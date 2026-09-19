@@ -153,62 +153,53 @@ class SymbolHole:
     n_tokens: int = 1
 
 
+def _as_row(item: SymbolHole) -> dict[str, Any]:
+    return {
+        "hole_id": item.hole_id,
+        "kind": item.kind,
+        "start": item.start,
+        "end": item.end,
+        "original": item.original,
+        "n_tokens": item.n_tokens,
+    }
+
+
+def _from_row(row: Mapping[str, Any]) -> SymbolHole:
+    return SymbolHole(
+        hole_id=str(row.get("hole_id") or "SYM_0"),
+        kind=str(row.get("kind") or "span"),
+        start=int(row["start"]),
+        end=int(row["end"]),
+        original=str(row.get("original") or ""),
+        n_tokens=int(row.get("n_tokens") or 1),
+    )
+
+
 def find_symbol_holes(tactics: str, *, max_holes: int = 24) -> list[SymbolHole]:
     """Mask operators first, then leftover identifiers that are not PCA structure."""
 
-    holes: list[SymbolHole] = []
+    from jevops.mask import find_literals
+
     occupied: list[tuple[int, int]] = []
-
-    def free(start: int, end: int) -> bool:
-        return all(end <= a or start >= b for a, b in occupied)
-
-    for phrase, _alt in PHRASE_ALTS:
-        if len(holes) >= max_holes:
-            break
-        start = 0
-        while True:
-            found = tactics.find(phrase, start)
-            if found < 0:
-                break
-            end = found + len(phrase)
-            if free(found, end):
-                holes.append(
-                    SymbolHole(
-                        hole_id=f"SYM_{len(holes)}",
-                        kind="phrase",
-                        start=found,
-                        end=end,
-                        original=phrase,
-                    )
-                )
-                occupied.append((found, end))
-            start = found + 1
-            if len(holes) >= max_holes:
-                break
-
-    for op in OPERATORS:
-        if len(holes) >= max_holes:
-            break
-        start = 0
-        while True:
-            found = tactics.find(op, start)
-            if found < 0:
-                break
-            end = found + len(op)
-            if free(found, end):
-                holes.append(
-                    SymbolHole(
-                        hole_id=f"SYM_{len(holes)}",
-                        kind="operator",
-                        start=found,
-                        end=end,
-                        original=op,
-                    )
-                )
-                occupied.append((found, end))
-            start = found + 1
-            if len(holes) >= max_holes:
-                break
+    phrase_rows = find_literals(
+        tactics,
+        [src for src, _dst in PHRASE_ALTS],
+        kind="phrase",
+        max_holes=max_holes,
+        occupied=occupied,
+        id_prefix="SYM_",
+    )
+    occupied.extend((int(row["start"]), int(row["end"])) for row in phrase_rows)
+    op_rows = find_literals(
+        tactics,
+        OPERATORS,
+        kind="operator",
+        max_holes=max(0, int(max_holes) - len(phrase_rows)),
+        occupied=occupied,
+        id_prefix="SYM_",
+    )
+    occupied.extend((int(row["start"]), int(row["end"])) for row in op_rows)
+    holes = [_from_row(row) for row in phrase_rows + op_rows]
 
     for match in lra_loop._TOKEN.finditer(tactics):
         if len(holes) >= max_holes:
@@ -224,7 +215,7 @@ def find_symbol_holes(tactics: str, *, max_holes: int = 24) -> list[SymbolHole]:
         stripped = line.lstrip()
         if any(stripped.startswith(prefix) for prefix in PCA_KEEP_PREFIXES):
             continue
-        if not free(start, end):
+        if not all(end <= a or start >= b for a, b in occupied):
             continue
         holes.append(
             SymbolHole(
@@ -237,6 +228,8 @@ def find_symbol_holes(tactics: str, *, max_holes: int = 24) -> list[SymbolHole]:
         )
         occupied.append((start, end))
     holes.sort(key=lambda hole: hole.start)
+    for i, item in enumerate(holes):
+        holes[i] = _rehole(item, i)
     return holes[:max_holes]
 
 
@@ -254,14 +247,10 @@ def is_pca_line(tactics: str, pos: int) -> bool:
 def cfg_schedule_for_score(score: Any, *, one_hole: bool = False) -> dict[str, Any]:
     """Map a TypeSafe Score (0..len-1, may be fractional) onto a mask schedule."""
 
+    from jevops.mask import schedule_for_score
+
     table = ONE_HOLE_SCHEDULES if one_hole else CFG_SCHEDULES
-    try:
-        value = float(score)
-    except (TypeError, ValueError):
-        value = 0.0
-    index = int(round(value))
-    index = max(0, min(len(table) - 1, index))
-    return dict(table[index])
+    return schedule_for_score(score, table)
 
 
 def _rehole(hole: SymbolHole, index: int) -> SymbolHole:
@@ -278,63 +267,30 @@ def _rehole(hole: SymbolHole, index: int) -> SymbolHole:
 def all_span_windows(tactics: str, span: int, *, stride: Optional[int] = None) -> list[SymbolHole]:
     """Token windows of ``span``. Default stride=span (tile). stride=1 overlaps."""
 
-    span = max(1, int(span))
-    step = span if stride is None else max(1, int(stride))
-    tokens = list(lra_loop._TOKEN.finditer(tactics))
-    windows: list[SymbolHole] = []
-    index = 0
-    while index < len(tokens):
-        if is_pca_line(tactics, tokens[index].start()):
-            index += 1
-            continue
-        group = []
-        cursor = index
-        while cursor < len(tokens) and len(group) < span:
-            if is_pca_line(tactics, tokens[cursor].start()):
-                break
-            group.append(tokens[cursor])
-            cursor += 1
-        if len(group) == span:
-            start, end = group[0].start(), group[-1].end()
-            original = tactics[start:end]
-            windows.append(
-                SymbolHole(
-                    hole_id=f"SYM_{len(windows)}",
-                    kind="span",
-                    start=start,
-                    end=end,
-                    original=original,
-                    n_tokens=span,
-                )
-            )
-            index += step
-        else:
-            index += 1
-    return windows
+    from jevops.mask import span_windows
+
+    rows = span_windows(
+        tactics,
+        span,
+        stride=stride,
+        tokens=list(lra_loop._TOKEN.finditer(tactics)),
+        skip_fn=is_pca_line,
+    )
+    return [_from_row(row) for row in rows]
 
 
 def schedule_holes(tactics: str, *, n_masks: int, span: int) -> list[SymbolHole]:
     """Non-overlapping token windows of ``span``, skipping PCA control-flow lines."""
+
+    from jevops.mask import pick_nonoverlapping
 
     n_masks = max(1, int(n_masks))
     windows = all_span_windows(tactics, span)
     if not windows:
         fallback = find_symbol_holes(tactics, max_holes=n_masks)
         return [_rehole(hole, i) for i, hole in enumerate(fallback[:n_masks])]
-    if len(windows) <= n_masks:
-        return [_rehole(hole, i) for i, hole in enumerate(windows)]
-    step = len(windows) / float(n_masks)
-    picked: list[SymbolHole] = []
-    occupied: list[tuple[int, int]] = []
-    for i in range(n_masks):
-        window = windows[min(len(windows) - 1, int(i * step))]
-        if any(window.end > a and window.start < b for a, b in occupied):
-            continue
-        occupied.append((window.start, window.end))
-        picked.append(window)
-    if not picked:
-        picked = windows[:n_masks]
-    return [_rehole(hole, i) for i, hole in enumerate(picked)]
+    picked = pick_nonoverlapping([_as_row(item) for item in windows], n=n_masks)
+    return [_from_row(row) for row in picked]
 
 
 def _window_priority(hole: SymbolHole) -> int:
@@ -621,14 +577,15 @@ def closed_fills(hole: SymbolHole, tactics: str) -> list[str]:
 
 
 def mask_skeleton(tactics: str, holes: Sequence[SymbolHole]) -> str:
-    out = tactics
-    for hole in sorted(holes, key=lambda item: item.start, reverse=True):
-        out = out[: hole.start] + f"<<<{hole.hole_id} kind={hole.kind}>>>" + out[hole.end :]
-    return out
+    from jevops.mask import mask_skeleton as _fn
+
+    return _fn(tactics, [_as_row(item) for item in holes])
 
 
 def apply_fill(tactics: str, hole: SymbolHole, fill: str) -> str:
-    return tactics[: hole.start] + fill + tactics[hole.end :]
+    from jevops.mask import apply_fill as _fn
+
+    return _fn(tactics, _as_row(hole), fill)
 
 
 def closed_candidates(
@@ -636,41 +593,25 @@ def closed_candidates(
 ) -> list[dict[str, Any]]:
     """One-hole closed-vocab edits that are strictly shorter."""
 
+    from jevops.mask import shorter_fills
+
     holes = find_symbol_holes(tactics)
-    current_tok = lra_loop.token_count(tactics)
-    rows: list[dict[str, Any]] = []
-    seen: set[str] = set()
-    for hole in holes:
-        for fill in closed_fills(hole, tactics):
-            if fill == hole.original:
-                continue
-            body = apply_fill(tactics, hole, fill).strip("\n")
-            tok = lra_loop.token_count(body)
-            if tok >= current_tok or body in seen:
-                continue
-            seen.add(body)
-            rows.append(
-                {
-                    "kind": f"{hole.hole_id}_{hole.kind}_{fill[:24] or 'drop'}",
-                    "hole_id": hole.hole_id,
-                    "hole_kind": hole.kind,
-                    "original": hole.original,
-                    "fill": fill,
-                    "tactics": body,
-                    "token_count": tok,
-                    "generator": "closed_lean_vocab",
-                    "llm": "off",
-                }
-            )
-            if len(rows) >= max_candidates:
-                break
+    rows = shorter_fills(
+        tactics,
+        [_as_row(item) for item in holes],
+        fills_fn=lambda item, text: closed_fills(_from_row(item), text),
+        token_fn=lra_loop.token_count,
+        max_candidates=max_candidates,
+        generator="closed_lean_vocab",
+    )
     if include_replay:
         try:
             import inits_updates_shorten as lra_ius
 
             replayed = lra_ius.replay(tactics).strip("\n")
             tok = lra_loop.token_count(replayed)
-            if replayed not in seen and tok < current_tok:
+            seen = {str(row.get("tactics") or "") for row in rows}
+            if replayed not in seen and tok < lra_loop.token_count(tactics):
                 rows.insert(
                     0,
                     {
@@ -702,7 +643,7 @@ def closed_multihole(tactics: str, holes: Sequence[SymbolHole], *, schedule_id: 
         if not alts:
             continue
         fill = min(alts, key=lambda text: (lra_loop.token_count(text), len(text)))
-        body = body[: hole.start] + fill + body[hole.end :]
+        body = apply_fill(body, hole, fill)
         fills[hole.hole_id] = fill
     body = body.strip("\n")
     tok = lra_loop.token_count(body)
@@ -725,16 +666,9 @@ def closed_multihole(tactics: str, holes: Sequence[SymbolHole], *, schedule_id: 
 
 
 def parse_leanstral_fills(text: str, holes: Sequence[SymbolHole]) -> dict[str, str]:
-    fills: dict[str, str] = {}
-    for hole in holes:
-        pattern = re.compile(
-            rf"<<<{re.escape(hole.hole_id)}(?: kind={re.escape(hole.kind)})?>>>\s*(.*?)(?=<<<SYM_|\Z)",
-            re.S,
-        )
-        match = pattern.search(text)
-        if match:
-            fills[hole.hole_id] = match.group(1).strip()
-    return fills
+    from jevops.mask import parse_marked_fills
+
+    return parse_marked_fills(text, holes, attr="kind")
 
 
 def leanstral_prompt(

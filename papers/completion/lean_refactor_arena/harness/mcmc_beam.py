@@ -15,7 +15,6 @@ one-line local Leanstral replacements. Not official Track 2. Not an Arena rankin
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import math
 import os
@@ -72,6 +71,7 @@ HND_REPLACEMENTS = (
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import constrained_beam as lra_cb  # noqa: E402
 import draft_fanout as lra_fan  # noqa: E402
 import inits_updates_shorten as lra_ius  # noqa: E402
@@ -95,90 +95,59 @@ def locked_have_names(reference: str) -> set[str]:
 
 
 def mutable_indices(tactics: str, locked_haves: set[str]) -> list[int]:
-    out: list[int] = []
-    for index, line in enumerate(tactics.splitlines()):
-        stripped = line.strip()
-        if not stripped:
-            continue
-        if any(stripped.startswith(head) for head in LOCKED_HEADS):
-            continue
-        if stripped.startswith("have ") and lra_cb.have_binder_name(stripped) in locked_haves:
-            continue
-        out.append(index)
-    return out
+    from jevops.mask import mutable_indices as _fn
+
+    return _fn(
+        tactics,
+        skip_prefix=LOCKED_HEADS,
+        skip_fn=lambda stripped, _i: stripped.startswith("have ")
+        and lra_cb.have_binder_name(stripped) in locked_haves,
+    )
 
 
 def apply_drop(tactics: str, index: int) -> str:
-    lines = tactics.splitlines()
-    if index < 0 or index >= len(lines):
-        return tactics
-    del lines[index]
-    return "\n".join(lines)
+    from jevops.mask import drop_index
+
+    return drop_index(tactics, index)
 
 
 def apply_replace(tactics: str, index: int, nxt: str) -> str:
-    lines = tactics.splitlines()
-    if index < 0 or index >= len(lines):
-        return tactics
-    indent = lines[index][: len(lines[index]) - len(lines[index].lstrip())]
-    lines[index] = indent + nxt.strip()
-    return "\n".join(lines)
+    from jevops.mask import replace_index
+
+    return replace_index(tactics, index, nxt)
 
 
 def join_consecutive_applies(tactics: str) -> str:
-    lines = tactics.splitlines()
-    out: list[str] = []
-    index = 0
-    while index < len(lines):
-        a = lines[index]
-        if (
-            index + 1 < len(lines)
-            and a.strip().startswith("apply ")
-            and lines[index + 1].strip().startswith("apply ")
-            and (len(a) - len(a.lstrip())) == (len(lines[index + 1]) - len(lines[index + 1].lstrip()))
-        ):
-            indent = a[: len(a) - len(a.lstrip())]
-            out.append(f"{indent}{a.strip()} <;> {lines[index + 1].strip()}")
-            index += 2
-            continue
-        out.append(a)
-        index += 1
-    return "\n".join(out)
+    from jevops.mask import join_consecutive_lines
+
+    return join_consecutive_lines(
+        tactics,
+        lambda line: line.strip().startswith("apply "),
+        joiner=lambda indent, a, b: f"{indent}{a.strip()} <;> {b.strip()}",
+        same_indent=True,
+    )
 
 
 def drop_last_duplicate_lines(tactics: str, locked_haves: set[str]) -> list[tuple[int, str, str]]:
     """Drop the last extra copy of a stripped line that appears more than once."""
 
-    lines = tactics.splitlines()
-    mutable = set(mutable_indices(tactics, locked_haves))
-    counts: dict[str, list[int]] = {}
-    for index, line in enumerate(lines):
-        counts.setdefault(line.strip(), []).append(index)
-    out: list[tuple[int, str, str]] = []
-    for stripped, idxs in counts.items():
-        if len(idxs) < 2 or not stripped:
-            continue
-        last = idxs[-1]
-        if last not in mutable:
-            continue
-        out.append((last, stripped, apply_drop(tactics, last)))
-    return out
+    from jevops.mask import last_duplicate_drops
+
+    return last_duplicate_drops(tactics, mutable=mutable_indices(tactics, locked_haves))
 
 
 def collapse_ih_simps(tactics: str) -> Optional[str]:
     """Fold the two simp bullets after ``apply (ih …).2.2`` into ``<;> simp_all``."""
 
-    lines = tactics.splitlines()
-    for index, line in enumerate(lines):
-        if IH_APPLY not in line:
-            continue
-        indent = line[: len(line) - len(line.lstrip())]
-        nxt = lines[index + 1].strip() if index + 1 < len(lines) else ""
-        nxt2 = lines[index + 2].strip() if index + 2 < len(lines) else ""
-        if nxt.startswith(". simp") and nxt2.startswith(". simp"):
-            folded = indent + IH_APPLY + " <;> simp_all"
-            return "\n".join(lines[:index] + [folded] + lines[index + 3 :])
-    return None
+    from jevops.mask import fold_following
+
+    return fold_following(
+        tactics,
+        lambda line: IH_APPLY in line,
+        lambda stripped: stripped.startswith(". simp"),
+        n_follow=2,
+        replacement=lambda indent, _line, _following: indent + IH_APPLY + " <;> simp_all",
+    )
 
 
 def propose_edits(
@@ -188,25 +157,23 @@ def propose_edits(
     extra: Optional[Sequence[dict[str, str]]] = None,
     limit: Optional[int] = MAX_PROPOSALS,
 ) -> list[dict[str, str]]:
+    from jevops.search import proposal_bag
+
     locked = locked_have_names(reference)
     idxs = mutable_indices(tactics, locked)
-    proposals: list[dict[str, str]] = []
-    seen: set[str] = {tactics.strip("\n")}
+
+    def _keep_locked(text: str) -> bool:
+        present_names = {lra_cb.have_binder_name(line.strip()) for line in text.splitlines()}
+        for have in lra_cb.prefix_have_lines(reference):
+            name = lra_cb.have_binder_name(have.strip())
+            if name and name not in present_names:
+                return False
+        return True
+
+    _push, proposals = proposal_bag(seed=tactics, accept_fn=_keep_locked)
 
     def push(kind: str, body: str, note: str, *, lock: bool = True) -> None:
-        text = body.strip("\n")
-        if not text or text in seen:
-            return
-        # Must keep locked prefix have *names* (simp_all fuel), not the
-        # original type ascription text.
-        if lock:
-            present_names = {lra_cb.have_binder_name(line.strip()) for line in text.splitlines()}
-            for have in lra_cb.prefix_have_lines(reference):
-                name = lra_cb.have_binder_name(have.strip())
-                if name and name not in present_names:
-                    return
-        seen.add(text)
-        proposals.append({"kind": kind, "tactics": text, "note": note})
+        _push(kind, body, note, accept=lock)
 
     if extra:
         for item in extra:
@@ -873,19 +840,11 @@ def propose_edits(
 
 
 def load_typesafe():
+    from jevops.outer import load_configured
+
     lra_pca.load_keyfile()
     lra_pca.pin_typesafe_path()
-    if not TS_PATH.is_file():
-        return None
-    spec = importlib.util.spec_from_file_location("lra_typesafe_inference_mcmc", TS_PATH)
-    if spec is None or spec.loader is None:
-        return None
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    if not module.typesafe_configured():
-        return None
-    return module
+    return load_configured(TS_PATH, "lra_typesafe_inference_mcmc")
 
 
 def typesafe_rank_proposals(
@@ -929,19 +888,17 @@ def typesafe_rank_proposals(
         result = module.TypeSafeClient(timeout=45.0).system_one(state, questions)
     except Exception as exc:  # noqa: BLE001
         return {"skipped": True, "reason": str(exc)[:300], "order": list(range(len(proposals)))}
-    usage = dict(getattr(result, "usage", None) or {})
-    inn = int(usage.get("input_tokens") or usage.get("prompt_tokens") or lra_t1.estimate_tokens(json.dumps(state)))
-    out = int(usage.get("output_tokens") or usage.get("completion_tokens") or 0)
+    from jevops.outer import result_usage
+    from jevops.search import index_order
+
+    inn, out = result_usage(
+        result, fallback_in=lra_t1.estimate_tokens(json.dumps(state))
+    )
     ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
     choice = (getattr(result, "choices", None) or {}).get("next_edit")
     pick = str(getattr(choice, "choice", None) or "p0")
     probs = dict(getattr(choice, "probabilities", None) or {})
-    order = sorted(range(len(proposals)), key=lambda i: float(probs.get(f"p{i}") or 0.0), reverse=True)
-    if pick.startswith("p") and pick[1:].isdigit():
-        idx = int(pick[1:])
-        if idx in order:
-            order.remove(idx)
-            order.insert(0, idx)
+    order = index_order(len(proposals), probs, prefix="p", pick=pick)
     nouls = getattr(result, "nouls", None) or {}
     scores = getattr(result, "scores", None) or {}
     return {
@@ -956,12 +913,9 @@ def typesafe_rank_proposals(
 
 
 def metropolis_accept(*, old_tok: int, new_tok: int, temperature: float, rng: random.Random) -> bool:
-    if new_tok < old_tok:
-        return True
-    if temperature <= 0:
-        return new_tok == old_tok
-    delta = new_tok - old_tok
-    return rng.random() < math.exp(-delta / max(temperature, 1e-6))
+    from jevops.search import metropolis_token_accept
+
+    return metropolis_token_accept(old_tok=old_tok, new_tok=new_tok, temperature=temperature, rng=rng)
 
 
 def leanstral_line_swap(

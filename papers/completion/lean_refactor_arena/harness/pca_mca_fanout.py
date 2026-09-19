@@ -17,7 +17,6 @@ Not official Track 2. Not an Arena ranking. Never LOCK_EX.
 from __future__ import annotations
 
 import argparse
-import ast
 import json
 import os
 import re
@@ -27,8 +26,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
-
-import numpy as np
 
 HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
@@ -105,68 +102,53 @@ class FeatureRow:
 
 
 def load_keyfile() -> None:
-    if not KEYFILE.is_file():
-        return
-    for line in KEYFILE.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        name, value = line.split("=", 1)
-        os.environ.setdefault(name.strip(), value.strip())
+    from jevops.outer import load_env_file
+
+    load_env_file(KEYFILE)
 
 
 def pin_typesafe_path() -> None:
-    os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
-    os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
-    os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
-    text = str(ROOT_ACCEL)
-    if text in sys.path:
-        sys.path.remove(text)
-    sys.path.insert(0, text)
+    from jevops.outer import pin_sys_path
+
+    pin_sys_path(
+        ROOT_ACCEL,
+        defaults={
+            "IPFS_ACCEL_SKIP_CORE": "1",
+            "IPFS_AUTO_INSTALL": "false",
+            "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
+        },
+    )
     lra_fan.pin_typesafe_path()
     lra_fan.ACCEL_ROOT = ROOT_ACCEL
     lra_fan.TYPESAFE_INFERENCE_PATH = ROOT_ACCEL / "ipfs_accelerate_py" / "typesafe_inference.py"
 
 
 def count_tactics(tactics: str) -> dict[str, float]:
-    lines = tactics.splitlines()
-    counts = {name: 0.0 for name in FEATURE_NAMES}
-    counts["n_cases"] = float(len(lra_fan.case_spans(tactics)))
-    counts["n_lines"] = float(len(lines))
-    counts["n_tokens"] = float(lra_loop.token_count(tactics))
-    counts["n_blank"] = float(sum(1 for line in lines if not line.strip()))
-    counts["max_indent"] = float(max((len(line) - len(line.lstrip()) for line in lines), default=0))
-    for line in lines:
-        stripped = line.strip()
-        if stripped.startswith("simp at "):
-            counts["n_simp_at"] += 1
-        if stripped.startswith("simp_all") or stripped == "simp" or stripped.startswith("simp ["):
-            counts["n_simp_all"] += 1
-        if stripped.startswith("have "):
-            counts["n_have"] += 1
-        if stripped.startswith("obtain "):
-            counts["n_obtain"] += 1
-        if stripped.startswith("rename_i "):
-            counts["n_rename_i"] += 1
-        if stripped.startswith("induction ") or stripped.startswith("induction\n"):
-            counts["n_induction"] += 1
-        if stripped.startswith("calc"):
-            counts["n_calc"] += 1
-        if stripped.startswith("exact "):
-            counts["n_exact"] += 1
-        if stripped.startswith("apply "):
-            counts["n_apply"] += 1
-        if stripped.startswith("rw ") or stripped.startswith("rw["):
-            counts["n_rw"] += 1
-        if stripped.startswith("intro") or stripped.startswith("intros "):
-            counts["n_intro"] += 1
-        if stripped == "ring" or stripped.startswith("ring "):
-            counts["n_ring"] += 1
-        if stripped == "omega" or stripped.startswith("omega "):
-            counts["n_omega"] += 1
-        if stripped.startswith("linarith") or stripped.startswith("nlinarith"):
-            counts["n_linarith"] += 1
-    return counts
+    from jevops.pick import count_prefix_lines, line_stats
+
+    extra = line_stats(tactics)
+    extra["n_cases"] = float(len(lra_fan.case_spans(tactics)))
+    extra["n_tokens"] = float(lra_loop.token_count(tactics))
+    return count_prefix_lines(
+        tactics,
+        {
+            "n_simp_at": lambda s: s.startswith("simp at "),
+            "n_simp_all": lambda s: s.startswith("simp_all") or s == "simp" or s.startswith("simp ["),
+            "n_have": lambda s: s.startswith("have "),
+            "n_obtain": lambda s: s.startswith("obtain "),
+            "n_rename_i": lambda s: s.startswith("rename_i "),
+            "n_induction": lambda s: s.startswith("induction ") or s.startswith("induction\n"),
+            "n_calc": lambda s: s.startswith("calc"),
+            "n_exact": lambda s: s.startswith("exact "),
+            "n_apply": lambda s: s.startswith("apply "),
+            "n_rw": lambda s: s.startswith("rw ") or s.startswith("rw["),
+            "n_intro": lambda s: s.startswith("intro") or s.startswith("intros "),
+            "n_ring": lambda s: s == "ring" or s.startswith("ring "),
+            "n_omega": lambda s: s == "omega" or s.startswith("omega "),
+            "n_linarith": lambda s: s.startswith("linarith") or s.startswith("nlinarith"),
+        },
+        extra=extra,
+    )
 
 
 def feature_row(record: Mapping[str, Any]) -> FeatureRow:
@@ -182,72 +164,30 @@ def feature_row(record: Mapping[str, Any]) -> FeatureRow:
 
 
 def fit_pca_mca(rows: Sequence[FeatureRow], *, n_principal: int = 3, n_minor: int = 3) -> dict[str, Any]:
-    matrix = np.asarray([row.vector for row in rows], dtype=float)
-    mean = matrix.mean(axis=0)
-    std = matrix.std(axis=0)
-    std[std == 0] = 1.0
-    zscore = (matrix - mean) / std
-    _, singular, vt = np.linalg.svd(zscore, full_matrices=False)
-    n_comp = int(vt.shape[0])
-    n_principal = max(1, min(int(n_principal), n_comp))
-    n_minor = max(1, min(int(n_minor), n_comp))
-    principal = vt[:n_principal]
-    minor = vt[-n_minor:]
-    explained = (singular ** 2)
-    explained = explained / float(explained.sum()) if float(explained.sum()) else explained
-    return {
-        "n_rows": int(matrix.shape[0]),
-        "n_features": int(matrix.shape[1]),
-        "feature_names": list(FEATURE_NAMES),
-        "mean": mean.tolist(),
-        "std": std.tolist(),
-        "singular_values": singular.tolist(),
-        "explained_ratio": explained.tolist(),
-        "principal": [
-            {"index": index, "explained": float(explained[index]), "loadings": dict(zip(FEATURE_NAMES, component.tolist()))}
-            for index, component in enumerate(principal)
-        ],
-        "minor": [
-            {
-                "index": n_comp - n_minor + index,
-                "explained": float(explained[n_comp - n_minor + index]),
-                "loadings": dict(zip(FEATURE_NAMES, component.tolist())),
-            }
-            for index, component in enumerate(minor)
-        ],
-        "zscore": zscore,
-        "vt": vt,
-    }
+    from jevops.rankers import zscore_svd
+
+    return zscore_svd(
+        [row.vector for row in rows],
+        n_principal=n_principal,
+        n_minor=n_minor,
+        feature_names=FEATURE_NAMES,
+    )
 
 
 def amenable_families(counts: Mapping[str, float], model: Mapping[str, Any], *, top_k: int = 5) -> list[dict[str, Any]]:
     """Features that load on minor components *and* are present in this proof."""
 
-    std = np.asarray(model["std"], dtype=float)
-    mean = np.asarray(model["mean"], dtype=float)
-    vector = np.asarray([float(counts[name]) for name in FEATURE_NAMES], dtype=float)
-    zscore = (vector - mean) / std
-    scores: dict[str, float] = {name: 0.0 for name in FEATURE_NAMES}
-    for component in model["minor"]:
-        loadings = component["loadings"]
-        for name in FEATURE_NAMES:
-            scores[name] += abs(float(loadings[name]) * float(zscore[FEATURE_NAMES.index(name)]))
-    ranked = sorted(scores.items(), key=lambda item: item[1], reverse=True)
-    families: list[dict[str, Any]] = []
-    for family, features in FAMILY_FEATURES.items():
-        hit = [name for name in features if counts.get(name, 0) > 0]
-        if not hit:
-            continue
-        families.append(
-            {
-                "family": family,
-                "features": hit,
-                "mca_score": float(sum(scores[name] for name in hit)),
-                "present": {name: counts[name] for name in hit},
-            }
-        )
-    families.sort(key=lambda item: item["mca_score"], reverse=True)
-    return families[:top_k]
+    from jevops.rankers import rank_present_families
+    from jevops.rankers import residual_feature_scores
+
+    scores = residual_feature_scores(
+        counts,
+        model["mean"],
+        model["std"],
+        model["minor"],
+        FEATURE_NAMES,
+    )
+    return rank_present_families(counts, scores, FAMILY_FEATURES, top_k=top_k)
 
 
 def drop_rename_i(text: str) -> str:
@@ -260,61 +200,48 @@ def drop_rename_i(text: str) -> str:
 
 def drop_have_after_induction(text: str) -> str:
     import binder_use as lra_bind
+    from jevops.mask import filter_after_flag
 
-    lines = text.splitlines(keepends=True)
-    out: list[str] = []
-    after_induction = False
-    offset = 0
-    for line in lines:
-        start, end = offset, offset + len(line)
-        stripped = line.strip()
-        if stripped.startswith("induction "):
-            after_induction = True
-            out.append(line)
-            offset = end
-            continue
-        if after_induction and _HAVE.match(line.rstrip("\n")):
-            if not lra_bind.safe_to_drop_span(text, start, end, line.rstrip("\n")):
-                out.append(line)
-            offset = end
-            continue
-        out.append(line)
-        offset = end
-    return "".join(out).strip("\n")
+    return filter_after_flag(
+        text,
+        lambda stripped: stripped.startswith("induction "),
+        lambda line, start, end: bool(_HAVE.match(line.rstrip("\n")))
+        and lra_bind.safe_to_drop_span(text, start, end, line.rstrip("\n")),
+    )
 
 
 def collapse_rw_to_simp(text: str) -> str:
     """Strength-reduce consecutive ``rw [lemmas]`` into one ``simp [lemmas]``."""
 
-    lines = text.splitlines()
-    out: list[str] = []
-    index = 0
-    while index < len(lines):
-        match = _RW_BRACKET.match(lines[index])
-        if not match:
-            out.append(lines[index])
-            index += 1
-            continue
-        indent = match.group("indent")
+    from jevops.mask import collapse_runs
+
+    def _lemmas(run: Sequence[str]) -> list[str]:
         lemmas: list[str] = []
-        while index < len(lines):
-            nxt = _RW_BRACKET.match(lines[index])
-            if not nxt or nxt.group("indent") != indent:
-                break
-            lemmas.extend(part.strip() for part in nxt.group(2).split(",") if part.strip())
-            index += 1
+        for line in run:
+            nxt = _RW_BRACKET.match(line)
+            if nxt:
+                lemmas.extend(part.strip() for part in nxt.group(2).split(",") if part.strip())
+        return lemmas
+
+    def _replace(indent: str, run: Sequence[str]) -> str:
+        lemmas = _lemmas(run)
         if len(lemmas) >= 2:
-            out.append(f"{indent}simp [{', '.join(lemmas)}]")
-        else:
-            out.append(f"{indent}rw [{lemmas[0]}]" if lemmas else lines[index - 1])
-    return "\n".join(out)
+            return f"{indent}simp [{', '.join(lemmas)}]"
+        return f"{indent}rw [{lemmas[0]}]" if lemmas else run[0]
+
+    return collapse_runs(text, lambda line: bool(_RW_BRACKET.match(line)), min_run=1, replacement=_replace)
 
 
 def keep_calc_only(text: str) -> str:
+    from jevops.mask import keep_matching_lines
+
     if not lra_fan._CALC.search(text):
         return text
-    kept = [line for line in text.splitlines() if line.strip().startswith("calc") or line.startswith("  ")]
-    return "\n".join(kept[:40]) if kept else text
+    return keep_matching_lines(
+        text,
+        lambda line: line.strip().startswith("calc") or line.startswith("  "),
+        cap=40,
+    )
 
 
 def guided_drafts(
@@ -562,19 +489,15 @@ def rank_problem(
 
 
 def audit_source() -> dict[str, Any]:
+    from jevops.repair import audit_source as _audit
+
     text = Path(__file__).read_text(encoding="utf-8")
-    tree = ast.parse(text)
-    imported = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            imported.update(alias.name.split(".", 1)[0] for alias in node.names)
-        elif isinstance(node, ast.ImportFrom) and node.module:
-            imported.add(node.module.split(".", 1)[0])
-    lock_ex = any(isinstance(node, ast.Attribute) and node.attr == "LOCK_EX" for node in ast.walk(tree))
+    out = _audit(text, forbidden_imports=FORBIDDEN_IMPORT_NAMES)
+    imported = set(out["imported_names"])
     return {
-        "forbidden_imports": sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES),
-        "uses_lock_ex": lock_ex,
-        "ok": not lock_ex and "generate_text" not in imported,
+        "forbidden_imports": out["forbidden_imports"],
+        "uses_lock_ex": out["uses_lock_ex"],
+        "ok": not out["uses_lock_ex"] and "generate_text" not in imported,
     }
 
 

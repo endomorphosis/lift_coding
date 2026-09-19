@@ -15,7 +15,6 @@ Never LOCK_EX. Never autostart llama-server. Jev does not write Lean.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import os
 import re
@@ -61,6 +60,7 @@ MAX_SAMPLES = 4
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import docker0_client as lra_d0  # noqa: E402
 import draft_fanout as lra_fan  # noqa: E402
 import generate_text as lra_gt  # noqa: E402
@@ -86,106 +86,103 @@ _HAVE_NAME = re.compile(r"have\s+([A-Za-z0-9_']+)")
 
 
 def have_binder_name(stripped: str) -> str:
+    from jevops.outer import first_group
+
     core = stripped.lstrip("·. ").strip()
-    match = _HAVE_NAME.match(core)
-    return match.group(1) if match else ""
+    return first_group(core, _HAVE_NAME, method="match") or ""
 
 
 def identifier_used(name: str, text: str) -> bool:
+    from jevops.repair import ident_used
+
     if not name:
         return False
-    return re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", text) is not None
+    return ident_used(
+        name,
+        text,
+        pattern=re.compile(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])"),
+    )
 
 
 def pca_prefix(tactics: str) -> str:
     """Keep PCA glue; keep MCA ``have`` only when a later line still names it."""
 
-    lines = tactics.splitlines()
-    pre: list[str] = []
-    rest: list[str] = []
-    hit_case = False
-    for line in lines:
-        if not hit_case and line.strip().startswith("case "):
-            hit_case = True
-        (rest if hit_case else pre).append(line)
-    out: list[str] = []
-    for index, line in enumerate(pre):
-        stripped = line.strip()
-        if stripped.startswith("rename_i ") or stripped.startswith("obtain "):
-            continue
-        if stripped.startswith("have "):
-            name = have_binder_name(stripped)
-            later = "\n".join(pre[index + 1 :] + rest)
-            if identifier_used(name, later):
-                out.append(line)
-            continue
-        out.append(line)
-    return "\n".join(out).rstrip()
+    from jevops.mask import split_before
+
+    from jevops.search import filter_used_later
+
+    pre, rest = split_before(tactics, lambda line: line.strip().startswith("case "))
+    kept = filter_used_later(
+        pre,
+        maybe_drop=lambda stripped: stripped.startswith("have "),
+        name_fn=have_binder_name,
+        used_fn=identifier_used,
+        extra_later=rest,
+        always_drop=lambda stripped: stripped.startswith("rename_i ") or stripped.startswith("obtain "),
+    )
+    return "\n".join(kept).rstrip()
 
 
 def reference_vocab(tactics: str) -> list[str]:
-    seen: set[str] = set()
-    vocab: list[str] = []
-    for line in tactics.splitlines():
-        stripped = line.strip()
-        if not stripped or stripped in seen:
-            continue
-        seen.add(stripped)
-        vocab.append(line.rstrip())
-    for extra in ("simp_all", "omega", "constructor", STOP_TOKEN):
-        if extra not in seen:
-            vocab.append(extra)
-            seen.add(extra)
-    return vocab
+    from jevops.mask import unique_vocab
+
+    return unique_vocab(tactics, extras=("simp_all", "omega", "constructor", STOP_TOKEN))
 
 
 def last_open_case(prefix: str) -> Optional[str]:
-    tag = None
-    for line in prefix.splitlines():
-        stripped = line.strip()
-        if stripped.startswith("case "):
-            rest = stripped[len("case ") :]
-            if "=>" in rest:
-                rest = rest.split("=>", 1)[0]
-            tag = rest.split()[0] if rest.split() else None
-    return tag
+    from jevops.search import last_header_tag
+
+    return last_header_tag(prefix, "case ", split_on="=>")
 
 
 def case_header_map(reference: str) -> dict[str, str]:
-    headers: dict[str, str] = {}
-    spans = lra_fan.case_spans(reference)
-    if not spans:
-        return headers
-    top = min(span.indent for span in spans)
-    for span in spans:
-        if span.indent != top:
-            continue
-        tag = span.label.split()[0]
-        header = reference[span.start : span.header_end].splitlines()[0].rstrip()
-        headers[tag] = header
-    return headers
+    from jevops.mask import header_map
+
+    return header_map(
+        reference,
+        lra_fan.case_spans(reference),
+        tag_fn=lambda span: span.label.split()[0],
+    )
 
 
 def case_arm_lines(reference: str, tag: str) -> list[str]:
-    want = str(tag or "").split()[0]
-    for span in lra_fan.case_spans(reference):
-        if span.label.split()[0] != want:
-            continue
-        body = reference[span.header_end : span.end]
-        return [line.rstrip() for line in body.splitlines() if line.strip()]
-    return []
+    from jevops.mask import span_body_lines
+
+    return span_body_lines(
+        reference,
+        lra_fan.case_spans(reference),
+        tag,
+        tag_fn=lambda span: span.label.split()[0],
+    )
+
+
+def _status_pack(pack: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "missing": list(pack.get("missing_cases") or []),
+        "empty": list(pack.get("empty_arms") or []),
+        "unfinished": list(pack.get("unfinished_arms") or []),
+        "earliest": pack.get("earliest_unfinished"),
+        "open": pack.get("open_case"),
+        "next_original": pack.get("next_original"),
+    }
 
 
 def structure_pack(reference: str, prefix: str) -> dict[str, Any]:
     """PCA skeleton + MCA holes of the *original* proof, plus what the prefix still lacks."""
 
+    from jevops.search import structure_status
+
     holes = lra_mask.find_holes(reference)
     skeleton = lra_mask.mask_skeleton(reference, holes)
     tags = pca_case_tags(reference)
-    missing = [tag for tag in tags if f"case {tag}" not in prefix]
-    empty_arms = empty_case_arms(prefix, reference)
-    remaining = {tag: remaining_arm_lines(prefix, reference, tag) for tag in tags}
-    unfinished_arms = [tag for tag in tags if f"case {tag}" in prefix and remaining.get(tag)]
+    status = structure_status(
+        prefix,
+        tags,
+        present_fn=lambda pref, tag: f"case {tag}" in pref,
+        remaining_fn=lambda pref, tag: remaining_arm_lines(pref, reference, tag),
+        empty_fn=lambda pref, _tags: empty_case_arms(pref, reference),
+        open_fn=last_open_case,
+    )
     counts = lra_pca.count_tactics(reference)
     mca = [
         {
@@ -199,17 +196,12 @@ def structure_pack(reference: str, prefix: str) -> dict[str, Any]:
         "pca_prefix": pca_prefix(reference),
         "pca_skeleton_head": skeleton[:900],
         "pca_case_tags": tags,
-        "missing_cases": missing,
-        "empty_arms": empty_arms,
-        "unfinished_arms": unfinished_arms,
-        "next_original": None
-        if not unfinished_arms
-        else (remaining.get(unfinished_arms[0]) or [None])[0],
-        "earliest_unfinished": next(
-            (tag for tag in tags if tag in missing or tag in unfinished_arms or tag in empty_arms),
-            None,
-        ),
-        "open_case": last_open_case(prefix),
+        "missing_cases": status["missing"],
+        "empty_arms": status["empty"],
+        "unfinished_arms": status["unfinished"],
+        "next_original": status["next_original"],
+        "earliest_unfinished": status["earliest"],
+        "open_case": status["open"],
         "mca_holes": mca,
         "n_have": int(counts.get("n_have") or 0),
         "n_induction": int(counts.get("n_induction") or 0),
@@ -221,54 +213,17 @@ def structure_pack(reference: str, prefix: str) -> dict[str, Any]:
 def guided_vocab(prefix: str, reference: str, pack: Mapping[str, Any]) -> list[str]:
     """Priority next lines: missing PCA case headers before MCA haves."""
 
-    present = {line.strip() for line in prefix.splitlines() if line.strip()}
-    missing = list(pack.get("missing_cases") or [])
-    empty_arms = list(pack.get("empty_arms") or [])
+    from jevops.search import guided_next
+
     headers = case_header_map(reference)
-    open_tag = pack.get("open_case")
-    out: list[str] = []
-
-    def push(line: str) -> None:
-        stripped = line.strip()
-        if not stripped or stripped in present:
-            return
-        if line not in out:
-            out.append(line)
-
-    earliest = pack.get("earliest_unfinished")
-    if earliest and earliest in missing:
-        if earliest in headers:
-            push(headers[str(earliest)])
-        return out
-    next_original = pack.get("next_original")
-    unfinished = list(pack.get("unfinished_arms") or [])
-    if earliest and (earliest in empty_arms or earliest in unfinished):
-        # Always emit next_original even if the same stripped text already
-        # appeared in an earlier arm (e.g. a second ``simp_all`` / ``exact``).
-        if next_original:
-            out.append(str(next_original))
-        else:
-            rem = remaining_arm_lines(prefix, reference, str(earliest))
-            if rem:
-                out.append(rem[0])
-        return out
-    if missing:
-        if open_tag:
-            for line in case_arm_lines(reference, str(open_tag)):
-                push(line)
-        for tag in missing:
-            if tag in headers:
-                push(headers[tag])
-        return out
-    if empty_arms:
-        tag = empty_arms[0]
-        for line in case_arm_lines(reference, tag):
-            push(line)
-        return out
-    # PCA complete: closers only. No MCA have/rename, no English.
-    for extra in CLOSERS:
-        push(extra)
-    return out
+    return guided_next(
+        prefix,
+        _status_pack(pack),
+        header_of=lambda tag: headers.get(str(tag), ""),
+        remaining_fn=lambda tag: remaining_arm_lines(prefix, reference, str(tag)),
+        arm_lines_fn=lambda tag: case_arm_lines(reference, str(tag)),
+        closers=CLOSERS,
+    )
 
 
 def filter_to_earliest(
@@ -278,82 +233,57 @@ def filter_to_earliest(
 ) -> list[str]:
     """Drop candidates that skip past the earliest unfinished PCA case."""
 
-    earliest = pack.get("earliest_unfinished")
-    if not earliest:
-        kept: list[str] = []
-        seen: set[str] = set()
-        for line in lines:
-            stripped = str(line).strip()
-            if not stripped or stripped == STOP_TOKEN or stripped in seen:
-                continue
-            if looks_like_closer(stripped):
-                kept.append(str(line))
-                seen.add(stripped)
-        return kept
-    missing = set(pack.get("missing_cases") or [])
-    empty = set(pack.get("empty_arms") or [])
-    unfinished = set(pack.get("unfinished_arms") or [])
-    allowed: set[str] = set()
-    nxt_raw = str(pack.get("next_original") or "")
-    nxt = nxt_raw.strip()
-    if earliest in missing:
-        header = case_header_map(reference).get(str(earliest), "")
-        if header:
-            allowed.add(header.strip())
-        allowed.add(f"case {earliest}")
-    elif earliest in empty or earliest in unfinished:
-        if nxt:
-            allowed.add(nxt)
-            allowed.add(nxt_raw.rstrip())
-    kept: list[str] = []
-    seen: set[str] = set()
-    for line in lines:
-        stripped = str(line).strip()
-        if not stripped or stripped == STOP_TOKEN or stripped in seen:
-            continue
-        ok = False
-        if earliest in missing:
-            ok = stripped.startswith("case ") and earliest in stripped.split()
-        elif allowed:
-            ok = stripped in allowed or any(stripped == item or item in stripped for item in allowed)
-        if ok:
-            kept.append(str(line))
-            seen.add(stripped)
-    return kept
+    from jevops.search import filter_to_earliest as _fn
+
+    return _fn(
+        lines,
+        _status_pack(pack),
+        header_of=lambda tag: case_header_map(reference).get(str(tag), ""),
+        stop=STOP_TOKEN,
+        closer_pred=looks_like_closer,
+        header_match=lambda stripped, earliest: stripped.startswith("case ") and earliest in stripped.split(),
+        tag_token_fn=lambda tag: f"case {tag}",
+    )
 
 
 def looks_like_closer(stripped: str) -> bool:
-    key = stripped.strip()
-    if key in CLOSERS:
-        return True
-    return key.startswith(("simp", "exact ", "omega", "constructor", "rfl", "try simp", "try omega"))
+    from jevops.mask import starts_any
+
+    return starts_any(
+        stripped,
+        ("simp", "exact ", "omega", "constructor", "rfl", "try simp", "try omega"),
+        exact=CLOSERS,
+    )
 
 
 def looks_like_tactic(stripped: str) -> bool:
+    from jevops.mask import starts_any
+
     key = stripped.strip()
     if key == STOP_TOKEN:
         return True
-    return key.startswith(_TACTIC_HEAD) or key in CLOSERS
+    return starts_any(key, _TACTIC_HEAD, exact=CLOSERS)
 
 
 def parse_next_line(text: str) -> str:
+    from jevops.search import first_line
+
     body = lra_loop.extract_generated_tactics(text)
-    for line in body.splitlines():
-        stripped = line.strip()
-        if not stripped:
-            continue
-        if stripped.upper() == STOP_TOKEN or stripped in {".", "qed"}:
-            return STOP_TOKEN
-        if stripped.startswith("sorry") or stripped.startswith("admit"):
-            return STOP_TOKEN
-        if "<|im_start|>" in stripped or "<|im_end|>" in stripped or stripped.startswith("<|"):
-            continue
-        if stripped.startswith("You are") or stripped.startswith("Lean 4") or len(stripped) > 160:
-            continue
-        if not looks_like_tactic(stripped):
-            continue
-        return line.rstrip()
-    return STOP_TOKEN
+    return first_line(
+        body,
+        stop_pred=lambda s: s.upper() == STOP_TOKEN
+        or s in {".", "qed"}
+        or s.startswith("sorry")
+        or s.startswith("admit"),
+        skip_pred=lambda s: "<|im_start|>" in s
+        or "<|im_end|>" in s
+        or s.startswith("<|")
+        or s.startswith("You are")
+        or s.startswith("Lean 4")
+        or len(s) > 160,
+        keep_pred=looks_like_tactic,
+        default=STOP_TOKEN,
+    )
 
 
 def step_prompt(
@@ -393,44 +323,34 @@ def step_prompt(
 
 
 def pca_case_tags(tactics: str) -> list[str]:
+    from jevops.mask import top_level_labels
+
     spans = lra_fan.case_spans(tactics)
-    if not spans:
-        return []
-    top = min(span.indent for span in spans)
-    tags: list[str] = []
-    for span in spans:
-        if span.indent != top:
-            continue
-        tag = span.label.split()[0]
-        if tag not in tags:
-            tags.append(tag)
-    return tags
+    return top_level_labels(spans, tag_fn=lambda span: span.label.split()[0])
 
 
 def case_body_lines(prefix: str, tag: str) -> list[str]:
+    from jevops.mask import capture_after_header
+    from jevops.search import last_header_tag
+
     want = str(tag or "").split()[0]
-    capturing = False
-    body: list[str] = []
-    for line in prefix.splitlines():
-        stripped = line.strip()
-        if stripped.startswith("case "):
-            rest = stripped[len("case ") :]
-            if "=>" in rest:
-                rest = rest.split("=>", 1)[0]
-            this = rest.split()[0] if rest.split() else ""
-            capturing = this == want
-            continue
-        if capturing and stripped:
-            body.append(stripped)
-    return body
+    return capture_after_header(
+        prefix,
+        want,
+        is_header=lambda stripped: stripped.startswith("case "),
+        id_of=lambda stripped: last_header_tag(stripped, "case ", split_on="=>") or "",
+    )
 
 
 def empty_case_arms(prefix: str, reference: str) -> list[str]:
-    return [
-        tag
-        for tag in pca_case_tags(reference)
-        if f"case {tag}" in prefix and not case_body_lines(prefix, tag)
-    ]
+    from jevops.search import empty_headers
+
+    return empty_headers(
+        prefix,
+        pca_case_tags(reference),
+        present_fn=lambda pref, tag: f"case {tag}" in pref,
+        body_fn=lambda pref, tag: case_body_lines(pref, tag),
+    )
 
 
 def is_mca_line(stripped: str) -> bool:
@@ -441,68 +361,48 @@ def is_mca_line(stripped: str) -> bool:
 def arm_keep_lines(reference: str, tag: str) -> list[str]:
     """Original arm tactics; keep MCA ``have`` only when a later line still names it."""
 
+    from jevops.search import after_item
+    from jevops.search import filter_used_later
+
     lines = case_arm_lines(reference, tag)
-    tags = pca_case_tags(reference)
     later_arms: list[str] = []
-    seen = False
-    for other in tags:
-        if other == tag:
-            seen = True
-            continue
-        if seen:
-            later_arms.extend(case_arm_lines(reference, other))
-    out: list[str] = []
-    for index, line in enumerate(lines):
-        if is_mca_line(line.strip()):
-            name = have_binder_name(line.strip())
-            later = "\n".join(lines[index + 1 :] + later_arms)
-            if identifier_used(name, later):
-                out.append(line)
-            continue
-        out.append(line)
-    return out
+    for other in after_item(pca_case_tags(reference), tag):
+        later_arms.extend(case_arm_lines(reference, other))
+    return filter_used_later(
+        lines,
+        maybe_drop=lambda stripped: is_mca_line(stripped),
+        name_fn=have_binder_name,
+        used_fn=identifier_used,
+        extra_later=later_arms,
+    )
 
 
 def remaining_arm_lines(prefix: str, reference: str, tag: str) -> list[str]:
     """Original keep-lines not yet copied, counting indent-sensitive occurrences."""
 
-    have: dict[str, int] = {}
-    for line in prefix.splitlines():
-        key = line.rstrip()
-        if not key.strip():
-            continue
-        have[key] = have.get(key, 0) + 1
-    seen: dict[str, int] = {}
-    out: list[str] = []
-    for line in arm_keep_lines(reference, tag):
-        key = line.rstrip()
-        seen[key] = seen.get(key, 0) + 1
-        if have.get(key, 0) < seen[key]:
-            out.append(line)
-    return out
+    from jevops.search import missing_occurrences
+
+    return missing_occurrences(prefix.splitlines(), arm_keep_lines(reference, tag))
 
 
 def stop_allowed(prefix: str, reference: str) -> bool:
     """Do not STOP while a PCA case header is missing or its original arm is unfinished."""
 
-    tags = pca_case_tags(reference)
-    if not tags:
-        return True
-    if any(f"case {tag}" not in prefix for tag in tags):
-        return False
-    if empty_case_arms(prefix, reference):
-        return False
-    return not any(remaining_arm_lines(prefix, reference, tag) for tag in tags)
+    from jevops.search import structure_complete
+
+    return structure_complete(
+        prefix,
+        pca_case_tags(reference),
+        present_fn=lambda pref, tag: f"case {tag}" in pref,
+        empty_fn=lambda pref, _tags: empty_case_arms(pref, reference),
+        remaining_fn=lambda pref, tag: remaining_arm_lines(pref, reference, tag),
+    )
 
 
 def unused_vocab(prefix: str, vocab: Sequence[str]) -> list[str]:
-    present = {line.strip() for line in prefix.splitlines() if line.strip()}
-    out: list[str] = []
-    for item in vocab:
-        if item.strip() in present and item != STOP_TOKEN:
-            continue
-        out.append(item)
-    return out
+    from jevops.search import unused_items
+
+    return unused_items(prefix, vocab, stop=STOP_TOKEN)
 
 
 def typesafe_prune(
@@ -514,18 +414,9 @@ def typesafe_prune(
     keep: int,
     context: Optional[Mapping[str, Any]] = None,
 ) -> dict[str, Any]:
-    unique: list[str] = []
-    seen: set[str] = set()
-    for item in candidates:
-        key = item.strip() or STOP_TOKEN
-        if key in seen:
-            continue
-        seen.add(key)
-        unique.append(item if item.strip() else STOP_TOKEN)
-        if len(unique) >= MAX_CANDIDATES:
-            break
-    if not unique:
-        unique = [STOP_TOKEN]
+    from jevops.search import unique_cap
+
+    unique = unique_cap(candidates, cap=MAX_CANDIDATES, empty=STOP_TOKEN)
     lra_pca.load_keyfile()
     lra_pca.pin_typesafe_path()
     ts_path = Path("/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py")
@@ -537,8 +428,10 @@ def typesafe_prune(
             "jev_generated_lean": False,
             "arena_score": None,
         }
-    spec = importlib.util.spec_from_file_location("lra_typesafe_inference", ts_path)
-    if spec is None or spec.loader is None:
+    from jevops.outer import load_module_from_path
+
+    module = load_module_from_path(ts_path, "lra_typesafe_inference")
+    if module is None:
         return {
             "skipped": True,
             "reason": "typesafe_inference_spec",
@@ -546,9 +439,6 @@ def typesafe_prune(
             "jev_generated_lean": False,
             "arena_score": None,
         }
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
     Choice = module.Choice
     TypeSafeClient = module.TypeSafeClient
     typesafe_configured = module.typesafe_configured
@@ -601,17 +491,19 @@ def typesafe_prune(
             "jev_generated_lean": False,
             "arena_score": None,
         }
+    from jevops.outer import usage_tokens
+
     usage = dict(getattr(result, "usage", None) or {})
-    inn = int(usage.get("input_tokens") or usage.get("prompt_tokens") or lra_t1.estimate_tokens(json.dumps(state)))
-    out = int(usage.get("output_tokens") or usage.get("completion_tokens") or 0)
+    inn, out = usage_tokens(
+        usage, fallback_in=lra_t1.estimate_tokens(json.dumps(state))
+    )
     line = ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
     best = (getattr(result, "choices", None) or {}).get("next_line")
     pick_id = str(getattr(best, "choice", None) or "c0")
     probs = dict(getattr(best, "probabilities", None) or {})
-    ranked_ids = sorted(criteria.keys(), key=lambda key: float(probs.get(key) or 0.0), reverse=True)
-    if pick_id in criteria and pick_id in ranked_ids:
-        ranked_ids.remove(pick_id)
-        ranked_ids.insert(0, pick_id)
+    from jevops.search import pin_then_rank
+
+    ranked_ids = pin_then_rank(criteria.keys(), probs, first=pick_id if pick_id in criteria else None)
     kept = [criteria[key] for key in ranked_ids if key in criteria][:keep]
     if not kept:
         kept = unique[:keep]
@@ -682,29 +574,9 @@ def propose_lines(
 def extend_prefix(prefix: str, nxt: str, *, original: Optional[str] = None) -> str:
     """Append ``nxt``, preferring the original line's leading indent when it matches."""
 
-    if nxt == STOP_TOKEN:
-        return prefix
-    src = nxt
-    if original and original.strip() == nxt.strip():
-        src = original
-    if not prefix.strip():
-        return src if src[:1] in {" ", "\t"} else f"  {src.strip()}"
-    if src[:1] in {" ", "\t"}:
-        return prefix.rstrip() + "\n" + src.rstrip()
-    stripped = src.strip()
-    case_indent = 2
-    last = ""
-    for line in prefix.splitlines():
-        if line.strip().startswith("case "):
-            case_indent = len(line) - len(line.lstrip())
-        if line.strip():
-            last = line
-    if stripped.startswith("case "):
-        return prefix.rstrip() + "\n" + (" " * case_indent) + stripped
-    indent = len(last) - len(last.lstrip()) if last else case_indent + 2
-    if last.strip().startswith("case "):
-        indent = case_indent + 2
-    return prefix.rstrip() + "\n" + (" " * indent) + stripped
+    from jevops.search import extend_prefix as _fn
+
+    return _fn(prefix, nxt, stop=STOP_TOKEN, original=original, case_token="case ")
 
 
 def run_search(
@@ -842,23 +714,17 @@ _BARE_SIMP_ALL = re.compile(r"^[ \t]*\.?[ \t]*simp_all\s*$")
 
 
 def drop_first_bare_simp_all(tactics: str) -> Optional[str]:
-    lines = tactics.splitlines()
-    for index, line in enumerate(lines):
-        if _BARE_SIMP_ALL.match(line):
-            del lines[index]
-            return "\n".join(lines)
-    return None
+    from jevops.mask import drop_matching_line
+
+    return drop_matching_line(tactics, lambda line: bool(_BARE_SIMP_ALL.match(line)), last=False)
 
 
 def drop_last_bare_simp_all(tactics: str) -> Optional[str]:
     """Drop the last standalone ``simp_all`` / ``. simp_all`` line (not ``<;> simp_all``)."""
 
-    lines = tactics.splitlines()
-    for index in range(len(lines) - 1, -1, -1):
-        if _BARE_SIMP_ALL.match(lines[index]):
-            del lines[index]
-            return "\n".join(lines)
-    return None
+    from jevops.mask import drop_matching_line
+
+    return drop_matching_line(tactics, lambda line: bool(_BARE_SIMP_ALL.match(line)), last=True)
 
 
 def repair_no_progress_simp_all(tactics: str, errors: Sequence[Mapping[str, Any]]) -> Optional[str]:
@@ -869,22 +735,13 @@ def repair_no_progress_simp_all(tactics: str, errors: Sequence[Mapping[str, Any]
 
 
 def join_consecutive_exacts(tactics: str) -> str:
-    lines = tactics.splitlines()
-    out: list[str] = []
-    index = 0
-    while index < len(lines):
-        if (
-            lines[index].strip().startswith("exact ")
-            and index + 1 < len(lines)
-            and lines[index + 1].strip().startswith("exact ")
-        ):
-            indent = lines[index][: len(lines[index]) - len(lines[index].lstrip())]
-            out.append(f"{indent}{lines[index].strip()} <;> {lines[index + 1].strip()}")
-            index += 2
-            continue
-        out.append(lines[index])
-        index += 1
-    return "\n".join(out)
+    from jevops.mask import join_consecutive_lines
+
+    return join_consecutive_lines(
+        tactics,
+        lambda line: line.strip().startswith("exact "),
+        joiner=lambda indent, a, b: f"{indent}{a.strip()} <;> {b.strip()}",
+    )
 
 
 def collapse_defined_simp(tactics: str) -> str:
@@ -903,16 +760,9 @@ def shorten_keeping_prefix_haves(tactics: str) -> list[tuple[str, str]]:
     out: list[tuple[str, str]] = []
 
     def keep(name: str, body: Optional[str]) -> None:
-        if not body:
-            return
-        text = body.strip("\n")
-        if not text or text in seen:
-            return
-        present = {line.strip() for line in text.splitlines()}
-        if any(have.strip() not in present for have in haves):
-            return
-        seen.add(text)
-        out.append((name, text))
+        from jevops.pick import keep_if_contains
+
+        keep_if_contains(seen, out, name, body, required=haves)
 
     keep("simp_set", lra_fan.drop_redundant_simp_at(tactics))
     keep("drop_first_bare_simp", drop_first_bare_simp_all(tactics))
@@ -937,30 +787,24 @@ def shorten_keeping_prefix_haves(tactics: str) -> list[tuple[str, str]]:
 
 
 def prefix_have_lines(reference: str) -> list[str]:
-    out: list[str] = []
-    for line in reference.splitlines():
-        if line.strip().startswith("case "):
-            break
-        if line.strip().startswith("have "):
-            out.append(line)
-    return out
+    from jevops.mask import lines_until
+
+    return lines_until(
+        reference,
+        lambda line: line.strip().startswith("have "),
+        lambda line: line.strip().startswith("case "),
+    )
 
 
 def insert_haves_before_induction(draft: str, haves: Sequence[str]) -> str:
-    present = {line.strip() for line in draft.splitlines()}
-    missing = [line for line in haves if line.strip() not in present]
-    if not missing:
-        return draft
-    out: list[str] = []
-    inserted = False
-    for line in draft.splitlines():
-        if not inserted and line.strip().startswith("induction "):
-            out.extend(missing)
-            inserted = True
-        out.append(line)
-    if not inserted:
-        out = list(missing) + out
-    return "\n".join(out)
+    from jevops.mask import insert_before
+
+    return insert_before(
+        draft,
+        haves,
+        lambda line: line.strip().startswith("induction "),
+        if_missing="prepend",
+    )
 
 
 def lake_keepbest(

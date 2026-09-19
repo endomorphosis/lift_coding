@@ -15,7 +15,6 @@ import argparse
 import json
 import random
 import sys
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
@@ -107,13 +106,9 @@ FAMILY_STRUCTURED = {
 
 
 def _tags(record: Mapping[str, Any]) -> list[Any]:
-    raw = record.get("version_info")
-    if isinstance(raw, str):
-        try:
-            raw = json.loads(raw)
-        except json.JSONDecodeError:
-            return []
-    return list(raw) if isinstance(raw, list) else []
+    from jevops.jev import list_field
+
+    return list_field(record, "version_info")
 
 
 def analyze_proof(
@@ -122,6 +117,9 @@ def analyze_proof(
     tactics: Optional[str] = None,
     model: Optional[Mapping[str, Any]] = None,
 ) -> dict[str, Any]:
+    from jevops.pick import analysis_row
+    from jevops.pick import hole_rows
+
     body = (tactics if tactics is not None else lra_fan.tactic_block(record)).strip("\n")
     counts = lra_pca.count_tactics(body)
     families = lra_pca.amenable_families(counts, model) if model else []
@@ -132,32 +130,27 @@ def analyze_proof(
     }
     phrases = [src for src, _dst in lra_sym.PHRASE_ALTS if src in body]
     cases = [span.label for span in lra_fan.case_spans(body)]
-    return {
-        "name": record.get("name"),
-        "source": record.get("source"),
-        "n_tags": len(_tags(record)),
-        "n_tokens": lra_loop.token_count(body),
-        "n_lines": counts["n_lines"],
-        "counts": {k: int(v) for k, v in counts.items()},
-        "families": families,
-        "mca_holes": [
-            {
-                "id": hole.hole_id,
-                "family": hole.family,
-                "n_tokens": lra_loop.token_count(hole.original),
-                "head": hole.original.strip()[:80],
-                "used_binders": lra_bind.binders_used_later(body, hole.start, hole.end, hole.original),
-                "safe_to_drop": lra_bind.safe_to_drop_span(body, hole.start, hole.end, hole.original),
-            }
-            for hole in mca_holes
-        ],
-        "n_mca_holes": len(mca_holes),
-        "eligible_spans": spans,
-        "catalog_phrases_present": phrases,
-        "case_labels": cases[:12],
-        "n_cases": len(cases),
-        "pca_keep": bool(counts.get("n_induction") or counts.get("n_cases")),
-    }
+    holes = hole_rows(
+        mca_holes,
+        token_fn=lra_loop.token_count,
+        used_fn=lambda start, end, original: lra_bind.binders_used_later(body, start, end, original),
+        safe_fn=lambda start, end, original: lra_bind.safe_to_drop_span(body, start, end, original),
+    )
+    return analysis_row(
+        record,
+        n_tokens=lra_loop.token_count(body),
+        counts=counts,
+        families=families,
+        holes=holes,
+        extra={
+            "n_tags": len(_tags(record)),
+            "eligible_spans": spans,
+            "catalog_phrases_present": phrases,
+            "case_labels": cases[:12],
+            "n_cases": len(cases),
+            "pca_keep": bool(counts.get("n_induction") or counts.get("n_cases")),
+        },
+    )
 
 
 def random_drafts(
@@ -177,6 +170,7 @@ def random_drafts(
     names still appear later (the substOldPostSubset ``trigger1`` failure).
     """
 
+    from jevops.mask import drop_span
     from jevops.pick import pin_prefix
     from jevops.pick import shorter_bag
 
@@ -221,7 +215,7 @@ def random_drafts(
         if not wanted(hole.family):
             continue
         kind = f"drop_{hole.family}_{hole.hole_id}"
-        nxt = (body[: hole.start] + body[hole.end :]).strip("\n")
+        nxt = drop_span(body, hole.start, hole.end)
         if memory is not None and lra_bind.is_blacklisted(memory, name, kind, tactics=nxt):
             continue
         if hole.original.strip().startswith(("rename_i ", "have ")) and not lra_bind.safe_to_drop_span(
@@ -299,11 +293,11 @@ def typesafe_pick(
     from ipfs_accelerate_py.typesafe_inference import Choice, Noul, Score, TypeSafeClient, typesafe_configured
 
     if not typesafe_configured():
-        return {"skipped": True, "reason": "no_key"}
+        from jevops.jev import skipped
+
+        return skipped("no_key")
     tree = draft_tree(drafts)
-    from jevops.memory import named_success_kinds
     from jevops.pick import family_criteria as _family_criteria
-    from jevops.pick import named_keys
 
     family_criteria = _family_criteria(tree, structured=FAMILY_STRUCTURED, blurbs=FAMILY_BLURB)
     questions: dict[str, Any] = {
@@ -367,50 +361,39 @@ def typesafe_pick(
             limit=6,
         )
     )
-    for fam, kids in tree.items():
-        if len(kids) == 1:
-            continue
-        questions[f"leaf_{fam}"] = Choice(
-            instructions={
-                "question": f"Inside `{fam}`, which leaf is most likely to lake-compile AND cut tokens?",
-                "focus": "Prefer drop_unused_binders, collapse_simp_at, port_* over sweep_rand spans.",
-            },
-            criteria=dict(kids),
+    from jevops.pick import leaf_choice_questions
+    from jevops.pick import pick_state
+
+    questions.update(
+        leaf_choice_questions(
+            tree,
+            ctor=Choice,
+            focus="Prefer drop_unused_binders, collapse_simp_at, port_* over sweep_rand spans.",
         )
-    state = {
-        "problem": {"name": record.get("name"), "source": record.get("source")},
-        "n_tokens": analysis.get("n_tokens"),
-        "n_mca_holes": analysis.get("n_mca_holes"),
-        "counts": analysis.get("counts"),
-        "holes": analysis.get("mca_holes"),
-        "families": analysis.get("families"),
-        "drafts": [
-            {"kind": item.get("kind"), "family": item.get("family"), "tokens": item.get("token_count")}
-            for item in drafts[:16]
-        ],
-        "memory": {
-            "success_kinds": named_success_kinds(memory or {}, str(record.get("name") or ""), limit=12),
-            "blacklist": named_keys((memory or {}).get("blacklist") or [], str(record.get("name") or "")),
-        },
-        "goal": "Keep induction/case. Do not write Lean.",
-    }
-    started = time.perf_counter()
-    result = TypeSafeClient(timeout=45.0).system_one(state, questions)
+    )
+    state = pick_state(
+        record,
+        analysis,
+        drafts=drafts,
+        memory=memory,
+        extra={"goal": "Keep induction/case. Do not write Lean."},
+    )
+    from jevops.jev import invoke_system_one
     from jevops.jev import record_usage
 
-    usage = dict(getattr(result, "usage", None) or {})
+    result, wall_ms = invoke_system_one(TypeSafeClient(timeout=45.0), state, questions)
+    from jevops.jev import choice_head
+    from jevops.jev import noul_attr
+    from jevops.jev import unpack_response
+
+    choices, nouls, scores, usage = unpack_response(result)
     record_usage(ledger, usage, model=lra_t1.JEV_MODEL_ID)
-    choices = getattr(result, "choices", None) or {}
-    scores = getattr(result, "scores", None) or {}
-    nouls = getattr(result, "nouls", None) or {}
-    fam_ans = choices.get("family")
-    fam_probs = dict(getattr(fam_ans, "probabilities", None) or {})
-    family_conf = float(getattr(fam_ans, "confidence", None) or 0.0)
+    fam_ans, fam_probs, family_conf, fam_choice = choice_head(choices, "family")
     from jevops import pick as lra_pick
 
     leaf_qs = lra_pick.leaf_qs_from_choices(tree, choices, family_conf=family_conf)
-    noul_fail = float(getattr(nouls.get("will_fail_compile"), "noul", 0.0) or 0.0)
-    noul_pca = float(getattr(nouls.get("breaks_pca"), "noul", 0.0) or 0.0)
+    noul_fail = noul_attr(nouls, "will_fail_compile")
+    noul_pca = noul_attr(nouls, "breaks_pca")
     per_leaf_fail = lra_pick.noul_map(
         nouls, [item.get("kind") for item in drafts[:6]], prefix="fail_"
     )
@@ -427,8 +410,8 @@ def typesafe_pick(
         failed_stems=lra_bind.failed_skill_stems(memory or {}, str(record.get("name") or "")),
         cut_score=getattr(cut, "score", None),
         usage=usage,
-        wall_ms=(time.perf_counter() - started) * 1000.0,
-        greedy_fam_fallback=getattr(fam_ans, "choice", None),
+        wall_ms=wall_ms,
+        greedy_fam_fallback=fam_choice,
         beam_k=BEAM_K,
         fire_t=FIRE_T,
         fire_t_leaf=FIRE_T_LEAF,
@@ -513,32 +496,32 @@ def typesafe_intent(
     from ipfs_accelerate_py.typesafe_inference import Choice, Noul, Score, TypeSafeClient, typesafe_configured
 
     if not typesafe_configured():
-        return {"skipped": True, "families": set(FAMILY_BLURB), "reason": "no_key"}
-    present = {str(item.get("family")) for item in analysis.get("families") or []}
-    present.update({"dead_code", "search_space", "pca_keep"})
-    from jevops.pick import family_criteria as _family_criteria
+        from jevops.jev import skipped
 
+        return skipped("no_key", families=set(FAMILY_BLURB))
+    from jevops.jev import intent_state
+    from jevops.pick import family_criteria as _family_criteria
+    from jevops.pick import present_families
+
+    present = present_families(analysis)
     criteria = _family_criteria(present, structured=FAMILY_STRUCTURED, require_structured=True)
-    state = {
-        "problem": {"name": record.get("name"), "source": record.get("source")},
-        "n_tokens": analysis.get("n_tokens"),
-        "counts": analysis.get("counts"),
-        "n_mca_holes": analysis.get("n_mca_holes"),
-        "safe_holes": [h for h in analysis.get("mca_holes") or [] if h.get("safe_to_drop")],
-        "residuals": lra_port.analyze_residuals(tactics) if tactics else {},
-        "memory": {
-            "success_kinds": named_success_kinds(memory or {}, str(record.get("name") or "")),
+    state = intent_state(
+        record,
+        analysis,
+        residuals=lra_port.analyze_residuals(tactics) if tactics else {},
+        memory_view={"success_kinds": named_success_kinds(memory or {}, str(record.get("name") or ""))},
+        window=intent_window(memory),
+        extra={
+            "head": str(analysis.get("case_labels") or [])[:200],
+            "tree_node": tree_node,
+            "allow_families": sorted(allow_families or []),
+            "prior_research": lra_bind.prior_research(memory or {}, str(record.get("name") or "")),
+            "proposed_skill": lra_bind.propose_skill_from_research(
+                memory or {}, str(record.get("name") or "")
+            ),
+            "memory_wins": port_wins(memory),
         },
-        **intent_window(memory),
-        "head": str(analysis.get("case_labels") or [])[:200],
-        "tree_node": tree_node,
-        "allow_families": sorted(allow_families or []),
-        "prior_research": lra_bind.prior_research(memory or {}, str(record.get("name") or "")),
-        "proposed_skill": lra_bind.propose_skill_from_research(
-            memory or {}, str(record.get("name") or "")
-        ),
-        "memory_wins": port_wins(memory),
-    }
+    )
     skills = (
         lra_port.available_skills(tactics, memory=dict(memory or {}), name=str(record.get("name") or ""))
         if tactics
@@ -555,7 +538,6 @@ def typesafe_intent(
         allow_families=allow_families,
         is_blocked=(lambda kind: lra_bind.is_blacklisted(memory, name, kind)) if memory is not None else None,
     )
-    started = time.perf_counter()
     questions: dict[str, Any] = {
             "intent": Choice(
                 instructions={
@@ -677,14 +659,14 @@ def typesafe_intent(
             skip=("keep",),
         )
     )
-    result = TypeSafeClient(timeout=45.0).system_one(state, questions)
+    from jevops.jev import invoke_system_one
     from jevops.jev import record_usage
     from jevops.jev import unpack_response
     from jevops.pick import intent_from_answers
 
+    result, wall_ms = invoke_system_one(TypeSafeClient(timeout=45.0), state, questions)
     usage = dict(getattr(result, "usage", None) or {})
     record_usage(ledger, usage, model=lra_t1.JEV_MODEL_ID)
-
     choices, nouls, scores, _usage = unpack_response(result)
     return intent_from_answers(
         choices=choices,
@@ -701,7 +683,7 @@ def typesafe_intent(
         uncertain=UNCERTAIN,
         high_stakes=record.get("name") in HIGH_STAKES,
         tree_node=tree_node,
-        wall_ms=(time.perf_counter() - started) * 1000.0,
+        wall_ms=wall_ms,
         memory=memory,
         name=str(record.get("name") or ""),
         criteria=criteria,
@@ -932,11 +914,12 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
     mem_path = lra_bind.save_memory(memory)
     gaps = lra_bind.skill_gap_report(memory)
     from jevops.nca import live_status
+    from jevops.outer import closed_evidence
+    from jevops.outer import landscape_rows
+    from jevops.outer import safe_call
+    from jevops.outer import write_json_pair
 
-    try:
-        nca_status = live_status(memory)
-    except Exception:
-        nca_status = {}
+    nca_status = safe_call(live_status, memory, default={}) or {}
     (args.out / "skill-analysis.json").write_text(
         json.dumps({"schema": "lra-skill-analysis/v1", "gaps": gaps, "nca_status": nca_status}, indent=2, sort_keys=True)
         + "\n"
@@ -953,20 +936,7 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
             "explained_ratio": (model.get("explained_ratio") or [])[:6],
             "principal0": (model.get("principal") or [{}])[0].get("loadings"),
         },
-        "landscape": [
-            {
-                "name": item["name"],
-                "source": item["source"],
-                "n_tokens": item["n_tokens"],
-                "n_mca_holes": item["n_mca_holes"],
-                "n_have": item["counts"].get("n_have"),
-                "n_simp_at": item["counts"].get("n_simp_at"),
-                "n_rw": item["counts"].get("n_rw"),
-                "n_induction": item["counts"].get("n_induction"),
-                "top_family": (item["families"][0]["family"] if item["families"] else None),
-            }
-            for item in landscape
-        ],
+        "landscape": landscape_rows(landscape),
         "inits_139": extra_139,
         "canaries": canaries,
         "lake": lake_rows,
@@ -974,13 +944,9 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
         "memory_path": str(mem_path),
         "memory": _memory_counts(memory),
         "nca_status": nca_status,
-        "called_docker0": False,
-        "official_track2": False,
-        "arena_score": None,
+        **closed_evidence(),
         "ledger": ledger.as_dict() if hasattr(ledger, "as_dict") else {"jev_calls": ledger.jev_calls},
     }
-    from jevops.outer import write_json_pair
-
     write_json_pair(args.out, payload, prefix="random-canary", latest="random-canary-latest.json")
     return payload
 

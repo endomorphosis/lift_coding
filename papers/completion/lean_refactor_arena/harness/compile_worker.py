@@ -21,7 +21,6 @@ import json
 import os
 import re
 import resource
-import stat
 import sys
 import tempfile
 import time
@@ -37,6 +36,7 @@ DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import bake_oleans as lra_bake  # noqa: E402
 import splice as lra_splice  # noqa: E402
 
@@ -232,43 +232,45 @@ class CompilePlan:
 
 
 def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    from jevops.outer import digest_hex
+
+    return digest_hex(data)
 
 
 def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    from jevops.outer import digest_file
+
+    return digest_file(path)
 
 
 def sha256_text(text: str) -> str:
-    return sha256_bytes(text.encode("utf-8"))
+    from jevops.outer import digest_text
+
+    return digest_text(text)
 
 
 def require_lake_timeout(timeout: float) -> float:
     """Reject the IndependentKernelVerifier 30 s default as a lake timeout."""
 
-    if (
-        isinstance(timeout, bool)
-        or not isinstance(timeout, (int, float))
-        or timeout <= 0
-    ):
-        raise CompileError("lake compile timeout must be a positive number")
-    value = float(timeout)
-    if value <= INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS:
-        raise LakeTimeoutTooSmall(
-            f"lake compile timeout {value}s must exceed IndependentKernelVerifier "
-            f"default {INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS}s; "
-            "the 30s kernel verifier is not the lake oracle"
-        )
-    return value
+    from jevops.outer import require_positive_above
+
+    return require_positive_above(
+        timeout,
+        INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+        error_cls=CompileError,
+        too_small_cls=LakeTimeoutTooSmall,
+        not_positive="lake compile timeout must be a positive number",
+        too_small=(
+            "lake compile timeout {value}s must exceed IndependentKernelVerifier "
+            "default {floor}s; the 30s kernel verifier is not the lake oracle"
+        ),
+    )
 
 
 def header_max_heartbeats(header: str) -> Optional[int]:
-    if not isinstance(header, str) or not header.strip():
-        return None
-    match = _HEADER_HEARTBEATS.search(header)
-    if match is None:
-        return None
-    return int(match.group(1))
+    from jevops.outer import first_group_int
+
+    return first_group_int(header, _HEADER_HEARTBEATS)
 
 
 def iter_version_pins(version_info: Any) -> list[VersionPin]:
@@ -280,15 +282,9 @@ def iter_version_pins(version_info: Any) -> list[VersionPin]:
 
 
 def _tag_sort_key(tag: str) -> tuple[tuple[int, int, int], str]:
-    text = lra_bake.normalize_lean_tag(tag)
-    if text.startswith("v"):
-        text = text[1:]
-    main, _, suffix = text.partition("-")
-    parts = main.split(".")
-    nums = [int(part) if part.isdigit() else 0 for part in parts[:3]]
-    while len(nums) < 3:
-        nums.append(0)
-    return (nums[0], nums[1], nums[2]), suffix
+    from jevops.outer import version_sort_key
+
+    return version_sort_key(lra_bake.normalize_lean_tag(tag))
 
 
 def measurement_argv(
@@ -298,16 +294,24 @@ def measurement_argv(
     *,
     max_heartbeats: int = MEASUREMENT_MAX_HEARTBEATS,
 ) -> list[str]:
-    if not lake_path or Path(lake_path).name != "lake":
-        raise CompileError(f"expected tag-pinned lake, got {lake_path!r}")
-    if not lean_path or Path(lean_path).name != "lean":
-        raise CompileError(f"expected tag-pinned lean, got {lean_path!r}")
+    from jevops.outer import refuse_basename, require_basename
+
+    lake_path = require_basename(
+        lake_path, "lake", error_cls=CompileError, fmt="expected tag-pinned lake, got {path!r}"
+    )
+    lean_path = require_basename(
+        lean_path, "lean", error_cls=CompileError, fmt="expected tag-pinned lean, got {path!r}"
+    )
     if max_heartbeats <= 0:
         raise CompileError("measurement maxHeartbeats must be finite and positive")
     if not source_file:
         raise CompileError("source_file is required")
-    if Path(source_file).name == lra_bake.FORBIDDEN_PUTNAM_BASENAME:
-        raise CompileError("refusing to compile Tmp.lean as the Putnam module")
+    refuse_basename(
+        source_file,
+        lra_bake.FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=CompileError,
+        fmt="refusing to compile {name} as the Putnam module",
+    )
     return [
         lake_path,
         "env",
@@ -319,50 +323,35 @@ def measurement_argv(
 
 
 def axiom_digest(axiom_names: Sequence[str]) -> str:
-    canonical = json.dumps(list(axiom_names), separators=(",", ":"))
-    return sha256_text(canonical)
+    from jevops.outer import digest_compact
+
+    return digest_compact(list(axiom_names))
 
 
 def parse_axioms(stdout: str, stderr: str = "") -> tuple[list[str], bool]:
     """Extract axiom names and sorryAx from lake/lean stdout."""
 
+    from jevops.search import parse_marked_list
+
     text = f"{stdout}\n{stderr}"
+    names, _flagged = parse_marked_list(
+        text,
+        start_prefix="#print axioms",
+        line_re=_AXIOM_LINE,
+        flag_needles=("sorryAx",),
+        extra_if_flagged=("sorryAx",),
+    )
     sorry = "sorryAx" in text or "hasSorry" in text
-    names: list[str] = []
-    seen: set[str] = set()
-    printed = False
-    for raw_line in text.splitlines():
-        line = raw_line.strip()
-        if line.startswith("#print axioms"):
-            printed = True
-            continue
-        if "sorryAx" in line and "sorryAx" not in seen:
-            names.append("sorryAx")
-            seen.add("sorryAx")
-            sorry = True
-        if not printed:
-            continue
-        match = _AXIOM_LINE.match(line)
-        if match is None:
-            continue
-        payload = match.group("bracket")
-        if payload is None:
-            payload = match.group("bare") or ""
-        for item in payload.split(","):
-            name = item.strip()
-            if name in {"", "[]"}:
-                continue
-            if name not in seen:
-                names.append(name)
-                seen.add(name)
-    if sorry and "sorryAx" not in seen:
+    if sorry and "sorryAx" not in names:
         names.append("sorryAx")
     return names, sorry
 
 
 def clone_dir(url: str, state_root: Optional[Path] = None) -> Path:
+    from jevops.outer import join_under, url_cache_key
+
     root = Path(state_root) if state_root is not None else lra_bake.default_state_root()
-    return root / "clones" / lra_bake._url_cache_key(url)
+    return join_under(root, "clones", url_cache_key(url))
 
 
 def require_clone(
@@ -371,10 +360,10 @@ def require_clone(
     network: str,
     state_root: Optional[Path] = None,
 ) -> Path:
+    from jevops.outer import dir_has_markers
+
     path = clone_dir(url, state_root)
-    if path.is_dir() and (
-        (path / ".git").exists() or (path / "lakefile.lean").is_file()
-    ):
+    if dir_has_markers(path, (".git", "lakefile.lean")):
         return path
     if network == "deny":
         raise CloneMissing(
@@ -385,6 +374,8 @@ def require_clone(
 
 
 def checkout_commit(clone: Path, commit: str) -> dict[str, Any]:
+    from jevops.outer import run_process
+
     if not commit:
         return {"ok": True, "skipped": True, "commit": commit, "cwd": str(clone)}
     git_dir = clone / ".git"
@@ -392,24 +383,18 @@ def checkout_commit(clone: Path, commit: str) -> dict[str, Any]:
         return {"ok": True, "skipped": True, "commit": commit, "cwd": str(clone)}
     if not GIT_BIN.is_file():
         raise CompileToolchainMissing(f"git is not at {GIT_BIN}; cannot checkout {commit}")
-    import subprocess
-
-    completed = subprocess.run(
+    ran = run_process(
         [str(GIT_BIN), "-C", str(clone), "checkout", "--detach", commit],
-        capture_output=True,
-        text=True,
-        check=False,
+        cwd=clone,
+        error_cls=CompileError,
+        fail_fmt="git checkout " + commit + " failed: {stderr}",
     )
-    if completed.returncode != 0:
-        raise CompileError(
-            f"git checkout {commit} failed: {completed.stderr.strip() or completed.stdout.strip()}"
-        )
     return {
         "ok": True,
         "skipped": False,
         "commit": commit,
         "cwd": str(clone),
-        "exit_code": completed.returncode,
+        "exit_code": ran["exit_code"],
     }
 
 
@@ -447,26 +432,31 @@ def source_relpath(record: Mapping[str, Any]) -> str:
     source = str(record.get("source") or "")
     if source == PUTNAM_SOURCE:
         return lra_bake.PUTNAM_CANDIDATE_RELPATH
+    from jevops.outer import refuse_basename
+
     path = str(record.get("file_path") or "")
     if not path:
         raise CompileError(f"{record.get('name')}: missing file_path")
-    if Path(path).name == lra_bake.FORBIDDEN_PUTNAM_BASENAME:
-        raise CompileError("refusing Tmp.lean")
+    refuse_basename(path, lra_bake.FORBIDDEN_PUTNAM_BASENAME, error_cls=CompileError, fmt="refusing {name}")
     return path
 
 
 def write_record_source(record: Mapping[str, Any], dest: Path) -> Path:
+    from jevops.outer import write_text
+
     split = lra_splice.split_statement_body(record)
     text = lra_splice.lake_candidate_source(
         header=split.header,
         statement=split.statement,
         tactic_block=lra_splice.tactic_block_from_body(split.body_suffix),
     )
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    if dest.name == lra_bake.FORBIDDEN_PUTNAM_BASENAME:
-        raise CompileError("refusing to write Tmp.lean")
-    dest.write_text(text, encoding="utf-8")
-    return dest
+    return write_text(
+        dest,
+        text,
+        refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=CompileError,
+        refuse_fmt="refusing to write {name}",
+    )
 
 
 def resolve_pin(
@@ -558,37 +548,22 @@ def compile_tag(
         )
         supervisor_dir.mkdir(parents=True, exist_ok=True)
         env[PROCESS_SUPERVISOR_ENV] = str(supervisor_dir)
-        ru_before = resource.getrusage(resource.RUSAGE_CHILDREN)
-        started = time.perf_counter()
-        result = run_lean_process(
-            argv,
-            timeout=timeout,
-            cwd=str(cwd),
-            env=env,
-        )
-        wall_ms = max(0.0, (time.perf_counter() - started) * 1000.0)
-        ru_after = resource.getrusage(resource.RUSAGE_CHILDREN)
-        cpu_ms = max(
-            0.0,
-            (
-                (ru_after.ru_utime + ru_after.ru_stime)
-                - (ru_before.ru_utime + ru_before.ru_stime)
+        from jevops.outer import process_exit_code, timed_call
+
+        result, wall_ms, cpu_ms = timed_call(
+            lambda: run_lean_process(
+                argv,
+                timeout=timeout,
+                cwd=str(cwd),
+                env=env,
             )
-            * 1000.0,
         )
         stdout = result.stdout or ""
         stderr = result.stderr or ""
         axiom_names, sorry = parse_axioms(stdout, stderr)
-        if result.timed_out:
-            exit_code = 124
-        elif result.error:
-            exit_code = 1 if result.returncode in (None, 0) else int(result.returncode)
-        elif result.returncode is None:
-            exit_code = 0
-        else:
-            exit_code = int(result.returncode)
+        exit_code, timed_out = process_exit_code(result)
         receipt.exit_code = exit_code
-        receipt.timed_out = bool(result.timed_out)
+        receipt.timed_out = timed_out
         receipt.stdout = stdout
         receipt.stderr = stderr
         receipt.stdout_digest = sha256_text(stdout)
@@ -667,12 +642,12 @@ def compile_record(
     skip_checkout: bool = False,
     abort_on_first_failure: bool = True,
 ) -> list[CompileReceipt]:
+    from jevops.outer import collect_until
+
     pins = iter_version_pins(record.get("version_info"))
-    receipts: list[CompileReceipt] = []
-    remaining = [item.lean_tag for item in pins]
-    for pin in pins:
-        remaining = remaining[1:]
-        receipt = compile_tag(
+    return collect_until(
+        pins,
+        lambda pin: compile_tag(
             record,
             pin,
             timeout=timeout,
@@ -682,28 +657,23 @@ def compile_record(
             require_oleans=require_oleans,
             hardware_class=hardware_class,
             skip_checkout=skip_checkout,
-        )
-        if not receipt.ok and abort_on_first_failure:
-            receipt.aborted_remaining_tags = list(remaining)
-        receipts.append(receipt)
-        if not receipt.ok and abort_on_first_failure:
-            break
-    return receipts
+        ),
+        abort_fn=(lambda receipt: not receipt.ok) if abort_on_first_failure else None,
+        remaining_fn=lambda rest: [item.lean_tag for item in rest],
+        remaining_attr="aborted_remaining_tags" if abort_on_first_failure else "",
+    )
 
 
 def write_receipts(receipts: Sequence[CompileReceipt], dest_dir: Path) -> list[str]:
-    dest_dir = Path(dest_dir)
-    written: list[str] = []
-    for receipt in receipts:
-        safe_name = receipt.name.replace("/", "_") or "unnamed"
-        path = dest_dir / safe_name / f"{receipt.lean_tag}.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
-            json.dumps(receipt.to_dict(), indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        written.append(str(path))
-    return written
+    from jevops.outer import write_named_jsons
+
+    return write_named_jsons(
+        dest_dir,
+        receipts,
+        name_fn=lambda item: item.name,
+        tag_fn=lambda item: item.lean_tag,
+        payload_fn=lambda item: item.to_dict(),
+    )
 
 
 def plan_compile(path: Optional[Path] = None) -> CompilePlan:
@@ -719,10 +689,14 @@ def plan_compile(path: Optional[Path] = None) -> CompilePlan:
 
 
 def first_strata_record(records: Sequence[Mapping[str, Any]]) -> Mapping[str, Any]:
-    for record in records:
-        if record.get("source") == STRATA_SOURCE:
-            return record
-    raise CompileError("no Strata record in warmup JSONL")
+    from jevops.outer import first_where
+
+    return first_where(
+        records,
+        lambda record: record.get("source") == STRATA_SOURCE,
+        error_cls=CompileError,
+        miss="no Strata record in warmup JSONL",
+    )
 
 
 def expand_records(
@@ -732,32 +706,29 @@ def expand_records(
 ) -> list[Mapping[str, Any]]:
     """Records whose tags are compiled after ``after_name`` is green."""
 
-    found = False
-    out: list[Mapping[str, Any]] = []
-    for record in records:
-        name = str(record.get("name") or "")
-        if not found:
-            if name == after_name:
-                found = True
-            continue
-        if record.get("source") == STRATA_SOURCE:
-            out.append(record)
-    return out
+    from jevops.outer import after_named
+
+    return after_named(
+        records,
+        after_name,
+        pred=lambda record: record.get("source") == STRATA_SOURCE,
+    )
 
 
 def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
     if tags is None:
         tags = (STRATA_FIRST_TAG, "v4.27.0", "v4.29.1")
-    wanted: list[str] = []
-    for tag in tags:
-        if tag not in wanted:
-            wanted.append(tag)
+    from jevops.outer import map_partition, unique_keep
+
+    wanted = unique_keep(list(tags))
     resolver = LeanToolchainResolver()
+
     pins = [
         resolver.resolve_tag(tag, require_installed=False).to_dict() for tag in wanted
     ]
-    installed = [pin["lean_tag"] for pin in pins if pin["installed"]]
-    missing = [pin["lean_tag"] for pin in pins if not pin["installed"]]
+    installed, missing = map_partition(
+        pins, lambda pin: pin["installed"], lambda pin: pin["lean_tag"]
+    )
     return {
         "arena_score": None,
         "default_elan_home": str(lra_bake.default_elan_home()),
@@ -785,90 +756,56 @@ def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-                names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-                names.add(node.module)
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _call_name(node: ast.AST) -> str:
-    if isinstance(node, ast.Name):
-        return node.id
-    if isinstance(node, ast.Attribute):
-        return node.attr
-    return ""
+    from jevops.repair import call_short_name
+
+    return call_short_name(node)
 
 
 def _oracle_name_uses(tree: ast.AST) -> set[str]:
-    used: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Name) and node.id in FORBIDDEN_ORACLE_NAMES:
-            used.add(node.id)
-        if isinstance(node, ast.Attribute) and node.attr in FORBIDDEN_ORACLE_NAMES:
-            used.add(node.attr)
-    return used
+    from jevops.repair import ast_name_hits
+
+    return ast_name_hits(tree, FORBIDDEN_ORACLE_NAMES)
 
 
 def _timeout_kwarg_values(tree: ast.AST) -> list[float]:
-    values: list[float] = []
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        for keyword in node.keywords:
-            if keyword.arg not in {"timeout", "timeout_seconds"}:
-                continue
-            value = keyword.value
-            if isinstance(value, ast.Constant) and isinstance(value.value, (int, float)):
-                values.append(float(value.value))
-    return values
+    from jevops.repair import call_kwarg_numbers
+
+    return call_kwarg_numbers(tree, ("timeout", "timeout_seconds"))
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.repair import ast_name_hits, audit_source as _audit, call_kwarg_numbers, has_constant
+
     text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    out = _audit(
+        text,
+        forbidden_imports=FORBIDDEN_IMPORT_NAMES,
+        forbidden_calls=FORBIDDEN_CALLS,
+        forbidden_scores=FORBIDDEN_SCORE_NAMES,
+    )
     tree = ast.parse(text)
-    imported = _imported_names(text)
-    calls = {_call_name(child.func) for child in ast.walk(tree) if isinstance(child, ast.Call)}
-    oracle_uses = _oracle_name_uses(tree)
-    timeout_literals = _timeout_kwarg_values(tree)
-    score_assignments: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.keyword) and node.arg in FORBIDDEN_SCORE_NAMES:
-            if not (isinstance(node.value, ast.Constant) and node.value.value is None):
-                score_assignments.append(str(node.arg))
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            if node.target.id in FORBIDDEN_SCORE_NAMES and not (
-                isinstance(node.value, ast.Constant) and node.value.value is None
-            ):
-                score_assignments.append(node.target.id)
-    forbidden_imports = sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES)
-    forbidden_calls = sorted(calls & FORBIDDEN_CALLS)
+    oracle_uses = ast_name_hits(tree, FORBIDDEN_ORACLE_NAMES)
+    timeout_literals = call_kwarg_numbers(tree, ("timeout", "timeout_seconds"))
+    calls = set(out["call_names"])
+    score_assignments = list(out["score_keys"])
     uses_run_lean_process = "run_lean_process" in calls
     uses_measurement_argv = "measurement_argv" in calls
-    has_ikv_timeout_constant = any(
-        isinstance(node, ast.Constant)
-        and isinstance(node.value, float)
-        and node.value == INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
-        for node in ast.walk(tree)
-    )
+    has_ikv_timeout_constant = has_constant(text, INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS)
     lake_timeout_literals_ok = all(
         value > INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
         for value in timeout_literals
         if value == INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS or value >= 1.0
     ) and INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS not in timeout_literals
     return {
-        "imported_names": sorted(imported),
-        "forbidden_imports": forbidden_imports,
-        "forbidden_calls": forbidden_calls,
+        "imported_names": out["imported_names"],
+        "forbidden_imports": out["forbidden_imports"],
+        "forbidden_calls": out["forbidden_calls"],
         "forbidden_oracle_uses": sorted(oracle_uses),
         "score_assignments": score_assignments,
         "timeout_kwarg_literals": timeout_literals,
@@ -878,8 +815,8 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
         "lake_timeout_literals_ok": lake_timeout_literals_ok,
         "independent_kernel_verifier_is_lake_oracle": False,
         "ok": (
-            not forbidden_imports
-            and not forbidden_calls
+            not out["forbidden_imports"]
+            and not out["forbidden_calls"]
             and not oracle_uses
             and not score_assignments
             and uses_run_lean_process
@@ -945,59 +882,60 @@ sys.exit(0)
 
 
 def _write_executable(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
-    mode = path.stat().st_mode
-    path.chmod(mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+    from jevops.outer import write_executable
+
+    write_executable(path, text)
 
 
 def plant_fake_toolchain(elan_home: Path, lean_tag: str) -> Path:
-    toolchain_dir = (
-        Path(elan_home)
-        / "toolchains"
-        / lra_bake.elan_toolchain_dirname(lean_tag)
-        / "bin"
+    from jevops.outer import join_under, plant_executables
+
+    toolchain_dir = join_under(
+        elan_home, "toolchains", lra_bake.elan_toolchain_dirname(lean_tag), "bin"
     )
-    _write_executable(toolchain_dir / "lake", _FAKE_LAKE)
-    _write_executable(toolchain_dir / "lean", _FAKE_LEAN)
+    plant_executables(toolchain_dir, {"lake": _FAKE_LAKE, "lean": _FAKE_LEAN})
     return toolchain_dir
 
 
 def plant_synthetic_strata_clone(clone: Path) -> Path:
-    clone.mkdir(parents=True, exist_ok=True)
-    (clone / ".git").mkdir(parents=True, exist_ok=True)
-    (clone / ".git" / "HEAD").write_text("ref: refs/heads/main\n", encoding="utf-8")
-    (clone / "lakefile.lean").write_text(
-        "import Lake\n"
-        "open Lake DSL\n"
-        "\n"
-        "package «strata» where\n"
-        f'  moreLeanArgs := #["-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}"]\n'
-        "\n"
-        "lean_lib «Strata»\n",
-        encoding="utf-8",
+    from jevops.outer import plant_git_skeleton
+
+    return plant_git_skeleton(
+        clone,
+        files={
+            "lakefile.lean": (
+                "import Lake\n"
+                "open Lake DSL\n"
+                "\n"
+                "package «strata» where\n"
+                f'  moreLeanArgs := #["-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}"]\n'
+                "\n"
+                "lean_lib «Strata»\n"
+            ),
+            "lean-toolchain": f"leanprover/lean4:{STRATA_FIRST_TAG}\n",
+        },
     )
-    (clone / "lean-toolchain").write_text(
-        f"leanprover/lean4:{STRATA_FIRST_TAG}\n", encoding="utf-8"
-    )
-    return clone
 
 
 def _receipt_summary(receipt: CompileReceipt) -> dict[str, Any]:
+    from jevops.outer import argv_layout
+
     return {
         "aborted_remaining_tags": list(receipt.aborted_remaining_tags),
-        "argv_has_lake_env_lean": (
-            len(receipt.argv) >= 6
-            and Path(receipt.argv[0]).name == "lake"
-            and receipt.argv[1] == "env"
-            and Path(receipt.argv[2]).name == "lean"
-            and receipt.argv[3] == f"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}"
-            and receipt.argv[4] == "--json"
+        "argv_has_lake_env_lean": argv_layout(
+            receipt.argv,
+            min_len=6,
+            names={0: "lake", 2: "lean"},
+            eq={
+                1: "env",
+                3: f"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}",
+                4: "--json",
+            },
         ),
-        "argv_tag_pinned": (
-            receipt.lean_tag in receipt.argv[0] and receipt.lean_tag in receipt.argv[2]
-            if len(receipt.argv) >= 3
-            else False
+        "argv_tag_pinned": argv_layout(
+            receipt.argv,
+            min_len=3,
+            contains={0: receipt.lean_tag, 2: receipt.lean_tag},
         ),
         "axiom_digest": receipt.axiom_digest,
         "axiom_digest_hex64": len(receipt.axiom_digest) == 64,
@@ -1038,26 +976,16 @@ def _receipt_summary(receipt: CompileReceipt) -> dict[str, Any]:
 def _exec_scratch_parent() -> Path:
     """Return a directory that can exec shebang scripts. ``/tmp`` is often noexec."""
 
-    candidates: list[Path] = []
-    xdg = os.environ.get("XDG_STATE_HOME")
-    if xdg is not None and str(xdg).strip():
-        candidates.append(Path(str(xdg).strip()))
-    candidates.append(Path.home() / ".local" / "state")
-    candidates.append(Path.home())
-    for base in candidates:
-        try:
-            base.mkdir(parents=True, exist_ok=True)
-            probe = base / ".lra-014-exec-probe"
-            _write_executable(probe, "#!/usr/bin/python3.12\nimport sys\nsys.exit(0)\n")
-            rc = os.system(str(probe))
-            probe.unlink(missing_ok=True)
-            if rc == 0:
-                return base
-        except OSError:
-            continue
-    raise CompileError(
-        "no executable filesystem for tag-pinned synthetic lake/lean "
-        "(refusing /tmp noexec and PATH lake)"
+    from jevops.outer import exec_capable_dir, state_home_candidates
+
+    return exec_capable_dir(
+        state_home_candidates(),
+        probe_name=".lra-014-exec-probe",
+        error_cls=CompileError,
+        miss=(
+            "no executable filesystem for tag-pinned synthetic lake/lean "
+            "(refusing /tmp noexec and PATH lake)"
+        ),
     )
 
 
@@ -1282,8 +1210,9 @@ def self_check(
 
 
 def _print_json(payload: Mapping[str, Any]) -> None:
-    json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-    sys.stdout.write("\n")
+    from jevops.outer import print_json
+
+    print_json(payload)
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:

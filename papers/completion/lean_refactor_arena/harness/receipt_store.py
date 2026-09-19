@@ -38,6 +38,7 @@ MODELS_SOURCE = DATASETS_ROOT / "ipfs_datasets_py" / "logic" / "hammers" / "mode
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import retrieve as lra_retrieve  # noqa: E402
 import splice as lra_splice  # noqa: E402
 
@@ -282,25 +283,27 @@ class ProofReceipt:
 
 
 def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    from jevops.outer import digest_hex
+
+    return digest_hex(data)
 
 
 def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    from jevops.outer import digest_file
+
+    return digest_file(path)
 
 
 def canonical_bytes(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        ensure_ascii=False,
-        allow_nan=False,
-        separators=(",", ":"),
-        sort_keys=True,
-    ).encode("utf-8")
+    from jevops.outer import canonical_bytes as _fn
+
+    return _fn(value)
 
 
 def content_digest(value: Any) -> str:
-    return sha256_bytes(canonical_bytes(value))
+    from jevops.outer import digest_canonical
+
+    return digest_canonical(value)
 
 
 def not_applicable_digest() -> str:
@@ -314,6 +317,8 @@ def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[d
 def closed_dimensions_from_source(path: Path = PROOF_STORE_SOURCE) -> tuple[str, ...]:
     """Parse PROOF_AUTHORITY_DIMENSIONS from DuckDBProofStore@1 source."""
 
+    from jevops.outer import quoted_strings
+
     if not path.is_file():
         raise ReceiptStoreError(f"missing proof-store source: {path}")
     text = path.read_text(encoding="utf-8")
@@ -324,7 +329,7 @@ def closed_dimensions_from_source(path: Path = PROOF_STORE_SOURCE) -> tuple[str,
     )
     if match is None:
         raise ReceiptStoreError("PROOF_AUTHORITY_DIMENSIONS missing from duckdb_proof_store.py")
-    names = tuple(re.findall(r'"([a-z_]+)"', match.group(1)))
+    names = quoted_strings(match.group(1))
     if not names:
         raise ReceiptStoreError("PROOF_AUTHORITY_DIMENSIONS parsed empty")
     return names
@@ -333,35 +338,42 @@ def closed_dimensions_from_source(path: Path = PROOF_STORE_SOURCE) -> tuple[str,
 def environment_lock_field_names(path: Path = MODELS_SOURCE) -> list[str]:
     """AnnAssign names on EnvironmentLockRecord. No primary_executable field."""
 
+    from jevops.repair import class_ann_names
+
     if not path.is_file():
         raise ReceiptStoreError(f"missing hammer models source: {path}")
-    tree = ast.parse(path.read_text(encoding="utf-8"))
-    for node in tree.body:
-        if isinstance(node, ast.ClassDef) and node.name == "EnvironmentLockRecord":
-            names: list[str] = []
-            for item in node.body:
-                if isinstance(item, ast.AnnAssign) and isinstance(item.target, ast.Name):
-                    names.append(item.target.id)
-            return names
-    raise ReceiptStoreError("EnvironmentLockRecord class missing from models.py")
+    names = class_ann_names(path.read_text(encoding="utf-8"), "EnvironmentLockRecord")
+    if names is None:
+        raise ReceiptStoreError("EnvironmentLockRecord class missing from models.py")
+    return names
 
 
 def parse_executable_paths(value: Any) -> ExecutablePaths:
+    from jevops.outer import reject_present_keys, require_exact_keys
+
     if isinstance(value, ExecutablePaths):
         paths = value.to_dict()
     elif isinstance(value, Mapping):
-        if "primary_executable" in value:
-            raise ReceiptStoreError("executable_paths must not include primary_executable")
+        reject_present_keys(
+            value,
+            ("primary_executable",),
+            error_cls=ReceiptStoreError,
+            fmt="executable_paths must not include {key}",
+            empty=(),
+        )
         paths = {str(key): str(item) for key, item in value.items()}
     else:
         raise ReceiptStoreError("executable_paths must be a mapping of lean and lake")
-    if set(paths) != {"lean", "lake"}:
-        raise ReceiptStoreError("executable_paths must be exactly lean and lake")
-    lean = paths["lean"].strip()
-    lake = paths["lake"].strip()
-    if not lean or not lake:
-        raise ReceiptStoreError("executable_paths lean and lake must be nonempty")
-    return ExecutablePaths(lean=lean, lake=lake)
+    got = require_exact_keys(
+        paths,
+        ("lean", "lake"),
+        error_cls=ReceiptStoreError,
+        not_map="executable_paths must be a mapping of lean and lake",
+        extra_fmt="executable_paths must be exactly lean and lake",
+        miss_fmt="executable_paths must be exactly lean and lake",
+        empty_fmt="executable_paths lean and lake must be nonempty",
+    )
+    return ExecutablePaths(lean=got["lean"], lake=got["lake"])
 
 
 def assumptions_digest(
@@ -426,69 +438,73 @@ def receipt_key_digest(receipt: ProofReceipt, dimensions: Mapping[str, str]) -> 
 
 
 def _reject_proof_bodies(payload: Mapping[str, Any]) -> None:
-    for key in PROOF_BODY_KEYS:
-        if key in payload and payload[key] not in (None, "", []):
-            raise ReceiptStoreError(f"proof body field {key!r} is not stored in receipt rows")
+    from jevops.outer import reject_present_keys
+
+    reject_present_keys(
+        payload,
+        PROOF_BODY_KEYS,
+        error_cls=ReceiptStoreError,
+        fmt="proof body field {key!r} is not stored in receipt rows",
+    )
 
 
 def _tiny_payload(payload: Mapping[str, Any]) -> str:
-    blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
-    encoded = blob.encode("utf-8")
-    if len(encoded) > MAX_ROW_BYTES:
-        raise ReceiptStoreError(
-            f"receipt row {len(encoded)} bytes exceeds tiny-row cap {MAX_ROW_BYTES}"
-        )
-    return blob
+    from jevops.outer import dump_tiny
+
+    return dump_tiny(
+        payload,
+        max_bytes=MAX_ROW_BYTES,
+        error_cls=ReceiptStoreError,
+        fmt="receipt row {n} bytes exceeds tiny-row cap {max_bytes}",
+    )
 
 
 def sanitize_name(name: str) -> str:
-    cleaned = re.sub(r"[^A-Za-z0-9._-]+", "_", name).strip("._")
-    if not cleaned:
-        raise ReceiptStoreError("theorem name sanitizes empty")
-    return cleaned
+    from jevops.outer import sanitize_ident
+
+    return sanitize_ident(name, error_cls=ReceiptStoreError, empty="theorem name sanitizes empty")
 
 
 def write_cas_body(root: Path, body: str) -> str:
-    data = body.encode("utf-8")
-    digest = sha256_bytes(data)
-    folder = root / "artifacts" / digest[:2] / digest
-    folder.mkdir(parents=True, exist_ok=True)
-    path = folder / "candidate.lean"
-    if not path.exists():
-        path.write_text(body, encoding="utf-8")
-    return digest
+    from jevops.outer import write_cas
+
+    return write_cas(root, body.encode("utf-8"), prefix="artifacts", filename="candidate.lean")
 
 
 def filesystem_receipt_path(root: Path, name: str, lean_tag: str) -> Path:
-    return root / "receipts" / sanitize_name(name) / f"{lean_tag}.json"
+    from jevops.outer import join_under
+
+    return join_under(root, "receipts", sanitize_name(name), f"{lean_tag}.json")
 
 
 def write_filesystem_receipt(root: Path, receipt: ProofReceipt) -> Path:
+    from jevops.outer import write_json
+
     path = filesystem_receipt_path(root, receipt.name, receipt.lean_tag)
-    path.parent.mkdir(parents=True, exist_ok=True)
     payload = receipt.to_public_dict()
     _reject_proof_bodies(payload)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    write_json(path, payload)
     return path
 
 
 def try_import_duckdb() -> Any:
-    try:
-        import duckdb  # type: ignore[import-not-found]
-    except ImportError:
-        return None
-    return duckdb
+    from jevops.outer import try_import
+
+    return try_import("duckdb")
 
 
 def _guard_sql(sql: str) -> str:
-    text = sql.strip()
-    if not text:
-        raise InsertOnlyError("empty SQL")
-    if FORBIDDEN_SQL.search(text):
-        raise InsertOnlyError(f"forbidden mutating SQL: {text[:120]}")
-    if not ALLOWED_SQL_HEAD.match(text):
-        raise InsertOnlyError(f"SQL outside INSERT/SELECT/CREATE TABLE IF NOT EXISTS: {text[:120]}")
-    return text
+    from jevops.outer import guard_sql
+
+    return guard_sql(
+        sql,
+        allowed_head=ALLOWED_SQL_HEAD,
+        forbidden=FORBIDDEN_SQL,
+        error_cls=InsertOnlyError,
+        empty="empty SQL",
+        forbidden_fmt="forbidden mutating SQL: {sql}",
+        outside_fmt="SQL outside INSERT/SELECT/CREATE TABLE IF NOT EXISTS: {sql}",
+    )
 
 
 class InsertOnlyConnection:
@@ -512,13 +528,10 @@ class InsertOnlyConnection:
 def connect_optional_db(path: Path, *, duckdb_module: Any = None) -> tuple[InsertOnlyConnection, str]:
     """Open DuckDB when the package exists; otherwise sqlite3 (still INSERT-only)."""
 
-    path.parent.mkdir(parents=True, exist_ok=True)
-    module = duckdb_module if duckdb_module is not None else try_import_duckdb()
-    if module is not None:
-        conn = InsertOnlyConnection(module.connect(str(path)))
-        return conn, "duckdb"
-    conn = InsertOnlyConnection(sqlite3.connect(str(path)))
-    return conn, "sqlite3"
+    from jevops.outer import connect_engine
+
+    raw, engine = connect_engine(path, duckdb_module=duckdb_module)
+    return InsertOnlyConnection(raw), engine
 
 
 def install_schema(conn: InsertOnlyConnection) -> None:
@@ -527,14 +540,15 @@ def install_schema(conn: InsertOnlyConnection) -> None:
 
 
 def _integrity_conflict(exc: BaseException) -> bool:
-    name = type(exc).__name__.lower()
-    text = str(exc).lower()
-    needles = ("constraint", "unique", "duplicate", "primary key", "integrity")
-    return any(item in name for item in needles) or any(item in text for item in needles)
+    from jevops.outer import integrity_conflict
+
+    return integrity_conflict(exc)
 
 
 def insert_receipt_row(conn: InsertOnlyConnection, receipt: ProofReceipt) -> bool:
     """INSERT one tiny row. Existing key is skipped; never DELETE/UPDATE."""
+
+    from jevops.outer import dumps_compact
 
     payload = {
         "candidate_cid": receipt.candidate_cid,
@@ -554,18 +568,20 @@ def insert_receipt_row(conn: InsertOnlyConnection, receipt: ProofReceipt) -> boo
         receipt.verdict,
         receipt.token_count,
         receipt.elab_proxy,
-        json.dumps(receipt.dimensions, separators=(",", ":"), sort_keys=True),
-        json.dumps(receipt.executable_paths.to_dict(), separators=(",", ":"), sort_keys=True),
+        dumps_compact(receipt.dimensions),
+        dumps_compact(receipt.executable_paths.to_dict()),
         blob,
         receipt.created_at,
     )
-    try:
-        conn.execute(INSERT_RECEIPT_SQL, params)
-        return True
-    except Exception as exc:  # noqa: BLE001 — dialect-specific unique errors
-        if _integrity_conflict(exc):
-            return False
-        raise ReceiptStoreError(f"INSERT receipt failed: {exc}") from exc
+    from jevops.outer import insert_ignore_conflict
+
+    return insert_ignore_conflict(
+        conn.execute,
+        INSERT_RECEIPT_SQL,
+        params,
+        error_cls=ReceiptStoreError,
+        fail_fmt="INSERT receipt failed: {exc}",
+    )
 
 
 def insert_edge(
@@ -578,41 +594,46 @@ def insert_edge(
 ) -> bool:
     """INSERT an edge. Existing edges stay; there is no DELETE."""
 
+    from jevops.outer import insert_ignore_conflict
+
     stamp = time.time() if created_at is None else float(created_at)
-    try:
-        conn.execute(INSERT_EDGE_SQL, (parent_digest, child_digest, edge_kind, stamp))
-        return True
-    except Exception as exc:  # noqa: BLE001
-        if _integrity_conflict(exc):
-            return False
-        raise ReceiptStoreError(f"INSERT edge failed: {exc}") from exc
+    return insert_ignore_conflict(
+        conn.execute,
+        INSERT_EDGE_SQL,
+        (parent_digest, child_digest, edge_kind, stamp),
+        error_cls=ReceiptStoreError,
+        fail_fmt="INSERT edge failed: {exc}",
+    )
 
 
 def select_edges(conn: InsertOnlyConnection, parent_digest: str) -> list[tuple[str, str, str]]:
+    from jevops.outer import fetch_mapped
+
     result = conn.execute(SELECT_EDGE_SQL, (parent_digest,))
-    rows = result.fetchall()
-    return [(str(row[0]), str(row[1]), str(row[2])) for row in rows]
+    return fetch_mapped(result, lambda row: (str(row[0]), str(row[1]), str(row[2])))
 
 
 def lookup_receipt(conn: InsertOnlyConnection, key_digest: str) -> Optional[dict[str, Any]]:
+    from jevops.outer import row_dict
+
     result = conn.execute(SELECT_RECEIPT_SQL, (key_digest,))
-    row = result.fetchone()
-    if row is None:
-        return None
-    return {
-        "key_digest": row[0],
-        "theorem_name": row[1],
-        "lean_tag": row[2],
-        "body_digest": row[3],
-        "candidate_cid": row[4],
-        "verdict": row[5],
-        "token_count": row[6],
-        "elab_proxy": row[7],
-        "dimensions_json": row[8],
-        "executable_paths_json": row[9],
-        "payload_json": row[10],
-        "created_at": row[11],
-    }
+    return row_dict(
+        result.fetchone(),
+        (
+            "key_digest",
+            "theorem_name",
+            "lean_tag",
+            "body_digest",
+            "candidate_cid",
+            "verdict",
+            "token_count",
+            "elab_proxy",
+            "dimensions_json",
+            "executable_paths_json",
+            "payload_json",
+            "created_at",
+        ),
+    )
 
 
 def lookup_negative(
@@ -623,11 +644,11 @@ def lookup_negative(
 ) -> Optional[str]:
     """Return the stored verdict for a failed (theorem, body, toolchain)."""
 
+    from jevops.outer import row_cell
+
     result = conn.execute(SELECT_NEGATIVE_SQL, (theorem_name, body_digest, lean_tag))
-    row = result.fetchone()
-    if row is None:
-        return None
-    return str(row[1])
+    value = row_cell(result.fetchone(), 1)
+    return None if value is None else str(value)
 
 
 def should_skip_retry(verdict: Optional[str]) -> bool:
@@ -637,7 +658,9 @@ def should_skip_retry(verdict: Optional[str]) -> bool:
 def finalize_receipt(receipt: ProofReceipt, *, body: Optional[str] = None) -> ProofReceipt:
     if receipt.executable_paths is None:
         raise ReceiptStoreError("executable_paths required")
-    if not HEX64.match(receipt.body_digest):
+    from jevops.outer import is_hex_digest
+
+    if not is_hex_digest(receipt.body_digest):
         if body is not None:
             receipt.body_digest = sha256_bytes(body.encode("utf-8"))
         else:
@@ -703,59 +726,33 @@ def store_receipt(
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-                names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-                names.add(node.module)
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _call_func_names(source: str) -> set[str]:
-    names: set[str] = set()
-    tree = ast.parse(source)
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        func = node.func
-        if isinstance(func, ast.Name):
-            names.add(func.id)
-        elif isinstance(func, ast.Attribute):
-            names.add(func.attr)
-    return names
+    from jevops.repair import call_func_names
+
+    return call_func_names(source)
 
 
 def _keyword_names(source: str) -> set[str]:
-    return {
-        node.arg
-        for node in ast.walk(ast.parse(source))
-        if isinstance(node, ast.keyword) and isinstance(node.arg, str)
-    }
+    from jevops.repair import keyword_names
+
+    return keyword_names(source)
 
 
 def _string_constants(source: str) -> list[str]:
-    return [
-        node.value
-        for node in ast.walk(ast.parse(source))
-        if isinstance(node, ast.Constant) and isinstance(node.value, str)
-    ]
+    from jevops.repair import string_constants
+
+    return string_constants(source)
 
 
 def _function_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            names.add(node.name)
-    return names
+    from jevops.repair import function_names
+
+    return function_names(source)
 
 
 def _forbidden_sql_in_constants(source: str) -> list[str]:

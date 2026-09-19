@@ -16,7 +16,6 @@ import json
 import os
 import re
 import resource
-import stat
 import sys
 import tempfile
 import time
@@ -35,6 +34,7 @@ LEAN_FRONTEND_PATH = (
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import bake_oleans as lra_bake  # noqa: E402
 import compile_worker as lra_compile  # noqa: E402
 import splice as lra_splice  # noqa: E402
@@ -235,21 +235,27 @@ class TacticTryReceipt:
 
 
 def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    from jevops.outer import digest_hex
+
+    return digest_hex(data)
 
 
 def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    from jevops.outer import digest_file
+
+    return digest_file(path)
 
 
 def sha256_text(text: str) -> str:
-    return sha256_bytes(text.encode("utf-8"))
+    from jevops.outer import digest_text
+
+    return digest_text(text)
 
 
 def aesop_imported(record: Mapping[str, Any]) -> bool:
-    header = record.get("header") or ""
-    src = record.get("src") or ""
-    return bool(_AESOP_IMPORT.search(str(header))) or bool(_AESOP_IMPORT.search(str(src)))
+    from jevops.outer import any_search
+
+    return any_search((record.get("header") or "", record.get("src") or ""), _AESOP_IMPORT)
 
 
 def tactics_for_record(record: Mapping[str, Any]) -> list[str]:
@@ -282,15 +288,18 @@ def tactic_lake_source(record: Mapping[str, Any], tactic: str) -> str:
 
 
 def write_tactic_source(record: Mapping[str, Any], dest: Path, tactic: str) -> Path:
-    dest = Path(dest)
-    if dest.name == lra_bake.FORBIDDEN_PUTNAM_BASENAME:
-        raise TryError("refusing to write Tmp.lean")
+    from jevops.outer import write_text
+
     text = (
         sorry_lake_source(record) if tactic == SORRY_TACTIC else tactic_lake_source(record, tactic)
     )
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(text, encoding="utf-8")
-    return dest
+    return write_text(
+        dest,
+        text,
+        refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=TryError,
+        refuse_fmt="refusing to write {name}",
+    )
 
 
 def _attempt_from_result(
@@ -305,19 +314,12 @@ def _attempt_from_result(
     cpu_ms: float,
     error: str = "",
 ) -> TacticAttempt:
+    from jevops.outer import process_exit_code
+
     stdout = getattr(result, "stdout", "") or ""
     stderr = getattr(result, "stderr", "") or ""
-    timed_out = bool(getattr(result, "timed_out", False))
     result_error = getattr(result, "error", None)
-    returncode = getattr(result, "returncode", None)
-    if timed_out:
-        exit_code = 124
-    elif result_error:
-        exit_code = 1 if returncode in (None, 0) else int(returncode)
-    elif returncode is None:
-        exit_code = 0
-    else:
-        exit_code = int(returncode)
+    exit_code, timed_out = process_exit_code(result)
     axiom_names, sorry = lra_compile.parse_axioms(stdout, stderr)
     attempt = TacticAttempt(
         tactic=tactic,
@@ -377,23 +379,15 @@ def _run_tactic(
         source_file,
         max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
     )
-    ru_before = resource.getrusage(resource.RUSAGE_CHILDREN)
-    started = time.perf_counter()
-    result = run_lean_process(
-        argv,
-        timeout=timeout,
-        cwd=str(cwd),
-        env=dict(env),
-    )
-    wall_ms = max(0.0, (time.perf_counter() - started) * 1000.0)
-    ru_after = resource.getrusage(resource.RUSAGE_CHILDREN)
-    cpu_ms = max(
-        0.0,
-        (
-            (ru_after.ru_utime + ru_after.ru_stime)
-            - (ru_before.ru_utime + ru_before.ru_stime)
+    from jevops.outer import timed_call
+
+    result, wall_ms, cpu_ms = timed_call(
+        lambda: run_lean_process(
+            argv,
+            timeout=timeout,
+            cwd=str(cwd),
+            env=dict(env),
         )
-        * 1000.0,
     )
     return _attempt_from_result(
         tactic=tactic,
@@ -551,20 +545,25 @@ def try_tactics(
 def first_record_of_source(
     records: Sequence[Mapping[str, Any]], source: str
 ) -> Mapping[str, Any]:
-    for record in records:
-        if record.get("source") == source:
-            return record
-    raise TryError(f"warmup JSONL has no {source} record")
+    from jevops.outer import first_where
+
+    return first_where(
+        records,
+        lambda record: record.get("source") == source,
+        error_cls=TryError,
+        miss=f"warmup JSONL has no {source} record",
+    )
 
 
 def pin_for_tag(record: Mapping[str, Any], lean_tag: str) -> lra_compile.VersionPin:
-    for pin in lra_compile.iter_version_pins(record.get("version_info")):
-        if pin.lean_tag == lean_tag:
-            return pin
-    pins = lra_compile.iter_version_pins(record.get("version_info"))
-    if not pins:
-        raise TryError(f"{record.get('name')}: no version_info pins")
-    return pins[-1]
+    from jevops.outer import first_or_last
+
+    return first_or_last(
+        lra_compile.iter_version_pins(record.get("version_info")),
+        lambda pin: pin.lean_tag == lean_tag,
+        error_cls=TryError,
+        miss=f"{record.get('name')}: no version_info pins",
+    )
 
 
 def plan_try(path: Optional[Path] = None) -> dict[str, Any]:
@@ -646,95 +645,72 @@ def probe_toolchain(tags: Optional[Sequence[str]] = None) -> dict[str, Any]:
 
 
 def write_receipts(receipts: Sequence[TacticTryReceipt], dest_dir: Path) -> list[str]:
-    dest_dir = Path(dest_dir)
-    written: list[str] = []
-    for receipt in receipts:
-        safe_name = receipt.name.replace("/", "_") or "unnamed"
-        path = dest_dir / safe_name / f"{receipt.lean_tag}.json"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
-            json.dumps(receipt.to_dict(), indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        written.append(str(path))
-    return written
+    from jevops.outer import write_named_jsons
+
+    return write_named_jsons(
+        dest_dir,
+        receipts,
+        name_fn=lambda item: item.name,
+        tag_fn=lambda item: item.lean_tag,
+        payload_fn=lambda item: item.to_dict(),
+    )
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-                names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-                names.add(node.module)
-            for alias in node.names:
-                names.add(alias.name)
-                if alias.asname:
-                    names.add(alias.asname)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _call_name(node: ast.AST) -> str:
-    if isinstance(node, ast.Name):
-        return node.id
-    if isinstance(node, ast.Attribute):
-        return node.attr
-    return ""
+    from jevops.repair import call_short_name
+
+    return call_short_name(node)
 
 
 def _assigned_constant(tree: ast.AST, name: str) -> Any:
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Assign):
-            for target in node.targets:
-                if isinstance(target, ast.Name) and target.id == name:
-                    if isinstance(node.value, ast.Constant):
-                        return node.value.value
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            if node.target.id == name and isinstance(node.value, ast.Constant):
-                return node.value.value
-    return None
+    from jevops.repair import assigned_constant
+
+    return assigned_constant(tree, name)
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.repair import assigned_constants, audit_source as _audit
+
     text = Path(__file__).read_text(encoding="utf-8") if source is None else source
-    tree = ast.parse(text)
-    imported = _imported_names(text)
-    calls = {_call_name(child.func) for child in ast.walk(tree) if isinstance(child, ast.Call)}
-    attrs = {
-        child.attr
-        for child in ast.walk(tree)
-        if isinstance(child, ast.Attribute) and isinstance(child.attr, str)
-    }
-    score_assignments: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.keyword) and node.arg in FORBIDDEN_SCORE_NAMES:
-            if not (isinstance(node.value, ast.Constant) and node.value.value is None):
-                score_assignments.append(str(node.arg))
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            if node.target.id in FORBIDDEN_SCORE_NAMES and not (
-                isinstance(node.value, ast.Constant) and node.value.value is None
-            ):
-                score_assignments.append(node.target.id)
-    forbidden_imports = sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES)
-    forbidden_calls = sorted(calls & FORBIDDEN_CALLS)
-    forbidden_attrs = sorted(attrs & FORBIDDEN_ATTRS)
+    out = _audit(
+        text,
+        forbidden_imports=FORBIDDEN_IMPORT_NAMES,
+        forbidden_calls=FORBIDDEN_CALLS,
+        forbidden_scores=FORBIDDEN_SCORE_NAMES,
+        forbidden_attrs=FORBIDDEN_ATTRS,
+    )
+    imported = set(out["imported_names"])
+    calls = set(out["call_names"])
+    score_assignments = list(out["score_keys"])
     frontend = audit_lean_frontend_path_json()
-    hammer_ready = _assigned_constant(tree, "HAMMER_006_LRA_READY")
-    on_critical = _assigned_constant(tree, "ON_30_SEP_CRITICAL_PATH")
-    v1_runs = _assigned_constant(tree, "V1_RUNS_THIS")
-    uses_snapshot = _assigned_constant(tree, "USES_SNAPSHOT_GOAL")
-    loop_value = _assigned_constant(tree, "LOOP_VERSION")
-    path_value = _assigned_constant(tree, "PATH_NAME")
+    consts = assigned_constants(
+        text,
+        (
+            "HAMMER_006_LRA_READY",
+            "ON_30_SEP_CRITICAL_PATH",
+            "V1_RUNS_THIS",
+            "USES_SNAPSHOT_GOAL",
+            "LOOP_VERSION",
+            "PATH_NAME",
+        ),
+    )
+    hammer_ready = consts["HAMMER_006_LRA_READY"]
+    on_critical = consts["ON_30_SEP_CRITICAL_PATH"]
+    v1_runs = consts["V1_RUNS_THIS"]
+    uses_snapshot = consts["USES_SNAPSHOT_GOAL"]
+    loop_value = consts["LOOP_VERSION"]
+    path_value = consts["PATH_NAME"]
     return {
-        "imported_names": sorted(imported),
-        "forbidden_imports": forbidden_imports,
-        "forbidden_calls": forbidden_calls,
-        "forbidden_attrs": forbidden_attrs,
+        "imported_names": out["imported_names"],
+        "forbidden_imports": out["forbidden_imports"],
+        "forbidden_calls": out["forbidden_calls"],
+        "forbidden_attrs": out["forbidden_attrs"],
         "score_assignments": score_assignments,
         "uses_run_lean_process": "run_lean_process" in calls,
         "uses_measurement_argv": "measurement_argv" in calls,
@@ -750,9 +726,9 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
         "path_constant": path_value,
         "lean_frontend": frontend,
         "ok": (
-            not forbidden_imports
-            and not forbidden_calls
-            and not forbidden_attrs
+            not out["forbidden_imports"]
+            and not out["forbidden_calls"]
+            and not out["forbidden_attrs"]
             and not score_assignments
             and "run_lean_process" in calls
             and "measurement_argv" in calls
@@ -866,18 +842,18 @@ fail(f"unknown tactic {tactic!r}")
 
 
 def _write_executable(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
-    mode = path.stat().st_mode
-    path.chmod(mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+    from jevops.outer import write_executable
+
+    write_executable(path, text)
 
 
 def plant_fake_toolchain(elan_home: Path, lean_tag: str) -> Path:
-    toolchain_dir = (
-        Path(elan_home) / "toolchains" / lra_bake.elan_toolchain_dirname(lean_tag) / "bin"
+    from jevops.outer import join_under, plant_executables
+
+    toolchain_dir = join_under(
+        elan_home, "toolchains", lra_bake.elan_toolchain_dirname(lean_tag), "bin"
     )
-    _write_executable(toolchain_dir / "lake", _FAKE_LAKE)
-    _write_executable(toolchain_dir / "lean", _FAKE_LEAN)
+    plant_executables(toolchain_dir, {"lake": _FAKE_LAKE, "lean": _FAKE_LEAN})
     return toolchain_dir
 
 
@@ -898,21 +874,25 @@ def unsolved_record() -> dict[str, Any]:
 
 
 def _attempt_summary(attempt: Mapping[str, Any]) -> dict[str, Any]:
+    from jevops.outer import argv_layout
+
     argv = list(attempt.get("argv") or [])
     return {
-        "argv_has_lake_env_lean": (
-            len(argv) >= 6
-            and Path(argv[0]).name == "lake"
-            and argv[1] == "env"
-            and Path(argv[2]).name == "lean"
-            and argv[3] == f"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}"
-            and argv[4] == "--json"
+        "argv_has_lake_env_lean": argv_layout(
+            argv,
+            min_len=6,
+            names={0: "lake", 2: "lean"},
+            eq={
+                1: "env",
+                3: f"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}",
+                4: "--json",
+            },
         ),
-        "argv_tag_pinned": (
-            str(attempt.get("cwd") or "") != ""
-            and len(argv) >= 3
-            and "leanprover--lean4---" in argv[0]
-            and "leanprover--lean4---" in argv[2]
+        "argv_tag_pinned": bool(str(attempt.get("cwd") or ""))
+        and argv_layout(
+            argv,
+            min_len=3,
+            contains={0: "leanprover--lean4---", 2: "leanprover--lean4---"},
         ),
         "exit_code": attempt.get("exit_code"),
         "ok": bool(attempt.get("ok")),
@@ -1188,8 +1168,9 @@ def self_check(
 
 
 def _print_json(payload: Mapping[str, Any]) -> None:
-    json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-    sys.stdout.write("\n")
+    from jevops.outer import print_json
+
+    print_json(payload)
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:

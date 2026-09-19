@@ -34,6 +34,7 @@ ACCEL_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import generate_text as lra_gt  # noqa: E402
 import retrieve as lra_retrieve  # noqa: E402
 import splice as lra_splice  # noqa: E402
@@ -171,9 +172,9 @@ def usd_float(value: Decimal) -> float:
 def estimate_tokens(text: str) -> int:
     """Conservative char/4 estimate. Used only to pre-authorize spend."""
 
-    if not text:
-        return 1
-    return max(1, (len(text) + 3) // 4)
+    from jevops.outer import estimate_tokens_chars
+
+    return estimate_tokens_chars(text)
 
 
 def usd_for(kind: str, input_tokens: int, output_tokens: int) -> Decimal:
@@ -200,7 +201,9 @@ def usd_for(kind: str, input_tokens: int, output_tokens: int) -> Decimal:
 
 
 def _env_truthy(value: Optional[str]) -> bool:
-    return str(value or "").strip().lower() in {"1", "true", "yes", "on"}
+    from jevops.jev import env_truthy
+
+    return env_truthy(value)
 
 
 def official_track2_requested(
@@ -212,8 +215,9 @@ def official_track2_requested(
 
 
 def grok_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
-    source = os.environ if env is None else env
-    return any(str(source.get(name) or "").strip() for name in GROK_KEY_ENV_NAMES)
+    from jevops.jev import any_key
+
+    return any_key(os.environ if env is None else env, GROK_KEY_ENV_NAMES)
 
 
 def grok_cli_auth_configured(env: Optional[Mapping[str, str]] = None) -> bool:
@@ -224,13 +228,12 @@ def grok_cli_auth_configured(env: Optional[Mapping[str, str]] = None) -> bool:
     key is not required. Does not read the file contents.
     """
 
+    from jevops.outer import nonempty_file
+
     source = os.environ if env is None else env
     grok_home = str(source.get("GROK_HOME") or "").strip()
     auth = (Path(grok_home).expanduser() if grok_home else Path.home() / ".grok") / "auth.json"
-    try:
-        return auth.is_file() and auth.stat().st_size > 0
-    except OSError:
-        return False
+    return nonempty_file(auth)
 
 
 def grok_callable(env: Optional[Mapping[str, str]] = None) -> bool:
@@ -292,12 +295,15 @@ def resolve_track1_mode(
 def receipts_path_allowed(path: Path) -> tuple[bool, str]:
     """Track 1 receipts stay out of Track 2 / loop-v1 warmup trees."""
 
-    parts = [str(part).strip().lower() for part in Path(path).parts]
-    if any(part in FORBIDDEN_RECEIPT_PARTS for part in parts):
-        return False, "track2_receipt_path"
-    if all(marker in parts for marker in LOOP_V1_WARMUP_RECEIPT_MARKERS):
-        return False, "loop_v1_warmup_receipt_path"
-    return True, "ok"
+    from jevops.outer import path_parts_status
+
+    return path_parts_status(
+        path,
+        forbidden=FORBIDDEN_RECEIPT_PARTS,
+        all_markers=LOOP_V1_WARMUP_RECEIPT_MARKERS,
+        forbidden_reason="track2_receipt_path",
+        markers_reason="loop_v1_warmup_receipt_path",
+    )
 
 
 @dataclass(frozen=True)
@@ -517,9 +523,9 @@ def fixture_trace(model: str = REQUESTED_MODEL) -> dict[str, str]:
 
 
 def _ensure_accel_path() -> None:
-    accel = str(ACCEL_ROOT)
-    if accel not in sys.path:
-        sys.path.insert(0, accel)
+    from jevops.outer import ensure_sys_path
+
+    ensure_sys_path(ACCEL_ROOT)
 
 
 def _load_router():
@@ -539,13 +545,15 @@ def _live_grok_kwargs() -> dict[str, Any]:
     budget (not extra Track 1 generate_grok calls).
     """
 
+    from jevops.outer import env_int, env_str, which_bin
+
     kwargs = dict(FAIL_CLOSED_KWARGS)
-    kwargs["grok_max_turns"] = max(
-        1, int(str(os.environ.get("LRA_GROK_CLI_MAX_TURNS") or DEFAULT_GROK_CLI_MAX_TURNS))
+    kwargs["grok_max_turns"] = env_int(
+        "LRA_GROK_CLI_MAX_TURNS", DEFAULT_GROK_CLI_MAX_TURNS, minimum=1
     )
-    grok_bin = shutil.which("grok")
+    grok_bin = which_bin("grok")
     if grok_bin:
-        socket = str(os.environ.get("LRA_GROK_LEADER_SOCKET") or DEFAULT_GROK_LEADER_SOCKET)
+        socket = env_str("LRA_GROK_LEADER_SOCKET", DEFAULT_GROK_LEADER_SOCKET)
         kwargs["grok_cli_cmd"] = [grok_bin, "--leader-socket", socket]
     return kwargs
 
@@ -567,19 +575,20 @@ def grok_file_prompt(body: str, *, dest_name: str = GROK_TACTICS_FILENAME) -> st
 
 
 def prepare_grok_workspace(*, dest_name: str = GROK_TACTICS_FILENAME) -> Path:
-    GROK_FILE_WORK_ROOT.mkdir(parents=True, exist_ok=True)
-    workspace = Path(tempfile.mkdtemp(prefix="ws-", dir=str(GROK_FILE_WORK_ROOT)))
-    (workspace / dest_name).write_text(GROK_FILE_STUB, encoding="utf-8")
-    return workspace
+    from jevops.outer import mkdtemp_under
+
+    return mkdtemp_under(GROK_FILE_WORK_ROOT, prefix="ws-", files={dest_name: GROK_FILE_STUB})
 
 
 def tactics_file_is_stub(text: str) -> bool:
-    stripped = str(text or "").strip()
-    if not stripped:
-        return True
-    if "REPLACE_THIS_FILE" in stripped and len(stripped.split()) < 12:
-        return True
-    return stripped == GROK_FILE_STUB.strip()
+    from jevops.outer import is_stub_text
+
+    return is_stub_text(
+        text,
+        marker="REPLACE_THIS_FILE",
+        max_words=12,
+        exact=GROK_FILE_STUB,
+    )
 
 
 def read_grok_tactics_file(
@@ -589,18 +598,16 @@ def read_grok_tactics_file(
 ) -> str:
     """Return tactics from the workspace file. Chat is never consulted."""
 
+    from jevops.outer import first_file_text, glob_after
+
     dest = Path(workspace) / dest_name
-    candidates = []
-    if dest.is_file():
-        candidates.append(dest)
-    candidates.extend(sorted(path for path in Path(workspace).glob("*.lean") if path not in candidates))
-    for path in candidates:
-        raw = path.read_text(encoding="utf-8")
-        lines = [line for line in raw.splitlines() if "REPLACE_THIS_FILE" not in line]
-        body = "\n".join(lines).strip()
-        if body and not tactics_file_is_stub(body):
-            return body + "\n"
-    raise Track1LedgerError(f"grok did not write a tactics file under {workspace}")
+    return first_file_text(
+        glob_after(workspace, "*.lean", first=dest),
+        drop_substr="REPLACE_THIS_FILE",
+        reject_fn=tactics_file_is_stub,
+        error_cls=Track1LedgerError,
+        miss=f"grok did not write a tactics file under {workspace}",
+    )
 
 
 def build_grok_file_command(
@@ -609,14 +616,13 @@ def build_grok_file_command(
     *,
     dest_name: str = GROK_TACTICS_FILENAME,
 ) -> list[str]:
-    grok_bin = shutil.which("grok")
+    from jevops.outer import env_int, env_str, which_bin
+
+    grok_bin = which_bin("grok")
     if not grok_bin:
         raise Track1LedgerError("grok CLI not found on PATH")
-    socket = str(os.environ.get("LRA_GROK_LEADER_SOCKET") or DEFAULT_GROK_LEADER_SOCKET)
-    max_turns = max(
-        2,
-        int(str(os.environ.get("LRA_GROK_CLI_MAX_TURNS") or DEFAULT_GROK_FILE_MAX_TURNS)),
-    )
+    socket = env_str("LRA_GROK_LEADER_SOCKET", DEFAULT_GROK_LEADER_SOCKET)
+    max_turns = env_int("LRA_GROK_CLI_MAX_TURNS", DEFAULT_GROK_FILE_MAX_TURNS, minimum=2)
     return [
         grok_bin,
         "--leader-socket",
@@ -655,20 +661,9 @@ def build_grok_file_command(
 
 
 def _grok_stdout_payload(stdout: str) -> dict[str, Any]:
-    raw = str(stdout or "").strip()
-    if not raw:
-        return {}
-    candidates = [raw, *reversed([line.strip() for line in raw.splitlines() if line.strip()])]
-    for candidate in candidates:
-        if not candidate.startswith("{"):
-            continue
-        try:
-            payload = json.loads(candidate)
-        except (TypeError, ValueError):
-            continue
-        if isinstance(payload, dict):
-            return payload
-    return {}
+    from jevops.outer import first_json_dict
+
+    return first_json_dict(stdout)
 
 
 @dataclass(frozen=True)
@@ -824,15 +819,12 @@ def generate_grok_file(
 
 
 def _identity_from_trace(trace: Mapping[str, Any], *, generated: bool) -> ProviderIdentity:
-    resolved_provider = str(
-        trace.get("effective_provider_name")
-        or trace.get("provider_name")
-        or trace.get("provider")
-        or ""
-    ).strip()
-    resolved_model = str(
-        trace.get("effective_model_name") or trace.get("model_name") or ""
-    ).strip()
+    from jevops.outer import first_nonempty
+
+    resolved_provider = first_nonempty(
+        trace, "effective_provider_name", "provider_name", "provider"
+    )
+    resolved_model = first_nonempty(trace, "effective_model_name", "model_name")
     if generated and not resolved_provider:
         resolved_provider = REQUESTED_PROVIDER
     if generated and not resolved_model:
@@ -863,7 +855,8 @@ def write_ledger_receipt(ledger: ProblemLedger, path: Path) -> Path:
     allowed, reason = receipts_path_allowed(path)
     if not allowed:
         raise Track1LedgerError(f"refusing receipt path {path}: {reason}")
-    path.parent.mkdir(parents=True, exist_ok=True)
+    from jevops.outer import write_json
+
     payload = {
         "schema": RECEIPT_SCHEMA,
         "protocol": PROTOCOL,
@@ -877,7 +870,7 @@ def write_ledger_receipt(ledger: ProblemLedger, path: Path) -> Path:
         "ledger": ledger.as_dict(),
         "api_key_present_in_record": False,
     }
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    write_json(path, payload)
     return path
 
 
@@ -1277,120 +1270,87 @@ def plan_view(
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-                names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-                names.add(node.module)
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _call_func_names(source: str) -> set[str]:
-    names: set[str] = set()
-    tree = ast.parse(source)
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        func = node.func
-        if isinstance(func, ast.Name):
-            names.add(func.id)
-        elif isinstance(func, ast.Attribute):
-            names.add(func.attr)
-    return names
+    from jevops.repair import call_func_names
+
+    return call_func_names(source)
 
 
 def _assigned_constant(tree: ast.AST, name: str) -> Any:
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Assign):
-            value = node.value
-            targets = node.targets
-        elif isinstance(node, ast.AnnAssign) and node.value is not None:
-            value = node.value
-            targets = [node.target]
-        else:
-            continue
-        for target in targets:
-            if isinstance(target, ast.Name) and target.id == name:
-                if isinstance(value, ast.Constant):
-                    return value.value
-    return None
+    from jevops.repair import assigned_constant
+
+    return assigned_constant(tree, name)
 
 
 def _fail_closed_kwargs_from_source(source: str) -> dict[str, Any]:
-    tree = ast.parse(source)
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Assign):
-            targets = node.targets
-            value = node.value
-        elif isinstance(node, ast.AnnAssign) and node.value is not None:
-            targets = [node.target]
-            value = node.value
-        else:
-            continue
-        for target in targets:
-            if isinstance(target, ast.Name) and target.id == "FAIL_CLOSED_KWARGS":
-                if not isinstance(value, ast.Dict):
-                    raise Track1LedgerError("FAIL_CLOSED_KWARGS must be a dict")
-                return ast.literal_eval(value)
-    raise Track1LedgerError("FAIL_CLOSED_KWARGS assignment not found")
+    from jevops.repair import assigned_literal
+
+    return assigned_literal(
+        source,
+        "FAIL_CLOSED_KWARGS",
+        error_cls=Track1LedgerError,
+        miss="FAIL_CLOSED_KWARGS assignment not found",
+        not_dict="FAIL_CLOSED_KWARGS must be a dict",
+    )
 
 
 def _numeric_score_assignments(source: str) -> list[str]:
-    tree = ast.parse(source)
-    issues: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.keyword) and node.arg in FORBIDDEN_SCORE_NAMES:
-            value = node.value
-            if isinstance(value, ast.Constant) and value.value is None:
-                continue
-            issues.append(f"keyword {node.arg} at line {getattr(node, 'lineno', 0)}")
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            if node.target.id in FORBIDDEN_SCORE_NAMES:
-                value = node.value
-                if isinstance(value, ast.Constant) and value.value is None:
-                    continue
-                issues.append(f"ann {node.target.id} at line {getattr(node, 'lineno', 0)}")
-    return issues
+    from jevops.repair import score_assignments
+
+    return score_assignments(source, FORBIDDEN_SCORE_NAMES)
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.repair import assigned_constants, audit_source as _audit
+
     text = Path(__file__).read_text(encoding="utf-8") if source is None else source
-    tree = ast.parse(text)
-    imported = _imported_names(text)
-    calls = _call_func_names(text)
-    forbidden_imports = sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES)
-    forbidden_calls = sorted(name for name in calls if name in FORBIDDEN_CALLS)
-    score_issues = _numeric_score_assignments(text)
-    uses_lock_ex = any(
-        isinstance(node, ast.Attribute) and node.attr == "LOCK_EX" for node in ast.walk(tree)
+    out = _audit(
+        text,
+        forbidden_imports=FORBIDDEN_IMPORT_NAMES,
+        forbidden_calls=FORBIDDEN_CALLS,
+        forbidden_scores=FORBIDDEN_SCORE_NAMES,
     )
+    imported = set(out["imported_names"])
+    calls = set(out["call_func_names"])
+    score_issues = out["score_issues"]
+    uses_lock_ex = bool(out["uses_lock_ex"])
     kwargs = _fail_closed_kwargs_from_source(text)
+    consts = assigned_constants(
+        text,
+        (
+            "DEFAULT_MODE",
+            "DEFAULT_GENERATOR",
+            "LOOP_V1_TRACK1",
+            "OFFICIAL_TRACK2_MODE",
+            "IS_DEFAULT_WINNING_PATH",
+            "REQUESTED_PROVIDER",
+            "REQUESTED_MODEL",
+            "MAX_GROK_CALLS",
+        ),
+    )
     return {
-        "imported_names": sorted(imported),
-        "forbidden_imports": forbidden_imports,
-        "forbidden_calls": forbidden_calls,
+        "imported_names": out["imported_names"],
+        "forbidden_imports": out["forbidden_imports"],
+        "forbidden_calls": out["forbidden_calls"],
         "numeric_score_assignments": score_issues,
         "imports_llm_router": "ipfs_accelerate_py.llm_router" in imported or "llm_router" in imported,
         "imports_generate_text": "generate_text" in imported,
         "imports_typesafe_sdk": "typesafe_sdk" in imported or "typesafe" in imported,
         "imports_fcntl": "fcntl" in imported,
         "calls_generate_text": "generate_text" in calls or "router_generate_text" in imported,
-        "default_mode_constant": _assigned_constant(tree, "DEFAULT_MODE"),
-        "default_generator_constant": _assigned_constant(tree, "DEFAULT_GENERATOR"),
-        "loop_v1_track1_constant": _assigned_constant(tree, "LOOP_V1_TRACK1"),
-        "official_track2_mode_constant": _assigned_constant(tree, "OFFICIAL_TRACK2_MODE"),
-        "is_default_winning_path_constant": _assigned_constant(tree, "IS_DEFAULT_WINNING_PATH"),
-        "requested_provider_constant": _assigned_constant(tree, "REQUESTED_PROVIDER"),
-        "requested_model_constant": _assigned_constant(tree, "REQUESTED_MODEL"),
-        "max_grok_calls_constant": _assigned_constant(tree, "MAX_GROK_CALLS"),
+        "default_mode_constant": consts["DEFAULT_MODE"],
+        "default_generator_constant": consts["DEFAULT_GENERATOR"],
+        "loop_v1_track1_constant": consts["LOOP_V1_TRACK1"],
+        "official_track2_mode_constant": consts["OFFICIAL_TRACK2_MODE"],
+        "is_default_winning_path_constant": consts["IS_DEFAULT_WINNING_PATH"],
+        "requested_provider_constant": consts["REQUESTED_PROVIDER"],
+        "requested_model_constant": consts["REQUESTED_MODEL"],
+        "max_grok_calls_constant": consts["MAX_GROK_CALLS"],
         "fail_closed_kwargs": kwargs,
         "uses_lock_ex": uses_lock_ex,
         "ok": (
@@ -1399,18 +1359,18 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
             and "typesafe_sdk" not in imported
             and "typesafe" not in imported
             and "fcntl" not in imported
-            and not forbidden_imports
-            and not forbidden_calls
+            and not out["forbidden_imports"]
+            and not out["forbidden_calls"]
             and not score_issues
             and not uses_lock_ex
-            and _assigned_constant(tree, "DEFAULT_MODE") == "off"
-            and _assigned_constant(tree, "DEFAULT_GENERATOR") == "leanstral"
-            and _assigned_constant(tree, "LOOP_V1_TRACK1") == "off"
-            and _assigned_constant(tree, "OFFICIAL_TRACK2_MODE") == "off"
-            and _assigned_constant(tree, "IS_DEFAULT_WINNING_PATH") is False
-            and _assigned_constant(tree, "REQUESTED_PROVIDER") == "grok"
-            and _assigned_constant(tree, "REQUESTED_MODEL") == "grok-4.6"
-            and _assigned_constant(tree, "MAX_GROK_CALLS") == 2
+            and consts["DEFAULT_MODE"] == "off"
+            and consts["DEFAULT_GENERATOR"] == "leanstral"
+            and consts["LOOP_V1_TRACK1"] == "off"
+            and consts["OFFICIAL_TRACK2_MODE"] == "off"
+            and consts["IS_DEFAULT_WINNING_PATH"] is False
+            and consts["REQUESTED_PROVIDER"] == "grok"
+            and consts["REQUESTED_MODEL"] == "grok-4.6"
+            and consts["MAX_GROK_CALLS"] == 2
             and kwargs.get("provider") == "grok"
             and kwargs.get("model_name") == "grok-4.6"
             and kwargs.get("allow_local_fallback") is False

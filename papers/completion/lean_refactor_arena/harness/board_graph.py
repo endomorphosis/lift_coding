@@ -34,7 +34,9 @@ THEOREM_TASKS: dict[str, str] = {
 
 
 def _ptr(kind: str, ident: str) -> str:
-    return f"ptr://{kind}/{ident}"
+    from jevops.board import ptr
+
+    return ptr(kind, ident)
 
 
 def _codepath_ptr(path: str) -> str:
@@ -104,6 +106,8 @@ def board_window(memory: Mapping[str, Any]) -> list[dict[str, Any]]:
 def warmup_token_map() -> dict[str, int]:
     """Frozen warmup body token counts (local tokenizer). Never rewrites JSONL."""
 
+    from jevops.outer import token_map
+
     try:
         import run_warmup as lra_loop
         import splice as lra_splice
@@ -111,19 +115,14 @@ def warmup_token_map() -> dict[str, int]:
         _raw, _digest, records = lra_splice.load_warmup_records()
     except Exception:
         return {}
-    out: dict[str, int] = {}
-    for rec in records:
-        name = str(rec.get("name") or "")
-        if not name:
-            continue
+
+    def _body(rec: Mapping[str, Any]) -> str:
         try:
-            split = lra_splice.split_statement_body(rec)
-            out[name] = int(lra_loop.token_count(split.body_suffix))
+            return str(lra_splice.split_statement_body(rec).body_suffix)
         except Exception:
-            src = str(rec.get("src") or "")
-            if src:
-                out[name] = int(lra_loop.token_count(src))
-    return out
+            return str(rec.get("src") or "")
+
+    return token_map(records, token_fn=lra_loop.token_count, body_fn=_body)
 
 
 def credit_theorem(

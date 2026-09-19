@@ -15,7 +15,6 @@ import hashlib
 import json
 import os
 import sys
-import time
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional, Sequence
@@ -209,10 +208,12 @@ CANDIDATE_QUESTION_SPEC: dict[str, dict[str, Any]] = {
     },
 }
 
+from jevops.jev import keys_by_type  # noqa: E402
+
 ROUTE_QUESTION_KEYS = tuple(ROUTE_QUESTION_SPEC.keys())
-SCORE_QUESTION_KEYS = tuple(name for name, spec in ROUTE_QUESTION_SPEC.items() if spec["type"] == "score")
-NOUL_QUESTION_KEYS = tuple(name for name, spec in ROUTE_QUESTION_SPEC.items() if spec["type"] == "noul")
-CHOICE_QUESTION_KEYS = tuple(name for name, spec in ROUTE_QUESTION_SPEC.items() if spec["type"] == "choice")
+SCORE_QUESTION_KEYS = keys_by_type(ROUTE_QUESTION_SPEC, "score")
+NOUL_QUESTION_KEYS = keys_by_type(ROUTE_QUESTION_SPEC, "noul")
+CHOICE_QUESTION_KEYS = keys_by_type(ROUTE_QUESTION_SPEC, "choice")
 
 
 class TypesafeRouterError(RuntimeError):
@@ -265,20 +266,15 @@ class RouteResult:
     additive_not_replacement: bool = True
 
     def as_dict(self) -> dict[str, Any]:
-        payload = asdict(self)
-        legend = payload.get("likely_shorter_legend")
-        if isinstance(legend, dict):
-            payload["likely_shorter_legend"] = {str(key): value for key, value in legend.items()}
-        elab_legend = payload.get("elab_risk_legend")
-        if isinstance(elab_legend, dict):
-            payload["elab_risk_legend"] = {str(key): value for key, value in elab_legend.items()}
-        return payload
+        from jevops.jev import stringify_legend_keys
+
+        return stringify_legend_keys(asdict(self))
 
 
 def _ensure_accel_path() -> None:
-    accel = str(ACCEL_ROOT)
-    if accel not in sys.path:
-        sys.path.insert(0, accel)
+    from jevops.outer import ensure_sys_path
+
+    ensure_sys_path(ACCEL_ROOT)
 
 
 def _import_typesafe_inference() -> dict[str, Any]:
@@ -409,17 +405,14 @@ def instantiate_questions(
 
     from jevops import jev
 
-    packed: dict[str, Mapping[str, Any]] = dict(spec)
-    if neighbor_names and "neighbor_style_match" in packed:
-        neighbor_criteria = {"none": "Do not imitate a neighbor"}
-        for neighbor in neighbor_names:
-            neighbor_criteria[str(neighbor)] = f"Imitate neighbor {neighbor}"
-        packed["neighbor_style_match"] = {
-            **dict(packed["neighbor_style_match"]),
-            "criteria": neighbor_criteria,
-        }
     try:
-        return jev.instantiate_questions(packed, choice=choice, noul=noul, score=score)
+        return jev.instantiate_questions(
+            spec,
+            choice=choice,
+            noul=noul,
+            score=score,
+            neighbor_names=neighbor_names,
+        )
     except jev.JevError as exc:
         raise TypesafeRouterError(str(exc)) from exc
 
@@ -550,8 +543,9 @@ def answers_from_response(response: Any) -> dict[str, Any]:
         )
     except Exception as exc:
         raise TypesafeRouterError(str(exc)) from exc
-    out.update({"lean_text": None, "tactics": None, "proof_text": None, "arena_score": None})
-    return out
+    from jevops.jev import deny_lean_keys
+
+    return deny_lean_keys(out)
 
 
 def should_call_leanstral(answers: Optional[Mapping[str, Any]], rec: Mapping[str, Any]) -> bool:
@@ -621,30 +615,23 @@ class TypeSafeLraRouter:
         *,
         neighbor_names: Sequence[str] = (),
     ) -> RouteResult:
-        if not self.enabled:
-            reason = "official_track2_off" if self.official_track2 else "typesafe_off"
+        loaded = _import_typesafe_inference() if self.enabled else {"available": False}
+        configured = key_configured(self.env)
+        using_fixture = self.client_factory is not None
+        from jevops.jev import skip_reason
+
+        reason = skip_reason(
+            enabled=self.enabled,
+            official=self.official_track2,
+            key_ok=configured,
+            available=bool(loaded.get("available")),
+            using_fixture=using_fixture,
+            require_key=self.require_key,
+        )
+        if reason:
             return RouteResult(
                 skipped=True,
                 reason=reason,
-                mode=self.mode,
-                official_track2=self.official_track2,
-                model=self.model,
-            )
-        loaded = _import_typesafe_inference()
-        configured = key_configured(self.env)
-        using_fixture = self.client_factory is not None
-        if self.require_key and not configured and not using_fixture:
-            return RouteResult(
-                skipped=True,
-                reason="no_key",
-                mode=self.mode,
-                official_track2=self.official_track2,
-                model=self.model,
-            )
-        if not using_fixture and not loaded["available"]:
-            return RouteResult(
-                skipped=True,
-                reason="typesafe_inference_missing",
                 mode=self.mode,
                 official_track2=self.official_track2,
                 model=self.model,
@@ -657,14 +644,10 @@ class TypeSafeLraRouter:
             neighbor_names=neighbor_names,
         )
         factory = self.client_factory or loaded["TypeSafeClient"]
-        started = time.perf_counter()
+        from jevops.jev import invoke_system_one
+
         client = factory(model=self.model)
-        if hasattr(client, "__enter__"):
-            with client as opened:
-                response = opened.system_one(state, questions)
-        else:
-            response = client.system_one(state, questions)
-        wall_ms = (time.perf_counter() - started) * 1000.0
+        response, wall_ms = invoke_system_one(client, state, questions)
         extracted = answers_from_response(response)
         return RouteResult(
             skipped=False,
@@ -704,28 +687,22 @@ def distill_record(
 ) -> dict[str, Any]:
     """Log (features, Jev answers, Lean outcome). Does not generate Lean."""
 
+    from jevops.jev import distill_row
+
     problem = state.get("problem") if isinstance(state.get("problem"), Mapping) else {}
-    return {
-        "schema": "lra-typesafe-distill/v1",
-        "mode": "distill",
-        "features": {
-            "name": problem.get("name"),
-            "source": problem.get("source"),
-            "n_toolchains": problem.get("n_toolchains"),
-            "proof_length": problem.get("proof_length"),
-            "num_lines": problem.get("num_lines"),
-            "has_repo": problem.get("has_repo"),
+    return distill_row(
+        schema="lra-typesafe-distill/v1",
+        mode="distill",
+        problem=problem,
+        answers=result.as_dict(),
+        extra={
+            "lean_outcome": lean_outcome,
+            "official_track2": False,
+            "api_key_present_in_record": False,
+            "policy_path": DISTILL_POLICY_RELATIVE,
+            "writes_policy_by_default": False,
         },
-        "answers": result.as_dict(),
-        "lean_outcome": lean_outcome,
-        "jev_generated_lean": False,
-        "score_is_rubric_index": True,
-        "official_track2": False,
-        "api_key_present_in_record": False,
-        "policy_path": DISTILL_POLICY_RELATIVE,
-        "writes_policy_by_default": False,
-        "arena_score": None,
-    }
+    )
 
 
 def _imported_names(source: str) -> set[str]:
@@ -762,34 +739,58 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
         forbidden_calls=FORBIDDEN_CALLS,
         forbidden_scores=FORBIDDEN_SCORE_NAMES,
     )
+    from jevops.repair import assigned_constants, membership
+
     imported = out["imported_names"]
-    calls = _call_func_names(text)
-    tree = ast.parse(text)
+    calls = set(out["call_func_names"])
+    consts = assigned_constants(
+        text,
+        (
+            "JEV_GENERATES_LEAN",
+            "SCORE_IS_RUBRIC_INDEX",
+            "DEFAULT_MODE",
+            "LOOP_V1_TYPESAFE",
+            "OFFICIAL_TRACK2_MODE",
+        ),
+    )
     forbidden_imports = out["forbidden_imports"]
     forbidden_calls = out["forbidden_calls"]
     score_issues = out["score_issues"]
     uses_lock_ex = out["uses_lock_ex"]
+    flags = membership(
+        imported,
+        {
+            "imports_typesafe_inference": ("ipfs_accelerate_py.typesafe_inference",),
+            "imports_choice": ("Choice",),
+            "imports_noul": ("Noul",),
+            "imports_score": ("Score",),
+            "imports_typesafe_client": ("TypeSafeClient",),
+            "imports_typesafe_configured": ("typesafe_configured",),
+            "imports_typesafe_sdk": ("typesafe_sdk", "typesafe"),
+            "imports_llm_router": ("llm_router",),
+            "imports_generate_text": ("generate_text",),
+        },
+    )
+    flags.update(
+        membership(
+            calls,
+            {
+                "calls_generate_text": ("generate_text",),
+                "calls_system_one": ("system_one",),
+            },
+        )
+    )
     return {
         "imported_names": sorted(imported),
         "forbidden_imports": forbidden_imports,
         "forbidden_calls": forbidden_calls,
         "numeric_score_assignments": score_issues,
-        "imports_typesafe_inference": "ipfs_accelerate_py.typesafe_inference" in imported,
-        "imports_choice": "Choice" in imported,
-        "imports_noul": "Noul" in imported,
-        "imports_score": "Score" in imported,
-        "imports_typesafe_client": "TypeSafeClient" in imported,
-        "imports_typesafe_configured": "typesafe_configured" in imported,
-        "imports_typesafe_sdk": "typesafe_sdk" in imported or "typesafe" in imported,
-        "imports_llm_router": "llm_router" in imported,
-        "imports_generate_text": "generate_text" in imported,
-        "calls_generate_text": "generate_text" in calls,
-        "calls_system_one": "system_one" in calls,
-        "jev_generates_lean_constant": _assigned_constant(tree, "JEV_GENERATES_LEAN"),
-        "score_is_rubric_index_constant": _assigned_constant(tree, "SCORE_IS_RUBRIC_INDEX"),
-        "default_mode_constant": _assigned_constant(tree, "DEFAULT_MODE"),
-        "loop_v1_typesafe_constant": _assigned_constant(tree, "LOOP_V1_TYPESAFE"),
-        "official_track2_mode_constant": _assigned_constant(tree, "OFFICIAL_TRACK2_MODE"),
+        **flags,
+        "jev_generates_lean_constant": consts["JEV_GENERATES_LEAN"],
+        "score_is_rubric_index_constant": consts["SCORE_IS_RUBRIC_INDEX"],
+        "default_mode_constant": consts["DEFAULT_MODE"],
+        "loop_v1_typesafe_constant": consts["LOOP_V1_TYPESAFE"],
+        "official_track2_mode_constant": consts["OFFICIAL_TRACK2_MODE"],
         "uses_lock_ex": uses_lock_ex,
         "ok": (
             "ipfs_accelerate_py.typesafe_inference" in imported
@@ -804,22 +805,24 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
             and not forbidden_calls
             and not score_issues
             and not uses_lock_ex
-            and _assigned_constant(tree, "JEV_GENERATES_LEAN") is False
-            and _assigned_constant(tree, "SCORE_IS_RUBRIC_INDEX") is True
-            and _assigned_constant(tree, "DEFAULT_MODE") == "off"
-            and _assigned_constant(tree, "LOOP_V1_TYPESAFE") == "off"
-            and _assigned_constant(tree, "OFFICIAL_TRACK2_MODE") == "off"
+            and consts["JEV_GENERATES_LEAN"] is False
+            and consts["SCORE_IS_RUBRIC_INDEX"] is True
+            and consts["DEFAULT_MODE"] == "off"
+            and consts["LOOP_V1_TYPESAFE"] == "off"
+            and consts["OFFICIAL_TRACK2_MODE"] == "off"
         ),
     }
 
 
 def _load_named_record(name: str, path: Optional[Path] = None) -> tuple[dict[str, Any], list[dict[str, Any]], str]:
+    from jevops.outer import lookup_named
+
     raw, digest, records = lra_splice.load_warmup_records(path)
     del raw
-    for record in records:
-        if record.get("name") == name:
-            return record, records, digest
-    raise TypesafeRouterError(f"unknown warm-up problem: {name}")
+    record = lookup_named(records, name)
+    if record is None:
+        raise TypesafeRouterError(f"unknown warm-up problem: {name}")
+    return dict(record), records, digest
 
 
 def _neighbors_for(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> list[dict[str, str]]:
@@ -873,6 +876,8 @@ def plan_view(
 ) -> dict[str, Any]:
     resolved = resolve_typesafe_mode(flag=mode, env=env, official_track2=official_track2)
     loaded = _import_typesafe_inference()
+    from jevops.jev import catalog_kinds
+
     catalog = instantiate_questions(ROUTE_QUESTION_SPEC)
     score_levels = {
         name: list(spec["criteria"])
@@ -913,7 +918,7 @@ def plan_view(
         "typesafe_inference_path": loaded["path"],
         "key_configured": key_configured(env),
         "key_env_names": list(KEY_ENV_NAMES),
-        "catalog_kinds": {name: question.kind for name, question in catalog.items()},
+        "catalog_kinds": catalog_kinds(catalog),
         "n_catalog": len(catalog),
         "distill_policy_path": DISTILL_POLICY_RELATIVE,
         "writes_policy_by_default": False,

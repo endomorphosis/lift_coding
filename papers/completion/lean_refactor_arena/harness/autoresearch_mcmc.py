@@ -10,7 +10,6 @@ Jev does not write Lean. Prefix haves stay locked. Not Track 2. Not Arena.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import os
 import random
@@ -32,6 +31,7 @@ MAX_JEV = 20
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import mcmc_beam as lra_mcmc  # noqa: E402
 import pca_mca_fanout as lra_pca  # noqa: E402
 import run_warmup as lra_loop  # noqa: E402
@@ -85,17 +85,12 @@ PENALTY = {
 
 
 def load_typesafe():
+    from jevops.outer import load_module_from_path
+
     lra_pca.load_keyfile()
     lra_pca.pin_typesafe_path()
-    if not TS_PATH.is_file():
-        return None
-    spec = importlib.util.spec_from_file_location("lra_typesafe_autoresearch", TS_PATH)
-    if spec is None or spec.loader is None:
-        return None
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    if not module.typesafe_configured():
+    module = load_module_from_path(TS_PATH, "lra_typesafe_autoresearch")
+    if module is None or not module.typesafe_configured():
         return None
     return module
 
@@ -145,12 +140,9 @@ def featurize_proposal(
     for name, _kind, _q in ALL_FEATURES:
         got = nouls.get(name)
         features[name] = float(getattr(got, "noul", 0.0) or 0.0)
-    # Cookbook: combine in code. Miss-driven features subtract.
-    score = 0.0
-    for name, _kind, _q in ALL_FEATURES:
-        w = float(weights.get(name) or 0.5)
-        val = features.get(name, 0.0)
-        score += (-w if name in PENALTY else w) * val
+    from jevops.rankers import signed_dot
+
+    score = signed_dot(features, weights, penalty=PENALTY, default_w=0.5)
     return {
         "skipped": False,
         "score": score,
@@ -162,22 +154,16 @@ def featurize_proposal(
 def update_weights(rows: list[dict[str, Any]], weights: dict[str, float]) -> dict[str, float]:
     """One autoresearch step: nudge weights from lake labels (ok vs fail)."""
 
-    ok = [row for row in rows if row.get("ok")]
-    bad = [row for row in rows if row.get("ok") is False]
-    if not ok or not bad:
-        return weights
-    updated = dict(weights)
-    for name, _kind, _q in ALL_FEATURES:
-        mean_ok = sum(float((r.get("features") or {}).get(name) or 0.0) for r in ok) / len(ok)
-        mean_bad = sum(float((r.get("features") or {}).get(name) or 0.0) for r in bad) / len(bad)
-        if name in PENALTY:
-            gap = mean_bad - mean_ok
-            sign = 1.0
-        else:
-            gap = mean_ok - mean_bad
-            sign = 1.0
-        updated[name] = max(0.05, float(updated.get(name) or 0.5) + 0.3 * sign * gap)
-    return updated
+    from jevops.rankers import update_feature_weights
+
+    return update_feature_weights(
+        rows,
+        weights,
+        features=[name for name, _kind, _q in ALL_FEATURES],
+        penalty=PENALTY,
+        lr=0.3,
+        floor=0.05,
+    )
 
 
 def self_check() -> dict[str, Any]:

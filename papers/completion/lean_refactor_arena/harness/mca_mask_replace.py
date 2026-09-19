@@ -92,89 +92,58 @@ class Hole:
     indent: str
 
 
+def _as_row(item: Hole) -> dict[str, Any]:
+    return {
+        "hole_id": item.hole_id,
+        "kind": item.family,
+        "family": item.family,
+        "start": item.start,
+        "end": item.end,
+        "original": item.original,
+        "indent": item.indent,
+        "n_tokens": 1,
+    }
+
+
+def _mca_marker(item: Mapping[str, Any]) -> str:
+    return f"{item.get('indent') or ''}<<<{item.get('hole_id')} family={item.get('family')}>>>"
+
+
 def find_holes(tactics: str) -> list[Hole]:
     """Residual MCA spans: simp-at runs, rw runs, rename_i, have."""
 
-    lines = tactics.splitlines(keepends=True)
-    holes: list[Hole] = []
-    index = 0
-    offset = 0
-    while index < len(lines):
-        line = lines[index]
-        stripped = line.strip()
-        start = offset
-        if _SIMP_AT.match(line.rstrip("\n")):
-            run = index
-            while run < len(lines) and _SIMP_AT.match(lines[run].rstrip("\n")):
-                offset += len(lines[run])
-                run += 1
-            if run - index >= 2:
-                original = "".join(lines[index:run]).rstrip("\n")
-                indent = re.match(r" *", line).group(0) if re.match(r" *", line) else ""
-                holes.append(
-                    Hole(
-                        hole_id=f"MCA_{len(holes)}",
-                        family="strength_reduction",
-                        start=start,
-                        end=start + len(original),
-                        original=original,
-                        indent=indent,
-                    )
-                )
-            index = run
-            continue
-        if _RW.match(line.rstrip("\n")):
-            run = index
-            while run < len(lines) and _RW.match(lines[run].rstrip("\n")):
-                offset += len(lines[run])
-                run += 1
-            if run - index >= 2:
-                original = "".join(lines[index:run]).rstrip("\n")
-                indent = re.match(r" *", line).group(0) if re.match(r" *", line) else ""
-                holes.append(
-                    Hole(
-                        hole_id=f"MCA_{len(holes)}",
-                        family="algebraic_simplification",
-                        start=start,
-                        end=start + len(original),
-                        original=original,
-                        indent=indent,
-                    )
-                )
-            index = run
-            continue
-        if _RENAME.match(line.rstrip("\n")) or _HAVE.match(line.rstrip("\n")):
-            original = line.rstrip("\n")
-            indent = re.match(r" *", line).group(0) if re.match(r" *", line) else ""
-            family = "dead_code" if _RENAME.match(line.rstrip("\n")) else "loop_invariant"
-            holes.append(
-                Hole(
-                    hole_id=f"MCA_{len(holes)}",
-                    family=family,
-                    start=start,
-                    end=start + len(original),
-                    original=original,
-                    indent=indent,
-                )
-            )
-        offset += len(line)
-        index += 1
-    return holes
+    from jevops.mask import scan_line_holes
+
+    rows = scan_line_holes(
+        tactics,
+        (
+            {"match": lambda line: bool(_SIMP_AT.match(line)), "min_run": 2, "family": "strength_reduction"},
+            {"match": lambda line: bool(_RW.match(line)), "min_run": 2, "family": "algebraic_simplification"},
+            {"match": lambda line: bool(_RENAME.match(line)), "min_run": 1, "family": "dead_code"},
+            {"match": lambda line: bool(_HAVE.match(line)), "min_run": 1, "family": "loop_invariant"},
+        ),
+    )
+    return [
+        Hole(
+            hole_id=str(row["hole_id"]),
+            family=str(row.get("family") or row.get("kind") or ""),
+            start=int(row["start"]),
+            end=int(row["end"]),
+            original=str(row["original"]),
+            indent=str(row.get("indent") or ""),
+        )
+        for row in rows
+    ]
 
 
 def mask_skeleton(tactics: str, holes: Sequence[Hole]) -> str:
     """Replace MCA spans with hole markers. PCA skeleton (case/induction) stays."""
 
+    from jevops.mask import mask_skeleton as _fn
+
     if not holes:
         return tactics
-    parts: list[str] = []
-    cursor = 0
-    for hole in holes:
-        parts.append(tactics[cursor : hole.start])
-        parts.append(f"{hole.indent}<<<{hole.hole_id} family={hole.family}>>>")
-        cursor = hole.end
-    parts.append(tactics[cursor:])
-    return "".join(parts)
+    return _fn(tactics, [_as_row(item) for item in holes], marker_fn=_mca_marker)
 
 
 def template_fill(hole: Hole) -> str:
@@ -198,48 +167,22 @@ def template_fill(hole: Hole) -> str:
 
 
 def apply_fills(tactics: str, holes: Sequence[Hole], fills: Mapping[str, str]) -> str:
-    masked = mask_skeleton(tactics, holes)
-    out = masked
-    for hole in holes:
-        marker = f"{hole.indent}<<<{hole.hole_id} family={hole.family}>>>"
-        fill = fills.get(hole.hole_id, hole.original)
-        out = out.replace(marker, fill, 1)
-    # drop leftover empty lines from deleted holes
-    lines = [line for line in out.splitlines() if line.strip() or True]
-    cleaned: list[str] = []
-    blank = 0
-    for line in lines:
-        if not line.strip():
-            blank += 1
-            if blank <= 1:
-                cleaned.append(line)
-            continue
-        blank = 0
-        cleaned.append(line)
-    return "\n".join(cleaned).strip("\n")
+    from jevops.mask import apply_named_fills
+
+    return apply_named_fills(tactics, [_as_row(item) for item in holes], fills, marker_fn=_mca_marker)
 
 
 def parse_leanstral_fills(text: str, holes: Sequence[Hole]) -> dict[str, str]:
     """Accept either per-hole blocks or a full tactic block."""
 
-    fills: dict[str, str] = {}
-    for hole in holes:
-        pattern = re.compile(
-            rf"<<<{re.escape(hole.hole_id)}(?: family={re.escape(hole.family)})?>>>\s*(.*?)(?=<<<MCA_|\Z)",
-            re.S,
-        )
-        match = pattern.search(text)
-        if match:
-            body = match.group(1).strip("\n")
-            if body:
-                fills[hole.hole_id] = body
-    if fills:
-        return fills
-    tactics = lra_loop.extract_generated_tactics(text)
-    if tactics.strip():
-        # Whole-block fill: treat as replacing the original (caller may ignore).
-        fills["__full__"] = tactics
-    return fills
+    from jevops.mask import parse_marked_fills
+
+    return parse_marked_fills(
+        text,
+        holes,
+        attr="family",
+        fallback_fn=lra_loop.extract_generated_tactics,
+    )
 
 
 def leanstral_prompt(record: Mapping[str, Any], skeleton: str, holes: Sequence[Hole]) -> str:
@@ -290,17 +233,21 @@ def few_shot_example(record: Mapping[str, Any]) -> dict[str, Any]:
     holes = find_holes(tactics)
     fills = {hole.hole_id: template_fill(hole) for hole in holes}
     filled = apply_fills(tactics, holes, fills)
-    return {
-        "name": record.get("name"),
-        "ref_tokens": lra_loop.token_count(tactics),
-        "filled_tokens": lra_loop.token_count(filled),
-        "n_holes": len(holes),
-        "families": [hole.family for hole in holes],
-        "skeleton": mask_skeleton(tactics, holes),
-        "reference": tactics,
-        "filled": filled,
-        "ratio": round(lra_loop.token_count(filled) / max(1, lra_loop.token_count(tactics)), 4),
-    }
+    from jevops.pick import shot_stats
+
+    return shot_stats(
+        record.get("name"),
+        tactics,
+        filled,
+        token_fn=lra_loop.token_count,
+        extra={
+            "n_holes": len(holes),
+            "families": [hole.family for hole in holes],
+            "skeleton": mask_skeleton(tactics, holes),
+            "reference": tactics,
+            "filled": filled,
+        },
+    )
 
 
 def few_shot_prompt(target: Mapping[str, Any], shots: Sequence[Mapping[str, Any]]) -> str:
@@ -349,20 +296,24 @@ def _kind_needs_hammer(kind: str) -> bool:
 
 
 def _identity_dict(identity: Any) -> Optional[dict[str, Any]]:
-    if identity is None:
-        return None
-    if hasattr(identity, "requested_provider"):
-        return {
-            "requested_provider": identity.requested_provider,
-            "requested_model": identity.requested_model,
-            "resolved_provider": identity.resolved_provider,
-            "resolved_model": identity.resolved_model,
-            "fallback_used": bool(identity.fallback_used),
-            "arena_score": None,
-        }
+    from jevops.outer import object_fields
+
     if isinstance(identity, Mapping):
         return dict(identity)
-    return {"repr": str(identity), "arena_score": None}
+    row = object_fields(
+        identity,
+        (
+            "requested_provider",
+            "requested_model",
+            "resolved_provider",
+            "resolved_model",
+            "fallback_used",
+        ),
+        extra={"arena_score": None},
+    )
+    if row and "fallback_used" in row:
+        row["fallback_used"] = bool(row["fallback_used"])
+    return row
 
 
 def _flatten_tactics(reference: str, text: str) -> str:
@@ -372,14 +323,17 @@ def _flatten_tactics(reference: str, text: str) -> str:
 
 
 def _compile_row(item: Mapping[str, Any], compiled: Mapping[str, Any]) -> dict[str, Any]:
-    return {
-        "kind": item["kind"],
-        "generator": item.get("generator"),
-        "n_chars": len(str(item.get("tactics") or "")),
-        "tactics_head": str(item.get("tactics") or "")[:240],
-        "n_holes": len(item.get("holes") or []),
-        **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
-    }
+    from jevops.search import compile_head_row
+
+    return compile_head_row(
+        str(item["kind"]),
+        str(item.get("tactics") or ""),
+        compiled,
+        extra={
+            "generator": item.get("generator"),
+            "n_holes": len(item.get("holes") or []),
+        },
+    )
 
 
 def _hammer_passes(
@@ -527,26 +481,38 @@ def hammer_repair(draft: str, reference: str, errors: Sequence[Mapping[str, Any]
 
 
 def case_tag(label: str) -> str:
-    return str(label or "").split()[0]
+    from jevops.outer import first_token
+
+    return first_token(label)
 
 
 def replace_case_from(dst: str, src: str, tag: str) -> str:
     """Replace one top-level ``case`` arm in ``dst`` with the matching arm from ``src``."""
 
+    from jevops.outer import first_where
+
     want = case_tag(tag)
-    dst_span = next((span for span in lra_fan.case_spans(dst) if case_tag(span.label) == want), None)
-    src_span = next((span for span in lra_fan.case_spans(src) if case_tag(span.label) == want), None)
+    dst_span = first_where(lra_fan.case_spans(dst), lambda span: case_tag(span.label) == want)
+    src_span = first_where(lra_fan.case_spans(src), lambda span: case_tag(span.label) == want)
     if dst_span is None or src_span is None:
         return dst
     return dst[: dst_span.start] + src[src_span.start : src_span.end] + dst[dst_span.end :]
 
 
 def drop_bare_simp_all(tactics: str) -> str:
-    return re.sub(r"(?m)^[ \t]*simp_all\s*$", "", tactics)
+    from jevops.mask import rewrite_matching_lines
+
+    return rewrite_matching_lines(tactics, lambda stripped: stripped == "simp_all", lambda *_a: "")
 
 
 def try_simp_all(tactics: str) -> str:
-    return re.sub(r"(?m)^([ \t]*)simp_all\s*$", r"\1try simp_all", tactics)
+    from jevops.mask import rewrite_matching_lines
+
+    return rewrite_matching_lines(
+        tactics,
+        lambda stripped: stripped == "simp_all",
+        lambda indent, _stripped, _line: f"{indent}try simp_all",
+    )
 
 
 def grok_tactician_variants(grok: str, reference: str) -> list[dict[str, Any]]:
@@ -670,12 +636,14 @@ def assemble_candidates(
 
 
 def prioritize_holes(holes: Sequence[Hole], *, cap: int = 6) -> list[Hole]:
+    from jevops.mask import rank_cap
+
     rank = {"strength_reduction": 0, "algebraic_simplification": 1, "dead_code": 2, "loop_invariant": 3}
-    ordered = sorted(
+    return rank_cap(
         holes,
         key=lambda hole: (rank.get(hole.family, 9), -len(hole.original), hole.hole_id),
+        cap=cap,
     )
-    return ordered[: max(0, int(cap))]
 
 
 def ablate_holes(
@@ -689,46 +657,20 @@ def ablate_holes(
 ) -> list[dict[str, Any]]:
     """Drop one MCA hole at a time, then combine lake-valid drops."""
 
-    rows: list[dict[str, Any]] = []
-    droppable: list[Hole] = []
-    for hole in holes:
-        fills = {item.hole_id: (template_fill(item) if item.hole_id == hole.hole_id else item.original) for item in holes}
-        tactics_one = apply_fills(tactics, holes, fills)
-        compiled = lra_kb.compile_tactics(
-            record, tactics_one, state_root=state_root, timeout=timeout, restore=restore
+    from jevops.search import ablate_then_combine
+
+    def _compile(body: str) -> Mapping[str, Any]:
+        return lra_kb.compile_tactics(
+            record, body, state_root=state_root, timeout=timeout, restore=restore
         )
-        ok = bool(compiled.get("theorem_ok"))
-        rows.append(
-            {
-                "kind": f"ablate_{hole.hole_id}",
-                "generator": "deterministic",
-                "n_chars": len(tactics_one),
-                "tactics_head": tactics_one[:240],
-                "hole_id": hole.hole_id,
-                "family": hole.family,
-                **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
-            }
-        )
-        if ok:
-            droppable.append(hole)
-    if len(droppable) >= 2:
-        fills = {item.hole_id: (template_fill(item) if item in droppable else item.original) for item in holes}
-        combined = apply_fills(tactics, holes, fills)
-        compiled = lra_kb.compile_tactics(
-            record, combined, state_root=state_root, timeout=timeout, restore=restore
-        )
-        rows.append(
-            {
-                "kind": "ablate_combine_droppable",
-                "generator": "deterministic",
-                "n_chars": len(combined),
-                "tactics_head": combined[:240],
-                "n_droppable": len(droppable),
-                "droppable_ids": [hole.hole_id for hole in droppable],
-                **{k: compiled.get(k) for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")},
-            }
-        )
-    return rows
+
+    return ablate_then_combine(
+        tactics,
+        holes,
+        apply_fn=lambda text, fills: apply_fills(text, holes, fills),
+        fill_fn=template_fill,
+        compile_fn=_compile,
+    )
 
 
 def typesafe_rank_fanout(

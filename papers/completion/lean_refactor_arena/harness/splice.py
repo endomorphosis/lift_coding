@@ -22,6 +22,9 @@ from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
 HERE = Path(__file__).resolve().parent
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 PAPER_ROOT = HERE.parent
 REPO_ROOT = HERE.parents[3]
 WARMUP_JSONL = PAPER_ROOT / "data" / "benchmark_data_warmup.jsonl"
@@ -123,11 +126,15 @@ class AdmissionView:
 
 
 def _ensure_accel_path() -> None:
-    os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
-    os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
-    accel = str(ACCEL_ROOT)
-    if accel not in sys.path:
-        sys.path.insert(0, accel)
+    from jevops.outer import pin_sys_path
+
+    pin_sys_path(
+        ACCEL_ROOT,
+        defaults={
+            "IPFS_ACCEL_SKIP_CORE": "1",
+            "IPFS_AUTO_INSTALL": "false",
+        },
+    )
 
 
 def _admit_lean_proof_text():
@@ -138,31 +145,31 @@ def _admit_lean_proof_text():
 
 
 def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    from jevops.outer import digest_hex
+
+    return digest_hex(data)
 
 
 def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    from jevops.outer import digest_file
+
+    return digest_file(path)
 
 
 def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[dict[str, Any]]]:
     """Load the frozen warm-up JSONL. Refuses digest drift. Does not rewrite the file."""
 
+    from jevops.outer import load_jsonl_objects
+
     jsonl = Path(path) if path is not None else WARMUP_JSONL
-    raw = jsonl.read_bytes()
-    digest = sha256_bytes(raw)
-    if digest != FROZEN_WARMUP_SHA256:
-        raise DigestMismatch(f"warmup JSONL hash mismatch: {digest} != {FROZEN_WARMUP_SHA256}")
-    records = [json.loads(line) for line in raw.decode("utf-8").splitlines() if line.strip()]
-    if len(records) != WARMUP_N:
-        raise SpliceError(f"warmup JSONL must contain {WARMUP_N} records, got {len(records)}")
-    for index, record in enumerate(records):
-        if not isinstance(record, dict):
-            raise SpliceError(f"warmup record {index} is not an object")
-        missing = [field for field in REQUIRED_JSONL_FIELDS if field not in record]
-        if missing:
-            raise SpliceError(f"warmup record {index} missing fields: {missing}")
-    return raw, digest, records
+    return load_jsonl_objects(
+        jsonl,
+        expected_digest=FROZEN_WARMUP_SHA256,
+        expected_n=WARMUP_N,
+        required_fields=REQUIRED_JSONL_FIELDS,
+        mismatch_exc=DigestMismatch,
+        record_exc=SpliceError,
+    )
 
 
 def split_statement_body(record: Mapping[str, Any]) -> StatementBody:
@@ -177,6 +184,7 @@ def split_statement_body(record: Mapping[str, Any]) -> StatementBody:
         raise PrefixBindError(f"{name}: src must be a non-empty string")
     if not src.startswith(statement):
         raise PrefixBindError(f"{name}: src does not start with the frozen statement")
+    suffix = src[len(statement) :]
     header = record.get("header") or ""
     if not isinstance(header, str):
         header = ""
@@ -184,7 +192,7 @@ def split_statement_body(record: Mapping[str, Any]) -> StatementBody:
         name=name,
         source=str(record.get("source") or ""),
         statement=statement,
-        body_suffix=src[len(statement) :],
+        body_suffix=suffix,
         header=header,
     )
 
@@ -200,33 +208,33 @@ def statement_sorry_template(statement: str) -> str:
 def tactic_block_from_body(body_suffix: str) -> str:
     """Strip the leading `` := by`` of an already-split body. Does not inspect the statement."""
 
-    if not isinstance(body_suffix, str) or not body_suffix:
-        raise SpliceError("body suffix is empty")
-    for prefix in BODY_BY_PREFIXES:
-        if body_suffix.startswith(prefix):
-            return body_suffix[len(prefix) :]
-    raise SpliceError("body suffix does not start with ' := by' after the frozen statement")
+    from jevops.outer import strip_leading_prefixes
+
+    return strip_leading_prefixes(
+        body_suffix,
+        BODY_BY_PREFIXES,
+        error_cls=SpliceError,
+        empty_msg="body suffix is empty",
+        miss_msg="body suffix does not start with ' := by' after the frozen statement",
+    )
 
 
 def lake_candidate_source(*, header: str, statement: str, tactic_block: str) -> str:
     """Put Putnam ``header`` in the lake file. ``proof_text`` remains the tactic block only."""
 
-    core = statement + " := by\n" + str(tactic_block).lstrip("\n")
-    if isinstance(header, str) and header.strip():
-        return header.rstrip() + "\n\n" + core
-    return core
+    from jevops.outer import join_decl
+
+    return join_decl(statement, tactic_block, header=header if isinstance(header, str) else "")
 
 
 def forbidden_proof_tokens(proof_text: str) -> tuple[str, ...]:
     """Tokens that make ``proof_text`` a declaration/import rather than a tactic block."""
 
+    from jevops.repair import forbidden_tokens
+
     if not isinstance(proof_text, str):
         raise SpliceError("proof_text must be a string")
-    found: list[str] = []
-    for token in FORBIDDEN_PROOF_TOKENS:
-        if re.search(_TOKEN_BOUNDARY.format(token=re.escape(token)), proof_text, re.IGNORECASE):
-            found.append(token)
-    return tuple(found)
+    return forbidden_tokens(proof_text, FORBIDDEN_PROOF_TOKENS, boundary=_TOKEN_BOUNDARY)
 
 
 def admit_tactic_block(
@@ -281,37 +289,21 @@ def admission_view(record: Mapping[str, Any], proof_text: str) -> AdmissionView:
 def source_assign_scan_issues(source: str) -> list[str]:
     """Flag uses of the two-character assign needle. Longer `` := by`` prefixes are the body marker."""
 
-    needle = _ASSIGN_NEEDLE
-    tree = ast.parse(source)
-    issues: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Constant) and node.value == needle:
-            issues.append(f"bare assign needle at line {getattr(node, 'lineno', 0)}")
-        if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
-            continue
-        if node.func.attr not in _SCAN_METHODS:
-            continue
-        for arg in list(node.args) + [kw.value for kw in node.keywords]:
-            if isinstance(arg, ast.Constant) and arg.value == needle:
-                issues.append(
-                    f"{node.func.attr}(assign-needle) scan at line {getattr(node, 'lineno', 0)}"
-                )
-    return issues
+    from jevops.repair import scan_constant_uses
+
+    return scan_constant_uses(
+        source,
+        _ASSIGN_NEEDLE,
+        methods=_SCAN_METHODS,
+        bare_fmt="bare assign needle at line {line}",
+        call_fmt="{attr}(assign-needle) scan at line {line}",
+    )
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _record_report(record: Mapping[str, Any]) -> dict[str, Any]:
@@ -350,9 +342,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     imported = _imported_names(source)
     forbidden_imports = sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES)
     assign_scan_issues = source_assign_scan_issues(source)
-    uses_lock_ex = any(
-        isinstance(node, ast.Attribute) and node.attr == "LOCK_EX" for node in ast.walk(ast.parse(source))
-    )
+    from jevops.repair import uses_attr
+
+    uses_lock_ex = uses_attr(source, "LOCK_EX")
 
     sample = records[8] if len(records) > 8 else records[0]
     forbidden_views = {}

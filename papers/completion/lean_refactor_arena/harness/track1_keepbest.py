@@ -39,37 +39,37 @@ FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 def installed_matching_pins(record: Mapping[str, Any], clone: Path) -> list[dict[str, str]]:
     """Keep version_info rows whose elan tag is installed and commit matches the clone."""
 
-    head = ""
-    git_dir = clone / ".git"
-    if git_dir.exists():
-        import subprocess
+    from jevops.outer import filter_map
+    from jevops.outer import git_head
 
-        completed = subprocess.run(
-            ["git", "-C", str(clone), "rev-parse", "HEAD"],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        head = (completed.stdout or "").strip()
-    kept: list[dict[str, str]] = []
-    for pin in lra_cw.iter_version_pins(record.get("version_info")):
-        try:
-            lra_cw.resolve_pin(pin, require_installed=True)
-        except Exception:
-            continue
+    head = git_head(clone) if (clone / ".git").exists() else ""
+
+    def _ok(pin: Any) -> bool:
+        lra_cw.resolve_pin(pin, require_installed=True)
         if head and pin.git_commit and pin.git_commit != head:
-            continue
-        kept.append({pin.lean_tag: pin.git_commit})
-    return kept
+            return False
+        return True
+
+    return filter_map(
+        lra_cw.iter_version_pins(record.get("version_info")),
+        pred=_ok,
+        map_fn=lambda pin: {pin.lean_tag: pin.git_commit},
+        skip_exc=Exception,
+    )
 
 
 def splice_src(path: Path, original_src: str, replacement: str) -> None:
     """Replace the frozen JSONL ``src`` substring. Does not search for ``:=``."""
 
-    text = path.read_text(encoding="utf-8")
-    if original_src not in text:
-        raise RuntimeError(f"{path}: frozen src is not a substring of the lake file")
-    path.write_text(text.replace(original_src, replacement, 1), encoding="utf-8")
+    from jevops.outer import replace_once
+
+    replace_once(
+        path,
+        original_src,
+        replacement,
+        error_cls=RuntimeError,
+        miss="{path}: frozen src is not a substring of the lake file",
+    )
 
 
 def candidate_source(record: Mapping[str, Any], tactics: str) -> str:
@@ -219,78 +219,34 @@ def compile_tactics(
 
 
 def _line_in_span(pos: Any, start_line: int, end_line: int) -> bool:
-    if not isinstance(pos, Mapping):
-        return False
-    try:
-        line = int(pos.get("line"))
-    except (TypeError, ValueError):
-        return False
-    return start_line <= line <= end_line
+    from jevops.outer import mapping_line_in_span
+
+    return mapping_line_in_span(pos, start_line, end_line)
 
 
 def sorry_in_span(stdout: str, start_line: int, end_line: int) -> bool:
-    for line in (stdout or "").splitlines():
-        if not line.startswith("{"):
-            continue
-        try:
-            payload = json.loads(line)
-        except Exception:
-            continue
+    from jevops.outer import jsonl_pred_in_span
+
+    def _pred(payload: Mapping[str, Any]) -> bool:
         if payload.get("kind") != "hasSorry" and "sorry" not in str(payload.get("data") or "").lower():
-            continue
-        if payload.get("severity") not in {"warning", "error", None}:
-            continue
-        if _line_in_span(payload.get("pos"), start_line, end_line):
-            return True
-    return False
+            return False
+        return payload.get("severity") in {"warning", "error", None}
+
+    return jsonl_pred_in_span(stdout, pred=_pred, start_line=start_line, end_line=end_line)
 
 
 def parse_lean_errors(stdout: str) -> list[dict[str, Any]]:
-    errors: list[dict[str, Any]] = []
-    for line in (stdout or "").splitlines():
-        if not line.startswith("{"):
-            continue
-        try:
-            payload = json.loads(line)
-        except Exception:
-            continue
-        if payload.get("severity") != "error":
-            continue
-        errors.append({"pos": payload.get("pos"), "data": str(payload.get("data") or "")[:400]})
-        if len(errors) >= 6:
-            break
-    return errors
+    from jevops.repair import parse_jsonl_errors
+
+    return parse_jsonl_errors(stdout)
 
 
 def flatten_overindent(reference: str, tactics: str) -> str:
     """If hosted ``case`` lines are deeper than the reference, strip the extra indent."""
 
-    def case_indents(text: str) -> list[int]:
-        found = []
-        for line in text.splitlines():
-            stripped = line.lstrip()
-            if stripped.startswith("case ") and "=>" in stripped:
-                found.append(len(line) - len(stripped))
-        return found
+    from jevops.repair import flatten_overindent as _fn
 
-    ref_cases = case_indents(reference)
-    tac_cases = case_indents(tactics)
-    if not ref_cases or not tac_cases:
-        return tactics
-    extra = min(tac_cases) - min(ref_cases)
-    if extra <= 0:
-        return tactics
-    floor = min(tac_cases)
-    out = []
-    for line in tactics.splitlines():
-        if not line.strip():
-            out.append(line)
-            continue
-        indent = len(line) - len(line.lstrip())
-        if indent >= floor:
-            line = line[extra:]
-        out.append(line)
-    return "\n".join(out)
+    return _fn(reference, tactics, header_fn=lambda s: s.startswith("case ") and "=>" in s)
 
 
 def repair_prompt(record: Mapping[str, Any], *, failed: str, errors: Sequence[Mapping[str, Any]], reference: str) -> str:
@@ -312,12 +268,9 @@ def repair_prompt(record: Mapping[str, Any], *, failed: str, errors: Sequence[Ma
 
 
 def match_reference_indent(reference: str, tactics: str) -> str:
-    ref_first = next((line for line in reference.splitlines() if line.strip()), "")
-    indent = ref_first[: len(ref_first) - len(ref_first.lstrip())]
-    body = tactics.lstrip("\n")
-    if not indent or body.startswith(indent):
-        return body
-    return "\n".join((indent + line if line.strip() else line) for line in body.splitlines())
+    from jevops.repair import match_leading_indent
+
+    return match_leading_indent(reference, tactics)
 
 
 def hosted_tactics(path: Path) -> str:
@@ -333,9 +286,9 @@ def hosted_tactics(path: Path) -> str:
 
 
 def _row(item: Mapping[str, Any], compile_row: Mapping[str, Any]) -> dict[str, Any]:
-    payload = {**item, **compile_row, "n_chars": len(str(item.get("tactics") or "")), "tactics_head": str(item.get("tactics") or "")[:240]}
-    payload.pop("tactics", None)
-    return payload
+    from jevops.outer import merge_head_row
+
+    return merge_head_row(item, compile_row)
 
 
 def keepbest(

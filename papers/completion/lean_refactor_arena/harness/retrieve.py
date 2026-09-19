@@ -203,11 +203,15 @@ class Retrieval:
 
 
 def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    from jevops.outer import digest_hex
+
+    return digest_hex(data)
 
 
 def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    from jevops.outer import digest_file
+
+    return digest_file(path)
 
 
 def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[dict[str, Any]]]:
@@ -217,44 +221,27 @@ def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[d
 
 
 def _tactic_family(opener: str) -> str:
-    token = opener.split()[0].rstrip("!'")
-    if token.startswith("simp"):
-        return "simp"
-    if token in {"rw", "erw"}:
-        return "rw"
-    if token.startswith("exact"):
-        return "exact"
-    if token.startswith("apply"):
-        return "apply"
-    return token
+    from jevops.outer import token_family
+
+    return token_family(
+        opener,
+        prefixes=("simp", "exact", "apply"),
+        aliases={"rw": "rw", "erw": "rw"},
+    )
 
 
 def _bracket_inner(text: str, open_end: int) -> str:
     """Take the substring of a ``[…]`` list by character depth. Not a Lean parser."""
 
-    depth = 1
-    index = open_end
-    while index < len(text) and depth:
-        char = text[index]
-        if char == "[":
-            depth += 1
-        elif char == "]":
-            depth -= 1
-        index += 1
-    if depth != 0:
-        return text[open_end:]
-    return text[open_end : index - 1]
+    from jevops.mask import bracket_inner
+
+    return bracket_inner(text, open_end)
 
 
 def _keep_ident(name: str) -> bool:
-    if not name or name == "_" or set(name) <= {"_"}:
-        return False
-    if len(name) == 1:
-        return False
-    head = name.split(".", 1)[0]
-    if head.lower() in _STOPWORDS or name.lower() in _STOPWORDS:
-        return False
-    return True
+    from jevops.pick import keep_token
+
+    return keep_token(name, stopwords=_STOPWORDS, min_len=2)
 
 
 def extract_src_lemmas(src: str, *, cap: int = SRC_LEMMA_CAP) -> tuple[tuple[SrcLemma, ...], int]:
@@ -272,21 +259,18 @@ def extract_src_lemmas(src: str, *, cap: int = SRC_LEMMA_CAP) -> tuple[tuple[Src
         events.append((match.start(), "ident", match))
     events.sort(key=lambda item: item[0])
 
+    from jevops.pick import unique_first
+
     lemmas: list[SrcLemma] = []
-    seen: set[str] = set()
     for offset, kind, match in events:
         tactic = _tactic_family(match.group("tactic"))
         opener = match.group(0).strip()
         if kind == "list":
             inner = _bracket_inner(src, match.end())
             for ident_match in _IDENT.finditer(inner):
-                name = ident_match.group(0)
-                if not _keep_ident(name) or name in seen:
-                    continue
-                seen.add(name)
                 lemmas.append(
                     SrcLemma(
-                        name=name,
+                        name=ident_match.group(0),
                         tactic=tactic,
                         opener=opener,
                         offset=offset + ident_match.start(),
@@ -296,22 +280,18 @@ def extract_src_lemmas(src: str, *, cap: int = SRC_LEMMA_CAP) -> tuple[tuple[Src
         ident_match = _IDENT.match(src, match.end())
         if ident_match is None:
             continue
-        name = ident_match.group(0)
-        if not _keep_ident(name) or name in seen:
-            continue
-        seen.add(name)
         lemmas.append(
             SrcLemma(
-                name=name,
+                name=ident_match.group(0),
                 tactic=tactic,
                 opener=opener,
                 offset=ident_match.start(),
             )
         )
-    uncapped = len(lemmas)
     if cap < 0:
         raise RetrieveError("src lemma cap must be non-negative")
-    return tuple(lemmas[:cap]), uncapped
+    kept, uncapped = unique_first(lemmas, key_fn=lambda item: item.name, keep_fn=_keep_ident, cap=cap)
+    return tuple(kept), uncapped
 
 
 def jsonl_neighbors(
@@ -320,18 +300,19 @@ def jsonl_neighbors(
 ) -> tuple[NeighborProof, ...]:
     """Return the other 14 warm-up proofs in JSONL order. Never the query."""
 
+    from jevops.outer import exclude_named
+    from jevops.outer import unique_names
+
     if not query_name:
         raise RetrieveError("query name is empty")
-    names = [str(record.get("name") or "") for record in records]
+    names = unique_names(records)
     if len(names) != WARMUP_N or len(set(names)) != WARMUP_N:
         raise RetrieveError(f"warmup JSONL must contain {WARMUP_N} uniquely named records")
     if query_name not in names:
         raise UnknownProblem(f"unknown warm-up problem: {query_name}")
     neighbors: list[NeighborProof] = []
-    for record in records:
+    for record in exclude_named(records, query_name):
         name = str(record.get("name") or "")
-        if name == query_name:
-            continue
         statement = record.get("statement")
         src = record.get("src")
         if not isinstance(statement, str) or not statement:
@@ -372,8 +353,9 @@ def lemma_id_digest(query: str, neighbor_names: Sequence[str], lemma_names: Sequ
         "query": query,
         "src_lemmas": list(lemma_names),
     }
-    blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode("utf-8")
-    return sha256_bytes(blob)
+    from jevops.outer import digest_canonical
+
+    return digest_canonical(payload)
 
 
 def retrieve_record(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> Retrieval:
@@ -408,25 +390,29 @@ def retrieve_by_name(
     *,
     path: Optional[Path] = None,
 ) -> Retrieval:
+    from jevops.outer import lookup_named
+
     if records is None:
         _, _, records = load_warmup_records(path)
-    for record in records:
-        if record.get("name") == name:
-            return retrieve_record(record, records)
-    raise UnknownProblem(f"unknown warm-up problem: {name}")
+    record = lookup_named(records, name)
+    if record is None:
+        raise UnknownProblem(f"unknown warm-up problem: {name}")
+    return retrieve_record(record, records)
 
 
 def prompt_neighbors(retrieval: Retrieval, *, k: int = 4) -> list[dict[str, str]]:
     """TypeSafe neighbor slice from the design: name / statement[:400] / proof_head."""
 
-    return [
+    from jevops.pick import project_items
+
+    return project_items(
+        retrieval.neighbors[:k],
         {
-            "name": item.name,
-            "statement": item.statement_head,
-            "proof_head": item.proof_head,
-        }
-        for item in retrieval.neighbors[:k]
-    ]
+            "name": "name",
+            "statement": "statement_head",
+            "proof_head": "proof_head",
+        },
+    )
 
 
 def retrieval_view(retrieval: Retrieval, *, src_chars: int = PROMPT_HEAD_CHARS) -> dict[str, Any]:
@@ -466,72 +452,29 @@ def retrieval_view(retrieval: Retrieval, *, src_chars: int = PROMPT_HEAD_CHARS) 
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-                names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-                names.add(node.module)
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _attr_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    return {
-        node.attr
-        for node in ast.walk(tree)
-        if isinstance(node, ast.Attribute) and isinstance(node.attr, str)
-    }
+    from jevops.repair import attr_names
+
+    return attr_names(source)
 
 
 def _call_func_names(source: str) -> set[str]:
-    names: set[str] = set()
-    tree = ast.parse(source)
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        func = node.func
-        if isinstance(func, ast.Name):
-            names.add(func.id)
-        elif isinstance(func, ast.Attribute):
-            names.add(func.attr)
-    return names
+    from jevops.repair import call_func_names
+
+    return call_func_names(source)
 
 
 def _numeric_score_assignments(source: str) -> list[str]:
     """Flag invented numeric scores. ``arena_score = None`` is allowed."""
 
-    tree = ast.parse(source)
-    issues: list[str] = []
-    score_keys = frozenset({"score", "relevance_score", "arena_score", "official_score"})
-    for node in ast.walk(tree):
-        if isinstance(node, ast.keyword) and node.arg in score_keys:
-            value = node.value
-            if isinstance(value, ast.Constant) and value.value is None:
-                continue
-            issues.append(f"keyword {node.arg}={ast.dump(value)} at line {getattr(node, 'lineno', 0)}")
-        if isinstance(node, ast.Assign):
-            targets = []
-            for target in node.targets:
-                if isinstance(target, ast.Name):
-                    targets.append(target.id)
-                elif isinstance(target, ast.Attribute):
-                    targets.append(target.attr)
-            if any(name in score_keys for name in targets):
-                value = node.value
-                if isinstance(value, ast.Constant) and value.value is None:
-                    continue
-                issues.append(
-                    f"assign {targets}={ast.dump(value)} at line {getattr(node, 'lineno', 0)}"
-                )
-    return issues
+    from jevops.repair import score_assignments
+
+    return score_assignments(source, ("score", "relevance_score", "arena_score", "official_score"))
 
 
 def _synthetic_cap_fixture() -> dict[str, Any]:

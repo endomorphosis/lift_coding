@@ -43,11 +43,24 @@ HARDWARE_CLASS = "mistral_labs_api"
 
 
 def drop_subset(tactics: str, holes: Sequence[lra_mask.Hole], chosen: Sequence[str]) -> str:
-    fills = {
-        hole.hole_id: (lra_mask.template_fill(hole) if hole.hole_id in set(chosen) else hole.original)
-        for hole in holes
-    }
-    return lra_mask.apply_fills(tactics, holes, fills)
+    from jevops.mask import fill_subset
+
+    return fill_subset(
+        tactics,
+        [lra_mask._as_row(item) for item in holes],
+        chosen,
+        fill_fn=lambda item: lra_mask.template_fill(
+            lra_mask.Hole(
+                hole_id=str(item["hole_id"]),
+                family=str(item.get("family") or ""),
+                start=int(item["start"]),
+                end=int(item["end"]),
+                original=str(item["original"]),
+                indent=str(item.get("indent") or ""),
+            )
+        ),
+        marker_fn=lra_mask._mca_marker,
+    )
 
 
 def hammer_variants(tactics: str, reference: str) -> list[tuple[str, str]]:
@@ -217,21 +230,15 @@ def sgd_search(
             key=lambda item: item[1],
             reverse=True,
         )
-        picked = []
-        if jev.get("choice"):
-            picked.append(str(jev["choice"]))
-        if ranked:
-            picked.append(str(ranked[0][0]))
-        others = [hole.hole_id for hole in remaining if hole.hole_id not in picked]
-        if others:
-            picked.append(rng.choice(others))
-        # unique, at most 2 holes this minibatch
-        minibatch = []
-        for hole_id in picked:
-            if hole_id not in minibatch and any(h.hole_id == hole_id for h in remaining):
-                minibatch.append(hole_id)
-            if len(minibatch) >= 2:
-                break
+        from jevops.search import minibatch_ids
+
+        minibatch = minibatch_ids(
+            [hole.hole_id for hole in remaining],
+            choice=jev.get("choice"),
+            ranked=ranked,
+            rng=rng,
+            k=2,
+        )
         trial = drop_subset(reference, holes, list(dropped) + minibatch)
         evals = evaluate_tactics(
             record,
@@ -243,14 +250,14 @@ def sgd_search(
             memory=memory,
         )
         accepted = None
-        valid = [row for row in evals if row.get("theorem_ok")]
-        if valid:
-            best = sorted(valid, key=lambda row: int(row.get("token_count") or 10**9))[0]
-            if int(best["token_count"] or keep_tokens) < keep_tokens:
-                keep = str(best.get("tactics") or trial)
-                keep_tokens = int(best["token_count"])
-                dropped.update(minibatch)
-                accepted = {k: v for k, v in best.items() if k != "tactics"}
+        from jevops.search import apply_keepbest
+        from jevops.search import strip_tactics
+
+        best, keep_tokens, body = apply_keepbest(evals, keep_tokens, trial=trial)
+        if best:
+            keep = body
+            dropped.update(minibatch)
+            accepted = strip_tactics([best])[0]
         history.append(
             {
                 "round": round_i,
@@ -304,6 +311,8 @@ def sgd_search(
             if row.get("theorem_ok") and int(row.get("token_count") or keep_tokens) < keep_tokens:
                 keep = hammered if row in evals_h else filled
                 keep_tokens = int(row["token_count"])
+    from jevops.search import token_ratio
+
     ref_tokens = lra_loop.token_count(reference)
     return lra_pca.redact(
         {
@@ -315,7 +324,7 @@ def sgd_search(
             "n_holes": len(holes),
             "ref_tokens": ref_tokens,
             "keep_tokens": keep_tokens,
-            "ratio": round(keep_tokens / max(1, ref_tokens), 4),
+            "ratio": token_ratio(keep_tokens, ref_tokens),
             "dropped": sorted(dropped),
             "rounds": rounds_out,
             "leanstral": leanstral,
@@ -329,13 +338,9 @@ def sgd_search(
 
 
 def _accept(evals: Sequence[Mapping[str, Any]], keep_tokens: int) -> Optional[dict[str, Any]]:
-    valid = [row for row in evals if row.get("theorem_ok")]
-    if not valid:
-        return None
-    best = sorted(valid, key=lambda row: int(row.get("token_count") or 10**9))[0]
-    if int(best.get("token_count") or keep_tokens) < keep_tokens:
-        return best
-    return None
+    from jevops.search import accept_keepbest
+
+    return accept_keepbest(evals, keep_tokens)
 
 
 def diffuse_search(
@@ -375,21 +380,23 @@ def diffuse_search(
 
     def consider(label: str, hole_ids: Sequence[str]) -> dict[str, Any]:
         nonlocal keep, keep_tokens, dropped
+        from jevops.search import apply_keepbest
+        from jevops.search import strip_tactics
+
         trial = drop_subset(reference, holes, list(dict.fromkeys(list(dropped) + list(hole_ids))))
         evals = evaluate_tactics(
             record, trial, state_root=state_root, timeout=timeout, restore=restore, reference=reference, memory=memory
         )
-        hit = _accept(evals, keep_tokens)
+        hit, keep_tokens, body = apply_keepbest(evals, keep_tokens, trial=trial)
         if hit:
-            keep = str(hit.get("tactics") or trial)
-            keep_tokens = int(hit["token_count"])
+            keep = body
             dropped.update(hole_ids)
         return {
             "label": label,
             "holes": list(hole_ids),
             "accepted": bool(hit),
             "keep_tokens": keep_tokens,
-            "evals": [{k: v for k, v in row.items() if k != "tactics"} for row in evals],
+            "evals": strip_tactics(evals),
         }
 
     # Exploit jump: delete every MCA hole (the 414 move on CallElimCorrect).
@@ -405,10 +412,9 @@ def diffuse_search(
         explore: list[str] = []
         if remaining:
             jev = jev_round(record, remaining, history, keep_tokens)
-            probs = jev.get("probabilities") or {}
-            high = [hid for hid, p in probs.items() if float(p) >= tau]
-            if not high and jev.get("choice"):
-                high = [str(jev["choice"])]
+            from jevops.search import high_p_ids
+
+            high = high_p_ids(jev.get("probabilities") or {}, tau=tau, fallback=jev.get("choice"))
             explore = [rng.choice([hole.hole_id for hole in remaining])]
             step_exploit = consider("exploit_high_p", high)
             step_explore = consider("explore_random", explore)
@@ -454,16 +460,18 @@ def diffuse_search(
                 evals_d = evaluate_tactics(
                     record, denoised, state_root=state_root, timeout=timeout, restore=restore, reference=reference, memory=memory
                 )
-                hit = _accept(evals_n + evals_d, keep_tokens)
+                from jevops.search import apply_keepbest
+                from jevops.search import strip_tactics
+
+                hit, keep_tokens, body = apply_keepbest(evals_n + evals_d, keep_tokens, trial=denoised)
                 if hit:
-                    keep = str(hit.get("tactics") or denoised)
-                    keep_tokens = int(hit["token_count"])
+                    keep = body
                 noise = {
                     **noise_meta,
                     "identity": identity,
                     "accepted": bool(hit),
-                    "noise_evals": [{k: v for k, v in row.items() if k != "tactics"} for row in evals_n],
-                    "denoise_evals": [{k: v for k, v in row.items() if k != "tactics"} for row in evals_d],
+                    "noise_evals": strip_tactics(evals_n),
+                    "denoise_evals": strip_tactics(evals_d),
                 }
         history.append(
             {
@@ -484,6 +492,8 @@ def diffuse_search(
                 "keep_tokens": keep_tokens,
             }
         )
+    from jevops.search import token_ratio
+
     ref_tokens = lra_loop.token_count(reference)
     return lra_pca.redact(
         {
@@ -495,7 +505,7 @@ def diffuse_search(
             "n_holes": len(holes),
             "ref_tokens": ref_tokens,
             "keep_tokens": keep_tokens,
-            "ratio": round(keep_tokens / max(1, ref_tokens), 4),
+            "ratio": token_ratio(keep_tokens, ref_tokens),
             "dropped": sorted(dropped),
             "rounds": rounds_out,
             "ledger": None,

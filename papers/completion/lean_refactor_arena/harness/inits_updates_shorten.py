@@ -43,9 +43,9 @@ class Kernel:
 
 
 def _sub(old: str, new: str, text: str, count: int = 1) -> str:
-    if old not in text:
-        return text
-    return text.replace(old, new, count)
+    from jevops.memory import apply_literal_fold
+
+    return apply_literal_fold(text, {"old": old, "new": new, "count": count})
 
 
 def _kernel(kind: str, family: str, note: str, old: str, new: str, *, count: int = 1) -> Kernel:
@@ -492,14 +492,15 @@ def apply_kernel(kind: str, tactics: str) -> str:
 def propose(tactics: str) -> list[dict[str, str]]:
     """One-step proposals for TypeSafe / MCMC / hammer (no lake, no LLM)."""
 
-    current = tactics.strip("\n")
+    from jevops.pick import unique_transforms
+
     out: list[dict[str, str]] = []
-    seen = {current}
-    for kernel in KERNELS:
-        nxt = kernel.apply(current).strip("\n")
-        if nxt and nxt not in seen:
-            seen.add(nxt)
-            out.append({"kind": kernel.kind, "tactics": nxt, "note": kernel.note, "family": kernel.family})
+    for kernel, nxt in unique_transforms(
+        tactics,
+        KERNELS,
+        apply_fn=lambda item, body: item.apply(body),
+    ):
+        out.append({"kind": kernel.kind, "tactics": nxt, "note": kernel.note, "family": kernel.family})
     return out
 
 
@@ -535,9 +536,12 @@ def pca_mca_ops(tactics: str) -> list[tuple[str, str, tuple[str, ...]]]:
 def replay(tactics: str) -> str:
     """Apply every kernel in order. Original warmup script becomes the 174 cut."""
 
-    text = tactics.strip("\n")
-    for kernel in KERNELS:
-        text = kernel.apply(text).strip("\n")
+    from jevops.pick import compose_steps
+
+    text, _applied = compose_steps(
+        tactics,
+        tuple((kernel.kind, kernel.apply) for kernel in KERNELS),
+    )
     return text
 
 

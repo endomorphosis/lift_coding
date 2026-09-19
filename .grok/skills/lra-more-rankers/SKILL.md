@@ -3,15 +3,7 @@ name: lra-more-rankers
 description: Extra LRA NCA CALLs — SGD/mask/diffuse wraps, tactic Markov/HMM, isotonic Noul calibration, AdaBoost, remaining-cut quantiles, board PageRank, VAE contrastive. Use when ranking sequences, calibrating Jev, or CALL ptr://skill/port_{sgd,mask,diffuse,markov,hmm,isotonic,adaboost,quantile,pagerank,contrastive}. Never writes Lean.
 ---
 
-# Extra LRA rankers
+Canonical skill: `~/lift_coding/JevOps/skills/jevops-more-rankers/SKILL.md`.
+Module: `jevops.more_rankers`. PYTHONPATH must include JevOps.
 
-`harness/nca_more_rankers.py`. Integer milles. Lake is the oracle. Jev does not write Lean.
-
-- **Wraps:** `port_sgd` (MCA hole minibatch, no lake), `port_mask` (PCA skeleton), `port_diffuse` (closed symbol fills).
-- **Sequence:** `port_markov` / `port_hmm` — P(next tactic head | last).
-- **Calibrate:** `port_isotonic` PAVA on Noul/unsafe vs lake labels. Not an admit.
-- **Residual:** `port_adaboost` milles stumps. `port_quantile` q25/50/75 remaining_cut.
-- **Graph:** `port_pagerank` on `board_edges`.
-- **VAE diagnostic:** `port_contrastive` milles (neg−pos+margin). Jev stays the VAE loss.
-
-Never docker0. Dispatch `isotonic` here so it is not matched as `ica`.
+MCA/symbol generators (`port_sgd` / `port_mask` / `port_diffuse` bodies) stay LRA.
