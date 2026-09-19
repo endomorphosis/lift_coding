@@ -73,6 +73,10 @@ FORBIDDEN_IMPORT_NAMES = frozenset(
 )
 FROZEN_WARMUP_SHA256 = "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
 
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
+
 _GENERATE_LOCK = threading.Lock()
 _CLIENT_ENV_PINNED = False
 
@@ -118,51 +122,55 @@ class LraGeneration:
 def _pin_client_env(*, base_url: Optional[str] = None) -> str:
     """Bind llama.cpp to docker0 as a client. Never enable autostart."""
 
+    from jevops.outer import pin_env, pin_sys_path
+
     global _CLIENT_ENV_PINNED
     url = str(base_url or DOCKER0_OPENAI_BASE_URL).rstrip("/")
-    os.environ["IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"] = "0"
-    os.environ["IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL"] = "0"
-    os.environ["IPFS_ACCELERATE_LLAMA_CPP_PREFETCH_MODEL"] = "0"
-    os.environ["IPFS_ACCELERATE_LLAMA_CPP_AUTO_UPDATE"] = "0"
-    os.environ["IPFS_ACCELERATE_LLAMA_CPP_BASE_URL"] = url
-    os.environ["IPFS_ACCELERATE_LLAMA_CPP_HOST"] = DOCKER0_HOST
+    pin_env(
+        {
+            "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
+            "IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL": "0",
+            "IPFS_ACCELERATE_LLAMA_CPP_PREFETCH_MODEL": "0",
+            "IPFS_ACCELERATE_LLAMA_CPP_AUTO_UPDATE": "0",
+            "IPFS_ACCELERATE_LLAMA_CPP_BASE_URL": url,
+            "IPFS_ACCELERATE_LLAMA_CPP_HOST": DOCKER0_HOST,
+        }
+    )
     if url == DOCKER0_OPENAI_BASE_URL.rstrip("/"):
-        os.environ["IPFS_ACCELERATE_LLAMA_CPP_PORT"] = str(DOCKER0_PORT)
-    os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
-    os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
+        pin_env({"IPFS_ACCELERATE_LLAMA_CPP_PORT": str(DOCKER0_PORT)})
+    pin_sys_path(
+        "",
+        defaults={
+            "IPFS_ACCEL_SKIP_CORE": "1",
+            "IPFS_AUTO_INSTALL": "false",
+        },
+    )
     _CLIENT_ENV_PINNED = True
     return url
 
 
 def _ensure_accel_path() -> None:
-    accel = str(ACCEL_ROOT)
-    if accel not in sys.path:
-        sys.path.insert(0, accel)
+    from jevops.outer import ensure_sys_path
+
+    ensure_sys_path(ACCEL_ROOT)
 
 
 def _http_get(url: str, *, timeout: float) -> tuple[Optional[int], str]:
-    request = urllib.request.Request(url, method="GET", headers={"Accept": "application/json"})
-    try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            return int(getattr(response, "status", 200) or 200), ""
-    except urllib.error.HTTPError as exc:
-        return int(exc.code), str(exc.reason or exc)
-    except Exception as exc:  # noqa: BLE001 — probe must fail closed on any transport error
-        return None, f"{type(exc).__name__}: {exc}"
+    from jevops.outer import http_get
+
+    return http_get(url, timeout=timeout)
 
 
 def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> HealthProbe:
     """GET docker0 /health, then the loopback alias. Does not start a server."""
 
+    from jevops.outer import http_ok
+
     _pin_client_env()
     status, error = _http_get(DOCKER0_HEALTH_URL, timeout=timeout)
     alias_status, alias_error = _http_get(DOCKER0_HEALTH_ALIAS_URL, timeout=timeout)
-    ok = status is not None and status < 500
-    alias_ok = alias_status is not None and alias_status < 500
-    if not ok and error == "" and status is not None:
-        error = f"HTTP {status}"
-    if not alias_ok and alias_error == "" and alias_status is not None:
-        alias_error = f"HTTP {alias_status}"
+    ok, error = http_ok(status, error)
+    alias_ok, alias_error = http_ok(alias_status, alias_error)
     return HealthProbe(
         ok=ok,
         url=DOCKER0_HEALTH_URL,
@@ -175,9 +183,14 @@ def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> HealthPr
 
 
 def token_limits_for_source(source: str) -> tuple[int, int]:
-    if str(source or "").strip().lower() == "putnambench":
-        return PUTNAM_MAX_NEW_TOKENS, PUTNAM_TIMEOUT_SECONDS
-    return DEFAULT_MAX_NEW_TOKENS, DEFAULT_TIMEOUT_SECONDS
+    from jevops.outer import keyed_pair
+
+    tokens, timeout = keyed_pair(
+        source,
+        {"putnambench": (PUTNAM_MAX_NEW_TOKENS, PUTNAM_TIMEOUT_SECONDS)},
+        (DEFAULT_MAX_NEW_TOKENS, DEFAULT_TIMEOUT_SECONDS),
+    )
+    return int(tokens), int(timeout)
 
 
 def render_prompt(
@@ -201,10 +214,9 @@ def render_prompt(
     for key, value in fields.items():
         if key in values and value is not None:
             values[key] = str(value)
-    filled = template
-    for key, value in values.items():
-        filled = filled.replace("{{" + key + "}}", value)
-    return filled
+    from jevops.outer import fill_template
+
+    return fill_template(template, values)
 
 
 def _load_router():
@@ -220,23 +232,21 @@ def _identity_from_trace(
     *,
     generated: bool,
 ) -> ProviderIdentity:
-    resolved_provider = str(
-        trace.get("effective_provider_name")
-        or trace.get("provider_name")
-        or trace.get("provider")
-        or ""
-    ).strip()
-    resolved_model = str(
-        trace.get("effective_model_name") or trace.get("model_name") or ""
-    ).strip()
+    from jevops.outer import first_nonempty, name_fallback_used
+
+    resolved_provider = first_nonempty(
+        trace, "effective_provider_name", "provider_name", "provider"
+    )
+    resolved_model = first_nonempty(trace, "effective_model_name", "model_name")
     if generated and not resolved_provider:
         resolved_provider = REQUESTED_PROVIDER
     if generated and not resolved_model:
         resolved_model = REQUESTED_MODEL
-    fallback_used = bool(
-        resolved_provider
-        and resolved_provider.lower() not in ALLOWED_RESOLVED_PROVIDERS
-    ) or bool(resolved_provider.lower() in FORBIDDEN_FALLBACK_PROVIDERS)
+    fallback_used = name_fallback_used(
+        resolved_provider,
+        allowed=ALLOWED_RESOLVED_PROVIDERS,
+        forbidden=FORBIDDEN_FALLBACK_PROVIDERS,
+    )
     return ProviderIdentity(
         requested_provider=REQUESTED_PROVIDER,
         requested_model=REQUESTED_MODEL,
@@ -386,53 +396,39 @@ def generate_lra(
 
 
 def _fail_closed_kwargs_from_source(source: str) -> dict[str, Any]:
-    tree = ast.parse(source)
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Assign):
-            targets = node.targets
-            value = node.value
-        elif isinstance(node, ast.AnnAssign) and node.value is not None:
-            targets = [node.target]
-            value = node.value
-        else:
-            continue
-        for target in targets:
-            if isinstance(target, ast.Name) and target.id == "FAIL_CLOSED_KWARGS":
-                if not isinstance(value, ast.Dict):
-                    raise LraGenerateError("FAIL_CLOSED_KWARGS must be a dict")
-                return ast.literal_eval(value)
-    raise LraGenerateError("FAIL_CLOSED_KWARGS assignment not found")
+    from jevops.repair import assigned_literal
+
+    return assigned_literal(
+        source,
+        "FAIL_CLOSED_KWARGS",
+        error_cls=LraGenerateError,
+        miss="FAIL_CLOSED_KWARGS assignment not found",
+        not_dict="FAIL_CLOSED_KWARGS must be a dict",
+    )
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _prompt_contract(prompt_text: str) -> dict[str, bool]:
-    lower = prompt_text.lower()
-    return {
-        "tactic_block_only": "only the tactic block" in lower,
-        "no_repeat_statement": "do not repeat the theorem" in lower,
-        "no_imports": "do not add imports" in lower,
-        "no_axioms": "do not invent axioms" in lower,
-        "aesop_allowed": "aesop" in lower,
-        "nlinarith_allowed": "nlinarith" in lower,
-        "forbids_theorem_lemma_import_open": all(
-            token in lower for token in ("theorem", "lemma", "import", "open")
-        ),
-        "not_proof_prompt": "prove the fixed theorem" not in lower,
-    }
+    from jevops.outer import contains_flags
+
+    return contains_flags(
+        prompt_text,
+        {
+            "tactic_block_only": "only the tactic block",
+            "no_repeat_statement": "do not repeat the theorem",
+            "no_imports": "do not add imports",
+            "no_axioms": "do not invent axioms",
+            "aesop_allowed": "aesop",
+            "nlinarith_allowed": "nlinarith",
+            "forbids_theorem_lemma_import_open": ("theorem", "lemma", "import", "open"),
+            "not_proof_prompt": {"absent": ("prove the fixed theorem",)},
+        },
+    )
 
 
 def self_check() -> dict[str, Any]:
@@ -452,10 +448,9 @@ def self_check() -> dict[str, Any]:
     imported = _imported_names(source)
     forbidden_imports = sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES)
     uses_fcntl = "fcntl" in imported
-    uses_lock_ex = any(
-        isinstance(node, ast.Attribute) and node.attr == "LOCK_EX"
-        for node in ast.walk(ast.parse(source))
-    )
+    from jevops.repair import uses_attr
+
+    uses_lock_ex = uses_attr(source, "LOCK_EX")
     prompt_ok = _prompt_contract(prompt_text)
     health = probe_docker0_health()
 

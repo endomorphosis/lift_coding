@@ -55,28 +55,14 @@ SMALL_NAMES = (
 def keep_best_board(out: Path) -> dict[str, int]:
     """Shortest random-best / cascade-best token count per small canary."""
 
-    from jevops.outer import tokens_from_canaries
+    from jevops.outer import merge_keep_best
 
-    board: dict[str, int] = {}
-    latest = out / "random-canary-latest.json"
-    if latest.is_file():
-        try:
-            payload = json.loads(latest.read_text(encoding="utf-8"))
-        except json.JSONDecodeError:
-            payload = {}
-        board.update(tokens_from_canaries(payload, names=SMALL_NAMES))
-    from jevops.outer import glob_stem_int
-
-    for name in SMALL_NAMES:
-        safe = name.replace("/", "_")[:80]
-        bests = glob_stem_int(out, f"random-best-{safe}-*.lean")
-        if bests:
-            file_tok = int(bests[0][0])
-            board[name] = min(int(board.get(name) or file_tok), file_tok)
-            continue
-        if name == "Core.InitsUpdatesComm" and (out / "cascade-best-139.lean").is_file():
-            board[name] = min(int(board.get(name) or 139), 139)
-    return board
+    return merge_keep_best(
+        out,
+        SMALL_NAMES,
+        latest_json="random-canary-latest.json",
+        extras={"Core.InitsUpdatesComm": ("cascade-best-139.lean", 139)},
+    )
 
 
 def board_total(board: Mapping[str, int]) -> int:
@@ -184,7 +170,9 @@ def canary_args(
     seed: int,
     nest_depth: int = 3,
 ) -> argparse.Namespace:
-    return argparse.Namespace(
+    from jevops.outer import namespace
+
+    return namespace(
         live=True,
         all_small=True,
         from_best=True,
@@ -334,6 +322,8 @@ def run_loop(
         stalled_limit=2,
         on_inner_start=lambda mem: (mem.get("nca") or {}).pop("overlay_done", None),
     )
+    from jevops.outer import closed_evidence
+
     mem_path = lra_bind.save_memory(memory) if persist_memory else lra_bind.MEMORY_DEFAULT
     return {
         "schema": "lra-skill-improve-loop/v1",
@@ -352,11 +342,7 @@ def run_loop(
         "stop_reason": stepped.get("stop_reason") or "",
         "memory_path": str(mem_path),
         "memory_skills": list(memory.get("skills") or []),
-        "called_docker0": False,
-        "official_track2": False,
-        "arena_score": None,
-        "jev_writes_lean": False,
-        "grok_writes_lean": False,
+        **closed_evidence(grok_writes_lean=False),
         "ledger": ledger.as_dict() if hasattr(ledger, "as_dict") else {"grok_calls": ledger.grok_calls},
     }
 

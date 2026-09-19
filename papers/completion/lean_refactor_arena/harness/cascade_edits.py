@@ -18,9 +18,7 @@ Jev does not write Lean. Not Track 2. Not an Arena ranking.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
-import math
 import os
 import random
 import sys
@@ -45,6 +43,7 @@ MAX_JEV = 20
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import inits_updates_shorten as lra_ius  # noqa: E402
 
 FAMILY_TREE: dict[str, dict[str, str]] = lra_ius.family_tree()
@@ -106,106 +105,65 @@ import track1_ledger as lra_t1  # noqa: E402
 
 
 def load_typesafe():
+    from jevops.outer import load_configured
+
     lra_pca.load_keyfile()
     lra_pca.pin_typesafe_path()
-    if not TS_PATH.is_file():
-        return None
-    spec = importlib.util.spec_from_file_location("lra_typesafe_cascade", TS_PATH)
-    if spec is None or spec.loader is None:
-        return None
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    if not module.typesafe_configured():
-        return None
-    return module
+    return load_configured(TS_PATH, "lra_typesafe_cascade")
 
 
 def geo_mean(probs: list[float]) -> float:
-    live = [max(float(p), EPSILON) for p in probs if p is not None]
-    if not live:
-        return 0.0
-    log_mean = sum(math.log(p) for p in live) / len(live)
-    return math.exp(log_mean)
+    from jevops.pick import geo_mean as _fn
+
+    return _fn(probs, epsilon=EPSILON)
 
 
 def make_client(module):
-    kwargs: dict[str, Any] = {"timeout": 45.0}
-    policy_cls = getattr(module, "RetryPolicy", None)
-    if policy_cls is not None:
-        try:
-            kwargs["retry"] = policy_cls(
-                max_retries=5,
-                backoff_max=20.0,
-                timeout=45.0,
-                retry_statuses=(429, 503, 529),
-            )
-        except TypeError:
-            kwargs["retry"] = policy_cls(max_retries=5, backoff_max=20.0, timeout=45.0)
-    return module.TypeSafeClient(**kwargs)
+    from jevops.outer import client_kwargs
+
+    return module.TypeSafeClient(**client_kwargs(module))
 
 
 def _record_jev(ledger: lra_t1.ProblemLedger, result: Any, fallback: int = 200) -> None:
-    usage = dict(getattr(result, "usage", None) or {})
-    inn = int(usage.get("input_tokens") or usage.get("prompt_tokens") or fallback)
-    out = int(usage.get("output_tokens") or usage.get("completion_tokens") or 0)
+    from jevops.outer import result_usage
+
+    inn, out = result_usage(result, fallback_in=fallback)
     ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
 
 
 def is_unavailable(exc: BaseException) -> bool:
-    text = str(exc).lower()
-    return "503" in text or "unavailable" in text or "429" in text
+    from jevops.outer import is_unavailable as _fn
+
+    return _fn(exc)
 
 
 def call_with_retry(fn, *, attempts: int = 4):
-    last: Optional[BaseException] = None
-    for attempt in range(attempts):
-        try:
-            return fn()
-        except Exception as exc:  # noqa: BLE001
-            last = exc
-            if not is_unavailable(exc) or attempt + 1 >= attempts:
-                raise
-            time.sleep(min(20.0, 2.0 ** attempt))
-    raise last or RuntimeError("typesafe retry exhausted")
+    from jevops.outer import retry_call
+
+    return retry_call(fn, attempts=attempts)
 
 
 def available_tactics(current: str, reference: str, rng: random.Random) -> dict[str, str]:
-    found = {"keep": current}
-    for item in lra_mcmc.propose_edits(current, reference, rng, limit=None):
-        kind = str(item.get("kind") or "")
-        body = str(item.get("tactics") or "").strip("\n")
-        if kind and body and body != current.strip("\n"):
-            found[kind] = body
-    return found
+    from jevops.outer import unique_kind_bodies
+
+    return unique_kind_bodies(
+        lra_mcmc.propose_edits(current, reference, rng, limit=None),
+        keep={"keep": current},
+        skip_eq=current,
+    )
 
 
 def load_failed_kinds(path: Path) -> set[str]:
-    if not path.is_file():
-        return set()
-    try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return set()
-    failed: set[str] = set()
-    for row in payload.get("history") or []:
-        leaf = str((row.get("picked") or {}).get("leaf") or "")
-        if row.get("action") == "lake" and row.get("ok") is False and leaf:
-            failed.add(leaf)
-        if row.get("action") in {"skip_lake", "skip_not_shorter"} and leaf:
-            failed.add(leaf)
-    return failed
+    from jevops.outer import failed_leaves_from_history
+    from jevops.outer import load_json_object
+
+    return failed_leaves_from_history(load_json_object(path))
 
 
 def live_tree(available: Mapping[str, str]) -> dict[str, dict[str, str]]:
-    tree: dict[str, dict[str, str]] = {}
-    for fam, kids in FAMILY_TREE.items():
-        live = {leaf: desc for leaf, desc in kids.items() if leaf in available}
-        if live:
-            tree[fam] = live
-    if "keep" not in tree:
-        tree = {"keep": dict(FAMILY_TREE["keep"]), **tree}
-    return tree
+    from jevops.pick import live_tree as _fn
+
+    return _fn(FAMILY_TREE, available)
 
 
 def classify_tree(
@@ -242,58 +200,15 @@ def classify_tree(
         )
     result = call_with_retry(lambda: make_client(module).system_one(state, questions))
     _record_jev(ledger, result)
-    fam_ans = (getattr(result, "choices", None) or {}).get("family")
-    fam_probs = dict(getattr(fam_ans, "probabilities", None) or {})
-    family = {
-        "choice": getattr(fam_ans, "choice", None),
-        "confidence": float(getattr(fam_ans, "confidence", None) or 0.0),
-        "probabilities": {k: float(fam_probs.get(k) or 0.0) for k in tree},
-    }
-    leaf_qs: dict[str, dict[str, Any]] = {}
-    for fam, kids in tree.items():
-        if len(kids) == 1:
-            only = next(iter(kids))
-            leaf_qs[fam] = {"choice": only, "confidence": 1.0, "probabilities": {only: 1.0}}
-            continue
-        ans = (getattr(result, "choices", None) or {}).get(f"leaf_{fam}")
-        probs = dict(getattr(ans, "probabilities", None) or {})
-        leaf_qs[fam] = {
-            "choice": getattr(ans, "choice", None),
-            "confidence": float(getattr(ans, "confidence", None) or 0.0),
-            "probabilities": {k: float(probs.get(k) or 0.0) for k in kids},
-        }
-    fam_rank = sorted(tree, key=lambda fam: family["probabilities"].get(fam, 0.0), reverse=True)
-    beam_fams = fam_rank[:BEAM_K]
-    paths: list[dict[str, Any]] = []
-    for fam in beam_fams:
-        kids = tree[fam]
-        leaf_q = leaf_qs[fam]
-        for leaf in kids:
-            score = geo_mean(
-                [family["probabilities"].get(fam, EPSILON), leaf_q["probabilities"].get(leaf, EPSILON)]
-            )
-            paths.append(
-                {
-                    "family": fam,
-                    "leaf": leaf,
-                    "family_p": family["probabilities"].get(fam, 0.0),
-                    "leaf_p": leaf_q["probabilities"].get(leaf, 0.0),
-                    "path_score": score,
-                    "family_confidence": family["confidence"],
-                    "leaf_confidence": leaf_q["confidence"],
-                }
-            )
-    paths.sort(key=lambda item: item["path_score"], reverse=True)
-    top = paths[0]["path_score"] if paths else 0.0
-    second = paths[1]["path_score"] if len(paths) > 1 else EPSILON
-    return {
-        "family": family,
-        "leaves": leaf_qs,
-        "paths": paths,
-        "beam_fams": beam_fams,
-        "separation": top / max(second, EPSILON),
-        "abstain": float(family["confidence"] or 0.0) < CONFIDENT,
-    }
+    from jevops.pick import classification_from_answers
+
+    return classification_from_answers(
+        tree,
+        getattr(result, "choices", None) or {},
+        beam_k=BEAM_K,
+        confident=CONFIDENT,
+        epsilon=EPSILON,
+    )
 
 
 def verify_fail(module, state: Mapping[str, Any], *, ledger: lra_t1.ProblemLedger) -> dict[str, float]:
@@ -303,10 +218,11 @@ def verify_fail(module, state: Mapping[str, Any], *, ledger: lra_t1.ProblemLedge
             instructions=instr,
             criteria={"true": true_c, "false": false_c},
         )
+    from jevops.outer import attr_map
+
     result = call_with_retry(lambda: make_client(module).system_one(state, questions))
     _record_jev(ledger, result)
-    nouls = getattr(result, "nouls", None) or {}
-    return {name: float(getattr(nouls.get(name), "noul", 0.0) or 0.0) for name in FAIL_NOULS}
+    return attr_map(getattr(result, "nouls", None) or {}, FAIL_NOULS, "noul")
 
 
 def self_check() -> dict[str, Any]:

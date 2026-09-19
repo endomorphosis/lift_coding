@@ -34,6 +34,7 @@ WARMUP_JSONL = PAPER_ROOT / "data" / "benchmark_data_warmup.jsonl"
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import compile_worker as lra_cw  # noqa: E402
 import docker0_client as lra_d0  # noqa: E402
 import generate_text as lra_gt  # noqa: E402
@@ -233,33 +234,41 @@ class ProblemResult:
 
 
 def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    from jevops.outer import digest_hex
+
+    return digest_hex(data)
 
 
 def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    from jevops.outer import digest_file
+
+    return digest_file(path)
 
 
 def sha256_text(text: str) -> str:
-    return sha256_bytes(text.encode("utf-8"))
+    from jevops.outer import digest_text
+
+    return digest_text(text)
 
 
 def token_count(text: str) -> int:
     """Frozen local tokenizer. Not the unpublished Arena tokenizer."""
 
-    if not isinstance(text, str) or not text:
-        return 0
-    return len(_TOKEN.findall(text))
+    from jevops.search import count_matches
+
+    return count_matches(text, _TOKEN)
 
 
 def composite_score(token_ratio: float, elab_ratio: float) -> float:
-    return TOKEN_WEIGHT * float(token_ratio) + ELAB_WEIGHT * float(elab_ratio)
+    from jevops.search import weighted_sum
+
+    return weighted_sum((TOKEN_WEIGHT, token_ratio), (ELAB_WEIGHT, elab_ratio))
 
 
 def ratio(candidate: float, reference: float) -> float:
-    if reference <= 0:
-        return 1.0 if candidate <= 0 else float("inf")
-    return float(candidate) / float(reference)
+    from jevops.search import div_ratio
+
+    return div_ratio(candidate, reference)
 
 
 def strip_body_comments(text: str) -> str:
@@ -269,68 +278,32 @@ def strip_body_comments(text: str) -> str:
     and does not search for the first assign token.
     """
 
-    if not isinstance(text, str) or not text:
-        return ""
-    out: list[str] = []
-    index = 0
-    n = len(text)
-    block = 0
-    line_comment = False
-    while index < n:
-        if line_comment:
-            if text[index] == "\n":
-                line_comment = False
-                out.append("\n")
-            index += 1
-            continue
-        if block:
-            if text.startswith("-/", index):
-                block -= 1
-                index += 2
-            elif text.startswith("/-", index):
-                block += 1
-                index += 2
-            else:
-                index += 1
-            continue
-        if text.startswith("/-", index):
-            block = 1
-            index += 2
-            continue
-        if text.startswith("--", index):
-            line_comment = True
-            index += 2
-            continue
-        out.append(text[index])
-        index += 1
-    return "".join(out)
+    from jevops.mask import strip_comments
+
+    return strip_comments(text)
 
 
 def extract_generated_tactics(text: str) -> str:
     """Take a tactic block from an untrusted model payload. Not a statement splice."""
 
+    from jevops.mask import split_before_markers
+    from jevops.mask import strip_fence
+    from jevops.outer import strip_leading_prefixes
+
     if not isinstance(text, str):
         return ""
-    raw = text.strip()
-    if raw.startswith("```"):
-        lines = raw.splitlines()
-        if len(lines) >= 2 and lines[-1].strip().startswith("```"):
-            lines = lines[1:-1]
-        else:
-            lines = lines[1:]
-        raw = "\n".join(lines).strip()
-    for marker in _END_MARKERS:
-        if marker in raw:
-            raw = raw.split(marker, 1)[0].strip()
-    for prefix in lra_splice.BODY_BY_PREFIXES:
-        if raw.startswith(prefix):
-            raw = raw[len(prefix) :]
-            break
+    raw = split_before_markers(strip_fence(text), _END_MARKERS)
+    try:
+        raw = strip_leading_prefixes(raw, lra_splice.BODY_BY_PREFIXES)
+    except Exception:
+        pass
     return raw.strip()
 
 
 def statement_plus_tactics(statement: str, tactics: str) -> str:
-    return statement + BY_NEWLINE + str(tactics).lstrip("\n")
+    from jevops.outer import join_decl
+
+    return join_decl(statement, tactics, by_marker=BY_NEWLINE)
 
 
 def candidate_source(record: Mapping[str, Any], tactics: str) -> str:
@@ -343,20 +316,31 @@ def candidate_source(record: Mapping[str, Any], tactics: str) -> str:
 
 
 def record_with_tactics(record: Mapping[str, Any], tactics: str) -> dict[str, Any]:
-    updated = dict(record)
-    updated["src"] = statement_plus_tactics(str(record["statement"]), tactics)
-    return updated
+    from jevops.outer import with_field
+
+    return with_field(record, "src", statement_plus_tactics(str(record["statement"]), tactics))
 
 
 def pin_loop_env() -> None:
+    from jevops.outer import pin_env, pin_sys_path
+
     lra_d0.pin_client_env()
-    os.environ[AUTOSTART_ENV] = "0"
-    os.environ["LRA_TYPESAFE"] = TYPESAFE
-    os.environ["LRA_GENERATOR"] = GENERATOR
-    os.environ["LRA_HARDWARE"] = HARDWARE_CLASS
-    os.environ["LRA_LOOP"] = LOOP_VERSION
-    os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
-    os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
+    pin_env(
+        {
+            AUTOSTART_ENV: "0",
+            "LRA_TYPESAFE": TYPESAFE,
+            "LRA_GENERATOR": GENERATOR,
+            "LRA_HARDWARE": HARDWARE_CLASS,
+            "LRA_LOOP": LOOP_VERSION,
+        }
+    )
+    pin_sys_path(
+        "",
+        defaults={
+            "IPFS_ACCEL_SKIP_CORE": "1",
+            "IPFS_AUTO_INSTALL": "false",
+        },
+    )
 
 
 def effective_typesafe_mode() -> str:
@@ -390,9 +374,15 @@ def maybe_generate(
 ) -> lra_gt.LraGeneration:
     """Call Leanstral iff docker0 ``/health`` is ok. Skip only when down."""
 
+    from jevops.outer import require_env_eq
+
     pin_loop_env()
-    if os.environ.get(AUTOSTART_ENV) != "0":
-        raise LoopError(f"{AUTOSTART_ENV} must be 0; refusing to generate")
+    require_env_eq(
+        AUTOSTART_ENV,
+        "0",
+        error_cls=LoopError,
+        fmt="{key} must be {expected}; refusing to generate",
+    )
     if not health.ok:
         return lra_d0.skipped_generation(
             health,
@@ -431,29 +421,23 @@ def admit_tactics(record: Mapping[str, Any], tactics: str) -> lra_splice.Admissi
 
 
 def _elab_ms(receipts: Sequence[lra_cw.CompileReceipt]) -> float:
-    if not receipts:
-        return 0.0
-    return sum(max(0.0, item.wall_ms) for item in receipts) / float(len(receipts))
+    from jevops.outer import mean_nonneg
+
+    return mean_nonneg(receipts, getter=lambda item: item.wall_ms)
 
 
 def _all_tags_ok(
     record: Mapping[str, Any],
     receipts: Sequence[lra_cw.CompileReceipt],
 ) -> bool:
-    listed = []
-    for item in record.get("version_info") or []:
-        if isinstance(item, dict):
-            listed.extend(str(tag) for tag in item.keys() if str(tag).strip())
-        elif isinstance(item, str) and item.strip():
-            listed.append(item)
-    if not listed:
-        return False
-    by_tag = {item.lean_tag: item for item in receipts}
-    if any(tag not in by_tag for tag in listed):
-        return False
-    return all(
-        by_tag[tag].ok and not by_tag[tag].sorryAx and by_tag[tag].exit_code == 0
-        for tag in listed
+    from jevops.outer import flatten_version_tags
+    from jevops.outer import listed_all_ok
+
+    return listed_all_ok(
+        flatten_version_tags(record.get("version_info")),
+        receipts,
+        id_fn=lambda item: item.lean_tag,
+        ok_fn=lambda item: bool(item.ok) and not item.sorryAx and item.exit_code == 0,
     )
 
 
@@ -566,29 +550,31 @@ def evaluate_candidate(
 def keep_best(candidates: Sequence[CandidateRecord]) -> Optional[CandidateRecord]:
     """Hard-filter transfer, then tokens+elab among valid. Else the reference."""
 
-    valid = [item for item in candidates if item.valid]
-    if valid:
-        return sorted(valid, key=lambda item: (item.composite, item.token_count, item.kind))[0]
-    for item in candidates:
-        if item.kind == "reference":
-            return item
-    return candidates[0] if candidates else None
+    from jevops.search import pick_min
+
+    return pick_min(
+        candidates,
+        valid_fn=lambda item: item.valid,
+        key_fn=lambda item: (item.composite, item.token_count, item.kind),
+        fallback_fn=lambda rows: next((item for item in rows if item.kind == "reference"), None),
+    )
 
 
 def _failure_row(candidate: CandidateRecord) -> dict[str, Any]:
-    failing_tags = [
+    from jevops.pick import project_items
+
+    failing_tags = project_items(
+        [item for item in candidate.compile_receipts if not item.ok],
         {
-            "lean_tag": item.lean_tag,
-            "ok": item.ok,
-            "exit_code": item.exit_code,
-            "sorryAx": item.sorryAx,
-            "error": item.error,
-            "hardware_class": HARDWARE_CLASS,
-            "arena_score": None,
-        }
-        for item in candidate.compile_receipts
-        if not item.ok
-    ]
+            "lean_tag": "lean_tag",
+            "ok": "ok",
+            "exit_code": "exit_code",
+            "sorryAx": "sorryAx",
+            "error": "error",
+            "hardware_class": lambda _item: HARDWARE_CLASS,
+            "arena_score": lambda _item: None,
+        },
+    )
     return {
         "admission_accepted": candidate.admission_accepted,
         "admission_code": candidate.admission_code,
@@ -765,6 +751,8 @@ def run_problem(
 
 
 def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, str]:
+    from jevops.outer import write_json
+
     safe = result.name.replace("/", "_") or "unnamed"
     folder = Path(dest_dir) / safe
     folder.mkdir(parents=True, exist_ok=True)
@@ -779,11 +767,7 @@ def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, st
             payload["score"] = None
             payload["hardware_class"] = HARDWARE_CLASS
             compile_records.append(payload)
-            tag_path = folder / f"{item.lean_tag}.json"
-            tag_path.write_text(
-                json.dumps(payload, indent=2, sort_keys=True) + "\n",
-                encoding="utf-8",
-            )
+            write_json(folder / f"{item.lean_tag}.json", payload)
     problem = {
         "schema": PROBLEM_SCHEMA,
         "accepted": bool(kept is not None and kept.valid),
@@ -805,13 +789,9 @@ def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, st
         "warmup_sha256": FROZEN_WARMUP_SHA256,
         "compile_records": compile_records,
     }
-    (folder / "problem.json").write_text(
-        json.dumps(problem, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    write_json(folder / "problem.json", problem)
     result_path = folder / "result.json"
-    result_path.write_text(
-        json.dumps(result.to_dict(), indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    write_json(result_path, result.to_dict())
     admission = {
         "arena_score": None,
         "candidates": [
@@ -826,9 +806,7 @@ def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, st
         "hardware_class": HARDWARE_CLASS,
         "name": result.name,
     }
-    (folder / "admission.json").write_text(
-        json.dumps(admission, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    write_json(folder / "admission.json", admission)
     return {
         "admission": str(folder / "admission.json"),
         "candidate": str(folder / "candidate.lean"),
@@ -838,17 +816,16 @@ def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, st
 
 
 def plant_repo_clone(url: str, state_root: Path) -> Path:
+    from jevops.outer import plant_git_skeleton
+
     clone = lra_cw.clone_dir(url, state_root)
-    clone.mkdir(parents=True, exist_ok=True)
-    git_dir = clone / ".git"
-    git_dir.mkdir(parents=True, exist_ok=True)
-    (git_dir / "HEAD").write_text("ref: refs/heads/main\n", encoding="utf-8")
-    (clone / "lakefile.lean").write_text(
-        "import Lake\nopen Lake DSL\npackage «lra»\nlean_lib «Lra»\n",
-        encoding="utf-8",
+    return plant_git_skeleton(
+        clone,
+        files={
+            "lakefile.lean": "import Lake\nopen Lake DSL\npackage «lra»\nlean_lib «Lra»\n",
+            "lean-toolchain": "leanprover/lean4:v4.26.0\n",
+        },
     )
-    (clone / "lean-toolchain").write_text("leanprover/lean4:v4.26.0\n", encoding="utf-8")
-    return clone
 
 
 def plant_loop_env(
@@ -856,21 +833,22 @@ def plant_loop_env(
     *,
     parent: Optional[Path] = None,
 ) -> dict[str, Any]:
+    from jevops.outer import mkdtemp_under, unique_keep
+
     root_parent = Path(parent) if parent is not None else lra_cw._exec_scratch_parent()
-    root = Path(
-        tempfile.mkdtemp(prefix="lra-017-loop-", dir=str(root_parent))
-    )
+    root = mkdtemp_under(root_parent, prefix="lra-017-loop-")
     elan_home = root / "elan"
     state_root = root / "state"
-    tags: list[str] = []
-    urls: list[str] = []
-    for record in records:
-        for pin in lra_cw.iter_version_pins(record.get("version_info")):
-            if pin.lean_tag not in tags:
-                tags.append(pin.lean_tag)
-        url = str(record.get("url") or "")
-        if url and url not in urls:
-            urls.append(url)
+    tags = unique_keep(
+        [
+            pin.lean_tag
+            for record in records
+            for pin in lra_cw.iter_version_pins(record.get("version_info"))
+        ]
+    )
+    urls = unique_keep(
+        [str(record.get("url") or "") for record in records if str(record.get("url") or "")]
+    )
     for tag in tags:
         lra_cw.plant_fake_toolchain(elan_home, tag)
     for url in urls:
@@ -1023,119 +1001,64 @@ def plan_loop(jsonl: Optional[Path] = None) -> dict[str, Any]:
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-                names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-                names.add(node.module)
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _lock_ex_attributes(source: str) -> list[str]:
-    tree = ast.parse(source)
-    found: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Attribute) and node.attr in {
-            "LOCK_EX",
-            "F_WRLCK",
-            "F_SETLK",
-            "F_SETLKW",
-        }:
-            found.append(node.attr)
-    return found
+    from jevops.repair import attr_hits
+
+    return attr_hits(source, ("LOCK_EX", "F_WRLCK", "F_SETLK", "F_SETLKW"))
 
 
 def _call_func_name(func: ast.AST) -> str:
-    if isinstance(func, ast.Name):
-        return func.id
-    if isinstance(func, ast.Attribute):
-        parts: list[str] = []
-        cur: ast.AST = func
-        while isinstance(cur, ast.Attribute):
-            parts.append(cur.attr)
-            cur = cur.value
-        if isinstance(cur, ast.Name):
-            parts.append(cur.id)
-        return ".".join(reversed(parts))
-    return ""
+    from jevops.repair import call_func_name
+
+    return call_func_name(func)
 
 
 def _oracle_name_uses(tree: ast.AST) -> set[str]:
-    used: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Name) and node.id in FORBIDDEN_ORACLE_NAMES:
-            used.add(node.id)
-        if isinstance(node, ast.Attribute) and node.attr in FORBIDDEN_ORACLE_NAMES:
-            used.add(node.attr)
-    return used
+    from jevops.repair import ast_name_hits
+
+    return ast_name_hits(tree, FORBIDDEN_ORACLE_NAMES)
 
 
 def _subprocess_invokes_forbidden_binary(source: str) -> bool:
-    tree = ast.parse(source)
-    spawn = {"Popen", "run", "call", "check_call", "check_output"}
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        short = _call_func_name(node.func).rsplit(".", 1)[-1]
-        if short not in spawn:
-            continue
-        blobs: list[str] = []
-        for arg in list(node.args) + [kw.value for kw in node.keywords]:
-            for child in ast.walk(arg):
-                if isinstance(child, ast.Constant) and isinstance(child.value, str):
-                    blobs.append(child.value)
-        joined = " ".join(blobs)
-        if any(binary in joined for binary in FORBIDDEN_SERVER_BINARIES):
-            return True
-    return False
+    from jevops.repair import subprocess_invokes
+
+    return subprocess_invokes(source, FORBIDDEN_SERVER_BINARIES)
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.repair import ast_name_hits, audit_source as _audit, has_constant
+
     text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    out = _audit(
+        text,
+        forbidden_imports=FORBIDDEN_IMPORT_NAMES,
+        forbidden_scores=FORBIDDEN_SCORE_NAMES,
+    )
     tree = ast.parse(text)
-    imported = _imported_names(text)
     lock_ex_attrs = _lock_ex_attributes(text)
-    oracle_uses = _oracle_name_uses(tree)
-    forbidden_imports = sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES)
-    score_assignments: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.keyword) and node.arg in FORBIDDEN_SCORE_NAMES:
-            if not (isinstance(node.value, ast.Constant) and node.value.value is None):
-                score_assignments.append(str(node.arg))
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            if node.target.id in FORBIDDEN_SCORE_NAMES and not (
-                isinstance(node.value, ast.Constant) and node.value.value is None
-            ):
-                score_assignments.append(node.target.id)
-    hardware_literal = any(
-        isinstance(node, ast.Constant) and node.value == HARDWARE_CLASS
-        for node in ast.walk(tree)
-    )
-    typesafe_off = any(
-        isinstance(node, ast.Constant) and node.value == "off" for node in ast.walk(tree)
-    )
+    oracle_uses = ast_name_hits(tree, FORBIDDEN_ORACLE_NAMES)
+    score_assignments = list(out["score_keys"])
+    hardware_literal = has_constant(text, HARDWARE_CLASS)
+    typesafe_off = has_constant(text, "off")
     hammers_off = "HAMMERS = \"off\"" in text or "HAMMERS='off'" in text
     return {
-        "forbidden_imports": forbidden_imports,
+        "forbidden_imports": out["forbidden_imports"],
         "forbidden_oracle_uses": sorted(oracle_uses),
         "forbidden_server_binaries": _subprocess_invokes_forbidden_binary(text),
         "hammers_off": hammers_off,
         "hardware_class_literal": hardware_literal,
-        "imported_names": sorted(imported),
+        "imported_names": out["imported_names"],
         "lock_ex_attributes": lock_ex_attrs,
         "score_assignments": score_assignments,
         "typesafe_off": typesafe_off,
         "uses_lock_ex": bool(lock_ex_attrs),
         "ok": (
-            not forbidden_imports
+            not out["forbidden_imports"]
             and not oracle_uses
             and not lock_ex_attrs
             and not score_assignments
@@ -1379,8 +1302,9 @@ def self_check(
 
 
 def _print_json(payload: Mapping[str, Any]) -> None:
-    json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-    sys.stdout.write("\n")
+    from jevops.outer import print_json
+
+    print_json(payload)
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:

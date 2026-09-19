@@ -74,10 +74,9 @@ def fold_use_exact_reuse(tactics: str) -> str:
     nxt, n = _USE_EXACT_BLOCK.subn(repl, tactics)
     if not n:
         return tactics
-    # Only keep if strictly shorter.
-    if lra_loop.token_count(nxt) >= lra_loop.token_count(tactics):
-        return tactics
-    return nxt
+    from jevops.pick import keep_shorter
+
+    return keep_shorter(tactics, nxt, token_fn=lra_loop.token_count)
 
 
 def fold_ctor_pair_exacts(tactics: str) -> str:
@@ -139,10 +138,9 @@ SHORTEN_IDENTS: tuple[tuple[str, str, str], ...] = (
 def fold_shorten_ident(tactics: str, old: str, new: str) -> str:
     if old not in tactics:
         return tactics
-    nxt = tactics.replace(old, new)
-    if lra_loop.token_count(nxt) >= lra_loop.token_count(tactics):
-        return tactics
-    return nxt
+    from jevops.pick import keep_shorter
+
+    return keep_shorter(tactics, tactics.replace(old, new), token_fn=lra_loop.token_count)
 
 
 _GRIND_ONLY = re.compile(r"grind only \[[^\]]+\]")
@@ -153,10 +151,9 @@ def fold_grind_only_to_grind(tactics: str) -> str:
 
     if "grind only [" not in tactics:
         return tactics
-    nxt = _GRIND_ONLY.sub("grind", tactics)
-    if lra_loop.token_count(nxt) >= lra_loop.token_count(tactics):
-        return tactics
-    return nxt
+    from jevops.pick import keep_shorter
+
+    return keep_shorter(tactics, _GRIND_ONLY.sub("grind", tactics), token_fn=lra_loop.token_count)
 
 
 def fold_drop_unfold_before_split(tactics: str) -> str:
@@ -219,9 +216,9 @@ def fold_trim_intro_names(tactics: str) -> str:
             out.append(line)
             continue
         later = lra_bind.idents_in("\n".join(lines[index + 1 :]))
-        trimmed = list(names)
-        while trimmed and trimmed[-1] not in later:
-            trimmed.pop()
+        from jevops.search import trim_trailing_unused
+
+        trimmed = trim_trailing_unused(names, later)
         if trimmed == names:
             out.append(line)
             continue
@@ -555,17 +552,9 @@ def compose_pipeline(
 ) -> tuple[str, list[str]]:
     """Apply un-blacklisted skills in memory-weighted order."""
 
-    blocked = skip or set()
-    body = tactics.strip("\n")
-    applied: list[str] = []
-    for stem, fn in pipeline_order(memory, name=name):
-        if stem in blocked or f"port_{stem}" in blocked:
-            continue
-        nxt = fn(body).strip("\n")
-        if nxt and nxt != body:
-            body = nxt
-            applied.append(stem)
-    return body, applied
+    from jevops.pick import compose_steps
+
+    return compose_steps(tactics, pipeline_order(memory, name=name), skip=skip)
 
 
 def portable_drafts(
@@ -577,29 +566,13 @@ def portable_drafts(
 ) -> list[dict[str, object]]:
     """Shorter closed-vocab folds present in this script."""
 
+    from jevops.pick import shorter_bag
+
     body = tactics.strip("\n")
-    base = lra_loop.token_count(body)
-    rows: list[dict[str, object]] = []
-    seen = {body}
+    _push, rows = shorter_bag(body, token_fn=lra_loop.token_count, generator="portable_rewrites")
+
     def push(kind: str, family: str, nxt: str) -> None:
-        nxt = nxt.strip("\n")
-        if not nxt or nxt in seen:
-            return
-        tok = lra_loop.token_count(nxt)
-        if tok >= base:
-            return
-        seen.add(nxt)
-        rows.append(
-            {
-                "kind": f"port_{kind}",
-                "family": family,
-                "tactics": nxt,
-                "token_count": tok,
-                "generator": "portable_rewrites",
-                "llm": "off",
-                "n_masks": 1,
-            }
-        )
+        _push(f"port_{kind}", nxt, {"family": family, "n_masks": 1})
 
     push("trailing_tuple_comma", "search_space", fold_trailing_tuple_comma(body))
     push("redundant_inner_simp", "strength_reduction", fold_redundant_inner_simp(body))

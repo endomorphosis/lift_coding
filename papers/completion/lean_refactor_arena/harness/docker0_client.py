@@ -34,6 +34,7 @@ REPO_ROOT = HERE.parents[3]
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import generate_text as lra_gt  # noqa: E402
 
 DOCKER0_HOST = lra_gt.DOCKER0_HOST
@@ -120,8 +121,10 @@ def pin_client_env() -> str:
 def gpu0_lock_path() -> Path:
     """Owner lock path used by ``run_leanstral_ephemeral.py --gpu 0``."""
 
-    runtime = os.environ.get("XDG_RUNTIME_DIR") or f"/run/user/{os.getuid()}"
-    return Path(runtime) / f"leanstral-jobs-{os.getuid()}" / f"{OWNER_LOCK_ID}.lock"
+    import os
+    from jevops.outer import xdg_runtime_dir
+
+    return xdg_runtime_dir() / f"leanstral-jobs-{os.getuid()}" / f"{OWNER_LOCK_ID}.lock"
 
 
 def owner_script_path() -> Path:
@@ -135,14 +138,18 @@ def owner_argv(
 ) -> list[str]:
     """Argv for optional owner exec. The child takes exclusive ownership."""
 
-    py = python or sys.executable
+    from jevops.outer import python_argv
+
     path = Path(script) if script is not None else owner_script_path()
-    return [py, "-B", str(path), "--bind", OWNER_BIND, "--gpu", OWNER_GPU]
+    return python_argv(path, "--bind", OWNER_BIND, "--gpu", OWNER_GPU, python=python)
 
 
 def owner_argv_relative(*, python: Optional[str] = None) -> list[str]:
-    py = python or sys.executable
-    return [py, "-B", OWNER_SCRIPT_RELATIVE, "--bind", OWNER_BIND, "--gpu", OWNER_GPU]
+    from jevops.outer import python_argv
+
+    return python_argv(
+        OWNER_SCRIPT_RELATIVE, "--bind", OWNER_BIND, "--gpu", OWNER_GPU, python=python
+    )
 
 
 def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> lra_gt.HealthProbe:
@@ -153,11 +160,9 @@ def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> lra_gt.H
 
 
 def _stat_dev_ino(path: Path) -> Optional[tuple[int, int, int]]:
-    try:
-        st = path.stat()
-    except OSError:
-        return None
-    return os.major(st.st_dev), os.minor(st.st_dev), st.st_ino
+    from jevops.outer import stat_dev_ino
+
+    return stat_dev_ino(path)
 
 
 def _proc_locks_write_holder(path: Path) -> tuple[Optional[bool], Optional[int], str]:
@@ -166,39 +171,9 @@ def _proc_locks_write_holder(path: Path) -> tuple[Optional[bool], Optional[int],
     Query only. Does not call ``flock`` and does not take exclusive ownership.
     """
 
-    ident = _stat_dev_ino(path)
-    if ident is None:
-        return False, None, "missing"
-    maj, minr, ino = ident
-    tokens = (
-        f"{maj:x}:{minr:x}:{ino}",
-        f"{maj:02x}:{minr:02x}:{ino}",
-        f"{maj:08x}:{minr:08x}:{ino}",
-    )
-    proc = Path("/proc/locks")
-    try:
-        text = proc.read_text(encoding="utf-8")
-    except OSError as exc:
-        return None, None, f"proc_locks_unreadable: {exc}"
-    for line in text.splitlines():
-        parts = line.split()
-        if len(parts) < 6:
-            continue
-        kind = parts[1].upper()
-        mode = parts[3].upper() if len(parts) > 3 else ""
-        if kind not in {"FLOCK", "POSIX", "OFDLCK"}:
-            continue
-        if mode not in {"WRITE", "EX", "WRLCK"}:
-            continue
-        dev_field = parts[5]
-        if not any(token in dev_field for token in tokens):
-            continue
-        try:
-            pid = int(parts[4])
-        except ValueError:
-            pid = None
-        return True, pid, "proc_locks"
-    return False, None, "proc_locks"
+    from jevops.outer import proc_exclusive_holder
+
+    return proc_exclusive_holder(path)
 
 
 def _shared_probe_holder(path: Path) -> tuple[bool, str]:
@@ -208,82 +183,26 @@ def _shared_probe_holder(path: Path) -> tuple[bool, str]:
     with ``BlockingIOError``; a free lock is released immediately.
     """
 
-    import fcntl
+    from jevops.outer import shared_lock_busy
 
-    flags = os.O_RDONLY
-    if hasattr(os, "O_CLOEXEC"):
-        flags |= os.O_CLOEXEC
-    try:
-        fd = os.open(path, flags)
-    except OSError as exc:
-        raise Docker0ClientError(f"cannot open lock file for shared probe: {exc}") from exc
-    try:
-        sh = int(getattr(fcntl, "LOCK_SH", _FLOCK_SH))
-        nb = int(getattr(fcntl, "LOCK_NB", _FLOCK_NB))
-        un = int(getattr(fcntl, "LOCK_UN", _FLOCK_UN))
-        try:
-            fcntl.flock(fd, sh | nb)
-        except BlockingIOError:
-            return True, "shared_probe"
-        except OSError as exc:
-            if getattr(exc, "errno", None) in {11, 13}:  # EAGAIN / EACCES
-                return True, "shared_probe"
-            raise
-        fcntl.flock(fd, un)
-        return False, "shared_probe"
-    finally:
-        os.close(fd)
+    return shared_lock_busy(path, error_cls=Docker0ClientError)
 
 
 def inspect_gpu0_lock(path: Optional[Path] = None) -> LockInspection:
     """Inspect owner lock without taking exclusive ownership."""
 
+    from jevops.outer import inspect_lock
+
     pin_client_env()
     lock_path = Path(path) if path is not None else gpu0_lock_path()
-    if not lock_path.exists():
-        return LockInspection(
-            path=str(lock_path),
-            exists=False,
-            held=False,
-            pid=None,
-            method="missing",
-            error="",
-        )
-    held: Optional[bool]
-    pid: Optional[int]
-    method: str
-    held, pid, method = _proc_locks_write_holder(lock_path)
-    error = ""
-    if held is None:
-        error = method
-        try:
-            held, method = _shared_probe_holder(lock_path)
-            pid = None
-        except Exception as exc:  # noqa: BLE001 — lock state must fail closed
-            return LockInspection(
-                path=str(lock_path),
-                exists=True,
-                held=True,
-                pid=None,
-                method="error",
-                error=f"{error}; {type(exc).__name__}: {exc}",
-            )
-    elif held is False:
-        # Confirm with a shared probe when /proc reports free. Unlock immediately.
-        try:
-            sh_held, sh_method = _shared_probe_holder(lock_path)
-            if sh_held:
-                held = True
-                method = sh_method
-        except Exception as exc:  # noqa: BLE001
-            error = f"{type(exc).__name__}: {exc}"
+    info = inspect_lock(lock_path, error_cls=Docker0ClientError)
     return LockInspection(
-        path=str(lock_path),
-        exists=True,
-        held=bool(held),
-        pid=pid,
-        method=method,
-        error=error,
+        path=str(info["path"]),
+        exists=bool(info["exists"]),
+        held=bool(info["held"]),
+        pid=info["pid"],
+        method=str(info["method"]),
+        error=str(info.get("error") or ""),
     )
 
 
@@ -296,15 +215,18 @@ def decide_action(
 ) -> str:
     """Normative LRA client protocol. Never returns an exclusive-lock action."""
 
-    if health.ok:
-        return "generate"
-    if lock.held:
-        return "wait" if float(wait_seconds) > 0 else "skip_llm"
-    if lock.method == "error":
-        return "skip_llm"
-    if allow_owner_exec:
-        return "exec_owner"
-    return "skip_llm"
+    from jevops.outer import first_match
+
+    return first_match(
+        (
+            (lambda: health.ok, "generate"),
+            (lambda: lock.held and float(wait_seconds) > 0, "wait"),
+            (lambda: lock.held, "skip_llm"),
+            (lambda: lock.method == "error", "skip_llm"),
+            (lambda: allow_owner_exec, "exec_owner"),
+        ),
+        default="skip_llm",
+    )
 
 
 def wait_for_health(
@@ -315,13 +237,10 @@ def wait_for_health(
 ) -> lra_gt.HealthProbe:
     """Poll docker0 ``/health`` without flocking. Bounded wait."""
 
+    from jevops.outer import poll_until
+
     probe_fn = probe or probe_docker0_health
-    deadline = time.monotonic() + max(0.0, float(timeout))
-    last = probe_fn()
-    while not last.ok and time.monotonic() < deadline:
-        time.sleep(max(0.01, float(interval)))
-        last = probe_fn()
-    return last
+    return poll_until(probe_fn, ok_fn=lambda item: bool(item.ok), timeout=timeout, interval=interval)
 
 
 def maybe_exec_owner(
@@ -364,31 +283,15 @@ def maybe_exec_owner(
             started_llama_server=False,
             error=f"owner script missing: {target}",
         )
+    from jevops.outer import run_process
+
     env = dict(os.environ)
     env[AUTOSTART_ENV] = "0"
     env["IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL"] = "0"
     if extra_env:
         env.update({str(k): str(v) for k, v in extra_env.items()})
     try:
-        completed = subprocess.run(
-            argv,
-            env=env,
-            capture_output=True,
-            text=True,
-            timeout=float(timeout),
-            check=False,
-        )
-    except subprocess.TimeoutExpired as exc:
-        return OwnerExec(
-            attempted=True,
-            executed=True,
-            argv=argv,
-            argv_relative=rel,
-            pid=getattr(exc, "pid", None),
-            returncode=None,
-            started_llama_server=False,
-            error=f"TimeoutExpired: {exc}",
-        )
+        ran = run_process(argv, env=env, timeout=float(timeout))
     except OSError as exc:
         return OwnerExec(
             attempted=True,
@@ -400,15 +303,27 @@ def maybe_exec_owner(
             started_llama_server=False,
             error=f"{type(exc).__name__}: {exc}",
         )
+    if ran.get("timeout"):
+        return OwnerExec(
+            attempted=True,
+            executed=True,
+            argv=argv,
+            argv_relative=rel,
+            pid=ran.get("pid"),
+            returncode=None,
+            started_llama_server=False,
+            error=str(ran.get("error") or "TimeoutExpired"),
+        )
+    code = ran.get("exit_code")
     return OwnerExec(
         attempted=True,
         executed=True,
         argv=argv,
         argv_relative=rel,
         pid=None,
-        returncode=int(completed.returncode),
+        returncode=int(code) if code is not None else None,
         started_llama_server=False,
-        error="" if completed.returncode == 0 else (completed.stderr or completed.stdout or f"exit {completed.returncode}"),
+        error="" if ran.get("ok") else (ran.get("stderr") or ran.get("stdout") or f"exit {code}"),
     )
 
 
@@ -455,9 +370,15 @@ def generate_as_client(
     ``llama-server`` in this process.
     """
 
+    from jevops.outer import require_env_eq
+
     pin_client_env()
-    if os.environ.get(AUTOSTART_ENV) != "0":
-        raise Docker0ClientError(f"{AUTOSTART_ENV} must be 0; refusing to generate")
+    require_env_eq(
+        AUTOSTART_ENV,
+        "0",
+        error_cls=Docker0ClientError,
+        fmt="{key} must be {expected}; refusing to generate",
+    )
     health = probe_docker0_health()
     if health.ok:
         return lra_gt.generate_lra(
@@ -561,71 +482,29 @@ def plan_session(
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _lock_ex_attributes(source: str) -> list[str]:
-    tree = ast.parse(source)
-    found: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Attribute) and node.attr == "LOCK_EX":
-            found.append("LOCK_EX")
-        if isinstance(node, ast.Attribute) and node.attr == "F_WRLCK":
-            found.append("F_WRLCK")
-        if isinstance(node, ast.Attribute) and node.attr == "F_SETLK":
-            found.append("F_SETLK")
-        if isinstance(node, ast.Attribute) and node.attr == "F_SETLKW":
-            found.append("F_SETLKW")
-    return found
+    from jevops.repair import attr_hits
+
+    return attr_hits(source, ("LOCK_EX", "F_WRLCK", "F_SETLK", "F_SETLKW"))
 
 
 def _call_func_name(func: ast.AST) -> str:
-    if isinstance(func, ast.Name):
-        return func.id
-    if isinstance(func, ast.Attribute):
-        parts: list[str] = []
-        cur: ast.AST = func
-        while isinstance(cur, ast.Attribute):
-            parts.append(cur.attr)
-            cur = cur.value
-        if isinstance(cur, ast.Name):
-            parts.append(cur.id)
-        return ".".join(reversed(parts))
-    return ""
+    from jevops.repair import call_func_name
+
+    return call_func_name(func)
 
 
 def _subprocess_invokes_forbidden_binary(source: str) -> bool:
     """True only if a subprocess call passes a forbidden server binary."""
 
-    tree = ast.parse(source)
-    spawn = {"Popen", "run", "call", "check_call", "check_output"}
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call):
-            continue
-        name = _call_func_name(node.func)
-        short = name.rsplit(".", 1)[-1]
-        if short not in spawn:
-            continue
-        blobs: list[str] = []
-        for arg in list(node.args) + [kw.value for kw in node.keywords]:
-            for child in ast.walk(arg):
-                if isinstance(child, ast.Constant) and isinstance(child.value, str):
-                    blobs.append(child.value)
-        joined = " ".join(blobs)
-        if any(binary in joined for binary in FORBIDDEN_SERVER_BINARIES):
-            return True
-    return False
+    from jevops.repair import subprocess_invokes
+
+    return subprocess_invokes(source, FORBIDDEN_SERVER_BINARIES)
 
 
 def _hold_exclusive_child(path: Path) -> subprocess.Popen[str]:
@@ -664,15 +543,15 @@ def _hold_exclusive_child(path: Path) -> subprocess.Popen[str]:
 
 
 def _fake_owner_script(directory: Path) -> Path:
-    script = directory / "run_leanstral_ephemeral.py"
-    script.write_text(
+    from jevops.outer import write_text
+
+    return write_text(
+        Path(directory) / "run_leanstral_ephemeral.py",
         "import json, os, sys\n"
         "out = os.environ['LRA_OWNER_ARGV_OUT']\n"
         "with open(out, 'w', encoding='utf-8') as handle:\n"
         "    json.dump(sys.argv, handle)\n",
-        encoding="utf-8",
     )
-    return script
 
 
 def self_check() -> dict[str, Any]:
@@ -952,33 +831,31 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--allow-owner-exec", action="store_true", help="permit optional owner exec in --plan")
     parser.add_argument("--wait-seconds", type=float, default=0.0)
     args = parser.parse_args(argv)
+    from jevops.outer import print_json
+
     if args.probe_health:
         pin_client_env()
         probe = probe_docker0_health()
         payload = asdict(probe)
         payload["lock_ex_taken_by_client"] = False
         payload["llama_server_started"] = False
-        json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
+        print_json(payload)
         return 0 if probe.ok else 2
     if args.inspect_lock:
         pin_client_env()
         inspection = inspect_gpu0_lock()
-        json.dump(asdict(inspection), sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
+        print_json(asdict(inspection))
         return 0
     if args.plan:
         session = plan_session(
             allow_owner_exec=args.allow_owner_exec,
             wait_seconds=args.wait_seconds,
         )
-        json.dump(asdict(session), sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
+        print_json(asdict(session))
         return 0
     if args.self_check or argv is None or argv == []:
         report = self_check()
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
+        print_json(report)
         return 0 if report["ok"] else 1
     parser.error("choose --self-check, --probe-health, --inspect-lock, or --plan")
     return 2

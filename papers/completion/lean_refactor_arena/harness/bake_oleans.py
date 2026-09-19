@@ -34,6 +34,7 @@ PUTNAM_README = HERE / "putnam_lake" / "README.md"
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import splice as lra_splice  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
@@ -197,52 +198,49 @@ class BakePlan:
 
 
 def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    from jevops.outer import digest_hex
+
+    return digest_hex(data)
 
 
 def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    from jevops.outer import digest_file
+
+    return digest_file(path)
 
 
 def default_elan_home() -> Path:
-    raw = os.environ.get("ELAN_HOME")
-    if raw is not None and str(raw).strip():
-        return Path(str(raw)).expanduser()
-    return Path.home() / ".elan"
+    from jevops.outer import first_env_path
+
+    return first_env_path("ELAN_HOME", default=Path.home() / ".elan")
 
 
 def default_state_root() -> Path:
-    raw = os.environ.get("LRA_STATE_ROOT")
-    if raw is not None and str(raw).strip():
-        return Path(str(raw)).expanduser()
-    xdg = os.environ.get("XDG_STATE_HOME")
-    if xdg is not None and str(xdg).strip():
-        return Path(xdg) / STATE_RELATIVE
-    return Path.home() / ".local" / "state" / STATE_RELATIVE
+    from jevops.outer import state_root_from_env
+
+    return state_root_from_env(override_key="LRA_STATE_ROOT", relative=STATE_RELATIVE)
 
 
 def network_mode(value: Optional[str] = None) -> str:
-    raw = value if value is not None else os.environ.get("LRA_NETWORK")
-    if raw is None or not str(raw).strip():
-        raw = os.environ.get("IPFS_ACCELERATE_LRA_NETWORK", "allow")
-    text = str(raw).strip().lower()
-    if text in NETWORK_DENY_VALUES:
-        return "deny"
-    return "allow"
+    from jevops.outer import allow_or_deny
+
+    return allow_or_deny(
+        value,
+        deny=NETWORK_DENY_VALUES,
+        default="allow",
+        env_keys=("LRA_NETWORK", "IPFS_ACCELERATE_LRA_NETWORK"),
+    )
 
 
 def normalize_lean_tag(value: str) -> str:
-    if not isinstance(value, str) or not value.strip():
-        raise BakeError("lean tag must be a nonempty string")
-    text = value.strip()
-    if text.startswith(ELAN_TOOLCHAIN_DIRNAME_PREFIX):
-        text = text[len(ELAN_TOOLCHAIN_DIRNAME_PREFIX) :]
-    elif ":" in text:
-        text = text.rsplit(":", 1)[-1]
-    text = text.strip()
-    if not text:
-        raise BakeError(f"lean tag {value!r} normalized to empty")
-    return text
+    from jevops.outer import normalize_tag
+
+    return normalize_tag(
+        value,
+        prefix=ELAN_TOOLCHAIN_DIRNAME_PREFIX,
+        error_cls=BakeError,
+        empty="lean tag must be a nonempty string",
+    )
 
 
 def elan_toolchain_dirname(lean_tag: str) -> str:
@@ -252,62 +250,44 @@ def elan_toolchain_dirname(lean_tag: str) -> str:
 def tag_pinned_paths(lean_tag: str, *, elan_home: Optional[Path] = None) -> dict[str, Any]:
     """Return elan ``lean``/``lake`` paths. Never searches PATH."""
 
+    from jevops.outer import pinned_bin_paths
+
     home = Path(elan_home) if elan_home is not None else default_elan_home()
     tag = normalize_lean_tag(lean_tag)
-    toolchain_dir = home / "toolchains" / elan_toolchain_dirname(tag)
-    lean_path = toolchain_dir / "bin" / "lean"
-    lake_path = toolchain_dir / "bin" / "lake"
-    return {
-        "lean_tag": tag,
-        "elan_home": str(home),
-        "toolchain_dir": str(toolchain_dir),
-        "lean_path": str(lean_path),
-        "lake_path": str(lake_path),
-        "lean_installed": _is_executable(lean_path),
-        "lake_installed": _is_executable(lake_path),
-        "installed": _is_executable(lean_path) and _is_executable(lake_path),
-        "executable_paths": {"lean": str(lean_path), "lake": str(lake_path)},
-    }
+    return pinned_bin_paths(
+        home,
+        elan_toolchain_dirname(tag),
+        ("lean", "lake"),
+        extra={"lean_tag": tag},
+    )
 
 
 def _is_executable(path: Path) -> bool:
-    try:
-        mode = path.stat().st_mode
-    except OSError:
-        return False
-    return stat.S_ISREG(mode) and bool(mode & (stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH))
+    from jevops.outer import is_executable
+
+    return is_executable(path)
 
 
 def iter_version_pins(version_info: Any) -> list[VersionPin]:
-    if not isinstance(version_info, list):
-        raise BakeError("version_info must be a list of {lean_tag: git_commit} maps")
-    pins: list[VersionPin] = []
-    for index, item in enumerate(version_info):
-        if isinstance(item, dict) and item:
-            for tag, commit in item.items():
-                if not isinstance(tag, str) or not tag.strip():
-                    raise BakeError(f"version_info[{index}] has an empty lean tag")
-                if commit is None:
-                    commit_text = ""
-                elif isinstance(commit, str):
-                    commit_text = commit.strip()
-                else:
-                    raise BakeError(
-                        f"version_info[{index}] git commit must be a string, not {type(commit).__name__}"
-                    )
-                pins.append(VersionPin(lean_tag=normalize_lean_tag(tag), git_commit=commit_text))
-            continue
-        raise BakeError(f"version_info[{index}] is not a {{lean_tag: git_commit}} map")
-    if not pins:
-        raise BakeError("version_info is empty")
-    return pins
+    from jevops.outer import iter_tag_commit_pins
+
+    return iter_tag_commit_pins(
+        version_info,
+        pin_fn=lambda tag, commit: VersionPin(lean_tag=tag, git_commit=commit),
+        normalize_fn=normalize_lean_tag,
+        error_cls=BakeError,
+        not_list="version_info must be a list of {lean_tag: git_commit} maps",
+        empty_tag="version_info[{index}] has an empty lean tag",
+        bad_commit="version_info[{index}] git commit must be a string, not {type}",
+        not_map="version_info[{index}] is not a {{lean_tag: git_commit}} map",
+        empty="version_info is empty",
+    )
 
 
 def _url_cache_key(url: str) -> str:
-    parsed = urlparse(url)
-    host = parsed.netloc or "no-host"
-    path = parsed.path.strip("/") or "unnamed"
-    return f"{host}/{path}"
+    from jevops.outer import url_cache_key
+
+    return url_cache_key(url)
 
 
 def putnam_pin(lean_tag: str, *, jsonl_version_pin: str = "") -> PutnamPin:
@@ -390,15 +370,18 @@ def materialize_putnam_project(
     *,
     jsonl_version_pin: str = "",
 ) -> dict[str, str]:
+    from jevops.outer import plant_files, refuse_basename
+
     files = putnam_project_files(lean_tag, jsonl_version_pin=jsonl_version_pin)
     dest = Path(dest)
-    dest.mkdir(parents=True, exist_ok=True)
-    for relpath, text in files.items():
-        path = dest / relpath
-        if path.name == FORBIDDEN_PUTNAM_BASENAME:
-            raise BakeError("refusing to materialize Tmp.lean")
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text, encoding="utf-8")
+    for relpath in files:
+        refuse_basename(
+            relpath,
+            FORBIDDEN_PUTNAM_BASENAME,
+            error_cls=BakeError,
+            fmt="refusing to materialize {name}",
+        )
+    plant_files(dest, files)
     forbidden = dest / FORBIDDEN_PUTNAM_BASENAME
     if forbidden.exists():
         raise BakeError("Putnam lake project must not contain Tmp.lean")
@@ -530,15 +513,19 @@ def plan_bake(path: Optional[Path] = None) -> BakePlan:
 
 
 def job_cache_dir(job: BakeJob, state_root: Optional[Path] = None) -> Path:
+    from jevops.outer import join_under
+
     root = Path(state_root) if state_root is not None else default_state_root()
-    return root / "oleans" / job.cache_key
+    return join_under(root, "oleans", job.cache_key)
 
 
 def putnam_project_dir(job: BakeJob, state_root: Optional[Path] = None) -> Path:
+    from jevops.outer import join_under
+
     if job.kind != "putnam":
         raise BakeError("putnam_project_dir is only defined for Putnam jobs")
     root = Path(state_root) if state_root is not None else default_state_root()
-    return root / "putnam_lake" / job.lean_tag
+    return join_under(root, "putnam_lake", job.lean_tag)
 
 
 def cache_marker_path(cache_dir: Path) -> Path:
@@ -546,15 +533,9 @@ def cache_marker_path(cache_dir: Path) -> Path:
 
 
 def olean_paths(cache_dir: Path) -> list[Path]:
-    if not cache_dir.is_dir():
-        return []
-    found: list[Path] = []
-    for dirpath, dirnames, filenames in os.walk(cache_dir):
-        dirnames.sort()
-        for name in sorted(filenames):
-            if name.endswith(".olean"):
-                found.append(Path(dirpath) / name)
-    return found
+    from jevops.outer import walk_suffix_files
+
+    return walk_suffix_files(cache_dir, ".olean")
 
 
 def cache_present(job: BakeJob, state_root: Optional[Path] = None) -> bool:
@@ -565,11 +546,14 @@ def cache_present(job: BakeJob, state_root: Optional[Path] = None) -> bool:
 def plant_synthetic_cache(job: BakeJob, state_root: Path, *, n_oleans: int = 1) -> Path:
     """Write a dummy olean cache. Not a live lake bake."""
 
+    from jevops.outer import join_under, write_blobs, write_json
+
     cache_dir = job_cache_dir(job, state_root)
-    build_dir = cache_dir / ".lake" / "build" / "lib"
-    build_dir.mkdir(parents=True, exist_ok=True)
-    for index in range(n_oleans):
-        (build_dir / f"LraBake{index}.olean").write_bytes(b"LRA-013-synthetic-olean\n")
+    build_dir = join_under(cache_dir, ".lake", "build", "lib")
+    write_blobs(
+        build_dir,
+        {f"LraBake{index}.olean": b"LRA-013-synthetic-olean\n" for index in range(n_oleans)},
+    )
     receipt = {
         "schema": "lra-olean-bake/v1",
         "cache_key": job.cache_key,
@@ -579,9 +563,7 @@ def plant_synthetic_cache(job: BakeJob, state_root: Path, *, n_oleans: int = 1) 
         "lake_build_executed": False,
         "arena_score": None,
     }
-    (cache_dir / "bake-receipt.json").write_text(
-        json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
+    write_json(cache_dir / "bake-receipt.json", receipt)
     cache_marker_path(cache_dir).write_text("synthetic\n", encoding="utf-8")
     return cache_dir
 
@@ -647,7 +629,7 @@ def _run_tag_pinned_lake(
 ) -> dict[str, Any]:
     """Run tag-pinned lake. Never PATH ``lake``. Not used by --self-check."""
 
-    import subprocess
+    from jevops.outer import require_basename, run_process
 
     pin = tag_pinned_paths(lean_tag, elan_home=elan_home)
     if not pin["installed"]:
@@ -657,23 +639,18 @@ def _run_tag_pinned_lake(
             "to PATH lean/lake)"
         )
     argv = [pin["lake_path"], *list(args)]
-    if Path(argv[0]).name != "lake":
-        raise BakeError(f"expected tag-pinned lake, got {argv[0]!r}")
-    completed = subprocess.run(
-        argv,
-        cwd=str(cwd),
-        env=dict(env) if env is not None else None,
-        capture_output=True,
-        text=True,
-        timeout=timeout,
-        check=False,
+    require_basename(
+        argv[0], "lake", error_cls=BakeError, fmt="expected tag-pinned lake, got {path!r}"
     )
+    ran = run_process(argv, cwd=cwd, env=env, timeout=timeout)
+    if ran.get("timeout"):
+        raise BakeError(f"tag-pinned lake timed out for {lean_tag}: {ran.get('error') or 'TimeoutExpired'}")
     return {
         "argv": argv,
         "cwd": str(cwd),
-        "exit_code": completed.returncode,
-        "stdout": completed.stdout,
-        "stderr": completed.stderr,
+        "exit_code": ran.get("exit_code"),
+        "stdout": ran.get("stdout") or "",
+        "stderr": ran.get("stderr") or "",
         "lake_path": pin["lake_path"],
         "lean_path": pin["lean_path"],
         "arena_score": None,
@@ -724,31 +701,23 @@ def bake_job(
             raise BakeError(f"lake build failed for Putnam {job.lean_tag}: exit {result['exit_code']}")
         _copy_oleans(project / ".lake", job_cache_dir(job, root) / ".lake")
     else:
-        clone = root / "clones" / _url_cache_key(job.url)
+        from jevops.outer import join_under, run_process
+
+        clone = join_under(root, "clones", _url_cache_key(job.url))
         if not (clone / ".git").is_dir():
             if not GIT_BIN.is_file():
                 raise BakeToolchainMissing(f"git is not at {GIT_BIN}; cannot clone {job.url}")
-            import subprocess
-
             clone.parent.mkdir(parents=True, exist_ok=True)
-            cloned = subprocess.run(
-                [str(GIT_BIN), "clone", "--", job.url, str(clone)],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            if cloned.returncode != 0:
-                raise BakeError(f"git clone failed for {job.url}: {cloned.stderr.strip()}")
-        import subprocess
-
-        checked = subprocess.run(
-            [str(GIT_BIN), "-C", str(clone), "checkout", "--detach", job.git_commit],
-            capture_output=True,
-            text=True,
-            check=False,
+            cloned = run_process([str(GIT_BIN), "clone", "--", job.url, str(clone)])
+            if not cloned.get("ok"):
+                raise BakeError(f"git clone failed for {job.url}: {(cloned.get('stderr') or '').strip()}")
+        checked = run_process(
+            [str(GIT_BIN), "-C", str(clone), "checkout", "--detach", job.git_commit]
         )
-        if checked.returncode != 0:
-            raise BakeError(f"git checkout {job.git_commit} failed: {checked.stderr.strip()}")
+        if not checked.get("ok"):
+            raise BakeError(
+                f"git checkout {job.git_commit} failed: {(checked.get('stderr') or '').strip()}"
+            )
         result = _run_tag_pinned_lake(job.lean_tag, ["build"], cwd=clone, timeout=timeout)
         if result["exit_code"] != 0:
             raise BakeError(f"lake build failed for {job.cache_key}: exit {result['exit_code']}")
@@ -777,13 +746,9 @@ def _copy_oleans(src: Path, dest: Path) -> None:
 
 
 def _copytree(src: Path, dest: Path) -> None:
-    dest.mkdir(parents=True, exist_ok=True)
-    for entry in src.iterdir():
-        target = dest / entry.name
-        if entry.is_dir():
-            _copytree(entry, target)
-        else:
-            target.write_bytes(entry.read_bytes())
+    from jevops.outer import copy_tree
+
+    copy_tree(src, dest)
 
 
 def write_candidate(lean_tag: str, source_text: str, dest: Optional[Path] = None) -> Path:
@@ -805,78 +770,70 @@ def write_candidate(lean_tag: str, source_text: str, dest: Optional[Path] = None
                 lakefile_required=True,
             )
         )
+    from jevops.outer import refuse_basename, write_text
+
     dest = Path(dest)
-    if dest.name == FORBIDDEN_PUTNAM_BASENAME or dest.name == "Tmp":
+    if dest.name == "Tmp":
         raise BakeError("refusing to write Putnam candidate as Tmp.lean")
+    refuse_basename(
+        dest,
+        FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=BakeError,
+        fmt="refusing to write Putnam candidate as {name}",
+    )
     path = dest / PUTNAM_CANDIDATE_RELPATH if dest.is_dir() else dest
-    if path.name == FORBIDDEN_PUTNAM_BASENAME:
-        raise BakeError("refusing to write Putnam candidate as Tmp.lean")
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(source_text, encoding="utf-8")
+    write_text(
+        path,
+        source_text,
+        refuse=FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=BakeError,
+        refuse_fmt="refusing to write Putnam candidate as {name}",
+    )
     return path
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _call_name(node: ast.AST) -> str:
-    if isinstance(node, ast.Name):
-        return node.id
-    if isinstance(node, ast.Attribute):
-        return node.attr
-    return ""
+    from jevops.repair import call_func_name
+
+    dotted = call_func_name(node)
+    return dotted.rsplit(".", 1)[-1] if dotted else ""
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.repair import audit_source as _audit, matching_constants
+
     text = Path(__file__).read_text(encoding="utf-8") if source is None else source
-    tree = ast.parse(text)
-    imported = _imported_names(text)
-    calls = {_call_name(child.func) for child in ast.walk(tree) if isinstance(child, ast.Call)}
-    string_constants = [
-        child.value
-        for child in ast.walk(tree)
-        if isinstance(child, ast.Constant) and isinstance(child.value, str)
-    ]
-    forbidden_urls = sorted(
-        {
-            value
-            for value in string_constants
-            if "://" in value
-            and any(needle.lower() in value.lower() for needle in FORBIDDEN_PUTNAM_URL_NEEDLES)
-        }
+    out = _audit(
+        text,
+        forbidden_imports=FORBIDDEN_IMPORT_NAMES,
+        forbidden_calls=FORBIDDEN_CALLS,
+        forbidden_scores=FORBIDDEN_SCORE_NAMES,
     )
-    score_assignments: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.keyword) and node.arg in FORBIDDEN_SCORE_NAMES:
-            if not (
-                isinstance(node.value, ast.Constant) and node.value.value is None
-            ):
-                score_assignments.append(str(node.arg))
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            if node.target.id in FORBIDDEN_SCORE_NAMES and not (
-                isinstance(node.value, ast.Constant) and node.value.value is None
-            ):
-                score_assignments.append(node.target.id)
-    forbidden_imports = sorted(imported & FORBIDDEN_IMPORT_NAMES)
-    forbidden_calls = sorted(calls & FORBIDDEN_CALLS)
-    has_tmp_constant = FORBIDDEN_PUTNAM_BASENAME in string_constants
-    has_putnam_module = PUTNAM_MODULE in string_constants
-    has_mathlib_git = MATHLIB_GIT in string_constants
-    has_aesop_git = AESOP_GIT in string_constants
+    imported = set(out["imported_names"])
+    calls = set(out["call_names"])
+    constants = out["string_constants"]
+    forbidden_urls = sorted(
+        matching_constants(
+            text,
+            lambda value: "://" in value
+            and any(needle.lower() in value.lower() for needle in FORBIDDEN_PUTNAM_URL_NEEDLES),
+        )
+    )
+    score_assignments = list(out["score_keys"])
+    has_tmp_constant = FORBIDDEN_PUTNAM_BASENAME in constants
+    has_putnam_module = PUTNAM_MODULE in constants
+    has_mathlib_git = MATHLIB_GIT in constants
+    has_aesop_git = AESOP_GIT in constants
     return {
-        "imported_names": sorted(imported),
-        "forbidden_imports": forbidden_imports,
-        "forbidden_calls": forbidden_calls,
+        "imported_names": out["imported_names"],
+        "forbidden_imports": out["forbidden_imports"],
+        "forbidden_calls": out["forbidden_calls"],
         "forbidden_putnambench_urls": forbidden_urls,
         "score_assignments": score_assignments,
         "has_tmp_lean_constant": has_tmp_constant,
@@ -886,8 +843,8 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
         "uses_fcntl": "fcntl" in imported,
         "uses_shutil_which": "shutil" in imported and "which" in calls,
         "ok": (
-            not forbidden_imports
-            and not forbidden_calls
+            not out["forbidden_imports"]
+            and not out["forbidden_calls"]
             and not forbidden_urls
             and not score_assignments
             and has_tmp_constant
@@ -1116,8 +1073,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
 
 
 def _print_json(payload: Mapping[str, Any]) -> None:
-    json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-    sys.stdout.write("\n")
+    from jevops.outer import print_json
+
+    print_json(payload)
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:

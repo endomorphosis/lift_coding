@@ -39,11 +39,17 @@ def apply_lake_round(
 ) -> tuple[Optional[str], list[dict[str, Any]]]:
     """Lake up to lake_top drafts. Returns (accepted_body, lake_rows)."""
 
+    from jevops.nca import credit_skill
     from jevops.oracle import apply_round
+    from jevops.oracle import lake_budget as _lake_budget
+    from jevops.outer import arg_value
 
-    too_big = int(analysis.get("n_tokens") or 0) > lra_rand.MAX_LIVE_TOKENS
-    lake_budget = 1 if too_big else int(getattr(args, "lake_top", 3) or 3)
-    timeout = float(getattr(args, "timeout", 180.0) or 180.0)
+    too_big, lake_budget = _lake_budget(
+        analysis.get("n_tokens"),
+        cap=lra_rand.MAX_LIVE_TOKENS,
+        top=arg_value(args, "lake_top", 3, cast=int),
+    )
+    timeout = arg_value(args, "timeout", 180.0, cast=float)
     out_dir = getattr(args, "out", None)
     tactics_ref = tactics
 
@@ -73,19 +79,7 @@ def apply_lake_round(
             from_tokens=int(analysis.get("n_tokens") or 0),
             to_tokens=int(row["tokens"] or analysis.get("n_tokens") or 0),
         )
-        try:
-            import typesafe_nca as lra_nca
-
-            lra_nca.upsert_from_event(
-                memory,
-                ptr=str(row["kind"]),
-                kind="skill",
-                energy=0.7,
-                theorem_ok=True,
-                tokens=int(row["tokens"] or 0),
-            )
-        except Exception:
-            pass
+        credit_skill(memory, row["kind"], ok=True, tokens=int(row["tokens"] or 0))
         if not better:
             return
         try:
@@ -107,9 +101,9 @@ def apply_lake_round(
         except Exception:
             pass
         if out_dir is not None:
-            safe = str(record.get("name") or "canary").replace("/", "_")[:80]
-            best_path = out_dir / f"random-best-{safe}-{row['tokens']}.lean"
-            best_path.write_text(body + "\n")
+            from jevops.outer import write_best_body
+
+            best_path = write_best_body(out_dir, str(record.get("name") or ""), int(row["tokens"] or 0), body)
             row["best_path"] = str(best_path)
 
     def _on_fail(
@@ -128,18 +122,7 @@ def apply_lake_round(
             errors=row.get("errors") or compiled.get("errors") or [],
             tactics=body,
         )
-        try:
-            import typesafe_nca as lra_nca
-
-            lra_nca.upsert_from_event(
-                memory,
-                ptr=str(kind),
-                kind="skill",
-                energy=0.25,
-                theorem_ok=False,
-            )
-        except Exception:
-            pass
+        credit_skill(memory, kind, ok=False)
 
     return apply_round(
         memory=memory,
@@ -175,8 +158,12 @@ def eval_theorem(
     import splice as lra_splice
     import track1_keepbest as lra_kb
 
+    from jevops.oracle import closed
+    from jevops.oracle import require_named
+    from jevops.outer import arg_value
+
     if compile_fn is None:
-        return {"ok": False, "reason": "no_compile_fn", "name": name, "theorem_ok": False}
+        return closed("no_compile_fn", name)
     target = str(name or current.get("name") or "")
     rec: Mapping[str, Any] = current
     body = tactics
@@ -185,21 +172,18 @@ def eval_theorem(
         try:
             _raw, _digest, records = lra_splice.load_warmup_records()
         except Exception:
-            return {"ok": False, "reason": "warmup_unreadable", "name": target, "theorem_ok": False}
-        match = next((item for item in records if str(item.get("name") or "") == target), None)
-        if not match:
-            return {"ok": False, "reason": "not_small_or_unknown", "name": target, "theorem_ok": False}
-        n_tok = int(match.get("n_tokens") or 0)
-        if n_tok > lra_rand.MAX_LIVE_TOKENS:
-            return {"ok": False, "reason": "not_small_or_unknown", "name": target, "theorem_ok": False, "tokens": n_tok}
+            return closed("warmup_unreadable", target)
+        match, fail = require_named(records, target, cap=lra_rand.MAX_LIVE_TOKENS)
+        if fail:
+            return fail
         rec = match
         body = lra_fan.tactic_block(match)
         clone = lra_kb.lra_cw.clone_dir(str(match["url"]), lra_rand.DEFAULT_STATE)
         dest = clone / lra_kb.lra_cw.source_relpath(match)
         restore_bytes = dest.read_bytes() if dest.is_file() else b""
         if not dest.is_file():
-            return {"ok": False, "reason": "no_clone", "name": target, "theorem_ok": False}
-    timeout = float(getattr(args, "timeout", 180.0) or 180.0)
+            return closed("no_clone", target)
+    timeout = arg_value(args, "timeout", 180.0, cast=float)
 
     def _compile() -> Mapping[str, Any]:
         return compile_fn(
@@ -303,14 +287,14 @@ def inner_typesafe_walk(
         )
 
     def _remember(intent: Mapping[str, Any], nxt: str) -> None:
-        lra_bind.remember_research(
+        from jevops.memory import remember_intent
+
+        remember_intent(
             memory,
             name=str(record.get("name") or ""),
-            residuals=lra_port.analyze_residuals(nxt),
-            unsafe=intent.get("residual_unsafe") or {},
-            help_scores=intent.get("residual_help") or {},
-            skill=str(intent.get("skill") or "keep"),
-            compose=str(intent.get("compose") or "single"),
+            tactics=nxt,
+            intent=intent,
+            residual_fn=lra_port.analyze_residuals,
         )
 
     def _expand(nxt: str) -> None:
@@ -330,8 +314,14 @@ def inner_typesafe_walk(
         )
 
     def _extra(compose: str, nest_child: str, tool_name: str, nxt: str) -> dict[str, Any]:
-        if compose == "fork":
-            return {
+        from jevops.walk import extra_payload
+
+        return extra_payload(
+            compose,
+            nest_child=nest_child,
+            tool_name=tool_name,
+            default_hook="portable_rewrites.py",
+            fork={
                 "record": record,
                 "tactics": nxt,
                 "args": args,
@@ -349,10 +339,8 @@ def inner_typesafe_walk(
                 "pick_fn": pick,
                 "router_fn": router_fn,
                 "problem": str(record.get("name") or ""),
-            }
-        if compose == "hook":
-            return {"path": nest_child or tool_name or "portable_rewrites.py"}
-        return {}
+            },
+        )
 
     walk_args = args
     walk_allow_families = allow_families
@@ -503,20 +491,17 @@ def inner_typesafe_walk(
 def starting_tactics(record: Mapping[str, Any], *, out: Any = None, from_best: bool = False) -> str:
     """Keep-best body when --from-best, else frozen warmup tactics."""
 
-    from jevops.outer import glob_stem_int
+    from jevops.outer import starting_body
 
     tactics = lra_fan.tactic_block(record)
-    if not from_best or out is None:
+    if not from_best:
         return tactics
-    safe = str(record.get("name") or "canary").replace("/", "_")[:80]
-    bests = glob_stem_int(Path(out), f"random-best-{safe}-*.lean")
-    if bests:
-        return bests[0][1].read_text(encoding="utf-8").strip("\n")
-    if str(record.get("name") or "") == "Core.InitsUpdatesComm":
-        cascade = Path(out) / "cascade-best-139.lean"
-        if cascade.is_file():
-            return cascade.read_text(encoding="utf-8").strip("\n")
-    return tactics
+    return starting_body(
+        tactics,
+        out,
+        str(record.get("name") or "canary"),
+        extras={"Core.InitsUpdatesComm": "cascade-best-139.lean"},
+    )
 
 
 def run_nested_canary(
@@ -541,17 +526,15 @@ def run_nested_canary(
     dest = clone / lra_kb.lra_cw.source_relpath(record)
     restore = dest.read_bytes() if dest.is_file() else b""
     if not dest.is_file():
+        from jevops.walk import pack_canary
+
         analysis = lra_rand.analyze_proof(record, tactics=tactics, model=model)
-        return {
-            "analysis": {k: analysis[k] for k in analysis if k != "tactics"},
-            "n_drafts": 0,
-            "draft_kinds": [],
-            "ranked": {},
-            "lake": [{"name": record.get("name"), "skipped": "no_clone"}],
-            "trace": [],
-            "clone_exists": False,
-        }
-    max_steps = max(int(getattr(args, "rounds", 1) or 1), lra_rand.INNER_MAX_STEPS)
+        return pack_canary({"analysis": analysis}, skipped="no_clone", name=record.get("name"))
+    from jevops.outer import inner_budget
+
+    max_steps, max_depth = inner_budget(
+        args, min_steps=lra_rand.INNER_MAX_STEPS, default_depth=lra_rand.NEST_MAX_DEPTH
+    )
     walked = inner_typesafe_walk(
         record,
         tactics,
@@ -562,16 +545,16 @@ def run_nested_canary(
         model=model,
         restore=restore,
         max_steps=max_steps,
-        max_depth=int(getattr(args, "nest_depth", lra_rand.NEST_MAX_DEPTH) or lra_rand.NEST_MAX_DEPTH),
+        max_depth=max_depth,
         compile_one=compile_one,
         research_fn=research_fn,
         pick_fn=pick_fn,
         router_fn=router_fn,
     )
-    if dest.is_file() and restore:
-        dest.write_bytes(restore)
+    from jevops.outer import restore_if
     from jevops.walk import pack_canary
 
+    restore_if(dest, restore)
     return pack_canary(walked, clone_exists=True)
 
 

@@ -6,15 +6,16 @@ AST → ripgrep. DuckDB is never required. Never docker0. Does not write Lean.
 """
 from __future__ import annotations
 
-import ast
 import os
 import re
-import shutil
-import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional
 
 HERE = Path(__file__).resolve().parent
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 PAPER_ROOT = HERE.parent
 LRA_STATE = Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026-lra"
 MAX_HITS = 24
@@ -34,81 +35,77 @@ SOURCE_WEIGHT = {
 }
 
 
+def _ptr(symbol: str) -> str:
+    return f"ptr://skill/{symbol}" if str(symbol).startswith("port_") else ""
+
+
 def _score(query: str, symbol: str, source: str) -> float:
-    q = query.casefold()
-    s = symbol.casefold()
-    if s == q:
-        base = 1.0
-    elif s.endswith("." + q) or s.endswith("/" + q) or s.rsplit(".", 1)[-1] == q:
-        base = 0.9
-    elif s.startswith(q):
-        base = 0.8
-    elif q in s:
-        base = 0.55
-    else:
-        base = 0.15
-    return round(base * SOURCE_WEIGHT.get(source, 0.4), 4)
+    from jevops.search import name_match_score
+
+    return name_match_score(query, symbol, source=source, weights=SOURCE_WEIGHT)
 
 
 def _hit(symbol: str, *, source: str, query: str, path: str = "", extra: Optional[Mapping[str, Any]] = None) -> dict[str, Any]:
-    row = {
-        "symbol": symbol,
-        "source": source,
-        "path": path,
-        "score": _score(query, symbol, source),
-        "ptr": f"ptr://skill/{symbol}" if symbol.startswith("port_") else "",
-    }
-    if extra:
-        row.update(dict(extra))
-    return row
+    from jevops.search import hit_row
+
+    return hit_row(
+        symbol,
+        source=source,
+        query=query,
+        path=path,
+        extra=extra,
+        weights=SOURCE_WEIGHT,
+        ptr_fn=_ptr,
+    )
 
 
 def _candidate_duckdb_paths() -> list[Path]:
+    from jevops.outer import existing_files
+
     paths: list[Path] = []
     env = os.environ.get("LRA_DUCKDB_AST_INDEX")
     if env:
         paths.append(Path(env))
-    for rel in (
-        PAPER_ROOT / "evidence" / "canaries" / "nca-ast.duckdb",
-        LRA_STATE / "ast_index.duckdb",
-        LRA_STATE / "code_symbols.duckdb",
-    ):
-        paths.append(rel)
-    return [path for path in paths if path.is_file() and path.name != "control.duckdb"]
+    paths.extend(
+        (
+            PAPER_ROOT / "evidence" / "canaries" / "nca-ast.duckdb",
+            LRA_STATE / "ast_index.duckdb",
+            LRA_STATE / "code_symbols.duckdb",
+        )
+    )
+    return existing_files(paths, exclude_names=("control.duckdb",))
 
 
 def search_duckdb(query: str, *, db_path: Optional[Path] = None) -> tuple[list[dict[str, Any]], str]:
     """Query ipfs_accelerate DuckDB AST/symbol tables if a DB exists."""
 
-    try:
-        import duckdb  # type: ignore[import-not-found]
-    except Exception:
+    from jevops.outer import engine_tables, first_table_sql, open_readonly, try_import
+
+    if try_import("duckdb") is None:
         return [], "duckdb_unavailable"
     paths = [db_path] if db_path is not None else _candidate_duckdb_paths()
     paths = [path for path in paths if path is not None and path.is_file()]
     if not paths:
         return [], "no_duckdb_index"
     needle = f"%{query.casefold()}%"
+    table_sql = {
+        "symbols": (
+            "SELECT qualified_name, path, symbol_kind FROM symbols "
+            "WHERE lower(CAST(qualified_name AS VARCHAR)) LIKE ? LIMIT 20"
+        ),
+        "code_symbols": (
+            "SELECT name, path, kind FROM code_symbols "
+            "WHERE lower(CAST(name AS VARCHAR)) LIKE ? LIMIT 20"
+        ),
+    }
     hits: list[dict[str, Any]] = []
     used = ""
     for path in paths:
-        try:
-            con = duckdb.connect(str(path), read_only=True)
-        except Exception:
+        con, note = open_readonly(path, refuse_names=("control.duckdb",))
+        if con is None:
             continue
         try:
-            tables = {str(row[0]).casefold() for row in con.execute("SHOW TABLES").fetchall()}
-            sql = None
-            if "symbols" in tables:
-                sql = (
-                    "SELECT qualified_name, path, symbol_kind FROM symbols "
-                    "WHERE lower(CAST(qualified_name AS VARCHAR)) LIKE ? LIMIT 20"
-                )
-            elif "code_symbols" in tables:
-                sql = (
-                    "SELECT name, path, kind FROM code_symbols "
-                    "WHERE lower(CAST(name AS VARCHAR)) LIKE ? LIMIT 20"
-                )
+            sql = first_table_sql(engine_tables(con), table_sql)
             if not sql:
                 continue
             rows = con.execute(sql, [needle]).fetchall()
@@ -162,13 +159,15 @@ def search_vector_index(
         result = fn(snapshot, {"query_text": query, "max_results": 12})
     except Exception as exc:
         return [], f"vector_search_failed:{type(exc).__name__}"
+    from jevops.outer import field_of
+
     hits: list[dict[str, Any]] = []
     rows = getattr(result, "hits", None) or (result.get("hits") if isinstance(result, Mapping) else []) or []
     for item in list(rows)[:12]:
-        row = getattr(item, "row", item)
-        symbol = str(getattr(row, "qualified_symbol", None) or getattr(row, "symbol", None) or (row.get("qualified_symbol") if isinstance(row, Mapping) else "") or "")
-        path = str(getattr(row, "path", None) or (row.get("path") if isinstance(row, Mapping) else "") or "")
-        score = float(getattr(item, "score", None) or (item.get("score") if isinstance(item, Mapping) else 0.0) or 0.0)
+        row = field_of(item, "row", default=item)
+        symbol = str(field_of(row, "qualified_symbol", "symbol") or "")
+        path = str(field_of(row, "path") or "")
+        score = float(field_of(item, "score", default=0.0) or 0.0)
         if symbol:
             hit = _hit(symbol, source="vector", query=query, path=path)
             hit["score"] = round(max(hit["score"], score * SOURCE_WEIGHT["vector"]), 4)
@@ -190,73 +189,41 @@ def search_kg(query: str, memory: Optional[Mapping[str, Any]] = None) -> list[di
 
 
 def search_ast(query: str, *, root: Optional[Path] = None) -> list[dict[str, Any]]:
-    base = root or HERE
-    hits: list[dict[str, Any]] = []
-    q = query.casefold()
-    for path in sorted(base.glob("*.py"))[:80]:
-        try:
-            tree = ast.parse(path.read_text(encoding="utf-8"))
-        except (OSError, SyntaxError):
-            continue
-        for node in tree.body:
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                name = node.name
-                if q in name.casefold():
-                    hits.append(
-                        _hit(
-                            name,
-                            source="ast",
-                            query=query,
-                            path=path.name,
-                            extra={"lineno": int(getattr(node, "lineno", 0) or 0)},
-                        )
-                    )
-    return hits[:MAX_HITS]
+    from jevops.nca import matching_top_level
+
+    rows = matching_top_level(root or HERE, query, cap_hits=MAX_HITS)
+    return [
+        _hit(
+            str(row["name"]),
+            source="ast",
+            query=query,
+            path=str(row["path"]),
+            extra={"lineno": int(row.get("lineno") or 0)},
+        )
+        for row in rows
+    ]
 
 
 def search_rg(query: str, *, root: Optional[Path] = None) -> tuple[list[dict[str, Any]], str]:
-    base = root or HERE
-    rg = shutil.which("rg")
-    if not rg:
-        return [], "rg_missing"
-    pattern = _IDENT.search(query)
-    needle = pattern.group(0) if pattern else query[:40]
-    if not needle:
-        return [], "empty_query"
-    try:
-        proc = subprocess.run(
-            [rg, "-n", "--glob", "*.py", "--glob", "*.lean", "-e", needle, str(base)],
-            capture_output=True,
-            text=True,
-            timeout=RG_TIMEOUT,
-            check=False,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        return [], "rg_failed"
-    hits: list[dict[str, Any]] = []
-    for line in (proc.stdout or "").splitlines()[:MAX_HITS]:
-        parts = line.split(":", 2)
-        path = Path(parts[0]).name if parts else ""
-        snippet = parts[-1].strip() if parts else line
-        ident = _IDENT.search(snippet)
-        symbol = ident.group(0) if ident else needle
-        hits.append(_hit(symbol, source="rg", query=query, path=path, extra={"line": snippet[:160]}))
-    return hits, "rg"
+    from jevops.search import search_rg as _search_rg
+
+    return _search_rg(
+        query,
+        root=root or HERE,
+        ident_re=_IDENT,
+        timeout=RG_TIMEOUT,
+        cap=MAX_HITS,
+        globs=("*.py", "*.lean"),
+        hit_fn=lambda symbol, path="", snippet="", **_k: _hit(
+            symbol, source="rg", query=query, path=path, extra={"line": snippet}
+        ),
+    )
 
 
 def rank_hits(hits: list[dict[str, Any]], *, limit: int = 16) -> list[dict[str, Any]]:
-    seen: set[tuple[str, str]] = set()
-    ranked = sorted(hits, key=lambda row: (-float(row.get("score") or 0.0), str(row.get("symbol") or "")))
-    out: list[dict[str, Any]] = []
-    for row in ranked:
-        key = (str(row.get("symbol") or ""), str(row.get("source") or ""))
-        if key in seen:
-            continue
-        seen.add(key)
-        out.append(row)
-        if len(out) >= limit:
-            break
-    return out
+    from jevops.search import rank_hits as _rank_hits
+
+    return _rank_hits(hits, limit=limit)
 
 
 def search_symbols(

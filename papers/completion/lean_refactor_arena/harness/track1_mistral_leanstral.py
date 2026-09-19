@@ -12,7 +12,6 @@ Not an Arena ranking.
 from __future__ import annotations
 
 import argparse
-import ast
 import hashlib
 import json
 import os
@@ -40,6 +39,7 @@ KEYFILES = (
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import generate_text as lra_gt  # noqa: E402
 import splice as lra_splice  # noqa: E402
 import track1_ledger as lra_t1  # noqa: E402
@@ -90,62 +90,59 @@ class Track1MistralError(RuntimeError):
 
 
 def load_keyfiles() -> None:
+    from jevops.outer import load_env_file
+
     for path in KEYFILES:
-        if not path.is_file():
-            continue
-        for line in path.read_text(encoding="utf-8").splitlines():
-            line = line.strip()
-            if not line or line.startswith("#") or "=" not in line:
-                continue
-            name, value = line.split("=", 1)
-            value = value.strip()
-            if len(value) >= 2 and value[0] == value[-1] and value[0] in "'\"":
-                value = value[1:-1]
-            os.environ.setdefault(name.strip(), value)
+        load_env_file(path, strip_quotes=True)
 
 
 def pin_paths() -> None:
-    os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
-    os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
-    os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
-    text = str(ROOT_ACCEL)
-    if text in sys.path:
-        sys.path.remove(text)
-    sys.path.insert(0, text)
+    from jevops.outer import pin_sys_path
+
+    pin_sys_path(
+        ROOT_ACCEL,
+        defaults={
+            "IPFS_ACCEL_SKIP_CORE": "1",
+            "IPFS_AUTO_INSTALL": "false",
+            "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
+        },
+    )
     lra_ts.ACCEL_ROOT = ROOT_ACCEL
     lra_ts.TYPESAFE_INFERENCE_PATH = ROOT_ACCEL / "ipfs_accelerate_py" / "typesafe_inference.py"
 
 
 def mistral_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
-    source = os.environ if env is None else env
-    return any(str(source.get(name) or "").strip() for name in KEY_ENV_NAMES)
+    from jevops.jev import any_key
+
+    return any_key(os.environ if env is None else env, KEY_ENV_NAMES)
 
 
 def resolve_mistral_key(env: Optional[Mapping[str, str]] = None) -> str:
-    source = os.environ if env is None else env
-    for name in KEY_ENV_NAMES:
-        value = str(source.get(name) or "").strip()
-        if value:
-            return value
-    raise Track1MistralError("MISTRAL_API_KEY is not set")
+    from jevops.outer import first_nonempty
+
+    value = first_nonempty(os.environ if env is None else env, *KEY_ENV_NAMES)
+    if not value:
+        raise Track1MistralError("MISTRAL_API_KEY is not set")
+    return value
 
 
 def _redact_text(text: str, secret: str) -> str:
-    if not text:
-        return ""
-    redacted = text
-    if secret:
-        redacted = redacted.replace(secret, "[redacted]")
-    return redacted
+    from jevops.outer import redact_secret
+
+    return redact_secret(text, secret)
 
 
 def assert_hosted_url(url: str) -> None:
-    parsed = urlparse(url)
-    host = (parsed.hostname or "").lower()
-    if host in FORBIDDEN_HOSTS or host.endswith(".local"):
-        raise Track1MistralError(f"refusing prototype host {host!r}; Track 1 must use {API_HOST}")
-    if host != API_HOST:
-        raise Track1MistralError(f"refusing non-Labs host {host!r}; expected {API_HOST}")
+    from jevops.outer import require_host
+
+    require_host(
+        url,
+        API_HOST,
+        forbidden=FORBIDDEN_HOSTS,
+        error_cls=Track1MistralError,
+        prototype_fmt="refusing prototype host {host!r}; Track 1 must use {expected}",
+        mismatch_fmt="refusing non-Labs host {host!r}; expected {expected}",
+    )
 
 
 def chat_completions(
@@ -176,30 +173,28 @@ def chat_completions(
             payload["temperature"] = 0.3
     if stop:
         payload["stop"] = [str(item) for item in stop if str(item)]
+    from jevops.outer import chat_choice_texts
+    from jevops.outer import http_post
+    from jevops.outer import usage_tokens
+
     raw_body = json.dumps(payload).encode("utf-8")
-    request = urllib.request.Request(
+    started = time.perf_counter()
+    status, raw, final_url, error = http_post(
         url,
-        data=raw_body,
-        method="POST",
+        raw_body,
+        timeout=float(timeout),
         headers={
             "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
             "Accept": "application/json",
         },
     )
-    started = time.perf_counter()
-    try:
-        with urllib.request.urlopen(request, timeout=float(timeout)) as response:
-            raw = response.read().decode("utf-8", errors="replace")
-            status = int(getattr(response, "status", 200))
-            final_url = str(getattr(response, "geturl", lambda: url)())
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace") if exc.fp else ""
+    if error:
+        raise Track1MistralError(_redact_text(error, key)) from None
+    if status is None or int(status) >= 400:
         raise Track1MistralError(
-            _redact_text(f"Mistral HTTP {exc.code}: {detail[:400]}", key)
+            _redact_text(f"Mistral HTTP {status}: {raw[:400]}", key)
         ) from None
-    except Exception as exc:
-        raise Track1MistralError(_redact_text(f"{type(exc).__name__}: {exc}", key)) from None
     assert_hosted_url(final_url or url)
     try:
         data = json.loads(raw)
@@ -207,21 +202,13 @@ def chat_completions(
         raise Track1MistralError(f"Mistral returned invalid JSON: {exc}") from None
     if not isinstance(data, dict):
         raise Track1MistralError("Mistral returned a non-object JSON payload")
-    choices = data.get("choices") if isinstance(data.get("choices"), list) else []
-    texts: list[str] = []
-    for choice in choices:
-        if not isinstance(choice, Mapping):
-            continue
-        message = choice.get("message") if isinstance(choice.get("message"), Mapping) else {}
-        content = str(message.get("content") or "")
-        if content:
-            texts.append(content)
-    message = {}
-    if choices and isinstance(choices[0], Mapping):
-        message = choices[0].get("message") if isinstance(choices[0].get("message"), Mapping) else {}
-    text = texts[0] if texts else str(message.get("content") or "")
-    usage = data.get("usage") if isinstance(data.get("usage"), Mapping) else {}
+    text, _texts, usage = chat_choice_texts(data)
+    inn, out = usage_tokens(usage)
     resolved_model = str(data.get("model") or model)
+    choices = data.get("choices") if isinstance(data.get("choices"), list) else []
+    finish = ""
+    if choices and isinstance(choices[0], Mapping):
+        finish = str(choices[0].get("finish_reason") or "")
     return {
         "text": text,
         "model": resolved_model,
@@ -229,9 +216,9 @@ def chat_completions(
         "object": str(data.get("object") or ""),
         "status": status,
         "url_host": urlparse(final_url or url).hostname,
-        "input_tokens": int(usage.get("prompt_tokens") or usage.get("input_tokens") or 0),
-        "output_tokens": int(usage.get("completion_tokens") or usage.get("output_tokens") or 0),
-        "finish_reason": str((choices[0] or {}).get("finish_reason") or "") if choices else "",
+        "input_tokens": inn,
+        "output_tokens": out,
+        "finish_reason": finish,
         "wall_ms": (time.perf_counter() - started) * 1000.0,
         "hardware_class": HARDWARE_CLASS,
         "prototype_base_url": PROTOTYPE_BASE_URL,
@@ -316,20 +303,9 @@ def generate_mistral(
 
 
 def redact(payload: Any) -> Any:
-    if isinstance(payload, Mapping):
-        out = {}
-        for key, value in payload.items():
-            name = str(key).lower()
-            if "api_key" in name or name in {"authorization", "bearer"}:
-                out[key] = "[redacted]" if value else value
-            else:
-                out[key] = redact(value)
-        return out
-    if isinstance(payload, list):
-        return [redact(item) for item in payload]
-    if isinstance(payload, str) and (payload.startswith("apikey_") or payload.startswith("sk-")):
-        return "[redacted]"
-    return payload
+    from jevops.jev import redact as _fn
+
+    return _fn(payload, exact=("authorization", "bearer"), prefixes=("apikey_", "sk-"))
 
 
 def run_named(
@@ -431,21 +407,16 @@ def run_named(
 
 
 def audit_source() -> dict[str, Any]:
+    from jevops.repair import audit_source as _audit
+
     text = Path(__file__).read_text(encoding="utf-8")
-    tree = ast.parse(text)
-    imported = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            imported.update(alias.name.split(".", 1)[0] for alias in node.names)
-        elif isinstance(node, ast.ImportFrom) and node.module:
-            imported.add(node.module.split(".", 1)[0])
-    lock_ex = any(isinstance(node, ast.Attribute) and node.attr == "LOCK_EX" for node in ast.walk(tree))
-    docker0 = PROTOTYPE_BASE_URL in text
+    out = _audit(text, forbidden_imports=FORBIDDEN_IMPORT_NAMES)
+    imported = set(out["imported_names"])
     return {
-        "forbidden_imports": sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES),
-        "uses_lock_ex": lock_ex,
-        "mentions_prototype_url": docker0,
-        "ok": not lock_ex and "typesafe_sdk" not in imported,
+        "forbidden_imports": out["forbidden_imports"],
+        "uses_lock_ex": out["uses_lock_ex"],
+        "mentions_prototype_url": PROTOTYPE_BASE_URL in text,
+        "ok": not out["uses_lock_ex"] and "typesafe_sdk" not in imported,
     }
 
 

@@ -3,9 +3,5 @@ name: lra-thompson
 description: Thompson sampling on LRA Bayes skill posteriors. Use to explore high-variance stems or CALL ptr://skill/port_thompson. Draw is not a lake admit.
 ---
 
-# LRA Thompson sampling
-
-`nca_rankers.thompson_rank` samples `Beta(α,β)` per pipeline stem (two gammas).
-
-- CALL `ptr://skill/port_thompson`. Syncs Bayes counts if empty, then writes `nca.pipeline_bias` from draws.
-- Use when the mean would starve a rarely tried stem. Lake still admits. Never docker0.
+Canonical skill: `~/lift_coding/JevOps/skills/jevops-thompson/SKILL.md`.
+Module: `jevops.rankers`. PYTHONPATH must include JevOps.

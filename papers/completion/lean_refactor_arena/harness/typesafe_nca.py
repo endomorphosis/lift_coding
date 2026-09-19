@@ -45,19 +45,19 @@ def feed_state(memory: dict[str, Any], *, tactics: str = "", problem: str = "") 
     """Overlay memory plus LRA Lean residuals / decision tree."""
 
     import portable_rewrites as lra_port
-    from jevops.nca import feed_memory
-    from jevops.nca import overlay_counts
-
+    from jevops.nca import feed_with_overlays
     from jevops.nca import invert_multimap
-    from jevops.nca import overlay_tree
 
-    fed = feed_memory(memory, tactics=tactics, problem=problem, heal=True)
-    grid = _grid(memory)
-    if tactics:
-        counts = lra_port.analyze_residuals(tactics)
-        overlay_counts(memory, counts, inverse=invert_multimap(lra_port.SKILL_RESIDUAL))
-        overlay_tree(memory, lra_port.decision_tree(tactics, memory=memory, name=problem))
-    return {"n_cells": len(grid), "grid": grid, **{k: v for k, v in fed.items() if k not in {"n_cells", "grid"}}}
+    counts = lra_port.analyze_residuals(tactics) if tactics else None
+    tree = lra_port.decision_tree(tactics, memory=memory, name=problem) if tactics else None
+    return feed_with_overlays(
+        memory,
+        tactics=tactics,
+        problem=problem,
+        counts=counts,
+        inverse=invert_multimap(lra_port.SKILL_RESIDUAL) if counts else None,
+        tree=tree,
+    )
 
 
 def _safe_path(path: str | Path) -> Optional[Path]:
@@ -121,11 +121,9 @@ def mutate(
     from jevops.nca import apply_mutate
 
     def _fold(body: str) -> Optional[dict[str, Any]]:
-        for spec in memory.get("skills") or []:
-            nxt = lra_port.fold_from_memory_skill(body, spec)
-            if nxt != body:
-                return {"stem": spec.get("stem"), "tactics": nxt}
-        return None
+        from jevops.memory import first_fold
+
+        return first_fold(body, memory.get("skills") or [], fold_fn=lra_port.fold_from_memory_skill)
 
     def _mint() -> dict[str, Any]:
         prop = lra_bind.propose_skill_from_research(memory, problem)
@@ -138,21 +136,23 @@ def mutate(
 
 
 def nca_tool(name: str, **kwargs: Any) -> dict[str, Any]:
-    key = str(name or "").strip()
+    from jevops.nca import dispatch_tool
+
     memory = kwargs.get("memory") if isinstance(kwargs.get("memory"), dict) else {}
     tactics = str(kwargs.get("tactics") or "")
     problem = str(kwargs.get("problem") or "")
-    if key == "nca_walk":
-        return walk_codebase()
-    if key == "nca_hook":
-        return hook_and_eval(str(kwargs.get("path") or "portable_rewrites.py"))
-    if key == "nca_mutate":
-        return mutate(memory, tactics=tactics, problem=problem, op=str(kwargs.get("op") or "auto"))
-    if key == "nca_eval":
-        return evaluate_tests(*list(kwargs.get("tests") or ["test_skill_improve_loop"]))
-    from jevops.nca import dispatch_tool
-
-    return dispatch_tool(name, **kwargs)
+    return dispatch_tool(
+        name,
+        extras={
+            "nca_walk": lambda **_k: walk_codebase(),
+            "nca_hook": lambda **k: hook_and_eval(str(k.get("path") or "portable_rewrites.py")),
+            "nca_mutate": lambda **k: mutate(
+                memory, tactics=tactics, problem=problem, op=str(k.get("op") or "auto")
+            ),
+            "nca_eval": lambda **k: evaluate_tests(*list(k.get("tests") or ["test_skill_improve_loop"])),
+        },
+        **kwargs,
+    )
 
 
 def _nca_tick_entry(**kwargs: Any) -> dict[str, Any]:

@@ -9,7 +9,6 @@ Not official Track 2. Not an Arena ranking. Never LOCK_EX.
 from __future__ import annotations
 
 import argparse
-import ast
 import hashlib
 import json
 import os
@@ -103,24 +102,22 @@ class Draft:
 
 
 def load_keyfile() -> None:
-    if not KEYFILE.is_file():
-        return
-    for line in KEYFILE.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        name, value = line.split("=", 1)
-        os.environ.setdefault(name.strip(), value.strip())
+    from jevops.outer import load_env_file
+
+    load_env_file(KEYFILE)
 
 
 def pin_typesafe_path() -> None:
-    os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
-    os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
-    os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
-    text = str(ROOT_ACCEL)
-    if text in sys.path:
-        sys.path.remove(text)
-    sys.path.insert(0, text)
+    from jevops.outer import pin_sys_path
+
+    pin_sys_path(
+        ROOT_ACCEL,
+        defaults={
+            "IPFS_ACCEL_SKIP_CORE": "1",
+            "IPFS_AUTO_INSTALL": "false",
+            "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
+        },
+    )
 
 
 def tactic_block(record: Mapping[str, Any]) -> str:
@@ -129,89 +126,55 @@ def tactic_block(record: Mapping[str, Any]) -> str:
 
 
 def case_spans(text: str) -> list[CaseSpan]:
-    matches = list(_CASE.finditer(text))
-    spans: list[CaseSpan] = []
-    for index, match in enumerate(matches):
-        indent = len(match.group("indent"))
-        end = len(text)
-        for nxt in matches[index + 1 :]:
-            if len(nxt.group("indent")) <= indent:
-                end = nxt.start()
-                break
-        header_end = match.end()
-        if header_end < len(text) and text[header_end] == "\n":
-            header_end += 1
-        spans.append(
-            CaseSpan(
-                label=str(match.group("label")),
-                start=match.start(),
-                header_end=header_end,
-                end=end,
-                indent=indent,
-            )
+    from jevops.mask import nested_header_spans
+
+    rows = nested_header_spans(
+        text,
+        list(_CASE.finditer(text)),
+        indent_of=lambda match: len(match.group("indent")),
+        label_of=lambda match: str(match.group("label")),
+    )
+    return [
+        CaseSpan(
+            label=str(row["label"]),
+            start=int(row["start"]),
+            header_end=int(row["header_end"]),
+            end=int(row["end"]),
+            indent=int(row["indent"]),
         )
-    return spans
+        for row in rows
+    ]
 
 
 def replace_case_body(text: str, span: CaseSpan, body: str) -> str:
-    indent = " " * (span.indent + 2)
-    replacement = indent + body.strip() + "\n"
-    return text[: span.header_end] + replacement + text[span.end :]
+    from jevops.mask import replace_span
+
+    return replace_span(text, span.header_end, span.end, body, indent=" " * (span.indent + 2))
 
 
 def collapse_simp_at(text: str) -> str:
-    lines = text.splitlines()
-    out: list[str] = []
-    index = 0
-    while index < len(lines):
-        match = _SIMP_AT.match(lines[index])
-        if not match:
-            out.append(lines[index])
-            index += 1
-            continue
-        indent = match.group("indent")
-        run = 0
-        while index < len(lines) and _SIMP_AT.match(lines[index]) and lines[index].startswith(indent):
-            run += 1
-            index += 1
-        if run >= 2:
-            out.append(f"{indent}simp_all")
-        else:
-            out.append(lines[index - 1] if run == 1 else f"{indent}simp_all")
-    return "\n".join(out)
+    from jevops.mask import collapse_runs
+
+    return collapse_runs(
+        text,
+        lambda line: bool(_SIMP_AT.match(line)),
+        min_run=2,
+        replacement=lambda indent, _run: f"{indent}simp_all",
+    )
 
 
 def drop_redundant_simp_at(text: str) -> str:
     """Delete a ``simp at`` run when the next tactic is already ``simp_all``."""
 
-    lines = text.splitlines()
-    out: list[str] = []
-    index = 0
-    while index < len(lines):
-        match = _SIMP_AT.match(lines[index])
-        if not match:
-            out.append(lines[index])
-            index += 1
-            continue
-        indent = match.group("indent")
-        run_end = index
-        while run_end < len(lines) and _SIMP_AT.match(lines[run_end]) and lines[run_end].startswith(indent):
-            run_end += 1
-        skip = run_end
-        while skip < len(lines) and not lines[skip].strip():
-            skip += 1
-        following = lines[skip].strip() if skip < len(lines) else ""
-        # A single ``simp at hyp`` immediately before ``simp_all`` is also residual.
-        if run_end > index and following.startswith("simp_all"):
-            index = run_end
-            continue
-        if run_end - index >= 2:
-            out.append(f"{indent}simp_all")
-            index = run_end
-            continue
-        out.append(lines[index])
-        index += 1
-    return "\n".join(out)
+    from jevops.mask import rewrite_runs
+
+    return rewrite_runs(
+        text,
+        lambda line: bool(_SIMP_AT.match(line)),
+        following_pred=lambda following: following.startswith("simp_all"),
+        min_collapse=2,
+        replacement=lambda indent, _run: f"{indent}simp_all",
+    )
 
 
 def span_preserving_drafts(tactics: str) -> list[Draft]:
@@ -263,29 +226,35 @@ def drop_have_obtain(text: str) -> str:
 
 
 def first_case_only(text: str) -> str:
+    from jevops.outer import cut_prefix
+
     spans = case_spans(text)
     if not spans:
         return text
-    first = spans[0]
-    return text[: first.end].rstrip() + "\n"
+    return cut_prefix(text, spans[0].end)
 
 
 def _draft_id(index: int) -> str:
-    return f"d{index:03d}"
+    from jevops.pick import padded_id
+
+    return padded_id(index)
 
 
 def _push(drafts: list[Draft], seen: set[str], family: str, tactics: str, ops: Sequence[str]) -> None:
-    body = tactics.strip("\n")
-    if not body or body in seen or len(drafts) >= MAX_DRAFTS:
-        return
-    seen.add(body)
-    drafts.append(
-        Draft(
-            draft_id=_draft_id(len(drafts)),
+    from jevops.pick import padded_id
+    from jevops.pick import unique_push
+
+    unique_push(
+        drafts,
+        seen,
+        tactics,
+        lambda index, body: Draft(
+            draft_id=padded_id(index),
             family=family,
             tactics=body,
             ops=tuple(ops),
-        )
+        ),
+        cap=MAX_DRAFTS,
     )
 
 
@@ -294,7 +263,9 @@ def neighbor_tactic_head(record: Mapping[str, Any], *, n_lines: int = NEIGHBOR_H
         block = tactic_block(record)
     except Exception:
         return ""
-    return "\n".join(block.splitlines()[:n_lines]).strip("\n")
+    from jevops.outer import head_lines
+
+    return head_lines(block, n_lines)
 
 
 def enumerate_drafts(
@@ -347,16 +318,18 @@ def enumerate_drafts(
 
 
 def draft_catalog(drafts: Sequence[Draft]) -> list[dict[str, Any]]:
-    return [
+    from jevops.pick import project_items
+
+    return project_items(
+        drafts,
         {
-            "id": item.draft_id,
-            "family": item.family,
-            "ops": list(item.ops),
-            "n_chars": item.n_chars,
-            "head": item.head,
-        }
-        for item in drafts
-    ]
+            "id": "draft_id",
+            "family": "family",
+            "ops": lambda item: list(item.ops),
+            "n_chars": "n_chars",
+            "head": "head",
+        },
+    )
 
 
 def fanout_state(
@@ -409,49 +382,24 @@ def fanout_questions(drafts: Sequence[Draft], *, Choice: Any, Noul: Any, Score: 
 
 
 def redact(payload: Any) -> Any:
-    if isinstance(payload, Mapping):
-        out = {}
-        for key, value in payload.items():
-            name = str(key).lower()
-            if "api_key" in name or name in {"authorization", "token"} and name not in {
-                "input_tokens",
-                "output_tokens",
-                "total_tokens",
-                "completion_tokens",
-                "prompt_tokens",
-            }:
-                out[key] = "[redacted]" if value else value
-            else:
-                out[key] = redact(value)
-        return out
-    if isinstance(payload, list):
-        return [redact(item) for item in payload]
-    if isinstance(payload, str) and payload.startswith("apikey_"):
-        return "[redacted]"
-    return payload
+    from jevops.jev import redact as _fn
+
+    return _fn(payload)
 
 
 def rank_choice(probabilities: Mapping[str, Any], drafts: Sequence[Draft], *, k: int = 8) -> list[dict[str, Any]]:
-    by_id = {item.draft_id: item for item in drafts}
-    ranked = sorted(
-        ((str(key), float(value)) for key, value in probabilities.items()),
-        key=lambda item: item[1],
-        reverse=True,
+    from jevops.pick import attach_ranked, rank_by_prob
+
+    return attach_ranked(
+        rank_by_prob(probabilities, k=k),
+        {item.draft_id: item for item in drafts},
+        {
+            "family": "family",
+            "ops": lambda item: list(item.ops),
+            "n_chars": "n_chars",
+            "head": "head",
+        },
     )
-    rows = []
-    for draft_id, probability in ranked[:k]:
-        draft = by_id.get(draft_id)
-        rows.append(
-            {
-                "id": draft_id,
-                "probability": probability,
-                "family": None if draft is None else draft.family,
-                "ops": None if draft is None else list(draft.ops),
-                "n_chars": None if draft is None else draft.n_chars,
-                "head": None if draft is None else draft.head,
-            }
-        )
-    return rows
 
 
 def rank_problem(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]], *, live: bool) -> dict[str, Any]:
@@ -509,19 +457,17 @@ def rank_problem(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.repair import audit_source as _audit
+
     text = Path(__file__).read_text(encoding="utf-8") if source is None else source
-    tree = ast.parse(text)
-    imported = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            imported.update(alias.name.split(".", 1)[0] for alias in node.names)
-        elif isinstance(node, ast.ImportFrom) and node.module:
-            imported.add(node.module.split(".", 1)[0])
-    lock_ex = any(isinstance(node, ast.Attribute) and node.attr == "LOCK_EX" for node in ast.walk(tree))
+    out = _audit(text, forbidden_imports=FORBIDDEN_IMPORT_NAMES)
+    imported = set(out["imported_names"])
     return {
-        "forbidden_imports": sorted(name for name in imported if name in FORBIDDEN_IMPORT_NAMES),
-        "uses_lock_ex": lock_ex,
-        "ok": not lock_ex and "generate_text" not in imported and "typesafe_sdk" not in imported,
+        "forbidden_imports": out["forbidden_imports"],
+        "uses_lock_ex": out["uses_lock_ex"],
+        "ok": not out["uses_lock_ex"]
+        and "generate_text" not in imported
+        and "typesafe_sdk" not in imported,
     }
 
 

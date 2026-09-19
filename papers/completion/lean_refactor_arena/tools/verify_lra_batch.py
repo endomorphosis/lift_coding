@@ -37,6 +37,7 @@ WARMUP_JSONL = PAPER_ROOT / "data" / "benchmark_data_warmup.jsonl"
 
 if str(HARNESS) not in sys.path:
     sys.path.insert(0, str(HARNESS))
+import _jevops_path  # noqa: E402,F401
 import splice as lra_splice  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
@@ -1404,8 +1405,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
 
 
 def _print_json(payload: Mapping[str, Any]) -> None:
-    json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-    sys.stdout.write("\n")
+    from jevops.outer import print_json
+
+    print_json(payload)
 
 
 def _print_fail(message: str, payload: Mapping[str, Any]) -> None:

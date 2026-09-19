@@ -78,12 +78,16 @@ def binders_from_line(line: str) -> list[str]:
             names = ["this"]
         if stripped.startswith("have "):
             names.append("this")
-        return list(dict.fromkeys(names))
+        from jevops.outer import unique_keep
+
+        return unique_keep(names)
     return []
 
 
 def idents_in(text: str) -> set[str]:
-    return {tok for tok in IDENT.findall(text) if tok not in KEYWORDS}
+    from jevops.repair import idents_in as _fn
+
+    return _fn(text, pattern=IDENT, stopwords=KEYWORDS)
 
 
 def binders_used_later(tactics: str, start: int, end: int, original: str) -> list[str]:
@@ -92,8 +96,9 @@ def binders_used_later(tactics: str, start: int, end: int, original: str) -> lis
         return ["__keep__"]
     if not names:
         return []
-    later = idents_in(tactics[end:])
-    return [name for name in names if name in later]
+    from jevops.repair import names_used_later
+
+    return names_used_later(tactics, end, names, ident_fn=idents_in)
 
 
 def _is_prefix_have(tactics: str, start: int) -> bool:
@@ -140,23 +145,19 @@ def safe_to_drop_span(tactics: str, start: int, end: int, original: str) -> bool
 def drop_unused_binders(tactics: str, *, kinds: tuple[str, ...] = ("rename_i", "have")) -> str:
     """Delete rename_i/have lines whose binders are not used later."""
 
-    lines = tactics.splitlines(keepends=True)
-    offset = 0
-    keep: list[str] = []
-    for line in lines:
-        start, end = offset, offset + len(line)
+    from jevops.mask import filter_keepends
+
+    def _drop(line: str, start: int, end: int) -> bool:
         stripped = line.strip()
-        drop = False
         if "rename_i" in kinds and stripped.startswith("rename_i "):
-            drop = safe_to_drop_span(tactics, start, end, line.rstrip("\n"))
+            return safe_to_drop_span(tactics, start, end, line.rstrip("\n"))
         if "have" in kinds and stripped.startswith("have "):
-            drop = safe_to_drop_span(tactics, start, end, line.rstrip("\n"))
+            return safe_to_drop_span(tactics, start, end, line.rstrip("\n"))
         if "obtain" in kinds and stripped.startswith("obtain "):
-            drop = safe_to_drop_span(tactics, start, end, line.rstrip("\n"))
-        if not drop:
-            keep.append(line)
-        offset = end
-    return "".join(keep).strip("\n")
+            return safe_to_drop_span(tactics, start, end, line.rstrip("\n"))
+        return False
+
+    return filter_keepends(tactics, _drop)
 
 
 def unknown_identifiers(errors: Sequence[Mapping[str, Any]]) -> list[str]:
@@ -177,18 +178,17 @@ def insert_missing_line(draft: str, reference: str, missing_line: str) -> str:
 def restore_unknown_binders(draft: str, reference: str, errors: Sequence[Mapping[str, Any]]) -> str:
     """If lake says Unknown identifier X, restore the reference line that bound X."""
 
-    out = draft
-    for ident in unknown_identifiers(errors):
-        bound = None
-        for line in reference.splitlines():
-            left = line.split(":=", 1)[0]
-            if ident in binders_from_line(line) or ident in IDENT.findall(left):
-                bound = line
-                break
-        if bound is None:
-            continue
-        out = insert_missing_line(out, reference, bound)
-    return out.strip("\n")
+    from jevops.outer import first_matching_line
+    from jevops.repair import restore_bound_lines
+
+    def _bound(ref: str, ident: str) -> Optional[str]:
+        return first_matching_line(
+            ref,
+            lambda line: ident in binders_from_line(line)
+            or ident in IDENT.findall(line.split(":=", 1)[0]),
+        )
+
+    return restore_bound_lines(draft, reference, unknown_identifiers(errors), bound_fn=_bound)
 
 
 def error_class(errors: Sequence[Mapping[str, Any]]) -> str:
@@ -196,7 +196,7 @@ def error_class(errors: Sequence[Mapping[str, Any]]) -> str:
     from jevops.repair import join_errors
 
     blob = join_errors(errors)
-    hit = classify_text(
+    return classify_text(
         blob,
         (
             ("unknown_identifier", ("unknown identifier",)),
@@ -205,13 +205,8 @@ def error_class(errors: Sequence[Mapping[str, Any]]) -> str:
             ("unknown_tactic", ("unknown tactic",)),
             ("placeholder", ("don't know how to synthesize placeholder",)),
         ),
+        all_of=(("unsolved_goals", ("tactic", "unsolved")),),
     )
-    if hit != "other":
-        return hit
-    low = blob.lower()
-    if "tactic" in low and "unsolved" in low:
-        return "unsolved_goals"
-    return "other"
 
 
 # Draft IDs like pca_search_space_d012 change every round; ban the body, not the slot.
@@ -342,30 +337,17 @@ def expand_skills_from_memory(
     """Record keep-structure mints when AutoResearch says do not cut the residual."""
 
     import portable_rewrites as lra_port
+    from jevops.memory import expand_keep_notes
 
-    prop = propose_skill_from_research(memory, name)
-    notes: list[dict[str, Any]] = []
-    if prop.get("keep_structure") and prop.get("mint"):
-        notes.append({**prop, "name": name, "action": "keep_structure"})
-    if tactics:
-        residuals = lra_port.analyze_residuals(tactics)
-        for stem in lra_port.KEEP_STRUCTURE:
-            residual = lra_port.SKILL_RESIDUAL.get(stem, stem)
-            if residuals.get(residual):
-                notes.append(
-                    {
-                        "name": name,
-                        "action": "keep_structure",
-                        "residual": residual,
-                        "mint": [stem],
-                        "present": residuals.get(residual),
-                    }
-                )
-    if notes:
-        from jevops.memory import record_named_notes
-
-        record_named_notes(memory, "expanded", name, notes, keep=8)
-    return notes
+    return expand_keep_notes(
+        memory,
+        name=name,
+        tactics=tactics,
+        keep_mints=KEEP_MINTS,
+        residual_fn=lra_port.analyze_residuals if tactics else None,
+        keep_stems=lra_port.KEEP_STRUCTURE,
+        residual_map=lra_port.SKILL_RESIDUAL,
+    )
 
 
 ALLOWED_KEEP = frozenset(
