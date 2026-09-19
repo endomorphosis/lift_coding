@@ -508,23 +508,9 @@ PIPELINE: tuple[tuple[str, Any], ...] = (
 
 
 def _research_help(memory: Optional[dict[str, Any]], stem: str, *, name: str = "") -> float:
-    residual = SKILL_RESIDUAL.get(stem)
-    if not residual:
-        return 0.0
-    total = 0.0
-    n = 0
-    for row in (memory or {}).get("research") or []:
-        if name and row.get("name") != name:
-            continue
-        help_scores = row.get("help") or {}
-        if residual in help_scores:
-            total += float(help_scores.get(residual) or 0.0)
-            n += 1
-    if n:
-        return total / n
-    if name:
-        return _research_help(memory, stem, name="")
-    return 0.0
+    from jevops.memory import research_help
+
+    return research_help(memory, stem, name=name, residual_map=SKILL_RESIDUAL)
 
 
 def pipeline_order(
@@ -532,23 +518,8 @@ def pipeline_order(
 ) -> tuple[tuple[str, Any], ...]:
     """Reorder PIPELINE by memory: wins, then AutoResearch help, failures last."""
 
-    from collections import Counter
+    from jevops.pick import order_pipeline
 
-    wins: Counter[str] = Counter()
-    losses: Counter[str] = Counter()
-    for row in (memory or {}).get("successes") or []:
-        kind = str(row.get("kind") or "")
-        if kind.startswith("port_"):
-            stem = kind[len("port_") :].split("_pipeline")[0]
-            wins[stem] += 1
-        elif kind in {"drop_unused_binders", "collapse_simp_at"}:
-            wins[kind] += 1
-    for row in (memory or {}).get("failures") or []:
-        kind = str(row.get("kind") or "")
-        if kind.startswith("port_"):
-            stem = kind[len("port_") :].split("_pipeline")[0]
-            losses[stem] += 1
-    bias = list(((memory or {}).get("nca") or {}).get("pipeline_bias") or [])
     bayes_mean: dict[str, float] = {}
     try:
         import nca_rankers as lra_rank
@@ -557,36 +528,22 @@ def pipeline_order(
             bayes_mean[stem] = float(lra_rank.posterior(dict(memory or {}), stem).get("mean") or 0.5)
     except Exception:
         bayes_mean = {}
-    ranked = sorted(
+    return order_pipeline(
         PIPELINE,
-        key=lambda item: (
-            -wins[item[0]],
-            losses[item[0]],
-            bias.index(item[0]) if item[0] in bias else len(bias),
-            -bayes_mean.get(item[0], 0.5),
-            -_research_help(memory, item[0], name=name),
-            0 if item[0] in KEEP_STRUCTURE else 1,
-            item[0],
-        ),
+        memory,
+        name=name,
+        residual_map=SKILL_RESIDUAL,
+        keep_stems=KEEP_STRUCTURE,
+        bayes_mean=bayes_mean,
     )
-    return tuple(ranked)
 
 
 def fold_from_memory_skill(tactics: str, spec: Mapping[str, Any]) -> str:
     """Apply a memory-installed literal fold. Keeps listed tactic words."""
 
-    old = str(spec.get("old") or "")
-    new = str(spec.get("new") or "")
-    if not old or old not in tactics:
-        return tactics
-    keep = [str(item) for item in (spec.get("keep") or [])]
-    nxt = tactics.replace(old, new, max(1, int(spec.get("count") or 1)))
-    for word in keep:
-        if word in old and word not in nxt:
-            return tactics
-    if lra_loop.token_count(nxt) >= lra_loop.token_count(tactics):
-        return tactics
-    return nxt
+    from jevops.memory import apply_literal_fold
+
+    return apply_literal_fold(tactics, spec, token_fn=lra_loop.token_count)
 
 
 def compose_pipeline(
@@ -1024,18 +981,13 @@ def available_skills(
 ) -> dict[str, object]:
     """Named skills that actually change this script (skill-suggestion cookbook)."""
 
-    skills: dict[str, object] = {"keep": SKILL_CRITERIA["keep"]}
-    for item in portable_drafts(tactics, memory=memory, name=name):
-        kind = str(item["kind"])
-        key = "port_pipeline" if kind.startswith("port_pipeline_") else kind
-        skills[kind] = SKILL_CRITERIA.get(
-            key,
-            {
-                "what": f"{item.get('family')}; {item.get('token_count')} tok closed fold",
-                "not_for": "A fold that TypeSafe Noul has already fired on this problem",
-            },
-        )
-    return skills
+    from jevops.pick import skills_from_drafts
+
+    return skills_from_drafts(
+        portable_drafts(tactics, memory=memory, name=name),
+        keep_spec=SKILL_CRITERIA["keep"],
+        criteria=SKILL_CRITERIA,
+    )
 
 
 def decision_tree(
@@ -1047,13 +999,6 @@ def decision_tree(
 ) -> dict[str, list[str]]:
     """Family → skill kinds TypeSafe can nest into (decision-tree cookbook)."""
 
-    tree: dict[str, list[str]] = {}
-    for item in portable_drafts(tactics, skip=skip, memory=memory, name=name):
-        fam = str(item.get("family") or "search_space")
-        kind = str(item.get("kind") or "")
-        if not kind:
-            continue
-        kids = tree.setdefault(fam, [])
-        if kind not in kids:
-            kids.append(kind)
-    return tree
+    from jevops.pick import tree_from_drafts
+
+    return tree_from_drafts(portable_drafts(tactics, skip=skip, memory=memory, name=name))

@@ -32,10 +32,15 @@ ROUTER_TIMEOUT = 90.0
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import binder_use as lra_bind  # noqa: E402
 import random_canary as lra_rand  # noqa: E402
 import track1_ledger as lra_t1  # noqa: E402
 import typesafe_inner as lra_inner  # noqa: E402
+from jevops.outer import deterministic_route  # noqa: E402
+from jevops.outer import nca_status as nca_status_for_router  # noqa: E402
+from jevops.outer import parse_action as _parse_action  # noqa: E402
+from jevops.outer import route_next as _route_next  # noqa: E402
 
 SMALL_NAMES = (
     "CallElimCorrect.substOldPostSubset",
@@ -50,6 +55,8 @@ SMALL_NAMES = (
 def keep_best_board(out: Path) -> dict[str, int]:
     """Shortest random-best / cascade-best token count per small canary."""
 
+    from jevops.outer import tokens_from_canaries
+
     board: dict[str, int] = {}
     latest = out / "random-canary-latest.json"
     if latest.is_file():
@@ -57,21 +64,14 @@ def keep_best_board(out: Path) -> dict[str, int]:
             payload = json.loads(latest.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             payload = {}
-        for row in payload.get("canaries") or []:
-            name = str((row.get("analysis") or {}).get("name") or "")
-            tok = (row.get("analysis") or {}).get("n_tokens")
-            if name in SMALL_NAMES and tok:
-                board[name] = int(tok)
+        board.update(tokens_from_canaries(payload, names=SMALL_NAMES))
+    from jevops.outer import glob_stem_int
+
     for name in SMALL_NAMES:
         safe = name.replace("/", "_")[:80]
-        bests = sorted(
-            out.glob(f"random-best-{safe}-*.lean"),
-            key=lambda path: int(path.stem.rsplit("-", 1)[-1])
-            if path.stem.rsplit("-", 1)[-1].isdigit()
-            else 10**9,
-        )
+        bests = glob_stem_int(out, f"random-best-{safe}-*.lean")
         if bests:
-            file_tok = int(bests[0].stem.rsplit("-", 1)[-1])
+            file_tok = int(bests[0][0])
             board[name] = min(int(board.get(name) or file_tok), file_tok)
             continue
         if name == "Core.InitsUpdatesComm" and (out / "cascade-best-139.lean").is_file():
@@ -80,114 +80,15 @@ def keep_best_board(out: Path) -> dict[str, int]:
 
 
 def board_total(board: Mapping[str, int]) -> int:
-    return int(sum(board.values()))
+    from jevops.outer import board_total as _fn
+
+    return _fn(board)
 
 
 def parse_action(text: str) -> dict[str, Any]:
     """First JSON object in grok text; fail closed to action=run."""
 
-    match = _JSON_OBJ.search(str(text or ""))
-    if not match:
-        return {"action": "run", "reason": "no_json"}
-    try:
-        raw = json.loads(match.group(0))
-    except json.JSONDecodeError:
-        return {"action": "run", "reason": "bad_json"}
-    if not isinstance(raw, dict):
-        return {"action": "run", "reason": "not_object"}
-    action = str(raw.get("action") or "run").strip()
-    if action not in ACTIONS:
-        return {"action": "run", "reason": "unknown_action"}
-    out = {"action": action, "reason": str(raw.get("reason") or "router")}
-    for key in ("stem", "name", "old", "new", "family"):
-        if key in raw:
-            out[key] = str(raw.get(key) or "")
-    if "keep" in raw and isinstance(raw["keep"], list):
-        out["keep"] = [str(item) for item in raw["keep"]]
-    if "count" in raw:
-        try:
-            out["count"] = int(raw["count"])
-        except (TypeError, ValueError):
-            out["count"] = 1
-    return out
-
-
-def deterministic_route(
-    *,
-    gaps: list[dict[str, Any]],
-    last_lake: list[dict[str, Any]],
-    stalled: bool,
-) -> dict[str, Any]:
-    """Closed-vocab next action from AutoResearch gaps + last lake (no grok)."""
-
-    failed = [
-        row
-        for row in last_lake
-        if row.get("ok") is False and str(row.get("kind") or "").startswith("port_")
-    ]
-    if failed:
-        kind = str(failed[0].get("kind") or "")
-        stem = kind[len("port_") :] if kind.startswith("port_") else kind
-        return {
-            "action": "skip_stem",
-            "stem": stem.split("_pipeline")[0],
-            "name": str(failed[0].get("name") or ""),
-            "reason": "lake_failed_port",
-        }
-    for gap in gaps:
-        mints = list((gap.get("proposed") or {}).get("mint") or gap.get("keep_structure") or [])
-        if mints:
-            return {
-                "action": "mint",
-                "stem": str(mints[0]),
-                "name": str(gap.get("name") or ""),
-                "reason": "autoresearch_mint",
-            }
-    if last_lake and all(str(row.get("skipped") or "") == "nca_budget" for row in last_lake):
-        return {"action": "stop", "reason": "nca_budget"}
-    if stalled:
-        return {"action": "stop", "reason": "no_token_cut"}
-    return {"action": "nest_inner", "reason": "continue_typesafe"}
-
-
-def nca_status_for_router(memory: Optional[Mapping[str, Any]] = None) -> dict[str, Any]:
-    """Compact NCA snapshot for the outer Grok prompt."""
-
-    mem = dict(memory or {})
-    try:
-        import typesafe_nca as lra_nca
-        import board_graph as lra_board
-
-        halt = lra_nca.should_halt(mem)
-        window = lra_board.board_window(mem)
-    except Exception:
-        halt, window = {}, []
-    budget = (((mem.get("nca") or {}).get("grid") or {}).get("ptr://tool/budget") or {})
-    plan = {}
-    try:
-        import nca_plan as lra_plan
-
-        plan = lra_plan.plan_window(mem)
-    except Exception:
-        plan = {}
-    kern = dict((mem.get("nca") or {}).get("kernel") or {})
-    stats = dict(kern.get("stats") or {})
-    return {
-        "halt": bool(halt.get("halt")),
-        "budget_dead": bool(halt.get("budget_dead")),
-        "budget_energy": halt.get("budget_energy", budget.get("energy")),
-        "n_hot_tasks": halt.get("n_hot_tasks"),
-        "board_window": window[:6],
-        "plan": plan,
-        "kernel": {
-            "policy": kern.get("policy") or "arc",
-            "tick": kern.get("tick") or 0,
-            "n_l1": len(kern.get("l1") or {}),
-            "n_negative": len(kern.get("negative") or {}),
-            "n_in_flight": len(kern.get("in_flight") or []),
-            "stats": stats,
-        },
-    }
+    return _parse_action(text, actions=ACTIONS)
 
 
 def router_prompt(
@@ -197,41 +98,27 @@ def router_prompt(
     *,
     nca_status: Optional[Mapping[str, Any]] = None,
 ) -> str:
-    compact_gaps = [
-        {
-            "name": item.get("name"),
-            "proposed": item.get("proposed"),
-            "keep_structure": item.get("keep_structure"),
-            "top_help": (item.get("top_help") or [])[:2],
-        }
-        for item in gaps
-    ]
-    compact_lake = [
-        {
-            "name": row.get("name"),
-            "kind": row.get("kind"),
-            "ok": row.get("ok"),
-            "tokens": row.get("tokens"),
-            "skipped": row.get("skipped"),
-            "error_class": row.get("error_class"),
-        }
-        for row in last_lake[:12]
-    ]
-    return (
-        "You are the OUTER Grok loop. Do not write Lean. TypeSafe is the INNER loop.\n"
-        "Reply with one JSON object only, keys: action, stem, name, old, new, keep, reason.\n"
-        f"action must be one of: {', '.join(ACTIONS)}.\n"
-        "nest_inner: enter the TypeSafe inner loop, which keep-loops and recursively nests skill decision-tree children.\n"
-        "run: same as nest_inner (TypeSafe still nests).\n"
-        "install_fold: literal old→new substring fold that keeps intro/constructor/grind/exact/use.\n"
-        "skip_stem: ban a port_ skill that lake-failed.\n"
-        "mint: enable a keep-structure stem already in the harness.\n"
-        "stop: no remaining lake-valid cut. If nca.halt or nca.budget_dead is true, action must be stop.\n"
-        f"keep_best_tokens={json.dumps(dict(board), sort_keys=True)}\n"
-        f"total={board_total(board)}\n"
-        f"gaps={json.dumps(compact_gaps, sort_keys=True)}\n"
-        f"last_lake={json.dumps(compact_lake, sort_keys=True)}\n"
-        f"nca={json.dumps(dict(nca_status or {}), sort_keys=True)}\n"
+    from jevops.outer import format_prompt
+
+    return format_prompt(
+        preamble=(
+            "You are the OUTER Grok loop. Do not write Lean. TypeSafe is the INNER loop.\n"
+            "Reply with one JSON object only, keys: action, stem, name, old, new, keep, reason.\n"
+        ),
+        actions=ACTIONS,
+        extra=(
+            "nest_inner: enter the TypeSafe inner loop, which keep-loops and recursively nests skill decision-tree children.\n"
+            "run: same as nest_inner (TypeSafe still nests).\n"
+            "install_fold: literal old→new substring fold that keeps intro/constructor/grind/exact/use.\n"
+            "skip_stem: ban a port_ skill that lake-failed.\n"
+            "mint: enable a keep-structure stem already in the harness.\n"
+            "stop: no remaining lake-valid cut. If nca.halt or nca.budget_dead is true, action must be stop.\n"
+        ),
+        board=board,
+        gaps=gaps,
+        last_lake=last_lake,
+        nca_status=nca_status,
+        total=board_total(board),
     )
 
 
@@ -249,71 +136,42 @@ def route_next_action(
     """llm_router grok when --llm on; else deterministic AutoResearch route."""
 
     nca = nca_status_for_router(memory)
-    if nca.get("budget_dead"):
-        return {"action": "stop", "reason": "nca_budget", "router": "nca"}
-    if nca.get("halt"):
-        return {"action": "stop", "reason": "nca_halt", "router": "nca"}
-    fallback = deterministic_route(gaps=gaps, last_lake=last_lake, stalled=stalled)
-    if not llm:
-        fallback["router"] = "deterministic"
-        return fallback
-    prompt = router_prompt(board, gaps, last_lake, nca_status=nca)
-    try:
-        text, _identity, _line = lra_t1.generate_grok(
-            prompt,
-            ledger,
-            max_new_tokens=ROUTER_MAX_NEW,
-            timeout=ROUTER_TIMEOUT,
-            generate=generate,
-            fixture=generate is not None,
-        )
-    except Exception as exc:
-        fallback["router"] = "llm_router_error"
-        fallback["error"] = str(exc)[:240]
-        return fallback
-    action = parse_action(text)
-    action["router"] = "llm_router"
-    action["raw_head"] = str(text)[:240]
-    if memory is not None and isinstance(memory, dict):
-        try:
-            import typesafe_nca as lra_nca
+    prompt = ""
+    generate_fn = None
+    if nca.get("budget_dead") or nca.get("halt"):
+        llm = False
+    if llm:
+        prompt = router_prompt(board, gaps, last_lake, nca_status=nca)
 
-            lra_nca.charge_budget(memory, ledger=ledger, event="grok")
-        except Exception:
-            pass
-    return action
+        def generate_fn(prompt: str) -> str:
+            text, _identity, _line = lra_t1.generate_grok(
+                prompt,
+                ledger,
+                max_new_tokens=ROUTER_MAX_NEW,
+                timeout=ROUTER_TIMEOUT,
+                generate=generate,
+                fixture=generate is not None,
+            )
+            return text
+
+    return _route_next(
+        gaps=gaps,
+        last_lake=last_lake,
+        stalled=stalled,
+        llm=llm,
+        memory=memory,
+        generate_fn=generate_fn,
+        prompt=prompt,
+        ledger=ledger,
+    )
 
 
 def apply_action(memory: dict[str, Any], action: Mapping[str, Any]) -> dict[str, Any]:
     """Mutate memory from a closed action. No Python exec."""
 
-    kind = str(action.get("action") or "run")
-    if kind == "skip_stem":
-        stem = str(action.get("stem") or "")
-        name = str(action.get("name") or "")
-        if not stem:
-            return {"ok": False, "reason": "no_stem"}
-        key = f"{name}::port_{stem}" if name else f"*::port_{stem}"
-        blacklist = memory.setdefault("blacklist", [])
-        if key not in blacklist:
-            blacklist.append(key)
-        return {"ok": True, "applied": "skip_stem", "key": key}
-    if kind == "mint":
-        stem = str(action.get("stem") or "")
-        name = str(action.get("name") or "")
-        if not stem:
-            return {"ok": False, "reason": "no_stem"}
-        memory.setdefault("expanded", []).append(
-            {
-                "name": name,
-                "notes": [{"action": "keep_structure", "mint": [stem], "source": "loop"}],
-            }
-        )
-        return {"ok": True, "applied": "mint", "stem": stem}
-    if kind == "install_fold":
-        installed = lra_bind.install_memory_skill(memory, action)
-        return {"ok": bool(installed.get("ok")), **installed}
-    return {"ok": True, "applied": kind}
+    from jevops.outer import apply_action as _apply
+
+    return _apply(memory, action)
 
 
 def canary_args(
@@ -405,21 +263,17 @@ def run_loop(
     """OUTER Grok (llm_router). INNER TypeSafe keep-loop + recursive skill-tree nests."""
 
     memory = memory if memory is not None else lra_bind.load_memory()
-    try:
-        import board_graph as lra_board_seed
+    import board_graph as lra_board_seed
+    from jevops.outer import seed_runtime
 
-        lra_board_seed.seed_nca_from_board(memory)
-        lra_board_seed.overlay_live_board(memory)
-        try:
-            lra_board_seed.seed_keepbest_theorems(
-                memory,
-                keep_best_board(out),
-                warmup=lra_board_seed.warmup_token_map(),
-            )
-        except Exception:
-            pass
-    except Exception:
-        pass
+    seed_runtime(
+        memory,
+        seed_fn=lra_board_seed.seed_nca_from_board,
+        overlay_fn=lra_board_seed.overlay_live_board,
+        keepbest_fn=lambda mem: lra_board_seed.seed_keepbest_theorems(
+            mem, keep_best_board(out), warmup=lra_board_seed.warmup_token_map()
+        ),
+    )
     ledger = lra_t1.ProblemLedger(
         name="warmup#skill-improve-loop",
         max_jev_calls=max(8, 6 * int(rounds) * int(outer) * 3 + 2),
@@ -427,100 +281,59 @@ def run_loop(
         max_mistral_calls=0,
     )
     inner = run_inner or lra_rand.run_live
-    history: list[dict[str, Any]] = []
-    board = keep_best_board(out)
-    best_total = board_total(board)
-    stalled_rounds = 0
-    stop_reason = ""
-    last_lake: list[dict[str, Any]] = []
-    gaps = lra_bind.skill_gap_report(memory)
     nest_depth = max(1, int(lra_rand.NEST_MAX_DEPTH))
-    for step in range(max(1, int(outer))):
-        # OUTER: Grok / llm_router. INNER: TypeSafe nested skill-tree walk.
-        action = route_next_action(
+    from jevops.outer import run_steps
+
+    def _board_fn() -> tuple[dict[str, int], int]:
+        board = keep_best_board(out)
+        return board, board_total(board)
+
+    def _route_fn(*, board, gaps, last_lake, stalled):
+        return route_next_action(
             board=board,
             gaps=gaps,
             last_lake=last_lake,
-            stalled=stalled_rounds >= 2,
+            stalled=stalled,
             llm=True if llm else False,
             ledger=ledger,
             generate=generate,
             memory=memory,
         )
-        applied = apply_action(memory, action)
-        if persist_memory:
-            lra_bind.save_memory(memory)
-        payload: dict[str, Any] = {}
-        traces: list[Any] = []
-        if str(action.get("action") or "") != "stop":
-            (memory.get("nca") or {}).pop("overlay_done", None)
-            payload = inner(
-                canary_args(
-                    out=out,
-                    rounds=rounds,
-                    lake_top=lake_top,
-                    drafts=drafts,
-                    timeout=timeout,
-                    seed=seed + step,
-                    nest_depth=nest_depth,
-                )
-            )
-            gaps = list(payload.get("skill_analysis") or lra_bind.skill_gap_report(memory))
-            last_lake = list(payload.get("lake") or [])
-            traces = [row.get("trace") for row in payload.get("canaries") or [] if row.get("trace")]
-        board = keep_best_board(out)
-        total = board_total(board)
-        improved = total < best_total and total > 0
-        if improved:
-            best_total = total
-            stalled_rounds = 0
-        else:
-            stalled_rounds += 1
-        row = {
-            "step": step,
-            "outer": "grok" if llm else "deterministic",
-            "inner": "typesafe_nested",
-            "board": dict(board),
-            "total": total,
-            "improved": improved,
-            "n_lake": len(last_lake),
-            "n_ok": sum(1 for item in last_lake if item.get("ok")),
-            "action": action,
-            "applied": applied,
-            "n_traces": len(traces),
-            "max_trace_depth": max(
-                (
-                    int(ev.get("depth") or 0)
-                    for tr in traces
-                    for ev in lra_inner.flatten_trace(list(tr or []))
-                ),
-                default=0,
-            ),
-            "jev_calls": (payload.get("ledger") or {}).get("jev_calls"),
-        }
-        history.append(row)
-        if action.get("action") == "stop" or applied.get("applied") == "stop":
-            stop_reason = str(action.get("reason") or "stop")
-            break
-        if ledger.hard_stopped:
-            stop_reason = "ledger_hard_stop"
-            break
-        if stalled_rounds >= 2:
-            stop_reason = "no_token_cut"
-            break
-        try:
-            import typesafe_nca as lra_nca_halt
 
-            halt = lra_nca_halt.should_halt(memory)
-            row["nca_halt"] = halt
-            if halt.get("budget_dead"):
-                stop_reason = "nca_budget"
-                break
-            if halt.get("halt"):
-                stop_reason = "nca_halt"
-                break
-        except Exception:
-            pass
+    def _inner_fn(step: int) -> dict[str, Any]:
+        return inner(
+            canary_args(
+                out=out,
+                rounds=rounds,
+                lake_top=lake_top,
+                drafts=drafts,
+                timeout=timeout,
+                seed=seed + step,
+                nest_depth=nest_depth,
+            )
+        )
+
+    def _halt(mem: dict[str, Any]) -> dict[str, Any]:
+        import typesafe_nca as lra_nca_halt
+
+        return dict(lra_nca_halt.should_halt(mem) or {})
+
+    stepped = run_steps(
+        n=int(outer),
+        memory=memory,
+        llm=bool(llm),
+        gaps_fn=lambda: lra_bind.skill_gap_report(memory),
+        route_fn=_route_fn,
+        apply_fn=apply_action,
+        inner_fn=_inner_fn,
+        board_fn=_board_fn,
+        persist_fn=lra_bind.save_memory if persist_memory else None,
+        halt_fn=_halt,
+        flatten_fn=lra_inner.flatten_trace,
+        hard_stop_fn=lambda: bool(getattr(ledger, "hard_stopped", False)),
+        stalled_limit=2,
+        on_inner_start=lambda mem: (mem.get("nca") or {}).pop("overlay_done", None),
+    )
     mem_path = lra_bind.save_memory(memory) if persist_memory else lra_bind.MEMORY_DEFAULT
     return {
         "schema": "lra-skill-improve-loop/v1",
@@ -532,11 +345,11 @@ def run_loop(
         "outer": "grok",
         "inner": "typesafe_nested",
         "router": "ipfs_accelerate_py.llm_router.generate_text" if llm else "deterministic",
-        "history": history,
+        "history": stepped.get("history") or [],
         "board": dict(keep_best_board(out)),
         "total": board_total(keep_best_board(out)),
-        "best_total": best_total,
-        "stop_reason": stop_reason,
+        "best_total": stepped.get("best_total"),
+        "stop_reason": stepped.get("stop_reason") or "",
         "memory_path": str(mem_path),
         "memory_skills": list(memory.get("skills") or []),
         "called_docker0": False,
