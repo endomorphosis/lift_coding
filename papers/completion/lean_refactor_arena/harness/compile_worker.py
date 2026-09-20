@@ -121,78 +121,18 @@ class LakeTimeoutTooSmall(CompileError):
     """Lake timeout must exceed the IndependentKernelVerifier 30 s default."""
 
 
-@dataclass(frozen=True)
-class VersionPin:
-    lean_tag: str
-    git_commit: str
-
-    def to_dict(self) -> dict[str, str]:
-        return {"lean_tag": self.lean_tag, "git_commit": self.git_commit}
+from jevops.lean import CompilePlan as _KernelCompilePlan
+from jevops.lean import CompileReceipt
+from jevops.lean import VersionPin
 
 
 @dataclass
-class CompileReceipt:
-    """One per-tag lake compile receipt. IndependentKernelVerifier is unused."""
-
-    schema: str = RECEIPT_SCHEMA
-    name: str = ""
-    source: str = ""
-    file_path: str = ""
-    url: str = ""
-    lean_tag: str = ""
-    git_commit: str = ""
-    argv: list[str] = field(default_factory=list)
-    cwd: str = ""
-    exit_code: int = -1
-    timed_out: bool = False
-    timeout_seconds: float = WARMUP_TAG_TIMEOUT_SECONDS
-    stdout: str = ""
-    stderr: str = ""
-    stdout_digest: str = ""
-    axiom_names: list[str] = field(default_factory=list)
-    axiom_digest: str = ""
-    sorryAx: bool = False
-    wall_ms: float = 0.0
-    cpu_ms: float = 0.0
-    n_samples: int = 1
-    measurement_maxHeartbeats: int = MEASUREMENT_MAX_HEARTBEATS
-    header_maxHeartbeats: Optional[int] = None
-    lean_num_threads: int = LEAN_NUM_THREADS
-    independent_kernel_verifier_used: bool = False
-    independent_kernel_verifier_timeout_seconds: None = None
-    lake_oracle: bool = True
-    kernel_command_template: str = KERNEL_COMMAND_TEMPLATE
-    ok: bool = False
-    aborted_remaining_tags: list[str] = field(default_factory=list)
-    hardware_class: str = "unscored-dev"
-    error: str = ""
-    arena_score: None = None
-    score: None = None
-
-    def to_dict(self) -> dict[str, Any]:
-        payload = asdict(self)
-        payload["arena_score"] = None
-        payload["score"] = None
-        payload["independent_kernel_verifier_used"] = False
-        payload["independent_kernel_verifier_timeout_seconds"] = None
-        payload["lake_oracle"] = True
-        return payload
-
-
-@dataclass
-class CompilePlan:
-    records: list[dict[str, Any]]
-    frozen_warmup_sha256: str
-    jsonl_bytes: int
-    n_records: int
-    arena_score: None = None
+class CompilePlan(_KernelCompilePlan):
+    first_source: str = STRATA_SOURCE
 
     @property
     def first_record(self) -> dict[str, Any]:
-        for record in self.records:
-            if record.get("source") == STRATA_SOURCE:
-                return record
-        raise CompileError("warmup JSONL has no Strata record")
+        return super().first_record(error_cls=CompileError, miss="warmup JSONL has no Strata record")
 
     def to_dict(self) -> dict[str, Any]:
         first = self.first_record
@@ -252,25 +192,20 @@ def sha256_text(text: str) -> str:
 def require_lake_timeout(timeout: float) -> float:
     """Reject the IndependentKernelVerifier 30 s default as a lake timeout."""
 
-    from jevops.outer import require_positive_above
+    from jevops.lean import require_lake_timeout as _fn
 
-    return require_positive_above(
+    return _fn(
         timeout,
-        INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+        floor=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
         error_cls=CompileError,
         too_small_cls=LakeTimeoutTooSmall,
-        not_positive="lake compile timeout must be a positive number",
-        too_small=(
-            "lake compile timeout {value}s must exceed IndependentKernelVerifier "
-            "default {floor}s; the 30s kernel verifier is not the lake oracle"
-        ),
     )
 
 
 def header_max_heartbeats(header: str) -> Optional[int]:
-    from jevops.outer import first_group_int
+    from jevops.lean import header_max_heartbeats as _fn
 
-    return first_group_int(header, _HEADER_HEARTBEATS)
+    return _fn(header)
 
 
 def iter_version_pins(version_info: Any) -> list[VersionPin]:
@@ -294,64 +229,37 @@ def measurement_argv(
     *,
     max_heartbeats: int = MEASUREMENT_MAX_HEARTBEATS,
 ) -> list[str]:
-    from jevops.outer import refuse_basename, require_basename
+    from jevops.lean import measurement_argv as _fn
 
-    lake_path = require_basename(
-        lake_path, "lake", error_cls=CompileError, fmt="expected tag-pinned lake, got {path!r}"
-    )
-    lean_path = require_basename(
-        lean_path, "lean", error_cls=CompileError, fmt="expected tag-pinned lean, got {path!r}"
-    )
-    if max_heartbeats <= 0:
-        raise CompileError("measurement maxHeartbeats must be finite and positive")
-    if not source_file:
-        raise CompileError("source_file is required")
-    refuse_basename(
-        source_file,
-        lra_bake.FORBIDDEN_PUTNAM_BASENAME,
-        error_cls=CompileError,
-        fmt="refusing to compile {name} as the Putnam module",
-    )
-    return [
+    return _fn(
         lake_path,
-        "env",
         lean_path,
-        f"-DmaxHeartbeats={max_heartbeats}",
-        "--json",
         source_file,
-    ]
+        max_heartbeats=max_heartbeats,
+        refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=CompileError,
+    )
 
 
 def axiom_digest(axiom_names: Sequence[str]) -> str:
-    from jevops.outer import digest_compact
+    from jevops.lean import axiom_digest as _fn
 
-    return digest_compact(list(axiom_names))
+    return _fn(axiom_names)
 
 
 def parse_axioms(stdout: str, stderr: str = "") -> tuple[list[str], bool]:
     """Extract axiom names and sorryAx from lake/lean stdout."""
 
-    from jevops.search import parse_marked_list
+    from jevops.lean import parse_axioms as _fn
 
-    text = f"{stdout}\n{stderr}"
-    names, _flagged = parse_marked_list(
-        text,
-        start_prefix="#print axioms",
-        line_re=_AXIOM_LINE,
-        flag_needles=("sorryAx",),
-        extra_if_flagged=("sorryAx",),
-    )
-    sorry = "sorryAx" in text or "hasSorry" in text
-    if sorry and "sorryAx" not in names:
-        names.append("sorryAx")
-    return names, sorry
+    return _fn(stdout, stderr)
 
 
 def clone_dir(url: str, state_root: Optional[Path] = None) -> Path:
-    from jevops.outer import join_under, url_cache_key
+    from jevops.outer import url_clone_dir
 
     root = Path(state_root) if state_root is not None else lra_bake.default_state_root()
-    return join_under(root, "clones", url_cache_key(url))
+    return url_clone_dir(root, url)
 
 
 def require_clone(
@@ -360,42 +268,29 @@ def require_clone(
     network: str,
     state_root: Optional[Path] = None,
 ) -> Path:
-    from jevops.outer import dir_has_markers
+    from jevops.outer import require_marked_dir
 
-    path = clone_dir(url, state_root)
-    if dir_has_markers(path, (".git", "lakefile.lean")):
-        return path
-    if network == "deny":
-        raise CloneMissing(
+    return require_marked_dir(
+        clone_dir(url, state_root),
+        (".git", "lakefile.lean"),
+        error_cls=CloneMissing if network == "deny" else None,
+        miss=(
             f"cached clone missing for {url} under network=deny; never falling "
             "back to PATH lean or a guessed GitHub URL"
-        )
-    return path
+        ),
+    )
 
 
 def checkout_commit(clone: Path, commit: str) -> dict[str, Any]:
-    from jevops.outer import run_process
+    from jevops.outer import git_checkout
 
-    if not commit:
-        return {"ok": True, "skipped": True, "commit": commit, "cwd": str(clone)}
-    git_dir = clone / ".git"
-    if not git_dir.exists():
-        return {"ok": True, "skipped": True, "commit": commit, "cwd": str(clone)}
-    if not GIT_BIN.is_file():
-        raise CompileToolchainMissing(f"git is not at {GIT_BIN}; cannot checkout {commit}")
-    ran = run_process(
-        [str(GIT_BIN), "-C", str(clone), "checkout", "--detach", commit],
-        cwd=clone,
+    return git_checkout(
+        clone,
+        commit,
+        git_bin=GIT_BIN,
         error_cls=CompileError,
-        fail_fmt="git checkout " + commit + " failed: {stderr}",
+        miss_cls=CompileToolchainMissing,
     )
-    return {
-        "ok": True,
-        "skipped": False,
-        "commit": commit,
-        "cwd": str(clone),
-        "exit_code": ran["exit_code"],
-    }
 
 
 def project_dir_for_record(
@@ -404,58 +299,60 @@ def project_dir_for_record(
     *,
     state_root: Optional[Path] = None,
 ) -> Path:
-    source = str(record.get("source") or "")
-    if source == PUTNAM_SOURCE:
+    from jevops.lean import project_dir_for_record as _fn
+
+    def _putnam_dir(_rec: Mapping[str, Any], p: VersionPin, root: Optional[Path]) -> Path:
         return lra_bake.putnam_project_dir(
             lra_bake.BakeJob(
                 kind="putnam",
                 source=PUTNAM_SOURCE,
-                lean_tag=pin.lean_tag,
-                git_commit=pin.git_commit,
+                lean_tag=p.lean_tag,
+                git_commit=p.git_commit,
                 url="",
-                cache_key=f"putnam/{pin.lean_tag}",
+                cache_key=f"putnam/{p.lean_tag}",
                 phase=2,
-                record_names=(str(record.get("name") or ""),),
+                record_names=(str(_rec.get("name") or ""),),
                 file_paths=(lra_bake.PUTNAM_CANDIDATE_RELPATH,),
                 module=lra_bake.PUTNAM_MODULE,
                 lakefile_required=True,
             ),
-            state_root,
+            root,
         )
-    url = str(record.get("url") or "")
-    if not url:
-        raise CompileError(f"{record.get('name')}: repo record is missing url")
-    return clone_dir(url, state_root)
+
+    return _fn(
+        record,
+        pin,
+        putnam_source=PUTNAM_SOURCE,
+        putnam_dir_fn=_putnam_dir,
+        clone_dir_fn=lambda url: clone_dir(url, state_root),
+        error_cls=CompileError,
+        state_root=state_root,
+    )
 
 
 def source_relpath(record: Mapping[str, Any]) -> str:
-    source = str(record.get("source") or "")
-    if source == PUTNAM_SOURCE:
-        return lra_bake.PUTNAM_CANDIDATE_RELPATH
-    from jevops.outer import refuse_basename
+    from jevops.lean import source_relpath as _fn
 
-    path = str(record.get("file_path") or "")
-    if not path:
-        raise CompileError(f"{record.get('name')}: missing file_path")
-    refuse_basename(path, lra_bake.FORBIDDEN_PUTNAM_BASENAME, error_cls=CompileError, fmt="refusing {name}")
-    return path
+    return _fn(
+        record,
+        putnam_source=PUTNAM_SOURCE,
+        putnam_relpath=lra_bake.PUTNAM_CANDIDATE_RELPATH,
+        refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=CompileError,
+    )
 
 
 def write_record_source(record: Mapping[str, Any], dest: Path) -> Path:
-    from jevops.outer import write_text
+    from jevops.lean import write_lake_source
 
     split = lra_splice.split_statement_body(record)
-    text = lra_splice.lake_candidate_source(
+    return write_lake_source(
+        dest,
         header=split.header,
         statement=split.statement,
         tactic_block=lra_splice.tactic_block_from_body(split.body_suffix),
-    )
-    return write_text(
-        dest,
-        text,
         refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
         error_cls=CompileError,
-        refuse_fmt="refusing to write {name}",
     )
 
 
@@ -494,6 +391,7 @@ def compile_tag(
     header_cap = header_max_heartbeats(str(record.get("header") or ""))
     relpath = source_relpath(record)
     receipt = CompileReceipt(
+        schema=RECEIPT_SCHEMA,
         name=name,
         source=source,
         file_path=relpath,
@@ -503,30 +401,34 @@ def compile_tag(
         timeout_seconds=timeout,
         measurement_maxHeartbeats=MEASUREMENT_MAX_HEARTBEATS,
         header_maxHeartbeats=header_cap,
+        lean_num_threads=LEAN_NUM_THREADS,
+        kernel_command_template=KERNEL_COMMAND_TEMPLATE,
         hardware_class=hardware_class,
     )
     try:
         toolchain = resolve_pin(pin, elan_home=elan_home, require_installed=True)
-        if source == PUTNAM_SOURCE:
-            project = project_dir_for_record(record, pin, state_root=state_root)
-            if not (project / "lakefile.lean").is_file():
-                lra_bake.materialize_putnam_project(
-                    pin.lean_tag, project, jsonl_version_pin=pin.git_commit
-                )
-            dest = project / lra_bake.PUTNAM_CANDIDATE_RELPATH
+        from jevops.lean import prepare_lake_paths
+
+        cwd, source_file, dest = prepare_lake_paths(
+            record,
+            pin,
+            putnam_source=PUTNAM_SOURCE,
+            putnam_relpath=lra_bake.PUTNAM_CANDIDATE_RELPATH,
+            source_relpath_fn=source_relpath,
+            putnam_dir_fn=lambda rec, p, root: project_dir_for_record(rec, p, state_root=root),
+            materialize_fn=lambda p, project: lra_bake.materialize_putnam_project(
+                p.lean_tag, project, jsonl_version_pin=p.git_commit
+            ),
+            require_clone_fn=lambda url, net, root: require_clone(
+                url, network=net, state_root=root
+            ),
+            checkout_fn=checkout_commit,
+            skip_checkout=skip_checkout,
+            network=network,
+            state_root=state_root,
+        )
+        if source == PUTNAM_SOURCE or not dest.is_file():
             write_record_source(record, dest)
-            cwd = project
-            source_file = lra_bake.PUTNAM_CANDIDATE_RELPATH
-        else:
-            cwd = require_clone(
-                str(record.get("url") or ""), network=network, state_root=state_root
-            )
-            if not skip_checkout:
-                checkout_commit(cwd, pin.git_commit)
-            dest = cwd / relpath
-            if not dest.is_file():
-                write_record_source(record, dest)
-            source_file = relpath
         if require_oleans:
             job = _bake_job_for_record(record, pin)
             lra_bake.require_cache(job, network=network, state_root=state_root)
@@ -538,95 +440,56 @@ def compile_tag(
         )
         receipt.argv = list(argv)
         receipt.cwd = str(cwd)
-        env = os.environ.copy()
-        env["LEAN_NUM_THREADS"] = str(LEAN_NUM_THREADS)
-        env["ELAN_HOME"] = toolchain.elan_home
-        supervisor_dir = (
-            Path(state_root) / "process-supervisor"
-            if state_root is not None
-            else Path(tempfile.gettempdir()) / "lra-014-process-supervisor"
-        )
-        supervisor_dir.mkdir(parents=True, exist_ok=True)
-        env[PROCESS_SUPERVISOR_ENV] = str(supervisor_dir)
-        from jevops.outer import process_exit_code, timed_call
+        from jevops.outer import env_copy, nonempty, under_or_tmp
 
-        result, wall_ms, cpu_ms = timed_call(
+        supervisor_dir = under_or_tmp(
+            state_root, "process-supervisor", tmp_name="lra-014-process-supervisor"
+        )
+        env = env_copy(
+            {
+                "LEAN_NUM_THREADS": str(LEAN_NUM_THREADS),
+                "ELAN_HOME": toolchain.elan_home,
+                PROCESS_SUPERVISOR_ENV: str(supervisor_dir),
+            }
+        )
+        from jevops.lean import measure_overlay
+
+        measure_overlay(
+            receipt,
             lambda: run_lean_process(
                 argv,
                 timeout=timeout,
                 cwd=str(cwd),
                 env=env,
-            )
-        )
-        stdout = result.stdout or ""
-        stderr = result.stderr or ""
-        axiom_names, sorry = parse_axioms(stdout, stderr)
-        exit_code, timed_out = process_exit_code(result)
-        receipt.exit_code = exit_code
-        receipt.timed_out = timed_out
-        receipt.stdout = stdout
-        receipt.stderr = stderr
-        receipt.stdout_digest = sha256_text(stdout)
-        receipt.axiom_names = axiom_names
-        receipt.axiom_digest = axiom_digest(axiom_names)
-        receipt.sorryAx = sorry
-        receipt.wall_ms = wall_ms
-        receipt.cpu_ms = cpu_ms
-        if result.error:
-            receipt.error = str(result.error)
-        receipt.ok = (
-            exit_code == 0
-            and not receipt.timed_out
-            and not receipt.error
-            and not sorry
-            and "sorryAx" not in axiom_names
-            and bool(stdout.strip())
-            and receipt.measurement_maxHeartbeats == MEASUREMENT_MAX_HEARTBEATS
-            and receipt.measurement_maxHeartbeats > 0
-            and not receipt.independent_kernel_verifier_used
-            and receipt.timeout_seconds > INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
-            and argv[1:4] == ["env", toolchain.lean_path, f"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}"]
+            ),
+            argv=argv,
+            max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+            lean_path=toolchain.lean_path,
+            timeout_seconds=receipt.timeout_seconds,
+            ikv_floor=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+            extra_ok=receipt.measurement_maxHeartbeats == MEASUREMENT_MAX_HEARTBEATS,
         )
         return receipt
     except (CompileError, LeanToolchainMissing, lra_bake.BakeError) as exc:
-        receipt.error = str(exc)
-        receipt.ok = False
-        receipt.exit_code = -1
-        receipt.axiom_digest = axiom_digest(receipt.axiom_names)
-        receipt.stdout_digest = sha256_text(receipt.stdout)
-        return receipt
+        from jevops.lean import close_failed_receipt
+
+        return close_failed_receipt(
+            receipt, exc, digest_fn=sha256_text, axiom_digest_fn=axiom_digest
+        )
 
 
 def _bake_job_for_record(record: Mapping[str, Any], pin: VersionPin) -> lra_bake.BakeJob:
-    source = str(record.get("source") or "")
-    if source == PUTNAM_SOURCE:
-        return lra_bake.BakeJob(
-            kind="putnam",
-            source=PUTNAM_SOURCE,
-            lean_tag=pin.lean_tag,
-            git_commit=pin.git_commit,
-            url="",
-            cache_key=f"putnam/{pin.lean_tag}",
-            phase=2,
-            record_names=(str(record.get("name") or ""),),
-            file_paths=(lra_bake.PUTNAM_CANDIDATE_RELPATH,),
-            module=lra_bake.PUTNAM_MODULE,
-            lakefile_required=True,
-        )
-    url = str(record.get("url") or "")
-    relpath = str(record.get("file_path") or "")
-    return lra_bake.BakeJob(
-        kind="repo",
-        source=source,
-        lean_tag=pin.lean_tag,
-        git_commit=pin.git_commit,
-        url=url,
-        cache_key=f"repo/{lra_bake._url_cache_key(url)}/{pin.git_commit}/{pin.lean_tag}",
-        phase=0 if source == STRATA_SOURCE and pin.lean_tag == STRATA_FIRST_TAG else 1,
-        record_names=(str(record.get("name") or ""),),
-        file_paths=(relpath,),
-        module=relpath,
-        lakefile_required=True,
+    from jevops.lean import bake_job_for_record as _fn
+
+    return _fn(
+        record,
+        pin,
+        putnam_source=PUTNAM_SOURCE,
+        strata_source=STRATA_SOURCE,
+        strata_first_tag=STRATA_FIRST_TAG,
+        putnam_relpath=lra_bake.PUTNAM_CANDIDATE_RELPATH,
+        putnam_module=lra_bake.PUTNAM_MODULE,
+        url_key_fn=lra_bake._url_cache_key,
     )
 
 
@@ -718,7 +581,7 @@ def expand_records(
 def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
     if tags is None:
         tags = (STRATA_FIRST_TAG, "v4.27.0", "v4.29.1")
-    from jevops.outer import map_partition, unique_keep
+    from jevops.outer import env_str, map_partition, unique_keep
 
     wanted = unique_keep(list(tags))
     resolver = LeanToolchainResolver()
@@ -732,14 +595,14 @@ def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
     return {
         "arena_score": None,
         "default_elan_home": str(lra_bake.default_elan_home()),
-        "elan_home_env": os.environ.get("ELAN_HOME"),
+        "elan_home_env": env_str("ELAN_HOME"),
         "independent_kernel_verifier_is_lake_oracle": False,
         "installed_tags": installed,
         "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
         "lake": False,
         "measurement_argv_template": MEASUREMENT_ARGV_TEMPLATE,
         "missing_tags": missing,
-        "path": os.environ.get("PATH"),
+        "path": env_str("PATH"),
         "pins": pins,
         "run_lean_process": run_lean_process.__name__,
         "score": None,
@@ -780,9 +643,10 @@ def _timeout_kwarg_values(tree: ast.AST) -> list[float]:
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.outer import source_text
     from jevops.repair import ast_name_hits, audit_source as _audit, call_kwarg_numbers, has_constant
 
-    text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    text = source_text(source, path=__file__)
     out = _audit(
         text,
         forbidden_imports=FORBIDDEN_IMPORT_NAMES,
@@ -918,7 +782,7 @@ def plant_synthetic_strata_clone(clone: Path) -> Path:
 
 
 def _receipt_summary(receipt: CompileReceipt) -> dict[str, Any]:
-    from jevops.outer import argv_layout
+    from jevops.outer import argv_layout, nonempty
 
     return {
         "aborted_remaining_tags": list(receipt.aborted_remaining_tags),
@@ -959,7 +823,7 @@ def _receipt_summary(receipt: CompileReceipt) -> dict[str, Any]:
         "sorryAx": receipt.sorryAx,
         "source": receipt.source,
         "stdout_digest": receipt.stdout_digest,
-        "stdout_nonempty": bool(receipt.stdout.strip()),
+        "stdout_nonempty": nonempty(receipt.stdout),
         "printed_axioms": "#print axioms" in receipt.stdout,
         "timeout_exceeds_ikv_30s": (
             receipt.timeout_seconds > INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
@@ -994,9 +858,9 @@ def _synthetic_compile(
     *,
     persist_receipts: Optional[Path] = None,
 ) -> dict[str, Any]:
-    with tempfile.TemporaryDirectory(
-        prefix="lra-014-compile-", dir=str(_exec_scratch_parent())
-    ) as tmp:
+    from jevops.outer import temp_dir
+
+    with temp_dir(prefix="lra-014-compile-", parent=_exec_scratch_parent()) as tmp:
         root = Path(tmp)
         elan_home = root / "elan"
         state_root = root / "state"
@@ -1267,9 +1131,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     if args.self_check or argv is None or argv == []:
-        report = self_check(args.jsonl, receipts_dir=args.receipts_dir)
-        _print_json(report)
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check(args.jsonl, receipts_dir=args.receipts_dir))
 
     if args.plan:
         _print_json(plan_compile(args.jsonl).to_dict())
@@ -1283,29 +1147,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         try:
             timeout = require_lake_timeout(args.timeout)
         except CompileError as exc:
-            _print_json(
-                {
-                    "ok": False,
-                    "error": str(exc),
-                    "error_type": type(exc).__name__,
-                    "arena_score": None,
-                    "independent_kernel_verifier_is_lake_oracle": False,
-                }
-            )
+            from jevops.outer import failed_check
+
+            _print_json(failed_check(exc, independent_kernel_verifier_is_lake_oracle=False))
             return 1
         plan = plan_compile(args.jsonl)
         network = lra_bake.network_mode(args.network)
         records: list[Mapping[str, Any]] = []
         if args.name:
-            match = next((item for item in plan.records if item.get("name") == args.name), None)
+            from jevops.outer import closed_fail, lookup_named
+
+            match = lookup_named(plan.records, args.name)
             if match is None:
-                _print_json(
-                    {
-                        "ok": False,
-                        "error": f"unknown warm-up problem: {args.name}",
-                        "arena_score": None,
-                    }
-                )
+                _print_json(closed_fail(f"unknown warm-up problem: {args.name}"))
                 return 1
             records = [match]
         else:

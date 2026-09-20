@@ -6,7 +6,6 @@ AST → ripgrep. DuckDB is never required. Never docker0. Does not write Lean.
 """
 from __future__ import annotations
 
-import os
 import re
 import sys
 from pathlib import Path
@@ -60,12 +59,12 @@ def _hit(symbol: str, *, source: str, query: str, path: str = "", extra: Optiona
 
 
 def _candidate_duckdb_paths() -> list[Path]:
-    from jevops.outer import existing_files
+    from jevops.outer import existing_files, optional_env_path
 
     paths: list[Path] = []
-    env = os.environ.get("LRA_DUCKDB_AST_INDEX")
-    if env:
-        paths.append(Path(env))
+    env_path = optional_env_path("LRA_DUCKDB_AST_INDEX")
+    if env_path is not None:
+        paths.append(env_path)
     paths.extend(
         (
             PAPER_ROOT / "evidence" / "canaries" / "nca-ast.duckdb",
@@ -79,7 +78,7 @@ def _candidate_duckdb_paths() -> list[Path]:
 def search_duckdb(query: str, *, db_path: Optional[Path] = None) -> tuple[list[dict[str, Any]], str]:
     """Query ipfs_accelerate DuckDB AST/symbol tables if a DB exists."""
 
-    from jevops.outer import engine_tables, first_table_sql, open_readonly, try_import
+    from jevops.outer import query_first_engine, try_import
 
     if try_import("duckdb") is None:
         return [], "duckdb_unavailable"
@@ -98,41 +97,24 @@ def search_duckdb(query: str, *, db_path: Optional[Path] = None) -> tuple[list[d
             "WHERE lower(CAST(name AS VARCHAR)) LIKE ? LIMIT 20"
         ),
     }
-    hits: list[dict[str, Any]] = []
-    used = ""
-    for path in paths:
-        con, note = open_readonly(path, refuse_names=("control.duckdb",))
-        if con is None:
-            continue
-        try:
-            sql = first_table_sql(engine_tables(con), table_sql)
-            if not sql:
-                continue
-            rows = con.execute(sql, [needle]).fetchall()
-            used = str(path)
-            for row in rows:
-                name = str(row[0] or "")
-                if not name:
-                    continue
-                hits.append(
-                    _hit(
-                        name,
-                        source="duckdb",
-                        query=query,
-                        path=str(row[1] or ""),
-                        extra={"kind": str(row[2] or "") if len(row) > 2 else ""},
-                    )
-                )
-        except Exception:
-            continue
-        finally:
-            try:
-                con.close()
-            except Exception:
-                pass
-        if hits:
-            break
-    return hits, (used or "duckdb_no_symbols")
+    hits, used = query_first_engine(
+        paths,
+        table_sql,
+        [needle],
+        refuse_names=("control.duckdb",),
+        row_fn=lambda row: (
+            _hit(
+                str(row[0] or ""),
+                source="duckdb",
+                query=query,
+                path=str(row[1] or ""),
+                extra={"kind": str(row[2] or "") if len(row) > 2 else ""},
+            )
+            if row and row[0]
+            else None
+        ),
+    )
+    return hits, (used if used not in {"no_index", "no_matching_table", "query_failed"} else "duckdb_no_symbols")
 
 
 def search_vector_index(
@@ -158,12 +140,16 @@ def search_vector_index(
     try:
         result = fn(snapshot, {"query_text": query, "max_results": 12})
     except Exception as exc:
-        return [], f"vector_search_failed:{type(exc).__name__}"
+        from jevops.outer import tagged_exc
+
+        return [], tagged_exc("vector_search_failed", exc)
     from jevops.outer import field_of
 
     hits: list[dict[str, Any]] = []
     rows = getattr(result, "hits", None) or (result.get("hits") if isinstance(result, Mapping) else []) or []
-    for item in list(rows)[:12]:
+    from jevops.outer import head_seq
+
+    for item in head_seq(rows, 12):
         row = field_of(item, "row", default=item)
         symbol = str(field_of(row, "qualified_symbol", "symbol") or "")
         path = str(field_of(row, "path") or "")
@@ -178,14 +164,13 @@ def search_vector_index(
 def search_kg(query: str, memory: Optional[Mapping[str, Any]] = None) -> list[dict[str, Any]]:
     import typesafe_tools as lra_tools
 
+    from jevops.outer import matching_nodes
+
     graph = lra_tools.skill_knowledge_graph(memory)
-    q = query.casefold()
-    hits: list[dict[str, Any]] = []
-    for node in graph.get("nodes") or []:
-        nid = str(node.get("id") or "")
-        if q and q in nid.casefold():
-            hits.append(_hit(nid, source="kg", query=query, extra={"kind": node.get("kind")}))
-    return hits[:MAX_HITS]
+    return [
+        _hit(str(node.get("id") or ""), source="kg", query=query, extra={"kind": node.get("kind")})
+        for node in matching_nodes(graph.get("nodes") or [], query, cap=MAX_HITS)
+    ]
 
 
 def search_ast(query: str, *, root: Optional[Path] = None) -> list[dict[str, Any]]:
@@ -254,7 +239,9 @@ def search_symbols(
                 hits.append(_hit(str(hit.get("symbol") or ""), source="jsonld", query=q))
             sources["jsonld"] = "ok"
         except Exception as exc:
-            sources["jsonld"] = type(exc).__name__
+            from jevops.outer import exc_name
+
+            sources["jsonld"] = exc_name(exc)
         if use_duckdb:
             db_hits, db_note = search_duckdb(q, db_path=duckdb_path)
             sources["duckdb"] = db_note
@@ -289,8 +276,10 @@ def search_symbols(
         hits.extend(rg_hits)
     ranked = rank_hits(hits)
     if isinstance(memory, dict) and ranked:
+        from jevops.outer import head_seq
+
         grid = memory.setdefault("nca", {}).setdefault("grid", {})
-        for hit in ranked[:8]:
+        for hit in head_seq(ranked, 8):
             cid = str(hit.get("ptr") or "")
             if not cid.startswith("ptr://"):
                 symbol = str(hit.get("symbol") or "hit")

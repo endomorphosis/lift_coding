@@ -75,41 +75,14 @@ class Docker0ClientError(RuntimeError):
     """Fail-closed docker0 client error. Never a fallback success."""
 
 
+from jevops.outer import ClientSession
+from jevops.outer import LockInspection as _KernelLockInspection
+from jevops.outer import OwnerExec
+
+
 @dataclass(frozen=True)
-class LockInspection:
-    path: str
-    exists: bool
-    held: bool
-    pid: Optional[int]
-    method: str
-    error: str
+class LockInspection(_KernelLockInspection):
     lock_id: str = OWNER_LOCK_ID
-    lock_ex_taken_by_client: bool = False
-
-
-@dataclass(frozen=True)
-class OwnerExec:
-    attempted: bool
-    executed: bool
-    argv: list[str]
-    argv_relative: list[str]
-    pid: Optional[int]
-    returncode: Optional[int]
-    started_llama_server: bool
-    error: str = ""
-
-
-@dataclass(frozen=True)
-class ClientSession:
-    action: str
-    health: dict[str, Any]
-    lock: dict[str, Any]
-    autostart: str
-    lock_ex_taken_by_client: bool
-    llama_server_started: bool
-    owner_exec: dict[str, Any]
-    skipped: bool
-    reason: str
 
 
 def pin_client_env() -> str:
@@ -257,72 +230,58 @@ def maybe_exec_owner(
     started, is ``run_leanstral_ephemeral.py``, never ``llama-server``.
     """
 
+    from jevops.outer import pack_owner_exec
+
     argv = owner_argv(script=script)
     rel = owner_argv_relative()
     if script is not None:
         rel = owner_argv(script=script)
     if not execute:
-        return OwnerExec(
-            attempted=False,
-            executed=False,
-            argv=argv,
-            argv_relative=rel,
-            pid=None,
-            returncode=None,
-            started_llama_server=False,
-        )
+        return pack_owner_exec(attempted=False, executed=False, argv=argv, argv_relative=rel)
     target = Path(argv[2])
     if not target.is_file():
-        return OwnerExec(
+        return pack_owner_exec(
             attempted=True,
             executed=False,
             argv=argv,
             argv_relative=rel,
-            pid=None,
-            returncode=None,
-            started_llama_server=False,
             error=f"owner script missing: {target}",
         )
-    from jevops.outer import run_process
+    from jevops.outer import env_copy, exc_text, run_process
 
-    env = dict(os.environ)
-    env[AUTOSTART_ENV] = "0"
-    env["IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL"] = "0"
+    extra = {
+        AUTOSTART_ENV: "0",
+        "IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL": "0",
+    }
     if extra_env:
-        env.update({str(k): str(v) for k, v in extra_env.items()})
+        extra.update(dict(extra_env))
+    env = env_copy(extra)
     try:
         ran = run_process(argv, env=env, timeout=float(timeout))
     except OSError as exc:
-        return OwnerExec(
+        return pack_owner_exec(
             attempted=True,
             executed=False,
             argv=argv,
             argv_relative=rel,
-            pid=None,
-            returncode=None,
-            started_llama_server=False,
-            error=f"{type(exc).__name__}: {exc}",
+            error=exc_text(exc),
         )
     if ran.get("timeout"):
-        return OwnerExec(
+        return pack_owner_exec(
             attempted=True,
             executed=True,
             argv=argv,
             argv_relative=rel,
             pid=ran.get("pid"),
-            returncode=None,
-            started_llama_server=False,
             error=str(ran.get("error") or "TimeoutExpired"),
         )
     code = ran.get("exit_code")
-    return OwnerExec(
+    return pack_owner_exec(
         attempted=True,
         executed=True,
         argv=argv,
         argv_relative=rel,
-        pid=None,
         returncode=int(code) if code is not None else None,
-        started_llama_server=False,
         error="" if ran.get("ok") else (ran.get("stderr") or ran.get("stdout") or f"exit {code}"),
     )
 
@@ -332,20 +291,13 @@ def skipped_generation(
     *,
     reason: str,
 ) -> lra_gt.LraGeneration:
-    identity = lra_gt.ProviderIdentity(
+    from jevops.lean import skipped_generation as _fn
+
+    return _fn(
+        health,
+        reason=reason,
         requested_provider=REQUESTED_PROVIDER,
         requested_model=REQUESTED_MODEL,
-        resolved_provider="",
-        resolved_model="",
-        fallback_used=False,
-        arena_score=None,
-    )
-    return lra_gt.LraGeneration(
-        text="",
-        identity=identity,
-        health=health,
-        skipped=True,
-        error=reason,
     )
 
 
@@ -446,6 +398,8 @@ def plan_session(
 ) -> ClientSession:
     """Live protocol decision. Inspects lock without exclusive ownership."""
 
+    from jevops.outer import env_str
+
     pin_client_env()
     health = probe_docker0_health()
     lock = inspect_gpu0_lock(lock_path)
@@ -472,7 +426,7 @@ def plan_session(
         action=action,
         health=asdict(health),
         lock=asdict(lock),
-        autostart=os.environ.get(AUTOSTART_ENV, ""),
+        autostart=env_str(AUTOSTART_ENV),
         lock_ex_taken_by_client=False,
         llama_server_started=False,
         owner_exec=asdict(owner),
@@ -557,7 +511,9 @@ def _fake_owner_script(directory: Path) -> Path:
 def self_check() -> dict[str, Any]:
     """Exercise the client protocol. No compile. No live Leanstral completion."""
 
-    source = Path(__file__).read_text(encoding="utf-8")
+    from jevops.outer import env_str, read_text
+
+    source = read_text(__file__)
     imported = _imported_names(source)
     lock_ex_attrs = _lock_ex_attributes(source)
     uses_lock_ex = bool(lock_ex_attrs)
@@ -573,7 +529,7 @@ def self_check() -> dict[str, Any]:
     def fake_generate(prompt: str, **call_kwargs: Any) -> str:
         captured["prompt"] = prompt
         captured["kwargs"] = dict(call_kwargs)
-        captured["autostart"] = os.environ.get(AUTOSTART_ENV)
+        captured["autostart"] = env_str(AUTOSTART_ENV)
         return "simp"
 
     def fake_trace() -> dict[str, str]:
@@ -650,7 +606,9 @@ def self_check() -> dict[str, Any]:
 
     child_lock: dict[str, Any] = {"ok": False}
     fake_exec: dict[str, Any] = {"ok": False}
-    with tempfile.TemporaryDirectory(prefix="lra-016-lock-") as tmp:
+    from jevops.outer import temp_dir
+
+    with temp_dir(prefix="lra-016-lock-") as tmp:
         tmp_path = Path(tmp)
         lock_file = tmp_path / "gpu-0.lock"
         free_before = inspect_gpu0_lock(lock_file)
@@ -691,9 +649,9 @@ def self_check() -> dict[str, Any]:
             extra_env={"LRA_OWNER_ARGV_OUT": str(argv_out)},
             timeout=5.0,
         )
-        recorded_argv: list[str] = []
-        if argv_out.is_file():
-            recorded_argv = json.loads(argv_out.read_text(encoding="utf-8"))
+        from jevops.outer import read_json_if
+
+        recorded_argv = read_json_if(argv_out, default=[], require_object=False)
         fake_exec = {
             "ok": bool(
                 owner.executed
@@ -717,9 +675,11 @@ def self_check() -> dict[str, Any]:
         }
 
     planned_owner = maybe_exec_owner(execute=False)
+    from jevops.outer import tail_seq
+
     owner_argv_ok = (
-        planned_owner.argv_relative[-4:] == ["--bind", OWNER_BIND, "--gpu", OWNER_GPU]
-        or planned_owner.argv[-4:] == ["--bind", OWNER_BIND, "--gpu", OWNER_GPU]
+        tail_seq(planned_owner.argv_relative, 4) == ["--bind", OWNER_BIND, "--gpu", OWNER_GPU]
+        or tail_seq(planned_owner.argv, 4) == ["--bind", OWNER_BIND, "--gpu", OWNER_GPU]
     ) and OWNER_SCRIPT_RELATIVE in planned_owner.argv_relative
 
     skipped_when_down = skipped_generation(fake_health_down, reason="skip")
@@ -772,7 +732,7 @@ def self_check() -> dict[str, Any]:
         "lock_ex_attributes": lock_ex_attrs,
         "uses_lock_ex": uses_lock_ex,
         "forbidden_server_binaries_in_source": forbidden_bins,
-        "autostart": os.environ.get(AUTOSTART_ENV),
+        "autostart": env_str(AUTOSTART_ENV),
         "llama_server_started": False,
         "compiled": False,
         "arena_score": None,
@@ -855,8 +815,9 @@ def main(argv: Optional[list[str]] = None) -> int:
         return 0
     if args.self_check or argv is None or argv == []:
         report = self_check()
-        print_json(report)
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(report)
     parser.error("choose --self-check, --probe-health, --inspect-lock, or --plan")
     return 2
 

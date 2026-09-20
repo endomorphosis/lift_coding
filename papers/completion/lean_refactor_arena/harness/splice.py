@@ -17,7 +17,7 @@ import json
 import os
 import re
 import sys
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
@@ -100,29 +100,8 @@ class PrefixBindError(SpliceError):
     """``src`` is not the frozen ``statement`` plus a body suffix."""
 
 
-@dataclass(frozen=True)
-class StatementBody:
-    name: str
-    source: str
-    statement: str
-    body_suffix: str
-    header: str
-
-    @property
-    def reconstructed_src(self) -> str:
-        return self.statement + self.body_suffix
-
-
-@dataclass(frozen=True)
-class AdmissionView:
-    accepted: bool
-    failure_code: str
-    reason: str
-    name: str
-    native_source_starts_with_statement: bool
-    used_full_src_as_native: bool = False
-    used_full_src_as_canonical: bool = False
-    arena_score: None = None
+from jevops.lean import AdmissionView
+from jevops.lean import StatementBody
 
 
 def _ensure_accel_path() -> None:
@@ -175,13 +154,19 @@ def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[d
 def split_statement_body(record: Mapping[str, Any]) -> StatementBody:
     """Bind the statement as a prefix of ``src``. Never search for ``:=``."""
 
+    from jevops.outer import require_str
+
     name = str(record.get("name") or "")
-    statement = record.get("statement")
-    src = record.get("src")
-    if not isinstance(statement, str) or not statement:
-        raise PrefixBindError(f"{name}: statement must be a non-empty string")
-    if not isinstance(src, str) or not src:
-        raise PrefixBindError(f"{name}: src must be a non-empty string")
+    statement = require_str(
+        record.get("statement"),
+        error_cls=PrefixBindError,
+        empty=f"{name}: statement must be a non-empty string",
+    )
+    src = require_str(
+        record.get("src"),
+        error_cls=PrefixBindError,
+        empty=f"{name}: src must be a non-empty string",
+    )
     if not src.startswith(statement):
         raise PrefixBindError(f"{name}: src does not start with the frozen statement")
     suffix = src[len(statement) :]
@@ -200,31 +185,25 @@ def split_statement_body(record: Mapping[str, Any]) -> StatementBody:
 def statement_sorry_template(statement: str) -> str:
     """Supervisor-owned hole for lexical admission. Not a lake file and not ``src``."""
 
-    if not isinstance(statement, str) or not statement:
-        raise PrefixBindError("statement must be a non-empty string")
-    return statement + STATEMENT_SORRY_SUFFIX
+    from jevops.lean import statement_sorry_template as _fn
+
+    return _fn(statement, error_cls=PrefixBindError)
 
 
 def tactic_block_from_body(body_suffix: str) -> str:
     """Strip the leading `` := by`` of an already-split body. Does not inspect the statement."""
 
-    from jevops.outer import strip_leading_prefixes
+    from jevops.lean import tactic_block_from_body as _fn
 
-    return strip_leading_prefixes(
-        body_suffix,
-        BODY_BY_PREFIXES,
-        error_cls=SpliceError,
-        empty_msg="body suffix is empty",
-        miss_msg="body suffix does not start with ' := by' after the frozen statement",
-    )
+    return _fn(body_suffix, error_cls=SpliceError)
 
 
 def lake_candidate_source(*, header: str, statement: str, tactic_block: str) -> str:
     """Put Putnam ``header`` in the lake file. ``proof_text`` remains the tactic block only."""
 
-    from jevops.outer import join_decl
+    from jevops.lean import lake_candidate_source as _fn
 
-    return join_decl(statement, tactic_block, header=header if isinstance(header, str) else "")
+    return _fn(header=header, statement=statement, tactic_block=tactic_block)
 
 
 def forbidden_proof_tokens(proof_text: str) -> tuple[str, ...]:
@@ -266,13 +245,15 @@ def admit_tactic_block(
 
 
 def admission_view(record: Mapping[str, Any], proof_text: str) -> AdmissionView:
+    from jevops.outer import last_component
+
     split = split_statement_body(record)
     native = statement_sorry_template(split.statement)
     admission = admit_tactic_block(
         split.statement,
         proof_text,
         theorem_id=split.name,
-        declaration_name=split.name.rsplit(".", 1)[-1],
+        declaration_name=last_component(split.name),
     )
     return AdmissionView(
         accepted=bool(admission.accepted),
@@ -333,7 +314,9 @@ def _record_report(record: Mapping[str, Any]) -> dict[str, Any]:
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     """Prefix-bind all 15 records and exercise lexical admission. No compile."""
 
-    source = Path(__file__).read_text(encoding="utf-8")
+    from jevops.outer import read_text
+
+    source = read_text(__file__)
     jsonl = Path(path) if path is not None else WARMUP_JSONL
     before = sha256_file(jsonl)
     raw, digest, records = load_warmup_records(jsonl)
@@ -348,9 +331,11 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
 
     sample = records[8] if len(records) > 8 else records[0]
     forbidden_views = {}
+    from jevops.outer import first_token
+
     for proof in ("theorem foo : True := rfl", "lemma bar", "import Mathlib", "open Nat"):
         view = admission_view(sample, proof)
-        forbidden_views[proof.split()[0]] = asdict(view)
+        forbidden_views[first_token(proof)] = asdict(view)
 
     putnam = next(record for record in records if record["source"] == "putnambench")
     putnam_split = split_statement_body(putnam)
@@ -456,10 +441,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--jsonl", type=Path, default=None, help="warmup JSONL path (default: frozen data/benchmark_data_warmup.jsonl)")
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.self_check or argv is None or argv == []:
-        report = self_check(args.jsonl)
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check(args.jsonl))
     parser.error("choose --self-check")
     return 2
 

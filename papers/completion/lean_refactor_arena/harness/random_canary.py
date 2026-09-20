@@ -15,7 +15,7 @@ import argparse
 import json
 import random
 import sys
-from datetime import datetime, timezone
+
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
@@ -117,6 +117,7 @@ def analyze_proof(
     tactics: Optional[str] = None,
     model: Optional[Mapping[str, Any]] = None,
 ) -> dict[str, Any]:
+    from jevops.outer import head_seq
     from jevops.pick import analysis_row
     from jevops.pick import hole_rows
 
@@ -146,7 +147,7 @@ def analyze_proof(
             "n_tags": len(_tags(record)),
             "eligible_spans": spans,
             "catalog_phrases_present": phrases,
-            "case_labels": cases[:12],
+            "case_labels": head_seq(cases, 12),
             "n_cases": len(cases),
             "pca_keep": bool(counts.get("n_induction") or counts.get("n_cases")),
         },
@@ -170,27 +171,15 @@ def random_drafts(
     names still appear later (the substOldPostSubset ``trigger1`` failure).
     """
 
-    from jevops.mask import drop_span
-    from jevops.pick import pin_prefix
-    from jevops.pick import shorter_bag
+    from jevops.tactics import random_mca_drafts as _fn
 
     body = tactics.strip("\n")
-    push, rows = shorter_bag(body, token_fn=lra_loop.token_count)
-
     allow = set(allow_families) if allow_families else None
 
     def wanted(fam: str) -> bool:
         return allow is None or fam in allow
 
-    if wanted("dead_code"):
-        unused = lra_bind.drop_unused_binders(body)
-        push("drop_unused_binders", unused, {"family": "dead_code", "n_masks": 1})
-    if wanted("strength_reduction"):
-        simp_at = lra_fan.drop_redundant_simp_at(body)
-        push("collapse_simp_at", simp_at, {"family": "strength_reduction"})
-    if wanted("algebraic_simplification"):
-        rw = lra_pca.collapse_rw_to_simp(body)
-        push("collapse_rw", rw, {"family": "algebraic_simplification"})
+    early: list[tuple[str, str, dict[str, Any]]] = []
     if wanted("search_space") or wanted("algebraic_simplification") or wanted("dead_code"):
         blocked = {
             key
@@ -204,28 +193,10 @@ def random_drafts(
         ):
             fam = str(item.get("family") or "search_space")
             kind = str(item["kind"])
-            if memory is not None and lra_bind.is_blacklisted(memory, name, kind):
-                continue
             extra = {"family": fam, "generator": "portable_rewrites"}
-            push(kind, str(item["tactics"]), extra)
+            early.append((kind, str(item["tactics"]), extra))
 
-    holes = list(lra_mask.find_holes(body))
-    rng.shuffle(holes)
-    for hole in holes:
-        if not wanted(hole.family):
-            continue
-        kind = f"drop_{hole.family}_{hole.hole_id}"
-        nxt = drop_span(body, hole.start, hole.end)
-        if memory is not None and lra_bind.is_blacklisted(memory, name, kind, tactics=nxt):
-            continue
-        if hole.original.strip().startswith(("rename_i ", "have ")) and not lra_bind.safe_to_drop_span(
-            body, hole.start, hole.end, hole.original
-        ):
-            continue
-        push(kind, nxt, {"family": hole.family, "n_masks": 1})
-        if len(rows) >= n:
-            break
-
+    late: list[tuple[str, str, dict[str, Any]]] = []
     spans = list(lra_sym.ONE_HOLE_SPANS)
     rng.shuffle(spans)
     for span in spans:
@@ -241,24 +212,34 @@ def random_drafts(
             continue
         row = lra_sym.closed_multihole(body, [hole], schedule_id=f"rand_s{span}")
         if row:
-            kind = str(row["kind"])
-            body_txt = str(row["tactics"])
-            if memory is not None and lra_bind.is_blacklisted(memory, name, kind, tactics=body_txt):
-                continue
-            push(kind, body_txt, {"family": "symbol_diffuse", "span": span})
-
+            late.append(
+                (str(row["kind"]), str(row["tactics"]), {"family": "symbol_diffuse", "span": span})
+            )
     for draft in lra_pca.guided_drafts(body, list(families) or [{"family": "dead_code"}], counts):
-        if not wanted(str(draft.family)):
-            continue
-        kind = f"pca_{draft.family}_{draft.draft_id}"
-        if memory is not None and lra_bind.is_blacklisted(
-            memory, name, kind, tactics=str(draft.tactics)
-        ):
-            continue
-        push(kind, draft.tactics, {"family": draft.family})
-        if len(rows) >= n:
-            break
-    return pin_prefix(rows, n=n, shuffle_fn=rng.shuffle)
+        late.append(
+            (
+                f"pca_{draft.family}_{draft.draft_id}",
+                str(draft.tactics),
+                {"family": str(draft.family)},
+            )
+        )
+
+    def _blacklist(mem: Mapping[str, Any], problem: str, kind: str, nxt: str = "") -> bool:
+        return lra_bind.is_blacklisted(mem, problem, kind, tactics=nxt)
+
+    return _fn(
+        tactics,
+        rng,
+        n=n,
+        token_fn=lra_loop.token_count,
+        allow_families=allow,
+        name=name,
+        memory=memory,
+        safe_drop_fn=lra_bind.safe_to_drop_span,
+        blacklist_fn=_blacklist,
+        early_extras=early,
+        late_extras=late,
+    )
 
 
 from jevops.pick import draft_tree as kernel_draft_tree  # noqa: E402
@@ -268,11 +249,9 @@ from jevops.pick import sample_records  # noqa: E402
 
 
 def draft_tree(drafts: Sequence[Mapping[str, Any]]) -> dict[str, dict[str, str]]:
-    blurbs = dict(FAMILY_BLURB)
-    for fam, spec in FAMILY_STRUCTURED.items():
-        what = spec.get("what")
-        if what:
-            blurbs[fam] = str(what)
+    from jevops.outer import overlay_attr
+
+    blurbs = overlay_attr(FAMILY_BLURB, FAMILY_STRUCTURED, attr="what")
     return kernel_draft_tree(
         drafts,
         blurbs=blurbs,
@@ -390,12 +369,13 @@ def typesafe_pick(
     record_usage(ledger, usage, model=lra_t1.JEV_MODEL_ID)
     fam_ans, fam_probs, family_conf, fam_choice = choice_head(choices, "family")
     from jevops import pick as lra_pick
+    from jevops.outer import head_seq
 
     leaf_qs = lra_pick.leaf_qs_from_choices(tree, choices, family_conf=family_conf)
     noul_fail = noul_attr(nouls, "will_fail_compile")
     noul_pca = noul_attr(nouls, "breaks_pca")
     per_leaf_fail = lra_pick.noul_map(
-        nouls, [item.get("kind") for item in drafts[:6]], prefix="fail_"
+        nouls, [item.get("kind") for item in head_seq(drafts, 6)], prefix="fail_"
     )
     cut = scores.get("likely_token_cut")
     return lra_pick.rank_from_answers(
@@ -500,6 +480,7 @@ def typesafe_intent(
 
         return skipped("no_key", families=set(FAMILY_BLURB))
     from jevops.jev import intent_state
+    from jevops.outer import head_chars
     from jevops.pick import family_criteria as _family_criteria
     from jevops.pick import present_families
 
@@ -512,7 +493,7 @@ def typesafe_intent(
         memory_view={"success_kinds": named_success_kinds(memory or {}, str(record.get("name") or ""))},
         window=intent_window(memory),
         extra={
-            "head": str(analysis.get("case_labels") or [])[:200],
+            "head": head_chars(analysis.get("case_labels") or [], 200),
             "tree_node": tree_node,
             "allow_families": sorted(allow_families or []),
             "prior_research": lra_bind.prior_research(memory or {}, str(record.get("name") or "")),
@@ -759,16 +740,20 @@ def main(argv: Optional[list[str]] = None) -> int:
     )
     args = parser.parse_args(argv)
     if args.self_check or not args.live:
+        from jevops.outer import print_ok
+
         payload = self_check()
-        print(json.dumps(payload, indent=2, sort_keys=True))
+        code = print_ok(payload)
         if args.self_check and not args.live:
-            return 0 if payload["ok"] else 1
+            return code
         if not args.live:
-            return 0 if payload["ok"] else 1
+            return code
 
     payload = run_live(args)
     if not getattr(args, "quiet", False):
-        print(json.dumps(payload, indent=2, sort_keys=True, default=str))
+        from jevops.outer import print_json
+
+        print_json(payload, default=str)
     return 0
 
 
@@ -885,10 +870,17 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
 
     extra_139 = None
     if args.init_139 and CANARY_139.is_file():
-        inits = next(item for item in records if item.get("name") == "Core.InitsUpdatesComm")
+        from jevops.outer import lookup_named, read_text
+
+        inits = lookup_named(
+            records,
+            "Core.InitsUpdatesComm",
+            error_cls=RuntimeError,
+            miss="unknown warm-up problem: Core.InitsUpdatesComm",
+        )
         extra_139 = analyze_proof(
             inits,
-            tactics=CANARY_139.read_text(encoding="utf-8").strip("\n"),
+            tactics=read_text(CANARY_139).strip("\n"),
             model=model,
         )
         extra_139["cut"] = "cascade-best-139"
@@ -917,23 +909,25 @@ def run_live(args: argparse.Namespace) -> dict[str, Any]:
     from jevops.outer import closed_evidence
     from jevops.outer import landscape_rows
     from jevops.outer import safe_call
-    from jevops.outer import write_json_pair
+    from jevops.outer import head_seq, utc_stamp, write_json_pair
 
     nca_status = safe_call(live_status, memory, default={}) or {}
-    (args.out / "skill-analysis.json").write_text(
-        json.dumps({"schema": "lra-skill-analysis/v1", "gaps": gaps, "nca_status": nca_status}, indent=2, sort_keys=True)
-        + "\n"
+    from jevops.outer import write_json
+
+    write_json(
+        args.out / "skill-analysis.json",
+        {"schema": "lra-skill-analysis/v1", "gaps": gaps, "nca_status": nca_status},
     )
     payload = {
         "schema": "lra-random-canary/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "seed": int(args.seed),
         "k": int(args.k),
         "warmup_jsonl_sha256": digest,
         "n_records": len(records),
         "n_tag_cells": sum(int(item["n_tags"]) for item in landscape),
         "pca": {
-            "explained_ratio": (model.get("explained_ratio") or [])[:6],
+            "explained_ratio": head_seq(model.get("explained_ratio"), 6),
             "principal0": (model.get("principal") or [{}])[0].get("loadings"),
         },
         "landscape": landscape_rows(landscape),

@@ -15,7 +15,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime, timezone
+
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional
 
@@ -322,14 +322,14 @@ def run_loop(
         stalled_limit=2,
         on_inner_start=lambda mem: (mem.get("nca") or {}).pop("overlay_done", None),
     )
-    from jevops.outer import closed_evidence
+    from jevops.outer import closed_evidence, utc_stamp
 
     mem_path = lra_bind.save_memory(memory) if persist_memory else lra_bind.MEMORY_DEFAULT
     return {
         "schema": "lra-skill-improve-loop/v1",
         "protocol": PROTOCOL,
         "pr_id": PR_ID,
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "outer": int(outer),
         "llm": bool(llm),
         "outer": "grok",
@@ -361,9 +361,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     args = parser.parse_args(argv)
     if args.self_check or not args.live:
-        payload = self_check()
-        print(json.dumps(payload, indent=2, sort_keys=True))
-        return 0 if payload["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check())
     payload = run_loop(
         outer=max(1, int(args.outer)),
         llm=args.llm == "on",
@@ -374,12 +374,17 @@ def main(argv: Optional[list[str]] = None) -> int:
         timeout=float(args.timeout),
         seed=int(args.seed),
     )
-    args.out.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    text = json.dumps(payload, indent=2, sort_keys=True, default=str) + "\n"
-    (args.out / f"skill-improve-loop-{stamp}.json").write_text(text)
-    (args.out / "skill-improve-loop-latest.json").write_text(text)
-    print(json.dumps(payload, indent=2, sort_keys=True, default=str))
+    from jevops.outer import write_json_pair
+
+    write_json_pair(
+        args.out,
+        payload,
+        prefix="skill-improve-loop",
+        latest="skill-improve-loop-latest.json",
+    )
+    from jevops.outer import print_json
+
+    print_json(payload, default=str)
     return 0
 
 

@@ -202,22 +202,14 @@ class InsertOnlyError(ReceiptStoreError):
     """SQL outside the INSERT/SELECT/CREATE TABLE IF NOT EXISTS vocabulary."""
 
 
-@dataclass(frozen=True)
-class ExecutablePaths:
-    lean: str
-    lake: str
-
-    def to_dict(self) -> dict[str, str]:
-        return {"lean": self.lean, "lake": self.lake}
+from jevops.lean import ExecutablePaths
+from jevops.lean import ProofReceipt as _KernelProofReceipt
 
 
 @dataclass
-class ProofReceipt:
-    name: str
-    lean_tag: str
-    body_digest: str
-    verdict: str
-    executable_paths: ExecutablePaths
+class ProofReceipt(_KernelProofReceipt):
+    """LRA overlay: closed authority constants stay on the public dict."""
+
     generator: str = DEFAULT_GENERATOR
     policy: str = DEFAULT_POLICY
     resource: str = DEFAULT_RESOURCE
@@ -225,61 +217,22 @@ class ProofReceipt:
     backend_id: str = DEFAULT_BACKEND_ID
     git_commit: str = NOT_APPLICABLE
     lean_version: str = NOT_APPLICABLE
-    backend_config_digest: str = ""
-    premises_digest: str = ""
-    token_count: Optional[int] = None
-    elab_proxy: Optional[float] = None
     hardware_class: str = DEFAULT_RESOURCE
-    kernel_command_template: str = KERNEL_COMMAND_TEMPLATE
-    candidate_cid: str = ""
-    created_at: float = 0.0
-    arena_score: None = None
-    score: None = None
-    official_score: None = None
-    duckdb_used: bool = False
-    inserted: bool = False
-    skipped_duplicate: bool = False
-    filesystem_path: str = ""
-    dimensions: dict[str, str] = field(default_factory=dict)
-    key_digest: str = ""
 
     def to_public_dict(self) -> dict[str, Any]:
-        return {
-            "schema": RECEIPT_SCHEMA,
-            "protocol": PROTOCOL,
-            "name": self.name,
-            "lean_tag": self.lean_tag,
-            "body_digest": self.body_digest,
-            "candidate_cid": self.candidate_cid,
-            "verdict": self.verdict,
-            "token_count": self.token_count,
-            "elab_proxy": self.elab_proxy,
-            "generator": self.generator,
-            "policy": self.policy,
-            "resource": self.resource,
-            "hardware_class": self.hardware_class,
-            "executable_paths": self.executable_paths.to_dict(),
-            "kernel_command_template": self.kernel_command_template,
-            "dimensions": dict(self.dimensions),
-            "key_digest": self.key_digest,
-            "git_commit": self.git_commit,
-            "lean_version": self.lean_version,
-            "premises_digest": self.premises_digest,
-            "arena_score": self.arena_score,
-            "score": self.score,
-            "official_score": self.official_score,
-            "control_plane": CONTROL_PLANE,
-            "is_control_plane": IS_CONTROL_PLANE,
-            "filesystem_authority": FILESYSTEM_IS_AUTHORITY,
-            "insert_only": INSERT_ONLY,
-            "upsert_task": False,
-            "duckdb_used": self.duckdb_used,
-            "inserted": self.inserted,
-            "skipped_duplicate": self.skipped_duplicate,
-            "filesystem_path": self.filesystem_path,
-            "pr": PR_ID,
-            "lrah": LRAH_ID,
-        }
+        return super().to_public_dict(
+            extra={
+                "schema": RECEIPT_SCHEMA,
+                "protocol": PROTOCOL,
+                "control_plane": CONTROL_PLANE,
+                "is_control_plane": IS_CONTROL_PLANE,
+                "filesystem_authority": FILESYSTEM_IS_AUTHORITY,
+                "insert_only": INSERT_ONLY,
+                "upsert_task": False,
+                "pr": PR_ID,
+                "lrah": LRAH_ID,
+            }
+        )
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -317,11 +270,10 @@ def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[d
 def closed_dimensions_from_source(path: Path = PROOF_STORE_SOURCE) -> tuple[str, ...]:
     """Parse PROOF_AUTHORITY_DIMENSIONS from DuckDBProofStore@1 source."""
 
-    from jevops.outer import quoted_strings
+    from jevops.outer import quoted_strings, read_text, require_file
 
-    if not path.is_file():
-        raise ReceiptStoreError(f"missing proof-store source: {path}")
-    text = path.read_text(encoding="utf-8")
+    path = require_file(path, error_cls=ReceiptStoreError, miss="missing proof-store source: {path}")
+    text = read_text(path)
     match = re.search(
         r"PROOF_AUTHORITY_DIMENSIONS: Final\[tuple\[str, \.\.\.\]\] = \((.*?)\)",
         text,
@@ -339,10 +291,10 @@ def environment_lock_field_names(path: Path = MODELS_SOURCE) -> list[str]:
     """AnnAssign names on EnvironmentLockRecord. No primary_executable field."""
 
     from jevops.repair import class_ann_names
+    from jevops.outer import read_text, require_file
 
-    if not path.is_file():
-        raise ReceiptStoreError(f"missing hammer models source: {path}")
-    names = class_ann_names(path.read_text(encoding="utf-8"), "EnvironmentLockRecord")
+    path = require_file(path, error_cls=ReceiptStoreError, miss="missing hammer models source: {path}")
+    names = class_ann_names(read_text(path), "EnvironmentLockRecord")
     if names is None:
         raise ReceiptStoreError("EnvironmentLockRecord class missing from models.py")
     return names
@@ -394,6 +346,8 @@ def assumptions_digest(
 def project_dimensions(receipt: ProofReceipt) -> dict[str, str]:
     """Project every closed authority dimension. Missing keys fail closed."""
 
+    from jevops.lean import project_authority_dimensions
+
     premises = receipt.premises_digest or not_applicable_digest()
     backend_config = receipt.backend_config_digest or not_applicable_digest()
     mapping = {
@@ -413,16 +367,9 @@ def project_dimensions(receipt: ProofReceipt) -> dict[str, str]:
         "backend_version": receipt.lean_version,
         "backend_config": backend_config,
     }
-    missing = PROOF_AUTHORITY_DIMENSION_SET - set(mapping)
-    if missing:
-        raise DimensionError(f"authority dimension(s) dropped: {', '.join(sorted(missing))}")
-    extra = set(mapping) - PROOF_AUTHORITY_DIMENSION_SET
-    if extra:
-        raise DimensionError(f"unknown authority dimension(s): {', '.join(sorted(extra))}")
-    empty = [name for name, value in mapping.items() if not str(value).strip()]
-    if empty:
-        raise DimensionError(f"authority dimension(s) empty: {', '.join(empty)}")
-    return mapping
+    return project_authority_dimensions(
+        receipt, PROOF_AUTHORITY_DIMENSIONS, mapping, error_cls=DimensionError
+    )
 
 
 def receipt_key_digest(receipt: ProofReceipt, dimensions: Mapping[str, str]) -> str:
@@ -507,22 +454,14 @@ def _guard_sql(sql: str) -> str:
     )
 
 
-class InsertOnlyConnection:
+from jevops.outer import InsertOnlyConnection as _KernelInsertOnly
+
+
+class InsertOnlyConnection(_KernelInsertOnly):
     """Wrap a DuckDB or sqlite3 connection. Only INSERT/SELECT/CREATE IF NOT EXISTS."""
 
     def __init__(self, raw: Any) -> None:
-        self._raw = raw
-
-    def execute(self, sql: str, params: Optional[Sequence[Any]] = None) -> Any:
-        guarded = _guard_sql(sql)
-        if params is None:
-            return self._raw.execute(guarded)
-        return self._raw.execute(guarded, list(params))
-
-    def close(self) -> None:
-        close = getattr(self._raw, "close", None)
-        if callable(close):
-            close()
+        super().__init__(raw, guard_fn=_guard_sql)
 
 
 def connect_optional_db(path: Path, *, duckdb_module: Any = None) -> tuple[InsertOnlyConnection, str]:
@@ -658,13 +597,15 @@ def should_skip_retry(verdict: Optional[str]) -> bool:
 def finalize_receipt(receipt: ProofReceipt, *, body: Optional[str] = None) -> ProofReceipt:
     if receipt.executable_paths is None:
         raise ReceiptStoreError("executable_paths required")
-    from jevops.outer import is_hex_digest
+    from jevops.outer import ensure_digest
 
-    if not is_hex_digest(receipt.body_digest):
-        if body is not None:
-            receipt.body_digest = sha256_bytes(body.encode("utf-8"))
-        else:
-            raise ReceiptStoreError("body_digest must be sha256 hex")
+    receipt.body_digest = ensure_digest(
+        receipt.body_digest,
+        data=body.encode("utf-8") if body is not None else None,
+        digest_fn=sha256_bytes,
+        error_cls=ReceiptStoreError,
+        empty="body_digest must be sha256 hex",
+    )
     if not receipt.candidate_cid:
         receipt.candidate_cid = receipt.body_digest
     receipt.created_at = receipt.created_at or time.time()
@@ -758,13 +699,15 @@ def _function_names(source: str) -> set[str]:
 def _forbidden_sql_in_constants(source: str) -> list[str]:
     """Flag string constants that are mutating SQL statements, not prose."""
 
+    from jevops.outer import head_chars
+
     issues: list[str] = []
     for value in _string_constants(source):
         stripped = value.strip()
         if SQL_STATEMENT_HEAD.match(stripped) or (
             ALLOWED_SQL_HEAD.match(stripped) and FORBIDDEN_SQL.search(stripped)
         ):
-            issues.append(stripped[:80])
+            issues.append(head_chars(stripped, 80))
     return issues
 
 
@@ -801,7 +744,9 @@ def _synthetic_receipt(
 
 
 def _load_control_plane_pin() -> dict[str, Any]:
-    cfg = json.loads(SUPERVISOR_JSON.read_text(encoding="utf-8"))
+    from jevops.outer import read_json
+
+    cfg = read_json(SUPERVISOR_JSON)
     return {
         "primary_control_plane": cfg.get("primary_control_plane"),
         "matches_constant": cfg.get("primary_control_plane") == CONTROL_PLANE,
@@ -817,7 +762,9 @@ def _load_control_plane_pin() -> dict[str, Any]:
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     """Exercise filesystem authority, INSERT-only SQL, and closed dimensions."""
 
-    source = Path(__file__).read_text(encoding="utf-8")
+    from jevops.outer import read_text
+
+    source = read_text(__file__)
     jsonl = Path(path) if path is not None else WARMUP_JSONL
     before = sha256_file(jsonl)
     raw, digest, records = load_warmup_records(jsonl)
@@ -889,7 +836,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     except InsertOnlyError:
         upsert_sql_rejected = True
 
-    with tempfile.TemporaryDirectory(prefix="lra-023-receipt-") as tmp:
+    from jevops.outer import temp_dir
+
+    with temp_dir(prefix="lra-023-receipt-") as tmp:
         root = Path(tmp)
         db_path = root / "receipts.duckdb"
         receipt, body = _synthetic_receipt(premises_digest=retrieval.lemma_id_digest)
@@ -903,7 +852,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
             duckdb_module=duckdb_module,
         )
         fs_path = Path(stored.filesystem_path)
-        fs_payload = json.loads(fs_path.read_text(encoding="utf-8"))
+        from jevops.outer import read_json
+
+        fs_payload = read_json(fs_path)
         cas_path = root / "artifacts" / stored.candidate_cid[:2] / stored.candidate_cid / "candidate.lean"
         conn, engine = connect_optional_db(db_path, duckdb_module=duckdb_module)
         try:
@@ -955,9 +906,11 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
 
     dim_keys = list(stored.dimensions)
     fs_dim_keys = list(fs_payload.get("dimensions") or {})
-    row_dims = json.loads(row["dimensions_json"]) if row else {}
-    exec_paths = json.loads(row["executable_paths_json"]) if row else {}
-    row_payload = json.loads(row["payload_json"]) if row else {}
+    from jevops.outer import loads_json
+
+    row_dims = loads_json(row["dimensions_json"] if row else None, default={})
+    exec_paths = loads_json(row["executable_paths_json"] if row else None, default={})
+    row_payload = loads_json(row["payload_json"] if row else None, default={})
     edge_children = sorted(item[1] for item in edges)
     expected_children = sorted({stored.key_digest, second_child})
 
@@ -1114,7 +1067,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             body=args.body,
             premises_digest=retrieval.lemma_id_digest,
         )
-        root = args.out_dir if args.out_dir is not None else Path(tempfile.mkdtemp(prefix="lra-023-store-"))
+        from jevops.outer import mkdtemp
+
+        root = args.out_dir if args.out_dir is not None else mkdtemp(prefix="lra-023-store-")
         stored = store_receipt(
             receipt,
             root=root,
@@ -1123,14 +1078,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             parent_digest=content_digest({"problem": args.name}),
             require_duckdb=args.require_duckdb,
         )
-        json.dump(stored.to_public_dict(), sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
+        from jevops.outer import print_json
+
+        print_json(stored.to_public_dict())
         return 0
     if args.self_check or argv is None or argv == []:
-        report = self_check(args.jsonl)
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check(args.jsonl))
     parser.error("choose --self-check or --store")
     return 2
 

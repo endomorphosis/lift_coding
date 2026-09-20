@@ -20,7 +20,7 @@ import time
 import urllib.error
 import urllib.request
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 from urllib.parse import urlparse
@@ -114,13 +114,15 @@ def pin_paths() -> None:
 def mistral_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
     from jevops.jev import any_key
 
-    return any_key(os.environ if env is None else env, KEY_ENV_NAMES)
+    from jevops.outer import env_mapping
+
+    return any_key(env_mapping(env), KEY_ENV_NAMES)
 
 
 def resolve_mistral_key(env: Optional[Mapping[str, str]] = None) -> str:
-    from jevops.outer import first_nonempty
+    from jevops.outer import env_mapping, first_nonempty
 
-    value = first_nonempty(os.environ if env is None else env, *KEY_ENV_NAMES)
+    value = first_nonempty(env_mapping(env), *KEY_ENV_NAMES)
     if not value:
         raise Track1MistralError("MISTRAL_API_KEY is not set")
     return value
@@ -172,43 +174,37 @@ def chat_completions(
         if float(payload["temperature"]) <= 0.0:
             payload["temperature"] = 0.3
     if stop:
-        payload["stop"] = [str(item) for item in stop if str(item)]
+        from jevops.outer import nonempty_strs
+
+        payload["stop"] = nonempty_strs(stop)
     from jevops.outer import chat_choice_texts
-    from jevops.outer import http_post
+    from jevops.outer import elapsed_ms
+    from jevops.outer import field_of
+    from jevops.outer import http_json
     from jevops.outer import usage_tokens
 
-    raw_body = json.dumps(payload).encode("utf-8")
     started = time.perf_counter()
-    status, raw, final_url, error = http_post(
+    status, data, final_url = http_json(
         url,
-        raw_body,
+        payload,
         timeout=float(timeout),
         headers={
             "Authorization": f"Bearer {key}",
             "Content-Type": "application/json",
             "Accept": "application/json",
         },
+        error_cls=Track1MistralError,
+        redact_fn=lambda message: _redact_text(message, key),
+        http_fmt="Mistral HTTP {status}: {body}",
+        json_fmt="Mistral returned invalid JSON: {exc}",
+        not_object="Mistral returned a non-object JSON payload",
     )
-    if error:
-        raise Track1MistralError(_redact_text(error, key)) from None
-    if status is None or int(status) >= 400:
-        raise Track1MistralError(
-            _redact_text(f"Mistral HTTP {status}: {raw[:400]}", key)
-        ) from None
     assert_hosted_url(final_url or url)
-    try:
-        data = json.loads(raw)
-    except Exception as exc:
-        raise Track1MistralError(f"Mistral returned invalid JSON: {exc}") from None
-    if not isinstance(data, dict):
-        raise Track1MistralError("Mistral returned a non-object JSON payload")
     text, _texts, usage = chat_choice_texts(data)
     inn, out = usage_tokens(usage)
     resolved_model = str(data.get("model") or model)
     choices = data.get("choices") if isinstance(data.get("choices"), list) else []
-    finish = ""
-    if choices and isinstance(choices[0], Mapping):
-        finish = str(choices[0].get("finish_reason") or "")
+    finish = str(field_of(choices[0] if choices else {}, "finish_reason") or "")
     return {
         "text": text,
         "model": resolved_model,
@@ -219,7 +215,7 @@ def chat_completions(
         "input_tokens": inn,
         "output_tokens": out,
         "finish_reason": finish,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
         "hardware_class": HARDWARE_CLASS,
         "prototype_base_url": PROTOTYPE_BASE_URL,
         "used_prototype_endpoint": False,
@@ -317,6 +313,8 @@ def run_named(
     fixture: bool = False,
     path: Optional[Path] = None,
 ) -> dict[str, Any]:
+    from jevops.outer import env_copy
+
     pin_paths()
     if official_track2 or lra_ts.official_track2_requested():
         return {
@@ -349,10 +347,12 @@ def run_named(
     router = lra_ts.TypeSafeLraRouter(
         mode="inloop",
         official_track2=False,
-        env={**os.environ, "LRA_TYPESAFE": "inloop"},
+        env=env_copy({"LRA_TYPESAFE": "inloop"}),
         client_factory=factory,
         require_key=not fixture,
     )
+    from jevops.outer import elapsed_ms, head_chars
+
     started = time.perf_counter()
     jev_result = router.route(state, neighbor_names=[item["name"] for item in neighbors])
     ledger.record(
@@ -388,7 +388,7 @@ def run_named(
         "used_prototype_endpoint": False,
         "labs_retire_date": LABS_RETIRE_DATE,
         "text": text,
-        "text_head": text[:400],
+        "text_head": head_chars(text, 400),
         "n_chars": len(text),
         "jev_route": jev_result.as_dict(),
         "ledger": ledger.as_dict(),
@@ -401,15 +401,16 @@ def run_named(
         "contaminates_track2": False,
         "arena_score": None,
         "api_key_present_in_record": False,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
     }
     return redact(payload)
 
 
 def audit_source() -> dict[str, Any]:
+    from jevops.outer import read_text
     from jevops.repair import audit_source as _audit
 
-    text = Path(__file__).read_text(encoding="utf-8")
+    text = read_text(__file__)
     out = _audit(text, forbidden_imports=FORBIDDEN_IMPORT_NAMES)
     imported = set(out["imported_names"])
     return {
@@ -475,9 +476,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.self_check or not (args.probe or args.live):
         report = self_check()
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(report)
     load_keyfiles()
     pin_paths()
     if args.probe:
@@ -486,6 +487,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             max_tokens=8,
             timeout=60.0,
         )
+        from jevops.outer import head_chars
+
         report = redact(
             {
                 "ok": bool(ping.get("text")),
@@ -499,7 +502,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     "hardware_class": HARDWARE_CLASS,
                     "used_prototype_endpoint": False,
                 },
-                "text_head": str(ping.get("text") or "")[:120],
+                "text_head": head_chars(ping.get("text") or "", 120),
                 "finish_reason": ping.get("finish_reason"),
                 "input_tokens": ping.get("input_tokens"),
                 "output_tokens": ping.get("output_tokens"),
@@ -510,16 +513,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         )
     else:
         report = run_named(args.name, max_new_tokens=args.max_new_tokens)
-    text = json.dumps(report, indent=2, sort_keys=True) + "\n"
-    if "apikey_" in text or "sk-" in text:
-        raise SystemExit("refusing to write a receipt that looks like it contains a secret")
-    args.out.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    path = args.out / f"track1-mistral-{stamp}.json"
-    latest = args.out / "track1-mistral-latest.json"
-    path.write_text(text, encoding="utf-8")
-    latest.write_text(text, encoding="utf-8")
-    print(json.dumps({"ok": report.get("ok"), "latest": str(latest), "skipped": report.get("skipped"), "reason": report.get("reason"), "host": (report.get("identity") or {}).get("url_host"), "model": (report.get("identity") or {}).get("resolved_model"), "used_prototype": report.get("used_prototype_endpoint"), "arena_score": None}, indent=2, sort_keys=True))
+    from jevops.outer import write_json_pair
+
+    latest = write_json_pair(
+        args.out,
+        report,
+        prefix="track1-mistral",
+        latest="track1-mistral-latest.json",
+        refuse=("apikey_", "sk-"),
+        refuse_msg="refusing to write a receipt that looks like it contains a secret",
+    )
+    from jevops.outer import print_json
+
+    print_json({"ok": report.get("ok"), "latest": str(latest), "skipped": report.get("skipped"), "reason": report.get("reason"), "host": (report.get("identity") or {}).get("url_host"), "model": (report.get("identity") or {}).get("resolved_model"), "used_prototype": report.get("used_prototype_endpoint"), "arena_score": None})
     return 0 if report.get("ok") else 1
 
 

@@ -40,19 +40,24 @@ def _ptr(kind: str, ident: str) -> str:
 
 
 def _codepath_ptr(path: str) -> str:
-    text = str(path or "").replace("\\", "/").strip()
+    from jevops.outer import path_to_dots, posix_slash, without_prefix
+
+    text = posix_slash(path)
     if not text:
         return ""
-    if text.startswith("papers/completion/lean_refactor_arena/harness/"):
-        text = "harness/" + text.split("harness/", 1)[-1]
-    return _ptr("codepath", text.replace("/", ".").replace(".py", ""))
+    marker = "papers/completion/lean_refactor_arena/harness/"
+    if text.startswith(marker):
+        text = "harness/" + without_prefix(text, marker)
+    return _ptr("codepath", path_to_dots(text))
 
 
 def load_lra_board(*, path: Optional[Path] = None) -> dict[str, Any]:
     from jevops.board import board_from_payload
 
     target = path or TASKS_JSON
-    data = json.loads(target.read_text(encoding="utf-8"))
+    from jevops.outer import read_json
+
+    data = read_json(target)
 
     def _paths(row: Mapping[str, Any]) -> list[str]:
         paths = [str(p) for p in (row.get("suggested_code_paths") or []) if p]
@@ -204,26 +209,29 @@ def overlay_live_board(
             live = fetch_fn()
             reason = "injected"
         except Exception as exc:
-            return {"ok": False, "overlay": False, "reason": type(exc).__name__, "campaign_write": False, "called_docker0": False}
+            from jevops.outer import exc_name
+
+            return {"ok": False, "overlay": False, "reason": exc_name(exc), "campaign_write": False, "called_docker0": False}
     else:
         ready = (lane or LRA_LANE) / "quack-owner" / "paper-owner.ready.json"
         if ready.is_file():
             try:
                 import importlib
-                import sys
 
-                scripts = str(Path("/home/barberb/lift_coding/scripts"))
-                if scripts not in sys.path:
-                    sys.path.insert(0, scripts)
+                from jevops.outer import ensure_sys_path
+
+                ensure_sys_path("/home/barberb/lift_coding/scripts")
                 campaign = importlib.import_module("paper_supervisor_campaign")
                 live = campaign.fetch_board("lean_refactor_arena", lane or LRA_LANE)
                 reason = "fetch_board"
             except Exception as exc:
+                from jevops.outer import tagged_exc
+
                 memory.setdefault("nca", {})["overlay_done"] = True
                 return {
                     "ok": True,
                     "overlay": False,
-                    "reason": f"fetch_failed:{type(exc).__name__}",
+                    "reason": tagged_exc("fetch_failed", exc),
                     "campaign_write": False,
                     "called_docker0": False,
                 }
@@ -246,9 +254,13 @@ def replica_ready_page(*, lane: Optional[Path] = None) -> dict[str, Any]:
     if not ready_path.is_file():
         return {"ok": False, "reason": "no_ready_json", "tasks": [], "campaign_write": False}
     try:
-        blob = json.loads(ready_path.read_text(encoding="utf-8"))
+        from jevops.outer import read_json
+
+        blob = read_json(ready_path)
     except Exception as exc:
-        return {"ok": False, "reason": type(exc).__name__, "tasks": [], "campaign_write": False}
+        from jevops.outer import exc_name
+
+        return {"ok": False, "reason": exc_name(exc), "tasks": [], "campaign_write": False}
     endpoint = blob.get("quack_endpoint") or blob.get("database_path")
     if not endpoint:
         return {"ok": False, "reason": "no_endpoint", "tasks": [], "campaign_write": False}
@@ -270,9 +282,11 @@ def replica_ready_page(*, lane: Optional[Path] = None) -> dict[str, Any]:
                 tasks.append({"task_alias": alias})
         return {"ok": True, "reason": "replica", "tasks": tasks, "campaign_write": False}
     except Exception as exc:
+        from jevops.outer import tagged_exc
+
         return {
             "ok": False,
-            "reason": f"source_failed:{type(exc).__name__}",
+            "reason": tagged_exc("source_failed", exc),
             "tasks": [],
             "campaign_write": False,
         }

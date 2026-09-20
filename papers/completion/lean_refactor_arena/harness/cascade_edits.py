@@ -23,7 +23,7 @@ import os
 import random
 import sys
 import time
-from datetime import datetime, timezone
+
 from pathlib import Path
 from typing import Any, Mapping, Optional
 
@@ -105,11 +105,14 @@ import track1_ledger as lra_t1  # noqa: E402
 
 
 def load_typesafe():
-    from jevops.outer import load_configured
+    from jevops.outer import after_calls, load_configured
 
-    lra_pca.load_keyfile()
-    lra_pca.pin_typesafe_path()
-    return load_configured(TS_PATH, "lra_typesafe_cascade")
+    return after_calls(
+        (lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
+        load_configured,
+        TS_PATH,
+        "lra_typesafe_cascade",
+    )
 
 
 def geo_mean(probs: list[float]) -> float:
@@ -198,7 +201,9 @@ def classify_tree(
             ),
             criteria=dict(kids),
         )
-    result = call_with_retry(lambda: make_client(module).system_one(state, questions))
+    from jevops.jev import invoke_system_one
+
+    result = call_with_retry(lambda: invoke_system_one(make_client(module), state, questions)[0])
     _record_jev(ledger, result)
     from jevops.pick import classification_from_answers
 
@@ -220,7 +225,9 @@ def verify_fail(module, state: Mapping[str, Any], *, ledger: lra_t1.ProblemLedge
         )
     from jevops.outer import attr_map
 
-    result = call_with_retry(lambda: make_client(module).system_one(state, questions))
+    from jevops.jev import invoke_system_one
+
+    result = call_with_retry(lambda: invoke_system_one(make_client(module), state, questions)[0])
     _record_jev(ledger, result)
     return attr_map(getattr(result, "nouls", None) or {}, FAIL_NOULS, "noul")
 
@@ -265,27 +272,40 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.self_check or not args.live:
-        report = self_check()
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
-    os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
+        from jevops.outer import print_ok
+
+        return print_ok(self_check())
+    from jevops.outer import pin_env
+
+    pin_env({"IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0"}, overwrite=False)
     module = load_typesafe()
     if module is None:
-        print(json.dumps({"ok": False, "reason": "no_typesafe", "arena_score": None}, indent=2))
+        from jevops.outer import print_json
+
+        print_json({"ok": False, "reason": "no_typesafe", "arena_score": None})
         return 1
     _raw, digest, records = lra_splice.load_warmup_records()
-    name = str(args.names).split(",")[0].strip()
-    record = next(item for item in records if item.get("name") == name)
+    from jevops.outer import first_csv
+
+    name = first_csv(args.names)
+    from jevops.outer import lookup_named
+
+    record = lookup_named(
+        records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
+    )
     import draft_fanout as lra_fan
 
     reference = lra_fan.tactic_block(record)
-    current = Path(args.init_file).read_text(encoding="utf-8").strip("\n") if args.init_file else reference
+    from jevops.outer import read_text
+
+    current = read_text(args.init_file).strip("\n") if args.init_file else reference
     rng = random.Random(int(args.seed))
     ledger = lra_t1.ProblemLedger(name=f"{name}#cascade", max_jev_calls=MAX_JEV, max_mistral_calls=0, max_grok_calls=0)
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), args.state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
-    restore = dest.read_bytes() if dest.is_file() else b""
+    from jevops.outer import read_bytes_if
+
+    restore = read_bytes_if(dest)
     start = lra_mcmc.compile_one(record, current, state_root=args.state_root, timeout=args.timeout, restore=restore)
     best = {
         "kind": "init",
@@ -304,10 +324,12 @@ def main(argv: Optional[list[str]] = None) -> int:
             if kind in failed_kinds and kind != "keep":
                 found.pop(kind, None)
         tree = live_tree(found)
+        from jevops.outer import exc_head, head_seq, tail_chars
+
         state = {
             "problem": name,
             "current_tokens": best["token_count"],
-            "current_tail": current[-400:],
+            "current_tail": tail_chars(current, 400),
             "available_leaves": sorted(k for k in found if k != "keep"),
             "failed_kinds": sorted(failed_kinds),
             "goal": "Shorten a lake-valid Lean 4 proof without breaking compile. Do not write Lean.",
@@ -315,7 +337,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         try:
             classified = classify_tree(module, state, tree, ledger=ledger)
         except Exception as exc:  # noqa: BLE001
-            history.append({"round": round_i, "action": "typesafe_error", "error": str(exc)[:300]})
+            history.append({"round": round_i, "action": "typesafe_error", "error": exc_head(exc)})
             if is_unavailable(exc):
                 time.sleep(5.0)
                 continue
@@ -324,7 +346,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             "round": round_i,
             "abstain": classified["abstain"],
             "separation": classified["separation"],
-            "paths": classified["paths"][:6],
+            "paths": head_seq(classified["paths"], 6),
             "family": classified["family"],
             "beam_fams": classified["beam_fams"],
         }
@@ -369,13 +391,13 @@ def main(argv: Optional[list[str]] = None) -> int:
                 **state,
                 "edit_kind": leaf,
                 "proposed_tokens": tok,
-                "proposed_tail": body[-400:],
+                "proposed_tail": tail_chars(body, 400),
             }
             try:
                 flags = verify_fail(module, vstate, ledger=ledger)
             except Exception as exc:  # noqa: BLE001
                 row["action"] = "verify_error"
-                row["error"] = str(exc)[:300]
+                row["error"] = exc_head(exc)
                 history.append(row)
                 tried = True
                 break
@@ -396,7 +418,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             row["action"] = "lake"
             row["ok"] = ok
             row["tokens"] = lake_tok
-            row["errors"] = (compiled.get("errors") or [])[:1]
+            row["errors"] = head_seq(compiled.get("errors"), 1)
             history.append(row)
             tried = True
             if ok and lake_tok < int(best["token_count"]):
@@ -413,9 +435,11 @@ def main(argv: Optional[list[str]] = None) -> int:
         if not tried:
             row["action"] = "abstain_family"
             history.append(row)
+    from jevops.outer import elapsed_ms, utc_stamp, write_json_pair
+
     payload = {
         "schema": "lra-cascade-edits/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "protocol": PROTOCOL,
         "pr": PR_ID,
         "cookbooks": [
@@ -440,29 +464,25 @@ def main(argv: Optional[list[str]] = None) -> int:
         "official_track2": False,
         "arena_score": None,
         "jev_generated_lean": False,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
     }
-    text = json.dumps(lra_pca.redact(payload), indent=2, sort_keys=True) + "\n"
-    if "apikey_" in text:
-        raise SystemExit("refusing to write a receipt that contains an API key")
-    args.out.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    path = args.out / f"cascade-edits-{stamp}.json"
-    latest = args.out / "cascade-edits-latest.json"
-    path.write_text(text, encoding="utf-8")
-    latest.write_text(text, encoding="utf-8")
-    print(
-        json.dumps(
-            {
-                "ok": True,
-                "latest": str(latest),
-                "kept": payload["best"],
-                "beats_reference": payload["beats_reference"],
-                "arena_score": None,
-            },
-            indent=2,
-            sort_keys=True,
-        )
+    latest = write_json_pair(
+        args.out,
+        lra_pca.redact(payload),
+        prefix="cascade-edits",
+        latest="cascade-edits-latest.json",
+        refuse="apikey_",
+    )
+    from jevops.outer import print_json
+
+    print_json(
+        {
+            "ok": True,
+            "latest": str(latest),
+            "kept": payload["best"],
+            "beats_reference": payload["beats_reference"],
+            "arena_score": None,
+        }
     )
     return 0
 

@@ -9,14 +9,11 @@ Not official Track 2. Not an Arena ranking. Never LOCK_EX.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import re
 import sys
 import time
-from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
@@ -34,6 +31,7 @@ CANARY_NAMES = (
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import retrieve as lra_retrieve  # noqa: E402
 import splice as lra_splice  # noqa: E402
 
@@ -50,21 +48,17 @@ REF_HEAD_LINES = 24
 CASE_REPLACE_CAP = 8
 NEIGHBOR_DRAFT_CAP = 3
 NEIGHBOR_HEAD_LINES = 8
-HAMMER_BODIES = (
-    ("native_hammer", "rfl", ("template", "rfl")),
-    ("native_hammer", "simp_all", ("template", "simp_all")),
-    ("aesop", "aesop", ("template", "aesop")),
-    ("omega_decide", "omega", ("template", "omega")),
-)
+from jevops.tactics import HAMMER_BODIES
 LIKELY_SHORTER_CRITERIA = (
     "longer or same",
     "modest cut around 10 percent",
     "large cut of 30 percent or more",
 )
-_CASE = re.compile(r"^(?P<indent> *)case (?P<label>.+?) =>[ \t]*$", re.M)
-_SIMP_AT = re.compile(r"^(?P<indent> *)simp at \S+\s*$")
-_HAVE_OBTAIN = re.compile(r"^(?P<indent> *)(have |obtain |rename_i )")
-_CALC = re.compile(r"^\s*calc\b", re.M)
+from jevops.tactics import CALC as _CALC
+from jevops.tactics import CASE as _CASE
+from jevops.tactics import HAVE_OBTAIN as _HAVE_OBTAIN
+from jevops.tactics import SIMP_AT as _SIMP_AT
+from jevops.tactics import CaseSpan as CaseSpan
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
         "fcntl",
@@ -76,29 +70,7 @@ FORBIDDEN_IMPORT_NAMES = frozenset(
 )
 
 
-@dataclass(frozen=True)
-class CaseSpan:
-    label: str
-    start: int
-    header_end: int
-    end: int
-    indent: int
-
-
-@dataclass
-class Draft:
-    draft_id: str
-    family: str
-    tactics: str
-    ops: tuple[str, ...] = ()
-    n_chars: int = 0
-    head: str = ""
-
-    def __post_init__(self) -> None:
-        tactics = str(self.tactics).strip("\n")
-        object.__setattr__(self, "tactics", tactics)
-        object.__setattr__(self, "n_chars", len(tactics))
-        object.__setattr__(self, "head", tactics[:HEAD_CHARS])
+from jevops.tactics import Draft
 
 
 def load_keyfile() -> None:
@@ -126,112 +98,55 @@ def tactic_block(record: Mapping[str, Any]) -> str:
 
 
 def case_spans(text: str) -> list[CaseSpan]:
-    from jevops.mask import nested_header_spans
+    from jevops.tactics import case_spans as _fn
 
-    rows = nested_header_spans(
-        text,
-        list(_CASE.finditer(text)),
-        indent_of=lambda match: len(match.group("indent")),
-        label_of=lambda match: str(match.group("label")),
-    )
-    return [
-        CaseSpan(
-            label=str(row["label"]),
-            start=int(row["start"]),
-            header_end=int(row["header_end"]),
-            end=int(row["end"]),
-            indent=int(row["indent"]),
-        )
-        for row in rows
-    ]
+    return _fn(text)
 
 
 def replace_case_body(text: str, span: CaseSpan, body: str) -> str:
-    from jevops.mask import replace_span
+    from jevops.tactics import replace_case_body as _fn
 
-    return replace_span(text, span.header_end, span.end, body, indent=" " * (span.indent + 2))
+    return _fn(text, span, body)
 
 
 def collapse_simp_at(text: str) -> str:
-    from jevops.mask import collapse_runs
+    from jevops.tactics import collapse_simp_at as _fn
 
-    return collapse_runs(
-        text,
-        lambda line: bool(_SIMP_AT.match(line)),
-        min_run=2,
-        replacement=lambda indent, _run: f"{indent}simp_all",
-    )
+    return _fn(text)
 
 
 def drop_redundant_simp_at(text: str) -> str:
     """Delete a ``simp at`` run when the next tactic is already ``simp_all``."""
 
-    from jevops.mask import rewrite_runs
+    from jevops.tactics import drop_redundant_simp_at as _fn
 
-    return rewrite_runs(
-        text,
-        lambda line: bool(_SIMP_AT.match(line)),
-        following_pred=lambda following: following.startswith("simp_all"),
-        min_collapse=2,
-        replacement=lambda indent, _run: f"{indent}simp_all",
-    )
+    return _fn(text)
 
 
 def span_preserving_drafts(tactics: str) -> list[Draft]:
     """One-case edits that keep every ``case`` arm. Not whole-proof templates."""
 
+    from jevops.tactics import span_preserving_edits
+
     drafts: list[Draft] = []
     seen: set[str] = set()
-    spans = case_spans(tactics)
-    if not spans:
-        whole = drop_redundant_simp_at(tactics)
-        _push(drafts, seen, "simp_set", whole, ("drop_redundant_simp_at", "whole"))
-        return drafts
-    top = min(span.indent for span in spans)
-    for span in spans:
-        if span.indent != top:
-            continue
-        body = tactics[span.header_end : span.end]
-        collapsed = drop_redundant_simp_at(body)
-        if collapsed != body:
-            merged = tactics[: span.header_end] + collapsed + tactics[span.end :]
-            _push(
-                drafts,
-                seen,
-                "simp_set",
-                merged,
-                ("drop_redundant_simp_at", "case", span.label),
-            )
-        dropped = drop_have_obtain(body)
-        if dropped != body:
-            merged = tactics[: span.header_end] + dropped + tactics[span.end :]
-            _push(
-                drafts,
-                seen,
-                "have_chain",
-                merged,
-                ("drop_have_obtain", "case", span.label),
-            )
-    whole = drop_redundant_simp_at(tactics)
-    _push(drafts, seen, "simp_set", whole, ("drop_redundant_simp_at", "all_cases"))
+    for family, body, ops in span_preserving_edits(tactics):
+        _push(drafts, seen, family, body, ops)
     return drafts
 
 
 def drop_have_obtain(text: str) -> str:
     """Drop unused have/obtain/rename_i only. Keep destructuring and used binders."""
 
-    import binder_use as lra_bind
+    from jevops.tactics import drop_have_obtain as _fn
 
-    return lra_bind.drop_unused_binders(text, kinds=("rename_i", "have", "obtain"))
+    return _fn(text)
 
 
 def first_case_only(text: str) -> str:
-    from jevops.outer import cut_prefix
+    from jevops.tactics import first_case_only as _fn
 
-    spans = case_spans(text)
-    if not spans:
-        return text
-    return cut_prefix(text, spans[0].end)
+    return _fn(text)
 
 
 def _draft_id(index: int) -> str:
@@ -241,21 +156,9 @@ def _draft_id(index: int) -> str:
 
 
 def _push(drafts: list[Draft], seen: set[str], family: str, tactics: str, ops: Sequence[str]) -> None:
-    from jevops.pick import padded_id
-    from jevops.pick import unique_push
+    from jevops.tactics import push_draft
 
-    unique_push(
-        drafts,
-        seen,
-        tactics,
-        lambda index, body: Draft(
-            draft_id=padded_id(index),
-            family=family,
-            tactics=body,
-            ops=tuple(ops),
-        ),
-        cap=MAX_DRAFTS,
-    )
+    push_draft(drafts, seen, family, tactics, ops, cap=MAX_DRAFTS, head_chars=HEAD_CHARS)
 
 
 def neighbor_tactic_head(record: Mapping[str, Any], *, n_lines: int = NEIGHBOR_HEAD_LINES) -> str:
@@ -277,43 +180,15 @@ def enumerate_drafts(
     reference = tactic_block(record)
     drafts: list[Draft] = []
     seen: set[str] = set()
-    _push(drafts, seen, "reference", reference, ("identity",))
-    for family, body, ops in HAMMER_BODIES:
+    from jevops.tactics import closed_tree_edits, neighbor_style_ops
+
+    for family, body, ops in closed_tree_edits(reference, case_replace_cap=CASE_REPLACE_CAP):
         _push(drafts, seen, family, body, ops)
-    collapsed = collapse_simp_at(reference)
-    _push(drafts, seen, "simp_set", collapsed, ("collapse_simp_at",))
-    dropped = drop_have_obtain(reference)
-    _push(drafts, seen, "have_chain", dropped, ("drop_have_obtain",))
-    if _CALC.search(reference):
-        calc_lines = [line for line in reference.splitlines() if line.strip().startswith("calc") or line.startswith("  ")]
-        _push(drafts, seen, "calc", "\n".join(calc_lines[:40]), ("keep_calc",))
-    _push(drafts, seen, "custom", first_case_only(reference), ("first_case_only",))
-    for span in case_spans(reference)[:CASE_REPLACE_CAP]:
-        _push(
-            drafts,
-            seen,
-            "simp_set",
-            replace_case_body(reference, span, "simp_all"),
-            ("replace_case", span.label, "simp_all"),
-        )
-        _push(
-            drafts,
-            seen,
-            "aesop",
-            replace_case_body(reference, span, "aesop"),
-            ("replace_case", span.label, "aesop"),
-        )
     retrieval = lra_retrieve.retrieve_record(record, records)
     neighbors = lra_retrieve.prompt_neighbors(retrieval, k=NEIGHBOR_DRAFT_CAP)
     by_name = {item.get("name"): item for item in records}
-    for neighbor in neighbors:
-        name = str(neighbor.get("name") or "")
-        source = by_name.get(name)
-        if not isinstance(source, Mapping):
-            continue
-        head = neighbor_tactic_head(source)
-        if head:
-            _push(drafts, seen, "custom", head, ("neighbor_style", name))
+    for family, body, ops in neighbor_style_ops(neighbors, by_name, head_fn=neighbor_tactic_head):
+        _push(drafts, seen, family, body, ops)
     return drafts[:MAX_DRAFTS]
 
 
@@ -336,49 +211,56 @@ def fanout_state(
     record: Mapping[str, Any],
     drafts: Sequence[Draft],
 ) -> dict[str, Any]:
+    from jevops.jev import fanout_problem_state
+
     split = lra_splice.split_statement_body(record)
     tactics = lra_splice.tactic_block_from_body(split.body_suffix)
     ref_lines = tactics.splitlines()
-    return {
-        "problem": {
+    return fanout_problem_state(
+        record,
+        statement_n=STATEMENT_CHARS,
+        problem={
             "name": record.get("name"),
             "source": record.get("source"),
             "n_toolchains": len(record.get("version_info") or []),
             "proof_length": record.get("proof_length"),
             "num_lines": record.get("num_lines"),
         },
-        "statement": str(record.get("statement") or "")[:STATEMENT_CHARS],
-        "reference_head": "\n".join(ref_lines[:REF_HEAD_LINES]),
-        "drafts": draft_catalog(drafts),
-    }
+        extra={
+            "reference_head": "\n".join(ref_lines[:REF_HEAD_LINES]),
+            "drafts": draft_catalog(drafts),
+        },
+    )
 
 
 def fanout_questions(drafts: Sequence[Draft], *, Choice: Any, Noul: Any, Score: Any) -> dict[str, Any]:
-    if len(drafts) > MAX_CHOICE_OPTIONS:
-        raise RuntimeError(f"draft catalog {len(drafts)} exceeds Choice option cap {MAX_CHOICE_OPTIONS}")
-    criteria = {
-        item.draft_id: f"{item.family}; ops={','.join(item.ops)}; {item.n_chars} chars"
-        for item in drafts
-    }
-    return {
-        "best_first_draft": Choice(
-            instructions=(
-                "Which draft id in `drafts` should code lake-compile first as a refactor of "
-                "`reference_head` for `statement`? Pick exactly one id. Do not write Lean."
+    from jevops.jev import choice_questions, draft_criteria, require_choice_cap
+
+    require_choice_cap(len(drafts), MAX_CHOICE_OPTIONS)
+    return choice_questions(
+        Choice=Choice,
+        Noul=Noul,
+        Score=Score,
+        criteria=draft_criteria(drafts),
+        best_instructions=(
+            "Which draft id in `drafts` should code lake-compile first as a refactor of "
+            "`reference_head` for `statement`? Pick exactly one id. Do not write Lean."
+        ),
+        nouls={
+            "any_draft_likely_compiles": (
+                "Is at least one catalog draft likely to compile on the record's version_info tags?"
             ),
-            criteria=criteria,
-        ),
-        "any_draft_likely_compiles": Noul(
-            instructions="Is at least one catalog draft likely to compile on the record's version_info tags?"
-        ),
-        "likely_token_cut": Score(
-            instructions="How large a source-token cut is plausible if the best draft replaces the reference?",
-            criteria=list(LIKELY_SHORTER_CRITERIA),
-        ),
-        "spend_llm_after_fanout": Noul(
-            instructions="After trying the ranked drafts, should code still spend a Leanstral generation?"
-        ),
-    }
+            "spend_llm_after_fanout": (
+                "After trying the ranked drafts, should code still spend a Leanstral generation?"
+            ),
+        },
+        scores={
+            "likely_token_cut": (
+                "How large a source-token cut is plausible if the best draft replaces the reference?",
+                list(LIKELY_SHORTER_CRITERIA),
+            )
+        },
+    )
 
 
 def redact(payload: Any) -> Any:
@@ -403,6 +285,8 @@ def rank_choice(probabilities: Mapping[str, Any], drafts: Sequence[Draft], *, k:
 
 
 def rank_problem(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]], *, live: bool) -> dict[str, Any]:
+    from jevops.outer import dumps_sorted
+
     drafts = enumerate_drafts(record, records)
     state = fanout_state(record, drafts)
     payload = {
@@ -412,7 +296,7 @@ def rank_problem(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]
         "draft_ids": [item.draft_id for item in drafts],
         "families": sorted({item.family for item in drafts}),
         "n_case_spans": len(case_spans(tactic_block(record))),
-        "state_chars": len(json.dumps(state, sort_keys=True)),
+        "state_chars": len(dumps_sorted(state)),
         "jev_generated_lean": False,
         "arena_score": None,
         "compile_attempted": False,
@@ -429,21 +313,21 @@ def rank_problem(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]
         payload["error"] = "TYPESAFE_API_KEY is not set"
         payload["catalog"] = draft_catalog(drafts)
         return payload
+    from jevops.jev import invoke_system_one, unpack_response
+
     questions = fanout_questions(drafts, Choice=Choice, Noul=Noul, Score=Score)
-    client = TypeSafeClient(timeout=60.0)
-    started = time.perf_counter()
-    result = client.system_one(state, questions)
-    wall_ms = (time.perf_counter() - started) * 1000.0
-    best = (getattr(result, "choices", None) or {}).get("best_first_draft")
-    noul_any = (getattr(result, "nouls", None) or {}).get("any_draft_likely_compiles")
-    spend = (getattr(result, "nouls", None) or {}).get("spend_llm_after_fanout")
-    shorter = (getattr(result, "scores", None) or {}).get("likely_token_cut")
+    result, wall_ms = invoke_system_one(TypeSafeClient(timeout=60.0), state, questions)
+    choices, nouls, scores, usage = unpack_response(result)
+    best = choices.get("best_first_draft")
+    noul_any = nouls.get("any_draft_likely_compiles")
+    spend = nouls.get("spend_llm_after_fanout")
+    shorter = scores.get("likely_token_cut")
     probabilities = dict(getattr(best, "probabilities", None) or {})
     payload.update(
         {
             "live": True,
             "model": getattr(result, "model", None),
-            "usage": dict(getattr(result, "usage", None) or {}),
+            "usage": usage,
             "wall_ms": wall_ms,
             "best_first_draft": getattr(best, "choice", None),
             "best_confidence": getattr(best, "confidence", None),
@@ -457,9 +341,10 @@ def rank_problem(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.outer import source_text
     from jevops.repair import audit_source as _audit
 
-    text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    text = source_text(source, path=__file__)
     out = _audit(text, forbidden_imports=FORBIDDEN_IMPORT_NAMES)
     imported = set(out["imported_names"])
     return {
@@ -473,13 +358,19 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
 
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     jsonl = Path(path) if path is not None else WARMUP_JSONL
-    before = hashlib.sha256(jsonl.read_bytes()).hexdigest()
+    from jevops.outer import digest_file
+
+    before = digest_file(jsonl)
     _raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    after = hashlib.sha256(jsonl.read_bytes()).hexdigest()
+    after = digest_file(jsonl)
     audit = audit_source()
     rows = []
     for name in CANARY_NAMES:
-        record = next(item for item in records if item.get("name") == name)
+        from jevops.outer import lookup_named
+
+        record = lookup_named(
+            records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
+        )
         rows.append(rank_problem(record, records, live=False))
     ok = (
         audit["ok"]
@@ -514,15 +405,17 @@ def live_rank(names: Sequence[str], path: Optional[Path] = None) -> dict[str, An
     _raw, digest, records = lra_splice.load_warmup_records(jsonl)
     started = time.perf_counter()
     rows = []
+    from jevops.outer import elapsed_ms, lookup_named, utc_stamp
+
     for name in names:
-        record = next((item for item in records if item.get("name") == name), None)
+        record = lookup_named(records, name)
         if record is None:
             rows.append({"name": name, "error": "unknown warm-up problem", "arena_score": None})
             continue
         rows.append(rank_problem(record, records, live=True))
     payload = {
         "schema": "lra-draft-fanout/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "protocol": PROTOCOL,
         "pr": PR_ID,
         "live": True,
@@ -535,7 +428,7 @@ def live_rank(names: Sequence[str], path: Optional[Path] = None) -> dict[str, An
         "official_track2": False,
         "compile_attempted": False,
         "arena_score": None,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
         "canaries": rows,
     }
     return redact(payload)
@@ -551,21 +444,23 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.self_check or not args.live:
         report = self_check(args.jsonl)
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
-    names = [item.strip() for item in str(args.names).split(",") if item.strip()]
+        from jevops.outer import print_ok
+
+        return print_ok(report)
+    from jevops.outer import split_csv, write_json_pair
+
+    names = split_csv(args.names)
     report = live_rank(names, args.jsonl)
-    text = json.dumps(report, indent=2, sort_keys=True) + "\n"
-    if "apikey_" in text:
-        raise SystemExit("refusing to write a receipt that contains an API key")
-    args.out.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    path = args.out / f"draft-fanout-{stamp}.json"
-    latest = args.out / "draft-fanout-latest.json"
-    path.write_text(text, encoding="utf-8")
-    latest.write_text(text, encoding="utf-8")
-    print(json.dumps(
+    latest = write_json_pair(
+        args.out,
+        report,
+        prefix="draft-fanout",
+        latest="draft-fanout-latest.json",
+        refuse="apikey_",
+    )
+    from jevops.outer import print_json
+
+    print_json(
         {
             "ok": all(row.get("live") for row in report.get("canaries") or []),
             "latest": str(latest),
@@ -575,10 +470,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 for row in report.get("canaries") or []
             ],
             "arena_score": None,
-        },
-        indent=2,
-        sort_keys=True,
-    ))
+        }
+    )
     return 0
 
 

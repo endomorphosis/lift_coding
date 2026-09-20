@@ -20,8 +20,6 @@ import os
 import re
 import sys
 import time
-from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional, Sequence
 
@@ -74,140 +72,76 @@ import track1_ledger as lra_t1  # noqa: E402
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 
 
-@dataclass
-class BeamItem:
-    prefix: str
-    steps: list[str] = field(default_factory=list)
-    stopped: bool = False
-    score: float = 1.0
-
-
-_HAVE_NAME = re.compile(r"have\s+([A-Za-z0-9_']+)")
+from jevops.tactics import BeamItem
 
 
 def have_binder_name(stripped: str) -> str:
-    from jevops.outer import first_group
+    from jevops.tactics import have_binder_name as _fn
 
-    core = stripped.lstrip("·. ").strip()
-    return first_group(core, _HAVE_NAME, method="match") or ""
+    return _fn(stripped)
 
 
 def identifier_used(name: str, text: str) -> bool:
-    from jevops.repair import ident_used
+    from jevops.tactics import identifier_used as _fn
 
-    if not name:
-        return False
-    return ident_used(
-        name,
-        text,
-        pattern=re.compile(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])"),
-    )
+    return _fn(name, text)
 
 
 def pca_prefix(tactics: str) -> str:
     """Keep PCA glue; keep MCA ``have`` only when a later line still names it."""
 
-    from jevops.mask import split_before
+    from jevops.tactics import pca_prefix as _fn
 
-    from jevops.search import filter_used_later
-
-    pre, rest = split_before(tactics, lambda line: line.strip().startswith("case "))
-    kept = filter_used_later(
-        pre,
-        maybe_drop=lambda stripped: stripped.startswith("have "),
-        name_fn=have_binder_name,
-        used_fn=identifier_used,
-        extra_later=rest,
-        always_drop=lambda stripped: stripped.startswith("rename_i ") or stripped.startswith("obtain "),
-    )
-    return "\n".join(kept).rstrip()
+    return _fn(tactics)
 
 
 def reference_vocab(tactics: str) -> list[str]:
-    from jevops.mask import unique_vocab
+    from jevops.tactics import reference_vocab as _fn
 
-    return unique_vocab(tactics, extras=("simp_all", "omega", "constructor", STOP_TOKEN))
+    return _fn(tactics, stop=STOP_TOKEN)
 
 
 def last_open_case(prefix: str) -> Optional[str]:
-    from jevops.search import last_header_tag
+    from jevops.tactics import last_open_case as _fn
 
-    return last_header_tag(prefix, "case ", split_on="=>")
+    return _fn(prefix)
 
 
 def case_header_map(reference: str) -> dict[str, str]:
-    from jevops.mask import header_map
+    from jevops.tactics import case_header_map as _fn
 
-    return header_map(
-        reference,
-        lra_fan.case_spans(reference),
-        tag_fn=lambda span: span.label.split()[0],
-    )
+    return _fn(reference)
 
 
 def case_arm_lines(reference: str, tag: str) -> list[str]:
-    from jevops.mask import span_body_lines
+    from jevops.tactics import case_arm_lines as _fn
 
-    return span_body_lines(
-        reference,
-        lra_fan.case_spans(reference),
-        tag,
-        tag_fn=lambda span: span.label.split()[0],
-    )
+    return _fn(reference, tag)
 
 
 def _status_pack(pack: Mapping[str, Any]) -> dict[str, Any]:
-    return {
-        "missing": list(pack.get("missing_cases") or []),
-        "empty": list(pack.get("empty_arms") or []),
-        "unfinished": list(pack.get("unfinished_arms") or []),
-        "earliest": pack.get("earliest_unfinished"),
-        "open": pack.get("open_case"),
-        "next_original": pack.get("next_original"),
-    }
+    from jevops.outer import remap_get
+
+    return remap_get(
+        pack,
+        {
+            "missing": "missing_cases",
+            "empty": "empty_arms",
+            "unfinished": "unfinished_arms",
+            "earliest": "earliest_unfinished",
+            "open": "open_case",
+            "next_original": "next_original",
+        },
+        lists=("missing", "empty", "unfinished"),
+    )
 
 
 def structure_pack(reference: str, prefix: str) -> dict[str, Any]:
     """PCA skeleton + MCA holes of the *original* proof, plus what the prefix still lacks."""
 
-    from jevops.search import structure_status
+    from jevops.tactics import structure_pack as _fn
 
-    holes = lra_mask.find_holes(reference)
-    skeleton = lra_mask.mask_skeleton(reference, holes)
-    tags = pca_case_tags(reference)
-    status = structure_status(
-        prefix,
-        tags,
-        present_fn=lambda pref, tag: f"case {tag}" in pref,
-        remaining_fn=lambda pref, tag: remaining_arm_lines(pref, reference, tag),
-        empty_fn=lambda pref, _tags: empty_case_arms(pref, reference),
-        open_fn=last_open_case,
-    )
-    counts = lra_pca.count_tactics(reference)
-    mca = [
-        {
-            "id": hole.hole_id,
-            "family": hole.family,
-            "head": hole.original.strip().splitlines()[0][:120],
-        }
-        for hole in holes
-    ]
-    return {
-        "pca_prefix": pca_prefix(reference),
-        "pca_skeleton_head": skeleton[:900],
-        "pca_case_tags": tags,
-        "missing_cases": status["missing"],
-        "empty_arms": status["empty"],
-        "unfinished_arms": status["unfinished"],
-        "next_original": status["next_original"],
-        "earliest_unfinished": status["earliest"],
-        "open_case": status["open"],
-        "mca_holes": mca,
-        "n_have": int(counts.get("n_have") or 0),
-        "n_induction": int(counts.get("n_induction") or 0),
-        "n_cases": int(counts.get("n_cases") or 0),
-        "n_tokens_ref": int(counts.get("n_tokens") or 0),
-    }
+    return _fn(reference, prefix, token_fn=lra_loop.token_count)
 
 
 def guided_vocab(prefix: str, reference: str, pack: Mapping[str, Any]) -> list[str]:
@@ -247,43 +181,21 @@ def filter_to_earliest(
 
 
 def looks_like_closer(stripped: str) -> bool:
-    from jevops.mask import starts_any
+    from jevops.tactics import looks_like_closer as _fn
 
-    return starts_any(
-        stripped,
-        ("simp", "exact ", "omega", "constructor", "rfl", "try simp", "try omega"),
-        exact=CLOSERS,
-    )
+    return _fn(stripped, closers=CLOSERS)
 
 
 def looks_like_tactic(stripped: str) -> bool:
-    from jevops.mask import starts_any
+    from jevops.tactics import looks_like_tactic as _fn
 
-    key = stripped.strip()
-    if key == STOP_TOKEN:
-        return True
-    return starts_any(key, _TACTIC_HEAD, exact=CLOSERS)
+    return _fn(stripped, stop=STOP_TOKEN, closers=CLOSERS)
 
 
 def parse_next_line(text: str) -> str:
-    from jevops.search import first_line
+    from jevops.lean import parse_next_tactic_line
 
-    body = lra_loop.extract_generated_tactics(text)
-    return first_line(
-        body,
-        stop_pred=lambda s: s.upper() == STOP_TOKEN
-        or s in {".", "qed"}
-        or s.startswith("sorry")
-        or s.startswith("admit"),
-        skip_pred=lambda s: "<|im_start|>" in s
-        or "<|im_end|>" in s
-        or s.startswith("<|")
-        or s.startswith("You are")
-        or s.startswith("Lean 4")
-        or len(s) > 160,
-        keep_pred=looks_like_tactic,
-        default=STOP_TOKEN,
-    )
+    return parse_next_tactic_line(text, stop=STOP_TOKEN)
 
 
 def step_prompt(
@@ -292,117 +204,63 @@ def step_prompt(
     vocab: Sequence[str],
     pack: Optional[Mapping[str, Any]] = None,
 ) -> str:
-    vocab_block = "\n".join(f"- {item}" for item in list(vocab)[:24])
-    pack = pack or {}
-    missing = pack.get("missing_cases") or []
-    holes = pack.get("mca_holes") or []
-    hole_block = "\n".join(
-        f"- {item.get('id')} family={item.get('family')}: {item.get('head')}" for item in holes[:12]
-    ) or "(none)"
-    skeleton = str(pack.get("pca_skeleton_head") or "")[:700]
-    return (
-        "Lean 4 tactic completion. Emit ONLY the next tactic line after := by, "
-        "or the word STOP if the proof is finished.\n"
-        "No theorem/lemma/import/open/sorry/admit. Prefer a shorter lake-valid proof.\n"
-        "PCA (principal): keep induction and every case header. Fill missing case headers "
-        "before any MCA have/rename_i from the original.\n"
-        "MCA (residual): simp-at / have / rw holes may be dropped or filled only inside the "
-        "currently open case. Do not splice pre-induction haves after a case arm.\n\n"
-        f"Problem: {record.get('name')}\n"
-        f"Statement:\n{str(record.get('statement') or '')[:700]}\n\n"
-        f"PCA skeleton of the original (holes marked):\n{skeleton}\n\n"
-        f"MCA holes of the original:\n{hole_block}\n\n"
-        f"Missing PCA case tags: {missing or 'none'}\n"
-        f"Empty PCA case arms: {pack.get('empty_arms') or 'none'}\n"
-        f"Fill this PCA case first: {pack.get('earliest_unfinished') or 'none'}\n"
-        f"Open case: {pack.get('open_case') or 'none'}\n\n"
-        f"Prefix so far:\n{prefix or '(empty)'}\n\n"
-        f"Priority next lines:\n{vocab_block}\n\n"
-        "Next tactic line:"
-    )
+    from jevops.tactics import step_prompt as _fn
+
+    return _fn(record, prefix, vocab, pack)
 
 
 def pca_case_tags(tactics: str) -> list[str]:
-    from jevops.mask import top_level_labels
+    from jevops.tactics import pca_case_tags as _fn
 
-    spans = lra_fan.case_spans(tactics)
-    return top_level_labels(spans, tag_fn=lambda span: span.label.split()[0])
+    return _fn(tactics)
 
 
 def case_body_lines(prefix: str, tag: str) -> list[str]:
-    from jevops.mask import capture_after_header
-    from jevops.search import last_header_tag
+    from jevops.tactics import case_body_lines as _fn
 
-    want = str(tag or "").split()[0]
-    return capture_after_header(
-        prefix,
-        want,
-        is_header=lambda stripped: stripped.startswith("case "),
-        id_of=lambda stripped: last_header_tag(stripped, "case ", split_on="=>") or "",
-    )
+    return _fn(prefix, tag)
 
 
 def empty_case_arms(prefix: str, reference: str) -> list[str]:
-    from jevops.search import empty_headers
+    from jevops.tactics import empty_case_arms as _fn
 
-    return empty_headers(
-        prefix,
-        pca_case_tags(reference),
-        present_fn=lambda pref, tag: f"case {tag}" in pref,
-        body_fn=lambda pref, tag: case_body_lines(pref, tag),
-    )
+    return _fn(prefix, reference)
 
 
 def is_mca_line(stripped: str) -> bool:
-    core = stripped.lstrip("·. ").strip()
-    return core.startswith(("have ", "rename_i ", "obtain "))
+    from jevops.tactics import is_mca_line as _fn
+
+    return _fn(stripped)
 
 
 def arm_keep_lines(reference: str, tag: str) -> list[str]:
     """Original arm tactics; keep MCA ``have`` only when a later line still names it."""
 
-    from jevops.search import after_item
-    from jevops.search import filter_used_later
+    from jevops.tactics import arm_keep_lines as _fn
 
-    lines = case_arm_lines(reference, tag)
-    later_arms: list[str] = []
-    for other in after_item(pca_case_tags(reference), tag):
-        later_arms.extend(case_arm_lines(reference, other))
-    return filter_used_later(
-        lines,
-        maybe_drop=lambda stripped: is_mca_line(stripped),
-        name_fn=have_binder_name,
-        used_fn=identifier_used,
-        extra_later=later_arms,
-    )
+    return _fn(reference, tag)
 
 
 def remaining_arm_lines(prefix: str, reference: str, tag: str) -> list[str]:
     """Original keep-lines not yet copied, counting indent-sensitive occurrences."""
 
-    from jevops.search import missing_occurrences
+    from jevops.tactics import remaining_arm_lines as _fn
 
-    return missing_occurrences(prefix.splitlines(), arm_keep_lines(reference, tag))
+    return _fn(prefix, reference, tag)
 
 
 def stop_allowed(prefix: str, reference: str) -> bool:
     """Do not STOP while a PCA case header is missing or its original arm is unfinished."""
 
-    from jevops.search import structure_complete
+    from jevops.tactics import stop_allowed as _fn
 
-    return structure_complete(
-        prefix,
-        pca_case_tags(reference),
-        present_fn=lambda pref, tag: f"case {tag}" in pref,
-        empty_fn=lambda pref, _tags: empty_case_arms(pref, reference),
-        remaining_fn=lambda pref, tag: remaining_arm_lines(pref, reference, tag),
-    )
+    return _fn(prefix, reference)
 
 
 def unused_vocab(prefix: str, vocab: Sequence[str]) -> list[str]:
-    from jevops.search import unused_items
+    from jevops.tactics import unused_vocab as _fn
 
-    return unused_items(prefix, vocab, stop=STOP_TOKEN)
+    return _fn(prefix, vocab, stop=STOP_TOKEN)
 
 
 def typesafe_prune(
@@ -416,47 +274,45 @@ def typesafe_prune(
 ) -> dict[str, Any]:
     from jevops.search import unique_cap
 
+    from jevops.jev import skipped
+    from jevops.outer import exc_head, head_seq
+    from jevops.pick import numbered_criteria
+
     unique = unique_cap(candidates, cap=MAX_CANDIDATES, empty=STOP_TOKEN)
     lra_pca.load_keyfile()
     lra_pca.pin_typesafe_path()
     ts_path = Path("/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py")
     if not ts_path.is_file():
-        return {
-            "skipped": True,
-            "reason": "typesafe_inference_missing",
-            "kept": unique[:keep],
-            "jev_generated_lean": False,
-            "arena_score": None,
-        }
+        return skipped(
+            "typesafe_inference_missing",
+            kept=head_seq(unique, keep),
+            jev_generated_lean=False,
+            arena_score=None,
+        )
     from jevops.outer import load_module_from_path
 
     module = load_module_from_path(ts_path, "lra_typesafe_inference")
     if module is None:
-        return {
-            "skipped": True,
-            "reason": "typesafe_inference_spec",
-            "kept": unique[:keep],
-            "jev_generated_lean": False,
-            "arena_score": None,
-        }
+        return skipped(
+            "typesafe_inference_spec",
+            kept=head_seq(unique, keep),
+            jev_generated_lean=False,
+            arena_score=None,
+        )
     Choice = module.Choice
     TypeSafeClient = module.TypeSafeClient
     typesafe_configured = module.typesafe_configured
 
     if not typesafe_configured():
-        return {
-            "skipped": True,
-            "reason": "no_key",
-            "kept": unique[:keep],
-            "jev_generated_lean": False,
-            "arena_score": None,
-        }
+        return skipped("no_key", kept=head_seq(unique, keep), jev_generated_lean=False, arena_score=None)
     pack = dict(context or {})
-    criteria = {f"c{index}": line for index, line in enumerate(unique)}
+    criteria = numbered_criteria(unique, prefix="c")
+    from jevops.outer import head_chars, tail_chars
+
     state = {
         "problem": {"name": record.get("name")},
-        "prefix_tail": prefix[-600:],
-        "pca_skeleton_head": str(pack.get("pca_skeleton_head") or "")[:500],
+        "prefix_tail": tail_chars(prefix, 600),
+        "pca_skeleton_head": head_chars(pack.get("pca_skeleton_head") or "", 500),
         "pca_case_tags": pack.get("pca_case_tags"),
         "missing_cases": pack.get("missing_cases"),
         "empty_arms": pack.get("empty_arms"),
@@ -481,24 +337,24 @@ def typesafe_prune(
             criteria=criteria,
         )
     }
-    try:
-        result = TypeSafeClient(timeout=45.0).system_one(state, questions)
-    except Exception as exc:  # noqa: BLE001 — prune must fail closed to greedy
-        return {
-            "skipped": True,
-            "reason": str(exc)[:300],
-            "kept": unique[:keep],
-            "jev_generated_lean": False,
-            "arena_score": None,
-        }
-    from jevops.outer import usage_tokens
+    from jevops.jev import invoke_system_one, unpack_response
+    from jevops.outer import dumps_compact, usage_tokens
 
-    usage = dict(getattr(result, "usage", None) or {})
+    try:
+        result, _wall = invoke_system_one(TypeSafeClient(timeout=45.0), state, questions)
+    except Exception as exc:  # noqa: BLE001 — prune must fail closed to greedy
+        return skipped(
+            exc_head(exc),
+            kept=head_seq(unique, keep),
+            jev_generated_lean=False,
+            arena_score=None,
+        )
+    choices, _nouls, _scores, usage = unpack_response(result)
     inn, out = usage_tokens(
-        usage, fallback_in=lra_t1.estimate_tokens(json.dumps(state))
+        usage, fallback_in=lra_t1.estimate_tokens(dumps_compact(state))
     )
     line = ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
-    best = (getattr(result, "choices", None) or {}).get("next_line")
+    best = choices.get("next_line")
     pick_id = str(getattr(best, "choice", None) or "c0")
     probs = dict(getattr(best, "probabilities", None) or {})
     from jevops.search import pin_then_rank
@@ -533,14 +389,12 @@ def propose_lines(
     pack = dict(pack or {})
     priority = guided_vocab(item.prefix, reference, pack) if reference else unused_vocab(item.prefix, vocab)
     prompt = step_prompt(record, item.prefix, priority or unused_vocab(item.prefix, vocab), pack)
-    proposals: list[str] = []
     n_samples = 1 if beam <= 1 else min(max(int(beam), 1), MAX_SAMPLES)
-    for sample_i in range(n_samples):
-        del sample_i
+    from jevops.search import merge_next_line_proposals, sample_next_lines
+
+    def _one() -> Any:
         if generate is not None:
-            raw = generate(prompt, temperature=temperature)
-            proposals.append(parse_next_line(raw))
-            continue
+            return generate(prompt, temperature=temperature)
         result = lra_d0.generate_as_client(
             prompt,
             max_new_tokens=MAX_NEW_TOKENS_LINE,
@@ -551,8 +405,7 @@ def propose_lines(
             stop=["\n\n"],
         )
         if result.skipped or not result.text:
-            proposals.append(STOP_TOKEN)
-            continue
+            return None
         if result.identity.fallback_used:
             raise lra_gt.LraGenerateError(
                 "refusing fallback "
@@ -562,13 +415,22 @@ def propose_lines(
             # generate_lra may leave resolved empty on some llama.cpp traces; still local.
             if result.identity.resolved_provider in lra_gt.FORBIDDEN_FALLBACK_PROVIDERS:
                 raise lra_gt.LraGenerateError("refusing non-docker0 provider")
-        proposals.append(parse_next_line(result.text))
-    for extra in priority[: max(0, MAX_CANDIDATES - len(proposals) - 1)]:
-        proposals.append(extra)
-    proposals = filter_to_earliest(proposals, pack, reference) or list(priority[:MAX_CANDIDATES])
-    if STOP_TOKEN not in proposals:
-        proposals.append(STOP_TOKEN)
-    return proposals
+        return result.text
+
+    proposals = sample_next_lines(
+        n_samples,
+        generate_fn=_one,
+        parse_fn=parse_next_line,
+        empty=STOP_TOKEN,
+    )
+
+    return merge_next_line_proposals(
+        proposals,
+        priority,
+        stop=STOP_TOKEN,
+        cap=MAX_CANDIDATES,
+        filter_fn=lambda rows: filter_to_earliest(rows, pack, reference),
+    )
 
 
 def extend_prefix(prefix: str, nxt: str, *, original: Optional[str] = None) -> str:
@@ -600,96 +462,47 @@ def run_search(
     )
     beam_n = 1 if mode == "greedy" else max(1, int(beam))
     temp = float(temperature)
-    items = [BeamItem(prefix=prefix0)]
-    trace: list[dict[str, Any]] = []
-    local_calls = 0
     n_samples = 1 if beam_n <= 1 else min(beam_n, MAX_SAMPLES)
     prune_fn = prune or typesafe_prune
-    for step in range(int(max_steps)):
-        if all(item.stopped for item in items):
-            break
-        nxt_items: list[BeamItem] = []
-        for item in items:
-            if item.stopped:
-                nxt_items.append(item)
-                continue
-            pack = structure_pack(tactics, item.prefix)
-            if stop_allowed(item.prefix, tactics):
-                nxt_items.append(
-                    BeamItem(prefix=item.prefix, steps=item.steps, stopped=True, score=item.score)
-                )
-                trace.append(
-                    {
-                        "step": step,
-                        "stop_exhausted": True,
-                        "earliest_unfinished": pack.get("earliest_unfinished"),
-                    }
-                )
-                continue
-            proposals = propose_lines(
+    from jevops.search import run_prefix_beam
+
+    def _prune(item: BeamItem, proposals: Sequence[str], pack: Mapping[str, Any]) -> dict[str, Any]:
+        if prune is None:
+            return typesafe_prune(
                 record,
-                item,
-                vocab,
-                beam=beam_n,
-                temperature=temp,
-                generate=generate,
-                pack=pack,
-                reference=tactics,
+                item.prefix,
+                proposals,
+                ledger=ledger,
+                keep=beam_n,
+                context=pack,
             )
-            local_calls += n_samples
-            if prune is None:
-                pruned = typesafe_prune(
-                    record,
-                    item.prefix,
-                    proposals,
-                    ledger=ledger,
-                    keep=beam_n,
-                    context=pack,
-                )
-            else:
-                pruned = prune_fn(record, item.prefix, proposals, ledger=ledger, keep=beam_n)
-            kept_lines = list(pruned.get("kept") or [STOP_TOKEN])
-            filtered = filter_to_earliest(
-                [line for line in kept_lines if line != STOP_TOKEN],
-                pack,
-                tactics,
-            )
-            kept_lines = filtered or filter_to_earliest(proposals, pack, tactics)[:beam_n] or [STOP_TOKEN]
-            pruned = dict(pruned)
-            pruned["kept"] = kept_lines
-            pruned["stop_blocked"] = True
-            trace.append(
-                {
-                    "step": step,
-                    "prefix_lines": item.prefix.count("\n") + 1,
-                    "temperature": temp,
-                    "missing_cases": pack.get("missing_cases"),
-                    "empty_arms": pack.get("empty_arms"),
-                    "earliest_unfinished": pack.get("earliest_unfinished"),
-                    "next_original": pack.get("next_original"),
-                    "open_case": pack.get("open_case"),
-                    "proposals": proposals[:MAX_CANDIDATES],
-                    "typesafe": {k: pruned.get(k) for k in ("skipped", "reason", "best", "kept", "confidence")},
-                }
-            )
-            for nxt in kept_lines:
-                child = BeamItem(
-                    prefix=extend_prefix(item.prefix, nxt, original=str(pack.get("next_original") or "") or None),
-                    steps=item.steps + [nxt],
-                    stopped=nxt == STOP_TOKEN,
-                    score=item.score,
-                )
-                nxt_items.append(child)
-        # Cap beam after TypeSafe prune (search space stays bounded).
-        items = nxt_items[:beam_n]
-    finals = []
-    seen: set[str] = set()
-    for item in items:
-        body = item.prefix.strip("\n")
-        if body in seen:
-            continue
-        seen.add(body)
-        finals.append({"tactics": body, "steps": item.steps, "stopped": item.stopped})
+        return prune_fn(record, item.prefix, proposals, ledger=ledger, keep=beam_n)
+
+    out = run_prefix_beam(
+        prefix0,
+        max_steps=max_steps,
+        beam_n=beam_n,
+        stop_token=STOP_TOKEN,
+        pack_fn=lambda prefix: structure_pack(tactics, prefix),
+        stop_allowed_fn=lambda prefix: stop_allowed(prefix, tactics),
+        propose_fn=lambda item, pack: propose_lines(
+            record,
+            item,
+            vocab,
+            beam=beam_n,
+            temperature=temp,
+            generate=generate,
+            pack=pack,
+            reference=tactics,
+        ),
+        prune_fn=_prune,
+        extend_fn=lambda prefix, nxt, pack: extend_prefix(
+            prefix, nxt, original=str(pack.get("next_original") or "") or None
+        ),
+        filter_fn=lambda lines, pack: filter_to_earliest(lines, pack, tactics),
+        n_samples=n_samples,
+        item_cls=BeamItem,
+    )
     return {
         "pca_prefix": prefix0,
         "pca_mca": structure_pack(tactics, prefix0),
@@ -698,9 +511,9 @@ def run_search(
         "beam": beam_n,
         "temperature": temp,
         "max_steps": int(max_steps),
-        "local_calls": local_calls,
-        "finals": finals,
-        "trace": trace,
+        "local_calls": out["local_calls"],
+        "finals": out["finals"],
+        "trace": out["trace"],
         "ledger": ledger.as_dict(),
         "hardware_class": HARDWARE_CLASS,
         "called_hosted_mistral": False,
@@ -710,101 +523,65 @@ def run_search(
     }
 
 
-_BARE_SIMP_ALL = re.compile(r"^[ \t]*\.?[ \t]*simp_all\s*$")
-
-
 def drop_first_bare_simp_all(tactics: str) -> Optional[str]:
-    from jevops.mask import drop_matching_line
+    from jevops.tactics import drop_first_bare_simp_all as _fn
 
-    return drop_matching_line(tactics, lambda line: bool(_BARE_SIMP_ALL.match(line)), last=False)
+    return _fn(tactics)
 
 
 def drop_last_bare_simp_all(tactics: str) -> Optional[str]:
     """Drop the last standalone ``simp_all`` / ``. simp_all`` line (not ``<;> simp_all``)."""
 
-    from jevops.mask import drop_matching_line
+    from jevops.tactics import drop_last_bare_simp_all as _fn
 
-    return drop_matching_line(tactics, lambda line: bool(_BARE_SIMP_ALL.match(line)), last=True)
+    return _fn(tactics)
 
 
 def repair_no_progress_simp_all(tactics: str, errors: Sequence[Mapping[str, Any]]) -> Optional[str]:
-    blob = "\n".join(str(item.get("data") or "") for item in errors)
-    if "simp_all made no progress" not in blob:
-        return None
-    return drop_last_bare_simp_all(tactics)
+    from jevops.repair import repair_on_needle
+
+    return repair_on_needle(
+        tactics, errors, "simp_all made no progress", drop_last_bare_simp_all
+    )
 
 
 def join_consecutive_exacts(tactics: str) -> str:
-    from jevops.mask import join_consecutive_lines
+    from jevops.tactics import join_consecutive_exacts as _fn
 
-    return join_consecutive_lines(
-        tactics,
-        lambda line: line.strip().startswith("exact "),
-        joiner=lambda indent, a, b: f"{indent}{a.strip()} <;> {b.strip()}",
-    )
+    return _fn(tactics)
 
 
 def collapse_defined_simp(tactics: str) -> str:
-    return re.sub(
-        r"(?m)^(?P<indent>[ \t]*)simp \[isDefined\] at \* <;> simp_all\s*$",
-        r"\g<indent>simp_all",
-        tactics,
-    )
+    from jevops.tactics import collapse_defined_simp as _fn
+
+    return _fn(tactics)
 
 
 def shorten_keeping_prefix_haves(tactics: str) -> list[tuple[str, str]]:
     """Compiler shortenings that must keep every original prefix ``have`` (simp_all fuel)."""
 
-    haves = prefix_have_lines(tactics)
-    seen: set[str] = {tactics.strip("\n")}
-    out: list[tuple[str, str]] = []
-
-    def keep(name: str, body: Optional[str]) -> None:
-        from jevops.pick import keep_if_contains
-
-        keep_if_contains(seen, out, name, body, required=haves)
-
-    keep("simp_set", lra_fan.drop_redundant_simp_at(tactics))
-    keep("drop_first_bare_simp", drop_first_bare_simp_all(tactics))
-    keep("drop_last_bare_simp", drop_last_bare_simp_all(tactics))
-    keep("join_exacts", join_consecutive_exacts(tactics))
-    keep("collapse_defined_simp", collapse_defined_simp(tactics))
-    keep("join_exacts_drop_last_simp", drop_last_bare_simp_all(join_consecutive_exacts(tactics)))
     import inits_updates_shorten as lra_ius
+    from jevops.tactics import shorten_keeping_prefix_haves as _fn
 
-    replayed = lra_ius.replay(tactics).strip("\n")
-    if replayed and replayed not in seen:
-        seen.add(replayed)
-        out.append(("inits_replay", replayed))
-    for item in lra_ius.propose(tactics):
-        nxt = str(item.get("tactics") or "").strip("\n")
-        if nxt and nxt not in seen:
-            seen.add(nxt)
-            out.append((str(item.get("kind") or "inits_step"), nxt))
-    for draft in lra_fan.span_preserving_drafts(tactics):
-        keep(f"span_{draft.family}_{draft.draft_id}", draft.tactics)
-    return out
+    extras: list[tuple[str, str]] = [("inits_replay", lra_ius.replay(tactics))]
+    extras.extend((str(item.get("kind") or "inits_step"), str(item.get("tactics") or "")) for item in lra_ius.propose(tactics))
+    keep_extras = [
+        (f"span_{draft.family}_{draft.draft_id}", draft.tactics)
+        for draft in lra_fan.span_preserving_drafts(tactics)
+    ]
+    return _fn(tactics, extras, keep_extras)
 
 
 def prefix_have_lines(reference: str) -> list[str]:
-    from jevops.mask import lines_until
+    from jevops.tactics import prefix_have_lines as _fn
 
-    return lines_until(
-        reference,
-        lambda line: line.strip().startswith("have "),
-        lambda line: line.strip().startswith("case "),
-    )
+    return _fn(reference)
 
 
 def insert_haves_before_induction(draft: str, haves: Sequence[str]) -> str:
-    from jevops.mask import insert_before
+    from jevops.tactics import insert_haves_before_induction as _fn
 
-    return insert_before(
-        draft,
-        haves,
-        lambda line: line.strip().startswith("induction "),
-        if_missing="prepend",
-    )
+    return _fn(draft, haves)
 
 
 def lake_keepbest(
@@ -816,57 +593,22 @@ def lake_keepbest(
 ) -> list[dict[str, Any]]:
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
-    restore = dest.read_bytes() if dest.is_file() else b""
-    rows = []
+    from jevops.outer import read_bytes_if
+
+    restore = read_bytes_if(dest)
     reference = lra_fan.tactic_block(record)
-    seen: set[str] = set()
+    from jevops.search import compile_variant_rows
+    from jevops.tactics import keepbest_variants
+
+    pairs: list[tuple[str, str]] = []
     for kind, body in [("reference", reference), *[(f"beam_{index}", text) for index, text in enumerate(tactics_list)]]:
-        key = body.strip("\n")
-        if key in seen and kind != "reference":
-            continue
-        variants: list[tuple[str, str]] = [(kind, body)]
-        if kind != "reference":
-            haves = prefix_have_lines(reference)
-            present = {line.strip() for line in body.splitlines()}
-            for have in haves:
-                if have.strip() in present:
-                    continue
-                name = have_binder_name(have.strip()) or "have"
-                variants.append((f"{kind}_have_{name}", insert_haves_before_induction(body, [have])))
-            restored = insert_haves_before_induction(body, haves)
-            if restored != body:
-                variants.append((f"{kind}_haves", restored))
-            current = body
-            for pass_i in range(1, 4):
-                nxt = drop_last_bare_simp_all(current)
-                if not nxt or nxt == current:
-                    break
-                variants.append((f"{kind}_nosimp{pass_i}", nxt))
-                current = nxt
-        for label, current in variants:
-            key2 = current.strip("\n")
-            if key2 in seen and label != "reference":
-                continue
-            seen.add(key2)
-            compiled = lra_kb.compile_tactics(
-                record,
-                current,
-                state_root=state_root,
-                timeout=timeout,
-                restore=restore,
-            )
-            rows.append(
-                {
-                    "kind": label,
-                    "n_chars": len(current),
-                    "tactics_head": current[:240],
-                    **{
-                        k: compiled.get(k)
-                        for k in ("ok", "theorem_ok", "module_exit_0", "exit_code", "token_count", "errors", "wall_ms")
-                    },
-                }
-            )
-    return rows
+        pairs.extend(keepbest_variants(kind, body, reference))
+    return compile_variant_rows(
+        pairs,
+        lambda body: lra_kb.compile_tactics(
+            record, body, state_root=state_root, timeout=timeout, restore=restore
+        ),
+    )
 
 
 def self_check() -> dict[str, Any]:
@@ -979,15 +721,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.self_check or (not args.live and not args.repair_latest and not args.shorten_reference):
-        report = self_check()
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
-    os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
+        from jevops.outer import print_ok
+
+        return print_ok(self_check())
+    from jevops.outer import pin_env
+
+    pin_env({"IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0"}, overwrite=False)
     repair_tactics: dict[str, str] = {}
     if args.repair_latest:
         latest = args.out / "constrained-beam-latest.json"
-        prior = json.loads(latest.read_text(encoding="utf-8"))
+        from jevops.outer import read_json
+
+        prior = read_json(latest)
         for item in prior.get("problems") or []:
             finals = ((item.get("search") or {}).get("finals") or [])
             if finals and item.get("name"):
@@ -1004,15 +749,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             "official_track2": False,
             "arena_score": None,
         }
-        json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
+        from jevops.outer import print_json
+
+        print_json(payload)
         return 0
     _raw, digest, records = lra_splice.load_warmup_records()
-    names = [item.strip() for item in str(args.names).split(",") if item.strip()]
+    from jevops.outer import split_csv
+
+    names = split_csv(args.names)
     started = time.perf_counter()
     problems = []
     for name in names:
-        record = next(item for item in records if item.get("name") == name)
+        from jevops.outer import lookup_named
+
+        record = lookup_named(
+            records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
+        )
         if args.repair_latest:
             body = repair_tactics.get(name) or ""
             search = {
@@ -1091,9 +843,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 }
             )
         )
+    from jevops.outer import elapsed_ms, utc_stamp, write_json_pair
+
     payload = {
         "schema": "lra-constrained-beam-local/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "protocol": PROTOCOL,
         "pr": PR_ID,
         "hardware_class": HARDWARE_CLASS,
@@ -1101,30 +855,26 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "called_docker0": not args.repair_latest and not args.shorten_reference,
         "official_track2": False,
         "arena_score": None,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
         "problems": problems,
     }
-    text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    if "apikey_" in text:
-        raise SystemExit("refusing to write a receipt that contains an API key")
-    args.out.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    path = args.out / f"constrained-beam-{stamp}.json"
-    latest = args.out / "constrained-beam-latest.json"
-    path.write_text(text, encoding="utf-8")
-    latest.write_text(text, encoding="utf-8")
-    print(
-        json.dumps(
-            {
-                "ok": True,
-                "latest": str(latest),
-                "kept": [{"name": item.get("name"), "kept": item.get("kept")} for item in problems],
-                "hardware_class": HARDWARE_CLASS,
-                "arena_score": None,
-            },
-            indent=2,
-            sort_keys=True,
-        )
+    latest = write_json_pair(
+        args.out,
+        payload,
+        prefix="constrained-beam",
+        latest="constrained-beam-latest.json",
+        refuse="apikey_",
+    )
+    from jevops.outer import print_json
+
+    print_json(
+        {
+            "ok": True,
+            "latest": str(latest),
+            "kept": [{"name": item.get("name"), "kept": item.get("kept")} for item in problems],
+            "hardware_class": HARDWARE_CLASS,
+            "arena_score": None,
+        }
     )
     return 0
 

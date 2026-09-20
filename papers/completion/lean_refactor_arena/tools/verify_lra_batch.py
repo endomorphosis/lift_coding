@@ -1011,7 +1011,9 @@ def _numeric_score_assignments(source: str) -> list[str]:
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
-    text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    from jevops.outer import source_text
+
+    text = source_text(source, path=__file__)
     imported = _imported_names(text)
     forbidden = sorted(
         name
@@ -1113,7 +1115,9 @@ def _cli_verify(receipts_dir: Path, jsonl: Path, extra: Sequence[str]) -> dict[s
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     """Prove fail-closed gates on compact synthetic receipts. No lake compile."""
 
-    source = Path(__file__).read_text(encoding="utf-8")
+    from jevops.outer import read_text
+
+    source = read_text(__file__)
     jsonl = Path(path) if path is not None else WARMUP_JSONL
     before = sha256_file(jsonl)
     raw, digest, records = lra_splice.load_warmup_records(jsonl)

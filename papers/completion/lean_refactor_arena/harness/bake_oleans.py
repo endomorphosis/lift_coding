@@ -100,73 +100,19 @@ class BakeToolchainMissing(BakeError):
     """Tag-pinned elan lake/lean is not installed. Not a PATH fallback."""
 
 
-@dataclass(frozen=True)
-class VersionPin:
-    lean_tag: str
-    git_commit: str
-
-    def to_dict(self) -> dict[str, str]:
-        return {"lean_tag": self.lean_tag, "git_commit": self.git_commit}
-
-
-@dataclass(frozen=True)
-class PutnamPin:
-    lean_tag: str
-    mathlib_git: str
-    mathlib_rev: str
-    aesop_git: str
-    aesop_rev: str
-    jsonl_version_pin: str
-    package: str = PUTNAM_PACKAGE
-    lib: str = PUTNAM_LIB
-    module: str = PUTNAM_MODULE
-    candidate_relpath: str = PUTNAM_CANDIDATE_RELPATH
-    putnambench_url: None = None
-    tmp_lean: bool = False
-
-    def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
-
-
-@dataclass(frozen=True)
-class BakeJob:
-    kind: str
-    source: str
-    lean_tag: str
-    git_commit: str
-    url: str
-    cache_key: str
-    phase: int
-    record_names: tuple[str, ...]
-    file_paths: tuple[str, ...]
-    module: str
-    mathlib_rev: str = ""
-    aesop_rev: str = ""
-    lakefile_required: bool = False
-    putnambench_url: None = None
-    arena_score: None = None
-
-    def to_dict(self) -> dict[str, Any]:
-        payload = asdict(self)
-        payload["record_names"] = list(self.record_names)
-        payload["file_paths"] = list(self.file_paths)
-        payload["arena_score"] = None
-        return payload
+from jevops.lean import BakeJob
+from jevops.lean import BakePlan as _KernelBakePlan
+from jevops.lean import PutnamPin
+from jevops.lean import VersionPin
 
 
 @dataclass
-class BakePlan:
-    jobs: list[BakeJob] = field(default_factory=list)
+class BakePlan(_KernelBakePlan):
     frozen_warmup_sha256: str = FROZEN_WARMUP_SHA256
-    jsonl_bytes: int = 0
-    n_records: int = 0
-    arena_score: None = None
 
     @property
     def first_job(self) -> BakeJob:
-        if not self.jobs:
-            raise BakeError("bake plan is empty")
-        return self.jobs[0]
+        return super().first_job(error_cls=BakeError)
 
     def to_dict(self) -> dict[str, Any]:
         first = self.first_job
@@ -291,44 +237,39 @@ def _url_cache_key(url: str) -> str:
 
 
 def putnam_pin(lean_tag: str, *, jsonl_version_pin: str = "") -> PutnamPin:
-    tag = normalize_lean_tag(lean_tag)
-    if tag not in PUTNAM_TAGS:
-        raise BakeError(f"Putnam lake project is not defined for lean tag {tag}")
-    return PutnamPin(
-        lean_tag=tag,
+    from jevops.lean import putnam_pin_for_tag
+
+    return putnam_pin_for_tag(
+        lean_tag,
+        PUTNAM_TAGS,
         mathlib_git=MATHLIB_GIT,
-        mathlib_rev=tag,
         aesop_git=AESOP_GIT,
-        aesop_rev=tag,
         jsonl_version_pin=jsonl_version_pin,
+        normalize_fn=normalize_lean_tag,
+        error_cls=BakeError,
     )
 
 
 def render_lean_toolchain(lean_tag: str) -> str:
-    return f"leanprover/lean4:{normalize_lean_tag(lean_tag)}\n"
+    from jevops.lean import render_lean_toolchain as _fn
+
+    return _fn(normalize_lean_tag(lean_tag))
 
 
 def render_lakefile(lean_tag: str) -> str:
     """Per-tag Mathlib+Aesop lakefile. Candidate module is Putnam.Candidate, not Tmp.lean."""
 
+    from jevops.lean import render_mathlib_aesop_lakefile
+
     pin = putnam_pin(lean_tag)
-    return (
-        "import Lake\n"
-        "open Lake DSL\n"
-        "\n"
-        f"package «{pin.package}» where\n"
-        f"  moreLeanArgs := #[\"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}\"]\n"
-        f"  moreServerArgs := #[\"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}\"]\n"
-        "\n"
-        "require mathlib from git\n"
-        f'  "{pin.mathlib_git}" @ "{pin.mathlib_rev}"\n'
-        "\n"
-        "require aesop from git\n"
-        f'  "{pin.aesop_git}" @ "{pin.aesop_rev}"\n'
-        "\n"
-        "@[default_target]\n"
-        f"lean_lib «{pin.lib}» where\n"
-        f"  globs := #[.submodules `{pin.lib}]\n"
+    return render_mathlib_aesop_lakefile(
+        package=pin.package,
+        lib=pin.lib,
+        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        mathlib_git=pin.mathlib_git,
+        mathlib_rev=pin.mathlib_rev,
+        aesop_git=pin.aesop_git,
+        aesop_rev=pin.aesop_rev,
     )
 
 
@@ -337,6 +278,8 @@ def render_putnam_root() -> str:
 
 
 def render_putnam_candidate_stub() -> str:
+    from jevops.lean import render_placeholder_theorem
+
     return (
         "/-\n"
         "  LRA Putnam candidate module.\n"
@@ -347,21 +290,23 @@ def render_putnam_candidate_stub() -> str:
         "  `lake env lean Tmp.lean` without a lakefile.\n"
         "-/\n"
         "\n"
-        "theorem lra_putnam_candidate_placeholder : True := by\n"
-        "  trivial\n"
+        + render_placeholder_theorem()
     )
 
 
 def putnam_project_files(lean_tag: str, *, jsonl_version_pin: str = "") -> dict[str, str]:
     pin = putnam_pin(lean_tag, jsonl_version_pin=jsonl_version_pin)
-    pins_json = json.dumps(pin.to_dict(), indent=2, sort_keys=True) + "\n"
-    return {
-        "lakefile.lean": render_lakefile(pin.lean_tag),
-        "lean-toolchain": render_lean_toolchain(pin.lean_tag),
-        PUTNAM_ROOT_RELPATH: render_putnam_root(),
-        PUTNAM_CANDIDATE_RELPATH: render_putnam_candidate_stub(),
-        "pins.json": pins_json,
-    }
+    from jevops.lean import putnam_file_map
+
+    return putnam_file_map(
+        pin,
+        lakefile=render_lakefile(pin.lean_tag),
+        toolchain=render_lean_toolchain(pin.lean_tag),
+        root=render_putnam_root(),
+        candidate=render_putnam_candidate_stub(),
+        root_relpath=PUTNAM_ROOT_RELPATH,
+        candidate_relpath=PUTNAM_CANDIDATE_RELPATH,
+    )
 
 
 def materialize_putnam_project(
@@ -370,133 +315,37 @@ def materialize_putnam_project(
     *,
     jsonl_version_pin: str = "",
 ) -> dict[str, str]:
-    from jevops.outer import plant_files, refuse_basename
+    from jevops.lean import materialize_lake_files
 
     files = putnam_project_files(lean_tag, jsonl_version_pin=jsonl_version_pin)
-    dest = Path(dest)
-    for relpath in files:
-        refuse_basename(
-            relpath,
-            FORBIDDEN_PUTNAM_BASENAME,
-            error_cls=BakeError,
-            fmt="refusing to materialize {name}",
-        )
-    plant_files(dest, files)
-    forbidden = dest / FORBIDDEN_PUTNAM_BASENAME
-    if forbidden.exists():
-        raise BakeError("Putnam lake project must not contain Tmp.lean")
-    return {relpath: str(dest / relpath) for relpath in files}
+    return materialize_lake_files(
+        dest,
+        files,
+        refuse=FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=BakeError,
+    )
 
 
 def collect_bake_jobs(records: Sequence[Mapping[str, Any]]) -> list[BakeJob]:
-    if len(records) != WARMUP_N:
-        raise BakeError(f"warmup JSONL must contain {WARMUP_N} records, got {len(records)}")
-    repo_groups: dict[tuple[str, str, str, str], dict[str, Any]] = {}
-    putnam_groups: dict[str, dict[str, Any]] = {}
-    for record in records:
-        name = str(record.get("name") or "")
-        source = str(record.get("source") or "")
-        if source not in SOURCE_ORDER:
-            raise BakeError(f"{name}: unknown source {source!r}")
-        url = record.get("url") or ""
-        file_path = record.get("file_path") or ""
-        if not isinstance(url, str) or not isinstance(file_path, str):
-            raise BakeError(f"{name}: url and file_path must be strings")
-        pins = iter_version_pins(record.get("version_info"))
-        if source == PUTNAM_SOURCE:
-            if url.strip() or file_path.strip():
-                raise BakeError(
-                    f"{name}: Putnam url/file_path must be empty; do not guess a PutnamBench GitHub URL"
-                )
-            header = record.get("header") or ""
-            if not isinstance(header, str) or "import Mathlib" not in header or "import Aesop" not in header:
-                raise BakeError(f"{name}: Putnam header must import Mathlib and Aesop")
-            for pin in pins:
-                group = putnam_groups.setdefault(
-                    pin.lean_tag,
-                    {"names": [], "commit": pin.git_commit},
-                )
-                if group["commit"] != pin.git_commit:
-                    raise BakeError(
-                        f"Putnam tag {pin.lean_tag} has disagreeing JSONL pins "
-                        f"{group['commit']!r} vs {pin.git_commit!r}"
-                    )
-                group["names"].append(name)
-            continue
-        if not url.strip():
-            raise BakeError(f"{name}: repo record is missing url")
-        if not file_path.strip():
-            raise BakeError(f"{name}: repo record is missing file_path")
-        for pin in pins:
-            key = (source, url, pin.git_commit, pin.lean_tag)
-            group = repo_groups.setdefault(
-                key,
-                {"names": [], "files": []},
-            )
-            group["names"].append(name)
-            if file_path not in group["files"]:
-                group["files"].append(file_path)
+    from jevops.lean import BakeCatalog, collect_bake_jobs as _fn
 
-    jobs: list[BakeJob] = []
-    strata_first_keys = [
-        key
-        for key in repo_groups
-        if key[0] == STRATA_SOURCE and key[3] == STRATA_FIRST_TAG
-    ]
-    strata_first_keys.sort(key=lambda key: (key[1], key[2], key[3]))
-    remaining_keys = [key for key in repo_groups if key not in set(strata_first_keys)]
-    remaining_keys.sort(key=lambda key: (SOURCE_ORDER.index(key[0]), key[1], key[3], key[2]))
-
-    def repo_job(key: tuple[str, str, str, str], phase: int) -> BakeJob:
-        source, url, commit, tag = key
-        group = repo_groups[key]
-        return BakeJob(
-            kind="repo",
-            source=source,
-            lean_tag=tag,
-            git_commit=commit,
-            url=url,
-            cache_key=f"repo/{_url_cache_key(url)}/{commit}/{tag}",
-            phase=phase,
-            record_names=tuple(group["names"]),
-            file_paths=tuple(group["files"]),
-            module=group["files"][0],
-            lakefile_required=True,
-        )
-
-    for key in strata_first_keys:
-        jobs.append(repo_job(key, phase=0))
-    for key in remaining_keys:
-        jobs.append(repo_job(key, phase=1))
-    for tag in PUTNAM_TAGS:
-        if tag not in putnam_groups:
-            raise BakeError(f"missing Putnam JSONL tag {tag}")
-        group = putnam_groups[tag]
-        pin = putnam_pin(tag, jsonl_version_pin=group["commit"])
-        jobs.append(
-            BakeJob(
-                kind="putnam",
-                source=PUTNAM_SOURCE,
-                lean_tag=tag,
-                git_commit=group["commit"],
-                url="",
-                cache_key=f"putnam/{tag}",
-                phase=2,
-                record_names=tuple(group["names"]),
-                file_paths=(PUTNAM_CANDIDATE_RELPATH,),
-                module=PUTNAM_MODULE,
-                mathlib_rev=pin.mathlib_rev,
-                aesop_rev=pin.aesop_rev,
-                lakefile_required=True,
-                putnambench_url=None,
-            )
-        )
-    extra_putnam = sorted(set(putnam_groups) - set(PUTNAM_TAGS))
-    if extra_putnam:
-        raise BakeError(f"unexpected Putnam tags {extra_putnam}")
-    if not jobs or jobs[0].source != STRATA_SOURCE or jobs[0].lean_tag != STRATA_FIRST_TAG:
-        raise BakeError("bake plan must record Strata v4.26.0 first")
-    return jobs
+    return _fn(
+        records,
+        BakeCatalog(
+            warmup_n=WARMUP_N,
+            source_order=SOURCE_ORDER,
+            putnam_source=PUTNAM_SOURCE,
+            strata_source=STRATA_SOURCE,
+            strata_first_tag=STRATA_FIRST_TAG,
+            putnam_tags=PUTNAM_TAGS,
+            putnam_candidate_relpath=PUTNAM_CANDIDATE_RELPATH,
+            putnam_module=PUTNAM_MODULE,
+        ),
+        pin_fn=iter_version_pins,
+        putnam_pin_fn=lambda tag, commit: putnam_pin(tag, jsonl_version_pin=commit),
+        url_key_fn=_url_cache_key,
+        error_cls=BakeError,
+    )
 
 
 def plan_bake(path: Optional[Path] = None) -> BakePlan:
@@ -539,8 +388,9 @@ def olean_paths(cache_dir: Path) -> list[Path]:
 
 
 def cache_present(job: BakeJob, state_root: Optional[Path] = None) -> bool:
-    cache_dir = job_cache_dir(job, state_root)
-    return cache_marker_path(cache_dir).is_file() and bool(olean_paths(cache_dir))
+    from jevops.outer import dir_marked
+
+    return dir_marked(job_cache_dir(job, state_root), marker="BAKED", suffix=".olean")
 
 
 def plant_synthetic_cache(job: BakeJob, state_root: Path, *, n_oleans: int = 1) -> Path:
@@ -574,34 +424,29 @@ def require_cache(
     network: str,
     state_root: Optional[Path] = None,
 ) -> dict[str, Any]:
+    from jevops.outer import hit_or_miss
+
     present = cache_present(job, state_root)
     cache_dir = job_cache_dir(job, state_root)
-    if present:
-        return {
-            "ok": True,
-            "status": "cache-hit",
-            "cache_key": job.cache_key,
-            "cache_dir": str(cache_dir),
-            "n_oleans": len(olean_paths(cache_dir)),
-            "network": network,
-            "arena_score": None,
-        }
-    if network == "deny":
-        raise OleanCacheMissing(
+    base = {
+        "cache_key": job.cache_key,
+        "cache_dir": str(cache_dir),
+        "network": network,
+        "arena_score": None,
+    }
+    return hit_or_miss(
+        present,
+        deny=network == "deny",
+        error_cls=OleanCacheMissing,
+        deny_msg=(
             "olean cache missing for "
             f"{job.cache_key} under network=deny; first lake build is hours and "
             "must be pre-vendored before the 48h clock. Never falling back to "
             "PATH lean, Tmp.lean, or a guessed PutnamBench GitHub URL."
-        )
-    return {
-        "ok": False,
-        "status": "cache-missing",
-        "cache_key": job.cache_key,
-        "cache_dir": str(cache_dir),
-        "n_oleans": 0,
-        "network": network,
-        "arena_score": None,
-    }
+        ),
+        hit={**base, "ok": True, "status": "cache-hit", "n_oleans": len(olean_paths(cache_dir))},
+        miss={**base, "ok": False, "status": "cache-missing", "n_oleans": 0},
+    )
 
 
 def require_plan_caches(
@@ -614,8 +459,10 @@ def require_plan_caches(
 
 
 def lake_argv(lean_tag: str, *args: str, elan_home: Optional[Path] = None) -> list[str]:
+    from jevops.outer import prepend_argv
+
     pin = tag_pinned_paths(lean_tag, elan_home=elan_home)
-    return [pin["lake_path"], *args]
+    return prepend_argv(pin["lake_path"], *args)
 
 
 def _run_tag_pinned_lake(
@@ -629,32 +476,30 @@ def _run_tag_pinned_lake(
 ) -> dict[str, Any]:
     """Run tag-pinned lake. Never PATH ``lake``. Not used by --self-check."""
 
-    from jevops.outer import require_basename, run_process
+    from jevops.outer import run_pinned_bin
 
     pin = tag_pinned_paths(lean_tag, elan_home=elan_home)
-    if not pin["installed"]:
-        raise BakeToolchainMissing(
+    return run_pinned_bin(
+        [pin["lake_path"], *list(args)],
+        basename="lake",
+        cwd=cwd,
+        env=env,
+        timeout=timeout,
+        error_cls=BakeError,
+        miss_cls=BakeToolchainMissing,
+        installed=bool(pin["installed"]),
+        miss=(
             "tag-pinned elan toolchain not installed at "
             f"{pin['toolchain_dir']} (lean_tag={lean_tag!r}; never falling back "
             "to PATH lean/lake)"
-        )
-    argv = [pin["lake_path"], *list(args)]
-    require_basename(
-        argv[0], "lake", error_cls=BakeError, fmt="expected tag-pinned lake, got {path!r}"
+        ),
+        timeout_fmt=f"tag-pinned lake timed out for {lean_tag}: {{error}}",
+        extra={
+            "lake_path": pin["lake_path"],
+            "lean_path": pin["lean_path"],
+            "arena_score": None,
+        },
     )
-    ran = run_process(argv, cwd=cwd, env=env, timeout=timeout)
-    if ran.get("timeout"):
-        raise BakeError(f"tag-pinned lake timed out for {lean_tag}: {ran.get('error') or 'TimeoutExpired'}")
-    return {
-        "argv": argv,
-        "cwd": str(cwd),
-        "exit_code": ran.get("exit_code"),
-        "stdout": ran.get("stdout") or "",
-        "stderr": ran.get("stderr") or "",
-        "lake_path": pin["lake_path"],
-        "lean_path": pin["lean_path"],
-        "arena_score": None,
-    }
 
 
 def bake_job(
@@ -667,82 +512,63 @@ def bake_job(
 ) -> dict[str, Any]:
     """Return a cache hit, fail closed under network=deny, or bake if asked."""
 
-    hit = require_cache(job, network="allow", state_root=state_root)
-    if hit["ok"]:
-        hit["status"] = "cache-hit"
-        hit["lake_build_executed"] = False
-        return hit
-    if network == "deny":
-        require_cache(job, network="deny", state_root=state_root)
-    pin = tag_pinned_paths(job.lean_tag)
-    if not pin["installed"]:
-        raise BakeToolchainMissing(
-            "tag-pinned elan lake is not installed at "
-            f"{pin['lake_path']}; capability gap, not PATH lake usability"
-        )
-    if not execute:
-        return {
-            "ok": False,
-            "status": "ready-to-bake",
-            "cache_key": job.cache_key,
-            "network": network,
-            "lake_build_executed": False,
-            "lake_path": pin["lake_path"],
-            "arena_score": None,
-        }
-    root = Path(state_root) if state_root is not None else default_state_root()
-    if job.kind == "putnam":
-        project = putnam_project_dir(job, root)
-        materialize_putnam_project(job.lean_tag, project, jsonl_version_pin=job.git_commit)
-        result = _run_tag_pinned_lake(
-            job.lean_tag, ["build"], cwd=project, timeout=timeout
-        )
-        if result["exit_code"] != 0:
-            raise BakeError(f"lake build failed for Putnam {job.lean_tag}: exit {result['exit_code']}")
-        _copy_oleans(project / ".lake", job_cache_dir(job, root) / ".lake")
-    else:
-        from jevops.outer import join_under, run_process
+    from jevops.lean import bake_or_hit
+    from jevops.outer import git_checkout, git_clone, url_clone_dir
 
-        clone = join_under(root, "clones", _url_cache_key(job.url))
+    root = Path(state_root) if state_root is not None else default_state_root()
+
+    def _clone(item: BakeJob) -> Path:
+        clone = url_clone_dir(root, item.url)
         if not (clone / ".git").is_dir():
-            if not GIT_BIN.is_file():
-                raise BakeToolchainMissing(f"git is not at {GIT_BIN}; cannot clone {job.url}")
-            clone.parent.mkdir(parents=True, exist_ok=True)
-            cloned = run_process([str(GIT_BIN), "clone", "--", job.url, str(clone)])
-            if not cloned.get("ok"):
-                raise BakeError(f"git clone failed for {job.url}: {(cloned.get('stderr') or '').strip()}")
-        checked = run_process(
-            [str(GIT_BIN), "-C", str(clone), "checkout", "--detach", job.git_commit]
-        )
-        if not checked.get("ok"):
-            raise BakeError(
-                f"git checkout {job.git_commit} failed: {(checked.get('stderr') or '').strip()}"
+            git_clone(
+                item.url,
+                clone,
+                git_bin=GIT_BIN,
+                error_cls=BakeError,
+                miss_cls=BakeToolchainMissing,
             )
-        result = _run_tag_pinned_lake(job.lean_tag, ["build"], cwd=clone, timeout=timeout)
-        if result["exit_code"] != 0:
-            raise BakeError(f"lake build failed for {job.cache_key}: exit {result['exit_code']}")
-        _copy_oleans(clone / ".lake", job_cache_dir(job, root) / ".lake")
-    cache_dir = job_cache_dir(job, root)
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    cache_marker_path(cache_dir).write_text("baked\n", encoding="utf-8")
-    return {
-        "ok": True,
-        "status": "baked",
-        "cache_key": job.cache_key,
-        "cache_dir": str(cache_dir),
-        "n_oleans": len(olean_paths(cache_dir)),
-        "network": network,
-        "lake_build_executed": True,
-        "lake_argv": lake_argv(job.lean_tag, "build"),
-        "arena_score": None,
-    }
+        return clone
+
+    def _checkout(clone: Path, commit: str) -> Any:
+        return git_checkout(
+            clone,
+            commit,
+            git_bin=GIT_BIN,
+            error_cls=BakeError,
+            miss_cls=BakeToolchainMissing,
+            skip_empty=False,
+            skip_missing_git=False,
+        )
+
+    out = bake_or_hit(
+        job,
+        network=network,
+        execute=execute,
+        require_cache_fn=lambda item, network: require_cache(item, network=network, state_root=root),
+        tag_paths_fn=tag_pinned_paths,
+        materialize_fn=lambda item, project: materialize_putnam_project(
+            item.lean_tag, project, jsonl_version_pin=item.git_commit
+        ),
+        putnam_dir_fn=lambda item: putnam_project_dir(item, root),
+        clone_fn=_clone,
+        checkout_fn=_checkout,
+        run_lake_fn=lambda tag, args, cwd: _run_tag_pinned_lake(tag, args, cwd=cwd, timeout=timeout),
+        copy_oleans_fn=_copy_oleans,
+        cache_dir_fn=lambda item: job_cache_dir(item, root),
+        mark_fn=lambda cache_dir: cache_marker_path(cache_dir).write_text("baked\n", encoding="utf-8"),
+        olean_fn=olean_paths,
+        error_cls=BakeError,
+        miss_cls=BakeToolchainMissing,
+    )
+    if out.get("status") == "baked":
+        out["lake_argv"] = lake_argv(job.lean_tag, "build")
+    return out
 
 
 def _copy_oleans(src: Path, dest: Path) -> None:
-    if not src.is_dir():
-        raise BakeError(f"expected .lake directory at {src}")
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    _copytree(src, dest)
+    from jevops.outer import copy_dir_required
+
+    copy_dir_required(src, dest, error_cls=BakeError, miss="expected .lake directory at {src}")
 
 
 def _copytree(src: Path, dest: Path) -> None:
@@ -770,26 +596,15 @@ def write_candidate(lean_tag: str, source_text: str, dest: Optional[Path] = None
                 lakefile_required=True,
             )
         )
-    from jevops.outer import refuse_basename, write_text
+    from jevops.lean import write_putnam_candidate
 
-    dest = Path(dest)
-    if dest.name == "Tmp":
-        raise BakeError("refusing to write Putnam candidate as Tmp.lean")
-    refuse_basename(
+    return write_putnam_candidate(
         dest,
-        FORBIDDEN_PUTNAM_BASENAME,
-        error_cls=BakeError,
-        fmt="refusing to write Putnam candidate as {name}",
-    )
-    path = dest / PUTNAM_CANDIDATE_RELPATH if dest.is_dir() else dest
-    write_text(
-        path,
         source_text,
+        candidate_relpath=PUTNAM_CANDIDATE_RELPATH,
         refuse=FORBIDDEN_PUTNAM_BASENAME,
         error_cls=BakeError,
-        refuse_fmt="refusing to write Putnam candidate as {name}",
     )
-    return path
 
 
 def _imported_names(source: str) -> set[str]:
@@ -799,16 +614,16 @@ def _imported_names(source: str) -> set[str]:
 
 
 def _call_name(node: ast.AST) -> str:
-    from jevops.repair import call_func_name
+    from jevops.repair import call_short_name
 
-    dotted = call_func_name(node)
-    return dotted.rsplit(".", 1)[-1] if dotted else ""
+    return call_short_name(node)
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.outer import source_text
     from jevops.repair import audit_source as _audit, matching_constants
 
-    text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    text = source_text(source, path=__file__)
     out = _audit(
         text,
         forbidden_imports=FORBIDDEN_IMPORT_NAMES,
@@ -856,7 +671,9 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
 
 
 def _synthetic_fail_closed(plan: BakePlan) -> dict[str, Any]:
-    with tempfile.TemporaryDirectory(prefix="lra-013-oleans-") as tmp:
+    from jevops.outer import temp_dir
+
+    with temp_dir(prefix="lra-013-oleans-") as tmp:
         root = Path(tmp)
         first = plan.first_job
         planted = plant_synthetic_cache(first, root)
@@ -881,9 +698,11 @@ def _synthetic_fail_closed(plan: BakePlan) -> dict[str, Any]:
                 continue
             dest = root / "putnam_lake" / job.lean_tag
             files = materialize_putnam_project(job.lean_tag, dest, jsonl_version_pin=job.git_commit)
-            lakefile = (dest / "lakefile.lean").read_text(encoding="utf-8")
-            toolchain = (dest / "lean-toolchain").read_text(encoding="utf-8").strip()
-            pins = json.loads((dest / "pins.json").read_text(encoding="utf-8"))
+            from jevops.outer import read_json, read_text
+
+            lakefile = read_text(dest / "lakefile.lean")
+            toolchain = read_text(dest / "lean-toolchain").strip()
+            pins = read_json(dest / "pins.json")
             materialized[job.lean_tag] = {
                 "dest": str(dest),
                 "files": sorted(files),
@@ -925,21 +744,21 @@ def _synthetic_fail_closed(plan: BakePlan) -> dict[str, Any]:
 def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
     if tags is None:
         tags = (STRATA_FIRST_TAG, *PUTNAM_TAGS)
-    wanted: list[str] = []
-    for tag in tags:
-        if tag not in wanted:
-            wanted.append(tag)
+    from jevops.outer import env_str, map_partition, unique_keep
+
+    wanted = unique_keep(list(tags))
     pins = [tag_pinned_paths(tag) for tag in wanted]
-    installed = [pin["lean_tag"] for pin in pins if pin["installed"]]
-    missing = [pin["lean_tag"] for pin in pins if not pin["installed"]]
+    installed, missing = map_partition(
+        pins, lambda pin: pin["installed"], lambda pin: pin["lean_tag"]
+    )
     return {
         "arena_score": None,
         "default_elan_home": str(default_elan_home()),
-        "elan_home_env": os.environ.get("ELAN_HOME"),
+        "elan_home_env": env_str("ELAN_HOME"),
         "installed_tags": installed,
         "lake": False,
         "missing_tags": missing,
-        "path": os.environ.get("PATH"),
+        "path": env_str("PATH"),
         "pins": pins,
         "validation_home": str(Path.home()),
         "capability_gap": (
@@ -962,7 +781,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     putnam_jobs = [job for job in plan.jobs if job.kind == "putnam"]
     repo_jobs = [job for job in plan.jobs if job.kind == "repo"]
     phases = [job.phase for job in plan.jobs]
-    first_phase_ok = phases[:1] == [0] and all(phase >= 0 for phase in phases)
+    from jevops.outer import env_str, head_seq
+
+    first_phase_ok = head_seq(phases, 1) == [0] and all(phase >= 0 for phase in phases)
     strata_v426_before_rest = all(
         job.phase == 0
         for job in plan.jobs
@@ -1026,7 +847,7 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
         "bake_argv_template": BAKE_ARGV_TEMPLATE,
         "default_state_root": str(default_state_root()),
-        "network_env": os.environ.get("LRA_NETWORK"),
+        "network_env": env_str("LRA_NETWORK"),
         "protocol": "LRA/v1",
         "audit": audit,
         "synthetic": {
@@ -1093,9 +914,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     if args.self_check or argv is None or argv == []:
-        report = self_check(args.jsonl)
-        _print_json(report)
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check(args.jsonl))
 
     if args.plan:
         plan = plan_bake(args.jsonl)
@@ -1109,7 +930,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.dump_putnam_project:
         plan = plan_bake(args.jsonl)
         tag = normalize_lean_tag(args.tag)
-        job = next((item for item in plan.jobs if item.kind == "putnam" and item.lean_tag == tag), None)
+        from jevops.outer import first_where
+
+        job = first_where(plan.jobs, lambda item: item.kind == "putnam" and item.lean_tag == tag)
         pin_commit = job.git_commit if job is not None else ""
         files = putnam_project_files(tag, jsonl_version_pin=pin_commit)
         _print_json(
@@ -1155,16 +978,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         try:
             results = require_plan_caches(plan, network=network, state_root=state_root)
         except OleanCacheMissing as exc:
-            _print_json(
-                {
-                    "ok": False,
-                    "error": str(exc),
-                    "error_type": type(exc).__name__,
-                    "network": network,
-                    "arena_score": None,
-                    "first_job": plan.first_job.to_dict(),
-                }
-            )
+            from jevops.outer import failed_check
+
+            _print_json(failed_check(exc, network=network, first_job=plan.first_job.to_dict()))
             return 1
         _print_json(
             {

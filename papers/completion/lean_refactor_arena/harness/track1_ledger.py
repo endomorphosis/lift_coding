@@ -13,11 +13,9 @@ from __future__ import annotations
 
 import argparse
 import ast
-import hashlib
 import json
 import os
 import shutil
-import subprocess
 import sys
 import tempfile
 import time
@@ -177,27 +175,26 @@ def estimate_tokens(text: str) -> int:
     return estimate_tokens_chars(text)
 
 
+USD_RATES = {
+    "jev": (JEV_INPUT_USD_PER_MTOK, JEV_OUTPUT_USD_PER_MTOK),
+    "grok": (GROK_INPUT_USD_PER_MTOK, GROK_OUTPUT_USD_PER_MTOK),
+    "mistral": (MISTRAL_INPUT_USD_PER_MTOK, MISTRAL_OUTPUT_USD_PER_MTOK),
+}
+
+
 def usd_for(kind: str, input_tokens: int, output_tokens: int) -> Decimal:
-    kind_key = str(kind or "").strip().lower()
-    inn = max(0, int(input_tokens))
-    out = max(0, int(output_tokens))
-    million = Decimal("1000000")
-    if kind_key == "jev":
-        return _money(
-            (Decimal(inn) / million) * JEV_INPUT_USD_PER_MTOK
-            + (Decimal(out) / million) * JEV_OUTPUT_USD_PER_MTOK
-        )
-    if kind_key == "grok":
-        return _money(
-            (Decimal(inn) / million) * GROK_INPUT_USD_PER_MTOK
-            + (Decimal(out) / million) * GROK_OUTPUT_USD_PER_MTOK
-        )
-    if kind_key == "mistral":
-        return _money(
-            (Decimal(inn) / million) * MISTRAL_INPUT_USD_PER_MTOK
-            + (Decimal(out) / million) * MISTRAL_OUTPUT_USD_PER_MTOK
-        )
-    raise Track1LedgerError(f"unknown spend kind {kind!r}")
+    from jevops.outer import spend_for
+
+    return spend_for(
+        kind,
+        input_tokens,
+        output_tokens,
+        USD_RATES,
+        scale=Decimal("1000000"),
+        money_fn=_money,
+        error_cls=Track1LedgerError,
+        unknown_fmt="unknown spend kind {kind!r}",
+    )
 
 
 def _env_truthy(value: Optional[str]) -> bool:
@@ -217,7 +214,9 @@ def official_track2_requested(
 def grok_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
     from jevops.jev import any_key
 
-    return any_key(os.environ if env is None else env, GROK_KEY_ENV_NAMES)
+    from jevops.outer import env_mapping
+
+    return any_key(env_mapping(env), GROK_KEY_ENV_NAMES)
 
 
 def grok_cli_auth_configured(env: Optional[Mapping[str, str]] = None) -> bool:
@@ -228,11 +227,15 @@ def grok_cli_auth_configured(env: Optional[Mapping[str, str]] = None) -> bool:
     key is not required. Does not read the file contents.
     """
 
-    from jevops.outer import nonempty_file
+    from jevops.outer import env_mapping, home_config_file, nonempty_file
 
-    source = os.environ if env is None else env
-    grok_home = str(source.get("GROK_HOME") or "").strip()
-    auth = (Path(grok_home).expanduser() if grok_home else Path.home() / ".grok") / "auth.json"
+    source = env_mapping(env)
+    auth = home_config_file(
+        "auth.json",
+        env_key="GROK_HOME",
+        default_dir=".grok",
+        environ=source,
+    )
     return nonempty_file(auth)
 
 
@@ -258,7 +261,9 @@ def resolve_track1_mode(
 ) -> str:
     """Default off. Track 1 is opt-in and never official Track 2."""
 
-    source = os.environ if env is None else env
+    from jevops.outer import env_mapping
+
+    source = env_mapping(env)
     if official_track2_requested(flag=official_track2, env=source):
         return OFFICIAL_TRACK2_MODE
     if flag is not None:
@@ -463,14 +468,7 @@ class ProblemLedger:
         }
 
 
-@dataclass(frozen=True)
-class ProviderIdentity:
-    requested_provider: str
-    requested_model: str
-    resolved_provider: str
-    resolved_model: str
-    fallback_used: bool
-    arena_score: None = None
+from jevops.lean import ProviderIdentity
 
 
 @dataclass(frozen=True)
@@ -680,6 +678,8 @@ class GrokFileResult:
     arena_score: None = None
 
     def as_dict(self) -> dict[str, Any]:
+        from jevops.outer import head_chars
+
         return {
             "tactics_path": self.tactics_path,
             "workspace": self.workspace,
@@ -687,7 +687,7 @@ class GrokFileResult:
             "chat_ignored": self.chat_ignored,
             "chat_head": self.chat_head,
             "n_chars": len(self.tactics),
-            "tactics_head": self.tactics[:240],
+            "tactics_head": head_chars(self.tactics, 240),
             "called_docker0": self.called_docker0,
             "identity": asdict(self.identity),
             "arena_score": self.arena_score,
@@ -733,36 +733,28 @@ def generate_grok_file(
         dest.write_text(str(chat), encoding="utf-8")
         identity = _identity_from_trace(fixture_trace(), generated=True)
     else:
+        from jevops.outer import env_copy, run_process, write_json, write_text
+
         prompt_path = workspace / "PROMPT.txt"
-        prompt_path.write_text(str(prompt), encoding="utf-8")
+        write_text(prompt_path, str(prompt))
         cmd = build_grok_file_command(workspace, prompt_path, dest_name=dest_name)
-        (workspace / "grok.argv.json").write_text(
-            json.dumps(cmd, indent=2) + "\n", encoding="utf-8"
-        )
+        write_json(workspace / "grok.argv.json", cmd)
         try:
-            proc = subprocess.run(
+            ran = run_process(
                 cmd,
-                text=True,
-                capture_output=True,
-                check=False,
+                cwd=workspace,
+                env=env_copy(),
                 timeout=float(timeout),
-                env=os.environ.copy(),
-                cwd=str(workspace),
             )
-        except subprocess.TimeoutExpired as exc:
-            chat = str(exc.stdout or "")
-            stderr = str(exc.stderr or "")
-            (workspace / "grok.stdout").write_text(chat, encoding="utf-8")
-            (workspace / "grok.stderr").write_text(stderr, encoding="utf-8")
-            (workspace / "grok.returncode").write_text("timeout", encoding="utf-8")
         except FileNotFoundError as exc:
             raise Track1LedgerError("grok CLI not found on PATH") from exc
-        else:
-            chat = proc.stdout or ""
-            stderr = proc.stderr or ""
-            (workspace / "grok.stdout").write_text(chat, encoding="utf-8")
-            (workspace / "grok.stderr").write_text(stderr, encoding="utf-8")
-            (workspace / "grok.returncode").write_text(str(proc.returncode), encoding="utf-8")
+        chat = str(ran.get("stdout") or "")
+        stderr = str(ran.get("stderr") or "")
+        code = "timeout" if ran.get("timeout") else str(ran.get("exit_code"))
+        write_text(workspace / "grok.stdout", chat)
+        write_text(workspace / "grok.stderr", stderr)
+        write_text(workspace / "grok.returncode", code)
+        if not ran.get("timeout"):
             payload = _grok_stdout_payload(chat)
             if payload.get("text"):
                 chat = str(payload.get("text") or chat)
@@ -788,7 +780,9 @@ def generate_grok_file(
         stderr_head = ""
         err_path = workspace / "grok.stderr"
         if err_path.is_file():
-            stderr_head = err_path.read_text(encoding="utf-8")[:400]
+            from jevops.outer import read_text
+
+            stderr_head = read_text(err_path, max_chars=400)
         detail = str(exc)
         if stderr_head:
             detail = f"{detail}; grok.stderr={stderr_head!r}"
@@ -804,11 +798,13 @@ def generate_grok_file(
     )
     if line.skipped:
         raise Track1LedgerError(f"grok spend refused after call: {line.reason}")
+    from jevops.outer import head_chars
+
     return GrokFileResult(
         tactics=tactics,
         identity=identity,
         line=line,
-        chat_head=str(chat or "")[:240],
+        chat_head=head_chars(chat or "", 240),
         tactics_path=str(dest),
         workspace=str(workspace),
         used_file=True,
@@ -822,13 +818,15 @@ def _identity_from_trace(trace: Mapping[str, Any], *, generated: bool) -> Provid
     from jevops.outer import first_nonempty
 
     resolved_provider = first_nonempty(
-        trace, "effective_provider_name", "provider_name", "provider"
+        trace,
+        "effective_provider_name",
+        "provider_name",
+        "provider",
+        default=REQUESTED_PROVIDER if generated else "",
     )
-    resolved_model = first_nonempty(trace, "effective_model_name", "model_name")
-    if generated and not resolved_provider:
-        resolved_provider = REQUESTED_PROVIDER
-    if generated and not resolved_model:
-        resolved_model = REQUESTED_MODEL
+    resolved_model = first_nonempty(
+        trace, "effective_model_name", "model_name", default=REQUESTED_MODEL if generated else ""
+    )
     fallback_used = bool(
         resolved_provider
         and resolved_provider.lower() not in ALLOWED_RESOLVED_PROVIDERS
@@ -1007,7 +1005,9 @@ def run_named(
     get_trace: Optional[Callable[[], Mapping[str, Any]]] = None,
     receipts_dir: Optional[Path] = None,
 ) -> dict[str, Any]:
-    source_env = dict(os.environ if env is None else env)
+    from jevops.outer import env_copy
+
+    source_env = env_copy(base=env)
     resolved = resolve_track1_mode(flag=mode, env=source_env, official_track2=official_track2)
     track2 = official_track2_requested(flag=official_track2, env=source_env)
     record, records, digest = _load_named_record(name, path)
@@ -1065,6 +1065,8 @@ def run_named(
         client_factory=factory,
         require_key=not using_fixture,
     )
+    from jevops.outer import elapsed_ms
+
     started = time.perf_counter()
     jev_result = router.route(state, neighbor_names=[item["name"] for item in neighbors])
     if jev_result.skipped and not using_fixture:
@@ -1136,7 +1138,7 @@ def run_named(
                 fixture=using_fixture,
             )
     except Track1LedgerError as exc:
-        wall_ms = (time.perf_counter() - started) * 1000.0
+        wall_ms = elapsed_ms(started)
         result = Track1Result(
             skipped=True,
             reason=ledger.reason or str(exc),
@@ -1164,7 +1166,7 @@ def run_named(
         payload["source"] = record.get("source")
         return payload
 
-    wall_ms = (time.perf_counter() - started) * 1000.0
+    wall_ms = elapsed_ms(started)
     if receipts_dir is not None:
         write_ledger_receipt(ledger, Path(receipts_dir) / name / "track1_ledger.json")
     result = Track1Result(
@@ -1205,12 +1207,14 @@ def run_named(
 
 
 def _load_named_record(name: str, path: Optional[Path] = None) -> tuple[dict[str, Any], list[dict[str, Any]], str]:
+    from jevops.outer import lookup_named
+
     raw, digest, records = lra_splice.load_warmup_records(path)
     del raw
-    for record in records:
-        if record.get("name") == name:
-            return record, records, digest
-    raise Track1LedgerError(f"unknown warm-up problem: {name}")
+    record = lookup_named(
+        records, name, error_cls=Track1LedgerError, miss=f"unknown warm-up problem: {name}"
+    )
+    return record, records, digest
 
 
 def _neighbors_for(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> list[dict[str, str]]:
@@ -1306,9 +1310,10 @@ def _numeric_score_assignments(source: str) -> list[str]:
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.outer import source_text
     from jevops.repair import assigned_constants, audit_source as _audit
 
-    text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    text = source_text(source, path=__file__)
     out = _audit(
         text,
         forbidden_imports=FORBIDDEN_IMPORT_NAMES,
@@ -1432,11 +1437,15 @@ def _hard_stop_probe() -> dict[str, Any]:
 def _receipt_probe() -> dict[str, Any]:
     ledger = ProblemLedger(name="receipt-probe")
     ledger.record("jev", input_tokens=100, output_tokens=0, fixture=True)
-    with tempfile.TemporaryDirectory(prefix="lra-track1-") as tmp:
+    from jevops.outer import temp_dir
+
+    with temp_dir(prefix="lra-track1-") as tmp:
         root = Path(tmp)
         allowed = root / "track1" / "receipt.json"
         write_ledger_receipt(ledger, allowed)
-        written = json.loads(allowed.read_text(encoding="utf-8"))
+        from jevops.outer import read_json
+
+        written = read_json(allowed)
         track2_rejected = False
         track2_reason = ""
         try:
@@ -1492,11 +1501,15 @@ def _receipt_probe() -> dict[str, Any]:
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     """CI fixtures without a live key. Does not POST and does not compile."""
 
-    source = Path(__file__).read_text(encoding="utf-8")
+    from jevops.outer import read_text
+
+    source = read_text(__file__)
     jsonl = Path(path) if path is not None else WARMUP_JSONL
-    before = hashlib.sha256(jsonl.read_bytes()).hexdigest()
+    from jevops.outer import digest_file
+
+    before = digest_file(jsonl)
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    after = hashlib.sha256(jsonl.read_bytes()).hexdigest()
+    after = digest_file(jsonl)
     audit = audit_source(source)
     first = records[0]
     empty_env: dict[str, str] = {}
@@ -1593,7 +1606,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     mock_kwargs_ok = all(mock_kwargs.get(key) == value for key, value in expected_kwargs.items())
     hard_stop = _hard_stop_probe()
     receipts = _receipt_probe()
-    serialized = json.dumps({"fixture": fixture_run, "repair": repair_run}, sort_keys=True)
+    from jevops.outer import dumps_sorted
+
+    serialized = dumps_sorted({"fixture": fixture_run, "repair": repair_run})
     key_leak = any(token in serialized for token in ("BEGIN SECRET", "sk-live-", "sk-prod-", "xai-"))
 
     report = {
@@ -1741,13 +1756,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     )
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.plan:
-        payload = plan_view(mode="track1" if args.track1 else None, official_track2=args.official_track2)
-        json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if payload.get("ok") else 1
+        from jevops.outer import print_ok
+
+        return print_ok(plan_view(mode="track1" if args.track1 else None, official_track2=args.official_track2))
     if args.run:
         if not args.name:
             parser.error("--run requires --name")
+        from jevops.outer import failed_check, print_json
+
         try:
             payload = run_named(
                 args.name,
@@ -1759,29 +1775,21 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 receipts_dir=args.receipts_dir,
             )
         except (Track1LedgerError, lra_splice.SpliceError, lra_retrieve.RetrieveError) as exc:
-            json.dump(
-                {
-                    "ok": False,
-                    "error": str(exc),
-                    "error_type": type(exc).__name__,
-                    "arena_score": None,
-                    "contaminates_track2": False,
-                    "is_default_winning_path": False,
-                },
-                sys.stdout,
-                indent=2,
-                sort_keys=True,
+            print_json(
+                failed_check(
+                    exc,
+                    contaminates_track2=False,
+                    is_default_winning_path=False,
+                )
             )
-            sys.stdout.write("\n")
             return 1
-        json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if payload.get("ok") else 1
+        from jevops.outer import print_ok
+
+        return print_ok(payload)
     if args.self_check or argv is None or argv == []:
-        report = self_check(args.jsonl)
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check(args.jsonl))
     parser.error("choose --self-check, --plan, or --run")
     return 2
 

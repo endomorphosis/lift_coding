@@ -11,12 +11,11 @@ from __future__ import annotations
 import argparse
 import ast
 import json
-import os
 import sys
 import threading
 import urllib.error
 import urllib.request
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional
 
@@ -89,34 +88,9 @@ class Docker0Unreachable(LraGenerateError):
     """docker0 Leanstral is not reachable; generation must not complete via Grok/HF."""
 
 
-@dataclass(frozen=True)
-class HealthProbe:
-    ok: bool
-    url: str
-    alias_ok: bool
-    alias_url: str
-    status_code: Optional[int]
-    error: str
-    autostart: str
-
-
-@dataclass(frozen=True)
-class ProviderIdentity:
-    requested_provider: str
-    requested_model: str
-    resolved_provider: str
-    resolved_model: str
-    fallback_used: bool
-    arena_score: None = None
-
-
-@dataclass(frozen=True)
-class LraGeneration:
-    text: str
-    identity: ProviderIdentity
-    health: HealthProbe
-    skipped: bool = False
-    error: str = ""
+from jevops.lean import Generation as LraGeneration
+from jevops.lean import HealthProbe
+from jevops.lean import ProviderIdentity
 
 
 def _pin_client_env(*, base_url: Optional[str] = None) -> str:
@@ -164,7 +138,7 @@ def _http_get(url: str, *, timeout: float) -> tuple[Optional[int], str]:
 def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> HealthProbe:
     """GET docker0 /health, then the loopback alias. Does not start a server."""
 
-    from jevops.outer import http_ok
+    from jevops.outer import env_str, http_ok
 
     _pin_client_env()
     status, error = _http_get(DOCKER0_HEALTH_URL, timeout=timeout)
@@ -178,7 +152,7 @@ def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> HealthPr
         alias_url=DOCKER0_HEALTH_ALIAS_URL,
         status_code=status,
         error=error or alias_error,
-        autostart=os.environ.get("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", ""),
+        autostart=env_str("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
     )
 
 
@@ -199,32 +173,28 @@ def render_prompt(
 ) -> str:
     """Fill the LRA prompt. Returns a tactic-block-only instruction, not PROOF_PROMPT."""
 
-    template = PROMPT_PATH.read_text(encoding="utf-8")
-    values = {
-        "name": "",
-        "source": "",
-        "header": "",
-        "statement": "",
-        "src": "",
-    }
-    if record:
-        for key in values:
-            if key in record and record[key] is not None:
-                values[key] = str(record[key])
-    for key, value in fields.items():
-        if key in values and value is not None:
-            values[key] = str(value)
-    from jevops.outer import fill_template
+    from jevops.outer import fill_template, overlay_str, read_text
 
+    template = read_text(PROMPT_PATH)
+    values = overlay_str(
+        {"name": "", "source": "", "header": "", "statement": "", "src": ""},
+        record or {},
+        fields,
+    )
     return fill_template(template, values)
 
 
 def _load_router():
-    _ensure_accel_path()
-    from ipfs_accelerate_py.llm_router import generate_text as router_generate_text
-    from ipfs_accelerate_py.llm_router import get_last_generation_trace
+    from jevops.outer import import_names
 
-    return router_generate_text, get_last_generation_trace
+    attrs, err = import_names(
+        "ipfs_accelerate_py.llm_router",
+        ("generate_text", "get_last_generation_trace"),
+        setup=(_ensure_accel_path,),
+    )
+    if err is not None:
+        raise err
+    return attrs["generate_text"], attrs["get_last_generation_trace"]
 
 
 def _identity_from_trace(
@@ -235,13 +205,15 @@ def _identity_from_trace(
     from jevops.outer import first_nonempty, name_fallback_used
 
     resolved_provider = first_nonempty(
-        trace, "effective_provider_name", "provider_name", "provider"
+        trace,
+        "effective_provider_name",
+        "provider_name",
+        "provider",
+        default=REQUESTED_PROVIDER if generated else "",
     )
-    resolved_model = first_nonempty(trace, "effective_model_name", "model_name")
-    if generated and not resolved_provider:
-        resolved_provider = REQUESTED_PROVIDER
-    if generated and not resolved_model:
-        resolved_model = REQUESTED_MODEL
+    resolved_model = first_nonempty(
+        trace, "effective_model_name", "model_name", default=REQUESTED_MODEL if generated else ""
+    )
     fallback_used = name_fallback_used(
         resolved_provider,
         allowed=ALLOWED_RESOLVED_PROVIDERS,
@@ -298,6 +270,8 @@ def generate_lra(
 ) -> LraGeneration:
     """Probe docker0, then call the router with fail-closed kwargs. Record resolved identity."""
 
+    from jevops.outer import env_str
+
     if source and (max_new_tokens is None or timeout is None):
         source_tokens, source_timeout = token_limits_for_source(source)
         if max_new_tokens is None:
@@ -317,7 +291,7 @@ def generate_lra(
         alias_url=DOCKER0_HEALTH_ALIAS_URL,
         status_code=None,
         error=f"forced base_url={base_url}",
-        autostart=os.environ.get("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", ""),
+        autostart=env_str("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
     )
     if require_health and not health.ok:
         identity = ProviderIdentity(
@@ -348,7 +322,9 @@ def generate_lra(
     if temperature is not None:
         call_kwargs["temperature"] = float(temperature)
     if stop:
-        call_kwargs["stop"] = [str(item) for item in stop if str(item)]
+        from jevops.outer import nonempty_strs
+
+        call_kwargs["stop"] = nonempty_strs(stop)
     with _GENERATE_LOCK:
         _pin_client_env(base_url=pinned_base)
         try:
@@ -375,10 +351,12 @@ def generate_lra(
                     "refusing cross-provider fallback "
                     f"{identity.resolved_provider}/{identity.resolved_model}"
                 ) from exc
+            from jevops.outer import exc_text
+
             raise Docker0Unreachable(
                 "Leanstral generate_text failed closed at "
-                f"{os.environ.get('IPFS_ACCELERATE_LLAMA_CPP_BASE_URL', DOCKER0_OPENAI_BASE_URL)} "
-                f"({type(exc).__name__}: {exc}). requested="
+                f"{env_str('IPFS_ACCELERATE_LLAMA_CPP_BASE_URL', DOCKER0_OPENAI_BASE_URL)} "
+                f"({exc_text(exc)}). requested="
                 f"{identity.requested_provider}/{identity.requested_model} "
                 f"resolved={identity.resolved_provider}/{identity.resolved_model}"
             ) from exc
@@ -434,8 +412,10 @@ def _prompt_contract(prompt_text: str) -> dict[str, bool]:
 def self_check() -> dict[str, Any]:
     """Exercise fail-closed kwargs, health probe, and unreachable docker0. No compile."""
 
-    source = Path(__file__).read_text(encoding="utf-8")
-    prompt_text = PROMPT_PATH.read_text(encoding="utf-8")
+    from jevops.outer import env_str, read_text
+
+    source = read_text(__file__)
+    prompt_text = read_text(PROMPT_PATH)
     kwargs = _fail_closed_kwargs_from_source(source)
     expected = {
         "provider": "leanstral_local",
@@ -479,6 +459,8 @@ def self_check() -> dict[str, Any]:
     unreachable_error = ""
     unreachable_fallback = False
     unreachable_resolved = {"requested_provider": REQUESTED_PROVIDER, "requested_model": REQUESTED_MODEL}
+    from jevops.outer import exc_name, exc_text
+
     try:
         generate_lra(
             "unreachable docker0 must fail closed",
@@ -491,11 +473,11 @@ def self_check() -> dict[str, Any]:
         unreachable_error = str(exc)
         lowered = unreachable_error.lower()
         unreachable_fallback = any(name in lowered for name in ("grok", "huggingface", "hf_inference"))
-        unreachable_resolved["error_type"] = type(exc).__name__
+        unreachable_resolved["error_type"] = exc_name(exc)
         unreachable_resolved["resolved_provider"] = ""
         unreachable_resolved["resolved_model"] = ""
     except Exception as exc:  # noqa: BLE001 — self-check must classify unexpected success paths
-        unreachable_error = f"{type(exc).__name__}: {exc}"
+        unreachable_error = exc_text(exc)
         lowered = unreachable_error.lower()
         unreachable_fallback = any(
             name in lowered for name in FORBIDDEN_FALLBACK_PROVIDERS
@@ -521,7 +503,7 @@ def self_check() -> dict[str, Any]:
             "error": unreachable_error,
             "identity": unreachable_resolved,
         },
-        "autostart": os.environ.get("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
+        "autostart": env_str("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
         "llama_server_started": False,
         "compiled": False,
         "arena_score": None,
@@ -561,9 +543,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--header", default="")
     args = parser.parse_args(argv)
     if args.probe_health:
+        from jevops.outer import print_json
+
         probe = probe_docker0_health()
-        json.dump(asdict(probe), sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
+        print_json(asdict(probe))
         return 0 if probe.ok else 2
     if args.render_prompt:
         sys.stdout.write(
@@ -579,10 +562,9 @@ def main(argv: Optional[list[str]] = None) -> int:
             sys.stdout.write("\n")
         return 0
     if args.self_check or argv is None or argv == []:
-        report = self_check()
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check())
     parser.error("choose --self-check, --probe-health, or --render-prompt")
     return 2
 

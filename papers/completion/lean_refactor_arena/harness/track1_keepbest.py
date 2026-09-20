@@ -12,7 +12,7 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
@@ -89,6 +89,8 @@ def compile_tactics(
     timeout: float,
     restore: bytes,
 ) -> dict[str, Any]:
+    from jevops.outer import elapsed_ms, head_seq, tail_chars
+
     record = dict(record)
     if str(record.get("source") or "") == "putnambench":
         pins = lra_cw.iter_version_pins(record.get("version_info"))
@@ -101,16 +103,9 @@ def compile_tactics(
             kept.append({pin.lean_tag: pin.git_commit})
         record["version_info"] = kept
         if not record["version_info"]:
-            return {
-                "ok": False,
-                "theorem_ok": False,
-                "module_exit_0": False,
-                "exit_code": -1,
-                "error": "no_installed_matching_toolchain",
-                "token_count": lra_loop.token_count(tactics),
-                "errors": [],
-                "arena_score": None,
-            }
+            from jevops.lean import compile_closed
+
+            return compile_closed(token_count=lra_loop.token_count(tactics))
         split = lra_splice.split_statement_body(record)
         patched = dict(record)
         body = tactics if tactics.startswith(" := by") else " := by\n" + tactics
@@ -130,35 +125,21 @@ def compile_tactics(
         stdout = str(receipt.get("stdout") or "")
         errors = parse_lean_errors(stdout)
         sorry = sorry_in_span(stdout, 1, 10**9)
-        timed_out = bool(receipt.get("timed_out"))
-        theorem_ok = not timed_out and not errors and not sorry
-        return {
-            "ok": bool(theorem_ok),
-            "theorem_ok": bool(theorem_ok),
-            "module_exit_0": receipt.get("exit_code") == 0 and not timed_out,
-            "exit_code": receipt.get("exit_code"),
-            "wall_ms": receipt.get("wall_ms"),
-            "error": receipt.get("error"),
-            "token_count": lra_loop.token_count(tactics),
-            "sorryAx": receipt.get("sorryAx"),
-            "sorry_in_theorem": sorry,
-            "errors": errors,
-            "compile_wall_ms_outer": (time.perf_counter() - started) * 1000.0,
-            "arena_score": None,
-        }
+        from jevops.lean import pack_compile_view
+
+        return pack_compile_view(
+            receipt,
+            token_count=lra_loop.token_count(tactics),
+            errors=errors,
+            sorry=sorry,
+            extra={"compile_wall_ms_outer": elapsed_ms(started)},
+        )
     clone = lra_cw.clone_dir(str(record["url"]), state_root)
     record["version_info"] = installed_matching_pins(record, clone)
     if not record["version_info"]:
-        return {
-            "ok": False,
-            "theorem_ok": False,
-            "module_exit_0": False,
-            "exit_code": -1,
-            "error": "no_installed_matching_toolchain",
-            "token_count": lra_loop.token_count(tactics),
-            "errors": [],
-            "arena_score": None,
-        }
+        from jevops.lean import compile_closed
+
+        return compile_closed(token_count=lra_loop.token_count(tactics))
     pin = lra_cw.iter_version_pins(record.get("version_info"))[0]
     rel = lra_cw.source_relpath(record)
     dest = clone / rel
@@ -188,34 +169,24 @@ def compile_tactics(
     sorry_in_theorem = sorry_in_span(stdout, start_line, end_line)
     errors_in = [item for item in errors if _line_in_span(item.get("pos"), start_line, end_line)]
     errors_out = [item for item in errors if not _line_in_span(item.get("pos"), start_line, end_line)]
-    timed_out = bool(receipt.get("timed_out"))
-    exit_code = receipt.get("exit_code")
-    theorem_ok = (
-        not timed_out
-        and not errors_in
-        and not errors_out
-        and not sorry_in_theorem
+    from jevops.lean import pack_compile_view
+
+    return pack_compile_view(
+        receipt,
+        token_count=lra_loop.token_count(tactics),
+        errors=errors_in or errors_out,
+        sorry=sorry_in_theorem,
+        extra={
+            "error": receipt.get("error") or receipt.get("stderr_digest"),
+            "lean_tag": pin.lean_tag,
+            "theorem_span": [start_line, end_line],
+            "argv": receipt.get("argv"),
+            "compile_wall_ms_outer": elapsed_ms(started),
+            "stdout_tail": tail_chars(stdout, 400) if stdout else None,
+            "stderr_tail": tail_chars(receipt.get("stderr"), 400) if isinstance(receipt.get("stderr"), str) else None,
+            "errors": errors_in or head_seq(errors, 6),
+        },
     )
-    tokens = lra_loop.token_count(tactics)
-    return {
-        "ok": bool(theorem_ok),
-        "theorem_ok": bool(theorem_ok),
-        "module_exit_0": exit_code == 0 and not timed_out,
-        "exit_code": exit_code,
-        "wall_ms": receipt.get("wall_ms"),
-        "error": receipt.get("error") or receipt.get("stderr_digest"),
-        "token_count": tokens,
-        "lean_tag": pin.lean_tag,
-        "sorryAx": receipt.get("sorryAx"),
-        "sorry_in_theorem": sorry_in_theorem,
-        "theorem_span": [start_line, end_line],
-        "argv": receipt.get("argv"),
-        "compile_wall_ms_outer": (time.perf_counter() - started) * 1000.0,
-        "stdout_tail": stdout[-400:] if stdout else None,
-        "stderr_tail": (receipt.get("stderr") or "")[-400:] if isinstance(receipt.get("stderr"), str) else None,
-        "errors": errors_in or errors[:6],
-        "arena_score": None,
-    }
 
 
 def _line_in_span(pos: Any, start_line: int, end_line: int) -> bool:
@@ -250,21 +221,9 @@ def flatten_overindent(reference: str, tactics: str) -> str:
 
 
 def repair_prompt(record: Mapping[str, Any], *, failed: str, errors: Sequence[Mapping[str, Any]], reference: str) -> str:
-    err_lines = []
-    for item in errors[:4]:
-        err_lines.append(f"{item.get('pos')}: {item.get('data')}")
-    return (
-        "Lean Refactor Arena repair. The previous tactic block failed `lake env lean`.\n"
-        "Return ONLY the corrected tactic block after `:= by`.\n"
-        "Match reference indentation: top-level tactics and `case` lines use the same indent as the reference.\n"
-        "Do not re-introduce explicit binders already in the theorem telescope.\n"
-        "Do not repeat the statement. Do not emit sorry, admit, theorem, lemma, import, or open.\n\n"
-        f"Problem: {record.get('name')}\n\n"
-        f"Statement:\n{record.get('statement')}\n\n"
-        f"Reference tactic block (lake exit 0):\n{reference[:1200]}\n\n"
-        f"Failed tactic block:\n{failed[:1200]}\n\n"
-        f"Lake errors:\n" + "\n".join(err_lines)
-    )
+    from jevops.tactics import repair_prompt as _fn
+
+    return _fn(record, failed=failed, errors=errors, reference=reference)
 
 
 def match_reference_indent(reference: str, tactics: str) -> str:
@@ -274,7 +233,9 @@ def match_reference_indent(reference: str, tactics: str) -> str:
 
 
 def hosted_tactics(path: Path) -> str:
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    from jevops.outer import read_json
+
+    payload = read_json(path)
     text = str(payload.get("text") or payload.get("text_head") or "")
     if payload.get("used_prototype_endpoint") or payload.get("called_docker0"):
         raise RuntimeError("refusing a prototype/docker0 generation as a Track 1 candidate")
@@ -299,8 +260,12 @@ def keepbest(
     timeout: float,
     repair: bool = False,
 ) -> dict[str, Any]:
+    from jevops.outer import lookup_named
+
     _raw, digest, records = lra_splice.load_warmup_records()
-    record = next(item for item in records if item.get("name") == name)
+    record = lookup_named(
+        records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
+    )
     clone = lra_cw.require_clone(str(record["url"]), network="allow", state_root=state_root)
     rel = lra_cw.source_relpath(record)
     dest = clone / rel
@@ -309,57 +274,40 @@ def keepbest(
     restore = dest.read_bytes()
     ref_tactics = lra_splice.tactic_block_from_body(lra_splice.split_statement_body(record).body_suffix)
     drafts = lra_fan.enumerate_drafts(record, records)
-    collapse = next((item for item in drafts if "collapse_simp_at" in item.ops), None)
-    candidates = [
-        {"kind": "reference", "generator": "deterministic", "tactics": ref_tactics},
-    ]
+    from jevops.outer import first_where, utc_stamp
+    from jevops.search import beats_reference, compile_labeled, keepbest_candidates, keepbest_kept
+
+    collapse = first_where(drafts, lambda item: "collapse_simp_at" in item.ops)
+    hosted = None
+    flattened = None
     if hosted_path is not None and hosted_path.is_file():
         hosted = match_reference_indent(ref_tactics, hosted_tactics(hosted_path))
         flattened = flatten_overindent(ref_tactics, hosted)
-        candidates.append(
-            {"kind": "hosted_mistral", "generator": "labs-leanstral-1-5", "tactics": hosted}
-        )
-        if flattened != hosted:
-            candidates.append(
-                {"kind": "hosted_indent_normalized", "generator": "deterministic", "tactics": flattened}
-            )
-    if collapse is not None and collapse.tactics != ref_tactics:
-        candidates.append(
-            {"kind": "fanout_collapse_simp_at", "generator": "deterministic", "tactics": collapse.tactics}
-        )
-    for draft in lra_fan.span_preserving_drafts(ref_tactics):
-        if draft.tactics == ref_tactics:
-            continue
-        candidates.append(
-            {
-                "kind": f"span_{draft.draft_id}_{draft.ops[-1] if draft.ops else draft.family}",
-                "generator": "deterministic",
-                "tactics": draft.tactics,
-                "ops": list(draft.ops),
-            }
-        )
-    rows = []
-    tactics_by_kind = {item["kind"]: item["tactics"] for item in candidates}
-    for item in candidates:
-        compile_row = compile_tactics(
+    candidates = keepbest_candidates(
+        reference=ref_tactics,
+        hosted=hosted,
+        flattened=flattened,
+        collapse=None if collapse is None else collapse.tactics,
+        span_drafts=lra_fan.span_preserving_drafts(ref_tactics),
+    )
+    rows, tactics_by_kind = compile_labeled(
+        candidates,
+        lambda body: compile_tactics(
             record,
-            item["tactics"],
+            body,
             state_root=state_root,
             timeout=timeout,
             restore=restore,
-        )
-        rows.append(_row(item, compile_row))
+        ),
+        _row,
+    )
     repair_identity = None
     repaired = False
     hosted_row = next((row for row in rows if row["kind"] == "hosted_mistral"), None)
     indent_row = next((row for row in rows if row["kind"] == "hosted_indent_normalized"), None)
     ref_tokens = lra_loop.token_count(ref_tactics)
-    beats_reference = any(
-        row.get("module_exit_0") and int(row.get("token_count") or ref_tokens) < ref_tokens
-        for row in rows
-        if row["kind"] != "reference"
-    )
-    needs_repair = repair and not beats_reference
+    beats = beats_reference(rows, ref_tokens)
+    needs_repair = repair and not beats
     if needs_repair and hosted_row is not None:
         lra_mistral.load_keyfiles()
         lra_mistral.pin_paths()
@@ -407,31 +355,29 @@ def keepbest(
             )
         )
         repaired = True
-    valid = [row for row in rows if row.get("theorem_ok") or (row.get("ok") and not row.get("sorry_in_theorem"))]
-    module_ok = [row for row in rows if row.get("module_exit_0") or row.get("theorem_ok")]
-    if valid:
-        kept = sorted(
-            valid,
-            key=lambda row: (
-                int(row.get("token_count") or 10**9),
-                0 if row.get("kind") == "reference" else 1,
-                float(row.get("wall_ms") or 0),
-            ),
-        )[0]
-    elif module_ok:
-        kept = sorted(
-            module_ok,
-            key=lambda row: (
-                int(row.get("token_count") or 10**9),
-                0 if row.get("kind") == "reference" else 1,
-                float(row.get("wall_ms") or 0),
-            ),
-        )[0]
-    else:
-        kept = next((row for row in rows if row["kind"] == "reference"), rows[0] if rows else None)
+    from jevops.search import pick_min_tiers
+
+    def _valid(row: Mapping[str, Any]) -> bool:
+        return bool(row.get("theorem_ok") or (row.get("ok") and not row.get("sorry_in_theorem")))
+
+    def _module_ok(row: Mapping[str, Any]) -> bool:
+        return bool(row.get("module_exit_0") or row.get("theorem_ok"))
+
+    kept = pick_min_tiers(
+        rows,
+        (_valid, _module_ok),
+        key_fn=lambda row: (
+            int(row.get("token_count") or 10**9),
+            0 if row.get("kind") == "reference" else 1,
+            float(row.get("wall_ms") or 0),
+        ),
+        fallback_fn=lambda items: first_where(items, lambda row: row["kind"] == "reference"),
+    )
+    n_valid = sum(1 for row in rows if _valid(row))
+    n_module_ok = sum(1 for row in rows if _module_ok(row))
     return {
         "schema": "lra-track1-keepbest/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "name": name,
         "warmup_jsonl_sha256": digest,
         "hardware_class": HARDWARE_CLASS,
@@ -445,17 +391,9 @@ def keepbest(
         "file_path": rel,
         "hosted_receipt": str(hosted_path),
         "candidates": rows,
-        "kept": None
-        if kept is None
-        else {
-            "kind": kept["kind"],
-            "ok": kept.get("ok"),
-            "theorem_ok": kept.get("theorem_ok"),
-            "module_exit_0": kept.get("module_exit_0"),
-            "token_count": kept.get("token_count"),
-        },
-        "n_valid": len(valid),
-        "n_module_exit_0": len(module_ok),
+        "kept": keepbest_kept(kept),
+        "n_valid": n_valid,
+        "n_module_exit_0": n_module_ok,
     }
 
 
@@ -470,8 +408,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--repair", action="store_true", help="one hosted Labs repair if drafts fail lake")
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     args = parser.parse_args(list(argv) if argv is not None else None)
-    os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
-    names = [item.strip() for item in str(args.names).split(",") if item.strip()] or [args.name]
+    from jevops.outer import pin_env
+
+    pin_env({"IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0"}, overwrite=False)
+    from jevops.outer import split_csv
+
+    names = split_csv(args.names) or [args.name]
     hosted = None if args.no_hosted else args.hosted
     reports = []
     for name in names:
@@ -485,16 +427,17 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 repair=args.repair and use_hosted is not None,
             )
         )
-    args.out.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    from jevops.outer import field_of, first_where, path_safe, print_json, utc_stamp, write_json, write_json_pair
+
     if len(reports) == 1:
         report = reports[0]
-        text = json.dumps(report, indent=2, sort_keys=True) + "\n"
-        path = args.out / f"track1-keepbest-{stamp}.json"
-        latest = args.out / "track1-keepbest-latest.json"
-        path.write_text(text, encoding="utf-8")
-        latest.write_text(text, encoding="utf-8")
-        print(json.dumps({
+        latest = write_json_pair(
+            args.out,
+            report,
+            prefix="track1-keepbest",
+            latest="track1-keepbest-latest.json",
+        )
+        print_json({
             "ok": any(row.get("ok") for row in report.get("candidates") or []),
             "latest": str(latest),
             "kept": report.get("kept"),
@@ -513,11 +456,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 for row in report.get("candidates") or []
             ],
             "arena_score": None,
-        }, indent=2, sort_keys=True))
+        })
         return 0
     summary = {
         "schema": "lra-track1-keepbest-batch/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "arena_score": None,
         "called_docker0": False,
         "problems": [
@@ -525,24 +468,24 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 "name": item.get("name"),
                 "kept": item.get("kept"),
                 "n_valid": item.get("n_valid"),
-                "ref_tokens": next(
-                    (row.get("token_count") for row in item.get("candidates") or [] if row.get("kind") == "reference"),
-                    None,
+                "ref_tokens": field_of(
+                    first_where(item.get("candidates") or [], lambda row: row.get("kind") == "reference"),
+                    "token_count",
+                    default=None,
                 ),
             }
             for item in reports
         ],
     }
-    path = args.out / f"track1-keepbest-batch-{stamp}.json"
-    latest = args.out / "track1-keepbest-batch-latest.json"
-    path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    latest.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    latest = write_json_pair(
+        args.out,
+        summary,
+        prefix="track1-keepbest-batch",
+        latest="track1-keepbest-batch-latest.json",
+    )
     for item in reports:
-        safe = str(item.get("name") or "unnamed").replace("/", "_")
-        (args.out / f"track1-keepbest-{safe}.json").write_text(
-            json.dumps(item, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-        )
-    print(json.dumps({"ok": True, "latest": str(latest), "summary": summary["problems"], "arena_score": None}, indent=2, sort_keys=True))
+        write_json(args.out / f"track1-keepbest-{path_safe(item.get('name'))}.json", item)
+    print_json({"ok": True, "latest": str(latest), "summary": summary["problems"], "arena_score": None})
     return 0
 
 

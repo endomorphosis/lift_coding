@@ -111,6 +111,38 @@ class NcaAutoencoderTests(unittest.TestCase):
         self.assertFalse(out["writes_lean"])
         self.assertTrue(out["integer"])
 
+    def test_lean_ir_roundtrip_is_functional_not_legal(self) -> None:
+        packed = lra_ae.encode_lean_ir("intro simp trivial exact Hin")
+        self.assertEqual(packed["schema"], lra_ae.LEAN_IR_SCHEMA)
+        self.assertFalse(packed["legal_ir"])
+        self.assertEqual(packed["families"], [])
+        self.assertTrue(packed["functional_lean"])
+        ops = [item["op"] for item in packed["ops"]]
+        self.assertIn("intro", ops)
+        self.assertIn("simp", ops)
+        self.assertIn("trivial", ops)
+        self.assertIn("exact", ops)
+        lean = lra_ae.decode_lean_ir(packed)
+        self.assertIn("theorem ", lean)
+        self.assertIn("True := by", lean)
+        self.assertIn("  trivial", lean)
+        self.assertNotIn("sorry", lean)
+        row = lra_ae.lean_ir_roundtrip("intro simp trivial", rng=random.Random(0))
+        self.assertFalse(row["gold"])
+        self.assertEqual(row["loss_gold"], "jev")
+        self.assertFalse(row["legal_ir"])
+        self.assertIn("ir_ce_m", row)
+        self.assertIn("ir_cosine_m", row)
+        self.assertEqual(int(row["ir_ce_m"]), int(row["ir_ce_m"]))
+        mem: dict = {"nca": {}}
+        out = lra_rank.call_ranker("port_lean_ir", memory=mem, tactics="  intro\n  trivial\n", problem="P")
+        self.assertTrue(out["ok"])
+        self.assertEqual(out["kind"], "port_lean_ir")
+        self.assertFalse(out["writes_lean"])
+        self.assertFalse(out["legal_ir"])
+        self.assertTrue(out["functional_lean"])
+        self.assertIn("True := by", str(out.get("lean") or ""))
+
 
 if __name__ == "__main__":
     unittest.main()

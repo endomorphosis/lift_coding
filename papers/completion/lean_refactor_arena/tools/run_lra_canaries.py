@@ -13,7 +13,6 @@ import subprocess
 import sys
 import tempfile
 import time
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
@@ -68,6 +67,8 @@ def pin_paths() -> None:
         sys.path.insert(0, text)
     # Live TypeSafe client lives on origin/main accelerate, not the LRA law pin.
     sys.path.insert(0, str(ROOT_ACCEL))
+    import _jevops_path  # noqa: F401
+
     os.environ[AUTOSTART] = "0"
     os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
     os.environ.setdefault("IPFS_AUTO_INSTALL", "false")
@@ -126,19 +127,23 @@ def kernel_check_fol(declaration: str, body: str, timeout: float = 30.0) -> dict
                 env={**os.environ, AUTOSTART: "0"},
             )
     except (OSError, subprocess.TimeoutExpired) as exc:
+        from jevops.outer import elapsed_ms, exc_text
+
         return {
             "ok": False,
             "exit_code": None,
-            "error": f"{type(exc).__name__}: {exc}",
-            "wall_ms": (time.perf_counter() - started) * 1000.0,
+            "error": exc_text(exc),
+            "wall_ms": elapsed_ms(started),
             "source_chars": len(source),
         }
+    from jevops.outer import elapsed_ms
+
     return {
         "ok": proc.returncode == 0,
         "exit_code": proc.returncode,
         "stdout_tail": (proc.stdout or "")[-800:],
         "stderr_tail": (proc.stderr or "")[-800:],
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
         "source_chars": len(source),
         "error": "" if proc.returncode == 0 else "lean_nonzero_exit",
     }
@@ -153,6 +158,8 @@ def run_fol_canary(spec: Mapping[str, Any]) -> dict[str, Any]:
         expected_provable=spec.get("expected_provable"),
         expected_solver_status=str(spec.get("expected_solver_status") or ""),
     )
+    from jevops.outer import elapsed_ms
+
     started = time.perf_counter()
     payload = propose_and_solve(
         goal,
@@ -192,7 +199,7 @@ def run_fol_canary(spec: Mapping[str, Any]) -> dict[str, Any]:
             "match_expected": match,
             "advisory_only": True,
             "arena_score": None,
-            "wall_ms": (time.perf_counter() - started) * 1000.0,
+            "wall_ms": elapsed_ms(started),
         }
     )
 
@@ -214,6 +221,8 @@ def run_lra_canary(name: str, *, max_new_tokens: int, generate_timeout: float) -
     )
     route_dict = route.as_dict()
     jev_wants_llm = None if route.skipped else lra_ts.should_call_leanstral(route_dict, record)
+    from jevops.outer import elapsed_ms
+
     health = lra_d0.probe_docker0_health()
     generation = None
     tactics = ""
@@ -282,7 +291,7 @@ def run_lra_canary(name: str, *, max_new_tokens: int, generate_timeout: float) -
             "arena_score": None,
             "official_score": None,
             "jev_generated_lean": False,
-            "wall_ms": (time.perf_counter() - started) * 1000.0,
+            "wall_ms": elapsed_ms(started),
         }
     )
 
@@ -306,19 +315,25 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         try:
             rows.append(run_fol_canary(spec))
         except Exception as exc:  # noqa: BLE001 — retain the canary failure
-            errors.append({"kind": "fol", "goal_id": spec["goal_id"], "error": f"{type(exc).__name__}: {exc}"})
-            rows.append({"kind": "fol", "goal_id": spec["goal_id"], "ok": False, "error": f"{type(exc).__name__}: {exc}", "arena_score": None})
+            from jevops.outer import exc_text
+
+            errors.append({"kind": "fol", "goal_id": spec["goal_id"], "error": exc_text(exc)})
+            rows.append({"kind": "fol", "goal_id": spec["goal_id"], "ok": False, "error": exc_text(exc), "arena_score": None})
     for name in LRA_CANARIES:
         try:
             rows.append(run_lra_canary(name, max_new_tokens=args.max_new_tokens, generate_timeout=args.generate_timeout))
         except Exception as exc:  # noqa: BLE001
-            errors.append({"kind": "lra_warmup", "name": name, "error": f"{type(exc).__name__}: {exc}"})
-            rows.append({"kind": "lra_warmup", "name": name, "ok": False, "error": f"{type(exc).__name__}: {exc}", "arena_score": None})
+            from jevops.outer import exc_text
+
+            errors.append({"kind": "lra_warmup", "name": name, "error": exc_text(exc)})
+            rows.append({"kind": "lra_warmup", "name": name, "ok": False, "error": exc_text(exc), "arena_score": None})
     fol = [row for row in rows if row.get("kind") == "fol"]
     lra = [row for row in rows if row.get("kind") == "lra_warmup"]
+    from jevops.outer import elapsed_ms, print_json, utc_stamp, write_json_pair
+
     summary = {
         "schema": "lra-canary-run/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "leanstral_health_ok": bool(health.ok),
         "typesafe_configured": bool(typesafe_configured()),
         "typesafe_key_in_receipt": False,
@@ -334,21 +349,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "lra_admitted": sum(1 for row in lra if (row.get("admission") or {}).get("accepted")),
         "lra_jev_called": sum(1 for row in lra if (row.get("route") or {}).get("called_typesafe")),
         "errors": errors,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
         "canaries": rows,
     }
     summary = redact(summary)
-    dest = args.out
-    dest.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    path = dest / f"canary-run-{stamp}.json"
-    latest = dest / "latest.json"
-    text = json.dumps(summary, indent=2, sort_keys=True) + "\n"
-    if "apikey_" in text:
-        raise SystemExit("refusing to write a receipt that contains an API key")
-    path.write_text(text, encoding="utf-8")
-    latest.write_text(text, encoding="utf-8")
-    print(json.dumps({
+    latest = write_json_pair(
+        args.out,
+        summary,
+        prefix="canary-run",
+        latest="latest.json",
+        refuse="apikey_",
+    )
+    print_json({
         "ok": not errors and bool(health.ok) and bool(typesafe_configured()),
         "latest": str(latest),
         "leanstral_health_ok": summary["leanstral_health_ok"],
@@ -359,7 +371,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         "lra_admitted": summary["lra_admitted"],
         "errors": errors,
         "arena_score": None,
-    }, indent=2, sort_keys=True))
+    })
     return 0 if not errors else 1
 
 

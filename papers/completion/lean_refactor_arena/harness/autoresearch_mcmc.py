@@ -15,7 +15,7 @@ import os
 import random
 import sys
 import time
-from datetime import datetime, timezone
+
 from pathlib import Path
 from typing import Any, Mapping, Optional
 
@@ -85,11 +85,14 @@ PENALTY = {
 
 
 def load_typesafe():
-    from jevops.outer import load_module_from_path
+    from jevops.outer import after_calls, load_module_from_path
 
-    lra_pca.load_keyfile()
-    lra_pca.pin_typesafe_path()
-    module = load_module_from_path(TS_PATH, "lra_typesafe_autoresearch")
+    module = after_calls(
+        (lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
+        load_module_from_path,
+        TS_PATH,
+        "lra_typesafe_autoresearch",
+    )
     if module is None or not module.typesafe_configured():
         return None
     return module
@@ -117,25 +120,32 @@ def featurize_proposal(
     module,
     weights: Mapping[str, float],
 ) -> dict[str, Any]:
+    from jevops.outer import tail_chars
+
     state = {
         "problem": record.get("name"),
         "current_tokens": lra_loop.token_count(current),
-        "current_tail": current[-500:],
+        "current_tail": tail_chars(current, 500),
         "edit_kind": proposal.get("kind"),
         "edit_note": proposal.get("note"),
         "proposed_tokens": lra_loop.token_count(proposal.get("tactics") or ""),
-        "proposed_tail": str(proposal.get("tactics") or "")[-500:],
+        "proposed_tail": tail_chars(proposal.get("tactics") or "", 500),
         "goal": "Judge this MCMC edit of a lake-valid Lean 4 proof. Do not write Lean.",
     }
+    from jevops.jev import invoke_system_one, skipped, unpack_response
+    from jevops.outer import dumps_compact, exc_head, usage_tokens
+
     try:
-        result = module.TypeSafeClient(timeout=45.0).system_one(state, feature_questions(module))
+        result, _wall = invoke_system_one(
+            module.TypeSafeClient(timeout=45.0), state, feature_questions(module)
+        )
     except Exception as exc:  # noqa: BLE001
-        return {"skipped": True, "reason": str(exc)[:300], "score": 0.0, "features": {}}
-    usage = dict(getattr(result, "usage", None) or {})
-    inn = int(usage.get("input_tokens") or usage.get("prompt_tokens") or lra_t1.estimate_tokens(json.dumps(state)))
-    out = int(usage.get("output_tokens") or usage.get("completion_tokens") or 0)
+        return skipped(exc_head(exc), score=0.0, features={})
+    _choices, nouls, _scores, usage = unpack_response(result)
+    inn, out = usage_tokens(
+        usage, fallback_in=lra_t1.estimate_tokens(dumps_compact(state))
+    )
     ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
-    nouls = getattr(result, "nouls", None) or {}
     features: dict[str, float] = {}
     for name, _kind, _q in ALL_FEATURES:
         got = nouls.get(name)
@@ -195,18 +205,30 @@ def main(argv: Optional[list[str]] = None) -> int:
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.self_check or not args.live:
         report = self_check()
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
-    os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
+        from jevops.outer import print_ok
+
+        return print_ok(report)
+    from jevops.outer import pin_env
+
+    pin_env({"IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0"}, overwrite=False)
     module = load_typesafe()
     if module is None:
-        print(json.dumps({"ok": False, "reason": "no_typesafe", "arena_score": None}, indent=2))
+        from jevops.outer import print_json
+
+        print_json({"ok": False, "reason": "no_typesafe", "arena_score": None})
         return 1
     _raw, digest, records = lra_splice.load_warmup_records()
-    name = str(args.names).split(",")[0].strip()
-    record = next(item for item in records if item.get("name") == name)
-    init = Path(args.init_file).read_text(encoding="utf-8") if args.init_file else None
+    from jevops.outer import first_csv
+
+    name = first_csv(args.names)
+    from jevops.outer import lookup_named
+
+    record = lookup_named(
+        records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
+    )
+    from jevops.outer import read_text
+
+    init = read_text(args.init_file) if args.init_file else None
     import draft_fanout as lra_fan
 
     reference = lra_fan.tactic_block(record)
@@ -215,7 +237,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     ledger = lra_t1.ProblemLedger(name=f"{name}#autoresearch-mcmc", max_jev_calls=MAX_JEV, max_mistral_calls=0, max_grok_calls=0)
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), args.state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
-    restore = dest.read_bytes() if dest.is_file() else b""
+    from jevops.outer import read_bytes_if
+
+    restore = read_bytes_if(dest)
     start = lra_mcmc.compile_one(record, current, state_root=args.state_root, timeout=args.timeout, restore=restore)
     best = {
         "kind": "init",
@@ -243,7 +267,9 @@ def main(argv: Optional[list[str]] = None) -> int:
             break
         proposals = lra_mcmc.propose_edits(current, reference, rng)
         scored = []
-        for proposal in proposals[:6]:
+        from jevops.outer import head_seq
+
+        for proposal in head_seq(proposals, 6):
             feat = featurize_proposal(record, current, proposal, ledger=ledger, module=module, weights=weights)
             scored.append({**proposal, **feat})
             if ledger.hard_stopped:
@@ -255,7 +281,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             for item in scored
             if lra_loop.token_count(item.get("tactics") or "") < current_tok
         ]
-        to_lake = (shorter or scored)[:2]
+        to_lake = head_seq(shorter or scored, 2)
         for proposal in to_lake:
             compiled = lra_mcmc.compile_one(
                 record,
@@ -274,7 +300,7 @@ def main(argv: Optional[list[str]] = None) -> int:
                 "features": proposal.get("features"),
                 "ok": ok,
                 "tokens": tok,
-                "errors": (compiled.get("errors") or [])[:1],
+                "errors": head_seq(compiled.get("errors"), 1),
             }
             history.append(row)
             labeled.append(row)
@@ -282,9 +308,11 @@ def main(argv: Optional[list[str]] = None) -> int:
                 best = {"kind": f"ar_r{round_i}_{proposal.get('kind')}", "tactics": proposal["tactics"], "token_count": tok, "theorem_ok": True}
                 current = proposal["tactics"]
         weights = update_weights(labeled, weights)
+    from jevops.outer import elapsed_ms, utc_stamp, write_json_pair
+
     payload = {
         "schema": "lra-autoresearch-mcmc/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "protocol": PROTOCOL,
         "pr": PR_ID,
         "cookbook": "https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery",
@@ -305,29 +333,25 @@ def main(argv: Optional[list[str]] = None) -> int:
         "official_track2": False,
         "arena_score": None,
         "jev_generated_lean": False,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
     }
-    text = json.dumps(lra_pca.redact(payload), indent=2, sort_keys=True) + "\n"
-    if "apikey_" in text:
-        raise SystemExit("refusing to write a receipt that contains an API key")
-    args.out.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    path = args.out / f"autoresearch-mcmc-{stamp}.json"
-    latest = args.out / "autoresearch-mcmc-latest.json"
-    path.write_text(text, encoding="utf-8")
-    latest.write_text(text, encoding="utf-8")
-    print(
-        json.dumps(
-            {
-                "ok": True,
-                "latest": str(latest),
-                "kept": {"kind": best.get("kind"), "token_count": best.get("token_count"), "theorem_ok": best.get("theorem_ok")},
-                "beats_reference": payload["beats_reference"],
-                "arena_score": None,
-            },
-            indent=2,
-            sort_keys=True,
-        )
+    latest = write_json_pair(
+        args.out,
+        lra_pca.redact(payload),
+        prefix="autoresearch-mcmc",
+        latest="autoresearch-mcmc-latest.json",
+        refuse="apikey_",
+    )
+    from jevops.outer import print_json
+
+    print_json(
+        {
+            "ok": True,
+            "latest": str(latest),
+            "kept": {"kind": best.get("kind"), "token_count": best.get("token_count"), "theorem_ok": best.get("theorem_ok")},
+            "beats_reference": payload["beats_reference"],
+            "arena_score": None,
+        }
     )
     return 0
 

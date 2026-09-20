@@ -23,7 +23,7 @@ import os
 import re
 import sys
 import tempfile
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional, Sequence
 
@@ -125,112 +125,8 @@ class LoopError(RuntimeError):
     """Fail-closed warm-up loop error. Never an Arena success."""
 
 
-@dataclass
-class CandidateRecord:
-    kind: str
-    tactics: str
-    source_text: str
-    admission_accepted: bool
-    admission_code: str
-    admission_reason: str
-    compile_receipts: list[lra_cw.CompileReceipt] = field(default_factory=list)
-    valid: bool = False
-    token_count: int = 0
-    elab_ms: float = 0.0
-    token_ratio: float = 1.0
-    elab_ratio: float = 1.0
-    composite: float = 1.0
-    generator: str = "deterministic"
-    error: str = ""
-    called_leanstral: bool = False
-    skipped_generate: bool = False
-    arena_score: None = None
-
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "admission_accepted": self.admission_accepted,
-            "admission_code": self.admission_code,
-            "admission_reason": self.admission_reason,
-            "arena_score": None,
-            "called_leanstral": self.called_leanstral,
-            "compile_ok_tags": [
-                item.lean_tag for item in self.compile_receipts if item.ok
-            ],
-            "compile_n": len(self.compile_receipts),
-            "composite": self.composite,
-            "elab_ms": self.elab_ms,
-            "elab_ratio": self.elab_ratio,
-            "error": self.error,
-            "generator": self.generator,
-            "hardware_class": HARDWARE_CLASS,
-            "kind": self.kind,
-            "skipped_generate": self.skipped_generate,
-            "sorryAx": any(item.sorryAx for item in self.compile_receipts),
-            "tactic_chars": len(self.tactics),
-            "token_count": self.token_count,
-            "token_ratio": self.token_ratio,
-            "valid": self.valid,
-        }
-
-
-@dataclass
-class ProblemResult:
-    name: str
-    source: str
-    header: str
-    statement: str
-    phases: list[str]
-    health_ok: bool
-    called_leanstral: bool
-    skipped_generate: bool
-    skip_reason: str
-    retrieval_digest: str
-    n_neighbors: int
-    n_src_lemmas: int
-    candidates: list[CandidateRecord]
-    kept: Optional[CandidateRecord]
-    failures: list[dict[str, Any]]
-    hardware_class: str = HARDWARE_CLASS
-    hammers: str = HAMMERS
-    typesafe: str = TYPESAFE
-    generator: str = GENERATOR
-    loop_version: str = LOOP_VERSION
-    arena_score: None = None
-    official_score: None = None
-
-    def to_dict(self) -> dict[str, Any]:
-        kept = self.kept
-        return {
-            "arena_score": None,
-            "called_leanstral": self.called_leanstral,
-            "candidates": [item.to_dict() for item in self.candidates],
-            "failures": list(self.failures),
-            "failures_retained": True,
-            "generator": self.generator,
-            "hammers": self.hammers,
-            "hardware_class": self.hardware_class,
-            "header_chars": len(self.header),
-            "health_ok": self.health_ok,
-            "kept_kind": None if kept is None else kept.kind,
-            "kept_valid": False if kept is None else kept.valid,
-            "local_proxy_composite": None if kept is None else kept.composite,
-            "local_proxy_elab_ms": None if kept is None else kept.elab_ms,
-            "local_proxy_tokens": None if kept is None else kept.token_count,
-            "loop_version": self.loop_version,
-            "n_candidates": len(self.candidates),
-            "n_failures": len(self.failures),
-            "n_neighbors": self.n_neighbors,
-            "n_src_lemmas": self.n_src_lemmas,
-            "name": self.name,
-            "official_score": None,
-            "phases": list(self.phases),
-            "retrieval_digest": self.retrieval_digest,
-            "skip_reason": self.skip_reason,
-            "skipped_generate": self.skipped_generate,
-            "source": self.source,
-            "statement_chars": len(self.statement),
-            "typesafe": self.typesafe,
-        }
+from jevops.lean import CandidateRecord
+from jevops.lean import ProblemResult
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -286,18 +182,9 @@ def strip_body_comments(text: str) -> str:
 def extract_generated_tactics(text: str) -> str:
     """Take a tactic block from an untrusted model payload. Not a statement splice."""
 
-    from jevops.mask import split_before_markers
-    from jevops.mask import strip_fence
-    from jevops.outer import strip_leading_prefixes
+    from jevops.lean import extract_generated_tactics as _fn
 
-    if not isinstance(text, str):
-        return ""
-    raw = split_before_markers(strip_fence(text), _END_MARKERS)
-    try:
-        raw = strip_leading_prefixes(raw, lra_splice.BODY_BY_PREFIXES)
-    except Exception:
-        pass
-    return raw.strip()
+    return _fn(text)
 
 
 def statement_plus_tactics(statement: str, tactics: str) -> str:
@@ -307,8 +194,10 @@ def statement_plus_tactics(statement: str, tactics: str) -> str:
 
 
 def candidate_source(record: Mapping[str, Any], tactics: str) -> str:
+    from jevops.lean import lake_candidate_source
+
     split = lra_splice.split_statement_body(record)
-    return lra_splice.lake_candidate_source(
+    return lake_candidate_source(
         header=split.header,
         statement=split.statement,
         tactic_block=tactics,
@@ -374,7 +263,7 @@ def maybe_generate(
 ) -> lra_gt.LraGeneration:
     """Call Leanstral iff docker0 ``/health`` is ok. Skip only when down."""
 
-    from jevops.outer import require_env_eq
+    from jevops.outer import exc_text, require_env_eq
 
     pin_loop_env()
     require_env_eq(
@@ -383,13 +272,27 @@ def maybe_generate(
         error_cls=LoopError,
         fmt="{key} must be {expected}; refusing to generate",
     )
-    if not health.ok:
-        return lra_d0.skipped_generation(
-            health,
-            reason="docker0 down; skip generate; keep reference",
+    from jevops.lean import generate_if_healthy
+
+    def _fail(exc: BaseException) -> lra_gt.LraGeneration:
+        return lra_gt.LraGeneration(
+            text="",
+            identity=lra_gt.ProviderIdentity(
+                requested_provider=lra_gt.REQUESTED_PROVIDER,
+                requested_model=lra_gt.REQUESTED_MODEL,
+                resolved_provider="",
+                resolved_model="",
+                fallback_used=False,
+                arena_score=None,
+            ),
+            health=health,
+            skipped=False,
+            error=exc_text(exc),
         )
-    try:
-        return lra_gt.generate_lra(
+
+    return generate_if_healthy(
+        health_ok=bool(health.ok),
+        generate_fn=lambda: lra_gt.generate_lra(
             prompt,
             max_new_tokens=max_new_tokens,
             timeout=timeout,
@@ -397,23 +300,13 @@ def maybe_generate(
             require_health=False,
             generate=generate,
             get_trace=get_trace,
-        )
-    except Exception as exc:  # noqa: BLE001 — retain the failed Leanstral call
-        identity = lra_gt.ProviderIdentity(
-            requested_provider=lra_gt.REQUESTED_PROVIDER,
-            requested_model=lra_gt.REQUESTED_MODEL,
-            resolved_provider="",
-            resolved_model="",
-            fallback_used=False,
-            arena_score=None,
-        )
-        return lra_gt.LraGeneration(
-            text="",
-            identity=identity,
-            health=health,
-            skipped=False,
-            error=f"{type(exc).__name__}: {exc}",
-        )
+        ),
+        skip_result=lra_d0.skipped_generation(
+            health,
+            reason="docker0 down; skip generate; keep reference",
+        ),
+        fail_fn=_fail,
+    )
 
 
 def admit_tactics(record: Mapping[str, Any], tactics: str) -> lra_splice.AdmissionView:
@@ -456,24 +349,30 @@ def compile_tactics(
     timeout = lra_cw.require_lake_timeout(timeout)
     candidate_record = record_with_tactics(record, tactics)
     pins = lra_cw.iter_version_pins(record.get("version_info"))
-    if pins and str(record.get("source") or "") != lra_cw.PUTNAM_SOURCE:
-        dest_root = lra_cw.project_dir_for_record(
-            record, pins[0], state_root=state_root
-        )
-        relpath = lra_cw.source_relpath(candidate_record)
-        dest = dest_root / relpath
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_text(candidate_source(record, tactics), encoding="utf-8")
-    return lra_cw.compile_record(
-        candidate_record,
-        timeout=timeout,
-        state_root=state_root,
-        elan_home=elan_home,
-        network=network,
-        require_oleans=False,
-        hardware_class=HARDWARE_CLASS,
-        skip_checkout=skip_checkout,
-        abort_on_first_failure=True,
+    from jevops.lean import write_then_compile
+    from jevops.outer import write_text
+
+    return write_then_compile(
+        record,
+        tactics,
+        putnam_source=lra_cw.PUTNAM_SOURCE,
+        pins=pins,
+        candidate_record=candidate_record,
+        source_text=candidate_source(record, tactics),
+        project_dir_fn=lambda rec, pin: lra_cw.project_dir_for_record(rec, pin, state_root=state_root),
+        relpath_fn=lra_cw.source_relpath,
+        write_fn=write_text,
+        compile_fn=lambda rec: lra_cw.compile_record(
+            rec,
+            timeout=timeout,
+            state_root=state_root,
+            elan_home=elan_home,
+            network=network,
+            require_oleans=False,
+            hardware_class=HARDWARE_CLASS,
+            skip_checkout=skip_checkout,
+            abort_on_first_failure=True,
+        ),
     )
 
 
@@ -508,6 +407,7 @@ def evaluate_candidate(
         skipped_generate=skipped_generate,
         error=generate_error,
         token_count=token_count(tactics),
+        hardware_class=HARDWARE_CLASS,
         arena_score=None,
     )
     compile_anyway = kind.startswith("reference") or bool(view.accepted)
@@ -525,38 +425,41 @@ def evaluate_candidate(
             item.hardware_class = HARDWARE_CLASS
         candidate.compile_receipts = receipts
         candidate.elab_ms = _elab_ms(receipts)
-        if any(item.error for item in receipts) and not candidate.error:
-            candidate.error = next(item.error for item in receipts if item.error)
-    candidate.token_ratio = ratio(candidate.token_count, reference_tokens)
-    candidate.elab_ratio = ratio(candidate.elab_ms, reference_elab_ms or candidate.elab_ms)
-    candidate.composite = composite_score(candidate.token_ratio, candidate.elab_ratio)
-    candidate.valid = bool(
-        candidate.admission_accepted
-        and _all_tags_ok(record, candidate.compile_receipts)
-        and not any(item.sorryAx for item in candidate.compile_receipts)
+        from jevops.outer import first_where
+
+        hit = first_where(receipts, lambda item: bool(item.error))
+        if hit is not None and not candidate.error:
+            candidate.error = hit.error
+    from jevops.lean import score_candidate
+
+    reconstructed_ok = False
+    if kind.startswith("reference"):
+        reconstructed_ok = (
+            lra_splice.split_statement_body(record).reconstructed_src == record["src"]
+        )
+    return score_candidate(
+        candidate,
+        reference_tokens=reference_tokens,
+        reference_elab_ms=reference_elab_ms,
+        token_ratio_fn=ratio,
+        composite_fn=composite_score,
+        all_tags_ok_fn=_all_tags_ok,
+        record=record,
+        reconstructed_ok=reconstructed_ok,
     )
-    if kind.startswith("reference") and _all_tags_ok(record, candidate.compile_receipts):
-        # Prefix bind is the LRA authority. Unicode admission gaps do not
-        # discard a compile-ok reference; the reference is always legal.
-        if not candidate.admission_accepted:
-            candidate.valid = bool(
-                lra_splice.split_statement_body(record).reconstructed_src
-                == record["src"]
-                and _all_tags_ok(record, candidate.compile_receipts)
-            )
-    return candidate
 
 
 def keep_best(candidates: Sequence[CandidateRecord]) -> Optional[CandidateRecord]:
     """Hard-filter transfer, then tokens+elab among valid. Else the reference."""
 
+    from jevops.outer import first_where
     from jevops.search import pick_min
 
     return pick_min(
         candidates,
         valid_fn=lambda item: item.valid,
         key_fn=lambda item: (item.composite, item.token_count, item.kind),
-        fallback_fn=lambda rows: next((item for item in rows if item.kind == "reference"), None),
+        fallback_fn=lambda rows: first_where(rows, lambda item: item.kind == "reference"),
     )
 
 
@@ -674,18 +577,15 @@ def run_problem(
     if called and not skipped and len(candidates) < MAX_CANDIDATES:
         tactics = extract_generated_tactics(generation.text)
         if not tactics:
-            generated = CandidateRecord(
+            from jevops.lean import failed_candidate
+
+            generated = failed_candidate(
                 kind="generated",
-                tactics="",
-                source_text="",
-                admission_accepted=False,
-                admission_code="empty_generation",
-                admission_reason="Leanstral returned no tactic block",
+                code="empty_generation",
+                reason="Leanstral returned no tactic block",
                 generator=generation.identity.resolved_provider or GENERATOR,
-                called_leanstral=True,
-                skipped_generate=False,
                 error=generation.error or "empty tactic block",
-                arena_score=None,
+                hardware_class=HARDWARE_CLASS,
             )
             candidates.append(generated)
         else:
@@ -707,18 +607,16 @@ def run_problem(
                 )
             )
     elif called and generation.error and not skipped:
+        from jevops.lean import failed_candidate
+
         candidates.append(
-            CandidateRecord(
+            failed_candidate(
                 kind="generated",
-                tactics="",
-                source_text="",
-                admission_accepted=False,
-                admission_code="generate_error",
-                admission_reason=generation.error,
+                code="generate_error",
+                reason=generation.error,
                 generator=GENERATOR,
-                called_leanstral=True,
                 error=generation.error,
-                arena_score=None,
+                hardware_class=HARDWARE_CLASS,
             )
         )
 
@@ -751,15 +649,12 @@ def run_problem(
 
 
 def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, str]:
-    from jevops.outer import write_json
+    from jevops.outer import path_safe, write_tree
 
-    safe = result.name.replace("/", "_") or "unnamed"
-    folder = Path(dest_dir) / safe
-    folder.mkdir(parents=True, exist_ok=True)
     kept = result.kept
     candidate_text = kept.source_text if kept is not None else ""
-    (folder / "candidate.lean").write_text(candidate_text, encoding="utf-8")
     compile_records = []
+    files: dict[str, Any] = {"candidate.lean": candidate_text}
     if kept is not None:
         for item in kept.compile_receipts:
             payload = item.to_dict()
@@ -767,8 +662,8 @@ def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, st
             payload["score"] = None
             payload["hardware_class"] = HARDWARE_CLASS
             compile_records.append(payload)
-            write_json(folder / f"{item.lean_tag}.json", payload)
-    problem = {
+            files[f"{item.lean_tag}.json"] = payload
+    files["problem.json"] = {
         "schema": PROBLEM_SCHEMA,
         "accepted": bool(kept is not None and kept.valid),
         "arena_score": None,
@@ -789,10 +684,8 @@ def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, st
         "warmup_sha256": FROZEN_WARMUP_SHA256,
         "compile_records": compile_records,
     }
-    write_json(folder / "problem.json", problem)
-    result_path = folder / "result.json"
-    write_json(result_path, result.to_dict())
-    admission = {
+    files["result.json"] = result.to_dict()
+    files["admission.json"] = {
         "arena_score": None,
         "candidates": [
             {
@@ -806,12 +699,12 @@ def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, st
         "hardware_class": HARDWARE_CLASS,
         "name": result.name,
     }
-    write_json(folder / "admission.json", admission)
+    paths = write_tree(Path(dest_dir) / path_safe(result.name), files)
     return {
-        "admission": str(folder / "admission.json"),
-        "candidate": str(folder / "candidate.lean"),
-        "problem": str(folder / "problem.json"),
-        "result": str(result_path),
+        "admission": paths["admission.json"],
+        "candidate": paths["candidate.lean"],
+        "problem": paths["problem.json"],
+        "result": paths["result.json"],
     }
 
 
@@ -956,6 +849,8 @@ def run_warmup(
 
 
 def plan_loop(jsonl: Optional[Path] = None) -> dict[str, Any]:
+    from jevops.outer import env_str
+
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
     pin_loop_env()
     health = lra_d0.probe_docker0_health()
@@ -975,7 +870,7 @@ def plan_loop(jsonl: Optional[Path] = None) -> dict[str, Any]:
         "action_if_health_ok": "generate",
         "action_if_health_down": "skip_generate_keep_reference",
         "arena_score": None,
-        "autostart": os.environ.get(AUTOSTART_ENV),
+        "autostart": env_str(AUTOSTART_ENV),
         "docker0_health_url": lra_gt.DOCKER0_HEALTH_URL,
         "frozen_warmup_sha256": digest,
         "gates": GATES,
@@ -1031,9 +926,10 @@ def _subprocess_invokes_forbidden_binary(source: str) -> bool:
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.outer import source_text
     from jevops.repair import ast_name_hits, audit_source as _audit, has_constant
 
-    text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    text = source_text(source, path=__file__)
     out = _audit(
         text,
         forbidden_imports=FORBIDDEN_IMPORT_NAMES,
@@ -1089,14 +985,16 @@ def self_check(
     live: bool = True,
 ) -> dict[str, Any]:
     pin_loop_env()
-    source = Path(__file__).read_text(encoding="utf-8")
+    from jevops.outer import env_str, head_chars, read_text
+
+    source = read_text(__file__)
     audit = audit_source(source)
     raw, digest, records = lra_splice.load_warmup_records(path)
     live_health = lra_d0.probe_docker0_health()
     captured: list[dict[str, Any]] = []
 
     def fake_generate(prompt: str, **kwargs: Any) -> str:
-        captured.append({"prompt_head": prompt[:80], "kwargs": dict(kwargs)})
+        captured.append({"prompt_head": head_chars(prompt, 80), "kwargs": dict(kwargs)})
         source_line = ""
         for line in prompt.splitlines():
             if line.startswith("Source:"):
@@ -1203,7 +1101,7 @@ def self_check(
             "called_leanstral": bool(live_compiled.called_leanstral),
             "generated_error": "" if generated is None else generated.error,
             "generated_kinds": [item.kind for item in live_compiled.candidates],
-            "generated_tactic_head": "" if generated is None else generated.tactics[:160],
+            "generated_tactic_head": "" if generated is None else head_chars(generated.tactics, 160),
             "hardware_class": live_compiled.hardware_class,
             "health_ok": True,
             "kept_kind": None if live_compiled.kept is None else live_compiled.kept.kind,
@@ -1225,7 +1123,7 @@ def self_check(
         "ok": False,
         "arena_score": None,
         "audit": audit,
-        "autostart": os.environ.get(AUTOSTART_ENV),
+        "autostart": env_str(AUTOSTART_ENV),
         "called_leanstral_when_health_ok": must_call,
         "down": {
             "generate_calls": down_generate_calls,
@@ -1353,8 +1251,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             receipts_dir=args.receipts_dir,
             live=not args.no_live,
         )
-        _print_json(report)
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(report)
 
     if args.run or args.name or args.limit is not None:
         try:
@@ -1373,14 +1272,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 plant_synthetic=bool(args.synthetic_compile),
             )
         except LoopError as exc:
-            _print_json(
-                {
-                    "ok": False,
-                    "error": str(exc),
-                    "arena_score": None,
-                    "hardware_class": HARDWARE_CLASS,
-                }
-            )
+            from jevops.outer import closed_fail
+
+            _print_json(closed_fail(str(exc), hardware_class=HARDWARE_CLASS))
             return 1
         payload["ok"] = bool(payload.get("n_problems"))
         _print_json(payload)

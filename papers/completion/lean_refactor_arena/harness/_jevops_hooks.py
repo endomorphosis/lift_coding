@@ -80,3 +80,11 @@ def register_lra_hooks() -> None:
     hooks.register("load_keyfile", _lazy("pca_mca_fanout", "load_keyfile"))
     hooks.register("pin_typesafe", _lazy("pca_mca_fanout", "pin_typesafe_path"))
     hooks.register("install_fold", _lazy("binder_use", "install_memory_skill"))
+    hooks.register(
+        "memory_default",
+        lambda: HERE.parent / "evidence" / "canaries" / "refactor-memory.json",
+    )
+    hooks.register(
+        "skill_analysis_default",
+        lambda: HERE.parent / "evidence" / "canaries" / "skill-analysis.json",
+    )

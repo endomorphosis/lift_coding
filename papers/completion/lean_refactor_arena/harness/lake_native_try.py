@@ -19,7 +19,6 @@ import resource
 import sys
 import tempfile
 import time
-from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
@@ -79,9 +78,9 @@ PR_ID = "PR-5"
 LRAH_ID = "LRAH-005"
 HAMMER_006_CLAIM = "Do not claim HAMMER-006 is LRA-ready."
 CRITICAL_PATH_NOTE = "Not on the 30 Sep critical path."
-FIXED_TACTICS: tuple[str, ...] = ("rfl", "decide", "omega", "simp_all")
-AESOP_TACTIC = "aesop"
-SORRY_TACTIC = "sorry"
+from jevops.lean import AESOP_TACTIC
+from jevops.lean import PATH_A_TACTICS as FIXED_TACTICS
+from jevops.lean import SORRY_TACTIC
 TACTIC_TIMEOUT_SECONDS = 120.0
 UNSOLVED_RELPATH = "Strata/Unsolved.lean"
 
@@ -129,7 +128,7 @@ FORBIDDEN_SCORE_NAMES = frozenset(
     }
 )
 
-_AESOP_IMPORT = re.compile(r"(?m)^\s*import\s+Aesop\b")
+from jevops.lean import AESOP_IMPORT as _AESOP_IMPORT
 
 
 class TryError(RuntimeError):
@@ -140,98 +139,8 @@ class TryToolchainMissing(TryError):
     """Tag-pinned elan lake/lean is not installed. Not a PATH fallback."""
 
 
-@dataclass
-class TacticAttempt:
-    """One ``lake env lean`` invocation for a single tactic (or the sorry hole)."""
-
-    tactic: str = ""
-    argv: list[str] = field(default_factory=list)
-    cwd: str = ""
-    source_file: str = ""
-    exit_code: int = -1
-    timed_out: bool = False
-    timeout_seconds: float = TACTIC_TIMEOUT_SECONDS
-    stdout: str = ""
-    stderr: str = ""
-    stdout_digest: str = ""
-    axiom_names: list[str] = field(default_factory=list)
-    axiom_digest: str = ""
-    sorryAx: bool = False
-    wall_ms: float = 0.0
-    cpu_ms: float = 0.0
-    measurement_maxHeartbeats: int = MEASUREMENT_MAX_HEARTBEATS
-    ok: bool = False
-    error: str = ""
-    used_snapshot_goal: bool = False
-    used_lean_frontend: bool = False
-    used_goal_snapshot: bool = False
-    generator: str = GENERATOR_IDENTITY
-    arena_score: None = None
-    score: None = None
-
-    def to_dict(self) -> dict[str, Any]:
-        payload = asdict(self)
-        payload["arena_score"] = None
-        payload["score"] = None
-        payload["used_snapshot_goal"] = False
-        payload["used_lean_frontend"] = False
-        payload["used_goal_snapshot"] = False
-        payload["generator"] = GENERATOR_IDENTITY
-        return payload
-
-
-@dataclass
-class TacticTryReceipt:
-    """Loop v2 path A receipt. HAMMER-006 / snapshot_goal are unused."""
-
-    schema: str = RECEIPT_SCHEMA
-    name: str = ""
-    source: str = ""
-    file_path: str = ""
-    url: str = ""
-    lean_tag: str = ""
-    git_commit: str = ""
-    sorry_template_digest: str = ""
-    sorry_template_prefix_bound: bool = False
-    aesop_imported: bool = False
-    tactics_considered: list[str] = field(default_factory=list)
-    tactics_run: list[str] = field(default_factory=list)
-    sorry_attempt: Optional[dict[str, Any]] = None
-    attempts: list[dict[str, Any]] = field(default_factory=list)
-    winning_tactic: Optional[str] = None
-    ok: bool = False
-    loop: str = LOOP_VERSION
-    path: str = PATH_NAME
-    pr: str = PR_ID
-    lrah: str = LRAH_ID
-    on_30_sep_critical_path: bool = ON_30_SEP_CRITICAL_PATH
-    v1_runs_this: bool = V1_RUNS_THIS
-    hammer_006_lra_ready: bool = HAMMER_006_LRA_READY
-    uses_snapshot_goal: bool = USES_SNAPSHOT_GOAL
-    goal_snapshot_required: bool = GOAL_SNAPSHOT_REQUIRED
-    path_b_implemented: bool = PATH_B_IMPLEMENTED
-    generator: str = GENERATOR_IDENTITY
-    kernel_command_template: str = KERNEL_COMMAND_TEMPLATE
-    measurement_argv_template: str = MEASUREMENT_ARGV_TEMPLATE
-    timeout_seconds: float = TACTIC_TIMEOUT_SECONDS
-    error: str = ""
-    arena_score: None = None
-    score: None = None
-
-    def to_dict(self) -> dict[str, Any]:
-        payload = asdict(self)
-        payload["arena_score"] = None
-        payload["score"] = None
-        payload["on_30_sep_critical_path"] = False
-        payload["v1_runs_this"] = False
-        payload["hammer_006_lra_ready"] = False
-        payload["uses_snapshot_goal"] = False
-        payload["goal_snapshot_required"] = False
-        payload["path_b_implemented"] = False
-        payload["loop"] = LOOP_VERSION
-        payload["path"] = PATH_NAME
-        payload["generator"] = GENERATOR_IDENTITY
-        return payload
+from jevops.lean import TacticAttempt
+from jevops.lean import TacticTryReceipt
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -253,37 +162,39 @@ def sha256_text(text: str) -> str:
 
 
 def aesop_imported(record: Mapping[str, Any]) -> bool:
+    from jevops.lean import AESOP_IMPORT
     from jevops.outer import any_search
 
-    return any_search((record.get("header") or "", record.get("src") or ""), _AESOP_IMPORT)
+    return any_search((record.get("header") or "", record.get("src") or ""), AESOP_IMPORT)
 
 
 def tactics_for_record(record: Mapping[str, Any]) -> list[str]:
-    tactics = list(FIXED_TACTICS)
-    if aesop_imported(record):
-        tactics.append(AESOP_TACTIC)
-    return tactics
+    from jevops.lean import path_a_tactics
+
+    return path_a_tactics(str(record.get("header") or ""), str(record.get("src") or ""))
 
 
 def sorry_lake_source(record: Mapping[str, Any]) -> str:
+    from jevops.lean import lake_source_for_tactic
+
     split = lra_splice.split_statement_body(record)
-    return lra_splice.lake_candidate_source(
+    return lake_source_for_tactic(
         header=split.header,
         statement=split.statement,
-        tactic_block=SORRY_TACTIC,
+        tactic=SORRY_TACTIC,
+        error_cls=TryError,
     )
 
 
 def tactic_lake_source(record: Mapping[str, Any], tactic: str) -> str:
-    if not isinstance(tactic, str) or not tactic.strip():
-        raise TryError("tactic must be a nonempty string")
-    if tactic.strip() != tactic.split()[0]:
-        raise TryError(f"path A tries a single tactic name, not a script: {tactic!r}")
+    from jevops.lean import lake_source_for_tactic
+
     split = lra_splice.split_statement_body(record)
-    return lra_splice.lake_candidate_source(
+    return lake_source_for_tactic(
         header=split.header,
         statement=split.statement,
-        tactic_block=tactic.strip(),
+        tactic=tactic,
+        error_cls=TryError,
     )
 
 
@@ -314,50 +225,21 @@ def _attempt_from_result(
     cpu_ms: float,
     error: str = "",
 ) -> TacticAttempt:
-    from jevops.outer import process_exit_code
+    from jevops.lean import fill_tactic_attempt
 
-    stdout = getattr(result, "stdout", "") or ""
-    stderr = getattr(result, "stderr", "") or ""
-    result_error = getattr(result, "error", None)
-    exit_code, timed_out = process_exit_code(result)
-    axiom_names, sorry = lra_compile.parse_axioms(stdout, stderr)
-    attempt = TacticAttempt(
+    return fill_tactic_attempt(
         tactic=tactic,
-        argv=list(argv),
+        argv=argv,
         cwd=cwd,
         source_file=source_file,
-        exit_code=exit_code,
-        timed_out=timed_out,
-        timeout_seconds=timeout,
-        stdout=stdout,
-        stderr=stderr,
-        stdout_digest=sha256_text(stdout),
-        axiom_names=axiom_names,
-        axiom_digest=lra_compile.axiom_digest(axiom_names),
-        sorryAx=sorry,
+        timeout=timeout,
+        result=result,
         wall_ms=wall_ms,
         cpu_ms=cpu_ms,
-        measurement_maxHeartbeats=MEASUREMENT_MAX_HEARTBEATS,
-        error=error or (str(result_error) if result_error else ""),
+        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        sorry=SORRY_TACTIC,
+        error=error,
     )
-    attempt.ok = (
-        exit_code == 0
-        and not timed_out
-        and not attempt.error
-        and not sorry
-        and "sorryAx" not in axiom_names
-        and tactic != SORRY_TACTIC
-        and bool(stdout.strip())
-        and len(argv) >= 6
-        and Path(argv[0]).name == "lake"
-        and argv[1] == "env"
-        and Path(argv[2]).name == "lean"
-        and argv[3] == f"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}"
-        and argv[4] == "--json"
-        and not attempt.used_snapshot_goal
-        and not attempt.used_lean_frontend
-    )
-    return attempt
 
 
 def _run_tactic(
@@ -409,23 +291,26 @@ def _prepare_project(
     network: str,
     skip_checkout: bool,
 ) -> tuple[Path, str, Path]:
-    source = str(record.get("source") or "")
-    relpath = lra_compile.source_relpath(record)
-    if source == PUTNAM_SOURCE:
-        project = lra_compile.project_dir_for_record(record, pin, state_root=state_root)
-        if not (project / "lakefile.lean").is_file():
-            lra_bake.materialize_putnam_project(
-                pin.lean_tag, project, jsonl_version_pin=pin.git_commit
-            )
-        dest = project / lra_bake.PUTNAM_CANDIDATE_RELPATH
-        return project, lra_bake.PUTNAM_CANDIDATE_RELPATH, dest
-    cwd = lra_compile.require_clone(
-        str(record.get("url") or ""), network=network, state_root=state_root
+    from jevops.lean import prepare_lake_paths
+
+    return prepare_lake_paths(
+        record,
+        pin,
+        putnam_source=PUTNAM_SOURCE,
+        putnam_relpath=lra_bake.PUTNAM_CANDIDATE_RELPATH,
+        source_relpath_fn=lra_compile.source_relpath,
+        putnam_dir_fn=lambda rec, p, root: lra_compile.project_dir_for_record(rec, p, state_root=root),
+        materialize_fn=lambda p, dest: lra_bake.materialize_putnam_project(
+            p.lean_tag, dest, jsonl_version_pin=p.git_commit
+        ),
+        require_clone_fn=lambda url, net, root: lra_compile.require_clone(
+            url, network=net, state_root=root
+        ),
+        checkout_fn=lra_compile.checkout_commit,
+        skip_checkout=skip_checkout,
+        network=network,
+        state_root=state_root,
     )
-    if not skip_checkout:
-        lra_compile.checkout_commit(cwd, pin.git_commit)
-    dest = cwd / relpath
-    return cwd, relpath, dest
 
 
 def try_tactics(
@@ -447,7 +332,10 @@ def try_tactics(
     split = lra_splice.split_statement_body(record)
     template = lra_splice.statement_sorry_template(split.statement)
     lake_sorry = sorry_lake_source(record)
+    from jevops.lean import aesop_list_ok, sorry_prefix_bound
+
     receipt = TacticTryReceipt(
+        schema=RECEIPT_SCHEMA,
         name=name,
         source=source,
         file_path=lra_compile.source_relpath(record),
@@ -455,21 +343,30 @@ def try_tactics(
         lean_tag=pin.lean_tag,
         git_commit=pin.git_commit,
         sorry_template_digest=sha256_text(template),
-        sorry_template_prefix_bound=template.startswith(split.statement)
-        and template == split.statement + lra_splice.STATEMENT_SORRY_SUFFIX
-        and template in lake_sorry,
+        sorry_template_prefix_bound=sorry_prefix_bound(
+            template=template,
+            statement=split.statement,
+            suffix=lra_splice.STATEMENT_SORRY_SUFFIX,
+            lake_sorry=lake_sorry,
+        ),
         aesop_imported=aesop_imported(record),
         tactics_considered=list(considered),
         timeout_seconds=timeout,
+        loop=LOOP_VERSION,
+        path=PATH_NAME,
+        pr=PR_ID,
+        lrah=LRAH_ID,
+        generator=GENERATOR_IDENTITY,
+        kernel_command_template=KERNEL_COMMAND_TEMPLATE,
+        measurement_argv_template=MEASUREMENT_ARGV_TEMPLATE,
     )
-    if AESOP_TACTIC in considered and not receipt.aesop_imported:
-        receipt.error = "aesop listed without an Aesop import"
+    aesop_err = aesop_list_ok(considered, receipt.aesop_imported)
+    if aesop_err:
+        receipt.error = aesop_err
         receipt.ok = False
         return receipt
-    if AESOP_TACTIC not in considered and receipt.aesop_imported:
-        receipt.error = "Aesop imported but aesop was omitted from the tactic list"
-        receipt.ok = False
-        return receipt
+    from jevops.lean import close_failed_receipt, path_a_fill
+
     try:
         toolchain = lra_compile.resolve_pin(pin, elan_home=elan_home, require_installed=True)
         cwd, source_file, dest = _prepare_project(
@@ -479,36 +376,20 @@ def try_tactics(
             network=network,
             skip_checkout=skip_checkout,
         )
-        env = os.environ.copy()
-        env["LEAN_NUM_THREADS"] = str(LEAN_NUM_THREADS)
-        env["ELAN_HOME"] = toolchain.elan_home
-        supervisor_dir = (
-            Path(state_root) / "process-supervisor"
-            if state_root is not None
-            else Path(tempfile.gettempdir()) / "lra-021-process-supervisor"
+        from jevops.outer import env_copy, under_or_tmp
+
+        supervisor_dir = under_or_tmp(
+            state_root, "process-supervisor", tmp_name="lra-021-process-supervisor"
         )
-        supervisor_dir.mkdir(parents=True, exist_ok=True)
-        env[PROCESS_SUPERVISOR_ENV] = str(supervisor_dir)
-        sorry_attempt = _run_tactic(
-            record,
-            tactic=SORRY_TACTIC,
-            dest=dest,
-            source_file=source_file,
-            cwd=cwd,
-            lake_path=toolchain.lake_path,
-            lean_path=toolchain.lean_path,
-            timeout=timeout,
-            env=env,
+        env = env_copy(
+            {
+                "LEAN_NUM_THREADS": str(LEAN_NUM_THREADS),
+                "ELAN_HOME": toolchain.elan_home,
+                PROCESS_SUPERVISOR_ENV: str(supervisor_dir),
+            }
         )
-        receipt.sorry_attempt = sorry_attempt.to_dict()
-        if sorry_attempt.ok:
-            receipt.error = "sorry hole must not be a successful tactic try"
-            receipt.ok = False
-            return receipt
-        attempts: list[TacticAttempt] = []
-        winner: Optional[str] = None
-        for tactic in considered:
-            attempt = _run_tactic(
+        def _run(tactic: str) -> TacticAttempt:
+            return _run_tactic(
                 record,
                 tactic=tactic,
                 dest=dest,
@@ -519,27 +400,18 @@ def try_tactics(
                 timeout=timeout,
                 env=env,
             )
-            attempts.append(attempt)
-            receipt.tactics_run.append(tactic)
-            if attempt.ok:
-                winner = tactic
-                break
-        receipt.attempts = [item.to_dict() for item in attempts]
-        receipt.winning_tactic = winner
-        receipt.ok = winner is not None and all(
-            not item.used_snapshot_goal and Path(item.argv[0]).name == "lake"
-            for item in attempts
-        )
-        return receipt
+
+        return path_a_fill(receipt, considered, _run)
     except (TryError, lra_compile.CompileError, LeanToolchainMissing, lra_bake.BakeError) as exc:
-        receipt.error = str(exc)
-        receipt.ok = False
+        extra = ""
         if isinstance(exc, (LeanToolchainMissing, lra_compile.CompileToolchainMissing)):
-            receipt.error = (
-                f"{exc}; tag-pinned elan is a capability gap, not PATH lean "
+            extra = (
+                "; tag-pinned elan is a capability gap, not PATH lean "
                 "usability and not LeanFrontend.snapshot_goal"
             )
-        return receipt
+        return close_failed_receipt(
+            receipt, exc, digest_fn=sha256_text, axiom_digest_fn=lra_compile.axiom_digest, extra=extra
+        )
 
 
 def first_record_of_source(
@@ -675,9 +547,10 @@ def _assigned_constant(tree: ast.AST, name: str) -> Any:
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.outer import source_text
     from jevops.repair import assigned_constants, audit_source as _audit
 
-    text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    text = source_text(source, path=__file__)
     out = _audit(
         text,
         forbidden_imports=FORBIDDEN_IMPORT_NAMES,
@@ -959,9 +832,9 @@ def _synthetic_try(
     *,
     persist_receipts: Optional[Path] = None,
 ) -> dict[str, Any]:
-    with tempfile.TemporaryDirectory(
-        prefix="lra-021-try-", dir=str(lra_compile._exec_scratch_parent())
-    ) as tmp:
+    from jevops.outer import temp_dir
+
+    with temp_dir(prefix="lra-021-try-", parent=lra_compile._exec_scratch_parent()) as tmp:
         root = Path(tmp)
         elan_home = root / "elan"
         state_root = root / "state"
@@ -1046,6 +919,8 @@ def self_check(
     *,
     receipts_dir: Optional[Path] = None,
 ) -> dict[str, Any]:
+    from jevops.outer import head_seq
+
     jsonl = Path(path) if path is not None else WARMUP_JSONL
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
     audit = audit_source()
@@ -1119,7 +994,7 @@ def self_check(
         ),
         "strata_decide_won": strata["winning_tactic"] == "decide",
         "strata_rfl_failed_first": (
-            strata["tactics_run"][:1] == ["rfl"] and strata["winning_tactic"] == "decide"
+            head_seq(strata["tactics_run"], 1) == ["rfl"] and strata["winning_tactic"] == "decide"
         ),
         "synthetic": synthetic,
         "tactic_timeout_seconds": TACTIC_TIMEOUT_SECONDS,
@@ -1220,9 +1095,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     if args.self_check or argv is None or argv == []:
-        report = self_check(args.jsonl, receipts_dir=args.receipts_dir)
-        _print_json(report)
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check(args.jsonl, receipts_dir=args.receipts_dir))
 
     if args.plan:
         _print_json(plan_try(args.jsonl))
@@ -1238,32 +1113,31 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         try:
             timeout = lra_compile.require_lake_timeout(args.timeout)
         except lra_compile.CompileError as exc:
+            from jevops.outer import failed_check
+
             _print_json(
-                {
-                    "ok": False,
-                    "error": str(exc),
-                    "error_type": type(exc).__name__,
-                    "arena_score": None,
-                    "hammer_006_lra_ready": False,
-                    "on_30_sep_critical_path": False,
-                    "uses_snapshot_goal": False,
-                }
+                failed_check(
+                    exc,
+                    hammer_006_lra_ready=False,
+                    on_30_sep_critical_path=False,
+                    uses_snapshot_goal=False,
+                )
             )
             return 1
         raw, digest, records = lra_splice.load_warmup_records(
             args.jsonl if args.jsonl is not None else WARMUP_JSONL
         )
         del raw, digest
-        match = next((item for item in records if item.get("name") == args.name), None)
+        from jevops.outer import closed_fail, lookup_named
+
+        match = lookup_named(records, args.name)
         if match is None:
             _print_json(
-                {
-                    "ok": False,
-                    "error": f"unknown warm-up problem: {args.name}",
-                    "arena_score": None,
-                    "hammer_006_lra_ready": False,
-                    "uses_snapshot_goal": False,
-                }
+                closed_fail(
+                    f"unknown warm-up problem: {args.name}",
+                    hammer_006_lra_ready=False,
+                    uses_snapshot_goal=False,
+                )
             )
             return 1
         pin = pin_for_tag(match, STRATA_FIRST_TAG)

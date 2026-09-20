@@ -33,7 +33,9 @@ def is_inspect_only(name: str) -> bool:
     if path is None or not path.is_file():
         return False
     try:
-        head = path.read_text(encoding="utf-8", errors="ignore")[:8000]
+        from jevops.outer import read_text
+
+        head = read_text(path, errors="ignore", max_chars=8000)
     except OSError:
         return False
     return contains_any(head, ("172.17.0.1",))
@@ -47,11 +49,12 @@ def _roots() -> tuple[Path, ...]:
 
 
 def resolve_codepath(name: str) -> Optional[Path]:
-    raw = str(name or "").strip().replace("ptr://codepath/", "")
-    if not raw or ".." in raw or raw.startswith("/"):
+    from jevops.outer import module_stem
+
+    module = module_stem(name, strip_prefix="ptr://codepath/")
+    if module is None:
         return None
     # harness.portable_rewrites:fold_hoist → portable_rewrites.py
-    module = raw.split(":")[0]
     rel = module.replace("harness.", "").replace(".", "/")
     candidates = [
         HERE / f"{Path(rel).name}.py" if "/" not in rel.replace("harness/", "") else HERE / Path(rel).name,
@@ -73,23 +76,25 @@ def slice_codepath(name: str) -> dict[str, Any]:
     path = resolve_codepath(name)
     if path is None:
         return {"ok": False, "reason": "codepath_not_allowed", "name": name, "called_docker0": False, "inspect_only": is_inspect_only(name)}
-    symbol = ""
-    if ":" in str(name):
-        symbol = str(name).rsplit(":", 1)[-1]
     try:
         from jevops.nca import function_call_map
 
-        defs, calls_by = function_call_map(path.read_text(encoding="utf-8"))
+        from jevops.outer import exc_head, head_seq, read_text
+
+        defs, calls_by = function_call_map(read_text(path))
     except (OSError, SyntaxError) as exc:
-        return {"ok": False, "reason": "parse_failed", "error": str(exc)[:160], "called_docker0": False}
-    focus = symbol if symbol in calls_by or symbol in defs else (defs[0] if defs else "")
-    callees = (calls_by.get(focus) or [])[:MAX_NEIGHBORS]
-    callers = [fn for fn, kids in calls_by.items() if focus and focus in kids][:MAX_NEIGHBORS]
+        return {"ok": False, "reason": "parse_failed", "error": exc_head(exc, 160), "called_docker0": False}
+    from jevops.nca import focus_symbol
+    from jevops.outer import head_seq
+
+    focus = focus_symbol(name, defs, calls_by)
+    callees = head_seq(calls_by.get(focus), MAX_NEIGHBORS)
+    callers = head_seq([fn for fn, kids in calls_by.items() if focus and focus in kids], MAX_NEIGHBORS)
     return {
         "ok": True,
         "path": path.name,
         "symbol": focus,
-        "definitions": defs[:40],
+        "definitions": head_seq(defs, 40),
         "callees": callees,
         "callers": callers,
         "complete": True,
@@ -102,9 +107,9 @@ def slice_codepath(name: str) -> dict[str, Any]:
 
 
 def _iter_allowlisted_py() -> list[Path]:
-    from jevops.outer import existing_files
+    from jevops.outer import existing_files, head_seq
 
-    files = sorted(HERE.glob("*.py"))[:40]
+    files = head_seq(sorted(HERE.glob("*.py")), 40)
     files.extend(
         existing_files(
             (
@@ -144,7 +149,7 @@ def build_sidecar_index(*, root: Optional[Path] = None, write: bool = True) -> d
 def build_sidecar_duckdb(*, path: Optional[Path] = None, refresh: bool = True) -> dict[str, Any]:
     """Symbols+calls DuckDB next to evidence/. Refuses campaign control.duckdb."""
 
-    from jevops.outer import path_refused, try_import
+    from jevops.outer import connect_engine, exec_many, path_refused, table_count, try_import
 
     dest = Path(path or SIDECAR_DUCKDB)
     if path_refused(dest, names=("control.duckdb",), needles=("control.duckdb",)):
@@ -152,30 +157,34 @@ def build_sidecar_duckdb(*, path: Optional[Path] = None, refresh: bool = True) -
     duckdb = try_import("duckdb")
     if duckdb is None:
         return {"ok": False, "reason": "duckdb_unavailable", "control_duckdb": False, "called_docker0": False}
-    dest.parent.mkdir(parents=True, exist_ok=True)
     graph = harness_call_graph(refresh=refresh)
-    con = duckdb.connect(str(dest))
-    try:
-        con.execute(
-            "CREATE TABLE IF NOT EXISTS symbols (qualified_name VARCHAR, path VARCHAR, symbol_kind VARCHAR)"
-        )
-        con.execute("CREATE TABLE IF NOT EXISTS calls (caller VARCHAR, callee VARCHAR, path VARCHAR)")
-        con.execute("DELETE FROM symbols")
-        con.execute("DELETE FROM calls")
-        for _bare, qnames in (graph.get("defs") or {}).items():
-            for qname in qnames:
-                con.execute(
+    statements: list[Any] = [
+        "CREATE TABLE IF NOT EXISTS symbols (qualified_name VARCHAR, path VARCHAR, symbol_kind VARCHAR)",
+        "CREATE TABLE IF NOT EXISTS calls (caller VARCHAR, callee VARCHAR, path VARCHAR)",
+        "DELETE FROM symbols",
+        "DELETE FROM calls",
+    ]
+    for _bare, qnames in (graph.get("defs") or {}).items():
+        for qname in qnames:
+            statements.append(
+                (
                     "INSERT INTO symbols VALUES (?, ?, ?)",
                     [qname, f"{str(qname).split(':', 1)[0]}.py", "function"],
                 )
-        for caller, callees in (graph.get("calls") or {}).items():
-            for callee in callees:
-                con.execute(
+            )
+    for caller, callees in (graph.get("calls") or {}).items():
+        for callee in callees:
+            statements.append(
+                (
                     "INSERT INTO calls VALUES (?, ?, ?)",
                     [caller, callee, f"{str(caller).split(':', 1)[0]}.py"],
                 )
-        n_sym = int(con.execute("SELECT COUNT(*) FROM symbols").fetchone()[0])
-        n_calls = int(con.execute("SELECT COUNT(*) FROM calls").fetchone()[0])
+            )
+    con, _engine = connect_engine(dest, duckdb_module=duckdb)
+    try:
+        exec_many(con, statements)
+        n_sym = table_count(con, "symbols")
+        n_calls = table_count(con, "calls")
     finally:
         con.close()
     return {

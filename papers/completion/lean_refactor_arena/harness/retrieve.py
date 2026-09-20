@@ -19,7 +19,7 @@ import hashlib
 import json
 import re
 import sys
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
@@ -30,6 +30,7 @@ WARMUP_JSONL = PAPER_ROOT / "data" / "benchmark_data_warmup.jsonl"
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
+import _jevops_path  # noqa: E402,F401
 import splice as lra_splice  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
@@ -160,46 +161,9 @@ class UnknownProblem(RetrieveError):
     """The requested JSONL name is not in the frozen warm-up set."""
 
 
-@dataclass(frozen=True)
-class NeighborProof:
-    name: str
-    source: str
-    statement: str
-    src: str
-    header: str
-    file_path: str
-    proof_length: int
-    url: str
-
-    @property
-    def statement_head(self) -> str:
-        return self.statement[:PROMPT_HEAD_CHARS]
-
-    @property
-    def proof_head(self) -> str:
-        return self.src[:PROMPT_HEAD_CHARS]
-
-
-@dataclass(frozen=True)
-class SrcLemma:
-    name: str
-    tactic: str
-    opener: str
-    offset: int
-
-
-@dataclass(frozen=True)
-class Retrieval:
-    query: str
-    source: str
-    neighbors: tuple[NeighborProof, ...]
-    src_lemmas: tuple[SrcLemma, ...]
-    lemma_ids: tuple[str, ...]
-    lemma_id_digest: str
-    n_src_lemmas_uncapped: int
-    arena_score: None = None
-    corpus_manifest_ingest: bool = False
-    mathlib_ingest: bool = False
+from jevops.lean import NeighborProof
+from jevops.lean import Retrieval
+from jevops.tactics import SrcLemma
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -250,48 +214,9 @@ def extract_src_lemmas(src: str, *, cap: int = SRC_LEMMA_CAP) -> tuple[tuple[Src
     Does not parse Lean. Unique names, first-occurrence order, then cap.
     """
 
-    if not isinstance(src, str):
-        raise RetrieveError("src must be a string")
-    events: list[tuple[int, str, re.Match[str]]] = []
-    for match in _SIMP_RW_OPEN.finditer(src):
-        events.append((match.start(), "list", match))
-    for match in _EXACT_APPLY_OPEN.finditer(src):
-        events.append((match.start(), "ident", match))
-    events.sort(key=lambda item: item[0])
+    from jevops.tactics import extract_src_lemmas as _fn
 
-    from jevops.pick import unique_first
-
-    lemmas: list[SrcLemma] = []
-    for offset, kind, match in events:
-        tactic = _tactic_family(match.group("tactic"))
-        opener = match.group(0).strip()
-        if kind == "list":
-            inner = _bracket_inner(src, match.end())
-            for ident_match in _IDENT.finditer(inner):
-                lemmas.append(
-                    SrcLemma(
-                        name=ident_match.group(0),
-                        tactic=tactic,
-                        opener=opener,
-                        offset=offset + ident_match.start(),
-                    )
-                )
-            continue
-        ident_match = _IDENT.match(src, match.end())
-        if ident_match is None:
-            continue
-        lemmas.append(
-            SrcLemma(
-                name=ident_match.group(0),
-                tactic=tactic,
-                opener=opener,
-                offset=ident_match.start(),
-            )
-        )
-    if cap < 0:
-        raise RetrieveError("src lemma cap must be non-negative")
-    kept, uncapped = unique_first(lemmas, key_fn=lambda item: item.name, keep_fn=_keep_ident, cap=cap)
-    return tuple(kept), uncapped
+    return _fn(src, cap=cap, error_cls=RetrieveError)
 
 
 def jsonl_neighbors(
@@ -300,87 +225,39 @@ def jsonl_neighbors(
 ) -> tuple[NeighborProof, ...]:
     """Return the other 14 warm-up proofs in JSONL order. Never the query."""
 
-    from jevops.outer import exclude_named
-    from jevops.outer import unique_names
+    from jevops.lean import jsonl_neighbors as _fn
 
-    if not query_name:
-        raise RetrieveError("query name is empty")
-    names = unique_names(records)
-    if len(names) != WARMUP_N or len(set(names)) != WARMUP_N:
-        raise RetrieveError(f"warmup JSONL must contain {WARMUP_N} uniquely named records")
-    if query_name not in names:
-        raise UnknownProblem(f"unknown warm-up problem: {query_name}")
-    neighbors: list[NeighborProof] = []
-    for record in exclude_named(records, query_name):
-        name = str(record.get("name") or "")
-        statement = record.get("statement")
-        src = record.get("src")
-        if not isinstance(statement, str) or not statement:
-            raise RetrieveError(f"{name}: statement must be a non-empty string")
-        if not isinstance(src, str) or not src:
-            raise RetrieveError(f"{name}: src must be a non-empty string")
-        if not src.startswith(statement):
-            raise RetrieveError(f"{name}: src does not start with the frozen statement")
-        header = record.get("header") or ""
-        file_path = record.get("file_path") or ""
-        url = record.get("url") or ""
-        neighbors.append(
-            NeighborProof(
-                name=name,
-                source=str(record.get("source") or ""),
-                statement=statement,
-                src=src,
-                header=header if isinstance(header, str) else "",
-                file_path=file_path if isinstance(file_path, str) else "",
-                proof_length=int(record.get("proof_length") or 0),
-                url=url if isinstance(url, str) else "",
-            )
-        )
-    if len(neighbors) != NEIGHBOR_N:
-        raise RetrieveError(f"{query_name}: expected {NEIGHBOR_N} neighbors, got {len(neighbors)}")
-    if any(item.name == query_name for item in neighbors):
-        raise RetrieveError(f"{query_name}: neighbor table includes the query")
-    return tuple(neighbors)
+    return _fn(
+        records,
+        query_name,
+        expected_n=WARMUP_N,
+        neighbor_n=NEIGHBOR_N,
+        error_cls=RetrieveError,
+        unknown_cls=UnknownProblem,
+        head_chars=PROMPT_HEAD_CHARS,
+    )
 
 
 def lemma_id_digest(query: str, neighbor_names: Sequence[str], lemma_names: Sequence[str]) -> str:
     """Content digest of retrieved lemma ids. Not a score."""
 
-    payload = {
-        "cap": SRC_LEMMA_CAP,
-        "n_jsonl_neighbors": NEIGHBOR_N,
-        "neighbors": list(neighbor_names),
-        "query": query,
-        "src_lemmas": list(lemma_names),
-    }
-    from jevops.outer import digest_canonical
+    from jevops.lean import lemma_id_digest as _fn
 
-    return digest_canonical(payload)
+    return _fn(query, neighbor_names, lemma_names, cap=SRC_LEMMA_CAP, neighbor_n=NEIGHBOR_N)
 
 
 def retrieve_record(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> Retrieval:
-    name = str(record.get("name") or "")
-    src = record.get("src")
-    if not isinstance(src, str) or not src:
-        raise RetrieveError(f"{name}: src must be a non-empty string")
-    neighbors = jsonl_neighbors(records, name)
-    src_lemmas, uncapped = extract_src_lemmas(src, cap=SRC_LEMMA_CAP)
-    neighbor_names = tuple(item.name for item in neighbors)
-    lemma_names = tuple(item.name for item in src_lemmas)
-    lemma_ids = tuple(f"jsonl:{item}" for item in neighbor_names) + tuple(
-        f"src:{item}" for item in lemma_names
-    )
-    return Retrieval(
-        query=name,
-        source=str(record.get("source") or ""),
-        neighbors=neighbors,
-        src_lemmas=src_lemmas,
-        lemma_ids=lemma_ids,
-        lemma_id_digest=lemma_id_digest(name, neighbor_names, lemma_names),
-        n_src_lemmas_uncapped=uncapped,
-        arena_score=None,
-        corpus_manifest_ingest=False,
-        mathlib_ingest=False,
+    from jevops.lean import retrieve_record as _fn
+
+    return _fn(
+        record,
+        records,
+        expected_n=WARMUP_N,
+        neighbor_n=NEIGHBOR_N,
+        lemma_cap=SRC_LEMMA_CAP,
+        error_cls=RetrieveError,
+        unknown_cls=UnknownProblem,
+        head_chars=PROMPT_HEAD_CHARS,
     )
 
 
@@ -403,10 +280,11 @@ def retrieve_by_name(
 def prompt_neighbors(retrieval: Retrieval, *, k: int = 4) -> list[dict[str, str]]:
     """TypeSafe neighbor slice from the design: name / statement[:400] / proof_head."""
 
+    from jevops.outer import head_seq
     from jevops.pick import project_items
 
     return project_items(
-        retrieval.neighbors[:k],
+        head_seq(retrieval.neighbors, k),
         {
             "name": "name",
             "statement": "statement_head",
@@ -417,6 +295,8 @@ def prompt_neighbors(retrieval: Retrieval, *, k: int = 4) -> list[dict[str, str]
 
 def retrieval_view(retrieval: Retrieval, *, src_chars: int = PROMPT_HEAD_CHARS) -> dict[str, Any]:
     """JSON view with truncated proofs. Full ``src`` stays on the dataclass."""
+
+    from jevops.outer import head_chars
 
     return {
         "query": retrieval.query,
@@ -429,8 +309,8 @@ def retrieval_view(retrieval: Retrieval, *, src_chars: int = PROMPT_HEAD_CHARS) 
             {
                 "name": item.name,
                 "source": item.source,
-                "statement": item.statement[:src_chars],
-                "proof_head": item.src[:src_chars],
+                "statement": head_chars(item.statement, src_chars),
+                "proof_head": head_chars(item.src, src_chars),
                 "file_path": item.file_path,
                 "url": item.url,
                 "proof_length": item.proof_length,
@@ -538,7 +418,9 @@ def _record_report(record: Mapping[str, Any], records: Sequence[Mapping[str, Any
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     """Retrieve 14 JSONL neighbors + src lemmas for all 15 records. No compile."""
 
-    source = Path(__file__).read_text(encoding="utf-8")
+    from jevops.outer import read_text
+
+    source = read_text(__file__)
     jsonl = Path(path) if path is not None else WARMUP_JSONL
     before = sha256_file(jsonl)
     raw, digest, records = load_warmup_records(jsonl)
@@ -661,29 +543,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         try:
             retrieval = retrieve_by_name(args.name, path=args.jsonl)
         except RetrieveError as exc:
-            json.dump(
-                {
-                    "ok": False,
-                    "error": str(exc),
-                    "error_type": type(exc).__name__,
-                    "arena_score": None,
-                    "score": None,
-                    "corpus_manifest_ingest": False,
-                },
-                sys.stdout,
-                indent=2,
-                sort_keys=True,
-            )
-            sys.stdout.write("\n")
+            from jevops.outer import failed_check, print_json
+
+            print_json(failed_check(exc, score=None, corpus_manifest_ingest=False))
             return 1
-        json.dump(retrieval_view(retrieval, src_chars=args.src_chars), sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
+        from jevops.outer import print_json
+
+        print_json(retrieval_view(retrieval, src_chars=args.src_chars))
         return 0
     if args.self_check or argv is None or argv == []:
-        report = self_check(args.jsonl)
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check(args.jsonl))
     parser.error("choose --self-check or --retrieve")
     return 2
 

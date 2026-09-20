@@ -374,8 +374,9 @@ def main(argv: list[str] | None = None) -> int:
         report["failure_details"] = [
             {"test": str(test), "detail": detail} for test, detail in result.failures + result.errors
         ]
-    json.dump(report, sys.stdout, indent=2, sort_keys=True)
-    sys.stdout.write("\n")
+    from jevops.outer import print_json
+
+    print_json(report)
     return 0 if result.wasSuccessful() else 1
 
 

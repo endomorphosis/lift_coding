@@ -16,7 +16,7 @@ import os
 import random
 import sys
 import time
-from datetime import datetime, timezone
+
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
 
@@ -43,49 +43,29 @@ HARDWARE_CLASS = "mistral_labs_api"
 
 
 def drop_subset(tactics: str, holes: Sequence[lra_mask.Hole], chosen: Sequence[str]) -> str:
-    from jevops.mask import fill_subset
+    from jevops.tactics import drop_subset as _fn
 
-    return fill_subset(
-        tactics,
-        [lra_mask._as_row(item) for item in holes],
-        chosen,
-        fill_fn=lambda item: lra_mask.template_fill(
-            lra_mask.Hole(
-                hole_id=str(item["hole_id"]),
-                family=str(item.get("family") or ""),
-                start=int(item["start"]),
-                end=int(item["end"]),
-                original=str(item["original"]),
-                indent=str(item.get("indent") or ""),
-            )
-        ),
-        marker_fn=lra_mask._mca_marker,
-    )
+    return _fn(tactics, holes, chosen)
 
 
 def hammer_variants(tactics: str, reference: str) -> list[tuple[str, str]]:
     """Parallel tactician branches. Aesop is not a Strata/CSLib dep."""
 
     import inits_updates_shorten as lra_ius
+    import symbol_diffuse as lra_sym
+    from jevops.outer import head_seq
+    from jevops.tactics import hammer_variants as _fn
 
-    rows = [
-        ("identity", tactics),
-        ("simp_all", tactics.rstrip() + "\n  all_goals try simp_all"),
-        ("omega", tactics.rstrip() + "\n  try omega"),
-        (
-            "restore+simp",
-            lra_mask.hammer_repair(tactics, reference, [{"data": "unsolved goals"}]),
-        ),
+    extras: list[tuple[str, str]] = [
         ("inits_replay", lra_ius.replay(reference)),
         ("inits_step", lra_ius.replay(tactics)),
     ]
-    for item in lra_ius.propose(tactics)[:8]:
-        rows.append((str(item["kind"]), str(item["tactics"])))
-    import symbol_diffuse as lra_sym
-
-    for item in lra_sym.closed_candidates(tactics, max_candidates=6):
-        rows.append((str(item["kind"]), str(item["tactics"])))
-    return rows
+    extras.extend((str(item["kind"]), str(item["tactics"])) for item in head_seq(lra_ius.propose(tactics), 8))
+    extras.extend(
+        (str(item["kind"]), str(item["tactics"]))
+        for item in lra_sym.closed_candidates(tactics, max_candidates=6)
+    )
+    return _fn(tactics, reference, extras)
 
 
 def jev_round(
@@ -97,57 +77,49 @@ def jev_round(
     lra_pca.pin_typesafe_path()
     from ipfs_accelerate_py.typesafe_inference import Choice, Noul, Score, TypeSafeClient, typesafe_configured
 
+    from jevops.jev import (
+        choice_questions,
+        hole_criteria,
+        hole_round_state,
+        invoke_system_one,
+        pack_choice_round,
+        skipped,
+    )
+
     if not typesafe_configured():
-        return {"skipped": True, "reason": "no_key", "choice": None, "probabilities": {}}
-    criteria = {
-        hole.hole_id: f"{hole.family}; {len(hole.original.split())} words; {hole.original.strip()[:80]}"
-        for hole in holes
-    }
+        return skipped("no_key", choice=None, probabilities={})
+    criteria = hole_criteria(holes)
     if not criteria:
-        return {"skipped": True, "reason": "no_holes", "choice": None, "probabilities": {}}
-    state = {
-        "problem": record.get("name"),
-        "keep_tokens": keep_tokens,
-        "history": list(history)[-8:],
-        "holes": [
-            {"id": hole.hole_id, "family": hole.family, "n_words": len(hole.original.split())}
-            for hole in holes
-        ],
-        "goal": "Pick the MCA hole whose deletion is most likely to lake-compile AND cut tokens. Do not write Lean.",
-    }
-    questions = {
-        "next_hole": Choice(
-            instructions=(
-                "Which hole id should we drop next in this stochastic descent? "
-                "Prefer strength_reduction simp-at runs, then dead_code rename_i. "
-                "Do not write Lean."
-            ),
-            criteria=criteria,
+        return skipped("no_holes", choice=None, probabilities={})
+    state = hole_round_state(record, holes, history, keep_tokens)
+    questions = choice_questions(
+        Choice=Choice,
+        Noul=Noul,
+        Score=Score,
+        criteria=criteria,
+        best_key="next_hole",
+        best_instructions=(
+            "Which hole id should we drop next in this stochastic descent? "
+            "Prefer strength_reduction simp-at runs, then dead_code rename_i. "
+            "Do not write Lean."
         ),
-        "likely_compiles": Noul(instructions="Will dropping that hole still compile?"),
-        "likely_token_cut": Score(
-            instructions="How large a token cut if that hole is dropped?",
-            criteria=list(lra_fan.LIKELY_SHORTER_CRITERIA),
-        ),
-    }
-    client = TypeSafeClient(timeout=45.0)
-    started = time.perf_counter()
-    result = client.system_one(state, questions)
-    choice = (getattr(result, "choices", None) or {}).get("next_hole")
-    nouls = getattr(result, "nouls", None) or {}
-    scores = getattr(result, "scores", None) or {}
+        nouls={"likely_compiles": "Will dropping that hole still compile?"},
+        scores={
+            "likely_token_cut": (
+                "How large a token cut if that hole is dropped?",
+                list(lra_fan.LIKELY_SHORTER_CRITERIA),
+            )
+        },
+    )
+    result, wall_ms = invoke_system_one(TypeSafeClient(timeout=45.0), state, questions)
     return lra_pca.redact(
-        {
-            "skipped": False,
-            "choice": getattr(choice, "choice", None),
-            "confidence": getattr(choice, "confidence", None),
-            "probabilities": dict(getattr(choice, "probabilities", None) or {}),
-            "likely_compiles": getattr(nouls.get("likely_compiles"), "noul", None),
-            "likely_token_cut": getattr(scores.get("likely_token_cut"), "score", None),
-            "usage": dict(getattr(result, "usage", None) or {}),
-            "wall_ms": (time.perf_counter() - started) * 1000.0,
-            "model": getattr(result, "model", None),
-        }
+        pack_choice_round(
+            result,
+            choice_key="next_hole",
+            noul_key="likely_compiles",
+            score_key="likely_token_cut",
+            wall_ms=wall_ms,
+        )
     )
 
 
@@ -161,9 +133,10 @@ def evaluate_tactics(
     reference: str,
     memory: Optional[dict[str, Any]] = None,
 ) -> list[dict[str, Any]]:
-    def _one(label: str, body: str) -> dict[str, Any]:
-        import nca_kernel as lra_kern
+    import nca_kernel as lra_kern
+    from jevops.search import compile_variant_evals
 
+    def _compile(label: str, body: str) -> dict[str, Any]:
         def _run() -> dict[str, Any]:
             return dict(
                 lra_kb.compile_tactics(
@@ -171,27 +144,20 @@ def evaluate_tactics(
                 )
             )
 
-        compiled = lra_kern.guarded_compile(
-            memory,
-            name=record.get("name"),
-            kind=f"sgd:{label}",
-            tactics=body,
-            compile_fn=_run,
+        return dict(
+            lra_kern.guarded_compile(
+                memory,
+                name=record.get("name"),
+                kind=f"sgd:{label}",
+                tactics=body,
+                compile_fn=_run,
+            )
         )
-        return {
-            "hammer": label,
-            "tactics": body,
-            "token_count": compiled.get("token_count"),
-            "theorem_ok": compiled.get("theorem_ok"),
-            "exit_code": compiled.get("exit_code"),
-            "errors": compiled.get("errors"),
-            "n_chars": len(body),
-        }
 
     variants = hammer_variants(tactics, reference)
     # Lake splices one file; serialize compiles. "Parallel hammers" means
     # four closer variants per minibatch, not concurrent writes.
-    return [_one(label, body) for label, body in variants]
+    return compile_variant_evals(variants, _compile)
 
 
 def sgd_search(
@@ -205,42 +171,60 @@ def sgd_search(
     memory: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     rng = random.Random(seed)
+    from jevops.outer import lookup_named
+
     _raw, digest, records = lra_splice.load_warmup_records()
-    record = next(item for item in records if item.get("name") == name)
+    record = lookup_named(
+        records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
+    )
     reference = lra_fan.tactic_block(record)
     holes = lra_mask.find_holes(reference)
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
-    restore = dest.read_bytes() if dest.is_file() else b""
+    from jevops.outer import read_bytes_if
+
+    restore = read_bytes_if(dest)
     keep = reference
     keep_tokens = lra_loop.token_count(reference)
     history: list[dict[str, Any]] = []
-    rounds_out: list[dict[str, Any]] = []
     dropped: set[str] = set()
     lra_pca.load_keyfile()
     lra_pca.pin_typesafe_path()
-    remaining = [hole for hole in holes if hole.hole_id not in dropped]
-    for round_i in range(1, max(1, rounds) + 1):
-        remaining = [hole for hole in holes if hole.hole_id not in dropped]
-        if not remaining:
-            break
-        jev = jev_round(record, remaining, history, keep_tokens)
+    from jevops.search import apply_keepbest, coordinate_rounds, minibatch_ids, strip_tactics
+
+    box = {"tokens": keep_tokens, "keep": keep}
+    jevs: list[dict[str, Any]] = []
+
+    def _choose(remaining: Sequence[Any], _dropped: set[str], _round: int) -> list[str]:
+        jev = jev_round(record, remaining, history, box["tokens"])
+        jevs.append(jev)
         ranked = sorted(
             (jev.get("probabilities") or {}).items(),
             key=lambda item: item[1],
             reverse=True,
         )
-        from jevops.search import minibatch_ids
-
-        minibatch = minibatch_ids(
+        return minibatch_ids(
             [hole.hole_id for hole in remaining],
             choice=jev.get("choice"),
             ranked=ranked,
             rng=rng,
             k=2,
         )
-        trial = drop_subset(reference, holes, list(dropped) + minibatch)
-        evals = evaluate_tactics(
+
+    def _accept(evals: Sequence[Mapping[str, Any]], tokens: int, trial: str) -> tuple[Optional[Mapping[str, Any]], int, str]:
+        best, nxt_tokens, body = apply_keepbest(evals, tokens, trial=trial)
+        if not best:
+            return None, nxt_tokens, box["keep"]
+        box["tokens"] = nxt_tokens
+        box["keep"] = body
+        return strip_tactics([best])[0], nxt_tokens, body
+
+    walked = coordinate_rounds(
+        holes,
+        rounds=rounds,
+        choose_fn=_choose,
+        trial_fn=lambda chosen: drop_subset(reference, holes, chosen),
+        eval_fn=lambda trial: evaluate_tactics(
             record,
             trial,
             state_root=state_root,
@@ -248,35 +232,23 @@ def sgd_search(
             restore=restore,
             reference=reference,
             memory=memory,
-        )
-        accepted = None
-        from jevops.search import apply_keepbest
-        from jevops.search import strip_tactics
-
-        best, keep_tokens, body = apply_keepbest(evals, keep_tokens, trial=trial)
-        if best:
-            keep = body
-            dropped.update(minibatch)
-            accepted = strip_tactics([best])[0]
-        history.append(
-            {
-                "round": round_i,
-                "minibatch": minibatch,
-                "accepted": bool(accepted),
-                "keep_tokens": keep_tokens,
-                "jev_choice": jev.get("choice"),
-            }
-        )
-        rounds_out.append(
-            {
-                "round": round_i,
-                "jev": jev,
-                "minibatch": minibatch,
-                "evals": evals,
-                "accepted": accepted,
-                "keep_tokens": keep_tokens,
-            }
-        )
+        ),
+        accept_fn=_accept,
+        keep_tokens=keep_tokens,
+        keep_body=keep,
+        history=history,
+    )
+    keep = str(walked["keep"])
+    keep_tokens = int(walked["keep_tokens"])
+    dropped = set(walked["dropped"])
+    history = list(walked["history"])
+    rounds_out = []
+    for row, jev in zip(walked["rounds"], jevs):
+        item = dict(row)
+        item["jev"] = jev
+        rounds_out.append(item)
+    for row, jev in zip(history, jevs):
+        row["jev_choice"] = jev.get("choice")
     leanstral = None
     if use_leanstral and keep_tokens >= lra_loop.token_count(reference):
         lra_mistral.load_keyfiles()
@@ -360,13 +332,19 @@ def diffuse_search(
     """
 
     rng = random.Random(seed)
+    from jevops.outer import head_chars, lookup_named
+
     _raw, digest, records = lra_splice.load_warmup_records()
-    record = next(item for item in records if item.get("name") == name)
+    record = lookup_named(
+        records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
+    )
     reference = lra_fan.tactic_block(record)
     holes = lra_mask.find_holes(reference)
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
-    restore = dest.read_bytes() if dest.is_file() else b""
+    from jevops.outer import read_bytes_if
+
+    restore = read_bytes_if(dest)
     keep = reference
     keep_tokens = lra_loop.token_count(reference)
     dropped: set[str] = set()
@@ -437,7 +415,7 @@ def diffuse_search(
                     "Shrink it further. Keep induction and every case arm. "
                     "Delete only residual simp-at/rename_i/have/rw. No sorry.\n\n"
                     + lra_mask.few_shot_prompt(record, shots)
-                    + f"\nCURRENT KEEP ({keep_tokens} tokens):\n{keep[:1800]}\n"
+                    + f"\nCURRENT KEEP ({keep_tokens} tokens):\n{head_chars(keep, 1800)}\n"
                 )
                 noise_meta = {"hole": None, "mode": "shrink_keep"}
             try:
@@ -532,8 +510,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--timeout", type=float, default=120.0)
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
     args = parser.parse_args(list(argv) if argv is not None else None)
-    os.environ.setdefault("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART", "0")
-    names = [item.strip() for item in str(args.names).split(",") if item.strip()]
+    from jevops.outer import pin_env
+
+    pin_env({"IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0"}, overwrite=False)
+    from jevops.outer import split_csv
+
+    names = split_csv(args.names)
     started = time.perf_counter()
     reports = [
         (
@@ -548,43 +530,42 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         )
         for name in names
     ]
+    from jevops.outer import elapsed_ms, utc_stamp, write_json_pair
+
     payload = {
         "schema": "lra-sgd-fanout-batch/v1",
-        "observed_at": datetime.now(timezone.utc).isoformat(),
+        "observed_at": utc_stamp(),
         "arena_score": None,
         "called_docker0": False,
-        "wall_ms": (time.perf_counter() - started) * 1000.0,
+        "wall_ms": elapsed_ms(started),
         "problems": reports,
     }
-    text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    if "apikey_" in text:
-        raise SystemExit("refusing to write a receipt that contains a secret")
-    args.out.mkdir(parents=True, exist_ok=True)
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    path = args.out / f"sgd-fanout-{stamp}.json"
-    latest = args.out / "sgd-fanout-latest.json"
-    path.write_text(text, encoding="utf-8")
-    latest.write_text(text, encoding="utf-8")
-    print(
-        json.dumps(
-            {
-                "ok": True,
-                "latest": str(latest),
-                "results": [
-                    {
-                        "name": item.get("name"),
-                        "ref": item.get("ref_tokens"),
-                        "keep": item.get("keep_tokens"),
-                        "ratio": item.get("ratio"),
-                        "dropped": item.get("dropped"),
-                    }
-                    for item in reports
-                ],
-                "arena_score": None,
-            },
-            indent=2,
-            sort_keys=True,
-        )
+    latest = write_json_pair(
+        args.out,
+        payload,
+        prefix="sgd-fanout",
+        latest="sgd-fanout-latest.json",
+        refuse="apikey_",
+        refuse_msg="refusing to write a receipt that contains a secret",
+    )
+    from jevops.outer import print_json
+
+    print_json(
+        {
+            "ok": True,
+            "latest": str(latest),
+            "results": [
+                {
+                    "name": item.get("name"),
+                    "ref": item.get("ref_tokens"),
+                    "keep": item.get("keep_tokens"),
+                    "ratio": item.get("ratio"),
+                    "dropped": item.get("dropped"),
+                }
+                for item in reports
+            ],
+            "arena_score": None,
+        }
     )
     return 0
 

@@ -111,6 +111,47 @@ class NcaMoreRankerTests(unittest.TestCase):
         out = lra_rank.call_ranker("port_isotonic", memory={"successes": [{"noul": 0.2}, {"noul": 0.3}], "failures": [{"noul": 0.8}, {"noul": 0.9}], "nca": {}})
         self.assertEqual(out.get("kind"), "port_isotonic")
 
+    def test_gan_discriminator_is_jev_not_gold_ce(self) -> None:
+        def jev_fn(payload):
+            rows = list(payload.get("variations") or [])
+            self.assertTrue(any(row.get("role") == "real" for row in rows))
+            self.assertTrue(any(row.get("role") == "fake" for row in rows))
+            real = next(row for row in rows if row.get("role") == "real")
+            return {
+                "choice": real["id"],
+                "scores": {row["id"]: 800 if row.get("role") == "real" else 200 for row in rows},
+                "noul": 0.15,
+            }
+
+        mem: dict = {"nca": {}}
+        out = lra_more.call_gan(mem, tactics="  intro\n  simp\n  trivial\n", problem="P", jev_fn=jev_fn)
+        self.assertTrue(out["ok"])
+        self.assertEqual(out["kind"], "port_gan")
+        self.assertTrue(out["used_jev"])
+        self.assertFalse(out["gold"])
+        self.assertEqual(out["loss_gold"], "jev")
+        self.assertFalse(out["writes_lean"])
+        self.assertFalse(out["legal_ir"])
+        self.assertTrue(out["functional_lean"])
+        self.assertGreaterEqual(out["n_fake"], 1)
+        self.assertIn("True := by", str(out.get("lean") or ""))
+        dispatched = lra_rank.call_ranker("port_gan", memory={"nca": {}}, tactics="  trivial\n", problem="P")
+        self.assertEqual(dispatched.get("kind"), "port_gan")
+        self.assertFalse(dispatched["writes_lean"])
+        body = "  intro\n  trivial\n"
+        executed = lra_prog.execute_program_ops(
+            {
+                "nca": {
+                    "grid": {},
+                    "program_state": {"ops": [{"op": "CALL", "ptr": "ptr://skill/port_gan"}, {"op": "KEEP"}]},
+                }
+            },
+            tactics=body,
+            problem="P",
+        )
+        self.assertEqual(executed.get("tactics"), body)
+        self.assertTrue(any("gan" in str(op.get("ptr") or "") and op.get("ok") for op in executed["ran"]))
+
 
 if __name__ == "__main__":
     unittest.main()

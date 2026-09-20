@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import argparse
 import ast
-import hashlib
 import json
 import os
 import sys
@@ -228,47 +227,12 @@ from jevops.jev import FixtureResponse  # noqa: E402
 from jevops.jev import FixtureScore  # noqa: E402
 
 
+from jevops.jev import RouteResult as _KernelRouteResult
+
+
 @dataclass(frozen=True)
-class RouteResult:
-    skipped: bool
-    reason: str
-    mode: str
-    official_track2: bool
-    family: Optional[str] = None
-    family_confidence: Optional[float] = None
-    family_probs: Optional[dict[str, float]] = None
-    hammer_before_llm: Optional[float] = None
-    reference_already_tight: Optional[float] = None
-    likely_shorter: Optional[float] = None
-    likely_shorter_legend: Optional[dict[int, str]] = None
-    likely_shorter_is_rubric_index: bool = True
-    elab_risk: Optional[float] = None
-    elab_risk_legend: Optional[dict[int, str]] = None
-    version_fragile: Optional[float] = None
-    putnam_aesop_plausible: Optional[float] = None
-    calc_structure_worth_keeping: Optional[float] = None
-    statement_in_proof_duplicated: Optional[float] = None
-    uses_sorry_or_admit: Optional[float] = None
-    neighbor_style_match: Optional[str] = None
-    spend_llm: Optional[float] = None
-    usage: Optional[dict[str, Any]] = None
-    wall_ms: Optional[float] = None
-    called_typesafe: bool = False
-    used_fixture: bool = False
+class RouteResult(_KernelRouteResult):
     model: str = MODEL_ID
-    jev_generated_lean: bool = False
-    lean_text: None = None
-    tactics: None = None
-    proof_text: None = None
-    arena_score: None = None
-    api_key_redacted: bool = True
-    score_is_rubric_index: bool = True
-    additive_not_replacement: bool = True
-
-    def as_dict(self) -> dict[str, Any]:
-        from jevops.jev import stringify_legend_keys
-
-        return stringify_legend_keys(asdict(self))
 
 
 def _ensure_accel_path() -> None:
@@ -294,9 +258,11 @@ def _import_typesafe_inference() -> dict[str, Any]:
             reported = str(TYPESAFE_INFERENCE_PATH.relative_to(REPO_ROOT))
         except ValueError:
             reported = str(TYPESAFE_INFERENCE_PATH)
+        from jevops.outer import exc_text
+
         return {
             "available": False,
-            "error": f"{type(exc).__name__}: {exc}",
+            "error": exc_text(exc),
             "path": reported,
             "exists": TYPESAFE_INFERENCE_PATH.is_file(),
             "Choice": None,
@@ -331,7 +297,9 @@ def official_track2_requested(
 ) -> bool:
     from jevops.jev import env_flag
 
-    source = os.environ if env is None else env
+    from jevops.outer import env_mapping
+
+    source = env_mapping(env)
     return env_flag(
         flag=flag,
         env=source,
@@ -352,7 +320,9 @@ def resolve_typesafe_mode(
     from jevops.jev import JevError
     from jevops.jev import resolve_mode
 
-    source = os.environ if env is None else env
+    from jevops.outer import env_mapping
+
+    source = env_mapping(env)
     try:
         return resolve_mode(
             flag=flag,
@@ -374,7 +344,9 @@ def resolve_typesafe_mode(
 def key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
     from jevops.jev import any_key
 
-    source = os.environ if env is None else env
+    from jevops.outer import env_mapping
+
+    source = env_mapping(env)
     return any_key(source, KEY_ENV_NAMES)
 
 
@@ -551,19 +523,9 @@ def answers_from_response(response: Any) -> dict[str, Any]:
 def should_call_leanstral(answers: Optional[Mapping[str, Any]], rec: Mapping[str, Any]) -> bool:
     """v2 helper. Loop v1 calls Leanstral whenever docker0 /health is up."""
 
-    if answers is None:
-        return int(rec.get("proof_length") or 0) >= 400
-    if float(answers["family_confidence"]) < 0.5:
-        return int(rec.get("proof_length") or 0) >= 800
-    if float(answers["reference_already_tight"]) >= 0.8 and float(answers["likely_shorter"]) < 1.0:
-        return False
-    if float(answers["hammer_before_llm"]) >= 0.7 and float(answers["spend_llm"]) < 0.4:
-        return False
-    if rec.get("source") == "physlib" and float(answers["calc_structure_worth_keeping"]) >= 0.6:
-        return True
-    if rec.get("source") == "putnambench" and float(answers["putnam_aesop_plausible"]) >= 0.6:
-        return float(answers["spend_llm"]) >= 0.45
-    return float(answers["spend_llm"]) >= 0.45 or answers["family"] == "custom"
+    from jevops.search import should_call_generator
+
+    return should_call_generator(answers, rec)
 
 
 def default_fixture_answers() -> dict[str, Any]:
@@ -598,7 +560,9 @@ class TypeSafeLraRouter:
         model: str = MODEL_ID,
         require_key: bool = True,
     ) -> None:
-        self.env = dict(os.environ if env is None else env)
+        from jevops.outer import env_copy
+
+        self.env = env_copy(base=env)
         self.official_track2 = official_track2_requested(flag=official_track2, env=self.env)
         self.mode = resolve_typesafe_mode(flag=mode, env=self.env, official_track2=self.official_track2)
         self.client_factory = client_factory
@@ -730,9 +694,10 @@ def _numeric_score_assignments(source: str) -> list[str]:
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
+    from jevops.outer import source_text
     from jevops.repair import audit_source as _audit
 
-    text = Path(__file__).read_text(encoding="utf-8") if source is None else source
+    text = source_text(source, path=__file__)
     out = _audit(
         text,
         forbidden_imports=FORBIDDEN_IMPORT_NAMES,
@@ -819,9 +784,9 @@ def _load_named_record(name: str, path: Optional[Path] = None) -> tuple[dict[str
 
     raw, digest, records = lra_splice.load_warmup_records(path)
     del raw
-    record = lookup_named(records, name)
-    if record is None:
-        raise TypesafeRouterError(f"unknown warm-up problem: {name}")
+    record = lookup_named(
+        records, name, error_cls=TypesafeRouterError, miss=f"unknown warm-up problem: {name}"
+    )
     return dict(record), records, digest
 
 
@@ -932,11 +897,15 @@ def plan_view(
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     """CI fixtures without a live key. Does not POST and does not generate Lean."""
 
-    source = Path(__file__).read_text(encoding="utf-8")
+    from jevops.outer import read_text
+
+    source = read_text(__file__)
     jsonl = Path(path) if path is not None else WARMUP_JSONL
-    before = hashlib.sha256(jsonl.read_bytes()).hexdigest()
+    from jevops.outer import digest_file
+
+    before = digest_file(jsonl)
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    after = hashlib.sha256(jsonl.read_bytes()).hexdigest()
+    after = digest_file(jsonl)
     audit = audit_source(source)
     loaded = _import_typesafe_inference()
     first = records[0]
@@ -1010,7 +979,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     except TypesafeRouterError:
         unknown_closed = True
 
-    serialized = json.dumps({"distill": distill_log, "route": distill_result.as_dict()}, sort_keys=True)
+    from jevops.outer import dumps_sorted
+
+    serialized = dumps_sorted({"distill": distill_log, "route": distill_result.as_dict()})
     key_leak = any(token in serialized for token in ("BEGIN SECRET", "sk-live-", "sk-prod-"))
 
     report = {
@@ -1137,13 +1108,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--jsonl", type=Path, default=None, help="warmup JSONL path")
     args = parser.parse_args(list(argv) if argv is not None else None)
     if args.plan:
-        payload = plan_view(mode=args.typesafe, official_track2=args.official_track2)
-        json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if payload.get("ok") else 1
+        from jevops.outer import print_ok
+
+        return print_ok(plan_view(mode=args.typesafe, official_track2=args.official_track2))
     if args.route:
         if not args.name:
             parser.error("--route requires --name")
+        from jevops.outer import failed_check, print_json
+
         try:
             payload = route_named(
                 args.name,
@@ -1153,28 +1125,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 path=args.jsonl,
             )
         except (TypesafeRouterError, lra_splice.SpliceError, lra_retrieve.RetrieveError) as exc:
-            json.dump(
-                {
-                    "ok": False,
-                    "error": str(exc),
-                    "error_type": type(exc).__name__,
-                    "arena_score": None,
-                    "jev_generated_lean": False,
-                },
-                sys.stdout,
-                indent=2,
-                sort_keys=True,
-            )
-            sys.stdout.write("\n")
+            print_json(failed_check(exc, jev_generated_lean=False))
             return 1
-        json.dump(payload, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if payload.get("ok") else 1
+        from jevops.outer import print_ok
+
+        return print_ok(payload)
     if args.self_check or argv is None or argv == []:
-        report = self_check(args.jsonl)
-        json.dump(report, sys.stdout, indent=2, sort_keys=True)
-        sys.stdout.write("\n")
-        return 0 if report["ok"] else 1
+        from jevops.outer import print_ok
+
+        return print_ok(self_check(args.jsonl))
     parser.error("choose --self-check, --plan, or --route")
     return 2
 

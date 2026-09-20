@@ -158,53 +158,29 @@ def eval_theorem(
     import splice as lra_splice
     import track1_keepbest as lra_kb
 
-    from jevops.oracle import closed
-    from jevops.oracle import require_named
-    from jevops.outer import arg_value
+    from jevops.oracle import eval_named_or_current
+    from jevops.outer import arg_value, read_bytes_if
 
-    if compile_fn is None:
-        return closed("no_compile_fn", name)
-    target = str(name or current.get("name") or "")
-    rec: Mapping[str, Any] = current
-    body = tactics
-    restore_bytes = restore
-    if target and target != str(current.get("name") or ""):
-        try:
-            _raw, _digest, records = lra_splice.load_warmup_records()
-        except Exception:
-            return closed("warmup_unreadable", target)
-        match, fail = require_named(records, target, cap=lra_rand.MAX_LIVE_TOKENS)
-        if fail:
-            return fail
-        rec = match
-        body = lra_fan.tactic_block(match)
-        clone = lra_kb.lra_cw.clone_dir(str(match["url"]), lra_rand.DEFAULT_STATE)
-        dest = clone / lra_kb.lra_cw.source_relpath(match)
-        restore_bytes = dest.read_bytes() if dest.is_file() else b""
-        if not dest.is_file():
-            return closed("no_clone", target)
-    timeout = arg_value(args, "timeout", 180.0, cast=float)
+    def _records() -> list:
+        _raw, _digest, records = lra_splice.load_warmup_records()
+        return records
 
-    def _compile() -> Mapping[str, Any]:
-        return compile_fn(
-            rec,
-            body,
-            state_root=lra_rand.DEFAULT_STATE,
-            timeout=timeout,
-            restore=restore_bytes,
-        )
-
-    from jevops.oracle import pack_eval
-    from jevops.oracle import try_kind
-
-    compiled = try_kind(
-        memory if isinstance(memory, dict) else None,
-        name=rec.get("name"),
-        kind="eval_theorem",
-        tactics=body,
-        compile_fn=_compile,
+    return eval_named_or_current(
+        name,
+        current=current,
+        tactics=tactics,
+        compile_fn=compile_fn,
+        memory=memory,
+        timeout=arg_value(args, "timeout", 180.0, cast=float),
+        load_records_fn=_records,
+        tactic_block_fn=lra_fan.tactic_block,
+        clone_dir_fn=lambda url: lra_kb.lra_cw.clone_dir(url, lra_rand.DEFAULT_STATE),
+        relpath_fn=lra_kb.lra_cw.source_relpath,
+        read_bytes_fn=read_bytes_if,
+        cap=lra_rand.MAX_LIVE_TOKENS,
+        state_root=lra_rand.DEFAULT_STATE,
+        restore=restore,
     )
-    return pack_eval(compiled, name=rec.get("name"), tactics=body)
 
 
 def inner_typesafe_walk(
@@ -524,7 +500,9 @@ def run_nested_canary(
     )
     clone = lra_kb.lra_cw.clone_dir(str(record["url"]), lra_rand.DEFAULT_STATE)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
-    restore = dest.read_bytes() if dest.is_file() else b""
+    from jevops.outer import read_bytes_if
+
+    restore = read_bytes_if(dest)
     if not dest.is_file():
         from jevops.walk import pack_canary
 
