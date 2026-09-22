@@ -52,32 +52,42 @@ def original_tactics() -> str:
 
 
 def expected_174() -> str:
-    from jevops.outer import read_text
+    from jevops.outer import either, read_text, stripped_or
 
-    path = CANARY_BEST if CANARY_BEST.is_file() else CANARY_174
-    if path.is_file():
-        return read_text(path).strip("\n")
-    return replay(original_tactics())
+    path = either(CANARY_BEST.is_file(), lambda: CANARY_BEST, lambda: CANARY_174)
+    return either(
+        path.is_file(),
+        lambda: stripped_or(read_text(path), ""),
+        lambda: replay(original_tactics()),
+    )
 
 
 def self_check() -> dict[str, object]:
     src = original_tactics()
     got = replay(src)
-    want = expected_174() if CANARY_174.is_file() else got
+    from jevops.outer import call_if
+
+    want = call_if(CANARY_174.is_file(), expected_174, default=got)
     src_tok = lra_loop.token_count(src)
     got_tok = lra_loop.token_count(got)
-    return {
-        "ok": got == want and got_tok == TARGET_TOKENS and src_tok == 268,
-        "source_tokens": src_tok,
-        "replay_tokens": got_tok,
-        "target_tokens": TARGET_TOKENS,
-        "matches_canary": got == want,
-        "n_kernels": len(KERNELS),
-        "kinds": [kernel.kind for kernel in KERNELS],
-        "warmup_jsonl_sha256": lra_splice.FROZEN_WARMUP_SHA256,
-        "called_llm": False,
-        "arena_score": None,
-    }
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        {
+            "source_tokens": src_tok,
+            "replay_tokens": got_tok,
+            "target_tokens": TARGET_TOKENS,
+            "matches_canary": got == want,
+            "n_kernels": len(KERNELS),
+            "kinds": [kernel.kind for kernel in KERNELS],
+            "warmup_jsonl_sha256": lra_splice.FROZEN_WARMUP_SHA256,
+            "called_llm": False,
+            "arena_score": None,
+        },
+        got == want,
+        got_tok == TARGET_TOKENS,
+        src_tok == 268,
+    )
 
 
 def main(argv: Optional[list[str]] = None) -> int:
@@ -99,35 +109,31 @@ def main(argv: Optional[list[str]] = None) -> int:
             return code
     src = original_tactics()
     got = replay(src)
+    from jevops.lean import pack_inits_replay_receipt
     from jevops.outer import utc_stamp, write_text
 
     write_text(args.out / "inits-updates-replay.lean", got + "\n")
 
-    receipt: dict[str, object] = {
-        "schema": "lra-inits-updates-replay/v1",
-        "observed_at": utc_stamp(),
-        "name": PROBLEM,
-        "source_tokens": lra_loop.token_count(src),
-        "replay_tokens": lra_loop.token_count(got),
-        "target_tokens": TARGET_TOKENS,
-        "n_kernels": len(KERNELS),
-        "called_llm": False,
-        "arena_score": None,
-        "official_track2": False,
-        "hardware_class": "spark_gb10",
-        "warmup_jsonl_sha256": lra_splice.FROZEN_WARMUP_SHA256,
-    }
+    receipt: dict[str, object] = pack_inits_replay_receipt(
+        name=PROBLEM,
+        source_tokens=lra_loop.token_count(src),
+        replay_tokens=lra_loop.token_count(got),
+        target_tokens=TARGET_TOKENS,
+        n_kernels=len(KERNELS),
+        stamp=utc_stamp(),
+        digest=lra_splice.FROZEN_WARMUP_SHA256,
+    )
     if args.live:
         import mcmc_beam as lra_mcmc
         import track1_keepbest as lra_kb
 
-        from jevops.outer import head_seq, lookup_named
+        from jevops.outer import get_str, head_seq, lookup_named
 
         _raw, digest, records = lra_splice.load_warmup_records()
         record = lookup_named(
             records, PROBLEM, error_cls=RuntimeError, miss=f"unknown warm-up problem: {PROBLEM}"
         )
-        clone = lra_kb.lra_cw.clone_dir(str(record["url"]), lra_mcmc.DEFAULT_STATE)
+        clone = lra_kb.lra_cw.clone_dir(get_str(record, "url"), lra_mcmc.DEFAULT_STATE)
         dest = clone / lra_kb.lra_cw.source_relpath(record)
         from jevops.outer import read_bytes_if
 

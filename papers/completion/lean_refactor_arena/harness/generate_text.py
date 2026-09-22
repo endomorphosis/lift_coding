@@ -25,44 +25,6 @@ REPO_ROOT = HERE.parents[3]
 PROMPT_PATH = HERE / "lra_prompt.txt"
 ACCEL_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 
-DOCKER0_HOST = "172.17.0.1"
-DOCKER0_PORT = 8080
-DOCKER0_HEALTH_URL = f"http://{DOCKER0_HOST}:{DOCKER0_PORT}/health"
-DOCKER0_HEALTH_ALIAS_URL = f"http://127.0.0.1:{DOCKER0_PORT}/health"
-DOCKER0_OPENAI_BASE_URL = f"http://{DOCKER0_HOST}:{DOCKER0_PORT}/v1"
-UNREACHABLE_DOCKER0_OPENAI_BASE_URL = f"http://{DOCKER0_HOST}:9/v1"
-
-REQUESTED_PROVIDER = "leanstral_local"
-REQUESTED_MODEL = "Leanstral"
-FAIL_CLOSED_KWARGS: dict[str, Any] = {
-    "provider": "leanstral_local",
-    "model_name": "Leanstral",
-    "temperature": 0.0,
-    "allow_local_fallback": False,
-    "allow_cross_provider_fallback": False,
-    "disable_model_retry": True,
-}
-DEFAULT_MAX_NEW_TOKENS = 1400
-DEFAULT_TIMEOUT_SECONDS = 300
-PUTNAM_MAX_NEW_TOKENS = 4096
-PUTNAM_TIMEOUT_SECONDS = 600
-HEALTH_TIMEOUT_SECONDS = 2.0
-ALLOWED_RESOLVED_PROVIDERS = frozenset({"leanstral_local", "llama_cpp"})
-FORBIDDEN_FALLBACK_PROVIDERS = frozenset(
-    {
-        "grok",
-        "grok_cli",
-        "xai",
-        "hf_inference_api",
-        "huggingface",
-        "local_hf",
-        "openai",
-        "openrouter",
-        "codex_cli",
-        "gemini_cli",
-        "claude_code",
-    }
-)
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
         "fcntl",
@@ -70,11 +32,27 @@ FORBIDDEN_IMPORT_NAMES = frozenset(
         "leanstral_proof_provider",
     }
 )
-FROZEN_WARMUP_SHA256 = "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 import _jevops_path  # noqa: E402,F401
+from jevops.catalogs import ALLOWED_LEANSTRAL_PROVIDERS as ALLOWED_RESOLVED_PROVIDERS  # noqa: E402
+from jevops.catalogs import FROZEN_WARMUP_SHA256  # noqa: E402
+from jevops.catalogs import LEANSTRAL_LOCAL_MODEL as REQUESTED_MODEL  # noqa: E402
+from jevops.catalogs import LEANSTRAL_LOCAL_PROVIDER as REQUESTED_PROVIDER  # noqa: E402
+from jevops.catalogs import DEFAULT_MAX_NEW_TOKENS  # noqa: E402
+from jevops.catalogs import DEFAULT_TIMEOUT_SECONDS  # noqa: E402
+from jevops.catalogs import DOCKER0_HEALTH_ALIAS_URL  # noqa: E402
+from jevops.catalogs import DOCKER0_HEALTH_URL  # noqa: E402
+from jevops.catalogs import DOCKER0_HOST  # noqa: E402
+from jevops.catalogs import DOCKER0_OPENAI_BASE_URL  # noqa: E402
+from jevops.catalogs import DOCKER0_PORT  # noqa: E402
+from jevops.catalogs import FAIL_CLOSED_LEANSTRAL_KWARGS as FAIL_CLOSED_KWARGS  # noqa: E402
+from jevops.catalogs import FORBIDDEN_LEANSTRAL_FALLBACKS as FORBIDDEN_FALLBACK_PROVIDERS  # noqa: E402
+from jevops.catalogs import HEALTH_TIMEOUT_SECONDS  # noqa: E402
+from jevops.catalogs import PUTNAM_MAX_NEW_TOKENS  # noqa: E402
+from jevops.catalogs import PUTNAM_TIMEOUT_SECONDS  # noqa: E402
+from jevops.catalogs import UNREACHABLE_DOCKER0_OPENAI_BASE_URL  # noqa: E402
 
 _GENERATE_LOCK = threading.Lock()
 _CLIENT_ENV_PINNED = False
@@ -96,10 +74,11 @@ from jevops.lean import ProviderIdentity
 def _pin_client_env(*, base_url: Optional[str] = None) -> str:
     """Bind llama.cpp to docker0 as a client. Never enable autostart."""
 
-    from jevops.outer import pin_env, pin_sys_path
+    from jevops.outer import call_if, pin_env, pin_sys_path, rstrip_or, text_or
 
     global _CLIENT_ENV_PINNED
-    url = str(base_url or DOCKER0_OPENAI_BASE_URL).rstrip("/")
+
+    url = rstrip_or(base_url, DOCKER0_OPENAI_BASE_URL)
     pin_env(
         {
             "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
@@ -110,8 +89,10 @@ def _pin_client_env(*, base_url: Optional[str] = None) -> str:
             "IPFS_ACCELERATE_LLAMA_CPP_HOST": DOCKER0_HOST,
         }
     )
-    if url == DOCKER0_OPENAI_BASE_URL.rstrip("/"):
-        pin_env({"IPFS_ACCELERATE_LLAMA_CPP_PORT": str(DOCKER0_PORT)})
+    call_if(
+        url == rstrip_or(DOCKER0_OPENAI_BASE_URL),
+        lambda: pin_env({"IPFS_ACCELERATE_LLAMA_CPP_PORT": text_or(DOCKER0_PORT)}),
+    )
     pin_sys_path(
         "",
         defaults={
@@ -138,7 +119,7 @@ def _http_get(url: str, *, timeout: float) -> tuple[Optional[int], str]:
 def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> HealthProbe:
     """GET docker0 /health, then the loopback alias. Does not start a server."""
 
-    from jevops.outer import env_str, http_ok
+    from jevops.outer import env_str, first_truthy, http_ok
 
     _pin_client_env()
     status, error = _http_get(DOCKER0_HEALTH_URL, timeout=timeout)
@@ -151,20 +132,20 @@ def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> HealthPr
         alias_ok=alias_ok,
         alias_url=DOCKER0_HEALTH_ALIAS_URL,
         status_code=status,
-        error=error or alias_error,
+        error=first_truthy(error, alias_error),
         autostart=env_str("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
     )
 
 
 def token_limits_for_source(source: str) -> tuple[int, int]:
-    from jevops.outer import keyed_pair
+    from jevops.outer import first_int, keyed_pair
 
     tokens, timeout = keyed_pair(
         source,
         {"putnambench": (PUTNAM_MAX_NEW_TOKENS, PUTNAM_TIMEOUT_SECONDS)},
         (DEFAULT_MAX_NEW_TOKENS, DEFAULT_TIMEOUT_SECONDS),
     )
-    return int(tokens), int(timeout)
+    return first_int(tokens), first_int(timeout)
 
 
 def render_prompt(
@@ -173,28 +154,21 @@ def render_prompt(
 ) -> str:
     """Fill the LRA prompt. Returns a tactic-block-only instruction, not PROOF_PROMPT."""
 
-    from jevops.outer import fill_template, overlay_str, read_text
+    from jevops.outer import fill_template, overlay_map, overlay_str, read_text
 
     template = read_text(PROMPT_PATH)
     values = overlay_str(
         {"name": "", "source": "", "header": "", "statement": "", "src": ""},
-        record or {},
+        overlay_map(record),
         fields,
     )
     return fill_template(template, values)
 
 
 def _load_router():
-    from jevops.outer import import_names
+    from jevops.llm_router import load_accelerate_router
 
-    attrs, err = import_names(
-        "ipfs_accelerate_py.llm_router",
-        ("generate_text", "get_last_generation_trace"),
-        setup=(_ensure_accel_path,),
-    )
-    if err is not None:
-        raise err
-    return attrs["generate_text"], attrs["get_last_generation_trace"]
+    return load_accelerate_router(setup=(_ensure_accel_path,))
 
 
 def _identity_from_trace(
@@ -202,30 +176,16 @@ def _identity_from_trace(
     *,
     generated: bool,
 ) -> ProviderIdentity:
-    from jevops.outer import first_nonempty, name_fallback_used
+    from jevops.lean import identity_from_trace as _fn
 
-    resolved_provider = first_nonempty(
+    return _fn(
         trace,
-        "effective_provider_name",
-        "provider_name",
-        "provider",
-        default=REQUESTED_PROVIDER if generated else "",
-    )
-    resolved_model = first_nonempty(
-        trace, "effective_model_name", "model_name", default=REQUESTED_MODEL if generated else ""
-    )
-    fallback_used = name_fallback_used(
-        resolved_provider,
-        allowed=ALLOWED_RESOLVED_PROVIDERS,
-        forbidden=FORBIDDEN_FALLBACK_PROVIDERS,
-    )
-    return ProviderIdentity(
+        generated=generated,
         requested_provider=REQUESTED_PROVIDER,
         requested_model=REQUESTED_MODEL,
-        resolved_provider=resolved_provider,
-        resolved_model=resolved_model,
-        fallback_used=fallback_used,
-        arena_score=None,
+        allowed=ALLOWED_RESOLVED_PROVIDERS,
+        forbidden=FORBIDDEN_FALLBACK_PROVIDERS,
+        identity_cls=ProviderIdentity,
     )
 
 
@@ -270,115 +230,101 @@ def generate_lra(
 ) -> LraGeneration:
     """Probe docker0, then call the router with fail-closed kwargs. Record resolved identity."""
 
+    from jevops.lean import coalesce_limits
     from jevops.outer import env_str
 
-    if source and (max_new_tokens is None or timeout is None):
-        source_tokens, source_timeout = token_limits_for_source(source)
-        if max_new_tokens is None:
-            max_new_tokens = source_tokens
-        if timeout is None:
-            timeout = source_timeout
-    if max_new_tokens is None:
-        max_new_tokens = DEFAULT_MAX_NEW_TOKENS
-    if timeout is None:
-        timeout = DEFAULT_TIMEOUT_SECONDS
+    max_new_tokens, timeout = coalesce_limits(
+        source=source,
+        max_new=max_new_tokens,
+        timeout=timeout,
+        lookup_fn=token_limits_for_source,
+        default_new=DEFAULT_MAX_NEW_TOKENS,
+        default_timeout=DEFAULT_TIMEOUT_SECONDS,
+    )
 
     pinned_base = _pin_client_env(base_url=base_url)
-    health = probe_docker0_health() if base_url is None else HealthProbe(
-        ok=False,
-        url=DOCKER0_HEALTH_URL,
-        alias_ok=False,
-        alias_url=DOCKER0_HEALTH_ALIAS_URL,
-        status_code=None,
-        error=f"forced base_url={base_url}",
-        autostart=env_str("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
+    from jevops.lean import forced_unhealthy
+    from jevops.outer import either
+
+    health = either(
+        base_url is None,
+        probe_docker0_health,
+        lambda: forced_unhealthy(
+            HealthProbe,
+            url=DOCKER0_HEALTH_URL,
+            alias_url=DOCKER0_HEALTH_ALIAS_URL,
+            error=f"forced base_url={base_url}",
+            autostart=env_str("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
+        ),
     )
-    if require_health and not health.ok:
-        identity = ProviderIdentity(
-            requested_provider=REQUESTED_PROVIDER,
-            requested_model=REQUESTED_MODEL,
-            resolved_provider="",
-            resolved_model="",
-            fallback_used=False,
-            arena_score=None,
-        )
-        raise Docker0Unreachable(
-            "docker0 Leanstral is unreachable at "
-            f"{DOCKER0_HEALTH_URL}; fail closed without Grok/HF fallback "
-            f"({health.error or 'no /health'}). requested="
-            f"{identity.requested_provider}/{identity.requested_model}"
-        )
+    from jevops.lean import closed_provider_identity, refuse_unhealthy
+    from jevops.outer import first_truthy
 
-    router_generate = generate
-    router_trace = get_trace
-    if router_generate is None or router_trace is None:
-        loaded_generate, loaded_trace = _load_router()
-        if router_generate is None:
-            router_generate = loaded_generate
-        if router_trace is None:
-            router_trace = loaded_trace
+    identity = closed_provider_identity(
+        requested_provider=REQUESTED_PROVIDER,
+        requested_model=REQUESTED_MODEL,
+        identity_cls=ProviderIdentity,
+    )
+    from jevops.catalogs import DOCKER0_UNREACHABLE_FMT, LEANSTRAL_RERAISE_FMT
 
-    call_kwargs = dict(FAIL_CLOSED_KWARGS)
-    if temperature is not None:
-        call_kwargs["temperature"] = float(temperature)
-    if stop:
-        from jevops.outer import nonempty_strs
+    refuse_unhealthy(
+        health,
+        require_health=require_health,
+        error_cls=Docker0Unreachable,
+        fmt=DOCKER0_UNREACHABLE_FMT,
+        url=DOCKER0_HEALTH_URL,
+        error=first_truthy(health.error, default="no /health"),
+        provider=identity.requested_provider,
+        model=identity.requested_model,
+    )
 
-        call_kwargs["stop"] = nonempty_strs(stop)
-    with _GENERATE_LOCK:
-        _pin_client_env(base_url=pinned_base)
-        try:
-            text = router_generate(
-                prompt,
-                max_new_tokens=int(max_new_tokens),
-                timeout=float(timeout),
-                **call_kwargs,
-            )
-        except Docker0Unreachable:
-            raise
-        except LraGenerateError:
-            raise
-        except Exception as exc:
-            trace = {}
-            if router_trace is not None:
-                try:
-                    trace = dict(router_trace() or {})
-                except Exception:
-                    trace = {}
-            identity = _identity_from_trace(trace, generated=False)
-            if identity.fallback_used:
-                raise LraGenerateError(
-                    "refusing cross-provider fallback "
-                    f"{identity.resolved_provider}/{identity.resolved_model}"
-                ) from exc
-            from jevops.outer import exc_text
+    from jevops.outer import coalesce_pair
 
-            raise Docker0Unreachable(
-                "Leanstral generate_text failed closed at "
-                f"{env_str('IPFS_ACCELERATE_LLAMA_CPP_BASE_URL', DOCKER0_OPENAI_BASE_URL)} "
-                f"({exc_text(exc)}). requested="
-                f"{identity.requested_provider}/{identity.requested_model} "
-                f"resolved={identity.resolved_provider}/{identity.resolved_model}"
-            ) from exc
+    router_generate, router_trace = coalesce_pair(generate, get_trace, _load_router)
 
-    trace = dict(router_trace() or {}) if router_trace is not None else {}
-    identity = _identity_from_trace(trace, generated=True)
-    if identity.fallback_used:
-        raise LraGenerateError(
-            "resolved provider/model is a forbidden fallback: "
-            f"{identity.resolved_provider}/{identity.resolved_model}"
-        )
-    if not isinstance(text, str):
-        raise LraGenerateError("Leanstral returned a non-text payload")
-    return LraGeneration(text=text, identity=identity, health=health)
+    from jevops.lean import overlay_generate_kwargs
+    from jevops.outer import nonempty_strs
+
+    call_kwargs = overlay_generate_kwargs(
+        FAIL_CLOSED_KWARGS,
+        temperature=temperature,
+        stop=stop,
+        stop_fn=nonempty_strs,
+    )
+    from jevops.lean import catch_trace, refuse_if_fallback, require_text, reraise_router_fail, run_locked_generate
+    from jevops.outer import env_str, exc_text, first_int
+
+    return run_locked_generate(
+        lock=_GENERATE_LOCK,
+        pin_fn=lambda: _pin_client_env(base_url=pinned_base),
+        call_fn=lambda: router_generate(
+            prompt,
+            max_new_tokens=first_int(max_new_tokens),
+            timeout=float(timeout),
+            **call_kwargs,
+        ),
+        catch_trace_fn=lambda: catch_trace(router_trace),
+        identity_fn=_identity_from_trace,
+        refuse_fn=refuse_if_fallback,
+        reraise_fn=reraise_router_fail,
+        require_fn=require_text,
+        generation_cls=LraGeneration,
+        health=health,
+        generate_cls=LraGenerateError,
+        unreachable_cls=Docker0Unreachable,
+        error_fn=exc_text,
+        reraise_kwargs={
+            "fmt": LEANSTRAL_RERAISE_FMT,
+            "base": env_str("IPFS_ACCELERATE_LLAMA_CPP_BASE_URL", DOCKER0_OPENAI_BASE_URL),
+        },
+    )
 
 
 def _fail_closed_kwargs_from_source(source: str) -> dict[str, Any]:
-    from jevops.repair import assigned_literal
+    from jevops.repair import catalog_literal
 
-    return assigned_literal(
-        source,
-        "FAIL_CLOSED_KWARGS",
+    return catalog_literal(
+        "FAIL_CLOSED_LEANSTRAL_KWARGS",
         error_cls=LraGenerateError,
         miss="FAIL_CLOSED_KWARGS assignment not found",
         not_dict="FAIL_CLOSED_KWARGS must be a dict",
@@ -412,7 +358,7 @@ def _prompt_contract(prompt_text: str) -> dict[str, bool]:
 def self_check() -> dict[str, Any]:
     """Exercise fail-closed kwargs, health probe, and unreachable docker0. No compile."""
 
-    from jevops.outer import env_str, read_text
+    from jevops.outer import env_str, read_text, relative_or_str, text_or
 
     source = read_text(__file__)
     prompt_text = read_text(PROMPT_PATH)
@@ -453,8 +399,11 @@ def self_check() -> dict[str, Any]:
         generate=fake_generate,
         get_trace=fake_trace,
     )
-    mock_kwargs = captured.get("kwargs") or {}
-    mock_kwargs_ok = all(mock_kwargs.get(key) == value for key, value in expected.items())
+    from jevops.outer import kwargs_match_all, overlay_map
+
+    mock_kwargs = overlay_map(captured.get("kwargs"))
+
+    mock_kwargs_ok = kwargs_match_all([{"kwargs": mock_kwargs}], expected)
 
     unreachable_error = ""
     unreachable_fallback = False
@@ -470,7 +419,7 @@ def self_check() -> dict[str, Any]:
         unreachable_fallback = True
         unreachable_error = "generate_text returned success against unreachable docker0"
     except Docker0Unreachable as exc:
-        unreachable_error = str(exc)
+        unreachable_error = text_or(exc)
         lowered = unreachable_error.lower()
         unreachable_fallback = any(name in lowered for name in ("grok", "huggingface", "hf_inference"))
         unreachable_resolved["error_type"] = exc_name(exc)
@@ -508,27 +457,29 @@ def self_check() -> dict[str, Any]:
         "compiled": False,
         "arena_score": None,
         "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
-        "prompt_path": str(PROMPT_PATH.relative_to(REPO_ROOT)),
+        "prompt_path": relative_or_str(PROMPT_PATH, REPO_ROOT),
     }
-    report["ok"] = bool(
-        report["fail_closed_kwargs_match"]
-        and report["mock_call_kwargs_match"]
-        and mock_generation.identity.resolved_provider == REQUESTED_PROVIDER
-        and mock_generation.identity.resolved_model == REQUESTED_MODEL
-        and not mock_generation.identity.fallback_used
-        and mock_generation.identity.arena_score is None
-        and not forbidden_imports
-        and not uses_fcntl
-        and not uses_lock_ex
-        and all(prompt_ok.values())
-        and report["unreachable_docker0"]["failed_closed"]
-        and report["autostart"] == "0"
-        and report["llama_server_started"] is False
-        and report["compiled"] is False
-        and report["arena_score"] is None
-        and "fcntl" not in imported
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["fail_closed_kwargs_match"],
+        report["mock_call_kwargs_match"],
+        mock_generation.identity.resolved_provider == REQUESTED_PROVIDER,
+        mock_generation.identity.resolved_model == REQUESTED_MODEL,
+        not mock_generation.identity.fallback_used,
+        mock_generation.identity.arena_score is None,
+        not forbidden_imports,
+        not uses_fcntl,
+        not uses_lock_ex,
+        all(prompt_ok.values()),
+        report["unreachable_docker0"]["failed_closed"],
+        report["autostart"] == "0",
+        report["llama_server_started"] is False,
+        report["compiled"] is False,
+        report["arena_score"] is None,
+        "fcntl" not in imported,
     )
-    return report
 
 
 def main(argv: Optional[list[str]] = None) -> int:
@@ -547,7 +498,9 @@ def main(argv: Optional[list[str]] = None) -> int:
 
         probe = probe_docker0_health()
         print_json(asdict(probe))
-        return 0 if probe.ok else 2
+        from jevops.outer import exit_ok
+
+        return exit_ok(probe.ok, bad=2)
     if args.render_prompt:
         sys.stdout.write(
             render_prompt(

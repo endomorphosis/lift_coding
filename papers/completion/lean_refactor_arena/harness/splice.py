@@ -30,62 +30,17 @@ REPO_ROOT = HERE.parents[3]
 WARMUP_JSONL = PAPER_ROOT / "data" / "benchmark_data_warmup.jsonl"
 ACCEL_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 
-FROZEN_WARMUP_SHA256 = "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
-WARMUP_N = 15
-JSONL_FIELDS = (
-    "name",
-    "source",
-    "statement",
-    "src",
-    "proof_length",
-    "num_lines",
-    "header",
-    "file_path",
-    "url",
-    "start_line",
-    "end_line",
-    "version_info",
-)
-REQUIRED_JSONL_FIELDS = (
-    "name",
-    "source",
-    "statement",
-    "src",
-    "proof_length",
-    "num_lines",
-    "header",
-    "file_path",
-    "url",
-    "version_info",
-)
-STATEMENT_SORRY_SUFFIX = " := by\nsorry"
-BODY_BY_PREFIXES = (
-    " := by \n",
-    " := by\n",
-    " := by ",
-    " := by",
-    ":= by \n",
-    ":= by\n",
-    ":= by",
-)
-FORBIDDEN_PROOF_TOKENS = ("theorem", "lemma", "import", "open")
-FORBIDDEN_IMPORT_NAMES = frozenset({"fcntl", "LeanstralProofProvider", "leanstral_proof_provider"})
-_SCAN_METHODS = frozenset(
-    {
-        "find",
-        "rfind",
-        "index",
-        "rindex",
-        "partition",
-        "rpartition",
-        "split",
-        "rsplit",
-        "count",
-        "replace",
-    }
-)
-_ASSIGN_NEEDLE = ":" + "="
-_TOKEN_BOUNDARY = r"(?<![A-Za-z0-9_']){token}(?![A-Za-z0-9_'])"
+from jevops.catalogs import FORBIDDEN_IMPORT_CORE as FORBIDDEN_IMPORT_NAMES  # noqa: E402
+from jevops.catalogs import FROZEN_WARMUP_SHA256  # noqa: E402
+from jevops.catalogs import JSONL_FIELDS  # noqa: E402
+from jevops.catalogs import REQUIRED_JSONL_FIELDS  # noqa: E402
+from jevops.catalogs import WARMUP_N  # noqa: E402
+from jevops.lean import BODY_BY_PREFIXES  # noqa: E402
+from jevops.lean import FORBIDDEN_PROOF_TOKENS  # noqa: E402
+from jevops.lean import STATEMENT_SORRY_SUFFIX  # noqa: E402
+from jevops.lean import ASSIGN_NEEDLE as _ASSIGN_NEEDLE  # noqa: E402
+from jevops.lean import TOKEN_BOUNDARY as _TOKEN_BOUNDARY  # noqa: E402
+from jevops.repair import ASSIGN_SCAN_METHODS as _SCAN_METHODS  # noqa: E402
 
 
 class SpliceError(RuntimeError):
@@ -117,10 +72,9 @@ def _ensure_accel_path() -> None:
 
 
 def _admit_lean_proof_text():
-    _ensure_accel_path()
-    from ipfs_accelerate_py.agent_supervisor.proof.kernel_verification import admit_lean_proof_text
+    from jevops.lean import load_admit_lean_proof_text
 
-    return admit_lean_proof_text
+    return load_admit_lean_proof_text(setup=(_ensure_accel_path,))
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -138,9 +92,9 @@ def sha256_file(path: Path) -> str:
 def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[dict[str, Any]]]:
     """Load the frozen warm-up JSONL. Refuses digest drift. Does not rewrite the file."""
 
-    from jevops.outer import load_jsonl_objects
+    from jevops.outer import load_jsonl_objects, path_or
 
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    jsonl = path_or(path, WARMUP_JSONL)
     return load_jsonl_objects(
         jsonl,
         expected_digest=FROZEN_WARMUP_SHA256,
@@ -154,9 +108,9 @@ def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[d
 def split_statement_body(record: Mapping[str, Any]) -> StatementBody:
     """Bind the statement as a prefix of ``src``. Never search for ``:=``."""
 
-    from jevops.outer import require_str
+    from jevops.outer import as_str, get_str, require_str
 
-    name = str(record.get("name") or "")
+    name = get_str(record, "name")
     statement = require_str(
         record.get("statement"),
         error_cls=PrefixBindError,
@@ -167,15 +121,19 @@ def split_statement_body(record: Mapping[str, Any]) -> StatementBody:
         error_cls=PrefixBindError,
         empty=f"{name}: src must be a non-empty string",
     )
-    if not src.startswith(statement):
-        raise PrefixBindError(f"{name}: src does not start with the frozen statement")
-    suffix = src[len(statement) :]
-    header = record.get("header") or ""
-    if not isinstance(header, str):
-        header = ""
+    from jevops.outer import split_statement_suffix
+
+    suffix = split_statement_suffix(
+        src,
+        statement,
+        name=name,
+        error_cls=PrefixBindError,
+        miss_msg=f"{name}: src does not start with the frozen statement",
+    )
+    header = as_str(record.get("header"))
     return StatementBody(
         name=name,
-        source=str(record.get("source") or ""),
+        source=get_str(record, "source"),
         statement=statement,
         body_suffix=suffix,
         header=header,
@@ -211,8 +169,9 @@ def forbidden_proof_tokens(proof_text: str) -> tuple[str, ...]:
 
     from jevops.repair import forbidden_tokens
 
-    if not isinstance(proof_text, str):
-        raise SpliceError("proof_text must be a string")
+    from jevops.outer import raise_if
+
+    raise_if(not isinstance(proof_text, str), SpliceError, "proof_text must be a string")
     return forbidden_tokens(proof_text, FORBIDDEN_PROOF_TOKENS, boundary=_TOKEN_BOUNDARY)
 
 
@@ -233,18 +192,19 @@ def admit_tactic_block(
 
     forbidden_proof_tokens(proof_text)
     native = statement_sorry_template(statement)
-    admit = _admit_lean_proof_text()
-    return admit(
+    from jevops.lean import admit_empty_canonical
+
+    return admit_empty_canonical(
+        _admit_lean_proof_text(),
         proof_text,
         native,
         theorem_id=theorem_id,
         declaration_name=declaration_name,
-        canonical_source="",
-        expected_statement="",
     )
 
 
 def admission_view(record: Mapping[str, Any], proof_text: str) -> AdmissionView:
+    from jevops.lean import pack_admission_view
     from jevops.outer import last_component
 
     split = split_statement_body(record)
@@ -255,15 +215,12 @@ def admission_view(record: Mapping[str, Any], proof_text: str) -> AdmissionView:
         theorem_id=split.name,
         declaration_name=last_component(split.name),
     )
-    return AdmissionView(
-        accepted=bool(admission.accepted),
-        failure_code=getattr(admission.failure_code, "value", str(admission.failure_code)),
-        reason=str(admission.reason),
+    return pack_admission_view(
+        admission,
         name=split.name,
-        native_source_starts_with_statement=native.startswith(split.statement),
-        used_full_src_as_native=False,
-        used_full_src_as_canonical=False,
-        arena_score=None,
+        native=native,
+        statement=split.statement,
+        view_cls=AdmissionView,
     )
 
 
@@ -292,23 +249,26 @@ def _record_report(record: Mapping[str, Any]) -> dict[str, Any]:
     tactics = tactic_block_from_body(split.body_suffix)
     template = statement_sorry_template(split.statement)
     view = admission_view(record, "simp")
-    return {
-        "name": split.name,
-        "source": split.source,
-        "prefix_bind": record["src"].startswith(record["statement"]),
-        "body_is_suffix": split.body_suffix == record["src"][len(record["statement"]) :],
-        "reconstructed_src": split.reconstructed_src == record["src"],
-        "statement_chars": len(split.statement),
-        "body_chars": len(split.body_suffix),
-        "header_chars": len(split.header),
-        "body_starts_with_by": any(split.body_suffix.startswith(prefix) for prefix in BODY_BY_PREFIXES),
-        "tactic_block_chars": len(tactics),
-        "template_starts_with_statement": template.startswith(split.statement),
-        "template_sorry_count": template.count("sorry"),
-        "admission_simp": asdict(view),
-        "header_not_in_src": (not split.header.strip()) or (not record["src"].startswith(split.header)),
-        "arena_score": None,
-    }
+    from jevops.lean import pack_statement_report
+    from jevops.outer import prefix_bind_flags
+
+    flags = prefix_bind_flags(record["src"], record["statement"], split.body_suffix)
+    return pack_statement_report(
+        name=split.name,
+        source=split.source,
+        prefix_bind=flags["prefix_bind"],
+        body_is_suffix=flags["body_is_suffix"],
+        reconstructed_src=split.reconstructed_src == record["src"],
+        statement_chars=len(split.statement),
+        body_chars=len(split.body_suffix),
+        header_chars=len(split.header),
+        body_starts_with_by=any(split.body_suffix.startswith(prefix) for prefix in BODY_BY_PREFIXES),
+        tactic_block_chars=len(tactics),
+        template_starts_with_statement=template.startswith(split.statement),
+        template_sorry_count=template.count("sorry"),
+        admission_simp=asdict(view),
+        header_not_in_src=(not split.header.strip()) or (not record["src"].startswith(split.header)),
+    )
 
 
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
@@ -317,7 +277,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     from jevops.outer import read_text
 
     source = read_text(__file__)
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import path_or, relative_or_str
+
+    jsonl = path_or(path, WARMUP_JSONL)
     before = sha256_file(jsonl)
     raw, digest, records = load_warmup_records(jsonl)
     per_record = [_record_report(record) for record in records]
@@ -329,15 +291,19 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
 
     uses_lock_ex = uses_attr(source, "LOCK_EX")
 
-    sample = records[8] if len(records) > 8 else records[0]
+    from jevops.outer import at_or
+
+    sample = at_or(records, 8)
     forbidden_views = {}
-    from jevops.outer import first_token
+    from jevops.outer import first_token, text_or
 
     for proof in ("theorem foo : True := rfl", "lemma bar", "import Mathlib", "open Nat"):
         view = admission_view(sample, proof)
         forbidden_views[first_token(proof)] = asdict(view)
 
-    putnam = next(record for record in records if record["source"] == "putnambench")
+    from jevops.outer import first_where
+
+    putnam = first_where(records, lambda record: record["source"] == "putnambench")
     putnam_split = split_statement_body(putnam)
     putnam_tactics = tactic_block_from_body(putnam_split.body_suffix)
     admit = _admit_lean_proof_text()
@@ -367,7 +333,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         if "timeOrderF_superCommuteF_eq_time" not in item["name"]
     )
 
-    report = {
+    from jevops.outer import pack_unscored
+
+    report = pack_unscored(**{
         "ok": True,
         "n_records": len(records),
         "n_jsonl_fields": len(JSONL_FIELDS),
@@ -387,12 +355,12 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "forbidden_proof_text_rejected": forbidden_rejected,
         "source_copy_when_canonical_is_src": {
             "accepted": bool(source_copy.accepted),
-            "failure_code": getattr(source_copy.failure_code, "value", str(source_copy.failure_code)),
+            "failure_code": getattr(source_copy.failure_code, "value", text_or(source_copy.failure_code)),
             "reason": source_copy.reason,
         },
         "src_as_native_source": {
             "accepted": bool(src_as_native.accepted),
-            "failure_code": getattr(src_as_native.failure_code, "value", str(src_as_native.failure_code)),
+            "failure_code": getattr(src_as_native.failure_code, "value", text_or(src_as_native.failure_code)),
             "reason": src_as_native.reason,
         },
         "simp_native_source_prefix_bound": simp_prefix_bound,
@@ -409,37 +377,40 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "compiled": False,
         "lake": False,
         "llama_server_started": False,
-        "arena_score": None,
-        "warmup_path": str(jsonl.relative_to(REPO_ROOT)),
-    }
-    report["ok"] = bool(
-        report["n_records"] == WARMUP_N
-        and report["jsonl_unchanged"]
-        and report["prefix_bind_all"]
-        and report["sorry_templates_prefix_bound"]
-        and report["never_scans_first_assign"]
-        and not forbidden_imports
-        and not report["uses_fcntl"]
-        and not uses_lock_ex
-        and forbidden_rejected
-        and simp_prefix_bound
-        and others_admitted
-        and wick["prefix_bind"]
-        and wick["admission_simp"]["native_source_starts_with_statement"]
-        and not source_copy.accepted
-        and not src_as_native.accepted
-        and report["compiled"] is False
-        and report["lake"] is False
-        and report["arena_score"] is None
+        "warmup_path": relative_or_str(jsonl, REPO_ROOT),
+    })
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["n_records"] == WARMUP_N,
+        report["jsonl_unchanged"],
+        report["prefix_bind_all"],
+        report["sorry_templates_prefix_bound"],
+        report["never_scans_first_assign"],
+        not forbidden_imports,
+        not report["uses_fcntl"],
+        not uses_lock_ex,
+        forbidden_rejected,
+        simp_prefix_bound,
+        others_admitted,
+        wick["prefix_bind"],
+        wick["admission_simp"]["native_source_starts_with_statement"],
+        not source_copy.accepted,
+        not src_as_native.accepted,
+        report["compiled"] is False,
+        report["lake"] is False,
+        report["arena_score"] is None,
     )
-    return report
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--self-check", action="store_true", help="prefix-bind and lexical-admit all 15 records; no compile")
     parser.add_argument("--jsonl", type=Path, default=None, help="warmup JSONL path (default: frozen data/benchmark_data_warmup.jsonl)")
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
     if args.self_check or argv is None or argv == []:
         from jevops.outer import print_ok
 

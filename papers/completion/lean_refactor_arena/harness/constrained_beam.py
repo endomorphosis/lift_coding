@@ -26,35 +26,7 @@ from typing import Any, Callable, Mapping, Optional, Sequence
 HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
 OUT_DEFAULT = PAPER_ROOT / "evidence" / "canaries"
-DEFAULT_STATE = Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake"
-STOP_TOKEN = "STOP"
-CLOSERS = ("simp_all", "try simp_all", "omega", "try omega", "constructor", "rfl")
-_TACTIC_HEAD = (
-    "case ",
-    "have ",
-    "exact ",
-    "apply ",
-    "refine ",
-    "simp",
-    "rw ",
-    "omega",
-    "constructor",
-    "intro",
-    "induction ",
-    "exists ",
-    "· ",
-    ". ",
-)
-HARDWARE_CLASS = "spark_gb10"
-PROTOCOL = "LRA/v1"
 PR_ID = "PR-9f"
-MAX_STEPS_DEFAULT = 12
-BEAM_DEFAULT = 1
-MAX_NEW_TOKENS_LINE = 48
-LINE_TIMEOUT = 120.0
-MAX_CANDIDATES = 12
-MAX_JEV_CALLS = 48
-MAX_SAMPLES = 4
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
@@ -68,6 +40,19 @@ import run_warmup as lra_loop  # noqa: E402
 import splice as lra_splice  # noqa: E402
 import track1_keepbest as lra_kb  # noqa: E402
 import track1_ledger as lra_t1  # noqa: E402
+from jevops.catalogs import BEAM_DEFAULT
+from jevops.catalogs import DEFAULT_TRACK1_STATE as DEFAULT_STATE
+from jevops.catalogs import HARDWARE_CLASS_SPARK as HARDWARE_CLASS
+from jevops.catalogs import LINE_TIMEOUT
+from jevops.catalogs import MAX_BEAM_JEV_CALLS as MAX_JEV_CALLS
+from jevops.catalogs import MAX_CANDIDATES
+from jevops.catalogs import MAX_NEW_TOKENS_LINE
+from jevops.catalogs import MAX_SAMPLES
+from jevops.catalogs import MAX_STEPS_DEFAULT
+from jevops.catalogs import PROTOCOL
+from jevops.tactics import CLOSERS
+from jevops.tactics import STOP_TOKEN
+from jevops.tactics import TACTIC_HEAD as _TACTIC_HEAD
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 
@@ -147,15 +132,16 @@ def structure_pack(reference: str, prefix: str) -> dict[str, Any]:
 def guided_vocab(prefix: str, reference: str, pack: Mapping[str, Any]) -> list[str]:
     """Priority next lines: missing PCA case headers before MCA haves."""
 
+    from jevops.outer import text_or
     from jevops.search import guided_next
 
     headers = case_header_map(reference)
     return guided_next(
         prefix,
         _status_pack(pack),
-        header_of=lambda tag: headers.get(str(tag), ""),
-        remaining_fn=lambda tag: remaining_arm_lines(prefix, reference, str(tag)),
-        arm_lines_fn=lambda tag: case_arm_lines(reference, str(tag)),
+        header_of=lambda tag: headers.get(text_or(tag), ""),
+        remaining_fn=lambda tag: remaining_arm_lines(prefix, reference, text_or(tag)),
+        arm_lines_fn=lambda tag: case_arm_lines(reference, text_or(tag)),
         closers=CLOSERS,
     )
 
@@ -167,12 +153,13 @@ def filter_to_earliest(
 ) -> list[str]:
     """Drop candidates that skip past the earliest unfinished PCA case."""
 
+    from jevops.outer import text_or
     from jevops.search import filter_to_earliest as _fn
 
     return _fn(
         lines,
         _status_pack(pack),
-        header_of=lambda tag: case_header_map(reference).get(str(tag), ""),
+        header_of=lambda tag: case_header_map(reference).get(text_or(tag), ""),
         stop=STOP_TOKEN,
         closer_pred=looks_like_closer,
         header_match=lambda stripped, earliest: stripped.startswith("case ") and earliest in stripped.split(),
@@ -274,105 +261,63 @@ def typesafe_prune(
 ) -> dict[str, Any]:
     from jevops.search import unique_cap
 
-    from jevops.jev import skipped
     from jevops.outer import exc_head, head_seq
     from jevops.pick import numbered_criteria
 
     unique = unique_cap(candidates, cap=MAX_CANDIDATES, empty=STOP_TOKEN)
-    lra_pca.load_keyfile()
-    lra_pca.pin_typesafe_path()
-    ts_path = Path("/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py")
-    if not ts_path.is_file():
-        return skipped(
-            "typesafe_inference_missing",
-            kept=head_seq(unique, keep),
-            jev_generated_lean=False,
-            arena_score=None,
-        )
-    from jevops.outer import load_module_from_path
+    from jevops.jev import kept_skip, typesafe_session
 
-    module = load_module_from_path(ts_path, "lra_typesafe_inference")
-    if module is None:
-        return skipped(
-            "typesafe_inference_spec",
-            kept=head_seq(unique, keep),
-            jev_generated_lean=False,
-            arena_score=None,
-        )
-    Choice = module.Choice
-    TypeSafeClient = module.TypeSafeClient
-    typesafe_configured = module.typesafe_configured
+    def _skip(reason: str) -> dict[str, Any]:
+        return kept_skip(reason, unique, keep, head_fn=head_seq)
 
-    if not typesafe_configured():
-        return skipped("no_key", kept=head_seq(unique, keep), jev_generated_lean=False, arena_score=None)
-    pack = dict(context or {})
-    criteria = numbered_criteria(unique, prefix="c")
-    from jevops.outer import head_chars, tail_chars
+    from jevops.outer import first_not_none
 
-    state = {
-        "problem": {"name": record.get("name")},
-        "prefix_tail": tail_chars(prefix, 600),
-        "pca_skeleton_head": head_chars(pack.get("pca_skeleton_head") or "", 500),
-        "pca_case_tags": pack.get("pca_case_tags"),
-        "missing_cases": pack.get("missing_cases"),
-        "empty_arms": pack.get("empty_arms"),
-        "unfinished_arms": pack.get("unfinished_arms"),
-        "next_original": pack.get("next_original"),
-        "earliest_unfinished": pack.get("earliest_unfinished"),
-        "open_case": pack.get("open_case"),
-        "mca_holes": pack.get("mca_holes"),
-        "n_have_original": pack.get("n_have"),
-        "goal": "Pick the next Lean tactic line most likely to yield a shorter lake-valid proof.",
-        "candidates": criteria,
-    }
-    questions = {
-        "next_line": Choice(
-            instructions=(
-                "Which candidate is the best NEXT tactic line? Do not write Lean. "
-                "Fill earliest_unfinished in original order: if its header is missing, pick that "
-                "header; if the arm still has next_original, pick exactly that line. Never skip "
-                "ahead to a later case. Never pick have/rename or English. STOP only when every "
-                "PCA arm has used its original non-MCA tactics."
-            ),
-            criteria=criteria,
-        )
-    }
-    from jevops.jev import invoke_system_one, unpack_response
-    from jevops.outer import dumps_compact, usage_tokens
-
-    try:
-        result, _wall = invoke_system_one(TypeSafeClient(timeout=45.0), state, questions)
-    except Exception as exc:  # noqa: BLE001 — prune must fail closed to greedy
-        return skipped(
-            exc_head(exc),
-            kept=head_seq(unique, keep),
-            jev_generated_lean=False,
-            arena_score=None,
-        )
-    choices, _nouls, _scores, usage = unpack_response(result)
-    inn, out = usage_tokens(
-        usage, fallback_in=lra_t1.estimate_tokens(dumps_compact(state))
+    loaded, skipped_payload = typesafe_session(
+        setup=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
+        fallback=False,
     )
-    line = ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
-    best = choices.get("next_line")
-    pick_id = str(getattr(best, "choice", None) or "c0")
-    probs = dict(getattr(best, "probabilities", None) or {})
-    from jevops.search import pin_then_rank
+    early = first_not_none(skipped_payload, factory=lambda: None)
 
-    ranked_ids = pin_then_rank(criteria.keys(), probs, first=pick_id if pick_id in criteria else None)
-    kept = [criteria[key] for key in ranked_ids if key in criteria][:keep]
-    if not kept:
-        kept = unique[:keep]
-    return {
-        "skipped": bool(line.skipped),
-        "reason": line.reason if line.skipped else "routed",
-        "best": criteria.get(pick_id),
-        "kept": kept,
-        "confidence": getattr(best, "confidence", None),
-        "usage": usage,
-        "jev_generated_lean": False,
-        "arena_score": None,
-    }
+    def _ask() -> dict[str, Any]:
+        Choice = loaded["Choice"]
+        TypeSafeClient = loaded["TypeSafeClient"]
+        from jevops.outer import overlay_map
+
+        pack = overlay_map(context)
+        criteria = numbered_criteria(unique, prefix="c")
+        from jevops.jev import pack_prune, prune_state, rank_prune_kept
+
+        state = prune_state(record, prefix, pack, criteria)
+        from jevops.catalogs import PRUNE_NEXT_LINE
+
+        questions = {
+            "next_line": Choice(
+                instructions=PRUNE_NEXT_LINE,
+                criteria=criteria,
+            )
+        }
+        from jevops.jev import complete_prune, invoke_system_one, unpack_response
+        from jevops.outer import dumps_compact, usage_tokens
+
+        def _record(usage: Any) -> Any:
+            inn, out = usage_tokens(
+                usage, fallback_in=lra_t1.estimate_tokens(dumps_compact(state))
+            )
+            return ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
+
+        return complete_prune(
+            invoke_fn=lambda: invoke_system_one(TypeSafeClient(timeout=45.0), state, questions),
+            skip_fn=lambda exc: _skip(exc_head(exc)),
+            unpack_fn=unpack_response,
+            record_fn=_record,
+            rank_fn=rank_prune_kept,
+            pack_fn=pack_prune,
+            criteria=criteria,
+            unique=unique,
+            keep=keep,
+        )
+
+    return first_not_none(early, factory=_ask)
 
 
 def propose_lines(
@@ -386,36 +331,52 @@ def propose_lines(
     pack: Optional[Mapping[str, Any]] = None,
     reference: str = "",
 ) -> list[str]:
-    pack = dict(pack or {})
-    priority = guided_vocab(item.prefix, reference, pack) if reference else unused_vocab(item.prefix, vocab)
-    prompt = step_prompt(record, item.prefix, priority or unused_vocab(item.prefix, vocab), pack)
-    n_samples = 1 if beam <= 1 else min(max(int(beam), 1), MAX_SAMPLES)
+    from jevops.outer import either, get_str, or_call, overlay_map, sample_n
+
+    pack = overlay_map(pack)
+    priority = either(
+        bool(reference),
+        lambda: guided_vocab(item.prefix, reference, pack),
+        lambda: unused_vocab(item.prefix, vocab),
+    )
+    prompt = step_prompt(
+        record, item.prefix, or_call(priority, unused_vocab, item.prefix, vocab), pack
+    )
+    n_samples = sample_n(beam, MAX_SAMPLES)
     from jevops.search import merge_next_line_proposals, sample_next_lines
 
     def _one() -> Any:
-        if generate is not None:
-            return generate(prompt, temperature=temperature)
-        result = lra_d0.generate_as_client(
-            prompt,
-            max_new_tokens=MAX_NEW_TOKENS_LINE,
-            timeout=LINE_TIMEOUT,
-            source=str(record.get("source") or ""),
-            allow_owner_exec=False,
-            temperature=temperature,
-            stop=["\n\n"],
-        )
-        if result.skipped or not result.text:
-            return None
-        if result.identity.fallback_used:
-            raise lra_gt.LraGenerateError(
-                "refusing fallback "
-                f"{result.identity.resolved_provider}/{result.identity.resolved_model}"
+        from jevops.outer import either
+
+        def _docker0() -> Any:
+            result = lra_d0.generate_as_client(
+                prompt,
+                max_new_tokens=MAX_NEW_TOKENS_LINE,
+                timeout=LINE_TIMEOUT,
+                source=get_str(record, "source"),
+                allow_owner_exec=False,
+                temperature=temperature,
+                stop=["\n\n"],
             )
-        if result.identity.resolved_provider not in lra_gt.ALLOWED_RESOLVED_PROVIDERS and result.identity.resolved_provider:
-            # generate_lra may leave resolved empty on some llama.cpp traces; still local.
-            if result.identity.resolved_provider in lra_gt.FORBIDDEN_FALLBACK_PROVIDERS:
-                raise lra_gt.LraGenerateError("refusing non-docker0 provider")
-        return result.text
+            from jevops.lean import refuse_line_identity
+            from jevops.outer import call_if
+
+            def _accept() -> Any:
+                refuse_line_identity(
+                    result.identity,
+                    allowed=lra_gt.ALLOWED_RESOLVED_PROVIDERS,
+                    forbidden=lra_gt.FORBIDDEN_FALLBACK_PROVIDERS,
+                    error_cls=lra_gt.LraGenerateError,
+                )
+                return result.text
+
+            return call_if(not result.skipped and result.text, _accept)
+
+        return either(
+            generate is not None,
+            lambda: generate(prompt, temperature=temperature),
+            _docker0,
+        )
 
     proposals = sample_next_lines(
         n_samples,
@@ -451,32 +412,41 @@ def run_search(
     generate: Optional[Callable[..., str]] = None,
     prune: Optional[Callable[..., dict[str, Any]]] = None,
 ) -> dict[str, Any]:
-    tactics = lra_fan.tactic_block(record)
-    prefix0 = pca_prefix(tactics)
-    vocab = reference_vocab(tactics)
+    from jevops.outer import get_str
+    from jevops.search import begin_prefix_search
+
+    tactics, prefix0, vocab = begin_prefix_search(
+        record,
+        tactic_fn=lra_fan.tactic_block,
+        prefix_fn=pca_prefix,
+        vocab_fn=reference_vocab,
+    )
     ledger = lra_t1.ProblemLedger(
-        name=f"{record.get('name')}#constrained-beam-local",
+        name=f"{get_str(record, 'name')}#constrained-beam-local",
         max_jev_calls=MAX_JEV_CALLS,
         max_mistral_calls=0,
         max_grok_calls=0,
     )
-    beam_n = 1 if mode == "greedy" else max(1, int(beam))
+    from jevops.outer import beam_shape, either, get_str, if_none, or_none
+
+    beam_n, n_samples = beam_shape(mode, beam, sample_cap=MAX_SAMPLES)
     temp = float(temperature)
-    n_samples = 1 if beam_n <= 1 else min(beam_n, MAX_SAMPLES)
-    prune_fn = prune or typesafe_prune
-    from jevops.search import run_prefix_beam
+    prune_fn = if_none(prune, typesafe_prune)
+    from jevops.search import pack_beam_search, run_prefix_beam
 
     def _prune(item: BeamItem, proposals: Sequence[str], pack: Mapping[str, Any]) -> dict[str, Any]:
-        if prune is None:
-            return typesafe_prune(
+        return either(
+            prune is None,
+            lambda: typesafe_prune(
                 record,
                 item.prefix,
                 proposals,
                 ledger=ledger,
                 keep=beam_n,
                 context=pack,
-            )
-        return prune_fn(record, item.prefix, proposals, ledger=ledger, keep=beam_n)
+            ),
+            lambda: prune_fn(record, item.prefix, proposals, ledger=ledger, keep=beam_n),
+        )
 
     out = run_prefix_beam(
         prefix0,
@@ -497,30 +467,28 @@ def run_search(
         ),
         prune_fn=_prune,
         extend_fn=lambda prefix, nxt, pack: extend_prefix(
-            prefix, nxt, original=str(pack.get("next_original") or "") or None
+            prefix, nxt, original=or_none(get_str(pack, "next_original"))
         ),
         filter_fn=lambda lines, pack: filter_to_earliest(lines, pack, tactics),
         n_samples=n_samples,
         item_cls=BeamItem,
     )
-    return {
-        "pca_prefix": prefix0,
-        "pca_mca": structure_pack(tactics, prefix0),
-        "vocab_n": len(vocab),
-        "mode": mode,
-        "beam": beam_n,
-        "temperature": temp,
-        "max_steps": int(max_steps),
-        "local_calls": out["local_calls"],
-        "finals": out["finals"],
-        "trace": out["trace"],
-        "ledger": ledger.as_dict(),
-        "hardware_class": HARDWARE_CLASS,
-        "called_hosted_mistral": False,
-        "called_docker0": generate is None,
-        "official_track2": False,
-        "arena_score": None,
-    }
+    return pack_beam_search(
+        out,
+        prefix=prefix0,
+        vocab_n=len(vocab),
+        mode=mode,
+        beam=beam_n,
+        temperature=temp,
+        max_steps=max_steps,
+        extra={
+            "pca_mca": structure_pack(tactics, prefix0),
+            "ledger": ledger.as_dict(),
+            "hardware_class": HARDWARE_CLASS,
+            "called_docker0": generate is None,
+            "official_track2": False,
+        },
+    )
 
 
 def drop_first_bare_simp_all(tactics: str) -> Optional[str]:
@@ -563,8 +531,10 @@ def shorten_keeping_prefix_haves(tactics: str) -> list[tuple[str, str]]:
     import inits_updates_shorten as lra_ius
     from jevops.tactics import shorten_keeping_prefix_haves as _fn
 
+    from jevops.outer import map_pairs
+
     extras: list[tuple[str, str]] = [("inits_replay", lra_ius.replay(tactics))]
-    extras.extend((str(item.get("kind") or "inits_step"), str(item.get("tactics") or "")) for item in lra_ius.propose(tactics))
+    extras.extend(map_pairs(lra_ius.propose(tactics), default_kind="inits_step"))
     keep_extras = [
         (f"span_{draft.family}_{draft.draft_id}", draft.tactics)
         for draft in lra_fan.span_preserving_drafts(tactics)
@@ -591,18 +561,19 @@ def lake_keepbest(
     state_root: Path,
     timeout: float,
 ) -> list[dict[str, Any]]:
-    clone = lra_kb.lra_cw.clone_dir(str(record["url"]), state_root)
-    dest = clone / lra_kb.lra_cw.source_relpath(record)
-    from jevops.outer import read_bytes_if
+    from jevops.outer import clone_restore
 
-    restore = read_bytes_if(dest)
+    _clone, _dest, restore = clone_restore(
+        record,
+        state_root,
+        clone_fn=lra_kb.lra_cw.clone_dir,
+        relpath_fn=lra_kb.lra_cw.source_relpath,
+    )
     reference = lra_fan.tactic_block(record)
-    from jevops.search import compile_variant_rows
+    from jevops.search import compile_variant_rows, keepbest_beam_pairs
     from jevops.tactics import keepbest_variants
 
-    pairs: list[tuple[str, str]] = []
-    for kind, body in [("reference", reference), *[(f"beam_{index}", text) for index, text in enumerate(tactics_list)]]:
-        pairs.extend(keepbest_variants(kind, body, reference))
+    pairs = keepbest_beam_pairs(reference, tactics_list, variants_fn=keepbest_variants)
     return compile_variant_rows(
         pairs,
         lambda body: lra_kb.compile_tactics(
@@ -640,61 +611,42 @@ def self_check() -> dict[str, Any]:
     guided = guided_vocab(prefix, tactics, pack)
     after_none = structure_pack(tactics, prefix + "\n  case update_none =>\n    simp_all")
     guided_after = guided_vocab(prefix + "\n  case update_none =>\n    simp_all", tactics, after_none)
-    return {
-        "ok": "have Hlen1" not in prefix
-        and "induction Hup" in prefix
-        and "case update_none" not in prefix
-        and STOP_TOKEN in vocab
-        and nxt.strip() == "simp_all"
-        and dropped == "    exact foo"
-        and "have Hk" in insert_haves_before_induction("  exists x\n  induction H\n", ["  have Hk := foo"])
-        and "<;> exact" in join_consecutive_exacts("    exact A\n    exact B\n")
-        and indented.endswith("    exact InitStatesNotDefined Hinit")
-        and any("exact foo" in item for item in dup_rem)
-        and sum(item.strip() == "simp_all" for item in dup_rem) == 1
-        and any(
-            "exact foo" in item
-            for item in guided_vocab(
-                dup_pref,
-                dup_ref,
-                structure_pack(dup_ref, dup_pref),
-            )
-        )
-        and any("case update_none" in item for item in guided)
-        and not any("update_some" in item for item in guided)
-        and not any(item.strip().startswith("have ") for item in guided)
-        and not any(item.strip().startswith("have ") for item in guided_after)
-        and any(
-            "And.intro" in item
-            for item in guided_vocab(
-                prefix + "\n  case update_none =>\n    simp_all",
-                tactics,
-                structure_pack(tactics, prefix + "\n  case update_none =>\n    simp_all"),
-            )
-        )
-        and not any(
-            "update_some" in item
-            for item in guided_vocab(
-                prefix + "\n  case update_none =>\n    simp_all",
-                tactics,
-                structure_pack(tactics, prefix + "\n  case update_none =>\n    simp_all"),
-            )
-        )
-        and not any(item.strip().startswith("have ") for item in guided_vocab(
-            prefix + "\n  case update_none =>\n    simp_all\n  case update_some =>\n    simp_all",
-            tactics,
-            structure_pack(
-                tactics,
-                prefix + "\n  case update_none =>\n    simp_all\n  case update_some =>\n    simp_all",
-            ),
-        ))
-        and "172.17.0.1" in lra_gt.DOCKER0_HEALTH_URL,
-        "pca_prefix": prefix,
-        "vocab_n": len(vocab),
-        "hardware_class": HARDWARE_CLASS,
-        "called_hosted_mistral": False,
-        "arena_score": None,
-    }
+    after_none_prefix = prefix + "\n  case update_none =>\n    simp_all"
+    after_both_prefix = prefix + "\n  case update_none =>\n    simp_all\n  case update_some =>\n    simp_all"
+    guided_none = guided_vocab(after_none_prefix, tactics, structure_pack(tactics, after_none_prefix))
+    guided_both = guided_vocab(after_both_prefix, tactics, structure_pack(tactics, after_both_prefix))
+    guided_dup = guided_vocab(dup_pref, dup_ref, structure_pack(dup_ref, dup_pref))
+    from jevops.outer import any_contains, finalize_ok, none_stripped_startswith
+
+    return finalize_ok(
+        {
+            "pca_prefix": prefix,
+            "vocab_n": len(vocab),
+            "hardware_class": HARDWARE_CLASS,
+            "called_hosted_mistral": False,
+            "arena_score": None,
+        },
+        "have Hlen1" not in prefix,
+        "induction Hup" in prefix,
+        "case update_none" not in prefix,
+        STOP_TOKEN in vocab,
+        nxt.strip() == "simp_all",
+        dropped == "    exact foo",
+        "have Hk" in insert_haves_before_induction("  exists x\n  induction H\n", ["  have Hk := foo"]),
+        "<;> exact" in join_consecutive_exacts("    exact A\n    exact B\n"),
+        indented.endswith("    exact InitStatesNotDefined Hinit"),
+        any_contains(dup_rem, "exact foo"),
+        sum(item.strip() == "simp_all" for item in dup_rem) == 1,
+        any_contains(guided_dup, "exact foo"),
+        any_contains(guided, "case update_none"),
+        not any_contains(guided, "update_some"),
+        none_stripped_startswith(guided, "have "),
+        none_stripped_startswith(guided_after, "have "),
+        any_contains(guided_none, "And.intro"),
+        not any_contains(guided_none, "update_some"),
+        none_stripped_startswith(guided_both, "have "),
+        "172.17.0.1" in lra_gt.DOCKER0_HEALTH_URL,
+    )
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -719,7 +671,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=180.0)
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
     if args.self_check or (not args.live and not args.repair_latest and not args.shorten_reference):
         from jevops.outer import print_ok
 
@@ -730,19 +684,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     repair_tactics: dict[str, str] = {}
     if args.repair_latest:
         latest = args.out / "constrained-beam-latest.json"
-        from jevops.outer import read_json
+        from jevops.outer import call_if, first_truthy, get_str, nested_get, or_list, read_json
 
         prior = read_json(latest)
-        for item in prior.get("problems") or []:
-            finals = ((item.get("search") or {}).get("finals") or [])
+        for item in or_list(prior.get("problems"), []):
+            finals = or_list(nested_get(item, "search", "finals"), [])
             if finals and item.get("name"):
-                repair_tactics[str(item["name"])] = str(finals[0].get("tactics") or "")
+                repair_tactics[get_str(item, "name")] = get_str(finals[0], "tactics")
     health = lra_gt.probe_docker0_health()
     if not args.repair_latest and not args.shorten_reference and not health.ok:
         payload = {
             "ok": True,
             "skipped": True,
-            "reason": f"docker0_unhealthy: {health.error or health.status_code}",
+            "reason": f"docker0_unhealthy: {first_truthy(health.error, health.status_code)}",
             "hardware_class": HARDWARE_CLASS,
             "called_hosted_mistral": False,
             "called_docker0": False,
@@ -760,13 +714,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     started = time.perf_counter()
     problems = []
     for name in names:
-        from jevops.outer import lookup_named
+        from jevops.outer import call_if, lookup_named, or_list
 
         record = lookup_named(
             records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
         )
         if args.repair_latest:
-            body = repair_tactics.get(name) or ""
+            body = get_str(repair_tactics, name)
             search = {
                 "mode": "repair_latest",
                 "called_docker0": False,
@@ -776,7 +730,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 "official_track2": False,
                 "arena_score": None,
             }
-            lake_src = [body] if body.strip() else []
+            lake_src = call_if(body.strip(), lambda: [body], default=[])
         elif args.shorten_reference:
             orig = lra_fan.tactic_block(record)
             drafts = shorten_keeping_prefix_haves(orig)
@@ -800,23 +754,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 beam=args.beam,
                 temperature=args.temperature,
             )
-            lake_src = [item["tactics"] for item in search.get("finals") or []]
+            lake_src = [item["tactics"] for item in or_list(search.get("finals"), [])]
         lake_rows = lake_keepbest(
             record,
             lake_src,
             state_root=args.state_root,
             timeout=args.timeout,
         )
-        valid = [row for row in lake_rows if row.get("theorem_ok")]
-        kept = None
-        if valid:
-            kept = sorted(
-                valid,
-                key=lambda row: (
-                    int(row.get("token_count") or 10**9),
-                    0 if row.get("kind") == "reference" else 1,
-                ),
-            )[0]
+        from jevops.search import keep_shortest_ok, kept_view
+
+        kept = keep_shortest_ok(lake_rows)
         ref_tokens = lra_loop.token_count(lra_fan.tactic_block(record))
         problems.append(
             lra_pca.redact(
@@ -825,9 +772,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     "warmup_jsonl_sha256": digest,
                     "search": search,
                     "candidates": lake_rows,
-                    "kept": None
-                    if kept is None
-                    else {"kind": kept["kind"], "theorem_ok": kept.get("theorem_ok"), "token_count": kept.get("token_count")},
+                    "kept": kept_view(kept),
                     "reference_token_count": ref_tokens,
                     "beats_reference": bool(
                         kept is not None
@@ -865,12 +810,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         latest="constrained-beam-latest.json",
         refuse="apikey_",
     )
-    from jevops.outer import print_json
+    from jevops.outer import print_json, text_or
 
     print_json(
         {
             "ok": True,
-            "latest": str(latest),
+            "latest": text_or(latest),
             "kept": [{"name": item.get("name"), "kept": item.get("kept")} for item in problems],
             "hardware_class": HARDWARE_CLASS,
             "arena_score": None,

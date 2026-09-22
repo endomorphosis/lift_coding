@@ -22,12 +22,7 @@ from typing import Any, Mapping, Optional
 HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
 OUT_DEFAULT = PAPER_ROOT / "evidence" / "canaries"
-DEFAULT_STATE = Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026-lra/track1-lake"
-TS_PATH = Path("/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/typesafe_inference.py")
-HARDWARE_CLASS = "spark_gb10"
-PROTOCOL = "LRA/v1"
 PR_ID = "PR-9h"
-MAX_JEV = 20
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
@@ -38,77 +33,33 @@ import run_warmup as lra_loop  # noqa: E402
 import splice as lra_splice  # noqa: E402
 import track1_keepbest as lra_kb  # noqa: E402
 import track1_ledger as lra_t1  # noqa: E402
-
-SEED_FEATURES = (
-    ("likely_compiles", "noul", "After this edit the Lean file will still lake-compile."),
-    ("likely_shorter", "noul", "This edit uses fewer Lean tokens than the current script."),
-    ("drops_pca_glue", "noul", "This edit deletes induction, a case header, or intros/exists."),
-    ("drops_prefix_have", "noul", "This edit deletes a prefix have (Hk, Hlen1, or Hlen2) that simp_all uses."),
-    ("breaks_refine", "noul", "This edit will leave a refine ⟨rfl, ?_, ?_⟩ subgoal unsolved."),
-    ("duplicate_needed", "noul", "A line this edit drops is a load-bearing duplicate exact/simp_all/apply."),
-    ("local_one_line", "noul", "The edit changes exactly one tactic line."),
-)
-# From lake misses on the 260-token script (autoresearch round 2).
-MISS_FEATURES = (
-    (
-        "opens_refine_2a",
-        "noul",
-        "This edit will leave case refine_2.a or refine_2.a.h unsolved.",
-    ),
-    (
-        "semicolon_apply_longer",
-        "noul",
-        "This edit joins apply lines with <;> and will use more tokens, not fewer.",
-    ),
-    (
-        "constructor_for_rfl_refine",
-        "noul",
-        "This edit replaces refine ⟨rfl, ?_, ?_⟩ with constructor and will fail updatedStatesInit.",
-    ),
-    (
-        "drops_second_exact",
-        "noul",
-        "This edit deletes a second exact InitStatesNotDefined or InitStatesNodup that still has an open refine hole.",
-    ),
-)
-ALL_FEATURES = SEED_FEATURES + MISS_FEATURES
-PENALTY = {
-    "drops_pca_glue",
-    "drops_prefix_have",
-    "breaks_refine",
-    "duplicate_needed",
-    "opens_refine_2a",
-    "semicolon_apply_longer",
-    "constructor_for_rfl_refine",
-    "drops_second_exact",
-}
+from jevops.catalogs import ALL_FEATURES  # noqa: E402
+from jevops.catalogs import CASCADE_MAX_JEV as MAX_JEV  # noqa: E402
+from jevops.catalogs import DEFAULT_TRACK1_STATE as DEFAULT_STATE  # noqa: E402
+from jevops.catalogs import HARDWARE_CLASS_SPARK as HARDWARE_CLASS  # noqa: E402
+from jevops.catalogs import MISS_FEATURES  # noqa: E402
+from jevops.catalogs import PENALTY  # noqa: E402
+from jevops.catalogs import PROTOCOL  # noqa: E402
+from jevops.catalogs import SEED_FEATURES  # noqa: E402
 
 
 def load_typesafe():
-    from jevops.outer import after_calls, load_module_from_path
+    from jevops.jev import typesafe_namespace
 
-    module = after_calls(
-        (lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
-        load_module_from_path,
-        TS_PATH,
-        "lra_typesafe_autoresearch",
-    )
-    if module is None or not module.typesafe_configured():
-        return None
-    return module
+    return typesafe_namespace(setup=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path))
 
 
 def feature_questions(module) -> dict:
-    questions = {}
-    for name, kind, question in ALL_FEATURES:
-        if kind == "noul":
-            questions[name] = module.Noul(instructions=question)
-        else:
-            questions[name] = module.Score(
-                instructions=question,
-                criteria=list(__import__("draft_fanout", fromlist=["LIKELY_SHORTER_CRITERIA"]).LIKELY_SHORTER_CRITERIA),
-            )
-    return questions
+    from jevops.jev import questions_from_specs
+
+    import draft_fanout as lra_fan
+
+    return questions_from_specs(
+        ALL_FEATURES,
+        noul_ctor=module.Noul,
+        score_ctor=module.Score,
+        score_criteria=list(lra_fan.LIKELY_SHORTER_CRITERIA),
+    )
 
 
 def featurize_proposal(
@@ -120,45 +71,38 @@ def featurize_proposal(
     module,
     weights: Mapping[str, float],
 ) -> dict[str, Any]:
+    from jevops.jev import proposal_feature_state
     from jevops.outer import tail_chars
 
-    state = {
-        "problem": record.get("name"),
-        "current_tokens": lra_loop.token_count(current),
-        "current_tail": tail_chars(current, 500),
-        "edit_kind": proposal.get("kind"),
-        "edit_note": proposal.get("note"),
-        "proposed_tokens": lra_loop.token_count(proposal.get("tactics") or ""),
-        "proposed_tail": tail_chars(proposal.get("tactics") or "", 500),
-        "goal": "Judge this MCMC edit of a lake-valid Lean 4 proof. Do not write Lean.",
-    }
-    from jevops.jev import invoke_system_one, skipped, unpack_response
-    from jevops.outer import dumps_compact, exc_head, usage_tokens
-
-    try:
-        result, _wall = invoke_system_one(
-            module.TypeSafeClient(timeout=45.0), state, feature_questions(module)
-        )
-    except Exception as exc:  # noqa: BLE001
-        return skipped(exc_head(exc), score=0.0, features={})
-    _choices, nouls, _scores, usage = unpack_response(result)
-    inn, out = usage_tokens(
-        usage, fallback_in=lra_t1.estimate_tokens(dumps_compact(state))
+    state = proposal_feature_state(
+        record,
+        current,
+        proposal,
+        token_fn=lra_loop.token_count,
+        tail_fn=tail_chars,
     )
-    ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
-    features: dict[str, float] = {}
-    for name, _kind, _q in ALL_FEATURES:
-        got = nouls.get(name)
-        features[name] = float(getattr(got, "noul", 0.0) or 0.0)
+    from jevops.jev import featurize_or_skip, invoke_system_one, skipped, unpack_response
+    from jevops.outer import dumps_compact, exc_head, usage_tokens
     from jevops.rankers import signed_dot
 
-    score = signed_dot(features, weights, penalty=PENALTY, default_w=0.5)
-    return {
-        "skipped": False,
-        "score": score,
-        "features": features,
-        "jev_generated_lean": False,
-    }
+    def _record(usage: Any) -> Any:
+        inn, out = usage_tokens(
+            usage, fallback_in=lra_t1.estimate_tokens(dumps_compact(state))
+        )
+        return ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
+
+    return featurize_or_skip(
+        invoke_fn=lambda: invoke_system_one(
+            module.TypeSafeClient(timeout=45.0), state, feature_questions(module)
+        ),
+        skip_fn=lambda exc: skipped(exc_head(exc), score=0.0, features={}),
+        unpack_fn=unpack_response,
+        record_fn=_record,
+        feature_names=[name for name, _kind, _q in ALL_FEATURES],
+        weights=weights,
+        signed_dot_fn=signed_dot,
+        penalty=PENALTY,
+    )
 
 
 def update_weights(rows: list[dict[str, Any]], weights: dict[str, float]) -> dict[str, float]:
@@ -202,7 +146,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--state-root", type=Path, default=DEFAULT_STATE)
     parser.add_argument("--timeout", type=float, default=180.0)
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
     if args.self_check or not args.live:
         report = self_check()
         from jevops.outer import print_ok
@@ -226,27 +172,24 @@ def main(argv: Optional[list[str]] = None) -> int:
     record = lookup_named(
         records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
     )
-    from jevops.outer import read_text
+    from jevops.outer import call_if, first_int, first_truthy, get_str, read_text, text_or
 
-    init = read_text(args.init_file) if args.init_file else None
+    init = call_if(args.init_file, lambda: read_text(args.init_file))
     import draft_fanout as lra_fan
 
     reference = lra_fan.tactic_block(record)
-    current = (init or reference).strip("\n")
-    rng = random.Random(int(args.seed))
+    current = text_or(first_truthy(init, reference)).strip("\n")
+    rng = random.Random(first_int(args.seed))
     ledger = lra_t1.ProblemLedger(name=f"{name}#autoresearch-mcmc", max_jev_calls=MAX_JEV, max_mistral_calls=0, max_grok_calls=0)
-    clone = lra_kb.lra_cw.clone_dir(str(record["url"]), args.state_root)
+    clone = lra_kb.lra_cw.clone_dir(get_str(record, "url"), args.state_root)
     dest = clone / lra_kb.lra_cw.source_relpath(record)
     from jevops.outer import read_bytes_if
 
     restore = read_bytes_if(dest)
     start = lra_mcmc.compile_one(record, current, state_root=args.state_root, timeout=args.timeout, restore=restore)
-    best = {
-        "kind": "init",
-        "tactics": current,
-        "token_count": int(start.get("token_count") or lra_loop.token_count(current)),
-        "theorem_ok": bool(start.get("theorem_ok")),
-    }
+    from jevops.search import keep_beats, kept_view, start_keep
+
+    best = start_keep(current, start, token_fn=lra_loop.token_count)
     weights = {name: 0.8 for name, _k, _q in ALL_FEATURES}
     weights.update(
         {
@@ -262,52 +205,26 @@ def main(argv: Optional[list[str]] = None) -> int:
     history: list[dict[str, Any]] = []
     labeled: list[dict[str, Any]] = []
     started = time.perf_counter()
-    for round_i in range(int(args.rounds)):
-        if ledger.hard_stopped:
-            break
-        proposals = lra_mcmc.propose_edits(current, reference, rng)
-        scored = []
-        from jevops.outer import head_seq
+    from jevops.search import run_autoresearch_rounds
 
-        for proposal in head_seq(proposals, 6):
-            feat = featurize_proposal(record, current, proposal, ledger=ledger, module=module, weights=weights)
-            scored.append({**proposal, **feat})
-            if ledger.hard_stopped:
-                break
-        scored.sort(key=lambda item: float(item.get("score") or 0.0), reverse=True)
-        current_tok = lra_loop.token_count(current)
-        shorter = [
-            item
-            for item in scored
-            if lra_loop.token_count(item.get("tactics") or "") < current_tok
-        ]
-        to_lake = head_seq(shorter or scored, 2)
-        for proposal in to_lake:
-            compiled = lra_mcmc.compile_one(
-                record,
-                proposal["tactics"],
-                state_root=args.state_root,
-                timeout=args.timeout,
-                restore=restore,
-            )
-            ok = bool(compiled.get("theorem_ok"))
-            tok = int(compiled.get("token_count") or lra_loop.token_count(proposal["tactics"]))
-            row = {
-                "round": round_i,
-                "kind": proposal.get("kind"),
-                "note": proposal.get("note"),
-                "score": proposal.get("score"),
-                "features": proposal.get("features"),
-                "ok": ok,
-                "tokens": tok,
-                "errors": head_seq(compiled.get("errors"), 1),
-            }
-            history.append(row)
-            labeled.append(row)
-            if ok and tok < int(best["token_count"]):
-                best = {"kind": f"ar_r{round_i}_{proposal.get('kind')}", "tactics": proposal["tactics"], "token_count": tok, "theorem_ok": True}
-                current = proposal["tactics"]
-        weights = update_weights(labeled, weights)
+    current, best, weights = run_autoresearch_rounds(
+        rounds=first_int(args.rounds),
+        current=current,
+        best=best,
+        history=history,
+        labeled=labeled,
+        weights=weights,
+        ledger=ledger,
+        propose_fn=lambda body: lra_mcmc.propose_edits(body, reference, rng),
+        feature_fn=lambda body, proposal, wts: featurize_proposal(
+            record, body, proposal, ledger=ledger, module=module, weights=wts
+        ),
+        compile_fn=lambda body: lra_mcmc.compile_one(
+            record, body, state_root=args.state_root, timeout=args.timeout, restore=restore
+        ),
+        token_fn=lra_loop.token_count,
+        update_fn=update_weights,
+    )
     from jevops.outer import elapsed_ms, utc_stamp, write_json_pair
 
     payload = {
@@ -318,16 +235,16 @@ def main(argv: Optional[list[str]] = None) -> int:
         "cookbook": "https://docs.typesafe.ai/cookbooks/autoresearch_feature_discovery",
         "name": name,
         "warmup_jsonl_sha256": digest,
-        "rounds": int(args.rounds),
+        "rounds": first_int(args.rounds),
         "features": [item[0] for item in ALL_FEATURES],
         "miss_features": [item[0] for item in MISS_FEATURES],
         "final_weights": weights,
-        "best": {k: best[k] for k in ("kind", "token_count", "theorem_ok")},
+        "best": kept_view(best, ("kind", "token_count", "theorem_ok")),
         "best_tactics": best.get("tactics"),
         "history": history,
         "ledger": ledger.as_dict(),
         "reference_token_count": lra_loop.token_count(reference),
-        "beats_reference": bool(best.get("theorem_ok") and int(best["token_count"]) < lra_loop.token_count(reference)),
+        "beats_reference": keep_beats(best, lra_loop.token_count(reference)),
         "hardware_class": HARDWARE_CLASS,
         "called_docker0": False,
         "official_track2": False,
@@ -342,12 +259,12 @@ def main(argv: Optional[list[str]] = None) -> int:
         latest="autoresearch-mcmc-latest.json",
         refuse="apikey_",
     )
-    from jevops.outer import print_json
+    from jevops.outer import print_json, text_or
 
     print_json(
         {
             "ok": True,
-            "latest": str(latest),
+            "latest": text_or(latest),
             "kept": {"kind": best.get("kind"), "token_count": best.get("token_count"), "theorem_ok": best.get("theorem_ok")},
             "beats_reference": payload["beats_reference"],
             "arena_score": None,

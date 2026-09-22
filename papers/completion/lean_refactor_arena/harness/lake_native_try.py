@@ -38,14 +38,19 @@ import bake_oleans as lra_bake  # noqa: E402
 import compile_worker as lra_compile  # noqa: E402
 import splice as lra_splice  # noqa: E402
 
-if str(DATASETS_ROOT) not in sys.path:
-    sys.path.insert(0, str(DATASETS_ROOT))
-from ipfs_datasets_py.logic.hammers.frontends.lean_toolchain import (  # noqa: E402
-    KERNEL_COMMAND_TEMPLATE,
-    LeanToolchainMissing,
-    audit_lean_frontend_path_json,
-    run_lean_process,
-)
+def _ensure_datasets_path() -> None:
+    from jevops.outer import ensure_sys_path
+
+    ensure_sys_path(DATASETS_ROOT)
+
+
+from jevops.lean import load_lean_toolchain  # noqa: E402
+
+_tc = load_lean_toolchain(setup=(_ensure_datasets_path,))
+KERNEL_COMMAND_TEMPLATE = _tc["KERNEL_COMMAND_TEMPLATE"]
+LeanToolchainMissing = _tc["LeanToolchainMissing"]
+audit_lean_frontend_path_json = _tc["audit_lean_frontend_path_json"]
+run_lean_process = _tc["run_lean_process"]
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 WARMUP_N = lra_splice.WARMUP_N
@@ -63,26 +68,26 @@ INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS = (
     lra_compile.INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
 )
 
-LOOP_VERSION = "v2"
-PATH_NAME = "A"
-ON_30_SEP_CRITICAL_PATH = False
-V1_RUNS_THIS = False
-HAMMER_006_LRA_READY = False
-USES_SNAPSHOT_GOAL = False
-GOAL_SNAPSHOT_REQUIRED = False
-PATH_B_IMPLEMENTED = False
-GENERATOR_IDENTITY = "lake_native"
-RECEIPT_SCHEMA = "lra-lake-native-try/v1"
-PROTOCOL = "LRA/v1"
+from jevops.catalogs import HAMMER_006_LRA_READY
+from jevops.catalogs import LOOP_VERSION
+from jevops.catalogs import ON_30_SEP_CRITICAL_PATH
+from jevops.catalogs import PATH_NAME
+from jevops.catalogs import USES_SNAPSHOT_GOAL
+from jevops.catalogs import V1_RUNS_THIS
 PR_ID = "PR-5"
 LRAH_ID = "LRAH-005"
-HAMMER_006_CLAIM = "Do not claim HAMMER-006 is LRA-ready."
-CRITICAL_PATH_NOTE = "Not on the 30 Sep critical path."
+from jevops.catalogs import LAKE_NATIVE_SCHEMA as RECEIPT_SCHEMA
+from jevops.catalogs import PROTOCOL
+from jevops.catalogs import CRITICAL_PATH_NOTE
+from jevops.catalogs import GENERATOR_IDENTITY
+from jevops.catalogs import GOAL_SNAPSHOT_REQUIRED
+from jevops.catalogs import HAMMER_006_CLAIM
+from jevops.catalogs import PATH_B_IMPLEMENTED
+from jevops.catalogs import TACTIC_TIMEOUT_SECONDS
+from jevops.catalogs import UNSOLVED_RELPATH
 from jevops.lean import AESOP_TACTIC
 from jevops.lean import PATH_A_TACTICS as FIXED_TACTICS
 from jevops.lean import SORRY_TACTIC
-TACTIC_TIMEOUT_SECONDS = 120.0
-UNSOLVED_RELPATH = "Strata/Unsolved.lean"
 
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
@@ -118,15 +123,7 @@ FORBIDDEN_ATTRS = frozenset(
         "find_executable",
     }
 )
-FORBIDDEN_SCORE_NAMES = frozenset(
-    {
-        "arena_score",
-        "arena_score_tokens",
-        "arena_score_elab",
-        "official_track2_score",
-        "token_savings",
-    }
-)
+from jevops.catalogs import FORBIDDEN_SCORE_NAMES
 
 from jevops.lean import AESOP_IMPORT as _AESOP_IMPORT
 
@@ -163,15 +160,17 @@ def sha256_text(text: str) -> str:
 
 def aesop_imported(record: Mapping[str, Any]) -> bool:
     from jevops.lean import AESOP_IMPORT
-    from jevops.outer import any_search
+    from jevops.outer import any_search, get_str
 
-    return any_search((record.get("header") or "", record.get("src") or ""), AESOP_IMPORT)
+    return any_search((get_str(record, "header"), get_str(record, "src")), AESOP_IMPORT)
 
 
 def tactics_for_record(record: Mapping[str, Any]) -> list[str]:
     from jevops.lean import path_a_tactics
 
-    return path_a_tactics(str(record.get("header") or ""), str(record.get("src") or ""))
+    from jevops.outer import get_str
+
+    return path_a_tactics(get_str(record, "header"), get_str(record, "src"))
 
 
 def sorry_lake_source(record: Mapping[str, Any]) -> str:
@@ -199,14 +198,16 @@ def tactic_lake_source(record: Mapping[str, Any], tactic: str) -> str:
 
 
 def write_tactic_source(record: Mapping[str, Any], dest: Path, tactic: str) -> Path:
+    from jevops.lean import write_sorry_or_tactic
     from jevops.outer import write_text
 
-    text = (
-        sorry_lake_source(record) if tactic == SORRY_TACTIC else tactic_lake_source(record, tactic)
-    )
-    return write_text(
+    return write_sorry_or_tactic(
         dest,
-        text,
+        tactic=tactic,
+        sorry=SORRY_TACTIC,
+        sorry_fn=lambda: sorry_lake_source(record),
+        tactic_fn=lambda: tactic_lake_source(record, tactic),
+        write_fn=write_text,
         refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
         error_cls=TryError,
         refuse_fmt="refusing to write {name}",
@@ -254,32 +255,25 @@ def _run_tactic(
     timeout: float,
     env: Mapping[str, str],
 ) -> TacticAttempt:
-    write_tactic_source(record, dest, tactic)
-    argv = lra_compile.measurement_argv(
-        lake_path,
-        lean_path,
-        source_file,
-        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-    )
+    from jevops.lean import timed_tactic_with_lake_process
     from jevops.outer import timed_call
 
-    result, wall_ms, cpu_ms = timed_call(
-        lambda: run_lean_process(
-            argv,
-            timeout=timeout,
-            cwd=str(cwd),
-            env=dict(env),
-        )
-    )
-    return _attempt_from_result(
+    return timed_tactic_with_lake_process(
         tactic=tactic,
-        argv=argv,
-        cwd=str(cwd),
         source_file=source_file,
+        cwd=cwd,
+        lake_path=lake_path,
+        lean_path=lean_path,
         timeout=timeout,
-        result=result,
-        wall_ms=wall_ms,
-        cpu_ms=cpu_ms,
+        env=env,
+        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        write_fn=write_tactic_source,
+        write_args=(record, dest, tactic),
+        run_lean_process=run_lean_process,
+        fill_fn=_attempt_from_result,
+        timed_fn=timed_call,
+        refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=lra_compile.CompileError,
     )
 
 
@@ -326,32 +320,25 @@ def try_tactics(
     """Path A: sorry hole, then ``rfl``/``decide``/``omega``/``simp_all``/``aesop``."""
 
     timeout = lra_compile.require_lake_timeout(timeout)
-    name = str(record.get("name") or "")
-    source = str(record.get("source") or "")
     considered = tactics_for_record(record)
     split = lra_splice.split_statement_body(record)
     template = lra_splice.statement_sorry_template(split.statement)
     lake_sorry = sorry_lake_source(record)
-    from jevops.lean import aesop_list_ok, sorry_prefix_bound
+    from jevops.lean import aesop_list_ok, begin_path_a_receipt
 
-    receipt = TacticTryReceipt(
+    receipt = begin_path_a_receipt(
+        record,
+        pin,
+        relpath=lra_compile.source_relpath(record),
+        template=template,
+        statement=split.statement,
+        suffix=lra_splice.STATEMENT_SORRY_SUFFIX,
+        lake_sorry=lake_sorry,
+        aesop=aesop_imported(record),
+        considered=considered,
+        timeout=timeout,
+        digest_fn=sha256_text,
         schema=RECEIPT_SCHEMA,
-        name=name,
-        source=source,
-        file_path=lra_compile.source_relpath(record),
-        url=str(record.get("url") or ""),
-        lean_tag=pin.lean_tag,
-        git_commit=pin.git_commit,
-        sorry_template_digest=sha256_text(template),
-        sorry_template_prefix_bound=sorry_prefix_bound(
-            template=template,
-            statement=split.statement,
-            suffix=lra_splice.STATEMENT_SORRY_SUFFIX,
-            lake_sorry=lake_sorry,
-        ),
-        aesop_imported=aesop_imported(record),
-        tactics_considered=list(considered),
-        timeout_seconds=timeout,
         loop=LOOP_VERSION,
         path=PATH_NAME,
         pr=PR_ID,
@@ -361,159 +348,169 @@ def try_tactics(
         measurement_argv_template=MEASUREMENT_ARGV_TEMPLATE,
     )
     aesop_err = aesop_list_ok(considered, receipt.aesop_imported)
-    if aesop_err:
-        receipt.error = aesop_err
-        receipt.ok = False
-        return receipt
-    from jevops.lean import close_failed_receipt, path_a_fill
+    from jevops.lean import close_failed_receipt, lake_supervisor_fields, path_a_fill, run_path_a_try
+    from jevops.outer import env_copy, under_or_tmp
 
-    try:
-        toolchain = lra_compile.resolve_pin(pin, elan_home=elan_home, require_installed=True)
-        cwd, source_file, dest = _prepare_project(
+    def _env(toolchain: Any) -> Mapping[str, str]:
+        from jevops.lean import supervisor_env
+
+        return supervisor_env(
+            state_root,
+            toolchain,
+            tmp_name="lra-021-process-supervisor",
+            threads=LEAN_NUM_THREADS,
+            process_env_key=PROCESS_SUPERVISOR_ENV,
+            env_copy_fn=env_copy,
+            under_fn=under_or_tmp,
+            fields_fn=lake_supervisor_fields,
+        )
+
+    def _run_one(*, tactic: str, dest: Path, source_file: str, cwd: Path, toolchain: Any, timeout: float, env: Mapping[str, str]) -> TacticAttempt:
+        return _run_tactic(
+            record,
+            tactic=tactic,
+            dest=dest,
+            source_file=source_file,
+            cwd=cwd,
+            lake_path=toolchain.lake_path,
+            lean_path=toolchain.lean_path,
+            timeout=timeout,
+            env=env,
+        )
+
+    def _extra(exc: BaseException) -> str:
+        from jevops.lean import toolchain_gap_note
+
+        return toolchain_gap_note(
+            exc,
+            (LeanToolchainMissing, lra_compile.CompileToolchainMissing),
+            (
+                "; tag-pinned elan is a capability gap, not PATH lean "
+                "usability and not LeanFrontend.snapshot_goal"
+            ),
+        )
+
+    return run_path_a_try(
+        receipt,
+        considered,
+        aesop_err=aesop_err,
+        resolve_fn=lambda: lra_compile.resolve_pin(pin, elan_home=elan_home, require_installed=True),
+        prepare_fn=lambda: _prepare_project(
             record,
             pin,
             state_root=state_root,
             network=network,
             skip_checkout=skip_checkout,
-        )
-        from jevops.outer import env_copy, under_or_tmp
-
-        supervisor_dir = under_or_tmp(
-            state_root, "process-supervisor", tmp_name="lra-021-process-supervisor"
-        )
-        env = env_copy(
-            {
-                "LEAN_NUM_THREADS": str(LEAN_NUM_THREADS),
-                "ELAN_HOME": toolchain.elan_home,
-                PROCESS_SUPERVISOR_ENV: str(supervisor_dir),
-            }
-        )
-        def _run(tactic: str) -> TacticAttempt:
-            return _run_tactic(
-                record,
-                tactic=tactic,
-                dest=dest,
-                source_file=source_file,
-                cwd=cwd,
-                lake_path=toolchain.lake_path,
-                lean_path=toolchain.lean_path,
-                timeout=timeout,
-                env=env,
-            )
-
-        return path_a_fill(receipt, considered, _run)
-    except (TryError, lra_compile.CompileError, LeanToolchainMissing, lra_bake.BakeError) as exc:
-        extra = ""
-        if isinstance(exc, (LeanToolchainMissing, lra_compile.CompileToolchainMissing)):
-            extra = (
-                "; tag-pinned elan is a capability gap, not PATH lean "
-                "usability and not LeanFrontend.snapshot_goal"
-            )
-        return close_failed_receipt(
-            receipt, exc, digest_fn=sha256_text, axiom_digest_fn=lra_compile.axiom_digest, extra=extra
-        )
+        ),
+        env_fn=_env,
+        run_tactic_fn=_run_one,
+        fill_fn=path_a_fill,
+        close_fn=lambda rec, exc, extra: close_failed_receipt(
+            rec, exc, digest_fn=sha256_text, axiom_digest_fn=lra_compile.axiom_digest, extra=extra
+        ),
+        error_types=(TryError, lra_compile.CompileError, LeanToolchainMissing, lra_bake.BakeError),
+        extra_fn=_extra,
+        timeout=timeout,
+    )
 
 
 def first_record_of_source(
     records: Sequence[Mapping[str, Any]], source: str
 ) -> Mapping[str, Any]:
-    from jevops.outer import first_where
+    from jevops.outer import field_eq, first_where
 
     return first_where(
         records,
-        lambda record: record.get("source") == source,
+        field_eq("source", source),
         error_cls=TryError,
         miss=f"warmup JSONL has no {source} record",
     )
 
 
 def pin_for_tag(record: Mapping[str, Any], lean_tag: str) -> lra_compile.VersionPin:
-    from jevops.outer import first_or_last
+    from jevops.outer import first_or_last, get_str
 
     return first_or_last(
         lra_compile.iter_version_pins(record.get("version_info")),
         lambda pin: pin.lean_tag == lean_tag,
         error_cls=TryError,
-        miss=f"{record.get('name')}: no version_info pins",
+        miss=f"{get_str(record, 'name')}: no version_info pins",
     )
 
 
 def plan_try(path: Optional[Path] = None) -> dict[str, Any]:
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import get_str, if_none
+
+    jsonl = Path(if_none(path, WARMUP_JSONL))
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    per_record = []
-    for record in records:
-        considered = tactics_for_record(record)
-        per_record.append(
-            {
-                "aesop_imported": aesop_imported(record),
-                "name": str(record.get("name") or ""),
-                "source": str(record.get("source") or ""),
-                "tactics": considered,
-                "aesop_in_list": AESOP_TACTIC in considered,
-            }
-        )
+    from jevops.lean import path_a_plan_rows
+
+    per_record = path_a_plan_rows(
+        records,
+        tactics_fn=tactics_for_record,
+        aesop_fn=aesop_imported,
+        aesop_tactic=AESOP_TACTIC,
+    )
     first = first_record_of_source(records, STRATA_SOURCE)
     putnam = first_record_of_source(records, PUTNAM_SOURCE)
-    return {
-        "arena_score": None,
-        "score": None,
-        "aesop_if_imported": True,
-        "critical_path_note": CRITICAL_PATH_NOTE,
-        "fixed_tactics": list(FIXED_TACTICS),
-        "first_putnam_name": str(putnam.get("name") or ""),
-        "first_putnam_tactics": tactics_for_record(putnam),
-        "first_strata_name": str(first.get("name") or ""),
-        "first_strata_tactics": tactics_for_record(first),
-        "frozen_warmup_sha256": digest,
-        "generator": GENERATOR_IDENTITY,
-        "goal_snapshot_required": GOAL_SNAPSHOT_REQUIRED,
-        "hammer_006_claim": HAMMER_006_CLAIM,
-        "hammer_006_lra_ready": HAMMER_006_LRA_READY,
-        "jsonl_bytes": len(raw),
-        "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
-        "loop": LOOP_VERSION,
-        "lrah": LRAH_ID,
-        "measurement_argv_template": MEASUREMENT_ARGV_TEMPLATE,
-        "n_records": len(records),
-        "on_30_sep_critical_path": ON_30_SEP_CRITICAL_PATH,
-        "path": PATH_NAME,
-        "path_b_implemented": PATH_B_IMPLEMENTED,
-        "pr": PR_ID,
-        "protocol": PROTOCOL,
-        "records": per_record,
-        "run_lean_process": run_lean_process.__name__,
-        "sorry_template": "statement + ' := by\\nsorry'",
-        "tactic_timeout_seconds": TACTIC_TIMEOUT_SECONDS,
-        "uses_snapshot_goal": USES_SNAPSHOT_GOAL,
-        "v1_runs_this": V1_RUNS_THIS,
-    }
+    from jevops.lean import pack_try_plan
+
+    return pack_try_plan(
+        digest=digest,
+        jsonl_bytes=len(raw),
+        n_records=len(records),
+        per_record=per_record,
+        first_name=get_str(first, "name"),
+        first_tactics=tactics_for_record(first),
+        putnam_name=get_str(putnam, "name"),
+        putnam_tactics=tactics_for_record(putnam),
+        extra={
+            "aesop_if_imported": True,
+            "critical_path_note": CRITICAL_PATH_NOTE,
+            "fixed_tactics": list(FIXED_TACTICS),
+            "generator": GENERATOR_IDENTITY,
+            "goal_snapshot_required": GOAL_SNAPSHOT_REQUIRED,
+            "hammer_006_claim": HAMMER_006_CLAIM,
+            "hammer_006_lra_ready": HAMMER_006_LRA_READY,
+            "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
+            "loop": LOOP_VERSION,
+            "lrah": LRAH_ID,
+            "measurement_argv_template": MEASUREMENT_ARGV_TEMPLATE,
+            "on_30_sep_critical_path": ON_30_SEP_CRITICAL_PATH,
+            "path": PATH_NAME,
+            "path_b_implemented": PATH_B_IMPLEMENTED,
+            "pr": PR_ID,
+            "protocol": PROTOCOL,
+            "run_lean_process": run_lean_process.__name__,
+            "sorry_template": "statement + ' := by\\nsorry'",
+            "tactic_timeout_seconds": TACTIC_TIMEOUT_SECONDS,
+            "uses_snapshot_goal": USES_SNAPSHOT_GOAL,
+            "v1_runs_this": V1_RUNS_THIS,
+        },
+    )
 
 
 def probe_toolchain(tags: Optional[Sequence[str]] = None) -> dict[str, Any]:
-    payload = lra_compile.probe_toolchain(tags)
-    payload["arena_score"] = None
-    payload["score"] = None
-    payload["generator"] = GENERATOR_IDENTITY
-    payload["goal_snapshot_required"] = False
-    payload["hammer_006_lra_ready"] = False
-    payload["lake_native_try"] = True
-    payload["loop"] = LOOP_VERSION
-    payload["on_30_sep_critical_path"] = False
-    payload["path"] = PATH_NAME
-    payload["path_b_implemented"] = False
-    payload["tactic_timeout_seconds"] = TACTIC_TIMEOUT_SECONDS
-    payload["uses_snapshot_goal"] = False
-    payload["v1_runs_this"] = False
-    payload["live_elan_usable"] = False if payload.get("capability_gap") else bool(
-        payload.get("installed_tags")
+    from jevops.lean import overlay_try_probe
+
+    return overlay_try_probe(
+        lra_compile.probe_toolchain(tags),
+        extra={
+            "arena_score": None,
+            "score": None,
+            "generator": GENERATOR_IDENTITY,
+            "goal_snapshot_required": False,
+            "hammer_006_lra_ready": False,
+            "lake_native_try": True,
+            "loop": LOOP_VERSION,
+            "on_30_sep_critical_path": False,
+            "path": PATH_NAME,
+            "path_b_implemented": False,
+            "tactic_timeout_seconds": TACTIC_TIMEOUT_SECONDS,
+            "uses_snapshot_goal": False,
+            "v1_runs_this": False,
+        },
     )
-    if payload.get("capability_gap"):
-        payload["live_elan_usable"] = False
-        payload["snapshot_goal_usable_for_lake_projects"] = False
-    else:
-        payload["snapshot_goal_usable_for_lake_projects"] = False
-    return payload
 
 
 def write_receipts(receipts: Sequence[TacticTryReceipt], dest_dir: Path) -> list[str]:
@@ -548,7 +545,7 @@ def _assigned_constant(tree: ast.AST, name: str) -> Any:
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
     from jevops.outer import source_text
-    from jevops.repair import assigned_constants, audit_source as _audit
+    from jevops.repair import audit_source as _audit
 
     text = source_text(source, path=__file__)
     out = _audit(
@@ -559,11 +556,11 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
         forbidden_attrs=FORBIDDEN_ATTRS,
     )
     imported = set(out["imported_names"])
-    calls = set(out["call_names"])
-    score_assignments = list(out["score_keys"])
     frontend = audit_lean_frontend_path_json()
-    consts = assigned_constants(
-        text,
+    from jevops import lean as lean_mod
+    from jevops.repair import catalog_constants, module_call_names
+
+    consts = catalog_constants(
         (
             "HAMMER_006_LRA_READY",
             "ON_30_SEP_CRITICAL_PATH",
@@ -573,145 +570,42 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
             "PATH_NAME",
         ),
     )
-    hammer_ready = consts["HAMMER_006_LRA_READY"]
-    on_critical = consts["ON_30_SEP_CRITICAL_PATH"]
-    v1_runs = consts["V1_RUNS_THIS"]
-    uses_snapshot = consts["USES_SNAPSHOT_GOAL"]
-    loop_value = consts["LOOP_VERSION"]
-    path_value = consts["PATH_NAME"]
-    return {
-        "imported_names": out["imported_names"],
-        "forbidden_imports": out["forbidden_imports"],
-        "forbidden_calls": out["forbidden_calls"],
-        "forbidden_attrs": out["forbidden_attrs"],
-        "score_assignments": score_assignments,
-        "uses_run_lean_process": "run_lean_process" in calls,
-        "uses_measurement_argv": "measurement_argv" in calls,
-        "uses_statement_sorry_template": "statement_sorry_template" in calls,
-        "uses_snapshot_goal_call": "snapshot_goal" in calls,
-        "imports_lean_frontend": "LeanFrontend" in imported,
-        "imports_goal_snapshot": "GoalSnapshot" in imported,
-        "hammer_006_lra_ready_constant": hammer_ready,
-        "on_30_sep_critical_path_constant": on_critical,
-        "v1_runs_this_constant": v1_runs,
-        "uses_snapshot_goal_constant": uses_snapshot,
-        "loop_constant": loop_value,
-        "path_constant": path_value,
-        "lean_frontend": frontend,
-        "ok": (
-            not out["forbidden_imports"]
-            and not out["forbidden_calls"]
-            and not out["forbidden_attrs"]
-            and not score_assignments
-            and "run_lean_process" in calls
-            and "measurement_argv" in calls
-            and "statement_sorry_template" in calls
-            and "snapshot_goal" not in calls
-            and "LeanFrontend" not in imported
-            and "GoalSnapshot" not in imported
-            and hammer_ready is False
-            and on_critical is False
-            and v1_runs is False
-            and uses_snapshot is False
-            and loop_value == "v2"
-            and path_value == "A"
-            and frontend.get("unchanged_path_lean_json") is True
+    from jevops.repair import pack_call_audit
+
+    return pack_call_audit(
+        out,
+        required_calls=("run_lean_process", "measurement_argv", "statement_sorry_template"),
+        forbidden_call_names=("snapshot_goal",),
+        extra_call_names=module_call_names(lean_mod),
+        extra={
+            "forbidden_attrs": out["forbidden_attrs"],
+            "uses_snapshot_goal_call": "snapshot_goal" in set(out["call_names"] or ()),
+            "imports_lean_frontend": "LeanFrontend" in imported,
+            "imports_goal_snapshot": "GoalSnapshot" in imported,
+            "hammer_006_lra_ready_constant": consts["HAMMER_006_LRA_READY"],
+            "on_30_sep_critical_path_constant": consts["ON_30_SEP_CRITICAL_PATH"],
+            "v1_runs_this_constant": consts["V1_RUNS_THIS"],
+            "uses_snapshot_goal_constant": consts["USES_SNAPSHOT_GOAL"],
+            "loop_constant": consts["LOOP_VERSION"],
+            "path_constant": consts["PATH_NAME"],
+            "lean_frontend": frontend,
+        },
+        extra_ok=(
+            "LeanFrontend" not in imported,
+            "GoalSnapshot" not in imported,
+            consts["HAMMER_006_LRA_READY"] is False,
+            consts["ON_30_SEP_CRITICAL_PATH"] is False,
+            consts["V1_RUNS_THIS"] is False,
+            consts["USES_SNAPSHOT_GOAL"] is False,
+            consts["LOOP_VERSION"] == "v2",
+            consts["PATH_NAME"] == "A",
+            frontend.get("unchanged_path_lean_json") is True,
         ),
-    }
+    )
 
 
-_FAKE_LAKE = """#!/usr/bin/python3.12
-import os
-import sys
-
-args = sys.argv[1:]
-if not args or args[0] != "env" or len(args) < 2:
-    sys.stderr.write("lra-021-fake-lake: expected 'env <lean> ...'\\n")
-    sys.exit(2)
-os.execv(args[1], args[1:])
-"""
-
-_FAKE_LEAN = r"""#!/usr/bin/python3.12
-import json
-import re
-import sys
-from pathlib import Path
-
-argv = sys.argv[1:]
-heartbeats = None
-source = None
-has_json = False
-for arg in argv:
-    if arg.startswith("-DmaxHeartbeats="):
-        try:
-            heartbeats = int(arg.split("=", 1)[1])
-        except ValueError:
-            heartbeats = -1
-    elif arg == "--json":
-        has_json = True
-    elif not arg.startswith("-"):
-        source = arg
-
-if not has_json:
-    sys.stderr.write("lra-021-fake-lean: expected --json\n")
-    sys.exit(2)
-if heartbeats is None or heartbeats <= 0:
-    sys.stderr.write("measurement maxHeartbeats must be finite and positive\n")
-    sys.exit(3)
-if source is None:
-    sys.stderr.write("missing source file\n")
-    sys.exit(4)
-path = Path(source)
-if not path.is_file():
-    sys.stderr.write(f"source not found: {source}\n")
-    sys.exit(4)
-text = path.read_text(encoding="utf-8")
-if " := by\n" in text:
-    tactic_block = text.rsplit(" := by\n", 1)[-1].strip()
-elif " := by" in text:
-    tactic_block = text.rsplit(" := by", 1)[-1].strip()
-else:
-    tactic_block = ""
-tactic = tactic_block.split()[0] if tactic_block.split() else ""
-aesop_imported = bool(re.search(r"(?m)^\s*import\s+Aesop\b", text))
-unsolved = "theorem lra_unsolved" in text
-decl = path.stem.replace(".", "_") or "lra_candidate"
-
-
-def fail(message: str, sorry: bool = False) -> None:
-    payload = {"severity": "error", "data": message, "pos": {"line": 1, "column": 0}}
-    if sorry:
-        payload["data"] = "hasSorry"
-        payload["severity"] = "warning"
-    print(json.dumps(payload))
-    print(f"#print axioms {decl}")
-    print(f"{decl} : sorryAx" if sorry else f"{decl} : []")
-    sys.exit(1)
-
-
-def succeed() -> None:
-    print(json.dumps({"severity": "information", "data": "ok", "pos": {"line": 1, "column": 0}}))
-    print(f"#print axioms {decl}")
-    print(f"{decl} : []")
-    sys.exit(0)
-
-
-if tactic == "sorry":
-    fail("sorry hole", sorry=True)
-if unsolved:
-    fail(f"unsolved under {tactic}")
-if tactic == "rfl":
-    fail("rfl failed on lake-project goal")
-if tactic == "aesop":
-    if aesop_imported:
-        succeed()
-    fail("unknown identifier 'aesop' (Aesop not imported)")
-if tactic in {"decide", "omega", "simp_all"}:
-    if aesop_imported:
-        fail(f"{tactic} failed; Putnam synthetic closes with aesop")
-    succeed()
-fail(f"unknown tactic {tactic!r}")
-"""
+from jevops.lean import FAKE_LAKE_PATH_A as _FAKE_LAKE
+from jevops.lean import FAKE_LEAN_PATH_A as _FAKE_LEAN
 
 
 def _write_executable(path: Path, text: str) -> None:
@@ -721,110 +615,47 @@ def _write_executable(path: Path, text: str) -> None:
 
 
 def plant_fake_toolchain(elan_home: Path, lean_tag: str) -> Path:
-    from jevops.outer import join_under, plant_executables
+    from jevops.lean import plant_fake_toolchain as _fn
 
-    toolchain_dir = join_under(
-        elan_home, "toolchains", lra_bake.elan_toolchain_dirname(lean_tag), "bin"
+    return _fn(
+        elan_home,
+        lean_tag,
+        dirname_fn=lra_bake.elan_toolchain_dirname,
+        files={"lake": _FAKE_LAKE, "lean": _FAKE_LEAN},
     )
-    plant_executables(toolchain_dir, {"lake": _FAKE_LAKE, "lean": _FAKE_LEAN})
-    return toolchain_dir
 
 
 def unsolved_record() -> dict[str, Any]:
-    statement = "theorem lra_unsolved : False"
-    return {
-        "name": "lra_unsolved",
-        "source": STRATA_SOURCE,
-        "statement": statement,
-        "src": statement + " := by\nsorry",
-        "header": "",
-        "file_path": UNSOLVED_RELPATH,
-        "url": STRATA_URL,
-        "version_info": [{STRATA_FIRST_TAG: STRATA_FIRST_COMMIT}],
-        "proof_length": 5,
-        "num_lines": 2,
-    }
+    from jevops.lean import unsolved_record as _fn
+
+    return _fn(
+        source=STRATA_SOURCE,
+        file_path=UNSOLVED_RELPATH,
+        url=STRATA_URL,
+        lean_tag=STRATA_FIRST_TAG,
+        git_commit=STRATA_FIRST_COMMIT,
+    )
 
 
 def _attempt_summary(attempt: Mapping[str, Any]) -> dict[str, Any]:
-    from jevops.outer import argv_layout
+    from jevops.lean import attempt_summary
 
-    argv = list(attempt.get("argv") or [])
-    return {
-        "argv_has_lake_env_lean": argv_layout(
-            argv,
-            min_len=6,
-            names={0: "lake", 2: "lean"},
-            eq={
-                1: "env",
-                3: f"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}",
-                4: "--json",
-            },
-        ),
-        "argv_tag_pinned": bool(str(attempt.get("cwd") or ""))
-        and argv_layout(
-            argv,
-            min_len=3,
-            contains={0: "leanprover--lean4---", 2: "leanprover--lean4---"},
-        ),
-        "exit_code": attempt.get("exit_code"),
-        "ok": bool(attempt.get("ok")),
-        "sorryAx": bool(attempt.get("sorryAx")),
-        "tactic": attempt.get("tactic"),
-        "used_snapshot_goal": bool(attempt.get("used_snapshot_goal")),
-        "used_lean_frontend": bool(attempt.get("used_lean_frontend")),
-        "generator": attempt.get("generator"),
-        "stdout_nonempty": bool(str(attempt.get("stdout") or "").strip()),
-        "printed_axioms": "#print axioms" in str(attempt.get("stdout") or ""),
-        "timeout_exceeds_ikv_30s": float(attempt.get("timeout_seconds") or 0.0)
-        > INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
-        "arena_score": None,
-        "score": None,
-    }
+    return attempt_summary(
+        attempt,
+        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        ikv_floor=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+    )
 
 
 def _receipt_summary(receipt: TacticTryReceipt) -> dict[str, Any]:
-    attempts = [_attempt_summary(item) for item in receipt.attempts]
-    sorry = _attempt_summary(receipt.sorry_attempt) if receipt.sorry_attempt else None
-    return {
-        "aesop_imported": receipt.aesop_imported,
-        "aesop_in_considered": AESOP_TACTIC in receipt.tactics_considered,
-        "attempts": attempts,
-        "error": receipt.error,
-        "generator": receipt.generator,
-        "git_commit": receipt.git_commit,
-        "hammer_006_lra_ready": receipt.hammer_006_lra_ready,
-        "lean_tag": receipt.lean_tag,
-        "loop": receipt.loop,
-        "name": receipt.name,
-        "ok": receipt.ok,
-        "on_30_sep_critical_path": receipt.on_30_sep_critical_path,
-        "path": receipt.path,
-        "path_b_implemented": receipt.path_b_implemented,
-        "sorry_attempt": sorry,
-        "sorry_failed": sorry is not None and not sorry["ok"] and sorry["sorryAx"],
-        "sorry_first": sorry is not None and sorry["tactic"] == SORRY_TACTIC,
-        "sorry_template_prefix_bound": receipt.sorry_template_prefix_bound,
-        "source": receipt.source,
-        "stopped_after_winner": (
-            receipt.winning_tactic is not None
-            and receipt.tactics_run
-            and receipt.tactics_run[-1] == receipt.winning_tactic
-            and receipt.tactics_considered.index(receipt.winning_tactic)
-            == len(receipt.tactics_run) - 1
-        ),
-        "tactics_considered": list(receipt.tactics_considered),
-        "tactics_run": list(receipt.tactics_run),
-        "uses_snapshot_goal": receipt.uses_snapshot_goal,
-        "v1_runs_this": receipt.v1_runs_this,
-        "winning_tactic": receipt.winning_tactic,
-        "all_attempts_lake_env_lean": all(item["argv_has_lake_env_lean"] for item in attempts)
-        and (sorry is None or sorry["argv_has_lake_env_lean"]),
-        "no_snapshot_goal_on_attempts": all(not item["used_snapshot_goal"] for item in attempts)
-        and (sorry is None or not sorry["used_snapshot_goal"]),
-        "arena_score": None,
-        "score": None,
-    }
+    from jevops.lean import try_receipt_summary
+
+    return try_receipt_summary(
+        receipt,
+        attempt_fn=_attempt_summary,
+        aesop_tactic=AESOP_TACTIC,
+        sorry_tactic=SORRY_TACTIC,
+    )
 
 
 def _synthetic_try(
@@ -832,17 +663,20 @@ def _synthetic_try(
     *,
     persist_receipts: Optional[Path] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import temp_dir
+    from jevops.lean import planted_session
+    from jevops.outer import take_keys
 
-    with temp_dir(prefix="lra-021-try-", parent=lra_compile._exec_scratch_parent()) as tmp:
-        root = Path(tmp)
-        elan_home = root / "elan"
-        state_root = root / "state"
-        receipts_dir = root / "receipts"
-        for tag in ("v4.25.0", "v4.26.0", "v4.27.0"):
-            plant_fake_toolchain(elan_home, tag)
-        clone = lra_compile.plant_synthetic_strata_clone(
-            lra_compile.clone_dir(STRATA_URL, state_root)
+    with planted_session(
+        "lra-021-try-",
+        tags=("v4.25.0", "v4.26.0", "v4.27.0"),
+        plant_fn=plant_fake_toolchain,
+        clone_fn=lambda state: lra_compile.plant_synthetic_strata_clone(
+            lra_compile.clone_dir(STRATA_URL, state)
+        ),
+        parent=lra_compile._exec_scratch_parent(),
+    ) as planted:
+        elan_home, state_root, receipts_dir, clone = take_keys(
+            planted, "elan_home", "state_root", "receipts_dir", "clone"
         )
         first = first_record_of_source(records, STRATA_SOURCE)
         putnam = first_record_of_source(records, PUTNAM_SOURCE)
@@ -852,66 +686,65 @@ def _synthetic_try(
         first_pin = pin_for_tag(first, STRATA_FIRST_TAG)
         putnam_pin = pin_for_tag(putnam, STRATA_FIRST_TAG)
         unsolved_pin = pin_for_tag(unsolved, STRATA_FIRST_TAG)
-        timeout_30_rejected = False
-        try:
-            lra_compile.require_lake_timeout(
+        from jevops.outer import closed_on_error
+
+        timeout_30_rejected = closed_on_error(
+            lambda: lra_compile.require_lake_timeout(
                 INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
+            ),
+            lra_compile.LakeTimeoutTooSmall,
+        )
+        from jevops.outer import starmap
+
+        def _try(record: Mapping[str, Any], pin: Any, network: str) -> TacticTryReceipt:
+            return try_tactics(
+                record,
+                pin,
+                timeout=TACTIC_TIMEOUT_SECONDS,
+                state_root=state_root,
+                elan_home=elan_home,
+                network=network,
+                skip_checkout=True,
             )
-        except lra_compile.LakeTimeoutTooSmall:
-            timeout_30_rejected = True
-        strata_receipt = try_tactics(
-            first,
-            first_pin,
-            timeout=TACTIC_TIMEOUT_SECONDS,
-            state_root=state_root,
-            elan_home=elan_home,
-            network="deny",
-            skip_checkout=True,
-        )
-        putnam_receipt = try_tactics(
-            putnam,
-            putnam_pin,
-            timeout=TACTIC_TIMEOUT_SECONDS,
-            state_root=state_root,
-            elan_home=elan_home,
-            network="allow",
-            skip_checkout=True,
-        )
-        unsolved_receipt = try_tactics(
-            unsolved,
-            unsolved_pin,
-            timeout=TACTIC_TIMEOUT_SECONDS,
-            state_root=state_root,
-            elan_home=elan_home,
-            network="deny",
-            skip_checkout=True,
+
+        strata_receipt, putnam_receipt, unsolved_receipt = starmap(
+            _try,
+            (
+                (first, first_pin, "deny"),
+                (putnam, putnam_pin, "allow"),
+                (unsolved, unsolved_pin, "deny"),
+            ),
         )
         all_receipts = [strata_receipt, putnam_receipt, unsolved_receipt]
-        written = write_receipts(all_receipts, receipts_dir)
-        persisted: list[str] = []
-        if persist_receipts is not None:
-            persisted = write_receipts(all_receipts, Path(persist_receipts))
-        missing_closed = False
-        try:
-            lra_compile.require_clone(
+        from jevops.outer import persist_named_rows
+
+        written, persisted = persist_named_rows(
+            all_receipts,
+            receipts_dir,
+            persist_receipts,
+            write_receipts,
+        )
+        missing_closed = closed_on_error(
+            lambda: lra_compile.require_clone(
                 "https://github.com/example/missing-lra-021",
                 network="deny",
                 state_root=state_root,
-            )
-        except lra_compile.CloneMissing:
-            missing_closed = True
-        return {
-            "elan_home": str(elan_home),
-            "missing_clone_fails_closed_under_network_deny": missing_closed,
-            "n_receipts_persisted": len(persisted),
-            "n_receipts_written": len(written),
-            "persisted_receipts": persisted,
-            "putnam": _receipt_summary(putnam_receipt),
-            "receipts_written": [Path(path).name for path in written],
-            "strata": _receipt_summary(strata_receipt),
-            "timeout_30s_rejected": timeout_30_rejected,
-            "unsolved": _receipt_summary(unsolved_receipt),
-        }
+            ),
+            lra_compile.CloneMissing,
+        )
+        from jevops.lean import pack_synthetic_try
+
+        return pack_synthetic_try(
+            elan_home=elan_home,
+            missing_closed=missing_closed,
+            written=written,
+            persisted=persisted,
+            putnam=putnam_receipt,
+            strata=strata_receipt,
+            unsolved=unsolved_receipt,
+            timeout_30_rejected=timeout_30_rejected,
+            summary_fn=_receipt_summary,
+        )
 
 
 def self_check(
@@ -919,9 +752,9 @@ def self_check(
     *,
     receipts_dir: Optional[Path] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import head_seq
+    from jevops.outer import head_seq, if_none, relative_or_str
 
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    jsonl = Path(if_none(path, WARMUP_JSONL))
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
     audit = audit_source()
     synthetic = _synthetic_try(records, persist_receipts=receipts_dir)
@@ -930,22 +763,25 @@ def self_check(
     strata = synthetic["strata"]
     putnam = synthetic["putnam"]
     unsolved = synthetic["unsolved"]
-    putnam_aesop_only = all(
-        item["aesop_imported"] and item["aesop_in_list"] for item in plan["records"]
-        if item["source"] == PUTNAM_SOURCE
+    from jevops.outer import all_where
+
+    putnam_aesop_only = all_where(
+        plan["records"],
+        lambda item: item["source"] == PUTNAM_SOURCE,
+        lambda item: item["aesop_imported"] and item["aesop_in_list"],
     )
-    non_putnam_no_aesop = all(
-        (not item["aesop_imported"]) and (not item["aesop_in_list"])
-        for item in plan["records"]
-        if item["source"] != PUTNAM_SOURCE
+    non_putnam_no_aesop = all_where(
+        plan["records"],
+        lambda item: item["source"] != PUTNAM_SOURCE,
+        lambda item: (not item["aesop_imported"]) and (not item["aesop_in_list"]),
     )
-    report: dict[str, Any] = {
+    from jevops.outer import get_str, pack_unscored
+
+    report: dict[str, Any] = pack_unscored(**{
         "ok": False,
-        "arena_score": None,
-        "score": None,
         "aesop_only_when_imported": putnam_aesop_only and non_putnam_no_aesop,
         "audit": audit,
-        "capability_gap": toolchain.get("capability_gap") or "",
+        "capability_gap": get_str(toolchain, "capability_gap"),
         "compiled": bool(strata["ok"] and putnam["ok"]),
         "critical_path_note": CRITICAL_PATH_NOTE,
         "first_putnam_name": plan["first_putnam_name"],
@@ -1003,43 +839,45 @@ def self_check(
         "unsolved_ran_fixed_tactics": unsolved["tactics_run"] == list(FIXED_TACTICS),
         "uses_snapshot_goal": False,
         "v1_runs_this": False,
-        "warmup_path": str(jsonl.relative_to(REPO_ROOT)),
-    }
-    report["ok"] = bool(
-        report["n_records"] == WARMUP_N
-        and report["jsonl_unchanged"]
-        and report["aesop_only_when_imported"]
-        and report["path_a_lake_env_lean"]
-        and report["sorry_hole_then_tactic_list"]
-        and report["strata_decide_won"]
-        and report["strata_rfl_failed_first"]
-        and report["putnam_aesop_won"]
-        and report["putnam_tried_fixed_tactics_before_aesop"]
-        and report["unsolved_has_no_winner"]
-        and report["unsolved_ran_fixed_tactics"]
-        and strata["stopped_after_winner"]
-        and putnam["stopped_after_winner"]
-        and strata["sorry_template_prefix_bound"]
-        and putnam["sorry_template_prefix_bound"]
-        and strata["no_snapshot_goal_on_attempts"]
-        and putnam["no_snapshot_goal_on_attempts"]
-        and synthetic["timeout_30s_rejected"]
-        and synthetic["missing_clone_fails_closed_under_network_deny"]
-        and audit["ok"]
-        and report["lean_frontend_unchanged_path_lean_json"]
-        and report["hammer_006_lra_ready"] is False
-        and report["on_30_sep_critical_path"] is False
-        and report["v1_runs_this"] is False
-        and report["uses_snapshot_goal"] is False
-        and report["path_b_implemented"] is False
-        and report["goal_snapshot_required"] is False
-        and report["arena_score"] is None
-        and report["score"] is None
-        and report["llama_server_started"] is False
-        and report["loop"] == "v2"
-        and report["path"] == "A"
+        "warmup_path": relative_or_str(jsonl, REPO_ROOT),
+    })
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["n_records"] == WARMUP_N,
+        report["jsonl_unchanged"],
+        report["aesop_only_when_imported"],
+        report["path_a_lake_env_lean"],
+        report["sorry_hole_then_tactic_list"],
+        report["strata_decide_won"],
+        report["strata_rfl_failed_first"],
+        report["putnam_aesop_won"],
+        report["putnam_tried_fixed_tactics_before_aesop"],
+        report["unsolved_has_no_winner"],
+        report["unsolved_ran_fixed_tactics"],
+        strata["stopped_after_winner"],
+        putnam["stopped_after_winner"],
+        strata["sorry_template_prefix_bound"],
+        putnam["sorry_template_prefix_bound"],
+        strata["no_snapshot_goal_on_attempts"],
+        putnam["no_snapshot_goal_on_attempts"],
+        synthetic["timeout_30s_rejected"],
+        synthetic["missing_clone_fails_closed_under_network_deny"],
+        audit["ok"],
+        report["lean_frontend_unchanged_path_lean_json"],
+        report["hammer_006_lra_ready"] is False,
+        report["on_30_sep_critical_path"] is False,
+        report["v1_runs_this"] is False,
+        report["uses_snapshot_goal"] is False,
+        report["path_b_implemented"] is False,
+        report["goal_snapshot_required"] is False,
+        report["arena_score"] is None,
+        report["score"] is None,
+        report["llama_server_started"] is False,
+        report["loop"] == "v2",
+        report["path"] == "A",
     )
-    return report
 
 
 def _print_json(payload: Mapping[str, Any]) -> None:
@@ -1092,7 +930,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         action="store_true",
         help="do not git checkout (synthetic or already-checked worktree)",
     )
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
 
     if args.self_check or argv is None or argv == []:
         from jevops.outer import print_ok
@@ -1124,9 +964,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 )
             )
             return 1
-        raw, digest, records = lra_splice.load_warmup_records(
-            args.jsonl if args.jsonl is not None else WARMUP_JSONL
-        )
+        from jevops.outer import path_or
+
+        raw, digest, records = lra_splice.load_warmup_records(path_or(args.jsonl, WARMUP_JSONL))
         del raw, digest
         from jevops.outer import closed_fail, lookup_named
 
@@ -1157,7 +997,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         payload["receipts_written"] = written
         payload["summary"] = _receipt_summary(receipt)
         _print_json(payload)
-        return 0 if receipt.ok else 1
+        from jevops.outer import exit_ok
+
+        return exit_ok(receipt.ok)
 
     parser.error("choose --self-check, --plan, --probe-toolchain, or --try-name")
     return 2

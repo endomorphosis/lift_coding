@@ -40,91 +40,59 @@ import typesafe_router as lra_ts  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 WARMUP_N = lra_splice.WARMUP_N
-PROTOCOL = "LRA/v1"
 PR_ID = "PR-12"
 LRAH_ID = "LRAH-011"
-LOOP_V1_TRACK1 = "off"
-DEFAULT_MODE = "off"
-DEFAULT_GENERATOR = "leanstral"
-ALLOWED_MODES = ("off", "track1")
-OFFICIAL_TRACK2_MODE = "off"
-REQUESTED_PROVIDER = "grok"
-REQUESTED_MODEL = "grok-4.6"
+from jevops.catalogs import DEFAULT_GENERATOR
+from jevops.catalogs import DEFAULT_MODE
+from jevops.catalogs import FAIL_CLOSED_GROK_KWARGS as FAIL_CLOSED_KWARGS
+from jevops.catalogs import GROK_INPUT_USD_PER_MTOK
+from jevops.catalogs import GROK_OUTPUT_USD_PER_MTOK
+from jevops.catalogs import IS_DEFAULT_WINNING_PATH
+from jevops.catalogs import JEV_INPUT_USD_PER_MTOK
+from jevops.catalogs import JEV_OUTPUT_USD_PER_MTOK
+from jevops.catalogs import LOOP_V1_TRACK1
+from jevops.catalogs import MAX_GROK_CALLS
+from jevops.catalogs import MAX_JEV_CALLS
+from jevops.catalogs import MAX_MISTRAL_CALLS
+from jevops.catalogs import MISTRAL_INPUT_USD_PER_MTOK
+from jevops.catalogs import MISTRAL_OUTPUT_USD_PER_MTOK
+from jevops.catalogs import OFFICIAL_TRACK2_MODE
+from jevops.catalogs import PROBLEM_BUDGET_USD
+from jevops.catalogs import PROBLEM_BUDGET_USD_FLOAT
+from jevops.catalogs import PROTOCOL
+from jevops.catalogs import REQUESTED_MODEL
+from jevops.catalogs import REQUESTED_PROVIDER
+from jevops.catalogs import USD_QUANT
+
+from jevops.catalogs import ADDITIVE_NOT_REPLACEMENT
+from jevops.catalogs import ALLOWED_TRACK1_MODES as ALLOWED_MODES
+from jevops.catalogs import DEFAULT_GROK_CLI_MAX_TURNS
+from jevops.catalogs import DEFAULT_GROK_FILE_MAX_TURNS
+from jevops.catalogs import DEFAULT_TRACK1_RECEIPTS_RELATIVE
+from jevops.catalogs import GROK_FILE_WORK_ROOT
+from jevops.catalogs import TRACK1_LEDGER_SCHEMA as RECEIPT_SCHEMA
+from jevops.catalogs import TRACK_LABEL
 JEV_MODEL_ID = lra_ts.MODEL_ID
-ADDITIVE_NOT_REPLACEMENT = True
-IS_DEFAULT_WINNING_PATH = False
-PROBLEM_BUDGET_USD = Decimal("3.00")
-PROBLEM_BUDGET_USD_FLOAT = 3.0
-# TypeSafe public pricing, Sep 2026 (design_win_plan.md). Output free.
-JEV_INPUT_USD_PER_MTOK = Decimal("0.042")
-JEV_OUTPUT_USD_PER_MTOK = Decimal("0")
-# Disclosed grok-4.6 family rates used for the hard stop (xAI, 2026).
-GROK_INPUT_USD_PER_MTOK = Decimal("3.00")
-GROK_OUTPUT_USD_PER_MTOK = Decimal("15.00")
-MAX_GROK_CALLS = 2  # 1 draft + 1 Lean-feedback repair, then stop
-MAX_JEV_CALLS = 2  # at most two TypeSafe fan-outs per problem
-MAX_MISTRAL_CALLS = 2  # hosted Labs Leanstral: 1 draft + 1 repair, then stop
-# Labs preview lists hosted Leanstral 1.5 as free (Sep 2026). Still log tokens.
-MISTRAL_INPUT_USD_PER_MTOK = Decimal("0")
-MISTRAL_OUTPUT_USD_PER_MTOK = Decimal("0")
-MISTRAL_MODEL_ID = "labs-leanstral-1-5"
-USD_QUANT = Decimal("0.000001")
-FAIL_CLOSED_KWARGS: dict[str, Any] = {
-    "provider": "grok",
-    "model_name": "grok-4.6",
-    "temperature": 0.0,
-    "allow_local_fallback": False,
-    "allow_cross_provider_fallback": False,
-    "disable_model_retry": True,
-}
+from jevops.catalogs import MISTRAL_MODEL as MISTRAL_MODEL_ID
 # Isolated leader so a nested grok CLI does not attach to this TUI session.
 DEFAULT_GROK_LEADER_SOCKET = str(Path.home() / ".grok" / "leader-lra-track1.sock")
-DEFAULT_GROK_CLI_MAX_TURNS = 4
-DEFAULT_GROK_FILE_MAX_TURNS = 8
-GROK_TACTICS_FILENAME = "tactics.lean"
-GROK_FILE_STUB = "-- REPLACE_THIS_FILE\n"
-GROK_FILE_TOOLS = "write_file"
-GROK_FILE_DISALLOWED = "run_terminal_cmd,web_search,web_fetch,Agent,read_file,list_dir,grep,search_replace"
-GROK_FILE_WORK_ROOT = Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026-lra/grok-file"
 DEFAULT_MAX_NEW_TOKENS = lra_gt.DEFAULT_MAX_NEW_TOKENS
 DEFAULT_TIMEOUT_SECONDS = lra_gt.DEFAULT_TIMEOUT_SECONDS
 PUTNAM_MAX_NEW_TOKENS = lra_gt.PUTNAM_MAX_NEW_TOKENS
 PUTNAM_TIMEOUT_SECONDS = lra_gt.PUTNAM_TIMEOUT_SECONDS
-ALLOWED_RESOLVED_PROVIDERS = frozenset({"grok", "xai", "grok_cli"})
-FORBIDDEN_FALLBACK_PROVIDERS = frozenset(
-    {
-        "leanstral_local",
-        "llama_cpp",
-        "hf_inference_api",
-        "huggingface",
-        "local_hf",
-        "openai",
-        "openrouter",
-        "codex_cli",
-        "gemini_cli",
-        "claude_code",
-    }
-)
-GROK_KEY_ENV_NAMES = (
-    "XAI_API_KEY",
-    "ipfs_accelerate_py_XAI_API_KEY",
-    "IPFS_ACCELERATE_PY_XAI_API_KEY",
-    "IPFS_DATASETS_PY_XAI_API_KEY",
-)
+from jevops.catalogs import ALLOWED_GROK_PROVIDERS as ALLOWED_RESOLVED_PROVIDERS
+from jevops.catalogs import FORBIDDEN_GROK_FALLBACKS as FORBIDDEN_FALLBACK_PROVIDERS
+from jevops.catalogs import FORBIDDEN_RECEIPT_PARTS
+from jevops.catalogs import GROK_FILE_DISALLOWED
+from jevops.catalogs import GROK_FILE_STUB
+from jevops.catalogs import GROK_FILE_TOOLS
+from jevops.catalogs import GROK_KEY_ENV_NAMES
+from jevops.catalogs import GROK_TACTICS_FILENAME
+from jevops.catalogs import LOOP_V1_WARMUP_RECEIPT_MARKERS
+from jevops.catalogs import FORBIDDEN_SCORE_NAMES
+from jevops.catalogs import TRACK1_GENERATOR_ALIASES
+from jevops.catalogs import TRACK1_MODE_ALIASES
 JEV_KEY_ENV_NAMES = lra_ts.KEY_ENV_NAMES
-DEFAULT_TRACK1_RECEIPTS_RELATIVE = "papers/completion/lean_refactor_arena/submissions/track1"
-FORBIDDEN_RECEIPT_PARTS = frozenset(
-    {
-        "official_track2",
-        "official-track-2",
-        "track2",
-        "track-2",
-        "a100_80gb_x4",
-    }
-)
-LOOP_V1_WARMUP_RECEIPT_MARKERS = ("submissions", "warmup")
-RECEIPT_SCHEMA = "lra-track1-ledger/v1"
-TRACK_LABEL = "track1_closed"
 HEADER_CHARS = lra_ts.HEADER_CHARS
 NEIGHBOR_K = lra_ts.NEIGHBOR_K
 FORBIDDEN_IMPORT_NAMES = frozenset(
@@ -141,16 +109,6 @@ FORBIDDEN_CALLS = frozenset(
         "LOCK_EX",
         "urlopen",
         "Popen",
-    }
-)
-FORBIDDEN_SCORE_NAMES = frozenset(
-    {
-        "arena_score",
-        "arena_score_tokens",
-        "arena_score_elab",
-        "official_track2_score",
-        "token_savings",
-        "official_score",
     }
 )
 
@@ -242,7 +200,9 @@ def grok_cli_auth_configured(env: Optional[Mapping[str, str]] = None) -> bool:
 def grok_callable(env: Optional[Mapping[str, str]] = None) -> bool:
     """Live grok is callable via XAI_API_KEY *or* grok CLI OAuth."""
 
-    return grok_key_configured(env) or grok_cli_auth_configured(env)
+    from jevops.outer import first_truthy
+
+    return bool(first_truthy(grok_key_configured(env), grok_cli_auth_configured(env), default=False))
 
 
 def jev_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
@@ -261,40 +221,26 @@ def resolve_track1_mode(
 ) -> str:
     """Default off. Track 1 is opt-in and never official Track 2."""
 
+    from jevops.jev import resolve_opt_in_mode
     from jevops.outer import env_mapping
 
     source = env_mapping(env)
-    if official_track2_requested(flag=official_track2, env=source):
-        return OFFICIAL_TRACK2_MODE
-    if flag is not None:
-        raw = flag
-    else:
-        if _env_truthy(source.get("LRA_TRACK1")):
-            raw = "track1"
-        else:
-            generator = str(source.get("LRA_GENERATOR", DEFAULT_GENERATOR) or DEFAULT_GENERATOR)
-            generator = generator.strip().lower()
-            if generator in {
-                "grok",
-                "grok-4.6",
-                "xai",
-                "track1",
-                "mistral",
-                "mistral_labs",
-                "labs-leanstral-1-5",
-                "leanstral-1-5",
-            }:
-                raw = "track1"
-            else:
-                raw = source.get("LRA_TRACK1_MODE", DEFAULT_MODE)
-    if raw is None or str(raw).strip() == "":
-        raw = DEFAULT_MODE
-    mode = str(raw).strip().lower()
-    if mode in {"on", "1", "true", "yes", "grok"}:
-        mode = "track1"
-    if mode not in ALLOWED_MODES:
-        raise Track1LedgerError(f"unknown Track 1 mode {mode!r}; expected {ALLOWED_MODES}")
-    return mode
+    return resolve_opt_in_mode(
+        flag=flag,
+        env=source,
+        official=official_track2_requested(flag=official_track2, env=source),
+        closed=OFFICIAL_TRACK2_MODE,
+        default=DEFAULT_MODE,
+        allowed=ALLOWED_MODES,
+        truthy_env="LRA_TRACK1",
+        generator_env="LRA_GENERATOR",
+        default_generator=DEFAULT_GENERATOR,
+        generator_aliases=TRACK1_GENERATOR_ALIASES,
+        mode_env="LRA_TRACK1_MODE",
+        aliases=TRACK1_MODE_ALIASES,
+        error_cls=Track1LedgerError,
+        error_fmt="unknown Track 1 mode {mode!r}; expected {allowed}",
+    )
 
 
 def receipts_path_allowed(path: Path) -> tuple[bool, str]:
@@ -363,24 +309,23 @@ class ProblemLedger:
         self.remaining_usd = usd_float(remaining)
 
     def authorize(self, kind: str, input_tokens: int, output_tokens: int) -> tuple[bool, str, Decimal]:
-        if self.official_track2:
-            return False, "official_track2_off", Decimal("0")
-        kind_key = str(kind or "").strip().lower()
-        if kind_key == "grok" and self.grok_calls >= int(self.max_grok_calls):
-            self.hard_stopped = True
-            return False, "max_grok_calls", Decimal("0")
-        if kind_key == "mistral" and self.mistral_calls >= int(self.max_mistral_calls):
-            self.hard_stopped = True
-            return False, "max_mistral_calls", Decimal("0")
-        if kind_key == "jev" and self.jev_calls >= int(self.max_jev_calls):
-            self.hard_stopped = True
-            return False, "max_jev_calls", Decimal("0")
-        cost = usd_for(kind_key, input_tokens, output_tokens)
-        budget = _money(Decimal(str(self.budget_usd)))
-        if self._spent + cost > budget:
-            self.hard_stopped = True
-            return False, "hard_stop", cost
-        return True, "ok", cost
+        from jevops.outer import authorize_then_stop, first_int
+
+        return authorize_then_stop(
+            self,
+            kind,
+            cost_fn=lambda: usd_for(kind, input_tokens, output_tokens),
+            spent=self._spent,
+            budget=_money(Decimal(str(self.budget_usd))),
+            zero=Decimal("0"),
+            official=self.official_track2,
+            counts={"grok": self.grok_calls, "mistral": self.mistral_calls, "jev": self.jev_calls},
+            limits={
+                "grok": first_int(self.max_grok_calls),
+                "mistral": first_int(self.max_mistral_calls),
+                "jev": first_int(self.max_jev_calls),
+            },
+        )
 
     def record(
         self,
@@ -392,80 +337,78 @@ class ProblemLedger:
         model: str = "",
     ) -> UsageLine:
         allowed, reason, cost = self.authorize(kind, input_tokens, output_tokens)
-        kind_key = str(kind or "").strip().lower()
-        if kind_key == "grok":
-            default_model = REQUESTED_MODEL
-            call_index = self.grok_calls + 1
-        elif kind_key == "mistral":
-            default_model = MISTRAL_MODEL_ID
-            call_index = self.mistral_calls + 1
-        elif kind_key == "jev":
-            default_model = JEV_MODEL_ID
-            call_index = self.jev_calls + 1
-        else:
-            raise Track1LedgerError(f"unknown spend kind {kind_key!r}")
-        if not allowed:
-            line = UsageLine(
-                kind=kind_key,
-                input_tokens=int(input_tokens),
-                output_tokens=int(output_tokens),
-                usd=usd_float(cost),
-                call_index=call_index,
-                fixture=fixture,
-                model=model or default_model,
-                skipped=True,
-                reason=reason,
+        from jevops.outer import spend_kind
+
+        kind_key, default_model, call_index = spend_kind(
+            kind,
+            models={"grok": REQUESTED_MODEL, "mistral": MISTRAL_MODEL_ID, "jev": JEV_MODEL_ID},
+            counts={"grok": self.grok_calls, "mistral": self.mistral_calls, "jev": self.jev_calls},
+            error_cls=Track1LedgerError,
+            unknown_fmt="unknown spend kind {kind!r}",
+        )
+        from jevops.outer import bump_named, first_truthy, record_usage_line
+
+        def _bump() -> None:
+            self._spent = _money(self._spent + cost)
+            bump_named(
+                self,
+                kind_key,
+                {"grok": "grok_calls", "mistral": "mistral_calls", "jev": "jev_calls"},
+                error_cls=Track1LedgerError,
+                fmt="unknown spend kind {kind!r}",
             )
-            self.lines.append(line)
-            self.skipped = True
-            self.reason = reason
-            return line
-        self._spent = _money(self._spent + cost)
-        if kind_key == "grok":
-            self.grok_calls += 1
-        elif kind_key == "mistral":
-            self.mistral_calls += 1
-        elif kind_key == "jev":
-            self.jev_calls += 1
-        else:
-            raise Track1LedgerError(f"unknown spend kind {kind_key!r}")
-        self._refresh()
-        line = UsageLine(
+
+        return record_usage_line(
+            self,
+            UsageLine,
+            allowed=allowed,
+            reason=reason,
+            cost=cost,
+            usd_fn=usd_float,
+            bump_fn=_bump,
+            refresh_fn=self._refresh,
             kind=kind_key,
-            input_tokens=int(input_tokens),
-            output_tokens=int(output_tokens),
-            usd=usd_float(cost),
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
             call_index=call_index,
             fixture=fixture,
-            model=model or default_model,
-            skipped=False,
-            reason="recorded",
+            model=first_truthy(model, default_model),
         )
-        self.lines.append(line)
-        return line
 
     def as_dict(self) -> dict[str, Any]:
-        return {
-            "name": self.name,
-            "budget_usd": self.budget_usd,
-            "spent_usd": self.spent_usd,
-            "remaining_usd": self.remaining_usd,
-            "hard_stopped": self.hard_stopped,
-            "skipped": self.skipped,
-            "reason": self.reason,
-            "grok_calls": self.grok_calls,
-            "jev_calls": self.jev_calls,
-            "mistral_calls": self.mistral_calls,
-            "max_grok_calls": int(self.max_grok_calls),
-            "max_jev_calls": int(self.max_jev_calls),
-            "max_mistral_calls": int(self.max_mistral_calls),
-            "official_track2": self.official_track2,
-            "contaminates_track2": self.contaminates_track2,
-            "track": self.track,
-            "arena_score": self.arena_score,
-            "includes_jev_and_grok": True,
-            "lines": [line.as_dict() for line in self.lines],
-        }
+        from jevops.outer import attrs_dict
+
+        return attrs_dict(
+            self,
+            (
+                "name",
+                "budget_usd",
+                "spent_usd",
+                "remaining_usd",
+                "hard_stopped",
+                "skipped",
+                "reason",
+                "grok_calls",
+                "jev_calls",
+                "mistral_calls",
+                "max_grok_calls",
+                "max_jev_calls",
+                "max_mistral_calls",
+                "official_track2",
+                "contaminates_track2",
+                "track",
+                "arena_score",
+            ),
+            transform={
+                "max_grok_calls": int,
+                "max_jev_calls": int,
+                "max_mistral_calls": int,
+            },
+            extra={
+                "includes_jev_and_grok": True,
+                "lines": [line.as_dict() for line in self.lines],
+            },
+        )
 
 
 from jevops.lean import ProviderIdentity
@@ -509,7 +452,9 @@ class FixtureGrok:
         self.calls: list[dict[str, Any]] = []
 
     def __call__(self, prompt: str, **kwargs: Any) -> str:
-        self.calls.append({"prompt": prompt, "kwargs": dict(kwargs)})
+        from jevops.outer import overlay_map
+
+        self.calls.append({"prompt": prompt, "kwargs": overlay_map(kwargs)})
         return self.text
 
 
@@ -527,11 +472,9 @@ def _ensure_accel_path() -> None:
 
 
 def _load_router():
-    _ensure_accel_path()
-    from ipfs_accelerate_py.llm_router import generate_text as router_generate_text
-    from ipfs_accelerate_py.llm_router import get_last_generation_trace
+    from jevops.llm_router import load_accelerate_router
 
-    return router_generate_text, get_last_generation_trace
+    return load_accelerate_router(setup=(_ensure_accel_path,))
 
 
 def _live_grok_kwargs() -> dict[str, Any]:
@@ -543,33 +486,29 @@ def _live_grok_kwargs() -> dict[str, Any]:
     budget (not extra Track 1 generate_grok calls).
     """
 
-    from jevops.outer import env_int, env_str, which_bin
+    from jevops.outer import env_int, env_str, overlay_map, set_if, which_bin
 
-    kwargs = dict(FAIL_CLOSED_KWARGS)
-    kwargs["grok_max_turns"] = env_int(
-        "LRA_GROK_CLI_MAX_TURNS", DEFAULT_GROK_CLI_MAX_TURNS, minimum=1
-    )
     grok_bin = which_bin("grok")
-    if grok_bin:
-        socket = env_str("LRA_GROK_LEADER_SOCKET", DEFAULT_GROK_LEADER_SOCKET)
-        kwargs["grok_cli_cmd"] = [grok_bin, "--leader-socket", socket]
-    return kwargs
+    kwargs = overlay_map(
+        FAIL_CLOSED_KWARGS,
+        grok_max_turns=env_int(
+            "LRA_GROK_CLI_MAX_TURNS", DEFAULT_GROK_CLI_MAX_TURNS, minimum=1
+        ),
+    )
+    return set_if(
+        kwargs,
+        grok_bin,
+        "grok_cli_cmd",
+        [grok_bin, "--leader-socket", env_str("LRA_GROK_LEADER_SOCKET", DEFAULT_GROK_LEADER_SOCKET)],
+    )
 
 
 def grok_file_prompt(body: str, *, dest_name: str = GROK_TACTICS_FILENAME) -> str:
     """Instruct grok CLI to write tactics to a file. Chat is not the deliverable."""
 
-    return (
-        f"Your deliverable is the file {dest_name} in the working directory.\n"
-        "Use the write_file tool once to OVERWRITE that file with Lean 4 tactics only.\n"
-        "Do not read other files. Do not search the filesystem. Everything you need is in this prompt.\n"
-        "Do not put the tactics in chat. Chat may be a one-line ack such as wrote tactics.lean.\n"
-        "The file must contain ONLY the tactic block after := by.\n"
-        "No English, no markdown fences, no theorem/lemma/import/open/sorry/admit.\n"
-        "Keep induction and every case arm. Smallest lake-valid proof.\n"
-        f"The file currently contains a stub `{GROK_FILE_STUB.strip()}`. Replace it completely.\n\n"
-        + str(body or "")
-    )
+    from jevops.lean import grok_file_prompt as _fn
+
+    return _fn(body, dest_name=dest_name, stub=GROK_FILE_STUB)
 
 
 def prepare_grok_workspace(*, dest_name: str = GROK_TACTICS_FILENAME) -> Path:
@@ -614,48 +553,26 @@ def build_grok_file_command(
     *,
     dest_name: str = GROK_TACTICS_FILENAME,
 ) -> list[str]:
-    from jevops.outer import env_int, env_str, which_bin
+    from jevops.outer import env_int, env_str, raise_if, which_bin
 
     grok_bin = which_bin("grok")
-    if not grok_bin:
-        raise Track1LedgerError("grok CLI not found on PATH")
+
+    raise_if(not grok_bin, Track1LedgerError, "grok CLI not found on PATH")
     socket = env_str("LRA_GROK_LEADER_SOCKET", DEFAULT_GROK_LEADER_SOCKET)
     max_turns = env_int("LRA_GROK_CLI_MAX_TURNS", DEFAULT_GROK_FILE_MAX_TURNS, minimum=2)
-    return [
-        grok_bin,
-        "--leader-socket",
-        socket,
-        "--cwd",
-        str(workspace),
-        "--model",
-        REQUESTED_MODEL,
-        "--output-format",
-        "json",
-        "--no-plan",
-        "--no-subagents",
-        "--disable-web-search",
-        "--no-memory",
-        "--verbatim",
-        "--always-approve",
-        "--max-turns",
-        str(max_turns),
-        "--permission-mode",
-        "acceptEdits",
-        "--reasoning-effort",
-        "low",
-        "--tools",
-        GROK_FILE_TOOLS,
-        "--disallowed-tools",
-        GROK_FILE_DISALLOWED,
-        "--allow",
-        f"Write({dest_name})",
-        "--allow",
-        f"Edit({dest_name})",
-        "--deny",
-        "Bash(*)",
-        "--prompt-file",
-        str(prompt_path),
-    ]
+    from jevops.lean import grok_file_argv
+
+    return grok_file_argv(
+        grok_bin=grok_bin,
+        socket=socket,
+        workspace=workspace,
+        model=REQUESTED_MODEL,
+        max_turns=max_turns,
+        tools=GROK_FILE_TOOLS,
+        disallowed=GROK_FILE_DISALLOWED,
+        dest_name=dest_name,
+        prompt_path=prompt_path,
+    )
 
 
 def _grok_stdout_payload(stdout: str) -> dict[str, Any]:
@@ -709,135 +626,143 @@ def generate_grok_file(
     """Run grok CLI so it writes ``tactics.lean``. Lake reads that file, not chat."""
 
     estimated_in = estimate_tokens(prompt)
-    estimated_out = int(max_new_tokens)
-    allowed, reason, _cost = ledger.authorize("grok", estimated_in, estimated_out)
-    if not allowed:
-        line = ledger.record(
-            "grok",
-            input_tokens=estimated_in,
-            output_tokens=estimated_out,
-            fixture=fixture,
-            model=REQUESTED_MODEL,
-        )
-        raise Track1LedgerError(f"grok call refused: {reason}") from None
+    from jevops.outer import first_int
 
-    workspace = Path(workspace)
-    workspace.mkdir(parents=True, exist_ok=True)
-    dest = workspace / dest_name
-    if reset_stub or not dest.exists():
-        dest.write_text(GROK_FILE_STUB, encoding="utf-8")
+    estimated_out = first_int(max_new_tokens)
+    from jevops.outer import require_authorized
 
-    chat = ""
-    if generate is not None:
-        chat = generate(prompt, **FAIL_CLOSED_KWARGS)
-        dest.write_text(str(chat), encoding="utf-8")
-        identity = _identity_from_trace(fixture_trace(), generated=True)
-    else:
-        from jevops.outer import env_copy, run_process, write_json, write_text
+    require_authorized(
+        ledger,
+        "grok",
+        estimated_in,
+        estimated_out,
+        fixture=fixture,
+        model=REQUESTED_MODEL,
+        error_cls=Track1LedgerError,
+        fmt="grok call refused: {reason}",
+    )
 
-        prompt_path = workspace / "PROMPT.txt"
-        write_text(prompt_path, str(prompt))
+    from jevops.lean import run_workspace_generate
+    from jevops.outer import env_copy, run_process, write_json, write_text
+
+    def _run_cli() -> tuple[str, ProviderIdentity]:
+        from jevops.outer import text_or, write_cli_run_artifacts
+
+        prompt_path = Path(workspace) / "PROMPT.txt"
+        write_text(prompt_path, text_or(prompt))
         cmd = build_grok_file_command(workspace, prompt_path, dest_name=dest_name)
-        write_json(workspace / "grok.argv.json", cmd)
-        try:
-            ran = run_process(
+        from jevops.outer import reraise_as
+
+        ran = reraise_as(
+            lambda: run_process(
                 cmd,
                 cwd=workspace,
                 env=env_copy(),
                 timeout=float(timeout),
-            )
-        except FileNotFoundError as exc:
-            raise Track1LedgerError("grok CLI not found on PATH") from exc
-        chat = str(ran.get("stdout") or "")
-        stderr = str(ran.get("stderr") or "")
-        code = "timeout" if ran.get("timeout") else str(ran.get("exit_code"))
-        write_text(workspace / "grok.stdout", chat)
-        write_text(workspace / "grok.stderr", stderr)
-        write_text(workspace / "grok.returncode", code)
-        if not ran.get("timeout"):
-            payload = _grok_stdout_payload(chat)
-            if payload.get("text"):
-                chat = str(payload.get("text") or chat)
-        identity = ProviderIdentity(
+            ),
+            (FileNotFoundError,),
+            Track1LedgerError,
+            missing="grok CLI not found on PATH",
+        )
+        chat_out, stderr, code = write_cli_run_artifacts(
+            workspace,
+            prompt=text_or(prompt),
+            cmd=cmd,
+            ran=ran,
+            write_text_fn=write_text,
+            write_json_fn=write_json,
+        )
+        from jevops.outer import coalesce_chat_text
+
+        chat_out = coalesce_chat_text(chat_out, ran, _grok_stdout_payload)
+        from jevops.lean import grok_cli_identity
+
+        return chat_out, grok_cli_identity(
+            ProviderIdentity,
             requested_provider=REQUESTED_PROVIDER,
             requested_model=REQUESTED_MODEL,
-            resolved_provider="grok_cli",
-            resolved_model=REQUESTED_MODEL,
-            fallback_used=False,
-            arena_score=None,
         )
 
-    try:
-        tactics = read_grok_tactics_file(workspace, dest_name=dest_name)
-    except Track1LedgerError as exc:
-        line = ledger.record(
-            "grok",
-            input_tokens=estimated_in,
-            output_tokens=estimate_tokens(chat) if chat else 1,
-            fixture=fixture,
-            model=identity.resolved_model or REQUESTED_MODEL,
-        )
-        stderr_head = ""
-        err_path = workspace / "grok.stderr"
-        if err_path.is_file():
-            from jevops.outer import read_text
+    chat = ""
+    identity: Optional[ProviderIdentity] = None
+    from jevops.outer import call_caught, detail_with_file, either, read_text
 
-            stderr_head = read_text(err_path, max_chars=400)
-        detail = str(exc)
-        if stderr_head:
-            detail = f"{detail}; grok.stderr={stderr_head!r}"
-        raise Track1LedgerError(detail) from exc
-
-    usage_out = estimate_tokens(tactics)
-    line = ledger.record(
-        "grok",
-        input_tokens=estimated_in,
-        output_tokens=usage_out,
-        fixture=fixture,
-        model=identity.resolved_model or REQUESTED_MODEL,
+    generate_fn, identity_from_generate, run_fn = either(
+        generate is not None,
+        lambda: (
+            (lambda **_kw: generate(prompt, **FAIL_CLOSED_KWARGS)),
+            (lambda: _identity_from_trace(fixture_trace(), generated=True)),
+            None,
+        ),
+        lambda: (None, None, _run_cli),
     )
-    if line.skipped:
-        raise Track1LedgerError(f"grok spend refused after call: {line.reason}")
-    from jevops.outer import head_chars
+    ok, packed, exc = call_caught(
+        lambda: run_workspace_generate(
+            workspace=workspace,
+            dest_name=dest_name,
+            stub=GROK_FILE_STUB,
+            reset_stub=reset_stub,
+            generate_fn=generate_fn,
+            identity_from_generate=identity_from_generate,
+            run_fn=run_fn,
+            read_fn=read_grok_tactics_file,
+            write_text_fn=write_text,
+        ),
+        Track1LedgerError,
+    )
+    if not ok:
+        from jevops.outer import attr_or, fail_spend, first_truthy
 
-    return GrokFileResult(
+        fail_spend(
+            ledger,
+            "grok",
+            estimated_in,
+            either(chat, lambda: estimate_tokens(chat), lambda: 1),
+            fixture=fixture,
+            model=first_truthy(attr_or(identity, "resolved_model"), REQUESTED_MODEL),
+            error_cls=Track1LedgerError,
+            msg=detail_with_file(exc, Path(workspace) / "grok.stderr", read_fn=read_text),
+            cause=exc,
+        )
+    tactics, identity, chat, dest = packed
+
+    from jevops.lean import pack_file_result
+    from jevops.outer import first_truthy, head_chars, record_required, require_recorded
+
+    line = record_required(
+        ledger,
+        "grok",
+        estimated_in,
+        estimate_tokens(tactics),
+        fixture=fixture,
+        model=first_truthy(identity.resolved_model, REQUESTED_MODEL),
+        require_fn=require_recorded,
+        error_cls=Track1LedgerError,
+        fmt="grok spend refused after call: {reason}",
+    )
+    return pack_file_result(
+        GrokFileResult,
         tactics=tactics,
         identity=identity,
         line=line,
-        chat_head=head_chars(chat or "", 240),
-        tactics_path=str(dest),
-        workspace=str(workspace),
-        used_file=True,
-        chat_ignored=True,
-        called_docker0=False,
-        arena_score=None,
+        chat=chat,
+        dest=dest,
+        workspace=workspace,
+        head_fn=head_chars,
     )
 
 
 def _identity_from_trace(trace: Mapping[str, Any], *, generated: bool) -> ProviderIdentity:
-    from jevops.outer import first_nonempty
+    from jevops.lean import identity_from_trace as _fn
 
-    resolved_provider = first_nonempty(
+    return _fn(
         trace,
-        "effective_provider_name",
-        "provider_name",
-        "provider",
-        default=REQUESTED_PROVIDER if generated else "",
-    )
-    resolved_model = first_nonempty(
-        trace, "effective_model_name", "model_name", default=REQUESTED_MODEL if generated else ""
-    )
-    fallback_used = bool(
-        resolved_provider
-        and resolved_provider.lower() not in ALLOWED_RESOLVED_PROVIDERS
-    ) or bool(resolved_provider.lower() in FORBIDDEN_FALLBACK_PROVIDERS)
-    return ProviderIdentity(
+        generated=generated,
         requested_provider=REQUESTED_PROVIDER,
         requested_model=REQUESTED_MODEL,
-        resolved_provider=resolved_provider,
-        resolved_model=resolved_model,
-        fallback_used=fallback_used,
-        arena_score=None,
+        allowed=ALLOWED_RESOLVED_PROVIDERS,
+        forbidden=FORBIDDEN_FALLBACK_PROVIDERS,
+        identity_cls=ProviderIdentity,
     )
 
 
@@ -848,27 +773,28 @@ def token_limits_for_source(source: str) -> tuple[int, int]:
 def write_ledger_receipt(ledger: ProblemLedger, path: Path) -> Path:
     """Write a Track 1 ledger receipt. Refuses Track 2 / warmup trees."""
 
-    if ledger.official_track2 or ledger.contaminates_track2:
-        raise Track1LedgerError("refusing to write a Track 1 ledger into official Track 2 state")
-    allowed, reason = receipts_path_allowed(path)
-    if not allowed:
-        raise Track1LedgerError(f"refusing receipt path {path}: {reason}")
-    from jevops.outer import write_json
+    from jevops.outer import first_truthy, raise_if
 
-    payload = {
-        "schema": RECEIPT_SCHEMA,
-        "protocol": PROTOCOL,
-        "pr": PR_ID,
-        "lrah": LRAH_ID,
-        "track": TRACK_LABEL,
-        "official_track2": False,
-        "contaminates_track2": False,
-        "is_default_winning_path": False,
-        "arena_score": None,
-        "ledger": ledger.as_dict(),
-        "api_key_present_in_record": False,
-    }
-    write_json(path, payload)
+    raise_if(
+        first_truthy(ledger.official_track2, ledger.contaminates_track2),
+        Track1LedgerError,
+        "refusing to write a Track 1 ledger into official Track 2 state",
+    )
+    allowed, reason = receipts_path_allowed(path)
+    raise_if(not allowed, Track1LedgerError, f"refusing receipt path {path}: {reason}")
+    from jevops.outer import pack_ledger_receipt, write_json
+
+    write_json(
+        path,
+        pack_ledger_receipt(
+            ledger,
+            schema=RECEIPT_SCHEMA,
+            protocol=PROTOCOL,
+            pr=PR_ID,
+            lrah=LRAH_ID,
+            track=TRACK_LABEL,
+        ),
+    )
     return path
 
 
@@ -881,22 +807,18 @@ def _skip_result(
     used_fixture: bool = False,
     ledger: Optional[ProblemLedger] = None,
 ) -> Track1Result:
-    payload = ledger.as_dict() if ledger is not None else None
-    return Track1Result(
+    from jevops.outer import result_from_ledger
+
+    return result_from_ledger(
+        Track1Result,
+        ledger,
         skipped=True,
         reason=reason,
         mode=mode,
-        official_track2=official_track2,
         name=name,
         used_fixture=used_fixture,
-        grok_calls=ledger.grok_calls if ledger is not None else 0,
-        jev_calls=ledger.jev_calls if ledger is not None else 0,
-        spent_usd=ledger.spent_usd if ledger is not None else 0.0,
-        remaining_usd=ledger.remaining_usd if ledger is not None else PROBLEM_BUDGET_USD_FLOAT,
-        hard_stopped=bool(ledger.hard_stopped) if ledger is not None else False,
-        ledger=payload,
-        contaminates_track2=False,
-        is_default_winning_path=False,
+        official_track2=official_track2,
+        remaining_default=PROBLEM_BUDGET_USD_FLOAT,
     )
 
 
@@ -913,72 +835,99 @@ def generate_grok(
 ) -> tuple[str, ProviderIdentity, UsageLine]:
     """Call grok/grok-4.6 through llm_router.generate_text. No Leanstral fallback."""
 
-    if source and (max_new_tokens is None or timeout is None):
-        source_tokens, source_timeout = token_limits_for_source(source)
-        max_new_tokens = source_tokens
-        timeout = source_timeout
-    estimated_in = estimate_tokens(prompt)
-    estimated_out = int(max_new_tokens)
-    allowed, reason, _cost = ledger.authorize("grok", estimated_in, estimated_out)
-    if not allowed:
-        line = ledger.record(
-            "grok",
-            input_tokens=estimated_in,
-            output_tokens=estimated_out,
-            fixture=fixture,
-            model=REQUESTED_MODEL,
-        )
-        raise Track1LedgerError(f"grok call refused: {reason}") from None
+    from jevops.lean import coalesce_limits, refuse_if_fallback, require_text
+    from jevops.outer import ledger_generate
 
-    router_generate = generate
-    router_trace = get_trace
-    if router_generate is None:
-        if fixture:
-            raise Track1LedgerError("fixture generate callable required")
-        loaded_generate, loaded_trace = _load_router()
-        router_generate = loaded_generate
-        if router_trace is None:
-            router_trace = loaded_trace
-
-    call_kwargs = dict(FAIL_CLOSED_KWARGS) if generate is not None else _live_grok_kwargs()
-    try:
-        text = router_generate(
-            prompt,
-            max_new_tokens=int(max_new_tokens),
-            timeout=float(timeout),
-            **call_kwargs,
-        )
-    except Track1LedgerError:
-        raise
-    except Exception as exc:
-        raise Track1LedgerError(f"grok generate_text failed: {exc}") from exc
-    trace = dict(router_trace() or {}) if router_trace is not None else {}
-    identity = _identity_from_trace(trace, generated=True)
-    if identity.fallback_used:
-        raise Track1LedgerError(
-            "resolved provider/model is a forbidden Leanstral/HF fallback: "
-            f"{identity.resolved_provider}/{identity.resolved_model}"
-        )
-    if not isinstance(text, str):
-        raise Track1LedgerError("grok returned a non-text payload")
-    usage_in = trace.get("input_tokens") or trace.get("prompt_tokens") or estimated_in
-    usage_out = trace.get("output_tokens") or trace.get("completion_tokens") or estimate_tokens(text)
-    line = ledger.record(
-        "grok",
-        input_tokens=int(usage_in),
-        output_tokens=int(usage_out),
-        fixture=fixture,
-        model=identity.resolved_model or REQUESTED_MODEL,
+    max_new_tokens, timeout = coalesce_limits(
+        source=source,
+        max_new=max_new_tokens,
+        timeout=timeout,
+        lookup_fn=token_limits_for_source,
+        default_new=DEFAULT_MAX_NEW_TOKENS,
+        default_timeout=DEFAULT_TIMEOUT_SECONDS,
     )
-    if line.skipped:
-        raise Track1LedgerError(f"grok spend refused after call: {line.reason}")
-    return text, identity, line
+    estimated_in = estimate_tokens(prompt)
+    from jevops.outer import first_int
+
+    estimated_out = first_int(max_new_tokens)
+
+    def _identity(*, model: str, fixture: bool, extra: Optional[Mapping[str, Any]] = None, text: str = "") -> dict[str, Any]:
+        from jevops.outer import overlay_map
+
+        ident = _identity_from_trace(overlay_map(extra), generated=True)
+        refuse_if_fallback(
+            ident,
+            error_cls=Track1LedgerError,
+            fmt="resolved provider/model is a forbidden Leanstral/HF fallback: {provider}/{model}",
+        )
+        require_text(text, error_cls=Track1LedgerError, msg="grok returned a non-text payload")
+        return asdict(ident)
+
+    def _live() -> tuple[str, Mapping[str, Any], tuple[int, int]]:
+        from jevops.outer import call_or, either, fill_none, first_int, overlay_map, raise_if, reraise_as, text_or, usage_or_estimate
+
+        raise_if(
+            generate is None and fixture,
+            Track1LedgerError,
+            "fixture generate callable required",
+        )
+        router_generate, router_trace = fill_none(generate, get_trace, _load_router)
+        call_kwargs = either(
+            generate is not None,
+            lambda: overlay_map(FAIL_CLOSED_KWARGS),
+            _live_grok_kwargs,
+        )
+        text = reraise_as(
+            lambda: router_generate(
+                prompt,
+                max_new_tokens=first_int(max_new_tokens),
+                timeout=float(timeout),
+                **call_kwargs,
+            ),
+            (Exception,),
+            Track1LedgerError,
+            skip_types=(Track1LedgerError,),
+            fmt="grok generate_text failed: {exc}",
+        )
+        trace = overlay_map(call_or(router_trace, {}))
+        inn, out = usage_or_estimate(
+            trace, fallback_in=estimated_in, estimate_fn=estimate_tokens, text=text
+        )
+        return text_or(text), trace, (inn, out)
+
+    text, identity_dict, line = ledger_generate(
+        ledger,
+        "grok",
+        estimated_in=estimated_in,
+        estimated_out=estimated_out,
+        model=REQUESTED_MODEL,
+        fixture=False,
+        fixture_text="",
+        live_fn=_live,
+        identity_fn=_identity,
+        error_cls=Track1LedgerError,
+        estimate_fn=estimate_tokens,
+        refuse_fmt="grok call refused: {reason}",
+        after_fmt="grok spend refused after call: {reason}",
+    )
+    from jevops.lean import identity_from_mapping
+
+    return (
+        text,
+        identity_from_mapping(
+            ProviderIdentity,
+            identity_dict,
+            requested_provider=REQUESTED_PROVIDER,
+            requested_model=REQUESTED_MODEL,
+        ),
+        line,
+    )
 
 
 def _charge_jev(ledger: ProblemLedger, route: lra_ts.RouteResult, *, fixture: bool) -> UsageLine:
-    usage = dict(route.usage or {})
-    input_tokens = int(usage.get("input_tokens") or usage.get("prompt_tokens") or 0)
-    output_tokens = int(usage.get("output_tokens") or usage.get("completion_tokens") or 0)
+    from jevops.outer import first_truthy, overlay_map, usage_tokens
+
+    input_tokens, output_tokens = usage_tokens(overlay_map(route.usage), fallback_in=0)
     if fixture and input_tokens == 0 and output_tokens == 0:
         input_tokens = 0
         output_tokens = 0
@@ -986,8 +935,8 @@ def _charge_jev(ledger: ProblemLedger, route: lra_ts.RouteResult, *, fixture: bo
         "jev",
         input_tokens=input_tokens,
         output_tokens=output_tokens,
-        fixture=fixture or bool(route.used_fixture),
-        model=route.model or JEV_MODEL_ID,
+        fixture=bool(first_truthy(fixture, route.used_fixture, default=False)),
+        model=first_truthy(route.model, JEV_MODEL_ID),
     )
 
 
@@ -1005,216 +954,211 @@ def run_named(
     get_trace: Optional[Callable[[], Mapping[str, Any]]] = None,
     receipts_dir: Optional[Path] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import env_copy
+    from jevops.outer import env_copy, overlay_map, without_keys
 
     source_env = env_copy(base=env)
     resolved = resolve_track1_mode(flag=mode, env=source_env, official_track2=official_track2)
     track2 = official_track2_requested(flag=official_track2, env=source_env)
     record, records, digest = _load_named_record(name, path)
     ledger = ProblemLedger(name=name, official_track2=track2)
-    if track2 or resolved != "track1":
-        reason = "official_track2_off" if track2 else "not_default_winning_path"
-        result = _skip_result(
-            reason=reason,
-            mode="off" if track2 else resolved,
-            official_track2=track2,
-            name=name,
-            used_fixture=fixture,
-            ledger=ledger,
-        )
-        payload = result.as_dict()
-        payload["ok"] = True
-        payload["warmup_jsonl_sha256"] = digest
-        payload["source"] = record.get("source")
-        payload["default_mode"] = DEFAULT_MODE
-        payload["is_default_winning_path"] = False
-        payload["official_track2_stays_off"] = True
-        payload["contaminates_track2"] = False
-        return payload
-
-    using_fixture = fixture or generate is not None
-    if not using_fixture and not keys_configured(source_env):
-        result = _skip_result(
-            reason="no_key",
-            mode=resolved,
-            official_track2=False,
-            name=name,
-            used_fixture=False,
-            ledger=ledger,
-        )
-        payload = result.as_dict()
-        payload["ok"] = True
-        payload["warmup_jsonl_sha256"] = digest
-        payload["source"] = record.get("source")
-        payload["grok_key_configured"] = grok_key_configured(source_env)
-        payload["jev_key_configured"] = jev_key_configured(source_env)
-        payload["keys_configured"] = False
-        payload["is_default_winning_path"] = False
-        payload["contaminates_track2"] = False
-        return payload
-
-    neighbors = _neighbors_for(record, records)
-    state = lra_ts.problem_state(record, neighbors=neighbors)
-    factory = None
-    if using_fixture:
-        factory = lambda **kwargs: lra_ts.FixtureClient(answers=lra_ts.default_fixture_answers(), **kwargs)
-    router = lra_ts.TypeSafeLraRouter(
-        mode="inloop",
-        official_track2=False,
-        env={"LRA_TYPESAFE": "inloop", **{k: v for k, v in source_env.items() if k not in {"LRA_OFFICIAL_TRACK2", "LRA_TRACK"}}},
-        client_factory=factory,
-        require_key=not using_fixture,
+    from jevops.outer import (
+        append_repair,
+        begin_named_route,
+        bind_finish,
+        bind_named_skip,
+        call_caught,
+        call_then,
+        charge_unless_skipped,
+        closed_skip_extra,
+        either,
+        elapsed_ms,
+        fill_none,
+        first_truthy,
+        fixture_factory,
+        get_str,
+        names_of,
+        or_str,
+        replace_if,
+        run_named_route,
+        text_or,
     )
-    from jevops.outer import elapsed_ms
 
+    using_fixture = bool(first_truthy(fixture, generate is not None, default=False))
+    skip = bind_named_skip(_skip_result, digest=digest, name=name, ledger=ledger)
     started = time.perf_counter()
-    jev_result = router.route(state, neighbor_names=[item["name"] for item in neighbors])
-    if jev_result.skipped and not using_fixture:
-        result = _skip_result(
-            reason=jev_result.reason or "jev_skipped",
-            mode=resolved,
-            official_track2=False,
-            name=name,
-            used_fixture=using_fixture,
-            ledger=ledger,
-        )
-        payload = result.as_dict()
-        payload["ok"] = True
-        payload["warmup_jsonl_sha256"] = digest
-        payload["jev_route"] = jev_result.as_dict()
-        payload["contaminates_track2"] = False
-        return payload
-    if not jev_result.skipped:
-        jev_line = _charge_jev(ledger, jev_result, fixture=using_fixture)
-        if jev_line.skipped:
-            result = _skip_result(
-                reason=jev_line.reason,
-                mode=resolved,
-                official_track2=False,
-                name=name,
-                used_fixture=using_fixture,
-                ledger=ledger,
-            )
-            payload = result.as_dict()
-            payload["ok"] = True
-            payload["warmup_jsonl_sha256"] = digest
-            payload["jev_route"] = jev_result.as_dict()
-            payload["contaminates_track2"] = False
-            return payload
-
     prompt = lra_gt.render_prompt(record)
-    grok_factory = generate
-    grok_trace = get_trace
-    if using_fixture and grok_factory is None:
-        grok_factory = FixtureGrok()
-        grok_trace = fixture_trace
-    max_new, timeout = token_limits_for_source(str(record.get("source") or ""))
-    try:
-        text, identity, _line = generate_grok(
-            prompt,
-            ledger,
-            max_new_tokens=max_new,
-            timeout=timeout,
-            source=str(record.get("source") or ""),
-            generate=grok_factory,
-            get_trace=grok_trace,
-            fixture=using_fixture,
-        )
-        if repair:
-            repair_prompt = (
-                prompt
-                + "\n\nPrevious candidate failed lake compile:\n"
-                + str(lean_feedback)
-                + "\nReturn only a repaired tactic block after := by.\n"
-            )
-            text, identity, _line = generate_grok(
-                repair_prompt,
-                ledger,
-                max_new_tokens=max_new,
-                timeout=timeout,
-                source=str(record.get("source") or ""),
-                generate=grok_factory,
-                get_trace=grok_trace,
-                fixture=using_fixture,
-            )
-    except Track1LedgerError as exc:
-        wall_ms = elapsed_ms(started)
-        result = Track1Result(
-            skipped=True,
-            reason=ledger.reason or str(exc),
-            mode=resolved,
-            official_track2=False,
-            name=name,
-            called_grok=ledger.grok_calls > 0,
-            called_jev=ledger.jev_calls > 0,
-            used_fixture=using_fixture,
-            grok_calls=ledger.grok_calls,
-            jev_calls=ledger.jev_calls,
-            spent_usd=ledger.spent_usd,
-            remaining_usd=ledger.remaining_usd,
-            hard_stopped=ledger.hard_stopped,
-            jev_route=jev_result.as_dict(),
-            ledger=ledger.as_dict(),
-            wall_ms=wall_ms,
-            contaminates_track2=False,
-            is_default_winning_path=False,
-        )
-        payload = result.as_dict()
-        payload["ok"] = True
-        payload["error"] = str(exc)
-        payload["warmup_jsonl_sha256"] = digest
-        payload["source"] = record.get("source")
-        return payload
-
-    wall_ms = elapsed_ms(started)
-    if receipts_dir is not None:
-        write_ledger_receipt(ledger, Path(receipts_dir) / name / "track1_ledger.json")
-    result = Track1Result(
-        skipped=False,
-        reason="generated",
-        mode=resolved,
-        official_track2=False,
-        name=name,
-        called_grok=True,
-        called_jev=not jev_result.skipped,
-        used_fixture=using_fixture,
-        grok_calls=ledger.grok_calls,
-        jev_calls=ledger.jev_calls,
-        spent_usd=ledger.spent_usd,
-        remaining_usd=ledger.remaining_usd,
-        hard_stopped=ledger.hard_stopped,
-        text=text,
-        identity=asdict(identity),
-        jev_route=jev_result.as_dict(),
-        ledger=ledger.as_dict(),
-        wall_ms=wall_ms,
-        contaminates_track2=False,
-        is_default_winning_path=False,
+    grok_factory, grok_trace = either(
+        using_fixture,
+        lambda: fill_none(generate, get_trace, lambda: (FixtureGrok(), fixture_trace)),
+        lambda: (generate, get_trace),
     )
-    payload = result.as_dict()
-    payload["ok"] = True
-    payload["warmup_jsonl_sha256"] = digest
-    payload["source"] = record.get("source")
-    payload["n_neighbors"] = len(neighbors)
-    payload["default_mode"] = DEFAULT_MODE
-    payload["requested_provider"] = REQUESTED_PROVIDER
-    payload["requested_model"] = REQUESTED_MODEL
-    payload["budget_usd"] = PROBLEM_BUDGET_USD_FLOAT
-    payload["max_grok_calls"] = MAX_GROK_CALLS
-    payload["official_track2_stays_off"] = True
-    payload["keys_configured"] = keys_configured(source_env)
-    return payload
+    max_new, timeout = token_limits_for_source(get_str(record, "source"))
+    finish = bind_finish(
+        Track1Result,
+        ledger,
+        digest=digest,
+        mode=resolved,
+        name=name,
+        used_fixture=using_fixture,
+        remaining_default=PROBLEM_BUDGET_USD_FLOAT,
+    )
+    held: dict[str, Any] = {}
+
+    def _begin() -> tuple[Any, Any, Any]:
+        return begin_named_route(
+            record,
+            records,
+            neighbor_fn=_neighbors_for,
+            state_fn=lra_ts.problem_state,
+            fixture=using_fixture,
+            factory_fn=lambda: fixture_factory(lra_ts.FixtureClient, lra_ts.default_fixture_answers),
+            router_cls=lra_ts.TypeSafeLraRouter,
+            mode="inloop",
+            official_track2=False,
+            env=overlay_map(
+                {"LRA_TYPESAFE": "inloop"},
+                **without_keys(source_env, ("LRA_OFFICIAL_TRACK2", "LRA_TRACK")),
+            ),
+            require_key=not using_fixture,
+        )
+
+    def _route(router: Any, state: Any, neighbors: Any) -> Any:
+        held["neighbors"] = neighbors
+        result = router.route(state, neighbor_names=names_of(neighbors))
+        held["jev_result"] = result
+        return result
+
+    def _generate() -> tuple[bool, Any, Any]:
+        return call_caught(
+            lambda: call_then(
+                lambda text_prompt: generate_grok(
+                    text_prompt,
+                    ledger,
+                    max_new_tokens=max_new,
+                    timeout=timeout,
+                    source=get_str(record, "source"),
+                    generate=grok_factory,
+                    get_trace=grok_trace,
+                    fixture=using_fixture,
+                ),
+                prompt,
+                cond=repair,
+                second=append_repair(prompt, lean_feedback),
+            ),
+            Track1LedgerError,
+        )
+
+    return run_named_route(
+        early_pairs=(
+            (
+                first_truthy(track2, resolved != "track1"),
+                lambda: skip(
+                    extra=closed_skip_extra(
+                        record,
+                        default_mode=DEFAULT_MODE,
+                        official_track2_stays_off=True,
+                        is_default_winning_path=False,
+                    ),
+                    reason=replace_if(track2, "official_track2_off", "not_default_winning_path"),
+                    mode=replace_if(track2, "off", resolved),
+                    official_track2=track2,
+                    used_fixture=fixture,
+                ),
+            ),
+            (
+                not using_fixture and not keys_configured(source_env),
+                lambda: skip(
+                    extra=closed_skip_extra(
+                        record,
+                        grok_key_configured=grok_key_configured(source_env),
+                        jev_key_configured=jev_key_configured(source_env),
+                        keys_configured=False,
+                        is_default_winning_path=False,
+                    ),
+                    reason="no_key",
+                    mode=resolved,
+                    used_fixture=False,
+                ),
+            ),
+        ),
+        begin_fn=_begin,
+        route_fn=_route,
+        charge_fn=lambda result: charge_unless_skipped(
+            result, lambda: _charge_jev(ledger, result, fixture=using_fixture)
+        ),
+        skip_pairs_fn=lambda result, line: (
+            (
+                result.skipped and not using_fixture,
+                lambda: skip(
+                    extra=closed_skip_extra(extra={"jev_route": result.as_dict()}),
+                    reason=first_truthy(result.reason, "jev_skipped"),
+                    mode=resolved,
+                    used_fixture=using_fixture,
+                ),
+            ),
+            (
+                line is not None and line.skipped,
+                lambda: skip(
+                    extra=closed_skip_extra(extra={"jev_route": result.as_dict()}),
+                    reason=line.reason,
+                    mode=resolved,
+                    used_fixture=using_fixture,
+                ),
+            ),
+        ),
+        generate_fn=_generate,
+        fail_fn=lambda exc: finish(
+            skipped=True,
+            reason=or_str(ledger.reason, exc),
+            extra={
+                "called_grok": ledger.grok_calls > 0,
+                "called_jev": ledger.jev_calls > 0,
+                "jev_route": held["jev_result"].as_dict(),
+                "wall_ms": elapsed_ms(started),
+            },
+            overlay_extra={"error": text_or(exc), "source": get_str(record, "source")},
+        ),
+        success_fn=lambda packed: finish(
+            skipped=False,
+            reason="generated",
+            extra={
+                "called_grok": True,
+                "called_jev": not held["jev_result"].skipped,
+                "text": packed[0],
+                "identity": asdict(packed[1]),
+                "jev_route": held["jev_result"].as_dict(),
+                "wall_ms": elapsed_ms(started),
+            },
+            overlay_extra={
+                "source": record.get("source"),
+                "n_neighbors": len(held["neighbors"]),
+                "default_mode": DEFAULT_MODE,
+                "requested_provider": REQUESTED_PROVIDER,
+                "requested_model": REQUESTED_MODEL,
+                "budget_usd": PROBLEM_BUDGET_USD_FLOAT,
+                "max_grok_calls": MAX_GROK_CALLS,
+                "official_track2_stays_off": True,
+                "keys_configured": keys_configured(source_env),
+            },
+        ),
+        after_fn=(
+            None
+            if receipts_dir is None
+            else (lambda: write_ledger_receipt(ledger, Path(receipts_dir) / name / "track1_ledger.json"))
+        ),
+    )
 
 
 def _load_named_record(name: str, path: Optional[Path] = None) -> tuple[dict[str, Any], list[dict[str, Any]], str]:
-    from jevops.outer import lookup_named
+    from jevops.outer import load_named_pack
 
-    raw, digest, records = lra_splice.load_warmup_records(path)
-    del raw
-    record = lookup_named(
-        records, name, error_cls=Track1LedgerError, miss=f"unknown warm-up problem: {name}"
+    return load_named_pack(
+        lra_splice.load_warmup_records,
+        name,
+        error_cls=Track1LedgerError,
+        miss=f"unknown warm-up problem: {name}",
+        extra=path,
     )
-    return record, records, digest
 
 
 def _neighbors_for(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> list[dict[str, str]]:
@@ -1228,49 +1172,48 @@ def plan_view(
     official_track2: bool = False,
     env: Optional[Mapping[str, str]] = None,
 ) -> dict[str, Any]:
+    from jevops.jev import pack_plan_view
+    from jevops.outer import overlay_map
+
     resolved = resolve_track1_mode(flag=mode, env=env, official_track2=official_track2)
-    return {
-        "ok": True,
-        "protocol": PROTOCOL,
-        "pr": PR_ID,
-        "lrah": LRAH_ID,
-        "default_mode": DEFAULT_MODE,
-        "default_generator": DEFAULT_GENERATOR,
-        "resolved_mode": resolved,
-        "allowed_modes": list(ALLOWED_MODES),
-        "official_track2": official_track2_requested(flag=official_track2, env=env),
-        "official_track2_stays_off": True,
-        "loop_v1_track1": LOOP_V1_TRACK1,
-        "is_default_winning_path": IS_DEFAULT_WINNING_PATH,
-        "additive_not_replacement": ADDITIVE_NOT_REPLACEMENT,
-        "requested_provider": REQUESTED_PROVIDER,
-        "requested_model": REQUESTED_MODEL,
-        "fail_closed_kwargs": dict(FAIL_CLOSED_KWARGS),
-        "budget_usd": PROBLEM_BUDGET_USD_FLOAT,
-        "jev_input_usd_per_mtok": float(JEV_INPUT_USD_PER_MTOK),
-        "jev_output_usd_per_mtok": float(JEV_OUTPUT_USD_PER_MTOK),
-        "grok_input_usd_per_mtok": float(GROK_INPUT_USD_PER_MTOK),
-        "grok_output_usd_per_mtok": float(GROK_OUTPUT_USD_PER_MTOK),
-        "max_grok_calls": MAX_GROK_CALLS,
-        "max_jev_calls": MAX_JEV_CALLS,
-        "includes_jev_and_grok": True,
-        "skip_if_keys_missing": True,
-        "grok_key_env_names": list(GROK_KEY_ENV_NAMES),
-        "jev_key_env_names": list(JEV_KEY_ENV_NAMES),
-        "grok_key_configured": grok_key_configured(env),
-        "jev_key_configured": jev_key_configured(env),
-        "keys_configured": keys_configured(env),
-        "default_receipts_dir": DEFAULT_TRACK1_RECEIPTS_RELATIVE,
-        "forbidden_receipt_parts": sorted(FORBIDDEN_RECEIPT_PARTS),
-        "contaminates_track2": False,
-        "inloop_is_track1_only": True,
-        "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
-        "arena_score": None,
-        "compiled": False,
-        "llama_server_started": False,
-        "imports_llm_router": True,
-        "closed_generator": f"{REQUESTED_PROVIDER}/{REQUESTED_MODEL}",
-    }
+    return pack_plan_view(
+        protocol=PROTOCOL,
+        pr=PR_ID,
+        lrah=LRAH_ID,
+        default_mode=DEFAULT_MODE,
+        default_generator=DEFAULT_GENERATOR,
+        resolved_mode=resolved,
+        allowed_modes=list(ALLOWED_MODES),
+        official_track2=official_track2_requested(flag=official_track2, env=env),
+        official_track2_stays_off=True,
+        loop_v1_track1=LOOP_V1_TRACK1,
+        is_default_winning_path=IS_DEFAULT_WINNING_PATH,
+        additive_not_replacement=ADDITIVE_NOT_REPLACEMENT,
+        requested_provider=REQUESTED_PROVIDER,
+        requested_model=REQUESTED_MODEL,
+        fail_closed_kwargs=overlay_map(FAIL_CLOSED_KWARGS),
+        budget_usd=PROBLEM_BUDGET_USD_FLOAT,
+        jev_input_usd_per_mtok=float(JEV_INPUT_USD_PER_MTOK),
+        jev_output_usd_per_mtok=float(JEV_OUTPUT_USD_PER_MTOK),
+        grok_input_usd_per_mtok=float(GROK_INPUT_USD_PER_MTOK),
+        grok_output_usd_per_mtok=float(GROK_OUTPUT_USD_PER_MTOK),
+        max_grok_calls=MAX_GROK_CALLS,
+        max_jev_calls=MAX_JEV_CALLS,
+        includes_jev_and_grok=True,
+        skip_if_keys_missing=True,
+        grok_key_env_names=list(GROK_KEY_ENV_NAMES),
+        jev_key_env_names=list(JEV_KEY_ENV_NAMES),
+        grok_key_configured=grok_key_configured(env),
+        jev_key_configured=jev_key_configured(env),
+        keys_configured=keys_configured(env),
+        default_receipts_dir=DEFAULT_TRACK1_RECEIPTS_RELATIVE,
+        forbidden_receipt_parts=sorted(FORBIDDEN_RECEIPT_PARTS),
+        contaminates_track2=False,
+        inloop_is_track1_only=True,
+        frozen_warmup_sha256=FROZEN_WARMUP_SHA256,
+        imports_llm_router=True,
+        closed_generator=f"{REQUESTED_PROVIDER}/{REQUESTED_MODEL}",
+    )
 
 
 def _imported_names(source: str) -> set[str]:
@@ -1292,11 +1235,10 @@ def _assigned_constant(tree: ast.AST, name: str) -> Any:
 
 
 def _fail_closed_kwargs_from_source(source: str) -> dict[str, Any]:
-    from jevops.repair import assigned_literal
+    from jevops.repair import catalog_literal
 
-    return assigned_literal(
-        source,
-        "FAIL_CLOSED_KWARGS",
+    return catalog_literal(
+        "FAIL_CLOSED_GROK_KWARGS",
         error_cls=Track1LedgerError,
         miss="FAIL_CLOSED_KWARGS assignment not found",
         not_dict="FAIL_CLOSED_KWARGS must be a dict",
@@ -1311,7 +1253,7 @@ def _numeric_score_assignments(source: str) -> list[str]:
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
     from jevops.outer import source_text
-    from jevops.repair import assigned_constants, audit_source as _audit
+    from jevops.repair import audit_source as _audit
 
     text = source_text(source, path=__file__)
     out = _audit(
@@ -1321,12 +1263,16 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
         forbidden_scores=FORBIDDEN_SCORE_NAMES,
     )
     imported = set(out["imported_names"])
+    from jevops import llm_router as llm_mod
+    from jevops.repair import catalog_constants, module_imported_names
+
+    kernel_imported = module_imported_names(llm_mod)
+    ok_imported = imported | kernel_imported
     calls = set(out["call_func_names"])
     score_issues = out["score_issues"]
     uses_lock_ex = bool(out["uses_lock_ex"])
     kwargs = _fail_closed_kwargs_from_source(text)
-    consts = assigned_constants(
-        text,
+    consts = catalog_constants(
         (
             "DEFAULT_MODE",
             "DEFAULT_GENERATOR",
@@ -1338,51 +1284,51 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
             "MAX_GROK_CALLS",
         ),
     )
-    return {
-        "imported_names": out["imported_names"],
-        "forbidden_imports": out["forbidden_imports"],
-        "forbidden_calls": out["forbidden_calls"],
-        "numeric_score_assignments": score_issues,
-        "imports_llm_router": "ipfs_accelerate_py.llm_router" in imported or "llm_router" in imported,
-        "imports_generate_text": "generate_text" in imported,
-        "imports_typesafe_sdk": "typesafe_sdk" in imported or "typesafe" in imported,
-        "imports_fcntl": "fcntl" in imported,
-        "calls_generate_text": "generate_text" in calls or "router_generate_text" in imported,
-        "default_mode_constant": consts["DEFAULT_MODE"],
-        "default_generator_constant": consts["DEFAULT_GENERATOR"],
-        "loop_v1_track1_constant": consts["LOOP_V1_TRACK1"],
-        "official_track2_mode_constant": consts["OFFICIAL_TRACK2_MODE"],
-        "is_default_winning_path_constant": consts["IS_DEFAULT_WINNING_PATH"],
-        "requested_provider_constant": consts["REQUESTED_PROVIDER"],
-        "requested_model_constant": consts["REQUESTED_MODEL"],
-        "max_grok_calls_constant": consts["MAX_GROK_CALLS"],
-        "fail_closed_kwargs": kwargs,
-        "uses_lock_ex": uses_lock_ex,
-        "ok": (
-            ("ipfs_accelerate_py.llm_router" in imported or "llm_router" in imported)
-            and "generate_text" in imported
-            and "typesafe_sdk" not in imported
-            and "typesafe" not in imported
-            and "fcntl" not in imported
-            and not out["forbidden_imports"]
-            and not out["forbidden_calls"]
-            and not score_issues
-            and not uses_lock_ex
-            and consts["DEFAULT_MODE"] == "off"
-            and consts["DEFAULT_GENERATOR"] == "leanstral"
-            and consts["LOOP_V1_TRACK1"] == "off"
-            and consts["OFFICIAL_TRACK2_MODE"] == "off"
-            and consts["IS_DEFAULT_WINNING_PATH"] is False
-            and consts["REQUESTED_PROVIDER"] == "grok"
-            and consts["REQUESTED_MODEL"] == "grok-4.6"
-            and consts["MAX_GROK_CALLS"] == 2
-            and kwargs.get("provider") == "grok"
-            and kwargs.get("model_name") == "grok-4.6"
-            and kwargs.get("allow_local_fallback") is False
-            and kwargs.get("allow_cross_provider_fallback") is False
-            and kwargs.get("disable_model_retry") is True
+    from jevops.repair import pack_call_audit
+
+    return pack_call_audit(
+        out,
+        extra={
+            "numeric_score_assignments": score_issues,
+            "imports_llm_router": "ipfs_accelerate_py.llm_router" in ok_imported or "llm_router" in ok_imported,
+            "imports_generate_text": "generate_text" in ok_imported,
+            "imports_typesafe_sdk": "typesafe_sdk" in imported or "typesafe" in imported,
+            "imports_fcntl": "fcntl" in imported,
+            "calls_generate_text": "generate_text" in calls or "router_generate_text" in ok_imported,
+            "default_mode_constant": consts["DEFAULT_MODE"],
+            "default_generator_constant": consts["DEFAULT_GENERATOR"],
+            "loop_v1_track1_constant": consts["LOOP_V1_TRACK1"],
+            "official_track2_mode_constant": consts["OFFICIAL_TRACK2_MODE"],
+            "is_default_winning_path_constant": consts["IS_DEFAULT_WINNING_PATH"],
+            "requested_provider_constant": consts["REQUESTED_PROVIDER"],
+            "requested_model_constant": consts["REQUESTED_MODEL"],
+            "max_grok_calls_constant": consts["MAX_GROK_CALLS"],
+            "fail_closed_kwargs": kwargs,
+            "uses_lock_ex": uses_lock_ex,
+        },
+        extra_ok=(
+            "ipfs_accelerate_py.llm_router" in ok_imported or "llm_router" in ok_imported,
+            "generate_text" in ok_imported,
+            "typesafe_sdk" not in imported,
+            "typesafe" not in imported,
+            "fcntl" not in imported,
+            not score_issues,
+            not uses_lock_ex,
+            consts["DEFAULT_MODE"] == "off",
+            consts["DEFAULT_GENERATOR"] == "leanstral",
+            consts["LOOP_V1_TRACK1"] == "off",
+            consts["OFFICIAL_TRACK2_MODE"] == "off",
+            consts["IS_DEFAULT_WINNING_PATH"] is False,
+            consts["REQUESTED_PROVIDER"] == "grok",
+            consts["REQUESTED_MODEL"] == "grok-4.6",
+            consts["MAX_GROK_CALLS"] == 2,
+            kwargs.get("provider") == "grok",
+            kwargs.get("model_name") == "grok-4.6",
+            kwargs.get("allow_local_fallback") is False,
+            kwargs.get("allow_cross_provider_fallback") is False,
+            kwargs.get("disable_model_retry") is True,
         ),
-    }
+    )
 
 
 def _hard_stop_probe() -> dict[str, Any]:
@@ -1400,38 +1346,42 @@ def _hard_stop_probe() -> dict[str, Any]:
     first = max_calls.record("grok", input_tokens=100, output_tokens=10, fixture=True)
     second = max_calls.record("grok", input_tokens=100, output_tokens=10, fixture=True)
     third = max_calls.record("grok", input_tokens=100, output_tokens=10, fixture=True)
-    return {
-        "budget_usd": PROBLEM_BUDGET_USD_FLOAT,
-        "jev_20x8ktok_usd": usd_float(jev_usd),
-        "jev_recorded_usd": jev_line.usd,
-        "combined_spent_after_jev": combined.spent_usd,
-        "combined_grok_million_skipped": grok_over.skipped,
-        "combined_grok_reason": grok_over.reason,
-        "combined_hard_stopped": combined.hard_stopped,
-        "combined_spent_unchanged": combined.spent_usd == jev_line.usd,
-        "exact_three_allowed": (not exact_line.skipped) and exact.spent_usd == PROBLEM_BUDGET_USD_FLOAT,
-        "exact_next_hard_stop": exact_next.skipped and exact_next.reason == "hard_stop",
-        "max_calls_first_ok": not first.skipped,
-        "max_calls_second_ok": not second.skipped,
-        "max_calls_third_stopped": third.skipped and third.reason == "max_grok_calls",
-        "includes_jev_and_grok": True,
-        "ok": (
-            jev_line.usd > 0
-            and grok_over.skipped
-            and grok_over.reason == "hard_stop"
-            and combined.hard_stopped
-            and combined.spent_usd == jev_line.usd
-            and combined.spent_usd < PROBLEM_BUDGET_USD_FLOAT
-            and (not exact_line.skipped)
-            and exact.spent_usd == PROBLEM_BUDGET_USD_FLOAT
-            and exact_next.skipped
-            and exact_next.reason == "hard_stop"
-            and (not first.skipped)
-            and (not second.skipped)
-            and third.skipped
-            and third.reason == "max_grok_calls"
-        ),
-    }
+    from jevops.outer import finalize_ok
+
+    from jevops.outer import pack_unscored
+
+    return finalize_ok(
+        pack_unscored(**{
+            "budget_usd": PROBLEM_BUDGET_USD_FLOAT,
+            "jev_20x8ktok_usd": usd_float(jev_usd),
+            "jev_recorded_usd": jev_line.usd,
+            "combined_spent_after_jev": combined.spent_usd,
+            "combined_grok_million_skipped": grok_over.skipped,
+            "combined_grok_reason": grok_over.reason,
+            "combined_hard_stopped": combined.hard_stopped,
+            "combined_spent_unchanged": combined.spent_usd == jev_line.usd,
+            "exact_three_allowed": (not exact_line.skipped) and exact.spent_usd == PROBLEM_BUDGET_USD_FLOAT,
+            "exact_next_hard_stop": exact_next.skipped and exact_next.reason == "hard_stop",
+            "max_calls_first_ok": not first.skipped,
+            "max_calls_second_ok": not second.skipped,
+            "max_calls_third_stopped": third.skipped and third.reason == "max_grok_calls",
+            "includes_jev_and_grok": True,
+        }),
+        jev_line.usd > 0,
+        grok_over.skipped,
+        grok_over.reason == "hard_stop",
+        combined.hard_stopped,
+        combined.spent_usd == jev_line.usd,
+        combined.spent_usd < PROBLEM_BUDGET_USD_FLOAT,
+        not exact_line.skipped,
+        exact.spent_usd == PROBLEM_BUDGET_USD_FLOAT,
+        exact_next.skipped,
+        exact_next.reason == "hard_stop",
+        not first.skipped,
+        not second.skipped,
+        third.skipped,
+        third.reason == "max_grok_calls",
+    )
 
 
 def _receipt_probe() -> dict[str, Any]:
@@ -1446,56 +1396,55 @@ def _receipt_probe() -> dict[str, Any]:
         from jevops.outer import read_json
 
         written = read_json(allowed)
-        track2_rejected = False
-        track2_reason = ""
-        try:
-            write_ledger_receipt(ledger, root / "official_track2" / "receipt.json")
-        except Track1LedgerError as exc:
-            track2_rejected = True
-            track2_reason = str(exc)
-        warmup_rejected = False
-        try:
-            write_ledger_receipt(
+        from jevops.outer import catch_error, closed_on_error, finalize_ok
+
+        track2_rejected, track2_reason = catch_error(
+            lambda: write_ledger_receipt(ledger, root / "official_track2" / "receipt.json"),
+            Track1LedgerError,
+        )
+        warmup_rejected = closed_on_error(
+            lambda: write_ledger_receipt(
                 ledger,
                 root / "papers" / "completion" / "lean_refactor_arena" / "submissions" / "warmup" / "receipt.json",
-            )
-        except Track1LedgerError:
-            warmup_rejected = True
+            ),
+            Track1LedgerError,
+        )
         contaminated = ProblemLedger(name="contaminated", official_track2=True)
-        contaminated_rejected = False
-        try:
-            write_ledger_receipt(contaminated, allowed)
-        except Track1LedgerError:
-            contaminated_rejected = True
+        contaminated_rejected = closed_on_error(
+            lambda: write_ledger_receipt(contaminated, allowed),
+            Track1LedgerError,
+        )
         allowed_ok, allowed_reason = receipts_path_allowed(allowed)
         track2_ok, track2_path_reason = receipts_path_allowed(root / "track2" / "x.json")
-    return {
-        "written_track": written.get("track"),
-        "written_official_track2": written.get("official_track2"),
-        "written_contaminates_track2": written.get("contaminates_track2"),
-        "written_arena_score": written.get("arena_score"),
-        "written_is_default_winning_path": written.get("is_default_winning_path"),
-        "api_key_present_in_record": written.get("api_key_present_in_record"),
-        "track2_path_rejected": track2_rejected,
-        "track2_reason": track2_reason,
-        "warmup_path_rejected": warmup_rejected,
-        "official_track2_ledger_rejected": contaminated_rejected,
-        "allowed_path_ok": allowed_ok,
-        "track2_component_blocked": (not track2_ok) and track2_path_reason == "track2_receipt_path",
-        "ok": (
-            written.get("track") == TRACK_LABEL
-            and written.get("official_track2") is False
-            and written.get("contaminates_track2") is False
-            and written.get("arena_score") is None
-            and written.get("is_default_winning_path") is False
-            and written.get("api_key_present_in_record") is False
-            and track2_rejected
-            and warmup_rejected
-            and contaminated_rejected
-            and allowed_ok
-            and not track2_ok
-        ),
-    }
+    from jevops.outer import pack_unscored
+
+    return finalize_ok(
+        pack_unscored(**{
+            "written_track": written.get("track"),
+            "written_official_track2": written.get("official_track2"),
+            "written_contaminates_track2": written.get("contaminates_track2"),
+            "written_arena_score": written.get("arena_score"),
+            "written_is_default_winning_path": written.get("is_default_winning_path"),
+            "api_key_present_in_record": written.get("api_key_present_in_record"),
+            "track2_path_rejected": track2_rejected,
+            "track2_reason": track2_reason,
+            "warmup_path_rejected": warmup_rejected,
+            "official_track2_ledger_rejected": contaminated_rejected,
+            "allowed_path_ok": allowed_ok,
+            "track2_component_blocked": (not track2_ok) and track2_path_reason == "track2_receipt_path",
+        }),
+        written.get("track") == TRACK_LABEL,
+        written.get("official_track2") is False,
+        written.get("contaminates_track2") is False,
+        written.get("arena_score") is None,
+        written.get("is_default_winning_path") is False,
+        written.get("api_key_present_in_record") is False,
+        track2_rejected,
+        warmup_rejected,
+        contaminated_rejected,
+        allowed_ok,
+        not track2_ok,
+    )
 
 
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
@@ -1504,8 +1453,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     from jevops.outer import read_text
 
     source = read_text(__file__)
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
-    from jevops.outer import digest_file
+    from jevops.outer import digest_file, get_str, path_or, relative_or_str, text_or
+
+    jsonl = path_or(path, WARMUP_JSONL)
 
     before = digest_file(jsonl)
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
@@ -1529,11 +1479,11 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     except Track1LedgerError:
         unknown_closed = True
 
-    off_run = run_named(str(first["name"]), mode="off", env=empty_env, path=jsonl)
-    no_key_run = run_named(str(first["name"]), mode="track1", env=empty_env, path=jsonl)
+    off_run = run_named(get_str(first, "name"), mode="off", env=empty_env, path=jsonl)
+    no_key_run = run_named(get_str(first, "name"), mode="track1", env=empty_env, path=jsonl)
     fixture_client = FixtureGrok()
     fixture_run = run_named(
-        str(first["name"]),
+        get_str(first, "name"),
         mode="track1",
         env={"LRA_TRACK1": "1"},
         fixture=True,
@@ -1543,7 +1493,7 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     )
     repair_client = FixtureGrok("omega")
     repair_run = run_named(
-        str(first["name"]),
+        get_str(first, "name"),
         mode="track1",
         fixture=True,
         repair=True,
@@ -1552,7 +1502,7 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         path=jsonl,
     )
     official_run = run_named(
-        str(first["name"]),
+        get_str(first, "name"),
         mode="track1",
         official_track2=True,
         fixture=True,
@@ -1576,7 +1526,7 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         )
     except Track1LedgerError as exc:
         leanstral_closed = True
-        leanstral_error = str(exc)
+        leanstral_error = text_or(exc)
 
     kwargs = audit["fail_closed_kwargs"]
     captured: dict[str, Any] = {}
@@ -1594,7 +1544,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         get_trace=fixture_trace,
         fixture=True,
     )
-    mock_kwargs = captured.get("kwargs") or {}
+    from jevops.outer import overlay_map
+
+    mock_kwargs = overlay_map(captured.get("kwargs"))
     expected_kwargs = {
         "provider": "grok",
         "model_name": "grok-4.6",
@@ -1698,43 +1650,45 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "llama_server_started": False,
         "arena_score": None,
         "first_name": first.get("name"),
-        "warmup_path": str(jsonl.relative_to(REPO_ROOT)),
+        "warmup_path": relative_or_str(jsonl, REPO_ROOT),
         "budget_usd": PROBLEM_BUDGET_USD_FLOAT,
         "max_grok_calls": MAX_GROK_CALLS,
     }
-    report["ok"] = bool(
-        report["n_records"] == WARMUP_N
-        and report["jsonl_unchanged"]
-        and audit["ok"]
-        and report["default_mode_is_off"]
-        and report["not_default_winning_path"]
-        and report["grok_opt_in"]
-        and report["official_track2_stays_off"]
-        and report["off_skipped"]
-        and report["no_key_skipped"]
-        and report["fixture_generated"]
-        and report["repair_two_grok_calls"]
-        and report["official_did_not_call"]
-        and report["hard_stop_at_3_including_jev_grok"]
-        and report["does_not_contaminate_track2"]
-        and report["fail_closed_kwargs_match"]
-        and report["mock_call_kwargs_match"]
-        and mock_identity.resolved_provider == "xai"
-        and mock_identity.resolved_model == REQUESTED_MODEL
-        and not mock_identity.fallback_used
-        and mock_identity.arena_score is None
-        and leanstral_closed
-        and "leanstral" in leanstral_error.lower()
-        and unknown_closed
-        and not key_leak
-        and report["compiled"] is False
-        and report["arena_score"] is None
-        and fixture_run.get("arena_score") is None
-        and fixture_run.get("contaminates_track2") is False
-        and fixture_client.calls
-        and fixture_client.calls[0]["kwargs"].get("provider") == "grok"
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["n_records"] == WARMUP_N,
+        report["jsonl_unchanged"],
+        audit["ok"],
+        report["default_mode_is_off"],
+        report["not_default_winning_path"],
+        report["grok_opt_in"],
+        report["official_track2_stays_off"],
+        report["off_skipped"],
+        report["no_key_skipped"],
+        report["fixture_generated"],
+        report["repair_two_grok_calls"],
+        report["official_did_not_call"],
+        report["hard_stop_at_3_including_jev_grok"],
+        report["does_not_contaminate_track2"],
+        report["fail_closed_kwargs_match"],
+        report["mock_call_kwargs_match"],
+        mock_identity.resolved_provider == "xai",
+        mock_identity.resolved_model == REQUESTED_MODEL,
+        not mock_identity.fallback_used,
+        mock_identity.arena_score is None,
+        leanstral_closed,
+        "leanstral" in leanstral_error.lower(),
+        unknown_closed,
+        not key_leak,
+        report["compiled"] is False,
+        report["arena_score"] is None,
+        fixture_run.get("arena_score") is None,
+        fixture_run.get("contaminates_track2") is False,
+        fixture_client.calls,
+        fixture_client.calls[0]["kwargs"].get("provider") == "grok",
     )
-    return report
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -1754,20 +1708,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         default=None,
         help="optional Track 1 receipts directory (refuses Track 2 paths)",
     )
-    args = parser.parse_args(list(argv) if argv is not None else None)
-    if args.plan:
-        from jevops.outer import print_ok
+    from jevops.outer import list_or_none
 
-        return print_ok(plan_view(mode="track1" if args.track1 else None, official_track2=args.official_track2))
+    args = parser.parse_args(list_or_none(argv))
+    if args.plan:
+        from jevops.outer import call_if, print_ok
+
+        return print_ok(plan_view(mode=call_if(args.track1, lambda: "track1"), official_track2=args.official_track2))
     if args.run:
         if not args.name:
             parser.error("--run requires --name")
-        from jevops.outer import failed_check, print_json
+        from jevops.outer import call_if, failed_check, print_json
 
         try:
             payload = run_named(
                 args.name,
-                mode="track1" if args.track1 else None,
+                mode=call_if(args.track1, lambda: "track1"),
                 official_track2=args.official_track2,
                 fixture=args.fixture,
                 repair=args.repair,

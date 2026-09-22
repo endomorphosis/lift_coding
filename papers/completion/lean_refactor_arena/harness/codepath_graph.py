@@ -18,92 +18,89 @@ PAPER_ROOT = HERE.parent
 ACCEL = Path("/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py")
 SIDECAR = PAPER_ROOT / "evidence" / "canaries" / "nca-ast-sidecar.json"
 SIDECAR_DUCKDB = PAPER_ROOT / "evidence" / "canaries" / "nca-ast.duckdb"
-MAX_NEIGHBORS = 12
+from jevops.catalogs import INSPECT_ONLY_MARKERS  # noqa: E402
+from jevops.catalogs import MAX_CODEPATH_NEIGHBORS as MAX_NEIGHBORS  # noqa: E402
 _CROSS: dict[str, Any] | None = None
 _HARNESS_CROSS: dict[str, Any] | None = None
-INSPECT_ONLY_MARKERS = ("generate_text", "docker0", "leanstral_local", "172.17")
 
 
 def is_inspect_only(name: str) -> bool:
-    from jevops.outer import contains_any
+    from jevops.outer import inspect_only
 
-    if contains_any(name, INSPECT_ONLY_MARKERS):
-        return True
-    path = resolve_codepath(name)
-    if path is None or not path.is_file():
-        return False
-    try:
-        from jevops.outer import read_text
-
-        head = read_text(path, errors="ignore", max_chars=8000)
-    except OSError:
-        return False
-    return contains_any(head, ("172.17.0.1",))
+    return inspect_only(
+        name,
+        markers=INSPECT_ONLY_MARKERS,
+        needles=("172.17.0.1",),
+        resolve_fn=resolve_codepath,
+    )
 
 
 def _roots() -> tuple[Path, ...]:
-    roots = [HERE.resolve(), PAPER_ROOT.resolve()]
-    if ACCEL.is_dir():
-        roots.append(ACCEL.resolve())
-    return tuple(roots)
+    from jevops.outer import append_if
+
+    return tuple(append_if([HERE.resolve(), PAPER_ROOT.resolve()], ACCEL.is_dir(), ACCEL.resolve()))
 
 
 def resolve_codepath(name: str) -> Optional[Path]:
-    from jevops.outer import module_stem
+    from jevops.nca import codepath_rel_candidates, first_existing_file
+    from jevops.outer import call_if, module_stem
 
     module = module_stem(name, strip_prefix="ptr://codepath/")
-    if module is None:
-        return None
     # harness.portable_rewrites:fold_hoist → portable_rewrites.py
-    rel = module.replace("harness.", "").replace(".", "/")
-    candidates = [
-        HERE / f"{Path(rel).name}.py" if "/" not in rel.replace("harness/", "") else HERE / Path(rel).name,
-        HERE / Path(rel).with_suffix(".py").name,
-        HERE / f"{rel.split('/')[-1]}.py",
-        ACCEL / Path(*rel.split("/")).with_suffix(".py"),
-    ]
-    if rel.endswith(".py"):
-        candidates.append(HERE / Path(rel).name)
-        candidates.append(ACCEL / rel)
-    from jevops.nca import first_existing_file
-
-    return first_existing_file(candidates, roots=_roots())
+    return call_if(
+        module is not None,
+        lambda: first_existing_file(
+            codepath_rel_candidates(module, here=HERE, accel=ACCEL),
+            roots=_roots(),
+        ),
+    )
 
 
 def slice_codepath(name: str) -> dict[str, Any]:
     """Callers/callees-style slice from Python AST. No source bodies."""
 
+    from jevops.nca import pack_codepath_slice
+
+    from jevops.outer import either
+
     path = resolve_codepath(name)
-    if path is None:
-        return {"ok": False, "reason": "codepath_not_allowed", "name": name, "called_docker0": False, "inspect_only": is_inspect_only(name)}
-    try:
-        from jevops.nca import function_call_map
 
-        from jevops.outer import exc_head, head_seq, read_text
+    def _missing() -> dict[str, Any]:
+        return pack_codepath_slice(
+            ok=False,
+            name=name,
+            reason="codepath_not_allowed",
+            inspect_only=is_inspect_only(name),
+        )
 
-        defs, calls_by = function_call_map(read_text(path))
-    except (OSError, SyntaxError) as exc:
-        return {"ok": False, "reason": "parse_failed", "error": exc_head(exc, 160), "called_docker0": False}
-    from jevops.nca import focus_symbol
-    from jevops.outer import head_seq
+    def _present() -> dict[str, Any]:
+        try:
+            from jevops.nca import function_call_map
+            from jevops.outer import exc_head, head_seq, read_text
 
-    focus = focus_symbol(name, defs, calls_by)
-    callees = head_seq(calls_by.get(focus), MAX_NEIGHBORS)
-    callers = head_seq([fn for fn, kids in calls_by.items() if focus and focus in kids], MAX_NEIGHBORS)
-    return {
-        "ok": True,
-        "path": path.name,
-        "symbol": focus,
-        "definitions": head_seq(defs, 40),
-        "callees": callees,
-        "callers": callers,
-        "complete": True,
-        "source_bodies": False,
-        "called_docker0": False,
-        "campaign_write": False,
-        "inspect_only": is_inspect_only(name),
-        "invoked": False if is_inspect_only(name) else True,
-    }
+            defs, calls_by = function_call_map(read_text(path))
+        except (OSError, SyntaxError) as exc:
+            from jevops.outer import exc_head
+
+            return pack_codepath_slice(ok=False, reason="parse_failed", error=exc_head(exc, 160))
+        from jevops.nca import focus_symbol
+        from jevops.outer import head_seq
+
+        focus = focus_symbol(name, defs, calls_by)
+        inspect = is_inspect_only(name)
+        return pack_codepath_slice(
+            ok=True,
+            path=path.name,
+            symbol=focus,
+            definitions=head_seq(defs, 40),
+            callees=head_seq(calls_by.get(focus), MAX_NEIGHBORS),
+            callers=head_seq(
+                [fn for fn, kids in calls_by.items() if focus and focus in kids], MAX_NEIGHBORS
+            ),
+            inspect_only=inspect,
+        )
+
+    return either(path is None, _missing, _present)
 
 
 def _iter_allowlisted_py() -> list[Path]:
@@ -128,22 +125,17 @@ def build_sidecar_index(*, root: Optional[Path] = None, write: bool = True) -> d
 
     from jevops.nca import sidecar_files
 
-    base = root or HERE
-    files_payload = sidecar_files(sorted(base.glob("*.py")), cap_files=80, cap_symbols=80)
-    payload = {
-        "schema": "lra-nca-ast-sidecar/v1",
-        "n_files": len(files_payload),
-        "files": files_payload,
-        "campaign_write": False,
-        "called_docker0": False,
-        "control_duckdb": False,
-    }
-    if write:
-        from jevops.outer import write_json
+    from jevops.outer import if_none
 
-        write_json(SIDECAR, payload)
-        payload["path"] = str(SIDECAR)
-    return payload
+    base = if_none(root, HERE)
+    files_payload = sidecar_files(sorted(base.glob("*.py")), cap_files=80, cap_symbols=80)
+    from jevops.nca import pack_sidecar_index
+
+    payload = pack_sidecar_index(files_payload)
+    from jevops.outer import call_if, set_if, text_or, write_json
+
+    call_if(write, lambda: write_json(SIDECAR, payload))
+    return set_if(payload, write, "path", text_or(SIDECAR))
 
 
 def build_sidecar_duckdb(*, path: Optional[Path] = None, refresh: bool = True) -> dict[str, Any]:
@@ -151,72 +143,43 @@ def build_sidecar_duckdb(*, path: Optional[Path] = None, refresh: bool = True) -
 
     from jevops.outer import connect_engine, exec_many, path_refused, table_count, try_import
 
-    dest = Path(path or SIDECAR_DUCKDB)
-    if path_refused(dest, names=("control.duckdb",), needles=("control.duckdb",)):
-        return {"ok": False, "reason": "campaign_db_refused", "control_duckdb": True, "called_docker0": False}
-    duckdb = try_import("duckdb")
-    if duckdb is None:
-        return {"ok": False, "reason": "duckdb_unavailable", "control_duckdb": False, "called_docker0": False}
+    from jevops.outer import if_none
+
+    dest = Path(if_none(path, SIDECAR_DUCKDB))
     graph = harness_call_graph(refresh=refresh)
-    statements: list[Any] = [
-        "CREATE TABLE IF NOT EXISTS symbols (qualified_name VARCHAR, path VARCHAR, symbol_kind VARCHAR)",
-        "CREATE TABLE IF NOT EXISTS calls (caller VARCHAR, callee VARCHAR, path VARCHAR)",
-        "DELETE FROM symbols",
-        "DELETE FROM calls",
-    ]
-    for _bare, qnames in (graph.get("defs") or {}).items():
-        for qname in qnames:
-            statements.append(
-                (
-                    "INSERT INTO symbols VALUES (?, ?, ?)",
-                    [qname, f"{str(qname).split(':', 1)[0]}.py", "function"],
-                )
-            )
-    for caller, callees in (graph.get("calls") or {}).items():
-        for callee in callees:
-            statements.append(
-                (
-                    "INSERT INTO calls VALUES (?, ?, ?)",
-                    [caller, callee, f"{str(caller).split(':', 1)[0]}.py"],
-                )
-            )
-    con, _engine = connect_engine(dest, duckdb_module=duckdb)
-    try:
-        exec_many(con, statements)
-        n_sym = table_count(con, "symbols")
-        n_calls = table_count(con, "calls")
-    finally:
-        con.close()
-    return {
-        "ok": True,
-        "n_symbols": n_sym,
-        "n_calls": n_calls,
-        "path": str(dest),
-        "control_duckdb": False,
-        "called_docker0": False,
-        "campaign_write": False,
-    }
+    from jevops.nca import fill_sidecar_duckdb
+
+    return fill_sidecar_duckdb(
+        dest,
+        graph,
+        connect_fn=connect_engine,
+        exec_fn=exec_many,
+        count_fn=table_count,
+        try_import_fn=try_import,
+        refuse_fn=path_refused,
+        refuse_names=("control.duckdb",),
+    )
 
 
 def query_sidecar_duckdb(query: str, *, db_path: Optional[Path] = None) -> list[dict[str, Any]]:
-    from jevops.outer import query_engine
+    from jevops.outer import call_if, if_none, query_engine, text_or
 
-    needle = f"%{str(query or '').casefold()}%"
+    needle = f"%{text_or(query).casefold()}%"
+    from jevops.catalogs import SIDECAR_SYMBOLS_SQL
+
     return query_engine(
-        Path(db_path or SIDECAR_DUCKDB),
-        "SELECT qualified_name, path, symbol_kind FROM symbols "
-        "WHERE lower(CAST(qualified_name AS VARCHAR)) LIKE ? LIMIT 20",
+        Path(if_none(db_path, SIDECAR_DUCKDB)),
+        SIDECAR_SYMBOLS_SQL,
         [needle],
         refuse_names=("control.duckdb",),
-        row_fn=lambda row: (
-            {
-                "symbol": str(row[0]),
-                "path": str(row[1] or ""),
-                "kind": str(row[2] or ""),
+        row_fn=lambda row: call_if(
+            row and row[0],
+            lambda: {
+                "symbol": text_or(row[0]),
+                "path": text_or(row[1]),
+                "kind": text_or(row[2]),
                 "source": "sidecar_duckdb",
-            }
-            if row and row[0]
-            else None
+            },
         ),
     )
 
@@ -227,17 +190,19 @@ def query_calls_duckdb(
     db_path: Optional[Path] = None,
     direction: str = "callees",
 ) -> list[str]:
-    from jevops.outer import query_engine, without_prefix
+    from jevops.outer import call_if, either, if_none, query_engine, text_or, without_prefix
 
-    name = without_prefix(str(symbol or ""), "ptr://codepath/")
-    column = "caller" if direction == "callers" else "callee"
-    match_on = "callee" if direction == "callers" else "caller"
+    name = without_prefix(text_or(symbol), "ptr://codepath/")
+    column = either(direction == "callers", lambda: "caller", lambda: "callee")
+    match_on = either(direction == "callers", lambda: "callee", lambda: "caller")
+    from jevops.catalogs import SIDECAR_CALLS_SQL
+
     return query_engine(
-        Path(db_path or SIDECAR_DUCKDB),
-        f"SELECT {column} FROM calls WHERE {match_on} = ? OR {match_on} LIKE ? LIMIT 12",
+        Path(if_none(db_path, SIDECAR_DUCKDB)),
+        SIDECAR_CALLS_SQL.format(column=column, match_on=match_on),
         [name, f"%:{name.rsplit(':', 1)[-1]}"],
         refuse_names=("control.duckdb",),
-        row_fn=lambda row: str(row[0]) if row and row[0] else None,
+        row_fn=lambda row: call_if(row and row[0], lambda: text_or(row[0])),
     )
 
 
@@ -245,139 +210,95 @@ def harness_call_graph(*, refresh: bool = False) -> dict[str, Any]:
     """Call graph over harness/*.py only (no accelerate parse)."""
 
     global _HARNESS_CROSS
-    if _HARNESS_CROSS is not None and not refresh:
-        return _HARNESS_CROSS
-    try:
+    from jevops.outer import call_if, first_not_none, ignore_error
+
+    def _build() -> dict[str, Any]:
         from jevops.nca import call_graph_from_paths
 
-        _HARNESS_CROSS = call_graph_from_paths(
-            sorted(HERE.glob("*.py")),
-            cap_files=40,
-            cap_neighbors=MAX_NEIGHBORS,
+        global _HARNESS_CROSS
+        _HARNESS_CROSS = ignore_error(
+            lambda: call_graph_from_paths(
+                sorted(HERE.glob("*.py")),
+                cap_files=40,
+                cap_neighbors=MAX_NEIGHBORS,
+            ),
+            default={"defs": {}, "calls": {}, "n_defs": 0},
         )
-    except Exception:
-        _HARNESS_CROSS = {"defs": {}, "calls": {}, "n_defs": 0}
-    return _HARNESS_CROSS
+        return _HARNESS_CROSS
+
+    return first_not_none(call_if(not refresh, lambda: _HARNESS_CROSS), factory=_build)
 
 
 def seed_nca_call_edges(memory: dict[str, Any], *, db_path: Optional[Path] = None, limit: int = 48) -> dict[str, Any]:
     """Attach caller→callee pairs as NCA board_edges. DuckDB sidecar or harness AST."""
 
-    from jevops.nca import append_board_edges
-    from jevops.outer import path_refused
+    from jevops.catalogs import SIDECAR_EDGES_SQL
+    from jevops.nca import call_pairs_from_graph, seed_edges_from_query
+    from jevops.outer import call_if, first_int, if_none, path_refused, query_engine, text_or
 
-    dest = Path(db_path or SIDECAR_DUCKDB)
-    if path_refused(dest, names=("control.duckdb",)):
-        return {"ok": False, "reason": "campaign_db_refused", "n_edges": 0, "control_duckdb": True}
-    from jevops.outer import query_engine
-
-    rows: list[tuple[str, str]] = []
-    source = "harness_ast"
-    fetched = query_engine(
-        dest,
-        "SELECT caller, callee FROM calls LIMIT ?",
-        [int(limit)],
-        refuse_names=("control.duckdb",),
-        row_fn=lambda row: (str(row[0]), str(row[1])) if row and row[0] and row[1] else None,
+    dest = Path(if_none(db_path, SIDECAR_DUCKDB))
+    return seed_edges_from_query(
+        memory,
+        refused=path_refused(dest, names=("control.duckdb",)),
+        query_fn=lambda: query_engine(
+            dest,
+            SIDECAR_EDGES_SQL,
+            [first_int(limit)],
+            refuse_names=("control.duckdb",),
+            row_fn=lambda row: call_if(
+                row and row[0] and row[1],
+                lambda: (text_or(row[0]), text_or(row[1])),
+            ),
+        ),
+        graph_fn=lambda: call_pairs_from_graph(harness_call_graph(), limit=limit),
+        limit=limit,
     )
-    if fetched:
-        rows = fetched
-        source = "sidecar_duckdb"
-    if not rows:
-        graph = harness_call_graph()
-        added_pairs = 0
-        for caller, callees in (graph.get("calls") or {}).items():
-            for callee in callees:
-                rows.append((str(caller), str(callee)))
-                added_pairs += 1
-                if added_pairs >= int(limit):
-                    break
-            if added_pairs >= int(limit):
-                break
-        source = "harness_ast"
-    added = append_board_edges(memory, rows, limit=limit)
-    return {"ok": True, "n_edges": added, "source": source, "control_duckdb": False, "called_docker0": False}
 
 
 def query_sidecar(query: str, *, payload: Optional[dict[str, Any]] = None) -> list[dict[str, Any]]:
     from jevops.nca import query_sidecar_symbols
 
-    from jevops.outer import load_json_object
+    from jevops.outer import call_if, get_list, if_none, load_json_object, or_call
 
-    data = payload
-    if data is None and SIDECAR.is_file():
-        data = load_json_object(SIDECAR)
-    if not data:
-        data = build_sidecar_index(write=False)
-    return query_sidecar_symbols(data.get("files") or [], query, limit=24)
+    data = or_call(
+        if_none(payload, factory=lambda: call_if(SIDECAR.is_file(), lambda: load_json_object(SIDECAR))),
+        lambda: build_sidecar_index(write=False),
+    )
+    return query_sidecar_symbols(get_list(data, "files"), query, limit=24)
 
 
 def allowlist_call_graph(*, refresh: bool = False) -> dict[str, Any]:
     """Cross-module name→qualified-def graph on allowlisted roots."""
 
     global _CROSS
-    if _CROSS is not None and not refresh:
-        return _CROSS
-    from jevops.nca import call_graph_from_paths
+    from jevops.outer import call_if, first_not_none
 
-    _CROSS = call_graph_from_paths(_iter_allowlisted_py(), cap_neighbors=MAX_NEIGHBORS)
-    return _CROSS
+    def _build() -> dict[str, Any]:
+        from jevops.nca import call_graph_from_paths
+
+        global _CROSS
+        _CROSS = call_graph_from_paths(_iter_allowlisted_py(), cap_neighbors=MAX_NEIGHBORS)
+        return _CROSS
+
+    return first_not_none(call_if(not refresh, lambda: _CROSS), factory=_build)
 
 
 def slice_cross_module(name: str, *, db_path: Optional[Path] = None) -> dict[str, Any]:
     """Callers/callees across allowlisted modules. Ids only; no source bodies."""
 
-    if is_inspect_only(name):
-        sliced = slice_codepath(name)
-        sliced["cross_module"] = False
-        return sliced
-    from jevops.nca import first_matching_symbol
+    from jevops.nca import first_matching_symbol, pick_qualified, slice_cross_or_local
 
-    raw_name = str(name or "").replace("ptr://codepath/", "")
-    db_hits = query_sidecar_duckdb(raw_name.rsplit(":", 1)[-1], db_path=db_path)
-    q_db = first_matching_symbol(db_hits, raw_name)
-    if q_db:
-        db_callees = query_calls_duckdb(q_db, db_path=db_path, direction="callees")
-        db_callers = query_calls_duckdb(q_db, db_path=db_path, direction="callers")
-        if db_callees or db_callers:
-            return {
-                "ok": True,
-                "symbol": q_db,
-                "callees": db_callees,
-                "callers": db_callers,
-                "cross_module": any(":" in item and item.split(":")[0] != q_db.split(":")[0] for item in db_callees + db_callers),
-                "source": "sidecar_duckdb",
-                "source_bodies": False,
-                "called_docker0": False,
-                "campaign_write": False,
-                "complete": True,
-            }
-    from jevops.nca import pick_qualified
-
-    graph = allowlist_call_graph()
-    qname = pick_qualified(
+    return slice_cross_or_local(
         name,
-        graph.get("defs") or {},
-        graph.get("calls") or {},
+        inspect_fn=slice_codepath,
+        inspect_only_fn=is_inspect_only,
+        db_hits_fn=lambda query: query_sidecar_duckdb(query, db_path=db_path),
+        match_fn=first_matching_symbol,
+        callees_fn=lambda symbol: query_calls_duckdb(symbol, db_path=db_path, direction="callees"),
+        callers_fn=lambda symbol: query_calls_duckdb(symbol, db_path=db_path, direction="callers"),
+        graph_fn=allowlist_call_graph,
+        pick_fn=pick_qualified,
+        local_fn=slice_codepath,
+        cap=MAX_NEIGHBORS,
         strip_prefixes=("harness.",),
     )
-    if not qname:
-        local = slice_codepath(name)
-        local["cross_module"] = False
-        return local
-    calls = graph.get("calls") or {}
-    callees = list(calls.get(qname) or [])[:MAX_NEIGHBORS]
-    callers = [fn for fn, kids in calls.items() if qname in kids or qname.rsplit(":", 1)[-1] in kids][:MAX_NEIGHBORS]
-    cross = any(":" in item and not item.startswith(qname.split(":")[0] + ":") for item in callees + callers)
-    return {
-        "ok": True,
-        "symbol": qname,
-        "callees": callees,
-        "callers": callers,
-        "cross_module": bool(cross) or any(":" in item for item in callees),
-        "n_defs": graph.get("n_defs"),
-        "source_bodies": False,
-        "called_docker0": False,
-        "campaign_write": False,
-        "complete": True,
-    }

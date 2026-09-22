@@ -23,13 +23,10 @@ from dataclasses import asdict, dataclass
 
 from pathlib import Path
 from typing import Any, Mapping, Optional, Sequence
-from urllib.parse import urlparse
-
 HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
 REPO_ROOT = HERE.parents[3]
 WARMUP_JSONL = PAPER_ROOT / "data" / "benchmark_data_warmup.jsonl"
-ROOT_ACCEL = Path("/home/barberb/lift_coding/external/ipfs_accelerate")
 OUT_DEFAULT = PAPER_ROOT / "evidence" / "canaries"
 KEYFILES = (
     Path.home() / ".config/ipfs_accelerate_py/mistral.env",
@@ -46,42 +43,26 @@ import track1_ledger as lra_t1  # noqa: E402
 import typesafe_router as lra_ts  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
-PROTOCOL = "LRA/v1"
 PR_ID = "PR-12b"
 LRAH_ID = "LRAH-011b"
-TRACK_LABEL = "track1_closed"
-REQUESTED_PROVIDER = "mistral"
-REQUESTED_MODEL = "labs-leanstral-1-5"
-ALT_MODELS = ("labs-leanstral-1-5", "leanstral-1-5")
-API_HOST = "api.mistral.ai"
-CHAT_URL = f"https://{API_HOST}/v1/chat/completions"
-LABS_RETIRE_DATE = "2026-09-30"
-HARDWARE_CLASS = "mistral_labs_api"
-PROTOTYPE_HARDWARE_CLASS = "spark_gb10"
-PROTOTYPE_BASE_URL = "http://172.17.0.1:8080/v1"
-MAX_NEW_TOKENS_DEFAULT = 256
-TIMEOUT_DEFAULT = 180.0
-KEY_ENV_NAMES = (
-    "MISTRAL_API_KEY",
-    "IPFS_ACCELERATE_MISTRAL_API_KEY",
-    "IPFS_ACCELERATE_PY_MISTRAL_API_KEY",
-    "ipfs_accelerate_py_MISTRAL_API_KEY",
-    "IPFS_DATASETS_PY_MISTRAL_API_KEY",
-)
-FORBIDDEN_HOSTS = frozenset({"172.17.0.1", "127.0.0.1", "localhost", "0.0.0.0"})
-FORBIDDEN_PROVIDERS = frozenset(
-    {
-        "leanstral_local",
-        "llama_cpp",
-        "grok",
-        "grok_cli",
-        "xai",
-        "hf_inference_api",
-        "openai",
-        "openrouter",
-    }
-)
-CANARY_NAME = "CallElimCorrect.substOldPostSubset"
+from jevops.catalogs import ACCEL_ROOT as ROOT_ACCEL  # noqa: E402
+from jevops.catalogs import CANARY_PRIMARY as CANARY_NAME  # noqa: E402
+from jevops.catalogs import TRACK_LABEL  # noqa: E402
+from jevops.catalogs import LABS_RETIRE_DATE  # noqa: E402
+from jevops.catalogs import PROTOCOL  # noqa: E402
+from jevops.catalogs import MISTRAL_ALT_MODELS as ALT_MODELS  # noqa: E402
+from jevops.catalogs import MISTRAL_API_HOST as API_HOST  # noqa: E402
+from jevops.catalogs import MISTRAL_CHAT_URL as CHAT_URL  # noqa: E402
+from jevops.catalogs import MISTRAL_FORBIDDEN_HOSTS as FORBIDDEN_HOSTS  # noqa: E402
+from jevops.catalogs import MISTRAL_FORBIDDEN_PROVIDERS as FORBIDDEN_PROVIDERS  # noqa: E402
+from jevops.catalogs import MISTRAL_HARDWARE_CLASS as HARDWARE_CLASS  # noqa: E402
+from jevops.catalogs import MISTRAL_KEY_ENV_NAMES as KEY_ENV_NAMES  # noqa: E402
+from jevops.catalogs import MISTRAL_MAX_NEW_TOKENS as MAX_NEW_TOKENS_DEFAULT  # noqa: E402
+from jevops.catalogs import MISTRAL_MODEL as REQUESTED_MODEL  # noqa: E402
+from jevops.catalogs import MISTRAL_PROVIDER as REQUESTED_PROVIDER  # noqa: E402
+from jevops.catalogs import MISTRAL_TIMEOUT_SECONDS as TIMEOUT_DEFAULT  # noqa: E402
+from jevops.catalogs import PROTOTYPE_BASE_URL  # noqa: E402
+from jevops.catalogs import PROTOTYPE_HARDWARE_CLASS  # noqa: E402
 FORBIDDEN_IMPORT_NAMES = frozenset({"fcntl", "typesafe_sdk", "LeanstralProofProvider"})
 
 
@@ -120,11 +101,10 @@ def mistral_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
 
 
 def resolve_mistral_key(env: Optional[Mapping[str, str]] = None) -> str:
-    from jevops.outer import env_mapping, first_nonempty
+    from jevops.outer import env_mapping, first_nonempty, raise_if
 
     value = first_nonempty(env_mapping(env), *KEY_ENV_NAMES)
-    if not value:
-        raise Track1MistralError("MISTRAL_API_KEY is not set")
+    raise_if(not value, Track1MistralError, "MISTRAL_API_KEY is not set")
     return value
 
 
@@ -162,27 +142,16 @@ def chat_completions(
 
     assert_hosted_url(url)
     key = resolve_mistral_key()
-    payload: dict[str, Any] = {
-        "model": model,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": float(temperature),
-        "top_p": 1,
-        "max_tokens": int(max_tokens),
-    }
-    if int(n) > 1:
-        payload["n"] = int(n)
-        if float(payload["temperature"]) <= 0.0:
-            payload["temperature"] = 0.3
-    if stop:
-        from jevops.outer import nonempty_strs
+    from jevops.outer import chat_request_payload, elapsed_ms, http_json, pack_chat_response
 
-        payload["stop"] = nonempty_strs(stop)
-    from jevops.outer import chat_choice_texts
-    from jevops.outer import elapsed_ms
-    from jevops.outer import field_of
-    from jevops.outer import http_json
-    from jevops.outer import usage_tokens
-
+    payload = chat_request_payload(
+        prompt,
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        n=n,
+        stop=stop,
+    )
     started = time.perf_counter()
     status, data, final_url = http_json(
         url,
@@ -199,27 +168,22 @@ def chat_completions(
         json_fmt="Mistral returned invalid JSON: {exc}",
         not_object="Mistral returned a non-object JSON payload",
     )
-    assert_hosted_url(final_url or url)
-    text, _texts, usage = chat_choice_texts(data)
-    inn, out = usage_tokens(usage)
-    resolved_model = str(data.get("model") or model)
-    choices = data.get("choices") if isinstance(data.get("choices"), list) else []
-    finish = str(field_of(choices[0] if choices else {}, "finish_reason") or "")
-    return {
-        "text": text,
-        "model": resolved_model,
-        "id": str(data.get("id") or ""),
-        "object": str(data.get("object") or ""),
-        "status": status,
-        "url_host": urlparse(final_url or url).hostname,
-        "input_tokens": inn,
-        "output_tokens": out,
-        "finish_reason": finish,
-        "wall_ms": elapsed_ms(started),
-        "hardware_class": HARDWARE_CLASS,
-        "prototype_base_url": PROTOTYPE_BASE_URL,
-        "used_prototype_endpoint": False,
-    }
+    from jevops.outer import first_truthy
+
+    resolved = first_truthy(final_url, url)
+    assert_hosted_url(resolved)
+    return pack_chat_response(
+        data,
+        status=status,
+        url=resolved,
+        wall_ms=elapsed_ms(started),
+        model=model,
+        extra={
+            "hardware_class": HARDWARE_CLASS,
+            "prototype_base_url": PROTOTYPE_BASE_URL,
+            "used_prototype_endpoint": False,
+        },
+    )
 
 
 def generate_mistral(
@@ -232,70 +196,56 @@ def generate_mistral(
     fixture: bool = False,
     fixture_text: str = "simp_all",
 ) -> tuple[str, dict[str, Any], lra_t1.UsageLine]:
+    from jevops.outer import ledger_generate
+
     estimated_in = lra_t1.estimate_tokens(prompt)
-    estimated_out = int(max_new_tokens)
-    allowed, reason, _cost = ledger.authorize("mistral", estimated_in, estimated_out)
-    if not allowed:
-        line = ledger.record(
-            "mistral",
-            input_tokens=estimated_in,
-            output_tokens=estimated_out,
+    from jevops.outer import first_int
+
+    estimated_out = first_int(max_new_tokens)
+
+    def _identity(*, model: str, fixture: bool, extra: Optional[Mapping[str, Any]] = None, text: str = "") -> dict[str, Any]:
+        del text
+        from jevops.lean import hosted_identity
+
+        return hosted_identity(
+            requested_provider=REQUESTED_PROVIDER,
+            requested_model=model,
             fixture=fixture,
-            model=model,
+            extra=extra,
+            api_host=API_HOST,
+            hardware_class=HARDWARE_CLASS,
+            error_cls=Track1MistralError,
+            host_fmt="resolved host is not {host}",
         )
-        raise Track1MistralError(f"mistral call refused: {reason}")
-    if fixture:
-        identity = {
-            "requested_provider": REQUESTED_PROVIDER,
-            "requested_model": model,
-            "resolved_provider": REQUESTED_PROVIDER,
-            "resolved_model": model,
-            "fallback_used": False,
-            "url_host": API_HOST,
-            "hardware_class": HARDWARE_CLASS,
-            "used_prototype_endpoint": False,
-            "arena_score": None,
-        }
-        line = ledger.record(
-            "mistral",
-            input_tokens=estimated_in,
-            output_tokens=lra_t1.estimate_tokens(fixture_text),
-            fixture=True,
+
+    def _live() -> tuple[str, Mapping[str, Any], tuple[int, int]]:
+        payload = chat_completions(
+            prompt,
             model=model,
+            max_tokens=max_new_tokens,
+            timeout=timeout,
         )
-        return fixture_text, identity, line
-    payload = chat_completions(
-        prompt,
-        model=model,
-        max_tokens=max_new_tokens,
-        timeout=timeout,
-    )
-    resolved_provider = REQUESTED_PROVIDER
-    if payload.get("url_host") != API_HOST:
-        raise Track1MistralError("resolved host is not api.mistral.ai")
-    identity = {
-        "requested_provider": REQUESTED_PROVIDER,
-        "requested_model": model,
-        "resolved_provider": resolved_provider,
-        "resolved_model": payload.get("model") or model,
-        "fallback_used": False,
-        "request_id": payload.get("id"),
-        "url_host": payload.get("url_host"),
-        "hardware_class": HARDWARE_CLASS,
-        "used_prototype_endpoint": False,
-        "finish_reason": payload.get("finish_reason"),
-        "arena_score": None,
-    }
-    line = ledger.record(
+        from jevops.outer import first_int, get_str
+
+        inn = first_int(payload.get("input_tokens"), estimated_in)
+        out = first_int(payload.get("output_tokens"), lra_t1.estimate_tokens(get_str(payload, "text")))
+        return get_str(payload, "text"), payload, (inn, out)
+
+    return ledger_generate(
+        ledger,
         "mistral",
-        input_tokens=int(payload.get("input_tokens") or estimated_in),
-        output_tokens=int(payload.get("output_tokens") or lra_t1.estimate_tokens(payload["text"])),
-        fixture=False,
-        model=str(identity["resolved_model"]),
+        estimated_in=estimated_in,
+        estimated_out=estimated_out,
+        model=model,
+        fixture=fixture,
+        fixture_text=fixture_text,
+        live_fn=_live,
+        identity_fn=_identity,
+        error_cls=Track1MistralError,
+        estimate_fn=lra_t1.estimate_tokens,
+        refuse_fmt="mistral call refused: {reason}",
+        after_fmt="mistral spend refused after call: {reason}",
     )
-    if line.skipped:
-        raise Track1MistralError(f"mistral spend refused after call: {line.reason}")
-    return str(payload["text"]), identity, line
 
 
 def redact(payload: Any) -> Any:
@@ -316,94 +266,90 @@ def run_named(
     from jevops.outer import env_copy
 
     pin_paths()
-    if official_track2 or lra_ts.official_track2_requested():
-        return {
-            "ok": True,
-            "skipped": True,
-            "reason": "official_track2_off",
-            "called_mistral": False,
-            "called_jev": False,
-            "arena_score": None,
-            "contaminates_track2": False,
-        }
-    record, records, digest = lra_t1._load_named_record(name, path)
-    ledger = lra_t1.ProblemLedger(name=name, official_track2=False)
-    if not fixture and not (mistral_key_configured() and lra_t1.jev_key_configured()):
-        return {
-            "ok": True,
-            "skipped": True,
-            "reason": "no_key",
-            "name": name,
-            "mistral_key_configured": mistral_key_configured(),
-            "jev_key_configured": lra_t1.jev_key_configured(),
-            "called_mistral": False,
-            "arena_score": None,
-        }
-    neighbors = lra_t1._neighbors_for(record, records)
-    state = lra_ts.problem_state(record, neighbors=neighbors)
-    factory = None
-    if fixture:
-        factory = lambda **kwargs: lra_ts.FixtureClient(answers=lra_ts.default_fixture_answers(), **kwargs)
-    router = lra_ts.TypeSafeLraRouter(
-        mode="inloop",
-        official_track2=False,
-        env=env_copy({"LRA_TYPESAFE": "inloop"}),
-        client_factory=factory,
-        require_key=not fixture,
-    )
-    from jevops.outer import elapsed_ms, head_chars
+    from jevops.outer import closed_skip, first_call, first_truthy
 
-    started = time.perf_counter()
-    jev_result = router.route(state, neighbor_names=[item["name"] for item in neighbors])
-    ledger.record(
-        "jev",
-        input_tokens=int((jev_result.usage or {}).get("input_tokens") or 0),
-        output_tokens=int((jev_result.usage or {}).get("output_tokens") or 0),
-        fixture=fixture or bool(jev_result.used_fixture),
-        model=jev_result.model or lra_t1.JEV_MODEL_ID,
+    early = first_call(
+        (
+            first_truthy(official_track2, lra_ts.official_track2_requested()),
+            lambda: closed_skip(
+                "official_track2_off",
+                extra={"called_jev": False, "contaminates_track2": False},
+            ),
+        ),
+        (
+            not fixture and not (mistral_key_configured() and lra_t1.jev_key_configured()),
+            lambda: closed_skip(
+                "no_key",
+                extra={
+                    "name": name,
+                    "mistral_key_configured": mistral_key_configured(),
+                    "jev_key_configured": lra_t1.jev_key_configured(),
+                },
+            ),
+        ),
     )
-    prompt = lra_gt.render_prompt(record)
-    text, identity, _line = generate_mistral(
-        prompt,
-        ledger,
-        max_new_tokens=max_new_tokens,
-        timeout=timeout,
-        fixture=fixture,
-    )
-    payload = {
-        "ok": True,
-        "skipped": False,
-        "schema": "lra-track1-mistral-leanstral/v1",
-        "protocol": PROTOCOL,
-        "pr": PR_ID,
-        "track": TRACK_LABEL,
-        "name": name,
-        "source": record.get("source"),
-        "warmup_jsonl_sha256": digest,
-        "requested_provider": REQUESTED_PROVIDER,
-        "requested_model": REQUESTED_MODEL,
-        "identity": identity,
-        "hardware_class": HARDWARE_CLASS,
-        "prototype_hardware_class": PROTOTYPE_HARDWARE_CLASS,
-        "used_prototype_endpoint": False,
-        "labs_retire_date": LABS_RETIRE_DATE,
-        "text": text,
-        "text_head": head_chars(text, 400),
-        "n_chars": len(text),
-        "jev_route": jev_result.as_dict(),
-        "ledger": ledger.as_dict(),
-        "called_mistral": True,
-        "called_jev": True,
-        "called_docker0": False,
-        "lock_ex": False,
-        "llama_server_started": False,
-        "official_track2": False,
-        "contaminates_track2": False,
-        "arena_score": None,
-        "api_key_present_in_record": False,
-        "wall_ms": elapsed_ms(started),
-    }
-    return redact(payload)
+    from jevops.outer import first_not_none
+
+    def _run() -> dict[str, Any]:
+        record, records, digest = lra_t1._load_named_record(name, path)
+        ledger = lra_t1.ProblemLedger(name=name, official_track2=False)
+        from jevops.outer import begin_named_route, fixture_factory, get_str
+
+        neighbors, state, router = begin_named_route(
+            record,
+            records,
+            neighbor_fn=lra_t1._neighbors_for,
+            state_fn=lra_ts.problem_state,
+            fixture=fixture,
+            factory_fn=lambda: fixture_factory(lra_ts.FixtureClient, lra_ts.default_fixture_answers),
+            router_cls=lra_ts.TypeSafeLraRouter,
+            mode="inloop",
+            official_track2=False,
+            env=env_copy({"LRA_TYPESAFE": "inloop"}),
+            require_key=not fixture,
+        )
+        from jevops.outer import elapsed_ms, names_of, record_route_usage
+
+        started = time.perf_counter()
+        jev_result = router.route(state, neighbor_names=names_of(neighbors))
+        record_route_usage(
+            ledger,
+            jev_result,
+            fixture=fixture,
+            model=lra_t1.JEV_MODEL_ID,
+        )
+        prompt = lra_gt.render_prompt(record)
+        text, identity, _line = generate_mistral(
+            prompt,
+            ledger,
+            max_new_tokens=max_new_tokens,
+            timeout=timeout,
+            fixture=fixture,
+        )
+        from jevops.jev import hosted_run_payload
+
+        return redact(
+            hosted_run_payload(
+                name=name,
+                source=get_str(record, "source"),
+                digest=digest,
+                identity=identity,
+                text=text,
+                jev_route=jev_result.as_dict(),
+                ledger=ledger.as_dict(),
+                wall_ms=elapsed_ms(started),
+                requested_provider=REQUESTED_PROVIDER,
+                requested_model=REQUESTED_MODEL,
+                hardware_class=HARDWARE_CLASS,
+                prototype_hardware=PROTOTYPE_HARDWARE_CLASS,
+                protocol=PROTOCOL,
+                pr=PR_ID,
+                track=TRACK_LABEL,
+                labs_retire_date=LABS_RETIRE_DATE,
+            )
+        )
+
+    return first_not_none(early, factory=_run)
 
 
 def audit_source() -> dict[str, Any]:
@@ -413,56 +359,59 @@ def audit_source() -> dict[str, Any]:
     text = read_text(__file__)
     out = _audit(text, forbidden_imports=FORBIDDEN_IMPORT_NAMES)
     imported = set(out["imported_names"])
-    return {
-        "forbidden_imports": out["forbidden_imports"],
-        "uses_lock_ex": out["uses_lock_ex"],
-        "mentions_prototype_url": PROTOTYPE_BASE_URL in text,
-        "ok": not out["uses_lock_ex"] and "typesafe_sdk" not in imported,
-    }
+    from jevops.repair import pack_call_audit
+
+    return pack_call_audit(
+        out,
+        extra={
+            "uses_lock_ex": out["uses_lock_ex"],
+            "mentions_prototype_url": PROTOTYPE_BASE_URL in text,
+        },
+        extra_ok=(not out["uses_lock_ex"], "typesafe_sdk" not in imported),
+    )
 
 
 def self_check() -> dict[str, Any]:
     audit = audit_source()
     ledger = lra_t1.ProblemLedger(name="fixture")
     text, identity, line = generate_mistral("ping", ledger, fixture=True, fixture_text="simp")
-    refused = False
-    try:
-        assert_hosted_url("http://172.17.0.1:8080/v1/chat/completions")
-    except Track1MistralError:
-        refused = True
+    from jevops.outer import closed_on_error, finalize_ok
+
+    refused = closed_on_error(
+        lambda: assert_hosted_url("http://172.17.0.1:8080/v1/chat/completions"),
+        Track1MistralError,
+    )
     mistral_mode = lra_t1.resolve_track1_mode(env={"LRA_GENERATOR": "mistral_labs"})
     track2 = lra_t1.resolve_track1_mode(
         env={"LRA_GENERATOR": "mistral_labs", "LRA_OFFICIAL_TRACK2": "1"}
     )
     zero = lra_t1.usd_for("mistral", 1_000_000, 1_000_000)
-    report = {
-        "ok": True,
-        "audit": audit,
-        "fixture_text": text,
-        "fixture_host": identity.get("url_host"),
-        "fixture_usd": line.usd,
-        "refuses_docker0": refused,
-        "mistral_opt_in": mistral_mode == "track1",
-        "official_track2_stays_off": track2 == "off",
-        "labs_priced_zero": float(zero) == 0.0,
-        "requested_provider": REQUESTED_PROVIDER,
-        "requested_model": REQUESTED_MODEL,
-        "hardware_class": HARDWARE_CLASS,
-        "prototype_hardware_class": PROTOTYPE_HARDWARE_CLASS,
-        "used_prototype_endpoint": False,
-        "arena_score": None,
-        "jev_generated_lean": False,
-    }
-    report["ok"] = (
-        audit["ok"]
-        and refused
-        and mistral_mode == "track1"
-        and track2 == "off"
-        and float(zero) == 0.0
-        and text == "simp"
-        and identity.get("used_prototype_endpoint") is False
+    return finalize_ok(
+        {
+            "audit": audit,
+            "fixture_text": text,
+            "fixture_host": identity.get("url_host"),
+            "fixture_usd": line.usd,
+            "refuses_docker0": refused,
+            "mistral_opt_in": mistral_mode == "track1",
+            "official_track2_stays_off": track2 == "off",
+            "labs_priced_zero": float(zero) == 0.0,
+            "requested_provider": REQUESTED_PROVIDER,
+            "requested_model": REQUESTED_MODEL,
+            "hardware_class": HARDWARE_CLASS,
+            "prototype_hardware_class": PROTOTYPE_HARDWARE_CLASS,
+            "used_prototype_endpoint": False,
+            "arena_score": None,
+            "jev_generated_lean": False,
+        },
+        audit["ok"],
+        refused,
+        mistral_mode == "track1",
+        track2 == "off",
+        float(zero) == 0.0,
+        text == "simp",
+        identity.get("used_prototype_endpoint") is False,
     )
-    return report
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -473,7 +422,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--name", default=CANARY_NAME)
     parser.add_argument("--max-new-tokens", type=int, default=128)
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
     if args.self_check or not (args.probe or args.live):
         report = self_check()
         from jevops.outer import print_ok
@@ -487,7 +438,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             max_tokens=8,
             timeout=60.0,
         )
-        from jevops.outer import head_chars
+        from jevops.outer import get_str, head_chars
 
         report = redact(
             {
@@ -502,7 +453,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                     "hardware_class": HARDWARE_CLASS,
                     "used_prototype_endpoint": False,
                 },
-                "text_head": head_chars(ping.get("text") or "", 120),
+                "text_head": head_chars(get_str(ping, "text"), 120),
                 "finish_reason": ping.get("finish_reason"),
                 "input_tokens": ping.get("input_tokens"),
                 "output_tokens": ping.get("output_tokens"),
@@ -523,10 +474,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         refuse=("apikey_", "sk-"),
         refuse_msg="refusing to write a receipt that looks like it contains a secret",
     )
-    from jevops.outer import print_json
+    from jevops.outer import nested_get, print_json, text_or
 
-    print_json({"ok": report.get("ok"), "latest": str(latest), "skipped": report.get("skipped"), "reason": report.get("reason"), "host": (report.get("identity") or {}).get("url_host"), "model": (report.get("identity") or {}).get("resolved_model"), "used_prototype": report.get("used_prototype_endpoint"), "arena_score": None})
-    return 0 if report.get("ok") else 1
+    print_json({"ok": report.get("ok"), "latest": text_or(latest), "skipped": report.get("skipped"), "reason": report.get("reason"), "host": nested_get(report, "identity", "url_host"), "model": nested_get(report, "identity", "resolved_model"), "used_prototype": report.get("used_prototype_endpoint"), "arena_score": None})
+    from jevops.outer import exit_ok
+
+    return exit_ok(report.get("ok"))
 
 
 if __name__ == "__main__":

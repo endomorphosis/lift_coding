@@ -21,39 +21,34 @@ HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
 REPO_ROOT = HERE.parents[3]
 WARMUP_JSONL = PAPER_ROOT / "data" / "benchmark_data_warmup.jsonl"
-ROOT_ACCEL = Path("/home/barberb/lift_coding/external/ipfs_accelerate")
-KEYFILE = Path.home() / ".config/ipfs_accelerate_py/typesafe.env"
 OUT_DEFAULT = PAPER_ROOT / "evidence" / "canaries"
-CANARY_NAMES = (
-    "CallElimCorrect.substOldPostSubset",
-    "Cslib.CCS.bisimilarity_congr_choice",
-)
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 import _jevops_path  # noqa: E402,F401
 import retrieve as lra_retrieve  # noqa: E402
 import splice as lra_splice  # noqa: E402
+from jevops.catalogs import ACCEL_ROOT as ROOT_ACCEL
+from jevops.catalogs import CANARY_NAMES
+from jevops.catalogs import CASE_REPLACE_CAP
+from jevops.catalogs import TYPESAFE_KEYFILE as KEYFILE
+from jevops.catalogs import MAX_CHOICE_OPTIONS
+from jevops.catalogs import MAX_DRAFTS
+from jevops.catalogs import NEIGHBOR_DRAFT_CAP
+from jevops.catalogs import NEIGHBOR_HEAD_LINES
+from jevops.catalogs import PROTOCOL
+from jevops.catalogs import STATEMENT_CHARS
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 WARMUP_N = lra_splice.WARMUP_N
-PROTOCOL = "LRA/v1"
 PR_ID = "PR-9b"
 LRAH_ID = "LRAH-006b"
-MAX_DRAFTS = 48
-MAX_CHOICE_OPTIONS = 255
-HEAD_CHARS = 220
-STATEMENT_CHARS = 480
-REF_HEAD_LINES = 24
-CASE_REPLACE_CAP = 8
-NEIGHBOR_DRAFT_CAP = 3
-NEIGHBOR_HEAD_LINES = 8
+from jevops.catalogs import DRAFT_HEAD_CHARS as HEAD_CHARS
+from jevops.catalogs import DRAFT_REF_HEAD_LINES as REF_HEAD_LINES
 from jevops.tactics import HAMMER_BODIES
-LIKELY_SHORTER_CRITERIA = (
-    "longer or same",
-    "modest cut around 10 percent",
-    "large cut of 30 percent or more",
-)
+from jevops.catalogs import DRAFT_FANOUT_BEST
+from jevops.catalogs import DRAFT_FANOUT_NOULS
+from jevops.catalogs import LIKELY_SHORTER_CRITERIA
 from jevops.tactics import CALC as _CALC
 from jevops.tactics import CASE as _CASE
 from jevops.tactics import HAVE_OBTAIN as _HAVE_OBTAIN
@@ -178,18 +173,17 @@ def enumerate_drafts(
     """Deterministic drafts from the reference tactic tree. Not a Lean parser."""
 
     reference = tactic_block(record)
-    drafts: list[Draft] = []
-    seen: set[str] = set()
-    from jevops.tactics import closed_tree_edits, neighbor_style_ops
+    from jevops.tactics import closed_tree_edits, collect_tree_drafts, neighbor_style_ops
 
-    for family, body, ops in closed_tree_edits(reference, case_replace_cap=CASE_REPLACE_CAP):
-        _push(drafts, seen, family, body, ops)
     retrieval = lra_retrieve.retrieve_record(record, records)
     neighbors = lra_retrieve.prompt_neighbors(retrieval, k=NEIGHBOR_DRAFT_CAP)
     by_name = {item.get("name"): item for item in records}
-    for family, body, ops in neighbor_style_ops(neighbors, by_name, head_fn=neighbor_tactic_head):
-        _push(drafts, seen, family, body, ops)
-    return drafts[:MAX_DRAFTS]
+    return collect_tree_drafts(
+        closed_edits=closed_tree_edits(reference, case_replace_cap=CASE_REPLACE_CAP),
+        neighbor_ops=neighbor_style_ops(neighbors, by_name, head_fn=neighbor_tactic_head),
+        push_fn=_push,
+        cap=MAX_DRAFTS,
+    )
 
 
 def draft_catalog(drafts: Sequence[Draft]) -> list[dict[str, Any]]:
@@ -212,6 +206,7 @@ def fanout_state(
     drafts: Sequence[Draft],
 ) -> dict[str, Any]:
     from jevops.jev import fanout_problem_state
+    from jevops.outer import get_list, get_str
 
     split = lra_splice.split_statement_body(record)
     tactics = lra_splice.tactic_block_from_body(split.body_suffix)
@@ -220,9 +215,9 @@ def fanout_state(
         record,
         statement_n=STATEMENT_CHARS,
         problem={
-            "name": record.get("name"),
-            "source": record.get("source"),
-            "n_toolchains": len(record.get("version_info") or []),
+            "name": get_str(record, "name"),
+            "source": get_str(record, "source"),
+            "n_toolchains": len(get_list(record, "version_info")),
             "proof_length": record.get("proof_length"),
             "num_lines": record.get("num_lines"),
         },
@@ -242,18 +237,8 @@ def fanout_questions(drafts: Sequence[Draft], *, Choice: Any, Noul: Any, Score: 
         Noul=Noul,
         Score=Score,
         criteria=draft_criteria(drafts),
-        best_instructions=(
-            "Which draft id in `drafts` should code lake-compile first as a refactor of "
-            "`reference_head` for `statement`? Pick exactly one id. Do not write Lean."
-        ),
-        nouls={
-            "any_draft_likely_compiles": (
-                "Is at least one catalog draft likely to compile on the record's version_info tags?"
-            ),
-            "spend_llm_after_fanout": (
-                "After trying the ranked drafts, should code still spend a Leanstral generation?"
-            ),
-        },
+        best_instructions=DRAFT_FANOUT_BEST,
+        nouls=DRAFT_FANOUT_NOULS,
         scores={
             "likely_token_cut": (
                 "How large a source-token cut is plausible if the best draft replaces the reference?",
@@ -285,59 +270,63 @@ def rank_choice(probabilities: Mapping[str, Any], drafts: Sequence[Draft], *, k:
 
 
 def rank_problem(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]], *, live: bool) -> dict[str, Any]:
-    from jevops.outer import dumps_sorted
+    from jevops.jev import invoke_system_one, rank_catalog_or_live, unpack_response
+    from jevops.outer import dumps_sorted, overlay_map, unless_flag
 
     drafts = enumerate_drafts(record, records)
     state = fanout_state(record, drafts)
-    payload = {
-        "name": record.get("name"),
-        "source": record.get("source"),
-        "n_drafts": len(drafts),
-        "draft_ids": [item.draft_id for item in drafts],
-        "families": sorted({item.family for item in drafts}),
-        "n_case_spans": len(case_spans(tactic_block(record))),
-        "state_chars": len(dumps_sorted(state)),
-        "jev_generated_lean": False,
-        "arena_score": None,
-        "compile_attempted": False,
-    }
-    if not live:
-        payload["live"] = False
-        payload["catalog"] = draft_catalog(drafts)
-        return payload
-    pin_typesafe_path()
-    from ipfs_accelerate_py.typesafe_inference import Choice, Noul, Score, TypeSafeClient, typesafe_configured
+    families = [{"family": fam} for fam in sorted({item.family for item in drafts})]
 
-    if not typesafe_configured():
-        payload["live"] = False
-        payload["error"] = "TYPESAFE_API_KEY is not set"
-        payload["catalog"] = draft_catalog(drafts)
-        return payload
-    from jevops.jev import invoke_system_one, unpack_response
+    def _project(result: Any, wall_ms: float) -> dict[str, Any]:
+        from jevops.jev import pack_fanout_live_row
 
-    questions = fanout_questions(drafts, Choice=Choice, Noul=Noul, Score=Score)
-    result, wall_ms = invoke_system_one(TypeSafeClient(timeout=60.0), state, questions)
-    choices, nouls, scores, usage = unpack_response(result)
-    best = choices.get("best_first_draft")
-    noul_any = nouls.get("any_draft_likely_compiles")
-    spend = nouls.get("spend_llm_after_fanout")
-    shorter = scores.get("likely_token_cut")
-    probabilities = dict(getattr(best, "probabilities", None) or {})
-    payload.update(
-        {
-            "live": True,
-            "model": getattr(result, "model", None),
-            "usage": usage,
-            "wall_ms": wall_ms,
-            "best_first_draft": getattr(best, "choice", None),
-            "best_confidence": getattr(best, "confidence", None),
-            "any_draft_likely_compiles": getattr(noul_any, "noul", None),
-            "spend_llm_after_fanout": getattr(spend, "noul", None),
-            "likely_token_cut": getattr(shorter, "score", None),
-            "top": rank_choice(probabilities, drafts),
-        }
+        return pack_fanout_live_row(
+            result,
+            wall_ms,
+            unpack_fn=unpack_response,
+            rank_fn=rank_choice,
+            drafts=drafts,
+        )
+
+    def _invoke() -> tuple[Any, float]:
+        from jevops.jev import load_typesafe_inference
+
+        loaded = load_typesafe_inference(setup=(pin_typesafe_path,), fallback=False)
+        Choice, Noul, Score, TypeSafeClient = (
+            loaded["Choice"],
+            loaded["Noul"],
+            loaded["Score"],
+            loaded["TypeSafeClient"],
+        )
+        questions = fanout_questions(drafts, Choice=Choice, Noul=Noul, Score=Score)
+        return invoke_system_one(TypeSafeClient(timeout=60.0), state, questions)
+
+    def _configured() -> bool:
+        from jevops.jev import typesafe_is_configured
+
+        return typesafe_is_configured(setup=(pin_typesafe_path,), fallback=False)
+
+    return rank_catalog_or_live(
+        record,
+        drafts=drafts,
+        families=families,
+        features={},
+        live=live,
+        extra=overlay_map(
+            {
+                "n_case_spans": len(case_spans(tactic_block(record))),
+                "state_chars": len(dumps_sorted(state)),
+                "compile_attempted": False,
+            },
+            **unless_flag(live, {"catalog": draft_catalog(drafts)}),
+        ),
+        catalog_fn=lambda: draft_catalog(drafts),
+        pin_fn=pin_typesafe_path,
+        configured_fn=_configured,
+        invoke_fn=_invoke,
+        project_fn=_project,
+        redact_fn=redact,
     )
-    return redact(payload)
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
@@ -357,81 +346,76 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
 
 
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
-    from jevops.outer import digest_file
+    from jevops.outer import digest_file, path_or
+
+    jsonl = path_or(path, WARMUP_JSONL)
 
     before = digest_file(jsonl)
     _raw, digest, records = lra_splice.load_warmup_records(jsonl)
     after = digest_file(jsonl)
     audit = audit_source()
-    rows = []
-    for name in CANARY_NAMES:
-        from jevops.outer import lookup_named
+    from jevops.outer import all_rows, any_in, finalize_ok, lookup_named
 
-        record = lookup_named(
-            records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"
+    rows = [
+        rank_problem(
+            lookup_named(records, name, error_cls=RuntimeError, miss=f"unknown warm-up problem: {name}"),
+            records,
+            live=False,
         )
-        rows.append(rank_problem(record, records, live=False))
-    ok = (
-        audit["ok"]
-        and before == after == FROZEN_WARMUP_SHA256
-        and all(row["n_drafts"] >= 6 for row in rows)
-        and all(row["draft_ids"][0] == "d000" for row in rows)
-        and all("reference" in row["families"] for row in rows)
-        and all("simp_set" in row["families"] or "aesop" in row["families"] for row in rows)
-        and all(row["n_drafts"] <= MAX_CHOICE_OPTIONS for row in rows)
+        for name in CANARY_NAMES
+    ]
+    return finalize_ok(
+        {
+            "protocol": PROTOCOL,
+            "pr": PR_ID,
+            "lrah": LRAH_ID,
+            "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
+            "warmup_jsonl_sha256": digest,
+            "jsonl_unchanged": before == after == FROZEN_WARMUP_SHA256,
+            "audit": audit,
+            "max_drafts": MAX_DRAFTS,
+            "max_choice_options": MAX_CHOICE_OPTIONS,
+            "jev_generated_lean": False,
+            "arena_score": None,
+            "canaries": rows,
+        },
+        audit["ok"],
+        before == after == FROZEN_WARMUP_SHA256,
+        all_rows(rows, lambda row: row["n_drafts"] >= 6),
+        all_rows(rows, lambda row: row["draft_ids"][0] == "d000"),
+        all_rows(rows, lambda row: "reference" in row["families"]),
+        all_rows(rows, lambda row: any_in(row["families"], ("simp_set", "aesop"))),
+        all_rows(rows, lambda row: row["n_drafts"] <= MAX_CHOICE_OPTIONS),
     )
-    return {
-        "ok": ok,
-        "protocol": PROTOCOL,
-        "pr": PR_ID,
-        "lrah": LRAH_ID,
-        "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
-        "warmup_jsonl_sha256": digest,
-        "jsonl_unchanged": before == after == FROZEN_WARMUP_SHA256,
-        "audit": audit,
-        "max_drafts": MAX_DRAFTS,
-        "max_choice_options": MAX_CHOICE_OPTIONS,
-        "jev_generated_lean": False,
-        "arena_score": None,
-        "canaries": rows,
-    }
 
 
 def live_rank(names: Sequence[str], path: Optional[Path] = None) -> dict[str, Any]:
-    load_keyfile()
-    pin_typesafe_path()
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import pin_calls
+
+    pin_calls(load_keyfile, pin_typesafe_path)()
+    from jevops.outer import path_or
+
+    jsonl = path_or(path, WARMUP_JSONL)
     _raw, digest, records = lra_splice.load_warmup_records(jsonl)
     started = time.perf_counter()
-    rows = []
-    from jevops.outer import elapsed_ms, lookup_named, utc_stamp
+    from jevops.outer import elapsed_ms, pack_live_rank, rank_named_rows
 
-    for name in names:
-        record = lookup_named(records, name)
-        if record is None:
-            rows.append({"name": name, "error": "unknown warm-up problem", "arena_score": None})
-            continue
-        rows.append(rank_problem(record, records, live=True))
-    payload = {
-        "schema": "lra-draft-fanout/v1",
-        "observed_at": utc_stamp(),
-        "protocol": PROTOCOL,
-        "pr": PR_ID,
-        "live": True,
-        "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
-        "warmup_jsonl_sha256": digest,
-        "jev_generated_lean": False,
-        "typesafe_key_in_receipt": False,
-        "lock_ex": False,
-        "llama_server_started": False,
-        "official_track2": False,
-        "compile_attempted": False,
-        "arena_score": None,
-        "wall_ms": elapsed_ms(started),
-        "canaries": rows,
-    }
-    return redact(payload)
+    rows = rank_named_rows(
+        names, records, lambda record: rank_problem(record, records, live=True)
+    )
+    return pack_live_rank(
+        schema="lra-draft-fanout/v1",
+        digest=digest,
+        canaries=rows,
+        wall_ms=elapsed_ms(started),
+        extra={
+            "protocol": PROTOCOL,
+            "pr": PR_ID,
+            "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
+            "compile_attempted": False,
+        },
+        redact_fn=redact,
+    )
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -441,7 +425,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--names", default=",".join(CANARY_NAMES))
     parser.add_argument("--jsonl", type=Path, default=None)
     parser.add_argument("--out", type=Path, default=OUT_DEFAULT)
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
     if args.self_check or not args.live:
         report = self_check(args.jsonl)
         from jevops.outer import print_ok
@@ -458,16 +444,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         latest="draft-fanout-latest.json",
         refuse="apikey_",
     )
-    from jevops.outer import print_json
+    from jevops.outer import or_list, print_json, text_or
 
     print_json(
         {
-            "ok": all(row.get("live") for row in report.get("canaries") or []),
-            "latest": str(latest),
-            "n": len(report.get("canaries") or []),
+            "ok": all(row.get("live") for row in or_list(report.get("canaries"), [])),
+            "latest": text_or(latest),
+            "n": len(or_list(report.get("canaries"), [])),
             "picks": [
                 {"name": row.get("name"), "best": row.get("best_first_draft"), "n_drafts": row.get("n_drafts"), "wall_ms": row.get("wall_ms")}
-                for row in report.get("canaries") or []
+                for row in or_list(report.get("canaries"), [])
             ],
             "arena_score": None,
         }

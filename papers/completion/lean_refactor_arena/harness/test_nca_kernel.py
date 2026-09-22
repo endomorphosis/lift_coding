@@ -204,6 +204,7 @@ class NcaKernelTests(unittest.TestCase):
         lra_kern.flight_end(mem, "k1")
         c = lra_kern.flight_begin(mem, "k1")
         self.assertTrue(c["ok"])
+        lra_kern.flight_end(mem, "k1")
 
     def test_durable_inflight_survives_new_memory(self) -> None:
         import os

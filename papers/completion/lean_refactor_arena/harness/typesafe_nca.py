@@ -15,9 +15,9 @@ from typing import Any, Mapping, Optional
 
 HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
-WALK_MAX_FILES = 80
 
 import _jevops_path  # noqa: F401
+from jevops.catalogs import WALK_MAX_FILES  # noqa: E402
 import typesafe_tools as lra_tools
 from jevops.nca import (  # noqa: E402
     BUDGET_PTR,
@@ -48,14 +48,16 @@ def feed_state(memory: dict[str, Any], *, tactics: str = "", problem: str = "") 
     from jevops.nca import feed_with_overlays
     from jevops.nca import invert_multimap
 
-    counts = lra_port.analyze_residuals(tactics) if tactics else None
-    tree = lra_port.decision_tree(tactics, memory=memory, name=problem) if tactics else None
+    from jevops.outer import call_if
+
+    counts = call_if(tactics, lambda: lra_port.analyze_residuals(tactics))
+    tree = call_if(tactics, lambda: lra_port.decision_tree(tactics, memory=memory, name=problem))
     return feed_with_overlays(
         memory,
         tactics=tactics,
         problem=problem,
         counts=counts,
-        inverse=invert_multimap(lra_port.SKILL_RESIDUAL) if counts else None,
+        inverse=call_if(counts, lambda: invert_multimap(lra_port.SKILL_RESIDUAL)),
         tree=tree,
     )
 
@@ -123,50 +125,59 @@ def mutate(
     def _fold(body: str) -> Optional[dict[str, Any]]:
         from jevops.memory import first_fold
 
-        return first_fold(body, memory.get("skills") or [], fold_fn=lra_port.fold_from_memory_skill)
+        from jevops.outer import get_list
+
+        return first_fold(body, get_list(memory, "skills"), fold_fn=lra_port.fold_from_memory_skill)
 
     def _mint() -> dict[str, Any]:
+        from jevops.outer import call_if
+
         prop = lra_bind.propose_skill_from_research(memory, problem)
-        if prop.get("keep_structure") and prop.get("mint"):
+
+        def _keep() -> dict[str, Any]:
             lra_bind.expand_skills_from_memory(memory, name=problem, tactics=tactics)
             return prop
-        return {}
+
+        return call_if(prop.get("keep_structure") and prop.get("mint"), _keep, default={})
 
     return apply_mutate(memory, tactics=tactics, problem=problem, op=op, fold_fn=_fold, mint_fn=_mint)
 
 
 def nca_tool(name: str, **kwargs: Any) -> dict[str, Any]:
     from jevops.nca import dispatch_tool
+    from jevops.outer import as_dict, get_list, get_str
 
-    memory = kwargs.get("memory") if isinstance(kwargs.get("memory"), dict) else {}
-    tactics = str(kwargs.get("tactics") or "")
-    problem = str(kwargs.get("problem") or "")
+    memory = as_dict(kwargs.get("memory"), {})
+    tactics = get_str(kwargs, "tactics")
+    problem = get_str(kwargs, "problem")
     return dispatch_tool(
         name,
         extras={
             "nca_walk": lambda **_k: walk_codebase(),
-            "nca_hook": lambda **k: hook_and_eval(str(k.get("path") or "portable_rewrites.py")),
+            "nca_hook": lambda **k: hook_and_eval(get_str(k, "path", default="portable_rewrites.py")),
             "nca_mutate": lambda **k: mutate(
-                memory, tactics=tactics, problem=problem, op=str(k.get("op") or "auto")
+                memory, tactics=tactics, problem=problem, op=get_str(k, "op", default="auto")
             ),
-            "nca_eval": lambda **k: evaluate_tests(*list(k.get("tests") or ["test_skill_improve_loop"])),
+            "nca_eval": lambda **k: evaluate_tests(*get_list(k, "tests", default=["test_skill_improve_loop"])),
         },
         **kwargs,
     )
 
 
 def _nca_tick_entry(**kwargs: Any) -> dict[str, Any]:
-    mem = kwargs.get("memory") if isinstance(kwargs.get("memory"), dict) else {}
-    rec = kwargs.get("record") if isinstance(kwargs.get("record"), dict) else {}
-    problem = str(kwargs.get("problem") or rec.get("name") or "")
-    return tick(mem, tactics=str(kwargs.get("tactics") or ""), problem=problem)
+    from jevops.outer import as_dict, first_truthy, get_str, text_or
+
+    mem = as_dict(kwargs.get("memory"), {})
+    rec = as_dict(kwargs.get("record"), {})
+    problem = text_or(first_truthy(kwargs.get("problem"), rec.get("name"), default=""))
+    return tick(mem, tactics=get_str(kwargs, "tactics"), problem=problem)
+
+
+def _nca_fork_entry(**kwargs: Any) -> dict[str, Any]:
+    from jevops.outer import as_dict, without_keys
+
+    return fork_cells(as_dict(kwargs.get("memory"), {}), **without_keys(kwargs, ("name", "memory")))
 
 
 lra_tools.register_subloop("nca_tick", _nca_tick_entry)
-lra_tools.register_subloop(
-    "nca_fork",
-    lambda **kw: fork_cells(
-        kw.get("memory") if isinstance(kw.get("memory"), dict) else {},
-        **{k: v for k, v in kw.items() if k not in {"name", "memory"}},
-    ),
-)
+lra_tools.register_subloop("nca_fork", _nca_fork_entry)

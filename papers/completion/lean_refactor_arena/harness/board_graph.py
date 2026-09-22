@@ -20,17 +20,9 @@ from jevops.board import seed_grid_from_board
 HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
 TASKS_JSON = PAPER_ROOT / "tasks.json"
-ROOT_GOAL = "LRA-G000"
-BLOCKED = frozenset({"LRA-S09", "LRA-S10", "LRA-024", "LRA-025", "LRA-027"})
-# Small canaries credit the warmup (S04) or TypeSafe (S05) tasks.
-THEOREM_TASKS: dict[str, str] = {
-    "CallElimCorrect.substOldPostSubset": "LRA-017",
-    "CallElimCorrect.extractedOldExprInVars": "LRA-017",
-    "Core.InitsUpdatesComm": "LRA-019",
-    "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": "LRA-017",
-    "Cslib.SKI.parallelReduction_diamond": "LRA-017",
-    "Cslib.CCS.bisimilarity_congr_choice": "LRA-019",
-}
+from jevops.catalogs import BLOCKED  # noqa: E402
+from jevops.catalogs import ROOT_GOAL  # noqa: E402
+from jevops.catalogs import THEOREM_TASKS  # noqa: E402
 
 
 def _ptr(kind: str, ident: str) -> str:
@@ -40,28 +32,42 @@ def _ptr(kind: str, ident: str) -> str:
 
 
 def _codepath_ptr(path: str) -> str:
-    from jevops.outer import path_to_dots, posix_slash, without_prefix
+    from jevops.outer import call_if, path_to_dots, posix_slash, replace_if, without_prefix
 
     text = posix_slash(path)
-    if not text:
-        return ""
     marker = "papers/completion/lean_refactor_arena/harness/"
-    if text.startswith(marker):
-        text = "harness/" + without_prefix(text, marker)
-    return _ptr("codepath", path_to_dots(text))
+    return call_if(
+        text,
+        lambda: _ptr(
+            "codepath",
+            path_to_dots(
+                replace_if(text.startswith(marker), "harness/" + without_prefix(text, marker), text)
+            ),
+        ),
+        default="",
+    )
 
 
 def load_lra_board(*, path: Optional[Path] = None) -> dict[str, Any]:
     from jevops.board import board_from_payload
 
-    target = path or TASKS_JSON
+    from jevops.outer import if_none
+
+    target = if_none(path, TASKS_JSON)
     from jevops.outer import read_json
 
     data = read_json(target)
 
     def _paths(row: Mapping[str, Any]) -> list[str]:
-        paths = [str(p) for p in (row.get("suggested_code_paths") or []) if p]
-        paths.extend(str(p) for p in (row.get("deliverables") or []) if str(p).endswith(".py"))
+        from jevops.outer import get_list, project_map, text_or
+
+        paths = project_map([p for p in get_list(row, "suggested_code_paths") if p], text_or)
+        paths.extend(
+            project_map(
+                [p for p in get_list(row, "deliverables") if text_or(p).endswith(".py")],
+                text_or,
+            )
+        )
         return paths
 
     return board_from_payload(data, root=ROOT_GOAL, blocked=BLOCKED, code_paths_fn=_paths)
@@ -70,7 +76,9 @@ def load_lra_board(*, path: Optional[Path] = None) -> dict[str, Any]:
 def board_payload(ident: str, board: Optional[Mapping[str, Any]] = None) -> dict[str, Any]:
     from jevops.board import board_payload as kernel_payload
 
-    data = dict(board or load_lra_board())
+    from jevops.outer import or_load
+
+    data = or_load(board, load_lra_board)
     data.setdefault("root", ROOT_GOAL)
     return kernel_payload(ident, data, path_ptr=_codepath_ptr)
 
@@ -84,24 +92,28 @@ def refresh_board_window(memory: dict[str, Any]) -> list[dict[str, Any]]:
 def seed_nca_from_board(memory: dict[str, Any], *, board: Optional[Mapping[str, Any]] = None, force: bool = False) -> dict[str, Any]:
     """Insert goal/subgoal/task/codepath cells and DAG neighbors. No campaign write."""
 
-    data = dict(board or load_lra_board())
+    from jevops.outer import or_load
+
+    data = or_load(board, load_lra_board)
     data.setdefault("root", ROOT_GOAL)
-    out = seed_grid_from_board(memory, data, force=force, path_ptr=_codepath_ptr)
-    if out.get("skipped"):
-        return out
-    nca = memory.setdefault("nca", {})
-    try:
+    from jevops.board import seed_then_sidecar
+
+    def _sidecar(mem: dict[str, Any], nca: dict[str, Any]) -> None:
         import codepath_graph as lra_cp
 
-        if not nca.get("sidecar_built") and not (lra_cp.SIDECAR_DUCKDB.is_file()):
-            built = lra_cp.build_sidecar_duckdb()
-            nca["sidecar_built"] = bool(built.get("ok"))
-        extra = lra_cp.seed_nca_call_edges(memory)
-        if extra.get("ok") and extra.get("n_edges"):
-            nca["call_edges"] = extra["n_edges"]
-    except Exception:
-        pass
-    return out
+        from jevops.outer import call_if, overlay_map, set_if
+
+        built = call_if(
+            not nca.get("sidecar_built") and not lra_cp.SIDECAR_DUCKDB.is_file(),
+            lra_cp.build_sidecar_duckdb,
+        )
+        set_if(nca, built is not None, "sidecar_built", bool(overlay_map(built).get("ok")))
+        extra = lra_cp.seed_nca_call_edges(mem)
+        set_if(nca, extra.get("ok") and extra.get("n_edges"), "call_edges", extra.get("n_edges"))
+
+    return seed_then_sidecar(
+        memory, data, force=force, path_ptr=_codepath_ptr, sidecar_fn=_sidecar
+    )
 
 
 def board_window(memory: Mapping[str, Any]) -> list[dict[str, Any]]:
@@ -123,9 +135,13 @@ def warmup_token_map() -> dict[str, int]:
 
     def _body(rec: Mapping[str, Any]) -> str:
         try:
-            return str(lra_splice.split_statement_body(rec).body_suffix)
+            from jevops.outer import text_or
+
+            return text_or(lra_splice.split_statement_body(rec).body_suffix)
         except Exception:
-            return str(rec.get("src") or "")
+            from jevops.outer import get_str
+
+            return get_str(rec, "src")
 
     return token_map(records, token_fn=lra_loop.token_count, body_fn=_body)
 
@@ -139,18 +155,14 @@ def credit_theorem(
 ) -> dict[str, Any]:
     """Push lake result onto the owning theorem/task/subgoal cells."""
 
-    from jevops.board import credit_result
+    from jevops.board import credit_mapped
+    from jevops.outer import either
 
-    name = str(theorem or "")
-    task_id = THEOREM_TASKS.get(name)
-    if not task_id:
-        return {"ok": False, "reason": "unmapped_theorem", "theorem": theorem}
-    sub_id = "LRA-S05" if task_id == "LRA-019" else "LRA-S04"
-    return credit_result(
+    return credit_mapped(
         memory,
-        theorem=name,
-        task_id=task_id,
-        subgoal_id=sub_id,
+        theorem,
+        THEOREM_TASKS,
+        subgoal_fn=lambda task_id: either(task_id == "LRA-019", lambda: "LRA-S05", lambda: "LRA-S04"),
         theorem_ok=theorem_ok,
         tokens=tokens,
     )
@@ -161,9 +173,11 @@ def link_current_theorem(memory: dict[str, Any], theorem: str) -> dict[str, Any]
 
     from jevops.board import link_entity
 
-    name = str(theorem or "")
+    from jevops.outer import call_if, first_truthy, text_or
+
+    name = text_or(first_truthy(theorem, default=""))
     task_id = THEOREM_TASKS.get(name)
-    parent = _ptr("task", task_id) if task_id else ""
+    parent = call_if(task_id, lambda: _ptr("task", task_id), default="")
     out = link_entity(memory, ident=name, kind="theorem", parent_ptr=parent, energy=0.55)
     return {"ok": out.get("ok"), "theorem": out.get("id"), "task": parent, "reason": out.get("reason")}
 
@@ -175,7 +189,9 @@ def seed_keepbest_theorems(
 
     from jevops.board import seed_token_cells
 
-    warm_map = dict(warmup or {}) or warmup_token_map()
+    from jevops.outer import or_load
+
+    warm_map = or_load(warmup, warmup_token_map)
     return seed_token_cells(
         memory,
         tokens,
@@ -184,7 +200,7 @@ def seed_keepbest_theorems(
     )
 
 
-LRA_LANE = Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026-lra/lean_refactor_arena"
+from jevops.catalogs import LRA_LANE  # noqa: E402
 READY_JSON = LRA_LANE / "quack-owner" / "paper-owner.ready.json"
 
 
@@ -197,99 +213,55 @@ def overlay_live_board(
 ) -> dict[str, Any]:
     """Read-only status overlay from fetch_board. Never writes campaign DB."""
 
-    from jevops.board import prepare_overlay
+    from jevops.board import overlay_fetch
+    from jevops.outer import call_if, either, first_not_none, if_none
 
-    cached = prepare_overlay(memory, seed_fn=seed_nca_from_board, cache=fetch_fn is None)
-    if cached is not None:
-        return cached
-    live = None
-    reason = "no_ready_owner"
-    if fetch_fn is not None:
-        try:
-            live = fetch_fn()
-            reason = "injected"
-        except Exception as exc:
-            from jevops.outer import exc_name
+    root = if_none(lane, LRA_LANE)
+    ready = root / "quack-owner" / "paper-owner.ready.json"
 
-            return {"ok": False, "overlay": False, "reason": exc_name(exc), "campaign_write": False, "called_docker0": False}
-    else:
-        ready = (lane or LRA_LANE) / "quack-owner" / "paper-owner.ready.json"
-        if ready.is_file():
-            try:
-                import importlib
+    def _default_fetch() -> Any:
+        from jevops.board import load_campaign_fetch
 
-                from jevops.outer import ensure_sys_path
+        fetch = load_campaign_fetch(scripts_root="/home/barberb/lift_coding/scripts")
+        return fetch("lean_refactor_arena", root)
 
-                ensure_sys_path("/home/barberb/lift_coding/scripts")
-                campaign = importlib.import_module("paper_supervisor_campaign")
-                live = campaign.fetch_board("lean_refactor_arena", lane or LRA_LANE)
-                reason = "fetch_board"
-            except Exception as exc:
-                from jevops.outer import tagged_exc
-
-                memory.setdefault("nca", {})["overlay_done"] = True
-                return {
-                    "ok": True,
-                    "overlay": False,
-                    "reason": tagged_exc("fetch_failed", exc),
-                    "campaign_write": False,
-                    "called_docker0": False,
-                }
-    from jevops.board import overlay_or_empty
-
-    return overlay_or_empty(
+    injected = fetch_fn is not None
+    live_fn = first_not_none(fetch_fn, factory=lambda: call_if(ready.is_file(), lambda: _default_fetch))
+    return overlay_fetch(
         memory,
-        live,
-        reason=reason,
+        seed_fn=seed_nca_from_board,
+        fetch_fn=live_fn,
         prefix="LRA-",
         cache=fetch_fn is None,
         ready_fn=lambda: overlay_ready_tasks(memory, ready_fn=ready_fn, lane=lane),
+        empty_reason="no_ready_owner",
+        injected_reason=either(injected, lambda: "injected", lambda: "fetch_board"),
+        inject_fail=either(injected, lambda: "closed", lambda: "cache"),
     )
 
 
 def replica_ready_page(*, lane: Optional[Path] = None) -> dict[str, Any]:
     """Read-only DatabaseTaskSource.ready_tasks. Never CAS, never install_schema."""
 
-    ready_path = (lane or LRA_LANE) / "quack-owner" / "paper-owner.ready.json"
-    if not ready_path.is_file():
-        return {"ok": False, "reason": "no_ready_json", "tasks": [], "campaign_write": False}
-    try:
-        from jevops.outer import read_json
+    from jevops.board import replica_from_ready
+    from jevops.outer import if_none
 
-        blob = read_json(ready_path)
-    except Exception as exc:
-        from jevops.outer import exc_name
+    def _page(endpoint: str) -> Any:
+        from jevops.board import load_database_task_source
 
-        return {"ok": False, "reason": exc_name(exc), "tasks": [], "campaign_write": False}
-    endpoint = blob.get("quack_endpoint") or blob.get("database_path")
-    if not endpoint:
-        return {"ok": False, "reason": "no_endpoint", "tasks": [], "campaign_write": False}
-    try:
-        from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import (
-            DatabaseTaskSource,
-        )
-
+        DatabaseTaskSource = load_database_task_source()
         with DatabaseTaskSource(
             endpoint,
             owner_id="lra-nca-overlay-readonly",
             install_schema=False,
         ) as source:
-            page = source.ready_tasks(limit=100)
-        tasks: list[dict[str, str]] = []
-        for item in getattr(page, "tasks", ()) or ():
-            alias = str(getattr(item, "task_alias", "") or getattr(item, "id", "") or "")
-            if alias.startswith("LRA-"):
-                tasks.append({"task_alias": alias})
-        return {"ok": True, "reason": "replica", "tasks": tasks, "campaign_write": False}
-    except Exception as exc:
-        from jevops.outer import tagged_exc
+            return source.ready_tasks(limit=100)
 
-        return {
-            "ok": False,
-            "reason": tagged_exc("source_failed", exc),
-            "tasks": [],
-            "campaign_write": False,
-        }
+    return replica_from_ready(
+        if_none(lane, LRA_LANE) / "quack-owner" / "paper-owner.ready.json",
+        page_fn=_page,
+        prefix="LRA-",
+    )
 
 
 def overlay_ready_tasks(
@@ -298,11 +270,12 @@ def overlay_ready_tasks(
     """Mark Source.ready_tasks as ready. Default is no campaign Source (inject ready_fn)."""
 
     from jevops.board import overlay_ready
+    from jevops.outer import optional_fn
 
     return overlay_ready(
         memory,
         ready_fn=ready_fn,
-        replica_fn=(None if ready_fn is not None else (lambda: replica_ready_page(lane=lane))),
+        replica_fn=optional_fn(ready_fn is None, lambda: replica_ready_page(lane=lane)),
         prefix="LRA-",
         env_key="LRA_NCA_READY_TASKS",
     )

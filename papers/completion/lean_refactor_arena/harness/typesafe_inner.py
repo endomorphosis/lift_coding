@@ -42,7 +42,7 @@ def apply_lake_round(
     from jevops.nca import credit_skill
     from jevops.oracle import apply_round
     from jevops.oracle import lake_budget as _lake_budget
-    from jevops.outer import arg_value
+    from jevops.outer import arg_value, first_int, get_list, get_str
 
     too_big, lake_budget = _lake_budget(
         analysis.get("n_tokens"),
@@ -50,7 +50,7 @@ def apply_lake_round(
         top=arg_value(args, "lake_top", 3, cast=int),
     )
     timeout = arg_value(args, "timeout", 180.0, cast=float)
-    out_dir = getattr(args, "out", None)
+    out_dir = arg_value(args, "out", None)
     tactics_ref = tactics
 
     def _compile_kind(_kind: str, script: str) -> Mapping[str, Any]:
@@ -64,47 +64,65 @@ def apply_lake_round(
 
     def _repair(*, kind: str, tactics: str, compiled: Mapping[str, Any], row: Mapping[str, Any]) -> Optional[str]:
         del kind
-        if row.get("error_class") != "unknown_identifier":
-            return None
-        repaired_body = lra_bind.restore_unknown_binders(tactics, tactics_ref, compiled.get("errors") or [])
-        repaired_body = lra_mask.hammer_repair(repaired_body, tactics_ref, compiled.get("errors") or [])
-        return repaired_body
+        from jevops.outer import either, pipe
+
+        errors = get_list(compiled, "errors")
+        return either(
+            row.get("error_class") == "unknown_identifier",
+            lambda: pipe(
+                tactics,
+                lambda body: lra_bind.restore_unknown_binders(body, tactics_ref, errors),
+                lambda body: lra_mask.hammer_repair(body, tactics_ref, errors),
+            ),
+            lambda: None,
+        )
 
     def _on_ok(row: Mapping[str, Any], body: str, draft: Mapping[str, Any], *, better: bool) -> None:
+        from jevops.outer import first_int, get_str
+
         lra_bind.remember_success(
             memory,
-            name=str(record.get("name") or ""),
-            kind=str(row["kind"]),
-            family=str(draft.get("family") or ""),
-            from_tokens=int(analysis.get("n_tokens") or 0),
-            to_tokens=int(row["tokens"] or analysis.get("n_tokens") or 0),
+            name=get_str(record, "name"),
+            kind=get_str(row, "kind"),
+            family=get_str(draft, "family"),
+            from_tokens=first_int(analysis.get("n_tokens")),
+            to_tokens=first_int(row.get("tokens"), analysis.get("n_tokens")),
         )
-        credit_skill(memory, row["kind"], ok=True, tokens=int(row["tokens"] or 0))
-        if not better:
-            return
-        try:
+        credit_skill(memory, row["kind"], ok=True, tokens=first_int(row.get("tokens")))
+
+        def _sidecar() -> None:
             import codepath_graph as lra_cp
 
-            if (memory.get("nca") or {}).get("sidecar_built") and lra_cp.SIDECAR_DUCKDB.is_file():
-                lra_cp.build_sidecar_duckdb()
-        except Exception:
-            pass
-        try:
+            from jevops.outer import call_if, nested_get
+
+            call_if(
+                nested_get(memory, "nca", "sidecar_built") and lra_cp.SIDECAR_DUCKDB.is_file(),
+                lra_cp.build_sidecar_duckdb,
+            )
+
+        def _credit() -> None:
             import board_graph as lra_board
+
+            from jevops.outer import get_str
 
             lra_board.credit_theorem(
                 memory,
-                str(record.get("name") or ""),
+                get_str(record, "name"),
                 theorem_ok=True,
-                tokens=int(row["tokens"] or 0),
+                tokens=first_int(row.get("tokens")),
             )
-        except Exception:
-            pass
-        if out_dir is not None:
-            from jevops.outer import write_best_body
 
-            best_path = write_best_body(out_dir, str(record.get("name") or ""), int(row["tokens"] or 0), body)
-            row["best_path"] = str(best_path)
+        from jevops.outer import assign_if, call_if, ignore_each, text_or, write_best_body
+
+        call_if(better, lambda: ignore_each(_sidecar, _credit))
+        assign_if(
+            row,
+            "best_path",
+            better and out_dir is not None,
+            lambda: text_or(
+                write_best_body(out_dir, get_str(record, "name"), first_int(row.get("tokens")), body)
+            ),
+        )
 
     def _on_fail(
         row: Mapping[str, Any],
@@ -115,18 +133,20 @@ def apply_lake_round(
         kind: str,
     ) -> None:
         del draft
+        from jevops.outer import first_truthy, get_list, get_str, text_or
+
         lra_bind.remember_failure(
             memory,
-            name=str(record.get("name") or ""),
-            kind=str(kind),
-            errors=row.get("errors") or compiled.get("errors") or [],
+            name=get_str(record, "name"),
+            kind=text_or(kind),
+            errors=first_truthy(get_list(row, "errors"), get_list(compiled, "errors"), default=[]),
             tactics=body,
         )
         credit_skill(memory, kind, ok=False)
 
     return apply_round(
         memory=memory,
-        name=record.get("name"),
+        name=get_str(record, "name"),
         drafts=drafts,
         intent=intent,
         ranked=ranked,
@@ -137,7 +157,7 @@ def apply_lake_round(
         error_class_fn=lra_bind.error_class,
         on_ok=_on_ok,
         on_fail=_on_fail,
-        from_tokens=int(analysis.get("n_tokens") or 10**9),
+        from_tokens=first_int(analysis.get("n_tokens"), default=10**9),
         too_big=too_big,
     )
 
@@ -213,18 +233,30 @@ def inner_typesafe_walk(
     import call_stack as lra_cs
     import neural_tape as lra_tape
 
-    raw_compile = compile_one or lra_mcmc.compile_one
+    from jevops.walk import bind_walk_defaults
+
+    raw_compile, research, pick, counter, tape, stack = bind_walk_defaults(
+        compile_one=compile_one,
+        research_fn=research_fn,
+        pick_fn=pick_fn,
+        steps=steps,
+        tape=tape,
+        stack=stack,
+        default_compile=lra_mcmc.compile_one,
+        default_research=lra_rand.typesafe_autoresearch,
+        default_pick=lra_rand.typesafe_pick,
+        tape_factory=lambda: lra_tape.Tape.from_memory(memory),
+        stack_factory=lra_cs.CallStack,
+    )
 
     def compile_fn(record: Mapping[str, Any], tactics: str, **kwargs: Any) -> Mapping[str, Any]:
-        if compile_one is None:
-            kwargs.setdefault("memory", memory)
+        from jevops.outer import replace_if, with_defaults
+
+        kwargs = replace_if(compile_one is None, with_defaults(kwargs, memory=memory), kwargs)
         return raw_compile(record, tactics, **kwargs)
-    research = research_fn or lra_rand.typesafe_autoresearch
-    pick = pick_fn or lra_rand.typesafe_pick
-    counter = steps if steps is not None else [0]
-    body = str(tactics or "").strip("\n")
-    tape = tape if tape is not None else lra_tape.Tape.from_memory(memory)
-    stack = stack if stack is not None else lra_cs.CallStack()
+    from jevops.outer import get_str, stripped_or
+
+    body = stripped_or(tactics, "")
 
     def _link(mem: dict[str, Any], problem: str) -> None:
         import board_graph as lra_board
@@ -240,7 +272,7 @@ def inner_typesafe_walk(
         memory=memory,
         tape=tape,
         stack=stack,
-        problem=str(record.get("name") or ""),
+        problem=get_str(record, "name"),
         body=body,
         depth=depth,
         link_fn=_link,
@@ -265,31 +297,38 @@ def inner_typesafe_walk(
     def _remember(intent: Mapping[str, Any], nxt: str) -> None:
         from jevops.memory import remember_intent
 
+        from jevops.outer import get_str
+
         remember_intent(
             memory,
-            name=str(record.get("name") or ""),
+            name=get_str(record, "name"),
             tactics=nxt,
             intent=intent,
             residual_fn=lra_port.analyze_residuals,
         )
 
     def _expand(nxt: str) -> None:
-        lra_bind.expand_skills_from_memory(memory, name=str(record.get("name") or ""), tactics=nxt)
+        from jevops.outer import get_str
+
+        lra_bind.expand_skills_from_memory(memory, name=get_str(record, "name"), tactics=nxt)
 
     def _drafts(nxt: str, analysis: Mapping[str, Any], intent: Mapping[str, Any]) -> list[dict[str, Any]]:
-        allow = set(allow_families or intent.get("allow_families") or [])
+        from jevops.outer import first_set, get_list, get_str, or_int
+
+        allow = first_set(allow_families, intent.get("allow_families"))
         return lra_rand.random_drafts(
             nxt,
             rng,
-            n=max(2, int(getattr(args, "drafts", 6) or 6)),
-            families=analysis.get("families") or [],
+            n=or_int(getattr(args, "drafts", 6), 6, floor=2),
+            families=get_list(analysis, "families"),
             counts=analysis.get("counts"),
-            name=str(record.get("name") or ""),
+            name=get_str(record, "name"),
             memory=memory,
             allow_families=allow,
         )
 
     def _extra(compose: str, nest_child: str, tool_name: str, nxt: str) -> dict[str, Any]:
+        from jevops.outer import get_str, overlay_map
         from jevops.walk import extra_payload
 
         return extra_payload(
@@ -297,25 +336,12 @@ def inner_typesafe_walk(
             nest_child=nest_child,
             tool_name=tool_name,
             default_hook="portable_rewrites.py",
-            fork={
-                "record": record,
-                "tactics": nxt,
-                "args": args,
-                "memory": memory,
-                "ledger": ledger,
-                "rng": rng,
-                "model": model,
-                "restore": restore,
-                "depth": depth + 1,
-                "steps": counter,
-                "max_steps": max_steps,
-                "max_depth": max_depth,
-                "compile_one": compile_fn,
-                "research_fn": research,
-                "pick_fn": pick,
-                "router_fn": router_fn,
-                "problem": str(record.get("name") or ""),
-            },
+            fork=overlay_map(
+                base,
+                record=record,
+                tactics=nxt,
+                problem=get_str(record, "name"),
+            ),
         )
 
     walk_args = args
@@ -333,18 +359,41 @@ def inner_typesafe_walk(
             restore=restore,
             memory=memory,
         )
-        try:
+        from jevops.outer import ignore_error
+
+        def _credit() -> None:
             import board_graph as lra_board
+
+            from jevops.outer import first_int, first_truthy, get_str, text_or
 
             lra_board.credit_theorem(
                 memory,
-                str(evaled.get("name") or record.get("name") or ""),
+                text_or(first_truthy(evaled.get("name"), get_str(record, "name"), default="")),
                 theorem_ok=bool(evaled.get("theorem_ok")),
-                tokens=int(evaled.get("tokens") or 0),
+                tokens=first_int(evaled.get("tokens")),
             )
-        except Exception:
-            pass
+
+        ignore_error(_credit)
         return evaled
+
+    from jevops.walk import child_base
+
+    base = child_base(
+        args=args,
+        memory=memory,
+        ledger=ledger,
+        rng=rng,
+        model=model,
+        restore=restore,
+        depth=depth + 1,
+        steps=counter,
+        max_steps=max_steps,
+        max_depth=max_depth,
+        compile_one=compile_fn,
+        research_fn=research,
+        pick_fn=pick,
+        router_fn=router_fn,
+    )
 
     def _ptr_nest(
         *,
@@ -353,50 +402,30 @@ def inner_typesafe_walk(
         allow_families: Optional[set[str]] = None,
         allow_skills: Optional[set[str]] = None,
     ) -> dict[str, Any]:
-        return inner_typesafe_walk(
+        from jevops.outer import first_truthy
+        from jevops.walk import recurse_walk
+
+        return recurse_walk(
+            inner_typesafe_walk,
             record,
             tactics,
-            args=args,
-            memory=memory,
-            ledger=ledger,
-            rng=rng,
-            model=model,
-            restore=restore,
-            depth=depth + 1,
+            base,
             node=node,
-            allow_families=allow_families or walk_allow_families,
-            allow_skills=allow_skills or walk_allow_skills,
-            steps=counter,
-            max_steps=max_steps,
-            max_depth=max_depth,
-            compile_one=compile_fn,
-            research_fn=research,
-            pick_fn=pick,
-            router_fn=router_fn,
             tape=tape,
             stack=stack,
+            allow_families=first_truthy(allow_families, walk_allow_families),
+            allow_skills=first_truthy(allow_skills, walk_allow_skills),
         )
 
     def _spawn(child: str, tactics: str = "") -> dict[str, Any]:
+        from jevops.outer import first_truthy
+
         return lra_tools.spawn_subloop(
             child,
             record=record,
-            tactics=tactics or body,
-            args=args,
-            memory=memory,
-            ledger=ledger,
-            rng=rng,
-            model=model,
-            restore=restore,
-            depth=depth + 1,
+            tactics=first_truthy(tactics, body),
+            **base,
             node=child,
-            steps=counter,
-            max_steps=max_steps,
-            max_depth=max_depth,
-            compile_one=compile_fn,
-            research_fn=research,
-            pick_fn=pick,
-            router_fn=router_fn,
         )
 
     def _nest(
@@ -406,28 +435,19 @@ def inner_typesafe_walk(
         allow_skills: Optional[set[str]] = None,
         tactics: str = "",
     ) -> dict[str, Any]:
-        return inner_typesafe_walk(
+        from jevops.outer import first_truthy
+        from jevops.walk import recurse_walk
+
+        return recurse_walk(
+            inner_typesafe_walk,
             record,
-            tactics or body,
-            args=args,
-            memory=memory,
-            ledger=ledger,
-            rng=rng,
-            model=model,
-            restore=restore,
-            depth=depth + 1,
+            first_truthy(tactics, body),
+            base,
             node=child,
-            allow_families=allow_families,
-            allow_skills=allow_skills,
-            steps=counter,
-            max_steps=max_steps,
-            max_depth=max_depth,
-            compile_one=compile_fn,
-            research_fn=research,
-            pick_fn=pick,
-            router_fn=router_fn,
             tape=tape,
             stack=stack,
+            allow_families=allow_families,
+            allow_skills=allow_skills,
         )
 
     return inner_loop(
@@ -467,7 +487,7 @@ def inner_typesafe_walk(
 def starting_tactics(record: Mapping[str, Any], *, out: Any = None, from_best: bool = False) -> str:
     """Keep-best body when --from-best, else frozen warmup tactics."""
 
-    from jevops.outer import starting_body
+    from jevops.outer import get_str, starting_body
 
     tactics = lra_fan.tactic_block(record)
     if not from_best:
@@ -475,7 +495,7 @@ def starting_tactics(record: Mapping[str, Any], *, out: Any = None, from_best: b
     return starting_body(
         tactics,
         out,
-        str(record.get("name") or "canary"),
+        get_str(record, "name", default="canary"),
         extras={"Core.InitsUpdatesComm": "cascade-best-139.lean"},
     )
 
@@ -498,47 +518,50 @@ def run_nested_canary(
     tactics = starting_tactics(
         record, out=getattr(args, "out", None), from_best=bool(getattr(args, "from_best", False))
     )
-    clone = lra_kb.lra_cw.clone_dir(str(record["url"]), lra_rand.DEFAULT_STATE)
-    dest = clone / lra_kb.lra_cw.source_relpath(record)
-    from jevops.outer import read_bytes_if
+    from jevops.outer import clone_restore, get_str, inner_budget, restore_if
+    from jevops.walk import pack_canary, run_nested
 
-    restore = read_bytes_if(dest)
-    if not dest.is_file():
-        from jevops.walk import pack_canary
-
-        analysis = lra_rand.analyze_proof(record, tactics=tactics, model=model)
-        return pack_canary({"analysis": analysis}, skipped="no_clone", name=record.get("name"))
-    from jevops.outer import inner_budget
-
-    max_steps, max_depth = inner_budget(
-        args, min_steps=lra_rand.INNER_MAX_STEPS, default_depth=lra_rand.NEST_MAX_DEPTH
-    )
-    walked = inner_typesafe_walk(
+    _clone, dest, restore = clone_restore(
         record,
-        tactics,
-        args=args,
-        memory=memory,
-        ledger=ledger,
-        rng=rng,
-        model=model,
-        restore=restore,
-        max_steps=max_steps,
-        max_depth=max_depth,
-        compile_one=compile_one,
-        research_fn=research_fn,
-        pick_fn=pick_fn,
-        router_fn=router_fn,
+        lra_rand.DEFAULT_STATE,
+        clone_fn=lra_kb.lra_cw.clone_dir,
+        relpath_fn=lra_kb.lra_cw.source_relpath,
     )
-    from jevops.outer import restore_if
-    from jevops.walk import pack_canary
-
-    restore_if(dest, restore)
-    return pack_canary(walked, clone_exists=True)
+    return run_nested(
+        tactics=tactics,
+        dest=dest,
+        restore=restore,
+        name=get_str(record, "name"),
+        analyze_fn=lambda body: lra_rand.analyze_proof(record, tactics=body, model=model),
+        pack_fn=pack_canary,
+        budget_fn=lambda: inner_budget(
+            args, min_steps=lra_rand.INNER_MAX_STEPS, default_depth=lra_rand.NEST_MAX_DEPTH
+        ),
+        walk_fn=lambda body, restore, max_steps, max_depth: inner_typesafe_walk(
+            record,
+            body,
+            args=args,
+            memory=memory,
+            ledger=ledger,
+            rng=rng,
+            model=model,
+            restore=restore,
+            max_steps=max_steps,
+            max_depth=max_depth,
+            compile_one=compile_one,
+            research_fn=research_fn,
+            pick_fn=pick_fn,
+            router_fn=router_fn,
+        ),
+        restore_fn=restore_if,
+    )
 
 
 def _skill_walk_entry(**kwargs: Any) -> dict[str, Any]:
+    from jevops.outer import stripped_or
+
     record = kwargs.pop("record")
-    tactics = str(kwargs.pop("tactics", "") or "")
+    tactics = stripped_or(kwargs.pop("tactics", ""), "")
     return inner_typesafe_walk(record, tactics, **kwargs)
 
 
@@ -546,15 +569,21 @@ lra_tools.register_subloop("skill_walk", _skill_walk_entry)
 
 
 def _eval_theorem_entry(**kwargs: Any) -> dict[str, Any]:
-    record = kwargs.get("record") or {}
+    from jevops.outer import as_dict, first_truthy, get_str, overlay_map, text_or
+
+    record = overlay_map(kwargs.get("record"))
     return eval_theorem(
-        str(kwargs.get("name") or kwargs.get("theorem") or record.get("name") or ""),
-        current=record if isinstance(record, dict) else {},
-        tactics=str(kwargs.get("tactics") or ""),
-        compile_fn=kwargs.get("compile_one") or kwargs.get("compile_fn"),
+        text_or(
+            first_truthy(
+                kwargs.get("name"), kwargs.get("theorem"), record.get("name"), default=""
+            )
+        ),
+        current=record,
+        tactics=get_str(kwargs, "tactics"),
+        compile_fn=first_truthy(kwargs.get("compile_one"), kwargs.get("compile_fn")),
         args=kwargs.get("args"),
-        restore=kwargs.get("restore") or b"",
-        memory=kwargs.get("memory") if isinstance(kwargs.get("memory"), dict) else None,
+        restore=first_truthy(kwargs.get("restore"), default=b""),
+        memory=as_dict(kwargs.get("memory")),
     )
 
 

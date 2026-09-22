@@ -20,7 +20,6 @@ import argparse
 import ast
 import hashlib
 import json
-import re
 import shutil
 import subprocess
 import sys
@@ -40,24 +39,17 @@ if str(HARNESS) not in sys.path:
 import _jevops_path  # noqa: E402,F401
 import splice as lra_splice  # noqa: E402
 
-FROZEN_WARMUP_SHA256 = "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
-WARMUP_N = 15
-PROTOCOL = "LRA/v1"
-PROBLEM_SCHEMA = "lra-problem-receipt/v1"
-COMPILE_SCHEMA = "lra-compile-receipt/v1"
-BATCH_SCHEMA = "lra-batch-verify/v1"
-FREEZE_SCHEMA = "lra-freeze-binding/v1"
-HEX64 = re.compile(r"^[0-9a-f]{64}$")
-SKIP_JSON_NAMES = frozenset(
-    {
-        "batch.json",
-        "freeze_binding.json",
-        "problem.json",
-        "admission.json",
-        "result.json",
-    }
-)
-RESERVED_DIR_NAMES = frozenset({"problems", "validation", "outputs"})
+from jevops.catalogs import BATCH_GATES as ALL_GATES
+from jevops.catalogs import BATCH_SCHEMA
+from jevops.catalogs import COMPILE_SCHEMA
+from jevops.catalogs import FREEZE_SCHEMA
+from jevops.catalogs import FROZEN_WARMUP_SHA256
+from jevops.catalogs import HEX64
+from jevops.catalogs import PROBLEM_SCHEMA
+from jevops.catalogs import PROTOCOL
+from jevops.catalogs import RESERVED_DIR_NAMES
+from jevops.catalogs import SKIP_JSON_NAMES
+from jevops.catalogs import WARMUP_N
 FORBIDDEN_IMPORT_ROOTS = frozenset(
     {
         "law_to_action",
@@ -86,13 +78,6 @@ FORBIDDEN_SCORE_NAMES = frozenset(
         "relevance_score",
         "official_score",
     }
-)
-ALL_GATES = (
-    "digest",
-    "statement_bind",
-    "all_tags",
-    "no_sorry",
-    "complete",
 )
 EMPTY_AXIOM_DIGEST = hashlib.sha256(b"[]").hexdigest()
 

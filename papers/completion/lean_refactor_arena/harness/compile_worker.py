@@ -40,14 +40,19 @@ import _jevops_path  # noqa: E402,F401
 import bake_oleans as lra_bake  # noqa: E402
 import splice as lra_splice  # noqa: E402
 
-if str(DATASETS_ROOT) not in sys.path:
-    sys.path.insert(0, str(DATASETS_ROOT))
-from ipfs_datasets_py.logic.hammers.frontends.lean_toolchain import (  # noqa: E402
-    KERNEL_COMMAND_TEMPLATE,
-    LeanToolchainMissing,
-    LeanToolchainResolver,
-    run_lean_process,
-)
+def _ensure_datasets_path() -> None:
+    from jevops.outer import ensure_sys_path
+
+    ensure_sys_path(DATASETS_ROOT)
+
+
+from jevops.lean import load_lean_toolchain  # noqa: E402
+
+_tc = load_lean_toolchain(setup=(_ensure_datasets_path,))
+KERNEL_COMMAND_TEMPLATE = _tc["KERNEL_COMMAND_TEMPLATE"]
+LeanToolchainMissing = _tc["LeanToolchainMissing"]
+LeanToolchainResolver = _tc["LeanToolchainResolver"]
+run_lean_process = _tc["run_lean_process"]
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 WARMUP_N = lra_splice.WARMUP_N
@@ -56,20 +61,20 @@ PUTNAM_SOURCE = lra_bake.PUTNAM_SOURCE
 STRATA_FIRST_TAG = lra_bake.STRATA_FIRST_TAG
 STRATA_FIRST_COMMIT = lra_bake.STRATA_FIRST_COMMIT
 STRATA_URL = lra_bake.STRATA_URL
-STRATA_FIRST_FILE = "Strata/Transform/CallElimCorrect.lean"
-STRATA_EXPAND_FILE = "Strata/Languages/Core/StatementSemanticsProps.lean"
-MEASUREMENT_MAX_HEARTBEATS = lra_bake.MEASUREMENT_MAX_HEARTBEATS
-MEASUREMENT_ARGV_TEMPLATE = (
-    "{lake} env {lean} -DmaxHeartbeats="
-    f"{MEASUREMENT_MAX_HEARTBEATS} --json {{source_file}}"
-)
-LEAN_NUM_THREADS = 1
-WARMUP_TAG_TIMEOUT_SECONDS = 600.0
-OFFICIAL_TAG_TIMEOUT_SECONDS = 1200.0
-INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS = 30.0
-GIT_BIN = lra_bake.GIT_BIN
-RECEIPT_SCHEMA = "lra-compile-receipt/v1"
-PROCESS_SUPERVISOR_ENV = "IPFS_DATASETS_PROCESS_SUPERVISOR_DIR"
+from jevops.catalogs import INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS  # noqa: E402
+from jevops.catalogs import LEAN_NUM_THREADS  # noqa: E402
+from jevops.catalogs import MEASUREMENT_ARGV_TEMPLATE  # noqa: E402
+from jevops.catalogs import MEASUREMENT_MAX_HEARTBEATS  # noqa: E402
+from jevops.catalogs import OFFICIAL_TAG_TIMEOUT_SECONDS  # noqa: E402
+from jevops.catalogs import STRATA_EXPAND_FILE  # noqa: E402
+from jevops.catalogs import STRATA_FIRST_FILE  # noqa: E402
+from jevops.catalogs import WARMUP_TAG_TIMEOUT_SECONDS  # noqa: E402
+from jevops.catalogs import COMPILE_SCHEMA as RECEIPT_SCHEMA
+from jevops.catalogs import FORBIDDEN_CALLS_CORE as FORBIDDEN_CALLS
+from jevops.catalogs import FORBIDDEN_ORACLE_NAMES
+from jevops.catalogs import FORBIDDEN_SCORE_NAMES
+from jevops.catalogs import GIT_BIN
+from jevops.catalogs import PROCESS_SUPERVISOR_ENV
 
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
@@ -81,28 +86,8 @@ FORBIDDEN_IMPORT_NAMES = frozenset(
         "shutil",
     }
 )
-FORBIDDEN_ORACLE_NAMES = frozenset(
-    {
-        "IndependentKernelVerifier",
-        "KernelVerifier",
-        "verify_admitted_lean_proof",
-        "verify_lean_proof_text",
-    }
-)
-FORBIDDEN_CALLS = frozenset({"which", "find_executable", "LOCK_EX"})
-FORBIDDEN_SCORE_NAMES = frozenset(
-    {
-        "arena_score",
-        "arena_score_tokens",
-        "arena_score_elab",
-        "official_track2_score",
-        "token_savings",
-    }
-)
-_HEADER_HEARTBEATS = re.compile(r"set_option\s+maxHeartbeats\s+(\d+)")
-_AXIOM_LINE = re.compile(
-    r"^[^\s:]+\s*:\s*(?:\[(?P<bracket>[^\]]*)\]|(?P<bare>.+))\s*$"
-)
+from jevops.lean import AXIOM_LINE as _AXIOM_LINE  # noqa: E402
+from jevops.lean import HEADER_HEARTBEATS as _HEADER_HEARTBEATS  # noqa: E402
 
 
 class CompileError(RuntimeError):
@@ -135,40 +120,27 @@ class CompilePlan(_KernelCompilePlan):
         return super().first_record(error_cls=CompileError, miss="warmup JSONL has no Strata record")
 
     def to_dict(self) -> dict[str, Any]:
+        from jevops.lean import pack_compile_plan
+
         first = self.first_record
-        first_pins = iter_version_pins(first.get("version_info"))
-        return {
-            "arena_score": None,
-            "expand_after_first_green": True,
-            "first_commit": first_pins[0].git_commit if first_pins else "",
-            "first_file": str(first.get("file_path") or ""),
-            "first_is_strata": first.get("source") == STRATA_SOURCE,
-            "first_is_strata_v4_26": (
-                first.get("source") == STRATA_SOURCE
-                and first_pins
-                and first_pins[0].lean_tag == STRATA_FIRST_TAG
-                and first_pins[0].git_commit == STRATA_FIRST_COMMIT
-                and str(first.get("file_path") or "") == STRATA_FIRST_FILE
-                and str(first.get("url") or "") == STRATA_URL
-            ),
-            "first_name": str(first.get("name") or ""),
-            "first_tag": first_pins[0].lean_tag if first_pins else "",
-            "first_url": str(first.get("url") or ""),
-            "frozen_warmup_sha256": self.frozen_warmup_sha256,
-            "independent_kernel_verifier_default_timeout_seconds": (
-                INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
-            ),
-            "independent_kernel_verifier_is_lake_oracle": False,
-            "jsonl_bytes": self.jsonl_bytes,
-            "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
-            "measurement_argv_template": MEASUREMENT_ARGV_TEMPLATE,
-            "measurement_maxHeartbeats": MEASUREMENT_MAX_HEARTBEATS,
-            "n_records": self.n_records,
-            "newest_tag_first": True,
-            "official_timeout_seconds": OFFICIAL_TAG_TIMEOUT_SECONDS,
-            "score": None,
-            "warmup_timeout_seconds": WARMUP_TAG_TIMEOUT_SECONDS,
-        }
+        return pack_compile_plan(
+            first,
+            iter_version_pins(first.get("version_info")),
+            frozen_warmup_sha256=self.frozen_warmup_sha256,
+            jsonl_bytes=self.jsonl_bytes,
+            n_records=self.n_records,
+            first_source=STRATA_SOURCE,
+            first_tag=STRATA_FIRST_TAG,
+            first_commit=STRATA_FIRST_COMMIT,
+            first_file=STRATA_FIRST_FILE,
+            first_url=STRATA_URL,
+            kernel_command_template=KERNEL_COMMAND_TEMPLATE,
+            measurement_argv_template=MEASUREMENT_ARGV_TEMPLATE,
+            measurement_max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+            ikv_timeout=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+            official_timeout=OFFICIAL_TAG_TIMEOUT_SECONDS,
+            warmup_timeout=WARMUP_TAG_TIMEOUT_SECONDS,
+        )
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -256,9 +228,9 @@ def parse_axioms(stdout: str, stderr: str = "") -> tuple[list[str], bool]:
 
 
 def clone_dir(url: str, state_root: Optional[Path] = None) -> Path:
-    from jevops.outer import url_clone_dir
+    from jevops.outer import path_or, url_clone_dir
 
-    root = Path(state_root) if state_root is not None else lra_bake.default_state_root()
+    root = path_or(state_root, factory=lra_bake.default_state_root)
     return url_clone_dir(root, url)
 
 
@@ -268,12 +240,12 @@ def require_clone(
     network: str,
     state_root: Optional[Path] = None,
 ) -> Path:
-    from jevops.outer import require_marked_dir
+    from jevops.outer import replace_if, require_marked_dir
 
     return require_marked_dir(
         clone_dir(url, state_root),
         (".git", "lakefile.lean"),
-        error_cls=CloneMissing if network == "deny" else None,
+        error_cls=replace_if(network == "deny", CloneMissing, None),
         miss=(
             f"cached clone missing for {url} under network=deny; never falling "
             "back to PATH lean or a guessed GitHub URL"
@@ -302,19 +274,17 @@ def project_dir_for_record(
     from jevops.lean import project_dir_for_record as _fn
 
     def _putnam_dir(_rec: Mapping[str, Any], p: VersionPin, root: Optional[Path]) -> Path:
+        from jevops.lean import putnam_bake_job
+        from jevops.outer import get_str
+
         return lra_bake.putnam_project_dir(
-            lra_bake.BakeJob(
-                kind="putnam",
-                source=PUTNAM_SOURCE,
+            putnam_bake_job(
                 lean_tag=p.lean_tag,
                 git_commit=p.git_commit,
-                url="",
-                cache_key=f"putnam/{p.lean_tag}",
-                phase=2,
-                record_names=(str(_rec.get("name") or ""),),
-                file_paths=(lra_bake.PUTNAM_CANDIDATE_RELPATH,),
-                module=lra_bake.PUTNAM_MODULE,
-                lakefile_required=True,
+                name=get_str(_rec, "name"),
+                putnam_source=PUTNAM_SOURCE,
+                putnam_relpath=lra_bake.PUTNAM_CANDIDATE_RELPATH,
+                putnam_module=lra_bake.PUTNAM_MODULE,
             ),
             root,
         )
@@ -362,13 +332,16 @@ def resolve_pin(
     elan_home: Optional[Path] = None,
     require_installed: bool = True,
 ):
-    resolver = LeanToolchainResolver(elan_home)
-    try:
-        return resolver.resolve_tag(
-            pin.lean_tag, git_commit=pin.git_commit, require_installed=require_installed
-        )
-    except LeanToolchainMissing as exc:
-        raise CompileToolchainMissing(str(exc)) from exc
+    from jevops.lean import resolve_tag_pin
+
+    return resolve_tag_pin(
+        pin,
+        resolver_cls=LeanToolchainResolver,
+        elan_home=elan_home,
+        require_installed=require_installed,
+        miss_types=(LeanToolchainMissing,),
+        error_cls=CompileToolchainMissing,
+    )
 
 
 def compile_tag(
@@ -386,30 +359,60 @@ def compile_tag(
     """Run tag-pinned ``lake env lean`` with finite measurement maxHeartbeats."""
 
     timeout = require_lake_timeout(timeout)
-    name = str(record.get("name") or "")
-    source = str(record.get("source") or "")
-    header_cap = header_max_heartbeats(str(record.get("header") or ""))
+    from jevops.outer import get_str, text_or
+
+    header_cap = header_max_heartbeats(get_str(record, "header"))
     relpath = source_relpath(record)
-    receipt = CompileReceipt(
+    from jevops.lean import init_compile_receipt
+
+    receipt = init_compile_receipt(
+        record,
+        pin,
+        timeout=timeout,
+        relpath=relpath,
         schema=RECEIPT_SCHEMA,
-        name=name,
-        source=source,
-        file_path=relpath,
-        url=str(record.get("url") or ""),
-        lean_tag=pin.lean_tag,
-        git_commit=pin.git_commit,
-        timeout_seconds=timeout,
-        measurement_maxHeartbeats=MEASUREMENT_MAX_HEARTBEATS,
-        header_maxHeartbeats=header_cap,
+        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        header_cap=header_cap,
         lean_num_threads=LEAN_NUM_THREADS,
         kernel_command_template=KERNEL_COMMAND_TEMPLATE,
         hardware_class=hardware_class,
     )
-    try:
-        toolchain = resolve_pin(pin, elan_home=elan_home, require_installed=True)
-        from jevops.lean import prepare_lake_paths
+    from jevops.lean import (
+        close_failed_receipt,
+        prepare_lake_paths,
+        run_tag_compile,
+        stamp_measured_receipt,
+        stamp_with_lake_process,
+        write_candidate_if_needed,
+    )
 
-        cwd, source_file, dest = prepare_lake_paths(
+    def _stamp(receipt: CompileReceipt, *, toolchain: Any, cwd: Path, source_file: str) -> CompileReceipt:
+        return stamp_with_lake_process(
+            receipt,
+            lake_path=toolchain.lake_path,
+            lean_path=toolchain.lean_path,
+            source_file=source_file,
+            max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+            cwd=cwd,
+            toolchain=toolchain,
+            timeout=timeout,
+            stamp_fn=stamp_measured_receipt,
+            run_lean_process=run_lean_process,
+            state_root=state_root,
+            tmp_name="lra-014-process-supervisor",
+            process_env_key=PROCESS_SUPERVISOR_ENV,
+            threads=LEAN_NUM_THREADS,
+            ikv_floor=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+            refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
+            error_cls=CompileError,
+        )
+
+    from jevops.outer import optional_fn as _optional_fn
+
+    return run_tag_compile(
+        receipt,
+        resolve_fn=lambda: resolve_pin(pin, elan_home=elan_home, require_installed=True),
+        prepare_fn=lambda: prepare_lake_paths(
             record,
             pin,
             putnam_source=PUTNAM_SOURCE,
@@ -426,56 +429,25 @@ def compile_tag(
             skip_checkout=skip_checkout,
             network=network,
             state_root=state_root,
-        )
-        if source == PUTNAM_SOURCE or not dest.is_file():
-            write_record_source(record, dest)
-        if require_oleans:
-            job = _bake_job_for_record(record, pin)
-            lra_bake.require_cache(job, network=network, state_root=state_root)
-        argv = measurement_argv(
-            toolchain.lake_path,
-            toolchain.lean_path,
-            source_file,
-            max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-        )
-        receipt.argv = list(argv)
-        receipt.cwd = str(cwd)
-        from jevops.outer import env_copy, nonempty, under_or_tmp
-
-        supervisor_dir = under_or_tmp(
-            state_root, "process-supervisor", tmp_name="lra-014-process-supervisor"
-        )
-        env = env_copy(
-            {
-                "LEAN_NUM_THREADS": str(LEAN_NUM_THREADS),
-                "ELAN_HOME": toolchain.elan_home,
-                PROCESS_SUPERVISOR_ENV: str(supervisor_dir),
-            }
-        )
-        from jevops.lean import measure_overlay
-
-        measure_overlay(
-            receipt,
-            lambda: run_lean_process(
-                argv,
-                timeout=timeout,
-                cwd=str(cwd),
-                env=env,
+        ),
+        write_fn=lambda dest: write_candidate_if_needed(
+            record,
+            dest,
+            putnam_source=PUTNAM_SOURCE,
+            write_fn=write_record_source,
+        ),
+        bake_fn=_optional_fn(
+            require_oleans,
+            lambda: lra_bake.require_cache(
+                _bake_job_for_record(record, pin), network=network, state_root=state_root
             ),
-            argv=argv,
-            max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-            lean_path=toolchain.lean_path,
-            timeout_seconds=receipt.timeout_seconds,
-            ikv_floor=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
-            extra_ok=receipt.measurement_maxHeartbeats == MEASUREMENT_MAX_HEARTBEATS,
-        )
-        return receipt
-    except (CompileError, LeanToolchainMissing, lra_bake.BakeError) as exc:
-        from jevops.lean import close_failed_receipt
-
-        return close_failed_receipt(
-            receipt, exc, digest_fn=sha256_text, axiom_digest_fn=axiom_digest
-        )
+        ),
+        stamp_fn=_stamp,
+        close_fn=lambda rec, exc: close_failed_receipt(
+            rec, exc, digest_fn=sha256_text, axiom_digest_fn=axiom_digest
+        ),
+        error_types=(CompileError, LeanToolchainMissing, lra_bake.BakeError),
+    )
 
 
 def _bake_job_for_record(record: Mapping[str, Any], pin: VersionPin) -> lra_bake.BakeJob:
@@ -505,7 +477,7 @@ def compile_record(
     skip_checkout: bool = False,
     abort_on_first_failure: bool = True,
 ) -> list[CompileReceipt]:
-    from jevops.outer import collect_until
+    from jevops.outer import collect_until, optional_fn, replace_if
 
     pins = iter_version_pins(record.get("version_info"))
     return collect_until(
@@ -521,9 +493,9 @@ def compile_record(
             hardware_class=hardware_class,
             skip_checkout=skip_checkout,
         ),
-        abort_fn=(lambda receipt: not receipt.ok) if abort_on_first_failure else None,
+        abort_fn=optional_fn(abort_on_first_failure, lambda receipt: not receipt.ok),
         remaining_fn=lambda rest: [item.lean_tag for item in rest],
-        remaining_attr="aborted_remaining_tags" if abort_on_first_failure else "",
+        remaining_attr=replace_if(abort_on_first_failure, "aborted_remaining_tags", ""),
     )
 
 
@@ -540,23 +512,27 @@ def write_receipts(receipts: Sequence[CompileReceipt], dest_dir: Path) -> list[s
 
 
 def plan_compile(path: Optional[Path] = None) -> CompilePlan:
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import if_none
+
+    jsonl = Path(if_none(path, WARMUP_JSONL))
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    return CompilePlan(
-        records=records,
-        frozen_warmup_sha256=digest,
-        jsonl_bytes=len(raw),
-        n_records=len(records),
-        arena_score=None,
+    from jevops.lean import plan_from_records
+
+    return plan_from_records(
+        records,
+        digest,
+        len(raw),
+        first_source=STRATA_SOURCE,
+        cls=CompilePlan,
     )
 
 
 def first_strata_record(records: Sequence[Mapping[str, Any]]) -> Mapping[str, Any]:
-    from jevops.outer import first_where
+    from jevops.outer import field_eq, first_where
 
     return first_where(
         records,
-        lambda record: record.get("source") == STRATA_SOURCE,
+        field_eq("source", STRATA_SOURCE),
         error_cls=CompileError,
         miss="no Strata record in warmup JSONL",
     )
@@ -569,53 +545,39 @@ def expand_records(
 ) -> list[Mapping[str, Any]]:
     """Records whose tags are compiled after ``after_name`` is green."""
 
-    from jevops.outer import after_named
+    from jevops.outer import after_named, field_eq
 
     return after_named(
         records,
         after_name,
-        pred=lambda record: record.get("source") == STRATA_SOURCE,
+        pred=field_eq("source", STRATA_SOURCE),
     )
 
 
 def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
-    if tags is None:
-        tags = (STRATA_FIRST_TAG, "v4.27.0", "v4.29.1")
-    from jevops.outer import env_str, map_partition, unique_keep
+    from jevops.outer import if_none
 
-    wanted = unique_keep(list(tags))
+    tags = if_none(tags, (STRATA_FIRST_TAG, "v4.27.0", "v4.29.1"))
+    from jevops.lean import probe_pins
+    from jevops.outer import env_str, or_list, text_or
+
     resolver = LeanToolchainResolver()
-
-    pins = [
-        resolver.resolve_tag(tag, require_installed=False).to_dict() for tag in wanted
-    ]
-    installed, missing = map_partition(
-        pins, lambda pin: pin["installed"], lambda pin: pin["lean_tag"]
+    return probe_pins(
+        or_list(tags, ()),
+        resolve_fn=lambda tag: resolver.resolve_tag(tag, require_installed=False).to_dict(),
+        extra={
+            "default_elan_home": text_or(lra_bake.default_elan_home()),
+            "elan_home_env": env_str("ELAN_HOME"),
+            "independent_kernel_verifier_is_lake_oracle": False,
+            "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
+            "lake": False,
+            "measurement_argv_template": MEASUREMENT_ARGV_TEMPLATE,
+            "path": env_str("PATH"),
+            "run_lean_process": run_lean_process.__name__,
+            "validation_home": text_or(Path.home()),
+            "warmup_timeout_seconds": WARMUP_TAG_TIMEOUT_SECONDS,
+        },
     )
-    return {
-        "arena_score": None,
-        "default_elan_home": str(lra_bake.default_elan_home()),
-        "elan_home_env": env_str("ELAN_HOME"),
-        "independent_kernel_verifier_is_lake_oracle": False,
-        "installed_tags": installed,
-        "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
-        "lake": False,
-        "measurement_argv_template": MEASUREMENT_ARGV_TEMPLATE,
-        "missing_tags": missing,
-        "path": env_str("PATH"),
-        "pins": pins,
-        "run_lean_process": run_lean_process.__name__,
-        "score": None,
-        "validation_home": str(Path.home()),
-        "warmup_timeout_seconds": WARMUP_TAG_TIMEOUT_SECONDS,
-        "capability_gap": (
-            "No tag-pinned elan lean/lake binaries are installed under the "
-            "resolver elan home. Paths remain tag-pinned; this is not PATH "
-            "lake usability and is not IndependentKernelVerifier."
-            if missing and not installed
-            else ""
-        ),
-    }
 
 
 def _imported_names(source: str) -> set[str]:
@@ -656,93 +618,33 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
     tree = ast.parse(text)
     oracle_uses = ast_name_hits(tree, FORBIDDEN_ORACLE_NAMES)
     timeout_literals = call_kwarg_numbers(tree, ("timeout", "timeout_seconds"))
-    calls = set(out["call_names"])
-    score_assignments = list(out["score_keys"])
-    uses_run_lean_process = "run_lean_process" in calls
-    uses_measurement_argv = "measurement_argv" in calls
     has_ikv_timeout_constant = has_constant(text, INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS)
     lake_timeout_literals_ok = all(
         value > INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
         for value in timeout_literals
         if value == INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS or value >= 1.0
     ) and INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS not in timeout_literals
-    return {
-        "imported_names": out["imported_names"],
-        "forbidden_imports": out["forbidden_imports"],
-        "forbidden_calls": out["forbidden_calls"],
-        "forbidden_oracle_uses": sorted(oracle_uses),
-        "score_assignments": score_assignments,
-        "timeout_kwarg_literals": timeout_literals,
-        "uses_run_lean_process": uses_run_lean_process,
-        "uses_measurement_argv": uses_measurement_argv,
-        "has_ikv_timeout_constant": has_ikv_timeout_constant,
-        "lake_timeout_literals_ok": lake_timeout_literals_ok,
-        "independent_kernel_verifier_is_lake_oracle": False,
-        "ok": (
-            not out["forbidden_imports"]
-            and not out["forbidden_calls"]
-            and not oracle_uses
-            and not score_assignments
-            and uses_run_lean_process
-            and uses_measurement_argv
-            and lake_timeout_literals_ok
-        ),
-    }
+    from jevops import lean as lean_mod
+    from jevops.repair import module_call_names, pack_call_audit
+
+    packed = pack_call_audit(
+        out,
+        required_calls=("run_lean_process", "measurement_argv"),
+        extra_call_names=module_call_names(lean_mod),
+        extra={
+            "forbidden_oracle_uses": sorted(oracle_uses),
+            "timeout_kwarg_literals": timeout_literals,
+            "has_ikv_timeout_constant": has_ikv_timeout_constant,
+            "lake_timeout_literals_ok": lake_timeout_literals_ok,
+            "independent_kernel_verifier_is_lake_oracle": False,
+        },
+        extra_ok=(not oracle_uses, lake_timeout_literals_ok),
+    )
+    return packed
 
 
-_FAKE_LAKE = """#!/usr/bin/python3.12
-import os
-import sys
-
-args = sys.argv[1:]
-if not args or args[0] != "env" or len(args) < 2:
-    sys.stderr.write("lra-fake-lake: expected 'env <lean> ...'\\n")
-    sys.exit(2)
-os.execv(args[1], args[1:])
-"""
-
-_FAKE_LEAN = """#!/usr/bin/python3.12
-import json
-import sys
-from pathlib import Path
-
-argv = sys.argv[1:]
-heartbeats = None
-source = None
-for arg in argv:
-    if arg.startswith("-DmaxHeartbeats="):
-        try:
-            heartbeats = int(arg.split("=", 1)[1])
-        except ValueError:
-            heartbeats = -1
-    elif arg == "--json":
-        continue
-    elif not arg.startswith("-"):
-        source = arg
-
-if heartbeats is None or heartbeats <= 0:
-    sys.stderr.write("measurement maxHeartbeats must be finite and positive\\n")
-    sys.exit(3)
-if source is None:
-    sys.stderr.write("missing source file\\n")
-    sys.exit(4)
-path = Path(source)
-if not path.is_file():
-    sys.stderr.write(f"source not found: {source}\\n")
-    sys.exit(4)
-text = path.read_text(encoding="utf-8")
-sorry = "sorry" in text.split() or "sorryAx" in text or "admit" in text.split()
-decl = path.stem.replace(".", "_") or "lra_candidate"
-if sorry:
-    print(json.dumps({"severity": "warning", "data": "hasSorry", "pos": {"line": 1, "column": 0}}))
-    print(f"#print axioms {decl}")
-    print(f"{decl} : sorryAx")
-    sys.exit(1)
-print(json.dumps({"severity": "information", "data": "ok", "pos": {"line": 1, "column": 0}}))
-print(f"#print axioms {decl}")
-print(f"{decl} : []")
-sys.exit(0)
-"""
+from jevops.lean import FAKE_LAKE_EXEC as _FAKE_LAKE
+from jevops.lean import FAKE_LEAN_COMPILE as _FAKE_LEAN
 
 
 def _write_executable(path: Path, text: str) -> None:
@@ -752,89 +654,40 @@ def _write_executable(path: Path, text: str) -> None:
 
 
 def plant_fake_toolchain(elan_home: Path, lean_tag: str) -> Path:
-    from jevops.outer import join_under, plant_executables
+    from jevops.lean import plant_fake_toolchain as _fn
 
-    toolchain_dir = join_under(
-        elan_home, "toolchains", lra_bake.elan_toolchain_dirname(lean_tag), "bin"
+    return _fn(
+        elan_home,
+        lean_tag,
+        dirname_fn=lra_bake.elan_toolchain_dirname,
+        files={"lake": _FAKE_LAKE, "lean": _FAKE_LEAN},
     )
-    plant_executables(toolchain_dir, {"lake": _FAKE_LAKE, "lean": _FAKE_LEAN})
-    return toolchain_dir
 
 
 def plant_synthetic_strata_clone(clone: Path) -> Path:
-    from jevops.outer import plant_git_skeleton
+    from jevops.lean import plant_synthetic_clone, render_lean_toolchain, render_package_lakefile
 
-    return plant_git_skeleton(
+    return plant_synthetic_clone(
         clone,
-        files={
-            "lakefile.lean": (
-                "import Lake\n"
-                "open Lake DSL\n"
-                "\n"
-                "package «strata» where\n"
-                f'  moreLeanArgs := #["-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}"]\n'
-                "\n"
-                "lean_lib «Strata»\n"
+        {
+            "lakefile.lean": render_package_lakefile(
+                package="strata",
+                lib="Strata",
+                max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
             ),
-            "lean-toolchain": f"leanprover/lean4:{STRATA_FIRST_TAG}\n",
+            "lean-toolchain": render_lean_toolchain(STRATA_FIRST_TAG),
         },
     )
 
 
 def _receipt_summary(receipt: CompileReceipt) -> dict[str, Any]:
-    from jevops.outer import argv_layout, nonempty
+    from jevops.lean import compile_receipt_summary
 
-    return {
-        "aborted_remaining_tags": list(receipt.aborted_remaining_tags),
-        "argv_has_lake_env_lean": argv_layout(
-            receipt.argv,
-            min_len=6,
-            names={0: "lake", 2: "lean"},
-            eq={
-                1: "env",
-                3: f"-DmaxHeartbeats={MEASUREMENT_MAX_HEARTBEATS}",
-                4: "--json",
-            },
-        ),
-        "argv_tag_pinned": argv_layout(
-            receipt.argv,
-            min_len=3,
-            contains={0: receipt.lean_tag, 2: receipt.lean_tag},
-        ),
-        "axiom_digest": receipt.axiom_digest,
-        "axiom_digest_hex64": len(receipt.axiom_digest) == 64,
-        "axiom_names": list(receipt.axiom_names),
-        "cpu_ms_nonnegative": receipt.cpu_ms >= 0.0,
-        "exit_code": receipt.exit_code,
-        "file_path": receipt.file_path,
-        "git_commit": receipt.git_commit,
-        "header_maxHeartbeats": receipt.header_maxHeartbeats,
-        "independent_kernel_verifier_timeout_seconds": (
-            receipt.independent_kernel_verifier_timeout_seconds
-        ),
-        "independent_kernel_verifier_used": receipt.independent_kernel_verifier_used,
-        "lake_oracle": receipt.lake_oracle,
-        "lean_tag": receipt.lean_tag,
-        "measurement_maxHeartbeats": receipt.measurement_maxHeartbeats,
-        "measurement_maxHeartbeats_finite": receipt.measurement_maxHeartbeats > 0
-        and receipt.measurement_maxHeartbeats == MEASUREMENT_MAX_HEARTBEATS,
-        "name": receipt.name,
-        "ok": receipt.ok,
-        "sorryAx": receipt.sorryAx,
-        "source": receipt.source,
-        "stdout_digest": receipt.stdout_digest,
-        "stdout_nonempty": nonempty(receipt.stdout),
-        "printed_axioms": "#print axioms" in receipt.stdout,
-        "timeout_exceeds_ikv_30s": (
-            receipt.timeout_seconds > INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS
-        ),
-        "timeout_seconds": receipt.timeout_seconds,
-        "timed_out": receipt.timed_out,
-        "wall_ms_positive": receipt.wall_ms > 0.0,
-        "error": receipt.error,
-        "arena_score": None,
-        "score": None,
-    }
+    return compile_receipt_summary(
+        receipt,
+        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        ikv_floor=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+    )
 
 
 def _exec_scratch_parent() -> Path:
@@ -858,28 +711,33 @@ def _synthetic_compile(
     *,
     persist_receipts: Optional[Path] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import temp_dir
+    from jevops.lean import planted_session
+    from jevops.outer import get_str, take_keys
 
-    with temp_dir(prefix="lra-014-compile-", parent=_exec_scratch_parent()) as tmp:
-        root = Path(tmp)
-        elan_home = root / "elan"
-        state_root = root / "state"
-        receipts_dir = root / "receipts"
-        for tag in ("v4.25.0", "v4.26.0", "v4.27.0", "v4.29.1"):
-            plant_fake_toolchain(elan_home, tag)
-        clone = plant_synthetic_strata_clone(clone_dir(STRATA_URL, state_root))
+    with planted_session(
+        "lra-014-compile-",
+        tags=("v4.25.0", "v4.26.0", "v4.27.0", "v4.29.1"),
+        plant_fn=plant_fake_toolchain,
+        clone_fn=lambda state: plant_synthetic_strata_clone(clone_dir(STRATA_URL, state)),
+        parent=_exec_scratch_parent(),
+    ) as planted:
+        elan_home, state_root, receipts_dir, clone = take_keys(
+            planted, "elan_home", "state_root", "receipts_dir", "clone"
+        )
         first = plan.first_record
         write_record_source(first, clone / STRATA_FIRST_FILE)
-        expand = expand_records(plan.records, after_name=str(first.get("name") or ""))
-        if expand:
-            write_record_source(expand[-1], clone / STRATA_EXPAND_FILE)
+        expand = expand_records(plan.records, after_name=get_str(first, "name"))
+        from jevops.outer import apply_last
+
+        apply_last(expand, lambda record: write_record_source(record, clone / STRATA_EXPAND_FILE))
         first_job = _bake_job_for_record(first, iter_version_pins(first.get("version_info"))[0])
         lra_bake.plant_synthetic_cache(first_job, state_root)
-        timeout_30_rejected = False
-        try:
-            require_lake_timeout(INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS)
-        except LakeTimeoutTooSmall:
-            timeout_30_rejected = True
+        from jevops.outer import closed_on_error
+
+        timeout_30_rejected = closed_on_error(
+            lambda: require_lake_timeout(INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS),
+            LakeTimeoutTooSmall,
+        )
         first_receipts = compile_record(
             first,
             timeout=WARMUP_TAG_TIMEOUT_SECONDS,
@@ -890,29 +748,40 @@ def _synthetic_compile(
             hardware_class="synthetic",
             skip_checkout=True,
         )
-        first_green = bool(first_receipts) and all(item.ok for item in first_receipts)
-        expand_receipts: list[CompileReceipt] = []
-        if first_green:
-            for record in expand:
-                if str(record.get("file_path") or "") != STRATA_EXPAND_FILE:
-                    continue
-                expand_receipts.extend(
-                    compile_record(
-                        record,
-                        timeout=WARMUP_TAG_TIMEOUT_SECONDS,
-                        state_root=state_root,
-                        elan_home=elan_home,
-                        network="deny",
-                        hardware_class="synthetic",
-                        skip_checkout=True,
-                    )
-                )
-                break
-        putnam = next(
-            record for record in plan.records if record.get("source") == PUTNAM_SOURCE
+        from jevops.outer import all_rows, field_eq, first_where
+
+        first_green = bool(first_receipts) and all_rows(first_receipts, lambda item: item.ok)
+        expand_hit = first_where(
+            expand, lambda record: get_str(record, "file_path") == STRATA_EXPAND_FILE
+        )
+        from jevops.outer import call_if
+
+        expand_receipts: list[CompileReceipt] = call_if(
+            first_green and expand_hit is not None,
+            lambda: compile_record(
+                expand_hit,
+                timeout=WARMUP_TAG_TIMEOUT_SECONDS,
+                state_root=state_root,
+                elan_home=elan_home,
+                network="deny",
+                hardware_class="synthetic",
+                skip_checkout=True,
+            ),
+            default=[],
+        )
+        putnam = first_where(
+            plan.records,
+            field_eq("source", PUTNAM_SOURCE),
+            error_cls=CompileError,
+            miss="no Putnam record in warmup JSONL",
         )
         putnam_pins = iter_version_pins(putnam.get("version_info"))
-        putnam_pin = next(pin for pin in putnam_pins if pin.lean_tag == STRATA_FIRST_TAG)
+        putnam_pin = first_where(
+            putnam_pins,
+            lambda pin: pin.lean_tag == STRATA_FIRST_TAG,
+            error_cls=CompileError,
+            miss="no Putnam pin for first tag",
+        )
         putnam_receipt = compile_tag(
             putnam,
             putnam_pin,
@@ -924,58 +793,45 @@ def _synthetic_compile(
             skip_checkout=True,
         )
         all_receipts = [*first_receipts, *expand_receipts, putnam_receipt]
-        written = write_receipts(all_receipts, receipts_dir)
-        persisted: list[str] = []
-        if persist_receipts is not None:
-            persisted = write_receipts(all_receipts, Path(persist_receipts))
-        missing_clone_closed = False
-        try:
-            require_clone(
+        from jevops.outer import persist_named_rows
+
+        written, persisted = persist_named_rows(
+            all_receipts,
+            receipts_dir,
+            persist_receipts,
+            write_receipts,
+        )
+        missing_clone_closed = closed_on_error(
+            lambda: require_clone(
                 "https://github.com/example/missing-lra-014",
                 network="deny",
                 state_root=state_root,
-            )
-        except CloneMissing:
-            missing_clone_closed = True
-        expand_tags = [item.lean_tag for item in expand_receipts]
-        return {
-            "elan_home": str(elan_home),
-            "expand_n_receipts": len(expand_receipts),
-            "expand_ok": bool(expand_receipts) and all(item.ok for item in expand_receipts),
-            "expand_receipts": [_receipt_summary(item) for item in expand_receipts],
-            "expand_tags_newest_first": expand_tags == sorted(
-                expand_tags, key=_tag_sort_key, reverse=True
             ),
-            "first_file": STRATA_FIRST_FILE,
-            "first_green": first_green,
-            "first_n_receipts": len(first_receipts),
-            "first_name": str(first.get("name") or ""),
-            "first_receipts": [_receipt_summary(item) for item in first_receipts],
-            "first_strata_compiled": first_green,
-            "first_via_lake_env_lean": bool(first_receipts)
-            and all(_receipt_summary(item)["argv_has_lake_env_lean"] for item in first_receipts),
-            "missing_clone_fails_closed_under_network_deny": missing_clone_closed,
-            "n_receipts_persisted": len(persisted),
-            "n_receipts_written": len(written),
-            "persisted_receipts": persisted,
-            "putnam_header_maxHeartbeats": putnam_receipt.header_maxHeartbeats,
-            "putnam_measurement_maxHeartbeats": putnam_receipt.measurement_maxHeartbeats,
-            "putnam_ok": putnam_receipt.ok,
-            "putnam_overrides_zero_header": (
-                putnam_receipt.header_maxHeartbeats == 0
-                and putnam_receipt.measurement_maxHeartbeats == MEASUREMENT_MAX_HEARTBEATS
-                and putnam_receipt.ok
+            CloneMissing,
+        )
+        from jevops.lean import pack_synthetic_compile
+
+        return pack_synthetic_compile(
+            elan_home=elan_home,
+            expand_receipts=expand_receipts,
+            first_receipts=first_receipts,
+            putnam_receipt=putnam_receipt,
+            written=written,
+            persisted=persisted,
+            receipts_dir=receipts_dir,
+            first_file=STRATA_FIRST_FILE,
+            first_name=get_str(first, "name"),
+            first_green=first_green,
+            missing_clone_closed=missing_clone_closed,
+            timeout_30_rejected=timeout_30_rejected,
+            timeout_is_warmup=all_rows(
+                [*first_receipts, *expand_receipts, putnam_receipt],
+                lambda item: item.timeout_seconds == WARMUP_TAG_TIMEOUT_SECONDS,
             ),
-            "putnam_receipt": _receipt_summary(putnam_receipt),
-            "receipts_dir": str(receipts_dir),
-            "receipts_written": [Path(path).name for path in written],
-            "timeout_30s_rejected": timeout_30_rejected,
-            "timeout_is_warmup_600s": all(
-                item.timeout_seconds == WARMUP_TAG_TIMEOUT_SECONDS
-                for item in [*first_receipts, *expand_receipts, putnam_receipt]
-            ),
-            "independent_kernel_verifier_used": False,
-        }
+            summary_fn=_receipt_summary,
+            tag_sort_fn=_tag_sort_key,
+            max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        )
 
 
 def self_check(
@@ -983,22 +839,26 @@ def self_check(
     *,
     receipts_dir: Optional[Path] = None,
 ) -> dict[str, Any]:
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import get_str, if_none, relative_or_str
+
+    jsonl = Path(if_none(path, WARMUP_JSONL))
     plan = plan_compile(jsonl)
     audit = audit_source()
     synthetic = _synthetic_compile(plan, persist_receipts=receipts_dir)
     toolchain = probe_toolchain()
     first = plan.first_record
     first_pins = iter_version_pins(first.get("version_info"))
-    putnam_headers = []
-    for record in plan.records:
-        if record.get("source") != PUTNAM_SOURCE:
-            continue
-        putnam_headers.append(header_max_heartbeats(str(record.get("header") or "")))
-    report: dict[str, Any] = {
+    from jevops.outer import collect_where, field_eq
+
+    putnam_headers = collect_where(
+        plan.records,
+        field_eq("source", PUTNAM_SOURCE),
+        lambda record: header_max_heartbeats(get_str(record, "header")),
+    )
+    from jevops.outer import pack_unscored
+
+    report: dict[str, Any] = pack_unscored(**{
         "ok": False,
-        "arena_score": None,
-        "score": None,
         "compiled": bool(synthetic["first_strata_compiled"]),
         "lake": True,
         "lake_oracle": True,
@@ -1018,14 +878,14 @@ def self_check(
         "jsonl_bytes": plan.jsonl_bytes,
         "jsonl_unchanged": plan.frozen_warmup_sha256 == FROZEN_WARMUP_SHA256,
         "n_records": plan.n_records,
-        "first_name": str(first.get("name") or ""),
-        "first_file": str(first.get("file_path") or ""),
+        "first_name": get_str(first, "name"),
+        "first_file": get_str(first, "file_path"),
         "first_is_strata_v4_26": (
             first.get("source") == STRATA_SOURCE
             and first_pins
             and first_pins[0].lean_tag == STRATA_FIRST_TAG
             and first_pins[0].git_commit == STRATA_FIRST_COMMIT
-            and str(first.get("file_path") or "") == STRATA_FIRST_FILE
+            and get_str(first, "file_path") == STRATA_FIRST_FILE
         ),
         "first_strata_compiled_via_lake_env_lean": bool(
             synthetic["first_strata_compiled"] and synthetic["first_via_lake_env_lean"]
@@ -1039,38 +899,40 @@ def self_check(
         "synthetic": synthetic,
         "toolchain": toolchain,
         "plan": plan.to_dict(),
-        "warmup_path": str(jsonl.relative_to(REPO_ROOT)),
+        "warmup_path": relative_or_str(jsonl, REPO_ROOT),
         "protocol": "LRA/v1",
         "live_elan_installed": bool(toolchain["installed_tags"]),
         "capability_gap": toolchain["capability_gap"],
-    }
+    })
     first_receipts = synthetic["first_receipts"]
-    report["ok"] = bool(
-        report["n_records"] == WARMUP_N
-        and report["jsonl_unchanged"]
-        and report["first_is_strata_v4_26"]
-        and report["first_strata_compiled_via_lake_env_lean"]
-        and report["per_tag_timeout_written"]
-        and report["axiom_digest_receipts_written"]
-        and report["putnam_headers_are_zero"]
-        and synthetic["putnam_overrides_zero_header"]
-        and synthetic["timeout_30s_rejected"]
-        and synthetic["missing_clone_fails_closed_under_network_deny"]
-        and synthetic["expand_ok"]
-        and synthetic["expand_tags_newest_first"]
-        and all(item["axiom_digest_hex64"] for item in first_receipts)
-        and all(item["stdout_nonempty"] and item["printed_axioms"] for item in first_receipts)
-        and all(not item["error"] for item in first_receipts)
-        and all(item["timeout_exceeds_ikv_30s"] for item in first_receipts)
-        and all(not item["independent_kernel_verifier_used"] for item in first_receipts)
-        and audit["ok"]
-        and report["independent_kernel_verifier_used"] is False
-        and report["independent_kernel_verifier_is_lake_oracle"] is False
-        and report["arena_score"] is None
-        and report["score"] is None
-        and report["llama_server_started"] is False
+    from jevops.outer import all_rows, finalize_ok
+
+    return finalize_ok(
+        report,
+        report["n_records"] == WARMUP_N,
+        report["jsonl_unchanged"],
+        report["first_is_strata_v4_26"],
+        report["first_strata_compiled_via_lake_env_lean"],
+        report["per_tag_timeout_written"],
+        report["axiom_digest_receipts_written"],
+        report["putnam_headers_are_zero"],
+        synthetic["putnam_overrides_zero_header"],
+        synthetic["timeout_30s_rejected"],
+        synthetic["missing_clone_fails_closed_under_network_deny"],
+        synthetic["expand_ok"],
+        synthetic["expand_tags_newest_first"],
+        all_rows(first_receipts, lambda item: item["axiom_digest_hex64"]),
+        all_rows(first_receipts, lambda item: item["stdout_nonempty"] and item["printed_axioms"]),
+        all_rows(first_receipts, lambda item: not item["error"]),
+        all_rows(first_receipts, lambda item: item["timeout_exceeds_ikv_30s"]),
+        all_rows(first_receipts, lambda item: not item["independent_kernel_verifier_used"]),
+        audit["ok"],
+        report["independent_kernel_verifier_used"] is False,
+        report["independent_kernel_verifier_is_lake_oracle"] is False,
+        report["arena_score"] is None,
+        report["score"] is None,
+        report["llama_server_started"] is False,
     )
-    return report
 
 
 def _print_json(payload: Mapping[str, Any]) -> None:
@@ -1128,7 +990,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         action="store_true",
         help="do not git checkout (synthetic or already-checked worktree)",
     )
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
 
     if args.self_check or argv is None or argv == []:
         from jevops.outer import print_ok
@@ -1154,6 +1018,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         plan = plan_compile(args.jsonl)
         network = lra_bake.network_mode(args.network)
         records: list[Mapping[str, Any]] = []
+        from jevops.outer import get_str
+
         if args.name:
             from jevops.outer import closed_fail, lookup_named
 
@@ -1166,7 +1032,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             first = plan.first_record
             records = [first]
             if args.expand_tags:
-                records.extend(expand_records(plan.records, after_name=str(first.get("name") or "")))
+                records.extend(expand_records(plan.records, after_name=get_str(first, "name")))
         all_receipts: list[CompileReceipt] = []
         first_green = False
         for index, record in enumerate(records):
@@ -1199,7 +1065,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             "receipts_written": written,
         }
         _print_json(payload)
-        return 0 if payload["ok"] else 1
+        from jevops.outer import exit_ok
+
+        return exit_ok(payload["ok"])
 
     parser.error("choose --self-check, --plan, --probe-toolchain, or --compile-first")
     return 2

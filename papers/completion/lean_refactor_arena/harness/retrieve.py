@@ -17,7 +17,6 @@ import argparse
 import ast
 import hashlib
 import json
-import re
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -36,8 +35,9 @@ import splice as lra_splice  # noqa: E402
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 WARMUP_N = lra_splice.WARMUP_N
 NEIGHBOR_N = WARMUP_N - 1
-SRC_LEMMA_CAP = 16
-PROMPT_HEAD_CHARS = 400
+from jevops.catalogs import FORBIDDEN_CORPUS_ATTRS
+from jevops.catalogs import PROMPT_HEAD_CHARS
+from jevops.catalogs import SRC_LEMMA_CAP
 
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
@@ -56,101 +56,11 @@ FORBIDDEN_IMPORT_NAMES = frozenset(
         "ipfs_datasets_py",
     }
 )
-FORBIDDEN_CORPUS_ATTRS = frozenset(
-    {
-        "CorpusManifest",
-        "TheoremEntry",
-        "GoalFeatures",
-        "select_premises",
-        "select_premises_for_theorem",
-        "register_source",
-        "ingest",
-    }
-)
 
-# Character-class ident; not a Lean parser. Allows Unicode (ι) and dotted names.
-_IDENT = re.compile(
-    r"(?:[^\W\d])(?:[\w'])*(?:\.(?:[^\W\d])(?:[\w'])*)*",
-    re.UNICODE,
-)
-_SIMP_RW_OPEN = re.compile(
-    r"\b(?P<tactic>simp(?:_all|_rw)?(?:\s+only)?|rw!?|erw)\s*\[",
-    re.UNICODE,
-)
-_EXACT_APPLY_OPEN = re.compile(
-    r"\b(?P<tactic>exact'?|apply'?)\b\s*",
-    re.UNICODE,
-)
-# Binders / tactic modifiers, not theorem names. Compared case-insensitively.
-_STOPWORDS = frozenset(
-    {
-        "forall",
-        "exists",
-        "fun",
-        "let",
-        "in",
-        "if",
-        "then",
-        "else",
-        "do",
-        "match",
-        "with",
-        "end",
-        "where",
-        "open",
-        "import",
-        "using",
-        "from",
-        "as",
-        "return",
-        "case",
-        "of",
-        "by",
-        "have",
-        "show",
-        "this",
-        "sorry",
-        "admit",
-        "at",
-        "only",
-        "all",
-        "try",
-        "first",
-        "focus",
-        "repeat",
-        "skip",
-        "next",
-        "intro",
-        "intros",
-        "cases",
-        "constructor",
-        "refine",
-        "apply",
-        "exact",
-        "simp",
-        "rw",
-        "erw",
-        "simp_all",
-        "simp_rw",
-        "true",
-        "false",
-        "and",
-        "or",
-        "not",
-        "some",
-        "none",
-        "generalizing",
-        "hiding",
-        "renaming",
-        "calc",
-        "suffices",
-        "obtain",
-        "rcases",
-        "rintro",
-        "all_goals",
-        "any_goals",
-    }
-)
+from jevops.tactics import EXACT_APPLY_OPEN as _EXACT_APPLY_OPEN
+from jevops.tactics import IDENT as _IDENT
+from jevops.tactics import LEMMA_STOPWORDS as _STOPWORDS
+from jevops.tactics import SIMP_RW_OPEN as _SIMP_RW_OPEN
 
 
 class RetrieveError(RuntimeError):
@@ -267,68 +177,40 @@ def retrieve_by_name(
     *,
     path: Optional[Path] = None,
 ) -> Retrieval:
-    from jevops.outer import lookup_named
+    from jevops.outer import either, load_named_pack, lookup_named
 
-    if records is None:
-        _, _, records = load_warmup_records(path)
-    record = lookup_named(records, name)
-    if record is None:
-        raise UnknownProblem(f"unknown warm-up problem: {name}")
+    record, records, _digest = either(
+        records is None,
+        lambda: load_named_pack(
+            load_warmup_records,
+            name,
+            error_cls=UnknownProblem,
+            miss=f"unknown warm-up problem: {name}",
+            extra=path,
+        ),
+        lambda: (
+            lookup_named(records, name, error_cls=UnknownProblem, miss=f"unknown warm-up problem: {name}"),
+            records,
+            None,
+        ),
+    )
     return retrieve_record(record, records)
 
 
 def prompt_neighbors(retrieval: Retrieval, *, k: int = 4) -> list[dict[str, str]]:
     """TypeSafe neighbor slice from the design: name / statement[:400] / proof_head."""
 
-    from jevops.outer import head_seq
-    from jevops.pick import project_items
+    from jevops.lean import prompt_neighbors as _fn
 
-    return project_items(
-        head_seq(retrieval.neighbors, k),
-        {
-            "name": "name",
-            "statement": "statement_head",
-            "proof_head": "proof_head",
-        },
-    )
+    return _fn(retrieval, k=k)
 
 
 def retrieval_view(retrieval: Retrieval, *, src_chars: int = PROMPT_HEAD_CHARS) -> dict[str, Any]:
     """JSON view with truncated proofs. Full ``src`` stays on the dataclass."""
 
-    from jevops.outer import head_chars
+    from jevops.lean import retrieval_view as _fn
 
-    return {
-        "query": retrieval.query,
-        "source": retrieval.source,
-        "n_neighbors": len(retrieval.neighbors),
-        "n_src_lemmas": len(retrieval.src_lemmas),
-        "n_src_lemmas_uncapped": retrieval.n_src_lemmas_uncapped,
-        "src_lemma_cap": SRC_LEMMA_CAP,
-        "neighbors": [
-            {
-                "name": item.name,
-                "source": item.source,
-                "statement": head_chars(item.statement, src_chars),
-                "proof_head": head_chars(item.src, src_chars),
-                "file_path": item.file_path,
-                "url": item.url,
-                "proof_length": item.proof_length,
-                "src_chars": len(item.src),
-                "retrieved_full_src": True,
-            }
-            for item in retrieval.neighbors
-        ],
-        "src_lemmas": [asdict(item) for item in retrieval.src_lemmas],
-        "lemma_ids": list(retrieval.lemma_ids),
-        "lemma_id_digest": retrieval.lemma_id_digest,
-        "prompt_neighbors": prompt_neighbors(retrieval),
-        "arena_score": retrieval.arena_score,
-        "corpus_manifest_ingest": retrieval.corpus_manifest_ingest,
-        "mathlib_ingest": retrieval.mathlib_ingest,
-        "score": None,
-        "relevance_score": None,
-    }
+    return _fn(retrieval, src_chars=src_chars, lemma_cap=SRC_LEMMA_CAP)
 
 
 def _imported_names(source: str) -> set[str]:
@@ -358,61 +240,27 @@ def _numeric_score_assignments(source: str) -> list[str]:
 
 
 def _synthetic_cap_fixture() -> dict[str, Any]:
+    from jevops.lean import pack_lemma_cap_fixture
+
     names = [f"Lemma_{index:02d}" for index in range(20)]
     src = "theorem T : True := by\n  simp [" + ", ".join(names) + "]\n  exact Lemma_00\n  apply ExtraIdent"
     lemmas, uncapped = extract_src_lemmas(src, cap=SRC_LEMMA_CAP)
-    lemma_names = [item.name for item in lemmas]
-    return {
-        "uncapped": uncapped,
-        "returned": len(lemmas),
-        "names": lemma_names,
-        "first": lemma_names[0] if lemma_names else "",
-        "last": lemma_names[-1] if lemma_names else "",
-        "includes_extra_apply": "ExtraIdent" in lemma_names,
-        "tactics": sorted({item.tactic for item in lemmas}),
-        "capped_at_16": len(lemmas) == SRC_LEMMA_CAP and lemma_names == names[:SRC_LEMMA_CAP],
-        "uncapped_has_all_twenty_plus_extra": uncapped == 21,
-    }
+    return pack_lemma_cap_fixture(
+        names=names, lemmas=lemmas, uncapped=uncapped, cap=SRC_LEMMA_CAP
+    )
 
 
 def _record_report(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    from jevops.lean import pack_retrieval_report
+
     retrieval = retrieve_record(record, records)
-    neighbor_names = [item.name for item in retrieval.neighbors]
-    all_names = [str(item.get("name") or "") for item in records]
-    expected = [name for name in all_names if name != retrieval.query]
-    lemma_in_src = all(item.name in record["src"] for item in retrieval.src_lemmas)
-    tactics = sorted({item.tactic for item in retrieval.src_lemmas})
-    families = {item.tactic for item in retrieval.src_lemmas}
-    return {
-        "name": retrieval.query,
-        "source": retrieval.source,
-        "n_neighbors": len(retrieval.neighbors),
-        "neighbor_names": neighbor_names,
-        "neighbors_are_the_other_fourteen": neighbor_names == expected,
-        "self_excluded": retrieval.query not in neighbor_names,
-        "full_src_retrieved": all(item.src == next(r["src"] for r in records if r["name"] == item.name) for item in retrieval.neighbors),
-        "prefix_bind_neighbors": all(item.src.startswith(item.statement) for item in retrieval.neighbors),
-        "n_src_lemmas": len(retrieval.src_lemmas),
-        "n_src_lemmas_uncapped": retrieval.n_src_lemmas_uncapped,
-        "src_lemma_cap_held": len(retrieval.src_lemmas) <= SRC_LEMMA_CAP,
-        "src_lemmas": [asdict(item) for item in retrieval.src_lemmas],
-        "src_lemma_names": [item.name for item in retrieval.src_lemmas],
-        "src_lemma_tactics": tactics,
-        "has_simp": "simp" in families,
-        "has_rw": "rw" in families,
-        "has_exact": "exact" in families,
-        "has_apply": "apply" in families,
-        "lemmas_mentioned_in_src": lemma_in_src,
-        "lemma_id_digest": retrieval.lemma_id_digest,
-        "lemma_id_digest_hex64": len(retrieval.lemma_id_digest) == 64,
-        "n_lemma_ids": len(retrieval.lemma_ids),
-        "arena_score": retrieval.arena_score,
-        "score": None,
-        "relevance_score": None,
-        "corpus_manifest_ingest": retrieval.corpus_manifest_ingest,
-        "mathlib_ingest": retrieval.mathlib_ingest,
-        "prompt_neighbor_names": [item["name"] for item in prompt_neighbors(retrieval)],
-    }
+    return pack_retrieval_report(
+        retrieval,
+        records=records,
+        lemma_cap=SRC_LEMMA_CAP,
+        prompt_neighbors=prompt_neighbors(retrieval),
+        asdict_fn=asdict,
+    )
 
 
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
@@ -421,7 +269,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     from jevops.outer import read_text
 
     source = read_text(__file__)
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import any_in, path_or, relative_or_str
+
+    jsonl = path_or(path, WARMUP_JSONL)
     before = sha256_file(jsonl)
     raw, digest, records = load_warmup_records(jsonl)
     per_record = [_record_report(record, records) for record in records]
@@ -437,24 +287,35 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     uses_subprocess = "subprocess" in imported
     cap_fixture = _synthetic_cap_fixture()
 
-    all_names = [str(record.get("name") or "") for record in records]
-    neighbor_cover = all(item["neighbors_are_the_other_fourteen"] and item["self_excluded"] for item in per_record)
-    full_src = all(item["full_src_retrieved"] and item["prefix_bind_neighbors"] for item in per_record)
-    lemmas_ok = all(item["lemmas_mentioned_in_src"] and item["src_lemma_cap_held"] for item in per_record)
-    has_simp = any(item["has_simp"] for item in per_record)
-    has_rw = any(item["has_rw"] for item in per_record)
-    has_exact = any(item["has_exact"] for item in per_record)
-    no_scores = all(
-        item["arena_score"] is None and item["score"] is None and item["relevance_score"] is None
-        for item in per_record
+    from jevops.outer import all_rows, any_row, closed_on_error
+
+    from jevops.outer import get_str, project_map
+
+    all_names = project_map(records, lambda record: get_str(record, "name"))
+    neighbor_cover = all_rows(
+        per_record, lambda item: item["neighbors_are_the_other_fourteen"] and item["self_excluded"]
     )
-    no_manifest = all(item["corpus_manifest_ingest"] is False and item["mathlib_ingest"] is False for item in per_record)
-    n_neighbors_ok = all(item["n_neighbors"] == NEIGHBOR_N for item in per_record)
-    unknown_closed = False
-    try:
-        retrieve_by_name("not-a-warmup-problem", records)
-    except UnknownProblem:
-        unknown_closed = True
+    full_src = all_rows(
+        per_record, lambda item: item["full_src_retrieved"] and item["prefix_bind_neighbors"]
+    )
+    lemmas_ok = all_rows(
+        per_record, lambda item: item["lemmas_mentioned_in_src"] and item["src_lemma_cap_held"]
+    )
+    has_simp = any_row(per_record, lambda item: item["has_simp"])
+    has_rw = any_row(per_record, lambda item: item["has_rw"])
+    has_exact = any_row(per_record, lambda item: item["has_exact"])
+    no_scores = all_rows(
+        per_record,
+        lambda item: item["arena_score"] is None and item["score"] is None and item["relevance_score"] is None,
+    )
+    no_manifest = all_rows(
+        per_record, lambda item: item["corpus_manifest_ingest"] is False and item["mathlib_ingest"] is False
+    )
+    n_neighbors_ok = all_rows(per_record, lambda item: item["n_neighbors"] == NEIGHBOR_N)
+    unknown_closed = closed_on_error(
+        lambda: retrieve_by_name("not-a-warmup-problem", records),
+        UnknownProblem,
+    )
 
     report = {
         "ok": True,
@@ -478,7 +339,7 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "imported_names": sorted(imported),
         "forbidden_imports": forbidden_imports,
         "corpus_manifest_attrs": corpus_attrs,
-        "called_select_premises": "select_premises" in call_names or "select_premises_for_theorem" in call_names,
+        "called_select_premises": any_in(call_names, ("select_premises", "select_premises_for_theorem")),
         "uses_fcntl": "fcntl" in imported,
         "uses_lock_ex": uses_lock_ex,
         "uses_subprocess": uses_subprocess,
@@ -491,37 +352,39 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "llama_server_started": False,
         "arena_score": None,
         "score": None,
-        "warmup_path": str(jsonl.relative_to(REPO_ROOT)),
+        "warmup_path": relative_or_str(jsonl, REPO_ROOT),
         "protocol": "LRA/v1",
         "loop": "v2-deferred-retrieve-only",
     }
-    report["ok"] = bool(
-        report["n_records"] == WARMUP_N
-        and report["jsonl_unchanged"]
-        and neighbor_cover
-        and n_neighbors_ok
-        and full_src
-        and lemmas_ok
-        and has_simp
-        and has_rw
-        and has_exact
-        and cap_fixture["capped_at_16"]
-        and unknown_closed
-        and not forbidden_imports
-        and not corpus_attrs
-        and not report["called_select_premises"]
-        and not report["uses_fcntl"]
-        and not uses_lock_ex
-        and not uses_subprocess
-        and no_scores
-        and not score_issues
-        and no_manifest
-        and report["compiled"] is False
-        and report["lake"] is False
-        and report["arena_score"] is None
-        and report["score"] is None
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["n_records"] == WARMUP_N,
+        report["jsonl_unchanged"],
+        neighbor_cover,
+        n_neighbors_ok,
+        full_src,
+        lemmas_ok,
+        has_simp,
+        has_rw,
+        has_exact,
+        cap_fixture["capped_at_16"],
+        unknown_closed,
+        not forbidden_imports,
+        not corpus_attrs,
+        not report["called_select_premises"],
+        not report["uses_fcntl"],
+        not uses_lock_ex,
+        not uses_subprocess,
+        no_scores,
+        not score_issues,
+        no_manifest,
+        report["compiled"] is False,
+        report["lake"] is False,
+        report["arena_score"] is None,
+        report["score"] is None,
     )
-    return report
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -536,7 +399,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         default=PROMPT_HEAD_CHARS,
         help="truncate neighbor statement/src in JSON output (full src is still retrieved)",
     )
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
     if args.retrieve:
         if not args.name:
             parser.error("--retrieve requires --name")

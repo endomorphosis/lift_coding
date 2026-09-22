@@ -193,14 +193,25 @@ class TestNeverScanFirstAssign(unittest.TestCase):
         self.assertNotIn("':=' in", source)
 
     def test_split_statement_body_source_uses_startswith_only(self) -> None:
-        source = Path(splice.__file__).read_text(encoding="utf-8")
-        start = source.index("def split_statement_body")
-        end = source.index("\ndef ", start + 1)
-        fragment = source[start:end]
+        from jevops import outer
+
+        kernel = Path(outer.__file__).read_text(encoding="utf-8")
+        start = kernel.index("def split_statement_suffix")
+        end = kernel.index("\ndef ", start + 1)
+        fragment = kernel[start:end]
         self.assertIn("src.startswith(statement)", fragment)
         self.assertIn("src[len(statement)", fragment)
         self.assertNotIn("find(", fragment)
         self.assertNotIn("index(", fragment)
+        flags_start = kernel.index("def prefix_bind_flags")
+        flags_end = kernel.index("\ndef ", flags_start + 1)
+        flags_fragment = kernel[flags_start:flags_end]
+        self.assertIn("src.startswith(statement)", flags_fragment)
+        self.assertIn("src[len(statement)", flags_fragment)
+        source = Path(splice.__file__).read_text(encoding="utf-8")
+        start = source.index("def split_statement_body")
+        end = source.index("\ndef ", start + 1)
+        self.assertIn("split_statement_suffix", source[start:end])
 
 
 class TestLexicalAdmission(unittest.TestCase):

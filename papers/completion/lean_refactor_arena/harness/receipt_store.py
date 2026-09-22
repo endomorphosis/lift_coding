@@ -16,7 +16,6 @@ import argparse
 import ast
 import hashlib
 import json
-import re
 import sqlite3
 import sys
 import tempfile
@@ -44,68 +43,37 @@ import splice as lra_splice  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 WARMUP_N = lra_splice.WARMUP_N
-PROTOCOL = "LRA/v1"
-RECEIPT_SCHEMA = "lra-proof-receipt/v1"
-STORE_SCHEMA = "lra-receipt-store/v1"
 PR_ID = "PR-7"
 LRAH_ID = "LRAH-008"
-CONTROL_PLANE = "papers/completion/lean_refactor_arena/harness/run_warmup.py"
-IS_CONTROL_PLANE = False
-REQUIRES_TODO_DAEMON = False
-REQUIRES_DUCKDB = False
-FILESYSTEM_IS_AUTHORITY = True
-INSERT_ONLY = True
-KERNEL_COMMAND_TEMPLATE = "{lake} env {lean} --json {source_file}"
-MEASUREMENT_MAX_HEARTBEATS = 400000
-LEAN_NUM_THREADS = 1
-NO_NEW_AXIOMS = True
-NOT_APPLICABLE = "not-applicable"
-DEFAULT_IR = "lean4-proof-body"
-DEFAULT_PROPERTY = "statement-preserving-refactor"
-DEFAULT_TRANSLATOR = "body-splice-v1"
-DEFAULT_BACKEND_ID = "lake-env-lean"
-DEFAULT_POLICY = "open_policy_v1"
-DEFAULT_RESOURCE = "spark_gb10"
-DEFAULT_GENERATOR = "leanstral_local"
-MAX_ROW_BYTES = 8192
-HEX64 = re.compile(r"^[0-9a-f]{64}$")
-
-# Closed vocabulary copied from DuckDBProofStore@1. Self-check diffs this
-# against logic/common/duckdb_proof_store.py and fails on drift.
-PROOF_AUTHORITY_DIMENSIONS: tuple[str, ...] = (
-    "ir",
-    "property",
-    "assumptions",
-    "premises",
-    "translator",
-    "solver",
-    "toolchain",
-    "theorem_registry",
-    "policy",
-    "resource",
-    "tree",
-    "backend_id",
-    "backend_binary",
-    "backend_version",
-    "backend_config",
-)
-PROOF_AUTHORITY_DIMENSION_SET = frozenset(PROOF_AUTHORITY_DIMENSIONS)
-
-ALLOWED_SQL_HEAD = re.compile(
-    r"^\s*(CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS|INSERT\s+INTO|SELECT)\b",
-    re.IGNORECASE | re.DOTALL,
-)
-FORBIDDEN_SQL = re.compile(
-    r"\b(DELETE\s+FROM|DROP\s+TABLE|UPDATE\s+\w+|MERGE\s+INTO|REPLACE\s+INTO|"
-    r"INSERT\s+OR\s+REPLACE|INSERT\s+OR\s+IGNORE|TRUNCATE\s+TABLE|"
-    r"ALTER\s+TABLE)\b",
-    re.IGNORECASE,
-)
-SQL_STATEMENT_HEAD = re.compile(
-    r"^\s*(DELETE\s+FROM|DROP\s+TABLE|UPDATE\s+|MERGE\s+INTO|REPLACE\s+INTO|"
-    r"INSERT\s+OR\s+|TRUNCATE\s+TABLE|ALTER\s+TABLE)\b",
-    re.IGNORECASE,
-)
+from jevops.catalogs import CONTROL_PLANE
+from jevops.catalogs import PROOF_RECEIPT_SCHEMA as RECEIPT_SCHEMA
+from jevops.catalogs import RECEIPT_STORE_SCHEMA as STORE_SCHEMA
+from jevops.catalogs import ALLOWED_SQL_HEAD
+from jevops.catalogs import DEFAULT_BACKEND_ID
+from jevops.catalogs import DEFAULT_IR
+from jevops.catalogs import DEFAULT_POLICY
+from jevops.catalogs import DEFAULT_PROPERTY
+from jevops.catalogs import DEFAULT_RESOURCE
+from jevops.catalogs import DEFAULT_TRANSLATOR
+from jevops.catalogs import FILESYSTEM_IS_AUTHORITY
+from jevops.catalogs import FORBIDDEN_SQL
+from jevops.catalogs import HEX64
+from jevops.catalogs import INSERT_ONLY
+from jevops.catalogs import IS_CONTROL_PLANE
+from jevops.catalogs import KERNEL_COMMAND_TEMPLATE
+from jevops.catalogs import LEAN_NUM_THREADS
+from jevops.catalogs import MAX_ROW_BYTES
+from jevops.catalogs import MEASUREMENT_MAX_HEARTBEATS
+from jevops.catalogs import NO_NEW_AXIOMS
+from jevops.catalogs import NOT_APPLICABLE
+from jevops.catalogs import PROOF_AUTHORITY_DIMENSIONS
+from jevops.catalogs import PROOF_AUTHORITY_DIMENSION_SET
+from jevops.catalogs import PROOF_BODY_KEYS
+from jevops.catalogs import PROTOCOL
+from jevops.catalogs import RECEIPT_GENERATOR as DEFAULT_GENERATOR
+from jevops.catalogs import REQUIRES_DUCKDB
+from jevops.catalogs import REQUIRES_TODO_DAEMON
+from jevops.catalogs import SQL_STATEMENT_HEAD
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
         "fcntl",
@@ -126,68 +94,17 @@ FORBIDDEN_CALL_NAMES = frozenset(
         "build_environment_lock",
     }
 )
-PROOF_BODY_KEYS = frozenset({"src", "proof_text", "candidate_source", "body", "lean_source"})
 
-RECEIPT_DDL = """
-CREATE TABLE IF NOT EXISTS lra_proof_receipts (
-    key_digest VARCHAR PRIMARY KEY,
-    theorem_name VARCHAR NOT NULL,
-    lean_tag VARCHAR NOT NULL,
-    body_digest VARCHAR NOT NULL,
-    candidate_cid VARCHAR NOT NULL,
-    verdict VARCHAR NOT NULL,
-    token_count INTEGER,
-    elab_proxy DOUBLE,
-    dimensions_json VARCHAR NOT NULL,
-    executable_paths_json VARCHAR NOT NULL,
-    payload_json VARCHAR NOT NULL,
-    created_at DOUBLE NOT NULL
-)
-""".strip()
-
-EDGE_DDL = """
-CREATE TABLE IF NOT EXISTS lra_proof_edges (
-    parent_digest VARCHAR NOT NULL,
-    child_digest VARCHAR NOT NULL,
-    edge_kind VARCHAR NOT NULL,
-    created_at DOUBLE NOT NULL,
-    PRIMARY KEY (parent_digest, child_digest, edge_kind)
-)
-""".strip()
-
-INSERT_RECEIPT_SQL = """
-INSERT INTO lra_proof_receipts (
-    key_digest, theorem_name, lean_tag, body_digest, candidate_cid,
-    verdict, token_count, elab_proxy, dimensions_json,
-    executable_paths_json, payload_json, created_at
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-""".strip()
-
-INSERT_EDGE_SQL = """
-INSERT INTO lra_proof_edges (
-    parent_digest, child_digest, edge_kind, created_at
-) VALUES (?, ?, ?, ?)
-""".strip()
-
-SELECT_RECEIPT_SQL = (
-    "SELECT key_digest, theorem_name, lean_tag, body_digest, candidate_cid, "
-    "verdict, token_count, elab_proxy, dimensions_json, executable_paths_json, "
-    "payload_json, created_at FROM lra_proof_receipts WHERE key_digest = ?"
-)
-SELECT_NEGATIVE_SQL = (
-    "SELECT key_digest, verdict FROM lra_proof_receipts "
-    "WHERE theorem_name = ? AND body_digest = ? AND lean_tag = ?"
-)
-SELECT_EDGE_SQL = (
-    "SELECT parent_digest, child_digest, edge_kind, created_at "
-    "FROM lra_proof_edges WHERE parent_digest = ?"
-)
-SELECT_EDGE_ONE_SQL = (
-    "SELECT parent_digest, child_digest, edge_kind FROM lra_proof_edges "
-    "WHERE parent_digest = ? AND child_digest = ? AND edge_kind = ?"
-)
-SELECT_COUNT_RECEIPTS_SQL = "SELECT COUNT(*) FROM lra_proof_receipts"
-SELECT_COUNT_EDGES_SQL = "SELECT COUNT(*) FROM lra_proof_edges"
+from jevops.catalogs import EDGE_DDL
+from jevops.catalogs import INSERT_EDGE_SQL
+from jevops.catalogs import INSERT_RECEIPT_SQL
+from jevops.catalogs import RECEIPT_DDL
+from jevops.catalogs import SELECT_COUNT_EDGES_SQL
+from jevops.catalogs import SELECT_COUNT_RECEIPTS_SQL
+from jevops.catalogs import SELECT_EDGE_ONE_SQL
+from jevops.catalogs import SELECT_EDGE_SQL
+from jevops.catalogs import SELECT_NEGATIVE_SQL
+from jevops.catalogs import SELECT_RECEIPT_SQL
 
 
 class ReceiptStoreError(RuntimeError):
@@ -270,21 +187,16 @@ def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[d
 def closed_dimensions_from_source(path: Path = PROOF_STORE_SOURCE) -> tuple[str, ...]:
     """Parse PROOF_AUTHORITY_DIMENSIONS from DuckDBProofStore@1 source."""
 
-    from jevops.outer import quoted_strings, read_text, require_file
+    from jevops.outer import quoted_group, read_text, require_file
 
     path = require_file(path, error_cls=ReceiptStoreError, miss="missing proof-store source: {path}")
-    text = read_text(path)
-    match = re.search(
+    return quoted_group(
+        read_text(path),
         r"PROOF_AUTHORITY_DIMENSIONS: Final\[tuple\[str, \.\.\.\]\] = \((.*?)\)",
-        text,
-        re.S,
+        error_cls=ReceiptStoreError,
+        miss="PROOF_AUTHORITY_DIMENSIONS missing from duckdb_proof_store.py",
+        empty="PROOF_AUTHORITY_DIMENSIONS parsed empty",
     )
-    if match is None:
-        raise ReceiptStoreError("PROOF_AUTHORITY_DIMENSIONS missing from duckdb_proof_store.py")
-    names = quoted_strings(match.group(1))
-    if not names:
-        raise ReceiptStoreError("PROOF_AUTHORITY_DIMENSIONS parsed empty")
-    return names
 
 
 def environment_lock_field_names(path: Path = MODELS_SOURCE) -> list[str]:
@@ -295,13 +207,14 @@ def environment_lock_field_names(path: Path = MODELS_SOURCE) -> list[str]:
 
     path = require_file(path, error_cls=ReceiptStoreError, miss="missing hammer models source: {path}")
     names = class_ann_names(read_text(path), "EnvironmentLockRecord")
-    if names is None:
-        raise ReceiptStoreError("EnvironmentLockRecord class missing from models.py")
+    from jevops.outer import raise_if
+
+    raise_if(names is None, ReceiptStoreError, "EnvironmentLockRecord class missing from models.py")
     return names
 
 
 def parse_executable_paths(value: Any) -> ExecutablePaths:
-    from jevops.outer import reject_present_keys, require_exact_keys
+    from jevops.outer import reject_present_keys, require_exact_keys, str_map
 
     if isinstance(value, ExecutablePaths):
         paths = value.to_dict()
@@ -313,7 +226,7 @@ def parse_executable_paths(value: Any) -> ExecutablePaths:
             fmt="executable_paths must not include {key}",
             empty=(),
         )
-        paths = {str(key): str(item) for key, item in value.items()}
+        paths = str_map(value)
     else:
         raise ReceiptStoreError("executable_paths must be a mapping of lean and lake")
     got = require_exact_keys(
@@ -348,8 +261,10 @@ def project_dimensions(receipt: ProofReceipt) -> dict[str, str]:
 
     from jevops.lean import project_authority_dimensions
 
-    premises = receipt.premises_digest or not_applicable_digest()
-    backend_config = receipt.backend_config_digest or not_applicable_digest()
+    from jevops.outer import or_call
+
+    premises = or_call(receipt.premises_digest, not_applicable_digest)
+    backend_config = or_call(receipt.backend_config_digest, not_applicable_digest)
     mapping = {
         "ir": DEFAULT_IR,
         "property": DEFAULT_PROPERTY,
@@ -373,10 +288,12 @@ def project_dimensions(receipt: ProofReceipt) -> dict[str, str]:
 
 
 def receipt_key_digest(receipt: ProofReceipt, dimensions: Mapping[str, str]) -> str:
+    from jevops.outer import overlay_map
+
     return content_digest(
         {
             "body_digest": receipt.body_digest,
-            "dimensions": dict(dimensions),
+            "dimensions": overlay_map(dimensions),
             "lean_tag": receipt.lean_tag,
             "name": receipt.name,
             "schema": RECEIPT_SCHEMA,
@@ -487,33 +404,14 @@ def _integrity_conflict(exc: BaseException) -> bool:
 def insert_receipt_row(conn: InsertOnlyConnection, receipt: ProofReceipt) -> bool:
     """INSERT one tiny row. Existing key is skipped; never DELETE/UPDATE."""
 
-    from jevops.outer import dumps_compact
+    from jevops.outer import dumps_compact, insert_ignore_conflict, pack_receipt_insert_params
 
-    payload = {
-        "candidate_cid": receipt.candidate_cid,
-        "generator": receipt.generator,
-        "hardware_class": receipt.hardware_class,
-        "kernel_command_template": receipt.kernel_command_template,
-        "key_digest": receipt.key_digest,
-        "schema": RECEIPT_SCHEMA,
-    }
-    blob = _tiny_payload(payload)
-    params = (
-        receipt.key_digest,
-        receipt.name,
-        receipt.lean_tag,
-        receipt.body_digest,
-        receipt.candidate_cid,
-        receipt.verdict,
-        receipt.token_count,
-        receipt.elab_proxy,
-        dumps_compact(receipt.dimensions),
-        dumps_compact(receipt.executable_paths.to_dict()),
-        blob,
-        receipt.created_at,
+    params = pack_receipt_insert_params(
+        receipt,
+        schema=RECEIPT_SCHEMA,
+        dumps_fn=dumps_compact,
+        tiny_fn=_tiny_payload,
     )
-    from jevops.outer import insert_ignore_conflict
-
     return insert_ignore_conflict(
         conn.execute,
         INSERT_RECEIPT_SQL,
@@ -533,9 +431,9 @@ def insert_edge(
 ) -> bool:
     """INSERT an edge. Existing edges stay; there is no DELETE."""
 
-    from jevops.outer import insert_ignore_conflict
+    from jevops.outer import if_none, insert_ignore_conflict
 
-    stamp = time.time() if created_at is None else float(created_at)
+    stamp = float(if_none(created_at, factory=time.time))
     return insert_ignore_conflict(
         conn.execute,
         INSERT_EDGE_SQL,
@@ -546,10 +444,10 @@ def insert_edge(
 
 
 def select_edges(conn: InsertOnlyConnection, parent_digest: str) -> list[tuple[str, str, str]]:
-    from jevops.outer import fetch_mapped
+    from jevops.outer import fetch_mapped, text_or
 
     result = conn.execute(SELECT_EDGE_SQL, (parent_digest,))
-    return fetch_mapped(result, lambda row: (str(row[0]), str(row[1]), str(row[2])))
+    return fetch_mapped(result, lambda row: (text_or(row[0]), text_or(row[1]), text_or(row[2])))
 
 
 def lookup_receipt(conn: InsertOnlyConnection, key_digest: str) -> Optional[dict[str, Any]]:
@@ -583,11 +481,11 @@ def lookup_negative(
 ) -> Optional[str]:
     """Return the stored verdict for a failed (theorem, body, toolchain)."""
 
-    from jevops.outer import row_cell
+    from jevops.outer import row_cell, str_or_none
 
     result = conn.execute(SELECT_NEGATIVE_SQL, (theorem_name, body_digest, lean_tag))
     value = row_cell(result.fetchone(), 1)
-    return None if value is None else str(value)
+    return str_or_none(value)
 
 
 def should_skip_retry(verdict: Optional[str]) -> bool:
@@ -595,23 +493,17 @@ def should_skip_retry(verdict: Optional[str]) -> bool:
 
 
 def finalize_receipt(receipt: ProofReceipt, *, body: Optional[str] = None) -> ProofReceipt:
-    if receipt.executable_paths is None:
-        raise ReceiptStoreError("executable_paths required")
-    from jevops.outer import ensure_digest
+    from jevops.lean import finalize_proof_receipt
 
-    receipt.body_digest = ensure_digest(
-        receipt.body_digest,
-        data=body.encode("utf-8") if body is not None else None,
+    return finalize_proof_receipt(
+        receipt,
+        body=body,
         digest_fn=sha256_bytes,
+        project_fn=project_dimensions,
+        key_fn=receipt_key_digest,
+        now_fn=time.time,
         error_cls=ReceiptStoreError,
-        empty="body_digest must be sha256 hex",
     )
-    if not receipt.candidate_cid:
-        receipt.candidate_cid = receipt.body_digest
-    receipt.created_at = receipt.created_at or time.time()
-    receipt.dimensions = project_dimensions(receipt)
-    receipt.key_digest = receipt_key_digest(receipt, receipt.dimensions)
-    return receipt
 
 
 def store_receipt(
@@ -631,39 +523,28 @@ def store_receipt(
     control plane; this function does not schedule work.
     """
 
-    if IS_CONTROL_PLANE or REQUIRES_TODO_DAEMON:
-        raise ReceiptStoreError("receipt_store must not be the control plane")
-    finalize_receipt(receipt, body=body)
-    if body is not None:
-        receipt.candidate_cid = write_cas_body(root, body)
-        if receipt.body_digest != receipt.candidate_cid:
-            raise ReceiptStoreError("body_digest drifted from CAS write")
-    path = write_filesystem_receipt(root, receipt)
-    receipt.filesystem_path = str(path)
-    if duckdb_path is None:
-        receipt.duckdb_used = False
-        receipt.inserted = False
-        return receipt
-    module = duckdb_module if duckdb_module is not None else try_import_duckdb()
-    if require_duckdb and module is None:
-        raise ReceiptStoreError("duckdb package is required for this write but is not installed")
-    conn, engine = connect_optional_db(duckdb_path, duckdb_module=module)
-    try:
-        install_schema(conn)
-        inserted = insert_receipt_row(conn, receipt)
-        if parent_digest:
-            insert_edge(conn, parent_digest, receipt.key_digest)
-        commit = getattr(conn._raw, "commit", None)
-        if callable(commit):
-            commit()
-    finally:
-        conn.close()
-    receipt.duckdb_used = engine == "duckdb"
-    receipt.inserted = inserted
-    receipt.skipped_duplicate = not inserted
-    path = write_filesystem_receipt(root, receipt)
-    receipt.filesystem_path = str(path)
-    return receipt
+    from jevops.lean import persist_receipt
+    from jevops.outer import first_truthy, if_none
+
+    return persist_receipt(
+        receipt,
+        root=root,
+        body=body,
+        duckdb_path=duckdb_path,
+        parent_digest=parent_digest,
+        require_duckdb=require_duckdb,
+        control_plane=first_truthy(IS_CONTROL_PLANE, REQUIRES_TODO_DAEMON, default=False),
+        finalize_fn=finalize_receipt,
+        write_cas_fn=write_cas_body,
+        write_fs_fn=write_filesystem_receipt,
+        connect_fn=lambda path, module: connect_optional_db(path, duckdb_module=module),
+        install_fn=install_schema,
+        insert_fn=insert_receipt_row,
+        insert_edge_fn=insert_edge,
+        try_import_fn=lambda: if_none(duckdb_module, factory=try_import_duckdb),
+        error_cls=ReceiptStoreError,
+        control_msg="receipt_store must not be the control plane",
+    )
 
 
 def _imported_names(source: str) -> set[str]:
@@ -724,23 +605,19 @@ def _synthetic_receipt(
     premises_digest: str = "",
     git_commit: str = "451e5f047bafa010d178856db76c00029bfa4d7f",
 ) -> tuple[ProofReceipt, str]:
-    digest = sha256_bytes(body.encode("utf-8"))
-    receipt = ProofReceipt(
+    from jevops.lean import synthetic_proof_receipt
+
+    return synthetic_proof_receipt(
+        ProofReceipt,
+        ExecutablePaths,
         name=name,
         lean_tag=lean_tag,
-        body_digest=digest,
         verdict=verdict,
-        executable_paths=ExecutablePaths(
-            lean=f"/elan/toolchains/leanprover--lean4---{lean_tag}/bin/lean",
-            lake=f"/elan/toolchains/leanprover--lean4---{lean_tag}/bin/lake",
-        ),
+        body=body,
+        digest_fn=sha256_bytes,
         premises_digest=premises_digest,
         git_commit=git_commit,
-        lean_version=lean_tag,
-        token_count=1,
-        elab_proxy=None,
     )
-    return receipt, body
 
 
 def _load_control_plane_pin() -> dict[str, Any]:
@@ -765,7 +642,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     from jevops.outer import read_text
 
     source = read_text(__file__)
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import path_or, relative_or_str
+
+    jsonl = path_or(path, WARMUP_JSONL)
     before = sha256_file(jsonl)
     raw, digest, records = load_warmup_records(jsonl)
     after = sha256_file(jsonl)
@@ -778,13 +657,20 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     call_names = _call_func_names(source)
     forbidden_calls = sorted(name for name in call_names if name in FORBIDDEN_CALL_NAMES)
     sql_issues = _forbidden_sql_in_constants(source)
+    from jevops import catalogs as catalogs_mod
+    from jevops.repair import module_source, string_constants
+
+    kernel_sql = module_source(catalogs_mod)
+    kernel_sql_issues = _forbidden_sql_in_constants(kernel_sql)
+    kernel_has_insert = any("INSERT INTO" in value for value in string_constants(kernel_sql))
     fn_names = _function_names(source)
     control = _load_control_plane_pin()
     duckdb_module = try_import_duckdb()
     duckdb_available = duckdb_module is not None
 
-    dropped_error = ""
-    try:
+    from jevops.outer import catch_error, closed_on_error
+
+    def _dropped_dimension() -> None:
         bad = ProofReceipt(
             name="x",
             lean_tag="v4.26.0",
@@ -797,44 +683,32 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         missing = PROOF_AUTHORITY_DIMENSION_SET - set(mapping)
         if missing:
             raise DimensionError(f"authority dimension(s) dropped: {', '.join(sorted(missing))}")
-    except DimensionError as exc:
-        dropped_error = str(exc)
 
-    primary_rejected = False
-    try:
-        parse_executable_paths({"lean": "/lean", "lake": "/lake", "primary_executable": "/lean"})
-    except ReceiptStoreError:
-        primary_rejected = True
-
-    huge_rejected = False
-    try:
-        _tiny_payload({"src": "x" * (MAX_ROW_BYTES + 1)})
-    except ReceiptStoreError:
-        huge_rejected = True
-
-    body_rejected = False
-    try:
-        _reject_proof_bodies({"src": "theorem T : True := by rfl"})
-    except ReceiptStoreError:
-        body_rejected = True
-
-    delete_sql_rejected = False
-    try:
-        _guard_sql("DELETE" + " FROM lra_proof_edges WHERE parent_digest = 'x'")
-    except InsertOnlyError:
-        delete_sql_rejected = True
-
-    update_sql_rejected = False
-    try:
-        _guard_sql("UPDATE" + " lra_proof_receipts SET verdict = 'pass'")
-    except InsertOnlyError:
-        update_sql_rejected = True
-
-    upsert_sql_rejected = False
-    try:
-        _guard_sql("INSERT" + " OR REPLACE INTO lra_proof_receipts (key_digest) VALUES ('x')")
-    except InsertOnlyError:
-        upsert_sql_rejected = True
+    _dropped, dropped_error = catch_error(_dropped_dimension, DimensionError)
+    primary_rejected = closed_on_error(
+        lambda: parse_executable_paths({"lean": "/lean", "lake": "/lake", "primary_executable": "/lean"}),
+        ReceiptStoreError,
+    )
+    huge_rejected = closed_on_error(
+        lambda: _tiny_payload({"src": "x" * (MAX_ROW_BYTES + 1)}),
+        ReceiptStoreError,
+    )
+    body_rejected = closed_on_error(
+        lambda: _reject_proof_bodies({"src": "theorem T : True := by rfl"}),
+        ReceiptStoreError,
+    )
+    delete_sql_rejected = closed_on_error(
+        lambda: _guard_sql("DELETE" + " FROM lra_proof_edges WHERE parent_digest = 'x'"),
+        InsertOnlyError,
+    )
+    update_sql_rejected = closed_on_error(
+        lambda: _guard_sql("UPDATE" + " lra_proof_receipts SET verdict = 'pass'"),
+        InsertOnlyError,
+    )
+    upsert_sql_rejected = closed_on_error(
+        lambda: _guard_sql("INSERT" + " OR REPLACE INTO lra_proof_receipts (key_digest) VALUES ('x')"),
+        InsertOnlyError,
+    )
 
     from jevops.outer import temp_dir
 
@@ -876,7 +750,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
             conn.close()
         fs_exists = fs_path.is_file()
         cas_exists = cas_path.is_file()
-        cas_bytes = cas_path.stat().st_size if cas_exists else 0
+        from jevops.outer import call_if
+
+        cas_bytes = call_if(cas_exists, lambda: cas_path.stat().st_size, default=0)
         stored_again = store_receipt(
             ProofReceipt(
                 name=stored.name,
@@ -900,21 +776,26 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
             edges_after = select_edges(conn, parent)
             row_after = lookup_receipt(conn, stored.key_digest)
             count_edges_after = conn.execute(SELECT_COUNT_EDGES_SQL).fetchone()[0]
-            payload_after = str(row_after["payload_json"] if row_after else "")
+            from jevops.outer import get_str
+
+            payload_after = get_str(row_after, "payload_json")
         finally:
             conn.close()
 
-    dim_keys = list(stored.dimensions)
-    fs_dim_keys = list(fs_payload.get("dimensions") or {})
-    from jevops.outer import loads_json
+    from jevops.outer import loads_json, nested_get, overlay_map
 
-    row_dims = loads_json(row["dimensions_json"] if row else None, default={})
-    exec_paths = loads_json(row["executable_paths_json"] if row else None, default={})
-    row_payload = loads_json(row["payload_json"] if row else None, default={})
+    dim_keys = list(stored.dimensions)
+    fs_dim_keys = list(overlay_map(fs_payload.get("dimensions")))
+
+    row_dims = loads_json(nested_get(row, "dimensions_json"), default={})
+    exec_paths = loads_json(nested_get(row, "executable_paths_json"), default={})
+    row_payload = loads_json(nested_get(row, "payload_json"), default={})
     edge_children = sorted(item[1] for item in edges)
     expected_children = sorted({stored.key_digest, second_child})
 
-    report = {
+    from jevops.outer import any_in, any_pred, first_truthy, pack_unscored
+
+    report = pack_unscored(**{
         "ok": True,
         "schema": STORE_SCHEMA,
         "protocol": PROTOCOL,
@@ -946,14 +827,15 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "cas_body_bytes": cas_bytes,
         "filesystem_has_src": "src" in fs_payload,
         "row_has_src": "src" in row_payload,
-        "row_payload_bytes": len(row["payload_json"].encode("utf-8")) if row else -1,
-        "tiny_row": (len(row["payload_json"].encode("utf-8")) if row else MAX_ROW_BYTES + 1) <= MAX_ROW_BYTES,
+        "row_payload_bytes": call_if(row, lambda: len(row["payload_json"].encode("utf-8")), default=-1),
+        "tiny_row": call_if(row, lambda: len(row["payload_json"].encode("utf-8")), default=MAX_ROW_BYTES + 1)
+        <= MAX_ROW_BYTES,
         "huge_parent_row_rejected": huge_rejected,
         "proof_body_rejected": body_rejected,
         "insert_only": INSERT_ONLY,
-        "insert_receipt": stored.inserted or stored.skipped_duplicate,
-        "duplicate_skipped": stored_again.skipped_duplicate or not stored_again.inserted,
-        "first_edge_insert_or_present": first_edge or stored.key_digest in edge_children,
+        "insert_receipt": bool(first_truthy(stored.inserted, stored.skipped_duplicate, default=False)),
+        "duplicate_skipped": bool(first_truthy(stored_again.skipped_duplicate, not stored_again.inserted, default=False)),
+        "first_edge_insert_or_present": bool(first_truthy(first_edge, stored.key_digest in edge_children, default=False)),
         "second_edge_inserted": second_edge,
         "duplicate_edge_skipped": dup_edge is False,
         "existing_edges_survived": edge_children == expected_children
@@ -967,11 +849,13 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "update_sql_rejected": update_sql_rejected,
         "upsert_sql_rejected": upsert_sql_rejected,
         "forbidden_sql_constants": sql_issues,
-        "has_delete_method": "delete_edge" in fn_names or "delete_receipt" in fn_names,
-        "has_upsert_task": "upsert_task" in fn_names or "upsert_task" in call_names,
+        "kernel_forbidden_sql_constants": kernel_sql_issues,
+        "kernel_has_insert_sql": kernel_has_insert,
+        "has_delete_method": any_in(fn_names, ("delete_edge", "delete_receipt")),
+        "has_upsert_task": any_pred(lambda hay: "upsert_task" in hay, (fn_names, call_names)),
         "engine": engine,
         "duckdb_available": duckdb_available,
-        "duckdb_used": stored.duckdb_used or engine in {"duckdb", "sqlite3"},
+        "duckdb_used": bool(first_truthy(stored.duckdb_used, engine in {"duckdb", "sqlite3"}, default=False)),
         "requires_duckdb": REQUIRES_DUCKDB,
         "negative_cache_verdict": negative,
         "negative_cache_skips_retry": should_skip_retry(negative),
@@ -991,8 +875,8 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "llama_server_started": False,
         "arena_score": None,
         "score": None,
-        "warmup_path": str(jsonl.relative_to(REPO_ROOT)),
-        "row_after_duplicate_unchanged": payload_after == (row["payload_json"] if row else None),
+        "warmup_path": relative_or_str(jsonl, REPO_ROOT),
+        "row_after_duplicate_unchanged": payload_after == nested_get(row, "payload_json"),
         "sample": {
             "name": stored.name,
             "lean_tag": stored.lean_tag,
@@ -1001,46 +885,51 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
             "dimensions": stored.dimensions,
             "executable_paths": stored.executable_paths.to_dict(),
         },
-    }
-    report["ok"] = bool(
-        report["n_records"] == WARMUP_N
-        and report["jsonl_unchanged"]
-        and report["dimensions_match_duckdb_proof_store"]
-        and report["all_dimensions_populated"]
-        and report["dropped_dimension_fail_closed"]
-        and report["environment_lock_has_executable_paths"]
-        and not report["environment_lock_has_primary_executable"]
-        and not report["primary_executable_kwarg"]
-        and report["primary_executable_payload_rejected"]
-        and report["filesystem_receipt_exists"]
-        and report["cas_body_exists"]
-        and not report["filesystem_has_src"]
-        and not report["row_has_src"]
-        and report["tiny_row"]
-        and report["huge_parent_row_rejected"]
-        and report["proof_body_rejected"]
-        and report["insert_only"]
-        and report["existing_edges_survived"]
-        and report["no_delete_of_existing_edges"]
-        and report["delete_sql_rejected"]
-        and report["update_sql_rejected"]
-        and report["upsert_sql_rejected"]
-        and not report["forbidden_sql_constants"]
-        and not report["has_delete_method"]
-        and not report["has_upsert_task"]
-        and not forbidden_imports
-        and not forbidden_calls
-        and report["run_warmup_remains_control_plane"]
-        and report["negative_cache_skips_retry"]
-        and report["premises_from_retrieve"]
-        and report["compiled"] is False
-        and report["lake"] is False
-        and report["arena_score"] is None
-        and report["score"] is None
-        and not REQUIRES_DUCKDB
-        and not IS_CONTROL_PLANE
+    })
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["n_records"] == WARMUP_N,
+        report["jsonl_unchanged"],
+        report["dimensions_match_duckdb_proof_store"],
+        report["all_dimensions_populated"],
+        report["dropped_dimension_fail_closed"],
+        report["environment_lock_has_executable_paths"],
+        not report["environment_lock_has_primary_executable"],
+        not report["primary_executable_kwarg"],
+        report["primary_executable_payload_rejected"],
+        report["filesystem_receipt_exists"],
+        report["cas_body_exists"],
+        not report["filesystem_has_src"],
+        not report["row_has_src"],
+        report["tiny_row"],
+        report["huge_parent_row_rejected"],
+        report["proof_body_rejected"],
+        report["insert_only"],
+        report["existing_edges_survived"],
+        report["no_delete_of_existing_edges"],
+        report["delete_sql_rejected"],
+        report["update_sql_rejected"],
+        report["upsert_sql_rejected"],
+        not report["forbidden_sql_constants"],
+        not report["kernel_forbidden_sql_constants"],
+        report["kernel_has_insert_sql"],
+        not report["has_delete_method"],
+        not report["has_upsert_task"],
+        not forbidden_imports,
+        not forbidden_calls,
+        report["run_warmup_remains_control_plane"],
+        report["negative_cache_skips_retry"],
+        report["premises_from_retrieve"],
+        report["compiled"] is False,
+        report["lake"] is False,
+        report["arena_score"] is None,
+        report["score"] is None,
+        not REQUIRES_DUCKDB,
+        not IS_CONTROL_PLANE,
+        _dropped,
     )
-    return report
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -1055,9 +944,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--duckdb", type=Path, default=None, help="optional DuckDB/sqlite file; omitted = filesystem only")
     parser.add_argument("--require-duckdb", action="store_true")
     parser.add_argument("--jsonl", type=Path, default=None)
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
     if args.store:
-        jsonl = args.jsonl if args.jsonl is not None else WARMUP_JSONL
+        from jevops.outer import if_none, path_or
+
+        jsonl = path_or(args.jsonl, WARMUP_JSONL)
         _raw, _digest, records = load_warmup_records(jsonl)
         retrieval = lra_retrieve.retrieve_by_name(args.name, records)
         receipt, body = _synthetic_receipt(
@@ -1069,7 +962,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         )
         from jevops.outer import mkdtemp
 
-        root = args.out_dir if args.out_dir is not None else mkdtemp(prefix="lra-023-store-")
+        root = if_none(args.out_dir, factory=lambda: mkdtemp(prefix="lra-023-store-"))
         stored = store_receipt(
             receipt,
             root=root,

@@ -39,29 +39,32 @@ import splice as lra_splice  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 WARMUP_N = lra_splice.WARMUP_N
-STRATA_SOURCE = "strata"
-PUTNAM_SOURCE = "putnambench"
-STRATA_FIRST_TAG = "v4.26.0"
-STRATA_FIRST_COMMIT = "451e5f047bafa010d178856db76c00029bfa4d7f"
-STRATA_URL = "https://github.com/strata-org/Strata"
-SOURCE_ORDER = ("strata", "physlib", "cslib", "arklib", "putnambench")
-PUTNAM_TAGS: tuple[str, ...] = ("v4.25.0", "v4.26.0", "v4.27.0")
-MATHLIB_GIT = "https://github.com/leanprover-community/mathlib4.git"
-AESOP_GIT = "https://github.com/leanprover-community/aesop.git"
-PUTNAM_PACKAGE = "putnam_lake"
-PUTNAM_LIB = "Putnam"
-PUTNAM_MODULE = "Putnam.Candidate"
-PUTNAM_CANDIDATE_RELPATH = "Putnam/Candidate.lean"
-PUTNAM_ROOT_RELPATH = "Putnam.lean"
-FORBIDDEN_PUTNAM_BASENAME = "Tmp.lean"
-MEASUREMENT_MAX_HEARTBEATS = 400000
-ELAN_TOOLCHAIN_DIRNAME_PREFIX = "leanprover--lean4---"
-KERNEL_COMMAND_TEMPLATE = "{lake} env {lean} --json {source_file}"
-BAKE_ARGV_TEMPLATE = "{lake} build"
-DEFAULT_LAKE_TIMEOUT_SECONDS = 28800
-NETWORK_DENY_VALUES = frozenset({"deny", "offline", "none", "no", "0", "false", "off"})
-STATE_RELATIVE = Path("ipfs_accelerate_py") / "vericodegen-2026" / "lean_refactor_arena"
-GIT_BIN = Path("/usr/bin/git")
+from jevops.catalogs import AESOP_GIT  # noqa: E402
+from jevops.catalogs import BAKE_ARGV_TEMPLATE  # noqa: E402
+from jevops.catalogs import DEFAULT_LAKE_TIMEOUT_SECONDS  # noqa: E402
+from jevops.catalogs import ELAN_TOOLCHAIN_DIRNAME_PREFIX  # noqa: E402
+from jevops.catalogs import FORBIDDEN_PUTNAM_BASENAME  # noqa: E402
+from jevops.catalogs import FORBIDDEN_PUTNAM_URL_NEEDLES  # noqa: E402
+from jevops.catalogs import KERNEL_COMMAND_TEMPLATE  # noqa: E402
+from jevops.catalogs import MATHLIB_GIT  # noqa: E402
+from jevops.catalogs import MEASUREMENT_MAX_HEARTBEATS  # noqa: E402
+from jevops.catalogs import NETWORK_DENY_VALUES  # noqa: E402
+from jevops.catalogs import PUTNAM_CANDIDATE_RELPATH  # noqa: E402
+from jevops.catalogs import PUTNAM_LIB  # noqa: E402
+from jevops.catalogs import PUTNAM_MODULE  # noqa: E402
+from jevops.catalogs import PUTNAM_PACKAGE  # noqa: E402
+from jevops.catalogs import PUTNAM_ROOT_RELPATH  # noqa: E402
+from jevops.catalogs import PUTNAM_SOURCE  # noqa: E402
+from jevops.catalogs import PUTNAM_TAGS  # noqa: E402
+from jevops.catalogs import SOURCE_ORDER  # noqa: E402
+from jevops.catalogs import STRATA_FIRST_COMMIT  # noqa: E402
+from jevops.catalogs import STRATA_FIRST_TAG  # noqa: E402
+from jevops.catalogs import STRATA_SOURCE  # noqa: E402
+from jevops.catalogs import STRATA_URL  # noqa: E402
+from jevops.catalogs import FORBIDDEN_CALLS_CORE as FORBIDDEN_CALLS  # noqa: E402
+from jevops.catalogs import FORBIDDEN_SCORE_NAMES  # noqa: E402
+from jevops.catalogs import GIT_BIN  # noqa: E402
+from jevops.catalogs import STATE_RELATIVE  # noqa: E402
 
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
@@ -71,21 +74,7 @@ FORBIDDEN_IMPORT_NAMES = frozenset(
         "shutil",
     }
 )
-FORBIDDEN_CALLS = frozenset({"which", "find_executable", "LOCK_EX"})
-FORBIDDEN_SCORE_NAMES = frozenset(
-    {
-        "arena_score",
-        "arena_score_tokens",
-        "arena_score_elab",
-        "official_track2_score",
-        "token_savings",
-    }
-)
-FORBIDDEN_PUTNAM_URL_NEEDLES = (
-    "github.com/trishullab/PutnamBench",
-    "github.com/trishullab/putnambench",
-    "github.com/openai/putnam-bench",
-)
+
 
 
 class BakeError(RuntimeError):
@@ -115,32 +104,25 @@ class BakePlan(_KernelBakePlan):
         return super().first_job(error_cls=BakeError)
 
     def to_dict(self) -> dict[str, Any]:
+        from jevops.lean import pack_bake_plan
+
         first = self.first_job
-        return {
-            "arena_score": None,
-            "bake_argv_template": BAKE_ARGV_TEMPLATE,
-            "first_is_strata_v4_26": (
-                first.kind == "repo"
-                and first.source == STRATA_SOURCE
-                and first.lean_tag == STRATA_FIRST_TAG
-                and first.git_commit == STRATA_FIRST_COMMIT
-            ),
-            "first_job": first.to_dict(),
-            "frozen_warmup_sha256": self.frozen_warmup_sha256,
-            "jsonl_bytes": self.jsonl_bytes,
-            "jobs": [job.to_dict() for job in self.jobs],
-            "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
-            "measurement_maxHeartbeats": MEASUREMENT_MAX_HEARTBEATS,
-            "n_jobs": len(self.jobs),
-            "n_putnam_jobs": sum(1 for job in self.jobs if job.kind == "putnam"),
-            "n_records": self.n_records,
-            "n_repo_jobs": sum(1 for job in self.jobs if job.kind == "repo"),
-            "putnam_module": PUTNAM_MODULE,
-            "putnam_not_tmp_lean": True,
-            "putnam_tags": list(PUTNAM_TAGS),
-            "score": None,
-            "strata_first_tag": STRATA_FIRST_TAG,
-        }
+        return pack_bake_plan(
+            self.jobs,
+            first,
+            frozen_warmup_sha256=self.frozen_warmup_sha256,
+            jsonl_bytes=self.jsonl_bytes,
+            n_records=self.n_records,
+            bake_argv_template=BAKE_ARGV_TEMPLATE,
+            kernel_command_template=KERNEL_COMMAND_TEMPLATE,
+            measurement_max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+            first_source=STRATA_SOURCE,
+            first_tag=STRATA_FIRST_TAG,
+            first_commit=STRATA_FIRST_COMMIT,
+            putnam_module=PUTNAM_MODULE,
+            putnam_tags=PUTNAM_TAGS,
+            strata_first_tag=STRATA_FIRST_TAG,
+        )
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -196,9 +178,9 @@ def elan_toolchain_dirname(lean_tag: str) -> str:
 def tag_pinned_paths(lean_tag: str, *, elan_home: Optional[Path] = None) -> dict[str, Any]:
     """Return elan ``lean``/``lake`` paths. Never searches PATH."""
 
-    from jevops.outer import pinned_bin_paths
+    from jevops.outer import path_or, pinned_bin_paths
 
-    home = Path(elan_home) if elan_home is not None else default_elan_home()
+    home = path_or(elan_home, factory=default_elan_home)
     tag = normalize_lean_tag(lean_tag)
     return pinned_bin_paths(
         home,
@@ -278,20 +260,9 @@ def render_putnam_root() -> str:
 
 
 def render_putnam_candidate_stub() -> str:
-    from jevops.lean import render_placeholder_theorem
+    from jevops.lean import putnam_candidate_stub
 
-    return (
-        "/-\n"
-        "  LRA Putnam candidate module.\n"
-        "\n"
-        "  The compile worker overwrites this file with header + statement +\n"
-        "  tactic block via splice.lake_candidate_source. This is a module in\n"
-        "  the per-tag Mathlib+Aesop lake project, not Tmp.lean, and not\n"
-        "  `lake env lean Tmp.lean` without a lakefile.\n"
-        "-/\n"
-        "\n"
-        + render_placeholder_theorem()
-    )
+    return putnam_candidate_stub()
 
 
 def putnam_project_files(lean_tag: str, *, jsonl_version_pin: str = "") -> dict[str, str]:
@@ -349,31 +320,34 @@ def collect_bake_jobs(records: Sequence[Mapping[str, Any]]) -> list[BakeJob]:
 
 
 def plan_bake(path: Optional[Path] = None) -> BakePlan:
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import path_or
+
+    jsonl = path_or(path, WARMUP_JSONL)
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
     jobs = collect_bake_jobs(records)
-    return BakePlan(
-        jobs=jobs,
-        frozen_warmup_sha256=digest,
-        jsonl_bytes=len(raw),
-        n_records=len(records),
-        arena_score=None,
+    from jevops.lean import plan_bake_from_jobs
+
+    return plan_bake_from_jobs(
+        jobs,
+        digest,
+        len(raw),
+        len(records),
+        cls=BakePlan,
     )
 
 
 def job_cache_dir(job: BakeJob, state_root: Optional[Path] = None) -> Path:
-    from jevops.outer import join_under
+    from jevops.outer import join_under, path_or
 
-    root = Path(state_root) if state_root is not None else default_state_root()
+    root = path_or(state_root, factory=default_state_root)
     return join_under(root, "oleans", job.cache_key)
 
 
 def putnam_project_dir(job: BakeJob, state_root: Optional[Path] = None) -> Path:
-    from jevops.outer import join_under
+    from jevops.outer import join_under, path_or, raise_if
 
-    if job.kind != "putnam":
-        raise BakeError("putnam_project_dir is only defined for Putnam jobs")
-    root = Path(state_root) if state_root is not None else default_state_root()
+    raise_if(job.kind != "putnam", BakeError, "putnam_project_dir is only defined for Putnam jobs")
+    root = path_or(state_root, factory=default_state_root)
     return join_under(root, "putnam_lake", job.lean_tag)
 
 
@@ -396,26 +370,15 @@ def cache_present(job: BakeJob, state_root: Optional[Path] = None) -> bool:
 def plant_synthetic_cache(job: BakeJob, state_root: Path, *, n_oleans: int = 1) -> Path:
     """Write a dummy olean cache. Not a live lake bake."""
 
-    from jevops.outer import join_under, write_blobs, write_json
+    from jevops.lean import plant_synthetic_olean_cache
 
-    cache_dir = job_cache_dir(job, state_root)
-    build_dir = join_under(cache_dir, ".lake", "build", "lib")
-    write_blobs(
-        build_dir,
-        {f"LraBake{index}.olean": b"LRA-013-synthetic-olean\n" for index in range(n_oleans)},
+    from jevops.lean import pack_olean_receipt
+
+    return plant_synthetic_olean_cache(
+        job_cache_dir(job, state_root),
+        blobs={f"LraBake{index}.olean": b"LRA-013-synthetic-olean\n" for index in range(n_oleans)},
+        receipt=pack_olean_receipt(job),
     )
-    receipt = {
-        "schema": "lra-olean-bake/v1",
-        "cache_key": job.cache_key,
-        "kind": job.kind,
-        "lean_tag": job.lean_tag,
-        "synthetic": True,
-        "lake_build_executed": False,
-        "arena_score": None,
-    }
-    write_json(cache_dir / "bake-receipt.json", receipt)
-    cache_marker_path(cache_dir).write_text("synthetic\n", encoding="utf-8")
-    return cache_dir
 
 
 def require_cache(
@@ -424,13 +387,13 @@ def require_cache(
     network: str,
     state_root: Optional[Path] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import hit_or_miss
+    from jevops.outer import hit_or_miss, overlay_map, text_or
 
     present = cache_present(job, state_root)
     cache_dir = job_cache_dir(job, state_root)
     base = {
         "cache_key": job.cache_key,
-        "cache_dir": str(cache_dir),
+        "cache_dir": text_or(cache_dir),
         "network": network,
         "arena_score": None,
     }
@@ -444,8 +407,8 @@ def require_cache(
             "must be pre-vendored before the 48h clock. Never falling back to "
             "PATH lean, Tmp.lean, or a guessed PutnamBench GitHub URL."
         ),
-        hit={**base, "ok": True, "status": "cache-hit", "n_oleans": len(olean_paths(cache_dir))},
-        miss={**base, "ok": False, "status": "cache-missing", "n_oleans": 0},
+        hit=overlay_map(base, ok=True, status="cache-hit", n_oleans=len(olean_paths(cache_dir))),
+        miss=overlay_map(base, ok=False, status="cache-missing", n_oleans=0),
     )
 
 
@@ -513,21 +476,20 @@ def bake_job(
     """Return a cache hit, fail closed under network=deny, or bake if asked."""
 
     from jevops.lean import bake_or_hit
-    from jevops.outer import git_checkout, git_clone, url_clone_dir
+    from jevops.outer import git_checkout, path_or, url_clone_dir
 
-    root = Path(state_root) if state_root is not None else default_state_root()
+    root = path_or(state_root, factory=default_state_root)
 
     def _clone(item: BakeJob) -> Path:
-        clone = url_clone_dir(root, item.url)
-        if not (clone / ".git").is_dir():
-            git_clone(
-                item.url,
-                clone,
-                git_bin=GIT_BIN,
-                error_cls=BakeError,
-                miss_cls=BakeToolchainMissing,
-            )
-        return clone
+        from jevops.outer import git_clone_if_missing
+
+        return git_clone_if_missing(
+            item.url,
+            url_clone_dir(root, item.url),
+            git_bin=GIT_BIN,
+            error_cls=BakeError,
+            miss_cls=BakeToolchainMissing,
+        )
 
     def _checkout(clone: Path, commit: str) -> Any:
         return git_checkout(
@@ -539,6 +501,8 @@ def bake_job(
             skip_empty=False,
             skip_missing_git=False,
         )
+
+    from jevops.outer import overlay_if_status
 
     out = bake_or_hit(
         job,
@@ -560,9 +524,7 @@ def bake_job(
         error_cls=BakeError,
         miss_cls=BakeToolchainMissing,
     )
-    if out.get("status") == "baked":
-        out["lake_argv"] = lake_argv(job.lean_tag, "build")
-    return out
+    return overlay_if_status(out, "baked", {"lake_argv": lake_argv(job.lean_tag, "build")})
 
 
 def _copy_oleans(src: Path, dest: Path) -> None:
@@ -580,22 +542,20 @@ def _copytree(src: Path, dest: Path) -> None:
 def write_candidate(lean_tag: str, source_text: str, dest: Optional[Path] = None) -> Path:
     """Copy a Putnam candidate into Putnam/Candidate.lean. Never Tmp.lean."""
 
-    if dest is None:
-        dest = putnam_project_dir(
-            BakeJob(
-                kind="putnam",
-                source=PUTNAM_SOURCE,
+    from jevops.lean import putnam_bake_job
+    from jevops.outer import if_none
+
+    dest = if_none(
+        dest,
+        factory=lambda: putnam_project_dir(
+            putnam_bake_job(
                 lean_tag=normalize_lean_tag(lean_tag),
-                git_commit="",
-                url="",
-                cache_key=f"putnam/{normalize_lean_tag(lean_tag)}",
-                phase=2,
-                record_names=(),
-                file_paths=(PUTNAM_CANDIDATE_RELPATH,),
-                module=PUTNAM_MODULE,
-                lakefile_required=True,
+                putnam_source=PUTNAM_SOURCE,
+                putnam_relpath=PUTNAM_CANDIDATE_RELPATH,
+                putnam_module=PUTNAM_MODULE,
             )
-        )
+        ),
+    )
     from jevops.lean import write_putnam_candidate
 
     return write_putnam_candidate(
@@ -632,42 +592,49 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
     )
     imported = set(out["imported_names"])
     calls = set(out["call_names"])
-    constants = out["string_constants"]
+    from jevops import catalogs as catalogs_mod
+    from jevops.repair import module_source, string_constants
+
+    constants = list(out["string_constants"]) + string_constants(module_source(catalogs_mod))
+    catalog_text = module_source(catalogs_mod)
     forbidden_urls = sorted(
         matching_constants(
             text,
             lambda value: "://" in value
             and any(needle.lower() in value.lower() for needle in FORBIDDEN_PUTNAM_URL_NEEDLES),
         )
+        + matching_constants(
+            catalog_text,
+            lambda value: "://" in value
+            and any(needle.lower() in value.lower() for needle in FORBIDDEN_PUTNAM_URL_NEEDLES),
+        )
     )
-    score_assignments = list(out["score_keys"])
     has_tmp_constant = FORBIDDEN_PUTNAM_BASENAME in constants
     has_putnam_module = PUTNAM_MODULE in constants
     has_mathlib_git = MATHLIB_GIT in constants
     has_aesop_git = AESOP_GIT in constants
-    return {
-        "imported_names": out["imported_names"],
-        "forbidden_imports": out["forbidden_imports"],
-        "forbidden_calls": out["forbidden_calls"],
-        "forbidden_putnambench_urls": forbidden_urls,
-        "score_assignments": score_assignments,
-        "has_tmp_lean_constant": has_tmp_constant,
-        "has_putnam_module": has_putnam_module,
-        "has_mathlib_git": has_mathlib_git,
-        "has_aesop_git": has_aesop_git,
-        "uses_fcntl": "fcntl" in imported,
-        "uses_shutil_which": "shutil" in imported and "which" in calls,
-        "ok": (
-            not out["forbidden_imports"]
-            and not out["forbidden_calls"]
-            and not forbidden_urls
-            and not score_assignments
-            and has_tmp_constant
-            and has_putnam_module
-            and has_mathlib_git
-            and has_aesop_git
+    from jevops.repair import pack_call_audit
+
+    packed = pack_call_audit(
+        out,
+        extra={
+            "forbidden_putnambench_urls": forbidden_urls,
+            "has_tmp_lean_constant": has_tmp_constant,
+            "has_putnam_module": has_putnam_module,
+            "has_mathlib_git": has_mathlib_git,
+            "has_aesop_git": has_aesop_git,
+            "uses_fcntl": "fcntl" in imported,
+            "uses_shutil_which": "shutil" in imported and "which" in calls,
+        },
+        extra_ok=(
+            not forbidden_urls,
+            has_tmp_constant,
+            has_putnam_module,
+            has_mathlib_git,
+            has_aesop_git,
         ),
-    }
+    )
+    return packed
 
 
 def _synthetic_fail_closed(plan: BakePlan) -> dict[str, Any]:
@@ -678,132 +645,119 @@ def _synthetic_fail_closed(plan: BakePlan) -> dict[str, Any]:
         first = plan.first_job
         planted = plant_synthetic_cache(first, root)
         hit = require_cache(first, network="deny", state_root=root)
-        missing_raised = False
-        missing_message = ""
-        putnam_job = next(job for job in plan.jobs if job.kind == "putnam")
-        try:
-            require_cache(putnam_job, network="deny", state_root=root)
-        except OleanCacheMissing as exc:
-            missing_raised = True
-            missing_message = str(exc)
+        from jevops.outer import first_where
+
+        putnam_job = first_where(plan.jobs, lambda job: job.kind == "putnam")
+        from jevops.outer import catch_error, keyed_map, read_json, read_text
+
+        missing_raised, missing_message = catch_error(
+            lambda: require_cache(putnam_job, network="deny", state_root=root),
+            OleanCacheMissing,
+        )
         allow_missing = require_cache(putnam_job, network="allow", state_root=root)
-        write_denied = False
-        try:
-            write_candidate(STRATA_FIRST_TAG, "theorem x : True := by trivial", dest=root / FORBIDDEN_PUTNAM_BASENAME)
-        except BakeError:
-            write_denied = True
-        materialized: dict[str, Any] = {}
-        for job in plan.jobs:
-            if job.kind != "putnam":
-                continue
+        write_denied, _write_msg = catch_error(
+            lambda: write_candidate(
+                STRATA_FIRST_TAG, "theorem x : True := by trivial", dest=root / FORBIDDEN_PUTNAM_BASENAME
+            ),
+            BakeError,
+        )
+        from jevops.lean import pack_materialized_putnam
+
+        def _materialize(job: Any) -> dict[str, Any]:
             dest = root / "putnam_lake" / job.lean_tag
             files = materialize_putnam_project(job.lean_tag, dest, jsonl_version_pin=job.git_commit)
-            from jevops.outer import read_json, read_text
+            return pack_materialized_putnam(
+                dest,
+                files,
+                lakefile=read_text(dest / "lakefile.lean"),
+                toolchain=read_text(dest / "lean-toolchain").strip(),
+                pins=read_json(dest / "pins.json"),
+                mathlib_git=MATHLIB_GIT,
+                aesop_git=AESOP_GIT,
+                refuse=FORBIDDEN_PUTNAM_BASENAME,
+            )
 
-            lakefile = read_text(dest / "lakefile.lean")
-            toolchain = read_text(dest / "lean-toolchain").strip()
-            pins = read_json(dest / "pins.json")
-            materialized[job.lean_tag] = {
-                "dest": str(dest),
-                "files": sorted(files),
-                "has_lakefile": (dest / "lakefile.lean").is_file(),
-                "has_tmp_lean": (dest / FORBIDDEN_PUTNAM_BASENAME).exists(),
-                "toolchain": toolchain,
-                "mathlib_in_lakefile": "mathlib" in lakefile and MATHLIB_GIT in lakefile,
-                "aesop_in_lakefile": "aesop" in lakefile and AESOP_GIT in lakefile,
-                "candidate_module": pins.get("module"),
-                "putnambench_url": pins.get("putnambench_url"),
-                "tmp_lean": pins.get("tmp_lean"),
-                "jsonl_version_pin": pins.get("jsonl_version_pin"),
-            }
-        return {
-            "planted_cache_dir": str(planted),
-            "planted_n_oleans": len(olean_paths(planted)),
-            "deny_cache_hit_on_planted_strata_v4_26": hit["ok"] is True and hit["status"] == "cache-hit",
-            "missing_putnam_under_network_deny_raises": missing_raised,
-            "missing_message_mentions_network_deny": "network=deny" in missing_message,
-            "allow_missing_does_not_raise": allow_missing["ok"] is False
-            and allow_missing["status"] == "cache-missing",
-            "write_candidate_rejects_tmp_lean": write_denied,
-            "materialized_putnam": materialized,
-            "all_putnam_tags_materialized": set(materialized) == set(PUTNAM_TAGS),
-            "any_putnam_tmp_lean": any(row["has_tmp_lean"] for row in materialized.values()),
-            "all_putnam_have_mathlib_aesop_lakefile": all(
-                row["has_lakefile"] and row["mathlib_in_lakefile"] and row["aesop_in_lakefile"]
-                for row in materialized.values()
-            ),
-            "all_putnam_module_candidate": all(
-                row["candidate_module"] == PUTNAM_MODULE for row in materialized.values()
-            ),
-            "all_putnambench_url_null": all(
-                row["putnambench_url"] is None for row in materialized.values()
-            ),
-        }
+        materialized = keyed_map(
+            plan.jobs,
+            key_fn=lambda job: job.lean_tag,
+            val_fn=_materialize,
+            pred=lambda job: job.kind == "putnam",
+        )
+        from jevops.lean import pack_synthetic_bake
+
+        return pack_synthetic_bake(
+            planted=planted,
+            planted_n=len(olean_paths(planted)),
+            hit=hit,
+            missing_raised=missing_raised,
+            missing_message=missing_message,
+            allow_missing=allow_missing,
+            write_denied=write_denied,
+            materialized=materialized,
+            putnam_tags=PUTNAM_TAGS,
+            putnam_module=PUTNAM_MODULE,
+        )
 
 
 def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
-    if tags is None:
-        tags = (STRATA_FIRST_TAG, *PUTNAM_TAGS)
-    from jevops.outer import env_str, map_partition, unique_keep
+    from jevops.outer import if_none
 
-    wanted = unique_keep(list(tags))
-    pins = [tag_pinned_paths(tag) for tag in wanted]
-    installed, missing = map_partition(
-        pins, lambda pin: pin["installed"], lambda pin: pin["lean_tag"]
-    )
-    return {
-        "arena_score": None,
-        "default_elan_home": str(default_elan_home()),
-        "elan_home_env": env_str("ELAN_HOME"),
-        "installed_tags": installed,
-        "lake": False,
-        "missing_tags": missing,
-        "path": env_str("PATH"),
-        "pins": pins,
-        "validation_home": str(Path.home()),
-        "capability_gap": (
+    tags = if_none(tags, (STRATA_FIRST_TAG, *PUTNAM_TAGS))
+    from jevops.lean import probe_pins
+    from jevops.outer import env_str, text_or
+
+    return probe_pins(
+        list(tags),
+        resolve_fn=tag_pinned_paths,
+        extra={
+            "default_elan_home": text_or(default_elan_home()),
+            "elan_home_env": env_str("ELAN_HOME"),
+            "lake": False,
+            "path": env_str("PATH"),
+            "validation_home": text_or(Path.home()),
+        },
+        gap_msg=(
             "No tag-pinned elan lean/lake binaries are installed under the "
             "resolver elan home. Paths remain tag-pinned; this is not PATH "
             "lake usability and is not a completed olean bake."
-            if missing and not installed
-            else ""
         ),
-    }
+    )
 
 
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
+    from jevops.outer import get_str, path_or, relative_or_str, text_or
+
+    jsonl = path_or(path, WARMUP_JSONL)
     plan = plan_bake(jsonl)
     first = plan.first_job
     audit = audit_source()
     synthetic = _synthetic_fail_closed(plan)
     toolchain = probe_toolchain()
-    putnam_jobs = [job for job in plan.jobs if job.kind == "putnam"]
-    repo_jobs = [job for job in plan.jobs if job.kind == "repo"]
-    phases = [job.phase for job in plan.jobs]
-    from jevops.outer import env_str, head_seq
+    from jevops.outer import all_rows, all_where, env_str, field_eq, head_seq, where
 
-    first_phase_ok = head_seq(phases, 1) == [0] and all(phase >= 0 for phase in phases)
-    strata_v426_before_rest = all(
-        job.phase == 0
-        for job in plan.jobs
-        if job.source == STRATA_SOURCE and job.lean_tag == STRATA_FIRST_TAG
-    ) and all(job.phase > 0 for job in plan.jobs if not (
-        job.source == STRATA_SOURCE and job.lean_tag == STRATA_FIRST_TAG
-    ))
-    putnam_headers_ok = True
+    putnam_jobs = where(plan.jobs, lambda job: job.kind == "putnam")
+    repo_jobs = where(plan.jobs, lambda job: job.kind == "repo")
+    phases = [job.phase for job in plan.jobs]
+
+    first_phase_ok = head_seq(phases, 1) == [0] and all_rows(phases, lambda phase: phase >= 0)
+    is_strata_first = lambda job: job.source == STRATA_SOURCE and job.lean_tag == STRATA_FIRST_TAG
+    strata_v426_before_rest = all_where(
+        plan.jobs, is_strata_first, lambda job: job.phase == 0
+    ) and all_where(plan.jobs, lambda job: not is_strata_first(job), lambda job: job.phase > 0)
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    putnam_records = [record for record in records if record.get("source") == PUTNAM_SOURCE]
-    for record in putnam_records:
-        header = record.get("header") or ""
-        if "import Mathlib" not in header or "import Aesop" not in header:
-            putnam_headers_ok = False
-        if (record.get("url") or "").strip() or (record.get("file_path") or "").strip():
-            putnam_headers_ok = False
-    report: dict[str, Any] = {
+    putnam_records = where(records, field_eq("source", PUTNAM_SOURCE))
+    putnam_headers_ok = all_where(
+        records,
+        field_eq("source", PUTNAM_SOURCE),
+        lambda record: "import Mathlib" in get_str(record, "header")
+        and "import Aesop" in get_str(record, "header")
+        and not get_str(record, "url").strip()
+        and not get_str(record, "file_path").strip(),
+    )
+    from jevops.outer import pack_unscored
+
+    report: dict[str, Any] = pack_unscored(**{
         "ok": False,
-        "arena_score": None,
-        "score": None,
         "compiled": False,
         "lake": False,
         "lake_build_executed": False,
@@ -846,7 +800,7 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "measurement_maxHeartbeats": MEASUREMENT_MAX_HEARTBEATS,
         "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
         "bake_argv_template": BAKE_ARGV_TEMPLATE,
-        "default_state_root": str(default_state_root()),
+        "default_state_root": text_or(default_state_root()),
         "network_env": env_str("LRA_NETWORK"),
         "protocol": "LRA/v1",
         "audit": audit,
@@ -858,39 +812,41 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "putnam_projects": synthetic["materialized_putnam"],
         "toolchain": toolchain,
         "jobs": [job.to_dict() for job in plan.jobs],
-        "warmup_path": str(jsonl.relative_to(REPO_ROOT)),
+        "warmup_path": relative_or_str(jsonl, REPO_ROOT),
         "putnam_readme_exists": PUTNAM_README.is_file(),
-    }
-    report["ok"] = bool(
-        report["n_records"] == WARMUP_N
-        and report["jsonl_unchanged"]
-        and report["n_jobs"] == 15
-        and report["n_repo_jobs"] == 12
-        and report["n_putnam_jobs"] == 3
-        and report["first_is_strata_v4_26"]
-        and report["strata_v426_before_rest"]
-        and report["putnam_tags_match"]
-        and report["putnam_not_tmp_lean"]
-        and report["putnam_headers_import_mathlib_aesop"]
-        and report["putnam_url_file_path_empty"]
-        and report["putnambench_url_not_guessed"]
-        and report["missing_cache_fails_closed_under_network_deny"]
-        and synthetic["all_putnam_tags_materialized"]
-        and not synthetic["any_putnam_tmp_lean"]
-        and synthetic["all_putnam_have_mathlib_aesop_lakefile"]
-        and synthetic["all_putnam_module_candidate"]
-        and synthetic["all_putnambench_url_null"]
-        and synthetic["write_candidate_rejects_tmp_lean"]
-        and audit["ok"]
-        and report["compiled"] is False
-        and report["lake"] is False
-        and report["lake_build_executed"] is False
-        and report["oleans_baked"] is False
-        and report["arena_score"] is None
-        and report["score"] is None
-        and report["putnam_readme_exists"]
+    })
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["n_records"] == WARMUP_N,
+        report["jsonl_unchanged"],
+        report["n_jobs"] == 15,
+        report["n_repo_jobs"] == 12,
+        report["n_putnam_jobs"] == 3,
+        report["first_is_strata_v4_26"],
+        report["strata_v426_before_rest"],
+        report["putnam_tags_match"],
+        report["putnam_not_tmp_lean"],
+        report["putnam_headers_import_mathlib_aesop"],
+        report["putnam_url_file_path_empty"],
+        report["putnambench_url_not_guessed"],
+        report["missing_cache_fails_closed_under_network_deny"],
+        synthetic["all_putnam_tags_materialized"],
+        not synthetic["any_putnam_tmp_lean"],
+        synthetic["all_putnam_have_mathlib_aesop_lakefile"],
+        synthetic["all_putnam_module_candidate"],
+        synthetic["all_putnambench_url_null"],
+        synthetic["write_candidate_rejects_tmp_lean"],
+        audit["ok"],
+        report["compiled"] is False,
+        report["lake"] is False,
+        report["lake_build_executed"] is False,
+        report["oleans_baked"] is False,
+        report["arena_score"] is None,
+        report["score"] is None,
+        report["putnam_readme_exists"],
     )
-    return report
 
 
 def _print_json(payload: Mapping[str, Any]) -> None:
@@ -911,7 +867,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--network", default=None, help="allow or deny (default: LRA_NETWORK or allow)")
     parser.add_argument("--jsonl", type=Path, default=None, help="warmup JSONL path")
     parser.add_argument("--state-root", type=Path, default=None, help="olean/putnam_lake state root")
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
 
     if args.self_check or argv is None or argv == []:
         from jevops.outer import print_ok
@@ -930,10 +888,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     if args.dump_putnam_project:
         plan = plan_bake(args.jsonl)
         tag = normalize_lean_tag(args.tag)
-        from jevops.outer import first_where
+        from jevops.outer import attr_or, first_where
 
         job = first_where(plan.jobs, lambda item: item.kind == "putnam" and item.lean_tag == tag)
-        pin_commit = job.git_commit if job is not None else ""
+        pin_commit = attr_or(job, "git_commit", "")
         files = putnam_project_files(tag, jsonl_version_pin=pin_commit)
         _print_json(
             {
@@ -958,10 +916,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             dest = dest_root / job.lean_tag
             files = materialize_putnam_project(job.lean_tag, dest, jsonl_version_pin=job.git_commit)
             written[job.lean_tag] = files
+        from jevops.outer import text_or
+
         _print_json(
             {
                 "arena_score": None,
-                "dest": str(dest_root),
+                "dest": text_or(dest_root),
                 "module": PUTNAM_MODULE,
                 "not_tmp_lean": True,
                 "putnambench_url": None,

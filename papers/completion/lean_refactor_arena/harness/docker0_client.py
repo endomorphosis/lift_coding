@@ -47,28 +47,21 @@ FAIL_CLOSED_KWARGS = dict(lra_gt.FAIL_CLOSED_KWARGS)
 FROZEN_WARMUP_SHA256 = lra_gt.FROZEN_WARMUP_SHA256
 HEALTH_TIMEOUT_SECONDS = lra_gt.HEALTH_TIMEOUT_SECONDS
 
-OWNER_SCRIPT_RELATIVE = "scripts/run_leanstral_ephemeral.py"
-OWNER_BIND = "docker0"
-OWNER_GPU = "0"
-OWNER_LOCK_ID = "gpu-0"
-AUTOSTART_ENV = "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"
-FORBIDDEN_SERVER_BINARIES = frozenset(
-    {
-        "llama-server",
-        "llama_server",
-        "ipfs-accelerate-llama-cpp-serve",
-    }
-)
+from jevops.catalogs import AUTOSTART_ENV
+from jevops.catalogs import FLOCK_NB as _FLOCK_NB
+from jevops.catalogs import FLOCK_SH as _FLOCK_SH
+from jevops.catalogs import FLOCK_UN as _FLOCK_UN
+from jevops.catalogs import FORBIDDEN_SERVER_BINARIES
+from jevops.catalogs import OWNER_BIND
+from jevops.catalogs import OWNER_GPU
+from jevops.catalogs import OWNER_LOCK_ID
+from jevops.catalogs import OWNER_SCRIPT_RELATIVE
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
         "LeanstralProofProvider",
         "leanstral_proof_provider",
     }
 )
-# BSD flock numeric values (Linux). Exclusive is 2; this client never applies it.
-_FLOCK_SH = 1
-_FLOCK_NB = 4
-_FLOCK_UN = 8
 
 
 class Docker0ClientError(RuntimeError):
@@ -111,9 +104,9 @@ def owner_argv(
 ) -> list[str]:
     """Argv for optional owner exec. The child takes exclusive ownership."""
 
-    from jevops.outer import python_argv
+    from jevops.outer import path_or, python_argv
 
-    path = Path(script) if script is not None else owner_script_path()
+    path = path_or(script, factory=owner_script_path)
     return python_argv(path, "--bind", OWNER_BIND, "--gpu", OWNER_GPU, python=python)
 
 
@@ -164,18 +157,18 @@ def _shared_probe_holder(path: Path) -> tuple[bool, str]:
 def inspect_gpu0_lock(path: Optional[Path] = None) -> LockInspection:
     """Inspect owner lock without taking exclusive ownership."""
 
-    from jevops.outer import inspect_lock
+    from jevops.outer import get_str, if_none, inspect_lock
 
     pin_client_env()
-    lock_path = Path(path) if path is not None else gpu0_lock_path()
+    lock_path = Path(if_none(path, factory=gpu0_lock_path))
     info = inspect_lock(lock_path, error_cls=Docker0ClientError)
     return LockInspection(
-        path=str(info["path"]),
+        path=get_str(info, "path"),
         exists=bool(info["exists"]),
         held=bool(info["held"]),
         pid=info["pid"],
-        method=str(info["method"]),
-        error=str(info.get("error") or ""),
+        method=get_str(info, "method"),
+        error=get_str(info, "error"),
     )
 
 
@@ -210,10 +203,14 @@ def wait_for_health(
 ) -> lra_gt.HealthProbe:
     """Poll docker0 ``/health`` without flocking. Bounded wait."""
 
-    from jevops.outer import poll_until
+    from jevops.outer import if_none, poll_until
 
-    probe_fn = probe or probe_docker0_health
-    return poll_until(probe_fn, ok_fn=lambda item: bool(item.ok), timeout=timeout, interval=interval)
+    return poll_until(
+        if_none(probe, probe_docker0_health),
+        ok_fn=lambda item: bool(item.ok),
+        timeout=timeout,
+        interval=interval,
+    )
 
 
 def maybe_exec_owner(
@@ -230,59 +227,23 @@ def maybe_exec_owner(
     started, is ``run_leanstral_ephemeral.py``, never ``llama-server``.
     """
 
-    from jevops.outer import pack_owner_exec
+    from jevops.outer import call_if, env_copy, overlay_map, pack_owner_exec, replace_if, run_owner_exec, run_process
 
     argv = owner_argv(script=script)
-    rel = owner_argv_relative()
-    if script is not None:
-        rel = owner_argv(script=script)
-    if not execute:
-        return pack_owner_exec(attempted=False, executed=False, argv=argv, argv_relative=rel)
-    target = Path(argv[2])
-    if not target.is_file():
-        return pack_owner_exec(
-            attempted=True,
-            executed=False,
-            argv=argv,
-            argv_relative=rel,
-            error=f"owner script missing: {target}",
-        )
-    from jevops.outer import env_copy, exc_text, run_process
-
-    extra = {
-        AUTOSTART_ENV: "0",
-        "IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL": "0",
-    }
-    if extra_env:
-        extra.update(dict(extra_env))
-    env = env_copy(extra)
-    try:
-        ran = run_process(argv, env=env, timeout=float(timeout))
-    except OSError as exc:
-        return pack_owner_exec(
-            attempted=True,
-            executed=False,
-            argv=argv,
-            argv_relative=rel,
-            error=exc_text(exc),
-        )
-    if ran.get("timeout"):
-        return pack_owner_exec(
-            attempted=True,
-            executed=True,
-            argv=argv,
-            argv_relative=rel,
-            pid=ran.get("pid"),
-            error=str(ran.get("error") or "TimeoutExpired"),
-        )
-    code = ran.get("exit_code")
-    return pack_owner_exec(
-        attempted=True,
-        executed=True,
+    rel = replace_if(script is not None, argv, owner_argv_relative())
+    extra = overlay_map(
+        {AUTOSTART_ENV: "0", "IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL": "0"},
+        **overlay_map(extra_env),
+    )
+    return run_owner_exec(
+        execute=execute,
         argv=argv,
         argv_relative=rel,
-        returncode=int(code) if code is not None else None,
-        error="" if ran.get("ok") else (ran.get("stderr") or ran.get("stdout") or f"exit {code}"),
+        pack_fn=pack_owner_exec,
+        target=call_if(len(argv) > 2, lambda: Path(argv[2]), default=""),
+        run_fn=run_process,
+        env=env_copy(extra),
+        timeout=timeout,
     )
 
 
@@ -322,7 +283,7 @@ def generate_as_client(
     ``llama-server`` in this process.
     """
 
-    from jevops.outer import require_env_eq
+    from jevops.outer import generate_client_flow, require_env_eq
 
     pin_client_env()
     require_env_eq(
@@ -332,7 +293,9 @@ def generate_as_client(
         fmt="{key} must be {expected}; refusing to generate",
     )
     health = probe_docker0_health()
-    if health.ok:
+    lock = inspect_gpu0_lock(lock_path)
+
+    def _generate() -> lra_gt.LraGeneration:
         return lra_gt.generate_lra(
             prompt,
             max_new_tokens=max_new_tokens,
@@ -344,48 +307,18 @@ def generate_as_client(
             temperature=temperature,
             stop=stop,
         )
-    lock = inspect_gpu0_lock(lock_path)
-    action = decide_action(
-        health,
-        lock,
+
+    return generate_client_flow(
+        health=health,
+        lock=lock,
+        generate_fn=_generate,
+        wait_fn=lambda seconds: wait_for_health(timeout=seconds),
+        exec_fn=lambda execute: maybe_exec_owner(execute=execute),
+        skip_fn=lambda nxt, reason: skipped_generation(nxt, reason=reason),
+        decide_fn=decide_action,
         allow_owner_exec=allow_owner_exec,
         wait_seconds=wait_seconds,
-    )
-    if action == "wait":
-        health = wait_for_health(timeout=wait_seconds)
-        if health.ok:
-            return lra_gt.generate_lra(
-                prompt,
-                max_new_tokens=max_new_tokens,
-                timeout=timeout,
-                source=source,
-                require_health=False,
-                generate=generate,
-                get_trace=get_trace,
-            )
-        return skipped_generation(
-            health,
-            reason="docker0 unhealthy after wait; owner exclusive lock held; skip LLM",
-        )
-    if action == "exec_owner":
-        owner = maybe_exec_owner(execute=execute_owner)
-        if owner.executed and owner.returncode == 0:
-            health = wait_for_health(timeout=max(wait_seconds, 1.0))
-            if health.ok:
-                return lra_gt.generate_lra(
-                    prompt,
-                    max_new_tokens=max_new_tokens,
-                    timeout=timeout,
-                    source=source,
-                    require_health=False,
-                    generate=generate,
-                    get_trace=get_trace,
-                )
-        reason = owner.error or "owner exec not started in this process; skip LLM"
-        return skipped_generation(health, reason=reason)
-    return skipped_generation(
-        health,
-        reason="docker0 unhealthy; skip LLM without taking owner exclusive lock",
+        execute_owner=execute_owner,
     )
 
 
@@ -409,29 +342,24 @@ def plan_session(
         allow_owner_exec=allow_owner_exec,
         wait_seconds=wait_seconds,
     )
+    from jevops.outer import call_if
+
     owner = maybe_exec_owner(execute=False)
-    if action == "exec_owner" and execute_owner:
-        owner = maybe_exec_owner(execute=True)
-    reason = {
-        "generate": "docker0 /health ok; generate_text as HTTP client without exclusive lock",
-        "wait": "docker0 unhealthy and owner exclusive lock held; wait for /health",
-        "skip_llm": "docker0 unhealthy; skip LLM (exclusive lock held or owner exec not permitted)",
-        "exec_owner": "docker0 unhealthy and gpu-0.lock free; may exec run_leanstral_ephemeral.py",
-    }.get(action, action)
-    if action == "skip_llm" and lock.held:
-        reason = "docker0 unhealthy and owner exclusive lock held; skip LLM"
-    elif action == "skip_llm" and not allow_owner_exec:
-        reason = "docker0 unhealthy; owner exec not permitted; skip LLM"
-    return ClientSession(
+    owner = call_if(
+        action == "exec_owner" and execute_owner,
+        lambda: maybe_exec_owner(execute=True),
+        default=owner,
+    )
+    from jevops.outer import pack_client_session, session_reason
+
+    return pack_client_session(
         action=action,
-        health=asdict(health),
-        lock=asdict(lock),
+        health=health,
+        lock=lock,
         autostart=env_str(AUTOSTART_ENV),
-        lock_ex_taken_by_client=False,
-        llama_server_started=False,
-        owner_exec=asdict(owner),
-        skipped=action != "generate",
-        reason=reason,
+        owner=owner,
+        reason=session_reason(action, lock_held=bool(lock.held), allow_owner_exec=allow_owner_exec),
+        session_cls=ClientSession,
     )
 
 
@@ -464,36 +392,9 @@ def _subprocess_invokes_forbidden_binary(source: str) -> bool:
 def _hold_exclusive_child(path: Path) -> subprocess.Popen[str]:
     """Child process takes exclusive flock so this file never names LOCK_EX."""
 
-    path.parent.mkdir(parents=True, exist_ok=True)
-    flags = os.O_RDWR | os.O_CREAT
-    if hasattr(os, "O_CLOEXEC"):
-        flags |= os.O_CLOEXEC
-    fd = os.open(path, flags, stat.S_IRUSR | stat.S_IWUSR)
-    os.close(fd)
-    # 2 is BSD exclusive flock on Linux; 4 is non-blocking. Kept numeric so
-    # this module's AST has no LOCK_EX attribute.
-    code = (
-        "import fcntl, os, sys, time\n"
-        "p = sys.argv[1]\n"
-        "fd = os.open(p, os.O_RDWR)\n"
-        "fcntl.flock(fd, 2 | 4)\n"
-        "sys.stdout.write('held\\n')\n"
-        "sys.stdout.flush()\n"
-        "time.sleep(30)\n"
-    )
-    proc = subprocess.Popen(
-        [sys.executable, "-c", code, str(path)],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    assert proc.stdout is not None
-    line = proc.stdout.readline()
-    if line.strip() != "held":
-        err = proc.stderr.read() if proc.stderr is not None else ""
-        proc.kill()
-        raise Docker0ClientError(f"child failed to hold exclusive flock: {line!r} {err!r}")
-    return proc
+    from jevops.outer import hold_exclusive_child
+
+    return hold_exclusive_child(path, error_cls=Docker0ClientError)
 
 
 def _fake_owner_script(directory: Path) -> Path:
@@ -540,59 +441,60 @@ def self_check() -> dict[str, Any]:
 
     healthy_generation: Optional[dict[str, Any]] = None
     if health.ok:
+        from jevops.outer import pack_captured_generate
+
         result = generate_as_client(
             "docker0 client generate path",
             generate=fake_generate,
             get_trace=fake_trace,
             allow_owner_exec=False,
         )
-        healthy_generation = {
-            "skipped": result.skipped,
-            "text": result.text,
-            "identity": asdict(result.identity),
-            "call_kwargs": {key: (captured.get("kwargs") or {}).get(key) for key in FAIL_CLOSED_KWARGS},
-            "call_kwargs_match": all(
-                (captured.get("kwargs") or {}).get(key) == value
-                for key, value in FAIL_CLOSED_KWARGS.items()
-            ),
-            "autostart_during_generate": captured.get("autostart"),
-            "lock_ex_taken_by_client": False,
-        }
+        healthy_generation = pack_captured_generate(
+            result, captured, FAIL_CLOSED_KWARGS, asdict_fn=asdict
+        )
 
-    fake_health_down = lra_gt.HealthProbe(
-        ok=False,
+    from jevops.lean import forced_unhealthy
+
+    fake_health_down = forced_unhealthy(
+        lra_gt.HealthProbe,
         url=DOCKER0_HEALTH_URL,
-        alias_ok=False,
         alias_url=DOCKER0_HEALTH_ALIAS_URL,
-        status_code=None,
         error="simulated unhealthy",
         autostart="0",
     )
-    fake_lock_free = LockInspection(
+    from jevops.outer import lock_view
+
+    fake_lock_free = lock_view(
+        LockInspection,
         path="/tmp/lra-simulated-gpu-0.lock",
         exists=False,
         held=False,
-        pid=None,
         method="missing",
-        error="",
     )
-    fake_lock_held = LockInspection(
+    fake_lock_held = lock_view(
+        LockInspection,
         path="/tmp/lra-simulated-gpu-0.lock",
         exists=True,
         held=True,
         pid=1,
         method="proc_locks",
-        error="",
     )
-    action_healthy = decide_action(health if health.ok else lra_gt.HealthProbe(
-        ok=True,
-        url=DOCKER0_HEALTH_URL,
-        alias_ok=False,
-        alias_url=DOCKER0_HEALTH_ALIAS_URL,
-        status_code=200,
-        error="",
-        autostart="0",
-    ), live_lock, allow_owner_exec=True)
+    from jevops.lean import healthy_probe
+    from jevops.outer import either
+
+    action_healthy = decide_action(
+        either(
+            health.ok,
+            lambda: health,
+            lambda: healthy_probe(
+                lra_gt.HealthProbe,
+                url=DOCKER0_HEALTH_URL,
+                alias_url=DOCKER0_HEALTH_ALIAS_URL,
+            ),
+        ),
+        live_lock,
+        allow_owner_exec=True,
+    )
     action_unhealthy_held = decide_action(fake_health_down, fake_lock_held, allow_owner_exec=True)
     action_unhealthy_held_wait = decide_action(
         fake_health_down, fake_lock_held, allow_owner_exec=True, wait_seconds=2.0
@@ -619,16 +521,18 @@ def self_check() -> dict[str, Any]:
             action_while_held = decide_action(
                 fake_health_down, held, allow_owner_exec=True, wait_seconds=0.0
             )
+            from jevops.outer import first_truthy
+
             child_lock = {
                 "ok": bool(held.held) and not held.lock_ex_taken_by_client,
                 "held": held.held,
                 "pid": held.pid,
                 "child_pid": proc.pid,
-                "pid_matches_child": held.pid == proc.pid or held.pid is None,
+                "pid_matches_child": first_truthy(held.pid == proc.pid, held.pid is None),
                 "method": held.method,
                 "lock_ex_taken_by_client": held.lock_ex_taken_by_client,
                 "action": action_while_held,
-                "free_before_held": (not free_before.held) and (not free_before.exists or free_before.method == "missing"),
+                "free_before_held": (not free_before.held) and first_truthy(not free_before.exists, free_before.method == "missing"),
             }
         finally:
             proc.kill()
@@ -641,12 +545,14 @@ def self_check() -> dict[str, Any]:
         child_lock["released_after_kill"] = not after.held
         child_lock["ok"] = bool(child_lock.get("ok")) and (not after.held) and action_while_held == "skip_llm"
 
+        from jevops.outer import text_or
+
         argv_out = tmp_path / "owner-argv.json"
         fake_script = _fake_owner_script(tmp_path)
         owner = maybe_exec_owner(
             execute=True,
             script=fake_script,
-            extra_env={"LRA_OWNER_ARGV_OUT": str(argv_out)},
+            extra_env={"LRA_OWNER_ARGV_OUT": text_or(argv_out)},
             timeout=5.0,
         )
         from jevops.outer import read_json_if
@@ -675,33 +581,36 @@ def self_check() -> dict[str, Any]:
         }
 
     planned_owner = maybe_exec_owner(execute=False)
-    from jevops.outer import tail_seq
+    from jevops.outer import first_truthy, tail_seq
 
-    owner_argv_ok = (
-        tail_seq(planned_owner.argv_relative, 4) == ["--bind", OWNER_BIND, "--gpu", OWNER_GPU]
-        or tail_seq(planned_owner.argv, 4) == ["--bind", OWNER_BIND, "--gpu", OWNER_GPU]
+    owner_argv_ok = first_truthy(
+        tail_seq(planned_owner.argv_relative, 4) == ["--bind", OWNER_BIND, "--gpu", OWNER_GPU],
+        tail_seq(planned_owner.argv, 4) == ["--bind", OWNER_BIND, "--gpu", OWNER_GPU],
     ) and OWNER_SCRIPT_RELATIVE in planned_owner.argv_relative
 
     skipped_when_down = skipped_generation(fake_health_down, reason="skip")
     wait_probes = {"n": 0}
 
     def becoming_healthy() -> lra_gt.HealthProbe:
+        from jevops.lean import healthy_probe
+        from jevops.outer import either
+
         wait_probes["n"] += 1
-        if wait_probes["n"] < 2:
-            return fake_health_down
-        return lra_gt.HealthProbe(
-            ok=True,
-            url=DOCKER0_HEALTH_URL,
-            alias_ok=False,
-            alias_url=DOCKER0_HEALTH_ALIAS_URL,
-            status_code=200,
-            error="",
-            autostart="0",
+        return either(
+            wait_probes["n"] < 2,
+            lambda: fake_health_down,
+            lambda: healthy_probe(
+                lra_gt.HealthProbe,
+                url=DOCKER0_HEALTH_URL,
+                alias_url=DOCKER0_HEALTH_ALIAS_URL,
+            ),
         )
 
     waited = wait_for_health(timeout=1.0, interval=0.01, probe=becoming_healthy)
 
-    report = {
+    from jevops.outer import pack_unscored
+
+    report = pack_unscored(**{
         "ok": True,
         "fail_closed_kwargs": FAIL_CLOSED_KWARGS,
         "health": asdict(health),
@@ -739,7 +648,7 @@ def self_check() -> dict[str, Any]:
         "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
         "owner_script_exists": owner_script_path().is_file(),
         "lock_ex_taken_by_client": False,
-    }
+    })
     healthy_ok = True
     if health.ok:
         healthy_ok = bool(
@@ -754,32 +663,34 @@ def self_check() -> dict[str, Any]:
         )
     else:
         healthy_ok = live_plan.action in {"wait", "skip_llm", "exec_owner"}
-    report["ok"] = bool(
-        report["health_url_exact"]
-        and report["fail_closed_kwargs"] == lra_gt.FAIL_CLOSED_KWARGS
-        and healthy_ok
-        and report["actions"]["healthy_is_generate"]
-        and action_unhealthy_held == "skip_llm"
-        and action_unhealthy_held_wait == "wait"
-        and action_unhealthy_free == "exec_owner"
-        and action_unhealthy_free_no_exec == "skip_llm"
-        and child_lock.get("ok")
-        and fake_exec.get("ok")
-        and owner_argv_ok
-        and waited.ok
-        and skipped_when_down.skipped
-        and not forbidden_imports
-        and not uses_lock_ex
-        and not forbidden_bins
-        and report["autostart"] == "0"
-        and report["llama_server_started"] is False
-        and report["compiled"] is False
-        and report["arena_score"] is None
-        and report["lock_ex_taken_by_client"] is False
-        and live_lock.lock_ex_taken_by_client is False
-        and "LOCK_EX" not in lock_ex_attrs
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["health_url_exact"],
+        report["fail_closed_kwargs"] == lra_gt.FAIL_CLOSED_KWARGS,
+        healthy_ok,
+        report["actions"]["healthy_is_generate"],
+        action_unhealthy_held == "skip_llm",
+        action_unhealthy_held_wait == "wait",
+        action_unhealthy_free == "exec_owner",
+        action_unhealthy_free_no_exec == "skip_llm",
+        child_lock.get("ok"),
+        fake_exec.get("ok"),
+        owner_argv_ok,
+        waited.ok,
+        skipped_when_down.skipped,
+        not forbidden_imports,
+        not uses_lock_ex,
+        not forbidden_bins,
+        report["autostart"] == "0",
+        report["llama_server_started"] is False,
+        report["compiled"] is False,
+        report["arena_score"] is None,
+        report["lock_ex_taken_by_client"] is False,
+        live_lock.lock_ex_taken_by_client is False,
+        "LOCK_EX" not in lock_ex_attrs,
     )
-    return report
 
 
 def main(argv: Optional[list[str]] = None) -> int:
@@ -800,7 +711,9 @@ def main(argv: Optional[list[str]] = None) -> int:
         payload["lock_ex_taken_by_client"] = False
         payload["llama_server_started"] = False
         print_json(payload)
-        return 0 if probe.ok else 2
+        from jevops.outer import exit_ok
+
+        return exit_ok(probe.ok, bad=2)
     if args.inspect_lock:
         pin_client_env()
         inspection = inspect_gpu0_lock()

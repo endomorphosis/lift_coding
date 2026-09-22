@@ -22,13 +22,8 @@ from typing import Any, Callable, Mapping, Optional
 HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
 OUT_DEFAULT = PAPER_ROOT / "evidence" / "canaries"
-PROTOCOL = "LRA/v1"
 PR_ID = "PR-9h"
-ACTIONS = ("run", "nest_inner", "mint", "skip_stem", "install_fold", "stop")
-KEEP_WORDS = ("intro", "intros", "constructor", "grind", "induction", "exact", "use")
 _JSON_OBJ = re.compile(r"\{.*\}", re.DOTALL)
-ROUTER_MAX_NEW = 256
-ROUTER_TIMEOUT = 90.0
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
@@ -41,15 +36,14 @@ from jevops.outer import deterministic_route  # noqa: E402
 from jevops.outer import nca_status as nca_status_for_router  # noqa: E402
 from jevops.outer import parse_action as _parse_action  # noqa: E402
 from jevops.outer import route_next as _route_next  # noqa: E402
-
-SMALL_NAMES = (
-    "CallElimCorrect.substOldPostSubset",
-    "CallElimCorrect.extractedOldExprInVars",
-    "Core.InitsUpdatesComm",
-    "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-    "Cslib.SKI.parallelReduction_diamond",
-    "Cslib.CCS.bisimilarity_congr_choice",
-)
+from jevops.catalogs import KEEP_WORDS  # noqa: E402
+from jevops.catalogs import OUTER_ACTIONS as ACTIONS  # noqa: E402
+from jevops.catalogs import OUTER_ROUTER_EXTRA  # noqa: E402
+from jevops.catalogs import OUTER_ROUTER_PREAMBLE  # noqa: E402
+from jevops.catalogs import PROTOCOL  # noqa: E402
+from jevops.catalogs import ROUTER_MAX_NEW  # noqa: E402
+from jevops.catalogs import ROUTER_TIMEOUT  # noqa: E402
+from jevops.catalogs import SMALL_CANARY_NAMES as SMALL_NAMES  # noqa: E402
 
 
 def keep_best_board(out: Path) -> dict[str, int]:
@@ -87,19 +81,9 @@ def router_prompt(
     from jevops.outer import format_prompt
 
     return format_prompt(
-        preamble=(
-            "You are the OUTER Grok loop. Do not write Lean. TypeSafe is the INNER loop.\n"
-            "Reply with one JSON object only, keys: action, stem, name, old, new, keep, reason.\n"
-        ),
+        preamble=OUTER_ROUTER_PREAMBLE,
         actions=ACTIONS,
-        extra=(
-            "nest_inner: enter the TypeSafe inner loop, which keep-loops and recursively nests skill decision-tree children.\n"
-            "run: same as nest_inner (TypeSafe still nests).\n"
-            "install_fold: literal old→new substring fold that keeps intro/constructor/grind/exact/use.\n"
-            "skip_stem: ban a port_ skill that lake-failed.\n"
-            "mint: enable a keep-structure stem already in the harness.\n"
-            "stop: no remaining lake-valid cut. If nca.halt or nca.budget_dead is true, action must be stop.\n"
-        ),
+        extra=OUTER_ROUTER_EXTRA,
         board=board,
         gaps=gaps,
         last_lake=last_lake,
@@ -121,24 +105,21 @@ def route_next_action(
 ) -> dict[str, Any]:
     """llm_router grok when --llm on; else deterministic AutoResearch route."""
 
-    nca = nca_status_for_router(memory)
-    prompt = ""
-    generate_fn = None
-    if nca.get("budget_dead") or nca.get("halt"):
-        llm = False
-    if llm:
-        prompt = router_prompt(board, gaps, last_lake, nca_status=nca)
+    from jevops.outer import call_if, false_when, optional_fn
 
-        def generate_fn(prompt: str) -> str:
-            text, _identity, _line = lra_t1.generate_grok(
-                prompt,
-                ledger,
-                max_new_tokens=ROUTER_MAX_NEW,
-                timeout=ROUTER_TIMEOUT,
-                generate=generate,
-                fixture=generate is not None,
-            )
-            return text
+    nca = nca_status_for_router(memory)
+    llm = false_when(llm, nca.get("budget_dead"), nca.get("halt"))
+
+    def _generate(prompt: str) -> str:
+        text, _identity, _line = lra_t1.generate_grok(
+            prompt,
+            ledger,
+            max_new_tokens=ROUTER_MAX_NEW,
+            timeout=ROUTER_TIMEOUT,
+            generate=generate,
+            fixture=generate is not None,
+        )
+        return text
 
     return _route_next(
         gaps=gaps,
@@ -146,8 +127,10 @@ def route_next_action(
         stalled=stalled,
         llm=llm,
         memory=memory,
-        generate_fn=generate_fn,
-        prompt=prompt,
+        generate_fn=optional_fn(llm, _generate),
+        prompt=call_if(
+            llm, lambda: router_prompt(board, gaps, last_lake, nca_status=nca), default=""
+        ),
         ledger=ledger,
     )
 
@@ -170,23 +153,23 @@ def canary_args(
     seed: int,
     nest_depth: int = 3,
 ) -> argparse.Namespace:
-    from jevops.outer import namespace
+    from jevops.outer import first_int, namespace
 
     return namespace(
         live=True,
         all_small=True,
         from_best=True,
-        rounds=int(rounds),
-        lake_top=int(lake_top),
-        drafts=int(drafts),
+        rounds=first_int(rounds),
+        lake_top=first_int(lake_top),
+        drafts=first_int(drafts),
         timeout=float(timeout),
         init_139=True,
-        seed=int(seed),
+        seed=first_int(seed),
         k=lra_rand.DEFAULT_K,
         out=out,
         include_inits=False,
         quiet=True,
-        nest_depth=int(nest_depth),
+        nest_depth=first_int(nest_depth),
     )
 
 
@@ -210,27 +193,29 @@ def self_check() -> dict[str, Any]:
     import board_graph as lra_board_chk
 
     seeded = lra_board_chk.seed_nca_from_board({"nca": {"grid": {}}})
-    return {
-        "ok": (
-            parsed.get("action") == "install_fold"
-            and installed.get("ok") is True
-            and fold_ok
-            and skip.get("ok") is True
-            and det.get("action") == "mint"
-            and budget_stop.get("action") == "stop"
-            and budget_stop.get("reason") == "nca_budget"
-            and board_total(board) == 139
-            and seeded.get("campaign_write") is False
-            and lra_t1.FAIL_CLOSED_KWARGS.get("provider") == "grok"
-            and lra_t1.FAIL_CLOSED_KWARGS.get("allow_local_fallback") is False
-        ),
-        "called_docker0": False,
-        "arena_score": None,
-        "official_track2": False,
-        "router": "ipfs_accelerate_py.llm_router.generate_text",
-        "jev_writes_lean": False,
-        "grok_writes_lean": False,
-    }
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        {
+            "called_docker0": False,
+            "arena_score": None,
+            "official_track2": False,
+            "router": "ipfs_accelerate_py.llm_router.generate_text",
+            "jev_writes_lean": False,
+            "grok_writes_lean": False,
+        },
+        parsed.get("action") == "install_fold",
+        installed.get("ok") is True,
+        fold_ok,
+        skip.get("ok") is True,
+        det.get("action") == "mint",
+        budget_stop.get("action") == "stop",
+        budget_stop.get("reason") == "nca_budget",
+        board_total(board) == 139,
+        seeded.get("campaign_write") is False,
+        lra_t1.FAIL_CLOSED_KWARGS.get("provider") == "grok",
+        lra_t1.FAIL_CLOSED_KWARGS.get("allow_local_fallback") is False,
+    )
 
 
 def run_loop(
@@ -250,7 +235,9 @@ def run_loop(
 ) -> dict[str, Any]:
     """OUTER Grok (llm_router). INNER TypeSafe keep-loop + recursive skill-tree nests."""
 
-    memory = memory if memory is not None else lra_bind.load_memory()
+    from jevops.outer import if_none
+
+    memory = if_none(memory, factory=lra_bind.load_memory)
     import board_graph as lra_board_seed
     from jevops.outer import seed_runtime
 
@@ -262,19 +249,22 @@ def run_loop(
             mem, keep_best_board(out), warmup=lra_board_seed.warmup_token_map()
         ),
     )
+    from jevops.outer import call_if, first_int, jev_budget, or_int
+
     ledger = lra_t1.ProblemLedger(
         name="warmup#skill-improve-loop",
-        max_jev_calls=max(8, 6 * int(rounds) * int(outer) * 3 + 2),
-        max_grok_calls=max(1, int(outer) if llm else 0),
+        max_jev_calls=jev_budget(6 * first_int(rounds) * first_int(outer), 1, 1),
+        max_grok_calls=or_int(call_if(llm, lambda: first_int(outer), default=0), 1, floor=1),
         max_mistral_calls=0,
     )
-    inner = run_inner or lra_rand.run_live
-    nest_depth = max(1, int(lra_rand.NEST_MAX_DEPTH))
-    from jevops.outer import run_steps
+    inner = if_none(run_inner, lra_rand.run_live)
+    nest_depth = or_int(lra_rand.NEST_MAX_DEPTH, 1, floor=1)
+    from jevops.outer import optional_fn, pop_nested, run_steps
 
     def _board_fn() -> tuple[dict[str, int], int]:
-        board = keep_best_board(out)
-        return board, board_total(board)
+        from jevops.outer import mapping_and_total
+
+        return mapping_and_total(lambda: keep_best_board(out), board_total)
 
     def _route_fn(*, board, gaps, last_lake, stalled):
         return route_next_action(
@@ -282,7 +272,7 @@ def run_loop(
             gaps=gaps,
             last_lake=last_lake,
             stalled=stalled,
-            llm=True if llm else False,
+            llm=bool(llm),
             ledger=ledger,
             generate=generate,
             memory=memory,
@@ -304,10 +294,12 @@ def run_loop(
     def _halt(mem: dict[str, Any]) -> dict[str, Any]:
         import typesafe_nca as lra_nca_halt
 
-        return dict(lra_nca_halt.should_halt(mem) or {})
+        from jevops.outer import overlay_map
+
+        return overlay_map(lra_nca_halt.should_halt(mem))
 
     stepped = run_steps(
-        n=int(outer),
+        n=first_int(outer),
         memory=memory,
         llm=bool(llm),
         gaps_fn=lambda: lra_bind.skill_gap_report(memory),
@@ -315,36 +307,32 @@ def run_loop(
         apply_fn=apply_action,
         inner_fn=_inner_fn,
         board_fn=_board_fn,
-        persist_fn=lra_bind.save_memory if persist_memory else None,
+        persist_fn=optional_fn(persist_memory, lra_bind.save_memory),
         halt_fn=_halt,
         flatten_fn=lra_inner.flatten_trace,
         hard_stop_fn=lambda: bool(getattr(ledger, "hard_stopped", False)),
         stalled_limit=2,
-        on_inner_start=lambda mem: (mem.get("nca") or {}).pop("overlay_done", None),
+        on_inner_start=lambda mem: pop_nested(mem, "nca", "overlay_done"),
     )
-    from jevops.outer import closed_evidence, utc_stamp
+    from jevops.outer import either, get_list, get_str, skill_loop_payload
 
-    mem_path = lra_bind.save_memory(memory) if persist_memory else lra_bind.MEMORY_DEFAULT
-    return {
-        "schema": "lra-skill-improve-loop/v1",
-        "protocol": PROTOCOL,
-        "pr_id": PR_ID,
-        "observed_at": utc_stamp(),
-        "outer": int(outer),
-        "llm": bool(llm),
-        "outer": "grok",
-        "inner": "typesafe_nested",
-        "router": "ipfs_accelerate_py.llm_router.generate_text" if llm else "deterministic",
-        "history": stepped.get("history") or [],
-        "board": dict(keep_best_board(out)),
-        "total": board_total(keep_best_board(out)),
-        "best_total": stepped.get("best_total"),
-        "stop_reason": stepped.get("stop_reason") or "",
-        "memory_path": str(mem_path),
-        "memory_skills": list(memory.get("skills") or []),
-        **closed_evidence(grok_writes_lean=False),
-        "ledger": ledger.as_dict() if hasattr(ledger, "as_dict") else {"grok_calls": ledger.grok_calls},
-    }
+    mem_path = either(
+        persist_memory, lambda: lra_bind.save_memory(memory), lambda: lra_bind.MEMORY_DEFAULT
+    )
+    return skill_loop_payload(
+        outer=outer,
+        llm=llm,
+        history=get_list(stepped, "history"),
+        board=keep_best_board(out),
+        total=board_total(keep_best_board(out)),
+        best_total=stepped.get("best_total"),
+        stop_reason=get_str(stepped, "stop_reason"),
+        memory_path=mem_path,
+        memory_skills=get_list(memory, "skills"),
+        ledger=ledger,
+        protocol=PROTOCOL,
+        pr_id=PR_ID,
+    )
 
 
 def main(argv: Optional[list[str]] = None) -> int:
@@ -364,15 +352,17 @@ def main(argv: Optional[list[str]] = None) -> int:
         from jevops.outer import print_ok
 
         return print_ok(self_check())
+    from jevops.outer import first_int, or_int
+
     payload = run_loop(
-        outer=max(1, int(args.outer)),
+        outer=or_int(args.outer, 1, floor=1),
         llm=args.llm == "on",
         out=args.out,
-        rounds=max(1, int(args.rounds)),
-        lake_top=int(args.lake_top),
-        drafts=int(args.drafts),
+        rounds=or_int(args.rounds, 1, floor=1),
+        lake_top=first_int(args.lake_top),
+        drafts=first_int(args.drafts),
         timeout=float(args.timeout),
-        seed=int(args.seed),
+        seed=first_int(args.seed),
     )
     from jevops.outer import write_json_pair
 

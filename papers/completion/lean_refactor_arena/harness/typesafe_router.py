@@ -33,31 +33,29 @@ import splice as lra_splice  # noqa: E402
 
 FROZEN_WARMUP_SHA256 = lra_splice.FROZEN_WARMUP_SHA256
 WARMUP_N = lra_splice.WARMUP_N
-PROTOCOL = "LRA/v1"
 PR_ID = "PR-9"
 LRAH_ID = "LRAH-006"
-LOOP_V1_TYPESAFE = "off"
-DEFAULT_MODE = "off"
-ALLOWED_MODES = ("off", "distill", "inloop")
-OFFICIAL_TRACK2_MODE = "off"
-MODEL_ID = "jev-latest"
-JEV_GENERATES_LEAN = False
-SCORE_IS_RUBRIC_INDEX = True
-ADDITIVE_NOT_REPLACEMENT = True
-TRACK1_INLOOP_ONLY = True
-TYPESAFE_SYSTEMONE_URL = "https://api.typesafe.ai/v1/systemone"
-DISTILL_POLICY_RELATIVE = "papers/completion/lean_refactor_arena/policy/open_policy_v1.json"
-HEADER_CHARS = 500
-NEIGHBOR_K = 4
-REF_HEAD_LINES = 80
-REF_TAIL_LINES = 80
-CHAR_BUDGET = 150_000
-KEY_ENV_NAMES = (
-    "TYPESAFE_API_KEY",
-    "ipfs_accelerate_py_TYPESAFE_API_KEY",
-    "IPFS_ACCELERATE_PY_TYPESAFE_API_KEY",
-    "IPFS_DATASETS_PY_TYPESAFE_API_KEY",
-)
+from jevops.catalogs import DEFAULT_MODE
+from jevops.catalogs import PROTOCOL
+from jevops.catalogs import JEV_GENERATES_LEAN
+from jevops.catalogs import LOOP_V1_TYPESAFE
+from jevops.catalogs import OFFICIAL_TRACK2_MODE
+from jevops.catalogs import SCORE_IS_RUBRIC_INDEX
+
+from jevops.catalogs import ALLOWED_TYPESAFE_MODES as ALLOWED_MODES
+from jevops.catalogs import CHAR_BUDGET
+from jevops.catalogs import HEADER_CHARS
+from jevops.catalogs import NEIGHBOR_K
+from jevops.catalogs import REF_HEAD_LINES
+from jevops.catalogs import REF_TAIL_LINES
+from jevops.catalogs import TYPESAFE_MODEL_ID as MODEL_ID
+from jevops.typesafe_inference import API_KEY_ENV_NAMES as KEY_ENV_NAMES
+from jevops.catalogs import ADDITIVE_NOT_REPLACEMENT
+from jevops.catalogs import DISTILL_POLICY_RELATIVE
+from jevops.catalogs import FORBIDDEN_SCORE_NAMES
+from jevops.catalogs import TRACK1_INLOOP_ONLY
+from jevops.catalogs import TYPESAFE_SYSTEMONE_URL
+
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
         "typesafe_sdk",
@@ -84,128 +82,14 @@ FORBIDDEN_CALLS = frozenset(
         "check_output",
     }
 )
-FORBIDDEN_SCORE_NAMES = frozenset(
-    {
-        "arena_score",
-        "arena_score_tokens",
-        "arena_score_elab",
-        "official_track2_score",
-        "token_savings",
-        "official_score",
-        "relevance_score",
-    }
-)
 
-REWRITE_CRITERIA: dict[str, Any] = {
-    "native_hammer": {
-        "what": "Goal looks like rfl/decide/omega/simp_all/assumption",
-        "not_for": "Long calc, domain-specific lemmas, or large induction",
-    },
-    "simp_set": {"what": "Unfolding + rewrite lemmas should close or shrink it"},
-    "aesop": {"what": "Aesop/auto would likely close"},
-    "omega_decide": {"what": "Linear arithmetic or decidable predicates"},
-    "calc": {"what": "Keep calc/conv structure; drop noise"},
-    "have_chain": {"what": "Merge redundant have/show steps"},
-    "custom": {"what": "Needs a model-written tactic script"},
-}
-
-LIKELY_SHORTER_CRITERIA = (
-    "longer or same",
-    "modest cut around 10 percent",
-    "large cut of 30 percent or more",
-)
-ELAB_RISK_CRITERIA = (
-    "elab likely better or same",
-    "elab unclear",
-    "elab likely worse",
-)
-LIKELY_SHORTER_LEGEND = {index: label for index, label in enumerate(LIKELY_SHORTER_CRITERIA)}
-ELAB_RISK_LEGEND = {index: label for index, label in enumerate(ELAB_RISK_CRITERIA)}
-
-ROUTE_QUESTION_SPEC: dict[str, dict[str, Any]] = {
-    "rewrite_family": {
-        "type": "choice",
-        "instructions": "Which rewrite family should code try first on `reference_proof`?",
-        "criteria": REWRITE_CRITERIA,
-    },
-    "hammer_before_llm": {
-        "type": "noul",
-        "instructions": (
-            "Would Lean built-in tactics (rfl, decide, omega, simp_all, aesop if imported) "
-            "plausibly close `statement` without a custom script?"
-        ),
-    },
-    "reference_already_tight": {
-        "type": "noul",
-        "instructions": "Is `reference_proof` already compact relative to `statement`?",
-    },
-    "likely_shorter": {
-        "type": "score",
-        "instructions": "How large a source-token cut is plausible versus `problem.proof_length`?",
-        "criteria": list(LIKELY_SHORTER_CRITERIA),
-    },
-    "elab_risk_if_automated": {
-        "type": "score",
-        "instructions": "If replaced by simp_all/aesop/omega, how likely is elaboration to get worse?",
-        "criteria": list(ELAB_RISK_CRITERIA),
-    },
-    "version_fragile": {
-        "type": "noul",
-        "instructions": (
-            "Does `reference_proof` rely on tactic or API details likely to break "
-            "across Lean 4.25 through 4.33?"
-        ),
-    },
-    "putnam_aesop_plausible": {
-        "type": "noul",
-        "instructions": "Given `header` and `statement`, is a short aesop/simp proof plausible?",
-    },
-    "calc_structure_worth_keeping": {
-        "type": "noul",
-        "instructions": "Is `reference_proof` a calc/conv chain whose structure should be kept?",
-    },
-    "statement_in_proof_duplicated": {
-        "type": "noul",
-        "instructions": "Does `reference_proof` repeat `statement` or contain a second theorem/lemma?",
-    },
-    "uses_sorry_or_admit": {
-        "type": "noul",
-        "instructions": "Does `reference_proof` contain sorry, admit, or an axiom?",
-    },
-    "neighbor_style_match": {
-        "type": "choice",
-        "instructions": "Which neighbor's proof style should the generator imitate?",
-        "criteria": {"none": "Do not imitate a neighbor"},
-    },
-    "spend_llm": {
-        "type": "noul",
-        "instructions": "Should code spend an LLM generation rather than only hammers?",
-    },
-}
-
-CANDIDATE_QUESTION_SPEC: dict[str, dict[str, Any]] = {
-    "candidate_changes_statement": {
-        "type": "noul",
-        "instructions": "Does the candidate change the theorem statement versus `statement`?",
-    },
-    "likely_shorter_than_reference": {
-        "type": "score",
-        "instructions": "How large a source-token cut is this candidate versus the reference?",
-        "criteria": list(LIKELY_SHORTER_CRITERIA),
-    },
-    "likely_compiles": {
-        "type": "noul",
-        "instructions": "Is the candidate likely to compile on every version_info tag?",
-    },
-    "likely_worse_elab": {
-        "type": "noul",
-        "instructions": "Is the candidate likely worse on elaboration effort than the reference?",
-    },
-    "introduces_sorry": {
-        "type": "noul",
-        "instructions": "Does the candidate introduce sorry, admit, or a new axiom?",
-    },
-}
+from jevops.catalogs import CANDIDATE_QUESTION_SPEC
+from jevops.catalogs import ELAB_RISK_CRITERIA
+from jevops.catalogs import ELAB_RISK_LEGEND
+from jevops.catalogs import LIKELY_SHORTER_CRITERIA
+from jevops.catalogs import LIKELY_SHORTER_LEGEND
+from jevops.catalogs import REWRITE_CRITERIA
+from jevops.catalogs import ROUTE_QUESTION_SPEC
 
 from jevops.jev import keys_by_type  # noqa: E402
 
@@ -244,44 +128,15 @@ def _ensure_accel_path() -> None:
 def _import_typesafe_inference() -> dict[str, Any]:
     """Load in-tree TypeSafe types. Never imports typesafe-sdk."""
 
-    _ensure_accel_path()
-    try:
-        from ipfs_accelerate_py.typesafe_inference import (  # type: ignore[import-not-found]
-            Choice,
-            Noul,
-            Score,
-            TypeSafeClient,
-            typesafe_configured,
-        )
-    except ImportError as exc:
-        try:
-            reported = str(TYPESAFE_INFERENCE_PATH.relative_to(REPO_ROOT))
-        except ValueError:
-            reported = str(TYPESAFE_INFERENCE_PATH)
-        from jevops.outer import exc_text
+    from jevops.jev import load_typesafe_inference
+    from jevops.outer import relative_or_str
 
-        return {
-            "available": False,
-            "error": exc_text(exc),
-            "path": reported,
-            "exists": TYPESAFE_INFERENCE_PATH.is_file(),
-            "Choice": None,
-            "Noul": None,
-            "Score": None,
-            "TypeSafeClient": None,
-            "typesafe_configured": None,
-        }
-    return {
-        "available": True,
-        "error": "",
-        "path": str(TYPESAFE_INFERENCE_PATH),
-        "exists": True,
-        "Choice": Choice,
-        "Noul": Noul,
-        "Score": Score,
-        "TypeSafeClient": TypeSafeClient,
-        "typesafe_configured": typesafe_configured,
-    }
+    return load_typesafe_inference(
+        setup=(_ensure_accel_path,),
+        path=relative_or_str(TYPESAFE_INFERENCE_PATH, REPO_ROOT),
+        exists=TYPESAFE_INFERENCE_PATH.is_file(),
+        fallback=False,
+    )
 
 
 def _env_truthy(value: Optional[str]) -> bool:
@@ -334,10 +189,10 @@ def resolve_typesafe_mode(
             closed_if=official_track2_requested(flag=official_track2, env=source),
         )
     except JevError as exc:
-        raw = DEFAULT_MODE if flag is None else flag
-        if flag is None:
-            raw = source.get("LRA_TYPESAFE", DEFAULT_MODE)
-        mode = str(raw or DEFAULT_MODE).strip().lower()
+        from jevops.outer import if_none, text_or
+
+        raw = if_none(flag, source.get("LRA_TYPESAFE", DEFAULT_MODE))
+        mode = text_or(raw, DEFAULT_MODE).strip().lower()
         raise TypesafeRouterError(f"unknown LRA_TYPESAFE={mode!r}; expected {ALLOWED_MODES}") from exc
 
 
@@ -352,11 +207,12 @@ def key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
 
 def _question_kind(question: Any) -> str:
     from jevops import jev
+    from jevops.outer import text_or
 
     try:
         return jev.question_kind(question)
     except jev.JevError as exc:
-        raise TypesafeRouterError(str(exc)) from exc
+        raise TypesafeRouterError(text_or(exc)) from exc
 
 
 def _question_criteria(question: Any) -> Any:
@@ -376,6 +232,7 @@ def instantiate_questions(
     """Build the frozen ROUTE_QUESTIONS dict. Uses in-tree types when loaded."""
 
     from jevops import jev
+    from jevops.outer import text_or
 
     try:
         return jev.instantiate_questions(
@@ -386,7 +243,7 @@ def instantiate_questions(
             neighbor_names=neighbor_names,
         )
     except jev.JevError as exc:
-        raise TypesafeRouterError(str(exc)) from exc
+        raise TypesafeRouterError(text_or(exc)) from exc
 
 
 def route_questions(
@@ -394,7 +251,9 @@ def route_questions(
     *,
     typesafe: Optional[Mapping[str, Any]] = None,
 ) -> dict[str, Any]:
-    loaded = typesafe if typesafe is not None else _import_typesafe_inference()
+    from jevops.outer import if_none
+
+    loaded = if_none(typesafe, factory=_import_typesafe_inference)
     return instantiate_questions(
         ROUTE_QUESTION_SPEC,
         choice=loaded.get("Choice"),
@@ -405,7 +264,9 @@ def route_questions(
 
 
 def candidate_questions(*, typesafe: Optional[Mapping[str, Any]] = None) -> dict[str, Any]:
-    loaded = typesafe if typesafe is not None else _import_typesafe_inference()
+    from jevops.outer import if_none
+
+    loaded = if_none(typesafe, factory=_import_typesafe_inference)
     return instantiate_questions(
         CANDIDATE_QUESTION_SPEC,
         choice=loaded.get("Choice"),
@@ -421,8 +282,9 @@ def truncate_reference_proof(
     tail_lines: int = REF_TAIL_LINES,
     char_budget: int = CHAR_BUDGET,
 ) -> str:
-    if not isinstance(src, str):
-        raise TypesafeRouterError("reference_proof must be a string")
+    from jevops.outer import raise_if
+
+    raise_if(not isinstance(src, str), TypesafeRouterError, "reference_proof must be a string")
     from jevops.jev import truncate_middle
 
     return truncate_middle(
@@ -454,51 +316,48 @@ def problem_state(
 
 def _noul_value(answer: Any) -> float:
     from jevops import jev
+    from jevops.outer import text_or
 
     try:
         return jev.noul_value(answer)
     except jev.JevError as exc:
-        raise TypesafeRouterError(str(exc)) from exc
+        raise TypesafeRouterError(text_or(exc)) from exc
 
 
 def _choice_value(answer: Any) -> tuple[str, float, dict[str, float]]:
     from jevops import jev
+    from jevops.outer import text_or
 
     try:
         return jev.choice_value(answer)
     except jev.JevError as exc:
-        raise TypesafeRouterError(str(exc)) from exc
+        raise TypesafeRouterError(text_or(exc)) from exc
 
 
 def _score_value(answer: Any, *, n_levels: int, legend_fallback: Mapping[int, str]) -> tuple[float, dict[int, str]]:
     from jevops import jev
+    from jevops.outer import text_or
 
     try:
         return jev.score_value(answer, n_levels=n_levels, legend_fallback=legend_fallback)
     except jev.JevError as exc:
-        raise TypesafeRouterError(str(exc)) from exc
+        raise TypesafeRouterError(text_or(exc)) from exc
 
 
 def answers_from_response(response: Any) -> dict[str, Any]:
     """Project System One answers. Score stays a rubric index. No Lean text."""
 
     from jevops.jev import project_answers
+    from jevops.outer import text_or
 
     try:
+        from jevops.catalogs import ROUTE_CHOICE_ALIASES, ROUTE_NOUL_KEYS, ROUTE_OPTIONAL_CHOICES
+
         out = project_answers(
             response,
-            noul_keys=(
-                "hammer_before_llm",
-                "reference_already_tight",
-                "version_fragile",
-                "putnam_aesop_plausible",
-                "calc_structure_worth_keeping",
-                "statement_in_proof_duplicated",
-                "uses_sorry_or_admit",
-                "spend_llm",
-            ),
-            choice_aliases={"rewrite_family": "family", "neighbor_style_match": "neighbor_style_match"},
-            optional_choices=("neighbor_style_match",),
+            noul_keys=ROUTE_NOUL_KEYS,
+            choice_aliases=ROUTE_CHOICE_ALIASES,
+            optional_choices=ROUTE_OPTIONAL_CHOICES,
             score_specs={
                 "likely_shorter": {
                     "dest": "likely_shorter",
@@ -514,7 +373,7 @@ def answers_from_response(response: Any) -> dict[str, Any]:
             },
         )
     except Exception as exc:
-        raise TypesafeRouterError(str(exc)) from exc
+        raise TypesafeRouterError(text_or(exc)) from exc
     from jevops.jev import deny_lean_keys
 
     return deny_lean_keys(out)
@@ -531,20 +390,9 @@ def should_call_leanstral(answers: Optional[Mapping[str, Any]], rec: Mapping[str
 def default_fixture_answers() -> dict[str, Any]:
     """CI answers: rubric level 0 plus a tight reference. Not live Jev."""
 
-    return {
-        "rewrite_family": "have_chain",
-        "hammer_before_llm": 0.31,
-        "reference_already_tight": 0.91,
-        "likely_shorter": 0.0,
-        "elab_risk_if_automated": 1.0,
-        "version_fragile": 0.22,
-        "putnam_aesop_plausible": 0.18,
-        "calc_structure_worth_keeping": 0.12,
-        "statement_in_proof_duplicated": 0.05,
-        "uses_sorry_or_admit": 0.02,
-        "neighbor_style_match": "none",
-        "spend_llm": 0.21,
-    }
+    from jevops.catalogs import default_fixture_answers as _fn
+
+    return _fn()
 
 
 class TypeSafeLraRouter:
@@ -579,67 +427,51 @@ class TypeSafeLraRouter:
         *,
         neighbor_names: Sequence[str] = (),
     ) -> RouteResult:
-        loaded = _import_typesafe_inference() if self.enabled else {"available": False}
+        from jevops.outer import call_if, either
+
+        loaded = either(self.enabled, _import_typesafe_inference, lambda: {"available": False})
         configured = key_configured(self.env)
         using_fixture = self.client_factory is not None
-        from jevops.jev import skip_reason
+        from jevops.jev import invoke_system_one, route_or_skip, route_result_from_answers
 
-        reason = skip_reason(
+        def _invoke() -> tuple[Any, float]:
+            questions = instantiate_questions(
+                ROUTE_QUESTION_SPEC,
+                choice=call_if(not using_fixture, lambda: loaded.get("Choice")),
+                noul=call_if(not using_fixture, lambda: loaded.get("Noul")),
+                score=call_if(not using_fixture, lambda: loaded.get("Score")),
+                neighbor_names=neighbor_names,
+            )
+            from jevops.outer import first_truthy
+
+            factory = first_truthy(self.client_factory, loaded["TypeSafeClient"])
+            client = factory(model=self.model)
+            return invoke_system_one(client, state, questions)
+
+        return route_or_skip(
             enabled=self.enabled,
             official=self.official_track2,
             key_ok=configured,
             available=bool(loaded.get("available")),
             using_fixture=using_fixture,
             require_key=self.require_key,
-        )
-        if reason:
-            return RouteResult(
+            skip_fn=lambda reason: RouteResult(
                 skipped=True,
                 reason=reason,
                 mode=self.mode,
                 official_track2=self.official_track2,
                 model=self.model,
-            )
-        questions = instantiate_questions(
-            ROUTE_QUESTION_SPEC,
-            choice=loaded.get("Choice") if not using_fixture else None,
-            noul=loaded.get("Noul") if not using_fixture else None,
-            score=loaded.get("Score") if not using_fixture else None,
-            neighbor_names=neighbor_names,
-        )
-        factory = self.client_factory or loaded["TypeSafeClient"]
-        from jevops.jev import invoke_system_one
-
-        client = factory(model=self.model)
-        response, wall_ms = invoke_system_one(client, state, questions)
-        extracted = answers_from_response(response)
-        return RouteResult(
-            skipped=False,
-            reason="routed",
-            mode=self.mode,
-            official_track2=self.official_track2,
-            family=extracted["family"],
-            family_confidence=extracted["family_confidence"],
-            family_probs=extracted["family_probs"],
-            hammer_before_llm=extracted["hammer_before_llm"],
-            reference_already_tight=extracted["reference_already_tight"],
-            likely_shorter=extracted["likely_shorter"],
-            likely_shorter_legend=extracted["likely_shorter_legend"],
-            elab_risk=extracted["elab_risk"],
-            elab_risk_legend=extracted["elab_risk_legend"],
-            version_fragile=extracted["version_fragile"],
-            putnam_aesop_plausible=extracted["putnam_aesop_plausible"],
-            calc_structure_worth_keeping=extracted["calc_structure_worth_keeping"],
-            statement_in_proof_duplicated=extracted["statement_in_proof_duplicated"],
-            uses_sorry_or_admit=extracted["uses_sorry_or_admit"],
-            neighbor_style_match=extracted["neighbor_style_match"],
-            spend_llm=extracted["spend_llm"],
-            usage=extracted["usage"],
-            wall_ms=wall_ms,
-            called_typesafe=True,
-            used_fixture=using_fixture,
-            model=self.model,
-            jev_generated_lean=False,
+            ),
+            invoke_fn=_invoke,
+            project_fn=lambda response, wall_ms: route_result_from_answers(
+                answers_from_response(response),
+                mode=self.mode,
+                official_track2=self.official_track2,
+                wall_ms=wall_ms,
+                used_fixture=using_fixture,
+                model=self.model,
+                result_cls=RouteResult,
+            ),
         )
 
 
@@ -652,8 +484,9 @@ def distill_record(
     """Log (features, Jev answers, Lean outcome). Does not generate Lean."""
 
     from jevops.jev import distill_row
+    from jevops.outer import as_mapping
 
-    problem = state.get("problem") if isinstance(state.get("problem"), Mapping) else {}
+    problem = as_mapping(state.get("problem"), {})
     return distill_row(
         schema="lra-typesafe-distill/v1",
         mode="distill",
@@ -704,12 +537,14 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
         forbidden_calls=FORBIDDEN_CALLS,
         forbidden_scores=FORBIDDEN_SCORE_NAMES,
     )
-    from jevops.repair import assigned_constants, membership
+    from jevops import jev as jev_mod
+    from jevops.repair import catalog_constants, membership, module_imported_names
 
-    imported = out["imported_names"]
+    imported = set(out["imported_names"])
+    kernel_imported = module_imported_names(jev_mod)
+    ok_imported = imported | kernel_imported
     calls = set(out["call_func_names"])
-    consts = assigned_constants(
-        text,
+    consts = catalog_constants(
         (
             "JEV_GENERATES_LEAN",
             "SCORE_IS_RUBRIC_INDEX",
@@ -723,7 +558,7 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
     score_issues = out["score_issues"]
     uses_lock_ex = out["uses_lock_ex"]
     flags = membership(
-        imported,
+        ok_imported,
         {
             "imports_typesafe_inference": ("ipfs_accelerate_py.typesafe_inference",),
             "imports_choice": ("Choice",),
@@ -731,10 +566,17 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
             "imports_score": ("Score",),
             "imports_typesafe_client": ("TypeSafeClient",),
             "imports_typesafe_configured": ("typesafe_configured",),
-            "imports_typesafe_sdk": ("typesafe_sdk", "typesafe"),
-            "imports_llm_router": ("llm_router",),
-            "imports_generate_text": ("generate_text",),
         },
+    )
+    flags.update(
+        membership(
+            imported,
+            {
+                "imports_typesafe_sdk": ("typesafe_sdk", "typesafe"),
+                "imports_llm_router": ("llm_router",),
+                "imports_generate_text": ("generate_text",),
+            },
+        )
     )
     flags.update(
         membership(
@@ -745,49 +587,55 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
             },
         )
     )
-    return {
-        "imported_names": sorted(imported),
-        "forbidden_imports": forbidden_imports,
-        "forbidden_calls": forbidden_calls,
-        "numeric_score_assignments": score_issues,
-        **flags,
-        "jev_generates_lean_constant": consts["JEV_GENERATES_LEAN"],
-        "score_is_rubric_index_constant": consts["SCORE_IS_RUBRIC_INDEX"],
-        "default_mode_constant": consts["DEFAULT_MODE"],
-        "loop_v1_typesafe_constant": consts["LOOP_V1_TYPESAFE"],
-        "official_track2_mode_constant": consts["OFFICIAL_TRACK2_MODE"],
-        "uses_lock_ex": uses_lock_ex,
-        "ok": (
-            "ipfs_accelerate_py.typesafe_inference" in imported
-            and "Choice" in imported
-            and "TypeSafeClient" in imported
-            and "typesafe_sdk" not in imported
-            and "typesafe" not in imported
-            and "llm_router" not in imported
-            and "generate_text" not in imported
-            and "generate_text" not in calls
-            and not forbidden_imports
-            and not forbidden_calls
-            and not score_issues
-            and not uses_lock_ex
-            and consts["JEV_GENERATES_LEAN"] is False
-            and consts["SCORE_IS_RUBRIC_INDEX"] is True
-            and consts["DEFAULT_MODE"] == "off"
-            and consts["LOOP_V1_TYPESAFE"] == "off"
-            and consts["OFFICIAL_TRACK2_MODE"] == "off"
+    from jevops.repair import pack_call_audit
+
+    packed = pack_call_audit(
+        out,
+        extra={
+            "numeric_score_assignments": score_issues,
+            **flags,
+            "jev_generates_lean_constant": consts["JEV_GENERATES_LEAN"],
+            "score_is_rubric_index_constant": consts["SCORE_IS_RUBRIC_INDEX"],
+            "default_mode_constant": consts["DEFAULT_MODE"],
+            "loop_v1_typesafe_constant": consts["LOOP_V1_TYPESAFE"],
+            "official_track2_mode_constant": consts["OFFICIAL_TRACK2_MODE"],
+            "uses_lock_ex": uses_lock_ex,
+        },
+        extra_ok=(
+            "ipfs_accelerate_py.typesafe_inference" in ok_imported,
+            "Choice" in ok_imported,
+            "TypeSafeClient" in ok_imported,
+            "typesafe_sdk" not in imported,
+            "typesafe" not in imported,
+            "llm_router" not in imported,
+            "generate_text" not in imported,
+            "generate_text" not in calls,
+            not score_issues,
+            not uses_lock_ex,
+            consts["JEV_GENERATES_LEAN"] is False,
+            consts["SCORE_IS_RUBRIC_INDEX"] is True,
+            consts["DEFAULT_MODE"] == "off",
+            consts["LOOP_V1_TYPESAFE"] == "off",
+            consts["OFFICIAL_TRACK2_MODE"] == "off",
         ),
-    }
+    )
+    packed["imported_names"] = sorted(imported)
+    packed["forbidden_imports"] = forbidden_imports
+    packed["forbidden_calls"] = forbidden_calls
+    return packed
 
 
 def _load_named_record(name: str, path: Optional[Path] = None) -> tuple[dict[str, Any], list[dict[str, Any]], str]:
-    from jevops.outer import lookup_named
+    from jevops.outer import load_named_pack, overlay_map
 
-    raw, digest, records = lra_splice.load_warmup_records(path)
-    del raw
-    record = lookup_named(
-        records, name, error_cls=TypesafeRouterError, miss=f"unknown warm-up problem: {name}"
+    record, records, digest = load_named_pack(
+        lra_splice.load_warmup_records,
+        name,
+        error_cls=TypesafeRouterError,
+        miss=f"unknown warm-up problem: {name}",
+        extra=path,
     )
-    return dict(record), records, digest
+    return overlay_map(record), records, digest
 
 
 def _neighbors_for(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> list[dict[str, str]]:
@@ -805,32 +653,45 @@ def route_named(
     lean_outcome: Optional[Mapping[str, Any]] = None,
 ) -> dict[str, Any]:
     record, records, digest = _load_named_record(name, path)
-    neighbors = _neighbors_for(record, records)
-    state = problem_state(record, neighbors=neighbors)
-    factory = None
-    if fixture:
-        factory = lambda **kwargs: FixtureClient(answers=default_fixture_answers(), **kwargs)
-    router = TypeSafeLraRouter(mode=mode, official_track2=official_track2, client_factory=factory)
-    result = router.route(state, neighbor_names=[item["name"] for item in neighbors])
-    payload = result.as_dict()
-    payload["ok"] = True
-    payload["name"] = name
-    payload["source"] = record.get("source")
-    payload["warmup_jsonl_sha256"] = digest
-    payload["n_neighbors"] = len(neighbors)
-    payload["route_question_keys"] = list(ROUTE_QUESTION_KEYS)
-    payload["should_call_leanstral_v2"] = (
-        None if result.skipped else should_call_leanstral(payload, record)
+    from jevops.outer import assign_if, begin_named_route, call_if, fixture_factory, get_str
+
+    neighbors, state, router = begin_named_route(
+        record,
+        records,
+        neighbor_fn=_neighbors_for,
+        state_fn=problem_state,
+        fixture=fixture,
+        factory_fn=lambda: fixture_factory(FixtureClient, default_fixture_answers),
+        router_cls=TypeSafeLraRouter,
+        mode=mode,
+        official_track2=official_track2,
     )
-    if router.mode == "distill" and not result.skipped:
-        payload["distill"] = distill_record(state, result, lean_outcome=lean_outcome)
-    payload["imports_typesafe_inference"] = True
-    payload["imports_typesafe_sdk"] = False
-    payload["jev_generates_lean"] = False
-    payload["score_is_rubric_index"] = True
-    payload["official_track2_stays_off"] = True
-    payload["default_mode"] = DEFAULT_MODE
-    return payload
+    from jevops.outer import names_of
+
+    result = router.route(state, neighbor_names=names_of(neighbors))
+    from jevops.jev import overlay_route_payload
+
+    extra: dict[str, Any] = {
+        "route_question_keys": list(ROUTE_QUESTION_KEYS),
+        "should_call_leanstral_v2": call_if(
+            not result.skipped, lambda: should_call_leanstral(result.as_dict(), record)
+        ),
+        "default_mode": DEFAULT_MODE,
+    }
+    assign_if(
+        extra,
+        "distill",
+        router.mode == "distill" and not result.skipped,
+        lambda: distill_record(state, result, lean_outcome=lean_outcome),
+    )
+    return overlay_route_payload(
+        result.as_dict(),
+        name=name,
+        source=get_str(record, "source"),
+        digest=digest,
+        n_neighbors=len(neighbors),
+        extra=extra,
+    )
 
 
 def plan_view(
@@ -842,6 +703,7 @@ def plan_view(
     resolved = resolve_typesafe_mode(flag=mode, env=env, official_track2=official_track2)
     loaded = _import_typesafe_inference()
     from jevops.jev import catalog_kinds
+    from jevops.outer import str_keys
 
     catalog = instantiate_questions(ROUTE_QUESTION_SPEC)
     score_levels = {
@@ -849,49 +711,47 @@ def plan_view(
         for name, spec in ROUTE_QUESTION_SPEC.items()
         if spec["type"] == "score"
     }
-    return {
-        "ok": True,
-        "protocol": PROTOCOL,
-        "pr": PR_ID,
-        "lrah": LRAH_ID,
-        "default_mode": DEFAULT_MODE,
-        "resolved_mode": resolved,
-        "allowed_modes": list(ALLOWED_MODES),
-        "official_track2": official_track2_requested(flag=official_track2, env=env),
-        "official_track2_stays_off": True,
-        "loop_v1_typesafe": LOOP_V1_TYPESAFE,
-        "distill_uses_lra_typesafe_distill": True,
-        "inloop_is_track1_only": TRACK1_INLOOP_ONLY,
-        "additive_not_replacement": ADDITIVE_NOT_REPLACEMENT,
-        "model": MODEL_ID,
-        "route_question_keys": list(ROUTE_QUESTION_KEYS),
-        "score_question_keys": list(SCORE_QUESTION_KEYS),
-        "noul_question_keys": list(NOUL_QUESTION_KEYS),
-        "choice_question_keys": list(CHOICE_QUESTION_KEYS),
-        "likely_shorter_criteria": list(LIKELY_SHORTER_CRITERIA),
-        "likely_shorter_legend": {str(key): value for key, value in LIKELY_SHORTER_LEGEND.items()},
-        "score_is_rubric_index": SCORE_IS_RUBRIC_INDEX,
-        "score_levels": score_levels,
-        "jev_generates_lean": JEV_GENERATES_LEAN,
-        "typesafe_systemone_url": TYPESAFE_SYSTEMONE_URL,
-        "router_posts_to_typesafe": False,
-        "imports_typesafe_inference": True,
-        "imports_typesafe_sdk": False,
-        "typesafe_inference_available": loaded["available"],
-        "typesafe_inference_exists": loaded["exists"],
-        "typesafe_inference_error": loaded["error"],
-        "typesafe_inference_path": loaded["path"],
-        "key_configured": key_configured(env),
-        "key_env_names": list(KEY_ENV_NAMES),
-        "catalog_kinds": catalog_kinds(catalog),
-        "n_catalog": len(catalog),
-        "distill_policy_path": DISTILL_POLICY_RELATIVE,
-        "writes_policy_by_default": False,
-        "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
-        "arena_score": None,
-        "compiled": False,
-        "llama_server_started": False,
-    }
+    from jevops.jev import pack_plan_view
+
+    return pack_plan_view(
+        protocol=PROTOCOL,
+        pr=PR_ID,
+        lrah=LRAH_ID,
+        default_mode=DEFAULT_MODE,
+        resolved_mode=resolved,
+        allowed_modes=list(ALLOWED_MODES),
+        official_track2=official_track2_requested(flag=official_track2, env=env),
+        official_track2_stays_off=True,
+        loop_v1_typesafe=LOOP_V1_TYPESAFE,
+        distill_uses_lra_typesafe_distill=True,
+        inloop_is_track1_only=TRACK1_INLOOP_ONLY,
+        additive_not_replacement=ADDITIVE_NOT_REPLACEMENT,
+        model=MODEL_ID,
+        route_question_keys=list(ROUTE_QUESTION_KEYS),
+        score_question_keys=list(SCORE_QUESTION_KEYS),
+        noul_question_keys=list(NOUL_QUESTION_KEYS),
+        choice_question_keys=list(CHOICE_QUESTION_KEYS),
+        likely_shorter_criteria=list(LIKELY_SHORTER_CRITERIA),
+        likely_shorter_legend=str_keys(LIKELY_SHORTER_LEGEND),
+        score_is_rubric_index=SCORE_IS_RUBRIC_INDEX,
+        score_levels=score_levels,
+        jev_generates_lean=JEV_GENERATES_LEAN,
+        typesafe_systemone_url=TYPESAFE_SYSTEMONE_URL,
+        router_posts_to_typesafe=False,
+        imports_typesafe_inference=True,
+        imports_typesafe_sdk=False,
+        typesafe_inference_available=loaded["available"],
+        typesafe_inference_exists=loaded["exists"],
+        typesafe_inference_error=loaded["error"],
+        typesafe_inference_path=loaded["path"],
+        key_configured=key_configured(env),
+        key_env_names=list(KEY_ENV_NAMES),
+        catalog_kinds=catalog_kinds(catalog),
+        n_catalog=len(catalog),
+        distill_policy_path=DISTILL_POLICY_RELATIVE,
+        writes_policy_by_default=False,
+        frozen_warmup_sha256=FROZEN_WARMUP_SHA256,
+    )
 
 
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:
@@ -900,8 +760,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     from jevops.outer import read_text
 
     source = read_text(__file__)
-    jsonl = Path(path) if path is not None else WARMUP_JSONL
-    from jevops.outer import digest_file
+    from jevops.outer import digest_file, path_or, relative_or_str
+
+    jsonl = path_or(path, WARMUP_JSONL)
 
     before = digest_file(jsonl)
     raw, digest, records = lra_splice.load_warmup_records(jsonl)
@@ -941,15 +802,17 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     skip_llm = should_call_leanstral(distill_answers, first)
     distill_log = distill_record(state, distill_result, lean_outcome={"compiled": False, "status": "fixture"})
 
+    from jevops.outer import first_truthy, overlay_map
+
     custom_fixture = FixtureClient(
-        answers={
-            **default_fixture_answers(),
-            "rewrite_family": "custom",
-            "reference_already_tight": 0.2,
-            "likely_shorter": 2.0,
-            "spend_llm": 0.8,
-            "hammer_before_llm": 0.1,
-        }
+        answers=overlay_map(
+            default_fixture_answers(),
+            rewrite_family="custom",
+            reference_already_tight=0.2,
+            likely_shorter=2.0,
+            spend_llm=0.8,
+            hammer_before_llm=0.1,
+        )
     )
     custom_router = TypeSafeLraRouter(
         mode="distill",
@@ -984,7 +847,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
     serialized = dumps_sorted({"distill": distill_log, "route": distill_result.as_dict()})
     key_leak = any(token in serialized for token in ("BEGIN SECRET", "sk-live-", "sk-prod-"))
 
-    report = {
+    from jevops.outer import pack_unscored
+
+    report = pack_unscored(**{
         "ok": True,
         "protocol": PROTOCOL,
         "pr": PR_ID,
@@ -1018,10 +883,10 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "skip_llm_on_rubric_level_0": skip_llm is False,
         "spend_llm_on_custom_level_2": spend_llm is True,
         "likely_shorter_level_0": distill_result.likely_shorter,
-        "likely_shorter_legend_0": (distill_result.likely_shorter_legend or {}).get(0),
+        "likely_shorter_legend_0": overlay_map(distill_result.likely_shorter_legend).get(0),
         "likely_shorter_is_rubric_index": distill_result.likely_shorter_is_rubric_index,
         "likely_shorter_not_probability": distill_result.likely_shorter == 0.0
-        and (distill_result.likely_shorter_legend or {}).get(0) == "longer or same",
+        and overlay_map(distill_result.likely_shorter_legend).get(0) == "longer or same",
         "custom_likely_shorter_level_2": custom_result.likely_shorter,
         "distill_log": distill_log,
         "catalog_keys": list(catalog.keys()),
@@ -1029,7 +894,9 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "likely_shorter_criteria": list(likely_criteria),
         "n_score_levels": len(likely_criteria),
         "neighbor_names": neighbor_names,
-        "truncated_over_budget": "lra-truncated" in truncated_lines or len(truncated) <= CHAR_BUDGET,
+        "truncated_over_budget": first_truthy(
+            "lra-truncated" in truncated_lines, len(truncated_lines) <= CHAR_BUDGET
+        ),
         "jev_generated_lean": False,
         "off_skipped": off_result.skipped and off_result.reason == "typesafe_off",
         "no_key_skipped": no_key_result.skipped and no_key_result.reason in {"no_key", "typesafe_inference_missing"},
@@ -1051,44 +918,46 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
         "llama_server_started": False,
         "arena_score": None,
         "first_name": first.get("name"),
-        "warmup_path": str(jsonl.relative_to(REPO_ROOT)),
-    }
-    report["ok"] = bool(
-        report["n_records"] == WARMUP_N
-        and report["jsonl_unchanged"]
-        and audit["ok"]
-        and report["default_mode_is_off"]
-        and report["distill_uses_lra_typesafe_distill"]
-        and report["inloop_uses_lra_typesafe_inloop"]
-        and report["official_track2_stays_off"]
-        and report["off_skipped"]
-        and report["no_key_skipped"]
-        and report["distill_called"]
-        and report["official_stayed_off"]
-        and report["official_did_not_call"]
-        and report["skip_llm_on_rubric_level_0"]
-        and report["spend_llm_on_custom_level_2"]
-        and report["likely_shorter_not_probability"]
-        and report["likely_shorter_level_0"] == 0.0
-        and report["custom_likely_shorter_level_2"] == 2.0
-        and report["imports_typesafe_inference"]
-        and not report["imports_typesafe_sdk"]
-        and report["jev_generated_lean"] is False
-        and distill_result.jev_generated_lean is False
-        and distill_result.lean_text is None
-        and distill_result.tactics is None
-        and distill_result.proof_text is None
-        and distill_result.arena_score is None
-        and distill_log["jev_generated_lean"] is False
-        and distill_log["api_key_present_in_record"] is False
-        and unknown_closed
-        and not key_leak
-        and report["catalog_keys"] == list(ROUTE_QUESTION_KEYS)
-        and report["n_score_levels"] == 3
-        and report["compiled"] is False
-        and report["arena_score"] is None
+        "warmup_path": relative_or_str(jsonl, REPO_ROOT),
+    })
+    from jevops.outer import finalize_ok
+
+    return finalize_ok(
+        report,
+        report["n_records"] == WARMUP_N,
+        report["jsonl_unchanged"],
+        audit["ok"],
+        report["default_mode_is_off"],
+        report["distill_uses_lra_typesafe_distill"],
+        report["inloop_uses_lra_typesafe_inloop"],
+        report["official_track2_stays_off"],
+        report["off_skipped"],
+        report["no_key_skipped"],
+        report["distill_called"],
+        report["official_stayed_off"],
+        report["official_did_not_call"],
+        report["skip_llm_on_rubric_level_0"],
+        report["spend_llm_on_custom_level_2"],
+        report["likely_shorter_not_probability"],
+        report["likely_shorter_level_0"] == 0.0,
+        report["custom_likely_shorter_level_2"] == 2.0,
+        report["imports_typesafe_inference"],
+        not report["imports_typesafe_sdk"],
+        report["jev_generated_lean"] is False,
+        distill_result.jev_generated_lean is False,
+        distill_result.lean_text is None,
+        distill_result.tactics is None,
+        distill_result.proof_text is None,
+        distill_result.arena_score is None,
+        distill_log["jev_generated_lean"] is False,
+        distill_log["api_key_present_in_record"] is False,
+        unknown_closed,
+        not key_leak,
+        report["catalog_keys"] == list(ROUTE_QUESTION_KEYS),
+        report["n_score_levels"] == 3,
+        report["compiled"] is False,
+        report["arena_score"] is None,
     )
-    return report
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -1106,7 +975,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--official-track2", action="store_true", help="force official Track 2 off")
     parser.add_argument("--fixture", action="store_true", help="use CI fixture client; no live key")
     parser.add_argument("--jsonl", type=Path, default=None, help="warmup JSONL path")
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    from jevops.outer import list_or_none
+
+    args = parser.parse_args(list_or_none(argv))
     if args.plan:
         from jevops.outer import print_ok
 
