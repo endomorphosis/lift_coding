@@ -1,0 +1,88 @@
+{
+  "driver_sha256": "1d9d04fb7d2c978ad836ef53385c008e0cfe89f6db9d2aa269d4b98d52bd04f9",
+  "findings": [
+    "Tiny near-duplicate authored corpora have at most three centered directions; PCA is a strong baseline.",
+    "Corrupted-input fitting and clean-only validation differ; coarse steps can degrade nearly exact families.",
+    "Unknown held-out value/identifier atoms are omitted from numerical reconstruction and must be reported separately from coverage.",
+    "Typed-family structural reconstruction is not a source-text/IR decoder or proof/satisfiability training objective."
+  ],
+  "network_calls": 0,
+  "optimization_executed": false,
+  "provider_calls": 0,
+  "results": {
+    "legal_ir": {
+      "centered_training_rank": 3,
+      "distinct_validation_feature_vectors": 1,
+      "epochs_improving_aggregate": 4,
+      "epochs_selected": 1,
+      "feature_columns": 745,
+      "initial_family_losses": {
+        "deontic": 0.0018819045317308115,
+        "event_calculus": 0.003012288473841302,
+        "frame_logic": 0.0024201067972065373,
+        "tdfol": 0.003298468287011541
+      },
+      "pca_clean_training_objective": 6.336943478035577e-05,
+      "pca_clean_validation_objective": 0.0026531920224475477,
+      "pca_mean_corrupted_training_objective": 0.00035452143783979204,
+      "prior_checkpoint_sha256": "4dc47d93ebc53c46d6b2345a5750288ef1273943d997ea5e685a7d5c345caee9",
+      "selected_epoch": 9,
+      "training_rows": 4,
+      "validation_after": 0.002492487697267681,
+      "validation_before": 0.0026531920224475477,
+      "validation_known_atoms": 850,
+      "validation_rows": 2,
+      "validation_unknown_atoms": 160
+    },
+    "security_ir": {
+      "centered_training_rank": 3,
+      "distinct_validation_feature_vectors": 1,
+      "epochs_improving_aggregate": 1,
+      "epochs_selected": 0,
+      "feature_columns": 1110,
+      "initial_family_losses": {
+        "hyperproperty": 4.830815483593948e-06,
+        "program": 0.0008393946824304585,
+        "separation_logic": 0.0007952169637536288,
+        "temporal": 0.0014520475162086873,
+        "transition_system": 0.00024108852795377378
+      },
+      "pca_clean_training_objective": 5.439732657920391e-06,
+      "pca_clean_validation_objective": 0.0006665157011660286,
+      "pca_mean_corrupted_training_objective": 7.59052238140507e-05,
+      "prior_checkpoint_sha256": "f803009367b2b7f6bb3caac5f18af26cd110f626903dcede2a1941abd3df0b25",
+      "selected_epoch": 0,
+      "training_rows": 4,
+      "validation_after": 0.0006665157011660286,
+      "validation_before": 0.0006665157011660286,
+      "validation_known_atoms": 1948,
+      "validation_rows": 2,
+      "validation_unknown_atoms": 68
+    },
+    "ui_ux_ir": {
+      "centered_training_rank": 3,
+      "distinct_validation_feature_vectors": 1,
+      "epochs_improving_aggregate": 0,
+      "epochs_selected": 0,
+      "feature_columns": 269,
+      "initial_family_losses": {
+        "dcec": 4.8201209689758255e-05,
+        "event_calculus": 0.0001930679103952839,
+        "frame_logic": 0.0004243190315111823,
+        "tdfol": 0.0006284339780930509
+      },
+      "pca_clean_training_objective": 2.754871926935095e-07,
+      "pca_clean_validation_objective": 0.0003235055324223188,
+      "pca_mean_corrupted_training_objective": 0.00023717269249059063,
+      "prior_checkpoint_sha256": "258fa17c58438dab91ac7305322de95796dc029756003c1ac6ba188337fce7c4",
+      "selected_epoch": 0,
+      "training_rows": 4,
+      "validation_after": 0.0003235055324223188,
+      "validation_before": 0.0003235055324223188,
+      "validation_known_atoms": 498,
+      "validation_rows": 2,
+      "validation_unknown_atoms": 10
+    }
+  },
+  "schema": "domain-family-baseline-diagnosis/v1"
+}

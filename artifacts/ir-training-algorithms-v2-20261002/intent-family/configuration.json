@@ -1,0 +1,23 @@
+{
+  "input_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-coverage-20261002/intent-01/family-inputs-02.json.gz",
+    "sha256": "970693ef83766843cc2189d280bf108a6790004acda44479f07dde043e54f7f9"
+  },
+  "parent_descriptor": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-coverage-20261002/intent-01/family-training-02/family_checkpoint.json",
+    "schema": "native-family-denoising-autoencoder/v1",
+    "sha256": "5f7663ca35f6ca8d2cce4ba8a9d11d4e8f90ccce02ada5af91be17ba6f30d1e5"
+  },
+  "configuration": {
+    "epochs": 12,
+    "latent_width": 16,
+    "learning_rate": 0.001,
+    "minibatch_size": 32,
+    "denoising": 0.05,
+    "ridge": 0.001,
+    "patience": 4,
+    "seed": 1729,
+    "max_seconds": 120
+  },
+  "test_used": false
+}

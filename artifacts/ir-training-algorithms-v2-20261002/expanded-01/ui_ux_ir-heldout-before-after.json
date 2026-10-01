@@ -1,0 +1,143 @@
+{
+  "after": 0.0047640660445747276,
+  "after_families": {
+    "dcec": 0.006445677971933252,
+    "event_calculus": 0.017165618751734633,
+    "frame_logic": 0.0012561852926752134,
+    "tdfol": 0.0034687043668883795,
+    "temporal": 6.400919737428841e-05,
+    "transition_system": 0.0001842006868426009
+  },
+  "before": 0.003657937215953703,
+  "before_families": {
+    "dcec": 0.004166104663362696,
+    "event_calculus": 0.013472320094159737,
+    "frame_logic": 0.0012561852926752134,
+    "tdfol": 0.0027084374731341353,
+    "temporal": 6.400919737428841e-05,
+    "transition_system": 0.00028056657501614385
+  },
+  "coverage": {
+    "projections": [
+      {
+        "has_coverage": true,
+        "known_atoms": 1220,
+        "projection_id": "ui_ux_ir/declared_state/native/v2",
+        "row": 0,
+        "unknown_atoms": 2068
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 828,
+        "projection_id": "ui_ux_ir/declared_state/tla_plus/v2",
+        "row": 0,
+        "unknown_atoms": 7
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 1220,
+        "projection_id": "ui_ux_ir/event_prefix/native/v2",
+        "row": 0,
+        "unknown_atoms": 482
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 41,
+        "projection_id": "ui_ux_ir:dcec",
+        "row": 0,
+        "unknown_atoms": 0
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 215,
+        "projection_id": "ui_ux_ir:event_calculus",
+        "row": 0,
+        "unknown_atoms": 0
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 24,
+        "projection_id": "ui_ux_ir:flogic",
+        "row": 0,
+        "unknown_atoms": 1
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 62,
+        "projection_id": "ui_ux_ir:interface_bindings",
+        "row": 0,
+        "unknown_atoms": 0
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 72,
+        "projection_id": "ui_ux_ir:tdfol",
+        "row": 0,
+        "unknown_atoms": 3
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 1220,
+        "projection_id": "ui_ux_ir/event_prefix/native/v2",
+        "row": 1,
+        "unknown_atoms": 245
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 28,
+        "projection_id": "ui_ux_ir:dcec",
+        "row": 1,
+        "unknown_atoms": 0
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 161,
+        "projection_id": "ui_ux_ir:event_calculus",
+        "row": 1,
+        "unknown_atoms": 15
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 24,
+        "projection_id": "ui_ux_ir:flogic",
+        "row": 1,
+        "unknown_atoms": 1
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 62,
+        "projection_id": "ui_ux_ir:interface_bindings",
+        "row": 1,
+        "unknown_atoms": 0
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 42,
+        "projection_id": "ui_ux_ir:tdfol",
+        "row": 1,
+        "unknown_atoms": 2
+      }
+    ],
+    "untrained_projection_ids": []
+  },
+  "feature_panel": {
+    "colliding_row_groups": [],
+    "distinct_retained_feature_vectors": 2,
+    "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+    "rows": 2
+  },
+  "initialization": {
+    "inputs": "saved original training target rows only; existing frozen vocabulary; no validation/test initialization inputs",
+    "matches_saved_training_initialization": true,
+    "method": "training_only_deterministic_svd",
+    "replayed_parameter_sha256": "95b9dafed597efdae5d77a71ccb336579779668078d08f37f65282ba9abb9789"
+  },
+  "regressed_families": [
+    "dcec",
+    "event_calculus",
+    "tdfol"
+  ],
+  "relative_reduction": -0.3023914198955526,
+  "saved_selected_test_loss_replayed": true,
+  "used_for_training_or_model_selection": false
+}

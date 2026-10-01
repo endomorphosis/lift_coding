@@ -1,0 +1,908 @@
+{
+  "checkpoint": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/model/candidate.json",
+    "schema": "shared-paired-copy-aligned-continuation/v2",
+    "sha256": "9cf4da607d6fdb48400409e6618fcfe3246d0673e180696879b5601d1a889eec"
+  },
+  "counts": {
+    "accepted": 133,
+    "decoder_calls": 10039,
+    "encoder_calls": 288,
+    "exact": 133,
+    "incorrect_accepted": 0,
+    "rows": 139,
+    "seconds": 38.727706097764894,
+    "stage:accepted": 133,
+    "stage:encoder_source_agreement": 5,
+    "stage:inverse_source_agreement": 1
+  },
+  "default_supervisor_dispatch_changed": false,
+  "elapsed_seconds": 46.43760657380335,
+  "grammar_constrained_search_used": false,
+  "groups": {
+    "new_authored_holdout": {
+      "accepted": 64,
+      "decoder_calls": 1696,
+      "encoder_calls": 128,
+      "exact": 64,
+      "incorrect_accepted": 0,
+      "rows": 64,
+      "seconds": 16.76478714775294,
+      "stage:accepted": 64
+    },
+    "new_source_form_holdout": {
+      "accepted": 56,
+      "decoder_calls": 2731,
+      "encoder_calls": 117,
+      "exact": 56,
+      "incorrect_accepted": 0,
+      "rows": 56,
+      "seconds": 15.196236585034057,
+      "stage:accepted": 56
+    },
+    "prior_real_source_regression": {
+      "accepted": 13,
+      "decoder_calls": 5612,
+      "encoder_calls": 43,
+      "exact": 13,
+      "incorrect_accepted": 0,
+      "rows": 19,
+      "seconds": 6.766682364977896,
+      "stage:accepted": 13,
+      "stage:encoder_source_agreement": 5,
+      "stage:inverse_source_agreement": 1
+    }
+  },
+  "inference_mode": "fresh_greedy_and_ordinary_beam16_with_source_free_token_faithful_inverse_codec",
+  "lake": [
+    {
+      "category": "new_authored_holdout",
+      "id": "aligned-span-v2:test:short:mosaic:save:0",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "f17027bf2da40ae4f0bf330238b49bf647aef39bd1975248709d51035137f186",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (187ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "f305eca34bb01b3698baefbcf4fa6d34da357d21e751e114ca3bf25db4324931",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "new_authored_holdout",
+      "id": "aligned-span-v2:test:long:tundra:save:1",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "d86a95bbc0bbeb6d6030c810fe306a80a53f31c93fab0f65b833bffc82324d78",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (136ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "b418474619b30b851827033da0a634f6273e02d5318475e475cf4537c5808de8",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "new_authored_holdout",
+      "id": "aligned-span-v2:test:internal_article:saffron:save:2",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "0f933c095341cf1a717a5568668bef0cc6e3f521ca54e0da861ed13f0502abf2",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (155ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "13ebbf52cabd6b023d65b71f92ce978aabd83cdfc1a2208658a6ce7166ff07f4",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "new_authored_holdout",
+      "id": "aligned-span-v2:test:repeated_occurrences:violet:save:3",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "0ebec9aa556e0532016a6699b07a57efac008282bd6952fe2f08f1e0ce091074",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (169ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "eadd525000fc1852727f21163c51b361857006a012b36d6f3a65220446228269",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "new_authored_holdout",
+      "id": "aligned-span-v2:test:action_noun:opal:save:0",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "e15bfdec571fb594ed6de5c8c1818ac1529251ca52dfcedcbadfd6f446d86c8f",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (133ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "3125085fbf2d8dcabd2887331bf455193e86549e78167ec091a563f0c10cfd6a",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "new_authored_holdout",
+      "id": "aligned-span-v2:test:leading_extension:lilac:save:1",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "d12d9a98378fdd5d87a20b7c043aaa1b66c41a897dade7bf6b48d6781d44c3cf",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (136ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "de1a116dbb8166fc5053b972639b6849c31999ac8e5975695f6487b51d28b720",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "new_authored_holdout",
+      "id": "aligned-span-v2:test:quoted_command:marble:save:2",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "0d07a97a5b64df64b3f8550c3ad5cb3a30c16f1a174c0e0b75030aba877c6540",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (179ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "14fca1aad4b759b9c5cd44720b510b2ff96c95c27aff8ac72f8dae9fa2e14fb5",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "new_authored_holdout",
+      "id": "aligned-span-v2:test:numeric_range:ivory:save:3",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "aa563b22590e87119329098c2005f1e608cb5eff41c0e9144b6efce3656227df",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (162ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "b2173908c73abb7dc45783d25068c442f2c937f5eec83eb0cf2bf386bad9c8f6",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:d3182874d89e9badb01dc1a1277640626776e736b8acac0019e55854b94e2c5b",
+      "receipt": {
+        "reason": "model_rejected_before_compiler",
+        "status": "not_run"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:88bc5023407683be451bc887d79b92629d5677ede8d5bb2dcc14be448e20605b",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "3cebb926b5dd9464e501347b46b8e8e2cf9d669928361cc984b696de5b6b9132",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (150ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "2c8aff31478d079b5157c42a9b6b5752c870c212556fa1fbed643f3475d9bf99",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:66c6a2f758feec976f1b9f631170c12994afbd553ea6618628d8e3c13c8d40ec",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "c22366eb308c29fdda356bcdbd0666de69c91765eb433e9347d213cd9db1aa93",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (137ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "9eaabfd953e7797694bc7e4f756a146ce96fd453303d104cb0f5a13175d49034",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:3cee540a0e4d7d01a3ff98686a4553af8da713371f046a8b719d13f2e684ce56",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "175675c0fb06bf5a05d7a0ae53c38f898f9db5b525e14ec8ab1e3da55501c550",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (137ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "c71da92ba27b563691fdb44731966d92a850bc96b1518002169e573ba821dc40",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:a18197de66e216874707408269571024f85558c107fafe1991d7985c238c1f9f",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "5f5efbe5e2be2e3cf33b538ddeb7f0f9e6d7321153362c0f6194ee82108bf89c",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (150ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "2452c637aaf92febe47302b6bc2a400e9ac77c9bee4f4cd35223a9b01dfe1e60",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:a45149884d31e91f8ac949c84895216740799978c03790473cad409d535086ac",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "a36efc6084c87c04cc5d193b847edfacd5ac81fb9db8de66e7e1318ebf9f0723",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (137ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "67a27f18d11fb41319dbd5bfccce648c7c969fcc97b2a8a52518804f19af7249",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:27fd6f152fa7dcfcf35856f73c145f7724f3c80cf55c568ad631b2ec70ca585d",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "e8c63e4e013875475f07e400d7a9ce3460ea663af1be3560bbb7ee45e1b9b3c6",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (144ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "675124e14de56b60e775937d105c76648aa1b88d74eb0e44f310dd1827b99fa7",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:0d6ce9b51727ac71942294c92045bc34d002aabc665346f38e2c6fa694843993",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "9859a4872ac1a307a01bb0b290d71a2b6ffd1763d816c6de55664c821e3996f9",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (132ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "1b8021eafef12988dbfa15f68fb39ab2e64e516c94a5f5c55c30d2ab83e38b9a",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:ea666ee8d35c95ed6fa6ecb76a3e3bac32494650182e9dbfcbfb3aa8303715da",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "1ee4d8190b6b140413e5db8bfb666fed64799bf0aefcf92b1802e3e685381cf8",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (152ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "e04d35dc917ddb0ee8a7baecf64cf40e7c254eb693714e02495e285536292d1f",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:9462932c5061817566075fcddcff00a77996e7c4323b8c37f87fd632b6d84041",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "ecfd501a375fcad21493787015d5b60b7e975f37b4010c02236f05cb3630ad87",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (144ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "2028b56aceeadc3fa1f19993490ebaff1100422b2d3dd04901b4679818c49bb5",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:2ce1dcc6775cf6f61cc3eaee912c1c75dedf869d06c848dc24ff748939db8628",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "519d5b129b41167849b2500fb416b9ea544ab140543554cf5ff1779384f7accb",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (140ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "d9bf3b1b2cc6f9e6b7d7e22ab52da85e11c37e8cb4f07ecc0f4e9587d6a1fc64",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:0c46bf28a3c6be005f761cb39b3d02a986633f1aabcd0cf60e0f28601a63175c",
+      "receipt": {
+        "reason": "model_rejected_before_compiler",
+        "status": "not_run"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:ab0f7fc0ae09765f299ce21de8f55f8ff119bd667a66dbd3eed5daeb029ea658",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "9d82222aa18e23dec2b53df99fe2312ced93400dd71207fe6b5438e2a5922fa2",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (154ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "4e9ce0c0a4092c41d3cd15c71ddf8d0badece392c90d6a4228af099b69834f09",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:12469b647e692c7f4ae3d49a3f7d9528255b4c6d898cb3575eef52b8661b2987",
+      "receipt": {
+        "reason": "model_rejected_before_compiler",
+        "status": "not_run"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:d5b167f28f485e26392609beedfe4445738b5b00bc4edb64a7e421049d6e0eea",
+      "receipt": {
+        "reason": "model_rejected_before_compiler",
+        "status": "not_run"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:c864c2eb77333ca4dc6c7ea02695b9f05a6ec95da2f7d08b177c19902b597cf4",
+      "receipt": {
+        "reason": "model_rejected_before_compiler",
+        "status": "not_run"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:9be8f04001aee5ef0ce7783185ec147902d03c87d69604f84a1065ac7303d44f",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "93d07daebe6118a93a98d0cb5165e8b966d7c8e98e2357a4dfc70782bb493ef6",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (151ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "97cba1a83fe15dba50fd1ba74a59319c155e68abcd88829dd99fa9f9d259e5cb",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:fef416df38ef395ae6a259ecc7d98229f64684cd564028d5a63b9a456dd81950",
+      "receipt": {
+        "reason": "model_rejected_before_compiler",
+        "status": "not_run"
+      }
+    },
+    {
+      "category": "prior_real_source_regression",
+      "id": "intent-unit:62d040d6b7c8959e77c13a10360c49573222f9cedf7c6c0d06457295f36b115a",
+      "receipt": {
+        "actual_guard_truth_checked": false,
+        "backend_executed": true,
+        "backend_status": "passed",
+        "claim_proved": false,
+        "command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lake",
+          "build",
+          "TypedSlotFixture"
+        ],
+        "execution_authority": false,
+        "existence_asserted": false,
+        "facts_asserted": false,
+        "fixture_sha256": "c1ba523629fbcdd6f52d1f95a63f19bb335ec856d91a20b24cc86186eb6ca9c7",
+        "lean_source_sha256": "6dbbced6310c3f53e436415376d3193d4062dbb24121837f6b72ea41fa84a9a7",
+        "observations": [
+          {
+            "returncode": 0,
+            "stderr": "info: typed_slot_fixture: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\n",
+            "stdout": "\u2714 [2/3] Built TypedSlotFixture (151ms)\nBuild completed successfully (3 jobs).\n",
+            "timed_out": false
+          }
+        ],
+        "other_family_backends_executed": false,
+        "projection_sha256": "3b631878188130052987b01143ccf699ab2fee1ccba93d7a53e94963ecf3513b",
+        "proof_authority": false,
+        "schema": "intent-rich-logic-lake/v1",
+        "source_semantics_verified": false,
+        "status": "passed",
+        "syntax_verified": true,
+        "toolchain": "leanprover/lean4:v4.34.1",
+        "validated_scope": "parameterized_rich_formula_syntax_only"
+      }
+    }
+  ],
+  "new_holdouts_weak_authored_not_blind": true,
+  "pins": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/frozen-evaluation.json",
+      "sha256": "f8b479930b0c21304e74320a28c005a5cd2b6e89d5cfd31e0209ee5687580c2d"
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/model/candidate.json",
+      "sha256": "9cf4da607d6fdb48400409e6618fcfe3246d0673e180696879b5601d1a889eec"
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/evaluate.py",
+      "sha256": "1371f2e344ff81d7fb0ea9f55b5b9faa20e169a6859ce3c1d2111833db7cc692"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/rich_aligned_decoder.py",
+      "sha256": "61c6d5c0453a69a0f50237b960c3bccf87f1c5836a212c002f4a621242a6d6cf"
+    }
+  ],
+  "profile": "child",
+  "provider_calls": 0,
+  "schema": "intent-alignment-matched-evaluation/v2",
+  "source_labels_used_as_neural_inputs": false,
+  "timing_is_isolated_latency_benchmark": false
+}

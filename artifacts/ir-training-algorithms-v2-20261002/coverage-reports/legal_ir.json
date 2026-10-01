@@ -1,0 +1,1760 @@
+{
+  "all_logic_families_supported": false,
+  "all_requested_families_available": false,
+  "base_report_sha256": "b701f52e6432753ec696c75d38398334f10263b3786b97434462173e09da1d5f",
+  "base_source_digest": "12f2a589564ebcb5643a295647b8af039ce6ec854e5eb8680ccd46c60ed1a304",
+  "derived_native_models": [],
+  "domain_id": "legal_ir",
+  "download_calls": 0,
+  "execution_authority": false,
+  "external_backend_calls": 0,
+  "family_inventory": [
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "agency",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "published_extension_v3",
+      "requested": true,
+      "requires": "explicit agents, actions, choices, and agency semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "argumentation",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit arguments, attacks, and extension semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "source_bound_native_model_route",
+      "family_id": "authorization",
+      "frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+      "projection_adapter_available": true,
+      "ready_for_training": true,
+      "ready_target_count": 1,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "principals, permissions, delegation, and authorization policy",
+      "status": "targets_available",
+      "target_count": 1
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "bdi",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "published_extension_v3",
+      "requested": true,
+      "requires": "separate belief, desire, intention and update declarations",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "concurrency",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "shared state, interference, scheduling and synchronization model",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "cryptographic_protocol",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "protocol roles, primitives, adversary and security claims",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "datalog",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "range-restricted facts/rules and closed rule semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "dcec",
+      "frontier": "existing_modal_and_legal_bridge_views_require_separate_typed_source_adapter",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "typed agents, modal/event scope and any required time premises",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "defeasible_logic",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "rules, exceptions, priority and conflict resolution semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "native_projection_route",
+      "family_id": "deontic",
+      "frontier": "typed_input_and_successful_native_projection_required",
+      "projection_adapter_available": true,
+      "ready_for_training": true,
+      "ready_target_count": 1,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit normative modality, argument order, conditions and exceptions",
+      "status": "targets_available",
+      "target_count": 1
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "dependent_type",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "dependent types, terms and an explicit kernel encoding",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "description_logic",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "ontology concepts, roles and a declared description-logic fragment",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "doxastic",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit beliefs and belief-accessibility semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "epistemic",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit knowledge and epistemic-accessibility semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "epistemic_temporal",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "published_extension_v3",
+      "requested": true,
+      "requires": "joint epistemic accessibility and temporal model",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "native_projection_route",
+      "family_id": "event_calculus",
+      "frontier": "typed_input_and_successful_native_projection_required",
+      "projection_adapter_available": true,
+      "ready_for_training": true,
+      "ready_target_count": 1,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "events, fluents, occurrence times and initiation/termination rules",
+      "status": "targets_available",
+      "target_count": 1
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "finite_field_constraint",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "field modulus, typed variables and arithmetic constraints",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "first_order",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "typed predicates, ordered arguments and explicit quantifier scope",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "native_projection_route",
+      "family_id": "frame_logic",
+      "frontier": "typed_input_and_successful_native_projection_required",
+      "projection_adapter_available": true,
+      "ready_for_training": true,
+      "ready_target_count": 1,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "object identities, slots, classes and structural relationships",
+      "status": "targets_available",
+      "target_count": 1
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "fuzzy_weighted",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit grades, combination operators and calibrated semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "higher_order",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "typed terms and explicit parameterization/kernel encoding",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "horn_chc",
+      "frontier": "no_reviewed_domain_to_Horn_CHC_adapter_authorization_profile_is_not_Horn",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "Horn clauses, typed constraints and relation signatures",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "hyperproperty",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "multiple traces, trace quantifiers and relational policies",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "intention_agency",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit intended action declarations; not beliefs or observations",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "linear_logic",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "published_extension_v3",
+      "requested": true,
+      "requires": "resources and linear consumption/production semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "modal",
+      "frontier": "existing_modal_and_legal_bridge_views_require_separate_typed_source_adapter",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "declared modal operators and accessibility/frame assumptions",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "mu_calculus",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "transition model and scoped least/greatest fixed points",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "nonmonotonic_logic",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit defaults, negation and consequence semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "probabilistic",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit probability model; model confidence is not probability of truth",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "process_calculus",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "published_extension_v3",
+      "requested": true,
+      "requires": "processes, communication channels and operational semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "program",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "typed program/control-flow/contracts with source binding",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "propositional",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "closed proposition vocabulary and Boolean structure",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "refinement",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "typed source/target models and explicit refinement relation",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "domain_related_explicit_model",
+      "family_id": "relevance_paraconsistent",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "declared relevance/inconsistency-tolerant consequence relation",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "separation_logic",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "typed heap, ownership and frame/resource semantics",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "session_process",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "participants, message types and session ordering",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "situation_calculus",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "actions, situations and successor-state axioms",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "native_projection_route",
+      "family_id": "tdfol",
+      "frontier": "typed_input_and_successful_native_projection_required",
+      "projection_adapter_available": true,
+      "ready_for_training": true,
+      "ready_target_count": 1,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "explicit deontic/temporal scope and first-order arguments",
+      "status": "targets_available",
+      "target_count": 1
+    },
+    {
+      "applicability": "source_bound_native_model_route",
+      "family_id": "temporal",
+      "frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+      "projection_adapter_available": true,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "time/trace semantics and explicit temporal properties",
+      "status": "unsupported",
+      "target_count": 0
+    },
+    {
+      "applicability": "specialized_explicit_model",
+      "family_id": "transition_system",
+      "frontier": "domain_training_adapter_not_implemented",
+      "projection_adapter_available": false,
+      "ready_for_training": false,
+      "ready_target_count": 0,
+      "registry_layer": "baseline_v2",
+      "requested": true,
+      "requires": "states, initial condition and explicit transition relation",
+      "status": "unsupported",
+      "target_count": 0
+    }
+  ],
+  "frontier": [
+    {
+      "family_id": "agency",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "explicit agents, actions, choices, and agency semantics"
+    },
+    {
+      "family_id": "argumentation",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "explicit arguments, attacks, and extension semantics"
+    },
+    {
+      "family_id": "bdi",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "separate belief, desire, intention and update declarations"
+    },
+    {
+      "family_id": "concurrency",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "shared state, interference, scheduling and synchronization model"
+    },
+    {
+      "family_id": "cryptographic_protocol",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "protocol roles, primitives, adversary and security claims"
+    },
+    {
+      "family_id": "datalog",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "range-restricted facts/rules and closed rule semantics"
+    },
+    {
+      "family_id": "dcec",
+      "reason": "existing_modal_and_legal_bridge_views_require_separate_typed_source_adapter",
+      "requires": "typed agents, modal/event scope and any required time premises"
+    },
+    {
+      "family_id": "defeasible_logic",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "rules, exceptions, priority and conflict resolution semantics"
+    },
+    {
+      "family_id": "dependent_type",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "dependent types, terms and an explicit kernel encoding"
+    },
+    {
+      "family_id": "description_logic",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "ontology concepts, roles and a declared description-logic fragment"
+    },
+    {
+      "family_id": "doxastic",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "explicit beliefs and belief-accessibility semantics"
+    },
+    {
+      "family_id": "epistemic",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "explicit knowledge and epistemic-accessibility semantics"
+    },
+    {
+      "family_id": "epistemic_temporal",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "joint epistemic accessibility and temporal model"
+    },
+    {
+      "family_id": "finite_field_constraint",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "field modulus, typed variables and arithmetic constraints"
+    },
+    {
+      "family_id": "first_order",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "typed predicates, ordered arguments and explicit quantifier scope"
+    },
+    {
+      "family_id": "fuzzy_weighted",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "explicit grades, combination operators and calibrated semantics"
+    },
+    {
+      "family_id": "higher_order",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "typed terms and explicit parameterization/kernel encoding"
+    },
+    {
+      "family_id": "horn_chc",
+      "reason": "no_reviewed_domain_to_Horn_CHC_adapter_authorization_profile_is_not_Horn",
+      "requires": "Horn clauses, typed constraints and relation signatures"
+    },
+    {
+      "family_id": "hyperproperty",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "multiple traces, trace quantifiers and relational policies"
+    },
+    {
+      "family_id": "intention_agency",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "explicit intended action declarations; not beliefs or observations"
+    },
+    {
+      "family_id": "linear_logic",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "resources and linear consumption/production semantics"
+    },
+    {
+      "family_id": "modal",
+      "reason": "existing_modal_and_legal_bridge_views_require_separate_typed_source_adapter",
+      "requires": "declared modal operators and accessibility/frame assumptions"
+    },
+    {
+      "family_id": "mu_calculus",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "transition model and scoped least/greatest fixed points"
+    },
+    {
+      "family_id": "nonmonotonic_logic",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "explicit defaults, negation and consequence semantics"
+    },
+    {
+      "family_id": "probabilistic",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "explicit probability model; model confidence is not probability of truth"
+    },
+    {
+      "family_id": "process_calculus",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "processes, communication channels and operational semantics"
+    },
+    {
+      "family_id": "program",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "typed program/control-flow/contracts with source binding"
+    },
+    {
+      "family_id": "propositional",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "closed proposition vocabulary and Boolean structure"
+    },
+    {
+      "family_id": "refinement",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "typed source/target models and explicit refinement relation"
+    },
+    {
+      "family_id": "relevance_paraconsistent",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "declared relevance/inconsistency-tolerant consequence relation"
+    },
+    {
+      "family_id": "separation_logic",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "typed heap, ownership and frame/resource semantics"
+    },
+    {
+      "family_id": "session_process",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "participants, message types and session ordering"
+    },
+    {
+      "family_id": "situation_calculus",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "actions, situations and successor-state axioms"
+    },
+    {
+      "family_id": "temporal",
+      "reason": "explicit_matching_native_model_or_supported_UI_declaration_required",
+      "requires": "time/trace semantics and explicit temporal properties"
+    },
+    {
+      "family_id": "transition_system",
+      "reason": "domain_training_adapter_not_implemented",
+      "requires": "states, initial condition and explicit transition relation"
+    }
+  ],
+  "native_envelope_observations": [],
+  "producer_pins": {
+    "ipfs_datasets_py.logic.bridge.multiview": "089adb25bc018e9bddf41af3be05ca7036f13ec2e9bb792fd8b78845e82fe2aa",
+    "ipfs_datasets_py.logic.bridge.types": "713160f546ee4e0c28a77b23b6f3c6264d8e5cdd7bb12535b5e28a271464591c",
+    "ipfs_datasets_py.logic.families.canonical_catalog": "348639b3dd82d6382da85ad039c5c675e083400c50ad28cb20b8ada5e54a43ba",
+    "ipfs_datasets_py.logic.families.registry": "669c4d90dbbac1014bd3dced401027be0391d304477b904f9da04d5a2d6c0450",
+    "ipfs_datasets_py.logic.formalization.autoencoder.family_training": "e42e5314a59966ade1163e062817484357feb97e86158e21360ad39fa1558e64",
+    "ipfs_datasets_py.logic.formalization.autoencoder.family_training_v2": "c5b66780a5ed5b5247f3de1467d34ed17cba89bf250e9b2490218fe9e71f2e02",
+    "ipfs_datasets_py.logic.integration.reasoning.legal_ir_contract_telemetry": "f7d4200c27298cec4755caf8d8b9f1f9383d84d83bda8e7d2d474949ec952eb4",
+    "ipfs_datasets_py.logic.integration.reasoning.legal_ir_view_contracts": "086997b67133df2437435b417324b11ede49b503ca92f5af6c67146c765fd875",
+    "ipfs_datasets_py.logic.ir_core.canonical": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0",
+    "ipfs_datasets_py.logic.ir_core.claims": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b",
+    "ipfs_datasets_py.logic.ir_core.identity": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e",
+    "ipfs_datasets_py.logic.ir_core.provenance": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe",
+    "ipfs_datasets_py.logic.legal_ir.canonical_contracts": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+    "ipfs_datasets_py.logic.legal_ir.typed_adapter": "80204883247be10831b6d2c3f831336a80bab2a00f427f6dc35f363edd96fbb2",
+    "ipfs_datasets_py.logic.security_ir.code_logic_projection": "e6328d747d54f26835b8da24c87a9a80eff6951bdc936c87243307574a85788b",
+    "ipfs_datasets_py.logic.software_verification.authorization": "78f04e9231f9d04d98ab3597e52e8bb8c49d63047544657d33491b161effeeb7",
+    "ipfs_datasets_py.logic.software_verification.syntax_bridge": "cc46f305dede1cadb358a524f30dbb894b84ab062f0c083c3138c7e43f271116",
+    "ipfs_datasets_py.logic.syntax_core.ast": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4",
+    "ipfs_datasets_py.logic.syntax_core.contracts": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8",
+    "ipfs_datasets_py.logic.syntax_core.extensions": "4842bef325044b0bce9f14958d385864ba8d34273bc48618188f451f6832edf9",
+    "ipfs_datasets_py.logic.syntax_core.signatures": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+  },
+  "projections": [
+    {
+      "all_logic_families_supported": false,
+      "execution_authority": false,
+      "logic_family": "authorization",
+      "payload": {
+        "bridge": {
+          "bridge_version": "1.0.0",
+          "diagnostics": [],
+          "domain_identity": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+          "expression": {
+            "content_digest": "8aa0edc877710f360da707a5ff6746672710580a60be7e5f7d1a6d0dceba85db",
+            "expression_id": "expr:sv:authorization:bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+            "family": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "family",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "authorization",
+              "version": "1.0.0"
+            },
+            "interface": "TypedExpression@1",
+            "metadata": {
+              "bridge": "SoftwareVerificationSyntaxBridge@1",
+              "domain_identity": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+              "kind": "authorization",
+              "source_identities": [
+                "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+              ],
+              "view_role": ""
+            },
+            "profile": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "profile",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "datalog",
+              "version": "1.0.0"
+            },
+            "root": {
+              "arguments": [],
+              "binders": [],
+              "extension": {
+                "children": [],
+                "family": {
+                  "interface": "LogicIdentityNamespaces@1",
+                  "namespace": "family",
+                  "schema_version": "logic-identity-namespaces/v1",
+                  "value": "authorization",
+                  "version": "1.0.0"
+                },
+                "features": [
+                  "authorization.policy",
+                  "software_verification.authorization"
+                ],
+                "interface": "LogicExtensionNode@1",
+                "metadata": {},
+                "node_id": "node:sv:authorization:bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny:ext",
+                "payload": {
+                  "bridge_interface": "SoftwareVerificationSyntaxBridge@1",
+                  "bridge_version": "1.0.0",
+                  "document": {
+                    "bounds": {
+                      "max_delegation_depth": 64,
+                      "max_derivation_depth": 1024,
+                      "max_facts": 100000,
+                      "max_rules": 10000,
+                      "max_stratum": 255,
+                      "schema_version": "authorization-bounds/v1",
+                      "universe_size": null
+                    },
+                    "constraints": [],
+                    "decisions": [],
+                    "delegations": [],
+                    "document_id": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+                    "explanations": [],
+                    "facts": [
+                      {
+                        "atom": {
+                          "arguments": [
+                            {
+                              "kind": "constant",
+                              "sort": "principal",
+                              "value": "principal:owner"
+                            }
+                          ],
+                          "polarity": "positive",
+                          "predicate_id": "predicate:read"
+                        },
+                        "attributes": {},
+                        "fact_id": "fact:read",
+                        "issuer_principal_id": "",
+                        "schema_version": "authorization-fact/v1",
+                        "source_ref_ids": [
+                          "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                        ],
+                        "span_ids": []
+                      }
+                    ],
+                    "interface": "AuthorizationIR@1",
+                    "metadata": {},
+                    "observations": {},
+                    "precedence": {
+                      "resolution": "deny_overrides",
+                      "schema_version": "authorization-precedence/v1",
+                      "statement": "When allow and deny evidence co-exist, deny overrides unless the resolution policy says otherwise."
+                    },
+                    "predicates": [
+                      {
+                        "argument_sorts": [
+                          "principal"
+                        ],
+                        "arity": 1,
+                        "is_intensional": false,
+                        "name": "can_read",
+                        "predicate_id": "predicate:read",
+                        "schema_version": "authorization-predicate/v1",
+                        "source_ref_ids": [
+                          "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                        ],
+                        "span_ids": []
+                      }
+                    ],
+                    "principals": [
+                      {
+                        "attributes": {},
+                        "kind": "agent",
+                        "name": "Owner",
+                        "principal_id": "principal:owner",
+                        "schema_version": "authorization-principal/v1",
+                        "source_ref_ids": [
+                          "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                        ],
+                        "span_ids": []
+                      }
+                    ],
+                    "queries": [],
+                    "roles": [],
+                    "rules": [],
+                    "schema_version": "authorization-ir/v1",
+                    "sources": [
+                      {
+                        "container_sha256": "",
+                        "container_uri": "",
+                        "content_cid": "",
+                        "content_sha256": "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                        "license_expression": "",
+                        "metadata": {},
+                        "ref_id": "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                        "review_status": "unreviewed",
+                        "source_id": "native_legal_bridge_source",
+                        "source_revision": "domain-family-training/v2",
+                        "source_uri": "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                      }
+                    ],
+                    "spans": [],
+                    "speaks_for": [],
+                    "trust_root_principal_ids": [
+                      "principal:owner"
+                    ]
+                  },
+                  "domain_identity": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+                  "domain_schema": "authorization-ir/v1",
+                  "kind": "authorization",
+                  "schema_version": "authorization.ir/v1",
+                  "source_identities": [
+                    "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                    "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                    "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                  ],
+                  "view_role": ""
+                },
+                "payload_schema": "authorization.ir/v1",
+                "profile": {
+                  "interface": "LogicIdentityNamespaces@1",
+                  "namespace": "profile",
+                  "schema_version": "logic-identity-namespaces/v1",
+                  "value": "datalog",
+                  "version": "1.0.0"
+                },
+                "schema_version": "syntax-logic-extension-node/v1"
+              },
+              "kind": "extension",
+              "metadata": {},
+              "node_id": "node:sv:authorization:bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+              "schema_version": "syntax-logic-node/v1",
+              "sort": {
+                "arguments": [],
+                "kind": "bool",
+                "name": "Bool",
+                "schema_version": "syntax-logic-sort/v1"
+              },
+              "symbol": ""
+            },
+            "schema_version": "syntax-typed-expression/v1",
+            "signature": {
+              "family": {
+                "interface": "LogicIdentityNamespaces@1",
+                "namespace": "family",
+                "schema_version": "logic-identity-namespaces/v1",
+                "value": "authorization",
+                "version": "1.0.0"
+              },
+              "features": [
+                "authorization.policy",
+                "software_verification.authorization"
+              ],
+              "interface": "LogicSignature@1",
+              "metadata": {
+                "bridge": "SoftwareVerificationSyntaxBridge@1",
+                "domain": "software_verification",
+                "kind": "authorization"
+              },
+              "profile": {
+                "interface": "LogicIdentityNamespaces@1",
+                "namespace": "profile",
+                "schema_version": "logic-identity-namespaces/v1",
+                "value": "datalog",
+                "version": "1.0.0"
+              },
+              "schema_version": "syntax-logic-signature/v1",
+              "signature_id": "sig:sv:authorization",
+              "sorts": [
+                {
+                  "arguments": [],
+                  "kind": "bool",
+                  "name": "Bool",
+                  "schema_version": "syntax-logic-sort/v1"
+                }
+              ],
+              "symbols": []
+            }
+          },
+          "has_document": true,
+          "interface": "SoftwareVerificationSyntaxBridge@1",
+          "kind": "authorization",
+          "losses": [],
+          "preservation": "exact",
+          "route": {
+            "domain_schema": "authorization-ir/v1",
+            "family_id": "authorization",
+            "features": [
+              "software_verification.authorization",
+              "authorization.policy"
+            ],
+            "kind": "authorization",
+            "notes": "",
+            "payload_schema": "authorization.ir/v1",
+            "profile_id": "datalog",
+            "schema": "software-verification.syntax-bridge-route/v1",
+            "view_role": ""
+          },
+          "schema": "software-verification.syntax-bridge-result/v1",
+          "source_identities": [
+            "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+            "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+            "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+          ],
+          "status": "ok",
+          "unsupported": []
+        },
+        "native_document": {
+          "bounds": {
+            "max_delegation_depth": 64,
+            "max_derivation_depth": 1024,
+            "max_facts": 100000,
+            "max_rules": 10000,
+            "max_stratum": 255,
+            "schema_version": "authorization-bounds/v1",
+            "universe_size": null
+          },
+          "constraints": [],
+          "decisions": [],
+          "delegations": [],
+          "document_id": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+          "explanations": [],
+          "facts": [
+            {
+              "atom": {
+                "arguments": [
+                  {
+                    "kind": "constant",
+                    "sort": "principal",
+                    "value": "principal:owner"
+                  }
+                ],
+                "polarity": "positive",
+                "predicate_id": "predicate:read"
+              },
+              "attributes": {},
+              "fact_id": "fact:read",
+              "issuer_principal_id": "",
+              "schema_version": "authorization-fact/v1",
+              "source_ref_ids": [
+                "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+              ],
+              "span_ids": []
+            }
+          ],
+          "interface": "AuthorizationIR@1",
+          "metadata": {},
+          "observations": {},
+          "precedence": {
+            "resolution": "deny_overrides",
+            "schema_version": "authorization-precedence/v1",
+            "statement": "When allow and deny evidence co-exist, deny overrides unless the resolution policy says otherwise."
+          },
+          "predicates": [
+            {
+              "argument_sorts": [
+                "principal"
+              ],
+              "arity": 1,
+              "is_intensional": false,
+              "name": "can_read",
+              "predicate_id": "predicate:read",
+              "schema_version": "authorization-predicate/v1",
+              "source_ref_ids": [
+                "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+              ],
+              "span_ids": []
+            }
+          ],
+          "principals": [
+            {
+              "attributes": {},
+              "kind": "agent",
+              "name": "Owner",
+              "principal_id": "principal:owner",
+              "schema_version": "authorization-principal/v1",
+              "source_ref_ids": [
+                "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+              ],
+              "span_ids": []
+            }
+          ],
+          "queries": [],
+          "roles": [],
+          "rules": [],
+          "schema_version": "authorization-ir/v1",
+          "sources": [
+            {
+              "container_sha256": "",
+              "container_uri": "",
+              "content_cid": "",
+              "content_sha256": "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+              "license_expression": "",
+              "metadata": {},
+              "ref_id": "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+              "review_status": "unreviewed",
+              "source_id": "native_legal_bridge_source",
+              "source_revision": "domain-family-training/v2",
+              "source_uri": "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+            }
+          ],
+          "spans": [],
+          "speaks_for": [],
+          "trust_root_principal_ids": [
+            "principal:owner"
+          ]
+        },
+        "typed_expression": {
+          "content_digest": "8aa0edc877710f360da707a5ff6746672710580a60be7e5f7d1a6d0dceba85db",
+          "expression_id": "expr:sv:authorization:bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+          "family": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "family",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "authorization",
+            "version": "1.0.0"
+          },
+          "interface": "TypedExpression@1",
+          "metadata": {
+            "bridge": "SoftwareVerificationSyntaxBridge@1",
+            "domain_identity": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+            "kind": "authorization",
+            "source_identities": [
+              "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+              "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+              "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+            ],
+            "view_role": ""
+          },
+          "profile": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "profile",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "datalog",
+            "version": "1.0.0"
+          },
+          "root": {
+            "arguments": [],
+            "binders": [],
+            "extension": {
+              "children": [],
+              "family": {
+                "interface": "LogicIdentityNamespaces@1",
+                "namespace": "family",
+                "schema_version": "logic-identity-namespaces/v1",
+                "value": "authorization",
+                "version": "1.0.0"
+              },
+              "features": [
+                "authorization.policy",
+                "software_verification.authorization"
+              ],
+              "interface": "LogicExtensionNode@1",
+              "metadata": {},
+              "node_id": "node:sv:authorization:bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny:ext",
+              "payload": {
+                "bridge_interface": "SoftwareVerificationSyntaxBridge@1",
+                "bridge_version": "1.0.0",
+                "document": {
+                  "bounds": {
+                    "max_delegation_depth": 64,
+                    "max_derivation_depth": 1024,
+                    "max_facts": 100000,
+                    "max_rules": 10000,
+                    "max_stratum": 255,
+                    "schema_version": "authorization-bounds/v1",
+                    "universe_size": null
+                  },
+                  "constraints": [],
+                  "decisions": [],
+                  "delegations": [],
+                  "document_id": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+                  "explanations": [],
+                  "facts": [
+                    {
+                      "atom": {
+                        "arguments": [
+                          {
+                            "kind": "constant",
+                            "sort": "principal",
+                            "value": "principal:owner"
+                          }
+                        ],
+                        "polarity": "positive",
+                        "predicate_id": "predicate:read"
+                      },
+                      "attributes": {},
+                      "fact_id": "fact:read",
+                      "issuer_principal_id": "",
+                      "schema_version": "authorization-fact/v1",
+                      "source_ref_ids": [
+                        "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                      ],
+                      "span_ids": []
+                    }
+                  ],
+                  "interface": "AuthorizationIR@1",
+                  "metadata": {},
+                  "observations": {},
+                  "precedence": {
+                    "resolution": "deny_overrides",
+                    "schema_version": "authorization-precedence/v1",
+                    "statement": "When allow and deny evidence co-exist, deny overrides unless the resolution policy says otherwise."
+                  },
+                  "predicates": [
+                    {
+                      "argument_sorts": [
+                        "principal"
+                      ],
+                      "arity": 1,
+                      "is_intensional": false,
+                      "name": "can_read",
+                      "predicate_id": "predicate:read",
+                      "schema_version": "authorization-predicate/v1",
+                      "source_ref_ids": [
+                        "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                      ],
+                      "span_ids": []
+                    }
+                  ],
+                  "principals": [
+                    {
+                      "attributes": {},
+                      "kind": "agent",
+                      "name": "Owner",
+                      "principal_id": "principal:owner",
+                      "schema_version": "authorization-principal/v1",
+                      "source_ref_ids": [
+                        "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                      ],
+                      "span_ids": []
+                    }
+                  ],
+                  "queries": [],
+                  "roles": [],
+                  "rules": [],
+                  "schema_version": "authorization-ir/v1",
+                  "sources": [
+                    {
+                      "container_sha256": "",
+                      "container_uri": "",
+                      "content_cid": "",
+                      "content_sha256": "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                      "license_expression": "",
+                      "metadata": {},
+                      "ref_id": "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                      "review_status": "unreviewed",
+                      "source_id": "native_legal_bridge_source",
+                      "source_revision": "domain-family-training/v2",
+                      "source_uri": "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                    }
+                  ],
+                  "spans": [],
+                  "speaks_for": [],
+                  "trust_root_principal_ids": [
+                    "principal:owner"
+                  ]
+                },
+                "domain_identity": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+                "domain_schema": "authorization-ir/v1",
+                "kind": "authorization",
+                "schema_version": "authorization.ir/v1",
+                "source_identities": [
+                  "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                  "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+                  "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+                ],
+                "view_role": ""
+              },
+              "payload_schema": "authorization.ir/v1",
+              "profile": {
+                "interface": "LogicIdentityNamespaces@1",
+                "namespace": "profile",
+                "schema_version": "logic-identity-namespaces/v1",
+                "value": "datalog",
+                "version": "1.0.0"
+              },
+              "schema_version": "syntax-logic-extension-node/v1"
+            },
+            "kind": "extension",
+            "metadata": {},
+            "node_id": "node:sv:authorization:bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+            "schema_version": "syntax-logic-node/v1",
+            "sort": {
+              "arguments": [],
+              "kind": "bool",
+              "name": "Bool",
+              "schema_version": "syntax-logic-sort/v1"
+            },
+            "symbol": ""
+          },
+          "schema_version": "syntax-typed-expression/v1",
+          "signature": {
+            "family": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "family",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "authorization",
+              "version": "1.0.0"
+            },
+            "features": [
+              "authorization.policy",
+              "software_verification.authorization"
+            ],
+            "interface": "LogicSignature@1",
+            "metadata": {
+              "bridge": "SoftwareVerificationSyntaxBridge@1",
+              "domain": "software_verification",
+              "kind": "authorization"
+            },
+            "profile": {
+              "interface": "LogicIdentityNamespaces@1",
+              "namespace": "profile",
+              "schema_version": "logic-identity-namespaces/v1",
+              "value": "datalog",
+              "version": "1.0.0"
+            },
+            "schema_version": "syntax-logic-signature/v1",
+            "signature_id": "sig:sv:authorization",
+            "sorts": [
+              {
+                "arguments": [],
+                "kind": "bool",
+                "name": "Bool",
+                "schema_version": "syntax-logic-sort/v1"
+              }
+            ],
+            "symbols": []
+          }
+        }
+      },
+      "producer_id": "ipfs_datasets_py.logic.software_verification.syntax_bridge",
+      "profile": "datalog",
+      "projection_id": "legal_ir/supplemental/authorization/v2",
+      "proof_authority": false,
+      "qualification_gaps": [
+        "source_model_fidelity_not_verified",
+        "external_proofs_not_run"
+      ],
+      "ready_for_training": true,
+      "representation_kind": "native_typed_projection",
+      "source_decoder_trained": false,
+      "source_digest": "4a905c352a31e4b7b82879aafd21a7880f55b10b2413b761bc2eef26e5c4d1ea",
+      "source_semantics_verified": false,
+      "target_sha256": "3e7859b200ba58cc34bf2ad58ab5a487c8490d12f31f075adec96560c974a329",
+      "validation": [
+        {
+          "details": {
+            "domain_identity": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+            "exact": true,
+            "source_model_fidelity_verified": false
+          },
+          "stage": "target",
+          "status": "passed",
+          "validator_id": "SoftwareVerificationSyntaxBridge.round_trip"
+        }
+      ]
+    },
+    {
+      "all_logic_families_supported": false,
+      "execution_authority": false,
+      "logic_family": "deontic",
+      "payload": [
+        {
+          "action": "disclose",
+          "actor": "agency",
+          "conditions": [
+            "condition:7914c1a3764a6a4189bb"
+          ],
+          "exceptions": [
+            "exception:d774797d4f9332a6ba53"
+          ],
+          "formula_id": "formula-bridge-1",
+          "norm_type": "prohibition",
+          "object": "record",
+          "operator": "F",
+          "polarity": "negative",
+          "provenance_ids": [
+            "prov:bridge-1"
+          ]
+        }
+      ],
+      "producer_id": "ipfs_datasets_py.logic.integration.reasoning.legal_ir_contract_telemetry",
+      "profile": null,
+      "projection_id": "legal-ir/bridge-view/deontic/v1",
+      "proof_authority": false,
+      "qualification_gaps": [
+        "supplied_native_bridge_artifact_not_independently_executed_here",
+        "native_structural_contract_view",
+        "source_meaning_not_verified",
+        "backend_proof_receipts_not_promoted",
+        "metadata_overrides_excluded",
+        "CEC_lifecycle_view_uses_existing_bridge_projection_not_new_source_semantic_inference"
+      ],
+      "ready_for_training": true,
+      "representation_kind": "domain_structured_formula",
+      "source_decoder_trained": false,
+      "source_digest": "4a905c352a31e4b7b82879aafd21a7880f55b10b2413b761bc2eef26e5c4d1ea",
+      "source_semantics_verified": false,
+      "target_sha256": "9a6da4e2c442d6ea63c16f8d62553326335a3ee314590dc00c58ef4c51fd021e",
+      "validation": [
+        {
+          "details": {
+            "contract_id": "legal-ir-view/deontic/v1",
+            "issues": [],
+            "missing_required_fields": [],
+            "valid": true,
+            "view": "deontic"
+          },
+          "stage": "target",
+          "status": "passed",
+          "validator_id": "LEGAL_IR_VIEW_CONTRACTS:deontic"
+        }
+      ]
+    },
+    {
+      "all_logic_families_supported": false,
+      "execution_authority": false,
+      "logic_family": "event_calculus",
+      "payload": [
+        {
+          "events": [
+            {
+              "id": "event:notice",
+              "type": "notice"
+            }
+          ],
+          "fluents": [
+            {
+              "id": "fluent:notice",
+              "type": "notice_state"
+            }
+          ],
+          "formula_id": "prov:bridge-1:cec",
+          "lifecycle_transitions": [
+            {
+              "effect": "initiates",
+              "event_id": "event:notice",
+              "fluent_id": "fluent:notice"
+            }
+          ],
+          "provenance_ids": [
+            "prov:bridge-1"
+          ]
+        }
+      ],
+      "producer_id": "ipfs_datasets_py.logic.integration.reasoning.legal_ir_contract_telemetry",
+      "profile": null,
+      "projection_id": "legal-ir/bridge-view/cec/v1",
+      "proof_authority": false,
+      "qualification_gaps": [
+        "supplied_native_bridge_artifact_not_independently_executed_here",
+        "native_structural_contract_view",
+        "source_meaning_not_verified",
+        "backend_proof_receipts_not_promoted",
+        "metadata_overrides_excluded",
+        "CEC_lifecycle_view_uses_existing_bridge_projection_not_new_source_semantic_inference"
+      ],
+      "ready_for_training": true,
+      "representation_kind": "domain_structured_formula",
+      "source_decoder_trained": false,
+      "source_digest": "4a905c352a31e4b7b82879aafd21a7880f55b10b2413b761bc2eef26e5c4d1ea",
+      "source_semantics_verified": false,
+      "target_sha256": "368d3ec66990f807f8512daedeab36858467df2e32b3a3822af56100d14081f8",
+      "validation": [
+        {
+          "details": {
+            "contract_id": "legal-ir-view/cec/v1",
+            "issues": [],
+            "missing_required_fields": [],
+            "valid": true,
+            "view": "cec"
+          },
+          "stage": "target",
+          "status": "passed",
+          "validator_id": "LEGAL_IR_VIEW_CONTRACTS:cec"
+        }
+      ]
+    },
+    {
+      "all_logic_families_supported": false,
+      "execution_authority": false,
+      "logic_family": "frame_logic",
+      "payload": [
+        {
+          "formula_id": "formula-bridge-1",
+          "frame_id": "native:deontic_norms",
+          "object": "record",
+          "predicate": "prohibits",
+          "provenance_ids": [
+            "prov:bridge-1"
+          ],
+          "role": "prohibits",
+          "subject": "prov:bridge-1"
+        }
+      ],
+      "producer_id": "ipfs_datasets_py.logic.integration.reasoning.legal_ir_contract_telemetry",
+      "profile": null,
+      "projection_id": "legal-ir/bridge-view/frame_logic/v1",
+      "proof_authority": false,
+      "qualification_gaps": [
+        "supplied_native_bridge_artifact_not_independently_executed_here",
+        "native_structural_contract_view",
+        "source_meaning_not_verified",
+        "backend_proof_receipts_not_promoted",
+        "metadata_overrides_excluded",
+        "CEC_lifecycle_view_uses_existing_bridge_projection_not_new_source_semantic_inference"
+      ],
+      "ready_for_training": true,
+      "representation_kind": "domain_structured_formula",
+      "source_decoder_trained": false,
+      "source_digest": "4a905c352a31e4b7b82879aafd21a7880f55b10b2413b761bc2eef26e5c4d1ea",
+      "source_semantics_verified": false,
+      "target_sha256": "199469599df297fdbe95f6484a9da705092a8058f4320b4eb8af7e4ef09adcf6",
+      "validation": [
+        {
+          "details": {
+            "contract_id": "legal-ir-view/frame-logic/v1",
+            "issues": [],
+            "missing_required_fields": [],
+            "valid": true,
+            "view": "frame_logic"
+          },
+          "stage": "target",
+          "status": "passed",
+          "validator_id": "LEGAL_IR_VIEW_CONTRACTS:frame_logic"
+        }
+      ]
+    },
+    {
+      "all_logic_families_supported": false,
+      "execution_authority": false,
+      "logic_family": "tdfol",
+      "payload": [
+        {
+          "expression": "forall x. notice(x)",
+          "formula_id": "prov:bridge-1:tdfol",
+          "provenance_ids": [
+            "prov:bridge-1"
+          ],
+          "quantifiers": [
+            "forall"
+          ],
+          "temporal_anchors": [
+            "event:notice"
+          ]
+        }
+      ],
+      "producer_id": "ipfs_datasets_py.logic.integration.reasoning.legal_ir_contract_telemetry",
+      "profile": "temporal_first_order",
+      "projection_id": "legal-ir/bridge-view/tdfol/v1",
+      "proof_authority": false,
+      "qualification_gaps": [
+        "supplied_native_bridge_artifact_not_independently_executed_here",
+        "native_structural_contract_view",
+        "source_meaning_not_verified",
+        "backend_proof_receipts_not_promoted",
+        "metadata_overrides_excluded",
+        "CEC_lifecycle_view_uses_existing_bridge_projection_not_new_source_semantic_inference"
+      ],
+      "ready_for_training": true,
+      "representation_kind": "domain_structured_formula",
+      "source_decoder_trained": false,
+      "source_digest": "4a905c352a31e4b7b82879aafd21a7880f55b10b2413b761bc2eef26e5c4d1ea",
+      "source_semantics_verified": false,
+      "target_sha256": "bbf8ee7f1e81d6dca3b4fea1cf9abc6b23513874b814b436135798430723f2c7",
+      "validation": [
+        {
+          "details": {
+            "contract_id": "legal-ir-view/tdfol/v1",
+            "issues": [],
+            "missing_required_fields": [],
+            "valid": true,
+            "view": "tdfol"
+          },
+          "stage": "target",
+          "status": "passed",
+          "validator_id": "LEGAL_IR_VIEW_CONTRACTS:tdfol"
+        }
+      ]
+    }
+  ],
+  "proof_authority": false,
+  "provider_calls": 0,
+  "qualification_gaps": [],
+  "ready_for_training": true,
+  "report_sha256": "ce9e13e349bb3188123b5168be607fa428e8ae94d0124161b53f98381645a988",
+  "requested_families": [
+    "agency",
+    "argumentation",
+    "authorization",
+    "bdi",
+    "concurrency",
+    "cryptographic_protocol",
+    "datalog",
+    "dcec",
+    "defeasible_logic",
+    "deontic",
+    "dependent_type",
+    "description_logic",
+    "doxastic",
+    "epistemic",
+    "epistemic_temporal",
+    "event_calculus",
+    "finite_field_constraint",
+    "first_order",
+    "frame_logic",
+    "fuzzy_weighted",
+    "higher_order",
+    "horn_chc",
+    "hyperproperty",
+    "intention_agency",
+    "linear_logic",
+    "modal",
+    "mu_calculus",
+    "nonmonotonic_logic",
+    "probabilistic",
+    "process_calculus",
+    "program",
+    "propositional",
+    "refinement",
+    "relevance_paraconsistent",
+    "separation_logic",
+    "session_process",
+    "situation_calculus",
+    "tdfol",
+    "temporal",
+    "transition_system"
+  ],
+  "schema": "domain-family-training-targets/v2",
+  "source_binding_scope": {
+    "basis": "native_legal_bridge_source",
+    "meaning_verified": false,
+    "source_ref": {
+      "container_sha256": "",
+      "container_uri": "",
+      "content_cid": "",
+      "content_sha256": "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+      "license_expression": "",
+      "metadata": {},
+      "ref_id": "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+      "review_status": "unreviewed",
+      "source_id": "native_legal_bridge_source",
+      "source_revision": "domain-family-training/v2",
+      "source_uri": "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+    }
+  },
+  "source_decoder_trained": false,
+  "source_digest": "4a905c352a31e4b7b82879aafd21a7880f55b10b2413b761bc2eef26e5c4d1ea",
+  "source_semantics_verified": false,
+  "source_sha256": null,
+  "supplemental_inputs": [
+    {
+      "document": {
+        "bounds": {
+          "max_delegation_depth": 64,
+          "max_derivation_depth": 1024,
+          "max_facts": 100000,
+          "max_rules": 10000,
+          "max_stratum": 255,
+          "schema_version": "authorization-bounds/v1",
+          "universe_size": null
+        },
+        "constraints": [],
+        "decisions": [],
+        "delegations": [],
+        "document_id": "bafkreieqzeq7p3j33k3u4hngttxn3siv65rfzqubp357esbifug6usi5ny",
+        "explanations": [],
+        "facts": [
+          {
+            "atom": {
+              "arguments": [
+                {
+                  "kind": "constant",
+                  "sort": "principal",
+                  "value": "principal:owner"
+                }
+              ],
+              "polarity": "positive",
+              "predicate_id": "predicate:read"
+            },
+            "attributes": {},
+            "fact_id": "fact:read",
+            "issuer_principal_id": "",
+            "schema_version": "authorization-fact/v1",
+            "source_ref_ids": [
+              "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+            ],
+            "span_ids": []
+          }
+        ],
+        "interface": "AuthorizationIR@1",
+        "metadata": {},
+        "observations": {},
+        "precedence": {
+          "resolution": "deny_overrides",
+          "schema_version": "authorization-precedence/v1",
+          "statement": "When allow and deny evidence co-exist, deny overrides unless the resolution policy says otherwise."
+        },
+        "predicates": [
+          {
+            "argument_sorts": [
+              "principal"
+            ],
+            "arity": 1,
+            "is_intensional": false,
+            "name": "can_read",
+            "predicate_id": "predicate:read",
+            "schema_version": "authorization-predicate/v1",
+            "source_ref_ids": [
+              "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+            ],
+            "span_ids": []
+          }
+        ],
+        "principals": [
+          {
+            "attributes": {},
+            "kind": "agent",
+            "name": "Owner",
+            "principal_id": "principal:owner",
+            "schema_version": "authorization-principal/v1",
+            "source_ref_ids": [
+              "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+            ],
+            "span_ids": []
+          }
+        ],
+        "queries": [],
+        "roles": [],
+        "rules": [],
+        "schema_version": "authorization-ir/v1",
+        "sources": [
+          {
+            "container_sha256": "",
+            "container_uri": "",
+            "content_cid": "",
+            "content_sha256": "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+            "license_expression": "",
+            "metadata": {},
+            "ref_id": "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+            "review_status": "unreviewed",
+            "source_id": "native_legal_bridge_source",
+            "source_revision": "domain-family-training/v2",
+            "source_uri": "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+          }
+        ],
+        "spans": [],
+        "speaks_for": [],
+        "trust_root_principal_ids": [
+          "principal:owner"
+        ]
+      },
+      "kind": "authorization",
+      "source_ref": {
+        "container_sha256": "",
+        "container_uri": "",
+        "content_cid": "",
+        "content_sha256": "0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+        "license_expression": "",
+        "metadata": {},
+        "ref_id": "source:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9",
+        "review_status": "unreviewed",
+        "source_id": "native_legal_bridge_source",
+        "source_revision": "domain-family-training/v2",
+        "source_uri": "urn:domain-family-training:legal_ir:0bf7885734ed5c81aed64be3ba52e7d496a2a28db418ca0cdc7b4e7d6e61c3c9"
+      }
+    }
+  ],
+  "training_executed": false,
+  "training_target_scope": "auxiliary_structural_IR_views_not_source_to_IR_supervision",
+  "typed_input_digest": "4a905c352a31e4b7b82879aafd21a7880f55b10b2413b761bc2eef26e5c4d1ea"
+}

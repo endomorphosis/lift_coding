@@ -1,0 +1,1371 @@
+{
+  "audit_download_calls": 0,
+  "audit_external_backend_calls": 0,
+  "audit_neural_calls": 0,
+  "audit_provider_calls": 0,
+  "baseline_family_count": 35,
+  "canonical_family_count": 40,
+  "domains": {
+    "intent_ir": {
+      "actual_authored_case": {
+        "exact_typed_source_replay": true,
+        "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-reports/intent_ir.json",
+        "ready_logic_families": [
+          "authorization",
+          "datalog",
+          "dcec",
+          "deontic",
+          "first_order",
+          "frame_logic",
+          "higher_order",
+          "horn_chc",
+          "program",
+          "tdfol",
+          "temporal",
+          "transition_system"
+        ],
+        "ready_projection_count": 16,
+        "sha256": "05e0288610872f949a18927e7a0ae3e5d6edc72fc7213518e84f9970348bd5ae"
+      },
+      "catalog_presence_is_readiness": false,
+      "family_inventory": [
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "agency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit agents, actions, choices, and agency semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "argumentation",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit arguments, attacks, and extension semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "authorization",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "principals, permissions, delegation, and authorization policy"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "bdi",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "separate belief, desire, intention and update declarations"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "concurrency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "shared state, interference, scheduling and synchronization model"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "cryptographic_protocol",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "protocol roles, primitives, adversary and security claims"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "datalog",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "range-restricted facts/rules and closed rule semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "dcec",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "typed agents, modal/event scope and any required time premises"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "defeasible_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "rules, exceptions, priority and conflict resolution semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "deontic",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "explicit normative modality, argument order, conditions and exceptions"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "dependent_type",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "dependent types, terms and an explicit kernel encoding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "description_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "ontology concepts, roles and a declared description-logic fragment"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "doxastic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit beliefs and belief-accessibility semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "epistemic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit knowledge and epistemic-accessibility semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "epistemic_temporal",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "joint epistemic accessibility and temporal model"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "event_calculus",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "events, fluents, occurrence times and initiation/termination rules"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "finite_field_constraint",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "field modulus, typed variables and arithmetic constraints"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "first_order",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "typed predicates, ordered arguments and explicit quantifier scope"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "frame_logic",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "object identities, slots, classes and structural relationships"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "fuzzy_weighted",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit grades, combination operators and calibrated semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "higher_order",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "typed terms and explicit parameterization/kernel encoding"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "horn_chc",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "Horn clauses, typed constraints and relation signatures"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "hyperproperty",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "multiple traces, trace quantifiers and relational policies"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "intention_agency",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "explicit intended action declarations; not beliefs or observations"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "linear_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "resources and linear consumption/production semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "modal",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "declared modal operators and accessibility/frame assumptions"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "mu_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "transition model and scoped least/greatest fixed points"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "nonmonotonic_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit defaults, negation and consequence semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "probabilistic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit probability model; model confidence is not probability of truth"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "process_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "processes, communication channels and operational semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "program",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "typed program/control-flow/contracts with source binding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "propositional",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "closed proposition vocabulary and Boolean structure"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "refinement",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "typed source/target models and explicit refinement relation"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "relevance_paraconsistent",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "declared relevance/inconsistency-tolerant consequence relation"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "separation_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed heap, ownership and frame/resource semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "session_process",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "participants, message types and session ordering"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "situation_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "actions, situations and successor-state axioms"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "tdfol",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "explicit deontic/temporal scope and first-order arguments"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "temporal",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "time/trace semantics and explicit temporal properties"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "transition_system",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "states, initial condition and explicit transition relation"
+        }
+      ],
+      "native_supplemental_routes": [
+        {
+          "kind": "authorization",
+          "logic_family": "authorization",
+          "profile": "datalog",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "trace",
+          "logic_family": "temporal",
+          "profile": "finite_trace",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        }
+      ]
+    },
+    "legal_ir": {
+      "actual_authored_case": {
+        "exact_typed_source_replay": true,
+        "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-reports/legal_ir.json",
+        "ready_logic_families": [
+          "authorization",
+          "deontic",
+          "event_calculus",
+          "frame_logic",
+          "tdfol"
+        ],
+        "ready_projection_count": 5,
+        "sha256": "e49302c34edf5227bed26dc84fc10937f2a81761195aefe8e552828bc67abe0e"
+      },
+      "catalog_presence_is_readiness": false,
+      "family_inventory": [
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "agency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit agents, actions, choices, and agency semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "argumentation",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit arguments, attacks, and extension semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "authorization",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "principals, permissions, delegation, and authorization policy"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "bdi",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "separate belief, desire, intention and update declarations"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "concurrency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "shared state, interference, scheduling and synchronization model"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "cryptographic_protocol",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "protocol roles, primitives, adversary and security claims"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "datalog",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "range-restricted facts/rules and closed rule semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "dcec",
+          "missing_evidence_frontier": "existing_modal_and_legal_bridge_views_require_separate_typed_source_adapter",
+          "requires": "typed agents, modal/event scope and any required time premises"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "defeasible_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "rules, exceptions, priority and conflict resolution semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "deontic",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "explicit normative modality, argument order, conditions and exceptions"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "dependent_type",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "dependent types, terms and an explicit kernel encoding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "description_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "ontology concepts, roles and a declared description-logic fragment"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "doxastic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit beliefs and belief-accessibility semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "epistemic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit knowledge and epistemic-accessibility semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "epistemic_temporal",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "joint epistemic accessibility and temporal model"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "event_calculus",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "events, fluents, occurrence times and initiation/termination rules"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "finite_field_constraint",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "field modulus, typed variables and arithmetic constraints"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "first_order",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed predicates, ordered arguments and explicit quantifier scope"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "frame_logic",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "object identities, slots, classes and structural relationships"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "fuzzy_weighted",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit grades, combination operators and calibrated semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "higher_order",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed terms and explicit parameterization/kernel encoding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "horn_chc",
+          "missing_evidence_frontier": "no_reviewed_domain_to_Horn_CHC_adapter_authorization_profile_is_not_Horn",
+          "requires": "Horn clauses, typed constraints and relation signatures"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "hyperproperty",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "multiple traces, trace quantifiers and relational policies"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "intention_agency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit intended action declarations; not beliefs or observations"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "linear_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "resources and linear consumption/production semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "modal",
+          "missing_evidence_frontier": "existing_modal_and_legal_bridge_views_require_separate_typed_source_adapter",
+          "requires": "declared modal operators and accessibility/frame assumptions"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "mu_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "transition model and scoped least/greatest fixed points"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "nonmonotonic_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit defaults, negation and consequence semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "probabilistic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit probability model; model confidence is not probability of truth"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "process_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "processes, communication channels and operational semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "program",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed program/control-flow/contracts with source binding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "propositional",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "closed proposition vocabulary and Boolean structure"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "refinement",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed source/target models and explicit refinement relation"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "relevance_paraconsistent",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "declared relevance/inconsistency-tolerant consequence relation"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "separation_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed heap, ownership and frame/resource semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "session_process",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "participants, message types and session ordering"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "situation_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "actions, situations and successor-state axioms"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "tdfol",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "explicit deontic/temporal scope and first-order arguments"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "temporal",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "time/trace semantics and explicit temporal properties"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "transition_system",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "states, initial condition and explicit transition relation"
+        }
+      ],
+      "native_supplemental_routes": [
+        {
+          "kind": "authorization",
+          "logic_family": "authorization",
+          "profile": "datalog",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "temporal",
+          "logic_family": "temporal",
+          "profile": "ltl",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "trace",
+          "logic_family": "temporal",
+          "profile": "finite_trace",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        }
+      ]
+    },
+    "security_ir": {
+      "actual_authored_case": {
+        "exact_typed_source_replay": true,
+        "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-reports/security_ir.json",
+        "ready_logic_families": [
+          "authorization",
+          "concurrency",
+          "hyperproperty",
+          "program",
+          "refinement",
+          "separation_logic",
+          "temporal",
+          "transition_system"
+        ],
+        "ready_projection_count": 10,
+        "sha256": "470119d7748c0d0762d25e308fe467cef8f3fcddf6ce52cdbb15a1ecf1ae0f62"
+      },
+      "catalog_presence_is_readiness": false,
+      "family_inventory": [
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "agency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit agents, actions, choices, and agency semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "argumentation",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit arguments, attacks, and extension semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "authorization",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "principals, permissions, delegation, and authorization policy"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "bdi",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "separate belief, desire, intention and update declarations"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "concurrency",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "shared state, interference, scheduling and synchronization model"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "cryptographic_protocol",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "protocol roles, primitives, adversary and security claims"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "datalog",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "range-restricted facts/rules and closed rule semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "dcec",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed agents, modal/event scope and any required time premises"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "defeasible_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "rules, exceptions, priority and conflict resolution semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "deontic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit normative modality, argument order, conditions and exceptions"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "dependent_type",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "dependent types, terms and an explicit kernel encoding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "description_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "ontology concepts, roles and a declared description-logic fragment"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "doxastic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit beliefs and belief-accessibility semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "epistemic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit knowledge and epistemic-accessibility semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "epistemic_temporal",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "joint epistemic accessibility and temporal model"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "event_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "events, fluents, occurrence times and initiation/termination rules"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "finite_field_constraint",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "field modulus, typed variables and arithmetic constraints"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "first_order",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed predicates, ordered arguments and explicit quantifier scope"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "frame_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "object identities, slots, classes and structural relationships"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "fuzzy_weighted",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit grades, combination operators and calibrated semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "higher_order",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed terms and explicit parameterization/kernel encoding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "horn_chc",
+          "missing_evidence_frontier": "no_reviewed_domain_to_Horn_CHC_adapter_authorization_profile_is_not_Horn",
+          "requires": "Horn clauses, typed constraints and relation signatures"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "hyperproperty",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "multiple traces, trace quantifiers and relational policies"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "intention_agency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit intended action declarations; not beliefs or observations"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "linear_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "resources and linear consumption/production semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "modal",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "declared modal operators and accessibility/frame assumptions"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "mu_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "transition model and scoped least/greatest fixed points"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "nonmonotonic_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit defaults, negation and consequence semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "probabilistic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit probability model; model confidence is not probability of truth"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "process_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "processes, communication channels and operational semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "program",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "typed program/control-flow/contracts with source binding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "propositional",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "closed proposition vocabulary and Boolean structure"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "refinement",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "typed source/target models and explicit refinement relation"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "relevance_paraconsistent",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "declared relevance/inconsistency-tolerant consequence relation"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "separation_logic",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "typed heap, ownership and frame/resource semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "session_process",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "participants, message types and session ordering"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "situation_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "actions, situations and successor-state axioms"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "tdfol",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit deontic/temporal scope and first-order arguments"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "temporal",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "time/trace semantics and explicit temporal properties"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "transition_system",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "states, initial condition and explicit transition relation"
+        }
+      ],
+      "native_supplemental_routes": [
+        {
+          "kind": "authorization",
+          "logic_family": "authorization",
+          "profile": "datalog",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "concurrency",
+          "logic_family": "concurrency",
+          "profile": "rely_guarantee",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "protocol",
+          "logic_family": "cryptographic_protocol",
+          "profile": "dolev_yao",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "refinement",
+          "logic_family": "refinement",
+          "profile": "simulation",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "trace",
+          "logic_family": "temporal",
+          "profile": "finite_trace",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        }
+      ]
+    },
+    "ui_ux_ir": {
+      "actual_authored_case": {
+        "exact_typed_source_replay": true,
+        "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-reports/ui_ux_ir.json",
+        "ready_logic_families": [
+          "authorization",
+          "dcec",
+          "event_calculus",
+          "frame_logic",
+          "program",
+          "tdfol",
+          "temporal",
+          "transition_system"
+        ],
+        "ready_projection_count": 11,
+        "sha256": "bfb1981dd2f2923f3240686e1608675354be190e7211eab18cb0c1f614a1d9ac"
+      },
+      "catalog_presence_is_readiness": false,
+      "family_inventory": [
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "agency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit agents, actions, choices, and agency semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "argumentation",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit arguments, attacks, and extension semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "authorization",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "principals, permissions, delegation, and authorization policy"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "bdi",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "separate belief, desire, intention and update declarations"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "concurrency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "shared state, interference, scheduling and synchronization model"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "cryptographic_protocol",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "protocol roles, primitives, adversary and security claims"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "datalog",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "range-restricted facts/rules and closed rule semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "dcec",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "typed agents, modal/event scope and any required time premises"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "defeasible_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "rules, exceptions, priority and conflict resolution semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "deontic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit normative modality, argument order, conditions and exceptions"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "dependent_type",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "dependent types, terms and an explicit kernel encoding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "description_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "ontology concepts, roles and a declared description-logic fragment"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "doxastic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit beliefs and belief-accessibility semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "epistemic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit knowledge and epistemic-accessibility semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "epistemic_temporal",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "joint epistemic accessibility and temporal model"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "event_calculus",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "events, fluents, occurrence times and initiation/termination rules"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "finite_field_constraint",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "field modulus, typed variables and arithmetic constraints"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "first_order",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed predicates, ordered arguments and explicit quantifier scope"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "frame_logic",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "object identities, slots, classes and structural relationships"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "fuzzy_weighted",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit grades, combination operators and calibrated semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "higher_order",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed terms and explicit parameterization/kernel encoding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "horn_chc",
+          "missing_evidence_frontier": "no_reviewed_domain_to_Horn_CHC_adapter_authorization_profile_is_not_Horn",
+          "requires": "Horn clauses, typed constraints and relation signatures"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "hyperproperty",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "multiple traces, trace quantifiers and relational policies"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "intention_agency",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit intended action declarations; not beliefs or observations"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "linear_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "resources and linear consumption/production semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "modal",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "declared modal operators and accessibility/frame assumptions"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "mu_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "transition model and scoped least/greatest fixed points"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "nonmonotonic_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit defaults, negation and consequence semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "probabilistic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "explicit probability model; model confidence is not probability of truth"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "process_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "processes, communication channels and operational semantics"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "program",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "typed program/control-flow/contracts with source binding"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "propositional",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "closed proposition vocabulary and Boolean structure"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "domain_related_explicit_model",
+          "family_id": "refinement",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed source/target models and explicit refinement relation"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "relevance_paraconsistent",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "declared relevance/inconsistency-tolerant consequence relation"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "separation_logic",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "typed heap, ownership and frame/resource semantics"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "session_process",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "participants, message types and session ordering"
+        },
+        {
+          "adapter_available": false,
+          "applicability": "specialized_explicit_model",
+          "family_id": "situation_calculus",
+          "missing_evidence_frontier": "domain_training_adapter_not_implemented",
+          "requires": "actions, situations and successor-state axioms"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "native_projection_route",
+          "family_id": "tdfol",
+          "missing_evidence_frontier": "typed_input_and_successful_native_projection_required",
+          "requires": "explicit deontic/temporal scope and first-order arguments"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "temporal",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "time/trace semantics and explicit temporal properties"
+        },
+        {
+          "adapter_available": true,
+          "applicability": "source_bound_native_model_route",
+          "family_id": "transition_system",
+          "missing_evidence_frontier": "explicit_matching_native_model_or_supported_UI_declaration_required",
+          "requires": "states, initial condition and explicit transition relation"
+        }
+      ],
+      "native_supplemental_routes": [
+        {
+          "kind": "authorization",
+          "logic_family": "authorization",
+          "profile": "datalog",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "contract",
+          "logic_family": "program",
+          "profile": "dynamic_hoare",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "program",
+          "logic_family": "program",
+          "profile": "program_ir",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "state",
+          "logic_family": "transition_system",
+          "profile": "state_schema",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "temporal",
+          "logic_family": "temporal",
+          "profile": "ltl",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "trace",
+          "logic_family": "temporal",
+          "profile": "finite_trace",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        },
+        {
+          "kind": "transition",
+          "logic_family": "transition_system",
+          "profile": "action_system",
+          "requires": "explicit source-bound native model; no label-to-formula inference"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Declared applicability does not manufacture absent source models or semantic facts.",
+    "Canonical names count families; TLA+ and Datalog authorization profiles are not extra families.",
+    "All40 inventory is not a claim that all40 adapters exist.",
+    "Security protocol example is exercised in focused tests; the compact artifact case here contains the other explicit typed routes.",
+    "Supplemental models and native Legal bridge fixture records are authored declarations, not independently executed extraction or source-fidelity proofs.",
+    "UI state projection refuses unknown guards, effects, timing, parallel joins and recovery. Legacy EC payloads with omitted guard/effect/recovery semantics remain visible but cannot train in v2.",
+    "Supplied event traces are incomplete and unverified; absent propositions remain unknown.",
+    "TLA output retains64-step underapproximation, generated diagnostic BoundedProgress and fairness limits; no parser, TLC, Lake or prover ran in this audit.",
+    "Frozen v1 module hash is preserved; existing checkpoint producer files were not edited."
+  ],
+  "producer_pins": {
+    "ipfs_datasets_py.logic.formalization.autoencoder.family_training": "e42e5314a59966ade1163e062817484357feb97e86158e21360ad39fa1558e64",
+    "ipfs_datasets_py.logic.formalization.autoencoder.family_training_v2": "c5b66780a5ed5b5247f3de1467d34ed17cba89bf250e9b2490218fe9e71f2e02",
+    "ipfs_datasets_py.logic.formalization.autoencoder.ui_native_training_views": "16fa66defc9f01a9acffbdefb41b55c24273c16bf86dc03658630cb1949f8866"
+  },
+  "published_extension_count": 5,
+  "review": {
+    "files": [
+      "optimizers/logic_theorem_optimizer/autoencoder_family_training_v2.py",
+      "optimizers/logic_theorem_optimizer/domain_family_training_v2.py"
+    ],
+    "finding": "No concrete readiness-integration defect found; optimization excludes non-ready native targets, native/source histories remain separate, and validation selection is distinct from fitting."
+  },
+  "schema": "cross-domain-native-family-coverage-audit/v2",
+  "scope": "structural typed IR training targets; neither source decoding qualification nor theorem proof",
+  "tests": {
+    "actual_native_route_cases": [
+      "UI event-labelled StateTransitionIR + native bounded TLA compiler",
+      "UI finite-prefix TraceIR with explicit unknown absent propositions",
+      "UI explicitly supplied ProgramIR and bound ProgramContract",
+      "Legal and other-domain supplied AuthorizationIR native roundtrip",
+      "Legal supplied LTL TemporalFormula native roundtrip",
+      "Security ProtocolIR, ConcurrencyIR, RefinementIR native roundtrip",
+      "stale embedded and external SourceRef refusal",
+      "v2 readiness exclusion for known-loss legacy UI event-calculus targets"
+    ],
+    "command": "python -m pytest -q tests/unit/logic/formalization/autoencoder/test_family_training_v2.py tests/unit/logic/formalization/autoencoder/test_family_training.py",
+    "failed": 0,
+    "frozen_v1_regressions": 35,
+    "new_v2_tests": 32,
+    "passed": 67,
+    "seconds": 4.6,
+    "skipped": 0,
+    "test_file_sha256": "126c433dd4fb955fcb6395a6917ed7ed50debcb4bb4703c53cb27be22f04407b"
+  }
+}

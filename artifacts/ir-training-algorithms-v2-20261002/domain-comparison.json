@@ -1,0 +1,833 @@
+{
+  "driver": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/compare_domain_qualifications.py",
+    "sha256": "dc41e8bfc1c09ed91428a4216e9e0bc83f084a9296388bf9b77bcfa9e0e8828f"
+  },
+  "expanded": {
+    "legal_ir": {
+      "calibration_families": [
+        "event_calculus",
+        "tdfol"
+      ],
+      "corpus": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-legal-02/corpus.json",
+        "sha256": "d8d56ab699f7e39bbe4546fc44f26f5b507e4e61bb8330091462f8150c5cafad"
+      },
+      "descriptor": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-legal-02/legal_ir/recipe.json",
+        "schema": "domain-native-family-training/v2",
+        "sha256": "5425ff12a1de85be032c226750c902029b65ca8aed7db538f73ec73f5bbf9c49"
+      },
+      "families": [
+        "deontic",
+        "event_calculus",
+        "frame_logic",
+        "tdfol",
+        "temporal"
+      ],
+      "family_optimizer_steps": 4,
+      "heldout_test": {
+        "after": 0.007511139895174853,
+        "after_families": {
+          "deontic": 0.013981622213391522,
+          "event_calculus": 0.005730588517200068,
+          "frame_logic": 0.007655486516404051,
+          "tdfol": 0.008948012156797263,
+          "temporal": 0.0012399900720813537
+        },
+        "before": 0.007551250366481741,
+        "before_families": {
+          "deontic": 0.013981622213391522,
+          "event_calculus": 0.00578452338723534,
+          "frame_logic": 0.007655486516404051,
+          "tdfol": 0.009094629643296435,
+          "temporal": 0.0012399900720813537
+        },
+        "coverage": {
+          "projections": [
+            {
+              "has_coverage": true,
+              "known_atoms": 68,
+              "projection_id": "legal-ir/bridge-view/cec/v1",
+              "row": 0,
+              "unknown_atoms": 33
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 28,
+              "projection_id": "legal-ir/bridge-view/deontic/v1",
+              "row": 0,
+              "unknown_atoms": 4
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 325,
+              "projection_id": "legal-ir/bridge-view/frame_logic/v1",
+              "row": 0,
+              "unknown_atoms": 59
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 31,
+              "projection_id": "legal-ir/bridge-view/tdfol/v1",
+              "row": 0,
+              "unknown_atoms": 13
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 955,
+              "projection_id": "legal_ir/supplemental/temporal/v2",
+              "row": 0,
+              "unknown_atoms": 30
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 70,
+              "projection_id": "legal-ir/bridge-view/cec/v1",
+              "row": 1,
+              "unknown_atoms": 15
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 23,
+              "projection_id": "legal-ir/bridge-view/deontic/v1",
+              "row": 1,
+              "unknown_atoms": 7
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 322,
+              "projection_id": "legal-ir/bridge-view/frame_logic/v1",
+              "row": 1,
+              "unknown_atoms": 61
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 33,
+              "projection_id": "legal-ir/bridge-view/tdfol/v1",
+              "row": 1,
+              "unknown_atoms": 7
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 952,
+              "projection_id": "legal_ir/supplemental/temporal/v2",
+              "row": 1,
+              "unknown_atoms": 33
+            }
+          ],
+          "untrained_projection_ids": []
+        },
+        "feature_panel": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        },
+        "regressed_families": [],
+        "relative_reduction": 0.005311765516996858,
+        "saved_selected_test_loss_replayed": true,
+        "used_for_training_or_model_selection": false
+      },
+      "initialization": {
+        "inputs": "saved original training target rows only; existing frozen vocabulary; no validation/test initialization inputs",
+        "matches_saved_training_initialization": true,
+        "method": "training_only_deterministic_svd",
+        "replayed_parameter_sha256": "19ea3048b932623625dd63dc1ccc01552a51f8536ed7758d94abcf18236287ea"
+      },
+      "model_parameters_modified": false,
+      "panel": {
+        "training": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 6,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 6
+        },
+        "validation": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        }
+      },
+      "receipt": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-legal-02/receipt.json",
+        "sha256": "a77b56b74fb42835740f7e262bf5f7eedcad5cdfa33758c4db1ec6c15c9f8e08"
+      },
+      "selected_joint_refinement_epoch": 0,
+      "source_descriptor": null,
+      "source_optimizer_steps": 0,
+      "validation": {
+        "after": 0.008372975650322814,
+        "after_families": {
+          "deontic": 0.01505416969246735,
+          "event_calculus": 0.008363085627703232,
+          "frame_logic": 0.007156051980900413,
+          "tdfol": 0.00967228568478929,
+          "temporal": 0.0016192852657537886
+        },
+        "before": 0.00852101140818356,
+        "before_families": {
+          "deontic": 0.01505416969246735,
+          "event_calculus": 0.008718308274107384,
+          "frame_logic": 0.007156051980900413,
+          "tdfol": 0.010057241827688863,
+          "temporal": 0.0016192852657537886
+        },
+        "every_observed_family_nonregressing": true,
+        "relative_reduction": 0.017373026600876584
+      }
+    },
+    "security_ir": {
+      "calibration_families": [
+        "program"
+      ],
+      "corpus": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/corpus.json",
+        "sha256": "805f415255c8c2a43cfed0d577c6dd6c8f42fa3b6beae6c420f5be40e0265ae4"
+      },
+      "descriptor": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/security_ir/recipe.json",
+        "schema": "domain-native-family-training/v2",
+        "sha256": "9f990ef1adcc65719a1eb8d84ef725946a931602b26de7aaf77b13e3c65acac0"
+      },
+      "families": [
+        "authorization",
+        "program"
+      ],
+      "family_optimizer_steps": 4,
+      "heldout_test": {
+        "after": 0.00628977896452231,
+        "after_families": {
+          "authorization": 0.0013603413372700384,
+          "program": 0.011219216591774583
+        },
+        "before": 0.0063160069401203625,
+        "before_families": {
+          "authorization": 0.0013603413372700384,
+          "program": 0.011271672542970686
+        },
+        "coverage": {
+          "projections": [
+            {
+              "has_coverage": true,
+              "known_atoms": 551,
+              "projection_id": "program.program_ir/v1",
+              "row": 0,
+              "unknown_atoms": 796
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 1283,
+              "projection_id": "security_ir/supplemental/authorization/v2",
+              "row": 0,
+              "unknown_atoms": 55
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 597,
+              "projection_id": "program.program_ir/v1",
+              "row": 1,
+              "unknown_atoms": 172
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 1283,
+              "projection_id": "security_ir/supplemental/authorization/v2",
+              "row": 1,
+              "unknown_atoms": 55
+            }
+          ],
+          "untrained_projection_ids": []
+        },
+        "feature_panel": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        },
+        "regressed_families": [],
+        "relative_reduction": 0.004152619819248082,
+        "saved_selected_test_loss_replayed": true,
+        "used_for_training_or_model_selection": false
+      },
+      "initialization": {
+        "inputs": "saved original training target rows only; existing frozen vocabulary; no validation/test initialization inputs",
+        "matches_saved_training_initialization": true,
+        "method": "training_only_deterministic_svd",
+        "replayed_parameter_sha256": "4817a677a7ff5f9dd6a90ab063371fdbab1228e1df308e107a4f486904f530ba"
+      },
+      "model_parameters_modified": false,
+      "panel": {
+        "training": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 6,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 6
+        },
+        "validation": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        }
+      },
+      "receipt": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/receipt.json",
+        "sha256": "7c07c5dfb3e33e3d6fc2be695febb43052e5fbf9f845f66cfebacb0142fd5652"
+      },
+      "selected_joint_refinement_epoch": 0,
+      "source_descriptor": {
+        "completion_authority": false,
+        "execution_authority": false,
+        "manifest_sha256": "20e4967fc035ac092fb8cb769d63d259800c8ddb1069178c6cb4da8491e75d14",
+        "output": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/security_ir/source",
+        "proof_authority": false,
+        "schema": "security-formula-production-continuation@1",
+        "security_specification_inferred": false,
+        "weights_sha256": "340438a6bb26121577b59080edc6b14179820979e1c44182b5cdfcdc8c43f2db",
+        "whole_program_semantics_verified": false
+      },
+      "source_optimizer_steps": 3,
+      "validation": {
+        "after": 0.006267067216367805,
+        "after_families": {
+          "authorization": 0.0008806821562511314,
+          "program": 0.01165345227648448
+        },
+        "before": 0.006285307112747735,
+        "before_families": {
+          "authorization": 0.0008806821562511314,
+          "program": 0.01168993206924434
+        },
+        "every_observed_family_nonregressing": true,
+        "relative_reduction": 0.0029019896804941547
+      }
+    },
+    "ui_ux_ir": {
+      "calibration_families": [
+        "dcec",
+        "event_calculus",
+        "tdfol",
+        "transition_system"
+      ],
+      "corpus": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/corpus.json",
+        "sha256": "805f415255c8c2a43cfed0d577c6dd6c8f42fa3b6beae6c420f5be40e0265ae4"
+      },
+      "descriptor": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/ui_ux_ir/recipe.json",
+        "schema": "domain-native-family-training/v2",
+        "sha256": "0a6823723668d59fbb50d49c103dae9e9429affccd943eff04b568322158a2a0"
+      },
+      "families": [
+        "dcec",
+        "event_calculus",
+        "frame_logic",
+        "tdfol",
+        "temporal",
+        "transition_system"
+      ],
+      "family_optimizer_steps": 4,
+      "heldout_test": {
+        "after": 0.0047640660445747276,
+        "after_families": {
+          "dcec": 0.006445677971933252,
+          "event_calculus": 0.017165618751734633,
+          "frame_logic": 0.0012561852926752134,
+          "tdfol": 0.0034687043668883795,
+          "temporal": 6.400919737428841e-05,
+          "transition_system": 0.0001842006868426009
+        },
+        "before": 0.003657937215953703,
+        "before_families": {
+          "dcec": 0.004166104663362696,
+          "event_calculus": 0.013472320094159737,
+          "frame_logic": 0.0012561852926752134,
+          "tdfol": 0.0027084374731341353,
+          "temporal": 6.400919737428841e-05,
+          "transition_system": 0.00028056657501614385
+        },
+        "coverage": {
+          "projections": [
+            {
+              "has_coverage": true,
+              "known_atoms": 1220,
+              "projection_id": "ui_ux_ir/declared_state/native/v2",
+              "row": 0,
+              "unknown_atoms": 2068
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 828,
+              "projection_id": "ui_ux_ir/declared_state/tla_plus/v2",
+              "row": 0,
+              "unknown_atoms": 7
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 1220,
+              "projection_id": "ui_ux_ir/event_prefix/native/v2",
+              "row": 0,
+              "unknown_atoms": 482
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 41,
+              "projection_id": "ui_ux_ir:dcec",
+              "row": 0,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 215,
+              "projection_id": "ui_ux_ir:event_calculus",
+              "row": 0,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 24,
+              "projection_id": "ui_ux_ir:flogic",
+              "row": 0,
+              "unknown_atoms": 1
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 62,
+              "projection_id": "ui_ux_ir:interface_bindings",
+              "row": 0,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 72,
+              "projection_id": "ui_ux_ir:tdfol",
+              "row": 0,
+              "unknown_atoms": 3
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 1220,
+              "projection_id": "ui_ux_ir/event_prefix/native/v2",
+              "row": 1,
+              "unknown_atoms": 245
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 28,
+              "projection_id": "ui_ux_ir:dcec",
+              "row": 1,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 161,
+              "projection_id": "ui_ux_ir:event_calculus",
+              "row": 1,
+              "unknown_atoms": 15
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 24,
+              "projection_id": "ui_ux_ir:flogic",
+              "row": 1,
+              "unknown_atoms": 1
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 62,
+              "projection_id": "ui_ux_ir:interface_bindings",
+              "row": 1,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 42,
+              "projection_id": "ui_ux_ir:tdfol",
+              "row": 1,
+              "unknown_atoms": 2
+            }
+          ],
+          "untrained_projection_ids": []
+        },
+        "feature_panel": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        },
+        "regressed_families": [
+          "dcec",
+          "event_calculus",
+          "tdfol"
+        ],
+        "relative_reduction": -0.3023914198955526,
+        "saved_selected_test_loss_replayed": true,
+        "used_for_training_or_model_selection": false
+      },
+      "initialization": {
+        "inputs": "saved original training target rows only; existing frozen vocabulary; no validation/test initialization inputs",
+        "matches_saved_training_initialization": true,
+        "method": "training_only_deterministic_svd",
+        "replayed_parameter_sha256": "95b9dafed597efdae5d77a71ccb336579779668078d08f37f65282ba9abb9789"
+      },
+      "model_parameters_modified": false,
+      "panel": {
+        "training": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 6,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 6
+        },
+        "validation": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        }
+      },
+      "receipt": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/receipt.json",
+        "sha256": "7c07c5dfb3e33e3d6fc2be695febb43052e5fbf9f845f66cfebacb0142fd5652"
+      },
+      "selected_joint_refinement_epoch": 0,
+      "source_descriptor": null,
+      "source_optimizer_steps": 0,
+      "validation": {
+        "after": 0.0012034344326976875,
+        "after_families": {
+          "dcec": 0.00033016694327506375,
+          "event_calculus": 0.0009740076229845185,
+          "frame_logic": 0.001597575537793106,
+          "tdfol": 0.0039533141607310356,
+          "temporal": 5.41629134233123e-06,
+          "transition_system": 0.0003601260400600706
+        },
+        "before": 0.0012713403339209724,
+        "before_families": {
+          "dcec": 0.00040599159771623433,
+          "event_calculus": 0.0010131740798597166,
+          "frame_logic": 0.001597575537793106,
+          "tdfol": 0.004242924862780119,
+          "temporal": 5.41629134233123e-06,
+          "transition_system": 0.0003629596340343268
+        },
+        "every_observed_family_nonregressing": true,
+        "relative_reduction": 0.0534128426601983
+      }
+    }
+  },
+  "lake_build_executed": false,
+  "legal_matched_recommendation": "Keep prior v1 selected checkpoint on its fixed old panel. Fresh v2 lost its selected v1 gain; continuation is correctly blocked because the exact historical validation report export is unavailable.",
+  "legal_source_fixture_repair": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-legal-02/source-fixture-repair.json",
+    "sha256": "38fae73298f07ab69788eb62c85b2a16722540ffcc28627c28e602b604f0a4f8"
+  },
+  "matched": {
+    "legal_ir": {
+      "complete_v1_parent_continuation": {
+        "reason": "exact_original_validation_report_export_unavailable",
+        "status": "blocked"
+      },
+      "distinct_retained_validation_feature_vectors": 1,
+      "v1_selected_validation": 0.002492487697267681,
+      "v2_fresh_validation": 0.0026531920224475477,
+      "validation_rows": 2
+    },
+    "security_ir": {
+      "complete_v1_parent_continuation": {
+        "after": 0.0006665157011660286,
+        "before": 0.0006665157011660286,
+        "descriptor": {
+          "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/matched-01/security_ir/complete_parent_continuation/family_checkpoint.json",
+          "schema": "native-family-calibrated-autoencoder/v2",
+          "sha256": "74501bc161ad64495e6194db916784d45b281dcd7a8a3b813f0d8486ce582dd7"
+        },
+        "effective_feature_panels": {
+          "training": {
+            "colliding_row_groups": [],
+            "distinct_retained_feature_vectors": 4,
+            "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+            "rows": 4
+          },
+          "validation": {
+            "colliding_row_groups": [
+              [
+                0,
+                1
+              ]
+            ],
+            "distinct_retained_feature_vectors": 1,
+            "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+            "rows": 2
+          }
+        },
+        "initialization": "complete_parent_structural_head",
+        "optimizer_steps": 4,
+        "parent_unchanged": true,
+        "selected_epoch": 0,
+        "selected_families": [],
+        "status": "complete",
+        "test_coverage": {
+          "projections": [
+            {
+              "has_coverage": true,
+              "known_atoms": 296,
+              "projection_id": "hyperproperty.ir/v1",
+              "row": 0,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 75,
+              "projection_id": "program.program_contract/v1",
+              "row": 0,
+              "unknown_atoms": 3
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 164,
+              "projection_id": "program.program_ir/v1",
+              "row": 0,
+              "unknown_atoms": 13
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 55,
+              "projection_id": "separation_logic.heap_model/v1",
+              "row": 0,
+              "unknown_atoms": 2
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 125,
+              "projection_id": "separation_logic.ir/v1",
+              "row": 0,
+              "unknown_atoms": 9
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 36,
+              "projection_id": "temporal.formula/v1",
+              "row": 0,
+              "unknown_atoms": 3
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 223,
+              "projection_id": "transition_system.state_transition_ir/v1",
+              "row": 0,
+              "unknown_atoms": 4
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 296,
+              "projection_id": "hyperproperty.ir/v1",
+              "row": 1,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 75,
+              "projection_id": "program.program_contract/v1",
+              "row": 1,
+              "unknown_atoms": 3
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 164,
+              "projection_id": "program.program_ir/v1",
+              "row": 1,
+              "unknown_atoms": 13
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 55,
+              "projection_id": "separation_logic.heap_model/v1",
+              "row": 1,
+              "unknown_atoms": 2
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 125,
+              "projection_id": "separation_logic.ir/v1",
+              "row": 1,
+              "unknown_atoms": 9
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 36,
+              "projection_id": "temporal.formula/v1",
+              "row": 1,
+              "unknown_atoms": 3
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 223,
+              "projection_id": "transition_system.state_transition_ir/v1",
+              "row": 1,
+              "unknown_atoms": 4
+            }
+          ],
+          "untrained_projection_ids": []
+        },
+        "test_objective": 0.0006665157011660286
+      },
+      "distinct_retained_validation_feature_vectors": 1,
+      "v1_selected_validation": 0.0006665157011660286,
+      "v2_fresh_validation": 0.0006665157011660286,
+      "validation_rows": 2
+    },
+    "ui_ux_ir": {
+      "complete_v1_parent_continuation": {
+        "after": 0.00032347985243307096,
+        "before": 0.0003235055324223188,
+        "descriptor": {
+          "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/matched-01/ui_ux_ir/complete_parent_continuation/family_checkpoint.json",
+          "schema": "native-family-calibrated-autoencoder/v2",
+          "sha256": "ff4c5ee56aee4352b703bd669d268b09db2cf7c88611ba9f10efdd752773224d"
+        },
+        "effective_feature_panels": {
+          "training": {
+            "colliding_row_groups": [],
+            "distinct_retained_feature_vectors": 4,
+            "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+            "rows": 4
+          },
+          "validation": {
+            "colliding_row_groups": [
+              [
+                0,
+                1
+              ]
+            ],
+            "distinct_retained_feature_vectors": 1,
+            "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+            "rows": 2
+          }
+        },
+        "initialization": "complete_parent_structural_head",
+        "optimizer_steps": 4,
+        "parent_unchanged": true,
+        "selected_epoch": 0,
+        "selected_families": [
+          "event_calculus",
+          "frame_logic"
+        ],
+        "status": "complete",
+        "test_coverage": {
+          "projections": [
+            {
+              "has_coverage": true,
+              "known_atoms": 15,
+              "projection_id": "ui_ux_ir:dcec",
+              "row": 0,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 76,
+              "projection_id": "ui_ux_ir:event_calculus",
+              "row": 0,
+              "unknown_atoms": 1
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 24,
+              "projection_id": "ui_ux_ir:flogic",
+              "row": 0,
+              "unknown_atoms": 1
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 62,
+              "projection_id": "ui_ux_ir:interface_bindings",
+              "row": 0,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 72,
+              "projection_id": "ui_ux_ir:tdfol",
+              "row": 0,
+              "unknown_atoms": 3
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 15,
+              "projection_id": "ui_ux_ir:dcec",
+              "row": 1,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 76,
+              "projection_id": "ui_ux_ir:event_calculus",
+              "row": 1,
+              "unknown_atoms": 1
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 24,
+              "projection_id": "ui_ux_ir:flogic",
+              "row": 1,
+              "unknown_atoms": 1
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 62,
+              "projection_id": "ui_ux_ir:interface_bindings",
+              "row": 1,
+              "unknown_atoms": 0
+            },
+            {
+              "has_coverage": true,
+              "known_atoms": 72,
+              "projection_id": "ui_ux_ir:tdfol",
+              "row": 1,
+              "unknown_atoms": 3
+            }
+          ],
+          "untrained_projection_ids": []
+        },
+        "test_objective": 0.00032347985243307096
+      },
+      "distinct_retained_validation_feature_vectors": 1,
+      "v1_selected_validation": 0.0003235055324223188,
+      "v2_fresh_validation": 0.00032347985243307096,
+      "validation_rows": 2
+    }
+  },
+  "matched_receipt": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/matched-01/receipt.json",
+    "sha256": "a25301cc84e06670b64673376377ad5cf2598c74fde2baef2222eac406bb6350"
+  },
+  "matched_recommendations": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/matched-01/recommendations.json",
+    "sha256": "9902685f5d351eeb9d322512749e49d117ace8cb71704533ca2c9f9c65062865"
+  },
+  "network_calls": 0,
+  "proof_authority": false,
+  "provider_calls": 0,
+  "qualification_optimizer_steps": 0,
+  "schema": "security-ui-legal-family-v2-comparison/v1",
+  "scope": [
+    "Authored structurally varied development controls, not a natural language or software benchmark.",
+    "Validation family-block selection is followed by held-out test scoring with no fitting or selection on test targets.",
+    "SVD initialization is a new structural feature head, never a replacement for inherited Security source-decoder weights.",
+    "Security program facts come from native guarded code derivation. Authorization facts are explicit authored/source-bound declarations, not discovered enforcement.",
+    "Legal native deterministic multi-view teacher and supplied temporal constraints are supervision, not independently verified semantic truth.",
+    "UI finite traces are supplied event prefixes; unsupported timing/guards/effects remain frontiers.",
+    "Losses reconstruct retained native target features. They are not formula-decoding accuracy, proof success, Lake success, or task completion.",
+    "Unknown test atoms are counted and excluded from retained-feature objective, so objective reductions do not establish full target generalization.",
+    "Expanded and matched panels have different target/feature bases and cannot be ranked directly by raw loss.",
+    "Legal/UI source language models were not trained here. Security source stage is continued separately and makes no source-accuracy improvement claim.",
+    "No observed held-out family regressions are hidden by validation nonregression guarantees."
+  ],
+  "source_language_decoding_improvement_claim": false,
+  "tests": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/domain-recipes-tests.json",
+    "sha256": "80daa723f2581c0768fe967865f6e80b00f43159bcbf92c6033140d3ce61e99e"
+  }
+}

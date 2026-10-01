@@ -1,0 +1,61 @@
+{
+  "after": 0.00628977896452231,
+  "after_families": {
+    "authorization": 0.0013603413372700384,
+    "program": 0.011219216591774583
+  },
+  "before": 0.0063160069401203625,
+  "before_families": {
+    "authorization": 0.0013603413372700384,
+    "program": 0.011271672542970686
+  },
+  "coverage": {
+    "projections": [
+      {
+        "has_coverage": true,
+        "known_atoms": 551,
+        "projection_id": "program.program_ir/v1",
+        "row": 0,
+        "unknown_atoms": 796
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 1283,
+        "projection_id": "security_ir/supplemental/authorization/v2",
+        "row": 0,
+        "unknown_atoms": 55
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 597,
+        "projection_id": "program.program_ir/v1",
+        "row": 1,
+        "unknown_atoms": 172
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 1283,
+        "projection_id": "security_ir/supplemental/authorization/v2",
+        "row": 1,
+        "unknown_atoms": 55
+      }
+    ],
+    "untrained_projection_ids": []
+  },
+  "feature_panel": {
+    "colliding_row_groups": [],
+    "distinct_retained_feature_vectors": 2,
+    "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+    "rows": 2
+  },
+  "initialization": {
+    "inputs": "saved original training target rows only; existing frozen vocabulary; no validation/test initialization inputs",
+    "matches_saved_training_initialization": true,
+    "method": "training_only_deterministic_svd",
+    "replayed_parameter_sha256": "4817a677a7ff5f9dd6a90ab063371fdbab1228e1df308e107a4f486904f530ba"
+  },
+  "regressed_families": [],
+  "relative_reduction": 0.004152619819248082,
+  "saved_selected_test_loss_replayed": true,
+  "used_for_training_or_model_selection": false
+}

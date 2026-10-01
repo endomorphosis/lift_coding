@@ -1,0 +1,30 @@
+{
+  "recommendations": {
+    "legal_ir": {
+      "continuation_status": "blocked",
+      "fresh_v2_beats_prior_selected_v1": false,
+      "fresh_v2_loss": 0.0026531920224475477,
+      "prior_selected_v1_loss": 0.002492487697267681,
+      "retain_previous_checkpoint": true,
+      "scope": "one distinct retained validation feature vector; no automatic production promotion"
+    },
+    "security_ir": {
+      "continuation_status": "complete",
+      "fresh_v2_beats_prior_selected_v1": false,
+      "fresh_v2_loss": 0.0006665157011660286,
+      "prior_selected_v1_loss": 0.0006665157011660286,
+      "retain_previous_checkpoint": true,
+      "scope": "one distinct retained validation feature vector; no automatic production promotion"
+    },
+    "ui_ux_ir": {
+      "continuation_status": "complete",
+      "fresh_v2_beats_prior_selected_v1": true,
+      "fresh_v2_loss": 0.00032347985243307096,
+      "prior_selected_v1_loss": 0.0003235055324223188,
+      "retain_previous_checkpoint": false,
+      "scope": "one distinct retained validation feature vector; no automatic production promotion"
+    }
+  },
+  "schema": "matched-domain-recommendations/v1",
+  "source_model_or_proof_accuracy_claim": false
+}

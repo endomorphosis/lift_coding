@@ -1,0 +1,26 @@
+{
+  "current_recipe_producers": {
+    "native_targets": "c5b66780a5ed5b5247f3de1467d34ed17cba89bf250e9b2490218fe9e71f2e02",
+    "numerical_trainer": "4c9b1b872ca56929a4060272ec4e7056f38b675d1033b3fa257586beb8cf3b68",
+    "recipe": "960d18ee56f8bdb8ab35869b7e638f87cc951a0020e7ea222a6889a920ac5ce1",
+    "source_continuation": "40fe65a705045b8833f73e1525551c05571d5ef6c6f0a3b7e65b68c310df4333",
+    "ui_input_adapter": "39d892919e5e5108c589c35d9e586bd4eb294e93146a3174d271dc084398dd9f"
+  },
+  "elapsed_seconds": 5.225,
+  "failed": 0,
+  "junit": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/domain-recipes-tests.xml",
+    "sha256": "a547a52e3de5e9882f003e626036ac2c0dc0b79ed5904dac12f6ec431ca267c9"
+  },
+  "passed": 14,
+  "recipe": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_family_training_v2.py",
+    "sha256": "960d18ee56f8bdb8ab35869b7e638f87cc951a0020e7ea222a6889a920ac5ce1"
+  },
+  "schema": "domain-family-v2-tests/v1",
+  "skipped": 0,
+  "test_file": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_domain_family_training_v2.py",
+    "sha256": "60f0b21db9b6bd25951ea4326233c84c0127bf6e55ff2efb17747090bb1bebe9"
+  }
+}

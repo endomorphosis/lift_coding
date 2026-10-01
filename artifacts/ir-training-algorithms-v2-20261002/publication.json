@@ -1,0 +1,648 @@
+{
+  "clean_checkout_validation": {
+    "failed": 0,
+    "junit": "artifacts/ir-training-algorithms-v2-20261002/clean-checkout-tests.xml",
+    "passed": 382,
+    "skipped": 18,
+    "skipped_tests": [
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_alignment_training",
+        "name": "test_actual_joint_default_fits_source_and_native_family",
+        "reason": "local legal-initialized development parent absent"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_alignment_training",
+        "name": "test_family_failure_preserves_actual_source_child",
+        "reason": "local legal-initialized development parent absent"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_alignment_training",
+        "name": "test_false_mode_rejects_silent_family_settings_before_output",
+        "reason": "local legal-initialized development parent absent"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_alignment_training",
+        "name": "test_all_training_aliases_heldout_fail_before_optimizer_or_output",
+        "reason": "local legal-initialized development parent absent"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_aligned_decoder",
+        "name": "test_actual_parent_forward_inverse_full_source_gate_and_replay",
+        "reason": "local development checkpoint absent"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_inverse_recovery",
+        "name": "test_actual_neural_inverse_is_recovered_without_new_tokens_or_expected_slots",
+        "reason": "set INTENT_SOURCE_FORM_CHECKPOINT to the explicit source-form pilot child"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_inverse_recovery",
+        "name": "test_actual_report_replays_numerically_and_rejects_resigned_slot_tampering",
+        "reason": "set INTENT_SOURCE_FORM_CHECKPOINT to the explicit source-form pilot child"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_inverse_recovery",
+        "name": "test_codec_cannot_supply_missing_tokens_even_if_it_claims_equivalence",
+        "reason": "set INTENT_SOURCE_FORM_CHECKPOINT to the explicit source-form pilot child"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_inverse_recovery",
+        "name": "test_wrong_generated_object_cannot_be_repaired_using_source_slots",
+        "reason": "set INTENT_SOURCE_FORM_CHECKPOINT to the explicit source-form pilot child"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_actual_search_repairs_inverse_without_repeating_encoder",
+        "reason": "installed leaf continuation checkpoint required"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_actual_search_report_numerically_replays",
+        "reason": "installed leaf continuation checkpoint required"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_forged_cached_metrics_rejected_by_complete_numerical_replay",
+        "reason": "installed leaf continuation checkpoint required"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_resigned_cached_prediction_cannot_replace_actual_forward_inference",
+        "reason": "installed leaf continuation checkpoint required"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_cached_stage_must_match_all_source_options[changed0]",
+        "reason": "installed leaf continuation checkpoint required"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_cached_stage_must_match_all_source_options[changed1]",
+        "reason": "installed leaf continuation checkpoint required"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_cached_stage_must_match_all_source_options[changed2]",
+        "reason": "installed leaf continuation checkpoint required"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_cached_stage_must_match_all_source_options[changed3]",
+        "reason": "installed leaf continuation checkpoint required"
+      },
+      {
+        "class": "tests.unit.logic.intent_ir.formalize.test_rich_search_decoder",
+        "name": "test_cached_stage_must_match_all_source_options[changed4]",
+        "reason": "installed leaf continuation checkpoint required"
+      }
+    ]
+  },
+  "datasets_commit": "4425e503ab8550ec8ae0388bc88e54d63c1eb317",
+  "datasets_repository": "https://github.com/endomorphosis/ipfs_datasets_py",
+  "datasets_validation_base": "1f815d45f56b8d7232cfd8b82746ee3c19368c98",
+  "evidence_files": [
+    {
+      "bytes": 52351,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/result.json",
+      "sha256": "bac6fea2f385271c0e859ccd06d0fb5f5999bb5afad7cef0243cf799c4b8dfb1"
+    },
+    {
+      "bytes": 62098,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-audit.json",
+      "sha256": "ae4ff0a2145b6a0cc8052ec192debf8e124382b28d071a5e7fc33d20bd780ffb"
+    },
+    {
+      "bytes": 30764,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/domain-comparison.json",
+      "sha256": "585bef6cb0c0ae939c318f75468ba12371521248fe9b6fa8247d05412d83a93b"
+    },
+    {
+      "bytes": 3718,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/domain-baseline-diagnosis.json",
+      "sha256": "1797f612d4edd630727b72ddd264cb472c852d217c6ef4cf09608326c9b29ae9"
+    },
+    {
+      "bytes": 1306,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/domain-recipes-tests.json",
+      "sha256": "80daa723f2581c0768fe967865f6e80b00f43159bcbf92c6033140d3ce61e99e"
+    },
+    {
+      "bytes": 1194,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/regression-selection.json",
+      "sha256": "d8a12b60319acd7b90dd97ae2741fe91a37d4c364c2bf4c5d241aa945c8fa2a6"
+    },
+    {
+      "bytes": 53512,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/regression-tests.xml",
+      "sha256": "eb7cc0b6ab174e796ede478674cad80b71ac1e96184c51d941eded71f07ad6db"
+    },
+    {
+      "bytes": 10796,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/new-family-tests.xml",
+      "sha256": "63efa50b398799bd699c2076f11db47594e7ae52c003c6f563ef6a32ba397d76"
+    },
+    {
+      "bytes": 2715,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/domain-recipes-tests.xml",
+      "sha256": "a547a52e3de5e9882f003e626036ac2c0dc0b79ed5904dac12f6ec431ca267c9"
+    },
+    {
+      "bytes": 23448,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/matched-01/receipt.json",
+      "sha256": "a25301cc84e06670b64673376377ad5cf2598c74fde2baef2222eac406bb6350"
+    },
+    {
+      "bytes": 1204,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/matched-01/recommendations.json",
+      "sha256": "9902685f5d351eeb9d322512749e49d117ace8cb71704533ca2c9f9c65062865"
+    },
+    {
+      "bytes": 12299,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/expanded-01/receipt.json",
+      "sha256": "7c07c5dfb3e33e3d6fc2be695febb43052e5fbf9f845f66cfebacb0142fd5652"
+    },
+    {
+      "bytes": 1844,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/expanded-01/security_ir-heldout-before-after.json",
+      "sha256": "b57f0003b8625b5e50cb17be0bd5fa9919e33e2dd71357bfa88f381dcd089b96"
+    },
+    {
+      "bytes": 3893,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/expanded-01/ui_ux_ir-heldout-before-after.json",
+      "sha256": "c1556d651c0b390d04f031dd37e55d99285d3920cac56d0fdd8780e6d4c526b8"
+    },
+    {
+      "bytes": 5223,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/expanded-legal-02/receipt.json",
+      "sha256": "a77b56b74fb42835740f7e262bf5f7eedcad5cdfa33758c4db1ec6c15c9f8e08"
+    },
+    {
+      "bytes": 3146,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/expanded-legal-02/legal_ir-heldout-before-after.json",
+      "sha256": "fc7618a4fdb1b6b9eb7e5d1879563bc2c9b8712f92c69311451f06ba6cd28dfa"
+    },
+    {
+      "bytes": 1208,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/expanded-legal-02/source-fixture-repair.json",
+      "sha256": "38fae73298f07ab69788eb62c85b2a16722540ffcc28627c28e602b604f0a4f8"
+    },
+    {
+      "bytes": 769,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/intent-family/configuration.json",
+      "sha256": "faf7363702748b5072dc167541e98393e84bc38428a0a4d275f6230f043cf5cb"
+    },
+    {
+      "bytes": 267,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/intent-family/supersession.json",
+      "sha256": "5991cff29a5d04f82024ce7e0fd13541824823e7ecb3abddbc4329d4df6a08dc"
+    },
+    {
+      "bytes": 109061,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/comparison.json",
+      "sha256": "7dd71d0e155e7a259b12694fa63e3c066417ebe24770cc07219948f6636f0157"
+    },
+    {
+      "bytes": 8971,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/training-receipt.json",
+      "sha256": "181ae0f16814884cba09349ed925f4c47516024dbfc0932ac67a38e1d47018a0"
+    },
+    {
+      "bytes": 401,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/actual-run-config.json",
+      "sha256": "7463b35d483f30a596840eb22ec863ce314760a15815c1dae657bca77f6b74d3"
+    },
+    {
+      "bytes": 401,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/run-config.json",
+      "sha256": "84baed5d3662dea1f4aa8f120a6c7a3f861d9f2cf01af5e6c62ef6ec26fa8134"
+    },
+    {
+      "bytes": 1584,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/pre-training-pins.json",
+      "sha256": "1f08b9c0dd1fc277d5374e7a6c87fc3a6603c47b49a5644aaaaebfeea55d375d"
+    },
+    {
+      "bytes": 50043,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/frozen-evaluation.json",
+      "sha256": "f8b479930b0c21304e74320a28c005a5cd2b6e89d5cfd31e0209ee5687580c2d"
+    },
+    {
+      "bytes": 3991,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/final-tests.xml",
+      "sha256": "755933eb4b83672d0b67d4c019599d1650cd8c300d607b1c09abb2ead9a1cacf"
+    },
+    {
+      "bytes": 28531,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/parent-evaluation/receipt.json",
+      "sha256": "b4d5bbc25424e44a3dc8a453a23a94106854a0856f136b6aa1860218910ecdaf"
+    },
+    {
+      "bytes": 1882,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/parent-evaluation/recounted-receipt.json",
+      "sha256": "9192150ed3b9e8bccfcfb9beab1cb543f57cb623a67377cb60c5abac2a8f9800"
+    },
+    {
+      "bytes": 38106,
+      "path": "artifacts/ir-training-sequence-v2-20261002/intent-01/child-evaluation/receipt.json",
+      "sha256": "73663c03229a8ea386442b934bdb38c8bd6287fe139ae6b6d03048f3506d9eb9"
+    },
+    {
+      "bytes": 264566,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-reports/intent_ir.json",
+      "sha256": "05e0288610872f949a18927e7a0ae3e5d6edc72fc7213518e84f9970348bd5ae"
+    },
+    {
+      "bytes": 69020,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-reports/legal_ir.json",
+      "sha256": "e49302c34edf5227bed26dc84fc10937f2a81761195aefe8e552828bc67abe0e"
+    },
+    {
+      "bytes": 213747,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-reports/security_ir.json",
+      "sha256": "470119d7748c0d0762d25e308fe467cef8f3fcddf6ce52cdbb15a1ecf1ae0f62"
+    },
+    {
+      "bytes": 294175,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/coverage-reports/ui_ux_ir.json",
+      "sha256": "bfb1981dd2f2923f3240686e1608675354be190e7211eab18cb0c1f614a1d9ac"
+    },
+    {
+      "bytes": 2836632,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/intent-family/result-02.json",
+      "sha256": "4e905852642f6c0914cf5674b2c0273c60606d98414227d57f0f760519842795"
+    },
+    {
+      "bytes": 80699,
+      "path": "artifacts/ir-training-algorithms-v2-20261002/clean-checkout-tests.xml",
+      "sha256": "2493cc0620fd4557d9206b0ad676f2e1c8e5ea8b5571c7bc4d1b715e4a6bf69c"
+    }
+  ],
+  "excluded_artifact_classes": [
+    "raw model checkpoints and weights",
+    "raw training corpora and prepared tensors",
+    "runtime logs and caches",
+    "historical predecessor artifacts referenced by local receipts"
+  ],
+  "full_corpus_training_claim": false,
+  "model_weights_published_to_github": false,
+  "packaging_fixes": [
+    "Use lightweight native Legal IR fixture payloads without importing the optional supervisor LLM router.",
+    "Include the TLA module-name shadowing fix required by native state projection checks."
+  ],
+  "parent_validation_base": "2cbd4df015a15324c2cbf70448c44768e550213e",
+  "proof_authority": false,
+  "qualification_limitations": [
+    "UI held-out reconstruction regressed; its baseline remains preferred.",
+    "Intent remains opt-in because six real-source clauses reject, including one regression.",
+    "Family inventory does not imply that every adapter exists or that every source supplies typed evidence."
+  ],
+  "research_evidence_scope": "Immutable receipts from local experiments. Referenced local checkpoint and corpus paths remain provenance references, not downloadable GitHub artifacts.",
+  "runtime_checkpoint_promoted": false,
+  "schema": "ir-training-source-publication/v1",
+  "source_files": [
+    {
+      "path": "ipfs_datasets_py/logic/backends/tla/compiler.py",
+      "sha256": "f06c6244cd68191b29139d6476a5a4c5a2c2a167bdc06b4951665a02fba5b573"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+      "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/family_training.py",
+      "sha256": "e42e5314a59966ade1163e062817484357feb97e86158e21360ad39fa1558e64"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/family_training_v2.py",
+      "sha256": "c5b66780a5ed5b5247f3de1467d34ed17cba89bf250e9b2490218fe9e71f2e02"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/__init__.py",
+      "sha256": "aa1c0d7bf68c1920ef385ef21a227bbef9af6a46a3ec663b4613ca8c3a8f41a7"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder.py",
+      "sha256": "035ca389848a37344025a69c8788fd66179f60ac21207c24779faeeb936c6f8a"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder_security.py",
+      "sha256": "0cdf07a58e99e4fcf39a9263020ef36e21301ce4ebe19fc73a7cf7a6e09e5f3e"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder_transfer.py",
+      "sha256": "4f8de202f497e26e272965dfebd455172cea23ba25acc6b2d96a03096600ac80"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/published_legal_initializer.py",
+      "sha256": "f9c3ab05432b2f28beed90cb6efc11555f7d367b004f3c4534245fbc111f3f9f"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_autoencoder_checkpoint.py",
+      "sha256": "2f442b4cd1c2b4a1f3f5f225e413ab646f69ac51cc186bb8df91b3dea067c9ba"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_autoencoder_features.py",
+      "sha256": "9d7e6d04686c4b7ff9bf77991f7b0cd56c79f9621e0cc8532a9df760d44aa4b8"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_canonical_export.py",
+      "sha256": "3d012d223b61295c6f5e85190f5dbb8b3530cfe3b24dfe25b0a9ea43d91b0259"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_training_source.py",
+      "sha256": "09f1198e7d738c8535dbab6616a31bd564f9de6320edb64bdf3a24c5f507f15c"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_curriculum_v2.py",
+      "sha256": "e35630a64b81b738355fa5889826962ac75cb2157dbe7c9c40f880d59e90a776"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_decoder.py",
+      "sha256": "d89ced7eaf0236d64f38cb58175f9312d12afb826fbea853b28de07fd6a97dff"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_decoder_continuation.py",
+      "sha256": "40fe65a705045b8833f73e1525551c05571d5ef6c6f0a3b7e65b68c310df4333"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_decoder_v2.py",
+      "sha256": "e60f7e295e7b60dedf836fe33ee583633b7478ae59898d6b8dabaf12bf1e3e47"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_grammar.py",
+      "sha256": "34a43e4ba450a133f096ed8ec99143d5e68aefc503a1b111c78a82f18ca745b3"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_grammar_v2.py",
+      "sha256": "0798626264b0ad36580ff1e0ef86c37c98613e9404f1535a7a4c7c8ab9232bcf"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_screening.py",
+      "sha256": "f53a59b989274d7944628017a3baae2ebd66dc432855a7aa92033774d7c41eab"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ui_native_training_views.py",
+      "sha256": "16fa66defc9f01a9acffbdefb41b55c24273c16bf86dc03658630cb1949f8866"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/typed_slots.py",
+      "sha256": "12bc865d038238e43caa0d2f61f0a81e8e9cb44bc8876479fbecffc4155747cf"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/alignment_curriculum.py",
+      "sha256": "59d41fdc6d2aea9093a600fb35c7d8c1cfd43eb93dd8911022cde04a701486b7"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/alignment_training.py",
+      "sha256": "a28cb5904a49f8716a36a2693a80e19916d56d31fb334b2c9780bf722a0be0b3"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/compositional_decoder.py",
+      "sha256": "6afa934a4d02452ece3a39816b21aa95482ecbd5fc1ea5acea2074bb0df2bb24"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/copy_roundtrip.py",
+      "sha256": "d690e93ee3e1b136e5ac8bc7900aff1f61a3a1f67cf025ff41e8ab3d1a417de3"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/coverage_curriculum.py",
+      "sha256": "e1b8b0532fa6df6c3fd73c6d191cd4547b34b031eb2550c8bd378953f100f782"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/coverage_training.py",
+      "sha256": "e362cccfcb410db952dd476dbb050838e032d91edf56ee4240bee641eddcbc89"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/extended_projections.py",
+      "sha256": "20163bc5eb509065475bbe85716467b106f0b9dd74a1aa530bb61755600697eb"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/guarded_workflow.py",
+      "sha256": "27f57fe52c30c59d24386acf7e66785270ed33351791ad72b9d6f55d8df08b57"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/instruction_scope.py",
+      "sha256": "d7e5c9bbcf628d83ccc65dc6af78652e67e9cedfee100be67e17bc32581e3152"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/lean_projection.py",
+      "sha256": "aef6ff43d470857e67dbbc16707d213db0acac2439c1eddf1538a6f8eb930ed7"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+      "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/projection_contracts.py",
+      "sha256": "86386464d599b4fc5af66b3e6f634e797594bbde0c3e2bcff087d802c478fdaf"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/projection_request.py",
+      "sha256": "7bea0203a6173b014866616ec1a50a4adbf5c43678bdf2d184ae991af3509683"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_aligned_decoder.py",
+      "sha256": "61c6d5c0453a69a0f50237b960c3bccf87f1c5836a212c002f4a621242a6d6cf"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_decoder.py",
+      "sha256": "a393974d44e798bd4022841153ce37d90bc38a0fac397d35fa7f06ef61e996b9"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+      "sha256": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_inverse_codec.py",
+      "sha256": "91773ac7efa5af821c5109c42d45650f40b23300cf85d5756cdb99735292dd80"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_inverse_recovery.py",
+      "sha256": "decca91bfa4ca8c313a9577ca6f1f95ba2cad943c0e86dd49420d8aab51f09a7"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_logic.py",
+      "sha256": "3b97b839f5a2afa451f76a9c330f9e485e47ed1f62d80e568a424a92ec5433eb"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_search_decoder.py",
+      "sha256": "f6e36c0eb6d605f8e68a9362fdeca957ab4ccaf3d836c9784448cb245ce4bc34"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_search_policy.py",
+      "sha256": "e3267c120d306ff3e859e424a8981120448188a6ec9ffdeed9c28001d65030ee"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_training.py",
+      "sha256": "b374618dc8e587805bf347f0c2bbe6cff699472d352c35a8882ddfa94f869848"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/roundtrip.py",
+      "sha256": "1f07129fa0d66daa6f3fb682b1df72832f6bda709c65af6b3b3eae520339eacb"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/state_projections.py",
+      "sha256": "d22aa49f30252bf70c63ab76ee8338a045751f37d8cfeb5314c0587a0658ccb1"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/structural_projections.py",
+      "sha256": "c03ce3a4a083c463a3ced8d8dd8e08b9693711e35829cf8f44b9b007ab1bd6b9"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/workflow_state.py",
+      "sha256": "075283eb7eebb4426f535db2e20b714b6a208910c31e71c3c44752bca0464e0f"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/security_ir/code_program_derivation.py",
+      "sha256": "2084ee42f760d7d59b560a04b24af3e47c8966b7909f800f2b4c88be8f7bbbae"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_verification/source_adapters.py",
+      "sha256": "f6c038c20a258c729abc6c76483c83bafc75394794af58aa868e1f9b0e851bb1"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_copy_alignment.py",
+      "sha256": "30d86cb556ba79ab58c49a8ee0128438fbecfbb02ed009943117a64de7388ff4"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_family_training.py",
+      "sha256": "f0c17b0522dba3d84405ffc55747748a068474ab2b7e9d23eee83f772e44eda1"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_family_training_v2.py",
+      "sha256": "4c9b1b872ca56929a4060272ec4e7056f38b675d1033b3fa257586beb8cf3b68"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_copy.py",
+      "sha256": "bb23ea196d90e3fd8fc667599cf2904793f2f27c90f7ff82ba34aacc10c8f238"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_copy_aligned.py",
+      "sha256": "aab0d5b94eadc206fed9fc3a4667d7d0d83aeb7fa5e3004f86e4eae47b047e2d"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_copy_continuation.py",
+      "sha256": "a2237be0874c71686347cf9e3b9ab7cf2a68fd72aa30a369a9c33cd6f57f422b"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_copy_grammar_search.py",
+      "sha256": "f57790b97d7b1f49d6edd8f017a37502e75b886db9a656ea597f0339aec5f3c8"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_text.py",
+      "sha256": "0097b0128e21bcf386380490ae39023c9a15a44111088fb913f9fab5c366c9a3"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_family_training_v2.py",
+      "sha256": "960d18ee56f8bdb8ab35869b7e638f87cc951a0020e7ea222a6889a920ac5ce1"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_family_training.py",
+      "sha256": "85764c89d3f7387b29e3ebe70fd5afe2ef7792d48aec0d395b1fa100184f48c9"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/security_joint_training.py",
+      "sha256": "ff39e64d22fa7cc08478fe6e20b889a5715510f337713c3fdd6c1f34de838135"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/ui_family_training.py",
+      "sha256": "aef0a66c36e50409945e698c50f070e01d406724b11f7c016890c7496161f9b4"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/family_native_fixtures.py",
+      "sha256": "bacc5c45c5c6c56429db9d2fe10ccd8b5cc5b8ef2c4bcf2d46ad0a39b0780841"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_domain_family_training_v2.py",
+      "sha256": "60f0b21db9b6bd25951ea4326233c84c0127bf6e55ff2efb17747090bb1bebe9"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_family_training.py",
+      "sha256": "2c24c02d523aa146f633ee0e327f3d28be27fa5371927f8fa6607e40e912c55b"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_family_training_v2.py",
+      "sha256": "126c433dd4fb955fcb6395a6917ed7ed50debcb4bb4703c53cb27be22f04407b"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_security_formula_decoder.py",
+      "sha256": "0b8bb2d0392cdddec69f42782dc7a30f7f647c5f7d15919355ccc06359441c13"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_security_formula_decoder_continuation.py",
+      "sha256": "aa572b465774381800588c7f4a042b903715ac90373ec77448b2f61ed256acaf"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_security_formula_decoder_v2.py",
+      "sha256": "098689be63f2428c9db6c050550d2aaf2175c56e50aa134220a07e99ee4b7e51"
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_security_joint_training.py",
+      "sha256": "3f203d03174bb77c8db02cfda9a5471012e67a4878dbbc962e764894323b0a72"
+    },
+    {
+      "path": "tests/unit/logic/intent_ir/formalize/test_alignment_curriculum.py",
+      "sha256": "51a09c4c3d331246d18cc8e354e57b936af3b5840bcba2522132e0720186286e"
+    },
+    {
+      "path": "tests/unit/logic/intent_ir/formalize/test_alignment_training.py",
+      "sha256": "d2bcf418ebdfa495a72ff7edc4612d519216da79536ed6c434906ea7059c8620"
+    },
+    {
+      "path": "tests/unit/logic/intent_ir/formalize/test_coverage_curriculum.py",
+      "sha256": "4702ee9810e616ed2006ca67a19b072b37e15f1e1ff175808a82fdde2e2fcf2e"
+    },
+    {
+      "path": "tests/unit/logic/intent_ir/formalize/test_coverage_training.py",
+      "sha256": "74b5fdc442bf44eba8c8029239c1c19e46ef727c62ac0ba86da41216786b397f"
+    },
+    {
+      "path": "tests/unit/logic/intent_ir/formalize/test_rich_aligned_decoder.py",
+      "sha256": "5d43d650782b184c289331b0788c98205863ff456f75152e014692174a9b7bf5"
+    },
+    {
+      "path": "tests/unit/logic/intent_ir/formalize/test_rich_inverse_codec.py",
+      "sha256": "545d6954c399c9e81cf2c7707c3161a8953e40cab49f19f37837b7be7094ff42"
+    },
+    {
+      "path": "tests/unit/logic/intent_ir/formalize/test_rich_inverse_recovery.py",
+      "sha256": "91cef9ca971c6c640db6ccc3862c44b4e29657115043bf32c9063727d4777bd8"
+    },
+    {
+      "path": "tests/unit/logic/intent_ir/formalize/test_rich_search_decoder.py",
+      "sha256": "e0e4b7b619882db94bb7bda080a3a4d392d05d8ca444a86050452c00708715b1"
+    },
+    {
+      "path": "tests/unit/logic/security_ir/test_code_program_derivation.py",
+      "sha256": "5238147e171ee110b938077a1de54829c96aed6ee320865ee96604e9a1cd5bbd"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_family_training.py",
+      "sha256": "d05bebecc00680a72c582dea73026c605ab5485ff7d5930f531bba5ae02a3a54"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_family_training_v2.py",
+      "sha256": "c10ab3d9b89d8338031bb2e41f4117cfc8dba6cee541d1b82e563f97b7655acb"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_paired_copy_aligned.py",
+      "sha256": "641c4b2916ac526cebcc8d11557c704eb6880d49179ed1ecb1d0037c7260bfc0"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_paired_copy_continuation.py",
+      "sha256": "f9df3ef045033379b3bcc5a964587d0372176784714d1fa5aaebcda143138789"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_family_training.py",
+      "sha256": "fb2410c5f0f1788cb0e2bc86699da080b9253fbe5962d6681cb71c2e5047449e"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_ui_family_training.py",
+      "sha256": "92242fea8327cad08a50f5d3674a7d08fd4ce4e9fbc5ed4072c3d5d611463627"
+    }
+  ]
+}

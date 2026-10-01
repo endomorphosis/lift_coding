@@ -1,0 +1,396 @@
+{
+  "comparison_scope": "expanded native target basis; loss is not directly comparable to old smaller-family panels",
+  "corpus_sha256": "805f415255c8c2a43cfed0d577c6dd6c8f42fa3b6beae6c420f5be40e0265ae4",
+  "driver_sha256": "869f38e7dcc22ff74d15e942411fc80f82f54c7a525f796a5104c2030c0d68ff",
+  "hyperparameter_search_performed": false,
+  "lake_build_executed": false,
+  "network_calls": 0,
+  "preflight": {
+    "legal_ir": {
+      "families": [
+        "deontic",
+        "event_calculus",
+        "frame_logic",
+        "tdfol",
+        "temporal"
+      ],
+      "row_counts": {
+        "test": 2,
+        "train": 6,
+        "validation": 2
+      }
+    },
+    "security_ir": {
+      "families": [
+        "authorization",
+        "program"
+      ],
+      "row_counts": {
+        "test": 2,
+        "train": 6,
+        "validation": 2
+      }
+    },
+    "ui_ux_ir": {
+      "families": [
+        "dcec",
+        "event_calculus",
+        "frame_logic",
+        "tdfol",
+        "temporal",
+        "transition_system"
+      ],
+      "row_counts": {
+        "test": 2,
+        "train": 6,
+        "validation": 2
+      }
+    }
+  },
+  "prescribed_settings": "shared v2 defaults for all domains; Security source continuation3epochs from exact frozenv2 parent",
+  "provider_calls": 0,
+  "results": {
+    "legal_ir": {
+      "after": 0.008373075955736116,
+      "before": 0.008521107939985482,
+      "descriptor": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/legal_ir/recipe.json",
+        "schema": "domain-native-family-training/v2",
+        "sha256": "04c65fcd56096b560dfe0c06036bb4daafad2c77658f7984c1dffd1a17728c8a"
+      },
+      "effective_feature_panels": {
+        "training": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 6,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 6
+        },
+        "validation": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        }
+      },
+      "families": [
+        "deontic",
+        "event_calculus",
+        "frame_logic",
+        "tdfol",
+        "temporal"
+      ],
+      "optimizer_steps": 4,
+      "selected_calibration_families": [
+        "event_calculus",
+        "tdfol"
+      ],
+      "selected_epoch": 0,
+      "source_checkpoint": null,
+      "source_optimizer_steps": 0,
+      "test_coverage": {
+        "projections": [
+          {
+            "has_coverage": true,
+            "known_atoms": 68,
+            "projection_id": "legal-ir/bridge-view/cec/v1",
+            "row": 0,
+            "unknown_atoms": 33
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 28,
+            "projection_id": "legal-ir/bridge-view/deontic/v1",
+            "row": 0,
+            "unknown_atoms": 4
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 325,
+            "projection_id": "legal-ir/bridge-view/frame_logic/v1",
+            "row": 0,
+            "unknown_atoms": 59
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 31,
+            "projection_id": "legal-ir/bridge-view/tdfol/v1",
+            "row": 0,
+            "unknown_atoms": 13
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 955,
+            "projection_id": "legal_ir/supplemental/temporal/v2",
+            "row": 0,
+            "unknown_atoms": 30
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 70,
+            "projection_id": "legal-ir/bridge-view/cec/v1",
+            "row": 1,
+            "unknown_atoms": 15
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 23,
+            "projection_id": "legal-ir/bridge-view/deontic/v1",
+            "row": 1,
+            "unknown_atoms": 7
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 322,
+            "projection_id": "legal-ir/bridge-view/frame_logic/v1",
+            "row": 1,
+            "unknown_atoms": 61
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 33,
+            "projection_id": "legal-ir/bridge-view/tdfol/v1",
+            "row": 1,
+            "unknown_atoms": 7
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 952,
+            "projection_id": "legal_ir/supplemental/temporal/v2",
+            "row": 1,
+            "unknown_atoms": 33
+          }
+        ],
+        "untrained_projection_ids": []
+      },
+      "test_objective": 0.007511188610583202
+    },
+    "security_ir": {
+      "after": 0.006267067216367805,
+      "before": 0.006285307112747735,
+      "descriptor": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/security_ir/recipe.json",
+        "schema": "domain-native-family-training/v2",
+        "sha256": "9f990ef1adcc65719a1eb8d84ef725946a931602b26de7aaf77b13e3c65acac0"
+      },
+      "effective_feature_panels": {
+        "training": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 6,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 6
+        },
+        "validation": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        }
+      },
+      "families": [
+        "authorization",
+        "program"
+      ],
+      "optimizer_steps": 4,
+      "selected_calibration_families": [
+        "program"
+      ],
+      "selected_epoch": 0,
+      "source_checkpoint": {
+        "completion_authority": false,
+        "execution_authority": false,
+        "manifest_sha256": "20e4967fc035ac092fb8cb769d63d259800c8ddb1069178c6cb4da8491e75d14",
+        "output": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/security_ir/source",
+        "proof_authority": false,
+        "schema": "security-formula-production-continuation@1",
+        "security_specification_inferred": false,
+        "weights_sha256": "340438a6bb26121577b59080edc6b14179820979e1c44182b5cdfcdc8c43f2db",
+        "whole_program_semantics_verified": false
+      },
+      "source_optimizer_steps": 3,
+      "test_coverage": {
+        "projections": [
+          {
+            "has_coverage": true,
+            "known_atoms": 551,
+            "projection_id": "program.program_ir/v1",
+            "row": 0,
+            "unknown_atoms": 796
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 1283,
+            "projection_id": "security_ir/supplemental/authorization/v2",
+            "row": 0,
+            "unknown_atoms": 55
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 597,
+            "projection_id": "program.program_ir/v1",
+            "row": 1,
+            "unknown_atoms": 172
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 1283,
+            "projection_id": "security_ir/supplemental/authorization/v2",
+            "row": 1,
+            "unknown_atoms": 55
+          }
+        ],
+        "untrained_projection_ids": []
+      },
+      "test_objective": 0.00628977896452231
+    },
+    "ui_ux_ir": {
+      "after": 0.0012034344326976875,
+      "before": 0.0012713403339209724,
+      "descriptor": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/ui_ux_ir/recipe.json",
+        "schema": "domain-native-family-training/v2",
+        "sha256": "0a6823723668d59fbb50d49c103dae9e9429affccd943eff04b568322158a2a0"
+      },
+      "effective_feature_panels": {
+        "training": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 6,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 6
+        },
+        "validation": {
+          "colliding_row_groups": [],
+          "distinct_retained_feature_vectors": 2,
+          "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+          "rows": 2
+        }
+      },
+      "families": [
+        "dcec",
+        "event_calculus",
+        "frame_logic",
+        "tdfol",
+        "temporal",
+        "transition_system"
+      ],
+      "optimizer_steps": 4,
+      "selected_calibration_families": [
+        "dcec",
+        "event_calculus",
+        "tdfol",
+        "transition_system"
+      ],
+      "selected_epoch": 0,
+      "source_checkpoint": null,
+      "source_optimizer_steps": 0,
+      "test_coverage": {
+        "projections": [
+          {
+            "has_coverage": true,
+            "known_atoms": 1220,
+            "projection_id": "ui_ux_ir/declared_state/native/v2",
+            "row": 0,
+            "unknown_atoms": 2068
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 828,
+            "projection_id": "ui_ux_ir/declared_state/tla_plus/v2",
+            "row": 0,
+            "unknown_atoms": 7
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 1220,
+            "projection_id": "ui_ux_ir/event_prefix/native/v2",
+            "row": 0,
+            "unknown_atoms": 482
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 41,
+            "projection_id": "ui_ux_ir:dcec",
+            "row": 0,
+            "unknown_atoms": 0
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 215,
+            "projection_id": "ui_ux_ir:event_calculus",
+            "row": 0,
+            "unknown_atoms": 0
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 24,
+            "projection_id": "ui_ux_ir:flogic",
+            "row": 0,
+            "unknown_atoms": 1
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 62,
+            "projection_id": "ui_ux_ir:interface_bindings",
+            "row": 0,
+            "unknown_atoms": 0
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 72,
+            "projection_id": "ui_ux_ir:tdfol",
+            "row": 0,
+            "unknown_atoms": 3
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 1220,
+            "projection_id": "ui_ux_ir/event_prefix/native/v2",
+            "row": 1,
+            "unknown_atoms": 245
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 28,
+            "projection_id": "ui_ux_ir:dcec",
+            "row": 1,
+            "unknown_atoms": 0
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 161,
+            "projection_id": "ui_ux_ir:event_calculus",
+            "row": 1,
+            "unknown_atoms": 15
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 24,
+            "projection_id": "ui_ux_ir:flogic",
+            "row": 1,
+            "unknown_atoms": 1
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 62,
+            "projection_id": "ui_ux_ir:interface_bindings",
+            "row": 1,
+            "unknown_atoms": 0
+          },
+          {
+            "has_coverage": true,
+            "known_atoms": 42,
+            "projection_id": "ui_ux_ir:tdfol",
+            "row": 1,
+            "unknown_atoms": 2
+          }
+        ],
+        "untrained_projection_ids": []
+      },
+      "test_objective": 0.0047640660445747276
+    }
+  },
+  "schema": "expanded-domain-family-v2-qualification/v1",
+  "scope": "authored structurally varied development controls; supplied constraints/weak native legal teacher not independent semantic truth",
+  "source_language_decoding_improvement_claim": false,
+  "source_models_reinitialized": false,
+  "test_used_for_fit_or_selection": false
+}

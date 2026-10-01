@@ -1,0 +1,2907 @@
+{
+  "alignment_loss_independent_causal_ablation_run": false,
+  "default_supervisor_dispatch_changed": false,
+  "inference_api": "ipfs_datasets_py.logic.intent_ir.formalize.rich_aligned_decoder.prepare_aligned_rich_intent",
+  "matched_changes": {
+    "new_authored_holdout": [
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:long:tundra:save:1",
+        "instruction": "Must save the tundra packet beneath amber archival storage racks.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:long:tundra:view:2",
+        "instruction": "Do not view the tundra packet beneath amber archival storage racks",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:long:tundra:use:3",
+        "instruction": "The operator intends to use the tundra packet beneath amber archival storage racks.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:long:tundra:reuse:0",
+        "instruction": "Reuse tundra packet beneath amber archival storage racks",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:long:tundra:run:1",
+        "instruction": "Must run the tundra packet beneath amber archival storage racks.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:long:tundra:create:2",
+        "instruction": "Do not create the tundra packet beneath amber archival storage racks",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:long:tundra:fetch:3",
+        "instruction": "The operator intends to fetch the tundra packet beneath amber archival storage racks.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:long:tundra:show:0",
+        "instruction": "Show tundra packet beneath amber archival storage racks",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:internal_article:saffron:save:2",
+        "instruction": "Do not save the saffron packet with the bronze dispatch record",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:internal_article:saffron:view:3",
+        "instruction": "The operator intends to view the saffron packet with the bronze dispatch record.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:internal_article:saffron:use:0",
+        "instruction": "Use saffron packet with the bronze dispatch record",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:internal_article:saffron:reuse:1",
+        "instruction": "Must reuse the saffron packet with the bronze dispatch record.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:internal_article:saffron:run:2",
+        "instruction": "Do not run the saffron packet with the bronze dispatch record",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:internal_article:saffron:create:3",
+        "instruction": "The operator intends to create the saffron packet with the bronze dispatch record.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:internal_article:saffron:fetch:0",
+        "instruction": "Fetch saffron packet with the bronze dispatch record",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:internal_article:saffron:show:1",
+        "instruction": "Must show the saffron packet with the bronze dispatch record.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:repeated_occurrences:violet:view:0",
+        "instruction": "View violet packet violet packet",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:repeated_occurrences:violet:reuse:2",
+        "instruction": "Do not reuse the violet packet violet packet",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:repeated_occurrences:violet:create:0",
+        "instruction": "Create violet packet violet packet",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:repeated_occurrences:violet:show:2",
+        "instruction": "Do not show the violet packet violet packet",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:action_noun:opal:save:0",
+        "instruction": "Save opal register with secondary call logs",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:action_noun:opal:view:1",
+        "instruction": "Must view the opal register with secondary call logs.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:action_noun:opal:use:2",
+        "instruction": "Do not use the opal register with secondary call logs",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:action_noun:opal:reuse:3",
+        "instruction": "The operator intends to reuse the opal register with secondary call logs.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:action_noun:opal:run:0",
+        "instruction": "Run opal register with secondary call logs",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:action_noun:opal:create:1",
+        "instruction": "Must create the opal register with secondary call logs.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:action_noun:opal:fetch:2",
+        "instruction": "Do not fetch the opal register with secondary call logs",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:action_noun:opal:show:3",
+        "instruction": "The operator intends to show the opal register with secondary call logs.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:leading_extension:lilac:view:2",
+        "instruction": "Do not view the .lilac lilac packet beside dense storage blocks",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:leading_extension:lilac:reuse:0",
+        "instruction": "Reuse .lilac lilac packet beside dense storage blocks",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:leading_extension:lilac:create:2",
+        "instruction": "Do not create the .lilac lilac packet beside dense storage blocks",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:leading_extension:lilac:show:0",
+        "instruction": "Show .lilac lilac packet beside dense storage blocks",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:quoted_command:marble:save:2",
+        "instruction": "Do not save the `marble inspect` with the bronze dispatch record",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:quoted_command:marble:view:3",
+        "instruction": "The operator intends to view the `marble inspect` with the bronze dispatch record.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:quoted_command:marble:use:0",
+        "instruction": "Use `marble inspect` with the bronze dispatch record",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:quoted_command:marble:reuse:1",
+        "instruction": "Must reuse the `marble inspect` with the bronze dispatch record.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:quoted_command:marble:run:2",
+        "instruction": "Do not run the `marble inspect` with the bronze dispatch record",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:quoted_command:marble:create:3",
+        "instruction": "The operator intends to create the `marble inspect` with the bronze dispatch record.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:quoted_command:marble:fetch:0",
+        "instruction": "Fetch `marble inspect` with the bronze dispatch record",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:quoted_command:marble:show:1",
+        "instruction": "Must show the `marble inspect` with the bronze dispatch record.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:numeric_range:ivory:save:3",
+        "instruction": "The operator intends to save the ivory packet for 3-7 transfer batches.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:numeric_range:ivory:view:0",
+        "instruction": "View ivory packet for 3-7 transfer batches",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:numeric_range:ivory:use:1",
+        "instruction": "Must use the ivory packet for 3-7 transfer batches.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:numeric_range:ivory:reuse:2",
+        "instruction": "Do not reuse the ivory packet for 3-7 transfer batches",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:numeric_range:ivory:run:3",
+        "instruction": "The operator intends to run the ivory packet for 3-7 transfer batches.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:numeric_range:ivory:create:0",
+        "instruction": "Create ivory packet for 3-7 transfer batches",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:numeric_range:ivory:fetch:1",
+        "instruction": "Must fetch the ivory packet for 3-7 transfer batches.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "aligned-span-v2:test:numeric_range:ivory:show:2",
+        "instruction": "Do not show the ivory packet for 3-7 transfer batches",
+        "parent_exact": false
+      }
+    ],
+    "new_source_form_holdout": [
+      {
+        "child_exact": true,
+        "id": "intent-source-form:validation:3:create:explicit_actor_article",
+        "instruction": "The operator intends to create the .cfg local register beside compressed disk artifacts.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "intent-source-form:validation:3:reuse:recommended_article",
+        "instruction": "Should reuse the .cfg local register beside compressed disk artifacts.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "intent-source-form:validation:3:view:required_article",
+        "instruction": "Must view the .cfg local register beside compressed disk artifacts.",
+        "parent_exact": false
+      }
+    ],
+    "prior_real_source_regression": [
+      {
+        "child_exact": true,
+        "id": "intent-unit:27fd6f152fa7dcfcf35856f73c145f7724f3c80cf55c568ad631b2ec70ca585d",
+        "instruction": "View venue menu with optional filters.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "intent-unit:0d6ce9b51727ac71942294c92045bc34d002aabc665346f38e2c6fa694843993",
+        "instruction": "Show user actual saved path",
+        "parent_exact": false
+      },
+      {
+        "child_exact": true,
+        "id": "intent-unit:9462932c5061817566075fcddcff00a77996e7c4323b8c37f87fd632b6d84041",
+        "instruction": "Use vLLM backend for 5-10x faster evaluation.",
+        "parent_exact": false
+      },
+      {
+        "child_exact": false,
+        "id": "intent-unit:c864c2eb77333ca4dc6c7ea02695b9f05a6ec95da2f7d08b177c19902b597cf4",
+        "instruction": "Search for agents by skill.",
+        "parent_exact": true
+      }
+    ]
+  },
+  "model_and_curriculum_changed_together": true,
+  "profile": "matched fresh ordinary beam16 plus generated-only token-faithful inverse codec; no grammar-constrained search",
+  "profiles": {
+    "child": {
+      "checkpoint": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/model/candidate.json",
+        "schema": "shared-paired-copy-aligned-continuation/v2",
+        "sha256": "9cf4da607d6fdb48400409e6618fcfe3246d0673e180696879b5601d1a889eec"
+      },
+      "counts": {
+        "accepted": 133,
+        "exact": 133,
+        "incorrect_accepted": 0,
+        "rows": 139,
+        "stage:accepted": 133,
+        "stage:encoder_source_agreement": 5,
+        "stage:inverse_source_agreement": 1
+      },
+      "elapsed_seconds": 46.43760657380335,
+      "evidence": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/child-evaluation/rows.jsonl.gz",
+        "sha256": "719476c9863e89b45269d67d662258c19dac37c4fc9899f32965b6a26e830e51"
+      },
+      "groups": {
+        "new_authored_holdout": {
+          "accepted": 64,
+          "exact": 64,
+          "incorrect_accepted": 0,
+          "rows": 64,
+          "stage:accepted": 64
+        },
+        "new_source_form_holdout": {
+          "accepted": 56,
+          "exact": 56,
+          "incorrect_accepted": 0,
+          "rows": 56,
+          "stage:accepted": 56
+        },
+        "prior_real_source_regression": {
+          "accepted": 13,
+          "exact": 13,
+          "incorrect_accepted": 0,
+          "rows": 19,
+          "stage:accepted": 13,
+          "stage:encoder_source_agreement": 5,
+          "stage:inverse_source_agreement": 1
+        }
+      },
+      "lake_counts": {
+        "not_run": 6,
+        "passed": 21
+      },
+      "native_decoder_calls": 10039,
+      "native_encoder_calls": 288,
+      "original_receipt": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/child-evaluation/receipt.json",
+        "sha256": "73663c03229a8ea386442b934bdb38c8bd6287fe139ae6b6d03048f3506d9eb9"
+      },
+      "reporting_correction": null
+    },
+    "parent": {
+      "checkpoint": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-coverage-20261002/intent-01/source-training-02/model/candidate.json",
+        "schema": "shared-paired-copy-continuation/v1",
+        "sha256": "6e34b95ddbe74d1263bccf7bc2fb5657120365de881459215091cc85547f8f21"
+      },
+      "counts": {
+        "accepted": 80,
+        "exact": 80,
+        "incorrect_accepted": 0,
+        "rows": 139,
+        "stage:accepted": 80,
+        "stage:encoder_source_agreement": 56,
+        "stage:inverse_source_agreement": 3
+      },
+      "elapsed_seconds": 66.66976458393037,
+      "evidence": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/parent-evaluation/rows.jsonl.gz",
+        "sha256": "aecc2891a059cf82fdac66f2cbeffae39e416d76752044cd1d702d7d13caf8cb"
+      },
+      "groups": {
+        "new_authored_holdout": {
+          "accepted": 16,
+          "exact": 16,
+          "incorrect_accepted": 0,
+          "rows": 64,
+          "stage:accepted": 16,
+          "stage:encoder_source_agreement": 48
+        },
+        "new_source_form_holdout": {
+          "accepted": 53,
+          "exact": 53,
+          "incorrect_accepted": 0,
+          "rows": 56,
+          "stage:accepted": 53,
+          "stage:inverse_source_agreement": 3
+        },
+        "prior_real_source_regression": {
+          "accepted": 11,
+          "exact": 11,
+          "incorrect_accepted": 0,
+          "rows": 19,
+          "stage:accepted": 11,
+          "stage:encoder_source_agreement": 8
+        }
+      },
+      "lake_counts": {
+        "not_run": 13,
+        "passed": 14
+      },
+      "native_decoder_calls": 20252,
+      "native_encoder_calls": 294,
+      "original_receipt": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/parent-evaluation/receipt.json",
+        "sha256": "b4d5bbc25424e44a3dc8a453a23a94106854a0856f136b6aa1860218910ecdaf"
+      },
+      "reporting_correction": "accepted summary had a duplicate stage-key increment; exact_AST and immutable per-row outcomes unchanged"
+    }
+  },
+  "remaining_failures": [
+    {
+      "id": "intent-unit:d3182874d89e9badb01dc1a1277640626776e736b8acac0019e55854b94e2c5b",
+      "instruction": "Save .mmd source files alongside rendered outputs",
+      "stage": "encoder_source_agreement"
+    },
+    {
+      "id": "intent-unit:0c46bf28a3c6be005f761cb39b3d02a986633f1aabcd0cf60e0f28601a63175c",
+      "instruction": "Do not reuse the full system report template.",
+      "stage": "encoder_source_agreement"
+    },
+    {
+      "id": "intent-unit:12469b647e692c7f4ae3d49a3f7d9528255b4c6d898cb3575eef52b8661b2987",
+      "instruction": "Run `lametric icons` for full list.",
+      "stage": "encoder_source_agreement"
+    },
+    {
+      "id": "intent-unit:d5b167f28f485e26392609beedfe4445738b5b00bc4edb64a7e421049d6e0eea",
+      "instruction": "Run `lametric sounds` for full list.",
+      "stage": "encoder_source_agreement"
+    },
+    {
+      "id": "intent-unit:c864c2eb77333ca4dc6c7ea02695b9f05a6ec95da2f7d08b177c19902b597cf4",
+      "instruction": "Search for agents by skill.",
+      "stage": "encoder_source_agreement"
+    },
+    {
+      "id": "intent-unit:fef416df38ef395ae6a259ecc7d98229f64684cd564028d5a63b9a456dd81950",
+      "instruction": "Create the usage agreement with the commercial terms.",
+      "stage": "inverse_source_agreement"
+    }
+  ],
+  "schema": "intent-aligned-matched-comparison/v2",
+  "selection": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/frozen-evaluation.json",
+    "sha256": "f8b479930b0c21304e74320a28c005a5cd2b6e89d5cfd31e0209ee5687580c2d"
+  },
+  "source_accuracy_is_not_family_loss": true,
+  "syntax_compilation_is_not_semantic_proof": true,
+  "timing_is_isolated_latency_benchmark": false,
+  "training": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/training-receipt.json",
+    "sha256": "181ae0f16814884cba09349ed925f4c47516024dbfc0932ac67a38e1d47018a0"
+  },
+  "weak_authored_holdouts_not_blind_semantic_gold": true,
+  "weight_ablation": {
+    "actual_native_inference": true,
+    "disable_copy": {
+      "beam_width": 16,
+      "checkpoint": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/model/candidate.json",
+        "schema": "shared-paired-copy-aligned-continuation/v2",
+        "sha256": "9cf4da607d6fdb48400409e6618fcfe3246d0673e180696879b5601d1a889eec"
+      },
+      "completion_authority": false,
+      "context": null,
+      "continue_planning": true,
+      "counts": {
+        "decoder_executions": 0,
+        "encoder_executions": 2
+      },
+      "decoder_searches": [],
+      "encoder_search": {
+        "beam_width": 16,
+        "checkpoint": {
+          "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/model/candidate.json",
+          "schema": "shared-paired-copy-aligned-continuation/v2",
+          "sha256": "9cf4da607d6fdb48400409e6618fcfe3246d0673e180696879b5601d1a889eec"
+        },
+        "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+        "direction": "encode",
+        "download_calls": 0,
+        "execution_authority": false,
+        "max_new_tokens": 160,
+        "native_decoder_calls": 2416,
+        "proof_authority": false,
+        "provider_calls": 0,
+        "publication_performed": false,
+        "ranking": "descending_raw_autoregressive_log_probability",
+        "rows": [
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9928570985794067,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999879598617554,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -0.008054193232637579,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 0,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.003157154656946659,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9993137121200562,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9998687505722046,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9539003372192383,
+                "token": "<action>"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> not not unspecified <action>",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -5.85849614961275,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 1,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "not",
+              "not",
+              "unspecified",
+              "<action>"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0014558847760781646,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999531507492065,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -6.533016161408371,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 2,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0012262058444321156,
+                "token": "is"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.8402860760688782,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999209642410278,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.998809814453125,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9583100080490112,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999997615814209,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9966351389884949,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.5178990364074707,
+                "token": "required"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> is not unspecified <action> unspecified <object> <modality> required",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -7.58410678699684,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 3,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "is",
+              "not",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "<modality>",
+              "required"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0012262058444321156,
+                "token": "is"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.8402860760688782,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999209642410278,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.998809814453125,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9583100080490112,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999997615814209,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9966351389884949,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.47359809279441833,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> is not unspecified <action> unspecified <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -7.67329001353874,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 4,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "is",
+              "not",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.00040689759771339595,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999961853027344,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9457223415374756,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9310951828956604,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> <object> <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -7.934156309190573,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 5,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "<object>",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0003524298081174493,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.6324363350868225,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999982118606567,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999872446060181,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9046913981437683,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <actor> unspecified <action> <object> <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -8.509475280086724,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 6,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "<object>",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0011553519871085882,
+                "token": "to"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.1641416996717453,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999673366546631,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> to <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -8.571306631597455,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 7,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "to",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0011553519871085882,
+                "token": "to"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.8324284553527832,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9872368574142456,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9562532305717468,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.1830139011144638,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9997615218162537,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999998807907104,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999985694885254,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> to not not not <action> <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -8.703594598733087,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 8,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "to",
+              "not",
+              "not",
+              "not",
+              "<action>",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0012262058444321156,
+                "token": "is"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.129769966006279,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999305009841919,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> is <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -8.746717403191502,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 9,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "is",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.003157154656946659,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9993137121200562,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9998687505722046,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9539003372192383,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0374687984585762,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9791000485420227,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999980926513672,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> not not unspecified <action> <object> <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -9.112293728350584,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 10,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "not",
+              "not",
+              "unspecified",
+              "<action>",
+              "<object>",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0003524298081174493,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.36736196279525757,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9486176371574402,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.6950045228004456,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <actor> unspecified <action> unspecified <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -9.369118740982966,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 11,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.003157154656946659,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9993137121200562,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9998687505722046,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.024780238047242165,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9993557333946228,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999945163726807,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> not not unspecified <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -9.458085955842513,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 12,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "not",
+              "not",
+              "unspecified",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.0011553519871085882,
+                "token": "to"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.8324284553527832,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9872368574142456,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9562532305717468,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.09237705916166306,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.868241012096405,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999969005584717,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> to not not not unspecified <object> <modality> intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -9.528329407160076,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 13,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "to",
+              "not",
+              "not",
+              "not",
+              "unspecified",
+              "<object>",
+              "<modality>",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.003157154656946659,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9993137121200562,
+                "token": "not"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9998687505722046,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.01580597646534443,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> not not unspecified intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -9.907107944687988,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 14,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "not",
+              "not",
+              "unspecified",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          },
+          {
+            "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+            "copy_enabled": false,
+            "copy_probability_is_semantic_confidence": false,
+            "copy_trace": [
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999997615814209,
+                "token": "<actor>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.999998927116394,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 1.0,
+                "token": "<action>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9995391368865967,
+                "token": "unspecified"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9996392726898193,
+                "token": "<object>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9928570985794067,
+                "token": "<modality>"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 0.9999879598617554,
+                "token": "intended"
+              },
+              {
+                "copy_probability": 0.0,
+                "copy_source_positions": [],
+                "dominant_branch": "generator",
+                "extended_copy_token": false,
+                "generator_probability": 4.641256600734778e-05,
+                "token": "intended"
+              }
+            ],
+            "download_calls": 0,
+            "ended": true,
+            "execution_authority": false,
+            "generated_text": "<actor> unspecified <action> unspecified <object> <modality> intended intended",
+            "input_coverage_complete": false,
+            "input_oov_tokens": [
+              "mosaic"
+            ],
+            "log_probability": -9.985947897503824,
+            "proof_authority": false,
+            "provider_calls": 0,
+            "publication_performed": false,
+            "rank": 15,
+            "semantic_correctness_verified": false,
+            "status": "generated",
+            "target_access": false,
+            "teacher_forcing": false,
+            "tokens": [
+              "<actor>",
+              "unspecified",
+              "<action>",
+              "unspecified",
+              "<object>",
+              "<modality>",
+              "intended",
+              "intended"
+            ],
+            "training_executed": false,
+            "uncovered_input_tokens": [
+              "mosaic"
+            ],
+            "weight_ablation": "disable_copy"
+          }
+        ],
+        "schema": "shared-paired-copy-aligned-beam-search/v2",
+        "search_producer_sha256": "aab0d5b94eadc206fed9fc3a4667d7d0d83aeb7fa5e3004f86e4eae47b047e2d",
+        "semantic_correctness_verified": false,
+        "source_sha256": "3567284da19220aa16e7efebe89b618abfb31609f56d47eaae63089a01e01d91",
+        "target_access": false,
+        "teacher_forcing": false,
+        "training_executed": false,
+        "weight_ablation": "disable_copy"
+      },
+      "execution_authority": false,
+      "instruction_sha256": "25cd15bcd5625fd8897532d186bc9c4fc09db57a84214809e90e24b368caf698",
+      "inverse_decoding_method": null,
+      "learned": {
+        "ast": null,
+        "decoder": null,
+        "encoder": {
+          "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+          "copy_enabled": false,
+          "copy_probability_is_semantic_confidence": false,
+          "copy_trace": [
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.999997615814209,
+              "token": "<actor>"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.999998927116394,
+              "token": "unspecified"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 1.0,
+              "token": "<action>"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9995391368865967,
+              "token": "unspecified"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9996392726898193,
+              "token": "<object>"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9928570985794067,
+              "token": "<modality>"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9999879598617554,
+              "token": "intended"
+            }
+          ],
+          "copy_vocabulary_scope": "current_input_only",
+          "download_calls": 0,
+          "ended": true,
+          "execution_authority": false,
+          "generated_text": "<actor> unspecified <action> unspecified <object> <modality> intended",
+          "input_coverage_complete": false,
+          "input_oov_tokens": [
+            "mosaic"
+          ],
+          "proof_authority": false,
+          "provider_calls": 0,
+          "publication_performed": false,
+          "semantic_correctness_verified": false,
+          "status": "generated",
+          "target_access": false,
+          "teacher_forcing": false,
+          "tokens": [
+            "<actor>",
+            "unspecified",
+            "<action>",
+            "unspecified",
+            "<object>",
+            "<modality>",
+            "intended"
+          ],
+          "training_executed": false,
+          "uncovered_input_tokens": [
+            "mosaic"
+          ],
+          "weight_ablation": "disable_copy"
+        },
+        "normalized_text": null
+      },
+      "llm_calls": 0,
+      "logic": null,
+      "producer_pins": {
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_aligned_decoder": "61c6d5c0453a69a0f50237b960c3bccf87f1c5836a212c002f4a621242a6d6cf",
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_decoder": "a393974d44e798bd4022841153ce37d90bc38a0fac397d35fa7f06ef61e996b9",
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_grammar": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b",
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_inverse_codec": "91773ac7efa5af821c5109c42d45650f40b23300cf85d5756cdb99735292dd80",
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_logic": "3b97b839f5a2afa451f76a9c330f9e485e47ed1f62d80e568a424a92ec5433eb"
+      },
+      "project": false,
+      "proof_authority": false,
+      "raw_instruction_preserved": true,
+      "report_sha256": "c9fcc9a71a87c1f2bae634642a0631a17d51c7a864a8563c4dc328bd9408477c",
+      "rich_ir": null,
+      "schema": "intent-aligned-copy-roundtrip/v2",
+      "source_agreement": false,
+      "source_semantics_verified": false,
+      "status": "fail_open_no_source_agreed_roundtrip",
+      "training_steps": 0,
+      "weight_ablation": "disable_copy",
+      "whole_document_formalized": false
+    },
+    "expected_outcome": "withheld input-local OOV tokens cannot be synthesized after copy branch ablation",
+    "instruction": "Save mosaic packet",
+    "normal": {
+      "beam_width": 16,
+      "checkpoint": {
+        "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/model/candidate.json",
+        "schema": "shared-paired-copy-aligned-continuation/v2",
+        "sha256": "9cf4da607d6fdb48400409e6618fcfe3246d0673e180696879b5601d1a889eec"
+      },
+      "completion_authority": false,
+      "context": null,
+      "continue_planning": true,
+      "counts": {
+        "decoder_executions": 1,
+        "encoder_executions": 1
+      },
+      "decoder_searches": [],
+      "encoder_search": null,
+      "execution_authority": false,
+      "instruction_sha256": "25cd15bcd5625fd8897532d186bc9c4fc09db57a84214809e90e24b368caf698",
+      "inverse_decoding_method": "frozen_unspace",
+      "learned": {
+        "ast": {
+          "action": "save",
+          "actor": "unspecified",
+          "kind": "atom",
+          "modality": "intended",
+          "object": "mosaic packet"
+        },
+        "decoder": {
+          "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+          "copy_enabled": true,
+          "copy_probability_is_semantic_confidence": false,
+          "copy_trace": [
+            {
+              "copy_probability": 0.9987884163856506,
+              "copy_source_positions": [
+                1
+              ],
+              "dominant_branch": "copy",
+              "extended_copy_token": false,
+              "generator_probability": 5.385607426331134e-15,
+              "token": "unspecified"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9999997615814209,
+              "token": "intends"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9999995231628418,
+              "token": "to"
+            },
+            {
+              "copy_probability": 0.9987278580665588,
+              "copy_source_positions": [
+                3
+              ],
+              "dominant_branch": "copy",
+              "extended_copy_token": false,
+              "generator_probability": 8.286266859825637e-33,
+              "token": "save"
+            },
+            {
+              "copy_probability": 0.9986035823822021,
+              "copy_source_positions": [
+                5
+              ],
+              "dominant_branch": "copy",
+              "extended_copy_token": true,
+              "generator_probability": 0.0,
+              "token": "mosaic"
+            },
+            {
+              "copy_probability": 0.9988190531730652,
+              "copy_source_positions": [
+                6
+              ],
+              "dominant_branch": "copy",
+              "extended_copy_token": false,
+              "generator_probability": 7.575083527804226e-20,
+              "token": "packet"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9997398257255554,
+              "token": "."
+            }
+          ],
+          "copy_vocabulary_scope": "current_input_only",
+          "download_calls": 0,
+          "ended": true,
+          "execution_authority": false,
+          "generated_text": "unspecified intends to save mosaic packet .",
+          "input_coverage_complete": true,
+          "input_oov_tokens": [
+            "mosaic"
+          ],
+          "proof_authority": false,
+          "provider_calls": 0,
+          "publication_performed": false,
+          "semantic_correctness_verified": false,
+          "status": "generated",
+          "target_access": false,
+          "teacher_forcing": false,
+          "tokens": [
+            "unspecified",
+            "intends",
+            "to",
+            "save",
+            "mosaic",
+            "packet",
+            "."
+          ],
+          "training_executed": false,
+          "uncovered_input_tokens": [],
+          "weight_ablation": null
+        },
+        "encoder": {
+          "checkpoint_weights_sha256": "ef790ba3826a4cb3895eaabdfe20eecf8c6bb361e903b93c8f09d25d308952f8",
+          "copy_enabled": true,
+          "copy_probability_is_semantic_confidence": false,
+          "copy_trace": [
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.999997615814209,
+              "token": "<actor>"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9997500777244568,
+              "token": "unspecified"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 1.0,
+              "token": "<action>"
+            },
+            {
+              "copy_probability": 0.9913235902786255,
+              "copy_source_positions": [
+                0
+              ],
+              "dominant_branch": "copy",
+              "extended_copy_token": false,
+              "generator_probability": 2.3310614800663394e-26,
+              "token": "save"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 1.0,
+              "token": "<object>"
+            },
+            {
+              "copy_probability": 0.9851505160331726,
+              "copy_source_positions": [
+                1
+              ],
+              "dominant_branch": "copy",
+              "extended_copy_token": true,
+              "generator_probability": 0.0,
+              "token": "mosaic"
+            },
+            {
+              "copy_probability": 0.9968774318695068,
+              "copy_source_positions": [
+                2
+              ],
+              "dominant_branch": "copy",
+              "extended_copy_token": false,
+              "generator_probability": 1.3797446076111996e-22,
+              "token": "packet"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9994196891784668,
+              "token": "<modality>"
+            },
+            {
+              "copy_probability": 0.0,
+              "copy_source_positions": [],
+              "dominant_branch": "generator",
+              "extended_copy_token": false,
+              "generator_probability": 0.9999980926513672,
+              "token": "intended"
+            }
+          ],
+          "copy_vocabulary_scope": "current_input_only",
+          "download_calls": 0,
+          "ended": true,
+          "execution_authority": false,
+          "generated_text": "<actor> unspecified <action> save <object> mosaic packet <modality> intended",
+          "input_coverage_complete": true,
+          "input_oov_tokens": [
+            "mosaic"
+          ],
+          "proof_authority": false,
+          "provider_calls": 0,
+          "publication_performed": false,
+          "semantic_correctness_verified": false,
+          "status": "generated",
+          "target_access": false,
+          "teacher_forcing": false,
+          "tokens": [
+            "<actor>",
+            "unspecified",
+            "<action>",
+            "save",
+            "<object>",
+            "mosaic",
+            "packet",
+            "<modality>",
+            "intended"
+          ],
+          "training_executed": false,
+          "uncovered_input_tokens": [],
+          "weight_ablation": null
+        },
+        "normalized_text": "unspecified intends to save mosaic packet."
+      },
+      "llm_calls": 0,
+      "logic": null,
+      "producer_pins": {
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_aligned_decoder": "61c6d5c0453a69a0f50237b960c3bccf87f1c5836a212c002f4a621242a6d6cf",
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_decoder": "a393974d44e798bd4022841153ce37d90bc38a0fac397d35fa7f06ef61e996b9",
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_grammar": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b",
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_inverse_codec": "91773ac7efa5af821c5109c42d45650f40b23300cf85d5756cdb99735292dd80",
+        "ipfs_datasets_py.logic.intent_ir.formalize.rich_logic": "3b97b839f5a2afa451f76a9c330f9e485e47ed1f62d80e568a424a92ec5433eb"
+      },
+      "project": false,
+      "proof_authority": false,
+      "raw_instruction_preserved": true,
+      "report_sha256": "9b6d84919ef3e2d9a04324016db8c2681be6e2786487dd8bfb50833772f617d7",
+      "rich_ir": {
+        "ast": {
+          "action": "save",
+          "actor": "unspecified",
+          "kind": "atom",
+          "modality": "intended",
+          "object": "mosaic packet"
+        },
+        "schema": "intent-rich-ir/v1",
+        "source_sha256": "25cd15bcd5625fd8897532d186bc9c4fc09db57a84214809e90e24b368caf698"
+      },
+      "schema": "intent-aligned-copy-roundtrip/v2",
+      "source_agreement": true,
+      "source_semantics_verified": false,
+      "status": "source_supported_rich_candidate",
+      "training_steps": 0,
+      "weight_ablation": null,
+      "whole_document_formalized": false
+    }
+  }
+}

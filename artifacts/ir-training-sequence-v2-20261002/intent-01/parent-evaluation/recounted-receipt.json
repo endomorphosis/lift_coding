@@ -1,0 +1,58 @@
+{
+  "checkpoint": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-coverage-20261002/intent-01/source-training-02/model/candidate.json",
+    "schema": "shared-paired-copy-continuation/v1",
+    "sha256": "6e34b95ddbe74d1263bccf7bc2fb5657120365de881459215091cc85547f8f21"
+  },
+  "counts": {
+    "accepted": 80,
+    "exact": 80,
+    "incorrect_accepted": 0,
+    "rows": 139,
+    "stage:accepted": 80,
+    "stage:encoder_source_agreement": 56,
+    "stage:inverse_source_agreement": 3
+  },
+  "elapsed_seconds": 66.66976458393037,
+  "evidence": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/parent-evaluation/rows.jsonl.gz",
+    "sha256": "aecc2891a059cf82fdac66f2cbeffae39e416d76752044cd1d702d7d13caf8cb"
+  },
+  "groups": {
+    "new_authored_holdout": {
+      "accepted": 16,
+      "exact": 16,
+      "incorrect_accepted": 0,
+      "rows": 64,
+      "stage:accepted": 16,
+      "stage:encoder_source_agreement": 48
+    },
+    "new_source_form_holdout": {
+      "accepted": 53,
+      "exact": 53,
+      "incorrect_accepted": 0,
+      "rows": 56,
+      "stage:accepted": 53,
+      "stage:inverse_source_agreement": 3
+    },
+    "prior_real_source_regression": {
+      "accepted": 11,
+      "exact": 11,
+      "incorrect_accepted": 0,
+      "rows": 19,
+      "stage:accepted": 11,
+      "stage:encoder_source_agreement": 8
+    }
+  },
+  "lake_counts": {
+    "not_run": 13,
+    "passed": 14
+  },
+  "native_decoder_calls": 20252,
+  "native_encoder_calls": 294,
+  "original_receipt": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-sequence-v2-20261002/intent-01/parent-evaluation/receipt.json",
+    "sha256": "b4d5bbc25424e44a3dc8a453a23a94106854a0856f136b6aa1860218910ecdaf"
+  },
+  "reporting_correction": "accepted summary had a duplicate stage-key increment; exact_AST and immutable per-row outcomes unchanged"
+}

@@ -1,0 +1,109 @@
+{
+  "after": 0.007511139895174853,
+  "after_families": {
+    "deontic": 0.013981622213391522,
+    "event_calculus": 0.005730588517200068,
+    "frame_logic": 0.007655486516404051,
+    "tdfol": 0.008948012156797263,
+    "temporal": 0.0012399900720813537
+  },
+  "before": 0.007551250366481741,
+  "before_families": {
+    "deontic": 0.013981622213391522,
+    "event_calculus": 0.00578452338723534,
+    "frame_logic": 0.007655486516404051,
+    "tdfol": 0.009094629643296435,
+    "temporal": 0.0012399900720813537
+  },
+  "coverage": {
+    "projections": [
+      {
+        "has_coverage": true,
+        "known_atoms": 68,
+        "projection_id": "legal-ir/bridge-view/cec/v1",
+        "row": 0,
+        "unknown_atoms": 33
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 28,
+        "projection_id": "legal-ir/bridge-view/deontic/v1",
+        "row": 0,
+        "unknown_atoms": 4
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 325,
+        "projection_id": "legal-ir/bridge-view/frame_logic/v1",
+        "row": 0,
+        "unknown_atoms": 59
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 31,
+        "projection_id": "legal-ir/bridge-view/tdfol/v1",
+        "row": 0,
+        "unknown_atoms": 13
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 955,
+        "projection_id": "legal_ir/supplemental/temporal/v2",
+        "row": 0,
+        "unknown_atoms": 30
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 70,
+        "projection_id": "legal-ir/bridge-view/cec/v1",
+        "row": 1,
+        "unknown_atoms": 15
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 23,
+        "projection_id": "legal-ir/bridge-view/deontic/v1",
+        "row": 1,
+        "unknown_atoms": 7
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 322,
+        "projection_id": "legal-ir/bridge-view/frame_logic/v1",
+        "row": 1,
+        "unknown_atoms": 61
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 33,
+        "projection_id": "legal-ir/bridge-view/tdfol/v1",
+        "row": 1,
+        "unknown_atoms": 7
+      },
+      {
+        "has_coverage": true,
+        "known_atoms": 952,
+        "projection_id": "legal_ir/supplemental/temporal/v2",
+        "row": 1,
+        "unknown_atoms": 33
+      }
+    ],
+    "untrained_projection_ids": []
+  },
+  "feature_panel": {
+    "colliding_row_groups": [],
+    "distinct_retained_feature_vectors": 2,
+    "interpretation": "distinct source identities may become identical after training-vocabulary filtering",
+    "rows": 2
+  },
+  "initialization": {
+    "inputs": "saved original training target rows only; existing frozen vocabulary; no validation/test initialization inputs",
+    "matches_saved_training_initialization": true,
+    "method": "training_only_deterministic_svd",
+    "replayed_parameter_sha256": "19ea3048b932623625dd63dc1ccc01552a51f8536ed7758d94abcf18236287ea"
+  },
+  "regressed_families": [],
+  "relative_reduction": 0.005311765516996858,
+  "saved_selected_test_loss_replayed": true,
+  "used_for_training_or_model_selection": false
+}

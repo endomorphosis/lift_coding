@@ -1,0 +1,17 @@
+[
+  "tests/unit/logic/formalization/autoencoder/test_family_training.py",
+  "tests/unit/logic/formalization/autoencoder/test_security_formula_decoder_continuation.py",
+  "tests/unit/logic/formalization/autoencoder/test_security_formula_decoder_v2.py",
+  "tests/unit/logic/formalization/autoencoder/test_security_joint_training.py",
+  "tests/unit/logic/intent_ir/formalize/test_coverage_curriculum.py",
+  "tests/unit/logic/intent_ir/formalize/test_coverage_training.py",
+  "tests/unit/logic/intent_ir/formalize/test_rich_inverse_codec.py",
+  "tests/unit/logic/intent_ir/formalize/test_rich_inverse_recovery.py",
+  "tests/unit/logic/intent_ir/formalize/test_rich_search_decoder.py",
+  "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_family_training.py",
+  "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_paired_copy_continuation.py",
+  "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_projection_features.py",
+  "tests/unit/optimizers/logic_theorem_optimizer/test_legal_family_training.py",
+  "tests/unit/optimizers/logic_theorem_optimizer/test_ui_family_training.py",
+  "tests/unit/optimizers/logic_theorem_optimizer/test_ui_feature_training.py"
+]

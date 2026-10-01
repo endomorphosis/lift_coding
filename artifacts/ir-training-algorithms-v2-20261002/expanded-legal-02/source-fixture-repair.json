@@ -1,0 +1,23 @@
+{
+  "corrected": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-legal-02/receipt.json",
+    "sha256": "a77b56b74fb42835740f7e262bf5f7eedcad5cdfa33758c4db1ec6c15c9f8e08"
+  },
+  "hyperparameter_search_performed": false,
+  "issue": "Original generic annotation rendered two arguments for unary temporal operators, while native temporal formula arity was correct.",
+  "original": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/receipt.json",
+    "sha256": "7c07c5dfb3e33e3d6fc2be695febb43052e5fbf9f845f66cfebacb0142fd5652"
+  },
+  "original_driver_snapshot": {
+    "path": "/home/barberb/lift_coding/artifacts/ir-training-algorithms-v2-20261002/expanded-01/driver.py",
+    "sha256": "869f38e7dcc22ff74d15e942411fc80f82f54c7a525f796a5104c2030c0d68ff"
+  },
+  "original_preserved": true,
+  "repair": "Unary operators now render one argument; binary operators retain two; nested always/eventually explicitly nests. Corrected only authored Legal source annotations.",
+  "rerun_domains": [
+    "legal_ir"
+  ],
+  "schema": "authored-legal-temporal-annotation-repair/v1",
+  "settings_and_case_selection_unchanged": true
+}
