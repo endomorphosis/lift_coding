@@ -1,0 +1,102 @@
+{
+  "completed_at": "2026-10-02T14:57:57.637909+00:00",
+  "compression_result_path": "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/experiment-02/result.json",
+  "compression_result_sha256": "d3103e0137725ec062a28d56f6edbf821b9b9f62de1d8b949a06f58b9a209bd4",
+  "error": {
+    "message": "reconstruction child failed 1",
+    "type": "RuntimeError"
+  },
+  "limits": {
+    "acquire_timeout_seconds": 30,
+    "child_address_space_bytes": 4294967296,
+    "child_cpu_seconds": 240,
+    "child_process_slots": 1,
+    "cpu_slots": 2,
+    "experiment_wall_seconds": 300,
+    "maximum_output_bytes": 1610612736,
+    "memory_mb": 4096
+  },
+  "native_admission": {
+    "acquire_seconds": 0.007740186993032694,
+    "lane": "persistence",
+    "lease_id": "acd50757fe63486ba56f9a06238bc9da",
+    "policy_sha256": "03793b8f3246f9c5d2af6cd64c4aaee6ef09dd1041f6d0ff0d07ef87a955147a",
+    "released": true,
+    "state_path": "/tmp/ipfs-datasets-resource-scheduler-1000.json"
+  },
+  "originals_removed_or_replaced": false,
+  "patch": {
+    "allocated_bytes": 1167171584,
+    "bytes": 1167170658,
+    "device": 66306,
+    "gid": 1000,
+    "inode": 45630247,
+    "mode": "0o664",
+    "mtime_ns": 1790657723374753356,
+    "path": "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/experiment-02/v5-from-v4.zst",
+    "sha256": "4622e21a8077a5d39896314d3450c25788d2c183ce652a1912fe71509448b76c",
+    "uid": 1000
+  },
+  "qualified": false,
+  "qualified_for_original_replacement": false,
+  "reference": {
+    "allocated_bytes": 1205850112,
+    "bytes": 1205822463,
+    "device": 66306,
+    "gid": 1000,
+    "inode": 28863989,
+    "manifest_archive_sha256": "ff100f2c7d7e648206fa8ef9dfd8a770780a62e7e53a0e29886ced3dff31f242",
+    "manifest_sha256": "34ce9d0cd55670ef893ea476a71a7eba15279d755e759d850bf17df3a3340ba1",
+    "mode": "0o664",
+    "mtime_ns": 1790657625896273920,
+    "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v4/runtime.tar.gz",
+    "sha256": "ff100f2c7d7e648206fa8ef9dfd8a770780a62e7e53a0e29886ced3dff31f242",
+    "uid": 1000
+  },
+  "schema": "task-runtime-lossless-archive-experiment@1",
+  "started_at": "2026-10-02T14:57:55.928156+00:00",
+  "steps": [
+    {
+      "command": [
+        "zstd",
+        "--single-thread",
+        "--mmap-dict",
+        "-M2048",
+        "-d",
+        "--patch-from=/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v4/runtime.tar.gz",
+        "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/experiment-02/v5-from-v4.zst",
+        "-c"
+      ],
+      "cpu_system_seconds": 0.0028989999999999997,
+      "cpu_user_seconds": 0.0,
+      "limit_command": [
+        "prlimit",
+        "--as=4294967296",
+        "--fsize=1610612736",
+        "--cpu=240",
+        "--"
+      ],
+      "name": "reconstruction",
+      "reaped": true,
+      "returncode": 1,
+      "sampled_child_peak_rss_bytes": 2891776,
+      "seconds": 0.05294148297980428,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "target": {
+    "allocated_bytes": 1205850112,
+    "bytes": 1205823423,
+    "device": 66306,
+    "gid": 1000,
+    "inode": 28619315,
+    "manifest_archive_sha256": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe",
+    "manifest_sha256": "baccb15db1964c8d69e5e0b25e17770c6d59af91d196158128cd3e187ed0cd0b",
+    "mode": "0o664",
+    "mtime_ns": 1790657723374753356,
+    "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v5/runtime.tar.gz",
+    "sha256": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe",
+    "uid": 1000
+  }
+}

@@ -1,0 +1,1178 @@
+{
+  "archive_bytes_freshly_hashed": false,
+  "assessment": {
+    "all_reviewed_owned_runs_have_finished_receipts": false,
+    "blockers_or_gaps": [
+      "The process and link census is a point-in-time accessible-scope observation, with exact permission gaps retained.",
+      "Per-archive member-CAS roundtrip is owned by the separate archival worker and is not established by this activity audit.",
+      "Any active member-CAS capture reader must finish before replacement; fresh race/fence checks belong to the eventual replacement operation."
+    ],
+    "inactivity_globally_proved": false,
+    "recommendation": "conditional_reversible_archival_only_after_per_archive_exact_reconstruction_and_rechecked_no_active_owned_reader",
+    "safe_conditions": [
+      "Keep immutable original manifests, all recipes/CAS, exact gzip metadata and a verified restorer available.",
+      "Only exact named task-owned archive paths may be replaced; no source/checkpoint/result/runtime-directory deletion.",
+      "Preserve preparation/result records and make historical path restoration explicit before any future replay.",
+      "Recheck archive inode/size/mtime/ctime, links and active owned references immediately before any separately authorized replacement."
+    ]
+  },
+  "authority": {
+    "global_no_open_files_proved": false,
+    "replacement_authorized": false
+  },
+  "bundles": [
+    {
+      "archive": {
+        "bytes": 1205904593,
+        "ctime_ns": 1790669471250218942,
+        "dev": 66306,
+        "ino": 33066457,
+        "is_regular": true,
+        "is_symlink": false,
+        "mode": "0o664",
+        "mtime_ns": 1790669471250218942,
+        "nlink": 1,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-01/runtime.tar.gz",
+        "uid": 1000
+      },
+      "archive_build_receipt": {
+        "bytes": 103,
+        "fields": {
+          "archive_sha256": "fab413d963c0d9251b5fb88dc95ce07ae3502ed4723d74e60df57264de0e896a",
+          "files": 26922
+        },
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-01.log",
+        "sha256": "5659fda26c148bdc8040a37563fcbaff7fc66f1d72b90d21334f7c628b526eaf"
+      },
+      "known_consumers": [
+        {
+          "directory_entries": [
+            "config.json",
+            "dry-run.stderr",
+            "dry-run.stdout",
+            "harbor.stderr",
+            "harbor.stdout",
+            "invocation.json",
+            "jobs",
+            "preparation.json",
+            "receipt.json"
+          ],
+          "disposition": "known_jobs_finished",
+          "preparation": {
+            "bytes": 13822,
+            "fields": {
+              "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-01",
+              "archive_sha256": "fab413d963c0d9251b5fb88dc95ce07ae3502ed4723d74e60df57264de0e896a",
+              "arm": "full",
+              "prepared": true
+            },
+            "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-01/preparation.json",
+            "sha256": "cc312ede5ef52f4758c8fadab0a49323c00ece1454da16687b0e33c520e2d327"
+          },
+          "results": [
+            {
+              "bytes": 5922,
+              "fields": {
+                "finished_at": "2026-09-29T08:20:22.042595Z",
+                "id": "7bb351fb-58af-48a1-8021-4fa2f9033e1b",
+                "started_at": "2026-09-29T08:14:16.096205Z",
+                "task_name": "terminal-bench/fix-code-vulnerability",
+                "trial_name": "fix-code-vulnerability__LpmwPSj"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-01/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__LpmwPSj/result.json",
+              "sha256": "34d655d3a29cd7e8c7ce6689bb2cbee95de9b10bff66fae22ce040d2a3a2acc4"
+            },
+            {
+              "bytes": 1144,
+              "fields": {
+                "finished_at": "2026-09-29T08:20:22.045288",
+                "id": "6046b5f5-dfa3-41bf-a94c-a3bd51bf196b",
+                "n_total_trials": 1,
+                "started_at": "2026-09-29T08:14:16.060951"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-01/jobs/supervisor-full-fix-code-vulnerability/result.json",
+              "sha256": "31c003d4fccf56fd7c8f0d0b4dbc2123b56d180875c1867988e6fe1b91be81ed"
+            }
+          ]
+        },
+        {
+          "directory_entries": [
+            "config.json",
+            "dry-run.stderr",
+            "dry-run.stdout",
+            "preparation.json"
+          ],
+          "disposition": "preparation_only_no_job_results_observed",
+          "preparation": {
+            "bytes": 13830,
+            "fields": {
+              "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-01",
+              "archive_sha256": "fab413d963c0d9251b5fb88dc95ce07ae3502ed4723d74e60df57264de0e896a",
+              "arm": "no-index",
+              "prepared": true
+            },
+            "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-01/preparation.json",
+            "sha256": "0ecc287d9e29c1f593db0dfb006299aac98cead4c2b0e3dd193c1b66a03ae666"
+          },
+          "results": []
+        }
+      ],
+      "manifest": {
+        "bytes": 6080546,
+        "fields": {
+          "archive_sha256": "fab413d963c0d9251b5fb88dc95ce07ae3502ed4723d74e60df57264de0e896a"
+        },
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-01/manifest.json",
+        "sha256": "1741ba5b92979622f35d65b716813d1fd1c2316a28c7810f75b1098ee40e89b1"
+      },
+      "provenance_disposition": "preparation_only_not_proved_finished",
+      "recorded_archive_sha256": "fab413d963c0d9251b5fb88dc95ce07ae3502ed4723d74e60df57264de0e896a",
+      "stat_unchanged_during_review": true
+    },
+    {
+      "archive": {
+        "bytes": 1205904238,
+        "ctime_ns": 1790670332450037943,
+        "dev": 66306,
+        "ino": 33066439,
+        "is_regular": true,
+        "is_symlink": false,
+        "mode": "0o664",
+        "mtime_ns": 1790670332450037943,
+        "nlink": 1,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-02/runtime.tar.gz",
+        "uid": 1000
+      },
+      "archive_build_receipt": {
+        "bytes": 103,
+        "fields": {
+          "archive_sha256": "d457605f72efd98ea6662753e8112efeacfc30188691f6ad4bf772804232dfd3",
+          "files": 26922
+        },
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-02.log",
+        "sha256": "a5d9f6fe6eb169b5a2cd44021e19b8769def48481c19a62e90c1bc76bf98b3cd"
+      },
+      "known_consumers": [
+        {
+          "directory_entries": [
+            "config.json",
+            "dry-run.stderr",
+            "dry-run.stdout",
+            "harbor.stderr",
+            "harbor.stdout",
+            "invocation.json",
+            "jobs",
+            "preparation.json",
+            "receipt.json"
+          ],
+          "disposition": "known_jobs_finished",
+          "preparation": {
+            "bytes": 13822,
+            "fields": {
+              "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-02",
+              "archive_sha256": "d457605f72efd98ea6662753e8112efeacfc30188691f6ad4bf772804232dfd3",
+              "arm": "full",
+              "prepared": true
+            },
+            "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-02/preparation.json",
+            "sha256": "f64a803f2b4da0bd8c630c6d747237ce259765e13c6befddda77fe9b669d8dd2"
+          },
+          "results": [
+            {
+              "bytes": 6070,
+              "fields": {
+                "finished_at": "2026-09-29T08:34:38.748483Z",
+                "id": "7fff11e9-c5f1-4d4d-ad25-8efced908d70",
+                "started_at": "2026-09-29T08:27:17.886439Z",
+                "task_name": "terminal-bench/fix-code-vulnerability",
+                "trial_name": "fix-code-vulnerability__eho8DzW"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-02/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__eho8DzW/result.json",
+              "sha256": "85b9c3c1254e018e03bea94f137b6dc229bc137fd3b1d54d778289e6cbed6c23"
+            },
+            {
+              "bytes": 1146,
+              "fields": {
+                "finished_at": "2026-09-29T08:34:38.750369",
+                "id": "00e1cf8d-a729-4355-bdd4-e85e032dc924",
+                "n_total_trials": 1,
+                "started_at": "2026-09-29T08:27:17.860443"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-02/jobs/supervisor-full-fix-code-vulnerability/result.json",
+              "sha256": "cc774ec423b7b139abe35be2a3b43142397f5ec09da6b584700259c15bf49897"
+            }
+          ]
+        },
+        {
+          "directory_entries": [
+            "config.json",
+            "dry-run.stderr",
+            "dry-run.stdout",
+            "harbor.stderr",
+            "harbor.stdout",
+            "invocation.json",
+            "jobs",
+            "preparation.json",
+            "receipt.json"
+          ],
+          "disposition": "known_jobs_finished",
+          "preparation": {
+            "bytes": 13830,
+            "fields": {
+              "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-02",
+              "archive_sha256": "d457605f72efd98ea6662753e8112efeacfc30188691f6ad4bf772804232dfd3",
+              "arm": "no-index",
+              "prepared": true
+            },
+            "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/preparation.json",
+            "sha256": "9a0ed1e1c593e6915e9c678b7812b01389fe6b97672b4b30a66b2df0730ef297"
+          },
+          "results": [
+            {
+              "bytes": 5765,
+              "fields": {
+                "finished_at": "2026-09-29T08:41:18.497019Z",
+                "id": "d042ed94-8548-42e0-a4ff-6d475fa25a5a",
+                "started_at": "2026-09-29T08:34:41.892136Z",
+                "task_name": "terminal-bench/fix-code-vulnerability",
+                "trial_name": "fix-code-vulnerability__79SoPKN"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/jobs/supervisor-no-index-fix-code-vulnerability/fix-code-vulnerability__79SoPKN/result.json",
+              "sha256": "a3b5b32d5ea8bb2dc1eef37c194b6c24245e0edf4cf12da86b13f7e1d54f3206"
+            },
+            {
+              "bytes": 1148,
+              "fields": {
+                "finished_at": "2026-09-29T08:41:18.499138",
+                "id": "129af29a-205b-4cb2-96af-4c426f358ba5",
+                "n_total_trials": 1,
+                "started_at": "2026-09-29T08:34:41.866206"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/jobs/supervisor-no-index-fix-code-vulnerability/result.json",
+              "sha256": "6721f2cf449535b1bb620ce66a814b1cfd1fcb1522b9a45298590b50d8ce81c5"
+            }
+          ]
+        }
+      ],
+      "manifest": {
+        "bytes": 6080546,
+        "fields": {
+          "archive_sha256": "d457605f72efd98ea6662753e8112efeacfc30188691f6ad4bf772804232dfd3"
+        },
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-02/manifest.json",
+        "sha256": "8dea53bfcb168c303b602341c5a64c2d56b852897d1c56eea09a4ceb5039bf87"
+      },
+      "provenance_disposition": "known_jobs_finished",
+      "recorded_archive_sha256": "d457605f72efd98ea6662753e8112efeacfc30188691f6ad4bf772804232dfd3",
+      "stat_unchanged_during_review": true
+    },
+    {
+      "archive": {
+        "bytes": 1205895895,
+        "ctime_ns": 1790672061030400611,
+        "dev": 66306,
+        "ino": 33311887,
+        "is_regular": true,
+        "is_symlink": false,
+        "mode": "0o664",
+        "mtime_ns": 1790672061030400611,
+        "nlink": 1,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-03/runtime.tar.gz",
+        "uid": 1000
+      },
+      "archive_build_receipt": {
+        "bytes": 103,
+        "fields": {
+          "archive_sha256": "2e25bf15f7d59ca164ca5448905e73d9ff6d652e4afee8c222ef65397d5d1013",
+          "files": 26923
+        },
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-03.log",
+        "sha256": "b9a10636ba89554ec7cf2cceb6ae226c5e6ff0d28303bc65ba991007de4e1de6"
+      },
+      "known_consumers": [
+        {
+          "directory_entries": [
+            "config.json",
+            "dry-run.stderr",
+            "dry-run.stdout",
+            "harbor.stderr",
+            "harbor.stdout",
+            "invocation.json",
+            "jobs",
+            "preparation.json",
+            "receipt.json"
+          ],
+          "disposition": "known_jobs_finished",
+          "preparation": {
+            "bytes": 13822,
+            "fields": {
+              "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-03",
+              "archive_sha256": "2e25bf15f7d59ca164ca5448905e73d9ff6d652e4afee8c222ef65397d5d1013",
+              "arm": "full",
+              "prepared": true
+            },
+            "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/preparation.json",
+            "sha256": "12b658dbae7eca823ea693fb4a274fdf384964f33c748c448558fafd28752696"
+          },
+          "results": [
+            {
+              "bytes": 5914,
+              "fields": {
+                "finished_at": "2026-09-29T09:07:14.374173Z",
+                "id": "94582a03-f683-4762-b207-5206eb62b98d",
+                "started_at": "2026-09-29T08:58:49.568272Z",
+                "task_name": "terminal-bench/fix-code-vulnerability",
+                "trial_name": "fix-code-vulnerability__nrCRphy"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__nrCRphy/result.json",
+              "sha256": "1cc76f55f6579e7ee270eca1f6fc77143279fbff18f85155a4a55fcb11053470"
+            },
+            {
+              "bytes": 1148,
+              "fields": {
+                "finished_at": "2026-09-29T09:07:14.376362",
+                "id": "1b2d5ff5-727c-4d39-a184-fbf0d38cb4c7",
+                "n_total_trials": 1,
+                "started_at": "2026-09-29T08:58:49.540828"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/jobs/supervisor-full-fix-code-vulnerability/result.json",
+              "sha256": "b3118408d8cb020d04a1fe487a1a8200deb2c4055a08457ed8b7cebe1b89534f"
+            }
+          ]
+        },
+        {
+          "directory_entries": [
+            "config.json",
+            "dry-run.stderr",
+            "dry-run.stdout",
+            "harbor.stderr",
+            "harbor.stdout",
+            "invocation.json",
+            "jobs",
+            "preparation.json",
+            "receipt.json"
+          ],
+          "disposition": "known_jobs_finished",
+          "preparation": {
+            "bytes": 13830,
+            "fields": {
+              "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-03",
+              "archive_sha256": "2e25bf15f7d59ca164ca5448905e73d9ff6d652e4afee8c222ef65397d5d1013",
+              "arm": "no-index",
+              "prepared": true
+            },
+            "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/preparation.json",
+            "sha256": "89ea32773ac05fc622336aa7fc6683fc6af07db72944762ca72b0610c19e83ef"
+          },
+          "results": [
+            {
+              "bytes": 5765,
+              "fields": {
+                "finished_at": "2026-09-29T09:19:08.288729Z",
+                "id": "d8b1c2b4-4732-45aa-b4fb-75f16bf0bd16",
+                "started_at": "2026-09-29T09:12:01.513455Z",
+                "task_name": "terminal-bench/fix-code-vulnerability",
+                "trial_name": "fix-code-vulnerability__4Dfzugh"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/jobs/supervisor-no-index-fix-code-vulnerability/fix-code-vulnerability__4Dfzugh/result.json",
+              "sha256": "92ea3d9eff2aa389ec6217e008e4bc8a5cb0659dab8f131ff665791dc4a33526"
+            },
+            {
+              "bytes": 1148,
+              "fields": {
+                "finished_at": "2026-09-29T09:19:08.290852",
+                "id": "d8787ab8-ff41-4c6d-9d9d-c6fe9588f8d0",
+                "n_total_trials": 1,
+                "started_at": "2026-09-29T09:12:01.472489"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/jobs/supervisor-no-index-fix-code-vulnerability/result.json",
+              "sha256": "498567d34f5dc0054c973163116ec6ec0561860a3d3ca73df6d245067d0ee169"
+            }
+          ]
+        }
+      ],
+      "manifest": {
+        "bytes": 6080780,
+        "fields": {
+          "archive_sha256": "2e25bf15f7d59ca164ca5448905e73d9ff6d652e4afee8c222ef65397d5d1013"
+        },
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-03/manifest.json",
+        "sha256": "e718ffc4b6f281ae6284add0e299eb055ad3fbc9ee6c52fa7dcd70922f5766ea"
+      },
+      "provenance_disposition": "known_jobs_finished",
+      "recorded_archive_sha256": "2e25bf15f7d59ca164ca5448905e73d9ff6d652e4afee8c222ef65397d5d1013",
+      "stat_unchanged_during_review": true
+    },
+    {
+      "archive": {
+        "bytes": 1205894195,
+        "ctime_ns": 1790674505507925101,
+        "dev": 66306,
+        "ino": 28356940,
+        "is_regular": true,
+        "is_symlink": false,
+        "mode": "0o664",
+        "mtime_ns": 1790674505507925101,
+        "nlink": 1,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-04/runtime.tar.gz",
+        "uid": 1000
+      },
+      "known_consumers": [
+        {
+          "directory_entries": [
+            "config.json",
+            "dry-run.stderr",
+            "dry-run.stdout",
+            "harbor.stderr",
+            "harbor.stdout",
+            "invocation.json",
+            "jobs",
+            "preparation.json",
+            "receipt.json"
+          ],
+          "disposition": "known_jobs_finished",
+          "preparation": {
+            "bytes": 13822,
+            "fields": {
+              "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-04",
+              "archive_sha256": "53d7d8a4d29c245ca6e056ebf7ab4ec9481ea8b879b9782ab6f872c14e9cf40e",
+              "arm": "full",
+              "prepared": true
+            },
+            "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/preparation.json",
+            "sha256": "61d50e3262c9f4a414991d09e5961a08cb212d5aa0f518584605598be75ffe9b"
+          },
+          "results": [
+            {
+              "bytes": 5980,
+              "fields": {
+                "finished_at": "2026-09-29T09:47:26.870995Z",
+                "id": "18cba557-460c-4621-9885-1600caf6d4ab",
+                "started_at": "2026-09-29T09:38:55.942261Z",
+                "task_name": "terminal-bench/fix-code-vulnerability",
+                "trial_name": "fix-code-vulnerability__DqsoZ7E"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__DqsoZ7E/result.json",
+              "sha256": "2d603ef0813f53b75b4d6db75662822a5dbc58d37f1b65c0feacf714dd739621"
+            },
+            {
+              "bytes": 1148,
+              "fields": {
+                "finished_at": "2026-09-29T09:47:26.873021",
+                "id": "354f87d1-5205-4d24-81ce-5a10a9f786f2",
+                "n_total_trials": 1,
+                "started_at": "2026-09-29T09:38:55.911793"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/jobs/supervisor-full-fix-code-vulnerability/result.json",
+              "sha256": "ad92704d7ebf36c3cad83a32b747a61fd2efe51623537461b7c2517793852a0d"
+            }
+          ]
+        },
+        {
+          "directory_entries": [
+            "config.json",
+            "dry-run.stderr",
+            "dry-run.stdout",
+            "harbor.stderr",
+            "harbor.stdout",
+            "invocation.json",
+            "jobs",
+            "preparation.json",
+            "receipt.json"
+          ],
+          "disposition": "known_jobs_finished",
+          "preparation": {
+            "bytes": 13830,
+            "fields": {
+              "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-04",
+              "archive_sha256": "53d7d8a4d29c245ca6e056ebf7ab4ec9481ea8b879b9782ab6f872c14e9cf40e",
+              "arm": "no-index",
+              "prepared": true
+            },
+            "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/preparation.json",
+            "sha256": "f7f941d01f438ac034019488c6ab60303f7cf0b1ba9e74896bb505d662c78bca"
+          },
+          "results": [
+            {
+              "bytes": 5765,
+              "fields": {
+                "finished_at": "2026-09-29T09:54:04.135791Z",
+                "id": "6422825f-ca41-47f0-b77f-c071751902b3",
+                "started_at": "2026-09-29T09:47:30.922332Z",
+                "task_name": "terminal-bench/fix-code-vulnerability",
+                "trial_name": "fix-code-vulnerability__2xXoTsQ"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/jobs/supervisor-no-index-fix-code-vulnerability/fix-code-vulnerability__2xXoTsQ/result.json",
+              "sha256": "1dd6cfda14ac692c0713bc7b18fb1e7c5db2124012f9feefafc1d6d44ba147c1"
+            },
+            {
+              "bytes": 1148,
+              "fields": {
+                "finished_at": "2026-09-29T09:54:04.139099",
+                "id": "f2f18f88-9fd2-46c4-ba63-9e2c2bfbf188",
+                "n_total_trials": 1,
+                "started_at": "2026-09-29T09:47:30.893619"
+              },
+              "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/jobs/supervisor-no-index-fix-code-vulnerability/result.json",
+              "sha256": "a894237cf7aa772ee968381e9203c0cf8d8fb2c04917089b1fe8e4a5bf435e4c"
+            }
+          ]
+        }
+      ],
+      "manifest": {
+        "bytes": 6080780,
+        "fields": {
+          "archive_sha256": "53d7d8a4d29c245ca6e056ebf7ab4ec9481ea8b879b9782ab6f872c14e9cf40e"
+        },
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-04/manifest.json",
+        "sha256": "36be9d90bfb12d7e5f7110c27ad521f0386c3489b1936a5135db3dfa8bd0e1d4"
+      },
+      "provenance_disposition": "known_jobs_finished",
+      "recorded_archive_sha256": "53d7d8a4d29c245ca6e056ebf7ab4ec9481ea8b879b9782ab6f872c14e9cf40e",
+      "stat_unchanged_during_review": true
+    }
+  ],
+  "docker": {
+    "containers": [
+      {
+        "id": "25097a0032f3fa8fe57efeac626be8b727a9e51eda1e3323ea923a06ba9eac41",
+        "mounts": [
+          {
+            "Destination": "/opt/ipfs-supervisor/kit",
+            "Propagation": "rprivate",
+            "RW": false,
+            "Source": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/finite-advisory-worker-qualification-20261002-02/kit",
+            "Type": "bind"
+          },
+          {
+            "Destination": "/toolchains/lean",
+            "Propagation": "rprivate",
+            "RW": false,
+            "Source": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1",
+            "Type": "bind"
+          },
+          {
+            "Destination": "/opt/ipfs-supervisor/source",
+            "Propagation": "rprivate",
+            "RW": false,
+            "Source": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/finite-advisory-worker-qualification-20261002-02/source",
+            "Type": "bind"
+          },
+          {
+            "Destination": "/opt/ipfs-supervisor/datasets",
+            "Propagation": "rprivate",
+            "RW": false,
+            "Source": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/finite-advisory-worker-qualification-20261002-02/datasets",
+            "Type": "bind"
+          }
+        ],
+        "name": "/ipfs-finite-advisory-worker-1790954780380362977",
+        "overlapping_watched_roots": [],
+        "state": {
+          "ExitCode": 0,
+          "FinishedAt": "0001-01-01T00:00:00Z",
+          "Pid": 2138024,
+          "Running": true,
+          "StartedAt": "2026-10-02T15:26:20.831173212Z",
+          "Status": "running"
+        }
+      }
+    ],
+    "error": "",
+    "inspect_returncode": 0,
+    "list_returncode": 0
+  },
+  "findings": {
+    "docker_overlap_count": 0,
+    "no_archive_hardlink_aliases": true,
+    "observable_reference_matches": 0,
+    "original_stats_stable": true,
+    "provenance_counts": {
+      "known_jobs_finished": 3,
+      "preparation_only_not_proved_finished": 1
+    },
+    "symlink_matches_in_scanned_scope": 0
+  },
+  "finished_at": "2026-10-02T15:28:11.585245+00:00",
+  "inventory_sha256": "1981ac4ceb47b45fc7c42d5ed67a553888d16cc8d4d3b3c9697e8c7ef727d8c9",
+  "links": {
+    "complete_within_accessible_scope": false,
+    "entries_observed": 49619,
+    "entry_cap": 150000,
+    "error_count": 90,
+    "error_samples": [
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/policy/lifecycle"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/policy/profile"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/metadata-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/world/world-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/metadata-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/semantic/world-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/published-context/admitted-adfbdb69237e4bab87bd800f99a62419/1-sha256:24cf3e233895617c7da9bb01b60bb1716382e4e2a56a2b03ba3732f88af3aae8/retrieval-metadata-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/world/metadata-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/world/world-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/semantic/metadata-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.runtime/initial/semantic/world-lake"
+      },
+      {
+        "errno": 13,
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/docker-automation-gate-03/native-doctor/repository/.git/agent-validation-cache/locks"
+      }
+    ],
+    "matching_hardlinks": [
+      {
+        "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-04/runtime.tar.gz",
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-04/runtime.tar.gz"
+      },
+      {
+        "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-02/runtime.tar.gz",
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-02/runtime.tar.gz"
+      },
+      {
+        "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-01/runtime.tar.gz",
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-01/runtime.tar.gz"
+      },
+      {
+        "archive": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-03/runtime.tar.gz",
+        "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-03/runtime.tar.gz"
+      }
+    ],
+    "matching_symlinks": [],
+    "scan_roots": [
+      "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929",
+      "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002"
+    ],
+    "symlinks_observed": 3
+  },
+  "processes": {
+    "fields_read": {
+      "other_uid:cmdline": 368,
+      "other_uid:cwd": 1,
+      "other_uid:maps": 303,
+      "own_uid:cmdline": 230,
+      "own_uid:cwd": 199,
+      "own_uid:fd": 4724,
+      "own_uid:fd_list": 200,
+      "own_uid:maps": 206
+    },
+    "matches": [],
+    "other_errors": [],
+    "other_uid_permission_gap_sample": {
+      "1": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 0
+      },
+      "10": {
+        "fields": [
+          "cwd",
+          "fd_list"
+        ],
+        "uid": 0
+      },
+      "100": {
+        "fields": [
+          "cwd",
+          "fd_list"
+        ],
+        "uid": 0
+      },
+      "1003744": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 0
+      },
+      "101": {
+        "fields": [
+          "cwd",
+          "fd_list"
+        ],
+        "uid": 0
+      },
+      "1017": {
+        "fields": [
+          "cwd",
+          "fd_list"
+        ],
+        "uid": 0
+      },
+      "1018": {
+        "fields": [
+          "cwd",
+          "fd_list"
+        ],
+        "uid": 0
+      },
+      "102": {
+        "fields": [
+          "cwd",
+          "fd_list"
+        ],
+        "uid": 0
+      }
+    },
+    "own_audit_pid": 2175763,
+    "own_uid": 1000,
+    "own_uid_permission_gap_pids": {
+      "1004825": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1349863": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1434373": {
+        "fields": [
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1668510": {
+        "fields": [
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1886940": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1901929": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1925264": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1928146": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1928244": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1928348": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1928972": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1946833": {
+        "fields": [
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1952451": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1956954": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1961247": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "1964008": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "196533": {
+        "fields": [
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "2120094": {
+        "fields": [
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "2445895": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "2447": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd",
+          "fd"
+        ],
+        "uid": 1000
+      },
+      "2454021": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "2496": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "2537669": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "2624436": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "2677455": {
+        "fields": [
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "3430425": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "3671919": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "3795590": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "3985071": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "4040285": {
+        "fields": [
+          "cwd",
+          "maps",
+          "fd_list"
+        ],
+        "uid": 1000
+      },
+      "826919": {
+        "fields": [
+          "fd_list"
+        ],
+        "uid": 1000
+      }
+    },
+    "permission_denied": {
+      "other_uid:cwd": 367,
+      "other_uid:fd_list": 368,
+      "other_uid:maps": 65,
+      "own_uid:cwd": 24,
+      "own_uid:fd": 167,
+      "own_uid:fd_list": 30,
+      "own_uid:maps": 24
+    },
+    "permission_gap_process_counts": {
+      "other_uid": 368,
+      "own_uid": 31
+    },
+    "processes_seen": 598,
+    "vanished": {
+      "cwd": 7,
+      "fd": 1
+    }
+  },
+  "schema": "runtime-archive-activity-review@1",
+  "scope": "read-only provenance/activity snapshot of four additional task-owned automation archives; only this report is written",
+  "started_at": "2026-10-02T15:28:10.774187+00:00",
+  "uid": 1000
+}

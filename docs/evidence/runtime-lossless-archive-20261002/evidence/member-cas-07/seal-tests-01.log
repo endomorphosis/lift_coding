@@ -1,0 +1,10 @@
+test_corrupt_referenced_payload_refuses_without_seal (test_seal_store.SealTests.test_corrupt_referenced_payload_refuses_without_seal) ... ok
+test_durable_seal_replays_in_fresh_process (test_seal_store.SealTests.test_durable_seal_replays_in_fresh_process) ... ok
+test_group_writable_payload_refused (test_seal_store.SealTests.test_group_writable_payload_refused) ... ok
+test_wrong_accepted_recipe_refuses_without_seal (test_seal_store.SealTests.test_wrong_accepted_recipe_refuses_without_seal) ... ok
+test_wrong_codec_binding_refused (test_seal_store.SealTests.test_wrong_codec_binding_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.325s
+
+OK

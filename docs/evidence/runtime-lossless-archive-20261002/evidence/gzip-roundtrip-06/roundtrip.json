@@ -1,0 +1,30 @@
+{
+  "cpu_system_seconds": 1.5113159999999999,
+  "cpu_user_seconds": 31.595888,
+  "decoded_cap_bytes": 4294967296,
+  "decoded_tar_bytes": 3798630400,
+  "decoded_tar_sha256": "3cee5b8a09113dd1f2c511c59ccd06a9da3425547ca2f9040ddc96c06b926b95",
+  "deflate": {
+    "level": 1,
+    "memLevel": 8,
+    "strategy": 0,
+    "wbits": -15
+  },
+  "exact": true,
+  "expanded_tar_or_reconstructed_gzip_written": false,
+  "gzip_header_hex": "1f8b08089f44bb6a04ff72756e74696d652e74617200",
+  "gzip_mtime": 1790657695,
+  "gzip_trailer_hex": "a602eaa900806ae2",
+  "original_bytes": 1205823423,
+  "original_sha256": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe",
+  "originals_modified": false,
+  "peak_rss_bytes": 23539712,
+  "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+  "reconstructed_bytes": 1205823423,
+  "reconstructed_sha256": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe",
+  "schema": "runtime-gzip-exact-stream-roundtrip@1",
+  "seconds": 33.590864293975756,
+  "source": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v5/runtime.tar.gz",
+  "zlib_compile": "1.3",
+  "zlib_runtime": "1.3"
+}

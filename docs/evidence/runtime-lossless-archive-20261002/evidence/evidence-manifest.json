@@ -1,0 +1,118 @@
+{
+  "files": [
+    {
+      "bytes": 5102,
+      "path": "REPORT.md",
+      "sha256": "14f4d3752243196a5a028dd1081826cf2980df4e63abbebf60c420b37ebf98f4"
+    },
+    {
+      "bytes": 9173,
+      "path": "experiment-01/experiment.py",
+      "sha256": "44e0c425a12d643c7989f3e6f22aeb240c64471a3b689053f2e58b07291625d2"
+    },
+    {
+      "bytes": 70351,
+      "path": "experiment-01/result.json",
+      "sha256": "643c8ba25b37af621a366f77d48fbad1aadb2182aa8287a823093609fbc1400f"
+    },
+    {
+      "bytes": 109,
+      "path": "experiment-01/run.log",
+      "sha256": "41a5191e8c385fc524558b114ef7b61db2bc4cf297395badd2aea075439f78a1"
+    },
+    {
+      "bytes": 308,
+      "path": "experiment-02/compression.stderr",
+      "sha256": "950e848781f16ab3bfaa7528878a60cad6f28e5561af25661e0001b986b52e4c"
+    },
+    {
+      "bytes": 9172,
+      "path": "experiment-02/experiment.py",
+      "sha256": "07cf969095f92dc2baaae2bf5209045529935dbb3f83d327ce59fd1c6e4774f5"
+    },
+    {
+      "bytes": 229,
+      "path": "experiment-02/reconstruction.stderr",
+      "sha256": "fb48b6ca2c92af74e5a4b1081ac046676215bd3ff104e7b4f491f5c4f086792a"
+    },
+    {
+      "bytes": 73562,
+      "path": "experiment-02/result.json",
+      "sha256": "d3103e0137725ec062a28d56f6edbf821b9b9f62de1d8b949a06f58b9a209bd4"
+    },
+    {
+      "bytes": 100,
+      "path": "experiment-02/run.log",
+      "sha256": "80a372ea5b1f57d0d60f0ea4fd4afa947df54d1e2797899fe953c1a604473110"
+    },
+    {
+      "bytes": 8629,
+      "path": "manifest-overlap.json",
+      "sha256": "1660ea70bd58e164aa8e3bcc7a4b9e5178573239149ce03eb2997cbd243b8248"
+    },
+    {
+      "bytes": 2568,
+      "path": "producer-review.json",
+      "sha256": "d473409779da88e0e4299d16eee8331b44fbec5561f26d79387d542edd5b9b9c"
+    },
+    {
+      "bytes": 551,
+      "path": "scratch-cleanup.json",
+      "sha256": "db3e18ecc73936ecabda5482e132604d80e6cb684d54e10431233063f1fd795c"
+    },
+    {
+      "bytes": 229,
+      "path": "verification-03/reconstruction.stderr",
+      "sha256": "fb48b6ca2c92af74e5a4b1081ac046676215bd3ff104e7b4f491f5c4f086792a"
+    },
+    {
+      "bytes": 3832,
+      "path": "verification-03/result.json",
+      "sha256": "df371b576197ec7abd489b225bea14020386c4f27e10a11661b55d0b6322cc8e"
+    },
+    {
+      "bytes": 100,
+      "path": "verification-03/run.log",
+      "sha256": "80a372ea5b1f57d0d60f0ea4fd4afa947df54d1e2797899fe953c1a604473110"
+    },
+    {
+      "bytes": 8450,
+      "path": "verification-03/verify.py",
+      "sha256": "e3afe8809bb05c5448974b38c82cef6d14715c89508a86a0ef442697e3b0de25"
+    },
+    {
+      "bytes": 0,
+      "path": "verification-04/reconstruction.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 72454,
+      "path": "verification-04/result.json",
+      "sha256": "fef5199141cf8a455945bc1ec6035e3412877c73a4b69999b6a84b07b8b9a7f0"
+    },
+    {
+      "bytes": 101,
+      "path": "verification-04/run.log",
+      "sha256": "0c56c8c20d53d9dec923068e3d02b44b44be7fe97acb7477bab18a0da8ff906f"
+    },
+    {
+      "bytes": 8471,
+      "path": "verification-04/verify.py",
+      "sha256": "344def1d80a4ce809e80a3c57383698fabeba4c58a89558fd2d1dcb9b62f1a1f"
+    }
+  ],
+  "originals_removed_or_replaced": false,
+  "removed_reproducible_scratch": [
+    {
+      "allocated_bytes": 1167175680,
+      "bytes": 1167170658,
+      "originals_removed_or_replaced": false,
+      "reason": "Redundant ineffective experimental patch; exact originals remain; native streamed reconstruction qualified and recipe retained.",
+      "removed_path": "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/experiment-02/v5-from-v4.zst",
+      "schema": "runtime-lossless-experiment-scratch-cleanup@1",
+      "sha256": "4622e21a8077a5d39896314d3450c25788d2c183ce652a1912fe71509448b76c",
+      "time": "2026-10-02T15:04:40.448934+00:00"
+    }
+  ],
+  "schema": "runtime-lossless-archive-evidence@1"
+}

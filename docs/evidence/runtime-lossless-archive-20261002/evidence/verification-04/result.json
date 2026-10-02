@@ -1,0 +1,4471 @@
+{
+  "completed_at": "2026-10-02T14:58:54.505222+00:00",
+  "compression_result_path": "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/experiment-02/result.json",
+  "compression_result_sha256": "d3103e0137725ec062a28d56f6edbf821b9b9f62de1d8b949a06f58b9a209bd4",
+  "fraction_saved": 0.03205507893007653,
+  "limits": {
+    "acquire_timeout_seconds": 30,
+    "child_address_space_bytes": 4294967296,
+    "child_cpu_seconds": 240,
+    "child_process_slots": 1,
+    "cpu_slots": 2,
+    "experiment_wall_seconds": 300,
+    "maximum_output_bytes": 1610612736,
+    "memory_mb": 4096
+  },
+  "native_admission": {
+    "acquire_seconds": 0.010287635028362274,
+    "lane": "persistence",
+    "lease_id": "9b9b2a8c8536441fbf8cc7bdecb6452a",
+    "policy_sha256": "03793b8f3246f9c5d2af6cd64c4aaee6ef09dd1041f6d0ff0d07ef87a955147a",
+    "released": true,
+    "state_path": "/tmp/ipfs-datasets-resource-scheduler-1000.json"
+  },
+  "originals_removed_or_replaced": false,
+  "patch": {
+    "allocated_bytes": 1167171584,
+    "bytes": 1167170658,
+    "device": 66306,
+    "gid": 1000,
+    "inode": 45630247,
+    "mode": "0o664",
+    "mtime_ns": 1790657723374753356,
+    "path": "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/experiment-02/v5-from-v4.zst",
+    "sha256": "4622e21a8077a5d39896314d3450c25788d2c183ce652a1912fe71509448b76c",
+    "uid": 1000
+  },
+  "possible_allocated_saved_bytes": 38678528,
+  "possible_logical_saved_bytes": 38652765,
+  "process_census_after": {
+    "denied": [
+      {
+        "kind": "cwd",
+        "pid": 1,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 4,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 4,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 5,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 5,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 6,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 6,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 7,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 7,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 8,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 8,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 10,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 10,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 13,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 13,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 14,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 14,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 15,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 15,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 16,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 16,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 17,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 17,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 18,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 18,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 19,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 19,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 20,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 20,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 21,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 21,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 22,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 22,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 23,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 23,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 24,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 24,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 26,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 26,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 27,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 27,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 28,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 28,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 29,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 29,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 30,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 30,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 32,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 32,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 33,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 33,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 34,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 34,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 35,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 35,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 36,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 36,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 38,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 38,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 39,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 39,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 40,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 40,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 41,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 41,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 42,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 42,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 44,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 44,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 45,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 45,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 46,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 46,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 47,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 47,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 48,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 48,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 50,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 50,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 51,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 51,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 52,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 52,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 53,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 53,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 54,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 54,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 56,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 56,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 57,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 57,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 58,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 58,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 59,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 59,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 60,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 60,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 62,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 62,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 63,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 63,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 64,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 64,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 65,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 65,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 66,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 66,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 68,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 68,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 69,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 69,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 70,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 70,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 71,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 71,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 72,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 72,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 74,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 74,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 75,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 75,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 76,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 76,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 77,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 77,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 78,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 78,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 80,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 80,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 81,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 81,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 82,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 82,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 83,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 83,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 84,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 84,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 85,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 85,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 87,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 87,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 88,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 88,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 89,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 89,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 90,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 90,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 91,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 91,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 93,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 93,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 94,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 94,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 95,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 95,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 96,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 96,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 97,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 97,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 99,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 99,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 100,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 100,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 101,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 101,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 102,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 102,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 103,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 103,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 105,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 105,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 106,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 106,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 107,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 107,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 108,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 108,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 109,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 109,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 111,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 111,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 112,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 112,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 113,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 113,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 114,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 114,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 115,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 115,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 117,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 117,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 118,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 118,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 119,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 119,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 120,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 120,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 121,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 121,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 123,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 123,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 124,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 124,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 125,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 125,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 126,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 126,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 127,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 127,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 129,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 129,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 130,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 130,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 131,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 131,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 132,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 132,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 133,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 133,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 135,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 135,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 139,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 139,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 140,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 140,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 141,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 141,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 142,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 142,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 143,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 143,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 144,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 144,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 145,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 145,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 146,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 146,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 148,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 148,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 149,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 149,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 150,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 150,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 151,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 151,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 152,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 152,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 153,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 153,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 154,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 154,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 159,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 159,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 160,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 160,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 161,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 161,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 162,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 162,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 163,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 163,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 164,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 164,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 166,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 166,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 167,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 167,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 168,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 168,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 169,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 169,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 170,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 170,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 172,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 172,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 173,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 173,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 174,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 174,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 175,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 175,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 180,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 180,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 181,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 181,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 183,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 183,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 184,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 184,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 185,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 185,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 186,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 186,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 187,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 187,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 188,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 188,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 198,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 198,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 199,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 199,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 203,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 203,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 205,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 205,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 206,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 206,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 207,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 207,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 208,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 208,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 209,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 209,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 210,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 210,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 211,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 211,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 212,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 212,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 213,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 213,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 244,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 244,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 258,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 258,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 260,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 260,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 261,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 261,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 262,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 262,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 263,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 263,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 268,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 268,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 269,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 269,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 272,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 272,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 274,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 274,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 282,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 282,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 287,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 287,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 288,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 288,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 291,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 291,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 292,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 292,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 293,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 293,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 297,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 297,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 298,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 298,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 304,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 304,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 308,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 308,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 313,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 313,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 314,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 314,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 316,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 316,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 317,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 317,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 464,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 464,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 465,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 465,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 466,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 466,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 467,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 467,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 505,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 505,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 579,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 579,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 580,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 580,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 654,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 654,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 654,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 681,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 681,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 685,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 685,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 686,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 686,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 694,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 694,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 694,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 700,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 700,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 700,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 732,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 732,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1017,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1017,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1018,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1018,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1021,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1021,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1077,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1077,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1205,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1205,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1290,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1290,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1390,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1390,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1391,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1391,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1399,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1399,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1403,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1403,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1405,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1405,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1406,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1406,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1417,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1417,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1418,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1418,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1649,
+        "uid": 998
+      },
+      {
+        "kind": "fd",
+        "pid": 1649,
+        "uid": 998
+      },
+      {
+        "kind": "maps",
+        "pid": 1649,
+        "uid": 998
+      },
+      {
+        "kind": "cwd",
+        "pid": 1741,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1741,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1752,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1752,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1753,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1753,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1787,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1787,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1788,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1788,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1789,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1789,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1848,
+        "uid": 997
+      },
+      {
+        "kind": "fd",
+        "pid": 1848,
+        "uid": 997
+      },
+      {
+        "kind": "maps",
+        "pid": 1848,
+        "uid": 997
+      },
+      {
+        "kind": "cwd",
+        "pid": 1859,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1859,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1859,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1861,
+        "uid": 116
+      },
+      {
+        "kind": "fd",
+        "pid": 1861,
+        "uid": 116
+      },
+      {
+        "kind": "maps",
+        "pid": 1861,
+        "uid": 116
+      },
+      {
+        "kind": "cwd",
+        "pid": 1862,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1862,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1862,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1863,
+        "uid": 101
+      },
+      {
+        "kind": "fd",
+        "pid": 1863,
+        "uid": 101
+      },
+      {
+        "kind": "maps",
+        "pid": 1863,
+        "uid": 101
+      },
+      {
+        "kind": "cwd",
+        "pid": 1864,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1864,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1864,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1865,
+        "uid": 117
+      },
+      {
+        "kind": "fd",
+        "pid": 1865,
+        "uid": 117
+      },
+      {
+        "kind": "maps",
+        "pid": 1865,
+        "uid": 117
+      },
+      {
+        "kind": "cwd",
+        "pid": 1869,
+        "uid": 986
+      },
+      {
+        "kind": "fd",
+        "pid": 1869,
+        "uid": 986
+      },
+      {
+        "kind": "maps",
+        "pid": 1869,
+        "uid": 986
+      },
+      {
+        "kind": "cwd",
+        "pid": 1880,
+        "uid": 991
+      },
+      {
+        "kind": "fd",
+        "pid": 1880,
+        "uid": 991
+      },
+      {
+        "kind": "maps",
+        "pid": 1880,
+        "uid": 991
+      },
+      {
+        "kind": "cwd",
+        "pid": 1885,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1885,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1885,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1889,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1889,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1889,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1897,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1897,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1898,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1898,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1899,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1899,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1900,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1900,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1902,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1902,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1903,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1903,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1904,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1904,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1906,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1906,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1906,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1907,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1907,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1908,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1908,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1909,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1909,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1923,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1923,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1923,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1936,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1936,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1936,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1942,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1942,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1942,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2008,
+        "uid": 116
+      },
+      {
+        "kind": "fd",
+        "pid": 2008,
+        "uid": 116
+      },
+      {
+        "kind": "maps",
+        "pid": 2008,
+        "uid": 116
+      },
+      {
+        "kind": "cwd",
+        "pid": 2020,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2020,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2020,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2022,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2022,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2022,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2163,
+        "uid": 103
+      },
+      {
+        "kind": "fd",
+        "pid": 2163,
+        "uid": 103
+      },
+      {
+        "kind": "maps",
+        "pid": 2163,
+        "uid": 103
+      },
+      {
+        "kind": "cwd",
+        "pid": 2187,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2187,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2187,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2192,
+        "uid": 992
+      },
+      {
+        "kind": "fd",
+        "pid": 2192,
+        "uid": 992
+      },
+      {
+        "kind": "maps",
+        "pid": 2192,
+        "uid": 992
+      },
+      {
+        "kind": "cwd",
+        "pid": 2322,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2322,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2322,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2337,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2337,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2337,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2341,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2341,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2341,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2370,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2370,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2370,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2383,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2383,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2383,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2390,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2390,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2390,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2447,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 2447,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 2447,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 2496,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 2496,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 2496,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 2502,
+        "uid": 127
+      },
+      {
+        "kind": "fd",
+        "pid": 2502,
+        "uid": 127
+      },
+      {
+        "kind": "maps",
+        "pid": 2502,
+        "uid": 127
+      },
+      {
+        "kind": "cwd",
+        "pid": 2537,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2537,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2537,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2706,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2706,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2706,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2853,
+        "uid": 109
+      },
+      {
+        "kind": "fd",
+        "pid": 2853,
+        "uid": 109
+      },
+      {
+        "kind": "maps",
+        "pid": 2853,
+        "uid": 109
+      },
+      {
+        "kind": "cwd",
+        "pid": 3157,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3157,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3770,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3770,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 3770,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3771,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3771,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 3771,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 4841,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 4841,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 4841,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 5747,
+        "uid": 119
+      },
+      {
+        "kind": "fd",
+        "pid": 5747,
+        "uid": 119
+      },
+      {
+        "kind": "maps",
+        "pid": 5747,
+        "uid": 119
+      },
+      {
+        "kind": "cwd",
+        "pid": 6785,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 6785,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 6785,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 7813,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 7813,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 7813,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 196533,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 241067,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 241067,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 281521,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 281521,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 350282,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 350282,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 449971,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 449971,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 520083,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 520083,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 706325,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 706325,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 733115,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 733115,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 747442,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 747442,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 770304,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 770304,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 826919,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 857072,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 857072,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 860346,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 860346,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 889673,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 889673,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 987783,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 987783,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1003744,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1003744,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1003744,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1004825,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1004825,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1004825,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1036995,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1036995,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1036995,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1074499,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1074499,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1109783,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1109783,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1130636,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1130636,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1131945,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1131945,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1135635,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1135635,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1137907,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1137907,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1158139,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1158139,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1171252,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1171252,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1172753,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1172753,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1224482,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1224482,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1229402,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1229402,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1239120,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1239120,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1239120,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1254977,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1254977,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1254978,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1254978,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1298300,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1298300,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1308319,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1308319,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1313584,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1313584,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1317161,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1317161,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1329035,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1329035,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1342273,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1342273,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1346965,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1346965,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1348346,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1348346,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1349194,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1349194,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1349194,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1349863,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1349863,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1349863,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1355802,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1355802,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1362839,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1362839,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1374771,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1374771,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1409569,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1409569,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1425494,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1425494,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1434373,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1446099,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1446099,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1446100,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1446100,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1464422,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1464422,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1464431,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1464431,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1464822,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1464822,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1477925,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1477925,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1486080,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1486080,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1511382,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1511382,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1529503,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1529503,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1529503,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1533116,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1533116,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1533117,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1533117,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1543166,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1543166,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1543167,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1543167,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1543594,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1543594,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1550975,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1550975,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1567279,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1567279,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1567339,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1567339,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1567363,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1567363,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1567364,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1567364,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1578610,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1578610,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1578610,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1668510,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1738495,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1738495,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1738495,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1793619,
+        "uid": 65534
+      },
+      {
+        "kind": "fd",
+        "pid": 1793619,
+        "uid": 65534
+      },
+      {
+        "kind": "maps",
+        "pid": 1793619,
+        "uid": 65534
+      },
+      {
+        "kind": "cwd",
+        "pid": 1793623,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1793623,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1793623,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1861854,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1861854,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1886940,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1886940,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1886940,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1899381,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1899381,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 1899381,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 1901929,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1901929,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1901929,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1925264,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1925264,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1925264,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1928146,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1928146,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1928146,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1928244,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1928244,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1928244,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1928348,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1928348,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1928348,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1928972,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1928972,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1928972,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1932294,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1932294,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 1946833,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1952451,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1952451,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1952451,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1956954,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1956954,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1956954,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1961247,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1961247,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1961247,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 1964008,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 1964008,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 1964008,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 2120094,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 2150634,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2150634,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2150635,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2150635,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2150636,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2150636,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2441934,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2441934,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2441934,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2445895,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 2445895,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 2445895,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 2453406,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2453406,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2453406,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2454021,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 2454021,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 2454021,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 2478914,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2478914,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2478914,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2479859,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2479859,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2495937,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2495937,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2537669,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 2537669,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 2537669,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 2623006,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2623006,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2623006,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2624436,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 2624436,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 2624436,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 2677455,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 2818142,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2818142,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2956014,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 2956014,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 2956014,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 2956020,
+        "uid": 7
+      },
+      {
+        "kind": "fd",
+        "pid": 2956020,
+        "uid": 7
+      },
+      {
+        "kind": "maps",
+        "pid": 2956020,
+        "uid": 7
+      },
+      {
+        "kind": "cwd",
+        "pid": 2956022,
+        "uid": 123
+      },
+      {
+        "kind": "fd",
+        "pid": 2956022,
+        "uid": 123
+      },
+      {
+        "kind": "maps",
+        "pid": 2956022,
+        "uid": 123
+      },
+      {
+        "kind": "cwd",
+        "pid": 3082265,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3082265,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 3082265,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3086060,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3086060,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3222753,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3222753,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3421709,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3421709,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3429652,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3429652,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 3429652,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3430425,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 3430425,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 3430425,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 3621859,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3621859,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3670801,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3670801,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 3670801,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3671919,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 3671919,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 3671919,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 3678569,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3678569,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3794343,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3794343,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 3794343,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3795590,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 3795590,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 3795590,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 3878212,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3878212,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3984003,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 3984003,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 3984003,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 3985071,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 3985071,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 3985071,
+        "uid": 1000
+      },
+      {
+        "kind": "cwd",
+        "pid": 4037759,
+        "uid": 0
+      },
+      {
+        "kind": "fd",
+        "pid": 4037759,
+        "uid": 0
+      },
+      {
+        "kind": "maps",
+        "pid": 4037759,
+        "uid": 0
+      },
+      {
+        "kind": "cwd",
+        "pid": 4040285,
+        "uid": 1000
+      },
+      {
+        "kind": "fd",
+        "pid": 4040285,
+        "uid": 1000
+      },
+      {
+        "kind": "maps",
+        "pid": 4040285,
+        "uid": 1000
+      }
+    ],
+    "note": "Point-in-time census; excludes this experiment; requires repeat before any replacement.",
+    "own_uid_denied": 79,
+    "process_matches": [],
+    "scanned_processes": 586
+  },
+  "qualified": true,
+  "qualified_for_original_replacement": false,
+  "reconstruction_verified": true,
+  "reference": {
+    "allocated_bytes": 1205850112,
+    "bytes": 1205822463,
+    "device": 66306,
+    "gid": 1000,
+    "inode": 28863989,
+    "manifest_archive_sha256": "ff100f2c7d7e648206fa8ef9dfd8a770780a62e7e53a0e29886ced3dff31f242",
+    "manifest_sha256": "34ce9d0cd55670ef893ea476a71a7eba15279d755e759d850bf17df3a3340ba1",
+    "mode": "0o664",
+    "mtime_ns": 1790657625896273920,
+    "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v4/runtime.tar.gz",
+    "sha256": "ff100f2c7d7e648206fa8ef9dfd8a770780a62e7e53a0e29886ced3dff31f242",
+    "uid": 1000
+  },
+  "schema": "task-runtime-lossless-archive-experiment@1",
+  "started_at": "2026-10-02T14:58:50.802778+00:00",
+  "steps": [
+    {
+      "command": [
+        "zstd",
+        "--single-thread",
+        "--mmap-dict",
+        "-d",
+        "--patch-from=/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v4/runtime.tar.gz",
+        "--long=31",
+        "--memory=2048MB",
+        "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/experiment-02/v5-from-v4.zst",
+        "-c"
+      ],
+      "cpu_system_seconds": 0.998116,
+      "cpu_user_seconds": 0.275493,
+      "limit_command": [
+        "prlimit",
+        "--as=4294967296",
+        "--fsize=1610612736",
+        "--cpu=240",
+        "--"
+      ],
+      "name": "reconstruction",
+      "reaped": true,
+      "returncode": 0,
+      "sampled_child_peak_rss_bytes": 1478963200,
+      "seconds": 1.9327978510409594,
+      "stdout_bytes": 1205823423,
+      "stdout_sha256": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe"
+    }
+  ],
+  "target": {
+    "allocated_bytes": 1205850112,
+    "bytes": 1205823423,
+    "device": 66306,
+    "gid": 1000,
+    "inode": 28619315,
+    "manifest_archive_sha256": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe",
+    "manifest_sha256": "baccb15db1964c8d69e5e0b25e17770c6d59af91d196158128cd3e187ed0cd0b",
+    "mode": "0o664",
+    "mtime_ns": 1790657723374753356,
+    "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v5/runtime.tar.gz",
+    "sha256": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe",
+    "uid": 1000
+  }
+}

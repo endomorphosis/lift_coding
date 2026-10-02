@@ -1,0 +1,32 @@
+{
+  "command": [
+    "prlimit",
+    "--as=536870912",
+    "--fsize=1048576",
+    "--cpu=300",
+    "--",
+    "/usr/bin/python3.12",
+    "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/gzip-roundtrip-06/worker.py",
+    "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v5/runtime.tar.gz",
+    "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/gzip-roundtrip-06/roundtrip.json"
+  ],
+  "limits": {
+    "acquire_seconds": 30,
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "memory_mb": 512,
+    "wall_seconds": 300
+  },
+  "native_admission": {
+    "acquire_seconds": 0.026996717788279057,
+    "lane": "persistence",
+    "lease_id": "f9f900cb4b69401b9d7c82b6cfddf43b",
+    "policy_sha256": "03793b8f3246f9c5d2af6cd64c4aaee6ef09dd1041f6d0ff0d07ef87a955147a",
+    "released": true
+  },
+  "qualified": true,
+  "reaped": true,
+  "schema": "native-runtime-gzip-roundtrip-envelope@1",
+  "seconds": 33.69188789790496,
+  "worker_returncode": 0
+}

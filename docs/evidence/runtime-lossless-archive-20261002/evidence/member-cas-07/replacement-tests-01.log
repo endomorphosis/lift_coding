@@ -1,0 +1,9 @@
+test_cancellation_before_commit_retains_original_and_modes (test_replace_originals.ReplaceTests.test_cancellation_before_commit_retains_original_and_modes) ... ok
+test_exact_owned_original_replaced_only_after_reference_durable (test_replace_originals.ReplaceTests.test_exact_owned_original_replaced_only_after_reference_durable) ... ok
+test_existing_sidecar_refuses_without_overwrite_or_unlink (test_replace_originals.ReplaceTests.test_existing_sidecar_refuses_without_overwrite_or_unlink) ... ok
+test_same_length_wrong_hash_keeps_original (test_replace_originals.ReplaceTests.test_same_length_wrong_hash_keeps_original) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.027s
+
+OK

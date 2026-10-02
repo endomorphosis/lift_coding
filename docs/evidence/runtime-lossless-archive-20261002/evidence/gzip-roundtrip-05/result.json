@@ -1,0 +1,28 @@
+{
+  "command": [
+    "prlimit",
+    "--as=536870912",
+    "--fsize=1048576",
+    "--cpu=300",
+    "--",
+    "/usr/bin/python3.12",
+    "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/gzip-roundtrip-05/worker.py",
+    "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v5/runtime.tar.gz",
+    "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/gzip-roundtrip-05/roundtrip.json"
+  ],
+  "error": {
+    "message": "timed out waiting for a resource lease",
+    "type": "LeaseTimeoutError"
+  },
+  "limits": {
+    "acquire_seconds": 30,
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "memory_mb": 512,
+    "wall_seconds": 300
+  },
+  "qualified": false,
+  "reaped": true,
+  "schema": "native-runtime-gzip-roundtrip-envelope@1",
+  "seconds": 30.02598658297211
+}

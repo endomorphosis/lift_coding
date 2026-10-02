@@ -1,0 +1,45 @@
+{
+  "archive_writer": {
+    "api": "tarfile.open(archive, \"w:gz\", compresslevel=1)",
+    "gid": 0,
+    "gname": "root",
+    "gzip_header_mtime": "wall clock implicit; must preserve captured raw gzip header",
+    "member_mtime": 0,
+    "mode": "0755 executable else0644; portable assets0644",
+    "order": "files traversal order then portable_assets order; corresponding manifest order",
+    "tar_default": "PAX_FORMAT; hardlink and long-name/PAX behavior must retain exact raw headers",
+    "uid": 0,
+    "uname": "root"
+  },
+  "constraints": [
+    "No originals removed or replaced",
+    "No policy or threshold changed",
+    "Process-reference census incomplete; no inactivity claim",
+    "No large tar expansion performed",
+    "No unmeasured CAS space saving claimed"
+  ],
+  "follow_on_if_exact": "Bounded canonical member-CAS experiment: stream reference+target tar bodies, retain exact ordered raw tar headers/PAX/links/padding/trailer, write compressed content keyed by freshly verified SHA256. Reconstruct one target archive from the retained recipe+CAS and recheck original SHA256 before proposing any replacement. Manifest overlap alone is not extraction/reconstruction evidence.",
+  "next_experiment": {
+    "archive": "terminal-native-runtime-full-v5/runtime.tar.gz",
+    "compressed_original_input_limit_bytes": 1205823423,
+    "kind": "single archive streaming gzip decompress/recompress into SHA256; no expanded archive on disk",
+    "maximum_decoded_bytes": 4294967296,
+    "output_budget_bytes": 1048576,
+    "qualification": "compressed byte count and SHA256 equal original; complete decoded tar length and digest retained; no removal permitted",
+    "recipe": "preserve original raw gzip header (mtime+runtime.tar filename); zlib raw DEFLATE level1/default strategy; preserve/recompute original CRC32 and ISIZE trailer; hash emitted full gzip bytes",
+    "reservation": {
+      "acquire_timeout_seconds": 30,
+      "child_process_slots": 1,
+      "cpu_slots": 1,
+      "memory_mb": 512,
+      "wall_seconds": 300
+    }
+  },
+  "producer_observation": "Current released counterpart; not a claim its whole file equals the historical producer.",
+  "producer_path": "/tmp/ir-release-accelerate-20261001/benchmarks/agent_supervisor/container_coding/terminal_deployment.py",
+  "producer_sha256": "50bc0b3364b5c8948733ce9730989f4a1456c44a2825ddfc45c2b3a13904f7a5",
+  "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+  "schema": "runtime-lossless-archive-producer-review@1",
+  "zlib_compile_version": "1.3",
+  "zlib_runtime_version": "1.3"
+}

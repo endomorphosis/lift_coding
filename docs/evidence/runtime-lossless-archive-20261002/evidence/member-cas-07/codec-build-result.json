@@ -1,0 +1,14 @@
+{
+  "error": {
+    "message": "timed out waiting for a resource lease",
+    "type": "LeaseTimeoutError"
+  },
+  "limits": {
+    "child_process_slots": 4,
+    "cpu_slots": 1,
+    "memory_mb": 512,
+    "wall_seconds": 60
+  },
+  "qualified": false,
+  "schema": "native-static-zlib-codec-build@1"
+}

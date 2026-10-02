@@ -1,0 +1,54 @@
+{
+  "authority": "manifest-only byte/hash comparison against current CAS names; no capture/reconstruction or inactivity claim",
+  "candidates": [
+    {
+      "archive_allocated_bytes": 1205936128,
+      "archive_bytes": 1205904593,
+      "archive_sha256_recorded": "fab413d963c0d9251b5fb88dc95ce07ae3502ed4723d74e60df57264de0e896a",
+      "manifest_file_count": 26922,
+      "manifest_sha256": "1741ba5b92979622f35d65b716813d1fd1c2316a28c7810f75b1098ee40e89b1",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-01",
+      "same_payload_bytes": 3767971502,
+      "same_payload_hash_count": 26732,
+      "unknown_payload_bytes": 6530904,
+      "unknown_payload_count": 190
+    },
+    {
+      "archive_allocated_bytes": 1205923840,
+      "archive_bytes": 1205904238,
+      "archive_sha256_recorded": "d457605f72efd98ea6662753e8112efeacfc30188691f6ad4bf772804232dfd3",
+      "manifest_file_count": 26922,
+      "manifest_sha256": "8dea53bfcb168c303b602341c5a64c2d56b852897d1c56eea09a4ceb5039bf87",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-02",
+      "same_payload_bytes": 3767971502,
+      "same_payload_hash_count": 26732,
+      "unknown_payload_bytes": 6531154,
+      "unknown_payload_count": 190
+    },
+    {
+      "archive_allocated_bytes": 1205923840,
+      "archive_bytes": 1205895895,
+      "archive_sha256_recorded": "2e25bf15f7d59ca164ca5448905e73d9ff6d652e4afee8c222ef65397d5d1013",
+      "manifest_file_count": 26923,
+      "manifest_sha256": "e718ffc4b6f281ae6284add0e299eb055ad3fbc9ee6c52fa7dcd70922f5766ea",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-03",
+      "same_payload_bytes": 3767943694,
+      "same_payload_hash_count": 26731,
+      "unknown_payload_bytes": 6565371,
+      "unknown_payload_count": 192
+    },
+    {
+      "archive_allocated_bytes": 1205923840,
+      "archive_bytes": 1205894195,
+      "archive_sha256_recorded": "53d7d8a4d29c245ca6e056ebf7ab4ec9481ea8b879b9782ab6f872c14e9cf40e",
+      "manifest_file_count": 26923,
+      "manifest_sha256": "36be9d90bfb12d7e5f7110c27ad521f0386c3489b1936a5135db3dfa8bd0e1d4",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/runtime-04",
+      "same_payload_bytes": 3767904763,
+      "same_payload_hash_count": 26729,
+      "unknown_payload_bytes": 6611523,
+      "unknown_payload_count": 194
+    }
+  ],
+  "schema": "runtime-additional-candidate-manifest-inventory@1"
+}

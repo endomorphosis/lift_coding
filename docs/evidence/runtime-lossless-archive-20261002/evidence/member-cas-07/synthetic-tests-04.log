@@ -1,0 +1,144 @@
+test_changed_recipe_body_size_refused (test_archive_cas.ArchiveTests.test_changed_recipe_body_size_refused) ... ok
+test_exact_raw_tar_pax_hardlink_and_gzip_metadata (test_archive_cas.ArchiveTests.test_exact_raw_tar_pax_hardlink_and_gzip_metadata) ... ERROR
+test_gzip_timestamp_tamper_refused_by_original_digest (test_archive_cas.ArchiveTests.test_gzip_timestamp_tamper_refused_by_original_digest) ... FAIL
+test_missing_blob_refused (test_archive_cas.ArchiveTests.test_missing_blob_refused) ... ok
+test_nonprivate_store_parent_refused (test_archive_cas.ArchiveTests.test_nonprivate_store_parent_refused) ... ok
+test_replay_needs_only_recipe_and_cas (test_archive_cas.ArchiveTests.test_replay_needs_only_recipe_and_cas) ... ERROR
+test_reuses_shared_bytes_and_preserves_distinct_gzip_timestamps (test_archive_cas.ArchiveTests.test_reuses_shared_bytes_and_preserves_distinct_gzip_timestamps) ... ERROR
+test_staging_write_ceiling_refused (test_archive_cas.ArchiveTests.test_staging_write_ceiling_refused) ... ok
+test_statically_pinned_codec_exact_materialization (test_archive_cas.ArchiveTests.test_statically_pinned_codec_exact_materialization) ... ERROR
+test_store_exclusive_lock (test_archive_cas.ArchiveTests.test_store_exclusive_lock) ... ok
+test_symbolic_blob_refused (test_archive_cas.ArchiveTests.test_symbolic_blob_refused) ... FAIL
+test_tampered_blob_refused (test_archive_cas.ArchiveTests.test_tampered_blob_refused) ... ok
+test_wrong_archive_manifest_refused (test_archive_cas.ArchiveTests.test_wrong_archive_manifest_refused) ... ok
+test_wrong_codec_hash_refused (test_archive_cas.ArchiveTests.test_wrong_codec_hash_refused) ... ok
+test_wrong_external_original_refuses_materialization (test_archive_cas.ArchiveTests.test_wrong_external_original_refuses_materialization) ... ok
+test_zlib_profile_mismatch_refused (test_archive_cas.ArchiveTests.test_zlib_profile_mismatch_refused) ... ok
+
+======================================================================
+ERROR: test_exact_raw_tar_pax_hardlink_and_gzip_metadata (test_archive_cas.ArchiveTests.test_exact_raw_tar_pax_hardlink_and_gzip_metadata)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/test_archive_cas.py", line 30, in test_exact_raw_tar_pax_hardlink_and_gzip_metadata
+    a,m,recipe,row=self.captured(store);result=cas.reconstruct(recipe=recipe,store=store)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 235, in reconstruct
+    result=_reconstruct(recipe=recipe,store=store,static=compressor,output=output,expected_archive_sha256=expected_archive_sha256)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 279, in _reconstruct
+    for data in store.read_body(safe_digest(row['body_sha256']),size):emit(data)
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 114, in read_body
+    path=self.blob(digest);private_file(path);decoder=zlib.decompressobj();h=hashlib.sha256();total=0
+                           ^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 34, in private_file
+    require(st.st_uid==os.getuid() and not(st.st_mode & 0o022) and st.st_nlink==1,'owned private retained file required')
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 16, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: owned private retained file required
+
+======================================================================
+ERROR: test_replay_needs_only_recipe_and_cas (test_archive_cas.ArchiveTests.test_replay_needs_only_recipe_and_cas)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/test_archive_cas.py", line 37, in test_replay_needs_only_recipe_and_cas
+    self.assertTrue(cas.reconstruct(recipe=recipe,store=store)['exact'])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 235, in reconstruct
+    result=_reconstruct(recipe=recipe,store=store,static=compressor,output=output,expected_archive_sha256=expected_archive_sha256)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 279, in _reconstruct
+    for data in store.read_body(safe_digest(row['body_sha256']),size):emit(data)
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 114, in read_body
+    path=self.blob(digest);private_file(path);decoder=zlib.decompressobj();h=hashlib.sha256();total=0
+                           ^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 34, in private_file
+    require(st.st_uid==os.getuid() and not(st.st_mode & 0o022) and st.st_nlink==1,'owned private retained file required')
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 16, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: owned private retained file required
+
+======================================================================
+ERROR: test_reuses_shared_bytes_and_preserves_distinct_gzip_timestamps (test_archive_cas.ArchiveTests.test_reuses_shared_bytes_and_preserves_distinct_gzip_timestamps)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/test_archive_cas.py", line 42, in test_reuses_shared_bytes_and_preserves_distinct_gzip_timestamps
+    self.assertEqual(nextrow['new_blobs'],1);other=cas.reconstruct(recipe=pathlib.Path(nextrow['recipe']),store=store)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 235, in reconstruct
+    result=_reconstruct(recipe=recipe,store=store,static=compressor,output=output,expected_archive_sha256=expected_archive_sha256)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 279, in _reconstruct
+    for data in store.read_body(safe_digest(row['body_sha256']),size):emit(data)
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 114, in read_body
+    path=self.blob(digest);private_file(path);decoder=zlib.decompressobj();h=hashlib.sha256();total=0
+                           ^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 34, in private_file
+    require(st.st_uid==os.getuid() and not(st.st_mode & 0o022) and st.st_nlink==1,'owned private retained file required')
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 16, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: owned private retained file required
+
+======================================================================
+ERROR: test_statically_pinned_codec_exact_materialization (test_archive_cas.ArchiveTests.test_statically_pinned_codec_exact_materialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 235, in reconstruct
+    result=_reconstruct(recipe=recipe,store=store,static=compressor,output=output,expected_archive_sha256=expected_archive_sha256)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 279, in _reconstruct
+    for data in store.read_body(safe_digest(row['body_sha256']),size):emit(data)
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 114, in read_body
+    path=self.blob(digest);private_file(path);decoder=zlib.decompressobj();h=hashlib.sha256();total=0
+                           ^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 34, in private_file
+    require(st.st_uid==os.getuid() and not(st.st_mode & 0o022) and st.st_nlink==1,'owned private retained file required')
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 16, in require
+    if not value:raise ValueError(message)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: owned private retained file required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/test_archive_cas.py", line 85, in test_statically_pinned_codec_exact_materialization
+    result=cas.reconstruct(recipe=recipe,store=store,codec=codec,expected_codec_sha256=cas.digest_file(codec),
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 245, in reconstruct
+    if compressor is not None:compressor.close()
+                              ^^^^^^^^^^^^^^^^^^
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py", line 220, in close
+    if self.child.stdin and not self.child.stdin.closed:self.child.stdin.close()
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe
+
+======================================================================
+FAIL: test_gzip_timestamp_tamper_refused_by_original_digest (test_archive_cas.ArchiveTests.test_gzip_timestamp_tamper_refused_by_original_digest)
+----------------------------------------------------------------------
+ValueError: owned private retained file required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/test_archive_cas.py", line 61, in test_gzip_timestamp_tamper_refused_by_original_digest
+    with self.assertRaisesRegex(ValueError,'original gzip'):cas.reconstruct(recipe=recipe,store=store)
+AssertionError: "original gzip" does not match "owned private retained file required"
+
+======================================================================
+FAIL: test_symbolic_blob_refused (test_archive_cas.ArchiveTests.test_symbolic_blob_refused)
+----------------------------------------------------------------------
+ValueError: owned private retained file required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/test_archive_cas.py", line 80, in test_symbolic_blob_refused
+    with self.assertRaisesRegex(ValueError,'nonsymlink'):cas.reconstruct(recipe=recipe,store=store)
+AssertionError: "nonsymlink" does not match "owned private retained file required"
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.330s
+
+FAILED (failures=2, errors=4)

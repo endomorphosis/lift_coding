@@ -1,0 +1,38 @@
+{
+  "command": [
+    "prlimit",
+    "--as=805306368",
+    "--fsize=1610612736",
+    "--cpu=600",
+    "--",
+    "/usr/bin/python3.12",
+    "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/finish_store.py"
+  ],
+  "limits": {
+    "acquire_seconds": 30,
+    "child_process_slots": 3,
+    "cpu_slots": 3,
+    "memory_mb": 1024,
+    "store_and_materialized_restore_bytes": 5368709120,
+    "wall_seconds": 600
+  },
+  "native_admission": {
+    "acquire_seconds": 1.875837140949443,
+    "lease_id": "c6213b363ecc44fc9e06429c56a36788",
+    "policy_sha256": "03793b8f3246f9c5d2af6cd64c4aaee6ef09dd1041f6d0ff0d07ef87a955147a",
+    "released": true
+  },
+  "original_archives_removed": false,
+  "producer_sha256": {
+    "archive_cas.py": "0c94da945993fbdb9e2714124b31670dd50ff09daac661e4b04fca1799db6579",
+    "finish_store.py": "1d5d6be2e5a742481ee559d28e4faf596c185782f7e5f8a7437fd97454757779",
+    "seal_store.py": "6516f905b91753ea68448d306632de0d0ffb47591819af6c877b5a4834000bb1"
+  },
+  "qualified": true,
+  "reaped": true,
+  "result": "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/complete-qualification.json",
+  "returncode": 0,
+  "schema": "native-runtime-store-final-seal-envelope@1",
+  "seconds": 164.96126486896537,
+  "worker_pid": 2929590
+}

@@ -1,0 +1,202 @@
+{
+  "all_eleven_shared_same_path_hash_bytes": {
+    "file_count": 26858,
+    "largest": [
+      {
+        "bytes": 348353756,
+        "mode": 420,
+        "path": "toolchains/lean/lib/lean/libLean.a",
+        "sha256": "530ba5c5b46e6c8af5c2b3bf27b8d35cc92f1507b16b8d4dc8231da80326b1eb"
+      },
+      {
+        "bytes": 255113200,
+        "mode": 420,
+        "path": "toolchains/lean/lib/lean/libleanshared.so",
+        "sha256": "62108c3204c29d8532efd7101df65b391a1098da2de1ff9a4d0be3765fe2a67c"
+      },
+      {
+        "bytes": 90868376,
+        "mode": 420,
+        "path": "models/embedding/model.safetensors",
+        "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+      },
+      {
+        "bytes": 72969800,
+        "mode": 420,
+        "path": "toolchains/lean/lib/libLLVM-22.so",
+        "sha256": "e4522c20a8fd348d5b94dfec6c335ed34939aa7ee182cd70851b9a589370b86f"
+      },
+      {
+        "bytes": 72969800,
+        "mode": 420,
+        "path": "toolchains/lean/lib/libLLVM.so",
+        "sha256": "e4522c20a8fd348d5b94dfec6c335ed34939aa7ee182cd70851b9a589370b86f"
+      },
+      {
+        "bytes": 72969800,
+        "mode": 420,
+        "path": "toolchains/lean/lib/libLLVM.so.22.1",
+        "sha256": "e4522c20a8fd348d5b94dfec6c335ed34939aa7ee182cd70851b9a589370b86f"
+      },
+      {
+        "bytes": 62826656,
+        "mode": 420,
+        "path": "toolchains/lean/lib/libclang-cpp.so",
+        "sha256": "21c0a4d941ce153564fb5cb83eae31f5b4a0ab5f8847fe4e162e3132fe6ff3d7"
+      },
+      {
+        "bytes": 62826656,
+        "mode": 420,
+        "path": "toolchains/lean/lib/libclang-cpp.so.22.1",
+        "sha256": "21c0a4d941ce153564fb5cb83eae31f5b4a0ab5f8847fe4e162e3132fe6ff3d7"
+      },
+      {
+        "bytes": 34551196,
+        "mode": 420,
+        "path": "toolchains/lean/lib/lean/libStd.a",
+        "sha256": "f43155b66e34fa0a0132a99d8b666de2f51560600a146e0c26469ba94b534fd6"
+      },
+      {
+        "bytes": 32143862,
+        "mode": 420,
+        "path": "extensions/ducklake.duckdb_extension",
+        "sha256": "d0b57c8e261b89a1ae367c7224f0857cfde72ab6cf2609f188e0de9b897b1088"
+      },
+      {
+        "bytes": 29763764,
+        "mode": 420,
+        "path": "toolchains/lean/lib/lean/libInit.a",
+        "sha256": "f9484718bb61b8107436cbfa20e17c2cb07f2c44621b90b2dfcb930ba5bf84d3"
+      },
+      {
+        "bytes": 29708110,
+        "mode": 420,
+        "path": "extensions/quack.duckdb_extension",
+        "sha256": "41b2b9292bfb860c5ca8c5f818f9dd7a2c6bc24f9c750cffbc3169286fe59f08"
+      },
+      {
+        "bytes": 24099032,
+        "mode": 420,
+        "path": "toolchains/lean/lib/lean/libLake.a",
+        "sha256": "90965179a11fe7f149777ffe8da5f61fa0fa55fabb93de054fe4aae1dc81eb75"
+      },
+      {
+        "bytes": 19861758,
+        "mode": 420,
+        "path": "extensions/httpfs.duckdb_extension",
+        "sha256": "eba6e263e395a83966090f1f11ade63630b1b21422f0f2813858d179d42ea1e9"
+      },
+      {
+        "bytes": 13934112,
+        "mode": 420,
+        "path": "toolchains/lean/lib/lean/libLake_shared.so",
+        "sha256": "c797777a91dd5e7654ced392282560d6465f4e7b623f1a612ae295c5feb208e9"
+      }
+    ],
+    "total_bytes": 3765373238
+  },
+  "authority": "recorded manifests only; no tar extraction or fresh member hashing",
+  "bundles": [
+    {
+      "archive_bytes": 1205766907,
+      "archive_sha256_recorded": "c4ae4eb4c43614b8d0360d4986b7e4345d2a516af7e47f2bdc11bf93978179a5",
+      "manifest_sha256": "38ec5ab9f7fd7f451e564e5b66f230ff695d3e663bbe54aec992b6cc233ff216",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v2",
+      "regular_file_bytes": 3774077553,
+      "regular_file_count": 26903
+    },
+    {
+      "archive_bytes": 1205824260,
+      "archive_sha256_recorded": "5b400dd133d981b506209d88b18f586865b38c2aa4ed000e11409a037f726cba",
+      "manifest_sha256": "5aaca1213d6084fd97f22998ab9368679a7ed60b12ca4c38631d3bcc6b1f99c7",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v3",
+      "regular_file_bytes": 3774120162,
+      "regular_file_count": 26905
+    },
+    {
+      "archive_bytes": 1205822463,
+      "archive_sha256_recorded": "ff100f2c7d7e648206fa8ef9dfd8a770780a62e7e53a0e29886ced3dff31f242",
+      "manifest_sha256": "34ce9d0cd55670ef893ea476a71a7eba15279d755e759d850bf17df3a3340ba1",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v4",
+      "regular_file_bytes": 3774167063,
+      "regular_file_count": 26907
+    },
+    {
+      "archive_bytes": 1205823423,
+      "archive_sha256_recorded": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe",
+      "manifest_sha256": "baccb15db1964c8d69e5e0b25e17770c6d59af91d196158128cd3e187ed0cd0b",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v5",
+      "regular_file_bytes": 3774167983,
+      "regular_file_count": 26907
+    },
+    {
+      "archive_bytes": 1205822594,
+      "archive_sha256_recorded": "611a6e973f87984bd2b24a45ef8a24f40335ff9a4fe6872e5addf7974ae9aea2",
+      "manifest_sha256": "c3aa514ee1c45a2fcbd59ccafec961c364b74da98f44e23481028eef15421f09",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v6",
+      "regular_file_bytes": 3774168973,
+      "regular_file_count": 26907
+    },
+    {
+      "archive_bytes": 1205803138,
+      "archive_sha256_recorded": "6814ef8bc8adc782c41fa84fc3340dfc901f311d602b4578c59ec8c6fe130083",
+      "manifest_sha256": "395295187042ac818095a4e0aa434fc9189d73fa2eb5c6d95b8bbecbef1d8753",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v7",
+      "regular_file_bytes": 3774179431,
+      "regular_file_count": 26907
+    },
+    {
+      "archive_bytes": 1205801493,
+      "archive_sha256_recorded": "d64220b186f5e040ceb5b131ea5c05b134d539679a38be4991e60fd3fbbc3874",
+      "manifest_sha256": "f314ecc840e309f0fc07bd615c38f99128ef1ff1edec73ec8a9726d6e9126df7",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v8",
+      "regular_file_bytes": 3774199800,
+      "regular_file_count": 26907
+    },
+    {
+      "archive_bytes": 1205993345,
+      "archive_sha256_recorded": "717519453d5a6f346d33308ce043af3ecf2cb1f4e1688a39cfa8075be3a73c76",
+      "manifest_sha256": "ffe8aeefaf1ef866ab7e7d6a609753bc073f8e35ae08a37b7c3a8ed2433213aa",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/runtime-05",
+      "regular_file_bytes": 3774745397,
+      "regular_file_count": 26937
+    },
+    {
+      "archive_bytes": 1206016719,
+      "archive_sha256_recorded": "f39417fa686b8fa59e203354e973c8a98d84265a1dcff3dddf35e46b945cefbd",
+      "manifest_sha256": "ea941813d7f027feda60e0ae8277dbcd45a624a0972c3510d7dc70e9a9906440",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/runtime-06",
+      "regular_file_bytes": 3774759373,
+      "regular_file_count": 26937
+    },
+    {
+      "archive_bytes": 1206279189,
+      "archive_sha256_recorded": "d061d46c5f0b3349a4a7238370ffba86d48fee4a72cfc83022ada7e7e86c6a25",
+      "manifest_sha256": "531bed814583dfd8789a01adda76dc94c417bef721bdf86cf02105ae7ca931af",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/runtime-07",
+      "regular_file_bytes": 3775548673,
+      "regular_file_count": 26946
+    },
+    {
+      "archive_bytes": 1206279317,
+      "archive_sha256_recorded": "738b6c05790a65f218d39e9ae869d6fcd3cf56a39ebc0693a38ee0f42ace4231",
+      "manifest_sha256": "224aa806f99b1298270b8fe57a0cc6ee00a23417927e7e05ce6ee516bb84efd3",
+      "path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/runtime-08",
+      "regular_file_bytes": 3775548741,
+      "regular_file_count": 26946
+    }
+  ],
+  "schema": "runtime-bundle-manifest-overlap-inventory@1",
+  "v4_to_v5": {
+    "changed_files": [
+      {
+        "bytes": 11452,
+        "mode": 420,
+        "path": "source/benchmarks/agent_supervisor/container_coding/terminal_context_rebind.py",
+        "sha256": "75b0ebcc67a7f09e186818d2026b2e0dc922e360cee3458ef7b397f33ca205fb"
+      }
+    ],
+    "removed_paths": [],
+    "shared_bytes": 3774156531
+  }
+}

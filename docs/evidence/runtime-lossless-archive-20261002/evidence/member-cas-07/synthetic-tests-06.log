@@ -1,0 +1,22 @@
+test_changed_recipe_body_size_refused (test_archive_cas.ArchiveTests.test_changed_recipe_body_size_refused) ... ok
+test_exact_raw_tar_pax_hardlink_and_gzip_metadata (test_archive_cas.ArchiveTests.test_exact_raw_tar_pax_hardlink_and_gzip_metadata) ... ok
+test_gzip_timestamp_tamper_refused_by_original_digest (test_archive_cas.ArchiveTests.test_gzip_timestamp_tamper_refused_by_original_digest) ... ok
+test_missing_blob_refused (test_archive_cas.ArchiveTests.test_missing_blob_refused) ... ok
+test_nonprivate_store_parent_refused (test_archive_cas.ArchiveTests.test_nonprivate_store_parent_refused) ... ok
+test_replay_needs_only_recipe_and_cas (test_archive_cas.ArchiveTests.test_replay_needs_only_recipe_and_cas) ... ok
+test_reuses_shared_bytes_and_preserves_distinct_gzip_timestamps (test_archive_cas.ArchiveTests.test_reuses_shared_bytes_and_preserves_distinct_gzip_timestamps) ... ok
+test_staging_write_ceiling_refused (test_archive_cas.ArchiveTests.test_staging_write_ceiling_refused) ... ok
+test_static_codec_cleanup_preserves_primary_corruption_error (test_archive_cas.ArchiveTests.test_static_codec_cleanup_preserves_primary_corruption_error) ... ok
+test_statically_pinned_codec_exact_materialization (test_archive_cas.ArchiveTests.test_statically_pinned_codec_exact_materialization) ... ok
+test_store_exclusive_lock (test_archive_cas.ArchiveTests.test_store_exclusive_lock) ... ok
+test_symbolic_blob_refused (test_archive_cas.ArchiveTests.test_symbolic_blob_refused) ... ok
+test_tampered_blob_refused (test_archive_cas.ArchiveTests.test_tampered_blob_refused) ... ok
+test_wrong_archive_manifest_refused (test_archive_cas.ArchiveTests.test_wrong_archive_manifest_refused) ... ok
+test_wrong_codec_hash_refused (test_archive_cas.ArchiveTests.test_wrong_codec_hash_refused) ... ok
+test_wrong_external_original_refuses_materialization (test_archive_cas.ArchiveTests.test_wrong_external_original_refuses_materialization) ... ok
+test_zlib_profile_mismatch_refused (test_archive_cas.ArchiveTests.test_zlib_profile_mismatch_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.387s
+
+OK

@@ -1,0 +1,47 @@
+{
+  "command": [
+    "prlimit",
+    "--as=536870912",
+    "--fsize=536870912",
+    "--cpu=300",
+    "--",
+    "/usr/bin/python3.12",
+    "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/archive_cas.py",
+    "--archive",
+    "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v4/runtime.tar.gz",
+    "--manifest",
+    "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v4/manifest.json",
+    "--store",
+    "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/store",
+    "--slug",
+    "terminal-native-runtime-full-v4",
+    "--result",
+    "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/runs/terminal-native-runtime-full-v4/worker-result.json"
+  ],
+  "implementation_sha256": "26245986116a44d9612059ab4b725d0855d41ea2cfd9cae724950993aa214c99",
+  "limits": {
+    "acquire_seconds": 30,
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "maximum_tar_bytes": 4294967296,
+    "memory_mb": 512,
+    "staging_allocated_bytes": 5368709120,
+    "staging_apparent_bytes": 4294967296,
+    "wall_seconds": 300
+  },
+  "native_admission": {
+    "acquire_seconds": 0.02055761800147593,
+    "lane": "persistence",
+    "lease_id": "76ea772c69b54af293cf9c5a35582bcd",
+    "policy_sha256": "03793b8f3246f9c5d2af6cd64c4aaee6ef09dd1041f6d0ff0d07ef87a955147a",
+    "released": true
+  },
+  "qualified": true,
+  "reaped": true,
+  "returncode": 0,
+  "schema": "native-runtime-member-cas-envelope@1",
+  "seconds": 192.9639235320501,
+  "source": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v4",
+  "source_archive_sha256": "ff100f2c7d7e648206fa8ef9dfd8a770780a62e7e53a0e29886ced3dff31f242",
+  "source_manifest_sha256": "34ce9d0cd55670ef893ea476a71a7eba15279d755e759d850bf17df3a3340ba1"
+}

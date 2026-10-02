@@ -1,0 +1,44 @@
+{
+  "capture": {
+    "archive_sha256": "f39417fa686b8fa59e203354e973c8a98d84265a1dcff3dddf35e46b945cefbd",
+    "decoded_tar_bytes": 3799244800,
+    "members": 30490,
+    "new_blobs": 4,
+    "recipe": "/home/barberb/lift_coding/artifacts/runtime-lossless-archive-20261002/member-cas-07/store/recipes/runtime-06.jsonl",
+    "recipe_sha256": "33fe92469493fd621f54d2be7352f8cd38fbbe0f487f513438c0d75ab43af152",
+    "source_identity_unchanged": true,
+    "staging": {
+      "allocated_bytes": 1672822784,
+      "apparent_bytes": 1593724068,
+      "file_count": 27907
+    }
+  },
+  "capture_seconds": 22.01059528393671,
+  "cpu_system_seconds": 6.679782,
+  "cpu_user_seconds": 34.43989,
+  "originals_modified": false,
+  "peak_rss_bytes": 46800896,
+  "qualified": true,
+  "reconstruction": {
+    "archive_bytes": 1206016719,
+    "archive_sha256": "f39417fa686b8fa59e203354e973c8a98d84265a1dcff3dddf35e46b945cefbd",
+    "codec_sha256": "ffc1632ab19bfd1075aac903e5f2367eeaf873c36e506308ba7d61eff355945e",
+    "compressor": "pinned_static_zlib1.3",
+    "exact": true,
+    "expanded_tar_or_gzip_written": false,
+    "members": 30490,
+    "original_archive_read_during_replay": false,
+    "recipe_sha256": "33fe92469493fd621f54d2be7352f8cd38fbbe0f487f513438c0d75ab43af152",
+    "tar_bytes": 3799244800,
+    "tar_sha256": "768241abd813bca64229e63bf454ef91800cae37ca29bbf6b4232c9638a3d278",
+    "zlib_runtime": "1.3"
+  },
+  "reconstruction_seconds": 38.2180236550048,
+  "schema": "native-runtime-member-cas-qualification@1",
+  "seconds": 60.76464228099212,
+  "staging": {
+    "allocated_bytes": 1672822784,
+    "apparent_bytes": 1593724068,
+    "file_count": 27907
+  }
+}

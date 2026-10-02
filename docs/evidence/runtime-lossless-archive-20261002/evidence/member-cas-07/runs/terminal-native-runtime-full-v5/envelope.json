@@ -1,0 +1,24 @@
+{
+  "error": {
+    "message": "timed out waiting for a resource lease",
+    "type": "LeaseTimeoutError"
+  },
+  "implementation_sha256": "26245986116a44d9612059ab4b725d0855d41ea2cfd9cae724950993aa214c99",
+  "limits": {
+    "acquire_seconds": 30,
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "maximum_tar_bytes": 4294967296,
+    "memory_mb": 512,
+    "staging_allocated_bytes": 5368709120,
+    "staging_apparent_bytes": 4294967296,
+    "wall_seconds": 300
+  },
+  "qualified": false,
+  "reaped": true,
+  "schema": "native-runtime-member-cas-envelope@1",
+  "seconds": 30.01510766102001,
+  "source": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/full-integration-20260929/terminal-native-runtime-full-v5",
+  "source_archive_sha256": "edd48c6c80a88b06fce9a7fc3dfd01a1f9799552fc72f340aea5256f915f5dbe",
+  "source_manifest_sha256": "baccb15db1964c8d69e5e0b25e17770c6d59af91d196158128cd3e187ed0cd0b"
+}
