@@ -214,3 +214,24 @@ and preservation check. The [layout evidence](../../external/ipfs_accelerate/doc
 retains two earlier cache-preflight refusals, the causal setup transition and
 the correction. No cache advice ran in those failed probes; sufficient memory,
 full task acceptance and a new token comparison require separate validation.
+
+Three [subsequent cache diagnostics](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/source384-setup-cache-diagnostics-20261003/README.md)
+retain the same resource limits. Archive-only advice succeeds but root admission
+still fails. Advice to four pinned public Codex executable copies first refuses
+an unprotected receipt, then succeeds after a checked transport-permission fix.
+The final run admits the root lease but refuses its first index child lease,
+before source capture or inference. Its later memory sample is consistent with
+the unchanged headroom check; it is not the exact child decision measurement.
+The scheduler does not reserve child memory twice. These are instrumented
+failures with no provider calls or new task/token score. The cache policy remains
+outside production pending complete qualification; the backlog remains 18 of
+32 criteria closed.
+
+A separate seven-library cache diagnostic progresses through index preparation
+and a returned, validated numerical-worker output. The post-worker source check
+then refuses a child lease, and no inference artifact is published. Retained
+scheduler telemetry identifies `proof_memory_headroom` after unwind. The
+[separate library evidence](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/source384-native-library-cache-diagnostic-20261003/README.md)
+keeps these control-flow observations distinct from published inference and
+benchmark success. Its 25 helper controls pass; all source pins and inputs are
+preserved, resources are released, and provider calls remain zero.
