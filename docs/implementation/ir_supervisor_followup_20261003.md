@@ -108,10 +108,34 @@ no overall speedup ratio is inferred from differently instrumented runs.
 
 The [original-container qualification](../../external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/SOURCE384_DOCKER_QUALIFICATION.md)
 now passes native startup, resource admission and cold publication with the
-complete original checkout. The latest attempt still misses the combined
+complete original checkout. That fourth attempt still misses the combined
 90-second Source384 budget in the source observation immediately before inference;
 the context phase ends after 100.86 seconds. The fixed report collector preserves
 that native refusal and cleanup removes the container. Actual neural inference
 in this full Docker path, the full task result and a new token comparison remain
 unqualified. Thirteen real-checkpoint consumer controls passed again in 45.96
 seconds against the optimized indexing owners. No weights were changed.
+
+The [manifest reconstruction followup](../../external/ipfs_datasets/docs/software_contracts/evidence/source-combined-observation-performance-20261003/README.md)
+adds bounded reuse of canonical manifest reconstruction and a guarded native
+comparison at the existing post-read catalog check. It preserves fresh source,
+CAS, head, SQL and model validation. Its 114 distinct controls pass across two
+invocations. A fresh local run consumes the actual checkpoint over all 220
+permitted files in 89.963 seconds against the unchanged cooperative 90-second
+budget; its outer wrapper takes 90.041 seconds including cleanup and accounting.
+This roughly 37-millisecond native margin does not establish reliable scheduling
+or container qualification. All 127 decoded candidates remain unsupported by
+the current source grammar; correct formalization and a fresh task score remain
+unqualified. Thirteen supervisor checkpoint-consumer controls pass in 43.83
+seconds with these exact indexing producers.
+
+The fifth fresh Docker attempt passes deployment, native START/STOP, publication
+and the first source observation with the same complete input and resource
+profile. Its child worker then times out; no completed model load or inference
+artifact is established. Initial context takes 98.30 seconds and the probe
+109.86 seconds. Slow dependency downloads extend the separate deployment to
+1109.51 seconds. The container is removed and the structured failure is retained
+in the [new evidence package](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/source384-docker-reconstruction-20261003/README.md).
+The receipt does not isolate worker startup, inference and earlier preparation
+costs, so the remaining performance cause needs a timed diagnostic. This attempt
+does not provide a new task score, token comparison or proof of source behavior.
