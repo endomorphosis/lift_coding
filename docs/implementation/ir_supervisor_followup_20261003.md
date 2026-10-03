@@ -139,3 +139,55 @@ in the [new evidence package](../../external/ipfs_accelerate/docs/agent_supervis
 The receipt does not isolate worker startup, inference and earlier preparation
 costs, so the remaining performance cause needs a timed diagnostic. This attempt
 does not provide a new task score, token comparison or proof of source behavior.
+
+Two subsequent instrumented container runs isolated preparation budget starvation:
+cold preparation took about 79.4 seconds, with 40.0 seconds in AST projection
+persistence. The worker had less than one second remaining in the first run;
+the second refused before worker invocation. These stage diagnostics preserve
+the original source population, resources and deadlines.
+
+The [SQL and dependency replay](../../external/ipfs_datasets/docs/software_contracts/evidence/source-sql-column-performance-20261003/README.md)
+preserves all 31 projections, 13 catalog tables and cold reconstruction. An
+off-tree column insertion candidate improves host execute time from 3.399 to
+0.946 seconds, but Docker remains at 40.269 versus 38.692 seconds. That SQL patch
+was not applied. DuckDB 1.5.5 repeatedly attempts optional pandas imports when
+pandas is absent. Four fresh native processes with identical mixed values and
+engine binary measure 0.0215/0.0217 seconds with real pandas available, versus
+0.9992/0.9958 seconds without it. Every returned value matches. This isolates a
+dependency-related conversion cost without claiming an end-to-end speedup.
+
+The container deployment now pins pandas 3.0.2 and NumPy 1.26.4 and checks both
+before native START. All 91 focused deployment and transport controls pass.
+The index, inference and model owners remain unchanged. A fresh uninstrumented
+original-container qualification tests this deployment correction separately.
+That attempt stops during the existing 600-second CPU PyTorch installation
+limit, before pandas installation, START or inference. The 812.484-second
+attempt and cleanup are retained as a separate setup failure. A pinned local
+wheel transport is being added to avoid repeating the large network transfer
+in each fresh container; runtime and inference deadlines remain unchanged.
+
+The optional, hash-verified local CPU wheel now has 136 passing deployment and
+transport controls. Its first run passed setup in 65.266 seconds but exposed
+a late inference-publication import of training-only workspace initialization.
+The datasets fix shares canonical staging directly with inference while
+preserving the training guard; 43 datasets integration tests and 13 actual
+checkpoint supervisor tests pass. The earlier failed run remains separately
+recorded and makes no completed-inference claim.
+
+The [corrected original-container run](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/source384-docker-inference-publication-20261003/README.md)
+now passes setup, native START/STOP, real checkpoint inference, publication
+and source-bound replay. All 218 original files remain unchanged under the
+five-CPU/12-GiB profile. Source384 completes in 82.872 seconds within its
+90-second budget; full initial-context assembly takes 147.267 seconds and
+the native probe 171.962 seconds. The saved artifact records one model load,
+127 decoded unsupported candidates, one token deferral, 737 selection deferrals
+and 79 unsupported normalizations across 944 functions. The container is
+removed. Setup took 458.743 seconds and the whole attempt 656.825 seconds;
+these are distinct scopes, not a measured speedup against prior failed runs.
+
+The decoder still cannot represent the required header program. This pass
+establishes deployed inference plumbing without a source-qualified property,
+new benchmark score or token advantage. The full task trial, successor context
+refresh after publication, and explicit header grammar remain open. The raw
+inference artifact stays local because it contains benchmark source; public
+evidence preserves its digest and a reviewed verification summary.
