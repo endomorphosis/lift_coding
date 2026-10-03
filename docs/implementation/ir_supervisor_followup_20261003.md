@@ -33,15 +33,85 @@ the policy mismatch. Controlled pressure tests are distinct from an actual
 external-load stress campaign. The recovery suite passed 87 controls, including
 four actual subprocess and restart controls with injected pressure and time.
 
-The full learned methodology still needs integration into the Harbor container
-route. The earlier finite checkpoint fixture uses three CPU/process slots and
-a 6 GiB parent, while the original benchmark task allows one CPU and 2 GiB.
-A fair comparison needs a qualified common resource profile, exact model/index
-binding and proof/planning consumption in that route. These component fixes
-produce no new official benchmark score, token advantage or promoted weights.
+This release adds an opt-in
+[Source384 supervisor context](../../external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/SOURCE384_HARBOR_CONTEXT.md).
+The full arm consumes the real shared SecurityIR384 checkpoint through the
+datasets source-unit owner before planning. Signed source bytes, native AST/CAS
+state, model version, GTE assets, inference artifacts and producer identities
+are revalidated at planning and dispatch. The bounded prompt includes typed IR
+as canonical JSON text with explicit validation status. It grants no proof or
+execution authority. Source/model drift rejects; completed publication remains
+observable while a new dispatch requires a current generation.
+
+All comparison arms can select the same 5-CPU/12-GiB resource profile, accounting
+for the 6-GiB inference parent and scheduler reserve. Original task defaults
+remain unchanged. Transport controls qualify exact offline asset relocation
+and reject legacy-training combinations; no-index records Source384 disabled.
+The final consumer suite passes 13 cases with the actual pinned checkpoint,
+including exact IR delivery, no neural replay, population bounds and deadlines.
+Its 256-file bound matches the signed creation manifest and can accommodate
+the 218-file original checkout plus supervisor inputs.
+Separate transport and native lifecycle suites cover 126 and 58 cases.
+
+A retained public Bottle-source canary prepared its complete indexed context
+in 156.91 seconds with zero text-provider calls. Of 358 inventoried functions,
+127 decoded candidates remain unsupported by the source guard, one exceeds the
+GTE token limit, 166 exceed the declared selection budget and 64 fail exact
+normalization. Two candidates reach the prompt summary; the other 125 are
+explicitly counted as omitted. This is not a fresh official task score or a
+formal proof. Its timing predates the final timer-only preflight correction.
+
+The first large-source attempt exhausted the unchanged 90-second inference
+phase. Bottle's 4,652 dependency edges exceeded a 4,096-entry CID cache working
+set. Fixed 8,192-entry caches retain all validation and reduce instrumented
+observation from 27.85 to 13.62 seconds; 64 cache controls passed. Source-unit
+extraction/inference and scanner controls passed 79 cases. Failed prefixes and
+exact source generations are retained in repository evidence. No weights were
+trained or promoted in this release.
 
 The frozen backlog remains 18 of 32 closed, with 26 qualified for their declared
 scope and 14 production criteria open. GPU device admission, aggregate resource
 enforcement, the joined acceptance matrix and matched benchmark campaign remain
 among the outstanding work. Concurrent upstream decoder work is preserved in
-the pinned datasets revision.
+the pinned datasets revision. Automatic Source384 successor inference, source
+grammar for Bottle's string/header behavior, and fresh matched native
+Codex/no-index/full Harbor trials also remain open.
+
+The [header grammar followup](../../external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/SOURCE384_HEADER_GRAMMAR_PLAN.md)
+separates source-guard refusal from model expressiveness. All 127 source checks
+stop before prediction comparison, and the current binary-expression checkpoint
+cannot emit header-string transformations. The next slice reuses the existing
+string grammar and independently checked header contracts, with a forked head,
+held-out reconstruction measurements and explicit logic-validation gates.
+
+The first fresh Docker qualification enforced the earlier 5-CPU/8-GiB profile
+and completed deployment and empty native START. Preparation then timed out at
+native resource admission. Its pre-preparation free-memory sample was below
+the requested 6-GiB reservation plus unchanged scheduler headroom. The explicit
+replacement profile gives every comparison arm 12 GiB; the failed generation
+is retained separately and is not an official task score.
+
+The native startup check now polls within its existing deadline, binds the
+original root and daemon identities, and requires a stable healthy tree with
+an advancing heartbeat. Its 28 distinct controls passed across retained runs;
+two initial native failures passed on an unchanged-source retry. Docker report
+collection now uses a separate bounded JSON file; 158 controls pass, including
+merged-output and malformed-report cases.
+
+The [full-checkout indexing fix](../../external/ipfs_datasets/docs/software_contracts/evidence/source-cold-index-performance-20261003/README.md)
+uses 32,768-entry CID caches and bounded parameterized AST insert batches.
+It preserves current-byte verification, canonical reconstruction and transactional
+rollback. Its 146 controls pass, and all 218 public files publish in 55.02 seconds
+under the unchanged 90-second deadline. A fresh process observes the same index
+in 13.65 seconds. This is separate from the earlier Bottle-only measurements;
+no overall speedup ratio is inferred from differently instrumented runs.
+
+The [original-container qualification](../../external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/SOURCE384_DOCKER_QUALIFICATION.md)
+now passes native startup, resource admission and cold publication with the
+complete original checkout. The latest attempt still misses the combined
+90-second Source384 budget in the source observation immediately before inference;
+the context phase ends after 100.86 seconds. The fixed report collector preserves
+that native refusal and cleanup removes the container. Actual neural inference
+in this full Docker path, the full task result and a new token comparison remain
+unqualified. Thirteen real-checkpoint consumer controls passed again in 45.96
+seconds against the optimized indexing owners. No weights were changed.
