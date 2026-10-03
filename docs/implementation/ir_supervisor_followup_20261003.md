@@ -191,3 +191,16 @@ new benchmark score or token advantage. The full task trial, successor context
 refresh after publication, and explicit header grammar remain open. The raw
 inference artifact stays local because it contains benchmark source; public
 evidence preserves its digest and a reviewed verification summary.
+
+The first full Harbor trial adds the pinned Lean toolchain and existing native
+Doctor backends. Its official reward is 0.0: context preparation cannot acquire
+a resource lease before planning or repair. It makes zero observed provider
+calls; token/cost totals remain unavailable. Source preservation and cleanup
+pass. A separate exact-archive diagnostic reproduces the root-lease refusal
+with 5,484 MiB available against an 8,602-MiB requirement, and about 6.49 GB of
+file cache in its earlier sample. Pressure readings stay below refusal limits;
+the original trial had no corresponding telemetry, so these are distinct runs.
+The container driver now records bounded failure frames, phase and a native
+resource snapshot without changing error, authority or cleanup behavior;
+30 controls pass. The [admission evidence](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/source384-full-admission-diagnostics-20261003/README.md)
+retains the failed trial, reproduction and diagnostic-code generations.
