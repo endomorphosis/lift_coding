@@ -204,3 +204,13 @@ The container driver now records bounded failure frames, phase and a native
 resource snapshot without changing error, authority or cleanup behavior;
 30 controls pass. The [admission evidence](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/source384-full-admission-diagnostics-20261003/README.md)
 retains the failed trial, reproduction and diagnostic-code generations.
+
+A further setup probe identifies a separate layout collision: UV 0.9.24
+migrates the shipped Lean `toolchains` directory into its selected Python root
+and replaces it with a symlink. Deployment now gives managed Python a separate
+parent directory, keeping the interpreter entrypoint and Lean path intact.
+Fifty-six focused controls pass, including a real pinned UV offline reproduction
+and preservation check. The [layout evidence](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/source384-uv-layout-fix-20261003/README.md)
+retains two earlier cache-preflight refusals, the causal setup transition and
+the correction. No cache advice ran in those failed probes; sufficient memory,
+full task acceptance and a new token comparison require separate validation.
