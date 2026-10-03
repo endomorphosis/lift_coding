@@ -235,3 +235,20 @@ scheduler telemetry identifies `proof_memory_headroom` after unwind. The
 keeps these control-flow observations distinct from published inference and
 benchmark success. Its 25 helper controls pass; all source pins and inputs are
 preserved, resources are released, and provider calls remain zero.
+
+The [top128 payload diagnostic](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/source384-wheel-payload-cache-diagnostic-20261003/README.md)
+passes all setup advice stages and returns from initial Source384 preparation.
+Cold replay then refuses its second source-observation lease. Stage telemetry
+shows 73.285 MiB of anonymous growth during the preceding observation, with
+file cache nearly unchanged. No inference artifact was exported, and there is
+no new model-coverage, task or token score. Thirty helper controls pass;
+resource limits, admission checks and deadlines are unchanged.
+
+The [worker context correction](../../external/ipfs_accelerate/docs/agent_supervisor/evidence/worker-context-bundle-snapshot-20261003/README.md)
+replaces eight initial metadata reloads and eleven retry reloads with one
+coherent nomination snapshot per construction. Artifact checks and original
+read/evidence order remain in place, and later calls validate afresh. All 36
+actual-source controls pass with no skips. A separate legacy test module's
+removed Copilot import remains a collection blocker; it is not counted as a
+pass. This correction does not establish a measured benchmark speedup or fix
+the earlier cold-replay allocation. Backlog acceptance remains 18 of 32 closed.
