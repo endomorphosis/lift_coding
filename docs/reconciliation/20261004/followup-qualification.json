@@ -1,0 +1,114 @@
+{
+  "datasets_main": "5621c0d47963318050dc7c31a299d10735329925",
+  "lineage_qualification": {
+    "passed": 119,
+    "failed": 0,
+    "errors": 0,
+    "includes": "inherited lineage AST parity, bounded native successor replay, producer/runtime drift refusal, diagnostic tampering"
+  },
+  "live_native_proof_qualification": {
+    "passed": 1,
+    "errors": 1,
+    "scheduler": "task-scoped shared state; actual host resource sampler",
+    "passed_case": "default task-sized Isabelle phase leases",
+    "refused_case": "genuine signed finite proof query join",
+    "reason": "proof_memory_stall",
+    "observed_memory_stall_percent": 5.8,
+    "limit_percent": 2.0
+  },
+  "historical_paper_migrations": "remain unqualified: generic IntentRepository.upsert_task writes are outside the closed Quack protocol; no permissions widened",
+  "complete_suite_green": false,
+  "huggingface_archive": {
+    "repo": "Publicus/autoencoder-decoder-checkpoints",
+    "revision": "4757bb7483e330afe90769b935975301c7df4fe7",
+    "private": true,
+    "distinct_checkpoint_objects": 682,
+    "all_remote_lfs_sha256_and_sizes_verified": true
+  },
+  "public_releases": [
+    {
+      "repo": "Publicus/intent-ir-autoencoder",
+      "revision": "d12dd68fcc54441ded09ed217526e02b7bdfd9e3",
+      "exact_release_files": [
+        {
+          "path": "releases/20261002-384-development-v1/manifest.json",
+          "sha256": "250b6bf9cd93e32ee2db77498432d4dc5c7d705f333f9d99e92de69cdf2c727f",
+          "bytes": 8126
+        },
+        {
+          "path": "releases/20261002-384-development-v1/authored-corpus.json",
+          "sha256": "7cd0dbbbcfadf8a3a02ca307ff356e10a6090f5b2a1b9434abaa9ce7e50b6830",
+          "bytes": 321176
+        },
+        {
+          "path": "releases/20261002-384-development-v1/checkpoint.json",
+          "sha256": "f031dc5a3dfb9b4fd9e7a8bfbe0f188393edd3afdcc3f18c06c84f4749c6db55",
+          "bytes": 586049
+        }
+      ]
+    },
+    {
+      "repo": "Publicus/legal-ir-autoencoder",
+      "revision": "51c21af74109d375560d715363019c4c853dc831",
+      "exact_release_files": [
+        {
+          "path": "releases/20261001-legal-source-binding-v2/manifest.json",
+          "sha256": "190c585f5fd4aee96876c765ef600f62b8b1797d0865e3d60367315a1b907145",
+          "bytes": 1851
+        },
+        {
+          "path": "releases/20261001-legal-source-binding-v2/checkpoint.json",
+          "sha256": "562d59c076e421bf27c3db5e140c33036937811161dc553241dd365188125454",
+          "bytes": 1715320
+        },
+        {
+          "path": "releases/20261001-legal-source-binding-v2/parent-legal-head.json",
+          "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62",
+          "bytes": 1678190
+        }
+      ]
+    },
+    {
+      "repo": "Publicus/security-ir-autoencoder",
+      "revision": "9ec76c511c120886e4eff843d8ba4de736acfb38",
+      "exact_release_files": [
+        {
+          "path": "releases/20261002-384-development-v1/manifest.json",
+          "sha256": "d9fc241c7c6a039068681fab18b6a36fbcbd1752c2683ba1dc16423ce94aba2a",
+          "bytes": 8156
+        },
+        {
+          "path": "releases/20261002-384-development-v1/authored-corpus.json",
+          "sha256": "db7746b86c1149785a23802d545a9fdf329e209b175c625c8ce4e89d1361eb64",
+          "bytes": 180619
+        },
+        {
+          "path": "releases/20261002-384-development-v1/checkpoint.json",
+          "sha256": "855b3d6d85bb59e165930785bd49711df0fcc8fbc8e11329e2f4b65125520441",
+          "bytes": 597741
+        }
+      ]
+    },
+    {
+      "repo": "Publicus/ui-ux-ir-autoencoder",
+      "revision": "017d150284e6dfb522e74dea551e44bea9d17357",
+      "exact_release_files": [
+        {
+          "path": "releases/20261002-384-development-v1/manifest.json",
+          "sha256": "8faf96d5f3deb284cc2a0e8065c6c9c5a9e9983e097b9f205d4b93c1431f0f2e",
+          "bytes": 8111
+        },
+        {
+          "path": "releases/20261002-384-development-v1/authored-corpus.json",
+          "sha256": "660143d008ff0466ce053a8c006536bd67b0004f337311fcba1e74965a7e1678",
+          "bytes": 141982
+        },
+        {
+          "path": "releases/20261002-384-development-v1/checkpoint.json",
+          "sha256": "f87299d9c9e91e00f1639aa8486b0a5ea66bb2a6db83266c6e23425fe6175d8a",
+          "bytes": 588962
+        }
+      ]
+    }
+  ]
+}
