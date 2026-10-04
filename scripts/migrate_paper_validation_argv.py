@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Correct reviewed paper validation argv through native Quack CAS updates.
+"""Correct reviewed paper validation argv through closed owner-side CAS repairs.
 
 The campaign coordinator must stop workers and own the maintenance window.
 This script never starts/stops processes, opens a database file, requeues a
@@ -104,7 +104,14 @@ def plan_record(record, expected):
             "validation": {"argv": corrected, **policy}, "failure_receipt": failure}
 
 
-def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False):
+def maintenance_submit(operation, record, owner, state_dir=None):
+    spec = importlib.util.spec_from_file_location("paper_maintenance_client", ROOT / "scripts/paper_contract_maintenance.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.submit(operation, record["task_cid"], record["revision"], owner, state_dir=state_dir)
+
+
+def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False, owner_state_dir=None):
     repo_root = Path(repo_root).resolve()
     if not os.environ.get(TOKEN_ENV, "").strip():
         raise MigrationError("trusted Quack token environment is required")
@@ -119,7 +126,7 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False):
         raise MigrationError("reviewed paper task inventory differs")
     report = {"schema": "paper-validation-argv-migration/v1", "paper": paper,
               "started_at": datetime.now(timezone.utc).isoformat(), "dry_run": dry_run,
-              "native_mutation_api": "IntentRepository.upsert_task(expected_revision)",
+              "native_mutation_api": "paper-contract-maintenance/v1:validation_argv",
               "blocked_tasks_requeued": 0, "provider_invoked": False,
               "source_artifact_sha256": provenance["source_sha256"],
               "migration_script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -167,10 +174,8 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False):
                         "failure_receipt": plan["failure_receipt"]}
                 report["tasks"].append(item)
                 if plan["change"] and not dry_run:
-                    update = {key: record[key] for key in ("task_cid", "task_alias", "goal_cid", "ordinal", "status",
-                                                             "priority", "plan_cid", "objective_id", "body", "identity")}
-                    receipt = source.intent.upsert_task(**update, expected_revision=record["revision"], validations=[plan["validation"]])
-                    item["event"] = plain(receipt.to_dict())
+                    receipt = maintenance_submit("validation_argv", record, report["owner"], owner_state_dir)
+                    item["event"] = receipt["event"]
                     report["changed"] += 1
                 elif not plan["change"]:
                     report["unchanged"] += 1
@@ -211,9 +216,10 @@ def main():
     parser.add_argument("--quack-endpoint", required=True)
     parser.add_argument("--repo-root", type=Path, default=ROOT)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--owner-state-dir", type=Path, help="Live owner directory containing the separate maintenance credential")
     args = parser.parse_args()
     try:
-        report = migrate(args.paper, args.quack_endpoint, args.repo_root, dry_run=args.dry_run)
+        report = migrate(args.paper, args.quack_endpoint, args.repo_root, dry_run=args.dry_run, owner_state_dir=args.owner_state_dir)
     except Exception as exc:
         report = (exc.receipt if isinstance(exc, MigrationError) else None) or {
             "schema": "paper-validation-argv-migration/v1", "success": False, "error_type": type(exc).__name__,
