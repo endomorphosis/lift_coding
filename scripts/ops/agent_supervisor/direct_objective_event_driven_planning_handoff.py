@@ -2874,6 +2874,9 @@ def _lane_observations(
         owner_liveness,
         read_process_birth,
     )
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_activity import (
+        observe_supervisor_activity,
+    )
 
     current = broker.get("current")
     current = current if isinstance(current, list) else []
@@ -2910,15 +2913,15 @@ def _lane_observations(
             and int(supervisor_birth.parent_pid) == operator_pid
             and _pid_alive(supervisor_pid)
         )
-        heartbeat_age = _age_seconds(status.get("updated_at"))
+        activity = observe_supervisor_activity(status, now=datetime.now(UTC))
+        heartbeat_age = activity.heartbeat_age_seconds
         birth_matches = bool(
             isinstance(daemon_birth_raw, Mapping)
             and isinstance(status_daemon_birth, Mapping)
             and dict(daemon_birth_raw) == dict(status_daemon_birth)
         )
-        live = bool(
+        processes_current = bool(
             record is not None
-            and status.get("status") == "running"
             and status.get("supervisor_pid_alive") is True
             and status.get("daemon_pid_alive") is True
             and heartbeat_age is not None
@@ -2928,12 +2931,33 @@ def _lane_observations(
             and birth_matches
             and int(record.get("parent_pid") or 0) == supervisor_pid
         )
+        maintenance_processes_current = True
+        if activity.maintenance is not None:
+            # Maintenance is a newly admitted phase. Its typed producer must
+            # bind the same supervisor birth and the daemon's current parent;
+            # a fresh heartbeat alone cannot preserve a reused PID's health.
+            persisted_supervisor = status.get("supervisor_process_birth")
+            current_daemon = (
+                read_process_birth(daemon_identity.pid) if daemon_alive else None
+            )
+            maintenance_processes_current = bool(
+                supervisor_birth is not None
+                and isinstance(persisted_supervisor, Mapping)
+                and dict(persisted_supervisor) == supervisor_birth.to_dict()
+                and current_daemon is not None
+                and dict(daemon_birth_raw) == current_daemon.to_dict()
+                and current_daemon.parent_pid == supervisor_pid
+            )
+        live = processes_current and maintenance_processes_current and activity.phase_ready
         observations.append(
             {
                 "lane": lane,
                 "live": live,
+                "dispatch_ready": processes_current and activity.permits_dispatch,
+                "activity": activity.to_dict(),
                 "supervisor_pid": supervisor_pid,
                 "supervisor_birth_alive": supervisor_alive,
+                "maintenance_processes_current": maintenance_processes_current,
                 "daemon_pid": int(daemon_birth_raw.get("pid") or 0)
                 if isinstance(daemon_birth_raw, Mapping)
                 else 0,
@@ -3652,7 +3676,7 @@ def status(*, require_ready: bool) -> int:
         and projection_integrity["ready"] is True
         and int(broker.get("accepted_lane_count") or 0) == 4
         and len(lanes) == 4
-        and all(lane["live"] for lane in lanes)
+        and all(lane["dispatch_ready"] for lane in lanes)
         and progress_observed
     )
     output = {
