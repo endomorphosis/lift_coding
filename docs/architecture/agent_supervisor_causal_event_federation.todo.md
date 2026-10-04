@@ -1,0 +1,2378 @@
+# Causal Event-Driven Multi-Supervisor Federation task board
+
+Sealed bootstrap projection for program `agent-supervisor-causal-event-federation-v1`, root objective `CASF-G000`, task prefix `CASF-`, and plan revision `CASF-PLAN-R1`.
+
+DuckDB is the authoritative transactional operational store only behind the exclusive typed Quack state owner. DuckLake is optional, append-only, rebuildable, eventually consistent, and never scheduling, lease, policy, proof, acceptance, completion, or release authority. This Markdown is not operational or completion authority after transactional materialization.
+
+CASF-000 and CASF-001 are completed because the current inventory directory contains exact starting-tree, capability, named-authority, blocker, and explicit-nonclaim artifacts. CASF-002 through CASF-043 remain `todo`. The initial scheduler admits one lane and one logical worker only. The 12-supervisor/256-registered/64-active benchmark profile stays unavailable until CASF-005, CASF-009, CASF-010, CASF-016, CASF-024, and CASF-029 are accepted from current-tree evidence.
+
+## Parallel waves
+
+```text
+W0 CASF-000
+W1 CASF-001
+W2 CASF-002
+W3 CASF-003 | CASF-004
+W4 CASF-005
+W5 CASF-006
+W6 CASF-007 | CASF-008 | CASF-009
+W7 CASF-010 | CASF-013
+W8 CASF-011 | CASF-014
+W9 CASF-012 | CASF-015
+W10 CASF-016
+W11 CASF-017
+W12 CASF-018 | CASF-019 | CASF-020
+W13 CASF-021
+W14 CASF-022
+W15 CASF-023
+W16 CASF-024
+W17 CASF-025
+W18 CASF-026
+W19 CASF-027
+W20 CASF-028
+W21 CASF-029
+W22 CASF-030
+W23 CASF-031 | CASF-036
+W24 CASF-032
+W25 CASF-033 | CASF-034
+W26 CASF-035 | CASF-037
+W27 CASF-038 | CASF-039 | CASF-040 | CASF-041
+W28 CASF-042
+W29 CASF-043
+```
+
+Same-wave work is merely a candidate frontier: exact causal/conflict/effect/resource analysis must admit concurrency. Unknown scope serializes. Protected planning/control paths and sibling repositories are never worker-owned. A completed board row is never sufficient completion evidence.
+
+## CASF-000 Seal current authority and prerequisite baseline
+
+- Stable task ID: CASF-000
+- Status: completed
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g011
+- Goal id: CASF-G011
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G011
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Seal current authority and prerequisite baseline; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: 
+- Owned paths: docs/architecture/causal_event_federation_inventory/starting_tree.json, docs/architecture/causal_event_federation_inventory/capability_snapshot.json, docs/architecture/causal_event_federation_inventory/README.md
+- Predicted files: docs/architecture/causal_event_federation_inventory/starting_tree.json, docs/architecture/causal_event_federation_inventory/capability_snapshot.json, docs/architecture/causal_event_federation_inventory/README.md
+- Predicted symbols: starting-tree seal; capability snapshot; source-root bindings
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: none; immutable bootstrap evidence only
+- Causal effects: none; classify current causal capabilities and gaps without creating edges
+- Authority class: evidence-only; no operational authority
+- Risk class: low
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: compact-evidence-write
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-000-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-000-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: exact-baseline; identity-seal; explicit-nonclaims
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 scripts/validate_agent_supervisor_causal_event_federation_board.py --inventory-only
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: docs/architecture/causal_event_federation_inventory/starting_tree.json, docs/architecture/causal_event_federation_inventory/capability_snapshot.json, docs/architecture/causal_event_federation_inventory/README.md
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-001 Inventory DuckDB, Quack, DuckLake, runner, event, and causal surfaces
+
+- Stable task ID: CASF-001
+- Status: completed
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g011
+- Goal id: CASF-G011
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G011
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Inventory DuckDB, Quack, DuckLake, runner, event, and causal surfaces; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-000
+- Owned paths: docs/architecture/causal_event_federation_inventory/authorities.json, docs/architecture/causal_event_federation_inventory/README.md
+- Predicted files: docs/architecture/causal_event_federation_inventory/authorities.json, docs/architecture/causal_event_federation_inventory/README.md
+- Predicted symbols: authority disposition ledger; typed capability blockers
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: none; immutable bootstrap evidence only
+- Causal effects: none; classify current causal capabilities and gaps without creating edges
+- Authority class: evidence-only; no operational authority
+- Risk class: low
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: compact-evidence-write
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-001-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-001-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: named-authority-coverage; closed-statuses; typed-blockers
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 scripts/validate_agent_supervisor_causal_event_federation_board.py --inventory-only
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: docs/architecture/causal_event_federation_inventory/authorities.json, docs/architecture/causal_event_federation_inventory/README.md
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: CASF-BLOCKER-EVENT-WAIT-MISSING; CASF-BLOCKER-QUACK-EVENT-QUALIFICATION; CASF-BLOCKER-DUCKLAKE-PROJECTION-MISSING; CASF-BLOCKER-MULTI-SUPERVISOR-QUALIFICATION
+
+## CASF-002 Define federation, supervisor, agent, shard, and budget contracts
+
+- Stable task ID: CASF-002
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g012
+- Goal id: CASF-G012
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G012
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Define federation, supervisor, agent, shard, and budget contracts; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-000, CASF-001
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/contracts.py, ipfs_accelerate_py/agent_supervisor/federation/identity.py, ipfs_accelerate_py/agent_supervisor/federation/policy.py, test/api/causal_federation/test_contracts.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/contracts.py, ipfs_accelerate_py/agent_supervisor/federation/identity.py, ipfs_accelerate_py/agent_supervisor/federation/policy.py, test/api/causal_federation/test_contracts.py
+- Predicted symbols: FederationRequest; FederationIdentity; FederationPolicy; SupervisorDefinition; SubagentDefinition; SupervisorShard; FederationBudget
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: report exact committed/delivered/replayed/lost/dead-letter event evidence without mutation
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-002-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-002-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: closed-contracts; unknown-field-rejection; bounded-values; authority-binding
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_contracts.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/contracts.py, ipfs_accelerate_py/agent_supervisor/federation/identity.py, ipfs_accelerate_py/agent_supervisor/federation/policy.py, test/api/causal_federation/test_contracts.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-003 Define event, outbox, subscription, cursor, and dead-letter contracts
+
+- Stable task ID: CASF-003
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g013
+- Goal id: CASF-G013
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G013
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Define event, outbox, subscription, cursor, and dead-letter contracts; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-002
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/events.py, ipfs_accelerate_py/agent_supervisor/federation/outbox.py, ipfs_accelerate_py/agent_supervisor/federation/subscriptions.py, test/api/causal_federation/test_event_contracts.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/events.py, ipfs_accelerate_py/agent_supervisor/federation/outbox.py, ipfs_accelerate_py/agent_supervisor/federation/subscriptions.py, test/api/causal_federation/test_event_contracts.py
+- Predicted symbols: DomainEvent; TransactionalOutboxRecord; EventSubscription; ConsumerCursor; DeadLetter
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: report exact committed/delivered/replayed/lost/dead-letter event evidence without mutation
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-003-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-003-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: closed-events; content-refs; bounded-subscriptions; no-arbitrary-sql
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_event_contracts.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/events.py, ipfs_accelerate_py/agent_supervisor/federation/outbox.py, ipfs_accelerate_py/agent_supervisor/federation/subscriptions.py, test/api/causal_federation/test_event_contracts.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-004 Define causal node, edge, abstraction, intervention, and frontier contracts
+
+- Stable task ID: CASF-004
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g012
+- Goal id: CASF-G012
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G012
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Define causal node, edge, abstraction, intervention, and frontier contracts; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-002
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/causal_contracts.py, test/api/causal_federation/test_causal_contracts.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/causal_contracts.py, test/api/causal_federation/test_causal_contracts.py
+- Predicted symbols: CausalNode; CausalEdge; CausalAbstractionMap; InterventionTest; CausalFrontier
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: report exact committed/delivered/replayed/lost/dead-letter event evidence without mutation
+- Causal effects: define closed nodes/edges/evidence/maps/interventions/frontiers; no authority granted
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-004-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-004-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: closed-causal-vocabulary; evidence-binding; abstraction-status-closure
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_causal_contracts.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/causal_contracts.py, test/api/causal_federation/test_causal_contracts.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-005 Extend normalized control-plane schema and migrations
+
+- Stable task ID: CASF-005
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g012
+- Goal id: CASF-G012
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G012
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Extend normalized control-plane schema and migrations; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-002, CASF-003, CASF-004
+- Owned paths: ipfs_accelerate_py/agent_supervisor/task_sources/sql/0002_causal_event_federation_core.sql, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_migrations.py, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_schema.py, test/api/causal_federation/test_schema.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/task_sources/sql/0002_causal_event_federation_core.sql, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_migrations.py, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_schema.py, test/api/causal_federation/test_schema.py
+- Predicted symbols: CASF migration revision; normalized table catalog; join-critical identity verifier
+- Database migrations: 0002_causal_event_federation_core; extend canonical catalog only; idempotent forward migration and schema verification
+- Event effects: report exact committed/delivered/replayed/lost/dead-letter event evidence without mutation
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-005-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-005-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: normalized-schema; migration-idempotency; join-critical-identities
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_schema.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/task_sources/sql/0002_causal_event_federation_core.sql, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_migrations.py, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_schema.py, test/api/causal_federation/test_schema.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-006 Implement federation and supervisor registries
+
+- Stable task ID: CASF-006
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g012
+- Goal id: CASF-G012
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G012
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement federation and supervisor registries; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/registry.py, ipfs_accelerate_py/agent_supervisor/federation/supervisor_registry.py, ipfs_accelerate_py/agent_supervisor/federation/lifecycle.py, test/api/causal_federation/test_registries.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/registry.py, ipfs_accelerate_py/agent_supervisor/federation/supervisor_registry.py, ipfs_accelerate_py/agent_supervisor/federation/lifecycle.py, test/api/causal_federation/test_registries.py
+- Predicted symbols: FederationRegistry; SupervisorRegistry; SupervisorLifecycleMachine
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: report exact committed/delivered/replayed/lost/dead-letter event evidence without mutation
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-006-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-006-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: transactional-registries; lifecycle-closure; bounded-child-admission
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_registries.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/registry.py, ipfs_accelerate_py/agent_supervisor/federation/supervisor_registry.py, ipfs_accelerate_py/agent_supervisor/federation/lifecycle.py, test/api/causal_federation/test_registries.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-007 Implement logical subagent registry and bounded execution pools
+
+- Stable task ID: CASF-007
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g012
+- Goal id: CASF-G012
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G012
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement logical subagent registry and bounded execution pools; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-006
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/agent_registry.py, ipfs_accelerate_py/agent_supervisor/federation/agent_pool.py, test/api/causal_federation/test_agent_pool.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/agent_registry.py, ipfs_accelerate_py/agent_supervisor/federation/agent_pool.py, test/api/causal_federation/test_agent_pool.py
+- Predicted symbols: SubagentRegistry; BoundedExecutionPool; capacity admission
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: report exact committed/delivered/replayed/lost/dead-letter event evidence without mutation
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-007-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-007-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: 256-registration; 64-slot-ceiling; per-agent-identity-budget-cancel-receipt
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_agent_pool.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/agent_registry.py, ipfs_accelerate_py/agent_supervisor/federation/agent_pool.py, test/api/causal_federation/test_agent_pool.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-008 Implement authenticated external-agent trigger gateway
+
+- Stable task ID: CASF-008
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g012
+- Goal id: CASF-G012
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G012
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement authenticated external-agent trigger gateway; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-006
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/trigger.py, test/api/causal_federation/test_trigger.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/trigger.py, test/api/causal_federation/test_trigger.py
+- Predicted symbols: FederationControlGateway; delegation verifier; request idempotency
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: report exact committed/delivered/replayed/lost/dead-letter event evidence without mutation
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-008-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-008-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: authentication; delegation; audience-resource-expiry; transactional-create
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_trigger.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/trigger.py, test/api/causal_federation/test_trigger.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-009 Implement transactionally atomic domain event and outbox writes
+
+- Stable task ID: CASF-009
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g013
+- Goal id: CASF-G013
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G013
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement transactionally atomic domain event and outbox writes; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-003, CASF-005, CASF-006
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/outbox.py, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py, test/api/causal_federation/test_outbox.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/outbox.py, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py, test/api/causal_federation/test_outbox.py
+- Predicted symbols: atomic mutation-event-outbox transaction; sequence allocator
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: commit typed DOMAIN_EVENT and TRANSACTIONAL_OUTBOX rows atomically with mutation
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-009-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-009-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: atomic-mutation-event-outbox; sequence-monotonicity; exactly-once-effects
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_outbox.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/outbox.py, ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_transactions.py, test/api/causal_federation/test_outbox.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-010 Implement state-owner event wait and notification path
+
+- Stable task ID: CASF-010
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g013
+- Goal id: CASF-G013
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G013
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement state-owner event wait and notification path; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-009
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/event_wait.py, ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py, ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py, test/api/causal_federation/test_event_wait.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/event_wait.py, ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py, ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py, test/api/causal_federation/test_event_wait.py
+- Predicted symbols: wait_for_events; commit notifier; cancellation-safe waiter registry
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: notify registered waiters only after commit; no synthetic authoritative event
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-010-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-010-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: no-lost-wakeup; cursor-subscription-binding; bounded-wait; no-busy-loop
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_event_wait.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/event_wait.py, ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py, ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py, test/api/causal_federation/test_event_wait.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: Quack current profile is polling-limited; capability remains unavailable until this task passes no-lost-wakeup and idle tests
+
+## CASF-011 Implement bounded subscriptions and consumer cursors
+
+- Stable task ID: CASF-011
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g013
+- Goal id: CASF-G013
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G013
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement bounded subscriptions and consumer cursors; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-003, CASF-009, CASF-010
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/subscriptions.py, ipfs_accelerate_py/agent_supervisor/federation/event_router.py, test/api/causal_federation/test_subscriptions.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/subscriptions.py, ipfs_accelerate_py/agent_supervisor/federation/event_router.py, test/api/causal_federation/test_subscriptions.py
+- Predicted symbols: bounded selector compiler; cursor CAS; subscription revision
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: create subscription/cursor events and acknowledgements transactionally
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-011-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-011-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: selector-bounds; tenant-scope; cursor-recovery; no-arbitrary-sql
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_subscriptions.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/subscriptions.py, ipfs_accelerate_py/agent_supervisor/federation/event_router.py, test/api/causal_federation/test_subscriptions.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-012 Implement event coalescing, retry, backpressure, and dead letters
+
+- Stable task ID: CASF-012
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g013
+- Goal id: CASF-G013
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G013
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement event coalescing, retry, backpressure, and dead letters; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-003, CASF-009, CASF-011
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/event_router.py, test/api/causal_federation/test_event_router.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/event_router.py, test/api/causal_federation/test_event_router.py
+- Predicted symbols: EventCoalescer; RetryBudget; BackpressureController; DeadLetterRouter
+- Database migrations: covered by CASF-005 migration; runtime DDL prohibited
+- Event effects: coalesce wake hints, preserve source history, emit retry/dead-letter/quarantine events
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-012-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-012-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: semantic-coalescing; audit-exclusions; retry-backpressure-quarantine
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_event_router.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/event_router.py, test/api/causal_federation/test_event_router.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-013 Implement multilevel causal graph store
+
+- Stable task ID: CASF-013
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g021
+- Goal id: CASF-G021
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G021
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement multilevel causal graph store; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-004, CASF-005, CASF-009
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/causal_graph.py, test/api/causal_federation/test_causal_graph.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/causal_graph.py, test/api/causal_federation/test_causal_graph.py
+- Predicted symbols: MultilevelCausalGraph; closed-edge validator; cycle/fixed-point group checks
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: create or validate exact/admitted causal facts and bounded frontier projections with evidence
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-013-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-013-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: L0-L4-graph; evidence-qualified-edges; bounded-traversal; cycle-safety
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_causal_graph.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/causal_graph.py, test/api/causal_federation/test_causal_graph.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-014 Integrate exact causal evidence and nomination-only retrieval evidence
+
+- Stable task ID: CASF-014
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g021
+- Goal id: CASF-G021
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G021
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Integrate exact causal evidence and nomination-only retrieval evidence; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-013
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/causal_evidence.py, ipfs_accelerate_py/agent_supervisor/analysis/doctor_causal_localization.py, test/api/causal_federation/test_causal_evidence.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/causal_evidence.py, ipfs_accelerate_py/agent_supervisor/analysis/doctor_causal_localization.py, test/api/causal_federation/test_causal_evidence.py
+- Predicted symbols: ExactCausalEvidence; NominationEvidence; admission policy
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: create or validate exact/admitted causal facts and bounded frontier projections with evidence
+- Authority class: nomination-only until exact evidence/policy admission
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-014-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-014-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: exact-authority; nomination-only-ranking; retrieval-cannot-complete
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_causal_evidence.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/causal_evidence.py, ipfs_accelerate_py/agent_supervisor/analysis/doctor_causal_localization.py, test/api/causal_federation/test_causal_evidence.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-015 Implement causal abstraction maps and intervention consistency checks
+
+- Stable task ID: CASF-015
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g021
+- Goal id: CASF-G021
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G021
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement causal abstraction maps and intervention consistency checks; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-004, CASF-013, CASF-014
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/causal_abstraction.py, test/api/causal_federation/test_causal_abstraction.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/causal_abstraction.py, test/api/causal_federation/test_causal_abstraction.py
+- Predicted symbols: CausalAbstractionValidator; intervention consistency; faithfulness status
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: create or validate exact/admitted causal facts and bounded frontier projections with evidence
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-015-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-015-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: intervention-consistency; mismatch-recording; stale-map-rejection
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_causal_abstraction.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/causal_abstraction.py, test/api/causal_federation/test_causal_abstraction.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-016 Implement causal frontier compilation
+
+- Stable task ID: CASF-016
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g021
+- Goal id: CASF-G021
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G021
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement causal frontier compilation; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-013, CASF-014, CASF-015
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/causal_frontier.py, test/api/causal_federation/test_causal_frontier.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/causal_frontier.py, test/api/causal_federation/test_causal_frontier.py
+- Predicted symbols: CausalFrontierCompiler; must/may/do-not-wake partitions
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: create or validate exact/admitted causal facts and bounded frontier projections with evidence
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-016-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-016-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: minimal-frontier; unknown-widens; exact-descendant-notification
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_causal_frontier.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/causal_frontier.py, test/api/causal_federation/test_causal_frontier.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-017 Implement federation world snapshots
+
+- Stable task ID: CASF-017
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g021
+- Goal id: CASF-G021
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G021
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement federation world snapshots; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-006, CASF-013, CASF-016
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/world_snapshot.py, ipfs_accelerate_py/agent_supervisor/semantic_state/world_snapshot_builder.py, test/api/causal_federation/test_world_snapshot.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/world_snapshot.py, ipfs_accelerate_py/agent_supervisor/semantic_state/world_snapshot_builder.py, test/api/causal_federation/test_world_snapshot.py
+- Predicted symbols: FederationWorldSnapshot; freshness/fixed-root bindings
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: create or validate exact/admitted causal facts and bounded frontier projections with evidence
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-017-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-017-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: tree-policy-capability-budget-event-watermark-binding; freshness
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_world_snapshot.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/world_snapshot.py, ipfs_accelerate_py/agent_supervisor/semantic_state/world_snapshot_builder.py, test/api/causal_federation/test_world_snapshot.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-018 Integrate AST, symbols, semantic roots, and capsule projections
+
+- Stable task ID: CASF-018
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g022
+- Goal id: CASF-G022
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G022
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Integrate AST, symbols, semantic roots, and capsule projections; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-013, CASF-017
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/semantic_projection.py, test/api/causal_federation/test_semantic_projection.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/semantic_projection.py, test/api/causal_federation/test_semantic_projection.py
+- Predicted symbols: AST/symbol/capsule incremental projection; semantic-root invalidation
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: update exact dependencies/invalidation/frontiers and nominate retrieval evidence without authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-018-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-018-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: incremental-AST-symbol-capsule; shared-semantic-root; precise-invalidation
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_semantic_projection.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/semantic_projection.py, test/api/causal_federation/test_semantic_projection.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-019 Integrate proof, test, cache, and seal projections
+
+- Stable task ID: CASF-019
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g022
+- Goal id: CASF-G022
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G022
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Integrate proof, test, cache, and seal projections; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-013, CASF-014, CASF-017
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/proof_projection.py, test/api/causal_federation/test_proof_projection.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/proof_projection.py, test/api/causal_federation/test_proof_projection.py
+- Predicted symbols: proof/test/cache/seal projection; exact invalidation
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: update exact dependencies/invalidation/frontiers and nominate retrieval evidence without authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-019-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-019-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: proof-lineage; exact-cache-invalidation; unchanged-receipt-reuse
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_proof_projection.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/proof_projection.py, test/api/causal_federation/test_proof_projection.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-020 Integrate knowledge graph, vector, and BM25 index projections
+
+- Stable task ID: CASF-020
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g022
+- Goal id: CASF-G022
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G022
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Integrate knowledge graph, vector, and BM25 index projections; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-013, CASF-014, CASF-017
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/retrieval_projection.py, test/api/causal_federation/test_retrieval_projection.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/retrieval_projection.py, test/api/causal_federation/test_retrieval_projection.py
+- Predicted symbols: BM25/vector/KG nomination projection; index receipt
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: update exact dependencies/invalidation/frontiers and nominate retrieval evidence without authority
+- Authority class: nomination-only until exact evidence/policy admission
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-020-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-020-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: revisioned-BM25-vector-KG; provenance; nomination-only
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_retrieval_projection.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/retrieval_projection.py, test/api/causal_federation/test_retrieval_projection.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-021 Implement event-driven supervisor wake and cursor advancement
+
+- Stable task ID: CASF-021
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g023
+- Goal id: CASF-G023
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G023
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement event-driven supervisor wake and cursor advancement; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-010, CASF-011, CASF-012, CASF-016, CASF-017, CASF-018, CASF-019, CASF-020
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/scheduler.py, ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py, test/api/causal_federation/test_supervisor_wake.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/scheduler.py, ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py, test/api/causal_federation/test_supervisor_wake.py
+- Predicted symbols: SupervisorEventLoop; atomic event processing/cursor advancement
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit compact causal/semantic/proof/index/task readiness events through the transactional outbox
+- Causal effects: update exact dependencies/invalidation/frontiers and nominate retrieval evidence without authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-021-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-021-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: event-batch-only; minimal-slice; atomic-cursor; idle-no-scan
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_supervisor_wake.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/scheduler.py, ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py, test/api/causal_federation/test_supervisor_wake.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-022 Implement duplicate-work and task-subsumption detection
+
+- Stable task ID: CASF-022
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g031
+- Goal id: CASF-G031
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G031
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement duplicate-work and task-subsumption detection; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-013, CASF-016, CASF-021
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/deduplication.py, test/api/causal_federation/test_deduplication.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/deduplication.py, test/api/causal_federation/test_deduplication.py
+- Predicted symbols: TaskIntentIdentity; duplicate/subsumption/overlap/conflict classifier
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-022-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-022-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: exact-duplicate-share; subsumption; overlap-boundary; conflict-serialization
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_deduplication.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/deduplication.py, test/api/causal_federation/test_deduplication.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-023 Implement conflict-free parallel frontier
+
+- Stable task ID: CASF-023
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g031
+- Goal id: CASF-G031
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G031
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement conflict-free parallel frontier; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-016, CASF-022
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/parallel_frontier.py, test/api/causal_federation/test_parallel_frontier.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/parallel_frontier.py, test/api/causal_federation/test_parallel_frontier.py
+- Predicted symbols: ConflictFreeParallelFrontier; effect/ownership/resource analysis
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-023-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-023-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: proved-independence; effect-conflict-safety; bounded-capacity
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_parallel_frontier.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/parallel_frontier.py, test/api/causal_federation/test_parallel_frontier.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-024 Implement hierarchical resource and token budgets
+
+- Stable task ID: CASF-024
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g031
+- Goal id: CASF-G031
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G031
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement hierarchical resource and token budgets; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-005, CASF-006, CASF-007, CASF-023
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/budgets.py, test/api/causal_federation/test_budgets.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/budgets.py, test/api/causal_federation/test_budgets.py
+- Predicted symbols: BudgetHierarchy; reservation ledger; budget-transfer CAS
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-024-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-024-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: parent-child-conservation; CAS-transfer; validation-reserve-isolation
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_budgets.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/budgets.py, test/api/causal_federation/test_budgets.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-025 Implement supervisor sharding and specialization
+
+- Stable task ID: CASF-025
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g032
+- Goal id: CASF-G032
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G032
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement supervisor sharding and specialization; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-006, CASF-007, CASF-016, CASF-023, CASF-024
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/sharding.py, ipfs_accelerate_py/agent_supervisor/federation/supervisor_registry.py, test/api/causal_federation/test_sharding.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/sharding.py, ipfs_accelerate_py/agent_supervisor/federation/supervisor_registry.py, test/api/causal_federation/test_sharding.py
+- Predicted symbols: SupervisorShard; specialization matcher; assignment revision
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-025-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-025-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: bounded-shards; specialization; exact-assignment; revision-fence
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_sharding.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/sharding.py, ipfs_accelerate_py/agent_supervisor/federation/supervisor_registry.py, test/api/causal_federation/test_sharding.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-026 Implement work stealing
+
+- Stable task ID: CASF-026
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g032
+- Goal id: CASF-G032
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G032
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement work stealing; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-007, CASF-023, CASF-024, CASF-025
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/work_stealing.py, test/api/causal_federation/test_work_stealing.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/work_stealing.py, test/api/causal_federation/test_work_stealing.py
+- Predicted symbols: WorkStealingPlanner; atomic budget/assignment/fence transfer
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-026-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-026-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: unclaimed-only; capability-effect-policy-proof-merge-privacy-bounds
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_work_stealing.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/work_stealing.py, test/api/causal_federation/test_work_stealing.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-027 Implement shard rebalancing and fencing
+
+- Stable task ID: CASF-027
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g032
+- Goal id: CASF-G032
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G032
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement shard rebalancing and fencing; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-009, CASF-010, CASF-023, CASF-024, CASF-025, CASF-026
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/rebalancing.py, test/api/causal_federation/test_rebalancing.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/rebalancing.py, test/api/causal_federation/test_rebalancing.py
+- Predicted symbols: ShardRebalancePlanner; drain/transfer receipt; fencing epoch
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-027-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-027-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: freeze-drain-transfer-fence-activate; no-double-shard; budget-conservation
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_rebalancing.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/rebalancing.py, test/api/causal_federation/test_rebalancing.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-028 Integrate worktrees, merge queue, and merge train
+
+- Stable task ID: CASF-028
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g033
+- Goal id: CASF-G033
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G033
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Integrate worktrees, merge queue, and merge train; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-009, CASF-019, CASF-023, CASF-024, CASF-025, CASF-027
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/merge.py, test/api/causal_federation/test_merge.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/merge.py, test/api/causal_federation/test_merge.py
+- Predicted symbols: FederationMergeCoordinator; merge lane/train; worktree binding
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-028-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-028-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: isolated-worktrees; explicit-merge-order; proof-release-gates
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_merge.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/merge.py, test/api/causal_federation/test_merge.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-029 Implement supervisor and subagent crash recovery
+
+- Stable task ID: CASF-029
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g033
+- Goal id: CASF-G033
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G033
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement supervisor and subagent crash recovery; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-009, CASF-010, CASF-011, CASF-012, CASF-021, CASF-024, CASF-027, CASF-028
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/recovery.py, test/api/causal_federation/test_recovery.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/recovery.py, test/api/causal_federation/test_recovery.py
+- Predicted symbols: FederationRecoveryCoordinator; effect reconciliation; replay
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-029-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-029-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: crash-reconnect-replay; stale-fence-rejection; unknown-effect-reconciliation
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_recovery.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/recovery.py, test/api/causal_federation/test_recovery.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-030 Implement federation-level fixed-point detection
+
+- Stable task ID: CASF-030
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g033
+- Goal id: CASF-G033
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G033
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement federation-level fixed-point detection; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-009, CASF-021, CASF-023, CASF-024, CASF-028, CASF-029
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/fixed_point.py, test/api/causal_federation/test_fixed_point.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/fixed_point.py, test/api/causal_federation/test_fixed_point.py
+- Predicted symbols: FederationFixedPointDetector; false-fixed-point diagnostics
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: emit task, claim, budget, shard, lease, merge, recovery, and fixed-point events through the outbox
+- Causal effects: consume exact frontier/conflict relations; record scheduling/assignment/merge/recovery consequences
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-030-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-030-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: complete-conjunctive-predicate; event-watermark; false-completion-rejection
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_fixed_point.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/fixed_point.py, test/api/causal_federation/test_fixed_point.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-031 Implement real DuckLake history projection
+
+- Stable task ID: CASF-031
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g041
+- Goal id: CASF-G041
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G041
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement real DuckLake history projection; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-009, CASF-012, CASF-030
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/ducklake_projection.py, ipfs_accelerate_py/agent_supervisor/integrations/ducklake_history_projection.py, test/api/causal_federation/test_ducklake_projection.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/ducklake_projection.py, ipfs_accelerate_py/agent_supervisor/integrations/ducklake_history_projection.py, test/api/causal_federation/test_ducklake_projection.py
+- Predicted symbols: DuckLakeProjectionWorker; source-range cursor; projection receipt
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: consume authoritative event ranges and write only projection receipts back through the state owner
+- Causal effects: project or inspect causal history only; no production authority mutation
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-031-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-031-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: idempotent-projection; partitioned-bounded-files; source-range-checksum
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_ducklake_projection.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/ducklake_projection.py, ipfs_accelerate_py/agent_supervisor/integrations/ducklake_history_projection.py, test/api/causal_federation/test_ducklake_projection.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: DuckLake failure is typed unavailable/lagging and does not block the DuckDB/Quack control plane
+
+## CASF-032 Implement DuckLake recovery, security, and projection receipts
+
+- Stable task ID: CASF-032
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g041
+- Goal id: CASF-G041
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G041
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement DuckLake recovery, security, and projection receipts; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-031
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/ducklake_projection.py, test/api/causal_federation/test_ducklake_recovery.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/ducklake_projection.py, test/api/causal_federation/test_ducklake_recovery.py
+- Predicted symbols: DuckLakeProjectionRecovery; redaction/tenant/schema-evolution checks
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: consume authoritative event ranges and write only projection receipts back through the state owner
+- Causal effects: project or inspect causal history only; no production authority mutation
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-032-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-032-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: interruption-recovery; redaction; tenant-isolation; typed-lag-unavailable
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_ducklake_recovery.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/ducklake_projection.py, test/api/causal_federation/test_ducklake_recovery.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: DuckLake failure is typed unavailable/lagging and does not block the DuckDB/Quack control plane
+
+## CASF-033 Implement architecture and event drift monitoring
+
+- Stable task ID: CASF-033
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g041
+- Goal id: CASF-G041
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G041
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement architecture and event drift monitoring; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-012, CASF-013, CASF-016, CASF-021, CASF-029, CASF-031, CASF-032
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/drift_monitor.py, test/api/causal_federation/test_drift_monitor.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/drift_monitor.py, test/api/causal_federation/test_drift_monitor.py
+- Predicted symbols: ArchitectureDriftMonitor; EventDriftMonitor; unnecessary-wakeup detector
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: observe event/schema drift and emit typed non-promotional findings
+- Causal effects: project or inspect causal history only; no production authority mutation
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-033-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-033-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: current-tree-drift; schema-event-contract-drift; typed-alerts
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_drift_monitor.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/drift_monitor.py, test/api/causal_federation/test_drift_monitor.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-034 Add federation control service
+
+- Stable task ID: CASF-034
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g042
+- Goal id: CASF-G042
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G042
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Add federation control service; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-006, CASF-008, CASF-011, CASF-016, CASF-021, CASF-024, CASF-027, CASF-030, CASF-032
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/control_service.py, ipfs_accelerate_py/agent_supervisor/control/service.py, test/api/causal_federation/test_control_service.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/control_service.py, ipfs_accelerate_py/agent_supervisor/control/service.py, test/api/causal_federation/test_control_service.py
+- Predicted symbols: SupervisorControlService federation operations; authorization/audit envelope
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: invoke typed command/event operations; adapters never invent events
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-034-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-034-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: read-mutation-catalog; authorization-roots-idempotency-fence-dry-run-audit
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_control_service.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/control_service.py, ipfs_accelerate_py/agent_supervisor/control/service.py, test/api/causal_federation/test_control_service.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-035 Add CLI and MCP adapters
+
+- Stable task ID: CASF-035
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g042
+- Goal id: CASF-G042
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G042
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Add CLI and MCP adapters; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-008, CASF-034
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/cli.py, ipfs_accelerate_py/mcp/tools/agent_supervisor.py, test/api/causal_federation/test_control_parity.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/cli.py, ipfs_accelerate_py/mcp/tools/agent_supervisor.py, test/api/causal_federation/test_control_parity.py
+- Predicted symbols: ipfs-accelerate agent federation CLI; canonical MCP adapter parity
+- Database migrations: none in this task; use CASF-005 normalized schema and typed repository operations
+- Event effects: invoke typed command/event operations; adapters never invent events
+- Causal effects: preserve causal graph revision and reject model/retrieval-created authority
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-035-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-035-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: direct-typed-adapters; no-shell; Python-CLI-MCP-parity
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_control_parity.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/cli.py, ipfs_accelerate_py/mcp/tools/agent_supervisor.py, test/api/causal_federation/test_control_parity.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-036 Add TLA+/state-machine specifications and model checks
+
+- Stable task ID: CASF-036
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g042
+- Goal id: CASF-G042
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G042
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Add TLA+/state-machine specifications and model checks; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-003, CASF-004, CASF-009, CASF-010, CASF-015, CASF-027, CASF-029, CASF-030
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/formal/, test/api/causal_federation/test_formal_models.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/formal/, test/api/causal_federation/test_formal_models.py
+- Predicted symbols: event/lease/lifecycle/rebalance/causal formal specifications
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: exercise/replay events without bypassing idempotency, cursor, lease, or fence authority
+- Causal effects: verify causal propagation, notification, independence and non-promotion properties
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-036-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-036-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: no-lost-event; one-owner-per-epoch; lifecycle; rebalance; causal-properties
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_formal_models.py
+- Proof/model-checking requirements: Run existing formal tooling for event delivery, claims/leases/fences, lifecycle, shard transfer, budgets, causal propagation and cycle/fixed-point properties.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/formal/, test/api/causal_federation/test_formal_models.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-037 Build adversarial and chaos suites
+
+- Stable task ID: CASF-037
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g042
+- Goal id: CASF-G042
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G042
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Build adversarial and chaos suites; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-008, CASF-012, CASF-015, CASF-021, CASF-027, CASF-029, CASF-032, CASF-034, CASF-036
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/chaos.py, test/api/causal_federation/test_chaos.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/chaos.py, test/api/causal_federation/test_chaos.py
+- Predicted symbols: adversarial federation campaign; crash/storm/tenant/secret scenarios
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: exercise/replay events without bypassing idempotency, cursor, lease, or fence authority
+- Causal effects: verify causal propagation, notification, independence and non-promotion properties
+- Authority class: operational coordination through canonical typed Quack state-owner boundary
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: bounded-operational-implementation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: safety-critical-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-037-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-037-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: state-owner-supervisor-agent-consumer-failure; storm; tenant-secret-attacks
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_chaos.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/chaos.py, test/api/causal_federation/test_chaos.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-038 Build event-driven idle benchmark
+
+- Stable task ID: CASF-038
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g043
+- Goal id: CASF-G043
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G043
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Build event-driven idle benchmark; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-010, CASF-012, CASF-021, CASF-029, CASF-033, CASF-037
+- Owned paths: benchmarks/agent_supervisor/causal_event_federation/idle_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_idle.py, test/api/causal_federation/test_idle_benchmark.py
+- Predicted files: benchmarks/agent_supervisor/causal_event_federation/idle_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_idle.py, test/api/causal_federation/test_idle_benchmark.py
+- Predicted symbols: idle stability benchmark and observation receipt
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: exercise/replay events without bypassing idempotency, cursor, lease, or fence authority
+- Causal effects: verify causal propagation, notification, independence and non-promotion properties
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: qualification-observation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: benchmark-isolated-real-process
+- Token budget: input_tokens=32000; output_tokens=12000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-038-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-038-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: zero-board-scans-model-calls-context-rebuilds-unchanged-writes
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_idle_benchmark.py
+- Proof/model-checking requirements: Frozen benchmark identity, reproducible comparator, exact counters and assurance-equivalence proof.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: benchmarks/agent_supervisor/causal_event_federation/idle_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_idle.py, test/api/causal_federation/test_idle_benchmark.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-039 Build twelve-supervisor parallel benchmark
+
+- Stable task ID: CASF-039
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g043
+- Goal id: CASF-G043
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G043
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Build twelve-supervisor parallel benchmark; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-023, CASF-024, CASF-025, CASF-027, CASF-028, CASF-029, CASF-037
+- Owned paths: benchmarks/agent_supervisor/causal_event_federation/parallel_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_parallel.py, test/api/causal_federation/test_parallel_benchmark.py
+- Predicted files: benchmarks/agent_supervisor/causal_event_federation/parallel_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_parallel.py, test/api/causal_federation/test_parallel_benchmark.py
+- Predicted symbols: 12-supervisor/1000-task/100000-event real-process benchmark
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: exercise/replay events without bypassing idempotency, cursor, lease, or fence authority
+- Causal effects: verify causal propagation, notification, independence and non-promotion properties
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny-by-default; live provider route separately authorized and marked.
+- Effect class: qualification-observation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: benchmark-isolated-real-process
+- Token budget: input_tokens=32000; output_tokens=12000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-039-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-039-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: 12-supervisors; 1000-tasks; 100000-deliveries; throughput-three-x
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_parallel_benchmark.py
+- Proof/model-checking requirements: Frozen benchmark identity, reproducible comparator, exact counters and assurance-equivalence proof.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: benchmarks/agent_supervisor/causal_event_federation/parallel_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_parallel.py, test/api/causal_federation/test_parallel_benchmark.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: high-concurrency profile unavailable until all declared gate dependencies are accepted and live telemetry admits capacity
+
+## CASF-040 Build 256-agent bounded-load benchmark
+
+- Stable task ID: CASF-040
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g043
+- Goal id: CASF-G043
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G043
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Build 256-agent bounded-load benchmark; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-007, CASF-024, CASF-025, CASF-026, CASF-027, CASF-029, CASF-037
+- Owned paths: benchmarks/agent_supervisor/causal_event_federation/load_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_load.py, test/api/causal_federation/test_load_benchmark.py
+- Predicted files: benchmarks/agent_supervisor/causal_event_federation/load_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_load.py, test/api/causal_federation/test_load_benchmark.py
+- Predicted symbols: 256-logical-agent/64-slot bounded load benchmark
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: exercise/replay events without bypassing idempotency, cursor, lease, or fence authority
+- Causal effects: verify causal propagation, notification, independence and non-promotion properties
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: qualification-observation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: benchmark-isolated-real-process
+- Token budget: input_tokens=32000; output_tokens=12000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-040-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-040-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: 256-registered; 64-concurrent; telemetry-minimum; no-process-per-agent
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_load_benchmark.py
+- Proof/model-checking requirements: Frozen benchmark identity, reproducible comparator, exact counters and assurance-equivalence proof.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: benchmarks/agent_supervisor/causal_event_federation/load_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_load.py, test/api/causal_federation/test_load_benchmark.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: high-concurrency profile unavailable until all declared gate dependencies are accepted and live telemetry admits capacity
+
+## CASF-041 Build cross-supervisor token-efficiency benchmark
+
+- Stable task ID: CASF-041
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g043
+- Goal id: CASF-G043
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G043
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Build cross-supervisor token-efficiency benchmark; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-017, CASF-018, CASF-019, CASF-020, CASF-021, CASF-022, CASF-037
+- Owned paths: benchmarks/agent_supervisor/causal_event_federation/token_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_token.py, test/api/causal_federation/test_token_benchmark.py
+- Predicted files: benchmarks/agent_supervisor/causal_event_federation/token_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_token.py, test/api/causal_federation/test_token_benchmark.py
+- Predicted symbols: shared-context/token-reuse comparative benchmark
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: exercise/replay events without bypassing idempotency, cursor, lease, or fence authority
+- Causal effects: verify causal propagation, notification, independence and non-promotion properties
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: high
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny-by-default; live provider route separately authorized and marked.
+- Effect class: qualification-observation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: benchmark-isolated-real-process
+- Token budget: input_tokens=32000; output_tokens=12000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-041-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-041-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: repeated-context-minus-50; inputs-minus-40; calls-minus-60; capsules-70
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_token_benchmark.py
+- Proof/model-checking requirements: Frozen benchmark identity, reproducible comparator, exact counters and assurance-equivalence proof.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: benchmarks/agent_supervisor/causal_event_federation/token_manifest.json, benchmarks/agent_supervisor/causal_event_federation/run_token.py, test/api/causal_federation/test_token_benchmark.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: high-concurrency profile unavailable until all declared gate dependencies are accepted and live telemetry admits capacity
+
+## CASF-042 Implement promotion, rollback, and quarantine gates
+
+- Stable task ID: CASF-042
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g043
+- Goal id: CASF-G043
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G043
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Implement promotion, rollback, and quarantine gates; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-030, CASF-032, CASF-033, CASF-034, CASF-035, CASF-036, CASF-037, CASF-038, CASF-039, CASF-040, CASF-041
+- Owned paths: ipfs_accelerate_py/agent_supervisor/federation/promotion.py, test/api/causal_federation/test_promotion.py
+- Predicted files: ipfs_accelerate_py/agent_supervisor/federation/promotion.py, test/api/causal_federation/test_promotion.py
+- Predicted symbols: PromotionGate; QuarantineGate; rollback target/receipt
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: exercise/replay events without bypassing idempotency, cursor, lease, or fence authority
+- Causal effects: verify causal propagation, notification, independence and non-promotion properties
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: qualification-observation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-042-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-042-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: conjunctive-safety-causal-event-parallel-token-gates; rollback-quarantine
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_promotion.py
+- Proof/model-checking requirements: Property/state-machine tests plus adversarial counterexamples for safety invariants; no model result self-promotes acceptance.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: ipfs_accelerate_py/agent_supervisor/federation/promotion.py, test/api/causal_federation/test_promotion.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+## CASF-043 Produce current-tree qualification and residual-gap report
+
+- Stable task ID: CASF-043
+- Status: todo
+- Completion: auto
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: casf-g043
+- Goal id: CASF-G043
+- Parent goal ID: CASF-G000
+- Subgoal ID: CASF-G043
+- Owning repository: ipfs_accelerate_py
+- Board namespace: agent-supervisor-causal-event-federation-v1
+- Base revision: 84a056e41e48a81d4484be43840196578d6c87da
+- Base repository tree: 40f0771e77d394ac91d92cc1edb02f7860f6131b
+- Base plan revision: CASF-PLAN-R1
+- Objective: Produce current-tree qualification and residual-gap report; extend existing authorities narrowly, fail closed on missing capability, and preserve all non-compensable constraints.
+- Depends on: CASF-031, CASF-032, CASF-033, CASF-034, CASF-035, CASF-036, CASF-037, CASF-038, CASF-039, CASF-040, CASF-041, CASF-042
+- Owned paths: docs/architecture/causal_event_federation_inventory/final_qualification_report.json, docs/architecture/causal_event_federation_inventory/final_qualification_report.md, test/api/causal_federation/test_qualification_report.py
+- Predicted files: docs/architecture/causal_event_federation_inventory/final_qualification_report.json, docs/architecture/causal_event_federation_inventory/final_qualification_report.md, test/api/causal_federation/test_qualification_report.py
+- Predicted symbols: final qualification schema; exact-tree evidence aggregator
+- Database migrations: none; test/benchmark/report code may not mutate production schema
+- Event effects: report exact committed/delivered/replayed/lost/dead-letter event evidence without mutation
+- Causal effects: verify causal propagation, notification, independence and non-promotion properties
+- Authority class: non-authoritative projection, observation, benchmark, or qualification evidence
+- Risk class: critical
+- Read scope: Exact current accelerator source, declared predecessor receipts, canonical state-owner interfaces, and published sibling contracts only.
+- Write scope: Owned paths only in an isolated task worktree; authoritative mutations only through registered typed state-owner operations.
+- External effect scope: No production, credential, remote, paid-provider, or sibling-repository effect; deny.
+- Effect class: qualification-observation
+- Preconditions: Declared dependencies accepted on the current merge tree; exact policy, capability, generation, lease, fence, budget, and worktree bindings are current.
+- Permitted effects: Bounded owned-path edits, hermetic validation, managed artifacts, and typed/idempotent state-owner commands within declared scope.
+- Prohibited effects: Arbitrary SQL/path/credentials; direct control.duckdb open; Quack-to-file fallback; model-created authority/policy/completion; DuckLake scheduling authority; hidden validation reduction.
+- Resource class: cpu-standard-local-proof
+- Token budget: input_tokens=24000; output_tokens=8000
+- Resource demand: cpu_ms=7200000; cpu_concurrency=2; ram_mib=4096; gpu_memory_mib=0; gpu_compute_class=none; disk_mib=4096; disk_bandwidth_mib_s=100; network=deny; network_bandwidth_kib_s=0; subprocesses=12; worktree_slots=1; provider_quota_units=1; provider_concurrency=1; prover_class=local; prover_concurrency=1; exclusive_keys=casf-043-owned-paths; merge_slots=1; persistence_kib_s=2048
+- Model-route class: implementation/high; models nominate, exact current-tree tests/proofs/policies/receipts dispose
+- Parallel lane: gated-causal-frontier
+- Concurrency group: casf-043-owned-paths
+- Conflict policy: Exclusive ownership of declared writes; dependent overlaps merge in DAG order; unknown/opaque/irreversible/conflicting effects serialize; current fence wins; no work stealing bypass.
+- Lease and fencing: Exact federation/supervisor/subagent/task/attempt/worktree/assignment revision, lease expiry, fencing epoch, generation, CAS and idempotency binding; stale owners cannot commit, validate, merge, settle, or complete.
+- Acceptance subset: all-report-fields; exact-final-tree; residual-gaps; truthful-claims
+- Completion contract: Acceptance subset passes against the exact merged tree with all required state, event, causal, policy, budget, validation and proof evidence; process exit or board status cannot complete work.
+- Validation: python3 -m pytest -q test/api/causal_federation/test_qualification_report.py
+- Proof/model-checking requirements: Hermetic contract/property tests, exact current-tree identities, negative vectors, and declared acceptance evidence.
+- Rollback: Revert only owned implementation in a fenced rollback worktree, revoke active assignment/effects safely, preserve attempts/events/evidence, and restore the declared predecessor generation; never rewrite history.
+- Required evidence: exact commit/tree/schema/generation/policy/capability/task/attempt/fence identities; validation and proof receipts; effect observations; rollback target
+- Final result identity: pending; accepted only after current-tree merge and post-merge gates produce a canonical content identity
+- Outputs: docs/architecture/causal_event_federation_inventory/final_qualification_report.json, docs/architecture/causal_event_federation_inventory/final_qualification_report.md, test/api/causal_federation/test_qualification_report.py
+- Raw-source requirements: Exact owned/predecessor source blobs and content-addressed evidence; no private chain-of-thought or large generated body in Git.
+- Capability blockers: none
+
+

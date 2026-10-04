@@ -266,7 +266,7 @@ def materialize(paper, database, repo_root=ROOT):
                     planned = expected[record.task_cid]
                     if set(record.dependencies) != set(planned["depends_on"]):
                         raise ValueError(f"dependency projection mismatch: {record.task_alias}")
-                    if [(o["path"], o["effect"].get("kind")) for o in record.outputs] != [(o["path"], o["kind"]) for o in planned["outputs"]]:
+                    if [(str(Path(o["path"])), o["effect"].get("kind")) for o in record.outputs] != [(str(Path(o["path"])), o["kind"]) for o in planned["outputs"]]:
                         raise ValueError(f"output projection mismatch: {record.task_alias}")
                     if record.body.get("goal id") != planned["goal id"]:
                         raise ValueError(f"native goal metadata was lost: {record.task_alias}")

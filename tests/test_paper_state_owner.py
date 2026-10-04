@@ -61,8 +61,10 @@ class PaperStateOwnerTests(unittest.TestCase):
                     self.fail("temporary owner failed readiness; " + err + out)
                 self.assertEqual(ready["identity"]["process_birth"]["pid"], proc.pid)
                 self.assertTrue(ready["remote_probe"]["rollback_checked"])
+                self.assertEqual(ready["remote_probe"]["rollback_scope"], "read-only-transport")
+                self.assertFalse(ready["remote_probe"]["write_probe_performed"])
                 self.assertTrue(ready["remote_probe"]["identity_checked"])
-                self.assertEqual(ready["remote_probe"]["task_count"], 25)
+                self.assertEqual(ready["remote_probe"]["task_count"], 32)
                 endpoint = ready["quack_endpoint"]
                 vault = state / "handle_paper-owner-test.quack-token"
                 self.assertEqual(stat.S_IMODE(vault.stat().st_mode), 0o600)
@@ -71,7 +73,7 @@ class PaperStateOwnerTests(unittest.TestCase):
                 self.assertTrue(token not in json.dumps(ready), "public readiness leaked credential")
                 connection = open_quack_transport_connection(endpoint, token=token)
                 try:
-                    self.assertEqual(connection.execute("SELECT count(*) FROM tasks").fetchone()[0], 25)
+                    self.assertEqual(connection.execute("SELECT count(*) FROM tasks").fetchone()[0], 32)
                     self.assertEqual(connection.execute("SELECT count(*) FROM health_samples WHERE subject_kind = 'paper-owner-readiness'").fetchone()[0], 0)
                 finally:
                     connection.close()

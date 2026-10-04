@@ -1,0 +1,125 @@
+{
+  "action": "restarted_dead_campaign_controller",
+  "boards_complete": false,
+  "campaign_status": {
+    "ok": true,
+    "status": {
+      "controller_alive": false,
+      "ducklake": {
+        "authoritative": false,
+        "boards": {
+          "autoformalization": {
+            "artifact_rows_by_kind": {
+              "event": 289,
+              "goal": 19,
+              "owner_snapshot": 2117,
+              "task": 178
+            },
+            "board_namespace": "vericodegen-2026-autoformalization",
+            "board_rows": 1,
+            "current_task_rows": 29,
+            "input_event_count": 289,
+            "input_goal_count": 8
+          },
+          "law_to_action": {
+            "artifact_rows_by_kind": {
+              "event": 324,
+              "goal": 23,
+              "owner_snapshot": 2117,
+              "task": 188
+            },
+            "board_namespace": "vericodegen-2026-law_to_action",
+            "board_rows": 1,
+            "current_task_rows": 32,
+            "input_event_count": 324,
+            "input_goal_count": 9
+          },
+          "neurosymbolic_supervision": {
+            "artifact_rows_by_kind": {
+              "event": 290,
+              "goal": 14,
+              "owner_snapshot": 2117,
+              "task": 189
+            },
+            "board_namespace": "vericodegen-2026-neurosymbolic_supervision",
+            "board_rows": 1,
+            "current_task_rows": 28,
+            "input_event_count": 290,
+            "input_goal_count": 8
+          }
+        },
+        "ducklake": {
+          "catalog": "lake",
+          "catalog_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/ducklake/lake.ducklake",
+          "catalog_type": "ducklake",
+          "extension_versions": {
+            "ducklake": "d8a1881e",
+            "quack": "c154811"
+          }
+        },
+        "fetch_verification": "owner_snapshot_provenance",
+        "lake_snapshot_count": 95329,
+        "lake_snapshot_id": 95328,
+        "new_immutable_artifacts": 3,
+        "ok": true,
+        "paper_benchmark_evidence": false,
+        "projected_at": "2026-09-15T01:31:16.632801+00:00",
+        "schema": "vericodegen-ducklake-projection/v1",
+        "source_age_seconds": 30.174267,
+        "source_fetched_at": "2026-09-15T01:30:46.458517+00:00",
+        "source_snapshot_sha256": "4d13de67d0d4f17e9d840c731dcf35f4869cb90f2e7c1b0f99f17214073b7518",
+        "source_transport": "quack"
+      },
+      "lanes": {}
+    }
+  },
+  "controller_alive": false,
+  "cwd": "/home/barberb/lift_coding",
+  "lanes": {
+    "autoformalization": {
+      "blocked": [],
+      "eligible_candidates": [],
+      "in_progress": [],
+      "owner_alive": null,
+      "quack_read": null,
+      "remaining_noncomplete": null,
+      "state": null,
+      "supervisor_alive": null,
+      "tasks": null,
+      "waiting": []
+    },
+    "law_to_action": {
+      "blocked": [],
+      "eligible_candidates": [],
+      "in_progress": [],
+      "owner_alive": null,
+      "quack_read": null,
+      "remaining_noncomplete": null,
+      "state": null,
+      "supervisor_alive": null,
+      "tasks": null,
+      "waiting": []
+    },
+    "neurosymbolic_supervision": {
+      "blocked": [],
+      "eligible_candidates": [],
+      "in_progress": [],
+      "owner_alive": null,
+      "quack_read": null,
+      "remaining_noncomplete": null,
+      "state": null,
+      "supervisor_alive": null,
+      "tasks": null,
+      "waiting": []
+    }
+  },
+  "observed_at": "2026-09-15T01:35:31.098880+00:00",
+  "restart": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\n  \"controller\": {\n    \"pid\": 3823949,\n    \"birth\": \"443775\",\n    \"boot_id\": \"f4a3b80a-e3df-4702-8d03-86c19f69b2a9\",\n    \"log\": \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/campaign.log\",\n    \"argv\": [\n      \"/home/barberb/lift_coding/.venvs/ipfs-datasets-duckdb-quack/bin/python\",\n      \"/home/barberb/lift_coding/scripts/paper_supervisor_campaign.py\",\n      \"serve\",\n      \"--state-root\",\n      \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026\",\n      \"--worktree-parent\",\n      \"/home/barberb/lift_coding/.worktrees\"\n    ]\n  },\n  \"status\": \"starting\",\n  \"state_root\": \"/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026\"\n}\n"
+  },
+  "schema": "vericodegen-paper-board-watchdog/v1",
+  "state_root": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026",
+  "work_remaining": true
+}

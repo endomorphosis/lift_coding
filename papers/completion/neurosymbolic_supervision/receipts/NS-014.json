@@ -1,0 +1,143 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-014",
+  "status": "complete",
+  "completed_at": "2026-09-11T18:24:00+00:00",
+  "scope": "Native-proof profile qualification only. The selected profile closed as unavailable; no setup, proof generation, verification, CPython/pytest execution claim, or source/backend deployment was performed.",
+  "source_versions": {
+    "workspace_git_head": "c23acea9431b87299485a04d544c3e3e41580d76",
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "native_adapter": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16.py",
+      "sha256": "8b925d227a2d545ed095e1e4cf9b63553178b57f9bbf44a8e67ae5b1c65901c1"
+    },
+    "native_ffi": {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16_ffi.py",
+      "sha256": "388413638c87d76e9b9205d955f6286269b0e93d0cb073c04ee553f3528794d6"
+    },
+    "prior_capability_boundary": {
+      "NS-002_capabilities": "papers/completion/neurosymbolic_supervision/artifacts/capabilities.json",
+      "classification": "NS-002 previously recorded native provers unavailable in the sealed-style profile; NS-014 separately observed the bundled CLI help path and still found no qualified proof profile."
+    }
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_profile.json": "c0a395d76385981aa89ed0814cc44232394920b39b531b0547cd4c7f1127ce78",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_results.jsonl": "2f93b6df0e3d2d72bdefb7525028f3c4f748f8119350b1b1d53dd812795a6b4d",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_scope_decision.md": "8d874c9c572e3fc510814438908f323f842e5a64dbb3fa313e3d22c1db856152",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/validate_unavailable_profile.py": "5320c337d90e16bb8858c40dc4cb0495584ea0d7094f7af32c047163f821644a",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/native-profile-closure.log": "ee95b426c8fe370f4fd9c05d3d16176d94040c57dd4cfea1205fd4a6b01a2853",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/verify-task.log": "0a1a58029ad96444d4d0aa39ffc4bfc58cbccdc325d9b9f8d4cfd47ba9995841"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/qualification/native_profile.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_profile.json",
+    "papers/completion/neurosymbolic_supervision/qualification/native_results.jsonl": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_results.jsonl",
+    "papers/completion/neurosymbolic_supervision/qualification/native_scope_decision.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_scope_decision.md"
+  },
+  "criteria": [
+    {
+      "criterion": "A retained native result includes genuine proof payload, exact statement/public input binding, verified key/circuit/profile, backend version, and measured generation/verification evidence.",
+      "status": "met",
+      "explanation": "No native result is retained. The result record makes each mandatory retained-result field explicitly absent, records the native executable's missing runtime version and unverified key/circuit/profile, and records generation and verification durations as null/unavailable rather than inventing a proof-shaped result.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_profile.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/native-profile-closure.log"
+      ]
+    },
+    {
+      "criterion": "Outer source/test metadata, key/profile changes, missing mandatory tests, and simulated/test-only artifacts receive explicit dispositions.",
+      "status": "met",
+      "explanation": "The unavailable result contains five explicit Table 16 dispositions: outer-root mismatch, evidence-class mismatch, circuit/key/profile/revocation change, missing mandatory test, and simulated/test-only artifact. It reports that no end-to-end case was run because no eligible profile exists, while preserving the required reject/re-evaluate rules.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_scope_decision.md"
+      ]
+    },
+    {
+      "criterion": "Unavailable native proving is reported as unavailable, not zero cost or successful simulation.",
+      "status": "met",
+      "explanation": "The profile is closed as unavailable because backend version, circuit/profile, approved key/setup provenance, statement binding, and genuine measured proof evidence are missing. Both timing fields are null with reasons, and fallback, seeded/test-only, and key-shaped artifacts are explicitly excluded from retained credit.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_profile.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_scope_decision.md"
+      ]
+    },
+    {
+      "criterion": "No arbitrary CPython/pytest execution or full temporal/deontic semantics are inferred from the Horn-fragment adapter.",
+      "status": "met",
+      "explanation": "The profile, result, and scope decision confine the inspected helper to atoms, facts, and unary-antecedent implications under forward chaining and expressly exclude arbitrary CPython/pytest execution, runner attestation, and full temporal/deontic/first-order semantics.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_profile.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_results.jsonl",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/qualification/native_scope_decision.md"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns014-evidence-8e51081f",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns014-evidence-8e51081f/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns014-evidence-8e51081f/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns014-evidence-8e51081f/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns014-evidence-8e51081f/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/validate_unavailable_profile.py"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/validate_unavailable_profile.py",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/native-profile-closure.log",
+      "started_at": "2026-09-11T18:23:30+00:00",
+      "finished_at": "2026-09-11T18:23:31+00:00",
+      "execution_kind": "sealed-profile structural and native-CLI capability audit; prove, verify, setup, pytest, and fallback backends were deliberately not invoked"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ipfs-accelerate-validation-home-ns014-supervisor-initial",
+        "XDG_CACHE_HOME=/tmp/ipfs-accelerate-validation-home-ns014-supervisor-initial/.cache",
+        "XDG_CONFIG_HOME=/tmp/ipfs-accelerate-validation-home-ns014-supervisor-initial/.config",
+        "XDG_DATA_HOME=/tmp/ipfs-accelerate-validation-home-ns014-supervisor-initial/.local/share",
+        "XDG_STATE_HOME=/tmp/ipfs-accelerate-validation-home-ns014-supervisor-initial/.local/state",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "scripts/paper_supervisors.py",
+        "verify-task",
+        "--paper",
+        "neurosymbolic_supervision",
+        "--task",
+        "NS-014"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-014/verify-task.log",
+      "started_at": "2026-09-11T18:24:05+00:00",
+      "finished_at": "2026-09-11T18:24:10+00:00",
+      "execution_kind": "paper-supervisor task-contract verification under the sealed validation profile"
+    }
+  ],
+  "limitations": {
+    "native_profile_qualified": false,
+    "native_proof_generated": false,
+    "native_proof_verified": false,
+    "measured_generation_elapsed_ms": null,
+    "measured_verification_elapsed_ms": null,
+    "simulation_counted_as_success": false,
+    "setup_or_key_generation_performed": false,
+    "test_execution_claimed": false,
+    "semantic_scope": "Horn-style derivation fragment only; no CPython/pytest or full temporal/deontic semantics.",
+    "claim_boundary": "This receipt verifies an explicit unavailable-scope closure and its evidence integrity, not a native proof, a test run, a theorem beyond the limited adapter fragment, or a deployed backend."
+  },
+  "runtime_authority": "Artifact completion record only; no source tree, binary, key, setup ceremony, task status, provider attempt, rollout, acceptance oracle, portal, or submission state was changed."
+}

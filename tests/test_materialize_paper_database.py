@@ -21,7 +21,7 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
         for paper in MODULE.PAPERS:
             with self.subTest(paper=paper):
                 population, provenance = MODULE.build_population(paper)
-                self.assertEqual(len(population["taskboard"]), 25)
+                self.assertEqual(len(population["taskboard"]), {"autoformalization": 25, "law_to_action": 32, "neurosymbolic_supervision": 25, "lean_refactor_arena": 18}[paper])
                 known, seen = set(provenance["task_cids"].values()), set()
                 for task in population["taskboard"]:
                     self.assertLessEqual(set(task["depends_on"]), known)
@@ -32,7 +32,7 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                     self.assertTrue(all(isinstance(item, dict) and item["path"] for item in task["outputs"]))
                     snapshots = f"papers/completion/{paper}/receipts/snapshots/{task['task_id']}/"
                     self.assertEqual([item for item in task["outputs"] if "receipts/snapshots/" in item["path"]],
-                                     [{"path": snapshots, "kind": "directory"}])
+                                     [{"path": snapshots.rstrip("/") + "/", "kind": "directory"}])
                     self.assertTrue(all(item["argv"] == ["python3", "scripts/paper_supervisors.py", "verify-task",
                                                         "--paper", paper, "--task", task["task_id"]]
                                         for item in task["validation_commands"]))
@@ -52,7 +52,7 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
             report = MODULE.materialize("law_to_action", db)
             self.assertTrue(db.is_file())
             self.assertEqual(report["ready_tasks"], ["LA-001", "LA-002"])
-            self.assertEqual(report["population"]["task_count"], 25)
+            self.assertEqual(report["population"]["task_count"], 32)
             self.assertEqual(report["population"]["goal_count"], 9)
             self.assertEqual(report["task_snapshot"]["objective_count"], 1)
             self.assertEqual(MODULE._digest(db), report["bootstrap_database_sha256"])
@@ -65,15 +65,16 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                 objective = source.get_objective(report["source_provenance"]["objective_id"])
                 self.assertIn("From Law to Action", objective["title"])
                 attempt = SimpleNamespace(task_cid=record.task_cid, task_alias=record.task_alias,
-                                          attempt_id="test-attempt", claim_id="test-claim")
-                projection = DatabasePortalExecutionBridge._render_projection(None, attempt, record)
+                                          attempt_id="test-attempt", claim_id="test-claim", attempt_number=1,
+                                          lease_id="test-lease", owner_session_id="test-session", fencing_token=1, fence_epoch=1)
+                projection = DatabasePortalExecutionBridge._render_projection_seed(attempt, record)
                 self.assertIn("- Goal Id: LA-G2", projection)
                 self.assertIn("- Predicted Files:", projection)
                 self.assertIn("python3 scripts/paper_supervisors.py verify-task", projection)
                 self.assertNotIn("bash -lc", projection)
-                snapshots = "papers/completion/law_to_action/receipts/snapshots/LA-003/"
+                snapshots = "papers/completion/law_to_action/receipts/snapshots/LA-003"
                 self.assertEqual([dict(output["effect"]) for output in record.outputs if output["path"] == snapshots],
-                                 [{"path": snapshots, "kind": "directory"}])
+                                 [{"path": snapshots.rstrip("/") + "/", "kind": "directory"}])
                 repo = Path(tmp) / "worker"
                 repo.mkdir()
                 todo = repo / "projected.todo.md"
@@ -92,8 +93,8 @@ class PaperDatabaseMaterializationTests(unittest.TestCase):
                 self.assertEqual(set(allowed), {output["path"] for output in record.outputs})
                 self.assertIn(snapshots, allowed)
                 self.assertIn(snapshots, capsule["scope"]["expected_outputs"])
-                self.assertNotIn(snapshots.replace("LA-003/", "LA-002/"), allowed)
-                self.assertNotIn(snapshots.removesuffix("LA-003/"), allowed)
+                self.assertNotIn(snapshots.replace("LA-003", "LA-002"), allowed)
+                self.assertNotIn(snapshots.removesuffix("LA-003"), allowed)
             self.assertFalse(list(Path(tmp).glob(".paper-bootstrap-*")))
 
     def test_existing_database_is_never_opened_or_replaced(self):

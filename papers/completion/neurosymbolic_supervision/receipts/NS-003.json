@@ -1,0 +1,123 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "NS-003",
+  "status": "complete",
+  "completed_at": "2026-09-11T17:44:00+00:00",
+  "scope": "Frozen claim-to-evidence and submission-boundary records only. No manuscript, source tree, experiment, acceptance oracle, portal, author record, or deployment state was changed.",
+  "source_versions": {
+    "workspace_git_head": "d1251b222331e53219a7e0b7f721fbe623e34d8c",
+    "draft_extract": {
+      "path": "papers/completion/neurosymbolic_supervision/paper_extracted.txt",
+      "sha256": "809af88bfd4e8f78fc7fbc7c067dc5d41392c6c2d4aaf75ec02ec813036a23a4"
+    },
+    "prior_evidence_boundary": {
+      "NS-002_receipt": "papers/completion/neurosymbolic_supervision/receipts/NS-002.json",
+      "preliminary_evidence": "papers/completion/neurosymbolic_supervision/audit/preliminary_evidence.json",
+      "classification": "Repository-reported preliminary arithmetic and source/capability inventory only; no live experiment was inferred."
+    },
+    "deadline_source": "The review records a prior CFP check with tentative dates. This task did not access, authenticate to, or act on a submission portal."
+  },
+  "artifacts": {
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/claim_evidence_matrix.json": "cf631c3a0265d5c2d15944d906d027fbcc986078d7a3aa69d69be9d3cb546f63",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/scope.md": "5fe9f2d4e65938c5404f6ed3880144906f6212c05a72c85d078f34dbb4870dc4",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/deadline_plan.md": "b4bc032e96abdde60bd9545e91ac866b72249c12992b4c00444f8350c3d9aba5",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/NS-003-preflight.log": "b22d4a40c25571784b018c98b5821ccc0dde562b5cc19a259368ae4dfabce73c",
+    "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/NS-003-verify-task.log": "6fc21a86267ae3021abf106cd34f322d3ebfbd1db6be301dfb4f327fec0868e4"
+  },
+  "outputs": {
+    "papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/claim_evidence_matrix.json",
+    "papers/completion/neurosymbolic_supervision/protocol/scope.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/scope.md",
+    "papers/completion/neurosymbolic_supervision/protocol/deadline_plan.md": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/deadline_plan.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Every main-text claim and Table 17/18 row has an evidence obligation or an explicit removal/narrowing decision.",
+      "status": "met",
+      "explanation": "The matrix covers 32 abstract/main-text claim units (including Tables 1--5) and separately assigns owners and obligations to all four Table 17 rows and six Table 18 rows. Each has a controlled decision vocabulary and a publication rule; native and world/procedure rows have explicit narrowing closures.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/claim_evidence_matrix.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/NS-003-preflight.log"
+      ]
+    },
+    {
+      "criterion": "Required core tasks are separated from optional implementation campaigns; unavailable optional backends have a truthful closure path.",
+      "status": "met",
+      "explanation": "Scope freezes a source-linked context/routing/translation/reuse/publication/evaluation core, while native proof, learned/world/procedure, semantic-editing/refactoring, and federation work have explicit qualified-or-future-work closures. The closure forbids mock proof records and does not make unavailable optional backends block the core.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/scope.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/claim_evidence_matrix.json"
+      ]
+    },
+    {
+      "criterion": "The paper goal cannot pass by emptying a queue or changing the oracle/acceptance standard.",
+      "status": "met",
+      "explanation": "Both the matrix and scope require a fixed, independent oracle; matched A--D controls; current mandatory evidence; full terminal denominators; and cold scoring for reuse. They explicitly reject queue exhaustion, local no-call/hook evidence, stored artifacts, candidate booleans, and protocol changes made to make an arm pass as success.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/claim_evidence_matrix.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/scope.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/deadline_plan.md"
+      ]
+    },
+    {
+      "criterion": "No author identity, consent, model-use facts, or positive results are inferred.",
+      "status": "met",
+      "explanation": "The scope admits only inspected provenance, explicitly limited preliminary arithmetic, or conditional design at this stage. It reserves author-dependent facts for author-confirmable NS-024/025 records and directs all final positive findings to independently scored frozen-run evidence. The deadline plan creates no portal or submission side effect.",
+      "evidence": [
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/claim_evidence_matrix.json",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/scope.md",
+        "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/protocol/deadline_plan.md"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ns003-preflight",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-c",
+        "import json; from pathlib import Path; p=Path('papers/completion/neurosymbolic_supervision/audit/claim_evidence_matrix.json'); d=json.loads(p.read_text()); assert len(d['claims']) == 32; assert len(d['table17_rows']) == 4; assert len(d['table18_rows']) == 6; assert all(c['decision'] in d['decision_vocabulary'] for c in d['claims']); assert all(r['decision'] in d['decision_vocabulary'] for r in d['table17_rows'] + d['table18_rows']); print('matrix schema, 32 main-text claim units, and 10 Table 17/18 row obligations: OK')"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/NS-003-preflight.log",
+      "started_at": "2026-09-11T17:42:00+00:00",
+      "finished_at": "2026-09-11T17:42:01+00:00",
+      "execution_kind": "local structural preflight under the required sealed-style PATH; no provider, prover, portal, or experiment invoked"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/tmp/ns003-verify",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "scripts/paper_supervisors.py",
+        "verify-task",
+        "--paper",
+        "neurosymbolic_supervision",
+        "--task",
+        "NS-003"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/neurosymbolic_supervision/receipts/snapshots/NS-003/audit/NS-003-verify-task.log",
+      "started_at": "2026-09-11T17:43:30+00:00",
+      "finished_at": "2026-09-11T17:43:35+00:00",
+      "execution_kind": "paper-supervisor task-contract verification under the required sealed-style PATH"
+    }
+  ],
+  "limitations": {
+    "live_experiment_run": false,
+    "positive_results_inferred": false,
+    "author_facts_inferred": false,
+    "portal_checked_or_submission_attempted": false,
+    "optional_backend_implemented": false,
+    "claim_boundary": "This receipt proves the integrity and declared scope of NS-003 records, not the scientific truth of later claims or the availability of external services."
+  },
+  "runtime_authority": "Artifact completion record only; no native task status, queue, acceptance oracle, source pin, provider attempt, deployment, portal, author identity, consent, or submission state was changed."
+}

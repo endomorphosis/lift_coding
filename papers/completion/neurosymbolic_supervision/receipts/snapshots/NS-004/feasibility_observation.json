@@ -1,0 +1,46 @@
+{
+  "schema": "paper-protocol-feasibility-observation/v1",
+  "observed_at": "2026-09-11T18:01:24.032691+00:00",
+  "source_commit": "43f60dac61e35f9bc6ccf2b7fa39c73d797b2b08",
+  "scope_hashes": {
+    "protocol/scope.md": "5fe9f2d4e65938c5404f6ed3880144906f6212c05a72c85d078f34dbb4870dc4",
+    "protocol/deadline_plan.md": "b4bc032e96abdde60bd9545e91ac866b72249c12992b4c00444f8350c3d9aba5",
+    "audit/claim_evidence_matrix.json": "cf631c3a0265d5c2d15944d906d027fbcc986078d7a3aa69d69be9d3cb546f63",
+    "receipts/NS-003.json": "0df4b9ea954bd2c43ede5761516e70e54f5c3d353e977ed96d88285d3d09d178"
+  },
+  "host": {
+    "sched_affinity_cpu_count": 20,
+    "memory_kib": {
+      "MemTotal": 127601388,
+      "MemAvailable": 109462772
+    },
+    "reservation_proven": false
+  },
+  "historical_provider_observation": {
+    "task_id": "NS-004",
+    "attempt_id": "attempt:046eab51f02a47f8a7737b8a0842f726",
+    "started_at": "2026-09-11T17:45:48.571893+00:00",
+    "provider": "openai",
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "high",
+    "cli_version": "0.154.0",
+    "quota_guarded_fallback_observed": true,
+    "log_sha256": "93981be8c4fffee00a62a7f8adbcde5df25109f085ad19613426dbb41fb5d887",
+    "log_bytes": 331143,
+    "new_call_for_protocol": false,
+    "scientific_repair_result": false,
+    "benchmark_access_qualified": false,
+    "remaining_quota": null,
+    "remaining_quota_reason": "Not observable from the maintenance implementation log.",
+    "currency_charge": null,
+    "charge_reason": "No billing receipt in the preserved maintenance log."
+  },
+  "readiness": {
+    "genuine_frozen_tasks": false,
+    "independent_hidden_oracle": false,
+    "bounded_scientific_provider_adapter": false,
+    "reserved_compute": false,
+    "final_experiment_ready": false
+  },
+  "scope": "Observed availability supports a live pilot feasibility check; it does not authorize model substitution, new paid resources, or final results."
+}

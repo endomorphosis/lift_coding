@@ -316,7 +316,7 @@ class PaperBoardBuildTests(unittest.TestCase):
                     folder.mkdir(parents=True)
                     MODULE.build(paper)
                     native = parse_tasks(folder / "paper.todo.md", MODULE.PREFIXES[paper] + "-")
-                    self.assertEqual(len(native), 25)
+                    self.assertEqual(len(native), len(manifests[paper]["tasks"]))
                     for task, seed in zip(native, manifests[paper]["tasks"]):
                         receipt, snapshots = MODULE.task_evidence_paths(paper, seed["id"])
                         self.assertEqual(task.outputs, list(dict.fromkeys([*seed["deliverables"], receipt, snapshots])))

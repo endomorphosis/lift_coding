@@ -1,0 +1,188 @@
+{
+  "counts_by_split": {
+    "final_test": {
+      "by_domain": {
+        "cfr": 993,
+        "guidance": 7,
+        "mpep": 738,
+        "uscode": 175
+      },
+      "by_domain_record_counts": {
+        "cfr": 993,
+        "guidance": 7,
+        "mpep": 746,
+        "uscode": 175
+      },
+      "by_source_time": {
+        "2022-07-01": 738,
+        "2024-07-01": 993,
+        "2024-07-17": 7,
+        "2024-12-31": 175
+      },
+      "component_record_size_histogram": {
+        "10": 2,
+        "15": 1,
+        "1738": 1,
+        "25": 1,
+        "28": 1,
+        "29": 1,
+        "3": 3,
+        "4": 3,
+        "5": 2,
+        "6": 2,
+        "7": 1,
+        "8": 2
+      },
+      "exact_normalized_alias_records": 8,
+      "natural_source_records": 1921,
+      "natural_source_units": 1913,
+      "operational_connected_components": 20
+    },
+    "fixed_canary": {
+      "by_domain": {
+        "cfr": 38
+      },
+      "by_domain_record_counts": {
+        "cfr": 38
+      },
+      "by_source_time": {
+        "2024-07-01": 38
+      },
+      "component_record_size_histogram": {
+        "11": 1,
+        "27": 1
+      },
+      "exact_normalized_alias_records": 0,
+      "natural_source_records": 38,
+      "natural_source_units": 38,
+      "operational_connected_components": 2
+    },
+    "selection": {
+      "by_domain": {
+        "cfr": 15
+      },
+      "by_domain_record_counts": {
+        "cfr": 15
+      },
+      "by_source_time": {
+        "2024-07-01": 15
+      },
+      "component_record_size_histogram": {
+        "11": 1,
+        "2": 2
+      },
+      "exact_normalized_alias_records": 0,
+      "natural_source_records": 15,
+      "natural_source_units": 15,
+      "operational_connected_components": 3
+    },
+    "train": {
+      "by_domain": {
+        "cfr": 69
+      },
+      "by_domain_record_counts": {
+        "cfr": 69
+      },
+      "by_source_time": {
+        "2024-07-01": 69
+      },
+      "component_record_size_histogram": {
+        "1": 1,
+        "10": 1,
+        "58": 1
+      },
+      "exact_normalized_alias_records": 0,
+      "natural_source_records": 69,
+      "natural_source_units": 69,
+      "operational_connected_components": 3
+    }
+  },
+  "created_at": "2026-09-11T18:14:00.233621+00:00",
+  "full_route_scope": "Legal/policy natural cohort candidate populated; coding and trace provenance remain explicitly pending. This does not narrow the paper's full empirical route or claim experiments/annotation have run.",
+  "grouping_plan_sha256": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa",
+  "inventories": {
+    "coding_requirements_and_implementation": {
+      "admission": "pending_original_source_authorship_temporal_identity_and_record_rights_qualification",
+      "candidate_dataset": "Publicus/skillcenter-ir",
+      "label_columns_read": false,
+      "limitation": "Skill descriptions and auto-IR scores are not assumed to be human requirements, executable snippets, or semantic gold; no full remote corpus count is claimed local",
+      "local_shard_rows": 4096,
+      "local_shard_sha256": "bde002275f12f8a2e2fb4632ec5921eb3cf65babffb988872ead5679dc271fd5",
+      "natural_admitted": 0,
+      "revision": "2cc11a73403d03c0679ffa909c893ef6a850048a",
+      "upstream_license_risk_allow_rows": 72,
+      "upstream_license_risk_needs_review_rows": 4024
+    },
+    "legal_policy": {
+      "alias_policy": "Retain alias provenance in source exports but select one canonical representative per normalized source unit for annotation/evaluation. Aliases never inflate the100-unit floor.",
+      "dataset": "justicedao/patent-legal-corpus",
+      "eligible_records": 2043,
+      "exact_normalized_alias_records": 8,
+      "excluded": 131,
+      "exclusion_reasons": {
+        "reserved_section": 131
+      },
+      "macro_source_editions": 4,
+      "observed": 2174,
+      "raw_content_sha256": "66cc0653052512a3279cb9a530ad90b85f183ae201d74b0f930d0534a7ff9bdb",
+      "revision": "86c77cb650d30ee366983d1b2e25cd85e8c22e34",
+      "rights": "All upstream record metadata declares reviewed, redistribution_allowed=true, public-domain-US-government; dataset card declares CC0-1.0. These are preserved upstream declarations, not a new independent legal determination.",
+      "source_body_location": "Owner-only private research-inputs; only qualified development split exports may be mounted for providers",
+      "source_families": {
+        "cfr": 1115,
+        "guidance": 7,
+        "mpep": 746,
+        "uscode": 175
+      },
+      "time_semantics": "Per-record current_through/source_revision from upstream official edition metadata; no publication date inferred from download time",
+      "unique_normalized_source_units": 2035
+    },
+    "synthetic_fixture": {
+      "admission": "excluded_synthetic_fixture",
+      "natural_denominator": 0,
+      "observed_entries": 5,
+      "path": "external/ipfs_datasets/tests/fixtures/semantic_roundtrip/pilot_cases.json",
+      "rights": "Repository license does not independently establish embedded fixture text provenance; fixture classification is sufficient for natural-data exclusion",
+      "sha256": "6d34cdd1392d3a9964f04e4260f722e076ba7b96c3cdd2fc59749460756cf167",
+      "source_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    },
+    "trace_material": {
+      "admission": "unavailable_no_qualified_natural_trace_artifact_discovered",
+      "natural_admitted": 0,
+      "remediation": "Acquire retained execution traces tied to exact natural source and executable versions, rights and time provenance; generated traces remain their own derived-data population"
+    }
+  },
+  "partition_checkpoint": {
+    "access_scope": "Actual reconstructed Codex container private-tree exclusion plus actually invoked trusted role/hash/digest gate. Unknown and sealed-final roles fail closed. AF007/008 must integrate the gate and partition-specific access before any training/scoring; no current runner or public-network denial is claimed.",
+    "annotation": "AF005 owns independent candidate-blind annotation/adjudication.1913unique final candidates are not1913adjudicated units or measured outcomes.",
+    "boundary_report_sha256": "6621d44a2905f246a581ec4b766cd3cb527a5fc5aa5269babe880bf8a506aaa4",
+    "frozen_splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "group_definition": "Whole CFR parts and MPEP chapters at their source editions; whole USC/guidance editions; transitive union of detected identity/derivative/exact/near-duplicate/paraphrase relationships.20operational source-family/time groups does not mean20publishers or statistically independent editions.",
+    "historical_status_resolution": "The immutable splits manifest retains its pre-qualification candidate status. This new attestation and split audit resolve that historical status without changing any split bytes, salt, membership, source export or counts.",
+    "scientific_review_sha256": "4508a8ed6d640210d033583f6d07c55d376d81317319e08488e2be57db9a9971",
+    "scope": "AF004 data-partition checkpoint only",
+    "source_commit": "70af4e50576ea005527bc1fa154d7164f0cffcca",
+    "status": "qualified"
+  },
+  "population_limitations": {
+    "development_domain": "CFR legal material only; no cross-domain training capability inferred",
+    "fixed_one_shot_allocation": "The giant derivative-connected component remains whole, yielding 69 training / 15 selection / 38 canary versus 1913 unique final units. Do not rebalance or retry the salt after this result.",
+    "statistics": "Four broad official editions remain correlated; operational source components are not20independent sampled corpora."
+  },
+  "private_final_ids_disclosed": false,
+  "private_inventory_commitment_sha256": "fd6f3bf368de242f7a6d21867695d4eb5c644bf09a4a7f82cf687a76fa2c9126",
+  "schema": "autoformalization-corpus-manifest/v2",
+  "source_artifacts": [
+    {
+      "bytes": 7726,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/patent-legal-corpus-86c77cb6.README.md",
+      "sha256": "39e2f77f9fb2d4e1d7ffc2056eb2ea0c6b345abeacc6b5d68a728b181e434246"
+    },
+    {
+      "bytes": 4629,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/patent-legal-corpus-86c77cb6.coverage.json",
+      "sha256": "56b63af81a6fdfc5917005a5bf18de7252c4f8d9d334d414b74f9c3c6bbfb1c4"
+    }
+  ],
+  "status": "data_partition_checkpoint_qualified"
+}

@@ -77,7 +77,7 @@ def plan_record(record, expected):
             raise MigrationError(f"{alias}: reviewed {key} binding differs")
     if set(record["dependencies"]) != set(expected["depends_on"]):
         raise MigrationError(f"{alias}: reviewed dependencies differ")
-    if [v["path"] for v in record["outputs"]] != [v["path"] for v in expected["outputs"]]:
+    if [str(Path(v["path"])) for v in record["outputs"]] != [str(Path(v["path"])) for v in expected["outputs"]]:
         raise MigrationError(f"{alias}: reviewed outputs differ")
     if [v["criterion"] for v in record["acceptance"]] != expected["acceptance_criteria"]:
         raise MigrationError(f"{alias}: reviewed acceptance differs")
@@ -114,8 +114,9 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False):
     if not is_quack_transport_target(quack_endpoint):
         raise MigrationError("an explicit loopback Quack endpoint is required")
     expected = {r["task_id"]: r for r in population["taskboard"]}
-    if len(expected) != 25:
-        raise MigrationError("expected exactly 25 reviewed tasks")
+    expected_count = {"autoformalization": 25, "law_to_action": 32, "neurosymbolic_supervision": 25, "lean_refactor_arena": 18}[paper]
+    if len(expected) != expected_count:
+        raise MigrationError("reviewed paper task inventory differs")
     report = {"schema": "paper-validation-argv-migration/v1", "paper": paper,
               "started_at": datetime.now(timezone.utc).isoformat(), "dry_run": dry_run,
               "native_mutation_api": "IntentRepository.upsert_task(expected_revision)",
@@ -130,12 +131,13 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False):
         # its public identity to ready; authenticated queries prove liveness.
         # Historical stopped generations remain in the same database.
         store_id = "vericodegen-2026-" + paper
+        latest_generation = remote.execute("SELECT max(generation) FROM state_servers WHERE store_id = ?", [store_id]).fetchone()[0]
         identity = remote.execute(
             "SELECT server_id, store_id, database_uuid, generation, process_birth_id, listen_uri, status "
             "FROM state_servers WHERE store_id = ? AND listen_uri = ? AND stopped_at IS NULL "
             "AND status IN ('starting', 'ready') "
-            "AND generation = (SELECT max(generation) FROM state_servers WHERE store_id = ?)",
-            [store_id, quack_endpoint, store_id],
+            "AND generation = ?",
+            [store_id, quack_endpoint, latest_generation],
         ).fetchall()
         if len(identity) != 1:
             raise MigrationError("Quack owner is not the expected paper store")
@@ -147,7 +149,7 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False):
         report["owner_history_row_count"] = int(remote.execute("SELECT count(*) FROM state_servers WHERE store_id = ?", [store_id]).fetchone()[0])
         with DatabaseTaskSource(quack_endpoint, owner_id="paper-validation-migration:" + paper, install_schema=False) as source:
             records = [plain(r) for r in source.intent.list_tasks(limit=1000)]
-            if len(records) != 25 or {r["task_alias"] for r in records} != set(expected):
+            if len(records) != expected_count or {r["task_alias"] for r in records} != set(expected):
                 raise MigrationError("remote task population differs from reviewed paper")
             if any(r["status"] == "in_progress" for r in records):
                 raise MigrationError("refusing migration while any task is in_progress")

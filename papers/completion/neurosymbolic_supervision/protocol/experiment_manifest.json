@@ -1,0 +1,302 @@
+{
+  "schema": "paper-ns-experiment-preregistration/v1",
+  "version": "ns-core-v1",
+  "frozen_at": "2026-09-11T18:07:47.425840+00:00",
+  "freeze_kind": "protocol_design_only_before_final_outcomes",
+  "final_execution_ready": false,
+  "source_scope_commit": "43f60dac61e35f9bc6ccf2b7fa39c73d797b2b08",
+  "source_scope_hashes": {
+    "protocol/scope.md": "5fe9f2d4e65938c5404f6ed3880144906f6212c05a72c85d078f34dbb4870dc4",
+    "protocol/deadline_plan.md": "b4bc032e96abdde60bd9545e91ac866b72249c12992b4c00444f8350c3d9aba5",
+    "audit/claim_evidence_matrix.json": "cf631c3a0265d5c2d15944d906d027fbcc986078d7a3aa69d69be9d3cb546f63",
+    "receipts/NS-003.json": "0df4b9ea954bd2c43ede5761516e70e54f5c3d353e977ed96d88285d3d09d178"
+  },
+  "protocol_document": "papers/completion/neurosymbolic_supervision/protocol/preregistered_protocol.md",
+  "protocol_sha256": "e1e3403feafa0eb5c8bbda4b95e14e3415a92d2036182725784f30788d4e5e54",
+  "measurement_schema": "papers/completion/neurosymbolic_supervision/protocol/measurement_schema.json",
+  "measurement_schema_sha256": "e20f70ba7c055e9fdbbcd1540ce13213733dd3f3810d44a23c1f9f0b24064e03",
+  "core_obligations_retained": [
+    "NS-005",
+    "NS-006",
+    "NS-007",
+    "NS-008",
+    "NS-009",
+    "NS-010",
+    "NS-011",
+    "NS-012",
+    "NS-013",
+    "NS-016",
+    "NS-017",
+    "NS-018",
+    "NS-019",
+    "NS-020"
+  ],
+  "scope_change_authorized": false,
+  "population": {
+    "unit_of_independence": "upstream_repository_lineage_family",
+    "tasks_per_family": 1,
+    "development_families": 4,
+    "pilot_families": 4,
+    "final_families": 16,
+    "total_families": 24,
+    "actual_recruited_count": null,
+    "actual_recruited_reason": "NS-005 must recruit, qualify and freeze genuine historical tasks.",
+    "old_40_fixtures_admitted_as_live_repairs": false,
+    "hidden_target_patches_in_proposal_context": false,
+    "hidden_oracle_outputs_in_proposal_context": false,
+    "split_method": "Frozen candidate registry with temporal provenance, one lineage per split, SHA256 ranking and no post-outcome replacement.",
+    "registry_freeze_owner": "NS-005",
+    "pilot_final_disjoint": true
+  },
+  "arms": {
+    "A": {
+      "context": "raw_lexical",
+      "routing": "model_first",
+      "reuse": false,
+      "governed_lifecycle": false,
+      "validation": "full"
+    },
+    "B": {
+      "context": "semantic_source_linked",
+      "routing": "model_first",
+      "reuse": false,
+      "governed_lifecycle": false,
+      "validation": "full"
+    },
+    "C": {
+      "context": "semantic_source_linked",
+      "routing": "obligation_aware",
+      "reuse": true,
+      "governed_lifecycle": false,
+      "validation": "qualified_reuse_or_full_fallback"
+    },
+    "D": {
+      "context": "semantic_source_linked",
+      "routing": "obligation_aware",
+      "reuse": true,
+      "governed_lifecycle": true,
+      "validation": "qualified_reuse_or_full_fallback"
+    },
+    "C-no-route": {
+      "context": "semantic_source_linked",
+      "routing": "model_first",
+      "reuse": true,
+      "governed_lifecycle": false,
+      "validation": "qualified_reuse_or_full_fallback"
+    },
+    "C-no-reuse": {
+      "context": "semantic_source_linked",
+      "routing": "obligation_aware",
+      "reuse": false,
+      "governed_lifecycle": false,
+      "validation": "full"
+    }
+  },
+  "schedule": {
+    "main_arms": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "additional_ablation_arms": [
+      "C-no-route",
+      "C-no-reuse"
+    ],
+    "cache_profiles": [
+      "local_cold",
+      "local_warm"
+    ],
+    "final_repetitions": [
+      104729,
+      130363
+    ],
+    "development_units": 16,
+    "pilot_units": 48,
+    "final_main_units": 256,
+    "final_additional_ablation_units": 128,
+    "final_total_units": 384,
+    "total_comparison_units": 448,
+    "order_key": "sha256(UTF8(ns-core-v1|family_id|repetition|cache|arm)); lexical arm tie break",
+    "pilot_order_prefix": "ns-core-v1-pilot",
+    "schedule_seed_is_provider_seed": false,
+    "warm_prime": "Task-local visible pre-fix index/full baseline evidence only; no target, oracle outcome or other-arm solution.",
+    "provider_cache_control": "unavailable unless explicitly measured; local cache label only"
+  },
+  "model": {
+    "proposed_provider": "openai",
+    "proposed_model": "gpt-5.6-terra",
+    "reasoning_effort": "high",
+    "historically_observed_cli": "0.154.0",
+    "transport": "existing_native_quota_guarded_Docker_Codex_fallback",
+    "primary_provider": "grok",
+    "fallback_trigger": "independently_verified_primary_quota_exhausted",
+    "model_mismatch_action": "unavailable before scientific dispatch; pre-final amendment required to change profile",
+    "sampling_seed": null,
+    "sampling_seed_reason": "Control not demonstrated by maintenance invocation; NS-006 records actual support.",
+    "temperature": null,
+    "temperature_reason": "No temperature control observed; retain actual provider defaults with disclosure.",
+    "immutable_weight_revision": null,
+    "revision_reason": "Not exposed in the retained maintenance log; freeze all actually exposed metadata and label operational alias matching.",
+    "final_runtime_identity": null,
+    "final_runtime_identity_reason": "NS-016 must freeze actual pilot-qualified CLI/image/source and provider receipts.",
+    "paid_budget_extension_authorized": false
+  },
+  "budgets": {
+    "concurrent_ns_scientific_containers": 1,
+    "reserved_cpu_cores": 1,
+    "aggregate_memory_bytes": 2147483648,
+    "aggregate_process_thread_slots": 32,
+    "scratch_bytes_per_unit": 2147483648,
+    "required_gpu_count": 0,
+    "proposal_effects_per_unit": 1,
+    "request_serialized_bytes_max": 65536,
+    "admitted_patch_bytes_max": 16384,
+    "provider_wall_seconds_max": 180,
+    "active_unit_wall_seconds_max": 300,
+    "aggregate_unit_host_cpu_seconds_max": 240,
+    "independent_cold_scoring_wall_seconds_max": 120,
+    "independent_cold_scoring_cpu_seconds_max": 120,
+    "campaign_comparison_effects_max": 448,
+    "pre_final_boundary_provider_effects_reserved": 64,
+    "campaign_provider_effects_max": 512,
+    "campaign_host_cpu_hours_max": 60,
+    "campaign_active_elapsed_hours_max": 72,
+    "campaign_retained_artifact_bytes_max": 21474836480,
+    "additional_paid_provider_currency_budget": 0,
+    "limits_enforced_and_reserved": false,
+    "limits_reason": "NS-006 must prove aggregate enforcement; NS-016 obtains actual reservation and checks pilot costs against remaining deadline.",
+    "unknown_paid_effect_replay_allowed": false,
+    "hard_token_limit_claimed": false
+  },
+  "inference": {
+    "primary_comparison": [
+      "D",
+      "A"
+    ],
+    "separate_primary_cache_decisions": [
+      "local_cold",
+      "local_warm"
+    ],
+    "noninferiority_margin_absolute": 0.05,
+    "minimum_robust_useful_completion": 0.25,
+    "robust_family_success": "All two scheduled repetitions for this arm/cache independently solved; missing/non-success => 0.",
+    "alpha_per_primary_cache": 0.025,
+    "quality_bound": "CP_lower(gain,N,0.0125)-CP_upper(loss,N,0.0125) > -0.05",
+    "usefulness_bound": "CP_lower(D_robust_success,N,0.025) >= 0.25",
+    "zero_event_bound": "1-alpha**(1/N), using independent families, not repetitions",
+    "bootstrap_method": "percentile",
+    "bootstrap_unit": "whole paired family across all arms/repeats/cache",
+    "bootstrap_resamples": 20000,
+    "bootstrap_seed": 20260911,
+    "descriptive_confidence_level": 0.95,
+    "efficiency_primary_endpoint": "direct active end_to_end_elapsed_seconds including setup/recovery at stated horizon",
+    "efficiency_gate": "95% family-paired percentile bootstrap upper bound(D-A) < 0; approximate small-sample inference explicitly labeled",
+    "requires_zero_observed_false_admissions_and_false_reuse": true,
+    "requires_positive_boundary_progress": true,
+    "missingness_blocks_promotion": true,
+    "power_guarantee": false,
+    "family_independence_required_for_population_promotion": true,
+    "secondary_comparisons_exploratory_for_promotion": true
+  },
+  "metrics": {
+    "solved_rate": "independently solved scheduled units / all scheduled units by arm/cache",
+    "conditional_solve_rate": "solved dispatched units / dispatched units; null at denominator zero",
+    "false_acceptance": "invalid admitted scored candidates / all admitted scored candidates, plus scheduled-unit rate",
+    "false_denial": "valid denied scored candidates / all valid scored candidates; abstention without candidate separate",
+    "unknown_admission_risk": "unscored admissions separately counted and pessimistically invalid for upper bound",
+    "denominator_exclusions_after_final_outcomes": false,
+    "schema_measurements": [
+      "input_tokens",
+      "output_tokens",
+      "cached_input_tokens",
+      "reasoning_tokens",
+      "provider_charge",
+      "host_cpu_seconds",
+      "remote_gpu_seconds",
+      "peak_aggregate_memory_bytes",
+      "scratch_bytes",
+      "retained_storage_bytes",
+      "bytes_read",
+      "bytes_written",
+      "active_elapsed_seconds",
+      "queue_wait_seconds",
+      "human_wait_seconds",
+      "human_active_seconds",
+      "independent_scoring_cpu_seconds",
+      "independent_scoring_elapsed_seconds",
+      "prime_cpu_seconds",
+      "prime_elapsed_seconds"
+    ],
+    "overlapping_wall_durations_summed_as_elapsed": false
+  },
+  "amortization": {
+    "horizons": [
+      1,
+      10,
+      100,
+      1000
+    ],
+    "warm_projection": "S + H*W",
+    "cold_projection": "H*F",
+    "break_even": "max(1,ceil(S/(F-W))) if F>W and measurements comparable; never/undefined otherwise",
+    "unobserved_horizons_are_estimates": true,
+    "unknown_measurements_are_null_with_reason": true,
+    "stage_costs": [
+      "index_context",
+      "provider",
+      "fixture_setup",
+      "fixture_call",
+      "fixture_teardown",
+      "proof_generate",
+      "proof_verify",
+      "persist_seal",
+      "publication",
+      "retry_recovery",
+      "cold_scoring",
+      "warm_prime"
+    ],
+    "tariff_derived_currency_is_estimated": true
+  },
+  "boundary_qualification": {
+    "retained_table18_rows": [
+      "provider",
+      "translation",
+      "fixture_lifecycle",
+      "restart_publication"
+    ],
+    "family_blocks": 16,
+    "valid_invalid_cases_per_boundary_family": 2,
+    "planned_cases": 128,
+    "counts_as_live_repair": false,
+    "deny_all_useful_progress_credit": false,
+    "unsafe_controls_can_publish": false,
+    "optional_native_world_procedures": "NS-003 no-go/untested/future-work preserved unless separately qualified; no replacement by mock proofs."
+  },
+  "final_freeze_requirements": {
+    "NS-005": [
+      "task/source/oracle IDs",
+      "data provenance and licensing",
+      "split/dedup/leakage audit",
+      "positive and negative oracle qualification"
+    ],
+    "NS-006": [
+      "real one-proposal provider path",
+      "scope/oracle isolation",
+      "bounded resource enforcement",
+      "actual cost receipts and unknown-effect reconciliation"
+    ],
+    "NS-007--013": [
+      "retained real caller boundaries with valid progress and adversarial rejection"
+    ],
+    "NS-016": [
+      "real disjoint pilot",
+      "all matched arms viable",
+      "measured feasibility vs remaining time",
+      "immutable source/model/runner/scorer/schedule/resource final freeze"
+    ]
+  },
+  "planned_outputs_only": true,
+  "maintenance_provider_log_sha256": "93981be8c4fffee00a62a7f8adbcde5df25109f085ad19613426dbb41fb5d887",
+  "protocol_bundle_sha256": "7d5e9178ee161ee44ccc4284612ab616561f36fe16e01e00aaec285c481c607a"
+}

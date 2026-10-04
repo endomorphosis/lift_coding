@@ -1,0 +1,117 @@
+{
+  "expectation_echo_negative_rejected": true,
+  "finite_case_counts": {
+    "C01": 512,
+    "C02": 32,
+    "C03": 72
+  },
+  "full_inventory": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "C10",
+    "C11",
+    "C12"
+  ],
+  "independent_until_disagreements": 26,
+  "independent_until_trace_pairs": 64,
+  "negative_mutations": [
+    {
+      "failed_check_ids": [
+        "C01"
+      ],
+      "mutation": "material_implication_replaced_by_and",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C02",
+        "C03"
+      ],
+      "mutation": "box_always_true",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C03"
+      ],
+      "mutation": "diamond_always_false",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C04",
+        "C05"
+      ],
+      "mutation": "modal_witness_actual_truth_added",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C06"
+      ],
+      "mutation": "until_replaced_by_current_conjunction",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C07"
+      ],
+      "mutation": "always_replaced_by_current_truth",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C08"
+      ],
+      "mutation": "quantifier_order_swapped",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C09"
+      ],
+      "mutation": "write_violations_suppressed",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C10"
+      ],
+      "mutation": "audit_violations_suppressed",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C11"
+      ],
+      "mutation": "incomplete_and_identity_checks_ignored",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C12"
+      ],
+      "mutation": "encoder_retains_exception_so_loss_witness_disappears",
+      "strict_evaluation_rejected": true
+    },
+    {
+      "failed_check_ids": [
+        "C01",
+        "C02",
+        "C03"
+      ],
+      "mutation": "valuation_enumeration_truncated",
+      "strict_evaluation_rejected": true
+    }
+  ],
+  "scope": "new finite reconstruction and measurement-integrity checks only; no empirical benchmark or historical run",
+  "source_sha256": "a0b10baf23b8800b831ee6b7ca8e05a8418f6741c75d8cfeb647d420a057e282",
+  "validation": "passed"
+}

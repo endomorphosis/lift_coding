@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "name": "exclusive_owner_acquired",
+      "pass": true
+    },
+    {
+      "name": "pre_dispatch_reservation",
+      "pass": true
+    },
+    {
+      "error": "Identity already reserved; refusing silent replay: family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0/A4/104729",
+      "name": "duplicate_reservation_rejected",
+      "pass": true
+    },
+    {
+      "name": "interrupt_before_consume_keeps_reservation",
+      "pass": true
+    },
+    {
+      "name": "one_time_consume",
+      "pass": true
+    },
+    {
+      "error": "One-time consume already used: family:8db79498b4178af177088fb721098bf593f989d8633ae32abbabe82b3afde557:case-0/A4/104729",
+      "name": "silent_replay_rejected",
+      "pass": true
+    },
+    {
+      "error": "Scientific dispatch refused: LA-032 readiness is incomplete",
+      "name": "scientific_dispatch_refused",
+      "pass": true
+    },
+    {
+      "error": "Final identities remain sealed",
+      "name": "final_seal_holds_without_constructed_flag",
+      "pass": true
+    },
+    {
+      "error": "Exclusive owner is alive: pid:2094316",
+      "name": "second_live_owner_rejected",
+      "pass": true
+    },
+    {
+      "name": "stale_owner_reconciled",
+      "pass": true
+    }
+  ],
+  "constructed_development": true,
+  "created_at": "2026-09-14T12:04:36.488494+00:00",
+  "failed": [],
+  "model_calls": 0,
+  "schema": "la-generated-code-driver-probes/v1",
+  "scientific_cells_executed": 0,
+  "status": "PASS"
+}

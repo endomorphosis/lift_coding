@@ -1,0 +1,31 @@
+{"phase": "tokenized", "documents": 2043, "windows": 21803, "all_tokens_covered": 4983704, "cpu_threads": 2, "memory_limit_bytes": 17179869184}
+You're using a BertTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+{"phase": "embedding", "windows_completed": 32, "elapsed_seconds": 1.45}
+{"phase": "embedding", "windows_completed": 832, "elapsed_seconds": 28.42}
+{"phase": "embedding", "windows_completed": 1632, "elapsed_seconds": 57.24}
+{"phase": "embedding", "windows_completed": 2432, "elapsed_seconds": 84.29}
+{"phase": "embedding", "windows_completed": 3232, "elapsed_seconds": 112.15}
+{"phase": "embedding", "windows_completed": 4032, "elapsed_seconds": 139.54}
+{"phase": "embedding", "windows_completed": 4832, "elapsed_seconds": 167.16}
+{"phase": "embedding", "windows_completed": 5632, "elapsed_seconds": 194.57}
+{"phase": "embedding", "windows_completed": 6432, "elapsed_seconds": 221.92}
+{"phase": "embedding", "windows_completed": 7232, "elapsed_seconds": 248.72}
+{"phase": "embedding", "windows_completed": 8032, "elapsed_seconds": 275.81}
+{"phase": "embedding", "windows_completed": 8832, "elapsed_seconds": 302.67}
+{"phase": "embedding", "windows_completed": 9632, "elapsed_seconds": 329.9}
+{"phase": "embedding", "windows_completed": 10432, "elapsed_seconds": 355.72}
+{"phase": "embedding", "windows_completed": 11232, "elapsed_seconds": 379.62}
+{"phase": "embedding", "windows_completed": 12032, "elapsed_seconds": 403.69}
+{"phase": "embedding", "windows_completed": 12832, "elapsed_seconds": 427.87}
+{"phase": "embedding", "windows_completed": 13632, "elapsed_seconds": 452.13}
+{"phase": "embedding", "windows_completed": 14432, "elapsed_seconds": 476.88}
+{"phase": "embedding", "windows_completed": 15232, "elapsed_seconds": 502.23}
+{"phase": "embedding", "windows_completed": 16032, "elapsed_seconds": 527.31}
+{"phase": "embedding", "windows_completed": 16832, "elapsed_seconds": 551.94}
+{"phase": "embedding", "windows_completed": 17632, "elapsed_seconds": 576.19}
+{"phase": "embedding", "windows_completed": 18432, "elapsed_seconds": 600.64}
+{"phase": "embedding", "windows_completed": 19232, "elapsed_seconds": 625.54}
+{"phase": "embedding", "windows_completed": 20032, "elapsed_seconds": 649.68}
+{"phase": "embedding", "windows_completed": 20832, "elapsed_seconds": 673.82}
+{"phase": "embedding", "windows_completed": 21632, "elapsed_seconds": 697.73}
+{"completed_at": "2026-09-11T18:10:54.275357+00:00", "component_base_group_count_histogram": {"1": 23, "2": 3, "4": 1, "49": 1}, "component_size_histogram": {"1": 1, "2": 2, "3": 3, "4": 3, "5": 2, "6": 2, "7": 1, "8": 2, "10": 3, "11": 2, "15": 1, "25": 1, "27": 1, "28": 1, "29": 1, "58": 1, "1738": 1}, "components_after_full_graph_union": 28, "cross_lexical_component_window_edges": 1417, "eligible_source_records": 2043, "floor_possible_before_split_assignment": true, "fulltext_windows": 21803, "grouping_plan_sha256": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa", "independence_and_screen_limit": "Fixed lexical and pretrained-encoder screens are operational detection tests, not proof that every semantic paraphrase or statistical dependence has been removed. Four macro-editions remain correlated; graph components cannot be relabeled as independently sampled corpora.", "labels_read": false, "private_encoder_artifact_sha256": "8ac1cda209c1af666d3bb0ead530a0ada613ec1e6500b353edbbf23fe200a45a", "private_graph_sha256": "b987f4d47aa82932e7b160e3d14542364a219aee4cc7e4ab8b600bb536609319", "purpose": "Preseal fixed source-grouping screen only; no semantic labels, source fidelity scoring, compiler targets, model fitting or outcome inspection", "required_final_test_groups": 20, "required_final_test_natural_units": 100, "schema": "af004-fixed-encoder-grouping-audit/v1", "script_sha256": "a3b11fb9a4df81cab24b272929431f195ad46d999630448c8e1414b21a74764b", "source_sha256": "66cc0653052512a3279cb9a530ad90b85f183ae201d74b0f930d0534a7ff9bdb", "source_text_printed": false, "started_at": "2026-09-11T17:58:59.155015+00:00", "tokens_covered": 4983704}

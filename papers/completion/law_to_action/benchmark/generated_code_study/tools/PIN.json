@@ -1,0 +1,24 @@
+{
+  "extracted_from": "apt-get download elfutils",
+  "files": {
+    "eu-readelf": {
+      "bytes": 658168,
+      "mode": "0o100755",
+      "sha256": "86763485e545dbf50cc8df14b0349b28f3257b23afd5885a210729fa3a285b77"
+    },
+    "fixtures/sample.so": {
+      "bytes": 69240,
+      "mode": "0o100775",
+      "sha256": "7756ffcae6d9a8cdebf968057e07de24b51ad7bbe9ece20985acea9b0ec3e816"
+    },
+    "fixtures/sample;marker.so": {
+      "bytes": 69240,
+      "mode": "0o100775",
+      "sha256": "7756ffcae6d9a8cdebf968057e07de24b51ad7bbe9ece20985acea9b0ec3e816"
+    }
+  },
+  "host_path_not_required": true,
+  "notes": "Pinned host-local eu-readelf for constructed run_program argv qualification. Not a scientific 900-cell result.",
+  "package": "elfutils 0.190-1.1ubuntu0.1 arm64",
+  "schema": "la032-eu-readelf-pin/v1"
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "domain": "intent_ir",
+    "repository_id": "Publicus/intent-ir-autoencoder",
+    "main_revision": "d12dd68fcc54441ded09ed217526e02b7bdfd9e3",
+    "exact_release_files_verified": [
+      "authored-corpus.json",
+      "checkpoint.json"
+    ]
+  },
+  {
+    "domain": "legal_ir",
+    "repository_id": "Publicus/legal-ir-autoencoder",
+    "main_revision": "51c21af74109d375560d715363019c4c853dc831",
+    "exact_release_files_verified": [
+      "checkpoint.json",
+      "parent-legal-head.json"
+    ]
+  },
+  {
+    "domain": "security_ir",
+    "repository_id": "Publicus/security-ir-autoencoder",
+    "main_revision": "9ec76c511c120886e4eff843d8ba4de736acfb38",
+    "exact_release_files_verified": [
+      "authored-corpus.json",
+      "checkpoint.json"
+    ]
+  },
+  {
+    "domain": "ui_ux_ir",
+    "repository_id": "Publicus/ui-ux-ir-autoencoder",
+    "main_revision": "625a1f968fdfcdfc75fc38e1d7eecd16b07a2cf5",
+    "exact_release_files_verified": [
+      "authored-corpus.json",
+      "checkpoint.json"
+    ]
+  }
+]

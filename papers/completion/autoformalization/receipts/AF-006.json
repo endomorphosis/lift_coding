@@ -1,0 +1,195 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-006",
+  "status": "complete",
+  "completed_at": "2026-09-11T18:37:05.208101+00:00",
+  "source_versions": {
+    "historical_reference_suite": {
+      "status": "not_recovered",
+      "evidence": "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/evidence/reference_provenance.json",
+      "boundary": "The manuscript's reported Table 4 output is not represented as a newly executed or recovered historical result."
+    },
+    "new_reference_reconstruction": {
+      "language": "Python 3.12.3",
+      "implementation_sha256": "a0b10baf23b8800b831ee6b7ca8e05a8418f6741c75d8cfeb647d420a057e282",
+      "standard_library_only": true,
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evaluation/reference_semantics.py",
+      "revision": "AF-006 computed-outcome-correction/v1"
+    },
+    "minimal_pair_witnesses": {
+      "sha256": "7c7ad5f7ce7da2fda456982e903fe9a5e819fe54d354fac880362dbccb4a0a30",
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/data/minimal_pairs.jsonl",
+      "annotation_status": "independently specified constructed witnesses; not independent human review"
+    },
+    "prior_completed_receipt": {
+      "sha256": "870736eef0e2058edbec2c6fc5eae9b67e2450e32419157159206ff3dac69180",
+      "snapshot": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/previous-receipt.json",
+      "implementation_commit": "b255e2b6b188a7ad05270576a168f55cfc3c48f0",
+      "merge_commit": "72dc678ee7698a76a8e9d9f8217bfdb4feb3c4f2",
+      "disposition": "preserved historical execution and superseded assurance; not fresh validation"
+    },
+    "independent_finite_validator": {
+      "source": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/validate_computed_semantics.py",
+      "sha256": "c77cae2cb4367fa5f2fabae9edc3d35134d00fa54542b3bf227e6d0d3a1e5137",
+      "boundary": "separate finite encodings and semantic mutations; no empirical benchmark or independent human annotation"
+    }
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/evaluation/reference_semantics.py": "761e0fc52fabff7fa2030368a5f802fee8c415cfb852a0aab685b25d03ddccf8",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/evaluation/reference_results.json": "229fe00babb413253bba24f0f789b5cc2eab645c5403f85157a5a36161c79c80",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/data/minimal_pairs.jsonl": "7c7ad5f7ce7da2fda456982e903fe9a5e819fe54d354fac880362dbccb4a0a30",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/evidence/reference_provenance.json": "d53f82c8b0ea4215b7385f3d683c00b0cb913cf14ce5246b9f3afc0698e00607",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/logs/reference_semantics.stdout.log": "87f89978ec6ce3acbd22ceb08cbaefbaedd227106719eaa18f6e5ae671686bcf",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/logs/reference_semantics.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/logs/structural_validation.stdout.log": "ba53437f3ea651c8968d6b8a6a7d04e3b676f81b08f0a5fab9c6f585355d6d22",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/logs/structural_validation.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/audit/validation-attempt-1/actual-commands.json": "15eeb6c614ee84d46664289f73efaca4d072f96dcf9acbbb7d26425e795235be",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/audit/validation-attempt-1/independent_validation.stderr.log": "95e6ddcffec3779c5c9ab51d4011ed48ff2a463dbdae2211f330927dce1b5eb6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/audit/validation-attempt-1/independent_validation.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/audit/validation-attempt-1/validate_computed_semantics.py": "ed4f6f35c07656175e75d4a69e6a58f3705c88de18bfbb5d9c65bb8d8236da4a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/correction-audit.json": "fff8c5d339886990a5dec9b41d64d2108cb12c116af0d63f8a2b11e86eec707a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evaluation/reference_results.json": "993064ed72790c86ee032d01e62bb779f5dcbee02755d55dcc355ce0f7560b31",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evaluation/reference_semantics.py": "a0b10baf23b8800b831ee6b7ca8e05a8418f6741c75d8cfeb647d420a057e282",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evidence/reference_provenance.json": "72b3c58008ebac16f9cad94139d5e7ce2edaf3e10590b79ccc80f682f5abaeaf",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/independent_validation.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/independent_validation.stdout.log": "29b6e5cf5aaa5d3f37b7cfb90d09cab33cc0d78cc12210573514eb5221a3405f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/previous-receipt.json": "870736eef0e2058edbec2c6fc5eae9b67e2450e32419157159206ff3dac69180",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/reconstruction.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/reconstruction.stdout.log": "7520b642af82aace13f5776fdaa519206a4b09a42251f1c90f00e36bb6dd42e9",
+    "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/validate_computed_semantics.py": "c77cae2cb4367fa5f2fabae9edc3d35134d00fa54542b3bf227e6d0d3a1e5137"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evaluation/reference_semantics.py": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evaluation/reference_semantics.py",
+    "papers/completion/autoformalization/evaluation/reference_results.json": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evaluation/reference_results.json",
+    "papers/completion/autoformalization/data/minimal_pairs.jsonl": "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/data/minimal_pairs.jsonl",
+    "papers/completion/autoformalization/evidence/reference_provenance.json": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evidence/reference_provenance.json"
+  },
+  "criteria": [
+    {
+      "criterion": "All twelve checks retain enumerated case counts, expected logical outcomes and actual outputs; any mismatch updates the claim.",
+      "status": "met",
+      "explanation": "Every C01-C12 match now compares actual computed values and actual enumeration counts to frozen expectations. All twelve finite checks pass and an independently implemented backward temporal recurrence reproduces26 disagreements over64 trace pairs. Twelve semantic/enumeration mutations provoke rejection across every check; changing only an expected value leaves the actual observation unchanged and fails. The CLI retains mismatches with nonzero exit rather than echoing expected text.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evaluation/reference_semantics.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evaluation/reference_results.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/validate_computed_semantics.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/independent_validation.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/correction-audit.json"
+      ]
+    },
+    {
+      "criterion": "Every minimal-pair family has an independently specified distinction and expected supported/unsupported behavior.",
+      "status": "met",
+      "explanation": "The twelve constructed conformance families and their separate distinctions, supported/unsupported expectations and explicit witnesses are retained byte-identically (SHA7c7ad5f7...) from the original snapshot. The fresh validator checks this digest, family uniqueness and record contract. This is constructed specification, not independent human annotation or measured candidate accuracy.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/data/minimal_pairs.jsonl",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/validate_computed_semantics.py",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/independent_validation.stdout.log"
+      ]
+    },
+    {
+      "criterion": "Recovered historical output and newly executed output are not conflated; no unbounded soundness claim is inferred.",
+      "status": "met",
+      "explanation": "Original manuscript-era program, historical JSON and execution log remain unrecovered. Prior worker receipt/commands/eight snapshots remain immutable as an earlier reconstruction with deficient outcome checking. Fresh execution and correction provenance are separate; no compiler/model/prover, natural-distribution or unbounded soundness claim is inferred.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evidence/reference_provenance.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/previous-receipt.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/correction-audit.json"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/bin:/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/evaluation/reference_semantics.py",
+        "--output",
+        "papers/completion/autoformalization/evaluation/reference_results.json"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/evaluation/reference_semantics.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/reconstruction.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/reconstruction.stderr.log",
+      "started_at": "2026-09-11T18:35:37.050531+00:00",
+      "finished_at": "2026-09-11T18:35:37.097171+00:00",
+      "execution_kind": "fresh staged finite reconstruction"
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/bin:/bin",
+        "HOME=/tmp",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/validate_computed_semantics.py",
+        "--root",
+        "."
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/validate_computed_semantics.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/independent_validation.stdout.log",
+      "stderr_log": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/independent_validation.stderr.log",
+      "started_at": "2026-09-11T18:35:37.097408+00:00",
+      "finished_at": "2026-09-11T18:35:37.177353+00:00",
+      "execution_kind": "fresh independent finite encoding, immutable-history and semantic-mutation validation"
+    }
+  ],
+  "limitations": [
+    "The manuscript-era reference program, historical JSON output, and historical execution log remain unrecovered.",
+    "The result is generated by the same finite reconstruction program and is not an independent assurance certificate.",
+    "No unbounded soundness, compiler fidelity, learned-model accuracy, backend proof, or held-out natural-distribution result is claimed.",
+    "The adversarial witnesses are constructed conformance cases; they are not independently reviewed human annotations.",
+    "Separate reviewer finite encodings and mutation tests provide bounded executable cross-checks, not independent human scientific validation.",
+    "Prior outcome-echo assurance is superseded; original evidence has not been rewritten.",
+    "No live supervisor workspace, lane or native lifecycle state is changed by this staged candidate."
+  ],
+  "completion_scope": "Corrected finite conformance reconstruction and immutable evidence only. All twelve cases and fixed constructed distinctions remain; pending paper experiments and source admission obligations remain open.",
+  "historical_commands": {
+    "source_receipt": "papers/completion/autoformalization/receipts/snapshots/AF-006/computed-outcome-correction/previous-receipt.json",
+    "receipt_sha256": "870736eef0e2058edbec2c6fc5eae9b67e2450e32419157159206ff3dac69180",
+    "commands": [
+      {
+        "argv": [
+          "env",
+          "-i",
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+          "HOME=/tmp",
+          "PYTHONDONTWRITEBYTECODE=1",
+          "/usr/bin/python3.12",
+          "papers/completion/autoformalization/evaluation/reference_semantics.py",
+          "--output",
+          "papers/completion/autoformalization/evaluation/reference_results.json"
+        ],
+        "cwd": ".",
+        "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/evaluation/reference_semantics.py",
+        "exit_code": 0,
+        "log": "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/logs/reference_semantics.stdout.log",
+        "started_at": "2026-09-11T18:22:00+00:00",
+        "finished_at": "2026-09-11T18:22:01+00:00",
+        "scope": "New standard-library finite reconstruction only; the command neither accesses the unrecovered historical suite nor invokes project modules, learned models, or external solvers."
+      },
+      {
+        "argv": [
+          "/usr/bin/python3.12",
+          "-c",
+          "import json; from pathlib import Path; b=Path('papers/completion/autoformalization'); r=json.loads((b/'evaluation/reference_results.json').read_text()); pairs=[json.loads(line) for line in (b/'data/minimal_pairs.jsonl').read_text().splitlines() if line]; p=json.loads((b/'evidence/reference_provenance.json').read_text()); expected=[512,32,72,1,1,64,1,1,4,16,3,1]; assert len(r['checks'])==12 and [c['case_count'] for c in r['checks']]==expected and all(c['match'] and c['expected_outcome']==c['actual_output']['outcome'] for c in r['checks']); assert r['summary']['strong_until_conjunction_disagreements']=={'numerator':26,'denominator':64}; assert len(pairs)==12 and len({x['family_id'] for x in pairs})==12 and all(x['independent_distinction']['specified_before_candidate_output'] and set(x['pair'])=={'supported','unsupported'} and set(x['expected_supported_unsupported_behavior'])=={'supported','unsupported'} for x in pairs); assert p['historical_record']['status']=='reported_in_manuscript_but_program_and_result_not_recovered' and p['new_reconstruction']['status']=='executed_separately'; assert any('unbounded' in x for x in p['claim_limits']); print('AF-006 finite counts, independent minimal-pair contract, provenance separation: PASS')"
+        ],
+        "cwd": ".",
+        "exit_code": 0,
+        "log": "papers/completion/autoformalization/receipts/snapshots/AF-006/reference-reconstruction/logs/structural_validation.stdout.log",
+        "started_at": "2026-09-11T18:22:01+00:00",
+        "finished_at": "2026-09-11T18:22:01+00:00",
+        "scope": "Structural validation of exact finite counts, minimal-pair field contract, and historical/new provenance boundary."
+      }
+    ],
+    "interpretation": "Exact preserved historical command objects; not rerun against corrected current outputs and not proof of the corrected results."
+  }
+}

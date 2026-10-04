@@ -1,0 +1,258 @@
+{
+  "historical_branch_tip_verification": [
+    {
+      "repo": ".",
+      "published_head": "88440bfe56bc7bd54b1fb3973b9f26a845697263",
+      "cutoff_refs": 871,
+      "missing": []
+    },
+    {
+      "repo": "external/ipfs_datasets",
+      "published_head": "7800abcdf13c0a5d5aab1b5067a7c1b3d2add2e3",
+      "cutoff_refs": 969,
+      "missing": []
+    },
+    {
+      "repo": "external/ipfs_accelerate",
+      "published_head": "9e41265736d92acc33fa37d78b7364b823cb9fa8",
+      "cutoff_refs": 4808,
+      "missing": []
+    },
+    {
+      "repo": "external/ipfs_kit",
+      "published_head": "31dc1273134d4bd6b358220030f197dd6b456ef6",
+      "cutoff_refs": 2866,
+      "missing": []
+    },
+    {
+      "repo": "Mcp-Plus-Plus",
+      "published_head": "fd955a707b9d759072fea6e7717c0c5d2674af53",
+      "cutoff_refs": 1,
+      "missing": []
+    },
+    {
+      "repo": "hallucinate_app",
+      "published_head": "e951cafa8569ef3b6b29adf4ac9bbb61f4d00621",
+      "cutoff_refs": 7,
+      "missing": []
+    },
+    {
+      "repo": "swissknife",
+      "published_head": "14027d43818ca424b37e463d3a854ffeea6d0eb6",
+      "cutoff_refs": 20,
+      "missing": []
+    }
+  ],
+  "cleanup": {
+    "local_branches_removed": 27718,
+    "remote_branches_removed": 3748,
+    "stale_original_worktrees_removed": 17,
+    "retained": "Active, dirty, locked and artifact-bearing worktrees, occupied main branches, independent nested Git stores and post-inventory work"
+  },
+  "checkpoint_archive": {
+    "repository_id": "Publicus/autoencoder-decoder-checkpoints",
+    "revision": "4757bb7483e330afe90769b935975301c7df4fe7",
+    "distinct_checkpoint_objects_verified": 682,
+    "all_remote_sha256_and_sizes_verified": true,
+    "original_manifest_source_paths": 741,
+    "current_refresh_additional_or_changed_paths": 194,
+    "previous_refresh_revision": "1cf78fdd9508b761f4efdb837013540d71768292",
+    "private": true
+  },
+  "public_checkpoint_release_verification": [
+    {
+      "domain": "intent_ir",
+      "repository_id": "Publicus/intent-ir-autoencoder",
+      "main_revision": "d12dd68fcc54441ded09ed217526e02b7bdfd9e3",
+      "exact_release_files_verified": [
+        "authored-corpus.json",
+        "checkpoint.json"
+      ]
+    },
+    {
+      "domain": "legal_ir",
+      "repository_id": "Publicus/legal-ir-autoencoder",
+      "main_revision": "51c21af74109d375560d715363019c4c853dc831",
+      "exact_release_files_verified": [
+        "checkpoint.json",
+        "parent-legal-head.json"
+      ]
+    },
+    {
+      "domain": "security_ir",
+      "repository_id": "Publicus/security-ir-autoencoder",
+      "main_revision": "9ec76c511c120886e4eff843d8ba4de736acfb38",
+      "exact_release_files_verified": [
+        "authored-corpus.json",
+        "checkpoint.json"
+      ]
+    },
+    {
+      "domain": "ui_ux_ir",
+      "repository_id": "Publicus/ui-ux-ir-autoencoder",
+      "main_revision": "625a1f968fdfcdfc75fc38e1d7eecd16b07a2cf5",
+      "exact_release_files_verified": [
+        "authored-corpus.json",
+        "checkpoint.json"
+      ]
+    }
+  ],
+  "docker": [
+    {
+      "context": "default",
+      "returncode": 0,
+      "containers": [],
+      "error": null
+    },
+    {
+      "context": "rootless",
+      "returncode": 0,
+      "containers": [
+        {
+          "Command": "\"sh -c 'sleep infini\u2026\"",
+          "CreatedAt": "2026-10-04 05:44:52 +0000 UTC",
+          "ID": "0fc8e1b1ff3f",
+          "Image": "ipfs-native-deploy-1791092685-main",
+          "Labels": "com.docker.compose.config-hash=46cabfda25aed880a0012f97f8be404dee01096c3fc23833ceed179f341af8d5,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:a253bbaac4f57c571ba8b5ade71a2bc33a61da08299f3a993bf7cb3b9fba38c1,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/tmp/tmpw90lijz8/ipfs-native-deploy-1791092685-docker-compose-resources.json,/home/barberb/lift_coding/.venvs/terminal-bench-harbor/lib/python3.12/site-packages/harbor/environments/docker/docker-compose-build.yaml,/tmp/tmpatudi507/docker-compose-environment.json,/tmp/tmpdkbsxngf/docker-compose-mounts.json,com.docker.compose.project.working_dir=/home/barberb/lift_coding/.benchmarks/terminal-bench-2/fix-code-vulnerability/environment,com.docker.compose.project=ipfs-native-deploy-1791092685,com.docker.compose.service=main,com.docker.compose.version=5.0.1",
+          "LocalVolumes": "0",
+          "Mounts": "",
+          "Names": "ipfs-native-deploy-1791092685-main-1",
+          "Networks": "ipfs-native-deploy-1791092685_default",
+          "Platform": {
+            "architecture": "arm64",
+            "os": "linux"
+          },
+          "Ports": "",
+          "RunningFor": "1 second ago",
+          "Size": "4.1kB (virtual 565MB)",
+          "State": "running",
+          "Status": "Up 1 second"
+        }
+      ],
+      "error": null
+    }
+  ],
+  "captured_utc": "2026-10-04T05:49:17.435621+00:00",
+  "submodule_main_pins": {
+    "external/ipfs_datasets": "b11f2514a0180fdbebb4bcd878beef21885cb7db",
+    "external/ipfs_accelerate": "00cd68b189bcdbab055d5b6def9b95dc0538fc0a",
+    "external/ipfs_kit": "31dc1273134d4bd6b358220030f197dd6b456ef6",
+    "Mcp-Plus-Plus": "fd955a707b9d759072fea6e7717c0c5d2674af53",
+    "hallucinate_app": "e951cafa8569ef3b6b29adf4ac9bbb61f4d00621",
+    "swissknife": "14027d43818ca424b37e463d3a854ffeea6d0eb6"
+  },
+  "source_publication": [
+    {
+      "repo": "ipfs_datasets",
+      "github": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "head": "b11f2514a0180fdbebb4bcd878beef21885cb7db",
+      "previous_main": "28b4a43c04e89c889b8fce7910e54fb8f67b05ff",
+      "returncode": 0,
+      "log": "/home/barberb/lift_coding/artifacts/reconciliation-20261004/ipfs_datasets-final-source-push.log",
+      "remote_main_verified": true
+    },
+    {
+      "repo": "ipfs_accelerate",
+      "github": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "head": "00cd68b189bcdbab055d5b6def9b95dc0538fc0a",
+      "previous_main": "e80fe6a59cacf4bb61386f0823cbd8545274173b",
+      "returncode": 0,
+      "log": "/home/barberb/lift_coding/artifacts/reconciliation-20261004/ipfs_accelerate-final-source-push.log",
+      "remote_main_verified": true
+    }
+  ],
+  "all_captured_branch_ref_verification": [
+    {
+      "repo": ".",
+      "published_main": "88440bfe56bc7bd54b1fb3973b9f26a845697263",
+      "captured_refs_checked": 7302,
+      "missing": []
+    },
+    {
+      "repo": "external/ipfs_datasets",
+      "published_main": "7800abcdf13c0a5d5aab1b5067a7c1b3d2add2e3",
+      "captured_refs_checked": 4941,
+      "missing": []
+    },
+    {
+      "repo": "external/ipfs_accelerate",
+      "published_main": "9e41265736d92acc33fa37d78b7364b823cb9fa8",
+      "captured_refs_checked": 9077,
+      "missing": []
+    },
+    {
+      "repo": "external/ipfs_kit",
+      "published_main": "31dc1273134d4bd6b358220030f197dd6b456ef6",
+      "captured_refs_checked": 6710,
+      "missing": []
+    },
+    {
+      "repo": "Mcp-Plus-Plus",
+      "published_main": "fd955a707b9d759072fea6e7717c0c5d2674af53",
+      "captured_refs_checked": 21,
+      "missing": []
+    },
+    {
+      "repo": "hallucinate_app",
+      "published_main": "e951cafa8569ef3b6b29adf4ac9bbb61f4d00621",
+      "captured_refs_checked": 37,
+      "missing": []
+    },
+    {
+      "repo": "swissknife",
+      "published_main": "14027d43818ca424b37e463d3a854ffeea6d0eb6",
+      "captured_refs_checked": 3687,
+      "missing": []
+    }
+  ],
+  "validation": {
+    "complete_suite_green": false,
+    "passing_focused_checks": {
+      "root_core": {
+        "passed": 56
+      },
+      "root_paper_boards_and_owners": {
+        "passed": 65,
+        "subtests_passed": 41
+      },
+      "datasets_scheduler": {
+        "passed": 144
+      },
+      "datasets_checkout_layout": {
+        "passed": 93
+      },
+      "accelerator_current_context": {
+        "passed": 40,
+        "skipped": 51
+      },
+      "ipfs_kit_semantic_world_store": {
+        "passed": 115
+      },
+      "concurrent_semantic_serialization": {
+        "passed": 114
+      }
+    },
+    "remaining_limits": [
+      {
+        "scope": "historical inventory lineage/reuse profiles",
+        "reason": "Exact reviewed producer hashes differ from the current merged producers; qualification guards remain fail-closed."
+      },
+      {
+        "scope": "historical paper mutation/migration workflows",
+        "reason": "The current closed Quack writer protocol refuses older generic mutation templates; permissions were not widened."
+      },
+      {
+        "scope": "live native proof suites",
+        "reason": "Actual memory stall reached 14.26% against a 2% admission limit; a shared live scheduler configuration also conflicted. Native positive-path qualification is incomplete."
+      }
+    ],
+    "broad_run_receipts": [
+      "datasets-source-validation-test-receipt.json",
+      "datasets-remaining-source-validation-test-receipt.json",
+      "datasets-final-optimizer-test-receipt.json",
+      "accelerator-source-validation-test-receipt.json",
+      "accelerator-final-remaining-test-receipt.json",
+      "root-working-source-final-test-receipt.json"
+    ]
+  }
+}

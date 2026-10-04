@@ -284,7 +284,7 @@ class CampaignTests(unittest.TestCase):
                 self.assertEqual({b["paper_id"] for b in snap["boards"]}, set(CAM.PAPERS))
                 self.assertEqual(len({b["store_identity"]["database_uuid"] for b in snap["boards"]}), 3)
                 for board in snap["boards"]:
-                    self.assertEqual(len(board["tasks"]), 25)
+                    self.assertEqual(len(board["tasks"]), {"autoformalization": 25, "law_to_action": 32, "neurosymbolic_supervision": 25}[board["paper_id"]])
                     self.assertIn(board["tasks"][0]["status"], {"ready", "blocked"})
                     self.assertTrue(board["goals"])
                 source = state / "snapshot.json"
@@ -294,7 +294,7 @@ class CampaignTests(unittest.TestCase):
                 self.assertFalse(result["authoritative"])
                 self.assertGreater(result["lake_snapshot_count"], 0)
                 self.assertEqual(set(result["boards"]), set(CAM.PAPERS))
-                self.assertTrue(all(b["current_task_rows"] == 25 for b in result["boards"].values()))
+                self.assertTrue(all(b["current_task_rows"] == {"autoformalization": 25, "law_to_action": 32, "neurosymbolic_supervision": 25}[paper] for paper, b in result["boards"].items()))
             finally:
                 errors = CAM.cleanup_children(children)
                 for _kind, process, _record in children:

@@ -1,0 +1,35 @@
+[
+  {
+    "context": "default",
+    "returncode": 0,
+    "containers": [],
+    "error": null
+  },
+  {
+    "context": "rootless",
+    "returncode": 0,
+    "containers": [
+      {
+        "Command": "\"sh -c 'sleep infini\u2026\"",
+        "CreatedAt": "2026-10-04 05:44:52 +0000 UTC",
+        "ID": "0fc8e1b1ff3f",
+        "Image": "ipfs-native-deploy-1791092685-main",
+        "Labels": "com.docker.compose.config-hash=46cabfda25aed880a0012f97f8be404dee01096c3fc23833ceed179f341af8d5,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:a253bbaac4f57c571ba8b5ade71a2bc33a61da08299f3a993bf7cb3b9fba38c1,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/tmp/tmpw90lijz8/ipfs-native-deploy-1791092685-docker-compose-resources.json,/home/barberb/lift_coding/.venvs/terminal-bench-harbor/lib/python3.12/site-packages/harbor/environments/docker/docker-compose-build.yaml,/tmp/tmpatudi507/docker-compose-environment.json,/tmp/tmpdkbsxngf/docker-compose-mounts.json,com.docker.compose.project.working_dir=/home/barberb/lift_coding/.benchmarks/terminal-bench-2/fix-code-vulnerability/environment,com.docker.compose.project=ipfs-native-deploy-1791092685,com.docker.compose.service=main,com.docker.compose.version=5.0.1",
+        "LocalVolumes": "0",
+        "Mounts": "",
+        "Names": "ipfs-native-deploy-1791092685-main-1",
+        "Networks": "ipfs-native-deploy-1791092685_default",
+        "Platform": {
+          "architecture": "arm64",
+          "os": "linux"
+        },
+        "Ports": "",
+        "RunningFor": "1 second ago",
+        "Size": "4.1kB (virtual 565MB)",
+        "State": "running",
+        "Status": "Up 1 second"
+      }
+    ],
+    "error": null
+  }
+]

@@ -105,32 +105,26 @@ def remote_readiness(server, *, exercise_rollback=True):
         task_count = int(connection.execute("SELECT count(*) FROM tasks").fetchone()[0])
         rollback_checked = False
         if exercise_rollback:
-            sample_id = "paper-readiness:" + uuid.uuid4().hex
+            # The current Quack attachment is a read-only replica. Exercise
+            # rollback of its read transaction; canonical writes use the
+            # authenticated exclusive-owner mutation protocol.
             connection.execute("BEGIN TRANSACTION")
             try:
-                connection.execute(
-                    "INSERT INTO health_samples(sample_id, subject_kind, subject_id, observed_at, status, body_json) "
-                    "VALUES (?, ?, ?, ?, ?, ?)",
-                    [sample_id, "paper-owner-readiness", identity.server_id, _now(), "before", "{}"],
-                )
-                connection.execute("UPDATE health_samples SET status = ? WHERE sample_id = ?", ["after", sample_id])
-                observed = connection.execute("SELECT status FROM health_samples WHERE sample_id = ?", [sample_id]).fetchone()
-                if observed is None or observed[0] != "after":
-                    raise RuntimeError("remote transaction did not observe its own update")
+                observed = connection.execute("SELECT count(*) FROM tasks").fetchone()[0]
+                if observed != task_count:
+                    raise RuntimeError("remote readiness read snapshot differs")
             finally:
                 connection.execute("ROLLBACK")
-            absent = connection.execute("SELECT count(*) FROM health_samples WHERE sample_id = ?", [sample_id]).fetchone()[0]
-            if absent != 0:
-                raise RuntimeError("remote rollback did not remove readiness-only health sample")
             independent = connect(identity.listen_uri, token=token)
             try:
-                if independent.execute("SELECT count(*) FROM health_samples WHERE sample_id = ?", [sample_id]).fetchone()[0] != 0:
-                    raise RuntimeError("independent remote connection observed rolled-back readiness sample")
+                if independent.execute("SELECT count(*) FROM tasks").fetchone()[0] != task_count:
+                    raise RuntimeError("independent remote readiness snapshot differs")
             finally:
                 independent.close()
             rollback_checked = True
         result = {"network_query": True, "identity_checked": True, "task_count": task_count,
-                  "rollback_checked": rollback_checked, "checked_at": _now()}
+                  "rollback_checked": rollback_checked, "rollback_scope": "read-only-transport",
+                  "write_probe_performed": False, "checked_at": _now()}
         server._vault.assert_absent_from(result, surface_name="paper remote readiness")
         return result
     finally:

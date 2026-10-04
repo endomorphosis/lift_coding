@@ -1,0 +1,22 @@
+{
+  "schema": "af004-source-unit-accounting-addendum/v1",
+  "recorded_at": "2026-09-11T18:08:34.151251+00:00",
+  "grouping_plan_sha256": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa",
+  "status": "before_partition_assignment_and_before_any_scored_model_outcomes",
+  "observation": {
+    "eligible_source_records": 2043,
+    "unique_normalized_source_texts": 2035,
+    "exact_normalized_alias_records": 8
+  },
+  "rule": "Use the already fixed normalized-source identity to count unique natural source units and enforce100final-test units. Retain all alias provenance, but aliases never inflate annotation/evaluation denominators; select lexicographically first record identity per normalized source unit as canonical representative. This normalization is conservative identity accounting, not semantic equivalence adjudication.",
+  "unchanged": [
+    "graph thresholds",
+    "whole-part/chapter grouping",
+    "source edition identities",
+    "seed",
+    "one-shot private HMAC order",
+    "20-final-group minimum",
+    "minimum3development groups"
+  ],
+  "labels_or_outcomes_inspected": false
+}
