@@ -1,0 +1,307 @@
+{
+  "HEAD_after": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+  "HEAD_before": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+  "counts": {
+    "file_entries": 45,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      "D.": 45
+    },
+    "ahead/behind_cached_main": null,
+    "branch": "master",
+    "dirty_children": [],
+    "id": 123,
+    "origin": "github.com/endomorphosis/Eng-DCEC",
+    "parent": 112,
+    "relative": "ipfs_datasets_py/logic/CEC/Eng-DCEC",
+    "tracked": 45,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs.lisp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "css/bootstrap-theme.min.css"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "css/bootstrap.min.css"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "gf/CatEng.gf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "gf/DCEC.gf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "gf/DCECExt.gf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "gf/DCECExt.pgf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "gf/Eng.gf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "gf/EngExt.gf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "html/datacollect.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "html/simple.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "js/bootstrap.min.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "js/jquery-2.1.1.min.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "lisp/interface.lisp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "lisp/packages.lisp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "lisp/transform.lisp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "lisp/utils.lisp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "lisp/www.lisp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "loader.lisp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/DCECExt_o.gf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/EngExt_o.gf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/GF-extendor_instr.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/GF-loader_instr.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/GF_extendor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Extendor copies/agents.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Extendor copies/binAT_wo_spaces.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Extendor copies/irregular_transitive_verbs.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Extendor copies/irregular_verbs.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Extendor copies/transitive_verbs.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Extendor copies/transitve_w_spaces.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/adjectives.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/agents.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/intransitive_verbs.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/intransitive_w_spaces.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/irregular_transitive_verbs.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/irregular_verbs.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/nouns.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/transitive_verbs.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/Word Copies/Loader copies/transitive_w_spaces.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/input.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/Easy extension/loader.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/EngDCEC.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "python/EngDCEC.pyc"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 1771919,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-123/head.patch",
+      "public_derivative": {
+        "bytes": 1771919,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-123/head.public.patch",
+        "sha256": "fd91acd89e1ae73ef79c90f0bba461f08e38d376e07848ad16b25f83ab3422e5"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "fd91acd89e1ae73ef79c90f0bba461f08e38d376e07848ad16b25f83ab3422e5"
+    },
+    {
+      "bytes": 1771919,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-123/index.patch",
+      "public_derivative": {
+        "bytes": 1771919,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-123/index.public.patch",
+        "sha256": "fd91acd89e1ae73ef79c90f0bba461f08e38d376e07848ad16b25f83ab3422e5"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "fd91acd89e1ae73ef79c90f0bba461f08e38d376e07848ad16b25f83ab3422e5"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-123/unstaged.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-123/unstaged.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 1810,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-123/status-after.z",
+    "sha256": "78525f0622bcc0b6bae1b9f8fde50ac8c57cddf9649ce1df131985edcdab8742"
+  },
+  "status_before": {
+    "bytes": 1810,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-123/status-before.z",
+    "sha256": "78525f0622bcc0b6bae1b9f8fde50ac8c57cddf9649ce1df131985edcdab8742"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC"
+}

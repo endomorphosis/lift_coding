@@ -1,0 +1,177 @@
+{
+  "40_exact_historical_variants_retained_as_newer_published_origin": true,
+  "commit": "c2b25b7a274acda4ceac924abc9d6f9fc8fb1be0",
+  "current_local_variants_archived": true,
+  "explicit_exclusions": [
+    {
+      "path": "artifacts/container_coding_qualification/full_daemon/facade-init.txt",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/full_daemon/repo/",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/full_daemon/state/.benchmark_events.jsonl.lock",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/full_daemon/state/.implementation.lock.update.lock",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/full_daemon/state/benchmark_events.jsonl",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/full_daemon/state/worktrees/.pool-state/.ac2f2bcddbb0-5b2c393bca2c.lock.update.lock",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/full_daemon/state/worktrees/workspace_8c7c977bc41f_f33772c7d0a8/",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/full_daemon/state/worktrees/workspace_ac2f2bcddbb0_5b2c393bca2c/",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/image-id.txt",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/router-grok-pilot-v2.md",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/source-head.txt",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "artifacts/container_coding_qualification/source-status.txt",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "data/agent_supervisor/.control-transaction.lock",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "data/agent_supervisor/control-audit.jsonl",
+      "reason": "runtime state, effect receipts or nested runtime checkout; separate artifact publication scope"
+    },
+    {
+      "path": "tasks.todo.md",
+      "reason": "empty untracked file has no source/documentation content"
+    },
+    {
+      "path": "large weights and runtime qualification artifact trees",
+      "reason": "separate Hugging Face publication scope"
+    }
+  ],
+  "failed_operations": [
+    {
+      "operation": "empty first catalog cherry-pick",
+      "receipt": "local-catalog-cherry-pick-01.json"
+    },
+    {
+      "operation": "initial catalog equivalence assumption",
+      "receipt": "local-catalog-equivalence-precheck-failure-01.json"
+    },
+    {
+      "operation": "two bounded inspection assumptions corrected without original edits",
+      "receipt": "hunk-resolutions-01.json"
+    },
+    {
+      "operation": "one trailing blank line diff-check",
+      "receipt": "whitespace-resolution-01.json"
+    },
+    {
+      "operation": "first post-push status equality precheck",
+      "reason": "one concurrent new document appeared after the selected snapshot; original HEAD/index/all626 sources and original593 status records remain unchanged",
+      "returncode": 1
+    }
+  ],
+  "github_reported_rule_bypass": "GitHub accepted this authorized push while noting required documentation-gates status was expected. No new CI pass is claimed.",
+  "late_original_status_delta": [
+    {
+      "bytes": 6625,
+      "path": "docs/agent_supervisor/codebase_ir_span_deduplicated_input_guard_qualification.md",
+      "published_in_snapshot": false,
+      "sha256": "f5171cf0203d49a42642ea0bef0170e725ad9f807dc068d9249b9c5dfde62e65",
+      "status": "??"
+    }
+  ],
+  "merge_review": [
+    "hunk-resolutions-01.json",
+    "whole-file-semantic-resolution-02.json",
+    "whitespace-resolution-01.json"
+  ],
+  "nested_child_variant_included_exactly": true,
+  "nested_datasets_child_adapter_sha256": "a257e5b013854c6020f98dd97b1e79db73c09835c8501319417cbb2a4f70d3c4",
+  "ordinary_nonforce_push": true,
+  "original_593_status_records_retained_exactly": true,
+  "original_HEAD": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+  "original_HEAD_index_and_all_selected_source_bytes_unchanged": true,
+  "original_index_sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4",
+  "previous_remote_main": "02dc5e91a093b74e76f1f05c960ed8b939992449",
+  "published_new_or_changed_files": 98,
+  "remote_main": "c2b25b7a274acda4ceac924abc9d6f9fc8fb1be0",
+  "required_and_protected_exact_pins": [
+    {
+      "bytes": 23178,
+      "git_object": "47fea301d653a306a458b3510c7c7ace8b723fc8",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_requirement_grounding.py",
+      "sha256": "9d3c62d8e9b09c41ff9ae91798a7fca9cbc8f10c682af1fffc34f93547673076"
+    },
+    {
+      "bytes": 28202,
+      "git_object": "07f0a7be4a1e6ca823ed10dea702ba2e9d706390",
+      "path": "test/api/test_terminal_codebase_requirement_grounding.py",
+      "sha256": "56c461ab23473c73a874901c13c6082209e31decd4a062612e4877839cacbce9"
+    },
+    {
+      "bytes": 8004,
+      "git_object": "da53d9d2547d316eeec58e5fa8163c66ef2ce126",
+      "path": "docs/agent_supervisor/terminal_codebase_ir_requirement_grounding_qualification.md",
+      "sha256": "7e42659e980196c4ba75b02a6f61340e6f1376a1c7c569c721605474409c5dcb"
+    },
+    {
+      "bytes": 37444,
+      "git_object": "a440c1df8e37e1cc0bd487d3ebc3d71ee348bb61",
+      "path": "docs/architecture/repository_proof_index_and_codebase_ir.requirement_grounding_review.json",
+      "sha256": "fe0236cb2abf699d83a1cd7927b38af222670fac9f39ca5a0b46a194383e9efc"
+    },
+    {
+      "bytes": 33934,
+      "git_object": "0c1a2415ece4f135870f91a9ddcb322a7492e7f9",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_proof_query_join.py",
+      "sha256": "d6e4a6187036f5942f4637dd24bec65c1a90ed32c24e3b39e3759e653be03b79"
+    },
+    {
+      "bytes": 18129,
+      "git_object": "4dc3d9a8bb3dde9db7e8c3959c85e54836f0424d",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_admission.py",
+      "sha256": "2e5b0add5f19c1c31ad76dae67354d5bfadbfe59303a06590db14507c3abe7e4"
+    },
+    {
+      "bytes": 27488,
+      "git_object": "d70cc2a9fb7c6fd453461f834327fa0072f09e52",
+      "path": "test/api/test_finite_proof_query_admission.py",
+      "sha256": "6867188f535b6e24cf2a217b5d601a9d92446bff3ba382800e8664c6a0650de0"
+    },
+    {
+      "bytes": 22624,
+      "git_object": "ade27ebff1afe588941d885240a2ea62ca948525",
+      "path": "test/api/test_finite_proof_query_join.py",
+      "sha256": "d34cd489d69446bb4c88e6f8881fff44689cbf6c6944c1976fb411f77a06f890"
+    }
+  ],
+  "safe_catalog_commit_also_published": "c5e099195ef509503891a8a2b3df5739c8bf7ee6",
+  "schema": "accelerate-publication-closed@1",
+  "selected_sources_verified": 626,
+  "status": "selected_snapshot_published_and_verified_late_foreign_document_pending_root",
+  "url": "https://github.com/endomorphosis/ipfs_accelerate_py/commit/c2b25b7a274acda4ceac924abc9d6f9fc8fb1be0",
+  "utc": "2026-10-04T19:52:30.030922+00:00",
+  "validation": "AST/compile-only and JSON parsing, exact index/commit blob hashes, staged whitespace, source custody; prior focused tests retained; no new tests/fits/SQL/provers/workers.",
+  "worktree_retained": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/worktree"
+}

@@ -1,0 +1,1002 @@
+{
+  "HEAD_after": "e0b7650d3e3a403924773f8253e924c719748d36",
+  "HEAD_before": "e0b7650d3e3a403924773f8253e924c719748d36",
+  "counts": {
+    "file_entries": 184,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      "D.": 184
+    },
+    "ahead/behind_cached_main": null,
+    "branch": "master",
+    "dirty_children": [],
+    "id": 102,
+    "origin": "github.com/endomorphosis/Talos",
+    "parent": 92,
+    "relative": "ipfs_datasets_py/logic/CEC/Talos",
+    "tracked": 184,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "LICENSE"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/INSTALL"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/LICENCE"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/Makefile.am"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/Makefile.in"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/README"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/analyze.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/analyze.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/approx.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/approx.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/clause.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/clause.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/clock.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/clock.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/closure.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/closure.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/cmdline.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/cmdline.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/cnf.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/cnf.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/component.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/component.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/condensing.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/condensing.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/config.h.in"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/context.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/context.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/defs.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/defs.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/description.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/description.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfg.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfg2ascii.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfg2dfg.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfg2otter.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfg2tptp.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfgparser.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfgparser.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfgparser.y"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfgscanner.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/dfgscanner.l"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/doc-proof.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/doc-proof.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/eml.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/eml.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/flags.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/flags.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/foldfg.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/foldfg.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/graph.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/graph.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/hash.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/hash.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/hasharray.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/hasharray.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/hashmap.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/hashmap.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/ia.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/iaparser.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/iaparser.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/iaparser.y"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/iascanner.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/iascanner.l"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/kbo.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/kbo.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/list.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/list.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/memory.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/memory.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/misc.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/misc.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/order.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/order.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/partition.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/partition.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/proofcheck.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/proofcheck.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/ras.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/ras.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/renaming.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/renaming.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/resolution.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/resolution.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rpos.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rpos.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-inf.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-inf.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-red.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-red.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-sort.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-sort.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-split.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-split.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-ur.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/rules-ur.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/search.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/search.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/sharing.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/sharing.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/sort.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/sort.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/st.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/st.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/stack.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/stack.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/strings.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/strings.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/subst.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/subst.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/subsumption.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/subsumption.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/symbol.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/symbol.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/table.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/table.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tableau.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tableau.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/term.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/term.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/terminator.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/terminator.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/top.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tptp.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tptp2dfg.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tptpparser.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tptpparser.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tptpparser.y"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tptpscanner.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/tptpscanner.l"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/unify.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/unify.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/vector.c"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/vector.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/SPASS/version.h"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/VERSIONHISTORY"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/aclocal.m4"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/configure"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/configure.ac"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/handbook/handbook-spass.pdf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/LICENCE.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_1.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_2.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_3.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_4.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_5.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_6.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_7.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_abt.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/html/script_ovr.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/man/SPASS.1"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/man/dfg2ascii.1"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/man/dfg2dfg.1"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/man/dfg2otter.1"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/man/dfg2otter.pl.1"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/man/dfg2tptp.1"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/man/tptp2dfg.1"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/syntax/spass-input-syntax.pdf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/SPASS.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/dfg2ascii.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/dfg2dfg.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/dfg2otter.pl.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/dfg2otter.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/dfg2tptp.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/script.info"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/script.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/spassfaq.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/texinfo/tptp2dfg.texi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/doc/tutorial/tutorial.pdf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/examples/problem54.dfg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/m4/ac_prog_perl_version.m4"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/m4/compile"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/m4/depcomp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/m4/install-sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/m4/missing"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/m4/texinfo.tex"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/scripts/dfg2otter.pl.in"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SPASS-3.7/scripts/texi2pod.pl.in"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "outputParser.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "proofTree.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "talos.py"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 5262233,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-102/head.patch",
+      "public_derivative": {
+        "bytes": 5262233,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-102/head.public.patch",
+        "sha256": "3f3db02ca22c8816e2290f5ff25ff352aac618adeedc35824c338691d171ad39"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "3f3db02ca22c8816e2290f5ff25ff352aac618adeedc35824c338691d171ad39"
+    },
+    {
+      "bytes": 5262233,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-102/index.patch",
+      "public_derivative": {
+        "bytes": 5262233,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-102/index.public.patch",
+        "sha256": "3f3db02ca22c8816e2290f5ff25ff352aac618adeedc35824c338691d171ad39"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "3f3db02ca22c8816e2290f5ff25ff352aac618adeedc35824c338691d171ad39"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-102/unstaged.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-102/unstaged.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 5423,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-102/status-after.z",
+    "sha256": "7f327fa5de0ec6d6e83699e1a511f62ae84dc5360e816a01625fb21d81337993"
+  },
+  "status_before": {
+    "bytes": 5423,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-102/status-before.z",
+    "sha256": "7f327fa5de0ec6d6e83699e1a511f62ae84dc5360e816a01625fb21d81337993"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos"
+}

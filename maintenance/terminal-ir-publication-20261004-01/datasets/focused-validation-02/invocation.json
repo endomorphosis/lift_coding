@@ -1,0 +1,30 @@
+{
+  "schema": "datasets-isolated-publication-focused-validation@1",
+  "scope": "focused merged-code tests, not prior qualification transfer; no autoencoder fit/prover invocation authorized",
+  "tests": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_timeout_decision.py"
+  ],
+  "started_utc": "2026-10-04T19:56:25Z",
+  "argv": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "--junitxml=/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/focused-validation-02/junit.xml",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_timeout_decision.py"
+  ],
+  "before_source_pins": [
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_timeout_decision.py",
+      "bytes": 13908,
+      "sha256": "a722953599c4b298095bdf2bc849fccab9ceb04a31817aae57917aed33196e53"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "bytes": 109669,
+      "sha256": "0887be4827a877438f793552a1ea43cb36815ceced96ee51df11690576a66e8c"
+    }
+  ]
+}

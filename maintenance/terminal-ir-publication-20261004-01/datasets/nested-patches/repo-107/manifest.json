@@ -1,0 +1,23 @@
+{
+  "declared": {
+    "XY": {
+      ".M": 99
+    },
+    "ahead/behind_cached_main": "0/0",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 107,
+    "origin": "github.com/endomorphosis/common_crawl_search_engine",
+    "parent": 92,
+    "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+    "tracked": 99,
+    "untracked": 0
+  },
+  "errors": [
+    {
+      "error_type": "RuntimeError",
+      "message": "git command failed: ('rev-parse', 'HEAD') returncode=128"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+}

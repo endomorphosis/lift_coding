@@ -1,0 +1,33 @@
+{
+  "deleted_upstream_already": [
+    "docs/implementation/reports/SUPERVISOR_PARALLEL_REPAIR_20260928.md",
+    "docs/software_contracts/GIT_DECODER_PROFILES.md",
+    "docs/software_contracts/PAGED_RAW_FACTS_V1.md",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/CHUNKED_SNAPSHOTS.md",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/COMMITTED_SNAPSHOTS.md",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/PAGED_SNAPSHOT_EVIDENCE.md",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/STREAMING_SCANNER.md",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/chunked_snapshot.py",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/committed_snapshot.py",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/git_decoder_profile.py",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/paged_fact_scan.py",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/paged_fact_store.py",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/paged_fact_worker.py",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/paged_snapshot.py",
+    "ipfs_datasets_py/logic/software_contracts/semantic_index/streaming_scanner.py",
+    "tests/unit/logic/autoformal_repairs/test_817b9bac3966fbc1e819.py",
+    "tests/unit/logic/autoformal_repairs/test_e3b018a00ef13c0c927c.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_chunked_snapshot.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_committed_metadata_pack_memory.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_committed_metadata_thread_pressure.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_committed_snapshot.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_explicit_git_decoder_profile.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_paged_fact_io_faults.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_paged_fact_scan.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_paged_fact_store.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_paged_fact_worker.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_paged_snapshot.py",
+    "tests/unit/logic/software_contracts/semantic_index/test_streaming_scanner.py"
+  ],
+  "deleted_upstream_present": []
+}

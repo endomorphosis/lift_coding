@@ -1,0 +1,39 @@
+{
+  "batch_merge_owner_sha256": "8aec173c135351a62f97ee334f5a66aa1902dfa569f1caa9bb3f5c8f9f30001c",
+  "batch_merge_tests_scope": "Previously selected immutable batched merge owner; no new numerical or model tests.",
+  "content_sha256": "38f2fa5ec7a74687fd7702f8a6d214f3a7a6eaa0c611fd1444392520efc98865",
+  "helpers": [
+    {
+      "bytes": 13816,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/canonical_git/snapshot_root_current.py",
+      "sha256": "da8abef4289082999957da73a59cc140c5e3f9e6a8346b83d0e953df3ced5cd0"
+    },
+    {
+      "bytes": 6481,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/canonical_git/canonical_tree_pins_root_current.py",
+      "sha256": "5422253f2c77c56be259d0dc693c40e057b07594237cac5d696a9d19745cdbe7"
+    },
+    {
+      "bytes": 6598,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/canonical_git/prepare_root_current.py",
+      "sha256": "d21196da4bded3a34a398d5be32a72cbddc2dfcd8b1a051e8a21da573671b66c"
+    },
+    {
+      "bytes": 12310,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/canonical_git/restore_root_current.py",
+      "sha256": "c07f9efe926fef592466e6e29f14ebd266dab6c47f7607d4c59cfa99a3cc705a"
+    }
+  ],
+  "origin_push_executed": false,
+  "real_git_restoration_fixture": {
+    "active_precommit_hook_ran": true,
+    "adjacent_reference_and_unique_branch_addition_preserved": true,
+    "explicit_hf_payload_path_removed": true,
+    "full_current_source_restored": true,
+    "original_HEAD_and_index_preserved": true,
+    "zero_new_invalid_python": true
+  },
+  "ruff_passed": true,
+  "schema": "root-current-publication-helper-engineering-validation/v1",
+  "training_executed": false
+}

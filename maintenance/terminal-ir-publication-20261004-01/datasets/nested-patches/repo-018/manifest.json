@@ -1,0 +1,152 @@
+{
+  "HEAD_after": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+  "HEAD_before": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+  "counts": {
+    "file_entries": 4,
+    "regular_bytes_including_duplicates": 71681,
+    "regular_files": 1,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      ".M": 6149
+    },
+    "ahead/behind_cached_main": "0/7636",
+    "branch": "(detached)",
+    "dirty_children": [
+      "docs/fastmcp",
+      "docs/mcp-python-sdk",
+      "ipfs_accelerate_py/mcplusplus",
+      "ipfs_datasets_py",
+      "ipfs_kit_py",
+      "test/huggingface_transformers"
+    ],
+    "id": 18,
+    "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+    "parent": 4,
+    "relative": "ipfs_accelerate_py",
+    "tracked": 6149,
+    "untracked": 0
+  },
+  "errors": [
+    {
+      "error_type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/home/barberb/lift_coding/ipfs_accelerate_py/.pgir_campaign'",
+      "path": ".pgir_campaign/runtime/parallel/discovery/2026-08-17-pgir-114-pgir-030-retry-budget.md"
+    },
+    {
+      "error_type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/home/barberb/lift_coding/ipfs_accelerate_py/external'",
+      "path": "external/ipfs_accelerate"
+    },
+    {
+      "error_type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/home/barberb/lift_coding/ipfs_accelerate_py/external'",
+      "path": "external/ipfs_datasets"
+    },
+    {
+      "error_type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/home/barberb/lift_coding/ipfs_accelerate_py/external'",
+      "path": "external/ipfs_kit"
+    }
+  ],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "Mcp-Plus-Plus"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "hallucinate_app"
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1787205698783478723,
+        "device": 66306,
+        "inode": 4377518,
+        "mode": 33204,
+        "mtime_ns": 1787205698783478723,
+        "size": 71681
+      },
+      "before_stat": {
+        "ctime_ns": 1787205698783478723,
+        "device": 66306,
+        "inode": 4377518,
+        "mode": 33204,
+        "mtime_ns": 1787205698783478723,
+        "size": 71681
+      },
+      "bytes": 71681,
+      "category": "untracked",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/objects/82/82f7334dfd4a5707feea891eed8d3ca65e57be20efa75ec48f091ca6742bffc2",
+      "path": "agent_supervisor/analysis/mcp_contract_catalog.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "82f7334dfd4a5707feea891eed8d3ca65e57be20efa75ec48f091ca6742bffc2",
+      "stable": true
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 16747,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/repo-018/head.patch",
+      "public_derivative": {
+        "bytes": 16747,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/repo-018/head.public.patch",
+        "sha256": "b5a55a09307eaab238b697d71f3d42d99026ded5a0fca000f942cca73df8b6a6"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "b5a55a09307eaab238b697d71f3d42d99026ded5a0fca000f942cca73df8b6a6"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/repo-018/index.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/repo-018/index.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 16747,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/repo-018/unstaged.patch",
+      "public_derivative": {
+        "bytes": 16747,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/repo-018/unstaged.public.patch",
+        "sha256": "b5a55a09307eaab238b697d71f3d42d99026ded5a0fca000f942cca73df8b6a6"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "b5a55a09307eaab238b697d71f3d42d99026ded5a0fca000f942cca73df8b6a6"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/ipfs_accelerate_py",
+  "stable_all_files": true,
+  "stable_git_identity": false,
+  "status_after": {
+    "bytes": 41953854,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/repo-018/status-after.z",
+    "sha256": "8a8ccdbd2efab569e280235bb3ee2d225deddfc6b9e3925723940121dc2f177e"
+  },
+  "status_before": {
+    "bytes": 41953048,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches/repo-018/status-before.z",
+    "sha256": "b9d10003890eb6e725a5719dfa300dbe7be9bd5ef8764797c9f489bd58fb5f7b"
+  }
+}

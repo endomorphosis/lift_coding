@@ -105,33 +105,39 @@ def remote_readiness(server, *, exercise_rollback=True):
         task_count = int(connection.execute("SELECT count(*) FROM tasks").fetchone()[0])
         rollback_checked = False
         if exercise_rollback:
-            # The current Quack attachment is a read-only replica. Exercise
-            # rollback of its read transaction; canonical writes use the
-            # authenticated exclusive-owner mutation protocol.
+            sample_id = "paper-readiness:" + uuid.uuid4().hex
             connection.execute("BEGIN TRANSACTION")
             try:
-                observed = connection.execute("SELECT count(*) FROM tasks").fetchone()[0]
-                if observed != task_count:
-                    raise RuntimeError("remote readiness read snapshot differs")
+                connection.execute(
+                    "INSERT INTO health_samples(sample_id, subject_kind, subject_id, observed_at, status, body_json) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    [sample_id, "paper-owner-readiness", identity.server_id, _now(), "before", "{}"],
+                )
+                connection.execute("UPDATE health_samples SET status = ? WHERE sample_id = ?", ["after", sample_id])
+                observed = connection.execute("SELECT status FROM health_samples WHERE sample_id = ?", [sample_id]).fetchone()
+                if observed is None or observed[0] != "after":
+                    raise RuntimeError("remote transaction did not observe its own update")
             finally:
                 connection.execute("ROLLBACK")
+            absent = connection.execute("SELECT count(*) FROM health_samples WHERE sample_id = ?", [sample_id]).fetchone()[0]
+            if absent != 0:
+                raise RuntimeError("remote rollback did not remove readiness-only health sample")
             independent = connect(identity.listen_uri, token=token)
             try:
-                if independent.execute("SELECT count(*) FROM tasks").fetchone()[0] != task_count:
-                    raise RuntimeError("independent remote readiness snapshot differs")
+                if independent.execute("SELECT count(*) FROM health_samples WHERE sample_id = ?", [sample_id]).fetchone()[0] != 0:
+                    raise RuntimeError("independent remote connection observed rolled-back readiness sample")
             finally:
                 independent.close()
             rollback_checked = True
         result = {"network_query": True, "identity_checked": True, "task_count": task_count,
-                  "rollback_checked": rollback_checked, "rollback_scope": "read-only-transport",
-                  "write_probe_performed": False, "checked_at": _now()}
+                  "rollback_checked": rollback_checked, "checked_at": _now()}
         server._vault.assert_absent_from(result, surface_name="paper remote readiness")
         return result
     finally:
         connection.close()
 
 
-def serve(database, state_dir, store_id, secret_handle, port=0, *, worker_bootstrap_fd=None):
+def serve(database, state_dir, store_id, secret_handle, port=0):
     database, state_dir = Path(database).expanduser().resolve(), Path(state_dir).expanduser().resolve()
     if not database.is_file():
         raise ValueError("materialize the paper database before starting its owner")
@@ -151,32 +157,15 @@ def serve(database, state_dir, store_id, secret_handle, port=0, *, worker_bootst
     public = {"schema": "paper-quack-owner/v1", "ready": False, "database": str(database),
               "state_dir": str(state_dir), "checked_at": _now()}
     started = False
-    maintenance = None
     failure = None
     phase = "server_start"
     try:
         identity = server.start()
         started = True
-        if worker_bootstrap_fd is not None:
-            phase = "worker_authority_start"
-            handoff = server.start_supervisor_grant_broker(bootstrap_secret_fd=worker_bootstrap_fd)
-            public["worker_authority"] = {
-                "protocol": "native-typed-task-command/v1",
-                "socket_path": handoff["IPFS_ACCELERATE_AGENT_STATE_OWNER_SOCKET"],
-                "grant_broker_socket": handoff["IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SOCKET"],
-            }
         phase = "initial_local_readiness"
         server.ready()
         phase = "initial_remote_readiness"
         probe = remote_readiness(server)
-        if store_id in {"vericodegen-2026-" + paper for paper in
-                        ("autoformalization", "law_to_action", "neurosymbolic_supervision", "lean_refactor_arena")}:
-            phase = "initial_contract_maintenance"
-            import importlib.util
-            spec = importlib.util.spec_from_file_location("paper_owner_maintenance", ROOT / "scripts/paper_contract_maintenance.py")
-            module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
-            maintenance = module.OwnerMaintenance(server, state_dir)
         public.update({"ready": True, "quack_endpoint": identity.listen_uri,
                        "endpoint_secret_handle": identity.secret_handle,
                        "store_id": identity.store_id, "store_generation": str(identity.generation),
@@ -204,9 +193,6 @@ def serve(database, state_dir, store_id, secret_handle, port=0, *, worker_bootst
                 phase = "periodic_readiness_publication"
                 _atomic_json(ready_path, public)
                 last_remote_check = time.monotonic()
-            phase = "paper_contract_maintenance"
-            if maintenance is not None:
-                maintenance.poll()
             phase = "loop_sleep"
             time.sleep(0.25)
         return 0
@@ -226,11 +212,6 @@ def serve(database, state_dir, store_id, secret_handle, port=0, *, worker_bootst
         raise
     finally:
         try:
-            if maintenance is not None:
-                try:
-                    maintenance.close()
-                except OSError as cleanup_error:
-                    _emit_failure(_failure_diagnostics(cleanup_error, "maintenance_shutdown"))
             if started:
                 cleanup_phase = "server_stop"
                 try:
@@ -262,24 +243,8 @@ def main():
     parser.add_argument("--store-id", required=True)
     parser.add_argument("--secret-handle", required=True)
     parser.add_argument("--port", type=int, default=0)
-    parser.add_argument("--enable-worker-authority", action="store_true",
-                        help="Require a sealed bootstrap from the hardened parent handoff")
     args = parser.parse_args()
-    descriptor = None
-    if args.enable_worker_authority:
-        _native()
-        from ipfs_accelerate_py.agent_supervisor.runtime.process_security import harden_state_authority_process
-        harden_state_authority_process()
-        raw = os.environ.get("IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SECRET_FD", "")
-        if not raw.isascii() or not raw.isdecimal():
-            raise ValueError("worker authority requires its sealed parent handoff")
-        descriptor = int(raw)
-    try:
-        return serve(args.database, args.state_dir, args.store_id, args.secret_handle, args.port,
-                     worker_bootstrap_fd=descriptor)
-    finally:
-        if descriptor is not None:
-            os.close(descriptor)
+    return serve(args.database, args.state_dir, args.store_id, args.secret_handle, args.port)
 
 
 if __name__ == "__main__":

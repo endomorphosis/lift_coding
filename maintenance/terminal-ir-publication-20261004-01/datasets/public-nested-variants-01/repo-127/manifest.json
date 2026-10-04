@@ -1,0 +1,810 @@
+{
+  "HEAD_after": "5c7c2ab8a509073f39359b2a35446183855f460a",
+  "HEAD_before": "5c7c2ab8a509073f39359b2a35446183855f460a",
+  "counts": {
+    "file_entries": 145,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      "D.": 145
+    },
+    "ahead/behind_cached_main": "0/0",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 127,
+    "origin": "github.com/endomorphosis/common_crawl_search_engine",
+    "parent": 112,
+    "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+    "tracked": 145,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_cc_domain_search.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_cc_duckdb_search.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_cc_pointer_search.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_ccindex_parquet_vs_duckdb.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_domain_pointer_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_duckdb_domain.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_duckdb_pointer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_duckdb_pointer_domain.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_parallel_duckdb_indexes.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_results.json"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_rowgroup_slice.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "benchmarks/ccindex/benchmark_rowgroup_year_vs_collection.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/api.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/audit_parquet_shards.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_cc_parquet_rowgroup_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_cc_pointer_duckdb.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_domain_rowgroup_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_domain_rowgroup_year_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_duckdb_pointer_from_parquet.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_index_from_parquet.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_master_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_parallel_duckdb_indexes.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/build_year_meta_indexes.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/bulk_convert_gz_to_parquet.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/cc_domain_parquet_locator.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/cc_pipeline_hud.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/cc_pipeline_orchestrator.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/cc_pipeline_watch.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/cc_pointer_status.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/cli.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/convert_parquet_compression.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/dashboard.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/dashboard_app.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/download_warc_records.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/extract_cc_index_tarballs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/extract_from_cache.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/fetch_slice_plan.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/generate_repair_plan_from_audit.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/hf_datasets_adapter.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/hf_datasets_cli.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/launch_cc_pointer_build.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/mcp_server.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/monitor_cc_pointer_build.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/monitor_progress.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/orchestrator_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/parallel_convert_missing.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/parallel_validate_parquet.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/plan_pointers_from_csv.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/plan_pointers_from_jsonl.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/plan_slices_from_pointers.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/queue_cc_pointer_build.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/rebuild_legacy_parquet_collections.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/regenerate_parquet_from_gz.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/repair_legacy_parquet_columns.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/sample_ccindex_to_parquet.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/search_cc_domain.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/search_cc_duckdb_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/search_cc_pointer_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/search_cc_via_meta_indexes.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/search_parallel_duckdb_indexes.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/sort_cc_parquet_shards.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/sort_unsorted_memory_aware.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/static/ccindex-mcp-sdk.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/validate_and_mark_sorted.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/validate_and_sort_parquet.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/validate_collection_completeness.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/validate_search_completeness.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/validate_urlindex_sorted.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/validate_warc_record_blobs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/verify_warc_retrieval.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/warc_candidates_from_jsonl.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/watchdog_cc_pointer_build.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccindex/watchdog_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccsearch/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccsearch/brave_search.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccsearch/dashboard.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccsearch/mcp_server.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ccsearch/static/ccindex-mcp-sdk.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "cli.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "collinfo.json"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "conftest.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "dashboard.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "dashboard_e2e.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/CRITICAL_FINDINGS.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/NEW_SCRIPTS_SUMMARY.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/TEST_SUITE_DOCUMENTATION.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/TEST_SUITE_SUMMARY.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/CC_INDEX_DOWNLOAD_PLAN.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/CC_INDEX_SPECIFICATION.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/DUCKDB_INDEX_DESIGN.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/DUCKDB_INDEX_QUICKREF.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/DUCKDB_INDEX_STATUS.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/DUCKDB_POINTER_INDEX_COMPLETE.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/DUCKDB_POINTER_INDEX_COMPLETE.md.bak"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/DUCKDB_POINTER_TOOLS.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/HUGGINGFACE_DATASETS_INTEGRATION.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/INDEX_ARCHITECTURE.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/INDEX_HIERARCHY.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/INDEX_SYSTEM_SUMMARY.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/PARALLEL_DUCKDB_QUICKSTART.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/POINTER_INDEX_DESIGN.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/ccindex/WARC_REPLAY_AND_CACHING.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/CC_ORCHESTRATOR_README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/CC_PIPELINE_MANAGER_README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/COLLECTION_TRACKING_FEATURE.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/CONSOLIDATE_PARQUET_FILES.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/ORCHESTRATOR_FIXES.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/ORCHESTRATOR_REFACTORING.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/OVERNIGHT_BUILD_PROGRESS.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/OVERNIGHT_BUILD_STATUS.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/pipeline/PIPELINE_CONFIG_GUIDE.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "mcp_client.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "mcp_server.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pytest.ini"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_cli.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_cli_hf_remote_meta_wiring.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_hf_remote_meta_indexes.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_hf_remote_meta_smoke.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_imports.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_orchestrator_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_plan_slices_from_pointers.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_rowgroup_slice_index_discovery.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_warc_http_extract.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_warc_range_sliced_fetch.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccindex/test_wrappers.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/ccsearch/test_brave_search_cache.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/conftest.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_brave_and_settings_playwright.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_brave_cache_mcp_and_settings_endpoints.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_dashboard_playwright.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_hf_remote_meta_dashboard.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_index_orchestrator_tools.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_mcp_jsonrpc_batch_and_workers.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_panels_e2e_playwright.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_reverse_proxy_prefix.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/dashboard/test_waybackish_e2e_playwright.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_mcp_client.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_mcp_client_network.py"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 1843689,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-127/head.patch",
+      "public_derivative": {
+        "bytes": 1843689,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-127/head.public.patch",
+        "relative_path": "repo-127/head.public.patch",
+        "sha256": "e078241ce4004e4e41125d8eaeb754bd35ae76249b52b0d3eda058461a7f3dcf"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e078241ce4004e4e41125d8eaeb754bd35ae76249b52b0d3eda058461a7f3dcf"
+    },
+    {
+      "bytes": 1843689,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-127/index.patch",
+      "public_derivative": {
+        "bytes": 1843689,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-127/index.public.patch",
+        "relative_path": "repo-127/index.public.patch",
+        "sha256": "e078241ce4004e4e41125d8eaeb754bd35ae76249b52b0d3eda058461a7f3dcf"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e078241ce4004e4e41125d8eaeb754bd35ae76249b52b0d3eda058461a7f3dcf"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-127/unstaged.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-127/unstaged.public.patch",
+        "relative_path": "repo-127/unstaged.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 5604,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-127/status-after.z",
+    "sha256": "360ef4bbdc214f9d522346f5754fe4047dd97cc536b464aef5fbf740ec263bf6"
+  },
+  "status_before": {
+    "bytes": 5604,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-127/status-before.z",
+    "sha256": "360ef4bbdc214f9d522346f5754fe4047dd97cc536b464aef5fbf740ec263bf6"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+}

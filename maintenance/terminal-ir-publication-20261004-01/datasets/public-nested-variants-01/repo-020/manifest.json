@@ -1,0 +1,193 @@
+{
+  "HEAD_after": "d725e8e945266dda4175a04371a9f9976a990aa7",
+  "HEAD_before": "d725e8e945266dda4175a04371a9f9976a990aa7",
+  "counts": {
+    "file_entries": 3,
+    "regular_bytes_including_duplicates": 51471,
+    "regular_files": 3,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      ".M": 3
+    },
+    "ahead/behind_cached_main": "0/20",
+    "branch": "(detached)",
+    "dirty_children": [],
+    "id": 20,
+    "origin": "github.com/ipfs/ipfs-docs",
+    "parent": 7,
+    "relative": "docs/ipfs-docs",
+    "tracked": 3,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "after_stat": {
+        "ctime_ns": 1785870586240117364,
+        "device": 66306,
+        "inode": 25592406,
+        "mode": 33204,
+        "mtime_ns": 1785870586240117364,
+        "size": 10996
+      },
+      "before_stat": {
+        "ctime_ns": 1785870586240117364,
+        "device": 66306,
+        "inode": 25592406,
+        "mode": 33204,
+        "mtime_ns": 1785870586240117364,
+        "size": 10996
+      },
+      "bytes": 10996,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/e0/e03a6ac9392358ad6d616d5a4096f62ed7ce9573923044c27c24dc4071600c9d",
+      "path": "docs/case-studies/orcestra.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10996,
+        "public_content": "objects/e0/e03a6ac9392358ad6d616d5a4096f62ed7ce9573923044c27c24dc4071600c9d",
+        "public_sha256": "e03a6ac9392358ad6d616d5a4096f62ed7ce9573923044c27c24dc4071600c9d",
+        "raw_sha256": "e03a6ac9392358ad6d616d5a4096f62ed7ce9573923044c27c24dc4071600c9d"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "e03a6ac9392358ad6d616d5a4096f62ed7ce9573923044c27c24dc4071600c9d",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870586274435003,
+        "device": 66306,
+        "inode": 25594700,
+        "mode": 33204,
+        "mtime_ns": 1785870586274435003,
+        "size": 24503
+      },
+      "before_stat": {
+        "ctime_ns": 1785870586274435003,
+        "device": 66306,
+        "inode": 25594700,
+        "mode": 33204,
+        "mtime_ns": 1785870586274435003,
+        "size": 24503
+      },
+      "bytes": 24503,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c5/c5d384f42876df8ab5a620b3fc29e4e0789606078c074720e62b173af29285c5",
+      "path": "docs/how-to/scientific-data/landscape-guide.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 24503,
+        "public_content": "objects/c5/c5d384f42876df8ab5a620b3fc29e4e0789606078c074720e62b173af29285c5",
+        "public_sha256": "c5d384f42876df8ab5a620b3fc29e4e0789606078c074720e62b173af29285c5",
+        "raw_sha256": "c5d384f42876df8ab5a620b3fc29e4e0789606078c074720e62b173af29285c5"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c5d384f42876df8ab5a620b3fc29e4e0789606078c074720e62b173af29285c5",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870586274435003,
+        "device": 66306,
+        "inode": 25594701,
+        "mode": 33204,
+        "mtime_ns": 1785870586274435003,
+        "size": 15972
+      },
+      "before_stat": {
+        "ctime_ns": 1785870586274435003,
+        "device": 66306,
+        "inode": 25594701,
+        "mode": 33204,
+        "mtime_ns": 1785870586274435003,
+        "size": 15972
+      },
+      "bytes": 15972,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5b/5bc8b531db0b56b9f71c9848581d05e1d0958cb030e558c4f3a1f9a628d2bcf7",
+      "path": "docs/how-to/scientific-data/publish-geospatial-zarr-data.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 15972,
+        "public_content": "objects/5b/5bc8b531db0b56b9f71c9848581d05e1d0958cb030e558c4f3a1f9a628d2bcf7",
+        "public_sha256": "5bc8b531db0b56b9f71c9848581d05e1d0958cb030e558c4f3a1f9a628d2bcf7",
+        "raw_sha256": "5bc8b531db0b56b9f71c9848581d05e1d0958cb030e558c4f3a1f9a628d2bcf7"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5bc8b531db0b56b9f71c9848581d05e1d0958cb030e558c4f3a1f9a628d2bcf7",
+      "stable": true
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 2124,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-020/head.patch",
+      "public_derivative": {
+        "bytes": 2124,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-020/head.public.patch",
+        "relative_path": "repo-020/head.public.patch",
+        "sha256": "61ee5b225c13125e52d0599ea8ac145f0f296396cbebc942d89242419864e27e"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "61ee5b225c13125e52d0599ea8ac145f0f296396cbebc942d89242419864e27e"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-020/index.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-020/index.public.patch",
+        "relative_path": "repo-020/index.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2124,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-020/unstaged.patch",
+      "public_derivative": {
+        "bytes": 2124,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-020/unstaged.public.patch",
+        "relative_path": "repo-020/unstaged.public.patch",
+        "sha256": "61ee5b225c13125e52d0599ea8ac145f0f296396cbebc942d89242419864e27e"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "61ee5b225c13125e52d0599ea8ac145f0f296396cbebc942d89242419864e27e"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/external/ipfs_datasets/.tools/ipfs_kit_py/docs/ipfs-docs",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 146,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-020/status-after.z",
+    "sha256": "31798e61a669d9eb6f43630dd561be3916e6ce0c94cb13200917519abad5f7af"
+  },
+  "status_before": {
+    "bytes": 146,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-020/status-before.z",
+    "sha256": "31798e61a669d9eb6f43630dd561be3916e6ce0c94cb13200917519abad5f7af"
+  },
+  "workspace_relative": "external/ipfs_datasets/.tools/ipfs_kit_py/docs/ipfs-docs"
+}
