@@ -1,0 +1,19 @@
+{
+  "changed": [
+    {
+      "file": "papers/revisions/autoformalization_empirical_20260914/assistance/frozen_natural_protocol.json",
+      "frozen": "a0b68ad8a6859bfe53a340ff5206ea7d5ec866f30c76025f7e2aefb2044835bd",
+      "current": "31ba57fffd15ffb3c8a2545bbbeb42c89afbaa0b87045bd7a8853342c2e50ec2"
+    },
+    {
+      "file": "papers/revisions/autoformalization_empirical_20260914/assistance/run_natural_a.py",
+      "frozen": "ea92d745a4e94e1c5ca388dde5a8545d3a3e22306ad6a8437193ecc5b9192748",
+      "current": "1e58bfd16af48417cd0d8a855fdf0c879bd24202ac71c88be658d3b4aee92c4b"
+    }
+  ],
+  "expected_infrastructure_changes": [
+    "run_natural_a.py",
+    "frozen_natural_protocol.json"
+  ],
+  "candidate_changes_permitted": false
+}

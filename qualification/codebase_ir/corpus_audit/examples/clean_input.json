@@ -1,0 +1,68 @@
+{
+  "ancestral_training": [],
+  "ancestry_complete": true,
+  "native_records": [],
+  "schema": "codebase-ir-corpus-audit-input@1",
+  "units": [
+    {
+      "content_sha256": "597d5df55e28d50696c8f0c02b7986f85f9d43db52a80399d32ca37a4bf2fe14",
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "train",
+      "path": "train.py",
+      "related_revisions": [],
+      "repository_id": "fixture:clean-corpus",
+      "revision": "fixture:fresh0",
+      "revision_relations_complete": true,
+      "role": "train",
+      "source": {
+        "bytes_hex": "64656620696e6372656d656e74286e293a0a2020202072657475726e206e202b20310a"
+      }
+    },
+    {
+      "content_sha256": "46f7e385725ceef8dce9b047aab8843c2ab0a0885dee7a366eef3b0113b343ec",
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "tune",
+      "path": "tune.py",
+      "related_revisions": [],
+      "repository_id": "fixture:clean-corpus",
+      "revision": "fixture:fresh0",
+      "revision_relations_complete": true,
+      "role": "tune",
+      "source": {
+        "bytes_hex": "64656620696e6372656d656e74286e293a0a2020202072657475726e206e202b20320a"
+      }
+    },
+    {
+      "content_sha256": "800126a9280c131e43fa48b16a687229743ee2d445280cb3a14dd64eaaf401f7",
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "canary",
+      "path": "canary.py",
+      "related_revisions": [],
+      "repository_id": "fixture:clean-corpus",
+      "revision": "fixture:fresh0",
+      "revision_relations_complete": true,
+      "role": "canary",
+      "source": {
+        "bytes_hex": "64656620696e6372656d656e74286e293a0a2020202072657475726e206e202b20330a"
+      }
+    },
+    {
+      "content_sha256": "67cf7fff4c1ba1dfcaa22c4f72bdc5be60b83825880954ade0403ca402ede861",
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final",
+      "path": "final.py",
+      "related_revisions": [],
+      "repository_id": "fixture:clean-corpus",
+      "revision": "fixture:fresh0",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "bytes_hex": "64656620696e6372656d656e74286e293a0a2020202072657475726e206e202b20340a"
+      }
+    }
+  ]
+}

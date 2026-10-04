@@ -1,0 +1,101 @@
+{
+  "external_upload": false,
+  "files": {
+    "anonymous_supplement": "papers/completion/law_to_action/submission/anonymous_supplement.zip",
+    "author_handoff": "papers/completion/law_to_action/submission/author_handoff.md",
+    "checksums": "papers/completion/law_to_action/submission/checksums.sha256",
+    "final_validation": "papers/completion/law_to_action/submission/final_validation.md",
+    "paper_pdf": "papers/completion/law_to_action/submission/paper.pdf"
+  },
+  "human_validation": "not_collected",
+  "optional_author_review": {
+    "independence": "non-independent if later supplied",
+    "replaces_empirical_outcomes": false,
+    "required": false,
+    "status": "not_returned"
+  },
+  "paper": {
+    "anonymous": true,
+    "checklist_answers": [
+      "Yes",
+      "Yes",
+      "NA",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "Yes",
+      "No",
+      "NA",
+      "Yes",
+      "Yes",
+      "NA",
+      "NA",
+      "NA"
+    ],
+    "main_text_pages": 7,
+    "official_author_block": [
+      "Anonymous Author(s)",
+      "Affiliation",
+      "Address",
+      "email"
+    ],
+    "pdf_bytes": 215003,
+    "pdf_sha256": "b306a5d4c64961f9e9a1c061dac99645fbc3fca406621092ba813bc3cd221ecb",
+    "title": "From Law to Action: Neuro-Symbolic Runtime Enforcement for MCP Agents",
+    "total_pages": 23,
+    "zip_bytes": 31209772,
+    "zip_sha256": "e46b58516a47020e3df826bb7cdc3f870566c28a6a3eb92c5abf53c64ed679e1"
+  },
+  "prohibitions": [
+    "Do not interpret this metadata as a completed submission.",
+    "Do not interpret optional author review as independent human gold.",
+    "Do not fill unmeasured legal-fidelity or agreement rates."
+  ],
+  "recorded_at": "2026-09-13T04:08:03.264807+00:00",
+  "reproduction": {
+    "host_attempts": 902,
+    "human_agreement": null,
+    "kind": "automated_isolated_retained_data_analysis",
+    "latexmk_in_sealed_path": false,
+    "model_calls": 0,
+    "new_scientific_executions": 0,
+    "pdf_rebuilt_in_this_task": false,
+    "scientific_rows": 900
+  },
+  "schema": "law-to-action-proposed-submission-metadata/v1",
+  "status": "not_submitted",
+  "venue": {
+    "abstract_deadline": "2026-09-11 AoE",
+    "camera_ready": "2026-10-14",
+    "cfp_live_fetch": {
+      "abstract_deadline": "2026-09-11 AoE",
+      "activity": "automated",
+      "error": null,
+      "http_status": 200,
+      "live_bytes": 14043,
+      "live_fetch": true,
+      "live_sha256": "66b5740723edb198ed6faf80430bbee3634e316ee4c0385a64da6480e0724468",
+      "matches_retained": true,
+      "paper_deadline": "2026-09-13 AoE",
+      "retained_sha256": "66b5740723edb198ed6faf80430bbee3634e316ee4c0385a64da6480e0724468",
+      "url": "https://vericodegen.github.io/cfp.html"
+    },
+    "cfp_url": "https://vericodegen.github.io/cfp.html",
+    "double_blind": true,
+    "main_text_pages": "4-9 excluding references and appendices",
+    "name": "NeurIPS 2026 Workshop on AI for Verifiable Coding",
+    "non_archival": true,
+    "notification": "2026-09-29",
+    "paper_deadline": "2026-09-13 AoE",
+    "paper_deadline_utc": "2026-09-14T12:00:00+00:00",
+    "pdf_max_mb": 50,
+    "review_deadline": "2026-09-27",
+    "supplement_max_mb": 100,
+    "template": "neurips_2026_vericode_workshop.tex + neurips_2026_vericode.sty (2026-01-29)",
+    "track": "research",
+    "workshop": "2026-12-12 Atlanta"
+  },
+  "workshop_acceptance": "not_claimed"
+}

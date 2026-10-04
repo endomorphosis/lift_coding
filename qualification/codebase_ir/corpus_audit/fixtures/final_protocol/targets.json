@@ -1,0 +1,210 @@
+{
+  "cases": [
+    {
+      "case_id": "delta",
+      "desired_intent": "Example desired instruction remains a separate specification input; delta target stays +19 even if a later request asks for +23.",
+      "intent_used_as_label": false,
+      "source_binding": {
+        "end_byte": 158,
+        "function_name": "offset_delta",
+        "source_sha256": "5fbbf12527756c736ba8752b4b6b51c62910a7c757fd5fd4f087bda6547f3b5d",
+        "source_slice_sha256": "68d40c94754c54f53dcc3269ffe786c628b821b876b3b53fd65666905e63819a",
+        "start_byte": 80
+      },
+      "status": "supported",
+      "target": {
+        "body": {
+          "kind": "binary",
+          "left": {
+            "kind": "binary",
+            "left": {
+              "kind": "reference",
+              "name": "left",
+              "sort": "Int"
+            },
+            "operator": "Sub",
+            "right": {
+              "kind": "reference",
+              "name": "right",
+              "sort": "Int"
+            }
+          },
+          "operator": "Add",
+          "right": {
+            "kind": "literal",
+            "sort": "Int",
+            "value": 19
+          }
+        },
+        "function": {
+          "name": "offset_delta",
+          "parameters": [
+            {
+              "name": "left",
+              "sort": "Int"
+            },
+            {
+              "name": "right",
+              "sort": "Int"
+            }
+          ],
+          "returns": "Int"
+        },
+        "schema": "codebase-ir-qualification-expression@1"
+      },
+      "unit_id": "final:delta",
+      "unsupported_reason": null
+    },
+    {
+      "case_id": "window",
+      "desired_intent": "Example desired instruction remains a separate specification input; delta target stays +19 even if a later request asks for +23.",
+      "intent_used_as_label": false,
+      "source_binding": {
+        "end_byte": 156,
+        "function_name": "ordered_window",
+        "source_sha256": "19a1a50280f3cb0790125c3cc98bdb104b498cc68566639edc6c8625828baf65",
+        "source_slice_sha256": "28714b4dbb80f4063595ec3a98eb9765d9adb95b94704b2fd951723c939feea3",
+        "start_byte": 50
+      },
+      "status": "supported",
+      "target": {
+        "body": {
+          "kind": "boolean",
+          "operator": "And",
+          "values": [
+            {
+              "kind": "compare",
+              "left": {
+                "kind": "binary",
+                "left": {
+                  "kind": "reference",
+                  "name": "下界",
+                  "sort": "Int"
+                },
+                "operator": "Add",
+                "right": {
+                  "kind": "literal",
+                  "sort": "Int",
+                  "value": 7
+                }
+              },
+              "operator": "LtE",
+              "right": {
+                "kind": "reference",
+                "name": "上界",
+                "sort": "Int"
+              }
+            },
+            {
+              "kind": "compare",
+              "left": {
+                "kind": "reference",
+                "name": "下界",
+                "sort": "Int"
+              },
+              "operator": "NotEq",
+              "right": {
+                "kind": "reference",
+                "name": "上界",
+                "sort": "Int"
+              }
+            }
+          ]
+        },
+        "function": {
+          "name": "ordered_window",
+          "parameters": [
+            {
+              "name": "下界",
+              "sort": "Int"
+            },
+            {
+              "name": "上界",
+              "sort": "Int"
+            }
+          ],
+          "returns": "Bool"
+        },
+        "schema": "codebase-ir-qualification-expression@1"
+      },
+      "unit_id": "final:window",
+      "unsupported_reason": null
+    },
+    {
+      "case_id": "flag",
+      "desired_intent": "Example desired instruction remains a separate specification input; delta target stays +19 even if a later request asks for +23.",
+      "intent_used_as_label": false,
+      "source_binding": {
+        "end_byte": 90,
+        "function_name": "guarded_flag",
+        "source_sha256": "27a0c49e2de9be2ced487abed82599af0481d7e0de6050b7447f3d1a7dec4632",
+        "source_slice_sha256": "f72a288e0961aa5a8b6faf820fcca47543cf459bdd3e56f1535cb4e596439356",
+        "start_byte": 0
+      },
+      "status": "supported",
+      "target": {
+        "body": {
+          "kind": "boolean",
+          "operator": "And",
+          "values": [
+            {
+              "kind": "reference",
+              "name": "enabled",
+              "sort": "Bool"
+            },
+            {
+              "kind": "unary",
+              "operand": {
+                "kind": "reference",
+                "name": "blocked",
+                "sort": "Bool"
+              },
+              "operator": "Not"
+            }
+          ]
+        },
+        "function": {
+          "name": "guarded_flag",
+          "parameters": [
+            {
+              "name": "enabled",
+              "sort": "Bool"
+            },
+            {
+              "name": "blocked",
+              "sort": "Bool"
+            }
+          ],
+          "returns": "Bool"
+        },
+        "schema": "codebase-ir-qualification-expression@1"
+      },
+      "unit_id": "final:flag",
+      "unsupported_reason": null
+    },
+    {
+      "case_id": "dynamic",
+      "desired_intent": "Example desired instruction remains a separate specification input; delta target stays +19 even if a later request asks for +23.",
+      "intent_used_as_label": false,
+      "source_binding": {
+        "end_byte": 77,
+        "function_name": "dynamic_total",
+        "source_sha256": "15753c0489c2743a508b3d99220e4457dd7e21cb32c4e7dfa6ef9b5df2a914fe",
+        "source_slice_sha256": "4ee6bc0a2113c851bfcfa093424aad1860d92585957963cb085dc28264f567f3",
+        "start_byte": 0
+      },
+      "status": "unsupported",
+      "target": null,
+      "unit_id": "final:dynamic",
+      "unsupported_reason": "unsupported source construct: Call"
+    }
+  ],
+  "profile": "qualification/pure-int-bool-expression@1",
+  "provenance": {
+    "derived_from_desired_intent": false,
+    "independently_checked_source_semantics": false,
+    "native_teacher_compatibility_verified": false,
+    "origin": "authored_source_projection"
+  },
+  "schema": "codebase-ir-final-targets@1"
+}
