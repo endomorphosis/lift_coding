@@ -1,0 +1,221 @@
+--- prior-driver
++++ selector-step-driver
+@@ -14,10 +14,12 @@
+ 
+ ROOT = Path(__file__).resolve().parent
+ WORKSPACE = ROOT.parents[2]
+-PRIOR = ROOT.parent / 'terminal-codebase-ir-expanded-transfer-20261004-01'
+-HEAD = ROOT.parent / 'terminal-codebase-ir-intent-corpus-head-20261004-01'
+-CONSUMER = ROOT.parent / 'terminal-codebase-ir-analysis-consumer-20261004-01'
+-CAP = ROOT.parent / 'terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08'
++ARTIFACTS = WORKSPACE / 'artifacts/codebase_ir_terminal_bench'
++GROUND = ARTIFACTS / 'terminal-codebase-ir-requirement-grounding-20261004-01'
++PRIOR = ARTIFACTS / 'terminal-codebase-ir-expanded-transfer-20261004-01'
++HEAD = ARTIFACTS / 'terminal-codebase-ir-intent-corpus-head-20261004-01'
++CONSUMER = ARTIFACTS / 'terminal-codebase-ir-analysis-consumer-20261004-01'
++CAP = ARTIFACTS / 'terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08'
+ BASE_SHA = '5efc3725539ced8b5a0f6e172c3b4c7e92fccc158940feaa71b4890a054203a3'
+ BASE_CID = 'sha256:30d08864e562515c29af9c138f944a70626361137a8ae3721f532a6b6014a5fa'
+ 
+@@ -72,17 +74,24 @@
+         'review_ref': 'reviewed:developer-batching-constraint-slice-20261004@1',
+         'native_lean': pin(executable), 'selected_prior': selected,
+         'prior_metadata_inputs': pin(PRIOR / 'evidence/actual-01/metadata-inputs.json'),
+-        'scope': 'Eight authored candidate atoms from four public constraint bullets; full original prompt/residuals preserved. Finite conditional shape countermodel, no runtime equivalence, adaptation or planning authority.'}
++        'grounding_arguments': pin(GROUND / 'evidence/actual-03/grounding-arguments.json'),
++        'grounding_result': pin(GROUND / 'evidence/actual-03/grounding-result.json'),
++        'prior_grounding_metadata_inputs': pin(GROUND / 'evidence/actual-03/metadata-inputs.json'),
++        'grounding_seal': pin(GROUND / 'final-retention-01/seal.json'),
++        'scope': 'Closed exact-int list selector helper and exact rational ranker step prerequisites; no whole Python runtime, Hessian/binary64/asymptotic/AE convergence, original-task or planning authority.'}
+     write(ROOT / 'preparation/request.json', request)
+     print(json.dumps({'request': pin(ROOT / 'preparation/request.json'), 'selected_prior': len(selected)}))
+ 
+ 
+ def capture():
+-    destination = ROOT / 'source-04'; destination.mkdir()
++    destination = ROOT / 'source-01'; destination.mkdir()
+     files = []
+     entries = [(WORKSPACE / 'external/ipfs_accelerate', relative) for relative in (
+-        'benchmarks/agent_supervisor/container_coding/terminal_codebase_requirement_grounding.py',
+-        'test/api/test_terminal_codebase_requirement_grounding.py')]
++        'benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py',
++        'benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py',
++        'test/api/test_terminal_codebase_selector_semantics.py',
++        'test/api/test_terminal_codebase_ranker_step_certificate.py')]
++    entries += [(GROUND / 'source-04', 'test/api/test_terminal_codebase_requirement_grounding.py')]
+     entries += [(HEAD / 'source', relative) for relative in ('test/__init__.py', 'test/api/__init__.py')]
+     for base, relative in entries:
+         original = base / relative; before = pin(original); raw = read_pinned(before)
+@@ -92,18 +101,19 @@
+     config = destination / 'pytest.ini'; config.open('x').write('[pytest]\n'); config.chmod(0o444)
+     files.append({'captured': pin(config)})
+     assert pin(CAP / 'generation-manifest.json')['sha256'] == BASE_SHA
+-    write(ROOT / 'source-manifest-04.json', {'schema': 'terminal-batching-grounding-source-extension@1',
++    write(ROOT / 'source-manifest-01.json', {'schema': 'terminal-batching-grounding-source-extension@1',
+         'base_manifest': pin(CAP / 'generation-manifest.json'), 'base_generation_cid': BASE_CID,
+         'extension_manifests': [pin(path) for path in (HEAD / 'source-manifest.json',
+-            CONSUMER / 'source-manifest-02.json', PRIOR / 'source-manifest-02.json')],
++            CONSUMER / 'source-manifest-02.json', PRIOR / 'source-manifest-02.json',
++            GROUND / 'source-manifest-04.json')],
+         'files': files, 'scope': 'Stable individually pinned selected sources; no atomic whole-live or all-loader census.'})
+-    write(ROOT / 'preparation/producer-pins-04.json', {'driver': pin(Path(__file__).resolve()),
+-        'source_manifest': pin(ROOT / 'source-manifest-04.json'), 'request': pin(ROOT / 'preparation/request.json')})
+-    print(json.dumps({'source_manifest': pin(ROOT / 'source-manifest-04.json'),
+-        'producer_pins': pin(ROOT / 'preparation/producer-pins-04.json')}))
+-
+-
+-ROOTS = (ROOT / 'source-04', PRIOR / 'source-02', CONSUMER / 'source-02', HEAD / 'source',
++    write(ROOT / 'preparation/producer-pins-01.json', {'driver': pin(Path(__file__).resolve()),
++        'source_manifest': pin(ROOT / 'source-manifest-01.json'), 'request': pin(ROOT / 'preparation/request.json')})
++    print(json.dumps({'source_manifest': pin(ROOT / 'source-manifest-01.json'),
++        'producer_pins': pin(ROOT / 'preparation/producer-pins-01.json')}))
++
++
++ROOTS = (ROOT / 'source-01', GROUND / 'source-04', PRIOR / 'source-02', CONSUMER / 'source-02', HEAD / 'source',
+          CAP / 'accelerate', CAP / 'datasets', CAP / 'kit')
+ 
+ 
+@@ -129,13 +139,13 @@
+ def owned(mode):
+     run = ROOT / 'evidence' / mode; run.mkdir()
+     started = time.monotonic(); scheduler = lease = guard = None; cleanup = []
+-    receipt = {'schema': 'terminal-batching-grounding-owned-control@1', 'mode': mode, 'status': 'started',
++    receipt = {'schema': 'terminal-selector-step-owned-control@1', 'mode': mode, 'status': 'started',
+         'primary_error': None, 'cleanup_errors': cleanup, 'root_lease': None,
+         'new_public_fit_calls': 0, 'new_autoencoder_fits': 0, 'synthetic_fits': 0,
+         'native_lean_checks_invoked': [], 'native_metadata_hydration_attempts': 0,
+         'PlanCreate_calls': 0}
+     try:
+-        producers = json.loads((ROOT / 'preparation/producer-pins-04.json').read_bytes())
++        producers = json.loads((ROOT / 'preparation/producer-pins-01.json').read_bytes())
+         assert all(pin(row['path']) == row for row in producers.values())
+         request = json.loads(read_pinned(producers['request']))
+         for row in request['selected_prior']: assert pin(row['path']) == row
+@@ -158,7 +168,7 @@
+         os.environ['TERMINAL_BATCHING_GROUNDING_FROZEN_ENVELOPE'] = request['frozen_envelope']['path']
+         guard = Guard(expected); sys.meta_path.insert(0, guard)
+         import benchmarks.agent_supervisor.container_coding as package
+-        package.__path__ = [str(root / 'benchmarks/agent_supervisor/container_coding') for root in ROOTS[:4]] + list(package.__path__)
++        package.__path__ = [str(root / 'benchmarks/agent_supervisor/container_coding') for root in ROOTS[:-3]] + list(package.__path__)
+         from ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler import get_global_resource_scheduler, ResourceLane
+         scheduler = get_global_resource_scheduler(); config = scheduler.config
+         assert config.proof_safety_enabled and (config.proof_memory_stall_percent, config.proof_cpu_stall_percent,
+@@ -176,52 +186,80 @@
+                 def pytest_runtest_logreport(self, report):
+                     phases.append({'nodeid': report.nodeid, 'phase': report.when, 'outcome': report.outcome,
+                                    'seconds': report.duration})
+-            argv = ['-q', '-p', 'no:cacheprovider', '-c', str(ROOT / 'source-04/pytest.ini'), '--noconftest',
++            argv = ['-q', '-p', 'no:cacheprovider', '-c', str(ROOT / 'source-01/pytest.ini'), '--noconftest',
+                 '-o', 'addopts=', '--basetemp', str(run / 'fixtures'), '--junitxml', str(run / 'tests.xml'),
+-                str(ROOT / 'source-04/test/api/test_terminal_codebase_requirement_grounding.py')]
++                str(ROOT / 'source-01/test/api/test_terminal_codebase_selector_semantics.py'),
++                str(ROOT / 'source-01/test/api/test_terminal_codebase_ranker_step_certificate.py')]
+             code = int(pytest.main(argv, plugins=[Reports()])); write(run / 'phases.json', phases)
+             receipt['pytest_returncode'] = code
+             assert code == 0 and all(row['outcome'] == 'passed' for row in phases), 'selected tests failed or skipped'
+         elif mode.startswith('actual'):
+             envelope = json.loads(read_pinned(request['frozen_envelope']))
+-            arguments = {'corpus_receipt': envelope['corpus'], 'original_inputs': envelope['original_inputs'],
+-                'expected_corpus_sha256': request['expected_corpus_sha256'], 'query_id': request['query_id'],
+-                'review_ref': request['review_ref']}
+-            from benchmarks.agent_supervisor.container_coding import terminal_codebase_requirement_grounding as api
+-            result = api.build_terminal_batching_requirement_grounding(**arguments)
+-            assert api.validate_terminal_batching_requirement_grounding(result, **arguments) == result
+-            write(run / 'grounding-arguments.json', arguments); write(run / 'grounding-result.json', result)
+-            delta = api.project_terminal_batching_grounding_metadata(result, **arguments)
++            grounding_arguments = json.loads(read_pinned(request['grounding_arguments']))
++            grounding_result = json.loads(read_pinned(request['grounding_result']))
++            old_source = grounding_result['source_context']['source_record']
++            public_path = WORKSPACE / '.benchmarks/terminal-bench-2/llm-inference-batching-scheduler' / old_source['path']
++            public_binding = pin(public_path); public_raw = read_pinned(public_binding)
++            assert public_raw == old_source['source_text'].encode()
++            current_source = dict(old_source, source_text=public_raw.decode(), source_sha256=sha(public_raw))
++            from benchmarks.agent_supervisor.container_coding import terminal_codebase_selector_semantics as selector_api
++            from benchmarks.agent_supervisor.container_coding import terminal_codebase_ranker_step_certificate as step_api
++            selector_arguments = {'grounding_receipt': grounding_result, 'grounding_arguments': grounding_arguments,
++                'expected_grounding_sha256': grounding_result['grounding_sha256'], 'current_source_records': [current_source]}
++            selector = selector_api.build_terminal_batching_selector_semantics(**selector_arguments)
++            assert selector_api.validate_terminal_batching_selector_semantics(selector, **selector_arguments) == selector
++            step_arguments = {'corpus_receipt': envelope['corpus'], 'original_inputs': envelope['original_inputs'],
++                'expected_corpus_sha256': request['expected_corpus_sha256']}
++            step = step_api.build_terminal_ranker_step_certificate(**step_arguments)
++            assert step_api.validate_terminal_ranker_step_certificate(step, **step_arguments) == step
++            write(run / 'selector-arguments.json', selector_arguments); write(run / 'selector-result.json', selector)
++            write(run / 'step-arguments.json', step_arguments); write(run / 'step-result.json', step)
++            receipt['current_public_source_binding'] = public_binding
+             from benchmarks.agent_supervisor.container_coding import terminal_codebase_logic_qualification as logic
+-            checks = []
+-            output = run / 'lean'; output.mkdir()
+-            for key, filename, success in (
+-                ('intent', 'OriginalRequirementDeclarations.lean', True),
+-                ('finite_countermodel', 'IndependentBucketCountermodel.lean', True),
+-                ('false_global_cap_control', 'FalseGlobalCapControl.lean', False)):
++            checks = []; output = run / 'lean'; output.mkdir()
++            selector_negative = selector['lean_source'] + '\nnamespace BatchingSelector\n' + (
++                'theorem false_unconditional_lower_bound : sourceSemantics [1] 2 = some 1 ∧ (2 : Int) ≤ 1 := by decide\nend BatchingSelector\n')
++            step_negative = step['lean_source'] + '\nnamespace RankerStepPrerequisites\n' + (
++                'theorem false_reversed_step_bound : 1 < eta * conditionalSmoothness := by decide\nend RankerStepPrerequisites\n')
++            for key, filename, source, success in (
++                ('selector', 'SelectorSemantics.lean', selector['lean_source'], True),
++                ('false_selector_lower_bound', 'FalseSelectorLowerBound.lean', selector_negative, False),
++                ('step_parameters', 'RankerStepParameters.lean', step['lean_source'], True),
++                ('false_reversed_step_bound', 'FalseReversedStepBound.lean', step_negative, False)):
+                 assert pin(request['native_lean']['path']) == request['native_lean']
+                 receipt['native_lean_checks_invoked'].append({'key': key, 'expected_success': success})
+                 checked = logic._compile_lean(executable=Path(request['native_lean']['path']),
+-                    filename=filename, source=result['lean_sources'][key], output=output, expected_success=success)
+-                checks.append({'key': key, **checked})
+-                write(run / ('lean-' + key + '-check.json'), checks[-1])
++                    filename=filename, source=source, output=output, expected_success=success)
++                checks.append({'key': key, **checked}); write(run / ('lean-' + key + '-check.json'), checks[-1])
+                 assert checked['matches_expectation'] is True, 'Lean check inconclusive or wrong result: ' + key
+             write(run / 'lean-checks.json', checks)
+-            prior = json.loads(read_pinned(request['prior_metadata_inputs']))
+-            assert not (set(prior) & (set(delta) | {'grounding_lean_checks'})), 'grounding delta may not rewrite transfer families'
+-            records = {**prior, **delta, 'grounding_lean_checks': checks}
++            prior = json.loads(read_pinned(request['prior_grounding_metadata_inputs']))
++            assert len(prior) == 22 and sum(map(len, prior.values())) == 4209
++            delta = {'selector_source_model': [selector],
++                'selector_proof_obligations': [{'selector_sha256': selector['selector_sha256'],
++                    'source_binding': selector['source_binding'], 'closed_domain': selector['ir']['input_domains'],
++                    'assumptions': selector['model_assumptions'], 'conditional_model_checker_accepted': True,
++                    'source_runtime_equivalence_verified': False, 'full_task_satisfaction': 'unknown',
++                    'planning_handoff': 'abstained', 'canonical_tasks': []}],
++                'ranker_step_parameters': [step], 'selector_step_lean_checks': checks}
++            assert not (set(prior) & set(delta)) and len(prior) + len(delta) <= 32
++            records = {**prior, **delta}; assert all(records[key] == value for key, value in prior.items())
+             write(run / 'metadata-inputs.json', records)
+             from benchmarks.agent_supervisor.container_coding.codebase_ir_metadata import hydrate_codebase_ir_metadata
+             receipt['native_metadata_hydration_attempts'] = 1
+             metadata = hydrate_codebase_ir_metadata(records=records, output=run / 'metadata',
+-                source_snapshot={'schema': 'terminal-batching-requirement-grounding-snapshot@1',
+-                    'corpus': request['frozen_envelope'], 'prior_transfer_metadata': request['prior_metadata_inputs'],
+-                    'grounding': pin(run / 'grounding-result.json'), 'lean_checks': pin(run / 'lean-checks.json'),
+-                    'scope': 'Partial reviewed original requirements; conditional finite shape model. No Python execution/equivalence, original-task satisfaction, training or default planner authority.'})
++                source_snapshot={'schema': 'terminal-selector-step-source-snapshot@1',
++                    'corpus': request['frozen_envelope'], 'prior_grounding_metadata': request['prior_grounding_metadata_inputs'],
++                    'selector': pin(run / 'selector-result.json'), 'step': pin(run / 'step-result.json'),
++                    'lean_checks': pin(run / 'lean-checks.json'),
++                    'scope': request['scope']})
+             write(run / 'metadata-readback.json', metadata)
+             receipt['native_metadata_readback'] = pin(run / 'metadata-readback.json')
+             receipt['native_fresh_readback'] = metadata['fresh_process_readback']
+-            receipt['grounding_result'] = pin(run / 'grounding-result.json')
++            receipt['selector_result'] = pin(run / 'selector-result.json')
++            receipt['step_result'] = pin(run / 'step-result.json')
++            receipt['prior_4209_rows_preserved_exactly'] = True
++            assert pin(public_binding['path']) == public_binding
+         else:
+             raise ValueError('unknown owned mode')
+         for row in request['selected_prior']: assert pin(row['path']) == row
+@@ -259,8 +297,8 @@
+ def outer(mode):
+     started = time.monotonic(); child = None
+     argv = [sys.executable, '-B', str(Path(__file__).resolve()), 'owned', mode]
+-    record = {'schema': 'terminal-batching-grounding-outer-control@1', 'argv': argv,
+-        'driver': pin(Path(__file__).resolve()), 'producer_pin_specification': pin(ROOT / 'preparation/producer-pins-04.json'),
++    record = {'schema': 'terminal-selector-step-outer-control@1', 'argv': argv,
++        'driver': pin(Path(__file__).resolve()), 'producer_pin_specification': pin(ROOT / 'preparation/producer-pins-01.json'),
+         'started_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+         'returncode': None, 'primary_error': None, 'cleanup_errors': []}
+     write(ROOT / 'evidence' / (mode + '-invocation.json'), record)

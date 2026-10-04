@@ -1,0 +1,44 @@
+{
+  "files": [
+    {
+      "bytes": 2364,
+      "path": "control.py",
+      "sha256": "eacf43994336d1d9ae50925617d5595042405fa0ba84aca29a8636be8b25d8d5"
+    },
+    {
+      "bytes": 511,
+      "path": "task_file/input_data/requests_bucket_1.jsonl",
+      "sha256": "59f779e03963f0f94a66ff19763e7a424fc6d0063cc4b3385a74763b23b41a46"
+    },
+    {
+      "bytes": 513,
+      "path": "task_file/input_data/requests_bucket_2.jsonl",
+      "sha256": "cfd0640d0c8535ced94c3b87467537dcf25c320f8ab02ebd63f9403ba4972f7b"
+    },
+    {
+      "bytes": 4380,
+      "path": "task_file/scripts/baseline_packer.py",
+      "sha256": "547d230d5e6d93197803480cb81cab0ec6ac63fcfa0a24b246f549523f216c4e"
+    },
+    {
+      "bytes": 8096,
+      "path": "task_file/scripts/cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    }
+  ],
+  "fixture_training_calls": 0,
+  "fixture_used_for_training": false,
+  "public_sources": [
+    {
+      "bytes": 4380,
+      "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/llm-inference-batching-scheduler/environment/task_file/scripts/baseline_packer.py",
+      "sha256": "547d230d5e6d93197803480cb81cab0ec6ac63fcfa0a24b246f549523f216c4e"
+    },
+    {
+      "bytes": 8096,
+      "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/llm-inference-batching-scheduler/environment/task_file/scripts/cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    }
+  ],
+  "schema": "public-baseline-control-inputs@1"
+}

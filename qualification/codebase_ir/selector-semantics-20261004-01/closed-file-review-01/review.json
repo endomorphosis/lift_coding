@@ -1,0 +1,927 @@
+{
+  "PlanCreate_calls": 0,
+  "RPI_macrocriteria": {
+    "open": 32,
+    "qualified": 0
+  },
+  "actual_final": {
+    "bytes": 155853,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/closed.json",
+    "sha256": "836402f06567fb1259187214a7d0e540e89e35cc8dc3ffe6fa7de3d3f16644af"
+  },
+  "all_failed_outer_attempts_preserved": true,
+  "default_activation": false,
+  "earlier_native_status_counts": {
+    "inconclusive": 6,
+    "passed": 6,
+    "rejected": 4
+  },
+  "file_only_review_elapsed_seconds": 0.07936336100101471,
+  "final_native_checks": {
+    "complete_olean_bytes": [
+      102536,
+      15480
+    ],
+    "cpu_seconds": 20,
+    "output_bytes_limit": 262144,
+    "passed_positive": 2,
+    "rejected_false_controls": 2,
+    "retention_profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+    "wall_seconds": 20,
+    "workspace_bytes_limit": 16777216
+  },
+  "final_test_count": 30,
+  "final_test_phases": 90,
+  "fullturn_CPU_calendar_cost": null,
+  "isolated_helper_differential_cases_per_test_run": 1705,
+  "live_selected_sources_point_in_time": [
+    {
+      "captured": {
+        "bytes": 8912,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-04/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+        "sha256": "243f72c127e4086c44ea788c974b4b9565581a685f5b185505e1eb3dba420b70"
+      },
+      "live": {
+        "bytes": 8912,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+        "sha256": "243f72c127e4086c44ea788c974b4b9565581a685f5b185505e1eb3dba420b70"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 6749,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-04/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+        "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+      },
+      "live": {
+        "bytes": 6749,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+        "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 5752,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-04/test/api/test_terminal_codebase_selector_semantics.py",
+        "sha256": "b98c3561a3d9d4f9ef9440589916b62cf1e4dd10cbe4f2951b8abe7bb439459a"
+      },
+      "live": {
+        "bytes": 5752,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_terminal_codebase_selector_semantics.py",
+        "sha256": "b98c3561a3d9d4f9ef9440589916b62cf1e4dd10cbe4f2951b8abe7bb439459a"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 4027,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-04/test/api/test_terminal_codebase_ranker_step_certificate.py",
+        "sha256": "3a9cf3640549abeb736ffec0dff307ce5b193ec98b23b97ce3a9319693918961"
+      },
+      "live": {
+        "bytes": 4027,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_terminal_codebase_ranker_step_certificate.py",
+        "sha256": "3a9cf3640549abeb736ffec0dff307ce5b193ec98b23b97ce3a9319693918961"
+      }
+    }
+  ],
+  "metadata": {
+    "delta_families": [
+      "ranker_step_parameters",
+      "selector_proof_obligations",
+      "selector_source_model",
+      "selector_step_lean_checks"
+    ],
+    "families": 26,
+    "fresh_process_readback": {
+      "lake_snapshot_digest": "sha256:fac92af84661c32a71e9093c16b7ba996bae86589251cf7c857241abdc7e61cc",
+      "manifest_sha256": "sha256:c20fe910c735ff6689631b5d874874847296bec20fee7fa48556f1714e6616cd",
+      "method": "new_python_process_native_duckdb_and_ducklake_readback",
+      "row_count": 4216,
+      "row_root_sha256": "sha256:94085417fa4bb3ff37ba6f5cd1f0b6949b328dd90b6175873efef9f99188cd4c",
+      "verified": true
+    },
+    "generic_program_contracts": 0,
+    "hydration_attempts": 1,
+    "lake_packets": 82,
+    "native_SQL_statement_count": null,
+    "original_families_preserved_exactly": 22,
+    "original_rows_preserved_exactly": 4209,
+    "producer_rows": 4216,
+    "receipt": {
+      "bytes": 25015,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/metadata-readback.json",
+      "sha256": "a9f47e2cd87377d0150fb967210285d9a6a4f3b65651e1029c02e7f1eac44aaa"
+    }
+  },
+  "native_call_count": 16,
+  "native_checks": [
+    {
+      "check": "selector",
+      "compiled_artifacts": [
+        {
+          "bytes": 65536,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-02/lean/SelectorSemantics.olean",
+          "sha256": "14613e0dd31b053652f83f610ff659d7b5bca8fce6a3ebacd0239752be426921"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 4.028083009005059,
+      "matches_expectation": false,
+      "mode": "actual-02",
+      "output_truncated": true,
+      "profile": "inherited_generic64KiB",
+      "proof_file": {
+        "bytes": 2329,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-02/lean/SelectorSemantics.lean",
+        "sha256": "28f331b77425a80753d3ccdb2475a63ad3ddbfa5cd401af1263e969ab35ed6d7"
+      },
+      "receipt": {
+        "bytes": 1678,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-02/lean-selector-check.json",
+        "sha256": "08568d224eb597524c80417ee0317275a7cfde912d106b09a82e641931149399"
+      },
+      "returncode": 0,
+      "status": "inconclusive"
+    },
+    {
+      "check": "selector",
+      "compiled_artifacts": [
+        {
+          "bytes": 65536,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-03/lean/SelectorSemantics.olean",
+          "sha256": "ed6ae4865fc416f44a2229a58156b461f1bfddd2b3b034b311a270900d809db2"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.3860500390001107,
+      "matches_expectation": false,
+      "mode": "actual-03",
+      "output_truncated": true,
+      "profile": "inherited_generic64KiB",
+      "proof_file": {
+        "bytes": 2371,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-03/lean/SelectorSemantics.lean",
+        "sha256": "8cafc0bac059a8b9ecf938feef80ab43177141eddeca89175cba1ca1760866b8"
+      },
+      "receipt": {
+        "bytes": 1679,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-03/lean-selector-check.json",
+        "sha256": "3bdfdf807c9dc6f129f1e55fc57940003dcaeea7a0a9841dfff06f21376f20a2"
+      },
+      "returncode": 0,
+      "status": "inconclusive"
+    },
+    {
+      "check": "selector",
+      "compiled_artifacts": [
+        {
+          "bytes": 65536,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-04/lean/SelectorSemantics.olean",
+          "sha256": "a544a159601e39431be51e3a41a9548fdd5bff18d91cfe44c31b3cd90a095857"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.3441746219759807,
+      "matches_expectation": false,
+      "mode": "actual-04",
+      "output_truncated": true,
+      "profile": "inherited_generic64KiB",
+      "proof_file": {
+        "bytes": 2379,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-04/lean/SelectorSemantics.lean",
+        "sha256": "56cff1d647088ff30d31fbaa26735492a1fc7be310a4d9c5d6c78ba67a422e98"
+      },
+      "receipt": {
+        "bytes": 1679,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-04/lean-selector-check.json",
+        "sha256": "c2aa1bc3d9f511cbc697d7077aacce52d56241c5c314b9119cd5fa1e907650c9"
+      },
+      "returncode": 0,
+      "status": "inconclusive"
+    },
+    {
+      "check": "selector",
+      "compiled_artifacts": [
+        {
+          "bytes": 65536,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-05/lean/SelectorSemantics.olean",
+          "sha256": "c00744529ab24d4bcdd38802ac938b5c98f47cf4be9bfc1f205144d25037da75"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.25405674599460326,
+      "matches_expectation": false,
+      "mode": "actual-05",
+      "output_truncated": true,
+      "profile": "inherited_generic64KiB",
+      "proof_file": {
+        "bytes": 2380,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-05/lean/SelectorSemantics.lean",
+        "sha256": "2ae3655cf6b17602165e3feecb5c044fd4e9e714c4f65973b2b2502668cb4d08"
+      },
+      "receipt": {
+        "bytes": 1680,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-05/lean-selector-check.json",
+        "sha256": "ee5837bb2b9cc187114c2dad0ff76ff07dd7e4987d4daad829d1077b64717358"
+      },
+      "returncode": 0,
+      "status": "inconclusive"
+    },
+    {
+      "check": "false_reversed_step_bound",
+      "compiled_artifacts": [],
+      "elapsed_seconds_nested_not_added": 0.2534534070000518,
+      "matches_expectation": false,
+      "mode": "actual-06",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 894,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean/FalseReversedStepBound.lean",
+        "sha256": "cf55ab4ea2f2cb62ae2ea4a6f82006843bc52b857783482eb9d0b66704636922"
+      },
+      "receipt": {
+        "bytes": 2303,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean-false_reversed_step_bound-check.json",
+        "sha256": "a5ce127b29fc3ae4b15aa073e5fc3fb8ade06b2a7a21eb0925ce0214b20a656d"
+      },
+      "returncode": 1,
+      "status": "inconclusive"
+    },
+    {
+      "check": "false_selector_lower_bound",
+      "compiled_artifacts": [],
+      "elapsed_seconds_nested_not_added": 0.2317403620108962,
+      "matches_expectation": true,
+      "mode": "actual-06",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 2535,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean/FalseSelectorLowerBound.lean",
+        "sha256": "0fd1e01fe852a7cc341f30709f5afe702e2ed545cae15b6d72d2726ca4c6f144"
+      },
+      "receipt": {
+        "bytes": 1745,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean-false_selector_lower_bound-check.json",
+        "sha256": "b7494ad78e263258a40de300a5bcdca68d6e9d8ae0a2bc62123a884118abcad9"
+      },
+      "returncode": 1,
+      "status": "rejected"
+    },
+    {
+      "check": "selector",
+      "compiled_artifacts": [
+        {
+          "bytes": 102536,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean/SelectorSemantics.olean",
+          "sha256": "77224d2764ccd030e701cb20e19fcef7d49243ec7b9abb092556dba5d5586219"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.2437439909845125,
+      "matches_expectation": true,
+      "mode": "actual-06",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 2380,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean/SelectorSemantics.lean",
+        "sha256": "2ae3655cf6b17602165e3feecb5c044fd4e9e714c4f65973b2b2502668cb4d08"
+      },
+      "receipt": {
+        "bytes": 1872,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean-selector-check.json",
+        "sha256": "0bcf1bbacc5eaf495562794ed876335016bb45c5f29604f087835d38585a3ed7"
+      },
+      "returncode": 0,
+      "status": "passed"
+    },
+    {
+      "check": "step_parameters",
+      "compiled_artifacts": [
+        {
+          "bytes": 15480,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean/RankerStepParameters.olean",
+          "sha256": "b34bfd881cdb75384beaf3cb8e7f58ccee0f40811d0d9260ca13606d3e77a61d"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.22234007000224665,
+      "matches_expectation": true,
+      "mode": "actual-06",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 750,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean/RankerStepParameters.lean",
+        "sha256": "ac2e9df0a289139c9a5f8462e98d7d276b70b16a916db0744c30089703515149"
+      },
+      "receipt": {
+        "bytes": 1893,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/lean-step_parameters-check.json",
+        "sha256": "82ecfb730899f6ad23039275d572c4d7eb907b509d4a8a18aab209722dcf64ae"
+      },
+      "returncode": 0,
+      "status": "passed"
+    },
+    {
+      "check": "false_reversed_step_bound",
+      "compiled_artifacts": [],
+      "elapsed_seconds_nested_not_added": 0.2905705419834703,
+      "matches_expectation": false,
+      "mode": "actual-07",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 902,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean/FalseReversedStepBound.lean",
+        "sha256": "e8f3402a95ee438979ba951840d9623bb53acfc682157e4f2656639e710814a7"
+      },
+      "receipt": {
+        "bytes": 2086,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean-false_reversed_step_bound-check.json",
+        "sha256": "b54ca925ff44de229f515e4f808682b802970afccefa383103bc23ef5a97f71e"
+      },
+      "returncode": 1,
+      "status": "inconclusive"
+    },
+    {
+      "check": "false_selector_lower_bound",
+      "compiled_artifacts": [],
+      "elapsed_seconds_nested_not_added": 0.34108344101696275,
+      "matches_expectation": true,
+      "mode": "actual-07",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 2535,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean/FalseSelectorLowerBound.lean",
+        "sha256": "0fd1e01fe852a7cc341f30709f5afe702e2ed545cae15b6d72d2726ca4c6f144"
+      },
+      "receipt": {
+        "bytes": 1746,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean-false_selector_lower_bound-check.json",
+        "sha256": "ea0de49b5e507cb2b9284088203992c86328596ecc0161e947342af3fe343203"
+      },
+      "returncode": 1,
+      "status": "rejected"
+    },
+    {
+      "check": "selector",
+      "compiled_artifacts": [
+        {
+          "bytes": 102536,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean/SelectorSemantics.olean",
+          "sha256": "77224d2764ccd030e701cb20e19fcef7d49243ec7b9abb092556dba5d5586219"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.2835940809745807,
+      "matches_expectation": true,
+      "mode": "actual-07",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 2380,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean/SelectorSemantics.lean",
+        "sha256": "2ae3655cf6b17602165e3feecb5c044fd4e9e714c4f65973b2b2502668cb4d08"
+      },
+      "receipt": {
+        "bytes": 1872,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean-selector-check.json",
+        "sha256": "86fe5635f9db4259e5a5174805d1d6d799cc9cea8718c4de01e7abf02b91ae09"
+      },
+      "returncode": 0,
+      "status": "passed"
+    },
+    {
+      "check": "step_parameters",
+      "compiled_artifacts": [
+        {
+          "bytes": 15480,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean/RankerStepParameters.olean",
+          "sha256": "b34bfd881cdb75384beaf3cb8e7f58ccee0f40811d0d9260ca13606d3e77a61d"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.3011060180142522,
+      "matches_expectation": true,
+      "mode": "actual-07",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 750,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean/RankerStepParameters.lean",
+        "sha256": "ac2e9df0a289139c9a5f8462e98d7d276b70b16a916db0744c30089703515149"
+      },
+      "receipt": {
+        "bytes": 1892,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean-step_parameters-check.json",
+        "sha256": "9478400bc60a9955eb2253bf279a1b5697a76f52273d711379151cf53a1534b9"
+      },
+      "returncode": 0,
+      "status": "passed"
+    },
+    {
+      "check": "false_reversed_step_bound",
+      "compiled_artifacts": [],
+      "elapsed_seconds_nested_not_added": 0.3330532120016869,
+      "matches_expectation": true,
+      "mode": "actual-08",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 1084,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean/FalseReversedStepBound.lean",
+        "sha256": "8071ce877216db724ea69868c938b0edf676bd02e55e94746b3baf5a4fd79e54"
+      },
+      "receipt": {
+        "bytes": 1709,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean-false_reversed_step_bound-check.json",
+        "sha256": "a557685f4caa3bb04497c07309d058b569e74045a5e2a9b4bd033135ce508059"
+      },
+      "returncode": 1,
+      "status": "rejected"
+    },
+    {
+      "check": "false_selector_lower_bound",
+      "compiled_artifacts": [],
+      "elapsed_seconds_nested_not_added": 0.26037772101699375,
+      "matches_expectation": true,
+      "mode": "actual-08",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 2535,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean/FalseSelectorLowerBound.lean",
+        "sha256": "0fd1e01fe852a7cc341f30709f5afe702e2ed545cae15b6d72d2726ca4c6f144"
+      },
+      "receipt": {
+        "bytes": 1746,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean-false_selector_lower_bound-check.json",
+        "sha256": "8d4bcd4b886ec91847f0039f6cacb27e6396c859abbd6bca1eac1f5c3e9a6704"
+      },
+      "returncode": 1,
+      "status": "rejected"
+    },
+    {
+      "check": "selector",
+      "compiled_artifacts": [
+        {
+          "bytes": 102536,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean/SelectorSemantics.olean",
+          "sha256": "77224d2764ccd030e701cb20e19fcef7d49243ec7b9abb092556dba5d5586219"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.3611664480122272,
+      "matches_expectation": true,
+      "mode": "actual-08",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 2380,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean/SelectorSemantics.lean",
+        "sha256": "2ae3655cf6b17602165e3feecb5c044fd4e9e714c4f65973b2b2502668cb4d08"
+      },
+      "receipt": {
+        "bytes": 1872,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean-selector-check.json",
+        "sha256": "7397bf8fa54433991f51a5bbda4eedcbb335e2f98dd85b2bba43e590f58db747"
+      },
+      "returncode": 0,
+      "status": "passed"
+    },
+    {
+      "check": "step_parameters",
+      "compiled_artifacts": [
+        {
+          "bytes": 15480,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean/RankerStepParameters.olean",
+          "sha256": "b34bfd881cdb75384beaf3cb8e7f58ccee0f40811d0d9260ca13606d3e77a61d"
+        }
+      ],
+      "elapsed_seconds_nested_not_added": 0.3307524569972884,
+      "matches_expectation": true,
+      "mode": "actual-08",
+      "output_truncated": false,
+      "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+      "proof_file": {
+        "bytes": 750,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean/RankerStepParameters.lean",
+        "sha256": "ac2e9df0a289139c9a5f8462e98d7d276b70b16a916db0744c30089703515149"
+      },
+      "receipt": {
+        "bytes": 1892,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean-step_parameters-check.json",
+        "sha256": "e1b1bd5f92d59f1fd9e72834ec3c7e0f7b77e549bbfeb901b9d97b36e8e93a6e"
+      },
+      "returncode": 0,
+      "status": "passed"
+    }
+  ],
+  "official_benchmark_score": null,
+  "outer_attempts": [
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 30.31574485701276,
+      "elapsed_seconds_owned_nested_not_added": 30.190420926985098,
+      "metadata_hydration_attempts": 0,
+      "mode": "actual-01",
+      "native_lean_calls": 0,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-01-closed.json",
+        "sha256": "a53e71ace74160397f13bf67929e1d4b0a09462a6d66734e5ba07b6571a49349"
+      },
+      "owned": {
+        "bytes": 15268,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-01/closed.json",
+        "sha256": "c458348d539a7fd42c31a10d25a8421867032d7474e643f335e76763c4de8070"
+      },
+      "primary_error_type": "LeaseTimeoutError",
+      "released": null,
+      "returncode": 1,
+      "status": "failed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 7.335986573976697,
+      "elapsed_seconds_owned_nested_not_added": 7.158291393978288,
+      "metadata_hydration_attempts": 0,
+      "mode": "actual-02",
+      "native_lean_calls": 1,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-02-closed.json",
+        "sha256": "eef24d3174d37b6c744e8c72a378059e78ffa45b7ba6c358a81e4c45f056671a"
+      },
+      "owned": {
+        "bytes": 150810,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-02/closed.json",
+        "sha256": "9b88df771ab75aeed00e906147bda0e04454c503a0e594032b2db7c88a8028c0"
+      },
+      "primary_error_type": "AssertionError",
+      "released": true,
+      "returncode": 1,
+      "status": "failed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 3.536933428986231,
+      "elapsed_seconds_owned_nested_not_added": 3.3528757989988662,
+      "metadata_hydration_attempts": 0,
+      "mode": "actual-03",
+      "native_lean_calls": 1,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-03-closed.json",
+        "sha256": "09531cc91a7564aaa3c7409189f5764fef131dede996706e772383745fa783f5"
+      },
+      "owned": {
+        "bytes": 150810,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-03/closed.json",
+        "sha256": "cc6a6fa30f3308c2b2b7e9d6230fceadaeb8bbd1fca70d339f1bd605db799b62"
+      },
+      "primary_error_type": "AssertionError",
+      "released": true,
+      "returncode": 1,
+      "status": "failed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 3.826546928001335,
+      "elapsed_seconds_owned_nested_not_added": 3.6279459850047715,
+      "metadata_hydration_attempts": 0,
+      "mode": "actual-04",
+      "native_lean_calls": 1,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-04-closed.json",
+        "sha256": "62c43ed399e8a8e18ec03d7dbd3d382b1599116932b2e2709dba4fbd9a4aee27"
+      },
+      "owned": {
+        "bytes": 150811,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-04/closed.json",
+        "sha256": "0b5d3125500373061fc21501192c5797cf7b4229651e2db54494fcafc1efcdae"
+      },
+      "primary_error_type": "AssertionError",
+      "released": true,
+      "returncode": 1,
+      "status": "failed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 3.585415545006981,
+      "elapsed_seconds_owned_nested_not_added": 3.4110788139805663,
+      "metadata_hydration_attempts": 0,
+      "mode": "actual-05",
+      "native_lean_calls": 1,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-05-closed.json",
+        "sha256": "e8f3ed9065675e8a07fa0cfd019e6660f9963321150cb366719b53f572958f1b"
+      },
+      "owned": {
+        "bytes": 150811,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-05/closed.json",
+        "sha256": "1941ec6231314433702f83acfdffeca0e615601f128a2d9aa2e24346a4f098e7"
+      },
+      "primary_error_type": "AssertionError",
+      "released": true,
+      "returncode": 1,
+      "status": "failed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 4.339699072996154,
+      "elapsed_seconds_owned_nested_not_added": 4.1524679379945155,
+      "metadata_hydration_attempts": 0,
+      "mode": "actual-06",
+      "native_lean_calls": 4,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06-closed.json",
+        "sha256": "9f5cf931bb020ac6367defd3470397b911eb3bc2a0910136dfc5b3fa02546253"
+      },
+      "owned": {
+        "bytes": 151095,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-06/closed.json",
+        "sha256": "5b4a0ab1fd58f841734e7313545f2f20cdfc96a5a6be281668138b16fc545425"
+      },
+      "primary_error_type": "AssertionError",
+      "released": true,
+      "returncode": 1,
+      "status": "failed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 4.427454489981756,
+      "elapsed_seconds_owned_nested_not_added": 4.2483465319965035,
+      "metadata_hydration_attempts": 0,
+      "mode": "actual-07",
+      "native_lean_calls": 4,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07-closed.json",
+        "sha256": "17a6e6a2fce372c68e6ef2caf682164dbfaea3a9ed60437ce1cc278de39cdc37"
+      },
+      "owned": {
+        "bytes": 151096,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/closed.json",
+        "sha256": "32a26804e35ab031ac91a6ac16b8382ba07320fbee237db06e823f5fe6702beb"
+      },
+      "primary_error_type": "AssertionError",
+      "released": true,
+      "returncode": 1,
+      "status": "failed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 20.973339949006913,
+      "elapsed_seconds_owned_nested_not_added": 20.78263913100818,
+      "metadata_hydration_attempts": 1,
+      "mode": "actual-08",
+      "native_lean_calls": 4,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 991,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08-closed.json",
+        "sha256": "f2b71cbb649730951a8f14581508e3bbc099d61eacf0e0128452c24830525650"
+      },
+      "owned": {
+        "bytes": 155853,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/closed.json",
+        "sha256": "836402f06567fb1259187214a7d0e540e89e35cc8dc3ffe6fa7de3d3f16644af"
+      },
+      "primary_error_type": null,
+      "released": true,
+      "returncode": 0,
+      "status": "passed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 0.26923372500459664,
+      "elapsed_seconds_owned_nested_not_added": 0.1888733280065935,
+      "metadata_hydration_attempts": 0,
+      "mode": "outer",
+      "native_lean_calls": 0,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 988,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/outer-closed.json",
+        "sha256": "edbb0a48ab6004261a84f61cfbfdc9eeccb40267ecff42f9b75add3487ef89ef"
+      },
+      "owned": {
+        "bytes": 15604,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/outer/closed.json",
+        "sha256": "0c9115c62eceb7c63f148809f3c3a7865f797d56068c16806f073e15984f26f6"
+      },
+      "primary_error_type": "ValueError",
+      "released": true,
+      "returncode": 1,
+      "status": "failed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 12.102250907977577,
+      "elapsed_seconds_owned_nested_not_added": 11.93109289399581,
+      "metadata_hydration_attempts": 0,
+      "mode": "tests-01",
+      "native_lean_calls": 0,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-01-closed.json",
+        "sha256": "ec4f5a76e0e4ceef676e421fb6fbb815af81702dbd70ee32910cf5e5420c1154"
+      },
+      "owned": {
+        "bytes": 150662,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-01/closed.json",
+        "sha256": "669fea4d427536d8e58ef3618f0c1fcd6aa3318a55a697a51c92d10015e6511e"
+      },
+      "primary_error_type": null,
+      "released": true,
+      "returncode": 0,
+      "status": "passed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 10.291713413986145,
+      "elapsed_seconds_owned_nested_not_added": 10.136849597998662,
+      "metadata_hydration_attempts": 0,
+      "mode": "tests-02",
+      "native_lean_calls": 0,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 990,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-02-closed.json",
+        "sha256": "88d116f7a1f6520d21842150d15c02019fa7a9587a3048cf039f2aca08374a24"
+      },
+      "owned": {
+        "bytes": 149477,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-02/closed.json",
+        "sha256": "166375c0d32a68560ec3d7fb1f928b74789c875c76b2e566c4284673a57db6ab"
+      },
+      "primary_error_type": null,
+      "released": true,
+      "returncode": 0,
+      "status": "passed",
+      "waiting": 0
+    },
+    {
+      "PlanCreate_calls": 0,
+      "active": 0,
+      "cleanup_errors": [],
+      "elapsed_seconds_outer": 9.68764797699987,
+      "elapsed_seconds_owned_nested_not_added": 9.553908075991785,
+      "metadata_hydration_attempts": 0,
+      "mode": "tests-03",
+      "native_lean_calls": 0,
+      "new_autoencoder_fits": 0,
+      "new_fit_calls": 0,
+      "outer": {
+        "bytes": 988,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-03-closed.json",
+        "sha256": "133912eddbddeddfc900b148ef35bc680b44c91cd503bbb41496cc5b9a0c91df"
+      },
+      "owned": {
+        "bytes": 149476,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-03/closed.json",
+        "sha256": "3d05304753a882ca44c6c6c753ed63b41da13a2ec3f9c1f43e5a15e82932d583"
+      },
+      "primary_error_type": null,
+      "released": true,
+      "returncode": 0,
+      "status": "passed",
+      "waiting": 0
+    }
+  ],
+  "preparation_readback_docs_overhead_not_in_outer_sum": null,
+  "qualification_scope": "Closed selector exact Int/List model and exact rational step prerequisites with generated native checker evidence; independent native fresh DB/Lake readback is the producer subprocess receipt, not a new reviewer SQL reopening.",
+  "schema": "terminal-selector-step-closed-file-review@1",
+  "selected_imports": [
+    {
+      "drift": 0,
+      "mode": "actual-08",
+      "scope": "Only the retained parent pre-loader records; not manual-loader/fresh-child/fullsysmodules/wholecheckout census.",
+      "selected_parent_preloader_imports": 182
+    },
+    {
+      "drift": 0,
+      "mode": "tests-03",
+      "scope": "Only the retained parent pre-loader records; not manual-loader/fresh-child/fullsysmodules/wholecheckout census.",
+      "selected_parent_preloader_imports": 177
+    }
+  ],
+  "selected_outer_attempt_count": 12,
+  "selected_outer_elapsed_seconds": 110.69196686893702,
+  "semantics_limits": [
+    "Only exact reviewed helper AST profile lowered; enclosing Python runtime/baseline/performance not proved.",
+    "Logistic Hessian/real-valued convergence bridge, binary64 error, asymptotic/autoencoder convergence remain open.",
+    "Original fullprompt residuals remain unknown; ranks confer no truth; planning handoff abstains; allaggregateauthorityfalse.",
+    "CAP08imported resource profile is pinned scope; not fresh wholecurrentpublished profile qualification."
+  ],
+  "source_manifest": {
+    "bytes": 6238,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-manifest-04.json",
+    "sha256": "93e3c12215b70c86d4a02bf28aedb4e89a9efff1a7e70a182c155dc6ab2582c0"
+  },
+  "status": "passed_file_only",
+  "test_final": {
+    "bytes": 149476,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-03/closed.json",
+    "sha256": "3d05304753a882ca44c6c6c753ed63b41da13a2ec3f9c1f43e5a15e82932d583"
+  },
+  "test_receipts": [
+    {
+      "mode": "tests-01",
+      "passed_phases": 90,
+      "passed_test_cases": 30,
+      "phases": {
+        "bytes": 19348,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-01/phases.json",
+        "sha256": "1fbc708aca5651cd32e20d1b568c7a2b5a27a85cd076ff19c0c7bd30e7a81467"
+      },
+      "xml": {
+        "bytes": 4581,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-01/tests.xml",
+        "sha256": "983a43d09b48e4652d3e5fe1de0d19dce1d19da8eb4af75177e94ce99745792d"
+      }
+    },
+    {
+      "mode": "tests-02",
+      "passed_phases": 90,
+      "passed_test_cases": 30,
+      "phases": {
+        "bytes": 19348,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-02/phases.json",
+        "sha256": "35bb13a367ff7398a96bf1f4e9a941e827973ae4f322d9c5a683622ccd812de9"
+      },
+      "xml": {
+        "bytes": 4581,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-02/tests.xml",
+        "sha256": "9c18534a8b4513f5fbcd871e52e9f1ed197f6c72086997b2e4200bc8b7f69fd5"
+      }
+    },
+    {
+      "mode": "tests-03",
+      "passed_phases": 90,
+      "passed_test_cases": 30,
+      "phases": {
+        "bytes": 19348,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-03/phases.json",
+        "sha256": "9e88b2584be3082c46b2f2e1d34206788e5928dfc3c6e4afea0dc5f7717c4dc6"
+      },
+      "xml": {
+        "bytes": 4581,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/tests-03/tests.xml",
+        "sha256": "522ff547e62a0f7cfa763de418c2182093f861e821431e12a83671f85c5b5781"
+      }
+    }
+  ],
+  "total_scoped_new_autoencoder_fits": 0,
+  "total_scoped_new_fit_calls": 0
+}

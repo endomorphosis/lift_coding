@@ -1,0 +1,38 @@
+{
+  "schema": "terminal-ir-hf-bootstrap-publication@1",
+  "repo_id": "Publicus/codebase-ir-proof-index",
+  "repo_type": "dataset",
+  "parent": "15ee426ff7d393eb1f8d77d9318bce59c39262b3",
+  "commit": "50ca63252a6c4dcf51597a3d6e7e6e1d4c3ee623",
+  "commit_url": "https://huggingface.co/datasets/Publicus/codebase-ir-proof-index/commit/50ca63252a6c4dcf51597a3d6e7e6e1d4c3ee623",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1139,
+      "sha256": "ecdb564a118af46dd6f1ec77fef0757da1d37c340d27bb073e68aae24acac3f5"
+    },
+    {
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/seal.json",
+      "bytes": 127159,
+      "sha256": "57cc54ea656ddb991cf9d3b0b72605c843f053b784f88ad0b3fa9da3404d5c1e"
+    },
+    {
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/verification/final-closure.json",
+      "bytes": 3524,
+      "sha256": "072b462746e6c6dcd23fb08de712b755c74576b41e57c203b017c31f550082d1"
+    },
+    {
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/verification/readback.json",
+      "bytes": 32068,
+      "sha256": "46fd3fc73d2505fe11afb770ef982332bf1f350333e36a1a01ed4560d11364a1"
+    },
+    {
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-status.json",
+      "bytes": 1405,
+      "sha256": "43cff28e17cb3bd8f7033202a0afb4a13354a916ee9fd8c8d01e74f05ef75e8d"
+    }
+  ],
+  "readback_verified": true,
+  "bulk_archive_complete": false,
+  "elapsed_seconds": 2.6913867660041433
+}

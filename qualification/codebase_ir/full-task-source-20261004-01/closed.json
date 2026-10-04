@@ -1,0 +1,159 @@
+{
+  "cleanup_errors": [],
+  "elapsed_seconds": 30.013034775009146,
+  "final_scheduler_snapshot": {
+    "active_child_lease_count": 0,
+    "active_lease_count": 0,
+    "active_root_lease_count": 0,
+    "allocated": {
+      "cpu_slots": 0,
+      "memory_mb": 0
+    },
+    "allocated_child_process_slots": 0,
+    "allocated_gpu_memory_mb": 0,
+    "allocated_unified_memory_mb": 0,
+    "available": {
+      "child_process_slots": 16,
+      "cpu_slots": 16,
+      "gpu_memory_mb": null,
+      "memory_mb": 99688,
+      "unified_memory_mb": null
+    },
+    "capacity": {
+      "child_process_slots": 16,
+      "cpu_slots": 16,
+      "gpu_memory_mb": null,
+      "memory_mb": 99688,
+      "reserved_gpu_memory_mb": 0,
+      "reserved_memory_mb": 0,
+      "unified_memory_mb": null,
+      "usable_gpu_memory_mb": null,
+      "usable_memory_mb": 99688
+    },
+    "counters": {
+      "acquisitions_total": 0,
+      "cancellations_total": 0,
+      "recovered_leases_total": 0,
+      "recoveries_total": 0,
+      "releases_total": 0,
+      "saturation_events_total": 1,
+      "timeouts_total": 1
+    },
+    "lanes": {
+      "orchestration": {
+        "allocated": {
+          "child_process_slots": 0,
+          "cpu_slots": 0,
+          "gpu_memory_mb": 0,
+          "memory_mb": 0,
+          "unified_memory_mb": 0
+        },
+        "reservation": {
+          "cpu_slots": 0,
+          "memory_mb": 0
+        },
+        "telemetry": {
+          "acquisitions_total": 0,
+          "cancellations_total": 0,
+          "timeouts_total": 1,
+          "wait_count": 1,
+          "wait_seconds_max": 30.00017750900588,
+          "wait_seconds_mean": 30.00017750900588,
+          "wait_seconds_total": 30.00017750900588
+        }
+      },
+      "validation": {
+        "allocated": {
+          "child_process_slots": 0,
+          "cpu_slots": 0,
+          "gpu_memory_mb": 0,
+          "memory_mb": 0,
+          "unified_memory_mb": 0
+        },
+        "reservation": {
+          "cpu_slots": 2,
+          "memory_mb": 0
+        },
+        "telemetry": {
+          "acquisitions_total": 0,
+          "cancellations_total": 0,
+          "timeouts_total": 0,
+          "wait_count": 0,
+          "wait_seconds_max": 0.0,
+          "wait_seconds_mean": 0.0,
+          "wait_seconds_total": 0.0
+        }
+      }
+    },
+    "last_proof_refusal": {
+      "backoff_until": 1791144901.5870302,
+      "decision_cycle_at": 1791144899.5870302,
+      "demand": {
+        "additional_memory_mb": 2048,
+        "additional_process_slots": 1,
+        "pid_tasks_required": 48,
+        "root_reserved_memory_mb": 0,
+        "root_reserved_process_slots": 0
+      },
+      "error_type": null,
+      "gate": "envelope",
+      "historical": true,
+      "lane": "orchestration",
+      "parent_lease_id": null,
+      "proof_memory_headroom_mb": 24922,
+      "reason": "proof_io_stall",
+      "request_id": "",
+      "sample": {
+        "available_memory_mb": 111893,
+        "available_pid_tasks": 335781,
+        "cpu_slots": 20,
+        "cpu_stall_percent": 23.27,
+        "io_stall_percent": 19.69,
+        "memory_stall_percent": 0.01,
+        "pid_task_limit": 337808,
+        "total_memory_mb": 124610
+      },
+      "sample_contract": "max-host-visible-cgroup-avg10; memory/full,cpu/some,io/full; optional-psi-zero-fallback",
+      "schema": "proof-resource-admission-refusal@1",
+      "sequence": 1,
+      "thresholds": {
+        "cpu_stall_percent": 50.0,
+        "io_stall_percent": 10.0,
+        "memory_stall_percent": 2.0
+      },
+      "waiter_id": "44333a7fb90c439a9b16754d78d07273"
+    },
+    "proof_backoff": {
+      "reason": "proof_io_stall",
+      "until": 1791144901.5870302
+    },
+    "proof_recovery": {},
+    "saturation": {
+      "child_process_slots_saturated": false,
+      "cpu_saturated": false,
+      "events_total": 1,
+      "gpu_memory_saturated": false,
+      "memory_saturated": false,
+      "saturated": false,
+      "unified_memory_saturated": false
+    },
+    "schema_version": "legal-ir-global-resource-scheduler-v1",
+    "state_path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-source-20261004-01/resources.json",
+    "wait_time_seconds": {
+      "count": 1,
+      "max": 30.00017750900588,
+      "mean": 30.00017750900588,
+      "p50": 30.00017750900588,
+      "p95": 30.00017750900588,
+      "p99": 30.00017750900588,
+      "total": 30.00017750900588
+    },
+    "waiting_request_count": 0
+  },
+  "official_score": null,
+  "primary_error_type": "LeaseTimeoutError",
+  "prover_calls": 0,
+  "schema": "public-baseline-owned-control@1",
+  "status": "failed_retained",
+  "training_calls": 0
+}

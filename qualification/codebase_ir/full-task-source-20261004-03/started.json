@@ -1,0 +1,55 @@
+{
+  "cleanup_errors": [],
+  "official_score": null,
+  "prover_calls": 0,
+  "resource_policy": {
+    "lane_reservations": {
+      "validation": {
+        "cpu_slots": 2,
+        "memory_mb": 0
+      }
+    },
+    "max_gpu_memory_percent": null,
+    "max_memory_percent": null,
+    "max_swap_percent": null,
+    "max_waiting_requests": 256,
+    "proof_backoff_seconds": 2.0,
+    "proof_cpu_stall_percent": 50.0,
+    "proof_io_stall_percent": 10.0,
+    "proof_memory_headroom_mb": 24922,
+    "proof_memory_stall_percent": 2.0,
+    "proof_recovery_enabled": false,
+    "proof_recovery_grants": 4,
+    "proof_recovery_interval_seconds": 0.25,
+    "proof_recovery_samples": 2,
+    "proof_resource_profile": null,
+    "proof_safety_enabled": true,
+    "require_known_gpu_for_gpu_work": true,
+    "reserved_gpu_memory_mb": 0,
+    "reserved_memory_mb": 0,
+    "total_child_process_slots": 16,
+    "total_cpu_slots": 16,
+    "total_gpu_memory_mb": null,
+    "total_memory_mb": 99688,
+    "total_unified_memory_mb": null
+  },
+  "root_lease": {
+    "acquired_at": 1791145901.5537415,
+    "cancelled": false,
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "gpu_memory_mb": 0,
+    "lane": "orchestration",
+    "lease_id": "be0e9a754a174c5788be4ae19b5dd048",
+    "memory_mb": 2048,
+    "owner_pid": 3685605,
+    "parent_lease_id": null,
+    "released": false,
+    "requires_gpu": false,
+    "unified_memory_mb": 0,
+    "wait_seconds": 1.087988493964076e-06
+  },
+  "schema": "public-baseline-owned-control@1",
+  "status": "started",
+  "training_calls": 0
+}

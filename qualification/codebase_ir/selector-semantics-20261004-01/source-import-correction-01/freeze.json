@@ -1,0 +1,17 @@
+{
+  "schema": "terminal-selector-init-import-correction@1",
+  "status": "ast_pass_source_only",
+  "selector": {
+    "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+    "bytes": 8912,
+    "sha256": "243f72c127e4086c44ea788c974b4b9565581a685f5b185505e1eb3dba420b70"
+  },
+  "driver": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_04.py",
+    "bytes": 22884,
+    "sha256": "3fb9480bcffb8e2fe7af7f451d11278fcc602b001ee36c7b7ddf4ac996fe3cb4"
+  },
+  "change": "Lean uses only Init primitives/List/Int lemmas; replace broad Std import with Init; allterms/theorems and64KiB outputbound unchanged.",
+  "prior_failures_preserved": true,
+  "native_jobs_this_preparation": 0
+}

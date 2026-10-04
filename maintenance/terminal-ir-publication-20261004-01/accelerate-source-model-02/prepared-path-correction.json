@@ -1,0 +1,33 @@
+{
+  "correction": "Planning/runtime directories corrected from an unexecuted preparation-only guessed execution path; no attempted source read or production mutation used the guessed paths.",
+  "original_head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+  "original_index": {
+    "bytes": 2062937,
+    "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/index",
+    "sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4"
+  },
+  "original_preparation_retained": true,
+  "protected_current_pins": [
+    {
+      "bytes": 33934,
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_proof_query_join.py",
+      "sha256": "d6e4a6187036f5942f4637dd24bec65c1a90ed32c24e3b39e3759e653be03b79"
+    },
+    {
+      "bytes": 18129,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_admission.py",
+      "sha256": "2e5b0add5f19c1c31ad76dae67354d5bfadbfe59303a06590db14507c3abe7e4"
+    },
+    {
+      "bytes": 22624,
+      "path": "test/api/test_finite_proof_query_join.py",
+      "sha256": "d34cd489d69446bb4c88e6f8881fff44689cbf6c6944c1976fb411f77a06f890"
+    },
+    {
+      "bytes": 27488,
+      "path": "test/api/test_finite_proof_query_admission.py",
+      "sha256": "6867188f535b6e24cf2a217b5d601a9d92446bff3ba382800e8664c6a0650de0"
+    }
+  ],
+  "schema": "terminal-ir-successor-protected-path-correction@1"
+}

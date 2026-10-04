@@ -1,0 +1,71 @@
+{
+  "files": [
+    {
+      "bytes": 40,
+      "path": "approved-fixture-in-unsafe.bin.part-002",
+      "sha256": "49e7237e11464693589bca95fe317f2fde5793bb7d70da9749f55641a5fff406"
+    },
+    {
+      "bytes": 10,
+      "path": "z-safe.tar.gz.part-001",
+      "sha256": "b8c080d31276f415659803ef9d72751adb9f2420600f2c22c007c784eae11716"
+    },
+    {
+      "bytes": 62,
+      "path": "approved-fixture-in-unsafe.bin.part-001",
+      "sha256": "bfee322de3384501b47bccc88eba8539768e227506a66f115dbec26a1b321f92"
+    },
+    {
+      "bytes": 100,
+      "path": "z-safe.tar.gz.part-002",
+      "sha256": "b576043f56ecdd5de3496c6899af32c737f2f3201f4578362dae311130b50ca0"
+    },
+    {
+      "bytes": 10,
+      "path": "a-unsafe.tar.gz.part-001",
+      "sha256": "b8c080d31276f415659803ef9d72751adb9f2420600f2c22c007c784eae11716"
+    },
+    {
+      "bytes": 4608,
+      "path": "missing-terminal.tar.part-002",
+      "sha256": "606f558e014930f9c1669f03c71c28945c4631568e39cd308c6c7f4077c7bfb9"
+    },
+    {
+      "bytes": 100,
+      "path": "m-safe.tar.gz.part-002",
+      "sha256": "e6818c5b2c4c5f720637e7139130eeae3e2520f57bd01bcea3b7b47cb331c47a"
+    },
+    {
+      "bytes": 88,
+      "path": "clean.tar.xz.part-001",
+      "sha256": "836fa6fd11bf7c4fba86937ff3ae607c154f73955d03a663b62190ca736c36d0"
+    },
+    {
+      "bytes": 10,
+      "path": "m-safe.tar.gz.part-001",
+      "sha256": "b8c080d31276f415659803ef9d72751adb9f2420600f2c22c007c784eae11716"
+    },
+    {
+      "bytes": 88,
+      "path": "clean.tar.xz.part-002",
+      "sha256": "d87278126d228927fd69e92e9ca61da2db4e49d1f6a12701594b95a95398c2dc"
+    },
+    {
+      "bytes": 99,
+      "path": "a-unsafe.tar.gz.part-002",
+      "sha256": "ed0b42c4dbb4870892c80f6571efe42e54e764c307c45823dc23a0979adb93f4"
+    },
+    {
+      "bytes": 4608,
+      "path": "missing-terminal.tar.part-001",
+      "sha256": "529f657a3f9475640490c51fc4a87287e4287e5251c233e8fc41d5632488db72"
+    },
+    {
+      "bytes": 1024,
+      "path": "missing-terminal.tar.part-003",
+      "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+    }
+  ],
+  "schema": "synthetic-split-preservation@1",
+  "scope": "authored controls; intentionally absent terminal part is not genuine preserved source"
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "terminal-source-model-artifact-retention-profile-change@1",
+  "status": "prepared_source_only",
+  "driver": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_05.py",
+    "bytes": 25852,
+    "sha256": "f321d712adba571d626deef2548e45d95b8c29c7d200be843df14421940619cc"
+  },
+  "original_helper": {
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_logic_qualification.py",
+    "bytes": 19224,
+    "sha256": "7d56d32f62f2bc36b72cbbb5c6582c7de23b4edfdaaaa8e0b0b60d2369bfc829"
+  },
+  "profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+  "before_max_output_bytes": 65536,
+  "max_output_bytes": 262144,
+  "unchanged": {
+    "max_input_bytes": 262144,
+    "max_workspace_bytes": 16777216,
+    "timeout_seconds": 20,
+    "cpu_seconds": 20,
+    "outer_watchdog_seconds": 120,
+    "root_lease_cpu": 1,
+    "root_lease_memory_mb": 2048,
+    "root_lease_child_process_slots": 4,
+    "root_admission_timeout_seconds": 30,
+    "proof_PSI_memory_cpu_io": [
+      2,
+      50,
+      10
+    ],
+    "backoff_seconds": 2
+  },
+  "reason": "NativeLean rc0 with full seven-property selector model repeatedly artifact-truncated under64KiB export; explicitly increase bounded retained artifact output in new driver only without changing inherited checker/safety/semantic authority.",
+  "old_failed_checks_remain_inconclusive": true,
+  "source_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-manifest-04.json",
+    "bytes": 6238,
+    "sha256": "93e3c12215b70c86d4a02bf28aedb4e89a9efff1a7e70a182c155dc6ab2582c0"
+  },
+  "jobs_during_preparation": 0
+}

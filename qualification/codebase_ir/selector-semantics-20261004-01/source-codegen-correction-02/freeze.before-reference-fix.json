@@ -1,0 +1,17 @@
+{
+  "schema": "terminal-selector-kernel-evaluation-correction@1",
+  "status": "ast_pass_source_only",
+  "selector": {
+    "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+    "bytes": 8911,
+    "sha256": "353282bbd13bb776480aab04b4319722a2c1581464c242e753a8381bb194c11b"
+  },
+  "driver": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_03.py",
+    "bytes": 22884,
+    "sha256": "c420e5195314bef1c76bb266148d45e09e262fc1f19e4ad5932197886dae2ad4"
+  },
+  "change": "Only closed positive counterexample proof evaluation +kernel; all mathematical statements and open-domain conditions unchanged; limits unchanged.",
+  "actual03": "inconclusive_output_truncated_not_qualified",
+  "preparation_native_jobs": 0
+}

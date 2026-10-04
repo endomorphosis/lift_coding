@@ -1,0 +1,35 @@
+{
+  "active_exact_credential_veto_required": true,
+  "approvals": [
+    {
+      "approved_match_sha256": [
+        "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "1f4ebaf98e8d9adb018ef5d4532903667163656551b6499af2c2b0936574fd53",
+      "provenance_ref": "https://github.com/oauthlib/oauthlib/blob/9e824cfb0eb36b4d23ab73171b821b1a74ec659c/tests/oauth2/rfc6749/clients/test_service_application.py"
+    },
+    {
+      "approved_match_sha256": [
+        "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "4de74f50b33be0f5d1974d6c4652cb708daea90fce6a60826d6890ed5e31aa1d",
+      "provenance_ref": "https://github.com/oauthlib/oauthlib/blob/9e824cfb0eb36b4d23ab73171b821b1a74ec659c/tests/oauth1/rfc5849/test_signatures.py"
+    },
+    {
+      "approved_match_sha256": [
+        "3ade4761d8aad0fe44358e2bbad9742bdd43703aeecbdf626925bcf8178a3c3b"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "acd22beaf606192f6f196a65e7069363ae9cb66b9de24d44cc044a8fad97fcc4",
+      "provenance_ref": "https://github.com/oauthlib/oauthlib/blob/9dfa40c3bdab3aa788e711283afdf36c2fbdd1de/tests/oauth2/rfc6749/test_server.py"
+    }
+  ],
+  "review": {
+    "bytes": 9690,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/oauthlib-public-fixture-provenance-02/review.json",
+    "sha256": "231089323dafae96aabb965d1d09552f3e105a93a3f09c7989b010aa58dfcf87"
+  },
+  "schema": "terminal-ir-exact-public-fixture-approvals@1"
+}

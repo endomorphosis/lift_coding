@@ -1,0 +1,67 @@
+{
+  "captured_source_profile": "publicbaseline4380B SHA547d230... +costmodel8096B SHA0cf417...",
+  "files": [
+    {
+      "bytes": 4380,
+      "path": "baseline_packer.py",
+      "sha256": "547d230d5e6d93197803480cb81cab0ec6ac63fcfa0a24b246f549523f216c4e"
+    },
+    {
+      "bytes": 10942,
+      "path": "closed.json",
+      "sha256": "f1ed434c5a38215b5f3e4dbedf65dcc09279673797592b6cd50c0e3eae09ff43"
+    },
+    {
+      "bytes": 8096,
+      "path": "cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    },
+    {
+      "bytes": 1538,
+      "path": "input-manifest.json",
+      "sha256": "f73825ffa0162d7e5dcab84a2c758d196760e66e1dda33adb69ce9089e90b859"
+    },
+    {
+      "bytes": 1575,
+      "path": "output/result.json",
+      "sha256": "1c2008aaeb5127c55d832ae753422bc72d1e05fb59c79a1762cdfc2a97a71154"
+    },
+    {
+      "bytes": 1319,
+      "path": "output/task_file/output_data/plan_b1.jsonl",
+      "sha256": "4e98eb5cc42d12d61aeb9aeeddd4c9792f4d74affa72a2e41d4a23fbc597779e"
+    },
+    {
+      "bytes": 1321,
+      "path": "output/task_file/output_data/plan_b2.jsonl",
+      "sha256": "e2bd8ccde4db4be4d31fd947ff5497576f027f9292c561fb55aee4e314db6891"
+    },
+    {
+      "bytes": 1494,
+      "path": "resources.json",
+      "sha256": "2110468e2c4664235ae1f43d1888cc473083eb9c8a6532276a61f3298180c929"
+    },
+    {
+      "bytes": 0,
+      "path": "resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6347,
+      "path": "run_public_baseline_control.py",
+      "sha256": "b58dd0046aaf3359bc6952da90b15b61a401024fcb7f043b2615d9c6002eead7"
+    },
+    {
+      "bytes": 1547,
+      "path": "started.json",
+      "sha256": "173e6d08f0235e511acb6d0f3d78c355d1b23c9ab8c0be8d8f047bc1a2d0c31a"
+    }
+  ],
+  "full_task_satisfaction": false,
+  "model_convergence_proved": false,
+  "new_training_calls": 0,
+  "positive_claim": "Actual captured baseline produces16distinctshape tuples and violates globalcap8 onvalid authored fixtures.",
+  "schema": "public-baseline-control-file-seal@1",
+  "scope": "Observed real noarg baseline result only on16 authored inputs; not universalPython semantics orofficialtaskscore. All inputfixturebytesunchanged.",
+  "source_model_correspondence_for_all_inputs_proved": false
+}

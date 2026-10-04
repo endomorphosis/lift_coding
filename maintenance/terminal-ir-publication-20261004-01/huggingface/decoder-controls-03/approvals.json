@@ -1,0 +1,142 @@
+{
+  "public_container_provenance": [
+    {
+      "file_sha256": "492c22d6a0b22eff951c2ddf8b989fa6aa709ab16f20eb027c12a0c9a75a00fb",
+      "provenance_ref": "SYNTHETIC_DECLARATION_NOT_ACTUAL_PUBLISHED_PROVENANCE"
+    }
+  ],
+  "public_fixture_files": [
+    {
+      "approved_match_sha256": [
+        "bfee322de3384501b47bccc88eba8539768e227506a66f115dbec26a1b321f92"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "08af6d6c3db11eed12d89c05a4a55e83321318ebdd7c28db43fb452118b600a9",
+      "provenance_ref": "SYNTHETIC_DECLARATION_NOT_ACTUAL_PUBLISHED_PROVENANCE"
+    }
+  ],
+  "schema": "terminal-ir-publication-classification-approvals@1",
+  "scope": "synthetic controls only; no authentic public-provenance declarations",
+  "split_groups": [
+    {
+      "expected_source_schema": "synthetic-split-preservation@1",
+      "namespace": "synthetic_controls",
+      "ordered_parts": [
+        {
+          "bytes": 10,
+          "path": "a-unsafe.tar.gz.part-001",
+          "sha256": "b8c080d31276f415659803ef9d72751adb9f2420600f2c22c007c784eae11716"
+        },
+        {
+          "bytes": 99,
+          "path": "a-unsafe.tar.gz.part-002",
+          "sha256": "ed0b42c4dbb4870892c80f6571efe42e54e764c307c45823dc23a0979adb93f4"
+        }
+      ],
+      "path_prefix": "a-unsafe.tar.gz.part-",
+      "source_manifest": {
+        "bytes": 1902,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-03/split-preservation.json",
+        "sha256": "c3c1120064cf267e2923c53a324a8f9d91a04cd2a7b5dba0c4fc974e527745f6"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "expected_source_schema": "synthetic-split-preservation@1",
+      "namespace": "synthetic_controls",
+      "ordered_parts": [
+        {
+          "bytes": 88,
+          "path": "clean.tar.xz.part-001",
+          "sha256": "836fa6fd11bf7c4fba86937ff3ae607c154f73955d03a663b62190ca736c36d0"
+        },
+        {
+          "bytes": 88,
+          "path": "clean.tar.xz.part-002",
+          "sha256": "d87278126d228927fd69e92e9ca61da2db4e49d1f6a12701594b95a95398c2dc"
+        }
+      ],
+      "path_prefix": "clean.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 1902,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-03/split-preservation.json",
+        "sha256": "c3c1120064cf267e2923c53a324a8f9d91a04cd2a7b5dba0c4fc974e527745f6"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "expected_source_schema": "synthetic-split-preservation@1",
+      "namespace": "synthetic_controls",
+      "ordered_parts": [
+        {
+          "bytes": 10,
+          "path": "m-safe.tar.gz.part-001",
+          "sha256": "b8c080d31276f415659803ef9d72751adb9f2420600f2c22c007c784eae11716"
+        },
+        {
+          "bytes": 100,
+          "path": "m-safe.tar.gz.part-002",
+          "sha256": "e6818c5b2c4c5f720637e7139130eeae3e2520f57bd01bcea3b7b47cb331c47a"
+        }
+      ],
+      "path_prefix": "m-safe.tar.gz.part-",
+      "source_manifest": {
+        "bytes": 1902,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-03/split-preservation.json",
+        "sha256": "c3c1120064cf267e2923c53a324a8f9d91a04cd2a7b5dba0c4fc974e527745f6"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "expected_source_schema": "synthetic-split-preservation@1",
+      "namespace": "synthetic_controls",
+      "ordered_parts": [
+        {
+          "bytes": 4608,
+          "path": "missing-terminal.tar.part-001",
+          "sha256": "529f657a3f9475640490c51fc4a87287e4287e5251c233e8fc41d5632488db72"
+        },
+        {
+          "bytes": 4608,
+          "path": "missing-terminal.tar.part-002",
+          "sha256": "606f558e014930f9c1669f03c71c28945c4631568e39cd308c6c7f4077c7bfb9"
+        },
+        {
+          "bytes": 1024,
+          "path": "missing-terminal.tar.part-003",
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+        }
+      ],
+      "path_prefix": "missing-terminal.tar.part-",
+      "source_manifest": {
+        "bytes": 1902,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-03/split-preservation.json",
+        "sha256": "c3c1120064cf267e2923c53a324a8f9d91a04cd2a7b5dba0c4fc974e527745f6"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "expected_source_schema": "synthetic-split-preservation@1",
+      "namespace": "synthetic_controls",
+      "ordered_parts": [
+        {
+          "bytes": 10,
+          "path": "z-safe.tar.gz.part-001",
+          "sha256": "b8c080d31276f415659803ef9d72751adb9f2420600f2c22c007c784eae11716"
+        },
+        {
+          "bytes": 100,
+          "path": "z-safe.tar.gz.part-002",
+          "sha256": "b576043f56ecdd5de3496c6899af32c737f2f3201f4578362dae311130b50ca0"
+        }
+      ],
+      "path_prefix": "z-safe.tar.gz.part-",
+      "source_manifest": {
+        "bytes": 1902,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-03/split-preservation.json",
+        "sha256": "c3c1120064cf267e2923c53a324a8f9d91a04cd2a7b5dba0c4fc974e527745f6"
+      },
+      "source_manifest_field": "files"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "terminal-rat-negative-native-bound-control@1",
+  "status": "source_only_ast_pass",
+  "driver": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_07.py",
+    "bytes": 26144,
+    "sha256": "368c150d84ef126e5f0f8796cef6527ee6269c093379200dd9fa3470de485ae3"
+  },
+  "change": "Retain reversed-bound theorem; use native Rat LT/LE boolean definitions and already kernel-accepted eta*L<=1 to rewrite impossible claim to false=true, then genuine decide rejection. No changed numerical model/axioms/evaluator/quota.",
+  "prior_actual07_inconclusive_preserved": true,
+  "native_jobs_preparation": 0
+}

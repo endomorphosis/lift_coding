@@ -1,0 +1,542 @@
+[
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_exact_source_span_and_inert_authorities",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 1.423476138006663
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_exact_source_span_and_inert_authorities",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 1.0909087620093487
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_exact_source_span_and_inert_authorities",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.00011715400614775717
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[comparator]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00017286799266003072
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[comparator]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.5360033670149278
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[comparator]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.00010669100447557867
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[comment]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015157100278884172
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[comment]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.5944838209834415
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[comment]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.00010048298281617463
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[pin]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00016281899297609925
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[pin]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.5847880660148803
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[pin]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 9.467400377616286e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[duplicate]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00016005101497285068
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[duplicate]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.5394411410088651
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[duplicate]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 9.014600072987378e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[missing]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015632400754839182
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[missing]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.5997828030085657
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_changed_present_source_refused[missing]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 8.82419990375638e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_foreign_grounding_pin_refused",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 8.816199260763824e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_foreign_grounding_pin_refused",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.5669590689940378
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_foreign_grounding_pin_refused",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.763298344798386e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_resealed_foreign_lowering_refused",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0007489450217690319
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_resealed_foreign_lowering_refused",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 1.1416659870010335
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_resealed_foreign_lowering_refused",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 8.662600885145366e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_captured_ast_helper_matches_ir_on_1705_cases",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 8.942600106820464e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_captured_ast_helper_matches_ir_on_1705_cases",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0016566600243095309
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_captured_ast_helper_matches_ir_on_1705_cases",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.374401760287583e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_order_fallback_and_unbounded_exact_integer_domain",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.099300713278353e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_order_fallback_and_unbounded_exact_integer_domain",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.2449002396315336e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_order_fallback_and_unbounded_exact_integer_domain",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.0353025067597628e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives0-0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0001326909987255931
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives0-0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.182499833405018e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives0-0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.566499799489975e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives1-False]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.052900036796927e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives1-False]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.681698581203818e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives1-False]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.123300848528743e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives2-1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.632102304138243e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives2-1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.659300273284316e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives2-1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.1408999348059297e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives3-1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.40649814158678e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives3-1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.385599120520055e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives3-1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.05929861497134e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives4-1.0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.339300307445228e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives4-1.0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.254500916227698e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives4-1.0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9888993594795465e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives5-0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.332900375127792e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives5-0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.3648975659161806e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_selector_semantics.py::test_outside_closed_domain_refused[representatives5-0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.0018825690203811973
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_native_step_parameters_replay_without_fitting",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.025323437992483377
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_native_step_parameters_replay_without_fitting",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.9255315769987646
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_native_step_parameters_replay_without_fitting",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.00010304301395080984
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_foreign_corpus_pin_refused",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.168101728893816e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_foreign_corpus_pin_refused",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.45410419200197794
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_foreign_corpus_pin_refused",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 8.201799937523901e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_foreign_convergence_authority_refused",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.104099495336413e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_foreign_convergence_authority_refused",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.990930533997016
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_foreign_convergence_authority_refused",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.939402712509036e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[0.0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00013310700887814164
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[0.0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00016136301564984024
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[0.0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.768099122680724e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[-1.0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.516897701658309e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[-1.0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00012654700549319386
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[-1.0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.204800304956734e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[101.0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.350502371788025e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[101.0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00012083401088602841
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[101.0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.019199357368052e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[inf]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.2929011872038245e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[inf]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.507299697957933e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[inf]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.880100510083139e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[nan]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.105699528940022e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[nan]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.480000304989517e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[nan]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7920003049075603e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[True]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.31539844814688e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[True]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.408102202229202e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_or_oversized_step_refused[True]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8481008484959602e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.992098547518253e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.3712974982336164e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.2401003409177065e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.819300374947488e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.42399871442467e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8879992896690965e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.6464992919936776e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.526400541886687e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.883200068026781e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.481701762415469e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.193601150996983e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_invalid_difference_domain_refused[rows3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.775999018922448e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_feature_norms_and_float_embeddings_are_exact",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.7905014576390386e-05
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_feature_norms_and_float_embeddings_are_exact",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001441790082026273
+  },
+  {
+    "nodeid": "test/api/test_terminal_codebase_ranker_step_certificate.py::test_feature_norms_and_float_embeddings_are_exact",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.0011356409813743085
+  }
+]

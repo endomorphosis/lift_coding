@@ -1,0 +1,40 @@
+{
+  "all_six_source_tests_already_public_exact": true,
+  "initial_private_commit_retained": "cff3a2a72e3bf1a71e84ec8560126d39842cfbff",
+  "next_commit_scope": "ONLY_TWO_NEW_QUALIFICATION_DOCUMENTS",
+  "protected4_exact": true,
+  "remote_main": "f061c1c3529603466598907ba11b519986c5699f",
+  "schema": "terminal-ir-concurrent-source-publication-join@1",
+  "source_paths": [
+    {
+      "bytes": 8912,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+      "sha256": "243f72c127e4086c44ea788c974b4b9565581a685f5b185505e1eb3dba420b70"
+    },
+    {
+      "bytes": 5752,
+      "path": "test/api/test_terminal_codebase_selector_semantics.py",
+      "sha256": "b98c3561a3d9d4f9ef9440589916b62cf1e4dd10cbe4f2951b8abe7bb439459a"
+    },
+    {
+      "bytes": 6749,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+      "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+    },
+    {
+      "bytes": 4027,
+      "path": "test/api/test_terminal_codebase_ranker_step_certificate.py",
+      "sha256": "3a9cf3640549abeb736ffec0dff307ce5b193ec98b23b97ce3a9319693918961"
+    },
+    {
+      "bytes": 5501,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_batching_contract_reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441"
+    },
+    {
+      "bytes": 2924,
+      "path": "test/api/test_terminal_codebase_batching_contract_reference.py",
+      "sha256": "bd1bbd50dc20e0a6b511063794e2e8c9b5634794c9b3d17e270ac01ebc163963"
+    }
+  ]
+}

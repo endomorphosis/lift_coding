@@ -1,0 +1,61 @@
+{
+  "asymptotic_optimizer_convergence_proved": false,
+  "behavioral_satisfaction": false,
+  "caller_and_imported_bindings_status": "unproved",
+  "canonical_tasks": [],
+  "checker_calls": 0,
+  "closed_profile_ast_lowering_verified": true,
+  "complete_prompt_interpretation_qualified": false,
+  "completion_authority": false,
+  "conditional_source_model_proof_status": "not_run",
+  "effects": [],
+  "execution_authority": false,
+  "facts": [],
+  "formalization_authority": false,
+  "full_task_satisfaction": "unknown",
+  "generalized_ranking_gain_qualified": false,
+  "generic_program_profile_widened": false,
+  "grounding_sha256": "2ced136639be8937ba8b7734d7c88c2dc0626bc09d6ce815740420332d356e94",
+  "ir": {
+    "comparison": "greater_than_or_equal",
+    "empty_result": "IndexError",
+    "fallback_index": -1,
+    "input_domains": {
+      "reps": "immutable_snapshot_of_exact_python_int_list",
+      "s_val": "exact_python_int"
+    },
+    "iteration_order": "source_list_order",
+    "kind": "first_eligible_or_last"
+  },
+  "lean_source": "import Init\nset_option autoImplicit false\nnamespace BatchingSelector\n-- None models the IndexError of indexing an empty representative list.\nnoncomputable def sourceLoop (s : Int) (fallback : Option Int) : List Int → Option Int\n  | [] => fallback\n  | r :: rs => if s ≤ r then some r else sourceLoop s fallback rs\nnoncomputable def sourceSemantics (rs : List Int) (s : Int) : Option Int :=\n  sourceLoop s rs.getLast? rs\nnoncomputable def irSemantics (rs : List Int) (s : Int) : Option Int :=\n  match rs.find? (fun r => decide (s ≤ r)) with\n  | some r => some r\n  | none => rs.getLast?\ntheorem loop_correspondence (rs : List Int) (s : Int) (fallback : Option Int) :\n    sourceLoop s fallback rs =\n      (match rs.find? (fun r => decide (s ≤ r)) with\n       | some r => some r | none => fallback) := by\n  induction rs with\n  | nil => simp [sourceLoop]\n  | cons r rs ih =>\n    by_cases h : s ≤ r <;> simp [sourceLoop, List.find?, h, ih]\ntheorem source_to_ir (rs : List Int) (s : Int) :\n    sourceSemantics rs s = irSemantics rs s := by\n  exact loop_correspondence rs s rs.getLast?\ntheorem output_membership (rs : List Int) (s v : Int)\n    (h : irSemantics rs s = some v) : v ∈ rs := by\n  unfold irSemantics at h\n  cases hf : rs.find? (fun r => decide (s ≤ r)) with\n  | none => simp only [hf] at h; exact List.mem_of_getLast? h\n  | some r =>\n    simp only [hf, Option.some.injEq] at h\n    subst v\n    exact List.mem_of_find?_eq_some hf\ntheorem first_eligible (rs : List Int) (s v : Int)\n    (h : rs.find? (fun r => decide (s ≤ r)) = some v) :\n    s ≤ v ∧ ∃ before after, rs = before ++ v :: after ∧\n      ∀ r ∈ before, r < s := by\n  have result := List.find?_eq_some_iff_append.mp h\n  simpa using result\ntheorem no_eligible_fallback (rs : List Int) (s : Int)\n    (h : ∀ r ∈ rs, r < s) : irSemantics rs s = rs.getLast? := by\n  have hf : rs.find? (fun r => decide (s ≤ r)) = none := by\n    simp only [List.find?_eq_none, Bool.not_eq_true, decide_eq_false_iff_not]\n    intro r hr\n    exact Int.not_le.mpr (h r hr)\n  simp [irSemantics, hf]\ntheorem empty_index_error (s : Int) : sourceSemantics [] s = none := by\n  simp [sourceSemantics, sourceLoop]\n-- Deliberately does not assert unconditional coverage: the fallback can be small.\ntheorem unconditional_coverage_counterexample : sourceSemantics [1] 2 = some 1 := by\n  decide +kernel\nend BatchingSelector\n",
+  "lean_source_sha256": "2ae3655cf6b17602165e3feecb5c044fd4e9e714c4f65973b2b2502668cb4d08",
+  "model_assumptions": [
+    "Exact integers; bools, subclasses and custom comparison are outside the profile.",
+    "Closure reps is a fixed list during this call; concurrent mutation is outside the profile.",
+    "Lean Int and List Int model mathematical values and list order; CPython runtime semantics are not proved."
+  ],
+  "model_convergence": "unproved",
+  "mutation_authority": false,
+  "omission_authority": false,
+  "planning_handoff": "abstained",
+  "profile": "python-exact-int-immutable-list-first-ge-last@1",
+  "proof_authority": false,
+  "schema": "terminal-codebase-selector-semantics@1",
+  "selector_sha256": "347c7aaefb82a3f7957b8afee01ce18e0d227c214845d1d746eb97c0cd1ce018",
+  "semantic_alignment_verified": false,
+  "source_binding": {
+    "ast_sha256": "6f77cd212024de85e6ca646765269f05392cb76e3375b34f861ad8446c42061b",
+    "end_line": 83,
+    "fragment_sha256": "cb697f7078d7b577202155e318dcaeb9d35e8c0969ce462bd8c452603a115e02",
+    "path": "environment/task_file/scripts/baseline_packer.py",
+    "source_bytes": 4380,
+    "source_sha256": "547d230d5e6d93197803480cb81cab0ec6ac63fcfa0a24b246f549523f216c4e",
+    "start_line": 79,
+    "symbol": "_plan_for_requests.assign_rep"
+  },
+  "source_runtime_equivalence_verified": false,
+  "source_semantics_verified": false,
+  "status": "exact_ast_lowering_unchecked_conditional_model",
+  "training_calls": 0,
+  "whole_program_proved": false
+}
