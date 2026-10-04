@@ -1,0 +1,1518 @@
+{
+  "content_sha256": "6bafe83279d220536b259ad8289dd906eaa4126caba1feaa5d3e73ff49150180",
+  "proof_authority": false,
+  "qualified": false,
+  "retained_checkpoint_binding": {
+    "bytes": 2826559,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/learned-formula-staging/smoke-final-20260930/checkpoint.json",
+    "sha256": "4876186f4a5fe3957640a2cff1a4e1b2046bc945d24e08d244973e641733384e"
+  },
+  "retained_checkpoint_unmodified_codec": {
+    "learned_generation_executed": false,
+    "model_loaded": false,
+    "proof_authority": false,
+    "qualified": false,
+    "rows": [
+      {
+        "id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', 'application', 'applies', 'authorize', 'been', 'before', 'deadline', 'fees'",
+        "source_oov_tokens": [
+          ",",
+          "application",
+          "applies",
+          "authorize",
+          "been",
+          "before",
+          "deadline",
+          "fees",
+          "have",
+          "hold",
+          "if",
+          "legal",
+          "must",
+          "paid",
+          "registrar",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "registrar",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "authorize",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "application",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'and', 'application', 'applies', 'audit', 'been', 'before'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "and",
+          "application",
+          "applies",
+          "audit",
+          "been",
+          "before",
+          "complete",
+          "court",
+          "deadline",
+          "fees",
+          "filing",
+          "have",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "or",
+          "order",
+          "paid",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "audit",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "filing",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'application', 'applies', 'complete', 'custodian', 'hold', 'hours'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "application",
+          "applies",
+          "complete",
+          "custodian",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "must"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "custodian",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "application",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', 'applicant', 'applies', 'been', 'before', 'clerk', 'deadline', 'fees'",
+        "source_oov_tokens": [
+          ",",
+          "applicant",
+          "applies",
+          "been",
+          "before",
+          "clerk",
+          "deadline",
+          "fees",
+          "have",
+          "hold",
+          "if",
+          "legal",
+          "must",
+          "notify",
+          "paid",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "clerk",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "notify",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "applicant",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'applicant', 'application', 'applies', 'clerk', 'complete', 'hold'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "applicant",
+          "application",
+          "applies",
+          "clerk",
+          "complete",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "must",
+          "notify"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "clerk",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "notify",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "applicant",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'application', 'applies', 'authorize', 'complete', 'hold', 'hours'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "application",
+          "applies",
+          "authorize",
+          "complete",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "must",
+          "registrar"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "registrar",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "authorize",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "application",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'application', 'applies', 'audit', 'complete', 'filing', 'hold'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "application",
+          "applies",
+          "audit",
+          "complete",
+          "filing",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "must"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "audit",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "filing",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'application', 'applies', 'audit', 'complete', 'court', 'filing'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "application",
+          "applies",
+          "audit",
+          "complete",
+          "court",
+          "filing",
+          "hours",
+          "if",
+          "is",
+          "must",
+          "order"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "audit",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "filing",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'application', 'applies', 'authorize', 'complete', 'court', 'hours'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "application",
+          "applies",
+          "authorize",
+          "complete",
+          "court",
+          "hours",
+          "if",
+          "is",
+          "must",
+          "order",
+          "registrar"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "registrar",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "authorize",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "application",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'and', 'applicant', 'application', 'applies', 'been', 'before'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "and",
+          "applicant",
+          "application",
+          "applies",
+          "been",
+          "before",
+          "clerk",
+          "complete",
+          "court",
+          "deadline",
+          "fees",
+          "have",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "notify",
+          "or",
+          "order",
+          "paid",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "clerk",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "notify",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "applicant",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', 'application', 'applies', 'been', 'before', 'custodian', 'deadline', 'fees'",
+        "source_oov_tokens": [
+          ",",
+          "application",
+          "applies",
+          "been",
+          "before",
+          "custodian",
+          "deadline",
+          "fees",
+          "have",
+          "hold",
+          "if",
+          "legal",
+          "must",
+          "paid",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "custodian",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "application",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'application', 'applies', 'complete', 'court', 'custodian', 'hours'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "application",
+          "applies",
+          "complete",
+          "court",
+          "custodian",
+          "hours",
+          "if",
+          "is",
+          "must",
+          "order"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "custodian",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "application",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'and', 'application', 'applies', 'been', 'before', 'complete'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "and",
+          "application",
+          "applies",
+          "been",
+          "before",
+          "complete",
+          "court",
+          "custodian",
+          "deadline",
+          "fees",
+          "have",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "or",
+          "order",
+          "paid",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "custodian",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "application",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', 'applies', 'audit', 'been', 'before', 'deadline', 'fees', 'filing'",
+        "source_oov_tokens": [
+          ",",
+          "applies",
+          "audit",
+          "been",
+          "before",
+          "deadline",
+          "fees",
+          "filing",
+          "have",
+          "hold",
+          "if",
+          "legal",
+          "must",
+          "paid",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "audit",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "filing",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'applicant', 'application', 'applies', 'clerk', 'complete', 'court'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "applicant",
+          "application",
+          "applies",
+          "clerk",
+          "complete",
+          "court",
+          "hours",
+          "if",
+          "is",
+          "must",
+          "notify",
+          "order"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "clerk",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "notify",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "applicant",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'and', 'application', 'applies', 'authorize', 'been', 'before'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "and",
+          "application",
+          "applies",
+          "authorize",
+          "been",
+          "before",
+          "complete",
+          "court",
+          "deadline",
+          "fees",
+          "have",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "or",
+          "order",
+          "paid",
+          "registrar",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "registrar",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "authorize",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "application",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'and', 'application', 'applies', 'been', 'before', 'clerk'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "and",
+          "application",
+          "applies",
+          "been",
+          "before",
+          "clerk",
+          "complete",
+          "court",
+          "deadline",
+          "fees",
+          "filing",
+          "have",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "or",
+          "order",
+          "paid",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "clerk",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "filing",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'applicant', 'application', 'applies', 'complete', 'hold', 'hours'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "applicant",
+          "application",
+          "applies",
+          "complete",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "must",
+          "notify"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "notify",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "applicant",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'application', 'applies', 'clerk', 'complete', 'court', 'filing'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "application",
+          "applies",
+          "clerk",
+          "complete",
+          "court",
+          "filing",
+          "hours",
+          "if",
+          "is",
+          "must",
+          "order"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "clerk",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "filing",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'and', 'applicant', 'application', 'applies', 'been', 'before'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "and",
+          "applicant",
+          "application",
+          "applies",
+          "been",
+          "before",
+          "complete",
+          "court",
+          "deadline",
+          "fees",
+          "have",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "notify",
+          "or",
+          "order",
+          "paid",
+          "review"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "notify",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "applicant",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "facet": "temporal"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'application', 'applies', 'clerk', 'complete', 'filing', 'hold'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "application",
+          "applies",
+          "clerk",
+          "complete",
+          "filing",
+          "hold",
+          "hours",
+          "if",
+          "is",
+          "legal",
+          "must"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "clerk",
+            "facet": "actor"
+          },
+          {
+            "canonical_symbol": "filing",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      },
+      {
+        "id": "sha256:fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+        "source_compatible": false,
+        "source_failure": "source contains out-of-vocabulary tokens: ',', '48', 'applicant', 'application', 'applies', 'complete', 'court', 'hours'",
+        "source_oov_tokens": [
+          ",",
+          "48",
+          "applicant",
+          "application",
+          "applies",
+          "complete",
+          "court",
+          "hours",
+          "if",
+          "is",
+          "must",
+          "notify",
+          "order"
+        ],
+        "source_token_count": null,
+        "target_compatible": false,
+        "target_failure": "target contains out-of-vocabulary typed atoms",
+        "target_oov_typed_symbols": [
+          {
+            "canonical_symbol": "notify",
+            "facet": "action"
+          },
+          {
+            "canonical_symbol": "applicant",
+            "facet": "object"
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "facet": "conditions"
+          },
+          {
+            "canonical_symbol": "court_order",
+            "facet": "exceptions"
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "facet": "temporal"
+          }
+        ],
+        "target_token_count": null
+      }
+    ],
+    "scope": "static_canonical_ir_and_casefold_source_token_transport_only_no_exact_anchor_output",
+    "source_compatible_count": 0,
+    "source_fidelity_established": false,
+    "target_compatible_count": 0
+  },
+  "retained_implementation_bindings": [
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 31271,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_learning.py",
+      "sha256": "bb5fad7e1410149be8e9fe649c5825ccff931ed2ab89c840c70c141b96c6a425"
+    },
+    {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 1948,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+      "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+    }
+  ],
+  "retained_lineage": "source_conditioned_formula_v1",
+  "schema": "alignment-canonical-byte-existing-codec-comparison/v1",
+  "source_fidelity_established": false,
+  "train_refit_example_ids": [
+    "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+    "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+    "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+    "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+    "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+    "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+    "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+    "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+    "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+    "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+    "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+    "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+    "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+    "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+    "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+    "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656"
+  ],
+  "train_refitted_codec_binding": {
+    "bytes": 2680,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/train_refitted_typed_atom_codec.json",
+    "sha256": "8a453e0b3d039aa58738d991b2604c6a8295790c13bc142eee6b0c687185212f"
+  },
+  "train_refitted_codec_sha256": "23e77eaac35cb28c741fc2d57fb9a0e55f459cc68222941c75a366245af1d406",
+  "train_refitted_no_neural_checkpoint": {
+    "learned_generation_executed": false,
+    "model_loaded": false,
+    "proof_authority": false,
+    "qualified": false,
+    "rows": [
+      {
+        "id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 22,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 36,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 22
+      },
+      {
+        "id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 23,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 23,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 22,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 23,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 22,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 21,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 22,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 36,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 22
+      },
+      {
+        "id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 22,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 22,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 37,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 22
+      },
+      {
+        "id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 23,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 21,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 37,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 22
+      },
+      {
+        "id": "sha256:2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 36,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 22
+      },
+      {
+        "id": "sha256:3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 23,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 21,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 37,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 22
+      },
+      {
+        "id": "sha256:e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 22,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      },
+      {
+        "id": "sha256:fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+        "source_compatible": true,
+        "source_failure": null,
+        "source_oov_tokens": [],
+        "source_token_count": 22,
+        "target_compatible": true,
+        "target_failure": null,
+        "target_oov_typed_symbols": [],
+        "target_token_count": 19
+      }
+    ],
+    "scope": "static_canonical_ir_and_casefold_source_token_transport_only_no_exact_anchor_output",
+    "source_compatible_count": 22,
+    "source_fidelity_established": false,
+    "target_compatible_count": 22
+  },
+  "train_source_vocabulary_sha256": "8e8b4d493bbc250ee586859f8fd84766c101c4b3ec149e25de9d8cf6e54f5311",
+  "train_target_vocabulary_sha256": "dc766da02901f594a6c6e9b22809e18a53749d79237bc31131f675fdbf9fbb21"
+}

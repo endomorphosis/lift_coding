@@ -1,0 +1,290 @@
+{
+  "schema": "autoformalization-retrieval-validation/v1",
+  "recorded_at_utc": "2026-10-03T06:41:38.011501+00:00",
+  "workspace_root": "/home/barberb/lift_coding",
+  "repository_root": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "root_head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+  "datasets_head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+  "head_scope": "Context references only; dirty working-tree files are bound separately.",
+  "checks": [
+    {
+      "check": "focused_regression_tests",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_inventory.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_capabilities.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_baseline.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_study.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_projection.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_retrieval.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review_admission.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_retrieval_experiment.py"
+      ],
+      "exit_code": 0,
+      "passed": 307,
+      "elapsed_seconds": 9.1
+    },
+    {
+      "check": "ruff_new_python_files",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_admission.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+        "scripts/ops/legal_ir/run_alignment_retrieval_experiment.py",
+        "scripts/ops/legal_ir/admit_alignment_reviews.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_retrieval.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review_admission.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_retrieval_experiment.py"
+      ],
+      "exit_code": 0,
+      "files": 8
+    },
+    {
+      "check": "retrieval_cli",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/ops/legal_ir/run_alignment_retrieval_experiment.py",
+        "--output-directory",
+        "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/retrieval-01"
+      ],
+      "exit_code": 0,
+      "completed_geometries": 25,
+      "completed_policy_comparisons": 75
+    },
+    {
+      "check": "review_admission_cli",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/ops/legal_ir/admit_alignment_reviews.py",
+        "--review-bundle",
+        "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/projection-01/review_bundle.json",
+        "--expected-bundle-sha256",
+        "a1d712b5df4976e0fdd0c6cdc149f7eb08f6aebc1de6d60fb0b2caabfa171067",
+        "--submission",
+        "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/projection-01/reviewer_items.json",
+        "f1b92a0db024cb926ad4450295b82fe35a4906ee88e44903c82b4cfeceb7cc49",
+        "--output-directory",
+        "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/review-admission-02"
+      ],
+      "exit_code": 0,
+      "receipt_status": "pending",
+      "pending_items": 40,
+      "preliminary_candidates": 0
+    }
+  ],
+  "changed_file_bindings": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval.py",
+      "sha256": "4b436e8dd2ac49f89e52465aedfc13186a3f6cf9f255c9dc711cde72554b7c63",
+      "bytes": 20701
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_admission.py",
+      "sha256": "5ada191c03af4cfb3f69a60b116116b3ecfcec30b961030b20e66c631932d14e",
+      "bytes": 22279
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318",
+      "bytes": 17653
+    },
+    {
+      "path": "external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_retrieval_experiment.py",
+      "sha256": "9f44413d5a176c6d72e88a11acf716313e8d832aa992421bf464541f80aa0e56",
+      "bytes": 1689
+    },
+    {
+      "path": "external/ipfs_datasets/scripts/ops/legal_ir/admit_alignment_reviews.py",
+      "sha256": "02061b21a9190ab41d271cb6fc30583a8ec0627e2366bf9e26fa819037e2ec70",
+      "bytes": 3028
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_retrieval.py",
+      "sha256": "c85a93167c1a76aa615a6a3e47661d4b4e22b8ac38b8a08cc5f862b247912f21",
+      "bytes": 21875
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_review_admission.py",
+      "sha256": "910a5186b60dc96a5ee3d353e2fa6fe895770f1a1a9b329bb0b1cd1c40671970",
+      "bytes": 16713
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_retrieval_experiment.py",
+      "sha256": "9c1ee58118f396baa92db17d1faf244ba33edea5cd9edc10b7a0d64210a1ab07",
+      "bytes": 9068
+    },
+    {
+      "path": "external/ipfs_datasets/configs/autoencoders/alignment_retrieval_development_v1.json",
+      "sha256": "11b446957bd7cd6d970146a402c3bebf0dac629502c9e60bcdb87d990f05f696",
+      "bytes": 517
+    },
+    {
+      "path": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "sha256": "d2cdd930e7c017a16f0eb27b067b2ae53afc663883cd324ba64f31634adcb340",
+      "bytes": 9256
+    }
+  ],
+  "human_report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+    "sha256": "341e944b00280c49fb7de07c6918437a86af7af1fcb3538b873a524d37bf24ea",
+    "bytes": 9558
+  },
+  "machine_report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/retrieval-01/report.json",
+    "sha256": "edd57679e2a41b2f5c5d67ab8940058a54e21aadf48ee2f89894e49e469ad47b",
+    "bytes": 29242359
+  },
+  "compact_summary_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/retrieval-summary.json",
+    "sha256": "ca0a7cdcb8c8e46fb37a9ac9f6ff5f41518173441a0af715f6cc0d7777ed3768",
+    "bytes": 546473
+  },
+  "review_cli_artifact_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/review-admission-02/review_admission.json",
+    "sha256": "684fea10b2af43c414b2f45a6121a1f60b49bb01e5eb132a79d22cc82ace7410",
+    "bytes": 88841
+  },
+  "report_payload_sha256": "481a36770b96820f6045582424fae02e81cbaeaa839fdaba755041f6e17c7841",
+  "listed_source_bindings_rechecked": 19,
+  "artifact_checkpoint_hashes_rechecked": 12,
+  "cosine_query_orderings_reproduced": 3000,
+  "maximum_cosine_score_difference": 2.550603221962433e-07,
+  "policy_shortlist_trace_rows_checked": 9000,
+  "protected_protocol_and_input_bindings": [
+    {
+      "path": "papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/legal_ir/train.json",
+      "sha256": "00f4074cca56daed9f766e74c90d3d35e608bfb1058c24db99fc30250314704f",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/legal_ir/validation.json",
+      "sha256": "6a07b7a4d7c73802fc4a31a2666adcb312706fcc3deffbc46626d9d8914d43c9",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/preparation.json",
+      "sha256": "688d06be83671d0274801958fcc47c725c5023f0ca9e41a8330cff657eafb914",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/gte-embedding-reuse-20261002/archive-reuse-audit.json",
+      "sha256": "4218b8d58fc09cb6b06610936b13855f4f0a6fb0447f6ec5473332941c89c593",
+      "digest_rechecked": true
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/source_reconstruction_v3.py",
+      "sha256": "5498592e48f174e872b059b055da596aff543fbce76709408f835ca92bfd36da",
+      "digest_rechecked": true
+    }
+  ],
+  "review_receipt_digests_rechecked": true,
+  "review_source_and_submission_bindings_rechecked": true,
+  "local_links_checked": 17,
+  "local_links": [
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "retrieval-01/report.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "retrieval-summary.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "../../external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "projection-report.md"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "../../external/ipfs_datasets/scripts/ops/legal_ir/admit_alignment_reviews.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "review-admission-02/review_admission.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "projection-01/reviewer_items.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "../../implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/retrieval-report.md",
+      "target": "retrieval-validation.json"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "target": "alignment_projection_experiment.md"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "target": "alignment_study.md"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "target": "../../scripts/ops/legal_ir/run_alignment_retrieval_experiment.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "target": "../../configs/autoencoders/alignment_retrieval_development_v1.json"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "target": "../../ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "target": "../../ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "target": "../../ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_admission.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_retrieval_experiment.md",
+      "target": "../../scripts/ops/legal_ir/admit_alignment_reviews.py"
+    }
+  ],
+  "complete_dependency_manifest": false,
+  "elapsed_seconds": 26.961600496000756,
+  "numerical_scope": {
+    "head_precision": "float32",
+    "ridge_and_ranking_precision": "float64",
+    "torch_version": "2.13.0+cu130"
+  },
+  "new_fit_scope": "Training-only raw-384D core-facet ridge probe.",
+  "existing_encoder_autoencoder_projection_weights_trained": false,
+  "native_prover_executed": false,
+  "leanstral_loaded": false,
+  "sealed_final_test_accessed": false,
+  "primary_fidelity_status": "unavailable",
+  "native_useful_proof_status": "unrun",
+  "qualified": false,
+  "production_admitted": false,
+  "conclusion": "MMR improves exposed synthetic retrieval; formal composition and independent fidelity remain unresolved."
+}

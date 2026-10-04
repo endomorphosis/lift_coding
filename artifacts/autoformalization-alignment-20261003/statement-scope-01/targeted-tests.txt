@@ -1,0 +1,31 @@
+........................................................................ [ 20%]
+........................................................................ [ 40%]
+........................................................................ [ 61%]
+........................................................................ [ 81%]
+.............................................................F....       [100%]
+=================================== FAILURES ===================================
+_______ test_existing_adapter_registry_is_composed_without_new_families ________
+
+    def test_existing_adapter_registry_is_composed_without_new_families() -> None:
+        adapter_records = adapter_conformance_records()
+        manifest = logic_bridge_manifest()
+        contracts = typed_bridge_contract_manifest()
+    
+>       assert manifest["implemented_bridges"] == [
+            "modal_frame_logic",
+            "deontic_norms",
+            "fol_tdfol",
+            "cec_dcec",
+            "external_prover_router",
+            "zkp_attestation",
+        ]
+E       AssertionError: assert ['modal_frame...station', ...] == ['modal_frame..._attestation']
+E         
+E         Left contains one more item: 'ui_ux_ir_formalization'
+E         Use -v to get more diff
+
+tests/unit/logic/legal_ir/test_canonical_typed_bridge.py:359: AssertionError
+- generated xml file: /home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/statement-scope-01/targeted-tests.xml -
+=========================== short test summary info ============================
+FAILED ../../../../../dev::test_existing_adapter_registry_is_composed_without_new_families
+1 failed, 353 passed in 3.69s

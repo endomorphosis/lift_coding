@@ -1,0 +1,370 @@
+{
+  "schema": "autoformalization-joint-validation/v1",
+  "recorded_at_utc": "2026-10-03T07:05:08.506624+00:00",
+  "workspace_root": "/home/barberb/lift_coding",
+  "repository_root": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "root_head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+  "datasets_head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+  "head_scope": "Context references only; dirty working-tree files are bound separately.",
+  "checks": [
+    {
+      "check": "focused_regression_tests",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_inventory.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_capabilities.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_baseline.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_study.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_projection.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_retrieval.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review_admission.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_retrieval_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_joint_retrieval.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_joint_experiment.py"
+      ],
+      "exit_code": 0,
+      "passed": 387,
+      "elapsed_seconds": 13.63
+    },
+    {
+      "check": "ruff_new_python_files",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_joint_experiment.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_joint_retrieval.py",
+        "scripts/ops/legal_ir/run_alignment_joint_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_joint_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_joint_retrieval.py"
+      ],
+      "exit_code": 0,
+      "files": 5
+    },
+    {
+      "check": "joint_cli",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/ops/legal_ir/run_alignment_joint_experiment.py",
+        "--output-directory",
+        "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01"
+      ],
+      "exit_code": 0,
+      "completed_geometries": 25,
+      "completed_policy_comparisons": 75
+    }
+  ],
+  "changed_file_bindings": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_joint_experiment.py",
+      "sha256": "b0109ec410e589938a12a91777ac2a7b45fb533950a4d567db5b0e836b8dccc5",
+      "bytes": 20621
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_joint_retrieval.py",
+      "sha256": "72f875fc0f142615c8e60746ed9665423762198397abb13666d0747115d6a0de",
+      "bytes": 8701
+    },
+    {
+      "path": "external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_joint_experiment.py",
+      "sha256": "a8a0f27fc5a15dde6f88807bc38a234d0881a93bba5c5385fc01b85935718bae",
+      "bytes": 1674
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_joint_experiment.py",
+      "sha256": "ac7c68d99aa6adc134ce64b27d61e1676f6543b5ca9f629e12f0321fd076a915",
+      "bytes": 15814
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_joint_retrieval.py",
+      "sha256": "868d888df8c189574852289f03a90ca5def9119022e2396f6cfb5a7fc63e2c8b",
+      "bytes": 19610
+    },
+    {
+      "path": "external/ipfs_datasets/configs/autoencoders/alignment_joint_development_v1.json",
+      "sha256": "04cf447c3334b0e95a3692058ed6a459b72bd5a9312d415007ff2112993d8f9d",
+      "bytes": 441
+    },
+    {
+      "path": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "sha256": "9c57b6942c99bebd069dc66772a4a28ea98bd2738ce8e32e9c6b1da81eb441f5",
+      "bytes": 9711
+    }
+  ],
+  "human_report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/joint-report.md",
+    "sha256": "11774b699e0eacfd785757b024292f548144e15a2e3c12b139b12b43d60e179c",
+    "bytes": 9801
+  },
+  "machine_report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/joint-01/report.json",
+    "sha256": "b46b6e453ccd9fbe6e411b37aada410855b9c8c0db65bea930a2f97897d52bc3",
+    "bytes": 554214
+  },
+  "report_payload_sha256": "abd168c599270594a762d75ab7ddb252b5c789cfcf2dff04c2df970834057652",
+  "detail_artifact_bindings": [
+    {
+      "bytes": 1758805,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-00.json",
+      "sha256": "34cdb2a7ecd8d56d4fe631f925bf8724fe21df3a03f378d6174495c51c544a9e"
+    },
+    {
+      "bytes": 1735681,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-01.json",
+      "sha256": "f87d5018b4d373a5835320104b9c53807b8b6f923cffaf0da74c3ab2311b7f8e"
+    },
+    {
+      "bytes": 1726440,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-02.json",
+      "sha256": "1d0410514d5cbc3f2e3e7ac275c015dc577791330d23008fc4cc16937d089adc"
+    },
+    {
+      "bytes": 1729987,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-03.json",
+      "sha256": "25ac96e48c0bebb93d102b8e778ae2702f7a644cdb18ecfe6f2d1c72b3618edb"
+    },
+    {
+      "bytes": 1727809,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-04.json",
+      "sha256": "ff18a7f7433bd4c9df4b9614894be9a0a02b7af18494282fc22ccbabe547d2d0"
+    },
+    {
+      "bytes": 1733916,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-05.json",
+      "sha256": "fc7db10413fdedac5ff30cf623601741637ca165ff63c371ffdae5fbdb60c7d3"
+    },
+    {
+      "bytes": 1731119,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-06.json",
+      "sha256": "d25206337c2d872bd9d8b15ad82a59ffa331e57dc2fb4f9bbd00d1f2d8dd4097"
+    },
+    {
+      "bytes": 1735392,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-07.json",
+      "sha256": "dfe0d8d14d2469f705c3fcd1efa7f6d4e0866fcdc766ef4315d8d68b16f63454"
+    },
+    {
+      "bytes": 1745261,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-08.json",
+      "sha256": "1bb17c69aac07d9cf52d17b65b00cd5ab8837c510509c5e317ee5929c6500ec0"
+    },
+    {
+      "bytes": 1737281,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-09.json",
+      "sha256": "ade0e3430a82e4273643e615e5d2da50a8125e81ebc225b4eeba5bb6596e5c2d"
+    },
+    {
+      "bytes": 1727174,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-10.json",
+      "sha256": "d416542913d81de2d9258b11596060828716926bdfe9f5767dad890be0b07fbb"
+    },
+    {
+      "bytes": 1735448,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-11.json",
+      "sha256": "148b6526974e06d127eb5ad218cf53213c1ec700971d8084d059c39ad3fef70c"
+    },
+    {
+      "bytes": 1731150,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-12.json",
+      "sha256": "9b75c0cc9f136d2cad0784278dbb78107f6a7df5c23175ac28438ea1cef20c40"
+    },
+    {
+      "bytes": 1731925,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-13.json",
+      "sha256": "e722e5e54d2765897c61bc5c3d8400d3d968250bdfc43b9689569e8aae796f79"
+    },
+    {
+      "bytes": 1725462,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-14.json",
+      "sha256": "c3aa66ec8c7b8d1a2a453f6e6ae0b5ae609be34a7eb0cf1b9da1096bb49ba4d2"
+    },
+    {
+      "bytes": 1738358,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-15.json",
+      "sha256": "b08e9029561ae025154c36cb5cdebfb5cb4302cc43435addea91c43ede1c9a5e"
+    },
+    {
+      "bytes": 1731712,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-16.json",
+      "sha256": "701f4a0d751dac8cd0f7430581946a740dec9f02e2ecc55078721304c455f536"
+    },
+    {
+      "bytes": 1736099,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-17.json",
+      "sha256": "78ffc3bc1bfa0289fc350cebf9d948c82f576586b60134e4eb1036f9225dc13f"
+    },
+    {
+      "bytes": 1729758,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-18.json",
+      "sha256": "c2727348bc00b6b1e2a5d42c42290fe1c63d1d2a6c692e2b2f686aef1bf143df"
+    },
+    {
+      "bytes": 1736313,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-19.json",
+      "sha256": "91c23f900be1e60ef208953e8d40a8c0aa757337df05cd3932d68efcf5062230"
+    },
+    {
+      "bytes": 1729414,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-20.json",
+      "sha256": "69b93c00a389a1bf235e25fd8723bfccd3fede3ea709fb2b61de1c05e1acad1a"
+    },
+    {
+      "bytes": 1733944,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-21.json",
+      "sha256": "08abb658cd2675fd966f30febe15fa5b22e3775caaa54c27e6a79f1cdaa3143b"
+    },
+    {
+      "bytes": 1728309,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-22.json",
+      "sha256": "0c49efa975dbb3503512909caa73993c15edbd6b6c77fefd50c9d1f3e2a49e5b"
+    },
+    {
+      "bytes": 1732905,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-23.json",
+      "sha256": "7d0a1ecf67c452b4babc51eba5628d52d526dd164b65d9cd5c6c508567f37328"
+    },
+    {
+      "bytes": 1731330,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/joint-01/geometry-24.json",
+      "sha256": "e204d001a0f193c9c9299c8d27f0a5e34ca562b83826e4037591129f311497bb"
+    }
+  ],
+  "listed_source_bindings_rechecked": 22,
+  "artifact_checkpoint_hashes_rechecked": 12,
+  "detail_artifacts_rechecked": 25,
+  "scored_policy_query_rows_rechecked": 9000,
+  "mmr_query_orderings_reproduced": 3000,
+  "mmr_selection_traces_reproduced": 3000,
+  "maximum_mmr_cosine_score_difference": 0,
+  "all_hard_joint_geometry_support_equals_shortlist_ceiling": true,
+  "formal_hard_joint_misses": 47,
+  "formal_hard_joint_query_geometry_outcomes": 1440,
+  "protected_protocol_and_input_bindings": [
+    {
+      "path": "papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/legal_ir/train.json",
+      "sha256": "00f4074cca56daed9f766e74c90d3d35e608bfb1058c24db99fc30250314704f",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/legal_ir/validation.json",
+      "sha256": "6a07b7a4d7c73802fc4a31a2666adcb312706fcc3deffbc46626d9d8914d43c9",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/preparation.json",
+      "sha256": "688d06be83671d0274801958fcc47c725c5023f0ca9e41a8330cff657eafb914",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/gte-embedding-reuse-20261002/archive-reuse-audit.json",
+      "sha256": "4218b8d58fc09cb6b06610936b13855f4f0a6fb0447f6ec5473332941c89c593",
+      "digest_rechecked": true
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/source_reconstruction_v3.py",
+      "sha256": "5498592e48f174e872b059b055da596aff543fbce76709408f835ca92bfd36da",
+      "digest_rechecked": true
+    }
+  ],
+  "review_status_counts": {
+    "agreed_multiple_reviews": 0,
+    "ambiguous": 0,
+    "disputed": 0,
+    "pending": 40,
+    "single_review": 0,
+    "unsupported": 0
+  },
+  "preliminary_candidate_count": 0,
+  "frozen_probe_and_predictions_rechecked": true,
+  "review_receipt_digest_rechecked": true,
+  "local_links_checked": 13,
+  "local_links": [
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/joint-report.md",
+      "target": "joint-01/report.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/joint-report.md",
+      "target": "../../external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/joint-report.md",
+      "target": "joint-validation.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/joint-report.md",
+      "target": "projection-01/reviewer_items.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/joint-report.md",
+      "target": "../../implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "target": "alignment_retrieval_experiment.md"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "target": "../../scripts/ops/legal_ir/run_alignment_joint_experiment.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "target": "../../configs/autoencoders/alignment_joint_development_v1.json"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "target": "../../ipfs_datasets_py/logic/formalization/autoencoder/alignment_joint_experiment.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "target": "alignment_projection_experiment.md"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "target": "../../ipfs_datasets_py/logic/formalization/autoencoder/alignment_joint_retrieval.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "target": "alignment_retrieval_experiment.md"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_joint_retrieval_experiment.md",
+      "target": "alignment_study.md"
+    }
+  ],
+  "complete_dependency_manifest": false,
+  "elapsed_seconds": 28.81943589200091,
+  "numerical_scope": {
+    "head_precision": "float32",
+    "prediction_and_ranking_precision": "float64",
+    "torch_version": "2.13.0+cu130"
+  },
+  "existing_encoder_autoencoder_projection_weights_trained": false,
+  "probe_refitted": false,
+  "calibration_fitted": false,
+  "native_prover_executed": false,
+  "leanstral_loaded": false,
+  "sealed_final_test_accessed": false,
+  "primary_fidelity_status": "unavailable",
+  "native_useful_proof_status": "unrun",
+  "qualified": false,
+  "production_admitted": false,
+  "conclusion": "Hard joint selection exhausts synthetic shortlist support with raw relevance regression; remaining formal misses are candidate availability failures, not proof or fidelity results.",
+  "all_formal_shortlists_have_actor_support": true,
+  "remaining_formal_shortlist_misses_require_action_support": 47
+}

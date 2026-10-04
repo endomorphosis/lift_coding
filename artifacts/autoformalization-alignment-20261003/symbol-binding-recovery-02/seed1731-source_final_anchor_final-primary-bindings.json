@@ -1,0 +1,5078 @@
+{
+  "accepted": false,
+  "assessment_scope": "static_observed_TRAIN_alias_consistency_only",
+  "authored_reference_ir_accessed": false,
+  "content_sha256": "8e15e22a2ccdb438eeeea086114371e75417f69700650975c1daed0d7f113ce2",
+  "counts": {
+    "binding_outcome_counts": {
+      "binding_consistent": 16,
+      "binding_unavailable": 18
+    },
+    "binding_unavailable_reason_counts": {
+      "context_clarification_required": 4,
+      "prior_anchor_abstention": 6,
+      "retained_source_codec_OOV": 2,
+      "source_preflight_blocked": 6
+    },
+    "by_row_kind": {
+      "ambiguous": {
+        "binding_outcome_counts": {
+          "binding_unavailable": 2
+        },
+        "candidate_output_available_count": 0,
+        "candidate_output_withheld_count": 0,
+        "original_full_proposal_count": 0,
+        "row_count": 2
+      },
+      "explicit_context": {
+        "binding_outcome_counts": {
+          "binding_unavailable": 2
+        },
+        "candidate_output_available_count": 0,
+        "candidate_output_withheld_count": 0,
+        "original_full_proposal_count": 0,
+        "row_count": 2
+      },
+      "positive": {
+        "binding_outcome_counts": {
+          "binding_consistent": 16,
+          "binding_unavailable": 8
+        },
+        "candidate_output_available_count": 16,
+        "candidate_output_withheld_count": 0,
+        "original_full_proposal_count": 16,
+        "row_count": 24
+      },
+      "unsupported": {
+        "binding_outcome_counts": {
+          "binding_unavailable": 6
+        },
+        "candidate_output_available_count": 0,
+        "candidate_output_withheld_count": 0,
+        "original_full_proposal_count": 0,
+        "row_count": 6
+      }
+    },
+    "by_split": {
+      "train": {
+        "binding_outcome_counts": {
+          "binding_consistent": 16
+        },
+        "candidate_output_available_count": 16,
+        "candidate_output_withheld_count": 0,
+        "original_full_proposal_count": 16,
+        "row_count": 16
+      },
+      "validation": {
+        "binding_outcome_counts": {
+          "binding_unavailable": 18
+        },
+        "candidate_output_available_count": 0,
+        "candidate_output_withheld_count": 0,
+        "original_full_proposal_count": 0,
+        "row_count": 18
+      }
+    },
+    "candidate_output_available_count": 16,
+    "candidate_output_withheld_count": 0,
+    "leaf_count": 124,
+    "leaf_outcome_counts": {
+      "ambiguous_alias": 0,
+      "known_alias_mismatch": 0,
+      "matched_single_alias": 124,
+      "unknown_literal": 0
+    },
+    "original_full_proposal_count": 16,
+    "original_generation_outcome_counts": {
+      "anchor_abstained": 6,
+      "anchored_proposal": 16,
+      "clarification_required": 4,
+      "source_blocked": 6,
+      "source_encoding_unavailable": 2
+    },
+    "row_count": 34
+  },
+  "encoder_executed": false,
+  "independent_semantic_review_completed": false,
+  "is_private_repeat": false,
+  "model_executed": false,
+  "neural_training_executed": false,
+  "original_generation_binding": {
+    "bytes": 299143,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1731-source_final_anchor_final-generation.json",
+    "sha256": "29cfc6e841a2b9180b49e8b54be78fdae9ebfbaa83881594368ceb275079d53b"
+  },
+  "original_generation_execution": "previously_saved_model_outputs_not_reexecuted",
+  "profile_binding": {
+    "bytes": 4520,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-01/train_alias_profile.json",
+    "sha256": "72a903993de9be49a4cf90db4f28f13b8ecfdf326013eeb640ef5107646a168f"
+  },
+  "profile_content_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+  "proof_authority": false,
+  "proposal_transport_flags_scope": "structural_transport_not_generation_provenance",
+  "prover_executed": false,
+  "qualified": false,
+  "query_reference_accessed": false,
+  "role": "source_final_anchor_final",
+  "row_count": 34,
+  "rows": [
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "5d8396e2cbab0879a53a9ed950012db573fb655529bb7b1b863b3ffe40624984",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "authorize",
+            "end": 28,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "authorize",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "authorize"
+            ],
+            "source_text": "authorize",
+            "start": 19
+          },
+          {
+            "claimed_symbol": "registrar",
+            "end": 13,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the registrar",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "registrar"
+            ],
+            "source_text": "The registrar",
+            "start": 0
+          },
+          {
+            "claimed_symbol": "fees_paid",
+            "end": 94,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "fees have been paid",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "fees_paid"
+            ],
+            "source_text": "fees have been paid",
+            "start": 75
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 123,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 103
+          },
+          {
+            "claimed_symbol": "O",
+            "end": 18,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "O"
+            ],
+            "source_text": "must",
+            "start": 14
+          },
+          {
+            "claimed_symbol": "application",
+            "end": 44,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the application",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application"
+            ],
+            "source_text": "the application",
+            "start": 29
+          },
+          {
+            "claimed_symbol": "before_the_review_deadline",
+            "end": 71,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "before the review deadline",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "before_the_review_deadline"
+            ],
+            "source_text": "before the review deadline",
+            "start": 45
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "8f109e485d2377fabb44a565f316c3e103e7383b9c5eb70c474034e2d0022998",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "8f109e485d2377fabb44a565f316c3e103e7383b9c5eb70c474034e2d0022998",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "f4704380e4825cecb0fc875a202f16d1d292cd1f05e04064139ddb7402b54a45",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "authorize",
+            "end": 28,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "authorize",
+            "start": 19
+          },
+          {
+            "canonical_symbol": "registrar",
+            "end": 13,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "The registrar",
+            "start": 0
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "end": 94,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "fees have been paid",
+            "start": 75
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 123,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 103
+          },
+          {
+            "canonical_symbol": "O",
+            "end": 18,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must",
+            "start": 14
+          },
+          {
+            "canonical_symbol": "application",
+            "end": 44,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application",
+            "start": 29
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "end": 71,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "before the review deadline",
+            "start": 45
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "authorize",
+              "actor": "registrar",
+              "conditions": [
+                "fees_paid"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "application",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 0,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "8547e4b6f399ce4df091a0d25e23d0193b8b1084ec8502fa0d465f247577297a",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "4d5fdf885edf72d0ff8787725abfcdb0eea01a41d6abc9b475bf930e1bec460d",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 10,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 10,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "audit",
+            "end": 21,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "audit",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "audit"
+            ],
+            "source_text": "audit",
+            "start": 16
+          },
+          {
+            "claimed_symbol": "officer",
+            "end": 11,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the officer",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "officer"
+            ],
+            "source_text": "The officer",
+            "start": 0
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 110,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 83
+          },
+          {
+            "claimed_symbol": "fees_paid",
+            "end": 134,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/1",
+            "normalized_literal": "fees have been paid",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "fees_paid"
+            ],
+            "source_text": "fees have been paid",
+            "start": 115
+          },
+          {
+            "claimed_symbol": "court_order",
+            "end": 164,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a court order applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "court_order"
+            ],
+            "source_text": "a court order applies",
+            "start": 143
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 188,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/1",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 168
+          },
+          {
+            "claimed_symbol": "P",
+            "end": 15,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "may",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "P"
+            ],
+            "source_text": "may",
+            "start": 12
+          },
+          {
+            "claimed_symbol": "filing",
+            "end": 32,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the filing",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "filing"
+            ],
+            "source_text": "the filing",
+            "start": 22
+          },
+          {
+            "claimed_symbol": "before_the_review_deadline",
+            "end": 79,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "before the review deadline",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "before_the_review_deadline"
+            ],
+            "source_text": "before the review deadline",
+            "start": 53
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 48,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/1",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 33
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "5b00d3d966ae2655fabba28eb4d74f03bb785484cd5fb2385c4ef1e92459fb29",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "5b00d3d966ae2655fabba28eb4d74f03bb785484cd5fb2385c4ef1e92459fb29",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "673ed693715924c71b065da93fff98fe290331ddd490f31da2cc53eae48efe7c",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "audit",
+            "end": 21,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "audit",
+            "start": 16
+          },
+          {
+            "canonical_symbol": "officer",
+            "end": 11,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "The officer",
+            "start": 0
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 110,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 83
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "end": 134,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "fees have been paid",
+            "start": 115
+          },
+          {
+            "canonical_symbol": "court_order",
+            "end": 164,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a court order applies",
+            "start": 143
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 188,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 168
+          },
+          {
+            "canonical_symbol": "P",
+            "end": 15,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "may",
+            "start": 12
+          },
+          {
+            "canonical_symbol": "filing",
+            "end": 32,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the filing",
+            "start": 22
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "end": 79,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "before the review deadline",
+            "start": 53
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 48,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 33
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "audit",
+              "actor": "officer",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "filing",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 1,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "e931786b053aee01d72e1ab2a786858e3731dd217885ce5bcbb872f6ced135c1",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "2f16e161d6781ecd8eea87eb8530f84a813c3c8e624337faf08b83985aa324ee",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "retain",
+            "end": 61,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "retain",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "retain"
+            ],
+            "source_text": "retain",
+            "start": 55
+          },
+          {
+            "claimed_symbol": "custodian",
+            "end": 45,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the custodian",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "custodian"
+            ],
+            "source_text": "the custodian",
+            "start": 32
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 122,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 102
+          },
+          {
+            "claimed_symbol": "F",
+            "end": 54,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must not",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "F"
+            ],
+            "source_text": "must not",
+            "start": 46
+          },
+          {
+            "claimed_symbol": "application",
+            "end": 77,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the application",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application"
+            ],
+            "source_text": "the application",
+            "start": 62
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 93,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 78
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "11130854ec3de5b129f13e8dd71f73fcd02988aa09d79509aff2ad76619a07f6",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "11130854ec3de5b129f13e8dd71f73fcd02988aa09d79509aff2ad76619a07f6",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "964310cb5138417b803848db22ca8ab0d8bbde3f19f5f4797fe8d390a86ab261",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "retain",
+            "end": 61,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "retain",
+            "start": 55
+          },
+          {
+            "canonical_symbol": "custodian",
+            "end": 45,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the custodian",
+            "start": 32
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 122,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 102
+          },
+          {
+            "canonical_symbol": "F",
+            "end": 54,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must not",
+            "start": 46
+          },
+          {
+            "canonical_symbol": "application",
+            "end": 77,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application",
+            "start": 62
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 93,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 78
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "application",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 2,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "f6ff6d8eade65549dddc1a5c9a24074e82a5b73b74982807cda936a3f978dfb9",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "context_clarification_required",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:negative:ambiguous_actor",
+      "id": "sha256:06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "clarification_required",
+      "original_generation_row_sha256": "595d16c146a081508dcabf001486c74b389ebaef67ff1edf2c6a51fc99ab131a",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 3,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "477d4810f3ac51c568c6128084fbaafb4e8d1544b73c2e2b6f051c3b3977f5c8",
+      "review_status": "pending",
+      "row_kind": "ambiguous",
+      "source_fidelity_established": false,
+      "source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "3a9b28e2434d60a0315e52b72b2dedafda88be599c1dd49d4d53b77cfa236965",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "notify",
+            "end": 45,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "notify",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "notify"
+            ],
+            "source_text": "notify",
+            "start": 39
+          },
+          {
+            "claimed_symbol": "clerk",
+            "end": 33,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the clerk",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "clerk"
+            ],
+            "source_text": "the clerk",
+            "start": 24
+          },
+          {
+            "claimed_symbol": "fees_paid",
+            "end": 22,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "fees have been paid",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "fees_paid"
+            ],
+            "source_text": "fees have been paid",
+            "start": 3
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 115,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 95
+          },
+          {
+            "claimed_symbol": "O",
+            "end": 38,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "O"
+            ],
+            "source_text": "must",
+            "start": 34
+          },
+          {
+            "claimed_symbol": "applicant",
+            "end": 59,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the applicant",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "applicant"
+            ],
+            "source_text": "the applicant",
+            "start": 46
+          },
+          {
+            "claimed_symbol": "before_the_review_deadline",
+            "end": 86,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "before the review deadline",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "before_the_review_deadline"
+            ],
+            "source_text": "before the review deadline",
+            "start": 60
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "1a1d098d19e0d369f449767edf64c24088da00b53c067d2deca737f74d6299e7",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "1a1d098d19e0d369f449767edf64c24088da00b53c067d2deca737f74d6299e7",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "9d04ba0f1d7cb4fcfe205c50390bc1d511e90abfccdba93c162bf761e260e5db",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "notify",
+            "end": 45,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "notify",
+            "start": 39
+          },
+          {
+            "canonical_symbol": "clerk",
+            "end": 33,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the clerk",
+            "start": 24
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "end": 22,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "fees have been paid",
+            "start": 3
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 115,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 95
+          },
+          {
+            "canonical_symbol": "O",
+            "end": 38,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must",
+            "start": 34
+          },
+          {
+            "canonical_symbol": "applicant",
+            "end": 59,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the applicant",
+            "start": 46
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "end": 86,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "before the review deadline",
+            "start": 60
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "clerk",
+              "conditions": [
+                "fees_paid"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "applicant",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 4,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "c7ad73053dbb5527b60d7cf49a3cb47ac2c9b7990b20897c59e601c4e2716687",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "context_clarification_required",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:negative:relative_calendar",
+      "id": "sha256:27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "clarification_required",
+      "original_generation_row_sha256": "3078291a7fa472fcccf7a1f8134c78f355376f8b9aead4af52de7fb5aca663ee",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 5,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "78068ec051de8b8d2dce792bbe7fb0cdb8f413a042eb9c744e39d5dcbed347dc",
+      "review_status": "pending",
+      "row_kind": "ambiguous",
+      "source_fidelity_established": false,
+      "source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "prior_anchor_abstention",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+      "id": "sha256:2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchor_abstained",
+      "original_generation_row_sha256": "83fd9766859732ebb150dff5157bcb4323fb6c8b2ec8f002051fb7a9a596c983",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 6,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "77c882edb8e3b80a50334bbf0bd6518792971d1ea6dd988987765beae5c10da2",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "retained_source_codec_OOV",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+      "id": "sha256:340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "source_encoding_unavailable",
+      "original_generation_row_sha256": "7030ad437753f6dcb5b7d8a48c1b0343ae3b8d4ed5680c010ac2431d3554fc34",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 7,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "5baf7c37b54741ea657d7dbcf67d7784fb3cab340f030f66343fed90810e1d2d",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "prior_anchor_abstention",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+      "id": "sha256:3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchor_abstained",
+      "original_generation_row_sha256": "edd049b342a1d32c2840e9ab69266e510678a1b8e841048af9eea2cb826e0183",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 8,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "923950c5410ae5b2a509c862f6a0a76f3840cffb8a916d47d1ded42d01f72b03",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "source_preflight_blocked",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:negative:linked_variables",
+      "id": "sha256:4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "source_blocked",
+      "original_generation_row_sha256": "88d1441d6b558d029fbf059dd15a6a00015d7178aeee3838acef64521c5deb2b",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 9,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "a43eb6100c5e0dde73e63974e71272ecbab534848671f73814b998243818383e",
+      "review_status": "pending",
+      "row_kind": "unsupported",
+      "source_fidelity_established": false,
+      "source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "prior_anchor_abstention",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+      "id": "sha256:44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchor_abstained",
+      "original_generation_row_sha256": "334a43735a13a78e3a9e5d5e36c6197417c95b31a89976d5b124f26e791798e3",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 10,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "52b5dd9420ea5a30f13fcd63dd99d93604174e5e37809513546f9085243ba8d3",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "413f2d82cc944bdacd97de74e78c8451fa3e565be2cf6bf5e250d7242d1a2d15",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "notify",
+            "end": 25,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "notify",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "notify"
+            ],
+            "source_text": "notify",
+            "start": 19
+          },
+          {
+            "claimed_symbol": "clerk",
+            "end": 9,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the clerk",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "clerk"
+            ],
+            "source_text": "The clerk",
+            "start": 0
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 86,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 59
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 115,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 95
+          },
+          {
+            "claimed_symbol": "F",
+            "end": 18,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must not",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "F"
+            ],
+            "source_text": "must not",
+            "start": 10
+          },
+          {
+            "claimed_symbol": "applicant",
+            "end": 39,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the applicant",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "applicant"
+            ],
+            "source_text": "the applicant",
+            "start": 26
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 55,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 40
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "7d6a453934a5435a0750d07c0839ba4f7e5521bf7a8fff145ea5f0254cef9a90",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "7d6a453934a5435a0750d07c0839ba4f7e5521bf7a8fff145ea5f0254cef9a90",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "fde97e8453882fc0edf1c143e1439bddd09fdfa083aa91389ef305f1db48a91f",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "notify",
+            "end": 25,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "notify",
+            "start": 19
+          },
+          {
+            "canonical_symbol": "clerk",
+            "end": 9,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "The clerk",
+            "start": 0
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 86,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 59
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 115,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 95
+          },
+          {
+            "canonical_symbol": "F",
+            "end": 18,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must not",
+            "start": 10
+          },
+          {
+            "canonical_symbol": "applicant",
+            "end": 39,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the applicant",
+            "start": 26
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 55,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 40
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "applicant",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 11,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "d7c82208b4902497c34e3373c85fbf9bb31ecedac4fd9348427deaaa257b3f5a",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "6caee3a96e5341c12be5860db278937ee0242012263db33772c02a3ed42d93cf",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "authorize",
+            "end": 64,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "authorize",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "authorize"
+            ],
+            "source_text": "authorize",
+            "start": 55
+          },
+          {
+            "claimed_symbol": "registrar",
+            "end": 45,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the registrar",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "registrar"
+            ],
+            "source_text": "the registrar",
+            "start": 32
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 125,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 105
+          },
+          {
+            "claimed_symbol": "F",
+            "end": 54,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must not",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "F"
+            ],
+            "source_text": "must not",
+            "start": 46
+          },
+          {
+            "claimed_symbol": "application",
+            "end": 80,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the application",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application"
+            ],
+            "source_text": "the application",
+            "start": 65
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 96,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 81
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "5c16cc1a06ddcf9ad18bd00015875b70e077ebecc08ec01ead2dc825ac6e3353",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "5c16cc1a06ddcf9ad18bd00015875b70e077ebecc08ec01ead2dc825ac6e3353",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "1265fa45e08288bc621f3b5a42d810a4f025b090a24ecfd781cd4120104cbd08",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "authorize",
+            "end": 64,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "authorize",
+            "start": 55
+          },
+          {
+            "canonical_symbol": "registrar",
+            "end": 45,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the registrar",
+            "start": 32
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 125,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 105
+          },
+          {
+            "canonical_symbol": "F",
+            "end": 54,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must not",
+            "start": 46
+          },
+          {
+            "canonical_symbol": "application",
+            "end": 80,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application",
+            "start": 65
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 96,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 81
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "authorize",
+              "actor": "registrar",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "application",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 12,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "c6b4b358c113b7a1f2f4f54a1ea08620fc30fa8211a3c43a05f9ed4b27ae108c",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "7a9844247f6c7bd8834742fba9a9ff73216e9b1907eb0a8897dfa3b585e4678b",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "audit",
+            "end": 26,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "audit",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "audit"
+            ],
+            "source_text": "audit",
+            "start": 21
+          },
+          {
+            "claimed_symbol": "officer",
+            "end": 11,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the officer",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "officer"
+            ],
+            "source_text": "The officer",
+            "start": 0
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 84,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 57
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 113,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 93
+          },
+          {
+            "claimed_symbol": "F",
+            "end": 20,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must not",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "F"
+            ],
+            "source_text": "must not",
+            "start": 12
+          },
+          {
+            "claimed_symbol": "filing",
+            "end": 37,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the filing",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "filing"
+            ],
+            "source_text": "the filing",
+            "start": 27
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 53,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 38
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "37a37cd296d2a9ed641f6c844ac1548c3bfb72a9d572eb9bc95973b72f4f8086",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "37a37cd296d2a9ed641f6c844ac1548c3bfb72a9d572eb9bc95973b72f4f8086",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "07e7f054dd076acb471fa906c5c8261b20b0e4d3dd4bd9ba1d5f930f948b6978",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "audit",
+            "end": 26,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "audit",
+            "start": 21
+          },
+          {
+            "canonical_symbol": "officer",
+            "end": 11,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "The officer",
+            "start": 0
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 84,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 57
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 113,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 93
+          },
+          {
+            "canonical_symbol": "F",
+            "end": 20,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must not",
+            "start": 12
+          },
+          {
+            "canonical_symbol": "filing",
+            "end": 37,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the filing",
+            "start": 27
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 53,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 38
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "audit",
+              "actor": "officer",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "filing",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 13,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "196c0f475805d0bc23c4a3a3215d51b9b012fc274bbd29d272657ce2ac5d8867",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "source_preflight_blocked",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:negative:unique_witness",
+      "id": "sha256:5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "source_blocked",
+      "original_generation_row_sha256": "82b82aaab4bb0ce4e80c6a1c2f133338e4a1e5279e667172e74ae653cbbcf45c",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 14,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "c43ddaef2ebb4b46f6bb7d907dbaa0e3a61c2d9a884b09ffa63c38fe8a7f1f48",
+      "review_status": "pending",
+      "row_kind": "unsupported",
+      "source_fidelity_established": false,
+      "source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "30ad11757bb36c7377fa420d2af6a23cbfb946425952f8c7d0fd6746bab6f7a3",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "audit",
+            "end": 22,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "audit",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "audit"
+            ],
+            "source_text": "audit",
+            "start": 17
+          },
+          {
+            "claimed_symbol": "officer",
+            "end": 11,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the officer",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "officer"
+            ],
+            "source_text": "The officer",
+            "start": 0
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 80,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 53
+          },
+          {
+            "claimed_symbol": "court_order",
+            "end": 110,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a court order applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "court_order"
+            ],
+            "source_text": "a court order applies",
+            "start": 89
+          },
+          {
+            "claimed_symbol": "O",
+            "end": 16,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "O"
+            ],
+            "source_text": "must",
+            "start": 12
+          },
+          {
+            "claimed_symbol": "filing",
+            "end": 33,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the filing",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "filing"
+            ],
+            "source_text": "the filing",
+            "start": 23
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 49,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 34
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "cee3a1218396588b4b988de8a8e1e0322584d0cfa00f600be7f022fec5340e47",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "cee3a1218396588b4b988de8a8e1e0322584d0cfa00f600be7f022fec5340e47",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "2dd90b827a702520d3f0fcedd44a6bad98687f28f8b90b0f18e0f6d54dda1ef1",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "audit",
+            "end": 22,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "audit",
+            "start": 17
+          },
+          {
+            "canonical_symbol": "officer",
+            "end": 11,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "The officer",
+            "start": 0
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 80,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 53
+          },
+          {
+            "canonical_symbol": "court_order",
+            "end": 110,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a court order applies",
+            "start": 89
+          },
+          {
+            "canonical_symbol": "O",
+            "end": 16,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must",
+            "start": 12
+          },
+          {
+            "canonical_symbol": "filing",
+            "end": 33,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the filing",
+            "start": 23
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 49,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 34
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "audit",
+              "actor": "officer",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "filing",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 15,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "30b6bcec8565a402450aa2424d7ccfea0d649f83ee37fde57b35c3437826f770",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "00dfaad1cea1a5d8affab9bb86000ecd3c47a9fab89d8a66cad192fafe83b961",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "authorize",
+            "end": 60,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "authorize",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "authorize"
+            ],
+            "source_text": "authorize",
+            "start": 51
+          },
+          {
+            "claimed_symbol": "registrar",
+            "end": 45,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the registrar",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "registrar"
+            ],
+            "source_text": "the registrar",
+            "start": 32
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "claimed_symbol": "court_order",
+            "end": 122,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a court order applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "court_order"
+            ],
+            "source_text": "a court order applies",
+            "start": 101
+          },
+          {
+            "claimed_symbol": "O",
+            "end": 50,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "O"
+            ],
+            "source_text": "must",
+            "start": 46
+          },
+          {
+            "claimed_symbol": "application",
+            "end": 76,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the application",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application"
+            ],
+            "source_text": "the application",
+            "start": 61
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 92,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 77
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "64fbcef69754129a01f21e476a6db2844d3c6209137465501d6866f00dd67725",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "64fbcef69754129a01f21e476a6db2844d3c6209137465501d6866f00dd67725",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "7870d7e4927d41196f0eadecacd44b1720b80af0dfec9eb8b1789ded40e907e3",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "authorize",
+            "end": 60,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "authorize",
+            "start": 51
+          },
+          {
+            "canonical_symbol": "registrar",
+            "end": 45,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the registrar",
+            "start": 32
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "canonical_symbol": "court_order",
+            "end": 122,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a court order applies",
+            "start": 101
+          },
+          {
+            "canonical_symbol": "O",
+            "end": 50,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must",
+            "start": 46
+          },
+          {
+            "canonical_symbol": "application",
+            "end": 76,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application",
+            "start": 61
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 92,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 77
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "authorize",
+              "actor": "registrar",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "application",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 16,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "3a2b4b19fc4afba248604db457d69394f1a5d69262f26f1cfe24fd86fc88f97e",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "retained_source_codec_OOV",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+      "id": "sha256:65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "source_encoding_unavailable",
+      "original_generation_row_sha256": "f390dec29e239ee5b2f56fac8d676d0d36a20c283e15d3a2a24fa193957cc02a",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 17,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "69a65e5c00459c40ede0be4c70ad37ed02611e9e0b2e9c59ccab22f8969a195e",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "ab36c1da53318eb3f4e0aa7df5d2ea7c23d7b55e32a036f9b7bb48272a5df77e",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 10,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 10,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "notify",
+            "end": 20,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "notify",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "notify"
+            ],
+            "source_text": "notify",
+            "start": 14
+          },
+          {
+            "claimed_symbol": "clerk",
+            "end": 9,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the clerk",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "clerk"
+            ],
+            "source_text": "The clerk",
+            "start": 0
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 112,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 85
+          },
+          {
+            "claimed_symbol": "fees_paid",
+            "end": 136,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/1",
+            "normalized_literal": "fees have been paid",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "fees_paid"
+            ],
+            "source_text": "fees have been paid",
+            "start": 117
+          },
+          {
+            "claimed_symbol": "court_order",
+            "end": 166,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a court order applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "court_order"
+            ],
+            "source_text": "a court order applies",
+            "start": 145
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 190,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/1",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 170
+          },
+          {
+            "claimed_symbol": "P",
+            "end": 13,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "may",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "P"
+            ],
+            "source_text": "may",
+            "start": 10
+          },
+          {
+            "claimed_symbol": "applicant",
+            "end": 34,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the applicant",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "applicant"
+            ],
+            "source_text": "the applicant",
+            "start": 21
+          },
+          {
+            "claimed_symbol": "before_the_review_deadline",
+            "end": 81,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "before the review deadline",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "before_the_review_deadline"
+            ],
+            "source_text": "before the review deadline",
+            "start": 55
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 50,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/1",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 35
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "14263107d47dfb204dbd7985ccd108f99212ac0767c73021e9eacd26f517c682",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "14263107d47dfb204dbd7985ccd108f99212ac0767c73021e9eacd26f517c682",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "13f5dfbe9b39ae65598f82d9ccd8c0f2793864782b9e9b26fa67703714472b88",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "notify",
+            "end": 20,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "notify",
+            "start": 14
+          },
+          {
+            "canonical_symbol": "clerk",
+            "end": 9,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "The clerk",
+            "start": 0
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 112,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 85
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "end": 136,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "fees have been paid",
+            "start": 117
+          },
+          {
+            "canonical_symbol": "court_order",
+            "end": 166,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a court order applies",
+            "start": 145
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 190,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 170
+          },
+          {
+            "canonical_symbol": "P",
+            "end": 13,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "may",
+            "start": 10
+          },
+          {
+            "canonical_symbol": "applicant",
+            "end": 34,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the applicant",
+            "start": 21
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "end": 81,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "before the review deadline",
+            "start": 55
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 50,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 35
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "applicant",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 18,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "ed933cd55f0524d3b665984dcaa92b41c42045a6e6146a4776988777ceea64f4",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "source_preflight_blocked",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:negative:condition_disjunction",
+      "id": "sha256:7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "source_blocked",
+      "original_generation_row_sha256": "f40534e90a14370d4cbc4b2fe4e207edec47458c3ad7621a8bfa4efe1db4d9c4",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 19,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "0ad0a0ca92a9483ad1b09396bbb8d356309772b731edb392719a803fd600a149",
+      "review_status": "pending",
+      "row_kind": "unsupported",
+      "source_fidelity_established": false,
+      "source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "dbaa9e6542737b890eabf4e2472e43dddc9a69bb54a318e3d6449326efc3b6f8",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "retain",
+            "end": 25,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "retain",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "retain"
+            ],
+            "source_text": "retain",
+            "start": 19
+          },
+          {
+            "claimed_symbol": "custodian",
+            "end": 13,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the custodian",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "custodian"
+            ],
+            "source_text": "The custodian",
+            "start": 0
+          },
+          {
+            "claimed_symbol": "fees_paid",
+            "end": 91,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "fees have been paid",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "fees_paid"
+            ],
+            "source_text": "fees have been paid",
+            "start": 72
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 120,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 100
+          },
+          {
+            "claimed_symbol": "O",
+            "end": 18,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "O"
+            ],
+            "source_text": "must",
+            "start": 14
+          },
+          {
+            "claimed_symbol": "application",
+            "end": 41,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the application",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application"
+            ],
+            "source_text": "the application",
+            "start": 26
+          },
+          {
+            "claimed_symbol": "before_the_review_deadline",
+            "end": 68,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "before the review deadline",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "before_the_review_deadline"
+            ],
+            "source_text": "before the review deadline",
+            "start": 42
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "95e34b33b6bbf723f39a92d19210823018eefd5e5e8933a8c1c054202d21f00e",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "95e34b33b6bbf723f39a92d19210823018eefd5e5e8933a8c1c054202d21f00e",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "a7c84e1ae3800d2b786bd984a392067192e1c78e7e18135eb544da971e26b52e",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "retain",
+            "end": 25,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "retain",
+            "start": 19
+          },
+          {
+            "canonical_symbol": "custodian",
+            "end": 13,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "The custodian",
+            "start": 0
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "end": 91,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "fees have been paid",
+            "start": 72
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 120,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 100
+          },
+          {
+            "canonical_symbol": "O",
+            "end": 18,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must",
+            "start": 14
+          },
+          {
+            "canonical_symbol": "application",
+            "end": 41,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application",
+            "start": 26
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "end": 68,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "before the review deadline",
+            "start": 42
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "fees_paid"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "application",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 20,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "c8eace5fc9c09ac98bdf1c62a565d8fef2a4df20a2bfca1cb381b07312a0d0c2",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "185321b019379a84e7f0f61db7d5eeda0653b4523e9e51fe430f6a6b3a6e6ed9",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "retain",
+            "end": 57,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "retain",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "retain"
+            ],
+            "source_text": "retain",
+            "start": 51
+          },
+          {
+            "claimed_symbol": "custodian",
+            "end": 45,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the custodian",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "custodian"
+            ],
+            "source_text": "the custodian",
+            "start": 32
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "claimed_symbol": "court_order",
+            "end": 119,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a court order applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "court_order"
+            ],
+            "source_text": "a court order applies",
+            "start": 98
+          },
+          {
+            "claimed_symbol": "O",
+            "end": 50,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "O"
+            ],
+            "source_text": "must",
+            "start": 46
+          },
+          {
+            "claimed_symbol": "application",
+            "end": 73,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the application",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application"
+            ],
+            "source_text": "the application",
+            "start": 58
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 89,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 74
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "c2c0afd4f1a06c5555c6ff302786984e89b768b46add6c195114fd6f89ad98cf",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "c2c0afd4f1a06c5555c6ff302786984e89b768b46add6c195114fd6f89ad98cf",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "f6883ad152a1c6532bf8157043fb7530d1de4ee836833e7bbd705362367485a5",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "retain",
+            "end": 57,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "retain",
+            "start": 51
+          },
+          {
+            "canonical_symbol": "custodian",
+            "end": 45,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the custodian",
+            "start": 32
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "canonical_symbol": "court_order",
+            "end": 119,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a court order applies",
+            "start": 98
+          },
+          {
+            "canonical_symbol": "O",
+            "end": 50,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must",
+            "start": 46
+          },
+          {
+            "canonical_symbol": "application",
+            "end": 73,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application",
+            "start": 58
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 89,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 74
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "application",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 21,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "1a55117ff2ae3a90ae8fa2f38ac95a18c6d56cf4535c731626d624054fc95e48",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "context_clarification_required",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "1475ecb77ed7c374b5769b531ce5e0090176e9cc8342a3b086e63ebc9f24e583",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:interpretation:designated_official",
+      "id": "sha256:857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "clarification_required",
+      "original_generation_row_sha256": "bc2ece990263b6dc9e52b1432bc2fca67bfd8625f62c48fc957ba134e14f2feb",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 22,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "0009d03fca0ec3e49af24598d3512595c3573c0336c2da7f0d68a5270dfaffec",
+      "review_status": "pending",
+      "row_kind": "explicit_context",
+      "source_fidelity_established": false,
+      "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "source_preflight_blocked",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:negative:exception_conjunction",
+      "id": "sha256:9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "source_blocked",
+      "original_generation_row_sha256": "29da9f5fabea364f7dc4c5294db47f977c96b0293a86abbb1ef3cea38e063123",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 23,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "bb5b0fa22589a6d5191956a9695b6304e9f4f2af4d7d32af02be4ba387def549",
+      "review_status": "pending",
+      "row_kind": "unsupported",
+      "source_fidelity_established": false,
+      "source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "context_clarification_required",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "5c447c36d664bb11b85f516d3b79bc1e941abe1e192f2155dc9cabc05637366b",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:interpretation:designated_official",
+      "id": "sha256:a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "clarification_required",
+      "original_generation_row_sha256": "af2a607ab452c5704466f0287d2e9193b3aa26dc8d0e559fbb0b6f98db9f4946",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 24,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "c5d7e9d3150d84b43139c82cf5f582636f53d859d6789caabc1403972f702064",
+      "review_status": "pending",
+      "row_kind": "explicit_context",
+      "source_fidelity_established": false,
+      "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "3292f9dcf871ec01bc9af7696a6a2a318a07b2f396ec506e7b0184e3115cc541",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 10,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 10,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "retain",
+            "end": 80,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "retain",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "retain"
+            ],
+            "source_text": "retain",
+            "start": 74
+          },
+          {
+            "claimed_symbol": "custodian",
+            "end": 69,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the custodian",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "custodian"
+            ],
+            "source_text": "the custodian",
+            "start": 56
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "claimed_symbol": "fees_paid",
+            "end": 54,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/1",
+            "normalized_literal": "fees have been paid",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "fees_paid"
+            ],
+            "source_text": "fees have been paid",
+            "start": 35
+          },
+          {
+            "claimed_symbol": "court_order",
+            "end": 173,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a court order applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "court_order"
+            ],
+            "source_text": "a court order applies",
+            "start": 152
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 197,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/1",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 177
+          },
+          {
+            "claimed_symbol": "P",
+            "end": 73,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "may",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "P"
+            ],
+            "source_text": "may",
+            "start": 70
+          },
+          {
+            "claimed_symbol": "application",
+            "end": 96,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the application",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application"
+            ],
+            "source_text": "the application",
+            "start": 81
+          },
+          {
+            "claimed_symbol": "before_the_review_deadline",
+            "end": 143,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "before the review deadline",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "before_the_review_deadline"
+            ],
+            "source_text": "before the review deadline",
+            "start": 117
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 112,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/1",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 97
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "32514e2ec0046c0da94b72a24c967f80774f7a67d59ac4c10caf467127a72a47",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "32514e2ec0046c0da94b72a24c967f80774f7a67d59ac4c10caf467127a72a47",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "8a7dabc3ca7ee97ca0b78748a7f1608fccdd9ebb0be862b6d949dbc8ea0a0ada",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "retain",
+            "end": 80,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "retain",
+            "start": 74
+          },
+          {
+            "canonical_symbol": "custodian",
+            "end": 69,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the custodian",
+            "start": 56
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "end": 54,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "fees have been paid",
+            "start": 35
+          },
+          {
+            "canonical_symbol": "court_order",
+            "end": 173,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a court order applies",
+            "start": 152
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 197,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 177
+          },
+          {
+            "canonical_symbol": "P",
+            "end": 73,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "may",
+            "start": 70
+          },
+          {
+            "canonical_symbol": "application",
+            "end": 96,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application",
+            "start": 81
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "end": 143,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "before the review deadline",
+            "start": 117
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 112,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 97
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "application",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 25,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "11a9afdeaca6690fe5442417a945659d154e21b846883bb66967cb0cb28fbdb7",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "prior_anchor_abstention",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+      "id": "sha256:b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchor_abstained",
+      "original_generation_row_sha256": "37c734f21b2ad45c6ab56325e33a8a1d6902a80da75f921effe8621ce5afd601",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 26,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "ae02459657ee7d42c3c02c2f581eaa105b53e0bc7a46af090a3d16d2aa5acfb1",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "d57051e7f9cc1adbe9dc05722791ba42a1d3b73af656230b5d28366bd02fd74f",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "audit",
+            "end": 46,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "audit",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "audit"
+            ],
+            "source_text": "audit",
+            "start": 41
+          },
+          {
+            "claimed_symbol": "officer",
+            "end": 35,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the officer",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "officer"
+            ],
+            "source_text": "the officer",
+            "start": 24
+          },
+          {
+            "claimed_symbol": "fees_paid",
+            "end": 22,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "fees have been paid",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "fees_paid"
+            ],
+            "source_text": "fees have been paid",
+            "start": 3
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 113,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 93
+          },
+          {
+            "claimed_symbol": "O",
+            "end": 40,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "O"
+            ],
+            "source_text": "must",
+            "start": 36
+          },
+          {
+            "claimed_symbol": "filing",
+            "end": 57,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the filing",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "filing"
+            ],
+            "source_text": "the filing",
+            "start": 47
+          },
+          {
+            "claimed_symbol": "before_the_review_deadline",
+            "end": 84,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "before the review deadline",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "before_the_review_deadline"
+            ],
+            "source_text": "before the review deadline",
+            "start": 58
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "6a869b97dbeb1cc1d251e29d9f22eb463ea1502ded9dbe0c3d50d5ca66b45494",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "6a869b97dbeb1cc1d251e29d9f22eb463ea1502ded9dbe0c3d50d5ca66b45494",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "5f1eaa22f463703a74c5f97c5cd661428ebdf54b62b3f4310c0b673bd88e1347",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "audit",
+            "end": 46,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "audit",
+            "start": 41
+          },
+          {
+            "canonical_symbol": "officer",
+            "end": 35,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the officer",
+            "start": 24
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "end": 22,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "fees have been paid",
+            "start": 3
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 113,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 93
+          },
+          {
+            "canonical_symbol": "O",
+            "end": 40,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must",
+            "start": 36
+          },
+          {
+            "canonical_symbol": "filing",
+            "end": 57,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the filing",
+            "start": 47
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "end": 84,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "before the review deadline",
+            "start": 58
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "audit",
+              "actor": "officer",
+              "conditions": [
+                "fees_paid"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "filing",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 27,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "dce6616c2247cd42ee95bf1a574f8c55139073c9e3d07b1cbc4f7292790d5127",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "source_preflight_blocked",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:negative:quantified_scope",
+      "id": "sha256:d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "source_blocked",
+      "original_generation_row_sha256": "013e12d45ced815ff3209d383338480eea08ae43602336ebcff5f26de28310aa",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 28,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "f0ec8f95e5ef2c0450340e01d33f022ace6283533ee049efd64b1dfa82290261",
+      "review_status": "pending",
+      "row_kind": "unsupported",
+      "source_fidelity_established": false,
+      "source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "source_preflight_blocked",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:negative:negated_obligation",
+      "id": "sha256:d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "source_blocked",
+      "original_generation_row_sha256": "e0dcbb4f05318251db2db941f9d8d58741de5a89889e28000afba8aee12c4069",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 29,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "7e585eb4e79eff2b0a642a522837105b33f92a201a032b365b77baaf5fe219fb",
+      "review_status": "pending",
+      "row_kind": "unsupported",
+      "source_fidelity_established": false,
+      "source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "prior_anchor_abstention",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+      "id": "sha256:e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchor_abstained",
+      "original_generation_row_sha256": "508b083e00973e84d1bcbb547ae8e93a24d01bd703c529d59082eed96fe5ab4a",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 30,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "78b3a826d1725478f0a3a68845b6b490f7a99884771c292e9122f957eed9eb55",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "7991518fc24ec487946245d6b61fba042c4d6fab439e009236945463174ecae2",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 7,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 7,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "notify",
+            "end": 21,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "notify",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "notify"
+            ],
+            "source_text": "notify",
+            "start": 15
+          },
+          {
+            "claimed_symbol": "clerk",
+            "end": 9,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the clerk",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "clerk"
+            ],
+            "source_text": "The clerk",
+            "start": 0
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 82,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 55
+          },
+          {
+            "claimed_symbol": "court_order",
+            "end": 112,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a court order applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "court_order"
+            ],
+            "source_text": "a court order applies",
+            "start": 91
+          },
+          {
+            "claimed_symbol": "O",
+            "end": 14,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "must",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "O"
+            ],
+            "source_text": "must",
+            "start": 10
+          },
+          {
+            "claimed_symbol": "applicant",
+            "end": 35,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the applicant",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "applicant"
+            ],
+            "source_text": "the applicant",
+            "start": 22
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 51,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 36
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "e9c479077302ee0e345077bd1a90a1dbfd192e45f13e6f114cd520c6118cf930",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "e9c479077302ee0e345077bd1a90a1dbfd192e45f13e6f114cd520c6118cf930",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "20d0166366b33d51411c28a0e29ab706f5741e767dc8f0a31431b26240254d56",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "notify",
+            "end": 21,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "notify",
+            "start": 15
+          },
+          {
+            "canonical_symbol": "clerk",
+            "end": 9,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "The clerk",
+            "start": 0
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 82,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 55
+          },
+          {
+            "canonical_symbol": "court_order",
+            "end": 112,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a court order applies",
+            "start": 91
+          },
+          {
+            "canonical_symbol": "O",
+            "end": 14,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "must",
+            "start": 10
+          },
+          {
+            "canonical_symbol": "applicant",
+            "end": 35,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the applicant",
+            "start": 22
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 51,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 36
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "applicant",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 31,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "238f14567b7657fdbc2ab2b7661359543e206422472a7456f4ea1763ac7cc52d",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+      "split": "train"
+    },
+    {
+      "accepted": false,
+      "assessment": null,
+      "binding_outcome": "binding_unavailable",
+      "binding_unavailable_reason": "prior_anchor_abstention",
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": null,
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+      "id": "sha256:fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchor_abstained",
+      "original_generation_row_sha256": "04a9724f4087f9e1ed7f6a43d68fc75ced1383c022a3cd2b6d51b95a63d0f777",
+      "output_proposal": null,
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 32,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "237a7141ff3e3d09e9764966f2d83f59f3080dfb6fd4631f64c9d45b57c5c8a3",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+      "split": "validation"
+    },
+    {
+      "accepted": false,
+      "assessment": {
+        "accepted": false,
+        "assessment_scope": "per_leaf_observed_TRAIN_literal_alias_agreement",
+        "canonical_ir_repaired": false,
+        "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+        "content_sha256": "aa30cbce1d75aae9022ed81ca95224b8eb20e170b0666b534cb7ac4f7f2b15dd",
+        "independent_semantic_review_completed": false,
+        "leaf_count": 10,
+        "leaf_outcome_counts": {
+          "ambiguous_alias": 0,
+          "known_alias_mismatch": 0,
+          "matched_single_alias": 10,
+          "unknown_literal": 0
+        },
+        "leaves": [
+          {
+            "claimed_symbol": "authorize",
+            "end": 83,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "normalized_literal": "authorize",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "authorize"
+            ],
+            "source_text": "authorize",
+            "start": 74
+          },
+          {
+            "claimed_symbol": "registrar",
+            "end": 69,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "normalized_literal": "the registrar",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "registrar"
+            ],
+            "source_text": "the registrar",
+            "start": 56
+          },
+          {
+            "claimed_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "normalized_literal": "the application is complete",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application_complete"
+            ],
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "claimed_symbol": "fees_paid",
+            "end": 54,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/1",
+            "normalized_literal": "fees have been paid",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "fees_paid"
+            ],
+            "source_text": "fees have been paid",
+            "start": 35
+          },
+          {
+            "claimed_symbol": "court_order",
+            "end": 176,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "normalized_literal": "a court order applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "court_order"
+            ],
+            "source_text": "a court order applies",
+            "start": 155
+          },
+          {
+            "claimed_symbol": "legal_hold",
+            "end": 200,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/1",
+            "normalized_literal": "a legal hold applies",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "legal_hold"
+            ],
+            "source_text": "a legal hold applies",
+            "start": 180
+          },
+          {
+            "claimed_symbol": "P",
+            "end": 73,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "normalized_literal": "may",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "P"
+            ],
+            "source_text": "may",
+            "start": 70
+          },
+          {
+            "claimed_symbol": "application",
+            "end": 99,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "normalized_literal": "the application",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "application"
+            ],
+            "source_text": "the application",
+            "start": 84
+          },
+          {
+            "claimed_symbol": "before_the_review_deadline",
+            "end": 146,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "normalized_literal": "before the review deadline",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "before_the_review_deadline"
+            ],
+            "source_text": "before the review deadline",
+            "start": 120
+          },
+          {
+            "claimed_symbol": "within_48_hours",
+            "end": 115,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/1",
+            "normalized_literal": "within 48 hours",
+            "outcome": "matched_single_alias",
+            "recognized_symbols": [
+              "within_48_hours"
+            ],
+            "source_text": "within 48 hours",
+            "start": 100
+          }
+        ],
+        "model_executed": false,
+        "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+        "outcome": "binding_consistent",
+        "profile_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+        "profile_training_supervision_consumed": true,
+        "proof_authority": false,
+        "proposal_changed": false,
+        "proposal_input_scope": "model_candidate_not_reference",
+        "proposal_sha256": "1f396f0ea9b31a5f4ec8faf1e798b6adeb1c6666a7ce1b4ef01b8ed1d08e808e",
+        "prover_executed": false,
+        "qualified": false,
+        "query_reference_accessed": false,
+        "schema": "canonical-source-symbol-bindings/v1",
+        "source_fidelity_established": false,
+        "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+        "target_access": false,
+        "target_access_scope": "query_reference_only",
+        "training_executed": false
+      },
+      "binding_outcome": "binding_consistent",
+      "binding_unavailable_reason": null,
+      "candidate_output_withheld": false,
+      "candidate_proposal_sha256": "1f396f0ea9b31a5f4ec8faf1e798b6adeb1c6666a7ce1b4ef01b8ed1d08e808e",
+      "candidate_unchanged": true,
+      "canonical_ir_repaired": false,
+      "context_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "encoder_executed": false,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+      "independent_semantic_review_completed": false,
+      "model_executed": false,
+      "neural_training_executed": false,
+      "original_generation_outcome": "anchored_proposal",
+      "original_generation_row_sha256": "b9093f5bdff1d77c48c4604c244577efded88b46236dfecff706dab9170fd363",
+      "output_proposal": {
+        "accepted": false,
+        "anchors": [
+          {
+            "canonical_symbol": "authorize",
+            "end": 83,
+            "facet": "action",
+            "field_path": "/rules/0/action",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "authorize",
+            "start": 74
+          },
+          {
+            "canonical_symbol": "registrar",
+            "end": 69,
+            "facet": "actor",
+            "field_path": "/rules/0/actor",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the registrar",
+            "start": 56
+          },
+          {
+            "canonical_symbol": "application_complete",
+            "end": 30,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application is complete",
+            "start": 3
+          },
+          {
+            "canonical_symbol": "fees_paid",
+            "end": 54,
+            "facet": "conditions",
+            "field_path": "/rules/0/conditions/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "fees have been paid",
+            "start": 35
+          },
+          {
+            "canonical_symbol": "court_order",
+            "end": 176,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a court order applies",
+            "start": 155
+          },
+          {
+            "canonical_symbol": "legal_hold",
+            "end": 200,
+            "facet": "exceptions",
+            "field_path": "/rules/0/exceptions/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "a legal hold applies",
+            "start": 180
+          },
+          {
+            "canonical_symbol": "P",
+            "end": 73,
+            "facet": "modality",
+            "field_path": "/rules/0/modality",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "may",
+            "start": 70
+          },
+          {
+            "canonical_symbol": "application",
+            "end": 99,
+            "facet": "object",
+            "field_path": "/rules/0/object",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "the application",
+            "start": 84
+          },
+          {
+            "canonical_symbol": "before_the_review_deadline",
+            "end": 146,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/0",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "before the review deadline",
+            "start": 120
+          },
+          {
+            "canonical_symbol": "within_48_hours",
+            "end": 115,
+            "facet": "temporal",
+            "field_path": "/rules/0/temporal/1",
+            "offset_unit": "unicode_character_half_open",
+            "source_text": "within 48 hours",
+            "start": 100
+          }
+        ],
+        "canonical_ir": {
+          "rules": [
+            {
+              "action": "authorize",
+              "actor": "registrar",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "application",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "facet_operators": {
+          "conditions": "all",
+          "exceptions": "any",
+          "temporal": "all"
+        },
+        "model_executed": false,
+        "proof_authority": false,
+        "qualified": false,
+        "schema": "canonical-anchored-byte-proposal/v1",
+        "single_rule_scope": true,
+        "source_fidelity_established": false,
+        "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+        "target_access": false
+      },
+      "output_scope": "opt_in_static_filter_only_original_candidate_artifact_preserved",
+      "position": 33,
+      "proof_authority": false,
+      "prover_executed": false,
+      "qualified": false,
+      "query_reference_accessed": false,
+      "request_sha256": "7e69b7eeee28118a0be1bc375cd22450047a83744c7500baddfa6eec7533ab84",
+      "review_status": "pending",
+      "row_kind": "positive",
+      "source_fidelity_established": false,
+      "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+      "split": "train"
+    }
+  ],
+  "schema": "alignment-saved-candidate-symbol-binding-assessments/v1",
+  "seed": 1731,
+  "source_fidelity_established": false,
+  "source_requests_binding": {
+    "bytes": 11255,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/inference_requests.json",
+    "sha256": "1740f42c497901e974ec7cb8f8892bd6208f643c7708313000870ecde9f10595"
+  },
+  "training_supervision_consumed_by_separate_profile_fit": true
+}

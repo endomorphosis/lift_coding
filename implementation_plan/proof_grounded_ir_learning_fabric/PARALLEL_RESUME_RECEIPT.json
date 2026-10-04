@@ -1,0 +1,93 @@
+{
+  "schema": "pgir-parallel-resume-receipt@1",
+  "observed_at": "2026-08-16T22:49:17.032505+00:00",
+  "campaign": "ProofGroundedIRLearningFabric",
+  "repository": "/home/barberb/lift_coding/.pgir_campaign/worktrees/accelerate-authority",
+  "target_branch": "agent/proof-grounded-ir-learning",
+  "target_head": "d281b78a2ce34b79e67d1813a7d5b613379d0ce7",
+  "board": "docs/architecture/proof_grounded_ir_learning.todo.md",
+  "board_sha256": "aa1432703ad3507f43d69d640d0d153d9f8a6dd1fdd4b7dca83632fd0ddbe080",
+  "preflight": {
+    "path": "/home/barberb/lift_coding/.pgir_campaign/runtime/preflight-parallel-resume-20260816T224434Z",
+    "exit_code": 0,
+    "stuck": false,
+    "reconciliation_guardrail_count": 0,
+    "pending_replay_count": 0,
+    "retained_checkout_lease_recovered": true
+  },
+  "provider_probe": {
+    "exit_code": 0,
+    "response": "READY",
+    "provider": "openai",
+    "model_observed": "gpt-5.6-sol",
+    "cli_version": "0.147.0"
+  },
+  "master": {
+    "pid": 609540,
+    "pid_file": "/home/barberb/lift_coding/.pgir_campaign/runtime/master/pgir_parallel_master_20260816T224757Z.pid",
+    "log": "/home/barberb/lift_coding/.pgir_campaign/runtime/master/pgir_parallel_master_20260816T224757Z.log",
+    "duration_seconds": 28800,
+    "heartbeat_seconds": 30,
+    "task_timeout_seconds": 7200,
+    "quiet_log_timeout_seconds": 900,
+    "max_supervisor_restarts": 3,
+    "max_task_attempts": 3,
+    "lane_count": 3
+  },
+  "lanes": [
+    {
+      "lane": 0,
+      "supervisor_pid": 609728,
+      "daemon_pid": 610661,
+      "status": "running",
+      "restart_count": 0,
+      "task_id": "PGIR-003",
+      "task_cid": "baguqeeras4bk5tvbfa6rtebnga6ptgb33ek6przxsmpcjsm4z3ew65kxd23a",
+      "attempt": 2,
+      "phase": "implementing",
+      "blocked_count": 0,
+      "log": "/home/barberb/lift_coding/.pgir_campaign/runtime/parallel/lane-0/implementation_logs/pgir-003-attempt-2.log",
+      "log_growth_bytes_over_8_seconds": 820199
+    },
+    {
+      "lane": 1,
+      "supervisor_pid": 609729,
+      "daemon_pid": 610687,
+      "status": "running",
+      "restart_count": 0,
+      "task_id": "",
+      "phase": "resource_deferred",
+      "blocked_count": 0,
+      "typed_reason": "resource_claim_deferred:ipfs_datasets_py"
+    },
+    {
+      "lane": 2,
+      "supervisor_pid": 609730,
+      "daemon_pid": 611554,
+      "status": "running",
+      "restart_count": 0,
+      "task_id": "PGIR-002",
+      "task_cid": "baguqeerac34yqkahhsfvoijyo3hbe3ff2u3o6o754367xnm6tpmzf7iqcmhq",
+      "attempt": 1,
+      "phase": "implementing",
+      "blocked_count": 0,
+      "log": "/home/barberb/lift_coding/.pgir_campaign/runtime/parallel/lane-2/implementation_logs/pgir-002-attempt-1.log",
+      "log_growth_bytes_over_8_seconds": 36851
+    }
+  ],
+  "parallelism_verdict": "Two distinct canonical tasks are concurrently executing in isolated worktrees. The third lane is safely deferred by a shared ipfs_datasets_py resource claim, not blocked or stuck.",
+  "generated_output_safety": {
+    "objective_refill_scan_enabled": false,
+    "codebase_refill_scan_enabled": false,
+    "objective_ast_dataset_enabled": false,
+    "objective_todo_vector_index_enabled": false,
+    "reason": "Prevent recurrence of the quarantined 2,022,179,327-byte AST artifact and unadmitted board mutations while the frozen 37-task board executes."
+  },
+  "quarantine": {
+    "objective_ast_manifest": "/home/barberb/lift_coding/.pgir_campaign/runtime/quarantine/objective-ast-20260816T2240Z.hpn49X/pgir-objective-ast.manifest.json",
+    "checkout_recovery_attestation": "/home/barberb/lift_coding/.pgir_campaign/runtime/quarantine/checkout-recovery-20260816T2242Z.dj5T7s/operator-rebaseline-attestation.json",
+    "generated_blob": "9b6ded832adffea56cd1402bb08d1dca484eb3c8",
+    "generated_blob_sha256": "829685569fa11e2a699d973fed8a6d68e59d5e76c4c2205edf82e521a30d34c5",
+    "generated_blob_recoverable_from_git_history": true
+  }
+}

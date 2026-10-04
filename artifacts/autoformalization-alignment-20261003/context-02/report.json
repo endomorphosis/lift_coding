@@ -1,0 +1,1225 @@
+{
+  "assay_bindings": {
+    "legacy8": {
+      "bytes": 92583,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-02/legacy8_assay.json",
+      "sha256": "b629b8d2be30abe257929eaaa70f1ed133e1bc09985780a26862c5e95eac0868"
+    },
+    "native384": {
+      "bytes": 92624,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-02/native384_assay.json",
+      "sha256": "ac9e78e1614ab672e3d091bf5eb98ef3ed4647d51e9701bcb1f0e0c4a362eda4"
+    },
+    "native768": {
+      "bytes": 92562,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-02/native768_assay.json",
+      "sha256": "ed8c1b7947a28963306ee9290b779a739dd1d4eb52298a233e476c9a26f9e8d2"
+    }
+  },
+  "assay_evidence_scopes": {
+    "legacy8": "observed_native_receipts",
+    "native384": "observed_native_receipts",
+    "native768": "observed_native_receipts"
+  },
+  "asset_manifest_binding": {
+    "bytes": 1470,
+    "digest_verified": true,
+    "path": "configs/autoencoders/gte_multilingual_local_assets_v1.json",
+    "sha256": "8beb874aa7b06599346173fde12e95f9f926b3028942d5014cdd2f99c4385166"
+  },
+  "backend_comparability": {
+    "legacy8": {
+      "compared_identity_sha256": "ed80b1e7830bef908fea5753305f0d03c4205524345b7ad0554b9e1b6e25adcb",
+      "independent_runtime_attestation": false,
+      "profile_id": "legacy-linguistic-features-8d/v1",
+      "status": "matched_observed_profile"
+    },
+    "native384": {
+      "compared_identity_sha256": "5c1091f22a8ecd4ea728920a0c837f46a5656678b25860ace800937ecb45c5a7",
+      "independent_runtime_attestation": false,
+      "profile_id": "thenlper/gte-small@17e1f347d17fe144873b1201da91788898c639cd:d384:pool=mean:norm=l2:precision=float32:input_policy=exact_source_no_truncation",
+      "status": "matched_observed_profile"
+    },
+    "native768": {
+      "compared_identity_sha256": "63157516ad72ae81178c2e1747b1ddbf5a0da192159c085142c7e1689a0f12dd",
+      "independent_runtime_attestation": false,
+      "profile_id": "Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062:code=Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4:d768:pool=cls:norm=l2:cpu:float32:tokens8192:reject_overlength:v1",
+      "status": "matched_observed_profile"
+    }
+  },
+  "complete_dependency_manifest": false,
+  "configuration": {
+    "embedding_report": {
+      "path": "artifacts/autoformalization-alignment-20261003/richer-embedding-01/report.json",
+      "sha256": "1c663860ededddead242464a78a8a672a57a5c6727924b98108e0edc1399776b"
+    },
+    "gte384_snapshot": "/home/barberb/.cache/huggingface/hub/models--thenlper--gte-small/snapshots/17e1f347d17fe144873b1201da91788898c639cd",
+    "gte768_assets": {
+      "code_directory": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-encoder-assets/code",
+      "manifest": {
+        "path": "configs/autoencoders/gte_multilingual_local_assets_v1.json",
+        "sha256": "8beb874aa7b06599346173fde12e95f9f926b3028942d5014cdd2f99c4385166"
+      },
+      "model_directory": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-encoder-assets/model"
+    },
+    "max_seconds": 600,
+    "review_admission_report": {
+      "path": "artifacts/autoformalization-alignment-20261003/richer-review-admission-02/report_private.json",
+      "sha256": "ae86854d38dc11fcb4db2bd6c1de46c0440fc8441fe02b73b059bea5f9546a94"
+    },
+    "schema": "alignment-context-experiment-config/v1",
+    "spacy_backend": "local_en_core_web_sm",
+    "study_id": "autoformalization-context-development-v1"
+  },
+  "configuration_binding": {
+    "bytes": 1211,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_context_development_v1.json",
+    "sha256": "11f041b33b368fbe4b0011c51d72627575fb918e69031b01982161727fcd2443"
+  },
+  "context_input_binding": {
+    "bytes": 97961,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-02/context_inputs.json",
+    "sha256": "cdc355cee220b2c2ff72ab28486f31a826e2d01164819d6c7760f559970d8f75"
+  },
+  "context_input_forwarding_recipe": "two_arms_same_role_marked_json_shell_context_withheld_or_declared",
+  "context_lane_bindings": {
+    "legacy8": {
+      "bytes": 268465,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-02/legacy8_context_embeddings.json",
+      "sha256": "62cd6d788b731e1c0206b5c29038ce1b6890b8659dd3600383756e7a69379c58"
+    },
+    "native384": {
+      "bytes": 2553254,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-02/native384_context_embeddings.json",
+      "sha256": "d1130a6e4d994498500153a7f158c15646c886243542a6f855c75b774036523c"
+    },
+    "native768": {
+      "bytes": 5406154,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-02/native768_context_embeddings.json",
+      "sha256": "dfab86c55031b5d109f1d08d37a6f4f8346ef775f265a9bfcac5c37bdf2c1c32"
+    }
+  },
+  "context_lane_statuses": {
+    "legacy8": "produced",
+    "native384": "produced",
+    "native768": "produced"
+  },
+  "context_pairs": {
+    "legacy8": [
+      {
+        "arms": {
+          "declared_context": {
+            "encoder_text_equal": false,
+            "exact_vector_hash_equal": false,
+            "exact_vector_values_equal": false,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.1106371277013282,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 0.006120289885420904,
+            "unit_cosine_similarity": 0.9938797101145791,
+            "within_tolerance": false
+          },
+          "raw_source": {
+            "encoder_text_equal": true,
+            "exact_vector_hash_equal": true,
+            "exact_vector_values_equal": true,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.0,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 0.0,
+            "unit_cosine_similarity": 1.0,
+            "within_tolerance": true
+          },
+          "source_frame_only": {
+            "encoder_text_equal": true,
+            "exact_vector_hash_equal": true,
+            "exact_vector_values_equal": true,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.0,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 1.1102230246251565e-16,
+            "unit_cosine_similarity": 0.9999999999999999,
+            "within_tolerance": true
+          }
+        },
+        "distinct_declared_contexts": true,
+        "original_input_sha256s": [
+          "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+          "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc"
+        ],
+        "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73"
+      }
+    ],
+    "native384": [
+      {
+        "arms": {
+          "declared_context": {
+            "encoder_text_equal": false,
+            "exact_vector_hash_equal": false,
+            "exact_vector_values_equal": false,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.09028821721396037,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 0.00407598096788353,
+            "unit_cosine_similarity": 0.9959240190321165,
+            "within_tolerance": false
+          },
+          "raw_source": {
+            "encoder_text_equal": true,
+            "exact_vector_hash_equal": true,
+            "exact_vector_values_equal": true,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.0,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 1.1102230246251565e-16,
+            "unit_cosine_similarity": 0.9999999999999999,
+            "within_tolerance": true
+          },
+          "source_frame_only": {
+            "encoder_text_equal": true,
+            "exact_vector_hash_equal": true,
+            "exact_vector_values_equal": true,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.0,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 0.0,
+            "unit_cosine_similarity": 1.0,
+            "within_tolerance": true
+          }
+        },
+        "distinct_declared_contexts": true,
+        "original_input_sha256s": [
+          "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+          "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc"
+        ],
+        "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73"
+      }
+    ],
+    "native768": [
+      {
+        "arms": {
+          "declared_context": {
+            "encoder_text_equal": false,
+            "exact_vector_hash_equal": false,
+            "exact_vector_values_equal": false,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.18773522093964512,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 0.01762225593332567,
+            "unit_cosine_similarity": 0.9823777440666743,
+            "within_tolerance": false
+          },
+          "raw_source": {
+            "encoder_text_equal": true,
+            "exact_vector_hash_equal": true,
+            "exact_vector_values_equal": true,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.0,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 0.0,
+            "unit_cosine_similarity": 1.0,
+            "within_tolerance": true
+          },
+          "source_frame_only": {
+            "encoder_text_equal": true,
+            "exact_vector_hash_equal": true,
+            "exact_vector_values_equal": true,
+            "left_status": "embedded",
+            "normalized_value_l2_distance": 0.0,
+            "reason": null,
+            "right_status": "embedded",
+            "status": "available",
+            "unit_cosine_distance": 0.0,
+            "unit_cosine_similarity": 1.0,
+            "within_tolerance": true
+          }
+        },
+        "distinct_declared_contexts": true,
+        "original_input_sha256s": [
+          "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+          "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc"
+        ],
+        "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73"
+      }
+    ]
+  },
+  "context_resolution_executed": false,
+  "context_semantics_applied": false,
+  "dependency_binding_scope": "listed_owner_files_not_dependency_closure",
+  "elapsed_seconds": 26.12341961200582,
+  "embedded_vector_counts": {
+    "legacy8": 68,
+    "native384": 68,
+    "native768": 68
+  },
+  "embedding_receipts_produced": {
+    "legacy8": 68,
+    "native384": 68,
+    "native768": 68
+  },
+  "encoder_execution_executed": {
+    "legacy8": true,
+    "native384": true,
+    "native768": true
+  },
+  "evaluation_role": "exposed_development",
+  "independent_fidelity_available": false,
+  "independent_review_bundle_binding": {
+    "bytes": 195306,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/structure-01/review_bundle_private.json",
+    "sha256": "b40d15d3c48d1b050227351bdfb15bb5bddb0f41c760cbe8c1b8f81c9d68831e"
+  },
+  "independent_review_status": {
+    "automatic_adjudication": false,
+    "declared_completed_annotation_count": 0,
+    "human_reviews_authenticated": 0,
+    "independent_fidelity_available": false,
+    "independent_reviews_authenticated": 0,
+    "item_count": 34,
+    "production_admitted": false,
+    "proof_authority": false,
+    "qualified": false,
+    "receipt_sha256": "ae5c37574a34e24b50f2d0d63d9015404dd03ae585f156b1791fe78012068e3f",
+    "review_bundle_sha256": "6983d5e81766c2e06d831994ec88cc865a71a96acf35f6345b3bdace6c4f5a7b",
+    "reviewer_attestations_created": false,
+    "reviewer_identity_attestations_created": false,
+    "reviewer_independence_authenticated": false,
+    "schema": "alignment-richer-review-admission-validation/v1",
+    "source_author_independence_authenticated": false,
+    "source_fidelity_established": false,
+    "source_meaning_adjudicated": false,
+    "source_semantics_verified": false,
+    "status": "validated_diagnostic_admission_only",
+    "status_counts": {
+      "agreed_multiple_reviews": 0,
+      "ambiguous": 0,
+      "disputed": 0,
+      "pending": 34,
+      "single_review": 0,
+      "unsupported": 0
+    },
+    "submission_count": 0
+  },
+  "leanstral_hidden_states_extracted": false,
+  "limitations": [
+    "Different context vectors measure numerical sensitivity to provided tokens, not correct interpretation.",
+    "The two contextual assumptions are authored inputs; all 34 human reviews remain pending.",
+    "Framing introduces extra tokens; the matched empty-assumption arm isolates that input change.",
+    "Declared text and bindings repeat some cues; their independent effects are not isolated here.",
+    "The inner exact-text producer receipt describes serialized transport text, not original raw-source encoding.",
+    "No decoder, trained autoencoder, retrieval policy, generation or native proof is evaluated."
+  ],
+  "model_autoencoder_training_executed": false,
+  "native_useful_proof_coverage": {
+    "status": "unrun",
+    "value": null
+  },
+  "new_independent_reviews_created": 0,
+  "new_input_count_per_lane": 68,
+  "original_input_count": 34,
+  "original_validation_accessed": false,
+  "paired_contrastive_training_executed": false,
+  "panel_binding": {
+    "bytes": 93063,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json",
+    "sha256": "d7ab18fa836f9ef2b0c9963eedb3b5c7980c45ea250a8414253b9d1987a7dde6"
+  },
+  "predecessor_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/richer-embedding-01/report.json",
+    "sha256": "1c663860ededddead242464a78a8a672a57a5c6727924b98108e0edc1399776b"
+  },
+  "production_admitted": false,
+  "proof_authority": false,
+  "protected_protocol_bindings": [
+    {
+      "bytes": 4721,
+      "digest_verified": true,
+      "path": "papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    }
+  ],
+  "qualified": false,
+  "query_generation_executed": false,
+  "query_reference_scoring_executed": false,
+  "query_targets_used_in_embedding": false,
+  "raw_input_binding": {
+    "bytes": 17282,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/embedding_inputs.json",
+    "sha256": "072b5e7479499bd232715ec72bfe157c0dafb80c0bb9c140423c867c9f751f99"
+  },
+  "raw_lane_bindings": {
+    "legacy8": {
+      "bytes": 74282,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/legacy8_embeddings.json",
+      "sha256": "aa929c0836f592d2217e748fa7ee452c955ef2466497ee72efca2a859e08930c"
+    },
+    "native384": {
+      "bytes": 629044,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native384_embeddings.json",
+      "sha256": "14acf84a107d2bbdea3df8af9009f97ae670a3c45125e454c3a00312a78f7107"
+    },
+    "native768": {
+      "bytes": 1748842,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native768_embeddings.json",
+      "sha256": "d169295841e14829d896a81b48630d39f85537380df8e581b7440671ac49d2a9"
+    }
+  },
+  "raw_source_receipts_reused": 102,
+  "report_sha256": "3e30dca46bfbfbbb425fbd5604c44e767e8309cccea29f7ac38c74ec2c73f24d",
+  "resource_scope": {
+    "deadline_kind": "cooperative_between_native_calls_without_preemption",
+    "llm_calls": 0,
+    "local_cpu_only": true,
+    "model_downloads": 0,
+    "prover_calls": 0,
+    "raw_baseline_model_inference_repeated": false
+  },
+  "review_admission_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/richer-review-admission-02/report_private.json",
+    "sha256": "ae86854d38dc11fcb4db2bd6c1de46c0440fc8441fe02b73b059bea5f9546a94"
+  },
+  "ridge_training_executed": false,
+  "schema": "alignment-context-experiment-report/v1",
+  "sealed_final_test_accessed": false,
+  "source_bindings": [
+    {
+      "bytes": 17858,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/bridge/canonical.py",
+      "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194"
+    },
+    {
+      "bytes": 27572,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8"
+    },
+    {
+      "bytes": 392561,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a"
+    },
+    {
+      "bytes": 300668,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+    },
+    {
+      "bytes": 20651,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745"
+    },
+    {
+      "bytes": 18721,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_embedding_experiment.py",
+      "sha256": "c91b2730c45534821146991f5f873db8cea22a5baf0a2daa5667458fd5efa099"
+    },
+    {
+      "bytes": 25163,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27"
+    },
+    {
+      "bytes": 25914,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py",
+      "sha256": "23ea8a10eea572d05a90f822a8f0430d4c93648d6ec6a3e775f370cb3e9c4b5a"
+    },
+    {
+      "bytes": 23299,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e"
+    },
+    {
+      "bytes": 17653,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318"
+    },
+    {
+      "bytes": 22279,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_admission.py",
+      "sha256": "5ada191c03af4cfb3f69a60b116116b3ecfcec30b961030b20e66c631932d14e"
+    },
+    {
+      "bytes": 41368,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_embeddings.py",
+      "sha256": "f5fff80ce717d2c185271eb04e92af7c02d13a3f01bfb4afb758f5865b74684b"
+    },
+    {
+      "bytes": 20197,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+    },
+    {
+      "bytes": 19018,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+    },
+    {
+      "bytes": 31906,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+    },
+    {
+      "bytes": 22401,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_retrieval.py",
+      "sha256": "bbbac13f8464e6c0b15b8add91ebd0cedeb0db6531c43f7e4962445153a5ef40"
+    },
+    {
+      "bytes": 10920,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review.py",
+      "sha256": "7d8321eef857937239b31e40152184883ef368a8103342cb3ef1da1d45a49dfc"
+    },
+    {
+      "bytes": 21743,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_admission.py",
+      "sha256": "d1594da45955c19e8f64e1e1ce0ee2272dd589ed50ffadba3086faf64a650f37"
+    },
+    {
+      "bytes": 12871,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_workflow.py",
+      "sha256": "b7ca7776786a31412ed657a50c274262cacce052f790e5fa87d2f0cfe1a5cd10"
+    },
+    {
+      "bytes": 11288,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure.py",
+      "sha256": "8a5c5eb1667a46bd0e7ea3db1744f414de799e7dce1a53ecfbca888cdf51aa02"
+    },
+    {
+      "bytes": 22237,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure_experiment.py",
+      "sha256": "e57ed548cbe6a77a2ece2787da95c39e3a8a8a45754342b5debec4e637342230"
+    },
+    {
+      "bytes": 17237,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576"
+    },
+    {
+      "bytes": 15959,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    {
+      "bytes": 13375,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    {
+      "bytes": 9556,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    {
+      "bytes": 13308,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/features.py",
+      "sha256": "a5abe46dbb9c90f83699f8d7922676bc41335e26413d73ae173c9fd9b66bb23c"
+    },
+    {
+      "bytes": 37034,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd"
+    },
+    {
+      "bytes": 109257,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 13437,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+    },
+    {
+      "bytes": 14419,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "bytes": 27010,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e"
+    },
+    {
+      "bytes": 6017,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 26219,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    {
+      "bytes": 16725,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "sha256": "27855f5ffd59ebc45444d5e37c18ff1569618084cd27b1503db112940051ffb0"
+    },
+    {
+      "bytes": 306403,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_linguistic_snapshot/spacy_modal_codec.py",
+      "sha256": "16ec4e141d5cb2f9d37cd4db42733921bc046e17fee12afc43ab31ca7a60cd59"
+    },
+    {
+      "bytes": 21063,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/linguistic.py",
+      "sha256": "baca84b44f7eda33466ffdc75170d904f480aafb47a779131337d90ed9a7bca3"
+    },
+    {
+      "bytes": 4428,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 2122,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/admit_alignment_richer_reviews.py",
+      "sha256": "1eed2a881029effc2d8a84fe4760c61c25adb47fe69019bc727a12769446d92f"
+    },
+    {
+      "bytes": 1646,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_embedding_experiment.py",
+      "sha256": "15ca20f3f4406ec98ba0c34894f47de990db592b037fe77ba23301e9726931f4"
+    },
+    {
+      "bytes": 1826,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_parser_experiment.py",
+      "sha256": "11069f97f4210071c13fb780a2ee3c0c778e392adf1da008dee5e93e6da34b8b"
+    },
+    {
+      "bytes": 1579,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+    },
+    {
+      "bytes": 1954,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_structure_experiment.py",
+      "sha256": "2e5599887e63138f5cae663f15cb57da91c34b7e8dc4bb21eb3598fc961fdb69"
+    },
+    {
+      "bytes": 18845,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_context_embeddings.py",
+      "sha256": "72f2a31631595d9bae18eba412339ab103e6d7991a1cb7b4b645c9abf94ae759"
+    },
+    {
+      "bytes": 14649,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_context_assay.py",
+      "sha256": "0a1639aab457c6babef609f10ef7094de156f8f488e4369025657d69269c3edf"
+    },
+    {
+      "bytes": 19508,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_context_experiment.py",
+      "sha256": "60f8169c1f1f6ae0b9b6b9f0623e681a5c34887df881706f35c05f541d29fa59"
+    },
+    {
+      "bytes": 1628,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_context_experiment.py",
+      "sha256": "f266a6f6c3fc1cb039d7146f64dd9ec227612e11d272a0684daf7678ed6ca83e"
+    }
+  ],
+  "source_fidelity_established": false,
+  "source_input_dimensions": [
+    8,
+    384,
+    768
+  ],
+  "status": "completed",
+  "study_id": "autoformalization-context-development-v1",
+  "summaries": {
+    "legacy8": {
+      "all_inputs": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 32,
+            "exact_vector_hash_equal_count": 32,
+            "exact_vector_values_equal_count": 32,
+            "maxima": {
+              "normalized_value_l2_distance": 0.1598922742161109,
+              "unit_cosine_distance": 0.012782773737861852,
+              "unit_cosine_similarity": 1.0
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.00831103262356727,
+              "unit_cosine_distance": 0.0005973034653459807,
+              "unit_cosine_similarity": 0.999402696534654
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 32
+          },
+          "formatting": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 1.142287481190265,
+              "unit_cosine_distance": 0.6524108513457099,
+              "unit_cosine_similarity": 0.9619228244616175
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.4703209705634129,
+              "unit_cosine_distance": 0.1288082856822337,
+              "unit_cosine_similarity": 0.8711917143177663
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 1.142287481190265,
+              "unit_cosine_distance": 0.6524108513457099,
+              "unit_cosine_similarity": 0.9619228244616175
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.4689678560350792,
+              "unit_cosine_distance": 0.12821935450105915,
+              "unit_cosine_similarity": 0.8717806454989409
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 34
+      },
+      "explicit_assumptions": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.1598922742161109,
+              "unit_cosine_distance": 0.012782773737861852,
+              "unit_cosine_similarity": 0.9924744559161001
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.1412875546006436,
+              "unit_cosine_distance": 0.010154158910880895,
+              "unit_cosine_similarity": 0.9898458410891191
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "formatting": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.4784144247010117,
+              "unit_cosine_distance": 0.11444024145284648,
+              "unit_cosine_similarity": 0.8855597585471535
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.4784144247010117,
+              "unit_cosine_distance": 0.11444024145284648,
+              "unit_cosine_similarity": 0.8855597585471535
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.49358342603859784,
+              "unit_cosine_distance": 0.12181238217715762,
+              "unit_cosine_similarity": 0.9129555594313989
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.45541147771933876,
+              "unit_cosine_distance": 0.10442841137287934,
+              "unit_cosine_similarity": 0.8955715886271207
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 2
+      },
+      "none_required": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 32,
+            "exact_vector_hash_equal_count": 32,
+            "exact_vector_values_equal_count": 32,
+            "maxima": {
+              "normalized_value_l2_distance": 0.0,
+              "unit_cosine_distance": 2.220446049250313e-16,
+              "unit_cosine_similarity": 1.0
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.0,
+              "unit_cosine_distance": 4.85722573273506e-17,
+              "unit_cosine_similarity": 1.0
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 32
+          },
+          "formatting": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 1.142287481190265,
+              "unit_cosine_distance": 0.6524108513457099,
+              "unit_cosine_similarity": 0.9619228244616175
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.469815129679813,
+              "unit_cosine_distance": 0.1297062884465704,
+              "unit_cosine_similarity": 0.8702937115534296
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 1.142287481190265,
+              "unit_cosine_distance": 0.6524108513457099,
+              "unit_cosine_similarity": 0.9619228244616175
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.469815129679813,
+              "unit_cosine_distance": 0.1297062884465704,
+              "unit_cosine_similarity": 0.8702937115534296
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 32
+      }
+    },
+    "native384": {
+      "all_inputs": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 32,
+            "exact_vector_hash_equal_count": 29,
+            "exact_vector_values_equal_count": 29,
+            "maxima": {
+              "normalized_value_l2_distance": 0.1676100647581042,
+              "unit_cosine_distance": 0.014046567021790524,
+              "unit_cosine_similarity": 1.0
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.009513783522254009,
+              "unit_cosine_distance": 0.0007703634126547333,
+              "unit_cosine_similarity": 0.9992296365873453
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 32
+          },
+          "formatting": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.5800089414933112,
+              "unit_cosine_distance": 0.16820519658389432,
+              "unit_cosine_similarity": 0.8884556647257263
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.5022716492404102,
+              "unit_cosine_distance": 0.12633683594033296,
+              "unit_cosine_similarity": 0.8736631640596669
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.5800089414933112,
+              "unit_cosine_distance": 0.16820519658389432,
+              "unit_cosine_similarity": 0.8884556647257263
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.5033229514584253,
+              "unit_cosine_distance": 0.1268759915436401,
+              "unit_cosine_similarity": 0.8731240084563598
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 34
+      },
+      "explicit_assumptions": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.1676100647581042,
+              "unit_cosine_distance": 0.014046567021790524,
+              "unit_cosine_similarity": 0.9878542109917012
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.1617338134069543,
+              "unit_cosine_distance": 0.013096178015044646,
+              "unit_cosine_similarity": 0.9869038219849553
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "formatting": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.5037507749973197,
+              "unit_cosine_distance": 0.1268824130715427,
+              "unit_cosine_similarity": 0.8731175869284573
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.5037507749973197,
+              "unit_cosine_distance": 0.1268824130715427,
+              "unit_cosine_similarity": 0.8731175869284573
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.524002955061845,
+              "unit_cosine_distance": 0.1372895341133098,
+              "unit_cosine_similarity": 0.8651933670138054
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.5216229682403369,
+              "unit_cosine_distance": 0.13604808354975217,
+              "unit_cosine_similarity": 0.8639519164502478
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 2
+      },
+      "none_required": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 32,
+            "exact_vector_hash_equal_count": 29,
+            "exact_vector_values_equal_count": 29,
+            "maxima": {
+              "normalized_value_l2_distance": 3.5416453674436147e-07,
+              "unit_cosine_distance": 6.261657858885883e-14,
+              "unit_cosine_similarity": 1.0
+            },
+            "means": {
+              "normalized_value_l2_distance": 3.1654460242093816e-08,
+              "unit_cosine_distance": 5.3637649877202875e-15,
+              "unit_cosine_similarity": 0.9999999999999947
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 32
+          },
+          "formatting": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.5800089414933112,
+              "unit_cosine_distance": 0.16820519658389432,
+              "unit_cosine_similarity": 0.8884556647257263
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.5021792038806034,
+              "unit_cosine_distance": 0.12630273736963238,
+              "unit_cosine_similarity": 0.8736972626303676
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.5800089414933112,
+              "unit_cosine_distance": 0.16820519658389432,
+              "unit_cosine_similarity": 0.8884556647257263
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.5021792004095559,
+              "unit_cosine_distance": 0.1263027357932581,
+              "unit_cosine_similarity": 0.8736972642067419
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 32
+      }
+    },
+    "native768": {
+      "all_inputs": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 32,
+            "exact_vector_hash_equal_count": 32,
+            "exact_vector_values_equal_count": 32,
+            "maxima": {
+              "normalized_value_l2_distance": 0.4075858471090285,
+              "unit_cosine_distance": 0.08306310907059922,
+              "unit_cosine_similarity": 1.0
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.023268152415109326,
+              "unit_cosine_distance": 0.0046062130533041055,
+              "unit_cosine_similarity": 0.9953937869466958
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 32
+          },
+          "formatting": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.9156638763463655,
+              "unit_cosine_distance": 0.4192201953488509,
+              "unit_cosine_similarity": 0.8560765115135557
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.7121619703416449,
+              "unit_cosine_distance": 0.25856303665617764,
+              "unit_cosine_similarity": 0.7414369633438224
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 34,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.9156638763463655,
+              "unit_cosine_distance": 0.4192201953488509,
+              "unit_cosine_similarity": 0.8560765115135557
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.7191661579252067,
+              "unit_cosine_distance": 0.2638507469351334,
+              "unit_cosine_similarity": 0.7361492530648667
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 34
+      },
+      "explicit_assumptions": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.4075858471090285,
+              "unit_cosine_distance": 0.08306310907059922,
+              "unit_cosine_similarity": 0.9264518652582612
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.39555859105685853,
+              "unit_cosine_distance": 0.07830562190616902,
+              "unit_cosine_similarity": 0.9216943780938309
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "formatting": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.6952186620804138,
+              "unit_cosine_distance": 0.24166448010022468,
+              "unit_cosine_similarity": 0.7583355198997753
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.6952186620804138,
+              "unit_cosine_distance": 0.24166448010022468,
+              "unit_cosine_similarity": 0.7583355198997753
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 2,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.8208599958584737,
+              "unit_cosine_distance": 0.3369055697625736,
+              "unit_cosine_similarity": 0.6737944600776288
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.8142898510009641,
+              "unit_cosine_distance": 0.3315555548424724,
+              "unit_cosine_similarity": 0.6684444451575275
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 2
+      },
+      "none_required": {
+        "comparisons": {
+          "declared_context": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 32,
+            "exact_vector_hash_equal_count": 32,
+            "exact_vector_values_equal_count": 32,
+            "maxima": {
+              "normalized_value_l2_distance": 0.0,
+              "unit_cosine_distance": 1.1102230246251565e-16,
+              "unit_cosine_similarity": 1.0
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.0,
+              "unit_cosine_distance": 4.85722573273506e-17,
+              "unit_cosine_similarity": 1.0
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 32
+          },
+          "formatting": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.9156638763463655,
+              "unit_cosine_distance": 0.4192201953488509,
+              "unit_cosine_similarity": 0.8560765115135557
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.7132209271079719,
+              "unit_cosine_distance": 0.2596191964409246,
+              "unit_cosine_similarity": 0.7403808035590753
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          },
+          "total": {
+            "eligible_count": 32,
+            "equal_encoder_text_count": 0,
+            "exact_vector_hash_equal_count": 0,
+            "exact_vector_values_equal_count": 0,
+            "maxima": {
+              "normalized_value_l2_distance": 0.9156638763463655,
+              "unit_cosine_distance": 0.4192201953488509,
+              "unit_cosine_similarity": 0.8560765115135557
+            },
+            "means": {
+              "normalized_value_l2_distance": 0.7132209271079719,
+              "unit_cosine_distance": 0.2596191964409246,
+              "unit_cosine_similarity": 0.7403808035590753
+            },
+            "unavailable_count": 0,
+            "within_tolerance_count": 0
+          }
+        },
+        "original_inputs": 32
+      }
+    }
+  }
+}

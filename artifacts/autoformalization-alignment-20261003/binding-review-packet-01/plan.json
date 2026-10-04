@@ -1,0 +1,42 @@
+{
+  "accepted": false,
+  "actual_fit_or_evaluation_admission": false,
+  "content_sha256": "f0c4ff5e9ecc544b166ce07ccccad50edd7c66c099ab5106e322e1d36c6af259",
+  "existing_review_admission_adapter_compatible": false,
+  "group_split_rule": "(actor_index-pair_index) mod 4 in {0,1} proposes TRAIN; other groups propose DEV",
+  "independent_semantic_review_completed": false,
+  "items": 64,
+  "next_admission_requirement": "Actual independent reviews, adjudication, and a separately versioned adapter for this payload.",
+  "original_target_free_sources_binding": {
+    "bytes": 1432297,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/target_free_inputs.json",
+    "sha256": "134f9a3bf917f0613fb474c04d8a5e414da443b133e12149f026cd3b5aa9473d"
+  },
+  "paraphrase_equivalence_created": false,
+  "previously_exposed_compositions_possible": true,
+  "prior_validation_binding": {
+    "bytes": 132503,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-validation-01/validation.json",
+    "sha256": "d38b0cf7e628a2e9a552735f0e7280ac2d19b635b41df6138368e3e29cddd20f"
+  },
+  "proof_authority": false,
+  "proposed_split_counts": {
+    "proposed_development": 32,
+    "proposed_train": 32
+  },
+  "qualified": false,
+  "runner_binding": {
+    "bytes": 10557,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/prepare_binding_review_packet.py",
+    "sha256": "56a2c52a37bc09685240b650a1f194c22433adb8ac969a7be6db5f49da311a83"
+  },
+  "schema": "symbol-binding-review-preparation-plan/v1",
+  "sealed_final_test_created": false,
+  "semantic_targets_created": false,
+  "source_author_independence_authenticated": false,
+  "source_fidelity_established": false,
+  "source_group_assignments_frozen_before_annotation": true,
+  "source_groups": 16,
+  "training_executed": false,
+  "variants_per_group": 4
+}

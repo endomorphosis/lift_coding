@@ -1,0 +1,225 @@
+{
+  "content_sha256": "17372de1a394f523fada6f48f3a1ea18e3ee9c4ef5ce6ca12b850dc37c3438cf",
+  "created_checkout_clean": true,
+  "dependencies_resolve": true,
+  "independent_readonly_reviews": [
+    "/root/paper_analysis",
+    "/root/decoder_checkout_audit"
+  ],
+  "local_link_checks": [
+    {
+      "label": "native embedding and retrieval report",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-report.md"
+    },
+    {
+      "label": "validation receipt",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-validation.json"
+    },
+    {
+      "label": "parser experiment",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md"
+    },
+    {
+      "label": "richer review workflow",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md"
+    },
+    {
+      "label": "declared-context report",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-embedding-report.md"
+    },
+    {
+      "label": "validation receipt",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-embedding-validation.json"
+    },
+    {
+      "label": "frozen checkpoint comparison",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/checkpoint-representation-report.md"
+    },
+    {
+      "label": "validation receipt",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/checkpoint-representation-validation.json"
+    },
+    {
+      "label": "decoder discovery",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/decoder-discovery-report.md"
+    },
+    {
+      "label": "inventory",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/decoder-discovery-01/inventory.json"
+    },
+    {
+      "label": "source-decoder evaluation",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_decoder_source_evaluation.md"
+    },
+    {
+      "label": "aligned interface preparation",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_aligned_interface_training.md"
+    },
+    {
+      "label": "Autoencoder handbook",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/README.md"
+    },
+    {
+      "label": "lineages",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/legal_autoencoder_lineages.md"
+    },
+    {
+      "label": "versioned runtime interface",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/versioned_runtime_interface.md"
+    },
+    {
+      "label": "Parallel 8D 384D 768D migration plan",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_multilingual_migration_plan.md"
+    },
+    {
+      "label": "decoder reuse",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_decoder_reuse.md"
+    },
+    {
+      "label": "joint formula training",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/modal_joint_formula_training.md"
+    },
+    {
+      "label": "Logic output requirements",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/logic_output_requirements.md"
+    },
+    {
+      "label": "AF-002 frozen research protocol",
+      "target": "/home/barberb/lift_coding/papers/completion/autoformalization/protocol.md"
+    },
+    {
+      "label": "ProofGroundedIRLearningFabric handoff",
+      "target": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/README.md"
+    },
+    {
+      "label": "Existing Hammer and Leanstral optimization plan",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/plans/HAMMER_LEANSTRAL_LEGAL_IR_NEXT_OPTIMIZATION_PLAN.md"
+    },
+    {
+      "label": "source-free proof-feedback contract",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py"
+    },
+    {
+      "label": "local asset manifest",
+      "target": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/models/refs/Frosty40_Leanstral-1.5-119B-A6B-GGUF-NVFP4/Leanstral-1.5-119B-A6B-NVFP4.gguf.json"
+    },
+    {
+      "label": "legal IR loss configuration",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_loss_configuration.py"
+    },
+    {
+      "label": "premise selector",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_premise_selection.py"
+    },
+    {
+      "label": "local runner guide",
+      "target": "/home/barberb/lift_coding/scripts/run_leanstral_ephemeral.md"
+    },
+    {
+      "label": "saved admission report",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/generic-prover-admission-qualification-20261003/REPORT.md"
+    },
+    {
+      "label": "JevOps prompt study",
+      "target": "/home/barberb/lift_coding/JevOps/jevops/leanstral_prompt_lab.py"
+    },
+    {
+      "label": "repair study",
+      "target": "/home/barberb/lift_coding/JevOps/jevops/leanstral_repair_lab.py"
+    },
+    {
+      "label": "Runtime registry",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py"
+    },
+    {
+      "label": "Formalization samples",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/samples.py"
+    },
+    {
+      "label": "source provenance",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/provenance.py"
+    },
+    {
+      "label": "Joint formula profile",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+    },
+    {
+      "label": "Loss configuration",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_loss_configuration.py"
+    },
+    {
+      "label": "768D decoder reuse",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_reuse.py"
+    },
+    {
+      "label": "native profile",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py"
+    },
+    {
+      "label": "Canonical catalog",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/families/canonical_catalog.py"
+    },
+    {
+      "label": "LegalIR proof router",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_router.py"
+    },
+    {
+      "label": "Leanstral runner",
+      "target": "/home/barberb/lift_coding/scripts/run_leanstral_ephemeral.py"
+    },
+    {
+      "label": "JevOps client",
+      "target": "/home/barberb/lift_coding/JevOps/jevops/leanstral.py"
+    }
+  ],
+  "model_execution": false,
+  "new_unit_tests_executed": false,
+  "paper_url": "https://arxiv.org/html/2510.15681v3",
+  "plan_binding": {
+    "bytes": 71544,
+    "path": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+    "sha256": "51fd16db21e23d096b3bad2bb18c3b19d6e315d5eb116f1a921946d0362dfbc7"
+  },
+  "predecessor_validation_binding": {
+    "bytes": 25317,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/decoder-discovery-01/validation.json",
+    "sha256": "e2682e782ee28f6c6c655491cfdc6696d2e71c7bbb332cea912cc72ca53e1a3a"
+  },
+  "preserved_donor_source_count": 14,
+  "prior_evidence_preserved": true,
+  "proof_authority": false,
+  "protocol_preserved": true,
+  "qualified": false,
+  "schema": "alignment-improvement-plan-synthesis-validation/v1",
+  "semantic_review_completed": false,
+  "status": "passed_plan_links_dependencies_and_preservation",
+  "training_execution": false,
+  "unchanged_source_binding_count": 55,
+  "work_package_ids": [
+    "AFI-01",
+    "AFI-02",
+    "AFI-03",
+    "AFI-04",
+    "AFI-05",
+    "AFI-06",
+    "AFI-07a",
+    "AFI-07b",
+    "AFI-08",
+    "AFI-09a",
+    "AFI-09b",
+    "AFI-10",
+    "AFI-11",
+    "AFI-12",
+    "AFI-13",
+    "AFI-14",
+    "AFI-15",
+    "AFI-16",
+    "AFI-17",
+    "AFI-18",
+    "AFI-19",
+    "AFI-20",
+    "AFI-21",
+    "AFI-22",
+    "AFI-23"
+  ]
+}

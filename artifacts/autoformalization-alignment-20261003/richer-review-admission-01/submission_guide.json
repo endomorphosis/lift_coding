@@ -1,0 +1,69 @@
+{
+  "agreement_recipe": "Exact interpretation status, flags, ordered rules and scope text; notes, identity and time do not determine concordance. Disagreements need external adjudication.",
+  "allowed_changes": "Fill annotations; optionally submit a nonempty subset or reorder items. Never edit source, context, hashes, or item IDs.",
+  "annotation_fields": [
+    "interpretation_status",
+    "ambiguity",
+    "unsupported_meaning",
+    "normative_rules",
+    "freeform_qualifier_scope",
+    "notes",
+    "reviewer_id",
+    "reviewed_at_utc"
+  ],
+  "automatic_adjudication": false,
+  "bounds": {
+    "aggregate_json_bytes": 16777216,
+    "atom_utf8_bytes": 4096,
+    "items_per_payload": 34,
+    "qualifiers_per_facet": 128,
+    "rules_per_annotation": 32,
+    "scope_notes_utf8_bytes": 16384,
+    "submissions": 20
+  },
+  "declared_identity": "Supply a trimmed nonempty reviewer_id and a calendar-valid ISO UTC timestamp using Z or +00:00. This records declarations, not identity or independence authentication.",
+  "digest_recipe": "sha256_sorted_compact_utf8_json_no_nan_no_newline",
+  "encoder_calls": 0,
+  "freeform_qualifier_scope": "An explicit string is required for completion. Empty string means no additional scope; normative rules with qualifiers need nonempty scope explaining connectives, attachment, binding and timing.",
+  "generated_reviews": 0,
+  "independent_fidelity_available": false,
+  "interpretation_statuses": {
+    "ambiguous": "ambiguity=true and nonempty notes describing competing interpretations or needed clarification; proposed rules may be tentative or [].",
+    "no_normative_rule": "Explicit normative_rules=[], both flags false, and nonempty notes explaining the absence of a normative rule.",
+    "normative": "At least one proposed normative rule, ambiguity=false and unsupported_meaning=false.",
+    "unsupported": "unsupported_meaning=true and nonempty notes explaining meaning not expressible in the flat facets; proposed rules may be tentative or []."
+  },
+  "model_calls": 0,
+  "notes": "Optional for normative interpretations; required nonempty rationale for the other interpretation statuses.",
+  "production_admitted": false,
+  "prohibited_hints": "Do not add candidate outputs, authored references, expectations, split labels, original IDs, qualification or authentication claims.",
+  "proof_authority": false,
+  "prover_calls": 0,
+  "provider_calls": 0,
+  "qualified": false,
+  "reviewer_attestations_created": false,
+  "reviewer_identity_attestations_created": false,
+  "reviewer_independence_authenticated": false,
+  "reviewer_payload_schema": "alignment-richer-source-context-reviewer/v1",
+  "rule_contract": {
+    "actor_action": "Nonempty UTF8 strings.",
+    "fields": [
+      "modality",
+      "actor",
+      "action",
+      "object",
+      "conditions",
+      "exceptions",
+      "temporal"
+    ],
+    "modality": "O, P, or F",
+    "object": "A UTF8 string; empty string explicitly records no object.",
+    "partial": "Null annotation fields or null whole rule facets remain unanswered. Null qualifier-list members are invalid.",
+    "qualifiers": "conditions, exceptions and temporal are lists of nonempty UTF8 strings; order and duplicates are retained."
+  },
+  "schema": "alignment-richer-review-submission-guide/v1",
+  "source_author_independence_authenticated": false,
+  "source_fidelity_established": false,
+  "source_semantics_verified": false,
+  "submission_format": "Copy the reviewer payload, retain instructions and exact item envelopes, and fill annotation slots only."
+}

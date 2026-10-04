@@ -1,0 +1,27 @@
+{
+  "actual_optimizer_updates": 0,
+  "loss_backward_or_optimizer_step_executed": false,
+  "model_training_executed": false,
+  "plan_file_sha256": "b02b0b35a9f2d82abd5422643f9034bea30e1d83f0c21772aa0a609c234ead3b",
+  "pytest_seconds": 2.27,
+  "ruff": "passed_2files",
+  "schema": "source-vector-reconstruction-engineering-validation/v1",
+  "status": "passed_preparation_and_zero_update_checkpoint_checks",
+  "test_count": 25,
+  "torch_initialization_and_safe_tensor_reload_executed": true,
+  "train_normalization_readonly_float64_check": {
+    "legacy8": {
+      "coordinate_mean_global_rms_float64": 0.06846078464398661,
+      "distinct_raw_vector_count": 16
+    },
+    "native384": {
+      "coordinate_mean_global_rms_float64": 0.01458643542152571,
+      "distinct_raw_vector_count": 16
+    },
+    "native768": {
+      "coordinate_mean_global_rms_float64": 0.015848931915948206,
+      "distinct_raw_vector_count": 16
+    }
+  },
+  "validation_scope": "stdlib_actual_input_preflight_and_disposable_zero_step_loader_tests_no_semantic_reference"
+}

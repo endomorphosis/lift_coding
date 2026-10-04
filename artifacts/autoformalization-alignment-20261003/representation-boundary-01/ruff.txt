@@ -1,0 +1,31 @@
+/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/validate_representation_boundary.py:102:5: I001 [*] Import block is un-sorted or un-formatted
+    |
+100 |               and raw(prepared["source_context_joins"]) == raw(joins["rows"]), "external input/producer selection replay differs")
+101 |       sys.path.insert(0, str(REPO))
+102 | /     from ipfs_datasets_py.logic.formalization.autoencoder import alignment_lane_bundle as lane
+103 | |     from ipfs_datasets_py.logic.formalization.autoencoder import alignment_stage_declarations as stages
+    | |_______________________________________________________________________________________________________^ I001
+104 |
+105 |       vectors = 0
+    |
+    = help: Organize imports
+
+tests/unit/logic/formalization/autoencoder/test_alignment_stage_declarations.py:2:1: I001 [*] Import block is un-sorted or un-formatted
+   |
+ 1 |   """Stage association, leakage and inactive-admission checks without models."""
+ 2 | / import hashlib
+ 3 | | import json
+ 4 | | import subprocess
+ 5 | | import sys
+ 6 | | from copy import deepcopy
+ 7 | | from pathlib import Path
+ 8 | |
+ 9 | | import pytest
+10 | | from ipfs_datasets_py.logic.formalization.autoencoder import alignment_lane_bundle as lane
+11 | | from ipfs_datasets_py.logic.formalization.autoencoder import alignment_stage_declarations as subject
+   | |____________________________________________________________________________________________________^ I001
+   |
+   = help: Organize imports
+
+Found 2 errors.
+[*] 2 fixable with the `--fix` option.

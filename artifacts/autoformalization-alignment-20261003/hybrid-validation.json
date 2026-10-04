@@ -1,0 +1,556 @@
+{
+  "schema": "autoformalization-hybrid-validation/v1",
+  "recorded_at_utc": "2026-10-03T07:41:22.069012+00:00",
+  "workspace_root": "/home/barberb/lift_coding",
+  "repository_root": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "root_head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+  "datasets_head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+  "head_scope": "Context references only; dirty working-tree files are bound separately.",
+  "checks": [
+    {
+      "check": "focused_regression_tests",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_inventory.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_capabilities.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_baseline.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_study.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_projection.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_retrieval.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review_admission.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_retrieval_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_joint_retrieval.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_joint_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_hybrid_retrieval.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_hybrid_experiment.py"
+      ],
+      "exit_code": 0,
+      "passed": 475,
+      "elapsed_seconds": 18.61
+    },
+    {
+      "check": "ruff_new_python_files",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_hybrid_experiment.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_hybrid_retrieval.py",
+        "scripts/ops/legal_ir/run_alignment_hybrid_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_hybrid_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_hybrid_retrieval.py"
+      ],
+      "exit_code": 0,
+      "files": 5
+    },
+    {
+      "check": "hybrid_cli",
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/ops/legal_ir/run_alignment_hybrid_experiment.py",
+        "--output-directory",
+        "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01"
+      ],
+      "exit_code": 0,
+      "completed_pairs": 12,
+      "completed_paired_comparisons": 60,
+      "raw_control_completed": true
+    }
+  ],
+  "changed_file_bindings": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_hybrid_experiment.py",
+      "sha256": "ce1bd06d39018061a91fd7e643c729380865a4e985adbbda9ff6cd5e7a2550c7",
+      "bytes": 22586
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_hybrid_retrieval.py",
+      "sha256": "247c9c25404dc34118ceacb20ff425007cc87ad6f3705f7ec467950616ce9a81",
+      "bytes": 17766
+    },
+    {
+      "path": "external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_hybrid_experiment.py",
+      "sha256": "284522e4e323e9a6dbb9796084a36ca0571979503dc4878e6c7c6c4b43628d35",
+      "bytes": 1714
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_hybrid_experiment.py",
+      "sha256": "2c2782b3c24b0f8c047e03eb6cfc4d237a25a1637cd6a5ea4aca789d559a7c2b",
+      "bytes": 16954
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_hybrid_retrieval.py",
+      "sha256": "6308abf9ceeb57c7b2d7247b391f75ee58fca2428fcd4905d158777d49420fb8",
+      "bytes": 21588
+    },
+    {
+      "path": "external/ipfs_datasets/configs/autoencoders/alignment_hybrid_development_v1.json",
+      "sha256": "c8b1d28bb8ead0955c1b24d5ec56b35883cdc065ad433dfcd2b31d2c4fd121e2",
+      "bytes": 530
+    },
+    {
+      "path": "external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md",
+      "sha256": "87b1bd8e37db86006462c337f2c2406ff2c57b028deb0c70fadc178e99d4f5e8",
+      "bytes": 10268
+    }
+  ],
+  "human_report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/hybrid-report.md",
+    "sha256": "74e7cd7170ac60169adef3245bb99bee8ef59004c3142f2fa8631d1d74c452d1",
+    "bytes": 10163
+  },
+  "machine_report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/hybrid-01/report.json",
+    "sha256": "0ef7e07508ab6d531c88c78572cda04c1cde9191ea4b4c0f95b9b35fdc4430e8",
+    "bytes": 673632
+  },
+  "richer_material_inventory_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+    "sha256": "8713fddcffaf79c6872f1a8ec8bccd7dec7ddb24da76a8b26df5e6350a9cdca9",
+    "bytes": 13024
+  },
+  "inventory_observed_file_bindings": [
+    {
+      "path": "external/ipfs_datasets/configs/autoencoders/alignment_study_development_v1.json",
+      "sha256": "413e7250098d39e3e1ff59405c75c5eca283ec5820828d8be7fb00beb01e2f31",
+      "bytes": 3177
+    },
+    {
+      "path": "external/ipfs_datasets/configs/autoencoders/gte_decoder_source_evaluation_v1.json",
+      "sha256": "13b65fbf97a02005b9880ab9e0caf2cfb7c0fdd132324f144a5b48a08becc009",
+      "bytes": 842
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/source_reconstruction_v3.py",
+      "sha256": "5498592e48f174e872b059b055da596aff543fbce76709408f835ca92bfd36da",
+      "bytes": 7576
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/intent_source_coverage_v1/cases.py",
+      "sha256": "7f0a9bcec6faf5b01b884244c00cbad1f1010d85373f3e57b0604cf6d01afb7c",
+      "bytes": 6022
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/native_dcec_ui_v1/guard_cases.py",
+      "sha256": "a1680b54df4f346bd262329f984e0f01852199fe497792361a5292823459c0fd",
+      "bytes": 4085
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/source_security_styles_v4.py",
+      "sha256": "e8384bb692d486f851f45e0f11438292220deab81acbfdcf4fa0778d59bc74fe",
+      "bytes": 3935
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/source384_fidelity_v2/panel.py",
+      "sha256": "2ecb6dbc51ed20ddc0e5da52304b1d07b4c709f1cf39ebbd51ca82e47d4a0a6b",
+      "bytes": 3627
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/intent_ui_source_compositions_v1/panel.py",
+      "sha256": "99a1ee0330e2a73e0f78051e8a6623605746b1c74b56f83fdbe6f484965bfc33",
+      "bytes": 3322
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/attested_authorization/manifest.json",
+      "sha256": "202a7f7536817cce5b47075b893c1ea8ca2a564b9a488d6950f8dbbbc4c44e1e",
+      "bytes": 28187
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/proof_tactician/manifest.json",
+      "sha256": "168c7902c975dc93a803558d4974e9a2c73f6fb07eabb9d93564935b1f61b02d",
+      "bytes": 166789
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/software_verification/conformance/manifest.json",
+      "sha256": "9a6f1a0d02fa151116ebf2febfe3a50fce06c1e677b0b88b620a3fde9a919ce1",
+      "bytes": 13164
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_compiler.py",
+      "sha256": "7c4934b32f44755646e137704a0d6eeb4310127d99d1f584e3e2f1e1c23625d5",
+      "bytes": 17327
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_decompiler.py",
+      "sha256": "e90ca3ac4359057220f60bb398235b27feec7a3cdce03a2ad9dda76515031684",
+      "bytes": 11500
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_decompiler_reconstruction.py",
+      "sha256": "afe11b1fcfc5003df40e136cc2de095f7d6ba708c6ee3f06a09cd6f7f4c8c0b0",
+      "bytes": 7496
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/preparation.json",
+      "sha256": "688d06be83671d0274801958fcc47c725c5023f0ca9e41a8330cff657eafb914",
+      "bytes": 3008
+    },
+    {
+      "path": "artifacts/autoformalization-alignment-20261003/retrieval-01/review_admission.json",
+      "sha256": "37ff0abb003f5f525784733ae97cef80fcb81f2e6aa4e2a3e26f7ffdd7e73c0c",
+      "bytes": 82817
+    }
+  ],
+  "inventory_scope": {
+    "independently_reviewed_natural_source_corpora_identified": 0,
+    "partition_rows_generated": false,
+    "sealed_partition_rows_opened": false,
+    "sealed_panel_generator_metadata_inspected": true,
+    "material_admitted_to_hybrid_corpus": false
+  },
+  "report_payload_sha256": "35310c8a2cbb85daa1e00c0c9051b46a9cc0b44d363b3031bea72c2cb38e156b",
+  "detail_artifact_bindings": [
+    {
+      "bytes": 574169,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/raw-control.json",
+      "sha256": "7c0bde3ce797157c875474c5563370bc55264b9e81967398882e8bbe8302e457"
+    },
+    {
+      "bytes": 18111137,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-00.json",
+      "sha256": "52bf0456172d1a43b312ccf06eeb556dca75b7b0011f901ed952d7f736d49288"
+    },
+    {
+      "bytes": 18203741,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-01.json",
+      "sha256": "ac70435ed25fea35490d87c52e262ae83e18f0db44848ce926a0db7e50902139"
+    },
+    {
+      "bytes": 17992081,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-02.json",
+      "sha256": "63feac494f9329aaedf40bcb613eadbdefd83ae42673816e35182b5784648ccf"
+    },
+    {
+      "bytes": 18235329,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-03.json",
+      "sha256": "6ba3eb03c4902a4ad6fea84795baac04d1ecc76192182242a9990b996c4fc485"
+    },
+    {
+      "bytes": 18158149,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-04.json",
+      "sha256": "e0755b2000abd879c22755ba2b22a7998311d35eb9872e49a202d0f295549e79"
+    },
+    {
+      "bytes": 18317443,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-05.json",
+      "sha256": "7229371a6d204de5a4935144b219f79989d4fa0566039d70a2f1934d9f639a13"
+    },
+    {
+      "bytes": 18131586,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-06.json",
+      "sha256": "04d93a2e1a58e81167e835eafba6b35fe15cce8f4bf387c5a20b536a6c2ef290"
+    },
+    {
+      "bytes": 18281786,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-07.json",
+      "sha256": "95bc54e5dc75482f8c8dcc7f6609bf26830e4c080c1cf730f8b0497a90a670f4"
+    },
+    {
+      "bytes": 18118566,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-08.json",
+      "sha256": "8f8f8640c2d2243f83f2cb782457955b3e4361a4137e075a86f1d4a3fbe27f9a"
+    },
+    {
+      "bytes": 18368913,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-09.json",
+      "sha256": "19466a70a2b61eb15cc8686c8c39f7f001fdb51f812f479e6b47a05ffa92c9f4"
+    },
+    {
+      "bytes": 18049189,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-10.json",
+      "sha256": "80e92d570ff120ae75682dad0b8db912ec2fce448c36a6646736a113c84a4292"
+    },
+    {
+      "bytes": 18210953,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-01/pair-11.json",
+      "sha256": "fd30950e2b040bc749f433b7d71b20eaaadda686567bee6e8ec756cdd11be841"
+    }
+  ],
+  "listed_source_bindings_rechecked": 25,
+  "artifact_checkpoint_hashes_rechecked": 12,
+  "predecessor_detail_bindings_rechecked": 25,
+  "detail_artifacts_rechecked": 13,
+  "scored_policy_query_rows_rechecked": 7320,
+  "paired_rows_rechecked": 7200,
+  "raw_shortlist_hashes_recomputed": 120,
+  "control_selected_item_matches": 3000,
+  "control_joint_trace_matches": 3000,
+  "maximum_control_cosine_score_difference": 0,
+  "all_rows_have_unique20_shortlist_and_unique5_subset": true,
+  "recoveries_vs_formal_only": {
+    "source_only": 47,
+    "formal_only": 0,
+    "source_discovery_formal_select": 47,
+    "rrf_formal": 47,
+    "quota_formal": 47
+  },
+  "new_losses_vs_formal_only": {
+    "source_only": 0,
+    "formal_only": 0,
+    "source_discovery_formal_select": 0,
+    "rrf_formal": 0,
+    "quota_formal": 0
+  },
+  "formal_prior_failure_distinct_queries": 29,
+  "formal_prior_failure_group_counts": {
+    "v3:legal_ir:3:1": 11,
+    "v3:legal_ir:1:4": 20,
+    "v3:legal_ir:0:3": 16
+  },
+  "identical_selected_rows_vs_source_discovery_formal_select": {
+    "rrf_formal": 1431,
+    "quota_formal": 1434
+  },
+  "upstream_opportunity_scope": "Single-head policy prefix20; two-head prefixes40 before deduplication; actual batched distance computation uses both full90 geometries.",
+  "actual_union_size": {
+    "min": 20,
+    "max": 28,
+    "mean": 23.635416666666668
+  },
+  "protected_protocol_and_input_bindings": [
+    {
+      "path": "papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/legal_ir/train.json",
+      "sha256": "00f4074cca56daed9f766e74c90d3d35e608bfb1058c24db99fc30250314704f",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/legal_ir/validation.json",
+      "sha256": "6a07b7a4d7c73802fc4a31a2666adcb312706fcc3deffbc46626d9d8914d43c9",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/source-native-v3-20261001/run-02/preparation.json",
+      "sha256": "688d06be83671d0274801958fcc47c725c5023f0ca9e41a8330cff657eafb914",
+      "digest_rechecked": true
+    },
+    {
+      "path": "artifacts/gte-embedding-reuse-20261002/archive-reuse-audit.json",
+      "sha256": "4218b8d58fc09cb6b06610936b13855f4f0a6fb0447f6ec5473332941c89c593",
+      "digest_rechecked": true
+    },
+    {
+      "path": "external/ipfs_datasets/tests/fixtures/logic/source_reconstruction_v3.py",
+      "sha256": "5498592e48f174e872b059b055da596aff543fbce76709408f835ca92bfd36da",
+      "digest_rechecked": true
+    }
+  ],
+  "review_status_counts": {
+    "agreed_multiple_reviews": 0,
+    "ambiguous": 0,
+    "disputed": 0,
+    "pending": 40,
+    "single_review": 0,
+    "unsupported": 0
+  },
+  "preliminary_candidate_count": 0,
+  "frozen_probe_and_predictions_rechecked": true,
+  "review_receipt_digest_rechecked": true,
+  "local_links_checked": 43,
+  "local_links": [
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/hybrid-report.md",
+      "target": "hybrid-01/report.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/hybrid-report.md",
+      "target": "../../external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/hybrid-report.md",
+      "target": "hybrid-validation.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/hybrid-report.md",
+      "target": "richer-material-inventory.md"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/hybrid-report.md",
+      "target": "../../implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/configs/autoencoders/alignment_study_development_v1.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../source-native-v3-20261001/run-02/preparation.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "retrieval-01/review_admission.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/intent_source_coverage_v1/cases.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/native_dcec_ui_v1/guard_cases.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/source_security_styles_v4.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/attested_authorization/manifest.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/proof_tactician/manifest.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/software_verification/conformance/manifest.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_compiler.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_decompiler.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_decompiler_reconstruction.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/source384_fidelity_v2/panel.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/intent_ui_source_compositions_v1/panel.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/configs/autoencoders/gte_decoder_source_evaluation_v1.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/configs/autoencoders/alignment_study_development_v1.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/configs/autoencoders/gte_decoder_source_evaluation_v1.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/source_reconstruction_v3.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/intent_source_coverage_v1/cases.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/native_dcec_ui_v1/guard_cases.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/source_security_styles_v4.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/source384_fidelity_v2/panel.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/intent_ui_source_compositions_v1/panel.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/attested_authorization/manifest.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/proof_tactician/manifest.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/fixtures/logic/software_verification/conformance/manifest.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_compiler.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_decompiler.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_decompiler_reconstruction.py"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../artifacts/source-native-v3-20261001/run-02/preparation.json"
+    },
+    {
+      "document": "artifacts/autoformalization-alignment-20261003/richer-material-inventory.md",
+      "target": "../../artifacts/autoformalization-alignment-20261003/retrieval-01/review_admission.json"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md",
+      "target": "alignment_joint_retrieval_experiment.md"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md",
+      "target": "../../scripts/ops/legal_ir/run_alignment_hybrid_experiment.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md",
+      "target": "../../configs/autoencoders/alignment_hybrid_development_v1.json"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md",
+      "target": "../../ipfs_datasets_py/logic/formalization/autoencoder/alignment_hybrid_experiment.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md",
+      "target": "../../ipfs_datasets_py/logic/formalization/autoencoder/alignment_hybrid_retrieval.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md",
+      "target": "../../ipfs_datasets_py/logic/formalization/autoencoder/alignment_joint_retrieval.py"
+    },
+    {
+      "document": "external/ipfs_datasets/docs/autoencoders/alignment_hybrid_retrieval_experiment.md",
+      "target": "../../../../artifacts/autoformalization-alignment-20261003/richer-material-inventory.md"
+    }
+  ],
+  "complete_dependency_manifest": false,
+  "elapsed_seconds": 25.95189931999994,
+  "numerical_scope": {
+    "head_precision": "float32",
+    "prediction_and_ranking_precision": "float64",
+    "torch_version": "2.13.0+cu130"
+  },
+  "existing_encoder_autoencoder_projection_weights_trained": false,
+  "probe_refitted": false,
+  "calibration_fitted": false,
+  "native_prover_executed": false,
+  "leanstral_loaded": false,
+  "experiment_sealed_final_test_accessed": false,
+  "primary_fidelity_status": "unavailable",
+  "native_useful_proof_status": "unrun",
+  "qualified": false,
+  "production_admitted": false,
+  "conclusion": "Source discovery alone and both merges recover47formal-head misses; no fusion-specific coverage advantage or independent fidelity/proof gain is established."
+}

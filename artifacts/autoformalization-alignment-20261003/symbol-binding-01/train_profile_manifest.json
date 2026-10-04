@@ -1,0 +1,286 @@
+{
+  "accepted": false,
+  "authored_reference_ir_accessed": false,
+  "content_sha256": "6cb238e7f3584086d395071c7d0dd2b9703abbd86bd726ab46912eaa96749091",
+  "encoder_executed": false,
+  "independent_semantic_review_completed": false,
+  "model_executed": false,
+  "neural_training_executed": false,
+  "proof_authority": false,
+  "prover_executed": false,
+  "qualified": false,
+  "query_reference_accessed": false,
+  "requests_binding": {
+    "bytes": 11255,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/inference_requests.json",
+    "sha256": "1740f42c497901e974ec7cb8f8892bd6208f643c7708313000870ecde9f10595"
+  },
+  "row_count": 16,
+  "rows": [
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "8f109e485d2377fabb44a565f316c3e103e7383b9c5eb70c474034e2d0022998",
+      "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 10,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "5b00d3d966ae2655fabba28eb4d74f03bb785484cd5fb2385c4ef1e92459fb29",
+      "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "11130854ec3de5b129f13e8dd71f73fcd02988aa09d79509aff2ad76619a07f6",
+      "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "1a1d098d19e0d369f449767edf64c24088da00b53c067d2deca737f74d6299e7",
+      "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "7d6a453934a5435a0750d07c0839ba4f7e5521bf7a8fff145ea5f0254cef9a90",
+      "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "5c16cc1a06ddcf9ad18bd00015875b70e077ebecc08ec01ead2dc825ac6e3353",
+      "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "37a37cd296d2a9ed641f6c844ac1548c3bfb72a9d572eb9bc95973b72f4f8086",
+      "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "cee3a1218396588b4b988de8a8e1e0322584d0cfa00f600be7f022fec5340e47",
+      "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "64fbcef69754129a01f21e476a6db2844d3c6209137465501d6866f00dd67725",
+      "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 10,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "14263107d47dfb204dbd7985ccd108f99212ac0767c73021e9eacd26f517c682",
+      "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "95e34b33b6bbf723f39a92d19210823018eefd5e5e8933a8c1c054202d21f00e",
+      "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "c2c0afd4f1a06c5555c6ff302786984e89b768b46add6c195114fd6f89ad98cf",
+      "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 10,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "32514e2ec0046c0da94b72a24c967f80774f7a67d59ac4c10caf467127a72a47",
+      "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "6a869b97dbeb1cc1d251e29d9f22eb463ea1502ded9dbe0c3d50d5ca66b45494",
+      "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 7,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "e9c479077302ee0e345077bd1a90a1dbfd192e45f13e6f114cd520c6118cf930",
+      "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    },
+    {
+      "anchor_count": 10,
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+      "independent_semantic_review_completed": false,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "proposal_sha256": "1f396f0ea9b31a5f4ec8faf1e798b6adeb1c6666a7ce1b4ef01b8ed1d08e808e",
+      "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+      "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+    }
+  ],
+  "schema": "alignment-static-symbol-binding-TRAIN-manifest/v1",
+  "source_fidelity_established": false,
+  "supervision_binding": {
+    "bytes": 333966,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/train_weak_supervision.json",
+    "sha256": "97a333821790db1ad11a542f918a32e583b9b4ab150b82cdd71bbd883bbc42ba"
+  },
+  "training_manifest_sha256": "1339d9fe39ea4a60be40223ac6711f3c2cf706f4dccd2f63e25483e43aad8250",
+  "training_supervision_consumed": true
+}

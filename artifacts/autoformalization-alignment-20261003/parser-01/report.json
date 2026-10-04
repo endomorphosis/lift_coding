@@ -1,0 +1,673 @@
+{
+  "baseline_construction_binding": {
+    "bytes": 585771,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/constructions.json",
+    "sha256": "098ea14c579a561f9a0bc0a89c61c2860bcba977d893c1a4e574248aa3e1369b"
+  },
+  "baseline_exact_replay_records": 34,
+  "baseline_summaries": {
+    "all": {
+      "construction_status_counts": {
+        "abstained": 27,
+        "success": 5,
+        "unavailable": 2
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 2,
+      "negative_ir_emissions": 1,
+      "negative_no_ir": 7,
+      "negative_rows": 8,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 4,
+      "positive_exact_candidate_roundtrips": 4,
+      "positive_ir_emitted": 4,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          },
+          "exceptions": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          },
+          "temporal": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          },
+          "exceptions": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          },
+          "temporal": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          }
+        }
+      },
+      "positive_rows": 24,
+      "qualified": false,
+      "rows": 34,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    },
+    "development": {
+      "construction_status_counts": {
+        "abstained": 14,
+        "success": 2,
+        "unavailable": 2
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 2,
+      "negative_ir_emissions": 1,
+      "negative_no_ir": 7,
+      "negative_rows": 8,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 1,
+      "positive_exact_candidate_roundtrips": 1,
+      "positive_ir_emitted": 1,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          },
+          "exceptions": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          },
+          "temporal": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          },
+          "exceptions": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          },
+          "temporal": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          }
+        }
+      },
+      "positive_rows": 8,
+      "qualified": false,
+      "rows": 18,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    },
+    "train": {
+      "construction_status_counts": {
+        "abstained": 13,
+        "success": 3
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 0,
+      "negative_ir_emissions": 0,
+      "negative_no_ir": 0,
+      "negative_rows": 0,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 3,
+      "positive_exact_candidate_roundtrips": 3,
+      "positive_ir_emitted": 3,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          },
+          "exceptions": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          },
+          "temporal": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          },
+          "exceptions": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          },
+          "temporal": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          }
+        }
+      },
+      "positive_rows": 16,
+      "qualified": false,
+      "rows": 16,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    }
+  },
+  "clarification_pattern_rows": [
+    "alignment-richer-legal-authored-development-v1:negative:ambiguous_actor"
+  ],
+  "complete_dependency_manifest": false,
+  "composition": {
+    "compiler_config_cid": "baguqeerab76qr5dc5l6tovougzmuhi74r7vomi47aolcl5vxfazyi5ocrwrq",
+    "composition_cid": "baguqeera2s3qjrys55c4lgl5ujimzx2y6elaqh4lsgfji3q47vy3ewhw6nyq",
+    "decompiler_config_cid": "baguqeeratlk326nodsva4rxwm65xgnpenhcovspm7crtyd4enaqhgjciqayq",
+    "frozen_roundtrip_composition_admitted": false,
+    "model_calls": 0,
+    "profile": "explicit-qualifier-source-withheld-diagnostic/v1",
+    "source_withheld": true
+  },
+  "configuration": {
+    "max_seconds": 120,
+    "richer_report": {
+      "path": "artifacts/autoformalization-alignment-20261003/richer-01/report.json",
+      "sha256": "a97ad11b271e6149e1818a476008fba7355fa02d8e5b3cb49fedd462e8886483"
+    },
+    "schema": "alignment-parser-experiment-config/v1",
+    "study_id": "autoformalization-parser-development-v1"
+  },
+  "configuration_binding": {
+    "bytes": 326,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_parser_development_v1.json",
+    "sha256": "1631e07235200f13dce2b7fd9021d1336f69a33002ef34f29563297e079a6e0e"
+  },
+  "construction_binding": {
+    "bytes": 1160241,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-01/constructions.json",
+    "sha256": "56ebb4b0c6448e9b47a1cf5cdcee00fd783ce2b2467109da616d09408d2fafa3"
+  },
+  "default_compiler_replaced": false,
+  "dependency_binding_scope": "listed_study_and_core_source_files_only",
+  "development_used_in_vocabulary_fit": false,
+  "development_used_to_design_grammar": true,
+  "elapsed_seconds": 2.0767391010012943,
+  "evaluation_role": "exposed_development",
+  "exact_authored_gains": 18,
+  "exact_authored_regressions": 0,
+  "frozen_baseline_sources_changed": false,
+  "frozen_roundtrip_composition_admitted": false,
+  "limitations": [
+    "The grammar was designed after viewing exposed development diagnostics; gains are exploratory regression evidence.",
+    "Exact caller atom surfaces and declared connectives restrict this profile to controlled single-rule English.",
+    "Candidate preservation does not certify source fidelity or interpretation of flat qualifier atoms.",
+    "Absent negative candidates do not certify general unsupported-semantic recognition or clarification.",
+    "Explicit context resolution, native proof and kernel checking remain unrun or unavailable.",
+    "Independent 8D, 384D, 768D and Leanstral model lanes were not exercised."
+  ],
+  "native_useful_proof_coverage": {
+    "status": "unrun",
+    "value": null
+  },
+  "original_validation_accessed": false,
+  "panel_binding": {
+    "bytes": 93063,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json",
+    "sha256": "d7ab18fa836f9ef2b0c9963eedb3b5c7980c45ea250a8414253b9d1987a7dde6"
+  },
+  "predecessor_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/richer-01/report.json",
+    "sha256": "a97ad11b271e6149e1818a476008fba7355fa02d8e5b3cb49fedd462e8886483"
+  },
+  "primary_fidelity": {
+    "status": "unavailable_independent_review",
+    "value": null
+  },
+  "production_admitted": false,
+  "protected_protocol_bindings": [
+    {
+      "bytes": 4721,
+      "digest_verified": true,
+      "path": "papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    }
+  ],
+  "qualified": false,
+  "query_targets_used_in_construction": false,
+  "report_sha256": "bfaf2e695408ea5c7f977449e79f7cacc6982a0ecc6f5b5bbc2253515aceb86a",
+  "representation_assay_binding": {
+    "bytes": 72675,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/representation_assays.json",
+    "sha256": "62f804108cbde57f5c6a7e3a8e637bce70c1b9e0ebd155a6112fdcf741160ab8"
+  },
+  "resource_scope": {
+    "deadline_kind": "cooperative_between_rows_no_preemption",
+    "model_embeddings_computed": 0,
+    "model_loads": 0,
+    "optimizer_steps": 0,
+    "prover_calls": 0,
+    "provider_calls": 0
+  },
+  "schema": "alignment-parser-experiment-report/v1",
+  "sealed_final_test_accessed": false,
+  "source_bindings": [
+    {
+      "bytes": 19018,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+    },
+    {
+      "bytes": 31906,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+    },
+    {
+      "bytes": 20197,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+    },
+    {
+      "bytes": 23299,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e"
+    },
+    {
+      "bytes": 20651,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745"
+    },
+    {
+      "bytes": 17237,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576"
+    },
+    {
+      "bytes": 25163,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27"
+    },
+    {
+      "bytes": 17653,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318"
+    },
+    {
+      "bytes": 109257,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 37034,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd"
+    },
+    {
+      "bytes": 13437,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+    },
+    {
+      "bytes": 27010,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e"
+    },
+    {
+      "bytes": 17858,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/bridge/canonical.py",
+      "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194"
+    },
+    {
+      "bytes": 4428,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 27572,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8"
+    },
+    {
+      "bytes": 392561,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a"
+    },
+    {
+      "bytes": 300668,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+    },
+    {
+      "bytes": 1579,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+    },
+    {
+      "bytes": 14419,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "bytes": 6017,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 25914,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py",
+      "sha256": "23ea8a10eea572d05a90f822a8f0430d4c93648d6ec6a3e775f370cb3e9c4b5a"
+    },
+    {
+      "bytes": 1826,
+      "path": "scripts/ops/legal_ir/run_alignment_parser_experiment.py",
+      "sha256": "11069f97f4210071c13fb780a2ee3c0c778e392adf1da008dee5e93e6da34b8b"
+    }
+  ],
+  "status": "completed",
+  "study_id": "autoformalization-parser-development-v1",
+  "summaries": {
+    "all": {
+      "construction_status_counts": {
+        "abstained": 10,
+        "success": 22,
+        "unavailable": 2
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 2,
+      "negative_ir_emissions": 0,
+      "negative_no_ir": 8,
+      "negative_rows": 8,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 22,
+      "positive_exact_candidate_roundtrips": 22,
+      "positive_ir_emitted": 22,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.9333333333333333,
+            "tp": 28
+          },
+          "exceptions": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.9333333333333333,
+            "tp": 28
+          },
+          "temporal": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.9333333333333333,
+            "tp": 28
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.9333333333333333,
+            "tp": 28
+          },
+          "exceptions": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.9333333333333333,
+            "tp": 28
+          },
+          "temporal": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.9333333333333333,
+            "tp": 28
+          }
+        }
+      },
+      "positive_rows": 24,
+      "qualified": false,
+      "rows": 34,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    },
+    "development": {
+      "construction_status_counts": {
+        "abstained": 10,
+        "success": 6,
+        "unavailable": 2
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 2,
+      "negative_ir_emissions": 0,
+      "negative_no_ir": 8,
+      "negative_rows": 8,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 6,
+      "positive_exact_candidate_roundtrips": 6,
+      "positive_ir_emitted": 6,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.8,
+            "tp": 8
+          },
+          "exceptions": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.8,
+            "tp": 8
+          },
+          "temporal": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.8,
+            "tp": 8
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.8,
+            "tp": 8
+          },
+          "exceptions": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.8,
+            "tp": 8
+          },
+          "temporal": {
+            "fn": 2,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.8,
+            "tp": 8
+          }
+        }
+      },
+      "positive_rows": 8,
+      "qualified": false,
+      "rows": 18,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    },
+    "train": {
+      "construction_status_counts": {
+        "success": 16
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 0,
+      "negative_ir_emissions": 0,
+      "negative_no_ir": 0,
+      "negative_rows": 0,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 16,
+      "positive_exact_candidate_roundtrips": 16,
+      "positive_ir_emitted": 16,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 0,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 20
+          },
+          "exceptions": {
+            "fn": 0,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 20
+          },
+          "temporal": {
+            "fn": 0,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 20
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 0,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 20
+          },
+          "exceptions": {
+            "fn": 0,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 20
+          },
+          "temporal": {
+            "fn": 0,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 20
+          }
+        }
+      },
+      "positive_rows": 16,
+      "qualified": false,
+      "rows": 16,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    }
+  },
+  "target_origin": "synthetic_authored_unreviewed",
+  "training_vocabulary": {
+    "actions": [
+      "audit",
+      "authorize",
+      "notify",
+      "retain"
+    ],
+    "actors": [
+      "clerk",
+      "custodian",
+      "officer",
+      "registrar"
+    ],
+    "objects": [
+      "applicant",
+      "application",
+      "filing"
+    ],
+    "qualifiers": [
+      "application_complete",
+      "before_the_review_deadline",
+      "court_order",
+      "fees_paid",
+      "legal_hold",
+      "within_48_hours"
+    ]
+  },
+  "training_vocabulary_sha256": "8a8f1782bea7d40473525991a922b56e8e2a4ad2ba8db7cabdd04d19056242b7"
+}

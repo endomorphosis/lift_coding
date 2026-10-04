@@ -1,0 +1,808 @@
+{
+  "authored_panel_semantics_read": false,
+  "complete_dependency_manifest": false,
+  "content_sha256": "3f87a20b2dd68b5754df42cdacf147cac6b76851cc8032f550822b75c1c92146",
+  "context_resolution_executed": false,
+  "decoder_profiles": [
+    "retained-native768-literal-span/v1",
+    "retained-native768-fixed-codec/v1",
+    "anchored-canonical-proposal/v1"
+  ],
+  "fixed_codec_output_cap": 512,
+  "fixed_codec_vocabulary": [
+    "<pad>",
+    "<bos>",
+    "<eos>",
+    "\"F\"",
+    "\"O\"",
+    "\"P\"",
+    "\"action\"",
+    "\"actor\"",
+    "\"approve\"",
+    "\"archive\"",
+    "\"conditions\"",
+    "\"deliver\"",
+    "\"examine\"",
+    "\"exceptions\"",
+    "\"modality\"",
+    "\"notary\"",
+    "\"notice\"",
+    "\"object\"",
+    "\"preserve\"",
+    "\"publish\"",
+    "\"registrar\"",
+    "\"rules\"",
+    "\"secretary\"",
+    "\"temporal\"",
+    "\"treasurer\"",
+    "\"trustee\"",
+    ",",
+    ":",
+    "[",
+    "]",
+    "{",
+    "}"
+  ],
+  "fixed_codec_vocabulary_sha256": "fdddce1c10efb20647fc40d77a7422e68740305d67f25a41919d3527aa71beef",
+  "grammar_design_used_exposed_development": true,
+  "implementation_bindings": [
+    {
+      "bytes": 9794,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+      "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+    },
+    {
+      "bytes": 16508,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_grounding.py",
+      "sha256": "3e3a2afdeda600bf47745790f76e76fd76998522185ac87d61df2257bcd0cada"
+    },
+    {
+      "bytes": 14419,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    }
+  ],
+  "independent_semantic_review_completed": false,
+  "input_bindings": {
+    "declared_context_inputs": {
+      "bytes": 97961,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/context-02/context_inputs.json",
+      "sha256": "cdc355cee220b2c2ff72ab28486f31a826e2d01164819d6c7760f559970d8f75"
+    },
+    "prior_documentation_validation": {
+      "bytes": 18795,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/decoder-replay-02/validation.json",
+      "sha256": "45193075f7fcd23e2caf46d24243536540f054c521be4b6527c1f84bc9d16582"
+    },
+    "prior_numerical_validation": {
+      "bytes": 96524,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/decoder-replay-01/validation.json",
+      "sha256": "ba3ee457a4405c60d2921bbe0572b4face6c05f7565f755e8cc599d5cd84c4bf"
+    },
+    "retained_fixed_codec_selected_checkpoint": {
+      "bytes": 3613695,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-generated-field-training-r2-20261003/training-r1/results/768-generated-fields-every2-2718/selected-state.json",
+      "sha256": "b23f1db1169e37e235d297475bcbd7f2676ce3442158515481d4375e17df66d7"
+    },
+    "sidecar_report": {
+      "bytes": 39654,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/sidecar-replay-01/report.json",
+      "sha256": "29b01ff5523161a87717f008ca52ed08536f60be1601e8bf660fe13435145f25"
+    },
+    "source_inputs": {
+      "bytes": 17282,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/embedding_inputs.json",
+      "sha256": "072b5e7479499bd232715ec72bfe157c0dafb80c0bb9c140423c867c9f751f99"
+    },
+    "source_span_report": {
+      "bytes": 68675,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/report.json",
+      "sha256": "a42536a312b3940fe761e99b9b418a0889bd921f97b73fc3821158fb447e4d3a"
+    },
+    "training_vocabulary_metadata": {
+      "bytes": 20513,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-01/report.json",
+      "sha256": "0e8b43316bb1209a4a7be47c3fef98ce8172e674f93e50e6237b38cb27e210e5"
+    }
+  },
+  "loaded_repository_sources_before": [
+    {
+      "bytes": 56829,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    {
+      "bytes": 4434,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    {
+      "bytes": 2708,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/__init__.py",
+      "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 9794,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+      "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+    },
+    {
+      "bytes": 14419,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "bytes": 16508,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_grounding.py",
+      "sha256": "3e3a2afdeda600bf47745790f76e76fd76998522185ac87d61df2257bcd0cada"
+    },
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 5845,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    },
+    {
+      "bytes": 175,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/__init__.py",
+      "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+    },
+    {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    }
+  ],
+  "prior_unchanged_checked_file_count": 245,
+  "proof_authority": false,
+  "qualified": false,
+  "row_count": 34,
+  "rows": [
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:0b121f5243a089c5ed78a8a5907b20692334cc05932076ef4a55c462b1954e79",
+      "id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+      "input_sha256": "01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+      "requires_context_resolution": false,
+      "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+      "source_text": "The registrar must authorize the application before the review deadline if fees have been paid, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:aa3b6abd58344c42de458dc76c075eb5482c2dcc3ecf1d03703e2d107b181191",
+      "id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+      "input_sha256": "02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+      "requires_context_resolution": false,
+      "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+      "source_text": "The officer may audit the filing within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:49881d5b775b16f0f2721b3c7ad200e76098f0e2f62860ca9892f586af0b20ea",
+      "id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+      "input_sha256": "037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+      "requires_context_resolution": false,
+      "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+      "source_text": "If the application is complete, the custodian must not retain the application within 48 hours, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:01ded8bcf2a5e8bf8d5590f4ad85d6c57e2f8326a61f87da284f55d0bae851da",
+      "id": "sha256:06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+      "input_sha256": "06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+      "requires_context_resolution": false,
+      "source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+      "source_text": "The clerk told the custodian that they must retain the application."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:54be35d0ffef83539dd0696bdfe9216795b61781b8b353b20afc2d4ab8e463f5",
+      "id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+      "input_sha256": "2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+      "requires_context_resolution": false,
+      "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+      "source_text": "If fees have been paid, the clerk must notify the applicant before the review deadline, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:ffc1af047cc6260fffe88f53bd5dad7a9d70ebbdedebc6334716fe0307f48da9",
+      "id": "sha256:27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+      "input_sha256": "27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+      "requires_context_resolution": false,
+      "source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+      "source_text": "The clerk must notify the applicant next Friday."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:fcc60bb7dc6d45aa2719d5a59cecc6d03e717d4db3979f0687eb20bf6ac51de4",
+      "id": "sha256:2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+      "input_sha256": "2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+      "requires_context_resolution": false,
+      "source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+      "source_text": "The clerk may retain the filing within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:a859b3edab17d31ba872d7df7c690ee338f09c0198b15f7f86461f5d23375481",
+      "id": "sha256:340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+      "input_sha256": "340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+      "requires_context_resolution": false,
+      "source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+      "source_text": "If identity has been verified, the clerk must retain the filing before the review deadline, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:3e60e7be45a74c919b86d97f7874934d332c0d0a6af9775c312e85a597b4040d",
+      "id": "sha256:3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+      "input_sha256": "3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+      "requires_context_resolution": false,
+      "source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+      "source_text": "If the application is complete, the officer must not notify the applicant within 48 hours, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:f149a7b0212a280d5c061fc7ba3c7c3611d557330c592b704bc0dcf24de71160",
+      "id": "sha256:4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+      "input_sha256": "4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+      "requires_context_resolution": false,
+      "source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+      "source_text": "A clerk may notify an applicant only if that applicant's application is complete."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:46b81d8fdd586aaf66a401cca6b62460218ba443f455058f0719dac6044ec1cc",
+      "id": "sha256:44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+      "input_sha256": "44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+      "requires_context_resolution": false,
+      "source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+      "source_text": "The clerk must retain the filing within 48 hours if the application is complete, unless a court order applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:9562c3ca7fa75254c8b8365c4ce8368da87770847969a22f49ad72ea7fcca15e",
+      "id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+      "input_sha256": "4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+      "requires_context_resolution": false,
+      "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+      "source_text": "The clerk must not notify the applicant within 48 hours if the application is complete, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:396ca5ff4417d6464a17493072f047376f5b36fc3123010b44ddcea118a7b1ff",
+      "id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+      "input_sha256": "54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+      "requires_context_resolution": false,
+      "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+      "source_text": "If the application is complete, the registrar must not authorize the application within 48 hours, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:576d0cb92ad557c1ed7e1364a1415b3e65ac711e43b14efc306e809a987a545b",
+      "id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+      "input_sha256": "5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+      "requires_context_resolution": false,
+      "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+      "source_text": "The officer must not audit the filing within 48 hours if the application is complete, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:74c3903f0430005873596dab7aa86725d9423b04def039c83fb7c2ac395327dc",
+      "id": "sha256:5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+      "input_sha256": "5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+      "requires_context_resolution": false,
+      "source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+      "source_text": "Each officer must assign exactly one reviewer to each application."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:cfd6a90b314cbdb665a3b493a4e83db722f6ec54883146269fb91d6ece6ff411",
+      "id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+      "input_sha256": "5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+      "requires_context_resolution": false,
+      "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+      "source_text": "The officer must audit the filing within 48 hours if the application is complete, unless a court order applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:70e8793b90e558950564703e5e4009e10848555361249f8849c0ed7d1b9f6622",
+      "id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+      "input_sha256": "60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+      "requires_context_resolution": false,
+      "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+      "source_text": "If the application is complete, the registrar must authorize the application within 48 hours, unless a court order applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:00dbb808f14510eb8f258072f2d21c9d621c494d6e055196454e95330ef98f7d",
+      "id": "sha256:65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+      "input_sha256": "65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+      "requires_context_resolution": false,
+      "source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+      "source_text": "The officer must notify the applicant before the review deadline if identity has been verified, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:fb91b87eb7fa06f5516e58b619bb1f5083070e250bab0a44ba39af3002e46bcd",
+      "id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+      "input_sha256": "6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+      "requires_context_resolution": false,
+      "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+      "source_text": "The clerk may notify the applicant within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:7fb8e612e8d997c7813431f27d22f15793527137e1052a080d869631a8f30ea5",
+      "id": "sha256:7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+      "input_sha256": "7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+      "requires_context_resolution": false,
+      "source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+      "source_text": "The clerk must notify the applicant if the application is complete or fees have been paid."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:275c04afb312409aeea781bc3b7a8be3cfabf2dd8bc5ef2b03404d665da6124f",
+      "id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+      "input_sha256": "796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+      "requires_context_resolution": false,
+      "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+      "source_text": "The custodian must retain the application before the review deadline if fees have been paid, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:22c2c6825cf299fb1d1ddf9ab2e4d7f00a51af394332d1cab9c4ce16a0bb1ec9",
+      "id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+      "input_sha256": "7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+      "requires_context_resolution": false,
+      "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+      "source_text": "If the application is complete, the custodian must retain the application within 48 hours, unless a court order applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "explicit_assumptions",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {
+          "designated_official": {
+            "kind": "actor_atom",
+            "value": "custodian"
+          }
+        },
+        "role": "explicit_assumptions",
+        "sha256": "1475ecb77ed7c374b5769b531ce5e0090176e9cc8342a3b086e63ebc9f24e583",
+        "text": "For this policy, 'designated official' denotes the custodian."
+      },
+      "declared_context_transport_id": "sha256:6ce7bce2ac5957e30f69e41436a19e3f138d6aa54ae43b19a59117eb3184c2c6",
+      "id": "sha256:857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+      "input_sha256": "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+      "requires_context_resolution": true,
+      "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "source_text": "The designated official must retain the case file within 48 hours if the application is complete, unless a court order applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:62f9075f46bfe140bdb3449987165e85bae0a4311ed360112a717e23d7d38556",
+      "id": "sha256:9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+      "input_sha256": "9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+      "requires_context_resolution": false,
+      "source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+      "source_text": "The clerk must notify the applicant unless a court order applies and a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "explicit_assumptions",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {
+          "designated_official": {
+            "kind": "actor_atom",
+            "value": "clerk"
+          }
+        },
+        "role": "explicit_assumptions",
+        "sha256": "5c447c36d664bb11b85f516d3b79bc1e941abe1e192f2155dc9cabc05637366b",
+        "text": "For this policy, 'designated official' denotes the clerk."
+      },
+      "declared_context_transport_id": "sha256:686421adbb6f0eee6f1189b8cf10543cf65d37baed8521fa0a3143727def5a2d",
+      "id": "sha256:a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+      "input_sha256": "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+      "requires_context_resolution": true,
+      "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "source_text": "The designated official must retain the case file within 48 hours if the application is complete, unless a court order applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:1db91c3c8235a348bfdc8aa84c2367488e0b759e19b6fdf3d0950e0547a31769",
+      "id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+      "input_sha256": "ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+      "requires_context_resolution": false,
+      "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+      "source_text": "If the application is complete and fees have been paid, the custodian may retain the application within 48 hours and before the review deadline, unless a court order applies or a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:165534c5861343e31cb017a81dac5f55579b389a7d650f0a890e146d60289833",
+      "id": "sha256:b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+      "input_sha256": "b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+      "requires_context_resolution": false,
+      "source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+      "source_text": "If the application is complete and fees have been paid, the officer may notify the applicant within 48 hours and before the review deadline, unless a court order applies or a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:6c276e55108d9cca50618b6162a1e52b914820f0b692b7feb1e046238493669f",
+      "id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+      "input_sha256": "b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+      "requires_context_resolution": false,
+      "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+      "source_text": "If fees have been paid, the officer must audit the filing before the review deadline, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:351276d98995276230799c9c65683565f406fabf5e25bdb3a44e5d78fe568c2d",
+      "id": "sha256:d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+      "input_sha256": "d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+      "requires_context_resolution": false,
+      "source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+      "source_text": "Every clerk must review every application."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:bd7ee171a4b57f2d5a448eff4f20e85131397d61919aad43bf332eba0b2b933d",
+      "id": "sha256:d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+      "input_sha256": "d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+      "requires_context_resolution": false,
+      "source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+      "source_text": "The clerk is not required to notify the applicant."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:8d4e6bf5e867bf1960bdefdfece841ba77cbe3ebcc0b60486db19417bffad926",
+      "id": "sha256:e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+      "input_sha256": "e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+      "requires_context_resolution": false,
+      "source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+      "source_text": "The clerk must not retain the filing within 48 hours if the application is complete, unless a legal hold applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:e180bf17784b5124ded04aa1d4ab4bc7858b217c6ac3fb4880cb8713919adb0e",
+      "id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+      "input_sha256": "f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+      "requires_context_resolution": false,
+      "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+      "source_text": "The clerk must notify the applicant within 48 hours if the application is complete, unless a court order applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:e268f4bbccf365a6c0f62e5173b0f5e14b72c0f62d0bdc489759404a9da08093",
+      "id": "sha256:fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+      "input_sha256": "fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+      "requires_context_resolution": false,
+      "source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+      "source_text": "If the application is complete, the officer must notify the applicant within 48 hours, unless a court order applies."
+    },
+    {
+      "context_applied": false,
+      "context_role": "none_required",
+      "context_semantics_applied": false,
+      "declared_context": {
+        "bindings": {},
+        "role": "none_required",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      "declared_context_transport_id": "sha256:c85efca2f39871c4570b343a8253ac89e2f82958d347c9fc09eea3f6a5de1334",
+      "id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+      "input_sha256": "fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+      "requires_context_resolution": false,
+      "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+      "source_text": "If the application is complete and fees have been paid, the registrar may authorize the application within 48 hours and before the review deadline, unless a court order applies or a legal hold applies."
+    }
+  ],
+  "runner_binding": {
+    "bytes": 24954,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/run_source_grounding.py",
+    "sha256": "46950a212ea979470ef0bd09d812335b300af42917b57ea5255f7bfd02541a81"
+  },
+  "schema": "alignment-source-grounding-request-manifest/v1",
+  "source_construction_recipe": "exact_source_and_declared_unresolved_context/v1",
+  "source_fidelity_established": false,
+  "targets_used_in_construction": false,
+  "vocabulary": {
+    "actions": [
+      "audit",
+      "authorize",
+      "notify",
+      "retain"
+    ],
+    "actors": [
+      "clerk",
+      "custodian",
+      "officer",
+      "registrar"
+    ],
+    "objects": [
+      "applicant",
+      "application",
+      "filing"
+    ],
+    "qualifiers": [
+      "application_complete",
+      "before_the_review_deadline",
+      "court_order",
+      "fees_paid",
+      "legal_hold",
+      "within_48_hours"
+    ]
+  },
+  "vocabulary_fit_development_used": false,
+  "vocabulary_provenance": "frozen_parser_01_TRAIN_supervised_atom_vocabulary",
+  "vocabulary_sha256": "8a8f1782bea7d40473525991a922b56e8e2a4ad2ba8db7cabdd04d19056242b7"
+}
