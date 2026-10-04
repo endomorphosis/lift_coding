@@ -1,0 +1,33 @@
+{
+  "bindings": [
+    {
+      "bytes": 5818,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run_reconstruction_batch.py",
+      "sha256": "269cc873668e611a74ab405f2bcf224b6ece7d0defc9b39c0e08c20ef2500bb0"
+    },
+    {
+      "bytes": 8011,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/resume_batched_integration_v2.py",
+      "sha256": "8aec173c135351a62f97ee334f5a66aa1902dfa569f1caa9bb3f5c8f9f30001c"
+    },
+    {
+      "bytes": 8840917,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/canonical_git/main-preparation/datasets/integration-fast-03/prepared.json",
+      "sha256": "5cf2b6a93148e8f39dfc7aa2b6f5ba9da5e493eb1ef50824cde0d3902afbcf92"
+    }
+  ],
+  "datasets_integration_completed": true,
+  "datasets_restoration_and_publication_pending": true,
+  "earlier_private_integration_interrupted": {
+    "ignored_tracked_path_failure_preserved": "canonical_git/main-preparation/datasets/integration-fast-02",
+    "original_checkout_or_index_modified": false,
+    "partial_original_reports_retained": true,
+    "reason": "batch conflict restoration replaced per-file conflict loop",
+    "successful_resume_generation": "canonical_git/main-preparation/datasets/integration-fast-03"
+  },
+  "fixture_model_calls": 0,
+  "fixture_training_updates": 0,
+  "schema": "publication-root-continuation-validation/v1",
+  "training_started": false,
+  "worker_process_group_termination_fixture_passed": true
+}

@@ -1,0 +1,23 @@
+{
+  "declared": {
+    "XY": {
+      ".M": 3
+    },
+    "ahead/behind_cached_main": "0/17",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 51,
+    "origin": "github.com/ipfs/ipfs-docs",
+    "parent": 32,
+    "relative": "docs/ipfs-docs",
+    "tracked": 3,
+    "untracked": 0
+  },
+  "errors": [
+    {
+      "error_type": "RuntimeError",
+      "message": "git command failed: ('rev-parse', 'HEAD') returncode=128"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/docs/ipfs-docs"
+}

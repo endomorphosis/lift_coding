@@ -1,0 +1,29 @@
+{
+  "concurrent_drifts": [
+    {
+      "current_bytes": 7376,
+      "current_sha256": "cb0f64760227ec780723b0d82c227df765605264738df62595315006f370e359",
+      "path": ".gitignore",
+      "previous_bytes": 4121,
+      "previous_sha256": "2653bf3ba5198874a1fa7be0a1e01ce23dabba76ce07ab23a94f688333a106ac"
+    }
+  ],
+  "fetch_stderr": "From https://github.com/endomorphosis/lift_coding\n * branch                  main       -> FETCH_HEAD\nAuto packing the repository in background for optimum performance.\nSee \"git help gc\" for manual housekeeping.\nwarning: The last gc run reported the following. Please correct the root cause\nand remove .git/gc.log\nAutomatic cleanup will not be performed until the file is removed.\n\nwarning: There are too many unreachable loose objects; run 'git prune' to remove them.\n\n",
+  "fetch_stdout": "",
+  "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+  "head_is_remote_ancestor": true,
+  "no_original_index_source_HEAD_writes": true,
+  "origin_main": "e36ac8fcf39004d40ccbf24ff5f92a26f228f0de",
+  "prior_attempts_preserved": [
+    "prepare_snapshot.py",
+    "private-index",
+    "private-index.lock",
+    "prepare_source_02.py",
+    "private-index-02"
+  ],
+  "schema": "root-publication-concurrent-drift-and-origin@1",
+  "selected_source_files": 435,
+  "source_paths_exact_remote": 31,
+  "source_paths_present_remote": 44,
+  "utc": "2026-10-04T19:59:27.128365+00:00"
+}

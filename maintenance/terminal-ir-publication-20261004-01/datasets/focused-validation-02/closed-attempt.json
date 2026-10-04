@@ -1,0 +1,46 @@
+{
+  "actual_outer_elapsed_seconds": 0.8663317869941238,
+  "after_source_pins": [
+    {
+      "bytes": 13908,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_timeout_decision.py",
+      "sha256": "a722953599c4b298095bdf2bc849fccab9ceb04a31817aae57917aed33196e53",
+      "unchanged": true
+    },
+    {
+      "bytes": 109669,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "0887be4827a877438f793552a1ea43cb36815ceced96ee51df11690576a66e8c",
+      "unchanged": true
+    }
+  ],
+  "child_started": true,
+  "cleanup_errors": [],
+  "environment_policy": {
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONPATH": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout"
+  },
+  "exception": null,
+  "logs": [
+    {
+      "bytes": 99,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/focused-validation-02/stdout.log",
+      "sha256": "eddd0dbb48e8c4cf20c5904f994b11c6327830e2997f61a4930236b40b038e03"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/focused-validation-02/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2396,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/focused-validation-02/junit.xml",
+      "sha256": "ea37efa343adaee44ab56de5ff9d4d38628a8863bbbe6f4e03bd3b26573a2e43"
+    }
+  ],
+  "returncode": 0,
+  "schema": "datasets-publication-focused-test-outer@1",
+  "scope": "focused merged-code tests, not prior qualification transfer; no autoencoder fit/prover invocation authorized",
+  "status": "passed",
+  "timeout_seconds": 240
+}

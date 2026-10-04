@@ -6,7 +6,9 @@ import ast
 import hashlib
 import json
 import os
+import stat
 import subprocess
+import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -53,7 +55,16 @@ def conflicts(repo):
     return entries
 
 
-def merge(repo, head, kind):
+def normalized_origin(remote):
+    value = remote.strip().removesuffix(".git").removesuffix("/")
+    for prefix in ("https://", "http://", "ssh://git@", "git@"):
+        if value.startswith(prefix):
+            value = value[len(prefix):]
+            break
+    return value.replace("github.com:", "github.com/")
+
+
+def merge(repo, head, kind, directory):
     if run(repo, ["merge-base", "--is-ancestor", head, "HEAD"], accepted=(0, 1)).returncode == 0:
         return {"head": head, "kind": kind, "status": "already_ancestor", "conflicts": []}
     before = text(repo, ["rev-parse", "HEAD"])
@@ -77,11 +88,12 @@ def merge(repo, head, kind):
     pending = run(repo, ["rev-parse", "--verify", "--quiet", "MERGE_HEAD"], accepted=(0, 1))
     if pending.returncode != 0:
         raise RuntimeError("merge did not produce an auditable merge state: " + result.stderr.decode("utf-8", "replace")[-4000:])
-    message = PUBLICATION / "merge-message.txt"
-    message.write_text("Integrate preserved source history and worktree changes\n\n"
-                       + "Source commit: " + head + "\nSource role: " + kind + "\n"
-                       + "Conflicts retain current integrated source; canonical current source takes precedence.\n")
-    run(repo, ["commit", "--file", str(message)])
+    with tempfile.NamedTemporaryFile(mode="w", dir=directory, prefix="merge-message-", suffix=".txt") as message:
+        message.write("Integrate preserved source history and worktree changes\n\n"
+                      + "Source commit: " + head + "\nSource role: " + kind + "\n"
+                      + "Conflicts retain current integrated source; canonical current source takes precedence.\n")
+        message.flush()
+        run(repo, ["commit", "--file", message.name])
     return {"head": head, "kind": kind, "status": "merged", "before": before,
             "after": text(repo, ["rev-parse", "HEAD"]), "conflicts": resolutions}
 
@@ -90,9 +102,12 @@ def integrate(plan, directory):
     canonical = Path(plan["canonical_repository"]).resolve()
     expected_origin = plan["normalized_origin"]
     remote = text(canonical, ["remote", "get-url", "origin"])
-    if "endomorphosis/" not in remote or expected_origin.rsplit("/", 1)[1] not in remote:
+    if normalized_origin(remote) != expected_origin or not expected_origin.startswith("github.com/endomorphosis/"):
         raise ValueError("selected owned origin differs")
-    baseline = text(canonical, ["rev-parse", "origin/main"])
+    baseline_ref = plan.get("baseline_remote_ref", "origin/main")
+    if baseline_ref not in {"origin/main", "origin/master"}:
+        raise ValueError("selected remote baseline must be main or master")
+    baseline = text(canonical, ["rev-parse", baseline_ref])
     if baseline != plan["origin_main_sha256_or_git_oid"]:
         raise ValueError("origin/main advanced before integration; select a new plan")
     worktree = Path(plan["fresh_worktree"]).absolute()
@@ -102,11 +117,31 @@ def integrate(plan, directory):
     run(canonical, ["worktree", "add", "-b", plan["integration_branch"], str(worktree), baseline])
     records = []
     for index, selected in enumerate(plan["heads"]):
-        record = merge(worktree, selected["oid"], selected["kind"])
+        record = merge(worktree, selected["oid"], selected["kind"], directory)
         records.append(record)
         save(directory / ("merge-" + str(index).zfill(4) + ".json"), record)
         print(json.dumps({"repository": expected_origin, "head": selected["oid"], "index": index,
                           "status": record["status"], "conflict_count": len(record["conflicts"])}), flush=True)
+    authoritative = plan.get("authoritative_source", {})
+    restored = []
+    source_commit = authoritative.get("snapshot_commit")
+    for selected in authoritative.get("selected_files", []):
+        path = worktree / selected["path"]
+        if selected["state"] in {"absent", "deleted"}:
+            if path.exists() or path.is_symlink():
+                run(worktree, ["rm", "-f", "--ignore-unmatch", "--", selected["path"]])
+                restored.append(selected["path"])
+            continue
+        observed = os.fsencode(os.readlink(path)) if path.is_symlink() else path.read_bytes() if path.is_file() else None
+        mode = "120000" if path.is_symlink() else "100755" if path.is_file() and path.stat().st_mode & stat.S_IXUSR else "100644"
+        if observed is None or hashlib.sha256(observed).hexdigest() != selected["sha256"] or mode != selected["mode"]:
+            run(worktree, ["checkout", source_commit, "--", selected["path"]])
+            restored.append(selected["path"])
+        observed = os.fsencode(os.readlink(path)) if path.is_symlink() else path.read_bytes()
+        if hashlib.sha256(observed).hexdigest() != selected["sha256"]:
+            raise ValueError("authoritative current source differs: " + selected["path"])
+    if restored and run(worktree, ["diff", "--cached", "--quiet"], accepted=(0, 1)).returncode:
+        run(worktree, ["commit", "-m", "Preserve pinned canonical source after history integration"])
     gitlinks = []
     for selected in plan.get("published_gitlinks", []):
         run(worktree, ["update-index", "--add", "--cacheinfo", "160000", selected["oid"], selected["path"]])
@@ -132,9 +167,12 @@ def integrate(plan, directory):
               "canonical_repository": str(canonical), "normalized_origin": expected_origin,
               "fresh_worktree": str(worktree), "baseline_origin_main": baseline, "integrated_tip": selected_tip,
               "selected_head_count": len(plan["heads"]), "all_selected_heads_ancestors": True,
+              "baseline_remote_ref": baseline_ref, "authoritative_file_count": len(authoritative.get("selected_files", [])),
+              "authoritative_paths_restored": restored, "pinned_canonical_source_preserved": True,
+              "overlapping_worktree_contents": "Conflict resolution retains integrated source, followed by canonical source pins; every selected commit remains reachable.",
               "merge_records": records, "published_gitlinks": gitlinks, "python_syntax_errors": syntax_errors,
               "original_worktrees_replaced": False, "history_rewritten": False, "force_push_used": False,
-              "origin_push_executed": False}
+              "origin_push_executed": False, "eligible_for_root_prepublication_review": not syntax_errors}
     binding = save(directory / "prepared.json", report)
     print(json.dumps({"prepared_binding": binding, "syntax_error_count": len(syntax_errors), "tip": selected_tip}), flush=True)
 

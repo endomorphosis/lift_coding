@@ -225,13 +225,12 @@ class CampaignTests(unittest.TestCase):
                 if argv[1] == "branch":
                     return f"agent/vericodegen-2026-{paper}\n"
                 return "" if argv[1] == "status" else "tracked\n"
-            def launch(argv, cwd, env, log, *, worker_bootstrap_fd=None):
+            def launch(argv, cwd, env, log):
                 process, record = original_launch([sys.executable, "-c", "import time; time.sleep(60)"], root, env, log)
                 children.append(process)
                 if len(children) == 1:
                     ready = native_ready(process, lane / "control.duckdb", paper)
-                    ready.update(quack_endpoint="quack://127.0.0.1:1", endpoint_secret_handle="handle:test",
-                                 worker_authority={"socket_path": "/test/owner.sock", "grant_broker_socket": "/test/grants.sock"})
+                    ready.update(quack_endpoint="quack://127.0.0.1:1", endpoint_secret_handle="handle:test")
                     CAM.write(lane / "quack-owner/paper-owner.ready.json", ready)
                 else:
                     timer = threading.Timer(0.2, os.kill, args=(os.getpid(), signal.SIGTERM))
@@ -285,7 +284,7 @@ class CampaignTests(unittest.TestCase):
                 self.assertEqual({b["paper_id"] for b in snap["boards"]}, set(CAM.PAPERS))
                 self.assertEqual(len({b["store_identity"]["database_uuid"] for b in snap["boards"]}), 3)
                 for board in snap["boards"]:
-                    self.assertEqual(len(board["tasks"]), {"autoformalization": 25, "law_to_action": 32, "neurosymbolic_supervision": 25}[board["paper_id"]])
+                    self.assertEqual(len(board["tasks"]), 25)
                     self.assertIn(board["tasks"][0]["status"], {"ready", "blocked"})
                     self.assertTrue(board["goals"])
                 source = state / "snapshot.json"
@@ -295,7 +294,7 @@ class CampaignTests(unittest.TestCase):
                 self.assertFalse(result["authoritative"])
                 self.assertGreater(result["lake_snapshot_count"], 0)
                 self.assertEqual(set(result["boards"]), set(CAM.PAPERS))
-                self.assertTrue(all(b["current_task_rows"] == {"autoformalization": 25, "law_to_action": 32, "neurosymbolic_supervision": 25}[paper] for paper, b in result["boards"].items()))
+                self.assertTrue(all(b["current_task_rows"] == 25 for b in result["boards"].values()))
             finally:
                 errors = CAM.cleanup_children(children)
                 for _kind, process, _record in children:

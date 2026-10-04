@@ -1,0 +1,1295 @@
+{
+  "HEAD_after": "0f4784322c564503c4a4d67ccb7fba29e32f111a",
+  "HEAD_before": "0f4784322c564503c4a4d67ccb7fba29e32f111a",
+  "counts": {
+    "file_entries": 242,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      "D.": 242
+    },
+    "ahead/behind_cached_main": "0/1",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 109,
+    "origin": "github.com/huggingface/doc-builder",
+    "parent": 100,
+    "relative": "test/doc-builder",
+    "tracked": 242,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/accelerate_doc.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/build_main_documentation.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/build_pr_documentation.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/bump-huggingface-js-packages.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/delete_old_pr_documentations.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/lint-svelte-kit.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/populate_search_engine.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/quality.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/test.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/upload_pr_documentation.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "LICENSE"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "MANIFEST.in"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/runnable-code-blocks.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "dummy/_toctree.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "dummy/index.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/.gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/.npmrc"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/.prettierignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/.prettierrc"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/eslint.config.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/package-lock.json"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/package.json"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/postbuild.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/postcss.config.cjs"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/postprocess.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/docstring.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/frameworkcontent.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/hashInCode.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/hfOptions.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/index.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/inferenceSnippet.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/mdsvex/index.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/tokenizersLang.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/preprocessors/utils.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/app.css"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/app.d.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/app.html"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/hooks.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Added.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Changed.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/CodeBlock.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/CodeBlockFw.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/ColabDropdown.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/CopyButton.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/CopyLLMTxtMenu.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/CourseFloatingBanner.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Deprecated.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/DocNotebookDropdown.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Docstring.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Dropdown.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/DropdownEntry.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/DropdownMenu.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/EditOnGithub.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/ExampleCodeBlock.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/FrameworkContent.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/FrameworkContentBlock.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/FrameworkSwitch.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/FrameworkSwitchCourse.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Heading.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/HfOption.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/HfOptions.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconAnthropic.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconArrowUpRight.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconCaret.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconCaretDown.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconCode.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconCopy.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconCopyLink.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconCurl.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconEyeHide.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconEyeShow.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconHuggingChat.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconJax.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconJs.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconMCP.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconNode.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconOpenAI.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconPython.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconPytorch.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconRust.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/IconTensorflow.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceApi.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceBaseten.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceBlackForest.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceCerebras.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceClarifai.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceCohere.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceFal.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceFeatherless.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceFireworks.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceGroq.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceHf.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceHyperbolic.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceNebius.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceNovita.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceNscale.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceOvh.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferencePublicAI.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceReplicate.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceSambaNova.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceScaleway.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceTogetherAI.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceWavespeed.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconInferenceZai.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconLinkExternal.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/IconSettings.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/InferenceSnippet/InferenceSnippet.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Markdown.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/MermaidChart.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcon.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconAudioClassification.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconAudioToAudio.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconAutomaticSpeechRecognition.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconConversational.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconDocumentQuestionAnswering.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconFeatureExtraction.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconFillMask.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconImageClassification.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconImageSegmentation.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconImageToImage.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconImageToText.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconObjectDetection.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconQuestionAnswering.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconReinforcementLearning.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconRobotics.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconSentenceSimilarity.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconSummarization.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTableQuestionAnswering.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTabularClassification.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTabularRegression.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconText2textGeneration.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTextClassification.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTextGeneration.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTextToImage.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTextToSpeech.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTokenClassification.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconTranslation.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconUnconditionalImageGeneration.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconVoiceActivityDetection.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineIcons/IconZeroShotClassification.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/PipelineTag.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Question.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Tip.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/TokenizersLanguageContent.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Tooltip.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/TooltipFromAction.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/Youtube.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/copyToClipboard.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/hfDocPaths.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/pipeline.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/stores.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/tooltipAction.svelte.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/types.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/lib/utils.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/routes/+layout.svelte"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/routes/+layout.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/src/routes/endpoints/toc/+server.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/static/favicon.png"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/svelte.config.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/tailwind.config.cjs"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/tsconfig.json"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "kit/vite.config.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "migrations/clear_meili_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "migrations/create_meili_index.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "migrations/export_meili_ids_to_hf.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "migrations/migrate_tips.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "migrations/swap_meili_indexes.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pyproject.toml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "scripts/.prettierrc"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "scripts/delete-old-prs.ts"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "setup.cfg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "setup.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/autodoc.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/build_cache.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/build_doc.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/build_embeddings.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/check_links.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/build.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/check_links.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/convert_doc_file.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/doc_builder_cli.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/embeddings.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/light_install.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/notebook_to_mdx.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/preview.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/push.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/commands/style.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/convert_md_to_mdx.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/convert_rst_to_mdx.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/convert_to_notebook.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/embeddings_tracker.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/external.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/meilisearch_helper.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/accelerate.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/autotrain.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/bitsandbytes.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/datasets.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/diffusers.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/evaluate.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/huggingface_hub.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/kernels.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/lerobot.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/lighteval.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/openenv.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/optimum.executorch.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/optimum.habana.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/optimum.intel.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/optimum.neuron.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/optimum.tpu.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/optimum.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/peft.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/safetensors.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/setfit.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/timm.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/tokenizers.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/trackio.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/transformers.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_deps/trl.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/mock_imports.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/process_hf_docs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/pytest_plugin.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/style_doc.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/testing.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/doc_builder/utils.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/data/convert_include_dummy.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/data/convert_literalinclude_dummy.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_autodoc.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_build_cache.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_build_doc.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_convert_doc_file.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_convert_md_to_mdx.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_convert_rst_to_mdx.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_convert_to_notebook.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_doc_integration.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_mock_imports.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_style_doc.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests/test_utils.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "uv.lock"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 2040796,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-109/head.patch",
+      "public_derivative": {
+        "bytes": 2040796,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-109/head.public.patch",
+        "relative_path": "repo-109/head.public.patch",
+        "sha256": "7b4aba1a591d04e70f62938a42bc713461b77bf63eb771fcbfb7a41584a944e9"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "7b4aba1a591d04e70f62938a42bc713461b77bf63eb771fcbfb7a41584a944e9"
+    },
+    {
+      "bytes": 2040796,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-109/index.patch",
+      "public_derivative": {
+        "bytes": 2040796,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-109/index.public.patch",
+        "relative_path": "repo-109/index.public.patch",
+        "sha256": "7b4aba1a591d04e70f62938a42bc713461b77bf63eb771fcbfb7a41584a944e9"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "7b4aba1a591d04e70f62938a42bc713461b77bf63eb771fcbfb7a41584a944e9"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-109/unstaged.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-109/unstaged.public.patch",
+        "relative_path": "repo-109/unstaged.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/test/doc-builder",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 9575,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-109/status-after.z",
+    "sha256": "f941d9f326384f4c6d12b04ccc9c71f6f157c4a2d44fe278e4819a8002e93d2c"
+  },
+  "status_before": {
+    "bytes": 9575,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-109/status-before.z",
+    "sha256": "f941d9f326384f4c6d12b04ccc9c71f6f157c4a2d44fe278e4819a8002e93d2c"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/test/doc-builder"
+}

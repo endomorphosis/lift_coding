@@ -1,0 +1,2860 @@
+{
+  "HEAD_after": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+  "HEAD_before": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+  "counts": {
+    "file_entries": 555,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      "D.": 555
+    },
+    "ahead/behind_cached_main": "0/0",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 126,
+    "origin": "github.com/endomorphosis/omni_converter_mk2",
+    "parent": 112,
+    "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2",
+    "tracked": 555,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "CHANGELOG_mk1.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "CLAUDE.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "CLAUDE_old.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "CURRENT_STATE_ANALYSIS.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "PRD.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "REVISED_ARCHITECTURE.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "ROADMAP.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "SAD.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "TESTING.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "TODO_map.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "TODO_mk1.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "UNITTEST_FILES_MISSING_FROM_PYTEST.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__main__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__main___stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__version__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_example_docstring_format.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_example_test_file_unittest_lib.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_example_test_format.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_example_test_format_mk2.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_example_test_format.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_example_test_format.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_fixtures.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/TEST_FILES.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test.ics"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test.mp3"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test.mp4"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test.xlsx"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test.xml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_avi/avi_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_avi/file_example_AVI_1280_1_5MG.avi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_avi/file_example_AVI_1920_2_3MG.avi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_avi/file_example_AVI_480_750kB.avi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_avi/file_example_AVI_640_800kB.avi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_gif/gif_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_gif/test.gif"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_html/test_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_jpg/jpeg_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_jpg/test.jpg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_js/js_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_js/test.js"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_json/json_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_jsonld/jsonld_ground_truth.tx"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_jsonld/test.jsonld"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_md/md_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_md/test.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_mp4/mp4_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_mp4/test.mp4"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_pdf/test.pdf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_png/png_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_png/test.png"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_svg/svg_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_svg/test.svg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_webp/test.webp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_webp/webp_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_xlsx/xlsx_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/_test_files/test_xlsx_presentational/xlsx_presentational_ground_truth.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/debugging/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/debugging/_debug_dependency_cache.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/integration_tests/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/integration_tests/pipelines/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/integration_tests/pipelines/test_json_pipeline.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/integration_tests/test_vertical_slice.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/performance_tests/test_skeleton_error_handling.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/performance_tests/test_skeleton_format_support_coverage.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/performance_tests/test_skeleton_processing_speed.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/performance_tests/test_skeleton_processing_success_rate.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/performance_tests/test_skeleton_resource_utilization.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/performance_tests/test_skeleton_security_effectiveness.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/performance_tests/test_skeleton_text_quality.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/run_all_tests.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/skeleton_tests/test_skeleton_processor_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/system_tests/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/batch_processor_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/batch_processor_/test_batch_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/batch_processor_/test_batch_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/batch_processor_/test_resolve_paths.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/content_extractor_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/content_extractor_/test_content_extractor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/content_extractor_/test_recursive_serialize.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/content_sanitizer_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/content_sanitizer_/test_content_sanitizer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/content_sanitizer_/test_sanitized_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/file_validator/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/file_validator/_test__file_validator_in_dir_file_validator_20250717_040434.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/file_validator/_test__validation_result_in_dir_file_validator_20250717_040507.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/file_validator/_test_file_validator_factory_in_dir_file_validator_20250717_040641.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/file_validator/test_file_validator.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/file_validator/test_file_validator_validate_file.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/file_validator/test_validation_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/handlers/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/output_formatter_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/output_formatter_/_formatted_output_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/output_formatter_/_output_formatter_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/output_formatter_/test_formatted_output.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/output_formatter_/test_output_formatter.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/pipeline/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/pipeline/_pipeline_status_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/pipeline/_processing_pipeline_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/pipeline/_processing_result_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/pipeline/test_pipeline_status.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/pipeline/test_processing_pipeline.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/pipeline/test_processing_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/text_normalizer_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/text_normalizer_/default_normalizers_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/text_normalizer_/default_normalizers_/normalizer_mock_whitespace.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/text_normalizer_/plugins_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/text_normalizer_/plugins_/normalizer_mock_plugin.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/text_normalizer_/test_normalized_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/core_/text_normalizer_/test_text_normalizer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/interfaces_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/interfaces_/skeleton_test_cli.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/interfaces_/skeleton_test_interface_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/interfaces_/skeleton_test_python_api.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/interfaces_/test_options.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/monitors_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/monitors_/test_error_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/monitors_/test_resource_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/monitors_/test_security_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_ability_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_ability_/by_ability_test_template.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_dependency_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_dependency_/by_dependency_test_template.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_mime_type_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_mime_type_/by_mime_type_test_template.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_mime_type_/skeleton_test_xlsx_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_mime_type_/test_docx_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_mime_type_/test_pdf_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/by_mime_type_/test_xlsx_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/fallbacks_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/fallbacks_/fallback_test_template.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/processors_/test_processor_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/test_document_retrieval.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/test_analyze_init_method.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/test_detect_attributes_in_init.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/test_extract_classes_from_ast.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/test_parse_python_ast.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/test_read_python_file.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/test_setup_cli_interface.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/class_to_typeddict_converter/testing_plan_class_to_typeddict_converter.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/filesystem/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/filesystem/test_file_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/filesystem/test_file_info.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "_tests/unit_tests/utils_/filesystem/test_file_system.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_async_batch_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_async_batch_processor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_batch_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_batch_processor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_batch_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_batch_result_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_get_output_path.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_get_output_path_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_resolve_paths.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/_resolve_paths_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/batch_processor_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "batch_processor/batch_processor_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "check_protocols.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/_pipeline_status.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/_pipeline_status_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/_processing_pipeline.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/_processing_pipeline_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/_processing_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/_processing_result_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/ARCHITECTURE.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_content_extractor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_content_extractor_constants.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_content_extractor_constants_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_content_extractor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_content_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_map_extension_to_format.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_map_extension_to_format_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_recursive_serialize.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/_recursive_serialize_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/content_extractor_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/content_extractor_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_application_handler.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_application_handler_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_audio_handler.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_audio_handler_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_handler_capabilities.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_handler_capabilities_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_image_handler.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_image_handler_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_text_handler.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_text_handler_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_video_handler.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/_video_handler_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/handler_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/handlers/handler_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/_get_dependency_info.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/_get_dependency_info_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/_get_processor_resource_configs copy.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/_get_processor_resource_configs copy_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/_get_processor_resource_configs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/_get_processor_resource_configs_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_audio_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_document_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_ebook_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_image_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_image_processor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_llm_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_llm_processor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_ocr_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_ocr_processor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_office_open_xml_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_video_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/_video_processor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/by_ability_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_ability/by_ability_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_7zip_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_bs4_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_calibre_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_cv2_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_duckdb_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_ffmpeg_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_icalendar_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_libreoffice_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_lxml_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_markitdown_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_openai_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_openpyxl_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_pandas_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_pil_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_ppyaml.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_pymediainfo_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_pypdf2_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_pytesseract_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_python_docx_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_skeleton_vllm_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_surya_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_tiktoken_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_torch_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/_whisper_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/dependency_module_protocol.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_dependency/dependency_processor_template.py.jinja2"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/_csv_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/_html_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/_json_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/_pdf_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/_svg_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/_text_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/_xlsx_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/_xml_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/mimetype_processor_template.py.jinja2"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/by_mime_type/processor_class_protocol.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/_generic_calendar_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/_generic_csv_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/_generic_html_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/_generic_json_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/_generic_markdown_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/_generic_svg_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/_generic_text_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/_generic_xml_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/fallback_module_protocol.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/fallbacks/fallback_processor_template.py.jinja2"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/processor_architecture.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/processor_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/processors/processor_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_extractor/revised_architecture.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/_constants.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/_constants_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/_content_sanitizer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/_content_sanitizer_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/_sanitized_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/_sanitized_content_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/content_sanitizer_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/content_sanitizer/content_sanitizer_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/core_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/core_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/file_validator/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/file_validator/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/file_validator/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/file_validator/_file_validator.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/file_validator/_file_validator_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/file_validator/_validation_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/file_validator/_validation_result_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/file_validator/file_validator_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/output_formatter/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/output_formatter/_formatted_output.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/output_formatter/_formatted_output_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/output_formatter/_output_formatter.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/output_formatter/_output_formatter_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/output_formatter/output_formatter_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/output_formatter/output_formatter_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/_normalized_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/_normalized_content_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/_text_normalizer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/_text_normalizer_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/default_normalizers/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/default_normalizers/normalize_empty_lines.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/default_normalizers/normalize_line_endings.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/default_normalizers/normalize_unicode.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/default_normalizers/normalize_whitespace.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "core/text_normalizer/text_normalizer_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "dependencies.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "dependencies_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_programs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_programs_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_folder_stats_2025-06-12_16-25-12.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_folder_stats_dirs_only.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_format_detector/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_format_detector/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_format_detector/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_format_detector/_file_format_detector.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_format_detector/_file_format_detector_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_format_detector/file_format_detector_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "file_format_detector/file_format_detector_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "install.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "install_optional_dependencies.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/_cli.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/_cli_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/_gui.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/_object_oriented_python_api.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/_object_oriented_python_api_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/_python_api.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/_python_api_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/interfaces_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/interfaces_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/options.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "interfaces/options_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logger.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logger_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logs/_logs_go_here.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "main.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "main_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/_constants.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/_constants_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/_error_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/_error_monitor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/_monitor_constants.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/_resource_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/_resource_monitor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/monitors_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/monitors_factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/_security_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/_security_monitor_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/_security_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/_security_result_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/specific_checks/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/specific_checks/_archive_security.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/specific_checks/_audio_security.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/specific_checks/_document_security.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/specific_checks/_image_security.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/specific_checks/_video_security.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "monitors/security_monitor/specific_checks/specific_checks_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "protocols.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "protocols_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "requirements.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "start.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "supported_formats.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "supported_formats_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "teardown.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "teardown_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/conftest.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/integration_tests/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/integration_tests/pipelines/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/integration_tests/pipelines/test_json_pipeline.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/integration_tests/test_vertical_slice.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_processing_speed.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_processing_success_rate.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_skeleton_error_handling.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_skeleton_format_support_coverage.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_skeleton_processing_speed.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_skeleton_processing_success_rate.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_skeleton_resource_utilization.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_skeleton_security_effectiveness.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_skeleton_text_quality.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/performance_tests/test_text_quality.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/run_pytest_tests.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/skeleton_tests/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/skeleton_tests/test_processor_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/skeleton_tests/test_skeleton_processor_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/test_working_examples.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/batch_processor_/test_batch_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/batch_processor_/test_batch_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/batch_processor_/test_resolve_paths.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/content_extractor_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/content_extractor_/test_content_extractor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/content_extractor_/test_recursive_serialize.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/content_sanitizer_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/content_sanitizer_/test_content_sanitizer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/content_sanitizer_/test_sanitized_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/file_validator/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/file_validator/test_file_validator.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/file_validator/test_file_validator_validate_file.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/file_validator/test_validation_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/output_formatter_/test_formatted_output.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/output_formatter_/test_output_formatter.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/pipeline/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/pipeline/test_pipeline_status.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/pipeline/test_processing_pipeline.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/pipeline/test_processing_result.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/text_normalizer_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/text_normalizer_/test_normalized_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/core_/text_normalizer_/test_text_normalizer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/interfaces_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/interfaces_/test_interface_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/interfaces_/test_options.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/monitors_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/monitors_/test_error_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/monitors_/test_resource_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/monitors_/test_security_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/processors_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/processors_/by_mime_type_/test_docx_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/processors_/by_mime_type_/test_pdf_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/processors_/by_mime_type_/test_xlsx_processor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/processors_/test_processor_factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/class_to_typeddict_converter/test_analyze_init_method.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/class_to_typeddict_converter/test_detect_attributes_in_init.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/class_to_typeddict_converter/test_extract_classes_from_ast.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/class_to_typeddict_converter/test_parse_python_ast.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/class_to_typeddict_converter/test_read_python_file.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/class_to_typeddict_converter/test_setup_cli_interface.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/filesystem/test_file_content.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/filesystem/test_file_info.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "tests_pytest/unit_tests/utils_/filesystem/test_file_system.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "types_.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/_resource_pool.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/_resource_pool_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/dependencies/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/dependencies/tqdm.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/dependencies/tqdm_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/run_in_thread_pool.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/run_in_thread_pool_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/try_except_decorator.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/try_except_decorator_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/external_program_installers/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/external_program_installers/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/external_program_installers/install_calibre.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/external_program_installers/install_ffmpeg_wip.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/external_program_installers/install_ffprobe_wip.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/external_program_installers/install_libreoffice.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/external_program_installers/install_tesseract_wip.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/filesystem.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/filesystem_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/calculate_structural_similarity.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/calculate_structural_similarity_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/get_words.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/get_words_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/longest_common_subsequence_length.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/longest_common_subsequence_length_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/processors/add_eof_marker.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/processors/add_eof_marker_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/simple_bleu_approximation.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/simple_bleu_approximation_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/simple_rouge_approximation.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/for_tests/simple_rouge_approximation_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_can_handle.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_can_handle_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_check_if_all_these_processors_are_mocks.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_check_if_all_these_processors_are_mocks_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_generate_capability_report.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_generate_capability_report_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_generate_startup_report.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_generate_startup_report_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_is_mock.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/handlers/_is_mock_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/hardware.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/hardware_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/_async_interface.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/_async_interface_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/_embeddings.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/_embeddings_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/constants.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/CHANGELOG.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/TODO.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/_anthropic_dependency.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/_anthropic_dependency_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/_openai_dependency.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/_openai_dependency_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/_torch_dependency.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/dependencies/_torch_dependency_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/factory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/factory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/prompts/_prompt_template.yaml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/prompts/document_summary.yaml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/prompts/metadata_extraction.yaml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/refactored_init.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/refactored_prompt_loader.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/llm/refactored_prompt_loader_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/list_normalizers.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/list_normalizers_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/list_output_formats.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/list_output_formats_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/list_supported_formats.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/list_supported_formats_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/process_directory.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/process_directory_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/progress_callback.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/progress_callback_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/show_version.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main_/show_version_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/plugin_discovery.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/plugin_discovery_stubs.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/software.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/software_stubs.md"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 11950107,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-126/head.patch",
+      "public_derivative": {
+        "bytes": 11950107,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-126/head.public.patch",
+        "relative_path": "repo-126/head.public.patch",
+        "sha256": "a11875c515e09e7c4e52ea4f9a424b82b6a97bff5b7567f4bdfa80f31f73b288"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "a11875c515e09e7c4e52ea4f9a424b82b6a97bff5b7567f4bdfa80f31f73b288"
+    },
+    {
+      "bytes": 11950107,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-126/index.patch",
+      "public_derivative": {
+        "bytes": 11950107,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-126/index.public.patch",
+        "relative_path": "repo-126/index.public.patch",
+        "sha256": "a11875c515e09e7c4e52ea4f9a424b82b6a97bff5b7567f4bdfa80f31f73b288"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "a11875c515e09e7c4e52ea4f9a424b82b6a97bff5b7567f4bdfa80f31f73b288"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-126/unstaged.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-126/unstaged.public.patch",
+        "relative_path": "repo-126/unstaged.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/omni_converter_mk2",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 28754,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-126/status-after.z",
+    "sha256": "e5f95e5f5008591c89aa35b83533cd12cffcd548c0e3a645f5c8cf3a57dea3e0"
+  },
+  "status_before": {
+    "bytes": 28754,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-126/status-before.z",
+    "sha256": "e5f95e5f5008591c89aa35b83533cd12cffcd548c0e3a645f5c8cf3a57dea3e0"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/omni_converter_mk2"
+}

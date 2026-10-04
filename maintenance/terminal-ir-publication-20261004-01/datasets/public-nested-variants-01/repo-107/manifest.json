@@ -1,0 +1,3649 @@
+{
+  "HEAD_after": "5c7c2ab8a509073f39359b2a35446183855f460a",
+  "HEAD_before": "5c7c2ab8a509073f39359b2a35446183855f460a",
+  "counts": {
+    "file_entries": 99,
+    "regular_bytes_including_duplicates": 1625940,
+    "regular_files": 99,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      ".M": 99
+    },
+    "ahead/behind_cached_main": "0/0",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 107,
+    "origin": "github.com/endomorphosis/common_crawl_search_engine",
+    "parent": 92,
+    "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+    "tracked": 99,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591218375466,
+        "device": 66306,
+        "inode": 26252823,
+        "mode": 33204,
+        "mtime_ns": 1785870591218375466,
+        "size": 3764
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591218375466,
+        "device": 66306,
+        "inode": 26252823,
+        "mode": 33204,
+        "mtime_ns": 1785870591218375466,
+        "size": 3764
+      },
+      "bytes": 3764,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/9c/9c606c6ec9ee7ab166c17ca434ca5dc2b0cbc9dc8b878bba0dba76afb36798a8",
+      "path": "README.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 3764,
+        "public_content": "objects/9c/9c606c6ec9ee7ab166c17ca434ca5dc2b0cbc9dc8b878bba0dba76afb36798a8",
+        "public_sha256": "9c606c6ec9ee7ab166c17ca434ca5dc2b0cbc9dc8b878bba0dba76afb36798a8",
+        "raw_sha256": "9c606c6ec9ee7ab166c17ca434ca5dc2b0cbc9dc8b878bba0dba76afb36798a8"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9c606c6ec9ee7ab166c17ca434ca5dc2b0cbc9dc8b878bba0dba76afb36798a8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591220642569,
+        "device": 66306,
+        "inode": 41449000,
+        "mode": 33277,
+        "mtime_ns": 1785870591220642569,
+        "size": 7130
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591220642569,
+        "device": 66306,
+        "inode": 41449000,
+        "mode": 33277,
+        "mtime_ns": 1785870591220642569,
+        "size": 7130
+      },
+      "bytes": 7130,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/a4/a4482e6302def26f9b0d8619abcac41abfe2389d6efed660deaa5f9e0a94d519",
+      "path": "benchmarks/ccindex/benchmark_cc_domain_search.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7130,
+        "public_content": "objects/a4/a4482e6302def26f9b0d8619abcac41abfe2389d6efed660deaa5f9e0a94d519",
+        "public_sha256": "a4482e6302def26f9b0d8619abcac41abfe2389d6efed660deaa5f9e0a94d519",
+        "raw_sha256": "a4482e6302def26f9b0d8619abcac41abfe2389d6efed660deaa5f9e0a94d519"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "a4482e6302def26f9b0d8619abcac41abfe2389d6efed660deaa5f9e0a94d519",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591222642765,
+        "device": 66306,
+        "inode": 41449001,
+        "mode": 33204,
+        "mtime_ns": 1785870591222642765,
+        "size": 17763
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591222642765,
+        "device": 66306,
+        "inode": 41449001,
+        "mode": 33204,
+        "mtime_ns": 1785870591222642765,
+        "size": 17763
+      },
+      "bytes": 17763,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5e/5e52320998e54555bcf9e4ed4bc1e772e410d15fa868d3eda2d66ff26d252b7e",
+      "path": "benchmarks/ccindex/benchmark_cc_duckdb_search.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 17763,
+        "public_content": "objects/5e/5e52320998e54555bcf9e4ed4bc1e772e410d15fa868d3eda2d66ff26d252b7e",
+        "public_sha256": "5e52320998e54555bcf9e4ed4bc1e772e410d15fa868d3eda2d66ff26d252b7e",
+        "raw_sha256": "5e52320998e54555bcf9e4ed4bc1e772e410d15fa868d3eda2d66ff26d252b7e"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5e52320998e54555bcf9e4ed4bc1e772e410d15fa868d3eda2d66ff26d252b7e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591226095457,
+        "device": 66306,
+        "inode": 41449002,
+        "mode": 33204,
+        "mtime_ns": 1785870591226095457,
+        "size": 11150
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591226095457,
+        "device": 66306,
+        "inode": 41449002,
+        "mode": 33204,
+        "mtime_ns": 1785870591226095457,
+        "size": 11150
+      },
+      "bytes": 11150,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/77/77b80965376686a9a05c14eaeb0d0a42facb2d7e313ada1d9555ab2dbbe654d8",
+      "path": "benchmarks/ccindex/benchmark_cc_pointer_search.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 11150,
+        "public_content": "objects/77/77b80965376686a9a05c14eaeb0d0a42facb2d7e313ada1d9555ab2dbbe654d8",
+        "public_sha256": "77b80965376686a9a05c14eaeb0d0a42facb2d7e313ada1d9555ab2dbbe654d8",
+        "raw_sha256": "77b80965376686a9a05c14eaeb0d0a42facb2d7e313ada1d9555ab2dbbe654d8"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "77b80965376686a9a05c14eaeb0d0a42facb2d7e313ada1d9555ab2dbbe654d8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591226095457,
+        "device": 66306,
+        "inode": 41449003,
+        "mode": 33277,
+        "mtime_ns": 1785870591226095457,
+        "size": 4846
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591226095457,
+        "device": 66306,
+        "inode": 41449003,
+        "mode": 33277,
+        "mtime_ns": 1785870591226095457,
+        "size": 4846
+      },
+      "bytes": 4846,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ff/ff51e9108d2ee5447f42ba28faeee534f62524ec482e619fce4aba22c57c7ce8",
+      "path": "benchmarks/ccindex/benchmark_ccindex_parquet_vs_duckdb.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 4846,
+        "public_content": "objects/ff/ff51e9108d2ee5447f42ba28faeee534f62524ec482e619fce4aba22c57c7ce8",
+        "public_sha256": "ff51e9108d2ee5447f42ba28faeee534f62524ec482e619fce4aba22c57c7ce8",
+        "raw_sha256": "ff51e9108d2ee5447f42ba28faeee534f62524ec482e619fce4aba22c57c7ce8"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "ff51e9108d2ee5447f42ba28faeee534f62524ec482e619fce4aba22c57c7ce8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591226095457,
+        "device": 66306,
+        "inode": 41449004,
+        "mode": 33277,
+        "mtime_ns": 1785870591226095457,
+        "size": 10601
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591226095457,
+        "device": 66306,
+        "inode": 41449004,
+        "mode": 33277,
+        "mtime_ns": 1785870591226095457,
+        "size": 10601
+      },
+      "bytes": 10601,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/8e/8ecc215c17b986353f3291366d4aaeb70c7b579fc2580fe0b2e36984aee787e0",
+      "path": "benchmarks/ccindex/benchmark_domain_pointer_index.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10601,
+        "public_content": "objects/8e/8ecc215c17b986353f3291366d4aaeb70c7b579fc2580fe0b2e36984aee787e0",
+        "public_sha256": "8ecc215c17b986353f3291366d4aaeb70c7b579fc2580fe0b2e36984aee787e0",
+        "raw_sha256": "8ecc215c17b986353f3291366d4aaeb70c7b579fc2580fe0b2e36984aee787e0"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "8ecc215c17b986353f3291366d4aaeb70c7b579fc2580fe0b2e36984aee787e0",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591228643356,
+        "device": 66306,
+        "inode": 41449005,
+        "mode": 33277,
+        "mtime_ns": 1785870591228643356,
+        "size": 7287
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591228643356,
+        "device": 66306,
+        "inode": 41449005,
+        "mode": 33277,
+        "mtime_ns": 1785870591228643356,
+        "size": 7287
+      },
+      "bytes": 7287,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/04/044f631824642dd2ddbd8fd0cdbab2522377cc7610876d043d972a12c4338dd4",
+      "path": "benchmarks/ccindex/benchmark_duckdb_domain.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7287,
+        "public_content": "objects/04/044f631824642dd2ddbd8fd0cdbab2522377cc7610876d043d972a12c4338dd4",
+        "public_sha256": "044f631824642dd2ddbd8fd0cdbab2522377cc7610876d043d972a12c4338dd4",
+        "raw_sha256": "044f631824642dd2ddbd8fd0cdbab2522377cc7610876d043d972a12c4338dd4"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "044f631824642dd2ddbd8fd0cdbab2522377cc7610876d043d972a12c4338dd4",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591228643356,
+        "device": 66306,
+        "inode": 41449006,
+        "mode": 33277,
+        "mtime_ns": 1785870591228643356,
+        "size": 10792
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591228643356,
+        "device": 66306,
+        "inode": 41449006,
+        "mode": 33277,
+        "mtime_ns": 1785870591228643356,
+        "size": 10792
+      },
+      "bytes": 10792,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/77/7712bfad589651ad34267308e6c00768a1a26e01a794a5f7f54fa0498afe3f03",
+      "path": "benchmarks/ccindex/benchmark_duckdb_pointer.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10792,
+        "public_content": "objects/77/7712bfad589651ad34267308e6c00768a1a26e01a794a5f7f54fa0498afe3f03",
+        "public_sha256": "7712bfad589651ad34267308e6c00768a1a26e01a794a5f7f54fa0498afe3f03",
+        "raw_sha256": "7712bfad589651ad34267308e6c00768a1a26e01a794a5f7f54fa0498afe3f03"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "7712bfad589651ad34267308e6c00768a1a26e01a794a5f7f54fa0498afe3f03",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591229643454,
+        "device": 66306,
+        "inode": 41449007,
+        "mode": 33277,
+        "mtime_ns": 1785870591229643454,
+        "size": 6188
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591229643454,
+        "device": 66306,
+        "inode": 41449007,
+        "mode": 33277,
+        "mtime_ns": 1785870591229643454,
+        "size": 6188
+      },
+      "bytes": 6188,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/e1/e1fb5e14bc92144effacccd15e9b37ff3d25a52ab0a98d677caf43461e358da7",
+      "path": "benchmarks/ccindex/benchmark_duckdb_pointer_domain.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 6188,
+        "public_content": "objects/e1/e1fb5e14bc92144effacccd15e9b37ff3d25a52ab0a98d677caf43461e358da7",
+        "public_sha256": "e1fb5e14bc92144effacccd15e9b37ff3d25a52ab0a98d677caf43461e358da7",
+        "raw_sha256": "e1fb5e14bc92144effacccd15e9b37ff3d25a52ab0a98d677caf43461e358da7"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "e1fb5e14bc92144effacccd15e9b37ff3d25a52ab0a98d677caf43461e358da7",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591231066474,
+        "device": 66306,
+        "inode": 41449008,
+        "mode": 33204,
+        "mtime_ns": 1785870591231066474,
+        "size": 5216
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591231066474,
+        "device": 66306,
+        "inode": 41449008,
+        "mode": 33204,
+        "mtime_ns": 1785870591231066474,
+        "size": 5216
+      },
+      "bytes": 5216,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/29/29440c289dd45ccc31c9031ea4a2e57df63aa93c40ad5fdb22597a8dffaabbd9",
+      "path": "benchmarks/ccindex/benchmark_parallel_duckdb_indexes.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 5216,
+        "public_content": "objects/29/29440c289dd45ccc31c9031ea4a2e57df63aa93c40ad5fdb22597a8dffaabbd9",
+        "public_sha256": "29440c289dd45ccc31c9031ea4a2e57df63aa93c40ad5fdb22597a8dffaabbd9",
+        "raw_sha256": "29440c289dd45ccc31c9031ea4a2e57df63aa93c40ad5fdb22597a8dffaabbd9"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "29440c289dd45ccc31c9031ea4a2e57df63aa93c40ad5fdb22597a8dffaabbd9",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591231066474,
+        "device": 66306,
+        "inode": 41449010,
+        "mode": 33204,
+        "mtime_ns": 1785870591231066474,
+        "size": 10431
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591231066474,
+        "device": 66306,
+        "inode": 41449010,
+        "mode": 33204,
+        "mtime_ns": 1785870591231066474,
+        "size": 10431
+      },
+      "bytes": 10431,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d2/d22f5adddf77d0321c03905728048580c1ca43b8ecc9083615a85842521da989",
+      "path": "benchmarks/ccindex/benchmark_rowgroup_slice.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10431,
+        "public_content": "objects/d2/d22f5adddf77d0321c03905728048580c1ca43b8ecc9083615a85842521da989",
+        "public_sha256": "d22f5adddf77d0321c03905728048580c1ca43b8ecc9083615a85842521da989",
+        "raw_sha256": "d22f5adddf77d0321c03905728048580c1ca43b8ecc9083615a85842521da989"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d22f5adddf77d0321c03905728048580c1ca43b8ecc9083615a85842521da989",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591234643945,
+        "device": 66306,
+        "inode": 41449011,
+        "mode": 33204,
+        "mtime_ns": 1785870591234643945,
+        "size": 6460
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591234643945,
+        "device": 66306,
+        "inode": 41449011,
+        "mode": 33204,
+        "mtime_ns": 1785870591234643945,
+        "size": 6460
+      },
+      "bytes": 6460,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d8/d8e40078ab95af140ca29100c3f476ae3cf70472eed4b98f70d3abd040c921b8",
+      "path": "benchmarks/ccindex/benchmark_rowgroup_year_vs_collection.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 6460,
+        "public_content": "objects/d8/d8e40078ab95af140ca29100c3f476ae3cf70472eed4b98f70d3abd040c921b8",
+        "public_sha256": "d8e40078ab95af140ca29100c3f476ae3cf70472eed4b98f70d3abd040c921b8",
+        "raw_sha256": "d8e40078ab95af140ca29100c3f476ae3cf70472eed4b98f70d3abd040c921b8"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d8e40078ab95af140ca29100c3f476ae3cf70472eed4b98f70d3abd040c921b8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591234643945,
+        "device": 66306,
+        "inode": 41449013,
+        "mode": 33204,
+        "mtime_ns": 1785870591234643945,
+        "size": 295
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591234643945,
+        "device": 66306,
+        "inode": 41449013,
+        "mode": 33204,
+        "mtime_ns": 1785870591234643945,
+        "size": 295
+      },
+      "bytes": 295,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/4e/4e2c593b2b1ebebdfa82c387a611b8093b879a9a93eae76a17ee7f1b15693e84",
+      "path": "ccindex/__init__.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 295,
+        "public_content": "objects/4e/4e2c593b2b1ebebdfa82c387a611b8093b879a9a93eae76a17ee7f1b15693e84",
+        "public_sha256": "4e2c593b2b1ebebdfa82c387a611b8093b879a9a93eae76a17ee7f1b15693e84",
+        "raw_sha256": "4e2c593b2b1ebebdfa82c387a611b8093b879a9a93eae76a17ee7f1b15693e84"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "4e2c593b2b1ebebdfa82c387a611b8093b879a9a93eae76a17ee7f1b15693e84",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591242199776,
+        "device": 66306,
+        "inode": 41449014,
+        "mode": 33204,
+        "mtime_ns": 1785870591242199776,
+        "size": 206231
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591242199776,
+        "device": 66306,
+        "inode": 41449014,
+        "mode": 33204,
+        "mtime_ns": 1785870591242199776,
+        "size": 206231
+      },
+      "bytes": 206231,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/a6/a60ee592bff0a2ce5b58435f7dda39599c82f687f8cdeffd0c647aa389c669a4",
+      "path": "ccindex/api.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 206231,
+        "public_content": "objects/a6/a60ee592bff0a2ce5b58435f7dda39599c82f687f8cdeffd0c647aa389c669a4",
+        "public_sha256": "a60ee592bff0a2ce5b58435f7dda39599c82f687f8cdeffd0c647aa389c669a4",
+        "raw_sha256": "a60ee592bff0a2ce5b58435f7dda39599c82f687f8cdeffd0c647aa389c669a4"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "a60ee592bff0a2ce5b58435f7dda39599c82f687f8cdeffd0c647aa389c669a4",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591243497024,
+        "device": 66306,
+        "inode": 41449015,
+        "mode": 33204,
+        "mtime_ns": 1785870591243497024,
+        "size": 19755
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591243497024,
+        "device": 66306,
+        "inode": 41449015,
+        "mode": 33204,
+        "mtime_ns": 1785870591243497024,
+        "size": 19755
+      },
+      "bytes": 19755,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/6b/6b1c45a31817d450b125f55f90d7c24037cc85945aa1a3cfe7e160c02856e874",
+      "path": "ccindex/audit_parquet_shards.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 19755,
+        "public_content": "objects/6b/6b1c45a31817d450b125f55f90d7c24037cc85945aa1a3cfe7e160c02856e874",
+        "public_sha256": "6b1c45a31817d450b125f55f90d7c24037cc85945aa1a3cfe7e160c02856e874",
+        "raw_sha256": "6b1c45a31817d450b125f55f90d7c24037cc85945aa1a3cfe7e160c02856e874"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6b1c45a31817d450b125f55f90d7c24037cc85945aa1a3cfe7e160c02856e874",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591243842594,
+        "device": 66306,
+        "inode": 41449016,
+        "mode": 33204,
+        "mtime_ns": 1785870591243842594,
+        "size": 6881
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591243842594,
+        "device": 66306,
+        "inode": 41449016,
+        "mode": 33204,
+        "mtime_ns": 1785870591243842594,
+        "size": 6881
+      },
+      "bytes": 6881,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/1b/1b282691acf6e150dc91d6c10b9144217869a1706217a6ece96ba2490916d345",
+      "path": "ccindex/build_cc_parquet_rowgroup_index.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 6881,
+        "public_content": "objects/1b/1b282691acf6e150dc91d6c10b9144217869a1706217a6ece96ba2490916d345",
+        "public_sha256": "1b282691acf6e150dc91d6c10b9144217869a1706217a6ece96ba2490916d345",
+        "raw_sha256": "1b282691acf6e150dc91d6c10b9144217869a1706217a6ece96ba2490916d345"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "1b282691acf6e150dc91d6c10b9144217869a1706217a6ece96ba2490916d345",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591246234429,
+        "device": 66306,
+        "inode": 41449017,
+        "mode": 33204,
+        "mtime_ns": 1785870591246234429,
+        "size": 51563
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591246234429,
+        "device": 66306,
+        "inode": 41449017,
+        "mode": 33204,
+        "mtime_ns": 1785870591246234429,
+        "size": 51563
+      },
+      "bytes": 51563,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/3a/3aa196b487511b9fbe60ee4ef94152ed798c17825c80f0cf67068e6efa8c2f28",
+      "path": "ccindex/build_cc_pointer_duckdb.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 51563,
+        "public_content": "objects/3a/3aa196b487511b9fbe60ee4ef94152ed798c17825c80f0cf67068e6efa8c2f28",
+        "public_sha256": "3aa196b487511b9fbe60ee4ef94152ed798c17825c80f0cf67068e6efa8c2f28",
+        "raw_sha256": "3aa196b487511b9fbe60ee4ef94152ed798c17825c80f0cf67068e6efa8c2f28"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "3aa196b487511b9fbe60ee4ef94152ed798c17825c80f0cf67068e6efa8c2f28",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591246645125,
+        "device": 66306,
+        "inode": 41449018,
+        "mode": 33204,
+        "mtime_ns": 1785870591246645125,
+        "size": 26172
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591246645125,
+        "device": 66306,
+        "inode": 41449018,
+        "mode": 33204,
+        "mtime_ns": 1785870591246645125,
+        "size": 26172
+      },
+      "bytes": 26172,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ef/ef3856c3034b9104ef6ec9d798cfb8468b3b189711302c4862c36f7cfcec09e5",
+      "path": "ccindex/build_domain_rowgroup_index.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 26172,
+        "public_content": "objects/ef/ef3856c3034b9104ef6ec9d798cfb8468b3b189711302c4862c36f7cfcec09e5",
+        "public_sha256": "ef3856c3034b9104ef6ec9d798cfb8468b3b189711302c4862c36f7cfcec09e5",
+        "raw_sha256": "ef3856c3034b9104ef6ec9d798cfb8468b3b189711302c4862c36f7cfcec09e5"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "ef3856c3034b9104ef6ec9d798cfb8468b3b189711302c4862c36f7cfcec09e5",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591248467832,
+        "device": 66306,
+        "inode": 41449019,
+        "mode": 33204,
+        "mtime_ns": 1785870591248467832,
+        "size": 7034
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591248467832,
+        "device": 66306,
+        "inode": 41449019,
+        "mode": 33204,
+        "mtime_ns": 1785870591248467832,
+        "size": 7034
+      },
+      "bytes": 7034,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/6c/6c355c216c7db59683802f9306af957c2fc56f45642e3a421344aca875a9b60f",
+      "path": "ccindex/build_domain_rowgroup_year_index.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7034,
+        "public_content": "objects/6c/6c355c216c7db59683802f9306af957c2fc56f45642e3a421344aca875a9b60f",
+        "public_sha256": "6c355c216c7db59683802f9306af957c2fc56f45642e3a421344aca875a9b60f",
+        "raw_sha256": "6c355c216c7db59683802f9306af957c2fc56f45642e3a421344aca875a9b60f"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6c355c216c7db59683802f9306af957c2fc56f45642e3a421344aca875a9b60f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591248645322,
+        "device": 66306,
+        "inode": 41449020,
+        "mode": 33277,
+        "mtime_ns": 1785870591248645322,
+        "size": 6239
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591248645322,
+        "device": 66306,
+        "inode": 41449020,
+        "mode": 33277,
+        "mtime_ns": 1785870591248645322,
+        "size": 6239
+      },
+      "bytes": 6239,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c2/c20d8c2207f0d1b2e4d47ce71aec1d5e5afbf0df86e5e178f79f552e53df3d0f",
+      "path": "ccindex/build_duckdb_pointer_from_parquet.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 6239,
+        "public_content": "objects/c2/c20d8c2207f0d1b2e4d47ce71aec1d5e5afbf0df86e5e178f79f552e53df3d0f",
+        "public_sha256": "c20d8c2207f0d1b2e4d47ce71aec1d5e5afbf0df86e5e178f79f552e53df3d0f",
+        "raw_sha256": "c20d8c2207f0d1b2e4d47ce71aec1d5e5afbf0df86e5e178f79f552e53df3d0f"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c20d8c2207f0d1b2e4d47ce71aec1d5e5afbf0df86e5e178f79f552e53df3d0f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591248645322,
+        "device": 66306,
+        "inode": 41449021,
+        "mode": 33204,
+        "mtime_ns": 1785870591248645322,
+        "size": 16775
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591248645322,
+        "device": 66306,
+        "inode": 41449021,
+        "mode": 33204,
+        "mtime_ns": 1785870591248645322,
+        "size": 16775
+      },
+      "bytes": 16775,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5c/5c5677269d4a448f80ca2252cdcab947dcf1d8bc7c2c3d4f1a814a82d75af676",
+      "path": "ccindex/build_index_from_parquet.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 16775,
+        "public_content": "objects/5c/5c5677269d4a448f80ca2252cdcab947dcf1d8bc7c2c3d4f1a814a82d75af676",
+        "public_sha256": "5c5677269d4a448f80ca2252cdcab947dcf1d8bc7c2c3d4f1a814a82d75af676",
+        "raw_sha256": "5c5677269d4a448f80ca2252cdcab947dcf1d8bc7c2c3d4f1a814a82d75af676"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5c5677269d4a448f80ca2252cdcab947dcf1d8bc7c2c3d4f1a814a82d75af676",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591250797726,
+        "device": 66306,
+        "inode": 41449022,
+        "mode": 33204,
+        "mtime_ns": 1785870591250797726,
+        "size": 10080
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591250797726,
+        "device": 66306,
+        "inode": 41449022,
+        "mode": 33204,
+        "mtime_ns": 1785870591250797726,
+        "size": 10080
+      },
+      "bytes": 10080,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ba/bafe14af1c145676b0812b7be6385d52374d18d821efb83fbfa2e0e732ce9151",
+      "path": "ccindex/build_master_index.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10080,
+        "public_content": "objects/ba/bafe14af1c145676b0812b7be6385d52374d18d821efb83fbfa2e0e732ce9151",
+        "public_sha256": "bafe14af1c145676b0812b7be6385d52374d18d821efb83fbfa2e0e732ce9151",
+        "raw_sha256": "bafe14af1c145676b0812b7be6385d52374d18d821efb83fbfa2e0e732ce9151"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "bafe14af1c145676b0812b7be6385d52374d18d821efb83fbfa2e0e732ce9151",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591251138351,
+        "device": 66306,
+        "inode": 41449023,
+        "mode": 33204,
+        "mtime_ns": 1785870591251138351,
+        "size": 10097
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591251138351,
+        "device": 66306,
+        "inode": 41449023,
+        "mode": 33204,
+        "mtime_ns": 1785870591251138351,
+        "size": 10097
+      },
+      "bytes": 10097,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/31/3142e91b738bf8255cf58b086f28310023ea50bb58a4ba74e4ce2408c7c54910",
+      "path": "ccindex/build_parallel_duckdb_indexes.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10097,
+        "public_content": "objects/31/3142e91b738bf8255cf58b086f28310023ea50bb58a4ba74e4ce2408c7c54910",
+        "public_sha256": "3142e91b738bf8255cf58b086f28310023ea50bb58a4ba74e4ce2408c7c54910",
+        "raw_sha256": "3142e91b738bf8255cf58b086f28310023ea50bb58a4ba74e4ce2408c7c54910"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "3142e91b738bf8255cf58b086f28310023ea50bb58a4ba74e4ce2408c7c54910",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591252155715,
+        "device": 66306,
+        "inode": 41449024,
+        "mode": 33204,
+        "mtime_ns": 1785870591252155715,
+        "size": 7503
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591252155715,
+        "device": 66306,
+        "inode": 41449024,
+        "mode": 33204,
+        "mtime_ns": 1785870591252155715,
+        "size": 7503
+      },
+      "bytes": 7503,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ca/ca074be93295e74871d5d431d79e53dbc60787adbc3aaf3e2e091c0721eaf6a7",
+      "path": "ccindex/build_year_meta_indexes.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7503,
+        "public_content": "objects/ca/ca074be93295e74871d5d431d79e53dbc60787adbc3aaf3e2e091c0721eaf6a7",
+        "public_sha256": "ca074be93295e74871d5d431d79e53dbc60787adbc3aaf3e2e091c0721eaf6a7",
+        "raw_sha256": "ca074be93295e74871d5d431d79e53dbc60787adbc3aaf3e2e091c0721eaf6a7"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "ca074be93295e74871d5d431d79e53dbc60787adbc3aaf3e2e091c0721eaf6a7",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591252663909,
+        "device": 66306,
+        "inode": 41449025,
+        "mode": 33204,
+        "mtime_ns": 1785870591252663909,
+        "size": 15148
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591252663909,
+        "device": 66306,
+        "inode": 41449025,
+        "mode": 33204,
+        "mtime_ns": 1785870591252663909,
+        "size": 15148
+      },
+      "bytes": 15148,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/7c/7c50cd6431097780ca5d8be0d25e917cd0c649effbfc0b8eca1f1deacf03988d",
+      "path": "ccindex/bulk_convert_gz_to_parquet.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 15148,
+        "public_content": "objects/7c/7c50cd6431097780ca5d8be0d25e917cd0c649effbfc0b8eca1f1deacf03988d",
+        "public_sha256": "7c50cd6431097780ca5d8be0d25e917cd0c649effbfc0b8eca1f1deacf03988d",
+        "raw_sha256": "7c50cd6431097780ca5d8be0d25e917cd0c649effbfc0b8eca1f1deacf03988d"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "7c50cd6431097780ca5d8be0d25e917cd0c649effbfc0b8eca1f1deacf03988d",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591252663909,
+        "device": 66306,
+        "inode": 41449026,
+        "mode": 33204,
+        "mtime_ns": 1785870591252663909,
+        "size": 7051
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591252663909,
+        "device": 66306,
+        "inode": 41449026,
+        "mode": 33204,
+        "mtime_ns": 1785870591252663909,
+        "size": 7051
+      },
+      "bytes": 7051,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/6e/6e8ef76fc8cae24111add78ed9d50c1eee2bacd846c939c86046d611257581b6",
+      "path": "ccindex/cc_domain_parquet_locator.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7051,
+        "public_content": "objects/6e/6e8ef76fc8cae24111add78ed9d50c1eee2bacd846c939c86046d611257581b6",
+        "public_sha256": "6e8ef76fc8cae24111add78ed9d50c1eee2bacd846c939c86046d611257581b6",
+        "raw_sha256": "6e8ef76fc8cae24111add78ed9d50c1eee2bacd846c939c86046d611257581b6"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6e8ef76fc8cae24111add78ed9d50c1eee2bacd846c939c86046d611257581b6",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591253645814,
+        "device": 66306,
+        "inode": 41449027,
+        "mode": 33277,
+        "mtime_ns": 1785870591253645814,
+        "size": 17851
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591253645814,
+        "device": 66306,
+        "inode": 41449027,
+        "mode": 33277,
+        "mtime_ns": 1785870591253645814,
+        "size": 17851
+      },
+      "bytes": 17851,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/59/5944b04aa9cf225c4969b8c6d643bdee94d5ae778c1b4cf1a5061de25ce6a4e5",
+      "path": "ccindex/cc_pipeline_hud.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 17851,
+        "public_content": "objects/59/5944b04aa9cf225c4969b8c6d643bdee94d5ae778c1b4cf1a5061de25ce6a4e5",
+        "public_sha256": "5944b04aa9cf225c4969b8c6d643bdee94d5ae778c1b4cf1a5061de25ce6a4e5",
+        "raw_sha256": "5944b04aa9cf225c4969b8c6d643bdee94d5ae778c1b4cf1a5061de25ce6a4e5"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5944b04aa9cf225c4969b8c6d643bdee94d5ae778c1b4cf1a5061de25ce6a4e5",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591257646207,
+        "device": 66306,
+        "inode": 41449028,
+        "mode": 33277,
+        "mtime_ns": 1785870591257646207,
+        "size": 158499
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591257646207,
+        "device": 66306,
+        "inode": 41449028,
+        "mode": 33277,
+        "mtime_ns": 1785870591257646207,
+        "size": 158499
+      },
+      "bytes": 158499,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/94/9423b3ef43589dec69a9f094501f66eabefc9a6e03abd3977838e61b4c90d4aa",
+      "path": "ccindex/cc_pipeline_orchestrator.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 158499,
+        "public_content": "objects/94/9423b3ef43589dec69a9f094501f66eabefc9a6e03abd3977838e61b4c90d4aa",
+        "public_sha256": "9423b3ef43589dec69a9f094501f66eabefc9a6e03abd3977838e61b4c90d4aa",
+        "raw_sha256": "9423b3ef43589dec69a9f094501f66eabefc9a6e03abd3977838e61b4c90d4aa"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9423b3ef43589dec69a9f094501f66eabefc9a6e03abd3977838e61b4c90d4aa",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591258646305,
+        "device": 66306,
+        "inode": 41449029,
+        "mode": 33277,
+        "mtime_ns": 1785870591258646305,
+        "size": 14056
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591258646305,
+        "device": 66306,
+        "inode": 41449029,
+        "mode": 33277,
+        "mtime_ns": 1785870591258646305,
+        "size": 14056
+      },
+      "bytes": 14056,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/01/014225a17ccc8717bb56c0bb4ba303c2001de75a1ab6426fe87093d3c01cff3a",
+      "path": "ccindex/cc_pipeline_watch.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 14056,
+        "public_content": "objects/01/014225a17ccc8717bb56c0bb4ba303c2001de75a1ab6426fe87093d3c01cff3a",
+        "public_sha256": "014225a17ccc8717bb56c0bb4ba303c2001de75a1ab6426fe87093d3c01cff3a",
+        "raw_sha256": "014225a17ccc8717bb56c0bb4ba303c2001de75a1ab6426fe87093d3c01cff3a"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "014225a17ccc8717bb56c0bb4ba303c2001de75a1ab6426fe87093d3c01cff3a",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591259646403,
+        "device": 66306,
+        "inode": 41449030,
+        "mode": 33204,
+        "mtime_ns": 1785870591259646403,
+        "size": 12898
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591259646403,
+        "device": 66306,
+        "inode": 41449030,
+        "mode": 33204,
+        "mtime_ns": 1785870591259646403,
+        "size": 12898
+      },
+      "bytes": 12898,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/12/1219830e0b426c72e89660d377d9afe0e212be0839ddc451048671f9d329f87c",
+      "path": "ccindex/cc_pointer_status.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 12898,
+        "public_content": "objects/12/1219830e0b426c72e89660d377d9afe0e212be0839ddc451048671f9d329f87c",
+        "public_sha256": "1219830e0b426c72e89660d377d9afe0e212be0839ddc451048671f9d329f87c",
+        "raw_sha256": "1219830e0b426c72e89660d377d9afe0e212be0839ddc451048671f9d329f87c"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "1219830e0b426c72e89660d377d9afe0e212be0839ddc451048671f9d329f87c",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591260646502,
+        "device": 66306,
+        "inode": 41449032,
+        "mode": 33204,
+        "mtime_ns": 1785870591260646502,
+        "size": 6192
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591260646502,
+        "device": 66306,
+        "inode": 41449032,
+        "mode": 33204,
+        "mtime_ns": 1785870591260646502,
+        "size": 6192
+      },
+      "bytes": 6192,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/94/94ce511832c9752b7a01ae5e643216ff15a32ae68a294a58d2e7e82dde47858e",
+      "path": "ccindex/convert_parquet_compression.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 6192,
+        "public_content": "objects/94/94ce511832c9752b7a01ae5e643216ff15a32ae68a294a58d2e7e82dde47858e",
+        "public_sha256": "94ce511832c9752b7a01ae5e643216ff15a32ae68a294a58d2e7e82dde47858e",
+        "raw_sha256": "94ce511832c9752b7a01ae5e643216ff15a32ae68a294a58d2e7e82dde47858e"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "94ce511832c9752b7a01ae5e643216ff15a32ae68a294a58d2e7e82dde47858e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591261646600,
+        "device": 66306,
+        "inode": 41449035,
+        "mode": 33204,
+        "mtime_ns": 1785870591261646600,
+        "size": 9647
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591261646600,
+        "device": 66306,
+        "inode": 41449035,
+        "mode": 33204,
+        "mtime_ns": 1785870591261646600,
+        "size": 9647
+      },
+      "bytes": 9647,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/53/53083eb52919ffd7f37202bb9475ecc722bf7eec6c88eb5e2c1a1099389208b7",
+      "path": "ccindex/download_warc_records.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 9647,
+        "public_content": "objects/53/53083eb52919ffd7f37202bb9475ecc722bf7eec6c88eb5e2c1a1099389208b7",
+        "public_sha256": "53083eb52919ffd7f37202bb9475ecc722bf7eec6c88eb5e2c1a1099389208b7",
+        "raw_sha256": "53083eb52919ffd7f37202bb9475ecc722bf7eec6c88eb5e2c1a1099389208b7"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "53083eb52919ffd7f37202bb9475ecc722bf7eec6c88eb5e2c1a1099389208b7",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591261646600,
+        "device": 66306,
+        "inode": 41449036,
+        "mode": 33204,
+        "mtime_ns": 1785870591261646600,
+        "size": 7473
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591261646600,
+        "device": 66306,
+        "inode": 41449036,
+        "mode": 33204,
+        "mtime_ns": 1785870591261646600,
+        "size": 7473
+      },
+      "bytes": 7473,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/8d/8d435ba1f905456daa8acf1ab3ef0911fef61caabedd4f4192966318cb9a12fe",
+      "path": "ccindex/extract_cc_index_tarballs.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7473,
+        "public_content": "objects/8d/8d435ba1f905456daa8acf1ab3ef0911fef61caabedd4f4192966318cb9a12fe",
+        "public_sha256": "8d435ba1f905456daa8acf1ab3ef0911fef61caabedd4f4192966318cb9a12fe",
+        "raw_sha256": "8d435ba1f905456daa8acf1ab3ef0911fef61caabedd4f4192966318cb9a12fe"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "8d435ba1f905456daa8acf1ab3ef0911fef61caabedd4f4192966318cb9a12fe",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591262646698,
+        "device": 66306,
+        "inode": 41449037,
+        "mode": 33204,
+        "mtime_ns": 1785870591262646698,
+        "size": 14671
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591262646698,
+        "device": 66306,
+        "inode": 41449037,
+        "mode": 33204,
+        "mtime_ns": 1785870591262646698,
+        "size": 14671
+      },
+      "bytes": 14671,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/b8/b8fc3de00375509bc0dcaf30ba598541b4d8eb521d8c6190c67049cd71a7ecd2",
+      "path": "ccindex/extract_from_cache.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 14671,
+        "public_content": "objects/b8/b8fc3de00375509bc0dcaf30ba598541b4d8eb521d8c6190c67049cd71a7ecd2",
+        "public_sha256": "b8fc3de00375509bc0dcaf30ba598541b4d8eb521d8c6190c67049cd71a7ecd2",
+        "raw_sha256": "b8fc3de00375509bc0dcaf30ba598541b4d8eb521d8c6190c67049cd71a7ecd2"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "b8fc3de00375509bc0dcaf30ba598541b4d8eb521d8c6190c67049cd71a7ecd2",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591262646698,
+        "device": 66306,
+        "inode": 41449038,
+        "mode": 33204,
+        "mtime_ns": 1785870591262646698,
+        "size": 5920
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591262646698,
+        "device": 66306,
+        "inode": 41449038,
+        "mode": 33204,
+        "mtime_ns": 1785870591262646698,
+        "size": 5920
+      },
+      "bytes": 5920,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/43/43506c7c69b5e7e5c6575256eee72186c40e8bb86b1f645338f06975c364bbc6",
+      "path": "ccindex/fetch_slice_plan.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 5920,
+        "public_content": "objects/43/43506c7c69b5e7e5c6575256eee72186c40e8bb86b1f645338f06975c364bbc6",
+        "public_sha256": "43506c7c69b5e7e5c6575256eee72186c40e8bb86b1f645338f06975c364bbc6",
+        "raw_sha256": "43506c7c69b5e7e5c6575256eee72186c40e8bb86b1f645338f06975c364bbc6"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "43506c7c69b5e7e5c6575256eee72186c40e8bb86b1f645338f06975c364bbc6",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591263646797,
+        "device": 66306,
+        "inode": 41449039,
+        "mode": 33204,
+        "mtime_ns": 1785870591263646797,
+        "size": 16195
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591263646797,
+        "device": 66306,
+        "inode": 41449039,
+        "mode": 33204,
+        "mtime_ns": 1785870591263646797,
+        "size": 16195
+      },
+      "bytes": 16195,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/8a/8aba2f5e2a187e712ad0f85a65e7fa38019afaba8d600de54ac8d8405063bbd6",
+      "path": "ccindex/generate_repair_plan_from_audit.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 16195,
+        "public_content": "objects/8a/8aba2f5e2a187e712ad0f85a65e7fa38019afaba8d600de54ac8d8405063bbd6",
+        "public_sha256": "8aba2f5e2a187e712ad0f85a65e7fa38019afaba8d600de54ac8d8405063bbd6",
+        "raw_sha256": "8aba2f5e2a187e712ad0f85a65e7fa38019afaba8d600de54ac8d8405063bbd6"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "8aba2f5e2a187e712ad0f85a65e7fa38019afaba8d600de54ac8d8405063bbd6",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591263646797,
+        "device": 66306,
+        "inode": 41449040,
+        "mode": 33204,
+        "mtime_ns": 1785870591263646797,
+        "size": 26359
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591263646797,
+        "device": 66306,
+        "inode": 41449040,
+        "mode": 33204,
+        "mtime_ns": 1785870591263646797,
+        "size": 26359
+      },
+      "bytes": 26359,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/12/1277ab8cea91f75f19cd2ea3622ecd776a4b5e5600e5f5bfcb12af24ffa3db4f",
+      "path": "ccindex/hf_datasets_adapter.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 26359,
+        "public_content": "objects/12/1277ab8cea91f75f19cd2ea3622ecd776a4b5e5600e5f5bfcb12af24ffa3db4f",
+        "public_sha256": "1277ab8cea91f75f19cd2ea3622ecd776a4b5e5600e5f5bfcb12af24ffa3db4f",
+        "raw_sha256": "1277ab8cea91f75f19cd2ea3622ecd776a4b5e5600e5f5bfcb12af24ffa3db4f"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "1277ab8cea91f75f19cd2ea3622ecd776a4b5e5600e5f5bfcb12af24ffa3db4f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591265646993,
+        "device": 66306,
+        "inode": 41449041,
+        "mode": 33204,
+        "mtime_ns": 1785870591265646993,
+        "size": 11517
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591265646993,
+        "device": 66306,
+        "inode": 41449041,
+        "mode": 33204,
+        "mtime_ns": 1785870591265646993,
+        "size": 11517
+      },
+      "bytes": 11517,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/80/80e943715a7f4baab59d0b1d289ab7ae2bae982485a69289e34428015264c710",
+      "path": "ccindex/hf_datasets_cli.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 11517,
+        "public_content": "objects/80/80e943715a7f4baab59d0b1d289ab7ae2bae982485a69289e34428015264c710",
+        "public_sha256": "80e943715a7f4baab59d0b1d289ab7ae2bae982485a69289e34428015264c710",
+        "raw_sha256": "80e943715a7f4baab59d0b1d289ab7ae2bae982485a69289e34428015264c710"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "80e943715a7f4baab59d0b1d289ab7ae2bae982485a69289e34428015264c710",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591267030489,
+        "device": 66306,
+        "inode": 41449042,
+        "mode": 33204,
+        "mtime_ns": 1785870591267030489,
+        "size": 16929
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591267030489,
+        "device": 66306,
+        "inode": 41449042,
+        "mode": 33204,
+        "mtime_ns": 1785870591267030489,
+        "size": 16929
+      },
+      "bytes": 16929,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/24/24c2850b37c4ea4efd58e50eda2d9f38cb2c1cbfd2defade875c7aada20eb7d2",
+      "path": "ccindex/launch_cc_pointer_build.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 16929,
+        "public_content": "objects/24/24c2850b37c4ea4efd58e50eda2d9f38cb2c1cbfd2defade875c7aada20eb7d2",
+        "public_sha256": "24c2850b37c4ea4efd58e50eda2d9f38cb2c1cbfd2defade875c7aada20eb7d2",
+        "raw_sha256": "24c2850b37c4ea4efd58e50eda2d9f38cb2c1cbfd2defade875c7aada20eb7d2"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "24c2850b37c4ea4efd58e50eda2d9f38cb2c1cbfd2defade875c7aada20eb7d2",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591267647190,
+        "device": 66306,
+        "inode": 41449044,
+        "mode": 33204,
+        "mtime_ns": 1785870591267647190,
+        "size": 14352
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591267647190,
+        "device": 66306,
+        "inode": 41449044,
+        "mode": 33204,
+        "mtime_ns": 1785870591267647190,
+        "size": 14352
+      },
+      "bytes": 14352,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/cb/cb689ca68c070049946e7436a1d4bdfbec1a2f03f2eb7cee192616103e25c6d8",
+      "path": "ccindex/monitor_cc_pointer_build.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 14352,
+        "public_content": "objects/cb/cb689ca68c070049946e7436a1d4bdfbec1a2f03f2eb7cee192616103e25c6d8",
+        "public_sha256": "cb689ca68c070049946e7436a1d4bdfbec1a2f03f2eb7cee192616103e25c6d8",
+        "raw_sha256": "cb689ca68c070049946e7436a1d4bdfbec1a2f03f2eb7cee192616103e25c6d8"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "cb689ca68c070049946e7436a1d4bdfbec1a2f03f2eb7cee192616103e25c6d8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591269203919,
+        "device": 66306,
+        "inode": 41449045,
+        "mode": 33204,
+        "mtime_ns": 1785870591269203919,
+        "size": 2624
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591269203919,
+        "device": 66306,
+        "inode": 41449045,
+        "mode": 33204,
+        "mtime_ns": 1785870591269203919,
+        "size": 2624
+      },
+      "bytes": 2624,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5d/5d0bbedc1a66fe7de0ac45c074642e92063a322a2294d96ac0486aaaa6a18b47",
+      "path": "ccindex/monitor_progress.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 2624,
+        "public_content": "objects/5d/5d0bbedc1a66fe7de0ac45c074642e92063a322a2294d96ac0486aaaa6a18b47",
+        "public_sha256": "5d0bbedc1a66fe7de0ac45c074642e92063a322a2294d96ac0486aaaa6a18b47",
+        "raw_sha256": "5d0bbedc1a66fe7de0ac45c074642e92063a322a2294d96ac0486aaaa6a18b47"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5d0bbedc1a66fe7de0ac45c074642e92063a322a2294d96ac0486aaaa6a18b47",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591270787659,
+        "device": 66306,
+        "inode": 41449046,
+        "mode": 33204,
+        "mtime_ns": 1785870591270787659,
+        "size": 30196
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591270787659,
+        "device": 66306,
+        "inode": 41449046,
+        "mode": 33204,
+        "mtime_ns": 1785870591270787659,
+        "size": 30196
+      },
+      "bytes": 30196,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/9d/9d20a644dba1b06cb37eadc1795d4e1d0d1e45b378aa73175c2a9f2c54eae9bc",
+      "path": "ccindex/orchestrator_manager.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 30196,
+        "public_content": "objects/9d/9d20a644dba1b06cb37eadc1795d4e1d0d1e45b378aa73175c2a9f2c54eae9bc",
+        "public_sha256": "9d20a644dba1b06cb37eadc1795d4e1d0d1e45b378aa73175c2a9f2c54eae9bc",
+        "raw_sha256": "9d20a644dba1b06cb37eadc1795d4e1d0d1e45b378aa73175c2a9f2c54eae9bc"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9d20a644dba1b06cb37eadc1795d4e1d0d1e45b378aa73175c2a9f2c54eae9bc",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591270787659,
+        "device": 66306,
+        "inode": 41449047,
+        "mode": 33277,
+        "mtime_ns": 1785870591270787659,
+        "size": 4654
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591270787659,
+        "device": 66306,
+        "inode": 41449047,
+        "mode": 33277,
+        "mtime_ns": 1785870591270787659,
+        "size": 4654
+      },
+      "bytes": 4654,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/9f/9fc5f6958921e13a1a96d8f8298b544ed18723026c35f2719cce4d3541dff58d",
+      "path": "ccindex/parallel_convert_missing.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 4654,
+        "public_content": "objects/9f/9fc5f6958921e13a1a96d8f8298b544ed18723026c35f2719cce4d3541dff58d",
+        "public_sha256": "9fc5f6958921e13a1a96d8f8298b544ed18723026c35f2719cce4d3541dff58d",
+        "raw_sha256": "9fc5f6958921e13a1a96d8f8298b544ed18723026c35f2719cce4d3541dff58d"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9fc5f6958921e13a1a96d8f8298b544ed18723026c35f2719cce4d3541dff58d",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591274647878,
+        "device": 66306,
+        "inode": 41449048,
+        "mode": 33204,
+        "mtime_ns": 1785870591274647878,
+        "size": 4319
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591274647878,
+        "device": 66306,
+        "inode": 41449048,
+        "mode": 33204,
+        "mtime_ns": 1785870591274647878,
+        "size": 4319
+      },
+      "bytes": 4319,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c0/c0ad00dadbbc34dbe4cc86f64affeac93ded6bca88f5120daf12cd49cba64189",
+      "path": "ccindex/parallel_validate_parquet.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 4319,
+        "public_content": "objects/c0/c0ad00dadbbc34dbe4cc86f64affeac93ded6bca88f5120daf12cd49cba64189",
+        "public_sha256": "c0ad00dadbbc34dbe4cc86f64affeac93ded6bca88f5120daf12cd49cba64189",
+        "raw_sha256": "c0ad00dadbbc34dbe4cc86f64affeac93ded6bca88f5120daf12cd49cba64189"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c0ad00dadbbc34dbe4cc86f64affeac93ded6bca88f5120daf12cd49cba64189",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591274647878,
+        "device": 66306,
+        "inode": 41449049,
+        "mode": 33204,
+        "mtime_ns": 1785870591274647878,
+        "size": 16926
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591274647878,
+        "device": 66306,
+        "inode": 41449049,
+        "mode": 33204,
+        "mtime_ns": 1785870591274647878,
+        "size": 16926
+      },
+      "bytes": 16926,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/2d/2d67b43f32ffbf0fd6cb9a7673209436aa1265ee0106728a30ef0c29260c716a",
+      "path": "ccindex/plan_pointers_from_csv.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 16926,
+        "public_content": "objects/2d/2d67b43f32ffbf0fd6cb9a7673209436aa1265ee0106728a30ef0c29260c716a",
+        "public_sha256": "2d67b43f32ffbf0fd6cb9a7673209436aa1265ee0106728a30ef0c29260c716a",
+        "raw_sha256": "2d67b43f32ffbf0fd6cb9a7673209436aa1265ee0106728a30ef0c29260c716a"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "2d67b43f32ffbf0fd6cb9a7673209436aa1265ee0106728a30ef0c29260c716a",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591276648075,
+        "device": 66306,
+        "inode": 41449050,
+        "mode": 33204,
+        "mtime_ns": 1785870591276648075,
+        "size": 19106
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591276648075,
+        "device": 66306,
+        "inode": 41449050,
+        "mode": 33204,
+        "mtime_ns": 1785870591276648075,
+        "size": 19106
+      },
+      "bytes": 19106,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/35/35df9580cd1786ac47de030579ea4fbc1f11b894490ad3a81ad72aadcd794d43",
+      "path": "ccindex/plan_pointers_from_jsonl.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 19106,
+        "public_content": "objects/35/35df9580cd1786ac47de030579ea4fbc1f11b894490ad3a81ad72aadcd794d43",
+        "public_sha256": "35df9580cd1786ac47de030579ea4fbc1f11b894490ad3a81ad72aadcd794d43",
+        "raw_sha256": "35df9580cd1786ac47de030579ea4fbc1f11b894490ad3a81ad72aadcd794d43"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "35df9580cd1786ac47de030579ea4fbc1f11b894490ad3a81ad72aadcd794d43",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591277648173,
+        "device": 66306,
+        "inode": 41449051,
+        "mode": 33204,
+        "mtime_ns": 1785870591277648173,
+        "size": 10719
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591277648173,
+        "device": 66306,
+        "inode": 41449051,
+        "mode": 33204,
+        "mtime_ns": 1785870591277648173,
+        "size": 10719
+      },
+      "bytes": 10719,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/a5/a596eabfb4cdc7a2db72365d06343b380b0c21fb37db73cd92eb182d4493b4ca",
+      "path": "ccindex/plan_slices_from_pointers.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10719,
+        "public_content": "objects/a5/a596eabfb4cdc7a2db72365d06343b380b0c21fb37db73cd92eb182d4493b4ca",
+        "public_sha256": "a596eabfb4cdc7a2db72365d06343b380b0c21fb37db73cd92eb182d4493b4ca",
+        "raw_sha256": "a596eabfb4cdc7a2db72365d06343b380b0c21fb37db73cd92eb182d4493b4ca"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "a596eabfb4cdc7a2db72365d06343b380b0c21fb37db73cd92eb182d4493b4ca",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591279926269,
+        "device": 66306,
+        "inode": 41449052,
+        "mode": 33204,
+        "mtime_ns": 1785870591279926269,
+        "size": 28062
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591279926269,
+        "device": 66306,
+        "inode": 41449052,
+        "mode": 33204,
+        "mtime_ns": 1785870591279926269,
+        "size": 28062
+      },
+      "bytes": 28062,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/de/de13dbcb8c253d4b4010889cefa0c2621c8259c3e44a5fe3359882be9349a4d8",
+      "path": "ccindex/queue_cc_pointer_build.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 28062,
+        "public_content": "objects/de/de13dbcb8c253d4b4010889cefa0c2621c8259c3e44a5fe3359882be9349a4d8",
+        "public_sha256": "de13dbcb8c253d4b4010889cefa0c2621c8259c3e44a5fe3359882be9349a4d8",
+        "raw_sha256": "de13dbcb8c253d4b4010889cefa0c2621c8259c3e44a5fe3359882be9349a4d8"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "de13dbcb8c253d4b4010889cefa0c2621c8259c3e44a5fe3359882be9349a4d8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591279926269,
+        "device": 66306,
+        "inode": 41449053,
+        "mode": 33204,
+        "mtime_ns": 1785870591279926269,
+        "size": 6562
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591279926269,
+        "device": 66306,
+        "inode": 41449053,
+        "mode": 33204,
+        "mtime_ns": 1785870591279926269,
+        "size": 6562
+      },
+      "bytes": 6562,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/00/00790687b4bdf51d9a52b6bb381df1b8b8d13c275245900a45027b488a55f9bf",
+      "path": "ccindex/rebuild_legacy_parquet_collections.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 6562,
+        "public_content": "objects/00/00790687b4bdf51d9a52b6bb381df1b8b8d13c275245900a45027b488a55f9bf",
+        "public_sha256": "00790687b4bdf51d9a52b6bb381df1b8b8d13c275245900a45027b488a55f9bf",
+        "raw_sha256": "00790687b4bdf51d9a52b6bb381df1b8b8d13c275245900a45027b488a55f9bf"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "00790687b4bdf51d9a52b6bb381df1b8b8d13c275245900a45027b488a55f9bf",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591279926269,
+        "device": 66306,
+        "inode": 41449054,
+        "mode": 33204,
+        "mtime_ns": 1785870591279926269,
+        "size": 6026
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591279926269,
+        "device": 66306,
+        "inode": 41449054,
+        "mode": 33204,
+        "mtime_ns": 1785870591279926269,
+        "size": 6026
+      },
+      "bytes": 6026,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/46/460d1ebcaa996468b54d44f9583d52ecc17586e52619d417bf86ce22d98a9584",
+      "path": "ccindex/regenerate_parquet_from_gz.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 6026,
+        "public_content": "objects/46/460d1ebcaa996468b54d44f9583d52ecc17586e52619d417bf86ce22d98a9584",
+        "public_sha256": "460d1ebcaa996468b54d44f9583d52ecc17586e52619d417bf86ce22d98a9584",
+        "raw_sha256": "460d1ebcaa996468b54d44f9583d52ecc17586e52619d417bf86ce22d98a9584"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "460d1ebcaa996468b54d44f9583d52ecc17586e52619d417bf86ce22d98a9584",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591280648468,
+        "device": 66306,
+        "inode": 41449055,
+        "mode": 33204,
+        "mtime_ns": 1785870591280648468,
+        "size": 10673
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591280648468,
+        "device": 66306,
+        "inode": 41449055,
+        "mode": 33204,
+        "mtime_ns": 1785870591280648468,
+        "size": 10673
+      },
+      "bytes": 10673,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/44/44c76e5ece97afe5301bb99d58a12d1bff4873a6cf059fd4e508d7c8662a519f",
+      "path": "ccindex/repair_legacy_parquet_columns.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10673,
+        "public_content": "objects/44/44c76e5ece97afe5301bb99d58a12d1bff4873a6cf059fd4e508d7c8662a519f",
+        "public_sha256": "44c76e5ece97afe5301bb99d58a12d1bff4873a6cf059fd4e508d7c8662a519f",
+        "raw_sha256": "44c76e5ece97afe5301bb99d58a12d1bff4873a6cf059fd4e508d7c8662a519f"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "44c76e5ece97afe5301bb99d58a12d1bff4873a6cf059fd4e508d7c8662a519f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591281648567,
+        "device": 66306,
+        "inode": 41449056,
+        "mode": 33277,
+        "mtime_ns": 1785870591281648567,
+        "size": 8047
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591281648567,
+        "device": 66306,
+        "inode": 41449056,
+        "mode": 33277,
+        "mtime_ns": 1785870591281648567,
+        "size": 8047
+      },
+      "bytes": 8047,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/63/639ab5939c53c7f5b7949b7dda8f7d33abae38a6e23a3a293d0991345af34f19",
+      "path": "ccindex/sample_ccindex_to_parquet.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 8047,
+        "public_content": "objects/63/639ab5939c53c7f5b7949b7dda8f7d33abae38a6e23a3a293d0991345af34f19",
+        "public_sha256": "639ab5939c53c7f5b7949b7dda8f7d33abae38a6e23a3a293d0991345af34f19",
+        "raw_sha256": "639ab5939c53c7f5b7949b7dda8f7d33abae38a6e23a3a293d0991345af34f19"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "639ab5939c53c7f5b7949b7dda8f7d33abae38a6e23a3a293d0991345af34f19",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591283016909,
+        "device": 66306,
+        "inode": 41449057,
+        "mode": 33277,
+        "mtime_ns": 1785870591283016909,
+        "size": 7478
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591283016909,
+        "device": 66306,
+        "inode": 41449057,
+        "mode": 33277,
+        "mtime_ns": 1785870591283016909,
+        "size": 7478
+      },
+      "bytes": 7478,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/df/df0f646db47c79276fed5d74b878d59ff0534adc04c96c3230351af07da17572",
+      "path": "ccindex/search_cc_domain.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7478,
+        "public_content": "objects/df/df0f646db47c79276fed5d74b878d59ff0534adc04c96c3230351af07da17572",
+        "public_sha256": "df0f646db47c79276fed5d74b878d59ff0534adc04c96c3230351af07da17572",
+        "raw_sha256": "df0f646db47c79276fed5d74b878d59ff0534adc04c96c3230351af07da17572"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "df0f646db47c79276fed5d74b878d59ff0534adc04c96c3230351af07da17572",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591283648763,
+        "device": 66306,
+        "inode": 41449058,
+        "mode": 33204,
+        "mtime_ns": 1785870591283648763,
+        "size": 18632
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591283648763,
+        "device": 66306,
+        "inode": 41449058,
+        "mode": 33204,
+        "mtime_ns": 1785870591283648763,
+        "size": 18632
+      },
+      "bytes": 18632,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ea/eae0433458823798766a3efde45654d4e9958529ef1a4945fda2ab66477a93f5",
+      "path": "ccindex/search_cc_duckdb_index.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 18632,
+        "public_content": "objects/ea/eae0433458823798766a3efde45654d4e9958529ef1a4945fda2ab66477a93f5",
+        "public_sha256": "eae0433458823798766a3efde45654d4e9958529ef1a4945fda2ab66477a93f5",
+        "raw_sha256": "eae0433458823798766a3efde45654d4e9958529ef1a4945fda2ab66477a93f5"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "eae0433458823798766a3efde45654d4e9958529ef1a4945fda2ab66477a93f5",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591285648960,
+        "device": 66306,
+        "inode": 41449059,
+        "mode": 33204,
+        "mtime_ns": 1785870591285648960,
+        "size": 12708
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591285648960,
+        "device": 66306,
+        "inode": 41449059,
+        "mode": 33204,
+        "mtime_ns": 1785870591285648960,
+        "size": 12708
+      },
+      "bytes": 12708,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/b2/b2f8b738ae267138332684785044ba3d9a2b403edd09f60e8e61e788e39f2df1",
+      "path": "ccindex/search_cc_pointer_index.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 12708,
+        "public_content": "objects/b2/b2f8b738ae267138332684785044ba3d9a2b403edd09f60e8e61e788e39f2df1",
+        "public_sha256": "b2f8b738ae267138332684785044ba3d9a2b403edd09f60e8e61e788e39f2df1",
+        "raw_sha256": "b2f8b738ae267138332684785044ba3d9a2b403edd09f60e8e61e788e39f2df1"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "b2f8b738ae267138332684785044ba3d9a2b403edd09f60e8e61e788e39f2df1",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591286649058,
+        "device": 66306,
+        "inode": 41449060,
+        "mode": 33204,
+        "mtime_ns": 1785870591286649058,
+        "size": 13345
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591286649058,
+        "device": 66306,
+        "inode": 41449060,
+        "mode": 33204,
+        "mtime_ns": 1785870591286649058,
+        "size": 13345
+      },
+      "bytes": 13345,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/0f/0f1206cf0f788dad68da902b70fef1bc679ca83441d83764fb4ca77dc3084513",
+      "path": "ccindex/search_cc_via_meta_indexes.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 13345,
+        "public_content": "objects/0f/0f1206cf0f788dad68da902b70fef1bc679ca83441d83764fb4ca77dc3084513",
+        "public_sha256": "0f1206cf0f788dad68da902b70fef1bc679ca83441d83764fb4ca77dc3084513",
+        "raw_sha256": "0f1206cf0f788dad68da902b70fef1bc679ca83441d83764fb4ca77dc3084513"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "0f1206cf0f788dad68da902b70fef1bc679ca83441d83764fb4ca77dc3084513",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591286649058,
+        "device": 66306,
+        "inode": 41449061,
+        "mode": 33204,
+        "mtime_ns": 1785870591286649058,
+        "size": 3033
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591286649058,
+        "device": 66306,
+        "inode": 41449061,
+        "mode": 33204,
+        "mtime_ns": 1785870591286649058,
+        "size": 3033
+      },
+      "bytes": 3033,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/e9/e98bde7e4b454a3ac5a3b0a920b9d39f356014eca792305115d33ce46b0dc456",
+      "path": "ccindex/search_parallel_duckdb_indexes.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 3033,
+        "public_content": "objects/e9/e98bde7e4b454a3ac5a3b0a920b9d39f356014eca792305115d33ce46b0dc456",
+        "public_sha256": "e98bde7e4b454a3ac5a3b0a920b9d39f356014eca792305115d33ce46b0dc456",
+        "raw_sha256": "e98bde7e4b454a3ac5a3b0a920b9d39f356014eca792305115d33ce46b0dc456"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "e98bde7e4b454a3ac5a3b0a920b9d39f356014eca792305115d33ce46b0dc456",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591287649157,
+        "device": 66306,
+        "inode": 41449062,
+        "mode": 33204,
+        "mtime_ns": 1785870591287649157,
+        "size": 8838
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591287649157,
+        "device": 66306,
+        "inode": 41449062,
+        "mode": 33204,
+        "mtime_ns": 1785870591287649157,
+        "size": 8838
+      },
+      "bytes": 8838,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/67/67eb224ada9dff0997620f8749973d2d394f43f1d3553459e28f28301fc6c88a",
+      "path": "ccindex/sort_cc_parquet_shards.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 8838,
+        "public_content": "objects/67/67eb224ada9dff0997620f8749973d2d394f43f1d3553459e28f28301fc6c88a",
+        "public_sha256": "67eb224ada9dff0997620f8749973d2d394f43f1d3553459e28f28301fc6c88a",
+        "raw_sha256": "67eb224ada9dff0997620f8749973d2d394f43f1d3553459e28f28301fc6c88a"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "67eb224ada9dff0997620f8749973d2d394f43f1d3553459e28f28301fc6c88a",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591288649255,
+        "device": 66306,
+        "inode": 41449063,
+        "mode": 33204,
+        "mtime_ns": 1785870591288649255,
+        "size": 10993
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591288649255,
+        "device": 66306,
+        "inode": 41449063,
+        "mode": 33204,
+        "mtime_ns": 1785870591288649255,
+        "size": 10993
+      },
+      "bytes": 10993,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/1d/1d05e830079d932093548adfe2847f2c4ff305eea06ab3419945502c207cd8c2",
+      "path": "ccindex/sort_unsorted_memory_aware.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10993,
+        "public_content": "objects/1d/1d05e830079d932093548adfe2847f2c4ff305eea06ab3419945502c207cd8c2",
+        "public_sha256": "1d05e830079d932093548adfe2847f2c4ff305eea06ab3419945502c207cd8c2",
+        "raw_sha256": "1d05e830079d932093548adfe2847f2c4ff305eea06ab3419945502c207cd8c2"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "1d05e830079d932093548adfe2847f2c4ff305eea06ab3419945502c207cd8c2",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591291649550,
+        "device": 66306,
+        "inode": 41449066,
+        "mode": 33204,
+        "mtime_ns": 1785870591291649550,
+        "size": 74121
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591291649550,
+        "device": 66306,
+        "inode": 41449066,
+        "mode": 33204,
+        "mtime_ns": 1785870591291649550,
+        "size": 74121
+      },
+      "bytes": 74121,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/0f/0f7d53bcc641a3db13f60de49e06d763dfada205ffdbe31703d1057b5a67d016",
+      "path": "ccindex/validate_and_mark_sorted.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 74121,
+        "public_content": "objects/0f/0f7d53bcc641a3db13f60de49e06d763dfada205ffdbe31703d1057b5a67d016",
+        "public_sha256": "0f7d53bcc641a3db13f60de49e06d763dfada205ffdbe31703d1057b5a67d016",
+        "raw_sha256": "0f7d53bcc641a3db13f60de49e06d763dfada205ffdbe31703d1057b5a67d016"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "0f7d53bcc641a3db13f60de49e06d763dfada205ffdbe31703d1057b5a67d016",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591292649648,
+        "device": 66306,
+        "inode": 41449067,
+        "mode": 33204,
+        "mtime_ns": 1785870591292649648,
+        "size": 9652
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591292649648,
+        "device": 66306,
+        "inode": 41449067,
+        "mode": 33204,
+        "mtime_ns": 1785870591292649648,
+        "size": 9652
+      },
+      "bytes": 9652,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/77/7739c3bd01104dd3130b642f5016f2bb7d438499b37447b6ab734868b0529bed",
+      "path": "ccindex/validate_and_sort_parquet.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 9652,
+        "public_content": "objects/77/7739c3bd01104dd3130b642f5016f2bb7d438499b37447b6ab734868b0529bed",
+        "public_sha256": "7739c3bd01104dd3130b642f5016f2bb7d438499b37447b6ab734868b0529bed",
+        "raw_sha256": "7739c3bd01104dd3130b642f5016f2bb7d438499b37447b6ab734868b0529bed"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "7739c3bd01104dd3130b642f5016f2bb7d438499b37447b6ab734868b0529bed",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591292649648,
+        "device": 66306,
+        "inode": 41449068,
+        "mode": 33204,
+        "mtime_ns": 1785870591292649648,
+        "size": 27830
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591292649648,
+        "device": 66306,
+        "inode": 41449068,
+        "mode": 33204,
+        "mtime_ns": 1785870591292649648,
+        "size": 27830
+      },
+      "bytes": 27830,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/8b/8b33c97dd0705004f9241dd720bb27ecbfffd4d49273bb118a9ce953ef5c7c26",
+      "path": "ccindex/validate_collection_completeness.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 27830,
+        "public_content": "objects/8b/8b33c97dd0705004f9241dd720bb27ecbfffd4d49273bb118a9ce953ef5c7c26",
+        "public_sha256": "8b33c97dd0705004f9241dd720bb27ecbfffd4d49273bb118a9ce953ef5c7c26",
+        "raw_sha256": "8b33c97dd0705004f9241dd720bb27ecbfffd4d49273bb118a9ce953ef5c7c26"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "8b33c97dd0705004f9241dd720bb27ecbfffd4d49273bb118a9ce953ef5c7c26",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591293649747,
+        "device": 66306,
+        "inode": 41449069,
+        "mode": 33204,
+        "mtime_ns": 1785870591293649747,
+        "size": 7921
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591293649747,
+        "device": 66306,
+        "inode": 41449069,
+        "mode": 33204,
+        "mtime_ns": 1785870591293649747,
+        "size": 7921
+      },
+      "bytes": 7921,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/4b/4b5c1bb2a31963f4fe7f72da22724310fc6690edd798751f7fccdaf825d1ea54",
+      "path": "ccindex/validate_search_completeness.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7921,
+        "public_content": "objects/4b/4b5c1bb2a31963f4fe7f72da22724310fc6690edd798751f7fccdaf825d1ea54",
+        "public_sha256": "4b5c1bb2a31963f4fe7f72da22724310fc6690edd798751f7fccdaf825d1ea54",
+        "raw_sha256": "4b5c1bb2a31963f4fe7f72da22724310fc6690edd798751f7fccdaf825d1ea54"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "4b5c1bb2a31963f4fe7f72da22724310fc6690edd798751f7fccdaf825d1ea54",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591294649845,
+        "device": 66306,
+        "inode": 41449070,
+        "mode": 33204,
+        "mtime_ns": 1785870591294649845,
+        "size": 8521
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591294649845,
+        "device": 66306,
+        "inode": 41449070,
+        "mode": 33204,
+        "mtime_ns": 1785870591294649845,
+        "size": 8521
+      },
+      "bytes": 8521,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/9b/9b92a8679cf4c7edd3567e24b5ec8e4e6012626e3e38f1c7bdadd7773fc40cd8",
+      "path": "ccindex/validate_urlindex_sorted.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 8521,
+        "public_content": "objects/9b/9b92a8679cf4c7edd3567e24b5ec8e4e6012626e3e38f1c7bdadd7773fc40cd8",
+        "public_sha256": "9b92a8679cf4c7edd3567e24b5ec8e4e6012626e3e38f1c7bdadd7773fc40cd8",
+        "raw_sha256": "9b92a8679cf4c7edd3567e24b5ec8e4e6012626e3e38f1c7bdadd7773fc40cd8"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9b92a8679cf4c7edd3567e24b5ec8e4e6012626e3e38f1c7bdadd7773fc40cd8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591294649845,
+        "device": 66306,
+        "inode": 41449071,
+        "mode": 33204,
+        "mtime_ns": 1785870591294649845,
+        "size": 5147
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591294649845,
+        "device": 66306,
+        "inode": 41449071,
+        "mode": 33204,
+        "mtime_ns": 1785870591294649845,
+        "size": 5147
+      },
+      "bytes": 5147,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/3a/3acc261e74fac757bfec1c4eb5c533c3601927fb3f391ed52b5f206db5da3b4a",
+      "path": "ccindex/validate_warc_record_blobs.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 5147,
+        "public_content": "objects/3a/3acc261e74fac757bfec1c4eb5c533c3601927fb3f391ed52b5f206db5da3b4a",
+        "public_sha256": "3acc261e74fac757bfec1c4eb5c533c3601927fb3f391ed52b5f206db5da3b4a",
+        "raw_sha256": "3acc261e74fac757bfec1c4eb5c533c3601927fb3f391ed52b5f206db5da3b4a"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "3acc261e74fac757bfec1c4eb5c533c3601927fb3f391ed52b5f206db5da3b4a",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591295649943,
+        "device": 66306,
+        "inode": 41449072,
+        "mode": 33204,
+        "mtime_ns": 1785870591295649943,
+        "size": 12587
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591295649943,
+        "device": 66306,
+        "inode": 41449072,
+        "mode": 33204,
+        "mtime_ns": 1785870591295649943,
+        "size": 12587
+      },
+      "bytes": 12587,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/09/098e860dba1af90fe1cd06784d724fd60dd7f36cc71049d5c48f9c7e31adf697",
+      "path": "ccindex/verify_warc_retrieval.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 12587,
+        "public_content": "objects/09/098e860dba1af90fe1cd06784d724fd60dd7f36cc71049d5c48f9c7e31adf697",
+        "public_sha256": "098e860dba1af90fe1cd06784d724fd60dd7f36cc71049d5c48f9c7e31adf697",
+        "raw_sha256": "098e860dba1af90fe1cd06784d724fd60dd7f36cc71049d5c48f9c7e31adf697"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "098e860dba1af90fe1cd06784d724fd60dd7f36cc71049d5c48f9c7e31adf697",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591295649943,
+        "device": 66306,
+        "inode": 41449073,
+        "mode": 33204,
+        "mtime_ns": 1785870591295649943,
+        "size": 7082
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591295649943,
+        "device": 66306,
+        "inode": 41449073,
+        "mode": 33204,
+        "mtime_ns": 1785870591295649943,
+        "size": 7082
+      },
+      "bytes": 7082,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5c/5caa7b13fa497c22644c6147f4ded72cbac53a67c5d9885a3c1a93a1ec6f4dad",
+      "path": "ccindex/warc_candidates_from_jsonl.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7082,
+        "public_content": "objects/5c/5caa7b13fa497c22644c6147f4ded72cbac53a67c5d9885a3c1a93a1ec6f4dad",
+        "public_sha256": "5caa7b13fa497c22644c6147f4ded72cbac53a67c5d9885a3c1a93a1ec6f4dad",
+        "raw_sha256": "5caa7b13fa497c22644c6147f4ded72cbac53a67c5d9885a3c1a93a1ec6f4dad"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5caa7b13fa497c22644c6147f4ded72cbac53a67c5d9885a3c1a93a1ec6f4dad",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591296650042,
+        "device": 66306,
+        "inode": 41449074,
+        "mode": 33204,
+        "mtime_ns": 1785870591296650042,
+        "size": 12741
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591296650042,
+        "device": 66306,
+        "inode": 41449074,
+        "mode": 33204,
+        "mtime_ns": 1785870591296650042,
+        "size": 12741
+      },
+      "bytes": 12741,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/6a/6a98fc6b6d23183c8723979736f6b4451fc60a63f76197025a67ab53602d313e",
+      "path": "ccindex/watchdog_cc_pointer_build.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 12741,
+        "public_content": "objects/6a/6a98fc6b6d23183c8723979736f6b4451fc60a63f76197025a67ab53602d313e",
+        "public_sha256": "6a98fc6b6d23183c8723979736f6b4451fc60a63f76197025a67ab53602d313e",
+        "raw_sha256": "6a98fc6b6d23183c8723979736f6b4451fc60a63f76197025a67ab53602d313e"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6a98fc6b6d23183c8723979736f6b4451fc60a63f76197025a67ab53602d313e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591297650140,
+        "device": 66306,
+        "inode": 41449075,
+        "mode": 33204,
+        "mtime_ns": 1785870591297650140,
+        "size": 10449
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591297650140,
+        "device": 66306,
+        "inode": 41449075,
+        "mode": 33204,
+        "mtime_ns": 1785870591297650140,
+        "size": 10449
+      },
+      "bytes": 10449,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c0/c0fd13cb1c28af59f86689dbac3bb25a29ee7b284ae3c6c5405f1996b2c1e65f",
+      "path": "ccindex/watchdog_monitor.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10449,
+        "public_content": "objects/c0/c0fd13cb1c28af59f86689dbac3bb25a29ee7b284ae3c6c5405f1996b2c1e65f",
+        "public_sha256": "c0fd13cb1c28af59f86689dbac3bb25a29ee7b284ae3c6c5405f1996b2c1e65f",
+        "raw_sha256": "c0fd13cb1c28af59f86689dbac3bb25a29ee7b284ae3c6c5405f1996b2c1e65f"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c0fd13cb1c28af59f86689dbac3bb25a29ee7b284ae3c6c5405f1996b2c1e65f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591298650238,
+        "device": 66306,
+        "inode": 41449078,
+        "mode": 33204,
+        "mtime_ns": 1785870591298650238,
+        "size": 17870
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591298650238,
+        "device": 66306,
+        "inode": 41449078,
+        "mode": 33204,
+        "mtime_ns": 1785870591298650238,
+        "size": 17870
+      },
+      "bytes": 17870,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/28/2883b603c2658ca7b492746c1c26be3a4117dad7532382880d6034a8d20f80de",
+      "path": "ccsearch/brave_search.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 17870,
+        "public_content": "objects/28/2883b603c2658ca7b492746c1c26be3a4117dad7532382880d6034a8d20f80de",
+        "public_sha256": "2883b603c2658ca7b492746c1c26be3a4117dad7532382880d6034a8d20f80de",
+        "raw_sha256": "2883b603c2658ca7b492746c1c26be3a4117dad7532382880d6034a8d20f80de"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "2883b603c2658ca7b492746c1c26be3a4117dad7532382880d6034a8d20f80de",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591301650533,
+        "device": 66306,
+        "inode": 26252825,
+        "mode": 33204,
+        "mtime_ns": 1785870591301650533,
+        "size": 50091
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591301650533,
+        "device": 66306,
+        "inode": 26252825,
+        "mode": 33204,
+        "mtime_ns": 1785870591301650533,
+        "size": 50091
+      },
+      "bytes": 50091,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/32/3289b5682755c2deb27aa57bc472d40329a13630f3e22ac511f6231f1dc7964b",
+      "path": "cli.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 50091,
+        "public_content": "objects/32/3289b5682755c2deb27aa57bc472d40329a13630f3e22ac511f6231f1dc7964b",
+        "public_sha256": "3289b5682755c2deb27aa57bc472d40329a13630f3e22ac511f6231f1dc7964b",
+        "raw_sha256": "3289b5682755c2deb27aa57bc472d40329a13630f3e22ac511f6231f1dc7964b"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "3289b5682755c2deb27aa57bc472d40329a13630f3e22ac511f6231f1dc7964b",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591306651025,
+        "device": 66306,
+        "inode": 26252956,
+        "mode": 33204,
+        "mtime_ns": 1785870591306651025,
+        "size": 159954
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591306651025,
+        "device": 66306,
+        "inode": 26252956,
+        "mode": 33204,
+        "mtime_ns": 1785870591306651025,
+        "size": 159954
+      },
+      "bytes": 159954,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/36/3603515adef9f017ce44ff20d49883daa34de319ac9c19dc15c55c47507e0e91",
+      "path": "dashboard.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 159954,
+        "public_content": "objects/36/3603515adef9f017ce44ff20d49883daa34de319ac9c19dc15c55c47507e0e91",
+        "public_sha256": "3603515adef9f017ce44ff20d49883daa34de319ac9c19dc15c55c47507e0e91",
+        "raw_sha256": "3603515adef9f017ce44ff20d49883daa34de319ac9c19dc15c55c47507e0e91"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "3603515adef9f017ce44ff20d49883daa34de319ac9c19dc15c55c47507e0e91",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591307651123,
+        "device": 66306,
+        "inode": 26252957,
+        "mode": 33204,
+        "mtime_ns": 1785870591307651123,
+        "size": 8245
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591307651123,
+        "device": 66306,
+        "inode": 26252957,
+        "mode": 33204,
+        "mtime_ns": 1785870591307651123,
+        "size": 8245
+      },
+      "bytes": 8245,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/17/1734a44ae8bf3ca1c346701f857f8f8b49e492688d49463c0e9644942c8a2aa3",
+      "path": "dashboard_e2e.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 8245,
+        "public_content": "objects/17/1734a44ae8bf3ca1c346701f857f8f8b49e492688d49463c0e9644942c8a2aa3",
+        "public_sha256": "1734a44ae8bf3ca1c346701f857f8f8b49e492688d49463c0e9644942c8a2aa3",
+        "raw_sha256": "1734a44ae8bf3ca1c346701f857f8f8b49e492688d49463c0e9644942c8a2aa3"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "1734a44ae8bf3ca1c346701f857f8f8b49e492688d49463c0e9644942c8a2aa3",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591307651123,
+        "device": 66306,
+        "inode": 41449084,
+        "mode": 33204,
+        "mtime_ns": 1785870591307651123,
+        "size": 4567
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591307651123,
+        "device": 66306,
+        "inode": 41449084,
+        "mode": 33204,
+        "mtime_ns": 1785870591307651123,
+        "size": 4567
+      },
+      "bytes": 4567,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/b3/b3c341311991143be3a7279e86014889f2b800d4b64a918fca8f6fadb2955bf4",
+      "path": "docs/CRITICAL_FINDINGS.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 4567,
+        "public_content": "objects/b3/b3c341311991143be3a7279e86014889f2b800d4b64a918fca8f6fadb2955bf4",
+        "public_sha256": "b3c341311991143be3a7279e86014889f2b800d4b64a918fca8f6fadb2955bf4",
+        "raw_sha256": "b3c341311991143be3a7279e86014889f2b800d4b64a918fca8f6fadb2955bf4"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "b3c341311991143be3a7279e86014889f2b800d4b64a918fca8f6fadb2955bf4",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591310065697,
+        "device": 66306,
+        "inode": 41449092,
+        "mode": 33204,
+        "mtime_ns": 1785870591310065697,
+        "size": 16546
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591310065697,
+        "device": 66306,
+        "inode": 41449092,
+        "mode": 33204,
+        "mtime_ns": 1785870591310065697,
+        "size": 16546
+      },
+      "bytes": 16546,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/de/def21cdbeb4ee6f642bd24fdf75b2eaf88e6bf3496c53fb5388b608be29015eb",
+      "path": "docs/ccindex/DUCKDB_INDEX_DESIGN.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 16546,
+        "public_content": "objects/de/def21cdbeb4ee6f642bd24fdf75b2eaf88e6bf3496c53fb5388b608be29015eb",
+        "public_sha256": "def21cdbeb4ee6f642bd24fdf75b2eaf88e6bf3496c53fb5388b608be29015eb",
+        "raw_sha256": "def21cdbeb4ee6f642bd24fdf75b2eaf88e6bf3496c53fb5388b608be29015eb"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "def21cdbeb4ee6f642bd24fdf75b2eaf88e6bf3496c53fb5388b608be29015eb",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591313783230,
+        "device": 66306,
+        "inode": 41449098,
+        "mode": 33204,
+        "mtime_ns": 1785870591313783230,
+        "size": 12083
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591313783230,
+        "device": 66306,
+        "inode": 41449098,
+        "mode": 33204,
+        "mtime_ns": 1785870591313783230,
+        "size": 12083
+      },
+      "bytes": 12083,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/df/df2ffab576de533f2f5c4dc641fffda3cecc3d63c6509d7aca2d7e20e1724f23",
+      "path": "docs/ccindex/HUGGINGFACE_DATASETS_INTEGRATION.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 12083,
+        "public_content": "objects/df/df2ffab576de533f2f5c4dc641fffda3cecc3d63c6509d7aca2d7e20e1724f23",
+        "public_sha256": "df2ffab576de533f2f5c4dc641fffda3cecc3d63c6509d7aca2d7e20e1724f23",
+        "raw_sha256": "df2ffab576de533f2f5c4dc641fffda3cecc3d63c6509d7aca2d7e20e1724f23"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "df2ffab576de533f2f5c4dc641fffda3cecc3d63c6509d7aca2d7e20e1724f23",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591313783230,
+        "device": 66306,
+        "inode": 41449099,
+        "mode": 33204,
+        "mtime_ns": 1785870591313783230,
+        "size": 4914
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591313783230,
+        "device": 66306,
+        "inode": 41449099,
+        "mode": 33204,
+        "mtime_ns": 1785870591313783230,
+        "size": 4914
+      },
+      "bytes": 4914,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d0/d03a79cb3f43dadbfae78f0bdbda46def90e71447a001d313c0edcf3f8dfe07e",
+      "path": "docs/ccindex/INDEX_ARCHITECTURE.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 4914,
+        "public_content": "objects/d0/d03a79cb3f43dadbfae78f0bdbda46def90e71447a001d313c0edcf3f8dfe07e",
+        "public_sha256": "d03a79cb3f43dadbfae78f0bdbda46def90e71447a001d313c0edcf3f8dfe07e",
+        "raw_sha256": "d03a79cb3f43dadbfae78f0bdbda46def90e71447a001d313c0edcf3f8dfe07e"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d03a79cb3f43dadbfae78f0bdbda46def90e71447a001d313c0edcf3f8dfe07e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591313783230,
+        "device": 66306,
+        "inode": 41449100,
+        "mode": 33204,
+        "mtime_ns": 1785870591313783230,
+        "size": 10689
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591313783230,
+        "device": 66306,
+        "inode": 41449100,
+        "mode": 33204,
+        "mtime_ns": 1785870591313783230,
+        "size": 10689
+      },
+      "bytes": 10689,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/79/7982296ce07cadd056de6e2ad3458d1c527507a1bf3abc8673c6396d8e1b80fd",
+      "path": "docs/ccindex/INDEX_HIERARCHY.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10689,
+        "public_content": "objects/79/7982296ce07cadd056de6e2ad3458d1c527507a1bf3abc8673c6396d8e1b80fd",
+        "public_sha256": "7982296ce07cadd056de6e2ad3458d1c527507a1bf3abc8673c6396d8e1b80fd",
+        "raw_sha256": "7982296ce07cadd056de6e2ad3458d1c527507a1bf3abc8673c6396d8e1b80fd"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "7982296ce07cadd056de6e2ad3458d1c527507a1bf3abc8673c6396d8e1b80fd",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591315651910,
+        "device": 66306,
+        "inode": 41449103,
+        "mode": 33204,
+        "mtime_ns": 1785870591315651910,
+        "size": 10017
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591315651910,
+        "device": 66306,
+        "inode": 41449103,
+        "mode": 33204,
+        "mtime_ns": 1785870591315651910,
+        "size": 10017
+      },
+      "bytes": 10017,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/3a/3adf07177050a181908b347b9d925bfc443c0d6295c2015c0101465f3ff5d984",
+      "path": "docs/ccindex/POINTER_INDEX_DESIGN.md",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10017,
+        "public_content": "objects/3a/3adf07177050a181908b347b9d925bfc443c0d6295c2015c0101465f3ff5d984",
+        "public_sha256": "3adf07177050a181908b347b9d925bfc443c0d6295c2015c0101465f3ff5d984",
+        "raw_sha256": "3adf07177050a181908b347b9d925bfc443c0d6295c2015c0101465f3ff5d984"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "3adf07177050a181908b347b9d925bfc443c0d6295c2015c0101465f3ff5d984",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591325652893,
+        "device": 66306,
+        "inode": 26252958,
+        "mode": 33204,
+        "mtime_ns": 1785870591325652893,
+        "size": 8803
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591325652893,
+        "device": 66306,
+        "inode": 26252958,
+        "mode": 33204,
+        "mtime_ns": 1785870591325652893,
+        "size": 8803
+      },
+      "bytes": 8803,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/bb/bb626a9eb2786e412cdb05cd3433e5f8ed6e4562ad391ecdda0a78dc10c0c861",
+      "path": "mcp_client.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 8803,
+        "public_content": "objects/bb/bb626a9eb2786e412cdb05cd3433e5f8ed6e4562ad391ecdda0a78dc10c0c861",
+        "public_sha256": "bb626a9eb2786e412cdb05cd3433e5f8ed6e4562ad391ecdda0a78dc10c0c861",
+        "raw_sha256": "bb626a9eb2786e412cdb05cd3433e5f8ed6e4562ad391ecdda0a78dc10c0c861"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "bb626a9eb2786e412cdb05cd3433e5f8ed6e4562ad391ecdda0a78dc10c0c861",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591325652893,
+        "device": 66306,
+        "inode": 26252959,
+        "mode": 33204,
+        "mtime_ns": 1785870591325652893,
+        "size": 11670
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591325652893,
+        "device": 66306,
+        "inode": 26252959,
+        "mode": 33204,
+        "mtime_ns": 1785870591325652893,
+        "size": 11670
+      },
+      "bytes": 11670,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/81/81035aa106b974fed36bac71af6327979b06dddeb69eea765f2c0f0169b40e73",
+      "path": "mcp_server.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 11670,
+        "public_content": "objects/81/81035aa106b974fed36bac71af6327979b06dddeb69eea765f2c0f0169b40e73",
+        "public_sha256": "81035aa106b974fed36bac71af6327979b06dddeb69eea765f2c0f0169b40e73",
+        "raw_sha256": "81035aa106b974fed36bac71af6327979b06dddeb69eea765f2c0f0169b40e73"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "81035aa106b974fed36bac71af6327979b06dddeb69eea765f2c0f0169b40e73",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591327653090,
+        "device": 66306,
+        "inode": 41449118,
+        "mode": 33204,
+        "mtime_ns": 1785870591327653090,
+        "size": 3874
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591327653090,
+        "device": 66306,
+        "inode": 41449118,
+        "mode": 33204,
+        "mtime_ns": 1785870591327653090,
+        "size": 3874
+      },
+      "bytes": 3874,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/da/daed7712c66f5e6bbd329ccb63697d04d10fb26500d257998c7e53141706939f",
+      "path": "tests/ccindex/test_cli.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 3874,
+        "public_content": "objects/da/daed7712c66f5e6bbd329ccb63697d04d10fb26500d257998c7e53141706939f",
+        "public_sha256": "daed7712c66f5e6bbd329ccb63697d04d10fb26500d257998c7e53141706939f",
+        "raw_sha256": "daed7712c66f5e6bbd329ccb63697d04d10fb26500d257998c7e53141706939f"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "daed7712c66f5e6bbd329ccb63697d04d10fb26500d257998c7e53141706939f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591327653090,
+        "device": 66306,
+        "inode": 41449119,
+        "mode": 33204,
+        "mtime_ns": 1785870591327653090,
+        "size": 1926
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591327653090,
+        "device": 66306,
+        "inode": 41449119,
+        "mode": 33204,
+        "mtime_ns": 1785870591327653090,
+        "size": 1926
+      },
+      "bytes": 1926,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/09/092f58aa4e778221f3eb4efb2f16c6ce52f4c85449a3a77bc8926fe67831f890",
+      "path": "tests/ccindex/test_cli_hf_remote_meta_wiring.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 1926,
+        "public_content": "objects/09/092f58aa4e778221f3eb4efb2f16c6ce52f4c85449a3a77bc8926fe67831f890",
+        "public_sha256": "092f58aa4e778221f3eb4efb2f16c6ce52f4c85449a3a77bc8926fe67831f890",
+        "raw_sha256": "092f58aa4e778221f3eb4efb2f16c6ce52f4c85449a3a77bc8926fe67831f890"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "092f58aa4e778221f3eb4efb2f16c6ce52f4c85449a3a77bc8926fe67831f890",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591328653188,
+        "device": 66306,
+        "inode": 41449120,
+        "mode": 33204,
+        "mtime_ns": 1785870591328653188,
+        "size": 6375
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591328653188,
+        "device": 66306,
+        "inode": 41449120,
+        "mode": 33204,
+        "mtime_ns": 1785870591328653188,
+        "size": 6375
+      },
+      "bytes": 6375,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/eb/eb5aed3e9b9212a769127ca0c1b885582cbe8b679262d2fe230b71e22eadbb45",
+      "path": "tests/ccindex/test_hf_remote_meta_indexes.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 6375,
+        "public_content": "objects/eb/eb5aed3e9b9212a769127ca0c1b885582cbe8b679262d2fe230b71e22eadbb45",
+        "public_sha256": "eb5aed3e9b9212a769127ca0c1b885582cbe8b679262d2fe230b71e22eadbb45",
+        "raw_sha256": "eb5aed3e9b9212a769127ca0c1b885582cbe8b679262d2fe230b71e22eadbb45"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "eb5aed3e9b9212a769127ca0c1b885582cbe8b679262d2fe230b71e22eadbb45",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591328653188,
+        "device": 66306,
+        "inode": 41449121,
+        "mode": 33204,
+        "mtime_ns": 1785870591328653188,
+        "size": 1148
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591328653188,
+        "device": 66306,
+        "inode": 41449121,
+        "mode": 33204,
+        "mtime_ns": 1785870591328653188,
+        "size": 1148
+      },
+      "bytes": 1148,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ca/caf384a278ffbeffa92286cb612e02f09718a77ca86acc1fd39edc68f40cff87",
+      "path": "tests/ccindex/test_hf_remote_meta_smoke.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 1148,
+        "public_content": "objects/ca/caf384a278ffbeffa92286cb612e02f09718a77ca86acc1fd39edc68f40cff87",
+        "public_sha256": "caf384a278ffbeffa92286cb612e02f09718a77ca86acc1fd39edc68f40cff87",
+        "raw_sha256": "caf384a278ffbeffa92286cb612e02f09718a77ca86acc1fd39edc68f40cff87"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "caf384a278ffbeffa92286cb612e02f09718a77ca86acc1fd39edc68f40cff87",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591328653188,
+        "device": 66306,
+        "inode": 41449122,
+        "mode": 33204,
+        "mtime_ns": 1785870591328653188,
+        "size": 3238
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591328653188,
+        "device": 66306,
+        "inode": 41449122,
+        "mode": 33204,
+        "mtime_ns": 1785870591328653188,
+        "size": 3238
+      },
+      "bytes": 3238,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ee/ee587a86bda25a57e964fc4140244d7bfc226f2ddf28a6794d7fe2086cc5beeb",
+      "path": "tests/ccindex/test_imports.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 3238,
+        "public_content": "objects/ee/ee587a86bda25a57e964fc4140244d7bfc226f2ddf28a6794d7fe2086cc5beeb",
+        "public_sha256": "ee587a86bda25a57e964fc4140244d7bfc226f2ddf28a6794d7fe2086cc5beeb",
+        "raw_sha256": "ee587a86bda25a57e964fc4140244d7bfc226f2ddf28a6794d7fe2086cc5beeb"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "ee587a86bda25a57e964fc4140244d7bfc226f2ddf28a6794d7fe2086cc5beeb",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591329653286,
+        "device": 66306,
+        "inode": 41449123,
+        "mode": 33204,
+        "mtime_ns": 1785870591329653286,
+        "size": 2989
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591329653286,
+        "device": 66306,
+        "inode": 41449123,
+        "mode": 33204,
+        "mtime_ns": 1785870591329653286,
+        "size": 2989
+      },
+      "bytes": 2989,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/62/62a8ed1ef67376e4ff464706d77cfda69450eddff18aaf940abd23d6cb291d8b",
+      "path": "tests/ccindex/test_orchestrator_manager.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 2989,
+        "public_content": "objects/62/62a8ed1ef67376e4ff464706d77cfda69450eddff18aaf940abd23d6cb291d8b",
+        "public_sha256": "62a8ed1ef67376e4ff464706d77cfda69450eddff18aaf940abd23d6cb291d8b",
+        "raw_sha256": "62a8ed1ef67376e4ff464706d77cfda69450eddff18aaf940abd23d6cb291d8b"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "62a8ed1ef67376e4ff464706d77cfda69450eddff18aaf940abd23d6cb291d8b",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591329653286,
+        "device": 66306,
+        "inode": 41449124,
+        "mode": 33204,
+        "mtime_ns": 1785870591329653286,
+        "size": 1940
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591329653286,
+        "device": 66306,
+        "inode": 41449124,
+        "mode": 33204,
+        "mtime_ns": 1785870591329653286,
+        "size": 1940
+      },
+      "bytes": 1940,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/63/63cb39061c1a7db02a7fb978bbb9457e633f44f3908e401d0fd8decfb045a90e",
+      "path": "tests/ccindex/test_plan_slices_from_pointers.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 1940,
+        "public_content": "objects/63/63cb39061c1a7db02a7fb978bbb9457e633f44f3908e401d0fd8decfb045a90e",
+        "public_sha256": "63cb39061c1a7db02a7fb978bbb9457e633f44f3908e401d0fd8decfb045a90e",
+        "raw_sha256": "63cb39061c1a7db02a7fb978bbb9457e633f44f3908e401d0fd8decfb045a90e"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "63cb39061c1a7db02a7fb978bbb9457e633f44f3908e401d0fd8decfb045a90e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591332653581,
+        "device": 66306,
+        "inode": 41449126,
+        "mode": 33204,
+        "mtime_ns": 1785870591332653581,
+        "size": 1584
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591332653581,
+        "device": 66306,
+        "inode": 41449126,
+        "mode": 33204,
+        "mtime_ns": 1785870591332653581,
+        "size": 1584
+      },
+      "bytes": 1584,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/9f/9f08f01d808a63de6b922efc3d1d6d57bcc067acee85949258bb9f1f160a97a2",
+      "path": "tests/ccindex/test_warc_http_extract.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 1584,
+        "public_content": "objects/9f/9f08f01d808a63de6b922efc3d1d6d57bcc067acee85949258bb9f1f160a97a2",
+        "public_sha256": "9f08f01d808a63de6b922efc3d1d6d57bcc067acee85949258bb9f1f160a97a2",
+        "raw_sha256": "9f08f01d808a63de6b922efc3d1d6d57bcc067acee85949258bb9f1f160a97a2"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9f08f01d808a63de6b922efc3d1d6d57bcc067acee85949258bb9f1f160a97a2",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591337219550,
+        "device": 66306,
+        "inode": 41449130,
+        "mode": 33204,
+        "mtime_ns": 1785870591337219550,
+        "size": 3708
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591337219550,
+        "device": 66306,
+        "inode": 41449130,
+        "mode": 33204,
+        "mtime_ns": 1785870591337219550,
+        "size": 3708
+      },
+      "bytes": 3708,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c9/c97c318788f3928b62947b1751acf47a1139af13af94861deb3398d5487ecb65",
+      "path": "tests/ccsearch/test_brave_search_cache.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 3708,
+        "public_content": "objects/c9/c97c318788f3928b62947b1751acf47a1139af13af94861deb3398d5487ecb65",
+        "public_sha256": "c97c318788f3928b62947b1751acf47a1139af13af94861deb3398d5487ecb65",
+        "raw_sha256": "c97c318788f3928b62947b1751acf47a1139af13af94861deb3398d5487ecb65"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c97c318788f3928b62947b1751acf47a1139af13af94861deb3398d5487ecb65",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591338654171,
+        "device": 66306,
+        "inode": 41449133,
+        "mode": 33204,
+        "mtime_ns": 1785870591338654171,
+        "size": 11776
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591338654171,
+        "device": 66306,
+        "inode": 41449133,
+        "mode": 33204,
+        "mtime_ns": 1785870591338654171,
+        "size": 11776
+      },
+      "bytes": 11776,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5c/5c7922dd1d05008d739588c57e5a9eab707513afac909c6cd92aed4c4f4c5be3",
+      "path": "tests/dashboard/test_brave_and_settings_playwright.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 11776,
+        "public_content": "objects/5c/5c7922dd1d05008d739588c57e5a9eab707513afac909c6cd92aed4c4f4c5be3",
+        "public_sha256": "5c7922dd1d05008d739588c57e5a9eab707513afac909c6cd92aed4c4f4c5be3",
+        "raw_sha256": "5c7922dd1d05008d739588c57e5a9eab707513afac909c6cd92aed4c4f4c5be3"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5c7922dd1d05008d739588c57e5a9eab707513afac909c6cd92aed4c4f4c5be3",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591338654171,
+        "device": 66306,
+        "inode": 41449134,
+        "mode": 33204,
+        "mtime_ns": 1785870591338654171,
+        "size": 3231
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591338654171,
+        "device": 66306,
+        "inode": 41449134,
+        "mode": 33204,
+        "mtime_ns": 1785870591338654171,
+        "size": 3231
+      },
+      "bytes": 3231,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/63/6370cc0b9cde032d3e21bd4df301b508bb3d0fd1ce4a738551af25a387a53edc",
+      "path": "tests/dashboard/test_brave_cache_mcp_and_settings_endpoints.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 3231,
+        "public_content": "objects/63/6370cc0b9cde032d3e21bd4df301b508bb3d0fd1ce4a738551af25a387a53edc",
+        "public_sha256": "6370cc0b9cde032d3e21bd4df301b508bb3d0fd1ce4a738551af25a387a53edc",
+        "raw_sha256": "6370cc0b9cde032d3e21bd4df301b508bb3d0fd1ce4a738551af25a387a53edc"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6370cc0b9cde032d3e21bd4df301b508bb3d0fd1ce4a738551af25a387a53edc",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591339654270,
+        "device": 66306,
+        "inode": 41449136,
+        "mode": 33204,
+        "mtime_ns": 1785870591339654270,
+        "size": 4430
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591339654270,
+        "device": 66306,
+        "inode": 41449136,
+        "mode": 33204,
+        "mtime_ns": 1785870591339654270,
+        "size": 4430
+      },
+      "bytes": 4430,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/97/97cd79e70c12934b40c3252724bca3fc03cac0fe9177966322c50518e64d31fc",
+      "path": "tests/dashboard/test_hf_remote_meta_dashboard.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 4430,
+        "public_content": "objects/97/97cd79e70c12934b40c3252724bca3fc03cac0fe9177966322c50518e64d31fc",
+        "public_sha256": "97cd79e70c12934b40c3252724bca3fc03cac0fe9177966322c50518e64d31fc",
+        "raw_sha256": "97cd79e70c12934b40c3252724bca3fc03cac0fe9177966322c50518e64d31fc"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "97cd79e70c12934b40c3252724bca3fc03cac0fe9177966322c50518e64d31fc",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591340654368,
+        "device": 66306,
+        "inode": 41449137,
+        "mode": 33204,
+        "mtime_ns": 1785870591340654368,
+        "size": 10557
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591340654368,
+        "device": 66306,
+        "inode": 41449137,
+        "mode": 33204,
+        "mtime_ns": 1785870591340654368,
+        "size": 10557
+      },
+      "bytes": 10557,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c1/c16ff3929d852171c21f63e4d1cb0267f830c08c685d31123166248c39b41432",
+      "path": "tests/dashboard/test_index_orchestrator_tools.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 10557,
+        "public_content": "objects/c1/c16ff3929d852171c21f63e4d1cb0267f830c08c685d31123166248c39b41432",
+        "public_sha256": "c16ff3929d852171c21f63e4d1cb0267f830c08c685d31123166248c39b41432",
+        "raw_sha256": "c16ff3929d852171c21f63e4d1cb0267f830c08c685d31123166248c39b41432"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c16ff3929d852171c21f63e4d1cb0267f830c08c685d31123166248c39b41432",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591340654368,
+        "device": 66306,
+        "inode": 41449138,
+        "mode": 33204,
+        "mtime_ns": 1785870591340654368,
+        "size": 2295
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591340654368,
+        "device": 66306,
+        "inode": 41449138,
+        "mode": 33204,
+        "mtime_ns": 1785870591340654368,
+        "size": 2295
+      },
+      "bytes": 2295,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/45/45278d2314575266358d980f7473567e1d77348cd4254c484c4bbb665a14946f",
+      "path": "tests/dashboard/test_mcp_jsonrpc_batch_and_workers.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 2295,
+        "public_content": "objects/45/45278d2314575266358d980f7473567e1d77348cd4254c484c4bbb665a14946f",
+        "public_sha256": "45278d2314575266358d980f7473567e1d77348cd4254c484c4bbb665a14946f",
+        "raw_sha256": "45278d2314575266358d980f7473567e1d77348cd4254c484c4bbb665a14946f"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "45278d2314575266358d980f7473567e1d77348cd4254c484c4bbb665a14946f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591342654565,
+        "device": 66306,
+        "inode": 41449139,
+        "mode": 33204,
+        "mtime_ns": 1785870591342654565,
+        "size": 13696
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591342654565,
+        "device": 66306,
+        "inode": 41449139,
+        "mode": 33204,
+        "mtime_ns": 1785870591342654565,
+        "size": 13696
+      },
+      "bytes": 13696,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/b2/b211ed2174e3ec5a031c886f95414cfb654d1106a409e3cf042b63bf54098ce4",
+      "path": "tests/dashboard/test_panels_e2e_playwright.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 13696,
+        "public_content": "objects/b2/b211ed2174e3ec5a031c886f95414cfb654d1106a409e3cf042b63bf54098ce4",
+        "public_sha256": "b211ed2174e3ec5a031c886f95414cfb654d1106a409e3cf042b63bf54098ce4",
+        "raw_sha256": "b211ed2174e3ec5a031c886f95414cfb654d1106a409e3cf042b63bf54098ce4"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "b211ed2174e3ec5a031c886f95414cfb654d1106a409e3cf042b63bf54098ce4",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591344654761,
+        "device": 66306,
+        "inode": 41449140,
+        "mode": 33204,
+        "mtime_ns": 1785870591344654761,
+        "size": 1655
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591344654761,
+        "device": 66306,
+        "inode": 41449140,
+        "mode": 33204,
+        "mtime_ns": 1785870591344654761,
+        "size": 1655
+      },
+      "bytes": 1655,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/9b/9b9923d5bffa53951a559b8723df7136bc76907232ddda89f0ad16ccd12a300b",
+      "path": "tests/dashboard/test_reverse_proxy_prefix.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 1655,
+        "public_content": "objects/9b/9b9923d5bffa53951a559b8723df7136bc76907232ddda89f0ad16ccd12a300b",
+        "public_sha256": "9b9923d5bffa53951a559b8723df7136bc76907232ddda89f0ad16ccd12a300b",
+        "raw_sha256": "9b9923d5bffa53951a559b8723df7136bc76907232ddda89f0ad16ccd12a300b"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9b9923d5bffa53951a559b8723df7136bc76907232ddda89f0ad16ccd12a300b",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591345822652,
+        "device": 66306,
+        "inode": 41449141,
+        "mode": 33204,
+        "mtime_ns": 1785870591345822652,
+        "size": 7900
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591345822652,
+        "device": 66306,
+        "inode": 41449141,
+        "mode": 33204,
+        "mtime_ns": 1785870591345822652,
+        "size": 7900
+      },
+      "bytes": 7900,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/f5/f5ba0731a240c4fb606cdde5fdaf02db7669cfae787399bebe3fee773a7456e4",
+      "path": "tests/dashboard/test_waybackish_e2e_playwright.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 7900,
+        "public_content": "objects/f5/f5ba0731a240c4fb606cdde5fdaf02db7669cfae787399bebe3fee773a7456e4",
+        "public_sha256": "f5ba0731a240c4fb606cdde5fdaf02db7669cfae787399bebe3fee773a7456e4",
+        "raw_sha256": "f5ba0731a240c4fb606cdde5fdaf02db7669cfae787399bebe3fee773a7456e4"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "f5ba0731a240c4fb606cdde5fdaf02db7669cfae787399bebe3fee773a7456e4",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870591346654958,
+        "device": 66306,
+        "inode": 41449143,
+        "mode": 33204,
+        "mtime_ns": 1785870591346654958,
+        "size": 4166
+      },
+      "before_stat": {
+        "ctime_ns": 1785870591346654958,
+        "device": 66306,
+        "inode": 41449143,
+        "mode": 33204,
+        "mtime_ns": 1785870591346654958,
+        "size": 4166
+      },
+      "bytes": 4166,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/e9/e917f667783bf7a9fcf9767a131293848ac7f8e44d211ec366e7638622e7d371",
+      "path": "tests/test_mcp_client_network.py",
+      "public_representation": {
+        "policy": "exact_original_unflagged_by_scoped_pattern_scan",
+        "public_bytes": 4166,
+        "public_content": "objects/e9/e917f667783bf7a9fcf9767a131293848ac7f8e44d211ec366e7638622e7d371",
+        "public_sha256": "e917f667783bf7a9fcf9767a131293848ac7f8e44d211ec366e7638622e7d371",
+        "raw_sha256": "e917f667783bf7a9fcf9767a131293848ac7f8e44d211ec366e7638622e7d371"
+      },
+      "raw_object_policy": "LOCAL_ONLY; publication uses public_representation only",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "e917f667783bf7a9fcf9767a131293848ac7f8e44d211ec366e7638622e7d371",
+      "stable": true
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 802094,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-107/head.patch",
+      "public_derivative": {
+        "bytes": 802094,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-107/head.public.patch",
+        "relative_path": "repo-107/head.public.patch",
+        "sha256": "9e3cb8e7f17514b8b6db437ba5a5cd5e8fcebe1d1a48fc2fd14e9487e86d80a2"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "9e3cb8e7f17514b8b6db437ba5a5cd5e8fcebe1d1a48fc2fd14e9487e86d80a2"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-107/index.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-107/index.public.patch",
+        "relative_path": "repo-107/index.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 802094,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-107/unstaged.patch",
+      "public_derivative": {
+        "bytes": 802094,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-107/unstaged.public.patch",
+        "relative_path": "repo-107/unstaged.public.patch",
+        "sha256": "9e3cb8e7f17514b8b6db437ba5a5cd5e8fcebe1d1a48fc2fd14e9487e86d80a2"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "9e3cb8e7f17514b8b6db437ba5a5cd5e8fcebe1d1a48fc2fd14e9487e86d80a2"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 3991,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-107/status-after.z",
+    "sha256": "052f158de37e629bd108fee37c0cee9529212bd633b9f2c3bb4486dc26a7538e"
+  },
+  "status_before": {
+    "bytes": 3991,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-107/status-before.z",
+    "sha256": "052f158de37e629bd108fee37c0cee9529212bd633b9f2c3bb4486dc26a7538e"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+}

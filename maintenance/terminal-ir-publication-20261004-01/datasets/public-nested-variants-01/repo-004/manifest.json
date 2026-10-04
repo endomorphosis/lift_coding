@@ -1,0 +1,122 @@
+{
+  "HEAD_after": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+  "HEAD_before": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+  "counts": {
+    "file_entries": 4,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      ".M": 4
+    },
+    "ahead/behind_cached_main": "0/31",
+    "branch": "main",
+    "dirty_children": [
+      "ipfs_accelerate_py",
+      "ipfs_datasets_py",
+      "ipfs_kit_py",
+      "swissknife"
+    ],
+    "id": 4,
+    "origin": "github.com/endomorphosis/hallucinate_app",
+    "parent": null,
+    "relative": "hallucinate_app",
+    "tracked": 4,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "0cc04ebb640c4c981cf4650016e096a73ab0e8c0",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "ipfs_accelerate_py",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    },
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "9059235ee84c17cdc5c971cedaf332529a1e6235",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "ipfs_datasets_py",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    },
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "ad19bd0a548139c540bd78163b9bea8dd38bf6cb",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "ipfs_kit_py",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    },
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "5cec1a41432a072cf86a8318c9dcb9493b6db7c2",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "swissknife",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 986,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-004/head.patch",
+      "public_derivative": {
+        "bytes": 986,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-004/head.public.patch",
+        "relative_path": "repo-004/head.public.patch",
+        "sha256": "c9cf3da38a247204b5e2b4a33726bde832d6910461704852fdc3e3ccb9202581"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "c9cf3da38a247204b5e2b4a33726bde832d6910461704852fdc3e3ccb9202581"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-004/index.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-004/index.public.patch",
+        "relative_path": "repo-004/index.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 986,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-004/unstaged.patch",
+      "public_derivative": {
+        "bytes": 986,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-004/unstaged.public.patch",
+        "relative_path": "repo-004/unstaged.public.patch",
+        "sha256": "c9cf3da38a247204b5e2b4a33726bde832d6910461704852fdc3e3ccb9202581"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "c9cf3da38a247204b5e2b4a33726bde832d6910461704852fdc3e3ccb9202581"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 71,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-004/status-after.z",
+    "sha256": "79a8e474ed707ed226f7cd45ee398e24acebf483b9792609a4271e7214b75ac3"
+  },
+  "status_before": {
+    "bytes": 71,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-004/status-before.z",
+    "sha256": "79a8e474ed707ed226f7cd45ee398e24acebf483b9792609a4271e7214b75ac3"
+  },
+  "workspace_relative": "hallucinate_app"
+}

@@ -1,0 +1,1920 @@
+{
+  "dirty": [
+    {
+      "id": 0,
+      "parent": null,
+      "relative": "external/ipfs_accelerate",
+      "branch": "main",
+      "tracked": 71,
+      "untracked": 522,
+      "XY": {
+        ".M": 71
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "2/3090",
+      "dirty_children": []
+    },
+    {
+      "id": 1,
+      "parent": null,
+      "relative": "external/ipfs_datasets",
+      "branch": "main",
+      "tracked": 157,
+      "untracked": 2177,
+      "XY": {
+        ".M": 129,
+        ".D": 28
+      },
+      "origin": "github.com/endomorphosis/ipfs_datasets_py",
+      "ahead/behind_cached_main": "0/3366",
+      "dirty_children": [
+        ".tools/ipfs_kit_py",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+      ]
+    },
+    {
+      "id": 2,
+      "parent": null,
+      "relative": "external/ipfs_kit",
+      "branch": "main",
+      "tracked": 1,
+      "untracked": 14,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/6078",
+      "dirty_children": []
+    },
+    {
+      "id": 4,
+      "parent": null,
+      "relative": "hallucinate_app",
+      "branch": "main",
+      "tracked": 4,
+      "untracked": 0,
+      "XY": {
+        ".M": 4
+      },
+      "origin": "github.com/endomorphosis/hallucinate_app",
+      "ahead/behind_cached_main": "0/31",
+      "dirty_children": [
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "swissknife"
+      ]
+    },
+    {
+      "id": 5,
+      "parent": null,
+      "relative": "JevOps",
+      "branch": "main",
+      "tracked": 3,
+      "untracked": 8,
+      "XY": {
+        ".M": 3
+      },
+      "origin": "github.com/endomorphosis/JevOps",
+      "ahead/behind_cached_main": "0/1",
+      "dirty_children": []
+    },
+    {
+      "id": 7,
+      "parent": 1,
+      "relative": ".tools/ipfs_kit_py",
+      "branch": "main",
+      "tracked": 6,
+      "untracked": 0,
+      "XY": {
+        ".M": 6
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": [
+        "docs/filesystem_spec",
+        "docs/ipfs-docs",
+        "docs/ipfsspec",
+        "docs/lighthouse-python-sdk",
+        "docs/mcp-python-sdk",
+        "ipfs_accelerate_py"
+      ]
+    },
+    {
+      "id": 8,
+      "parent": 1,
+      "relative": "ipfs_accelerate_py",
+      "branch": "main",
+      "tracked": 1,
+      "untracked": 0,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/9",
+      "dirty_children": []
+    },
+    {
+      "id": 16,
+      "parent": 4,
+      "relative": "swissknife",
+      "branch": "main",
+      "tracked": 103,
+      "untracked": 0,
+      "XY": {
+        ".M": 103
+      },
+      "origin": "github.com/endomorphosis/swissknife",
+      "ahead/behind_cached_main": "0/71",
+      "dirty_children": []
+    },
+    {
+      "id": 17,
+      "parent": 4,
+      "relative": "ipfs_datasets_py",
+      "branch": "main",
+      "tracked": 6839,
+      "untracked": 0,
+      "XY": {
+        ".M": 6839
+      },
+      "origin": "github.com/endomorphosis/ipfs_datasets_py",
+      "ahead/behind_cached_main": "0/2813",
+      "dirty_children": [
+        ".tools/ipfs_kit_py",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py/logic/CEC/DCEC_Library",
+        "ipfs_datasets_py/logic/CEC/Talos",
+        "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+        "ipfs_datasets_py/multimedia/omni_converter_mk2",
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+        "ipfs_kit_py"
+      ]
+    },
+    {
+      "id": 18,
+      "parent": 4,
+      "relative": "ipfs_accelerate_py",
+      "branch": "(detached)",
+      "tracked": 6149,
+      "untracked": 0,
+      "XY": {
+        ".M": 6149
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/7636",
+      "dirty_children": [
+        "docs/fastmcp",
+        "docs/mcp-python-sdk",
+        "ipfs_accelerate_py/mcplusplus",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "test/huggingface_transformers"
+      ]
+    },
+    {
+      "id": 19,
+      "parent": 4,
+      "relative": "ipfs_kit_py",
+      "branch": "main",
+      "tracked": 4353,
+      "untracked": 0,
+      "XY": {
+        ".M": 4353
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/380",
+      "dirty_children": []
+    },
+    {
+      "id": 20,
+      "parent": 7,
+      "relative": "docs/ipfs-docs",
+      "branch": "(detached)",
+      "tracked": 3,
+      "untracked": 0,
+      "XY": {
+        ".M": 3
+      },
+      "origin": "github.com/ipfs/ipfs-docs",
+      "ahead/behind_cached_main": "0/20",
+      "dirty_children": []
+    },
+    {
+      "id": 22,
+      "parent": 7,
+      "relative": "docs/ipfsspec",
+      "branch": "(detached)",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        ".M": 9
+      },
+      "origin": "github.com/fsspec/ipfsspec",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 24,
+      "parent": 7,
+      "relative": "docs/lighthouse-python-sdk",
+      "branch": "(detached)",
+      "tracked": 29,
+      "untracked": 0,
+      "XY": {
+        ".M": 29
+      },
+      "origin": "github.com/lighthouse-web3/lighthouse-python-sdk",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 25,
+      "parent": 7,
+      "relative": "docs/filesystem_spec",
+      "branch": "(detached)",
+      "tracked": 1,
+      "untracked": 0,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/fsspec/filesystem_spec",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 29,
+      "parent": 7,
+      "relative": "docs/mcp-python-sdk",
+      "branch": "(detached)",
+      "tracked": 36,
+      "untracked": 0,
+      "XY": {
+        ".M": 36
+      },
+      "origin": "github.com/modelcontextprotocol/python-sdk",
+      "ahead/behind_cached_main": "0/127",
+      "dirty_children": []
+    },
+    {
+      "id": 30,
+      "parent": 7,
+      "relative": "ipfs_accelerate_py",
+      "branch": "main",
+      "tracked": 3,
+      "untracked": 26,
+      "XY": {
+        ".D": 3
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/7543",
+      "dirty_children": []
+    },
+    {
+      "id": 31,
+      "parent": 17,
+      "relative": "ipfs_kit_py",
+      "branch": "main",
+      "tracked": 4353,
+      "untracked": 0,
+      "XY": {
+        ".M": 4353
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/380",
+      "dirty_children": []
+    },
+    {
+      "id": 32,
+      "parent": 17,
+      "relative": ".tools/ipfs_kit_py",
+      "branch": "main",
+      "tracked": 4359,
+      "untracked": 0,
+      "XY": {
+        ".M": 4359
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/380",
+      "dirty_children": [
+        "docs/filesystem_spec",
+        "docs/ipfs-docs",
+        "docs/ipfsspec",
+        "docs/lighthouse-python-sdk",
+        "docs/mcp-python-sdk",
+        "ipfs_accelerate_py"
+      ]
+    },
+    {
+      "id": 33,
+      "parent": 17,
+      "relative": "ipfs_accelerate_py",
+      "branch": "main",
+      "tracked": 5928,
+      "untracked": 0,
+      "XY": {
+        ".M": 5928
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/8507",
+      "dirty_children": []
+    },
+    {
+      "id": 34,
+      "parent": 17,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "branch": "(detached)",
+      "tracked": 1,
+      "untracked": 0,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/endomorphosis/DCEC_Library",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 35,
+      "parent": 17,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos",
+      "branch": "(detached)",
+      "tracked": 1,
+      "untracked": 0,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/endomorphosis/Talos",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 38,
+      "parent": 17,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "branch": "main",
+      "tracked": 89,
+      "untracked": 0,
+      "XY": {
+        ".M": 89
+      },
+      "origin": "github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 39,
+      "parent": 17,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "branch": "main",
+      "tracked": 386,
+      "untracked": 0,
+      "XY": {
+        ".M": 386
+      },
+      "origin": "github.com/endomorphosis/omni_converter_mk2",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 40,
+      "parent": 17,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "branch": "main",
+      "tracked": 99,
+      "untracked": 0,
+      "XY": {
+        ".M": 99
+      },
+      "origin": "github.com/endomorphosis/common_crawl_search_engine",
+      "ahead/behind_cached_main": "0/2",
+      "dirty_children": []
+    },
+    {
+      "id": 41,
+      "parent": 18,
+      "relative": "test/huggingface_transformers",
+      "branch": "main",
+      "tracked": 556,
+      "untracked": 0,
+      "XY": {
+        ".M": 556
+      },
+      "origin": "github.com/huggingface/transformers",
+      "ahead/behind_cached_main": "0/683",
+      "dirty_children": []
+    },
+    {
+      "id": 44,
+      "parent": 18,
+      "relative": "ipfs_kit_py",
+      "branch": "main",
+      "tracked": 4353,
+      "untracked": 0,
+      "XY": {
+        ".M": 4353
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/380",
+      "dirty_children": []
+    },
+    {
+      "id": 45,
+      "parent": 18,
+      "relative": "ipfs_datasets_py",
+      "branch": "(detached)",
+      "tracked": 7292,
+      "untracked": 0,
+      "XY": {
+        ".M": 7292
+      },
+      "origin": "github.com/endomorphosis/ipfs_datasets_py",
+      "ahead/behind_cached_main": "0/2545",
+      "dirty_children": [
+        ".tools/ipfs_kit_py",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py/logic/CEC/DCEC_Library",
+        "ipfs_datasets_py/logic/CEC/Eng-DCEC",
+        "ipfs_datasets_py/logic/CEC/ShadowProver",
+        "ipfs_datasets_py/logic/CEC/Talos",
+        "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+        "ipfs_datasets_py/multimedia/omni_converter_mk2",
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+        "ipfs_kit_py"
+      ]
+    },
+    {
+      "id": 47,
+      "parent": 18,
+      "relative": "docs/fastmcp",
+      "branch": "main",
+      "tracked": 18,
+      "untracked": 0,
+      "XY": {
+        ".M": 18
+      },
+      "origin": "github.com/jlowin/fastmcp",
+      "ahead/behind_cached_main": "0/227",
+      "dirty_children": []
+    },
+    {
+      "id": 48,
+      "parent": 18,
+      "relative": "docs/mcp-python-sdk",
+      "branch": "main",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        ".M": 9
+      },
+      "origin": "github.com/jlowin/mcp-python-sdk",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 50,
+      "parent": 18,
+      "relative": "ipfs_accelerate_py/mcplusplus",
+      "branch": "main",
+      "tracked": 47,
+      "untracked": 0,
+      "XY": {
+        ".M": 47
+      },
+      "origin": "github.com/endomorphosis/Mcp-Plus-Plus",
+      "ahead/behind_cached_main": "0/137",
+      "dirty_children": []
+    },
+    {
+      "id": 51,
+      "parent": 32,
+      "relative": "docs/ipfs-docs",
+      "branch": "main",
+      "tracked": 3,
+      "untracked": 0,
+      "XY": {
+        ".M": 3
+      },
+      "origin": "github.com/ipfs/ipfs-docs",
+      "ahead/behind_cached_main": "0/17",
+      "dirty_children": []
+    },
+    {
+      "id": 53,
+      "parent": 32,
+      "relative": "docs/ipfsspec",
+      "branch": "main",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        ".M": 9
+      },
+      "origin": "github.com/fsspec/ipfsspec",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 55,
+      "parent": 32,
+      "relative": "docs/lighthouse-python-sdk",
+      "branch": "main",
+      "tracked": 29,
+      "untracked": 0,
+      "XY": {
+        ".M": 29
+      },
+      "origin": "github.com/lighthouse-web3/lighthouse-python-sdk",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 56,
+      "parent": 32,
+      "relative": "docs/filesystem_spec",
+      "branch": "(detached)",
+      "tracked": 1,
+      "untracked": 0,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/fsspec/filesystem_spec",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 60,
+      "parent": 32,
+      "relative": "docs/mcp-python-sdk",
+      "branch": "main",
+      "tracked": 49,
+      "untracked": 0,
+      "XY": {
+        ".M": 49
+      },
+      "origin": "github.com/modelcontextprotocol/python-sdk",
+      "ahead/behind_cached_main": "0/69",
+      "dirty_children": []
+    },
+    {
+      "id": 61,
+      "parent": 32,
+      "relative": "ipfs_accelerate_py",
+      "branch": "main",
+      "tracked": 5932,
+      "untracked": 0,
+      "XY": {
+        ".M": 5932
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/8507",
+      "dirty_children": [
+        "docs/fastmcp",
+        "docs/mcp-python-sdk",
+        "ipfs_accelerate_py/mcplusplus",
+        "ipfs_datasets_py"
+      ]
+    },
+    {
+      "id": 62,
+      "parent": 45,
+      "relative": "ipfs_kit_py",
+      "branch": "(detached)",
+      "tracked": 4353,
+      "untracked": 0,
+      "XY": {
+        ".M": 4353
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/710",
+      "dirty_children": []
+    },
+    {
+      "id": 63,
+      "parent": 45,
+      "relative": ".tools/ipfs_kit_py",
+      "branch": "(detached)",
+      "tracked": 4359,
+      "untracked": 0,
+      "XY": {
+        ".M": 4359
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/710",
+      "dirty_children": [
+        "docs/filesystem_spec",
+        "docs/ipfs-docs",
+        "docs/ipfsspec",
+        "docs/lighthouse-python-sdk",
+        "docs/mcp-python-sdk",
+        "ipfs_accelerate_py"
+      ]
+    },
+    {
+      "id": 64,
+      "parent": 45,
+      "relative": "ipfs_accelerate_py",
+      "branch": "main",
+      "tracked": 5928,
+      "untracked": 0,
+      "XY": {
+        ".M": 5928
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/8507",
+      "dirty_children": []
+    },
+    {
+      "id": 65,
+      "parent": 45,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "branch": "master",
+      "tracked": 1,
+      "untracked": 0,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/endomorphosis/DCEC_Library",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 66,
+      "parent": 45,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos",
+      "branch": "main",
+      "tracked": 1,
+      "untracked": 0,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/endomorphosis/Talos",
+      "ahead/behind_cached_main": "1/0",
+      "dirty_children": []
+    },
+    {
+      "id": 69,
+      "parent": 45,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "branch": "main",
+      "tracked": 89,
+      "untracked": 0,
+      "XY": {
+        ".M": 89
+      },
+      "origin": "github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 70,
+      "parent": 45,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "branch": "main",
+      "tracked": 386,
+      "untracked": 0,
+      "XY": {
+        ".M": 386
+      },
+      "origin": "github.com/endomorphosis/omni_converter_mk2",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 71,
+      "parent": 45,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "branch": "main",
+      "tracked": 99,
+      "untracked": 0,
+      "XY": {
+        ".M": 99
+      },
+      "origin": "github.com/endomorphosis/common_crawl_search_engine",
+      "ahead/behind_cached_main": "0/2",
+      "dirty_children": []
+    },
+    {
+      "id": 72,
+      "parent": 61,
+      "relative": "ipfs_datasets_py",
+      "branch": "main",
+      "tracked": 6722,
+      "untracked": 0,
+      "XY": {
+        ".M": 6722
+      },
+      "origin": "github.com/endomorphosis/ipfs_datasets_py",
+      "ahead/behind_cached_main": "0/3018",
+      "dirty_children": []
+    },
+    {
+      "id": 73,
+      "parent": 61,
+      "relative": "docs/fastmcp",
+      "branch": "main",
+      "tracked": 18,
+      "untracked": 0,
+      "XY": {
+        ".M": 18
+      },
+      "origin": "github.com/jlowin/fastmcp",
+      "ahead/behind_cached_main": "0/227",
+      "dirty_children": []
+    },
+    {
+      "id": 74,
+      "parent": 61,
+      "relative": "docs/mcp-python-sdk",
+      "branch": "main",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        ".M": 9
+      },
+      "origin": "github.com/jlowin/mcp-python-sdk",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 75,
+      "parent": 61,
+      "relative": "ipfs_accelerate_py/mcplusplus",
+      "branch": "main",
+      "tracked": 47,
+      "untracked": 0,
+      "XY": {
+        ".M": 47
+      },
+      "origin": "github.com/endomorphosis/Mcp-Plus-Plus",
+      "ahead/behind_cached_main": "0/137",
+      "dirty_children": []
+    },
+    {
+      "id": 76,
+      "parent": 63,
+      "relative": "docs/ipfs-docs",
+      "branch": "(detached)",
+      "tracked": 3,
+      "untracked": 0,
+      "XY": {
+        ".M": 3
+      },
+      "origin": "github.com/ipfs/ipfs-docs",
+      "ahead/behind_cached_main": "0/20",
+      "dirty_children": []
+    },
+    {
+      "id": 78,
+      "parent": 63,
+      "relative": "docs/ipfsspec",
+      "branch": "main",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        ".M": 9
+      },
+      "origin": "github.com/fsspec/ipfsspec",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 80,
+      "parent": 63,
+      "relative": "docs/lighthouse-python-sdk",
+      "branch": "main",
+      "tracked": 29,
+      "untracked": 0,
+      "XY": {
+        ".M": 29
+      },
+      "origin": "github.com/lighthouse-web3/lighthouse-python-sdk",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 81,
+      "parent": 63,
+      "relative": "docs/filesystem_spec",
+      "branch": "master",
+      "tracked": 1,
+      "untracked": 0,
+      "XY": {
+        ".M": 1
+      },
+      "origin": "github.com/fsspec/filesystem_spec",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 85,
+      "parent": 63,
+      "relative": "docs/mcp-python-sdk",
+      "branch": "(detached)",
+      "tracked": 49,
+      "untracked": 0,
+      "XY": {
+        ".M": 49
+      },
+      "origin": "github.com/modelcontextprotocol/python-sdk",
+      "ahead/behind_cached_main": "0/91",
+      "dirty_children": []
+    },
+    {
+      "id": 86,
+      "parent": 63,
+      "relative": "ipfs_accelerate_py",
+      "branch": "(detached)",
+      "tracked": 5503,
+      "untracked": 0,
+      "XY": {
+        ".M": 5503
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/10764",
+      "dirty_children": [
+        "docs/fastmcp",
+        "docs/mcp-python-sdk",
+        "ipfs_accelerate_py/mcplusplus",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "test/doc-builder",
+        "test/huggingface_doc_builder",
+        "test/huggingface_transformers"
+      ]
+    },
+    {
+      "id": 88,
+      "parent": 86,
+      "relative": "test/huggingface_transformers",
+      "branch": "main",
+      "tracked": 556,
+      "untracked": 0,
+      "XY": {
+        ".M": 556
+      },
+      "origin": "github.com/huggingface/transformers",
+      "ahead/behind_cached_main": "0/683",
+      "dirty_children": []
+    },
+    {
+      "id": 91,
+      "parent": 86,
+      "relative": "ipfs_kit_py",
+      "branch": "main",
+      "tracked": 4353,
+      "untracked": 0,
+      "XY": {
+        ".M": 4353
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/380",
+      "dirty_children": []
+    },
+    {
+      "id": 92,
+      "parent": 86,
+      "relative": "ipfs_datasets_py",
+      "branch": "(detached)",
+      "tracked": 6010,
+      "untracked": 0,
+      "XY": {
+        ".M": 6010
+      },
+      "origin": "github.com/endomorphosis/ipfs_datasets_py",
+      "ahead/behind_cached_main": "0/4598",
+      "dirty_children": [
+        ".tools/ipfs_kit_py",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py/logic/CEC/DCEC_Library",
+        "ipfs_datasets_py/logic/CEC/Eng-DCEC",
+        "ipfs_datasets_py/logic/CEC/ShadowProver",
+        "ipfs_datasets_py/logic/CEC/Talos",
+        "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+        "ipfs_datasets_py/multimedia/omni_converter_mk2",
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+        "ipfs_kit_py"
+      ]
+    },
+    {
+      "id": 94,
+      "parent": 86,
+      "relative": "docs/fastmcp",
+      "branch": "(detached)",
+      "tracked": 13,
+      "untracked": 0,
+      "XY": {
+        ".M": 13
+      },
+      "origin": "github.com/jlowin/fastmcp",
+      "ahead/behind_cached_main": "0/209",
+      "dirty_children": []
+    },
+    {
+      "id": 95,
+      "parent": 86,
+      "relative": "docs/mcp-python-sdk",
+      "branch": "main",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        ".M": 9
+      },
+      "origin": "github.com/jlowin/mcp-python-sdk",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 97,
+      "parent": 86,
+      "relative": "ipfs_accelerate_py/mcplusplus",
+      "branch": "(detached)",
+      "tracked": 38,
+      "untracked": 0,
+      "XY": {
+        ".M": 38
+      },
+      "origin": "github.com/endomorphosis/Mcp-Plus-Plus",
+      "ahead/behind_cached_main": "0/9",
+      "dirty_children": []
+    },
+    {
+      "id": 98,
+      "parent": 92,
+      "relative": "ipfs_kit_py",
+      "branch": "main",
+      "tracked": 4353,
+      "untracked": 0,
+      "XY": {
+        ".M": 4353
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 99,
+      "parent": 92,
+      "relative": ".tools/ipfs_kit_py",
+      "branch": "main",
+      "tracked": 4353,
+      "untracked": 0,
+      "XY": {
+        ".M": 4353
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/3",
+      "dirty_children": []
+    },
+    {
+      "id": 100,
+      "parent": 92,
+      "relative": "ipfs_accelerate_py",
+      "branch": "(detached)",
+      "tracked": 5502,
+      "untracked": 0,
+      "XY": {
+        ".M": 5502
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/3223",
+      "dirty_children": [
+        "docs/fastmcp",
+        "docs/mcp-python-sdk",
+        "ipfs_accelerate_py/mcplusplus",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "test/doc-builder",
+        "test/huggingface_doc_builder",
+        "test/huggingface_transformers"
+      ]
+    },
+    {
+      "id": 101,
+      "parent": 92,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "branch": "master",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        "D.": 9
+      },
+      "origin": "github.com/endomorphosis/DCEC_Library",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 102,
+      "parent": 92,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos",
+      "branch": "master",
+      "tracked": 184,
+      "untracked": 0,
+      "XY": {
+        "D.": 184
+      },
+      "origin": "github.com/endomorphosis/Talos",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 103,
+      "parent": 92,
+      "relative": "ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "branch": "master",
+      "tracked": 45,
+      "untracked": 0,
+      "XY": {
+        "D.": 45
+      },
+      "origin": "github.com/endomorphosis/Eng-DCEC",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 104,
+      "parent": 92,
+      "relative": "ipfs_datasets_py/logic/CEC/ShadowProver",
+      "branch": "master",
+      "tracked": 318,
+      "untracked": 0,
+      "XY": {
+        "D.": 318
+      },
+      "origin": "github.com/endomorphosis/ShadowProver",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 105,
+      "parent": 92,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "branch": "main",
+      "tracked": 89,
+      "untracked": 0,
+      "XY": {
+        ".M": 89
+      },
+      "origin": "github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 106,
+      "parent": 92,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "branch": "main",
+      "tracked": 386,
+      "untracked": 0,
+      "XY": {
+        ".M": 386
+      },
+      "origin": "github.com/endomorphosis/omni_converter_mk2",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 107,
+      "parent": 92,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "branch": "main",
+      "tracked": 99,
+      "untracked": 0,
+      "XY": {
+        ".M": 99
+      },
+      "origin": "github.com/endomorphosis/common_crawl_search_engine",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 108,
+      "parent": 100,
+      "relative": "test/huggingface_transformers",
+      "branch": "main",
+      "tracked": 554,
+      "untracked": 0,
+      "XY": {
+        ".M": 554
+      },
+      "origin": "github.com/huggingface/transformers",
+      "ahead/behind_cached_main": "1/166",
+      "dirty_children": []
+    },
+    {
+      "id": 109,
+      "parent": 100,
+      "relative": "test/doc-builder",
+      "branch": "main",
+      "tracked": 242,
+      "untracked": 0,
+      "XY": {
+        "D.": 242
+      },
+      "origin": "github.com/huggingface/doc-builder",
+      "ahead/behind_cached_main": "0/1",
+      "dirty_children": []
+    },
+    {
+      "id": 111,
+      "parent": 100,
+      "relative": "ipfs_kit_py",
+      "branch": "main",
+      "tracked": 4294,
+      "untracked": 0,
+      "XY": {
+        ".M": 4294
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "1/360",
+      "dirty_children": []
+    },
+    {
+      "id": 112,
+      "parent": 100,
+      "relative": "ipfs_datasets_py",
+      "branch": "main",
+      "tracked": 5947,
+      "untracked": 0,
+      "XY": {
+        ".M": 5947
+      },
+      "origin": "github.com/endomorphosis/ipfs_datasets_py",
+      "ahead/behind_cached_main": "1/2212",
+      "dirty_children": [
+        ".tools/ipfs_kit_py",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py/logic/CEC/DCEC_Library",
+        "ipfs_datasets_py/logic/CEC/Eng-DCEC",
+        "ipfs_datasets_py/logic/CEC/ShadowProver",
+        "ipfs_datasets_py/logic/CEC/Talos",
+        "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+        "ipfs_datasets_py/multimedia/omni_converter_mk2",
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+        "ipfs_kit_py"
+      ]
+    },
+    {
+      "id": 114,
+      "parent": 100,
+      "relative": "docs/fastmcp",
+      "branch": "main",
+      "tracked": 13,
+      "untracked": 0,
+      "XY": {
+        ".M": 13
+      },
+      "origin": "github.com/jlowin/fastmcp",
+      "ahead/behind_cached_main": "0/206",
+      "dirty_children": []
+    },
+    {
+      "id": 115,
+      "parent": 100,
+      "relative": "docs/mcp-python-sdk",
+      "branch": "(detached)",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        ".M": 9
+      },
+      "origin": "github.com/jlowin/mcp-python-sdk",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 116,
+      "parent": 100,
+      "relative": "test/huggingface_doc_builder",
+      "branch": "main",
+      "tracked": 242,
+      "untracked": 0,
+      "XY": {
+        "D.": 242
+      },
+      "origin": "github.com/huggingface/doc-builder",
+      "ahead/behind_cached_main": "0/1",
+      "dirty_children": []
+    },
+    {
+      "id": 117,
+      "parent": 100,
+      "relative": "ipfs_accelerate_py/mcplusplus",
+      "branch": "(detached)",
+      "tracked": 38,
+      "untracked": 0,
+      "XY": {
+        ".M": 38
+      },
+      "origin": "github.com/endomorphosis/Mcp-Plus-Plus",
+      "ahead/behind_cached_main": "0/11",
+      "dirty_children": []
+    },
+    {
+      "id": 118,
+      "parent": 112,
+      "relative": "ipfs_kit_py",
+      "branch": "(detached)",
+      "tracked": 4294,
+      "untracked": 0,
+      "XY": {
+        ".M": 4294
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/360",
+      "dirty_children": []
+    },
+    {
+      "id": 119,
+      "parent": 112,
+      "relative": ".tools/ipfs_kit_py",
+      "branch": "(detached)",
+      "tracked": 4294,
+      "untracked": 0,
+      "XY": {
+        ".M": 4294
+      },
+      "origin": "github.com/endomorphosis/ipfs_kit_py",
+      "ahead/behind_cached_main": "0/355",
+      "dirty_children": []
+    },
+    {
+      "id": 120,
+      "parent": 112,
+      "relative": "ipfs_accelerate_py",
+      "branch": "(detached)",
+      "tracked": 5494,
+      "untracked": 0,
+      "XY": {
+        ".M": 5494
+      },
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "ahead/behind_cached_main": "0/3231",
+      "dirty_children": []
+    },
+    {
+      "id": 121,
+      "parent": 112,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "branch": "master",
+      "tracked": 9,
+      "untracked": 0,
+      "XY": {
+        "D.": 9
+      },
+      "origin": "github.com/endomorphosis/DCEC_Library",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 122,
+      "parent": 112,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos",
+      "branch": "master",
+      "tracked": 184,
+      "untracked": 0,
+      "XY": {
+        "D.": 184
+      },
+      "origin": "github.com/endomorphosis/Talos",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 123,
+      "parent": 112,
+      "relative": "ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "branch": "master",
+      "tracked": 45,
+      "untracked": 0,
+      "XY": {
+        "D.": 45
+      },
+      "origin": "github.com/endomorphosis/Eng-DCEC",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 124,
+      "parent": 112,
+      "relative": "ipfs_datasets_py/logic/CEC/ShadowProver",
+      "branch": "master",
+      "tracked": 318,
+      "untracked": 0,
+      "XY": {
+        "D.": 318
+      },
+      "origin": "github.com/endomorphosis/ShadowProver",
+      "ahead/behind_cached_main": null,
+      "dirty_children": []
+    },
+    {
+      "id": 125,
+      "parent": 112,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "branch": "main",
+      "tracked": 191,
+      "untracked": 0,
+      "XY": {
+        "D.": 191
+      },
+      "origin": "github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 126,
+      "parent": 112,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "branch": "main",
+      "tracked": 555,
+      "untracked": 0,
+      "XY": {
+        "D.": 555
+      },
+      "origin": "github.com/endomorphosis/omni_converter_mk2",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    },
+    {
+      "id": 127,
+      "parent": 112,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "branch": "main",
+      "tracked": 145,
+      "untracked": 0,
+      "XY": {
+        "D.": 145
+      },
+      "origin": "github.com/endomorphosis/common_crawl_search_engine",
+      "ahead/behind_cached_main": "0/0",
+      "dirty_children": []
+    }
+  ],
+  "parents": {
+    "0": {
+      "parent": null,
+      "relative": "external/ipfs_accelerate"
+    },
+    "1": {
+      "parent": null,
+      "relative": "external/ipfs_datasets"
+    },
+    "2": {
+      "parent": null,
+      "relative": "external/ipfs_kit"
+    },
+    "3": {
+      "parent": null,
+      "relative": "Mcp-Plus-Plus"
+    },
+    "4": {
+      "parent": null,
+      "relative": "hallucinate_app"
+    },
+    "5": {
+      "parent": null,
+      "relative": "JevOps"
+    },
+    "6": {
+      "parent": 1,
+      "relative": "ipfs_kit_py"
+    },
+    "7": {
+      "parent": 1,
+      "relative": ".tools/ipfs_kit_py"
+    },
+    "8": {
+      "parent": 1,
+      "relative": "ipfs_accelerate_py"
+    },
+    "9": {
+      "parent": 1,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library"
+    },
+    "10": {
+      "parent": 1,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos"
+    },
+    "11": {
+      "parent": 1,
+      "relative": "ipfs_datasets_py/logic/CEC/Eng-DCEC"
+    },
+    "12": {
+      "parent": 1,
+      "relative": "ipfs_datasets_py/logic/CEC/ShadowProver"
+    },
+    "13": {
+      "parent": 1,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+    },
+    "14": {
+      "parent": 1,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2"
+    },
+    "15": {
+      "parent": 1,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+    },
+    "16": {
+      "parent": 4,
+      "relative": "swissknife"
+    },
+    "17": {
+      "parent": 4,
+      "relative": "ipfs_datasets_py"
+    },
+    "18": {
+      "parent": 4,
+      "relative": "ipfs_accelerate_py"
+    },
+    "19": {
+      "parent": 4,
+      "relative": "ipfs_kit_py"
+    },
+    "20": {
+      "parent": 7,
+      "relative": "docs/ipfs-docs"
+    },
+    "21": {
+      "parent": 7,
+      "relative": "docs/libp2p-universal-connectivity"
+    },
+    "22": {
+      "parent": 7,
+      "relative": "docs/ipfsspec"
+    },
+    "23": {
+      "parent": 7,
+      "relative": "docs/lassie"
+    },
+    "24": {
+      "parent": 7,
+      "relative": "docs/lighthouse-python-sdk"
+    },
+    "25": {
+      "parent": 7,
+      "relative": "docs/filesystem_spec"
+    },
+    "26": {
+      "parent": 7,
+      "relative": "docs/ipfs_cluster"
+    },
+    "27": {
+      "parent": 7,
+      "relative": "docs/libp2p_docs"
+    },
+    "28": {
+      "parent": 7,
+      "relative": "docs/storacha_specs"
+    },
+    "29": {
+      "parent": 7,
+      "relative": "docs/mcp-python-sdk"
+    },
+    "30": {
+      "parent": 7,
+      "relative": "ipfs_accelerate_py"
+    },
+    "31": {
+      "parent": 17,
+      "relative": "ipfs_kit_py"
+    },
+    "32": {
+      "parent": 17,
+      "relative": ".tools/ipfs_kit_py"
+    },
+    "33": {
+      "parent": 17,
+      "relative": "ipfs_accelerate_py"
+    },
+    "34": {
+      "parent": 17,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library"
+    },
+    "35": {
+      "parent": 17,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos"
+    },
+    "36": {
+      "parent": 17,
+      "relative": "ipfs_datasets_py/logic/CEC/Eng-DCEC"
+    },
+    "37": {
+      "parent": 17,
+      "relative": "ipfs_datasets_py/logic/CEC/ShadowProver"
+    },
+    "38": {
+      "parent": 17,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+    },
+    "39": {
+      "parent": 17,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2"
+    },
+    "40": {
+      "parent": 17,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+    },
+    "41": {
+      "parent": 18,
+      "relative": "test/huggingface_transformers"
+    },
+    "42": {
+      "parent": 18,
+      "relative": "test/doc-builder"
+    },
+    "43": {
+      "parent": 18,
+      "relative": "ipfs_transformers_py"
+    },
+    "44": {
+      "parent": 18,
+      "relative": "ipfs_kit_py"
+    },
+    "45": {
+      "parent": 18,
+      "relative": "ipfs_datasets_py"
+    },
+    "46": {
+      "parent": 18,
+      "relative": "ipfs_model_manager_py"
+    },
+    "47": {
+      "parent": 18,
+      "relative": "docs/fastmcp"
+    },
+    "48": {
+      "parent": 18,
+      "relative": "docs/mcp-python-sdk"
+    },
+    "49": {
+      "parent": 18,
+      "relative": "test/huggingface_doc_builder"
+    },
+    "50": {
+      "parent": 18,
+      "relative": "ipfs_accelerate_py/mcplusplus"
+    },
+    "51": {
+      "parent": 32,
+      "relative": "docs/ipfs-docs"
+    },
+    "52": {
+      "parent": 32,
+      "relative": "docs/libp2p-universal-connectivity"
+    },
+    "53": {
+      "parent": 32,
+      "relative": "docs/ipfsspec"
+    },
+    "54": {
+      "parent": 32,
+      "relative": "docs/lassie"
+    },
+    "55": {
+      "parent": 32,
+      "relative": "docs/lighthouse-python-sdk"
+    },
+    "56": {
+      "parent": 32,
+      "relative": "docs/filesystem_spec"
+    },
+    "57": {
+      "parent": 32,
+      "relative": "docs/ipfs_cluster"
+    },
+    "58": {
+      "parent": 32,
+      "relative": "docs/libp2p_docs"
+    },
+    "59": {
+      "parent": 32,
+      "relative": "docs/storacha_specs"
+    },
+    "60": {
+      "parent": 32,
+      "relative": "docs/mcp-python-sdk"
+    },
+    "61": {
+      "parent": 32,
+      "relative": "ipfs_accelerate_py"
+    },
+    "62": {
+      "parent": 45,
+      "relative": "ipfs_kit_py"
+    },
+    "63": {
+      "parent": 45,
+      "relative": ".tools/ipfs_kit_py"
+    },
+    "64": {
+      "parent": 45,
+      "relative": "ipfs_accelerate_py"
+    },
+    "65": {
+      "parent": 45,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library"
+    },
+    "66": {
+      "parent": 45,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos"
+    },
+    "67": {
+      "parent": 45,
+      "relative": "ipfs_datasets_py/logic/CEC/Eng-DCEC"
+    },
+    "68": {
+      "parent": 45,
+      "relative": "ipfs_datasets_py/logic/CEC/ShadowProver"
+    },
+    "69": {
+      "parent": 45,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+    },
+    "70": {
+      "parent": 45,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2"
+    },
+    "71": {
+      "parent": 45,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+    },
+    "72": {
+      "parent": 61,
+      "relative": "ipfs_datasets_py"
+    },
+    "73": {
+      "parent": 61,
+      "relative": "docs/fastmcp"
+    },
+    "74": {
+      "parent": 61,
+      "relative": "docs/mcp-python-sdk"
+    },
+    "75": {
+      "parent": 61,
+      "relative": "ipfs_accelerate_py/mcplusplus"
+    },
+    "76": {
+      "parent": 63,
+      "relative": "docs/ipfs-docs"
+    },
+    "77": {
+      "parent": 63,
+      "relative": "docs/libp2p-universal-connectivity"
+    },
+    "78": {
+      "parent": 63,
+      "relative": "docs/ipfsspec"
+    },
+    "79": {
+      "parent": 63,
+      "relative": "docs/lassie"
+    },
+    "80": {
+      "parent": 63,
+      "relative": "docs/lighthouse-python-sdk"
+    },
+    "81": {
+      "parent": 63,
+      "relative": "docs/filesystem_spec"
+    },
+    "82": {
+      "parent": 63,
+      "relative": "docs/ipfs_cluster"
+    },
+    "83": {
+      "parent": 63,
+      "relative": "docs/libp2p_docs"
+    },
+    "84": {
+      "parent": 63,
+      "relative": "docs/storacha_specs"
+    },
+    "85": {
+      "parent": 63,
+      "relative": "docs/mcp-python-sdk"
+    },
+    "86": {
+      "parent": 63,
+      "relative": "ipfs_accelerate_py"
+    },
+    "87": {
+      "parent": 68,
+      "relative": "snark"
+    },
+    "88": {
+      "parent": 86,
+      "relative": "test/huggingface_transformers"
+    },
+    "89": {
+      "parent": 86,
+      "relative": "test/doc-builder"
+    },
+    "90": {
+      "parent": 86,
+      "relative": "ipfs_transformers_py"
+    },
+    "91": {
+      "parent": 86,
+      "relative": "ipfs_kit_py"
+    },
+    "92": {
+      "parent": 86,
+      "relative": "ipfs_datasets_py"
+    },
+    "93": {
+      "parent": 86,
+      "relative": "ipfs_model_manager_py"
+    },
+    "94": {
+      "parent": 86,
+      "relative": "docs/fastmcp"
+    },
+    "95": {
+      "parent": 86,
+      "relative": "docs/mcp-python-sdk"
+    },
+    "96": {
+      "parent": 86,
+      "relative": "test/huggingface_doc_builder"
+    },
+    "97": {
+      "parent": 86,
+      "relative": "ipfs_accelerate_py/mcplusplus"
+    },
+    "98": {
+      "parent": 92,
+      "relative": "ipfs_kit_py"
+    },
+    "99": {
+      "parent": 92,
+      "relative": ".tools/ipfs_kit_py"
+    },
+    "100": {
+      "parent": 92,
+      "relative": "ipfs_accelerate_py"
+    },
+    "101": {
+      "parent": 92,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library"
+    },
+    "102": {
+      "parent": 92,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos"
+    },
+    "103": {
+      "parent": 92,
+      "relative": "ipfs_datasets_py/logic/CEC/Eng-DCEC"
+    },
+    "104": {
+      "parent": 92,
+      "relative": "ipfs_datasets_py/logic/CEC/ShadowProver"
+    },
+    "105": {
+      "parent": 92,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+    },
+    "106": {
+      "parent": 92,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2"
+    },
+    "107": {
+      "parent": 92,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+    },
+    "108": {
+      "parent": 100,
+      "relative": "test/huggingface_transformers"
+    },
+    "109": {
+      "parent": 100,
+      "relative": "test/doc-builder"
+    },
+    "110": {
+      "parent": 100,
+      "relative": "ipfs_transformers_py"
+    },
+    "111": {
+      "parent": 100,
+      "relative": "ipfs_kit_py"
+    },
+    "112": {
+      "parent": 100,
+      "relative": "ipfs_datasets_py"
+    },
+    "113": {
+      "parent": 100,
+      "relative": "ipfs_model_manager_py"
+    },
+    "114": {
+      "parent": 100,
+      "relative": "docs/fastmcp"
+    },
+    "115": {
+      "parent": 100,
+      "relative": "docs/mcp-python-sdk"
+    },
+    "116": {
+      "parent": 100,
+      "relative": "test/huggingface_doc_builder"
+    },
+    "117": {
+      "parent": 100,
+      "relative": "ipfs_accelerate_py/mcplusplus"
+    },
+    "118": {
+      "parent": 112,
+      "relative": "ipfs_kit_py"
+    },
+    "119": {
+      "parent": 112,
+      "relative": ".tools/ipfs_kit_py"
+    },
+    "120": {
+      "parent": 112,
+      "relative": "ipfs_accelerate_py"
+    },
+    "121": {
+      "parent": 112,
+      "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library"
+    },
+    "122": {
+      "parent": 112,
+      "relative": "ipfs_datasets_py/logic/CEC/Talos"
+    },
+    "123": {
+      "parent": 112,
+      "relative": "ipfs_datasets_py/logic/CEC/Eng-DCEC"
+    },
+    "124": {
+      "parent": 112,
+      "relative": "ipfs_datasets_py/logic/CEC/ShadowProver"
+    },
+    "125": {
+      "parent": 112,
+      "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+    },
+    "126": {
+      "parent": 112,
+      "relative": "ipfs_datasets_py/multimedia/omni_converter_mk2"
+    },
+    "127": {
+      "parent": 112,
+      "relative": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+    }
+  },
+  "agents": [
+    {
+      "id": 29,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/.tools/ipfs_kit_py/docs/mcp-python-sdk/AGENTS.md"
+    },
+    {
+      "id": 41,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/test/huggingface_transformers/AGENTS.md"
+    },
+    {
+      "id": 47,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/docs/fastmcp/AGENTS.md"
+    },
+    {
+      "id": 60,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/mcp-python-sdk/AGENTS.md"
+    },
+    {
+      "id": 73,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/docs/fastmcp/AGENTS.md"
+    },
+    {
+      "id": 85,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/mcp-python-sdk/AGENTS.md"
+    },
+    {
+      "id": 88,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/test/huggingface_transformers/AGENTS.md"
+    },
+    {
+      "id": 94,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/docs/fastmcp/AGENTS.md"
+    },
+    {
+      "id": 108,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/test/huggingface_transformers/AGENTS.md"
+    },
+    {
+      "id": 114,
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/docs/fastmcp/AGENTS.md"
+    }
+  ],
+  "summary": {
+    "initialized": 128,
+    "dirty": 89,
+    "detached_dirty": 24,
+    "no_network_refs_refreshed": true
+  },
+  "scope": "Observed local cached Git refs and declared initialized submodules only. Retained artifact repository markers were excluded. No remote refs fetched; no live HEAD/index/worktree mutation by this audit.",
+  "sensitive_filename_only_primary_inventory": [
+    "external/ipfs_kit/config/deployment/kubernetes/secrets.yaml"
+  ],
+  "no_root_AGENTS_found": true
+}

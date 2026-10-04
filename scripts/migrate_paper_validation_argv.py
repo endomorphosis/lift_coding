@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Correct reviewed paper validation argv through closed owner-side CAS repairs.
+"""Correct reviewed paper validation argv through native Quack CAS updates.
 
 The campaign coordinator must stop workers and own the maintenance window.
 This script never starts/stops processes, opens a database file, requeues a
@@ -77,7 +77,7 @@ def plan_record(record, expected):
             raise MigrationError(f"{alias}: reviewed {key} binding differs")
     if set(record["dependencies"]) != set(expected["depends_on"]):
         raise MigrationError(f"{alias}: reviewed dependencies differ")
-    if [str(Path(v["path"])) for v in record["outputs"]] != [str(Path(v["path"])) for v in expected["outputs"]]:
+    if [v["path"] for v in record["outputs"]] != [v["path"] for v in expected["outputs"]]:
         raise MigrationError(f"{alias}: reviewed outputs differ")
     if [v["criterion"] for v in record["acceptance"]] != expected["acceptance_criteria"]:
         raise MigrationError(f"{alias}: reviewed acceptance differs")
@@ -104,14 +104,7 @@ def plan_record(record, expected):
             "validation": {"argv": corrected, **policy}, "failure_receipt": failure}
 
 
-def maintenance_submit(operation, record, owner, state_dir=None):
-    spec = importlib.util.spec_from_file_location("paper_maintenance_client", ROOT / "scripts/paper_contract_maintenance.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module.submit(operation, record["task_cid"], record["revision"], owner, state_dir=state_dir)
-
-
-def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False, owner_state_dir=None):
+def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False):
     repo_root = Path(repo_root).resolve()
     if not os.environ.get(TOKEN_ENV, "").strip():
         raise MigrationError("trusted Quack token environment is required")
@@ -121,12 +114,11 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False, owner_state
     if not is_quack_transport_target(quack_endpoint):
         raise MigrationError("an explicit loopback Quack endpoint is required")
     expected = {r["task_id"]: r for r in population["taskboard"]}
-    expected_count = {"autoformalization": 25, "law_to_action": 32, "neurosymbolic_supervision": 25, "lean_refactor_arena": 18}[paper]
-    if len(expected) != expected_count:
-        raise MigrationError("reviewed paper task inventory differs")
+    if len(expected) != 25:
+        raise MigrationError("expected exactly 25 reviewed tasks")
     report = {"schema": "paper-validation-argv-migration/v1", "paper": paper,
               "started_at": datetime.now(timezone.utc).isoformat(), "dry_run": dry_run,
-              "native_mutation_api": "paper-contract-maintenance/v1:validation_argv",
+              "native_mutation_api": "IntentRepository.upsert_task(expected_revision)",
               "blocked_tasks_requeued": 0, "provider_invoked": False,
               "source_artifact_sha256": provenance["source_sha256"],
               "migration_script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -138,13 +130,12 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False, owner_state
         # its public identity to ready; authenticated queries prove liveness.
         # Historical stopped generations remain in the same database.
         store_id = "vericodegen-2026-" + paper
-        latest_generation = remote.execute("SELECT max(generation) FROM state_servers WHERE store_id = ?", [store_id]).fetchone()[0]
         identity = remote.execute(
             "SELECT server_id, store_id, database_uuid, generation, process_birth_id, listen_uri, status "
             "FROM state_servers WHERE store_id = ? AND listen_uri = ? AND stopped_at IS NULL "
             "AND status IN ('starting', 'ready') "
-            "AND generation = ?",
-            [store_id, quack_endpoint, latest_generation],
+            "AND generation = (SELECT max(generation) FROM state_servers WHERE store_id = ?)",
+            [store_id, quack_endpoint, store_id],
         ).fetchall()
         if len(identity) != 1:
             raise MigrationError("Quack owner is not the expected paper store")
@@ -156,7 +147,7 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False, owner_state
         report["owner_history_row_count"] = int(remote.execute("SELECT count(*) FROM state_servers WHERE store_id = ?", [store_id]).fetchone()[0])
         with DatabaseTaskSource(quack_endpoint, owner_id="paper-validation-migration:" + paper, install_schema=False) as source:
             records = [plain(r) for r in source.intent.list_tasks(limit=1000)]
-            if len(records) != expected_count or {r["task_alias"] for r in records} != set(expected):
+            if len(records) != 25 or {r["task_alias"] for r in records} != set(expected):
                 raise MigrationError("remote task population differs from reviewed paper")
             if any(r["status"] == "in_progress" for r in records):
                 raise MigrationError("refusing migration while any task is in_progress")
@@ -174,8 +165,10 @@ def migrate(paper, quack_endpoint, repo_root=ROOT, *, dry_run=False, owner_state
                         "failure_receipt": plan["failure_receipt"]}
                 report["tasks"].append(item)
                 if plan["change"] and not dry_run:
-                    receipt = maintenance_submit("validation_argv", record, report["owner"], owner_state_dir)
-                    item["event"] = receipt["event"]
+                    update = {key: record[key] for key in ("task_cid", "task_alias", "goal_cid", "ordinal", "status",
+                                                             "priority", "plan_cid", "objective_id", "body", "identity")}
+                    receipt = source.intent.upsert_task(**update, expected_revision=record["revision"], validations=[plan["validation"]])
+                    item["event"] = plain(receipt.to_dict())
                     report["changed"] += 1
                 elif not plan["change"]:
                     report["unchanged"] += 1
@@ -216,10 +209,9 @@ def main():
     parser.add_argument("--quack-endpoint", required=True)
     parser.add_argument("--repo-root", type=Path, default=ROOT)
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--owner-state-dir", type=Path, help="Live owner directory containing the separate maintenance credential")
     args = parser.parse_args()
     try:
-        report = migrate(args.paper, args.quack_endpoint, args.repo_root, dry_run=args.dry_run, owner_state_dir=args.owner_state_dir)
+        report = migrate(args.paper, args.quack_endpoint, args.repo_root, dry_run=args.dry_run)
     except Exception as exc:
         report = (exc.receipt if isinstance(exc, MigrationError) else None) or {
             "schema": "paper-validation-argv-migration/v1", "success": False, "error_type": type(exc).__name__,

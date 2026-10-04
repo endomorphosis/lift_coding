@@ -1,0 +1,17 @@
+{
+  "scope": "Isolated checkout only; no LIVE Git state changes",
+  "steps": [
+    {
+      "label": "origin-url",
+      "returncode": 0,
+      "seconds": 0.0020942249975632876,
+      "log": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/origin-url.log"
+    },
+    {
+      "label": "fetch-main",
+      "returncode": 0,
+      "seconds": 0.7012426040018909,
+      "log": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/fetch-main.log"
+    }
+  ]
+}
