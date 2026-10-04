@@ -1,6 +1,6 @@
 # Formal logic autoformalization improvement plan
 
-Date: 2026-10-03; updated 2026-10-04. Status: proposed architecture and implementation sequence, updated with executed development experiments, source-only review recording, a concrete label evidence design, reusable contrastive owners, an audit of previously saved Leanstral embeddings and separately executed source-vector reconstruction training. Priority assumption: improve source fidelity first, then proof coverage and cost. Measured diagnostic results are identified below; proposed acceptance targets remain unmeasured.
+Date: 2026-10-03; updated 2026-10-04. Status: proposed architecture and implementation sequence, updated with executed development experiments, source-only review recording, a concrete label evidence design, reusable contrastive owners and an audit of previously saved Leanstral embeddings. Priority assumption: improve source fidelity first, then proof coverage and cost. Measured diagnostic results are identified below; proposed acceptance targets remain unmeasured.
 
 Extend the existing system with a shared retrieval space connecting natural language, typed logic, and verified proof traces. Preserve the independent 8D spaCy, 384D GTE-small, and 768D multilingual GTE paths. Give Leanstral two separately evaluated roles: formalization and proof repair, and an optional embedding teacher. Keep source meaning, executable syntax, and proof authority as distinct requirements throughout.
 
@@ -461,24 +461,3 @@ Checkpoint every new trainable adapter with its objective, optimizer state, seed
 5. Select the smallest runtime combination that improves useful, source-faithful proof coverage. Retain other lanes as independent supported experiments or qualified alternatives.
 
 The next deliverable should be admitted independent source-facet reviews and a larger disjoint corpus, with explicit context and candidate-pool coverage. Use that evidence to compare raw source vectors, actual autoencoder representations, and contrastive alignment before advancing proof retrieval and bounded repair.
-
-
-## Publication and source-vector reconstruction continuation, 2026-10-04
-
-The separately versioned [reconstruction run plan](../../artifacts/autoformalization-publication-20261004/training/run-plan-02.json) executed nine genuine source-vector autoencoder fits: three seeds each for the independent spaCy8, GTE-small384 and GTE-multilingual768 lanes. Every model uses a two-layer encoder and decoder with tanh, a complete compressed bottleneck, and no residual skip or sample memory. The input producer recipes remain pinned; no backbone inference or backbone fine-tuning occurred during these fits.
-
-| Lane | Input/output width | Hidden width | Complete latent width | Selected TRAIN raw-coordinate MSE across three seeds |
-| --- | ---: | ---: | ---: | ---: |
-| spaCy8 | 8 | 16 | 4 | 0.000403320–0.000498896 |
-| GTE-small384 | 384 | 128 | 32 | 2.41097e-8–5.07603e-8 |
-| GTE-multilingual768 | 768 | 128 | 64 | 2.05024e-8–1.51349e-7 |
-
-Each run used the same 16 historical legal TRAIN sources across four groups, CPU float32, one thread, Adam at 0.003, batch size eight and gradient clipping at five. Selection at update 200 was fixed before fitting. Checkpoints at updates 0, 100 and 200 preserve exact model, optimizer and RNG continuation; each run additionally executed three private resume-comparison updates while preserving the selected master. The nine runs therefore completed 1,800 selected-lineage updates and 1,827 actual optimizer updates. Saved reload, resumed weights and Adam moments, finite-value checks and CPU RNG preservation passed in all nine runs. The [root-verified compact results](../../artifacts/autoformalization-publication-20261004/training/reconstruction-summary-01.json) bind every original report and selected checkpoint without publishing row vector tables.
-
-Reconstruction error decreased in every run relative to its untrained initialization. Raw identity reconstruction has zero error without compression. These are TRAIN-only engineering results, with different native scales and capacities; the cross-lane numbers do not rank semantic quality. Held-out reconstruction, retrieval improvement, independently measured source fidelity, multi-family generalization and proof utility remain unmeasured for these nine models. All five semantic/decoder masks remain zero, and every semantic, contrastive, fidelity, qualification and proof-authority flag remains false. The previously described alignment and decoder generations retain their original scopes.
-
-The [initial publication evidence](../../artifacts/autoformalization-publication-20261004/initial-publication-evidence-01.json) records verified ordinary main publications for all 16 available owned repositories and nine immutable initial Hugging Face releases. Large model-weight and data payloads use immutable Hugging Face references in Git. The isolated conversion changed only selected unpublished payload entries, retained original histories locally, and preserved canonical source blobs and modes; published histories were excluded. Unavailable ghost worktrees and foreign upstream repositories are outside this claim.
-
-The nine selected autoencoders, their Adam states, normalization, pinned producer configurations and compact results are published in [the immutable Hugging Face reconstruction release](https://huggingface.co/Publicus/legal-ir-autoencoder/tree/ce4589fa2a61ac5755af08e2f5a3a345667c2465/releases/20261004-source-reconstruction-aes-v1). The [publication receipt](../../artifacts/autoformalization-publication-20261004/huggingface/reconstruction-upload-01/publication.json) verifies all 45 new files and exact preservation of all 422 prior paths. This is a separate release from the retained conditional decoders and formula sidecars.
-
-The next scientific priority remains a larger corpus with disjoint source groups and broad logic-family coverage, independently reviewed source facets and targets, and matched raw-vector, compressed-vector and contrastive-alignment comparisons. The new checkpoints supply actual compressed controls for that comparison; training-set reconstruction alone does not admit paired semantic training or qualify an autoformalizer.
