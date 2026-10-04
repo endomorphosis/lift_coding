@@ -1,0 +1,23 @@
+{
+  "declared": {
+    "XY": {
+      ".M": 554
+    },
+    "ahead/behind_cached_main": "1/166",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 108,
+    "origin": "github.com/huggingface/transformers",
+    "parent": 100,
+    "relative": "test/huggingface_transformers",
+    "tracked": 554,
+    "untracked": 0
+  },
+  "errors": [
+    {
+      "error_type": "RuntimeError",
+      "message": "git command failed: ('rev-parse', 'HEAD') returncode=128"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/test/huggingface_transformers"
+}

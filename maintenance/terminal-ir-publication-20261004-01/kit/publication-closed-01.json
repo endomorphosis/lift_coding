@@ -1,0 +1,121 @@
+{
+  "current_change_count": 15,
+  "exact_published_pins": [
+    {
+      "bytes": 68954,
+      "path": "ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
+      "remote_git_object": "f71912823974acdce14dddaddef36588a9367a49",
+      "sha256": "21a37c5e3b7c33c002f0e02ef1372a00dab421edbcc24c8774b563eca41e1ef1",
+      "status": " M"
+    },
+    {
+      "bytes": 5714,
+      "path": "ipfs_kit_py/semantic_world_store/__init__.py",
+      "remote_git_object": "055cf1c97045d76fdace14746b253ece9d190a25",
+      "sha256": "d539f03b43fcd7ad66c178d530019d31c000dccc79782f22b0d3eba154c132f6",
+      "status": "??"
+    },
+    {
+      "bytes": 44115,
+      "path": "ipfs_kit_py/semantic_world_store/artifacts.py",
+      "remote_git_object": "23dcd37f01ee33ac67cc2831adc021359e7b277a",
+      "sha256": "b30439f064cd5668480f6cfd8151204103947e2fe41c2ac827d172ec5b49965d",
+      "status": "??"
+    },
+    {
+      "bytes": 4916,
+      "path": "ipfs_kit_py/semantic_world_store/durable_vfs.py",
+      "remote_git_object": "2ef9de98be3e48f6234832360cd30576f1fae318",
+      "sha256": "53c295d88bbadc1db39c429e3f74194cbc7ce9f154e9c8e3901ac7bca157720e",
+      "status": "??"
+    },
+    {
+      "bytes": 84858,
+      "path": "ipfs_kit_py/semantic_world_store/graph_history.py",
+      "remote_git_object": "f57486291e83649dbb0e3fe6d0b90d7108fc4be1",
+      "sha256": "3fbfe98f47218625476449a8036d7bd8ef6898970c92d925cce294965e9f020a",
+      "status": "??"
+    },
+    {
+      "bytes": 48721,
+      "path": "ipfs_kit_py/semantic_world_store/projections.py",
+      "remote_git_object": "395a772539311dfe4031bdf26f2bc5f6d30f2c95",
+      "sha256": "ffc18f78016ebfc20e610dbe8e3f94aeb7f41e2d1805743b5e46d62b82d11b08",
+      "status": "??"
+    },
+    {
+      "bytes": 45588,
+      "path": "ipfs_kit_py/semantic_world_store/recovery.py",
+      "remote_git_object": "5fc8d11cc42059cf02daff9e6649561ea088309d",
+      "sha256": "c225a365e6e2d497c30b7f4d60ab5c63123811ca887378e35a364b14d3490e84",
+      "status": "??"
+    },
+    {
+      "bytes": 32002,
+      "path": "ipfs_kit_py/semantic_world_store/resolver.py",
+      "remote_git_object": "2e0b59b4cb0400f7c252899bcf2c6c8bddd786f0",
+      "sha256": "2bc62f866dbffeec2a5876bfb140b1af7bf39b7a16dd20ce57077d6f118874a3",
+      "status": "??"
+    },
+    {
+      "bytes": 23549,
+      "path": "ipfs_kit_py/semantic_world_store/verified_store.py",
+      "remote_git_object": "f2b978c6a932e06e5ca7b4eb1a40c266e93dcb91",
+      "sha256": "69d8564f35f762323c782545d3d8c5113697098c80183b78e91c5e36b3ae528a",
+      "status": "??"
+    },
+    {
+      "bytes": 11086,
+      "path": "ipfs_kit_py/semantic_world_store/vfs_outbox.py",
+      "remote_git_object": "580e5ff7a6d681ba5fbee97954416468e51de720",
+      "sha256": "418d5075e100a1f7d08c712c60843ecbab2bbfe786849e6b5bc7363e5f98c6fd",
+      "status": "??"
+    },
+    {
+      "bytes": 34596,
+      "path": "ipfs_kit_py/semantic_world_store/world_roots.py",
+      "remote_git_object": "90b00725479c9b9eed748e6d4d9ead69b8400d46",
+      "sha256": "beb462a134bec5f54aaefb53161c1e27b49005657908dcfd596de30ea9cfd6fe",
+      "status": "??"
+    },
+    {
+      "bytes": 39428,
+      "path": "tests/semantic_world_store/test_graph_history_and_roots.py",
+      "remote_git_object": "0043d907df86bec36e74aadd084cce57ea2ec0fb",
+      "sha256": "61a7f2ddd359a91ed8d94d86bcfd3f106219d0013bb2d674315199e67c891394",
+      "status": "??"
+    },
+    {
+      "bytes": 29536,
+      "path": "tests/semantic_world_store/test_projection_resolution.py",
+      "remote_git_object": "518e2d1666917d5f0a6a4760274bd5d3463fd11d",
+      "sha256": "4a04c8f6386daf3c579d0064eb9e5f1dcfffbfef3d24373fa152a32a471ebaa3",
+      "status": "??"
+    },
+    {
+      "bytes": 29468,
+      "path": "tests/semantic_world_store/test_recovery_vfs_concurrency.py",
+      "remote_git_object": "178293aa0595c96fd93545c824882f7c2986b744",
+      "sha256": "65f79bddbfb7fd42fe38bcfdd4be313eed66e951a1a518f5c9ec413403195838",
+      "status": "??"
+    },
+    {
+      "bytes": 32078,
+      "path": "tests/semantic_world_store/test_verified_store.py",
+      "remote_git_object": "dd633f79d6248c7813e76327ada135f0b8fc3377",
+      "sha256": "e2887e76eeebd2467ab27f491388c0edc2f100a4e28dd23e394b7878ad9260d8",
+      "status": "??"
+    }
+  ],
+  "local_HEAD_index_status_and_current_bytes_unchanged": true,
+  "new_commit_push_or_worktree_needed": false,
+  "original_local_HEAD_is_ancestor_of_remote": true,
+  "remote_main": "8ac00bb1974b1378e12091d546d8425af34049e0",
+  "remote_only_features_preserved": true,
+  "repo": "kit",
+  "schema": "publication-already-published-verified@1",
+  "status": "all_current_meaningful_changes_already_published_exactly",
+  "url": "https://github.com/endomorphosis/ipfs_kit_py/commit/8ac00bb1974b1378e12091d546d8425af34049e0",
+  "utc": "2026-10-04T19:56:11.246534+00:00",
+  "validation": "AST/compile-only for selected current source/test files and exact Git blob/remote main checks; no test/model/prover/SQL execution."
+}

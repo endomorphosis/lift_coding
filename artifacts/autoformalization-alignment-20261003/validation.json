@@ -1,0 +1,151 @@
+{
+  "schema": "autoformalization-alignment-validation/v1",
+  "recorded_at_utc": "2026-10-03T05:22:21.200665+00:00",
+  "checkouts": [
+    {
+      "path": "/home/barberb/lift_coding",
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "working_tree": "dirty; listed bytes are authoritative for this scope"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "working_tree": "dirty; listed bytes are authoritative for this scope"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "head": "18e0f79e56def8ba426cafdfad568fe6bf7440b7",
+      "working_tree": "dirty; listed bytes are authoritative for this scope"
+    }
+  ],
+  "checks": [
+    {
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_inventory.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_capabilities.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_baseline.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_study.py"
+      ],
+      "exit_code": 0,
+      "summary": "94 passed in 0.66s",
+      "scope": "four new focused test files only"
+    },
+    {
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "--fix",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_inventory.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_capabilities.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+        "scripts/ops/legal_ir/prepare_alignment_study.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_inventory.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_capabilities.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_baseline.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_study.py"
+      ],
+      "exit_code": 0,
+      "summary": "All checks passed!",
+      "scope": "nine new Python files only"
+    },
+    {
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/ops/legal_ir/prepare_alignment_study.py",
+        "--baseline",
+        "--output-directory",
+        "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/baseline-02"
+      ],
+      "exit_code": 0,
+      "summary": "completed exposed-development diagnostic; qualification false"
+    }
+  ],
+  "implementation_and_test_bindings": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_inventory.py",
+      "sha256": "6b40f2ea59bc8071c495151ea350f449b763cadca2b0d31a54ba287cfc2b4ff9",
+      "bytes": 26179
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_capabilities.py",
+      "sha256": "f6070a31ebf5813b56178fda256649442ed24cb6431d735a7f1cea759776b59b",
+      "bytes": 24912
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745",
+      "bytes": 20651
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576",
+      "bytes": 17237
+    },
+    {
+      "path": "external/ipfs_datasets/scripts/ops/legal_ir/prepare_alignment_study.py",
+      "sha256": "9439ba1dcd1e0dd606c49065e48fd9ec1ba65c37de5af5cc44ac6ff865f70739",
+      "bytes": 2491
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_inventory.py",
+      "sha256": "8ca483326cb2119c70dc7964444eb731cdb274f4f226c2d56508c9297b8d0a53",
+      "bytes": 15017
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_capabilities.py",
+      "sha256": "b834251c6264d6dbf1c7e6e34b6621758254edd63486127515711f681ede0517",
+      "bytes": 9908
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_baseline.py",
+      "sha256": "c3260eab251ed10c45e592a0ead5ee1d249ae6f95f7677fec1b4c5b9531b389f",
+      "bytes": 12355
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_study.py",
+      "sha256": "de58de893fcf3f48681b09895fb0e56fbccf5f3cb991a3a6fdd9a987317af170",
+      "bytes": 9646
+    },
+    {
+      "path": "external/ipfs_datasets/configs/autoencoders/alignment_study_development_v1.json",
+      "sha256": "413e7250098d39e3e1ff59405c75c5eca283ec5820828d8be7fb00beb01e2f31",
+      "bytes": 3177
+    },
+    {
+      "path": "external/ipfs_datasets/docs/autoencoders/alignment_study.md",
+      "sha256": "fc0c5df9747702735813f6f8094ecc22c018bee645ea541c60b1393d18faa2d5",
+      "bytes": 8788
+    }
+  ],
+  "report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/report.md",
+    "sha256": "85592272fbb760fe7a246af37a12816b9d3595209561b51342f692b0daa73237",
+    "bytes": 7574
+  },
+  "manifest_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/baseline-02/manifest.json",
+    "sha256": "ebc075b0dd10cb0aa825d704e26ef31ef4fec7621ac79a9568d2e22c56abd2f4",
+    "bytes": 1621679
+  },
+  "manifest_payload_sha256": "0248ef52f5c66e62fd6bf2067af8a4034541363df31129bc202db59ef87976c9",
+  "listed_source_and_provenance_digests_rechecked": true,
+  "complete_dependency_manifest": false,
+  "model_loaded": false,
+  "model_training_performed": false,
+  "native_prover_executed": false,
+  "primary_fidelity_status": "unavailable",
+  "native_useful_proof_status": "unrun",
+  "qualified": false,
+  "production_admitted": false
+}

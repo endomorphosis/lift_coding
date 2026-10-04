@@ -1,0 +1,145 @@
+{
+  "schema": "datasets-isolated-publication-focused-validation@1",
+  "scope": "focused merged-code tests, not prior qualification transfer; no autoencoder fit/prover invocation authorized",
+  "tests": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_timeout_decision.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_local_benchmark_resource_profile.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_global_resource_scheduler.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_resource_safety.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_lifecycle.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_durable_reads.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_resource_recovery.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_reboot.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_refusal_telemetry.py",
+    "tests/unit/logic/backends/test_process_file_limits.py",
+    "tests/unit/logic/backends/test_process_workspace_guard.py",
+    "tests/unit/logic/backends/test_process_lifecycle.py",
+    "tests/unit/logic/backends/test_process_parallel_limits.py",
+    "tests/unit/logic/backends/test_codebase_process_parallel_limits.py",
+    "tests/unit/logic/backends/test_protocol_operation_control.py",
+    "tests/unit/logic/backends/test_tamarin_resource_admission.py"
+  ],
+  "started_utc": "2026-10-04T19:56:25Z",
+  "argv": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "--junitxml=/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/focused-validation-01/junit.xml",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_timeout_decision.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_local_benchmark_resource_profile.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_global_resource_scheduler.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_resource_safety.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_lifecycle.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_durable_reads.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_resource_recovery.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_reboot.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_refusal_telemetry.py",
+    "tests/unit/logic/backends/test_process_file_limits.py",
+    "tests/unit/logic/backends/test_process_workspace_guard.py",
+    "tests/unit/logic/backends/test_process_lifecycle.py",
+    "tests/unit/logic/backends/test_process_parallel_limits.py",
+    "tests/unit/logic/backends/test_codebase_process_parallel_limits.py",
+    "tests/unit/logic/backends/test_protocol_operation_control.py",
+    "tests/unit/logic/backends/test_tamarin_resource_admission.py"
+  ],
+  "before_source_pins": [
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_timeout_decision.py",
+      "bytes": 13819,
+      "sha256": "20c5a9bc39a7f8896991524290818a95fda051369361682c48002cb240cbac70"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_local_benchmark_resource_profile.py",
+      "bytes": 9685,
+      "sha256": "6f28e6bc1bf3427a0422f3aff387be117df83af104ea9ce4b2d545d654edbc38"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_global_resource_scheduler.py",
+      "bytes": 13076,
+      "sha256": "312e255fc5a17447c67b00f8b77b945b51fdccc88622b92f2c32ee887a506d05"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_proof_resource_safety.py",
+      "bytes": 11686,
+      "sha256": "1ce5b627c6bdcf9d8848ef150da2daa8a55d40e869606b302fdf9aca3acb40ad"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_lifecycle.py",
+      "bytes": 9727,
+      "sha256": "5ececc80a55df1ee91588497b03258e041d7935c9aa272751704eb0ec0c87bd8"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_durable_reads.py",
+      "bytes": 10124,
+      "sha256": "3a1090761781a1059cf12c9f859f3dd60bc7cc3a2fe7c7a93c74b6b5a6e9e0c6"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_proof_resource_recovery.py",
+      "bytes": 14577,
+      "sha256": "b3210e2bdcc31204ef8c2844b1efff4da414cf94c5ec298ed5aa0ad1022cc1ef"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_reboot.py",
+      "bytes": 16968,
+      "sha256": "3c160e482b2b093bebea9c4156c66f7893da135d3ac3a88ecdf19003c929b2ae"
+    },
+    {
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_refusal_telemetry.py",
+      "bytes": 11602,
+      "sha256": "f8f79fdfa0724293e3de612c81992361cfbafd9e0e0662979db6c3b7095e9f1f"
+    },
+    {
+      "path": "tests/unit/logic/backends/test_process_file_limits.py",
+      "bytes": 5121,
+      "sha256": "cef92d9b42668a8981081ecab1ea0ab306103fbd26c8b3f0bd32b93a4167e6e3"
+    },
+    {
+      "path": "tests/unit/logic/backends/test_process_workspace_guard.py",
+      "bytes": 25702,
+      "sha256": "ebe6bd7b9f9e810d12aadf3a28eedd1cf4b7637ba08dd614e81aa5005b1a1d58"
+    },
+    {
+      "path": "tests/unit/logic/backends/test_process_lifecycle.py",
+      "bytes": 19695,
+      "sha256": "38a65143d09e5933d55e2dd3b4cea35c57429db2cb321c08830798f9e248640f"
+    },
+    {
+      "path": "tests/unit/logic/backends/test_process_parallel_limits.py",
+      "bytes": 4327,
+      "sha256": "79535342d125743034baaf74264a89ed4b8f792c106e30f9159a1beedc800914"
+    },
+    {
+      "path": "tests/unit/logic/backends/test_codebase_process_parallel_limits.py",
+      "bytes": 4336,
+      "sha256": "0bbef24243f90410480c501042a2eceba5e5c33944236589d1426de78570a8a1"
+    },
+    {
+      "path": "tests/unit/logic/backends/test_protocol_operation_control.py",
+      "bytes": 28618,
+      "sha256": "28b6802b09878337a320d444186c0e74f3d9a80ca1c11ad98c9348758b24f24e"
+    },
+    {
+      "path": "tests/unit/logic/backends/test_tamarin_resource_admission.py",
+      "bytes": 26920,
+      "sha256": "1dd96807d12f0b614ba8d6f28b263e7f7d774ddd9d6d4793f2664092cd87c1fe"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "bytes": 109669,
+      "sha256": "0887be4827a877438f793552a1ea43cb36815ceced96ee51df11690576a66e8c"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/backends/process.py",
+      "bytes": 78154,
+      "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/backends/registry.py",
+      "bytes": 84269,
+      "sha256": "b782be0587c5c6a55d28133c4839a182984ff2e274cb97ffd05d82caa76cc2a1"
+    }
+  ]
+}

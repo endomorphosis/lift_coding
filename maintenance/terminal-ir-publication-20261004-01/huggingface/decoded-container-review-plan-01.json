@@ -1,0 +1,51 @@
+{
+  "actual_decoding_elapsed_seconds": null,
+  "authority": {
+    "model_convergence": false,
+    "semantic_proof": false,
+    "task_completion": false
+  },
+  "credential_scope": "Use frozen complete-PEM/known-format/exact-available-credential scanner; retain candidate digests and source/member path hashes only. Token/header-only test parser constants must not be promoted to complete key matches. Root can classify known public fixture bytes through exact digest and public provenance.",
+  "formats": [
+    "gzip",
+    "xz",
+    "bzip2",
+    "zstd",
+    "tar",
+    "zip"
+  ],
+  "known_candidate_values_printed": false,
+  "proposed_budgets_requiring_root_approval": {
+    "credential_boundary_overlap_bytes": 65536,
+    "depth_max": 4,
+    "member_count_max": 1000000,
+    "memory_read_block_bytes": 1048576,
+    "single_container_decoded_bytes_max": 17179869184,
+    "single_seekable_reconstruction_bytes_max": 4294967296,
+    "total_decoded_bytes_max": 137438953472,
+    "wall_seconds_max": 7200,
+    "workers": 1
+  },
+  "public_upload_performed": false,
+  "publication_gates": {
+    "all_raw_bytes_published_claim": false,
+    "any_unresolved_or_candidate": "No universal clean claim; root exact-provenance classification or explicit public quarantine required. Retain all originals locally and preserve digest/path coverage; report dropped-public-content bytes truthfully.",
+    "clean_or_explicit_public_provenance": "Retain full decode classification receipt tied to exact raw file/shard SHA and scanner source/tools/budgets; root authorizes publication separately.",
+    "decoded_secret_found": "Fresh publication derivative must physically omit all affected raw file chunks from shard members, not merely omit the file path. Conservative shared-chunk closure may require quarantine of further referencing paths. Original local candidate shards remain private unchanged."
+  },
+  "recursion": "Inspect decoded stream magic and archive members recursively; never extract member paths into source directories. Member names and links are scanned separately. Binary/text payloads remain opaque and are scanned as byte streams.",
+  "remote_mutations": 0,
+  "schema": "terminal-ir-decoded-container-review-plan@1",
+  "selected_inputs": "Final path/index manifests and actual opaque-container records from local archive-build-01; archived bytes reconstructed from pinned local shard chunks, not potentially drifted live originals. Exact source reconstruction SHA must match the archived full SHA before positive classification.",
+  "split_archives": "Explicit ordered group map from generated preservation manifest; concatenate exact CAS bodies in original part order only with recorded group lineage; incomplete groups remain unresolved. Magic-less archive parts must not be assumed non-containers.",
+  "status": "SOURCE_ONLY_PROPOSAL_NOT_EXECUTED_OR_UPLOAD_AUTHORIZATION",
+  "unresolved_cases": [
+    "Unsupported format",
+    "Encrypted member",
+    "Depth, byte, member or time bound reached",
+    "Incomplete split archive",
+    "Archive parse refusal",
+    "Reconstructed bytes do not match original archived full SHA",
+    "Non-regular archive member metadata with inaccessible contents"
+  ]
+}

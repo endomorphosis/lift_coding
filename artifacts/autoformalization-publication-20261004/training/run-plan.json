@@ -1,0 +1,296 @@
+{
+  "authorization_scope": "user_authorized_source_vector_reconstruction_only_no_semantic_mask_promotion",
+  "config": {
+    "batch_size": 8,
+    "cpu_threads": 1,
+    "device": "cpu",
+    "dtype": "float32",
+    "gradient_clip": 5.0,
+    "learning_rate": 0.003,
+    "midpoint": 100,
+    "normalization": "train_coordinate_mean_and_global_rms/v1",
+    "private_resume_comparison_updates": 3,
+    "steps": 200
+  },
+  "content_sha256": "e4b31a2178456511f06144c8926298fed4e9ea421a000734a7ae10d25fc299d3",
+  "helper_binding": {
+    "bytes": 25449,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/train_reconstruction.py",
+    "sha256": "a9325c29e738cf67bba52c228476d317c2bef88980b2b8d9ff14914ae77deba6"
+  },
+  "lane_owner_binding": {
+    "bytes": 18141,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+    "sha256": "d7d2e1303e15d46b70997e5880df6fb9a690bfebde63666cad04db516f3ef3a8"
+  },
+  "lanes": {
+    "legacy8": {
+      "architecture": [
+        8,
+        16,
+        4
+      ],
+      "bundle_binding": {
+        "bytes": 25144,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/legacy8_raw_train_bundle.json",
+        "sha256": "26a7810e8605eb25da608a50228483c0ec709ac597a67df0cdfdcca192f5e0f4"
+      },
+      "expected_lane_binding": {
+        "bytes": 2798,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/legacy8_raw_train_expected_bindings.json",
+        "sha256": "2c10595c86fe13ca456b85b09de300bf8bb9e0911a68c8bd9d39d2f88cd8e8a1"
+      }
+    },
+    "native384": {
+      "architecture": [
+        384,
+        128,
+        32
+      ],
+      "bundle_binding": {
+        "bytes": 155023,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native384_raw_train_bundle.json",
+        "sha256": "bde9861a4e7c12895f9dd208f7daaca40458422669f3cbce55508841f7322d36"
+      },
+      "expected_lane_binding": {
+        "bytes": 2798,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native384_raw_train_expected_bindings.json",
+        "sha256": "c30fefa309d4b0846e0ef17ff7c69e219a8001cb477ffecf8d51383c941748c6"
+      }
+    },
+    "native768": {
+      "architecture": [
+        768,
+        128,
+        64
+      ],
+      "bundle_binding": {
+        "bytes": 285377,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native768_raw_train_bundle.json",
+        "sha256": "c6f71204c8b4dc9f27f435a1f8b8c28c034923a8d29e0ded183145458eac7f71"
+      },
+      "expected_lane_binding": {
+        "bytes": 2798,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native768_raw_train_expected_bindings.json",
+        "sha256": "5b95a956faa3f693e207f6435a221e536ed01bce9bafbc6011e718014f4b5bc5"
+      }
+    }
+  },
+  "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "schema": "source-vector-reconstruction-run-plan/v1",
+  "seeds": [
+    1729,
+    1730,
+    1731
+  ],
+  "train_selection": [
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+      "id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+      "id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+      "id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+      "split": "train"
+    },
+    {
+      "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+      "id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 1
+      },
+      "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+      "split": "train"
+    }
+  ]
+}

@@ -1,0 +1,513 @@
+{
+  "audit_execution": {
+    "largest_hashed_file_bound_bytes": 134217728,
+    "linux_process_memory": {
+      "VmHWM_KiB": 32048,
+      "VmRSS_KiB": 26320
+    },
+    "max_row_parse_buffer_bytes": 2097152,
+    "max_small_json_bytes": 8388608,
+    "static_elapsed_seconds": 5.253889158004313,
+    "stream_chunk_bytes": 262144,
+    "subprocess_scope": "git rev-parse HEAD only"
+  },
+  "audit_scope": "read-only stdlib replay of saved bytes; no model or live embedding request",
+  "backend_checks": {
+    "binaries": [
+      {
+        "bytes": 873048,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libggml-base.so.0.17.0",
+        "sha256": "363272849a01494d0139f2afca820ea4347a53d3bb7ad6e4cf73e5fdaa4ce2fe"
+      },
+      {
+        "bytes": 929104,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libggml-cpu.so.0.17.0",
+        "sha256": "92f5ecd90596ee0b3e342e860343f712aba3ed69f94903bbd64463547d06118d"
+      },
+      {
+        "bytes": 59396536,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libggml-cuda.so.0.17.0",
+        "sha256": "448f31a5de8696f37025e46823984deda4361d252d60b8cd096adae496541858"
+      },
+      {
+        "bytes": 77880,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libggml.so.0.17.0",
+        "sha256": "6cebcbc5f3c587358f8da52a134e7360e5bbf310b2705e58ce10614d9f34c24f"
+      },
+      {
+        "bytes": 5333896,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libllama-common.so.0.0.1",
+        "sha256": "54d664b1230fdf421b9bbb8bec1d93a0716da03d1778baf0a546a8eee4d9e3de"
+      },
+      {
+        "bytes": 3804216,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libllama-server-impl.so",
+        "sha256": "18db71c3a03599bc9e38b1850d62718e935107ec4e406e6e92373052f5925c7a"
+      },
+      {
+        "bytes": 3862040,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libllama.so.0.0.1",
+        "sha256": "ca62747307627688d0d3a5c2f647bcc631cc64c22f806c5df05cfd5b5ce3d507"
+      },
+      {
+        "bytes": 1322104,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libmtmd.so.0.0.1",
+        "sha256": "22069c66b458093da08aae6898c5f03f40b62a328bd8b1faad80b6ddeda24964"
+      },
+      {
+        "bytes": 72488,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/llama-server",
+        "sha256": "0adc7f54a813786433108605eacaae7348cedcc76fd8d959c5f94c5cabc03eef"
+      }
+    ],
+    "extraction_location": "src/models/deepseek2.cpp:426-430 final RMS-normalized t_embd, preceding lm_head/t_logits",
+    "last_transformer_block_index": 35,
+    "native_hidden_width": 4096,
+    "source_output_routes": {
+      "generation_client": "JevOps/jevops/leanstral.py chat_completion",
+      "per_token_embedding": "/embeddings with pooling none; not exercised by saved run",
+      "pooled_embedding": "/v1/embeddings requires --embeddings and pooling other than none"
+    },
+    "sources": [
+      {
+        "bytes": 20638,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/src/models/deepseek2.cpp",
+        "sha256": "2746b7ca65408a3212d726b5753986fc25c9dc1a6592e91d91a21c19cb958bed"
+      },
+      {
+        "bytes": 217414,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/tools/server/server-context.cpp",
+        "sha256": "f28c3aab9b7367c488ff2b23394ae447c57f1731c6936cc9963426f54055500f"
+      },
+      {
+        "bytes": 56704,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/tools/server/server-common.cpp",
+        "sha256": "2a67b239d3484fce399dfcd380088217ce33b1057d3337de7d460fdab95ef211"
+      },
+      {
+        "bytes": 16645,
+        "matches_saved_runtime_binding": true,
+        "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/tools/server/server-queue.cpp",
+        "sha256": "4f9173c7a9c2d19038586d1c84903e7e757949d71b91dbc8953c7d682e40c8bc"
+      }
+    ],
+    "vocabulary_logits_width": 131072
+  },
+  "canary_checks": {
+    "a_b_a_replay_l2": 0.0,
+    "batch_rows": 16,
+    "registered_tolerance_l2": 0.001,
+    "replay_rows": 1,
+    "saved_report_metrics_exactly_recomputed": true,
+    "single_batch_equivalent_at_tolerance": false,
+    "single_rows": 1,
+    "single_vs_batch_l2": 0.14593208421713977,
+    "vectors_finite_unit_norm_4096": true
+  },
+  "content_sha256": "fe895b7460de2fe1b4f1611483587c8f120cf8c9b033994458041c74349f868c",
+  "created_utc": "2026-10-04T04:39:43.978607+00:00",
+  "current_panel_overlap": {
+    "cached_vectors_directly_join_current_panels": false,
+    "comparison": "SHA256 exact UTF8 source_text only; no context, targets or vector values in matching",
+    "new_exact_source_overlap": 0,
+    "new_public_packet_rows": 64,
+    "new_unique_source_texts": 64,
+    "old_exact_source_overlap": 0,
+    "old_request_rows": 34,
+    "old_unique_source_texts": 33
+  },
+  "false_flags": {
+    "accepted": false,
+    "actual_training_or_evaluation_admission": false,
+    "gpu_admission_attempted": false,
+    "independent_semantic_review_completed": false,
+    "model_inference_executed_this_stage": false,
+    "model_loaded_this_stage": false,
+    "model_or_source_files_modified": false,
+    "new_embeddings_generated": false,
+    "proof_authority": false,
+    "qualified": false,
+    "retrieval_quality_evaluated": false,
+    "service_started_stopped_or_reconfigured": false,
+    "source_fidelity_established": false,
+    "training_executed": false
+  },
+  "file_bindings": [
+    {
+      "bytes": 873048,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libggml-base.so.0.17.0",
+      "sha256": "363272849a01494d0139f2afca820ea4347a53d3bb7ad6e4cf73e5fdaa4ce2fe"
+    },
+    {
+      "bytes": 929104,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libggml-cpu.so.0.17.0",
+      "sha256": "92f5ecd90596ee0b3e342e860343f712aba3ed69f94903bbd64463547d06118d"
+    },
+    {
+      "bytes": 59396536,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libggml-cuda.so.0.17.0",
+      "sha256": "448f31a5de8696f37025e46823984deda4361d252d60b8cd096adae496541858"
+    },
+    {
+      "bytes": 77880,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libggml.so.0.17.0",
+      "sha256": "6cebcbc5f3c587358f8da52a134e7360e5bbf310b2705e58ce10614d9f34c24f"
+    },
+    {
+      "bytes": 5333896,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libllama-common.so.0.0.1",
+      "sha256": "54d664b1230fdf421b9bbb8bec1d93a0716da03d1778baf0a546a8eee4d9e3de"
+    },
+    {
+      "bytes": 3804216,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libllama-server-impl.so",
+      "sha256": "18db71c3a03599bc9e38b1850d62718e935107ec4e406e6e92373052f5925c7a"
+    },
+    {
+      "bytes": 3862040,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libllama.so.0.0.1",
+      "sha256": "ca62747307627688d0d3a5c2f647bcc631cc64c22f806c5df05cfd5b5ce3d507"
+    },
+    {
+      "bytes": 1322104,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/libmtmd.so.0.0.1",
+      "sha256": "22069c66b458093da08aae6898c5f03f40b62a328bd8b1faad80b6ddeda24964"
+    },
+    {
+      "bytes": 72488,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/build/bin/llama-server",
+      "sha256": "0adc7f54a813786433108605eacaae7348cedcc76fd8d959c5f94c5cabc03eef"
+    },
+    {
+      "bytes": 1262,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/models/refs/Frosty40_Leanstral-1.5-119B-A6B-GGUF-NVFP4/Leanstral-1.5-119B-A6B-NVFP4.gguf.json",
+      "sha256": "61da0f6e9feeaa07243caae920452e3d99386252b0cf9950548ba0f1aafb97a4"
+    },
+    {
+      "bytes": 204472,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/common/arg.cpp",
+      "sha256": "006dc24c757326cdcae64b6a6b5ce7bad8712f4a79ce71a648057584b0bf40ad"
+    },
+    {
+      "bytes": 20638,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/src/models/deepseek2.cpp",
+      "sha256": "2746b7ca65408a3212d726b5753986fc25c9dc1a6592e91d91a21c19cb958bed"
+    },
+    {
+      "bytes": 98895,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/tools/server/README.md",
+      "sha256": "bdf35ef84d5d3f61effa071d56b35ded3413de1319f719f96691ea87c5aa5054"
+    },
+    {
+      "bytes": 56704,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/tools/server/server-common.cpp",
+      "sha256": "2a67b239d3484fce399dfcd380088217ce33b1057d3337de7d460fdab95ef211"
+    },
+    {
+      "bytes": 217414,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/tools/server/server-context.cpp",
+      "sha256": "f28c3aab9b7367c488ff2b23394ae447c57f1731c6936cc9963426f54055500f"
+    },
+    {
+      "bytes": 16645,
+      "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/source/llama.cpp/tools/server/server-queue.cpp",
+      "sha256": "4f9173c7a9c2d19038586d1c84903e7e757949d71b91dbc8953c7d682e40c8bc"
+    },
+    {
+      "bytes": 19173,
+      "path": "/home/barberb/lift_coding/JevOps/jevops/leanstral.py",
+      "sha256": "8dc79fe95e4ae6eba2bc859421e8113f9cbe8d482af4703b733f8f49fb2f9b32"
+    },
+    {
+      "bytes": 7687,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261003/report.json",
+      "sha256": "bde78bb39fe0472d92bcdea846d5c41018f0f539947b8ce37e464d21f38ab2b3"
+    },
+    {
+      "bytes": 15531,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/benchmark_autoformal_outputs.py",
+      "sha256": "3083ba97c5dfbb244dae3c30aff9c78fe1dad5770830ba3cc514ac0dc7564f3e"
+    },
+    {
+      "bytes": 2271106,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/canary.json",
+      "sha256": "164f1eafe7e4489b02682780c102c50fad73bc0f6589c0179927780c25c29e5d"
+    },
+    {
+      "bytes": 686628,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/embedding-server.log",
+      "sha256": "21089b27312ec2d4c8e68a9034c37e4bf2511485abcd6066af7f0bf682e6e8a6"
+    },
+    {
+      "bytes": 12270,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/executed-producer.py",
+      "sha256": "6bc0f6fb48b5378bea4583df45e32a6c49b8ceaef5b8a35ad2757067238350c4"
+    },
+    {
+      "bytes": 94323950,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/outputs-1.json",
+      "sha256": "8851c34557a765e99abf99d80cb519ae263be41ef4779c375f2c7963d15fcbd8"
+    },
+    {
+      "bytes": 94323950,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/outputs-2.json",
+      "sha256": "8851c34557a765e99abf99d80cb519ae263be41ef4779c375f2c7963d15fcbd8"
+    },
+    {
+      "bytes": 94323950,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/outputs-3.json",
+      "sha256": "8851c34557a765e99abf99d80cb519ae263be41ef4779c375f2c7963d15fcbd8"
+    },
+    {
+      "bytes": 204794,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/report.json",
+      "sha256": "c222de3846619794db32c7b534cc942dd29f8f1561d270573a5923930eedebcc"
+    },
+    {
+      "bytes": 100,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/restoration-validation.json",
+      "sha256": "f91e6f9d2c2df35fc7c3aa17753f31834d5269dd87376c9bb32bac8164acab48"
+    },
+    {
+      "bytes": 3207,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/runtime-mapped-binaries.json",
+      "sha256": "5a1984127bd87a6db5de1e48f0b2bf615f580c1f4cc183ada0ee9ba18c974a9f"
+    },
+    {
+      "bytes": 224803,
+      "path": "/home/barberb/lift_coding/artifacts/autoformal-leanstral4096-800x20-20261004-fixed16/workload.json",
+      "sha256": "a989f58bf0c723b1628665610dc4763e3aa3c766e25edceaf45a99770ee96ea1"
+    },
+    {
+      "bytes": 57962,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-packet-01/reviewer_items.json",
+      "sha256": "8a8303ea83fe22899f798703e7931b1f48a8aa0afb01c7d6980a7d3e9301701e"
+    },
+    {
+      "bytes": 27453,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/leanstral-embedding-inventory-01/audit_saved_embeddings.py",
+      "sha256": "69f748373f8de60064fc982084df7c2c3b7df3f63c5b87dd3b9e7e086e6c0817"
+    },
+    {
+      "bytes": 11255,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/inference_requests.json",
+      "sha256": "1740f42c497901e974ec7cb8f8892bd6208f643c7708313000870ecde9f10595"
+    },
+    {
+      "bytes": 12770,
+      "path": "/home/barberb/lift_coding/scripts/benchmark_leanstral_embeddings.py",
+      "sha256": "6a33b3f75ba247d46977422a5d27978d9835fcceadf46bf2b935f9a09b7b6980"
+    },
+    {
+      "bytes": 8146,
+      "path": "/home/barberb/lift_coding/scripts/run_leanstral_ephemeral.md",
+      "sha256": "3c7916ccfbefbf333637bde0ccd761a192ff8d84dedc9e5465717f4b0bf27ca0"
+    },
+    {
+      "bytes": 23062,
+      "path": "/home/barberb/lift_coding/scripts/run_leanstral_ephemeral.py",
+      "sha256": "05639916bc1dc93a53386ea0e5f7662103a95a2b9fc9e81b5945145d0cbbd943"
+    },
+    {
+      "bytes": 10914,
+      "path": "/home/barberb/lift_coding/scripts/summarize_standalone_zk_leanstral.py",
+      "sha256": "b0d7ca6a269d75f64f161bf5b9a41e421e7fe58e762f5c08c00230bb94fb0ec5"
+    }
+  ],
+  "limitations": [
+    "Saved fixed-order 16-slot repeats do not establish batch-peer, order, padding or slot independence.",
+    "The observed single-vs-batch failure has no established cause; representation cache identity must retain batching policy until qualified.",
+    "Mean pooling, per-token extraction and long-context behavior were not exercised by these saved outputs.",
+    "The historical benchmark replaces the managed generation service and does not share the ephemeral runner GPU lock/admission envelope.",
+    "Current resource readiness is owned by root's separate read-only preflight; this stage does not admit residency.",
+    "Cached throughput sources have no exact match in the current34/64 panels and cannot supply their embeddings.",
+    "Historical synthetic throughput and vector validity establish neither retrieval quality nor autoformalization/source fidelity.",
+    "GGUF header/stat and manifest-declared digest do not independently authenticate all current weight bytes or a separately fine-tuned checkpoint."
+  ],
+  "model_asset": {
+    "declared_model_digest_independently_verified_this_stage": false,
+    "header": {
+      "full_model_hash_verified": false,
+      "metadata_bytes": 8385220,
+      "metadata_end_offset": 8385220,
+      "metadata_kv_count": 58,
+      "metadata_prefix_sha256": "550c9abbf62aa6acee190e8a3f621910c111b26ca32cf6cfbfbb4203ed7c77b4",
+      "selected_metadata": {
+        "deepseek2.block_count": 36,
+        "deepseek2.context_length": 1048576,
+        "deepseek2.embedding_length": 4096,
+        "deepseek2.expert_count": 128,
+        "deepseek2.expert_used_count": 4,
+        "deepseek2.vocab_size": 131072,
+        "general.architecture": "deepseek2",
+        "general.base_model.0.name": "Leanstral 2603",
+        "general.base_model.0.organization": "Mistralai",
+        "general.base_model.0.repo_url": "https://huggingface.co/mistralai/Leanstral-2603",
+        "general.base_model.0.version": "2603",
+        "general.file_type": 39,
+        "general.quantization_version": 2,
+        "general.type": "model",
+        "tokenizer.ggml.add_bos_token": true,
+        "tokenizer.ggml.add_eos_token": false,
+        "tokenizer.ggml.bos_token_id": 1,
+        "tokenizer.ggml.eos_token_id": 2,
+        "tokenizer.ggml.model": "gpt2",
+        "tokenizer.ggml.pre": "tekken",
+        "tokenizer.ggml.tokens": {
+          "array_length": 131072,
+          "element_type": 8
+        }
+      },
+      "tensor_count": 615,
+      "tensor_headers_or_weights_read": false,
+      "tensors_loaded": false,
+      "version": 3
+    },
+    "manifest_declared_cid_v1": "bafkreicgnd6su3jhmtpckbejqurdb2lchdvvydluswdg5m5zy3cpvroh3i",
+    "manifest_declared_model_sha256": "4668fd2a6d2764de250489852230e96238eb5c0d7495866eb3b9c6c4fac5c7da",
+    "manifest_file_sha256": "61da0f6e9feeaa07243caae920452e3d99386252b0cf9950548ba0f1aafb97a4",
+    "manifest_path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/models/refs/Frosty40_Leanstral-1.5-119B-A6B-GGUF-NVFP4/Leanstral-1.5-119B-A6B-NVFP4.gguf.json",
+    "observed_stat_bytes": 67135119264,
+    "observed_stat_mtime_ns": 1784160744739110705,
+    "path": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/models/cid-v1/bafkreicgnd6su3jhmtpckbejqurdb2lchdvvydluswdg5m5zy3cpvroh3i/Leanstral-1.5-119B-A6B-NVFP4.gguf",
+    "separate_user_finetuned_checkpoint_established": false,
+    "whole_model_bytes_hashed_this_stage": 0
+  },
+  "prior_failed_run": {
+    "full_workload_run_count": 0,
+    "original_service_restored_declared": true,
+    "report_file_sha256": "bde78bb39fe0472d92bcdea846d5c41018f0f539947b8ce37e464d21f38ab2b3",
+    "single_vs_batch_l2": 0.14593208421713977,
+    "status": "failed"
+  },
+  "producer_checks": {
+    "current_script_identical_to_executed": false,
+    "current_script_sha256": "6a33b3f75ba247d46977422a5d27978d9835fcceadf46bf2b935f9a09b7b6980",
+    "diff_scope": "current script sets restoration guard before stopping service and protects stop/log collection/restoration/final report on failure",
+    "embedding_inference_measurement_body_unchanged": true,
+    "executed_producer_matches_saved_report": true,
+    "executed_producer_sha256": "6bc0f6fb48b5378bea4583df45e32a6c49b8ceaef5b8a35ad2757067238350c4",
+    "executed_source_not_imported_or_run": true,
+    "historical_service_unit_content_not_exported": true,
+    "unified_diff_sha256": "0ff7a4c0a8143e0481154f177cf6d1684afc1e7a47a5fa665ba4c6e916ddf509"
+  },
+  "registered_embedding_profile": {
+    "add_bos_token": true,
+    "add_eos_token": false,
+    "batch_size": 512,
+    "cache_policy": "erase every slot before each batch; batch size <= slot count, so each request gets an empty slot",
+    "chat_template_applied": false,
+    "context_per_slot_observed": 512,
+    "context_total_requested": 8192,
+    "cpu_threads": 20,
+    "exact_server_argv_file_scope": "retained report, not copied here",
+    "fit": "off",
+    "gpu": "CUDA0",
+    "gpu_layers_requested": 36,
+    "input": "exact raw source, no chat template",
+    "normalization": "l2",
+    "parallel_slots": 16,
+    "physical_microbatch_size": 512,
+    "pooling": "last",
+    "request_route": "/v1/embeddings",
+    "tokenizer": "Tekken; GGUF gpt2 tokenization frontend",
+    "tokenizer_flags_in_saved_request": {
+      "add_special": true,
+      "parse_special": true
+    }
+  },
+  "reported_historical_cost": {
+    "load_seconds": 249.2290498049988,
+    "medians": {
+      "cache_erase_seconds": 0.31688568397657946,
+      "embedding_request_seconds": 14.986548055981984,
+      "native_input_tokens_per_second": 557.3544419319888,
+      "source_lexical_tokens_per_second": 414.7753986470615,
+      "transactions_per_second": 51.846924830882685,
+      "wall_seconds": 15.430037608006387
+    },
+    "mixed_journal_earlier_failed_memory_peak": "62.8G",
+    "new_benchmark_executed": false,
+    "resource_scope": "saved systemd unit journal, not current host admission or model allocation guarantee",
+    "selected_completed_unit_memory_peak": "47.5G",
+    "selected_completed_unit_swap_peak": "0B",
+    "service_restoration_report_and_saved_receipt_agree": true,
+    "timing_scope": "warm client wall time includes tokenization inside server, full vector inference, HTTP, vector validation and cache erasure; disk writes excluded"
+  },
+  "saved_run_identity": {
+    "build_info": "b1-571d0d5",
+    "report_file_sha256": "c222de3846619794db32c7b534cc942dd29f8f1561d270573a5923930eedebcc",
+    "runtime_manifest_file_sha256": "5a1984127bd87a6db5de1e48f0b2bf615f580c1f4cc183ada0ee9ba18c974a9f",
+    "source_revision": "571d0d540df04f25298d0e159e520d9fc62ed121",
+    "workload_sha256": "ea64beb15548b3be7a3922ff8a6d96de67e19295d6a8d85970aecbf105101391"
+  },
+  "schema": "leanstral-saved-embedding-static-inventory/v1",
+  "seal_recipe": "SHA256 canonical sorted compact UTF8 JSON, ensure_ascii=False, allow_nan=False, excluding content_sha256",
+  "vector_checks": {
+    "all_three_output_files_byte_identical": true,
+    "fixed_profile_repeatability_only": true,
+    "runs": [
+      {
+        "exact_workload_id_joins": 800,
+        "file_sha256": "8851c34557a765e99abf99d80cb519ae263be41ef4779c375f2c7963d15fcbd8",
+        "finite_4096_value_count": 3276800,
+        "norm_max": 1.0000000544401457,
+        "norm_min": 0.9999999417143012,
+        "payload_sha256": "3cb537cf1de436e655f3a20e7d113273c78c37d68cdc08e0b393e407c003ffcd",
+        "registered_payload_hash_matches": true,
+        "repeat": 1,
+        "row_count": 800
+      },
+      {
+        "exact_workload_id_joins": 800,
+        "file_sha256": "8851c34557a765e99abf99d80cb519ae263be41ef4779c375f2c7963d15fcbd8",
+        "finite_4096_value_count": 3276800,
+        "norm_max": 1.0000000544401457,
+        "norm_min": 0.9999999417143012,
+        "payload_sha256": "3cb537cf1de436e655f3a20e7d113273c78c37d68cdc08e0b393e407c003ffcd",
+        "registered_payload_hash_matches": true,
+        "repeat": 2,
+        "row_count": 800
+      },
+      {
+        "exact_workload_id_joins": 800,
+        "file_sha256": "8851c34557a765e99abf99d80cb519ae263be41ef4779c375f2c7963d15fcbd8",
+        "finite_4096_value_count": 3276800,
+        "norm_max": 1.0000000544401457,
+        "norm_min": 0.9999999417143012,
+        "payload_sha256": "3cb537cf1de436e655f3a20e7d113273c78c37d68cdc08e0b393e407c003ffcd",
+        "registered_payload_hash_matches": true,
+        "repeat": 3,
+        "row_count": 800
+      }
+    ],
+    "total_finite_4096_values": 9830400,
+    "total_rows": 2400
+  },
+  "workload_joins": {
+    "historical_workload_row_keys": [
+      "id",
+      "source_text",
+      "vocabulary"
+    ],
+    "native_tokens": 8600,
+    "non_source_metadata_scope": "historical vocabulary fields were deserialized and covered by workload digest; only id/source_text used for source joins, no quality assessment",
+    "registered_workload_digest_matches": true,
+    "rows": 800,
+    "token_receipt_id_joins": 800,
+    "unique_exact_source_sha256": 800,
+    "unique_ids": 800
+  }
+}

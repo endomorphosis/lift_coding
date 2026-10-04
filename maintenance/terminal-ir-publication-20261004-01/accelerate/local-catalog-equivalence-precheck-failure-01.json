@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "reason": "Entire final local catalog tree is not remote-identical; first empty pick does not imply second commit already published",
+  "actual_diff_stat": " docs/model_catalog/ir_persistent_catalog.md        | 24 ++++++++++-\n .../model_catalog/sources/ir_persistent.py         | 24 +++++++++--\n test/test_ir_persistent_catalog.py                 | 50 ++++++++++++++++++++++\n 3 files changed, 94 insertions(+), 4 deletions(-)\n"
+}

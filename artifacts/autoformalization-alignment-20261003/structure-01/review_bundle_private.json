@@ -1,0 +1,4562 @@
+{
+  "bundle_sha256": "d85fae05df6164b6fb12ef0ad2fa576a02efe38eeedd7f6c9508c51a0f46754a",
+  "encoder_calls": 0,
+  "independent_fidelity_available": false,
+  "model_calls": 0,
+  "organizer_manifest": {
+    "audience": "organizer",
+    "candidate_reference_blind": false,
+    "digest_recipe": "sha256_sorted_compact_utf8_json_no_nan_no_newline",
+    "independent_fidelity_available": false,
+    "input_manifest_sha256": "a76e601b65e7f5ae58c7d22e3de36518f53355743e9dcbbba095398bd114f42a",
+    "item_count": 34,
+    "payload_bytes": 111171,
+    "payload_schema": "alignment-richer-source-context-organizer/v1",
+    "payload_sha256": "6d620172b7409e09f05dfe96c126f2a3d4c198daa8a977af9380e37a71379f0d",
+    "production_admitted": false,
+    "proof_authority": false,
+    "qualified": false,
+    "reviewer_identity_attestations_created": false,
+    "schema": "alignment-richer-review-audience-manifest/v1",
+    "source_semantics_verified": false,
+    "submissions_created": false
+  },
+  "organizer_payload": {
+    "automatic_adjudication": false,
+    "completed_reviews": 0,
+    "do_not_send_to_reviewers": true,
+    "independent_fidelity_available": false,
+    "input_manifest_sha256": "a76e601b65e7f5ae58c7d22e3de36518f53355743e9dcbbba095398bd114f42a",
+    "original_40_review_bundle_reusable": false,
+    "production_admitted": false,
+    "proof_authority": false,
+    "qualified": false,
+    "reviewer_identity_attestations_created": false,
+    "reviewer_key": [
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "The applicant and their application require a shared variable binding.",
+          "reason_code": "relational_variable_binding",
+          "required_handling": "abstain"
+        },
+        "authored_reference": null,
+        "authored_reference_sha256": null,
+        "case_variant": "linked_variables",
+        "input_sha256": "4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+        "item_id": "richer-review-item-00b1e06d9d6ae726a83677e4",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:negative:linked_variables",
+        "original_id": "alignment-richer-legal-authored-development-v1:negative:linked_variables",
+        "reference_review_status": "unreviewed",
+        "row_kind": "unsupported",
+        "source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "fees_paid"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "application",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "e862ca08eee88670b6b5eeb9f4a53e7361d4c95720526d5c659a5de5487344b4",
+        "case_variant": "single_b",
+        "input_sha256": "796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+        "item_id": "richer-review-item-04ba56dabe38166cd2cd60e5",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+        "original_id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_b",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "filing",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "dd0127f823cd24ff148fff10f4278183ca39439f7eb48a507229da04ea1ae031",
+        "case_variant": "multiple",
+        "input_sha256": "2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+        "item_id": "richer-review-item-14b0bfa59a875977fa29720e",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+        "original_id": "alignment-richer-legal-authored-development-v1:retention_clerk:multiple",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "clerk",
+              "conditions": [
+                "identity_verified"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "filing",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "5495420540c3c37b20e7e55a9c8b154465aa662862492aa33bf7907f93705b45",
+        "case_variant": "single_b",
+        "input_sha256": "340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+        "item_id": "richer-review-item-1d36c0bf0efa38ec27b1832a",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+        "original_id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_b",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "officer",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "applicant",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "ceceaa513b5a1d1ef8ed597154151929a9eed39514169885fb12d04a43b3affd",
+        "case_variant": "prohibition",
+        "input_sha256": "3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+        "item_id": "richer-review-item-2b68de1f4f66130da76d9bee",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+        "original_id": "alignment-richer-legal-authored-development-v1:notice_officer:prohibition",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "filing",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "bb501d2153cf889dec621886438f14b04092b455b9c0dbdd4fbf6e8132909b09",
+        "case_variant": "prohibition",
+        "input_sha256": "e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+        "item_id": "richer-review-item-2f98914aa49150d0cb7e7eb8",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+        "original_id": "alignment-richer-legal-authored-development-v1:retention_clerk:prohibition",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "authorize",
+              "actor": "registrar",
+              "conditions": [
+                "fees_paid"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "application",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "e2b15288265aa3800ea6a701515dee7e1525b698ac9a65f19d9e86e66673c86b",
+        "case_variant": "single_b",
+        "input_sha256": "01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+        "item_id": "richer-review-item-3a4a133d2004412e7373eb8d",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+        "original_id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_b",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "audit",
+              "actor": "officer",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "filing",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "0cdb72bc947a9cf5a7aa3c95f97f1502b0718c2af8e67e014abebf77fb6bb894",
+        "case_variant": "prohibition",
+        "input_sha256": "5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+        "item_id": "richer-review-item-3b413894b865b9098a090c4e",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+        "original_id": "alignment-richer-legal-authored-development-v1:audit_officer:prohibition",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "officer",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "applicant",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "7d8bf24f5273d7328ae5783c4aa7ab85588f3e5348b6b0a7bc871cfb6b1da8a5",
+        "case_variant": "multiple",
+        "input_sha256": "b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+        "item_id": "richer-review-item-3c2aadc280b45028616ba713",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+        "original_id": "alignment-richer-legal-authored-development-v1:notice_officer:multiple",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "application",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "1c0628d65ffc55638f4cbe77d8193724f44494493a78b0a2b4ddb9603e34a9de",
+        "case_variant": "prohibition",
+        "input_sha256": "037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+        "item_id": "richer-review-item-4997cfea219a2ed4724ef54e",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+        "original_id": "alignment-richer-legal-authored-development-v1:retention_custodian:prohibition",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "authorize",
+              "actor": "registrar",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "application",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "7ed634c1112e289fc1cf302003a6410d1450aa1f1dbc02f6c8fba69471d7eb33",
+        "case_variant": "single_a",
+        "input_sha256": "60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+        "item_id": "richer-review-item-4a534c047c11b1eac64d3af7",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+        "original_id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_a",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "application",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "f15309b951f872ee06e4dba58427dbf58af61c40c057e3415f1cda4f9d255284",
+        "case_variant": "single_a",
+        "input_sha256": "7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+        "item_id": "richer-review-item-52b2ee39c3fd4f729a3d9025",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+        "original_id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_a",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Absence of obligation cannot be silently changed into prohibition or permission.",
+          "reason_code": "negated_deontic_modality",
+          "required_handling": "abstain"
+        },
+        "authored_reference": null,
+        "authored_reference_sha256": null,
+        "case_variant": "negated_obligation",
+        "input_sha256": "d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+        "item_id": "richer-review-item-5a55c1965d4c664f351f53f7",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:negative:negated_obligation",
+        "original_id": "alignment-richer-legal-authored-development-v1:negative:negated_obligation",
+        "reference_review_status": "unreviewed",
+        "row_kind": "unsupported",
+        "source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "applicant",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "7a6a04fc3b0af5aa8a8a418d415c34ff5b6d6866894222c0f94bbbdadee2be21",
+        "case_variant": "prohibition",
+        "input_sha256": "4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+        "item_id": "richer-review-item-60855995bd8301a51212b084",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+        "original_id": "alignment-richer-legal-authored-development-v1:notice_clerk:prohibition",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "officer",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "applicant",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "95f2edcda625b5d5abb05c1887020d20b4e0487e5eff5e2c20b5dd142dddab76",
+        "case_variant": "single_a",
+        "input_sha256": "fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+        "item_id": "richer-review-item-706d0f29686a10d725655e20",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+        "original_id": "alignment-richer-legal-authored-development-v1:notice_officer:single_a",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "authorize",
+              "actor": "registrar",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "application",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "492506f798a1ead697bfffdb5ddd4d403d8a12a8ef16b5732d59e30b7996655f",
+        "case_variant": "multiple",
+        "input_sha256": "fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+        "item_id": "richer-review-item-7b1a7a73e17cadf8018987f8",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+        "original_id": "alignment-richer-legal-authored-development-v1:authorization_registrar:multiple",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "applicant",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "420e4b8ec8558faf3005c58e1e6e960bc0faa340b94deff2751705e9307c9efb",
+        "case_variant": "multiple",
+        "input_sha256": "6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+        "item_id": "richer-review-item-7b90428c1a970c5a63241982",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+        "original_id": "alignment-richer-legal-authored-development-v1:notice_clerk:multiple",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "application",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "7e5548999026a24b0dbd35b0f33cc3b6bdb64748739508709c50879c84778b45",
+        "case_variant": "multiple",
+        "input_sha256": "ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+        "item_id": "richer-review-item-7c184d4fe143b24daeee7c36",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+        "original_id": "alignment-richer-legal-authored-development-v1:retention_custodian:multiple",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "No reference date or timezone is supplied for this deictic deadline.",
+          "reason_code": "missing_calendar_context",
+          "required_handling": "clarify"
+        },
+        "authored_reference": null,
+        "authored_reference_sha256": null,
+        "case_variant": "relative_calendar",
+        "input_sha256": "27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+        "item_id": "richer-review-item-8155164b9ec49123dea2a635",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:negative:relative_calendar",
+        "original_id": "alignment-richer-legal-authored-development-v1:negative:relative_calendar",
+        "reference_review_status": "unreviewed",
+        "row_kind": "ambiguous",
+        "source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "applicant",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "7b236b65fa5e6e85882c581f07e252187deaaf35113348968827af11733358db",
+        "case_variant": "single_a",
+        "input_sha256": "f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+        "item_id": "richer-review-item-826ea46b530272c9f0b832bf",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+        "original_id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_a",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "authorize",
+              "actor": "registrar",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "F",
+              "object": "application",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "69a298a844d88539f7d2dc72b7f22afece434080f69eb7a24de289805a9a1bbe",
+        "case_variant": "prohibition",
+        "input_sha256": "54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+        "item_id": "richer-review-item-8461b1b0af8455d51c723f90",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+        "original_id": "alignment-richer-legal-authored-development-v1:authorization_registrar:prohibition",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "filing",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "6b15e84849e8a2a9f3b786fcea9a4f828278698a9959181619942b4ec4776e6f",
+        "case_variant": "single_a",
+        "input_sha256": "44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+        "item_id": "richer-review-item-8b22e2dfcddbc1a77a37dce7",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+        "original_id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_a",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "officer",
+              "conditions": [
+                "identity_verified"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "applicant",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "09e102a9091658ecf7ff0e316a03153b471d25cde5da810c8e93a2771fa9de4d",
+        "case_variant": "single_b",
+        "input_sha256": "65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+        "item_id": "richer-review-item-98143074480573acb1302f77",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+        "original_id": "alignment-richer-legal-authored-development-v1:notice_officer:single_b",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "audit",
+              "actor": "officer",
+              "conditions": [
+                "application_complete",
+                "fees_paid"
+              ],
+              "exceptions": [
+                "court_order",
+                "legal_hold"
+              ],
+              "modality": "P",
+              "object": "filing",
+              "temporal": [
+                "before_the_review_deadline",
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "fce539100046942ab77c9ef707f71bcf8bc1e5fe536837f1811842aeec5509c5",
+        "case_variant": "multiple",
+        "input_sha256": "02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+        "item_id": "richer-review-item-9f83a4c9faf2aec58d7e7ca2",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+        "original_id": "alignment-richer-legal-authored-development-v1:audit_officer:multiple",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "audit",
+              "actor": "officer",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "filing",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "921ed42dd5c2f12020057033a8610f82027be14bdafe8366e5b9c4e547d00e05",
+        "case_variant": "single_a",
+        "input_sha256": "5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+        "item_id": "richer-review-item-c4b6033c6b1b14b2c133f6a9",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+        "original_id": "alignment-richer-legal-authored-development-v1:audit_officer:single_a",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "notify",
+              "actor": "clerk",
+              "conditions": [
+                "fees_paid"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "applicant",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "d51d85d4b80ee634f6791735c5b89ee2099f4b2d64770584084e415b38718993",
+        "case_variant": "single_b",
+        "input_sha256": "2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+        "item_id": "richer-review-item-ca564d34aab8c505e2723cc6",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+        "original_id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_b",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+          "reason_code": "authored_flat_reference",
+          "required_handling": "preserve_supported_facets"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "audit",
+              "actor": "officer",
+              "conditions": [
+                "fees_paid"
+              ],
+              "exceptions": [
+                "legal_hold"
+              ],
+              "modality": "O",
+              "object": "filing",
+              "temporal": [
+                "before_the_review_deadline"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "1fa682a58bdc44f0199893e2d55f8aec60ed5aa91bec43162e6900adae3c0136",
+        "case_variant": "single_b",
+        "input_sha256": "b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+        "item_id": "richer-review-item-d33b23fb384621ff5d62b054",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+        "original_id": "alignment-richer-legal-authored-development-v1:audit_officer:single_b",
+        "reference_review_status": "unreviewed",
+        "row_kind": "positive",
+        "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+        "split": "train"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Existence, uniqueness, and per-application binding require another representation.",
+          "reason_code": "quantified_cardinality",
+          "required_handling": "abstain"
+        },
+        "authored_reference": null,
+        "authored_reference_sha256": null,
+        "case_variant": "unique_witness",
+        "input_sha256": "5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+        "item_id": "richer-review-item-e262e94dbed5d138d548b362",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:negative:unique_witness",
+        "original_id": "alignment-richer-legal-authored-development-v1:negative:unique_witness",
+        "reference_review_status": "unreviewed",
+        "row_kind": "unsupported",
+        "source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "The declared flat exception list is disjunctive, not conjunctive.",
+          "reason_code": "exception_conjunction",
+          "required_handling": "abstain"
+        },
+        "authored_reference": null,
+        "authored_reference_sha256": null,
+        "case_variant": "exception_conjunction",
+        "input_sha256": "9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+        "item_id": "richer-review-item-eeb2728cda1db06979f5af86",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:negative:exception_conjunction",
+        "original_id": "alignment-richer-legal-authored-development-v1:negative:exception_conjunction",
+        "reference_review_status": "unreviewed",
+        "row_kind": "unsupported",
+        "source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "These caller-supplied assumptions are not inferred from the shared source.",
+          "reason_code": "auxiliary_actor_interpretation",
+          "required_handling": "explicit_context_or_unavailable"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "clerk",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "case_file",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "b0306adbf93cd3ca61dba55afd1079d5acc90b45046588cb32c940f78b814a26",
+        "case_variant": "clerk",
+        "input_sha256": "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+        "item_id": "richer-review-item-f0c742a36b3192e333d2bf68",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:interpretation:designated_official",
+        "original_id": "alignment-richer-legal-authored-development-v1:context:clerk",
+        "reference_review_status": "unreviewed",
+        "row_kind": "explicit_context",
+        "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "These caller-supplied assumptions are not inferred from the shared source.",
+          "reason_code": "auxiliary_actor_interpretation",
+          "required_handling": "explicit_context_or_unavailable"
+        },
+        "authored_reference": {
+          "rules": [
+            {
+              "action": "retain",
+              "actor": "custodian",
+              "conditions": [
+                "application_complete"
+              ],
+              "exceptions": [
+                "court_order"
+              ],
+              "modality": "O",
+              "object": "case_file",
+              "temporal": [
+                "within_48_hours"
+              ]
+            }
+          ]
+        },
+        "authored_reference_sha256": "b9bf00940293a2c4a29252284c2b7bbe79e1ce18437ccb4f1c950a083705843e",
+        "case_variant": "custodian",
+        "input_sha256": "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+        "item_id": "richer-review-item-f3f2cad5ca0825bfd4e07c85",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:interpretation:designated_official",
+        "original_id": "alignment-richer-legal-authored-development-v1:context:custodian",
+        "reference_review_status": "unreviewed",
+        "row_kind": "explicit_context",
+        "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "The declared flat condition list is conjunctive, not disjunctive.",
+          "reason_code": "condition_disjunction",
+          "required_handling": "abstain"
+        },
+        "authored_reference": null,
+        "authored_reference_sha256": null,
+        "case_variant": "condition_disjunction",
+        "input_sha256": "7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+        "item_id": "richer-review-item-f4ddb6dca26e0efaaf08f5c9",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:negative:condition_disjunction",
+        "original_id": "alignment-richer-legal-authored-development-v1:negative:condition_disjunction",
+        "reference_review_status": "unreviewed",
+        "row_kind": "unsupported",
+        "source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "Flat actor/object atoms cannot encode universal binding.",
+          "reason_code": "quantified_binders",
+          "required_handling": "abstain"
+        },
+        "authored_reference": null,
+        "authored_reference_sha256": null,
+        "case_variant": "quantified_scope",
+        "input_sha256": "d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+        "item_id": "richer-review-item-f5754884b2ab975943efb965",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:negative:quantified_scope",
+        "original_id": "alignment-richer-legal-authored-development-v1:negative:quantified_scope",
+        "reference_review_status": "unreviewed",
+        "row_kind": "unsupported",
+        "source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+        "split": "validation"
+      },
+      {
+        "authored_expectation": {
+          "authored_unreviewed": true,
+          "compiler_outcome_observed": false,
+          "notes": "The pronoun does not identify a unique obligated actor.",
+          "reason_code": "ambiguous_actor_reference",
+          "required_handling": "clarify"
+        },
+        "authored_reference": null,
+        "authored_reference_sha256": null,
+        "case_variant": "ambiguous_actor",
+        "input_sha256": "06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+        "item_id": "richer-review-item-f5b48bc01247a015316eebbf",
+        "original_group_id": "alignment-richer-legal-authored-development-v1:group:negative:ambiguous_actor",
+        "original_id": "alignment-richer-legal-authored-development-v1:negative:ambiguous_actor",
+        "reference_review_status": "unreviewed",
+        "row_kind": "ambiguous",
+        "source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+        "split": "validation"
+      }
+    ],
+    "schema": "alignment-richer-source-context-organizer/v1",
+    "source_bindings": {
+      "evaluation_role": "exposed_development",
+      "panel": {
+        "bytes": 93063,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json",
+        "sha256": "d7ab18fa836f9ef2b0c9963eedb3b5c7980c45ea250a8414253b9d1987a7dde6"
+      },
+      "parser_report": {
+        "path": "artifacts/autoformalization-alignment-20261003/parser-01/report.json",
+        "sha256": "0e8b43316bb1209a4a7be47c3fef98ce8172e674f93e50e6237b38cb27e210e5"
+      },
+      "sources": [
+        {
+          "bytes": 19018,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+          "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+        },
+        {
+          "bytes": 31906,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+          "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+        },
+        {
+          "bytes": 20197,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+          "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+        },
+        {
+          "bytes": 23299,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+          "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e"
+        },
+        {
+          "bytes": 20651,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+          "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745"
+        },
+        {
+          "bytes": 17237,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+          "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576"
+        },
+        {
+          "bytes": 25163,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+          "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27"
+        },
+        {
+          "bytes": 17653,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+          "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318"
+        },
+        {
+          "bytes": 109257,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+        },
+        {
+          "bytes": 37034,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+          "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd"
+        },
+        {
+          "bytes": 13437,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+          "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+        },
+        {
+          "bytes": 27010,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+          "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e"
+        },
+        {
+          "bytes": 17858,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/bridge/canonical.py",
+          "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194"
+        },
+        {
+          "bytes": 4428,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/utils/cid_utils.py",
+          "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+        },
+        {
+          "bytes": 27572,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/deontic/converter.py",
+          "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8"
+        },
+        {
+          "bytes": 392561,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+          "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a"
+        },
+        {
+          "bytes": 300668,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+          "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+        },
+        {
+          "bytes": 1579,
+          "digest_verified": true,
+          "path": "scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+          "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+        },
+        {
+          "bytes": 14419,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+          "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+        },
+        {
+          "bytes": 6017,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+          "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+        },
+        {
+          "bytes": 25914,
+          "digest_verified": true,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py",
+          "sha256": "23ea8a10eea572d05a90f822a8f0430d4c93648d6ec6a3e775f370cb3e9c4b5a"
+        },
+        {
+          "bytes": 1826,
+          "digest_verified": true,
+          "path": "scripts/ops/legal_ir/run_alignment_parser_experiment.py",
+          "sha256": "11069f97f4210071c13fb780a2ee3c0c778e392adf1da008dee5e93e6da34b8b"
+        },
+        {
+          "bytes": 13308,
+          "path": "ipfs_datasets_py/logic/formalization/features.py",
+          "sha256": "a5abe46dbb9c90f83699f8d7922676bc41335e26413d73ae173c9fd9b66bb23c"
+        },
+        {
+          "bytes": 11288,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure.py",
+          "sha256": "8a5c5eb1667a46bd0e7ea3db1744f414de799e7dce1a53ecfbca888cdf51aa02"
+        },
+        {
+          "bytes": 10920,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review.py",
+          "sha256": "7d8321eef857937239b31e40152184883ef368a8103342cb3ef1da1d45a49dfc"
+        },
+        {
+          "bytes": 22237,
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure_experiment.py",
+          "sha256": "e57ed548cbe6a77a2ece2787da95c39e3a8a8a45754342b5debec4e637342230"
+        },
+        {
+          "bytes": 1954,
+          "path": "scripts/ops/legal_ir/run_alignment_structure_experiment.py",
+          "sha256": "2e5599887e63138f5cae663f15cb57da91c34b7e8dc4bb21eb3598fc961fdb69"
+        }
+      ]
+    },
+    "source_bindings_sha256": "076c4552256d066c32e83fe1331507371e6b360680188584bd095f79cc582ad6",
+    "source_panel": {
+      "capabilities": {
+        "conditions_connective": "all",
+        "context_interpretation": "explicit_authored_assumptions_separate_from_source",
+        "current_compiler_context_input": "unavailable",
+        "exceptions_connective": "any",
+        "native_legal_semantics_verified": false,
+        "native_temporal_semantics_verified": false,
+        "nested_scope": "unsupported",
+        "positive_representation": "flat_seven_facets_single_rule",
+        "quantified_binders": "unsupported",
+        "scope_representation": "qualifiers_apply_to_whole_single_rule",
+        "semantic_ir_interface": "CanonicalRoundTripIR@1",
+        "source_fidelity_verified": false,
+        "temporal_connective": "all_named_constraints",
+        "temporal_reasoning": "opaque_atoms_no_calendar_or_solver_semantics"
+      },
+      "domain_id": "legal_ir",
+      "evaluation_role": "exposed_development",
+      "independent_fidelity_available": false,
+      "integrity": {
+        "development_positive_rows_sha256": "c0300c587a35e55fa9f529b3a6d0c9bb780cf34482db9aca7db11e48c96b82d8",
+        "digest_recipe": "sha256_sorted_compact_utf8_json_payload_without_integrity",
+        "interpretation_bundles_sha256": "d68b39db340c70bb5f94fc411519917004bc75e6007dcfebca1a8942f1fc69d5",
+        "panel_payload_sha256": "47fa727e7eecda1e6864652b1408c289a2215a29823f10179b2d3f9af735ae95",
+        "row_kind_counts": {
+          "ambiguous": 2,
+          "explicit_context": 2,
+          "positive": 24,
+          "unsupported": 6
+        },
+        "rows_sha256": "484cdf663f2070bb03aa184d07090303a18e0e34959c04e6f1c94257c0d8ebf3",
+        "schema": "alignment-richer-panel-integrity/v1",
+        "split_counts": {
+          "train": 16,
+          "validation": 18
+        },
+        "train_positive_rows_sha256": "92de61a2608376ef6d9ae62b81384662fcbd0de102e06f0783ecbd7d3fa7dff7"
+      },
+      "interpretation_bundles": [
+        {
+          "authored_unreviewed": true,
+          "bundle_id": "alignment-richer-legal-authored-development-v1:interpretation:designated_official",
+          "excluded_from_source_only_evaluation_gold": true,
+          "excluded_from_source_only_training": true,
+          "group_id": "alignment-richer-legal-authored-development-v1:group:interpretation:designated_official",
+          "input_sha256s": [
+            "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+            "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f"
+          ],
+          "row_ids": [
+            "alignment-richer-legal-authored-development-v1:context:clerk",
+            "alignment-richer-legal-authored-development-v1:context:custodian"
+          ],
+          "source_only_consumption_allowed": false,
+          "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+          "split": "validation"
+        }
+      ],
+      "limits": {
+        "max_context_chars": 2000,
+        "max_qualifiers_per_facet": 3,
+        "max_rows": 64,
+        "max_rules_per_positive": 1,
+        "max_source_chars": 4000
+      },
+      "logic_family": "deontic",
+      "panel_id": "alignment-richer-legal-authored-development-v1",
+      "primary_fidelity": "unavailable",
+      "production_admitted": false,
+      "proof_authority": false,
+      "provenance": {
+        "independent_from_compiler_decoder_machinery": true,
+        "independent_source_review_available": false,
+        "natural_source_corpus": false,
+        "proof_verified": false,
+        "review_status": "pending_human_review",
+        "reviewer_identity_authenticated": false,
+        "source_author_independence_authenticated": false,
+        "source_origin": "manual_fixture_authored_text",
+        "source_target_pair_authorship": "same_fixture_author_unreviewed",
+        "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+        "target_origin": "synthetic_authored_unreviewed"
+      },
+      "qualified": false,
+      "resource_scope": {
+        "compiler_calls": 0,
+        "decoder_calls": 0,
+        "encoder_calls": 0,
+        "model_calls": 0,
+        "prover_calls": 0,
+        "provider_calls": 0,
+        "sealed_inputs_accessed": false,
+        "vectors_present": false
+      },
+      "review_contract": {
+        "author_independence": "unavailable",
+        "candidate_reference_blind_payload_required": true,
+        "completed_reviews": 0,
+        "context_review_requires_explicit_schema": true,
+        "existing_review_receipt_reusable": false,
+        "reviewer_authentication": "unavailable",
+        "separate_from_original_40": true,
+        "source_context_review_required": true,
+        "status": "not_prepared"
+      },
+      "rows": [
+        {
+          "case_variant": "single_a",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_a",
+          "input_sha256": "f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+          "source_text": "The clerk must notify the applicant within 48 hours if the application is complete, unless a court order applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "notify",
+                "actor": "clerk",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "court_order"
+                ],
+                "modality": "O",
+                "object": "applicant",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "7b236b65fa5e6e85882c581f07e252187deaaf35113348968827af11733358db"
+        },
+        {
+          "case_variant": "single_b",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_b",
+          "input_sha256": "2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+          "source_text": "If fees have been paid, the clerk must notify the applicant before the review deadline, unless a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "notify",
+                "actor": "clerk",
+                "conditions": [
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "O",
+                "object": "applicant",
+                "temporal": [
+                  "before_the_review_deadline"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "d51d85d4b80ee634f6791735c5b89ee2099f4b2d64770584084e415b38718993"
+        },
+        {
+          "case_variant": "multiple",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:multiple",
+          "input_sha256": "6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+          "source_text": "The clerk may notify the applicant within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "notify",
+                "actor": "clerk",
+                "conditions": [
+                  "application_complete",
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "court_order",
+                  "legal_hold"
+                ],
+                "modality": "P",
+                "object": "applicant",
+                "temporal": [
+                  "before_the_review_deadline",
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "420e4b8ec8558faf3005c58e1e6e960bc0faa340b94deff2751705e9307c9efb"
+        },
+        {
+          "case_variant": "prohibition",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:notice_clerk",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:prohibition",
+          "input_sha256": "4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+          "source_text": "The clerk must not notify the applicant within 48 hours if the application is complete, unless a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "notify",
+                "actor": "clerk",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "F",
+                "object": "applicant",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "7a6a04fc3b0af5aa8a8a418d415c34ff5b6d6866894222c0f94bbbdadee2be21"
+        },
+        {
+          "case_variant": "single_a",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_a",
+          "input_sha256": "7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+          "source_text": "If the application is complete, the custodian must retain the application within 48 hours, unless a court order applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "custodian",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "court_order"
+                ],
+                "modality": "O",
+                "object": "application",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "f15309b951f872ee06e4dba58427dbf58af61c40c057e3415f1cda4f9d255284"
+        },
+        {
+          "case_variant": "single_b",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_b",
+          "input_sha256": "796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+          "source_text": "The custodian must retain the application before the review deadline if fees have been paid, unless a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "custodian",
+                "conditions": [
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "O",
+                "object": "application",
+                "temporal": [
+                  "before_the_review_deadline"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "e862ca08eee88670b6b5eeb9f4a53e7361d4c95720526d5c659a5de5487344b4"
+        },
+        {
+          "case_variant": "multiple",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:multiple",
+          "input_sha256": "ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+          "source_text": "If the application is complete and fees have been paid, the custodian may retain the application within 48 hours and before the review deadline, unless a court order applies or a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "custodian",
+                "conditions": [
+                  "application_complete",
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "court_order",
+                  "legal_hold"
+                ],
+                "modality": "P",
+                "object": "application",
+                "temporal": [
+                  "before_the_review_deadline",
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "7e5548999026a24b0dbd35b0f33cc3b6bdb64748739508709c50879c84778b45"
+        },
+        {
+          "case_variant": "prohibition",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:retention_custodian",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:prohibition",
+          "input_sha256": "037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+          "source_text": "If the application is complete, the custodian must not retain the application within 48 hours, unless a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "custodian",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "F",
+                "object": "application",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "1c0628d65ffc55638f4cbe77d8193724f44494493a78b0a2b4ddb9603e34a9de"
+        },
+        {
+          "case_variant": "single_a",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_a",
+          "input_sha256": "5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+          "source_text": "The officer must audit the filing within 48 hours if the application is complete, unless a court order applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "audit",
+                "actor": "officer",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "court_order"
+                ],
+                "modality": "O",
+                "object": "filing",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "921ed42dd5c2f12020057033a8610f82027be14bdafe8366e5b9c4e547d00e05"
+        },
+        {
+          "case_variant": "single_b",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_b",
+          "input_sha256": "b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+          "source_text": "If fees have been paid, the officer must audit the filing before the review deadline, unless a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "audit",
+                "actor": "officer",
+                "conditions": [
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "O",
+                "object": "filing",
+                "temporal": [
+                  "before_the_review_deadline"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "1fa682a58bdc44f0199893e2d55f8aec60ed5aa91bec43162e6900adae3c0136"
+        },
+        {
+          "case_variant": "multiple",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:multiple",
+          "input_sha256": "02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+          "source_text": "The officer may audit the filing within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "audit",
+                "actor": "officer",
+                "conditions": [
+                  "application_complete",
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "court_order",
+                  "legal_hold"
+                ],
+                "modality": "P",
+                "object": "filing",
+                "temporal": [
+                  "before_the_review_deadline",
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "fce539100046942ab77c9ef707f71bcf8bc1e5fe536837f1811842aeec5509c5"
+        },
+        {
+          "case_variant": "prohibition",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:audit_officer",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:prohibition",
+          "input_sha256": "5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+          "source_text": "The officer must not audit the filing within 48 hours if the application is complete, unless a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "audit",
+                "actor": "officer",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "F",
+                "object": "filing",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "0cdb72bc947a9cf5a7aa3c95f97f1502b0718c2af8e67e014abebf77fb6bb894"
+        },
+        {
+          "case_variant": "single_a",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_a",
+          "input_sha256": "60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+          "source_text": "If the application is complete, the registrar must authorize the application within 48 hours, unless a court order applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "authorize",
+                "actor": "registrar",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "court_order"
+                ],
+                "modality": "O",
+                "object": "application",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "7ed634c1112e289fc1cf302003a6410d1450aa1f1dbc02f6c8fba69471d7eb33"
+        },
+        {
+          "case_variant": "single_b",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_b",
+          "input_sha256": "01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+          "source_text": "The registrar must authorize the application before the review deadline if fees have been paid, unless a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "authorize",
+                "actor": "registrar",
+                "conditions": [
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "O",
+                "object": "application",
+                "temporal": [
+                  "before_the_review_deadline"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "e2b15288265aa3800ea6a701515dee7e1525b698ac9a65f19d9e86e66673c86b"
+        },
+        {
+          "case_variant": "multiple",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:multiple",
+          "input_sha256": "fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+          "source_text": "If the application is complete and fees have been paid, the registrar may authorize the application within 48 hours and before the review deadline, unless a court order applies or a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "authorize",
+                "actor": "registrar",
+                "conditions": [
+                  "application_complete",
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "court_order",
+                  "legal_hold"
+                ],
+                "modality": "P",
+                "object": "application",
+                "temporal": [
+                  "before_the_review_deadline",
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "492506f798a1ead697bfffdb5ddd4d403d8a12a8ef16b5732d59e30b7996655f"
+        },
+        {
+          "case_variant": "prohibition",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:authorization_registrar",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:prohibition",
+          "input_sha256": "54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+          "source_text": "If the application is complete, the registrar must not authorize the application within 48 hours, unless a legal hold applies.",
+          "split": "train",
+          "target": {
+            "rules": [
+              {
+                "action": "authorize",
+                "actor": "registrar",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "F",
+                "object": "application",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "69a298a844d88539f7d2dc72b7f22afece434080f69eb7a24de289805a9a1bbe"
+        },
+        {
+          "case_variant": "single_a",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_a",
+          "input_sha256": "44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+          "source_text": "The clerk must retain the filing within 48 hours if the application is complete, unless a court order applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "clerk",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "court_order"
+                ],
+                "modality": "O",
+                "object": "filing",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "6b15e84849e8a2a9f3b786fcea9a4f828278698a9959181619942b4ec4776e6f"
+        },
+        {
+          "case_variant": "single_b",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_b",
+          "input_sha256": "340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [
+                "identity_verified"
+              ],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "contains_authored_oov_atoms"
+          },
+          "row_kind": "positive",
+          "source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+          "source_text": "If identity has been verified, the clerk must retain the filing before the review deadline, unless a legal hold applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "clerk",
+                "conditions": [
+                  "identity_verified"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "O",
+                "object": "filing",
+                "temporal": [
+                  "before_the_review_deadline"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "5495420540c3c37b20e7e55a9c8b154465aa662862492aa33bf7907f93705b45"
+        },
+        {
+          "case_variant": "multiple",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:multiple",
+          "input_sha256": "2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+          "source_text": "The clerk may retain the filing within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "clerk",
+                "conditions": [
+                  "application_complete",
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "court_order",
+                  "legal_hold"
+                ],
+                "modality": "P",
+                "object": "filing",
+                "temporal": [
+                  "before_the_review_deadline",
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "dd0127f823cd24ff148fff10f4278183ca39439f7eb48a507229da04ea1ae031"
+        },
+        {
+          "case_variant": "prohibition",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:retention_clerk",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:prohibition",
+          "input_sha256": "e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+          "source_text": "The clerk must not retain the filing within 48 hours if the application is complete, unless a legal hold applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "clerk",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "F",
+                "object": "filing",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "bb501d2153cf889dec621886438f14b04092b455b9c0dbdd4fbf6e8132909b09"
+        },
+        {
+          "case_variant": "single_a",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_a",
+          "input_sha256": "fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+          "source_text": "If the application is complete, the officer must notify the applicant within 48 hours, unless a court order applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "notify",
+                "actor": "officer",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "court_order"
+                ],
+                "modality": "O",
+                "object": "applicant",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "95f2edcda625b5d5abb05c1887020d20b4e0487e5eff5e2c20b5dd142dddab76"
+        },
+        {
+          "case_variant": "single_b",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_b",
+          "input_sha256": "65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [
+                "identity_verified"
+              ],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "contains_authored_oov_atoms"
+          },
+          "row_kind": "positive",
+          "source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+          "source_text": "The officer must notify the applicant before the review deadline if identity has been verified, unless a legal hold applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "notify",
+                "actor": "officer",
+                "conditions": [
+                  "identity_verified"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "O",
+                "object": "applicant",
+                "temporal": [
+                  "before_the_review_deadline"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "09e102a9091658ecf7ff0e316a03153b471d25cde5da810c8e93a2771fa9de4d"
+        },
+        {
+          "case_variant": "multiple",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:multiple",
+          "input_sha256": "b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+          "source_text": "If the application is complete and fees have been paid, the officer may notify the applicant within 48 hours and before the review deadline, unless a court order applies or a legal hold applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "notify",
+                "actor": "officer",
+                "conditions": [
+                  "application_complete",
+                  "fees_paid"
+                ],
+                "exceptions": [
+                  "court_order",
+                  "legal_hold"
+                ],
+                "modality": "P",
+                "object": "applicant",
+                "temporal": [
+                  "before_the_review_deadline",
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "7d8bf24f5273d7328ae5783c4aa7ab85588f3e5348b6b0a7bc871cfb6b1da8a5"
+        },
+        {
+          "case_variant": "prohibition",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Comparison is an authored diagnostic, not an adjudicated source meaning.",
+            "reason_code": "authored_flat_reference",
+            "required_handling": "preserve_supported_facets"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:notice_officer",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:prohibition",
+          "input_sha256": "3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "positive",
+          "source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+          "source_text": "If the application is complete, the officer must not notify the applicant within 48 hours, unless a legal hold applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "notify",
+                "actor": "officer",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "legal_hold"
+                ],
+                "modality": "F",
+                "object": "applicant",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "ceceaa513b5a1d1ef8ed597154151929a9eed39514169885fb12d04a43b3affd"
+        },
+        {
+          "case_variant": "quantified_scope",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Flat actor/object atoms cannot encode universal binding.",
+            "reason_code": "quantified_binders",
+            "required_handling": "abstain"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:negative:quantified_scope",
+          "id": "alignment-richer-legal-authored-development-v1:negative:quantified_scope",
+          "input_sha256": "d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "no_positive_reference"
+          },
+          "row_kind": "unsupported",
+          "source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+          "source_text": "Every clerk must review every application.",
+          "split": "validation",
+          "target": null,
+          "target_sha256": null
+        },
+        {
+          "case_variant": "unique_witness",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Existence, uniqueness, and per-application binding require another representation.",
+            "reason_code": "quantified_cardinality",
+            "required_handling": "abstain"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:negative:unique_witness",
+          "id": "alignment-richer-legal-authored-development-v1:negative:unique_witness",
+          "input_sha256": "5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "no_positive_reference"
+          },
+          "row_kind": "unsupported",
+          "source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+          "source_text": "Each officer must assign exactly one reviewer to each application.",
+          "split": "validation",
+          "target": null,
+          "target_sha256": null
+        },
+        {
+          "case_variant": "linked_variables",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "The applicant and their application require a shared variable binding.",
+            "reason_code": "relational_variable_binding",
+            "required_handling": "abstain"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:negative:linked_variables",
+          "id": "alignment-richer-legal-authored-development-v1:negative:linked_variables",
+          "input_sha256": "4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "no_positive_reference"
+          },
+          "row_kind": "unsupported",
+          "source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+          "source_text": "A clerk may notify an applicant only if that applicant's application is complete.",
+          "split": "validation",
+          "target": null,
+          "target_sha256": null
+        },
+        {
+          "case_variant": "condition_disjunction",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "The declared flat condition list is conjunctive, not disjunctive.",
+            "reason_code": "condition_disjunction",
+            "required_handling": "abstain"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:negative:condition_disjunction",
+          "id": "alignment-richer-legal-authored-development-v1:negative:condition_disjunction",
+          "input_sha256": "7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "no_positive_reference"
+          },
+          "row_kind": "unsupported",
+          "source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+          "source_text": "The clerk must notify the applicant if the application is complete or fees have been paid.",
+          "split": "validation",
+          "target": null,
+          "target_sha256": null
+        },
+        {
+          "case_variant": "exception_conjunction",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "The declared flat exception list is disjunctive, not conjunctive.",
+            "reason_code": "exception_conjunction",
+            "required_handling": "abstain"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:negative:exception_conjunction",
+          "id": "alignment-richer-legal-authored-development-v1:negative:exception_conjunction",
+          "input_sha256": "9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "no_positive_reference"
+          },
+          "row_kind": "unsupported",
+          "source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+          "source_text": "The clerk must notify the applicant unless a court order applies and a legal hold applies.",
+          "split": "validation",
+          "target": null,
+          "target_sha256": null
+        },
+        {
+          "case_variant": "negated_obligation",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "Absence of obligation cannot be silently changed into prohibition or permission.",
+            "reason_code": "negated_deontic_modality",
+            "required_handling": "abstain"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:negative:negated_obligation",
+          "id": "alignment-richer-legal-authored-development-v1:negative:negated_obligation",
+          "input_sha256": "d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "no_positive_reference"
+          },
+          "row_kind": "unsupported",
+          "source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+          "source_text": "The clerk is not required to notify the applicant.",
+          "split": "validation",
+          "target": null,
+          "target_sha256": null
+        },
+        {
+          "case_variant": "ambiguous_actor",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "The pronoun does not identify a unique obligated actor.",
+            "reason_code": "ambiguous_actor_reference",
+            "required_handling": "clarify"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:negative:ambiguous_actor",
+          "id": "alignment-richer-legal-authored-development-v1:negative:ambiguous_actor",
+          "input_sha256": "06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "no_positive_reference"
+          },
+          "row_kind": "ambiguous",
+          "source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+          "source_text": "The clerk told the custodian that they must retain the application.",
+          "split": "validation",
+          "target": null,
+          "target_sha256": null
+        },
+        {
+          "case_variant": "relative_calendar",
+          "context": {
+            "bindings": {},
+            "role": "none_required",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "text": ""
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "No reference date or timezone is supplied for this deictic deadline.",
+            "reason_code": "missing_calendar_context",
+            "required_handling": "clarify"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:negative:relative_calendar",
+          "id": "alignment-richer-legal-authored-development-v1:negative:relative_calendar",
+          "input_sha256": "27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+          "interpretation_bundle_id": null,
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "no_positive_reference"
+          },
+          "row_kind": "ambiguous",
+          "source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+          "source_text": "The clerk must notify the applicant next Friday.",
+          "split": "validation",
+          "target": null,
+          "target_sha256": null
+        },
+        {
+          "case_variant": "clerk",
+          "context": {
+            "bindings": {
+              "designated_official": {
+                "kind": "actor_atom",
+                "value": "clerk"
+              }
+            },
+            "role": "explicit_assumptions",
+            "sha256": "5c447c36d664bb11b85f516d3b79bc1e941abe1e192f2155dc9cabc05637366b",
+            "text": "For this policy, 'designated official' denotes the clerk."
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "These caller-supplied assumptions are not inferred from the shared source.",
+            "reason_code": "auxiliary_actor_interpretation",
+            "required_handling": "explicit_context_or_unavailable"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:interpretation:designated_official",
+          "id": "alignment-richer-legal-authored-development-v1:context:clerk",
+          "input_sha256": "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+          "interpretation_bundle_id": "alignment-richer-legal-authored-development-v1:interpretation:designated_official",
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "explicit_context",
+          "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+          "source_text": "The designated official must retain the case file within 48 hours if the application is complete, unless a court order applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "clerk",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "court_order"
+                ],
+                "modality": "O",
+                "object": "case_file",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "b0306adbf93cd3ca61dba55afd1079d5acc90b45046588cb32c940f78b814a26"
+        },
+        {
+          "case_variant": "custodian",
+          "context": {
+            "bindings": {
+              "designated_official": {
+                "kind": "actor_atom",
+                "value": "custodian"
+              }
+            },
+            "role": "explicit_assumptions",
+            "sha256": "1475ecb77ed7c374b5769b531ce5e0090176e9cc8342a3b086e63ebc9f24e583",
+            "text": "For this policy, 'designated official' denotes the custodian."
+          },
+          "domain_id": "legal_ir",
+          "evaluation_role": "exposed_development",
+          "expectation": {
+            "authored_unreviewed": true,
+            "compiler_outcome_observed": false,
+            "notes": "These caller-supplied assumptions are not inferred from the shared source.",
+            "reason_code": "auxiliary_actor_interpretation",
+            "required_handling": "explicit_context_or_unavailable"
+          },
+          "group_id": "alignment-richer-legal-authored-development-v1:group:interpretation:designated_official",
+          "id": "alignment-richer-legal-authored-development-v1:context:custodian",
+          "input_sha256": "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+          "interpretation_bundle_id": "alignment-richer-legal-authored-development-v1:interpretation:designated_official",
+          "logic_family": "deontic",
+          "proof_authority": false,
+          "provenance": {
+            "independent_from_compiler_decoder_machinery": true,
+            "independent_source_review_available": false,
+            "natural_source_corpus": false,
+            "proof_verified": false,
+            "review_status": "pending_human_review",
+            "reviewer_identity_authenticated": false,
+            "source_author_independence_authenticated": false,
+            "source_origin": "manual_fixture_authored_text",
+            "source_target_pair_authorship": "same_fixture_author_unreviewed",
+            "target_construction": "manual_literals_not_compiler_or_decoder_outputs",
+            "target_origin": "synthetic_authored_unreviewed"
+          },
+          "qualified": false,
+          "qualifier_vocabulary": {
+            "oov_atoms": {
+              "conditions": [],
+              "exceptions": [],
+              "temporal": []
+            },
+            "status": "train_known"
+          },
+          "row_kind": "explicit_context",
+          "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+          "source_text": "The designated official must retain the case file within 48 hours if the application is complete, unless a court order applies.",
+          "split": "validation",
+          "target": {
+            "rules": [
+              {
+                "action": "retain",
+                "actor": "custodian",
+                "conditions": [
+                  "application_complete"
+                ],
+                "exceptions": [
+                  "court_order"
+                ],
+                "modality": "O",
+                "object": "case_file",
+                "temporal": [
+                  "within_48_hours"
+                ]
+              }
+            ]
+          },
+          "target_sha256": "b9bf00940293a2c4a29252284c2b7bbe79e1ce18437ccb4f1c950a083705843e"
+        }
+      ],
+      "schema": "alignment-richer-panel/v1"
+    },
+    "source_panel_sha256": "0c77133b912dc52c17b4740710b5ce4be78425c201950c749c07930891348a65",
+    "source_semantics_verified": false,
+    "status": "prepared_pending_human_review",
+    "submissions_created": false
+  },
+  "production_admitted": false,
+  "proof_authority": false,
+  "prover_calls": 0,
+  "provider_calls": 0,
+  "qualified": false,
+  "reviewer_identity_attestations_created": false,
+  "reviewer_manifest": {
+    "audience": "reviewer",
+    "candidate_reference_blind": true,
+    "digest_recipe": "sha256_sorted_compact_utf8_json_no_nan_no_newline",
+    "independent_fidelity_available": false,
+    "input_manifest_sha256": "a76e601b65e7f5ae58c7d22e3de36518f53355743e9dcbbba095398bd114f42a",
+    "item_count": 34,
+    "payload_bytes": 25297,
+    "payload_schema": "alignment-richer-source-context-reviewer/v1",
+    "payload_sha256": "0584581979beac91312aabae8aed650cfc28af3b9c3ca239f67a6c8a2f9dfb62",
+    "production_admitted": false,
+    "proof_authority": false,
+    "qualified": false,
+    "reviewer_identity_attestations_created": false,
+    "schema": "alignment-richer-review-audience-manifest/v1",
+    "source_semantics_verified": false,
+    "submissions_created": false
+  },
+  "reviewer_payload": {
+    "instructions": {
+      "ambiguity": "Describe competing interpretations and the clarification needed rather than choosing an unstated referent or assumption.",
+      "blank_annotations": "Null fields mean unreviewed or unanswered, never an adjudicated absence of meaning.",
+      "context": "Treat explicit_assumptions as separately supplied input. Do not infer missing context; distinguish source-only wording from interpretations requiring assumptions.",
+      "explicit_none": "If review establishes no normative rule, explicitly record that interpretation and an empty normative_rules list with reasons.",
+      "freeform_qualifier_scope": "Explain qualifier connectives, scope, relationships, variable binding, and timing in free form. Seven flat facets need not express the source's full meaning.",
+      "normative_rules": "You may describe each proposed norm using modality, actor, action, object, conditions, exceptions, and temporal facets. No suggested values or target rules are supplied.",
+      "reviewer_identity": "Leave identity and timestamp fields blank until an actual review. Entering a declared identity alone does not authenticate a reviewer or their independence.",
+      "task": "Interpret the exact source and separately declared assumptions independently; no proposed answer is supplied.",
+      "unsupported_meaning": "Record meaningful binders, scope, logical connectives, negated modalities, and temporal interpretation that a flat representation cannot express."
+    },
+    "items": [
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+        "item_id": "richer-review-item-00b1e06d9d6ae726a83677e4",
+        "source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+        "source_text": "A clerk may notify an applicant only if that applicant's application is complete."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+        "item_id": "richer-review-item-04ba56dabe38166cd2cd60e5",
+        "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+        "source_text": "The custodian must retain the application before the review deadline if fees have been paid, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+        "item_id": "richer-review-item-14b0bfa59a875977fa29720e",
+        "source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+        "source_text": "The clerk may retain the filing within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+        "item_id": "richer-review-item-1d36c0bf0efa38ec27b1832a",
+        "source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+        "source_text": "If identity has been verified, the clerk must retain the filing before the review deadline, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+        "item_id": "richer-review-item-2b68de1f4f66130da76d9bee",
+        "source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+        "source_text": "If the application is complete, the officer must not notify the applicant within 48 hours, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+        "item_id": "richer-review-item-2f98914aa49150d0cb7e7eb8",
+        "source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+        "source_text": "The clerk must not retain the filing within 48 hours if the application is complete, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+        "item_id": "richer-review-item-3a4a133d2004412e7373eb8d",
+        "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+        "source_text": "The registrar must authorize the application before the review deadline if fees have been paid, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+        "item_id": "richer-review-item-3b413894b865b9098a090c4e",
+        "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+        "source_text": "The officer must not audit the filing within 48 hours if the application is complete, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+        "item_id": "richer-review-item-3c2aadc280b45028616ba713",
+        "source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+        "source_text": "If the application is complete and fees have been paid, the officer may notify the applicant within 48 hours and before the review deadline, unless a court order applies or a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+        "item_id": "richer-review-item-4997cfea219a2ed4724ef54e",
+        "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+        "source_text": "If the application is complete, the custodian must not retain the application within 48 hours, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+        "item_id": "richer-review-item-4a534c047c11b1eac64d3af7",
+        "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+        "source_text": "If the application is complete, the registrar must authorize the application within 48 hours, unless a court order applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+        "item_id": "richer-review-item-52b2ee39c3fd4f729a3d9025",
+        "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+        "source_text": "If the application is complete, the custodian must retain the application within 48 hours, unless a court order applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+        "item_id": "richer-review-item-5a55c1965d4c664f351f53f7",
+        "source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+        "source_text": "The clerk is not required to notify the applicant."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+        "item_id": "richer-review-item-60855995bd8301a51212b084",
+        "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+        "source_text": "The clerk must not notify the applicant within 48 hours if the application is complete, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+        "item_id": "richer-review-item-706d0f29686a10d725655e20",
+        "source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+        "source_text": "If the application is complete, the officer must notify the applicant within 48 hours, unless a court order applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+        "item_id": "richer-review-item-7b1a7a73e17cadf8018987f8",
+        "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+        "source_text": "If the application is complete and fees have been paid, the registrar may authorize the application within 48 hours and before the review deadline, unless a court order applies or a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+        "item_id": "richer-review-item-7b90428c1a970c5a63241982",
+        "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+        "source_text": "The clerk may notify the applicant within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+        "item_id": "richer-review-item-7c184d4fe143b24daeee7c36",
+        "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+        "source_text": "If the application is complete and fees have been paid, the custodian may retain the application within 48 hours and before the review deadline, unless a court order applies or a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+        "item_id": "richer-review-item-8155164b9ec49123dea2a635",
+        "source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+        "source_text": "The clerk must notify the applicant next Friday."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+        "item_id": "richer-review-item-826ea46b530272c9f0b832bf",
+        "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+        "source_text": "The clerk must notify the applicant within 48 hours if the application is complete, unless a court order applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+        "item_id": "richer-review-item-8461b1b0af8455d51c723f90",
+        "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+        "source_text": "If the application is complete, the registrar must not authorize the application within 48 hours, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+        "item_id": "richer-review-item-8b22e2dfcddbc1a77a37dce7",
+        "source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+        "source_text": "The clerk must retain the filing within 48 hours if the application is complete, unless a court order applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+        "item_id": "richer-review-item-98143074480573acb1302f77",
+        "source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+        "source_text": "The officer must notify the applicant before the review deadline if identity has been verified, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+        "item_id": "richer-review-item-9f83a4c9faf2aec58d7e7ca2",
+        "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+        "source_text": "The officer may audit the filing within 48 hours and before the review deadline if the application is complete and fees have been paid, unless a court order applies or a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+        "item_id": "richer-review-item-c4b6033c6b1b14b2c133f6a9",
+        "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+        "source_text": "The officer must audit the filing within 48 hours if the application is complete, unless a court order applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+        "item_id": "richer-review-item-ca564d34aab8c505e2723cc6",
+        "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+        "source_text": "If fees have been paid, the clerk must notify the applicant before the review deadline, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+        "item_id": "richer-review-item-d33b23fb384621ff5d62b054",
+        "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+        "source_text": "If fees have been paid, the officer must audit the filing before the review deadline, unless a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+        "item_id": "richer-review-item-e262e94dbed5d138d548b362",
+        "source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+        "source_text": "Each officer must assign exactly one reviewer to each application."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+        "item_id": "richer-review-item-eeb2728cda1db06979f5af86",
+        "source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+        "source_text": "The clerk must notify the applicant unless a court order applies and a legal hold applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {
+            "designated_official": {
+              "kind": "actor_atom",
+              "value": "clerk"
+            }
+          },
+          "role": "explicit_assumptions",
+          "sha256": "5c447c36d664bb11b85f516d3b79bc1e941abe1e192f2155dc9cabc05637366b",
+          "text": "For this policy, 'designated official' denotes the clerk."
+        },
+        "input_sha256": "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+        "item_id": "richer-review-item-f0c742a36b3192e333d2bf68",
+        "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+        "source_text": "The designated official must retain the case file within 48 hours if the application is complete, unless a court order applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {
+            "designated_official": {
+              "kind": "actor_atom",
+              "value": "custodian"
+            }
+          },
+          "role": "explicit_assumptions",
+          "sha256": "1475ecb77ed7c374b5769b531ce5e0090176e9cc8342a3b086e63ebc9f24e583",
+          "text": "For this policy, 'designated official' denotes the custodian."
+        },
+        "input_sha256": "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+        "item_id": "richer-review-item-f3f2cad5ca0825bfd4e07c85",
+        "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+        "source_text": "The designated official must retain the case file within 48 hours if the application is complete, unless a court order applies."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+        "item_id": "richer-review-item-f4ddb6dca26e0efaaf08f5c9",
+        "source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+        "source_text": "The clerk must notify the applicant if the application is complete or fees have been paid."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+        "item_id": "richer-review-item-f5754884b2ab975943efb965",
+        "source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+        "source_text": "Every clerk must review every application."
+      },
+      {
+        "annotation": {
+          "ambiguity": null,
+          "freeform_qualifier_scope": null,
+          "interpretation_status": null,
+          "normative_rules": null,
+          "notes": null,
+          "reviewed_at_utc": null,
+          "reviewer_id": null,
+          "unsupported_meaning": null
+        },
+        "context": {
+          "bindings": {},
+          "role": "none_required",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        "input_sha256": "06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+        "item_id": "richer-review-item-f5b48bc01247a015316eebbf",
+        "source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+        "source_text": "The clerk told the custodian that they must retain the application."
+      }
+    ],
+    "schema": "alignment-richer-source-context-reviewer/v1"
+  },
+  "schema": "alignment-richer-review-bundle/v1",
+  "source_semantics_verified": false,
+  "status": "prepared_pending_human_review",
+  "submissions_created": false,
+  "training_executed": false
+}

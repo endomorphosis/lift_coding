@@ -1,0 +1,2381 @@
+{
+  "schema": "accelerate-publication-original-checkout@1",
+  "utc": "2026-10-04T19:27:16.891446+00:00",
+  "HEAD": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+  "index_path": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/index",
+  "index_sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4",
+  "status_records": [
+    {
+      "status": " M",
+      "path": ".gitignore"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/code_symbol_vector_index.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/doctor_contract_adapters.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/doctor_repository_diagnostics.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/planning_analysis_factory.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/program_ast_adapters.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/context/context_compiler.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/context/context_contracts.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/control/control_plane.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/control/lifecycle_orchestrator.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/control/profile_authority.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/service_factory.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/merge/database_coordination.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/README.md"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/deterministic_doctor_transaction.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/plan_critic.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/plan_evaluator.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/symbolic_candidate_planner.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/prompt/README.md"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/prompt/plan_create_service.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/prompt/prompt_directory_scanner.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/prompt/prompt_goal_planner.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/multi_prover_resources.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/multi_prover_router.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/proof_scope_index.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/README.md"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/deterministic_doctor_runtime.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/supervisor_meta_index.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/task_sources/intent_repository.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/task_sources/typed_database_task_source.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/task_sources/typed_state_owner.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/database_attempt_feedback.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon_runner.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor_runtime.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/validation/project_dependency_preflight.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/validation/validation_commands.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/agent_supervisor/validation/validation_runtime.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/llm_router.py"
+    },
+    {
+      "status": " M",
+      "path": "ipfs_accelerate_py/model_catalog/schema.py"
+    },
+    {
+      "status": " M",
+      "path": "scripts/ops/agent_supervisor/deterministic_doctor.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/semantic_state/test_context_pack.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_code_symbol_vector_index.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_context_delta.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_database_portal_bridge.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_deterministic_doctor_runtime.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_doctor_contract_adapters.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_grok_docker_task_execution.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_intent_repository.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_multi_prover_resources.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_multi_prover_router.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_plan_create_service.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_plan_evaluator.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_project_dependency_preflight.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_proof_scope_index.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_quack_transport_native.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_agent_supervisor_validation_scheduler.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_database_attempt_diagnostic_feedback.py"
+    },
+    {
+      "status": " M",
+      "path": "test/api/test_supervisor_meta_index.py"
+    },
+    {
+      "status": " M",
+      "path": "test/integration/test_agent_supervisor_doctor_transaction_live.py"
+    },
+    {
+      "status": " M",
+      "path": "test/integration/test_agent_supervisor_planner_doctor_chaos.py"
+    },
+    {
+      "status": " M",
+      "path": "test/test_ai_service_catalog_schema.py"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/full_daemon/facade-init.txt"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/full_daemon/repo/"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/full_daemon/state/.benchmark_events.jsonl.lock"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/full_daemon/state/.implementation.lock.update.lock"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/full_daemon/state/benchmark_events.jsonl"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/full_daemon/state/worktrees/.pool-state/.ac2f2bcddbb0-5b2c393bca2c.lock.update.lock"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/full_daemon/state/worktrees/workspace_8c7c977bc41f_f33772c7d0a8/"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/full_daemon/state/worktrees/workspace_ac2f2bcddbb0_5b2c393bca2c/"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/image-id.txt"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/router-grok-pilot-v2.md"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/source-head.txt"
+    },
+    {
+      "status": "??",
+      "path": "artifacts/container_coding_qualification/source-status.txt"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/Dockerfile"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/Dockerfile.finite-worker"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/Dockerfile.supervision"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/INDEXED_ABLATIONS.md"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/README.md"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/SECURITY_CHECKPOINT_PLAN.md"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/SUPERVISION_INTEGRATION.md"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/SYMBOLIC_SECURITY.md"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_full_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_inventory_resume_worker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_signed_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_signed_successor_archive.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_source_delta.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_source_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_finite_advisory_spawn.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_finite_repository_advisory_join.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/audit_finite_repository_advisory_worker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/benchmark_comparison.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/codebase_ir_metadata.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/container_worker_deployment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/daemon_run.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/doctor_component_probe.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/doctor_composition_smoke.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/doctor_literal_repair.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/doctor_symbol_repair.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_advisory_spawn_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_proof_query_worker_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_repository_admission_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_repository_advisory_join_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_repository_advisory_worker_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_repository_advisory_worker_support.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_repository_candidate_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_repository_native_tests.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_repository_sharded_metadata.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/finite_repository_worker_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/harbor_agent.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/index_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/indexed_doctor_lifecycle.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/inventory_resume_scan_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/inventory_resume_setup_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/learned_vector_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/live.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/live_supervisor_qualification.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/local_live_planner.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/local_planning_qualification.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/native_codex_baseline.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/native_doctor_supervision.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/native_header_supervision.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/native_quack_qualification.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/portable_context.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/prepare_daemon.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_full_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_inventory_evidence_join.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_inventory_inference_reuse.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_inventory_resume.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_inventory_scan.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_signed_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_source_delta.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_source_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_inventory_public_worker_read.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/qualify_source_delta_ignore.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/report.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/retrieval_prompt_smoke.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_codebase_inventory_resume_docker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_codebase_signed_successor_docker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_docker.sh"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_finite_advisory_join_tamper_controls.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_finite_advisory_spawn_docker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_finite_proof_query_worker_docker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_finite_repository_advisory_worker_docker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_finite_repository_worker_docker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/run_supervision_docker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/source_successor_dispatch_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/source_successor_full_scan_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_adaptation_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_analysis_order.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_analysis_receiver.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_catalog_capture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_decoder_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_decoder_logic.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_decoder_training.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_finite_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_finite_index.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_finite_service_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_indexed_planning.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_control.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_corpus.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_transfer.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_relevance.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_ir_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_logic_qualification.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_planning_snapshot.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_proof_index.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_repository_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_repository_index.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_requirement_grounding.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_supervisor_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_context_audit.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_context_rebind.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_deployment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_doctor_dispatch.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_indexed_preparation.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_initial_context.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_input_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_native_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_native_start_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_public_outputs.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_report.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_repository_preview.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_run.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_source_unit_advice.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_worker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_full_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_signed_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_signed_successor_archive.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_source_delta.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_source_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_benchmark_comparison.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_cleanup_deadline.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_full_supervisor_harbor_agent.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_index_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_inventory_resume_scan_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_inventory_resume_setup_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_learned_vector_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_live.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_local_planner_bridge.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_native_codex_baseline.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_native_codex_bundle.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_native_doctor_gate.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_native_supervisor_diagnostics.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_post_stop_refresh_budget.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_qualify_codebase_signed_successor.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_run.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_source_successor_dispatch_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_source_successor_full_scan_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_supervision_docker.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_adapter.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_autoencoder_context.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_context_audit.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_context_rebind.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_deployment.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_formula_assets.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_frozen_security.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_indexed_preparation.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_initial_context.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_instruction_delivery.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_autoencoder.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_copy.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_guarded_context.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_projection_request.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_projections.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_requirement_planning.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_roundtrip.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_scope.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_scope_transport.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_public_outputs.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_repository_preview.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_rich_search_advice.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_rich_source_unit_advice.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_security_assets.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_source_unit_advice.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_transfer_context.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_translation_audit.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/test_vector_index_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "benchmarks/agent_supervisor/container_coding/vector_index_preflight.py"
+    },
+    {
+      "status": "??",
+      "path": "data/agent_supervisor/.control-transaction.lock"
+    },
+    {
+      "status": "??",
+      "path": "data/agent_supervisor/control-audit.jsonl"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/SHARED_DATASETS_PROVER_RESOURCES.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_4096_cuda_bitwise_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_768_4096_head_followup_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_formula_guard_coordinator_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_inventory_evidence_join_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_inventory_inference_reuse_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_inventory_resume_worker_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_inventory_scan_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_ir_input_guard_candidate_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_ir_lease_cadence_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_ir_span_binding_dedup_portable_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_ir_span_inference_candidates_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_ir_span_whole_input_guard_partial_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_ir_span_whole_input_guard_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_multi_dimension_inference_plan.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_multi_dimension_inference_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_multi_head_bitwise_workload_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_multi_head_guard_cost_profiling.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_source_delta_and_runtime_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_source_successor_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/codebase_successor_expansion_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_advisory_spawn_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_proof_query_admission_failure_custody_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_proof_query_attempt_lease_native_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_proof_query_attempt_lease_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_proof_query_dispatch_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_proof_query_join_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_proof_query_post_birth_controls_and_host_expiry_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_repository_admission_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_repository_advisory_join_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_repository_advisory_worker_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_repository_candidate_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/finite_repository_worker_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/intent_autoencoder_preplanning.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/security_autoencoder_checkpoint.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/security_code_training.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_adaptation_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_decoder_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_finite_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_finite_service_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_intent_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_ir_analysis_consumer_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_ir_expanded_transfer_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_ir_intent_corpus_head_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_ir_intent_relevance_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_ir_learned_intent_join_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_ir_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_ir_requirement_grounding_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_codebase_repository_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/agent_supervisor/terminal_repository_preview_qualification.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_ADVISORY_SPAWN_ADDENDUM.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_ATTEMPT_LEASE_NATIVE_ADDENDUM.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_FINITE_PROOF_QUERY_ATTEMPT_LEASE_ADDENDUM.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_FINITE_PROOF_QUERY_DISPATCH_ADDENDUM.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_FINITE_PROOF_QUERY_JOIN_ADDENDUM.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_PLAN.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_POST_BIRTH_CONTROLS_AND_HOST_EXPIRY_ADDENDUM.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_ROADMAP.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/TERMINAL_BENCH_INTENT_PLANNING_PLAN.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/repository_proof_index_and_codebase_ir.todo.md"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/terminal_bench_intent_planning.review.json"
+    },
+    {
+      "status": "??",
+      "path": "docs/architecture/terminal_bench_intent_planning.todo.md"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/doctor_header_contracts.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/doctor_runtime_contracts.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/context/operator_repair_note.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/control/before_popen_refusal.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/admitted_benchmark_runtime.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/isolated_benchmark_runtime.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/checked_integer_batch.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/checked_integer_codebase.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/codebase_feature_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/codebase_inventory_evidence_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/codebase_source_delta_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/conditional_codebase_batch.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/conditional_codebase_evidence.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_capacity.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_capacity_preview.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_codebase.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_plan_preview.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_plan_service.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_source_custody.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_proof_query_join.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/intent_codebase_matching.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/intent_requirement_adapter.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/intent_requirement_repair.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/intent_symbolic_planning.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/repository_plan_preview.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/structural_codebase_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/prompt/intent_plan_coverage.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_hammer_tasks.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_isabelle_tasks.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_kernel_tasks.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_native_bundle.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_prover_resources.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_tla_tasks.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/candidate_execution.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/code_retrieval_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_autoencoder.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_autoencoder_index.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_autoencoder_security.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_autoencoder_transfer.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_inventory_evidence_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_inventory_evidence_worker_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_inventory_execution.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_successor_dispatch_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_successor_dispatch_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codex_usage_receipt.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/container_worker_boundary.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_candidate_runner.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_contract_candidate_runner.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_contract_proof.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_contract_refresh.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_header_workflow.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_repair_composition.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_residual_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_scoped_analysis.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_security_ir.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_task_workflow.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_advisory_artifact_closure.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_execution.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_worker_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_worker_dispatch.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_worker_source_custody.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_worktree_allocation.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_repository_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_repository_candidate.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_repository_candidate_runner.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_repository_execution.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/intent_autoencoder_advisor.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/intent_requirement_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/intent_requirement_observation.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/local_completion_bridge.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/local_learned_embedding.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/local_planning_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_learned_retrieval.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_legal_initializer.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_retrieval.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_task_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/router_public_instruction.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_advisor.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_checkpoint.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_features.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_hub.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_code_training_profile.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_cve_canonical_export.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_cve_corpus.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_cve_training_source.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_formalization_plan.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_formula_model.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_source_program_advisor_384.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_capsule_selection.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_context_runtime.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_router_translation.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/supervised_task_context.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/task_context_bundle.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/intent_progress.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/intent_world_snapshot.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/native_owner_bootstrap.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/p2p_tasks/codebase_federated_dispatch.py"
+    },
+    {
+      "status": "??",
+      "path": "ipfs_accelerate_py/p2p_tasks/codebase_federated_history.py"
+    },
+    {
+      "status": "??",
+      "path": "scripts/ops/agent_supervisor/prepare_task_context.py"
+    },
+    {
+      "status": "??",
+      "path": "tasks.todo.md"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_code_retrieval_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_intent_progress.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_intent_world_snapshot.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_published_learned_retrieval.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_published_retrieval.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_published_task_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_security_source_program_advisor_384.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_semantic_capsule_selection.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_semantic_context_refresh.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_semantic_context_retry.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_semantic_context_runtime.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_semantic_worker_projection.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/semantic_state/test_supervised_task_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_admitted_owner_git_identity.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_admitted_runtime_launch_bounds.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_agent_supervisor_benchmark_attempt_bound.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_agent_supervisor_doctor_repair_composition.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_agent_supervisor_doctor_runtime_contracts.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_agent_supervisor_duckdb_reattach_custody.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_agent_supervisor_intent_plan_projection.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_agent_supervisor_local_bootstrap_real.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_agent_supervisor_local_planning_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_before_popen_refusal.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_candidate_execution.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_checked_integer_batch.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_checked_integer_codebase.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_autoencoder.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_autoencoder_index.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_autoencoder_transfer.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_feature_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_inventory_evidence_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_inventory_evidence_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_inventory_evidence_worker_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_inventory_execution.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_inventory_paired_receiving.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_inventory_public_sources.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_inventory_reservation_receiving.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_ir_metadata.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_ir_metadata_restart_paths.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_source_delta_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_successor_dispatch_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codebase_successor_dispatch_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_codex_tool_diagnostics.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_conditional_codebase_batch.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_conditional_codebase_evidence.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_context_chunk_losslessness.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_database_bounded_pre_effect_retry.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_database_completion_attempt_binding.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_database_portal_attempt_budget.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_database_projection_alias_parsing.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_datasets_hammer_tasks.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_datasets_isabelle_tasks.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_datasets_kernel_tasks.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_datasets_native_bundle.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_datasets_prover_resources.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_datasets_tla_tasks.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_candidate_runner.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_contract_candidate_runner.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_contract_proof.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_contract_refresh.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_header_contracts.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_header_workflow.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_literal_repair_operator.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_repair_eligibility.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_residual_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_retained_seed_exports.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_scoped_analysis.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_security_ir.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_doctor_task_workflow.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_advisory_artifact_closure.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_integer_capacity.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_integer_capacity_preview.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_integer_codebase.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_integer_plan_preview.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_integer_plan_service.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_attempt_lease_dispatch.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_execution.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_failure_retention.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_join.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_worker_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_worker_dispatch.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_worker_source_custody.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_proof_query_worktree_allocation.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_repository_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_repository_advisory_worker.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_repository_candidate.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_repository_candidate_runner.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_repository_execution.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_finite_repository_sharded_metadata.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_codebase_matching.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_ordinary_claim.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_plan_coverage.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_requirement_adapter.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_requirement_admission.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_requirement_observation.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_requirement_observation_native.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_requirement_worker_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_symbolic_planning.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_intent_symbolic_planning_ordered.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_inventory_constructor_cleanup.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_local_completion_bridge.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_local_planning_declared_create.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_local_planning_public_replay.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_local_planning_receipt_storage.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_local_validation_python_launcher.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_multi_prover_callable_lifecycle.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_multi_prover_ready_queue.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_multi_prover_ready_queue_boundaries.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_native_quack_owner_qualification.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_owner_completion_service_retirement.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_plan_create_live_root_observation.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_plan_create_semantic_input_identity.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_plan_critic_dependency_coverage.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_published_legal_initializer.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_repository_plan_preview.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_router_implementation_runner.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_router_public_instruction.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_router_workspace_contract.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_security_autoencoder_checkpoint.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_security_autoencoder_hub.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_security_code_training_profile.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_security_cve_canonical_export.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_security_cve_corpus.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_security_cve_training_source.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_security_formula_advice.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_semantic_router_integration.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_semantic_router_translation.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_structural_codebase_context.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_supervisor_meta_public_replay.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_supervisor_planning_composition.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_symbolic_candidate_pending_proof.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_task_claim_fenced_callback.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_analysis_order.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_catalog_capture.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_decoder_corpus.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_decoder_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_decoder_logic.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_decoder_training.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_finite_index.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_indexed_planning.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_intent_control.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_intent_corpus.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_intent_ranker_training.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_intent_ranker_transfer.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_intent_relevance.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_intent_training_join.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_ir_experiment.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_logic_qualification.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_planning_snapshot.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_proof_index.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_repository_index.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_requirement_grounding.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_codebase_supervisor_fixture.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_doctor_dispatch.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_terminal_intent_benchmark_config.py"
+    },
+    {
+      "status": "??",
+      "path": "test/api/test_validation_memfd_portability.py"
+    },
+    {
+      "status": "??",
+      "path": "test/benchmarks/test_codebase_inventory_evidence_join_launch_audit.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_admitted_benchmark_runtime.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_admitted_context_refresh.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_admitted_learned_refresh.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_admitted_published_shutdown.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_agent_supervisor_doctor_transaction_validation.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_initial_learned_context_reuse.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_isolated_benchmark_runtime.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_large_native_task_receipt_cas.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_native_frozen_security_checkpoint.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_native_header_contract_repair.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_native_owner_live_heartbeat.py"
+    },
+    {
+      "status": "??",
+      "path": "test/integration/test_public_instruction_worker_identity.py"
+    },
+    {
+      "status": "??",
+      "path": "test/unit/test_codebase_federated_dispatch.py"
+    },
+    {
+      "status": "??",
+      "path": "test/unit/test_codebase_federated_history.py"
+    }
+  ]
+}

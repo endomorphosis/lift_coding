@@ -1,0 +1,8 @@
+{
+  "schema": "accelerate-publication-whitespace-resolution@1",
+  "path": "test/api/test_codebase_autoencoder_transfer.py",
+  "archived_current_sha256": "bbe428d00c6f03899701e9eaa5bc4a22ec33f5e9b83476a8c9bee05fc246149a",
+  "final_sha256": "ff89eb5a6a0c625f46bdef60db715215751226bee2fc0c0b9387a56f4b916493",
+  "reason": "Only local extra blank line at EOF differs; retain exact published source without semantic change. git diff --check first failed on this whitespace only.",
+  "first_diff_check_returncode": 2
+}

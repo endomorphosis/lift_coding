@@ -1,0 +1,210 @@
+{
+  "accepted": false,
+  "anchor_epochs_requested_per_seed": 100,
+  "anchor_loss_normalization": "mean_start_end_cross_entropy_per_anchor_per_batch",
+  "batch_size": 8,
+  "content_sha256": "8c9852c92d9eb61513cf9e28bbfdabeaeac25b554e50313372257239d808926e",
+  "cpu_limit_seconds": [
+    240,
+    250
+  ],
+  "cpu_threads": 1,
+  "development_binding_hashed_not_parsed_for_fit": {
+    "bytes": 87513,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/development_transport_diagnostics.json",
+    "sha256": "b082892c4ef713cdb0b1e32de673270cf8d804cd9f7566cc5d80006055626c6a"
+  },
+  "device": "cpu",
+  "dtype": "float32",
+  "expected_anchor_optimizer_steps_per_seed": 200,
+  "expected_source_optimizer_steps_per_seed": 200,
+  "external_embedding_conditioning": false,
+  "extra_prior_bindings": [
+    {
+      "bytes": 12983,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_byte_codec.py",
+      "sha256": "e2e1859fb2c71c2c2b758516dc35149e7a742d39f6950be76b0962e226d7cafb"
+    },
+    {
+      "bytes": 13412,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_byte_codec.py",
+      "sha256": "13b0c0de5020fa2a35cfc7a8cc7ae787cb95e5bb9ff3ff8be622d04535b63829"
+    }
+  ],
+  "implementation_bindings": [
+    {
+      "bytes": 1948,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+      "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+    },
+    {
+      "bytes": 12983,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_byte_codec.py",
+      "sha256": "e2e1859fb2c71c2c2b758516dc35149e7a742d39f6950be76b0962e226d7cafb"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 9794,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+      "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+    },
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 45968,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_typed_anchors.py",
+      "sha256": "5c348c96e01a25b20414138d094c5146a664f76fb5045dfb59f37b6128024f3e"
+    },
+    {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 31271,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_learning.py",
+      "sha256": "bb5fad7e1410149be8e9fe649c5825ccff931ed2ab89c840c70c141b96c6a425"
+    },
+    {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 28318,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_typed_anchors.py",
+      "sha256": "66fbd49a22b8eb722dfa7cf253cc492f10bcba3fee87e712108ac9f6cf2264ec"
+    }
+  ],
+  "independent_semantic_review_completed": false,
+  "inference_requests_binding": {
+    "bytes": 11255,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/inference_requests.json",
+    "sha256": "1740f42c497901e974ec7cb8f8892bd6208f643c7708313000870ecde9f10595"
+  },
+  "input_bindings": [
+    {
+      "bytes": 100192,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-validation-01/validation.json",
+      "sha256": "e1542f1f28b95326c1d23c3df8147abf4e992fc8e5fa976b2626cd0e0077a898"
+    },
+    {
+      "bytes": 1432297,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/target_free_inputs.json",
+      "sha256": "134f9a3bf917f0613fb474c04d8a5e414da443b133e12149f026cd3b5aa9473d"
+    },
+    {
+      "bytes": 333966,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/train_weak_supervision.json",
+      "sha256": "97a333821790db1ad11a542f918a32e583b9b4ab150b82cdd71bbd883bbc42ba"
+    },
+    {
+      "bytes": 35118,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/all_request_outcomes.json",
+      "sha256": "0f9af0f349dff957e1d2951dbf8747ba59f760083364eefcdecd5f465537b33e"
+    },
+    {
+      "bytes": 2680,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/train_refitted_typed_atom_codec.json",
+      "sha256": "8a453e0b3d039aa58738d991b2604c6a8295790c13bc142eee6b0c687185212f"
+    }
+  ],
+  "learning_rate": 0.008,
+  "max_rss_kib": 2097152,
+  "max_seconds": 300,
+  "maximum_seconds_per_fit": 60,
+  "new_encoder_calls": 0,
+  "output_selection": "last_completed_TRAIN_updates_only_no_development_selection",
+  "prepared_group_loss_weights_consumed": false,
+  "preserved_prior_binding_count": 336,
+  "proof_authority": false,
+  "prover_calls": 0,
+  "qualified": false,
+  "runner_binding": {
+    "bytes": 38999,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/run_typed_anchor_decoder.py",
+    "sha256": "d362651092b415fab289184b2a0cd8ea15a9bca83828ac77d9680aadea1a8bef"
+  },
+  "schema": "alignment-typed-anchor-weak-fitting-plan/v1",
+  "seeds": [
+    1729,
+    1730,
+    1731
+  ],
+  "source_embedding_dim": 32,
+  "source_epochs_requested_per_seed": 100,
+  "source_fidelity_established": false,
+  "source_hidden_size": 64,
+  "source_loss_normalization": "mean_cross_entropy_over_non_PAD_next_tokens_per_batch",
+  "started_utc": "2026-10-04T02:09:24Z",
+  "states": [
+    "source_initial",
+    "source_final",
+    "source_final_anchor_initial",
+    "source_final_anchor_final"
+  ],
+  "timing_canary": {
+    "accepted": false,
+    "development_quality_evaluated": false,
+    "elapsed_seconds": 2.3103912390070036,
+    "epochs": 5,
+    "evidence_scope": "inline_disposable_worker_observation_no_retained_weights",
+    "independent_semantic_review_completed": false,
+    "input_bindings": [
+      {
+        "bytes": 333966,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/train_weak_supervision.json",
+        "sha256": "97a333821790db1ad11a542f918a32e583b9b4ab150b82cdd71bbd883bbc42ba"
+      },
+      {
+        "bytes": 1432297,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/target_free_inputs.json",
+        "sha256": "134f9a3bf917f0613fb474c04d8a5e414da443b133e12149f026cd3b5aa9473d"
+      }
+    ],
+    "main_stage_updates_include_canary": false,
+    "max_rss_kib": 695040,
+    "optimizer_updates": 10,
+    "owner_binding": {
+      "bytes": 31271,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_learning.py",
+      "sha256": "bb5fad7e1410149be8e9fe649c5825ccff931ed2ab89c840c70c141b96c6a425"
+    },
+    "proof_authority": false,
+    "qualified": false,
+    "retained_weights": false,
+    "rng_state_unchanged": true,
+    "saved_outputs": false,
+    "schema": "typed-anchor-disposable-source-timing-canary/v1",
+    "seed": 1729,
+    "source_fidelity_established": false,
+    "source_model_parameter_count": 44257,
+    "source_model_tensor_count": 12,
+    "training_config": {
+      "batch_size": 8,
+      "cpu_threads": 1,
+      "device": "cpu",
+      "dtype": "float32",
+      "embedding_dim": 32,
+      "hidden_size": 64,
+      "learning_rate": 0.008,
+      "torch_version": "2.13.0+cu130"
+    },
+    "training_elapsed_seconds": 0.8448139620013535,
+    "training_rows": 16,
+    "tuning_rows": 0,
+    "worker_cpu_seconds": 6.197779000000001
+  },
+  "torch_version": "2.13.0+cu130",
+  "training_group_count": 4,
+  "training_rows": 16,
+  "tuning_rows": 0,
+  "weak_label_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog"
+}

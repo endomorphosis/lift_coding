@@ -1,0 +1,3176 @@
+[
+  {
+    "path": ".gitignore",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/Dockerfile",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/Dockerfile.finite-worker",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/Dockerfile.supervision",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/INDEXED_ABLATIONS.md",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "9932202d1db323fb4aaac28f44d8f4deb6c6e69c93446a09c4bd24382e0b0b4d",
+    "base_sha256": "9932202d1db323fb4aaac28f44d8f4deb6c6e69c93446a09c4bd24382e0b0b4d",
+    "remote_sha256": "bc83d6150d7f012bd7c9f38b744c790d13828f8a692480b1399d2d0eaab9b8b3",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0004",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "bc83d6150d7f012bd7c9f38b744c790d13828f8a692480b1399d2d0eaab9b8b3",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/README.md",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "d1a4d1baf1e71e8bfb5e6bbc2b0d02ae6ff754666bccb15f8f7aa2469f684fb1",
+    "base_sha256": "d1a4d1baf1e71e8bfb5e6bbc2b0d02ae6ff754666bccb15f8f7aa2469f684fb1",
+    "remote_sha256": "718f55832df5a488a23ac203cf49791589412eeacb7208a6c18027641803383f",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0005",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "718f55832df5a488a23ac203cf49791589412eeacb7208a6c18027641803383f",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/SECURITY_CHECKPOINT_PLAN.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/SUPERVISION_INTEGRATION.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/SYMBOLIC_SECURITY.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_full_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_inventory_resume_worker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_signed_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_signed_successor_archive.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_source_delta.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_codebase_source_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_finite_advisory_spawn.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_finite_repository_advisory_join.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/audit_finite_repository_advisory_worker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/benchmark_comparison.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "2a4797838b30b7c8f7baae04a232043c51787d8a84372e342e4201291d3d8920",
+    "base_sha256": "2a4797838b30b7c8f7baae04a232043c51787d8a84372e342e4201291d3d8920",
+    "remote_sha256": "0494f2c7bdf7f223dd7748582d517dc6725d093fdaad24d15fb36c06721c62c8",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0018",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "0494f2c7bdf7f223dd7748582d517dc6725d093fdaad24d15fb36c06721c62c8",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/codebase_ir_metadata.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "6de19b39635eef7c682a3171b9d5e3afe3e656e10767080023002188c39f62f5",
+    "base_sha256": "9673422923915be2cd75ac1bbcd8157ec9db58eb9a1d73a35888599b7d5152bf",
+    "remote_sha256": "9673422923915be2cd75ac1bbcd8157ec9db58eb9a1d73a35888599b7d5152bf",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0019",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "6de19b39635eef7c682a3171b9d5e3afe3e656e10767080023002188c39f62f5",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/container_worker_deployment.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "1ed1ba67ba0e5bd183d89af5afbe21731f545cd7461761f4919c9d55758f0135",
+    "base_sha256": "1ed1ba67ba0e5bd183d89af5afbe21731f545cd7461761f4919c9d55758f0135",
+    "remote_sha256": "e44f6f2d1a66b217c23f20fc06af83ebedfa22e08062500bfc6b57e0c446ab5e",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0020",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "e44f6f2d1a66b217c23f20fc06af83ebedfa22e08062500bfc6b57e0c446ab5e",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/daemon_run.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/doctor_component_probe.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/doctor_composition_smoke.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/doctor_literal_repair.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/doctor_symbol_repair.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_advisory_spawn_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_proof_query_worker_experiment.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "46bab256cceb75b756a295bc09c8f95c921596925c8771208680513278c0c162",
+    "base_sha256": "b67744389148c444d8dfd1dc3089c0a05205d41630d1bafd3d7571653742aa35",
+    "remote_sha256": "b67744389148c444d8dfd1dc3089c0a05205d41630d1bafd3d7571653742aa35",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0027",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "46bab256cceb75b756a295bc09c8f95c921596925c8771208680513278c0c162",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_repository_admission_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_repository_advisory_join_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_repository_advisory_worker_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_repository_advisory_worker_support.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_repository_candidate_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_repository_native_tests.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_repository_sharded_metadata.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/finite_repository_worker_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "eaa9cbf9addb90cd21e999e858fbeab353c0c81e0f6b4143b944a2ef33fd288d",
+    "base_sha256": "eaa9cbf9addb90cd21e999e858fbeab353c0c81e0f6b4143b944a2ef33fd288d",
+    "remote_sha256": "228ad1ed731e73d7c4bccdab099849a48c80ce1105cf3940bd251afb3f8570d4",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0036",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "228ad1ed731e73d7c4bccdab099849a48c80ce1105cf3940bd251afb3f8570d4",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "798308917911be224ff54be6f932ac7061a62ee2a1c0d566e737aaed0c78cfc6",
+    "base_sha256": "798308917911be224ff54be6f932ac7061a62ee2a1c0d566e737aaed0c78cfc6",
+    "remote_sha256": "fe475f623c5d530ec736cfbad9be25038819de5d831e52c940511d998c68e154",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0037",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "fe475f623c5d530ec736cfbad9be25038819de5d831e52c940511d998c68e154",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/harbor_agent.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/index_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/indexed_doctor_lifecycle.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/inventory_resume_scan_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/inventory_resume_setup_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/learned_vector_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/live.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/live_supervisor_qualification.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/local_live_planner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/local_planning_qualification.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/native_codex_baseline.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "d7becb29e7ecce76c3e7d99208527c7f820c05c3c524cc76b16f66cbd0779c6a",
+    "base_sha256": "d7becb29e7ecce76c3e7d99208527c7f820c05c3c524cc76b16f66cbd0779c6a",
+    "remote_sha256": "bd045976353aa909b608764148cb6fb1f98aa27fab264f2cea4905ae07c7f699",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0048",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "bd045976353aa909b608764148cb6fb1f98aa27fab264f2cea4905ae07c7f699",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/native_doctor_supervision.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/native_header_supervision.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/native_quack_qualification.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/portable_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/prepare_daemon.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_full_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_inventory_evidence_join.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_inventory_inference_reuse.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_inventory_resume.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_inventory_scan.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_signed_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_source_delta.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_codebase_source_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_inventory_public_worker_read.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/qualify_source_delta_ignore.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/report.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/retrieval_prompt_smoke.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_codebase_inventory_resume_docker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_codebase_signed_successor_docker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_docker.sh",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_finite_advisory_join_tamper_controls.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_finite_advisory_spawn_docker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_finite_proof_query_worker_docker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_finite_repository_advisory_worker_docker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_finite_repository_worker_docker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/run_supervision_docker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/source_successor_dispatch_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/source_successor_full_scan_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_adaptation_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_analysis_order.py",
+    "decision": "new_current_source",
+    "current_sha256": "0a1d6cb2bac8bf8eae6a49c60872ff4f7efde350f55c75142b1728be63745849"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_analysis_receiver.py",
+    "decision": "new_current_source",
+    "current_sha256": "dcf750f3377a75d2c261bbe744faffa31e12f779bd01326929063eee01365626"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_catalog_capture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_decoder_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_decoder_logic.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_decoder_training.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_finite_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_finite_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_finite_service_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_indexed_planning.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_control.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_corpus.py",
+    "decision": "new_current_source",
+    "current_sha256": "29292de03fbf36aca253f9b3d0cf8031effab0f35453011851d352976c12e29d"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+    "decision": "new_current_source",
+    "current_sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_transfer.py",
+    "decision": "new_current_source",
+    "current_sha256": "cbc3679f5af0609969d9c118541ad8aff44d02e3e9d04b4b08a03074fb8c8bdb"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_relevance.py",
+    "decision": "new_current_source",
+    "current_sha256": "cdbc9c77f6dec4637067c284cbab0a9e9dfc48ae1d6a8960b5169d7937a8c63c"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py",
+    "decision": "new_current_source",
+    "current_sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_ir_experiment.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "9937054025df0a981a76b17d52841ba7f6c3b49613dfe6ca7481f4d4c712a4cd",
+    "base_sha256": "48983d6e10a982566d76808851406a2b77976b289cce3d4f00d4fb902ce62eaa",
+    "remote_sha256": "48983d6e10a982566d76808851406a2b77976b289cce3d4f00d4fb902ce62eaa",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0096",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "9937054025df0a981a76b17d52841ba7f6c3b49613dfe6ca7481f4d4c712a4cd",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_logic_qualification.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_planning_snapshot.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_proof_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_repository_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_repository_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_requirement_grounding.py",
+    "decision": "new_current_source",
+    "current_sha256": "9d3c62d8e9b09c41ff9ae91798a7fca9cbc8f10c682af1fffc34f93547673076"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_supervisor_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "867f7a8551aade949bbd7258127185670b8f34bd6789da63a39df7c654c66e87",
+    "base_sha256": "867f7a8551aade949bbd7258127185670b8f34bd6789da63a39df7c654c66e87",
+    "remote_sha256": "0732cbdeab49a9ff1ffc1ae839d3eddeb92e916d8da50ca1fb3a46bdae0945a2",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0104",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "0732cbdeab49a9ff1ffc1ae839d3eddeb92e916d8da50ca1fb3a46bdae0945a2",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_context_audit.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "90d4ce6866fb97b8c4430d365a8fc8f3c0fd59bdfa89ba3cbf7a4c02e337180d",
+    "base_sha256": "90d4ce6866fb97b8c4430d365a8fc8f3c0fd59bdfa89ba3cbf7a4c02e337180d",
+    "remote_sha256": "a88a3b0fcc3ed3225cc21a78e43b324c601416f6d710e58beb84d4211edcaca6",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0105",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "a88a3b0fcc3ed3225cc21a78e43b324c601416f6d710e58beb84d4211edcaca6",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_context_rebind.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "75b0ebcc67a7f09e186818d2026b2e0dc922e360cee3458ef7b397f33ca205fb",
+    "base_sha256": "75b0ebcc67a7f09e186818d2026b2e0dc922e360cee3458ef7b397f33ca205fb",
+    "remote_sha256": "b6a47a338081d4c45c3865da16288d9d908d33b04beb8fd54aaad796ec3b3984",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0106",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "b6a47a338081d4c45c3865da16288d9d908d33b04beb8fd54aaad796ec3b3984",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_deployment.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "634aa3d40bdf5df23d96118f28ccdc10348553b4c9a10fccc21e62108f0e9ce2",
+    "base_sha256": "634aa3d40bdf5df23d96118f28ccdc10348553b4c9a10fccc21e62108f0e9ce2",
+    "remote_sha256": "6f9660f6c209e2319dc81d310b883913d8cf08f40db818e055af925a793bc1b8",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0107",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "6f9660f6c209e2319dc81d310b883913d8cf08f40db818e055af925a793bc1b8",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_doctor_dispatch.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "023d8e7ab240e7d9f1d4ff8080322173fe3842dedf9471a690d791253e6234a8",
+    "base_sha256": "023d8e7ab240e7d9f1d4ff8080322173fe3842dedf9471a690d791253e6234a8",
+    "remote_sha256": "8592439fa72e7b392b8e0650bf97ddbcaa605b00a9fbd1233d2af369b49d7cd3",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0108",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "8592439fa72e7b392b8e0650bf97ddbcaa605b00a9fbd1233d2af369b49d7cd3",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_indexed_preparation.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "d4c4236726d6e6f7faf1307298c1e04006a3e6fac6fcdc2029a801e6388dafad",
+    "base_sha256": "d4c4236726d6e6f7faf1307298c1e04006a3e6fac6fcdc2029a801e6388dafad",
+    "remote_sha256": "75a869c9a7b8ec3c9d367029f19aa248fabc9c3fdd4e23c8097d28bf2539e0e0",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0109",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "75a869c9a7b8ec3c9d367029f19aa248fabc9c3fdd4e23c8097d28bf2539e0e0",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_initial_context.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "5623268360c3be84cbb9560c57bfee89c7cfb072dead77052f364d8492913b38",
+    "base_sha256": "5623268360c3be84cbb9560c57bfee89c7cfb072dead77052f364d8492913b38",
+    "remote_sha256": "de8620ba32c46f3145ac5117c191076baa4737982c62ede7786b8e47b108f55d",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0110",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "de8620ba32c46f3145ac5117c191076baa4737982c62ede7786b8e47b108f55d",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_input_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_native_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_native_start_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_public_outputs.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_report.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_repository_preview.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_run.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_source_unit_advice.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/terminal_worker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_full_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_signed_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_signed_successor_archive.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_source_delta.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_audit_codebase_source_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_benchmark_comparison.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_cleanup_deadline.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_full_supervisor_harbor_agent.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_index_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_inventory_resume_scan_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_inventory_resume_setup_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_learned_vector_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_live.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_local_planner_bridge.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_native_codex_baseline.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "aabbf44e21929f4a65082c805b8bafeb9585d6a66911508543cb2636930969f5",
+    "base_sha256": "aabbf44e21929f4a65082c805b8bafeb9585d6a66911508543cb2636930969f5",
+    "remote_sha256": "16e2b0e15ed1ddfae4060015df94549a4836eb7c56967079a63be95a907d4e7d",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0134",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "16e2b0e15ed1ddfae4060015df94549a4836eb7c56967079a63be95a907d4e7d",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_native_codex_bundle.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_native_doctor_gate.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_native_supervisor_diagnostics.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_post_stop_refresh_budget.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "27103c9b591e4c22a556739c5f1fa67aa95acc24e24c7c1442d8820c1bbd9195",
+    "base_sha256": "27103c9b591e4c22a556739c5f1fa67aa95acc24e24c7c1442d8820c1bbd9195",
+    "remote_sha256": "bc5ff9e85fce8bacbde4c2f70578f92a35511a46dd06dd7eed0aea22fcefa394",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0138",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "bc5ff9e85fce8bacbde4c2f70578f92a35511a46dd06dd7eed0aea22fcefa394",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_qualify_codebase_signed_successor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_run.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_source_successor_dispatch_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_source_successor_full_scan_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_supervision_docker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_adapter.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_autoencoder_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_context_audit.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "bd0fb119d2abbd48c7dcc74db2b80b74b2ea1cb37d9f8a3d5ea28f83861bd10b",
+    "base_sha256": "bd0fb119d2abbd48c7dcc74db2b80b74b2ea1cb37d9f8a3d5ea28f83861bd10b",
+    "remote_sha256": "494e0f439ae7eb6e5289c5cf1d1fdd606681c050e8c65241e66d83ea224d58c1",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0146",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "494e0f439ae7eb6e5289c5cf1d1fdd606681c050e8c65241e66d83ea224d58c1",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_context_rebind.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "db068e793c9f34a6a194ae21c62c99ec89a5951e2ea7c38cbfd40ace5df52e28",
+    "base_sha256": "db068e793c9f34a6a194ae21c62c99ec89a5951e2ea7c38cbfd40ace5df52e28",
+    "remote_sha256": "adeb2512d74ac3031653868e69bcd1afa0065adbcb8da9355d9fb1692f60658c",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0147",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "adeb2512d74ac3031653868e69bcd1afa0065adbcb8da9355d9fb1692f60658c",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_deployment.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "40347dc296af6b9b1f51afaad33166e7abebbc56a5973e8acf1f36abbec8d3d4",
+    "base_sha256": "40347dc296af6b9b1f51afaad33166e7abebbc56a5973e8acf1f36abbec8d3d4",
+    "remote_sha256": "b4233034b5288a3f2ea5935310970e80e26b9789c5d4da85b682a25457e29b11",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0148",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "b4233034b5288a3f2ea5935310970e80e26b9789c5d4da85b682a25457e29b11",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_formula_assets.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_frozen_security.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_indexed_preparation.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_initial_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_instruction_delivery.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_autoencoder.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_copy.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_guarded_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_projection_request.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_projections.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_requirement_planning.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "f210b2031b14f1ffde5d21a5285b14b7bed7d3de3129bd3eb11a6075c11f1020",
+    "base_sha256": "f210b2031b14f1ffde5d21a5285b14b7bed7d3de3129bd3eb11a6075c11f1020",
+    "remote_sha256": "334220a0c07ff7cb413f9f94e75ede2901f0b82bec48f96698b3ffbddbdd1414",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0159",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "334220a0c07ff7cb413f9f94e75ede2901f0b82bec48f96698b3ffbddbdd1414",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_roundtrip.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_scope.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_intent_scope_transport.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_public_outputs.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_repository_preview.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_rich_search_advice.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_rich_source_unit_advice.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_security_assets.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_source_unit_advice.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_transfer_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_terminal_translation_audit.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/test_vector_index_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "benchmarks/agent_supervisor/container_coding/vector_index_preflight.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/SHARED_DATASETS_PROVER_RESOURCES.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_4096_cuda_bitwise_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "2ead871492f026d7edf339337f94d08c75feb056c95043a000470271f47b4bb5"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_768_4096_head_followup_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_formula_guard_coordinator_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "0323dcc20e448aca753cb222094bdfabb69f3b124e3fa0a20a63d6dab5451886"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_inventory_evidence_join_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_inventory_inference_reuse_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_inventory_resume_worker_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_inventory_scan_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_ir_input_guard_candidate_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "8d049c40b55965869a4ae08c00d739d1c0ba7a8f06113a23c06a6de8512cbe19"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_ir_lease_cadence_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "79cd0b89fe21d739e0256768a7bf5f44e742b5f0e135e1874d2c28547f448f55"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_ir_span_binding_dedup_portable_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "63505dc7764fc6ef1fff87c48ea088df1cf8cd70c83b2d16f585644d2642f59e"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_ir_span_inference_candidates_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "4972b1479964561827d195a30fea1d35f2e9c1ecb4bef5d37c14e7af165287ec"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_ir_span_whole_input_guard_partial_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "ba08df630e4e42e4491d6824f3154050a7fa0074941243ef04455b25584d4d1e"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_ir_span_whole_input_guard_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "9a9332c223d46e88ad27c517318ee888a0e396387b31f75458d1fd31e6b265ae"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_multi_dimension_inference_plan.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_multi_dimension_inference_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_multi_head_bitwise_workload_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "da0e96d2914fca10fde4be5c78b95705692741597595da306b0bb70ae823d42d"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_multi_head_guard_cost_profiling.md",
+    "decision": "new_current_source",
+    "current_sha256": "96cfb21deccd51f60a8678fd2507c970f0b55bbb13714ed600940dc501afdb47"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_source_delta_and_runtime_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_source_successor_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/codebase_successor_expansion_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_advisory_spawn_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_proof_query_admission_failure_custody_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "c9edffe614fb6d3c9183ef8b94f398197adfb3da2619e1415b008ee2f83b26a9"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_proof_query_attempt_lease_native_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_proof_query_attempt_lease_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_proof_query_dispatch_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_proof_query_join_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_proof_query_post_birth_controls_and_host_expiry_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "cb5567b03f4537eac3c8fc3a0d544e619243d3f5c4cbd37590526d9efaf78b50"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_repository_admission_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_repository_advisory_join_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_repository_advisory_worker_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_repository_candidate_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/finite_repository_worker_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/intent_autoencoder_preplanning.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/security_autoencoder_checkpoint.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/security_code_training.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_adaptation_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_decoder_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_finite_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_finite_service_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_intent_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_ir_analysis_consumer_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "8c77e45d2130a031bed22ac9c9bc1fc3db286e6e8e622be9d2e0a0426f574379"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_ir_expanded_transfer_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "26b710006f295ba2ece99e2e695f26ef73d702f002a3e9fe40e80a882c194c0e"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_ir_intent_corpus_head_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "8fddc623a31c46d67e1d5afa7d257e9580a483a898339911664b94b61976be52"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_ir_intent_relevance_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "8d871df92746dc041e38f671bab7bf9341042975f7f1bb2094cb568dafe0841c"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_ir_learned_intent_join_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "198f318f2fafc46972dbf26924d9203026968ec9f42432f7e015876a712d0c08"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_ir_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_ir_requirement_grounding_qualification.md",
+    "decision": "new_current_source",
+    "current_sha256": "7e42659e980196c4ba75b02a6f61340e6f1376a1c7c569c721605474409c5dcb"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_codebase_repository_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/agent_supervisor/terminal_repository_preview_qualification.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_ADVISORY_SPAWN_ADDENDUM.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_ATTEMPT_LEASE_NATIVE_ADDENDUM.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_FINITE_PROOF_QUERY_ATTEMPT_LEASE_ADDENDUM.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_FINITE_PROOF_QUERY_DISPATCH_ADDENDUM.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_FINITE_PROOF_QUERY_JOIN_ADDENDUM.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_PLAN.md",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "ba526947b9a42cfa64895db776bec25c27a1d68893666adf833999bf90d2fffc",
+    "base_sha256": "97110ab98cd00120ce723305b53acd2c98d57b91486bbc8dbc8747ceb000a229",
+    "remote_sha256": "97110ab98cd00120ce723305b53acd2c98d57b91486bbc8dbc8747ceb000a229",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0228",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "ba526947b9a42cfa64895db776bec25c27a1d68893666adf833999bf90d2fffc",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_POST_BIRTH_CONTROLS_AND_HOST_EXPIRY_ADDENDUM.md",
+    "decision": "new_current_source",
+    "current_sha256": "57edbb1e36562514436f4c2d0dceb8b0bbf1cdf29fcb332e66a004e8e3046a5f"
+  },
+  {
+    "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_ROADMAP.md",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "98885fd5a900c40755e6f357f4ac087812a97026aafa94a8a2027220412c4c72",
+    "base_sha256": "1b4e898a32c1143709c67734dce6688bd51adde0a95759ef4e3ab9e8859dd64c",
+    "remote_sha256": "1b4e898a32c1143709c67734dce6688bd51adde0a95759ef4e3ab9e8859dd64c",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0230",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "98885fd5a900c40755e6f357f4ac087812a97026aafa94a8a2027220412c4c72",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "docs/architecture/TERMINAL_BENCH_INTENT_PLANNING_PLAN.md",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "515f2a82b28557de57da8e09a0ed28091efb0136c6df05824bf9200588238d14",
+    "base_sha256": "4bff7ef0b707e5658b34534cdee0d86ff024d1c9773d9b7ca38db92c828b0620",
+    "remote_sha256": "4bff7ef0b707e5658b34534cdee0d86ff024d1c9773d9b7ca38db92c828b0620",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0231",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "515f2a82b28557de57da8e09a0ed28091efb0136c6df05824bf9200588238d14",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.adaptation_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "6c9e12e1f0455d4a6403583a58428976af70c40fb27eb1d77e73e4bc4601b732"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.admission_failure_custody_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "34a6ad5b9a88d83248d81e4df045b8f091ebd5c2516d8fe6a6d3ccd330ffcace"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.advisory_join_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "a6fe882c016564992395433c80c5027f3b883b74bc0d9f0a7f5ac594f12f3a6c"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.analysis_consumer_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "e3304175f34f01fb9a0b2a48cfb2f131dff34a4227753c129e26a400c4c8b565"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.attempt_lease_native_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "f7105aad777ed505cc6c6d4d49c544243be57fea96a24b9dd8270f46432ac236"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.candidate_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "4a6b34cef93d82e03e654be822fe1f3d735b578c6692bff72a03b1f5ab27be3b"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.comprehensive_refresh_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "4dde70bea78622292ffce239b0b353a9d52ca8520a173537fbdb18e42394ea81"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.cuda_guard_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "5dd272e2a643fcfd490b91c67225dd708c8c7853fb9d4fc0960e8ff55f09ee9f"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.expanded_transfer_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "576c4d87bd043ea2bbf0f3d7d1eb11c1a4d053dcd98c1122a387af836d949a03"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_admission_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "c469cbdc6e111f69642f4e03d886792241e5d154a29d3349a88861fc2b20fb0d"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_advisory_spawn_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "899e75d22aac16de0c4bb3199e2f15fb6fa126d8882aa145b5c4b5e0db0a2255"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_advisory_worker_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "99aa3940e31b3443c6987871d65ca5c61571f2255c229050819b78a370d2066a"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_proof_query_attempt_lease_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "b3706a9b46891ac124e3b624e4c9a4feeac8b8053a58980bf6f397d4935a42f3"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_proof_query_dispatch_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "fb04941c382a3c9f842d60b514c0b7af3ea303772926a11924fe4bf7fb5aa4b8"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_proof_query_join_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "935a98e3ec71867033b32daa6b089db70a9aa995549674ced4061c535dadd36c"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "dcd1fd2836938797385008dba95869a1b57823dba68a436f4a165ad2d74632a0"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_service_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "f3964e2f2d575c2ed034f20b39c2bdd5326b7569aef20354c40949ea6240d120"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.finite_worker_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "beb22cd04db32e72c5298dc244cc79f7f73f951c1d0fedee4d4263ff164830d0"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.followup_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "f4b6cd357b817ef5711c5aaad421e560f0bce655c55375cd54f23d93caf01c5a"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.formula_coordinator_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "1487d9561d22aa982c3e821bcf1bc2bc8fd9f03c530cd208788e23776d760092"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.guard_cost_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "9f14dd763514dd97c6b37570e87f7189e05bfe1a40d60fb13928b5a1b576c00b"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.guard_workload_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "4d525c3027a5d6ef7b34f368c8225b563a130bc69f2b0cc6faa9a73dc17404ee"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.head_followup_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "324903100a6b4fb83a26ef5d5b0853128dc2308662f03362dded2f4190e36071"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.incremental_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "a77ca17bf697cf9e9b1194cc2a5d952a40d4416a214ea3bbfcb29169f6b1a307"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.inference_reuse_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "e2c502a6d9cb150d20f0020a0351ff5228c6358dd7c83253b378406a759657c8"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.input_guard_candidate_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "a126390f1b855f0df21e9c1f24bf2b4c393b6f5c1d0dc1cbf3e4abcd654923d0"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.integration_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "f401f1b16325229a12a6f5e90e7286a0b3de153823bba398a6cf88de84b69500"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.intent_corpus_head_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "d2fdfe9c9baa282f538dff71284b2dc9c0d5ae84dd150b248622e2dd549f24ba"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.intent_relevance_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "0a7afaacec7f0cbd13cdf0febb68478d10eed822c1360225cc32ac7b4f14222c"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.inventory_evidence_join_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "742875f8a72588ec4cf24107d37385b3fcf19918eb728f6e957da1cc23505a4d"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.inventory_resume_worker_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "600f377ef6828a0c5001baba5f23096a751f7203beb222ff90fb6d03f3f6b725"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.inventory_scan_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "4dbb7127b535c31d6ad599abe73c9d263541a17fd27794051549c7f4c4861335"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.learned_intent_join_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "53929e2e9a3dcadaffb7c2610caa27b7c0d2eef4c97aacc928b7d499ab035e5f"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.lease_cadence_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "b5fe56a253c9d12e0467430b8e441cba715e9216987f664696cc1835c4d0f432"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.multi_dimension_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "1d6fe8320261a3f9706e53b6e06d84d3f0354d00723e2910b68999998c1e795d"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.planning_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "41abc15bdfe44fc02e3ce81d0f66158e1751825b3721f207933f847c52defadf"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.post_birth_controls_and_host_expiry_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "b8f56a58a5dfb4a1211dc7fc1f528b8fb427b1f1a3b4bb684a4a1cb95dc5620e"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.requirement_grounding_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "fe0236cb2abf699d83a1cd7927b38af222670fac9f39ca5a0b46a194383e9efc"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.review.json",
+    "decision": "new_current_source",
+    "current_sha256": "2bb91ada2ed96a727b70f5af23b8d071b8ec87bfaa204793606cf8a7570a6bae"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.roadmap_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "2b9f3b4fb53d7498ba4f0f9dcfbefa7abe6445a6a6ca2636f00dfb57cc2ecb6d"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.service_preview_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "a7f4e866eaffe71c8f8ac52afce4a8b25705f02476c2333e8b44de59c0de4c8e"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.source_delta_runtime_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "fb7664d68f863de982e12361014296cdaf668ea2bc22fa20d16a313e3452d040"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.source_successor_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "8a9a24c56873f97edac6e325078039fc0e2ba017c922839d11eaf3d92e7f2f91"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.span_inference_candidates_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "9acea490b6c1227dcd63f3e92e98e7e873f471395e8bf222cbe6d8781d0b0f1e"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.span_whole_input_guard_partial_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "687ddc50eb2b4ae3e02d9d7fe15c2ec6b66c76ee05739275100b2a2dd69e8629"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.span_whole_input_guard_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "9c0713d2c904545ef81f9bd149fac9124b5210a3a40301b68d886d5a021793e2"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.successor_expansion_review.json",
+    "decision": "new_current_source",
+    "current_sha256": "1c53f35336a0d4ce49cc0d0db7c05b1274a63d5ab7638d3f6f1879df02297010"
+  },
+  {
+    "path": "docs/architecture/repository_proof_index_and_codebase_ir.todo.md",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "4d3c6f47fd5310e65c1b4a05afec2d48511124ff34b80ef59092457b2018a1e0",
+    "base_sha256": "ad6ef82f2e7f09666ddd8881401aae1d1b494f05489ca30f008eda739d223c30",
+    "remote_sha256": "ad6ef82f2e7f09666ddd8881401aae1d1b494f05489ca30f008eda739d223c30",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0279",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "4d3c6f47fd5310e65c1b4a05afec2d48511124ff34b80ef59092457b2018a1e0",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "docs/architecture/terminal_bench_intent_planning.review.json",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "docs/architecture/terminal_bench_intent_planning.todo.md",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "e789bce12a77009ab0250ae465e9a9347c1200d35c6df1ced1e6b1d19c807f38",
+    "base_sha256": "6f632fd80a8cba69f9ae023bf8a5b1674568dcd6d6fa9b025c574e3997189a53",
+    "remote_sha256": "6f632fd80a8cba69f9ae023bf8a5b1674568dcd6d6fa9b025c574e3997189a53",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0281",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "e789bce12a77009ab0250ae465e9a9347c1200d35c6df1ced1e6b1d19c807f38",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/analysis/code_symbol_vector_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/analysis/doctor_contract_adapters.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/analysis/doctor_header_contracts.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/analysis/doctor_repository_diagnostics.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/analysis/doctor_runtime_contracts.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/analysis/planning_analysis_factory.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/analysis/program_ast_adapters.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/context/context_compiler.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/context/context_contracts.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/context/operator_repair_note.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/control/before_popen_refusal.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/control/control_plane.py",
+    "base_ref": "HEAD",
+    "current_sha256": "3eadc8f782e3b88f261c5e6c6366b4da482ea1664c31bdef69f1f2d5a2dc0ac0",
+    "base_sha256": "7c1bf2a95a11fb34aaecbcd04da82964c1702a5e7e95206c40e4b9f5afa9d34b",
+    "remote_sha256": "1229e506a1bf624b4ddddbd443c484cc2e7ef396cc242208a7c27c8f8931334e",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0293",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "1229e506a1bf624b4ddddbd443c484cc2e7ef396cc242208a7c27c8f8931334e",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/control/lifecycle_orchestrator.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/control/profile_authority.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/admitted_benchmark_runtime.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "f30b7bb77a142c69205ba403ba0c3357d37739fd62c7347978e3e9b00fa0696e",
+    "base_sha256": "c714d9c4c285635470c22a65226b8d59823b04a838f3d7d149c271c0fcc96d6e",
+    "remote_sha256": "4f14fb9da9115410a5aa8ecde82a4d78db151e120dfffffd6303b7a24796ab79",
+    "merge_returncode": 2,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0296",
+    "decision": "requires_hunk_review",
+    "conflict_count": 2
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/isolated_benchmark_runtime.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "661f0b06b07aa45b96305eccfbf3c5216319b50174d0e4603bbdb2a161ccf4b5",
+    "base_sha256": "3c31ecff80baf3cb96324041a721d23ffc597da9aaa4841833f16c5799097fcc",
+    "remote_sha256": "470f041ea3f0047972e2d551499f04d6ef07bcb0339d8f492012d08048437390",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0298",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "81590aba0098b4ea5032176b264b49b212f96e5d232ebedfd171bb1ae1ca50a5",
+    "equals_current": false,
+    "equals_remote": false
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/service_factory.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/merge/database_coordination.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/README.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/checked_integer_batch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/checked_integer_codebase.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/codebase_feature_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/codebase_inventory_evidence_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/codebase_source_delta_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/conditional_codebase_batch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/conditional_codebase_evidence.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/deterministic_doctor_transaction.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_capacity.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_capacity_preview.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_codebase.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_plan_preview.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_plan_service.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_integer_source_custody.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_proof_query_join.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/formal_plan_compiler.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/intent_codebase_matching.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/intent_requirement_adapter.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "66a0b30c01a70c710d8c6a2a12870f91ce91f4093bf84b6c19bd575412ea6b2d",
+    "base_sha256": "b2f839de50bf0cc294a5417e0e8cd9fa43a6977d16300fa0039a0b20b20f3555",
+    "remote_sha256": "4b773cdf818c40af82015a2bbe460ec364a1faa0e1146427f2e39608122c27c2",
+    "merge_returncode": 1,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0319",
+    "decision": "requires_hunk_review",
+    "conflict_count": 1
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/intent_requirement_repair.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/intent_symbolic_planning.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "33ae420f26b6645da4e1328954ece93da22831ca538dc95cbb1c8350b57efc6b",
+    "base_sha256": "607311669b62f0c579dda7c3997a035eab73fe33ac8ff3a7663a6726140b1ce4",
+    "remote_sha256": "dd5b7e7d4c23167fe309d991c143f936e86c26b62e55afdf47a6586d5fc0f5e2",
+    "merge_returncode": 1,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0321",
+    "decision": "requires_hunk_review",
+    "conflict_count": 1
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/plan_critic.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/plan_evaluator.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/repository_plan_preview.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/structural_codebase_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/planning/symbolic_candidate_planner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/prompt/README.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/prompt/intent_plan_coverage.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "da7b280e67971468c335d21d86a2fa862d14eeeb7fb5a6cd609afd0ff4b66e7c",
+    "base_sha256": "6a9e1ca5943242e280d0c3e262a97e57db284fae80c4212713ac6e691ec68fa6",
+    "remote_sha256": "6a9e1ca5943242e280d0c3e262a97e57db284fae80c4212713ac6e691ec68fa6",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0328",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "da7b280e67971468c335d21d86a2fa862d14eeeb7fb5a6cd609afd0ff4b66e7c",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/prompt/plan_create_service.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/prompt/prompt_directory_scanner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/prompt/prompt_goal_planner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_hammer_tasks.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_isabelle_tasks.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_kernel_tasks.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_native_bundle.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_prover_resources.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/datasets_tla_tasks.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/multi_prover_resources.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/multi_prover_router.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/proof/proof_scope_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/README.md",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/candidate_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/code_retrieval_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_autoencoder.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_autoencoder_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_autoencoder_security.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_autoencoder_transfer.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_inventory_evidence_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_inventory_evidence_worker_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_inventory_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_successor_dispatch_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codebase_successor_dispatch_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/codex_usage_receipt.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/container_worker_boundary.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/deterministic_doctor_runtime.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_candidate_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_contract_candidate_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_contract_proof.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_contract_refresh.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_header_workflow.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_repair_composition.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "6f93c9226715d88c3eb80d85cb2c30f5ee80c52086d060a9f396cedd8550dccc",
+    "base_sha256": "6f93c9226715d88c3eb80d85cb2c30f5ee80c52086d060a9f396cedd8550dccc",
+    "remote_sha256": "3ceea14c09e49c5b917e7d065be141c335f118d294e758b220f33b235bb89a17",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0361",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "3ceea14c09e49c5b917e7d065be141c335f118d294e758b220f33b235bb89a17",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_residual_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_scoped_analysis.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_security_ir.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_task_workflow.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "5e6a9378c98f3c7e8ee2a615638269a8e3517add7dbb470170592ce005456411",
+    "base_sha256": "5e6a9378c98f3c7e8ee2a615638269a8e3517add7dbb470170592ce005456411",
+    "remote_sha256": "5f7aa180e14f4b9a5536ee671cfaeba10ada5753366194d3ca31e2873818f102",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0365",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "5f7aa180e14f4b9a5536ee671cfaeba10ada5753366194d3ca31e2873818f102",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_advisory_artifact_closure.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_worker_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_worker_dispatch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_worker_source_custody.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_worktree_allocation.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_repository_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_repository_candidate.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_repository_candidate_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_repository_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/intent_autoencoder_advisor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/intent_requirement_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/intent_requirement_observation.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "9601e06f4baf2fe77dda029ab508ad484d1d26cc635c9cb4897621a92f272490",
+    "base_sha256": "9601e06f4baf2fe77dda029ab508ad484d1d26cc635c9cb4897621a92f272490",
+    "remote_sha256": "680e5a62d5f6816f46e7d92683b899b9c26e4e9cf3b1883f90767f5be3ef0518",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0380",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "680e5a62d5f6816f46e7d92683b899b9c26e4e9cf3b1883f90767f5be3ef0518",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/local_completion_bridge.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "45da53b7321f7a475fd3be125dd337a52ad509f72e865ee3be8e5e3cf7cb3209",
+    "base_sha256": "45da53b7321f7a475fd3be125dd337a52ad509f72e865ee3be8e5e3cf7cb3209",
+    "remote_sha256": "a495de56fcd1c1fdb634090bd944256d812d5413ffc644f94904bff99c2eb256",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0381",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "a495de56fcd1c1fdb634090bd944256d812d5413ffc644f94904bff99c2eb256",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/local_learned_embedding.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/local_planning_admission.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "6136102abbfd45456dddfca9732e3ef706632e870e57753df62f790e79c19741",
+    "base_sha256": "836aedb3de761d45429218e3296c87a743ad68174361e1e66b2959af9dda26a3",
+    "remote_sha256": "321ec1c7a2cdddecbba912f62514409c5d3ed8f5281fbdfe9e8feeb6d09361eb",
+    "merge_returncode": 4,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0383",
+    "decision": "requires_hunk_review",
+    "conflict_count": 4
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_learned_retrieval.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "004205b2403be07c7847ddf95cdd0e8f0c71eb01f16cb82ee3cfc2318f15c45f",
+    "base_sha256": "004205b2403be07c7847ddf95cdd0e8f0c71eb01f16cb82ee3cfc2318f15c45f",
+    "remote_sha256": "468a4932177039ce8605c7481f593f0d367b99f73e081ac9c362b27feec83110",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0384",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "468a4932177039ce8605c7481f593f0d367b99f73e081ac9c362b27feec83110",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_legal_initializer.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_retrieval.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "235b21882aa4731375ca20bf955f4e29411d67d5db365849a13d519681f072ba",
+    "base_sha256": "235b21882aa4731375ca20bf955f4e29411d67d5db365849a13d519681f072ba",
+    "remote_sha256": "174878ae38d1aa8e4b1308d0d41982bbdfe377083aa5e9806f4a4a55d89ab583",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0386",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "174878ae38d1aa8e4b1308d0d41982bbdfe377083aa5e9806f4a4a55d89ab583",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_task_context.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "69eb2b9d02f4493ea93ed412593a4428ed55149260ba51e516bd4efc64db31a1",
+    "base_sha256": "cd809effb7d13eedc46c21e8875246f4f11164e39e8e4de6e12a7ab24ed2618b",
+    "remote_sha256": "d16874f2be9dec0e63c8e59fe0f6ad86a5b833b351d3e3a22b346e0f2a2d60d6",
+    "merge_returncode": 1,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0387",
+    "decision": "requires_hunk_review",
+    "conflict_count": 1
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/quack_state_server.py",
+    "base_ref": "HEAD",
+    "current_sha256": "26785afc5462208aa143f66e18b8ac11790b1d479b5bd09c984f61da82f33bbc",
+    "base_sha256": "b8989ed9b9898f6702188a6da5e8f884f8ce4a3239d28bf8615a3549980ff1d4",
+    "remote_sha256": "44b804497a280f437270d0a5c2ac4e555a9d6b42a013c61c868c4bd72d938bcd",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0388",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "44b804497a280f437270d0a5c2ac4e555a9d6b42a013c61c868c4bd72d938bcd",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/router_public_instruction.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "36bd7f3594e6564233cac56d3c077ecdf93ac172beb71492bed2e25deab2ea88",
+    "base_sha256": "36bd7f3594e6564233cac56d3c077ecdf93ac172beb71492bed2e25deab2ea88",
+    "remote_sha256": "9f33994d69720eca2bddf5d2d49a9a2830bd35929e837fa47fc13ad1737cd791",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0390",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "9f33994d69720eca2bddf5d2d49a9a2830bd35929e837fa47fc13ad1737cd791",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_advisor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_checkpoint.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_features.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_hub.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_code_training_profile.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_cve_canonical_export.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_cve_corpus.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_cve_training_source.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_formalization_plan.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_formula_model.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/security_source_program_advisor_384.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "38c4ea7fc1fe2aa70b4f9b64c48c1443ecc3ab2f5d5b8971564074b9d3c02c36",
+    "base_sha256": "3fbca2588eff5f04f027df4ff4cc6dec3582725ab9e3527f3b9dc8663befdc0f",
+    "remote_sha256": "3fbca2588eff5f04f027df4ff4cc6dec3582725ab9e3527f3b9dc8663befdc0f",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0401",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "38c4ea7fc1fe2aa70b4f9b64c48c1443ecc3ab2f5d5b8971564074b9d3c02c36",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_capsule_selection.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_context_runtime.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_router_translation.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/supervised_task_context.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "7dd92656ade76228a35aa508ed819aa17582eb7f7f483ea0696254fe41a7ce13",
+    "base_sha256": "e182601e91db9e1d4466b75472f5fa05ca1f0861b49df55a9a6e8bad2acd4548",
+    "remote_sha256": "e182601e91db9e1d4466b75472f5fa05ca1f0861b49df55a9a6e8bad2acd4548",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0405",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "7dd92656ade76228a35aa508ed819aa17582eb7f7f483ea0696254fe41a7ce13",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/supervisor_meta_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/runtime/task_context_bundle.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "dd5d68e7b948972de2bb0417ec6582d35b4d213acc50b7188dfc2381319dd7a0",
+    "base_sha256": "f88ea305c0d6992de34c9314779c047ba86e89a79053577ff2e18aa682de3f1a",
+    "remote_sha256": "b027c9c948b6c8bcf765d61ccb7111589e3aed796a662a7da43837615d2b0ebe",
+    "merge_returncode": 3,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0407",
+    "decision": "requires_hunk_review",
+    "conflict_count": 3
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/intent_progress.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/semantic_state/intent_world_snapshot.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/task_sources/intent_repository.py",
+    "base_ref": "HEAD",
+    "current_sha256": "3e2c313d5a43544bcacd590342e47ad20d5fcf62d02b4bdf2218cbfce7bd26bf",
+    "base_sha256": "f7b3091e49df02a0871289d59a9ed314582d4f763086c37612dd6572669408bd",
+    "remote_sha256": "cfb424da40edc50559600f065198e1a25ab5f0ebc2bff0393b3baec6d55b3127",
+    "merge_returncode": 1,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0412",
+    "decision": "requires_hunk_review",
+    "conflict_count": 1
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/task_sources/quack_state_client.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/task_sources/typed_database_task_source.py",
+    "base_ref": "HEAD",
+    "current_sha256": "e5564c668488b1d926e308fbdada93db1371dd4bba9c54e7c29a8627623ee2aa",
+    "base_sha256": "8d5c002138b58eab134518806280dab239f52a880451df0eb050b8600eb12f32",
+    "remote_sha256": "8454ba8930e327a0e63f8ead2f76c472f60df280427bceed4a868d856b5b0279",
+    "merge_returncode": 1,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0414",
+    "decision": "requires_hunk_review",
+    "conflict_count": 1
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/task_sources/typed_state_owner.py",
+    "base_ref": "HEAD",
+    "current_sha256": "3a14872b80c7889891626f9de00eeb672218b1bca45086c8af4f7059e164e9a7",
+    "base_sha256": "6047145c82e14bd4f29c5c90d07694601f021bba185ecd46e0ccdd2d93459658",
+    "remote_sha256": "95ffbe87ccbb811f7cf9281940bf4b9b004e5457087a7878138abe40330465a7",
+    "merge_returncode": 3,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0415",
+    "decision": "requires_hunk_review",
+    "conflict_count": 3
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/database_attempt_feedback.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py",
+    "base_ref": "HEAD",
+    "current_sha256": "0721431b4bae97649af43bb5110cc848e52b844de8448039359e1d211d2f9bca",
+    "base_sha256": "9bc7fba0c78eddba92d754e15b3030a28fac3bf4c23de80bf9510f533ac7479f",
+    "remote_sha256": "79a5f33b0e70c5e94287b69fcfc3afef9087ea1c876b795c28059d48f3c2a185",
+    "merge_returncode": 3,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0417",
+    "decision": "requires_hunk_review",
+    "conflict_count": 3
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+    "base_ref": "HEAD",
+    "current_sha256": "45f64db38f63bd78b58a225f062dc00d446ec362f45316d7e4ce6b03119d4fcd",
+    "base_sha256": "63d502c88eff144a4ed2bbaae2baa8bcb1f8898e14970b6ce323d84fb0beb03c",
+    "remote_sha256": "2a72c45fdda52d3586510261a8d009fc80425bac7aacf237ea0bc6f7cb8c25d8",
+    "merge_returncode": 9,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0418",
+    "decision": "requires_hunk_review",
+    "conflict_count": 9
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+    "base_ref": "HEAD",
+    "current_sha256": "e0f1c3442c2d54d3fc5c2acd9af808ce4b1556d6e3c34d143fde566bf824fcb5",
+    "base_sha256": "a0a60d6d2948c952b559fc67cebf3ff65a7bc7580f8b1e87d6eb4678992eae64",
+    "remote_sha256": "8b1916c99b43480fa05701d93e004cb3dbe2425b59332d99c938d156d4e1e4ce",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0420",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "8b1916c99b43480fa05701d93e004cb3dbe2425b59332d99c938d156d4e1e4ce",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/native_owner_bootstrap.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "ec3989c4b1b9b7e1d86f50439f353107bb8305aae771f4ace3fb0c9924f6e6e8",
+    "base_sha256": "ec3989c4b1b9b7e1d86f50439f353107bb8305aae771f4ace3fb0c9924f6e6e8",
+    "remote_sha256": "ac592f12821a88747ed0c90265b590136a1195acff50347a8455d0b839157ff5",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0421",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "ac592f12821a88747ed0c90265b590136a1195acff50347a8455d0b839157ff5",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor_runtime.py",
+    "base_ref": "HEAD",
+    "current_sha256": "7ce7f562f552ccb4ed69c60ae84d8748923f479fd65d5109f7039fbe11e93cf6",
+    "base_sha256": "feb8f3af7b7ef407ef728672ee35d93a464e2d33974d44fee2624fc585f9c196",
+    "remote_sha256": "600b1d1f9a0ad2c268597187fd707b7b0c4b680cdc0f7f800147c1023ecdf857",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0422",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "600b1d1f9a0ad2c268597187fd707b7b0c4b680cdc0f7f800147c1023ecdf857",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/validation/project_dependency_preflight.py",
+    "base_ref": "HEAD",
+    "current_sha256": "db609b9da3d607ba602f8fc73dc1267666dd40ad30e35ecbd36d24afe32a0b4f",
+    "base_sha256": "8d8b18d18d7d4fc1a6650b1c18470dd0610d9becbc87e75f351d8a8aa9b90a85",
+    "remote_sha256": "fb18435a542a5f8d18b98fb19aaa1c0cd0a06db1aff3550d589db6c3eb3f5309",
+    "merge_returncode": 3,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0423",
+    "decision": "requires_hunk_review",
+    "conflict_count": 3
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/validation/validation_commands.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/agent_supervisor/validation/validation_runtime.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/llm_router.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/model_catalog/schema.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/p2p_tasks/codebase_federated_dispatch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "ipfs_accelerate_py/p2p_tasks/codebase_federated_history.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "scripts/ops/agent_supervisor/deterministic_doctor.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "scripts/ops/agent_supervisor/prepare_task_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "tasks.todo.md",
+    "decision": "new_current_source",
+    "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "test/api/semantic_state/test_code_retrieval_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_context_pack.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_intent_progress.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_intent_world_snapshot.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_published_learned_retrieval.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_published_retrieval.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_published_task_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_security_source_program_advisor_384.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_semantic_capsule_selection.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_semantic_context_refresh.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_semantic_context_retry.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_semantic_context_runtime.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_semantic_worker_projection.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/semantic_state/test_supervised_task_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_admitted_owner_git_identity.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_admitted_runtime_launch_bounds.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_benchmark_attempt_bound.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_code_symbol_vector_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_context_delta.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_database_portal_bridge.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_deterministic_doctor_runtime.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_doctor_contract_adapters.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_doctor_repair_composition.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_doctor_runtime_contracts.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_duckdb_reattach_custody.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_grok_docker_task_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_intent_plan_projection.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_intent_repository.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_local_bootstrap_real.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_local_planning_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_multi_prover_resources.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_multi_prover_router.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_plan_create_service.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_plan_evaluator.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_project_dependency_preflight.py",
+    "base_ref": "HEAD",
+    "current_sha256": "c5f46daa1c8ce3af7f1fba3716be5f1a79d377f9dc4166c861c325f170e42a04",
+    "base_sha256": "ef683fc4249aa32c0262cbad78983352d8402e92ef954e4c32176aa0c73ce058",
+    "remote_sha256": "cb5bc3f22f870cb45f6ffb2b64e81e702e0bc00897d9991462f3eb8ec291e9e5",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0467",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "0963b97cfb563c98ac61a30d9d3e0cb335554e5a8271850c01a70e5ded70ac00",
+    "equals_current": false,
+    "equals_remote": false
+  },
+  {
+    "path": "test/api/test_agent_supervisor_proof_scope_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_quack_transport_native.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_agent_supervisor_validation_scheduler.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_before_popen_refusal.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_candidate_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_checked_integer_batch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_checked_integer_codebase.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_autoencoder.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_autoencoder_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_autoencoder_transfer.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "bbe428d00c6f03899701e9eaa5bc4a22ec33f5e9b83476a8c9bee05fc246149a",
+    "base_sha256": "ff89eb5a6a0c625f46bdef60db715215751226bee2fc0c0b9387a56f4b916493",
+    "remote_sha256": "ff89eb5a6a0c625f46bdef60db715215751226bee2fc0c0b9387a56f4b916493",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0477",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "bbe428d00c6f03899701e9eaa5bc4a22ec33f5e9b83476a8c9bee05fc246149a",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "test/api/test_codebase_feature_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_inventory_evidence_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_inventory_evidence_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_inventory_evidence_worker_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_inventory_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_inventory_paired_receiving.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "a76ba1dea47bd35368520c6f8f9141a0e6aa8ca2aabfebfaf3ade8f138f9589d",
+    "base_sha256": "efd644223d78c76cab01067adb862a52780633d1a23e835df2ae70cc2064e1bb",
+    "remote_sha256": "efd644223d78c76cab01067adb862a52780633d1a23e835df2ae70cc2064e1bb",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0483",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "a76ba1dea47bd35368520c6f8f9141a0e6aa8ca2aabfebfaf3ade8f138f9589d",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "test/api/test_codebase_inventory_public_sources.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_inventory_reservation_receiving.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_ir_metadata.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_ir_metadata_restart_paths.py",
+    "decision": "new_current_source",
+    "current_sha256": "81cfad1b6dc1460168e9107d91e369657e734b3f999dfb7ce0e53a2e8701ffa0"
+  },
+  {
+    "path": "test/api/test_codebase_source_delta_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_successor_dispatch_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codebase_successor_dispatch_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_codex_tool_diagnostics.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_conditional_codebase_batch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_conditional_codebase_evidence.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_context_chunk_losslessness.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_database_attempt_diagnostic_feedback.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_database_bounded_pre_effect_retry.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_database_completion_attempt_binding.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_database_portal_attempt_budget.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_database_projection_alias_parsing.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_datasets_hammer_tasks.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_datasets_isabelle_tasks.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_datasets_kernel_tasks.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_datasets_native_bundle.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_datasets_prover_resources.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_datasets_tla_tasks.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_candidate_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_contract_candidate_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_contract_proof.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_contract_refresh.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_header_contracts.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_header_workflow.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_literal_repair_operator.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_repair_eligibility.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_residual_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_retained_seed_exports.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_scoped_analysis.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_security_ir.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_doctor_task_workflow.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_advisory_artifact_closure.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "067561006696d0867f004bd85c8ee97fb520c33954077c5c0bb98c93dbb2e7cd",
+    "base_sha256": "30cd6e4e1ed91186c14c154dd3bdb2f43a86a0197d929c7f881834b8fc7cf1c8",
+    "remote_sha256": "30cd6e4e1ed91186c14c154dd3bdb2f43a86a0197d929c7f881834b8fc7cf1c8",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0519",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "067561006696d0867f004bd85c8ee97fb520c33954077c5c0bb98c93dbb2e7cd",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "test/api/test_finite_integer_capacity.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_integer_capacity_preview.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_integer_codebase.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_integer_plan_preview.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_integer_plan_service.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_attempt_lease_dispatch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_failure_retention.py",
+    "decision": "new_current_source",
+    "current_sha256": "784ea16dd80b200644ef0b046a264a8ccf4f777659d7c746966833fb7e0c1eb7"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_join.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_worker_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_worker_dispatch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_worker_source_custody.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_proof_query_worktree_allocation.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_repository_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_repository_advisory_worker.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_repository_candidate.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_repository_candidate_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_repository_execution.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_finite_repository_sharded_metadata.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_codebase_matching.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_ordinary_claim.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_plan_coverage.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_requirement_adapter.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_requirement_admission.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_requirement_observation.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "a9168bae145dcd1d85dc6df66999752107b3a6ecfb199bc4882156b50a57678e",
+    "base_sha256": "ae8c834c9edc6fde5470096872fbd369ff0c6b969157633637bd31a71377fee7",
+    "remote_sha256": "ae8c834c9edc6fde5470096872fbd369ff0c6b969157633637bd31a71377fee7",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0545",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "a9168bae145dcd1d85dc6df66999752107b3a6ecfb199bc4882156b50a57678e",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "test/api/test_intent_requirement_observation_native.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_requirement_worker_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_symbolic_planning.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_intent_symbolic_planning_ordered.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_inventory_constructor_cleanup.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_local_completion_bridge.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "ca11212bb0b8d4ffc7dd9d63c5e13abde572d9c1467d60e18e329a841f05a5ca",
+    "base_sha256": "ca11212bb0b8d4ffc7dd9d63c5e13abde572d9c1467d60e18e329a841f05a5ca",
+    "remote_sha256": "212d1d2e07efdc6549ad5548a22a363d27886e8e3d9432ebdf015af37ba3b970",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0551",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "212d1d2e07efdc6549ad5548a22a363d27886e8e3d9432ebdf015af37ba3b970",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "test/api/test_local_planning_declared_create.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_local_planning_public_replay.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_local_planning_receipt_storage.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_local_validation_python_launcher.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_multi_prover_callable_lifecycle.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_multi_prover_ready_queue.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_multi_prover_ready_queue_boundaries.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_native_quack_owner_qualification.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_owner_completion_service_retirement.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "4f8ce45c2edfa21a74ffe6fd9e34c13b2340d8c43c5a68b76c1e85979acfc21b",
+    "base_sha256": "4f8ce45c2edfa21a74ffe6fd9e34c13b2340d8c43c5a68b76c1e85979acfc21b",
+    "remote_sha256": "6e164a092938cfa9799660d457ebfff1879a49aa0f9afbd53415c67c05b410fe",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0560",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "6e164a092938cfa9799660d457ebfff1879a49aa0f9afbd53415c67c05b410fe",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "test/api/test_plan_create_live_root_observation.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_plan_create_semantic_input_identity.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_plan_critic_dependency_coverage.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_published_legal_initializer.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_repository_plan_preview.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_router_implementation_runner.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_router_public_instruction.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_router_workspace_contract.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_security_autoencoder_checkpoint.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_security_autoencoder_hub.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_security_code_training_profile.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_security_cve_canonical_export.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_security_cve_corpus.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_security_cve_training_source.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_security_formula_advice.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_semantic_router_integration.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_semantic_router_translation.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_structural_codebase_context.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_supervisor_meta_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_supervisor_meta_public_replay.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_supervisor_planning_composition.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_symbolic_candidate_pending_proof.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_task_claim_fenced_callback.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_analysis_order.py",
+    "decision": "new_current_source",
+    "current_sha256": "69fb418c967a05e959144d05f79d9e6a78f357fb0a5a650136b4200a91d4a0fe"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_catalog_capture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_decoder_corpus.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_decoder_experiment.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_decoder_logic.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_decoder_training.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_finite_index.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "001ba33c021b4b2edb085ae23bfff1b6e1abb1e69aa766bfa9d44321f19e248e",
+    "base_sha256": "32234a30846021ea0d28497c188fe4faf3683349df2f840e9b1ca38fffe1410a",
+    "remote_sha256": "32234a30846021ea0d28497c188fe4faf3683349df2f840e9b1ca38fffe1410a",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0590",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "001ba33c021b4b2edb085ae23bfff1b6e1abb1e69aa766bfa9d44321f19e248e",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "test/api/test_terminal_codebase_indexed_planning.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_intent_control.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_intent_corpus.py",
+    "decision": "new_current_source",
+    "current_sha256": "5478113e11dd1fdd428255d0b455fe1a8e9b7cc592996f1d5d5d86d47e2125bd"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_intent_ranker_training.py",
+    "decision": "new_current_source",
+    "current_sha256": "db11d9401692f259559b0bf334eb70f7197d27082ecc95473b3ab896c4752732"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_intent_ranker_transfer.py",
+    "decision": "new_current_source",
+    "current_sha256": "f5ef494413ab5f2ea46204c361c39d9646a49dacaf3103404e4a03d652498c3a"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_intent_relevance.py",
+    "decision": "new_current_source",
+    "current_sha256": "a7338d98d026139f5779b39928c8bc7dc8975f075844a24b2a674c881409277f"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_intent_training_join.py",
+    "decision": "new_current_source",
+    "current_sha256": "6f94d840c98efd50781820ce39936418ab86337d79bcdb64c44d3f35e749d0b9"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_ir_experiment.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "679214e765e61c8c13c3cc3f1f2b4d453f07f18ce8fd27d65f8caf8ee45caf36",
+    "base_sha256": "27ed50dfb7b297815a170b3b7ce19607071a6d14951fd2c42779b621b51fa956",
+    "remote_sha256": "27ed50dfb7b297815a170b3b7ce19607071a6d14951fd2c42779b621b51fa956",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0598",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "679214e765e61c8c13c3cc3f1f2b4d453f07f18ce8fd27d65f8caf8ee45caf36",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "test/api/test_terminal_codebase_logic_qualification.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_planning_snapshot.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_proof_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_repository_index.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_requirement_grounding.py",
+    "decision": "new_current_source",
+    "current_sha256": "56c461ab23473c73a874901c13c6082209e31decd4a062612e4877839cacbce9"
+  },
+  {
+    "path": "test/api/test_terminal_codebase_supervisor_fixture.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_terminal_doctor_dispatch.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "fe1c3c1ee3c7c241d4ec02bf8e9a784a657cb0e145e0805a65f19615ffe465f2",
+    "base_sha256": "fe1c3c1ee3c7c241d4ec02bf8e9a784a657cb0e145e0805a65f19615ffe465f2",
+    "remote_sha256": "56055bd98635af864e8ce80ff4b349d6051d87fe2d9faa5115cb436a28b813b5",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0605",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "56055bd98635af864e8ce80ff4b349d6051d87fe2d9faa5115cb436a28b813b5",
+    "equals_current": false,
+    "equals_remote": true
+  },
+  {
+    "path": "test/api/test_terminal_intent_benchmark_config.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/api/test_validation_memfd_portability.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/benchmarks/test_codebase_inventory_evidence_join_launch_audit.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_admitted_benchmark_runtime.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "53dd23b9390963a18c4fcda222cbab17d411ee474f8607d9f488aece5225962a",
+    "base_sha256": "bb0b80fcccb2d555bd05e16d4c49ef404865f542f7a317c3ca8bde7e6bbc9f79",
+    "remote_sha256": "005b8777df78d9bc0286371975be2f0788734e2b8b9fd37d20b4edb583b113fd",
+    "merge_returncode": 2,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0609",
+    "decision": "requires_hunk_review",
+    "conflict_count": 2
+  },
+  {
+    "path": "test/integration/test_admitted_context_refresh.py",
+    "base_ref": "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+    "current_sha256": "ef4e319ad1e7a67c753b1acd2423381ab3715eb5508654bb28a584d875b1d8c5",
+    "base_sha256": "d56c144cdfae543e51abb1b66d392f20e520541304c21f02f8a95ee9d48fce56",
+    "remote_sha256": "d56c144cdfae543e51abb1b66d392f20e520541304c21f02f8a95ee9d48fce56",
+    "merge_returncode": 0,
+    "review_directory": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/merge-review-01/0610",
+    "decision": "three_way_clean_merge",
+    "merged_sha256": "ef4e319ad1e7a67c753b1acd2423381ab3715eb5508654bb28a584d875b1d8c5",
+    "equals_current": true,
+    "equals_remote": false
+  },
+  {
+    "path": "test/integration/test_admitted_learned_refresh.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_admitted_published_shutdown.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_agent_supervisor_doctor_transaction_live.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_agent_supervisor_doctor_transaction_validation.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_agent_supervisor_planner_doctor_chaos.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_initial_learned_context_reuse.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_isolated_benchmark_runtime.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_large_native_task_receipt_cas.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_native_frozen_security_checkpoint.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_native_header_contract_repair.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_native_owner_live_heartbeat.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/integration/test_public_instruction_worker_identity.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/test_ai_service_catalog_schema.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/unit/test_codebase_federated_dispatch.py",
+    "decision": "already_exact_remote"
+  },
+  {
+    "path": "test/unit/test_codebase_federated_history.py",
+    "decision": "already_exact_remote"
+  }
+]

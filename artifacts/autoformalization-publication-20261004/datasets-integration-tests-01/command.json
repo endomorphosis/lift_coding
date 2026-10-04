@@ -1,0 +1,82 @@
+{
+  "candidate_commit": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+  "checked_source_bindings": [
+    {
+      "bytes": 28116,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/tests/unit/logic/formalization/autoencoder/test_alignment_review_provenance.py",
+      "sha256": "a1935d24b845dea8d06600d230c3627f436e7a5f2238728c0ee5ba5bba4fd1f3"
+    },
+    {
+      "bytes": 23921,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py",
+      "sha256": "cc623c6d3f2f3006bcc110c465ac79cc1d2e79d8ed687869818d718fcb68c522"
+    },
+    {
+      "bytes": 17846,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/tests/unit/logic/formalization/autoencoder/test_alignment_relation_declarations.py",
+      "sha256": "1fd7fa894b022cf679cf778848c43ea2d05cfbda5d9a9f4dceb379470633c102"
+    },
+    {
+      "bytes": 35724,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/tests/unit/logic/formalization/autoencoder/test_alignment_lane_bundle.py",
+      "sha256": "e33af1728a25650fcb086ef98927df7bca3508af9eb4a3a88ac0ca575ff0633b"
+    },
+    {
+      "bytes": 24684,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/tests/unit/logic/formalization/autoencoder/test_alignment_stage_declarations.py",
+      "sha256": "d399a123268bca41e80ed574dee78e7b936a88b8987500e56edfb3818ec6a1c2"
+    },
+    {
+      "bytes": 25216,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_provenance.py",
+      "sha256": "f666f3e5b1be498687662c0b9cfae2d8befe319c58625259ed7e1d360d65f222"
+    },
+    {
+      "bytes": 18008,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py",
+      "sha256": "ef382f127be99f174df45388c5cc8a5b29c960fca7497d68e555365faaa85f0d"
+    },
+    {
+      "bytes": 8494,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_declarations.py",
+      "sha256": "869461e204b0ff2b6d060cd07cea585d627eb3eb87557aebc21f058f3d64c175"
+    },
+    {
+      "bytes": 18141,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+      "sha256": "d7d2e1303e15d46b70997e5880df6fb9a690bfebde63666cad04db516f3ef3a8"
+    },
+    {
+      "bytes": 23074,
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_declarations.py",
+      "sha256": "4e475329097a747f9ec1a635c58395209271eb9808dc5658e70f0bf7eebc1c0e"
+    }
+  ],
+  "command": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-B",
+    "-m",
+    "pytest",
+    "-c",
+    "/dev/null",
+    "--confcutdir=tests/unit/logic/formalization/autoencoder",
+    "-o",
+    "pythonpath=/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets",
+    "-o",
+    "cache_dir=/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/datasets-integration-tests-01/pytest-cache",
+    "-q",
+    "--junitxml=/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/datasets-integration-tests-01/tests.xml",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_review_provenance.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_declarations.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_lane_bundle.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_stage_declarations.py"
+  ],
+  "cwd": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets",
+  "environment_overrides": {
+    "IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0
+}

@@ -1,0 +1,149 @@
+{
+  "schema": "autoformalization-projection-validation/v1",
+  "recorded_at_utc": "2026-10-03T05:45:11.926684+00:00",
+  "checkouts": [
+    {
+      "path": "/home/barberb/lift_coding",
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "working_tree": "dirty; exact listed bytes bound separately"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "working_tree": "dirty; exact listed bytes bound separately"
+    }
+  ],
+  "checks": [
+    {
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_inventory.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_capabilities.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_baseline.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_study.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_projection.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_experiment.py"
+      ],
+      "exit_code": 0,
+      "summary": "162 passed in 7.38s"
+    },
+    {
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-m",
+        "ruff",
+        "check",
+        "--fix",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_review.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+        "scripts/ops/legal_ir/run_alignment_projection_experiment.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_projection.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_review.py",
+        "tests/unit/logic/formalization/autoencoder/test_alignment_experiment.py"
+      ],
+      "exit_code": 0,
+      "summary": "All checks passed!"
+    },
+    {
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/ops/legal_ir/run_alignment_projection_experiment.py",
+        "--output-directory",
+        "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/projection-01"
+      ],
+      "exit_code": 0,
+      "summary": "12/12 fixed trials completed;80steps each; exact checkpoint replay"
+    }
+  ],
+  "new_file_bindings": [
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e",
+      "bytes": 23299
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_review.py",
+      "sha256": "7db0b5248c40f240c3834f3f5c430a10b43dcb9703775d5867d1b641c09a8f84",
+      "bytes": 13995
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27",
+      "bytes": 25163
+    },
+    {
+      "path": "external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_projection_experiment.py",
+      "sha256": "312b294237651f1c370499f3bd8f9c81f0fcfce771785ee7ca033ec11e874709",
+      "bytes": 1725
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_projection.py",
+      "sha256": "ba0b77120d4f696d7cc633f1c5364363d723859ffeea0cf74927e543212387b3",
+      "bytes": 14772
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_review.py",
+      "sha256": "3cb97313f81966856244aed84c27aa67e9e1c2db63648f8aaf3ff6be173b2c7f",
+      "bytes": 9706
+    },
+    {
+      "path": "external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_experiment.py",
+      "sha256": "f2bbdc064a958b267a2712edbcb26ee93b7c6d8d5bd8468d8f15e600df45fe14",
+      "bytes": 10080
+    },
+    {
+      "path": "external/ipfs_datasets/configs/autoencoders/alignment_projection_development_v1.json",
+      "sha256": "ff80329c20108d9af78859e51545de2dc20a72392265115a79dafbb9ea2f54a3",
+      "bytes": 533
+    },
+    {
+      "path": "external/ipfs_datasets/docs/autoencoders/alignment_projection_experiment.md",
+      "sha256": "4040d4de6e6c226eb1bc3ced12e243613019fdd419488be19219cbb63de75587",
+      "bytes": 8672
+    }
+  ],
+  "human_report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/projection-report.md",
+    "sha256": "c030099c8bfd20d455043fd60a833e3db340a684a3b52d978a308e84c495ad6a",
+    "bytes": 9334
+  },
+  "machine_report_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/projection-01/report.json",
+    "sha256": "d33e08af18174716813a67de443893d46c5324d2fcf018154cef01cef6b7ad6c",
+    "bytes": 4710534
+  },
+  "report_payload_sha256": "7e48665b6ba9e1417a9b1bfc4b48240061eec373032f55838681bf7c8d3fa2ff",
+  "artifact_checkpoint_hashes_rechecked": 12,
+  "listed_source_bindings_rechecked": 15,
+  "protected_protocol_and_input_hashes_rechecked": true,
+  "review_payload_digests_rechecked": true,
+  "local_links_checked": 12,
+  "complete_dependency_manifest": false,
+  "numerical_scope": {
+    "complete_dependency_manifest": false,
+    "head_precision": "float32",
+    "raw_normalization_and_ranking_accumulation": "Python_float64",
+    "torch_git_version": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "torch_version": "2.13.0+cu130"
+  },
+  "elapsed_seconds": 30.175369132000924,
+  "existing_encoder_autoencoder_weights_trained": false,
+  "projection_training_performed": true,
+  "native_prover_executed": false,
+  "leanstral_loaded": false,
+  "sealed_final_test_accessed": false,
+  "primary_fidelity_status": "unavailable",
+  "native_useful_proof_status": "unrun",
+  "qualified": false,
+  "production_admitted": false,
+  "conclusion": "Coverage signal with ranking and composition regressions; no formal-retrieval, generation, fidelity, or proof improvement established."
+}

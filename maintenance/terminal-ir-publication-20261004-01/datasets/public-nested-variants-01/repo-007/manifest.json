@@ -1,0 +1,140 @@
+{
+  "HEAD_after": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+  "HEAD_before": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+  "counts": {
+    "file_entries": 6,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      ".M": 6
+    },
+    "ahead/behind_cached_main": "0/0",
+    "branch": "main",
+    "dirty_children": [
+      "docs/filesystem_spec",
+      "docs/ipfs-docs",
+      "docs/ipfsspec",
+      "docs/lighthouse-python-sdk",
+      "docs/mcp-python-sdk",
+      "ipfs_accelerate_py"
+    ],
+    "id": 7,
+    "origin": "github.com/endomorphosis/ipfs_kit_py",
+    "parent": 1,
+    "relative": ".tools/ipfs_kit_py",
+    "tracked": 6,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "fec09b04ad626df44a03bc605cb2e526b752b042",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "docs/filesystem_spec",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    },
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "4cf83720b59738d93db4068976f9c2a11f023e45",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "docs/ipfs-docs",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    },
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "docs/ipfsspec",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    },
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "6b2c86693090c770d2c9a4d82ba315000a77068b",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "docs/lighthouse-python-sdk",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    },
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "d3133ae6ce7333a501e38046aff4275c44326f90",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "docs/mcp-python-sdk",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    },
+    {
+      "category": "tracked_current_delta",
+      "index_oid": "48f13ab632dec4c3575acaad6e309ef60420904b",
+      "index_stage": "0",
+      "kind": "gitlink",
+      "path": "ipfs_accelerate_py",
+      "scope": "declared child variant captured independently; no parent traversal of child contents"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 1550,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-007/head.patch",
+      "public_derivative": {
+        "bytes": 1550,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-007/head.public.patch",
+        "relative_path": "repo-007/head.public.patch",
+        "sha256": "39a8322684fbb713e2214c844b4ed691b168de55f58b5d830c2961880367dacf"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "39a8322684fbb713e2214c844b4ed691b168de55f58b5d830c2961880367dacf"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-007/index.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-007/index.public.patch",
+        "relative_path": "repo-007/index.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1550,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-007/unstaged.patch",
+      "public_derivative": {
+        "bytes": 1550,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-007/unstaged.public.patch",
+        "relative_path": "repo-007/unstaged.public.patch",
+        "sha256": "39a8322684fbb713e2214c844b4ed691b168de55f58b5d830c2961880367dacf"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "39a8322684fbb713e2214c844b4ed691b168de55f58b5d830c2961880367dacf"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/external/ipfs_datasets/.tools/ipfs_kit_py",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 134,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-007/status-after.z",
+    "sha256": "92531a791a3703819e1fad4223531d5798c2d9282efa9580be1f5c95661758e3"
+  },
+  "status_before": {
+    "bytes": 134,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-007/status-before.z",
+    "sha256": "92531a791a3703819e1fad4223531d5798c2d9282efa9580be1f5c95661758e3"
+  },
+  "workspace_relative": "external/ipfs_datasets/.tools/ipfs_kit_py"
+}

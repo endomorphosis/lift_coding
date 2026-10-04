@@ -1,0 +1,211 @@
+{
+  "authority": {
+    "execution_authority": false,
+    "learned_checkpoint_claim": false,
+    "model_convergence_proved": false,
+    "planning_authority": false,
+    "proof_authority": false,
+    "semantic_equivalence_proved": false,
+    "task_satisfaction_proved": false
+  },
+  "builder": {
+    "bytes": 26475,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+    "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+  },
+  "compression_tools": [
+    {
+      "bytes": 920248,
+      "path": "/usr/bin/zstd",
+      "sha256": "de8edfe03230ae3f378e21d845424d7df16803a5d034037bcb0d7d817e792c8e"
+    },
+    {
+      "bytes": 657432,
+      "path": "/usr/lib/aarch64-linux-gnu/libzstd.so.1.5.5",
+      "sha256": "fe726238b170b83aa83bf1f8a79109b8b61b9eb45234304511d093bbe5f5fb20"
+    }
+  ],
+  "credential_controls": {
+    "before_public_upload_gate": [
+      "Root review of actual frozen source/scope",
+      "Complete root-selected sealed and external pin closure",
+      "Classify every raw credential candidate using filename/hash-only reports; do not expose secret values",
+      "Resolve unstable/missing selected source nodes with explicit capture epoch or truthful retained classification",
+      "Bounded decoded-container secret scan or explicit reviewed exclusion classification for every opaque container; no raw-only secret-free claim",
+      "Confirm selected release prefix absent and exact new dataset identity; root authorizes remote creation/upload",
+      "Independent chunk/path reconstruction and all shard SHA validation before publication"
+    ],
+    "complete_PEM_bounds": "Body lines <=4096 bytes and <=512 lines, with matching END type. Cross-chunk retained prefix 64KiB; exotic larger key encodings not fully covered and no universal secret-free claim.",
+    "credential_candidates": "exclude raw whole-file content from public shards before committing newly staged chunks; retain file digest/path and match digest only; original sealed bytes unchanged",
+    "metadata_candidates": "private raw path/index metadata, public digest-only metadata derivative",
+    "nested_container_secret_scan_complete": false,
+    "nested_raw_quarantine": {
+      "bytes": 24878,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/raw-quarantine-01.json",
+      "sha256": "b3a7e2b630ae6e8536903247e094e6aa8820f8522981be81fd04c85788a3aa90"
+    },
+    "opaque_compressed_containers": "magic and not-performed inner-scan recorded; raw byte scan does not qualify recursively compressed content",
+    "public_upload_performed": false,
+    "public_upload_qualified": false,
+    "scan": "Raw streams and 64KiB cross-chunk overlap; complete newline-delimited private-key PEM blocks rather than isolated BEGIN constants; known GitHub/HF formats and exact available credential values; no matched values in outputs"
+  },
+  "custody": {
+    "all_source_regular_reads": "O_NOFOLLOW + before/after FD identity/stat + matching final path lstat; source.resolve refuses parent symlinks",
+    "atomic_whole_checkout_claimed": false,
+    "bounded_read_retries": 3,
+    "capture_failures": "retain partial new output and actual primary error type; outer wrapper must retain import/argument/pre-try/setup/cancellation status and logs",
+    "changed_later": "retain valid file-specific captured snapshot and explicit added/deleted/changed later drift; append capture epoch can cover later current bytes",
+    "compression_child": "one own process group, bounded wait and own PG cleanup on error; no unrelated process cleanup",
+    "sealed_and_external_pin_closure": "mandatory complete root-selected exact file pins before/after; DRAFT intentionally fails closed until supplied",
+    "selected_strict_pins": 348,
+    "source_chmod_or_nlink_changes": false,
+    "source_hardlinks_created": false,
+    "source_mutations": false,
+    "unstable_during_read": "retain unresolved metadata after retries; no false content SHA or byte claim"
+  },
+  "format": {
+    "deduplication": "raw SHA256 chunks shared across all selected namespaces; each unique clean chunk stored once",
+    "final_tar_zstd_max_bytes": 268435456,
+    "manifest_raw_jsonl_shard_max_bytes": 133169152,
+    "manifest_zstd_shard_max_bytes": 134217728,
+    "member_codec": "zstd level1 individual raw chunks in ordinary tar members chunks/<SHA>.zst",
+    "mode_uid_gid_times": "original node modes/uid/gid/timestamps retained as metadata; normalized tar member metadata is not original filesystem metadata",
+    "path_encoding": "ASCII JSON escaping retains surrogateescaped POSIX paths; source byte contents opaque",
+    "raw_tar_max_bytes": 264241152,
+    "regular_content_chunk_bytes": 8388608,
+    "regular_file_binding": "ordered chunk SHA256/length list and full raw file SHA256/bytes; exact all-file-path membership retained",
+    "special_nodes": "retain type/rdev/mode/stat only; never open or reconstruct",
+    "symlinks": "retain link text/hash/length without following; credential-bearing target text remains private"
+  },
+  "prospective_argv": [
+    "python",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+    "--scopes",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scopes-approved-02.json",
+    "--output",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/archive-build-01",
+    "--expected-script-sha256",
+    "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036",
+    "--expected-scopes-sha256",
+    "f2ec236e180f42f262661faca65d282918a55a4956174759727b341aeb4306e6",
+    "--wall-seconds",
+    "7200",
+    "--zstd",
+    "/usr/bin/zstd",
+    "--zstd-library",
+    "/usr/lib/aarch64-linux-gnu/libzstd.so.1.5.5"
+  ],
+  "prospective_destination": {
+    "creation_or_upload_authorized": false,
+    "evidence_only": true,
+    "release_prefix": "releases/20261004-terminal-codebase-ir-evidence-v1",
+    "repo_id": "Publicus/codebase-ir-proof-index",
+    "repo_type": "dataset"
+  },
+  "resource_plan": {
+    "CPU_kernel_containment_claimed": false,
+    "compression_workers": 1,
+    "local_disk_free_at_previous_probe_bytes": 752623464448,
+    "no_second_full_82GB_raw_copy": true,
+    "private_disk_usage": "SQLite path index plus at most one stable-file staged compressed chunks and one <=252MiB tar in progress; final compressed archive bytes remain local for upload",
+    "prospective_builder_wall_budget_seconds": 7200,
+    "root_durable_outer_wrapper_required": true,
+    "source_read_processes": 1
+  },
+  "schema": "terminal-ir-HF-evidence-publication-preparation-plan@1",
+  "scope_accounting": {
+    "actual_build_elapsed_seconds": null,
+    "actual_remote_cost_or_job_counts": null,
+    "all_dataset_bulk_exclusions_preserved": true,
+    "deduplicated_bytes_measured": null,
+    "older_failed_runs_included": true,
+    "original_raw_nested_variants_preserved_locally": true,
+    "prepared_archive_bytes_measured": null,
+    "publication_admin_selfreferences": "selected root inventory administration paths retained as metadata only; new archives/private ledgers excluded from self recursion",
+    "raw_nested_secret_variants_public": false,
+    "root_inventory_only_no_unselected_live_walk": true,
+    "whole_original_CodebaseIR_tree": true,
+    "whole_workspace_currentness_qualified": false
+  },
+  "scope_draft": {
+    "bytes": 110037,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scopes-approved-02.json",
+    "sha256": "f2ec236e180f42f262661faca65d282918a55a4956174759727b341aeb4306e6"
+  },
+  "source_population_metadata": {
+    "codebase_ir_terminal_bench": {
+      "directories": 239751,
+      "enclosing_outer_elapsed_seconds": null,
+      "enumeration_errors": 0,
+      "metadata_inventory_inner_seconds": 85.31497446700814,
+      "regular_file_paths": 2220961,
+      "regular_logical_bytes": 81779767990,
+      "source": "previous actual no-follow node inventory; bytes not yet hashed by this builder",
+      "special_nodes_metadata_only": 8,
+      "symlinks": 1181
+    },
+    "datasets_generated_preserved": {
+      "files": 56,
+      "immutable_CAS_content_expected": true,
+      "logical_bytes": 1890097490,
+      "manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      }
+    },
+    "datasets_nested_public_review_derivatives": {
+      "all_raw_credential_candidates_remain_local_unchanged": true,
+      "raw_quarantined_bytes": 954454,
+      "raw_quarantined_objects": 38,
+      "redacted_derivatives_are_original_bytes": false,
+      "repos": 89,
+      "summary": {
+        "bytes": 84113,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/summary.json",
+        "sha256": "1828cd937ca128bb0b255ec459612aa640aef8205ecd0b66943e4ae485e8d32b"
+      },
+      "unique_object_bytes": 2456178530,
+      "unique_object_count": 21388
+    },
+    "datasets_working_changes": {
+      "deletion_payloads": "Git patch/deletion ledger retained by dataset publisher; missing nodes are not fabricated",
+      "deletion_rows": 28,
+      "manifest": {
+        "bytes": 360991,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/selection-01.json",
+        "sha256": "5d4f5b710cbf3d1277db822f1df22dd1aed556e92cfc9a6a9001d88d11bd67db"
+      },
+      "selected": 2251
+    },
+    "root_working_changes": {
+      "atomic_current_checkout": false,
+      "directory_selections_metadata_only": 85,
+      "manifest": {
+        "bytes": 55587880,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/root/inventory.json",
+        "sha256": "760c094b574df6624347ea5e5b8e8c998863e1d5c4aae4617bbd81de5fa655a9"
+      },
+      "regular_file_paths": 203949,
+      "regular_logical_bytes": 26752198062,
+      "symlinks": 292
+    }
+  },
+  "source_preparation_failure_receipts": [
+    {
+      "correction": "Actual AArch64 ldconfig path pinned above; no builder invocation or package install",
+      "enclosing_outer_elapsed_seconds": null,
+      "error_type": "FileNotFoundError",
+      "operation": "initial compression library source pin probe",
+      "path": "/usr/lib/x86_64-linux-gnu/libzstd.so.1"
+    },
+    {
+      "correction": "Actual excluded verification namespace in sealed scope is final-retention-01/verification; exact readback/closure hashes bound there.",
+      "enclosing_outer_elapsed_seconds": null,
+      "error_type": "FileNotFoundError",
+      "operation": "initial latest readback path probe",
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-requirement-grounding-20261004-01/verification/readback.json"
+    }
+  ],
+  "status": "ROOT_AUTHORIZED_LOCAL_PREPARATION_REMOTE_UPLOAD_UNQUALIFIED"
+}
