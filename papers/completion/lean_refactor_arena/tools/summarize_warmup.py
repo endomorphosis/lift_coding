@@ -10,121 +10,65 @@ from __future__ import annotations
 import hashlib
 import json
 import statistics
+import sys
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+HARNESS = ROOT / "harness"
 JSONL = ROOT / "data" / "benchmark_data_warmup.jsonl"
 SUMMARY = ROOT / "data" / "warmup_summary.json"
 TABLE = ROOT / "manuscript" / "warmup_table.tex"
 RECEIPT = ROOT / "evidence" / "import_receipt.json"
-FROZEN_SHA256 = "6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804"
-SOURCE_URL = (
-    "https://delta-lab-ai-lean-refactor-arena.hf.space/gradio_api/file="
-    "/tmp/gradio/3389f2fbc0397df3689218ee1bc68f1c47c0721bae28e0e7aaa5a5ea503b4e94/"
-    "benchmark_data_warmup.jsonl"
-)
-ARENA_SPACE = "https://huggingface.co/spaces/delta-lab-ai/lean-refactor-arena"
-WORKSHOP = "https://vericodegen.github.io/"
-ARENA_SITE = "https://leanrefactor.github.io/"
 
-DISPLAY_NAMES = {
-    "CallElimCorrect.substOldPostSubset": "substOldPostSubset",
-    "CallElimCorrect.extractedOldExprInVars": "extractedOldExprInVars",
-    "Core.InitsUpdatesComm": "InitsUpdatesComm",
-    "fundamental_theorem_of_variational_calculus'": "var. calculus FT",
-    "Electromagnetism.ElectromagneticPotential.time_deriv_time_deriv_electricField_of_isExtrema": "time-deriv E extrema",
-    "FieldSpecification.WickAlgebra.\u03b9_timeOrderF_superCommuteF_eq_time": "iota time-order",
-    "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": "Fsub.Typing.progress",
-    "Cslib.SKI.parallelReduction_diamond": "parallelReduction diamond",
-    "Cslib.CCS.bisimilarity_congr_choice": "bisimilarity congr choice",
-    "Binius.BinaryBasefold.fiberwise_dist_lt_imp_dist_lt_unique_decoding_radius": "fiberwise unique-dec.",
-    "Binius.BinaryBasefold.fold_advances_evaluation_poly": "fold advances eval poly",
-    "interleaved_affine_gaps_imply_tensor_gaps": "interleaved affine gaps",
-    "putnam_1964_a4": "putnam_1964_a4",
-    "putnam_1964_b2": "putnam_1964_b2",
-    "putnam_1995_a3": "putnam_1995_a3",
-}
-
-SOURCE_LABEL = {
-    "strata": "Strata",
-    "physlib": "PhysLib",
-    "cslib": "CSLib",
-    "arklib": "ArkLib",
-    "putnambench": "Putnam",
-}
+if str(HARNESS) not in sys.path:
+    sys.path.insert(0, str(HARNESS))
+import _jevops_path  # noqa: E402,F401
+from jevops.catalogs import ARENA_SITE  # noqa: E402
+from jevops.catalogs import ARENA_SPACE  # noqa: E402
+from jevops.catalogs import FROZEN_WARMUP_SHA256 as FROZEN_SHA256  # noqa: E402
+from jevops.catalogs import SOURCE_LABEL  # noqa: E402
+from jevops.catalogs import WARMUP_DISPLAY_NAMES as DISPLAY_NAMES  # noqa: E402
+from jevops.catalogs import WARMUP_SOURCE_URL as SOURCE_URL  # noqa: E402
+from jevops.catalogs import WORKSHOP  # noqa: E402
 
 
 def tex_escape(value: str) -> str:
-    return (
-        value.replace("\\", "\\textbackslash{}")
-        .replace("_", "\\_")
-        .replace("%", "\\%")
-        .replace("&", "\\&")
-        .replace("#", "\\#")
-    )
+    from jevops.lean import tex_escape as _fn
+
+    return _fn(value)
 
 
 def lean_versions(record: dict) -> list[str]:
-    versions = []
-    for item in record.get("version_info") or []:
-        if isinstance(item, dict) and item:
-            versions.append(next(iter(item.keys())))
-        elif isinstance(item, str):
-            versions.append(item)
-    return versions
+    from jevops.lean import listed_version_tags
+
+    return listed_version_tags(record.get("version_info"), first_only=True)
 
 
 def load_records() -> tuple[bytes, str, list[dict]]:
-    raw = JSONL.read_bytes()
-    digest = hashlib.sha256(raw).hexdigest()
-    if digest != FROZEN_SHA256:
-        raise SystemExit(f"warmup JSONL hash mismatch: {digest} != {FROZEN_SHA256}")
-    records = [json.loads(line) for line in raw.decode("utf-8").splitlines() if line.strip()]
-    return raw, digest, records
+    from jevops.outer import read_digest_jsonl
+
+    return read_digest_jsonl(JSONL, frozen=FROZEN_SHA256)
 
 
 def problem_row(record: dict) -> dict:
-    versions = lean_versions(record)
-    return {
-        "name": record["name"],
-        "source": record["source"],
-        "file_path": record.get("file_path") or "",
-        "url": record.get("url") or "",
-        "num_lines": record["num_lines"],
-        "proof_length": record["proof_length"],
-        "src_chars": len(record.get("src") or ""),
-        "statement_chars": len(record.get("statement") or ""),
-        "has_header": bool((record.get("header") or "").strip()),
-        "start_line": record.get("start_line"),
-        "end_line": record.get("end_line"),
-        "n_toolchains": len(versions),
-        "lean_versions": versions,
-    }
+    from jevops.lean import drive_warmup_row
+
+    return drive_warmup_row(record, versions_fn=lean_versions)
 
 
 def write_table(problems: list[dict]) -> None:
-    lines = [
-        r"\begin{tabular}{llrrl}",
-        r"  \toprule",
-        r"  Source & Theorem (short) & Lines & Tokens & Toolchains \\",
-        r"  \midrule",
-    ]
-    for problem in problems:
-        display = DISPLAY_NAMES.get(problem["name"], problem["name"].split(".")[-1])
-        lines.append(
-            "  {source} & \\texttt{{{name}}} & {lines} & {tokens} & {n} \\\\".format(
-                source=SOURCE_LABEL.get(problem["source"], problem["source"]),
-                name=tex_escape(display),
-                lines=problem["num_lines"],
-                tokens=problem["proof_length"],
-                n=problem["n_toolchains"],
-            )
-        )
-    lines.extend([r"  \bottomrule", r"\end{tabular}", ""])
-    TABLE.parent.mkdir(parents=True, exist_ok=True)
-    TABLE.write_text("\n".join(lines), encoding="utf-8")
+    from jevops.lean import warmup_latex_table
+    from jevops.outer import drive_write_rendered
+
+    drive_write_rendered(
+        TABLE,
+        problems,
+        render_fn=lambda rows: warmup_latex_table(
+            rows, display_names=DISPLAY_NAMES, source_labels=SOURCE_LABEL
+        ),
+    )
 
 
 def main() -> None:

@@ -115,19 +115,18 @@
       ]
     },
     {
-      "name": "Core.InitsUpdatesComm",
+      "name": "Cslib.SKI.parallelReduction_diamond",
       "notes": [
         {
           "action": "keep_structure",
-          "help": 0.46,
+          "help": 0.5,
           "keep_structure": true,
           "mint": [
-            "hoist_repeated_simp",
-            "redundant_inner_simp"
+            "trailing_tuple_comma"
           ],
-          "name": "Core.InitsUpdatesComm",
-          "residual": "intro_then_simp_all",
-          "unsafe": 0.47
+          "name": "Cslib.SKI.parallelReduction_diamond",
+          "residual": "use_then_exact",
+          "unsafe": 0.73
         }
       ]
     },
@@ -251,130 +250,131 @@
       ]
     },
     {
-      "name": "CallElimCorrect.substOldPostSubset",
+      "name": "Core.InitsUpdatesComm",
       "notes": [
         {
           "action": "keep_structure",
-          "mint": [
-            "hoist_repeated_simp"
-          ],
-          "name": "CallElimCorrect.substOldPostSubset",
-          "present": 6,
-          "residual": "repeated_simp_list"
-        }
-      ]
-    },
-    {
-      "name": "CallElimCorrect.substOldPostSubset",
-      "notes": [
-        {
-          "action": "keep_structure",
-          "mint": [
-            "hoist_repeated_simp"
-          ],
-          "name": "CallElimCorrect.substOldPostSubset",
-          "present": 6,
-          "residual": "repeated_simp_list"
-        }
-      ]
-    },
-    {
-      "name": "CallElimCorrect.substOldPostSubset",
-      "notes": [
-        {
-          "action": "keep_structure",
-          "mint": [
-            "hoist_repeated_simp"
-          ],
-          "name": "CallElimCorrect.substOldPostSubset",
-          "present": 6,
-          "residual": "repeated_simp_list"
-        }
-      ]
-    },
-    {
-      "name": "CallElimCorrect.substOldPostSubset",
-      "notes": [
-        {
-          "action": "keep_structure",
-          "mint": [
-            "hoist_repeated_simp"
-          ],
-          "name": "CallElimCorrect.substOldPostSubset",
-          "present": 6,
-          "residual": "repeated_simp_list"
-        }
-      ]
-    },
-    {
-      "name": "CallElimCorrect.substOldPostSubset",
-      "notes": [
-        {
-          "action": "keep_structure",
-          "mint": [
-            "hoist_repeated_simp"
-          ],
-          "name": "CallElimCorrect.substOldPostSubset",
-          "present": 6,
-          "residual": "repeated_simp_list"
-        }
-      ]
-    },
-    {
-      "name": "CallElimCorrect.substOldPostSubset",
-      "notes": [
-        {
-          "action": "keep_structure",
-          "mint": [
-            "hoist_repeated_simp"
-          ],
-          "name": "CallElimCorrect.substOldPostSubset",
-          "present": 6,
-          "residual": "repeated_simp_list"
-        }
-      ]
-    },
-    {
-      "name": "CallElimCorrect.substOldPostSubset",
-      "notes": [
-        {
-          "action": "keep_structure",
-          "mint": [
-            "hoist_repeated_simp"
-          ],
-          "name": "CallElimCorrect.substOldPostSubset",
-          "present": 6,
-          "residual": "repeated_simp_list"
-        }
-      ]
-    },
-    {
-      "name": "CallElimCorrect.substOldPostSubset",
-      "notes": [
-        {
-          "action": "keep_structure",
-          "mint": [
-            "hoist_repeated_simp"
-          ],
-          "name": "CallElimCorrect.substOldPostSubset",
-          "present": 6,
-          "residual": "repeated_simp_list"
-        }
-      ]
-    },
-    {
-      "name": "Cslib.SKI.parallelReduction_diamond",
-      "notes": [
-        {
-          "action": "keep_structure",
-          "help": 0.5,
+          "help": 0.14,
           "keep_structure": true,
           "mint": [
-            "trailing_tuple_comma"
+            "hoist_repeated_simp",
+            "redundant_inner_simp"
           ],
-          "name": "Cslib.SKI.parallelReduction_diamond",
-          "residual": "use_then_exact",
-          "unsafe": 0.73
+          "name": "Core.InitsUpdatesComm",
+          "residual": "intro_then_simp_all",
+          "unsafe": 0.45
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
+        }
+      ]
+    },
+    {
+      "name": "CallElimCorrect.substOldPostSubset",
+      "notes": [
+        {
+          "action": "keep_structure",
+          "mint": [
+            "hoist_repeated_simp"
+          ],
+          "name": "CallElimCorrect.substOldPostSubset",
+          "present": 6,
+          "residual": "repeated_simp_list"
         }
       ]
     }
@@ -1140,6 +1140,26 @@
       [
         "ptr://residual/repeated_simp_list",
         "ptr://skill/port_hoist_repeated_simp"
+      ],
+      [
+        "ptr://task/LRA-010",
+        "ptr://codepath/Operates"
+      ],
+      [
+        "ptr://residual/use_then_exact",
+        "ptr://skill/port_use_exact"
+      ],
+      [
+        "ptr://residual/use_then_exact",
+        "ptr://skill/port_use_exact_reuse"
+      ],
+      [
+        "ptr://residual/grind",
+        "ptr://skill/port_grind_only_to_grind"
+      ],
+      [
+        "ptr://residual/grind",
+        "ptr://skill/port_repeat_par_grind"
       ]
     ],
     "board_window": [
@@ -1149,21 +1169,21 @@
         "kind": "goal"
       },
       {
-        "energy": 0.5866516317135192,
+        "energy": 0.5625715096777371,
         "id": "Core.InitsUpdatesComm",
         "kind": "theorem",
         "remaining_cut": 132,
         "tokens": 139
       },
       {
-        "energy": 0.5843545350389906,
+        "energy": 0.5617836055183737,
         "id": "CallElimCorrect.substOldPostSubset",
         "kind": "theorem",
         "remaining_cut": 93,
         "tokens": 392
       },
       {
-        "energy": 0.5753718569338104,
+        "energy": 0.5587025469282969,
         "id": "CallElimCorrect.extractedOldExprInVars",
         "kind": "theorem",
         "remaining_cut": 65,
@@ -1209,330 +1229,350 @@
     "call_edges": 48,
     "grid": {
       "ptr://cell/lake": {
-        "energy": 0.278265,
+        "energy": 0.04230037189598773,
         "help": 0.0,
         "id": "ptr://cell/lake",
         "kind": "cell",
         "losses": 2,
-        "tick": 1,
+        "tick": 7,
         "tokens": 392,
         "unsafe": 0.0,
         "updated_at": 1789722231.278893,
         "visited": true,
         "wins": 0
       },
+      "ptr://codepath/Operates": {
+        "energy": 0.5382587681718641,
+        "id": "ptr://codepath/Operates",
+        "kind": "codepath",
+        "losses": 0,
+        "path": "run_warmup.py",
+        "tick": 6,
+        "wins": 0
+      },
       "ptr://codepath/Run": {
-        "energy": 0.47476498069875,
+        "energy": 0.5395380302237763,
         "id": "ptr://codepath/Run",
         "kind": "codepath",
         "losses": 0,
         "path": "nca_program.py",
-        "tick": 3,
+        "tick": 9,
         "wins": 0
       },
       "ptr://codepath/Strip": {
-        "energy": 0.47476498069875,
+        "energy": 0.5395380302237763,
         "id": "ptr://codepath/Strip",
         "kind": "codepath",
         "losses": 0,
         "path": "splice.py",
-        "tick": 3,
+        "tick": 9,
         "wins": 0
       },
       "ptr://codepath/after": {
-        "energy": 0.47476498069875,
+        "energy": 0.5395380302237763,
         "id": "ptr://codepath/after",
         "kind": "codepath",
         "losses": 0,
         "path": "docker0_client.py",
-        "tick": 3,
+        "tick": 9,
         "wins": 0
       },
       "ptr://codepath/def": {
-        "energy": 0.47476498069875,
+        "energy": 0.5395380302237763,
         "id": "ptr://codepath/def",
         "kind": "codepath",
         "losses": 0,
         "path": "docker0_client.py",
-        "tick": 3,
+        "tick": 9,
         "wins": 0
       },
       "ptr://codepath/external.ipfs_datasets.ipfs_datasets_py.logic.hammers.frontends.lean_toolchain": {
         "blocked": false,
-        "energy": 0.48189157214177775,
+        "energy": 0.5365893498518154,
         "help": 0.0,
         "id": "ptr://codepath/external.ipfs_datasets.ipfs_datasets_py.logic.hammers.frontends.lean_toolchain",
         "kind": "codepath",
         "losses": 0,
         "path": "external/ipfs_datasets/ipfs_datasets_py/logic/hammers/frontends/lean_toolchain.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/free_before": {
-        "energy": 0.47476498069875,
+        "energy": 0.5395380302237763,
         "id": "ptr://codepath/free_before",
         "kind": "codepath",
         "losses": 0,
         "path": "docker0_client.py",
-        "tick": 3,
+        "tick": 9,
         "wins": 0
       },
       "ptr://codepath/harness.bake_oleans": {
         "blocked": false,
-        "energy": 0.48189157214177775,
+        "energy": 0.5365893498518154,
         "help": 0.0,
         "id": "ptr://codepath/harness.bake_oleans",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/bake_oleans.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.compile_worker": {
         "blocked": false,
-        "energy": 0.4808493285398133,
+        "energy": 0.5388871010371653,
         "help": 0.0,
         "id": "ptr://codepath/harness.compile_worker",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/compile_worker.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.docker0_client": {
         "blocked": false,
-        "energy": 0.48752315264302226,
+        "energy": 0.5413528740068025,
         "help": 0.0,
         "id": "ptr://codepath/harness.docker0_client",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/docker0_client.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.generate_text": {
         "blocked": false,
-        "energy": 0.483019969845,
+        "energy": 0.5366621061668546,
         "help": 0.0,
         "id": "ptr://codepath/harness.generate_text",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/generate_text.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.lake_native_try": {
         "blocked": false,
-        "energy": 0.4841543650328,
+        "energy": 0.5369033576263197,
         "help": 0.0,
         "id": "ptr://codepath/harness.lake_native_try",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/lake_native_try.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.receipt_store": {
         "blocked": false,
-        "energy": 0.4842474802946667,
+        "energy": 0.5367531876983328,
         "help": 0.0,
         "id": "ptr://codepath/harness.receipt_store",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/receipt_store.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.retrieve": {
         "blocked": false,
-        "energy": 0.484234931068,
+        "energy": 0.5367848107690594,
         "help": 0.0,
         "id": "ptr://codepath/harness.retrieve",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/retrieve.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.run_official_track2": {
         "blocked": false,
-        "energy": 0.37946505030000005,
+        "energy": 0.368240600920214,
         "help": 0.0,
         "id": "ptr://codepath/harness.run_official_track2",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/run_official_track2.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.run_warmup": {
         "blocked": false,
-        "energy": 0.5882268633931668,
+        "energy": 0.6120306938293477,
         "help": 0.0,
         "id": "ptr://codepath/harness.run_warmup",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/run_warmup.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.splice": {
         "blocked": false,
-        "energy": 0.4827788622253334,
+        "energy": 0.5366061275482402,
         "help": 0.0,
         "id": "ptr://codepath/harness.splice",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/splice.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.test_splice": {
         "blocked": false,
-        "energy": 0.4827788622253334,
+        "energy": 0.5366061275482402,
         "help": 0.0,
         "id": "ptr://codepath/harness.test_splice",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/test_splice.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.track1_ledger": {
         "blocked": false,
-        "energy": 0.49301140267477783,
+        "energy": 0.5461294233990713,
         "help": 0.0,
         "id": "ptr://codepath/harness.track1_ledger",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/track1_ledger.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/harness.typesafe_router": {
         "blocked": false,
-        "energy": 0.5906432482808666,
+        "energy": 0.6108560007452348,
         "help": 0.0,
         "id": "ptr://codepath/harness.typesafe_router",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/harness/typesafe_router.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/held": {
-        "energy": 0.47476498069875,
+        "energy": 0.5395380302237763,
         "id": "ptr://codepath/held",
         "kind": "codepath",
         "losses": 0,
         "path": "docker0_client.py",
-        "tick": 3,
+        "tick": 9,
         "wins": 0
       },
       "ptr://codepath/if": {
-        "energy": 0.47476498069875,
+        "energy": 0.5395380302237763,
         "id": "ptr://codepath/if",
         "kind": "codepath",
         "losses": 0,
         "path": "nca_program.py",
-        "tick": 3,
+        "tick": 9,
         "wins": 0
       },
       "ptr://codepath/inspect": {
-        "energy": 0.47476498069875,
+        "energy": 0.5373306876405866,
         "id": "ptr://codepath/inspect",
         "kind": "codepath",
         "losses": 0,
-        "path": "random_canary.py",
-        "tick": 3,
+        "path": "test_skill_improve_loop.py",
+        "tick": 9,
         "wins": 0
       },
       "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md": {
         "blocked": false,
-        "energy": 0.501146880144728,
+        "energy": 0.5496001084747447,
         "help": 0.0,
         "id": "ptr://codepath/papers.completion.lean_refactor_arena.design_win_plan.md",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/design_win_plan.md",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/papers.completion.lean_refactor_arena.tools.verify_lra_batch": {
         "blocked": false,
-        "energy": 0.4803536601453333,
+        "energy": 0.5360060247627575,
         "help": 0.0,
         "id": "ptr://codepath/papers.completion.lean_refactor_arena.tools.verify_lra_batch",
         "kind": "codepath",
         "losses": 0,
         "path": "papers/completion/lean_refactor_arena/tools/verify_lra_batch.py",
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://codepath/scripts.run_leanstral_ephemeral": {
         "blocked": false,
-        "energy": 0.501146880144728,
+        "energy": 0.5496001084747447,
         "help": 0.0,
         "id": "ptr://codepath/scripts.run_leanstral_ephemeral",
         "kind": "codepath",
         "losses": 0,
         "path": "scripts/run_leanstral_ephemeral.py",
-        "tick": 3,
+        "tick": 9,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://family/algebraic_simplification": {
+        "energy": 0.5145,
+        "help": 0.0,
+        "id": "ptr://family/algebraic_simplification",
+        "kind": "family",
+        "losses": 0,
+        "tick": 1,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://family/search_space": {
-        "energy": 0.5237364999999999,
+        "energy": 0.538862032300248,
         "help": 0.0,
         "id": "ptr://family/search_space",
         "kind": "family",
         "losses": 0,
-        "tick": 2,
+        "tick": 8,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://goal/LRA-G000": {
         "blocked": false,
-        "energy": 0.4946217574819578,
+        "energy": 0.509937468545845,
         "help": 0.0,
         "id": "ptr://goal/LRA-G000",
         "kind": "goal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Ship a Leanstral-backed local harness in this repo that rewrites warm-up proof bodies under Lean-as-oracle, without inventing Arena scores or treating Spark NVFP4 wall-clock as official Track 2.",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1540,83 +1580,119 @@
       },
       "ptr://residual/apply_semi_assumption": {
         "count": 9,
-        "energy": 0.5986244818400001,
-        "help": 0.47,
+        "energy": 0.338979595699452,
+        "help": 0.36,
         "id": "ptr://residual/apply_semi_assumption",
         "kind": "residual",
         "losses": 0,
-        "tick": 2,
-        "tokens": 0,
-        "unsafe": 0.65,
-        "wins": 0
-      },
-      "ptr://residual/ctor_lone": {
-        "count": 3,
-        "energy": 0.3609473293066667,
-        "help": 0.18,
-        "id": "ptr://residual/ctor_lone",
-        "kind": "residual",
-        "losses": 0,
-        "tick": 3,
+        "tick": 8,
         "tokens": 0,
         "unsafe": 0.57,
         "wins": 0
       },
-      "ptr://residual/have": {
-        "count": 5,
-        "energy": 0.33549152836499996,
-        "help": 0.11,
-        "id": "ptr://residual/have",
+      "ptr://residual/apply_seq_assumption": {
+        "count": 1,
+        "energy": 0.37373077770311497,
+        "help": 0.32,
+        "id": "ptr://residual/apply_seq_assumption",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 4,
+        "tokens": 0,
+        "unsafe": 0.56,
+        "wins": 0
+      },
+      "ptr://residual/ctor_lone": {
+        "count": 2,
+        "energy": 0.4541460062228564,
+        "help": 0.12,
+        "id": "ptr://residual/ctor_lone",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 9,
+        "tokens": 0,
+        "unsafe": 0.54,
+        "wins": 0
+      },
+      "ptr://residual/grind": {
+        "count": 19,
+        "energy": 0.6123094233210512,
+        "help": 0.67,
+        "id": "ptr://residual/grind",
         "kind": "residual",
         "losses": 0,
         "tick": 3,
         "tokens": 0,
-        "unsafe": 0.66,
+        "unsafe": 0.56,
+        "wins": 0
+      },
+      "ptr://residual/have": {
+        "count": 3,
+        "energy": 0.48118000000000005,
+        "help": 0.3,
+        "id": "ptr://residual/have",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 9,
+        "tokens": 0,
+        "unsafe": 0.5,
         "wins": 0
       },
       "ptr://residual/intro_then_simp_all": {
-        "count": 6,
-        "energy": 0.5701863845066667,
-        "help": 1.1,
+        "count": 9,
+        "energy": 0.3548359232548394,
+        "help": 0.75,
         "id": "ptr://residual/intro_then_simp_all",
         "kind": "residual",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.61,
         "wins": 0
       },
       "ptr://residual/intros_x_Hin": {
-        "count": 7,
-        "energy": 0.5606494818400001,
-        "help": 0.28,
+        "count": 1,
+        "energy": 0.3529841370376545,
+        "help": 0.24,
         "id": "ptr://residual/intros_x_Hin",
         "kind": "residual",
         "losses": 0,
-        "tick": 2,
+        "tick": 8,
         "tokens": 0,
-        "unsafe": 0.73,
+        "unsafe": 0.51,
         "wins": 0
       },
       "ptr://residual/repeated_simp_list": {
         "count": 6,
-        "energy": 0.61797948184,
-        "help": 0.54,
+        "energy": 0.40765744179297286,
+        "help": 0.64,
         "id": "ptr://residual/repeated_simp_list",
         "kind": "residual",
         "losses": 0,
-        "tick": 2,
+        "tick": 8,
         "tokens": 0,
-        "unsafe": 0.29,
+        "unsafe": 0.4,
+        "wins": 0
+      },
+      "ptr://residual/use_then_exact": {
+        "count": 7,
+        "energy": 0.32907699239646854,
+        "help": 0.26,
+        "id": "ptr://residual/use_then_exact",
+        "kind": "residual",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.72,
         "wins": 0
       },
       "ptr://skill/pca_search_space_d001": {
-        "energy": 0.2686882599666667,
+        "energy": 0.11207181864149521,
         "help": 0.0,
         "id": "ptr://skill/pca_search_space_d001",
         "kind": "skill",
-        "losses": 3,
-        "tick": 2,
+        "losses": 9,
+        "tick": 8,
         "tokens": 0,
         "unsafe": 0.0,
         "updated_at": 1789722198.374341,
@@ -1624,12 +1700,12 @@
         "wins": 0
       },
       "ptr://skill/pca_search_space_d002": {
-        "energy": 0.2897806924933334,
+        "energy": 0.11211847697923524,
         "help": 0.0,
         "id": "ptr://skill/pca_search_space_d002",
         "kind": "skill",
-        "losses": 2,
-        "tick": 1,
+        "losses": 8,
+        "tick": 7,
         "tokens": 0,
         "unsafe": 0.0,
         "updated_at": 1789722214.8766148,
@@ -1637,12 +1713,12 @@
         "wins": 0
       },
       "ptr://skill/pca_search_space_d003": {
-        "energy": 0.2686882599666667,
+        "energy": 0.11207181864149521,
         "help": 0.0,
         "id": "ptr://skill/pca_search_space_d003",
         "kind": "skill",
-        "losses": 3,
-        "tick": 2,
+        "losses": 9,
+        "tick": 8,
         "tokens": 0,
         "unsafe": 0.0,
         "updated_at": 1789722208.4579961,
@@ -1650,12 +1726,12 @@
         "wins": 0
       },
       "ptr://skill/pca_search_space_d004": {
-        "energy": 0.2897806924933334,
+        "energy": 0.11211847697923524,
         "help": 0.0,
         "id": "ptr://skill/pca_search_space_d004",
         "kind": "skill",
-        "losses": 2,
-        "tick": 1,
+        "losses": 8,
+        "tick": 7,
         "tokens": 0,
         "unsafe": 0.0,
         "updated_at": 1789722225.942875,
@@ -1663,12 +1739,12 @@
         "wins": 0
       },
       "ptr://skill/pca_search_space_d005": {
-        "energy": 0.2897806924933334,
+        "energy": 0.11211847697923524,
         "help": 0.0,
         "id": "ptr://skill/pca_search_space_d005",
         "kind": "skill",
-        "losses": 2,
-        "tick": 1,
+        "losses": 8,
+        "tick": 7,
         "tokens": 0,
         "unsafe": 0.0,
         "updated_at": 1789722231.2686818,
@@ -1676,12 +1752,12 @@
         "wins": 0
       },
       "ptr://skill/pca_search_space_d017": {
-        "energy": 0.2686882599666667,
+        "energy": 0.11207181864149521,
         "help": 0.0,
         "id": "ptr://skill/pca_search_space_d017",
         "kind": "skill",
-        "losses": 3,
-        "tick": 2,
+        "losses": 9,
+        "tick": 8,
         "tokens": 0,
         "unsafe": 0.0,
         "updated_at": 1789722203.368458,
@@ -1689,20 +1765,42 @@
         "wins": 0
       },
       "ptr://skill/port_ctor_pair_exacts": {
-        "energy": 0.5131148920644445,
+        "energy": 0.4536940326204184,
         "help": 0.0,
         "id": "ptr://skill/port_ctor_pair_exacts",
         "kind": "skill",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://skill/port_drop_intro_before_simp_all": {
-        "energy": 0.5120544824111112,
+        "energy": 0.4536878130167318,
         "help": 0.0,
         "id": "ptr://skill/port_drop_intro_before_simp_all",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 9,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_drop_unfold_before_split": {
+        "energy": 0.4543101612324694,
+        "help": 0.0,
+        "id": "ptr://skill/port_drop_unfold_before_split",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 4,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_grind_only_to_grind": {
+        "energy": 0.4561521311569441,
+        "help": 0.0,
+        "id": "ptr://skill/port_grind_only_to_grind",
         "kind": "skill",
         "losses": 0,
         "tick": 3,
@@ -1711,75 +1809,20 @@
         "wins": 0
       },
       "ptr://skill/port_hoist_repeated_simp": {
-        "energy": 0.5094395266333335,
+        "energy": 0.45367247555866097,
         "help": 0.0,
         "id": "ptr://skill/port_hoist_repeated_simp",
         "kind": "skill",
         "losses": 0,
-        "tick": 2,
+        "tick": 8,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
-      "ptr://skill/port_semi_assumption": {
-        "energy": 0.5094395266333335,
+      "ptr://skill/port_repeat_par_grind": {
+        "energy": 0.4561521311569441,
         "help": 0.0,
-        "id": "ptr://skill/port_semi_assumption",
-        "kind": "skill",
-        "losses": 0,
-        "tick": 2,
-        "tokens": 0,
-        "unsafe": 0.0,
-        "wins": 0
-      },
-      "ptr://skill/port_shorten_hasvars_getvars": {
-        "energy": 0.5094395266333335,
-        "help": 0.0,
-        "id": "ptr://skill/port_shorten_hasvars_getvars",
-        "kind": "skill",
-        "losses": 0,
-        "tick": 2,
-        "tokens": 0,
-        "unsafe": 0.0,
-        "wins": 0
-      },
-      "ptr://skill/port_shorten_list_subset_app": {
-        "energy": 0.5094395266333335,
-        "help": 0.0,
-        "id": "ptr://skill/port_shorten_list_subset_app",
-        "kind": "skill",
-        "losses": 0,
-        "tick": 2,
-        "tokens": 0,
-        "unsafe": 0.0,
-        "wins": 0
-      },
-      "ptr://skill/port_shorten_list_subset_trans": {
-        "energy": 0.5094395266333335,
-        "help": 0.0,
-        "id": "ptr://skill/port_shorten_list_subset_trans",
-        "kind": "skill",
-        "losses": 0,
-        "tick": 2,
-        "tokens": 0,
-        "unsafe": 0.0,
-        "wins": 0
-      },
-      "ptr://skill/port_shorten_llexpr_getvars": {
-        "energy": 0.5094395266333335,
-        "help": 0.0,
-        "id": "ptr://skill/port_shorten_llexpr_getvars",
-        "kind": "skill",
-        "losses": 0,
-        "tick": 2,
-        "tokens": 0,
-        "unsafe": 0.0,
-        "wins": 0
-      },
-      "ptr://skill/port_trim_intro_names": {
-        "energy": 0.5120544824111112,
-        "help": 0.0,
-        "id": "ptr://skill/port_trim_intro_names",
+        "id": "ptr://skill/port_repeat_par_grind",
         "kind": "skill",
         "losses": 0,
         "tick": 3,
@@ -1787,25 +1830,113 @@
         "unsafe": 0.0,
         "wins": 0
       },
+      "ptr://skill/port_semi_assumption": {
+        "energy": 0.45367247555866097,
+        "help": 0.0,
+        "id": "ptr://skill/port_semi_assumption",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 8,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_shorten_hasvars_getvars": {
+        "energy": 0.45367247555866097,
+        "help": 0.0,
+        "id": "ptr://skill/port_shorten_hasvars_getvars",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 8,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_shorten_list_subset_app": {
+        "energy": 0.45367247555866097,
+        "help": 0.0,
+        "id": "ptr://skill/port_shorten_list_subset_app",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 8,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_shorten_list_subset_trans": {
+        "energy": 0.45367247555866097,
+        "help": 0.0,
+        "id": "ptr://skill/port_shorten_list_subset_trans",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 8,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_shorten_llexpr_getvars": {
+        "energy": 0.45367247555866097,
+        "help": 0.0,
+        "id": "ptr://skill/port_shorten_llexpr_getvars",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 8,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_trim_intro_names": {
+        "energy": 0.4536917107223122,
+        "help": 0.0,
+        "id": "ptr://skill/port_trim_intro_names",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 9,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
       "ptr://skill/port_unused_intros": {
-        "energy": 0.5094395266333335,
+        "energy": 0.45367247555866097,
         "help": 0.0,
         "id": "ptr://skill/port_unused_intros",
         "kind": "skill",
         "losses": 0,
-        "tick": 2,
+        "tick": 8,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_use_exact": {
+        "energy": 0.4561521311569441,
+        "help": 0.0,
+        "id": "ptr://skill/port_use_exact",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 3,
+        "tokens": 0,
+        "unsafe": 0.0,
+        "wins": 0
+      },
+      "ptr://skill/port_use_exact_reuse": {
+        "energy": 0.4561521311569441,
+        "help": 0.0,
+        "id": "ptr://skill/port_use_exact_reuse",
+        "kind": "skill",
+        "losses": 0,
+        "tick": 3,
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://subgoal/LRA-S01": {
         "blocked": false,
-        "energy": 0.4977377837311185,
+        "energy": 0.5355136359741725,
         "help": 0.0,
         "id": "ptr://subgoal/LRA-S01",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Leanstral generate_text and docker0 HTTP client",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1813,12 +1944,12 @@
       },
       "ptr://subgoal/LRA-S02": {
         "blocked": false,
-        "energy": 0.5027245454653334,
+        "energy": 0.5325660276485501,
         "help": 0.0,
         "id": "ptr://subgoal/LRA-S02",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Prefix splice and lexical admission",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1826,12 +1957,12 @@
       },
       "ptr://subgoal/LRA-S03": {
         "blocked": false,
-        "energy": 0.48953127233480714,
+        "energy": 0.5353195506504826,
         "help": 0.0,
         "id": "ptr://subgoal/LRA-S03",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Lake compile toolchain and dedicated verifier",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1839,12 +1970,12 @@
       },
       "ptr://subgoal/LRA-S04": {
         "blocked": false,
-        "energy": 0.5365376779988555,
+        "energy": 0.5988598773859237,
         "help": 0.0,
         "id": "ptr://subgoal/LRA-S04",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Warm-up loop v1 on this machine",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1852,12 +1983,12 @@
       },
       "ptr://subgoal/LRA-S05": {
         "blocked": false,
-        "energy": 0.5600873833331,
+        "energy": 0.59119460152181,
         "help": 0.0,
         "id": "ptr://subgoal/LRA-S05",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "TypeSafe Jev distill after v1",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1865,12 +1996,12 @@
       },
       "ptr://subgoal/LRA-S06": {
         "blocked": false,
-        "energy": 0.5078408156900556,
+        "energy": 0.5373276755739657,
         "help": 0.0,
         "id": "ptr://subgoal/LRA-S06",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Optional Track 1 budget path",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1878,12 +2009,12 @@
       },
       "ptr://subgoal/LRA-S07": {
         "blocked": false,
-        "energy": 0.4970198416020445,
+        "energy": 0.5340713653814131,
         "help": 0.0,
         "id": "ptr://subgoal/LRA-S07",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Deferred lake-native hammers and JSONL retrieval",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1891,12 +2022,12 @@
       },
       "ptr://subgoal/LRA-S08": {
         "blocked": false,
-        "energy": 0.5034588545000002,
+        "energy": 0.5326395577235964,
         "help": 0.0,
         "id": "ptr://subgoal/LRA-S08",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Optional INSERT-only proof receipts",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1910,7 +2041,7 @@
         "id": "ptr://subgoal/LRA-S09",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Official Track 2 gate",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1924,7 +2055,7 @@
         "id": "ptr://subgoal/LRA-S10",
         "kind": "subgoal",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "title": "Manuscript measured section and human submission",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1932,13 +2063,13 @@
       },
       "ptr://task/LRA-010": {
         "blocked": false,
-        "energy": 0.47418925887456664,
+        "energy": 0.5385360137042364,
         "help": 0.0,
         "id": "ptr://task/LRA-010",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Thin fail-closed Leanstral generate_text entry point",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1946,13 +2077,13 @@
       },
       "ptr://task/LRA-011": {
         "blocked": false,
-        "energy": 0.47576758868075114,
+        "energy": 0.5378736757736636,
         "help": 0.0,
         "id": "ptr://task/LRA-011",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Prefix splice tests on all 15 warm-up records",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1960,13 +2091,13 @@
       },
       "ptr://task/LRA-012": {
         "blocked": false,
-        "energy": 0.47354209356221705,
+        "energy": 0.5381677940368014,
         "help": 0.0,
         "id": "ptr://task/LRA-012",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Tag-pinned Lean/lake toolchain resolver",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1974,13 +2105,13 @@
       },
       "ptr://task/LRA-013": {
         "blocked": false,
-        "energy": 0.47354209356221705,
+        "energy": 0.5381677940368014,
         "help": 0.0,
         "id": "ptr://task/LRA-013",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Bake lake oleans and Putnam Mathlib lake projects",
         "tokens": 0,
         "unsafe": 0.0,
@@ -1988,13 +2119,13 @@
       },
       "ptr://task/LRA-014": {
         "blocked": false,
-        "energy": 0.4757458648462567,
+        "energy": 0.5448049829794998,
         "help": 0.0,
         "id": "ptr://task/LRA-014",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Multi-tag lake compile worker starting with one Strata file",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2002,13 +2133,13 @@
       },
       "ptr://task/LRA-015": {
         "blocked": false,
-        "energy": 0.47039398675941785,
+        "energy": 0.53647154426214,
         "help": 0.0,
         "id": "ptr://task/LRA-015",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Dedicated verify_lra_batch fail-closed verifier",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2016,13 +2147,13 @@
       },
       "ptr://task/LRA-016": {
         "blocked": false,
-        "energy": 0.4922163914024907,
+        "energy": 0.5507436126701069,
         "help": 0.0,
         "id": "ptr://task/LRA-016",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Docker0 HTTP client; never owner LOCK_EX",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2030,29 +2161,29 @@
       },
       "ptr://task/LRA-017": {
         "blocked": false,
-        "energy": 0.711086586123003,
+        "energy": 0.7456287662891694,
         "help": 0.0,
         "id": "ptr://task/LRA-017",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "run_warmup.py loop v1 using Leanstral on this machine",
-        "tokens": 322,
+        "tokens": 552,
         "unsafe": 0.0,
-        "updated_at": 1789722185.455889,
+        "updated_at": 1789767202.1175506,
         "visited": true,
-        "wins": 2
+        "wins": 18
       },
       "ptr://task/LRA-018": {
         "blocked": false,
-        "energy": 0.4552952666835222,
+        "energy": 0.5066044752752423,
         "help": 0.0,
         "id": "ptr://task/LRA-018",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Warm-up runbook wired to verify_lra_batch",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2060,29 +2191,29 @@
       },
       "ptr://task/LRA-019": {
         "blocked": false,
-        "energy": 0.7210787369756736,
+        "energy": 0.7484542323868637,
         "help": 0.0,
         "id": "ptr://task/LRA-019",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "TypeSafe Jev router via in-tree typesafe_inference",
-        "tokens": 139,
+        "tokens": 296,
         "unsafe": 0.0,
-        "updated_at": 1789722175.0412612,
+        "updated_at": 1789767205.6380935,
         "visited": true,
-        "wins": 1
+        "wins": 5
       },
       "ptr://task/LRA-020": {
         "blocked": false,
-        "energy": 0.5108348444735796,
+        "energy": 0.563593749978751,
         "help": 0.0,
         "id": "ptr://task/LRA-020",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Optional Track 1 US$3 ledger and grok adapter",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2090,13 +2221,13 @@
       },
       "ptr://task/LRA-021": {
         "blocked": false,
-        "energy": 0.4784961094919849,
+        "energy": 0.538565518499895,
         "help": 0.0,
         "id": "ptr://task/LRA-021",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Lake-native tactic try without snapshot_goal",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2104,13 +2235,13 @@
       },
       "ptr://task/LRA-022": {
         "blocked": false,
-        "energy": 0.47888201622908894,
+        "energy": 0.5381062012954976,
         "help": 0.0,
         "id": "ptr://task/LRA-022",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Premise retrieval from 14 JSONL neighbors plus src lemmas",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2118,13 +2249,13 @@
       },
       "ptr://task/LRA-023": {
         "blocked": false,
-        "energy": 0.47898779340455555,
+        "energy": 0.5379478381465866,
         "help": 0.0,
         "id": "ptr://task/LRA-023",
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Optional DuckDB INSERT-only proof receipts",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2139,7 +2270,7 @@
         "kind": "task",
         "losses": 0,
         "status": "blocked",
-        "tick": 3,
+        "tick": 9,
         "title": "SM80 GGUF derived from Frosty40 NVFP4",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2154,7 +2285,7 @@
         "kind": "task",
         "losses": 0,
         "status": "blocked",
-        "tick": 3,
+        "tick": 9,
         "title": "Official Track 2 runner gated on cluster and SM80 GGUF",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2169,7 +2300,7 @@
         "kind": "task",
         "losses": 0,
         "status": "completed",
-        "tick": 3,
+        "tick": 9,
         "title": "Fill manuscript measured sections from receipts only",
         "tokens": 0,
         "unsafe": 0.0,
@@ -2184,668 +2315,148 @@
         "kind": "task",
         "losses": 0,
         "status": "blocked",
-        "tick": 3,
+        "tick": 9,
         "title": "Human Arena Space / OpenReview submission",
         "tokens": 0,
         "unsafe": 0.0,
         "wins": 0
       },
       "ptr://theorem/CallElimCorrect.extractedOldExprInVars": {
-        "energy": 0.5677602998536673,
+        "energy": 0.780549506167911,
         "help": 0.0,
         "id": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
         "kind": "theorem",
         "leftover_drafts": 0,
         "losses": 0,
-        "remaining_cut": 65,
-        "tick": 3,
-        "tokens": 260,
+        "remaining_cut": 3,
+        "tick": 9,
+        "tokens": 322,
         "unsafe": 0.0,
-        "updated_at": 1789722486.9855857,
+        "updated_at": 1789767171.689088,
         "visited": true,
         "warmup_tokens": 325,
-        "wins": 2
+        "wins": 8
       },
       "ptr://theorem/CallElimCorrect.substOldPostSubset": {
-        "energy": 0.5740481745272934,
+        "energy": 0.7844914883526644,
         "help": 0.0,
         "id": "ptr://theorem/CallElimCorrect.substOldPostSubset",
         "kind": "theorem",
         "leftover_drafts": 0,
         "losses": 0,
-        "remaining_cut": 93,
-        "tick": 3,
-        "tokens": 392,
+        "remaining_cut": 3,
+        "tick": 9,
+        "tokens": 482,
         "unsafe": 0.0,
-        "updated_at": 1789722484.9033642,
+        "updated_at": 1789767152.3696995,
         "visited": true,
         "warmup_tokens": 485,
-        "wins": 2
+        "wins": 8
       },
       "ptr://theorem/Core.InitsUpdatesComm": {
-        "energy": 0.5756561421994634,
+        "energy": 0.7849745289581836,
         "help": 0.0,
         "id": "ptr://theorem/Core.InitsUpdatesComm",
         "kind": "theorem",
         "leftover_drafts": 0,
         "losses": 0,
-        "remaining_cut": 132,
-        "tick": 3,
-        "tokens": 139,
+        "remaining_cut": 3,
+        "tick": 9,
+        "tokens": 268,
         "unsafe": 0.0,
-        "updated_at": 1789722482.7121387,
+        "updated_at": 1789767120.0353837,
         "visited": true,
         "warmup_tokens": 271,
-        "wins": 2
+        "wins": 6
       },
       "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice": {
-        "energy": 0.5535791726729042,
+        "energy": 0.7506172619961852,
         "help": 0.0,
         "id": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
         "kind": "theorem",
         "leftover_drafts": 0,
         "losses": 0,
         "remaining_cut": 3,
-        "tick": 3,
+        "tick": 9,
         "tokens": 296,
         "unsafe": 0.0,
-        "updated_at": 1789722494.1116626,
+        "updated_at": 1789767205.6381056,
         "visited": true,
         "warmup_tokens": 299,
-        "wins": 0
+        "wins": 4
       },
       "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress": {
-        "energy": 0.5533801729869472,
+        "energy": 0.748848961096034,
         "help": 0.0,
         "id": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
         "kind": "theorem",
         "leftover_drafts": 0,
         "losses": 0,
         "remaining_cut": 3,
-        "tick": 3,
+        "tick": 9,
         "tokens": 519,
         "unsafe": 0.0,
-        "updated_at": 1789722496.2335985,
+        "updated_at": 1789767199.8722634,
         "visited": true,
         "warmup_tokens": 522,
-        "wins": 0
+        "wins": 10
       },
       "ptr://theorem/Cslib.SKI.parallelReduction_diamond": {
-        "energy": 0.5533801729869472,
+        "energy": 0.751347301885588,
         "help": 0.0,
         "id": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
         "kind": "theorem",
         "leftover_drafts": 0,
         "losses": 0,
-        "remaining_cut": 15,
-        "tick": 3,
-        "tokens": 540,
+        "remaining_cut": 3,
+        "tick": 9,
+        "tokens": 552,
         "unsafe": 0.0,
-        "updated_at": 1789722490.6084828,
+        "updated_at": 1789767202.1175578,
         "visited": true,
         "warmup_tokens": 555,
-        "wins": 0
+        "wins": 10
       },
       "ptr://tool/budget": {
-        "energy": 0.995122,
+        "energy": 0.995107,
         "help": 0.0,
         "id": "ptr://tool/budget",
         "jev_calls": 48,
         "kind": "tool",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "tokens": 0,
         "unsafe": 0.0,
-        "usd": 0.014634,
+        "usd": 0.014679,
         "visited": true,
         "wins": 0
       },
       "ptr://tool/nca_program": {
-        "energy": 0.8554676358000003,
+        "energy": 0.6429038738941386,
         "id": "ptr://tool/nca_program",
         "kind": "tool",
         "losses": 0,
-        "tick": 3,
+        "tick": 9,
         "wins": 0
       }
     },
     "journal": [
       {
-        "energy_delta": 0.0105,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0105,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0105,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0105,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0105,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0105,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0073,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0073,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0073,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0073,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0073,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0073,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0051,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.162,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.44,
-        "event": "upsert",
-        "op": "task",
-        "ptr": "ptr://task/LRA-019",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.1672,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.44,
-        "event": "upsert",
-        "op": "task",
-        "ptr": "ptr://task/LRA-017",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.1672,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.015,
-        "event": "upsert",
-        "op": "task",
-        "ptr": "ptr://task/LRA-017",
-        "tick": 0
-      },
-      {
-        "energy_delta": 0.0,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 0
-      },
-      {
         "energy_delta": 0.0,
         "event": "tick",
         "focus": "",
-        "n_cells": 68,
+        "n_cells": 87,
         "op": "TICK",
         "ptr": "",
-        "tick": 1
+        "tick": 4
       },
       {
-        "energy_delta": -0.0579,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 1
-      },
-      {
-        "energy_delta": -0.15,
-        "event": "upsert",
-        "op": "skill",
-        "ptr": "ptr://skill/pca_search_space_d001",
-        "tick": 1
-      },
-      {
-        "energy_delta": -0.15,
-        "event": "upsert",
-        "op": "skill",
-        "ptr": "ptr://skill/pca_search_space_d017",
-        "tick": 1
-      },
-      {
-        "energy_delta": -0.15,
-        "event": "upsert",
-        "op": "skill",
-        "ptr": "ptr://skill/pca_search_space_d003",
-        "tick": 1
-      },
-      {
-        "energy_delta": 0.0,
-        "event": "tick",
-        "focus": "",
-        "n_cells": 82,
-        "op": "TICK",
-        "ptr": "",
-        "tick": 2
-      },
-      {
-        "energy_delta": -0.15,
-        "event": "upsert",
-        "op": "lake",
-        "ptr": "ptr://cell/lake",
-        "tick": 2
-      },
-      {
-        "energy_delta": -0.15,
-        "event": "upsert",
-        "op": "skill",
-        "ptr": "ptr://skill/pca_search_space_d002",
-        "tick": 2
-      },
-      {
-        "energy_delta": -0.15,
-        "event": "upsert",
-        "op": "skill",
-        "ptr": "ptr://skill/pca_search_space_d004",
-        "tick": 2
-      },
-      {
-        "energy_delta": -0.15,
-        "event": "upsert",
-        "op": "skill",
-        "ptr": "ptr://skill/pca_search_space_d005",
-        "tick": 2
-      },
-      {
-        "energy_delta": 0.0,
-        "event": "tick",
-        "focus": "",
-        "n_cells": 86,
-        "op": "TICK",
-        "ptr": "",
-        "tick": 3
-      },
-      {
-        "energy_delta": 0.0093,
-        "event": "upsert",
-        "op": "lake",
-        "ptr": "ptr://cell/lake",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0647,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0123,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.013,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0123,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0613,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0453,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0654,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0086,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0086,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0091,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0458,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0429,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0317,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.006,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0064,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.006,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0321,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.03,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0222,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0042,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0045,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0042,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.021,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0155,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0224,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.003,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.003,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0031,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0157,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0147,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0109,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0021,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0022,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0021,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.011,
-        "event": "upsert",
-        "op": "theorem",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "tick": 3
-      },
-      {
-        "energy_delta": 0.0048,
-        "event": "jev",
-        "jev_calls": 1,
-        "op": "BUDGET",
-        "ptr": "ptr://tool/budget",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0001,
-        "event": "jev",
-        "jev_calls": 2,
-        "op": "BUDGET",
-        "ptr": "ptr://tool/budget",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0001,
-        "event": "jev",
-        "jev_calls": 3,
-        "op": "BUDGET",
-        "ptr": "ptr://tool/budget",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0001,
-        "event": "jev",
-        "jev_calls": 4,
-        "op": "BUDGET",
-        "ptr": "ptr://tool/budget",
-        "tick": 3
-      },
-      {
-        "energy_delta": -0.0001,
-        "event": "jev",
-        "jev_calls": 5,
-        "op": "BUDGET",
-        "ptr": "ptr://tool/budget",
-        "tick": 3
-      },
-      {
-        "energy_delta": 0.0,
+        "energy_delta": 0.1668,
         "event": "instruct",
         "jev_calls": 5,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
       },
       {
         "energy_delta": -0.0001,
@@ -2853,7 +2464,7 @@
         "jev_calls": 6,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
       },
       {
         "energy_delta": -0.0001,
@@ -2861,7 +2472,7 @@
         "jev_calls": 7,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
       },
       {
         "energy_delta": -0.0001,
@@ -2869,14 +2480,14 @@
         "jev_calls": 8,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
       },
       {
-        "energy_delta": -0.0103,
+        "energy_delta": -0.0586,
         "event": "upsert",
         "op": "theorem",
         "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "tick": 3
+        "tick": 4
       },
       {
         "energy_delta": -0.0001,
@@ -2884,7 +2495,7 @@
         "jev_calls": 9,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
       },
       {
         "energy_delta": -0.0001,
@@ -2892,7 +2503,7 @@
         "jev_calls": 10,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
       },
       {
         "energy_delta": -0.0001,
@@ -2900,7 +2511,7 @@
         "jev_calls": 11,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
       },
       {
         "energy_delta": -0.0001,
@@ -2908,7 +2519,7 @@
         "jev_calls": 12,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
       },
       {
         "energy_delta": -0.0001,
@@ -2916,15 +2527,140 @@
         "jev_calls": 13,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.019,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0085,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 4
+      },
+      {
+        "energy_delta": -0.0056,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 4
       },
       {
         "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0015,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0052,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-019",
+        "tick": 4
+      },
+      {
+        "energy_delta": -0.044,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.1183,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0078,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.1183,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0073,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 4
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "tick",
+        "focus": "",
+        "n_cells": 87,
+        "op": "TICK",
+        "ptr": "",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.1665,
         "event": "instruct",
         "jev_calls": 13,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
       },
       {
         "energy_delta": -0.0001,
@@ -2932,7 +2668,7 @@
         "jev_calls": 14,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
       },
       {
         "energy_delta": -0.0001,
@@ -2940,7 +2676,7 @@
         "jev_calls": 15,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
       },
       {
         "energy_delta": -0.0001,
@@ -2948,14 +2684,14 @@
         "jev_calls": 16,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
       },
       {
-        "energy_delta": -0.0076,
+        "energy_delta": -0.0649,
         "event": "upsert",
         "op": "theorem",
         "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "tick": 3
+        "tick": 5
       },
       {
         "energy_delta": -0.0001,
@@ -2963,7 +2699,7 @@
         "jev_calls": 17,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
       },
       {
         "energy_delta": -0.0001,
@@ -2971,7 +2707,7 @@
         "jev_calls": 18,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
       },
       {
         "energy_delta": -0.0001,
@@ -2979,7 +2715,7 @@
         "jev_calls": 19,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
       },
       {
         "energy_delta": -0.0001,
@@ -2987,7 +2723,7 @@
         "jev_calls": 20,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
       },
       {
         "energy_delta": -0.0001,
@@ -2995,15 +2731,140 @@
         "jev_calls": 21,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0146,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0057,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 5
+      },
+      {
+        "energy_delta": -0.016,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 5
       },
       {
         "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0011,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0033,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 5
+      },
+      {
+        "energy_delta": -0.0442,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0011,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.002,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 5
+      },
+      {
+        "energy_delta": -0.0442,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0011,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0013,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 5
+      },
+      {
+        "energy_delta": -0.0442,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 5
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "tick",
+        "focus": "",
+        "n_cells": 89,
+        "op": "TICK",
+        "ptr": "",
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.1662,
         "event": "instruct",
         "jev_calls": 21,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
       },
       {
         "energy_delta": -0.0001,
@@ -3011,7 +2872,7 @@
         "jev_calls": 22,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
       },
       {
         "energy_delta": -0.0001,
@@ -3019,7 +2880,7 @@
         "jev_calls": 23,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
       },
       {
         "energy_delta": -0.0001,
@@ -3027,14 +2888,14 @@
         "jev_calls": 24,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
       },
       {
-        "energy_delta": -0.0014,
+        "energy_delta": -0.0602,
         "event": "upsert",
         "op": "theorem",
         "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "tick": 3
+        "tick": 6
       },
       {
         "energy_delta": -0.0001,
@@ -3042,7 +2903,7 @@
         "jev_calls": 25,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
       },
       {
         "energy_delta": -0.0001,
@@ -3050,7 +2911,7 @@
         "jev_calls": 26,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
       },
       {
         "energy_delta": -0.0001,
@@ -3058,7 +2919,7 @@
         "jev_calls": 27,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
       },
       {
         "energy_delta": -0.0001,
@@ -3066,7 +2927,7 @@
         "jev_calls": 28,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
       },
       {
         "energy_delta": -0.0001,
@@ -3074,15 +2935,111 @@
         "jev_calls": 29,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.0179,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.0043,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 6
+      },
+      {
+        "energy_delta": -0.0083,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 6
       },
       {
         "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.0003,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.0025,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 6
+      },
+      {
+        "energy_delta": -0.0448,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "tick": 6
+      },
+      {
+        "energy_delta": -0.0002,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.0014,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 6
+      },
+      {
+        "energy_delta": -0.0451,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 6
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "tick",
+        "focus": "",
+        "n_cells": 95,
+        "op": "TICK",
+        "ptr": "",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.1659,
         "event": "instruct",
         "jev_calls": 29,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
       },
       {
         "energy_delta": -0.0001,
@@ -3090,7 +3047,7 @@
         "jev_calls": 30,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
       },
       {
         "energy_delta": -0.0001,
@@ -3098,7 +3055,7 @@
         "jev_calls": 31,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
       },
       {
         "energy_delta": -0.0001,
@@ -3106,14 +3063,14 @@
         "jev_calls": 32,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
       },
       {
-        "energy_delta": -0.0015,
+        "energy_delta": -0.0171,
         "event": "upsert",
         "op": "theorem",
         "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "tick": 3
+        "tick": 7
       },
       {
         "energy_delta": -0.0001,
@@ -3121,7 +3078,7 @@
         "jev_calls": 33,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
       },
       {
         "energy_delta": -0.0001,
@@ -3129,7 +3086,7 @@
         "jev_calls": 34,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
       },
       {
         "energy_delta": -0.0001,
@@ -3137,7 +3094,7 @@
         "jev_calls": 35,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
       },
       {
         "energy_delta": -0.0001,
@@ -3145,7 +3102,7 @@
         "jev_calls": 36,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
       },
       {
         "energy_delta": -0.0001,
@@ -3153,15 +3110,111 @@
         "jev_calls": 37,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.11,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.0052,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-019",
+        "tick": 7
       },
       {
         "energy_delta": 0.0,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.0003,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.0015,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 7
+      },
+      {
+        "energy_delta": -0.0448,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 7
+      },
+      {
+        "energy_delta": -0.0004,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.0008,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 7
+      },
+      {
+        "energy_delta": -0.0453,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 7
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "tick",
+        "focus": "",
+        "n_cells": 95,
+        "op": "TICK",
+        "ptr": "",
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.1656,
         "event": "instruct",
         "jev_calls": 37,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
       },
       {
         "energy_delta": -0.0001,
@@ -3169,7 +3222,7 @@
         "jev_calls": 38,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
       },
       {
         "energy_delta": -0.0001,
@@ -3177,7 +3230,7 @@
         "jev_calls": 39,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
       },
       {
         "energy_delta": -0.0001,
@@ -3185,14 +3238,14 @@
         "jev_calls": 40,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
       },
       {
-        "energy_delta": -0.0014,
+        "energy_delta": -0.0606,
         "event": "upsert",
         "op": "theorem",
         "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "tick": 3
+        "tick": 8
       },
       {
         "energy_delta": -0.0001,
@@ -3200,7 +3253,7 @@
         "jev_calls": 41,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
       },
       {
         "energy_delta": -0.0001,
@@ -3208,7 +3261,7 @@
         "jev_calls": 42,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
       },
       {
         "energy_delta": -0.0001,
@@ -3216,7 +3269,7 @@
         "jev_calls": 43,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
       },
       {
         "energy_delta": -0.0001,
@@ -3224,7 +3277,7 @@
         "jev_calls": 44,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
       },
       {
         "energy_delta": -0.0001,
@@ -3232,15 +3285,111 @@
         "jev_calls": 45,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.0176,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.0034,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 8
+      },
+      {
+        "energy_delta": -0.0089,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 8
       },
       {
         "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "tick": 8
+      },
+      {
+        "energy_delta": -0.0004,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.0019,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-017",
+        "tick": 8
+      },
+      {
+        "energy_delta": -0.0453,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.0008,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.0015,
+        "event": "upsert",
+        "op": "task",
+        "ptr": "ptr://task/LRA-019",
+        "tick": 8
+      },
+      {
+        "energy_delta": -0.0444,
+        "event": "upsert",
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "call",
+        "ok": true,
+        "op": "theorem",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "tick": 8
+      },
+      {
+        "energy_delta": 0.0,
+        "event": "tick",
+        "focus": "",
+        "n_cells": 96,
+        "op": "TICK",
+        "ptr": "",
+        "tick": 9
+      },
+      {
+        "energy_delta": 0.1653,
         "event": "instruct",
         "jev_calls": 45,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 9
       },
       {
         "energy_delta": -0.0001,
@@ -3248,7 +3397,7 @@
         "jev_calls": 46,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 9
       },
       {
         "energy_delta": -0.0001,
@@ -3256,7 +3405,7 @@
         "jev_calls": 47,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 9
       },
       {
         "energy_delta": -0.0001,
@@ -3264,9 +3413,39 @@
         "jev_calls": 48,
         "op": "BUDGET",
         "ptr": "ptr://tool/budget",
-        "tick": 3
+        "tick": 9
       }
     ],
+    "kernel": {
+      "arc": {
+        "b1": [],
+        "b2": [],
+        "p": 0,
+        "t1": [],
+        "t2": []
+      },
+      "budget": {
+        "max_bytes": 65536,
+        "max_cells": 12,
+        "max_depth": 3
+      },
+      "in_flight": [],
+      "l1": {},
+      "l1_cap": 32,
+      "l1_max_bytes": 262144,
+      "lru": [],
+      "negative": {},
+      "policy": "arc",
+      "stats": {
+        "evicts": 0,
+        "flights": 40,
+        "hits": 0,
+        "integrity_miss": 0,
+        "misses": 0,
+        "negative_hits": 0
+      },
+      "tick": 40
+    },
     "live_overlay": {
       "n_overlaid": 18,
       "reason": "fetch_board"
@@ -3276,7 +3455,7 @@
       "autoencoder_ok": true,
       "called_docker0": false,
       "datasets_ir_ok": true,
-      "decompiled": "inspect cells ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress, ptr://theorem/Core.InitsUpdatesComm, ptr://theorem/CallElimCorrect.substOldPostSubset, ptr://theorem/CallElimCorrect.extractedOldExprInVars, ptr://theorem/Cslib.SKI.parallelReduction_diamond, ptr://theorem/Cslib.CCS.bisimilarity_congr_choice; walk neighbors on the board and skill graph; project; limit",
+      "decompiled": "inspect cells ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress, ptr://theorem/Cslib.SKI.parallelReduction_diamond, ptr://theorem/Cslib.CCS.bisimilarity_congr_choice, ptr://theorem/Core.InitsUpdatesComm, ptr://theorem/CallElimCorrect.substOldPostSubset, ptr://theorem/CallElimCorrect.extractedOldExprInVars; walk neighbors on the board and skill graph; project; limit",
       "hardware_class": "nca_local_ir",
       "ir": {
         "called_docker0": false,
@@ -3286,11 +3465,11 @@
           {
             "entity_ids": [
               "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+              "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+              "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
               "ptr://theorem/Core.InitsUpdatesComm",
               "ptr://theorem/CallElimCorrect.substOldPostSubset",
               "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-              "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-              "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
               "ptr://task/LRA-010",
               "ptr://task/LRA-011"
             ],
@@ -3320,20 +3499,62 @@
         ],
         "seeds": [
           "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+          "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+          "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
           "ptr://theorem/Core.InitsUpdatesComm",
           "ptr://theorem/CallElimCorrect.substOldPostSubset",
           "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-          "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-          "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
           "ptr://task/LRA-010",
           "ptr://task/LRA-011"
         ],
         "source": "local"
       },
+      "last_ran": [
+        {
+          "detail_ok": true,
+          "ok": true,
+          "op": "SEARCH",
+          "query": "inspect cells ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.pro"
+        },
+        {
+          "detail_ok": true,
+          "ok": true,
+          "op": "CALL",
+          "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress"
+        },
+        {
+          "detail_ok": true,
+          "ok": true,
+          "op": "CALL",
+          "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond"
+        },
+        {
+          "detail_ok": true,
+          "ok": true,
+          "op": "CALL",
+          "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice"
+        },
+        {
+          "detail_ok": true,
+          "ok": true,
+          "op": "SLICE"
+        },
+        {
+          "detail_ok": true,
+          "ok": true,
+          "op": "TICK"
+        },
+        {
+          "ok": true,
+          "op": "KEEP",
+          "stop": true
+        }
+      ],
       "ops": [],
-      "provider": "local_ir"
+      "provider": "local_ir",
+      "tactics": "  generalize eq : [] = \u0393 at der\n  have der' : Typing \u0393 t \u03c4 := der\n  induction der <;> subst eq\n  case var mem => grind\n  case app t\u2081 _ _ t\u2082 l r ih_l ih_r =>\n    right\n    cases ih_l rfl l with\n    | inl val_l =>\n        cases ih_r rfl r with\n        | inl val_r =>\n            have \u27e8\u03c3, t\u2081, eq\u27e9 := l.canonical_form_abs val_l\n            exists t\u2081 ^\u1d57\u1d57 t\u2082\n            grind\n        | inr red_r =>\n            obtain \u27e8t\u2082', _\u27e9 := red_r\n            exists t\u2081.app t\u2082'\n            grind\n    | inr red_l =>\n        obtain \u27e8t\u2081', _\u27e9 := red_l\n        exists t\u2081'.app t\u2082\n        grind\n  case tapp \u03c3' der _ ih =>\n    right\n    specialize ih rfl der\n    cases ih with\n    | inl val =>\n        obtain \u27e8_, t, _\u27e9 := der.canonical_form_tabs val\n        exists t ^\u1d57\u1d5e \u03c3'\n        grind\n    | inr red =>\n        obtain \u27e8t', _\u27e9 := red\n        exists .tapp t' \u03c3'\n        grind\n  case let' t\u2081 \u03c3 t\u2082 \u03c4 L der _ ih _ =>\n    right\n    cases ih rfl der with\n    | inl _ =>\n        exists t\u2082 ^\u1d57\u1d57 t\u2081\n        grind\n    | inr red =>\n        obtain \u27e8t\u2081', _\u27e9 := red\n        exists t\u2081'.let' t\u2082\n        grind\n  case inl der _ ih =>\n    cases (ih rfl der) with\n    | inl val => grind\n    | inr red =>\n        right\n        obtain \u27e8t', _\u27e9 := red\n        exists .inl t'\n        grind\n  case inr der _ ih =>\n    cases (ih rfl der) with\n    | inl val => grind\n    | inr red =>\n        right\n        obtain \u27e8t', _\u27e9 := red\n        exists .inr t'\n        grind\n  case case t\u2081 _ _ t\u2082 _ t\u2083 _ der _ _ ih _ _ =>\n    right\n    cases ih rfl der with\n    | inl val =>\n        have \u27e8t\u2081, lr\u27e9 := der.canonical_form_sum val\n        cases lr <;> [exists t\u2082 ^\u1d57\u1d57 t\u2081; exists t\u2083 ^\u1d57\u1d57 t\u2081] <;> grind\n    | inr red =>\n        obtain \u27e8t\u2081', _\u27e9 := red\n        exists t\u2081'.case t\u2082 t\u2083\n        grind\n  case sub => grind\n  case abs \u03c3 _ \u03c4 L _ _=>\n    left\n    constructor\n    apply LC.abs L\n    \u00b7 grind only [\u2192 wf, cases Term.LC]\n    \u00b7 grind only [\u2192 wf]\n  case tabs L _ _=>\n    left\n    constructor\n    apply LC.tabs L\n    \u00b7 grind only [\u2192 wf, cases Term.LC]\n    \u00b7 grind only [\u2192 wf]"
     },
-    "tick": 3
+    "tick": 9
   },
   "observations": {
     "no_drafts_instructed_by": {
@@ -3414,9 +3635,9 @@
     {
       "compose": "nest",
       "help": {
-        "ctor_lone": 0.15,
+        "ctor_lone": 0.13,
         "have": 0.12,
-        "intro_then_simp_all": 0.54
+        "intro_then_simp_all": 0.39
       },
       "name": "Core.InitsUpdatesComm",
       "residuals": {
@@ -3426,57 +3647,17 @@
       },
       "skill": "keep",
       "unsafe": {
-        "ctor_lone": 0.55,
-        "have": 0.67,
-        "intro_then_simp_all": 0.41
+        "ctor_lone": 0.53,
+        "have": 0.62,
+        "intro_then_simp_all": 0.4
       }
     },
     {
       "compose": "nest",
       "help": {
-        "ctor_lone": 0.22,
-        "have": 0.15,
-        "intro_then_simp_all": 0.37
-      },
-      "name": "Core.InitsUpdatesComm",
-      "residuals": {
-        "ctor_lone": 3,
-        "have": 5,
-        "intro_then_simp_all": 1
-      },
-      "skill": "keep",
-      "unsafe": {
-        "ctor_lone": 0.51,
-        "have": 0.64,
-        "intro_then_simp_all": 0.43
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "ctor_lone": 0.22,
-        "have": 0.14,
-        "intro_then_simp_all": 0.23
-      },
-      "name": "Core.InitsUpdatesComm",
-      "residuals": {
-        "ctor_lone": 3,
-        "have": 5,
-        "intro_then_simp_all": 1
-      },
-      "skill": "keep",
-      "unsafe": {
-        "ctor_lone": 0.52,
-        "have": 0.61,
-        "intro_then_simp_all": 0.46
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "ctor_lone": 0.24,
-        "have": 0.13,
-        "intro_then_simp_all": 0.32
+        "ctor_lone": 0.23,
+        "have": 0.11,
+        "intro_then_simp_all": 0.24
       },
       "name": "Core.InitsUpdatesComm",
       "residuals": {
@@ -3487,36 +3668,16 @@
       "skill": "keep",
       "unsafe": {
         "ctor_lone": 0.5,
-        "have": 0.66,
-        "intro_then_simp_all": 0.44
+        "have": 0.63,
+        "intro_then_simp_all": 0.42
       }
     },
     {
       "compose": "nest",
       "help": {
-        "ctor_lone": 0.21,
-        "have": 0.15,
-        "intro_then_simp_all": 0.19
-      },
-      "name": "Core.InitsUpdatesComm",
-      "residuals": {
-        "ctor_lone": 3,
-        "have": 5,
-        "intro_then_simp_all": 1
-      },
-      "skill": "keep",
-      "unsafe": {
-        "ctor_lone": 0.52,
-        "have": 0.65,
-        "intro_then_simp_all": 0.46
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "ctor_lone": 0.24,
-        "have": 0.18,
-        "intro_then_simp_all": 0.3
+        "ctor_lone": 0.33,
+        "have": 0.08,
+        "intro_then_simp_all": 0.14
       },
       "name": "Core.InitsUpdatesComm",
       "residuals": {
@@ -3528,15 +3689,15 @@
       "unsafe": {
         "ctor_lone": 0.51,
         "have": 0.63,
-        "intro_then_simp_all": 0.44
+        "intro_then_simp_all": 0.45
       }
     },
     {
       "compose": "nest",
       "help": {
-        "ctor_lone": 0.22,
-        "have": 0.14,
-        "intro_then_simp_all": 0.18
+        "ctor_lone": 0.24,
+        "have": 0.16,
+        "intro_then_simp_all": 0.25
       },
       "name": "Core.InitsUpdatesComm",
       "residuals": {
@@ -3546,7 +3707,7 @@
       },
       "skill": "keep",
       "unsafe": {
-        "ctor_lone": 0.52,
+        "ctor_lone": 0.53,
         "have": 0.63,
         "intro_then_simp_all": 0.44
       }
@@ -3554,9 +3715,9 @@
     {
       "compose": "nest",
       "help": {
-        "ctor_lone": 0.2,
-        "have": 0.13,
-        "intro_then_simp_all": 0.18
+        "ctor_lone": 0.22,
+        "have": 0.12,
+        "intro_then_simp_all": 0.19
       },
       "name": "Core.InitsUpdatesComm",
       "residuals": {
@@ -3566,41 +3727,78 @@
       },
       "skill": "keep",
       "unsafe": {
-        "ctor_lone": 0.48,
+        "ctor_lone": 0.53,
         "have": 0.64,
+        "intro_then_simp_all": 0.42
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.24,
+        "have": 0.13,
+        "intro_then_simp_all": 0.15
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.5,
+        "have": 0.65,
         "intro_then_simp_all": 0.43
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_semi_assumption": 0.42,
-        "intro_then_simp_all": 1.09,
-        "intros_x_Hin": 0.26,
-        "repeated_simp_list": 1.18
+        "ctor_lone": 0.19,
+        "have": 0.09,
+        "intro_then_simp_all": 0.15
       },
-      "name": "CallElimCorrect.substOldPostSubset",
+      "name": "Core.InitsUpdatesComm",
       "residuals": {
-        "apply_semi_assumption": 9,
-        "intro_then_simp_all": 6,
-        "intros_x_Hin": 7,
-        "repeated_simp_list": 6
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
       },
       "skill": "keep",
       "unsafe": {
-        "apply_semi_assumption": 0.66,
-        "intro_then_simp_all": 0.59,
-        "intros_x_Hin": 0.65,
-        "repeated_simp_list": 0.37
+        "ctor_lone": 0.49,
+        "have": 0.65,
+        "intro_then_simp_all": 0.44
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_semi_assumption": 0.37,
-        "intro_then_simp_all": 0.83,
-        "intros_x_Hin": 0.27,
-        "repeated_simp_list": 0.82
+        "ctor_lone": 0.33,
+        "have": 0.13,
+        "intro_then_simp_all": 0.2
+      },
+      "name": "Core.InitsUpdatesComm",
+      "residuals": {
+        "ctor_lone": 3,
+        "have": 5,
+        "intro_then_simp_all": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.5,
+        "have": 0.6,
+        "intro_then_simp_all": 0.42
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.49,
+        "intro_then_simp_all": 1.12,
+        "intros_x_Hin": 0.49,
+        "repeated_simp_list": 0.85
       },
       "name": "CallElimCorrect.substOldPostSubset",
       "residuals": {
@@ -3612,7 +3810,7 @@
       "skill": "keep",
       "unsafe": {
         "apply_semi_assumption": 0.64,
-        "intro_then_simp_all": 0.58,
+        "intro_then_simp_all": 0.52,
         "intros_x_Hin": 0.65,
         "repeated_simp_list": 0.36
       }
@@ -3620,10 +3818,10 @@
     {
       "compose": "nest",
       "help": {
-        "apply_semi_assumption": 0.32,
-        "intro_then_simp_all": 0.9,
-        "intros_x_Hin": 0.23,
-        "repeated_simp_list": 0.99
+        "apply_semi_assumption": 0.38,
+        "intro_then_simp_all": 0.96,
+        "intros_x_Hin": 0.24,
+        "repeated_simp_list": 0.91
       },
       "name": "CallElimCorrect.substOldPostSubset",
       "residuals": {
@@ -3634,19 +3832,19 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_semi_assumption": 0.61,
-        "intro_then_simp_all": 0.57,
-        "intros_x_Hin": 0.64,
-        "repeated_simp_list": 0.38
+        "apply_semi_assumption": 0.64,
+        "intro_then_simp_all": 0.5,
+        "intros_x_Hin": 0.68,
+        "repeated_simp_list": 0.37
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_semi_assumption": 0.4,
-        "intro_then_simp_all": 0.9,
-        "intros_x_Hin": 0.2,
-        "repeated_simp_list": 0.77
+        "apply_semi_assumption": 0.3,
+        "intro_then_simp_all": 0.87,
+        "intros_x_Hin": 0.21,
+        "repeated_simp_list": 0.76
       },
       "name": "CallElimCorrect.substOldPostSubset",
       "residuals": {
@@ -3658,41 +3856,18 @@
       "skill": "keep",
       "unsafe": {
         "apply_semi_assumption": 0.58,
-        "intro_then_simp_all": 0.56,
+        "intro_then_simp_all": 0.51,
         "intros_x_Hin": 0.64,
-        "repeated_simp_list": 0.4
+        "repeated_simp_list": 0.39
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_semi_assumption": 0.43,
-        "intro_then_simp_all": 1.0,
-        "intros_x_Hin": 0.25,
-        "repeated_simp_list": 0.55
-      },
-      "name": "CallElimCorrect.substOldPostSubset",
-      "residuals": {
-        "apply_semi_assumption": 9,
-        "intro_then_simp_all": 6,
-        "intros_x_Hin": 7,
-        "repeated_simp_list": 6
-      },
-      "skill": "keep",
-      "unsafe": {
-        "apply_semi_assumption": 0.53,
-        "intro_then_simp_all": 0.54,
-        "intros_x_Hin": 0.66,
-        "repeated_simp_list": 0.36
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "apply_semi_assumption": 0.46,
-        "intro_then_simp_all": 0.78,
-        "intros_x_Hin": 0.24,
-        "repeated_simp_list": 0.68
+        "apply_semi_assumption": 0.33,
+        "intro_then_simp_all": 0.84,
+        "intros_x_Hin": 0.2,
+        "repeated_simp_list": 0.79
       },
       "name": "CallElimCorrect.substOldPostSubset",
       "residuals": {
@@ -3705,16 +3880,16 @@
       "unsafe": {
         "apply_semi_assumption": 0.57,
         "intro_then_simp_all": 0.56,
-        "intros_x_Hin": 0.65,
-        "repeated_simp_list": 0.36
+        "intros_x_Hin": 0.64,
+        "repeated_simp_list": 0.41
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_semi_assumption": 0.42,
-        "intro_then_simp_all": 0.92,
-        "intros_x_Hin": 0.33,
+        "apply_semi_assumption": 0.36,
+        "intro_then_simp_all": 0.8,
+        "intros_x_Hin": 0.21,
         "repeated_simp_list": 0.64
       },
       "name": "CallElimCorrect.substOldPostSubset",
@@ -3726,19 +3901,19 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_semi_assumption": 0.56,
+        "apply_semi_assumption": 0.57,
         "intro_then_simp_all": 0.58,
-        "intros_x_Hin": 0.65,
+        "intros_x_Hin": 0.62,
         "repeated_simp_list": 0.4
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_semi_assumption": 0.41,
-        "intro_then_simp_all": 1.15,
-        "intros_x_Hin": 0.26,
-        "repeated_simp_list": 0.5
+        "apply_semi_assumption": 0.31,
+        "intro_then_simp_all": 0.73,
+        "intros_x_Hin": 0.19,
+        "repeated_simp_list": 0.63
       },
       "name": "CallElimCorrect.substOldPostSubset",
       "residuals": {
@@ -3749,19 +3924,65 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_semi_assumption": 0.56,
-        "intro_then_simp_all": 0.56,
+        "apply_semi_assumption": 0.59,
+        "intro_then_simp_all": 0.59,
         "intros_x_Hin": 0.67,
-        "repeated_simp_list": 0.36
+        "repeated_simp_list": 0.37
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.51,
-        "ctor_lone": 0.21,
-        "intro_then_simp_all": 0.75,
-        "intros_x_Hin": 0.31
+        "apply_semi_assumption": 0.49,
+        "intro_then_simp_all": 0.96,
+        "intros_x_Hin": 0.22,
+        "repeated_simp_list": 0.99
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.58,
+        "intro_then_simp_all": 0.59,
+        "intros_x_Hin": 0.67,
+        "repeated_simp_list": 0.41
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_semi_assumption": 0.4,
+        "intro_then_simp_all": 0.81,
+        "intros_x_Hin": 0.21,
+        "repeated_simp_list": 0.45
+      },
+      "name": "CallElimCorrect.substOldPostSubset",
+      "residuals": {
+        "apply_semi_assumption": 9,
+        "intro_then_simp_all": 6,
+        "intros_x_Hin": 7,
+        "repeated_simp_list": 6
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_semi_assumption": 0.55,
+        "intro_then_simp_all": 0.56,
+        "intros_x_Hin": 0.64,
+        "repeated_simp_list": 0.44
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.53,
+        "ctor_lone": 0.29,
+        "intro_then_simp_all": 0.91,
+        "intros_x_Hin": 0.34
       },
       "name": "CallElimCorrect.extractedOldExprInVars",
       "residuals": {
@@ -3773,18 +3994,18 @@
       "skill": "keep",
       "unsafe": {
         "apply_seq_assumption": 0.61,
-        "ctor_lone": 0.32,
-        "intro_then_simp_all": 0.6,
-        "intros_x_Hin": 0.56
+        "ctor_lone": 0.35,
+        "intro_then_simp_all": 0.61,
+        "intros_x_Hin": 0.5
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.44,
-        "ctor_lone": 0.16,
-        "intro_then_simp_all": 0.73,
-        "intros_x_Hin": 0.2
+        "apply_seq_assumption": 0.4,
+        "ctor_lone": 0.12,
+        "intro_then_simp_all": 0.77,
+        "intros_x_Hin": 0.19
       },
       "name": "CallElimCorrect.extractedOldExprInVars",
       "residuals": {
@@ -3796,63 +4017,17 @@
       "skill": "keep",
       "unsafe": {
         "apply_seq_assumption": 0.57,
-        "ctor_lone": 0.34,
-        "intro_then_simp_all": 0.59,
-        "intros_x_Hin": 0.49
+        "ctor_lone": 0.33,
+        "intro_then_simp_all": 0.6,
+        "intros_x_Hin": 0.47
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.41,
-        "ctor_lone": 0.08,
-        "intro_then_simp_all": 0.66,
-        "intros_x_Hin": 0.15
-      },
-      "name": "CallElimCorrect.extractedOldExprInVars",
-      "residuals": {
-        "apply_seq_assumption": 8,
-        "ctor_lone": 1,
-        "intro_then_simp_all": 9,
-        "intros_x_Hin": 1
-      },
-      "skill": "keep",
-      "unsafe": {
-        "apply_seq_assumption": 0.55,
-        "ctor_lone": 0.35,
-        "intro_then_simp_all": 0.61,
-        "intros_x_Hin": 0.45
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "apply_seq_assumption": 0.4,
+        "apply_seq_assumption": 0.35,
         "ctor_lone": 0.07,
-        "intro_then_simp_all": 0.63,
-        "intros_x_Hin": 0.16
-      },
-      "name": "CallElimCorrect.extractedOldExprInVars",
-      "residuals": {
-        "apply_seq_assumption": 8,
-        "ctor_lone": 1,
-        "intro_then_simp_all": 9,
-        "intros_x_Hin": 1
-      },
-      "skill": "keep",
-      "unsafe": {
-        "apply_seq_assumption": 0.58,
-        "ctor_lone": 0.35,
-        "intro_then_simp_all": 0.58,
-        "intros_x_Hin": 0.48
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "apply_seq_assumption": 0.37,
-        "ctor_lone": 0.06,
-        "intro_then_simp_all": 0.68,
+        "intro_then_simp_all": 0.7,
         "intros_x_Hin": 0.15
       },
       "name": "CallElimCorrect.extractedOldExprInVars",
@@ -3864,41 +4039,64 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_seq_assumption": 0.59,
-        "ctor_lone": 0.34,
+        "apply_seq_assumption": 0.57,
+        "ctor_lone": 0.37,
         "intro_then_simp_all": 0.58,
-        "intros_x_Hin": 0.48
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "apply_seq_assumption": 0.3,
-        "ctor_lone": 0.08,
-        "intro_then_simp_all": 0.61,
-        "intros_x_Hin": 0.16
-      },
-      "name": "CallElimCorrect.extractedOldExprInVars",
-      "residuals": {
-        "apply_seq_assumption": 8,
-        "ctor_lone": 1,
-        "intro_then_simp_all": 9,
-        "intros_x_Hin": 1
-      },
-      "skill": "keep",
-      "unsafe": {
-        "apply_seq_assumption": 0.59,
-        "ctor_lone": 0.32,
-        "intro_then_simp_all": 0.61,
-        "intros_x_Hin": 0.46
+        "intros_x_Hin": 0.51
       }
     },
     {
       "compose": "nest",
       "help": {
         "apply_seq_assumption": 0.39,
-        "ctor_lone": 0.08,
-        "intro_then_simp_all": 0.73,
+        "ctor_lone": 0.07,
+        "intro_then_simp_all": 0.7,
+        "intros_x_Hin": 0.21
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.59,
+        "ctor_lone": 0.37,
+        "intro_then_simp_all": 0.62,
+        "intros_x_Hin": 0.52
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.37,
+        "ctor_lone": 0.07,
+        "intro_then_simp_all": 0.75,
+        "intros_x_Hin": 0.24
+      },
+      "name": "CallElimCorrect.extractedOldExprInVars",
+      "residuals": {
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.56,
+        "ctor_lone": 0.39,
+        "intro_then_simp_all": 0.61,
+        "intros_x_Hin": 0.51
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.39,
+        "ctor_lone": 0.1,
+        "intro_then_simp_all": 0.79,
         "intros_x_Hin": 0.17
       },
       "name": "CallElimCorrect.extractedOldExprInVars",
@@ -3910,18 +4108,18 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_seq_assumption": 0.59,
-        "ctor_lone": 0.31,
+        "apply_seq_assumption": 0.57,
+        "ctor_lone": 0.39,
         "intro_then_simp_all": 0.57,
-        "intros_x_Hin": 0.48
+        "intros_x_Hin": 0.51
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.33,
-        "ctor_lone": 0.08,
-        "intro_then_simp_all": 0.63,
+        "apply_seq_assumption": 0.37,
+        "ctor_lone": 0.16,
+        "intro_then_simp_all": 0.59,
         "intros_x_Hin": 0.15
       },
       "name": "CallElimCorrect.extractedOldExprInVars",
@@ -3933,51 +4131,40 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_seq_assumption": 0.58,
-        "ctor_lone": 0.34,
-        "intro_then_simp_all": 0.59,
-        "intros_x_Hin": 0.48
+        "apply_seq_assumption": 0.56,
+        "ctor_lone": 0.36,
+        "intro_then_simp_all": 0.61,
+        "intros_x_Hin": 0.49
       }
     },
     {
       "compose": "nest",
       "help": {
-        "grind": 0.22,
-        "use_then_exact": 0.5
+        "apply_seq_assumption": 0.39,
+        "ctor_lone": 0.06,
+        "intro_then_simp_all": 0.71,
+        "intros_x_Hin": 0.17
       },
-      "name": "Cslib.SKI.parallelReduction_diamond",
+      "name": "CallElimCorrect.extractedOldExprInVars",
       "residuals": {
-        "grind": 1,
-        "use_then_exact": 7
+        "apply_seq_assumption": 8,
+        "ctor_lone": 1,
+        "intro_then_simp_all": 9,
+        "intros_x_Hin": 1
       },
       "skill": "keep",
       "unsafe": {
-        "grind": 0.45,
-        "use_then_exact": 0.73
+        "apply_seq_assumption": 0.54,
+        "ctor_lone": 0.35,
+        "intro_then_simp_all": 0.54,
+        "intros_x_Hin": 0.47
       }
     },
     {
       "compose": "nest",
       "help": {
-        "grind": 0.29,
-        "use_then_exact": 0.41
-      },
-      "name": "Cslib.SKI.parallelReduction_diamond",
-      "residuals": {
-        "grind": 1,
-        "use_then_exact": 7
-      },
-      "skill": "keep",
-      "unsafe": {
-        "grind": 0.41,
-        "use_then_exact": 0.7
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "grind": 0.26,
-        "use_then_exact": 0.32
+        "grind": 0.28,
+        "use_then_exact": 0.4
       },
       "name": "Cslib.SKI.parallelReduction_diamond",
       "residuals": {
@@ -3993,8 +4180,8 @@
     {
       "compose": "nest",
       "help": {
-        "grind": 0.19,
-        "use_then_exact": 0.3
+        "grind": 0.23,
+        "use_then_exact": 0.29
       },
       "name": "Cslib.SKI.parallelReduction_diamond",
       "residuals": {
@@ -4003,15 +4190,66 @@
       },
       "skill": "keep",
       "unsafe": {
-        "grind": 0.4,
+        "grind": 0.41,
+        "use_then_exact": 0.74
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.24,
+        "use_then_exact": 0.29
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.41,
+        "use_then_exact": 0.74
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.29,
+        "use_then_exact": 0.36
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.41,
         "use_then_exact": 0.73
       }
     },
     {
       "compose": "nest",
       "help": {
-        "grind": 0.3,
-        "use_then_exact": 0.33
+        "grind": 0.25,
+        "use_then_exact": 0.26
+      },
+      "name": "Cslib.SKI.parallelReduction_diamond",
+      "residuals": {
+        "grind": 1,
+        "use_then_exact": 7
+      },
+      "skill": "keep",
+      "unsafe": {
+        "grind": 0.41,
+        "use_then_exact": 0.72
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "grind": 0.27,
+        "use_then_exact": 0.39
       },
       "name": "Cslib.SKI.parallelReduction_diamond",
       "residuals": {
@@ -4021,14 +4259,14 @@
       "skill": "keep",
       "unsafe": {
         "grind": 0.39,
-        "use_then_exact": 0.71
+        "use_then_exact": 0.74
       }
     },
     {
       "compose": "nest",
       "help": {
         "grind": 0.27,
-        "use_then_exact": 0.24
+        "use_then_exact": 0.27
       },
       "name": "Cslib.SKI.parallelReduction_diamond",
       "residuals": {
@@ -4044,8 +4282,8 @@
     {
       "compose": "nest",
       "help": {
-        "grind": 0.3,
-        "use_then_exact": 0.32
+        "grind": 0.25,
+        "use_then_exact": 0.29
       },
       "name": "Cslib.SKI.parallelReduction_diamond",
       "residuals": {
@@ -4054,32 +4292,15 @@
       },
       "skill": "keep",
       "unsafe": {
-        "grind": 0.4,
+        "grind": 0.42,
         "use_then_exact": 0.74
       }
     },
     {
       "compose": "nest",
       "help": {
-        "grind": 0.28,
-        "use_then_exact": 0.31
-      },
-      "name": "Cslib.SKI.parallelReduction_diamond",
-      "residuals": {
-        "grind": 1,
-        "use_then_exact": 7
-      },
-      "skill": "keep",
-      "unsafe": {
-        "grind": 0.37,
-        "use_then_exact": 0.73
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "apply_seq_assumption": 0.63,
-        "ctor_lone": 0.59
+        "apply_seq_assumption": 0.47,
+        "ctor_lone": 0.57
       },
       "name": "Cslib.CCS.bisimilarity_congr_choice",
       "residuals": {
@@ -4095,8 +4316,8 @@
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.43,
-        "ctor_lone": 0.21
+        "apply_seq_assumption": 0.25,
+        "ctor_lone": 0.25
       },
       "name": "Cslib.CCS.bisimilarity_congr_choice",
       "residuals": {
@@ -4105,14 +4326,31 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_seq_assumption": 0.64,
-        "ctor_lone": 0.53
+        "apply_seq_assumption": 0.59,
+        "ctor_lone": 0.52
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.4,
+        "apply_seq_assumption": 0.3,
+        "ctor_lone": 0.25
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.57,
+        "ctor_lone": 0.5
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.28,
         "ctor_lone": 0.24
       },
       "name": "Cslib.CCS.bisimilarity_congr_choice",
@@ -4122,31 +4360,14 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_seq_assumption": 0.6,
-        "ctor_lone": 0.48
+        "apply_seq_assumption": 0.57,
+        "ctor_lone": 0.5
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.36,
-        "ctor_lone": 0.42
-      },
-      "name": "Cslib.CCS.bisimilarity_congr_choice",
-      "residuals": {
-        "apply_seq_assumption": 1,
-        "ctor_lone": 9
-      },
-      "skill": "keep",
-      "unsafe": {
-        "apply_seq_assumption": 0.59,
-        "ctor_lone": 0.49
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "apply_seq_assumption": 0.34,
+        "apply_seq_assumption": 0.32,
         "ctor_lone": 0.32
       },
       "name": "Cslib.CCS.bisimilarity_congr_choice",
@@ -4156,14 +4377,31 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_seq_assumption": 0.58,
-        "ctor_lone": 0.49
+        "apply_seq_assumption": 0.56,
+        "ctor_lone": 0.5
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.37,
+        "apply_seq_assumption": 0.23,
+        "ctor_lone": 0.19
+      },
+      "name": "Cslib.CCS.bisimilarity_congr_choice",
+      "residuals": {
+        "apply_seq_assumption": 1,
+        "ctor_lone": 9
+      },
+      "skill": "keep",
+      "unsafe": {
+        "apply_seq_assumption": 0.56,
+        "ctor_lone": 0.48
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "apply_seq_assumption": 0.28,
         "ctor_lone": 0.26
       },
       "name": "Cslib.CCS.bisimilarity_congr_choice",
@@ -4173,15 +4411,15 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_seq_assumption": 0.59,
+        "apply_seq_assumption": 0.58,
         "ctor_lone": 0.48
       }
     },
     {
       "compose": "nest",
       "help": {
-        "apply_seq_assumption": 0.42,
-        "ctor_lone": 0.32
+        "apply_seq_assumption": 0.34,
+        "ctor_lone": 0.27
       },
       "name": "Cslib.CCS.bisimilarity_congr_choice",
       "residuals": {
@@ -4190,52 +4428,15 @@
       },
       "skill": "keep",
       "unsafe": {
-        "apply_seq_assumption": 0.6,
-        "ctor_lone": 0.5
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "apply_seq_assumption": 0.33,
-        "ctor_lone": 0.41
-      },
-      "name": "Cslib.CCS.bisimilarity_congr_choice",
-      "residuals": {
-        "apply_seq_assumption": 1,
-        "ctor_lone": 9
-      },
-      "skill": "keep",
-      "unsafe": {
-        "apply_seq_assumption": 0.58,
-        "ctor_lone": 0.46
+        "apply_seq_assumption": 0.57,
+        "ctor_lone": 0.49
       }
     },
     {
       "compose": "nest",
       "help": {
         "ctor_lone": 0.16,
-        "grind": 0.9,
-        "have": 0.44
-      },
-      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-      "residuals": {
-        "ctor_lone": 2,
-        "grind": 19,
-        "have": 3
-      },
-      "skill": "keep",
-      "unsafe": {
-        "ctor_lone": 0.54,
-        "grind": 0.62,
-        "have": 0.51
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "ctor_lone": 0.14,
-        "grind": 0.8,
+        "grind": 0.93,
         "have": 0.32
       },
       "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
@@ -4246,36 +4447,16 @@
       },
       "skill": "keep",
       "unsafe": {
-        "ctor_lone": 0.51,
-        "grind": 0.58,
-        "have": 0.52
+        "ctor_lone": 0.56,
+        "grind": 0.59,
+        "have": 0.53
       }
     },
     {
       "compose": "nest",
       "help": {
         "ctor_lone": 0.14,
-        "grind": 0.72,
-        "have": 0.31
-      },
-      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-      "residuals": {
-        "ctor_lone": 2,
-        "grind": 19,
-        "have": 3
-      },
-      "skill": "keep",
-      "unsafe": {
-        "ctor_lone": 0.51,
-        "grind": 0.53,
-        "have": 0.49
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "ctor_lone": 0.12,
-        "grind": 0.63,
+        "grind": 0.76,
         "have": 0.25
       },
       "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
@@ -4286,17 +4467,17 @@
       },
       "skill": "keep",
       "unsafe": {
-        "ctor_lone": 0.51,
-        "grind": 0.56,
+        "ctor_lone": 0.53,
+        "grind": 0.53,
         "have": 0.52
       }
     },
     {
       "compose": "nest",
       "help": {
-        "ctor_lone": 0.15,
-        "grind": 0.69,
-        "have": 0.39
+        "ctor_lone": 0.12,
+        "grind": 0.53,
+        "have": 0.22
       },
       "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
       "residuals": {
@@ -4308,35 +4489,15 @@
       "unsafe": {
         "ctor_lone": 0.52,
         "grind": 0.59,
-        "have": 0.5
+        "have": 0.48
       }
     },
     {
       "compose": "nest",
       "help": {
-        "ctor_lone": 0.13,
-        "grind": 0.79,
-        "have": 0.39
-      },
-      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-      "residuals": {
-        "ctor_lone": 2,
-        "grind": 19,
-        "have": 3
-      },
-      "skill": "keep",
-      "unsafe": {
-        "ctor_lone": 0.51,
-        "grind": 0.56,
-        "have": 0.5
-      }
-    },
-    {
-      "compose": "nest",
-      "help": {
-        "ctor_lone": 0.11,
-        "grind": 0.72,
-        "have": 0.35
+        "ctor_lone": 0.17,
+        "grind": 0.64,
+        "have": 0.25
       },
       "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
       "residuals": {
@@ -4348,15 +4509,35 @@
       "unsafe": {
         "ctor_lone": 0.51,
         "grind": 0.58,
-        "have": 0.49
+        "have": 0.54
       }
     },
     {
       "compose": "nest",
       "help": {
-        "ctor_lone": 0.1,
+        "ctor_lone": 0.12,
         "grind": 0.67,
-        "have": 0.23
+        "have": 0.3
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.54,
+        "grind": 0.56,
+        "have": 0.5
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.14,
+        "grind": 0.71,
+        "have": 0.31
       },
       "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
       "residuals": {
@@ -4367,8 +4548,48 @@
       "skill": "keep",
       "unsafe": {
         "ctor_lone": 0.51,
-        "grind": 0.57,
-        "have": 0.51
+        "grind": 0.56,
+        "have": 0.49
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.12,
+        "grind": 0.68,
+        "have": 0.28
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.49,
+        "grind": 0.59,
+        "have": 0.52
+      }
+    },
+    {
+      "compose": "nest",
+      "help": {
+        "ctor_lone": 0.15,
+        "grind": 0.72,
+        "have": 0.27
+      },
+      "name": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+      "residuals": {
+        "ctor_lone": 2,
+        "grind": 19,
+        "have": 3
+      },
+      "skill": "keep",
+      "unsafe": {
+        "ctor_lone": 0.51,
+        "grind": 0.58,
+        "have": 0.52
       }
     }
   ],
@@ -4376,7 +4597,7 @@
   "skills": [],
   "subloop_returns": [
     {
-      "n_steps": 8,
+      "n_steps": 6,
       "name": "skill_walk",
       "ok": true,
       "returned": true
@@ -4394,8 +4615,8 @@
       "returned": true
     },
     {
-      "n_steps": 4,
-      "name": "nca_fork",
+      "n_steps": 8,
+      "name": "skill_walk",
       "ok": true,
       "returned": true
     },
@@ -4521,25 +4742,25 @@
     },
     {
       "n_steps": 6,
-      "name": "skill_walk",
+      "name": "decision_tree",
       "ok": true,
       "returned": true
     },
     {
       "n_steps": 8,
-      "name": "skill_walk",
+      "name": "decision_tree",
       "ok": true,
       "returned": true
     },
     {
       "n_steps": 8,
-      "name": "skill_walk",
+      "name": "decision_tree",
       "ok": true,
       "returned": true
     },
     {
       "n_steps": 8,
-      "name": "skill_walk",
+      "name": "decision_tree",
       "ok": true,
       "returned": true
     },
@@ -4584,75 +4805,6 @@
         "energy": 0.5,
         "kind": "theorem",
         "parent_frame": "",
-        "payload": "CallElimCorrect.substOldPostSubset",
-        "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.3,
-        "kind": "lake",
-        "parent_frame": "f1",
-        "payload": {
-          "n": 3,
-          "ok": false
-        },
-        "ptr": "",
-        "theorem_ok": false,
-        "tokens": 392
-      },
-      {
-        "energy": 0.3,
-        "kind": "lake",
-        "parent_frame": "f1",
-        "payload": {
-          "n": 3,
-          "ok": false
-        },
-        "ptr": "",
-        "theorem_ok": false,
-        "tokens": 392
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
-        "payload": "CallElimCorrect.extractedOldExprInVars",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
-        "payload": "Cslib.SKI.parallelReduction_diamond",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
-        "payload": "Cslib.CCS.bisimilarity_congr_choice",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
-        "payload": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
         "payload": "Core.InitsUpdatesComm",
         "ptr": "ptr://theorem/Core.InitsUpdatesComm",
         "theorem_ok": null,
@@ -4671,51 +4823,6 @@
         "energy": 0.5,
         "kind": "theorem",
         "parent_frame": "",
-        "payload": "CallElimCorrect.extractedOldExprInVars",
-        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
-        "payload": "Cslib.SKI.parallelReduction_diamond",
-        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
-        "payload": "Cslib.CCS.bisimilarity_congr_choice",
-        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
-        "payload": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
-        "payload": "Core.InitsUpdatesComm",
-        "ptr": "ptr://theorem/Core.InitsUpdatesComm",
-        "theorem_ok": null,
-        "tokens": 0
-      },
-      {
-        "energy": 0.5,
-        "kind": "theorem",
-        "parent_frame": "",
         "payload": "CallElimCorrect.substOldPostSubset",
         "ptr": "ptr://theorem/CallElimCorrect.substOldPostSubset",
         "theorem_ok": null,
@@ -4734,6 +4841,24 @@
         "energy": 0.5,
         "kind": "theorem",
         "parent_frame": "",
+        "payload": "CallElimCorrect.extractedOldExprInVars",
+        "ptr": "ptr://theorem/CallElimCorrect.extractedOldExprInVars",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.SKI.parallelReduction_diamond",
+        "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
         "payload": "Cslib.SKI.parallelReduction_diamond",
         "ptr": "ptr://theorem/Cslib.SKI.parallelReduction_diamond",
         "theorem_ok": null,
@@ -4745,6 +4870,24 @@
         "parent_frame": "",
         "payload": "Cslib.CCS.bisimilarity_congr_choice",
         "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.CCS.bisimilarity_congr_choice",
+        "ptr": "ptr://theorem/Cslib.CCS.bisimilarity_congr_choice",
+        "theorem_ok": null,
+        "tokens": 0
+      },
+      {
+        "energy": 0.5,
+        "kind": "theorem",
+        "parent_frame": "",
+        "payload": "Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
+        "ptr": "ptr://theorem/Cslib.LambdaCalculus.LocallyNameless.Fsub.Typing.progress",
         "theorem_ok": null,
         "tokens": 0
       },
@@ -4758,7 +4901,7 @@
         "tokens": 0
       }
     ],
-    "head": 19,
-    "n": 20
+    "head": 11,
+    "n": 12
   }
 }
