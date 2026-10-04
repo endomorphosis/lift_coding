@@ -12,24 +12,15 @@ HERE = Path(__file__).resolve().parent
 
 
 def _lazy(module: str, attr: str) -> Callable[..., Any]:
-    def fn(*args: Any, **kwargs: Any) -> Any:
-        mod = importlib.import_module(module)
-        return getattr(mod, attr)(*args, **kwargs)
+    from jevops.hooks import lazy_attr
 
-    fn.__name__ = attr
-    fn.__qualname__ = f"{module}.{attr}"
-    return fn
+    return lazy_attr(module, attr)
 
 
 def _const(module: str, attr: str, default: Any = None) -> Callable[[], Any]:
-    def fn() -> Any:
-        try:
-            mod = importlib.import_module(module)
-            return getattr(mod, attr, default)
-        except Exception:
-            return default
+    from jevops.hooks import lazy_const
 
-    return fn
+    return lazy_const(module, attr, default)
 
 
 def register_lra_hooks() -> None:

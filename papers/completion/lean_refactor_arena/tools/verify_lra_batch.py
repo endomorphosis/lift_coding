@@ -122,17 +122,13 @@ class TagRecord:
     payload: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        return {
-            "lean_tag": self.lean_tag,
-            "git_commit": self.git_commit,
-            "sorryAx": self.sorryAx,
-            "axiom_names": list(self.axiom_names),
-            "axiom_digest": self.axiom_digest,
-            "exit_code": self.exit_code,
-            "ok": self.ok,
-            "path": self.path,
-            "arena_score": None,
-        }
+        from jevops.outer import public_fields
+
+        return public_fields(
+            self,
+            ("lean_tag", "git_commit", "sorryAx", "axiom_names", "axiom_digest", "exit_code", "ok", "path"),
+            extra={"arena_score": None},
+        )
 
 
 @dataclass
@@ -169,81 +165,56 @@ class ProblemJudgment:
     tag_records: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
-        return {
-            "name": self.name,
-            "source": self.source,
-            "listed_tags": list(self.listed_tags),
-            "receipt_found": self.receipt_found,
-            "duplicate": self.duplicate,
-            "digest_ok": self.digest_ok,
-            "statement_bind_ok": self.statement_bind_ok,
-            "all_tags_ok": self.all_tags_ok,
-            "no_sorry_ok": self.no_sorry_ok,
-            "one_receipt": self.one_receipt,
-            "arena_score_null": self.arena_score_null,
-            "failures": list(self.failures),
-            "tag_records": list(self.tag_records),
-            "arena_score": None,
-            "score": None,
-        }
+        from jevops.outer import public_fields
+
+        return public_fields(
+            self,
+            (
+                "name",
+                "source",
+                "listed_tags",
+                "receipt_found",
+                "duplicate",
+                "digest_ok",
+                "statement_bind_ok",
+                "all_tags_ok",
+                "no_sorry_ok",
+                "one_receipt",
+                "arena_score_null",
+                "failures",
+                "tag_records",
+            ),
+            extra={"arena_score": None, "score": None},
+        )
 
 
 def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+    from jevops.outer import digest_hex
+
+    return digest_hex(data)
 
 
 def sha256_file(path: Path) -> str:
-    return sha256_bytes(path.read_bytes())
+    from jevops.outer import digest_file
+
+    return digest_file(path)
 
 
 def sha256_text(text: str) -> str:
-    return sha256_bytes(text.encode("utf-8"))
+    from jevops.outer import digest_text
+
+    return digest_text(text)
 
 
 def load_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+    from jevops.outer import read_json
+
+    return read_json(path, require_object=False)
 
 
-def listed_tags(version_info: Any) -> list[str]:
-    """JSONL ``version_info`` order. Never newest-mtime and never PATH lean."""
-
-    tags: list[str] = []
-    if not isinstance(version_info, list):
-        return tags
-    for item in version_info:
-        if isinstance(item, dict):
-            for tag in item.keys():
-                if isinstance(tag, str) and tag.strip() and tag not in tags:
-                    tags.append(tag)
-        elif isinstance(item, str) and item.strip() and item not in tags:
-            tags.append(item)
-    return tags
-
-
-def listed_commits(version_info: Any) -> dict[str, str]:
-    commits: dict[str, str] = {}
-    if not isinstance(version_info, list):
-        return commits
-    for item in version_info:
-        if not isinstance(item, dict):
-            continue
-        for tag, commit in item.items():
-            if isinstance(tag, str) and tag.strip() and tag not in commits:
-                commits[tag] = "" if commit is None else str(commit)
-    return commits
-
-
-def candidate_binds_statement(candidate: str, header: str, statement: str) -> bool:
-    """Prefix check. Never scan the statement for the first ``:=``."""
-
-    if not isinstance(candidate, str) or not isinstance(statement, str) or not statement:
-        return False
-    header_text = header if isinstance(header, str) else ""
-    prefixes = [statement, header_text + statement]
-    if header_text.strip():
-        prefixes.append(header_text.rstrip() + "\n\n" + statement)
-        prefixes.append(header_text.rstrip() + "\n" + statement)
-    return any(candidate.startswith(prefix) for prefix in prefixes)
+from jevops.lean import candidate_binds_statement
+from jevops.lean import listed_version_commits as listed_commits
+from jevops.lean import listed_version_tags as listed_tags
 
 
 def _is_hex64(value: Any) -> bool:
@@ -251,242 +222,105 @@ def _is_hex64(value: Any) -> bool:
 
 
 def _score_nonnull(payload: Mapping[str, Any], *keys: str) -> list[str]:
-    bad: list[str] = []
-    for key in keys:
-        if key in payload and payload.get(key) is not None:
-            bad.append(key)
-    return bad
+    from jevops.repair import present_nonnull
+
+    return present_nonnull(payload, keys)
 
 
 def axiom_report_exists(record: TagRecord) -> bool:
-    has_digest = _is_hex64(record.axiom_digest)
-    has_names = isinstance(record.axiom_names, list)
-    printed = "#print axioms" in (record.stdout or "") or "#print axioms" in (
-        record.stderr or ""
-    )
-    return bool((has_digest or has_names) and (printed or has_digest or has_names))
+    from jevops.lean import axiom_report_exists as _fn
+
+    return _fn(record, hex64=HEX64)
 
 
 def has_sorry_ax(record: TagRecord) -> bool:
-    names = [str(item) for item in record.axiom_names]
-    text = f"{record.stdout}\n{record.stderr}"
-    return bool(
-        record.sorryAx
-        or "sorryAx" in names
-        or "sorryAx" in text
-        or "hasSorry" in text
-    )
+    from jevops.lean import has_sorry_ax as _fn
+
+    return _fn(record)
 
 
 def tag_record_from_payload(payload: Mapping[str, Any], *, path: str = "") -> TagRecord:
-    names = payload.get("axiom_names")
-    if not isinstance(names, list):
-        names = []
-    return TagRecord(
-        lean_tag=str(payload.get("lean_tag") or payload.get("tag") or ""),
-        git_commit=str(payload.get("git_commit") or ""),
-        sorryAx=bool(payload.get("sorryAx")),
-        axiom_names=[str(item) for item in names],
-        axiom_digest=str(payload.get("axiom_digest") or ""),
-        stdout=str(payload.get("stdout") or payload.get("axiom_report") or ""),
-        stderr=str(payload.get("stderr") or ""),
-        exit_code=int(payload.get("exit_code") if payload.get("exit_code") is not None else -1),
-        ok=bool(payload.get("ok")),
-        path=path,
-        arena_score=None,
-        payload=dict(payload),
-    )
+    from jevops.lean import tag_from_payload
+
+    return tag_from_payload(payload, path=path, tag_cls=TagRecord)
 
 
 def _read_candidate(directory: Path, payload: Mapping[str, Any]) -> str:
-    if isinstance(payload.get("candidate"), str) and payload["candidate"]:
-        return payload["candidate"]
-    for name in ("candidate.lean", "candidate.src", "src.lean"):
-        path = directory / name
-        if path.is_file():
-            return path.read_text(encoding="utf-8")
-    return ""
+    from jevops.lean import read_candidate_text
+
+    return read_candidate_text(directory, payload)
 
 
 def _compile_records_from_payload(payload: Mapping[str, Any], *, path: str) -> dict[str, TagRecord]:
-    records: dict[str, TagRecord] = {}
-    raw = payload.get("compile_records")
-    items: list[Any]
-    if isinstance(raw, dict):
-        items = []
-        for tag, value in raw.items():
-            if isinstance(value, dict):
-                row = dict(value)
-                row.setdefault("lean_tag", tag)
-                items.append(row)
-    elif isinstance(raw, list):
-        items = raw
-    else:
-        items = []
-    for item in items:
-        if not isinstance(item, dict):
-            continue
-        record = tag_record_from_payload(item, path=path)
-        if record.lean_tag:
-            records[record.lean_tag] = record
-    return records
+    from jevops.lean import compile_records_from_payload
+
+    return compile_records_from_payload(payload, path=path, tag_fn=tag_record_from_payload)
 
 
 def load_tag_files(directory: Path) -> dict[str, TagRecord]:
-    records: dict[str, TagRecord] = {}
-    if not directory.is_dir():
-        return records
-    for path in sorted(directory.glob("*.json")):
-        if path.name in SKIP_JSON_NAMES:
-            continue
-        try:
-            payload = load_json(path)
-        except (OSError, json.JSONDecodeError):
-            continue
-        if not isinstance(payload, dict):
-            continue
-        schema = str(payload.get("schema") or "")
-        if schema not in {"", COMPILE_SCHEMA}:
-            if schema.startswith("lra-problem") or schema.startswith("lra-batch"):
-                continue
-        record = tag_record_from_payload(payload, path=str(path))
-        if not record.lean_tag:
-            stem = path.stem
-            if stem.startswith("v"):
-                record.lean_tag = stem
-        if record.lean_tag:
-            records[record.lean_tag] = record
-    tags_dir = directory / "tags"
-    if tags_dir.is_dir():
-        records.update(load_tag_files(tags_dir))
-    return records
+    from jevops.lean import load_tag_directory
+
+    return load_tag_directory(
+        directory,
+        skip_names=SKIP_JSON_NAMES,
+        compile_schema=COMPILE_SCHEMA,
+        tag_fn=tag_record_from_payload,
+        load_json_fn=load_json,
+    )
 
 
 def load_problem_from_dir(directory: Path) -> Optional[ProblemReceipt]:
-    problem_path = directory / "problem.json"
-    payload: dict[str, Any] = {}
-    if problem_path.is_file():
-        loaded = load_json(problem_path)
-        if not isinstance(loaded, dict):
-            raise VerifyError(f"{problem_path}: problem.json is not an object")
-        payload = loaded
-    tag_records = load_tag_files(directory)
-    nested = _compile_records_from_payload(payload, path=str(problem_path))
-    for tag, record in nested.items():
-        if tag in tag_records:
-            existing = tag_records[tag]
-            if existing.axiom_digest and record.axiom_digest and existing.axiom_digest != record.axiom_digest:
-                raise VerifyError(f"{directory}: duplicate compile records for tag {tag}")
-        tag_records.setdefault(tag, record)
-    name = str(payload.get("name") or directory.name)
-    if not name or name in RESERVED_DIR_NAMES:
-        if not payload and not tag_records:
-            return None
-        if not name or name in RESERVED_DIR_NAMES:
-            return None
-    if not payload and not tag_records and not _read_candidate(directory, {}):
-        return None
-    accepted = payload.get("accepted")
-    return ProblemReceipt(
-        name=name,
-        source=str(payload.get("source") or ""),
-        header=str(payload.get("header") or ""),
-        statement=str(payload.get("statement") or ""),
-        candidate=_read_candidate(directory, payload),
-        warmup_sha256=str(payload.get("warmup_sha256") or payload.get("jsonl_sha256") or ""),
-        accepted=None if accepted is None else bool(accepted),
-        compile_records=tag_records,
-        path=str(directory),
-        mock=bool(
-            payload.get("mock")
-            or payload.get("fixed_program_substituted")
-            or payload.get("silent_replay")
-        ),
-        payload=payload,
+    from jevops.lean import problem_from_directory
+
+    return problem_from_directory(
+        directory,
+        reserved=RESERVED_DIR_NAMES,
+        skip_names=SKIP_JSON_NAMES,
+        compile_schema=COMPILE_SCHEMA,
+        tag_fn=tag_record_from_payload,
+        problem_cls=ProblemReceipt,
+        load_json_fn=load_json,
+        error_cls=VerifyError,
     )
 
 
 def load_problem_from_file(path: Path) -> Optional[ProblemReceipt]:
-    payload = load_json(path)
-    if not isinstance(payload, dict):
-        raise VerifyError(f"{path}: receipt is not an object")
-    schema = str(payload.get("schema") or "")
-    if schema == COMPILE_SCHEMA:
-        record = tag_record_from_payload(payload, path=str(path))
-        name = str(payload.get("name") or path.stem)
-        return ProblemReceipt(
-            name=name,
-            source=str(payload.get("source") or ""),
-            compile_records={record.lean_tag: record} if record.lean_tag else {},
-            path=str(path),
-            payload=payload,
-        )
-    if schema and schema not in {PROBLEM_SCHEMA, ""}:
-        return None
-    records = _compile_records_from_payload(payload, path=str(path))
-    return ProblemReceipt(
-        name=str(payload.get("name") or path.stem),
-        source=str(payload.get("source") or ""),
-        header=str(payload.get("header") or ""),
-        statement=str(payload.get("statement") or ""),
-        candidate=str(payload.get("candidate") or ""),
-        warmup_sha256=str(payload.get("warmup_sha256") or payload.get("jsonl_sha256") or ""),
-        accepted=None if payload.get("accepted") is None else bool(payload.get("accepted")),
-        compile_records=records,
-        path=str(path),
-        mock=bool(
-            payload.get("mock")
-            or payload.get("fixed_program_substituted")
-            or payload.get("silent_replay")
-        ),
-        payload=payload,
+    from jevops.lean import problem_from_json_file
+
+    return problem_from_json_file(
+        path,
+        compile_schema=COMPILE_SCHEMA,
+        problem_schema=PROBLEM_SCHEMA,
+        tag_fn=tag_record_from_payload,
+        problem_cls=ProblemReceipt,
+        load_json_fn=load_json,
+        error_cls=VerifyError,
     )
 
 
 def iter_receipt_roots(receipts_dir: Path) -> list[Path]:
-    roots: list[Path] = []
-    problems = receipts_dir / "problems"
-    if problems.is_dir():
-        roots.append(problems)
-    roots.append(receipts_dir)
-    return roots
+    from jevops.lean import iter_receipt_roots as _fn
+
+    return _fn(receipts_dir)
 
 
 def load_problem_receipts(receipts_dir: Path) -> list[ProblemReceipt]:
-    if not receipts_dir.is_dir():
-        raise VerifyError(f"receipts directory does not exist: {receipts_dir}")
-    loaded: list[ProblemReceipt] = []
-    seen_dirs: set[Path] = set()
-    for root in iter_receipt_roots(receipts_dir):
-        resolved_root = root.resolve()
-        if resolved_root in seen_dirs:
-            continue
-        seen_dirs.add(resolved_root)
-        for child in sorted(root.iterdir(), key=lambda item: item.name):
-            if child.name.startswith("."):
-                continue
-            if child.is_dir():
-                if child.name in RESERVED_DIR_NAMES and child.parent == receipts_dir:
-                    continue
-                receipt = load_problem_from_dir(child)
-                if receipt is not None:
-                    loaded.append(receipt)
-                continue
-            if child.suffix == ".json" and child.name not in SKIP_JSON_NAMES:
-                receipt = load_problem_from_file(child)
-                if receipt is not None and (receipt.compile_records or receipt.candidate):
-                    loaded.append(receipt)
-    return loaded
+    from jevops.lean import load_receipt_tree
+
+    return load_receipt_tree(
+        receipts_dir,
+        reserved=RESERVED_DIR_NAMES,
+        skip_names=SKIP_JSON_NAMES,
+        from_dir_fn=load_problem_from_dir,
+        from_file_fn=load_problem_from_file,
+        error_cls=VerifyError,
+    )
 
 
 def load_freeze_binding(receipts_dir: Path) -> dict[str, Any]:
-    path = receipts_dir / "freeze_binding.json"
-    if not path.is_file():
-        return {}
-    payload = load_json(path)
-    if not isinstance(payload, dict):
-        raise VerifyError("freeze_binding.json is not an object")
-    return payload
+    from jevops.lean import load_freeze_file
+
+    return load_freeze_file(receipts_dir, load_json_fn=load_json, error_cls=VerifyError)
 
 
 def judge_problem(
@@ -495,133 +329,24 @@ def judge_problem(
     *,
     frozen_digest: str,
 ) -> ProblemJudgment:
-    name = str(record.get("name") or "")
-    source = str(record.get("source") or "")
-    header = record.get("header") or ""
-    if not isinstance(header, str):
-        header = ""
-    statement = record.get("statement") or ""
-    if not isinstance(statement, str):
-        statement = ""
-    src = record.get("src") or ""
-    tags = listed_tags(record.get("version_info"))
-    matches = [item for item in receipts if item.name == name]
-    judgment = ProblemJudgment(
-        name=name,
-        source=source,
-        listed_tags=list(tags),
-        receipt_found=bool(matches),
-        duplicate=len(matches) > 1,
-        digest_ok=False,
-        statement_bind_ok=False,
-        all_tags_ok=False,
-        no_sorry_ok=False,
-        one_receipt=len(matches) == 1,
-        arena_score_null=True,
-        tag_records=[],
+    from jevops.lean import drive_judge_problem
+
+    return drive_judge_problem(
+        record,
+        receipts,
+        frozen_digest=frozen_digest,
+        tags_fn=listed_tags,
+        score_names=tuple(FORBIDDEN_SCORE_NAMES),
+        bind_fn=candidate_binds_statement,
+        axiom_fn=axiom_report_exists,
+        sorry_fn=has_sorry_ax,
+        judgment_cls=ProblemJudgment,
     )
-    jsonl_bind = isinstance(src, str) and bool(statement) and src.startswith(statement)
-    if not jsonl_bind:
-        judgment.failures.append("jsonl src does not start with statement")
-    if not matches:
-        judgment.failures.append("missing receipt")
-        return judgment
-    if judgment.duplicate:
-        judgment.failures.append("duplicate receipts")
-        return judgment
-    receipt = matches[0]
-    score_keys = _score_nonnull(receipt.payload, *FORBIDDEN_SCORE_NAMES)
-    for tag_record in receipt.compile_records.values():
-        score_keys.extend(_score_nonnull(tag_record.payload, *FORBIDDEN_SCORE_NAMES))
-    score_keys = sorted(set(score_keys))
-    judgment.arena_score_null = not score_keys
-    if score_keys:
-        judgment.failures.append("arena score written: " + ",".join(score_keys))
-    if receipt.mock:
-        judgment.failures.append("mock/fixed-program/silent-replay receipt")
-    digest_ok = True
-    if receipt.warmup_sha256:
-        digest_ok = receipt.warmup_sha256 == frozen_digest
-        if not digest_ok:
-            judgment.failures.append("receipt warmup_sha256 mismatch")
-    judgment.digest_ok = digest_ok
-    receipt_statement = receipt.statement or statement
-    receipt_header = receipt.header if receipt.header else header
-    if receipt.statement and receipt.statement != statement:
-        judgment.failures.append("receipt statement mutated")
-        statement_ok = False
-    else:
-        statement_ok = True
-    if receipt.header and receipt.header != header:
-        # Allow equivalent trailing whitespace on Putnam headers.
-        if receipt.header.rstrip() != header.rstrip():
-            judgment.failures.append("receipt header mutated")
-            statement_ok = False
-    candidate = receipt.candidate
-    bind_ok = bool(candidate) and candidate_binds_statement(
-        candidate, receipt_header, statement
-    )
-    if not candidate:
-        judgment.failures.append("missing candidate")
-    elif not bind_ok:
-        judgment.failures.append("candidate does not bind header+statement")
-    judgment.statement_bind_ok = bool(jsonl_bind and statement_ok and bind_ok)
-    present_tags = [tag for tag in tags if tag in receipt.compile_records]
-    extra = [tag for tag in receipt.compile_records if tag not in tags]
-    judgment.tag_records = sorted(receipt.compile_records)
-    missing_tags = [tag for tag in tags if tag not in receipt.compile_records]
-    all_tags_ok = not missing_tags and bool(tags)
-    if missing_tags:
-        judgment.failures.append("missing tags: " + ",".join(missing_tags))
-    if extra:
-        # Extra tags are retained evidence; they do not satisfy listed tags.
-        pass
-    judgment.all_tags_ok = all_tags_ok
-    sorry_ok = True
-    if not present_tags:
-        sorry_ok = False
-        if "missing receipt" not in judgment.failures and missing_tags:
-            pass
-        elif not receipt.compile_records:
-            judgment.failures.append("missing axiom reports")
-            sorry_ok = False
-    for tag in tags:
-        record = receipt.compile_records.get(tag)
-        if record is None:
-            sorry_ok = False
-            continue
-        if not axiom_report_exists(record):
-            sorry_ok = False
-            judgment.failures.append(f"{tag}: missing axiom report")
-        if has_sorry_ax(record):
-            sorry_ok = False
-            judgment.failures.append(f"{tag}: sorryAx")
-        if record.exit_code not in (0,):
-            sorry_ok = False
-            judgment.failures.append(f"{tag}: compile exit {record.exit_code}")
-        if receipt.accepted is False:
-            sorry_ok = False
-            if "accepted is false" not in judgment.failures:
-                judgment.failures.append("accepted is false")
-    judgment.no_sorry_ok = bool(sorry_ok and present_tags and not missing_tags)
-    return judgment
 
 
 def schedule_view(records: Sequence[Mapping[str, Any]], digest: str, nbytes: int) -> dict[str, Any]:
-    problems = []
-    for record in records:
-        problems.append(
-            {
-                "name": record.get("name"),
-                "source": record.get("source"),
-                "listed_tags": listed_tags(record.get("version_info")),
-                "header_chars": len(record.get("header") or ""),
-                "statement_chars": len(record.get("statement") or ""),
-                "src_startswith_statement": str(record.get("src") or "").startswith(
-                    str(record.get("statement") or "")
-                ),
-            }
-        )
+    from jevops.lean import schedule_rows
+
     return {
         "schema": BATCH_SCHEMA,
         "status": "SCHEDULE",
@@ -630,7 +355,7 @@ def schedule_view(records: Sequence[Mapping[str, Any]], digest: str, nbytes: int
         "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
         "warmup_jsonl_sha256": digest,
         "jsonl_bytes": nbytes,
-        "problems": problems,
+        "problems": schedule_rows(records, tags_fn=listed_tags),
         "arena_score": None,
         "score": None,
         "writes_arena_scores": False,
@@ -650,213 +375,65 @@ def verify_batch(
 ) -> tuple[int, dict[str, Any], str]:
     """Return (exit_code, payload, fail_message). Exit 2 is fail-closed."""
 
-    gates = set()
-    if require_digest:
-        gates.add("digest")
-    if require_statement_bind:
-        gates.add("statement_bind")
-    if require_all_tags:
-        gates.add("all_tags")
-    if require_no_sorry:
-        gates.add("no_sorry")
-    if require_complete:
-        gates.update(ALL_GATES)
+    from jevops.lean import drive_verify_batch, note_freeze_binding, selected_gates
 
-    failures: list[str] = []
-    try:
-        before = sha256_file(jsonl)
-        raw, digest, records = lra_splice.load_warmup_records(jsonl)
-        after = sha256_file(jsonl)
-    except lra_splice.DigestMismatch as exc:
-        payload = _fail_payload(["digest"], [str(exc)], n_scheduled=WARMUP_N)
-        return 2, payload, str(exc)
-    except (OSError, lra_splice.SpliceError, json.JSONDecodeError) as exc:
-        payload = _fail_payload(["digest"], [str(exc)], n_scheduled=WARMUP_N)
-        return 2, payload, str(exc)
-
-    jsonl_unchanged = before == after == FROZEN_WARMUP_SHA256 == digest
-    if not jsonl_unchanged:
-        failures.append(
-            f"warmup JSONL hash mismatch: {digest} != {FROZEN_WARMUP_SHA256}"
-        )
-    if len(records) != WARMUP_N:
-        failures.append(f"warmup JSONL must contain {WARMUP_N} records, got {len(records)}")
-
-    try:
-        receipts = load_problem_receipts(receipts_dir)
-        binding = load_freeze_binding(receipts_dir)
-    except (OSError, json.JSONDecodeError, VerifyError) as exc:
-        payload = _fail_payload(sorted(gates) or ["complete"], [str(exc)], n_scheduled=len(records))
-        return 2, payload, str(exc)
-
-    if binding:
-        bound = str(binding.get("warmup_sha256") or binding.get("jsonl_sha256") or "")
-        if bound and bound != FROZEN_WARMUP_SHA256:
-            failures.append("freeze_binding warmup_sha256 mismatch")
-        if binding.get("tiny_byte_lm") is True:
-            failures.append("tiny-byte-lm freeze")
-        score_keys = _score_nonnull(binding, *FORBIDDEN_SCORE_NAMES)
-        if score_keys:
-            failures.append("freeze_binding writes arena scores")
-
-    scheduled_names = [str(record.get("name") or "") for record in records]
-    judgments = [
-        judge_problem(record, receipts, frozen_digest=digest) for record in records
-    ]
-    by_name = {item.name: item for item in judgments}
-    extra_names = sorted(
-        {item.name for item in receipts if item.name not in by_name}
+    return drive_verify_batch(
+        jsonl=jsonl,
+        receipts_dir=receipts_dir,
+        gates=selected_gates(
+            digest=require_digest,
+            statement=require_statement_bind,
+            tags=require_all_tags,
+            sorry=require_no_sorry,
+            complete=require_complete,
+            all_gates=ALL_GATES,
+        ),
+        load_fn=lra_splice.load_warmup_records,
+        digest_fn=sha256_file,
+        frozen=FROZEN_WARMUP_SHA256,
+        expected_n=WARMUP_N,
+        fail_fn=_fail_payload,
+        mismatch_type=lra_splice.DigestMismatch,
+        io_types=(OSError, lra_splice.SpliceError, json.JSONDecodeError),
+        load_receipts_fn=load_problem_receipts,
+        load_binding_fn=load_freeze_binding,
+        note_fn=note_freeze_binding,
+        judge_fn=judge_problem,
+        error_types=(OSError, json.JSONDecodeError, VerifyError),
+        score_names=tuple(FORBIDDEN_SCORE_NAMES),
+        schema=BATCH_SCHEMA,
+        protocol=PROTOCOL,
     )
-
-    missing = [item.name for item in judgments if not item.receipt_found]
-    duplicates = [item.name for item in judgments if item.duplicate]
-    digest_bad = [item.name for item in judgments if item.receipt_found and not item.digest_ok]
-    bind_bad = [item.name for item in judgments if not item.statement_bind_ok]
-    tags_bad = [item.name for item in judgments if not item.all_tags_ok]
-    sorry_bad = [item.name for item in judgments if not item.no_sorry_ok]
-    score_bad = [item.name for item in judgments if not item.arena_score_null]
-    one_receipt_ok = not missing and not duplicates and len(judgments) == WARMUP_N
-
-    if missing:
-        failures.append("missing receipts: " + ",".join(missing[:8]))
-    if duplicates:
-        failures.append("duplicate receipts: " + ",".join(duplicates[:8]))
-    if digest_bad:
-        failures.append("digest bind failed: " + ",".join(digest_bad[:8]))
-    if bind_bad:
-        failures.append("statement-bind failed: " + ",".join(bind_bad[:8]))
-    if tags_bad:
-        failures.append("missing listed tags: " + ",".join(tags_bad[:8]))
-    if sorry_bad:
-        failures.append("sorryAx or missing axiom report: " + ",".join(sorry_bad[:8]))
-    if score_bad:
-        failures.append("arena scores written: " + ",".join(score_bad[:8]))
-
-    digest_ok = jsonl_unchanged and not digest_bad and "freeze_binding warmup_sha256 mismatch" not in failures
-    statement_ok = not bind_bad and not missing
-    all_tags_ok = not tags_bad and not missing
-    no_sorry_ok = not sorry_bad and not missing
-    # Extra receipts for unknown names are retained negatives and do not
-    # block completeness of the scheduled 15.
-    complete = bool(
-        digest_ok
-        and statement_ok
-        and all_tags_ok
-        and no_sorry_ok
-        and one_receipt_ok
-        and not score_bad
-        and len(records) == WARMUP_N
-        and not duplicates
-    )
-
-    triggered: list[str] = []
-    if "digest" in gates and not digest_ok:
-        triggered.append("digest")
-    if "statement_bind" in gates and not statement_ok:
-        triggered.append("statement_bind")
-    if "all_tags" in gates and not all_tags_ok:
-        triggered.append("all_tags")
-    if "no_sorry" in gates and not no_sorry_ok:
-        triggered.append("no_sorry")
-    if "complete" in gates and not complete:
-        triggered.append("complete")
-
-    status = "PASS" if complete else ("FAIL" if triggered or (gates and failures) else "INCOMPLETE")
-    if triggered:
-        status = "FAIL"
-    payload = {
-        "schema": BATCH_SCHEMA,
-        "status": status,
-        "protocol": PROTOCOL,
-        "n_scheduled": len(records),
-        "n_receipts": len({item.name for item in receipts}),
-        "scheduled_names": scheduled_names,
-        "missing_receipts": missing,
-        "duplicate_receipts": duplicates,
-        "digest_ok": digest_ok,
-        "statement_bind_ok": statement_ok,
-        "all_tags_ok": all_tags_ok,
-        "no_sorryAx": no_sorry_ok,
-        "one_receipt_per_scheduled_problem": one_receipt_ok,
-        "complete": complete,
-        "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
-        "warmup_jsonl_sha256": digest,
-        "jsonl_bytes": len(raw),
-        "jsonl_unchanged": jsonl_unchanged,
-        "gates": sorted(gates),
-        "triggered_gates": triggered,
-        "failures": failures,
-        "problems": [item.to_dict() for item in judgments],
-        "extra_receipt_names": extra_names,
-        "arena_score": None,
-        "score": None,
-        "writes_arena_scores": False,
-        "imports_law_to_action_verify_batch": False,
-        "tiny_byte_lm": False,
-        "compiled": False,
-        "lake": False,
-        "llama_server_started": False,
-    }
-    message = failures[0] if failures else ("batch is not complete" if not complete else "")
-    if status == "FAIL":
-        return 2, payload, message or "batch is not complete"
-    return 0, payload, ""
 
 
 def _fail_payload(gates: Sequence[str], failures: Sequence[str], *, n_scheduled: int) -> dict[str, Any]:
-    return {
-        "schema": BATCH_SCHEMA,
-        "status": "FAIL",
-        "protocol": PROTOCOL,
-        "n_scheduled": n_scheduled,
-        "digest_ok": False,
-        "statement_bind_ok": False,
-        "all_tags_ok": False,
-        "no_sorryAx": False,
-        "one_receipt_per_scheduled_problem": False,
-        "complete": False,
-        "gates": list(gates),
-        "failures": list(failures),
-        "arena_score": None,
-        "score": None,
-        "writes_arena_scores": False,
-        "imports_law_to_action_verify_batch": False,
-    }
+    from jevops.lean import fail_batch_payload
+
+    return fail_batch_payload(
+        gates,
+        failures,
+        n_scheduled=n_scheduled,
+        schema=BATCH_SCHEMA,
+        protocol=PROTOCOL,
+    )
 
 
 def compact_candidate(record: Mapping[str, Any]) -> str:
-    split = lra_splice.split_statement_body(record)
-    return lra_splice.lake_candidate_source(
-        header=split.header,
-        statement=split.statement,
-        tactic_block="rfl",
-    )
+    from jevops.lean import drive_split_candidate
+
+    return drive_split_candidate(record, "rfl", split_fn=lra_splice.split_statement_body)
 
 
 def compact_tag_payload(record: Mapping[str, Any], tag: str, commit: str) -> dict[str, Any]:
-    name = str(record.get("name") or "")
-    decl = name.rsplit(".", 1)[-1].replace("'", "") or "lra_candidate"
-    stdout = (
-        json.dumps({"severity": "information", "data": "ok", "pos": {"line": 1, "column": 0}})
-        + f"\n#print axioms {decl}\n{decl} : []\n"
+    from jevops.lean import synthetic_ok_tag
+
+    return synthetic_ok_tag(
+        record,
+        tag,
+        commit,
+        schema=COMPILE_SCHEMA,
+        axiom_digest=EMPTY_AXIOM_DIGEST,
     )
-    return {
-        "schema": COMPILE_SCHEMA,
-        "name": name,
-        "source": record.get("source"),
-        "lean_tag": tag,
-        "git_commit": commit,
-        "sorryAx": False,
-        "axiom_names": [],
-        "axiom_digest": EMPTY_AXIOM_DIGEST,
-        "stdout": stdout,
-        "stderr": "",
-        "exit_code": 0,
-        "ok": True,
-        "arena_score": None,
-        "score": None,
-        "hardware_class": "synthetic-verify",
-    }
 
 
 def write_problem_fixture(
@@ -872,65 +449,27 @@ def write_problem_fixture(
     accepted: bool = True,
     statement: Optional[str] = None,
 ) -> Path:
-    name = str(record.get("name") or "")
-    directory = dest / name
-    if directory.exists():
-        shutil.rmtree(directory)
-    directory.mkdir(parents=True, exist_ok=True)
-    tags = listed_tags(record.get("version_info"))
-    commits = listed_commits(record.get("version_info"))
-    compile_records = []
-    skip = set(drop_tags)
-    sorry = set(sorry_tags)
-    for tag in tags:
-        if tag in skip:
-            continue
-        payload = compact_tag_payload(record, tag, commits.get(tag, ""))
-        if tag in sorry:
-            payload["sorryAx"] = True
-            payload["axiom_names"] = ["sorryAx"]
-            payload["axiom_digest"] = sha256_text(json.dumps(["sorryAx"], separators=(",", ":")))
-            payload["stdout"] = payload["stdout"].replace(" : []", " : sorryAx")
-            payload["ok"] = False
-            payload["exit_code"] = 1
-        compile_records.append(payload)
-        (directory / f"{tag}.json").write_text(
-            json.dumps(payload, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-    header = record.get("header") or ""
-    frozen_statement = record.get("statement") or ""
-    used_statement = frozen_statement if statement is None else statement
-    candidate = mutate_candidate if mutate_candidate is not None else compact_candidate(record)
-    if statement is not None:
-        candidate = lra_splice.lake_candidate_source(
-            header=header if isinstance(header, str) else "",
-            statement=used_statement,
-            tactic_block="rfl",
-        )
-    problem = {
-        "schema": PROBLEM_SCHEMA,
-        "name": name,
-        "source": record.get("source"),
-        "header": header,
-        "statement": used_statement,
-        "candidate": candidate,
-        "warmup_sha256": digest if warmup_sha256 is None else warmup_sha256,
-        "accepted": accepted,
-        "compile_records": compile_records,
-        "arena_score": None,
-        "score": None,
-        "generator": "deterministic",
-        "hardware_class": "synthetic-verify",
-    }
-    if injected_score is not None:
-        problem["arena_score"] = injected_score
-    (directory / "problem.json").write_text(
-        json.dumps(problem, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
+    from jevops.lean import drive_listed_fixture, lake_candidate_source
+
+    return drive_listed_fixture(
+        dest,
+        record,
+        digest=digest,
+        tags_fn=listed_tags,
+        commits_fn=listed_commits,
+        problem_schema=PROBLEM_SCHEMA,
+        tag_payload_fn=compact_tag_payload,
+        candidate_fn=compact_candidate,
+        lake_source_fn=lake_candidate_source,
+        sorry_digest_fn=sha256_text,
+        drop_tags=drop_tags,
+        mutate_candidate=mutate_candidate,
+        sorry_tags=sorry_tags,
+        injected_score=injected_score,
+        warmup_sha256=warmup_sha256,
+        accepted=accepted,
+        statement=statement,
     )
-    (directory / "candidate.lean").write_text(candidate, encoding="utf-8")
-    return directory
 
 
 def write_complete_fixture(
@@ -939,75 +478,34 @@ def write_complete_fixture(
     *,
     digest: str,
 ) -> None:
-    dest.mkdir(parents=True, exist_ok=True)
-    binding = {
-        "schema": FREEZE_SCHEMA,
-        "warmup_sha256": digest,
-        "protocol": PROTOCOL,
-        "n_problems": len(records),
-        "arena_score": None,
-        "score": None,
-        "tiny_byte_lm": False,
-    }
-    (dest / "freeze_binding.json").write_text(
-        json.dumps(binding, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
+    from jevops.lean import write_freeze_bundle
+
+    write_freeze_bundle(
+        dest,
+        records,
+        digest=digest,
+        schema=FREEZE_SCHEMA,
+        protocol=PROTOCOL,
+        write_problem_fn=write_problem_fixture,
     )
-    for record in records:
-        write_problem_fixture(dest, record, digest=digest)
 
 
 def _copy_fixture(src: Path, dest: Path) -> None:
-    if dest.exists():
-        shutil.rmtree(dest)
-    shutil.copytree(src, dest)
+    from jevops.outer import drive_replace_tree
+
+    drive_replace_tree(src, dest)
 
 
 def _imported_names(source: str) -> set[str]:
-    tree = ast.parse(source)
-    names: set[str] = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(alias.name.split(".", 1)[0])
-                names.add(alias.name)
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(node.module.split(".", 1)[0])
-                names.add(node.module)
-            for alias in node.names:
-                names.add(alias.name)
-    return names
+    from jevops.repair import imported_names
+
+    return imported_names(source)
 
 
 def _numeric_score_assignments(source: str) -> list[str]:
-    tree = ast.parse(source)
-    issues: list[str] = []
-    for node in ast.walk(tree):
-        if isinstance(node, ast.keyword) and node.arg in FORBIDDEN_SCORE_NAMES:
-            value = node.value
-            if isinstance(value, ast.Constant) and value.value is None:
-                continue
-            issues.append(f"keyword {node.arg} at line {getattr(node, 'lineno', 0)}")
-        if isinstance(node, ast.Assign):
-            targets: list[str] = []
-            for target in node.targets:
-                if isinstance(target, ast.Name):
-                    targets.append(target.id)
-                elif isinstance(target, ast.Attribute):
-                    targets.append(target.attr)
-            if any(name in FORBIDDEN_SCORE_NAMES for name in targets):
-                value = node.value
-                if isinstance(value, ast.Constant) and value.value is None:
-                    continue
-                issues.append(f"assign {targets} at line {getattr(node, 'lineno', 0)}")
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            if node.target.id in FORBIDDEN_SCORE_NAMES:
-                value = node.value
-                if value is None or (isinstance(value, ast.Constant) and value.value is None):
-                    continue
-                issues.append(f"ann-assign {node.target.id} at line {getattr(node, 'lineno', 0)}")
-    return issues
+    from jevops.repair import assignment_score_issues
+
+    return assignment_score_issues(source, FORBIDDEN_SCORE_NAMES)
 
 
 def audit_source(source: Optional[str] = None) -> dict[str, Any]:
@@ -1411,8 +909,9 @@ def _print_json(payload: Mapping[str, Any]) -> None:
 
 
 def _print_fail(message: str, payload: Mapping[str, Any]) -> None:
-    sys.stdout.write("FAIL: " + message + "\n")
-    _print_json(payload)
+    from jevops.outer import drive_print_fail
+
+    drive_print_fail(message, payload)
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:

@@ -3,9 +3,14 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+HARNESS = ROOT / "harness"
+if str(HARNESS) not in sys.path:
+    sys.path.insert(0, str(HARNESS))
+import _jevops_path  # noqa: E402,F401
 PAPER = "lean_refactor_arena"
 NS = "vericodegen-2026-lean_refactor_arena"
 HEAP = f"papers/completion/{PAPER}/paper.objectives.md"
@@ -195,158 +200,30 @@ TASKS = [
 
 
 def emit_objectives() -> str:
-    lines = [
-        "# Lean Refactor Arena — objective heap",
-        "",
-        f"Reviewed scope: `papers/completion/{PAPER}/review.md`. Executable board: `papers/completion/{PAPER}/paper.todo.md`.",
-        "",
-        "A completed LRA board means Leanstral + in-repo `run_warmup.py` ran on this machine under Lean-as-oracle,",
-        "with fail-closed receipts and no invented Arena scores. It does not mean official Track 2, OpenReview upload,",
-        "or treating Spark NVFP4 wall-clock as 4×A100.",
-        "",
-        "## LRA-G000 Complete the Leanstral local harness and honest competition report",
-        "",
-        "- Status: active",
-        "- Parent:",
-        "- Depends on:",
-        "- Fib priority: 1",
-        "- Priority: P0",
-        "- Track: lean_refactor_arena",
-        "- Bundle: lean_refactor_arena/LRA-G000",
-        f"- Goal: {GOAL}",
-        f"- Outputs: {', '.join(dict.fromkeys(p for t in TASKS for p in t['deliverables']))}",
-        f"- Gap task: {', '.join(t['id'] for t in TASKS)}",
-        "- Acceptance: Linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; unrun official rows stay unrun.",
-        "- Validation: python3 scripts/paper_supervisors.py verify-goal --paper lean_refactor_arena --goal LRA-G000",
-        "",
-    ]
-    for i, (gid, title, desc) in enumerate(SUBGOALS, start=2):
-        tasks = [t for t in TASKS if t["subgoal"] == gid]
-        outputs = list(dict.fromkeys(p for t in tasks for p in t["deliverables"]))
-        lines.extend([
-            f"## {gid} {title}",
-            "",
-            "- Status: active",
-            "- Parent: LRA-G000",
-            "- Depends on:",
-            f"- Fib priority: {i}",
-            "- Priority: P0" if any(t["priority"] == "P0" for t in tasks) else "- Priority: P1",
-            "- Track: lean_refactor_arena",
-            f"- Bundle: lean_refactor_arena/{gid}",
-            f"- Goal: {desc}",
-            f"- Outputs: {', '.join(outputs)}",
-            f"- Gap task: {', '.join(t['id'] for t in tasks)}",
-            "- Acceptance: Linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; unrun official rows stay unrun.",
-            f"- Validation: python3 scripts/paper_supervisors.py verify-goal --paper lean_refactor_arena --goal {gid}",
-            "",
-        ])
-    return "\n".join(lines)
+    from jevops.board import render_objective_heap
+
+    return render_objective_heap(PAPER, GOAL, SUBGOALS, TASKS)
 
 
 def emit_todo() -> str:
-    lines = [
-        "# Lean Refactor Arena — implementation taskboard",
-        "",
-        "Read `papers/completion/lean_refactor_arena/review.md` and `papers/completion/lean_refactor_arena/design_win_plan.md` before work.",
-        f"Objective heap: `{HEAP}`. Board namespace: `{NS}`.",
-        "",
-        "Primary path: Leanstral on live docker0 (`172.17.0.1:8080`) + in-repo `harness/run_warmup.py`.",
-        "Never invent Arena scores. Spark NVFP4 is not official Track 2. Jev does not generate Lean.",
-        "Implement in native ephemeral worktrees. GPU tasks are exclusive clients of docker0; do not LOCK_EX.",
-        "Each task writes its receipt using the contract in the runbook.",
-        "",
-    ]
-    for t in TASKS:
-        receipt = f"papers/completion/{PAPER}/receipts/{t['id']}.json"
-        snapshots = f"papers/completion/{PAPER}/receipts/snapshots/{t['id']}/"
-        outputs = t["deliverables"] + [receipt]
-        predicted = outputs + [snapshots]
-        allowed = [
-            f"papers/completion/{PAPER}/harness/",
-            f"papers/completion/{PAPER}/tools/",
-            f"papers/completion/{PAPER}/evidence/",
-            f"papers/completion/{PAPER}/manuscript/",
-            f"papers/completion/{PAPER}/receipts/",
-        ]
-        if t["id"] == "LRA-012" or t["id"] == "LRA-021":
-            allowed.append("external/ipfs_datasets/ipfs_datasets_py/logic/hammers/")
-        if t["id"] in {"LRA-010", "LRA-016", "LRA-019"}:
-            allowed.append("external/ipfs_accelerate/ipfs_accelerate_py/")
-        acc = "; ".join(t["acceptance"])
-        lines.extend([
-            f"## {t['id']} {t['title']}",
-            "",
-            f"- Status: {t['status']}",
-            f"- Completion: {t['completion']}",
-            f"- Is schedulable: {'false' if t['completion'] == 'manual' else 'true'}",
-            f"- Review only: false",
-            f"- Priority: {t['priority']}",
-            "- Track: lean_refactor_arena",
-            f"- Depends on: {', '.join(t['depends'])}",
-            f"- Goal id: {t['subgoal']}",
-            "- Parent goal: LRA-G000",
-            f"- Objective heap: {HEAP}",
-            f"- Board namespace: {NS}",
-            f"- Bundle: lean_refactor_arena/{t['subgoal']}",
-            f"- Parallel lane: {t['lane']}",
-            f"- Outputs: {', '.join(outputs)}",
-            f"- Predicted files: {', '.join(predicted)}",
-            f"- Allowed paths: {', '.join(allowed)}",
-            f"- Resource class: {t['resource']}",
-            "- Resource stage: execution",
-            f"- Implementation timeout seconds: {t['timeout']}",
-            f"- Validation: {VERIFY.format(id=t['id'])}",
-            f"- Acceptance: {acc}",
-            "- Paper evidence: design_win_plan.md; protocol.md LRA/v1; frozen warmup SHA-256 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
-            "- Reuse candidates: papers/completion/lean_refactor_arena/design_win_plan.md, scripts/run_leanstral_ephemeral.py",
-            f"- Receipt: {receipt}",
-            "",
-            t["description"],
-            "",
-            "Acceptance criteria:",
-            "",
-        ])
-        for i, item in enumerate(t["acceptance"], 1):
-            lines.append(f"{i}. {item}")
-        lines.extend([
-            "",
-            "Record dependencies, exact code/data/model/tool versions, actual command logs, failures and claim limitations in the receipt.",
-            "",
-        ])
-    return "\n".join(lines)
+    from jevops.board import render_taskboard
+    from jevops.catalogs import FROZEN_WARMUP_SHA256
+
+    return render_taskboard(
+        PAPER,
+        TASKS,
+        heap=HEAP,
+        namespace=NS,
+        verify=VERIFY,
+        sha256=FROZEN_WARMUP_SHA256,
+    )
 
 
 def emit_tasks_json() -> dict:
-    return {
-        "paper_id": PAPER,
-        "title": "Warm-up Characterization and an Open-Weight Harness for Lean Refactor Arena",
-        "pdf": "papers/completion/lean_refactor_arena/manuscript/main.pdf",
-        "goal": GOAL,
-        "subgoals": [{"id": gid, "title": title, "description": desc} for gid, title, desc in SUBGOALS],
-        "tasks": [
-            {
-                "id": t["id"],
-                "subgoal_id": t["subgoal"],
-                "title": t["title"],
-                "priority": t["priority"],
-                "depends_on": t["depends"],
-                "paper_evidence": [
-                    "design_win_plan.md",
-                    "protocol.md LRA/v1",
-                    "frozen warmup SHA-256 6209680cf00cde0765b77b24834cd72c64dd585b2f7e3f2a58209980ab59a804",
-                ],
-                "description": t["description"],
-                "acceptance_criteria": t["acceptance"],
-                "deliverables": t["deliverables"],
-                "suggested_code_paths": [
-                    "papers/completion/lean_refactor_arena/design_win_plan.md",
-                    "scripts/run_leanstral_ephemeral.py",
-                ],
-                "implementation_paths": [],
-            }
-            for t in TASKS
-        ],
-    }
+    from jevops.board import render_tasks_json
+    from jevops.catalogs import FROZEN_WARMUP_SHA256
+
+    return render_tasks_json(PAPER, GOAL, SUBGOALS, TASKS, sha256=FROZEN_WARMUP_SHA256)
 
 
 def main() -> None:
