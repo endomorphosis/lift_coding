@@ -128,13 +128,12 @@ def _ensure_accel_path() -> None:
 def _import_typesafe_inference() -> dict[str, Any]:
     """Load in-tree TypeSafe types. Never imports typesafe-sdk."""
 
-    from jevops.jev import load_typesafe_inference
-    from jevops.outer import relative_or_str
+    from jevops.jev import drive_load_inference
 
-    return load_typesafe_inference(
+    return drive_load_inference(
         setup=(_ensure_accel_path,),
-        path=relative_or_str(TYPESAFE_INFERENCE_PATH, REPO_ROOT),
-        exists=TYPESAFE_INFERENCE_PATH.is_file(),
+        path=TYPESAFE_INFERENCE_PATH,
+        root=REPO_ROOT,
         fallback=False,
     )
 
@@ -150,14 +149,11 @@ def official_track2_requested(
     flag: bool = False,
     env: Optional[Mapping[str, str]] = None,
 ) -> bool:
-    from jevops.jev import env_flag
+    from jevops.jev import drive_env_closed
 
-    from jevops.outer import env_mapping
-
-    source = env_mapping(env)
-    return env_flag(
+    return drive_env_closed(
         flag=flag,
-        env=source,
+        env=env,
         truthy_keys=("LRA_OFFICIAL_TRACK2",),
         value_key="LRA_TRACK",
         values=("official_track2", "official-track-2", "track2_official"),
@@ -172,47 +168,37 @@ def resolve_typesafe_mode(
 ) -> str:
     """Default off. Distill/inloop only when not official Track 2."""
 
-    from jevops.jev import JevError
-    from jevops.jev import resolve_mode
+    from jevops.jev import drive_mapped_mode
 
-    from jevops.outer import env_mapping
-
-    source = env_mapping(env)
-    try:
-        return resolve_mode(
-            flag=flag,
-            env=source,
-            env_key="LRA_TYPESAFE",
-            default=DEFAULT_MODE,
-            allowed=ALLOWED_MODES,
-            closed=OFFICIAL_TRACK2_MODE,
-            closed_if=official_track2_requested(flag=official_track2, env=source),
-        )
-    except JevError as exc:
-        from jevops.outer import if_none, text_or
-
-        raw = if_none(flag, source.get("LRA_TYPESAFE", DEFAULT_MODE))
-        mode = text_or(raw, DEFAULT_MODE).strip().lower()
-        raise TypesafeRouterError(f"unknown LRA_TYPESAFE={mode!r}; expected {ALLOWED_MODES}") from exc
+    return drive_mapped_mode(
+        flag=flag,
+        env=env,
+        env_key="LRA_TYPESAFE",
+        default=DEFAULT_MODE,
+        allowed=ALLOWED_MODES,
+        closed=OFFICIAL_TRACK2_MODE,
+        official=official_track2,
+        closed_fn=official_track2_requested,
+        error_cls=TypesafeRouterError,
+        message_fn=lambda mode: f"unknown LRA_TYPESAFE={mode!r}; expected {ALLOWED_MODES}",
+    )
 
 
 def key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
-    from jevops.jev import any_key
+    from jevops.outer import drive_any_env_key
 
-    from jevops.outer import env_mapping
-
-    source = env_mapping(env)
-    return any_key(source, KEY_ENV_NAMES)
+    return drive_any_env_key(env, KEY_ENV_NAMES)
 
 
 def _question_kind(question: Any) -> str:
     from jevops import jev
-    from jevops.outer import text_or
+    from jevops.outer import reraise_mapped, text_or
 
-    try:
-        return jev.question_kind(question)
-    except jev.JevError as exc:
-        raise TypesafeRouterError(text_or(exc)) from exc
+    return reraise_mapped(
+        lambda: jev.question_kind(question),
+        jev.JevError,
+        lambda exc: TypesafeRouterError(text_or(exc)),
+    )
 
 
 def _question_criteria(question: Any) -> Any:
@@ -232,18 +218,19 @@ def instantiate_questions(
     """Build the frozen ROUTE_QUESTIONS dict. Uses in-tree types when loaded."""
 
     from jevops import jev
-    from jevops.outer import text_or
+    from jevops.outer import reraise_mapped, text_or
 
-    try:
-        return jev.instantiate_questions(
+    return reraise_mapped(
+        lambda: jev.instantiate_questions(
             spec,
             choice=choice,
             noul=noul,
             score=score,
             neighbor_names=neighbor_names,
-        )
-    except jev.JevError as exc:
-        raise TypesafeRouterError(text_or(exc)) from exc
+        ),
+        jev.JevError,
+        lambda exc: TypesafeRouterError(text_or(exc)),
+    )
 
 
 def route_questions(
@@ -251,27 +238,25 @@ def route_questions(
     *,
     typesafe: Optional[Mapping[str, Any]] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import if_none
+    from jevops.jev import drive_loaded_questions
 
-    loaded = if_none(typesafe, factory=_import_typesafe_inference)
-    return instantiate_questions(
-        ROUTE_QUESTION_SPEC,
-        choice=loaded.get("Choice"),
-        noul=loaded.get("Noul"),
-        score=loaded.get("Score"),
+    return drive_loaded_questions(
+        typesafe,
+        factory=_import_typesafe_inference,
+        spec=ROUTE_QUESTION_SPEC,
+        instantiate_fn=instantiate_questions,
         neighbor_names=neighbor_names,
     )
 
 
 def candidate_questions(*, typesafe: Optional[Mapping[str, Any]] = None) -> dict[str, Any]:
-    from jevops.outer import if_none
+    from jevops.jev import drive_loaded_questions
 
-    loaded = if_none(typesafe, factory=_import_typesafe_inference)
-    return instantiate_questions(
-        CANDIDATE_QUESTION_SPEC,
-        choice=loaded.get("Choice"),
-        noul=loaded.get("Noul"),
-        score=loaded.get("Score"),
+    return drive_loaded_questions(
+        typesafe,
+        factory=_import_typesafe_inference,
+        spec=CANDIDATE_QUESTION_SPEC,
+        instantiate_fn=instantiate_questions,
     )
 
 
@@ -282,17 +267,15 @@ def truncate_reference_proof(
     tail_lines: int = REF_TAIL_LINES,
     char_budget: int = CHAR_BUDGET,
 ) -> str:
-    from jevops.outer import raise_if
+    from jevops.jev import drive_truncate_text
 
-    raise_if(not isinstance(src, str), TypesafeRouterError, "reference_proof must be a string")
-    from jevops.jev import truncate_middle
-
-    return truncate_middle(
+    return drive_truncate_text(
         src,
         head_lines=head_lines,
         tail_lines=tail_lines,
         char_budget=char_budget,
         marker="# lra-truncated middle",
+        error_cls=TypesafeRouterError,
     )
 
 
@@ -316,45 +299,47 @@ def problem_state(
 
 def _noul_value(answer: Any) -> float:
     from jevops import jev
-    from jevops.outer import text_or
+    from jevops.outer import reraise_mapped, text_or
 
-    try:
-        return jev.noul_value(answer)
-    except jev.JevError as exc:
-        raise TypesafeRouterError(text_or(exc)) from exc
+    return reraise_mapped(
+        lambda: jev.noul_value(answer),
+        jev.JevError,
+        lambda exc: TypesafeRouterError(text_or(exc)),
+    )
 
 
 def _choice_value(answer: Any) -> tuple[str, float, dict[str, float]]:
     from jevops import jev
-    from jevops.outer import text_or
+    from jevops.outer import reraise_mapped, text_or
 
-    try:
-        return jev.choice_value(answer)
-    except jev.JevError as exc:
-        raise TypesafeRouterError(text_or(exc)) from exc
+    return reraise_mapped(
+        lambda: jev.choice_value(answer),
+        jev.JevError,
+        lambda exc: TypesafeRouterError(text_or(exc)),
+    )
 
 
 def _score_value(answer: Any, *, n_levels: int, legend_fallback: Mapping[int, str]) -> tuple[float, dict[int, str]]:
     from jevops import jev
-    from jevops.outer import text_or
+    from jevops.outer import reraise_mapped, text_or
 
-    try:
-        return jev.score_value(answer, n_levels=n_levels, legend_fallback=legend_fallback)
-    except jev.JevError as exc:
-        raise TypesafeRouterError(text_or(exc)) from exc
+    return reraise_mapped(
+        lambda: jev.score_value(answer, n_levels=n_levels, legend_fallback=legend_fallback),
+        jev.JevError,
+        lambda exc: TypesafeRouterError(text_or(exc)),
+    )
 
 
 def answers_from_response(response: Any) -> dict[str, Any]:
     """Project System One answers. Score stays a rubric index. No Lean text."""
 
-    from jevops.jev import project_answers
-    from jevops.outer import text_or
+    from jevops.catalogs import ROUTE_CHOICE_ALIASES, ROUTE_NOUL_KEYS, ROUTE_OPTIONAL_CHOICES
+    from jevops.jev import deny_lean_keys, drive_project_route_answers, project_answers
 
-    try:
-        from jevops.catalogs import ROUTE_CHOICE_ALIASES, ROUTE_NOUL_KEYS, ROUTE_OPTIONAL_CHOICES
-
-        out = project_answers(
-            response,
+    return drive_project_route_answers(
+        response,
+        project_fn=lambda payload: project_answers(
+            payload,
             noul_keys=ROUTE_NOUL_KEYS,
             choice_aliases=ROUTE_CHOICE_ALIASES,
             optional_choices=ROUTE_OPTIONAL_CHOICES,
@@ -371,12 +356,10 @@ def answers_from_response(response: Any) -> dict[str, Any]:
                     "legend": ELAB_RISK_LEGEND,
                 },
             },
-        )
-    except Exception as exc:
-        raise TypesafeRouterError(text_or(exc)) from exc
-    from jevops.jev import deny_lean_keys
-
-    return deny_lean_keys(out)
+        ),
+        deny_fn=deny_lean_keys,
+        error_cls=TypesafeRouterError,
+    )
 
 
 def should_call_leanstral(answers: Optional[Mapping[str, Any]], rec: Mapping[str, Any]) -> bool:
@@ -408,18 +391,28 @@ class TypeSafeLraRouter:
         model: str = MODEL_ID,
         require_key: bool = True,
     ) -> None:
+        from jevops.jev import drive_router_fields
         from jevops.outer import env_copy
 
-        self.env = env_copy(base=env)
-        self.official_track2 = official_track2_requested(flag=official_track2, env=self.env)
-        self.mode = resolve_typesafe_mode(flag=mode, env=self.env, official_track2=self.official_track2)
-        self.client_factory = client_factory
-        self.model = model
-        self.require_key = require_key and client_factory is None
+        self.__dict__.update(
+            drive_router_fields(
+                mode=mode,
+                official_track2=official_track2,
+                env=env,
+                client_factory=client_factory,
+                model=model,
+                require_key=require_key,
+                env_fn=env_copy,
+                track2_fn=official_track2_requested,
+                mode_fn=resolve_typesafe_mode,
+            )
+        )
 
     @property
     def enabled(self) -> bool:
-        return self.mode in {"distill", "inloop"} and not self.official_track2
+        from jevops.jev import mode_enabled
+
+        return mode_enabled(self.mode, self.official_track2)
 
     def route(
         self,
@@ -427,51 +420,18 @@ class TypeSafeLraRouter:
         *,
         neighbor_names: Sequence[str] = (),
     ) -> RouteResult:
-        from jevops.outer import call_if, either
+        from jevops.jev import drive_router_route
 
-        loaded = either(self.enabled, _import_typesafe_inference, lambda: {"available": False})
-        configured = key_configured(self.env)
-        using_fixture = self.client_factory is not None
-        from jevops.jev import invoke_system_one, route_or_skip, route_result_from_answers
-
-        def _invoke() -> tuple[Any, float]:
-            questions = instantiate_questions(
-                ROUTE_QUESTION_SPEC,
-                choice=call_if(not using_fixture, lambda: loaded.get("Choice")),
-                noul=call_if(not using_fixture, lambda: loaded.get("Noul")),
-                score=call_if(not using_fixture, lambda: loaded.get("Score")),
-                neighbor_names=neighbor_names,
-            )
-            from jevops.outer import first_truthy
-
-            factory = first_truthy(self.client_factory, loaded["TypeSafeClient"])
-            client = factory(model=self.model)
-            return invoke_system_one(client, state, questions)
-
-        return route_or_skip(
-            enabled=self.enabled,
-            official=self.official_track2,
-            key_ok=configured,
-            available=bool(loaded.get("available")),
-            using_fixture=using_fixture,
-            require_key=self.require_key,
-            skip_fn=lambda reason: RouteResult(
-                skipped=True,
-                reason=reason,
-                mode=self.mode,
-                official_track2=self.official_track2,
-                model=self.model,
-            ),
-            invoke_fn=_invoke,
-            project_fn=lambda response, wall_ms: route_result_from_answers(
-                answers_from_response(response),
-                mode=self.mode,
-                official_track2=self.official_track2,
-                wall_ms=wall_ms,
-                used_fixture=using_fixture,
-                model=self.model,
-                result_cls=RouteResult,
-            ),
+        return drive_router_route(
+            self,
+            state,
+            neighbor_names=neighbor_names,
+            import_fn=_import_typesafe_inference,
+            key_fn=key_configured,
+            questions_fn=instantiate_questions,
+            spec=ROUTE_QUESTION_SPEC,
+            answers_fn=answers_from_response,
+            result_cls=RouteResult,
         )
 
 
@@ -483,22 +443,15 @@ def distill_record(
 ) -> dict[str, Any]:
     """Log (features, Jev answers, Lean outcome). Does not generate Lean."""
 
-    from jevops.jev import distill_row
-    from jevops.outer import as_mapping
+    from jevops.jev import drive_distill_record
 
-    problem = as_mapping(state.get("problem"), {})
-    return distill_row(
+    return drive_distill_record(
+        state,
+        result.as_dict(),
+        lean_outcome=lean_outcome,
         schema="lra-typesafe-distill/v1",
         mode="distill",
-        problem=problem,
-        answers=result.as_dict(),
-        extra={
-            "lean_outcome": lean_outcome,
-            "official_track2": False,
-            "api_key_present_in_record": False,
-            "policy_path": DISTILL_POLICY_RELATIVE,
-            "writes_policy_by_default": False,
-        },
+        policy_path=DISTILL_POLICY_RELATIVE,
     )
 
 
@@ -626,21 +579,27 @@ def audit_source(source: Optional[str] = None) -> dict[str, Any]:
 
 
 def _load_named_record(name: str, path: Optional[Path] = None) -> tuple[dict[str, Any], list[dict[str, Any]], str]:
-    from jevops.outer import load_named_pack, overlay_map
+    from jevops.outer import drive_overlay_named
 
-    record, records, digest = load_named_pack(
+    return drive_overlay_named(
         lra_splice.load_warmup_records,
         name,
         error_cls=TypesafeRouterError,
         miss=f"unknown warm-up problem: {name}",
         extra=path,
     )
-    return overlay_map(record), records, digest
 
 
 def _neighbors_for(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> list[dict[str, str]]:
-    retrieval = lra_retrieve.retrieve_record(record, records)
-    return lra_retrieve.prompt_neighbors(retrieval, k=NEIGHBOR_K)
+    from jevops.outer import drive_prompt_neighbors
+
+    return drive_prompt_neighbors(
+        record,
+        records,
+        retrieve_fn=lra_retrieve.retrieve_record,
+        neighbor_fn=lra_retrieve.prompt_neighbors,
+        k=NEIGHBOR_K,
+    )
 
 
 def route_named(
@@ -652,45 +611,25 @@ def route_named(
     path: Optional[Path] = None,
     lean_outcome: Optional[Mapping[str, Any]] = None,
 ) -> dict[str, Any]:
-    record, records, digest = _load_named_record(name, path)
-    from jevops.outer import assign_if, begin_named_route, call_if, fixture_factory, get_str
+    from jevops.jev import drive_named_route
 
-    neighbors, state, router = begin_named_route(
-        record,
-        records,
-        neighbor_fn=_neighbors_for,
-        state_fn=problem_state,
-        fixture=fixture,
-        factory_fn=lambda: fixture_factory(FixtureClient, default_fixture_answers),
-        router_cls=TypeSafeLraRouter,
+    return drive_named_route(
+        name,
         mode=mode,
         official_track2=official_track2,
-    )
-    from jevops.outer import names_of
-
-    result = router.route(state, neighbor_names=names_of(neighbors))
-    from jevops.jev import overlay_route_payload
-
-    extra: dict[str, Any] = {
-        "route_question_keys": list(ROUTE_QUESTION_KEYS),
-        "should_call_leanstral_v2": call_if(
-            not result.skipped, lambda: should_call_leanstral(result.as_dict(), record)
-        ),
-        "default_mode": DEFAULT_MODE,
-    }
-    assign_if(
-        extra,
-        "distill",
-        router.mode == "distill" and not result.skipped,
-        lambda: distill_record(state, result, lean_outcome=lean_outcome),
-    )
-    return overlay_route_payload(
-        result.as_dict(),
-        name=name,
-        source=get_str(record, "source"),
-        digest=digest,
-        n_neighbors=len(neighbors),
-        extra=extra,
+        fixture=fixture,
+        path=path,
+        lean_outcome=lean_outcome,
+        load_fn=_load_named_record,
+        neighbor_fn=_neighbors_for,
+        state_fn=problem_state,
+        fixture_client=FixtureClient,
+        answers_fn=default_fixture_answers,
+        router_cls=TypeSafeLraRouter,
+        should_call_fn=should_call_leanstral,
+        distill_fn=distill_record,
+        route_keys=ROUTE_QUESTION_KEYS,
+        default_mode=DEFAULT_MODE,
     )
 
 
@@ -700,57 +639,47 @@ def plan_view(
     official_track2: bool = False,
     env: Optional[Mapping[str, str]] = None,
 ) -> dict[str, Any]:
-    resolved = resolve_typesafe_mode(flag=mode, env=env, official_track2=official_track2)
-    loaded = _import_typesafe_inference()
-    from jevops.jev import catalog_kinds
-    from jevops.outer import str_keys
+    from jevops.jev import drive_plan_view
 
-    catalog = instantiate_questions(ROUTE_QUESTION_SPEC)
-    score_levels = {
-        name: list(spec["criteria"])
-        for name, spec in ROUTE_QUESTION_SPEC.items()
-        if spec["type"] == "score"
-    }
-    from jevops.jev import pack_plan_view
-
-    return pack_plan_view(
-        protocol=PROTOCOL,
-        pr=PR_ID,
-        lrah=LRAH_ID,
-        default_mode=DEFAULT_MODE,
-        resolved_mode=resolved,
-        allowed_modes=list(ALLOWED_MODES),
-        official_track2=official_track2_requested(flag=official_track2, env=env),
-        official_track2_stays_off=True,
-        loop_v1_typesafe=LOOP_V1_TYPESAFE,
-        distill_uses_lra_typesafe_distill=True,
-        inloop_is_track1_only=TRACK1_INLOOP_ONLY,
-        additive_not_replacement=ADDITIVE_NOT_REPLACEMENT,
-        model=MODEL_ID,
-        route_question_keys=list(ROUTE_QUESTION_KEYS),
-        score_question_keys=list(SCORE_QUESTION_KEYS),
-        noul_question_keys=list(NOUL_QUESTION_KEYS),
-        choice_question_keys=list(CHOICE_QUESTION_KEYS),
-        likely_shorter_criteria=list(LIKELY_SHORTER_CRITERIA),
-        likely_shorter_legend=str_keys(LIKELY_SHORTER_LEGEND),
-        score_is_rubric_index=SCORE_IS_RUBRIC_INDEX,
-        score_levels=score_levels,
-        jev_generates_lean=JEV_GENERATES_LEAN,
-        typesafe_systemone_url=TYPESAFE_SYSTEMONE_URL,
-        router_posts_to_typesafe=False,
-        imports_typesafe_inference=True,
-        imports_typesafe_sdk=False,
-        typesafe_inference_available=loaded["available"],
-        typesafe_inference_exists=loaded["exists"],
-        typesafe_inference_error=loaded["error"],
-        typesafe_inference_path=loaded["path"],
-        key_configured=key_configured(env),
-        key_env_names=list(KEY_ENV_NAMES),
-        catalog_kinds=catalog_kinds(catalog),
-        n_catalog=len(catalog),
-        distill_policy_path=DISTILL_POLICY_RELATIVE,
-        writes_policy_by_default=False,
-        frozen_warmup_sha256=FROZEN_WARMUP_SHA256,
+    return drive_plan_view(
+        mode=mode,
+        official_track2=official_track2,
+        env=env,
+        resolve_fn=resolve_typesafe_mode,
+        import_fn=_import_typesafe_inference,
+        spec=ROUTE_QUESTION_SPEC,
+        instantiate_fn=instantiate_questions,
+        track2_fn=official_track2_requested,
+        key_fn=key_configured,
+        fields={
+            "protocol": PROTOCOL,
+            "pr": PR_ID,
+            "lrah": LRAH_ID,
+            "default_mode": DEFAULT_MODE,
+            "allowed_modes": list(ALLOWED_MODES),
+            "official_track2_stays_off": True,
+            "loop_v1_typesafe": LOOP_V1_TYPESAFE,
+            "distill_uses_lra_typesafe_distill": True,
+            "inloop_is_track1_only": TRACK1_INLOOP_ONLY,
+            "additive_not_replacement": ADDITIVE_NOT_REPLACEMENT,
+            "model": MODEL_ID,
+            "route_question_keys": list(ROUTE_QUESTION_KEYS),
+            "score_question_keys": list(SCORE_QUESTION_KEYS),
+            "noul_question_keys": list(NOUL_QUESTION_KEYS),
+            "choice_question_keys": list(CHOICE_QUESTION_KEYS),
+            "likely_shorter_criteria": list(LIKELY_SHORTER_CRITERIA),
+            "likely_shorter_legend": LIKELY_SHORTER_LEGEND,
+            "score_is_rubric_index": SCORE_IS_RUBRIC_INDEX,
+            "jev_generates_lean": JEV_GENERATES_LEAN,
+            "typesafe_systemone_url": TYPESAFE_SYSTEMONE_URL,
+            "router_posts_to_typesafe": False,
+            "imports_typesafe_inference": True,
+            "imports_typesafe_sdk": False,
+            "key_env_names": list(KEY_ENV_NAMES),
+            "distill_policy_path": DISTILL_POLICY_RELATIVE,
+            "writes_policy_by_default": False,
+            "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
+        },
     )
 
 

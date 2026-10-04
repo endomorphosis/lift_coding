@@ -6,7 +6,6 @@ AST → ripgrep. DuckDB is never required. Never docker0. Does not write Lean.
 """
 from __future__ import annotations
 
-import re
 import sys
 from pathlib import Path
 from typing import Any, Callable, Mapping, Optional
@@ -19,16 +18,15 @@ PAPER_ROOT = HERE.parent
 from jevops.catalogs import LRA_STATE_ROOT as LRA_STATE
 from jevops.catalogs import RG_TIMEOUT_SECONDS as RG_TIMEOUT
 from jevops.catalogs import SYMBOL_MAX_HITS as MAX_HITS
-
-_IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_.']*")
+from jevops.tactics import SEARCH_IDENT as _IDENT
 
 from jevops.catalogs import SOURCE_WEIGHT
 
 
 def _ptr(symbol: str) -> str:
-    from jevops.outer import call_if, text_or
+    from jevops.outer import drive_prefixed_when
 
-    return call_if(text_or(symbol).startswith("port_"), lambda: f"ptr://skill/{symbol}", default="")
+    return drive_prefixed_when(symbol, needle="port_", prefix="ptr://skill/")
 
 
 def _score(query: str, symbol: str, source: str) -> float:
@@ -52,60 +50,32 @@ def _hit(symbol: str, *, source: str, query: str, path: str = "", extra: Optiona
 
 
 def _candidate_duckdb_paths() -> list[Path]:
-    from jevops.outer import append_if, existing_files, optional_env_path
+    from jevops.outer import drive_env_existing
 
-    env_path = optional_env_path("LRA_DUCKDB_AST_INDEX")
-    paths = append_if([], env_path is not None, env_path)
-    paths.extend(
+    return drive_env_existing(
+        "LRA_DUCKDB_AST_INDEX",
         (
             PAPER_ROOT / "evidence" / "canaries" / "nca-ast.duckdb",
             LRA_STATE / "ast_index.duckdb",
             LRA_STATE / "code_symbols.duckdb",
-        )
+        ),
+        exclude=("control.duckdb",),
     )
-    return existing_files(paths, exclude_names=("control.duckdb",))
 
 
 def search_duckdb(query: str, *, db_path: Optional[Path] = None) -> tuple[list[dict[str, Any]], str]:
     """Query ipfs_accelerate DuckDB AST/symbol tables if a DB exists."""
 
-    from jevops.outer import call_if, first_not_none, query_first_engine, replace_if, row_cell, text_or, try_import
-
-    if try_import("duckdb") is None:
-        return [], "duckdb_unavailable"
-    paths = [
-        path
-        for path in first_not_none(
-            call_if(db_path is not None, lambda: [db_path]), factory=_candidate_duckdb_paths
-        )
-        if path is not None and path.is_file()
-    ]
-    if not paths:
-        return [], "no_duckdb_index"
-    needle = f"%{query.casefold()}%"
     from jevops.catalogs import CODE_SYMBOLS_SQL, SYMBOLS_SQL
+    from jevops.outer import drive_duckdb_search
 
-    table_sql = {
-        "symbols": SYMBOLS_SQL,
-        "code_symbols": CODE_SYMBOLS_SQL,
-    }
-    hits, used = query_first_engine(
-        paths,
-        table_sql,
-        [needle],
-        refuse_names=("control.duckdb",),
-        row_fn=lambda row: call_if(
-            row and row[0],
-            lambda: _hit(
-                text_or(row[0]),
-                source="duckdb",
-                query=query,
-                path=text_or(row[1]),
-                extra={"kind": text_or(row_cell(row, 2, default=""))},
-            ),
-        ),
+    return drive_duckdb_search(
+        query,
+        db_path=db_path,
+        candidate_fn=_candidate_duckdb_paths,
+        table_sql={"symbols": SYMBOLS_SQL, "code_symbols": CODE_SYMBOLS_SQL},
+        hit_fn=_hit,
     )
-    return hits, replace_if(used in {"no_index", "no_matching_table", "query_failed"}, "duckdb_no_symbols", used)
 
 
 def search_vector_index(
@@ -136,26 +106,26 @@ def search_vector_index(
 
 def search_kg(query: str, memory: Optional[Mapping[str, Any]] = None) -> list[dict[str, Any]]:
     import typesafe_tools as lra_tools
+    from jevops.outer import drive_kg_search
 
-    from jevops.outer import get_list, get_str, map_hits, matching_nodes
-
-    graph = lra_tools.skill_knowledge_graph(memory)
-    return map_hits(
-        matching_nodes(get_list(graph, "nodes"), query, cap=MAX_HITS),
-        lambda node: _hit(
-            get_str(node, "id"), source="kg", query=query, extra={"kind": node.get("kind")}
-        ),
+    return drive_kg_search(
+        query,
+        memory,
+        graph_fn=lra_tools.skill_knowledge_graph,
+        hit_fn=_hit,
+        cap=MAX_HITS,
     )
 
 
 def search_ast(query: str, *, root: Optional[Path] = None) -> list[dict[str, Any]]:
-    from jevops.nca import matching_top_level
-    from jevops.outer import first_int, get_str, if_none, map_hits
+    from jevops.nca import drive_ast_hits
+    from jevops.outer import first_int, get_str, if_none
 
-    rows = matching_top_level(if_none(root, HERE), query, cap_hits=MAX_HITS)
-    return map_hits(
-        rows,
-        lambda row: _hit(
+    return drive_ast_hits(
+        if_none(root, HERE),
+        query,
+        cap=MAX_HITS,
+        hit_fn=lambda row: _hit(
             get_str(row, "name"),
             source="ast",
             query=query,
@@ -166,12 +136,14 @@ def search_ast(query: str, *, root: Optional[Path] = None) -> list[dict[str, Any
 
 
 def search_rg(query: str, *, root: Optional[Path] = None) -> tuple[list[dict[str, Any]], str]:
-    from jevops.outer import if_none
+    from jevops.outer import drive_search_at
     from jevops.search import search_rg as _search_rg
 
-    return _search_rg(
+    return drive_search_at(
         query,
-        root=if_none(root, HERE),
+        root,
+        HERE,
+        _search_rg,
         ident_re=_IDENT,
         timeout=RG_TIMEOUT,
         cap=MAX_HITS,
@@ -201,58 +173,30 @@ def search_symbols(
 ) -> dict[str, Any]:
     """Search/rank symbols. JSON-LD → optional DuckDB → vector → KG → ast → rg."""
 
-    from jevops.search import collect_source_hits, credit_search_hits, first_ident, pack_symbol_search
+    import nca_jsonld as lra_ld
+    import codepath_graph as lra_cp
+    from jevops.search import drive_symbol_search, sidecar_hit_row
 
-    from jevops.outer import as_dict, call_if, either, or_call, text_or
-
-    q = or_call(text_or(query).strip(), first_ident, tactics, _IDENT)
-    sources: dict[str, str] = {}
-    hits: list[dict[str, Any]] = []
-    if q:
-
-        def _jsonld() -> list[dict[str, Any]]:
-            import nca_jsonld as lra_ld
-
-            from jevops.outer import get_str, if_none
-
-            doc = lra_ld.memory_jsonld(if_none(memory, default={}))
-
-            return [
-                _hit(get_str(hit, "symbol"), source="jsonld", query=q)
-                for hit in lra_ld.search_jsonld(doc, q)
-            ]
-
-        def _sidecar() -> list[dict[str, Any]]:
-            import codepath_graph as lra_cp
-
-            from jevops.search import sidecar_hit_row
-
-            return [
-                sidecar_hit_row(row)
-                for row in lra_cp.query_sidecar(
-                    q, payload=call_if(root is not None, lambda: lra_cp.build_sidecar_index(root=root, write=False))
-                )
-            ]
-
-        hits, sources = collect_source_hits(
-            (
-                ("jsonld", _jsonld),
-                (
-                    "duckdb",
-                    either(
-                        use_duckdb,
-                        lambda: (lambda: search_duckdb(q, db_path=duckdb_path)),
-                        lambda: (lambda: ([], "skipped_optional")),
-                    ),
-                ),
-                ("vector", lambda: search_vector_index(q, snapshot=vector_snapshot, search_fn=vector_search)),
-                ("kg", lambda: search_kg(q, memory)),
-                ("ast", lambda: search_ast(q, root=root)),
-                ("sidecar", _sidecar),
-                ("rg", lambda: search_rg(q, root=root)),
-            ),
-            fail_notes={"sidecar": "sidecar_failed"},
-        )
-    ranked = rank_hits(hits)
-    promoted = credit_search_hits(as_dict(memory), ranked)
-    return pack_symbol_search(query=q, ranked=ranked, sources=sources, promoted=promoted)
+    return drive_symbol_search(
+        query,
+        memory=memory,
+        tactics=tactics,
+        duckdb_path=duckdb_path,
+        use_duckdb=use_duckdb,
+        vector_snapshot=vector_snapshot,
+        vector_search=vector_search,
+        root=root,
+        ident_re=_IDENT,
+        jsonld_fn=lra_ld.memory_jsonld,
+        jsonld_search_fn=lra_ld.search_jsonld,
+        hit_fn=_hit,
+        sidecar_query_fn=lra_cp.query_sidecar,
+        sidecar_build_fn=lra_cp.build_sidecar_index,
+        sidecar_row_fn=sidecar_hit_row,
+        duckdb_fn=search_duckdb,
+        vector_fn=search_vector_index,
+        kg_fn=search_kg,
+        ast_fn=search_ast,
+        rg_fn=search_rg,
+        rank_fn=rank_hits,
+    )

@@ -137,8 +137,12 @@ class ProofReceipt(_KernelProofReceipt):
     hardware_class: str = DEFAULT_RESOURCE
 
     def to_public_dict(self) -> dict[str, Any]:
-        return super().to_public_dict(
-            extra={
+        from jevops.lean import drive_receipt_public
+
+        return drive_receipt_public(
+            self,
+            super().to_public_dict,
+            {
                 "schema": RECEIPT_SCHEMA,
                 "protocol": PROTOCOL,
                 "control_plane": CONTROL_PLANE,
@@ -148,7 +152,7 @@ class ProofReceipt(_KernelProofReceipt):
                 "upsert_task": False,
                 "pr": PR_ID,
                 "lrah": LRAH_ID,
-            }
+            },
         )
 
 
@@ -187,58 +191,42 @@ def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[d
 def closed_dimensions_from_source(path: Path = PROOF_STORE_SOURCE) -> tuple[str, ...]:
     """Parse PROOF_AUTHORITY_DIMENSIONS from DuckDBProofStore@1 source."""
 
-    from jevops.outer import quoted_group, read_text, require_file
+    from jevops.outer import drive_required_parse, quoted_group
 
-    path = require_file(path, error_cls=ReceiptStoreError, miss="missing proof-store source: {path}")
-    return quoted_group(
-        read_text(path),
-        r"PROOF_AUTHORITY_DIMENSIONS: Final\[tuple\[str, \.\.\.\]\] = \((.*?)\)",
+    return drive_required_parse(
+        path,
         error_cls=ReceiptStoreError,
-        miss="PROOF_AUTHORITY_DIMENSIONS missing from duckdb_proof_store.py",
-        empty="PROOF_AUTHORITY_DIMENSIONS parsed empty",
+        miss="missing proof-store source: {path}",
+        parse_fn=lambda text: quoted_group(
+            text,
+            r"PROOF_AUTHORITY_DIMENSIONS: Final\[tuple\[str, \.\.\.\]\] = \((.*?)\)",
+            error_cls=ReceiptStoreError,
+            miss="PROOF_AUTHORITY_DIMENSIONS missing from duckdb_proof_store.py",
+            empty="PROOF_AUTHORITY_DIMENSIONS parsed empty",
+        ),
     )
 
 
 def environment_lock_field_names(path: Path = MODELS_SOURCE) -> list[str]:
     """AnnAssign names on EnvironmentLockRecord. No primary_executable field."""
 
+    from jevops.outer import drive_class_ann
     from jevops.repair import class_ann_names
-    from jevops.outer import read_text, require_file
 
-    path = require_file(path, error_cls=ReceiptStoreError, miss="missing hammer models source: {path}")
-    names = class_ann_names(read_text(path), "EnvironmentLockRecord")
-    from jevops.outer import raise_if
-
-    raise_if(names is None, ReceiptStoreError, "EnvironmentLockRecord class missing from models.py")
-    return names
+    return drive_class_ann(
+        path,
+        "EnvironmentLockRecord",
+        error_cls=ReceiptStoreError,
+        miss="missing hammer models source: {path}",
+        missing_msg="EnvironmentLockRecord class missing from models.py",
+        names_fn=class_ann_names,
+    )
 
 
 def parse_executable_paths(value: Any) -> ExecutablePaths:
-    from jevops.outer import reject_present_keys, require_exact_keys, str_map
+    from jevops.lean import parse_executable_paths as _parse
 
-    if isinstance(value, ExecutablePaths):
-        paths = value.to_dict()
-    elif isinstance(value, Mapping):
-        reject_present_keys(
-            value,
-            ("primary_executable",),
-            error_cls=ReceiptStoreError,
-            fmt="executable_paths must not include {key}",
-            empty=(),
-        )
-        paths = str_map(value)
-    else:
-        raise ReceiptStoreError("executable_paths must be a mapping of lean and lake")
-    got = require_exact_keys(
-        paths,
-        ("lean", "lake"),
-        error_cls=ReceiptStoreError,
-        not_map="executable_paths must be a mapping of lean and lake",
-        extra_fmt="executable_paths must be exactly lean and lake",
-        miss_fmt="executable_paths must be exactly lean and lake",
-        empty_fmt="executable_paths lean and lake must be nonempty",
-    )
-    return ExecutablePaths(lean=got["lean"], lake=got["lake"])
+    return _parse(value, paths_cls=ExecutablePaths, error_cls=ReceiptStoreError)
 
 
 def assumptions_digest(
@@ -247,57 +235,41 @@ def assumptions_digest(
     lean_num_threads: int = LEAN_NUM_THREADS,
     no_new_axioms: bool = NO_NEW_AXIOMS,
 ) -> str:
-    return content_digest(
-        {
-            "lean_num_threads": lean_num_threads,
-            "maxHeartbeats": max_heartbeats,
-            "no_new_axioms": no_new_axioms,
-        }
+    from jevops.lean import assumption_digest
+
+    return assumption_digest(
+        max_heartbeats=max_heartbeats,
+        lean_num_threads=lean_num_threads,
+        no_new_axioms=no_new_axioms,
+        digest_fn=content_digest,
     )
 
 
 def project_dimensions(receipt: ProofReceipt) -> dict[str, str]:
     """Project every closed authority dimension. Missing keys fail closed."""
 
-    from jevops.lean import project_authority_dimensions
+    from jevops.lean import drive_project_dimensions
 
-    from jevops.outer import or_call
-
-    premises = or_call(receipt.premises_digest, not_applicable_digest)
-    backend_config = or_call(receipt.backend_config_digest, not_applicable_digest)
-    mapping = {
-        "ir": DEFAULT_IR,
-        "property": DEFAULT_PROPERTY,
-        "assumptions": assumptions_digest(),
-        "premises": premises,
-        "translator": receipt.translator,
-        "solver": receipt.generator,
-        "toolchain": receipt.lean_tag,
-        "theorem_registry": receipt.name,
-        "policy": receipt.policy,
-        "resource": receipt.resource,
-        "tree": receipt.git_commit,
-        "backend_id": receipt.backend_id,
-        "backend_binary": receipt.executable_paths.lean,
-        "backend_version": receipt.lean_version,
-        "backend_config": backend_config,
-    }
-    return project_authority_dimensions(
-        receipt, PROOF_AUTHORITY_DIMENSIONS, mapping, error_cls=DimensionError
+    return drive_project_dimensions(
+        receipt,
+        dimensions=PROOF_AUTHORITY_DIMENSIONS,
+        assumptions_fn=assumptions_digest,
+        premises_fn=not_applicable_digest,
+        backend_fn=not_applicable_digest,
+        ir=DEFAULT_IR,
+        property_name=DEFAULT_PROPERTY,
+        error_cls=DimensionError,
     )
 
 
 def receipt_key_digest(receipt: ProofReceipt, dimensions: Mapping[str, str]) -> str:
-    from jevops.outer import overlay_map
+    from jevops.lean import drive_receipt_digest
 
-    return content_digest(
-        {
-            "body_digest": receipt.body_digest,
-            "dimensions": overlay_map(dimensions),
-            "lean_tag": receipt.lean_tag,
-            "name": receipt.name,
-            "schema": RECEIPT_SCHEMA,
-        }
+    return drive_receipt_digest(
+        receipt,
+        dimensions,
+        digest_fn=content_digest,
+        schema=RECEIPT_SCHEMA,
     )
 
 
@@ -336,19 +308,21 @@ def write_cas_body(root: Path, body: str) -> str:
 
 
 def filesystem_receipt_path(root: Path, name: str, lean_tag: str) -> Path:
-    from jevops.outer import join_under
+    from jevops.outer import drive_named_json_path
 
-    return join_under(root, "receipts", sanitize_name(name), f"{lean_tag}.json")
+    return drive_named_json_path(root, name, lean_tag, sanitize_fn=sanitize_name)
 
 
 def write_filesystem_receipt(root: Path, receipt: ProofReceipt) -> Path:
-    from jevops.outer import write_json
+    from jevops.outer import drive_public_receipt, write_json
 
-    path = filesystem_receipt_path(root, receipt.name, receipt.lean_tag)
-    payload = receipt.to_public_dict()
-    _reject_proof_bodies(payload)
-    write_json(path, payload)
-    return path
+    return drive_public_receipt(
+        root,
+        path_fn=lambda: filesystem_receipt_path(root, receipt.name, receipt.lean_tag),
+        payload_fn=receipt.to_public_dict,
+        reject_fn=_reject_proof_bodies,
+        write_fn=write_json,
+    )
 
 
 def try_import_duckdb() -> Any:
@@ -384,15 +358,15 @@ class InsertOnlyConnection(_KernelInsertOnly):
 def connect_optional_db(path: Path, *, duckdb_module: Any = None) -> tuple[InsertOnlyConnection, str]:
     """Open DuckDB when the package exists; otherwise sqlite3 (still INSERT-only)."""
 
-    from jevops.outer import connect_engine
+    from jevops.outer import drive_wrapped_engine
 
-    raw, engine = connect_engine(path, duckdb_module=duckdb_module)
-    return InsertOnlyConnection(raw), engine
+    return drive_wrapped_engine(path, duckdb_module=duckdb_module, wrap_fn=InsertOnlyConnection)
 
 
 def install_schema(conn: InsertOnlyConnection) -> None:
-    conn.execute(RECEIPT_DDL)
-    conn.execute(EDGE_DDL)
+    from jevops.outer import drive_exec_each
+
+    drive_exec_each(conn, (RECEIPT_DDL, EDGE_DDL))
 
 
 def _integrity_conflict(exc: BaseException) -> bool:
@@ -404,18 +378,15 @@ def _integrity_conflict(exc: BaseException) -> bool:
 def insert_receipt_row(conn: InsertOnlyConnection, receipt: ProofReceipt) -> bool:
     """INSERT one tiny row. Existing key is skipped; never DELETE/UPDATE."""
 
-    from jevops.outer import dumps_compact, insert_ignore_conflict, pack_receipt_insert_params
+    from jevops.outer import drive_insert_packed, dumps_compact
 
-    params = pack_receipt_insert_params(
+    return drive_insert_packed(
+        conn.execute,
+        INSERT_RECEIPT_SQL,
         receipt,
         schema=RECEIPT_SCHEMA,
         dumps_fn=dumps_compact,
         tiny_fn=_tiny_payload,
-    )
-    return insert_ignore_conflict(
-        conn.execute,
-        INSERT_RECEIPT_SQL,
-        params,
         error_cls=ReceiptStoreError,
         fail_fmt="INSERT receipt failed: {exc}",
     )
@@ -431,31 +402,36 @@ def insert_edge(
 ) -> bool:
     """INSERT an edge. Existing edges stay; there is no DELETE."""
 
-    from jevops.outer import if_none, insert_ignore_conflict
+    from jevops.outer import drive_insert_stamped
 
-    stamp = float(if_none(created_at, factory=time.time))
-    return insert_ignore_conflict(
+    return drive_insert_stamped(
         conn.execute,
         INSERT_EDGE_SQL,
-        (parent_digest, child_digest, edge_kind, stamp),
+        (parent_digest, child_digest, edge_kind),
+        created_at=created_at,
         error_cls=ReceiptStoreError,
         fail_fmt="INSERT edge failed: {exc}",
     )
 
 
 def select_edges(conn: InsertOnlyConnection, parent_digest: str) -> list[tuple[str, str, str]]:
-    from jevops.outer import fetch_mapped, text_or
+    from jevops.outer import drive_fetch_rows, text_or
 
-    result = conn.execute(SELECT_EDGE_SQL, (parent_digest,))
-    return fetch_mapped(result, lambda row: (text_or(row[0]), text_or(row[1]), text_or(row[2])))
+    return drive_fetch_rows(
+        conn.execute,
+        SELECT_EDGE_SQL,
+        parent_digest,
+        lambda row: (text_or(row[0]), text_or(row[1]), text_or(row[2])),
+    )
 
 
 def lookup_receipt(conn: InsertOnlyConnection, key_digest: str) -> Optional[dict[str, Any]]:
-    from jevops.outer import row_dict
+    from jevops.outer import drive_lookup_row
 
-    result = conn.execute(SELECT_RECEIPT_SQL, (key_digest,))
-    return row_dict(
-        result.fetchone(),
+    return drive_lookup_row(
+        conn.execute,
+        SELECT_RECEIPT_SQL,
+        (key_digest,),
         (
             "key_digest",
             "theorem_name",
@@ -481,15 +457,19 @@ def lookup_negative(
 ) -> Optional[str]:
     """Return the stored verdict for a failed (theorem, body, toolchain)."""
 
-    from jevops.outer import row_cell, str_or_none
+    from jevops.outer import drive_lookup_cell
 
-    result = conn.execute(SELECT_NEGATIVE_SQL, (theorem_name, body_digest, lean_tag))
-    value = row_cell(result.fetchone(), 1)
-    return str_or_none(value)
+    return drive_lookup_cell(
+        conn.execute,
+        SELECT_NEGATIVE_SQL,
+        (theorem_name, body_digest, lean_tag),
+    )
 
 
 def should_skip_retry(verdict: Optional[str]) -> bool:
-    return verdict in {"fail", "error"}
+    from jevops.outer import retry_verdict_skipped
+
+    return retry_verdict_skipped(verdict)
 
 
 def finalize_receipt(receipt: ProofReceipt, *, body: Optional[str] = None) -> ProofReceipt:
@@ -523,17 +503,17 @@ def store_receipt(
     control plane; this function does not schedule work.
     """
 
-    from jevops.lean import persist_receipt
-    from jevops.outer import first_truthy, if_none
+    from jevops.lean import drive_store_receipt
 
-    return persist_receipt(
+    return drive_store_receipt(
         receipt,
         root=root,
         body=body,
         duckdb_path=duckdb_path,
         parent_digest=parent_digest,
         require_duckdb=require_duckdb,
-        control_plane=first_truthy(IS_CONTROL_PLANE, REQUIRES_TODO_DAEMON, default=False),
+        duckdb_module=duckdb_module,
+        control_flags=(IS_CONTROL_PLANE, REQUIRES_TODO_DAEMON),
         finalize_fn=finalize_receipt,
         write_cas_fn=write_cas_body,
         write_fs_fn=write_filesystem_receipt,
@@ -541,7 +521,7 @@ def store_receipt(
         install_fn=install_schema,
         insert_fn=insert_receipt_row,
         insert_edge_fn=insert_edge,
-        try_import_fn=lambda: if_none(duckdb_module, factory=try_import_duckdb),
+        try_import_fn=try_import_duckdb,
         error_cls=ReceiptStoreError,
         control_msg="receipt_store must not be the control plane",
     )
@@ -580,16 +560,15 @@ def _function_names(source: str) -> set[str]:
 def _forbidden_sql_in_constants(source: str) -> list[str]:
     """Flag string constants that are mutating SQL statements, not prose."""
 
-    from jevops.outer import head_chars
+    from jevops.repair import drive_forbidden_sql
 
-    issues: list[str] = []
-    for value in _string_constants(source):
-        stripped = value.strip()
-        if SQL_STATEMENT_HEAD.match(stripped) or (
-            ALLOWED_SQL_HEAD.match(stripped) and FORBIDDEN_SQL.search(stripped)
-        ):
-            issues.append(head_chars(stripped, 80))
-    return issues
+    return drive_forbidden_sql(
+        source,
+        constants_fn=_string_constants,
+        head_re=SQL_STATEMENT_HEAD,
+        allowed_re=ALLOWED_SQL_HEAD,
+        forbidden_re=FORBIDDEN_SQL,
+    )
 
 
 def _primary_executable_kwargs(source: str) -> bool:
@@ -621,19 +600,20 @@ def _synthetic_receipt(
 
 
 def _load_control_plane_pin() -> dict[str, Any]:
-    from jevops.outer import read_json
+    from jevops.outer import drive_plane_report, read_json
 
-    cfg = read_json(SUPERVISOR_JSON)
-    return {
-        "primary_control_plane": cfg.get("primary_control_plane"),
-        "matches_constant": cfg.get("primary_control_plane") == CONTROL_PLANE,
-        "run_warmup_exists": (REPO_ROOT / CONTROL_PLANE).is_file(),
-        "receipt_store_is_control_plane": IS_CONTROL_PLANE,
-        "requires_todo_daemon": REQUIRES_TODO_DAEMON,
-        "requires_duckdb": REQUIRES_DUCKDB,
-        "filesystem_is_authority": FILESYSTEM_IS_AUTHORITY,
-        "insert_only": INSERT_ONLY,
-    }
+    return drive_plane_report(
+        read_json(SUPERVISOR_JSON),
+        plane=CONTROL_PLANE,
+        script_exists=(REPO_ROOT / CONTROL_PLANE).is_file(),
+        flags={
+            "receipt_store_is_control_plane": IS_CONTROL_PLANE,
+            "requires_todo_daemon": REQUIRES_TODO_DAEMON,
+            "requires_duckdb": REQUIRES_DUCKDB,
+            "filesystem_is_authority": FILESYSTEM_IS_AUTHORITY,
+            "insert_only": INSERT_ONLY,
+        },
+    )
 
 
 def self_check(path: Optional[Path] = None) -> dict[str, Any]:

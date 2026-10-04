@@ -54,16 +54,15 @@ def hammer_variants(tactics: str, reference: str) -> list[tuple[str, str]]:
 
     import inits_updates_shorten as lra_ius
     import symbol_diffuse as lra_sym
-    from jevops.outer import head_seq, map_pairs
-    from jevops.tactics import hammer_variants as _fn
+    from jevops.tactics import drive_hammer_variants
 
-    extras: list[tuple[str, str]] = [
-        ("inits_replay", lra_ius.replay(reference)),
-        ("inits_step", lra_ius.replay(tactics)),
-    ]
-    extras.extend(map_pairs(head_seq(lra_ius.propose(tactics), 8)))
-    extras.extend(map_pairs(lra_sym.closed_candidates(tactics, max_candidates=6)))
-    return _fn(tactics, reference, extras)
+    return drive_hammer_variants(
+        tactics,
+        reference,
+        replay_fn=lra_ius.replay,
+        propose_fn=lra_ius.propose,
+        closed_fn=lra_sym.closed_candidates,
+    )
 
 
 def jev_round(
@@ -72,59 +71,18 @@ def jev_round(
     history: Sequence[Mapping[str, Any]],
     keep_tokens: int,
 ) -> dict[str, Any]:
-    from jevops.jev import typesafe_session
-
-    loaded, skip = typesafe_session(setup=(lra_pca.pin_typesafe_path,), fallback=False)
-    if skip is not None:
-        return skip
-    Choice = loaded["Choice"]
-    Noul = loaded["Noul"]
-    Score = loaded["Score"]
-    TypeSafeClient = loaded["TypeSafeClient"]
-
     from jevops.catalogs import LIKELY_SHORTER_CRITERIA, SGD_HOLE_INSTRUCTIONS
-    from jevops.jev import (
-        choice_questions,
-        hole_criteria,
-        hole_round_state,
-        invoke_system_one,
-        pack_choice_round,
-        skipped,
-    )
+    from jevops.jev import drive_hole_round
 
-    from jevops.jev import complete_choice_round
-
-    criteria = hole_criteria(holes)
-    state = hole_round_state(record, holes, history, keep_tokens)
-    questions = choice_questions(
-        Choice=Choice,
-        Noul=Noul,
-        Score=Score,
-        criteria=criteria,
-        best_key="next_hole",
+    return drive_hole_round(
+        record,
+        holes,
+        history,
+        keep_tokens,
+        setup=(lra_pca.pin_typesafe_path,),
         best_instructions=SGD_HOLE_INSTRUCTIONS,
-        nouls={"likely_compiles": "Will dropping that hole still compile?"},
-        scores={
-            "likely_token_cut": (
-                "How large a token cut if that hole is dropped?",
-                list(LIKELY_SHORTER_CRITERIA),
-            )
-        },
-    )
-    return complete_choice_round(
-        configured=True,
-        criteria=criteria,
-        invoke_fn=lambda: invoke_system_one(TypeSafeClient(timeout=45.0), state, questions),
-        pack_fn=lambda result, wall_ms, **_k: pack_choice_round(
-            result,
-            choice_key="next_hole",
-            noul_key="likely_compiles",
-            score_key="likely_token_cut",
-            wall_ms=wall_ms,
-        ),
+        shorter_criteria=LIKELY_SHORTER_CRITERIA,
         redact_fn=lra_pca.redact,
-        skip_fn=lambda reason, **extra: skipped(reason, **extra),
-        skip_extra={"choice": None, "probabilities": {}},
     )
 
 
@@ -139,34 +97,22 @@ def evaluate_tactics(
     memory: Optional[dict[str, Any]] = None,
 ) -> list[dict[str, Any]]:
     import nca_kernel as lra_kern
-    from jevops.search import compile_variant_evals
+    from jevops.kernel import drive_variant_evals
 
-    def _compile(label: str, body: str) -> dict[str, Any]:
-        from jevops.outer import dict_call, get_str
-
-        def _run() -> dict[str, Any]:
-            return dict_call(
-                lra_kb.compile_tactics,
-                record,
-                body,
-                state_root=state_root,
-                timeout=timeout,
-                restore=restore,
-            )
-
-        return dict_call(
-            lra_kern.guarded_compile,
-            memory,
-            name=get_str(record, "name"),
-            kind=f"sgd:{label}",
-            tactics=body,
-            compile_fn=_run,
-        )
-
-    variants = hammer_variants(tactics, reference)
     # Lake splices one file; serialize compiles. "Parallel hammers" means
     # four closer variants per minibatch, not concurrent writes.
-    return compile_variant_evals(variants, _compile)
+    return drive_variant_evals(
+        record,
+        tactics,
+        state_root=state_root,
+        timeout=timeout,
+        restore=restore,
+        reference=reference,
+        memory=memory,
+        variants_fn=hammer_variants,
+        compile_fn=lra_kb.compile_tactics,
+        guard_fn=lra_kern.guarded_compile,
+    )
 
 
 def sgd_search(
@@ -179,135 +125,41 @@ def sgd_search(
     use_leanstral: bool,
     memory: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import first_int
+    from jevops.search import drive_sgd
 
-    rng = random.Random(first_int(seed))
-    from jevops.outer import load_and_clone
-
-    record, records, digest, _clone, _dest, restore = load_and_clone(
-        lra_splice.load_warmup_records,
+    return drive_sgd(
         name,
-        state_root,
+        state_root=state_root,
+        timeout=timeout,
+        rounds=rounds,
+        seed=seed,
+        use_leanstral=use_leanstral,
+        memory=memory,
+        rng_cls=random.Random,
+        load_fn=lra_splice.load_warmup_records,
         clone_fn=lra_kb.lra_cw.clone_dir,
         relpath_fn=lra_kb.lra_cw.source_relpath,
-        error_cls=RuntimeError,
-        miss=f"unknown warm-up problem: {name}",
-    )
-    from jevops.outer import pin_calls
-    from jevops.search import begin_keep_search, boxed_keepbest, coordinate_rounds
-
-    started = begin_keep_search(
-        record,
         tactic_fn=lra_fan.tactic_block,
-        find_fn=lra_mask.find_holes,
+        holes_fn=lra_mask.find_holes,
         token_fn=lra_loop.token_count,
-        pin_fn=pin_calls(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
-    )
-    from jevops.outer import head_errors, keep_box, take_keys
-
-    reference, holes, keep, keep_tokens, history, dropped, jevs = take_keys(
-        started, "reference", "holes", "keep", "keep_tokens", "history", "dropped", "jevs"
-    )
-    box = keep_box(keep_tokens, keep)
-
-    def _choose(remaining: Sequence[Any], _dropped: set[str], _round: int) -> list[str]:
-        from jevops.search import choose_minibatch
-
-        jev = jev_round(record, remaining, history, box["tokens"])
-        jevs.append(jev)
-        return choose_minibatch(remaining, jev, rng, k=2)
-
-    walked = coordinate_rounds(
-        holes,
-        rounds=rounds,
-        choose_fn=_choose,
-        trial_fn=lambda chosen: drop_subset(reference, holes, chosen),
-        eval_fn=lambda trial: evaluate_tactics(
-            record,
-            trial,
-            state_root=state_root,
-            timeout=timeout,
-            restore=restore,
-            reference=reference,
-            memory=memory,
-        ),
-        accept_fn=boxed_keepbest(box),
-        keep_tokens=keep_tokens,
-        keep_body=keep,
-        history=history,
-    )
-    from jevops.search import attach_jev_rounds, maybe_leanstral_restart, sgd_payload, unpack_walked
-
-    keep, keep_tokens, dropped, history = unpack_walked(walked)
-
-    rounds_out = attach_jev_rounds(walked["rounds"], jevs, history)
-
-    from jevops.repair import bind_align
-
-    _align = bind_align(
-        reference,
+        key_fns=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
+        jev_fn=jev_round,
+        drop_fn=drop_subset,
+        eval_fn=evaluate_tactics,
         extract_fn=lra_loop.extract_generated_tactics,
         match_fn=lra_kb.match_reference_indent,
         flatten_fn=lra_kb.flatten_overindent,
-    )
-
-    def _generate() -> tuple[str, Any, Any]:
-        from jevops.outer import after_calls
-
-        ledger = lra_t1.ProblemLedger(name=f"{name}#sgd")
-        from jevops.outer import named_shots
-
-        shots = named_shots(
-            records, lra_mask.SHOT_NAMES, skip_name=name, example_fn=lra_mask.few_shot_example
-        )
-        prompt = lra_mask.few_shot_prompt(record, shots)
-        text, identity, _line = after_calls(
-            (lra_mistral.load_keyfiles, lra_mistral.pin_paths),
-            lra_mistral.generate_mistral,
-            prompt,
-            ledger,
-            max_new_tokens=700,
-            timeout=180.0,
-        )
-        return text, identity, ledger
-
-    keep, keep_tokens, leanstral = maybe_leanstral_restart(
-        use=use_leanstral,
-        keep=keep,
-        keep_tokens=keep_tokens,
-        ref_tokens=lra_loop.token_count(reference),
-        generate_fn=_generate,
-        flatten_fn=_align,
-        eval_fn=lambda body: evaluate_tactics(
-            record,
-            body,
-            state_root=state_root,
-            timeout=timeout,
-            restore=restore,
-            reference=reference,
-            memory=memory,
-        ),
-        hammer_fn=lambda filled, evals: lra_mask.hammer_repair(
-            filled, reference, head_errors(evals)
-        ),
-        ledger_fn=lambda ledger: ledger.as_dict(),
-    )
-
-    ref_tokens = lra_loop.token_count(reference)
-    return lra_pca.redact(
-        sgd_payload(
-            name=name,
-            digest=digest,
-            n_holes=len(holes),
-            ref_tokens=ref_tokens,
-            keep_tokens=keep_tokens,
-            dropped=dropped,
-            rounds=rounds_out,
-            leanstral=leanstral,
-            hardware_class=HARDWARE_CLASS,
-            protocol=PROTOCOL,
-            pr=PR_ID,
-        )
+        ledger_cls=lra_t1.ProblemLedger,
+        shot_names=lra_mask.SHOT_NAMES,
+        example_fn=lra_mask.few_shot_example,
+        prompt_fn=lra_mask.few_shot_prompt,
+        keyfile_fns=(lra_mistral.load_keyfiles, lra_mistral.pin_paths),
+        generate_fn=lra_mistral.generate_mistral,
+        hammer_fn=lra_mask.hammer_repair,
+        redact_fn=lra_pca.redact,
+        hardware_class=HARDWARE_CLASS,
+        protocol=PROTOCOL,
+        pr=PR_ID,
     )
 
 
@@ -333,97 +185,50 @@ def diffuse_search(
     restart, not neural SGD or a trained denoiser.
     """
 
-    from jevops.outer import either, head_chars, load_and_clone, named_shots, pin_calls
-    from jevops.repair import flatten_matched
-    from jevops.search import diffuse_noise_step, run_diffuse_search
+    from jevops.outer import head_chars, named_shots
+    from jevops.search import drive_diffuse
 
-    held: dict[str, Any] = {}
-
-    def _load(problem: str, *, error_cls: Any) -> tuple[Any, Any, str, Any, Any, bytes]:
-        packed = load_and_clone(
-            lra_splice.load_warmup_records,
-            problem,
-            state_root,
-            clone_fn=lra_kb.lra_cw.clone_dir,
-            relpath_fn=lra_kb.lra_cw.source_relpath,
-            error_cls=error_cls,
-            miss=f"unknown warm-up problem: {problem}",
-        )
-        held["restore"] = packed[5]
-        return packed
-
-    def _eval(record: Mapping[str, Any], body: str) -> list[dict[str, Any]]:
-        return evaluate_tactics(
-            record,
-            body,
-            state_root=state_root,
-            timeout=timeout,
-            restore=held["restore"],
-            reference=lra_fan.tactic_block(record),
+    def _shrink(rec: Mapping[str, Any], body: str, tokens: int, recs: Sequence[Mapping[str, Any]], _name: str) -> str:
+        return (
+            f"Current lake-valid keep is {tokens} tokens "
+            f"(reference {lra_loop.token_count(lra_fan.tactic_block(rec))}). "
+            "Shrink it further. Keep induction and every case arm. "
+            "Delete only residual simp-at/rename_i/have/rw. No sorry.\n\n"
+            + lra_mask.few_shot_prompt(
+                rec,
+                named_shots(recs, lra_mask.SHOT_NAMES, skip_name=name, example_fn=lra_mask.few_shot_example),
+            )
+            + f"\nCURRENT KEEP ({tokens} tokens):\n{head_chars(body, 1800)}\n"
         )
 
-    def _noise(
-        round_i: int,
-        remaining: Sequence[Any],
-        keep: str,
-        keep_tokens: int,
-        record: Mapping[str, Any],
-        records: Sequence[Mapping[str, Any]],
-        rng: Any,
-    ) -> tuple[Any, str, int]:
-        return diffuse_noise_step(
-            use_leanstral=use_leanstral,
-            remaining=remaining,
-            rng=rng,
-            keep=keep,
-            keep_tokens=keep_tokens,
-            record=record,
-            records=records,
-            name=name,
-            ledger_fn=lambda i: lra_t1.ProblemLedger(name=f"{name}#diffuse-r{i}"),
-            one_hole_prompt_fn=lra_mask.one_hole_prompt,
-            shrink_prompt_fn=lambda rec, body, tokens, recs, _name: (
-                f"Current lake-valid keep is {tokens} tokens "
-                f"(reference {lra_loop.token_count(lra_fan.tactic_block(rec))}). "
-                "Shrink it further. Keep induction and every case arm. "
-                "Delete only residual simp-at/rename_i/have/rw. No sorry.\n\n"
-                + lra_mask.few_shot_prompt(
-                    rec,
-                    named_shots(recs, lra_mask.SHOT_NAMES, skip_name=name, example_fn=lra_mask.few_shot_example),
-                )
-                + f"\nCURRENT KEEP ({tokens} tokens):\n{head_chars(body, 1800)}\n"
-            ),
-            generate_fn=lambda prompt, ledger: lra_mistral.generate_mistral(
-                prompt, ledger, max_new_tokens=400, timeout=120.0
-            ),
-            extract_fn=lra_loop.extract_generated_tactics,
-            flatten_fn=flatten_matched(lra_kb.match_reference_indent, lra_kb.flatten_overindent),
-            hammer_fn=lambda noisy, errors: lra_mask.hammer_repair(
-                noisy, lra_fan.tactic_block(record), errors
-            ),
-            eval_fn=lambda body: _eval(record, body),
-            skip_exc=(lra_t1.Track1LedgerError, lra_mistral.Track1MistralError),
-            round_i=round_i,
-        )
-
-    return run_diffuse_search(
+    return drive_diffuse(
         name,
-        load_fn=_load,
-        tactic_fn=lra_fan.tactic_block,
-        find_fn=lra_mask.find_holes,
-        token_fn=lra_loop.token_count,
-        pin_fn=pin_calls(
-            lra_pca.load_keyfile,
-            lra_pca.pin_typesafe_path,
-            *either(use_leanstral, lambda: (lra_mistral.load_keyfiles, lra_mistral.pin_paths), lambda: ()),
-        ),
-        drop_fn=drop_subset,
-        eval_fn=_eval,
-        jev_fn=jev_round,
-        noise_fn=_noise,
+        state_root=state_root,
+        timeout=timeout,
         rounds=rounds,
         seed=seed,
+        use_leanstral=use_leanstral,
         tau=tau,
+        load_records_fn=lra_splice.load_warmup_records,
+        clone_fn=lra_kb.lra_cw.clone_dir,
+        relpath_fn=lra_kb.lra_cw.source_relpath,
+        tactic_fn=lra_fan.tactic_block,
+        holes_fn=lra_mask.find_holes,
+        token_fn=lra_loop.token_count,
+        key_fns=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
+        leanstral_fns=(lra_mistral.load_keyfiles, lra_mistral.pin_paths),
+        drop_fn=drop_subset,
+        eval_fn=evaluate_tactics,
+        jev_fn=jev_round,
+        ledger_cls=lra_t1.ProblemLedger,
+        one_prompt_fn=lra_mask.one_hole_prompt,
+        shrink_prompt_fn=_shrink,
+        generate_fn=lambda prompt, ledger: lra_mistral.generate_mistral(prompt, ledger, max_new_tokens=400, timeout=120.0),
+        extract_fn=lra_loop.extract_generated_tactics,
+        match_fn=lra_kb.match_reference_indent,
+        flatten_over_fn=lra_kb.flatten_overindent,
+        hammer_fn=lra_mask.hammer_repair,
+        skip_exc=(lra_t1.Track1LedgerError, lra_mistral.Track1MistralError),
         redact_fn=lra_pca.redact,
         hardware_class=HARDWARE_CLASS,
         protocol=PROTOCOL,

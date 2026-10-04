@@ -71,35 +71,21 @@ def featurize_proposal(
     module,
     weights: Mapping[str, float],
 ) -> dict[str, Any]:
-    from jevops.jev import proposal_feature_state
-    from jevops.outer import tail_chars
+    from jevops.jev import drive_featurize_proposal
+    from jevops.rankers import signed_dot
 
-    state = proposal_feature_state(
+    return drive_featurize_proposal(
         record,
         current,
         proposal,
-        token_fn=lra_loop.token_count,
-        tail_fn=tail_chars,
-    )
-    from jevops.jev import featurize_or_skip, invoke_system_one, skipped, unpack_response
-    from jevops.outer import dumps_compact, exc_head, usage_tokens
-    from jevops.rankers import signed_dot
-
-    def _record(usage: Any) -> Any:
-        inn, out = usage_tokens(
-            usage, fallback_in=lra_t1.estimate_tokens(dumps_compact(state))
-        )
-        return ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
-
-    return featurize_or_skip(
-        invoke_fn=lambda: invoke_system_one(
-            module.TypeSafeClient(timeout=45.0), state, feature_questions(module)
-        ),
-        skip_fn=lambda exc: skipped(exc_head(exc), score=0.0, features={}),
-        unpack_fn=unpack_response,
-        record_fn=_record,
-        feature_names=[name for name, _kind, _q in ALL_FEATURES],
+        ledger=ledger,
+        module=module,
         weights=weights,
+        token_fn=lra_loop.token_count,
+        questions_fn=feature_questions,
+        estimate_fn=lra_t1.estimate_tokens,
+        model_id=lra_t1.JEV_MODEL_ID,
+        feature_names=[name for name, _kind, _q in ALL_FEATURES],
         signed_dot_fn=signed_dot,
         penalty=PENALTY,
     )

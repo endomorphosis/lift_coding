@@ -42,23 +42,25 @@ from jevops.inits import replay
 
 
 def original_tactics() -> str:
-    from jevops.outer import lookup_named
+    from jevops.outer import drive_named_block
 
-    _raw, _digest, records = lra_splice.load_warmup_records()
-    record = lookup_named(
-        records, PROBLEM, error_cls=RuntimeError, miss=f"unknown warm-up problem: {PROBLEM}"
+    return drive_named_block(
+        lra_splice.load_warmup_records,
+        PROBLEM,
+        tactic_fn=lra_fan.tactic_block,
+        error_cls=RuntimeError,
+        miss=f"unknown warm-up problem: {PROBLEM}",
     )
-    return lra_fan.tactic_block(record).strip("\n")
 
 
 def expected_174() -> str:
-    from jevops.outer import either, read_text, stripped_or
+    from jevops.outer import drive_prefer_file, read_text
 
-    path = either(CANARY_BEST.is_file(), lambda: CANARY_BEST, lambda: CANARY_174)
-    return either(
-        path.is_file(),
-        lambda: stripped_or(read_text(path), ""),
-        lambda: replay(original_tactics()),
+    return drive_prefer_file(
+        CANARY_BEST,
+        CANARY_174,
+        read_fn=read_text,
+        missing_fn=lambda: replay(original_tactics()),
     )
 
 

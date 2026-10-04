@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 import time
 from dataclasses import asdict, dataclass
@@ -46,7 +45,7 @@ from jevops.catalogs import DEFAULT_TRACK1_STATE as DEFAULT_STATE
 from jevops.catalogs import HARDWARE_CLASS_SPARK as HARDWARE_CLASS
 from jevops.catalogs import MISTRAL_HARDWARE_CLASS as LEANSTRAL_HARDWARE
 from jevops.catalogs import PROTOCOL
-MARKER = re.compile(r"<<<SYM_(\d+)(?: kind=([a-z_]+))?>>>")
+from jevops.tactics import SYM_HOLE as MARKER
 
 # Longest-first so ‹_› / <;> / ?_ mask as one hole.
 # Skip := / · — their closed alts are not strictly shorter.
@@ -97,16 +96,9 @@ def _as_row(item: SymbolHole) -> dict[str, Any]:
 
 
 def _from_row(row: Mapping[str, Any]) -> SymbolHole:
-    from jevops.outer import first_int, get_str
+    from jevops.outer import drive_hole_from_row
 
-    return SymbolHole(
-        hole_id=get_str(row, "hole_id", default="SYM_0"),
-        kind=get_str(row, "kind", default="span"),
-        start=first_int(row["start"]),
-        end=first_int(row["end"]),
-        original=get_str(row, "original"),
-        n_tokens=first_int(row.get("n_tokens"), default=1),
-    )
+    return drive_hole_from_row(row, cls=SymbolHole)
 
 
 def find_symbol_holes(tactics: str, *, max_holes: int = 24) -> list[SymbolHole]:
@@ -144,11 +136,14 @@ def is_pca_line(tactics: str, pos: int) -> bool:
 def cfg_schedule_for_score(score: Any, *, one_hole: bool = False) -> dict[str, Any]:
     """Map a TypeSafe Score (0..len-1, may be fractional) onto a mask schedule."""
 
-    from jevops.mask import schedule_for_score
-    from jevops.outer import either
+    from jevops.mask import drive_score_schedule
 
-    table = either(one_hole, lambda: ONE_HOLE_SCHEDULES, lambda: CFG_SCHEDULES)
-    return schedule_for_score(score, table)
+    return drive_score_schedule(
+        score,
+        one_hole=one_hole,
+        one_table=ONE_HOLE_SCHEDULES,
+        multi_table=CFG_SCHEDULES,
+    )
 
 
 def _rehole(hole: SymbolHole, index: int) -> SymbolHole:
@@ -165,66 +160,56 @@ def _rehole(hole: SymbolHole, index: int) -> SymbolHole:
 def all_span_windows(tactics: str, span: int, *, stride: Optional[int] = None) -> list[SymbolHole]:
     """Token windows of ``span``. Default stride=span (tile). stride=1 overlaps."""
 
-    from jevops.mask import span_windows
+    from jevops.mask import drive_span_holes
 
-    rows = span_windows(
+    return drive_span_holes(
         tactics,
         span,
         stride=stride,
-        tokens=list(lra_loop._TOKEN.finditer(tactics)),
+        tokens_fn=lambda text: list(lra_loop._TOKEN.finditer(text)),
         skip_fn=is_pca_line,
+        from_row=_from_row,
     )
-    return [_from_row(row) for row in rows]
 
 
 def schedule_holes(tactics: str, *, n_masks: int, span: int) -> list[SymbolHole]:
     """Non-overlapping token windows of ``span``, skipping PCA control-flow lines."""
 
-    from jevops.mask import pick_nonoverlapping
-    from jevops.outer import either, or_int
+    from jevops.mask import drive_schedule_holes
 
-    n_masks = or_int(n_masks, 1, floor=1)
-    windows = all_span_windows(tactics, span)
-    return either(
-        windows,
-        lambda: [
-            _from_row(row)
-            for row in pick_nonoverlapping([_as_row(item) for item in windows], n=n_masks)
-        ],
-        lambda: [
-            _rehole(hole, i)
-            for i, hole in enumerate(find_symbol_holes(tactics, max_holes=n_masks)[:n_masks])
-        ],
+    return drive_schedule_holes(
+        tactics,
+        n_masks=n_masks,
+        span=span,
+        windows_fn=all_span_windows,
+        holes_fn=lambda text, count: find_symbol_holes(text, max_holes=count),
+        from_row=_from_row,
+        rehole=_rehole,
+        as_row=_as_row,
     )
 
 
 def _window_priority(hole: SymbolHole) -> int:
-    from jevops.outer import count_hits
+    from jevops.outer import drive_hit_sum
 
-    return count_hits(hole.original, PHRASE_ALTS, weight=10, add_len=True) + count_hits(
-        hole.original, OPERATORS, weight=3
-    )
+    return drive_hit_sum(hole.original, ((PHRASE_ALTS, 10, True), (OPERATORS, 3, False)))
 
 
 def prefer_one_holes(tactics: str, span: int, *, max_pos: int = 2) -> list[SymbolHole]:
     """One hole of ``span`` tokens, preferring phrase/operator-aligned windows."""
 
-    from jevops.mask import pick_scored
-    from jevops.outer import either, or_int
+    from jevops.mask import drive_prefer_holes
 
-    windows = all_span_windows(tactics, span, stride=1)
-    return either(
-        windows,
-        lambda: [
-            _rehole(_from_row(row), 0)
-            for row in pick_scored(
-                [_as_row(hole) for hole in windows],
-                n=or_int(max_pos, 1, floor=1),
-                score_fn=lambda row: _window_priority(_from_row(row)),
-                reindex=False,
-            )
-        ],
-        lambda: schedule_holes(tactics, n_masks=1, span=span),
+    return drive_prefer_holes(
+        tactics,
+        span,
+        max_pos=max_pos,
+        windows_fn=lambda text, width: all_span_windows(text, width, stride=1),
+        score_fn=lambda row: _window_priority(_from_row(row)),
+        schedule_fn=lambda text, width: schedule_holes(text, n_masks=1, span=width),
+        from_row=_from_row,
+        rehole=_rehole,
+        as_row=_as_row,
     )
 
 
@@ -258,17 +243,22 @@ def one_hole_closed_rows(tactics: str, *, max_pos: int = 2) -> list[dict[str, An
 def kernel_one_hole_rows(tactics: str) -> list[dict[str, Any]]:
     """One catalog kernel per candidate: a single aligned span of varying length."""
 
-    try:
-        import inits_updates_shorten as lra_ius
-    except Exception:
-        return []
     from jevops.mask import kernel_one_hole_rows as _fn
+    from jevops.outer import call_or_empty
 
-    return _fn(
-        tactics,
-        propose_fn=lra_ius.propose,
-        token_fn=lra_loop.token_count,
-        spans=ONE_HOLE_SPANS,
+    def _import() -> Any:
+        import inits_updates_shorten as lra_ius
+
+        return lra_ius
+
+    return call_or_empty(
+        _import,
+        lambda mod: _fn(
+            tactics,
+            propose_fn=mod.propose,
+            token_fn=lra_loop.token_count,
+            spans=ONE_HOLE_SPANS,
+        ),
     )
 
 
@@ -318,11 +308,12 @@ def script_idents(tactics: str) -> list[str]:
 def closed_fills(hole: SymbolHole, tactics: str) -> list[str]:
     """Lean-language fills. No model. Prefer strictly shorter replacements."""
 
-    from jevops.tactics import closed_fills as _fn
+    from jevops.tactics import drive_hole_fills
 
-    return _fn(
-        _as_row(hole),
+    return drive_hole_fills(
+        hole,
         tactics,
+        as_row=_as_row,
         phrase_alts=PHRASE_ALTS,
         operator_alts=OPERATOR_ALTS,
         token_re=lra_loop._TOKEN,
@@ -330,15 +321,15 @@ def closed_fills(hole: SymbolHole, tactics: str) -> list[str]:
 
 
 def mask_skeleton(tactics: str, holes: Sequence[SymbolHole]) -> str:
-    from jevops.mask import mask_skeleton as _fn
+    from jevops.mask import drive_mask_rows
 
-    return _fn(tactics, [_as_row(item) for item in holes])
+    return drive_mask_rows(tactics, holes, as_row=_as_row)
 
 
 def apply_fill(tactics: str, hole: SymbolHole, fill: str) -> str:
-    from jevops.mask import apply_fill as _fn
+    from jevops.mask import drive_apply_row
 
-    return _fn(tactics, _as_row(hole), fill)
+    return drive_apply_row(tactics, hole, fill, as_row=_as_row)
 
 
 def closed_candidates(
@@ -346,22 +337,21 @@ def closed_candidates(
 ) -> list[dict[str, Any]]:
     """One-hole closed-vocab edits that are strictly shorter."""
 
-    from jevops.mask import closed_with_replay
-    from jevops.outer import call_if, ignore_error
+    from jevops.mask import drive_closed_candidates
 
     def _replay() -> Any:
         import inits_updates_shorten as lra_ius
 
         return lra_ius.replay
 
-    replay_fn = call_if(include_replay, lambda: ignore_error(_replay))
-    return closed_with_replay(
+    return drive_closed_candidates(
         tactics,
-        find_symbol_holes(tactics),
+        include_replay=include_replay,
+        replay_loader=_replay,
+        holes_fn=find_symbol_holes,
         fills_fn=lambda item, text: closed_fills(_from_row(item), text),
         token_fn=lra_loop.token_count,
         as_row_fn=_as_row,
-        replay_fn=replay_fn,
         max_candidates=max_candidates,
         generator="closed_lean_vocab",
     )
@@ -394,11 +384,12 @@ def leanstral_prompt(
     holes: Sequence[SymbolHole],
     shots: Sequence[Mapping[str, Any]] = (),
 ) -> str:
-    from jevops.outer import call_if, first_not_none
+    from jevops.outer import drive_prompt_or_plain
 
-    return first_not_none(
-        call_if(shots, lambda: few_shot_prompt(record, skeleton, holes, shots)),
-        factory=lambda: _leanstral_plain_prompt(record, skeleton, holes),
+    return drive_prompt_or_plain(
+        shots,
+        shot_fn=lambda: few_shot_prompt(record, skeleton, holes, shots),
+        plain_fn=lambda: _leanstral_plain_prompt(record, skeleton, holes),
     )
 
 
@@ -407,21 +398,9 @@ def _leanstral_plain_prompt(
     skeleton: str,
     holes: Sequence[SymbolHole],
 ) -> str:
-    from jevops.outer import get_str, head_seq
+    from jevops.lean import plain_hole_prompt
 
-    docs = []
-    for hole in head_seq(holes, 8):
-        docs.append(f"{hole.hole_id} kind={hole.kind} ORIGINAL={hole.original!r}\n")
-    return (
-        "Lean 4 tactic hole-fill. Each <<<SYM_i kind=...>>> is one operator or symbol. "
-        "Fill with a SHORTER Lean operator/symbol from the language (constructor, simp_all, $, "
-        "‹_›, all_goals, intro, .update_some, a hyp already in the proof). "
-        "Keep induction and every · / case arm. No sorry, no theorem, no open.\n\n"
-        f"Problem: {get_str(record, 'name')}\n"
-        f"SKELETON:\n{skeleton}\n\n"
-        f"HOLES:\n{''.join(docs)}\n"
-        "Reply as:\n<<<SYM_0 kind=...>>>\n<fill>\n<<<SYM_1 kind=...>>>\n<fill>\n"
-    )
+    return plain_hole_prompt(record, skeleton, holes)
 
 
 def leanstral_candidates(
@@ -435,48 +414,27 @@ def leanstral_candidates(
     n_shots: int = 0,
 ) -> list[dict[str, Any]]:
     import track1_mistral_leanstral as lra_mistral
-    from jevops.outer import call_if, cap_or_fill, generate_text_and_usage, get_str, head_chars, head_seq
-    from jevops.search import holes_or_find
+    from jevops.mask import drive_leanstral_fills
 
-    lra_mistral.load_keyfiles()
-    holes = holes_or_find(
+    return drive_leanstral_fills(
+        record,
+        tactics,
         holes,
-        lambda: find_symbol_holes(tactics),
-        kinds=("operator", "phrase"),
-        n=8,
-        head_fn=head_seq,
+        ledger=ledger,
+        shots=shots,
+        schedule_id=schedule_id,
+        n_shots=n_shots,
+        load_keys_fn=lra_mistral.load_keyfiles,
+        find_fn=find_symbol_holes,
+        catalog_fn=catalog_shots,
+        skeleton_fn=mask_skeleton,
+        prompt_fn=leanstral_prompt,
+        chat_fn=lra_mistral.chat_completions,
+        parse_fn=parse_leanstral_fills,
+        token_fn=lra_loop.token_count,
+        extract_fn=lra_loop.extract_generated_tactics,
+        default_model=lra_mistral.REQUESTED_MODEL,
     )
-    def _fill() -> list[dict[str, Any]]:
-        use_shots = cap_or_fill(shots, n_shots, lambda: catalog_shots(tactics, n_shots=n_shots))
-        skeleton = mask_skeleton(tactics, holes)
-        prompt = leanstral_prompt(record, skeleton, holes, use_shots)
-        raw = lra_mistral.chat_completions(prompt, max_tokens=600, temperature=0.3, n=1)
-        text, inn, out = generate_text_and_usage(raw, fallback_in=200)
-        call_if(
-            ledger is not None,
-            lambda: ledger.record(
-                "mistral",
-                input_tokens=inn,
-                output_tokens=out,
-                model=get_str(raw, "model", default=lra_mistral.REQUESTED_MODEL),
-            ),
-        )
-        fills = parse_leanstral_fills(text, holes)
-        from jevops.mask import pack_leanstral_fill_rows
-
-        return pack_leanstral_fill_rows(
-            tactics=tactics,
-            holes=holes,
-            text=text,
-            fills=fills,
-            token_fn=lra_loop.token_count,
-            extract_fn=lra_loop.extract_generated_tactics,
-            schedule_id=schedule_id,
-            n_shots=len(use_shots),
-            head_fn=head_chars,
-        )
-
-    return call_if(holes, _fill, default=[])
 
 
 def typesafe_rank(
@@ -485,70 +443,21 @@ def typesafe_rank(
     *,
     ledger: Optional[Any] = None,
 ) -> dict[str, Any]:
-    from jevops.jev import skipped
-    from jevops.outer import first_call, head_chars, pin_calls
+    from jevops.jev import drive_fill_rank
 
-    from jevops.outer import call_if, first_not_none
-
-    early = first_call((not drafts, lambda: skipped("no_drafts", arena_score=None)))
-
-    def _rank() -> dict[str, Any]:
-        from jevops.jev import typesafe_session
-
-        loaded, no_key = typesafe_session(
-            setup=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
-            fallback=False,
-            arena_score=None,
-        )
-        Choice = None if loaded is None else loaded["Choice"]
-        Noul = None if loaded is None else loaded["Noul"]
-        Score = None if loaded is None else loaded["Score"]
-        TypeSafeClient = None if loaded is None else loaded["TypeSafeClient"]
-
-        def _ask() -> dict[str, Any]:
-            from jevops.jev import fill_rank_criteria, fill_rank_state
-            from jevops.outer import any_pred, first_truthy, or_list, set_if
-
-            criteria = fill_rank_criteria(drafts, head_fn=head_chars)
-            state = fill_rank_state(
-                record,
-                drafts,
-                head_fn=head_chars,
-                goal=RANK_FILL_GOAL,
-            )
-            questions: dict[str, Any] = {
-                "best_fill": Choice(
-                    instructions=RANK_FILL_BEST,
-                    criteria=criteria,
-                ),
-                "cfg_mask": Score(
-                    instructions=RANK_FILL_CFG,
-                    criteria=or_list(CFG_MASK_CRITERIA, []),
-                ),
-            }
-            set_if(
-                questions,
-                any_pred(lambda item: first_truthy(item.get("llm") == "on", item.get("few_shot"), default=False), drafts),
-                "prefer_few_shot",
-                Noul(instructions=RANK_FILL_FEW_SHOT),
-            )
-            from jevops.jev import charge_packed, invoke_system_one, invoke_then_project, pack_fill_rank
-
-            def _project(result: Any, wall_ms: float) -> dict[str, Any]:
-                return charge_packed(
-                    pack_fill_rank(result, wall_ms, schedule_fn=cfg_schedule_for_score),
-                    ledger,
-                    model=lra_t1.JEV_MODEL_ID,
-                )
-
-            return invoke_then_project(
-                invoke_fn=lambda: invoke_system_one(TypeSafeClient(timeout=45.0), state, questions),
-                project_fn=_project,
-            )
-
-        return first_not_none(no_key, factory=_ask)
-
-    return first_not_none(early, factory=_rank)
+    return drive_fill_rank(
+        record,
+        drafts,
+        ledger=ledger,
+        setup=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
+        goal=RANK_FILL_GOAL,
+        best_instructions=RANK_FILL_BEST,
+        cfg_instructions=RANK_FILL_CFG,
+        few_shot_instructions=RANK_FILL_FEW_SHOT,
+        cfg_criteria=CFG_MASK_CRITERIA,
+        schedule_fn=cfg_schedule_for_score,
+        model_id=lra_t1.JEV_MODEL_ID,
+    )
 
 
 def typesafe_cfg_score(
@@ -560,83 +469,41 @@ def typesafe_cfg_score(
 ) -> dict[str, Any]:
     """Ask TypeSafe Score/Choice how many masks and how long they should be."""
 
-    from jevops.outer import either
+    from jevops.jev import drive_cfg_score
 
-    table = either(one_hole, lambda: ONE_HOLE_SCHEDULES, lambda: CFG_SCHEDULES)
-    rubric = either(one_hole, lambda: ONE_HOLE_CRITERIA, lambda: CFG_MASK_CRITERIA)
-    from jevops.outer import pin_calls
-
-    from jevops.jev import typesafe_session
-    from jevops.outer import overlay_map
-
-    loaded, skip = typesafe_session(
-        setup=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
-        fallback=False,
-        cfg_schedule=overlay_map(table[0]),
+    return drive_cfg_score(
+        record,
+        tactics,
+        ledger=ledger,
         one_hole=one_hole,
+        setup=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
+        one_schedules=ONE_HOLE_SCHEDULES,
+        multi_schedules=CFG_SCHEDULES,
+        one_criteria=ONE_HOLE_CRITERIA,
+        multi_criteria=CFG_MASK_CRITERIA,
+        spans=ONE_HOLE_SPANS,
+        windows_fn=all_span_windows,
+        token_fn=lra_loop.token_count,
+        one_goal=CFG_ONE_HOLE_GOAL,
+        multi_goal=CFG_MULTI_GOAL,
+        one_score=CFG_ONE_HOLE_SCORE,
+        multi_score=CFG_MULTI_SCORE,
+        one_choice=CFG_ONE_HOLE_CHOICE,
+        multi_choice=CFG_MULTI_CHOICE,
+        schedule_fn=cfg_schedule_for_score,
+        model_id=lra_t1.JEV_MODEL_ID,
     )
-    if skip is not None:
-        return skip
-    Choice = loaded["Choice"]
-    Score = loaded["Score"]
-    TypeSafeClient = loaded["TypeSafeClient"]
-
-    from jevops.outer import first_not_none, head_chars, or_list
-
-    def _ask() -> dict[str, Any]:
-        from jevops.jev import cfg_score_criteria, cfg_score_state
-        from jevops.search import eligible_span_counts
-
-        eligible = eligible_span_counts(tactics, ONE_HOLE_SPANS, all_span_windows)
-        criteria = cfg_score_criteria(table, eligible)
-        state = cfg_score_state(
-            record,
-            tactics,
-            token_fn=lra_loop.token_count,
-            eligible=eligible,
-            one_hole=one_hole,
-            head_fn=head_chars,
-            goal=either(one_hole, lambda: CFG_ONE_HOLE_GOAL, lambda: CFG_MULTI_GOAL),
-        )
-        from jevops.jev import charge_packed, invoke_system_one, invoke_then_project, pack_cfg_score
-
-        questions = {
-            "cfg_mask": Score(
-                instructions=either(one_hole, lambda: CFG_ONE_HOLE_SCORE, lambda: CFG_MULTI_SCORE),
-                criteria=or_list(rubric, []),
-            ),
-            "best_schedule": Choice(
-                instructions=either(one_hole, lambda: CFG_ONE_HOLE_CHOICE, lambda: CFG_MULTI_CHOICE),
-                criteria=criteria,
-            ),
-        }
-        return invoke_then_project(
-            invoke_fn=lambda: invoke_system_one(TypeSafeClient(timeout=45.0), state, questions),
-            project_fn=lambda result, wall_ms: charge_packed(
-                pack_cfg_score(
-                    result,
-                    wall_ms,
-                    table=table,
-                    schedule_fn=cfg_schedule_for_score,
-                    one_hole=one_hole,
-                    eligible=eligible,
-                ),
-                ledger,
-                model=lra_t1.JEV_MODEL_ID,
-            ),
-        )
-
-    return _ask()
 
 
 def pca_mca_ops(tactics: str) -> list[tuple[str, str, tuple[str, ...]]]:
-    from jevops.tactics import collect_symbol_ops
+    from jevops.tactics import drive_symbol_ops
 
-    return collect_symbol_ops(
-        closed_candidates(tactics, max_candidates=8, include_replay=True),
-        kernel_one_hole_rows(tactics),
+    return drive_symbol_ops(
+        tactics,
+        closed_fn=lambda text: closed_candidates(text, max_candidates=8, include_replay=True),
+        rows_fn=kernel_one_hole_rows,
         family="symbol_diffuse",
-        kernel_cap=8,
+        cap=8,
     )
 
 

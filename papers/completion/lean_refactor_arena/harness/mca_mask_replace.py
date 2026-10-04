@@ -111,40 +111,31 @@ def one_hole_prompt(record: Mapping[str, Any], tactics: str, hole: Hole) -> str:
 
 
 def few_shot_example(record: Mapping[str, Any]) -> dict[str, Any]:
-    tactics = lra_fan.tactic_block(record)
-    holes = find_holes(tactics)
-    fills = {hole.hole_id: template_fill(hole) for hole in holes}
-    filled = apply_fills(tactics, holes, fills)
-    from jevops.outer import get_str
-    from jevops.pick import shot_stats
+    from jevops.pick import drive_shot_example
 
-    return shot_stats(
-        get_str(record, "name"),
-        tactics,
-        filled,
+    return drive_shot_example(
+        record,
+        tactic_fn=lra_fan.tactic_block,
+        holes_fn=find_holes,
+        fill_one_fn=template_fill,
+        apply_fn=apply_fills,
+        skeleton_fn=mask_skeleton,
         token_fn=lra_loop.token_count,
-        extra={
-            "n_holes": len(holes),
-            "families": [hole.family for hole in holes],
-            "skeleton": mask_skeleton(tactics, holes),
-            "reference": tactics,
-            "filled": filled,
-        },
     )
 
 
 def few_shot_prompt(target: Mapping[str, Any], shots: Sequence[Mapping[str, Any]]) -> str:
+    from jevops.tactics import drive_few_shot_block
     from jevops.tactics import few_shot_prompt as _fn
 
-    tactics = lra_fan.tactic_block(target)
-    holes = find_holes(tactics)
-    skeleton = mask_skeleton(tactics, holes)
-    return _fn(
+    return drive_few_shot_block(
         target,
         shots,
-        tactics=tactics,
-        skeleton=skeleton,
-        token_count=lra_loop.token_count(tactics),
+        tactic_fn=lra_fan.tactic_block,
+        holes_fn=find_holes,
+        skeleton_fn=mask_skeleton,
+        token_fn=lra_loop.token_count,
+        prompt_fn=_fn,
     )
 
 
@@ -161,24 +152,18 @@ def _kind_needs_hammer(kind: str) -> bool:
 
 
 def _identity_dict(identity: Any) -> Optional[dict[str, Any]]:
-    from jevops.outer import either, object_fields, overlay_map, set_if
+    from jevops.outer import drive_identity_public
 
-    def _fields() -> Optional[dict[str, Any]]:
-        row = object_fields(
-            identity,
-            (
-                "requested_provider",
-                "requested_model",
-                "resolved_provider",
-                "resolved_model",
-                "fallback_used",
-            ),
-            extra={"arena_score": None},
-        )
-        set_if(row, row and "fallback_used" in row, "fallback_used", bool(overlay_map(row).get("fallback_used")))
-        return row
-
-    return either(isinstance(identity, Mapping), lambda: overlay_map(identity), _fields)
+    return drive_identity_public(
+        identity,
+        (
+            "requested_provider",
+            "requested_model",
+            "resolved_provider",
+            "resolved_model",
+            "fallback_used",
+        ),
+    )
 
 
 def _flatten_tactics(reference: str, text: str) -> str:
@@ -194,19 +179,9 @@ def _flatten_tactics(reference: str, text: str) -> str:
 
 
 def _compile_row(item: Mapping[str, Any], compiled: Mapping[str, Any]) -> dict[str, Any]:
-    from jevops.search import compile_head_row
+    from jevops.tactics import drive_compile_head
 
-    from jevops.outer import get_list, get_str
-
-    return compile_head_row(
-        get_str(item, "kind"),
-        get_str(item, "tactics"),
-        compiled,
-        extra={
-            "generator": item.get("generator"),
-            "n_holes": len(get_list(item, "holes")),
-        },
-    )
+    return drive_compile_head(item, compiled)
 
 
 def _hammer_passes(
@@ -309,27 +284,30 @@ def assemble_candidates(
 ) -> list[dict[str, Any]]:
     del record
     import inits_updates_shorten as lra_ius
-    from jevops.outer import optional_fn
-    from jevops.tactics import assemble_mca_candidates as _fn
+    from jevops.tactics import drive_assemble_candidates
 
-    return _fn(
+    return drive_assemble_candidates(
         tactics,
         holes,
         leanstral_text=leanstral_text,
         replay_fn=lra_ius.replay,
-        parse_fills_fn=optional_fn(leanstral_text, parse_leanstral_fills),
+        parse_fn=parse_leanstral_fills,
         indent_fn=lra_kb.match_reference_indent,
         flatten_fn=lra_kb.flatten_overindent,
     )
 
 
 def prioritize_holes(holes: Sequence[Hole], *, cap: int = 6) -> list[Hole]:
-    from jevops.mask import rank_cap
+    from jevops.mask import drive_family_rank
 
-    rank = {"strength_reduction": 0, "algebraic_simplification": 1, "dead_code": 2, "loop_invariant": 3}
-    return rank_cap(
+    return drive_family_rank(
         holes,
-        key=lambda hole: (rank.get(hole.family, 9), -len(hole.original), hole.hole_id),
+        rank={
+            "strength_reduction": 0,
+            "algebraic_simplification": 1,
+            "dead_code": 2,
+            "loop_invariant": 3,
+        },
         cap=cap,
     )
 
@@ -345,19 +323,18 @@ def ablate_holes(
 ) -> list[dict[str, Any]]:
     """Drop one MCA hole at a time, then combine lake-valid drops."""
 
-    from jevops.search import ablate_then_combine
+    from jevops.search import drive_ablate
 
-    def _compile(body: str) -> Mapping[str, Any]:
-        return lra_kb.compile_tactics(
-            record, body, state_root=state_root, timeout=timeout, restore=restore
-        )
-
-    return ablate_then_combine(
+    return drive_ablate(
+        record,
         tactics,
         holes,
-        apply_fn=lambda text, fills: apply_fills(text, holes, fills),
+        compile_fn=lra_kb.compile_tactics,
+        apply_fn=apply_fills,
         fill_fn=template_fill,
-        compile_fn=_compile,
+        state_root=state_root,
+        timeout=timeout,
+        restore=restore,
     )
 
 
@@ -369,72 +346,26 @@ def typesafe_rank_fanout(
 ) -> dict[str, Any]:
     """One Jev Choice over tactician/PCA drafts. Jev does not write Lean."""
 
-    from jevops.jev import skipped
-    from jevops.outer import exc_head, first_call, head_chars, head_seq, pin_calls
+    from jevops.catalogs import RANK_FANOUT_BEST, RANK_FANOUT_GOAL
+    from jevops.jev import drive_rank_fanout
 
-    from jevops.outer import call_if, first_not_none
-
-    early = first_call((not drafts, lambda: skipped("no_drafts", arena_score=None)))
-
-    def _rank() -> dict[str, Any]:
-        from jevops.jev import typesafe_session
-
-        loaded, skip = typesafe_session(
-            setup=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
-            fallback=False,
-            arena_score=None,
-        )
-        if skip is not None:
-            return skip
-        Choice = loaded["Choice"]
-        TypeSafeClient = loaded["TypeSafeClient"]
-
-        def _ask() -> dict[str, Any]:
-            from jevops.jev import draft_rank_state
-
-            from jevops.catalogs import RANK_FANOUT_BEST, RANK_FANOUT_GOAL
-
-            packed = draft_rank_state(
-                record,
-                drafts,
-                goal=RANK_FANOUT_GOAL,
-            )
-            criteria = packed["criteria"]
-            state = packed["state"]
-            questions = {
-                "best_first_draft": Choice(
-                    instructions=RANK_FANOUT_BEST,
-                    criteria=criteria,
-                )
-            }
-            from jevops.jev import charge_packed, invoke_or_skip, invoke_system_one, pack_best_draft
-            from jevops.outer import dumps_compact
-
-            def _project(result: Any, wall_ms: float) -> dict[str, Any]:
-                return charge_packed(
-                    pack_best_draft(result, wall_ms=wall_ms),
-                    ledger,
-                    model=lra_t1.JEV_MODEL_ID,
-                    fallback_in=lra_t1.estimate_tokens(dumps_compact(state)),
-                    redact_fn=lra_pca.redact,
-                )
-
-            return invoke_or_skip(
-                invoke_fn=lambda: invoke_system_one(TypeSafeClient(timeout=60.0), state, questions),
-                project_fn=_project,
-                skip_fn=lambda exc: skipped(exc_head(exc, 400), arena_score=None),
-            )
-
-        return _ask()
-
-    return first_not_none(early, factory=_rank)
+    return drive_rank_fanout(
+        record,
+        drafts,
+        ledger=ledger,
+        setup=(lra_pca.load_keyfile, lra_pca.pin_typesafe_path),
+        goal=RANK_FANOUT_GOAL,
+        best_instructions=RANK_FANOUT_BEST,
+        model_id=lra_t1.JEV_MODEL_ID,
+        estimate_fn=lra_t1.estimate_tokens,
+        redact_fn=lra_pca.redact,
+    )
 
 
 def load_grok_tactics_file(path: Path) -> str:
-    from jevops.outer import read_text
+    from jevops.outer import drive_read_extract, read_text
 
-    text = read_text(path)
-    return lra_loop.extract_generated_tactics(text)
+    return drive_read_extract(path, read_fn=read_text, extract_fn=lra_loop.extract_generated_tactics)
 
 
 def run_problem(
@@ -452,387 +383,73 @@ def run_problem(
     grok_tactics_paths: Sequence[Path] = (),
     typesafe_fanout: bool = False,
 ) -> dict[str, Any]:
-    from jevops.outer import (
-        after_calls,
-        call_caught,
-        call_if,
-        caught_reason,
-        dict_call,
-        either,
-        first_truthy,
-        fit_drop,
-        get_list,
-        get_str,
-        head_chars,
-        if_none,
-        if_prefix,
-        load_and_clone,
-        mark_skipped,
-        optional_fn,
-        or_call,
-        or_none,
-        or_str,
-        str_or_none,
-        tagged_mapping,
-        take_keys,
-        text_or,
-    )
-    from jevops.repair import align_generated
-    from jevops.search import (
-        after_compile_row,
-        begin_masked,
-        collect_grok_fanout_extras,
-        collect_one_hole_fills,
-        collect_path_candidates,
-        dispatch_mca_generation,
-        flatten_shot,
-        pack_failed_candidate,
-        pack_generated_candidate,
-        pin_grok_fanout,
-        run_mca_problem,
-    )
+    del grok_trace
+    from jevops.search import drive_mca_problem
 
-    record, records, digest, _clone, _dest, restore = load_and_clone(
-        lra_splice.load_warmup_records,
+    return drive_mca_problem(
         name,
-        state_root,
+        state_root=state_root,
+        timeout=timeout,
+        call_leanstral=call_leanstral,
+        ablate=ablate,
+        one_hole=one_hole,
+        few_shot=few_shot,
+        grok_few_shot=grok_few_shot,
+        grok_generate=grok_generate,
+        grok_tactics_paths=grok_tactics_paths,
+        typesafe_fanout=typesafe_fanout,
+        load_fn=lra_splice.load_warmup_records,
         clone_fn=lra_kb.lra_cw.clone_dir,
         relpath_fn=lra_kb.lra_cw.source_relpath,
-        error_cls=RuntimeError,
-        miss=f"unknown warm-up problem: {name}",
-    )
-    masked = begin_masked(
-        record,
         tactic_fn=lra_fan.tactic_block,
         find_fn=find_holes,
         mask_fn=mask_skeleton,
-        fill_pred=lambda hole: hole.family in {"strength_reduction", "algebraic_simplification"},
-    )
-    tactics, holes, skeleton, fill_holes = take_keys(
-        masked, "tactics", "holes", "skeleton", "fill_holes"
-    )
-
-    def _grok_paths() -> dict[str, Any]:
-        ledger = lra_t1.ProblemLedger(name=f"{name}#grok-file-fanout")
-        rows = collect_path_candidates(
-            grok_tactics_paths,
-            load_fn=load_grok_tactics_file,
-            flatten_fn=lambda text: _flatten_tactics(tactics, text),
-            pack_fn=pack_generated_candidate,
-            generator="grok-file",
-            extra={"chat_ignored": True},
-            head_fn=head_chars,
-        )
-        return {"ledger": ledger, "grok_file_rows": rows}
-
-    def _grok_few_shot() -> dict[str, Any]:
-        shots = shot_examples(records, skip_name=name)
-        ledger = lra_t1.ProblemLedger(name=f"{name}#grok-few-shot")
-        if grok_generate is None and not lra_t1.grok_callable():
-            mark_skipped(ledger, "no_key")
-            return {"ledger": ledger, "grok_skip_reason": "no_key"}
-        workspace = lra_t1.prepare_grok_workspace()
-        prompt = lra_t1.grok_file_prompt(few_shot_prompt(record, shots))
-        ok, grok_result, exc = call_caught(
-            lambda: lra_t1.generate_grok_file(
-                prompt,
-                ledger,
-                workspace=workspace,
-                max_new_tokens=GROK_MAX_NEW_TOKENS,
-                timeout=GROK_TIMEOUT_SECONDS,
-                generate=grok_generate,
-                fixture=grok_generate is not None,
-                reset_stub=True,
-            ),
-            lra_t1.Track1LedgerError,
-        )
-        skip_reason, grok_result = caught_reason(ok, grok_result, exc)
-        out: dict[str, Any] = {
-            "ledger": ledger,
-            "grok_workspace": workspace,
-            "grok_skip_reason": skip_reason,
-            "grok_file_meta": [],
-        }
-        if grok_result is not None:
-            _tactics, row = flatten_shot(
-                kind="grok_few_shot",
-                generator="grok-4.6",
-                text=grok_result.tactics,
-                shots=shots,
-                flatten_fn=lambda text: _flatten_tactics(tactics, text),
-                pack_fn=pack_generated_candidate,
-                extra={
-                    "source": "tactics.lean",
-                    "tactics_path": grok_result.tactics_path,
-                    "chat_ignored": True,
-                },
-            )
-            out["identity"] = grok_result.identity
-            out["grok_few_shot_row"] = row
-            out["grok_file_meta"] = [tagged_mapping("draft", grok_result)]
-        return out
-
-    def _few_shot() -> dict[str, Any]:
-        shots = shot_examples(records, skip_name=name)
-        ledger = lra_t1.ProblemLedger(name=f"{name}#few-shot")
-        prompt = few_shot_prompt(record, shots)
-        text, identity, _line = after_calls(
-            (lra_mistral.load_keyfiles, lra_mistral.pin_paths),
-            lra_mistral.generate_mistral,
-            prompt,
-            ledger,
-            max_new_tokens=900,
-            timeout=180.0,
-        )
-        _filled, row = flatten_shot(
-            kind="leanstral_few_shot",
-            generator="labs-leanstral-1-5",
-            text=text,
-            shots=shots,
-            flatten_fn=lambda body: _flatten_tactics(tactics, body),
-            pack_fn=pack_generated_candidate,
-        )
-        return {"ledger": ledger, "identity": identity, "few_shot_row": row}
-
-    def _one_hole() -> dict[str, Any]:
-        targets = prioritize_holes(first_truthy(fill_holes, holes), cap=2)
-        if not targets:
-            return {}
-        ledger = lra_t1.ProblemLedger(name=f"{name}#mca-one-hole")
-        after_calls((lra_mistral.load_keyfiles, lra_mistral.pin_paths), lambda: None)
-        fills, identity = collect_one_hole_fills(
-            targets,
-            holes,
-            tactics,
-            generate_fn=lambda hole: lra_mistral.generate_mistral(
-                one_hole_prompt(record, tactics, hole),
-                ledger,
-                max_new_tokens=256,
-                timeout=120.0,
-            ),
-            parse_fn=parse_leanstral_fills,
-            fallback_fn=lra_loop.extract_generated_tactics,
-            apply_fn=apply_fills,
-            align_fn=lambda filled: align_generated(
-                tactics,
-                filled,
-                extract_fn=lambda text: text,
-                match_fn=lra_kb.match_reference_indent,
-                flatten_fn=lra_kb.flatten_overindent,
-            ),
-            pack_fn=pack_generated_candidate,
-            asdict_fn=asdict,
-            skip_exc=(lra_mistral.Track1MistralError,),
-            generator="labs-leanstral-1-5",
-            head_fn=head_chars,
-        )
-        return {"ledger": ledger, "identity": identity, "one_hole_fills": fills}
-
-    def _mask() -> dict[str, Any]:
-        ledger = lra_t1.ProblemLedger(name=f"{name}#mca-mask")
-        prompt = leanstral_prompt(record, mask_skeleton(tactics, fill_holes), fill_holes)
-        text, identity, _line = after_calls(
-            (lra_mistral.load_keyfiles, lra_mistral.pin_paths),
-            lra_mistral.generate_mistral,
-            prompt,
-            ledger,
-            max_new_tokens=700,
-            timeout=180.0,
-        )
-        return {"ledger": ledger, "identity": identity, "leanstral_text": text}
-
-    generated = dispatch_mca_generation(
-        grok_paths=grok_tactics_paths,
-        grok_few_shot=grok_few_shot,
-        few_shot=few_shot,
-        call_leanstral=call_leanstral,
-        one_hole=one_hole,
-        fill_holes=fill_holes,
-        holes=holes,
-        grok_paths_fn=_grok_paths,
-        grok_few_shot_fn=_grok_few_shot,
-        few_shot_fn=_few_shot,
-        one_hole_fn=_one_hole,
-        mask_fn=_mask,
-    )
-    grok_few_shot = bool(generated.get("grok_few_shot"))
-
-    def _compile(body: str) -> dict[str, Any]:
-        return dict_call(
-            lra_kb.compile_tactics,
-            record,
-            body,
-            state_root=state_root,
-            timeout=timeout,
-            restore=restore,
-        )
-
-    def _hammer(kind: str, item: Mapping[str, Any], compiled: Mapping[str, Any]) -> tuple[list[dict[str, Any]], str, list[Any], bool]:
-        hammer_gen = if_prefix(kind, "grok", "grok+simp_all/omega", "leanstral+simp_all/omega")
-        return _hammer_passes(
-            kind=kind,
-            tactics_now=get_str(item, "tactics"),
-            reference=tactics,
-            errors=get_list(compiled, "errors"),
-            record=record,
-            state_root=state_root,
-            timeout=timeout,
-            restore=restore,
-            generator=hammer_gen,
-        )
-
-    def _repair(
-        rows: list[dict[str, Any]], grok_ok: bool, grok_tactics: str, grok_errors: list[Any]
-    ) -> tuple[list[dict[str, Any]], bool]:
-        grok_few_shot_row = generated.get("grok_few_shot_row")
-        ledger = generated.get("ledger")
-        grok_tactics_current = first_truthy(grok_tactics, default="")
-        grok_errors_current = get_list(grok_errors)
-        if not (grok_few_shot and grok_few_shot_row is not None and not grok_ok and ledger is not None):
-            return rows, grok_ok
-        prompt = lra_t1.grok_file_prompt(
-            lra_kb.repair_prompt(
-                record,
-                failed=or_call(grok_tactics_current, lambda: grok_few_shot_row["tactics"]),
-                errors=grok_errors_current,
-                reference=tactics,
-            )
-        )
-        ok, grok_result, exc = call_caught(
-            lambda: lra_t1.generate_grok_file(
-                prompt,
-                ledger,
-                workspace=if_none(generated.get("grok_workspace"), factory=lra_t1.prepare_grok_workspace),
-                max_new_tokens=GROK_MAX_NEW_TOKENS,
-                timeout=GROK_TIMEOUT_SECONDS,
-                generate=grok_generate,
-                fixture=grok_generate is not None,
-                reset_stub=False,
-            ),
-            lra_t1.Track1LedgerError,
-        )
-        if not ok:
-            generated["grok_skip_reason"] = or_str(generated.get("grok_skip_reason"), exc)
-            rows.append(
-                pack_failed_candidate(
-                    kind="grok_few_shot_repair",
-                    generator="grok-4.6",
-                    reason=text_or(exc),
-                    extra={"source": "tactics.lean", "chat_ignored": True},
-                )
-            )
-            return rows, grok_ok
-        generated["identity"] = grok_result.identity
-        generated.setdefault("grok_file_meta", []).append(tagged_mapping("repair", grok_result))
-        repaired_tactics = _flatten_tactics(tactics, grok_result.tactics)
-        compiled_r = lra_kb.compile_tactics(
-            record,
-            repaired_tactics,
-            state_root=state_root,
-            timeout=timeout,
-            restore=restore,
-        )
-        rows, hammer_ok = after_compile_row(
-            rows,
-            {
-                "kind": "grok_few_shot_repair",
-                "generator": "grok-4.6",
-                "tactics": repaired_tactics,
-                "holes": [],
-            },
-            compiled_r,
-            row_fn=_compile_row,
-            hammer_fn=lambda: _hammer_passes(
-                kind="grok_few_shot_repair",
-                tactics_now=repaired_tactics,
-                reference=tactics,
-                errors=get_list(compiled_r, "errors"),
-                record=record,
-                state_root=state_root,
-                timeout=timeout,
-                restore=restore,
-                generator="grok+simp_all/omega",
-            ),
-        )
-        if compiled_r.get("theorem_ok"):
-            return rows, True
-        return rows, bool(first_truthy(grok_ok, hammer_ok, default=False))
-
-    def _fanout(candidates: list[dict[str, Any]], ledger: Any) -> dict[str, Any]:
-        from jevops.outer import first_where, kind_startswith
-
-        seed_row = first_where(candidates, kind_startswith("grok"))
-        if seed_row is None:
-            seed_row = {"tactics": tactics}
-        _raw, _digest, warmup_records = lra_splice.load_warmup_records()
-        extras = collect_grok_fanout_extras(
-            seed_row["tactics"],
-            tactics,
-            tactician_fn=grok_tactician_variants,
-            feature_fn=lra_pca.count_tactics,
-            family_fn=lra_pca.amenable_families,
-            draft_fn=lra_pca.guided_drafts,
-            model=fit_drop(warmup_records, lra_pca.feature_row, lra_pca.fit_pca_mca),
-        )
-        ranked = typesafe_rank_fanout(record, extras, ledger=ledger)
-        pin_grok_fanout(
-            candidates,
-            extras,
-            get_str(ranked, "best_first_draft"),
-            cap=MAX_GROK_FANOUT,
-            key_fn=lambda item: item["kind"],
-        )
-        return ranked
-
-    return run_mca_problem(
-        generated=generated,
-        name=name,
-        digest=digest,
-        tactics=tactics,
-        holes=holes,
-        skeleton=skeleton,
-        assemble_fn=lambda leanstral_text, holes: assemble_candidates(
-            record, tactics, holes, leanstral_text=leanstral_text
-        ),
-        compile_fn=_compile,
-        row_fn=_compile_row,
-        hammer_fn=_hammer,
+        ledger_cls=lra_t1.ProblemLedger,
+        load_grok_fn=load_grok_tactics_file,
+        flatten_fn=_flatten_tactics,
+        shot_fn=shot_examples,
+        grok_callable_fn=lra_t1.grok_callable,
+        workspace_fn=lra_t1.prepare_grok_workspace,
+        grok_prompt_fn=lra_t1.grok_file_prompt,
+        grok_file_fn=lra_t1.generate_grok_file,
+        grok_error=lra_t1.Track1LedgerError,
+        grok_max_new=GROK_MAX_NEW_TOKENS,
+        grok_timeout=GROK_TIMEOUT_SECONDS,
+        few_prompt_fn=few_shot_prompt,
+        key_fns=(lra_mistral.load_keyfiles, lra_mistral.pin_paths),
+        generate_mistral_fn=lra_mistral.generate_mistral,
+        prioritize_fn=prioritize_holes,
+        one_prompt_fn=one_hole_prompt,
+        parse_fn=parse_leanstral_fills,
+        extract_fn=lra_loop.extract_generated_tactics,
+        apply_fn=apply_fills,
+        match_fn=lra_kb.match_reference_indent,
+        flatten_over_fn=lra_kb.flatten_overindent,
+        asdict_fn=asdict,
+        mistral_error=lra_mistral.Track1MistralError,
+        lean_prompt_fn=leanstral_prompt,
+        compile_body_fn=lra_kb.compile_tactics,
+        compile_row_fn=_compile_row,
+        hammer_passes_fn=_hammer_passes,
         needs_hammer_fn=_kind_needs_hammer,
-        repair_fn=_repair,
-        ablate_fn=optional_fn(
-            ablate and holes,
-            lambda: ablate_holes(
-                record,
-                tactics,
-                prioritize_holes(holes, cap=6),
-                state_root=state_root,
-                timeout=timeout,
-                restore=restore,
-            ),
-        ),
-        fanout_fn=_fanout,
-        extra_fn=lambda grok_ok, grok_tactics, grok_errors, generated, typesafe_meta: {
-            "leanstral_identity": either(generated.get("grok_few_shot"), lambda: None, lambda: generated.get("identity")),
-            "grok_identity": call_if(generated.get("grok_few_shot"), lambda: _identity_dict(generated.get("identity"))),
-            "grok_few_shot": bool(generated.get("grok_few_shot")),
-            "grok_ok": grok_ok,
-            "grok_skip_reason": or_none(generated.get("grok_skip_reason")),
-            "grok_used_file": bool(generated.get("grok_few_shot")),
-            "grok_chat_ignored": bool(generated.get("grok_few_shot")),
-            "grok_workspace": str_or_none(generated.get("grok_workspace")),
-            "grok_file_calls": list(generated.get("grok_file_meta") or ()),
-            "typesafe_fanout": typesafe_meta,
-            "ledger": call_if(generated.get("ledger"), lambda: generated["ledger"].as_dict()),
-        },
+        repair_prompt_fn=lra_kb.repair_prompt,
+        assemble_fn=assemble_candidates,
+        ablate_holes_fn=ablate_holes,
+        tactician_fn=grok_tactician_variants,
+        feature_fn=lra_pca.count_tactics,
+        family_fn=lra_pca.amenable_families,
+        draft_fn=lra_pca.guided_drafts,
+        row_feature_fn=lra_pca.feature_row,
+        fit_fn=lra_pca.fit_pca_mca,
+        rank_fn=typesafe_rank_fanout,
+        identity_fn=_identity_dict,
         redact_fn=lra_pca.redact,
         token_fn=lra_loop.token_count,
-        head_fn=head_chars,
-        asdict_fn=asdict,
+        fanout_cap=MAX_GROK_FANOUT,
         hardware_class=HARDWARE_CLASS,
         grok_hardware_class=GROK_HARDWARE_CLASS,
-        grok_paths=grok_tactics_paths,
-        typesafe_fanout=typesafe_fanout,
     )
+
 
 
 def self_check() -> dict[str, Any]:

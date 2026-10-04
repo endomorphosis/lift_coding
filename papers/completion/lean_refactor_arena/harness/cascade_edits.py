@@ -89,16 +89,15 @@ def geo_mean(probs: list[float]) -> float:
 
 
 def make_client(module):
-    from jevops.outer import client_kwargs
+    from jevops.outer import drive_module_client
 
-    return module.TypeSafeClient(**client_kwargs(module))
+    return drive_module_client(module)
 
 
 def _record_jev(ledger: lra_t1.ProblemLedger, result: Any, fallback: int = 200) -> None:
-    from jevops.outer import result_usage
+    from jevops.outer import drive_usage_record
 
-    inn, out = result_usage(result, fallback_in=fallback)
-    ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
+    drive_usage_record(ledger, result, kind="jev", model=lra_t1.JEV_MODEL_ID, fallback=fallback)
 
 
 def is_unavailable(exc: BaseException) -> bool:
@@ -114,20 +113,15 @@ def call_with_retry(fn, *, attempts: int = 4):
 
 
 def available_tactics(current: str, reference: str, rng: random.Random) -> dict[str, str]:
-    from jevops.outer import unique_kind_bodies
+    from jevops.outer import drive_unique_edits
 
-    return unique_kind_bodies(
-        lra_mcmc.propose_edits(current, reference, rng, limit=None),
-        keep={"keep": current},
-        skip_eq=current,
-    )
+    return drive_unique_edits(current, reference, rng, propose_fn=lra_mcmc.propose_edits)
 
 
 def load_failed_kinds(path: Path) -> set[str]:
-    from jevops.outer import failed_leaves_from_history
-    from jevops.outer import load_json_object
+    from jevops.outer import drive_failed_history, load_json_object
 
-    return failed_leaves_from_history(load_json_object(path))
+    return drive_failed_history(path, load_fn=load_json_object)
 
 
 def live_tree(available: Mapping[str, str]) -> dict[str, dict[str, str]]:
@@ -150,23 +144,17 @@ def classify_tree(
     below CONFIDENT, report the coarser parent (keep / do nothing).
     """
     from jevops.catalogs import CASCADE_FAMILY_INSTRUCTIONS
-    from jevops.jev import tree_choice_questions
+    from jevops.jev import drive_classify_tree
 
-    questions = tree_choice_questions(
+    return drive_classify_tree(
+        module,
+        state,
         tree,
-        Choice=module.Choice,
+        ledger=ledger,
+        make_client_fn=make_client,
+        retry_fn=call_with_retry,
+        record_fn=_record_jev,
         family_instructions=CASCADE_FAMILY_INSTRUCTIONS,
-    )
-    from jevops.jev import invoke_system_one
-
-    result = call_with_retry(lambda: invoke_system_one(make_client(module), state, questions)[0])
-    _record_jev(ledger, result)
-    from jevops.outer import overlay_map
-    from jevops.pick import classification_from_answers
-
-    return classification_from_answers(
-        tree,
-        overlay_map(getattr(result, "choices", None)),
         beam_k=BEAM_K,
         confident=CONFIDENT,
         epsilon=EPSILON,
@@ -174,16 +162,18 @@ def classify_tree(
 
 
 def verify_fail(module, state: Mapping[str, Any], *, ledger: lra_t1.ProblemLedger) -> dict[str, float]:
-    from jevops.jev import noul_questions
+    from jevops.jev import drive_verify_noul
 
-    questions = noul_questions(FAIL_NOULS, module.Noul)
-    from jevops.outer import attr_map, overlay_map
-
-    from jevops.jev import invoke_system_one
-
-    result = call_with_retry(lambda: invoke_system_one(make_client(module), state, questions)[0])
-    _record_jev(ledger, result)
-    return attr_map(overlay_map(getattr(result, "nouls", None)), FAIL_NOULS, "noul")
+    return drive_verify_noul(
+        module,
+        state,
+        ledger=ledger,
+        spec=FAIL_NOULS,
+        noul_ctor=module.Noul,
+        client_fn=make_client,
+        retry_fn=call_with_retry,
+        record_fn=_record_jev,
+    )
 
 
 def self_check() -> dict[str, Any]:

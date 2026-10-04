@@ -40,13 +40,14 @@ def installed_matching_pins(record: Mapping[str, Any], clone: Path) -> list[dict
     """Keep version_info rows whose elan tag is installed and commit matches the clone."""
 
     from jevops.lean import filter_installed_pin_maps
-    from jevops.outer import call_if, git_head
+    from jevops.outer import drive_installed_head
 
-    head = call_if((clone / ".git").exists(), lambda: git_head(clone), default="")
-    return filter_installed_pin_maps(
-        lra_cw.iter_version_pins(record.get("version_info")),
+    return drive_installed_head(
+        record,
+        clone,
+        pins_fn=lambda info: lra_cw.iter_version_pins(info),
         resolve_fn=lambda pin: lra_cw.resolve_pin(pin, require_installed=True),
-        head=head,
+        filter_fn=filter_installed_pin_maps,
     )
 
 
@@ -65,11 +66,13 @@ def splice_src(path: Path, original_src: str, replacement: str) -> None:
 
 
 def candidate_source(record: Mapping[str, Any], tactics: str) -> str:
-    split = lra_splice.split_statement_body(record)
-    return lra_splice.lake_candidate_source(
+    from jevops.lean import drive_split_candidate
+
+    return drive_split_candidate(
+        record,
+        tactics,
+        split_fn=lra_splice.split_statement_body,
         header="",
-        statement=split.statement,
-        tactic_block=tactics,
     )
 
 
@@ -81,16 +84,10 @@ def compile_tactics(
     timeout: float,
     restore: bytes,
 ) -> dict[str, Any]:
-    from jevops.lean import compile_closed, compile_keepbest, pack_compile_view, splice_span
-    from jevops.outer import elapsed_ms, head_seq, tail_chars
+    from jevops.lean import drive_keepbest_tactics, filter_installed_pin_maps, pack_compile_extra, pins_for_source
+    from jevops.outer import get_str, head_seq, tail_chars
 
-    from jevops.outer import get_str
-
-    clone = lra_cw.clone_dir(get_str(record, "url"), state_root)
-
-    def _pins(rec: Mapping[str, Any]) -> list[Any]:
-        from jevops.lean import filter_installed_pin_maps, pins_for_source
-
+    def _pins(rec: Mapping[str, Any], clone: Any) -> list[Any]:
         return pins_for_source(
             rec,
             putnam_source="putnambench",
@@ -123,8 +120,6 @@ def compile_tactics(
         errors_out: Sequence[Mapping[str, Any]],
         wall: float,
     ) -> dict[str, Any]:
-        from jevops.lean import pack_compile_extra
-
         pin = lra_cw.iter_version_pins(rec.get("version_info"))[0]
         return pack_compile_extra(
             receipt,
@@ -139,29 +134,23 @@ def compile_tactics(
             head_fn=head_seq,
         )
 
-    from jevops.lean import patch_putnam_src
-
-    return compile_keepbest(
+    return drive_keepbest_tactics(
         record,
         tactics,
-        putnam_source="putnambench",
-        token_fn=lra_loop.token_count,
-        closed_fn=compile_closed,
+        state_root=state_root,
+        timeout=timeout,
+        restore=restore,
+        url=get_str(record, "url"),
+        clone_fn=lra_cw.clone_dir,
+        relpath_fn=lra_cw.source_relpath,
         pins_fn=_pins,
-        compile_fn=_compile,
+        compile_record_fn=_compile,
         parse_errors_fn=parse_lean_errors,
         sorry_fn=sorry_in_span,
-        pack_fn=pack_compile_view,
-        elapsed_fn=elapsed_ms,
-        now_fn=time.perf_counter,
-        patch_fn=patch_putnam_src,
+        token_fn=lra_loop.token_count,
         statement_fn=lambda rec: lra_splice.split_statement_body(rec).statement,
-        dest_fn=lambda rec: clone / lra_cw.source_relpath(rec),
-        restore=restore,
-        write_bytes_fn=lambda dest, data: Path(dest).write_bytes(data),
         candidate_source_fn=candidate_source,
         splice_fn=splice_src,
-        span_fn=splice_span,
         line_in_span_fn=_line_in_span,
         extra_fn=_extra,
     )
@@ -211,11 +200,12 @@ def match_reference_indent(reference: str, tactics: str) -> str:
 
 
 def hosted_tactics(path: Path) -> str:
-    from jevops.lean import hosted_tactics_from_payload
+    from jevops.lean import drive_hosted_file
     from jevops.outer import read_json
 
-    return hosted_tactics_from_payload(
-        read_json(path),
+    return drive_hosted_file(
+        path,
+        read_fn=read_json,
         extract_fn=lra_loop.extract_generated_tactics,
         error_cls=RuntimeError,
     )
@@ -235,124 +225,32 @@ def keepbest(
     timeout: float,
     repair: bool = False,
 ) -> dict[str, Any]:
-    from jevops.outer import load_and_clone, require_file_bytes
+    from jevops.search import drive_keepbest
 
-    record, records, digest, clone, dest, restore = load_and_clone(
-        lra_splice.load_warmup_records,
-        name,
-        state_root,
+    return drive_keepbest(
+        name=name,
+        hosted_path=hosted_path,
+        state_root=state_root,
+        timeout=timeout,
+        repair=repair,
+        load_fn=lra_splice.load_warmup_records,
         clone_fn=lambda url, root: lra_cw.require_clone(url, network="allow", state_root=root),
         relpath_fn=lra_cw.source_relpath,
-        error_cls=RuntimeError,
-        miss=f"unknown warm-up problem: {name}",
-        read_fn=lambda path: require_file_bytes(
-            path, error_cls=RuntimeError, miss="{path}: clone/checkout Strata first"
-        ),
-    )
-    rel = lra_cw.source_relpath(record)
-    del dest
-    ref_tactics = lra_splice.tactic_block_from_body(lra_splice.split_statement_body(record).body_suffix)
-    drafts = lra_fan.enumerate_drafts(record, records)
-    from jevops.outer import attr_or, contains_attr, first_where
-    from jevops.search import keepbest_payload, pick_min_tiers, run_keepbest
-
-    collapse = first_where(drafts, contains_attr("ops", "collapse_simp_at"))
-    from jevops.outer import call_if_file, map_if
-
-    hosted = call_if_file(
-        hosted_path,
-        lambda: match_reference_indent(ref_tactics, hosted_tactics(hosted_path)),
-    )
-    flattened = map_if(hosted, lambda body: flatten_overindent(ref_tactics, body))
-
-    def _repair(
-        rows: Sequence[Mapping[str, Any]],
-        tactics_by_kind: Mapping[str, str],
-        hosted_row: Mapping[str, Any],
-    ) -> Optional[Mapping[str, Any]]:
-        from jevops.outer import field_eq, first_or_required, get_list, pin_calls, replace_if
-
-        pin_calls(lra_mistral.load_keyfiles, lra_mistral.pin_paths)()
-        indent_row = first_where(rows, field_eq("kind", "hosted_indent_normalized"))
-
-        failed = first_or_required(tactics_by_kind, "hosted_indent_normalized", "hosted_mistral")
-        errors = replace_if(
-            indent_row and indent_row.get("module_exit_0"),
-            [
-                {
-                    "pos": None,
-                    "data": (
-                        "The indent-normalized draft compiles but is not shorter than the "
-                        "reference. Return a strictly shorter tactic block that still compiles."
-                    ),
-                }
-            ],
-            get_list(hosted_row, "errors"),
-        )
-        prompt = repair_prompt(record, failed=failed, errors=errors, reference=ref_tactics)
-        ledger = lra_t1.ProblemLedger(name=f"{name}#repair")
-        text, repair_identity, _line = lra_mistral.generate_mistral(
-            prompt,
-            ledger,
-            max_new_tokens=1400,
-            timeout=180.0,
-        )
-        from jevops.repair import align_generated, align_then_compile
-
-        repaired_tactics, compile_row = align_then_compile(
-            text,
-            ref_tactics,
-            align_fn=lambda reference, body: align_generated(
-                reference,
-                body,
-                extract_fn=lra_loop.extract_generated_tactics,
-                match_fn=match_reference_indent,
-                flatten_fn=flatten_overindent,
-            ),
-            compile_fn=lambda body: compile_tactics(
-                record,
-                body,
-                state_root=state_root,
-                timeout=timeout,
-                restore=restore,
-            ),
-        )
-        return _row(
-            {
-                "kind": "hosted_mistral_repair",
-                "generator": "labs-leanstral-1-5",
-                "tactics": repaired_tactics,
-                "ledger": ledger.as_dict(),
-                "repair_identity": repair_identity,
-            },
-            compile_row,
-        )
-
-    return run_keepbest(
-        name=name,
-        digest=digest,
-        ref_tactics=ref_tactics,
-        hosted=hosted,
-        flattened=flattened,
-        collapse=attr_or(collapse, "tactics"),
-        span_drafts=lra_fan.span_preserving_drafts(ref_tactics),
-        compile_fn=lambda body: compile_tactics(
-            record,
-            body,
-            state_root=state_root,
-            timeout=timeout,
-            restore=restore,
-        ),
+        split_fn=lra_splice.split_statement_body,
+        body_fn=lra_splice.tactic_block_from_body,
+        drafts_fn=lra_fan.enumerate_drafts,
+        span_fn=lra_fan.span_preserving_drafts,
+        hosted_fn=hosted_tactics,
+        match_fn=match_reference_indent,
+        flatten_fn=flatten_overindent,
+        compile_fn=compile_tactics,
         row_fn=_row,
         token_fn=lra_loop.token_count,
-        repair=repair,
-        repair_fn=_repair,
-        pick_fn=pick_min_tiers,
-        first_where_fn=first_where,
-        pack_fn=keepbest_payload,
-        clone=clone,
-        rel=rel,
-        hosted_path=hosted_path,
+        key_fns=(lra_mistral.load_keyfiles, lra_mistral.pin_paths),
+        prompt_fn=repair_prompt,
+        ledger_cls=lra_t1.ProblemLedger,
+        generate_fn=lra_mistral.generate_mistral,
+        extract_fn=lra_loop.extract_generated_tactics,
         hardware_class=HARDWARE_CLASS,
         prototype_hardware=PROTOTYPE_HARDWARE,
     )

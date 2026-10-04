@@ -28,11 +28,6 @@ PAPER_ROOT = HERE.parent
 REPO_ROOT = HERE.parents[3]
 WARMUP_JSONL = PAPER_ROOT / "data" / "benchmark_data_warmup.jsonl"
 OUT_DEFAULT = PAPER_ROOT / "evidence" / "canaries"
-KEYFILES = (
-    Path.home() / ".config/ipfs_accelerate_py/mistral.env",
-    Path.home() / ".config/ipfs_accelerate_py/typesafe.env",
-    Path.home() / ".vibe" / ".env",
-)
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
@@ -47,6 +42,7 @@ PR_ID = "PR-12b"
 LRAH_ID = "LRAH-011b"
 from jevops.catalogs import ACCEL_ROOT as ROOT_ACCEL  # noqa: E402
 from jevops.catalogs import CANARY_PRIMARY as CANARY_NAME  # noqa: E402
+from jevops.catalogs import MISTRAL_KEYFILES as KEYFILES  # noqa: E402
 from jevops.catalogs import TRACK_LABEL  # noqa: E402
 from jevops.catalogs import LABS_RETIRE_DATE  # noqa: E402
 from jevops.catalogs import PROTOCOL  # noqa: E402
@@ -71,41 +67,44 @@ class Track1MistralError(RuntimeError):
 
 
 def load_keyfiles() -> None:
-    from jevops.outer import load_env_file
+    from jevops.outer import drive_load_env_files
 
-    for path in KEYFILES:
-        load_env_file(path, strip_quotes=True)
+    drive_load_env_files(KEYFILES, strip_quotes=True)
 
 
 def pin_paths() -> None:
-    from jevops.outer import pin_sys_path
+    from jevops.outer import drive_pin_then
 
-    pin_sys_path(
+    def _after() -> None:
+        lra_ts.ACCEL_ROOT = ROOT_ACCEL
+        lra_ts.TYPESAFE_INFERENCE_PATH = ROOT_ACCEL / "ipfs_accelerate_py" / "typesafe_inference.py"
+
+    drive_pin_then(
         ROOT_ACCEL,
         defaults={
             "IPFS_ACCEL_SKIP_CORE": "1",
             "IPFS_AUTO_INSTALL": "false",
             "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
         },
+        after_fn=_after,
     )
-    lra_ts.ACCEL_ROOT = ROOT_ACCEL
-    lra_ts.TYPESAFE_INFERENCE_PATH = ROOT_ACCEL / "ipfs_accelerate_py" / "typesafe_inference.py"
 
 
 def mistral_key_configured(env: Optional[Mapping[str, str]] = None) -> bool:
-    from jevops.jev import any_key
+    from jevops.outer import drive_any_env_key
 
-    from jevops.outer import env_mapping
-
-    return any_key(env_mapping(env), KEY_ENV_NAMES)
+    return drive_any_env_key(env, KEY_ENV_NAMES)
 
 
 def resolve_mistral_key(env: Optional[Mapping[str, str]] = None) -> str:
-    from jevops.outer import env_mapping, first_nonempty, raise_if
+    from jevops.outer import drive_required_env_key
 
-    value = first_nonempty(env_mapping(env), *KEY_ENV_NAMES)
-    raise_if(not value, Track1MistralError, "MISTRAL_API_KEY is not set")
-    return value
+    return drive_required_env_key(
+        env,
+        KEY_ENV_NAMES,
+        error_cls=Track1MistralError,
+        miss="MISTRAL_API_KEY is not set",
+    )
 
 
 def _redact_text(text: str, secret: str) -> str:
@@ -140,49 +139,29 @@ def chat_completions(
 ) -> dict[str, Any]:
     """POST chat/completions to Mistral Labs. Never docker0."""
 
-    assert_hosted_url(url)
-    key = resolve_mistral_key()
-    from jevops.outer import chat_request_payload, elapsed_ms, http_json, pack_chat_response
+    from jevops.outer import post_hosted_chat
 
-    payload = chat_request_payload(
+    return post_hosted_chat(
         prompt,
+        url=url,
         model=model,
         max_tokens=max_tokens,
+        timeout=timeout,
         temperature=temperature,
         n=n,
         stop=stop,
-    )
-    started = time.perf_counter()
-    status, data, final_url = http_json(
-        url,
-        payload,
-        timeout=float(timeout),
-        headers={
-            "Authorization": f"Bearer {key}",
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        },
+        assert_url=assert_hosted_url,
+        resolve_key=resolve_mistral_key,
+        redact_fn=_redact_text,
         error_cls=Track1MistralError,
-        redact_fn=lambda message: _redact_text(message, key),
-        http_fmt="Mistral HTTP {status}: {body}",
-        json_fmt="Mistral returned invalid JSON: {exc}",
-        not_object="Mistral returned a non-object JSON payload",
-    )
-    from jevops.outer import first_truthy
-
-    resolved = first_truthy(final_url, url)
-    assert_hosted_url(resolved)
-    return pack_chat_response(
-        data,
-        status=status,
-        url=resolved,
-        wall_ms=elapsed_ms(started),
-        model=model,
         extra={
             "hardware_class": HARDWARE_CLASS,
             "prototype_base_url": PROTOTYPE_BASE_URL,
             "used_prototype_endpoint": False,
         },
+        http_fmt="Mistral HTTP {status}: {body}",
+        json_fmt="Mistral returned invalid JSON: {exc}",
+        not_object="Mistral returned a non-object JSON payload",
     )
 
 
@@ -196,17 +175,11 @@ def generate_mistral(
     fixture: bool = False,
     fixture_text: str = "simp_all",
 ) -> tuple[str, dict[str, Any], lra_t1.UsageLine]:
-    from jevops.outer import ledger_generate
-
-    estimated_in = lra_t1.estimate_tokens(prompt)
-    from jevops.outer import first_int
-
-    estimated_out = first_int(max_new_tokens)
+    from jevops.lean import hosted_identity
+    from jevops.outer import drive_mistral_generate
 
     def _identity(*, model: str, fixture: bool, extra: Optional[Mapping[str, Any]] = None, text: str = "") -> dict[str, Any]:
         del text
-        from jevops.lean import hosted_identity
-
         return hosted_identity(
             requested_provider=REQUESTED_PROVIDER,
             requested_model=model,
@@ -218,33 +191,18 @@ def generate_mistral(
             host_fmt="resolved host is not {host}",
         )
 
-    def _live() -> tuple[str, Mapping[str, Any], tuple[int, int]]:
-        payload = chat_completions(
-            prompt,
-            model=model,
-            max_tokens=max_new_tokens,
-            timeout=timeout,
-        )
-        from jevops.outer import first_int, get_str
-
-        inn = first_int(payload.get("input_tokens"), estimated_in)
-        out = first_int(payload.get("output_tokens"), lra_t1.estimate_tokens(get_str(payload, "text")))
-        return get_str(payload, "text"), payload, (inn, out)
-
-    return ledger_generate(
+    return drive_mistral_generate(
+        prompt,
         ledger,
-        "mistral",
-        estimated_in=estimated_in,
-        estimated_out=estimated_out,
+        max_new_tokens=max_new_tokens,
+        timeout=timeout,
         model=model,
         fixture=fixture,
         fixture_text=fixture_text,
-        live_fn=_live,
+        estimate_fn=lra_t1.estimate_tokens,
+        chat_fn=chat_completions,
         identity_fn=_identity,
         error_cls=Track1MistralError,
-        estimate_fn=lra_t1.estimate_tokens,
-        refuse_fmt="mistral call refused: {reason}",
-        after_fmt="mistral spend refused after call: {reason}",
     )
 
 
@@ -263,93 +221,39 @@ def run_named(
     fixture: bool = False,
     path: Optional[Path] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import env_copy
+    from jevops.jev import drive_hosted_named
 
-    pin_paths()
-    from jevops.outer import closed_skip, first_call, first_truthy
-
-    early = first_call(
-        (
-            first_truthy(official_track2, lra_ts.official_track2_requested()),
-            lambda: closed_skip(
-                "official_track2_off",
-                extra={"called_jev": False, "contaminates_track2": False},
-            ),
-        ),
-        (
-            not fixture and not (mistral_key_configured() and lra_t1.jev_key_configured()),
-            lambda: closed_skip(
-                "no_key",
-                extra={
-                    "name": name,
-                    "mistral_key_configured": mistral_key_configured(),
-                    "jev_key_configured": lra_t1.jev_key_configured(),
-                },
-            ),
-        ),
+    return drive_hosted_named(
+        name,
+        max_new_tokens=max_new_tokens,
+        timeout=timeout,
+        official_track2=official_track2,
+        fixture=fixture,
+        path=path,
+        pin_fn=pin_paths,
+        track2_fn=lra_ts.official_track2_requested,
+        mistral_key_fn=mistral_key_configured,
+        jev_key_fn=lra_t1.jev_key_configured,
+        load_fn=lra_t1._load_named_record,
+        neighbor_fn=lra_t1._neighbors_for,
+        state_fn=lra_ts.problem_state,
+        fixture_client=lra_ts.FixtureClient,
+        answers_fn=lra_ts.default_fixture_answers,
+        router_cls=lra_ts.TypeSafeLraRouter,
+        ledger_cls=lra_t1.ProblemLedger,
+        model_id=lra_t1.JEV_MODEL_ID,
+        prompt_fn=lra_gt.render_prompt,
+        generate_fn=generate_mistral,
+        redact_fn=redact,
+        requested_provider=REQUESTED_PROVIDER,
+        requested_model=REQUESTED_MODEL,
+        hardware_class=HARDWARE_CLASS,
+        prototype_hardware=PROTOTYPE_HARDWARE_CLASS,
+        protocol=PROTOCOL,
+        pr=PR_ID,
+        track=TRACK_LABEL,
+        labs_retire_date=LABS_RETIRE_DATE,
     )
-    from jevops.outer import first_not_none
-
-    def _run() -> dict[str, Any]:
-        record, records, digest = lra_t1._load_named_record(name, path)
-        ledger = lra_t1.ProblemLedger(name=name, official_track2=False)
-        from jevops.outer import begin_named_route, fixture_factory, get_str
-
-        neighbors, state, router = begin_named_route(
-            record,
-            records,
-            neighbor_fn=lra_t1._neighbors_for,
-            state_fn=lra_ts.problem_state,
-            fixture=fixture,
-            factory_fn=lambda: fixture_factory(lra_ts.FixtureClient, lra_ts.default_fixture_answers),
-            router_cls=lra_ts.TypeSafeLraRouter,
-            mode="inloop",
-            official_track2=False,
-            env=env_copy({"LRA_TYPESAFE": "inloop"}),
-            require_key=not fixture,
-        )
-        from jevops.outer import elapsed_ms, names_of, record_route_usage
-
-        started = time.perf_counter()
-        jev_result = router.route(state, neighbor_names=names_of(neighbors))
-        record_route_usage(
-            ledger,
-            jev_result,
-            fixture=fixture,
-            model=lra_t1.JEV_MODEL_ID,
-        )
-        prompt = lra_gt.render_prompt(record)
-        text, identity, _line = generate_mistral(
-            prompt,
-            ledger,
-            max_new_tokens=max_new_tokens,
-            timeout=timeout,
-            fixture=fixture,
-        )
-        from jevops.jev import hosted_run_payload
-
-        return redact(
-            hosted_run_payload(
-                name=name,
-                source=get_str(record, "source"),
-                digest=digest,
-                identity=identity,
-                text=text,
-                jev_route=jev_result.as_dict(),
-                ledger=ledger.as_dict(),
-                wall_ms=elapsed_ms(started),
-                requested_provider=REQUESTED_PROVIDER,
-                requested_model=REQUESTED_MODEL,
-                hardware_class=HARDWARE_CLASS,
-                prototype_hardware=PROTOTYPE_HARDWARE_CLASS,
-                protocol=PROTOCOL,
-                pr=PR_ID,
-                track=TRACK_LABEL,
-                labs_retire_date=LABS_RETIRE_DATE,
-            )
-        )
-
-    return first_not_none(early, factory=_run)
 
 
 def audit_source() -> dict[str, Any]:

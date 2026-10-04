@@ -177,24 +177,24 @@ def retrieve_by_name(
     *,
     path: Optional[Path] = None,
 ) -> Retrieval:
-    from jevops.outer import either, load_named_pack, lookup_named
+    from jevops.outer import drive_retrieve_named, load_named_pack, lookup_named
 
-    record, records, _digest = either(
-        records is None,
-        lambda: load_named_pack(
+    return drive_retrieve_named(
+        missing=records is None,
+        missing_fn=lambda: load_named_pack(
             load_warmup_records,
             name,
             error_cls=UnknownProblem,
             miss=f"unknown warm-up problem: {name}",
             extra=path,
         ),
-        lambda: (
+        present_fn=lambda: (
             lookup_named(records, name, error_cls=UnknownProblem, miss=f"unknown warm-up problem: {name}"),
             records,
             None,
         ),
+        retrieve_fn=retrieve_record,
     )
-    return retrieve_record(record, records)
 
 
 def prompt_neighbors(retrieval: Retrieval, *, k: int = 4) -> list[dict[str, str]]:
@@ -251,14 +251,14 @@ def _synthetic_cap_fixture() -> dict[str, Any]:
 
 
 def _record_report(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    from jevops.lean import pack_retrieval_report
+    from jevops.lean import drive_retrieval_report
 
-    retrieval = retrieve_record(record, records)
-    return pack_retrieval_report(
-        retrieval,
-        records=records,
+    return drive_retrieval_report(
+        record,
+        records,
+        retrieve_fn=retrieve_record,
+        neighbor_fn=prompt_neighbors,
         lemma_cap=SRC_LEMMA_CAP,
-        prompt_neighbors=prompt_neighbors(retrieval),
         asdict_fn=asdict,
     )
 

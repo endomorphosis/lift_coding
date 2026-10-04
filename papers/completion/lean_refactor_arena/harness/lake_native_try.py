@@ -104,25 +104,8 @@ FORBIDDEN_IMPORT_NAMES = frozenset(
         "shutil",
     }
 )
-FORBIDDEN_CALLS = frozenset(
-    {
-        "which",
-        "find_executable",
-        "LOCK_EX",
-        "snapshot_goal",
-        "attempt_native_automation",
-    }
-)
-FORBIDDEN_ATTRS = frozenset(
-    {
-        "snapshot_goal",
-        "GoalSnapshot",
-        "LeanFrontend",
-        "attempt_native_automation",
-        "LOCK_EX",
-        "find_executable",
-    }
-)
+from jevops.catalogs import FORBIDDEN_ATTRS_LAKE_NATIVE as FORBIDDEN_ATTRS
+from jevops.catalogs import FORBIDDEN_CALLS_LAKE_NATIVE as FORBIDDEN_CALLS
 from jevops.catalogs import FORBIDDEN_SCORE_NAMES
 
 from jevops.lean import AESOP_IMPORT as _AESOP_IMPORT
@@ -159,40 +142,35 @@ def sha256_text(text: str) -> str:
 
 
 def aesop_imported(record: Mapping[str, Any]) -> bool:
-    from jevops.lean import AESOP_IMPORT
-    from jevops.outer import any_search, get_str
+    from jevops.lean import AESOP_IMPORT, drive_text_pair_search
 
-    return any_search((get_str(record, "header"), get_str(record, "src")), AESOP_IMPORT)
+    return drive_text_pair_search(record, AESOP_IMPORT)
 
 
 def tactics_for_record(record: Mapping[str, Any]) -> list[str]:
-    from jevops.lean import path_a_tactics
+    from jevops.lean import drive_header_src_tactics
 
-    from jevops.outer import get_str
-
-    return path_a_tactics(get_str(record, "header"), get_str(record, "src"))
+    return drive_header_src_tactics(record)
 
 
 def sorry_lake_source(record: Mapping[str, Any]) -> str:
-    from jevops.lean import lake_source_for_tactic
+    from jevops.lean import drive_split_tactic_source
 
-    split = lra_splice.split_statement_body(record)
-    return lake_source_for_tactic(
-        header=split.header,
-        statement=split.statement,
-        tactic=SORRY_TACTIC,
+    return drive_split_tactic_source(
+        record,
+        SORRY_TACTIC,
+        split_fn=lra_splice.split_statement_body,
         error_cls=TryError,
     )
 
 
 def tactic_lake_source(record: Mapping[str, Any], tactic: str) -> str:
-    from jevops.lean import lake_source_for_tactic
+    from jevops.lean import drive_split_tactic_source
 
-    split = lra_splice.split_statement_body(record)
-    return lake_source_for_tactic(
-        header=split.header,
-        statement=split.statement,
-        tactic=tactic,
+    return drive_split_tactic_source(
+        record,
+        tactic,
+        split_fn=lra_splice.split_statement_body,
         error_cls=TryError,
     )
 
@@ -307,6 +285,10 @@ def _prepare_project(
     )
 
 
+def _sorry_template(statement: str) -> str:
+    return lra_splice.statement_sorry_template(statement)
+
+
 def try_tactics(
     record: Mapping[str, Any],
     pin: lra_compile.VersionPin,
@@ -319,151 +301,87 @@ def try_tactics(
 ) -> TacticTryReceipt:
     """Path A: sorry hole, then ``rfl``/``decide``/``omega``/``simp_all``/``aesop``."""
 
-    timeout = lra_compile.require_lake_timeout(timeout)
-    considered = tactics_for_record(record)
-    split = lra_splice.split_statement_body(record)
-    template = lra_splice.statement_sorry_template(split.statement)
-    lake_sorry = sorry_lake_source(record)
-    from jevops.lean import aesop_list_ok, begin_path_a_receipt
+    from jevops.lean import drive_path_a_try
 
-    receipt = begin_path_a_receipt(
+    return drive_path_a_try(
         record,
         pin,
-        relpath=lra_compile.source_relpath(record),
-        template=template,
-        statement=split.statement,
-        suffix=lra_splice.STATEMENT_SORRY_SUFFIX,
-        lake_sorry=lake_sorry,
-        aesop=aesop_imported(record),
-        considered=considered,
         timeout=timeout,
+        state_root=state_root,
+        elan_home=elan_home,
+        network=network,
+        skip_checkout=skip_checkout,
+        require_timeout_fn=lra_compile.require_lake_timeout,
+        tactics_fn=tactics_for_record,
+        split_fn=lra_splice.split_statement_body,
+        sorry_template_fn=_sorry_template,
+        lake_sorry_fn=sorry_lake_source,
+        aesop_fn=aesop_imported,
+        relpath_fn=lra_compile.source_relpath,
         digest_fn=sha256_text,
+        sorry_suffix=lra_splice.STATEMENT_SORRY_SUFFIX,
         schema=RECEIPT_SCHEMA,
         loop=LOOP_VERSION,
-        path=PATH_NAME,
+        path_name=PATH_NAME,
         pr=PR_ID,
         lrah=LRAH_ID,
         generator=GENERATOR_IDENTITY,
-        kernel_command_template=KERNEL_COMMAND_TEMPLATE,
-        measurement_argv_template=MEASUREMENT_ARGV_TEMPLATE,
-    )
-    aesop_err = aesop_list_ok(considered, receipt.aesop_imported)
-    from jevops.lean import close_failed_receipt, lake_supervisor_fields, path_a_fill, run_path_a_try
-    from jevops.outer import env_copy, under_or_tmp
-
-    def _env(toolchain: Any) -> Mapping[str, str]:
-        from jevops.lean import supervisor_env
-
-        return supervisor_env(
-            state_root,
-            toolchain,
-            tmp_name="lra-021-process-supervisor",
-            threads=LEAN_NUM_THREADS,
-            process_env_key=PROCESS_SUPERVISOR_ENV,
-            env_copy_fn=env_copy,
-            under_fn=under_or_tmp,
-            fields_fn=lake_supervisor_fields,
-        )
-
-    def _run_one(*, tactic: str, dest: Path, source_file: str, cwd: Path, toolchain: Any, timeout: float, env: Mapping[str, str]) -> TacticAttempt:
-        return _run_tactic(
-            record,
-            tactic=tactic,
-            dest=dest,
-            source_file=source_file,
-            cwd=cwd,
-            lake_path=toolchain.lake_path,
-            lean_path=toolchain.lean_path,
-            timeout=timeout,
-            env=env,
-        )
-
-    def _extra(exc: BaseException) -> str:
-        from jevops.lean import toolchain_gap_note
-
-        return toolchain_gap_note(
-            exc,
-            (LeanToolchainMissing, lra_compile.CompileToolchainMissing),
-            (
-                "; tag-pinned elan is a capability gap, not PATH lean "
-                "usability and not LeanFrontend.snapshot_goal"
-            ),
-        )
-
-    return run_path_a_try(
-        receipt,
-        considered,
-        aesop_err=aesop_err,
-        resolve_fn=lambda: lra_compile.resolve_pin(pin, elan_home=elan_home, require_installed=True),
-        prepare_fn=lambda: _prepare_project(
-            record,
-            pin,
-            state_root=state_root,
-            network=network,
-            skip_checkout=skip_checkout,
+        kernel_template=KERNEL_COMMAND_TEMPLATE,
+        argv_template=MEASUREMENT_ARGV_TEMPLATE,
+        threads=LEAN_NUM_THREADS,
+        process_env_key=PROCESS_SUPERVISOR_ENV,
+        tmp_name="lra-021-process-supervisor",
+        gap_types=(LeanToolchainMissing, lra_compile.CompileToolchainMissing),
+        gap_note=(
+            "; tag-pinned elan is a capability gap, not PATH lean "
+            "usability and not LeanFrontend.snapshot_goal"
         ),
-        env_fn=_env,
-        run_tactic_fn=_run_one,
-        fill_fn=path_a_fill,
-        close_fn=lambda rec, exc, extra: close_failed_receipt(
-            rec, exc, digest_fn=sha256_text, axiom_digest_fn=lra_compile.axiom_digest, extra=extra
-        ),
+        resolve_fn=lra_compile.resolve_pin,
+        prepare_fn=_prepare_project,
+        run_tactic_fn=_run_tactic,
+        axiom_digest_fn=lra_compile.axiom_digest,
         error_types=(TryError, lra_compile.CompileError, LeanToolchainMissing, lra_bake.BakeError),
-        extra_fn=_extra,
-        timeout=timeout,
     )
 
 
 def first_record_of_source(
     records: Sequence[Mapping[str, Any]], source: str
 ) -> Mapping[str, Any]:
-    from jevops.outer import field_eq, first_where
+    from jevops.outer import drive_first_field
 
-    return first_where(
+    return drive_first_field(
         records,
-        field_eq("source", source),
+        "source",
+        source,
         error_cls=TryError,
         miss=f"warmup JSONL has no {source} record",
     )
 
 
 def pin_for_tag(record: Mapping[str, Any], lean_tag: str) -> lra_compile.VersionPin:
-    from jevops.outer import first_or_last, get_str
+    from jevops.outer import drive_matching_pin
 
-    return first_or_last(
-        lra_compile.iter_version_pins(record.get("version_info")),
-        lambda pin: pin.lean_tag == lean_tag,
+    return drive_matching_pin(
+        record,
+        lean_tag,
+        pins_fn=lra_compile.iter_version_pins,
         error_cls=TryError,
-        miss=f"{get_str(record, 'name')}: no version_info pins",
     )
 
 
 def plan_try(path: Optional[Path] = None) -> dict[str, Any]:
-    from jevops.outer import get_str, if_none
+    from jevops.lean import drive_plan_try
 
-    jsonl = Path(if_none(path, WARMUP_JSONL))
-    raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    from jevops.lean import path_a_plan_rows
-
-    per_record = path_a_plan_rows(
-        records,
+    return drive_plan_try(
+        path,
+        default_path=WARMUP_JSONL,
+        load_fn=lra_splice.load_warmup_records,
         tactics_fn=tactics_for_record,
         aesop_fn=aesop_imported,
         aesop_tactic=AESOP_TACTIC,
-    )
-    first = first_record_of_source(records, STRATA_SOURCE)
-    putnam = first_record_of_source(records, PUTNAM_SOURCE)
-    from jevops.lean import pack_try_plan
-
-    return pack_try_plan(
-        digest=digest,
-        jsonl_bytes=len(raw),
-        n_records=len(records),
-        per_record=per_record,
-        first_name=get_str(first, "name"),
-        first_tactics=tactics_for_record(first),
-        putnam_name=get_str(putnam, "name"),
-        putnam_tactics=tactics_for_record(putnam),
+        first_of_source_fn=first_record_of_source,
+        strata_source=STRATA_SOURCE,
+        putnam_source=PUTNAM_SOURCE,
         extra={
             "aesop_if_imported": True,
             "critical_path_note": CRITICAL_PATH_NOTE,
@@ -491,10 +409,11 @@ def plan_try(path: Optional[Path] = None) -> dict[str, Any]:
 
 
 def probe_toolchain(tags: Optional[Sequence[str]] = None) -> dict[str, Any]:
-    from jevops.lean import overlay_try_probe
+    from jevops.lean import drive_overlay_probe
 
-    return overlay_try_probe(
-        lra_compile.probe_toolchain(tags),
+    return drive_overlay_probe(
+        tags,
+        probe_fn=lra_compile.probe_toolchain,
         extra={
             "arena_score": None,
             "score": None,

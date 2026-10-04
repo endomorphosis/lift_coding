@@ -104,24 +104,26 @@ class BakePlan(_KernelBakePlan):
         return super().first_job(error_cls=BakeError)
 
     def to_dict(self) -> dict[str, Any]:
-        from jevops.lean import pack_bake_plan
+        from jevops.lean import drive_with_first, pack_bake_plan
 
-        first = self.first_job
-        return pack_bake_plan(
-            self.jobs,
-            first,
-            frozen_warmup_sha256=self.frozen_warmup_sha256,
-            jsonl_bytes=self.jsonl_bytes,
-            n_records=self.n_records,
-            bake_argv_template=BAKE_ARGV_TEMPLATE,
-            kernel_command_template=KERNEL_COMMAND_TEMPLATE,
-            measurement_max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-            first_source=STRATA_SOURCE,
-            first_tag=STRATA_FIRST_TAG,
-            first_commit=STRATA_FIRST_COMMIT,
-            putnam_module=PUTNAM_MODULE,
-            putnam_tags=PUTNAM_TAGS,
-            strata_first_tag=STRATA_FIRST_TAG,
+        return drive_with_first(
+            self,
+            lambda first: pack_bake_plan(
+                self.jobs,
+                first,
+                frozen_warmup_sha256=self.frozen_warmup_sha256,
+                jsonl_bytes=self.jsonl_bytes,
+                n_records=self.n_records,
+                bake_argv_template=BAKE_ARGV_TEMPLATE,
+                kernel_command_template=KERNEL_COMMAND_TEMPLATE,
+                measurement_max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+                first_source=STRATA_SOURCE,
+                first_tag=STRATA_FIRST_TAG,
+                first_commit=STRATA_FIRST_COMMIT,
+                putnam_module=PUTNAM_MODULE,
+                putnam_tags=PUTNAM_TAGS,
+                strata_first_tag=STRATA_FIRST_TAG,
+            ),
         )
 
 
@@ -138,9 +140,9 @@ def sha256_file(path: Path) -> str:
 
 
 def default_elan_home() -> Path:
-    from jevops.outer import first_env_path
+    from jevops.outer import drive_default_home
 
-    return first_env_path("ELAN_HOME", default=Path.home() / ".elan")
+    return drive_default_home("ELAN_HOME", ".elan")
 
 
 def default_state_root() -> Path:
@@ -172,21 +174,26 @@ def normalize_lean_tag(value: str) -> str:
 
 
 def elan_toolchain_dirname(lean_tag: str) -> str:
-    return f"{ELAN_TOOLCHAIN_DIRNAME_PREFIX}{normalize_lean_tag(lean_tag)}"
+    from jevops.lean import elan_toolchain_dirname as _fn
+
+    return _fn(
+        lean_tag,
+        prefix=ELAN_TOOLCHAIN_DIRNAME_PREFIX,
+        normalize_fn=normalize_lean_tag,
+    )
 
 
 def tag_pinned_paths(lean_tag: str, *, elan_home: Optional[Path] = None) -> dict[str, Any]:
     """Return elan ``lean``/``lake`` paths. Never searches PATH."""
 
-    from jevops.outer import path_or, pinned_bin_paths
+    from jevops.outer import drive_tag_bins
 
-    home = path_or(elan_home, factory=default_elan_home)
-    tag = normalize_lean_tag(lean_tag)
-    return pinned_bin_paths(
-        home,
-        elan_toolchain_dirname(tag),
-        ("lean", "lake"),
-        extra={"lean_tag": tag},
+    return drive_tag_bins(
+        lean_tag,
+        elan_home=elan_home,
+        home_fn=default_elan_home,
+        normalize_fn=normalize_lean_tag,
+        dirname_fn=elan_toolchain_dirname,
     )
 
 
@@ -233,30 +240,27 @@ def putnam_pin(lean_tag: str, *, jsonl_version_pin: str = "") -> PutnamPin:
 
 
 def render_lean_toolchain(lean_tag: str) -> str:
-    from jevops.lean import render_lean_toolchain as _fn
+    from jevops.lean import drive_normalized_toolchain
 
-    return _fn(normalize_lean_tag(lean_tag))
+    return drive_normalized_toolchain(lean_tag, normalize_fn=normalize_lean_tag)
 
 
 def render_lakefile(lean_tag: str) -> str:
     """Per-tag Mathlib+Aesop lakefile. Candidate module is Putnam.Candidate, not Tmp.lean."""
 
-    from jevops.lean import render_mathlib_aesop_lakefile
+    from jevops.lean import drive_pin_lakefile
 
-    pin = putnam_pin(lean_tag)
-    return render_mathlib_aesop_lakefile(
-        package=pin.package,
-        lib=pin.lib,
+    return drive_pin_lakefile(
+        lean_tag,
+        pin_fn=putnam_pin,
         max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-        mathlib_git=pin.mathlib_git,
-        mathlib_rev=pin.mathlib_rev,
-        aesop_git=pin.aesop_git,
-        aesop_rev=pin.aesop_rev,
     )
 
 
 def render_putnam_root() -> str:
-    return f"import {PUTNAM_MODULE}\n"
+    from jevops.lean import putnam_root_import
+
+    return putnam_root_import(PUTNAM_MODULE)
 
 
 def render_putnam_candidate_stub() -> str:
@@ -266,15 +270,16 @@ def render_putnam_candidate_stub() -> str:
 
 
 def putnam_project_files(lean_tag: str, *, jsonl_version_pin: str = "") -> dict[str, str]:
-    pin = putnam_pin(lean_tag, jsonl_version_pin=jsonl_version_pin)
-    from jevops.lean import putnam_file_map
+    from jevops.lean import drive_putnam_files
 
-    return putnam_file_map(
-        pin,
-        lakefile=render_lakefile(pin.lean_tag),
-        toolchain=render_lean_toolchain(pin.lean_tag),
-        root=render_putnam_root(),
-        candidate=render_putnam_candidate_stub(),
+    return drive_putnam_files(
+        lean_tag,
+        jsonl_version_pin=jsonl_version_pin,
+        pin_fn=putnam_pin,
+        lakefile_fn=render_lakefile,
+        toolchain_fn=render_lean_toolchain,
+        root_fn=render_putnam_root,
+        candidate_fn=render_putnam_candidate_stub,
         root_relpath=PUTNAM_ROOT_RELPATH,
         candidate_relpath=PUTNAM_CANDIDATE_RELPATH,
     )
@@ -286,32 +291,32 @@ def materialize_putnam_project(
     *,
     jsonl_version_pin: str = "",
 ) -> dict[str, str]:
-    from jevops.lean import materialize_lake_files
+    from jevops.lean import drive_materialize_project, materialize_lake_files
 
-    files = putnam_project_files(lean_tag, jsonl_version_pin=jsonl_version_pin)
-    return materialize_lake_files(
+    return drive_materialize_project(
+        lean_tag,
         dest,
-        files,
+        pin=jsonl_version_pin,
+        files_fn=putnam_project_files,
+        write_fn=materialize_lake_files,
         refuse=FORBIDDEN_PUTNAM_BASENAME,
         error_cls=BakeError,
     )
 
 
 def collect_bake_jobs(records: Sequence[Mapping[str, Any]]) -> list[BakeJob]:
-    from jevops.lean import BakeCatalog, collect_bake_jobs as _fn
+    from jevops.lean import drive_collect_jobs
 
-    return _fn(
+    return drive_collect_jobs(
         records,
-        BakeCatalog(
-            warmup_n=WARMUP_N,
-            source_order=SOURCE_ORDER,
-            putnam_source=PUTNAM_SOURCE,
-            strata_source=STRATA_SOURCE,
-            strata_first_tag=STRATA_FIRST_TAG,
-            putnam_tags=PUTNAM_TAGS,
-            putnam_candidate_relpath=PUTNAM_CANDIDATE_RELPATH,
-            putnam_module=PUTNAM_MODULE,
-        ),
+        warmup_n=WARMUP_N,
+        source_order=SOURCE_ORDER,
+        putnam_source=PUTNAM_SOURCE,
+        strata_source=STRATA_SOURCE,
+        strata_first_tag=STRATA_FIRST_TAG,
+        putnam_tags=PUTNAM_TAGS,
+        putnam_candidate_relpath=PUTNAM_CANDIDATE_RELPATH,
+        putnam_module=PUTNAM_MODULE,
         pin_fn=iter_version_pins,
         putnam_pin_fn=lambda tag, commit: putnam_pin(tag, jsonl_version_pin=commit),
         url_key_fn=_url_cache_key,
@@ -320,39 +325,47 @@ def collect_bake_jobs(records: Sequence[Mapping[str, Any]]) -> list[BakeJob]:
 
 
 def plan_bake(path: Optional[Path] = None) -> BakePlan:
-    from jevops.outer import path_or
+    from jevops.lean import drive_loaded_plan, plan_bake_from_jobs
 
-    jsonl = path_or(path, WARMUP_JSONL)
-    raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    jobs = collect_bake_jobs(records)
-    from jevops.lean import plan_bake_from_jobs
-
-    return plan_bake_from_jobs(
-        jobs,
-        digest,
-        len(raw),
-        len(records),
-        cls=BakePlan,
+    return drive_loaded_plan(
+        path,
+        default_path=WARMUP_JSONL,
+        load_fn=lra_splice.load_warmup_records,
+        build_fn=lambda raw, digest, records: plan_bake_from_jobs(
+            collect_bake_jobs(records),
+            digest,
+            len(raw),
+            len(records),
+            cls=BakePlan,
+        ),
     )
 
 
 def job_cache_dir(job: BakeJob, state_root: Optional[Path] = None) -> Path:
-    from jevops.outer import join_under, path_or
+    from jevops.outer import drive_joined
 
-    root = path_or(state_root, factory=default_state_root)
-    return join_under(root, "oleans", job.cache_key)
+    return drive_joined(state_root, "oleans", job.cache_key, factory=default_state_root)
 
 
 def putnam_project_dir(job: BakeJob, state_root: Optional[Path] = None) -> Path:
-    from jevops.outer import join_under, path_or, raise_if
+    from jevops.outer import drive_kind_joined
 
-    raise_if(job.kind != "putnam", BakeError, "putnam_project_dir is only defined for Putnam jobs")
-    root = path_or(state_root, factory=default_state_root)
-    return join_under(root, "putnam_lake", job.lean_tag)
+    return drive_kind_joined(
+        job,
+        state_root,
+        "putnam_lake",
+        job.lean_tag,
+        kind="putnam",
+        factory=default_state_root,
+        error_cls=BakeError,
+        miss="putnam_project_dir is only defined for Putnam jobs",
+    )
 
 
 def cache_marker_path(cache_dir: Path) -> Path:
-    return cache_dir / "BAKED"
+    from jevops.lean import cache_marker_path as _fn
+
+    return _fn(cache_dir)
 
 
 def olean_paths(cache_dir: Path) -> list[Path]:
@@ -362,22 +375,30 @@ def olean_paths(cache_dir: Path) -> list[Path]:
 
 
 def cache_present(job: BakeJob, state_root: Optional[Path] = None) -> bool:
-    from jevops.outer import dir_marked
+    from jevops.outer import drive_dir_of
 
-    return dir_marked(job_cache_dir(job, state_root), marker="BAKED", suffix=".olean")
+    return drive_dir_of(
+        job,
+        state_root,
+        dir_fn=job_cache_dir,
+        marker="BAKED",
+        suffix=".olean",
+    )
 
 
 def plant_synthetic_cache(job: BakeJob, state_root: Path, *, n_oleans: int = 1) -> Path:
     """Write a dummy olean cache. Not a live lake bake."""
 
-    from jevops.lean import plant_synthetic_olean_cache
+    from jevops.lean import drive_synthetic_oleans, pack_olean_receipt
 
-    from jevops.lean import pack_olean_receipt
-
-    return plant_synthetic_olean_cache(
-        job_cache_dir(job, state_root),
-        blobs={f"LraBake{index}.olean": b"LRA-013-synthetic-olean\n" for index in range(n_oleans)},
-        receipt=pack_olean_receipt(job),
+    return drive_synthetic_oleans(
+        job,
+        state_root,
+        n=n_oleans,
+        cache_fn=job_cache_dir,
+        receipt_fn=pack_olean_receipt,
+        blob=b"LRA-013-synthetic-olean\n",
+        prefix="LraBake",
     )
 
 
@@ -387,28 +408,16 @@ def require_cache(
     network: str,
     state_root: Optional[Path] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import hit_or_miss, overlay_map, text_or
+    from jevops.lean import drive_require_cache
 
-    present = cache_present(job, state_root)
-    cache_dir = job_cache_dir(job, state_root)
-    base = {
-        "cache_key": job.cache_key,
-        "cache_dir": text_or(cache_dir),
-        "network": network,
-        "arena_score": None,
-    }
-    return hit_or_miss(
-        present,
-        deny=network == "deny",
+    return drive_require_cache(
+        job,
+        network=network,
+        state_root=state_root,
+        present_fn=cache_present,
+        cache_dir_fn=job_cache_dir,
+        olean_count_fn=lambda cache_dir: len(olean_paths(cache_dir)),
         error_cls=OleanCacheMissing,
-        deny_msg=(
-            "olean cache missing for "
-            f"{job.cache_key} under network=deny; first lake build is hours and "
-            "must be pre-vendored before the 48h clock. Never falling back to "
-            "PATH lean, Tmp.lean, or a guessed PutnamBench GitHub URL."
-        ),
-        hit=overlay_map(base, ok=True, status="cache-hit", n_oleans=len(olean_paths(cache_dir))),
-        miss=overlay_map(base, ok=False, status="cache-missing", n_oleans=0),
     )
 
 
@@ -418,14 +427,20 @@ def require_plan_caches(
     network: str,
     state_root: Optional[Path] = None,
 ) -> list[dict[str, Any]]:
-    return [require_cache(job, network=network, state_root=state_root) for job in plan.jobs]
+    from jevops.lean import require_plan_caches as _fn
+
+    return _fn(
+        plan.jobs,
+        require_fn=require_cache,
+        network=network,
+        state_root=state_root,
+    )
 
 
 def lake_argv(lean_tag: str, *args: str, elan_home: Optional[Path] = None) -> list[str]:
-    from jevops.outer import prepend_argv
+    from jevops.outer import drive_lake_argv
 
-    pin = tag_pinned_paths(lean_tag, elan_home=elan_home)
-    return prepend_argv(pin["lake_path"], *args)
+    return drive_lake_argv(lean_tag, args, pin_fn=tag_pinned_paths, elan_home=elan_home)
 
 
 def _run_tag_pinned_lake(
@@ -439,29 +454,18 @@ def _run_tag_pinned_lake(
 ) -> dict[str, Any]:
     """Run tag-pinned lake. Never PATH ``lake``. Not used by --self-check."""
 
-    from jevops.outer import run_pinned_bin
+    from jevops.lean import drive_run_pinned_lake
 
-    pin = tag_pinned_paths(lean_tag, elan_home=elan_home)
-    return run_pinned_bin(
-        [pin["lake_path"], *list(args)],
-        basename="lake",
+    return drive_run_pinned_lake(
+        lean_tag,
+        args,
         cwd=cwd,
-        env=env,
         timeout=timeout,
+        env=env,
+        elan_home=elan_home,
+        paths_fn=tag_pinned_paths,
         error_cls=BakeError,
         miss_cls=BakeToolchainMissing,
-        installed=bool(pin["installed"]),
-        miss=(
-            "tag-pinned elan toolchain not installed at "
-            f"{pin['toolchain_dir']} (lean_tag={lean_tag!r}; never falling back "
-            "to PATH lean/lake)"
-        ),
-        timeout_fmt=f"tag-pinned lake timed out for {lean_tag}: {{error}}",
-        extra={
-            "lake_path": pin["lake_path"],
-            "lean_path": pin["lean_path"],
-            "arena_score": None,
-        },
     )
 
 
@@ -475,56 +479,33 @@ def bake_job(
 ) -> dict[str, Any]:
     """Return a cache hit, fail closed under network=deny, or bake if asked."""
 
-    from jevops.lean import bake_or_hit
-    from jevops.outer import git_checkout, path_or, url_clone_dir
+    from jevops.lean import drive_bake_job
+    from jevops.outer import git_checkout, git_clone_if_missing, path_or, url_clone_dir
 
-    root = path_or(state_root, factory=default_state_root)
-
-    def _clone(item: BakeJob) -> Path:
-        from jevops.outer import git_clone_if_missing
-
-        return git_clone_if_missing(
-            item.url,
-            url_clone_dir(root, item.url),
-            git_bin=GIT_BIN,
-            error_cls=BakeError,
-            miss_cls=BakeToolchainMissing,
-        )
-
-    def _checkout(clone: Path, commit: str) -> Any:
-        return git_checkout(
-            clone,
-            commit,
-            git_bin=GIT_BIN,
-            error_cls=BakeError,
-            miss_cls=BakeToolchainMissing,
-            skip_empty=False,
-            skip_missing_git=False,
-        )
-
-    from jevops.outer import overlay_if_status
-
-    out = bake_or_hit(
+    return drive_bake_job(
         job,
         network=network,
         execute=execute,
-        require_cache_fn=lambda item, network: require_cache(item, network=network, state_root=root),
+        root=path_or(state_root, factory=default_state_root),
+        timeout=timeout,
+        require_cache_fn=require_cache,
         tag_paths_fn=tag_pinned_paths,
         materialize_fn=lambda item, project: materialize_putnam_project(
             item.lean_tag, project, jsonl_version_pin=item.git_commit
         ),
-        putnam_dir_fn=lambda item: putnam_project_dir(item, root),
-        clone_fn=_clone,
-        checkout_fn=_checkout,
-        run_lake_fn=lambda tag, args, cwd: _run_tag_pinned_lake(tag, args, cwd=cwd, timeout=timeout),
+        putnam_dir_fn=putnam_project_dir,
+        run_lake_fn=_run_tag_pinned_lake,
         copy_oleans_fn=_copy_oleans,
-        cache_dir_fn=lambda item: job_cache_dir(item, root),
-        mark_fn=lambda cache_dir: cache_marker_path(cache_dir).write_text("baked\n", encoding="utf-8"),
+        cache_dir_fn=job_cache_dir,
         olean_fn=olean_paths,
         error_cls=BakeError,
         miss_cls=BakeToolchainMissing,
+        git_bin=GIT_BIN,
+        git_clone_fn=git_clone_if_missing,
+        git_checkout_fn=git_checkout,
+        url_clone_dir_fn=url_clone_dir,
+        lake_argv_fn=lake_argv,
     )
-    return overlay_if_status(out, "baked", {"lake_argv": lake_argv(job.lean_tag, "build")})
 
 
 def _copy_oleans(src: Path, dest: Path) -> None:
@@ -542,26 +523,19 @@ def _copytree(src: Path, dest: Path) -> None:
 def write_candidate(lean_tag: str, source_text: str, dest: Optional[Path] = None) -> Path:
     """Copy a Putnam candidate into Putnam/Candidate.lean. Never Tmp.lean."""
 
-    from jevops.lean import putnam_bake_job
-    from jevops.outer import if_none
+    from jevops.lean import drive_write_candidate, putnam_bake_job, write_putnam_candidate
 
-    dest = if_none(
-        dest,
-        factory=lambda: putnam_project_dir(
-            putnam_bake_job(
-                lean_tag=normalize_lean_tag(lean_tag),
-                putnam_source=PUTNAM_SOURCE,
-                putnam_relpath=PUTNAM_CANDIDATE_RELPATH,
-                putnam_module=PUTNAM_MODULE,
-            )
-        ),
-    )
-    from jevops.lean import write_putnam_candidate
-
-    return write_putnam_candidate(
-        dest,
+    return drive_write_candidate(
+        lean_tag,
         source_text,
-        candidate_relpath=PUTNAM_CANDIDATE_RELPATH,
+        dest,
+        normalize_fn=normalize_lean_tag,
+        job_fn=putnam_bake_job,
+        dir_fn=putnam_project_dir,
+        write_fn=write_putnam_candidate,
+        relpath=PUTNAM_CANDIDATE_RELPATH,
+        source=PUTNAM_SOURCE,
+        module=PUTNAM_MODULE,
         refuse=FORBIDDEN_PUTNAM_BASENAME,
         error_cls=BakeError,
     )
@@ -700,22 +674,14 @@ def _synthetic_fail_closed(plan: BakePlan) -> dict[str, Any]:
 
 
 def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
-    from jevops.outer import if_none
+    from jevops.lean import drive_home_probe
 
-    tags = if_none(tags, (STRATA_FIRST_TAG, *PUTNAM_TAGS))
-    from jevops.lean import probe_pins
-    from jevops.outer import env_str, text_or
-
-    return probe_pins(
-        list(tags),
+    return drive_home_probe(
+        tags,
+        default_tags=(STRATA_FIRST_TAG, *PUTNAM_TAGS),
         resolve_fn=tag_pinned_paths,
-        extra={
-            "default_elan_home": text_or(default_elan_home()),
-            "elan_home_env": env_str("ELAN_HOME"),
-            "lake": False,
-            "path": env_str("PATH"),
-            "validation_home": text_or(Path.home()),
-        },
+        elan_home_fn=default_elan_home,
+        extra={},
         gap_msg=(
             "No tag-pinned elan lean/lake binaries are installed under the "
             "resolver elan home. Paths remain tag-pinned; this is not PATH "

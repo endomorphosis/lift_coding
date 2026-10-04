@@ -159,41 +159,27 @@ def statement_plus_tactics(statement: str, tactics: str) -> str:
 
 
 def candidate_source(record: Mapping[str, Any], tactics: str) -> str:
-    from jevops.lean import lake_candidate_source
+    from jevops.lean import drive_split_candidate
 
-    split = lra_splice.split_statement_body(record)
-    return lake_candidate_source(
-        header=split.header,
-        statement=split.statement,
-        tactic_block=tactics,
-    )
+    return drive_split_candidate(record, tactics, split_fn=lra_splice.split_statement_body)
 
 
 def record_with_tactics(record: Mapping[str, Any], tactics: str) -> dict[str, Any]:
-    from jevops.outer import get_str, with_field
+    from jevops.outer import drive_record_src
 
-    return with_field(record, "src", statement_plus_tactics(get_str(record, "statement"), tactics))
+    return drive_record_src(record, tactics, join_fn=statement_plus_tactics)
 
 
 def pin_loop_env() -> None:
-    from jevops.outer import pin_env, pin_sys_path
+    from jevops.outer import drive_pin_loop
 
-    lra_d0.pin_client_env()
-    pin_env(
-        {
-            AUTOSTART_ENV: "0",
-            "LRA_TYPESAFE": TYPESAFE,
-            "LRA_GENERATOR": GENERATOR,
-            "LRA_HARDWARE": HARDWARE_CLASS,
-            "LRA_LOOP": LOOP_VERSION,
-        }
-    )
-    pin_sys_path(
-        "",
-        defaults={
-            "IPFS_ACCEL_SKIP_CORE": "1",
-            "IPFS_AUTO_INSTALL": "false",
-        },
+    drive_pin_loop(
+        client_pin_fn=lra_d0.pin_client_env,
+        autostart_env=AUTOSTART_ENV,
+        typesafe=TYPESAFE,
+        generator=GENERATOR,
+        hardware=HARDWARE_CLASS,
+        loop=LOOP_VERSION,
     )
 
 
@@ -204,13 +190,12 @@ def effective_typesafe_mode() -> str:
 
 
 def render_loop_prompt(record: Mapping[str, Any], retrieval: lra_retrieve.Retrieval) -> str:
-    from jevops.lean import retrieval_prompt_extra
+    from jevops.lean import drive_retrieval_prompt
 
-    base = lra_gt.render_prompt(record)
-    lemmas = ", ".join(item.name for item in retrieval.src_lemmas)
-    return base + retrieval_prompt_extra(
-        lemmas=lemmas,
-        n_neighbors=len(retrieval.neighbors),
+    return drive_retrieval_prompt(
+        record,
+        retrieval,
+        prompt_fn=lra_gt.render_prompt,
         lemma_cap=lra_retrieve.SRC_LEMMA_CAP,
     )
 
@@ -227,16 +212,8 @@ def maybe_generate(
 ) -> lra_gt.LraGeneration:
     """Call Leanstral iff docker0 ``/health`` is ok. Skip only when down."""
 
-    from jevops.outer import exc_text, require_env_eq
-
-    pin_loop_env()
-    require_env_eq(
-        AUTOSTART_ENV,
-        "0",
-        error_cls=LoopError,
-        fmt="{key} must be {expected}; refusing to generate",
-    )
-    from jevops.lean import failed_generation, generate_if_healthy
+    from jevops.lean import drive_maybe_generate, failed_generation
+    from jevops.outer import exc_text
 
     def _fail(exc: BaseException) -> lra_gt.LraGeneration:
         return failed_generation(
@@ -249,8 +226,11 @@ def maybe_generate(
             skipped=False,
         )
 
-    return generate_if_healthy(
-        health_ok=bool(health.ok),
+    return drive_maybe_generate(
+        pin_fn=pin_loop_env,
+        autostart_env=AUTOSTART_ENV,
+        error_cls=LoopError,
+        health=health,
         generate_fn=lambda: lra_gt.generate_lra(
             prompt,
             max_new_tokens=max_new_tokens,
@@ -282,11 +262,10 @@ def _all_tags_ok(
     record: Mapping[str, Any],
     receipts: Sequence[lra_cw.CompileReceipt],
 ) -> bool:
-    from jevops.outer import flatten_version_tags
-    from jevops.outer import listed_all_ok
+    from jevops.outer import drive_tags_ok
 
-    return listed_all_ok(
-        flatten_version_tags(record.get("version_info")),
+    return drive_tags_ok(
+        record.get("version_info"),
         receipts,
         id_fn=lambda item: item.lean_tag,
         ok_fn=lambda item: bool(item.ok) and not item.sorryAx and item.exit_code == 0,
@@ -305,33 +284,27 @@ def compile_tactics(
 ) -> list[lra_cw.CompileReceipt]:
     """Lake-compile a tactic block. IndependentKernelVerifier is not the oracle."""
 
-    timeout = lra_cw.require_lake_timeout(timeout)
-    candidate_record = record_with_tactics(record, tactics)
-    pins = lra_cw.iter_version_pins(record.get("version_info"))
-    from jevops.lean import write_then_compile
+    from jevops.lean import drive_compile_tactics
     from jevops.outer import write_text
 
-    return write_then_compile(
+    return drive_compile_tactics(
         record,
         tactics,
-        putnam_source=lra_cw.PUTNAM_SOURCE,
-        pins=pins,
-        candidate_record=candidate_record,
-        source_text=candidate_source(record, tactics),
+        timeout=timeout,
+        state_root=state_root,
+        elan_home=elan_home,
+        network=network,
+        skip_checkout=skip_checkout,
+        require_timeout_fn=lra_cw.require_lake_timeout,
+        with_tactics_fn=record_with_tactics,
+        pins_fn=lra_cw.iter_version_pins,
+        source_text_fn=candidate_source,
         project_dir_fn=lambda rec, pin: lra_cw.project_dir_for_record(rec, pin, state_root=state_root),
         relpath_fn=lra_cw.source_relpath,
         write_fn=write_text,
-        compile_fn=lambda rec: lra_cw.compile_record(
-            rec,
-            timeout=timeout,
-            state_root=state_root,
-            elan_home=elan_home,
-            network=network,
-            require_oleans=False,
-            hardware_class=HARDWARE_CLASS,
-            skip_checkout=skip_checkout,
-            abort_on_first_failure=True,
-        ),
+        compile_record_fn=lra_cw.compile_record,
+        putnam_source=lra_cw.PUTNAM_SOURCE,
+        hardware_class=HARDWARE_CLASS,
     )
 
 
@@ -352,12 +325,15 @@ def evaluate_candidate(
     skipped_generate: bool = False,
     generate_error: str = "",
 ) -> CandidateRecord:
-    from jevops.lean import attach_compile, evaluate_with_compile, make_candidate, score_candidate
+    from jevops.lean import attach_compile, drive_evaluate_candidate, make_candidate, score_candidate
 
-    return evaluate_with_compile(
+    return drive_evaluate_candidate(
+        record,
         kind=kind,
         tactics=tactics,
-        source_text=candidate_source(record, tactics),
+        generator=generator,
+        source_fn=candidate_source,
+        token_fn=token_count,
         admit_fn=lambda body: admit_tactics(record, body),
         make_fn=make_candidate,
         compile_fn=lambda body: compile_tactics(
@@ -383,8 +359,6 @@ def evaluate_candidate(
             reconstructed_ok=reconstructed_ok,
         ),
         reconstruct_fn=lambda: lra_splice.split_statement_body(record).reconstructed_src == record["src"],
-        generator=generator,
-        token_count=token_count(tactics),
         hardware_class=HARDWARE_CLASS,
         called_leanstral=called_leanstral,
         skipped_generate=skipped_generate,
@@ -407,12 +381,14 @@ def keep_best(candidates: Sequence[CandidateRecord]) -> Optional[CandidateRecord
 
 
 def _failure_row(candidate: CandidateRecord) -> dict[str, Any]:
-    from jevops.lean import failure_row
+    from jevops.lean import drive_failing_tags, failure_row
     from jevops.pick import project_items
 
-    failing_tags = project_items(
-        [item for item in candidate.compile_receipts if not item.ok],
-        {
+    return drive_failing_tags(
+        candidate,
+        project_fn=project_items,
+        row_fn=failure_row,
+        fields={
             "lean_tag": "lean_tag",
             "ok": "ok",
             "exit_code": "exit_code",
@@ -421,8 +397,8 @@ def _failure_row(candidate: CandidateRecord) -> dict[str, Any]:
             "hardware_class": lambda _item: HARDWARE_CLASS,
             "arena_score": lambda _item: None,
         },
+        hardware_class=HARDWARE_CLASS,
     )
-    return failure_row(candidate, hardware_class=HARDWARE_CLASS, failing_tags=failing_tags)
 
 
 def run_problem(
@@ -442,125 +418,59 @@ def run_problem(
 ) -> ProblemResult:
     """One warm-up problem through loop v1. Hammers and TypeSafe stay off."""
 
-    pin_loop_env()
-    split = lra_splice.split_statement_body(record)
-    from jevops.outer import first_truthy, get_str, if_none
+    from jevops.lean import drive_warmup_problem
 
-    probe = if_none(health, factory=lra_d0.probe_docker0_health)
-    ref_tactics = lra_splice.tactic_block_from_body(split.body_suffix)
-    stripped = first_truthy(strip_body_comments(ref_tactics).strip(), ref_tactics)
-    from jevops.lean import (
-        append_generated,
-        collect_warmup_problem,
-        generation_skip_reason,
-        pack_problem_result,
-        pin_reference_scores,
-    )
-
-    def _eval(
-        kind: str,
-        tactics: str,
-        *,
-        generator: str,
-        reference_tokens: int,
-        reference_elab_ms: float,
-        called_leanstral: bool = False,
-        generate_error: str = "",
-    ) -> CandidateRecord:
-        return evaluate_candidate(
-            record,
-            kind=kind,
-            tactics=tactics,
-            generator=generator,
-            reference_tokens=reference_tokens,
-            reference_elab_ms=reference_elab_ms,
-            timeout=compile_timeout,
-            state_root=state_root,
-            elan_home=elan_home,
-            network=network,
-            skip_checkout=skip_checkout,
-            called_leanstral=called_leanstral,
-            generate_error=generate_error,
-        )
-
-    return collect_warmup_problem(
+    return drive_warmup_problem(
         record,
         records,
-        split=split,
-        reconstruct_ok=record["src"] == split.reconstructed_src,
-        error_cls=LoopError,
+        health=health,
+        generate=generate,
+        get_trace=get_trace,
+        max_new_tokens=max_new_tokens,
+        generate_timeout=generate_timeout,
+        compile_timeout=compile_timeout,
+        state_root=state_root,
+        elan_home=elan_home,
+        network=network,
+        skip_checkout=skip_checkout,
+        pin_env_fn=pin_loop_env,
+        split_fn=lra_splice.split_statement_body,
+        probe_factory=lra_d0.probe_docker0_health,
+        tactic_from_body_fn=lra_splice.tactic_block_from_body,
+        strip_fn=strip_body_comments,
+        evaluate_fn=evaluate_candidate,
         retrieve_fn=lra_retrieve.retrieve_record,
         phases=list(V1_PHASES),
-        probe=probe,
-        ref_tactics=ref_tactics,
-        stripped=stripped,
-        token_fn=token_count,
-        evaluate_fn=_eval,
-        pin_fn=pin_reference_scores,
         composite_fn=composite_score,
         prompt_fn=render_loop_prompt,
-        generate_fn=lambda prompt: maybe_generate(
-            prompt,
-            health=probe,
-            source=get_str(record, "source"),
-            max_new_tokens=max_new_tokens,
-            timeout=generate_timeout,
-            generate=generate,
-            get_trace=get_trace,
-        ),
-        skip_reason_fn=generation_skip_reason,
-        append_fn=append_generated,
+        maybe_generate_fn=maybe_generate,
         extract_fn=extract_generated_tactics,
         keep_fn=keep_best,
         failure_fn=_failure_row,
-        pack_fn=pack_problem_result,
+        token_fn=token_count,
+        error_cls=LoopError,
         max_candidates=MAX_CANDIDATES,
         hardware_class=HARDWARE_CLASS,
         hammers=HAMMERS,
         typesafe=effective_typesafe_mode(),
         generator=GENERATOR,
         loop_version=LOOP_VERSION,
-        generator_default=GENERATOR,
     )
 
 
 def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, str]:
-    from jevops.outer import path_safe, write_tree
+    from jevops.lean import drive_problem_receipt
 
-    from jevops.lean import compile_receipt_files
-
-    kept = result.kept
-    from jevops.outer import attr_or, first_truthy
-
-    candidate_text = first_truthy(attr_or(kept, "source_text", ""), default="")
-    receipt_files, compile_records = compile_receipt_files(kept, hardware_class=HARDWARE_CLASS)
-    from jevops.lean import admission_receipt, problem_receipt_json
-    from jevops.outer import overlay_map
-
-    files = overlay_map(
-        overlay_map({"candidate.lean": candidate_text}, **overlay_map(receipt_files)),
-        **{
-            "problem.json": problem_receipt_json(
-                result,
-                schema=PROBLEM_SCHEMA,
-                hammers=HAMMERS,
-                hardware_class=HARDWARE_CLASS,
-                loop_version=LOOP_VERSION,
-                typesafe=TYPESAFE,
-                warmup_sha256=FROZEN_WARMUP_SHA256,
-                compile_records=compile_records,
-                candidate_text=candidate_text,
-            ),
-            "result.json": result.to_dict(),
-            "admission.json": admission_receipt(result, hardware_class=HARDWARE_CLASS),
-        },
-    )
-    paths = write_tree(Path(dest_dir) / path_safe(result.name), files)
-    from jevops.outer import index_paths
-
-    return index_paths(
-        paths,
-        {
+    return drive_problem_receipt(
+        result,
+        dest_dir,
+        hardware_class=HARDWARE_CLASS,
+        schema=PROBLEM_SCHEMA,
+        hammers=HAMMERS,
+        loop_version=LOOP_VERSION,
+        typesafe=TYPESAFE,
+        warmup_sha256=FROZEN_WARMUP_SHA256,
+        index={
             "admission": "admission.json",
             "candidate": "candidate.lean",
             "problem": "problem.json",
@@ -570,18 +480,19 @@ def write_problem_receipt(result: ProblemResult, dest_dir: Path) -> dict[str, st
 
 
 def plant_repo_clone(url: str, state_root: Path) -> Path:
-    from jevops.lean import plant_synthetic_clone, render_lean_toolchain, render_package_lakefile
+    from jevops.lean import drive_plant_named, render_lean_toolchain, render_package_lakefile
 
-    clone = lra_cw.clone_dir(url, state_root)
-
-    return plant_synthetic_clone(
-        clone,
-        {
-            "lakefile.lean": render_package_lakefile(
-                package="lra", lib="Lra", max_heartbeats=lra_cw.MEASUREMENT_MAX_HEARTBEATS
-            ),
-            "lean-toolchain": render_lean_toolchain("v4.26.0"),
-        },
+    return drive_plant_named(
+        None,
+        package="lra",
+        lib="Lra",
+        heartbeats=lra_cw.MEASUREMENT_MAX_HEARTBEATS,
+        tag="v4.26.0",
+        lakefile_fn=render_package_lakefile,
+        toolchain_fn=render_lean_toolchain,
+        clone_fn=lra_cw.clone_dir,
+        url=url,
+        state_root=state_root,
     )
 
 
@@ -590,13 +501,12 @@ def plant_loop_env(
     *,
     parent: Optional[Path] = None,
 ) -> dict[str, Any]:
-    from jevops.lean import plant_loop_workspace
-    from jevops.outer import path_or
+    from jevops.lean import drive_plant_loop
 
-    root_parent = path_or(parent, factory=lra_cw._exec_scratch_parent)
-    return plant_loop_workspace(
+    return drive_plant_loop(
         records,
-        parent=root_parent,
+        parent=parent,
+        parent_factory=lra_cw._exec_scratch_parent,
         prefix="lra-017-loop-",
         pin_iter_fn=lambda info: lra_cw.iter_version_pins(info),
         plant_toolchain_fn=lra_cw.plant_fake_toolchain,
@@ -622,56 +532,31 @@ def run_warmup(
     receipts_dir: Optional[Path] = None,
     plant_synthetic: bool = False,
 ) -> dict[str, Any]:
-    pin_loop_env()
-    raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    from jevops.outer import select_limit, select_named
+    from jevops.lean import drive_warmup_batch
 
-    selected = select_limit(
-        select_named(records, names, error_cls=LoopError, miss_fmt="unknown warm-up names: {missing}"),
-        limit,
-    )
-    planted = None
-    if plant_synthetic:
-        planted = plant_loop_env(selected)
-        elan_home = planted["elan_home"]
-        state_root = planted["state_root"]
-        skip_checkout = True
-        network = "deny"
-    from jevops.outer import if_none, map_collect, optional_fn
-
-    live_health = if_none(health, factory=lra_d0.probe_docker0_health)
-
-    results, written = map_collect(
-        selected,
-        lambda record: run_problem(
-            record,
-            records,
-            health=live_health,
-            generate=generate,
-            get_trace=get_trace,
-            max_new_tokens=max_new_tokens,
-            generate_timeout=generate_timeout,
-            compile_timeout=compile_timeout,
-            state_root=state_root,
-            elan_home=elan_home,
-            network=network,
-            skip_checkout=skip_checkout,
-        ),
-        after_fn=optional_fn(
-            receipts_dir is not None,
-            lambda result: list(write_problem_receipt(result, Path(receipts_dir)).values()),
-        ),
-    )
-    from jevops.lean import warmup_batch_payload
-
-    return warmup_batch_payload(
-        digest=digest,
-        results=results,
-        health_ok=bool(live_health.ok),
-        jsonl_bytes=len(raw),
-        n_records=len(records),
-        planted=bool(planted),
-        written=written,
+    return drive_warmup_batch(
+        jsonl=jsonl,
+        names=names,
+        limit=limit,
+        health=health,
+        generate=generate,
+        get_trace=get_trace,
+        max_new_tokens=max_new_tokens,
+        generate_timeout=generate_timeout,
+        compile_timeout=compile_timeout,
+        state_root=state_root,
+        elan_home=elan_home,
+        network=network,
+        skip_checkout=skip_checkout,
+        receipts_dir=receipts_dir,
+        plant_synthetic=plant_synthetic,
+        pin_env_fn=pin_loop_env,
+        load_fn=lra_splice.load_warmup_records,
+        plant_fn=plant_loop_env,
+        probe_factory=lra_d0.probe_docker0_health,
+        run_fn=run_problem,
+        write_fn=write_problem_receipt,
+        error_cls=LoopError,
         generator=GENERATOR,
         hammers=HAMMERS,
         hardware_class=HARDWARE_CLASS,
@@ -684,24 +569,19 @@ def run_warmup(
 
 
 def plan_loop(jsonl: Optional[Path] = None) -> dict[str, Any]:
-    from jevops.outer import env_str
+    from jevops.lean import drive_plan_loop, plan_loop_problems
 
-    raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    pin_loop_env()
-    health = lra_d0.probe_docker0_health()
-    from jevops.lean import plan_loop_payload, plan_loop_problems
-
-    problems = plan_loop_problems(
-        records,
-        split_fn=lra_splice.split_statement_body,
-        pins_fn=lambda rec: lra_cw.iter_version_pins(rec.get("version_info")),
-    )
-    return plan_loop_payload(
-        digest=digest,
-        problems=problems,
-        health=health,
-        jsonl_bytes=len(raw),
-        autostart=env_str(AUTOSTART_ENV),
+    return drive_plan_loop(
+        jsonl,
+        load_fn=lra_splice.load_warmup_records,
+        pin_fn=pin_loop_env,
+        probe_fn=lra_d0.probe_docker0_health,
+        problems_fn=lambda records: plan_loop_problems(
+            records,
+            split_fn=lra_splice.split_statement_body,
+            pins_fn=lambda rec: lra_cw.iter_version_pins(rec.get("version_info")),
+        ),
+        autostart_env=AUTOSTART_ENV,
         health_url=lra_gt.DOCKER0_HEALTH_URL,
         generator=GENERATOR,
         hammers=HAMMERS,

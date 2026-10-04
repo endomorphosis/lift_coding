@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 
 from pathlib import Path
@@ -23,7 +22,6 @@ HERE = Path(__file__).resolve().parent
 PAPER_ROOT = HERE.parent
 OUT_DEFAULT = PAPER_ROOT / "evidence" / "canaries"
 PR_ID = "PR-9h"
-_JSON_OBJ = re.compile(r"\{.*\}", re.DOTALL)
 
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
@@ -35,7 +33,6 @@ import typesafe_inner as lra_inner  # noqa: E402
 from jevops.outer import deterministic_route  # noqa: E402
 from jevops.outer import nca_status as nca_status_for_router  # noqa: E402
 from jevops.outer import parse_action as _parse_action  # noqa: E402
-from jevops.outer import route_next as _route_next  # noqa: E402
 from jevops.catalogs import KEEP_WORDS  # noqa: E402
 from jevops.catalogs import OUTER_ACTIONS as ACTIONS  # noqa: E402
 from jevops.catalogs import OUTER_ROUTER_EXTRA  # noqa: E402
@@ -78,9 +75,9 @@ def router_prompt(
     *,
     nca_status: Optional[Mapping[str, Any]] = None,
 ) -> str:
-    from jevops.outer import format_prompt
+    from jevops.outer import drive_router_text
 
-    return format_prompt(
+    return drive_router_text(
         preamble=OUTER_ROUTER_PREAMBLE,
         actions=ACTIONS,
         extra=OUTER_ROUTER_EXTRA,
@@ -88,7 +85,7 @@ def router_prompt(
         gaps=gaps,
         last_lake=last_lake,
         nca_status=nca_status,
-        total=board_total(board),
+        total_fn=board_total,
     )
 
 
@@ -105,10 +102,7 @@ def route_next_action(
 ) -> dict[str, Any]:
     """llm_router grok when --llm on; else deterministic AutoResearch route."""
 
-    from jevops.outer import call_if, false_when, optional_fn
-
-    nca = nca_status_for_router(memory)
-    llm = false_when(llm, nca.get("budget_dead"), nca.get("halt"))
+    from jevops.outer import drive_route_action
 
     def _generate(prompt: str) -> str:
         text, _identity, _line = lra_t1.generate_grok(
@@ -121,17 +115,19 @@ def route_next_action(
         )
         return text
 
-    return _route_next(
+    return drive_route_action(
+        board=board,
         gaps=gaps,
         last_lake=last_lake,
         stalled=stalled,
         llm=llm,
         memory=memory,
-        generate_fn=optional_fn(llm, _generate),
-        prompt=call_if(
-            llm, lambda: router_prompt(board, gaps, last_lake, nca_status=nca), default=""
-        ),
         ledger=ledger,
+        status_fn=nca_status_for_router,
+        generate_fn=_generate,
+        prompt_fn=lambda board, gaps, last_lake, nca: router_prompt(
+            board, gaps, last_lake, nca_status=nca
+        ),
     )
 
 
@@ -153,23 +149,17 @@ def canary_args(
     seed: int,
     nest_depth: int = 3,
 ) -> argparse.Namespace:
-    from jevops.outer import first_int, namespace
+    from jevops.outer import drive_canary_namespace
 
-    return namespace(
-        live=True,
-        all_small=True,
-        from_best=True,
-        rounds=first_int(rounds),
-        lake_top=first_int(lake_top),
-        drafts=first_int(drafts),
-        timeout=float(timeout),
-        init_139=True,
-        seed=first_int(seed),
-        k=lra_rand.DEFAULT_K,
+    return drive_canary_namespace(
         out=out,
-        include_inits=False,
-        quiet=True,
-        nest_depth=first_int(nest_depth),
+        rounds=rounds,
+        lake_top=lake_top,
+        drafts=drafts,
+        timeout=timeout,
+        seed=seed,
+        nest_depth=nest_depth,
+        k=lra_rand.DEFAULT_K,
     )
 
 
@@ -232,106 +222,49 @@ def run_loop(
     run_inner: Optional[Callable[[argparse.Namespace], dict[str, Any]]] = None,
     memory: Optional[dict[str, Any]] = None,
     persist_memory: bool = True,
+    on_step: Optional[Any] = None,
 ) -> dict[str, Any]:
     """OUTER Grok (llm_router). INNER TypeSafe keep-loop + recursive skill-tree nests."""
 
-    from jevops.outer import if_none
-
-    memory = if_none(memory, factory=lra_bind.load_memory)
     import board_graph as lra_board_seed
-    from jevops.outer import seed_runtime
+    import typesafe_nca as lra_nca_halt
+    from jevops.outer import drive_skill_loop, or_int
 
-    seed_runtime(
-        memory,
+    return drive_skill_loop(
+        outer=outer,
+        llm=llm,
+        out=out,
+        rounds=rounds,
+        lake_top=lake_top,
+        drafts=drafts,
+        timeout=timeout,
+        seed=seed,
+        generate=generate,
+        run_inner=run_inner,
+        memory=memory,
+        persist_memory=persist_memory,
+        load_memory_fn=lra_bind.load_memory,
         seed_fn=lra_board_seed.seed_nca_from_board,
         overlay_fn=lra_board_seed.overlay_live_board,
         keepbest_fn=lambda mem: lra_board_seed.seed_keepbest_theorems(
             mem, keep_best_board(out), warmup=lra_board_seed.warmup_token_map()
         ),
-    )
-    from jevops.outer import call_if, first_int, jev_budget, or_int
-
-    ledger = lra_t1.ProblemLedger(
-        name="warmup#skill-improve-loop",
-        max_jev_calls=jev_budget(6 * first_int(rounds) * first_int(outer), 1, 1),
-        max_grok_calls=or_int(call_if(llm, lambda: first_int(outer), default=0), 1, floor=1),
-        max_mistral_calls=0,
-    )
-    inner = if_none(run_inner, lra_rand.run_live)
-    nest_depth = or_int(lra_rand.NEST_MAX_DEPTH, 1, floor=1)
-    from jevops.outer import optional_fn, pop_nested, run_steps
-
-    def _board_fn() -> tuple[dict[str, int], int]:
-        from jevops.outer import mapping_and_total
-
-        return mapping_and_total(lambda: keep_best_board(out), board_total)
-
-    def _route_fn(*, board, gaps, last_lake, stalled):
-        return route_next_action(
-            board=board,
-            gaps=gaps,
-            last_lake=last_lake,
-            stalled=stalled,
-            llm=bool(llm),
-            ledger=ledger,
-            generate=generate,
-            memory=memory,
-        )
-
-    def _inner_fn(step: int) -> dict[str, Any]:
-        return inner(
-            canary_args(
-                out=out,
-                rounds=rounds,
-                lake_top=lake_top,
-                drafts=drafts,
-                timeout=timeout,
-                seed=seed + step,
-                nest_depth=nest_depth,
-            )
-        )
-
-    def _halt(mem: dict[str, Any]) -> dict[str, Any]:
-        import typesafe_nca as lra_nca_halt
-
-        from jevops.outer import overlay_map
-
-        return overlay_map(lra_nca_halt.should_halt(mem))
-
-    stepped = run_steps(
-        n=first_int(outer),
-        memory=memory,
-        llm=bool(llm),
-        gaps_fn=lambda: lra_bind.skill_gap_report(memory),
-        route_fn=_route_fn,
+        ledger_cls=lra_t1.ProblemLedger,
+        default_inner=lra_rand.run_live,
+        nest_depth=or_int(lra_rand.NEST_MAX_DEPTH, 1, floor=1),
+        board_fn=lambda: keep_best_board(out),
+        board_total_fn=board_total,
+        route_fn=route_next_action,
+        canary_args_fn=canary_args,
         apply_fn=apply_action,
-        inner_fn=_inner_fn,
-        board_fn=_board_fn,
-        persist_fn=optional_fn(persist_memory, lra_bind.save_memory),
-        halt_fn=_halt,
+        gaps_fn=lra_bind.skill_gap_report,
+        save_fn=lra_bind.save_memory,
+        memory_default=lra_bind.MEMORY_DEFAULT,
+        halt_fn=lra_nca_halt.should_halt,
         flatten_fn=lra_inner.flatten_trace,
-        hard_stop_fn=lambda: bool(getattr(ledger, "hard_stopped", False)),
-        stalled_limit=2,
-        on_inner_start=lambda mem: pop_nested(mem, "nca", "overlay_done"),
-    )
-    from jevops.outer import either, get_list, get_str, skill_loop_payload
-
-    mem_path = either(
-        persist_memory, lambda: lra_bind.save_memory(memory), lambda: lra_bind.MEMORY_DEFAULT
-    )
-    return skill_loop_payload(
-        outer=outer,
-        llm=llm,
-        history=get_list(stepped, "history"),
-        board=keep_best_board(out),
-        total=board_total(keep_best_board(out)),
-        best_total=stepped.get("best_total"),
-        stop_reason=get_str(stepped, "stop_reason"),
-        memory_path=mem_path,
-        memory_skills=get_list(memory, "skills"),
-        ledger=ledger,
         protocol=PROTOCOL,
         pr_id=PR_ID,
+        on_step=on_step,
     )
 
 
