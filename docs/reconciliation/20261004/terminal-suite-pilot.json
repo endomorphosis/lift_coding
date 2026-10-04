@@ -1,0 +1,65 @@
+{
+  "accelerate_publication": "fc1d4057f65a52451bea6c9f0b26ea77125d8c9b",
+  "actual_benchmark_sources": {
+    "datasets": "d5aaf256618c53b009695e8d5618436fba1c0419",
+    "kit": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+    "source": "4344c7272ebe3c5f26f192d4cb10c962a43eff34"
+  },
+  "all_services_restored": true,
+  "benchmark_advantage_claimed": false,
+  "cached_tokens_included": true,
+  "ci": {
+    "conclusion": "failure",
+    "head_sha": "fc1d4057f65a52451bea6c9f0b26ea77125d8c9b",
+    "job": "documentation-gates",
+    "job_id": 111487135301,
+    "other_workflow_failure_causes_audited": false,
+    "reason": "The job was not started because your account is locked due to a billing issue.",
+    "run_id": 37219620579,
+    "steps": [],
+    "url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/37219620579",
+    "workflow": "Documentation Gates"
+  },
+  "component_checks": {
+    "benchmark_passed": 272,
+    "frozen_import_blocked_cases": 3,
+    "identical_frozen_failures": 7,
+    "overall_green": false,
+    "owner_failed": 10,
+    "owner_passed": 35
+  },
+  "matched_baselines": false,
+  "official_trials": [
+    {
+      "agent_seconds": 222.360036,
+      "observed_tokens": 391436,
+      "reward": {
+        "reward": 1.0
+      },
+      "supervisor_completed": true,
+      "task": "headless-terminal"
+    },
+    {
+      "agent_seconds": 845.225242,
+      "observed_tokens": 474865,
+      "reward": {
+        "reward": 0.0
+      },
+      "supervisor_completed": false,
+      "task": "largest-eigenval"
+    },
+    {
+      "agent_seconds": 288.546274,
+      "observed_tokens": 423871,
+      "reward": {
+        "reward": 1.0
+      },
+      "supervisor_completed": true,
+      "task": "feal-differential-cryptanalysis"
+    }
+  ],
+  "public_evidence_manifest_sha256": "3fbf6d14edf0fd271dd64f44269668280e74e60ab25f2347ea60b1eea8fd9f8b",
+  "remaining_tasks_outside_this_methodology_pilot": 85,
+  "retained_datasets_gitlink": "0808aa2cee87a9b45db896ebff0af3c8e9cbb464",
+  "schema": "terminal-suite-publication-observation@1"
+}
