@@ -151,6 +151,7 @@ def serve(database, state_dir, store_id, secret_handle, port=0):
     public = {"schema": "paper-quack-owner/v1", "ready": False, "database": str(database),
               "state_dir": str(state_dir), "checked_at": _now()}
     started = False
+    maintenance = None
     failure = None
     phase = "server_start"
     try:
@@ -160,6 +161,14 @@ def serve(database, state_dir, store_id, secret_handle, port=0):
         server.ready()
         phase = "initial_remote_readiness"
         probe = remote_readiness(server)
+        if store_id in {"vericodegen-2026-" + paper for paper in
+                        ("autoformalization", "law_to_action", "neurosymbolic_supervision", "lean_refactor_arena")}:
+            phase = "initial_contract_maintenance"
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("paper_owner_maintenance", ROOT / "scripts/paper_contract_maintenance.py")
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            maintenance = module.OwnerMaintenance(server, state_dir)
         public.update({"ready": True, "quack_endpoint": identity.listen_uri,
                        "endpoint_secret_handle": identity.secret_handle,
                        "store_id": identity.store_id, "store_generation": str(identity.generation),
@@ -187,6 +196,9 @@ def serve(database, state_dir, store_id, secret_handle, port=0):
                 phase = "periodic_readiness_publication"
                 _atomic_json(ready_path, public)
                 last_remote_check = time.monotonic()
+            phase = "paper_contract_maintenance"
+            if maintenance is not None:
+                maintenance.poll()
             phase = "loop_sleep"
             time.sleep(0.25)
         return 0
@@ -206,6 +218,11 @@ def serve(database, state_dir, store_id, secret_handle, port=0):
         raise
     finally:
         try:
+            if maintenance is not None:
+                try:
+                    maintenance.close()
+                except OSError as cleanup_error:
+                    _emit_failure(_failure_diagnostics(cleanup_error, "maintenance_shutdown"))
             if started:
                 cleanup_phase = "server_stop"
                 try:

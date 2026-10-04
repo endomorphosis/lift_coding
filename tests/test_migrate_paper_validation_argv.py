@@ -20,7 +20,7 @@ SPEC.loader.exec_module(MIG)
 
 
 @contextmanager
-def old_quack_board(paper, *, restart_owner=False):
+def old_quack_board(paper, *, restart_owner=False, prepare=None):
     isolated = {k: v for k, v in os.environ.items() if not k.startswith(("IPFS_ACCELERATE_AGENT_QUACK_", "IPFS_ACCELERATE_AGENT_STATE_"))}
     isolated["IPFS_ACCELERATE_AGENT_QUACK_PREFER"] = "false"
     with patch.dict(os.environ, isolated, clear=True), tempfile.TemporaryDirectory(prefix="paper-argv-migration-test-") as tmp:
@@ -29,6 +29,9 @@ def old_quack_board(paper, *, restart_owner=False):
         # Reproduce the former import representation, on a fresh test DB only.
         with patch.object(MIG.MAT, "_validation_argv", side_effect=lambda command, *_: ["bash", "-lc", command]):
             MIG.MAT.materialize(paper, database, ROOT)
+        if prepare is not None:
+            with native_source(database) as offline:
+                prepare(offline)
         argv = [sys.executable, str(ROOT / "scripts/paper_state_owner.py"), "--database", str(database),
              "--state-dir", str(owner), "--store-id", "vericodegen-2026-" + paper,
              "--secret-handle", "handle:migration-test"]
@@ -68,6 +71,7 @@ def old_quack_board(paper, *, restart_owner=False):
                     raise AssertionError("test owner generation did not advance")
             token = (owner / "handle_migration-test.quack-token").read_text().strip()
             os.environ[MIG.TOKEN_ENV] = token
+            os.environ["PAPER_OWNER_STATE_DIR"] = str(owner)
             yield ready["quack_endpoint"], token
         finally:
             if proc.poll() is None:
@@ -99,6 +103,17 @@ def upsert_record(source, record, **changes):
     return source.intent.upsert_task(**payload, expected_revision=record["revision"])
 
 
+def historical_ready_tasks(source):
+    """Recreate the all-ready historical maintenance state offline only.
+
+    Current reviewed LA/LRA boards also import authored blocked controls;
+    their unknown blocked receipts remain refusal cases in live migration.
+    """
+    for record in snapshot(source):
+        if record["status"] == "blocked":
+            upsert_record(source, record, status="ready")
+
+
 class PaperValidationMigrationTests(unittest.TestCase):
     def test_dispatch_forbidden_receipt_preserves_unknown_observation_and_rejects_positive_dispatch(self):
         failure = {"operation": "database_portal_attempt_failure", "reason": "validation_project_dependency_preflight_failed",
@@ -128,10 +143,10 @@ class PaperValidationMigrationTests(unittest.TestCase):
             if os.environ.get("PAPER_ARGV_RESTART_TEST_RECEIPT"):
                 Path(os.environ["PAPER_ARGV_RESTART_TEST_RECEIPT"]).write_text(json.dumps(report, indent=2) + "\n")
 
-    def test_all_three_actual_boards_migrate_with_one_event_per_task_and_idempotent_retry(self):
+    def test_all_four_reviewed_boards_migrate_with_one_event_per_task_and_idempotent_retry(self):
         receipts = []
         for paper in MIG.MAT.PAPERS:
-            with self.subTest(paper=paper), old_quack_board(paper) as (endpoint, token):
+            with self.subTest(paper=paper), old_quack_board(paper, prepare=historical_ready_tasks) as (endpoint, token):
                 with native_source(endpoint) as source:
                     before = snapshot(source)
                 dry = MIG.migrate(paper, endpoint, dry_run=True)
@@ -159,13 +174,12 @@ class PaperValidationMigrationTests(unittest.TestCase):
 
     def test_admission_rejects_any_inprogress_bad_argv_or_source_before_first_update(self):
         paper = "neurosymbolic_supervision"
-        with old_quack_board(paper) as (endpoint, _), native_source(endpoint) as source:
-            pristine = MIG.plain(source.intent.get_task("NS-025"))
-            for case in ("in_progress", "bad_argv", "bad_source", "unknown_blocked"):
+        for case in ("in_progress", "bad_argv", "bad_source", "unknown_blocked"):
+            def prepare(source):
                 current = MIG.plain(source.intent.get_task("NS-025"))
-                old_validation = pristine["validations"][0]
+                old_validation = current["validations"][0]
                 validation = {"argv": old_validation["argv"], **old_validation["policy"]}
-                body, status = dict(pristine["body"]), "ready"
+                body, status = dict(current["body"]), "ready"
                 if case == "in_progress":
                     status = "in_progress"
                 elif case == "bad_argv":
@@ -176,13 +190,12 @@ class PaperValidationMigrationTests(unittest.TestCase):
                     status = "blocked"
                     body["completion_receipt"] = {"operation": "unrelated"}
                 upsert_record(source, current, validations=[validation], body=body, status=status)
+            with self.subTest(case=case), old_quack_board(paper, prepare=prepare) as (endpoint, _), native_source(endpoint) as source:
                 before = MIG.digest(snapshot(source))
-                with self.subTest(case=case), self.assertRaises(MIG.MigrationError):
+                with self.assertRaises(MIG.MigrationError):
                     MIG.migrate(paper, endpoint)
                 self.assertEqual(MIG.digest(snapshot(source)), before)
-            current = MIG.plain(source.intent.get_task("NS-025"))
-            upsert_record(source, current, status="ready", body=pristine["body"],
-                          validations=[{"argv": old_validation["argv"], **old_validation["policy"]}])
+        with old_quack_board(paper) as (endpoint, _), native_source(endpoint) as source:
             before = MIG.digest(snapshot(source))
             with self.assertRaises(MIG.MigrationError):
                 MIG.migrate("law_to_action", endpoint)
@@ -190,17 +203,19 @@ class PaperValidationMigrationTests(unittest.TestCase):
 
     def test_exact_preflight_blocked_receipt_is_preserved_without_requeue(self):
         paper = "neurosymbolic_supervision"
-        with old_quack_board(paper) as (endpoint, _), native_source(endpoint) as source:
+        failure = {}
+        def prepare(source):
             task = MIG.plain(source.intent.get_task("NS-001"))
-            failure = {"operation": "database_portal_attempt_failure", "reason": "validation_project_dependency_preflight_failed",
+            failure.update({"operation": "database_portal_attempt_failure", "reason": "validation_project_dependency_preflight_failed",
                        "deferred": True, "attempt_consumed": False, "provider_dispatched": False,
                        "failure_kind": "lifecycle_setup", "repair_required": True,
                        "task_cid": task["task_cid"], "claim_id": "claim:test-fixture", "attempt_id": "attempt:test-fixture",
                        "owner_session_id": "session:test-fixture", "lease_id": "lease:test-fixture",
                        "fencing_token": 1, "fence_epoch": 1,
-                       "control_expected_revision": task["revision"], "control_result_revision": task["revision"] + 1}
+                       "control_expected_revision": task["revision"], "control_result_revision": task["revision"] + 1})
             source.intent.cas_task_status(task_cid=task["task_cid"], expected_revision=task["revision"],
                                           new_status="blocked", receipt=failure)
+        with old_quack_board(paper, prepare=prepare) as (endpoint, _), native_source(endpoint) as source:
             report = MIG.migrate(paper, endpoint)
             self.assertEqual(report["changed"], 25)
             self.assertEqual(report["blocked_tasks_requeued"], 0)

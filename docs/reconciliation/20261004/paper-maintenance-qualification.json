@@ -1,0 +1,45 @@
+{
+  "schema": "paper-contract-maintenance-qualification/v1",
+  "scope": "temporary native owners only; original live campaigns unchanged",
+  "tested_dependency_heads": {
+    "datasets": "dca2c054b49413b18662e0957a093911c31a2d37",
+    "accelerator": "c7cd40d3171da4eba4ebe393647ad27d85367cf3"
+  },
+  "passing_current_checks": {
+    "all_four_board_migrations_and_snapshot_repairs": {
+      "tests": 2,
+      "board_subtests": 8,
+      "log": "all-four-board-final-qualification.log"
+    },
+    "maintenance_authentication_and_source_fences": {
+      "tests": 5,
+      "log": "final-maintenance-authority.log"
+    },
+    "latest_main_owner_lifecycle_restart_and_cas": {
+      "tests": 8,
+      "log": "latest-main-owner-qualification.log"
+    }
+  },
+  "fixture_corrections": [
+    "Construct historical all-ready argv migration state offline; current authored blocked controls remain refusal cases.",
+    "Snapshot repair counts eligible ready tasks and preserves current authored blocked controls.",
+    "Extract Quack owner row values by numeric index before signing the identity binding."
+  ],
+  "native_proof_admission": {
+    "passed": 1,
+    "resource_refusals": 3,
+    "collected": 25,
+    "stopped_after_three_refusals": true,
+    "mandatory_ast_seal_retained": true,
+    "actual_host_resource_sampler": true,
+    "scheduler_state_isolated": true,
+    "unchanged_memory_stall_limit_percent": 2.0,
+    "largest_observed_memory_stall_percent": 33.52,
+    "log": "native-proof-admission-qualification.log"
+  },
+  "complete_suite_green": false,
+  "remaining_qualification": [
+    "Remaining native proof-admission cases require a host that satisfies the existing real resource limits.",
+    "Legacy paper worker claim smoke still requires current native worker authority bindings; this scoped maintenance API does not grant worker claim authority."
+  ]
+}
