@@ -52,7 +52,7 @@ def reject_nested_payloads(value):
         for key, item in value.items():
             if key in RAW_VECTOR_KEYS and contains_numeric_array(item):
                 raise ValueError('raw nested vector payload rejected')
-            if key in RAW_STATE_KEYS and isinstance(item, (dict, list)):
+            if key in RAW_STATE_KEYS and isinstance(item, dict | list):
                 raise ValueError('raw nested model state payload rejected')
             reject_nested_payloads(item)
     elif isinstance(value, list):
