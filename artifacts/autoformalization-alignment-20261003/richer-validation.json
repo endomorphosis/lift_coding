@@ -1,0 +1,394 @@
+{
+  "artifact_checks": [
+    {
+      "bytes": 93063,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json",
+      "sha256": "d7ab18fa836f9ef2b0c9963eedb3b5c7980c45ea250a8414253b9d1987a7dde6"
+    },
+    {
+      "bytes": 585771,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/constructions.json",
+      "sha256": "098ea14c579a561f9a0bc0a89c61c2860bcba977d893c1a4e574248aa3e1369b"
+    },
+    {
+      "bytes": 72675,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/representation_assays.json",
+      "sha256": "62f804108cbde57f5c6a7e3a8e637bce70c1b9e0ebd155a6112fdcf741160ab8"
+    }
+  ],
+  "cli_result": {
+    "elapsed_seconds": 1.1972558880006545,
+    "exit_code": 0,
+    "status": "completed"
+  },
+  "configuration_checks": [
+    {
+      "bytes": 336,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_richer_development_v1.json",
+      "sha256": "bdaef56c20d8dea39bc060cab96ea92c7b63673f05168949bfa8e85d83626f36"
+    },
+    {
+      "bytes": 3177,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_study_development_v1.json",
+      "sha256": "413e7250098d39e3e1ff59405c75c5eca283ec5820828d8be7fb00beb01e2f31"
+    }
+  ],
+  "construction_records_verified": 34,
+  "content_sha256": "f561e68fa14dcfd9b8d85e9c98500dc66f581ac52cdc82c5b0e55e94d17ea2b0",
+  "context_premise_compiler_receipts": 2,
+  "documentation_bindings": [
+    {
+      "bytes": 8445,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "sha256": "fa05a3f41644a171cec2df0cbde533bc84e5dd62379de41d077b17c062c6acd7"
+    },
+    {
+      "bytes": 9124,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "sha256": "741472a3797181f6851945ec10cffed5ad4c1e38565edee6cb83f3ba17858c78"
+    }
+  ],
+  "limitations": [
+    "Listed-source checks are not a complete transitive closure or filesystem/network access trace.",
+    "Native artifacts are bridge transport receipts; no solver or kernel proof executed.",
+    "Absence of a negative candidate does not certify correct abstention or clarification.",
+    "Fixture labels and reference diagnostics do not establish independent source fidelity."
+  ],
+  "link_checks": [
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "comprehensive improvement plan",
+      "target": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "retrieval experiments",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/hybrid-report.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "panel",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "construction adapter",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "runner",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "machine-readable report",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/report.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "constructions.json",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/constructions.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "saved assays",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/representation_assays.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "workflow documentation",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md",
+      "exists": true,
+      "label": "configuration",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_richer_development_v1.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "initial development study",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_study.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "richer configuration",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_richer_development_v1.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "CLI",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_richer_experiment.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "panel helper",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "evaluation adapter",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "canonical compiler",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "source-withheld decompiler",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "round-trip contract",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "categorical and bag-feature codec",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "qualified Legal-to-Lean path",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "autoencoder handbook",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/README.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md",
+      "exists": true,
+      "label": "parallel lane contract",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/parallel_lineage_execution.md"
+    }
+  ],
+  "markdown_links_verified": 22,
+  "native_bridge_artifacts_verified": 5,
+  "negative_emissions": [
+    {
+      "candidate": {
+        "rules": [
+          {
+            "action": "retain",
+            "actor": "clerk",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "application",
+            "temporal": []
+          }
+        ]
+      },
+      "id": "alignment-richer-legal-authored-development-v1:negative:ambiguous_actor",
+      "roundtrip_exact": true,
+      "source": "The clerk told the custodian that they must retain the application."
+    }
+  ],
+  "new_python_file_bindings": [
+    {
+      "bytes": 31906,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+    },
+    {
+      "bytes": 20197,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+    },
+    {
+      "bytes": 19018,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+    },
+    {
+      "bytes": 1579,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+    },
+    {
+      "bytes": 15445,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_richer_panel.py",
+      "sha256": "ab23b755a1c5f770a587e052c9efa50f054f5c4a5ec120dfad9fbdf4cb0da748"
+    },
+    {
+      "bytes": 15192,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_richer_evaluation.py",
+      "sha256": "3106818955dc6d6744e4f560ed34c42daad5c3da391ec83bc0fa5649c6668a1c"
+    },
+    {
+      "bytes": 19203,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_richer_experiment.py",
+      "sha256": "aa967661e685eabd3c776bc3e0f6310d86909bc740a9afc0d87bef6263196e52"
+    }
+  ],
+  "original_codec_matches_prior_projection_trials": 12,
+  "original_training_check": {
+    "bytes": 3113459,
+    "path": "/home/barberb/lift_coding/artifacts/source-native-v3-20261001/run-02/legal_ir/train.json",
+    "sha256": "00f4074cca56daed9f766e74c90d3d35e608bfb1058c24db99fc30250314704f"
+  },
+  "positive_diagnostic_counts": {
+    "compiler.measured_path": 4,
+    "typed_deontic.unmapped_condition": 2,
+    "typed_deontic.unrepresented_procedure": 20
+  },
+  "posthoc_scores_verified": 34,
+  "protocol_checks": [
+    {
+      "bytes": 4721,
+      "path": "/home/barberb/lift_coding/papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    }
+  ],
+  "qualified": false,
+  "query_stage_receipts": {
+    "l1": 32,
+    "l2": 5,
+    "t1": 5
+  },
+  "report": {
+    "bytes": 19774,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/report.json",
+    "sha256": "a97ad11b271e6149e1818a476008fba7355fa02d8e5b3cb49fedd462e8886483"
+  },
+  "report_payload_sha256": "086dc8279a7e9e96cfff3f6553239ed23b0eb61b8c731b2e1f506621097e25aa",
+  "representation_assays_recomputed": 6,
+  "schema": "alignment-richer-evidence-validation/v1",
+  "source_checks": [
+    {
+      "bytes": 19018,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+    },
+    {
+      "bytes": 31906,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+    },
+    {
+      "bytes": 20197,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+    },
+    {
+      "bytes": 23299,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e"
+    },
+    {
+      "bytes": 20651,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745"
+    },
+    {
+      "bytes": 17237,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576"
+    },
+    {
+      "bytes": 25163,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27"
+    },
+    {
+      "bytes": 17653,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 37034,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd"
+    },
+    {
+      "bytes": 13437,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+    },
+    {
+      "bytes": 27010,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e"
+    },
+    {
+      "bytes": 17858,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/bridge/canonical.py",
+      "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194"
+    },
+    {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 27572,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8"
+    },
+    {
+      "bytes": 392561,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a"
+    },
+    {
+      "bytes": 300668,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+    },
+    {
+      "bytes": 1579,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+    }
+  ],
+  "status": "passed",
+  "test_result": {
+    "exit_code": 0,
+    "failed": 0,
+    "files": 17,
+    "passed": 575,
+    "seconds": 24.59
+  },
+  "unchanged_shared_prior_sources": [
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+    "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+    "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+    "ipfs_datasets_py/logic/deontic/converter.py",
+    "ipfs_datasets_py/logic/deontic/formula_builder.py",
+    "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py"
+  ]
+}

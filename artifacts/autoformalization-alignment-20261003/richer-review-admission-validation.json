@@ -1,0 +1,761 @@
+{
+  "admission_validation": {
+    "automatic_adjudication": false,
+    "declared_completed_annotation_count": 0,
+    "human_reviews_authenticated": 0,
+    "independent_fidelity_available": false,
+    "independent_reviews_authenticated": 0,
+    "item_count": 34,
+    "production_admitted": false,
+    "proof_authority": false,
+    "qualified": false,
+    "receipt_sha256": "ae5c37574a34e24b50f2d0d63d9015404dd03ae585f156b1791fe78012068e3f",
+    "review_bundle_sha256": "6983d5e81766c2e06d831994ec88cc865a71a96acf35f6345b3bdace6c4f5a7b",
+    "reviewer_attestations_created": false,
+    "reviewer_identity_attestations_created": false,
+    "reviewer_independence_authenticated": false,
+    "schema": "alignment-richer-review-admission-validation/v1",
+    "source_author_independence_authenticated": false,
+    "source_fidelity_established": false,
+    "source_meaning_adjudicated": false,
+    "source_semantics_verified": false,
+    "status": "validated_diagnostic_admission_only",
+    "status_counts": {
+      "agreed_multiple_reviews": 0,
+      "ambiguous": 0,
+      "disputed": 0,
+      "pending": 34,
+      "single_review": 0,
+      "unsupported": 0
+    },
+    "submission_count": 0
+  },
+  "authored_reference_scoring_executed": false,
+  "bundle_binding": {
+    "bytes": 195306,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/structure-01/review_bundle_private.json",
+    "sha256": "b40d15d3c48d1b050227351bdfb15bb5bddb0f41c760cbe8c1b8f81c9d68831e"
+  },
+  "cli_result": {
+    "exit_code": 0,
+    "pending_items": 34,
+    "status": "pending",
+    "submission_count": 0
+  },
+  "complete_dependency_manifest": false,
+  "content_sha256": "9bf7db1f3198271f3982030dba0f6981b3e54b89b39d40e092e6ff616ffd9308",
+  "context_role_counts": {
+    "explicit_assumptions": 2,
+    "none_required": 32
+  },
+  "declared_completed_annotation_count": 0,
+  "directory_mode": "0700",
+  "encoder_calls": 0,
+  "evaluation_role": "exposed_development",
+  "exact_input_envelopes_preserved": 34,
+  "human_report_binding": {
+    "bytes": 4343,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md",
+    "sha256": "5e6e6570851f0c287553278b8e30cc15fc019a1eea6ed806325e127a315c27ca"
+  },
+  "human_reviews_authenticated": 0,
+  "independent_agent_audit": {
+    "agent": "pipeline_inventory",
+    "issues": [],
+    "scope": "all3outputbindings7sourcesprior38sourcesprotocolexactreplay34inputspermissions",
+    "status": "passed"
+  },
+  "independent_fidelity_available": false,
+  "independent_reviews_authenticated": 0,
+  "independent_workflow_scope_check_passed": true,
+  "limitations": [
+    "Integrity, typed completeness and exact agreement do not authenticate reviewer identity or independence.",
+    "Actual human review and semantic adjudication remain pending for all34items.",
+    "Synthetic annotations occurred only in isolated tests and temporary fixtures.",
+    "This workflow admits the existing exposed authored panel; natural-source corpus review remains a separate scope.",
+    "Source and metadata checks do not attest arbitrary runtime replacement or a complete dependency closure."
+  ],
+  "local_link_checks": [
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md",
+      "exists_after_validation_write": true,
+      "label": "private machine report",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-02/report_private.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md",
+      "exists_after_validation_write": true,
+      "label": "private receipt",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-02/receipt_private.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md",
+      "exists_after_validation_write": true,
+      "label": "reviewer packet",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/structure-01/reviewer_items.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md",
+      "exists_after_validation_write": true,
+      "label": "reviewer manifest",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/structure-01/reviewer_manifest.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md",
+      "exists_after_validation_write": true,
+      "label": "submission guide",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-02/submission_guide.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md",
+      "exists_after_validation_write": true,
+      "label": "runbook",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_review_admission.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md",
+      "exists_after_validation_write": true,
+      "label": "validation receipt",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-validation.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_review_admission.md",
+      "exists_after_validation_write": true,
+      "label": "blank preparation",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_review_admission.md",
+      "exists_after_validation_write": true,
+      "label": "CLI",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/admit_alignment_richer_reviews.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_review_admission.md",
+      "exists_after_validation_write": true,
+      "label": "workflow",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_workflow.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "native embedding and retrieval report",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-report.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "validation receipt",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-validation.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "parser experiment",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "richer review workflow",
+      "target": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-report.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "source-decoder evaluation",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_decoder_source_evaluation.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "aligned interface preparation",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_aligned_interface_training.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Autoencoder handbook",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/README.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "lineages",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/legal_autoencoder_lineages.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "versioned runtime interface",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/versioned_runtime_interface.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Parallel 8D 384D 768D migration plan",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_multilingual_migration_plan.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "decoder reuse",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_decoder_reuse.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "joint formula training",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/modal_joint_formula_training.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Logic output requirements",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/logic_output_requirements.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "AF-002 frozen research protocol",
+      "target": "/home/barberb/lift_coding/papers/completion/autoformalization/protocol.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "ProofGroundedIRLearningFabric handoff",
+      "target": "/home/barberb/lift_coding/implementation_plan/proof_grounded_ir_learning_fabric/README.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Existing Hammer and Leanstral optimization plan",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/plans/HAMMER_LEANSTRAL_LEGAL_IR_NEXT_OPTIMIZATION_PLAN.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "source-free proof-feedback contract",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "local asset manifest",
+      "target": "/home/barberb/.cache/ipfs_accelerate_py/llama_cpp/models/refs/Frosty40_Leanstral-1.5-119B-A6B-GGUF-NVFP4/Leanstral-1.5-119B-A6B-NVFP4.gguf.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "legal IR loss configuration",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_loss_configuration.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "premise selector",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_premise_selection.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "local runner guide",
+      "target": "/home/barberb/lift_coding/scripts/run_leanstral_ephemeral.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "saved admission report",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/generic-prover-admission-qualification-20261003/REPORT.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "JevOps prompt study",
+      "target": "/home/barberb/lift_coding/JevOps/jevops/leanstral_prompt_lab.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "repair study",
+      "target": "/home/barberb/lift_coding/JevOps/jevops/leanstral_repair_lab.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Runtime registry",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Formalization samples",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/samples.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "source provenance",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/ir_core/provenance.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Joint formula profile",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Loss configuration",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_loss_configuration.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "768D decoder reuse",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_reuse.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "native profile",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Canonical catalog",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/families/canonical_catalog.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "LegalIR proof router",
+      "target": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_router.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "Leanstral runner",
+      "target": "/home/barberb/lift_coding/scripts/run_leanstral_ephemeral.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "exists_after_validation_write": true,
+      "label": "JevOps client",
+      "target": "/home/barberb/lift_coding/JevOps/jevops/leanstral.py"
+    }
+  ],
+  "model_calls": 0,
+  "new_human_reviews_created": false,
+  "new_repository_file_bindings": [
+    {
+      "bytes": 21743,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_admission.py",
+      "sha256": "d1594da45955c19e8f64e1e1ce0ee2272dd589ed50ffadba3086faf64a650f37"
+    },
+    {
+      "bytes": 12871,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_workflow.py",
+      "sha256": "b7ca7776786a31412ed657a50c274262cacce052f790e5fa87d2f0cfe1a5cd10"
+    },
+    {
+      "bytes": 2122,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/admit_alignment_richer_reviews.py",
+      "sha256": "1eed2a881029effc2d8a84fe4760c61c25adb47fe69019bc727a12769446d92f"
+    },
+    {
+      "bytes": 26305,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_richer_review_admission.py",
+      "sha256": "0e29515c12390434557b54cad74c5797575bbae716f964bf1853136a7d1daa13"
+    },
+    {
+      "bytes": 18129,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_admit_alignment_richer_reviews.py",
+      "sha256": "028ff78915a63e6357a873226c40f28d81cccd128d6a7b180d1ba28f1de97bc5"
+    },
+    {
+      "bytes": 8578,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_review_admission.md",
+      "sha256": "e6e418c0423a7bdf2f518afc576e0e7811d72badb00a34d4e4594c9439cdf6b7"
+    }
+  ],
+  "original_validation_accessed": false,
+  "output_bindings": [
+    {
+      "bytes": 52860,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-02/receipt_private.json",
+      "sha256": "768518af4c2cd6041c6cad17ec0a5ed08ba3301ce40e897e3658d916e5069006"
+    },
+    {
+      "bytes": 61627,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-02/report_private.json",
+      "sha256": "ae86854d38dc11fcb4db2bd6c1de46c0440fc8441fe02b73b059bea5f9546a94"
+    },
+    {
+      "bytes": 3539,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-02/submission_guide.json",
+      "sha256": "2a5056cb2929fa84087d23a484c9db5b3efb7a318fad2fbce8a57bfb1a45461b"
+    }
+  ],
+  "output_file_modes": [
+    "0600",
+    "0600",
+    "0600"
+  ],
+  "pending_items": 34,
+  "plan_binding": {
+    "bytes": 60188,
+    "path": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+    "sha256": "73a82c24d6baaaca1503785000079d93425994c6960415fc4f59a599a236ef66"
+  },
+  "prior_source_checks": [
+    {
+      "bytes": 19018,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e",
+      "unchanged": true
+    },
+    {
+      "bytes": 31906,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a",
+      "unchanged": true
+    },
+    {
+      "bytes": 20197,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76",
+      "unchanged": true
+    },
+    {
+      "bytes": 23299,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e",
+      "unchanged": true
+    },
+    {
+      "bytes": 20651,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745",
+      "unchanged": true
+    },
+    {
+      "bytes": 17237,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576",
+      "unchanged": true
+    },
+    {
+      "bytes": 25163,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27",
+      "unchanged": true
+    },
+    {
+      "bytes": 17653,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318",
+      "unchanged": true
+    },
+    {
+      "bytes": 109257,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+      "unchanged": true
+    },
+    {
+      "bytes": 37034,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd",
+      "unchanged": true
+    },
+    {
+      "bytes": 13437,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64",
+      "unchanged": true
+    },
+    {
+      "bytes": 27010,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e",
+      "unchanged": true
+    },
+    {
+      "bytes": 17858,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/bridge/canonical.py",
+      "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194",
+      "unchanged": true
+    },
+    {
+      "bytes": 4428,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf",
+      "unchanged": true
+    },
+    {
+      "bytes": 27572,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8",
+      "unchanged": true
+    },
+    {
+      "bytes": 392561,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a",
+      "unchanged": true
+    },
+    {
+      "bytes": 300668,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59",
+      "unchanged": true
+    },
+    {
+      "bytes": 1579,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8",
+      "unchanged": true
+    },
+    {
+      "bytes": 14419,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7",
+      "unchanged": true
+    },
+    {
+      "bytes": 6017,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b",
+      "unchanged": true
+    },
+    {
+      "bytes": 25914,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py",
+      "sha256": "23ea8a10eea572d05a90f822a8f0430d4c93648d6ec6a3e775f370cb3e9c4b5a",
+      "unchanged": true
+    },
+    {
+      "bytes": 1826,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_parser_experiment.py",
+      "sha256": "11069f97f4210071c13fb780a2ee3c0c778e392adf1da008dee5e93e6da34b8b",
+      "unchanged": true
+    },
+    {
+      "bytes": 13308,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/features.py",
+      "sha256": "a5abe46dbb9c90f83699f8d7922676bc41335e26413d73ae173c9fd9b66bb23c",
+      "unchanged": true
+    },
+    {
+      "bytes": 11288,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure.py",
+      "sha256": "8a5c5eb1667a46bd0e7ea3db1744f414de799e7dce1a53ecfbca888cdf51aa02",
+      "unchanged": true
+    },
+    {
+      "bytes": 10920,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review.py",
+      "sha256": "7d8321eef857937239b31e40152184883ef368a8103342cb3ef1da1d45a49dfc",
+      "unchanged": true
+    },
+    {
+      "bytes": 22237,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure_experiment.py",
+      "sha256": "e57ed548cbe6a77a2ece2787da95c39e3a8a8a45754342b5debec4e637342230",
+      "unchanged": true
+    },
+    {
+      "bytes": 1954,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_structure_experiment.py",
+      "sha256": "2e5599887e63138f5cae663f15cb57da91c34b7e8dc4bb21eb3598fc961fdb69",
+      "unchanged": true
+    },
+    {
+      "bytes": 41368,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_embeddings.py",
+      "sha256": "f5fff80ce717d2c185271eb04e92af7c02d13a3f01bfb4afb758f5865b74684b",
+      "unchanged": true
+    },
+    {
+      "bytes": 22401,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_retrieval.py",
+      "sha256": "bbbac13f8464e6c0b15b8add91ebd0cedeb0db6531c43f7e4962445153a5ef40",
+      "unchanged": true
+    },
+    {
+      "bytes": 18721,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_embedding_experiment.py",
+      "sha256": "c91b2730c45534821146991f5f873db8cea22a5baf0a2daa5667458fd5efa099",
+      "unchanged": true
+    },
+    {
+      "bytes": 9556,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609",
+      "unchanged": true
+    },
+    {
+      "bytes": 13375,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea",
+      "unchanged": true
+    },
+    {
+      "bytes": 15959,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e",
+      "unchanged": true
+    },
+    {
+      "bytes": 16725,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "sha256": "27855f5ffd59ebc45444d5e37c18ff1569618084cd27b1503db112940051ffb0",
+      "unchanged": true
+    },
+    {
+      "bytes": 26219,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f",
+      "unchanged": true
+    },
+    {
+      "bytes": 306403,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_linguistic_snapshot/spacy_modal_codec.py",
+      "sha256": "16ec4e141d5cb2f9d37cd4db42733921bc046e17fee12afc43ab31ca7a60cd59",
+      "unchanged": true
+    },
+    {
+      "bytes": 21063,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/linguistic.py",
+      "sha256": "baca84b44f7eda33466ffdc75170d904f480aafb47a779131337d90ed9a7bca3",
+      "unchanged": true
+    },
+    {
+      "bytes": 1646,
+      "path": "scripts/ops/legal_ir/run_alignment_embedding_experiment.py",
+      "sha256": "15ca20f3f4406ec98ba0c34894f47de990db592b037fe77ba23301e9726931f4",
+      "unchanged": true
+    }
+  ],
+  "production_admitted": false,
+  "proof_authority": false,
+  "protected_protocol_checks": [
+    {
+      "bytes": 4721,
+      "digest_verified": true,
+      "path": "papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401",
+      "unchanged": true
+    }
+  ],
+  "prover_calls": 0,
+  "qualified": false,
+  "receipt_exactly_recomputed": true,
+  "receipt_payload_sha256": "ae5c37574a34e24b50f2d0d63d9015404dd03ae585f156b1791fe78012068e3f",
+  "report_binding": {
+    "bytes": 61627,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-review-admission-02/report_private.json",
+    "sha256": "ae86854d38dc11fcb4db2bd6c1de46c0440fc8441fe02b73b059bea5f9546a94"
+  },
+  "report_payload_sha256": "2dfe7022dde124c3e75313ac410e9d56b774c60c90a992f237208e0d30aaddb9",
+  "ruff_result": {
+    "checked_new_python_files": 5,
+    "exit_code": 0
+  },
+  "schema": "alignment-richer-review-evidence-validation/v1",
+  "sealed_final_test_accessed": false,
+  "source_checks": [
+    {
+      "bytes": 12871,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_workflow.py",
+      "sha256": "b7ca7776786a31412ed657a50c274262cacce052f790e5fa87d2f0cfe1a5cd10",
+      "unchanged": true
+    },
+    {
+      "bytes": 21743,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_admission.py",
+      "sha256": "d1594da45955c19e8f64e1e1ce0ee2272dd589ed50ffadba3086faf64a650f37",
+      "unchanged": true
+    },
+    {
+      "bytes": 10920,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review.py",
+      "sha256": "7d8321eef857937239b31e40152184883ef368a8103342cb3ef1da1d45a49dfc",
+      "unchanged": true
+    },
+    {
+      "bytes": 31906,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a",
+      "unchanged": true
+    },
+    {
+      "bytes": 22279,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_admission.py",
+      "sha256": "5ada191c03af4cfb3f69a60b116116b3ecfcec30b961030b20e66c631932d14e",
+      "unchanged": true
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+      "unchanged": true
+    },
+    {
+      "bytes": 2122,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/admit_alignment_richer_reviews.py",
+      "sha256": "1eed2a881029effc2d8a84fe4760c61c25adb47fe69019bc727a12769446d92f",
+      "unchanged": true
+    }
+  ],
+  "source_fidelity_established": false,
+  "source_semantics_verified": false,
+  "status": "verified_pending_review_readiness_only",
+  "submission_count": 0,
+  "test_result": {
+    "collected": 180,
+    "elapsed_seconds": 4.58,
+    "exit_code": 0,
+    "failed": 0,
+    "passed": 180,
+    "paths": [
+      "tests/unit/logic/formalization/autoencoder/test_alignment_richer_review.py",
+      "tests/unit/logic/formalization/autoencoder/test_alignment_richer_review_admission.py",
+      "tests/unit/logic/formalization/autoencoder/test_admit_alignment_richer_reviews.py"
+    ],
+    "post_test_edits": "Ruff import grouping only in the two new test files; production sources unchanged",
+    "source": "observed root combined pytest session98069"
+  },
+  "training_executed": false,
+  "unchanged_prior_source_count": 38
+}

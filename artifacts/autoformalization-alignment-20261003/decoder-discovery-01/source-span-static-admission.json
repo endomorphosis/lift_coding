@@ -1,0 +1,133 @@
+{
+  "checkpoint_implementation_bindings": [
+    {
+      "bytes": 109257,
+      "checkpoint_pin_matched": true,
+      "exists_in_pinned_commit": true,
+      "expected_checkpoint_sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+      "materialized_in_new_checkout": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 14622,
+      "checkpoint_pin_matched": true,
+      "exists_in_pinned_commit": true,
+      "expected_checkpoint_sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290",
+      "materialized_in_new_checkout": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 146870,
+      "checkpoint_pin_matched": true,
+      "exists_in_pinned_commit": true,
+      "expected_checkpoint_sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd",
+      "materialized_in_new_checkout": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 35294,
+      "checkpoint_pin_matched": true,
+      "exists_in_pinned_commit": false,
+      "expected_checkpoint_sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185",
+      "materialized_in_new_checkout": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+      "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+    },
+    {
+      "bytes": 22521,
+      "checkpoint_pin_matched": true,
+      "exists_in_pinned_commit": false,
+      "expected_checkpoint_sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d",
+      "materialized_in_new_checkout": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+      "sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d"
+    }
+  ],
+  "complete_dependency_manifest": false,
+  "content_sha256": "9cc44aa025d5f2dd5a82d6a360f7e75794d17a48cd758fdae897e02fdfd78920",
+  "context_inspection_binding": {
+    "bytes": 533,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native-context-inspection.json",
+    "sha256": "dbd04c99f2b937edcf6de7b5a7923e03d561915b0478d94dabd0ae996dfb3b0e"
+  },
+  "context_manifest_binding": {
+    "bytes": 7711,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/training-context-manifest.json",
+    "sha256": "d86f85b16fe2ff128a47a744f86475ae05af62bb42de998876aa148dc7b22030"
+  },
+  "historical_context_inspection": {
+    "context_count": 1485,
+    "encoder_reexecuted": false,
+    "manifest": {
+      "bytes": 106631,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/native-contexts-01/manifest.json",
+      "sha256": "e2b83738d6cdb3cdb99155983e127942c041c9bf536c942cf7bce2f6aa8915f5"
+    },
+    "proof_authority": false,
+    "schema": "legal-native768-context-inspection/v1",
+    "source_semantics_verified": false,
+    "status": "source_vector_producer_joins_verified",
+    "target_access": false,
+    "training_executed": false
+  },
+  "inventory_binding": {
+    "bytes": 115342,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/decoder-discovery-01/inventory.json",
+    "sha256": "462e4d9bfdc33935b09934e8be44a63553de80d93dc5d87b8e58d488e539d7ea"
+  },
+  "optimizer_resume_replayed": false,
+  "original_corpus_rows_accessed": false,
+  "producer_bindings": [
+    {
+      "bytes": 15959,
+      "manifest_pin_matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    {
+      "bytes": 13861,
+      "manifest_pin_matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_worker_contract.py",
+      "sha256": "2e8af403f437ec335a58d7b7c1a3a2771f3c047b6e41d55ce2e080dfb5187747"
+    },
+    {
+      "bytes": 13375,
+      "manifest_pin_matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    {
+      "bytes": 9556,
+      "manifest_pin_matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    {
+      "bytes": 20766,
+      "manifest_pin_matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/prepare_legal_native768_contexts.py",
+      "sha256": "1bcaac6757a7c8a30b6e49c473e19fdc0ba7339a142f709832acbf7bcd3522cc"
+    }
+  ],
+  "proof_authority": false,
+  "proof_executed": false,
+  "public_api_symbols_statically_present": [
+    "load_checkpoint",
+    "DimensionalSpanDecoder.decode_formal_logic"
+  ],
+  "qualified": false,
+  "runtime_loaded": false,
+  "schema": "alignment-source-span-decoder-static-admission/v1",
+  "sealed_test_accessed": false,
+  "source_encoder_executed": false,
+  "source_fidelity_established": false,
+  "status": "checkpoint_source_pins_match_api_present_runtime_not_replayed",
+  "trainer_binding": {
+    "bytes": 27988,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_legal_open_vocabulary_experiment.py",
+    "sha256": "2fb9df93811cd868cca5b710bf01504aa25349ecf269cfd356fbb8f24a5b9c07"
+  }
+}
