@@ -1,0 +1,71 @@
+{
+  "HuggingFace_evidence": {
+    "public_pointer_is_upload_proof": false,
+    "raw_quarantine_and_credentials_public": false,
+    "release_prefix": "releases/20261004-terminal-codebase-ir-evidence-v1",
+    "remote_revision": null,
+    "repo_id": "Publicus/codebase-ir-proof-index",
+    "source_scope_bytes_deferred": 5508875853,
+    "source_scope_files_deferred": 192772,
+    "status": "local_archive_preparation_remote_upload_unqualified",
+    "url": "https://huggingface.co/datasets/Publicus/codebase-ir-proof-index"
+  },
+  "JevOps_conversion": {
+    "declared_main_branch": true,
+    "exact_in_published_child": true,
+    "old_root_tracked_files": 1,
+    "statement_lock_sha256": "dc377f8359cac300023e225d694494ea631943298c44667ec44e1352de1e6237"
+  },
+  "authority": {
+    "all_32_macro_acceptance_rows": "OPEN",
+    "model_convergence_proved": false,
+    "official_score": null,
+    "production_default_enabled": false,
+    "source_semantic_equivalence": false,
+    "task_satisfaction_proved": false
+  },
+  "canonical_published_gitlinks": {
+    "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+    "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+    "external/ipfs_accelerate": "a601b87e9e6bceb42f925cb085203ea337d204a5",
+    "external/ipfs_datasets": "a3e7ea91cfbbf2e68d68b1362e0a22690cb09d97",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "hallucinate_child": {
+    "dirty_gitlinks_patch": {
+      "bytes": 986,
+      "path": "maintenance/terminal-ir-publication-20261004-01/hallucinate-working-gitlinks.patch",
+      "sha256": "c9cf3da38a247204b5e2b4a33726bde832d6910461704852fdc3e3ccb9202581"
+    },
+    "original_HEAD": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+    "original_nested_variants": "separate evidence archive; no canonical child source qualification is claimed",
+    "root_existing_remote_gitlink_preserved": true,
+    "source_modified_by_publication": false
+  },
+  "merge": {
+    "exact_older_published_snapshots_retained_locally": true,
+    "gitignore": {
+      "captured_sha256": "5722eeb3784da8c295d1c3dfa3e198c0a68706200d6e7988b3a6b90a5bce0a0e",
+      "merged_sha256": "599503b9f70023b9f59242e996daa6dacf893ee9b4aac8bbefec037631fddac5",
+      "preserved_published_pattern": "*.duckdb.lock",
+      "reason": "Keep the current individual snapshot plus the existing remote lock-file exclusion; no source behavior change."
+    },
+    "preserved_newer_published_paper_script_test_paths": 12,
+    "published_parent": "cc5d5bf9fa40bd9a8834d8fb61a03a4724033297",
+    "remote_only_features_preserved": true
+  },
+  "original_source_index_HEAD_mutated": false,
+  "schema": "terminal-ir-source-publication@1",
+  "source_scope": "prior frozen root selection; individually stable current .gitignore captured separately; later new source-to-model files excluded",
+  "source_snapshot": {
+    "globally_atomic_checkout": false,
+    "original_index_unchanged": true,
+    "parent": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+    "selected_bytes": 28748978,
+    "selected_files": 435,
+    "tree": "37a6763e16db5f34a048c1b63b135dca89ba95de"
+  },
+  "unseen_successor_source_included": false,
+  "utc": "2026-10-04T20:09:57.598714+00:00",
+  "validation": "Git blob byte replays and selected Python syntax/JSON only; prior focused qualification evidence retained; no new model/prover/nativeSQL/test jobs by root publisher"
+}

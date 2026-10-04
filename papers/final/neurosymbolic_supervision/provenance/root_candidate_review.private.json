@@ -1,0 +1,64 @@
+{
+  "accepted_as_NS024_manuscript_candidate": true,
+  "actual_build": {
+    "bytes": 27563,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_actual_integrated_manuscript_v1/build_execution_v2/result.private.json",
+    "sha256": "aef9146a234e08ebed053c4be53d703a5716ee601146e6e6ea341a463775435d"
+  },
+  "actual_pdf": {
+    "bytes": 252576,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_actual_integrated_manuscript_v1/manuscript_v2/build/main.pdf",
+    "sha256": "0fb82abbec94c3858b6c9e63fcd456b16a5ad4aa2f294c4b52d08a8592c59862"
+  },
+  "at": "2026-09-13T13:48:04.010462+00:00",
+  "author_attestations_invented": false,
+  "copy_constraints": [
+    "Preserve NS019-owned generated/figures/family_useful.pdf8ea and NS022-owned main.tex/paper.pdf.",
+    "Stage final integrated editable build source under NS024-owned snapshots and keep exact source/binary bindings; only allowedreleasePDFandZIP binary transport.",
+    "Retain original failed compile and original preparation packages."
+  ],
+  "findings": [
+    "Six main pages; references7; technical appendices8\u201312; disclosure13; checklist14\u201320.",
+    "Every newly added page renders without overlap or cropping.",
+    "All16 answers truthful within preparation evidence; human judgments remain unmeasured and no outside reviewer required.",
+    "Official style unchanged and allfonts embedded Type1 or CIDTrueType; noType3.",
+    "No unresolved citation/reference or scientific/checklist placeholder.",
+    "Configured authoring fallback distinguished from fixed scientific model; no assertion about unrecorded actual fallback invocation."
+  ],
+  "inspection": {
+    "bytes": 18396,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_actual_integrated_manuscript_v1/inspection/report.private.json",
+    "sha256": "52930ccc547e75b5c609f1c93c6f20dcf886eb39912f9321b229c752eabb5879"
+  },
+  "new_native_completion_claimed": false,
+  "package": {
+    "bytes": 52620,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/ns024_actual_integrated_manuscript_v1/package.private.json",
+    "sha256": "35e414550190d3234a62bedbac199963af70b761104aae09d71706201eabb13e"
+  },
+  "prior_root_font_visual_review": {
+    "bytes": 1892,
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/ns028_ab_pilot_review/runtime_contract_v3/final_AB_cold32_proposal_v1/actual_post32_v1/ns022_font_visual_review_v2/review.private.json",
+    "sha256": "9857948a3375e3dbc1593a78bf2388abbce0fb746eff79daed5dda1bae88607e"
+  },
+  "publication_authorized": false,
+  "root_confirmed_first_twelve_pdf_page_text_byte_exact": true,
+  "root_read": [
+    "Full main.tex and disclosure source",
+    "All16 checklist answers/justifications in previous source review and final rendered pages",
+    "Actual build and font/page/reference/placeholder reports"
+  ],
+  "root_verified_package_files": 110,
+  "root_viewed_changed_pages": [
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "schema": "ns024-root-integrated-manuscript-review/v1",
+  "scientific_calls": 0
+}

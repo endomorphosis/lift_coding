@@ -1,0 +1,45 @@
+\section{Analysis and evidence separation}
+\label{sec:analysis-method}
+
+For family $f$, arm $a$, and repetition $r$, let $Y_{far}$ indicate admitted
+useful completion. Average the two fixed repetitions within each family and arm:
+$\bar Y_{fa}=(Y_{fa1}+Y_{fa2})/2$. The retained contrast is
+\[
+  \widehat{\Delta}=\frac{1}{8}\sum_{f=1}^{8}
+                   \bigl(\bar Y_{fB}-\bar Y_{fA}\bigr).
+\]
+Families are the independent analysis units; 32 nested cells are not 32
+independent repositories. A descriptive robust-family outcome additionally
+requires both repetitions to succeed and is not a promotion decision.
+
+The frozen bootstrap draws eight whole family blocks with replacement, sharing
+each draw across arms and repetitions. It uses 20,000 resamples, Python 3.12
+\texttt{random.Random} with seed 20260911, lexicographically ordered family
+identifiers, and exactly eight \texttt{randrange(8)} draws per resample.
+The 95\% percentile endpoints use linear interpolation at $(B-1)p$ for
+$p\in\{0.025,0.975\}$ and $B=20{,}000$. These intervals are conditional,
+descriptive summaries of eight convenience-selected families, not
+population-level coverage or superiority/noninferiority decisions.
+
+Failures remain in the fixed outcome denominator. Resource summaries report
+their available-observation counts and missingness. Provider child, HTTP
+wrapper, gateway, scorer, and operator clocks can overlap and are not added
+as disjoint costs. Shared native preparation is counted once. Baseline checks,
+prior failed attempts, review, queue waits, cleanup, and artifact work retain
+their own accounting scopes. Token usage and cost ticks are telemetry;
+unavailable settled charges and unmeasured effort remain unknown.
+
+The developmental pilot is a separate four-family, 24-cell A/B study with
+three nested repetitions. Its retained labels include ten useful completions,
+five per arm, from 24 POSTs and 12 scores. Ten child durations exceeded 595
+seconds by less than 1 ms, and pilot cell 20 exceeded 600 seconds in both
+wrapper and gateway clocks. These deviations and labels remain preserved;
+the final resource policy is not applied retrospectively to relabel the pilot.
+
+Earlier boundary evidence is also separate from final repair outcomes.
+The mutation/cold comparison retains one false reuse among all 26 cases,
+rather than reporting a selected zero-of-25 subset. All four later correction
+invocations, including failed and partial attempts, remain visible; corrected
+full-cold execution supplies no positive reuse credit. Constructed gate checks
+and public-baseline passes do not count as useful final repairs.
+

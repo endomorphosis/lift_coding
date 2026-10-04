@@ -1,0 +1,39 @@
+{
+  "bounds": {"max_modules": 2400, "max_bytes": 67108864, "max_file_bytes": 2097152},
+  "integration_review": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/architecture/repository_proof_index_and_codebase_ir.integration_review.json",
+  "repositories": [
+    {
+      "name": "datasets",
+      "root": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "packages": ["ipfs_datasets_py"],
+      "released_ref": "c9446bd44cef1603c1461242e6c577e26af45ad8",
+      "released_checkout": "/tmp/ir-release-datasets-20261001"
+    },
+    {
+      "name": "accelerate",
+      "root": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "packages": ["ipfs_accelerate_py"],
+      "released_ref": "6ab718bf96126c0f78d60d322cf86c6de74eac72",
+      "released_checkout": "/tmp/ir-release-accelerate-20261001"
+    }
+  ],
+  "seeds": [
+    "ipfs_datasets_py.logic.software_contracts.codebase_ir",
+    "ipfs_datasets_py.logic.software_contracts.codebase_ir_targets",
+    "ipfs_datasets_py.logic.software_contracts.codebase_source_training",
+    "ipfs_datasets_py.logic.software_contracts.codebase_federated_training",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_runtime_registry",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_federated_codebase",
+    "ipfs_accelerate_py.agent_supervisor.planning.repository_plan_preview",
+    "ipfs_accelerate_py.agent_supervisor.planning.structural_codebase_context",
+    "ipfs_accelerate_py.agent_supervisor.planning.conditional_codebase_evidence",
+    "ipfs_accelerate_py.agent_supervisor.planning.finite_integer_plan_service"
+  ],
+  "probe_seeds": [
+    "ipfs_datasets_py.logic.software_contracts.codebase_ir",
+    "ipfs_datasets_py.logic.software_contracts.codebase_source_training",
+    "ipfs_datasets_py.logic.software_contracts.codebase_federated_training",
+    "ipfs_accelerate_py.agent_supervisor.planning.repository_plan_preview",
+    "ipfs_accelerate_py.agent_supervisor.planning.finite_integer_plan_service"
+  ]
+}

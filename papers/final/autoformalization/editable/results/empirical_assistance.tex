@@ -1,0 +1,13 @@
+\begin{table}[t]
+\centering\small
+\caption{Native acceptance on 64 constructed goals (32 valid, 32 invalid). Every method attempted the same fixed declarations.}
+\label{tab:assistance-results}
+\begin{tabular}{lrrr}\toprule
+Method & Valid accepted & Invalid accepted & Unsupported\\\midrule
+Fixed native tactics & 32/32 & 0/32 & 0\\
+SMT-guided reconstruction & 24/32 & 0/32 & 16\\
+Leanstral, primary policy & 12/32 & 0/32 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+Leanstral's valid-goal acceptance differs from the baseline by -62.5 percentage points (2,000 family-bootstrap draws; 95\% interval [-90.6, -28.1]).

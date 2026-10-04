@@ -1,0 +1,25 @@
+{
+  "historical_compact_analysis": "Exact original LA-023 package and its Python 3.12.3 pins remain in the nested ZIP. Its harness smoke tests are constructed controls, not the 900-cell study.",
+  "historical_scientific_runtime": {
+    "actual_runtime_binaries_included": false,
+    "image_sha256": "74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+    "physical_profile": "one CPU / singleton cpuset / 2 GiB no swap / 16 PIDs / 20-second wall and CPU with explicit cumulative-active startup amendments / 18000-second study CPU stop",
+    "private_store_and_key_included": false
+  },
+  "offline_recovery_analysis": {
+    "command": "./reproduce.sh --output /absolute/fresh/output",
+    "per_subprocess_limits": {
+      "address_space_bytes": 2147483648,
+      "cpu_affinity": "recovery reader: one available CPU; original compact harness: inherited affinity",
+      "cpu_seconds": 60,
+      "wall_seconds": 65
+    },
+    "python": "3.12 standard library"
+  },
+  "pdf_rebuild": {
+    "command": "./build_pdf.sh /absolute/fresh/pdf-output",
+    "official_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "requires": "latexmk and an installed TeX distribution; no auto-install"
+  },
+  "schema": "law-final-artifact-environment/v1"
+}

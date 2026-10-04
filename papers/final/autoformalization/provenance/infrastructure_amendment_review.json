@@ -1,0 +1,22 @@
+{
+  "source": "run_natural_a_before_context_guard.py",
+  "active": "run_natural_a.py",
+  "scientific_functions_AST_unchanged": {
+    "strict_payload": true,
+    "post": true,
+    "evaluate": true,
+    "summarize": true
+  },
+  "scope": "Changes add context preflight and configurable scheduling envelope; prompts, response extraction, native representation scoring and aggregation unchanged.",
+  "scientific_ast_bindings_unchanged": {
+    "SEED": true,
+    "SCHEMA_EXAMPLE": true,
+    "PROMPT_BASE": true,
+    "strict_payload": true,
+    "post": true,
+    "evaluate": true,
+    "summarize": true
+  },
+  "original_client_sha256": "ea92d745a4e94e1c5ca388dde5a8545d3a3e22306ad6a8437193ecc5b9192748",
+  "active_client_sha256": "1e58bfd16af48417cd0d8a855fdf0c879bd24202ac71c88be658d3b4aee92c4b"
+}
