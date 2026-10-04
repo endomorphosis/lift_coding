@@ -1,0 +1,81 @@
+{
+  "schema": "proof-grounded-ir-learning/campaign-launch-receipt@1",
+  "observed_at": "2026-08-16T21:49:08Z",
+  "disposition": "running_inventory_smoke",
+  "authority": {
+    "accelerator_branch": "agent/proof-grounded-ir-learning",
+    "accelerator_seed_commit": "8b42722897be2d2b88e416a40370c6a56b04bad8",
+    "accelerator_authority_commit": "8d46a6d25dd006c8cab3c9d9612707d2a014e79c",
+    "accelerator_authority_tree": "697ee660025fbf14a1cbe6c24fd8da5365df84d5",
+    "datasets_authority_commit": "df93e91e6338c84a17c3208ef68b88de8566f78c",
+    "datasets_authority_tree": "37b9cb40644831c85c6fdf07d0228e45061e239a",
+    "task_board_sha256": "edf672a7f603f4003e0ff39cd14e362da2659126a83075b97f6aa18d0e179c37",
+    "objective_heap_sha256": "db68de695d10e4c354fe3a470ef85f7c3b9529195aa4f5e1b0c3e2e84eaa9b82",
+    "justice_dao_pinset_sha256": "8e3a4b1bd81639393ddda35e5dfb3b95f9e7320afa898bde0b3eb9a0317a6b76"
+  },
+  "preflight": {
+    "exit_code": 0,
+    "stuck": false,
+    "stale_worktree_count": 0,
+    "pending_reconciliation_count": 0,
+    "target_checkout_clean": true,
+    "objective_scan_receipt_cid": "baguqeera4lfwubrhgf3dbhr2s47o5mhebbpu5p2u2xrlsbrhciim3vv4g3ma",
+    "codebase_scan_receipt_cid": "baguqeerascugs22zjpbqdnedm2mmvqs6cnie3av4xhty2cb7uqi2ldnw3irq"
+  },
+  "bounded_policy": {
+    "lane_count": 1,
+    "wrapper_duration_seconds": 28800,
+    "heartbeat_interval_seconds": 30,
+    "status_stale_seconds": 600,
+    "implementation_timeout_seconds": 1800,
+    "implementation_log_stall_seconds": 600,
+    "max_restarts": 3,
+    "max_task_attempts": 3,
+    "merge_target": "agent/proof-grounded-ir-learning",
+    "managed_submodule": "ipfs_datasets_py"
+  },
+  "preserved_incidents": [
+    {
+      "kind": "interpreter_import_failure",
+      "task_attempt_consumed": false,
+      "cause": "managed daemon safe-path import lacked the clean controller PYTHONPATH",
+      "remediation": "bind /home/barberb/.local/bin/python and the clean controller root through PYTHONPATH"
+    },
+    {
+      "kind": "implementation_provider_unavailable",
+      "task_id": "PGIR-001",
+      "attempt": 1,
+      "task_attempt_consumed": true,
+      "provider": "grok-4.5",
+      "cause": "Grok CLI was not signed in",
+      "remediation": "capability-probe and explicitly select the installed Codex fallback"
+    }
+  ],
+  "provider": {
+    "command": "/usr/local/bin/codex exec --approve-for-me --ephemeral",
+    "cli_version": "0.147.0",
+    "capability_probe_exit_code": 0,
+    "capability_probe_response": "READY",
+    "model_observed_in_probe": "gpt-5.6-sol",
+    "authority": "implementation_candidate_only"
+  },
+  "live_observation": {
+    "master_pid": 3098400,
+    "supervisor_pid": 3098426,
+    "daemon_pid": 3099819,
+    "supervisor_status": "running",
+    "supervisor_restart_count": 0,
+    "blocked_count": 0,
+    "active_task_id": "PGIR-001",
+    "active_task_cid": "baguqeeraa3ltwmsx2hkyxhigmfkadmyfy2js7cir3jl2kticrqexsemd75rq",
+    "active_attempt": 2,
+    "active_phase": "implementing",
+    "implementation_in_progress": true
+  },
+  "runtime_root": "/home/barberb/lift_coding/.pgir_campaign/runtime",
+  "master_pid_path": "/home/barberb/lift_coding/.pgir_campaign/runtime/master/pgir_master_20260816T214730Z.pid",
+  "master_log_path": "/home/barberb/lift_coding/.pgir_campaign/runtime/master/pgir_master_20260816T214730Z.log",
+  "task_state_path": "/home/barberb/lift_coding/.pgir_campaign/runtime/track/pgir_task_state.json",
+  "promotion_status": "not_admitted",
+  "publication_status": "not_admitted"
+}

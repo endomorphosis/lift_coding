@@ -1,0 +1,63 @@
+{
+  "admitted": false,
+  "batch_losses": [],
+  "checkpoint_sha256": "3a5928cb57d763b2db57118e453d531f0b9b88128fed7916267015c08b3b289f",
+  "deadline_scope": "soft_deadline_before_numeric_or_metric_batch; preparation_and_serialization_not_interruptible",
+  "download_calls": 0,
+  "elapsed_seconds": 0.03717062500072643,
+  "epochs_completed": 0,
+  "epochs_requested": 1,
+  "examples_persisted": false,
+  "final_model_state_sha256": "33cd49aa3e4ff02db043a6aa53bab3fc0efbe106c225e1b40bcf29d6411da07e",
+  "final_output_head_sha256": "dce494ce592e4182462fcd190fb9a224c7c46ff41382aef409643f0191b80441",
+  "formalized": false,
+  "gradient_norm_max": 0.0,
+  "independent_source_conditioning": true,
+  "initial_model_state_sha256": "33cd49aa3e4ff02db043a6aa53bab3fc0efbe106c225e1b40bcf29d6411da07e",
+  "initial_output_head_sha256": "dce494ce592e4182462fcd190fb9a224c7c46ff41382aef409643f0191b80441",
+  "legacy_weights_used": false,
+  "lineage_id": "source_conditioned_formula_v1",
+  "objective": "teacher_forced_formula_token_cross_entropy",
+  "optimizer_steps": 0,
+  "output_head_gradient_norm_max": 0.0,
+  "parent_checkpoint_sha256": null,
+  "progress": {
+    "epochs_completed": 0,
+    "optimizer_steps": 0,
+    "row_cursor": 0
+  },
+  "promotion_performed": false,
+  "proof_authority": false,
+  "provider_calls": 0,
+  "publication_performed": false,
+  "qualified": false,
+  "roundtrip_ok": false,
+  "sample_memory_used": false,
+  "schema": "learned-legal-formula-training/v1",
+  "semantic_correctness_verified": false,
+  "stopped_reason": "deadline_before_batch",
+  "training_after": {
+    "complete": false,
+    "rows_evaluated": 0,
+    "teacher_forcing": true,
+    "token_cross_entropy": null
+  },
+  "training_before": {
+    "complete": false,
+    "rows_evaluated": 0,
+    "teacher_forcing": true,
+    "token_cross_entropy": null
+  },
+  "training_executed": false,
+  "tuning": {
+    "complete": true,
+    "rejected_rows": [],
+    "rows_evaluated": 0,
+    "scope": "held_out_sources_with_in_vocabulary_targets",
+    "split_source_and_id_disjoint": true,
+    "targets_required_disjoint": false,
+    "teacher_forcing": true,
+    "token_cross_entropy": null,
+    "used_for_fit_or_selection": false
+  }
+}

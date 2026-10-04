@@ -1,0 +1,159 @@
+{
+  "accepted": false,
+  "actual_training_or_evaluation_admission": false,
+  "automatic_adjudication": false,
+  "candidate_or_reference_accessed": false,
+  "complete_dependency_manifest": false,
+  "completed_independent_reviews": 0,
+  "content_sha256": "df5181ed6a45b24558447cec8f5383c43920776568f8072b8c42e62da0cc31f7",
+  "dependency_binding_scope": "five_explicit_owners_not_dependency_closure",
+  "encoder_calls": 0,
+  "file_digest_recipe": "sha256_exact_file_bytes",
+  "independent_semantic_review_completed": false,
+  "model_calls": 0,
+  "organizer_manifest_accessed": false,
+  "organizer_private": true,
+  "output_directory": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-admission-01/recording",
+  "packet_binding": {
+    "bytes": 57962,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-packet-01/reviewer_items.json",
+    "sha256": "8a8303ea83fe22899f798703e7931b1f48a8aa0afb01c7d6980a7d3e9301701e"
+  },
+  "packet_content_digest_recipe": "sha256_sorted_compact_utf8_json_no_nan_no_newline",
+  "preparation_validation": {
+    "accepted": false,
+    "actual_training_or_evaluation_admission": false,
+    "digest_recipe": "sha256_sorted_compact_utf8_json_no_nan_no_newline",
+    "independent_fidelity_available": false,
+    "independent_semantic_review_completed": false,
+    "input_manifest_order": "item_id_sorted",
+    "input_manifest_sha256": "6c297a63d1ae723457d7680dad526798190c00b6af6b95f9bc4ce9b4668f19eb",
+    "item_count": 64,
+    "production_admitted": false,
+    "proof_authority": false,
+    "qualified": false,
+    "reviewer_attestations_created": false,
+    "reviewer_identity_attestations_created": false,
+    "reviewer_identity_authenticated": false,
+    "reviewer_independence_authenticated": false,
+    "reviewer_packet_sha256": "a8f465c7950e34ce11f69a5a900d79895f5e19545a2082da75eb9ddf59815655",
+    "schema": "canonical-binding-review-packet-validation/v1",
+    "semantic_gold_created": false,
+    "source_author_independence_authenticated": false,
+    "source_fidelity_established": false,
+    "source_semantics_verified": false,
+    "status": "validated_blank_source_only_packet"
+  },
+  "proof_authority": false,
+  "prover_calls": 0,
+  "provider_calls": 0,
+  "qualified": false,
+  "receipt_binding": {
+    "bytes": 123008,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-admission-01/recording/receipt_private.json",
+    "sha256": "5ca45110113be81b180c4ecacc99b7b534c14095496ef449995645dde494950c"
+  },
+  "recording_validation": {
+    "accepted": false,
+    "actual_training_or_evaluation_admission": false,
+    "automatic_adjudication": false,
+    "declared_completed_annotation_count": 0,
+    "digest_recipe": "sha256_sorted_compact_utf8_json_no_nan_no_newline",
+    "encoder_calls": 0,
+    "human_reviews_authenticated": 0,
+    "independent_fidelity_available": false,
+    "independent_reviews_authenticated": 0,
+    "independent_semantic_review_completed": false,
+    "input_manifest_sha256": "6c297a63d1ae723457d7680dad526798190c00b6af6b95f9bc4ce9b4668f19eb",
+    "item_count": 64,
+    "masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "model_calls": 0,
+    "production_admitted": false,
+    "proof_authority": false,
+    "prover_calls": 0,
+    "provider_calls": 0,
+    "qualified": false,
+    "receipt_sha256": "671ef1708b6a71778aa00d3135886b64183d0e7583c045a080a88cb2e06ff545",
+    "reviewer_attestations_created": false,
+    "reviewer_identity_attestations_created": false,
+    "reviewer_identity_authenticated": false,
+    "reviewer_independence_authenticated": false,
+    "reviewer_packet_sha256": "a8f465c7950e34ce11f69a5a900d79895f5e19545a2082da75eb9ddf59815655",
+    "schema": "canonical-binding-review-validation/v1",
+    "semantic_gold_created": false,
+    "source_author_independence_authenticated": false,
+    "source_fidelity_established": false,
+    "source_meaning_adjudicated": false,
+    "source_semantics_verified": false,
+    "status": "validated_declaration_recording_only",
+    "status_counts": {
+      "agreed_multiple_reviews": 0,
+      "ambiguous": 0,
+      "disputed": 0,
+      "pending": 64,
+      "single_review": 0,
+      "unsupported": 0
+    },
+    "submission_count": 0,
+    "submissions_created": false,
+    "training_executed": false
+  },
+  "reviewer_identity_authenticated": false,
+  "reviewer_independence_authenticated": false,
+  "reviewer_packet_sha256": "a8f465c7950e34ce11f69a5a900d79895f5e19545a2082da75eb9ddf59815655",
+  "schema": "canonical-binding-review-recording-artifact/v1",
+  "semantic_gold_created": false,
+  "source_bindings": [
+    {
+      "bytes": 10419,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_binding_review_workflow.py",
+      "sha256": "af60454d3d1a573ea97960f69d1a9e6a68ef102608123e368dbd87ee97cb7420"
+    },
+    {
+      "bytes": 21097,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_binding_review.py",
+      "sha256": "658bce8569101e36852702ceb53f1bc0ab61d6a00ed071e73d7044f39765d59d"
+    },
+    {
+      "bytes": 12871,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_workflow.py",
+      "sha256": "b7ca7776786a31412ed657a50c274262cacce052f790e5fa87d2f0cfe1a5cd10"
+    },
+    {
+      "bytes": 21743,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_admission.py",
+      "sha256": "d1594da45955c19e8f64e1e1ce0ee2272dd589ed50ffadba3086faf64a650f37"
+    },
+    {
+      "bytes": 2012,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/record_binding_reviews.py",
+      "sha256": "0237cc0a9fba4280a02e102ff88a676c9153361f0c2abbf597d81a1097d958a1"
+    }
+  ],
+  "source_fidelity_established": false,
+  "source_only_packet": true,
+  "status": "pending",
+  "status_counts": {
+    "agreed_multiple_reviews": 0,
+    "ambiguous": 0,
+    "disputed": 0,
+    "pending": 64,
+    "single_review": 0,
+    "unsupported": 0
+  },
+  "submission_bindings": [],
+  "submission_count": 0,
+  "submission_guide_binding": {
+    "bytes": 4208,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-admission-01/recording/submission_guide.json",
+    "sha256": "ec15a55c4d3390422f8527ca7c91484a168595764d2bb10877389a02f101c571"
+  },
+  "submissions_created": false,
+  "training_executed": false
+}

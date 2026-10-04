@@ -1,0 +1,1037 @@
+{
+  "HEAD_after": "d58933631a5362b1e2fdc45254ef620fa231223a",
+  "HEAD_before": "d58933631a5362b1e2fdc45254ef620fa231223a",
+  "counts": {
+    "file_entries": 191,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      "D.": 191
+    },
+    "ahead/behind_cached_main": "0/0",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 125,
+    "origin": "github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+    "parent": 112,
+    "relative": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+    "tracked": 191,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".pre-commit-config.yaml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__version__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs.yaml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/configs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/default_paths.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/file_paths_manager/file_path.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/file_paths_manager/file_path_and_metadata.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/playwright/browser_launch_configs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/playwright/proxy_launch_configs.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/resource/api_connection.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/resource/resource.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/supported_providers.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "configs/types/valid_path.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/define_function.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/file_unit.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/core.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/file_converter/file_converter.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/file_loader/file_loader.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/file_saver/file_saver.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/optimize.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/pipeline.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/abw/test.abw"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/arc/test.arc"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/azw/test.azw"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/bin/test.bin"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/bz/test.bz"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/bz2/test.bz2"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/cda/test.cda"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/csh/test.csh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/doc/test.doc"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/docx/test.docx"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/eot/test.eot"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/epub/test.epub"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/ipynb/test.ipynb"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/jsonl/test.jsonl"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/jsonld/test.jsonld"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/mpkg/test.mpkg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/msg/test.msg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/odp/test.odp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/ods/test.ods"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/odt/test.odt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/ogx/test.ogx"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/pdf/test.pdf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/php/test.php"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/pptx/test.pptx"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/rtf/test.rtf"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/sh/test.bash"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/sh/test.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/vsd/test.vsd"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/woff/test.woff"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/woff2/test.woff2"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/xhtml/test.xhtml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/xls/test.xls"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/xlsx/test.xlsx"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/xml/test.xml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/application/xul/test.xul"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/3gpp/test.3gpp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/3gpp2/test.3gpp2"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/aac/test.aac"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/abw/test.abw"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/acc/test.acc"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/midi/test.midi"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/mp3/test.mp3"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/oga/test.oga"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/ogv/test.ogv"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/opus/test.opus"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/wav/test.wav"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/audio/weba/test.weba"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/apng/test.apng"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/avif/test.avif"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/bmp/test.bmp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/gif/test.gif"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/ico/test.ico"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/jpeg/test.jpeg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/jpeg/test.jpg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/png/test.png"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/svg+xml/test.svg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/svg+xml/test.svg+xml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/svg+xml/test.xml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/tiff/test.tiff"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/image/webp/test.webp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/rss/test.rss"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/text/css/test.css"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/text/md/test.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/text/mjs/test.mjs"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/text/txt/test.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/video/3gpp/test.3gpp"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/video/3gpp2/test.3gpp2"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/video/mp2t/test.mp2t"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/video/mp4/test.mp4"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/video/mpeg/test.mpeg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/video/ogg/test.ogg"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/video/webm/test.webm"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/functions/type/video/x-msvideo/test.x-msvideo"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/monad_file_conversion_pipeline.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/monad_file_converter.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/monad_file_loader.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/conversion_pipeline/monad_file_writer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/core_error_manager/core_error_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/core_resource_manager/core_resource_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "converter_system/file_path_queue/file_path_queue.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/PRD.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docs/SAD.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/config_parser/config_parser.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/config_parser/resources/_check_for_invalid_keys.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/config_parser/resources/_check_if_there_are_duplicate_keys_in_this_dictionary.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/config_parser/resources/_normalize_dict_keys_and_values.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/config_parser/resources/_print_configs_on_startup.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/external_resource_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/file_paths_manager/file_paths_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/file_paths_manager/mime_type.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/file_paths_manager/supported_mime_types.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/non_system_resource_manager/api_connection.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/non_system_resource_manager/api_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/non_system_resource_manager/network_bandwidth_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/non_system_resource_manager/non_system_resource_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/non_system_resource_manager/resources/psutil.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/base_resource_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/hardware_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/resource_config.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/resource_emitter.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/resource_packet.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/resources/comfy_model_management.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/resources/hardware_monitor/psutil.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/software_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "external_interface/system_resource_manager/system_resource_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "input/_input_files_go_here.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "install.bat"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logger/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logger/_handle_uncaught_exception.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logger/_pydantic_file_handler.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logger/logger.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logger/make_json_from_log_file.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "logs/_logs_go_here.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "main.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "output/_output_files_go_here.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/non_system_resources/api_connection_pool/api_connections_pool.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/non_system_resources/core_functions_pool/analyze_functions_in_directory/_create_test_input.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/non_system_resources/core_functions_pool/analyze_functions_in_directory/function_analyzer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/non_system_resources/core_functions_pool/analyze_functions_in_directory/resource_profiler.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/non_system_resources/core_functions_pool/core_functions_pool.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/non_system_resources/core_functions_pool/load_functions_from_file.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/non_system_resources/file_path_pool/file_path_pool.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/pool_health_monitor/pool_health_monitor.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/pool_resource_manager/pool_resource_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pools/system_resources/system_resources_pool_template.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pyproject.toml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "requirements.txt"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "start.bat"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test.bat"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_core/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_core/test_core.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_external_interface/test_config_parser/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_external_interface/test_config_parser/test_config_parser_arg_val_errors.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_external_interface/test_config_parser/test_config_parser_file_errors.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_external_interface/test_file_manager.py/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_external_interface/test_file_manager.py/test_file_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_logger/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_logger/test_logger.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_pools/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_pools/test_pool_resource_manager.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_pydantic_models/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "test/test_pydantic_models/test_resource.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/asyncio_coroutine.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/get_cid.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/logger.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/make_merkle_tree.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/next_step.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/pipeline.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/common/stopwatch.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/async_.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/debuggable.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/either.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/error.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/helper_functions.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/just.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/maybe.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/monad.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/monads/nothing.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/run_in_parallel_with_concurrency_limiter.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/run_in_process_pool.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/converter_system/run_in_thread_pool.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/errors/error_on_wrong_value.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/file_paths_manager/md5_checksum.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "utils/main/run_with_argparse.py"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 492778,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-125/head.patch",
+      "public_derivative": {
+        "bytes": 492778,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-125/head.public.patch",
+        "sha256": "52c0cf209aaa872bc1f878b3d55ce15abb1ced0bb8f1d921ee274bc865832c44"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "52c0cf209aaa872bc1f878b3d55ce15abb1ced0bb8f1d921ee274bc865832c44"
+    },
+    {
+      "bytes": 492778,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-125/index.patch",
+      "public_derivative": {
+        "bytes": 492778,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-125/index.public.patch",
+        "sha256": "52c0cf209aaa872bc1f878b3d55ce15abb1ced0bb8f1d921ee274bc865832c44"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "52c0cf209aaa872bc1f878b3d55ce15abb1ced0bb8f1d921ee274bc865832c44"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-125/unstaged.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-125/unstaged.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 11621,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-125/status-after.z",
+    "sha256": "4c3cffc585c4c7739c5cc37a2b24c7519c169c1404ba051a82770c50a9f2a1b5"
+  },
+  "status_before": {
+    "bytes": 11621,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-125/status-before.z",
+    "sha256": "4c3cffc585c4c7739c5cc37a2b24c7519c169c1404ba051a82770c50a9f2a1b5"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+}

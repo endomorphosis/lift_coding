@@ -1,0 +1,130 @@
+{
+  "HEAD_after": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+  "HEAD_before": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+  "counts": {
+    "file_entries": 9,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      "D.": 9
+    },
+    "ahead/behind_cached_main": null,
+    "branch": "master",
+    "dirty_children": [],
+    "id": 101,
+    "origin": "github.com/endomorphosis/DCEC_Library",
+    "parent": 92,
+    "relative": "ipfs_datasets_py/logic/CEC/DCEC_Library",
+    "tracked": 9,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "DCECContainer.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "LICENSE"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "TEST.namespace"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "TEST.statements"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "__init__.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "cleaning.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "highLevelParsing.py"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "prototypes.py"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 87996,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-101/head.patch",
+      "public_derivative": {
+        "bytes": 87996,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-101/head.public.patch",
+        "relative_path": "repo-101/head.public.patch",
+        "sha256": "0055864e78f936e88b54035d4241f4430e2a0f672133f7f7a8177cad50aa9c3e"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "0055864e78f936e88b54035d4241f4430e2a0f672133f7f7a8177cad50aa9c3e"
+    },
+    {
+      "bytes": 87996,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-101/index.patch",
+      "public_derivative": {
+        "bytes": 87996,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-101/index.public.patch",
+        "relative_path": "repo-101/index.public.patch",
+        "sha256": "0055864e78f936e88b54035d4241f4430e2a0f672133f7f7a8177cad50aa9c3e"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "0055864e78f936e88b54035d4241f4430e2a0f672133f7f7a8177cad50aa9c3e"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-101/unstaged.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-101/unstaged.public.patch",
+        "relative_path": "repo-101/unstaged.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 152,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-101/status-after.z",
+    "sha256": "fc20871949df540bf4d1bd496eb0ffb23d3faa1e4e0c7d38e2cdeaf25fa51942"
+  },
+  "status_before": {
+    "bytes": 152,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-101/status-before.z",
+    "sha256": "fc20871949df540bf4d1bd496eb0ffb23d3faa1e4e0c7d38e2cdeaf25fa51942"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library"
+}

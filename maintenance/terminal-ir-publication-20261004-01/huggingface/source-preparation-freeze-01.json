@@ -1,0 +1,22 @@
+{
+  "actual_builder_invocations": 0,
+  "original_tree_writes": 0,
+  "plan": {
+    "bytes": 10260,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publication-plan-01.json",
+    "sha256": "ab318fdf9f403511f90ed2873f8ec003e6b537f1181426137c0746a4bcf03fed"
+  },
+  "remote_mutations": 0,
+  "schema": "terminal-ir-archive-builder-source-freeze@1",
+  "scope_draft": {
+    "bytes": 3839,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scopes-draft-01.json",
+    "sha256": "a2ea7691610ed1107062702b6709d38e2fc88d2ca98ea30149ef1ed3c93b506a"
+  },
+  "script": {
+    "bytes": 26390,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive.py",
+    "sha256": "01957f36bcaf9708b900503aac9ade2a2eaae926b7b6f9c7be5c9345ed7c5232"
+  },
+  "status": "AST_AND_COMPILE_ONLY_NO_EXECUTION"
+}

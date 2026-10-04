@@ -1,0 +1,30 @@
+{
+  "declared": {
+    "XY": {
+      ".M": 6
+    },
+    "ahead/behind_cached_main": "0/0",
+    "branch": "main",
+    "dirty_children": [
+      "docs/filesystem_spec",
+      "docs/ipfs-docs",
+      "docs/ipfsspec",
+      "docs/lighthouse-python-sdk",
+      "docs/mcp-python-sdk",
+      "ipfs_accelerate_py"
+    ],
+    "id": 7,
+    "origin": "github.com/endomorphosis/ipfs_kit_py",
+    "parent": 1,
+    "relative": ".tools/ipfs_kit_py",
+    "tracked": 6,
+    "untracked": 0
+  },
+  "errors": [
+    {
+      "error_type": "RuntimeError",
+      "message": "git command failed: ('rev-parse', 'HEAD') returncode=128"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/.tools/ipfs_kit_py"
+}

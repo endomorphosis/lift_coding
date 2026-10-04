@@ -1,0 +1,64 @@
+{
+  "accepted": false,
+  "additional_gate_assessment_calls": 0,
+  "additional_profile_fit_calls": 0,
+  "algorithmic_query_reference_use": false,
+  "content_sha256": "c5277a12a7edec7e53543cc0592f1f8432e5a2f0bee2b1d7502bdc32a7a2a385",
+  "created_utc": "2026-10-04T03:09:08Z",
+  "encoder_executed": false,
+  "frozen_report_or_runner_modified": false,
+  "frozen_runner_binding": {
+    "bytes": 38552,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/run_symbol_binding_recovery_child.py",
+    "sha256": "f7b83f6c995fa5fcbf60cffc4973edb6fc48a5553fbbc4383d6a3ee6a48d42d6"
+  },
+  "gate_decisions_modified": false,
+  "gate_inputs": "only_source_text_model_candidate_proposal_frozen_TRAIN_alias_profile_and_profile_pin",
+  "historical_metadata_json_deserialized_for_file_binding_validation": true,
+  "historical_posthoc_counterexample_previously_exposed": true,
+  "historical_weak_reference_field_paths": [
+    "/exact_span_wrong_symbol_weak_counterexamples/0/weak_reference_rule"
+  ],
+  "historical_weak_reference_value_count": 1,
+  "historical_weak_reference_values_consumed_by_withholding_policy": false,
+  "historical_weak_reference_values_present_in_parsed_json": true,
+  "historical_weak_reference_values_supplied_to_assess_bindings": false,
+  "historical_weak_reference_values_supplied_to_profile_fitting": false,
+  "independent_blind_quality_study": false,
+  "independent_fidelity_evaluation_performed": false,
+  "independent_semantic_review_completed": false,
+  "interpretation": "The worker deserialized a prior validation metadata container that includes one historical posthoc weak reference rule. Those values were not inputs to profile fitting, alias assessment, or candidate withholding. The static assay tests the frozen TRAIN alias policy on previously exposed saved candidates; it is not a blind independent accuracy study.",
+  "model_executed": false,
+  "neural_training_executed": false,
+  "prior_validation_binding": {
+    "bytes": 132503,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-validation-01/validation.json",
+    "sha256": "d38b0cf7e628a2e9a552735f0e7280ac2d19b635b41df6138368e3e29cddd20f"
+  },
+  "profile_binding": {
+    "bytes": 4520,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-01/train_alias_profile.json",
+    "sha256": "72a903993de9be49a4cf90db4f28f13b8ecfdf326013eeb640ef5107646a168f"
+  },
+  "profile_content_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+  "profile_fit_inputs": "only_closed_TRAIN16_id_source_text_weak_proposal_records",
+  "profile_frozen_before_prior_validation_json_parsing": true,
+  "proof_authority": false,
+  "prover_executed": false,
+  "qualified": false,
+  "reference_access_false_fields_scope": "algorithmic_query_reference_use_only_not_absence_of_historical_metadata_values_in_deserialized_containers",
+  "report_binding": {
+    "bytes": 233794,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-recovery-02/report.json",
+    "sha256": "f149106e315427b186359f9f44f66773f0388bfbe063a1f4949150af79f9c428"
+  },
+  "report_content_sha256": "2a7acbafb65a158c7ce4f7ee7b5189d33c1cc9ffa284977f0328869618a02515",
+  "report_fields_with_algorithmic_access_scope": [
+    "query_reference_accessed",
+    "development_reference_ir_accessed",
+    "development_weak_proposal_accessed"
+  ],
+  "schema": "alignment-static-symbol-binding-provenance-scope-addendum/v1",
+  "source_fidelity_established": false,
+  "withholding_policy": "only_known_single_alias_mismatch_from_source_candidate_profile_correspondence"
+}

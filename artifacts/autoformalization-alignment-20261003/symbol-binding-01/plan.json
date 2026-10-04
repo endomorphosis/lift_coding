@@ -1,0 +1,259 @@
+{
+  "accepted": false,
+  "all_known_single_aliases_match": "binding_consistent_and_candidate_retained_for_unqualified_review",
+  "all_row_slots": 510,
+  "authored_reference_ir_accessed": false,
+  "candidate_independent_profile": true,
+  "candidate_redecoding_calls": 0,
+  "canonical_only_outputs": "binding_unavailable_without_synthesized_anchors",
+  "content_sha256": "ab07cca75a3c9af2f51a050b5ecd8cefd4d0280b0f19270a12cd1895b2479de5",
+  "cpu_limit_seconds": [
+    60,
+    65
+  ],
+  "development_reference_ir_accessed": false,
+  "development_weak_proposal_accessed": false,
+  "encoder_calls": 0,
+  "encoder_executed": false,
+  "expected_result_hypothesis_not_admission_rule": "48_primary_TRAIN_candidates_consistent_and_one_primary_DEV_candidate_inconsistent",
+  "fit_manifest_binding": {
+    "bytes": 13108,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-01/train_profile_manifest.json",
+    "sha256": "fc7d72464789afa3b0ccc8b414eb6ea7987b1fcaa639057c902443d696f73809"
+  },
+  "implementation_bindings": [
+    {
+      "bytes": 13888,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_symbol_bindings.py",
+      "sha256": "7a46a2488ee37621bdebc6d4521e3eb8160c7eaeaf66ffb2b59cff016c7c8a7a"
+    },
+    {
+      "bytes": 12983,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_byte_codec.py",
+      "sha256": "e2e1859fb2c71c2c2b758516dc35149e7a742d39f6950be76b0962e226d7cafb"
+    }
+  ],
+  "independent_semantic_review_completed": false,
+  "input_bindings": [
+    {
+      "bytes": 333966,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/train_weak_supervision.json",
+      "sha256": "97a333821790db1ad11a542f918a32e583b9b4ab150b82cdd71bbd883bbc42ba"
+    },
+    {
+      "bytes": 11255,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/inference_requests.json",
+      "sha256": "1740f42c497901e974ec7cb8f8892bd6208f643c7708313000870ecde9f10595"
+    },
+    {
+      "bytes": 35118,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/all_request_outcomes.json",
+      "sha256": "0f9af0f349dff957e1d2951dbf8747ba59f760083364eefcdecd5f465537b33e"
+    }
+  ],
+  "known_single_alias_mismatch": "binding_inconsistent_and_candidate_output_withheld_in_opt_in_filter_only",
+  "max_rss_kib": 524288,
+  "max_seconds": 60,
+  "model_calls": 0,
+  "model_executed": false,
+  "neural_training_executed": false,
+  "new_test_binding": {
+    "bytes": 24708,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_symbol_bindings.py",
+    "sha256": "0d70a3b4d94d91b26db3dbc4af7b5b5155336f700f5b24f7bf173b63390863ee"
+  },
+  "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+  "optimizer_updates": 0,
+  "output_scope": "new_opt_in_static_filter_receipts_original_candidates_immutable",
+  "preserved_prior_checked_file_count": 444,
+  "preserved_prior_typed_implementation_test_file_count": 2,
+  "primary_receipt_count": 12,
+  "primary_row_slots": 408,
+  "prior_validation_binding": {
+    "bytes": 132503,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-validation-01/validation.json",
+    "sha256": "d38b0cf7e628a2e9a552735f0e7280ac2d19b635b41df6138368e3e29cddd20f"
+  },
+  "private_repeat_receipt_count": 3,
+  "private_repeat_row_slots": 102,
+  "profile_binding": {
+    "bytes": 4520,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-01/train_alias_profile.json",
+    "sha256": "72a903993de9be49a4cf90db4f28f13b8ecfdf326013eeb640ef5107646a168f"
+  },
+  "profile_content_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+  "profile_fit_pair_count": 16,
+  "profile_fit_split": "train",
+  "profile_fitting_calls_predeclared": 1,
+  "proof_authority": false,
+  "prover_calls": 0,
+  "prover_executed": false,
+  "qualified": false,
+  "query_reference_accessed": false,
+  "rows_per_receipt": 34,
+  "runner_binding": {
+    "bytes": 29862,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/run_symbol_binding_assay.py",
+    "sha256": "77f4625e7a63c6309dcbfef7abb253521f87ffbf2dc41691c152732fae9a491a"
+  },
+  "saved_candidate_bindings_hashed_not_parsed_before_freeze": [
+    {
+      "binding": {
+        "bytes": 188525,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1729-source_initial-generation.json",
+        "sha256": "0a888a701cc95222b8d8f51f7b8335fdc14a00404049bee467f4266d5b428b14"
+      },
+      "is_private_repeat": false,
+      "role": "source_initial",
+      "seed": 1729
+    },
+    {
+      "binding": {
+        "bytes": 206654,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1729-source_final-generation.json",
+        "sha256": "3ea1fe38ee77bab86b7239421316546890b8d43df24cb95dd5da7105bf6ad11c"
+      },
+      "is_private_repeat": false,
+      "role": "source_final",
+      "seed": 1729
+    },
+    {
+      "binding": {
+        "bytes": 205193,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1729-source_final_anchor_initial-generation.json",
+        "sha256": "784f19ba6e0147786bab18df41d942fe929e53b761511ffa042d33c228963339"
+      },
+      "is_private_repeat": false,
+      "role": "source_final_anchor_initial",
+      "seed": 1729
+    },
+    {
+      "binding": {
+        "bytes": 304327,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1729-source_final_anchor_final-generation.json",
+        "sha256": "dcf45067e366d9faa89a696ae544795b9c977d690f68e78cf2e0141474391ff3"
+      },
+      "is_private_repeat": false,
+      "role": "source_final_anchor_final",
+      "seed": 1729
+    },
+    {
+      "binding": {
+        "bytes": 304327,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1729-source-final-anchor-final-private-reload.json",
+        "sha256": "dcf45067e366d9faa89a696ae544795b9c977d690f68e78cf2e0141474391ff3"
+      },
+      "is_private_repeat": true,
+      "role": "source_final_anchor_final",
+      "seed": 1729
+    },
+    {
+      "binding": {
+        "bytes": 198621,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1730-source_initial-generation.json",
+        "sha256": "47cd5735bdad02d87fee897caeb1d94283b425cd3828904aec09b5356966c35f"
+      },
+      "is_private_repeat": false,
+      "role": "source_initial",
+      "seed": 1730
+    },
+    {
+      "binding": {
+        "bytes": 206744,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1730-source_final-generation.json",
+        "sha256": "7c8e7e5ac2cd206aa2fa0d9a62c8a9a7b8734f3a364185016eca49ef69696c6c"
+      },
+      "is_private_repeat": false,
+      "role": "source_final",
+      "seed": 1730
+    },
+    {
+      "binding": {
+        "bytes": 205283,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1730-source_final_anchor_initial-generation.json",
+        "sha256": "4405f429a832d37171464a303cbbba8ec623aba5cdf647f61c5e9dc35a76e34f"
+      },
+      "is_private_repeat": false,
+      "role": "source_final_anchor_initial",
+      "seed": 1730
+    },
+    {
+      "binding": {
+        "bytes": 299086,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1730-source_final_anchor_final-generation.json",
+        "sha256": "1211b510b8ce85e977ad89e8cc1989b7952f905ed307dbf0905e4d57b71a04b9"
+      },
+      "is_private_repeat": false,
+      "role": "source_final_anchor_final",
+      "seed": 1730
+    },
+    {
+      "binding": {
+        "bytes": 299086,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1730-source-final-anchor-final-private-reload.json",
+        "sha256": "1211b510b8ce85e977ad89e8cc1989b7952f905ed307dbf0905e4d57b71a04b9"
+      },
+      "is_private_repeat": true,
+      "role": "source_final_anchor_final",
+      "seed": 1730
+    },
+    {
+      "binding": {
+        "bytes": 199725,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1731-source_initial-generation.json",
+        "sha256": "127c850629ccc66c5b3bfacc875ad9f2a1d0a95a8e236eebbb1e41e425f8f0c5"
+      },
+      "is_private_repeat": false,
+      "role": "source_initial",
+      "seed": 1731
+    },
+    {
+      "binding": {
+        "bytes": 206802,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1731-source_final-generation.json",
+        "sha256": "6629f159dd7baa8301e8207a231721200487aa204df2da43fb049e1bfcbd3c1f"
+      },
+      "is_private_repeat": false,
+      "role": "source_final",
+      "seed": 1731
+    },
+    {
+      "binding": {
+        "bytes": 205341,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1731-source_final_anchor_initial-generation.json",
+        "sha256": "da88847dba2a0ecd2ae660b290a1f5483d1df8317d7f319fd3188b3c6a7977b8"
+      },
+      "is_private_repeat": false,
+      "role": "source_final_anchor_initial",
+      "seed": 1731
+    },
+    {
+      "binding": {
+        "bytes": 299143,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1731-source_final_anchor_final-generation.json",
+        "sha256": "29cfc6e841a2b9180b49e8b54be78fdae9ebfbaa83881594368ceb275079d53b"
+      },
+      "is_private_repeat": false,
+      "role": "source_final_anchor_final",
+      "seed": 1731
+    },
+    {
+      "binding": {
+        "bytes": 299143,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1731-source-final-anchor-final-private-reload.json",
+        "sha256": "29cfc6e841a2b9180b49e8b54be78fdae9ebfbaa83881594368ceb275079d53b"
+      },
+      "is_private_repeat": true,
+      "role": "source_final_anchor_final",
+      "seed": 1731
+    }
+  ],
+  "schema": "alignment-static-source-symbol-binding-plan/v1",
+  "semantic_scope": "observed_TRAIN_literal_facet_symbol_agreement_only",
+  "source_fidelity_established": false,
+  "started_utc": "2026-10-04T02:56:35Z",
+  "training_supervision_consumed": true,
+  "unknown_or_ambiguous_alias": "binding_unassessed_and_candidate_retained_for_unqualified_review",
+  "weak_correspondence_origin": "source_parser_derived_with_frozen_TRAIN_supervised_atom_catalog",
+  "weak_gold_comparison_requested": false
+}

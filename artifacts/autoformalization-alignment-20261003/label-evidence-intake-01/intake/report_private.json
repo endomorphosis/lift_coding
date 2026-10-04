@@ -1,0 +1,198 @@
+{
+  "accepted": false,
+  "actual_training_or_evaluation_admission": false,
+  "admission_status": "pending",
+  "automatic_adjudication": false,
+  "cohort_policy_metadata_accessed": false,
+  "complete_dependency_manifest": false,
+  "content_digest_recipe": "sha256_sorted_compact_utf8_json_no_nan_no_newline",
+  "content_sha256": "35929db42f50cd58a5cfe504a8ea37153bcf52dd07e73cde4d0c700945d19b28",
+  "declared_package_item_count": 0,
+  "dependency_binding_scope": "eight_explicit_owners_not_dependency_closure",
+  "encoder_calls": 0,
+  "evidence_packages_created": false,
+  "expected_bindings": {
+    "cohort": null,
+    "organizer": null,
+    "packet": {
+      "content_sha256": "a8f465c7950e34ce11f69a5a900d79895f5e19545a2082da75eb9ddf59815655",
+      "file_bytes": 57962,
+      "file_sha256": "8a8303ea83fe22899f798703e7931b1f48a8aa0afb01c7d6980a7d3e9301701e"
+    },
+    "process": null,
+    "receipt": {
+      "content_sha256": "030b34addf534c610528ae9692fd8e618928eb8be43278c8eed7850a3df88ce1",
+      "file_bytes": 123008,
+      "file_sha256": "5ca45110113be81b180c4ecacc99b7b534c14095496ef449995645dde494950c"
+    },
+    "submissions": []
+  },
+  "file_digest_recipe": "sha256_exact_file_bytes",
+  "formal_targets_admitted": 0,
+  "human_reviews_authenticated": 0,
+  "independent_fidelity_available": false,
+  "independent_reviews_authenticated": 0,
+  "independent_semantic_review_completed": false,
+  "input_byte_limit": 16777216,
+  "input_bytes": 188437,
+  "input_file_bindings_verified": true,
+  "input_file_count": 4,
+  "intake_receipt_binding": {
+    "bytes": 91547,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/label-evidence-intake-01/intake/intake_receipt_private.json",
+    "sha256": "def505b32cdf302effc223c27c746806501f381e62dd624441d3fbcb3440426c"
+  },
+  "item_count": 64,
+  "masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "metadata_content_bindings_verified": false,
+  "metadata_semantics_validated": false,
+  "model_calls": 0,
+  "organizer_metadata_accessed": false,
+  "organizer_private": true,
+  "original_submission_bindings": [],
+  "output_directory": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/label-evidence-intake-01/intake",
+  "package_binding": {
+    "bytes": 750,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/label-evidence-intake-01/empty_evidence_package.json",
+    "sha256": "6d5b4d084a44e291f89a373bb645b409db44f6eb0d7626d463a18a5f068f9130"
+  },
+  "packet_binding": {
+    "bytes": 57962,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-packet-01/reviewer_items.json",
+    "sha256": "8a8303ea83fe22899f798703e7931b1f48a8aa0afb01c7d6980a7d3e9301701e"
+  },
+  "production_admitted": false,
+  "proof_authority": false,
+  "prover_calls": 0,
+  "provider_calls": 0,
+  "qualified": false,
+  "recording_generation_replayed": true,
+  "recording_receipt_binding": {
+    "bytes": 123008,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-admission-01/recording/receipt_private.json",
+    "sha256": "5ca45110113be81b180c4ecacc99b7b534c14095496ef449995645dde494950c"
+  },
+  "recording_replay_validation": {
+    "accepted": false,
+    "actual_training_or_evaluation_admission": false,
+    "automatic_adjudication": false,
+    "declared_completed_annotation_count": 0,
+    "digest_recipe": "sha256_sorted_compact_utf8_json_no_nan_no_newline",
+    "encoder_calls": 0,
+    "human_reviews_authenticated": 0,
+    "independent_fidelity_available": false,
+    "independent_reviews_authenticated": 0,
+    "independent_semantic_review_completed": false,
+    "input_manifest_sha256": "6c297a63d1ae723457d7680dad526798190c00b6af6b95f9bc4ce9b4668f19eb",
+    "item_count": 64,
+    "masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "model_calls": 0,
+    "production_admitted": false,
+    "proof_authority": false,
+    "prover_calls": 0,
+    "provider_calls": 0,
+    "qualified": false,
+    "receipt_sha256": "671ef1708b6a71778aa00d3135886b64183d0e7583c045a080a88cb2e06ff545",
+    "reviewer_attestations_created": false,
+    "reviewer_identity_attestations_created": false,
+    "reviewer_identity_authenticated": false,
+    "reviewer_independence_authenticated": false,
+    "reviewer_packet_sha256": "a8f465c7950e34ce11f69a5a900d79895f5e19545a2082da75eb9ddf59815655",
+    "schema": "canonical-binding-review-validation/v1",
+    "semantic_gold_created": false,
+    "source_author_independence_authenticated": false,
+    "source_fidelity_established": false,
+    "source_meaning_adjudicated": false,
+    "source_semantics_verified": false,
+    "status": "validated_declaration_recording_only",
+    "status_counts": {
+      "agreed_multiple_reviews": 0,
+      "ambiguous": 0,
+      "disputed": 0,
+      "pending": 64,
+      "single_review": 0,
+      "unsupported": 0
+    },
+    "submission_count": 0,
+    "submissions_created": false,
+    "training_executed": false
+  },
+  "recording_report_binding": {
+    "bytes": 6717,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-admission-01/recording/report_private.json",
+    "sha256": "4982d16081ee92f9f8393274d8e401dff45defe03c4e7d7db7abef285dd3d958"
+  },
+  "review_declarations_accessed": true,
+  "reviewer_attestations_created": false,
+  "reviewer_identity_attestations_created": false,
+  "reviewer_identity_authenticated": false,
+  "reviewer_independence_authenticated": false,
+  "schema": "canonical-binding-label-evidence-intake-artifact/v1",
+  "selected_metadata_file_bindings": {},
+  "selected_process_authenticated": false,
+  "selected_process_binding": null,
+  "selected_process_metadata_accessed": false,
+  "semantic_gold_created": false,
+  "separate_candidate_or_authored_reference_files_accessed": false,
+  "source_author_independence_authenticated": false,
+  "source_bindings": [
+    {
+      "bytes": 17036,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_label_evidence_intake_workflow.py",
+      "sha256": "2c8fcb32eac1ba58f57a8cc2e6c5839527f4020a070fd1e1d38cf66a8bb6da9e"
+    },
+    {
+      "bytes": 19777,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_label_evidence_intake.py",
+      "sha256": "c78aae8affd9e897f8dbbe7283c91855666d9fc6651fec193753435d6356f58a"
+    },
+    {
+      "bytes": 2727,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/intake_binding_label_evidence.py",
+      "sha256": "a08b474b11ef423b48d310b93f859cf226d9fb69c69135db57c43f2a2ec9c166"
+    },
+    {
+      "bytes": 21097,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_binding_review.py",
+      "sha256": "658bce8569101e36852702ceb53f1bc0ab61d6a00ed071e73d7044f39765d59d"
+    },
+    {
+      "bytes": 10419,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_binding_review_workflow.py",
+      "sha256": "af60454d3d1a573ea97960f69d1a9e6a68ef102608123e368dbd87ee97cb7420"
+    },
+    {
+      "bytes": 12871,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_workflow.py",
+      "sha256": "b7ca7776786a31412ed657a50c274262cacce052f790e5fa87d2f0cfe1a5cd10"
+    },
+    {
+      "bytes": 21743,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_admission.py",
+      "sha256": "d1594da45955c19e8f64e1e1ce0ee2272dd589ed50ffadba3086faf64a650f37"
+    },
+    {
+      "bytes": 2012,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/record_binding_reviews.py",
+      "sha256": "0237cc0a9fba4280a02e102ff88a676c9153361f0c2abbf597d81a1097d958a1"
+    }
+  ],
+  "source_fidelity_established": false,
+  "source_semantics_verified": false,
+  "status": "pending",
+  "submissions_created": false,
+  "training_executed": false,
+  "verification_status": "pending"
+}

@@ -1,0 +1,110 @@
+{
+  "accelerate_replacement_reason": "include_untracked_test_and_container_source_roots",
+  "all_final_original_indexes_heads_existing_branches_selected_source_bytes_preserved": true,
+  "attempts_retained": [
+    "snapshot-01",
+    "snapshot-02",
+    "snapshot-03"
+  ],
+  "content_sha256": "429abd0bb490ac61ed8711438339a42812c88187e55e899e697d3b9e6543e46a",
+  "initial_attempt_status": "root_success_then_dataset_concurrent_source_mutation",
+  "initial_dataset_changed_paths": [
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_deduplicated_whole_input_guard_device_inference.py",
+    "scripts/ops/autoencoder/benchmark_eight_dimensional_preconditioning.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_deduplicated_whole_input_guard_device_inference.py"
+  ],
+  "initial_dataset_partial_commit": "1c84ab2ed3bdca1bab3dde1ed82f4d94e28dd856",
+  "main_merge_executed": false,
+  "origin_push_executed": false,
+  "schema": "canonical-source-final-selection/v1",
+  "selected_file_count": 3563,
+  "snapshot_count": 7,
+  "snapshots": [
+    {
+      "gitlinks_deferred": [
+        "Mcp-Plus-Plus",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "hallucinate_app"
+      ],
+      "name": "root",
+      "original_head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "python_syntax_errors": [],
+      "repository": "/home/barberb/lift_coding",
+      "selected_file_count": 785,
+      "snapshot_commit": "bc64e1a2d3d3428ae3823fd4754d0051a61d485d",
+      "snapshot_ref": "refs/heads/publication/canonical-wip-20261004/3560d0e1d9383e2100675998"
+    },
+    {
+      "gitlinks_deferred": [
+        ".tools/ipfs_kit_py",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+      ],
+      "name": "datasets",
+      "original_head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "python_syntax_errors": [],
+      "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "selected_file_count": 2252,
+      "snapshot_commit": "5e7f15587898dda5960720a407b9f42fb7b6389a",
+      "snapshot_ref": "refs/heads/publication/canonical-recovery-20261004/908f50b1afbebe39f161c9d4"
+    },
+    {
+      "gitlinks_deferred": [],
+      "name": "accelerate",
+      "original_head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "python_syntax_errors": [],
+      "repository": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "selected_file_count": 511,
+      "snapshot_commit": "61ee3184d53e076c177ddba2efd0ee1aa4c35036",
+      "snapshot_ref": "refs/heads/publication/canonical-complete-20261004/3a01801b87de704196138eb8"
+    },
+    {
+      "gitlinks_deferred": [],
+      "name": "kit",
+      "original_head": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "python_syntax_errors": [],
+      "repository": "/home/barberb/lift_coding/external/ipfs_kit",
+      "selected_file_count": 15,
+      "snapshot_commit": "3e8f8deb20e20a3b1f0ed9627a07b34be3bcc7db",
+      "snapshot_ref": "refs/heads/publication/canonical-recovery-20261004/c413082a5d5a85a7d620ac12"
+    },
+    {
+      "gitlinks_deferred": [],
+      "name": "mcp_cpp",
+      "original_head": "97c62bd060ebb479ee43745a3863673929146b25",
+      "python_syntax_errors": [],
+      "repository": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+      "selected_file_count": 0,
+      "snapshot_commit": "74165c5001a66d8f1b1a9facc61c9afdc9d7dfb8",
+      "snapshot_ref": "refs/heads/publication/canonical-recovery-20261004/99580373b6f9df0cfd539747"
+    },
+    {
+      "gitlinks_deferred": [
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "swissknife"
+      ],
+      "name": "hallucinate",
+      "original_head": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+      "python_syntax_errors": [],
+      "repository": "/home/barberb/lift_coding/hallucinate_app",
+      "selected_file_count": 0,
+      "snapshot_commit": "e7b81044e505cf31b5a142942e18b0ccbb14dcc6",
+      "snapshot_ref": "refs/heads/publication/canonical-recovery-20261004/929cca7214cf7e1218104939"
+    },
+    {
+      "gitlinks_deferred": [],
+      "name": "swissknife",
+      "original_head": "75931db15273786ecd579f1089ec5599b9ded352",
+      "python_syntax_errors": [],
+      "repository": "/home/barberb/lift_coding/swissknife",
+      "selected_file_count": 0,
+      "snapshot_commit": "d6ababe0f493e68c49997b66a2bf802d5887f8ee",
+      "snapshot_ref": "refs/heads/publication/canonical-recovery-20261004/a347da32619f7af527221290"
+    }
+  ],
+  "training_executed": false
+}

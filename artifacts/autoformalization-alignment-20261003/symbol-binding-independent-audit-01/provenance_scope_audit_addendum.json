@@ -1,0 +1,77 @@
+{
+  "accepted": false,
+  "additional_gate_assessment_calls": 0,
+  "additional_profile_fit_calls": 0,
+  "algorithmic_query_reference_use": false,
+  "assay_provenance_scope_addendum_binding": {
+    "bytes": 3687,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-recovery-02/provenance_scope_addendum.json",
+    "sha256": "3173403dd858dec8788b611e67e190f4e99ed8164e2a466a48e66dc299fddf4b"
+  },
+  "audit_addendum_scope": "provenance_disclosure_and_immutable_binding_validation_not_semantic_quality",
+  "checked_file_bindings": [
+    {
+      "bytes": 138014,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-independent-audit-01/audit.json",
+      "sha256": "88fe2f7de08334242af24fc258bdda6feb4167a83901241f2b12fc960928c47f"
+    },
+    {
+      "bytes": 29372,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-independent-audit-01/audit_saved_bindings.py",
+      "sha256": "1e3501c37bbdc92c9bcab0adcff9a926a9706f202207077b59a090ab6cd75d8e"
+    },
+    {
+      "bytes": 3687,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-recovery-02/provenance_scope_addendum.json",
+      "sha256": "3173403dd858dec8788b611e67e190f4e99ed8164e2a466a48e66dc299fddf4b"
+    },
+    {
+      "bytes": 233794,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-recovery-02/report.json",
+      "sha256": "f149106e315427b186359f9f44f66773f0388bfbe063a1f4949150af79f9c428"
+    },
+    {
+      "bytes": 38552,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/run_symbol_binding_recovery_child.py",
+      "sha256": "f7b83f6c995fa5fcbf60cffc4973edb6fc48a5553fbbc4383d6a3ee6a48d42d6"
+    },
+    {
+      "bytes": 4520,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-01/train_alias_profile.json",
+      "sha256": "72a903993de9be49a4cf90db4f28f13b8ecfdf326013eeb640ef5107646a168f"
+    },
+    {
+      "bytes": 132503,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-validation-01/validation.json",
+      "sha256": "d38b0cf7e628a2e9a552735f0e7280ac2d19b635b41df6138368e3e29cddd20f"
+    }
+  ],
+  "checked_file_count": 7,
+  "content_sha256": "9801923be30b274d35c38631a63b48ca1965ac5f828ca55324211e87927a5849",
+  "encoder_executed": false,
+  "frozen_original_audit_binding": {
+    "bytes": 138014,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/symbol-binding-independent-audit-01/audit.json",
+    "sha256": "88fe2f7de08334242af24fc258bdda6feb4167a83901241f2b12fc960928c47f"
+  },
+  "historical_metadata_weak_reference_paths": [
+    "/exact_span_wrong_symbol_weak_counterexamples/0/weak_reference_rule"
+  ],
+  "historical_metadata_weak_reference_value_count": 1,
+  "independent_blind_quality_study": false,
+  "independent_fidelity_evaluation_performed": false,
+  "independent_semantic_review_completed": false,
+  "metadata_deserialization_occurred": true,
+  "model_executed": false,
+  "neural_training_executed": false,
+  "original_assessment_counts_and_filters_unchanged": true,
+  "original_profile_and_plan_frozen_before_historical_metadata_parse": true,
+  "proof_authority": false,
+  "prover_executed": false,
+  "qualified": false,
+  "query_reference_comparisons": 0,
+  "reference_access_false_flags_scope": "algorithmic_query_reference_use_only_not_total_container_deserialization",
+  "schema": "alignment-symbol-binding-independent-provenance-scope-audit-addendum/v1",
+  "source_fidelity_established": false,
+  "status": "passed"
+}

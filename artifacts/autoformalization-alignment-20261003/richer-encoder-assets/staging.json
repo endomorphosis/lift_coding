@@ -1,0 +1,74 @@
+{
+  "elapsed_seconds": 1193.1035832310008,
+  "files": [
+    {
+      "bytes": 7127,
+      "observed_bytes": 7127,
+      "observed_sha256": "3411088045ffb8a9a0aa9936eae275896b39983a2ee5b08f091b44e6289e4fe4",
+      "official_pinned_url": "https://huggingface.co/Alibaba-NLP/new-impl/resolve/40ced75c3017eb27626c9d4ea981bde21a2662f4/configuration.py",
+      "path": "configuration.py",
+      "relative_to": "code",
+      "sha256": "3411088045ffb8a9a0aa9936eae275896b39983a2ee5b08f091b44e6289e4fe4"
+    },
+    {
+      "bytes": 59023,
+      "observed_bytes": 59023,
+      "observed_sha256": "374670b416fcc82f081c9cd28b5fd61c2bd91bbe18eb4798fcc48a81f9c250a0",
+      "official_pinned_url": "https://huggingface.co/Alibaba-NLP/new-impl/resolve/40ced75c3017eb27626c9d4ea981bde21a2662f4/modeling.py",
+      "path": "modeling.py",
+      "relative_to": "code",
+      "sha256": "374670b416fcc82f081c9cd28b5fd61c2bd91bbe18eb4798fcc48a81f9c250a0"
+    },
+    {
+      "bytes": 1429,
+      "observed_bytes": 1429,
+      "observed_sha256": "711bdc81365fc25d30533cf05b9fdf588e5ba01f18540fbbb1307d787597a313",
+      "official_pinned_url": "https://huggingface.co/Alibaba-NLP/gte-multilingual-base/resolve/9bbca17d9273fd0d03d5725c7a4b0f6b45142062/config.json",
+      "path": "config.json",
+      "relative_to": "model",
+      "sha256": "711bdc81365fc25d30533cf05b9fdf588e5ba01f18540fbbb1307d787597a313"
+    },
+    {
+      "bytes": 610753338,
+      "observed_bytes": 610753338,
+      "observed_sha256": "f5a35a10faa54da7717870af1517c9b41e9bd8e3880bc5a8e9363d4c3c63e9b0",
+      "official_pinned_url": "https://huggingface.co/Alibaba-NLP/gte-multilingual-base/resolve/9bbca17d9273fd0d03d5725c7a4b0f6b45142062/model.safetensors",
+      "path": "model.safetensors",
+      "relative_to": "model",
+      "sha256": "f5a35a10faa54da7717870af1517c9b41e9bd8e3880bc5a8e9363d4c3c63e9b0"
+    },
+    {
+      "bytes": 964,
+      "observed_bytes": 964,
+      "observed_sha256": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835",
+      "official_pinned_url": "https://huggingface.co/Alibaba-NLP/gte-multilingual-base/resolve/9bbca17d9273fd0d03d5725c7a4b0f6b45142062/special_tokens_map.json",
+      "path": "special_tokens_map.json",
+      "relative_to": "model",
+      "sha256": "8c785abebea9ae3257b61681b4e6fd8365ceafde980c21970d001e834cf10835"
+    },
+    {
+      "bytes": 17082756,
+      "observed_bytes": 17082756,
+      "observed_sha256": "f59925fcb90c92b894cb93e51bb9b4a6105c5c249fe54ce1c704420ac39b81af",
+      "official_pinned_url": "https://huggingface.co/Alibaba-NLP/gte-multilingual-base/resolve/9bbca17d9273fd0d03d5725c7a4b0f6b45142062/tokenizer.json",
+      "path": "tokenizer.json",
+      "relative_to": "model",
+      "sha256": "f59925fcb90c92b894cb93e51bb9b4a6105c5c249fe54ce1c704420ac39b81af"
+    },
+    {
+      "bytes": 1149,
+      "observed_bytes": 1149,
+      "observed_sha256": "24cebbf2ef20fc317256e03e52ac7b2ca326586f946a8427ecac036332bf0933",
+      "official_pinned_url": "https://huggingface.co/Alibaba-NLP/gte-multilingual-base/resolve/9bbca17d9273fd0d03d5725c7a4b0f6b45142062/tokenizer_config.json",
+      "path": "tokenizer_config.json",
+      "relative_to": "model",
+      "sha256": "24cebbf2ef20fc317256e03e52ac7b2ca326586f946a8427ecac036332bf0933"
+    }
+  ],
+  "manifest_path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/gte_multilingual_local_assets_v1.json",
+  "manifest_sha256": "8beb874aa7b06599346173fde12e95f9f926b3028942d5014cdd2f99c4385166",
+  "model_loads": 0,
+  "qualified": false,
+  "schema": "richer-encoder-pinned-asset-staging/v1",
+  "status": "completed"
+}

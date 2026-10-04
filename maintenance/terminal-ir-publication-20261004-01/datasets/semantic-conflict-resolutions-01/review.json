@@ -1,0 +1,87 @@
+{
+  "schema": "datasets-reviewed-three-way-semantic-resolution@1",
+  "rows": [
+    {
+      "path": "ipfs_datasets_py/logic/backends/process.py",
+      "merged_sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2",
+      "AST": "passed",
+      "hunks": [
+        {
+          "index": 1,
+          "choice": "local",
+          "reason": "Document sampled logical-workspace bounds and their external/unlinked-file limits."
+        },
+        {
+          "index": 2,
+          "choice": "local",
+          "reason": "Preserve additional explicit workspace entry/depth limit fields."
+        },
+        {
+          "index": 3,
+          "choice": "local",
+          "reason": "Retain pre-spawn wall/cancellation check after initial workspace scan."
+        },
+        {
+          "index": 4,
+          "choice": "custom",
+          "reason": "Use existing pre-scan absolute deadline/cancellation locals; retain ancestry/RSS setup and add workspace sampler state."
+        },
+        {
+          "index": 5,
+          "choice": "local",
+          "reason": "Retain periodic no-follow bounded workspace inventory and native-tree termination."
+        },
+        {
+          "index": 6,
+          "choice": "local",
+          "reason": "Join workspace cleanup fault with descendant cleanup fault."
+        },
+        {
+          "index": 7,
+          "choice": "local",
+          "reason": "Include explicit workspace exhaustion in resource classification."
+        },
+        {
+          "index": 8,
+          "choice": "local",
+          "reason": "Retain workspace limit observation in native result."
+        },
+        {
+          "index": 9,
+          "choice": "local",
+          "reason": "Preserve executor-failure flag for post-callback exception handling."
+        }
+      ]
+    },
+    {
+      "path": "ipfs_datasets_py/logic/backends/registry.py",
+      "merged_sha256": "b782be0587c5c6a55d28133c4839a182984ff2e274cb97ffd05d82caa76cc2a1",
+      "AST": "passed",
+      "hunks": [
+        {
+          "index": 1,
+          "choice": "local",
+          "reason": "Preserve existing ordinary is_available refusal while adding exact canonical request-local missing-native fallback eligibility; custom/probe/failing delegates never become implicit eligibility."
+        },
+        {
+          "index": 2,
+          "choice": "local",
+          "reason": "Use reviewed request-specific availability method for native Hyper fallback; existing scoped budget wraps it."
+        }
+      ]
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+      "merged_sha256": "af8ad2d10aa10f1cb9f9b41d39392e28cc6acfb88bf8b949215e9616bd09f355",
+      "AST": "passed",
+      "hunks": [
+        {
+          "index": 1,
+          "choice": "local",
+          "reason": "Precise comment says prior storage authorization; numeric campaign limits remain identical."
+        }
+      ]
+    }
+  ],
+  "scope": "isolated checkout only; preserves independent upstream controls and explicitly reviewed current additions; no LIVE edits"
+}
