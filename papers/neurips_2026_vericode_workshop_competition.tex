@@ -1,0 +1,475 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2026_vericode_competition
+
+% This template is for COMPETITION REPORTS submitted to the
+% NeurIPS 2026 Workshop on AI for Verifiable Coding.
+% For regular workshop papers, use neurips_2026_vericode_workshop.tex instead.
+%
+% The first-page footnote ("Competition at NeurIPS 2026 Workshop on AI for
+% Verifiable Coding.") is set automatically by the style file; you do not need
+% to supply \workshoptitle.
+%
+% 0. "default": submission version. Competition reports are not anonymized, so
+%    this shows your real author names; it adds line numbers to aid review.
+%    Use this until you are notified of acceptance.
+\usepackage{neurips_2026_vericode_competition}
+% 1. camera-ready: add the "final" option to remove line numbers and print the
+%    competition footnote.
+%  \usepackage[final]{neurips_2026_vericode_competition}
+% 2. "preprint" is used for arXiv or other preprint postings.
+%  \usepackage[preprint]{neurips_2026_vericode_competition}
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{neurips_2026_vericode_competition}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+
+\title{Formatting and Content Instructions for Competition Reports}
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+
+\author{%
+  David S.~Hippocampus\thanks{Use footnote for providing further information
+    about author (webpage, alternative address), \emph{not} for acknowledging
+    funding agencies.} \\
+  Department of Computer Science\\
+  Cranberry-Lemon University\\
+  Pittsburgh, PA 15213 \\
+  \texttt{hippo@cs.cranberry-lemon.edu} \\
+  % examples of more authors
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \AND
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\begin{abstract}
+  Every competition entry must include a report prepared with this template; a score without a conforming report is not ranked. Section~\ref{required} defines the four required sections: \textbf{Approach}, \textbf{Models}, \textbf{Budget accounting}, and \textbf{Reproduction}. The abstract must be one paragraph, indented \nicefrac{1}{2}~inch (3~picas) on both margins, in 10~point type with 11~point leading.
+\end{abstract}
+
+
+\section{Submission of competition reports}
+
+
+Reports must be at least 3 pages and up to 9 pages, including figures; references and appendices do not count. A report records what you ran, so brevity is expected: a few paragraphs per required section is usually enough. Prepare it with \verb+neurips_2026_vericode_competition.sty+, and do not modify the style files.
+
+\textcolor{red}{Competition reports are not anonymized: give your real names, affiliations, and contact information in the submission version so we can contact you if we have questions about your submitted code.}
+
+\paragraph{Desk rejection} Failure to follow this template, or to stay within the compute budget for your track (Section~\ref{budget}), is grounds for desk rejection from the competition.
+
+
+\subsection{Review process}
+\label{review}
+
+
+Reports are reviewed by the competition chair together with maintainers of the Lean repositories we collaborate with. Reviewers are not scoring novelty; they check that the result is real, honestly accounted for, within budget, and reproducible from your code archive.
+
+
+\section{Required report contents}
+\label{required}
+
+
+Every report must contain the four sections below, under these headings, in this order. Table~\ref{required-table} summarizes them. None may be omitted or deferred entirely to an appendix.
+
+
+\begin{table}[!ht]
+  \caption{The four required sections. A missing or uncheckable section is grounds for desk rejection.}
+  \label{required-table}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Section      & Must establish           & Checked against \\
+    \midrule
+    Approach     & What the pipeline does   & Code archive \\
+    Models       & What produced the output & Code archive \\
+    Budget       & What the run cost        & Provider price sheet, logs \\
+    Reproduction & That the run repeats     & Code archive \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\subsection{Approach}
+
+
+Describe the refactoring pipeline end to end, so that a reader understand how your system operates on the benchmark data and how your submitted refactored proofs came from. Some example contents you can describe in detail is agent workflow and training procedure depending on your system. A pipeline figure is encouraged (Figure~\ref{pipeline-figure}).
+
+
+
+\subsection{Models}
+
+
+List every model used in the pipeline, including auxiliary ones such as embedding models, rerankers, and judges. For each, give the model name and version, sampling hyperparameter, the provider, and, for open-weight models, a link to the weights on Hugging Face or equivalent. If you fine-tuned a model, say so and give the link to the checkpoint on Hugging Face or equivalent.
+
+
+\subsection{Budget accounting}
+\label{budget}
+
+
+Report what the submitted run cost. Both tracks are capped (Table~\ref{limits-table}), and this section is how reviewers confirm the cap was respected. Exceeding a cap is a desk rejection, so measure before you submit.
+
+
+\begin{table}[!ht]
+  \caption{Compute budget per track. Exceeding a cap is grounds for desk rejection.}
+  \label{limits-table}
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Track  & Resource                    & Cap \\
+    \midrule
+    Closed & API spend, list prices      & US\$3 per problem \\
+    Open   & Hardware                    & 4 $\times$ A100 80\,GB \\
+           & Wall-clock, full benchmark  & 48 hours \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\paragraph{Closed track} Report per-problem API spend at the provider's list prices (Table~\ref{budget-table}). Give the total, mean, and \emph{maximum} per problem in the body; the maximum is what is checked against the cap. You are encouraged to put the full per-problem table in an appendix.
+
+\paragraph{Open track} Report the accelerator model and count and the end-to-end wall-clock time of the inference run that produced the submitted JSONL (Table~\ref{hardware-table}). The 48-hour cap with  at no more than four 80\,GB A100s is the inference compute budget. Fine-tuning compute is not capped, and must be reported separately.
+
+
+\begin{table}[!ht]
+  \caption{Closed track: per-problem API spend at list prices. Costs include all retries and discarded candidates; the maximum row establishes compliance with the US\$3 cap.}
+  \label{budget-table}
+  \centering
+  \begin{tabular}{llr}
+    \toprule
+    Problem & Model & Cost (USD) \\
+    \midrule
+    \texttt{prob\_0001} & \texttt{model-id-20260114} & 0.72 \\
+    \texttt{prob\_0002} & \texttt{model-id-20260114} & 0.22 \\
+    \midrule
+    Total   &                            & 54.31 \\
+    Mean    &                            &  0.22 \\
+    Maximum &                            &  2.41 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[!ht]
+  \caption{Open track: hardware and wall-clock time for the run that produced the submitted JSONL. Only the benchmark run counts against the 48-hour cap.}
+  \label{hardware-table}
+  \centering
+  \begin{tabular}{llr}
+    \toprule
+    Stage & Accelerators & Wall-clock (h) \\
+    \midrule
+    Benchmark run & 4 $\times$ A100 80\,GB & 31.5 \\
+    Fine-tuning   & 4 $\times$ A100 80\,GB & 19.0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\subsection{Reproduction}
+
+
+State how the organizers can regenerate your submitted JSONL from your code archive. The commands themselves belong in a README in the archive, not in the report; here, confirm that the archive contains a documented entry point and give the expected wall-clock time and, for the closed track, the expected API cost of a rerun. The competition chair and the collaborating Lean repository maintainers will run it (Section~\ref{review}).
+
+Also state what is not deterministic. Sampling, unseeded parallelism, and provider-side nondeterminism mean a rerun may not reproduce the JSONL line for line, and reviewers expect that; what they need is the magnitude. Say how much the score varied across your own reruns, or state that you did not measure it.
+
+
+\section{General formatting instructions}
+\label{gen_inst}
+
+
+The text must be confined within a rectangle 5.5~inches (33~picas) wide and
+9~inches (54~picas) long. The left margin is 1.5~inch (9~picas).  Use 10~point
+type with a vertical spacing (leading) of 11~points.  Times New Roman is the
+preferred typeface throughout, and will be selected for you by default.
+Paragraphs are separated by \nicefrac{1}{2}~line space (5.5 points), with no
+indentation.
+
+
+The paper title should be 17~point, initial caps/lower case, bold, centered
+between two horizontal rules. The top rule should be 4~points thick and the
+bottom rule should be 1~point thick. Allow \nicefrac{1}{4}~inch space above and
+below the title to rules. All pages should start at 1~inch (6~picas) from the
+top of the page.
+
+
+For the final version, authors' names are set in boldface, and each name is
+centered above the corresponding address. The lead author's name is to be listed
+first (left-most), and the co-authors' names (if different address) are set to
+follow. If there is only one co-author, list both author and co-author side by
+side.
+
+
+\section{Headings: first level}
+\label{headings}
+
+
+All headings should be lower case (except for first word and proper nouns),
+flush left, and bold.
+
+
+First-level headings should be in 12-point type.
+
+
+\subsection{Headings: second level}
+
+
+Second-level headings should be in 10-point type.
+
+
+\subsubsection{Headings: third level}
+
+
+Third-level headings should be in 10-point type.
+
+
+\paragraph{Paragraphs}
+
+
+There is also a \verb+\paragraph+ command available, which sets the heading in
+bold, flush left, and inline with the text, with the heading followed by 1\,em
+of space.
+
+
+\section{Citations, figures, tables, references}
+\label{others}
+
+
+\subsection{Citations within the text}
+
+
+The \verb+natbib+ package will be loaded for you by default.  Citations may be
+author/year or numeric, as long as you maintain internal consistency.  As to the
+format of the references themselves, any style is acceptable as long as it is
+used consistently. The documentation for \verb+natbib+ may be found at
+\begin{center}
+  \url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
+\end{center}
+Of note is the command \verb+\citet+, which produces citations appropriate for
+use in inline text.
+
+If you wish to load the \verb+natbib+ package with options, you may add the
+following before loading the style file:
+\begin{verbatim}
+   \PassOptionsToPackage{options}{natbib}
+\end{verbatim}
+
+
+\subsection{Footnotes}
+
+
+Footnotes should be used sparingly.  If you do require a footnote, indicate
+footnotes with a number\footnote{Sample of the first footnote.} in the
+text. Place the footnotes at the bottom of the page on which they appear.
+Precede the footnote with a horizontal rule of 2~inches (12~picas).
+
+
+Note that footnotes are properly typeset \emph{after} punctuation
+marks.\footnote{As in this example.}
+
+
+\subsection{Figures}
+
+
+\begin{figure}
+  \centering
+  \fbox{\rule[-.5cm]{0cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
+  \caption{Sample figure caption. A pipeline diagram of the kind encouraged in the Approach section: explain what the figure shows and add a key take-away message to the caption.}
+  \label{pipeline-figure}
+\end{figure}
+
+
+All artwork must be neat, clean, and legible. Lines should be dark enough for
+reproduction purposes. The figure number and caption always appear after the
+figure. Place one line space before the figure caption and one line space after
+the figure. The figure caption should be lower case (except for the first word
+and proper nouns); figures are numbered consecutively.
+
+
+You may use color figures.  However, it is best for the figure captions and the
+paper body to be legible if the paper is printed in either black/white or in
+color.
+
+
+\subsection{Tables}
+
+
+All tables must be centered, neat, clean, and legible.  The table number and
+title always appear before the table.  See Table~\ref{budget-table}.
+
+
+Place one line space before the table title, one line space after the
+table title, and one line space after the table. The table title must
+be lower case (except for the first word and proper nouns); tables are
+numbered consecutively.
+
+
+Note that publication-quality tables \emph{do not contain vertical rules}. We
+strongly suggest the use of the \verb+booktabs+ package, which allows for
+typesetting high-quality, professional tables:
+\begin{center}
+  \url{https://www.ctan.org/pkg/booktabs}
+\end{center}
+This package was used to typeset the tables in Section~\ref{required}.
+
+
+\subsection{Math}
+Note that display math in bare TeX commands will not create correct line numbers
+for submission. Please use LaTeX (or AMSTeX) commands for unnumbered display
+math.
+
+
+\subsection{Final instructions}
+
+Do not change any aspects of the formatting parameters in the style files.  In
+particular, do not modify the width or length of the rectangle the text should
+fit into, and do not change font sizes. Please note that pages should be
+numbered.
+
+
+\section{Preparing PDF files}
+
+
+Please prepare submission files with paper size ``US Letter,'' and not, for
+example, ``A4.''
+
+
+Fonts were the main cause of problems in the past years. Your PDF file must only
+contain Type 1 or Embedded TrueType fonts. Here are a few instructions to
+achieve this.
+
+
+\begin{itemize}
+
+
+\item You should directly generate PDF files using \verb+pdflatex+.
+
+
+\item You can check which fonts a PDF files uses.  In Acrobat Reader, select the
+  menu Files$>$Document Properties$>$Fonts and select Show All Fonts. You can
+  also use the program \verb+pdffonts+ which comes with \verb+xpdf+ and is
+  available out-of-the-box on most Linux machines.
+
+
+\item \verb+xfig+ ``patterned'' shapes are implemented with bitmap fonts.  Use
+  "solid" shapes instead.
+
+
+\item The \verb+\bbold+ package almost always uses bitmap fonts.  You should use
+  the equivalent AMS Fonts:
+\begin{verbatim}
+   \usepackage{amsfonts}
+\end{verbatim}
+followed by, e.g., \verb+\mathbb{R}+, \verb+\mathbb{N}+, or \verb+\mathbb{C}+
+for $\mathbb{R}$, $\mathbb{N}$ or $\mathbb{C}$.
+
+
+\end{itemize}
+
+
+If your file contains type 3 fonts or non embedded TrueType fonts, we will ask
+you to fix it.
+
+
+\subsection{Margins in \LaTeX{}}
+
+
+Most of the margin problems come from figures positioned by hand using
+\verb+\special+ or other commands. We suggest using the command
+\verb+\includegraphics+ from the \verb+graphicx+ package. Always specify the
+figure width as a multiple of the line width as in the example below:
+\begin{verbatim}
+   \usepackage[pdftex]{graphicx} ...
+   \includegraphics[width=0.8\linewidth]{myfile.pdf}
+\end{verbatim}
+See Section 4.4 in the graphics bundle documentation
+(\url{http://mirrors.ctan.org/macros/latex/required/graphics/grfguide.pdf})
+
+
+A number of width problems arise when \LaTeX{} cannot properly hyphenate a
+line. Please give LaTeX hyphenation hints using the \verb+\-+ command when
+necessary.
+
+\begin{ack}
+Use unnumbered first level headings for the acknowledgments. All acknowledgments
+go at the end of the report before the list of references. Moreover, you are
+required to declare funding (financial activities supporting the submitted work)
+and competing interests (related financial activities outside the submitted
+work). Competition entrants should additionally declare any compute or API
+credits provided by a model vendor, including credits provided to the team at no
+cost.
+
+Use the \texttt{ack} environment provided in the style file.
+\end{ack}
+
+\section*{References}
+
+
+References follow the acknowledgments in the camera-ready report. Use unnumbered
+first-level heading for the references. Any choice of citation style is
+acceptable as long as you are consistent. It is permissible to reduce the font
+size to \verb+small+ (9 point) when listing the references. The reference section
+does not count towards the page limit.
+\medskip
+
+
+{
+\small
+
+
+[1] Alexander, J.A.\ \& Mozer, M.C.\ (1995) Template-based algorithms for
+connectionist rule extraction. In G.\ Tesauro, D.S.\ Touretzky and T.K.\ Leen
+(eds.), {\it Advances in Neural Information Processing Systems 7},
+pp.\ 609--616. Cambridge, MA: MIT Press.
+
+
+[2] Bower, J.M.\ \& Beeman, D.\ (1995) {\it The Book of GENESIS: Exploring
+  Realistic Neural Models with the GEneral NEural SImulation System.}  New York:
+TELOS/Springer--Verlag.
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\section{Appendices}
+Appendices carry material supporting the four required sections that does not fit
+in four pages, such as the full per-problem cost table. There is no page limit for
+appendices, but the report must stand alone without them.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}

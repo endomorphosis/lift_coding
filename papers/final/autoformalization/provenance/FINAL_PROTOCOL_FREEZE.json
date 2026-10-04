@@ -1,0 +1,76 @@
+{
+  "amendment_policy": "Preserve any failed run; later infrastructure-only fixes explicitly versioned, no candidate tuning from final outputs.",
+  "code_sha256": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py": "2b00f9f605827e18364ba41552f39c54c8df1f2ee42732b69f04ad20c5240e87",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": "9e6be753d3d714131fa01b1196725e89ba95904a9f04f5186646fe6d4f40b7b9",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py": "80b0e0699d2f3cc7324778764ccc684c863aa43ff459683f52e2865887f7cd87",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py": "0755cce95acc5e8094a109254cf841c1bdbbcec340f16a68023cdd4d93f9b864",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py": "0f81dad45244ab88d3df5ac8c5d585d80d4ee14c59a5441c1bdd19f5a2cccd86",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/modal/decompiler.py": "054d95f3951009e3131266842f33516cc3063703e63c298ec042073c8bbe07a5",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_modal_parser.py": "2d12dff43f85c18bb20f4ac2bc878a2d2ef27a7e2b1a6dc6493b100f7138b0e0",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": "eb620bd0767b43bf387238265ff4c78846ee475c13185563469c9d4cf176b387",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_ir.py": "697b8e183fb966f01a0b81e4241154c38d2785277739518cbdfcc8db37695743",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py": "e1bee6ba59b916cf02cb47cb712df2e90d02f6273abf544121ab6eae59c32c9e",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py": "fd40489c229a8976e50e31d5b9b46184796d7b0cd73e35531dfd0e817833b26f",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/assistance/frozen_natural_protocol.json": "a0b68ad8a6859bfe53a340ff5206ea7d5ec866f30c76025f7e2aefb2044835bd",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/assistance/leanstral_v15.jinja": "5d10fc791bfd021fa072fbc6f6792f05de3908f60b4bdb44c647c08336e62585",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/assistance/run_natural_a.py": "ea92d745a4e94e1c5ca388dde5a8545d3a3e22306ad6a8437193ecc5b9192748",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/autoencoder/derive_t1.py": "e6c23616d54c955dbaa1ed7c83cf6663c52b02fa4a278cf7e7354f180205dad1",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/autoencoder/derive_t3.py": "a572255421777f5e9fb24268c21b77fd2180774edebc5deb07306cbfe32821b9",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/autoencoder/encode_sources.py": "83620d1ae26f8bee8f247dfa2672a24e538e8e57e958f2f8e70c86eb4ec24bea",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/autoencoder/scientific_profile.json": "531c37db1b0c464750ed1c34951fb3ac35002a4bb74addf4ba00da86d4642e75",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/autoencoder/score_embeddings.py": "744faac7bebb5f1b2e1a4b1b280890b5ea3ad6fbe8796217d6e4b8f4f92800cd",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/autoencoder/source_only_eval.py": "922fd0a14585bcb7c9f1e3e34ca088f766796f0af38ebf638fe4641e9d2359ac",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/guidance/learned_route.py": "acbd4e7b898ea647e2e5c52e968a52b4864be5a61f18f93067d3926bda1fd86c",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/guidance/native_b.py": "7d36c1e176e70e2484530ec685395e453a7652d896d618a35050138010bfe87a",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/guidance/qualification.json": "91b716a7e373110cf2f0eb676923339f127269d3ce7abe7642336ff1c44ead35",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/guidance/structural_checks.py": "dd233a3e04936f82d48c449f5928965e806c8abcb7a5a7f136b001916f83e041",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/pipeline/native_c.py": "cc82904fe656d3c4e283b0d8fa97f3bef99bbf47d7a666effe01d7ceb18458e3",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/pipeline/patch_overlay/external/ipfs_datasets/ipfs_datasets_py/logic/modal/codec.py": "bf80ae36f5092015bb56fe0e119f359135bda8a21b41cd74f779abd8de5e862b",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/pipeline/patch_overlay/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py": "1c704dec09a9de95dcc491149f30bd08b396185ddd5f0041c25f69b609460f31",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/pipeline/release_final.py": "39a10914ab5e8055b3febeada0ef0b1dab9c68a37a9d6b5640b36e1c42fae6cf",
+    "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/pipeline/run_corpus.py": "7c7bb29177b31e5f2e7bf94226c2bc8f3295c52624aff475422a028ca3944528",
+    "/home/barberb/lift_coding/scripts/run_leanstral_ephemeral.py": "510e04a4c9378484f771f80c83eb430ca9156b7399651f1e33ba10f9bbc04170"
+  },
+  "cycle_projection": "remove original normalized text, all metadata, frame fields and source IDs/maps/spans; preserve operator/predicate/conditions/exceptions semantic fields; native decompile and recompile first4096 output chars; compare semantic-field formula multiset; empty-to-empty is excluded from nonempty coverage",
+  "development_receipts": [
+    "pipeline/constructed_t5_v2.jsonl",
+    "pipeline/constructed_c_v2.jsonl"
+  ],
+  "final_source_access_before_freeze": false,
+  "frozen_at": "2026-09-14T08:09:01.085629+00:00",
+  "pipeline_profiles": {
+    "A": "100 units chosen by smallest SHA256(AF20260914-A100: + full normalized unit SHA); Leanstral1.5 direct formula JSON max8; temperature0,2048tokens,60s, one attempt per source; same registered operators/checks asC; separate matched100-source comparison",
+    "B": "actual strict native typed deontic compiler + native source-withheld roundtrip; source-derived lexical vocabulary capped1000; five seconds per record",
+    "C": "actual native SpaCyLegalEncoder+SpaCyModalIRCompiler+native clause enrichment; omits KG/embedding decoration; ten seconds per record including cycle",
+    "D": "native solver/Lean proof assistance measured on separate64 constructed pairedgoals; no unsupported natural cross-view proof score fabricated",
+    "E_T4": "qualified actual T3 obligation prior schedules both immutable structural checks, off/on/rollback; all1913 sources andthree seeds; no coverage gain possible from order alone",
+    "T5": "C plus original AF014 executable exception-scoping patch, selected on development data before this evaluation"
+  },
+  "ready_for_final_source_access": true,
+  "resource_profile": "Bounded temporary Leanstral jobs90GiB4CPUs; persistent service masked. Corpus workers4GiB each, 4 per C/T5 arm, at most8, CPU pool4-15; AE bounded8GiB2CPUs. No retraining, no final-driven candidate repair.",
+  "schema": "autoformalization-final-empirical-protocol/v1",
+  "source_population": {
+    "alias_rule": "NFKC casefold Unicode alphanumeric token sequence; lexicographic first record ID",
+    "canary": 38,
+    "deduplicated_units": 1913,
+    "domains": {
+      "cfr": 993,
+      "guidance": 7,
+      "mpep": 738,
+      "uscode": 175
+    },
+    "embedding_input": "full text, existing AF029 windowing contract",
+    "raw_records": 1921,
+    "selection": 15,
+    "source_prefix_chars": 4096,
+    "train": 69
+  },
+  "statistics": {
+    "ae": "T0cold,actualT1memorylookup,threeT2source-conditioned reconstruction, T3exacttieddecoder reuse plus actualfixed-contextproofheadexports; identity-copy cosine1/MSE0 control makes absence of bottleneck explicit",
+    "human_semantic_fidelity": "not measured, not a prerequisite for these automated experiments",
+    "primary": "counts with all planned denominators; errors,timeouts,abstentions explicit; pairedsource outcomes",
+    "repair": "paired semantic-field changes, exception-role correction and removal of exception-token leakage; schema/span regressions; structural repair effects not independent semantic correctness",
+    "uncertainty": "10000 paired operational-component bootstrap draws, seed104729; 20 components/4 editions with dominant1738-record component; not20 independent legal editions; unitstratified2000draw intervals secondary conditional diagnostics"
+  }
+}

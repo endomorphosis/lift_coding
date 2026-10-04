@@ -1,0 +1,127 @@
+{
+  "ancestry_complete": false,
+  "native_exposure_inventory_complete": false,
+  "schema": "codebase-ir-final-cohort@1",
+  "scope": "explicit_supplied_source_scope",
+  "units": [
+    {
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final:delta",
+      "path": "final_delta.py",
+      "related_revisions": [],
+      "repository_id": "qualification:final-protocol-20261002",
+      "revision": "authored-final@1",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "path": "source/final_delta.py",
+        "sha256": "5fbbf12527756c736ba8752b4b6b51c62910a7c757fd5fd4f087bda6547f3b5d",
+        "size_bytes": 159
+      },
+      "template_family": "authored-final:delta"
+    },
+    {
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final:window",
+      "path": "final_window.py",
+      "related_revisions": [],
+      "repository_id": "qualification:final-protocol-20261002",
+      "revision": "authored-final@1",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "path": "source/final_window.py",
+        "sha256": "19a1a50280f3cb0790125c3cc98bdb104b498cc68566639edc6c8625828baf65",
+        "size_bytes": 157
+      },
+      "template_family": "authored-final:window"
+    },
+    {
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final:flag",
+      "path": "final_flag.py",
+      "related_revisions": [],
+      "repository_id": "qualification:final-protocol-20261002",
+      "revision": "authored-final@1",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "path": "source/final_flag.py",
+        "sha256": "27a0c49e2de9be2ced487abed82599af0481d7e0de6050b7447f3d1a7dec4632",
+        "size_bytes": 91
+      },
+      "template_family": "authored-final:flag"
+    },
+    {
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final:dynamic",
+      "path": "final_dynamic.py",
+      "related_revisions": [],
+      "repository_id": "qualification:final-protocol-20261002",
+      "revision": "authored-final@1",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "path": "source/final_dynamic.py",
+        "sha256": "15753c0489c2743a508b3d99220e4457dd7e21cb32c4e7dfa6ef9b5df2a914fe",
+        "size_bytes": 78
+      },
+      "template_family": "authored-final:dynamic"
+    },
+    {
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "comparison:train",
+      "path": "comparison_train.py",
+      "related_revisions": [],
+      "repository_id": "qualification:comparison-20261002",
+      "revision": "authored-comparison@1",
+      "revision_relations_complete": true,
+      "role": "train",
+      "source": {
+        "path": "source/comparison_train.py",
+        "sha256": "fcefb063e61cf22991be63c79f733753fd8062f2ef4169141efe7c1a0ef21a44",
+        "size_bytes": 59
+      },
+      "template_family": "authored-comparison:train"
+    },
+    {
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "comparison:tune",
+      "path": "comparison_tune.py",
+      "related_revisions": [],
+      "repository_id": "qualification:comparison-20261002",
+      "revision": "authored-comparison@1",
+      "revision_relations_complete": true,
+      "role": "tune",
+      "source": {
+        "path": "source/comparison_tune.py",
+        "sha256": "9883f5dee6cc943ffa8049e5d88e168ff3290d15d6b9ee6158e6a5986eb7fe4a",
+        "size_bytes": 61
+      },
+      "template_family": "authored-comparison:tune"
+    },
+    {
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "comparison:canary",
+      "path": "comparison_canary.py",
+      "related_revisions": [],
+      "repository_id": "qualification:comparison-20261002",
+      "revision": "authored-comparison@1",
+      "revision_relations_complete": true,
+      "role": "canary",
+      "source": {
+        "path": "source/comparison_canary.py",
+        "sha256": "93ce8f968a355da1a5828ee66a0384a0ef4bd689f549ef84f7d7cbe4418319a0",
+        "size_bytes": 60
+      },
+      "template_family": "authored-comparison:canary"
+    }
+  ]
+}

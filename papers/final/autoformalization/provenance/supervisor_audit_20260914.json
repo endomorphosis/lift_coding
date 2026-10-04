@@ -1,0 +1,1824 @@
+{
+  "schema": "three-paper-supervisor-readonly-audit/v1",
+  "started_at": "2026-09-14T09:41:53.148178+00:00",
+  "scope": "Live runtime and persisted requirement audit; not scientific replication or a finding that all original paper evaluations are complete.",
+  "mutations": {
+    "native_boards": 0,
+    "runtime_processes": 0,
+    "provider_calls": 0,
+    "local_audit_files": 2
+  },
+  "query_method": {
+    "transport": "native authenticated Quack",
+    "function": "scripts.paper_supervisor_campaign.fetch_board",
+    "queries": [
+      "BEGIN TRANSACTION",
+      "SELECT key, value FROM control_plane_metadata",
+      "SELECT * FROM tasks ORDER BY ordinal, task_alias",
+      "SELECT task_cid, dependency_task_cid FROM task_dependencies ORDER BY task_cid, dependency_task_cid",
+      "SELECT * FROM goals ORDER BY ordinal, goal_alias",
+      "SELECT * FROM domain_events ORDER BY global_sequence",
+      "COMMIT"
+    ],
+    "identity_verification": "Fetched control_plane_metadata.database_uuid equals owner readiness identity.database_uuid; process identity checked against Linux start-time ticks and boot ID.",
+    "secrets": "Authentication tokens and token file contents are omitted."
+  },
+  "controller": {
+    "pid": 2301028,
+    "birth": "63224282",
+    "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+    "alive": true,
+    "observed_at": "2026-09-14T09:41:53.148397+00:00",
+    "current_start_time_ticks": "63224282",
+    "cmdline_sha256": "1110f2fcc9885e8867f840be8627f1e41f7d128079590a2758f4965793226760",
+    "process_state": "R"
+  },
+  "campaign_binding": {
+    "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/campaign.json",
+    "bytes": 34974,
+    "sha256": "18ec8172d8c88d271a45249cdc3b58629c77febd7d8203981350845b6767879e"
+  },
+  "boards": [
+    {
+      "paper_id": "autoformalization",
+      "query_started_at": "2026-09-14T09:41:53.148516+00:00",
+      "query_finished_at": "2026-09-14T09:41:53.399518+00:00",
+      "query_succeeded": true,
+      "canonical_query_result_sha256": "dfc77fb57533a97259f3ca5d8392932f3e9413267212d2872d0767c59e455cbb",
+      "store_identity": {
+        "store_id": "vericodegen-2026-autoformalization",
+        "database_uuid": "24e4319a-319f-46b2-a231-2df7eb25c420"
+      },
+      "store_generation": {
+        "generation": "28"
+      },
+      "owner_readiness": {
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/quack-owner/paper-owner.ready.json",
+        "bytes": 2120,
+        "sha256": "19983a897c90ed1b3fbdc354330e10325990a1cc33c97fb668b73fc1b5ff4226",
+        "ready": true,
+        "database": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/control.duckdb",
+        "quack_endpoint": "quack:127.0.0.1:32915",
+        "store_id": "vericodegen-2026-autoformalization",
+        "store_generation": "28",
+        "schema_revision": "1"
+      },
+      "owner": {
+        "pid": 2301744,
+        "birth": "63224317",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "alive": true,
+        "observed_at": "2026-09-14T09:41:53.416098+00:00",
+        "current_start_time_ticks": "63224317",
+        "cmdline_sha256": "cf40ea70140b7c7d35cd3079a808bc72c0a82de322c4f53453ad2e0742aacae8",
+        "process_state": "S"
+      },
+      "supervisor": {
+        "pid": 2328517,
+        "birth": "63226068",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "alive": true,
+        "observed_at": "2026-09-14T09:41:53.416214+00:00",
+        "current_start_time_ticks": "63226068",
+        "cmdline_sha256": "aebd25b32faa18b783fa5dd170ebccbc06ef2b808e7650991b4501f968f7b137",
+        "process_state": "S"
+      },
+      "root_owned_replacement": false,
+      "task_counts": {
+        "completed": 29
+      },
+      "task_progress": {
+        "state": "tasks_complete",
+        "in_progress": [],
+        "eligible_candidates": [],
+        "blocked": [],
+        "waiting": [],
+        "dependency_snapshot_available": true,
+        "authority": "diagnostic_from_authenticated_snapshot; native_claim_required"
+      },
+      "goals": [
+        {
+          "id": "AF-G000",
+          "cid": "baguqeerajx3cm4ewuohn7rpqobaqo7tj4g4bwzbzx23h2fzwcmmllgbgww4a",
+          "status": "open",
+          "revision": 5,
+          "title": "Complete the evidence-backed workshop paper",
+          "requirement": "Complete a reproducible workshop manuscript using actual automated structural, native-training and checker evidence with explicitly bounded claims. Independent human semantic-fidelity or agreement claims are excluded without real data; optional author feedback does not block manuscript preparation. Preserve failed/unrun conditions and all existing training, checkpoint, privacy and source-custody safeguards.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "AF-001",
+            "AF-002",
+            "AF-003",
+            "AF-004",
+            "AF-005",
+            "AF-006",
+            "AF-007",
+            "AF-008",
+            "AF-009",
+            "AF-010",
+            "AF-011",
+            "AF-012",
+            "AF-013",
+            "AF-014",
+            "AF-015",
+            "AF-016",
+            "AF-017",
+            "AF-018",
+            "AF-019",
+            "AF-020",
+            "AF-021",
+            "AF-022",
+            "AF-023",
+            "AF-024",
+            "AF-025",
+            "AF-026",
+            "AF-027",
+            "AF-028",
+            "AF-029"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-G000",
+          "raw_row_sha256": "833b92d9b221d1adc6529b4b427a89884b4c54a200c51893cdde04cb1e66fabd",
+          "native_fields_sha256": "9ae8bb8e101f8b004cfabd23669cffa7949d0ef8364af779055b718b24a02ce5"
+        },
+        {
+          "id": "AF-S01",
+          "cid": "baguqeerar3rrsu7gs7whx5kmgu2qxjwcdw3bw7d4usjasot3iu7x3w5svgla",
+          "status": "completed",
+          "revision": 2,
+          "title": "Recover sources and freeze executable research scope",
+          "requirement": "Recover editable material, define claim-linked protocols, and pin actual implementation/runtime capabilities without blocking independent work on inaccessible author sources.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "AF-001",
+            "AF-002",
+            "AF-003"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S01",
+          "raw_row_sha256": "8a51641c17b39b7f35961ff866dd356c349dc429ce9ce5c811d0296e780ba487",
+          "native_fields_sha256": "2d3b42a703c9dd0a667f899634ac2d9d30349dcee840ccc11a6659b6753b0f74"
+        },
+        {
+          "id": "AF-S02",
+          "cid": "baguqeeravc4bn7heafm3facnwo5r57tk3txisgetfrfnxp4vho3akptlocya",
+          "status": "completed",
+          "revision": 4,
+          "title": "Freeze source provenance and the supported evaluation scope",
+          "requirement": "Preserve grouped source partitions, automatic-target provenance and finite constructed semantic witnesses. Keep uncollected human annotations historical and blank; use an explicit structural-evidence scope and label any optional author feedback separately.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "AF-004",
+            "AF-005",
+            "AF-006",
+            "AF-028"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S02",
+          "raw_row_sha256": "c3bbaa9dc8d0beebd07b24d9254be5437483c82ddc37e07b60472c89d2f09a16",
+          "native_fields_sha256": "910cc1b7639f3dd308cfab51cb383fc63b84612bc1da9c9cdaaaadf647ae3423"
+        },
+        {
+          "id": "AF-S03",
+          "cid": "baguqeerai4jcrswlmyoo5p2pygb5n7c37tn3mpfnsoahmcpujmizri7lwzua",
+          "status": "open",
+          "revision": 3,
+          "title": "Build and validate an honest benchmark harness",
+          "requirement": "Implement matched conditions, result/coverage accounting, inference isolation and numerical training validation before admitting research results.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "AF-007",
+            "AF-008",
+            "AF-009",
+            "AF-010",
+            "AF-026",
+            "AF-027"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S03",
+          "raw_row_sha256": "aa1e54d13a8f16c022ff9488884c4344c19359fb1a527f6ef1d1b6b42589dbff",
+          "native_fields_sha256": "a4c3d55e4e70c53f0bff28c8d083c1707b6206ad13b352b08aaa29a49ca87a14"
+        },
+        {
+          "id": "AF-S04",
+          "cid": "baguqeeraylnago2j6tnfguxawjhdtcppoxsiormk375fl5d6t6tfhu2pdfgq",
+          "status": "open",
+          "revision": 2,
+          "title": "Measure learning, trusted feedback, guidance, and compiler repair",
+          "requirement": "Execute T0–T5 with frozen checkpoints, independent selection/test roles, actual activated consumers and traceable isolated repairs.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "AF-011",
+            "AF-012",
+            "AF-013",
+            "AF-014",
+            "AF-029"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S04",
+          "raw_row_sha256": "c29caa953c6244e276fba402b634a11c57a2723fbc071c796a1b9593608457e4",
+          "native_fields_sha256": "8bf85e957a7f94373c42418980bb2f3ccbee09e6673aba21e05488abeb6502f4"
+        },
+        {
+          "id": "AF-S05",
+          "cid": "baguqeerahb6fl5glhymoe5bxo6ju75z7ol2dokdnw44edktvhrjhoz4rketa",
+          "status": "open",
+          "revision": 1,
+          "title": "Measure valid proof transfer and supporting components",
+          "requirement": "Execute A–E plus supported bridge/code/trace, retrieval, planning, proof-assistance and cross-domain comparisons with native evidence and explicit limitations.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "AF-015",
+            "AF-016",
+            "AF-017",
+            "AF-018",
+            "AF-019"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S05",
+          "raw_row_sha256": "e24c8421240bd6a228068b1b8167f1f4729baddf03b40589254cdeae1f4fa976",
+          "native_fields_sha256": "516836c39c31bab52d2d2768572878550336a5b8ed4d06f03fb7b58dd5256219"
+        },
+        {
+          "id": "AF-S06",
+          "cid": "baguqeeralujimbxca5csqimh737zhi4sgjuzzdcw4msca5tew2oe6uy2cmmq",
+          "status": "open",
+          "revision": 1,
+          "title": "Analyze evidence and rewrite the empirical paper",
+          "requirement": "Account for total cost, uncertainty, coverage, failures and missingness; generate tables and align every manuscript claim with measured scope.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "AF-020",
+            "AF-021",
+            "AF-022"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S06",
+          "raw_row_sha256": "8f33da22ddbdff05fd06ae8cb9c4ad4ceff7dbc8508dead0cb3174b377bd890f",
+          "native_fields_sha256": "f5e1f1d3c2ae98013a20372234f1b57f9a43144d68ad33385c605fabaa6a493d"
+        },
+        {
+          "id": "AF-S07",
+          "cid": "baguqeerapzfriatubhftfvntaxsyjww6s4clbabczmrzbax5j4eyinchbv2q",
+          "status": "open",
+          "revision": 1,
+          "title": "Prepare anonymous reproducible submission files for author review",
+          "requirement": "Freeze anonymous artifacts, official template/questionnaire/disclosures, clean reproduction and a concrete author review packet; keep author sign-off and submission external.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "AF-023",
+            "AF-024",
+            "AF-025"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper autoformalization --goal AF-S07",
+          "raw_row_sha256": "d35a2a1d8b4ad9bbaf6056030c8bc53d741d81b1185f13f2acf5511539565ae3",
+          "native_fields_sha256": "21ff6392d6e4ca25e6d51a0ee076fd741040ce1a75cc647eb3cbc2e811e4b8f9"
+        }
+      ],
+      "task_rows": [
+        {
+          "id": "AF-001",
+          "cid": "baguqeeraqxyaolszbgigx4ygjb74nkzn36qjyqdyloesuqkc6iy5qauwcifa",
+          "status": "completed",
+          "revision": 8,
+          "title": "Recover editable manuscript and missing reference artifacts",
+          "goal_id": "AF-S01",
+          "raw_row_sha256": "05cc3373b29d5890e323478a9921d4d4c7a283935329a071eda94367c226d7a7"
+        },
+        {
+          "id": "AF-002",
+          "cid": "baguqeera3mwymnfki5wf7vqk6g5k5dlgndfuot3a4qgggy6x4xogidvcv6aq",
+          "status": "completed",
+          "revision": 7,
+          "title": "Freeze research questions, experiment scope, and completion policy",
+          "goal_id": "AF-S01",
+          "raw_row_sha256": "6613c7f5b88be8f576c9296b2ee8a432cbc3a09bc3c3ecadb5914dd293b37448"
+        },
+        {
+          "id": "AF-003",
+          "cid": "baguqeerahtsqd4lwljjf5jveejkb7cv5j2dnpikl7zafo6xpbxhygd423ybq",
+          "status": "completed",
+          "revision": 7,
+          "title": "Audit S01–S40 modules and preflight exact runtime routes",
+          "goal_id": "AF-S01",
+          "raw_row_sha256": "77ae8fd7e7eef35b6eea5dee57161a91d1392ad5d1da742a1862244d1bb6906d"
+        },
+        {
+          "id": "AF-004",
+          "cid": "baguqeerafrpqpvvdoxqotb2os3f4c5fnacbf7tdwi5cpo37a5q3fkzm2t3tq",
+          "status": "completed",
+          "revision": 6,
+          "title": "Build versioned corpus and enforce source-family/time partitions",
+          "goal_id": "AF-S02",
+          "raw_row_sha256": "6a5ba344a5311b821817bf15cfb48fe1f0c7849e311a2f03f080adb31fcdb968"
+        },
+        {
+          "id": "AF-005",
+          "cid": "baguqeerakhicosafg672mjepnuvecprvulbijw7e3f7kyq5fssfogoim64wa",
+          "status": "completed",
+          "revision": 11,
+          "title": "Prepare independent annotation and adjudication evidence",
+          "goal_id": "AF-S02",
+          "raw_row_sha256": "8671ad22417538109e9812779dddd1d8e1b3eff6bc308ae241b98a46af1d79cc"
+        },
+        {
+          "id": "AF-006",
+          "cid": "baguqeerabnnk56cu3k46uxkhilqfbsnedn4dybru32zwmoojojm6aewxwjva",
+          "status": "completed",
+          "revision": 5,
+          "title": "Reproduce reference semantics and build adversarial minimal pairs",
+          "goal_id": "AF-S02",
+          "raw_row_sha256": "63e36b9b5207a30858387fe3375db78f933025fba3ef462f764d1999d5261a14"
+        },
+        {
+          "id": "AF-007",
+          "cid": "baguqeeradgkthihgnusw67mz2gcihjqnmt65v32dfgy6clrdmjwrn5b2d5ha",
+          "status": "completed",
+          "revision": 8,
+          "title": "Implement provenance-preserving evaluation and result accounting",
+          "goal_id": "AF-S03",
+          "raw_row_sha256": "9b6437a79da0d24530db276ce5e009823096b78b499245fad7602566f540bc36"
+        },
+        {
+          "id": "AF-008",
+          "cid": "baguqeerauq66dhafxvj5x7vo2i3xdvuunjttmyulsuoojczrn3dc5suwvgca",
+          "status": "completed",
+          "revision": 5,
+          "title": "Enforce inference-time and source-withheld leakage controls",
+          "goal_id": "AF-S03",
+          "raw_row_sha256": "4e866ffbd9dc963969cea07cd241da7b516e7428a6f464dc3ef9cd1686fce9ce"
+        },
+        {
+          "id": "AF-009",
+          "cid": "baguqeerawqcdzumvvxeckex4lwyexnlwhklikgt6ptcwkw7qpf3no5f7lywq",
+          "status": "completed",
+          "revision": 7,
+          "title": "Validate packed training numerics and explicit parameter updates",
+          "goal_id": "AF-S03",
+          "raw_row_sha256": "9a51aa9ad4b680bdbbb89ba482e6617feac36bc68e1afe53fa170ed77f10e30a"
+        },
+        {
+          "id": "AF-010",
+          "cid": "baguqeeraxhmnlksxil4tahnr3eerh4ad5yr4qwdrxxtnga3ouc77zpbrsiaq",
+          "status": "completed",
+          "revision": 6,
+          "title": "Implement matched A–E pipeline conditions",
+          "goal_id": "AF-S03",
+          "raw_row_sha256": "7cc8710781779c07394c8ca6d5cd46d1a7e1330ae6ec9793c792b9720b40875b"
+        },
+        {
+          "id": "AF-011",
+          "cid": "baguqeerai5kwqswl4ggqwbzng7f6u6bspdxyi4v475kpsrmxhg3c7azqwnba",
+          "status": "completed",
+          "revision": 7,
+          "title": "Execute deterministic, memory, and shared-only training baselines",
+          "goal_id": "AF-S04",
+          "raw_row_sha256": "7fa9a70e75fbf5a83677d3354f2c527edee522d19da7bed088744cba2a533576"
+        },
+        {
+          "id": "AF-015",
+          "cid": "baguqeeragwca5hr6omwcdo5fboub7au4qm6xrg5e5vxhlrijppb6odfrhr6q",
+          "status": "completed",
+          "revision": 5,
+          "title": "Validate supported bridges and execute policy–code–trace case",
+          "goal_id": "AF-S05",
+          "raw_row_sha256": "61eb64756b225df27f504c926da03d9f59358e400eff9db05efe5ef8de146003"
+        },
+        {
+          "id": "AF-012",
+          "cid": "baguqeerav47fdgy6ok4i775htsrl4z3fugldvjqdxicn2guvqpjyg6gwwp3a",
+          "status": "completed",
+          "revision": 5,
+          "title": "Train and evaluate isolated trusted proof heads",
+          "goal_id": "AF-S04",
+          "raw_row_sha256": "b6dc58791d2bb315c9fd8434b44631008d3288bde3a92b8468643e43743e9449"
+        },
+        {
+          "id": "AF-013",
+          "cid": "baguqeera74cylaej5bdtik2opdburgpzciwenjpka3p6wbrm5apqalkwoija",
+          "status": "completed",
+          "revision": 13,
+          "title": "Evaluate source-free guidance promotion and actual consumer activation",
+          "goal_id": "AF-S04",
+          "raw_row_sha256": "e80328add25d31b549258357a26e91a53931705ba20ace3c54ac48198f3f2fed"
+        },
+        {
+          "id": "AF-014",
+          "cid": "baguqeeraxylh57ljbxcj53odysl4erbkc7aha6zhk22ddty27lsxkqvnwrha",
+          "status": "completed",
+          "revision": 7,
+          "title": "Run bounded compiler/decompiler repair ablation",
+          "goal_id": "AF-S04",
+          "raw_row_sha256": "4b9cc5692bbf574de13e204a5f29d5c1dd583926724c0f162477bbf77fe4bd1a"
+        },
+        {
+          "id": "AF-016",
+          "cid": "baguqeera2vorfexdu3cjkkbjmvxopzw72contlmncol43xrpu53aow5v2l7a",
+          "status": "completed",
+          "revision": 8,
+          "title": "Execute matched A–E source-to-proof benchmark",
+          "goal_id": "AF-S05",
+          "raw_row_sha256": "5295cf6a7dd044c8c02f66dbda9f6914d9265e225aac70557dda14664d80dafe"
+        },
+        {
+          "id": "AF-017",
+          "cid": "baguqeerat24vzp3hsd7v2jmjkwizeqvupssdpqh5jbsisntmooeif2kcvp3q",
+          "status": "completed",
+          "revision": 5,
+          "title": "Measure retrieval and premise-selection contributions",
+          "goal_id": "AF-S05",
+          "raw_row_sha256": "1d7e2d44755c3f50f2413521a8e9c76daf10c63ba3a657fe81f08c30b19e90db"
+        },
+        {
+          "id": "AF-018",
+          "cid": "baguqeerarf4ja7fx2ggh7pnmevupd2mywkoj2l6rauctrftrya6ajkuwbffq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Compare bounded planning, Hammer, and Leanstral assistance",
+          "goal_id": "AF-S05",
+          "raw_row_sha256": "432531d846c156275bfb85857da1bc6b23cd4ad5f4737a2b2ed527a46961c7f4"
+        },
+        {
+          "id": "AF-019",
+          "cid": "baguqeerav7rr3t2qaklck4ob5i2g7bq5yjb4fouityzgzcn5iddagw76wzua",
+          "status": "completed",
+          "revision": 8,
+          "title": "Evaluate or explicitly bound cross-domain statistical transfer",
+          "goal_id": "AF-S05",
+          "raw_row_sha256": "d8925f0c0dbb43cc1fcd0ef8cb7effeb26d43654d5c09fcb32349c8b03f97b21"
+        },
+        {
+          "id": "AF-020",
+          "cid": "baguqeerattqiuj23pmpys4z3ebxlvqmkt5kupn44qcboaqklumrupx4fivda",
+          "status": "completed",
+          "revision": 7,
+          "title": "Measure total cost and optional CPU/CUDA execution economics",
+          "goal_id": "AF-S06",
+          "raw_row_sha256": "48f866052315f40e896d08466ee1f4288450f612ea1ff495459426b2a5487c4d"
+        },
+        {
+          "id": "AF-021",
+          "cid": "baguqeerae5elq22qvgqnw7sei4tomjtjiat4ctwbi6xwsroivwgy5n7xd7fq",
+          "status": "completed",
+          "revision": 8,
+          "title": "Analyze frozen results and regenerate every results table",
+          "goal_id": "AF-S06",
+          "raw_row_sha256": "6b473650317042d968bb9374bb9baf36b94e5da67be7b218c72117a0a5019497"
+        },
+        {
+          "id": "AF-022",
+          "cid": "baguqeeravwbdasbkspetjz2vvznix4aehjbt5zwonkgwj6tvbws2vuxrpp6a",
+          "status": "completed",
+          "revision": 6,
+          "title": "Rewrite contribution, claims, equations, and related work",
+          "goal_id": "AF-S06",
+          "raw_row_sha256": "4824fbedbab11e417399bdad136f86a027eb14bcbedd0e40d4c7268bf02759dc"
+        },
+        {
+          "id": "AF-023",
+          "cid": "baguqeera2plxewcoqaz6awvzdzicviulr2p7l4cq7vpuegpzsw2wrivlyfrq",
+          "status": "completed",
+          "revision": 6,
+          "title": "Assemble anonymous implementation and reproducibility package",
+          "goal_id": "AF-S07",
+          "raw_row_sha256": "856162a81b021a89233c0150264cc236dc9fa953cb198855b0d4e16842648236"
+        },
+        {
+          "id": "AF-024",
+          "cid": "baguqeerawfto7tkuqo2hl4nwobhw5pmoyochr55pbgcywyry2di3vjbnwyhq",
+          "status": "completed",
+          "revision": 6,
+          "title": "Apply official template, questionnaire, and actual LLM disclosure",
+          "goal_id": "AF-S07",
+          "raw_row_sha256": "70248ccbc0ed961dafd504f60b1fddf9e51f55a168dc784b4752e4636d09e589"
+        },
+        {
+          "id": "AF-025",
+          "cid": "baguqeeratehgxtrrx524upipaav3xplttynhoo5u5ltaa7zvyqv5ednplizq",
+          "status": "completed",
+          "revision": 6,
+          "title": "Reproduce retained evidence and prepare the author handoff",
+          "goal_id": "AF-S07",
+          "raw_row_sha256": "defe9c7998575b9e3ebd5d5992f5cfb1435c3ecc5bbc2e08db8d21b1cb589c8c"
+        },
+        {
+          "id": "AF-026",
+          "cid": "baguqeeraxdgkneaw3ynojmhnggo6xupccv3sc2rdzlfu7y6bmj6sl6lq7mma",
+          "status": "completed",
+          "revision": 3,
+          "title": "Qualify executor-bound leakage controls and correct AF-008 blind-credit claims",
+          "goal_id": "AF-S03",
+          "raw_row_sha256": "544f3b81764ab9ebbd7dcb8fe24b1b8724948a05dfcdf28c269b0c061193aa02"
+        },
+        {
+          "id": "AF-027",
+          "cid": "baguqeeranduanusik7ajumblf7a5ij7533sffrehguww73qm2kxopf5djwmq",
+          "status": "completed",
+          "revision": 3,
+          "title": "Qualify usable experiment runtimes, source inputs and real pipeline execution",
+          "goal_id": "AF-S03",
+          "raw_row_sha256": "837124eefcdce0fabe05d2b62c446485fbb8e1720a37bd98fbd2e0e493a97b10"
+        },
+        {
+          "id": "AF-028",
+          "cid": "baguqeerajoyleplz52v4gdv4ss65ztgvrsnpm3t4bde72kkwueobr6ciig2q",
+          "status": "completed",
+          "revision": 5,
+          "title": "Audit structural-evidence scope and optional author feedback",
+          "goal_id": "AF-S02",
+          "raw_row_sha256": "13b701190812ca876af75d94b41f4d8bada3c101f87dc0d50fa8578efc83868c"
+        },
+        {
+          "id": "AF-029",
+          "cid": "baguqeerafyvhtvwm3po2bdu24kszez755vbclnm7qifekfxdlnfeqa74sj5a",
+          "status": "completed",
+          "revision": 8,
+          "title": "Execute teacher-bound native training and produce promotion-eligible checkpoints",
+          "goal_id": "AF-S04",
+          "raw_row_sha256": "43f4557989f610fe8ad1b87cb1cda2cfd2c8bc66011dc1be238006b4bb174abd"
+        }
+      ],
+      "events": 288,
+      "last_event": {
+        "event_id": "baguqeerao4wkiwyizpj5x4fq6z6vmcthqt7bsemibpgwlylml4blwc6g4x7q",
+        "global_sequence": 288,
+        "event_type": "intent.evidence_recorded",
+        "recorded_at": "2026-09-12T23:59:17Z",
+        "task_cid": "baguqeeratehgxtrrx524upipaav3xplttynhoo5u5ltaa7zvyqv5ednplizq"
+      }
+    },
+    {
+      "paper_id": "law_to_action",
+      "query_started_at": "2026-09-14T09:41:53.418200+00:00",
+      "query_finished_at": "2026-09-14T09:41:53.560470+00:00",
+      "query_succeeded": true,
+      "canonical_query_result_sha256": "8be61987fd26336567918b130166e519e977be635a97a3066f455a5ad0c77f64",
+      "store_identity": {
+        "store_id": "vericodegen-2026-law_to_action",
+        "database_uuid": "1a3666fc-75c6-4c20-bb6d-be27b1cc0767"
+      },
+      "store_generation": {
+        "generation": "27"
+      },
+      "owner_readiness": {
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/quack-owner/paper-owner.ready.json",
+        "bytes": 2092,
+        "sha256": "0eea080d055b57707c80f7d7bdd41cac56203bc10295fc117b9fdc9f0d756d1a",
+        "ready": true,
+        "database": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/control.duckdb",
+        "quack_endpoint": "quack:127.0.0.1:41395",
+        "store_id": "vericodegen-2026-law_to_action",
+        "store_generation": "27",
+        "schema_revision": "1"
+      },
+      "owner": {
+        "pid": 2303549,
+        "birth": "63224400",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "alive": true,
+        "observed_at": "2026-09-14T09:41:53.579960+00:00",
+        "current_start_time_ticks": "63224400",
+        "cmdline_sha256": "b94204e35394d7e65dab23bba413a659d4f5a3d9da93639c75e83a5456f21f7e",
+        "process_state": "R"
+      },
+      "supervisor": {
+        "pid": 2328518,
+        "birth": "63226069",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "alive": true,
+        "observed_at": "2026-09-14T09:41:53.580230+00:00",
+        "current_start_time_ticks": "63226069",
+        "cmdline_sha256": "02d6d388ee08b8bd9248131f8365cd793252af2ebcc9033c36cc8544b7f682e6",
+        "process_state": "S"
+      },
+      "root_owned_replacement": false,
+      "task_counts": {
+        "completed": 29
+      },
+      "task_progress": {
+        "state": "tasks_complete",
+        "in_progress": [],
+        "eligible_candidates": [],
+        "blocked": [],
+        "waiting": [],
+        "dependency_snapshot_available": true,
+        "authority": "diagnostic_from_authenticated_snapshot; native_claim_required"
+      },
+      "goals": [
+        {
+          "id": "LA-G000",
+          "cid": "baguqeerapxpbrwhyrrqdfhrs7t33dycal66xiswg2tgpycmujdd3fexpzhra",
+          "status": "open",
+          "revision": 4,
+          "title": "Complete the evidence-backed workshop paper",
+          "requirement": "Produce an anonymous AI for Verifiable Coding 2026 workshop manuscript and reproducible artifact grounded in actual automated source-contract, solver/checker, protected-effect, utility and cost evidence. Complete writing from measured evidence and explicit scoped omissions without requiring outside reviewers. Optional author review is labeled as such. Do not claim expert legal fidelity, human agreement or independent human validation without actual data.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-001",
+            "LA-002",
+            "LA-003",
+            "LA-004",
+            "LA-005",
+            "LA-006",
+            "LA-007",
+            "LA-008",
+            "LA-009",
+            "LA-010",
+            "LA-011",
+            "LA-012",
+            "LA-013",
+            "LA-014",
+            "LA-015",
+            "LA-016",
+            "LA-017",
+            "LA-018",
+            "LA-019",
+            "LA-020",
+            "LA-021",
+            "LA-022",
+            "LA-023",
+            "LA-024",
+            "LA-025",
+            "LA-026",
+            "LA-027",
+            "LA-028",
+            "LA-029"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G000",
+          "raw_row_sha256": "fe44e8dcc0350df76bb82351604e107e25bbbfeaf3b53c121fb6874d4e0f8b12",
+          "native_fields_sha256": "ea43ce88b8e083f7f8d0c7694ade9b7e8870653c8dc4c53850b621a6d5f45291"
+        },
+        {
+          "id": "LA-G1",
+          "cid": "baguqeeraxhizi5ozssybsakm32ygtn6xxcxl73hys4mfwue2zxaek2nqyzka",
+          "status": "completed",
+          "revision": 2,
+          "title": "Recover the editable paper and establish the supported contribution",
+          "requirement": "Recover or faithfully reconstruct source; audit every implementation and result claim against pinned repository evidence.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-001",
+            "LA-002"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G1",
+          "raw_row_sha256": "20a8c9948ab5412b3794ba942267dfef56b31276b652a417ea431248ee596d37",
+          "native_fields_sha256": "c374f5bd268bb233e079b75cf5170ce785a8b38049b809334fcf532cfb78c7d8"
+        },
+        {
+          "id": "LA-G2",
+          "cid": "baguqeerahekkeofxizpm325yrnp2m5cnorsv3mpqghfccmodp2nzd46pmulq",
+          "status": "open",
+          "revision": 3,
+          "title": "Freeze a reproducible source-bound benchmark and explicit automated evidence scope",
+          "requirement": "Preserve fixed cohorts, source-lineage splits, case identities and budgets. Bind machine-checkable expectations and their provenance before evaluated predictions. Outside reviewers are not a dependency and optional author review provides no independent-human claim.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-003",
+            "LA-004",
+            "LA-005",
+            "LA-006",
+            "LA-007",
+            "LA-026",
+            "LA-027"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G2",
+          "raw_row_sha256": "886b95b28754c796d18361b02b68cb1053262e3ad757163c176d135e30308375",
+          "native_fields_sha256": "de3fda1303aac93e179979678ceb48423b063a8dffe9acda3936d08f4477fd73"
+        },
+        {
+          "id": "LA-G3",
+          "cid": "baguqeeraxfm26k47spevjnoy5jrwkxiv7yfg25bqbecxifkhgnfp5adsvp3q",
+          "status": "open",
+          "revision": 3,
+          "title": "Qualify source contracts and real proof execution",
+          "requirement": "Measure source linkage, supported structural contracts and scoped behavior with real native solver/checker receipts. Legal semantic fidelity and human agreement remain unmeasured without suitable independent data.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-009",
+            "LA-010",
+            "LA-028"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G3",
+          "raw_row_sha256": "7e88bf1f4ef4493d94575b6aeb5344bd62a40be7a8d5c77238a179182ff9e962",
+          "native_fields_sha256": "52f7880c26c061224f902a74490e002bd8cfe7409b8d73371e8886d4f3793b97"
+        },
+        {
+          "id": "LA-G4",
+          "cid": "baguqeera6xlnvbtn5e3huzugppmsjo4rxfd577m4xugmcqx2plhkcumfonxa",
+          "status": "open",
+          "revision": 1,
+          "title": "Implement and qualify the actual protected execution boundary",
+          "requirement": "Build effect-observing sandbox handlers and qualify mediation, signed capabilities, durable state and actual network paths.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-008",
+            "LA-011",
+            "LA-012",
+            "LA-013"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G4",
+          "raw_row_sha256": "187176059c9cbfa4edbbbef67b91d8851b4cfda11abe860d81d6431bceb87806",
+          "native_fields_sha256": "0e40e0c3b6fe9c376c3446457d0adb855cf985e4007b72dfc49af7acdaef7dfd"
+        },
+        {
+          "id": "LA-G5",
+          "cid": "baguqeeraamwz3thle47exrykus56owz66yyu3yi4wogfcdjh2dftd7tjfudq",
+          "status": "open",
+          "revision": 2,
+          "title": "Run matched baselines, end-to-end agents, ablations and cost measurements",
+          "requirement": "Collect real case-level evidence for fixed-action safety and useful closed-loop work, with paired ablations and complete cost accounting.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-014",
+            "LA-015",
+            "LA-016",
+            "LA-017",
+            "LA-018",
+            "LA-029"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G5",
+          "raw_row_sha256": "7c0840996f0dcef93cf4fa6f998ec60f22980f9f3e3a1c0e0474a111da2e4624",
+          "native_fields_sha256": "e135b9612cd2fc70825ff21852cc9abacac0a59e3fdbd6e2f706448f79db57a5"
+        },
+        {
+          "id": "LA-G6",
+          "cid": "baguqeeraz6oaqzm6ytbeurf5fw76fpbagy2hu5vkgk5br3tf5bpx3dpj4ioq",
+          "status": "open",
+          "revision": 1,
+          "title": "Analyze results and write a verifiable-coding research paper",
+          "requirement": "Generate uncertainty-aware results, failure attribution, actual traces and a focused contribution grounded in primary literature.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-019",
+            "LA-020",
+            "LA-021",
+            "LA-022"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G6",
+          "raw_row_sha256": "3031e8c59f638956c1e75b13c2848bf401e2cf36b362446beb4780720fa1b7be",
+          "native_fields_sha256": "73c7e84892b2e900e74542647e8191d56b711f1c48e81b79ef6e3b94bc91e561"
+        },
+        {
+          "id": "LA-G7",
+          "cid": "baguqeerazmhn53qjoob7aoh52rwkzmfwtp5o6xptxdjcbkdu5ncfni5skmmq",
+          "status": "open",
+          "revision": 1,
+          "title": "Create an anonymous reproducible submission package",
+          "requirement": "Package exact commands, artifacts and provenance, comply with the official workshop format and disclose actual methodology.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-023",
+            "LA-024"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G7",
+          "raw_row_sha256": "800d072a4df3939d5c56520514a25ba66f6901b1c8ff78af07f278309108168c",
+          "native_fields_sha256": "d5596040fce0deaf3f2764636bb8f406f6e7df061463d7ecf96eb75b53c9b612"
+        },
+        {
+          "id": "LA-G8",
+          "cid": "baguqeerarymtzgjdk3b2hdrquabwcdmhxekjshtnpzv3xinhdvfeai6otawa",
+          "status": "open",
+          "revision": 2,
+          "title": "Reproduce the final paper in isolation and provide optional author handoff",
+          "requirement": "Reproduce critical results and build the manuscript in a clean isolated environment. This technical reproduction may be automated. Optional author review is not an external prerequisite or independent human validation.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "LA-025"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper law_to_action --goal LA-G8",
+          "raw_row_sha256": "2ef4f5dbf7cba41a638d57d6ff3347d002b2473d4e6362b72d9d260a63c9eb7d",
+          "native_fields_sha256": "98c76f7003e00344f3b8bc3f7b4404dd2193acfe07ac6a73b4146a977cd8cc3f"
+        }
+      ],
+      "task_rows": [
+        {
+          "id": "LA-001",
+          "cid": "baguqeeraeyqysmvzat3bbdq36wujh6rcnndigf2tqb4rb7u6rrjf3bigd3wq",
+          "status": "completed",
+          "revision": 8,
+          "title": "Recover or reconstruct editable manuscript and its private source companion",
+          "goal_id": "LA-G1",
+          "raw_row_sha256": "aaae540ba59df02f55f260947de87f58af4af189525e192d295b346997f885ca"
+        },
+        {
+          "id": "LA-002",
+          "cid": "baguqeerahx67ejaalgj7544gnwugb2ovfg5ajgfe5nlzxjwr2knqj2keap7a",
+          "status": "completed",
+          "revision": 7,
+          "title": "Audit claims against pinned code and choose the smallest credible evaluated contribution",
+          "goal_id": "LA-G1",
+          "raw_row_sha256": "2adedf83d6408b933b44bc30540beda0f76310d50fa00f3e11e9e17c8b518311"
+        },
+        {
+          "id": "LA-003",
+          "cid": "baguqeerawxasr2xxmioq5jep237vzcjpwofv3tcqbphypavrjbwuatrhohka",
+          "status": "completed",
+          "revision": 6,
+          "title": "Predeclare benchmark protocol, task populations, leakage controls and run budget",
+          "goal_id": "LA-G2",
+          "raw_row_sha256": "ee15e58026c5347e16642ed129760f4400b17b68f3cb9a853a6250c83ff77980"
+        },
+        {
+          "id": "LA-004",
+          "cid": "baguqeera5ivphnjzyfjexbnfnlacr4hweebv75fcwhke24ya23efou2ishva",
+          "status": "completed",
+          "revision": 6,
+          "title": "Freeze source manifests and reconcile all reported corpus populations",
+          "goal_id": "LA-G2",
+          "raw_row_sha256": "49d55e8b48b3e016c326b84aef2305f3eb562c19cf599a2768ff31ebfa918c08"
+        },
+        {
+          "id": "LA-005",
+          "cid": "baguqeeracjvnikxagfollti2zvwbijyps7gw2nvhagewx75oztzmgmwla4gq",
+          "status": "completed",
+          "revision": 8,
+          "title": "Construct and independently review the legal applicability and fidelity gold set",
+          "goal_id": "LA-G2",
+          "raw_row_sha256": "dd21214c7d3f5823f0d970a2f0fc7e0f71f034749e46e153faeb780295967577"
+        },
+        {
+          "id": "LA-006",
+          "cid": "baguqeeraild45mhndku3575wc4mwrf2g2qhq2iyhm2zmb2uwzop35pv4ssoq",
+          "status": "completed",
+          "revision": 10,
+          "title": "Complete source-supported CVE pair evidence under the automated scope",
+          "goal_id": "LA-G2",
+          "raw_row_sha256": "636f3865e4e0350ecbb19e24f69627320fc2e34496a2c87d9b249514ee5bd411"
+        },
+        {
+          "id": "LA-007",
+          "cid": "baguqeeraidfsyezhr2on5nyfkylamwtv7jhnbcwyb23j7r7q563fdybx3yuq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Annotate real SkillCenter intent and malicious-Markdown controls",
+          "goal_id": "LA-G2",
+          "raw_row_sha256": "aff5ca04ecdfa388778e2c4438bb6b1ee4fd7b888dc1a70aeb4a4fb9adcf9c14"
+        },
+        {
+          "id": "LA-008",
+          "cid": "baguqeerajx2zoroi2sw4phn4rl7btfvetfqpwy3bqwz6lzvz7j3r75uzropq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Implement a reproducible sandbox harness with observed generated-code effects",
+          "goal_id": "LA-G4",
+          "raw_row_sha256": "8c7b3c144bc4a08491770fef60ea15c907f9ad4e0b92718b7d3aa2a4f02eafa9"
+        },
+        {
+          "id": "LA-009",
+          "cid": "baguqeerapwukrr5damt7oclxcdonw573mo6oafwqa64oz6vbdkbaon27khja",
+          "status": "completed",
+          "revision": 7,
+          "title": "Execute source-to-IR contract, coverage and scoped behavior measurements",
+          "goal_id": "LA-G3",
+          "raw_row_sha256": "4264f70586c93350c2867dbca6023497f9148b186b4c16c7e0a3db66ac35b08e"
+        },
+        {
+          "id": "LA-010",
+          "cid": "baguqeeravwsrtcfybwypzfipvqh7pmue5r37jzo2qlvffuuqxs4tsnttlhdq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Qualify and run the selected real solver and independent checker routes",
+          "goal_id": "LA-G3",
+          "raw_row_sha256": "8525bb4ef2964a8c217a45202e05c770b45e480bf1897ad8a236c2569807863b"
+        },
+        {
+          "id": "LA-011",
+          "cid": "baguqeeraqyavp3epfpzbaswijgtn2jgyeyh6bgeyp4adwnwigrlkqi2hng4q",
+          "status": "completed",
+          "revision": 5,
+          "title": "Wire and verify complete mediation, strict capabilities and exact live context",
+          "goal_id": "LA-G4",
+          "raw_row_sha256": "e7b79a45e1fb959048ce8e6a1e130b659be4c5c06b916713e0e326d9ad359d87"
+        },
+        {
+          "id": "LA-012",
+          "cid": "baguqeera5khofplwwzhcpm2hhpmd6tuhr4q3blblywennuamcbo4qepqro2q",
+          "status": "completed",
+          "revision": 5,
+          "title": "Qualify the real DuckDB owner and durable capability consumption",
+          "goal_id": "LA-G4",
+          "raw_row_sha256": "835f17840a50994a138fdd635d64454dbedbf136bb9a0ba695135a9d72ac4ce5"
+        },
+        {
+          "id": "LA-013",
+          "cid": "baguqeerai2w42l6e6jopn7lxcenjqdzkmw4nxl5cuyl6m3uxpnv7qguvgvka",
+          "status": "completed",
+          "revision": 5,
+          "title": "Run actual transport parity and content-retrieval qualification",
+          "goal_id": "LA-G4",
+          "raw_row_sha256": "1d729411cda04f801d0fce201e36db064f726a4b21de1ab8b636615ee23c786c"
+        },
+        {
+          "id": "LA-014",
+          "cid": "baguqeerajpn4hzjagrhanq33t6oqomkij37w6dnyz3awuz6r6zhsxk5a72ta",
+          "status": "completed",
+          "revision": 5,
+          "title": "Implement matched baseline arms and validate experiment comparability",
+          "goal_id": "LA-G5",
+          "raw_row_sha256": "4479254e014f95e31b627240f0fca5a92bb96ea77c61167a07ed950f5d4b647d"
+        },
+        {
+          "id": "LA-015",
+          "cid": "baguqeeraesj3yxjjv5ez7jkcmlp5mgyzi5txvfiswpuwwlv2qlfyck5r7rtq",
+          "status": "completed",
+          "revision": 6,
+          "title": "Run the frozen fixed-action end-to-end safety and utility benchmark",
+          "goal_id": "LA-G5",
+          "raw_row_sha256": "9c5293d35e570ee481647523f3f4c029ecd37a70b8abe4d7da78494cf00b9a69"
+        },
+        {
+          "id": "LA-016",
+          "cid": "baguqeerajnpucvuihgzssvjjhftm25rvwxsfn5s344lkeounlpi7wsv6lq5q",
+          "status": "completed",
+          "revision": 5,
+          "title": "Run a separate closed-loop generated-code agent planning and recovery study",
+          "goal_id": "LA-G5",
+          "raw_row_sha256": "77c9e5d3d3832c778359b26a2d1bbca0a0c3a283472a11d872faff3c36b760b0"
+        },
+        {
+          "id": "LA-017",
+          "cid": "baguqeeral3ttqjcs3lgy4g53kplu3biynhd7roq5tc7cdel6t6au45einkra",
+          "status": "completed",
+          "revision": 5,
+          "title": "Execute paired component ablations against actual effect outcomes",
+          "goal_id": "LA-G5",
+          "raw_row_sha256": "3fafd03bcb7cfbbfdbac3345929e2cd144a810b9aadb3c599327e2d7d4d7f1f0"
+        },
+        {
+          "id": "LA-018",
+          "cid": "baguqeera5fqdxil6uu7aaaeudilckk56ots7jym4nkxpo3qvbewanceboccq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Measure full cost and latency for cold and reused evidence",
+          "goal_id": "LA-G5",
+          "raw_row_sha256": "d102ba6924dd949c4334365d7a3de8d60a59e6727bd1e7ee17d1e1f781ef5ace"
+        },
+        {
+          "id": "LA-019",
+          "cid": "baguqeeraj4rlrsqiknoe3pv3mgk4ypqmevjcibkypjqexpvntafzatqem6yq",
+          "status": "completed",
+          "revision": 7,
+          "title": "Analyze empirical results with uncertainty and stage-specific failure attribution",
+          "goal_id": "LA-G6",
+          "raw_row_sha256": "2e9380f23b9b328cf9e13a1e52623f39e56e4ed903dc207831c38c3a33e6b24a"
+        },
+        {
+          "id": "LA-020",
+          "cid": "baguqeerapkraxlef346tijalfkgsdfssoecevon62bbg6f3qga757mxghp2q",
+          "status": "completed",
+          "revision": 6,
+          "title": "Replace the narrative walkthrough with a reproducible source-to-effect trace",
+          "goal_id": "LA-G6",
+          "raw_row_sha256": "0f0d77d9646741b4a0128889c2398b7692e66412e39444cfb6f4b91b6fe1be1d"
+        },
+        {
+          "id": "LA-021",
+          "cid": "baguqeeraeviogdaiyjoukfl5ctt3zrcmfeg7nbegtle6wr4kjgsjdpn3utfa",
+          "status": "completed",
+          "revision": 19,
+          "title": "Strengthen related work and workshop-specific novelty using primary sources",
+          "goal_id": "LA-G6",
+          "raw_row_sha256": "6450784177f81b9ad92ee2285bad168b614f3664a54c5d934c4574b0d1b80db0"
+        },
+        {
+          "id": "LA-022",
+          "cid": "baguqeerauioboytpo6pwuxymhdzmd4tamw52wq5jlrnaao3xcwpcjzya4mxq",
+          "status": "completed",
+          "revision": 7,
+          "title": "Complete results, limitations and conclusions in the editable paper",
+          "goal_id": "LA-G6",
+          "raw_row_sha256": "cfe36310040c2a1cdd257be3332dcbc14f6ebdc43f0bea4654567c9a22ca5a21"
+        },
+        {
+          "id": "LA-023",
+          "cid": "baguqeerauam6ohylje4wcdxgv4rxoo2gjr6rqzijylc7apxrvr4ue4lyjkjq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Assemble a reproducible artifact with pinned environments and lawful source access",
+          "goal_id": "LA-G7",
+          "raw_row_sha256": "aac2fcfd2a8fe6665d5855cfc938ba83aedc20d9ca98b32f9e4624a032105321"
+        },
+        {
+          "id": "LA-024",
+          "cid": "baguqeerat43st5o2vulahtcvtzi5agx24xdt64kido3yk4f743sevvf3k47a",
+          "status": "completed",
+          "revision": 8,
+          "title": "Apply official workshop template, anonymization and actual LLM disclosure",
+          "goal_id": "LA-G7",
+          "raw_row_sha256": "265a2310e450359ef68d3f549fd34b6963361484787452aa0cdbff42221c30f4"
+        },
+        {
+          "id": "LA-025",
+          "cid": "baguqeerabzl5c2pau7yau67ha44uaxnfjfb3pcfk4j55ypzxtf4kyi5wioaq",
+          "status": "completed",
+          "revision": 6,
+          "title": "Reproduce key results in a clean environment and provide optional author handoff",
+          "goal_id": "LA-G8",
+          "raw_row_sha256": "576d22ee16060f171b986fd3af0bc4da181c9103e38da17b57605d84feffb3a6"
+        },
+        {
+          "id": "LA-026",
+          "cid": "baguqeerapdt3u73qc2hl3atlo5u7c244q6nefgb567oibffxsulzct6y37gq",
+          "status": "completed",
+          "revision": 3,
+          "title": "Complete source-bound CVE reproductions and reviewer-ready evidence",
+          "goal_id": "LA-G2",
+          "raw_row_sha256": "d24b4f3abf4ac9f4ee61b3f734c8b885eb56499ff0dd62f850300f6487555447"
+        },
+        {
+          "id": "LA-027",
+          "cid": "baguqeera3qfhroearm24s4xvzi4ducx23bgdkqiyhyehya7ynkp7msapnddq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Implement and qualify the automated evidence scope without an outside-review gate",
+          "goal_id": "LA-G2",
+          "raw_row_sha256": "533dc31d2fda18b1b7153b8577aa080ea64cdb04e384311d808c1bae7d641cc5"
+        },
+        {
+          "id": "LA-028",
+          "cid": "baguqeera2eubiv2oenpouaea7lddgh5qevfjpcnf37g6joqx74eve7lchm6a",
+          "status": "completed",
+          "revision": 3,
+          "title": "Qualify real source adapters, review import and benchmark execution before final scoring",
+          "goal_id": "LA-G3",
+          "raw_row_sha256": "2bf1745c3480516aef5300afa59e63cb5e9c0b6d61f60f0a8cbcef079f97dccc"
+        },
+        {
+          "id": "LA-029",
+          "cid": "baguqeera2j3y6xsbaindi2maxobusy6uoarzywq2s7gmg7i3dje64uw5mqca",
+          "status": "completed",
+          "revision": 5,
+          "title": "Execute the frozen fixed-action benchmark under measured operator resource boundaries",
+          "goal_id": "LA-G5",
+          "raw_row_sha256": "f4a4da1f7edb82ab496edfd2ed48ba99c1001dbfbe32aa2f347e5636925c9ae9"
+        }
+      ],
+      "events": 286,
+      "last_event": {
+        "event_id": "baguqeeraclxwjz7m3fg4eeiv2ddggiwouiqxov267sicwvt4rvclxp6ot6ta",
+        "global_sequence": 286,
+        "event_type": "intent.completion_recorded",
+        "recorded_at": "2026-09-13T04:37:46Z",
+        "task_cid": "baguqeerabzl5c2pau7yau67ha44uaxnfjfb3pcfk4j55ypzxtf4kyi5wioaq"
+      }
+    },
+    {
+      "paper_id": "neurosymbolic_supervision",
+      "query_started_at": "2026-09-14T09:41:53.583036+00:00",
+      "query_finished_at": "2026-09-14T09:41:53.733118+00:00",
+      "query_succeeded": true,
+      "canonical_query_result_sha256": "b4291721f2a03a96001104f17e28a3e7de9028ca1c96f7b0bafb843b34cd8f68",
+      "store_identity": {
+        "store_id": "vericodegen-2026-neurosymbolic_supervision",
+        "database_uuid": "17351fb0-0d3b-4069-a697-51f09ecf0a99"
+      },
+      "store_generation": {
+        "generation": "27"
+      },
+      "owner_readiness": {
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/quack-owner/paper-owner.ready.json",
+        "bytes": 2176,
+        "sha256": "6145742948eb93bc8a6afe2abe523b6af8ec7c9a3ba3cbd0bef087d13cee09bd",
+        "ready": true,
+        "database": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/control.duckdb",
+        "quack_endpoint": "quack:127.0.0.1:42973",
+        "store_id": "vericodegen-2026-neurosymbolic_supervision",
+        "store_generation": "27",
+        "schema_revision": "1"
+      },
+      "owner": {
+        "pid": 2304781,
+        "birth": "63224469",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "alive": true,
+        "observed_at": "2026-09-14T09:41:53.751095+00:00",
+        "current_start_time_ticks": "63224469",
+        "cmdline_sha256": "effef81dc8152c5c85abeaf6b0deccff71eb73443a2bff9a46ef02af88ca809f",
+        "process_state": "S"
+      },
+      "supervisor": {
+        "pid": 3569030,
+        "birth": "72790892",
+        "boot_id": "006c44d2-c190-4cce-9a49-35ab689b243f",
+        "alive": false,
+        "observed_at": "2026-09-14T09:41:53.751205+00:00"
+      },
+      "root_owned_replacement": true,
+      "task_counts": {
+        "completed": 28
+      },
+      "task_progress": {
+        "state": "tasks_complete",
+        "in_progress": [],
+        "eligible_candidates": [],
+        "blocked": [],
+        "waiting": [],
+        "dependency_snapshot_available": true,
+        "authority": "diagnostic_from_authenticated_snapshot; native_claim_required"
+      },
+      "goals": [
+        {
+          "id": "NS-G000",
+          "cid": "baguqeeracnyhj6bmbvwlb7pznpy6pz4dt4f64zvdu4i54my6w3btpn4ahxrq",
+          "status": "open",
+          "revision": 3,
+          "title": "Complete the evidence-backed workshop paper",
+          "requirement": "Complete an evidence-backed, anonymous and reproducible 2026 AI for Verifiable Coding workshop manuscript for the frozen neurosymbolic supervision core: recover editable sources; qualify the current integrated implementation; execute and independently score genuine matched benchmarks and ablations; replace all placeholders with measured, unavailable, or explicitly narrowed claims; and prepare a checked author-review submission package without inventing results or submitting automatically.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "NS-001",
+            "NS-002",
+            "NS-003",
+            "NS-004",
+            "NS-005",
+            "NS-006",
+            "NS-007",
+            "NS-008",
+            "NS-009",
+            "NS-010",
+            "NS-011",
+            "NS-012",
+            "NS-013",
+            "NS-014",
+            "NS-015",
+            "NS-016",
+            "NS-017",
+            "NS-018",
+            "NS-019",
+            "NS-020",
+            "NS-021",
+            "NS-022",
+            "NS-023",
+            "NS-024",
+            "NS-025",
+            "NS-026",
+            "NS-027",
+            "NS-028"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper neurosymbolic_supervision --goal NS-G000",
+          "raw_row_sha256": "2647b8b656425234944fcd06dbc4eb009099d938be94ad6ed8bcc5a91f135992",
+          "native_fields_sha256": "d1f2f178bc88dfc36f91596f8c7cccd532fc85ea3a34f7f88cc0f6e14596b5bd"
+        },
+        {
+          "id": "NS-SG1",
+          "cid": "baguqeera3lk7tmghlo6vpv3dp6uktnfm7feygxtcv3ybmm6cqcirerhlti6q",
+          "status": "completed",
+          "revision": 2,
+          "title": "Freeze a recoverable manuscript and supported scientific scope",
+          "requirement": "Recover editable sources independently of code/protocol work, inventory the exact loaded source forest, and distinguish implemented/evaluated mechanisms from optional plans.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "NS-001",
+            "NS-002",
+            "NS-003"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper neurosymbolic_supervision --goal NS-SG1",
+          "raw_row_sha256": "fb13a763bc233e736ff3e137b319aa9ed4deb4cb3b296a99bbe9904f82512600",
+          "native_fields_sha256": "3cff091afb6d81dab0c078aa6b9d25561204473b82004eb4c727a48673347e24"
+        },
+        {
+          "id": "NS-SG2",
+          "cid": "baguqeeratt6jxhqaopdfohnq2wdofddectswq7vjeugddotf33cts73x6soq",
+          "status": "open",
+          "revision": 2,
+          "title": "Build a leakage-safe benchmark and instrumented comparison runner",
+          "requirement": "Freeze tasks, hidden acceptance oracles, matched A–D conditions, resource metrics, and preregistered statistical and quality criteria.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "NS-004",
+            "NS-005",
+            "NS-006",
+            "NS-026"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper neurosymbolic_supervision --goal NS-SG2",
+          "raw_row_sha256": "a6ab00bd2a17f0ceb77ac1cf5ea57c3b861cd676c42e974efa400bb52b71b3be",
+          "native_fields_sha256": "bfbb8aa4a911c29e6c8a5d6964b02ec11f2f75874f215c513ddc2988404d8a50"
+        },
+        {
+          "id": "NS-SG3",
+          "cid": "baguqeerakmxaj4wcjzvytpfy4pdz32rp53ogwyp724td4fqw3qqddvqj4kfa",
+          "status": "open",
+          "revision": 2,
+          "title": "Qualify the actual supervision and evidence boundaries",
+          "requirement": "Exercise valid progress and adversarial rejection through current context, routing, translation, fixture reuse, sealing, restart, and retained optional mechanisms.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "NS-007",
+            "NS-008",
+            "NS-009",
+            "NS-010",
+            "NS-011",
+            "NS-012",
+            "NS-013",
+            "NS-014",
+            "NS-015",
+            "NS-027"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper neurosymbolic_supervision --goal NS-SG3",
+          "raw_row_sha256": "5ca00b794c654ecef91202b9ecf8fabbb6fccd5b887f57184a6535321e9eda6e",
+          "native_fields_sha256": "fcb6b3c02e95f83ebd610b29c43cb8a86e0a45140ed8ca582abf3a38e76bdf3e"
+        },
+        {
+          "id": "NS-SG4",
+          "cid": "baguqeeragaoxweqfzdlaynxjkc6ini5ffydrkdhxwialz3f72hl7xmkjwpza",
+          "status": "open",
+          "revision": 2,
+          "title": "Execute frozen main experiments and isolated ablations",
+          "requirement": "Pilot separately, freeze final versions, then obtain genuine provider/runner/checker evidence under fixed budgets without relabeling replay fixtures.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "NS-016",
+            "NS-017",
+            "NS-018",
+            "NS-028"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper neurosymbolic_supervision --goal NS-SG4",
+          "raw_row_sha256": "009c1b387d7fae82a5a2a2385f767490d89951d183b82561af71d55464056bc7",
+          "native_fields_sha256": "f9f1ea0191c29f370bc51cdbbbe494ae256601f40151b541b367bae9bca068e0"
+        },
+        {
+          "id": "NS-SG5",
+          "cid": "baguqeera36nk5mzni7ijfde32sto6lpuo5yznld524z23y7zmmhfvrwrj6kq",
+          "status": "open",
+          "revision": 1,
+          "title": "Independently analyze outcomes and reconcile every claim",
+          "requirement": "Compute uncertainty, full denominators, actual economics, positive/negative integration witnesses, conditional theorem assumptions, and explicit limitations.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "NS-019",
+            "NS-020",
+            "NS-023"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper neurosymbolic_supervision --goal NS-SG5",
+          "raw_row_sha256": "c858881d0babbf28bcfc0ac9a649418f9c8862b15f71de1a119c7375403f4796",
+          "native_fields_sha256": "a04c68c54eb07ab329436c392109093af965d21c120a27ad5a0f0d90da9cfb92"
+        },
+        {
+          "id": "NS-SG6",
+          "cid": "baguqeera27mglkwg2ii5glbg4rprul5nktve7lixlrk7ou55clkx7ajfsxcq",
+          "status": "open",
+          "revision": 1,
+          "title": "Finish the scientific manuscript and references",
+          "requirement": "Replace placeholders from generated evidence, sharpen novelty and scope, verify references/artifact links, and clearly distinguish the three related submissions.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "NS-021",
+            "NS-022"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper neurosymbolic_supervision --goal NS-SG6",
+          "raw_row_sha256": "07f18b21358fe3a6d487260749c25817d1a9ebf0c5cf3b8ed13661905ab9e6c1",
+          "native_fields_sha256": "80e3035b51abcea6a945434038a21ba94851052dac13536ef288f4ef300c79e9"
+        },
+        {
+          "id": "NS-SG7",
+          "cid": "baguqeeraoxeg44mmje2ke6wcus6j4j6sv2c7sodkqekr7kk3rkhrtjqh4v2a",
+          "status": "open",
+          "revision": 1,
+          "title": "Deliver an anonymous reproducible submission package",
+          "requirement": "Use the official 2026 template/checklist, audit disclosures and anonymity, reproduce tables from raw evidence, and prepare a final independent author-review package without submission.",
+          "acceptance": "All linked task criteria have current artifact and validation evidence; numerical claims trace to real runs; author handoff is explicit.",
+          "linked_task_ids": [
+            "NS-024",
+            "NS-025"
+          ],
+          "validation_command": "python3 scripts/paper_supervisors.py verify-goal --paper neurosymbolic_supervision --goal NS-SG7",
+          "raw_row_sha256": "16dd86371ac0766439b67a1f700083c856013ddf4f18f8e4fa49809b9ebd6d92",
+          "native_fields_sha256": "fbc6fc489778448780183a390c87b36c1420bfbdf222dfeb458058783a984cfb"
+        }
+      ],
+      "task_rows": [
+        {
+          "id": "NS-001",
+          "cid": "baguqeerauj4ylyfvkbx7zjedjjb6ozomofgvn4tyw7zmpm3vp2qelrkmxwaa",
+          "status": "completed",
+          "revision": 8,
+          "title": "Recover or reconstruct editable LaTeX and preserve the PDF baseline",
+          "goal_id": "NS-SG1",
+          "raw_row_sha256": "b07c14138bf3acf9adac3c572bfdd78f1a29d8ac9513edb13c5b9eee4416180e"
+        },
+        {
+          "id": "NS-002",
+          "cid": "baguqeeranfbqnhqrjquvq43qq724eftv2n3omxm2nyib4bc2osbpk4yxidoq",
+          "status": "completed",
+          "revision": 7,
+          "title": "Inventory the actual loaded forest and reproduce provenance of preliminary artifacts",
+          "goal_id": "NS-SG1",
+          "raw_row_sha256": "d54982762ba88eb46dd7191d5e72730cfcb628b5a1bdb1cee8c17f06fd153962"
+        },
+        {
+          "id": "NS-003",
+          "cid": "baguqeeralbsv5253fgirj64pemzp6fjkc2ivcjjjz2vylzi2ohxm765imfha",
+          "status": "completed",
+          "revision": 5,
+          "title": "Freeze a claim-to-evidence matrix and a bounded submission scope",
+          "goal_id": "NS-SG1",
+          "raw_row_sha256": "43d98025adbabb90d23cf7037abdf178d2946bc5feba78adb9121a631c7e22cc"
+        },
+        {
+          "id": "NS-004",
+          "cid": "baguqeerasgyig3s3bpmq2xqcjqbyvla7xavw5f357uehxdhxbzc7tdtfsffa",
+          "status": "completed",
+          "revision": 6,
+          "title": "Preregister the matched protocol, metrics, budgets, and statistical criteria",
+          "goal_id": "NS-SG2",
+          "raw_row_sha256": "35cd15657fdd6f95529445f3c89499e736537d75b537eaca567653b715abcfb8"
+        },
+        {
+          "id": "NS-005",
+          "cid": "baguqeerav7gaviq33pmxnnazggwzu2zcnxilcbp3b6zjxc4abfl6nxczxknq",
+          "status": "completed",
+          "revision": 7,
+          "title": "Freeze historical tasks, holdouts, adversarial cases, and independent oracles",
+          "goal_id": "NS-SG2",
+          "raw_row_sha256": "2adaef8ea10d7fe711908ca869dfe5b8944717031c1020267ae259733403aef6"
+        },
+        {
+          "id": "NS-006",
+          "cid": "baguqeeraay5z4yt524xbc6w3ixo5hbqse775vgjnwbwwfd2pi7aonbvp27za",
+          "status": "completed",
+          "revision": 5,
+          "title": "Implement the paired runner and measure real provider, validation, and resource boundaries",
+          "goal_id": "NS-SG2",
+          "raw_row_sha256": "c5a6be6750e730befd30956653ba2f9295079a266319e1530650c0367f96fcb6"
+        },
+        {
+          "id": "NS-007",
+          "cid": "baguqeerameq52fwdfqetcd2odgwourjn4gzhurddwntx2ojhiqtcceoumx3q",
+          "status": "completed",
+          "revision": 5,
+          "title": "Qualify semantic context, invalidation, and source-preserving repair parity",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "6366ed0420fabb405c8980abe68083de13305cd41f992edae0c86905af344fa5"
+        },
+        {
+          "id": "NS-008",
+          "cid": "baguqeeracllsccqfu2dtqkla5mpvo47xhq3grf5gi5mlfa5g6dqm7hmwf3ja",
+          "status": "completed",
+          "revision": 5,
+          "title": "Exercise deterministic closure and authorized residual dispatch through the real caller",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "2c8a5f60b46baa7d52becbaadc19975821808a93b202f75af17e4a3496f71d2d"
+        },
+        {
+          "id": "NS-009",
+          "cid": "baguqeeranuvqo3wppkyxrsbxzkqxm37b5j6xjiqdfegsqc5wlephkzcg4tbq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Validate translation preservation and retained symbolic checker admission",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "bef7f8a3934db7b09da442d8ee8a1e68a741029b593e6d18831c8bdb3f64c7cd"
+        },
+        {
+          "id": "NS-010",
+          "cid": "baguqeeraxkxmw2mfui3sqa7jtwojdnxubjnchbg4pdy6yxacjycualh7lrla",
+          "status": "completed",
+          "revision": 5,
+          "title": "Implement or close the fixture-instance and phase-aware reuse seam",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "20ab6d9223d208b3f93439aa127c5a481f35bae5570b31528cb40370306fb815"
+        },
+        {
+          "id": "NS-011",
+          "cid": "baguqeeravxh7tzskbol27nv2lumwxonzkl6mmhc3pmu24anpd63zfzktpopa",
+          "status": "completed",
+          "revision": 6,
+          "title": "Independently cold-score reuse and adversarial dependency mutations",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "92411c6aa76e9b96067e84e38fa17824cbf322df4f30546c4c7205df448ac08a"
+        },
+        {
+          "id": "NS-012",
+          "cid": "baguqeeratvp7364bkn7ifddzv5gktwg4276t7odp72mhe6z2hc6asuluwota",
+          "status": "completed",
+          "revision": 5,
+          "title": "Qualify complete inventories, parallel sealing, CAS, and useful restart recovery",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "ffef7c694e4584159ab012e299d105de6931f7ac4be57c5e02266134e5f8c41c"
+        },
+        {
+          "id": "NS-013",
+          "cid": "baguqeeraohkkpm7gw5xxoks3hgv4yfvsffcqvmosan4tvkjd4khpfidoyrna",
+          "status": "completed",
+          "revision": 5,
+          "title": "Record one complete state-to-repair-to-certificate-to-publication witness",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "9f055389ffbf22213272bb307e91d392aad8dbb081f0f07858ecbe703f500d92"
+        },
+        {
+          "id": "NS-014",
+          "cid": "baguqeerayjpz7p662tvs6bavpejq6fw4tdj2c2v3m6kc7wgovdccn3yzglya",
+          "status": "completed",
+          "revision": 5,
+          "title": "Qualify the named native proof profile or explicitly close its scope as unavailable",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "23137c01c784785044c95694f8eff575f4ef1312d5cfdf291fb917e2c767ea01"
+        },
+        {
+          "id": "NS-015",
+          "cid": "baguqeeraimo7bi2gyl5vw6cmcaxlge6rlrkq6n3756ggasvyx4msgbetyv5a",
+          "status": "completed",
+          "revision": 14,
+          "title": "Qualify retained procedures/world consumption/refactoring or narrow extensions",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "3a33a8bb45dcc190822ba1fcc6ae76bf67ea6873aec31ee0037f37970535901d"
+        },
+        {
+          "id": "NS-016",
+          "cid": "baguqeeraumwr2l6x7safw4yxtthtacesqluagswb6b36dzf6uiwc4alkeaqa",
+          "status": "completed",
+          "revision": 7,
+          "title": "Pilot on development data and freeze final runtime, protocol, and task population",
+          "goal_id": "NS-SG4",
+          "raw_row_sha256": "7d466603db6756bd8853ba4a04426ad68787ea6bea26feff1795cb4ace39d6c2"
+        },
+        {
+          "id": "NS-017",
+          "cid": "baguqeera3b47wxkqgasy6273yoviaonjttn3sv73hf3u3xvc5rkcskzondla",
+          "status": "completed",
+          "revision": 9,
+          "title": "Adopt the frozen32 A/B cold final evidence without repeating experiments",
+          "goal_id": "NS-SG4",
+          "raw_row_sha256": "473030ca305b3af901ad76f609b51d0865c7df5f59d098a831efe18df92eaf28"
+        },
+        {
+          "id": "NS-018",
+          "cid": "baguqeeraeunez23xtulwfv4khb3t6laal7kzycbunpn6ncog4vpdytvevapa",
+          "status": "completed",
+          "revision": 8,
+          "title": "Document withdrawn ablations and the retained A/B factor comparison",
+          "goal_id": "NS-SG4",
+          "raw_row_sha256": "c94087f8e1c7b52fa4c2355aaa0ca01b6812aca10e7e457d3cb0d2c637b300d1"
+        },
+        {
+          "id": "NS-019",
+          "cid": "baguqeerago6nsmurnckvpgdhxejz5qnfzlpxswsfrhpqnflt333hmjtpwdaa",
+          "status": "completed",
+          "revision": 8,
+          "title": "Regenerate descriptive eight-family A/B outcomes and measured cost summaries",
+          "goal_id": "NS-SG5",
+          "raw_row_sha256": "9f0ac6fe1f02e6dac05fdbb8a9f8cc6b78cf1c6228a0f79f12f2b8f01aa808c6"
+        },
+        {
+          "id": "NS-020",
+          "cid": "baguqeera4r2wwglfc6hr2sed2zmkog7jadkxfb6bavhn2vl4eak6pmni2czq",
+          "status": "completed",
+          "revision": 8,
+          "title": "Reconcile boundary evidence and claims with the frozen A/B experiment",
+          "goal_id": "NS-SG5",
+          "raw_row_sha256": "d2b34f8d02fb5fb1ed928e16bb995f5db9db2b4acc7f9b2891631b1b64ec821b"
+        },
+        {
+          "id": "NS-021",
+          "cid": "baguqeera5gqehhp7h4edsgrjl4ecjbskufjxpd73l2dkb2h73bgbhajmyf5a",
+          "status": "completed",
+          "revision": 8,
+          "title": "Verify references, anonymous artifact citations, and distinct contribution",
+          "goal_id": "NS-SG6",
+          "raw_row_sha256": "0cb6cb73e7a2b3acda21acf8a8c926d065a3492a4490581e58cebfcb9e1fdf36"
+        },
+        {
+          "id": "NS-023",
+          "cid": "baguqeerarggv3po2fweo5l4ajjeu5y4ekrvnvgr55aey2osb3scvspqkffyq",
+          "status": "completed",
+          "revision": 5,
+          "title": "Audit the conditional acceptance and reuse arguments against actual gates",
+          "goal_id": "NS-SG5",
+          "raw_row_sha256": "7000fe477ad7238ed23401d5917cd7cc81712bcb22120baa0750f0d49ff63b3b"
+        },
+        {
+          "id": "NS-022",
+          "cid": "baguqeeratzwt25i3kkqqhgktuyfcdjxtcrxeosiqohqomqvzgxsfqidiamuq",
+          "status": "completed",
+          "revision": 15,
+          "title": "Write the manuscript around descriptive A/B results and explicit limitations",
+          "goal_id": "NS-SG6",
+          "raw_row_sha256": "33610e9e88cc705811f630024355b0be11a5b3d990a53fbefb721daa09694138"
+        },
+        {
+          "id": "NS-024",
+          "cid": "baguqeeraqkivn2kb27scvzto6kd7nrgvaefyxfcuu6mzcoxnfvo5ivxp36ca",
+          "status": "completed",
+          "revision": 12,
+          "title": "Package the anonymous frozen A/B evidence and actual executed sources",
+          "goal_id": "NS-SG7",
+          "raw_row_sha256": "12a4d4b2f7182f98a5a0b0ad119844ccaaa617940ee00c95b066629665148f11"
+        },
+        {
+          "id": "NS-025",
+          "cid": "baguqeera5b3mlcrqr7qpaww2z5yhflahdebo36gscp5scmysbc4ngtzoh7pq",
+          "status": "completed",
+          "revision": 8,
+          "title": "Audit the final descriptive A/B package and produce the manuscript handoff",
+          "goal_id": "NS-SG7",
+          "raw_row_sha256": "543dc7b159549fbb66b5c04a90b2881dcba05d6f938b9d289abca66fd01d3e62"
+        },
+        {
+          "id": "NS-026",
+          "cid": "baguqeerayy33aaufe7iu7r4yqwnhwaljqexlp2xyoeazvew62pz6uqh6moaq",
+          "status": "completed",
+          "revision": 4,
+          "title": "Implement and qualify an actual production provider and independent historical scorer",
+          "goal_id": "NS-SG2",
+          "raw_row_sha256": "0756dfd10c693cdac9b2578db0e34374c6abec8382b2b5b32c7f3fb9e7900e19"
+        },
+        {
+          "id": "NS-027",
+          "cid": "baguqeerazsur4ealksasrmr3bfswbxfydevtrwaaoynu6mhonjmoyudvx5na",
+          "status": "completed",
+          "revision": 4,
+          "title": "Qualify retained-byte reuse authority or remove unsupported reuse before final runs",
+          "goal_id": "NS-SG3",
+          "raw_row_sha256": "f767c105cf0ca8670bfa221dd9846a68908dc0b96deb60279ec1bd6ddb0865f1"
+        },
+        {
+          "id": "NS-028",
+          "cid": "baguqeeraox6hmk7kurbe7fqb75u4nazoecl56u4pgo74txu4pxql3sp65gua",
+          "status": "completed",
+          "revision": 15,
+          "title": "Execute a genuine historical pilot and replace the unsupported pre-final freeze",
+          "goal_id": "NS-SG4",
+          "raw_row_sha256": "c64b624ecbd54069d7ee030512c8743722bcd266b29ddea2c0da859ba670b5e7"
+        }
+      ],
+      "events": 290,
+      "last_event": {
+        "event_id": "baguqeeraj2qhmf6zkvyhr7xe65w6suygq23kauushtryrpvp75jrjemdskna",
+        "global_sequence": 290,
+        "event_type": "intent.completion_recorded",
+        "recorded_at": "2026-09-13T17:26:40Z",
+        "task_cid": "baguqeera5b3mlcrqr7qpaww2z5yhflahdebo36gscp5scmysbc4ngtzoh7pq"
+      }
+    }
+  ],
+  "source_bindings": [
+    {
+      "path": "/home/barberb/lift_coding/papers/completion/autoformalization/supervisor.json",
+      "bytes": 2116,
+      "sha256": "f1b174d155747326a5c758a7e18e2ae093b871a694dd9613e39ed259457d1ec6"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/papers/completion/autoformalization/supervisor.json",
+      "bytes": 2116,
+      "sha256": "f1b174d155747326a5c758a7e18e2ae093b871a694dd9613e39ed259457d1ec6"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/completion/law_to_action/supervisor.json",
+      "bytes": 2075,
+      "sha256": "58dd10f5e8f09e1139d3733c8c63f76b148584efab0dd13fff82f452cd2d66a0"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-law_to_action-2026/papers/completion/law_to_action/supervisor.json",
+      "bytes": 2075,
+      "sha256": "58dd10f5e8f09e1139d3733c8c63f76b148584efab0dd13fff82f452cd2d66a0"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/completion/neurosymbolic_supervision/supervisor.json",
+      "bytes": 2204,
+      "sha256": "ab571b64446a56ff8ec61eda912c1fdc73c545bd6cbb7958552aaf02307d1a58"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/supervisor.json",
+      "bytes": 2204,
+      "sha256": "ab571b64446a56ff8ec61eda912c1fdc73c545bd6cbb7958552aaf02307d1a58"
+    },
+    {
+      "path": "/home/barberb/lift_coding/scripts/paper_supervisor_campaign.py",
+      "bytes": 25439,
+      "sha256": "d93a0440c30d126f7ccf069a57ff490b6f214786e397688a8600de0af7f551cd"
+    },
+    {
+      "path": "/home/barberb/lift_coding/scripts/paper_state_owner.py",
+      "bytes": 11701,
+      "sha256": "c5c2a3d359b63ad42cb01015eb8782200dfdc3b6083732d3bba4d42a55eaf958"
+    },
+    {
+      "path": "/home/barberb/lift_coding/scripts/paper_ducklake_projection.py",
+      "bytes": 17954,
+      "sha256": "9fc1869cbdefcb06eee6a62e037b0c61b1f89509cb6d411a8cf2ad52711b6e62"
+    },
+    {
+      "path": "/home/barberb/lift_coding/scripts/paper_supervisors.py",
+      "bytes": 30342,
+      "sha256": "0dc1aced74cf4eca1be42d9aa3b7f5d080b857a5744ad50a21e66af7fddb8592"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/original_programme_crosswalk.json",
+      "bytes": 1139,
+      "sha256": "d0d2785ca0799c8f72184e97a38690c36d5864ad0f34abe309f932cd4655b8fe"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/revisions/law_to_action_synthesis_20260914/README.md",
+      "bytes": 1253,
+      "sha256": "2fe49aca7408cfffd0b1d9a57853f47546d82db45e202cb9194852b0776ce0f4"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/revisions/law_to_action_synthesis_20260914/REVISION_NOTES.md",
+      "bytes": 3713,
+      "sha256": "807f18fb51f79330cd66b746959b626ed593695cafc38f3d5b367f132165bca0"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/README.md",
+      "bytes": 3837,
+      "sha256": "87300c4c3fe0bd81e6db8788136ac70044ce6d8a243dcb59cc293449f7b2c3fb"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/RESEARCH_PROGRESS.md",
+      "bytes": 22749,
+      "sha256": "25abf09dd982eb61b01edc7d6b583152fc15a6ecabd454788605469507ac4a5a"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/scope_and_evaluation_gap.md",
+      "bytes": 11865,
+      "sha256": "2f1e635b01501fc8114a001acae83bde637707d9f7d108c5bc43aa792e7a1078"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/latest_build.json",
+      "bytes": 659,
+      "sha256": "11256044ad851902214c186e7787ec38aaa8af39b8057c719db6dc22f572a1f3"
+    },
+    {
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/invocation_summary.json",
+      "bytes": 9299,
+      "sha256": "4b65f74ebfbc88c56390905a98e4962cde8ab67cadf29379fd0b54616d462bec"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/papers/completion/autoformalization/receipts/AF-015.json",
+      "bytes": 12078,
+      "sha256": "f9966549bcbccb4db8c7f44eced602f0b025765ad02ef4adfee3f20397dfd2bc"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/papers/completion/autoformalization/receipts/AF-017.json",
+      "bytes": 14681,
+      "sha256": "cc32787aef698318705ed099d08d1b6b44267bf31c08db669d98ddb29c3f1a35"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/papers/completion/autoformalization/receipts/AF-018.json",
+      "bytes": 17006,
+      "sha256": "81c42040ab1d2cb32d09e2983c49fd4db518c484c6717bc009924027e3a47615"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026/papers/completion/autoformalization/receipts/AF-019.json",
+      "bytes": 14625,
+      "sha256": "e0b4cfae57d752a22af8c8e99a3c0b43e2d83adb3e63190f7a0aa145deeca730"
+    }
+  ],
+  "ducklake_status": {
+    "source": {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/ducklake-status.json",
+      "bytes": 1893,
+      "sha256": "47a8ee39041f71082bfbee65052a8118eaf5fc2c4f0a999c70adfbc2dd73c8c6"
+    },
+    "observation": {
+      "schema": "vericodegen-ducklake-projection/v1",
+      "ok": true,
+      "authoritative": false,
+      "paper_benchmark_evidence": false,
+      "source_transport": "quack",
+      "fetch_verification": "owner_snapshot_provenance",
+      "source_snapshot_sha256": "043abdfaee625d08cfdb7994494dc5af3940697e1fc57cccfc6f31697c15f003",
+      "source_fetched_at": "2026-09-14T09:33:56.989335+00:00",
+      "source_age_seconds": 252.991492,
+      "projected_at": "2026-09-14T09:38:09.980841+00:00",
+      "ducklake": {
+        "catalog": "lake",
+        "catalog_type": "ducklake",
+        "catalog_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/ducklake/lake.ducklake",
+        "extension_versions": {
+          "ducklake": "d8a1881e",
+          "quack": "c154811"
+        }
+      },
+      "lake_snapshot_id": 86778,
+      "lake_snapshot_count": 86779,
+      "new_immutable_artifacts": 3,
+      "boards": {
+        "autoformalization": {
+          "board_namespace": "vericodegen-2026-autoformalization",
+          "board_rows": 1,
+          "current_task_rows": 29,
+          "artifact_rows_by_kind": {
+            "event": 288,
+            "goal": 19,
+            "owner_snapshot": 1927,
+            "task": 178
+          },
+          "input_goal_count": 8,
+          "input_event_count": 288
+        },
+        "law_to_action": {
+          "board_namespace": "vericodegen-2026-law_to_action",
+          "board_rows": 1,
+          "current_task_rows": 29,
+          "artifact_rows_by_kind": {
+            "event": 286,
+            "goal": 19,
+            "owner_snapshot": 1927,
+            "task": 168
+          },
+          "input_goal_count": 9,
+          "input_event_count": 286
+        },
+        "neurosymbolic_supervision": {
+          "board_namespace": "vericodegen-2026-neurosymbolic_supervision",
+          "board_rows": 1,
+          "current_task_rows": 28,
+          "artifact_rows_by_kind": {
+            "event": 290,
+            "goal": 14,
+            "owner_snapshot": 1927,
+            "task": 189
+          },
+          "input_goal_count": 8,
+          "input_event_count": 290
+        }
+      }
+    }
+  },
+  "health": {
+    "source": {
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/health.json",
+      "bytes": 209502,
+      "sha256": "7438f3eed32c2f38e3eb36ab8464007f24e841a3e5600f83e8b4c750880e26ca"
+    },
+    "observation": {
+      "checked_at": "2026-09-14T09:33:56.989173+00:00",
+      "children_exited": [
+        {
+          "kind": "supervisor",
+          "pid": 2328519,
+          "exit_code": 143
+        }
+      ],
+      "tasks": {
+        "autoformalization": {
+          "completed": 29
+        },
+        "law_to_action": {
+          "completed": 29
+        },
+        "neurosymbolic_supervision": {
+          "completed": 28
+        }
+      },
+      "progress": {
+        "autoformalization": {
+          "state": "tasks_complete",
+          "in_progress": [],
+          "eligible_candidates": [],
+          "blocked": [],
+          "waiting": [],
+          "dependency_snapshot_available": true,
+          "authority": "diagnostic_from_authenticated_snapshot; native_claim_required"
+        },
+        "law_to_action": {
+          "state": "tasks_complete",
+          "in_progress": [],
+          "eligible_candidates": [],
+          "blocked": [],
+          "waiting": [],
+          "dependency_snapshot_available": true,
+          "authority": "diagnostic_from_authenticated_snapshot; native_claim_required"
+        },
+        "neurosymbolic_supervision": {
+          "state": "tasks_complete",
+          "in_progress": [],
+          "eligible_candidates": [],
+          "blocked": [],
+          "waiting": [],
+          "dependency_snapshot_available": true,
+          "authority": "diagnostic_from_authenticated_snapshot; native_claim_required"
+        }
+      },
+      "quack_reads_succeeded": true
+    }
+  },
+  "backend_conclusion": {
+    "authority": "DuckDB accessed through three dedicated authenticated Quack owners; no direct database file access was used by this audit.",
+    "history": "Campaign projection receipt reports catalog_type=ducklake and loaded DuckLake/Quack extension versions; source code checks this and rejects fallback. The audit does not attach to or modify the live DuckLake catalog.",
+    "observation_limit": "DuckLake metadata comes from the live campaign projection receipt, separately bound by hash; current task state was independently fetched through Quack."
+  },
+  "reconciliation": {
+    "all_original_research_completed": false,
+    "task_count_interpretation": "All 86 recorded tasks are completed under their historical/amended receipt contracts. These counts do not establish that unrun or unsupported experiments occurred. All three root goals remain open.",
+    "automatic_goal_reconciliation": "Disabled by the native launch arguments; open goals are not themselves proof of a failed worker.",
+    "autoformalization": {
+      "after_current_delivery": "Append hash-bound current empirical and artifact evidence to the existing task/goal lineage. Audit AF-S03/S04/S06/S07 individually against actual current files and reproduction receipts; preserve original receipts. Do not bulk-complete from 29/29.",
+      "remaining_scope": [
+        "AF-S05 explicitly covers A–E, bridge/code/trace, retrieval, planning/proof assistance and domains. Each obligation needs actual execution evidence or an honest supported/unavailable status permitted by its contract.",
+        "AF-016 requires original 20 Table 6 cells mapped to measured or explicit unavailable/unrun status. D/E must stay visible.",
+        "The original AF-013 canonical guidance route was unactivated/E locked; the new check-order consumer is a separately identified limited implementation.",
+        "Historical AF-017 retrieval used signed hashed trigrams and constructed labels, with no MiniLM/FAISS retrieval or native admitted-premise quality evidence.",
+        "Historical AF-015 bridge/code/trace checks were finite Python; native repository compilers/checkers were not run. The new proof suite does not by itself establish source-to-proof bridge soundness."
+      ],
+      "current_crosswalk": "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/original_programme_crosswalk.json"
+    },
+    "law_to_action": {
+      "status": "Polished synthesis preserves the measured 900-cell study and explicitly leaves richer semantics and closed-loop planning unmeasured.",
+      "remaining_scope": "Persisted LA-G5 requests useful closed-loop work and matched ablations/costs; LA-G2–G8 require individual current-evidence reconciliation before closure. Human legal fidelity is not a prerequisite under the recorded amended scope."
+    },
+    "neurosymbolic_supervision": {
+      "status": "Concurrent whole-system revision exists and explicitly records unfinished original research obligations; it must not be overwritten or treated as complete from 28/28 historical tasks.",
+      "remaining_scope": [
+        "Complete integrated lifecycle reuse/procedure/proof mechanisms, warm-horizon economics and matched real-repository studies.",
+        "Confirmatory breadth remains unenrolled in the current progress record.",
+        "The latest Requests cold comparison has eight terminal invocation records; its README still says running. Provider aggregation and limitations remain to be reconciled. Partial D excludes lifecycle reuse, certified procedures and learned-world utility."
+      ],
+      "restart_decision": "Do not restart an idle NS supervisor or repeat terminal scientific invocations: no native task is currently eligible/in progress/blocked. The recorded replacement PID is absent; shutdown cause is unestablished. Admit reviewed follow-ups and reconcile concurrent ownership before any later dispatch.",
+      "health_caveat": "The campaign retains its original in-memory child list; its exit-143 entry for PID 2328519 is not evidence for how replacement PID 3569030 ended."
+    }
+  },
+  "finished_at": "2026-09-14T09:41:53.755046+00:00"
+}

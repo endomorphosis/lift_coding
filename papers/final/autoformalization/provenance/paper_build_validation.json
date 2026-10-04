@@ -1,0 +1,90 @@
+{
+  "main_pages": 9,
+  "main_text_last_page": 9,
+  "references_start_page": 10,
+  "pdf_bytes": 277389,
+  "pdf_sha256": "dbc6877bfe4fe2ff0f4abf73edf35f5f9ccd9a9bfc0e7b12488e0890a7b0c078",
+  "official_style_sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+  "official_checklist_contract_sha256": "f0115ecc8040a773d4d579a668f32fafbb663c416b07ff7a96b6968f30104374",
+  "official_checklist_guideline_blocks": 16,
+  "commands": [
+    {
+      "argv": [
+        "pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-output-directory=../build",
+        "main.tex"
+      ],
+      "cwd": "editable/manuscript",
+      "log": "final-pass1.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "bibtex",
+        "main"
+      ],
+      "cwd": "editable/build",
+      "log": "final-bibtex.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-output-directory=../build",
+        "main.tex"
+      ],
+      "cwd": "editable/manuscript",
+      "log": "final-pass2.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "pdflatex",
+        "-no-shell-escape",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-output-directory=../build",
+        "main.tex"
+      ],
+      "cwd": "editable/manuscript",
+      "log": "final-pass3.log",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "pdftotext",
+        "-layout",
+        "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/editable/build/main.pdf",
+        "/home/barberb/lift_coding/papers/revisions/autoformalization_empirical_20260914/editable/build/paper.txt"
+      ],
+      "cwd": ".",
+      "log": "pdftotext.log",
+      "returncode": 0
+    }
+  ],
+  "source_date_epoch": "1789344000",
+  "pdfinfo": "Title:           Compiler-Guided Autoformalization with Adaptive Multi-View Representations\nSubject:         NeurIPS 2026 Workshop on AI for Verifiable Coding\nKeywords:        \nAuthor:          Anonymous Author(s)\nCreator:         LaTeX with the official workshop style\nProducer:        pdfTeX\nCreationDate:    Mon Sep 14 00:00:00 2026 UTC\nModDate:         Mon Sep 14 00:00:00 2026 UTC\nCustom Metadata: yes\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           22\nEncrypted:       no\nPage size:       612 x 792 pts (letter)\nPage rot:        0\nFile size:       277389 bytes\nOptimized:       no\nPDF version:     1.7\n",
+  "inputs_sha256": {
+    "editable/manuscript/checklist.tex": "7a57db096f936b8ec6eb0d26062724e7868636ee78ada71597401d8e68f95c07",
+    "editable/manuscript/empirical_disclosure.tex": "dfde06a1cb1dc8e9a4d7160a528f4cf88c412f74d1edf62febbbb9babf41d8d6",
+    "editable/manuscript/figure-01.tex": "75f749dd278afb2b8385ab84e2281fdc30acc7c25180bb700e7e348cc8fba8d9",
+    "editable/manuscript/main.tex": "50c1a70de891a970d3fc687632f31fcf51f12f56c0582f41f303c8e11ec57a95",
+    "editable/manuscript/references.bib": "3b78c8785c383782197d5a3475530846d552823890704d19f387ad8c89c7d644",
+    "editable/results/empirical_assistance.tex": "f5ae42a35f89be694e59e50963d71f21265bd8b0dbeba610be02f312e00be8d5",
+    "editable/results/empirical_execution.tex": "faf7b9c1d798333b1c665899c74ab38e27c560242a1f47b37c3605d371665a84",
+    "editable/results/empirical_learning.tex": "7b54b0a0f867a6e22d46de516d2f280838b17dce56c7e33dc31f48bd2192af9a",
+    "editable/results/empirical_learning_discussion.tex": "7825d85e02949ddfe967fdcd90db25822757eb3a53cfb981785a84e998f8be7d",
+    "editable/results/empirical_numbers.tex": "39489d33cb71c5ec158a0381ee24293c6fca0db01b4aef3af83e7c8e854f87ed",
+    "editable/results/empirical_pipeline.tex": "a8c0f16a0ae6bd759a4731bb7bb981b28092ae6e7153e3436330b2dd6b548e0b",
+    "editable/results/empirical_pipeline_discussion.tex": "d361a88cc1ff60a2be10c8d469d3eaa9314d1bf2796895ab2d1036ea9aa156b2"
+  }
+}

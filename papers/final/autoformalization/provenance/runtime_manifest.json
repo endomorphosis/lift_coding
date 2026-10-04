@@ -1,0 +1,120 @@
+{
+  "python": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+  "platform": "Linux-6.17.0-1014-nvidia-aarch64-with-glibc2.39",
+  "machine": "aarch64",
+  "packages": {
+    "spacy": "3.8.14",
+    "en-core-web-sm": "3.8.0",
+    "numpy": "1.26.4",
+    "torch": "2.13.0",
+    "transformers": "4.52.1",
+    "tokenizers": "0.21.4",
+    "multiformats": "0.3.1.post4"
+  },
+  "hardware": "NVIDIA GB10; 20 logical CPUs; 127601388 KiB host memory, unified CPU/GPU memory",
+  "concurrent_host_workloads_present": true,
+  "resource_interpretation": "Affinity and per-job ceilings did not reserve exclusive CPUs; unrelated concurrent workloads were present. Recorded latencies are descriptive, not controlled throughput comparisons.",
+  "observed_cpu_capacity": {
+    "0": {
+      "scheduler_capacity": 718,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "0"
+    },
+    "1": {
+      "scheduler_capacity": 718,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "1"
+    },
+    "2": {
+      "scheduler_capacity": 718,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "2"
+    },
+    "3": {
+      "scheduler_capacity": 718,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "3"
+    },
+    "4": {
+      "scheduler_capacity": 718,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "4"
+    },
+    "5": {
+      "scheduler_capacity": 997,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "5"
+    },
+    "6": {
+      "scheduler_capacity": 997,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "6"
+    },
+    "7": {
+      "scheduler_capacity": 997,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "7"
+    },
+    "8": {
+      "scheduler_capacity": 997,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "8"
+    },
+    "9": {
+      "scheduler_capacity": 997,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "9"
+    },
+    "10": {
+      "scheduler_capacity": 731,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "10"
+    },
+    "11": {
+      "scheduler_capacity": 731,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "11"
+    },
+    "12": {
+      "scheduler_capacity": 731,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "12"
+    },
+    "13": {
+      "scheduler_capacity": 731,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "13"
+    },
+    "14": {
+      "scheduler_capacity": 731,
+      "max_frequency_khz": 2808000,
+      "thread_siblings": "14"
+    },
+    "15": {
+      "scheduler_capacity": 1017,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "15"
+    },
+    "16": {
+      "scheduler_capacity": 1017,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "16"
+    },
+    "17": {
+      "scheduler_capacity": 1017,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "17"
+    },
+    "18": {
+      "scheduler_capacity": 1017,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "18"
+    },
+    "19": {
+      "scheduler_capacity": 1024,
+      "max_frequency_khz": 3900000,
+      "thread_siblings": "19"
+    }
+  },
+  "cpu_topology_note": "Sysfs thread-sibling lists are singletons. Repeated lscpu core IDs were not treated as evidence of simultaneous multithreading; capacities differ across CPUs."
+}

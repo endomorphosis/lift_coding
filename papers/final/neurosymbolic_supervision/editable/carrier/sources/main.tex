@@ -1,0 +1,61 @@
+% Actual complete32 assembly candidate. NS024 checklist and normal task validation remain separate.
+\input{header}
+\usepackage{xcolor} % Required by the unchanged official checklist answer macros.
+\begin{document}
+\maketitle
+\input{fragments/abstract}
+\input{fragments/introduction}
+\input{fragments/evidence_method}
+\input{fragments/design}
+\input{fragments/analysis_method}
+\input{fragments/results}
+\begin{table}[tbp]
+\centering
+\caption{Useful completions in the fixed 32-cell A/B cold comparison. Eight families are the analysis blocks; two repetitions per arm are nested.}
+\label{tab:final32}
+\input{generated/table17}
+\end{table}
+\input{fragments/related_work}
+\input{fragments/limitations}
+\input{fragments/conclusion}
+\label{paper:main-end}
+\clearpage
+\label{paper:references-start}
+\bibliographystyle{plainnat}
+\bibliography{verified_references}
+\clearpage
+\appendix
+\label{paper:appendix-start}
+\input{appendix/entry}
+\clearpage
+\section{Family-level display}
+Figure~\ref{fig:family-useful} displays the same family counts as Table~\ref{tab:final32}; it is not an additional experiment.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{layout/family_useful.pdf}
+\caption{Useful completions by family and arm in the same 32-cell comparison. Each arm has two nested repetitions per family; the figure adds no trials.}
+\label{fig:family-useful}
+\end{figure}
+\clearpage
+\section{Historical boundary evidence}
+\label{sec:historical-boundaries}
+Table~\ref{tab:boundary-history} retains the historical qualification scope separately from the final repair comparison. Identifiers of the form NS-NNN name internal qualification records, not repository families or independent repair trials. The anonymous boundary component retains the detailed evidence index and limitations.
+\begin{table}[htbp]
+\centering
+\caption{Historical evidence boundaries. Local controls, unavailable measurements, and the retained false-reuse case are not additional final repair outcomes.}
+\label{tab:boundary-history}
+\input{layout/table18}
+\end{table}
+\section{Withdrawn and unmeasured comparisons}
+\begin{table}[htbp]
+\centering
+\caption{Withdrawn and unmeasured comparisons. These entries are scope dispositions, not zero-effect measurements.}
+\label{tab:withdrawn-comparisons}
+\input{generated/ablations}
+\end{table}
+\clearpage
+\input{appendix/llm_usage_disclosure}
+\clearpage
+\label{paper:checklist-start}
+\input{checklist}
+\end{document}

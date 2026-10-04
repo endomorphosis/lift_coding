@@ -1,0 +1,35 @@
+{
+  "repositories": [
+    {
+      "name": "datasets",
+      "root": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "packages": ["ipfs_datasets_py"],
+      "released_ref": "c9446bd44cef1603c1461242e6c577e26af45ad8",
+      "released_checkout": "/tmp/ir-release-datasets-20261001"
+    },
+    {
+      "name": "accelerate",
+      "root": "/home/barberb/lift_coding/external/ipfs_accelerate",
+      "packages": ["ipfs_accelerate_py"],
+      "released_ref": "6ab718bf96126c0f78d60d322cf86c6de74eac72",
+      "released_checkout": "/tmp/ir-release-accelerate-20261001"
+    }
+  ],
+  "bounds": {"max_rounds": 80, "max_files": 512, "max_bytes": 16777216, "max_file_bytes": 2097152, "total_timeout": 180},
+  "allowed_asset_suffixes": [".json", ".txt", ".yaml", ".yml", ".toml", ".cfg", ".ini", ".csv", ".tsv"],
+  "allow_ctypes_python_handle": true,
+  "nominate_eager_imports": true,
+  "seeds": [
+    "ipfs_accelerate_py.agent_supervisor.planning.finite_integer_capacity_preview",
+    "ipfs_accelerate_py.agent_supervisor.planning.finite_integer_plan_preview",
+    "ipfs_accelerate_py.agent_supervisor.prompt.plan_create_service",
+    "ipfs_accelerate_py.agent_supervisor.planning.plan_revision_contracts",
+    "ipfs_accelerate_py.agent_supervisor.planning.repository_plan_preview",
+    "ipfs_datasets_py.logic.software_contracts.codebase_ir",
+    "ipfs_datasets_py.logic.software_contracts.duckdb_ast_store",
+    "ipfs_datasets_py.logic.software_contracts.duckdb_ingest",
+    "ipfs_datasets_py.duckdb_control.codebase_catalog",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler",
+    "ipfs_datasets_py.logic.software_contracts.codebase_finite_integer_observation"
+  ]
+}

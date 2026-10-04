@@ -1,0 +1,3 @@
+def effectful(n: int) -> int:
+    print(n)
+    return n
