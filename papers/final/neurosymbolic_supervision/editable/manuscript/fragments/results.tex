@@ -1,0 +1,83 @@
+\section{Results}
+\label{sec:results}
+
+\paragraph{Complete fixed-cohort accounting.}
+All 32 planned cells have verified terminal records; none is missing or replaced.
+The experiment made 32 original proposal POSTs and 16 scoring invocations,
+of which 15 completed cold validation. Useful completion was 9/32 (28.125\%):
+A achieved 5/16 and B 4/16. Table~\ref{tab:final32} reports the family counts.
+Failures remain in these denominators. The mean of the eight paired family
+differences, B minus A, is $-0.0625$, or $-6.25$ percentage points. The frozen
+20,000-resample whole-family bootstrap gives a descriptive 95\% percentile
+interval of $[-0.1875,0]$. Each resample draws eight families and preserves both
+arms and their nested repetitions. The interval describes this convenience
+sample; it supplies no population-level superiority, noninferiority, or
+promotion decision.
+
+\paragraph{Concentration across families.}
+Tomlkit yielded one useful completion per arm, Tornado two for A and one for B,
+and more-itertools two for each arm. The other five families yielded none.
+Seven family differences are zero; the Tornado difference is $-0.5$ and
+accounts for the aggregate gap. Its B cell~012 (repetition 130363) ended in a
+transport failure without a response or scorer invocation. This outcome remains
+part of the fixed comparison. The data do not isolate an effect of semantic
+content, a particular native component, or prompt compression. The treatment
+changes the combined request, and the recorded endpoint includes operational
+and provider failures.
+
+\paragraph{Failure categories and incomplete validation.}
+The remaining 23 cells comprise 14 proposal-child deadlines, two known proposal
+failures, and seven records with the original signed label
+\texttt{hidden\_acceptance\_failed}. The two proposal failures were cell~003
+(Tomlkit, A, 130363), which returned HTTP~503, and the transport failure in
+cell~012. Their known local termination does not establish whether a remote
+charge occurred. Among the seven hidden-failure labels, six completed cold
+validation and failed executed hidden checks. Cell~005 (installer, A, 104729)
+instead passed 28/28 public checks but collected zero hidden assertions and
+ended with an import-name failure. It is incomplete hidden validation, neither
+an observed hidden behavioral assertion failure nor a demonstrated external
+infrastructure fault. Its original label and zero useful credit are preserved;
+no candidate, test, or failed request was revised and rerun.
+
+\paragraph{Measured time and unavailable costs.}
+The provider-child, HTTP-wrapper, and signed proposal-gateway clocks each cover
+32/32 cells. Their medians are 472.777, 473.660, and 474.107 seconds,
+respectively. The 14 deadline cells are resource-unqualified under the frozen
+measured predicates; configured caps do not imply that every measured duration
+complied. Scoring-gateway time is available for 16/32 cells, with a median of
+2.500 seconds across those invocations, including the incomplete validation.
+Only one of eight families has complete scoring-time observations for both
+repetitions of both arms. The frozen policy therefore leaves the paired
+scoring-cost interval unavailable instead of imputing zeros or bootstrapping
+fewer families. Grant-to-terminal duration includes waiting and bookkeeping:
+its median is 603.644 seconds and its maximum 10,938.574 seconds. These intervals
+overlap and are not summed. API usage is reported for 16/32 cells; settlement
+is unavailable for all 32. No dollar total, complete effort cost, or net
+efficiency gain is established.
+
+\paragraph{Runtime and accounting deviations.}
+The original lease ended during cell~007. Its consumed failure and unknown
+signal sender remain recorded; a prospectively admitted continuation covers
+only cells~008--032, with separately identified executable sources. The original
+requests, order, limits, and analysis policy remain fixed. The 26 additive
+disclosures also preserve pre-effect launch errors, bookkeeping takeovers,
+diagnostic corrections, and interrupted operator work. Cell~027 had sufficient
+credential headroom at its metadata check but only 895.290 seconds at the
+later reservation, below the intended 900-second margin; exact POST time is
+unobserved. Cell~029's delayed bookkeeping enlarges its grant-to-terminal clock
+without creating another scientific trial. Outer invocation durations and
+work after signed-gateway clock sampling retain separate scopes and missingness. They are not added
+to the signed gateway interval or treated as measured AI reasoning effort.
+
+\paragraph{Evidence and comparison limits.}
+Fifteen failed proposals lacked original candidate-binding files. Their later
+unsigned sidecars describe the unchanged public inventory and an empty patch;
+they are derived metadata, not returned model edits, recovered original files,
+or successful candidates. The four-family developmental pilot remains separate:
+its 24 cells yielded ten historical useful labels, five per arm, with retained
+timing deviations rather than retrospective final-policy compliance.
+Earlier boundary evidence in Table~\ref{tab:boundary-history} is also separate
+from final repair outcomes. The ablation scope in
+Table~\ref{tab:withdrawn-comparisons} records unmeasured or withdrawn endpoints.
+C/D routing, warm-cache reuse, publication efficacy, and the original
+sixteen-family inferential objectives are not evaluated by these 32 cells.

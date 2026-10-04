@@ -1,0 +1,8 @@
+\begin{figure}[ht]
+\centering
+\fbox{\parbox{0.88\linewidth}{\centering Source text, provenance, and retrieved context\\deterministic compilation into typed, profile-indexed IR}}\\$\downarrow$\\
+\fbox{\parbox{0.88\linewidth}{\centering Symbolic evaluation\\source-withheld reconstruction; structural checks; native proof checking\\retrieval and model proposals provide candidates for checking}}\\$\downarrow$\\
+\fbox{\parbox{0.88\linewidth}{\centering Learned representations and isolated feedback\\source-conditioned embedding projection; separate proof-priority heads}}\\$\downarrow$\\
+\fbox{\parbox{0.88\linewidth}{\centering Qualified consumers and repair\\executed here: immutable checks with learned ordering and rollback;\\a separately selected executable exception-scoping repair}}
+\caption{Architectural overview. Information-flow contracts connect compilation, reconstruction, assistance, and learning. The experiments exercise these components separately; the diagram does not imply an automatically activated end-to-end source-to-proof system.}
+\end{figure}

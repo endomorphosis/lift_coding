@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering\small
+\caption{Native representation and reconstruction outcomes. A and C share structural checks on the 100-source subset. B uses its stricter native deontic contract; its whole-call timeouts cannot be assigned to a cycle phase. Counts are not source-semantic accuracy.}
+\label{tab:pipeline-results}
+\begin{tabular}{lrrrrr}\toprule
+Method & Units & IR passes & Nonempty & Exact cycle & Cycle timeout\\\midrule
+Native B & 1913 & 32 & 32 & 26 & \textemdash\\
+Native C & 1913 & 1913 & 1893 & 0 & 809\\
+Repaired C (T5) & 1913 & 1913 & 1893 & 0 & 911\\
+\midrule
+Direct model A & 100 & 62 & 53 & 0 & 0\\
+Native C, same subset & 100 & 100 & 99 & 0 & 44\\
+\bottomrule
+\end{tabular}
+\end{table}

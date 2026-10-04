@@ -1,0 +1,25 @@
+{
+  "ancestral_training": [],
+  "ancestry_complete": true,
+  "native_records": [],
+  "schema": "codebase-ir-corpus-audit-input@1",
+  "units": [
+    {
+      "content_sha256": "7b352ea89b7a4adbedf14c117d9ebb458d4af8e9209b419774b7b0515c1604b5",
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final:renamed-ancestor",
+      "path": "renamed_step.py",
+      "related_revisions": [
+        "native/sha256:af5c1a90f38ac36f0f0955e28e07209359d09a7e30c82b532884468a007f730f/training_targets/0"
+      ],
+      "repository_id": "qualification:codebase-source-training-20261002",
+      "revision": "fixture:untouched-final@1",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "bytes_hex": "23204e6567617469766520636f6e74726f6c3a20612066696e616c206c6162656c2063616e6e6f7420657261736520616e6365737472616c20747261696e696e67206578706f737572652e0a6465662073746570286e3a20696e7429202d3e20696e743a0a2020202072657475726e206e202b20310a"
+      }
+    }
+  ]
+}

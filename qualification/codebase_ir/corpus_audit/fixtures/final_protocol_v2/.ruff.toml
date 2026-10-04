@@ -1,0 +1,4 @@
+# These captured unsupported examples deliberately retain unresolved calls.
+[lint.per-file-ignores]
+"source/dependency_consumer.py" = ["F821"]
+"source/unsupported_call.py" = ["F821"]

@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering\small
+\caption{Measured execution costs. Concurrent per-record intervals are sums, not end-to-end elapsed time or CPU time. Model request intervals exclude model loading. These scopes must not be added to enclosing job intervals.}
+\label{tab:execution-costs}
+\begin{tabular}{lrl}\toprule
+Stage & Seconds & Scope\\\midrule
+Native B, complete cohort & 7332.8 & sum of record intervals\\
+Native C, complete cohort & 13598.6 & sum of record intervals\\
+Repaired C, complete cohort & 14100.6 & sum of record intervals\\
+Leanstral, 64 proof calls & 259.9 & inference requests\\
+Direct model A, all 100 units & 2953.4 & sum of record intervals\\
+A, 97 returned responses & 2601.9 & returned API response intervals\\
+Learned check-order replay & 50.3 & whole replay job\\
+Full-document MiniLM encoding & 1700.4 & whole encoder job\\
+Projection worker 1, four arms & 3769.9 & worker including preparation\\
+Projection worker 2, four arms & 3839.3 & worker including preparation\\
+\bottomrule
+\end{tabular}
+\end{table}
+The 97 returned natural-source responses account for 98,085 prompt and 30,415 completion tokens; 3 failed requests have no returned token-usage report. Their observed failure wall time is included in the all-record total. The 64 proof calls use 9,470 and 6,056, respectively. Five separate serving-qualification calls use 11.218 request seconds and are excluded from those denominators. A failed chat-template qualification consumed 295.152 seconds of model loading and no model requests. The corrected proof job loaded in 281.246 seconds. The natural-source job loaded in 275.883 seconds, then kept that model warm across client batches under a 10,000-second wall limit. Historical launch arguments show an earlier 900-second envelope; retained runtime-override records identify the superseding limit without relabeling the original log.
+
+The host is an NVIDIA GB10 with 20 logical CPU threads and approximately 128 GB of unified memory. Compiler jobs use bounded worker pools; each worker has a 4 GiB virtual-address limit. The Python runtime is 3.12.3, spaCy 3.8.14 with en\_core\_web\_sm 3.8.0, and NumPy 1.26.4. Exact runtime, model, source, code, and observation hashes are retained in the supplement. Full-document encoding covers 19,955 windows and 4,819,558 tokens, using 1656.6 process-CPU seconds. The two projection workers use 6428.9 process-CPU seconds in total, including all four independently computed arms and shared source-feature preparation. Concurrent worker wall intervals are not summed as end-to-end elapsed time.

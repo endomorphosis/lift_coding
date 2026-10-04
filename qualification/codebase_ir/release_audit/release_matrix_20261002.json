@@ -1,0 +1,135 @@
+{
+  "ledger": {
+    "path": "docs/architecture/repository_proof_index_backlog_status.json",
+    "repository": "accelerate",
+    "sha256": "deaa08bfcda1367427a7f5165f5bcd4adeebbc89b932e648d58333599ed4100c"
+  },
+  "local_documents": [
+    {
+      "kind": "task_table",
+      "name": "current_todo",
+      "observed_path": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/architecture/repository_proof_index_and_codebase_ir.todo.md",
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_parallel_qualification/release_audit/release-matrix-inputs-20261002-01/current_todo.md",
+      "sha256": "9a04ac23336265bc508d06b049110b4e71d39bf89a6742cea1e7638ef3d578b1",
+      "size_bytes": 68569,
+      "source_basis": "retained_working_observation"
+    },
+    {
+      "kind": "context",
+      "name": "current_roadmap",
+      "observed_path": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_ROADMAP.md",
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_parallel_qualification/release_audit/release-matrix-inputs-20261002-01/current_roadmap.md",
+      "sha256": "f584f345efc6a46d9c293ef6ca03b84eaf9da5a32d2021601f81953497c9f545",
+      "size_bytes": 72727,
+      "source_basis": "retained_working_observation"
+    }
+  ],
+  "released_documents": [
+    {
+      "name": "progress",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_PROGRESS.md",
+      "repository": "accelerate",
+      "sha256": "0c122cada261c08fe659686e9a58a4ac75c933906273e4d572cd801ce8ce442d"
+    },
+    {
+      "name": "todo",
+      "path": "docs/architecture/repository_proof_index_and_codebase_ir.todo.md",
+      "repository": "accelerate",
+      "sha256": null
+    },
+    {
+      "name": "roadmap",
+      "path": "docs/architecture/REPOSITORY_PROOF_INDEX_AND_CODEBASE_IR_ROADMAP.md",
+      "repository": "accelerate",
+      "sha256": null
+    }
+  ],
+  "repositories": [
+    {
+      "commit": "8a37a3a81b99be4cc1f8df1143f308a3b7d1875e",
+      "name": "accelerate",
+      "package_roots": [
+        "ipfs_accelerate_py"
+      ],
+      "root": "/home/barberb/lift_coding/external/ipfs_accelerate"
+    },
+    {
+      "commit": "8de37ba8d216cd21a5d7134292de01d9e12c9a56",
+      "name": "datasets",
+      "package_roots": [
+        "ipfs_datasets_py"
+      ],
+      "root": "/home/barberb/lift_coding/external/ipfs_datasets"
+    }
+  ],
+  "schema": "codebase-ir-release-matrix-input@1",
+  "selected_evidence": [
+    "behavioral-native-supervision",
+    "behavioral-repository-admission",
+    "behavioral-v2-planning",
+    "budgeted-repository-preparation",
+    "dirty-paged-staging-native",
+    "finite-cache-correspondence-manifest",
+    "finite-checked-cache",
+    "finite-native-evidence-manifest",
+    "finite-native-final",
+    "finite-native-owned-file-scope",
+    "finite-native-summary",
+    "foundation-cache-tests-junit",
+    "foundation-cache-tests-log",
+    "foundation-selected-port-manifest",
+    "foundation-tests-junit",
+    "foundation-tests-log",
+    "independent-successor-context",
+    "joined-source-evidence-matrix",
+    "ledger-bookkeeping-audit",
+    "logic-family-portfolio-implementation",
+    "managed-preparation-worker-integration",
+    "native-ducklake-history",
+    "native-intent-codebase-catalog",
+    "native-training-lifecycle",
+    "nested-durable-resources",
+    "paged-staging-evidence-manifest",
+    "paged-staging-native-comparison",
+    "paged-staging-native-final",
+    "paged-staging-tests-junit",
+    "paged-staging-tests-log",
+    "pinned-parent-runtime",
+    "pipeline-lifecycle-cap",
+    "planning-contract-prerequisites",
+    "prior-centered-continuation",
+    "profile-acceptance-manifest",
+    "profile-acceptance-qualification",
+    "proof-cache-checksums-json",
+    "proof-cache-source-inventory-json",
+    "proof-cache-summary-json",
+    "proof-cache-tests-log",
+    "proof-cache-tests-xml",
+    "protected-pipeline-resources",
+    "public-context-manifest",
+    "public-context-native",
+    "repository-shards-resident-inference",
+    "resource-worker-delegation",
+    "reviewed-population-final-catalog",
+    "reviewed-task-population-admission",
+    "reviewed-task-population-native-attempt",
+    "scan-policy-manifest",
+    "semantic-manifest-evidence",
+    "semantic-manifest-qualification",
+    "semantic-supervision",
+    "shared-host-resource-bridge",
+    "source-federation-implementation",
+    "source-parser-replay",
+    "source384-acceptance",
+    "source384-qualified-02",
+    "strict-training-generation",
+    "typed-code-evidence",
+    "typed-intent-evidence",
+    "worker-contract-prerequisites"
+  ],
+  "snapshot": {
+    "root": "/home/barberb/lift_coding/artifacts/codebase_ir_parallel_qualification/release_audit/admission-retained-supplement-snapshot-20261002-01/snapshots/generation-000",
+    "sha256": "c0dfa09657489dec8ab14cf6a3700151f8b181904f5c1da091ccf98efc08deae"
+  },
+  "source_profiles": []
+}

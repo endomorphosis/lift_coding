@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering\small
+\caption{Source-conditioned embedding reconstruction on 1,913 held-out units. T3 reuses exactly tied decoder values. The decoder has no demonstrated compression bottleneck; identity copying is exact by construction. The supplemental constant mean uses only 69 training vectors.}
+\label{tab:training-results}
+\begin{tabular}{llrr}\toprule
+Condition & Seed & Mean cosine & Mean MSE\\\midrule
+T0 fixed cold projection & fixed & 0.1961 & 0.002527\\
+T1 sample memory & three seeds & 0.1961 & 0.002527\\
+T2 shared parameters & 104729 & 0.5599 & 0.001823\\
+T2 shared parameters & 130363 & 0.5599 & 0.001823\\
+T2 shared parameters & 155921 & 0.5599 & 0.001823\\
+T3 isolated proof heads & tied to T2 & same as T2 & same as T2\\
+Training-mean control & supplemental & 0.5381 & 0.002406\\
+Identity-copy control & analytic & 1.0000 & 0.000000\\
+\bottomrule
+\end{tabular}
+\end{table}

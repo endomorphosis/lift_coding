@@ -1,0 +1,90 @@
+\section{Models, tools, and research assets}
+\label{app:llm}
+\subsection{Executed model assistance}
+The proof and direct-formalization experiments use Leanstral-1.5-119B-A6B,
+with a locally cached NVFP4 GGUF quantization~\citep{mistralai2026leanstral,frosty402026leanstralnvfp4}. The file contains
+67,135,119,264 bytes. Its tokenizer requires the v15 message format; the
+GGUF does not supply a chat template, so we provide and hash the template
+explicitly. The natural-source model stayed loaded across client batches under a
+10,000-second wall limit and stopped after all 100 attempts completed. The earlier
+proof jobs used 900-second wall envelopes. Serving
+qualification checks the rendered instruction and
+reasoning-setting tokens and a single beginning-of-sequence token before
+inference. We use reasoning effort \texttt{none}, temperature zero, fixed
+seeds, one request per item, and the token and wall budgets in the main text.
+This evaluates a bounded direct-proposal interface rather than the model's
+published agentic configuration. Prompt text, responses, finish reasons,
+token counts, and native proof decisions are retained in the evidence.
+The natural-source prompt includes the registered operator vocabulary and
+an exact JSON schema. It never includes a compiler candidate or a semantic
+reference answer. All 100 natural prompts passed tokenizer-level context
+budget checks before the first request.
+
+Native proof checking uses Lean 4.33.1 with fixed declarations. Z3 4.15.4
+and CVC5 1.3.3 provide candidate first-order dispositions; native Lean
+reconstruction remains mandatory. The learned check-order consumer uses
+separate schema and provenance checks, not a proof kernel. Software agents
+independently inspected and qualified code boundaries; that engineering
+review is not human annotation of legal meaning.
+
+One earlier constructed development call used the served model
+\texttt{grok-4.6} through the xAI API, with 821 prompt and 54 completion
+tokens. A Codex \texttt{gpt-5.6-terra} fallback at high reasoning effort was
+configured but not invoked for that call. It is excluded from all current
+natural-source and 64-goal denominators. Agent assistance was also used for
+implementation, experiment orchestration, code inspection, manuscript
+editing, and citation checks. Authors remain responsible for the claims.
+
+\subsection{Embedding model and learned states}
+\label{app:llm-minilm}
+The complete-document source encoder is
+\texttt{sentence-transformers/all-MiniLM-L6-v2}~\citep{sentence_transformers2026minilm}, revision
+\texttt{1110a243fdf4706b3f48f1d95db1a4f5529b4d41}, loaded locally with
+remote code disabled. Its 90,868,376-byte safetensors file has SHA-256
+\texttt{53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db}.
+We tokenize without truncation, divide content into 254-token windows,
+apply attention-mask mean pooling and L2 normalization per window, and
+form a content-token-weighted document average with final L2 normalization.
+Inference uses float32 on two CPU threads. All 15 selection vectors match
+the retained training-era encoder outputs exactly.
+
+The adaptive states are distinct from the pretrained MiniLM encoder. We
+recover three memory-only states, three shared-parameter states, and three
+matched proof-head states. Extraction verifies each original state hash;
+large numerical arrays are preserved as exact float64 values. Prediction
+uses a fixed training-derived view alphabet, \texttt{deontic.ir} and
+\texttt{knowledge\_graphs.neo4j\_compat}. The modality and view classifiers
+have empty learned tables. Reconstruction bypasses the legacy
+target-guided helper. T3's protected reconstruction state is identical to
+its paired T2 state; only the separate proof-head path is evaluated anew.
+
+\subsection{Assets and reproduction scope}
+\label{app:assets}
+The legal cohort comes from \texttt{justicedao/patent-legal-corpus},
+revision \texttt{86c77cb650d30ee366983d1b2e25cd85e8c22e34}. Upstream records
+declare reviewed, redistributable U.S.\ government works, and the dataset
+card declares CC0-1.0. We retain those declarations without asserting a
+new legal determination. The pinned MiniLM, upstream Leanstral, and NVFP4
+model cards each declare Apache-2.0. No code-licensing risk cohort is included in the
+natural-source results. The supplement identifies public model versions,
+source-unit hashes, normalization, aliases, and component membership.
+
+The anonymous ZIP contains per-unit metric observations and scripts that
+regenerate reported counts, intervals, and tables, together with fixed
+protocols and proof-checking evidence. Multi-gigabyte learned states and
+the full external runtime are not shipped in that package. Thus table
+reproduction from measured observations is supported; a complete fresh
+inference run additionally needs the identified states and runtime. Their
+hashes identify exact inputs but are not an anonymous download service.
+
+\subsection{Broader impacts}
+\label{app:impacts}
+Structured formalization can make missing approvals, incomplete audit
+conditions, or inconsistent premises easier to inspect. Its principal
+risk is misplaced authority: a structurally valid formula or accepted
+proof can be presented as a correct interpretation of a legal or security
+requirement. We report the scope of each check, preserve abstention and
+failure, and make no independent source-fidelity claim. Such tools should
+support inspection of explicit system requirements rather than substitute
+for accountable interpretation or justify monitoring beyond the declared
+task.

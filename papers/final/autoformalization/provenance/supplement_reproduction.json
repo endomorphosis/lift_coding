@@ -1,0 +1,73 @@
+{
+  "all_payload_hashes_match": true,
+  "all_component_reproductions_passed": true,
+  "tables_exact_match": [
+    {
+      "name": "empirical_assistance.tex",
+      "sha256": "f5ae42a35f89be694e59e50963d71f21265bd8b0dbeba610be02f312e00be8d5"
+    },
+    {
+      "name": "empirical_execution.tex",
+      "sha256": "faf7b9c1d798333b1c665899c74ab38e27c560242a1f47b37c3605d371665a84"
+    },
+    {
+      "name": "empirical_learning.tex",
+      "sha256": "7b54b0a0f867a6e22d46de516d2f280838b17dce56c7e33dc31f48bd2192af9a"
+    },
+    {
+      "name": "empirical_learning_discussion.tex",
+      "sha256": "7825d85e02949ddfe967fdcd90db25822757eb3a53cfb981785a84e998f8be7d"
+    },
+    {
+      "name": "empirical_numbers.tex",
+      "sha256": "39489d33cb71c5ec158a0381ee24293c6fca0db01b4aef3af83e7c8e854f87ed"
+    },
+    {
+      "name": "empirical_pipeline.tex",
+      "sha256": "a8c0f16a0ae6bd759a4731bb7bb981b28092ae6e7153e3436330b2dd6b548e0b"
+    },
+    {
+      "name": "empirical_pipeline_discussion.tex",
+      "sha256": "d361a88cc1ff60a2be10c8d469d3eaa9314d1bf2796895ab2d1036ea9aa156b2"
+    }
+  ],
+  "proof_replay_requested": true,
+  "runs": [
+    {
+      "component": "pipeline",
+      "returncode": 0,
+      "output": "{\"native_aggregate_exact_match\": true, \"sources\": 1913, \"native_arm_attempts\": 5739, \"bootstrap_draws\": 10000, \"model_calls\": 0}\n"
+    },
+    {
+      "component": "autoencoder",
+      "returncode": 0,
+      "output": "{\"status\": \"PASS\", \"sources\": 1913, \"arms\": 11, \"output\": \"/tmp/af-reproduction-1cjo8rz7/autoencoder\"}\n"
+    },
+    {
+      "component": "guidance",
+      "returncode": 0,
+      "output": "{\"exact_summary_match\": true, \"counts\": {\"records\": 5739, \"C_compiled\": 5739, \"nonempty_candidates\": 5679, \"learned_consumptions\": 5739, \"order_changes\": 5739, \"outcomes_unchanged\": 5739, \"rollback_passed\": 5739, \"all_structural_checks_pass\": 5739, \"eligible_nonempty_checked_candidates\": 5679, \"actual_check_calls\": 34434, \"check_execution_errors\": 0}}\n"
+    },
+    {
+      "component": "natural",
+      "returncode": 0,
+      "output": "{\n  \"passed\": true,\n  \"verified_manifest_files\": 451,\n  \"unchanged_formula_bodies\": 241,\n  \"counts\": {\n    \"planned\": 100,\n    \"attempted\": 100,\n    \"statuses\": {\n      \"response_rejected\": 26,\n      \"measured\": 71,\n      \"request_failed\": 3\n    },\n    \"responses\": 97,\n    \"complete_responses\": 97,\n    \"formats_accepted\": 71,\n    \"structural_and_provenance_pass\": 62,\n    \"nonempty_eligible\": 53,\n    \"empty_valid\": 9,\n    \"formula_count\": 196,\n    \"exact_nonempty_cycles\": 0,\n    \"cycles_measured\": 62,\n    \"cycle_statuses\": {\n      \"not_attempted\": 29,\n      \"measured\": 62,\n      \"not_eligible_invalid_structure_or_span\": 9\n    },\n    \"inference_wall_seconds\": 2601.8607409583637,\n    \"total_record_wall_seconds\": 2953.3761081137927,\n    \"prompt_tokens\": 98085,\n    \"completion_tokens\": 30415\n  },\n  \"model_calls\": 0,\n  \"native_checker_reexecution\": false,\n  \"semantic_fidelity_established\": false\n}\n"
+    },
+    {
+      "component": "proof",
+      "returncode": 0,
+      "output": "{\n  \"passed\": true,\n  \"exact_primary_summary_match\": true,\n  \"attempted_goals\": 64,\n  \"valid_goals\": 32,\n  \"invalid_goals\": 32,\n  \"families\": 8,\n  \"family_bootstrap_draws\": 2000,\n  \"model_calls\": 0,\n  \"native_checker_calls\": 0,\n  \"primary_model_valid_accepted\": 12,\n  \"separate_historical_qualification_calls\": 5,\n  \"separate_qualification_inference_seconds\": 11.217617183108814,\n  \"scope\": \"Recorded primary outcomes and exact bootstrap only. Post-hoc additional acceptances remain excluded; no independent proof replay or semantic evaluation.\"\n}\n"
+    },
+    {
+      "component": "af-final-supplement-vmnxtpra",
+      "returncode": 0,
+      "output": "{\"sources\": 1913, \"direct_model_sources\": 100, \"guidance_source_seed_pairs\": 5739, \"constructed_proof_goals\": 64}\n"
+    },
+    {
+      "component": "proof",
+      "returncode": 0,
+      "output": "{\"goal_id\": \"new.natural_order.2.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.premise_chain.1.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.integer_code.3.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.dependent_type.2.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.dependent_type.0.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.natural_order.3.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.dependent_type.3.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.integer_code.2.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.integer_code.0.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.integer_code.1.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.natural_order.0.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n{\"goal_id\": \"new.dependent_type.1.valid\", \"arm\": \"primary_model\", \"accepted\": true}\n"
+    }
+  ],
+  "fresh_model_inference_performed": false
+}

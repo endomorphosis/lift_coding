@@ -1,0 +1,28 @@
+{
+  "schema": "measured-paper-table-generation/v1",
+  "inputs_sha256": {
+    "pipeline/summary.json": "f691a0e4e68bdab65c25f6070a3ea58b2173ef0637747f60dc0bf44fc1c7335c",
+    "autoencoder/final/summary.json": "f377273058ad5876a1bddcdbc7ea352ebc15efed8aad6a7bd63f2d9d448bf7a4",
+    "guidance/final_join/summary.json": "b30db1b424d3f2756ff27bdee2b306fbef6251959f710ea19c08890d84793758",
+    "assistance/natural_summary.json": "50e8d478f3bc414b821bcd77dc9ebf77f48a03348ea13070dac35295d1fc320a",
+    "assistance/summary.json": "0605ad7d9b1d29f9348585fd4cbfcbc438b33272b411c6ddc9b14a9a42b3c74e",
+    "assistance/paper_ready_numbers.json": "973e02d22904654b70682c5f8db9455aa3e879fdb5f7dd0713d9c954388bb89b",
+    "autoencoder/final/source_embeddings.jsonl.receipt.json": "d620a6a1d7c89f58d61451384402940e9cdbb43ccc252934c12944ee1adb9c51"
+  },
+  "generator_sha256": "5ff0f7c25f3b07715898cad2d637eda83ad626049862c14b8b7b4bd952aefc18",
+  "outputs_sha256": {
+    "empirical_numbers.tex": "39489d33cb71c5ec158a0381ee24293c6fca0db01b4aef3af83e7c8e854f87ed",
+    "empirical_pipeline.tex": "a8c0f16a0ae6bd759a4731bb7bb981b28092ae6e7153e3436330b2dd6b548e0b",
+    "empirical_pipeline_discussion.tex": "d361a88cc1ff60a2be10c8d469d3eaa9314d1bf2796895ab2d1036ea9aa156b2",
+    "empirical_learning.tex": "7b54b0a0f867a6e22d46de516d2f280838b17dce56c7e33dc31f48bd2192af9a",
+    "empirical_learning_discussion.tex": "7825d85e02949ddfe967fdcd90db25822757eb3a53cfb981785a84e998f8be7d",
+    "empirical_assistance.tex": "f5ae42a35f89be694e59e50963d71f21265bd8b0dbeba610be02f312e00be8d5",
+    "empirical_execution.tex": "faf7b9c1d798333b1c665899c74ab38e27c560242a1f47b37c3605d371665a84"
+  },
+  "complete_denominators": {
+    "sources": 1913,
+    "direct_model_sources": 100,
+    "guidance_source_seed_pairs": 5739,
+    "constructed_proof_goals": 64
+  }
+}

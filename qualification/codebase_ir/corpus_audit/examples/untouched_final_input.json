@@ -1,0 +1,38 @@
+{
+  "ancestral_training": [],
+  "ancestry_complete": true,
+  "native_records": [],
+  "schema": "codebase-ir-corpus-audit-input@1",
+  "units": [
+    {
+      "content_sha256": "c444e99ef87a131fe98748423f2ed7f17255267adcc3095c66e1cdf4b0a8a35c",
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final:boundary-sign",
+      "path": "boundary_sign.py",
+      "related_revisions": [],
+      "repository_id": "qualification:codebase-source-training-20261002",
+      "revision": "fixture:untouched-final@1",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "bytes_hex": "64656620626f756e646172795f7369676e2876616c75653a20696e7429202d3e20696e743a0a2020202069662076616c7565203c202d373a0a202020202020202072657475726e202d310a2020202069662076616c7565203e2031333a0a202020202020202072657475726e20310a2020202072657475726e20300a"
+      }
+    },
+    {
+      "content_sha256": "08695331f022d643812221d8b65dd309d802c5ae18deccd08adbc181cb88241a",
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final:closed-interval",
+      "path": "closed_interval.py",
+      "related_revisions": [],
+      "repository_id": "qualification:codebase-source-training-20261002",
+      "revision": "fixture:untouched-final@1",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "bytes_hex": "64656620696e5f636c6f7365645f696e74657276616c2876616c75653a20696e742c206c6f7765723a20696e742c2075707065723a20696e7429202d3e20626f6f6c3a0a2020202072657475726e206c6f776572203c3d2076616c756520616e642076616c7565203c3d2075707065720a"
+      }
+    }
+  ]
+}

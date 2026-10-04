@@ -1,0 +1,23 @@
+{
+  "ancestral_training": [],
+  "ancestry_complete": true,
+  "native_records": [],
+  "schema": "codebase-ir-corpus-audit-input@1",
+  "units": [
+    {
+      "content_sha256": "44aac74d063b159265ff14acb36609c11f6822146c8934eb1868899477366dd4",
+      "dependencies": [],
+      "dependencies_complete": true,
+      "id": "final:train-helper",
+      "path": "train_helper_consumer.py",
+      "related_revisions": [],
+      "repository_id": "qualification:codebase-source-training-20261002",
+      "revision": "fixture:untouched-final@1",
+      "revision_relations_complete": true,
+      "role": "final",
+      "source": {
+        "bytes_hex": "66726f6d20747261696e20696d706f727420737465700a0a0a6465662066696e616c5f636f6e73756d65722876616c75653a20696e7429202d3e20696e743a0a2020202072657475726e20737465702876616c756529202a2031310a"
+      }
+    }
+  ]
+}
