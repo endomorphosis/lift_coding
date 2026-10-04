@@ -131,7 +131,7 @@ def remote_readiness(server, *, exercise_rollback=True):
         connection.close()
 
 
-def serve(database, state_dir, store_id, secret_handle, port=0):
+def serve(database, state_dir, store_id, secret_handle, port=0, *, worker_bootstrap_fd=None):
     database, state_dir = Path(database).expanduser().resolve(), Path(state_dir).expanduser().resolve()
     if not database.is_file():
         raise ValueError("materialize the paper database before starting its owner")
@@ -157,6 +157,14 @@ def serve(database, state_dir, store_id, secret_handle, port=0):
     try:
         identity = server.start()
         started = True
+        if worker_bootstrap_fd is not None:
+            phase = "worker_authority_start"
+            handoff = server.start_supervisor_grant_broker(bootstrap_secret_fd=worker_bootstrap_fd)
+            public["worker_authority"] = {
+                "protocol": "native-typed-task-command/v1",
+                "socket_path": handoff["IPFS_ACCELERATE_AGENT_STATE_OWNER_SOCKET"],
+                "grant_broker_socket": handoff["IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SOCKET"],
+            }
         phase = "initial_local_readiness"
         server.ready()
         phase = "initial_remote_readiness"
@@ -254,8 +262,24 @@ def main():
     parser.add_argument("--store-id", required=True)
     parser.add_argument("--secret-handle", required=True)
     parser.add_argument("--port", type=int, default=0)
+    parser.add_argument("--enable-worker-authority", action="store_true",
+                        help="Require a sealed bootstrap from the hardened parent handoff")
     args = parser.parse_args()
-    return serve(args.database, args.state_dir, args.store_id, args.secret_handle, args.port)
+    descriptor = None
+    if args.enable_worker_authority:
+        _native()
+        from ipfs_accelerate_py.agent_supervisor.runtime.process_security import harden_state_authority_process
+        harden_state_authority_process()
+        raw = os.environ.get("IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SECRET_FD", "")
+        if not raw.isascii() or not raw.isdecimal():
+            raise ValueError("worker authority requires its sealed parent handoff")
+        descriptor = int(raw)
+    try:
+        return serve(args.database, args.state_dir, args.store_id, args.secret_handle, args.port,
+                     worker_bootstrap_fd=descriptor)
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
 
 
 if __name__ == "__main__":
