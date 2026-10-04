@@ -1,0 +1,80 @@
+[
+  {
+    "id": "legal-computer-access",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title18/pdf/USCODE-2024-title18-partI-chap47-sec1030.pdf",
+    "path": "papers/completion/runtime_bootstrap/la004_source_bridge/legal_raw/legal-computer-access.pdf",
+    "size_bytes": 170233,
+    "sha256": "b403c8ea9d052478c35cdcdaa5361ba6ff09d3ca89b129e1bc031c870367ac76",
+    "status": 200,
+    "text_sha256": "d7ad445ec2100cd5e4efb62cd4815fd4dd7b2c209f00d457a419afc2a8e07940",
+    "operative_pattern": "intentionally accesses a computer",
+    "operative_pattern_found": true,
+    "normalization": "pdftotext -raw UTF-8 output; whitespace collapsed for operative pattern only",
+    "normalized_text_sha256": "a7786333c86c80a5ca7b0872a6cf0f28e3ed69c29050204671c2395a7a574405"
+  },
+  {
+    "id": "legal-federal-records-privacy",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title5/pdf/USCODE-2024-title5-partI-chap5-subchapII-sec552a.pdf",
+    "path": "papers/completion/runtime_bootstrap/la004_source_bridge/legal_raw/legal-federal-records-privacy.pdf",
+    "size_bytes": 207511,
+    "sha256": "9a090bb5da1dd4bc151d2fc7651e659c3d56d23fad3932eaedd3f083638ab24a",
+    "status": 200,
+    "text_sha256": "794a0b190d59127f6db11cfbf5f9a29a44248850d6986e5687e33b7e77579912",
+    "operative_pattern": "No agency shall disclose",
+    "operative_pattern_found": true,
+    "normalization": "pdftotext -raw UTF-8 output; whitespace collapsed for operative pattern only",
+    "normalized_text_sha256": "53ddd70a86497df24ee5388d02244e02f0e60814e42a7d5da7facc4a5ef45898"
+  },
+  {
+    "id": "legal-childrens-privacy",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title15/pdf/USCODE-2024-title15-chap91-sec6502.pdf",
+    "path": "papers/completion/runtime_bootstrap/la004_source_bridge/legal_raw/legal-childrens-privacy.pdf",
+    "size_bytes": 140398,
+    "sha256": "39eede5f2f8dffb893574526f158e1c1bb16a3cd2047a6634d770e132b11348b",
+    "status": 200,
+    "text_sha256": "d7166e4aff6f7fbcfec383501dbd19a819955fafc537fffae5023a6eaaaed2c8",
+    "operative_pattern": "unlawful for an operator",
+    "operative_pattern_found": true,
+    "normalization": "pdftotext -raw UTF-8 output; whitespace collapsed for operative pattern only",
+    "normalized_text_sha256": "58b47e9dad18d43726505ffa6538a04fdbcc70279d3841b8faf0259ad34b3de0"
+  },
+  {
+    "id": "legal-access-control-circumvention",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title17/pdf/USCODE-2024-title17-chap12-sec1201.pdf",
+    "path": "papers/completion/runtime_bootstrap/la004_source_bridge/legal_raw/legal-access-control-circumvention.pdf",
+    "size_bytes": 155496,
+    "sha256": "0878ee4ab36ad6fbfcbbc1fb6749ef5242f57a30f21e8119c84498edb05f1aa1",
+    "status": 200,
+    "text_sha256": "2abf13af7a1cc2e0c485a818b328ad05441591c0709bcbc3c8bb859249184364",
+    "operative_pattern": "No person shall circumvent",
+    "operative_pattern_found": true,
+    "normalization": "pdftotext -raw UTF-8 output; whitespace collapsed for operative pattern only",
+    "normalized_text_sha256": "a0e204ede0d0c3e3a70ef522484989ad1ce8d865c74ed03be0e3082ba45bd681"
+  },
+  {
+    "id": "legal-health-information",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/pdf/USCODE-2024-title42-chap7-subchapXI-partC-sec1320d-6.pdf",
+    "path": "papers/completion/runtime_bootstrap/la004_source_bridge/legal_raw/legal-health-information.pdf",
+    "size_bytes": 139247,
+    "sha256": "32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0",
+    "status": 200,
+    "text_sha256": "7ea0ca5d9050d31079e9d36f61a53fa426f5bc08afc28ef79136655dc14c2321",
+    "operative_pattern": "knowingly and in violation",
+    "operative_pattern_found": true,
+    "normalization": "pdftotext -raw UTF-8 output; whitespace collapsed for operative pattern only",
+    "normalized_text_sha256": "279c74a9baa635848c0b193b7ceca7880803011af3cbf621eef009d1b08fb7eb"
+  },
+  {
+    "id": "legal-telecom-confidentiality",
+    "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title47/pdf/USCODE-2024-title47-chap5-subchapII-partI-sec222.pdf",
+    "path": "papers/completion/runtime_bootstrap/la004_source_bridge/legal_raw/legal-telecom-confidentiality.pdf",
+    "size_bytes": 138021,
+    "sha256": "4cc72f64f8f4a6b99809b2da804e90ba00d796f5e91e93d20b35751d21c1072e",
+    "status": 200,
+    "text_sha256": "066e898e4612983b2f1b64495acc8e5e75adace96c19345e8a778b468b62e4cb",
+    "operative_pattern": "duty to protect the confidentiality",
+    "operative_pattern_found": true,
+    "normalization": "pdftotext -raw UTF-8 output; whitespace collapsed for operative pattern only",
+    "normalized_text_sha256": "9a4c305f7f4e801cb3305523c69ddaf3055d718f5fc356d8bd7a6795770a972d"
+  }
+]

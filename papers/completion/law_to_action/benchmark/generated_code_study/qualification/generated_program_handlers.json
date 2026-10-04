@@ -1,0 +1,265 @@
+{
+  "all_constructed_controls_pass": true,
+  "archive_extract_member_implemented": true,
+  "authorize_product_create_request_constructed": true,
+  "candidate_program_executions": 0,
+  "constructed_program_executions": 24,
+  "created_at": "2026-09-14T12:55:11.873321+00:00",
+  "eu_readelf_pin": "/home/barberb/lift_coding/papers/completion/law_to_action/benchmark/generated_code_study/tools/PIN.json",
+  "la030_profile": "bounded-python-syntax-development-v1 allowed_sink/other_sink only",
+  "la030_two_sink_profile_sufficient": false,
+  "model_calls": 0,
+  "native_context_effect_enforcement": "constructed_process_and_network_observers_present",
+  "negative_undeclared_effect_tests": "constructed_partial",
+  "notes": "Constructed interpreter programs exercised lodging, redaction, SQLite, XML, Jinja sandbox, zip ancestor budget, eu-readelf argv-as-one-element, password-route, graph-layout allowlist, catalog authorization, project-name sanitization, local redirect, data-root upload, and 168 skill native-observer controls. Status remains NOT_QUALIFIED: this is not scientific admission and does not execute 900 cells.",
+  "positive_useful_work_tests": "constructed_partial",
+  "required_generated_program_profile": "A model-generated run(payload) program must perform the source-relative useful work. A handler that silently solves the task for a fixed forwarding program does not qualify.",
+  "route_password_input_events_constructed": true,
+  "run_program_implemented": true,
+  "sanitize_generated_project_name_constructed": true,
+  "schema": "la-generated-program-handler-qualification/v1",
+  "scientific_admission": false,
+  "scientific_cells_executed": 0,
+  "select_local_login_redirect_constructed": true,
+  "skill_native_observer_all_pass": true,
+  "skill_native_observer_constructed_controls": 168,
+  "sqlite_query_implemented": true,
+  "status": "PASS",
+  "store_upload_inside_data_root_constructed": true,
+  "strict_syntax_escape_rejection": "PASS",
+  "template_render_implemented": true,
+  "tests": [
+    {
+      "error": null,
+      "id": "legal_lodging_constructed_program_useful_work",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_redact_constructed_program_useful_work",
+      "pass": true
+    },
+    {
+      "error": null,
+      "files": {
+        "records": []
+      },
+      "id": "cve_sqlite_parameterized_lookup_injection_literal",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_sqlite_parameterized_lookup_ordinary",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_xml_unresolved_entity_no_canary",
+      "pass": true,
+      "result": {
+        "literal_note_text": "",
+        "unresolved_entities": [
+          "xxe"
+        ]
+      }
+    },
+    {
+      "id": "strict_syntax_escape_rejection",
+      "pass": true,
+      "rejected": 3
+    },
+    {
+      "id": "silent_solver_handler_does_not_qualify",
+      "notes": "A handler that writes the expected artifact without executing candidate useful work is recorded as disqualifying.",
+      "observed_solver_wrote_expected_without_program_effects": true,
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "undeclared_extra_file_is_observable",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_template_render_ordinary",
+      "network_deltas": [
+        {
+          "effect": "template_render",
+          "network_observed": false,
+          "new_socket_inodes": []
+        }
+      ],
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_template_render_rejects_mutable_container_method",
+      "pass": true,
+      "result": {
+        "error": "SecurityError",
+        "items_after": []
+      }
+    },
+    {
+      "error": null,
+      "id": "cve_archive_extract_within_ancestor_budget",
+      "pass": true,
+      "result": {
+        "bytes": 14,
+        "decision": "extract",
+        "files": [
+          "a.txt"
+        ],
+        "remaining_depth": 0,
+        "remaining_files": 21
+      }
+    },
+    {
+      "error": null,
+      "id": "cve_archive_deny_exhausted_ancestor_budget",
+      "pass": true,
+      "result": {
+        "decision": "deny",
+        "files": [],
+        "reason": "recursion_limit"
+      }
+    },
+    {
+      "error": null,
+      "id": "cve_elf_eu_readelf_literal_argv",
+      "network_deltas": [
+        {
+          "effect": "run_program",
+          "network_observed": true,
+          "new_socket_inodes": [
+            "tcp:508138820",
+            "tcp:508143652"
+          ]
+        }
+      ],
+      "pass": true,
+      "spawn": {
+        "argv_from_program": [
+          "eu-readelf",
+          "-d",
+          "inputs/sample.so"
+        ],
+        "executed_argv": [
+          "/home/barberb/lift_coding/papers/completion/law_to_action/benchmark/generated_code_study/tools/eu-readelf",
+          "-d",
+          "/tmp/la032-handler-508nkre3/world/files/inputs/sample.so"
+        ],
+        "path_was_one_argv_element": true,
+        "pid": 1011903,
+        "returncode": 0,
+        "shell": false,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "d2093a4e0ca10546030cff3131eea41aad37f5f8dcd1202efb13da4d421df53f",
+        "textrel": false
+      }
+    },
+    {
+      "error": null,
+      "id": "cve_elf_semicolon_is_one_argv_element",
+      "pass": true,
+      "spawn": {
+        "argv_from_program": [
+          "eu-readelf",
+          "-d",
+          "inputs/sample;marker.so"
+        ],
+        "executed_argv": [
+          "/home/barberb/lift_coding/papers/completion/law_to_action/benchmark/generated_code_study/tools/eu-readelf",
+          "-d",
+          "/tmp/la032-handler-xorrgjf_/world/files/inputs/sample;marker.so"
+        ],
+        "path_was_one_argv_element": true,
+        "pid": 1011960,
+        "returncode": 0,
+        "shell": false,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "d2093a4e0ca10546030cff3131eea41aad37f5f8dcd1202efb13da4d421df53f",
+        "textrel": false
+      }
+    },
+    {
+      "error": "ProgramError: ProgramError: run_program allowlist is eu-readelf -d <path> as one argv list",
+      "id": "cve_elf_extra_argv_rejected",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_route_ordinary_input_method",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_route_password_pass_through",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_graph_plain_dot_without_subprocess",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_graph_rejects_unlisted_layout_touch",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_product_create_requires_administrator",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_product_create_denied_without_administrator",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_sanitize_project_name_ordinary",
+      "pass": true
+    },
+    {
+      "error": null,
+      "files": [
+        "outputs/escape-client",
+        "public/result.json"
+      ],
+      "id": "cve_sanitize_project_name_strips_traversal",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_redirect_preserves_relative",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_redirect_rejects_external",
+      "pass": true
+    },
+    {
+      "error": null,
+      "id": "cve_upload_inside_data_root",
+      "pass": true
+    },
+    {
+      "error": null,
+      "files": [
+        "public/result.json"
+      ],
+      "id": "cve_upload_rejects_parent_escape",
+      "pass": true
+    }
+  ],
+  "unimplemented_required_operations": {
+    "exact_commit_license_inventory": "Trape remains MISSING_RECOGNIZED_LICENSE after exact-commit README/trape.py/core/static/templates/requirements inspection; declared package licenses remain UNINVENTORIED",
+    "scientific_admission": "constructed controls are not family admission or 900-cell execution",
+    "worker_image_host_observer": "pending; constructed FixtureEffects observers are not the pinned worker-image host observer"
+  },
+  "write_graph_with_layout_allowlist_constructed": true,
+  "xml_parse_implemented": true
+}

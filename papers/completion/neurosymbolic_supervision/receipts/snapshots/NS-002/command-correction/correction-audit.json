@@ -1,0 +1,43 @@
+{
+  "schema": "paper-command-receipt-correction-audit/v1",
+  "started_at": "2026-09-11T17:07:22.257053+00:00",
+  "finished_at": "2026-09-11T17:07:26.553454+00:00",
+  "integration_commit": "21441b56d03f7381cdd673b1cf7e97a8f36466bb",
+  "original_receipt_sha256": "c426086270cd7cda71cf244c3cbe78e377cc557f47a19ec9ffa9b3fa79c7dda5",
+  "original_completed_at": "2026-09-11T17:08:00+00:00",
+  "historical_timestamp_problem": "Original receipt claimed 17:08Z although native merge and read-only observation occurred before 17:00Z; it is preserved, not backdated.",
+  "correction": "Replace completed_at with actual correction completion; bind exact recovered stdin programs to fresh replay logs and concrete environment values.",
+  "historical_program_source": {
+    "log_sha256": "637f7b88d14f5483d50292726bb18c29488756d3908bed37b0a2561b197468b8",
+    "first_line": 7220
+  },
+  "replay_context_changes": "Independent frozen export, new concrete HOME; installation disabled and bytecode writes disabled. Source programs are exact extracted historical stdin.",
+  "replays": [
+    {
+      "name": "import-probe",
+      "stdout_sha256": "1b53899764bc0d90e99da3463e43113666f0619d7a90427f4e6fd01b3d25d9e2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "started_at": "2026-09-11T17:07:25.992832+00:00",
+      "finished_at": "2026-09-11T17:07:26.516000+00:00",
+      "exit_code": 0
+    },
+    {
+      "name": "preliminary-arithmetic",
+      "stdout_sha256": "104b5cd9404c6480082d3f22e5e3106ae16edbccef919d3f1cf6b070d8eafdf2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "started_at": "2026-09-11T17:07:26.516271+00:00",
+      "finished_at": "2026-09-11T17:07:26.552937+00:00",
+      "exit_code": 0
+    }
+  ],
+  "import_result_and_source_hash_match_except_workspace_paths": true,
+  "preliminary_arithmetic_matches_historical_log": true,
+  "source_crosschecks": 13,
+  "original_snapshots_preserved": true,
+  "scientific_outputs_changed": false,
+  "live_database_mutated": false,
+  "live_worktree_mutated": false,
+  "provider_invoked": false,
+  "new_benchmark_executed": false,
+  "limitation": "Recomputes arithmetic over existing raw artifacts and repeats import probes; no measured prover timing or live model receipt is created."
+}

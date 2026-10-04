@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-09-11T18:48:03.215710+00:00",
+  "source_sha256": {
+    "run.py": "5c454f0d6060d9682330ed0d9ab98f75d2c0f7f74d7609804b95e2da5d7eadd0",
+    "handlers/effects.py": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b"
+  },
+  "internally_matching_wrong_payload_and_journal": {
+    "journal_consistent": true,
+    "observed_effect_count": 1,
+    "requested_postcondition_match": false,
+    "measurement_match": false,
+    "allowed_work_credit": 0
+  },
+  "nonzero_exit_with_correct_postcondition_rejected": true,
+  "scope": "pure reviewer fixture only; no provider or empirical benchmark; temporary state cleaned"
+}

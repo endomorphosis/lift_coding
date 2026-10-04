@@ -1,0 +1,169 @@
+{
+  "access_gate_requirement": "Retain an actual scoped-provider mount/network qualification and trusted pinned role-admission checks before criterion 3 is marked met. Gate implementation alone is insufficient; future runner activation must fail closed until integration.",
+  "af002_frozen_protocol_matches_current_files": true,
+  "af004_inventory_reading": "No positive per-domain minimum is declared for this checkpoint. Unqualified coding/implementation/trace inventory entries are permissible; empirical claims and acquisition/provenance work remain pending without narrowing full scope.",
+  "committed_files": {
+    "papers/completion/autoformalization/config/experiment_plan.json": {
+      "bytes": 13390,
+      "sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c"
+    },
+    "papers/completion/autoformalization/data/corpus_manifest.json": {
+      "bytes": 6890,
+      "sha256": "52eef2182d4de20b43822694a03e55e12864d76ced6b5d8b0ef81221d0a89104"
+    },
+    "papers/completion/autoformalization/data/splits.json": {
+      "bytes": 5027,
+      "sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27"
+    },
+    "papers/completion/autoformalization/data/teacher_manifest.json": {
+      "bytes": 4101,
+      "sha256": "dcee7f2d3e74ce804a57978360047337353b2f958713ffe924f6ba9c9a8a0906"
+    },
+    "papers/completion/autoformalization/evidence/split_audit.json": {
+      "bytes": 6771,
+      "sha256": "cfce1dc56a4bca7cc7a84631f3e52e6509bc29a48da4afa3b7491e42980175b1"
+    },
+    "papers/completion/autoformalization/protocol.md": {
+      "bytes": 4721,
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    },
+    "papers/completion/autoformalization/receipts/AF-002.json": {
+      "bytes": 5393,
+      "sha256": "e990653ae9f80c734b673b759d9c352374d73e17aa403619e0d3dd8d5954e436"
+    },
+    "papers/completion/autoformalization/receipts/snapshots/AF-002/config/experiment_plan.json": {
+      "bytes": 13390,
+      "sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c"
+    },
+    "papers/completion/autoformalization/receipts/snapshots/AF-002/protocol.md": {
+      "bytes": 4721,
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    },
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/data_admission.py": {
+      "bytes": 2576,
+      "sha256": "f1fa0421255b2bfccbf744fa608009c95a605a4b923bf5bd32e49266382d0890"
+    },
+    "papers/completion/autoformalization/receipts/snapshots/AF-004/grouping_plan.json": {
+      "bytes": 4681,
+      "sha256": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa"
+    },
+    "papers/completion/autoformalization/tasks.json": {
+      "bytes": 58121,
+      "sha256": "9b84d234b360867a5db6a450c5324537d3b453f2bcef164139e606a732d046a7"
+    }
+  },
+  "decision": "acceptable_partition_checkpoint_conditional_on_actual_access_enforcement",
+  "downstream_obligations": [
+    {
+      "before": "annotation selection and scored output inspection",
+      "owners": [
+        "AF-005",
+        "AF-007"
+      ],
+      "required": "Freeze a count-aware selection of at least 100 unique units spanning at least 20 groups, including at least one per group; account for groups smaller than five, domain/time coverage, and all selected eligibility statuses."
+    },
+    {
+      "before": "affected scored output inspection",
+      "owners": [
+        "AF-005",
+        "AF-007"
+      ],
+      "required": "Declare source/group weighting and estimand; preserve the prespecified group bootstrap while explicitly limiting interpretation under shared four-edition dependence. Any supplementary hierarchy-aware analysis or amendment must be declared before affected outcomes."
+    },
+    {
+      "owners": [
+        "AF-005"
+      ],
+      "required": "Actual candidate-blind independent annotation, disagreement records and adjudication. Independent human review is not asserted by this review or by upstream rights review."
+    },
+    {
+      "owners": [
+        "AF-007"
+      ],
+      "required": "Wire frozen input roles and fail-closed access enforcement into actual benchmark execution, result admission, all-status denominators, and raw-record provenance."
+    },
+    {
+      "owners": [
+        "AF-008"
+      ],
+      "required": "Implement and qualify inference views and adversarial filesystem/retrieval/locator/parser-state/sample-memory controls before affected experiments."
+    },
+    {
+      "owners": [
+        "AF-005",
+        "AF-007",
+        "AF-008"
+      ],
+      "required": "Keep final sources/IDs/labels excluded from development; permit separately authorized sealed evaluation only after checkpoint/configuration/patch lock."
+    },
+    {
+      "owners": [
+        "AF-004 follow-up acquisition",
+        "AF-005",
+        "AF-007"
+      ],
+      "required": "Keep coding/implementation/trace qualifications pending; any additional cohort requires separately versioned pre-outcome admission while preserving the existing frozen partition."
+    }
+  ],
+  "narrative": {
+    "path": "review.md",
+    "sha256": "f8a5025bab62771b7da6cc93bd78e077cf2bcad6c9503d35efb090622f74907e"
+  },
+  "prohibited_inferences": [
+    "100 units independently adjudicated",
+    "20 statistically independent sampled corpora",
+    "unseen-edition generalization",
+    "forward-temporal generalization",
+    "broad cross-domain training capability",
+    "all paraphrases proven absent",
+    "independent human review performed",
+    "full empirical objective complete"
+  ],
+  "prohibited_shortcuts": [
+    "retry salt or rebalance this partition",
+    "weaken frozen minimums",
+    "invent power or annotation",
+    "treat unqualified domains as measured zero performance"
+  ],
+  "review_kind": "contract and aggregate scientific review; not human annotation/adjudication",
+  "review_limits": {
+    "actual_container_enforcement_independently_executed_by_this_reviewer": false,
+    "heldout_bodies_inspected": false,
+    "heldout_identifiers_inspected": false,
+    "heldout_labels_inspected": false,
+    "live_database_accessed": false,
+    "live_native_mutation_performed": false,
+    "provider_logs_inspected": false,
+    "source_lane_modified": false
+  },
+  "reviewed_at": "2026-09-11T18:21:50.035335+00:00",
+  "reviewer": "independent Codex subagent /root/submodule_mounts",
+  "schema": "paper-af004-scientific-partition-review/v1",
+  "scientific_grouping_qualification": {
+    "all_operational_components": 28,
+    "definition": "whole parts/chapters at source edition, unioned by declared derivative/similarity edges",
+    "development_components": {
+      "fixed_canary": 2,
+      "selection": 3,
+      "train": 3
+    },
+    "development_scope": "CFR 2024-07-01 only; same edition also appears in final test",
+    "development_units": {
+      "fixed_canary": 38,
+      "selection": 15,
+      "train": 69
+    },
+    "final_operational_components": 20,
+    "final_records": 1921,
+    "final_unique_candidate_units": 1913,
+    "forward_temporal_split_required_by_contract": false,
+    "full_adjudicated_floor_satisfied": false,
+    "independent_component_sampling_established": false,
+    "largest_component_record_fraction": 0.9047371160853722,
+    "largest_final_component_records": 1738,
+    "macro_editions": 4,
+    "twenty_publishers_or_editions_required_by_contract": false
+  },
+  "source_commit": "70af4e50576ea005527bc1fa154d7164f0cffcca",
+  "source_tree": "71351fd78ad266461f117818f82f99514dd4b3cf"
+}

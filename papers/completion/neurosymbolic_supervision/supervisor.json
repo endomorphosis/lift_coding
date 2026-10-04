@@ -1,0 +1,43 @@
+{
+  "schema": "vericodegen-paper-supervisor/v1",
+  "paper_id": "neurosymbolic_supervision",
+  "title": "Proof-Carrying Neurosymbolic Supervision: State, Logic-Governed Decisions, and Test-Evidence Reuse",
+  "pdf": "papers/vericodegen_neurosymbolic_supervision_workshop_draft.pdf",
+  "todo_path": "papers/completion/neurosymbolic_supervision/paper.todo.md",
+  "objective_path": "papers/completion/neurosymbolic_supervision/paper.objectives.md",
+  "review_path": "papers/completion/neurosymbolic_supervision/review.md",
+  "manifest_path": "papers/completion/neurosymbolic_supervision/tasks.json",
+  "research_template_paths": [
+    "papers/neurips_2026_vericode_workshop.tex",
+    "papers/neurips_2026_vericode.sty",
+    "papers/checklist.tex"
+  ],
+  "source_project": "https://www.overleaf.com/project/6a7b4742e20ac910c422a7e0",
+  "source_project_access": "HTTP 403 on 2026-09-11; paper membership unverified",
+  "task_prefix": "NS-",
+  "root_goal_id": "NS-G000",
+  "board_namespace": "vericodegen-2026-neurosymbolic_supervision",
+  "state_prefix": "paper_neurosymbolic_supervision",
+  "submodule_paths": [
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit"
+  ],
+  "implementation_timeout_seconds": 7200,
+  "max_task_attempts": 3,
+  "runtime_authority": "native DatabaseTaskSource via dedicated loopback Quack owner; fail closed",
+  "refill_policy": "fixed reviewed board; split/discover follow-ups explicitly with lineage",
+  "history_projection": "DuckLake; non-authoritative snapshots fetched through Quack",
+  "runtime_launcher": "scripts/paper_supervisor_campaign.py",
+  "source_board_policy": "Markdown and JSON are reviewed import sources; runtime task changes belong to the database",
+  "implementation_route": {
+    "primary_provider": "grok_cli",
+    "primary_model": "grok-4.6",
+    "fallback_provider": "codex",
+    "fallback_model": "gpt-5.6-terra",
+    "fallback_reasoning_effort": "high",
+    "fallback_trigger": "independently_verified_primary_quota_exhaustion",
+    "authorization_source": "User explicitly requested Codex gpt-5.6 Terra high fallback in this conversation on 2026-09-11",
+    "task_model_dispatched_by_configuration_change": false
+  }
+}

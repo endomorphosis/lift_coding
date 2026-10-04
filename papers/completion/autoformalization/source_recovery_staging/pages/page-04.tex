@@ -1,0 +1,34 @@
+% Original PDF page 4; hash in recovery-map.json.
+\recoverypage{4}
+\input{figure-01.tex}
+\noindent
+come from shared feature parameters. This distinction is essential because reconstructing a stored\linebreak[4]
+vector for a known sample is not generalization. [artifact S24]\linebreak[4]
+A schematic description of the shared heads is\par
+
+\input{equations/equation-02.tex}
+\input{equations/equation-03.tex}
+\input{equations/equation-04.tex}
+\noindent
+Here Ag is the activity of a bounded feature group, and Wg , Ug , Vg stand for enabled embedding and\linebreak[4]
+logit tables. This notation summarizes the packed implementation, not a claim that it is a Transformer\linebreak[4]
+or variational autoencoder. Some groups may be disabled, and a forward-only no-op is reported\linebreak[4]
+separately from a parameter update. [artifact S26--S28]\par
+
+\subsection*{4.2  Actual gradient objectives}
+\noindent
+The packed tensor implementation gathers active rows, constructs predictions, reduces losses in\linebreak[4]
+FP32, backpropagates, clips gradients, applies an SGD-style step, and scatters changed rows into\linebreak[4]
+transaction-aware state. BF16 activations are optional after a numerical check; the same packed\linebreak[4]
+path has a CPU reference. This is real differentiation through tensor losses, not just the word ``SGD''\linebreak[4]
+applied to a prose critique loop. The inspected update is not an Adam update. [artifact S26--S28]\linebreak[4]
+For the active heads, its objective is\par
+
+\input{equations/equation-05.tex}
+\noindent
+Targets are normalized distributions; masks exclude unavailable target rows. Reconstruction is\linebreak[4]
+averaged over embedding coordinates, cosine loss guards zero-norm vectors, the auxiliary term\linebreak[4]
+penalizes extreme norm ratios, and regularization is normalized over parameters. Terms for inactive\linebreak[4]
+update targets are zero. The outer controller additionally scores structural/view losses and regression\linebreak[4]
+constraints; it is not simply Equation 5 applied to every available metric. [artifact S27]\par
+

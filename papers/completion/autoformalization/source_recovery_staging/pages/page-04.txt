@@ -1,0 +1,61 @@
+                            Source + provenance; BM25, vector, and graph context
+                         deterministic compilation → source-grounded, multi-view IR
+
+                                           Two diagnostic paths
+                   source-withheld decompilation; Tactician/Hammer/Leanstral candidates
+                         independent structural and configured native proof checks
+
+                                         Adaptive shared parameters
+                              embedding reconstruction + family/view prediction
+                                  isolated, admitted proof-feedback heads
+
+                                      Guarded update and introspection
+                     model-selection checks, minimal pairs, regression controls, rollback
+
+                       Stable source-free guidance or bounded compiler-repair proposal
+                            fixed-canary admission → explicitly enabled consumer
+
+      Figure 1: Coupled compilation, retrieval, proof assistance, and learning. Arrows show permissible
+      information flow, not one automatically activated entry point. Only admitted feedback trains proof
+      heads; the frozen canonical compiler remains deterministic.
+
+
+133   come from shared feature parameters. This distinction is essential because reconstructing a stored
+134   vector for a known sample is not generalization. [artifact S24]
+135   A schematic description of the shared heads is
+                                                   X
+                                    ê = e0 (f ) +   Ag (f )Wg ,                                          (2)
+                                                    g
+                                                                                  !
+                                                                  X
+                                    pF = softmax     ℓ0F (f ) +       Ag (f )Ug       ,                   (3)
+                                                                  g
+                                                                                  !
+                                                                  X
+                                    pV = softmax     ℓ0V (f ) +       Ag (f )Vg       .                   (4)
+                                                                  g
+
+136   Here Ag is the activity of a bounded feature group, and Wg , Ug , Vg stand for enabled embedding and
+137   logit tables. This notation summarizes the packed implementation, not a claim that it is a Transformer
+138   or variational autoencoder. Some groups may be disabled, and a forward-only no-op is reported
+139   separately from a parameter update. [artifact S26–S28]
+
+140   4.2   Actual gradient objectives
+
+141   The packed tensor implementation gathers active rows, constructs predictions, reduces losses in
+142   FP32, backpropagates, clips gradients, applies an SGD-style step, and scatters changed rows into
+143   transaction-aware state. BF16 activations are optional after a numerical check; the same packed
+144   path has a CPU reference. This is real differentiation through tensor losses, not just the word “SGD”
+145   applied to a prose critique loop. The inspected update is not an Adam update. [artifact S26–S28]
+146   For the active heads, its objective is
+                              Lpacked = H(qF , pF ) + H(qV , pV ) + MSE(e, ê)
+                                        + λc (1 − cos(e, ê)) + Lnorm + λ2 R(Θ).                          (5)
+147   Targets are normalized distributions; masks exclude unavailable target rows. Reconstruction is
+148   averaged over embedding coordinates, cosine loss guards zero-norm vectors, the auxiliary term
+149   penalizes extreme norm ratios, and regularization is normalized over parameters. Terms for inactive
+150   update targets are zero. The outer controller additionally scores structural/view losses and regression
+151   constraints; it is not simply Equation 5 applied to every available metric. [artifact S27]
+
+
+                                                         4
+

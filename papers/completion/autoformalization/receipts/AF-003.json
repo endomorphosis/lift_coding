@@ -1,0 +1,172 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-003",
+  "status": "complete",
+  "completed_at": "2026-09-11T17:32:38.093703+00:00",
+  "source_versions": {
+    "source-repository-01": {
+      "current_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "host_evidence": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/host-source-provenance.json",
+      "manuscript_revision": "unknown"
+    },
+    "selected_runtime": {
+      "manifest": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/config/environment_manifest.json",
+      "smoke": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log"
+    }
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/source_audit_private.json": "6d49b050fa1dee7800e1da58c7aa96749388d95540a1399ab281b96922796b7a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/evidence/runtime_capability_matrix.json": "903437435bdba28c018f2ecf9fe15cc93543a520e292ec2af8f390eb20d4b82f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/config/environment_manifest.json": "562fabdee337aa0722348c837fe6fa6ef418ffbc21e1ae6e988c3edfac841a53",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/static-preflight-validation.log": "c425983d5f94f5824878ad72e2e041deaddc905019eff44873f3bc9f5b7258cd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/config/environment_manifest.json": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/correction-audit.json": "89a25eecdea5d9892dc906bee86ad2a18abbe342b90713c8030e0b656e4f8743",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/runtime_capability_matrix.json": "92b19f363faee75a2ffbcc67d0b9092c6ccbd2666f13ae78a11b68c9c7a4ff6b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json": "f865eca0f686e1d179cc71c4e8a7a9c36928780468df3384b73803c9c35bd454",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-command-extraction.json": "2b30744086a69aef865f24259503b7d78fdaf11e23369f0ac32b3b9fb4fb6311",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-dependency-probe.py": "92a4ca195e2d16f1d033b11067695f86810751feba08195f9f23a006c3238f5f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-dependency-probe.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-dependency-probe.stdout.log": "af3d136595a77246b760b59fc4c26d0091c26d793f360f89d50012b0acf7a256",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-distribution-probe.py": "04d01df4f8ae688e19e67af8a7d5e56604bc848564da8ffe9233323960f80d39",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-distribution-probe.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-distribution-probe.stdout.log": "d798eb3f46148c0901e703513a20ce6de3c0de8ea34e0c92ace0af8b432730cd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/host-source-provenance.json": "7a137973aa5d2279e0b8a6ebf44f756de4404415a3d5be3cf77469428b740b48",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/manifest-validation.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/manifest-validation.stdout.log": "41e5b7ccb2c16614facfd374421bcc98d8bd38da844abccd042c2a3954a9470e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/original-literal-command.stderr.log": "c2991ee16dc3ec7a542e8bb72d6360b32fc028f41cb33d3d9638cc2de16e6248",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/original-literal-command.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/original-receipt.json": "a53348381639aeee48f06083fdaefdf894683c0f61d78cd4fc957ec41591ca31",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log": "0ad4111bbac7dab13b99db1c7119d876439885eaacc2165e572b3bf787c66b67",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected_runtime_smoke.py": "eae7db51b56ff153b48a1444e6457f134dad9c1dac84a252701203e5c6badc19",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/sentinel.lean": "e2947f62292f80356beb235bf71268c30eb82f21240aef0bd592203f86eb4f67",
+    "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/sentinel.smt2": "0081d3444afc92c0d414efa337f83e0c2caf36953f95db8ad534d4f86eccebb7"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/evidence/source_audit_private.json": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json",
+    "papers/completion/autoformalization/evidence/runtime_capability_matrix.json": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/runtime_capability_matrix.json",
+    "papers/completion/autoformalization/config/environment_manifest.json": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/config/environment_manifest.json"
+  },
+  "criteria": [
+    {
+      "criterion": "All 40 roles have resolved mappings or a concrete unresolved status and recovery task.",
+      "status": "met",
+      "explanation": "All40 roles are retained;38 mappings match exact host Git objects, and S14/S32 retain explicit recovery tasks. Manuscript-era source identity remains unresolved.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json"
+      ]
+    },
+    {
+      "criterion": "Runtime matrix separates implemented, documented-only, fixture-only, unsupported and unavailable routes; importability is not credited as end-to-end success.",
+      "status": "met",
+      "explanation": "All five classifications and actual route counts are retained. Historical sandbox observations are separated from selected host smoke; zero end-to-end research routes are credited.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/runtime_capability_matrix.json"
+      ]
+    },
+    {
+      "criterion": "Chosen model/solver entry points, feature flags and resource constraints are pinned in a manifest.",
+      "status": "met",
+      "explanation": "Pins intended AdaptiveModalAutoencoder architecture/source/default initialization, real MiniLM checkpoint/tokenizer/pooling, Intent compiler registry, Z3/CVC5 binaries and Lean4.33.1, with source/model/binary hashes, CPU/16GiB limits and bounded synthetic smoke. Trained checkpoints, direct-model A and evaluation integration remain explicitly unqualified in their later tasks.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/config/environment_manifest.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log",
+        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/host-source-provenance.json"
+      ]
+    },
+    {
+      "criterion": "Private repository identities stay in an internal ledger for later anonymization.",
+      "status": "met",
+      "explanation": "Host Git identity reconciliation is retained in the internal private ledger and immutable audit snapshots for later anonymous export; old provider-visible Git failures are preserved.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/evidence/source_audit_private.json"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/home/barberb",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-"
+      ],
+      "cwd": ".",
+      "stdin_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-dependency-probe.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-dependency-probe.stdout.log",
+      "started_at": "2026-09-11T17:29:36.593859+00:00",
+      "finished_at": "2026-09-11T17:29:36.630050+00:00",
+      "scope": "Exact historical Python program, fresh host context; original provider sandbox package results remain historical."
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/home/barberb",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "/usr/bin/python3.12",
+        "-"
+      ],
+      "cwd": ".",
+      "stdin_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-distribution-probe.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/historical-distribution-probe.stdout.log",
+      "started_at": "2026-09-11T17:29:36.630391+00:00",
+      "finished_at": "2026-09-11T17:29:36.685582+00:00",
+      "scope": "Exact historical Python program, fresh host context; original provider sandbox package results remain historical."
+    },
+    {
+      "argv": [
+        "env",
+        "-i",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+        "HOME=/home/barberb",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "PYTHONPATH=external/ipfs_datasets",
+        "IPFS_AUTO_INSTALL=false",
+        "IPFS_DATASETS_AUTO_INSTALL=false",
+        "IPFS_KIT_AUTO_INSTALL_DEPS=0",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "CUDA_VISIBLE_DEVICES=",
+        "OMP_NUM_THREADS=2",
+        "OPENBLAS_NUM_THREADS=2",
+        "/usr/bin/python3.12",
+        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected_runtime_smoke.py",
+        "/home/barberb/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction"
+      ],
+      "cwd": ".",
+      "script_artifact": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected_runtime_smoke.py",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/selected-runtime-smoke.stdout.log",
+      "started_at": "2026-09-11T17:29:36.795987+00:00",
+      "finished_at": "2026-09-11T17:29:41.628189+00:00",
+      "scope": "Synthetic sentinel preflight; no paper benchmark, corpus, final test, training, GPU, or external model service."
+    },
+    {
+      "argv": [
+        "/usr/bin/python3.12",
+        "-c",
+        "import json; from pathlib import Path; b=Path('papers/completion/autoformalization'); a=json.loads((b/'evidence/source_audit_private.json').read_text()); m=json.loads((b/'evidence/runtime_capability_matrix.json').read_text()); e=json.loads((b/'config/environment_manifest.json').read_text()); assert len(a['roles'])==40; assert e['selected_entry_points']['model']['entry_point']; assert e['selected_entry_points']['embedding_producer']['revision']; assert e['selected_entry_points']['solver']['primary']['probe']['stdout'].strip()=='unsat'; assert e['selected_entry_points']['native_checker']['probe']['exit_code']==0; assert m['summary']['end_to_end_successes']==0; assert e['feature_flags']['final_test_access'] is False; print('AF-003 selected-runtime manifest structure and evidence boundaries: PASS')"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-003/command-correction/manifest-validation.stdout.log",
+      "started_at": "2026-09-11T17:32:38.075688+00:00",
+      "finished_at": "2026-09-11T17:32:38.093703+00:00"
+    }
+  ],
+  "limitations": [
+    "No corpus, final-test data, training, A-E/T0-T5 benchmark, GPU or external model service was used.",
+    "Constructor/import/embedding/native-tool smoke does not establish semantic fidelity, proof transfer, learned gains or retrieval quality.",
+    "Selected host profile is not automatically available inside provider sandboxes; its explicit resources must be reproduced before worker execution.",
+    "Direct-generative-model A and trained checkpoints remain unqualified; available large Leanstral weights exceed the current16GiB envelope."
+  ],
+  "completion_scope": "Source audit plus exact intended-runtime selection and bounded preflight only; preserves all later scientific task obligations."
+}

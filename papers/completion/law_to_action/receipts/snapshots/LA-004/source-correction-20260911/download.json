@@ -1,0 +1,22 @@
+{
+  "schema": "la004-pinned-source-download/v1",
+  "started_at": "2026-09-11T17:44:12.949267+00:00",
+  "completed_at": "2026-09-11T17:45:50.738735+00:00",
+  "url": "https://huggingface.co/datasets/hitoshura25/cvefixes/resolve/d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2/data/train-00000-of-00003.parquet",
+  "dataset_revision": "d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2",
+  "relative_path": "data/train-00000-of-00003.parquet",
+  "download_path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la004_source_bridge/train-00000-of-00003.parquet",
+  "bytes": 211599861,
+  "sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+  "expected_bytes": 211599861,
+  "expected_sha256": "2e25e84e85e1560d41acacbfc7eb359349f5417bc9bf31318cdf0c4aafccb7d1",
+  "http_status": 200,
+  "headers": {
+    "Content-Length": "211599861",
+    "ETag": "\"782ddb00de41e352cd2de7bca55a30a7d25a26f0080657527ebc69e255a53252\"",
+    "Content-Type": "application/octet-stream",
+    "X-Repo-Commit": null
+  },
+  "verified": true,
+  "scope": "First pinned source shard only. No source code, patches, annotation labels, or benchmark outcomes were displayed or evaluated."
+}

@@ -1,0 +1,71 @@
+{
+  "all_document_pairs": 2085903,
+  "base_structural_groups": 82,
+  "body_text_printed": false,
+  "builder_sha256": "3371d41f515bbc57e0b5334a009b9a74f4323726f707dfa03d82ae4e2e6a7936",
+  "completed_at": "2026-09-11T17:56:52.050592+00:00",
+  "component_base_group_count_histogram": {
+    "1": 37,
+    "2": 1,
+    "43": 1
+  },
+  "component_size_histogram": {
+    "1": 1,
+    "2": 3,
+    "3": 3,
+    "4": 4,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 3,
+    "11": 2,
+    "14": 3,
+    "15": 2,
+    "16": 1,
+    "25": 1,
+    "26": 1,
+    "27": 1,
+    "33": 1,
+    "85": 1,
+    "175": 1,
+    "1430": 1
+  },
+  "connected_components_after_identity_and_lexical_union": 39,
+  "cross_group_edge_counts": {
+    "five_token_shingle_overlap": 342,
+    "normalized_fulltext": 7,
+    "source_sha256": 7,
+    "source_uri": 7
+  },
+  "cross_group_pairs_with_nonzero_overlap": 516232,
+  "eligible_domain_counts": {
+    "cfr": 1115,
+    "guidance": 7,
+    "mpep": 746,
+    "uscode": 175
+  },
+  "eligible_natural_source_records": 2043,
+  "excluded_records": 131,
+  "exclusion_reason_counts": {
+    "reserved_section": 131
+  },
+  "floor_possible_after_lexical_graph": true,
+  "grouping_plan_sha256": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa",
+  "independence_claim": "Structural connected components remain candidates; four macro-editions share legal domain and temporal provenance. This audit does not prove statistical independence.",
+  "input_records": 2174,
+  "macro_source_editions": 4,
+  "maximum_possible_final_test_groups_before_development_reservation": 39,
+  "paraphrase_screen_status": "pending_if_floor_possible; additional unions cannot increase component count",
+  "partition_assignment_status": "not_assigned_pending_full_grouping_and_access_enforcement",
+  "private_graph_location": "Owner-only research-inputs/autoformalization/af004-v1; no membership or source IDs published in this report",
+  "private_graph_sha256": "a19a1aa16c43fd7411daf4d60c8942050218b555abd472bc3bd15ac334e15b03",
+  "required_final_test_groups": 20,
+  "required_final_test_natural_units": 100,
+  "schema": "af004-lexical-graph-audit/v1",
+  "semantic_labels_read": false,
+  "source_sha256": "66cc0653052512a3279cb9a530ad90b85f183ae201d74b0f930d0534a7ff9bdb",
+  "started_at": "2026-09-11T17:56:44.044578+00:00",
+  "unique_shingles": 1591208
+}

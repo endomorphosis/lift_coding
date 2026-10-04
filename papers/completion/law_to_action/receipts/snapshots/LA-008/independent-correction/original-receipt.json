@@ -1,0 +1,121 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-008",
+  "status": "complete",
+  "completed_at": "2026-09-11T18:24:30Z",
+  "completion_mode": "Bounded fixture-only sandbox-harness qualification. The retained smoke traces establish measurement behavior only; they are explicitly excluded from empirical benchmark denominators and do not qualify solver, cryptographic capability, durable-storage, network, or model claims.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py": "e6f2a3542ac764b0dfbf1ae146ace8e709aac318f297364fbb2495cca96ad6fa",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/__init__.py": "4edebaad0eb70b880c73a522ce6c5f2aa194ed02ad026b8cf58083944870eb5e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/effects.py": "271fa32365910d9b63c45d60bdd688f0b4c43d3cec955df513bacacaf820a2f7",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/cases/schema.json": "15b01791290f51cd6adf81fcba4194029466758fa5d58462062e0f248bf9a279",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/tests/test_measurement_integrity.py": "a0b7196c8e14c39f6a6d19ccc0bb1322734e073941fb14a0fa93240bfffc2fcc",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log": "a116991ff4bd047cb0c542e1346a1cf6f8e312ea1dbd1fc27302f002acfcc0df",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/smoke.log": "7aa8a7ac16f3f2ad6981b0020d12f095def0d4a6fece2bd4bd5f059274a08fe4",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/replay.log": "1d99f74e4e070f34d6e9ca2fcad9ec72f9dcb3aea3e68c103d7232ece3fb7222",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl": "30052bd4db7e5e3814577c21bf32f79710336935a0a443a1a66476f3a4c93699",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/trace.json": "fc0769a832607592273c9eab72423e2da475193513233459b863976f6e0a7f8e",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stdout.raw": "c54b095d306c05fa1bea0984fe5ae21941a958de7a76c5a80d3346de8a133281",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/trace.json": "8741cfe4a863367ecb6ef921d3e5515feb2d14e15e1bcfd33bc7815c62709533",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/worker.stdout.raw": "dd452ef139d4eeaa29ff3c4407ff5e3debb2e5588f5f11a15c81deac65534b84",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/worker.stderr.raw": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/records.jsonl": "3a8f1d8a592788175ca89c429f50c159945f115d41f67d783a28759de9ec2c0d",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/trace.json": "3a8f1d8a592788175ca89c429f50c159945f115d41f67d783a28759de9ec2c0d"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/benchmark/run.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py",
+    "papers/completion/law_to_action/benchmark/handlers/__init__.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/__init__.py",
+    "papers/completion/law_to_action/benchmark/handlers/effects.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/handlers/effects.py",
+    "papers/completion/law_to_action/benchmark/cases/schema.json": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/cases/schema.json",
+    "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/tests/test_measurement_integrity.py"
+  },
+  "criteria": [
+    {
+      "criterion": "One authorized operation produces expected observed effects and a rejected operation produces none.",
+      "status": "met",
+      "explanation": "The sole handler mutation is a bounded export_json operation. The smoke runs one exact-context authorized fixture (one observer event and one export) and one denied fixture (zero observer events and zero exports); the observer rereads the journal and filesystem rather than receiving the handler return object.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/trace.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/45baeec7-7b5f-4437-b188-9ef9b0775eba/trace.json"
+      ]
+    },
+    {
+      "criterion": "Reject-all policy is detected by allowed-work metrics.",
+      "status": "met",
+      "explanation": "allowed_work_metrics reports scheduled allowed work, successful allowed work, decision denials, and reject_all_detected. The integrity test feeds two denied allowed-work records and asserts detection rather than treating a zero-effect result as safe.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/tests/test_measurement_integrity.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log"
+      ]
+    },
+    {
+      "criterion": "Harness supports deterministic replay, actual exit statuses/timeouts, unique run IDs and raw trace retention.",
+      "status": "met",
+      "explanation": "Every subprocess result retains return code/signal/timeout/wall time and raw request/stdout/stderr files under a UUID run directory. Replays use the recorded case and seed, compare a semantic digest that excludes IDs and timing, and receive a new UUID. The test suite also causes and verifies a real SIGKILL timeout.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/replay.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/records.jsonl",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces/5e4e1733-a323-41a7-a032-040f05215ba6/trace.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stdout.raw",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces/f054b641-0c06-413d-a768-f76e6cc19435/worker.stderr.raw"
+      ]
+    },
+    {
+      "criterion": "Harness smoke checks verify measurement correctness without treating fixtures as empirical benchmark results.",
+      "status": "met",
+      "explanation": "The runner refuses non-fixture case execution, marks every retained record empirical_eligible=false, labels fixture-only crypto and disabled network, and prints empirical_benchmark_result=false. The smoke command is therefore a measurement qualification check only.",
+      "evidence": [
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/smoke.log",
+        "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": ["/usr/bin/python3.12", "-m", "unittest", "papers/completion/law_to_action/benchmark/tests/test_measurement_integrity.py", "-v"],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/measurement-integrity.log"
+    },
+    {
+      "argv": ["/usr/bin/python3.12", "papers/completion/law_to_action/benchmark/run.py", "smoke", "--trace-dir", "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/traces", "--records", "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl", "--seed", "104729", "--timeout-seconds", "5"],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/smoke.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py"
+    },
+    {
+      "argv": ["/usr/bin/python3.12", "papers/completion/law_to_action/benchmark/run.py", "replay", "--source-records", "papers/completion/law_to_action/receipts/snapshots/LA-008/smoke/records.jsonl", "--index", "0", "--trace-dir", "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/traces", "--records", "papers/completion/law_to_action/receipts/snapshots/LA-008/replay/records.jsonl", "--timeout-seconds", "5"],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-008/validation/replay.log",
+      "script_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/outputs/benchmark/run.py"
+    }
+  ],
+  "source_versions": {
+    "python": "/usr/bin/python3.12 (3.12.3)",
+    "harness_schema": "law-to-action-sandbox-harness/v1",
+    "harness_version": "1.0.0",
+    "case_schema": "law-to-action-benchmark-case/v1",
+    "handler": "bounded-export-handler/v1",
+    "observer": "filesystem-journal-observer/v1",
+    "solver": "none; no solver claim",
+    "crypto": "fixture_only; no real capability claim",
+    "storage": "ephemeral filesystem; no durable consumption claim",
+    "network": "disabled in fixture labels; no network qualification claim",
+    "model": "none"
+  },
+  "claim_limitations": [
+    "The fixture gate is deliberately not UCAN, signed-capability, solver/checker, or product-runtime enforcement; LA-010 through LA-014 remain required for those claims.",
+    "The handler accepts a bounded declarative export instruction and does not execute arbitrary generated source code; it qualifies only this selected generated-code-effect observation route.",
+    "Fixture smoke and replay records are retained qualification evidence, not empirical cases, source labels, benchmark attempts, or paper performance results.",
+    "This task does not establish source fidelity, legal/CVE/skill labels, model behavior, durable replay prevention, transport containment, or full resource-cgroup qualification."
+  ]
+}

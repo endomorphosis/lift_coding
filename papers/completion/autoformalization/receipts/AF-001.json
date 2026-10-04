@@ -1,0 +1,169 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "task_id": "AF-001",
+  "status": "complete",
+  "completed_at": "2026-09-11T16:05:24.516544+00:00",
+  "source_versions": {
+    "repository_commit": "8601408d6406681a14a9488d31d1cd9a16164649",
+    "overlay": "Paper recovery outputs are new uncommitted files; immutable content snapshots below are the source pins. No experimental runtime is claimed.",
+    "original_pdf_sha256": "15a19fbfb7bc700c0827a8e48711422283f7703810689d3834a346826fbe5943",
+    "reconstruction_generator_sha256": "6b3c311e861e3dcdb47c000cd6d97012bc5b93cdec762d7a5daa44b90bf1997b",
+    "tex_installation_manifest": "papers/completion/runtime_bootstrap/tex_installation_provenance.json"
+  },
+  "artifacts": {
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/main.tex": "b43407c9243eed2a47c62f910a8b714ef5394ba2703323baa9355450cc22ad6a",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/references.bib": "1d01d56a4c3546d06b98e5fdf68b5aee72a9ccbd9d2c3219d76b8225dc5e163f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json": "7205ed76038f7e0567592c7eee613ab0af214fff30676042fbc46fb2cf5b5ebc",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/source_recovery.json": "bf15924be0c0d0f0528803a1508c049f8ab046a0e0c9b3c3b8e34331556bdba5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/figure-01.tex": "9e53b0168ab17ce2a54c7f747060098276cfdb2b48da182bcf101afd1f35bcc2",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/main.pdf": "088193dda5ae92692b488ed6728635abe86b640527ceb5083690577744dfbe75",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/source_discrepancies.md": "08152e8a7ef546b4ab1a8b762cfbf151720120655f7a563ca096895673fe28df",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/BUILD.md": "5c50e7ff874e434bbcb804cf299cce6eb7c67fe15296fb98abd0e2fa0cddfcec",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-027.tex": "0c0e9ecd1dee6a2fb022d1614f205a09ba403cf003339061003f57f6a68ce017",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-018.tex": "41b853e4596ba551e4288a5c573d240e59383ba7eb98bb69259dac8b0412940f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-026.tex": "615a52038c00730f593574dc4c241989cf36fbbdd6d82e9a660b225df4254990",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-013.tex": "3a2de8298bf7f1a513dab4a9d91697c2817ad7338c3587afd05d4ce249b269c1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-025.tex": "e272323ba8fb2456fc813542dfdd47ae7be4941e110d71ceb3284e7efa1c4e8e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-014.tex": "62dfa16d89c76f4d666db10a34f48c9bd4730ea236fa379ebde2ba774854c005",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-030.tex": "bb8e61b53ad8816da294f770072b1685d87013dd8e96126e25018bb384416e98",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-011.tex": "41649368ed153dcb2ca29479543fb1a1baa804b94a67dfc66d43b8f41496421b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-017.tex": "80ae9d048cb4a7540a64fd75539664f15487f14a09d0e60c7aef58d04de4988e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-020.tex": "c25214c3e67fc59ba1a0cf8c15689bb93549c9fc79ad7d48d27b54be9c4e9e9d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-024.tex": "08c99b6a9c2801c70389efc4647f3d5a93e9865feff27f1100fee42fe10d03e0",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-012.tex": "1fc89b3e39151ed0ca6b040d9d1fcafe7716155fc9a62a8b0b2d42ca8fe1cf8c",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-016.tex": "c6a80d00b1f02e5478054da1441fba3599a3b8c047a87284d44d4b138fa03868",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-015.tex": "a530b943516dd07fab3596f728ced5c000f0212d80076c6594689dc53c227dbb",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-019.tex": "18e8aacfca080402f0baa908d5414c0ea9ef8b794f9b048affd28986ff0cb7db",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/blocks/block-029.tex": "b41ca6e96f07502b44256322f2f17d3976ba237f3a25a0c8fcfe47478c251002",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-07.tex": "72eca1664078098b21d88554f1b01fec67e0c95604754e1d691d900510c5dc4e",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-10.tex": "e0400f48e2f6021a035c9dae78b8e0386332f436351cb369a2de63945d2d5bc1",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-11.tex": "14cc088bcc1e123aa8509ca5900319dac217790794bd767bcf5ab44917d68104",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-08.tex": "e54f8b4c0a4db8940af2a0814bcb29a4c930c511e5e1886722b85224485ec116",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-06.tex": "cb670806a3796e47b65545a8474e78ee65633ce870db4d44451f90afb2186cc8",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-04.tex": "4ef6e4c5edba4f8a820d622b75f698f6ba9a0029b2a7b42d4b9a2de82467bf80",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-24.tex": "f465d6f742a1fafe12fa90d077f4d9306dc973ac4e7cbc8cb7fe4729db7c6038",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-03.tex": "41e27849fc22a4a94b0ffa480292b5ed7409e3399bd97c883c2ada422d79d791",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-25.tex": "9845ff96e6c61f95963fcc78838a5065ff4a669a4c74374f5c285b767da5c901",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-26.tex": "421bace46fe05c7d3f5a4a7791f9391b704debe53c5cf0d4229c4f6de6907fd3",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-15.tex": "853ea8b8b28098b3c6280aa286babaa159f2721de80d0fda726e7d94e8369053",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-09.tex": "2be8d16ca878dfe58ae0c5ba794d76305568e9fe8cb9e4e3777d79ea61d19683",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-23.tex": "e0ddc78dc674501ef4b7b98e1f6a44a9f50d7d2f99eec9a87771145f351c34d5",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-12.tex": "0fb220ab8e547236350495fd0854ac7dab72fcea7f303c0f85f8e40c93009d13",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-13.tex": "2a6cb9c73a7e6547d6354e550f22d93ff42e944a3f5ae5743e211dea30845a8f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-22.tex": "ad2dbd8a4b09aa2518246a4694c934b7f5a4514e4b1ed6e36e11f5acbef74375",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-05.tex": "333a63bfaabffbd4d84acdf721716ddc49805de85480421a1b2af6c35bd2669f",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-18.tex": "d264759a4ce6e2662a3f7e571ddd89d9a0c18c1bf618bdaee2e5815191fc7163",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-01.tex": "899a92d7a283cd586a5541d3297794625d80037a05b40471f6f156bc6e59c347",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-20.tex": "96ec3a3802b1ecf229671771b3db301aacbe20bf55446dc1bcbbb7e484ac3dfe",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-17.tex": "6b50d023f4c5f4120d6bf901842987ef2db2a829ba84be9e6bb085b1bfc33887",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-14.tex": "d0159a3185b51af31ef992cb69df40bfb38c57cd620bfc6a000e4bbe2fb1efb4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-02.tex": "77f54e02a8bf6b0b849b2d53c23df515e6ddd2604b7860d8a089dac7ab5cc100",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-21.tex": "098064bf5b4f7e17156c97778e03dfbaf34b0295a3fb1480f4ecc761d2984154",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-16.tex": "14994eaed4110992c3704dedcc6df68f13bbcf18005368a48a85d10bf0459e4b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-19.tex": "0ba590091f2536c117dcc83943a66b0e81663801e11d22ab16b17e6d717e2e20",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/pages/page-27.tex": "d7afa0935792d0c298f6749263e5c33e31059aab9110d4c3b23730dfbfaee1c7",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/inputs/neurips_2026_vericode_workshop.tex": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/inputs/checklist.tex": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/inputs/neurips_2026_vericode.sty": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-14.tex": "6909f3a2d29fc3a5391f98db4b90a8f1ddb13f7667c67423d8b28a1ac6ba5992",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-11.tex": "45ca4fe78cccc5ff0f3c100dddc8e781ed18ddea58312165d138e042d25e8b75",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-05.tex": "2fac789a92fb893d3098cfbe3cb71157fa24a082124c62520aad1254f7d30fdf",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-10.tex": "4e1f4797d1af0721fb7f1bec95745d0aa23776ac3b8c00eb26bcb5656e40bf78",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-13.tex": "98cc5e189f447e27ebb1ec34402067cdd86f79fe943baaa3f70fab7a6e6d9691",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-09.tex": "eb4cdb1a2d1c85e76e3b1d814f05c3c0398974cb525f65abfacceda3a1819369",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-07.tex": "baeba7a1970d098b12b90494c0175081d807ff5ac4afb7ec225ef9db4bb33162",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-12.tex": "3f244c2770c1926e94208ff3be09bb35c495cdad37df8cc5a8186c98974af3c0",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-01.tex": "628a7b63ab50076e2ba9c366ac24d07fde356505c1dd526ba524151abfcac61b",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-08.tex": "b035b1c3e2e9f5562b4e63a1892ff1d64f4b419731ffa777f74e1d667d71cd97",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-02.tex": "7d8147fb37fdce9419c541c29870cfa05f6cc43a630dbbaf480db87454c8f223",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-06.tex": "19fb5fee8c67ea8c2db54b7a67e8f431ebf97324820921106d23388cdd8c3368",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-15.tex": "649dbf410a7401eb6311ed5925521749aada71861691fe98aac442f1349ce7dd",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-04.tex": "fecb13913a17f6071552e4d0db92734d53bb6be3887af6810b1660a2d3a13843",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/equations/equation-03.tex": "d758303b025d214e9e5a2bd88fc407540e9dede880b7010cdc30105e1eceb846",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/source_recovery.json": "0593579737bef5ec6466521f3cab7c12e6212db466791d4f65cf86c19847fa11",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/source_discrepancies.md": "08152e8a7ef546b4ab1a8b762cfbf151720120655f7a563ca096895673fe28df",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log": "a662361839c81e4f0b63cf60991cf837ab43fd0b931a752cfb9ae8eab42a63f4",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/receipt-before-clarification.json": "34fb7cac5ac9f91302e09cff0d1d52577f7c307239b97de09a2d19e9e7209e8d",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json": "f5c80187c3d94f532dd5b84619ad7ca33844a785b0f8bc08226360581884d280",
+    "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md": "02f09d449cf9366470542dc0e65d1c20871a150e637c9bcd91dc171da676cc6a"
+  },
+  "outputs": {
+    "papers/completion/autoformalization/manuscript/main.tex": "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/main.tex",
+    "papers/completion/autoformalization/manuscript/references.bib": "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/references.bib",
+    "papers/completion/autoformalization/evidence/source_recovery.json": "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+    "papers/completion/autoformalization/evidence/source_discrepancies.md": "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md"
+  },
+  "criteria": [
+    {
+      "criterion": "Editable source builds into a PDF with all original equations/tables/citations accounted for, or recovered-source failures and reconstruction progress are explicitly recorded.",
+      "status": "met",
+      "explanation": "The task explicitly permits documented recovery failures and reconstruction progress. The compiled editable review copy maps all 859 original numbered lines, 15 equations, 13 tables and 10 references; the discrepancy audit identifies inline-math, table-cell, bibliography and checklist work still required. This is a recovery checkpoint, not publication-ready reconstruction or empirical validation.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+      ]
+    },
+    {
+      "criterion": "Historical evidence is distinguished from newly reconstructed material; absent logs are not manufactured.",
+      "status": "met",
+      "explanation": "Source-origin records identify PDF reconstruction and preserve the original PDF hash, all 44 TBD values and other pending markers. Missing author LaTeX/BibTeX, private source ledger, reference suite and original experimental logs remain explicitly absent. No experiment ran and no result was filled.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+      ]
+    },
+    {
+      "criterion": "Source recovery does not gate independent protocol or code preflight tasks.",
+      "status": "met",
+      "explanation": "AF-002 and AF-003 retain empty prerequisite lists in the reviewed task manifest, recorded in source_recovery.json. Source recovery and unavailable Overleaf access do not block protocol or code-audit scheduling.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+      ]
+    },
+    {
+      "criterion": "Manuscript-specific source recovery is distinguished from the now-available local research template and checklist; reconstruction uses the local research shell without modifying shared inputs.",
+      "status": "met",
+      "explanation": "The recovered text is newly reconstructed from the original paper PDF. The research style and supplied template/checklist copies are byte-identical to the user-provided inputs; shared originals were not edited. Pending official checklist answers remain explicit.",
+      "evidence": [
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_recovery.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/checkpoint-clarification/source_discrepancies.md",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/manuscript/recovery-map.json",
+        "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/home/barberb/.local/bin/vericodegen-latexmk",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "main.tex"
+      ],
+      "cwd": "papers/completion/autoformalization/manuscript",
+      "exit_code": 0,
+      "log": "papers/completion/autoformalization/receipts/snapshots/AF-001/evidence/AF-001-build.log"
+    }
+  ],
+  "limitations": [
+    "full visual equation and inline-math audit",
+    "table cell recovery and publication typesetting",
+    "reviewed word-break dehyphenation",
+    "verified structured bibliography and citation commands",
+    "truthful official checklist answers",
+    "claims review against actual evidence",
+    "final workshop page count and anonymity check"
+  ],
+  "completion_scope": "Recovery failure/progress checkpoint permitted by AF-001; all empirical obligations and final manuscript reconciliation remain open.",
+  "checkpoint_clarified_at": "2026-09-11T16:13:06.017409+00:00"
+}

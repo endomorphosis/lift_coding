@@ -1,0 +1,29 @@
+{
+  "failures": [
+    {
+      "check": "families_not_scientifically_admitted",
+      "detail": 0
+    },
+    {
+      "check": "generated_program_handler_qualification_incomplete",
+      "detail": "NOT_QUALIFIED"
+    },
+    {
+      "check": "runtime_model_qualification_incomplete",
+      "detail": "NOT_QUALIFIED"
+    }
+  ],
+  "final_cohort_released": false,
+  "identity_freeze": "PASS",
+  "model_calls": 0,
+  "native_tasks_registered": 0,
+  "notes": "Identity freeze may pass while readiness fails. This verifier does not execute or claim the 900 scientific cells.",
+  "planned_cells": 900,
+  "schema": "la-generated-code-study-preparation-verification/v1",
+  "scientific_admitted_cases": 0,
+  "scientific_admitted_families": 0,
+  "scientific_cells_executed": 0,
+  "status": "PREPARATION_INCOMPLETE",
+  "study_sha256": "d3f1cf2b39b5147c65f8a5cf28eb62594c35035201688d5862fb72cc20f508ff",
+  "verifier_sha256": "9f8ab26b65c9bf61b63574baf27d21735cda563895c0fbe65c006e84e0d03a1f"
+}

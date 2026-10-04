@@ -1,0 +1,38 @@
+{
+  "schema": "paper-task-evidence/v1",
+  "paper_id": "law_to_action",
+  "task_id": "LA-002",
+  "status": "complete",
+  "completed_at": "2026-09-11T16:50:24+00:00",
+  "completion_mode": "LA-002 source audit and scope decision, with immutable snapshots of each declared deliverable and its structural validation log; this is not a benchmark, corpus recount, trained-model evaluation, live transport run, or solver/checker qualification.",
+  "artifacts": {
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json": "975e422a30b5b719b91abc61f84f0d71596a7dcc6a47699c247b990b91096808",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md": "88800274dd2adca8eddbfce8c072a6871f44076e5d12d23636f6936294b3e587",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json": "08edc18b882c5607a4ea248888ca3473e9576f199ba36df2eaaf6f16e88d4d82",
+    "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log": "9b2a8a953a48d77925ad61ce13d742381335d2e922e53c4a02ee4e5848106c7b"
+  },
+  "outputs": {
+    "papers/completion/law_to_action/claim_evidence_matrix.json": "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json",
+    "papers/completion/law_to_action/scope.md": "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md",
+    "papers/completion/law_to_action/environment_inventory.json": "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json"
+  },
+  "criteria": [
+    {"criterion": "Matrix covers each contribution, every logic/backend family, trained normalizer claim and numerical corpus claim.", "status": "met", "explanation": "The matrix audits all four draft contributions; the full baseline and Wave-2 registry lists; seven unqualified backend kinds; deterministic versus optional-provider normalizer behavior; and each reported municipal, Netherlands, Belgium, CVEfixes, and SkillCenter quantity. It records these as inspected, declared-only, fixture-only, unsupported, or future work rather than research results.", "evidence": ["papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json", "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/environment_inventory.json", "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"]},
+    {"criterion": "Explicit OFF/default in-memory-store and fixture-versus-live limitations recorded.", "status": "met", "explanation": "The matrix and scope identify OFF pass-through, the process-local InMemoryCapabilityConsumptionStore default, non-blocking AUDIT/SHADOW modes, and the fixture-only CVE, admissibility, MCP, and enforcement-test surfaces. They reserve live-hub, real-token, durable-state, and transport claims for later direct evidence.", "evidence": ["papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json", "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md", "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"]},
+    {"criterion": "Bounded paper scope, protected routes and essential versus optional experiments are selected.", "status": "met", "explanation": "scope.md selects explicit ENFORCE mediation at SupervisorPreInvocationEnforcement.authorize_and_delegate around one benchmark-owned sandbox handler, with generated-code-effect correlation as an input only. It lists the prerequisite protocol, source, route, backend, fixed-action, and durable-state experiments, and excludes legal fidelity, trained normalization, all-family backends, live network parity, and closed-loop studies from the core claim.", "evidence": ["papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/scope.md", "papers/completion/law_to_action/receipts/snapshots/LA-002/outputs/claim_evidence_matrix.json", "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"]}
+  ],
+  "commands": [
+    {
+      "argv": ["/usr/bin/python3.12", "-c", "LA-002 structural assertions over matrix, scope, and inventory"],
+      "cwd": ".",
+      "exit_code": 0,
+      "log": "papers/completion/law_to_action/receipts/snapshots/LA-002/validation/audit-structure.log"
+    }
+  ],
+  "source_versions": {
+    "audit_outputs": "claim_evidence_matrix.json=975e422a30b5b719b91abc61f84f0d71596a7dcc6a47699c247b990b91096808; scope.md=88800274dd2adca8eddbfce8c072a6871f44076e5d12d23636f6936294b3e587; environment_inventory.json=08edc18b882c5607a4ea248888ca3473e9576f199ba36df2eaaf6f16e88d4d82",
+    "external_git_revisions": "unavailable because each external worktree has a broken gitdir pointer; matrix and inventory retain current source-file SHA-256 pins rather than inventing commits.",
+    "authoritative_environment": "/usr/bin/python3.12 with PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin; no qualified solver/checker deployment is present."
+  },
+  "limitations": ["This complete receipt verifies immutable audit artifacts and their current-output identities; it does not convert inspection, fixtures, registry declarations, or release-card counts into empirical results.", "No benchmark result, corpus recount, trained-model evaluation, live transport run, or solver/checker qualification was performed by LA-002."]
+}

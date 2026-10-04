@@ -1,0 +1,161 @@
+{
+  "schema": "af004-provider-container-filesystem-boundary-qualification/v1",
+  "completed_at": "2026-09-11T18:18:38.530995+00:00",
+  "verdict": "PASS for local private research-input path exclusion in the reconstructed actual Codex provider container boundary.",
+  "historical_container_id": "cb6583a3421ddc14f9026c5c64ff4d0470c5b8d41f13652024cb128bd5650ee3",
+  "historical_container_was_actually_inspected": true,
+  "native_docker_endpoint": "unix:///var/run/docker.sock",
+  "image_id": "sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6",
+  "uid_gid": "1000:1000",
+  "configuration_equivalence": {
+    "image": true,
+    "all27_non_auth_bind_sources_destinations_and_access_modes": true,
+    "all_recorded_HostConfig_fields": true,
+    "sealed_effective_environment": true,
+    "runtime_AppArmor_profile": "docker-default",
+    "auth_omission": "Only the single read-only /opt/codex-home/auth.json file bind was omitted. Its destination is not an ancestor of private research input paths; no auth file contents were opened or copied."
+  },
+  "private_tree_inside_any_retained_bind_source": false,
+  "host_facts": {
+    "private_sentinel": {
+      "exists_on_host": true,
+      "is_directory": false
+    },
+    "host_home_sentinel": {
+      "exists_on_host": true,
+      "is_directory": false
+    },
+    "private_research_root": {
+      "exists_on_host": true,
+      "is_directory": true
+    },
+    "private_raw_directory": {
+      "exists_on_host": true,
+      "is_directory": true
+    },
+    "private_lexical_membership": {
+      "exists_on_host": true,
+      "is_directory": false
+    }
+  },
+  "checks": [
+    {
+      "label": "private_sentinel",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "host_home_sentinel",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "private_research_root",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "private_raw_directory",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "private_lexical_membership",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "host_root_alias_sentinel",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "proc_init_root_sentinel",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "proc_self_root_sentinel",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "docker_socket",
+      "open_succeeded": false,
+      "expected_accessible": false,
+      "errno": "ENOENT"
+    },
+    {
+      "label": "workspace_positive_control",
+      "open_succeeded": true,
+      "expected_accessible": true,
+      "errno": null
+    },
+    {
+      "label": "toolchain_positive_control",
+      "open_succeeded": true,
+      "expected_accessible": true,
+      "errno": null
+    }
+  ],
+  "body_reads": 0,
+  "directory_entries_enumerated": 0,
+  "source_ID_output": false,
+  "provider_invocations": 0,
+  "network_requests": 0,
+  "effective_home": "/opt/codex-home",
+  "probe_exit_code": 0,
+  "cleanup": {
+    "exact_probe_id": "1a61445a7ca53d12041ed0fb1254840cbf11c0abc6e008f9a3b54e9f3b746c02",
+    "remove_exit_code": 0,
+    "post_remove_inspect": {
+      "argv": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "inspect",
+        "1a61445a7ca53d12041ed0fb1254840cbf11c0abc6e008f9a3b54e9f3b746c02"
+      ],
+      "exit_code": 1,
+      "stdout": "[]\n",
+      "stderr": "error: no such object: 1a61445a7ca53d12041ed0fb1254840cbf11c0abc6e008f9a3b54e9f3b746c02\n"
+    },
+    "original_still_stopped_and_unchanged": true,
+    "original_finished_at": "2026-09-11T17:45:03.468359816Z",
+    "host_sentinels_removed": true
+  },
+  "evidence_files_sha256": {
+    "attempt-1/host-sentinel-proof.json": "221ca19ebc82543f8092e900f22e808482221c9fcd442faf7f429f5680430cec",
+    "attempt-1/probe-receipt.json": "c32a17d04791bdf1c82e93f1465600d806847283fa6350019ad596443eda3743",
+    "attempt-1/probe_command.py": "3b3fc002078660f6b4b044e39016b579dbb15c960eed3c9d17aacdaff3541cf0",
+    "attempt-1/run_probe.py": "8a2ef2a0e774426f2ee2442858a06bfe46b18ebd86a90e510860edc690064e90",
+    "host-sentinel-proof.json": "81cc1060640b95110747e19242b491a694f68b67b5b673b1053a5b0352497f39",
+    "original-inspection.json": "e4aa0a64f46192ffcf3ccb9900a8ea9f17d59de6a919718a77f66c0b00993948",
+    "probe-inspection.json": "64102020e70c42c5ad18f803135bad9786807deb51ef2bc18560df9cb16da167",
+    "probe-receipt.json": "a395b64d80d78bad2ac38375cdb48b867b70c765c5ec02167935196d2adfd928",
+    "probe.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "probe.stdout.log": "fc39f2166d9625ef9478541cbd513e3b896722d61009870357957b9a14ca4e2a",
+    "probe_command.py": "ac872945b914366f5dbf98c7f3e7ff93e9e59218fb0515dcbfe545fdfbb33ff6",
+    "run_probe.py": "2d3370ebd902a49646bc0dcc8916569534d24a52c4847582eedad9d7216ca1b7"
+  },
+  "attempt_history": [
+    "First ambient Docker inspect used a different daemon and was non-authoritative; the explicit native endpoint returned the original stopped container.",
+    "First probe container was created but never started because its pre-start AppArmorProfile was not materialized. Exact created container removed and evidence preserved in attempt-1/.",
+    "Successful second probe compares HostConfig before start and AppArmor after the read-only command exits. No historical provider container was restarted or removed."
+  ],
+  "limits": [
+    "This dynamically qualifies the actual Codex fallback filesystem boundary. The Grok Docker path was source-reviewed but not dynamically exercised by this probe.",
+    "Bridge networking remains enabled. The probe makes no public-source network-denial or pretraining-contamination claim.",
+    "Direct private-tree exclusion does not prove absence of prior source copies, independently accessible Git objects, screenshots, prompt content, or semantic contamination elsewhere.",
+    "Raw private membership and source body contents were neither read nor enumerated by the probe.",
+    "This is infrastructure evidence, not a scientific benchmark, source-family independence proof, corpus eligibility decision, or completed AF004 receipt."
+  ],
+  "native_campaign_or_database_changed": false
+}

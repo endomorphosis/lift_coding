@@ -1,0 +1,31 @@
+{
+  "schema": "law-to-action-resource-plan/v1",
+  "task": "LA-003",
+  "basis": {"environment_inventory": "papers/completion/law_to_action/environment_inventory.json", "authoritative_python": "/usr/bin/python3.12", "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin", "resource_class": "cpu-medium"},
+  "availability_at_freeze": {
+    "cpu_only_fixed_action_runner": "required; must be runnable without network or a paid service",
+    "model_weights_or_provider_credentials": "not available or pinned; no model run is scheduled",
+    "qualified_solver_or_checker": "not available under the authoritative validation PATH; no solver proof claim is scheduled",
+    "live_ucan_crypto": "not qualified; A3/A4 record fixture/envelope status and make no live-crypto claim",
+    "durable_consumption_store": "not qualified; restart/cross-worker replay claims are excluded",
+    "source_manifests_and_independent_oracles": "not yet frozen; execution is blocked until LA-004 and later independent-label tasks provide them"
+  },
+  "fixed_action_budget": {
+    "attempts": 900,
+    "calculation": "60 cases * 5 arms * 3 seeds",
+    "wall_timeout_seconds_per_attempt": 20,
+    "memory_gib_per_attempt": 2,
+    "processes_per_attempt": 1,
+    "network": "disabled",
+    "maximum_cpu_seconds": 18000,
+    "maximum_cpu_hours": 5,
+    "stop_rule": "Stop at the CPU ceiling or a required-dependency failure, preserve all started records, and report every unstarted/timeout/failure category."
+  },
+  "reproducibility_requirements": ["immutable source, policy, handler, retrieval, and environment hashes", "actual package distribution/version/hash list", "command, seed, configuration fingerprint, exit status, elapsed time, and raw outcome for every attempt", "fixture-versus-live and provider/solver availability labels", "no user-profile toolchain or network-dependent installation in validation"],
+  "conditional_requirements": {
+    "closed_loop_agent": ["accessible model identifier and immutable weights or provider revision", "tokenizer revision", "provider terms and credential availability", "prompt and context budget", "per-call token/cost receipt", "independent task-success oracle", "lineage-disjoint source split"],
+    "solver_or_checker_claim": ["digest-bound deployment usable under the authoritative PATH", "supported fragment and translation pin", "provider/checker version", "raw solver result and independent checker receipt"],
+    "live_ucan_or_durable_replay_claim": ["real verifier/key material handling without secret disclosure", "durable consumption adapter", "restart and concurrent-use qualification"]
+  },
+  "decision": "Proceed only with the narrower CPU-only fixed-action contribution when its source/oracle dependencies are frozen. Otherwise report a capability/dependency gap and do not substitute fixtures, profile tools, hosted access, or a paid API."
+}

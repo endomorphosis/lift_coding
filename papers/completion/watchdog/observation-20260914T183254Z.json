@@ -1,0 +1,84 @@
+{
+  "action": "inspect_and_unblock",
+  "boards_complete": false,
+  "controller_alive": true,
+  "la032": {
+    "active_phase": "implementing",
+    "attempt_id": "attempt:16741a2853f743faa703e865790ae88f",
+    "claim_id": "claim:6d4bbbe89c2d40c087f902ee85f3f886",
+    "do_not_complete_until_owner_records_dedicated_verifier_pass": true,
+    "do_not_interrupt": true,
+    "host_pointer": "papers/completion/law_to_action/receipts/snapshots/LA-032/POINTER.json",
+    "host_pointer_bytes": 456,
+    "implementation_in_progress": true,
+    "native_last_validation_returncode": null,
+    "native_status": "in_progress",
+    "next_proposal_must": "compact pointer/index only; drop PDF bodies, duckdb copies, per-cell dumps, snapshot-duplicate trees",
+    "persist_bound_bytes": 262144,
+    "portal_attempt_dir": "ab5556c8175ab197129b79d9",
+    "prior_failed_attempt": "attempt:9d639a2ead684c098275fe6973e74f21",
+    "prior_failure": "inline_provider_rescue returncode=1 after portal_provider_failed; local receipt complete is not native PASS",
+    "scientific_cells_executed": 0,
+    "scientific_execution_allowed": false,
+    "task_revision": 13,
+    "worktree": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/law_to_action/worktrees/la-032-19a71a7af2b0-attempt-1-1789410623"
+  },
+  "la032_dispatched": true,
+  "lanes": {
+    "autoformalization": {
+      "blocked": [],
+      "state": "tasks_complete",
+      "tasks": {
+        "completed": 29
+      }
+    },
+    "law_to_action": {
+      "blocked": [
+        {
+          "human_review": false,
+          "reason": "blocked_task",
+          "task": "LA-031",
+          "unmet_dependencies": [
+            "LA-032"
+          ]
+        }
+      ],
+      "state": "working",
+      "tasks": {
+        "blocked": 1,
+        "completed": 30,
+        "in_progress": 1
+      }
+    },
+    "neurosymbolic_supervision": {
+      "blocked": [],
+      "state": "tasks_complete",
+      "tasks": {
+        "completed": 28
+      }
+    }
+  },
+  "native_taskboard_mutations": 0,
+  "next": "Do not interrupt the live LA-032 attempt. If it dies on EventPayloadTooLarge or proposal_gate_failed after verifier PASS, requeue ready and keep hashes/pointers under 262144 bytes. Do not complete until the owner records dedicated-verifier PASS and native status is completed. Host PASS_READINESS is not native admission.",
+  "observed_at": "2026-09-14T18:32:54.026231+00:00",
+  "pids": {
+    "controller": 2301028,
+    "dead_prior_original_grok_runner": 1591541,
+    "dead_prior_rescue_grok_runner": 320004,
+    "grok_bin": 801387,
+    "grok_cli_runner": 769927,
+    "implementation_daemon": 3484218,
+    "law_owner": 2303549,
+    "unrelated_worker_1187352_untouched": true
+  },
+  "registration_hold_released": true,
+  "scheduler_stopped": false,
+  "unblocked_or_advanced": [
+    "Watchdog ran python3 scripts/paper_board_watchdog.py; campaign controller alive; Law owner alive.",
+    "Dead rescue grok runner 320004 left LA-032 portal_provider_failed at 18:27Z; concurrent CAS already requeued ready and campaign claimed in_progress.",
+    "Live attempt:16741a2853f743faa703e865790ae88f in worktree la-032-19a71a7af2b0-attempt-1-1789410623 with grok_cli_runner 769927 / grok 801387; log growing; not interrupted.",
+    "Host snapshot is compact POINTER.json 456 bytes; new worktree has no snapshot-duplicate tree yet.",
+    "AF 29/29 complete; NS 28/28 complete with idle supervisor_alive=false left idle; LA-031 remains blocked on LA-032.",
+    "Did not treat local receipts/LA-032.json complete as owner-recorded PASS. Did not execute or claim 900 cells. Did not ready-release LA-031. Did not kill pid 1187352."
+  ]
+}

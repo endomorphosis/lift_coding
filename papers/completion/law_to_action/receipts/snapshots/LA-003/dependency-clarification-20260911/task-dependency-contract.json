@@ -1,0 +1,122 @@
+{
+  "source_tasks_sha256": "95dc6a59fe049062676ac48673e301c4a05b8fa9c6860d92f254cb2d7f4459ef",
+  "tasks": [
+    {
+      "id": "LA-004",
+      "subgoal_id": "LA-G2",
+      "title": "Freeze source manifests and reconcile all reported corpus populations",
+      "priority": "P0",
+      "depends_on": [
+        "LA-003"
+      ],
+      "paper_evidence": [
+        "pp10\u201311 Appendix A; p16 E.1 lines 514\u2013518"
+      ],
+      "description": "Acquire bounded source cohorts at exact revisions and preserve bytes, URI, hashes/CIDs, source lineage, license/review state, schema and source failures. Recount every population used by the experiment. Preserve exact CVE snapshot d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2 and SkillCenter f9dd4fec3c86d85ebf116c7408ac5ce602c418a1 unless protocol documents a justified revision change. Distinguish physical rows, unique sources, normalized IRs, tombstones, index rows and checked formalizations. Broader un-recounted release statistics remain attributed background or are removed.",
+      "acceptance_criteria": [
+        "Machine-readable manifests resolve every evaluated source and its source-to-IR parent identities.",
+        "Count script reproduces cohort counts and explains dropped/unsupported rows.",
+        "Source permissions permit included artifact redistribution; otherwise provide lawful retrieval instructions and hashes.",
+        "No full-corpus or worldwide-coverage claim is inferred from bounded samples."
+      ],
+      "deliverables": [
+        "papers/completion/law_to_action/benchmark/manifests/sources.json",
+        "papers/completion/law_to_action/benchmark/manifests/splits.json",
+        "papers/completion/law_to_action/benchmark/corpus_counts.json",
+        "papers/completion/law_to_action/benchmark/scripts/recount_sources.py"
+      ],
+      "suggested_code_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/processors/legal_data/canonical_legal_corpora.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/source_snapshot.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/skillcenter.py"
+      ],
+      "implementation_paths": []
+    },
+    {
+      "id": "LA-005",
+      "subgoal_id": "LA-G2",
+      "title": "Construct and independently review the legal applicability and fidelity gold set",
+      "priority": "P0",
+      "depends_on": [
+        "LA-004"
+      ],
+      "paper_evidence": [
+        "p2 \u00a72.1 lines 61\u201368; pp10\u201311 A.1 lines 386\u2013391; p16 Table E1 legal row"
+      ],
+      "description": "Annotate bounded legal provisions for actor/action/modality/object, conditions, exceptions, effective intervals, jurisdiction, authority, definitions, cross-references and exact source spans. Include omitted-exception, wrong-date/jurisdiction, unsupported-construct and no-applicable-record cases. Obtain competent independent human legal review with disagreement/adjudication records; prepare annotation packets autonomously and expose missing reviewer access as a dependency. Never represent generated labels as expert review.",
+      "acceptance_criteria": [
+        "Every held-out label has source spans, annotator/review provenance and applicability assumptions.",
+        "Ambiguous/unsupported cases have explicit unknown labels rather than silently forced permission or denial.",
+        "Agreement/disagreement and final adjudication are documented; missing expert review narrows claims and is visibly unresolved."
+      ],
+      "deliverables": [
+        "papers/completion/law_to_action/benchmark/annotations/legal.jsonl",
+        "papers/completion/law_to_action/benchmark/annotations/legal_guidelines.md",
+        "papers/completion/law_to_action/benchmark/annotations/legal_review_report.md"
+      ],
+      "suggested_code_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_compiler_api.py",
+        "external/ipfs_datasets/tests/conformance/legal_ir/test_legal_ir_compiler_conformance.py"
+      ],
+      "implementation_paths": []
+    },
+    {
+      "id": "LA-006",
+      "subgoal_id": "LA-G2",
+      "title": "Build real CVE vulnerable/fixed pairs and unrelated-code controls",
+      "priority": "P0",
+      "depends_on": [
+        "LA-004"
+      ],
+      "paper_evidence": [
+        "pp2\u20133 \u00a72.2; p11 A.2 lines 409\u2013414; p16 Table E1 CVE row"
+      ],
+      "description": "Select real supported vulnerable/fixed code pairs from the frozen CVE cohort with exact repository revisions and source-row locators. Define reviewed, non-authoritative scoped restriction candidates and explicit intent/code-effect mappings. Include unrelated but lexically similar code, broadened effects, fixed negatives and unknown scope. Retain CVE/CWE/source lineage and distinguish a fix for one restriction from universal security.",
+      "acceptance_criteria": [
+        "Each pair has runnable sandbox reproduction or precisely defined supported behavior evidence and independently reviewed expected polarity.",
+        "No fabricated fixture CVE or mocked source record enters empirical sample counts.",
+        "Wildcards, self-granted authority and unsupported transfer remain rejected/unknown with reasons."
+      ],
+      "deliverables": [
+        "papers/completion/law_to_action/benchmark/cases/cve_pairs.jsonl",
+        "papers/completion/law_to_action/benchmark/cases/cve_controls.jsonl",
+        "papers/completion/law_to_action/benchmark/annotations/cve_review.md"
+      ],
+      "suggested_code_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/security_ir/cvefixes/evaluation.py",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_cve_security_e2e.py"
+      ],
+      "implementation_paths": []
+    },
+    {
+      "id": "LA-007",
+      "subgoal_id": "LA-G2",
+      "title": "Annotate real SkillCenter intent and malicious-Markdown controls",
+      "priority": "P0",
+      "depends_on": [
+        "LA-004"
+      ],
+      "paper_evidence": [
+        "p3 \u00a72.3 lines 110\u2013120; p11 A.3; p16 Table E1 skill row"
+      ],
+      "description": "Select genuine pinned SkillCenter records and annotate goals, pre/postconditions, guards, effects, verification steps and success/failure/retry/parallel/join control edges with source spans. Tag inferred versus grounded nodes. Add bounded malicious Markdown and fake-permission mutations as clearly synthetic negative controls. Define independent review and record actual normalizer/model revisions; scope learned-component claims if no trained system exists.",
+      "acceptance_criteria": [
+        "Original skill and mutation identities/lineage remain distinguishable.",
+        "Independent reference annotations are created before viewing evaluated predictions.",
+        "Ingestion never executes source Markdown commands, and false textual authority has explicit expected rejection."
+      ],
+      "deliverables": [
+        "papers/completion/law_to_action/benchmark/annotations/skills.jsonl",
+        "papers/completion/law_to_action/benchmark/cases/skill_adversarial.jsonl",
+        "papers/completion/law_to_action/benchmark/annotations/skill_guidelines.md"
+      ],
+      "suggested_code_paths": [
+        "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
+        "external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/skillcenter.py",
+        "external/ipfs_datasets/tests/unit/logic/intent_ir/test_skillcenter_source.py"
+      ],
+      "implementation_paths": []
+    }
+  ]
+}

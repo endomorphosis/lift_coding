@@ -1,0 +1,108 @@
+{
+  "compiler_and_view_targets": {
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "status": "producer_interfaces_selected_in_AF003_but_dataset_targets_not_generated",
+    "targets_produced": 0
+  },
+  "created_at": "2026-09-11T18:14:00.233621+00:00",
+  "learned_advice": {
+    "checkpoints": 0,
+    "status": "pending_training_and_promotion_tasks"
+  },
+  "mock_targets": {
+    "natural_gold_admission": false,
+    "semantic_claim_admission": false
+  },
+  "proof_feedback": {
+    "records": 0,
+    "status": "pending_actual_checker_feedback_task"
+  },
+  "schema": "autoformalization-teacher-manifest/v2",
+  "semantic_gold": {
+    "existing_semantic_labels_used": 0,
+    "rights_review_is_not_semantic_review": true,
+    "status": "pending_AF005_independent_candidate_blind_annotation"
+  },
+  "source_grouping_encoder": {
+    "fulltext_windows": 21803,
+    "private_vector_sha256": "8ac1cda209c1af666d3bb0ead530a0ada613ec1e6500b353edbbf23fe200a45a",
+    "producer": {
+      "device": "cpu",
+      "dtype": "torch.float32",
+      "files": [
+        {
+          "path": "1_Pooling/config.json",
+          "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+          "size": 190
+        },
+        {
+          "path": "README.md",
+          "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+          "size": 10502
+        },
+        {
+          "path": "config.json",
+          "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+          "size": 612
+        },
+        {
+          "path": "config_sentence_transformers.json",
+          "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+          "size": 116
+        },
+        {
+          "path": "model.safetensors",
+          "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+          "size": 90868376
+        },
+        {
+          "path": "modules.json",
+          "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+          "size": 349
+        },
+        {
+          "path": "sentence_bert_config.json",
+          "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+          "size": 53
+        },
+        {
+          "path": "special_tokens_map.json",
+          "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+          "size": 112
+        },
+        {
+          "path": "tokenizer.json",
+          "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+          "size": 466247
+        },
+        {
+          "path": "tokenizer_config.json",
+          "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+          "size": 350
+        },
+        {
+          "path": "vocab.txt",
+          "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+          "size": 231508
+        }
+      ],
+      "loader": "transformers.AutoTokenizer.from_pretrained + transformers.AutoModel.from_pretrained",
+      "local_files_only": true,
+      "max_length": 256,
+      "model_directory": "/home/barberb/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "pooling": "attention-mask mean pooling then L2 normalization",
+      "qualification": "local loading and two synthetic embedding inferences only; no semantic-quality or retrieval measurement",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "trust_remote_code": false
+    },
+    "purpose": "Fixed lexical/paraphrase leakage grouping only; never use holdout vectors as training targets or source-quality scores",
+    "status": "actually_executed_preseal_only",
+    "vectors_exported_to_provider": false
+  },
+  "upstream_vector_exclusion": {
+    "producer": "local-hashed-term-projection@1.0.0",
+    "status": "excluded_from_semantic_embedding_and_teacher_claims",
+    "targets_imported": 0
+  }
+}

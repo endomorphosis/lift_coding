@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/usr/bin/python3.12",
+    "-c",
+    "LA-002 structural assertions over matrix, scope, and inventory"
+  ],
+  "cwd": ".",
+  "physical_cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la_002_command_correction/candidate",
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "external/ipfs_accelerate:external/ipfs_datasets:external/ipfs_kit"
+  },
+  "started_at": "2026-09-11T16:58:26.779796+00:00",
+  "finished_at": "2026-09-11T16:58:26.878637+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "  File \"<string>\", line 1\n    LA-002 structural assertions over matrix, scope, and inventory\n       ^^\nSyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers\n",
+  "scope": "Fresh read-only host replay over hash-verified frozen LA-002 audit outputs; not a benchmark or reconstruction of provider environment."
+}

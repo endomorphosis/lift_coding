@@ -1,0 +1,39 @@
+{
+  "status": "pass",
+  "scope": "Narrow dependency wording and frozen protocol/synthetic arithmetic checks only",
+  "prior_receipt_sha256": "fad876022b0e53833a8741c677b91b296a2b409af99c3b1e90eccee041756ad0",
+  "historical_artifacts_verified": 23,
+  "prior_protocol_json_preserved_except_one_additive_workflow_field": true,
+  "prior_markdown_preserved_except_one_workflow_paragraph": true,
+  "resource_plan_byte_identical": true,
+  "native_task_dependencies_unchanged": true,
+  "independent_review_and_evaluation_admission_gates_preserved": true,
+  "frozen_design_validation": {
+    "status": "pass",
+    "scope": "protocol document and synthetic arithmetic validation only",
+    "source_corpora_loaded": false,
+    "benchmark_results_loaded": false,
+    "provider_invoked": false,
+    "experiments_executed": 0,
+    "synthetic_checks": [
+      "exact ranked strata and reversed-input invariance",
+      "short/duplicate/cross-population cohorts rejected",
+      "family-derived case membership",
+      "distinct denial/abstention/withholding and undefined denominator",
+      "balanced fixed schedule",
+      "real-mechanism and model-study separation",
+      "independent budget arithmetic",
+      "group resource scope and separate CPU/wall accounting; no live enforcement qualification"
+    ],
+    "documents_sha256": {
+      "protocol.json": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f",
+      "protocol.md": "f7b232fd849fb01150446dd5a17bfc79cd1d1d60d90db871c00ae75c84d9ac41",
+      "resource_plan.json": "985d48de55803995bec8ab4b75ffb0979a1c3f49c66f314d97caa7609db616aa"
+    }
+  },
+  "source_corpora_loaded": false,
+  "benchmark_results_loaded": false,
+  "independent_labels_loaded": false,
+  "experiments_executed": 0,
+  "provider_invoked": false
+}

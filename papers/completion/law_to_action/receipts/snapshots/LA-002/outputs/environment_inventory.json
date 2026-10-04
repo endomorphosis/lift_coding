@@ -1,0 +1,28 @@
+{
+  "schema": "law-to-action-environment-inventory/v1",
+  "observed_at": "2026-09-11T16:45:05Z",
+  "purpose": "LA-002 environment and source-identity discovery. It is not a benchmark environment lock or a provider qualification.",
+  "authoritative_validation_environment": {
+    "python": "/usr/bin/python3.12",
+    "python_version": "Python 3.12.3",
+    "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "home": "fresh private ipfs-accelerate-validation-home-* directory",
+    "probe": {
+      "command": "env -i PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin HOME=<fresh-private-home> /bin/bash -c '<python/version, command -v, importlib probes>'",
+      "executables_found": [],
+      "python_modules": {"cryptography": true, "pytest": true, "z3": false, "cvc5": false, "torch": false, "transformers": false, "anyio": false, "duckdb": false}
+    },
+    "conclusion": "No Z3, cvc5, Vampire/E, Isabelle, Coq/Rocq, Lean/Lake executable or Z3/cvc5 Python module is available under the required validation PATH. Do not claim a live solver/checker route from provider-shell tools or earlier host observations."
+  },
+  "non_authoritative_prior_observation": {
+    "path": "papers/completion/runtime_bootstrap/research_environment.json",
+    "sha256": "169a150686d858f8cdf9916f7e58e93ddf9ee2933881df69de41446be712a64a",
+    "note": "It recorded user-profile Z3 4.15.4 and cvc5 1.3.3, but explicitly says executable/version discovery is not research qualification. Those user-writable/profile tools are unavailable in the authoritative validation environment and are not adopted."
+  },
+  "repositories": [
+    {"root": "external/ipfs_accelerate", "git_revision": null, "git_revision_status": "unavailable: broken .git worktree pointer", "files": {"admissibility_enforcement.py": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0", "cve_security_gate.py": "32b413d70cd47daefd36d50152e592003e5163baa4dfd16a261db8fcd0c84af3", "ir_constraint_compiler.py": "332075acbb38d4ae4037b81bcf06840e4d800f33a0f90e2b4c59517b37ec0e56", "execution_permit.py": "d1ef6113cb915c64759dcb1614daad4f0979e2da1c816f8222deb76a4f506522"}},
+    {"root": "external/ipfs_datasets", "git_revision": null, "git_revision_status": "unavailable: broken .git worktree pointer", "files": {"logic/admissibility/service.py": "e21f01a09e0f5b19b6171dc87bbc57b115ccf183b92a030752339a0b0a8ee4e5", "logic/verification_api.py": "ab7dab72dc18cf8a4a4fccf8a97fe426875d26998680ea70f56aca5cbe118be8", "logic/intent_ir/normalize/skill.py": "a4213c6a9c3a872797863375905c3f50d1e02db477425116b2d04c9a9ff048fd", "logic/security_ir/cvefixes/adapter.py": "e48c33c7bed68da1c93539c23174d3963d01f0b7bec39b0475395c85a5851cdc"}},
+    {"root": "external/ipfs_kit", "git_revision": null, "git_revision_status": "unavailable: broken .git worktree pointer", "files": {"mcp_server/authorization.py": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd"}}
+  ],
+  "required_before_experiment": ["repair or replace each source checkout and record immutable commits plus dirty-tree hashes", "record all Python package distributions and hashes in the selected scientific environment", "supply a digest-bound solver/checker deployment or record its unavailability", "pin corpus release revision/manifest/hash and source license/access state", "pin model weights/tokenizer/provider if any learned path is evaluated", "retain command, config, seeds, exit status, elapsed time, raw records, fixture/live label, and backend receipt for every run"]
+}

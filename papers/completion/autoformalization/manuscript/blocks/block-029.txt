@@ -1,0 +1,23 @@
+               Table 12: Planning, proposal, and checking do not have interchangeable authority.
+
+      Component           Computation or output                       Acceptance boundary
+      Tactician           Policy-bound route ordering and finite      Pure plan; no theorem or execution
+                          acyclic subgoals; stop/abstain reasons.     result is produced.
+      Hammer selector     Rank existing premise candidates from       Relevance score is not logical
+                          reproducible features.                      implication; sources still require
+                                                                      admission.
+      ATP portfolio       Search translated first-order problems      Supported translation, explicit
+                          using allowed Vampire/E routes.             execution permission, native
+                                                                      reconstruction.
+      SMT portfolio       Search admitted SMT-LIB encodings           Solver-local outcome retains theory
+                          using allowed Z3/cvc5 routes.               and scope; not automatically an ITP
+                                                                      theorem.
+      ITP frontend and    Capture the native goal and reconstruct     The originating Lean/Coq/Isabelle
+      reconstructor       a native tactic/term candidate.             checker accepts the proof in a pinned
+                                                                      environment.
+      Leanstral           Suggest proof edits, strategies, or         Raw generated text remains untrusted;
+                          bounded compiler work through               configured independent checks are
+                          configured lanes.                           required.
+      Adaptive proof      Predict route availability, outcome,        Version-matched admitted feedback;
+      heads               premise family, reconstruction, and         prediction cannot replace checking.
+                          failure categories.

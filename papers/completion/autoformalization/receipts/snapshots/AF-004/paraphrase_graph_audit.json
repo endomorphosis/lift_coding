@@ -1,0 +1,117 @@
+{
+  "completed_at": "2026-09-11T18:10:54.275357+00:00",
+  "component_base_group_count_histogram": {
+    "1": 23,
+    "2": 3,
+    "4": 1,
+    "49": 1
+  },
+  "component_size_histogram": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 3,
+    "5": 2,
+    "6": 2,
+    "7": 1,
+    "8": 2,
+    "10": 3,
+    "11": 2,
+    "15": 1,
+    "25": 1,
+    "27": 1,
+    "28": 1,
+    "29": 1,
+    "58": 1,
+    "1738": 1
+  },
+  "components_after_full_graph_union": 28,
+  "cross_lexical_component_window_edges": 1417,
+  "eligible_source_records": 2043,
+  "embedding_producer": {
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "files": [
+      {
+        "path": "1_Pooling/config.json",
+        "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+        "size": 190
+      },
+      {
+        "path": "README.md",
+        "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+        "size": 10502
+      },
+      {
+        "path": "config.json",
+        "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+        "size": 612
+      },
+      {
+        "path": "config_sentence_transformers.json",
+        "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+        "size": 116
+      },
+      {
+        "path": "model.safetensors",
+        "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+        "size": 90868376
+      },
+      {
+        "path": "modules.json",
+        "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+        "size": 349
+      },
+      {
+        "path": "sentence_bert_config.json",
+        "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+        "size": 53
+      },
+      {
+        "path": "special_tokens_map.json",
+        "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "size": 112
+      },
+      {
+        "path": "tokenizer.json",
+        "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "size": 466247
+      },
+      {
+        "path": "tokenizer_config.json",
+        "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "size": 350
+      },
+      {
+        "path": "vocab.txt",
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+        "size": 231508
+      }
+    ],
+    "loader": "transformers.AutoTokenizer.from_pretrained + transformers.AutoModel.from_pretrained",
+    "local_files_only": true,
+    "max_length": 256,
+    "model_directory": "/home/barberb/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "pooling": "attention-mask mean pooling then L2 normalization",
+    "qualification": "local loading and two synthetic embedding inferences only; no semantic-quality or retrieval measurement",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "trust_remote_code": false
+  },
+  "floor_possible_before_split_assignment": true,
+  "fulltext_windows": 21803,
+  "grouping_plan_sha256": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa",
+  "independence_and_screen_limit": "Fixed lexical and pretrained-encoder screens are operational detection tests, not proof that every semantic paraphrase or statistical dependence has been removed. Four macro-editions remain correlated; graph components cannot be relabeled as independently sampled corpora.",
+  "labels_read": false,
+  "private_encoder_artifact_sha256": "8ac1cda209c1af666d3bb0ead530a0ada613ec1e6500b353edbbf23fe200a45a",
+  "private_graph_sha256": "b987f4d47aa82932e7b160e3d14542364a219aee4cc7e4ab8b600bb536609319",
+  "purpose": "Preseal fixed source-grouping screen only; no semantic labels, source fidelity scoring, compiler targets, model fitting or outcome inspection",
+  "required_final_test_groups": 20,
+  "required_final_test_natural_units": 100,
+  "schema": "af004-fixed-encoder-grouping-audit/v1",
+  "script_sha256": "a3b11fb9a4df81cab24b272929431f195ad46d999630448c8e1414b21a74764b",
+  "source_sha256": "66cc0653052512a3279cb9a530ad90b85f183ae201d74b0f930d0534a7ff9bdb",
+  "source_text_printed": false,
+  "started_at": "2026-09-11T17:58:59.155015+00:00",
+  "tokens_covered": 4983704
+}

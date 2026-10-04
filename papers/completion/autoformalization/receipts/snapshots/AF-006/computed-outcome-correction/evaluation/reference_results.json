@@ -1,0 +1,845 @@
+{
+  "checks": [
+    {
+      "actual_output": {
+        "counterexample_count": 0,
+        "counterexamples": []
+      },
+      "case_count": 512,
+      "check_id": "C01",
+      "checks": {
+        "case_count": true,
+        "counterexample_count": true
+      },
+      "enumeration": "16 relations \u00d7 4 p-valuations \u00d7 4 q-valuations \u00d7 2 designated worlds",
+      "expected_case_count": 512,
+      "expected_outcome": "No finite countermodel",
+      "expected_values": {
+        "counterexample_count": 0
+      },
+      "match": true,
+      "title": "Normal modal distribution"
+    },
+    {
+      "actual_output": {
+        "counterexample_count": 0,
+        "counterexamples": []
+      },
+      "case_count": 32,
+      "check_id": "C02",
+      "checks": {
+        "case_count": true,
+        "counterexample_count": true
+      },
+      "enumeration": "4 reflexive relations \u00d7 4 p-valuations \u00d7 2 designated worlds",
+      "expected_case_count": 32,
+      "expected_outcome": "No finite countermodel",
+      "expected_values": {
+        "counterexample_count": 0
+      },
+      "match": true,
+      "title": "Reflexive factivity"
+    },
+    {
+      "actual_output": {
+        "counterexample_count": 0,
+        "counterexamples": [],
+        "duality_failure_count": 0,
+        "duality_failures": []
+      },
+      "case_count": 72,
+      "check_id": "C03",
+      "checks": {
+        "case_count": true,
+        "counterexample_count": true,
+        "duality_failure_count": true
+      },
+      "enumeration": "9 serial relations \u00d7 4 p-valuations \u00d7 2 designated worlds; O(p) implies P(p)",
+      "expected_case_count": 72,
+      "expected_outcome": "No finite countermodel",
+      "expected_values": {
+        "counterexample_count": 0,
+        "duality_failure_count": 0
+      },
+      "match": true,
+      "title": "Serial D"
+    },
+    {
+      "actual_output": {
+        "actual_truth": false,
+        "modal_truth": true,
+        "separates": true,
+        "witness": {
+          "actual_world": 0,
+          "p": [
+            1
+          ],
+          "relation": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      },
+      "case_count": 1,
+      "check_id": "C04",
+      "checks": {
+        "actual_truth": true,
+        "case_count": true,
+        "modal_truth": true,
+        "separates": true
+      },
+      "enumeration": "One specified non-reflexive actual/accessible-world model",
+      "expected_case_count": 1,
+      "expected_outcome": "Explicit separating model",
+      "expected_values": {
+        "actual_truth": false,
+        "modal_truth": true,
+        "separates": true
+      },
+      "match": true,
+      "title": "Obligation not actuality"
+    },
+    {
+      "actual_output": {
+        "actual_truth": false,
+        "modal_truth": true,
+        "separates": true,
+        "witness": {
+          "actual_world": 0,
+          "p": [
+            1
+          ],
+          "relation": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ]
+        }
+      },
+      "case_count": 1,
+      "check_id": "C05",
+      "checks": {
+        "actual_truth": true,
+        "case_count": true,
+        "modal_truth": true,
+        "separates": true
+      },
+      "enumeration": "One specified non-reflexive actual/accessible-world model",
+      "expected_case_count": 1,
+      "expected_outcome": "Explicit separating model",
+      "expected_values": {
+        "actual_truth": false,
+        "modal_truth": true,
+        "separates": true
+      },
+      "match": true,
+      "title": "Belief without factivity"
+    },
+    {
+      "actual_output": {
+        "disagreement_count": 26,
+        "disagreements": [
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              false,
+              false
+            ],
+            "q": [
+              true,
+              false,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              false,
+              false
+            ],
+            "q": [
+              true,
+              false,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              false,
+              false
+            ],
+            "q": [
+              true,
+              true,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              false,
+              false
+            ],
+            "q": [
+              true,
+              true,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              false,
+              true
+            ],
+            "q": [
+              true,
+              false,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              false,
+              true
+            ],
+            "q": [
+              true,
+              false,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              false,
+              true
+            ],
+            "q": [
+              true,
+              true,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              false,
+              true
+            ],
+            "q": [
+              true,
+              true,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              true,
+              false
+            ],
+            "q": [
+              true,
+              false,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              true,
+              false
+            ],
+            "q": [
+              true,
+              false,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              true,
+              false
+            ],
+            "q": [
+              true,
+              true,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              true,
+              false
+            ],
+            "q": [
+              true,
+              true,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              true,
+              true
+            ],
+            "q": [
+              true,
+              false,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              true,
+              true
+            ],
+            "q": [
+              true,
+              false,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              true,
+              true
+            ],
+            "q": [
+              true,
+              true,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              false,
+              true,
+              true
+            ],
+            "q": [
+              true,
+              true,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              false,
+              false
+            ],
+            "q": [
+              false,
+              true,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              false,
+              false
+            ],
+            "q": [
+              false,
+              true,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              false,
+              true
+            ],
+            "q": [
+              false,
+              true,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              false,
+              true
+            ],
+            "q": [
+              false,
+              true,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              true,
+              false
+            ],
+            "q": [
+              false,
+              false,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              true,
+              false
+            ],
+            "q": [
+              false,
+              true,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              true,
+              false
+            ],
+            "q": [
+              false,
+              true,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              true,
+              true
+            ],
+            "q": [
+              false,
+              false,
+              true
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              true,
+              true
+            ],
+            "q": [
+              false,
+              true,
+              false
+            ],
+            "strong_until": true
+          },
+          {
+            "conjunction_at_zero": false,
+            "p": [
+              true,
+              true,
+              true
+            ],
+            "q": [
+              false,
+              true,
+              true
+            ],
+            "strong_until": true
+          }
+        ],
+        "until_false_conjunction_true": 0,
+        "until_true_conjunction_false": 26
+      },
+      "case_count": 64,
+      "check_id": "C06",
+      "checks": {
+        "case_count": true,
+        "disagreement_count": true,
+        "until_false_conjunction_true": true,
+        "until_true_conjunction_false": true
+      },
+      "enumeration": "All 64 length-three Boolean p/q trace pairs; p strictly before q",
+      "expected_case_count": 64,
+      "expected_outcome": "26 disagreements",
+      "expected_values": {
+        "disagreement_count": 26,
+        "until_false_conjunction_true": 0,
+        "until_true_conjunction_false": 26
+      },
+      "match": true,
+      "title": "Until not conjunction"
+    },
+    {
+      "actual_output": {
+        "always_truth": false,
+        "current_truth": true,
+        "separates": true,
+        "trace_p": [
+          true,
+          false,
+          true
+        ]
+      },
+      "case_count": 1,
+      "check_id": "C07",
+      "checks": {
+        "always_truth": true,
+        "case_count": true,
+        "current_truth": true,
+        "separates": true
+      },
+      "enumeration": "One length-three separating trace",
+      "expected_case_count": 1,
+      "expected_outcome": "Explicit separating trace",
+      "expected_values": {
+        "always_truth": false,
+        "current_truth": true,
+        "separates": true
+      },
+      "match": true,
+      "title": "Always not current truth"
+    },
+    {
+      "actual_output": {
+        "exists_for_all": false,
+        "for_all_exists": true,
+        "separates": true,
+        "witness": {
+          "domain": [
+            "alice",
+            "bob"
+          ],
+          "relation": [
+            [
+              "alice",
+              "alice"
+            ],
+            [
+              "bob",
+              "bob"
+            ]
+          ]
+        }
+      },
+      "case_count": 1,
+      "check_id": "C08",
+      "checks": {
+        "case_count": true,
+        "exists_for_all": true,
+        "for_all_exists": true,
+        "separates": true
+      },
+      "enumeration": "One two-element diagonal relation",
+      "expected_case_count": 1,
+      "expected_outcome": "Diagonal-relation witness",
+      "expected_values": {
+        "exists_for_all": false,
+        "for_all_exists": true,
+        "separates": true
+      },
+      "match": true,
+      "title": "Quantifier order"
+    },
+    {
+      "actual_output": {
+        "cases": [
+          {
+            "approved": true,
+            "violation": false,
+            "write": true
+          },
+          {
+            "approved": false,
+            "violation": true,
+            "write": true
+          },
+          {
+            "approved": false,
+            "violation": false,
+            "write": false
+          },
+          {
+            "approved": true,
+            "violation": false,
+            "write": false
+          }
+        ],
+        "safe_relation_violation_count": 0,
+        "unsafe_relation_violation_count": 1,
+        "violation_flags": [
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      "case_count": 4,
+      "check_id": "C09",
+      "checks": {
+        "case_count": true,
+        "safe_relation_violation_count": true,
+        "unsafe_relation_violation_count": true,
+        "violation_flags": true
+      },
+      "enumeration": "All four approved/write valuations; safe approved write and unsafe unapproved write distinguished",
+      "expected_case_count": 4,
+      "expected_outcome": "Safe relation 0; unsafe 1 violation",
+      "expected_values": {
+        "safe_relation_violation_count": 0,
+        "unsafe_relation_violation_count": 1,
+        "violation_flags": [
+          false,
+          true,
+          false,
+          false
+        ]
+      },
+      "match": true,
+      "title": "Guarded writes"
+    },
+    {
+      "actual_output": {
+        "violating_assignments": [
+          {
+            "audit": false,
+            "request_observed": true,
+            "window_complete": true,
+            "write": true
+          }
+        ],
+        "violation_count": 1
+      },
+      "case_count": 16,
+      "check_id": "C10",
+      "checks": {
+        "case_count": true,
+        "violating_assignments": true,
+        "violation_count": true
+      },
+      "enumeration": "All sixteen request-observed/window-complete/write/audit assignments",
+      "expected_case_count": 16,
+      "expected_outcome": "1 violating assignment",
+      "expected_values": {
+        "violating_assignments": [
+          {
+            "audit": false,
+            "request_observed": true,
+            "window_complete": true,
+            "write": true
+          }
+        ],
+        "violation_count": 1
+      },
+      "match": true,
+      "title": "Complete audit window"
+    },
+    {
+      "actual_output": {
+        "cases": [
+          {
+            "audit_observed": false,
+            "capture_complete": false,
+            "policy_identity": "tenant-a:admin",
+            "request_observed": true,
+            "trace_identity": "tenant-a:admin",
+            "write": true
+          },
+          {
+            "audit_observed": true,
+            "capture_complete": true,
+            "policy_identity": "tenant-a:admin",
+            "request_observed": true,
+            "trace_identity": "tenant-b:admin",
+            "write": true
+          },
+          {
+            "audit_observed": true,
+            "capture_complete": true,
+            "policy_identity": "tenant-a:admin",
+            "request_observed": true,
+            "trace_identity": "tenant-a:admin",
+            "write": true
+          }
+        ],
+        "status_sequence": [
+          "unknown",
+          "unresolved_identity",
+          "satisfied_within_observed_window"
+        ]
+      },
+      "case_count": 3,
+      "check_id": "C11",
+      "checks": {
+        "case_count": true,
+        "status_sequence": true
+      },
+      "enumeration": "Three specified trace observations; compute completeness and grounded-identity decisions",
+      "expected_case_count": 3,
+      "expected_outcome": "Unknown, unresolved, bounded satisfaction",
+      "expected_values": {
+        "status_sequence": [
+          "unknown",
+          "unresolved_identity",
+          "satisfied_within_observed_window"
+        ]
+      },
+      "match": true,
+      "title": "Incomplete/unaligned traces"
+    },
+    {
+      "actual_output": {
+        "first_ir": {
+          "obligation": "audit"
+        },
+        "meaning_counterexamples": [
+          {
+            "exempt": true,
+            "obligation_holds": false,
+            "round_trip_truth": false,
+            "source_truth": true
+          }
+        ],
+        "meaning_disagreement_count": 1,
+        "original_source": {
+          "exception": "exempt",
+          "obligation": "audit"
+        },
+        "realized_source": "must audit",
+        "recompiled_ir": {
+          "obligation": "audit"
+        },
+        "recompiled_ir_equal": true,
+        "source_meaning_equal": false
+      },
+      "case_count": 1,
+      "check_id": "C12",
+      "checks": {
+        "case_count": true,
+        "meaning_disagreement_count": true,
+        "recompiled_ir_equal": true,
+        "source_meaning_equal": true
+      },
+      "enumeration": "One deliberately lossy two-template round trip; compare meaning on all four exempt/obligation valuations",
+      "expected_case_count": 1,
+      "expected_outcome": "Equal recompiled IR; unequal source meaning",
+      "expected_values": {
+        "meaning_disagreement_count": 1,
+        "recompiled_ir_equal": true,
+        "source_meaning_equal": false
+      },
+      "match": true,
+      "title": "Round-trip shared loss"
+    }
+  ],
+  "claims": {
+    "finite_result": "All twelve finite expected outcomes matched.",
+    "non_claims": [
+      "Not recovered historical output.",
+      "Not independent human annotation.",
+      "Not project compiler/model/prover execution or unbounded soundness.",
+      "Not natural-distribution accuracy or benchmark performance."
+    ]
+  },
+  "execution_kind": "new_reconstruction_execution",
+  "historical_output_status": "not_recovered_not_executed",
+  "implementation": {
+    "language": "Python",
+    "python_implementation": "cpython",
+    "python_version": "3.12.3",
+    "standard_library_only": true
+  },
+  "schema": "autoformalization-reference-semantics-results/v3",
+  "suite_id": "AF-006-finite-reference-reconstruction",
+  "summary": {
+    "all_expected_outcomes_matched": true,
+    "case_counts": [
+      512,
+      32,
+      72,
+      1,
+      1,
+      64,
+      1,
+      1,
+      4,
+      16,
+      3,
+      1
+    ],
+    "check_count": 12,
+    "failed_check_ids": [],
+    "strong_until_conjunction_disagreements": {
+      "denominator": 64,
+      "numerator": 26
+    },
+    "total_enumerated_cases": 708
+  }
+}

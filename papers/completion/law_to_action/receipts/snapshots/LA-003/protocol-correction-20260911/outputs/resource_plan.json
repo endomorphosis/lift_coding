@@ -1,0 +1,76 @@
+{
+  "schema": "law-to-action-resource-plan/v2",
+  "task": "LA-003",
+  "basis": {
+    "environment_inventory": "papers/completion/law_to_action/environment_inventory.json",
+    "authoritative_python": "/usr/bin/python3.12",
+    "authoritative_path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
+    "resource_class": "cpu-medium",
+    "scope": "Historical isolated-provider audit is not a universal host capability inventory; later qualifications must establish exact scientific deployment pins."
+  },
+  "availability_at_freeze": {
+    "cpu_only_fixed_action_runner": "required; must be runnable without network or a paid service",
+    "model_weights_or_provider_credentials": "No scientific model deployment is qualified/pinned by LA-003. The supervisor provider session is not itself experiment qualification. Model study is planned but currently not dispatchable.",
+    "qualified_solver_or_checker": "Not qualified by this protocol. Host binaries may exist; only actual LA-010 deployment/checker evidence admits a scored proof-dependent arm.",
+    "live_ucan_crypto": "Not yet qualified; real verifier is required for scored A3/A4. Fixture-only envelope checks cannot substitute.",
+    "durable_consumption_store": "Not yet qualified; actual LA-012 durability qualification is required for scored A4. Process-local memory cannot substitute.",
+    "source_manifests_and_independent_oracles": "not yet frozen; execution is blocked until LA-004 and later independent-label tasks provide them"
+  },
+  "fixed_action_budget": {
+    "attempts": 900,
+    "calculation": "60 cases * 5 arms * 3 seeds",
+    "wall_timeout_seconds_per_attempt": 20,
+    "memory_gib_per_attempt": 2,
+    "processes_per_attempt": 1,
+    "network": "disabled",
+    "maximum_cpu_seconds": 18000,
+    "maximum_cpu_hours": 5,
+    "stop_rule": "Stop at the CPU ceiling or a required-dependency failure, preserve all started records, and report every unstarted/timeout/failure category.",
+    "meaning": "Ceiling for the900 scheduled fixed-action attempts once all required dependencies qualify; excludes setup/qualification cost, which must be retained separately."
+  },
+  "reproducibility_requirements": [
+    "immutable source, policy, handler, retrieval, and environment hashes",
+    "actual package distribution/version/hash list",
+    "command, seed, configuration fingerprint, exit status, elapsed time, and raw outcome for every attempt",
+    "fixture-versus-live and provider/solver availability labels",
+    "no user-profile toolchain or network-dependent installation in validation"
+  ],
+  "conditional_requirements": {
+    "closed_loop_agent": [
+      "accessible model identifier and immutable weights or provider revision",
+      "tokenizer revision",
+      "provider terms and credential availability",
+      "prompt and context budget",
+      "per-call token/cost receipt",
+      "independent task-success oracle",
+      "lineage-disjoint source split",
+      "Freeze exact30 family/60 case lineage-disjoint model-study cohort and deterministic quotas before outputs",
+      "Implement actual A0\u2013A4 model interventions and retain full proposed actions/replans",
+      "Do not infer model prompt/retrieval efficacy from model-free fixed-action controls"
+    ],
+    "solver_or_checker_claim": [
+      "digest-bound deployment usable under the authoritative PATH",
+      "supported fragment and translation pin",
+      "provider/checker version",
+      "raw solver result and independent checker receipt"
+    ],
+    "live_ucan_or_durable_replay_claim": [
+      "real verifier/key material handling without secret disclosure",
+      "durable consumption adapter",
+      "restart and concurrent-use qualification"
+    ]
+  },
+  "decision": "LA-003 completes protocol definition only. Both declared studies remain unrun until their own real source/oracle/mechanism/model qualifications are satisfied. Retain every LA-004\u2013LA-025 paper obligation. No paid access or fixture substitution is assumed.",
+  "protocol_revision": "LA-003/v2",
+  "model_study_budget": {
+    "maximum_model_calls_per_attempt": 8,
+    "maximum_input_tokens_per_call": 2048,
+    "maximum_output_tokens_per_call": 1024,
+    "maximum_total_model_calls": 7200,
+    "maximum_total_input_output_tokens": 22118400,
+    "maximum_wall_seconds_per_attempt": 120,
+    "maximum_aggregate_attempt_wall_hours": 30,
+    "maximum_parallel_attempts": 1,
+    "paid_provider_budget": 0
+  }
+}

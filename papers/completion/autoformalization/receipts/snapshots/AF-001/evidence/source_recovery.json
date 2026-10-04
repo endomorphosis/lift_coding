@@ -1,0 +1,157 @@
+{
+  "schema": "autoformalization-source-recovery-progress/v1",
+  "recorded_at": "2026-09-11T15:59:33.723471+00:00",
+  "task": "AF-001",
+  "status": "partial_reconstruction_for_review",
+  "original_pdf": {
+    "path": "papers/autoformalization_training_methods_revised-1.pdf",
+    "sha256": "15a19fbfb7bc700c0827a8e48711422283f7703810689d3834a346826fbe5943",
+    "pages": 27
+  },
+  "overleaf": {
+    "url": "https://www.overleaf.com/project/6a7b4742e20ac910c422a7e0",
+    "downloaded": false,
+    "paper_membership_verified": false,
+    "prior_access": "unauthenticated access unavailable; not retried in this staging pass"
+  },
+  "coverage": {
+    "numbered_lines": 859,
+    "expected_numbered_lines": 859,
+    "equations": 15,
+    "tables": 13,
+    "references": 10,
+    "TBD_occurrences_in_original": 44,
+    "TODO_occurrences_in_original": 2,
+    "To_complete_occurrences_in_original": 1
+  },
+  "build": {
+    "schema": "autoformalization-recovery-build/v1",
+    "recorded_at": "2026-09-11T15:57:48.390650+00:00",
+    "runs": [
+      {
+        "argv": [
+          "pdflatex",
+          "-no-shell-escape",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-output-directory=build",
+          "main.tex"
+        ],
+        "cwd": "papers/completion/autoformalization/source_recovery_staging",
+        "returncode": 0,
+        "stdout_log": "build/pdflatex-pass-1.stdout.log",
+        "stdout_sha256": "603dc9e09680c35498fb9fe87b970e1ac47c4014c96075f3f5785573e5005925"
+      },
+      {
+        "argv": [
+          "pdflatex",
+          "-no-shell-escape",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-output-directory=build",
+          "main.tex"
+        ],
+        "cwd": "papers/completion/autoformalization/source_recovery_staging",
+        "returncode": 0,
+        "stdout_log": "build/pdflatex-pass-2.stdout.log",
+        "stdout_sha256": "00c80173170fea12c646b53ecec13738a1019ab699ca5aaa98f3d464c5fb0e88"
+      }
+    ],
+    "pdf": {
+      "path": "build/main.pdf",
+      "sha256": "9f51adf3d178cf5b175af464a3d60b748b8d5219a0f129a5682b5cc0a499b01c",
+      "bytes": 255325
+    },
+    "tex_log_sha256": "29bcb55c046a46dd3d706dfac43608229623aacb0add997f4f37ddd4b60d56a7",
+    "warning_counts": {
+      "overfull_hbox": 0,
+      "underfull_hbox": 164,
+      "missing_character": 0
+    },
+    "submission_ready": false,
+    "paper_task_complete": false,
+    "scientific_claims_verified": false
+  },
+  "template_inputs": [
+    {
+      "path": "inputs/checklist.tex",
+      "sha256": "780ba13c480f652dcc42e69ed61a752ce0ea270f15d332d4a45b059dabad84f6",
+      "identical_to_user_file": true
+    },
+    {
+      "path": "inputs/neurips_2026_vericode.sty",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11",
+      "identical_to_user_file": true
+    },
+    {
+      "path": "inputs/neurips_2026_vericode_workshop.tex",
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250",
+      "identical_to_user_file": true
+    }
+  ],
+  "original_author_sources_recovered": false,
+  "runtime_state_changed": false,
+  "experiments_run": false,
+  "completion_receipt_created": false,
+  "missing_historical_artifacts": [
+    "manuscript-specific original tex/bib",
+    "private S01-S40 audit ledger with exact revision/path/range",
+    "evaluation/reference_semantics.py",
+    "evaluation/reference_results.json",
+    "model checkpoints/training logs/held-out measurements"
+  ],
+  "required_next_work": [
+    "full visual equation and inline-math audit",
+    "table cell recovery and publication typesetting",
+    "reviewed word-break dehyphenation",
+    "verified structured bibliography and citation commands",
+    "truthful official checklist answers",
+    "claims review against actual evidence",
+    "final workshop page count and anonymity check"
+  ],
+  "audit": "source_discrepancies.md",
+  "mapping": "recovery-map.json",
+  "canonical_manuscript": "papers/completion/autoformalization/manuscript",
+  "canonical_build": {
+    "argv": [
+      "/home/barberb/.local/bin/vericodegen-latexmk",
+      "-pdf",
+      "-interaction=nonstopmode",
+      "-halt-on-error",
+      "-file-line-error",
+      "main.tex"
+    ],
+    "cwd": "papers/completion/autoformalization/manuscript",
+    "exit_code": 0,
+    "log": "papers/completion/autoformalization/evidence/AF-001-build.log",
+    "pdf_sha256": "088193dda5ae92692b488ed6728635abe86b640527ceb5083690577744dfbe75",
+    "recorded_at": "2026-09-11T16:04:37.946907+00:00"
+  },
+  "independent_task_dependencies": {
+    "AF-002": [],
+    "AF-003": []
+  },
+  "recovery_checkpoint_scope": "AF-001 permits explicitly recorded recovery failures and reconstruction progress. This checkpoint records partial reconstruction with all original numbered lines and identified equations/tables/citations mapped. It does not establish completed publication typesetting, recovered author sources, or empirical results.",
+  "continued_obligations": [
+    {
+      "task": "AF-021",
+      "title": "Analyze frozen results and regenerate every results table"
+    },
+    {
+      "task": "AF-022",
+      "title": "Rewrite contribution, claims, equations, and related work"
+    },
+    {
+      "task": "AF-023",
+      "title": "Assemble anonymous implementation and reproducibility package"
+    },
+    {
+      "task": "AF-024",
+      "title": "Apply official template, questionnaire, and actual LLM disclosure"
+    },
+    {
+      "task": "AF-025",
+      "title": "Perform independent reproduction and prepare final author review packet"
+    }
+  ]
+}

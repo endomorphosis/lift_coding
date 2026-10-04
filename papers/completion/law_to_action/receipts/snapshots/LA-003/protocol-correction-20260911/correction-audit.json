@@ -1,0 +1,25 @@
+{
+  "schema": "law-to-action-protocol-correction-audit/v1",
+  "corrected_at": "2026-09-11T17:13:39.695488+00:00",
+  "previous_implementation_commit": "b10a9bddb1d93b0526a368cd42c3d10cfb08798f",
+  "previous_status": "blocked by missing exact output authorization for required receipt snapshots; provider work/failed validation remains historical",
+  "original_archive": "papers/completion/law_to_action/receipts/snapshots/LA-003/protocol-correction-20260911/original/",
+  "corrections": [
+    "Decision false-denial rate counts D only; A is separate and the optional union is named withholding.",
+    "Exact population quotas use frozen UTF-8 canonical JSON SHA256 ranking and cumulative allocation; shortfall/duplicate/cross-population lineages reject before outcome freeze.",
+    "Model-free policy/retrieval configurations are equivalence controls; actual prompt/retrieval effectiveness is reserved for separately planned actual-model LA-016.",
+    "Real named mechanisms must qualify before scored arms; no missing UCAN/solver/durable mechanism is replaced by a fixture.",
+    "Both study budgets and all remaining LA-004\u2013LA-025 obligations are retained explicitly; protocol completion is not paper completion."
+  ],
+  "observed_evidence": "Executable validator succeeded over documents using synthetic family/decision examples and budget arithmetic. No corpora, source labels, benchmark outcomes, model, provider, solver, or network were loaded.",
+  "source_versions": {
+    "original_protocol_commit": "b10a9bddb1d93b0526a368cd42c3d10cfb08798f",
+    "original_parent_commit": "418980b7522555d03194e74eb5c790f9e7106437",
+    "validator_python": "Python 3.12.3"
+  },
+  "native_control_state_mutated": false,
+  "live_lane_or_workspace_mutated": false,
+  "provider_invoked_for_correction": false,
+  "benchmark_experiments_executed": 0,
+  "completion_scope": "Reviewable local protocol checkpoint only; integration and native status validation/CAS remain with root."
+}

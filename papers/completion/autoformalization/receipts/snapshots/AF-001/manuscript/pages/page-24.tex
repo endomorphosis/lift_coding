@@ -1,0 +1,62 @@
+% Original PDF page 24; hash in recovery-map.json.
+\recoverypage{24}
+\noindent
+SMT-facing API may report a solver-local result without representing it as a native ITP theorem.\linebreak[4]
+[artifact S19,S37]\linebreak[4]
+A theorem applies to the formalized premises and goal. It does not independently establish that the\linebreak[4]
+original prose, source-code extractor, or cross-domain identity mapping was correct. In particular,\linebreak[4]
+a valid reconstructed proof of an incorrectly simplified obligation does not repair the semantic loss\linebreak[4]
+caused by the simplification.\par
+
+\subsection*{O.3  What the optional premise selector actually learns}
+\noindent
+The deterministic baseline uses symbol, type, import, and graph-overlap features. The optional\linebreak[4]
+selector artifact applies a bounded linear score followed by a sigmoid, with additional count features\linebreak[4]
+and a pinned model digest. The supplied default weights are hand-authored. Its documentation\linebreak[4]
+explicitly does not claim a trained neural or tree-based checkpoint. A genuinely learned artifact can\linebreak[4]
+fit the same interface, but the training dataset, loss, split, parameter provenance, and evaluation would\linebreak[4]
+then require separate evidence. [artifact S36]\linebreak[4]
+The documented held-out benchmark uses shared-import proximity as a relevance proxy because\linebreak[4]
+the fixture corpus lacks explicit theorem-to-theorem dependency labels. Recall or reciprocal rank\linebreak[4]
+against that proxy is not ground-truth proof-premise recall. A digest binds the loaded artifact; it\linebreak[4]
+neither demonstrates training nor proves that the source of the digest was independently trusted.\par
+
+\subsection*{O.4  Leanstral does not train itself by generating a draft}
+\noindent
+The security proof-assistant lane treats Leanstral output as advisory and checks the proposed Lean\linebreak[4]
+code against a designated proof consumer. Its policy rejects proof bypasses such as sorry, admit,\linebreak[4]
+or unapproved axioms. Configuration readiness, an actual model call, a generated candidate, and a\linebreak[4]
+checker-accepted proof are different events. The source audit does not demonstrate fine-tuning of\linebreak[4]
+Leanstral's base weights. [artifact S39]\linebreak[4]
+The legal rollout gives the return path to learning an explicit artifact boundary. Candidate JSON or\linebreak[4]
+free-form drafts are audit inputs only. Structured guidance that passes the required syntax, provenance,\linebreak[4]
+anti-copy, proof, and configured reconstruction checks may enter the trusted feature bus and bounded\linebreak[4]
+autoencoder training. A stable source-free export remains inert until its independent promotion gate\linebreak[4]
+accepts it. A deterministic compiler/decompiler patch is a separately versioned executable change\linebreak[4]
+with focused tests and frozen-canary evidence. [artifact S40]\linebreak[4]
+The documented rollout is an ordered smoke, hyperparameter-selection, fixed-canary, and production\linebreak[4]
+sequence. Promotion checks per-family semantics, reconstruction, source-copy behavior, trusted-\linebreak[4]
+feedback receipt agreement, process outcomes, queue telemetry, accepted-patch rate, and rollback\linebreak[4]
+identity. These are documented control requirements, not evidence that this manuscript executed or\linebreak[4]
+completed such a rollout.\par
+
+\section*{P  Putting the representations and update loops together}
+\noindent
+This explanatory procedure composes inspected interfaces while explicitly separating design from\linebreak[4]
+execution. It is not a claim that one repository function implements the entire procedure with every\linebreak[4]
+optional component enabled.\par
+
+\noindent
+Construct and ground. Begin with a versioned source and provenance. Retrieve candidate frames\linebreak[4]
+or context through the configured lexical, numerical, or graph route. Compile an interpretation using\linebreak[4]
+the chosen domain adapter and record ambiguity or unsupported semantics. Preserve the canonical\linebreak[4]
+declaration independently of any learned feature vector. Numerical targets identify their producer;\linebreak[4]
+compiler-derived targets identify their teacher. [artifact S01,S07,S22,S34,S35]\par
+
+\noindent
+Project and challenge. Produce named logical views using shared symbols and explicit projection\linebreak[4]
+contracts. A frame view records roles, a deontic view records normative force, a temporal view\linebreak[4]
+records clock relations, and an event view records transitions. Source-withheld decompilation exposes\linebreak[4]
+missing reconstructable information. Minimal pairs and independent annotations challenge omissions\linebreak[4]
+that a compiler/decompiler cycle could share. [artifact S04,S07,S09,S31]\par
+

@@ -1,0 +1,1222 @@
+{
+  "all_constructed_controls_pass": true,
+  "any_network_observed": false,
+  "candidate_program_executions": 0,
+  "checks": [
+    {
+      "case_id": "skill-new-https_headers:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-https_headers:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-current_user:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-backup_code:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-0",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-0",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-0",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-0",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-0",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-0",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-0",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-1",
+      "control": "native_matching_contract",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-1",
+      "control": "incomplete_observation_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-1",
+      "control": "observer_integrity_error_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-1",
+      "control": "extra_public_output_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-1",
+      "control": "forbidden_effect_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-1",
+      "control": "unexpected_post_state_rejected",
+      "pass": true
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-1",
+      "control": "unaccounted_effect_rejected",
+      "pass": true
+    }
+  ],
+  "constructed_observation_contract_controls": 168,
+  "constructed_program_executions": 24,
+  "created_at": "2026-09-14T12:34:52.393083+00:00",
+  "executions": [
+    {
+      "case_id": "skill-new-https_headers:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "https_headers"
+    },
+    {
+      "case_id": "skill-new-https_headers:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "https_headers"
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "jwt_bind"
+    },
+    {
+      "case_id": "skill-new-jwt_bind:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "jwt_bind"
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "xbox_credentials"
+    },
+    {
+      "case_id": "skill-new-xbox_credentials:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "xbox_credentials"
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "ip_assessment"
+    },
+    {
+      "case_id": "skill-new-ip_assessment:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "ip_assessment"
+    },
+    {
+      "case_id": "skill-new-current_user:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "current_user"
+    },
+    {
+      "case_id": "skill-new-current_user:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "current_user"
+    },
+    {
+      "case_id": "skill-new-backup_code:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "backup_code"
+    },
+    {
+      "case_id": "skill-new-backup_code:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "backup_code"
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "s3_delete"
+    },
+    {
+      "case_id": "skill-new-s3_delete:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "s3_delete"
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "modsecurity_config"
+    },
+    {
+      "case_id": "skill-new-modsecurity_config:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "modsecurity_config"
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "graphql_preread"
+    },
+    {
+      "case_id": "skill-new-graphql_preread:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "graphql_preread"
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "crudadmin_export"
+    },
+    {
+      "case_id": "skill-new-crudadmin_export:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "crudadmin_export"
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "fastly_config"
+    },
+    {
+      "case_id": "skill-new-fastly_config:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "fastly_config"
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-0",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "django_refresh"
+    },
+    {
+      "case_id": "skill-new-django_refresh:case-1",
+      "checks": {
+        "exact_effect_sequence": true,
+        "exact_output_bytes": true,
+        "exact_post_state": true,
+        "integrity_errors_empty": true,
+        "observation_complete": true,
+        "unaccounted_effects_empty": true
+      },
+      "error": null,
+      "network_observed": false,
+      "pass": true,
+      "task_key": "django_refresh"
+    }
+  ],
+  "model_calls": 0,
+  "native_matching_pass": 24,
+  "network_calls": 0,
+  "notes": "168 constructed skill controls: 24 native FixtureEffects executions plus 144 fail-closed mutations of those native observations. Not scientific admission and not 900 cells.",
+  "observer": "FixtureEffects.observe process/file/state/network journal",
+  "schema": "la-skill-native-observer-qualification/v1",
+  "scientific_admission": false,
+  "scientific_cells_executed": 0,
+  "status": "NOT_QUALIFIED",
+  "worker_image_host_observer": false
+}

@@ -1,0 +1,29 @@
+{
+  "actual_cwd": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/la008_independent_correction/candidate",
+  "argv": [
+    "/usr/bin/python3.12",
+    "papers/completion/law_to_action/benchmark/run.py",
+    "smoke",
+    "--trace-dir",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/traces",
+    "--records",
+    "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/smoke/records.jsonl",
+    "--seed",
+    "104729",
+    "--timeout-seconds",
+    "5"
+  ],
+  "completed_at": "2026-09-11T18:50:28.688705Z",
+  "cwd": ".",
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0,
+  "started_at": "2026-09-11T18:50:28.550814Z",
+  "stderr": "",
+  "stderr_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/smoke.stderr.raw",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout": "{\"empirical_benchmark_result\": false, \"kind\": \"harness_smoke\", \"metrics\": {\"allowed_decision_denials\": 0, \"allowed_measurement_failures\": 0, \"allowed_scheduled\": 1, \"allowed_work_success_rate\": 1.0, \"allowed_work_successful\": 1, \"reject_all_detected\": false}, \"run_ids\": [\"534d65f7-c3a6-43cb-a27b-079a7b1599c1\", \"d0c3ce6c-f233-414c-8740-87c011622e9d\"]}\n",
+  "stdout_artifact": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/smoke.stdout.raw",
+  "stdout_sha256": "ce5ab77084b0717df203687575fd59a2f0317fc6d282efbf3ffe565c22adcbdf"
+}

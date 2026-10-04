@@ -1,0 +1,1779 @@
+Rc files read (in order):
+  NONE
+Latexmk: This is Latexmk, John Collins, 9 March 2026. Version 4.88.
+No existing .aux file, so I'll make a simple one, and require run of *latex.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Category 'other':
+  Rerun of 'pdflatex' forced or previously required:
+    Reason or flag: 'Initial setup'
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -file-line-error -recorder  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-08-10>
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/size10.clo)) (./neurips_2026_vericode.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/environ/environ.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/inputenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/url/url.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1phv.fd) (./pages/page-01.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--25
+\T1/ptm/m/n/10 In-
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--43
+\T1/ptm/m/n/10 and
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--43
+\T1/ptm/m/n/10 tional,
+[1{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]) (./pages/page-02.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--17
+\T1/ptm/m/n/10 tives,
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--17
+\T1/ptm/m/n/10 and ac-ti-va-tion in-stead of de-scrib-ing all of them as one au-toen-coder.
+
+Underfull \hbox (badness 1748) in paragraph at lines 21--36
+\T1/ptm/m/n/10 records does not equate do-main on-tolo-gies or log-i-cal in-ter-pre-ta-tions. [ar-ti-fact S01--S06]
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--36
+\T1/ptm/m/n/10 tions,
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--36
+\T1/ptm/m/n/10 tax
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--36
+\T1/ptm/m/n/10 im-ply equiv-a-lent for-mu-las. [ar-ti-fact S01,S05]
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 sup-plied the tar-get vec-tor. [ar-ti-fact S22,S23]
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 tors;
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 selected;
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 quired
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 to mea-sure fi-delity to the orig-i-nal source.
+[2]) (./pages/page-03.tex
+Underfull \hbox (badness 10000) in paragraph at lines 5--18
+\T1/ptm/m/n/10 ground-
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--18
+\T1/ptm/m/n/10 frozen pro-file silently uses it. [ar-ti-fact S07,S08,S23,S25]
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--18
+\T1/ptm/m/n/10 stituents
+(./equations/equation-01.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 4--36
+\T1/ptm/m/n/10 pro-grams could con-sis-tently omit the same ex-cep-tion. [ar-ti-fact S07]
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 binder,
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 tic
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 gram-mar de-cides what can be rep-re-sented. [ar-ti-fact S33]
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 domain
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 fer,
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--57
+\T1/ptm/m/n/10 slot--
+) (./pages/page-04.tex (./figure-01.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 4--7
+\T1/ptm/m/n/10 vec-tor for a known sam-ple is not gen-er-al-iza-tion. [ar-ti-fact S24]
+(./equations/equation-02.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                     [4]) (./equations/equation-03.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    ) (./equations/equation-04.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--16
+ \T1/ptm/m/n/10 Here Ag is the ac-tiv-ity of a bounded fea-ture group,
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--16
+\T1/ptm/m/n/10 and Wg , Ug , Vg stand for en-abled em-bed-ding and
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--16
+\T1/ptm/m/n/10 former
+(./equations/equation-05.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )) (./pages/page-05.tex
+Underfull \hbox (badness 10000) in paragraph at lines 10--22
+\T1/ptm/m/n/10 met-rics be-long in the ex-per-i-ment man-i-fest. [ar-ti-fact S24]
+
+Underfull \hbox (badness 7740) in paragraph at lines 25--35
+\T1/ptm/m/n/10 The code re-ports cov-er-age, ab-sten-tion, and family-specific met-rics. [ar-ti-fact S24]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--35
+\T1/ptm/m/n/10 tion
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 38--51
+\T1/ptm/m/n/10 dates
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--51
+\T1/ptm/m/n/10 guar-an-tees. [ar-ti-fact S24,S25,S29]
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--51
+\T1/ptm/m/n/10 data.
+
+Underfull \hbox (badness 3148) in paragraph at lines 55--59
+\T1/ptm/m/n/10 client reads sharded post-ings and ap-plies term-frequency, inverse-frequency, and length-
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--59
+\T1/ptm/m/n/10 normalization
+) (./pages/page-06.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--11
+\T1/ptm/m/n/10 S22,S34,S35]
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 tion
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 ner
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 is not it-self a trained tac-tic syn-the-sizer. [ar-ti-fact S38]
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 prover
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 avail-abil-ity must be es-tab-lished. [ar-ti-fact S37]
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 bol,
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 selector
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 35--47
+\T1/ptm/m/n/10 [ar-ti-fact S39,S40]
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--47
+\T1/ptm/m/n/10 feed-
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--47
+\T1/ptm/m/n/10 tuned
+) (./pages/page-07.tex (./equations/equation-06.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--14
+\T1/ptm/m/n/10 tion
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 16--29
+\T1/ptm/m/n/10 S09,S31]
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--47
+\T1/ptm/m/n/10 ported
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--47
+\T1/ptm/m/n/10 in-vo-ca-tion of a com-piler [7].
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--47
+\T1/ptm/m/n/10 re-place-ment p $\OMS/cmsy/m/n/10 ^$ \T1/ptm/m/n/10 q. [ar-ti-fact S18]
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--47
+\T1/ptm/m/n/10 or
+(./equations/equation-07.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    ) (./equations/equation-08.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--63
+\T1/ptm/m/n/10 per sup-ported trans-la-tion, not a sound-ness the-o-rem about ev-ery cur-rent ex-trac-tor.
+) (./pages/page-08.tex [8] (./equations/equation-09.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    ) (./equations/equation-10.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    ) (./equations/equation-11.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 is
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 in-suf-fi-cient.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 the
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 plete
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 dif-fer-ent con-clu-sions. [ar-ti-fact S01,S09]
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 model
+
+Underfull \hbox (badness 3333) in paragraph at lines 50--59
+\T1/ptm/m/n/10 con-ve-nience fix-tures. Their pres-ence is not a new pass-ing test run. [ar-ti-fact S32]
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--59
+\T1/ptm/m/n/10 met
+[9]) (./pages/page-09.tex (./blocks/block-011.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 gets,
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 proof-transfer re-sults.]
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 tion
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 not
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 ported
+
+Underfull \hbox (badness 7256) in paragraph at lines 21--40
+\T1/ptm/m/n/10 fi-nite run-time ob-ser-va-tion, ev-i-dence readi-ness, and pol-icy ap-proval. [ar-ti-fact S19]
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--40
+\T1/ptm/m/n/10 ture
+[10]) [11] (./pages/page-10.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 In-for-ma-tion Pro-cess-ing Sys-tems 35, 2022. https://arxiv.org/abs/2205.12615.
+
+Underfull \hbox (badness 1077) in paragraph at lines 4--32
+\T1/ptm/m/n/10 and Jeremy Avi-gad. ProofNet: Aut-o-for-mal-iz-ing and for-mally prov-ing undergraduate-level
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 math-e-mat-ics. arXiv:2302.12433, 2023.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 In-tel-li-gence, 287:103348, 2020. doi:10.1016/j.artint.2020.103348.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 Com-put-ing, 4:67--95, 1986. doi:10.1007/BF03037383.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 doi:10.1007/BFb0054170.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 baum.
+
+Underfull \hbox (badness 6332) in paragraph at lines 4--32
+\T1/ptm/m/n/10 Ad-vances in Neu-ral In-for-ma-tion Pro-cess-ing Sys-tems 31, 2018. https://arxiv.org/abs/
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 1810.02338.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 iza-tion. In Ad-vances in Neu-ral In-for-ma-tion Pro-cess-ing Sys-tems 37, 2024.
+
+Underfull \hbox (badness 1189) in paragraph at lines 4--32
+\T1/ptm/m/n/10 [10] Al-bert Qiaochu Jiang, Wenda Li, Szy-mon Tworkowski, Kon-rad Czechowski, Tomasz
+
+Underfull \hbox (badness 1168) in paragraph at lines 4--32
+\T1/ptm/m/n/10 Odrzygó¹d¹, Pi-otr Miªo±, Yuhuai Wu, and Mateja Jam-nik. Thor: Wield-ing ham-mers to
+) [12] (./pages/page-11.tex (./blocks/block-012.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [13])) (./pages/page-12.tex (./blocks/block-013.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [14]
+Overfull \vbox (84.166pt too high) has occurred while \output is active
+Overfull \vbox (84.166pt too high) has occurred while \output is active [15])) (./pages/page-13.tex (./blocks/block-014.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 source-view, target-view, source-formula-root,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 target-formula-root,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 signature-map, interpretation-profile, bridge-assumptions,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 preserved-property, preservation-direction,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 supported-fragment,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 named-losses, source-map-root, checker-environment,
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+\T1/ptm/m/n/10 that
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--55
+\T1/ptm/m/n/10 tity,
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--55
+\T1/ptm/m/n/10 gin,
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--62
+\T1/ptm/m/n/10 change
+[16]) (./pages/page-14.tex (./blocks/block-015.tex)
+Underfull \hbox (badness 1688) in paragraph at lines 13--17
+\T1/ptm/m/n/10 The in-cluded eval-u-a-tion/reference_semantics.py uses only the Python stan-dard li-brary. It
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--21
+\T1/ptm/m/n/10 python eval-u-a-tion/reference_semantics.py
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--29
+\T1/ptm/m/n/10 sion
+[17]) (./pages/page-15.tex (./blocks/block-016.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 14--19
+\T1/ptm/m/n/10 ity
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--26
+\T1/ptm/m/n/10 route
+(./blocks/block-017.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [18])) (./pages/page-16.tex (./blocks/block-018.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 9--16
+\T1/ptm/m/n/10 ness.
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--16
+\T1/ptm/m/n/10 ing,
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 ac-cep-tance pro-file.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 in-ter-pre-ta-tions.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 source lin-eage.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 ab-sten-tion or ex-plicit par-tial anal-y-sis.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 obli-ga-tions for ev-ery relied-upon trans-la-tion.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 Keep can-di-date, sat-is-fi-a-bil-ity, mon-i-tor, and kernel-checked out-comes dis-tinct.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 ver-i-fied state-ment to the outer ar-ti-fact fields.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 kind. Un-known does not be-come true or false by de-fault.
+[19]) (./pages/page-17.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+\T1/ptm/m/n/10 claims,
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+\T1/ptm/m/n/10 thor
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--17
+\T1/ptm/m/n/10 recheck
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--24
+\T1/ptm/m/n/10 All
+(./blocks/block-019.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [20])) (./pages/page-18.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--23
+\T1/ptm/m/n/10 rather than silently la-bel-ing all vec-tors pre-trained se-man-tic em-bed-dings.
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--23
+\T1/ptm/m/n/10 ured
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--23
+\T1/ptm/m/n/10 A
+[21] (./blocks/block-020.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 26--32
+\T1/ptm/m/n/10 tute
+(./equations/equation-12.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )) (./pages/page-19.tex (./equations/equation-13.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--15
+ \T1/ptm/m/n/10 where M se-lects avail-able tar-get rows. The de-nom-
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--15
+\T1/ptm/m/n/10 i-na-tor in the in-spected path is the to-tal sam-ple count,
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--15
+\T1/ptm/m/n/10 head.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--15
+\T1/ptm/m/n/10 ent
+(./equations/equation-14.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--23
+\T1/ptm/m/n/10 transaction-
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--23
+\T1/ptm/m/n/10 Some
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--23
+\T1/ptm/m/n/10 counted
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 26--38
+\T1/ptm/m/n/10 which need not be dif-fer-en-tiable ten-sors.
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--51
+\T1/ptm/m/n/10 con-fi-dence or avail-able la-bels are in-ad-e-quate.
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--51
+\T1/ptm/m/n/10 head
+) (./pages/page-20.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--23
+\T1/ptm/m/n/10 an un-fixed sam-ple set blocks guid-ance emis-sion.
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 26--36
+\T1/ptm/m/n/10 semantic-
+
+Underfull \hbox (badness 7168) in paragraph at lines 26--36
+\T1/ptm/m/n/10 pre-served source facets and re-gres-sion cases be-fore its be-hav-ior be-comes canon-i-cal.
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--36
+\T1/ptm/m/n/10 cal.
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--36
+\T1/ptm/m/n/10 tion
+(./blocks/block-024.tex)) (./pages/page-21.tex (./blocks/block-025.tex [24])
+Underfull \hbox (badness 10000) in paragraph at lines 4--13
+\T1/ptm/m/n/10 agents or prove that the obli-ga-tion was ful-filled.
+(./blocks/block-026.tex) (./blocks/block-027.tex)) (./pages/page-22.tex [25]
+Underfull \hbox (badness 10000) in paragraph at lines 4--9
+\T1/ptm/m/n/10 lookup,
+(./equations/equation-15.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--29
+\T1/ptm/m/n/10 pa-ram-e-ters be-long in a re-pro-ducible run record. [ar-ti-fact S34]
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--29
+\T1/ptm/m/n/10 selection
+
+Underfull \hbox (badness 2547) in paragraph at lines 4--29
+\T1/ptm/m/n/10 er-rors can prop-a-gate into compiler-derived su-per-vi-sion un-less in-de-pen-dent checks ex-pose
+
+Underfull \hbox (badness 1642) in paragraph at lines 32--45
+\T1/ptm/m/n/10 query. An eval-u-ated route must iden-tify the ac-tual back-end and sta-tus. [ar-ti-fact S35]
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--45
+\T1/ptm/m/n/10 cal
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--58
+\T1/ptm/m/n/10 nec-es-sar-ily as-sert a log-i-cal im-pli-ca-tion. [ar-ti-fact S34]
+[26]) (./pages/page-23.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
+\T1/ptm/m/n/10 ing.
+(./blocks/block-029.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 13--22
+\T1/ptm/m/n/10 and
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--22
+\T1/ptm/m/n/10 im-ple-men-ta-tion per-forms no proof, write, or net-work work. [ar-ti-fact S38]
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--22
+\T1/ptm/m/n/10 of
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--34
+\T1/ptm/m/n/10 tract;
+
+Underfull \hbox (badness 1082) in paragraph at lines 25--34
+\T1/ptm/m/n/10 opaque un-rec-og-nized terms must re-turn un-sup-ported rather than be erased. [ar-ti-fact S37]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--34
+\T1/ptm/m/n/10 out
+[27]) (./pages/page-24.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+\T1/ptm/m/n/10 [ar-ti-fact S19,S37]
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--22
+\T1/ptm/m/n/10 would
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--22
+\T1/ptm/m/n/10 then re-quire sep-a-rate ev-i-dence. [ar-ti-fact S36]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--41
+\T1/ptm/m/n/10 Leanstral's base weights. [ar-ti-fact S39]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--41
+\T1/ptm/m/n/10 nance,
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--41
+\T1/ptm/m/n/10 with fo-cused tests and frozen-canary ev-i-dence. [ar-ti-fact S40]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--41
+\T1/ptm/m/n/10 tion
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 56--61
+\T1/ptm/m/n/10 poses
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--61
+\T1/ptm/m/n/10 sions
+) (./pages/page-25.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+\T1/ptm/m/n/10 an
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--18
+\T1/ptm/m/n/10 tion
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--18
+\T1/ptm/m/n/10 fact
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--43
+\T1/ptm/m/n/10 straint,
+
+Underfull \hbox (badness 2443) in paragraph at lines 28--43
+\T1/ptm/m/n/10 op-er-a-tion, time, and policy-version map-pings must be ad-mit-ted. [ar-ti-fact S01,S04,S09]
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--43
+\T1/ptm/m/n/10 changed
+) (./pages/page-26.tex
+Underfull \vbox (badness 3547) has occurred while \output is active
+Underfull \vbox (badness 3547) has occurred while \output is active [29] (./blocks/block-030.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 10--20
+\T1/ptm/m/n/10 than
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--20
+\T1/ptm/m/n/10 der
+) [30] (./pages/page-27.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--12
+\T1/ptm/m/n/10 and not a set of com-pleted com-pli-ance an-swers.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--12
+\T1/ptm/m/n/10 manuscript and ar-ti-fact.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--12
+\T1/ptm/m/n/10 ment
+) [31] (./main.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)</home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on main.pdf (31 pages, 255325 bytes).
+Transcript written on main.log.
+Latexmk: Getting log file 'main.log'
+Latexmk: Examining 'main.fls'
+Latexmk: Examining 'main.log'
+Latexmk: References changed.
+Latexmk: References changed.
+Latexmk: Log file says output to 'main.pdf'
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  main.aux
+  main.out
+
+------------
+Run number 2 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -file-line-error -recorder  "main.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-08-10>
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/size10.clo)) (./neurips_2026_vericode.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/environ/environ.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/lineno/lineno.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/inputenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/url/url.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def))) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def) (./main.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
+* v-part:(T,H,B)=(95.39737pt, 556.47656pt, 143.09605pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=430.00462pt
+* \textheight=556.47656pt
+* \oddsidemargin=19.8752pt
+* \evensidemargin=19.8752pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: pdftex
+* paper: letterpaper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 397.48499pt, 108.40501pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43pt, 72.27pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=397.48499pt
+* \textheight=650.43pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-37.0pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(./main.out) (./main.out) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/psnfss/t1phv.fd) (./pages/page-01.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--25
+\T1/ptm/m/n/10 In-
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--43
+\T1/ptm/m/n/10 and
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--43
+\T1/ptm/m/n/10 tional,
+[1{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]) (./pages/page-02.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--17
+\T1/ptm/m/n/10 tives,
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--17
+\T1/ptm/m/n/10 and ac-ti-va-tion in-stead of de-scrib-ing all of them as one au-toen-coder.
+
+Underfull \hbox (badness 1748) in paragraph at lines 21--36
+\T1/ptm/m/n/10 records does not equate do-main on-tolo-gies or log-i-cal in-ter-pre-ta-tions. [ar-ti-fact S01--S06]
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--36
+\T1/ptm/m/n/10 tions,
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--36
+\T1/ptm/m/n/10 tax
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--36
+\T1/ptm/m/n/10 im-ply equiv-a-lent for-mu-las. [ar-ti-fact S01,S05]
+(/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd)
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 sup-plied the tar-get vec-tor. [ar-ti-fact S22,S23]
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 tors;
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 selected;
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 quired
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--58
+\T1/ptm/m/n/10 to mea-sure fi-delity to the orig-i-nal source.
+[2]) (./pages/page-03.tex
+Underfull \hbox (badness 10000) in paragraph at lines 5--18
+\T1/ptm/m/n/10 ground-
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--18
+\T1/ptm/m/n/10 frozen pro-file silently uses it. [ar-ti-fact S07,S08,S23,S25]
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--18
+\T1/ptm/m/n/10 stituents
+(./equations/equation-01.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 4--36
+\T1/ptm/m/n/10 pro-grams could con-sis-tently omit the same ex-cep-tion. [ar-ti-fact S07]
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 binder,
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 tic
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 gram-mar de-cides what can be rep-re-sented. [ar-ti-fact S33]
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 domain
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--49
+\T1/ptm/m/n/10 fer,
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--57
+\T1/ptm/m/n/10 slot--
+) (./pages/page-04.tex (./figure-01.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 4--7
+\T1/ptm/m/n/10 vec-tor for a known sam-ple is not gen-er-al-iza-tion. [ar-ti-fact S24]
+(./equations/equation-02.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                     [4]) (./equations/equation-03.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    ) (./equations/equation-04.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--16
+ \T1/ptm/m/n/10 Here Ag is the ac-tiv-ity of a bounded fea-ture group,
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--16
+\T1/ptm/m/n/10 and Wg , Ug , Vg stand for en-abled em-bed-ding and
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--16
+\T1/ptm/m/n/10 former
+(./equations/equation-05.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )) (./pages/page-05.tex
+Underfull \hbox (badness 10000) in paragraph at lines 10--22
+\T1/ptm/m/n/10 met-rics be-long in the ex-per-i-ment man-i-fest. [ar-ti-fact S24]
+
+Underfull \hbox (badness 7740) in paragraph at lines 25--35
+\T1/ptm/m/n/10 The code re-ports cov-er-age, ab-sten-tion, and family-specific met-rics. [ar-ti-fact S24]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--35
+\T1/ptm/m/n/10 tion
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 38--51
+\T1/ptm/m/n/10 dates
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--51
+\T1/ptm/m/n/10 guar-an-tees. [ar-ti-fact S24,S25,S29]
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--51
+\T1/ptm/m/n/10 data.
+
+Underfull \hbox (badness 3148) in paragraph at lines 55--59
+\T1/ptm/m/n/10 client reads sharded post-ings and ap-plies term-frequency, inverse-frequency, and length-
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--59
+\T1/ptm/m/n/10 normalization
+) (./pages/page-06.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--11
+\T1/ptm/m/n/10 S22,S34,S35]
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 tion
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 ner
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 is not it-self a trained tac-tic syn-the-sizer. [ar-ti-fact S38]
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 prover
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 avail-abil-ity must be es-tab-lished. [ar-ti-fact S37]
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 bol,
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--32
+\T1/ptm/m/n/10 selector
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 35--47
+\T1/ptm/m/n/10 [ar-ti-fact S39,S40]
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--47
+\T1/ptm/m/n/10 feed-
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--47
+\T1/ptm/m/n/10 tuned
+) (./pages/page-07.tex (./equations/equation-06.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--14
+\T1/ptm/m/n/10 tion
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 16--29
+\T1/ptm/m/n/10 S09,S31]
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--47
+\T1/ptm/m/n/10 ported
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--47
+\T1/ptm/m/n/10 in-vo-ca-tion of a com-piler [7].
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--47
+\T1/ptm/m/n/10 re-place-ment p $\OMS/cmsy/m/n/10 ^$ \T1/ptm/m/n/10 q. [ar-ti-fact S18]
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--47
+\T1/ptm/m/n/10 or
+(./equations/equation-07.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    ) (./equations/equation-08.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--63
+\T1/ptm/m/n/10 per sup-ported trans-la-tion, not a sound-ness the-o-rem about ev-ery cur-rent ex-trac-tor.
+) (./pages/page-08.tex [8] (./equations/equation-09.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    ) (./equations/equation-10.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    ) (./equations/equation-11.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 is
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 in-suf-fi-cient.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 the
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 plete
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 dif-fer-ent con-clu-sions. [ar-ti-fact S01,S09]
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--47
+\T1/ptm/m/n/10 model
+
+Underfull \hbox (badness 3333) in paragraph at lines 50--59
+\T1/ptm/m/n/10 con-ve-nience fix-tures. Their pres-ence is not a new pass-ing test run. [ar-ti-fact S32]
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--59
+\T1/ptm/m/n/10 met
+[9]) (./pages/page-09.tex (./blocks/block-011.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 gets,
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 proof-transfer re-sults.]
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 tion
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 not
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--18
+\T1/ptm/m/n/10 ported
+
+Underfull \hbox (badness 7256) in paragraph at lines 21--40
+\T1/ptm/m/n/10 fi-nite run-time ob-ser-va-tion, ev-i-dence readi-ness, and pol-icy ap-proval. [ar-ti-fact S19]
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--40
+\T1/ptm/m/n/10 ture
+[10]) [11] (./pages/page-10.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 In-for-ma-tion Pro-cess-ing Sys-tems 35, 2022. https://arxiv.org/abs/2205.12615.
+
+Underfull \hbox (badness 1077) in paragraph at lines 4--32
+\T1/ptm/m/n/10 and Jeremy Avi-gad. ProofNet: Aut-o-for-mal-iz-ing and for-mally prov-ing undergraduate-level
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 math-e-mat-ics. arXiv:2302.12433, 2023.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 In-tel-li-gence, 287:103348, 2020. doi:10.1016/j.artint.2020.103348.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 Com-put-ing, 4:67--95, 1986. doi:10.1007/BF03037383.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 doi:10.1007/BFb0054170.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 baum.
+
+Underfull \hbox (badness 6332) in paragraph at lines 4--32
+\T1/ptm/m/n/10 Ad-vances in Neu-ral In-for-ma-tion Pro-cess-ing Sys-tems 31, 2018. https://arxiv.org/abs/
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 1810.02338.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--32
+\T1/ptm/m/n/10 iza-tion. In Ad-vances in Neu-ral In-for-ma-tion Pro-cess-ing Sys-tems 37, 2024.
+
+Underfull \hbox (badness 1189) in paragraph at lines 4--32
+\T1/ptm/m/n/10 [10] Al-bert Qiaochu Jiang, Wenda Li, Szy-mon Tworkowski, Kon-rad Czechowski, Tomasz
+
+Underfull \hbox (badness 1168) in paragraph at lines 4--32
+\T1/ptm/m/n/10 Odrzygó¹d¹, Pi-otr Miªo±, Yuhuai Wu, and Mateja Jam-nik. Thor: Wield-ing ham-mers to
+) [12] (./pages/page-11.tex (./blocks/block-012.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [13])) (./pages/page-12.tex (./blocks/block-013.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [14]
+Overfull \vbox (84.166pt too high) has occurred while \output is active
+Overfull \vbox (84.166pt too high) has occurred while \output is active [15])) (./pages/page-13.tex (./blocks/block-014.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 source-view, target-view, source-formula-root,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 target-formula-root,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 signature-map, interpretation-profile, bridge-assumptions,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 preserved-property, preservation-direction,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 supported-fragment,
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\T1/ptm/m/n/10 named-losses, source-map-root, checker-environment,
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--47
+\T1/ptm/m/n/10 that
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--55
+\T1/ptm/m/n/10 tity,
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--55
+\T1/ptm/m/n/10 gin,
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--62
+\T1/ptm/m/n/10 change
+[16]) (./pages/page-14.tex (./blocks/block-015.tex)
+Underfull \hbox (badness 1688) in paragraph at lines 13--17
+\T1/ptm/m/n/10 The in-cluded eval-u-a-tion/reference_semantics.py uses only the Python stan-dard li-brary. It
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--21
+\T1/ptm/m/n/10 python eval-u-a-tion/reference_semantics.py
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--29
+\T1/ptm/m/n/10 sion
+[17]) (./pages/page-15.tex (./blocks/block-016.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 14--19
+\T1/ptm/m/n/10 ity
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--26
+\T1/ptm/m/n/10 route
+(./blocks/block-017.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [18])) (./pages/page-16.tex (./blocks/block-018.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 9--16
+\T1/ptm/m/n/10 ness.
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--16
+\T1/ptm/m/n/10 ing,
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 ac-cep-tance pro-file.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 in-ter-pre-ta-tions.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 source lin-eage.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 ab-sten-tion or ex-plicit par-tial anal-y-sis.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 obli-ga-tions for ev-ery relied-upon trans-la-tion.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 Keep can-di-date, sat-is-fi-a-bil-ity, mon-i-tor, and kernel-checked out-comes dis-tinct.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 ver-i-fied state-ment to the outer ar-ti-fact fields.
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--42
+\T1/ptm/m/n/10 kind. Un-known does not be-come true or false by de-fault.
+[19]) (./pages/page-17.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+\T1/ptm/m/n/10 claims,
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+\T1/ptm/m/n/10 thor
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--17
+\T1/ptm/m/n/10 recheck
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--24
+\T1/ptm/m/n/10 All
+(./blocks/block-019.tex
+Underfull \vbox (badness 10000) has occurred while \output is active
+Underfull \vbox (badness 10000) has occurred while \output is active [20])) (./pages/page-18.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--23
+\T1/ptm/m/n/10 rather than silently la-bel-ing all vec-tors pre-trained se-man-tic em-bed-dings.
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--23
+\T1/ptm/m/n/10 ured
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--23
+\T1/ptm/m/n/10 A
+[21] (./blocks/block-020.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 26--32
+\T1/ptm/m/n/10 tute
+(./equations/equation-12.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )) (./pages/page-19.tex (./equations/equation-13.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--15
+ \T1/ptm/m/n/10 where M se-lects avail-able tar-get rows. The de-nom-
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--15
+\T1/ptm/m/n/10 i-na-tor in the in-spected path is the to-tal sam-ple count,
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--15
+\T1/ptm/m/n/10 head.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--15
+\T1/ptm/m/n/10 ent
+(./equations/equation-14.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--23
+\T1/ptm/m/n/10 transaction-
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--23
+\T1/ptm/m/n/10 Some
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--23
+\T1/ptm/m/n/10 counted
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 26--38
+\T1/ptm/m/n/10 which need not be dif-fer-en-tiable ten-sors.
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--51
+\T1/ptm/m/n/10 con-fi-dence or avail-able la-bels are in-ad-e-quate.
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--51
+\T1/ptm/m/n/10 head
+) (./pages/page-20.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--23
+\T1/ptm/m/n/10 an un-fixed sam-ple set blocks guid-ance emis-sion.
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 26--36
+\T1/ptm/m/n/10 semantic-
+
+Underfull \hbox (badness 7168) in paragraph at lines 26--36
+\T1/ptm/m/n/10 pre-served source facets and re-gres-sion cases be-fore its be-hav-ior be-comes canon-i-cal.
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--36
+\T1/ptm/m/n/10 cal.
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--36
+\T1/ptm/m/n/10 tion
+(./blocks/block-024.tex)) (./pages/page-21.tex (./blocks/block-025.tex [24])
+Underfull \hbox (badness 10000) in paragraph at lines 4--13
+\T1/ptm/m/n/10 agents or prove that the obli-ga-tion was ful-filled.
+(./blocks/block-026.tex) (./blocks/block-027.tex)) (./pages/page-22.tex [25]
+Underfull \hbox (badness 10000) in paragraph at lines 4--9
+\T1/ptm/m/n/10 lookup,
+(./equations/equation-15.tex
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    
+pdfTeX warning (ext4): destination with the same identifier (name{equation.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 \begin{equation}
+                    )
+Underfull \hbox (badness 10000) in paragraph at lines 4--29
+\T1/ptm/m/n/10 pa-ram-e-ters be-long in a re-pro-ducible run record. [ar-ti-fact S34]
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--29
+\T1/ptm/m/n/10 selection
+
+Underfull \hbox (badness 2547) in paragraph at lines 4--29
+\T1/ptm/m/n/10 er-rors can prop-a-gate into compiler-derived su-per-vi-sion un-less in-de-pen-dent checks ex-pose
+
+Underfull \hbox (badness 1642) in paragraph at lines 32--45
+\T1/ptm/m/n/10 query. An eval-u-ated route must iden-tify the ac-tual back-end and sta-tus. [ar-ti-fact S35]
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--45
+\T1/ptm/m/n/10 cal
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--58
+\T1/ptm/m/n/10 nec-es-sar-ily as-sert a log-i-cal im-pli-ca-tion. [ar-ti-fact S34]
+[26]) (./pages/page-23.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
+\T1/ptm/m/n/10 ing.
+(./blocks/block-029.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 13--22
+\T1/ptm/m/n/10 and
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--22
+\T1/ptm/m/n/10 im-ple-men-ta-tion per-forms no proof, write, or net-work work. [ar-ti-fact S38]
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--22
+\T1/ptm/m/n/10 of
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--34
+\T1/ptm/m/n/10 tract;
+
+Underfull \hbox (badness 1082) in paragraph at lines 25--34
+\T1/ptm/m/n/10 opaque un-rec-og-nized terms must re-turn un-sup-ported rather than be erased. [ar-ti-fact S37]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--34
+\T1/ptm/m/n/10 out
+[27]) (./pages/page-24.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+\T1/ptm/m/n/10 [ar-ti-fact S19,S37]
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--22
+\T1/ptm/m/n/10 would
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--22
+\T1/ptm/m/n/10 then re-quire sep-a-rate ev-i-dence. [ar-ti-fact S36]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--41
+\T1/ptm/m/n/10 Leanstral's base weights. [ar-ti-fact S39]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--41
+\T1/ptm/m/n/10 nance,
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--41
+\T1/ptm/m/n/10 with fo-cused tests and frozen-canary ev-i-dence. [ar-ti-fact S40]
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--41
+\T1/ptm/m/n/10 tion
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 56--61
+\T1/ptm/m/n/10 poses
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--61
+\T1/ptm/m/n/10 sions
+) (./pages/page-25.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--9
+\T1/ptm/m/n/10 an
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--18
+\T1/ptm/m/n/10 tion
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--18
+\T1/ptm/m/n/10 fact
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--43
+\T1/ptm/m/n/10 straint,
+
+Underfull \hbox (badness 2443) in paragraph at lines 28--43
+\T1/ptm/m/n/10 op-er-a-tion, time, and policy-version map-pings must be ad-mit-ted. [ar-ti-fact S01,S04,S09]
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--43
+\T1/ptm/m/n/10 changed
+) (./pages/page-26.tex
+Underfull \vbox (badness 3547) has occurred while \output is active
+Underfull \vbox (badness 3547) has occurred while \output is active [29] (./blocks/block-030.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 10--20
+\T1/ptm/m/n/10 than
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--20
+\T1/ptm/m/n/10 der
+) [30] (./pages/page-27.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--12
+\T1/ptm/m/n/10 and not a set of com-pleted com-pli-ance an-swers.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--12
+\T1/ptm/m/n/10 manuscript and ar-ti-fact.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--12
+\T1/ptm/m/n/10 ment
+) [31] (./main.aux) )
+(see the transcript file for additional information)</home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/barberb/.local/share/vericodegen-texlive/.TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on main.pdf (31 pages, 255325 bytes).
+Transcript written on main.log.
+Latexmk: Getting log file 'main.log'
+Latexmk: Examining 'main.fls'
+Latexmk: Examining 'main.log'
+Latexmk: Log file says output to 'main.pdf'
+Latexmk: All targets (main.pdf) are up-to-date
+

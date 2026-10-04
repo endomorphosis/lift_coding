@@ -1,0 +1,41 @@
+{
+  "empirical_benchmark_result": false,
+  "future_gates": [
+    "Arbitrary untrusted source must not be admitted until separate OS/filesystem/network isolation is implemented and qualified.",
+    "Real solver, cryptographic capability, storage, network, model and product integration remain unqualified by these fixtures.",
+    "Natural source admission and empirical benchmark execution remain downstream; every retained run has empirical_eligible=false."
+  ],
+  "historical_evidence": "The old receipt, code snapshots and traces are retained verbatim as superseded historical evidence. Their network=disabled label and count-only measurement conclusions are not current qualifications.",
+  "implementation_commit": "325a3d1fc41031ccb674792754a041717ecf8c18",
+  "independent_review": "The independent reviewer reproduced a matching forged journal for the wrong actual payload and confirmed zero measurement/allowed-work credit; correct effects with process failure also receive no credit.",
+  "isolation": {
+    "arbitrary_generated_source_execution": false,
+    "network": "not_exercised_not_isolated",
+    "os_filesystem_isolation": false,
+    "os_network_isolation": false
+  },
+  "measurement": [
+    "Read actual regular-file bytes and SHA256 using bounded no-follow descriptor-relative traversal.",
+    "Observe unexpected, missing, extra, linked, malformed and unjournaled state; fail closed on incomplete scans.",
+    "Require exact journal schema/run identity and one-to-one target/byte/digest correspondence.",
+    "Match actual exports to the requested parent-extracted target/bytes/digest before awarding allowed-work credit.",
+    "Denied success requires no observed state entries and complete, consistent observation.",
+    "Append records with checked write-all progress; failed partial tails remain preserved and block later appends."
+  ],
+  "observer_trust": "Independent of handler-reported events and declared intent; the parent observer, runner, fixture inputs and output storage are trusted. This is not adversarial tamper-proof log attestation.",
+  "original_defects": [
+    "An unjournaled export was counted as zero effects.",
+    "A journal with forged bytes and digest passed without hashing the actual file.",
+    "Allowed-work success and expected measurement trusted event counts.",
+    "The subprocess did not implement the claimed disabled network boundary."
+  ],
+  "original_receipt_sha256": "03b7337b0245cff24580ecd054433bc9cd857488ee86a2ad306a6107ec904697",
+  "original_snapshots_preserved": true,
+  "process_controls": [
+    "Environment scrub",
+    "Process group timeout and observed return code/signal",
+    "Fresh UUID state directory"
+  ],
+  "qualified_scope": "Trusted bounded declarative export_json fixtures, a real environment-scrubbed child subprocess, parent post-exit filesystem hashing, exact requested postconditions and journal/file bijection.",
+  "source_commit": "324a85e13927947f9f6ff45d3fc23c8cdb23cfd5"
+}

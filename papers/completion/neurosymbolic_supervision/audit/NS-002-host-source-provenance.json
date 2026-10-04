@@ -1,0 +1,105 @@
+{
+  "schema": "vericodegen-host-source-provenance-assist/v1",
+  "paper_id": "neurosymbolic_supervision",
+  "task_context": "NS-002",
+  "captured_at": "2026-09-11T16:46:10.176591+00:00",
+  "host_workspace": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c",
+  "observation_scope": "Read-only host filesystem and Git observations of the current worker checkout. This is not evidence of loaded Python modules, runtime integration, test execution, rollout qualification, or container Git/mount capabilities.",
+  "task_authority_mutated": false,
+  "source_files_mutated": false,
+  "optional_git_locks_disabled": true,
+  "repositories": [
+    {
+      "name": "parent",
+      "workspace_relative_path": ".",
+      "host_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c",
+      "observation_started_at": "2026-09-11T16:46:09.835560+00:00",
+      "head": "6c7f59fc7d0c3cb370c6d2f5b76596030f5f2fdb",
+      "head_tree": "be88ef338136cb6a94bbb60857ceed322b1db3a7",
+      "git_directory": "/home/barberb/lift_coding/.git/worktrees/workspace_0cc10e0ea050_67542b35bc3c",
+      "common_git_directory": "/home/barberb/lift_coding/.git",
+      "branch": "implementation/ns-002-60f9ed63ea4d-attempt-1-1789144893",
+      "status_porcelain_v1": "",
+      "tracked_diff_raw": "",
+      "tracked_or_untracked_changes_observed": false,
+      "git_marker": {
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c/.git",
+        "sha256": "433c707f50e21b2f2e76c423973049084948a8117045334f9141489d7385a656",
+        "text": "gitdir: /home/barberb/lift_coding/.git/worktrees/workspace_0cc10e0ea050_67542b35bc3c"
+      },
+      "three_external_gitlinks": "160000 commit 6a28df6a9ac89359fa35a54a6f6df85718b65f2b\texternal/ipfs_accelerate\n160000 commit ac82107e246b30e35a2bbdcf75e01370d22350c6\texternal/ipfs_datasets\n160000 commit 6196017ca3df016c7159dce43af60f2a0d96a9ae\texternal/ipfs_kit",
+      "observation_finished_at": "2026-09-11T16:46:09.992655+00:00"
+    },
+    {
+      "name": "ipfs_accelerate",
+      "workspace_relative_path": "external/ipfs_accelerate",
+      "host_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c/external/ipfs_accelerate",
+      "observation_started_at": "2026-09-11T16:46:09.992703+00:00",
+      "head": "6a28df6a9ac89359fa35a54a6f6df85718b65f2b",
+      "head_tree": "bf79a82f0ce6125f87e66e072b1338392a3c5611",
+      "git_directory": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/.git/worktrees/ipfs_accelerate5",
+      "common_git_directory": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/.git",
+      "branch": "implementation/ns-002-60f9ed63ea4d-attempt-1-1789144893-submodule-external-ipfs_accelerate",
+      "status_porcelain_v1": "",
+      "tracked_diff_raw": "",
+      "tracked_or_untracked_changes_observed": false,
+      "git_marker": {
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c/external/ipfs_accelerate/.git",
+        "sha256": "4fa5f6969ee89c0cd85461c8d26ae35334afd33e86a9b68835b12582fbe78388",
+        "text": "gitdir: /home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/.git/worktrees/ipfs_accelerate5"
+      },
+      "observation_finished_at": "2026-09-11T16:46:10.039613+00:00"
+    },
+    {
+      "name": "ipfs_datasets",
+      "workspace_relative_path": "external/ipfs_datasets",
+      "host_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c/external/ipfs_datasets",
+      "observation_started_at": "2026-09-11T16:46:10.039633+00:00",
+      "head": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "head_tree": "2b3d892dd1c31fb6b8a3eebdb88616d411c49a47",
+      "git_directory": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_datasets/.git/worktrees/ipfs_datasets5",
+      "common_git_directory": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_datasets/.git",
+      "branch": "implementation/ns-002-60f9ed63ea4d-attempt-1-1789144893-submodule-external-ipfs_datasets",
+      "status_porcelain_v1": "",
+      "tracked_diff_raw": "",
+      "tracked_or_untracked_changes_observed": false,
+      "git_marker": {
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c/external/ipfs_datasets/.git",
+        "sha256": "24edaffccea9981e81f46ea5824106bf5a72794666a85ebdf12cea1ff0ef98d8",
+        "text": "gitdir: /home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_datasets/.git/worktrees/ipfs_datasets5"
+      },
+      "observation_finished_at": "2026-09-11T16:46:10.140644+00:00"
+    },
+    {
+      "name": "ipfs_kit",
+      "workspace_relative_path": "external/ipfs_kit",
+      "host_path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c/external/ipfs_kit",
+      "observation_started_at": "2026-09-11T16:46:10.140676+00:00",
+      "head": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "head_tree": "93070c709af29095fdff11f3e2698543449c08ef",
+      "git_directory": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_kit/.git/worktrees/ipfs_kit4",
+      "common_git_directory": "/home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_kit/.git",
+      "branch": "implementation/ns-002-60f9ed63ea4d-attempt-1-1789144893-submodule-external-ipfs_kit",
+      "status_porcelain_v1": "",
+      "tracked_diff_raw": "",
+      "tracked_or_untracked_changes_observed": false,
+      "git_marker": {
+        "path": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/workspace_0cc10e0ea050_67542b35bc3c/external/ipfs_kit/.git",
+        "sha256": "cdb23d258f509458c370332e6ada23f1b65350c1bb4a9e8c4b9e67bf9dd28c4e",
+        "text": "gitdir: /home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_kit/.git/worktrees/ipfs_kit4"
+      },
+      "observation_finished_at": "2026-09-11T16:46:10.176356+00:00"
+    }
+  ],
+  "command_log": {
+    "path": "papers/completion/neurosymbolic_supervision/audit/NS-002-host-source-provenance.commands.log",
+    "sha256": "58a8ae011ea0438cacff2e4586b73634964b73b99c45fa31cd46b00306bacb05",
+    "command_count": 29
+  },
+  "limitations": [
+    "This is a sequential point-in-time observation of a live editable worker tree; changes after capture are not covered.",
+    "Detached HEAD symbolic-ref exit1 means no branch, not an unavailable commit.",
+    "Read-only host access cannot establish whether the container can read the recorded Git directories.",
+    "No new experiments were run and no task completion criterion was marked met."
+  ]
+}

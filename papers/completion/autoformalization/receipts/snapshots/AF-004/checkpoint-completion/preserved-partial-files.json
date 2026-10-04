@@ -1,0 +1,156 @@
+{
+  "artifacts": [
+    {
+      "bytes": 6890,
+      "path": "papers/completion/autoformalization/data/corpus_manifest.json",
+      "sha256": "52eef2182d4de20b43822694a03e55e12864d76ced6b5d8b0ef81221d0a89104"
+    },
+    {
+      "bytes": 5027,
+      "path": "papers/completion/autoformalization/data/splits.json",
+      "sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27"
+    },
+    {
+      "bytes": 4101,
+      "path": "papers/completion/autoformalization/data/teacher_manifest.json",
+      "sha256": "dcee7f2d3e74ce804a57978360047337353b2f958713ffe924f6ba9c9a8a0906"
+    },
+    {
+      "bytes": 6771,
+      "path": "papers/completion/autoformalization/evidence/split_audit.json",
+      "sha256": "cfce1dc56a4bca7cc7a84631f3e52e6509bc29a48da4afa3b7491e42980175b1"
+    },
+    {
+      "bytes": 8747,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/build_lexical_graph.py",
+      "sha256": "3371d41f515bbc57e0b5334a009b9a74f4323726f707dfa03d82ae4e2e6a7936"
+    },
+    {
+      "bytes": 1446,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/candidate_verification.json",
+      "sha256": "8aacbdf627ef6b69b2baad831a7fb130a015711e2ab5990c87e11689c02498bd"
+    },
+    {
+      "bytes": 2576,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/data_admission.py",
+      "sha256": "f1fa0421255b2bfccbf744fa608009c95a605a4b923bf5bd32e49266382d0890"
+    },
+    {
+      "bytes": 558,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/final_handoff_privacy.log",
+      "sha256": "6dace5158ad5dc0359ad9294e8e82e23c3d68852b159b305afbc5674bfd9452d"
+    },
+    {
+      "bytes": 578,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/final_handoff_privacy_verification.json",
+      "sha256": "abdd793dd5f8efbfda1f94f5bc64a167c9059877f7798ba0b35f4b75a5b75a22"
+    },
+    {
+      "bytes": 159299,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/fixed_canary.sources.jsonl",
+      "sha256": "98549048682ea1eb727812a6bb8e9d7a9834c22d43a62fd5373b7b7fad97c207"
+    },
+    {
+      "bytes": 4681,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/grouping_plan.json",
+      "sha256": "bf5b1e0331e76c857513fa0a04b1dfd9159643fc0295935757c8702f14bcf9fa"
+    },
+    {
+      "bytes": 2277,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/lexical_graph.log",
+      "sha256": "88936d42070e5717fb4e197a221c6b4d13afe04a4fbb0f8af72bd6f78c988f7c"
+    },
+    {
+      "bytes": 2360,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/lexical_graph_audit.json",
+      "sha256": "3930e991375b6c9d42f6eeb2694441c22a267b4ebfdd83f6f07479dff005e4c4"
+    },
+    {
+      "bytes": 1628,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/materialize_candidate.final.log",
+      "sha256": "5168a29b30b84d786048bcac7ac318bac591ddde7dcad1f4fc194389833b39a8"
+    },
+    {
+      "bytes": 1628,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/materialize_candidate.log",
+      "sha256": "7549f40fd4fde4a88c3a71413267db8fd94561b448c48a01496d3ac88da8b2e2"
+    },
+    {
+      "bytes": 1628,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/materialize_candidate.manifest_refinement.log",
+      "sha256": "5168a29b30b84d786048bcac7ac318bac591ddde7dcad1f4fc194389833b39a8"
+    },
+    {
+      "bytes": 17277,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/materialize_candidate.py",
+      "sha256": "6a4ec199e75027353843dc67cbf8601d4e0dc914d4b17bc6a4ef8fd6f5c0339b"
+    },
+    {
+      "bytes": 1081,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/paraphrase_graph.attempt1.log",
+      "sha256": "4d5ae48a4bf9898cf36360648b2935c891f7450825790c961531538a1d703a7a"
+    },
+    {
+      "bytes": 4211,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/paraphrase_graph.log",
+      "sha256": "d8d5e2acdf4128ae613e2fd06618d58418ee033e6e8dcd7aadb6c01609654597"
+    },
+    {
+      "bytes": 4361,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/paraphrase_graph_audit.json",
+      "sha256": "cb344117857eb98c385e70c54d865d22cac973ec283b4c8e917a89a30550cb24"
+    },
+    {
+      "bytes": 7726,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/patent-legal-corpus-86c77cb6.README.md",
+      "sha256": "39e2f77f9fb2d4e1d7ffc2056eb2ea0c6b345abeacc6b5d68a728b181e434246"
+    },
+    {
+      "bytes": 4629,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/patent-legal-corpus-86c77cb6.coverage.json",
+      "sha256": "56b63af81a6fdfc5917005a5bf18de7252c4f8d9d334d414b74f9c3c6bbfb1c4"
+    },
+    {
+      "bytes": 7738,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/screen_paraphrases.py",
+      "sha256": "a3b11fb9a4df81cab24b272929431f195ad46d999630448c8e1414b21a74764b"
+    },
+    {
+      "bytes": 50666,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/selection.sources.jsonl",
+      "sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c"
+    },
+    {
+      "bytes": 1116,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/source_unit_accounting_addendum.json",
+      "sha256": "ba202fb0b532ce573c3fbfe492302f34c1b518021c5d3e4ba3b18ee05cdf023a"
+    },
+    {
+      "bytes": 693588,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/train.sources.jsonl",
+      "sha256": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532"
+    },
+    {
+      "bytes": 1220,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/verify_candidate.final.log",
+      "sha256": "4a99c9877d2dde9d47233416f994646ac30e6825376c04af95503964d744a3fc"
+    },
+    {
+      "bytes": 1220,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/verify_candidate.log",
+      "sha256": "4a99c9877d2dde9d47233416f994646ac30e6825376c04af95503964d744a3fc"
+    },
+    {
+      "bytes": 7626,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/verify_candidate.py",
+      "sha256": "b2942e336551b8249c84c738fc3853f554006f86daef2be6a135281155717277"
+    },
+    {
+      "bytes": 1920,
+      "path": "papers/completion/autoformalization/receipts/snapshots/AF-004/verify_final_handoff.py",
+      "sha256": "7a5c1945d178b6715a949b71418863d1a1930495eef0eca4033525279baabc63"
+    }
+  ],
+  "partial_candidate_review_sha256": "939858efde7cfaccd31e3a1436fadf11984c48212203bdba80ac89c8d646098a",
+  "source_commit": "70af4e50576ea005527bc1fa154d7164f0cffcca"
+}
