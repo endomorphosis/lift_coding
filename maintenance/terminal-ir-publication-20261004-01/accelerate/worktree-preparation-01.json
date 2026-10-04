@@ -1,0 +1,33 @@
+{
+  "utc": "2026-10-04T19:32:29.902155+00:00",
+  "operations": [
+    {
+      "argv": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "5a3b389b01fab59c75f2aadef7a46e071b9dd2de",
+        "origin/main"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "elapsed_seconds": 0.0029124930151738226
+    },
+    {
+      "argv": [
+        "git",
+        "worktree",
+        "add",
+        "-b",
+        "codex/terminal-ir-publication-20261004-accelerate-01",
+        "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate/worktree",
+        "origin/main"
+      ],
+      "returncode": 0,
+      "stdout": "branch 'codex/terminal-ir-publication-20261004-accelerate-01' set up to track 'origin/main'.\nHEAD is now at 02dc5e91a Fix symbolic Doctor harness source roles and report capability gaps\n",
+      "stderr": "Preparing worktree (new branch 'codex/terminal-ir-publication-20261004-accelerate-01')\nUpdating files:  51% (11325/22104)\nUpdating files:  51% (11372/22104)\nUpdating files:  51% (11392/22104)\nUpdating files:  52% (11495/22104)\nUpdating files:  53% (11716/22104)\nUpdating files:  54% (11937/22104)\nUpdating files:  55% (12158/22104)\nUpdating files:  56% (12379/22104)\nUpdating files:  57% (12600/22104)\nUpdating files:  58% (12821/22104)\nUpdating files:  59% (13042/22104)\nUpdating files:  60% (13263/22104)\nUpdating files:  61% (13484/22104)\nUpdating files:  62% (13705/22104)\nUpdating files:  63% (13926/22104)\nUpdating files:  64% (14147/22104)\nUpdating files:  65% (14368/22104)\nUpdating files:  66% (14589/22104)\nUpdating files:  67% (14810/22104)\nUpdating files:  68% (15031/22104)\nUpdating files:  69% (15252/22104)\nUpdating files:  70% (15473/22104)\nUpdating files:  71% (15694/22104)\nUpdating files:  72% (15915/22104)\nUpdating files:  73% (16136/22104)\nUpdating files:  74% (16357/22104)\nUpdating files:  75% (16578/22104)\nUpdating files:  76% (16800/22104)\nUpdating files:  77% (17021/22104)\nUpdating files:  78% (17242/22104)\nUpdating files:  79% (17463/22104)\nUpdating files:  79% (17524/22104)\nUpdating files:  79% (17537/22104)\nUpdating files:  80% (17684/22104)\nUpdating files:  81% (17905/22104)\nUpdating files:  82% (18126/22104)\nUpdating files:  83% (18347/22104)\nUpdating files:  84% (18568/22104)\nUpdating files:  85% (18789/22104)\nUpdating files:  86% (19010/22104)\nUpdating files:  87% (19231/22104)\nUpdating files:  88% (19452/22104)\nUpdating files:  89% (19673/22104)\nUpdating files:  90% (19894/22104)\nUpdating files:  91% (20115/22104)\nUpdating files:  92% (20336/22104)\nUpdating files:  93% (20557/22104)\nUpdating files:  94% (20778/22104)\nUpdating files:  95% (20999/22104)\nUpdating files:  96% (21220/22104)\nUpdating files:  97% (21441/22104)\nUpdating files:  98% (21662/22104)\nUpdating files:  99% (21883/22104)\nUpdating files: 100% (22104/22104)\nUpdating files: 100% (22104/22104), done.\n",
+      "elapsed_seconds": 5.841064153995831
+    }
+  ]
+}

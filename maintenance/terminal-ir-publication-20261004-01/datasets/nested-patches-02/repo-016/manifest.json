@@ -1,0 +1,2966 @@
+{
+  "HEAD_after": "df11f08fae17d35153e420fdcdc5b38d9f6b9a7f",
+  "HEAD_before": "df11f08fae17d35153e420fdcdc5b38d9f6b9a7f",
+  "counts": {
+    "file_entries": 103,
+    "regular_bytes_including_duplicates": 3861335,
+    "regular_files": 103,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      ".M": 103
+    },
+    "ahead/behind_cached_main": "0/71",
+    "branch": "main",
+    "dirty_children": [],
+    "id": 16,
+    "origin": "github.com/endomorphosis/swissknife",
+    "parent": 4,
+    "relative": "swissknife",
+    "tracked": 103,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607633238034,
+        "device": 66306,
+        "inode": 22968271,
+        "mode": 33277,
+        "mtime_ns": 1785870607633238034,
+        "size": 15977
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607633238034,
+        "device": 66306,
+        "inode": 22968271,
+        "mode": 33277,
+        "mtime_ns": 1785870607633238034,
+        "size": 15977
+      },
+      "bytes": 15977,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/06/06be53b5ed1d018f1ac3d184b255602a92270f6ea5c70d60b5aaf53401212e5e",
+      "path": "cleanup-archive/analysis/mcp_server_diagnostic.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "06be53b5ed1d018f1ac3d184b255602a92270f6ea5c70d60b5aaf53401212e5e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607716246011,
+        "device": 66306,
+        "inode": 22968823,
+        "mode": 33204,
+        "mtime_ns": 1785870607716246011,
+        "size": 10312
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607716246011,
+        "device": 66306,
+        "inode": 22968823,
+        "mode": 33204,
+        "mtime_ns": 1785870607716246011,
+        "size": 10312
+      },
+      "bytes": 10312,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/da/da2ac6cc226626662d086d3d990729838d5ca73a965f6b8d60080dda3d8cfbde",
+      "path": "docs/ERROR_REPORTING_SETUP.md",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "da2ac6cc226626662d086d3d990729838d5ca73a965f6b8d60080dda3d8cfbde",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607402215834,
+        "device": 66306,
+        "inode": 22969631,
+        "mode": 33204,
+        "mtime_ns": 1785870607402215834,
+        "size": 5329
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607402215834,
+        "device": 66306,
+        "inode": 22969631,
+        "mode": 33204,
+        "mtime_ns": 1785870607402215834,
+        "size": 5329
+      },
+      "bytes": 5329,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/01/0170ec85325c77211d3dac28dd0fc0be3f805a7b3437487b9868d91bed080e01",
+      "path": "examples/docker_error_reporting_integration.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "0170ec85325c77211d3dac28dd0fc0be3f805a7b3437487b9868d91bed080e01",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607406216219,
+        "device": 66306,
+        "inode": 22969646,
+        "mode": 33277,
+        "mtime_ns": 1785870607406216219,
+        "size": 6320
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607406216219,
+        "device": 66306,
+        "inode": 22969646,
+        "mode": 33277,
+        "mtime_ns": 1785870607406216219,
+        "size": 6320
+      },
+      "bytes": 6320,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/48/4842e9fe7093f3d11aa02a3ebfe9be14e5948b899e386c9640bda6a54f17ea87",
+      "path": "ipfs_accelerate_js/docs/GENERATOR_IMPROVEMENT_GUIDE.md",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "4842e9fe7093f3d11aa02a3ebfe9be14e5948b899e386c9640bda6a54f17ea87",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607412216795,
+        "device": 66306,
+        "inode": 24387362,
+        "mode": 33204,
+        "mtime_ns": 1785870607412216795,
+        "size": 8031
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607412216795,
+        "device": 66306,
+        "inode": 24387362,
+        "mode": 33204,
+        "mtime_ns": 1785870607412216795,
+        "size": 8031
+      },
+      "bytes": 8031,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ca/cac504910a1540076b95f9ac21b2238b9d5038c276ad3268c02c215f203da7f6",
+      "path": "scripts/invoke-mcp-libp2p.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "cac504910a1540076b95f9ac21b2238b9d5038c276ad3268c02c215f203da7f6",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607414216988,
+        "device": 66306,
+        "inode": 24387383,
+        "mode": 33204,
+        "mtime_ns": 1785870607414216988,
+        "size": 53866
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607414216988,
+        "device": 66306,
+        "inode": 24387383,
+        "mode": 33204,
+        "mtime_ns": 1785870607414216988,
+        "size": 53866
+      },
+      "bytes": 53866,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/65/65fbbe3533a9485cff1fc72b733978ead6eda9bc7d3e03017c003bb24d1b9c12",
+      "path": "scripts/ipfs_mcp_libp2p_bridge.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "65fbbe3533a9485cff1fc72b733978ead6eda9bc7d3e03017c003bb24d1b9c12",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607415217084,
+        "device": 66306,
+        "inode": 24384537,
+        "mode": 33277,
+        "mtime_ns": 1785870607415217084,
+        "size": 30444
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607415217084,
+        "device": 66306,
+        "inode": 24384537,
+        "mode": 33277,
+        "mtime_ns": 1785870607415217084,
+        "size": 30444
+      },
+      "bytes": 30444,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/df/df022e5f94d04e6eae3e60760b9b9f2c837f54677f6793a029cd0f873ce19038",
+      "path": "scripts/mcp-plus-plus/todo_daemon.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "df022e5f94d04e6eae3e60760b9b9f2c837f54677f6793a029cd0f873ce19038",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607416217180,
+        "device": 66306,
+        "inode": 24385132,
+        "mode": 33204,
+        "mtime_ns": 1785870607416217180,
+        "size": 7206
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607416217180,
+        "device": 66306,
+        "inode": 24385132,
+        "mode": 33204,
+        "mtime_ns": 1785870607416217180,
+        "size": 7206
+      },
+      "bytes": 7206,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/2f/2f85fe41a3a99bc0b59bfec27b06e546024d2eee9fbf879ce95f0fd39daf73e3",
+      "path": "src/utils/error_reporting/README.md",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "2f85fe41a3a99bc0b59bfec27b06e546024d2eee9fbf879ce95f0fd39daf73e3",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607416217180,
+        "device": 66306,
+        "inode": 24385133,
+        "mode": 33204,
+        "mtime_ns": 1785870607416217180,
+        "size": 2202
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607416217180,
+        "device": 66306,
+        "inode": 24385133,
+        "mode": 33204,
+        "mtime_ns": 1785870607416217180,
+        "size": 2202
+      },
+      "bytes": 2202,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/7b/7b3c54972c1b383dd9d2d293023a787f07564c6a0fef1c2294d365fab1d1ac6e",
+      "path": "src/utils/error_reporting/__init__.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "7b3c54972c1b383dd9d2d293023a787f07564c6a0fef1c2294d365fab1d1ac6e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607417217276,
+        "device": 66306,
+        "inode": 24385137,
+        "mode": 33204,
+        "mtime_ns": 1785870607417217276,
+        "size": 12307
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607417217276,
+        "device": 66306,
+        "inode": 24385137,
+        "mode": 33204,
+        "mtime_ns": 1785870607417217276,
+        "size": 12307
+      },
+      "bytes": 12307,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/b1/b145abe46131a9ac6e2b34f788eae50f2a7be7c814347f6872c76493b703097e",
+      "path": "src/utils/error_reporting/python_error_handler.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "b145abe46131a9ac6e2b34f788eae50f2a7be7c814347f6872c76493b703097e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607419217468,
+        "device": 66306,
+        "inode": 24386289,
+        "mode": 33277,
+        "mtime_ns": 1785870607419217468,
+        "size": 15058
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607419217468,
+        "device": 66306,
+        "inode": 24386289,
+        "mode": 33277,
+        "mtime_ns": 1785870607419217468,
+        "size": 15058
+      },
+      "bytes": 15058,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/4b/4b47dc04f7a14e7f2dbb7f6e8622114b5fe4d82dd495aaef2401e516aa8a9a01",
+      "path": "test/fixed_web_platform/README_FAULT_TOLERANCE.md",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "4b47dc04f7a14e7f2dbb7f6e8622114b5fe4d82dd495aaef2401e516aa8a9a01",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607420217564,
+        "device": 66306,
+        "inode": 24386290,
+        "mode": 33277,
+        "mtime_ns": 1785870607420217564,
+        "size": 17059
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607420217564,
+        "device": 66306,
+        "inode": 24386290,
+        "mode": 33277,
+        "mtime_ns": 1785870607420217564,
+        "size": 17059
+      },
+      "bytes": 17059,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/f0/f08eff331fdb6a9eba5f0d6081f2006c122cb24cbd59ff5f2beb2c70a443d32f",
+      "path": "test/fixed_web_platform/RESOURCE_POOL_ERROR_RECOVERY.md",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "f08eff331fdb6a9eba5f0d6081f2006c122cb24cbd59ff5f2beb2c70a443d32f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607420217564,
+        "device": 66306,
+        "inode": 24386291,
+        "mode": 33277,
+        "mtime_ns": 1785870607420217564,
+        "size": 8886
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607420217564,
+        "device": 66306,
+        "inode": 24386291,
+        "mode": 33277,
+        "mtime_ns": 1785870607420217564,
+        "size": 8886
+      },
+      "bytes": 8886,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/a5/a51fa024c4ac2cb8159fab751593f70b75995d4b5eaffa8d8690eadca394cd5b",
+      "path": "test/fixed_web_platform/WEB_RESOURCE_POOL_IMPLEMENTATION_GUIDE.md",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "a51fa024c4ac2cb8159fab751593f70b75995d4b5eaffa8d8690eadca394cd5b",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607422217756,
+        "device": 66306,
+        "inode": 24386292,
+        "mode": 33277,
+        "mtime_ns": 1785870607422217756,
+        "size": 25278
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607422217756,
+        "device": 66306,
+        "inode": 24386292,
+        "mode": 33277,
+        "mtime_ns": 1785870607422217756,
+        "size": 25278
+      },
+      "bytes": 25278,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/8d/8d9f4db91d12e45efc6b0ae328b064bfdaf39f6e161d9637c14315697970b96b",
+      "path": "test/fixed_web_platform/WEB_RESOURCE_POOL_RECOVERY_GUIDE.md",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "8d9f4db91d12e45efc6b0ae328b064bfdaf39f6e161d9637c14315697970b96b",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607423217853,
+        "device": 66306,
+        "inode": 24386293,
+        "mode": 33277,
+        "mtime_ns": 1785870607423217853,
+        "size": 6068
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607423217853,
+        "device": 66306,
+        "inode": 24386293,
+        "mode": 33277,
+        "mtime_ns": 1785870607423217853,
+        "size": 6068
+      },
+      "bytes": 6068,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/0a/0a016b876166e555274040e025f83b911891ba9be9ad73f20ea01f89384131a7",
+      "path": "test/fixed_web_platform/__init__.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "0a016b876166e555274040e025f83b911891ba9be9ad73f20ea01f89384131a7",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607424217949,
+        "device": 66306,
+        "inode": 24386294,
+        "mode": 33277,
+        "mtime_ns": 1785870607424217949,
+        "size": 23371
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607424217949,
+        "device": 66306,
+        "inode": 24386294,
+        "mode": 33277,
+        "mtime_ns": 1785870607424217949,
+        "size": 23371
+      },
+      "bytes": 23371,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/47/47241f2c3ff4a9bb6d38f32969c3f351f201ee1ae816f8e77cf8389bef9bbf9c",
+      "path": "test/fixed_web_platform/adaptive_scaling.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "47241f2c3ff4a9bb6d38f32969c3f351f201ee1ae816f8e77cf8389bef9bbf9c",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607429218429,
+        "device": 66306,
+        "inode": 24386295,
+        "mode": 33277,
+        "mtime_ns": 1785870607429218429,
+        "size": 73585
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607429218429,
+        "device": 66306,
+        "inode": 24386295,
+        "mode": 33277,
+        "mtime_ns": 1785870607429218429,
+        "size": 73585
+      },
+      "bytes": 73585,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/92/921e08ec5db4c3f089365df0927ff6161eeffb178d7492e5c1feca4ad44c6433",
+      "path": "test/fixed_web_platform/auto_tuning_system.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "921e08ec5db4c3f089365df0927ff6161eeffb178d7492e5c1feca4ad44c6433",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607430218525,
+        "device": 66306,
+        "inode": 24386296,
+        "mode": 33277,
+        "mtime_ns": 1785870607430218525,
+        "size": 50586
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607430218525,
+        "device": 66306,
+        "inode": 24386296,
+        "mode": 33277,
+        "mtime_ns": 1785870607430218525,
+        "size": 50586
+      },
+      "bytes": 50586,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/df/df52db131d4b5abf2715f18c275d7aca106bdcc7bf7292afaf899c222dee9571",
+      "path": "test/fixed_web_platform/browser_automation.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "df52db131d4b5abf2715f18c275d7aca106bdcc7bf7292afaf899c222dee9571",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607432218717,
+        "device": 66306,
+        "inode": 24386297,
+        "mode": 33277,
+        "mtime_ns": 1785870607432218717,
+        "size": 27132
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607432218717,
+        "device": 66306,
+        "inode": 24386297,
+        "mode": 33277,
+        "mtime_ns": 1785870607432218717,
+        "size": 27132
+      },
+      "bytes": 27132,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d0/d0f5246b395b387c91232c40ba1cdd4203a10f136637fa6f85313bc3058bae6e",
+      "path": "test/fixed_web_platform/browser_capability_detection.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d0f5246b395b387c91232c40ba1cdd4203a10f136637fa6f85313bc3058bae6e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607433218814,
+        "device": 66306,
+        "inode": 24386298,
+        "mode": 33277,
+        "mtime_ns": 1785870607433218814,
+        "size": 27642
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607433218814,
+        "device": 66306,
+        "inode": 24386298,
+        "mode": 33277,
+        "mtime_ns": 1785870607433218814,
+        "size": 27642
+      },
+      "bytes": 27642,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/52/529299488bbe99f0c96f6170838fac2231015428d9a69f323bc3229fd3962c03",
+      "path": "test/fixed_web_platform/browser_capability_detector.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "529299488bbe99f0c96f6170838fac2231015428d9a69f323bc3229fd3962c03",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607435219006,
+        "device": 66306,
+        "inode": 24386299,
+        "mode": 33277,
+        "mtime_ns": 1785870607435219006,
+        "size": 50167
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607435219006,
+        "device": 66306,
+        "inode": 24386299,
+        "mode": 33277,
+        "mtime_ns": 1785870607435219006,
+        "size": 50167
+      },
+      "bytes": 50167,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/8b/8b3640eae3675255cb48329e5cbf9a1c55be676e0b9d82aa44ddd759f5dc40ca",
+      "path": "test/fixed_web_platform/browser_cpu_detection.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "8b3640eae3675255cb48329e5cbf9a1c55be676e0b9d82aa44ddd759f5dc40ca",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607439219390,
+        "device": 66306,
+        "inode": 24386300,
+        "mode": 33277,
+        "mtime_ns": 1785870607439219390,
+        "size": 60691
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607439219390,
+        "device": 66306,
+        "inode": 24386300,
+        "mode": 33277,
+        "mtime_ns": 1785870607439219390,
+        "size": 60691
+      },
+      "bytes": 60691,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/aa/aac9e9cb0746dd3649186fbc0134910ea3320487f07bc02ca3f4f69ce0a22cc3",
+      "path": "test/fixed_web_platform/browser_performance_history.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "aac9e9cb0746dd3649186fbc0134910ea3320487f07bc02ca3f4f69ce0a22cc3",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607442219678,
+        "device": 66306,
+        "inode": 24386301,
+        "mode": 33277,
+        "mtime_ns": 1785870607442219678,
+        "size": 34959
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607442219678,
+        "device": 66306,
+        "inode": 24386301,
+        "mode": 33277,
+        "mtime_ns": 1785870607442219678,
+        "size": 34959
+      },
+      "bytes": 34959,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c7/c7ea75e614b20c62c1f105cac40aa430e24c0f4f81f65afb85b1a4106894320e",
+      "path": "test/fixed_web_platform/browser_performance_optimizer.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c7ea75e614b20c62c1f105cac40aa430e24c0f4f81f65afb85b1a4106894320e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607444219871,
+        "device": 66306,
+        "inode": 24386302,
+        "mode": 33277,
+        "mtime_ns": 1785870607444219871,
+        "size": 42764
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607444219871,
+        "device": 66306,
+        "inode": 24386302,
+        "mode": 33277,
+        "mtime_ns": 1785870607444219871,
+        "size": 42764
+      },
+      "bytes": 42764,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d0/d0bc2e1a776813112e2786d6d57d6b80a0301a242ecc12a5abb6d2b9149ea7be",
+      "path": "test/fixed_web_platform/circuit_breaker.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d0bc2e1a776813112e2786d6d57d6b80a0301a242ecc12a5abb6d2b9149ea7be",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607446220063,
+        "device": 66306,
+        "inode": 24386303,
+        "mode": 33277,
+        "mtime_ns": 1785870607446220063,
+        "size": 74814
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607446220063,
+        "device": 66306,
+        "inode": 24386303,
+        "mode": 33277,
+        "mtime_ns": 1785870607446220063,
+        "size": 74814
+      },
+      "bytes": 74814,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/29/29e0599eb8d3ce5f6742a31339a14d56e64c0e6cc7c5a06c1fe554c1b1bee88e",
+      "path": "test/fixed_web_platform/connection_pool_integration.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "29e0599eb8d3ce5f6742a31339a14d56e64c0e6cc7c5a06c1fe554c1b1bee88e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607447220159,
+        "device": 66306,
+        "inode": 24386304,
+        "mode": 33277,
+        "mtime_ns": 1785870607447220159,
+        "size": 31068
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607447220159,
+        "device": 66306,
+        "inode": 24386304,
+        "mode": 33277,
+        "mtime_ns": 1785870607447220159,
+        "size": 31068
+      },
+      "bytes": 31068,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/88/88e58fa760ceda6be376e318b302d6696c0c476e1cbc2231fd069b3db05292c9",
+      "path": "test/fixed_web_platform/connection_pool_manager.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "88e58fa760ceda6be376e318b302d6696c0c476e1cbc2231fd069b3db05292c9",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607448220255,
+        "device": 66306,
+        "inode": 24386305,
+        "mode": 33277,
+        "mtime_ns": 1785870607448220255,
+        "size": 39660
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607448220255,
+        "device": 66306,
+        "inode": 24386305,
+        "mode": 33277,
+        "mtime_ns": 1785870607448220255,
+        "size": 39660
+      },
+      "bytes": 39660,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5e/5e4b2f1e0fe41044cce6955fdca8a46135d39b618536291eace2793f6e47414b",
+      "path": "test/fixed_web_platform/cross_browser_metrics_collector.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5e4b2f1e0fe41044cce6955fdca8a46135d39b618536291eace2793f6e47414b",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607452220639,
+        "device": 66306,
+        "inode": 24386307,
+        "mode": 33277,
+        "mtime_ns": 1785870607452220639,
+        "size": 31729
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607452220639,
+        "device": 66306,
+        "inode": 24386307,
+        "mode": 33277,
+        "mtime_ns": 1785870607452220639,
+        "size": 31729
+      },
+      "bytes": 31729,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ce/cea9f405cc24dcb06861ff0b5ab6bc72729d0d8d2737b2e83f658e3542712930",
+      "path": "test/fixed_web_platform/cross_model_tensor_sharing.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "cea9f405cc24dcb06861ff0b5ab6bc72729d0d8d2737b2e83f658e3542712930",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607455220928,
+        "device": 66306,
+        "inode": 24386308,
+        "mode": 33277,
+        "mtime_ns": 1785870607455220928,
+        "size": 46343
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607455220928,
+        "device": 66306,
+        "inode": 24386308,
+        "mode": 33277,
+        "mtime_ns": 1785870607455220928,
+        "size": 46343
+      },
+      "bytes": 46343,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/dc/dc6d36222e54060bd94330536de04ad4095fbc8cc2e36ebb404eceae4500971f",
+      "path": "test/fixed_web_platform/cross_origin_model_sharing.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "dc6d36222e54060bd94330536de04ad4095fbc8cc2e36ebb404eceae4500971f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607457221120,
+        "device": 66306,
+        "inode": 24386309,
+        "mode": 33277,
+        "mtime_ns": 1785870607457221120,
+        "size": 30456
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607457221120,
+        "device": 66306,
+        "inode": 24386309,
+        "mode": 33277,
+        "mtime_ns": 1785870607457221120,
+        "size": 30456
+      },
+      "bytes": 30456,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d4/d4847b99ba5f2b164994ce07db37d77c1cec9ae18db1262396b9d1f8c5a6b136",
+      "path": "test/fixed_web_platform/enhanced_resource_pool_tester.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d4847b99ba5f2b164994ce07db37d77c1cec9ae18db1262396b9d1f8c5a6b136",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607458221216,
+        "device": 66306,
+        "inode": 24386310,
+        "mode": 33277,
+        "mtime_ns": 1785870607458221216,
+        "size": 13995
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607458221216,
+        "device": 66306,
+        "inode": 24386310,
+        "mode": 33277,
+        "mtime_ns": 1785870607458221216,
+        "size": 13995
+      },
+      "bytes": 13995,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/af/afc5c685f0c7644ab3bf30e78d550de39fb0a028a914cd8dc294c0056e518d95",
+      "path": "test/fixed_web_platform/enhanced_resource_pool_tester_mock.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "afc5c685f0c7644ab3bf30e78d550de39fb0a028a914cd8dc294c0056e518d95",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607461221504,
+        "device": 66306,
+        "inode": 24386311,
+        "mode": 33277,
+        "mtime_ns": 1785870607461221504,
+        "size": 37565
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607461221504,
+        "device": 66306,
+        "inode": 24386311,
+        "mode": 33277,
+        "mtime_ns": 1785870607461221504,
+        "size": 37565
+      },
+      "bytes": 37565,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/0f/0f963bea5ee099a4974303c72260178e2ebe6c7aff22e682d1a63e6b490f6135",
+      "path": "test/fixed_web_platform/enhanced_websocket_bridge.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "0f963bea5ee099a4974303c72260178e2ebe6c7aff22e682d1a63e6b490f6135",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607464221793,
+        "device": 66306,
+        "inode": 24386312,
+        "mode": 33277,
+        "mtime_ns": 1785870607464221793,
+        "size": 67102
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607464221793,
+        "device": 66306,
+        "inode": 24386312,
+        "mode": 33277,
+        "mtime_ns": 1785870607464221793,
+        "size": 67102
+      },
+      "bytes": 67102,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/be/beec0aa8210d97ad8e6a0e873549e0a86d6037fc37ff07cddfb01928df1f9614",
+      "path": "test/fixed_web_platform/fault_tolerance_validation.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "beec0aa8210d97ad8e6a0e873549e0a86d6037fc37ff07cddfb01928df1f9614",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607465221889,
+        "device": 66306,
+        "inode": 24386313,
+        "mode": 33277,
+        "mtime_ns": 1785870607465221889,
+        "size": 25909
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607465221889,
+        "device": 66306,
+        "inode": 24386313,
+        "mode": 33277,
+        "mtime_ns": 1785870607465221889,
+        "size": 25909
+      },
+      "bytes": 25909,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/b3/b30b340977392b7750c641c1c60dcc3e4dd2350f0335c4f41972daefc8b6c4af",
+      "path": "test/fixed_web_platform/fault_tolerance_visualization_integration.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "b30b340977392b7750c641c1c60dcc3e4dd2350f0335c4f41972daefc8b6c4af",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607467222081,
+        "device": 66306,
+        "inode": 24386314,
+        "mode": 33277,
+        "mtime_ns": 1785870607467222081,
+        "size": 83611
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607467222081,
+        "device": 66306,
+        "inode": 24386314,
+        "mode": 33277,
+        "mtime_ns": 1785870607467222081,
+        "size": 83611
+      },
+      "bytes": 83611,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/aa/aa8d10978be591802080360fe31c4188c95790378b41ef7aaa779afaa492439b",
+      "path": "test/fixed_web_platform/fault_tolerant_model_sharding.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "aa8d10978be591802080360fe31c4188c95790378b41ef7aaa779afaa492439b",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607469222273,
+        "device": 66306,
+        "inode": 24386315,
+        "mode": 33277,
+        "mtime_ns": 1785870607469222273,
+        "size": 45015
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607469222273,
+        "device": 66306,
+        "inode": 24386315,
+        "mode": 33277,
+        "mtime_ns": 1785870607469222273,
+        "size": 45015
+      },
+      "bytes": 45015,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ba/baaa77ebeeae94cbc7a614a9417451a149324ceae50137cc2bd58a89983430a8",
+      "path": "test/fixed_web_platform/mobile_device_optimization.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "baaa77ebeeae94cbc7a614a9417451a149324ceae50137cc2bd58a89983430a8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607470222369,
+        "device": 66306,
+        "inode": 24386316,
+        "mode": 33277,
+        "mtime_ns": 1785870607470222369,
+        "size": 45990
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607470222369,
+        "device": 66306,
+        "inode": 24386316,
+        "mode": 33277,
+        "mtime_ns": 1785870607470222369,
+        "size": 45990
+      },
+      "bytes": 45990,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/4d/4dd9987ada5dd9bed512d479e923a6f8056dabb64349921b0ed70fe4e5499830",
+      "path": "test/fixed_web_platform/model_sharding.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "4dd9987ada5dd9bed512d479e923a6f8056dabb64349921b0ed70fe4e5499830",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607473222658,
+        "device": 66306,
+        "inode": 24386317,
+        "mode": 33277,
+        "mtime_ns": 1785870607473222658,
+        "size": 78745
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607473222658,
+        "device": 66306,
+        "inode": 24386317,
+        "mode": 33277,
+        "mtime_ns": 1785870607473222658,
+        "size": 78745
+      },
+      "bytes": 78745,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/7e/7e142df14f35d5ef585d30048c00bc93241f592fd2c8dccb93922c8a9a6bfdd9",
+      "path": "test/fixed_web_platform/multimodal_optimizer.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "7e142df14f35d5ef585d30048c00bc93241f592fd2c8dccb93922c8a9a6bfdd9",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607475222850,
+        "device": 66306,
+        "inode": 24386318,
+        "mode": 33277,
+        "mtime_ns": 1785870607475222850,
+        "size": 30384
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607475222850,
+        "device": 66306,
+        "inode": 24386318,
+        "mode": 33277,
+        "mtime_ns": 1785870607475222850,
+        "size": 30384
+      },
+      "bytes": 30384,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/95/955b786e457850dc0eb6bb1c288a19e36a6d9859bdf61a236df350c59da78be4",
+      "path": "test/fixed_web_platform/parallel_model_executor.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "955b786e457850dc0eb6bb1c288a19e36a6d9859bdf61a236df350c59da78be4",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607478223138,
+        "device": 66306,
+        "inode": 24386319,
+        "mode": 33277,
+        "mtime_ns": 1785870607478223138,
+        "size": 77794
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607478223138,
+        "device": 66306,
+        "inode": 24386319,
+        "mode": 33277,
+        "mtime_ns": 1785870607478223138,
+        "size": 77794
+      },
+      "bytes": 77794,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d3/d35381a93e1d043e12277a5defd5e3fa18b164725d84699b1908b912e71efeed",
+      "path": "test/fixed_web_platform/parallel_model_executor_enhanced.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d35381a93e1d043e12277a5defd5e3fa18b164725d84699b1908b912e71efeed",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607489224195,
+        "device": 66306,
+        "inode": 24386320,
+        "mode": 33277,
+        "mtime_ns": 1785870607489224195,
+        "size": 69784
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607489224195,
+        "device": 66306,
+        "inode": 24386320,
+        "mode": 33277,
+        "mtime_ns": 1785870607489224195,
+        "size": 69784
+      },
+      "bytes": 69784,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/77/775bef9cd33b75e852262355fe55b289936ca6b7520c2f2922a363241a279621",
+      "path": "test/fixed_web_platform/performance_trend_analyzer.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "775bef9cd33b75e852262355fe55b289936ca6b7520c2f2922a363241a279621",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607495224772,
+        "device": 66306,
+        "inode": 24386321,
+        "mode": 33277,
+        "mtime_ns": 1785870607495224772,
+        "size": 29687
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607495224772,
+        "device": 66306,
+        "inode": 24386321,
+        "mode": 33277,
+        "mtime_ns": 1785870607495224772,
+        "size": 29687
+      },
+      "bytes": 29687,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/a9/a939adf668f73ea6dead5f0086b05c9ed3b3f4fe3d045f1535060bb34509dc6e",
+      "path": "test/fixed_web_platform/progressive_model_loader.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "a939adf668f73ea6dead5f0086b05c9ed3b3f4fe3d045f1535060bb34509dc6e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607501225349,
+        "device": 66306,
+        "inode": 24386322,
+        "mode": 33277,
+        "mtime_ns": 1785870607501225349,
+        "size": 17982
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607501225349,
+        "device": 66306,
+        "inode": 24386322,
+        "mode": 33277,
+        "mtime_ns": 1785870607501225349,
+        "size": 17982
+      },
+      "bytes": 17982,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/41/4121a9cec4e981eed9a9a63eace50e7c86c585ad61a154442239257419916fce",
+      "path": "test/fixed_web_platform/real_webgpu_connection.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "4121a9cec4e981eed9a9a63eace50e7c86c585ad61a154442239257419916fce",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607503225541,
+        "device": 66306,
+        "inode": 24386323,
+        "mode": 33277,
+        "mtime_ns": 1785870607503225541,
+        "size": 18073
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607503225541,
+        "device": 66306,
+        "inode": 24386323,
+        "mode": 33277,
+        "mtime_ns": 1785870607503225541,
+        "size": 18073
+      },
+      "bytes": 18073,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/e5/e5a46285fb1d6b62361f6aba9c5ddee2ef9934b75e1cfa6ccfbd31ddf244707a",
+      "path": "test/fixed_web_platform/real_webnn_connection.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "e5a46285fb1d6b62361f6aba9c5ddee2ef9934b75e1cfa6ccfbd31ddf244707a",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607505225733,
+        "device": 66306,
+        "inode": 24386324,
+        "mode": 33277,
+        "mtime_ns": 1785870607505225733,
+        "size": 111655
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607505225733,
+        "device": 66306,
+        "inode": 24386324,
+        "mode": 33277,
+        "mtime_ns": 1785870607505225733,
+        "size": 111655
+      },
+      "bytes": 111655,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/dd/dd1cedaa4365a82f7d409cd41c0fe417df179fe490e355acdd7cf046a5079a22",
+      "path": "test/fixed_web_platform/resource_pool_bridge.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "dd1cedaa4365a82f7d409cd41c0fe417df179fe490e355acdd7cf046a5079a22",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607507225925,
+        "device": 66306,
+        "inode": 24386325,
+        "mode": 33277,
+        "mtime_ns": 1785870607507225925,
+        "size": 60028
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607507225925,
+        "device": 66306,
+        "inode": 24386325,
+        "mode": 33277,
+        "mtime_ns": 1785870607507225925,
+        "size": 60028
+      },
+      "bytes": 60028,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/6e/6e61d2c4240f0862c244b63ea18cd9754246849241a200285d67fb123806eb86",
+      "path": "test/fixed_web_platform/resource_pool_bridge_integration.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6e61d2c4240f0862c244b63ea18cd9754246849241a200285d67fb123806eb86",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607509971085,
+        "device": 66306,
+        "inode": 24386326,
+        "mode": 33277,
+        "mtime_ns": 1785870607509971085,
+        "size": 83593
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607509971085,
+        "device": 66306,
+        "inode": 24386326,
+        "mode": 33277,
+        "mtime_ns": 1785870607509971085,
+        "size": 83593
+      },
+      "bytes": 83593,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5d/5d77fe183b278d9d9f99dcda2d7c725be117bbce29db6e3c735803e3d2c6de61",
+      "path": "test/fixed_web_platform/resource_pool_bridge_integration_enhanced.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5d77fe183b278d9d9f99dcda2d7c725be117bbce29db6e3c735803e3d2c6de61",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607511226310,
+        "device": 66306,
+        "inode": 24386327,
+        "mode": 33277,
+        "mtime_ns": 1785870607511226310,
+        "size": 64138
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607511226310,
+        "device": 66306,
+        "inode": 24386327,
+        "mode": 33277,
+        "mtime_ns": 1785870607511226310,
+        "size": 64138
+      },
+      "bytes": 64138,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/9b/9b2850b9d727f3f42121d7b72b99b65fde87db148dd832de8a87af6b3464d89a",
+      "path": "test/fixed_web_platform/resource_pool_bridge_recovery.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9b2850b9d727f3f42121d7b72b99b65fde87db148dd832de8a87af6b3464d89a",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607513729926,
+        "device": 66306,
+        "inode": 24386328,
+        "mode": 33277,
+        "mtime_ns": 1785870607513729926,
+        "size": 64717
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607513729926,
+        "device": 66306,
+        "inode": 24386328,
+        "mode": 33277,
+        "mtime_ns": 1785870607513729926,
+        "size": 64717
+      },
+      "bytes": 64717,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/38/38a3b3568052e15408cf5645a1a6a9286736b13879ab2244499e84f92163f5b0",
+      "path": "test/fixed_web_platform/resource_pool_circuit_breaker.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "38a3b3568052e15408cf5645a1a6a9286736b13879ab2244499e84f92163f5b0",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607515999456,
+        "device": 66306,
+        "inode": 24386329,
+        "mode": 33277,
+        "mtime_ns": 1785870607515999456,
+        "size": 54018
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607515999456,
+        "device": 66306,
+        "inode": 24386329,
+        "mode": 33277,
+        "mtime_ns": 1785870607515999456,
+        "size": 54018
+      },
+      "bytes": 54018,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/e8/e89018083f4b0ef27db4970f18cef35e64536a7cc01a750df18a4a07026a6a78",
+      "path": "test/fixed_web_platform/resource_pool_db_integration.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "e89018083f4b0ef27db4970f18cef35e64536a7cc01a750df18a4a07026a6a78",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607518339265,
+        "device": 66306,
+        "inode": 24386330,
+        "mode": 33277,
+        "mtime_ns": 1785870607518339265,
+        "size": 51369
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607518339265,
+        "device": 66306,
+        "inode": 24386330,
+        "mode": 33277,
+        "mtime_ns": 1785870607518339265,
+        "size": 51369
+      },
+      "bytes": 51369,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d9/d900b908bdaccf34dfdea757a12b22ee0df87464a5c86346e9cd3c6c73498649",
+      "path": "test/fixed_web_platform/resource_pool_error_recovery.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d900b908bdaccf34dfdea757a12b22ee0df87464a5c86346e9cd3c6c73498649",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607519155216,
+        "device": 66306,
+        "inode": 24386331,
+        "mode": 33277,
+        "mtime_ns": 1785870607519155216,
+        "size": 12654
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607519155216,
+        "device": 66306,
+        "inode": 24386331,
+        "mode": 33277,
+        "mtime_ns": 1785870607519155216,
+        "size": 12654
+      },
+      "bytes": 12654,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/7b/7b0fa6d5b25a26be10b2fa05b0c8528f42f083fe78cef79ef4492112c9f1a58c",
+      "path": "test/fixed_web_platform/resource_pool_integration.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "7b0fa6d5b25a26be10b2fa05b0c8528f42f083fe78cef79ef4492112c9f1a58c",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607522076312,
+        "device": 66306,
+        "inode": 24386332,
+        "mode": 33277,
+        "mtime_ns": 1785870607522076312,
+        "size": 71661
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607522076312,
+        "device": 66306,
+        "inode": 24386332,
+        "mode": 33277,
+        "mtime_ns": 1785870607522076312,
+        "size": 71661
+      },
+      "bytes": 71661,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/b2/b2d43028263dd0ad81493439a7d8b923cd16ebf4b536bdd82838a8f2358a482d",
+      "path": "test/fixed_web_platform/resource_pool_integration_enhanced.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "b2d43028263dd0ad81493439a7d8b923cd16ebf4b536bdd82838a8f2358a482d",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607525016291,
+        "device": 66306,
+        "inode": 24386333,
+        "mode": 33277,
+        "mtime_ns": 1785870607525016291,
+        "size": 72458
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607525016291,
+        "device": 66306,
+        "inode": 24386333,
+        "mode": 33277,
+        "mtime_ns": 1785870607525016291,
+        "size": 72458
+      },
+      "bytes": 72458,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c6/c68ba0ea2ee42bce896b35220db188be5762d94ea5b08ca4876d2dd73205c2f3",
+      "path": "test/fixed_web_platform/safari_webgpu_handler.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c68ba0ea2ee42bce896b35220db188be5762d94ea5b08ca4876d2dd73205c2f3",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607526637471,
+        "device": 66306,
+        "inode": 24386334,
+        "mode": 33277,
+        "mtime_ns": 1785870607526637471,
+        "size": 34775
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607526637471,
+        "device": 66306,
+        "inode": 24386334,
+        "mode": 33277,
+        "mtime_ns": 1785870607526637471,
+        "size": 34775
+      },
+      "bytes": 34775,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/4a/4aa3efe2062fc480d59578a4d45e4c6ba4aad970301a3b24739d160bbfdf002f",
+      "path": "test/fixed_web_platform/streaming_inference.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "4aa3efe2062fc480d59578a4d45e4c6ba4aad970301a3b24739d160bbfdf002f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607528331185,
+        "device": 66306,
+        "inode": 24516200,
+        "mode": 33277,
+        "mtime_ns": 1785870607528331185,
+        "size": 32963
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607528331185,
+        "device": 66306,
+        "inode": 24516200,
+        "mode": 33277,
+        "mtime_ns": 1785870607528331185,
+        "size": 32963
+      },
+      "bytes": 32963,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/01/0155ffc2614fe8c9f4e6adc6f3cc4c2c1ebcc57b4b2242a0cd3e531d3659d198",
+      "path": "test/fixed_web_platform/test/test_fault_tolerant_model_sharding.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "0155ffc2614fe8c9f4e6adc6f3cc4c2c1ebcc57b4b2242a0cd3e531d3659d198",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607529273756,
+        "device": 66306,
+        "inode": 24516202,
+        "mode": 33277,
+        "mtime_ns": 1785870607529273756,
+        "size": 18771
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607529273756,
+        "device": 66306,
+        "inode": 24516202,
+        "mode": 33277,
+        "mtime_ns": 1785870607529273756,
+        "size": 18771
+      },
+      "bytes": 18771,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/35/3534c05dba4914d961264a243b87d863338aaa3141e0c86babab4a128de4741f",
+      "path": "test/fixed_web_platform/unified_framework/__init__.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "3534c05dba4914d961264a243b87d863338aaa3141e0c86babab4a128de4741f",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607531084682,
+        "device": 66306,
+        "inode": 24516203,
+        "mode": 33277,
+        "mtime_ns": 1785870607531084682,
+        "size": 25092
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607531084682,
+        "device": 66306,
+        "inode": 24516203,
+        "mode": 33277,
+        "mtime_ns": 1785870607531084682,
+        "size": 25092
+      },
+      "bytes": 25092,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/cc/cc0e665e27e76746df3eb1f4ca2c393a50aa13507e786c594ea3138f22b72637",
+      "path": "test/fixed_web_platform/unified_framework/configuration_manager.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "cc0e665e27e76746df3eb1f4ca2c393a50aa13507e786c594ea3138f22b72637",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607533219799,
+        "device": 66306,
+        "inode": 24516204,
+        "mode": 33277,
+        "mtime_ns": 1785870607533219799,
+        "size": 24557
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607533219799,
+        "device": 66306,
+        "inode": 24516204,
+        "mode": 33277,
+        "mtime_ns": 1785870607533219799,
+        "size": 24557
+      },
+      "bytes": 24557,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/09/09528a0bf31422f4c5cc59ceecceb349310b7d9d5bbaac7d1f465b4b6aaf3ea6",
+      "path": "test/fixed_web_platform/unified_framework/dependency_management.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "09528a0bf31422f4c5cc59ceecceb349310b7d9d5bbaac7d1f465b4b6aaf3ea6",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607535577290,
+        "device": 66306,
+        "inode": 24516205,
+        "mode": 33277,
+        "mtime_ns": 1785870607535577290,
+        "size": 28008
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607535577290,
+        "device": 66306,
+        "inode": 24516205,
+        "mode": 33277,
+        "mtime_ns": 1785870607535577290,
+        "size": 28008
+      },
+      "bytes": 28008,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/da/daf97459ef01663d38bc13c8b8a7a44c2c71c7831e38098f1eb7d239ab57c4f4",
+      "path": "test/fixed_web_platform/unified_framework/error_handling.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "daf97459ef01663d38bc13c8b8a7a44c2c71c7831e38098f1eb7d239ab57c4f4",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607537155025,
+        "device": 66306,
+        "inode": 24516206,
+        "mode": 33277,
+        "mtime_ns": 1785870607537155025,
+        "size": 25491
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607537155025,
+        "device": 66306,
+        "inode": 24516206,
+        "mode": 33277,
+        "mtime_ns": 1785870607537155025,
+        "size": 25491
+      },
+      "bytes": 25491,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/36/36de2ada46a23d412d1300c59650d9e85541e2f3af076deb251c39222c38261e",
+      "path": "test/fixed_web_platform/unified_framework/error_propagation.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "36de2ada46a23d412d1300c59650d9e85541e2f3af076deb251c39222c38261e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607538077002,
+        "device": 66306,
+        "inode": 24516207,
+        "mode": 33277,
+        "mtime_ns": 1785870607538077002,
+        "size": 37108
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607538077002,
+        "device": 66306,
+        "inode": 24516207,
+        "mode": 33277,
+        "mtime_ns": 1785870607538077002,
+        "size": 37108
+      },
+      "bytes": 37108,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/0e/0e42554d433f4e6651304160eafa23a22f5165766cb5d4b95e5b33454a1e5908",
+      "path": "test/fixed_web_platform/unified_framework/fallback_manager.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "0e42554d433f4e6651304160eafa23a22f5165766cb5d4b95e5b33454a1e5908",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607539314753,
+        "device": 66306,
+        "inode": 24516208,
+        "mode": 33277,
+        "mtime_ns": 1785870607539314753,
+        "size": 48403
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607539314753,
+        "device": 66306,
+        "inode": 24516208,
+        "mode": 33277,
+        "mtime_ns": 1785870607539314753,
+        "size": 48403
+      },
+      "bytes": 48403,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/63/6371d2737c32f13eb1f5243628dec134de6e1f853701ca589b22bcbd4dec1af4",
+      "path": "test/fixed_web_platform/unified_framework/graceful_degradation.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6371d2737c32f13eb1f5243628dec134de6e1f853701ca589b22bcbd4dec1af4",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607540528629,
+        "device": 66306,
+        "inode": 24516209,
+        "mode": 33277,
+        "mtime_ns": 1785870607540528629,
+        "size": 24460
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607540528629,
+        "device": 66306,
+        "inode": 24516209,
+        "mode": 33277,
+        "mtime_ns": 1785870607540528629,
+        "size": 24460
+      },
+      "bytes": 24460,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d2/d2009f0a19d660bf3de794b45afd869c48dcfcff949405d28cb1741ada372243",
+      "path": "test/fixed_web_platform/unified_framework/input_validation.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d2009f0a19d660bf3de794b45afd869c48dcfcff949405d28cb1741ada372243",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607541213175,
+        "device": 66306,
+        "inode": 24516210,
+        "mode": 33277,
+        "mtime_ns": 1785870607541213175,
+        "size": 18925
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607541213175,
+        "device": 66306,
+        "inode": 24516210,
+        "mode": 33277,
+        "mtime_ns": 1785870607541213175,
+        "size": 18925
+      },
+      "bytes": 18925,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d5/d5607a5f8d7a84c70f6403538f7adba11f9aea8234c6d9bcc04b1d8c5668480e",
+      "path": "test/fixed_web_platform/unified_framework/model_sharding.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d5607a5f8d7a84c70f6403538f7adba11f9aea8234c6d9bcc04b1d8c5668480e",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607541946974,
+        "device": 66306,
+        "inode": 24516211,
+        "mode": 33277,
+        "mtime_ns": 1785870607541946974,
+        "size": 21286
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607541946974,
+        "device": 66306,
+        "inode": 24516211,
+        "mode": 33277,
+        "mtime_ns": 1785870607541946974,
+        "size": 21286
+      },
+      "bytes": 21286,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/9b/9b50ac3e195fd64d6d4faf199ab461fd51ffea352fce49546cc09d58353dccc6",
+      "path": "test/fixed_web_platform/unified_framework/multimodal_integration.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "9b50ac3e195fd64d6d4faf199ab461fd51ffea352fce49546cc09d58353dccc6",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607542229289,
+        "device": 66306,
+        "inode": 24516212,
+        "mode": 33277,
+        "mtime_ns": 1785870607542229289,
+        "size": 47653
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607542229289,
+        "device": 66306,
+        "inode": 24516212,
+        "mode": 33277,
+        "mtime_ns": 1785870607542229289,
+        "size": 47653
+      },
+      "bytes": 47653,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/af/af8c66b980aa172f6491d14cd73eb34e5020093371a2348e43bc9e8969fa49fa",
+      "path": "test/fixed_web_platform/unified_framework/performance_dashboard.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "af8c66b980aa172f6491d14cd73eb34e5020093371a2348e43bc9e8969fa49fa",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607543747771,
+        "device": 66306,
+        "inode": 24516213,
+        "mode": 33277,
+        "mtime_ns": 1785870607543747771,
+        "size": 24281
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607543747771,
+        "device": 66306,
+        "inode": 24516213,
+        "mode": 33277,
+        "mtime_ns": 1785870607543747771,
+        "size": 24281
+      },
+      "bytes": 24281,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ab/ab487edf7daec85d11d19eb5fff7de50c5ee6dbfa8dc5f1ed9a1eb196cde1a83",
+      "path": "test/fixed_web_platform/unified_framework/platform_detector.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "ab487edf7daec85d11d19eb5fff7de50c5ee6dbfa8dc5f1ed9a1eb196cde1a83",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607545229577,
+        "device": 66306,
+        "inode": 24516214,
+        "mode": 33277,
+        "mtime_ns": 1785870607545229577,
+        "size": 17297
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607545229577,
+        "device": 66306,
+        "inode": 24516214,
+        "mode": 33277,
+        "mtime_ns": 1785870607545229577,
+        "size": 17297
+      },
+      "bytes": 17297,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/89/89dba18063402ad3fd421da35256b9f08c240f2c49bb6c74c8035fdfd4bff641",
+      "path": "test/fixed_web_platform/unified_framework/result_formatter.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "89dba18063402ad3fd421da35256b9f08c240f2c49bb6c74c8035fdfd4bff641",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607546229673,
+        "device": 66306,
+        "inode": 24516215,
+        "mode": 33277,
+        "mtime_ns": 1785870607546229673,
+        "size": 18095
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607546229673,
+        "device": 66306,
+        "inode": 24516215,
+        "mode": 33277,
+        "mtime_ns": 1785870607546229673,
+        "size": 18095
+      },
+      "bytes": 18095,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c0/c003bdc533ee4a73db6aefa42b7eca73981eac3551d8b36807dc2def06cd2310",
+      "path": "test/fixed_web_platform/unified_framework/string_utils.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c003bdc533ee4a73db6aefa42b7eca73981eac3551d8b36807dc2def06cd2310",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607547229769,
+        "device": 66306,
+        "inode": 24516216,
+        "mode": 33277,
+        "mtime_ns": 1785870607547229769,
+        "size": 28582
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607547229769,
+        "device": 66306,
+        "inode": 24516216,
+        "mode": 33277,
+        "mtime_ns": 1785870607547229769,
+        "size": 28582
+      },
+      "bytes": 28582,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/2d/2dd76e7af4fe58c232f937631b22fbc16a34d4044db3614f1d66979eb39ad330",
+      "path": "test/fixed_web_platform/unified_framework/telemetry.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "2dd76e7af4fe58c232f937631b22fbc16a34d4044db3614f1d66979eb39ad330",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607549500532,
+        "device": 66306,
+        "inode": 24386335,
+        "mode": 33277,
+        "mtime_ns": 1785870607549500532,
+        "size": 73243
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607549500532,
+        "device": 66306,
+        "inode": 24386335,
+        "mode": 33277,
+        "mtime_ns": 1785870607549500532,
+        "size": 73243
+      },
+      "bytes": 73243,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c1/c1c7d914e48953d64db185f7ec44a4b3359041676935eb5bc23a15f77a515a97",
+      "path": "test/fixed_web_platform/unified_web_framework.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c1c7d914e48953d64db185f7ec44a4b3359041676935eb5bc23a15f77a515a97",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607550828835,
+        "device": 66306,
+        "inode": 24516218,
+        "mode": 33277,
+        "mtime_ns": 1785870607550828835,
+        "size": 47325
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607550828835,
+        "device": 66306,
+        "inode": 24516218,
+        "mode": 33277,
+        "mtime_ns": 1785870607550828835,
+        "size": 47325
+      },
+      "bytes": 47325,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/8b/8b4da592c904b35a0cf8b417bd667e36f2d7d8fe87c87317c0d8fc2251f6a065",
+      "path": "test/fixed_web_platform/visualization/fault_tolerance_visualizer.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "8b4da592c904b35a0cf8b417bd667e36f2d7d8fe87c87317c0d8fc2251f6a065",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607551385897,
+        "device": 66306,
+        "inode": 24386336,
+        "mode": 33277,
+        "mtime_ns": 1785870607551385897,
+        "size": 22113
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607551385897,
+        "device": 66306,
+        "inode": 24386336,
+        "mode": 33277,
+        "mtime_ns": 1785870607551385897,
+        "size": 22113
+      },
+      "bytes": 22113,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/0b/0b5681c258ee3d9cf4b59bdec8284c8d9e4a5b5e987d950202d845ea22056df1",
+      "path": "test/fixed_web_platform/web_accelerator.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "0b5681c258ee3d9cf4b59bdec8284c8d9e4a5b5e987d950202d845ea22056df1",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607553470609,
+        "device": 66306,
+        "inode": 24386337,
+        "mode": 33277,
+        "mtime_ns": 1785870607553470609,
+        "size": 116215
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607553470609,
+        "device": 66306,
+        "inode": 24386337,
+        "mode": 33277,
+        "mtime_ns": 1785870607553470609,
+        "size": 116215
+      },
+      "bytes": 116215,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/ee/ee6c68a8fd1e92a9b7f527da95503452de5a1ff09565c3bddc38ad4309ebba32",
+      "path": "test/fixed_web_platform/web_platform_handler.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "ee6c68a8fd1e92a9b7f527da95503452de5a1ff09565c3bddc38ad4309ebba32",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607554230442,
+        "device": 66306,
+        "inode": 24386338,
+        "mode": 33277,
+        "mtime_ns": 1785870607554230442,
+        "size": 32455
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607554230442,
+        "device": 66306,
+        "inode": 24386338,
+        "mode": 33277,
+        "mtime_ns": 1785870607554230442,
+        "size": 32455
+      },
+      "bytes": 32455,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/f1/f1c4aacfdd58b883e7c41a9efdff6a88fd178b730da5e22f23087ff2b22b1fe5",
+      "path": "test/fixed_web_platform/webgpu_4bit_inference.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "f1c4aacfdd58b883e7c41a9efdff6a88fd178b730da5e22f23087ff2b22b1fe5",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607554230442,
+        "device": 66306,
+        "inode": 24386339,
+        "mode": 33277,
+        "mtime_ns": 1785870607554230442,
+        "size": 17453
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607554230442,
+        "device": 66306,
+        "inode": 24386339,
+        "mode": 33277,
+        "mtime_ns": 1785870607554230442,
+        "size": 17453
+      },
+      "bytes": 17453,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5a/5ad1f567bbc114760bbe4435410c7a2b17b4cb14ff21ccd6b01174baef6c26da",
+      "path": "test/fixed_web_platform/webgpu_4bit_kernels.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5ad1f567bbc114760bbe4435410c7a2b17b4cb14ff21ccd6b01174baef6c26da",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607556832596,
+        "device": 66306,
+        "inode": 24386340,
+        "mode": 33277,
+        "mtime_ns": 1785870607556832596,
+        "size": 57720
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607556832596,
+        "device": 66306,
+        "inode": 24386340,
+        "mode": 33277,
+        "mtime_ns": 1785870607556832596,
+        "size": 57720
+      },
+      "bytes": 57720,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/f0/f005c002606bd620d6b5b65ecd252ef4310878771990c10537cfc8611dd39fe1",
+      "path": "test/fixed_web_platform/webgpu_adaptive_precision.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "f005c002606bd620d6b5b65ecd252ef4310878771990c10537cfc8611dd39fe1",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607557275535,
+        "device": 66306,
+        "inode": 24386341,
+        "mode": 33277,
+        "mtime_ns": 1785870607557275535,
+        "size": 8282
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607557275535,
+        "device": 66306,
+        "inode": 24386341,
+        "mode": 33277,
+        "mtime_ns": 1785870607557275535,
+        "size": 8282
+      },
+      "bytes": 8282,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/38/3838e37e163f97decc4ccf1c521dcf73503d2be22046a93311f538de2a43a03d",
+      "path": "test/fixed_web_platform/webgpu_audio_compute_shaders.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "3838e37e163f97decc4ccf1c521dcf73503d2be22046a93311f538de2a43a03d",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607557521590,
+        "device": 66306,
+        "inode": 24386342,
+        "mode": 33277,
+        "mtime_ns": 1785870607557521590,
+        "size": 4412
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607557521590,
+        "device": 66306,
+        "inode": 24386342,
+        "mode": 33277,
+        "mtime_ns": 1785870607557521590,
+        "size": 4412
+      },
+      "bytes": 4412,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/62/62930b7ccf0a6a6a20d164cf5d11f813015b814fe6fc279176451b272625cb72",
+      "path": "test/fixed_web_platform/webgpu_audio_fix.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "62930b7ccf0a6a6a20d164cf5d11f813015b814fe6fc279176451b272625cb72",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607560931870,
+        "device": 66306,
+        "inode": 24386343,
+        "mode": 33277,
+        "mtime_ns": 1785870607560931870,
+        "size": 58155
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607560931870,
+        "device": 66306,
+        "inode": 24386343,
+        "mode": 33277,
+        "mtime_ns": 1785870607560931870,
+        "size": 58155
+      },
+      "bytes": 58155,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/dc/dc2a06ec29c40ee3caf60db5f03e3840c01069f184db674ffd530723e6876bb7",
+      "path": "test/fixed_web_platform/webgpu_compute_shaders.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "dc2a06ec29c40ee3caf60db5f03e3840c01069f184db674ffd530723e6876bb7",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607562717146,
+        "device": 66306,
+        "inode": 24386344,
+        "mode": 33277,
+        "mtime_ns": 1785870607562717146,
+        "size": 38118
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607562717146,
+        "device": 66306,
+        "inode": 24386344,
+        "mode": 33277,
+        "mtime_ns": 1785870607562717146,
+        "size": 38118
+      },
+      "bytes": 38118,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/c1/c1adb67e7f037382254ed0bc5a6676e4ebd00f5d5172559be33cef34811880bf",
+      "path": "test/fixed_web_platform/webgpu_implementation.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "c1adb67e7f037382254ed0bc5a6676e4ebd00f5d5172559be33cef34811880bf",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607565231499,
+        "device": 66306,
+        "inode": 24386345,
+        "mode": 33277,
+        "mtime_ns": 1785870607565231499,
+        "size": 64920
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607565231499,
+        "device": 66306,
+        "inode": 24386345,
+        "mode": 33277,
+        "mtime_ns": 1785870607565231499,
+        "size": 64920
+      },
+      "bytes": 64920,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/e1/e19ff9077b58c85409240392c3ef0b36b971aa7fca9d84ee61b72df2bf38cda9",
+      "path": "test/fixed_web_platform/webgpu_kv_cache_optimization.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "e19ff9077b58c85409240392c3ef0b36b971aa7fca9d84ee61b72df2bf38cda9",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607567231692,
+        "device": 66306,
+        "inode": 24386346,
+        "mode": 33277,
+        "mtime_ns": 1785870607567231692,
+        "size": 38427
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607567231692,
+        "device": 66306,
+        "inode": 24386346,
+        "mode": 33277,
+        "mtime_ns": 1785870607567231692,
+        "size": 38427
+      },
+      "bytes": 38427,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/88/8800d59c66e2227dd5104c881f5c2b23b2861c137800875f7d0510001f266752",
+      "path": "test/fixed_web_platform/webgpu_low_latency_optimizer.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "8800d59c66e2227dd5104c881f5c2b23b2861c137800875f7d0510001f266752",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607568231788,
+        "device": 66306,
+        "inode": 24386347,
+        "mode": 33277,
+        "mtime_ns": 1785870607568231788,
+        "size": 33548
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607568231788,
+        "device": 66306,
+        "inode": 24386347,
+        "mode": 33277,
+        "mtime_ns": 1785870607568231788,
+        "size": 33548
+      },
+      "bytes": 33548,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/46/46bb580ee9bdc8b7514a5e6aa2a8854719ae417650304880ed7625095f4b1f66",
+      "path": "test/fixed_web_platform/webgpu_memory_optimization.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "46bb580ee9bdc8b7514a5e6aa2a8854719ae417650304880ed7625095f4b1f66",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607570231980,
+        "device": 66306,
+        "inode": 24386348,
+        "mode": 33277,
+        "mtime_ns": 1785870607570231980,
+        "size": 32093
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607570231980,
+        "device": 66306,
+        "inode": 24386348,
+        "mode": 33277,
+        "mtime_ns": 1785870607570231980,
+        "size": 32093
+      },
+      "bytes": 32093,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/07/072e3560b6fee01347ee511c8ec826ffe8e2301342a26e42d4ca79aecf5648c6",
+      "path": "test/fixed_web_platform/webgpu_quantization.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "072e3560b6fee01347ee511c8ec826ffe8e2301342a26e42d4ca79aecf5648c6",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607571232076,
+        "device": 66306,
+        "inode": 24386349,
+        "mode": 33277,
+        "mtime_ns": 1785870607571232076,
+        "size": 43416
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607571232076,
+        "device": 66306,
+        "inode": 24386349,
+        "mode": 33277,
+        "mtime_ns": 1785870607571232076,
+        "size": 43416
+      },
+      "bytes": 43416,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d0/d0733c64e96d62315d90840c31b115d0579336960944cd9504f45510aabc9ae1",
+      "path": "test/fixed_web_platform/webgpu_shader_precompilation.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d0733c64e96d62315d90840c31b115d0579336960944cd9504f45510aabc9ae1",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607572232172,
+        "device": 66306,
+        "inode": 24386350,
+        "mode": 33277,
+        "mtime_ns": 1785870607572232172,
+        "size": 8351
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607572232172,
+        "device": 66306,
+        "inode": 24386350,
+        "mode": 33277,
+        "mtime_ns": 1785870607572232172,
+        "size": 8351
+      },
+      "bytes": 8351,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/a7/a752942d2b565cf9d44f5281b47a2c57eefc39d42746d1db3988cd6a864915ae",
+      "path": "test/fixed_web_platform/webgpu_shader_registry.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "a752942d2b565cf9d44f5281b47a2c57eefc39d42746d1db3988cd6a864915ae",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607574232364,
+        "device": 66306,
+        "inode": 24386351,
+        "mode": 33277,
+        "mtime_ns": 1785870607574232364,
+        "size": 107854
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607574232364,
+        "device": 66306,
+        "inode": 24386351,
+        "mode": 33277,
+        "mtime_ns": 1785870607574232364,
+        "size": 107854
+      },
+      "bytes": 107854,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/23/23115b89180346bffc554cdacfa44c28c0c528f1671a97ca2b211d4c4f0cd936",
+      "path": "test/fixed_web_platform/webgpu_streaming_inference.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "23115b89180346bffc554cdacfa44c28c0c528f1671a97ca2b211d4c4f0cd936",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607576232556,
+        "device": 66306,
+        "inode": 24386352,
+        "mode": 33277,
+        "mtime_ns": 1785870607576232556,
+        "size": 43639
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607576232556,
+        "device": 66306,
+        "inode": 24386352,
+        "mode": 33277,
+        "mtime_ns": 1785870607576232556,
+        "size": 43639
+      },
+      "bytes": 43639,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/dd/dd803e4bb1a01cc72cf046aabde807737f3494200115a4385e4dd4493e2bc0be",
+      "path": "test/fixed_web_platform/webgpu_streaming_pipeline.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "dd803e4bb1a01cc72cf046aabde807737f3494200115a4385e4dd4493e2bc0be",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607577232652,
+        "device": 66306,
+        "inode": 24386353,
+        "mode": 33277,
+        "mtime_ns": 1785870607577232652,
+        "size": 66122
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607577232652,
+        "device": 66306,
+        "inode": 24386353,
+        "mode": 33277,
+        "mtime_ns": 1785870607577232652,
+        "size": 66122
+      },
+      "bytes": 66122,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/5a/5a9c128fd21e704b2ca3ac5ef0b9b4030cdce7d080b205446c5af806c0cfb3a5",
+      "path": "test/fixed_web_platform/webgpu_transformer_compute_shaders.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "5a9c128fd21e704b2ca3ac5ef0b9b4030cdce7d080b205446c5af806c0cfb3a5",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607579232845,
+        "device": 66306,
+        "inode": 24386354,
+        "mode": 33277,
+        "mtime_ns": 1785870607579232845,
+        "size": 91735
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607579232845,
+        "device": 66306,
+        "inode": 24386354,
+        "mode": 33277,
+        "mtime_ns": 1785870607579232845,
+        "size": 91735
+      },
+      "bytes": 91735,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/75/7542391f7ad31380373722b37ec91a810e1030dbede5f97f0710dd61d2253bb8",
+      "path": "test/fixed_web_platform/webgpu_ultra_low_precision.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "7542391f7ad31380373722b37ec91a810e1030dbede5f97f0710dd61d2253bb8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607579232845,
+        "device": 66306,
+        "inode": 24386355,
+        "mode": 33277,
+        "mtime_ns": 1785870607579232845,
+        "size": 12803
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607579232845,
+        "device": 66306,
+        "inode": 24386355,
+        "mode": 33277,
+        "mtime_ns": 1785870607579232845,
+        "size": 12803
+      },
+      "bytes": 12803,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/f4/f4b71a6d5947c1f1790a3ef35b3202d4b601f2377c94b4e3ed8d0d04bd00bc25",
+      "path": "test/fixed_web_platform/webgpu_video_compute_shaders.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "f4b71a6d5947c1f1790a3ef35b3202d4b601f2377c94b4e3ed8d0d04bd00bc25",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607581233037,
+        "device": 66306,
+        "inode": 24386356,
+        "mode": 33277,
+        "mtime_ns": 1785870607581233037,
+        "size": 31699
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607581233037,
+        "device": 66306,
+        "inode": 24386356,
+        "mode": 33277,
+        "mtime_ns": 1785870607581233037,
+        "size": 31699
+      },
+      "bytes": 31699,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d6/d639fc99cfc13b226a96ae057b929ed60a76617c82178d81a412b7376d0fcdbf",
+      "path": "test/fixed_web_platform/webgpu_wasm_fallback.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d639fc99cfc13b226a96ae057b929ed60a76617c82178d81a412b7376d0fcdbf",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607585233421,
+        "device": 66306,
+        "inode": 24386357,
+        "mode": 33277,
+        "mtime_ns": 1785870607585233421,
+        "size": 34316
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607585233421,
+        "device": 66306,
+        "inode": 24386357,
+        "mode": 33277,
+        "mtime_ns": 1785870607585233421,
+        "size": 34316
+      },
+      "bytes": 34316,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/d1/d17f17999c242c842cd07104f594fc31663f64451826fc1911587b1b41ea9ec2",
+      "path": "test/fixed_web_platform/webnn_implementation.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "d17f17999c242c842cd07104f594fc31663f64451826fc1911587b1b41ea9ec2",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607587233614,
+        "device": 66306,
+        "inode": 24386358,
+        "mode": 33277,
+        "mtime_ns": 1785870607587233614,
+        "size": 35268
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607587233614,
+        "device": 66306,
+        "inode": 24386358,
+        "mode": 33277,
+        "mtime_ns": 1785870607587233614,
+        "size": 35268
+      },
+      "bytes": 35268,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/62/62b6706ad044b9af6207234940bc80a2724884bdfbe83f59e5d55a50c123ff3b",
+      "path": "test/fixed_web_platform/webnn_inference.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "62b6706ad044b9af6207234940bc80a2724884bdfbe83f59e5d55a50c123ff3b",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607590233902,
+        "device": 66306,
+        "inode": 24386359,
+        "mode": 33277,
+        "mtime_ns": 1785870607590233902,
+        "size": 45207
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607590233902,
+        "device": 66306,
+        "inode": 24386359,
+        "mode": 33277,
+        "mtime_ns": 1785870607590233902,
+        "size": 45207
+      },
+      "bytes": 45207,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/6c/6c5baa49941cd6edfa3d39c1e2e769ba8049108285eacda21e385f2988b49fc8",
+      "path": "test/fixed_web_platform/websocket_bridge.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6c5baa49941cd6edfa3d39c1e2e769ba8049108285eacda21e385f2988b49fc8",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607591233998,
+        "device": 66306,
+        "inode": 24516232,
+        "mode": 33277,
+        "mtime_ns": 1785870607591233998,
+        "size": 496
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607591233998,
+        "device": 66306,
+        "inode": 24516232,
+        "mode": 33277,
+        "mtime_ns": 1785870607591233998,
+        "size": 496
+      },
+      "bytes": 496,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/6c/6ca8ffd7d2cc56f5e7e0aa0e84bc10d883ed01e366129fd342b387e0af3a6949",
+      "path": "test/fixed_web_platform/worker/__init__.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "6ca8ffd7d2cc56f5e7e0aa0e84bc10d883ed01e366129fd342b387e0af3a6949",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607594234286,
+        "device": 66306,
+        "inode": 24516233,
+        "mode": 33277,
+        "mtime_ns": 1785870607594234286,
+        "size": 26007
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607594234286,
+        "device": 66306,
+        "inode": 24516233,
+        "mode": 33277,
+        "mtime_ns": 1785870607594234286,
+        "size": 26007
+      },
+      "bytes": 26007,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/4e/4ea5f0c18a437c4965a88edcb6dda7ab169426382d7f3b4045b77f2e0c606e29",
+      "path": "test/fixed_web_platform/worker/web_utils.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "4ea5f0c18a437c4965a88edcb6dda7ab169426382d7f3b4045b77f2e0c606e29",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607596234479,
+        "device": 66306,
+        "inode": 24516235,
+        "mode": 33277,
+        "mtime_ns": 1785870607596234479,
+        "size": 13495
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607596234479,
+        "device": 66306,
+        "inode": 24516235,
+        "mode": 33277,
+        "mtime_ns": 1785870607596234479,
+        "size": 13495
+      },
+      "bytes": 13495,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/04/040de817bede24330e1b48172dd3a93b3a6cd6fab2324de4c4c24a23dbdd312c",
+      "path": "test/fixed_web_tests/test_hf_bert_web.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "040de817bede24330e1b48172dd3a93b3a6cd6fab2324de4c4c24a23dbdd312c",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607597234575,
+        "device": 66306,
+        "inode": 24516398,
+        "mode": 33204,
+        "mtime_ns": 1785870607597234575,
+        "size": 5069
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607597234575,
+        "device": 66306,
+        "inode": 24516398,
+        "mode": 33204,
+        "mtime_ns": 1785870607597234575,
+        "size": 5069
+      },
+      "bytes": 5069,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/a6/a63692533d228a79e126089e54f6363a4ae93d1f18192cebdcc7d3bafbad9ba1",
+      "path": "test/mcp-plus-plus/descriptor_cli_test.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "a63692533d228a79e126089e54f6363a4ae93d1f18192cebdcc7d3bafbad9ba1",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607599234767,
+        "device": 66306,
+        "inode": 24516433,
+        "mode": 33204,
+        "mtime_ns": 1785870607599234767,
+        "size": 7341
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607599234767,
+        "device": 66306,
+        "inode": 24516433,
+        "mode": 33204,
+        "mtime_ns": 1785870607599234767,
+        "size": 7341
+      },
+      "bytes": 7341,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/90/90c4503406b77de11233c4b263a259d97d815bc420fb5c3bf17022611acde799",
+      "path": "test/mcp-plus-plus/todo_daemon_test.py",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "90c4503406b77de11233c4b263a259d97d815bc420fb5c3bf17022611acde799",
+      "stable": true
+    },
+    {
+      "after_stat": {
+        "ctime_ns": 1785870607600234863,
+        "device": 66306,
+        "inode": 24516967,
+        "mode": 33277,
+        "mtime_ns": 1785870607600234863,
+        "size": 11054
+      },
+      "before_stat": {
+        "ctime_ns": 1785870607600234863,
+        "device": 66306,
+        "inode": 24516967,
+        "mode": 33277,
+        "mtime_ns": 1785870607600234863,
+        "size": 11054
+      },
+      "bytes": 11054,
+      "category": "tracked_current_delta",
+      "kind": "regular",
+      "object_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/objects/56/56dcdc65a8438a81201794e775063ec0d91a80c5633b1495846e139107706e3f",
+      "path": "test/web_platform_integration/README.md",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sensitive_filename": false,
+      "sha256": "56dcdc65a8438a81201794e775063ec0d91a80c5633b1495846e139107706e3f",
+      "stable": true
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 4293638,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-016/head.patch",
+      "public_derivative": {
+        "bytes": 4293638,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-016/head.public.patch",
+        "sha256": "6f5e2e4c808737b6e0371f821b6cf8e0b277f2d875c802171fa142aad62185c4"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "6f5e2e4c808737b6e0371f821b6cf8e0b277f2d875c802171fa142aad62185c4"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-016/index.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-016/index.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4293638,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-016/unstaged.patch",
+      "public_derivative": {
+        "bytes": 4293638,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-016/unstaged.public.patch",
+        "sha256": "6f5e2e4c808737b6e0371f821b6cf8e0b277f2d875c802171fa142aad62185c4"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "unflagged_by_scoped_pattern_scan",
+      "secret_findings": [],
+      "sha256": "6f5e2e4c808737b6e0371f821b6cf8e0b277f2d875c802171fa142aad62185c4"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/swissknife",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 5720,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-016/status-after.z",
+    "sha256": "837342b20f500c05bb281ea846fa6224f3df20121cb27b3750dd90a21526f6ef"
+  },
+  "status_before": {
+    "bytes": 5720,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-016/status-before.z",
+    "sha256": "837342b20f500c05bb281ea846fa6224f3df20121cb27b3750dd90a21526f6ef"
+  },
+  "workspace_relative": "hallucinate_app/swissknife"
+}

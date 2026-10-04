@@ -1,0 +1,1675 @@
+{
+  "HEAD_after": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+  "HEAD_before": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+  "counts": {
+    "file_entries": 318,
+    "regular_bytes_including_duplicates": 0,
+    "regular_files": 0,
+    "symlinks_no_follow": 0
+  },
+  "declared": {
+    "XY": {
+      "D.": 318
+    },
+    "ahead/behind_cached_main": null,
+    "branch": "master",
+    "dirty_children": [],
+    "id": 124,
+    "origin": "github.com/endomorphosis/ShadowProver",
+    "parent": 112,
+    "relative": "ipfs_datasets_py/logic/CEC/ShadowProver",
+    "tracked": 318,
+    "untracked": 0
+  },
+  "errors": [],
+  "files": [
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".github/workflows/build.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitignore"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".gitmodules"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".vscode/extensions.json"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": ".vscode/settings.json"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "Dockerfile"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "LICENCE"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "docker-compose.yml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "pom.xml"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/D-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/K-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/K-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/LP1-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/LP1-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/LP2-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/LP2-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/S4-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/S4-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/S5-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/S5-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/T-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/T-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/acu_simulation1.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/acu_simulation2.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/acu_simulation3.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/broken/akrasia.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/broken/cognitive-calculus-rules.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/broken/counterfactuals.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/broken/debug.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/broken/example.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/broken/false-belief-test.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/broken/mccounterfactual-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/broken/tough_counterfactual_problems.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/cognitive-calculus-debug.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/cognitivecalculus-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/cognitivecalculus-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/colorshadowprover-completeness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/dde_1_no_action.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/first-order-counterfactual-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/firstorder-answer-extraction-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/firstorder-completeness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/firstorder-debug-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/firstorder-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/inductivecalculus-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/paladyn/README.md"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/paladyn/sim1.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/paladyn/sim2.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/paladyn/sim3.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/paladyn/sim4.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/propositional-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/propositional-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/sandbox.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/tutorial/DCEC.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "problems/tutorial/PropositionalLogic.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "run_shadowprover.sh"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "snark"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/META-INF/MANIFEST.MF"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/Py4JServer.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/Runner.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/Server.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/axiomsets/AxiomSet.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/axiomsets/DiscreteEventCalculus.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/axiomsets/SimpleEventCalculus.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/constraints/Constraint.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/constraints/NoFreeVariablesConstraint.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/constraints/Signature.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/Logic.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/NDRule.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/PropositionalResolutionProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/Prover.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/SnarkWrapper.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/AxiologyProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/CCProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/CognitiveCalculusProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/ColoredConverter.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/Converter.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/FolConverter.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/InductiveCalculusProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/ModalConverter.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/SecondOrderCognitiveCalculusProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/SecondOrderProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/ShadowProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/ccprovers/TraitLearnerCognitiveCalculusProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/BreakupBiConditionals.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/DR1.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/DR2.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/DR3.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/DR5.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/InnerModalForward.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/IntentionToPerception.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/KnowledgeConjunctions.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/ModalConjunctions.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/ModalImplications.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/NecToPos.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/NotExistsToForallNot.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/OughtSchema.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/PerceptionToKnowledge.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/R11a.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/R4.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/SaysToBelief.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/SelfBelief.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/TheoremsToNecessity.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/cognitivecalculus/UniversalElim.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/expanders/inductivecalculus/Generalize.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/internals/AgentSnapShot.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/internals/ConsistentSubsetFinder.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/internals/Expander.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/internals/FirstOrderAntiUnifier.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/internals/InductionSchemaGeneration.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/internals/UniversalInstantiation.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/AtomicJustification.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/CompoundJustification.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/GeneralUnificationResult.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/HigherOrderUnification.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/InferenceJustification.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/Justification.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/ResolutionJustification.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/TrivialJustification.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/proof/Unifier.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/DProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/KProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/LP.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/LP1.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/LP2.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/PropositionalModalConverter.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/S4Prover.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/S5Prover.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/TProver.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/rules/DemodulationImplementation.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/rules/FirstOrderColorResolutionImplementation.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/rules/FirstOrderResolutionImplementation.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/rules/ForwardClauseRule.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/rules/ForwardGeneralRule.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/rules/ParamodulationImplementation.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/sortsystem/Category.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/sortsystem/Functor.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/sortsystem/Ontology.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/core/sortsystem/SortSystem.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/dpl/Interpreter.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/examples/AxiologyExample.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/examples/Example.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/examples/TAI_AEGAP.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/examples/VirtueLearning.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/generators/DomainGenerator.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/generators/FOLPropositionalProblemGenerator.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/generators/Generator.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/generators/GeneratorParams.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/generators/Names.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/generators/PropositionalProblemGenerator.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/generators/Vectorizer.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/hyperlog/Evaluator.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/Context.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/ErrorPhrase.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/Expression.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/MetaFormula.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/Phrase.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/cnf/CNFFormula.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/cnf/Clause.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/cnf/Literal.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/cnf/PseudoLiteral.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/deduction/Assume.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/deduction/AssumeStar.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/deduction/DedSequence.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/deduction/Deduction.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/deduction/MethodApplication.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/deduction/PrimitiveDeduction.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/deduction/SupposeAbsurd.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/And.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Atom.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/BaseFormula.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Belief.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/BiConditional.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/CanProve.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Common.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Communicates.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/CounterFactual.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Desire.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Exemplar.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Existential.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Formula.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/FormulaVariable.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/GeneralModal.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Implication.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Intends.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Knowledge.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/NamedLambda.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Necessity.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Not.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Or.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Ought.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Perception.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Possibility.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Predicate.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Quantifier.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Says.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Schema.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Trait.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/UnaryModalFormula.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/formula/Universal.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/measures/BooleanRank.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/measures/FunctionSymbols.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/measures/Measure.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/measures/QuantifierRank.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/measures/RelationSymbols.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/Absurd.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/AndIntroPM.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/Both.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/Claim.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/ConstructiveDilemma.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/DerivedMethod.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/DoubleNegation.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/Equivalence.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/FalseElim.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/LeftAnd.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/LeftEither.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/LeftIff.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/ModusPonens.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/ModusTollens.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/PrimitiveMethod.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/RightAnd.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/RightEither.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/RightIff.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/method/TrueIntro.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/sorts/Sort.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/value/Compound.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/value/Constant.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/value/Time.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/value/Value.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/representations/value/Variable.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/sandboxes/ClojureSandbox.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/sandboxes/DDE_Sandbox.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/sandboxes/DPLSandbox.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/sandboxes/HyperLog.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/sandboxes/LispSandbox.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/sandboxes/Run.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/sandboxes/Sandbox.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/CollectionUtils.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/Color.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/CommonUtils.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/Constants.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/DPLChunk.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/Holder.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/ImmutablePair.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/Logger.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/Pair.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/Problem.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/ProblemReader.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/Reader.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/Sets.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/java/org/rairlab/shadow/prover/utils/SymbolGenerator.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/D-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/K-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/K-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/LP1-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/LP1-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/LP2-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/LP2-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/S4-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/S4-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/S5-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/S5-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/T-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/T-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/acu_simulation1.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/acu_simulation2.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/acu_simulation3.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/akrasia.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/axiomsets/discrete-event-calculus.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/axiomsets/medical.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/axiomsets/simple-event-calculus.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/axiomsets/telephone.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/cognitive-calculus-debug.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/constraints/discrete-event-calculus.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/constraints/medical.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/constraints/simple-event-calculus.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/constraints/telephone.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/cognitivecalculus-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/cognitivecalculus-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/colorshadowprover-completeness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/counterfactuals.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/first-order-counterfactual-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/inductivecalculus-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/mccounterfactual-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/sandbox.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/ccprovers/tough_counterfactual_problems.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/cognitive-calculus-rules.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/firstorder-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/firstorder-debug-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/core/firstorder-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/dde_1_no_action.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/debug.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/dpl/test1.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/examples/taiaegap.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/examples/virtuelearning.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/experiments/tmp.cljs"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/false-belief-test.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/firstorder-answer-extraction-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/propositional-completness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/main/resources/org/rairlab/shadow/prover/propositional-soundness-tests.clj"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/AnswerExtractionTests.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/ComparisionShadowProverTests.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/FalseBeliefTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/DPLTests.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/SnarkWrapperTests.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/ccprovers/CognitiveCalculusProverTests.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/ccprovers/InductiveCalculusProverTests.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/ccprovers/SecondOrderCognitiveCalculusProverTests.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/proof/UnifierTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/DProverTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/KProverTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/LP1ProverTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/LP2ProverTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/S4ProverTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/S5ProverTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/propositionalmodalprovers/TProverTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/core/sortsystem/SortSystemTest.java"
+    },
+    {
+      "category": "tracked_current_delta",
+      "kind": "missing",
+      "path": "src/test/java/org/rairlab/shadow/prover/utils/LogicTest.java"
+    }
+  ],
+  "patches": [
+    {
+      "bytes": 1237552,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-124/head.patch",
+      "public_derivative": {
+        "bytes": 1237552,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-124/head.public.patch",
+        "relative_path": "repo-124/head.public.patch",
+        "sha256": "f39d2307058a3ae2b7a2fdfcf893f88225e4a5c28b8545a92bfa3e3558414eaa"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "f39d2307058a3ae2b7a2fdfcf893f88225e4a5c28b8545a92bfa3e3558414eaa"
+    },
+    {
+      "bytes": 1237552,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-124/index.patch",
+      "public_derivative": {
+        "bytes": 1237552,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-124/index.public.patch",
+        "relative_path": "repo-124/index.public.patch",
+        "sha256": "f39d2307058a3ae2b7a2fdfcf893f88225e4a5c28b8545a92bfa3e3558414eaa"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "f39d2307058a3ae2b7a2fdfcf893f88225e4a5c28b8545a92bfa3e3558414eaa"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-124/unstaged.patch",
+      "public_derivative": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/public-nested-variants-01/repo-124/unstaged.public.patch",
+        "relative_path": "repo-124/unstaged.public.patch",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "public_derivative_scope": "review-only derivative; redacted diffs are not asserted replay-applicable",
+      "raw_policy": "LOCAL_ONLY; excluded from publication regardless of flags",
+      "secret_findings": [],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver",
+  "stable_all_files": true,
+  "stable_git_identity": true,
+  "status_after": {
+    "bytes": 22726,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-124/status-after.z",
+    "sha256": "4717fc393b3b26ed9e5d2df89ac86891279af965ade47bfd858a24766866169a"
+  },
+  "status_before": {
+    "bytes": 22726,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/nested-patches-02/repo-124/status-before.z",
+    "sha256": "4717fc393b3b26ed9e5d2df89ac86891279af965ade47bfd858a24766866169a"
+  },
+  "workspace_relative": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver"
+}

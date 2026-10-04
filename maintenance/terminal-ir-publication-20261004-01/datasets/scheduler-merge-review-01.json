@@ -1,0 +1,18 @@
+{
+  "schema": "datasets-scheduler-conflict-resolution@1",
+  "base": "latest origin/main resource_scheduler.py",
+  "policy": "Preserve all published resource profiles, proof recovery, admission diagnostics, counters and fairness; transplant only unpublished timeout descriptor. Generic final gate diagnostics remain admission_observation. Historical waiter refusals remain proof_refusal_observation. Tests use the published field contract.",
+  "upstream_sha256": "740543329dacbd84afcb19c88b6fdb0f09b4dd38bb564cfc6cf999d3fcb4e22a",
+  "local_sha256": "f156511991e33d3b4ba523c3c5080ea30d0a53ad8a4dbcccea0487432679a9aa",
+  "merged_sha256": "0887be4827a877438f793552a1ea43cb36815ceced96ee51df11690576a66e8c",
+  "ast_parse_passed": true,
+  "changes": [
+    "optional deepcopy timeout_decision constructor field",
+    "waiter-local optional descriptor initialization",
+    "descriptor built only in actual terminal timeout branch using existing sampled clocks/predicates",
+    "timeout exception receives descriptor; cancellation receives none",
+    "unpublished timeout tests updated for historical refusal field name"
+  ],
+  "admission_behavior_changed": false,
+  "validation_pending": true
+}

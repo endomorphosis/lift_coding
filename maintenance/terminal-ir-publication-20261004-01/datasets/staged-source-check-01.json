@@ -1,0 +1,1935 @@
+{
+  "AST_errors": [],
+  "AST_python_count": 300,
+  "base_commit": "fd89d2a48aa0de771dd22ec8fd079af10732051f",
+  "captured_utc": "2026-10-04T20:00:45Z",
+  "pins": [
+    {
+      "bytes": 5794,
+      "path": ".gitignore",
+      "sha256": "37a987d84143730f02e779fa18ffdd8227977cdf8182bbe0a481f294042699aa"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26953,
+      "path": "benchmarks/audit_cached_span_device_probe.py",
+      "sha256": "a2c41f716db083c126fb509608204391646d5217764357665fb6abfa585533ab"
+    },
+    {
+      "AST": "passed",
+      "bytes": 63904,
+      "path": "benchmarks/audit_formula_guard_coordinator.py",
+      "sha256": "15996a66797b68927261903edbadddb2ae6bfd29711ddde7806acf1bbd9f7f84"
+    },
+    {
+      "AST": "passed",
+      "bytes": 63951,
+      "path": "benchmarks/audit_formula_guard_coordinator_v2.py",
+      "sha256": "f0d566a4145b4e3e055fcb5620f3a89a1b0355452acc37b03c76c1b9eb2f9ac3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 63951,
+      "path": "benchmarks/audit_formula_guard_coordinator_v3.py",
+      "sha256": "f38e215b5052242b682ad2e6a5b2e2631588a8f98957c75e8b3f3137a9475c53"
+    },
+    {
+      "AST": "passed",
+      "bytes": 81825,
+      "path": "benchmarks/audit_formula_guard_costs.py",
+      "sha256": "21947c4e70361dc5998d60da15ad9dff6f979224e00ed87cb268631e555d62d1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 81933,
+      "path": "benchmarks/audit_formula_guard_costs_v2.py",
+      "sha256": "7653fc4deff63b8efb949ff23e47989981dadf1a603c99d7d3c8799958893725"
+    },
+    {
+      "AST": "passed",
+      "bytes": 87059,
+      "path": "benchmarks/audit_formula_guard_costs_v3.py",
+      "sha256": "d977d68e7d8eea53233ef4887e7ea6614a5fc08707e9a47bd39e730f3e7488e7"
+    },
+    {
+      "AST": "passed",
+      "bytes": 90886,
+      "path": "benchmarks/audit_formula_guard_costs_v4.py",
+      "sha256": "998fc6b10364c4ba41093ed3af8a1fad623bf033c4db2a4ac3e2ffe5e9b4e93d"
+    },
+    {
+      "AST": "passed",
+      "bytes": 92493,
+      "path": "benchmarks/audit_formula_guard_costs_v5.py",
+      "sha256": "9552de463d7577a5715f5b3a9c6fcfe6278ba1fd18c35bbe22f9f631df403209"
+    },
+    {
+      "AST": "passed",
+      "bytes": 71159,
+      "path": "benchmarks/audit_formula_input_guard_candidate.py",
+      "sha256": "f6041cc1404f0d4ba49ffca7b8243e6894b015d47137c801522b9c2ab1d01027"
+    },
+    {
+      "AST": "passed",
+      "bytes": 76864,
+      "path": "benchmarks/audit_formula_lease_cadence.py",
+      "sha256": "2df372ee665d949fe0152d86bf47ffb58f683d88a7a5093d68484021ec97df77"
+    },
+    {
+      "AST": "passed",
+      "bytes": 83077,
+      "path": "benchmarks/audit_span_deduplicated_input_guard.py",
+      "sha256": "6ed935625b3832689856a007777580ac8e3f275d7ab231fb8d1413f853053bb7"
+    },
+    {
+      "AST": "passed",
+      "bytes": 79585,
+      "path": "benchmarks/audit_span_inference_candidates.py",
+      "sha256": "bdbbc3f863e688e3bfa78ffcd8708f5fde33b222491496d52e018aeea1ae727b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 77268,
+      "path": "benchmarks/audit_span_whole_input_guard.py",
+      "sha256": "76c1bb182a8136328ff148a1a4bf303b6dd6bfa66eff69e4b7f97d14000ab68b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25831,
+      "path": "benchmarks/bench_hyper_counterexample_validation.py",
+      "sha256": "2ddce83eb52581dd702e0e0c56d394f6b431c1bf8cc370e4097ca90329c1c15f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20746,
+      "path": "benchmarks/bench_hyper_dotnet_bootstrap.py",
+      "sha256": "e4f51d66d5b2c2de1e31850ee6e1bd4c3a37ca0978393f34df5a7a0b21d0e947"
+    },
+    {
+      "AST": "passed",
+      "bytes": 21913,
+      "path": "benchmarks/bench_hyper_evidence_integrity.py",
+      "sha256": "2003295942af75056a5f111ebf5dabb2043c8c1c3981b0f1fd1479cc1cb06f35"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17685,
+      "path": "benchmarks/bench_hyper_fallback_validation.py",
+      "sha256": "466a95e90f81e2e9aeef73a7a7332caa174e893c69789a96837c28446e906346"
+    },
+    {
+      "AST": "passed",
+      "bytes": 33166,
+      "path": "benchmarks/bench_hyper_installer_resources.py",
+      "sha256": "2751d07e549fd2f6129c94c79f684d66f3a98c7c49d462374007e993338adfe4"
+    },
+    {
+      "AST": "passed",
+      "bytes": 23484,
+      "path": "benchmarks/bench_hyper_native_parallel.py",
+      "sha256": "631d4a8dad1950e30ff9c45c59dc071b274d3fdca18498ffa2a6bd14053e38fc"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20410,
+      "path": "benchmarks/bench_hyper_native_setup.py",
+      "sha256": "0086a9cc0c4731809d6be26e13e845fb47d4e8a3f0d005181ad84304a7969edd"
+    },
+    {
+      "AST": "passed",
+      "bytes": 19295,
+      "path": "benchmarks/bench_hyper_native_smoke.py",
+      "sha256": "26831eb4ff38394f5f5be6bfe061ea360bb3d4525d7771729399a5803cbe303f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 30677,
+      "path": "benchmarks/bench_hyper_operation_control.py",
+      "sha256": "04e5c73c07ab09ec809bb386e37bb9f6b47db599fd55f4a3573ac6100f517216"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13883,
+      "path": "benchmarks/bench_hyper_python_admission.py",
+      "sha256": "9ee728aebf4ab5d618a2a13950ecbb6e8b8062172841f07a6863bf9bd0a29321"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18649,
+      "path": "benchmarks/bench_hyper_registry_fallback.py",
+      "sha256": "8c22ac54e36db52236361518dd1fb9991921780b2c934551856cdf6a16ef2e61"
+    },
+    {
+      "AST": "passed",
+      "bytes": 22267,
+      "path": "benchmarks/bench_process_workspace_guard.py",
+      "sha256": "144535a9bc06b64cdbd07b8fbf6aba80f0bbf0687c28bbf9b839a0b9e6e0f799"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5659,
+      "path": "benchmarks/guard_cost_observer_budget_v2.py",
+      "sha256": "1f1e1a1699c230618e8f14a77715219664a34d60ca25d333745dace73fd3b825"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5771,
+      "path": "benchmarks/guard_cost_observer_budget_v3.py",
+      "sha256": "149ca08c53dc97606a8fe877cbcf8a4dae56b3f67a9a0730e2e697b26458b196"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5771,
+      "path": "benchmarks/guard_cost_observer_budget_v4.py",
+      "sha256": "7716ea86869c56b5506e62ee45dea159a646759405ae922d5fd5833a84f8b2dd"
+    },
+    {
+      "AST": "passed",
+      "bytes": 19764,
+      "path": "benchmarks/probe_cached_span_device_candidate.py",
+      "sha256": "fdd6b1e42128bce1290a1c886802046f34ab75c9255fb61bfa3068fda6fefe37"
+    },
+    {
+      "AST": "passed",
+      "bytes": 19809,
+      "path": "benchmarks/probe_cached_span_device_candidate_v2.py",
+      "sha256": "4a5e5a6c633f20c6886bbeecdf9bbc45b23c5c784d8fd5d55543acb18932ecc5"
+    },
+    {
+      "AST": "passed",
+      "bytes": 44906,
+      "path": "benchmarks/profile_dimension_guard_costs.py",
+      "sha256": "cabc64a5479c92ac52cb577673f36615176d4660d6bc4956666c98748b7c584c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 47206,
+      "path": "benchmarks/profile_dimension_guard_costs_v2.py",
+      "sha256": "1623ab2602b56c4a178f2aef437947ffadbe987ba6c4430ceccf4c8429b857ba"
+    },
+    {
+      "AST": "passed",
+      "bytes": 47267,
+      "path": "benchmarks/profile_dimension_guard_costs_v3.py",
+      "sha256": "e29b9b299564abb530699dcee9c00163b35f6d7fbfd5205cf99c0ba074e1f06b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 51216,
+      "path": "benchmarks/profile_dimension_guard_costs_v4.py",
+      "sha256": "231cda2130e81054925d4478600b4eb282639f0bbaa473ded416862f3e4aab65"
+    },
+    {
+      "AST": "passed",
+      "bytes": 53731,
+      "path": "benchmarks/profile_dimension_guard_costs_v5.py",
+      "sha256": "8c3cf068624bc47e41f90df3bb3217d602f3c17d91b85a797b066b669a9767c0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 53831,
+      "path": "benchmarks/profile_dimension_guard_costs_v6.py",
+      "sha256": "c1843cf34591200f53caca9e0655ea41d077a7783123f0cc924d639c8ccb3cd0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 54524,
+      "path": "benchmarks/profile_formula_guard_costs.py",
+      "sha256": "61786537ff7e6d442322d307ef7d7a1a609cf9279d8a005017eb9e1e73127577"
+    },
+    {
+      "AST": "passed",
+      "bytes": 55098,
+      "path": "benchmarks/profile_formula_guard_costs_v2.py",
+      "sha256": "f0f4b9d5daa1c3380ec9f742aeacc24e815ccfee2f1e0aa180ad9fe2b08275f4"
+    },
+    {
+      "AST": "passed",
+      "bytes": 44567,
+      "path": "benchmarks/qualify_formula_guard_coordinator.py",
+      "sha256": "e8b9634c6e905d0c63e7eba067e86a034796537f08d758d548a1d22123190ed8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 52932,
+      "path": "benchmarks/qualify_formula_input_guard_candidate.py",
+      "sha256": "7b2a365dd99708d75cea6e16458d1b250959e5c3a2a028cc946f0dac1ee3b09e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 59069,
+      "path": "benchmarks/qualify_formula_lease_cadence.py",
+      "sha256": "ed3bbfc3b20bfab34d58a8dc76a0a858a31cbd28e3e1d1183a8d54bcd18848a1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 41228,
+      "path": "benchmarks/qualify_span_deduplicated_input_guard.py",
+      "sha256": "cbe2c2cf85e9b43acda341c8d646b76b53c02b9068ace8c3ec30b9ffadd7da3f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 44077,
+      "path": "benchmarks/qualify_span_inference_candidates.py",
+      "sha256": "a558fd42438f4471268d7d7c8f87f62ca0024570001c59bf3f5736328ff22258"
+    },
+    {
+      "AST": "passed",
+      "bytes": 39860,
+      "path": "benchmarks/qualify_span_whole_input_guard.py",
+      "sha256": "454110e3fee76e2ac0b27c05989edbc677e95f94d6962e5ba3a807aaa2c798c0"
+    },
+    {
+      "bytes": 4465,
+      "path": "data/logic/conformance/reachable_matrix_v2.json",
+      "sha256": "26be310f059934dcdbfdc3ae055b067edf358dd1607e61775ebc75f7f9461f79"
+    },
+    {
+      "bytes": 6688,
+      "path": "data/logic/itp_hammer/benchmark.json",
+      "sha256": "d4d8ccea9d466a11de55153b7e395cbb4e7148cb1e0d603d90640a88ad7288e0"
+    },
+    {
+      "bytes": 26765,
+      "path": "data/logic/itp_hammer/environment.json",
+      "sha256": "351c2ac45a0c2e90248421431669e330382752badd90475f2981d7fe4ab44cc1"
+    },
+    {
+      "bytes": 139412,
+      "path": "docs/architecture/logic/logic_parser_baseline/capability_matrix.json",
+      "sha256": "6f30b67479f967443eaecdae6cdd130df464515a65a00e92fe33df8b1192a894"
+    },
+    {
+      "bytes": 122179,
+      "path": "docs/architecture/logic/logic_parser_v2_baseline/claim_runtime_audit.json",
+      "sha256": "3bce43eda157b29286ecef9b01644cc45fab614347b00020b8998ea0bc3177b4"
+    },
+    {
+      "bytes": 7264,
+      "path": "docs/autoencoders/alignment_binding_review_recording.md",
+      "sha256": "c3fd1d1e1a9096637176f35752aa06f56bb44587ebbd7abb6bca268c60ef084f"
+    },
+    {
+      "bytes": 131322,
+      "path": "docs/autoencoders/codebase_ir_repository_pipeline_improvement_plan.md",
+      "sha256": "f0dac92514c73b448ad14b7002db07e878172a3da94241be0c82d1edbded327c"
+    },
+    {
+      "bytes": 114400,
+      "path": "docs/autoencoders/codebase_ir_repository_pipeline_plan.json",
+      "sha256": "89dde2cb21a1b21a2f191b37288f80f5b09f85b3f6bb243b3222ba9c69865e80"
+    },
+    {
+      "bytes": 4964,
+      "path": "docs/autoencoders/ir_family_dimension_cuda_guard_followup_plan.json",
+      "sha256": "f6b1b5f7ba8a625941a6a5faab98e9ecbd67659f9ff00d23efea6c89c095936a"
+    },
+    {
+      "bytes": 26746,
+      "path": "docs/autoencoders/ir_family_dimension_guard_workload_followup_plan.json",
+      "sha256": "b04ec3926086a866bff351bb245c1e41fe8724f9bf3a3c639e89e41a6ae43e47"
+    },
+    {
+      "bytes": 5825,
+      "path": "docs/autoencoders/ir_family_formula_guard_coordinator_followup_plan.json",
+      "sha256": "39ba4ff8ce3a5d13797399a5ea022ade566735c23c93a9c84f00fbeba4bbd7ae"
+    },
+    {
+      "bytes": 2332,
+      "path": "docs/autoencoders/ir_family_guard_cost_profiling_followup_plan.json",
+      "sha256": "3a32823902c1711e004f89b7bb042752cb3228dba26403699dbc1a66f3b3c555"
+    },
+    {
+      "bytes": 3708,
+      "path": "docs/autoencoders/ir_family_input_guard_candidate_followup_plan.json",
+      "sha256": "3cd7980ab0a010a9cbdb7eba38d3efbb028ecae0d0d2d8c7eae78661dc1a14f2"
+    },
+    {
+      "bytes": 2257,
+      "path": "docs/autoencoders/ir_family_lease_cadence_followup_plan.json",
+      "sha256": "50a427316f5dc4fa53a9e257c91c9542ea071be951c2ad1fd6b8deae53f4e54a"
+    },
+    {
+      "bytes": 2953,
+      "path": "docs/autoencoders/ir_family_span_binding_dedup_followup_plan.json",
+      "sha256": "b677feed89cec07efcbb0ef05162ad647c992a20b45d21350bed1dcfc85f5cac"
+    },
+    {
+      "bytes": 2553,
+      "path": "docs/autoencoders/ir_family_span_inference_candidates_followup_plan.json",
+      "sha256": "bdedcea72c69c5dfe13c3eb39e07174c7d2114b706d1cd9bb0bc9d7ee77a2f96"
+    },
+    {
+      "bytes": 2613,
+      "path": "docs/autoencoders/ir_family_span_whole_input_guard_followup_plan.json",
+      "sha256": "b461ccb1947b7e22fa72b71a24fe48e552f6f3841f64a31075a147c7f9946e2a"
+    },
+    {
+      "bytes": 2413,
+      "path": "docs/autoencoders/ir_family_span_whole_input_guard_partial_followup_plan.json",
+      "sha256": "22b1f301660061c3c92491827868e4f5416711f5e3f74c1e01864276439a4345"
+    },
+    {
+      "bytes": 128445,
+      "path": "docs/implementation/runbooks/resource_aware_proving.md",
+      "sha256": "0c7ad2269fd3412e00d0d148d6fcb661ad528158012f6d6cf178fc192e77145d"
+    },
+    {
+      "bytes": 184615,
+      "path": "docs/software_contracts/CODEBASE_IR_FOUNDATION.md",
+      "sha256": "d9912fb5af67a96507c1b5db4c791a39171f51db60d84628c679a93e58278aad"
+    },
+    {
+      "kind": "gitlink_or_deleted",
+      "path": "ipfs_accelerate_py"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25370,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_paired_temporal_ownership_corpus.py",
+      "sha256": "fd9a3609dd5fbc11e211a66f768061035c317995899c31eaecf73ec76f50ccf0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 27942,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_coupled_span_corpus.py",
+      "sha256": "bbd64d43d40e4c3a109fd45efd4343345ad87d78d1f9575fcce6a6255ba87a46"
+    },
+    {
+      "AST": "passed",
+      "bytes": 16739,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_coupled_span_metrics.py",
+      "sha256": "d8e0f5b6d924cbe840975b995bbeeccc075ddf014768b909201cf38b5df87566"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12842,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_event_eligibility_adapter.py",
+      "sha256": "3b7a93d56023a8825c64c2dd41fc6c8c63e1a7adb823faaca5652f4e5d7d0044"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12411,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_event_owner_adapter_v2.py",
+      "sha256": "549e6697004fb59a57a0ffa8c2a78289f7d6b1222f6d861f782d1f829a7566a3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12411,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_event_owner_adapter_v3.py",
+      "sha256": "2fb0195768993cc5d82e3da3f79d1a39c4161ac6d9ff2de534785d52d38f5ca4"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12682,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_event_owner_adapter_v4.py",
+      "sha256": "9ca4051c79a81102e9c58a8d2e2ec39af61868e2a2f29adac343d7a8c8cdd2cc"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12691,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_event_proposer_v2.py",
+      "sha256": "6544e893feb8b8e4e355716eb6a3ae73b4f23fe94c86caefd9af99a4b018fb90"
+    },
+    {
+      "AST": "passed",
+      "bytes": 21578,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_event_proposer_v3.py",
+      "sha256": "e975c1eac06dbec495920acb10d4eac343d732d6121018cf58d18135bb425af6"
+    },
+    {
+      "AST": "passed",
+      "bytes": 27231,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_event_proposer_v4.py",
+      "sha256": "4f2a6b9640a8b244ff5da67e38ba4424e21acbd33c93e06ba50fab4502440866"
+    },
+    {
+      "AST": "passed",
+      "bytes": 30031,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_owner_pointer_corpus.py",
+      "sha256": "d2449c5f07a1bfbcd88fc12bb8ecadb38c070c82c93a688bb83cd6e38a458ec2"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12174,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_owner_pointer_metrics.py",
+      "sha256": "8c3e43640259043fc42dc835ae0194127c6ce7c8214f74f448b7c2774cfd371f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12641,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_owner_pointer_metrics_v2.py",
+      "sha256": "1380d526c7af466ccbc309e96bdc9ca94687fa29e923cd6cf780ab4c644a3179"
+    },
+    {
+      "AST": "passed",
+      "bytes": 23728,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_placement_corpus.py",
+      "sha256": "1c21121029262cc0fa9b1df2ae607a835a5c603409acb2a91a7b749ea6d4b1c1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17814,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_placement_qualification.py",
+      "sha256": "8d7419ed1281cdd2854b2eeb69d2ba031f2139824953d3492aae71e541991602"
+    },
+    {
+      "AST": "passed",
+      "bytes": 35036,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_relative_owner_corpus.py",
+      "sha256": "ff0a0d575c777600437dd766c5db74a0f9124dd5a5f10c52c4846c9208c07007"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11871,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_relative_owner_metrics.py",
+      "sha256": "f0bc4b68d139aa0a59ba05321ccb38cd7cef39582239533cfff8ff09c2745b0c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 27062,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_stability_corpus.py",
+      "sha256": "631a9819c7b23d2d666934df3e1ce9a43427dd81e2c28b04b1fceb2e46b2431e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17902,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_stability_qualification.py",
+      "sha256": "93e3e3f6c75a530ab2c752cff8356d352dd19f30db031fffdc7088424997075e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 104289,
+      "path": "ipfs_datasets_py/logic/backends/hyperproperties/adapters.py",
+      "sha256": "bd2ec5cca6e501dfad16f17dd76c7652d3d2be9ae8445cbf01cf6ef0e266689f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 126518,
+      "path": "ipfs_datasets_py/logic/backends/hyperproperties/execution_v2.py",
+      "sha256": "09f83896f6eb970e55433d9b196cac1fa16848be9ef1d335e5b747d53c3173d2"
+    },
+    {
+      "AST": "passed",
+      "bytes": 15783,
+      "path": "ipfs_datasets_py/logic/backends/installers/dotnet_sdk.py",
+      "sha256": "b9e222cc0a50d7a66966e8f366f61fd10f28bb6afda3e590b77ee8cbb6fc02ff"
+    },
+    {
+      "AST": "passed",
+      "bytes": 28696,
+      "path": "ipfs_datasets_py/logic/backends/installers/dotnet_sdk_archive.py",
+      "sha256": "50858b3320b36374469c964856b9fc925767e0c0f26482c75b9d98ed8fc2624e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 205281,
+      "path": "ipfs_datasets_py/logic/backends/installers/hyperproperty.py",
+      "sha256": "61286ae90045419fd64ae157409d46b37212e51c12a499012f38c5d8594a33c8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17191,
+      "path": "ipfs_datasets_py/logic/backends/installers/hyperproperty_setup.py",
+      "sha256": "b285c6593a172e79c0aefa812dbbb9d1eb73c32778ad962dc0491c0d18dbda4e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 6897,
+      "path": "ipfs_datasets_py/logic/backends/installers/hyperproperty_transaction.py",
+      "sha256": "81a131fb1b93f9aa08146c5c4174b9464da9e0e15551a2356c7d74945a755ebb"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12735,
+      "path": "ipfs_datasets_py/logic/backends/installers/install_control.py",
+      "sha256": "f0da0c2e6467e290074dbdff4bf1283b76a5d649eec9cfe62f3ea5331b90a155"
+    },
+    {
+      "AST": "passed",
+      "bytes": 78154,
+      "path": "ipfs_datasets_py/logic/backends/process.py",
+      "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+    },
+    {
+      "AST": "passed",
+      "bytes": 73928,
+      "path": "ipfs_datasets_py/logic/backends/protocol/tamarin.py",
+      "sha256": "7ec8a6d14c6996a09bf7314cc680f4d88f6f4beb6863b9117801e83e5d377dd5"
+    },
+    {
+      "AST": "passed",
+      "bytes": 7281,
+      "path": "ipfs_datasets_py/logic/backends/python_admission.py",
+      "sha256": "15d4b4b7d21cd8236f16c4e4f067a57a8ba6520097e7903fb3afa40072f32df8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 84269,
+      "path": "ipfs_datasets_py/logic/backends/registry.py",
+      "sha256": "b782be0587c5c6a55d28133c4839a182984ff2e274cb97ffd05d82caa76cc2a1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 89083,
+      "path": "ipfs_datasets_py/logic/conformance/claim_runtime_audit.py",
+      "sha256": "7093842990c7bcde03c6fc5e8d892133f8951d30288b6a3502ebde77de190402"
+    },
+    {
+      "AST": "passed",
+      "bytes": 74733,
+      "path": "ipfs_datasets_py/logic/conformance/matrix.py",
+      "sha256": "f3bb9e774aa0d8306a70d80f7f3407d237c21da40540dfdd5ef900dcdc2f1737"
+    },
+    {
+      "AST": "passed",
+      "bytes": 71761,
+      "path": "ipfs_datasets_py/logic/external_provers/lazy_installer.py",
+      "sha256": "2d6ae631cabdb5b206df815ebdb519e397171760de9f6dc52585048dfddd7837"
+    },
+    {
+      "AST": "passed",
+      "bytes": 53146,
+      "path": "ipfs_datasets_py/logic/families/providers.py",
+      "sha256": "126c2ea35e65881cc46e991ddd34e80f2ea0b7c884c796c95217ff84cc4f6368"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25046,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_capabilities.py",
+      "sha256": "8be1b67fde4d397442abdc18edaa69ffb1c36ccdf48ff4f0186d0a96a2d20807"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18141,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+      "sha256": "d7d2e1303e15d46b70997e5880df6fb9a690bfebde63666cad04db516f3ef3a8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9479,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_masked_contrastive.py",
+      "sha256": "913033528d04602fe60e941ee78cfd8d8b7a898bc0803c02e9b60531bd2aa89f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8596,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_raw_ranking.py",
+      "sha256": "6faba849284d90219148e27a30aeb4101530af823fb78a4f6f804e37b73e4603"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8494,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_declarations.py",
+      "sha256": "869461e204b0ff2b6d060cd07cea585d627eb3eb87557aebc21f058f3d64c175"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18008,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py",
+      "sha256": "ef382f127be99f174df45388c5cc8a5b29c960fca7497d68e555365faaa85f0d"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25216,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_provenance.py",
+      "sha256": "f666f3e5b1be498687662c0b9cfae2d8befe319c58625259ed7e1d360d65f222"
+    },
+    {
+      "AST": "passed",
+      "bytes": 23074,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_declarations.py",
+      "sha256": "4e475329097a747f9ec1a635c58395209271eb9808dc5658e70f0bf7eebc1c0e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 29119,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_workflow.py",
+      "sha256": "0e72fb48de559eb047fb87f0490d23fe4abfec98b8197ef94d359c84e57c8441"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17786,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_training_mixture.py",
+      "sha256": "2d7de997e1baff4a1534ddd756f99864ef2270e3c641c0664f6a240f826bfda5"
+    },
+    {
+      "AST": "passed",
+      "bytes": 97881,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "sha256": "c7ac8153acc04926bc2200e1031970c428090bc2132f31cc937fbdebdec3478f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 21097,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_binding_review.py",
+      "sha256": "658bce8569101e36852702ceb53f1bc0ab61d6a00ed071e73d7044f39765d59d"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10419,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_binding_review_workflow.py",
+      "sha256": "af60454d3d1a573ea97960f69d1a9e6a68ef102608123e368dbd87ee97cb7420"
+    },
+    {
+      "AST": "passed",
+      "bytes": 19777,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_label_evidence_intake.py",
+      "sha256": "c78aae8affd9e897f8dbbe7283c91855666d9fc6651fec193753435d6356f58a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17036,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_label_evidence_intake_workflow.py",
+      "sha256": "2c8fcb32eac1ba58f57a8cc2e6c5839527f4020a070fd1e1d38cf66a8bb6da9e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 29993,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 4214,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py",
+      "sha256": "7e74f5ea2230549165fd0cb0230b2b8baaa0016cc2352d5a422c70c20f5e4da8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13888,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_symbol_bindings.py",
+      "sha256": "7a46a2488ee37621bdebc6d4521e3eb8160c7eaeaf66ffb2b59cff016c7c8a7a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 95883,
+      "path": "ipfs_datasets_py/logic/software_verification/hyperproperties.py",
+      "sha256": "a1d0ae559b0b40d1ef7a5cb41f87fd315e7954156d14e41e1d478f745dd71ff4"
+    },
+    {
+      "AST": "passed",
+      "bytes": 22063,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/authenticated_lease_heartbeat.py",
+      "sha256": "584ddf7f8274481940ff48648da5947d08ba42534cf46157da3591a4ac634b30"
+    },
+    {
+      "AST": "passed",
+      "bytes": 39486,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+      "sha256": "af8ad2d10aa10f1cb9f9b41d39392e28cc6acfb88bf8b949215e9616bd09f355"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10964,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/input_content_guard.py",
+      "sha256": "aa3fefbe8a1ab4d81bf61ae9edf395a9070b3c0f94b728ee6fa5ddca0c81c325"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11673,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_owner_type_portable.py",
+      "sha256": "4902d911cc282e0dfb44b3d4e62191dbc4ac67774dfdf2c0bf33fe79379fcec7"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10472,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_4096_bitwise_device_inference_v2.py",
+      "sha256": "14678654b927d0b6910fda6a8c82961978a9e7ebc29334aaae6cb2320abc5dc3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12409,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_cached_input_device_inference.py",
+      "sha256": "ec07cb2d502c0e1aedbdb3c11d29348fbddf438982dfbab4c07368a85391eb70"
+    },
+    {
+      "AST": "passed",
+      "bytes": 31231,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_deduplicated_whole_input_guard_device_inference.py",
+      "sha256": "451b162cf25c90681a7f372f421c52c9711a6267bc614f5fb8cc1c44f8831f34"
+    },
+    {
+      "AST": "passed",
+      "bytes": 22528,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_device_bitwise_inference.py",
+      "sha256": "d1c12eb54ca8c17c9815ed20db9237c86876361ac3d72fa30ce2d470b0fccf91"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18688,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_lease_heartbeat_device_inference.py",
+      "sha256": "c1b8263bcc06e978efea616c9915a3986b7da5d3bc587badb38e815331758c1f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26996,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_whole_input_guard_device_inference.py",
+      "sha256": "398611f204ce27194d6a0c5b739ad13d1387feeb626d250995ac97de42d17b20"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26738,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_temporal_coupled_span.py",
+      "sha256": "476964ff4e68957514f1b7ad5492a79711c699781b67145768d3060f09e563cb"
+    },
+    {
+      "AST": "passed",
+      "bytes": 23960,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_temporal_event_eligibility.py",
+      "sha256": "0a5b99f7f05ba31d32f5df16543a5618653df84f1e275c2b6cf9018eca59efb7"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25604,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_temporal_event_shape.py",
+      "sha256": "b7a2688dca551a169edbec41ffc194920d0ed681d2830d29dd8a64c78f291d73"
+    },
+    {
+      "AST": "passed",
+      "bytes": 24858,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_temporal_owner_pointer.py",
+      "sha256": "34f50cb1419448478835fa69a85a1adac0d4a673a337ad899ec6189f5f88b6de"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17610,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_temporal_placement.py",
+      "sha256": "8b4f4ae7177cc0c74881e25d3f24ddb4d43f9698235c13b92253a3a79941cda4"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26665,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_temporal_relative_owner.py",
+      "sha256": "ec880791ae6ce1a3b249a1cc519db35f2e719cb70c0468c6d93006e56bd34ad9"
+    },
+    {
+      "AST": "passed",
+      "bytes": 27453,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_temporal_stability.py",
+      "sha256": "aa7dcc2c5e04330a70a521aa6fac3cf7804c610cfefe76f51ea32114d6999c72"
+    },
+    {
+      "AST": "passed",
+      "bytes": 35609,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula_bitwise_device_inference.py",
+      "sha256": "5b5631eb1cf779ea8b6fcf3073d074355f52ef8c74adea84fc595421dea85089"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18602,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula_bitwise_device_inference_v2.py",
+      "sha256": "ebc7f8242ec3a4852be4c025b4ef818bc48e74add7634935ec403e1bd3c6dfb9"
+    },
+    {
+      "AST": "passed",
+      "bytes": 15376,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula_bitwise_device_inference_v3.py",
+      "sha256": "417b0e1aa1212f195edded1c54a38163dc6c519494c7e00cd8716242c24b1286"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18903,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula_lease_heartbeat_device_inference.py",
+      "sha256": "d367abb349d909247b334424445cd690486170e833dcac4d26ec434e7b0b804f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 109669,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "0887be4827a877438f793552a1ea43cb36815ceced96ee51df11690576a66e8c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26501,
+      "path": "scripts/ops/autoencoder/benchmark_training_paraphrase_mixture.py",
+      "sha256": "9f8b036eadb8ee343687d62dd5b490b15d6786414d0bd72e1e06f0b87bbf7115"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13057,
+      "path": "scripts/ops/autoencoder/evaluate_training_mixture_styles.py",
+      "sha256": "5491333721699cf2ef730e81ff1c544565c87ebe23439fd86ac117067b676740"
+    },
+    {
+      "AST": "passed",
+      "bytes": 3180,
+      "path": "scripts/ops/autoencoder/run_alignment_stage.py",
+      "sha256": "e1b03f8d0818e630dfec51ab1ddad08485cb8fbf698a58905c9a692e68e0a57c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9022,
+      "path": "scripts/ops/legal_ir/export_legal_owner_type_portable.py",
+      "sha256": "1cc3134685bf0f7da6a0616153c5c47b396e5f895d90fa8a545237ee1846befd"
+    },
+    {
+      "AST": "passed",
+      "bytes": 2727,
+      "path": "scripts/ops/legal_ir/intake_binding_label_evidence.py",
+      "sha256": "a08b474b11ef423b48d310b93f859cf226d9fb69c69135db57c43f2a2ec9c166"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5499,
+      "path": "scripts/ops/legal_ir/prepare_legal_owner_pointer_real_diagnostics.py",
+      "sha256": "a884c81636ee0cdda8eaa0e49669ee5d50f119606606c9f3333854979ceded48"
+    },
+    {
+      "AST": "passed",
+      "bytes": 1028,
+      "path": "scripts/ops/legal_ir/prepare_legal_paired_temporal_ownership_corpus.py",
+      "sha256": "922872628d83c9818105589e0668371b2864dbe337e0c7a9db96f43fbfd10d0b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 946,
+      "path": "scripts/ops/legal_ir/prepare_legal_temporal_coupled_span_corpus.py",
+      "sha256": "f2e08e63f3e3ab2ba304eba295a4be53a068b64a58a6ec9e33a60b98db641723"
+    },
+    {
+      "AST": "passed",
+      "bytes": 949,
+      "path": "scripts/ops/legal_ir/prepare_legal_temporal_owner_pointer_corpus.py",
+      "sha256": "3815c2d964b65aaa7f51a1215afff9d663205e2c20676430cfe5903207aa762a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 1005,
+      "path": "scripts/ops/legal_ir/prepare_legal_temporal_placement_corpus.py",
+      "sha256": "32412fd1e108a3f2300854c44f126b2b012f3a4224cd98dc14cc4277d8a7524b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 1013,
+      "path": "scripts/ops/legal_ir/prepare_legal_temporal_relative_owner_corpus.py",
+      "sha256": "ae421f570f01b19fa558c653d1a682af2158fc6dfa46c4ff869781ccfd431eb8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 1076,
+      "path": "scripts/ops/legal_ir/prepare_legal_temporal_stability_corpus.py",
+      "sha256": "91f57b7b34fc518b02c25d71923761391fd831fc97dcf5957987606bb9fa1531"
+    },
+    {
+      "AST": "passed",
+      "bytes": 41255,
+      "path": "scripts/ops/legal_ir/qualify_legal_paired_ownership_head.py",
+      "sha256": "86b951554ceae0b2bbd9a836701b37af4b47afe6081b0bfb649e096652a2b663"
+    },
+    {
+      "AST": "passed",
+      "bytes": 41552,
+      "path": "scripts/ops/legal_ir/qualify_legal_paired_ownership_head_v2.py",
+      "sha256": "ce5722a2361b7cc211c30f347e1155a1df1e690f360d21537c512d5f69e58cbd"
+    },
+    {
+      "AST": "passed",
+      "bytes": 41782,
+      "path": "scripts/ops/legal_ir/qualify_legal_temporal_coupled_span.py",
+      "sha256": "6a9d8fc2c1d16ca8f319502129de0d9e65e71fa68321c6495af11c38e0223391"
+    },
+    {
+      "AST": "passed",
+      "bytes": 36609,
+      "path": "scripts/ops/legal_ir/qualify_legal_temporal_owner_pointer.py",
+      "sha256": "5c98a6e69cebd176fffc5b6be070864e5ad0ef50a037b569e249517aeb4e1fef"
+    },
+    {
+      "AST": "passed",
+      "bytes": 50934,
+      "path": "scripts/ops/legal_ir/qualify_legal_temporal_placement_head.py",
+      "sha256": "823ba8c06ecd6bc6821c4975e1526f3748120ba0a795ad9b094a2f5fcf47cf9c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 57369,
+      "path": "scripts/ops/legal_ir/qualify_legal_temporal_relative_owner.py",
+      "sha256": "0701e87974adf864f5bc5f9ab6f024bf5d22bd7564f3c0af5b4ead9bd2702784"
+    },
+    {
+      "AST": "passed",
+      "bytes": 61421,
+      "path": "scripts/ops/legal_ir/qualify_legal_temporal_stability_head.py",
+      "sha256": "9b1ebaaaba674d3116fa8b6fdbc258bb291faed082937d013161226cf7c3f243"
+    },
+    {
+      "AST": "passed",
+      "bytes": 16814,
+      "path": "scripts/ops/legal_ir/qualify_legal_temporal_stability_head_v2.py",
+      "sha256": "dca7cf3ff30efe84414495416a5422a76fc85ff52844d91c7c9f39b28ac3f741"
+    },
+    {
+      "AST": "passed",
+      "bytes": 2012,
+      "path": "scripts/ops/legal_ir/record_binding_reviews.py",
+      "sha256": "0237cc0a9fba4280a02e102ff88a676c9153361f0c2abbf597d81a1097d958a1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12634,
+      "path": "scripts/ops/legal_ir/replay_legal_temporal_stability_teacher.py",
+      "sha256": "c3dbf5043947aae1d02f41408a24a708ce39211d96ae8ef901069957c243f142"
+    },
+    {
+      "AST": "passed",
+      "bytes": 21679,
+      "path": "scripts/ops/legal_ir/run_legal_paired_temporal_ownership.py",
+      "sha256": "29d36993bace85cffc26e85308d003b97439dd02016aeae49b8669f390c6eb47"
+    },
+    {
+      "AST": "passed",
+      "bytes": 15826,
+      "path": "scripts/ops/legal_ir/run_legal_temporal_coupled_span.py",
+      "sha256": "1ebdb538ca84bb45ad37418c7da25831fe036a4bd386be46b01f36b45be9fb56"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13558,
+      "path": "scripts/ops/legal_ir/run_legal_temporal_owner_pointer.py",
+      "sha256": "289f0c3f826029d5480bafbfb399961bc621243329d5b4a1f1658673c9c15ec8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 22141,
+      "path": "scripts/ops/legal_ir/run_legal_temporal_placement.py",
+      "sha256": "095ce85a3a574f45ca4a2dd001065ee012734a735358e6534e0b0458373016d0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 16240,
+      "path": "scripts/ops/legal_ir/run_legal_temporal_relative_owner.py",
+      "sha256": "478b0479cfb0c1e5cd52421aee04798b7d84104598210cfc477808ab7958a4dc"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26729,
+      "path": "scripts/ops/legal_ir/run_legal_temporal_stability.py",
+      "sha256": "a2526e45a7cd23f327210461788d6bb83a89916f7fa7747fb3c4e8bb455cd57f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 33408,
+      "path": "tests/integration/logic/backends/test_hyperproperty_backends.py",
+      "sha256": "935a8cc59a93e237c7f19af566582e7e401a5323b29db7c352154d6a1a247e85"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26129,
+      "path": "tests/integration/logic/backends/test_protocol_backends.py",
+      "sha256": "efd84608e5897d184efa3db8d4a63952fe80903b156fb37b788f205448c65c88"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18336,
+      "path": "tests/integration/logic/test_verification_provider_matrix_api.py",
+      "sha256": "d67e1c564f5c4a9754865ea44ac11ea27d3b6c0b9e4158cd9e0ae6a6ab54f19a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 30775,
+      "path": "tests/integration/logic_providers/test_hyper_execution_v2.py",
+      "sha256": "b13c0e333518ebd20d397d4c4ceec8a513e9e2fd46ac54f3f7f9feb42ae9cd0b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 38923,
+      "path": "tests/integration/logic_providers/test_protocol_execution_v2.py",
+      "sha256": "bbb13e51a9d29e521564b3a8bf526288b768975ea1073366c62905aba09a69f8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10596,
+      "path": "tests/unit/logic/autoformal/test_legal_paired_temporal_ownership_corpus.py",
+      "sha256": "426a2f03310a3d83d22ca40db21e5a3eec76ef9723580fa24ca275a0a7a63530"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9773,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_coupled_span_corpus.py",
+      "sha256": "014cf6588478e4824e2c4a206e033c792c2a237a88923306877500dd2f0d8061"
+    },
+    {
+      "AST": "passed",
+      "bytes": 12970,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_coupled_span_metrics.py",
+      "sha256": "ccab57172d034fca0804fe33143f098620729ef9f6f814a0346fb986530b9b8f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10738,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_event_eligibility_adapter.py",
+      "sha256": "1dbf20a1625224feb3c6a10f367e964effd377d84f99386d8230cecec57c5dbd"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13983,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_event_owner_adapter_v2.py",
+      "sha256": "9b262d7226fc7126e585740194e31b3a9e72e9924f6ff4b8b9d020c929097749"
+    },
+    {
+      "AST": "passed",
+      "bytes": 14333,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_event_owner_adapter_v3.py",
+      "sha256": "a411177e5ba3388379711719e2ae7ebacb4e4ae8eefe8d71dba929d022774f57"
+    },
+    {
+      "AST": "passed",
+      "bytes": 16753,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_event_owner_adapter_v4.py",
+      "sha256": "e0ce1ac5d6e9de767bb65e1ee63bab8d51a79e7be2323c569a2c244118b36fdc"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13465,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_event_proposer_v2.py",
+      "sha256": "0b4513e209244f1d699c7bc18ce18a4f8e3174db3c7ccb3417cef37099d5e632"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17654,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_event_proposer_v3.py",
+      "sha256": "12c22523a71a00395a3804def58cc1f44ad31476a56bac6257b3efe1e8c6aae1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 30177,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_event_proposer_v4.py",
+      "sha256": "a15cc4026cfd4be89b337e77ceaa6b5fd4f4e0c43ff8397a7a623159d20804f0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10497,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_owner_pointer_corpus.py",
+      "sha256": "f32405c838eb0e533592b1148784f0bafeae5432f1bb4a9ff45711980c5a7e36"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10602,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_owner_pointer_metrics.py",
+      "sha256": "cbbdcb015b65d7b256204c01eed7d84daac902d1a9807e288eeee767ee4ff268"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11091,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_owner_pointer_metrics_v2.py",
+      "sha256": "595902c7af0fd45dd09464ca187ec146ac474c05032adc5fd415d5c817666369"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10948,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_placement_corpus.py",
+      "sha256": "88a944a5118654c472b3f9c7c1f5e41e96560b27f365db057a97e16f863356f5"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11497,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_placement_qualification.py",
+      "sha256": "0a0daf48164b949a0697f5db827bf0e961b81917df4a4774c74fd2537714c73f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8997,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_relative_owner_corpus.py",
+      "sha256": "a6a710a6036214acdeb11bb4f842e3484585bdc1e4fb02a6199bd2bcaeec30e2"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13333,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_relative_owner_metrics.py",
+      "sha256": "9fdde9bcbea681da9ee61df92c489d6f7d0c1b77413a599419382092289532eb"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13325,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_stability_corpus.py",
+      "sha256": "cb7f22e98c0fd9644622f4101efc8baa9765f02bf7b0176f7738c2566ee34ade"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13369,
+      "path": "tests/unit/logic/autoformal/test_legal_temporal_stability_qualification.py",
+      "sha256": "e8507764c7d6e8f511f3253984673823b6634848a0e35c3bcd73c12c5c426255"
+    },
+    {
+      "AST": "passed",
+      "bytes": 1944,
+      "path": "tests/unit/logic/autoformal/test_prepare_legal_owner_pointer_real_diagnostics.py",
+      "sha256": "ca7ae001d9f83b0458e4ad7e7eb7cdbf5d61ae0b6c952f445dd32fd2160f2baf"
+    },
+    {
+      "AST": "passed",
+      "bytes": 19156,
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_paired_ownership_head.py",
+      "sha256": "59c011c79e2665dcd7414e646d18ba111b393e19d729a9a2077d27e3935f7b48"
+    },
+    {
+      "AST": "passed",
+      "bytes": 22640,
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_paired_ownership_head_v2.py",
+      "sha256": "f06477c393630b1159f17a81af9979222e818d11fc790827bc7d71005e4df33c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17982,
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_temporal_coupled_span.py",
+      "sha256": "00e6bd3d400ff65de1317b6cb8c31b2a8aa7e173180ca2ac1aea37aaf7d029e2"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13787,
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_temporal_owner_pointer.py",
+      "sha256": "1fbb79c770a6e9215b70c044f5bc5bc07f74b2eaf7242af7a7f1f60ddfeaf254"
+    },
+    {
+      "AST": "passed",
+      "bytes": 28968,
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_temporal_placement_head.py",
+      "sha256": "a3c47912871a882616e2b368c90b2f3d3390ae8cfe835e0fbbe53ecc19374bef"
+    },
+    {
+      "AST": "passed",
+      "bytes": 27582,
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_temporal_relative_owner.py",
+      "sha256": "0691f8a7ff17d78de7d4fd732a213b3507f98bd70e21a1cd9212339aad64aead"
+    },
+    {
+      "AST": "passed",
+      "bytes": 41524,
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_temporal_stability_head.py",
+      "sha256": "77062330a8b88fcb4fcc1bb23f16d2373adc281a89201a9edf94596cf3548935"
+    },
+    {
+      "AST": "passed",
+      "bytes": 4918,
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_temporal_stability_head_v2.py",
+      "sha256": "a10e450a2f0ca3de8404feddcbd9cf0dba1a1b078720128e352c79092b83402c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8400,
+      "path": "tests/unit/logic/autoformal/test_replay_legal_temporal_stability_teacher.py",
+      "sha256": "d2a8f93f9efd078d9e7e1fafa89a34181f1a8eaa4e15f9e64ff6f61162d19a43"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5427,
+      "path": "tests/unit/logic/autoformal/test_run_legal_temporal_coupled_span.py",
+      "sha256": "b8e7c799371a85ae13614c9701ae7cb2fd4010d7813ff33355d1fcbf04ec0bcc"
+    },
+    {
+      "AST": "passed",
+      "bytes": 3243,
+      "path": "tests/unit/logic/autoformal/test_run_legal_temporal_owner_pointer.py",
+      "sha256": "9522b42f621eba6d21a6b84bfcaac84e98847915e44109c8241a183192872219"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5436,
+      "path": "tests/unit/logic/autoformal/test_run_legal_temporal_relative_owner.py",
+      "sha256": "017cb27959b1f442016f6d41b54b27f47ad681783bcc8609bc07abc653521ea9"
+    },
+    {
+      "AST": "passed",
+      "bytes": 1931,
+      "path": "tests/unit/logic/backends/_python_admission_fixtures.py",
+      "sha256": "da144e5e7a46a2030bf0464cc8808e13a848ab833505243046bc3ba66086dd39"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20496,
+      "path": "tests/unit/logic/backends/test_hyper_counterexample_validation.py",
+      "sha256": "fa1efe5add1dc4e14ac916aadd6b02bc554be6455be100a53e344af338294429"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9676,
+      "path": "tests/unit/logic/backends/test_hyper_dependency_resolution.py",
+      "sha256": "491284adcfe3eaafeba55b74f26cba88cbfa4c825e9bcf9559dea679a4021642"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8707,
+      "path": "tests/unit/logic/backends/test_hyper_dotnet_bootstrap_benchmark.py",
+      "sha256": "a4e37c9ad3eaebb5e9468695a9ed7f282b07f2e1286d85541d1c2bdf75a74ddd"
+    },
+    {
+      "AST": "passed",
+      "bytes": 10034,
+      "path": "tests/unit/logic/backends/test_hyper_dotnet_install_control.py",
+      "sha256": "840d1c462d1d90a2d9c1fc962d0e2f5e58110cb83bbd5a665df4337974ec4cb8"
+    },
+    {
+      "AST": "passed",
+      "bytes": 14912,
+      "path": "tests/unit/logic/backends/test_hyper_dotnet_sdk.py",
+      "sha256": "858ff1f8e3158c2b2315dcc2500d6ab6a3c53058c7a2694592ef89e7612a2951"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18889,
+      "path": "tests/unit/logic/backends/test_hyper_dotnet_sdk_archive.py",
+      "sha256": "dfba75ea4a4335306d5ab66b88f69f6f22890e93a85ba65ef7fc87a1fa2bdc6a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 28080,
+      "path": "tests/unit/logic/backends/test_hyper_evidence_integrity.py",
+      "sha256": "bb922bd4d42319c6726a22d3d7b6153c584fbb6debb01b47f907e20015a91a3f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 27917,
+      "path": "tests/unit/logic/backends/test_hyper_fallback_validation.py",
+      "sha256": "ff65fcf1f4dca8a14743b0e6f86791b85c533a7ba4c6439b33db88ab5a55c88d"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11106,
+      "path": "tests/unit/logic/backends/test_hyper_install_control.py",
+      "sha256": "702bb5a978efb6b00433dddb33c2af5d795d1e54ae497f3e07be0fcf56e1824a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13901,
+      "path": "tests/unit/logic/backends/test_hyper_installer_archives.py",
+      "sha256": "01e0f1c00774ef64dd7d7485734852d51e2433e07430d8cc09dbe6f39a4babe3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20708,
+      "path": "tests/unit/logic/backends/test_hyper_installer_transactions.py",
+      "sha256": "7ec949659fa11170f3bd9cc6464c9de126a6e280353813da3a8575e3b99c7ef7"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9361,
+      "path": "tests/unit/logic/backends/test_hyper_native_parallel_benchmark.py",
+      "sha256": "dce4712e67eff983218b05801d510908845d285acae998e35599d7e13862ccd2"
+    },
+    {
+      "AST": "passed",
+      "bytes": 29098,
+      "path": "tests/unit/logic/backends/test_hyper_operation_control.py",
+      "sha256": "c80ccd056ba96a4c0dea70e840d4920dbf81d87d0411e560ead61c1360bce991"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17545,
+      "path": "tests/unit/logic/backends/test_hyper_python_admission.py",
+      "sha256": "32ec093db618fd6cd7622d92f2f5775e72e417359dd73d3bb150cada3f9d308a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20707,
+      "path": "tests/unit/logic/backends/test_hyper_registry_fallback.py",
+      "sha256": "51c9082bdf64af594213c89885fd2c91ab9d0ff8e0330d291cba7e0d32eceb5e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20873,
+      "path": "tests/unit/logic/backends/test_hyper_registry_routing.py",
+      "sha256": "c48e4a23c5daee388a3db002c8c7807f174ad448e176f21358be8e4a7cbd198f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 33141,
+      "path": "tests/unit/logic/backends/test_hyper_resource_admission.py",
+      "sha256": "821dcca894e92d22aa4fe01ead1fd2ebce8b04d4a855790ace311040c02792cb"
+    },
+    {
+      "AST": "passed",
+      "bytes": 14648,
+      "path": "tests/unit/logic/backends/test_hyper_setup_integrity.py",
+      "sha256": "5c40e723afcab2c372c410b183b119181a1f1d4cf9a1d7c19cfb76a43cb3039c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 14356,
+      "path": "tests/unit/logic/backends/test_hyperproperty_setup.py",
+      "sha256": "66683ed2bf73b782fa3636dd7ac1f0b51790bc47ad65006cd26b980b99d31c52"
+    },
+    {
+      "AST": "passed",
+      "bytes": 45637,
+      "path": "tests/unit/logic/backends/test_hyperproperty_upstream_installer.py",
+      "sha256": "e3f40ba0f6a6757e9f9e4d9dff61eff07d61616e7bd027c0e4e6f7b497624904"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5121,
+      "path": "tests/unit/logic/backends/test_process_file_limits.py",
+      "sha256": "cef92d9b42668a8981081ecab1ea0ab306103fbd26c8b3f0bd32b93a4167e6e3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25702,
+      "path": "tests/unit/logic/backends/test_process_workspace_guard.py",
+      "sha256": "ebe6bd7b9f9e810d12aadf3a28eedd1cf4b7637ba08dd614e81aa5005b1a1d58"
+    },
+    {
+      "AST": "passed",
+      "bytes": 28618,
+      "path": "tests/unit/logic/backends/test_protocol_operation_control.py",
+      "sha256": "28b6802b09878337a320d444186c0e74f3d9a80ca1c11ad98c9348758b24f24e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 23162,
+      "path": "tests/unit/logic/backends/test_tamarin_claim_binding.py",
+      "sha256": "5acbad3e4559e7bcad9bcfb95fdbfa23db2d7afad4403c24d8be952cf78a802d"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26920,
+      "path": "tests/unit/logic/backends/test_tamarin_resource_admission.py",
+      "sha256": "1dd96807d12f0b614ba8d6f28b263e7f7d774ddd9d6d4793f2664092cd87c1fe"
+    },
+    {
+      "AST": "passed",
+      "bytes": 14731,
+      "path": "tests/unit/logic/conformance/test_matrix.py",
+      "sha256": "54ea6dca4a9c9d06e59d2042e9335ac814b782257c2dd370b94a92a5dbdf8ddb"
+    },
+    {
+      "AST": "passed",
+      "bytes": 14595,
+      "path": "tests/unit/logic/families/test_provider_catalog.py",
+      "sha256": "ab3385142a6a7d059190a60d2289d2e453dcd094ee97f7c862786a233647e5d9"
+    },
+    {
+      "AST": "passed",
+      "bytes": 35724,
+      "path": "tests/unit/logic/formalization/autoencoder/test_alignment_lane_bundle.py",
+      "sha256": "e33af1728a25650fcb086ef98927df7bca3508af9eb4a3a88ac0ca575ff0633b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 15881,
+      "path": "tests/unit/logic/formalization/autoencoder/test_alignment_masked_contrastive.py",
+      "sha256": "2f38303b4966b7bb3b1bd81187d5489dcb438c2d7fd9a2d0f04b2669063bfa71"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26358,
+      "path": "tests/unit/logic/formalization/autoencoder/test_alignment_raw_ranking.py",
+      "sha256": "4ab321302aef0086e7b11101b5bdb1e05618e1e96b996a3a11a356ef5e51dcba"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17846,
+      "path": "tests/unit/logic/formalization/autoencoder/test_alignment_relation_declarations.py",
+      "sha256": "1fd7fa894b022cf679cf778848c43ea2d05cfbda5d9a9f4dceb379470633c102"
+    },
+    {
+      "AST": "passed",
+      "bytes": 23921,
+      "path": "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py",
+      "sha256": "cc623c6d3f2f3006bcc110c465ac79cc1d2e79d8ed687869818d718fcb68c522"
+    },
+    {
+      "AST": "passed",
+      "bytes": 28116,
+      "path": "tests/unit/logic/formalization/autoencoder/test_alignment_review_provenance.py",
+      "sha256": "a1935d24b845dea8d06600d230c3627f436e7a5f2238728c0ee5ba5bba4fd1f3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 24684,
+      "path": "tests/unit/logic/formalization/autoencoder/test_alignment_stage_declarations.py",
+      "sha256": "d399a123268bca41e80ed574dee78e7b936a88b8987500e56edfb3818ec6a1c2"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17341,
+      "path": "tests/unit/logic/formalization/autoencoder/test_alignment_stage_workflow.py",
+      "sha256": "c89716a5a934fc10ec7d3b8ac3ada3bb6e8c0d2a46d7b3448f2d6755c15fe530"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11193,
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_training_mixture.py",
+      "sha256": "50d902dd26b7c9ff2dcbfc59c47dafef8e7b3a96ff68ea88353f3410bcded199"
+    },
+    {
+      "AST": "passed",
+      "bytes": 14670,
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_training_mixture_integration.py",
+      "sha256": "8eff05ea463c6601ec75af7e776afb3c5ec99f2cdc04328bec2bc60b829b5bdc"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5931,
+      "path": "tests/unit/logic/formalization/autoencoder/test_training_mixture_styles.py",
+      "sha256": "e3e6b1c35076646b83b6df67475d7260c832513e64932b02a96f1142d1091d8f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 7528,
+      "path": "tests/unit/logic/formalization/autoencoder/test_training_paraphrase_mixture_runner.py",
+      "sha256": "42c1157e177283db169bc87869528afbcb511ed81860ebc823d535b17171fc19"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25669,
+      "path": "tests/unit/logic/legal_ir/test_canonical_binding_review.py",
+      "sha256": "df0efcebe187733e69614b86c59ed677ded0de1c0cb025217752feec8a0bcc19"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9923,
+      "path": "tests/unit/logic/legal_ir/test_canonical_binding_review_workflow.py",
+      "sha256": "b7064c5bb6afc67964e3469809a32596bbe5a316e23d85ddc28a56caf646fb86"
+    },
+    {
+      "AST": "passed",
+      "bytes": 29992,
+      "path": "tests/unit/logic/legal_ir/test_canonical_label_evidence_intake.py",
+      "sha256": "eb16d75dff3614c613ed5afc3f2252a66f07951c6878f234229985206934901b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20289,
+      "path": "tests/unit/logic/legal_ir/test_canonical_label_evidence_intake_workflow.py",
+      "sha256": "111d2ce097c6a04633dd4e5bbb0097c7cda835366d8c47303d7624486ffdadb0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 33666,
+      "path": "tests/unit/logic/legal_ir/test_canonical_statement_scope.py",
+      "sha256": "0e2e272942c41472a4f166319c8212c25ee5901a0d86044c4937719ff80faa18"
+    },
+    {
+      "AST": "passed",
+      "bytes": 16503,
+      "path": "tests/unit/logic/legal_ir/test_canonical_statement_scope_bridge.py",
+      "sha256": "09623ca049a5af6a7912c67f1b74a5cbd1878e75393533d77a4bbf1765d92aea"
+    },
+    {
+      "AST": "passed",
+      "bytes": 24708,
+      "path": "tests/unit/logic/legal_ir/test_canonical_symbol_bindings.py",
+      "sha256": "0d70a3b4d94d91b26db3dbc4af7b5b5155336f700f5b24f7bf173b63390863ee"
+    },
+    {
+      "AST": "passed",
+      "bytes": 31660,
+      "path": "tests/unit/logic/test_compositional_verification_public_api.py",
+      "sha256": "441c1ff37d73a516837e2782a220b140e8e191a03daa546839ea56342ef4dd76"
+    },
+    {
+      "bytes": 42731,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_assemble_formula_lease_cadence_review.py.predecessor",
+      "sha256": "cd440bf10064fdd2d7eab3ea4f1a839d46275b79d6f83dd774473b9703cdff39"
+    },
+    {
+      "AST": "passed",
+      "bytes": 43011,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_assemble_formula_lease_cadence_review_v2.py",
+      "sha256": "18fbd041e43368223104a1137abe6db37c006e275d31867682f27ee41fb3de98"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9801,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_assemble_guard_cost_review.py",
+      "sha256": "7d46a719dd80f628c346ef21bf1b7a4c40d823bc5ad2513811a52b537cab675d"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25605,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_assemble_input_guard_candidate_review.py",
+      "sha256": "406ebe4fac321906d93c7d76756c4cbd421e93bd2d9cd567df6906ea07a75bd1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 31580,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_assemble_input_guard_candidate_review_v2.py",
+      "sha256": "3fac769829aec9ac40e7f479cf562fa9f54713174b27f5f38d8739c22937d2de"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9180,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_assemble_span_deduplicated_input_guard_review.py",
+      "sha256": "4ad317209da6b97d079ff5fe71cd24a344f79cd860a30ee9e9d74cab15313bd6"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8077,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_assemble_span_inference_candidates_review.py",
+      "sha256": "73e6e7a6a9934645020cd5ac89ce922c4d1e1ac0791cf294603be723b4d6cb03"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8066,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_assemble_span_whole_input_guard_review.py",
+      "sha256": "6a2ab7ed6f3e4cfc1a73e18c33e7c5930d7ecfb8fa64036e85a0343ce487dd76"
+    },
+    {
+      "AST": "passed",
+      "bytes": 29058,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_cached_span_device_probe.py",
+      "sha256": "775338fead37d20c58a5d9d780ba618b3dcdcb8c03befa29cc7be53b8add113f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 31609,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_guard_coordinator.py",
+      "sha256": "8635150c235b02242dbde32b79e48e443f5f8f1e6a219a1771ee5be486fbd30d"
+    },
+    {
+      "AST": "passed",
+      "bytes": 31870,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_guard_coordinator_v2.py",
+      "sha256": "23a486a49c01b18339f292a672e7258d779f4aea5fa574cb1de9e0f63a1dda03"
+    },
+    {
+      "AST": "passed",
+      "bytes": 32422,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_guard_coordinator_v3.py",
+      "sha256": "c34354390b8a877182b330c9463514c2cffb20f70f5686b0764f7eff976007b3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20875,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_guard_costs.py",
+      "sha256": "429419bd45c3d3131a8711284461850f7d4e38cf77cfae02ae17bb1570eb2c0d"
+    },
+    {
+      "AST": "passed",
+      "bytes": 22172,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_guard_costs_v2.py",
+      "sha256": "a1e2c6bfac88ccd92cfc85b44acd0c058c688dbdc69262945d740c067be9fa96"
+    },
+    {
+      "AST": "passed",
+      "bytes": 29229,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_guard_costs_v3.py",
+      "sha256": "57e18297f02938824e62b8b0ca038dd5090d8ef111b57a5f34c97cf60538069e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 33260,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_guard_costs_v4.py",
+      "sha256": "9e810b394e54b77cf4364bf1dc4883b52e6d4a89ad0b82a1f26139b52fd95b96"
+    },
+    {
+      "AST": "passed",
+      "bytes": 36505,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_guard_costs_v5.py",
+      "sha256": "8420524a3dcbbf2b8a6e9ab74bfb811b36dabafcf0d180a020126c8bbc2500f6"
+    },
+    {
+      "AST": "passed",
+      "bytes": 40670,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_input_guard_candidate.py",
+      "sha256": "c718498f24187e5f8d12170745548659f948f6e98790750503091caa59954de1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 47188,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_formula_lease_cadence.py",
+      "sha256": "80d85799df0d7eb82c5ef68257203ef02936384e917782ec85f1e490bf31032f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 27725,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_span_deduplicated_input_guard.py",
+      "sha256": "07dcd56618e00b026ad3f5f4c9fafed381498b8ed0bbae0fb724d79c848be219"
+    },
+    {
+      "AST": "passed",
+      "bytes": 20605,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_span_inference_candidates.py",
+      "sha256": "08bf1b3ebac04121fa61a738ec434a3a47f3d92d14ed04fefb8324702f1014c0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 23114,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_span_whole_input_guard.py",
+      "sha256": "3d9006276923918f3700dc6a76ff362f347662d40ba9f52eca5cbbc8f6599aa9"
+    },
+    {
+      "AST": "passed",
+      "bytes": 26106,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_synthetic_4096_guard_workloads.py",
+      "sha256": "025917fa5223e7cb982ec509f5b58a8901c46f2562048675ccd240d698f0eed9"
+    },
+    {
+      "AST": "passed",
+      "bytes": 51027,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_audit_synthetic_4096_head_device.py",
+      "sha256": "f23293e03d5ea2fccf459665f66d220f996629d5299204ca966c4606fa799045"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17617,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_authenticated_lease_heartbeat.py",
+      "sha256": "2814b0024e72cd311d0eea2d60460c89a6ec20ea2ab9e3c7ec5554c713c36e73"
+    },
+    {
+      "AST": "passed",
+      "bytes": 5173,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_cached_span_candidate_full_sessions.py",
+      "sha256": "d9ef4e6d0bf005181d104829363a18a5d2630e821e4347d91c0a86d3ddcc3913"
+    },
+    {
+      "AST": "passed",
+      "bytes": 19383,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_formula_guard_coordinator_review_builder.py",
+      "sha256": "5f62886b40d6a41c724e34862ae6134a77271dd7c27c170613ad2777b5f17c97"
+    },
+    {
+      "AST": "passed",
+      "bytes": 22535,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_formula_guard_coordinator_review_builder_v2.py",
+      "sha256": "efaf65dad3b28c3a4fecc5c4722d3fe3dd6ffc77e0e5e8d76f31835fe16b1e31"
+    },
+    {
+      "AST": "passed",
+      "bytes": 3575,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_guard_cost_observer_budget_v2.py",
+      "sha256": "2084d5b8f77c6d7d895a15dfdc45c2b3813cafdad847085c2be49036a0596ed1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 4284,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_guard_cost_observer_budget_v3.py",
+      "sha256": "f0741572fe29f4c5c7a0e84b723fe8c040ca6ecea74600700a4cdd9b8463589a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 6094,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_guard_cost_observer_budget_v4.py",
+      "sha256": "804cfb3f1c5fa988aebe370076d850bad0317ebafa4841b5f76ec9ee31178770"
+    },
+    {
+      "AST": "passed",
+      "bytes": 15759,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_guard_workload_review_builder.py",
+      "sha256": "5ffbaead13d07f9e2bdda4900c937d6db473542455b497b542d536351d50da57"
+    },
+    {
+      "AST": "passed",
+      "bytes": 15502,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_input_content_guard.py",
+      "sha256": "7026ddc97a337877702c96331478bf3697e3c7a46da60473d522894cc12c814f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 7846,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_owner_type_portable.py",
+      "sha256": "b0aa64c449d901c2d78d34371d4d9808f4ef34d1f2204454a882a3c766adeda3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13292,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_paired_temporal_ownership.py",
+      "sha256": "080975be7c1fe925e08cdf4893645a08cd1f920a7c57fb0c7df17dda25f9dd85"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13750,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_4096_bitwise_device_inference_v2.py",
+      "sha256": "4e672d2b46c7a074a4f1f9877d445db23ba116988051a300ec6cf946a61f9f0e"
+    },
+    {
+      "AST": "passed",
+      "bytes": 9277,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_cached_input_device_inference_v2.py",
+      "sha256": "26c6e527d5fb7d6e9f30698fcc8f3771b92bf2e5fdd8a4e71fd8faeb6d7694c0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 16828,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_deduplicated_whole_input_guard_device_inference.py",
+      "sha256": "1e5cb754e60f7e70b2195a68f3f40aa6ea56f41fa7df325d78abd6dd8ca33ef3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 30957,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_deduplicated_whole_input_guard_inherited_controls.py",
+      "sha256": "a6cc3e926cbb6e9cb7da66d1c8f5c8fea0665bfa97e19fae292e78b8b14f7f30"
+    },
+    {
+      "AST": "passed",
+      "bytes": 21030,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_device_bitwise_inference.py",
+      "sha256": "65c9511541963aa7cce116982cffe562f455a123ab5f2f8319a60885e3f178fe"
+    },
+    {
+      "bytes": 29432,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_lease_heartbeat_device_inference.py.predecessor",
+      "sha256": "dc3135298cb4fe6b1221adc95b96d5a872e6bafc9f8c9438c1e57921c7be102c"
+    },
+    {
+      "AST": "passed",
+      "bytes": 29717,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_lease_heartbeat_device_inference_v2.py",
+      "sha256": "e11736c4f9c33abca733b09be2cdb2e057c323d324eb5084447550b3661221ab"
+    },
+    {
+      "AST": "passed",
+      "bytes": 30735,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_whole_input_guard_device_inference.py",
+      "sha256": "c5633ae0b122901323ee39d422a7cd3a985d169233d360bf6e2bc9037ccfc5b6"
+    },
+    {
+      "AST": "passed",
+      "bytes": 18391,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_temporal_coupled_span.py",
+      "sha256": "135ad4480328ee19123dffa69b1713e6380d6296e961e49761971e70446f89ce"
+    },
+    {
+      "AST": "passed",
+      "bytes": 14635,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_temporal_event_eligibility.py",
+      "sha256": "43276828b7214f03fc310e6ec35393415d243b7daab3a42b92c5619dd1b4e679"
+    },
+    {
+      "AST": "passed",
+      "bytes": 19247,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_temporal_event_shape.py",
+      "sha256": "18f7bd5cf1ee1dd55370690d229eb03f8798390225f7e9aa86c091c55830820a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 16415,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_temporal_owner_pointer.py",
+      "sha256": "7aa4c5e4842bd466aa11ee48d1f309a91a8c6ba4c38ff83530a9c6846bef71d2"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8405,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_temporal_placement.py",
+      "sha256": "cf8a3c3172c5906fc41c48deb8b4a258c1e5e393f663d60b0cc7ee490ed9e903"
+    },
+    {
+      "AST": "passed",
+      "bytes": 17169,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_temporal_relative_owner.py",
+      "sha256": "ee571071c9719a046a5c3dc4f4d6a6bfed61a543912b4cd07cbe0609a9aa1ce3"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11118,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_temporal_stability.py",
+      "sha256": "3961488d327d60a96adb51533a21ad92618f8cf6c4ff3843756cbfb7896ec108"
+    },
+    {
+      "AST": "passed",
+      "bytes": 25595,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_latent_formula_bitwise_device_inference.py",
+      "sha256": "d4b71eafce77e828ffd81b540c6e1ce0b7c2887746ccae526d7e150848ee1a73"
+    },
+    {
+      "AST": "passed",
+      "bytes": 43872,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_latent_formula_bitwise_device_inference_v2.py",
+      "sha256": "5d3c2fd03f028f76c8a7643d239231fb78a8ddd9587ce5414b8961af3a1ce962"
+    },
+    {
+      "AST": "passed",
+      "bytes": 58762,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_latent_formula_bitwise_device_inference_v3.py",
+      "sha256": "9729e132f2fac3dc3e8840d2554d458c6fe6b9f211072837df0e35916edd21e2"
+    },
+    {
+      "bytes": 66895,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_latent_formula_lease_heartbeat_device_inference.py.predecessor",
+      "sha256": "ef7bb6d5171d01b23d41e9ad4d9a479bf4d2c1ccc9fcea8a81eab0c646de13c7"
+    },
+    {
+      "AST": "passed",
+      "bytes": 67571,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_latent_formula_lease_heartbeat_device_inference_v2.py",
+      "sha256": "6cf166ffab853e3cb9315d6f3e256818f1ce5f6718dbae72165885972b3259a0"
+    },
+    {
+      "AST": "passed",
+      "bytes": 15709,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_dimension_guard_costs.py",
+      "sha256": "2a911684c17282f4b10c9f8786a60970377e19ec1ed3747885107e7a0b204b9b"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8662,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_dimension_guard_costs_v2.py",
+      "sha256": "ee417a202f711aac98c7b79cb386bfdae5787f407c9e5aff5c5d2f3741b3cc77"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11784,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_dimension_guard_costs_v3.py",
+      "sha256": "64961536aa23c880d65e9b8087b1c013e5774e52b991b0fbbc8b759d95336472"
+    },
+    {
+      "AST": "passed",
+      "bytes": 21060,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_dimension_guard_costs_v4.py",
+      "sha256": "dd5deea953b4a18e45ecd2a23d6c22ea15f415c30bba52b26fdd7f1325035ce1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 27750,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_dimension_guard_costs_v5.py",
+      "sha256": "85b9d14defdca81113815b04edaa647a6061bdf981cd1fcefd190fd0615681ce"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11696,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_dimension_guard_costs_v6.py",
+      "sha256": "c97b78b0e647635c7f159a635a1219a5be010952dc1d4e07c108a0f495caf694"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11478,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_formula_guard_costs.py",
+      "sha256": "2035536a8823a47a870bf97924062cba87cebb4b04ad7075a4088cf03d5ebc5a"
+    },
+    {
+      "AST": "passed",
+      "bytes": 11653,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_formula_guard_costs_v2.py",
+      "sha256": "3b89217efbb8c38e5d86671f52e542fa7cd66b44d5e84cc3af4876db980e7927"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13584,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_profile_formula_guard_costs_v3.py",
+      "sha256": "452003d0f289610a70e70f6ea8dc3b2482ef5261d8c7e6ceb0c8d2b4da983ebe"
+    },
+    {
+      "AST": "passed",
+      "bytes": 13908,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_timeout_decision.py",
+      "sha256": "a722953599c4b298095bdf2bc849fccab9ceb04a31817aae57917aed33196e53"
+    },
+    {
+      "AST": "passed",
+      "bytes": 21911,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_review_bitwise_trained_head_devices.py",
+      "sha256": "f732c4ac0ebb1adf5b4832eebb247790a31716729c4f2d9c1e8aea4e7ef994ac"
+    },
+    {
+      "AST": "passed",
+      "bytes": 7588,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_run_legal_paired_temporal_ownership.py",
+      "sha256": "aacc08c46bffe4179f31c611c9015f3af79e2d10e59574b377b8532c4c28f3f1"
+    },
+    {
+      "AST": "passed",
+      "bytes": 7358,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_run_legal_temporal_placement.py",
+      "sha256": "118ce593d6b121578a1f244dffda688c5bff71e14ce643913ccbc07a500e674f"
+    },
+    {
+      "AST": "passed",
+      "bytes": 8037,
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_run_legal_temporal_stability.py",
+      "sha256": "281153f689c9775ec585712efe379159498904c28c6c32b81adcdc81f4848a2b"
+    }
+  ],
+  "schema": "datasets-isolated-staged-source-check@1",
+  "scope": "selected staged content only, not whole checkout/native/prover/global training qualification",
+  "staged_count": 325
+}

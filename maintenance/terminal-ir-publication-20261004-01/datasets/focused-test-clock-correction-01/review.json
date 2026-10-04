@@ -1,0 +1,12 @@
+{
+  "schema": "datasets-upstream-clock-contract-test-correction@1",
+  "reason": "The old frozen test expected3 wall calls; preserved published upstream admission path uses4. No production edit, policy or extra sampling added. Original failed505-case result retained.",
+  "published_grant_helpers_AST_identical": {
+    "_can_grant": true,
+    "_root_can_grant": true,
+    "_pressure_allows": true,
+    "_is_fair_turn": true
+  },
+  "before_test_sha256": "20c5a9bc39a7f8896991524290818a95fda051369361682c48002cb240cbac70",
+  "after_test_sha256": "a722953599c4b298095bdf2bc849fccab9ceb04a31817aae57917aed33196e53"
+}

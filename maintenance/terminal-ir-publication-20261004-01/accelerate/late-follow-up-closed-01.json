@@ -1,0 +1,28 @@
+{
+  "commit": "a601b87e9e6bceb42f925cb085203ea337d204a5",
+  "commit_stdout": "[codex/terminal-ir-publication-20261004-accelerate-01 a601b87e9] Publish deduplicated CodebaseIR input-guard qualification\n 2 files changed, 37 insertions(+)\n create mode 100644 docs/agent_supervisor/codebase_ir_span_deduplicated_input_guard_qualification.md\n create mode 100644 docs/architecture/repository_proof_index_and_codebase_ir.span_deduplicated_input_guard_review.json\n",
+  "elapsed_seconds": 1.7702998530003242,
+  "fresh_semantic_benchmark_validation": false,
+  "ordinary_nonforce_push": true,
+  "parent_snapshot_commit": "c2b25b7a274acda4ceac924abc9d6f9fc8fb1be0",
+  "paths": [
+    {
+      "bytes": 6625,
+      "path": "docs/agent_supervisor/codebase_ir_span_deduplicated_input_guard_qualification.md",
+      "sha256": "f5171cf0203d49a42642ea0bef0170e725ad9f807dc068d9249b9c5dfde62e65"
+    },
+    {
+      "bytes": 39753,
+      "path": "docs/architecture/repository_proof_index_and_codebase_ir.span_deduplicated_input_guard_review.json",
+      "sha256": "f26f86009374a168241ea2f6daf681a1a2ff5fa916418407efa1935fc500b246"
+    }
+  ],
+  "push_stderr": "remote: Bypassed rule violations for refs/heads/main:        \nremote: \nremote: - Required status check \"documentation-gates\" is expected.        \nremote: \nTo https://github.com/endomorphosis/ipfs_accelerate_py\n   c2b25b7a2..a601b87e9  HEAD -> main\n",
+  "qualification_pair_raw_pinned_and_local_links_resolve": true,
+  "remote_main": "a601b87e9e6bceb42f925cb085203ea337d204a5",
+  "schema": "accelerate-publication-late-qualification-follow-up@1",
+  "source_repo_modified": false,
+  "status": "published_and_verified",
+  "url": "https://github.com/endomorphosis/ipfs_accelerate_py/commit/a601b87e9e6bceb42f925cb085203ea337d204a5",
+  "utc": "2026-10-04T19:53:41.361665+00:00"
+}

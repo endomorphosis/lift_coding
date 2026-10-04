@@ -1,0 +1,34 @@
+{
+  "builder": {
+    "bytes": 26475,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+    "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+  },
+  "external_rows": 70,
+  "latest_sealed_regular_rows": 270,
+  "original_builder": {
+    "bytes": 26390,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive.py",
+    "sha256": "01957f36bcaf9708b900503aac9ade2a2eaae926b7b6f9c7be5c9345ed7c5232"
+  },
+  "patch": {
+    "bytes": 1547,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/builder-01-to-02.patch",
+    "sha256": "5dd3e6703b65968074c90852437a56b9af8ff3def3beaf200785658ee11cef42"
+  },
+  "plan": {
+    "bytes": 11150,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publication-plan-02.json",
+    "sha256": "c98f452b3e6493fbe5305d281794264399eff47f090ae2bd821ef540b781607e"
+  },
+  "remote_mutations": 0,
+  "schema": "terminal-ir-archive-builder-source-freeze@1",
+  "scope": {
+    "bytes": 110037,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scopes-approved-02.json",
+    "sha256": "f2ec236e180f42f262661faca65d282918a55a4956174759727b341aeb4306e6"
+  },
+  "source_tree_writes": 0,
+  "status": "AST_AND_COMPILE_ONLY_READY_FOR_AUTHORIZED_LOCAL_BUILD",
+  "strict_pins": 348
+}

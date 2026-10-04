@@ -1,0 +1,2098 @@
+{
+  "counts": {
+    "conflicted_already_published": 9,
+    "conflicts": 13,
+    "different_untracked_already_published": 47,
+    "different_untracked_collisions": 61
+  },
+  "history_scope": "exact new blob and exact path in reachable origin/main raw history; no timestamp heuristic",
+  "remote_base": "fd89d2a48aa0de771dd22ec8fd079af10732051f",
+  "rows": [
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "a416438bf4ec80ba3ab932f514a30e595889ec68",
+      "origin": "tracked_delta",
+      "path": ".gitignore",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "42c27206a40e15903048e39584f76f2ce1e79388",
+      "origin": "tracked_delta",
+      "path": "data/logic/conformance/reachable_matrix_v2.json",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "57e2e5c75e902d25bf3afd7be79059fc345343ad",
+      "origin": "tracked_delta",
+      "path": "docs/architecture/logic/logic_parser_baseline/capability_matrix.json",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "b002564bd6b87eae0dc83669b36932ab06690fef",
+      "origin": "tracked_delta",
+      "path": "docs/architecture/logic/logic_parser_v2_baseline/claim_runtime_audit.json",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "8d80c4ea797cf5bcac2e5c8a2d10e463df2330e3",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "8d80c4ea797cf5bcac2e5c8a2d10e463df2330e3",
+      "origin": "tracked_delta",
+      "path": "docs/autoencoders/README.md",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "eff7267d602c5a3f3f3044c1f9958001b63409b0",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "eff7267d602c5a3f3f3044c1f9958001b63409b0",
+      "origin": "tracked_delta",
+      "path": "docs/autoencoders/control_plane_and_sync.md",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "a41699c9f1998093a1aac4055dabcb5cfc0169bd",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "a41699c9f1998093a1aac4055dabcb5cfc0169bd",
+      "origin": "tracked_delta",
+      "path": "docs/autoencoders/inference_and_qualification.md",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "b7b5948df140fe6a910d9e7c6b3e703e3b7818dd",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "b7b5948df140fe6a910d9e7c6b3e703e3b7818dd",
+      "origin": "tracked_delta",
+      "path": "docs/autoencoders/multidomain_reconstruction_training.md",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "44d5ca0fa27675d0a4b7de9216d28441b31540d0",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "44d5ca0fa27675d0a4b7de9216d28441b31540d0",
+      "origin": "tracked_delta",
+      "path": "docs/autoencoders/projection_context_resolution.md",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "3d4e41af55fdcab8912500b9f83ea2a3b865871d",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "3d4e41af55fdcab8912500b9f83ea2a3b865871d",
+      "origin": "tracked_delta",
+      "path": "docs/implementation/runbooks/uscode_autoformal_supervisor.md",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "662d4f7f3f4066ab097fe1af64c2edb1d13aa9ff",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "662d4f7f3f4066ab097fe1af64c2edb1d13aa9ff",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/huggingface/autoformal_span_cache.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "6306716e4d0bc35c7952629f55aaf0ef53737027",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "6306716e4d0bc35c7952629f55aaf0ef53737027",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "1bcaab9cdf0bc3d1bfa0d788ec37d6989c2d8a31",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "1bcaab9cdf0bc3d1bfa0d788ec37d6989c2d8a31",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/autoformal/entity_cache.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "0a7f6b1c6b546ee1125dab4015bc53f287c6faa9",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "0a7f6b1c6b546ee1125dab4015bc53f287c6faa9",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/autoformal/lean_units.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "f30743aebc4b125e45a3b9d04a665095811d474c",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "f30743aebc4b125e45a3b9d04a665095811d474c",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/autoformal/meta_ontology.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "5eff03b044e84ac21295036710993f4e569a2279",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "5eff03b044e84ac21295036710993f4e569a2279",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/autoformal/span_cache.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "6689153c8143f0c566eaa004aba10fb6908e1856",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "6689153c8143f0c566eaa004aba10fb6908e1856",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/autoformal/worker_budget.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "e94807ec92002c9345d437e8401760bbfe8011af",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "e94807ec92002c9345d437e8401760bbfe8011af",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/atp/adapters.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "0fe8bc39c201f97b5c23f52882f05f71f0ff5dd6",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "0fe8bc39c201f97b5c23f52882f05f71f0ff5dd6",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/atp/execution_v2.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "584659c41bd6e42acc0c1f32f84ed1152f833802",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/hyperproperties/adapters.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "0d798205311e6630782c870dbc0e546625cb2714",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/hyperproperties/execution_v2.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "1cdd196cf93c948673299a3637fd45634adff05b",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/installers/hyperproperty.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "ce6a12d9a9e541ba80da1eb2d5fa91f6df47f76d",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "ce6a12d9a9e541ba80da1eb2d5fa91f6df47f76d",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/installers/isabelle.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "17ce75ec11793e5b8050f22d055b1e3491e25adc",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "17ce75ec11793e5b8050f22d055b1e3491e25adc",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/installers/registry.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "d68cc57f28f29ff446dc2427243d4d0e58228465",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "d68cc57f28f29ff446dc2427243d4d0e58228465",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/installers/state_model.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "c148cd4a9760ca6f34ec6a4bc8ca889ffe7275c7",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "c148cd4a9760ca6f34ec6a4bc8ca889ffe7275c7",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/kernel/isabelle.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "3aa40d4f726ed61826b77d99f94fc92a353f2359",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "3aa40d4f726ed61826b77d99f94fc92a353f2359",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "114904463a9f4217132cde3849c49e84d271e66c",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "114904463a9f4217132cde3849c49e84d271e66c",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/kernel/rocq.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": true,
+      "git_blob_oid": "0ad576a1bc7335f32db67c6d5517f49134a556f8",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/process.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "2058f1209e7e378551cb8dc12b318ec5afb8ad01",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "2058f1209e7e378551cb8dc12b318ec5afb8ad01",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/protocol/execution_v2.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "69af3d9a9c589bf3d1fe72852277a6ea4dce9faa",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "69af3d9a9c589bf3d1fe72852277a6ea4dce9faa",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/protocol/proverif.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "c7d1b04fa733d2b00081a0bdb66ab6953fc5e713",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/protocol/tamarin.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": true,
+      "git_blob_oid": "d8dacd07791ece5bd6013323a6aaa88f5067f43f",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/registry.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "e0bb0d8e74e83cd6bc24513e48f6759bce8c575a",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "e0bb0d8e74e83cd6bc24513e48f6759bce8c575a",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/smt/compiler.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "8efb15d16abc0b9e03e1edea0a0bbfcb73732440",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "8efb15d16abc0b9e03e1edea0a0bbfcb73732440",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/smt/execution_v2.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "439f513bc372bbb0288ef88c447813633262ff1e",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "439f513bc372bbb0288ef88c447813633262ff1e",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/tla/compiler.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "04edc9072fb91bd088bfffcc68ad5e3358f420f4",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "04edc9072fb91bd088bfffcc68ad5e3358f420f4",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/tla/execution_v2.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "e94c7554cc79644d1ecbc9ce3056bcbdbb3cae28",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "e94c7554cc79644d1ecbc9ce3056bcbdbb3cae28",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/backends/tla/runners.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "bc8cee9bb9d91d9830365a6827805f5261a81f24",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/conformance/claim_runtime_audit.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "b1e1ad1e8799fc99f93449fad602712f32438ad0",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/conformance/matrix.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "24f5107049edb019f1694b7bdd1d93236cec7744",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "24f5107049edb019f1694b7bdd1d93236cec7744",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "2972b9475f8d63158d59ae886c213cd35c7ea431",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "2972b9475f8d63158d59ae886c213cd35c7ea431",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "c976c7f1c97df45e7c23817a50b55faaa8b208d6",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "c976c7f1c97df45e7c23817a50b55faaa8b208d6",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/external_provers/__init__.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "5809d2e9519c8e41831f552a70329fc3de246454",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/external_provers/lazy_installer.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "5bba300e2ba64cc7ab2da057cfe7b0af0d12a76e",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/families/providers.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "985697bfdf58c82bed08602a81f9355d0b113dec",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "985697bfdf58c82bed08602a81f9355d0b113dec",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/hammers/frontends/base.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "34ffa716d065daf0379c00c271294185c6e08bef",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "34ffa716d065daf0379c00c271294185c6e08bef",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/hammers/frontends/isabelle.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "c967a8bfc6e913c6a371079eee2feb1aad15dd13",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "c967a8bfc6e913c6a371079eee2feb1aad15dd13",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/hammers/portfolio.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "e007c4c68ed0c30823ca863ad03b5b321f61fa46",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "e007c4c68ed0c30823ca863ad03b5b321f61fa46",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/hammers/process_lifecycle.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "9786061b2464d4074ea6f3a7637e94b07fe5eaf0",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "9786061b2464d4074ea6f3a7637e94b07fe5eaf0",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/hammers/reconstruction.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "034ad4a857ab8ec43a8733d22fe20578ee278164",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "034ad4a857ab8ec43a8733d22fe20578ee278164",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/hammers/reconstructors/isabelle.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "1e81176497a5fb95d66e623f76807d70d48f1390",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "1e81176497a5fb95d66e623f76807d70d48f1390",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/integration/bridges/prover_installer.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "05b16d8771a16bb534a83a0c0fb7dd3fa7512ee8",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "05b16d8771a16bb534a83a0c0fb7dd3fa7512ee8",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/intent_ir/README.md",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "fb934206096eacd6d65e388dee3c0d1fb769ee9d",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "fb934206096eacd6d65e388dee3c0d1fb769ee9d",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/intent_ir/__init__.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "049082bd3528682a395698fea6ae778421ddf156",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "049082bd3528682a395698fea6ae778421ddf156",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/legal_ir/__init__.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "c25f5c4638aef22e348566b239f8f6cb3c579e48",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "c25f5c4638aef22e348566b239f8f6cb3c579e48",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "1c9e3ac68d938d912ad6174f5257e8cd3d6a81cf",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "1c9e3ac68d938d912ad6174f5257e8cd3d6a81cf",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "46492c672b85884bb1be43cc496879e52c11e293",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "46492c672b85884bb1be43cc496879e52c11e293",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/modal/decompiler.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "88a253e8e86e64c2772b7a95165a22dde2bfcb1c",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "88a253e8e86e64c2772b7a95165a22dde2bfcb1c",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/parsers/classical_adapters.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "b5781d93dec54b154b410dab24910248bf520e97",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "b5781d93dec54b154b410dab24910248bf520e97",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/security_ir/__init__.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "346f8e3fc2dea42192062e141d4d414019d9e287",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "346f8e3fc2dea42192062e141d4d414019d9e287",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_contracts/cache.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "aea93ffade479c0ae7cecfe2ac7e55424a6710e0",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "aea93ffade479c0ae7cecfe2ac7e55424a6710e0",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_contracts/content.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "53466c186535fbee9795bc2d8fdc8e05476f1d11",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "53466c186535fbee9795bc2d8fdc8e05476f1d11",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_contracts/duckdb_ast_store.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "180892990338d6508f5ffb2ad9f7e0b95a2b7a54",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "180892990338d6508f5ffb2ad9f7e0b95a2b7a54",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_contracts/duckdb_ingest.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "40bfc116b007f5f0368fee2f4073957d7a3960fd",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "40bfc116b007f5f0368fee2f4073957d7a3960fd",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "920781061c7f34ab9cc710bbbbe306590b64f73d",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "920781061c7f34ab9cc710bbbbe306590b64f73d",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/scanner.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "2dd0c89502613d5bd705ba91c8ce048b050a6da6",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "2dd0c89502613d5bd705ba91c8ce048b050a6da6",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/merkle.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "b45b042bad2118b6c11e40ca0ab55b150b74b271",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_verification/hyperproperties.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "5e0b28f55d9a469bacb1c57bfc946d0e1e61d1d0",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "5e0b28f55d9a469bacb1c57bfc946d0e1e61d1d0",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_verification/pipeline.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "693228e46e6559d40be6a0bcd17d3a633e168d72",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "693228e46e6559d40be6a0bcd17d3a633e168d72",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/software_verification/source_adapters.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "00b8b92c4cbc25aa5ff5654d0063993c30a2476e",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "00b8b92c4cbc25aa5ff5654d0063993c30a2476e",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/submodule_registry.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "6037e664dd6c32cf7a6d80eb317448850d74a3ae",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "6037e664dd6c32cf7a6d80eb317448850d74a3ae",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/__init__.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "77950b04c9e103410b66a4147981146ab7bebd70",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "77950b04c9e103410b66a4147981146ab7bebd70",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "19bf6ac664f0d4df1230999242d6ff36fd85e99a",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "19bf6ac664f0d4df1230999242d6ff36fd85e99a",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/logic/verification_api.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "8f387953d99a4f010aac7b6d207f2dd6250d4a01",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "8f387953d99a4f010aac7b6d207f2dd6250d4a01",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/ml/embeddings/__init__.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "76966cdd7e7204bb559e64651eae3357be7974b3",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "76966cdd7e7204bb559e64651eae3357be7974b3",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/ml/embeddings/chunker.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": true,
+      "git_blob_oid": "ece123aa47b8123639c7cd190e7688e0c3d2b789",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "af04de4ce4595943a94c1e10a0a2bbf85d2eb698",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "af04de4ce4595943a94c1e10a0a2bbf85d2eb698",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_family_training_validated_v5.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "06392b0a8e06116c85fb4b1055b922cf9d2f3f03",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "06392b0a8e06116c85fb4b1055b922cf9d2f3f03",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_logic_requirements.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "883ab33fe3544a2aea1b2ae1520e0ff8c740e7ba",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "883ab33fe3544a2aea1b2ae1520e0ff8c740e7ba",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_projection_features.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "f7ea18ec4f0567d7747496ee9dd39e84ab91972b",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "f7ea18ec4f0567d7747496ee9dd39e84ab91972b",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "7ccef8ea17fa01b3462b7c3ba8c911342bc4d581",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "7ccef8ea17fa01b3462b7c3ba8c911342bc4d581",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "1b081180e55693bc19eb93e98b391a58d2077213",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "1b081180e55693bc19eb93e98b391a58d2077213",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_checkpoint.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "6d23481b78362751e6a7e65022ab18620288a88e",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "6d23481b78362751e6a7e65022ab18620288a88e",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_todo_daemon.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": true,
+      "git_blob_oid": "162b2a8f27a9542243270bdcd501481a6170121c",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "ecd21955f6aeca464047dca5466b9ea4074929d1",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "ecd21955f6aeca464047dca5466b9ea4074929d1",
+      "origin": "tracked_delta",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/ui_feature_training.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "6950b3a35c68b076ddf42cd32179a5fe820f0b80",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "6950b3a35c68b076ddf42cd32179a5fe820f0b80",
+      "origin": "tracked_delta",
+      "path": "scripts/ops/legal_ir/ingest_ipfs_uscode_entities.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "e446d3711255ccf31a86c632e7904ff318793782",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "e446d3711255ccf31a86c632e7904ff318793782",
+      "origin": "tracked_delta",
+      "path": "scripts/ops/legal_ir/publish_kg_meta_ontology.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "b1bfc44dfec3c7b4a65cb53cac1523fec1d07176",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "b1bfc44dfec3c7b4a65cb53cac1523fec1d07176",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/backends/test_atp_legacy_adapters.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "3c6c790c924bd49366639fbae316503adbc756fd",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/backends/test_hyperproperty_backends.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "4e2c76689e8de3a1524139b5de29efd5cd33e30a",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/backends/test_protocol_backends.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "587728cd06392bf090a7c3e95c2ad33c7876311e",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "587728cd06392bf090a7c3e95c2ad33c7876311e",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/backends/test_tla_model_checkers.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "1afdb634df5e0d3985f8d977ac0a3fa3e1696e3a",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "1afdb634df5e0d3985f8d977ac0a3fa3e1696e3a",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/hammers/test_canonical_backend.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "89262f8900220b750abb62c83fdae1ee474487f4",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "89262f8900220b750abb62c83fdae1ee474487f4",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/hammers/test_itp_frontends.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "515c04e44478ca6c99199f3719c6253b8d6735b4",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "515c04e44478ca6c99199f3719c6253b8d6735b4",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/hammers/test_mcp_hammer_tools.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "cb494c0b7f7148daeb7fc39335047e8580ac311e",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "cb494c0b7f7148daeb7fc39335047e8580ac311e",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/hammers/test_reconstruction.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "dd41474933397cb249bcdb42ed37699ac06182bc",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "dd41474933397cb249bcdb42ed37699ac06182bc",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/software_verification/test_runnable_examples.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "5401e86e010f529e1f2e73d5e6397550cab7f6e3",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "5401e86e010f529e1f2e73d5e6397550cab7f6e3",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/software_verification/test_source_vc_smt_pipeline.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "236613388735c7fb4332371f814fe617e7e640d5",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic/test_verification_provider_matrix_api.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "d9a8c589415875669063a629ec8b3104ba4030c8",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic_providers/test_hyper_execution_v2.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "baf7bd305d415094134b19afbfe5176cd3a10e5c",
+      "origin": "tracked_delta",
+      "path": "tests/integration/logic_providers/test_protocol_execution_v2.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "78b7ac1ce70058f204e40c45a1d437f46ff7f9e5",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "78b7ac1ce70058f204e40c45a1d437f46ff7f9e5",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/backends/smt/test_semantic_compiler.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "e4e601791ef4f350f6d72f7a8ac11d73a77e8ef9",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/backends/test_hyperproperty_upstream_installer.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "d2894ead7daa64f7c76080d5d0b72ad3bbe4b2b1",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "d2894ead7daa64f7c76080d5d0b72ad3bbe4b2b1",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/backends/test_process_lifecycle.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "0b7bd4341b9c204c81fc8d23fc90b4962a20e7d2",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "0b7bd4341b9c204c81fc8d23fc90b4962a20e7d2",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/common/test_canonical_cache_key.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "e6cbe4dab6433da38b1173cd167234e09525b487",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/conformance/test_matrix.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "8423224850e111929da1e261cc069a00f716594e",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/families/test_provider_catalog.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "91c586e2597b43c7ff2e8b8ff4d9d92b4399493d",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "91c586e2597b43c7ff2e8b8ff4d9d92b4399493d",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/software_contracts/semantic_index/test_scanner.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "5d534ce996adce1df92d63ca3c14155db715fec1",
+        "historical_status": "M"
+      },
+      "conflicted": true,
+      "git_blob_oid": "5d534ce996adce1df92d63ca3c14155db715fec1",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/software_contracts/semantic_state/test_merkle.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "80a9b32a3572a86611437e5d869b1366802ee28d",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "80a9b32a3572a86611437e5d869b1366802ee28d",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/software_contracts/test_duckdb_ingest.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "54f3ee580dbaa5362b04f024e6b2bd6e6ae82830",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_compositional_verification_public_api.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "a17cd9611628d7e1ba4e146a859583a54e119309",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "a17cd9611628d7e1ba4e146a859583a54e119309",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_entity_cache.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "f2528cea268891686469a3a8083d3d9ba1784433",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "f2528cea268891686469a3a8083d3d9ba1784433",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_ingest_ipfs_uscode_entities.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "7232d81977fb2e6671fe28dc18accb5223a99db7",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "7232d81977fb2e6671fe28dc18accb5223a99db7",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_lean_units.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "5e8ad084661ec46a3a16b413854d62dae9e3921e",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "5e8ad084661ec46a3a16b413854d62dae9e3921e",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_meta_ontology.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "6caa45509453a0f16edb58145eb2e16410db3ff7",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "6caa45509453a0f16edb58145eb2e16410db3ff7",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_span_cache.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "8a7d69cf6bff28f7944424c326faeacbd05b4437",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "8a7d69cf6bff28f7944424c326faeacbd05b4437",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_supervisor_loop.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "48b835c03b4f782011a5804308e2781d154a8d64",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "48b835c03b4f782011a5804308e2781d154a8d64",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_verification_api.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "480096703cb6daeed5c0e2ae353a8684062fe174",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "480096703cb6daeed5c0e2ae353a8684062fe174",
+      "origin": "tracked_delta",
+      "path": "tests/unit/logic/test_worker_budget.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "f654ae72f781a3a67c6ecf56ce79172aa39e11ac",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "f654ae72f781a3a67c6ecf56ce79172aa39e11ac",
+      "origin": "tracked_delta",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_daemon_resources.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "72132ec5ed17af8b46338bbbce32afe070c7375a",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "72132ec5ed17af8b46338bbbce32afe070c7375a",
+      "origin": "tracked_delta",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_runtime_registry.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "294baa5ef2f5cb1bccba9002973668f0966c55e7",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "294baa5ef2f5cb1bccba9002973668f0966c55e7",
+      "origin": "tracked_delta",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_global_resource_scheduler.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "cd2874399c3fe4299bfc11f5a0da7c9fbc99ef10",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "cd2874399c3fe4299bfc11f5a0da7c9fbc99ef10",
+      "origin": "tracked_delta",
+      "path": "tests/unit_tests/logic/CEC/native/test_dcec_integration.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "d97594950a3fd1711fb329ac3236fed2d4ebe7ec",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "d97594950a3fd1711fb329ac3236fed2d4ebe7ec",
+      "origin": "tracked_delta",
+      "path": "tests/unit_tests/logic/external_provers/test_lazy_native_solver_installation.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "33ca9764a85d448556aa1d4556d1c22a67e4bb64",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "33ca9764a85d448556aa1d4556d1c22a67e4bb64",
+      "origin": "tracked_delta",
+      "path": "tests/unit_tests/logic/hammers/test_portfolio.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "540d44aec3993cd04648e1f2227066f7c2a929b1",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "540d44aec3993cd04648e1f2227066f7c2a929b1",
+      "origin": "tracked_delta",
+      "path": "tests/unit_tests/logic/integration/test_state_model_installer_runtime.py",
+      "untracked_different_upstream": false
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "7d756544e6259a8d72c7d395ca5b057742e253d7",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "7d756544e6259a8d72c7d395ca5b057742e253d7",
+      "origin": "untracked",
+      "path": "benchmarks/bench_codebase_evidence_queries.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "57e28e25b67b08e096fa7ca5afabfbc1a1fb44c5",
+      "origin": "untracked",
+      "path": "docs/autoencoders/codebase_ir_repository_pipeline_improvement_plan.md",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "60a0a5a7f020b835ac54afd6268c6cff690a4d89",
+      "origin": "untracked",
+      "path": "docs/autoencoders/codebase_ir_repository_pipeline_plan.json",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "2a3273f121a861af96e4038fc494a4f3578b3943",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "2a3273f121a861af96e4038fc494a4f3578b3943",
+      "origin": "untracked",
+      "path": "docs/autoencoders/gte_migration_preparation.md",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "4cab30386d51e6faded6939c730c1d9f96c577ac",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "4cab30386d51e6faded6939c730c1d9f96c577ac",
+      "origin": "untracked",
+      "path": "docs/autoencoders/gte_multilingual_migration_plan.md",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "4e01e247360401d3b19b49740e24bf6391c5ae1c",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "4e01e247360401d3b19b49740e24bf6391c5ae1c",
+      "origin": "untracked",
+      "path": "docs/autoencoders/gte_multilingual_migration_work_items.json",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "1b6461e65f15635b89d04609dae01a4196cd3ea5",
+        "git_blob_oid": "45d0b2f74b1f12ebbe567e823ba270a10fe026fc",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "45d0b2f74b1f12ebbe567e823ba270a10fe026fc",
+      "origin": "untracked",
+      "path": "docs/autoencoders/source_margin_training.md",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "ff9cb599d1763c4ce2b7220a614ae7532688bd61",
+      "origin": "untracked",
+      "path": "docs/implementation/runbooks/resource_aware_proving.md",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "5524b78fb74d08261f9dbba848303c1af52a9079",
+      "origin": "untracked",
+      "path": "docs/software_contracts/CODEBASE_IR_FOUNDATION.md",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "187d6f00728348ab4133f80c011a8b4e0976d81c",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "187d6f00728348ab4133f80c011a8b4e0976d81c",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/duckdb_control/codebase_catalog.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "c15f433233b3345f529a9f5c04eec26fabeda56f",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/autoformal/legal_paired_temporal_ownership_corpus.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "b7bab207504e500fcd4233b1a266199b5d1f9628",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_capabilities.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "7064afe8afc53d697a916224bb80f03af9487bf7",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "7064afe8afc53d697a916224bb80f03af9487bf7",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "a9dcae6f06a8c3173160c13d3b93753eb87aba36",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "a9dcae6f06a8c3173160c13d3b93753eb87aba36",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_inference_session.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "e486e751d1a53ca282fe649a50dfc749fbd64152",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "55408e29da1e281d2afd8a9d27d1eb0fef52eefd",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "55408e29da1e281d2afd8a9d27d1eb0fef52eefd",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/published_384_checkpoints.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "43c1e8001d10a06a9d95da1556f44edf86eab1a7",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "43c1e8001d10a06a9d95da1556f44edf86eab1a7",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formalization_evaluation.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "e711e103d77930e95765d62c97c10aa424e31a53",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "e711e103d77930e95765d62c97c10aa424e31a53",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/legal_ir/autoencoder.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "0103a01f8779b92600f08bb5fa0e8ecd68354aa3",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "0103a01f8779b92600f08bb5fa0e8ecd68354aa3",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/security_ir/code_header_derivation.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "cf891b61233a0a7b10e0670822afad137afbe443",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "cf891b61233a0a7b10e0670822afad137afbe443",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_federated_artifacts.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "f2333a60818bb872e12de9af4b017325e82d42d8",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "f2333a60818bb872e12de9af4b017325e82d42d8",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_federated_training.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "56e2fb3f6078dc5d55085bb408837a357a2f3823",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "56e2fb3f6078dc5d55085bb408837a357a2f3823",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_finite_integer_observation.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "52eaeecc4006b56a3cd2cd2652ea9dd5c21f2cfc",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "52eaeecc4006b56a3cd2cd2652ea9dd5c21f2cfc",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_integer_profile.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "46e34fa66e4e71529ad3baebff548712a6ecd7c7",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "46e34fa66e4e71529ad3baebff548712a6ecd7c7",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_inventory_lineage.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "7dcf4bde02bcb12bc5cd4d0c51930434f84c7867",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "7dcf4bde02bcb12bc5cd4d0c51930434f84c7867",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_ir.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "4a3419c02336e3cd1d21e0edfe4fdd70d3efdd19",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "4a3419c02336e3cd1d21e0edfe4fdd70d3efdd19",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_ir_targets.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "c1e97c2098a836630cdbfd5055a5c3318cf583ad",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "c1e97c2098a836630cdbfd5055a5c3318cf583ad",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_parallel_dispatched_federation.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "8e71be4cae4e17eb10a3aa3609b977c3b2b0616b",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "8e71be4cae4e17eb10a3aa3609b977c3b2b0616b",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_resources.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "c45c2c281dd9b1d8436b07ca99c6992f5bfbb73c",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "c45c2c281dd9b1d8436b07ca99c6992f5bfbb73c",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_smt_compat.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "cf832ef98ea5e6cbc5b81c4d2f851fbe13d31a1e",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "cf832ef98ea5e6cbc5b81c4d2f851fbe13d31a1e",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_source_training.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "92245125f2ab910dfe15c4d4fd9ea71919433a77",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "92245125f2ab910dfe15c4d4fd9ea71919433a77",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_federated_codebase.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "5e2bbcb902fb377d968d4e28e1ce6e55f3a1f010",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "5e2bbcb902fb377d968d4e28e1ce6e55f3a1f010",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/codebase_feature_worker.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "a14f288d2c80418c87f265838f8af9ff0d34a87e",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "a14f288d2c80418c87f265838f8af9ff0d34a87e",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_joint_formula_inference.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "99994e13f74e58804135ffb13d653ecd16e98ed6",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "99994e13f74e58804135ffb13d653ecd16e98ed6",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula_inference.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "0f293a68ec9eaffee2860c49e295d1b254affb59",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "0f293a68ec9eaffee2860c49e295d1b254affb59",
+      "origin": "untracked",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "1985eae11b19c08caea9f01f55c7ac7f54c695a5",
+      "origin": "untracked",
+      "path": "scripts/ops/legal_ir/prepare_legal_paired_temporal_ownership_corpus.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "1e8b6355ffa8fef9a00c3eb4baf8b1193ba74878",
+      "origin": "untracked",
+      "path": "scripts/ops/legal_ir/qualify_legal_paired_ownership_head.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "234da87d479528b1944786a1bf764f9eb576e533",
+      "origin": "untracked",
+      "path": "scripts/ops/legal_ir/run_legal_paired_temporal_ownership.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "dd0fbdc5a831cdf3caa80003957b408c231d1aa9",
+        "historical_status": "M"
+      },
+      "conflicted": false,
+      "git_blob_oid": "dd0fbdc5a831cdf3caa80003957b408c231d1aa9",
+      "origin": "untracked",
+      "path": "tests/integration/logic/software_contracts/test_codebase_current.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "2a318006bdfcc1481e33e1e5cce9896e4471e972",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "2a318006bdfcc1481e33e1e5cce9896e4471e972",
+      "origin": "untracked",
+      "path": "tests/integration/logic/software_verification/test_source_vc_smt_soundness_boundaries.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "8727aef23ed3ccf9281b035fbd981c115a5454bb",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "8727aef23ed3ccf9281b035fbd981c115a5454bb",
+      "origin": "untracked",
+      "path": "tests/unit/duckdb_control/test_codebase_catalog.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "1a75e5ffde63b6e762b06b7a9102a25c72e7bcc8",
+      "origin": "untracked",
+      "path": "tests/unit/logic/autoformal/test_qualify_legal_paired_ownership_head.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "e3175c585afa0b0ac980531aa98f74e9bebd7e74",
+      "origin": "untracked",
+      "path": "tests/unit/logic/backends/test_process_file_limits.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "db6c5040bc9dc92a7c54bd64a6d585521213f13b",
+      "origin": "untracked",
+      "path": "tests/unit/logic/backends/test_protocol_operation_control.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "0c1988505899ef44a5536f0ebfb5aa6e0cd4eb65",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "0c1988505899ef44a5536f0ebfb5aa6e0cd4eb65",
+      "origin": "untracked",
+      "path": "tests/unit/logic/backends/test_smt_operation_benchmark_pool_guard.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": null,
+      "conflicted": false,
+      "git_blob_oid": "27ae014b593e0b74fa766ddde1262947ce13ffbe",
+      "origin": "untracked",
+      "path": "tests/unit/logic/backends/test_tamarin_resource_admission.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "b9f93134d51f3e7d6cf43bdcefb5e6d09fbe26e9",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "b9f93134d51f3e7d6cf43bdcefb5e6d09fbe26e9",
+      "origin": "untracked",
+      "path": "tests/unit/logic/formalization/autoencoder/test_checkpoint_hub_384.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "cb857877f0088f13cf5b174732eb84165d5313dc",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "cb857877f0088f13cf5b174732eb84165d5313dc",
+      "origin": "untracked",
+      "path": "tests/unit/logic/formalization/autoencoder/test_evaluate_gte_decoder_sources.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "899e55284d36bf37bcda76223f0403a130221eed",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "899e55284d36bf37bcda76223f0403a130221eed",
+      "origin": "untracked",
+      "path": "tests/unit/logic/formalization/autoencoder/test_legal_inference_session.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "7c3dbce66da3d547654e8f46120ca3014a83eeba",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "7c3dbce66da3d547654e8f46120ca3014a83eeba",
+      "origin": "untracked",
+      "path": "tests/unit/logic/formalization/autoencoder/test_security_formalization_control.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "6a7641df7b66ae3b8036a81c5aee1817e1e4b9b3",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "6a7641df7b66ae3b8036a81c5aee1817e1e4b9b3",
+      "origin": "untracked",
+      "path": "tests/unit/logic/security_ir/test_code_header_derivation.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "a5311a2bc7f98ced6bcc3151853fd18e666f4914",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "a5311a2bc7f98ced6bcc3151853fd18e666f4914",
+      "origin": "untracked",
+      "path": "tests/unit/logic/software_contracts/test_codebase_inventory_lineage.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "e5029caa434f54835b77a79f9fd7b1caf66617e5",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "e5029caa434f54835b77a79f9fd7b1caf66617e5",
+      "origin": "untracked",
+      "path": "tests/unit/logic/software_contracts/test_codebase_inventory_successor_model.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "c5e117557eabf63b30c8fbbed28881720e726d6e",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "c5e117557eabf63b30c8fbbed28881720e726d6e",
+      "origin": "untracked",
+      "path": "tests/unit/logic/software_contracts/test_duckdb_ast_store_persistence.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "dd415f635b8bc205bd03dccf1f9f12e90d978610",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "dd415f635b8bc205bd03dccf1f9f12e90d978610",
+      "origin": "untracked",
+      "path": "tests/unit/logic/software_verification/test_bundled_program_ast_mirroring.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "45cc4ddd33c983f79fa434e46d71b8b11a4f0eeb",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "45cc4ddd33c983f79fa434e46d71b8b11a4f0eeb",
+      "origin": "untracked",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_federated_codebase.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "c0e281602f43aa816ee19305beed7ce6d5d7c507",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "c0e281602f43aa816ee19305beed7ce6d5d7c507",
+      "origin": "untracked",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_device_precision.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "64395a254c178f480e748dc29930f85c489204b7",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "64395a254c178f480e748dc29930f85c489204b7",
+      "origin": "untracked",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_joint_formula_inference.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "4ec3e1d04308e11ab67821ea36b3f2aafc462d75",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "4ec3e1d04308e11ab67821ea36b3f2aafc462d75",
+      "origin": "untracked",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_latent_formula_batch.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "be6afb8cc56f41dca71dec550fcf24874a7ba316",
+        "git_blob_oid": "a1a85da2a09a053e37ebdbff56d87b7ced93c44b",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "a1a85da2a09a053e37ebdbff56d87b7ced93c44b",
+      "origin": "untracked",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_resource_scheduler_refusal_telemetry.py",
+      "untracked_different_upstream": true
+    },
+    {
+      "already_published_exact_path_blob": {
+        "commit": "5c451c239418147f7fdf117a377d7a8b1188b378",
+        "git_blob_oid": "f83e013a6e373d3d54e85da31d58d9bcc8f2f688",
+        "historical_status": "A"
+      },
+      "conflicted": false,
+      "git_blob_oid": "f83e013a6e373d3d54e85da31d58d9bcc8f2f688",
+      "origin": "untracked",
+      "path": "tests/unit_tests/logic/hammers/test_semantic_routing.py",
+      "untracked_different_upstream": true
+    }
+  ],
+  "schema": "datasets-origin-main-exact-path-history-comparison@1",
+  "selected_current_content": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/selected-content-02.json"
+}
