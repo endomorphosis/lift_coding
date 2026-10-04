@@ -1,0 +1,69 @@
+{
+  "actual_optimizer_updates": 0,
+  "content_sha256": "aa26d91d3b0a01a03b978bd2c658114a776b7e85ff26f7779f563a09ec98637d",
+  "genuine_human_reviews_available": false,
+  "lanes": [
+    {
+      "architecture": [
+        8,
+        16,
+        4
+      ],
+      "dimension": 8,
+      "lane_id": "legacy8",
+      "lane_receipt_sha256": "d26da53e80d63702cd33e788eeb2a6788ea33692cf9eeda0795e9f74edb3607a",
+      "model_training_executed": false,
+      "torch_imported": false,
+      "training_rows": 16
+    },
+    {
+      "architecture": [
+        384,
+        128,
+        32
+      ],
+      "dimension": 384,
+      "lane_id": "native384",
+      "lane_receipt_sha256": "d789d3e037c523d2c2d2fc325013ce737ed161b434088266648c549cb809fa8e",
+      "model_training_executed": false,
+      "torch_imported": false,
+      "training_rows": 16
+    },
+    {
+      "architecture": [
+        768,
+        128,
+        64
+      ],
+      "dimension": 768,
+      "lane_id": "native768",
+      "lane_receipt_sha256": "b3f7d46df1bcbf15d88bd9562e1d53ab5a645057414d3815fc14b75ba6b78399",
+      "model_training_executed": false,
+      "torch_imported": false,
+      "training_rows": 16
+    }
+  ],
+  "main_optimizer_updates_planned": 1800,
+  "new_semantic_labels_created": false,
+  "original_masks_changed": false,
+  "plan_binding": {
+    "bytes": 11459,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-plan.json",
+    "sha256": "2a9afe535d32cde6ddd8fbd31dc1c8220be30e0c56adacf626524fd5f51c1101"
+  },
+  "private_optimizer_updates_planned": 27,
+  "schema": "source-vector-reconstruction-preparation/v1",
+  "seeds": [
+    1729,
+    1730,
+    1731
+  ],
+  "semantic_or_contrastive_fit_authorized": false,
+  "status": "prepared_no_training_awaiting_root_publication_release",
+  "total_optimizer_updates_planned": 1827,
+  "weak_train_manifest_binding": {
+    "bytes": 333966,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/train_weak_supervision.json",
+    "sha256": "97a333821790db1ad11a542f918a32e583b9b4ab150b82cdd71bbd883bbc42ba"
+  }
+}

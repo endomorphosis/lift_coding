@@ -1,0 +1,4958 @@
+[
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/heads/integration/reconciliation-20261004",
+    "sha": "f175a80cdd5e71069f1146564b90c8592127f7a8",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/heads/integration/submodule-worktree-rescue-20260801",
+    "sha": "11a9b3be2d5a045bfd2519d21bc178db9379298d",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/agent/cig-reenables",
+    "sha": "14ae6c4c77400776357c229ffd6801ade0ca6054",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/agent/pcpr-v1-origin-main",
+    "sha": "b9e1a959ae087f17639b14fbd4e9c77bd17fb1f8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/agent/proof-backed-test-reuse",
+    "sha": "c74763581e7b8a444f20a2755925db5dd1492374",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/agent/ui-ux-ir",
+    "sha": "2ed219a22823ddb4698287081c64422384cf66ec",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/agent/vericodegen-papers-2026",
+    "sha": "f5cecfb550ef77c8d825e2da58889db61a1b7023",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/agent/worker-planner-doctor-integration",
+    "sha": "fb9e69424cebfcb2975b35b2db155337f63e26f3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-accelerate-domain-layout",
+    "sha": "d265331ded5a925e774e8437c460fc1caaf3fb53",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-fvt-ready-mains",
+    "sha": "48c3730313b5d39d129852c1f188545c4af2f3a1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-008",
+    "sha": "7f9ba49c2a3ea5224549cf97d21d20cdbd766f15",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-009",
+    "sha": "bc4a92837a4a74cb55e4e27b915e0944f3856c7b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-010-011",
+    "sha": "f62c91a1cb749044eef13f79167f28ef4d00b0b7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-012",
+    "sha": "43be79a5038b37458a546255d8619f50611f6a3f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-013",
+    "sha": "f9a1226a1007587bbc8f69e96e1986b3f75f9f15",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-014",
+    "sha": "14a5e9228e1536a9e6a9ae99e1e719a0692e84d6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-019-freeze",
+    "sha": "16ff58315b78cd83b8acf7eb30b56fd04b712b71",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-019-pg",
+    "sha": "0a72454ecddf76cb56e4816b9c0e1f41707264a5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-020",
+    "sha": "8d91c4b8a2f090ab82539949a4313ab08894017c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-020b",
+    "sha": "c38d03a3a6f71045b96fe22d43a7bac7a9f266b9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-021",
+    "sha": "802ea4b091bd89f175ea31fa6602bc937106aa81",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-023-freeze",
+    "sha": "f1b16546d15f595eadf2f20f68fc812c8039c94c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-024",
+    "sha": "d5114badbb00f6757cd9e81b31446ac48f791269",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-025",
+    "sha": "5f9e91108bb9f06806e452a414c6f7d335e0fb87",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-026",
+    "sha": "b53e48bd88ff1ffa1ecb449d65263d70c0a12f16",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-026-complete",
+    "sha": "c2461e376efdded7a0555ecb44ec81b8a7c4247c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-027-freeze",
+    "sha": "a2ae76300b3e8b7271ae22f980c46d867f851a3e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-028",
+    "sha": "fb5f749bafe7c6267ba806f573aaa32df994ff18",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-030-031-032",
+    "sha": "f22fa568f68e4340a523eed981b811a0ce091fe7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-a019",
+    "sha": "757198a2246d29c7aa1a466cafab71e458300f0f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-a023-027",
+    "sha": "861983539a83f1dbbd647e0784a98f364711d701",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-a030",
+    "sha": "ec61edfbe23bbb2ca47b9471b6b38eeed1211ed9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-a031",
+    "sha": "07a61b1a57fe686ccf57ae588a7e606550acbfc2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-a032",
+    "sha": "3f24a6334a55c34980e6f4aba30b7f75216b0796",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-birth",
+    "sha": "9ad208efb04786ce883134117fd93ae14cdfbf22",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-engine",
+    "sha": "74b6ae79cb0a3d1fb93a4a739d497f852daa03b9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-l",
+    "sha": "eaafa6b4f9a1ac947a144081ddf43cbe99e2b51a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-main",
+    "sha": "d46507c74b31a2ccd72a181ace893527ac19b1b2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-p019",
+    "sha": "4e4e847351adfd2be51bcc0a007425360fd4f23e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-p031",
+    "sha": "ac91b386d591668507a3afd91b471d1924b7b836",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-ase3-r",
+    "sha": "4caab1d6e259e18e839fa822002ccb1a56a65014",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-dqp-main",
+    "sha": "aea2af7dbd15c91240ca22498790a1c7e7ebd006",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-prepare-q",
+    "sha": "aecd42535085e7f1ec868c94451ddb274d647ab4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-product-gen",
+    "sha": "9e1f7eabf53acd799d123d8c12fa5e802673d35b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-ipfs-accelerate-q-readiness",
+    "sha": "2c4a1e93204ab336a12d15f883499bc3f48450f5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-post-cold-surface",
+    "sha": "dd8817decfad8e09710dee0c1db960e96776ce2f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-post-composite-pm",
+    "sha": "323e579da5595c32302344e2a5b904b23ff22597",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-post-patent",
+    "sha": "1a567424565ab4a84517b42fb90fd74b00c68991",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-post-terra-gate",
+    "sha": "19500c5b3b9550217aa8ec697bccdb88fcf554ca",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/chore/pin-post-wave2",
+    "sha": "149938ef5816b2e8a7c52640cecb2866cfc621f4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/codex/pctdd-g9-orphan-recovery",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/codex/pctdd-g9-runtime-integration",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/codex/pctdd-resource-aware-sealing-prep",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/codex/pctdd-retained-candidate-integration",
+    "sha": "a475ae74e6cf0de6a23b02a4e76ab712948ec9cd",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/codex/swissknife-parallel-supervisor-failsafe",
+    "sha": "48502dedf93383b5950465d0c646bb3c9f699669",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/consolidation/impl-remaining-20260628",
+    "sha": "8a90293820f2da1faedc028f72a537b76c2bdfd9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/feature/verified-gui-optimizer",
+    "sha": "9fb1ac6dabfe121b67a7298d049288105db57d76",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/agent-supervisor-deferred-blockers",
+    "sha": "a56b5bb7a0b66ef8f132d4ef3f8a480f796e7846",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/ci-expand-gates",
+    "sha": "4b24d188be4e41741ee37561afdd45fdc089d906",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/ci-next-deferred-slices",
+    "sha": "f5a772079acc8d5f9abd7d60f47dc01ee57a2dcc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/ci-reenable-deferred",
+    "sha": "bc5d43b0984b67b769db7fa7557a08e4079bb991",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/ci-test-suite-scope",
+    "sha": "21e56f9430ba473729f083bd726c2bea2d8100b0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/ci-wave3-remaining",
+    "sha": "be8e5cde035e73f0357226aa85cfdfc0a177bc60",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/ci-wave5-ptr-identity",
+    "sha": "ebc33a5bc661ed18adb40a35041cb15451076162",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/ci-wave6-vai-registry",
+    "sha": "82e174a5b683e2f3809cbe355e8adf3bccb6bbf8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/doep-callback-retention-deployment-20260910",
+    "sha": "502b85b305827e4dd85af1443a150e3dbd80b7c0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/pcce-r6-completion-mirror-idempotency-20260824",
+    "sha": "9d70e1a434443c75eb7e5203267f09b371ba19b9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/fix/port239-host-native-symbol-map",
+    "sha": "df40733119cb83cdfeec375d9afc6b3272f97b6d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-052-final-base-operator-20260824",
+    "sha": "c1ffcae6b68892bcc90beebfd0bd0ec2e6745936",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-054-clean-install-evidence-final-20260824",
+    "sha": "5319b3d0076f0908ef6765e33ea1b8f348bd4e18",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-056-qualification-final-20260824",
+    "sha": "5187807d1b91fe2d978e119a1cfb4e5964c902bd",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-060-benchmark-freeze-final-20260824",
+    "sha": "6f467da19b92ad51446906c9dd00c58c2faa94e0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-061-typed-structured-final-20260824",
+    "sha": "61a7d522d2df4291227d4b5b8b63e51048f75a6c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-062-dynamic-plugins-final-20260824",
+    "sha": "17e86ec0a8b085f172ec68572c8dcabc7f01b6ca",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-064-configurations-ab-final-20260824",
+    "sha": "a8441481bf10320c7659beb96ee5c54058e0c54a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-065-outer-20260824",
+    "sha": "01e3707d67f82ea7eb7806ff243a6847feb9cb1a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-065-outer-final-20260824",
+    "sha": "3359942825d569bedb2833b67da14f782d71ce97",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-065-outer-final2-20260824",
+    "sha": "29d551a2ea9652b62ab683591bcbe5f1ef5f5f12",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-070-threat-model-final-20260824",
+    "sha": "ff616cd432255656924f88da61190ec6a8044e7b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-071-outer-20260824",
+    "sha": "1d09b4d6cb85837cdd804a69d816b19487242525",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/PCCE-072-trust-admission-final-20260824",
+    "sha": "7cb10f89b2de1cded1ea26f01ecf911f1c8a7c6c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-002-f2366e8473c6-attempt-1-1788055871",
+    "sha": "646e9241b6e20c4b0e354a0eba357c92ecffbef0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-011-95e95e2695bb-attempt-1-1788103305",
+    "sha": "8f91a8089e0f66e13dc5ef872819bf96f6353287",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-031-b906eeacacaa-attempt-1-1789032495",
+    "sha": "a459d0e1dd45b09ca5392b7f54f841e81c28c87e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-032-1a7aedb9b60a-attempt-1-1789032817",
+    "sha": "e6071e9b35f3fcbaa7dd110511b624737327cf8a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-032-1a7aedb9b60a-attempt-2-1789034130",
+    "sha": "47c129b8141907fe472cd4542a3acf9ec338629e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-035-6af6c739fa94-attempt-1-1789271857",
+    "sha": "e7131e1cc884aa087b9faf42110f563cacf08c0b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-043-34bfe54609a0-attempt-1-1789262571",
+    "sha": "5abbf505dd1571043edce2fdb936703134c4e9cc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-044-96473a05873b-attempt-1-1789272664",
+    "sha": "25f3e8ce4db3964d27f6e1557dd0835cff186e1f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-063-63b6cf0d5a9b-attempt-1-1789033332",
+    "sha": "5160556c7ba25bd87c1a1e22bcd6716f959762d1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-063-63b6cf0d5a9b-attempt-1-1789770175",
+    "sha": "39bc1c585f8da11b02826d35c85e3185f8483e7e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-063-63b6cf0d5a9b-attempt-2-1789034682",
+    "sha": "d1154d2995a5c7dbcbd53407c2eae0153f027ecb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-100-e348c8e778da-attempt-1-1789388031",
+    "sha": "c20808ccef42d6b2de1f41a8475ffba3d8697bf7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-100-e348c8e778da-attempt-1-1789389104",
+    "sha": "8cf6b01abffbce6f367f9e5396379611f3bea8e0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-101-c77a24819add-attempt-1-1789389850",
+    "sha": "b071c10d7252a10cb6a2901480129e88562749ce",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-102-ce034f7ddcd7-attempt-1-1789390579",
+    "sha": "0094b2a6994079209a63e0a5b144407b030cc27e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/doep-103-7dee5b894631-attempt-1-1789391467",
+    "sha": "186f0b5398470aee6def69d2d407531673bcf264",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pcce-053-environment-evidence-final-20260824",
+    "sha": "7bf8bb1046942dcc4ec8797703d90e4b22b57a4b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-001-3c1c70df54d4-attempt-1-1787946259",
+    "sha": "ba1d3d9b5dc4504fb8bc667c38281f1548306fa9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-001-3c1c70df54d4-attempt-1-1787948114",
+    "sha": "def3203c6309294c51fb6a0b047c5ff51f2813ba",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-001-40d3ba7341cb-attempt-1-1788000460",
+    "sha": "15722203d786abe954589e8a0665d1813eda2199",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-001-40d3ba7341cb-attempt-1-1788028740",
+    "sha": "09a969f4626c1501213340643a29f96af60ab8ca",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-001-40d3ba7341cb-attempt-1-1788114931",
+    "sha": "5cae4df66fb11fd6e992d642b0494a539a29b751",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-001-40d3ba7341cb-attempt-1-1788223495",
+    "sha": "956a21b608914976e2bc11667bda955d77641a03",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-002-603a28236490-attempt-1-1788028919",
+    "sha": "737576ecc229aa3c5f82d891c4298729e3278e17",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1788241278",
+    "sha": "687bd408f8f77af7cddee4cd30a68265466b3208",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1788262188",
+    "sha": "ac0e0c171c73505e13854ef7411169d72a79ab48",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1788296103",
+    "sha": "c258b76c81fa79664c1944b6413230bda90a0f4d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1788433866",
+    "sha": "3a6d685f6355d68b9adc897f1c93412fe87a7045",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1788977025",
+    "sha": "837aa0eacf9f5d65548fd06a5856eb998e41d952",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1788994063",
+    "sha": "6a6c80ee9d69d7d81184b5e04a279b24735a08d2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1789033114",
+    "sha": "f8faaaced528c887701223dd56ebd1cd420ef477",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1789062224",
+    "sha": "11a33d830319e5007440c3df7aaa0cbbe823d1a7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-005-269d059a4ea4-attempt-1-1789071986",
+    "sha": "0e958a9ffcba1e280088b550466e684e414fe5d7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-006-0c4324168ce4-attempt-1-1789110313",
+    "sha": "e33b3289cf2630db4cb3d28b4c0c65034abb3c3a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-007-e272ca1f906f-attempt-1-1789110299",
+    "sha": "304cb967ecd842f7c3abbb845f80ac8e4ddee910",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-008-e253509a65d6-attempt-1-1789330993",
+    "sha": "2e6cbc6cb83c101832e1b7623e8d2f25ca29c65d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-031-2b0072132f64-attempt-1-1788132984",
+    "sha": "e848d4e4eb24156bf6fc693d01e019f30a1b6e15",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1788199788",
+    "sha": "8f272d9f158317dec67a6b43b22c9836eec9bfb8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1788240688",
+    "sha": "f351af8bf95cd575a53af595a4c7a8411a112411",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1788274762",
+    "sha": "5fc892eebf3ae3fd0389ec8462fa5681a78083e2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789058569",
+    "sha": "2ee6b40a8ef872e98cdd0578912f582fc5c9a819",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789059316",
+    "sha": "ea31b970ae6e126ca91852ae1a9bb8cd10e31680",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789060131",
+    "sha": "e2d043067cc5a95f85e47170dfc37e59beeb6d5f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789060682",
+    "sha": "21fa6920b494a182e3cc4776674ba095bd14640f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789061316",
+    "sha": "ced5a6a24636357ab2dbcfc78106796de57da1e8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789061961",
+    "sha": "c52d319ddffe57ba5a6eff4448ea3c5bdf5f580e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789063633",
+    "sha": "3d739cde178e9ffc56bcb6c2651925930baa0ebc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789064339",
+    "sha": "a8165a8513e283c80842ffd24dff632a7c585981",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789065455",
+    "sha": "3a2eb0cb117e4889ffce4466b0d809e18cc833b9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789065705",
+    "sha": "4bdb48759a3610b02d6eef0d6d015db0342256a0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789067159",
+    "sha": "7e637070e63bdaf63a6ff407e0257bf3b27d6c2e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/implementation/pctdd-034-6cc49f41f873-attempt-1-1789068323",
+    "sha": "81bea270acde3b00cffa2a220dc2ef9eb82f4039",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/integration/pin-accelerate-quota-glue-20260806",
+    "sha": "61b43369c9ef9c02c0c03efe7317b47a2caf3a77",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/integration/pin-accelerate-subreaper-20260806",
+    "sha": "a0d671df12c04f10194e282de7663b780b8ded75",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/integration/pin-all-submodule-mains-20260806",
+    "sha": "8389776df54224d08cfdca1b387ad158aecd379c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/integration/pin-hallucinate-uiir-main-20260806",
+    "sha": "d7a9c548a23fc8e2c4762b198132980d1f2cfcd4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/integration/sca-formal-first-docs-20260806",
+    "sha": "e7a5dcd86e2a5c013532ad2450b879c32f0e4c07",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/integration/top-recovery-main-landing-20260825",
+    "sha": "0c0f9d025f88645f15cbd31ee6c413eb1077fed9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/integration/uiir-gitlink-pin-20260805",
+    "sha": "bf780c04cf0ee36f6cd1773a758ba95b2922d8da",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/merge/hallucinate-backend-into-main",
+    "sha": "fc6a554697142ece2ccbff3de8280a9dbb100e9f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/PCCE-030-owner-scope-binding-outer-20260824",
+    "sha": "9a5ac6e82cf53c95ca4e731886209c6b1aeb0672",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-boundaries-parent-1789152547",
+    "sha": "e170db51516e5a0fcb1ef01cfbe5ba2355294d94",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-callback-birth-parent-20260913",
+    "sha": "dc22239577e03bd186c0050479a074c2fd369f54",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-callback-birth-parent-final-20260913",
+    "sha": "d5397397dd4c33c60b8a4e52698116267f34cac7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-causal-envelope-parent-20260913",
+    "sha": "f4e7923f082acd43abb31ef9e0dba5ae45b2d293",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-completion-key-recovery-20260909",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-composed-history-reader-20260910",
+    "sha": "bdbd8dc699df7f0543174ed9863b881a030b4e4a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-composed-parent-1789198445",
+    "sha": "aa746f685150297ea0eeb4d7abe4f360b475da46",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-default-grant-renewal-20260913",
+    "sha": "d5d9366f6d6e87f96b00a6d8d286bc7a799ed7c9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-lane-reclaim-parent-20260912",
+    "sha": "6278baecc093673423bb2bea7c458837ab954943",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-legacy-retry-parent-20260912",
+    "sha": "501d3f53eb51c7b89b7391a3d3ddd6473c21f31c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-live-recovery-20260909",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-native-drain-parent-1789244072",
+    "sha": "ccac2b71b348dc5675568b4b7cc3580021523d37",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-native-history-reader-20260910",
+    "sha": "4d92d9e93966289fd2ec2b6d6cd158163c215c36",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-native-replica-lock-parent-20260910",
+    "sha": "263c59b2a2c2b2de1f4e48824efd7b72db7d94ba",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-native-workspace-custody-20260911",
+    "sha": "ef36e338c64f2b1fca0cadb4fe3f406b3545b29c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-parent-exact-callback-closure-20260910",
+    "sha": "fd2a267d305896dee4c2a0d53cab59aa47f6d37a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-parent-forward47-authority-20260910",
+    "sha": "f34ab4f9f2178d8b19a0b232ec8ad5a1cbcce65d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-parent-reader-1789060235",
+    "sha": "89b9cb0c5e640a895000cc341ca7fcf75e735654",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-parent-resume-1789045719",
+    "sha": "1a4d62644162ddad9219913b8fd6b0eeaa9ff421",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-parent-retained-1789038272",
+    "sha": "3b953248a3469f2ac8261638497e39d113274631",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-pending-parent-1789136763",
+    "sha": "8ff6abb22430bbbc4c91d954504ecad50c70a637",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-provider-custody-parent-1789174345",
+    "sha": "edac53a50e3ee1434e6e8f9bb1dbc768b6fdd9f9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-quarantined-predecessor-native-20260913",
+    "sha": "228799000dfbf8b32326264f3598a3b20a672fa6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-retained-callback-parent-20260913",
+    "sha": "641a84fcbd9909d4009eaf99ad8c8f05147b64b5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-retained-pool-admission-20260910",
+    "sha": "d315e5181910a362cfc6f93b2fcc6b9594ec0fb9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-runtime-cutover-parent-20260911",
+    "sha": "dd505e34f270a1d3a79c038abc990729b979beda",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-task-readiness-parent-20260910",
+    "sha": "eca5eaeff949f5b694436033dee76271d8eac00f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep-workspace-custody-parent-20260911",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/doep053-atomic-owner-parent-20260913",
+    "sha": "793d71457707e3f9fecdc854b481f551d6dc55b2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/lift_coding-7fe11f6fd",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-cleanup-caller-parent-20260911",
+    "sha": "27a8cdec457b2b66d07608590664a7b91f83726e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-exact-argv-parent-20260910",
+    "sha": "48ee12c78a0425f36a597702288c568b43d00ee6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-failure-review-owned-scope-parent-20260910",
+    "sha": "df4d6e229fe8cafbfb68d4b29f4e99f1cc15e6e9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-final-stop-runtime-20260911",
+    "sha": "f0308fd29d6de9285fb52f96dd49f1fc0599d564",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-forward-parent-20260910",
+    "sha": "1323e086e376acd85d76d5389cae23b4a5aa2a41",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-inbox-parent-1789047598",
+    "sha": "7683758890dd2fd9e9daef0061e3b3a2d68e920f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-independent-custody-parent-20260911",
+    "sha": "ea2471103f0ca5d415bdbed4d2d01d6c81abad34",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-lifecycle-qualified-job24-40ceaecad4",
+    "sha": "40ceaecad4f16aabe3c3ee72fa514bc76308f326",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-native-source-reader-20260912",
+    "sha": "b728c736c41439d6a5913479c9f1a2f67caabf10",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-native-submodule-maintenance-20260911",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-native-timer-anchor-20260911",
+    "sha": "2aee4d3d820a7270f8e0f49368268b206737b087",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-old-runtime-source-reader-20260912",
+    "sha": "743be2fa621703cd8b4deb00c150e6a34d64e6d9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-pinned-reader-parent-1789108392",
+    "sha": "e33b3289cf2630db4cb3d28b4c0c65034abb3c3a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-pinned-reader-parent-20260911",
+    "sha": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-preserved-child-parent-20260910",
+    "sha": "a9b6e80dfad9c6748bc49bc38d10115a49960f34",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-process-group-cleanup-parent-20260910",
+    "sha": "b443efee9d355e2dc244256100514d19b3cfb5f9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-qualified-portfolio-20260909",
+    "sha": "6a6c80ee9d69d7d81184b5e04a279b24735a08d2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-qualified-runtime-1788972094",
+    "sha": "837aa0eacf9f5d65548fd06a5856eb998e41d952",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-qualified-runtime-datasets-parent-20260911",
+    "sha": "624b117f135eca7c279c989a02836c452ccb1001",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-qualified-source-parent-20260911",
+    "sha": "fc6aecf5c5466278c8ca4063995b452e971c8143",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-recovery-source-parent-1789093310",
+    "sha": "de565762ae307ad4de850953dfdf332989077352",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-replica-promotion-parent-20260910",
+    "sha": "2468d4028fd8694a445f2456b49c8b1f0a6b2666",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-root-parent-20260910",
+    "sha": "f8faaaced528c887701223dd56ebd1cd420ef477",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-stop-and-peer-custody-20260911",
+    "sha": "9d3a54618b7cec0da533968867312863db2b0722",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/repair/pctdd-unknown-outcome-cas-parent-20260910",
+    "sha": "d18542bf160d1a13dedab4fab326c653df155678",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding",
+    "ref": "refs/remotes/origin/revert-245-draft/pr-046-expo-dev-client-native-glasses",
+    "sha": "d2d79c3e98ed1973e28b7fb1051e6b550504c85f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/35a10fb8-pr-1-fail-closed-when-output-redaction-cannot-walk-the",
+    "sha": "a91b1b327fccbae30884dcd799ad5ada4c511cd3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/35a10fb8-pr-2-bind-tool-rank-cache-keys-to-the-redacted-descript",
+    "sha": "3963176838fd62927c3d20e8503f73648077a180",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/35a10fb8-pr-3-redact-the-configured-api-key-not-only-the-environ",
+    "sha": "9f73d701901250ceaf6595cd6dfe7d8d87715470",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/35a10fb8-pr-4-do-not-cache-a-policy-answer-when-the-content-cid",
+    "sha": "0e5c36b165eceb013a277edebbd80459f50dd980",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/35a10fb8-pr-5-stamp-the-policy-witness-when-a-question-map-was-b",
+    "sha": "614535c950826ede1f69f71234afd5f08c9875d9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/35a10fb8-pr-6-stop-the-tool-rank-before-an-unbounded-call",
+    "sha": "5a5a82a820b7aa9152dc8c8ea169ba9635051d2b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/35a10fb8-pr-7-deny-descriptor-name-and-namespace-with-the-existi",
+    "sha": "cd52863c942fe14f2feee22aab08205ce6578f38",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/35a10fb8-pr-8-lock-withhold-before-exact-deny-on-the-witness",
+    "sha": "97c62bd060ebb479ee43745a3863673929146b25",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/3604e9fb-pr-1-adapters-add-tool-slice-prior-and-an-empty-abstain",
+    "sha": "7c65a4d02341be30753c5e0ff37dbc1bf404eab8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/3604e9fb-pr-2-adapters-redact-serialized-bodies-and-content-addr",
+    "sha": "ee2406d7bace9d4eb57fed34a6b6bdf4506d4a64",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/3604e9fb-pr-3-adapters-rank-tool-chunks-with-a-fake-system-one-c",
+    "sha": "e21f3fa4e529eacbb2b9caa2370832a39823a441",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/3604e9fb-pr-4-adapters-evaluate-residual-clauses-without-letting",
+    "sha": "26bdf86189886e2630884d8b7a3d538ffda65a3e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/3604e9fb-pr-5-adapters-fill-closed-arguments-only-and-include-no",
+    "sha": "29166718535bc8e7f3764ce224bc6268c412c2a6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/3604e9fb-pr-6-adapters-add-stage-metrics-and-a-kill-switch-that",
+    "sha": "cdc77f9f18d3b5802d8028ba3e3467f7781e9317",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/execute-plan/3604e9fb-pr-7-docs-note-the-optional-system-one-approximator-is",
+    "sha": "33e8536e955d7c2c2eaa8bbcfcb05b5d78a7dd69",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/feat/pcce-006-proof-context-v0.1",
+    "sha": "0ed2b23d13371a6cae25e5f328a10152e5d1da11",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/integration/aae-mcp-release",
+    "sha": "96238cc9a86e69d224ab7b52d211a79ecf27b382",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/integration/eaaef-mcpp-033-recovery-20260823",
+    "sha": "c1f826e4d9750ac061b4062a1c01ae6d37971a78",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/integration/mcpp-pcce-main-landing-20260825",
+    "sha": "838261c04a4b6f2643d75017e0b472876597c673",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/Mcp-Plus-Plus",
+    "ref": "refs/remotes/origin/merge/mcpp-1.0-into-main",
+    "sha": "9d6c5013c0de8f70c74d0f4a445aa6bda10fd3b4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/heads/integration/ase3-023-salvage-20260809",
+    "sha": "7abfc4ca768dd5086600bb30815256c79aaace74",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/heads/integration/eaaef-source-qualification-dispatch-20260825",
+    "sha": "95f9916184e1635e01a3458e48a6a09a5b3d5697",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/heads/integration/eaaef-source-qualification-main-20260825",
+    "sha": "777ca22df45c20fd7427fc07c1a93b98bbc4b23f",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/heads/integration/eaaef-source-qualification-materializer-20260825",
+    "sha": "e4029a6b24d92eeb53675428a9f98710fc2d9f8c",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/heads/integration/incremental-verification-planner-pr176",
+    "sha": "c1b9980ef35a81b9f99eeb73d857342bc77b3bb3",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/heads/integration/pcpc-supervisor-replay-20260824",
+    "sha": "5a6b070c1e87b8059f63e6e9e4b8b55830ed8191",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/heads/integration/uiir-grok-terra-20260803",
+    "sha": "6224a301512d5775c0be61ec0fd58caf2c48ce91",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/adversarial-assurance-engine-v1",
+    "sha": "64a9c1921a425da82247b587970e05242e564d6d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-g213-merge-blob-rebind",
+    "sha": "d087150c1ebb67a3d3b9efc3603f8f37369759b4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-g213-terminal-bind",
+    "sha": "7ab5098d3ec36e00798018f4890949fcca2c0bad",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-grok-runner-cli-fix",
+    "sha": "673a5e79aad302482606d7217c4ed9e4673ccedc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-managed-tool-residual-requeue",
+    "sha": "c2fda7599c81f5e32c8aaeb91cc0971fe0b65409",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-matrix-packaging-refresh",
+    "sha": "4681eb4696a7490635cc2e926bb1b852b707506e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-post-merge-authority-rebind",
+    "sha": "b2ea539ed2f3780198fa8b2e7dfaa532c9bb6bb6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-post-merge-reseal",
+    "sha": "6298bbfb8ee4780ef2b9340218f61687456d8d57",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-rc-digest-rebind",
+    "sha": "b812c86d49b006e6106111e5bba6e17396c65130",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/fvt-supervisor-auto-finish-residuals",
+    "sha": "dad1e5b37fb319329424c9661a6902a898621245",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/incremental-proof-sealer-v1",
+    "sha": "d1980931f86c70214e15e7b2b39efdc7277e573e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/ipfs-kit-runtime-readiness",
+    "sha": "fa91130d852b0deb785124aa63ab40cf97e0ab27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/logic-governed-compositional-verification-fabric-v1",
+    "sha": "8448c29fb611f44fe7b9472d2c2f4326b1efdc35",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/logic-governed-semantic-work-fabric-actual-v1",
+    "sha": "12c4e8387de4986d38d69534f3d74864e7bb15c1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/logic-platform-canonicalization",
+    "sha": "f57abc30f1248a59f92c6fa5e4e7ee85e762fd78",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/proof-backed-test-reuse-closeout-composition",
+    "sha": "efb73fb87067a3a8a8e8cfb053d45c5077a5fcbc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/proof-backed-test-reuse-closeout-g140",
+    "sha": "fe5b6e6c41a8970bd8f6e45884287c694f05b91d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/proof-carrying-context-engine-v0.1",
+    "sha": "489da803b9a778d41d8576d0c90a5384fb943eb5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/proof-grounded-ir-learning",
+    "sha": "69b40d63a28f7cf5d647f18cfa7470de08561cc7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/semantic-compression-governor-v1",
+    "sha": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/software-verification-prover-matrix",
+    "sha": "21d98cfba08b497cd8e0768bea1443823fbe7795",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/uiir-supervisor-soft-complete",
+    "sha": "f024fa1134b7266cd4c63b4a2f63217399f19d38",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/upstream-voice-action-to-main",
+    "sha": "32af3546683f74681673e15d3dc222b7827cbc6f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/vas2-surface-exposure-policy",
+    "sha": "1ae3864891947d167dc45bcd8a15ebae9c964589",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/wpd-grok-cli-import-fix",
+    "sha": "b69dce750090031dfc26cc1f6b4a9c01e4d33203",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/agent/wpd-unstall-doctor-factory",
+    "sha": "59bdb2e964b4c58d3b4db55284ed39c139fd6e0d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/agent-supervisor-autonomous-meta-controller-v1",
+    "sha": "fcf3b0e34af37768c8b0e10d1b29c83982461cd0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/agent-supervisor-proof-carrying-test-reuse-plan",
+    "sha": "9b4965dac75e51bcc5e6e5e52cfa2145d44cf295",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/casf-024-025-budget-shards",
+    "sha": "6b9b0efb839956b4e9613dc01ee46df1571f53ae",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/casf-032-ducklake-recovery",
+    "sha": "7383aadcf1b6c6d04a17d1af1d145d0c31963920",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/casf-033-drift-rescue-20260824",
+    "sha": "f256cf1ff4f3717c060e982a9ee3cbdf7ddde250",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/casf-036-formal-model-rescue-20260824",
+    "sha": "47455e720e69478f60c74260da8532061a5fcd78",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/casf-admitted-execution-rebuild",
+    "sha": "9dc02cd9dfb1f28eef0f04b5a8e6a406f1e4a48d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/casf-inventory-local-route-20260824",
+    "sha": "0db0c4203ed5f98896c9db053bb2145b33759847",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/casf-provider-route-high-20260824",
+    "sha": "9eccc44e34a4acf4bd8258405bd6b1dacdafecec",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/causal-event-supervisor-federation-v1",
+    "sha": "8c3fba4e67a25bcc218b711b170031d82d00f7da",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/eaaef-092-quack-owner-rescue-20260824",
+    "sha": "2b89152ee882b4570d1f138b9c0d0a506f73c168",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/eaaef-093-quack-owner-rescue-20260824",
+    "sha": "48d8030fb2b0cda021d1aab2c1ea6a3062abb181",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/eaaef-integration-recovery",
+    "sha": "859bf276868aa6067fd3ebbe3850e402440a49d3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/eaaef-materializer-test-debt-20260824",
+    "sha": "9cfe4b24b54eb693276ab0ee286fb51f0ae09c81",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/eaaef-owner-cli-contention-guard-20260824",
+    "sha": "3d0c4277481cd1af00f4719518f922e0138b498c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/eaaef-owner-contention",
+    "sha": "ac06c92c624d7f9edae655822d3223d43d8a36d5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/eaaef-typed-lifecycle-20260823",
+    "sha": "433dd440124b7c4be2179a3417c6e579468d20d2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/eaaef-validator-admission-truth-20260824",
+    "sha": "8637b51b695e309dd4020c0415341fcc40c233e4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/mcplusplus-1.0-gap-closure",
+    "sha": "fa8ac3ee104d38af6538e323af04e0c021b39a18",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/proof-carrying-architecture-refactorer-v1",
+    "sha": "84a056e41e48a81d4484be43840196578d6c87da",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/proof-carrying-procedure-compiler-v1",
+    "sha": "80c614a80b666c6328885165ca8915185e585f9c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/semantic-preserving-autonomous-remodularization-v1",
+    "sha": "84320d8bd3a2612bbfa2e7a7566e5ad9714f7d56",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/spar-native-queue-repair-1789014017",
+    "sha": "027f849925783dbef04cdef1b8ba691542a9628d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/verified-residual-intelligence-foundry-v1",
+    "sha": "8aa15ed1298cbabf9221a5abea31a8352e35464c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/codex/vrif-land-000-014",
+    "sha": "2c4d99420f89afc579475628b01c05358a9c08a1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/control/sch-000-dependency-seal",
+    "sha": "bc99663b55a823bd992b777cf826e97b74809a5a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot-worktree-2026-03-04T10-46-01",
+    "sha": "784dbc1d7cd581c4f253b41fa886521b0a9c825d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/add-autohealing-for-workflows",
+    "sha": "108ccf5d0e902e069f20a0aeccef78026a64173f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/add-github-actions-workflow",
+    "sha": "95300b9777455ad32a6e80fb030d06ba5ff60822",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/add-ipfs-datasets-submodule",
+    "sha": "524199a79e9331cf02a2fe8e952c8bfe4c19d1e0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/add-p2p-api-caching",
+    "sha": "efb1f059a090f47f02f4135802de875600930f49",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/ensure-dependencies-from-endomorphosis",
+    "sha": "3f6e07b4608fde47d6e7d2706843deabf041f324",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/finish-phases-3-4",
+    "sha": "d80fe449c1531590128a67d11b9182a7b32313a1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-23c32681-f690-4a15-b045-a99d47de97c6",
+    "sha": "d7afed973ed0b27c4a10ca55cae199eb3d4aab1b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-4fdc6192-4719-4622-84a7-bc8d8ab39cb7",
+    "sha": "6717b5b3839454ec99dd8b74584fd678a101ba56",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-551026ad-6b6d-419e-915a-fb63ede1b6b2",
+    "sha": "6ecde8f9e78d61efb697d73cecc92affd380a812",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-a17d44cd-31e1-4b19-bd91-11b2d5764c20",
+    "sha": "248f5491be55c9e1991acf42dd145703cfffeea9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-a7054b58-8dfa-4b0a-92e5-84d0ba711f08",
+    "sha": "23f7cb60af809520e4244ac53832b61e20b8b0c9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-autohealing-scripts",
+    "sha": "92d7f67037f37ca923b49f8e2cf87ca147cd4c5d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-autohealing-workflows",
+    "sha": "374d30fcb1bb37be8ede572bbfbdec33a3b2cdc4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-autohealing-workflows-again",
+    "sha": "626fbc6ded037b3ca9b3a8d503470e8925751783",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-ci-cd-tests",
+    "sha": "765b86423d9d7d12324c0361198f5bae3ec0120e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-github-actions-workflows",
+    "sha": "c06ab84f4d20152690e8f0b79581941a1e5af5eb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-libp2p-connection-issues",
+    "sha": "8df42bba572dcc54404318b63f82fada513cf3a7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/fix-workflow-issues",
+    "sha": "1b6330739560d59965f5a2bd58a003e76ef04f1a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/implement-cache-infrastructure",
+    "sha": "a046f39096485662adeaf98564e4672f50543b34",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/implement-ipfs-router-integration",
+    "sha": "e74bdf3b33d6e5ac555b8c49fe1946de68fc2ade",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/improve-mcp-dashboard-coverage",
+    "sha": "037c66993210d476335d6dabd328c3383c16d164",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/integrate-cli-tools-ipfs-accelerate",
+    "sha": "f740f5b922201b5d924e3aac06fbff32f3de3c7f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/integrate-meta-spark-grok-ai",
+    "sha": "629a1ed153317365106b5fc4fad1f3b38a295910",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/move-github-submodules-root",
+    "sha": "4db9efe165821968f43f8fe6ffb7090f4df0d7ba",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/refactor-screenshot-output-location",
+    "sha": "b1d1dea4a2a0dd4d5eb073faf8a2761bbc4fd832",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/reorganize-root-directory-files",
+    "sha": "ebefa24e75e3f6c4fd477e12e6f6431f56c3580d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/research-multi-agent-supervisor-implementation",
+    "sha": "60b189b827ed94ba11b3ffa814751f50d9f98713",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/review-ci-cd-scripts",
+    "sha": "31a67e8d87a6a80dbbdb5ca27d7b57e54302b719",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/review-inference-pipeline-code",
+    "sha": "4ccce42846361fdd07ca5f09c8d37f2a82890811",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/copilot/update-ci-cd-to-github-runners",
+    "sha": "88b5a7309895f5dc66ed6488efefe6af4438e2cc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/docs/program-closeout-20260805",
+    "sha": "4fa15f6e37389a03f71775e7ca420bc1c99e0a0e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-008-monitor-recovery",
+    "sha": "18e68692f3465ce42b4913a8c586ddfcec2f0a00",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-009-python-facade",
+    "sha": "395137cd26df438a5691d860262453c73efb53d7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-010-011-cli-mcp",
+    "sha": "b172f4adb90e98e9c38318dc68be9944fdce48c2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-012-conformance-rebased",
+    "sha": "9477bfe175f6b9b88240f50674fa5825483c0e6b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-013-self-host-canary",
+    "sha": "43941c7ea9a84128f0a38a4da57f56a0badb3094",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-014-rollout-closeout",
+    "sha": "3a8b72fb4777f3e634515d455fd96f9e41ad29c9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-019-final-value-freeze",
+    "sha": "1a3cf57cae88d17e09fa898cefc44b8a7190f19c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-020-runtime-hardening",
+    "sha": "79b04ade0dc7fd2e1193ce985513ca6f8fc5b38d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-021-durable-refill",
+    "sha": "c1b40110d5f337dc0296b95efc34456fd9f205c0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-024-prompt-planning-transaction",
+    "sha": "9c6023447fb7cf4936bdb77eda5b4386d21e9fdd",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-025-generated-board-runtime",
+    "sha": "6588401e485a3b151ea74b72e79237089f77572e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-026-dual-receipts",
+    "sha": "7b73bac34f1227c1091a559607df68f42084dab3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-026-runtime-activation",
+    "sha": "9f0e6b16191e95fa46b2aeeffd136f66dce8c875",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-027-final-value-freeze",
+    "sha": "5ef9d8ab4fcb17c9e12403e5efb10fdbd8555fdf",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-028-router-owned-provider-decision",
+    "sha": "757471e4a7dcb5b9f01800e8dd01ea2b89de3c1f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-029-neutral-contract-layering",
+    "sha": "831500e2fe090c9016096ba6de85437249a14a1b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-033-portable-carrier-main",
+    "sha": "664b3ec7fae416d048f56293e6b0d37b1dbcd26e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-033-protected-transition-engine",
+    "sha": "4f0d0afcdd89768e1b9be36e48f200aa78ec2cc6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-033-q-construction-ready",
+    "sha": "1bcdc4f149caaaab0572c0100b3e1bdb3b1f9051",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-advance-a023-027",
+    "sha": "80b4cbe2fc38fb0b015bfb1cc93781bd91a822b6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-advance-l",
+    "sha": "49916267eb61cec7a86f63991adb4c1037ae2db0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/ase3-birth-builder",
+    "sha": "074aac9fee7670ba8dbd791645e55e89b88086f0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/eaaef-quack-prefer-hermetic-qualification",
+    "sha": "5fea8b370f31562654b379cab9d75b29061fc63e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/pcce-010-proof-context-v01",
+    "sha": "b36be53bfe92e536b95f84adbe45e89a2446c54b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/semantic-state-harness",
+    "sha": "63b03229d75310387e797b5db1839134c8dfc5f9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feat/semantic-state-harness-main-merge",
+    "sha": "63b03229d75310387e797b5db1839134c8dfc5f9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feature/agent-supervisor-codebase-proof",
+    "sha": "986187478cac1de40f9ad79d542b7eab681b9181",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feature/agent-supervisor-semantic-layout-exports",
+    "sha": "dd5245622a4ff850f66fb8f9ec902061b6083348",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feature/implement-batch-2-medium-priority-models",
+    "sha": "4f77e8b034090f4ea81d9d84793a923f0816beb1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/feature/verified-gui-optimizer",
+    "sha": "9f96d2cde6c0ca8ff4269645c9f4479a90f33790",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/agent-supervisor-deferred-blockers",
+    "sha": "bcbfc458ddd23a7c2beefd5edefec6707fc416ea",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/agent-supervisor-hybrid-merge-repairs",
+    "sha": "f703848b4a055ba454abe699d66cc24c23104486",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/ase3-023-suite-ordered-provider-seed",
+    "sha": "c8b9c4b80685d11ad2765c2f11b8394da5ba97b2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/ase3-main-doc-gates-and-pin-prep",
+    "sha": "f5a8166e4fb4b36e64571cb94d5258ba1c434f9a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-consolidated-recovery-1789035344",
+    "sha": "a773895c0bf3dbd0c1a5545fdb4522be2739ebea",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-forward-recovery-1789041180",
+    "sha": "a8f2e4b682fe58ab923a884486c31cfd91d51d64",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-forward-recovery-1789041995",
+    "sha": "98b4b800315473795301b351b4a3994c831f8928",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-forward-recovery-1789044296",
+    "sha": "d7eb70a79e5274dcf842dd7c3ce97f07e5da5220",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-forward-recovery-1789045449",
+    "sha": "efc372cdc33b19a7023cdb54b12e2a8611433dce",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-readiness-backport-1789033941",
+    "sha": "e5cbd1bcffddac90db18407a7cab32eabc85bb61",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-retained-observer-1789051476",
+    "sha": "d9d7b09d6ff022b89bbe248ab2e294900a00d206",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-status-latency-20260910",
+    "sha": "45379014bf041d7124e246b2139f23fe04372db8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/aseh-terminal-monitor-1789049629",
+    "sha": "15253720f95ce5c377ad6c7363dec063d8b58e3b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/composite-post-merge-binding",
+    "sha": "825646fd3c1fc15c7fe24020f884640a2d76abca",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/dss-accelerate-seal-pin",
+    "sha": "80cfe8ac6e353a63af7eeae33e5ca9caaffc29dd",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/grok-implementation-provider-and-bundle-refresh",
+    "sha": "1c4ae39f409f2a4fd31563eedc1e376e177f72df",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/grok-quota-terra-gate",
+    "sha": "8b398db18e9005ddec0b9e059a198fe37d6d046a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/implementation-provider-auto-grok",
+    "sha": "34420f615d3eebfefa3cc1a3e4ebf8f51b16afac",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/local-import-test-selection-20260910",
+    "sha": "7dcf2ca2a53f7d7556d1b516f1fccf687f224123",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/package-root-cold-surface",
+    "sha": "f979bb18971d1f5666eb17e945695f62925d9918",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/pcce-r6-main-integration",
+    "sha": "7cb09eef743b3f47d950afd941ba216af98cd3aa",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/pdr-report-main-daemon-supervisor-fixes",
+    "sha": "437ee9ca429ca89b729f59c1475d01316a38632d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-attempt-binding-v2-job15",
+    "sha": "182966fdca0568952e12fbc378781b1b3e9baf87",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-extension-image-cache-20260909",
+    "sha": "88600ca8a2086fa3ef6ba698c38d5db7c65ae9fb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-job10-recovery",
+    "sha": "71db97de07cc03b873deaac61071db5422d61099",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-job12-recovery",
+    "sha": "e1ff293e517f2b230777283916d147be90bf0d81",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-job13-native-recovery",
+    "sha": "6ad32b5468bb02374768625a60b6a28756b4dde7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-job9-deployment",
+    "sha": "3babce4a2fa50ffac0453ec2e61c62c2466f770c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-native-restart-pin-20260909",
+    "sha": "421bb161829eb8411dde8a49381a3a2f3d01becc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-repair-20260909-job8",
+    "sha": "8be69cbc8f4a19163a0d963f8fe77deb871fb53f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/sawm-zero-provider-rearm-evidence-20260910",
+    "sha": "f2ca4a9798cf428470ac47ce9ef35b1656698a84",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/srt-supervisor-parity-on-main",
+    "sha": "7a476db762f32c9e878c798a3961df615e9316f8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fix/uiir-quota-recovery-mainport",
+    "sha": "20800c69b86b9ccdfa5d10f94036e17c07526410",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/01d9f4ebf1306da23a8be60cd2b7f57963440884",
+    "sha": "01d9f4ebf1306da23a8be60cd2b7f57963440884",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/021a66ff36d294099bc28f771a3c29f22d066a3a",
+    "sha": "021a66ff36d294099bc28f771a3c29f22d066a3a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/037bb1d376b4a6e00d7c8bac8a76398aadab1153",
+    "sha": "037bb1d376b4a6e00d7c8bac8a76398aadab1153",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/3a50cb4c43c3648a1a512d397748f709a3fd55d1",
+    "sha": "3a50cb4c43c3648a1a512d397748f709a3fd55d1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/45caab0c1b9d15569b90eff2b822feba19a14eb1",
+    "sha": "45caab0c1b9d15569b90eff2b822feba19a14eb1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/4683e69a08cba19317b5e53a61f0db907c7c44c1",
+    "sha": "4683e69a08cba19317b5e53a61f0db907c7c44c1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/4b70cefdacd7ec2a64cae4cbaf3894e75a0ba049",
+    "sha": "4b70cefdacd7ec2a64cae4cbaf3894e75a0ba049",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/5432c34e15e322919fe470fff4b717d97175842d",
+    "sha": "5432c34e15e322919fe470fff4b717d97175842d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/69a758a264644a986521e89f51c282db3fe3b045",
+    "sha": "69a758a264644a986521e89f51c282db3fe3b045",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/81f5be6f8d9e0073666ae3b566e97dbd16e84b51",
+    "sha": "81f5be6f8d9e0073666ae3b566e97dbd16e84b51",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/9bb65c1f51aafc8dbf697e61a908a8804939208c",
+    "sha": "9bb65c1f51aafc8dbf697e61a908a8804939208c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/9cf29c50ebe9e0f859847368a8b990a8d2d36e87",
+    "sha": "9cf29c50ebe9e0f859847368a8b990a8d2d36e87",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/9d8a2638e16edef8922e704b0c03697a6372047e",
+    "sha": "9d8a2638e16edef8922e704b0c03697a6372047e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/a05f5f66072987eccc06658078dbf1cd36359038",
+    "sha": "a05f5f66072987eccc06658078dbf1cd36359038",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/a5df3de3ee48a4b679d58f310b7ca495919b0b11",
+    "sha": "a5df3de3ee48a4b679d58f310b7ca495919b0b11",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/ac64f1c64a5382ee87cfa04d49ce968734456d2a",
+    "sha": "ac64f1c64a5382ee87cfa04d49ce968734456d2a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/b08b46a95ca0c20af985d3705ca4a3e5e11f59a8",
+    "sha": "b08b46a95ca0c20af985d3705ca4a3e5e11f59a8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/bf64155a3d95b599e390577178f84120c15dd12b",
+    "sha": "bf64155a3d95b599e390577178f84120c15dd12b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/cf50474994c06dd715c4b808a99493215e130fa0",
+    "sha": "cf50474994c06dd715c4b808a99493215e130fa0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/dae613ad72ac49e75a206c44188f3b6b78c6c168",
+    "sha": "dae613ad72ac49e75a206c44188f3b6b78c6c168",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/f612a33a6536f12a13720e959ca61884536a5f38",
+    "sha": "f612a33a6536f12a13720e959ca61884536a5f38",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/fleet-publication/fba8a76b3451e362a3938b6875791fb0b0c0147a",
+    "sha": "fba8a76b3451e362a3938b6875791fb0b0c0147a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/hallucinate-llc-increase-agent-task-scope",
+    "sha": "891ae21e61c942bf76889f4e55de3c48ed4bd3a0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/PCCE-064-configurations-ab-final-20260824",
+    "sha": "b0c44f7a2a85cf26e97c0e976ab0029db694be7b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/PCCE-065-configurations-cd-20260824",
+    "sha": "25f2b38820cfbb9c90d24b896249e37d0c81232c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/PCCE-065-configurations-cd-final-20260824",
+    "sha": "e58a75b3ef721d3cc5e93be62bfd59cac72e7516",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/PCCE-071-sandbox-hardening-final-20260824",
+    "sha": "491348440a012e88510c803049007a16b90104ca",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/pcce-052-runtime-profiles-final-20260824",
+    "sha": "8b3b08ad3b9705b7981080e5414c6b3aecb06afe",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/pcce-053-environment-final-20260824",
+    "sha": "0d2acde7fd0356e1cd944c615b5980cd2e568cc7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/pcce-054-clean-install-final-20260824",
+    "sha": "4953f09d79dc30149ac44034bfa03c38c0732a63",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/pcce-056-installability-gate-final-20260824",
+    "sha": "78af7999a8190256798a78b4aa51a9ad9c1f0e58",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/implementation/pcce-070-threat-model-final-20260824",
+    "sha": "020284642f438dd35e6bc2d6ff41cdeb8b47bbd0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integrate/finish-and-main",
+    "sha": "b4b9a5110ae8914add6267f8fc7b028872a60817",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integrate/sca-622-production-authority-gate",
+    "sha": "bae4787950c878fb31c3ad559be1cfca306f59a3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integrate/uiir-native-cli-subreaper-port",
+    "sha": "1ca4db980ab31ab863ec241349f80024b9827eb3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integrate/uiir-verified-grok-quota-glue",
+    "sha": "e8574ac1050b0fc406a201917209a579b2e17d26",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/aae-scg-main-sync",
+    "sha": "f77f630036f475fde2c816a1604590c9eb096858",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/aae-to-main",
+    "sha": "0cb7e093f77b295addd4503683221f0e0ad4fcef",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/casf-final-recovery-20260823",
+    "sha": "57be96d4457fc8176d64777bafd91a9353b909f1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/casf-recovery-20260824",
+    "sha": "a486c0fd4e65d10a4a96b43a0818b3b4d0242cdf",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/eaaef-casf-final-20260824",
+    "sha": "3331a4383c03311a6e19a4eaf517d6eb64421f47",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/eaaef-casf-followup-20260824",
+    "sha": "20c285261f9be689a2cf7b87c0f1c6e02aacc5ce",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/eaaef-casf-main-landing-20260824",
+    "sha": "28e5446a3a5d9996a9ca4da3ea4c6a9decca122f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/eaaef-gitlink-rebind-20260823",
+    "sha": "bfff038cba6771d5c4414987ff30bdd1b4c8201b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/eaaef-source-qualification-landing-20260825",
+    "sha": "92d750191f03979ab7106606230140eeef77e48a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/external-agent-autonomous-execution-fabric-v1",
+    "sha": "3b71940c9a565a0dc4292f295042de6a70789b32",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/pcce-v0.1-final-20260825",
+    "sha": "8d629ce7f2ee5a6109dc92e84b47664ae896ddc6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/stale-worktree-consolidation-20260825",
+    "sha": "d7632e28260d5bfe29cc2c0ddc29d31a0472bd16",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/integration/validated-open-prs-20260914",
+    "sha": "95092293c98858c7a6fc0c67d771f4a687004ee2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/lizardperson_mcp",
+    "sha": "a7a5817509a8d8a8c2cb79b26a35d006d89723fb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/merge/mcplusplus-1.0-into-main",
+    "sha": "34397026c3260023482996e54f36b7f53f08811e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/merge/pcce-unstall-onto-main",
+    "sha": "330fb84063d4d2c8c28a3b66ce508bdefa7d0e57",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/operator/sawm-m27-prefix-repair",
+    "sha": "bbff12f06ff200b0f9280c50ca3866e1a752f3e9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/p2p-worker-hooks",
+    "sha": "4a6a3e781fd5443fe62cf0fe22d21a567590e5a7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/plan/pdr-restack-onto-main",
+    "sha": "39268d8a2355839f4da46355047498ec10474ddb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/plan/proof-directed-planner-doctor",
+    "sha": "43934dc37dff3b229f9fd6f83f2d0d16276b824b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/refactor/agent-supervisor-domain-layout",
+    "sha": "ab984496fb1109700ec37ed91bda5b29d7214ecb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/PCCE-030-patch-scope-binding-20260824",
+    "sha": "8a846a136cb6787620675b282e715809cf293106",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-binding-regression-1788938539",
+    "sha": "8dae62f9c35894ee4ef471415e49ce2b3603e70d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-closeout-qualification-20260913",
+    "sha": "b491e052006f519186a33d7a42062710a3efcbab",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-cooperative-parent-maintenance-20260911",
+    "sha": "02364562c681b076b208142c8ee3d8d2d9a7aff2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-current-source-retained-maintenance-20260911",
+    "sha": "9a67deed13da42ef3b665509c98aadb134c63bb4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-empty-wal-native-merge-20260912",
+    "sha": "2ca7adb09cfd0c3c3d99b86a0176abc3a79fc810",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-goal-lifecycle-status-20260913",
+    "sha": "5205bd1df8014015d384158ccd13286a026f23d8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-local-import-selection-20260910",
+    "sha": "2ad3a579086f4fd045af88eca50e1847256884d6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-native-consolidated-forward-20260910",
+    "sha": "a773895c0bf3dbd0c1a5545fdb4522be2739ebea",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-observation-main-1789062350",
+    "sha": "505e8f38ac2bf95a630de1964d206a87904805a1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-owner-observation-request-20260910",
+    "sha": "b15159c656c95b38cf26b7fd6d1a47d039c0521c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-owner-reclaim-1788958507",
+    "sha": "eb0db6728023725a5802bd1443ad91b4e90ea1c2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-probe-1788952764",
+    "sha": "3adb6540c791f0775aa43a6658241fc1f9c05bf6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-quack-cache-isolation-20260911",
+    "sha": "1018656f1671edec7bec5a5ef888388fba17fc42",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-qualified-status-20260910",
+    "sha": "290b6d2167069e7608b369459c1f88305d148bd4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-receipt-retry-1788941918",
+    "sha": "e14aaa481e6081a104081df5ae01720c8a396615",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-release-validation-readonly-20260913",
+    "sha": "e8cd1c8eff7a5df11690f6a5091931c987182dc1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-replica-promotion-20260910",
+    "sha": "51b24d305538460f779e7885984208d4116af5b9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-requalification-1788945520",
+    "sha": "07a90b822b481d6e3e71f8cae9354444d411b5df",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-source-repair-continuity-20260914",
+    "sha": "1407289f82b6fb5c19221c346c50e6b200a7fc93",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-status-sampling-cadence-20260913",
+    "sha": "8da15855f55e48d3a6ae5710c1b6a160c4062df4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-supervisor-binding-schema-20260910",
+    "sha": "e4386fc2334c40ee33361ffa3726ccaa0833cf1b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/aseh-terminal-lane-recovery-20260912",
+    "sha": "aa5e43ec77ed710fb9cb08c8270b4c93f49743e5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/bounded-native-status-metadata-20260910",
+    "sha": "3b178d3339536be08516ce81dafa87441e65dc1b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/bounded-process-fence-1789010527",
+    "sha": "456d5c40e2d6a4454a40083fefd56a3f76f6ea10",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/callback-birth-schema-main-20260913",
+    "sha": "308ac2e3e615b34c3619391461d56e42c3e2d92f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/callback-causal-envelope-main-20260913",
+    "sha": "3a2d45580f12cec373a38879e59768aafb7f83f6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/candidate-lifecycle-delete-journal-20260911",
+    "sha": "818f6f865e50a8bdbf29ce7f3bdf6ef7adc076a0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/candidate-lifecycle-journal-recovery-20260911",
+    "sha": "d37cfe37fc09bf66a0c2126db0c74290cfd282f1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/candidate-return-custody-join-20260910",
+    "sha": "7311b3f6d9ae87a02f4109f15426a6e3c1d50962",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/database-quarantine-custody-20260913",
+    "sha": "b145e33f8d0101babf66a3a7701f0ede23def515",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/derived-reference-pagination-20260913",
+    "sha": "147c13e2e3c192b2a149140cf5c3f30732b727e6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doctor-git-maintenance-custody-20260912",
+    "sha": "421b50d38ec48e46e72925732a52eddd924457d5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-binding-baseline-1789034647",
+    "sha": "e5e518505b682e768f57d265c287d2ee0372637f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-callback-baseline-1788975493",
+    "sha": "0f3c606bcf4da629920070ce242f1c87e961fb61",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-callback-evidence-main-1789032109",
+    "sha": "0c644ff9288bc473eabf665da8191fad5e5eb48a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-callback-generation-main-1788997648",
+    "sha": "66b22585dab911cc77fb01f844af20d8ac533619",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-callback-port-1788975493",
+    "sha": "6c4c69f14172d2b0507bddd60f18c9343b3d88b2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-candidate-diff-main-1789198445",
+    "sha": "d7551bfc66a1413c6cad960af5341c439108635d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-captured-provider-main-1789174345",
+    "sha": "ad1306f3b32d5d22a5d9207f262eb9548bc2eeab",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-claim-diagnostics-1788953549",
+    "sha": "0b1bbb118fcaca48d57b18c75f85a1eb02113b00",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-diagnostics-1788946341",
+    "sha": "450ad3da99a01071e9faab61dcc83fa7320392de",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-exact-boundaries-main-1789152547",
+    "sha": "466dd37c25bbc3c8cc428e9b8c6103bbfcfc9cf5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-landed-barrier-main-1788987181",
+    "sha": "8ef1c8b0bcd52c938a1e5b5a8e98eba16844fb94",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-native-binding-main-1789034647",
+    "sha": "48f9182a65cf168bfeefe94c407602b468276e96",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-native-maintenance-drain-1789244072",
+    "sha": "de9566b78032d0e51b6262f4c6c924a5f2855b0f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-native-reader-1789060235",
+    "sha": "d1dfd56fce76fc8ec85365a9fc2a4805b08566d8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-probe-blocker-identities-1788939827",
+    "sha": "90c7b3b60df7dd098051a3b736ecda6357607004",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-recovery-audit-1788942612",
+    "sha": "e14aaa481e6081a104081df5ae01720c8a396615",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-resume-snapshot-1789045719",
+    "sha": "effa21ba9a84bdb0d452276e6b4c27ee09a0c927",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/doep-retained-fingerprint-1789038272",
+    "sha": "832ad0651872608c1c633c7332343ddd5aa20555",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/fleet-checked-publication-main-20260912",
+    "sha": "f2ebd94b29bb4fc5f0deb16c76e0227ff5b28d79",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/fleet-native-status-failure-evidence-20260913",
+    "sha": "ae34614122404448bad93414d0ffe5e1d0af2541",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/fleet-storage-main-20260911",
+    "sha": "2c614200c44c4cff17ba9fc27739292f6cefc44b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/generic-portal-cleanup-custody-20260911",
+    "sha": "be0e79e5e71c4842f9103e66af076536dec9e233",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/generic-review-omitted-paths-20260910",
+    "sha": "7dcf2ca2a53f7d7556d1b516f1fccf687f224123",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/legacy-cursor-migration-main-20260913",
+    "sha": "1ab408159243ef840b7fabde98b25103dd2cf340",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/legacy-quarantined-predecessor-20260913",
+    "sha": "d33e7c015e267966c210757d2ca42e313113b501",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/legacy-unknown-callback-custody-20260911",
+    "sha": "2821c425ee5564d81d2b6f51e5ef741b5ed45043",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/legacy-verification-retry-main-20260912",
+    "sha": "242666b7e5620ee985ca04d532178beb8a98f730",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/lgcvf-exact-six-080-native-closure-b6f592a3b",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/main-doep-native-recovery-20260912",
+    "sha": "fee935ca4181964e381adc8dc35797408dc5e856",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/main-empty-wal-preservation-r2-20260912",
+    "sha": "4157177655583266b25a1658ce5a748e541be5fa",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/main-quack-cache-isolation-20260911",
+    "sha": "b570355bb0af26a41c8771c2d7789b420226a1b6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/main-workspace-parent-custody-20260911",
+    "sha": "740b5d3a46842db03b72ca63559232ab539c5be8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/main-workspace-quarantine-20260911",
+    "sha": "c2562a69024ab25e53e2afa74252302e5773b3e1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/native-board-writer-custody-20260911",
+    "sha": "f68fdfd253a75445dc96b7f8c5fb8e859588c792",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/native-repair-admission-guidance-20260911",
+    "sha": "03d6e40121264be091f63ab4b7f7218794825313",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/pctdd-callback-1788954120",
+    "sha": "11a78789eadb0beb94f5584d9a880e0da8a8f1a4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/pctdd-claim-custody-1788968570",
+    "sha": "0456a27f0e1f4cffe72bec7fbf8bc83ae3724468",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/pctdd-claim-safety-1788972094",
+    "sha": "0f3c606bcf4da629920070ce242f1c87e961fb61",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/pctdd-dead-child-recycle-1788943041",
+    "sha": "6ee7c68bcf235fce4e41f446dc4a955814d0a99f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/pctdd-peer-deferral-1788946913",
+    "sha": "b83de8345655a2a29ca9648de3e25ccd3e049e05",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/pctdd-recovery-guards-1789015053",
+    "sha": "114668d279b6ddfaf3bf7da21d1df71c212cab80",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/pctdd-recovery-review-1788985303",
+    "sha": "ee11c5a3eceffb18af84cb2c4ef98ef1e8611faa",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/recovery-heartbeat-main-20260912",
+    "sha": "fc0f51ec22a666a1ea47ef9497c0913ea097d1ba",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/retained-observation-cadence-20260913",
+    "sha": "9bfedc9aeefe3d2680c39743979c115f3d14382c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-attempt-observation-job56",
+    "sha": "149a620e6d38fbbca698b32eb2452626346d63ca",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-custody-fixture-job55",
+    "sha": "43247e8536cc9bb46e3079f3782d72a094912f9e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-dispatch-fixture-job54",
+    "sha": "8f5d6f4ab029bd82ed0475a59bc9e58dda29e6ce",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-historical-failure-replay-20260911",
+    "sha": "9aed6145bada88118696c94dde07b9fa4bf8721f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-history-and-custody-20260911",
+    "sha": "2fb16f5eee1588d3e36c504e47323a1ce8b7eab5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-job20-forward",
+    "sha": "586c47b7cd776e9e07b7ddbe64b4895a91b7f7ad",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-job21-forward",
+    "sha": "322fe225d35dfb3b5fd4cc25065350e2294c422e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-job22-forward",
+    "sha": "d4c168c36b4b8e102fd69bc1c8b1efd80aa4fb64",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-job23-forward",
+    "sha": "e6b7356acc941677c34fbb3fd932a60ea437c3d9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-job26-forward",
+    "sha": "844ec29e6a9222383bf3213ee12e4240f19c8618",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-job26-generic",
+    "sha": "ce48bfa7ac4e62d630c49d0f9102efbd2f005f22",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-job27-forward",
+    "sha": "4ef5dd51591fe41ace069278f2e6d6cefb764b45",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-native-dispatch-drain-20260910",
+    "sha": "7c17103a4101d4663ea32935feaa699595e48835",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-native-quota-session-20260911",
+    "sha": "a7e0ec37798af13a1d3f03758f853c55b59c08e2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-native-workspace-custody-20260911",
+    "sha": "504e205cbb1c616e445275e90370215ad8d39a4d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-native-zero-provider-forward-20260910",
+    "sha": "2d6c75d89592debc5d5d0ac722284ea3af474da0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-observation-budget-20260911",
+    "sha": "cdbed07045293f34e3c293405a02fbbb6e55cc94",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-owner-observation-diagnostics-pr207-20260914",
+    "sha": "13538b30e35df6674c3ab12728a737aa22450a03",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-pause-reader-composition-20260911",
+    "sha": "76955bb9f445b9082846059add5d9f08b79078a5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-peer-status-20260910",
+    "sha": "0cd73829b912b0c4d25f758a2bfedb71f0b1f58a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-phased-graceful-recovery-20260911",
+    "sha": "f5c5fbb1a750c0efda765a8d49e1a14223f5ae45",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-postdispatch-capacity-custody-20260911",
+    "sha": "ffe5714f1f618c1f4bdad83463d3d3b87b5d11d0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-preflight-native-bootstrap-20260911",
+    "sha": "354d1977fcf31d2a4b0eaabdf087d99c374cb968",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-reader-adoption-20260911",
+    "sha": "40451b52c133b943818515a86e0deb95d9fab812",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-recovery-scope-diagnostics-20260911",
+    "sha": "99f7ca10ec5a1899b8c5144182bbbd4cda883acd",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-remediation-native-job19",
+    "sha": "0729a8b02cda406df35cbaef6035f9d1306be01f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-replica-promotion-20260910",
+    "sha": "23b21f35498077635ec40d8b4d337363a8bb2418",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-retained-attempt-fairness-20260914",
+    "sha": "0c84b425f8bdc9c6af91fe82f7c811be69c1f812",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-unresolved-interruption-continuation-20260911",
+    "sha": "e860d9315acf4724a813798f3aa2419b5f380ec5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/sawm-writer-custody-recovery-20260911",
+    "sha": "6953389d77ae421dc62421cb1a70ffdeba59b8b0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-bootstrap-closeout-retain-r9",
+    "sha": "84320d8bd3a2612bbfa2e7a7566e5ad9714f7d56",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-bootstrap-mode-closeout-r8",
+    "sha": "d5432a5547baddf5d778977c867470ebf03cd755",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-callback-source-identities-20260910",
+    "sha": "abbd4c5d0672d43189d9ad2c45abf6a86c8406c1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-canonical-receipts-1789106391",
+    "sha": "cb972ab22305f309551b504ad4439ef195ff3b84",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-clause-current-source",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-expired-claim-settlement",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-legacy-owner-queue-20260910",
+    "sha": "0a4fec9682e6c0d295eb46364d7e2248be88606c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-lgcvf-exact-six-080-native-closure",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-main-baseline-1789158715",
+    "sha": "c57eced44ebcec1f85038e836410b4c974768afe",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-main-integration-1789158715",
+    "sha": "9abc424d40c1a4df8aae147097839d159a4f74b9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-merge-pair-deferral-r4",
+    "sha": "e867e6673978a07e6c9545a0f6a5c1181aff5693",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-canonical-receipts-1789106391",
+    "sha": "b4e4451c9740bb9204650b305f2c5f8239f8f7b3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-import-producer-20260911",
+    "sha": "66e9b6f6d4f765fb12910a53659cb6a32c4c7a34",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-merge-owner-bootstrap-20260910",
+    "sha": "00adaf6e4bb26706d10541f48ab4d14a12bec77a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-owner-port-1789040286",
+    "sha": "28ba9976e230996a785038eb5da5b76b4bb8748b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-owner-wrapper-maintenance-20260911",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-preserved-ledger-1789084778",
+    "sha": "a5b6780b32b5114d5fbcb2234f06837786855f94",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-queue-adapter-20260910",
+    "sha": "c339cb9bb654692dcb32f2b69595f24f8a37dec8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-queue-observation-1789063161",
+    "sha": "8c88842b7377866a6f0f11a558e934892ca49e88",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-native-source-transition-20260911",
+    "sha": "37f14415c7fcb8070061c915a5425519614379ad",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-owner-dequeue-1789040286",
+    "sha": "614f295c121a7e6d444840ae8defff704a384913",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-owner-recovery-runtime-20260910",
+    "sha": "96e9deffca6316f5abc05bb75e96244e713846aa",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-preserved-ledger-1789084778",
+    "sha": "1e9021cc3de7039c07473a40b087224c3ef9bdf3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-051c9a77b595da23-1789519911677248359",
+    "sha": "fba8a76b3451e362a3938b6875791fb0b0c0147a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-0a2cc46abc36f40c-1789677823601791843",
+    "sha": "5432c34e15e322919fe470fff4b717d97175842d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-3a475d3f04539d8f-1789523759865409912",
+    "sha": "cf50474994c06dd715c4b808a99493215e130fa0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-7a04b9956983c2e4-1789670099867384129",
+    "sha": "037bb1d376b4a6e00d7c8bac8a76398aadab1153",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-8b563182447998ed-1789527661796063467",
+    "sha": "3a50cb4c43c3648a1a512d397748f709a3fd55d1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-9c7c2e8c63d60626-1789666220116027861",
+    "sha": "01d9f4ebf1306da23a8be60cd2b7f57963440884",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-bd91b21327cf8ac0-1789673969567945934",
+    "sha": "f612a33a6536f12a13720e959ca61884536a5f38",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-d3fa95e756154300-1789692554772841208",
+    "sha": "b08b46a95ca0c20af985d3705ca4a3e5e11f59a8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-f77b807bec133da0-1789472063536959785",
+    "sha": "dae613ad72ac49e75a206c44188f3b6b78c6c168",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-fade72100f3719d8-1789798490032051521",
+    "sha": "4683e69a08cba19317b5e53a61f0db907c7c44c1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-ffd559082e93fdfe-1789516064496405409",
+    "sha": "a05f5f66072987eccc06658078dbf1cd36359038",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-publication-accelerator-source-84320d8bd3a2612b",
+    "sha": "84320d8bd3a2612bbfa2e7a7566e5ad9714f7d56",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-queue-observation-1789063161",
+    "sha": "cf8407288a639154e6412ca55fdaf9698ec9f5bd",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-queue-owner-1789018387",
+    "sha": "9ccf71271a634f8f17b6def2da6703006ea4c33c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-queue-retention-1789014017",
+    "sha": "dcabba309a68af3c9084ee70feaea30554756904",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-queue-transactions-1789018387",
+    "sha": "b32c6c83ba0b66313008083419384769018e53eb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-rearm-unbound-post-merge",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-rearm-unbound-post-merge-r5",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-recovered-native",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-replica-promotion-20260910",
+    "sha": "529544a4707b70ae6d26a30cafda85c03c301d95",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-retained-capture-driver-20260911",
+    "sha": "8747830c9e86df8bf574a24452f89e321119039f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-runtime-typed-settlement-20260914",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-semantic-reconstruction-20260912",
+    "sha": "49c8ee99b356d5e86502c601c67b1317a3d21cfc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-stopped-capture-recovery-20260911",
+    "sha": "7a6e5e592d330a51bd4112e33e516a9951870981",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-supervisor-clause-autoheal",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/spar-supervisor-clause-autoheal-merge",
+    "sha": "b6f592a3befee6fd2d4d81265c36904acd906353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/supervisor-observational-git-20260914",
+    "sha": "bab32e1f14a8b6a081f167d734d55d72f3e8b9c2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/supervisor-recovery-feedback-20260910",
+    "sha": "c7d748666618fc9dd29d1a6bf1b475b7e66bed16",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/supervisor-startup-callback-ownership-20260913",
+    "sha": "d31f22f21f6ef9f7d09b9944d9d784274996ebfa",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/terminal-lane-observation-20260912",
+    "sha": "08fa9a506a4f5edc634fbcb1d738b162fee3eb9b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/watchdog-active-storage-diagnostics-20260913",
+    "sha": "7f6b4d0eb71094dcdaeb25bac838f0f0277ffb92",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/watchdog-active-storage-main-20260913",
+    "sha": "083103d21421bd2ecb32c806826d947d97931f2c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/repair/watchdog-native-status-diagnostics-20260914",
+    "sha": "adbb87b06a01393f698fd4076fa390f3ef7a8661",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/transformers_git_submodule",
+    "sha": "6e84ea0591c8ccc632161f50bd697c7eab0c53b1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "ref": "refs/remotes/origin/worktree-2025-12-13T03-49-09",
+    "sha": "d341006e2539935e9027e44d2bd0618704060c69",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/ergoai-default-on-managed-install",
+    "sha": "6fecc4b4bb58e41170518cc0624c69e5629d6577",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/ergoai-into-main",
+    "sha": "1f26ec536b9f99e2cbd76ca6612d4fa6be2a0f77",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/incremental-proof-sealer-v1",
+    "sha": "1480ea2b4c54dda94c64b792c0af621cd764dbbb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/logic-governed-compositional-verification-fabric-v1",
+    "sha": "c4b533a8b68ff4aa3d2d6f5b8fe244682e29a0b1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/logic-platform-canonicalization",
+    "sha": "a0c1793ce9375eddca9ebf66a371574921efa540",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/proof-carrying-context-engine-v0.1",
+    "sha": "777f2dc8861bb756141302e014b202a21d363f76",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/proof-gated-contract-repair",
+    "sha": "014b8ea69721d8e0f0cd15b36b83bc5e8bb6a29c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/proof-grounded-ir-learning",
+    "sha": "baa41679c2649715ef7a7605a23c598a5c380e10",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/semantic-compression-governor-v1",
+    "sha": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/ui-ux-ir",
+    "sha": "9d558ad706e83a944bbf3b66508f969041cc9518",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/agent/upstream-voice-action-to-main",
+    "sha": "b20d0fb41df916f07c2a902c83966fb174219780",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/autoencoder/legacy-v1",
+    "sha": "ddf6b79467b68159650df81befc288c8553df664",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/autofix/gpu-enabled-tests/manual/20251101-180821",
+    "sha": "e9799c40eb7b1d5901a0aebfd30a8692211db0e3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/autofix/gpu-enabled-tests/manual/20251101-192232",
+    "sha": "deba03c43c5fbc152cb1a1dcfa4191ff3d0912af",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/autofix/graphrag-production-ci-cd/fix-permissions/20251101-095207",
+    "sha": "668ad5c183573cc12d6fcd6a798bd263a1fb04ff",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/autofix/graphrag-production-ci-cd/fix-permissions/20251101-095258",
+    "sha": "6786665515722c832bbc988930a4d6eab91b8acb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/autofix/pdf-processing-pipeline-ci-cd/manual/20251101-094954",
+    "sha": "dba5a60a7c371235489b13fc50629020af652994",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/autofix/pdf-processing-pipeline-ci-cd/manual/20251101-095443",
+    "sha": "ab3db0974b776b9facd9afbc8177c9d412cec4f4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/autofix/self-hosted-runner-validation/fix-syntax/20251031-181445",
+    "sha": "9528604066af7eaa53c7fb31c2428011e411cdaa",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/benchmark/semantic-roundtrip-20260726",
+    "sha": "5f9bd2255991e8c80f45c481dd0054da3f8fdab5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/codex/eaaef-094-ducklake-quack-rescue-20260824",
+    "sha": "75e2422e31a63eac2a7daab348761863ee871aeb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/codex/eaaef-094-independent-corrections-20260824",
+    "sha": "9ec41b645a676c72b5da72ca25a09f1baf0058a9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/codex/g203-verifier-full-receipt-20260726",
+    "sha": "feada0db461d1dde8e4970ce98c2ddbeb8756da1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/codex/integration/pre-origin-main-merge-20260719T062311Z",
+    "sha": "d6011c62d0a0f9cb4d3ec05bc0411b0e3f383b65",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/codex/lcr-final-source-20260828",
+    "sha": "a8191d2510658f330db78b43bc4fad3712973bf0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/codex/pre-origin-main-merge-20260726T194500Z",
+    "sha": "3743ba296978f727f0c687d8f340e332a0eef1bb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/codex/snapshot/main-20260719T055913Z",
+    "sha": "d6011c62d0a0f9cb4d3ec05bc0411b0e3f383b65",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/add-autohealing-workflow",
+    "sha": "73f2f5f4d9e27938b8d9298aa78eba9cc758ce3b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/add-counting-mechanism-workflows",
+    "sha": "46a7c69d9a54d903c67cb064cf0a601d3511d286",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/add-f-logic-integration",
+    "sha": "941982caf389789db300b52410aa75dd8fe80501",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/add-github-actions-workflow",
+    "sha": "99ce5640ff2fb33555b9b6793f5df5c961719837",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/add-jsonnet-conversion-util",
+    "sha": "c359efe8c51e1481cc5938fcd81099a152129a39",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/add-scrape-the-law-mk3",
+    "sha": "0ce7448c88e6564a4cf7008f2fc9f2b36ebd9ab8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/add-support-for-cli-apps",
+    "sha": "140627df40ac1868abd901f61c3fd816574a8d72",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/add-verification-framework",
+    "sha": "07bec96422d675e9a4ea054e463b23b8d071d712",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/auto-generate-error-reports",
+    "sha": "ffba980c77b033d350319da31c0044ad40adcba7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/check-auto-healing-functionality",
+    "sha": "7dca5dc826863fc0c00b0547baeb2d5f3e6f0cca",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/complete-pr-438/--copilot--complete-pr--438---complete-d-20251105-155732",
+    "sha": "b1d8c27e9f11b1683fd8a6e2e65090a4ce10791e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/create-fix-workflow-pr",
+    "sha": "49db6110a5c1f55a3a6abca965000e9d56802024",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/create-sub-dashboards-finance-medicine",
+    "sha": "92f86e034452cb1e9ac6cad7df2aacfc3e1c7520",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/feat-logical-crypto-exchange-security",
+    "sha": "1d17e8caef93c7f5d7876363b2033a963c9460e3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-4e57d0ef-0fb0-4ebe-aec5-eab05ed57de3",
+    "sha": "cf673a7b933e7530f3b127b6499b65150f8660c1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-all-open-pull-requests",
+    "sha": "5c350882a22b8de9ca2ce0c759e5b75e073a086c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-autohealing-workflows",
+    "sha": "53c20a1ea11ee0eac4e57d91ab24925fc8c861f5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-cdc2ccc6-2be3-4486-9190-d0b8c4ec1bc8",
+    "sha": "e0117faae43a3008cb750c7acd5a2d1631b3f203",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-copilot-agent-workflow",
+    "sha": "c3dcfeaa78fee360b7c260ac6b6a63b3bd9170f9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-copilot-invocation",
+    "sha": "352a1c3824c36da505689d3f93300ee76360020a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-e9443f29-b7dc-4271-bd67-af0aa458db51",
+    "sha": "90930907ba0184efbe2d711d364c66bef01d64f9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-ed10698b-52ec-408f-aa86-f35ea2b1c0aa",
+    "sha": "24c6aeedc9d75f3106093e221a59a58be8080076",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-failing-github-workflows",
+    "sha": "29125ce591e934d6b550a43e8c61f5f6777e7094",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-fb6ea17b-e629-4a7b-bdfc-ac80573f98ca",
+    "sha": "a16ff61e73bc986384cbfa8cdff4ce8691090e3b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-github-actions-failures",
+    "sha": "53586097a54fb05aa23bd29ebfd39260b66498c9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-github-actions-workflows",
+    "sha": "becf2a09155f7b7e42f216184b23bfc7d1e7e0df",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-github-actions-workflows-again",
+    "sha": "09b36acb9aed1f8fbe7cb4d5c1c53cb2439b21d5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-github-actions-workflows-another-one",
+    "sha": "10d5a6263ae76d68fa2bfdbc19298f93de45a512",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-municipal-codes-section",
+    "sha": "5b3fd36dd7c2927eaf16089e0b14215cec3fc9aa",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-self-hosted-runner-validation",
+    "sha": "d3838efdc4a64d4430a906757b25404209695b61",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-submodule-issues",
+    "sha": "6aa4eb8ddf2ef3331b46b997b30febd9348e1c5f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-workflow-autofix-scripts",
+    "sha": "bdc117b7ac2cc143a0a08b433e2171e89e6984b3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/fix-workflow-issues",
+    "sha": "74d088a41d85a1708c65dfa4a458afb4ee12314b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/implement-query-caching-mechanism",
+    "sha": "9c9fae18cc3674ffcebc6218d00a72f0be7f7bde",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/implement-test-stub-files",
+    "sha": "8ffb1ade49e43bcea4b5318597ed69de4fa1a082",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/improve-medicine-dashboard",
+    "sha": "c0fb888b56719cf127d53d94a7aa30f199a95b5b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/improve-pdf-parsing-toolkit",
+    "sha": "91aca1b0a3bf3b06421a602e8064f9fc71866c80",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/investigate-github-actions-failures",
+    "sha": "52c90d5d2f7b8b84c3e6849ed3e02c238a6e9c26",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/py-conformance-real-backend-20260705",
+    "sha": "f4358440effee8fc2fd436fa06a9fa843a11b8f4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/py-zkp-state-check-20260705",
+    "sha": "b61b274dc00d30063fc220feaaffa04a86166654",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/reorganize-documentation-files",
+    "sha": "15d9dfe9173f662c2ce0bff719c346c6fa9b29bf",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/review-github-actions-workflows",
+    "sha": "593da8340ee2fdc1018f2fbb58cdcbba96c26e49",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/review-repo-structure",
+    "sha": "9c81b74061535da0e502dd61b67f24cb8754c7e9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/sub-pr-344",
+    "sha": "2470df97d20763d6ed0e3f8a01efd6c59e78d8d8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/sub-pr-348",
+    "sha": "2bf7534dc02edc2c37ee6c4ab75be4541cc61778",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/sub-pr-354",
+    "sha": "9f93c7c835d0c92b3641236cf0e476aa537965d6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/track-ws12-execution-status",
+    "sha": "cbbe62ade7326c446c7c4ef699b7067394137461",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/update-documentation-and-review-code",
+    "sha": "430c98cd681c6bf83dca3a5fc1ca90f9104fd9e7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/update-documentation-for-mcp-server",
+    "sha": "640c7ae3a3c9ff66a382965abc291b1f5b0dc1c7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/update-logic-submodule-documentation",
+    "sha": "5a06562d395acec69b591c0ee3a26d63eeb06237",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/copilot/update-session-completion",
+    "sha": "2b8cec4f585e1c13472fbe3493a69f8d693a6203",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/feat/incremental-semantic-index",
+    "sha": "b572255d5f8f4f4f8136df43f58dae44f8e1b941",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/feat/pcce-008-proof-context-v01",
+    "sha": "6eb5803548b070a55c81d4631f13996d5c28137b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/feat/semantic-state-contracts",
+    "sha": "1330038f626ef92993f03d46f21e1a57719e9c25",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/feature/legal-corpora-reindex",
+    "sha": "df53f62e06d00ab69f53aadf0ec0d997c1647d87",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/feature/logic-intent-legal-gate",
+    "sha": "4cea48f66259be0269bfca4892de477154ec3fc2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/feature/patent-legal-intelligence",
+    "sha": "06af38328401607798f7ec70ed48af781480d089",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/feature/verified-gui-optimizer",
+    "sha": "628da00c7e839dc5634543c365de52c4e14827ce",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/fix/eval-006-test-weakening-rescue",
+    "sha": "2f24ec532ed31d634c203d1734baf326e4f8d636",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/fix/hssl-postrun-readiness",
+    "sha": "feada0db461d1dde8e4970ce98c2ddbeb8756da1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/fix/srt023-cid-provenance-20260727",
+    "sha": "9a65878e600ead6c68d054260aeb66e14d5938ae",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/fix/srt027-terminal-gate-20260727",
+    "sha": "5d8336c387353a284ab6a078cb5ea2fd897da6a3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/PCCE-062-dynamic-plugins-final-20260824",
+    "sha": "777f2dc8861bb756141302e014b202a21d363f76",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/eval-001-1b8285916458-attempt-1-1785168675",
+    "sha": "c9f725736ed294317f454fcfd5ea7bb9252e3b51",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/eval-001-1b8285916458-attempt-1-1785168995",
+    "sha": "c9f725736ed294317f454fcfd5ea7bb9252e3b51",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/eval-004-a3f5ffeca8ba-attempt-1-1785173357",
+    "sha": "8bc830dbb97122e99fc859a2a2b1209a20535ae4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/eval-005-0388426e5899-attempt-1-1785171064",
+    "sha": "9bb36b608c8ca3d5e23d55c2fe491f3f277aebd3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/hssl-bench-001-1b0a31c8f30a-attempt-1-1784846754",
+    "sha": "afd7c626e7c434be31f2d141fa7348e8ac850156",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/hssl-bench-015-0871b9af173a-attempt-1-1784868175",
+    "sha": "483790b4dd6502162bf4132e7cefff774677805c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/hssl-bench-033-912315a17807-attempt-1-1784910888",
+    "sha": "3e053f6edece026fef48c153aa5c4d62a50da3d2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/hssl-bench-039-0ff6f01997b4-attempt-2-1784915651",
+    "sha": "38e5bca53825a7f98a746236283546a214d9e5f5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/irf-010-e550b30c94ca-attempt-7-1784941497",
+    "sha": "b702d8319530b6d02cc8578852e58bbf79872fc7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/irf-011-f869f6e47cad-attempt-3-1784941497",
+    "sha": "b702d8319530b6d02cc8578852e58bbf79872fc7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/irf-012-502a60a00bac-attempt-5-1784941477",
+    "sha": "b702d8319530b6d02cc8578852e58bbf79872fc7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/pcce-060-benchmark-freeze-final-20260824",
+    "sha": "182a454a88c487983a976266d79fbf0680b019ee",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/pcce-061-typed-structured-final-20260824",
+    "sha": "da671b50ee600538cbb3cdb508aa755ef34dfdf7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-030-e099032d086a-attempt-1-1785184763",
+    "sha": "503df420477f7d064a862dd513b43d4f16b7a0cc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-050-149e38b5b404-attempt-1-1785188997",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-050-149e38b5b404-attempt-2-1785189313",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-050-149e38b5b404-attempt-3-1785189318",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-081-8e0b174aeb71-attempt-1-1785188316",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-081-8e0b174aeb71-attempt-2-1785188632",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-081-8e0b174aeb71-attempt-3-1785188637",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-082-c2756033f190-attempt-2-1785186971",
+    "sha": "3a26e0ca9f1d5eb2c214fc0bbd8fc472e77843ea",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-083-9de7cfcd71b2-attempt-1-1785187973",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-083-9de7cfcd71b2-attempt-2-1785188291",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-083-9de7cfcd71b2-attempt-3-1785188296",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-084-58c89f9dd2f5-attempt-1-1785188659",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-084-58c89f9dd2f5-attempt-2-1785188977",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat-084-58c89f9dd2f5-attempt-3-1785188982",
+    "sha": "84ee2a8ac80b59e14a7093744d183ba221a01a27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat2-060-faf8aaffa5cc-attempt-2-1785229487",
+    "sha": "bca6f894db40cffb2de8372ef830c0bdf4068535",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/plat2-060-faf8aaffa5cc-attempt-3-1785229502",
+    "sha": "bca6f894db40cffb2de8372ef830c0bdf4068535",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/portal-lir-hammer-121-attempt-1-1784819453",
+    "sha": "7652cbfbea89a8b7b7644f73f54c5cde88f1ecfb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/srt-001-1eaf682e0d1e-attempt-2-1785096498",
+    "sha": "28370554d1da4a9c555dd21dd9d90a0fc0ecff5d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/srt-014-fd05f1421440-attempt-2-1785109873",
+    "sha": "82b529e78db8fdee87f13b5b83ec1486f5446a81",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/srt-015-c1fc421f3b56-attempt-1-1785155548",
+    "sha": "0731914afa99d603623ff3bd70b324ca0f801931",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/srt-020-8fe108e8ae5b-attempt-1-1785096123",
+    "sha": "28370554d1da4a9c555dd21dd9d90a0fc0ecff5d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/implementation/srt-025-623c2b7a8f63-attempt-1-1785137074",
+    "sha": "a6a1de4d438cc66ce80923e78f4771e5ab64bf8b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integrate/datasets-to-main",
+    "sha": "ccc54beb22774263b9a277eaf0e366fc85a76af5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integration/aae-datasets-release",
+    "sha": "38cfb624e617fc878e627c3ef66d92a4d8817e59",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integration/aae-scg-main-sync",
+    "sha": "3af23d9d20e671d2e5260c3509623dba6dc29486",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integration/cvesir-ipfs-accelerate",
+    "sha": "3952dae8925e9f469632ed53eccf1678a924fd4e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integration/eaaef-datasets-recovery-20260823",
+    "sha": "dd898fe669ca9d4740fafe5123bf5f6ac91c7bb0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integration/hssl-benchmark-main-20260726",
+    "sha": "26ade2d5a7f26e5975ebd7f1a828541f020d7fb4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integration/lgcvf-task-work-to-github-main-20260828",
+    "sha": "88daaa71dec65f196abc883a34fb42418f750bb5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integration/pcce-v0.1-final-20260825",
+    "sha": "1ca3ec4e7f7ebbd8bebd2e3fdc54b8fd6e1bc407",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/integration/srt-supervisor-combined-20260727",
+    "sha": "2b8a7e1a132e79e22a385d265416e43b860bbd2c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/manual/srt-015-canonical-design",
+    "sha": "04fad542067f2d4006f5cbfbb19fca00da29a9b9",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/manual/srt-016-canonical-compiler",
+    "sha": "19948960c43a78b239b1851bdd39d80d42b62525",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/manual/srt-025-qualification",
+    "sha": "2dca522faff7abe7e295f4c615ab3bf31f80dd4b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/manual/srt-027-selection-gate",
+    "sha": "0731914afa99d603623ff3bd70b324ca0f801931",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/merge/mcpp-1.0-into-main",
+    "sha": "bb879dc2d78bd603fa543fa104c60603cf452355",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/merge/spar-accepted-root-into-main",
+    "sha": "c369b00ba315e42f54b7f53ff2f6c55987f05214",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/municode_test",
+    "sha": "6aa14f585ed5aeab90573f4d30f5c1d7529b618e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/pinned-for-origin-master",
+    "sha": "a584138a6be2914a628c69410ce11647ab7007ce",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/plan/hammer-symai-spacy-leanstral-benchmark",
+    "sha": "55c522fa99e188f7bfdc91e7788c75673533ebec",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/plan/hssl-g200-semantic-protocol",
+    "sha": "a669d0e3004c9a4e3a9ea8e3e64a7efa7f8df6ec",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/prep/semantic-state-contracts-control",
+    "sha": "8a9b480e31e93ec60826492d5c3a93b59db23957",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/chunked-committed-snapshot-20260913",
+    "sha": "cd8c041573091e40d4ae622f3975f0ae3465734a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/committed-metadata-pack-window-20260913",
+    "sha": "e28f5ac5193df12c08c4b381dedcf47e967f7682",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/complete-committed-snapshot-20260913",
+    "sha": "9c67dd3fab5dab4270720e7a56f1eba926c18a7f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/explicit-bounded-git-decoder-profile-20260913",
+    "sha": "db6ac044aeb3b1d2e2ba149fff04a53986719865",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/paged-raw-facts-20260914",
+    "sha": "8c0943e300d91c9332a2ee2dfc584106d1a00947",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/paged-snapshot-evidence-20260913",
+    "sha": "dbaff9c2198e014ee1bff4bba7c1c7240dbf4231",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/serial-committed-metadata-20260913",
+    "sha": "bf5d8970daaafaa771e98eb8fb818551e32979a3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/spar-accepted-root-producer-20260914",
+    "sha": "2fea27a5f41c03d5a5babf888b279fe2d3c8a2bc",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/repair/streaming-ordinary-scanner-20260913",
+    "sha": "30e76cefc93635a0f7d3e80a190174aed7f14785",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/rescue/srt-014-fd05f1421440-attempt-3-1785127681-failed-validation",
+    "sha": "4ca16ed39687170493cb241e7680747db0dfb2c7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/rescue/uir-002-attempt-2-stable-test-symbol",
+    "sha": "3b6e9cf4d6c055e443cbf652ce829e108bd86b27",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/wip/detached-commits-20260223",
+    "sha": "59d70e67a10311a7f9fb42cf4d32c1cf64101c62",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "ref": "refs/remotes/origin/worktree-2025-12-19T21-07-12",
+    "sha": "0d1b03529fcba3bd7841ece5eba02df82b411e0d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/agent/incremental-proof-sealer-v1",
+    "sha": "8799e8d3cc39bd8f2e58b819dacb6b3879b517c0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/agent/ipfs-kit-runtime-readiness",
+    "sha": "e4427c5433cf0fea87fcc78588cab5582bae5de4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/agent/proof-carrying-context-engine-v0.1",
+    "sha": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/agent/semantic-compression-governor-v1",
+    "sha": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/add-autohealing-workflow",
+    "sha": "f1b7046ff22f3547663d032011a254ba503c7fbd",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/add-github-actions-workflow",
+    "sha": "9b0055acc887c2df0e94e2e7f1a10800d931c23d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/autoheal-broken-workflows",
+    "sha": "5e2be40f83e6bf8c61ecf8740c91eeabac212803",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/delete-backup-temp-folders",
+    "sha": "d95ba194d3b34aa5d3ee2e988d64257a6d67cb9b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/enhanced-graphrag-integration",
+    "sha": "525109bbc283594adc44e3c28529d4e60b5e94f0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/fix-autohealing-workflows",
+    "sha": "b918a5b114ed4f19ce115589f81353d47478a3ef",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/investigate-github-actions-failures",
+    "sha": "5ec67c526f1e9dabc7f11d7a742ed8c2dd34f09c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/migrate-package-to-anyio",
+    "sha": "e864a18a1ba537cddbf3386331b16bb0f1561794",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/migrate-package-to-anyio-again",
+    "sha": "e5ec6415ad87582ff970f0343779ee448d5d9ed2",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/refactor-k8s-folder-structure",
+    "sha": "9fc6b74d9f837d51c86ce565801133d7da523724",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/refactor-root-folder-structure",
+    "sha": "2bfcb71fcd5b1ed0503fd2670e9eca3ddd0cbde7",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/relocate-root-directory-files",
+    "sha": "77258eae569c44751ffb01f4ca5f18174e9ec6c0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/review-ci-cd-scripts",
+    "sha": "7f6b164209a1401fc41cf2ff5cfc094edfb8cca4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/copilot/sub-pr-109-again",
+    "sha": "e6774b439cd2bdae3260e9b2b73047482f5acc20",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/feat/pcce-009-proof-context-v01",
+    "sha": "ba5508d940fb5b23a6d0d9b2084f5195cd26a671",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/feat/semantic-state-roots",
+    "sha": "df2f9cc092456329de9724c45a50c54b410875d1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/fix/proof-reuse-bootstrap",
+    "sha": "db5dfedbe0174521dca31fefb360097a5827a523",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/implementation/PCCE-072-trust-admission-final-20260824",
+    "sha": "f591ce1404df68bc597031141e483ae6e58b4dbb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/implementation/hao-335-attempt-1-1780996541-submodule-external-ipfs_kit",
+    "sha": "55dc7f68f449fd115237f30df0902dc1c3eb5a62",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/implementation/pcce-051-kit-proof-context-install-profile-final-20260824",
+    "sha": "ec95e129bb39a3a18562c6b82ad5f3af3ff1230f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/improve-workflows",
+    "sha": "35adf8d8e1b40c13ee06aa0c71b2b20ae81583ad",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/integrate/kdoc-architecture-refresh",
+    "sha": "b22b0058f530c279e24651b5b8c0765734242319",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/integration/aae-kit-release",
+    "sha": "2066e6fe671e89be4ae5e5172d055c937ad02135",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/integration/aae-scg-main-sync",
+    "sha": "523fc9b3d6f1014751428c4a90be4cfc3c871adf",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/integration/eaaef-kit-recovery-20260823",
+    "sha": "80bbdc3443e560b9bf40339c864a32689ccad8ef",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/merge/mcpp-1.0-into-main",
+    "sha": "aa60ba34488dd3bca97e543e3efc4bdd431cc87d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/new_cope",
+    "sha": "6d506868353afc5f864e5859f674b6dbe626258f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/refactor",
+    "sha": "d40f66593676f6cd9cc6b50a7b576ee3e6573d53",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/revert-4-model_manager",
+    "sha": "99552da0a3eccf9e16f4bb080ec1c1b19b5d1902",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/external/ipfs_kit",
+    "ref": "refs/remotes/origin/transformers_git_submodule",
+    "sha": "00f444e781bbf3bdbafc193af1f1b21b41dca48e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/hallucinate_app",
+    "ref": "refs/remotes/origin/agent/ui-ux-ir",
+    "sha": "da8a6a6baf8a4e3e4010895b61ad40d77edd1900",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/hallucinate_app",
+    "ref": "refs/remotes/origin/copilot/add-ci-script-for-electron-apps",
+    "sha": "5e04362255e6fc41b032d13e5b9dcc393d7bdd47",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/hallucinate_app",
+    "ref": "refs/remotes/origin/integrate/uiir-mediation-onto-main",
+    "sha": "231adb88466035ebbd13c600534daa65db2bbcec",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/heads/implementation/hao-730-attempt-2-1783568244-submodule-swissknife",
+    "sha": "9cf633de882d90f43582c97c238ccffcf0e25c74",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/heads/implementation/hao-756-attempt-6-1783575655-submodule-swissknife",
+    "sha": "047d151b7dd3f17626c4ca201ef3a838fd6fa821",
+    "local": true
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/Lilypad-PXE-boot",
+    "sha": "cd20694cd4dc1b225630bd1c79b13988577d3fd6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/agent/ptr-g140-interop-resync",
+    "sha": "8e6f120fd5e82dea6e2f6ccbfbb677c5d0a8b2c5",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/agent/ui-ux-ir",
+    "sha": "d0732bfe0806770ce41c7f9a887b4cba17acf01f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/auto-heal/swissknife-ci-20251030-005805",
+    "sha": "2395f5372af667781be68e1f2e73dcd15bcfe44c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/auto-heal/swissknife-ci-20251030-005827",
+    "sha": "d0e6ea664e2801da8449b7ee728d2634ee1d16a1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/auto-heal/swissknife-ci-20251030-022435",
+    "sha": "06e7d4d394139fcb144045a485dbdf0763ab76ae",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/auto-heal/swissknife-ci-20251030-022557",
+    "sha": "4fae61814a5f27050abc762c4a5a21e211fc0e9d",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/auto-heal/swissknife-ci-20251030-035616",
+    "sha": "267d44e3c8eed0939194baf3eb3513cc33ff3f6e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/auto-heal/swissknife-ci-20251030-035653",
+    "sha": "b86cdf5ad5f823396093cce593646a1b42513b0b",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/blueprints",
+    "sha": "b71294dd0c2f824aa19065a767e9620f5b75f81e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/chore/resync-kit-tools-manifest",
+    "sha": "f238c8c91d52418bff4d6c195b535690ad7478e1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/cope2boogaloo",
+    "sha": "0a48c2d5aa63330fcffc4a06644a89225da8e9c1",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/cope3vite",
+    "sha": "2f16cc958e463da1a2696b87208a1a108edbb35f",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/add-user-notification-system",
+    "sha": "cc02192017014f57f1b174acc9b016f91312afa6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/auto-heal-failed-workflows",
+    "sha": "b622eedf148f97ca838e9ab694585ff5a1214a70",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/browser-safe-zkp-purity-20260706",
+    "sha": "7cdb7045e423fbd281569f4a8650d940e664a3fb",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/fix-autohealing-workflows",
+    "sha": "b43e3de541a34688cbde3711d5c2a729f233e4df",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/fix-autohealing-workflows-again",
+    "sha": "7c3861936d4a03ccf7fd86c917263429294da3df",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/fix-b84f39f4-e5bd-416c-9f82-5a81775e0337",
+    "sha": "8a061214ba6af149c279739a43133b22d355cf00",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/fix-cli-desktop-build-issues",
+    "sha": "6562ecf0aa6e7ae8f1422264b187773068297696",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/integrate-mcp-plus-plus-support",
+    "sha": "a3078305bfd2b0077ec48ce3fd22d6630a1ece9a",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/prover-stub-fixes-20260705",
+    "sha": "57b02ae0109009b00f2f54c85590c4fc84527016",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/review-dependencies-arm64",
+    "sha": "e9578032c4a5c5a3e0c8f0cca4ecafb7072cb9a0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/copilot/review-pr-for-application-fixes",
+    "sha": "01c2bf62120454eff9e3a87af9335896a1ab507c",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/feature/verified-gui-optimizer",
+    "sha": "1821fbc19e02d233afb068c6591e3de30ed0bfe6",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/heal/wasm-prover-integration",
+    "sha": "47e9e19b61e01f826f8b6c769550b1916367beac",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/implementation/mgw-572-attempt-3-1783506404-submodule-swissknife",
+    "sha": "db63a68d338eaae27786887035a5b50a9176d353",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/integrate/sca-232-parser-repairs",
+    "sha": "e5e22c80457f2b841a01b9a62825922eed17b7e0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/known_good",
+    "sha": "b663fda484a03ab5e9413acf22367bd568110fb8",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/lilypad-automated-steering",
+    "sha": "2a8f49a81f841ceec32d94c90ef5cf09f1ab7da3",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/main2",
+    "sha": "fffc44c93517515612e0223a6a84a00300e647c4",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/main_old",
+    "sha": "49970ea71a77b8df8525faf8dab07ce60bfa41e0",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/merge/prover-into-main",
+    "sha": "b270b484b8bccb7378962ca27070248369e42484",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/pr/endomorphosis/1",
+    "sha": "00567bb60a28b1d6858feee08fc513ef50ab2f7e",
+    "local": false
+  },
+  {
+    "repo": "/home/barberb/lift_coding/swissknife",
+    "ref": "refs/remotes/origin/web-cope",
+    "sha": "8534856c7cb07e84a7678a4aa1763e16d1fcc021",
+    "local": false
+  }
+]

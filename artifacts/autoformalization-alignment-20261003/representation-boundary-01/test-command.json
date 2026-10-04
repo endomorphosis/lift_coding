@@ -1,0 +1,36 @@
+{
+  "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "environment_overrides": {
+    "IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS": "0",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "ruff_checked_files": [
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_declarations.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_lane_bundle.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_stage_declarations.py",
+    "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/assay_lane_identity.py",
+    "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/validate_representation_boundary.py"
+  ],
+  "ruff_exit_code": 1,
+  "targeted_argv": [
+    "/home/barberb/lift_coding/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-c",
+    "/dev/null",
+    "--confcutdir=tests/unit/logic/formalization/autoencoder",
+    "-o",
+    "pythonpath=/home/barberb/lift_coding/external/ipfs_datasets",
+    "-o",
+    "cache_dir=/tmp/representation-boundary-root-regression-cache",
+    "-q",
+    "--junitxml=/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/representation-boundary-01/targeted-tests.xml",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_lane_bundle.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_stage_declarations.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_richer_embeddings.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_context_embeddings.py",
+    "tests/unit/logic/formalization/autoencoder/test_alignment_checkpoint_representations.py"
+  ],
+  "targeted_exit_code": 0
+}

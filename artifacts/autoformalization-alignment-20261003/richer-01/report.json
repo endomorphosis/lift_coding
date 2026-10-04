@@ -1,0 +1,592 @@
+{
+  "base_configuration_binding": {
+    "bytes": 3177,
+    "digest_verified": true,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_study_development_v1.json",
+    "sha256": "413e7250098d39e3e1ff59405c75c5eca283ec5820828d8be7fb00beb01e2f31"
+  },
+  "complete_dependency_manifest": false,
+  "configuration": {
+    "max_seconds": 120,
+    "schema": "alignment-richer-experiment-config/v1",
+    "study_config": {
+      "path": "external/ipfs_datasets/configs/autoencoders/alignment_study_development_v1.json",
+      "sha256": "413e7250098d39e3e1ff59405c75c5eca283ec5820828d8be7fb00beb01e2f31"
+    },
+    "study_id": "autoformalization-richer-development-v1"
+  },
+  "configuration_binding": {
+    "bytes": 336,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_richer_development_v1.json",
+    "sha256": "bdaef56c20d8dea39bc060cab96ea92c7b63673f05168949bfa8e85d83626f36"
+  },
+  "construction_binding": {
+    "bytes": 585771,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/constructions.json",
+    "sha256": "098ea14c579a561f9a0bc0a89c61c2860bcba977d893c1a4e574248aa3e1369b"
+  },
+  "dependency_binding_scope": "listed_study_and_core_source_files_only",
+  "development_used_in_fit": false,
+  "elapsed_seconds": 1.1972558880006545,
+  "evaluation_role": "exposed_development",
+  "limitations": [
+    "Manual fixture references are regression labels, not independent source fidelity evidence.",
+    "Roundtrip equality tests candidate preservation, not fidelity to its original source.",
+    "Flat qualifier atoms do not bind quantified variables, native activation semantics, or temporal scope.",
+    "Context-required inputs cannot be resolved by the current source-only compiler.",
+    "Unknown-count collisions cannot be repaired by a deterministic projection of the same codec.",
+    "Distinct input features can still collapse under a learned projection; no richer projection was fitted.",
+    "Native transport/schema receipts are not kernel proofs or useful proof acceptance."
+  ],
+  "native_useful_proof_coverage": {
+    "status": "unrun",
+    "value": null
+  },
+  "original_training_binding": {
+    "path": "artifacts/source-native-v3-20261001/run-02/legal_ir/train.json",
+    "sha256": "00f4074cca56daed9f766e74c90d3d35e608bfb1058c24db99fc30250314704f"
+  },
+  "original_training_rows": 360,
+  "original_validation_accessed": false,
+  "panel_binding": {
+    "bytes": 93063,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json",
+    "sha256": "d7ab18fa836f9ef2b0c9963eedb3b5c7980c45ea250a8414253b9d1987a7dde6"
+  },
+  "panel_validation": {
+    "development_oov_qualifier_positive_rows": 2,
+    "development_positive_rows": 8,
+    "independent_fidelity_available": false,
+    "panel_payload_sha256": "47fa727e7eecda1e6864652b1408c289a2215a29823f10179b2d3f9af735ae95",
+    "proof_authority": false,
+    "qualified": false,
+    "row_kind_counts": {
+      "ambiguous": 2,
+      "explicit_context": 2,
+      "positive": 24,
+      "unsupported": 6
+    },
+    "schema": "alignment-richer-panel-contract-validation/v1",
+    "source_meaning_adjudicated": false,
+    "status": "validated_authored_fixture_contract",
+    "training_positive_rows": 16,
+    "typed_target_contract_validated": true
+  },
+  "primary_fidelity": {
+    "status": "unavailable_independent_review",
+    "value": null
+  },
+  "production_admitted": false,
+  "protected_protocol_bindings": [
+    {
+      "bytes": 4721,
+      "digest_verified": true,
+      "path": "papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    }
+  ],
+  "qualified": false,
+  "query_targets_used_in_construction": false,
+  "report_sha256": "086dc8279a7e9e96cfff3f6553239ed23b0eb61b8c731b2e1f506621097e25aa",
+  "representation_assay_binding": {
+    "bytes": 72675,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/representation_assays.json",
+    "sha256": "62f804108cbde57f5c6a7e3a8e637bce70c1b9e0ebd155a6112fdcf741160ab8"
+  },
+  "representation_summaries": {
+    "original_training_codec": {
+      "all_positive_rows": {
+        "binder_or_scope_semantics_evaluated": false,
+        "codec_space_id": "canonical-legal-rule-facets:sha256:e8afe9604664c8b625b1882a9d51806f6453666ccd545d6d773f1ceba422bd23",
+        "collision_groups": 6,
+        "distinct_feature_vectors": 18,
+        "distinct_target_collision_pairs": 6,
+        "distinct_target_payloads": 24,
+        "evaluation_role": "posthoc_authored_reference_diagnostic",
+        "feature_dimension": 22,
+        "projection_weights_loaded": false,
+        "qualified": false,
+        "rows": 24,
+        "rows_in_collision_groups": 12,
+        "same_core_distinct_target_collision_pairs": 6,
+        "schema": "alignment-representation-collision-assay/v1",
+        "unknown_atom_counts": {
+          "action": 16,
+          "actor": 4,
+          "conditions": 30,
+          "exceptions": 30,
+          "modality": 0,
+          "object": 16,
+          "temporal": 30
+        }
+      },
+      "development_rows": {
+        "binder_or_scope_semantics_evaluated": false,
+        "codec_space_id": "canonical-legal-rule-facets:sha256:e8afe9604664c8b625b1882a9d51806f6453666ccd545d6d773f1ceba422bd23",
+        "collision_groups": 2,
+        "distinct_feature_vectors": 6,
+        "distinct_target_collision_pairs": 2,
+        "distinct_target_payloads": 8,
+        "evaluation_role": "posthoc_authored_reference_diagnostic",
+        "feature_dimension": 22,
+        "projection_weights_loaded": false,
+        "qualified": false,
+        "rows": 8,
+        "rows_in_collision_groups": 4,
+        "same_core_distinct_target_collision_pairs": 2,
+        "schema": "alignment-representation-collision-assay/v1",
+        "unknown_atom_counts": {
+          "action": 4,
+          "actor": 0,
+          "conditions": 10,
+          "exceptions": 10,
+          "modality": 0,
+          "object": 4,
+          "temporal": 10
+        }
+      },
+      "feature_dimension": 22,
+      "training_rows": {
+        "binder_or_scope_semantics_evaluated": false,
+        "codec_space_id": "canonical-legal-rule-facets:sha256:e8afe9604664c8b625b1882a9d51806f6453666ccd545d6d773f1ceba422bd23",
+        "collision_groups": 4,
+        "distinct_feature_vectors": 12,
+        "distinct_target_collision_pairs": 4,
+        "distinct_target_payloads": 16,
+        "evaluation_role": "posthoc_authored_reference_diagnostic",
+        "feature_dimension": 22,
+        "projection_weights_loaded": false,
+        "qualified": false,
+        "rows": 16,
+        "rows_in_collision_groups": 8,
+        "same_core_distinct_target_collision_pairs": 4,
+        "schema": "alignment-representation-collision-assay/v1",
+        "unknown_atom_counts": {
+          "action": 12,
+          "actor": 4,
+          "conditions": 20,
+          "exceptions": 20,
+          "modality": 0,
+          "object": 12,
+          "temporal": 20
+        }
+      }
+    },
+    "richer_training_codec": {
+      "all_positive_rows": {
+        "binder_or_scope_semantics_evaluated": false,
+        "codec_space_id": "canonical-legal-rule-facets:sha256:ae208af291710a2c0f5906f6d69300119bc9069c74d30193607b4b965d5ae3e7",
+        "collision_groups": 0,
+        "distinct_feature_vectors": 24,
+        "distinct_target_collision_pairs": 0,
+        "distinct_target_payloads": 24,
+        "evaluation_role": "posthoc_authored_reference_diagnostic",
+        "feature_dimension": 27,
+        "projection_weights_loaded": false,
+        "qualified": false,
+        "rows": 24,
+        "rows_in_collision_groups": 0,
+        "same_core_distinct_target_collision_pairs": 0,
+        "schema": "alignment-representation-collision-assay/v1",
+        "unknown_atom_counts": {
+          "action": 0,
+          "actor": 0,
+          "conditions": 2,
+          "exceptions": 0,
+          "modality": 0,
+          "object": 0,
+          "temporal": 0
+        }
+      },
+      "development_rows": {
+        "binder_or_scope_semantics_evaluated": false,
+        "codec_space_id": "canonical-legal-rule-facets:sha256:ae208af291710a2c0f5906f6d69300119bc9069c74d30193607b4b965d5ae3e7",
+        "collision_groups": 0,
+        "distinct_feature_vectors": 8,
+        "distinct_target_collision_pairs": 0,
+        "distinct_target_payloads": 8,
+        "evaluation_role": "posthoc_authored_reference_diagnostic",
+        "feature_dimension": 27,
+        "projection_weights_loaded": false,
+        "qualified": false,
+        "rows": 8,
+        "rows_in_collision_groups": 0,
+        "same_core_distinct_target_collision_pairs": 0,
+        "schema": "alignment-representation-collision-assay/v1",
+        "unknown_atom_counts": {
+          "action": 0,
+          "actor": 0,
+          "conditions": 2,
+          "exceptions": 0,
+          "modality": 0,
+          "object": 0,
+          "temporal": 0
+        }
+      },
+      "feature_dimension": 27,
+      "training_rows": {
+        "binder_or_scope_semantics_evaluated": false,
+        "codec_space_id": "canonical-legal-rule-facets:sha256:ae208af291710a2c0f5906f6d69300119bc9069c74d30193607b4b965d5ae3e7",
+        "collision_groups": 0,
+        "distinct_feature_vectors": 16,
+        "distinct_target_collision_pairs": 0,
+        "distinct_target_payloads": 16,
+        "evaluation_role": "posthoc_authored_reference_diagnostic",
+        "feature_dimension": 27,
+        "projection_weights_loaded": false,
+        "qualified": false,
+        "rows": 16,
+        "rows_in_collision_groups": 0,
+        "same_core_distinct_target_collision_pairs": 0,
+        "schema": "alignment-representation-collision-assay/v1",
+        "unknown_atom_counts": {
+          "action": 0,
+          "actor": 0,
+          "conditions": 0,
+          "exceptions": 0,
+          "modality": 0,
+          "object": 0,
+          "temporal": 0
+        }
+      }
+    }
+  },
+  "resource_scope": {
+    "deadline_kind": "cooperative_between_rows_no_preemption",
+    "model_embeddings_computed": 0,
+    "model_loads": 0,
+    "optimizer_steps": 0,
+    "prover_calls": 0,
+    "provider_calls": 0
+  },
+  "schema": "alignment-richer-experiment-report/v1",
+  "sealed_final_test_accessed": false,
+  "source_bindings": [
+    {
+      "bytes": 19018,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+    },
+    {
+      "bytes": 31906,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+    },
+    {
+      "bytes": 20197,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+    },
+    {
+      "bytes": 23299,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e"
+    },
+    {
+      "bytes": 20651,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745"
+    },
+    {
+      "bytes": 17237,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576"
+    },
+    {
+      "bytes": 25163,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27"
+    },
+    {
+      "bytes": 17653,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318"
+    },
+    {
+      "bytes": 109257,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 37034,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd"
+    },
+    {
+      "bytes": 13437,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+    },
+    {
+      "bytes": 27010,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e"
+    },
+    {
+      "bytes": 17858,
+      "path": "ipfs_datasets_py/logic/bridge/canonical.py",
+      "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194"
+    },
+    {
+      "bytes": 4428,
+      "path": "ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 27572,
+      "path": "ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8"
+    },
+    {
+      "bytes": 392561,
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a"
+    },
+    {
+      "bytes": 300668,
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+    },
+    {
+      "bytes": 1579,
+      "path": "scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+    }
+  ],
+  "status": "completed",
+  "study_id": "autoformalization-richer-development-v1",
+  "summaries": {
+    "all": {
+      "construction_status_counts": {
+        "abstained": 27,
+        "success": 5,
+        "unavailable": 2
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 2,
+      "negative_ir_emissions": 1,
+      "negative_no_ir": 7,
+      "negative_rows": 8,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 4,
+      "positive_exact_candidate_roundtrips": 4,
+      "positive_ir_emitted": 4,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          },
+          "exceptions": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          },
+          "temporal": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          },
+          "exceptions": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          },
+          "temporal": {
+            "fn": 26,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.13333333333333333,
+            "tp": 4
+          }
+        }
+      },
+      "positive_rows": 24,
+      "qualified": false,
+      "rows": 34,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    },
+    "development": {
+      "construction_status_counts": {
+        "abstained": 14,
+        "success": 2,
+        "unavailable": 2
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 2,
+      "negative_ir_emissions": 1,
+      "negative_no_ir": 7,
+      "negative_rows": 8,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 1,
+      "positive_exact_candidate_roundtrips": 1,
+      "positive_ir_emitted": 1,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          },
+          "exceptions": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          },
+          "temporal": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          },
+          "exceptions": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          },
+          "temporal": {
+            "fn": 9,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.1,
+            "tp": 1
+          }
+        }
+      },
+      "positive_rows": 8,
+      "qualified": false,
+      "rows": 18,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    },
+    "train": {
+      "construction_status_counts": {
+        "abstained": 13,
+        "success": 3
+      },
+      "explicit_context_ir_emissions": 0,
+      "explicit_context_rows": 0,
+      "negative_ir_emissions": 0,
+      "negative_no_ir": 0,
+      "negative_rows": 0,
+      "positive_cross_facet_migrations": 0,
+      "positive_exact_authored_ir": 3,
+      "positive_exact_candidate_roundtrips": 3,
+      "positive_ir_emitted": 3,
+      "positive_qualifier_counts": {
+        "typed_qualifier_counts": {
+          "conditions": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          },
+          "exceptions": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          },
+          "temporal": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          }
+        },
+        "unscoped_qualifier_presence": {
+          "conditions": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          },
+          "exceptions": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          },
+          "temporal": {
+            "fn": 17,
+            "fp": 0,
+            "precision": 1.0,
+            "recall": 0.15,
+            "tp": 3
+          }
+        }
+      },
+      "positive_rows": 16,
+      "qualified": false,
+      "rows": 16,
+      "scoring_role": "synthetic_authored_unreviewed_posthoc"
+    }
+  },
+  "target_origin": "synthetic_authored_unreviewed",
+  "training_vocabulary": {
+    "actions": [
+      "audit",
+      "authorize",
+      "notify",
+      "retain"
+    ],
+    "actors": [
+      "clerk",
+      "custodian",
+      "officer",
+      "registrar"
+    ],
+    "objects": [
+      "applicant",
+      "application",
+      "filing"
+    ],
+    "qualifiers": [
+      "application_complete",
+      "before_the_review_deadline",
+      "court_order",
+      "fees_paid",
+      "legal_hold",
+      "within_48_hours"
+    ]
+  },
+  "training_vocabulary_sha256": "8a8f1782bea7d40473525991a922b56e8e2a4ad2ba8db7cabdd04d19056242b7"
+}

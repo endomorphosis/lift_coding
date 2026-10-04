@@ -1,0 +1,1995 @@
+{
+  "original_training_codec": {
+    "all_positive_rows": {
+      "binder_or_scope_semantics_evaluated": false,
+      "codec_space_id": "canonical-legal-rule-facets:sha256:e8afe9604664c8b625b1882a9d51806f6453666ccd545d6d773f1ceba422bd23",
+      "collision_groups": 6,
+      "collisions": [
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "177fa02b7e1d5d3f0f82d35d9ecc31167d9b3d0f8ffe72f70b9ff337260bcb1e",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:notice_clerk:single_a"
+              ],
+              "target_sha256": "7b236b65fa5e6e85882c581f07e252187deaaf35113348968827af11733358db"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:notice_clerk:single_b"
+              ],
+              "target_sha256": "d51d85d4b80ee634f6791735c5b89ee2099f4b2d64770584084e415b38718993"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "6d66a0fbb197299b353f141b9cce78c176cf055c225194904e20bddc1c007f2f",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:notice_officer:single_b"
+              ],
+              "target_sha256": "09e102a9091658ecf7ff0e316a03153b471d25cde5da810c8e93a2771fa9de4d"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:notice_officer:single_a"
+              ],
+              "target_sha256": "95f2edcda625b5d5abb05c1887020d20b4e0487e5eff5e2c20b5dd142dddab76"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "74fb0dd9d66c19753c45392885de51d801d3b2cac135469ce20501b9cdcc81ba",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:retention_clerk:single_b"
+              ],
+              "target_sha256": "5495420540c3c37b20e7e55a9c8b154465aa662862492aa33bf7907f93705b45"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:retention_clerk:single_a"
+              ],
+              "target_sha256": "6b15e84849e8a2a9f3b786fcea9a4f828278698a9959181619942b4ec4776e6f"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "bda7a29d1fdfb4e1cd2bcfb7a83fb41ced982fd20251b5c3fc461c639e2adfe4",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:audit_officer:single_b"
+              ],
+              "target_sha256": "1fa682a58bdc44f0199893e2d55f8aec60ed5aa91bec43162e6900adae3c0136"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:audit_officer:single_a"
+              ],
+              "target_sha256": "921ed42dd5c2f12020057033a8610f82027be14bdafe8366e5b9c4e547d00e05"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "d6e05fe07b13552b188b541703b81dbfdb677ffb1a105421839060843ef23303",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:authorization_registrar:single_a"
+              ],
+              "target_sha256": "7ed634c1112e289fc1cf302003a6410d1450aa1f1dbc02f6c8fba69471d7eb33"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:authorization_registrar:single_b"
+              ],
+              "target_sha256": "e2b15288265aa3800ea6a701515dee7e1525b698ac9a65f19d9e86e66673c86b"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "ff2ac8d4ef4364f5ccd8bf9ece201d285ac807f2e9569a1b4b6dd3905ca45b89",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:retention_custodian:single_b"
+              ],
+              "target_sha256": "e862ca08eee88670b6b5eeb9f4a53e7361d4c95720526d5c659a5de5487344b4"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:retention_custodian:single_a"
+              ],
+              "target_sha256": "f15309b951f872ee06e4dba58427dbf58af61c40c057e3415f1cda4f9d255284"
+            }
+          ]
+        }
+      ],
+      "distinct_feature_vectors": 18,
+      "distinct_target_collision_pairs": 6,
+      "distinct_target_payloads": 24,
+      "evaluation_role": "posthoc_authored_reference_diagnostic",
+      "feature_dimension": 22,
+      "projection_weights_loaded": false,
+      "qualified": false,
+      "row_bindings": [
+        {
+          "feature_sha256": "177fa02b7e1d5d3f0f82d35d9ecc31167d9b3d0f8ffe72f70b9ff337260bcb1e",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_a",
+          "target_sha256": "7b236b65fa5e6e85882c581f07e252187deaaf35113348968827af11733358db",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "177fa02b7e1d5d3f0f82d35d9ecc31167d9b3d0f8ffe72f70b9ff337260bcb1e",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_b",
+          "target_sha256": "d51d85d4b80ee634f6791735c5b89ee2099f4b2d64770584084e415b38718993",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "011e2833df12d4fc427b3fd2554a459fbeff6fde8808e32895e1a80d5d34ac21",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:multiple",
+          "target_sha256": "420e4b8ec8558faf3005c58e1e6e960bc0faa340b94deff2751705e9307c9efb",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 1,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "9ce585bbebd18e16e6dee4067cdec51707d370f8874405d06db06006ab608e49",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:prohibition",
+          "target_sha256": "7a6a04fc3b0af5aa8a8a418d415c34ff5b6d6866894222c0f94bbbdadee2be21",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "ff2ac8d4ef4364f5ccd8bf9ece201d285ac807f2e9569a1b4b6dd3905ca45b89",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_a",
+          "target_sha256": "f15309b951f872ee06e4dba58427dbf58af61c40c057e3415f1cda4f9d255284",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "ff2ac8d4ef4364f5ccd8bf9ece201d285ac807f2e9569a1b4b6dd3905ca45b89",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_b",
+          "target_sha256": "e862ca08eee88670b6b5eeb9f4a53e7361d4c95720526d5c659a5de5487344b4",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "f6dfad703a9a0e8b46d70b68ee70d47b7c28532239d213eddd519f9eb1bda8af",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:multiple",
+          "target_sha256": "7e5548999026a24b0dbd35b0f33cc3b6bdb64748739508709c50879c84778b45",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 1,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "f408eca84280a78fc6b277784b57c9a41beb0a21003df98b801f88a949bbbc4b",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:prohibition",
+          "target_sha256": "1c0628d65ffc55638f4cbe77d8193724f44494493a78b0a2b4ddb9603e34a9de",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "bda7a29d1fdfb4e1cd2bcfb7a83fb41ced982fd20251b5c3fc461c639e2adfe4",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_a",
+          "target_sha256": "921ed42dd5c2f12020057033a8610f82027be14bdafe8366e5b9c4e547d00e05",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "bda7a29d1fdfb4e1cd2bcfb7a83fb41ced982fd20251b5c3fc461c639e2adfe4",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_b",
+          "target_sha256": "1fa682a58bdc44f0199893e2d55f8aec60ed5aa91bec43162e6900adae3c0136",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "333c6ef12f9ce43922dffa6cd7070087058617f09fd00b6325201eb832bf21e2",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:multiple",
+          "target_sha256": "fce539100046942ab77c9ef707f71bcf8bc1e5fe536837f1811842aeec5509c5",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 0,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "486c3cf6bc0e43391c74aae61346d56040450e843dff18d3459da06cac3f7c36",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:prohibition",
+          "target_sha256": "0cdb72bc947a9cf5a7aa3c95f97f1502b0718c2af8e67e014abebf77fb6bb894",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "d6e05fe07b13552b188b541703b81dbfdb677ffb1a105421839060843ef23303",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_a",
+          "target_sha256": "7ed634c1112e289fc1cf302003a6410d1450aa1f1dbc02f6c8fba69471d7eb33",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 1,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "d6e05fe07b13552b188b541703b81dbfdb677ffb1a105421839060843ef23303",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_b",
+          "target_sha256": "e2b15288265aa3800ea6a701515dee7e1525b698ac9a65f19d9e86e66673c86b",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 1,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "423cd5ebdf0884be8dec1156eab80151c6b680967235044d65000e0e4471ea18",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:multiple",
+          "target_sha256": "492506f798a1ead697bfffdb5ddd4d403d8a12a8ef16b5732d59e30b7996655f",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 1,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 1,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "c2875071b99a0d2e3ccc9fc9f9ff4807d5323e2b70cd96a4c9bb3b2e6d1ce13b",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:prohibition",
+          "target_sha256": "69a298a844d88539f7d2dc72b7f22afece434080f69eb7a24de289805a9a1bbe",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 1,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "74fb0dd9d66c19753c45392885de51d801d3b2cac135469ce20501b9cdcc81ba",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_a",
+          "target_sha256": "6b15e84849e8a2a9f3b786fcea9a4f828278698a9959181619942b4ec4776e6f",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "74fb0dd9d66c19753c45392885de51d801d3b2cac135469ce20501b9cdcc81ba",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_b",
+          "target_sha256": "5495420540c3c37b20e7e55a9c8b154465aa662862492aa33bf7907f93705b45",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "6fe993c6fa69a73433a15950ca29daef882ef467dd319fa07666043676f3eb6b",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:multiple",
+          "target_sha256": "dd0127f823cd24ff148fff10f4278183ca39439f7eb48a507229da04ea1ae031",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 0,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "fea63ca191879183f5e3985d847032bb397b248deb4004abf67f9c2bb14a30ed",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:prohibition",
+          "target_sha256": "bb501d2153cf889dec621886438f14b04092b455b9c0dbdd4fbf6e8132909b09",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "6d66a0fbb197299b353f141b9cce78c176cf055c225194904e20bddc1c007f2f",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_a",
+          "target_sha256": "95f2edcda625b5d5abb05c1887020d20b4e0487e5eff5e2c20b5dd142dddab76",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "6d66a0fbb197299b353f141b9cce78c176cf055c225194904e20bddc1c007f2f",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_b",
+          "target_sha256": "09e102a9091658ecf7ff0e316a03153b471d25cde5da810c8e93a2771fa9de4d",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "5e48899015784c81b17311a0879f947848faeec803370d8a89efb86322a2264d",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:multiple",
+          "target_sha256": "7d8bf24f5273d7328ae5783c4aa7ab85588f3e5348b6b0a7bc871cfb6b1da8a5",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 1,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "bba04dff578a71a883eb99924c1228e2c63451655a3af49021b7ec3858740008",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:prohibition",
+          "target_sha256": "ceceaa513b5a1d1ef8ed597154151929a9eed39514169885fb12d04a43b3affd",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        }
+      ],
+      "rows": 24,
+      "rows_in_collision_groups": 12,
+      "same_core_distinct_target_collision_pairs": 6,
+      "schema": "alignment-representation-collision-assay/v1",
+      "unknown_atom_counts": {
+        "action": 16,
+        "actor": 4,
+        "conditions": 30,
+        "exceptions": 30,
+        "modality": 0,
+        "object": 16,
+        "temporal": 30
+      }
+    },
+    "codec": {
+      "blocks": [
+        {
+          "facet": "modality",
+          "kind": "categorical",
+          "offset": 0,
+          "unknown_index": 3,
+          "vocabulary": [
+            "F",
+            "O",
+            "P"
+          ],
+          "width": 4
+        },
+        {
+          "facet": "actor",
+          "kind": "categorical",
+          "offset": 4,
+          "unknown_index": 9,
+          "vocabulary": [
+            "clerk",
+            "commissioner",
+            "custodian",
+            "executor",
+            "officer"
+          ],
+          "width": 6
+        },
+        {
+          "facet": "action",
+          "kind": "categorical",
+          "offset": 10,
+          "unknown_index": 15,
+          "vocabulary": [
+            "certify",
+            "inspect",
+            "issue",
+            "register",
+            "retain"
+          ],
+          "width": 6
+        },
+        {
+          "facet": "object",
+          "kind": "categorical",
+          "offset": 16,
+          "unknown_index": 18,
+          "vocabulary": [
+            "certificate",
+            "filing"
+          ],
+          "width": 3
+        },
+        {
+          "facet": "conditions",
+          "kind": "bag",
+          "offset": 19,
+          "unknown_index": 19,
+          "vocabulary": [],
+          "width": 1
+        },
+        {
+          "facet": "exceptions",
+          "kind": "bag",
+          "offset": 20,
+          "unknown_index": 20,
+          "vocabulary": [],
+          "width": 1
+        },
+        {
+          "facet": "temporal",
+          "kind": "bag",
+          "offset": 21,
+          "unknown_index": 21,
+          "vocabulary": [],
+          "width": 1
+        }
+      ],
+      "codec_sha256": "e8afe9604664c8b625b1882a9d51806f6453666ccd545d6d773f1ceba422bd23",
+      "development_fit": false,
+      "feature_dimension": 22,
+      "feature_space_id": "canonical-legal-rule-facets:sha256:e8afe9604664c8b625b1882a9d51806f6453666ccd545d6d773f1ceba422bd23",
+      "fit_policy": "training_targets_only",
+      "qualified": false,
+      "schema": "legal-alignment-facet-codec/v1",
+      "training_target_count": 360,
+      "training_target_manifest_sha256": "094c5c7dea96262b50756e1cec15266719d19862764e1c218dacec574b045fb6",
+      "unknown_policy": "one_explicit_unknown_bucket_per_facet"
+    },
+    "development_rows": {
+      "binder_or_scope_semantics_evaluated": false,
+      "codec_space_id": "canonical-legal-rule-facets:sha256:e8afe9604664c8b625b1882a9d51806f6453666ccd545d6d773f1ceba422bd23",
+      "collision_groups": 2,
+      "collisions": [
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "6d66a0fbb197299b353f141b9cce78c176cf055c225194904e20bddc1c007f2f",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:notice_officer:single_b"
+              ],
+              "target_sha256": "09e102a9091658ecf7ff0e316a03153b471d25cde5da810c8e93a2771fa9de4d"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:notice_officer:single_a"
+              ],
+              "target_sha256": "95f2edcda625b5d5abb05c1887020d20b4e0487e5eff5e2c20b5dd142dddab76"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "74fb0dd9d66c19753c45392885de51d801d3b2cac135469ce20501b9cdcc81ba",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:retention_clerk:single_b"
+              ],
+              "target_sha256": "5495420540c3c37b20e7e55a9c8b154465aa662862492aa33bf7907f93705b45"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:retention_clerk:single_a"
+              ],
+              "target_sha256": "6b15e84849e8a2a9f3b786fcea9a4f828278698a9959181619942b4ec4776e6f"
+            }
+          ]
+        }
+      ],
+      "distinct_feature_vectors": 6,
+      "distinct_target_collision_pairs": 2,
+      "distinct_target_payloads": 8,
+      "evaluation_role": "posthoc_authored_reference_diagnostic",
+      "feature_dimension": 22,
+      "projection_weights_loaded": false,
+      "qualified": false,
+      "row_bindings": [
+        {
+          "feature_sha256": "74fb0dd9d66c19753c45392885de51d801d3b2cac135469ce20501b9cdcc81ba",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_a",
+          "target_sha256": "6b15e84849e8a2a9f3b786fcea9a4f828278698a9959181619942b4ec4776e6f",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "74fb0dd9d66c19753c45392885de51d801d3b2cac135469ce20501b9cdcc81ba",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_b",
+          "target_sha256": "5495420540c3c37b20e7e55a9c8b154465aa662862492aa33bf7907f93705b45",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "6fe993c6fa69a73433a15950ca29daef882ef467dd319fa07666043676f3eb6b",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:multiple",
+          "target_sha256": "dd0127f823cd24ff148fff10f4278183ca39439f7eb48a507229da04ea1ae031",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 0,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "fea63ca191879183f5e3985d847032bb397b248deb4004abf67f9c2bb14a30ed",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:prohibition",
+          "target_sha256": "bb501d2153cf889dec621886438f14b04092b455b9c0dbdd4fbf6e8132909b09",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "6d66a0fbb197299b353f141b9cce78c176cf055c225194904e20bddc1c007f2f",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_a",
+          "target_sha256": "95f2edcda625b5d5abb05c1887020d20b4e0487e5eff5e2c20b5dd142dddab76",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "6d66a0fbb197299b353f141b9cce78c176cf055c225194904e20bddc1c007f2f",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_b",
+          "target_sha256": "09e102a9091658ecf7ff0e316a03153b471d25cde5da810c8e93a2771fa9de4d",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "5e48899015784c81b17311a0879f947848faeec803370d8a89efb86322a2264d",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:multiple",
+          "target_sha256": "7d8bf24f5273d7328ae5783c4aa7ab85588f3e5348b6b0a7bc871cfb6b1da8a5",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 1,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "bba04dff578a71a883eb99924c1228e2c63451655a3af49021b7ec3858740008",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:prohibition",
+          "target_sha256": "ceceaa513b5a1d1ef8ed597154151929a9eed39514169885fb12d04a43b3affd",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        }
+      ],
+      "rows": 8,
+      "rows_in_collision_groups": 4,
+      "same_core_distinct_target_collision_pairs": 2,
+      "schema": "alignment-representation-collision-assay/v1",
+      "unknown_atom_counts": {
+        "action": 4,
+        "actor": 0,
+        "conditions": 10,
+        "exceptions": 10,
+        "modality": 0,
+        "object": 4,
+        "temporal": 10
+      }
+    },
+    "training_rows": {
+      "binder_or_scope_semantics_evaluated": false,
+      "codec_space_id": "canonical-legal-rule-facets:sha256:e8afe9604664c8b625b1882a9d51806f6453666ccd545d6d773f1ceba422bd23",
+      "collision_groups": 4,
+      "collisions": [
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "177fa02b7e1d5d3f0f82d35d9ecc31167d9b3d0f8ffe72f70b9ff337260bcb1e",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:notice_clerk:single_a"
+              ],
+              "target_sha256": "7b236b65fa5e6e85882c581f07e252187deaaf35113348968827af11733358db"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:notice_clerk:single_b"
+              ],
+              "target_sha256": "d51d85d4b80ee634f6791735c5b89ee2099f4b2d64770584084e415b38718993"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "bda7a29d1fdfb4e1cd2bcfb7a83fb41ced982fd20251b5c3fc461c639e2adfe4",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:audit_officer:single_b"
+              ],
+              "target_sha256": "1fa682a58bdc44f0199893e2d55f8aec60ed5aa91bec43162e6900adae3c0136"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:audit_officer:single_a"
+              ],
+              "target_sha256": "921ed42dd5c2f12020057033a8610f82027be14bdafe8366e5b9c4e547d00e05"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "d6e05fe07b13552b188b541703b81dbfdb677ffb1a105421839060843ef23303",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:authorization_registrar:single_a"
+              ],
+              "target_sha256": "7ed634c1112e289fc1cf302003a6410d1450aa1f1dbc02f6c8fba69471d7eb33"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:authorization_registrar:single_b"
+              ],
+              "target_sha256": "e2b15288265aa3800ea6a701515dee7e1525b698ac9a65f19d9e86e66673c86b"
+            }
+          ]
+        },
+        {
+          "differing_facets": [
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "distinct_targets": 2,
+          "feature_sha256": "ff2ac8d4ef4364f5ccd8bf9ece201d285ac807f2e9569a1b4b6dd3905ca45b89",
+          "same_core_distinct_target_pairs": 1,
+          "targets": [
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:retention_custodian:single_b"
+              ],
+              "target_sha256": "e862ca08eee88670b6b5eeb9f4a53e7361d4c95720526d5c659a5de5487344b4"
+            },
+            {
+              "row_ids": [
+                "alignment-richer-legal-authored-development-v1:retention_custodian:single_a"
+              ],
+              "target_sha256": "f15309b951f872ee06e4dba58427dbf58af61c40c057e3415f1cda4f9d255284"
+            }
+          ]
+        }
+      ],
+      "distinct_feature_vectors": 12,
+      "distinct_target_collision_pairs": 4,
+      "distinct_target_payloads": 16,
+      "evaluation_role": "posthoc_authored_reference_diagnostic",
+      "feature_dimension": 22,
+      "projection_weights_loaded": false,
+      "qualified": false,
+      "row_bindings": [
+        {
+          "feature_sha256": "177fa02b7e1d5d3f0f82d35d9ecc31167d9b3d0f8ffe72f70b9ff337260bcb1e",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_a",
+          "target_sha256": "7b236b65fa5e6e85882c581f07e252187deaaf35113348968827af11733358db",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "177fa02b7e1d5d3f0f82d35d9ecc31167d9b3d0f8ffe72f70b9ff337260bcb1e",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_b",
+          "target_sha256": "d51d85d4b80ee634f6791735c5b89ee2099f4b2d64770584084e415b38718993",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "011e2833df12d4fc427b3fd2554a459fbeff6fde8808e32895e1a80d5d34ac21",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:multiple",
+          "target_sha256": "420e4b8ec8558faf3005c58e1e6e960bc0faa340b94deff2751705e9307c9efb",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 1,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "9ce585bbebd18e16e6dee4067cdec51707d370f8874405d06db06006ab608e49",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:prohibition",
+          "target_sha256": "7a6a04fc3b0af5aa8a8a418d415c34ff5b6d6866894222c0f94bbbdadee2be21",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "ff2ac8d4ef4364f5ccd8bf9ece201d285ac807f2e9569a1b4b6dd3905ca45b89",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_a",
+          "target_sha256": "f15309b951f872ee06e4dba58427dbf58af61c40c057e3415f1cda4f9d255284",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "ff2ac8d4ef4364f5ccd8bf9ece201d285ac807f2e9569a1b4b6dd3905ca45b89",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_b",
+          "target_sha256": "e862ca08eee88670b6b5eeb9f4a53e7361d4c95720526d5c659a5de5487344b4",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "f6dfad703a9a0e8b46d70b68ee70d47b7c28532239d213eddd519f9eb1bda8af",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:multiple",
+          "target_sha256": "7e5548999026a24b0dbd35b0f33cc3b6bdb64748739508709c50879c84778b45",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 1,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "f408eca84280a78fc6b277784b57c9a41beb0a21003df98b801f88a949bbbc4b",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:prohibition",
+          "target_sha256": "1c0628d65ffc55638f4cbe77d8193724f44494493a78b0a2b4ddb9603e34a9de",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "bda7a29d1fdfb4e1cd2bcfb7a83fb41ced982fd20251b5c3fc461c639e2adfe4",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_a",
+          "target_sha256": "921ed42dd5c2f12020057033a8610f82027be14bdafe8366e5b9c4e547d00e05",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "bda7a29d1fdfb4e1cd2bcfb7a83fb41ced982fd20251b5c3fc461c639e2adfe4",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_b",
+          "target_sha256": "1fa682a58bdc44f0199893e2d55f8aec60ed5aa91bec43162e6900adae3c0136",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "333c6ef12f9ce43922dffa6cd7070087058617f09fd00b6325201eb832bf21e2",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:multiple",
+          "target_sha256": "fce539100046942ab77c9ef707f71bcf8bc1e5fe536837f1811842aeec5509c5",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 0,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "486c3cf6bc0e43391c74aae61346d56040450e843dff18d3459da06cac3f7c36",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:prohibition",
+          "target_sha256": "0cdb72bc947a9cf5a7aa3c95f97f1502b0718c2af8e67e014abebf77fb6bb894",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 0,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "d6e05fe07b13552b188b541703b81dbfdb677ffb1a105421839060843ef23303",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_a",
+          "target_sha256": "7ed634c1112e289fc1cf302003a6410d1450aa1f1dbc02f6c8fba69471d7eb33",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 1,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "d6e05fe07b13552b188b541703b81dbfdb677ffb1a105421839060843ef23303",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_b",
+          "target_sha256": "e2b15288265aa3800ea6a701515dee7e1525b698ac9a65f19d9e86e66673c86b",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 1,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        },
+        {
+          "feature_sha256": "423cd5ebdf0884be8dec1156eab80151c6b680967235044d65000e0e4471ea18",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:multiple",
+          "target_sha256": "492506f798a1ead697bfffdb5ddd4d403d8a12a8ef16b5732d59e30b7996655f",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 1,
+            "conditions": 2,
+            "exceptions": 2,
+            "modality": 0,
+            "object": 1,
+            "temporal": 2
+          }
+        },
+        {
+          "feature_sha256": "c2875071b99a0d2e3ccc9fc9f9ff4807d5323e2b70cd96a4c9bb3b2e6d1ce13b",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:prohibition",
+          "target_sha256": "69a298a844d88539f7d2dc72b7f22afece434080f69eb7a24de289805a9a1bbe",
+          "unknown_atom_counts": {
+            "action": 1,
+            "actor": 1,
+            "conditions": 1,
+            "exceptions": 1,
+            "modality": 0,
+            "object": 1,
+            "temporal": 1
+          }
+        }
+      ],
+      "rows": 16,
+      "rows_in_collision_groups": 8,
+      "same_core_distinct_target_collision_pairs": 4,
+      "schema": "alignment-representation-collision-assay/v1",
+      "unknown_atom_counts": {
+        "action": 12,
+        "actor": 4,
+        "conditions": 20,
+        "exceptions": 20,
+        "modality": 0,
+        "object": 12,
+        "temporal": 20
+      }
+    }
+  },
+  "richer_training_codec": {
+    "all_positive_rows": {
+      "binder_or_scope_semantics_evaluated": false,
+      "codec_space_id": "canonical-legal-rule-facets:sha256:ae208af291710a2c0f5906f6d69300119bc9069c74d30193607b4b965d5ae3e7",
+      "collision_groups": 0,
+      "collisions": [],
+      "distinct_feature_vectors": 24,
+      "distinct_target_collision_pairs": 0,
+      "distinct_target_payloads": 24,
+      "evaluation_role": "posthoc_authored_reference_diagnostic",
+      "feature_dimension": 27,
+      "projection_weights_loaded": false,
+      "qualified": false,
+      "row_bindings": [
+        {
+          "feature_sha256": "fc90febcf1ca18a51b890b6dd19e117d1230e58350a5bcf02a4abc215911d656",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_a",
+          "target_sha256": "7b236b65fa5e6e85882c581f07e252187deaaf35113348968827af11733358db",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "1fbce22e395856c649a1d9d852bafe38f53f86738362794a28fb7571810f489b",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_b",
+          "target_sha256": "d51d85d4b80ee634f6791735c5b89ee2099f4b2d64770584084e415b38718993",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "e601cd705c2ea655c6a6e8c78f81736e4f1efe88bff10db22ba8a786ac65a0bc",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:multiple",
+          "target_sha256": "420e4b8ec8558faf3005c58e1e6e960bc0faa340b94deff2751705e9307c9efb",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "ac71dc66489f354f4480b039f6b6ffd4293065f5357fecd6f6c7f931dffc0ace",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:prohibition",
+          "target_sha256": "7a6a04fc3b0af5aa8a8a418d415c34ff5b6d6866894222c0f94bbbdadee2be21",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "e89b29f95ad9eb5fda5e0294d79db1c24f489d3a30cb0f4ab02a1c08c86e3439",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_a",
+          "target_sha256": "f15309b951f872ee06e4dba58427dbf58af61c40c057e3415f1cda4f9d255284",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "4c200001b0951794b3e3c2920c958b38153f752191d3151120102306e3785513",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_b",
+          "target_sha256": "e862ca08eee88670b6b5eeb9f4a53e7361d4c95720526d5c659a5de5487344b4",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "e0458bdc37f0ecaace0df0185737ff212ce5f06d6d820c89394db8584032b3f2",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:multiple",
+          "target_sha256": "7e5548999026a24b0dbd35b0f33cc3b6bdb64748739508709c50879c84778b45",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "d2b562c3bed5b81dcf2bab95f8171c15b9cb821907619e2789b19b1ba97d6093",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:prohibition",
+          "target_sha256": "1c0628d65ffc55638f4cbe77d8193724f44494493a78b0a2b4ddb9603e34a9de",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "25395ae578274cc6d2a3e758c387f29b9a142b422960b069643ef7e24539a77a",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_a",
+          "target_sha256": "921ed42dd5c2f12020057033a8610f82027be14bdafe8366e5b9c4e547d00e05",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "88ce2c6de86e01f6ccdae31eeb7de50f7ecd1f80ef48a710b31766dc41eda3d5",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_b",
+          "target_sha256": "1fa682a58bdc44f0199893e2d55f8aec60ed5aa91bec43162e6900adae3c0136",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "df7ddd3fcbaa99a3491838f105ccfc2b0123d0bc93d2316601f7527a008591a0",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:multiple",
+          "target_sha256": "fce539100046942ab77c9ef707f71bcf8bc1e5fe536837f1811842aeec5509c5",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "f348dbfb86020d98a14fc0888496b30c8083e0c322d74bacf98bfe013c60f248",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:prohibition",
+          "target_sha256": "0cdb72bc947a9cf5a7aa3c95f97f1502b0718c2af8e67e014abebf77fb6bb894",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "f57eddd84eb2ad0f0f4d9f1f7091eb5a5364a18b899f2c2151bea3ac966eb2e1",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_a",
+          "target_sha256": "7ed634c1112e289fc1cf302003a6410d1450aa1f1dbc02f6c8fba69471d7eb33",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "36f53b7f071ea4fe23365c6f265c7bbd4b7e2b762233ea66cbb8a859579bacb7",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_b",
+          "target_sha256": "e2b15288265aa3800ea6a701515dee7e1525b698ac9a65f19d9e86e66673c86b",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "3c53b7531320d3cee9b0a137f251913deb72b105965c521f933fc06722f6deea",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:multiple",
+          "target_sha256": "492506f798a1ead697bfffdb5ddd4d403d8a12a8ef16b5732d59e30b7996655f",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "f60160acce5fc8cfb454011fcf348fc91e0de8afef9918928c9f46449b8e98c6",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:prohibition",
+          "target_sha256": "69a298a844d88539f7d2dc72b7f22afece434080f69eb7a24de289805a9a1bbe",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "ecffc5c640048ec2abc823ea4cfb1ed67663eb657d784434cc65708084b835a1",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_a",
+          "target_sha256": "6b15e84849e8a2a9f3b786fcea9a4f828278698a9959181619942b4ec4776e6f",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "46a9764ed69da007b73764b865204132d5b520c1a221c483c1460164dcfbc0cf",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_b",
+          "target_sha256": "5495420540c3c37b20e7e55a9c8b154465aa662862492aa33bf7907f93705b45",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "fca94b4406f4b2cc0223ec9566f5b17e115de0e5ce80a729881fb500f47595aa",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:multiple",
+          "target_sha256": "dd0127f823cd24ff148fff10f4278183ca39439f7eb48a507229da04ea1ae031",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "97e0522d0ffbd04652a2979631535626f07656edbd033353202cfd9ada7f20e9",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:prohibition",
+          "target_sha256": "bb501d2153cf889dec621886438f14b04092b455b9c0dbdd4fbf6e8132909b09",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "c97474c0f63980ed06f555f893a8565d555a7bb7578295d59a67119bb9ad672f",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_a",
+          "target_sha256": "95f2edcda625b5d5abb05c1887020d20b4e0487e5eff5e2c20b5dd142dddab76",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "5ec391d15fe1f362810175158005b0f99374c6a32446b066b5fa3a75ea0bac41",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_b",
+          "target_sha256": "09e102a9091658ecf7ff0e316a03153b471d25cde5da810c8e93a2771fa9de4d",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "7bdada6091344750401ef9b6a46769f3fa974d037566de083036a9c042759e26",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:multiple",
+          "target_sha256": "7d8bf24f5273d7328ae5783c4aa7ab85588f3e5348b6b0a7bc871cfb6b1da8a5",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "e3e775988bfa298ec5f754ee60f122024ec60d8ce62f20f1def1e432a8e7c580",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:prohibition",
+          "target_sha256": "ceceaa513b5a1d1ef8ed597154151929a9eed39514169885fb12d04a43b3affd",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        }
+      ],
+      "rows": 24,
+      "rows_in_collision_groups": 0,
+      "same_core_distinct_target_collision_pairs": 0,
+      "schema": "alignment-representation-collision-assay/v1",
+      "unknown_atom_counts": {
+        "action": 0,
+        "actor": 0,
+        "conditions": 2,
+        "exceptions": 0,
+        "modality": 0,
+        "object": 0,
+        "temporal": 0
+      }
+    },
+    "codec": {
+      "blocks": [
+        {
+          "facet": "modality",
+          "kind": "categorical",
+          "offset": 0,
+          "unknown_index": 3,
+          "vocabulary": [
+            "F",
+            "O",
+            "P"
+          ],
+          "width": 4
+        },
+        {
+          "facet": "actor",
+          "kind": "categorical",
+          "offset": 4,
+          "unknown_index": 8,
+          "vocabulary": [
+            "clerk",
+            "custodian",
+            "officer",
+            "registrar"
+          ],
+          "width": 5
+        },
+        {
+          "facet": "action",
+          "kind": "categorical",
+          "offset": 9,
+          "unknown_index": 13,
+          "vocabulary": [
+            "audit",
+            "authorize",
+            "notify",
+            "retain"
+          ],
+          "width": 5
+        },
+        {
+          "facet": "object",
+          "kind": "categorical",
+          "offset": 14,
+          "unknown_index": 17,
+          "vocabulary": [
+            "applicant",
+            "application",
+            "filing"
+          ],
+          "width": 4
+        },
+        {
+          "facet": "conditions",
+          "kind": "bag",
+          "offset": 18,
+          "unknown_index": 20,
+          "vocabulary": [
+            "application_complete",
+            "fees_paid"
+          ],
+          "width": 3
+        },
+        {
+          "facet": "exceptions",
+          "kind": "bag",
+          "offset": 21,
+          "unknown_index": 23,
+          "vocabulary": [
+            "court_order",
+            "legal_hold"
+          ],
+          "width": 3
+        },
+        {
+          "facet": "temporal",
+          "kind": "bag",
+          "offset": 24,
+          "unknown_index": 26,
+          "vocabulary": [
+            "before_the_review_deadline",
+            "within_48_hours"
+          ],
+          "width": 3
+        }
+      ],
+      "codec_sha256": "ae208af291710a2c0f5906f6d69300119bc9069c74d30193607b4b965d5ae3e7",
+      "development_fit": false,
+      "feature_dimension": 27,
+      "feature_space_id": "canonical-legal-rule-facets:sha256:ae208af291710a2c0f5906f6d69300119bc9069c74d30193607b4b965d5ae3e7",
+      "fit_policy": "training_targets_only",
+      "qualified": false,
+      "schema": "legal-alignment-facet-codec/v1",
+      "training_target_count": 16,
+      "training_target_manifest_sha256": "8ac1201eafa601774b2af01f4a45af8c647f3011ded52cacb719320e6bfb74eb",
+      "unknown_policy": "one_explicit_unknown_bucket_per_facet"
+    },
+    "development_rows": {
+      "binder_or_scope_semantics_evaluated": false,
+      "codec_space_id": "canonical-legal-rule-facets:sha256:ae208af291710a2c0f5906f6d69300119bc9069c74d30193607b4b965d5ae3e7",
+      "collision_groups": 0,
+      "collisions": [],
+      "distinct_feature_vectors": 8,
+      "distinct_target_collision_pairs": 0,
+      "distinct_target_payloads": 8,
+      "evaluation_role": "posthoc_authored_reference_diagnostic",
+      "feature_dimension": 27,
+      "projection_weights_loaded": false,
+      "qualified": false,
+      "row_bindings": [
+        {
+          "feature_sha256": "ecffc5c640048ec2abc823ea4cfb1ed67663eb657d784434cc65708084b835a1",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_a",
+          "target_sha256": "6b15e84849e8a2a9f3b786fcea9a4f828278698a9959181619942b4ec4776e6f",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "46a9764ed69da007b73764b865204132d5b520c1a221c483c1460164dcfbc0cf",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:single_b",
+          "target_sha256": "5495420540c3c37b20e7e55a9c8b154465aa662862492aa33bf7907f93705b45",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "fca94b4406f4b2cc0223ec9566f5b17e115de0e5ce80a729881fb500f47595aa",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:multiple",
+          "target_sha256": "dd0127f823cd24ff148fff10f4278183ca39439f7eb48a507229da04ea1ae031",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "97e0522d0ffbd04652a2979631535626f07656edbd033353202cfd9ada7f20e9",
+          "id": "alignment-richer-legal-authored-development-v1:retention_clerk:prohibition",
+          "target_sha256": "bb501d2153cf889dec621886438f14b04092b455b9c0dbdd4fbf6e8132909b09",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "c97474c0f63980ed06f555f893a8565d555a7bb7578295d59a67119bb9ad672f",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_a",
+          "target_sha256": "95f2edcda625b5d5abb05c1887020d20b4e0487e5eff5e2c20b5dd142dddab76",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "5ec391d15fe1f362810175158005b0f99374c6a32446b066b5fa3a75ea0bac41",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:single_b",
+          "target_sha256": "09e102a9091658ecf7ff0e316a03153b471d25cde5da810c8e93a2771fa9de4d",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 1,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "7bdada6091344750401ef9b6a46769f3fa974d037566de083036a9c042759e26",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:multiple",
+          "target_sha256": "7d8bf24f5273d7328ae5783c4aa7ab85588f3e5348b6b0a7bc871cfb6b1da8a5",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "e3e775988bfa298ec5f754ee60f122024ec60d8ce62f20f1def1e432a8e7c580",
+          "id": "alignment-richer-legal-authored-development-v1:notice_officer:prohibition",
+          "target_sha256": "ceceaa513b5a1d1ef8ed597154151929a9eed39514169885fb12d04a43b3affd",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        }
+      ],
+      "rows": 8,
+      "rows_in_collision_groups": 0,
+      "same_core_distinct_target_collision_pairs": 0,
+      "schema": "alignment-representation-collision-assay/v1",
+      "unknown_atom_counts": {
+        "action": 0,
+        "actor": 0,
+        "conditions": 2,
+        "exceptions": 0,
+        "modality": 0,
+        "object": 0,
+        "temporal": 0
+      }
+    },
+    "training_rows": {
+      "binder_or_scope_semantics_evaluated": false,
+      "codec_space_id": "canonical-legal-rule-facets:sha256:ae208af291710a2c0f5906f6d69300119bc9069c74d30193607b4b965d5ae3e7",
+      "collision_groups": 0,
+      "collisions": [],
+      "distinct_feature_vectors": 16,
+      "distinct_target_collision_pairs": 0,
+      "distinct_target_payloads": 16,
+      "evaluation_role": "posthoc_authored_reference_diagnostic",
+      "feature_dimension": 27,
+      "projection_weights_loaded": false,
+      "qualified": false,
+      "row_bindings": [
+        {
+          "feature_sha256": "fc90febcf1ca18a51b890b6dd19e117d1230e58350a5bcf02a4abc215911d656",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_a",
+          "target_sha256": "7b236b65fa5e6e85882c581f07e252187deaaf35113348968827af11733358db",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "1fbce22e395856c649a1d9d852bafe38f53f86738362794a28fb7571810f489b",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:single_b",
+          "target_sha256": "d51d85d4b80ee634f6791735c5b89ee2099f4b2d64770584084e415b38718993",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "e601cd705c2ea655c6a6e8c78f81736e4f1efe88bff10db22ba8a786ac65a0bc",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:multiple",
+          "target_sha256": "420e4b8ec8558faf3005c58e1e6e960bc0faa340b94deff2751705e9307c9efb",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "ac71dc66489f354f4480b039f6b6ffd4293065f5357fecd6f6c7f931dffc0ace",
+          "id": "alignment-richer-legal-authored-development-v1:notice_clerk:prohibition",
+          "target_sha256": "7a6a04fc3b0af5aa8a8a418d415c34ff5b6d6866894222c0f94bbbdadee2be21",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "e89b29f95ad9eb5fda5e0294d79db1c24f489d3a30cb0f4ab02a1c08c86e3439",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_a",
+          "target_sha256": "f15309b951f872ee06e4dba58427dbf58af61c40c057e3415f1cda4f9d255284",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "4c200001b0951794b3e3c2920c958b38153f752191d3151120102306e3785513",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:single_b",
+          "target_sha256": "e862ca08eee88670b6b5eeb9f4a53e7361d4c95720526d5c659a5de5487344b4",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "e0458bdc37f0ecaace0df0185737ff212ce5f06d6d820c89394db8584032b3f2",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:multiple",
+          "target_sha256": "7e5548999026a24b0dbd35b0f33cc3b6bdb64748739508709c50879c84778b45",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "d2b562c3bed5b81dcf2bab95f8171c15b9cb821907619e2789b19b1ba97d6093",
+          "id": "alignment-richer-legal-authored-development-v1:retention_custodian:prohibition",
+          "target_sha256": "1c0628d65ffc55638f4cbe77d8193724f44494493a78b0a2b4ddb9603e34a9de",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "25395ae578274cc6d2a3e758c387f29b9a142b422960b069643ef7e24539a77a",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_a",
+          "target_sha256": "921ed42dd5c2f12020057033a8610f82027be14bdafe8366e5b9c4e547d00e05",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "88ce2c6de86e01f6ccdae31eeb7de50f7ecd1f80ef48a710b31766dc41eda3d5",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:single_b",
+          "target_sha256": "1fa682a58bdc44f0199893e2d55f8aec60ed5aa91bec43162e6900adae3c0136",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "df7ddd3fcbaa99a3491838f105ccfc2b0123d0bc93d2316601f7527a008591a0",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:multiple",
+          "target_sha256": "fce539100046942ab77c9ef707f71bcf8bc1e5fe536837f1811842aeec5509c5",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "f348dbfb86020d98a14fc0888496b30c8083e0c322d74bacf98bfe013c60f248",
+          "id": "alignment-richer-legal-authored-development-v1:audit_officer:prohibition",
+          "target_sha256": "0cdb72bc947a9cf5a7aa3c95f97f1502b0718c2af8e67e014abebf77fb6bb894",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "f57eddd84eb2ad0f0f4d9f1f7091eb5a5364a18b899f2c2151bea3ac966eb2e1",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_a",
+          "target_sha256": "7ed634c1112e289fc1cf302003a6410d1450aa1f1dbc02f6c8fba69471d7eb33",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "36f53b7f071ea4fe23365c6f265c7bbd4b7e2b762233ea66cbb8a859579bacb7",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:single_b",
+          "target_sha256": "e2b15288265aa3800ea6a701515dee7e1525b698ac9a65f19d9e86e66673c86b",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "3c53b7531320d3cee9b0a137f251913deb72b105965c521f933fc06722f6deea",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:multiple",
+          "target_sha256": "492506f798a1ead697bfffdb5ddd4d403d8a12a8ef16b5732d59e30b7996655f",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        },
+        {
+          "feature_sha256": "f60160acce5fc8cfb454011fcf348fc91e0de8afef9918928c9f46449b8e98c6",
+          "id": "alignment-richer-legal-authored-development-v1:authorization_registrar:prohibition",
+          "target_sha256": "69a298a844d88539f7d2dc72b7f22afece434080f69eb7a24de289805a9a1bbe",
+          "unknown_atom_counts": {
+            "action": 0,
+            "actor": 0,
+            "conditions": 0,
+            "exceptions": 0,
+            "modality": 0,
+            "object": 0,
+            "temporal": 0
+          }
+        }
+      ],
+      "rows": 16,
+      "rows_in_collision_groups": 0,
+      "same_core_distinct_target_collision_pairs": 0,
+      "schema": "alignment-representation-collision-assay/v1",
+      "unknown_atom_counts": {
+        "action": 0,
+        "actor": 0,
+        "conditions": 0,
+        "exceptions": 0,
+        "modality": 0,
+        "object": 0,
+        "temporal": 0
+      }
+    }
+  }
+}
