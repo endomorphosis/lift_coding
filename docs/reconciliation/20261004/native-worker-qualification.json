@@ -1,0 +1,56 @@
+{
+  "schema": "reconciliation-native-worker-qualification/v1",
+  "root_suite": {
+    "passed": 21,
+    "subtests_passed": 7,
+    "duration_seconds": 201.62,
+    "receipt": "root-final-qualification.log"
+  },
+  "native_suite": {
+    "passed": 16,
+    "duration_seconds": 55.84,
+    "mandatory_ast_seal_enabled": true,
+    "receipt": "native-corrected-qualification.log"
+  },
+  "final_worker_suite": {
+    "passed": 4,
+    "subtests_passed": 7,
+    "duration_seconds": 45.1,
+    "receipt": "final-claim-and-handoff.log"
+  },
+  "real_claim_receipt": "real-claim-receipt.json",
+  "worker_authority": {
+    "direct_native_claim_qualified": true,
+    "managed_child_claim_qualified": true,
+    "provider_invocations": 0,
+    "markdown_writes": 0,
+    "read_credential_promoted_to_write": false,
+    "arbitrary_sql_enabled": false,
+    "new_schema_ddl": false,
+    "durable_replay_and_rollback_qualified": true,
+    "provider_and_validator_credentials_scrubbed": true,
+    "hash_grant_has_no_task_commands": true
+  },
+  "prior_diagnostic_failures_retained": true,
+  "native_fixture_corrections": [
+    "use private broker directory under group-writable pytest umask",
+    "replace absent cross-test hash owner helper with genuine build_server fixture"
+  ],
+  "full_provider_campaign_qualified": false,
+  "complete_proof_suite_green": false,
+  "remaining_proof_limitation": "Prior genuine native proof cases were refused by actual host memory PSI above the unchanged admission limit.",
+  "merged_main_worker_suite": {
+    "passed": 4,
+    "subtests_passed": 7,
+    "duration_seconds": 67.94,
+    "receipt": "merged-main-worker-qualification.log"
+  },
+  "accelerator_publication": "d59d1dde39e023b97d74ffbb436e2db9a10eda2b",
+  "documentation_gate": {
+    "equivalent_local_gate_passed": true,
+    "github_job_started": false,
+    "reason": "GitHub account is locked due to a billing issue",
+    "receipt": "github-ci-status.json",
+    "local_receipt": "documentation-gates-local.log"
+  }
+}

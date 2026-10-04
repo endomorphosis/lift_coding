@@ -345,10 +345,67 @@ def task_progress(board):
             "authority": "diagnostic_from_authenticated_snapshot; native_claim_required"}
 
 
-def launch(argv, cwd, env, log):
-    with log.open("a") as handle:
-        process = subprocess.Popen(argv, cwd=cwd, env=env, stdin=subprocess.DEVNULL,
-                                   stdout=handle, stderr=subprocess.STDOUT, start_new_session=True)
+def worker_bootstrap():
+    for path in reversed(import_roots(ROOT)):
+        sys.path.insert(0, str(path))
+    from ipfs_accelerate_py.agent_supervisor.runtime.worker_grant_broker import sealed_worker_bootstrap
+    return sealed_worker_bootstrap()
+
+
+def worker_owner_environment(repo, database, state_dir):
+    from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+        compact_default_owner_socket_path, TYPED_STATE_OWNER_SOCKET_FILENAME,
+        TYPED_STATE_OWNER_GRANT_BROKER_SOCKET_FILENAME,
+    )
+    socket_path = compact_default_owner_socket_path(
+        state_dir / TYPED_STATE_OWNER_SOCKET_FILENAME, identity=database,
+    )
+    env = environment(repo)
+    env["IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SOCKET"] = str(
+        socket_path.parent / TYPED_STATE_OWNER_GRANT_BROKER_SOCKET_FILENAME)
+    return env
+
+
+def launch(argv, cwd, env, log, *, worker_bootstrap_fd=None):
+    handoff = None
+    executable_fd = None
+    process = None
+    selected_env = dict(env)
+    try:
+        if worker_bootstrap_fd is not None:
+            from ipfs_accelerate_py.agent_supervisor.runtime.process_security import (
+                prepare_state_authority_child_handoff, STATE_AUTHORITY_PARENT_LOSS_TERMINATE,
+            )
+            selected_env["IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SECRET_FD"] = str(worker_bootstrap_fd)
+            handoff = prepare_state_authority_child_handoff(
+                selected_env, parent_loss_policy=STATE_AUTHORITY_PARENT_LOSS_TERMINATE,
+                bind_execution_identity=True,
+            )
+            executable_fd = os.open(argv[0], os.O_RDONLY | os.O_CLOEXEC)
+        with log.open("a") as handle:
+            process = subprocess.Popen(
+                argv, cwd=cwd, env=selected_env, stdin=subprocess.DEVNULL,
+                stdout=handle, stderr=subprocess.STDOUT, start_new_session=True,
+                pass_fds=() if handoff is None else handoff.pass_fds,
+            )
+        if handoff is not None:
+            handoff.deliver(process, expected_executable_descriptor=executable_fd,
+                            expected_argv=argv, timeout_seconds=45)
+    except BaseException:
+        if process is not None and process.poll() is None:
+            # A failed credential handoff belongs to this exact child only.
+            process.terminate()
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait(timeout=5)
+        raise
+    finally:
+        if handoff is not None:
+            handoff.close()
+        if executable_fd is not None:
+            os.close(executable_fd)
     return process, {**process_record(process.pid), "log": str(log), "argv": argv}
 
 
@@ -414,6 +471,7 @@ def serve(state, worktree_parent, papers=None):
         lock.close()
         raise
     children = []
+    worker_bootstraps = {}
     report = {"schema": "vericodegen-campaign/v1", "started_at": now(),
               "controller": process_record(os.getpid()),
               "authority": "duckdb-through-quack", "history": "ducklake", "lanes": {}}
@@ -454,8 +512,10 @@ def serve(state, worktree_parent, papers=None):
             prepare_owner_start(ready_path, paper)
             argv = [str(PYTHON), str(repo / "scripts/paper_state_owner.py"), "--database", str(database),
                     "--state-dir", str(lane / "quack-owner"), "--store-id", "vericodegen-2026-" + paper,
-                    "--secret-handle", "handle:vericodegen-2026:" + paper]
-            process, record = launch(argv, repo, environment(repo), lane / "owner.log")
+                    "--secret-handle", "handle:vericodegen-2026:" + paper, "--enable-worker-authority"]
+            worker_bootstraps[paper] = worker_bootstrap()
+            process, record = launch(argv, repo, worker_owner_environment(repo, database, lane / "quack-owner"), lane / "owner.log",
+                                     worker_bootstrap_fd=worker_bootstraps[paper])
             children.append(("owner", process, record))
             report["lanes"][paper] = {"repo": str(repo), "owner": record}
             write(state / "campaign.json", report)
@@ -476,7 +536,13 @@ def serve(state, worktree_parent, papers=None):
             ready = read(lane / "quack-owner/paper-owner.ready.json")
             env = environment(repo)
             env["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = token_for(ready, lane)
-            process, record = launch(native_argv(repo, paper, lane, ready), repo, env, lane / "supervisor.log")
+            authority = ready["worker_authority"]
+            env.update({"IPFS_ACCELERATE_AGENT_STATE_OWNER_SOCKET": authority["socket_path"],
+                        "IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SOCKET": authority["grant_broker_socket"],
+                        "IPFS_ACCELERATE_AGENT_STATE_STORE_ID": ready["store_id"],
+                        "IPFS_ACCELERATE_AGENT_QUACK_MUTATION_DIR": str(lane / "quack-owner/mutations")})
+            process, record = launch(native_argv(repo, paper, lane, ready), repo, env, lane / "supervisor.log",
+                                     worker_bootstrap_fd=worker_bootstraps[paper])
             children.append(("supervisor", process, record))
             report["lanes"][paper]["supervisor"] = record
             write(state / "campaign.json", report)
@@ -512,6 +578,8 @@ def serve(state, worktree_parent, papers=None):
             report["stopped_at"] = now()
             write(state / "campaign.json", report)
         finally:
+            for descriptor in worker_bootstraps.values():
+                os.close(descriptor)
             for sig, handler in previous_signals.items():
                 signal.signal(sig, handler)
             lock.close()

@@ -32,13 +32,18 @@ class PaperDatabaseDaemonTests(unittest.TestCase):
         from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
             DatabaseImplementationDaemon,
         )
+        from ipfs_accelerate_py.agent_supervisor.runtime.worker_grant_broker import sealed_worker_bootstrap
+        from ipfs_accelerate_py.agent_supervisor.task_sources.typed_state_owner import (
+            compact_default_owner_socket_path, TYPED_STATE_OWNER_SOCKET_FILENAME,
+            TYPED_STATE_OWNER_GRANT_BROKER_SOCKET_FILENAME,
+        )
+        from ipfs_accelerate_py.agent_supervisor.runtime.process_security import (
+            prepare_state_authority_child_handoff, STATE_AUTHORITY_PARENT_LOSS_TERMINATE,
+        )
 
         isolated = dict(os.environ)
         for name in tuple(isolated):
-            if name.startswith("IPFS_ACCELERATE_AGENT_QUACK_") or name in {
-                "IPFS_ACCELERATE_AGENT_STATE_STORE_ID",
-                "IPFS_ACCELERATE_AGENT_STATE_SCHEMA_REVISION",
-            }:
+            if name.startswith(("IPFS_ACCELERATE_AGENT_QUACK_", "IPFS_ACCELERATE_AGENT_STATE_")):
                 isolated.pop(name)
         isolated["IPFS_ACCELERATE_AGENT_QUACK_PREFER"] = "false"
         with patch.dict(os.environ, isolated, clear=True), tempfile.TemporaryDirectory(
@@ -53,16 +58,30 @@ class PaperDatabaseDaemonTests(unittest.TestCase):
             config = json.loads((ROOT / "papers/completion/neurosymbolic_supervision/supervisor.json").read_text())
             board.write_bytes((ROOT / config["todo_path"]).read_bytes())
             board_before = board.read_bytes()
+            bootstrap_fd = sealed_worker_bootstrap()
+            owner_environment = dict(os.environ)
+            owner_environment["IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SECRET_FD"] = str(bootstrap_fd)
+            owner_socket = compact_default_owner_socket_path(
+                state / TYPED_STATE_OWNER_SOCKET_FILENAME, identity=database,
+            )
+            owner_environment["IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SOCKET"] = str(
+                owner_socket.parent / TYPED_STATE_OWNER_GRANT_BROKER_SOCKET_FILENAME)
+            handoff = prepare_state_authority_child_handoff(
+                owner_environment, parent_loss_policy=STATE_AUTHORITY_PARENT_LOSS_TERMINATE,
+            )
             proc = subprocess.Popen(
                 [sys.executable, str(ROOT / "scripts/paper_state_owner.py"),
                  "--database", str(database), "--state-dir", str(state),
-                 "--store-id", "paper-daemon-smoke", "--secret-handle", "handle:paper-daemon-smoke"],
+                 "--store-id", "paper-daemon-smoke", "--secret-handle", "handle:paper-daemon-smoke",
+                 "--enable-worker-authority"],
                 cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+                env=owner_environment, pass_fds=handoff.pass_fds,
             )
             daemon, remote, ready, token = None, None, None, ""
             try:
+                handoff.deliver(proc, timeout_seconds=30)
                 ready_path = state / "paper-owner.ready.json"
-                deadline = time.monotonic() + 25
+                deadline = time.monotonic() + 45
                 while time.monotonic() < deadline and proc.poll() is None:
                     if ready_path.is_file():
                         observed = json.loads(ready_path.read_text())
@@ -78,6 +97,14 @@ class PaperDatabaseDaemonTests(unittest.TestCase):
                 vault = state / "handle_paper-daemon-smoke.quack-token"
                 token = vault.read_text().strip()
                 os.environ["IPFS_ACCELERATE_AGENT_QUACK_TOKEN"] = token
+                authority = ready["worker_authority"]
+                os.environ.update({
+                    "IPFS_ACCELERATE_AGENT_STATE_STORE_ID": ready["store_id"],
+                    "IPFS_ACCELERATE_AGENT_STATE_OWNER_SOCKET": authority["socket_path"],
+                    "IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SOCKET": authority["grant_broker_socket"],
+                    "IPFS_ACCELERATE_AGENT_STATE_GRANT_BROKER_SECRET_FD": str(bootstrap_fd),
+                    "IPFS_ACCELERATE_AGENT_QUACK_MUTATION_DIR": str(state / "mutations"),
+                })
                 endpoint = ready["quack_endpoint"]
                 remote = open_quack_transport_connection(endpoint, token=token)
                 before = remote.execute("SELECT count(*) FROM domain_events").fetchone()[0]
@@ -168,6 +195,7 @@ class PaperDatabaseDaemonTests(unittest.TestCase):
                 if os.environ.get("PAPER_DAEMON_SMOKE_REPORT"):
                     Path(os.environ["PAPER_DAEMON_SMOKE_REPORT"]).write_text(json.dumps(proof, indent=2) + "\n")
             finally:
+                handoff.close()
                 if daemon is not None:
                     daemon.close()
                 if remote is not None:
@@ -180,6 +208,7 @@ class PaperDatabaseDaemonTests(unittest.TestCase):
                         proc.kill()
                         proc.wait(timeout=5)
                 proc.communicate()
+                os.close(bootstrap_fd)
 
 
 if __name__ == "__main__":

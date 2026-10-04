@@ -225,12 +225,13 @@ class CampaignTests(unittest.TestCase):
                 if argv[1] == "branch":
                     return f"agent/vericodegen-2026-{paper}\n"
                 return "" if argv[1] == "status" else "tracked\n"
-            def launch(argv, cwd, env, log):
+            def launch(argv, cwd, env, log, *, worker_bootstrap_fd=None):
                 process, record = original_launch([sys.executable, "-c", "import time; time.sleep(60)"], root, env, log)
                 children.append(process)
                 if len(children) == 1:
                     ready = native_ready(process, lane / "control.duckdb", paper)
-                    ready.update(quack_endpoint="quack://127.0.0.1:1", endpoint_secret_handle="handle:test")
+                    ready.update(quack_endpoint="quack://127.0.0.1:1", endpoint_secret_handle="handle:test",
+                                 worker_authority={"socket_path": "/test/owner.sock", "grant_broker_socket": "/test/grants.sock"})
                     CAM.write(lane / "quack-owner/paper-owner.ready.json", ready)
                 else:
                     timer = threading.Timer(0.2, os.kill, args=(os.getpid(), signal.SIGTERM))
