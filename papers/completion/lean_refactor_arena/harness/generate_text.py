@@ -74,34 +74,21 @@ from jevops.lean import ProviderIdentity
 def _pin_client_env(*, base_url: Optional[str] = None) -> str:
     """Bind llama.cpp to docker0 as a client. Never enable autostart."""
 
-    from jevops.outer import call_if, pin_env, pin_sys_path, rstrip_or, text_or
+    from jevops.outer import drive_pin_docker0_client, drive_then_mark
 
-    global _CLIENT_ENV_PINNED
+    def _mark() -> None:
+        global _CLIENT_ENV_PINNED
+        _CLIENT_ENV_PINNED = True
 
-    url = rstrip_or(base_url, DOCKER0_OPENAI_BASE_URL)
-    pin_env(
-        {
-            "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
-            "IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL": "0",
-            "IPFS_ACCELERATE_LLAMA_CPP_PREFETCH_MODEL": "0",
-            "IPFS_ACCELERATE_LLAMA_CPP_AUTO_UPDATE": "0",
-            "IPFS_ACCELERATE_LLAMA_CPP_BASE_URL": url,
-            "IPFS_ACCELERATE_LLAMA_CPP_HOST": DOCKER0_HOST,
-        }
+    return drive_then_mark(
+        lambda: drive_pin_docker0_client(
+            base_url=base_url,
+            default_url=DOCKER0_OPENAI_BASE_URL,
+            host=DOCKER0_HOST,
+            port=DOCKER0_PORT,
+        ),
+        _mark,
     )
-    call_if(
-        url == rstrip_or(DOCKER0_OPENAI_BASE_URL),
-        lambda: pin_env({"IPFS_ACCELERATE_LLAMA_CPP_PORT": text_or(DOCKER0_PORT)}),
-    )
-    pin_sys_path(
-        "",
-        defaults={
-            "IPFS_ACCEL_SKIP_CORE": "1",
-            "IPFS_AUTO_INSTALL": "false",
-        },
-    )
-    _CLIENT_ENV_PINNED = True
-    return url
 
 
 def _ensure_accel_path() -> None:
@@ -119,33 +106,26 @@ def _http_get(url: str, *, timeout: float) -> tuple[Optional[int], str]:
 def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> HealthProbe:
     """GET docker0 /health, then the loopback alias. Does not start a server."""
 
-    from jevops.outer import env_str, first_truthy, http_ok
+    from jevops.lean import drive_health_probe
 
-    _pin_client_env()
-    status, error = _http_get(DOCKER0_HEALTH_URL, timeout=timeout)
-    alias_status, alias_error = _http_get(DOCKER0_HEALTH_ALIAS_URL, timeout=timeout)
-    ok, error = http_ok(status, error)
-    alias_ok, alias_error = http_ok(alias_status, alias_error)
-    return HealthProbe(
-        ok=ok,
-        url=DOCKER0_HEALTH_URL,
-        alias_ok=alias_ok,
+    return drive_health_probe(
+        pin_fn=_pin_client_env,
+        get_fn=_http_get,
+        health_url=DOCKER0_HEALTH_URL,
         alias_url=DOCKER0_HEALTH_ALIAS_URL,
-        status_code=status,
-        error=first_truthy(error, alias_error),
-        autostart=env_str("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
+        timeout=timeout,
+        probe_cls=HealthProbe,
     )
 
 
 def token_limits_for_source(source: str) -> tuple[int, int]:
-    from jevops.outer import first_int, keyed_pair
+    from jevops.outer import drive_token_limits
 
-    tokens, timeout = keyed_pair(
+    return drive_token_limits(
         source,
         {"putnambench": (PUTNAM_MAX_NEW_TOKENS, PUTNAM_TIMEOUT_SECONDS)},
         (DEFAULT_MAX_NEW_TOKENS, DEFAULT_TIMEOUT_SECONDS),
     )
-    return first_int(tokens), first_int(timeout)
 
 
 def render_prompt(
@@ -154,15 +134,14 @@ def render_prompt(
 ) -> str:
     """Fill the LRA prompt. Returns a tactic-block-only instruction, not PROOF_PROMPT."""
 
-    from jevops.outer import fill_template, overlay_map, overlay_str, read_text
+    from jevops.outer import drive_fill_prompt
 
-    template = read_text(PROMPT_PATH)
-    values = overlay_str(
-        {"name": "", "source": "", "header": "", "statement": "", "src": ""},
-        overlay_map(record),
+    return drive_fill_prompt(
+        PROMPT_PATH,
+        record,
         fields,
+        blanks={"name": "", "source": "", "header": "", "statement": "", "src": ""},
     )
-    return fill_template(template, values)
 
 
 def _load_router():
@@ -202,7 +181,7 @@ def generate_text(
 ) -> str:
     """Generate a tactic block via docker0 Leanstral. Fail closed; no Grok/HF fallback."""
 
-    result = generate_lra(
+    return generate_lra(
         prompt,
         max_new_tokens=max_new_tokens,
         timeout=timeout,
@@ -211,8 +190,7 @@ def generate_text(
         generate=generate,
         get_trace=get_trace,
         base_url=base_url,
-    )
-    return result.text
+    ).text
 
 
 def generate_lra(
@@ -230,93 +208,43 @@ def generate_lra(
 ) -> LraGeneration:
     """Probe docker0, then call the router with fail-closed kwargs. Record resolved identity."""
 
-    from jevops.lean import coalesce_limits
-    from jevops.outer import env_str
+    from jevops.catalogs import DOCKER0_UNREACHABLE_FMT, LEANSTRAL_RERAISE_FMT
+    from jevops.lean import drive_docker0_generate
 
-    max_new_tokens, timeout = coalesce_limits(
-        source=source,
-        max_new=max_new_tokens,
+    return drive_docker0_generate(
+        prompt,
+        max_new_tokens=max_new_tokens,
         timeout=timeout,
+        source=source,
+        require_health=require_health,
+        generate=generate,
+        get_trace=get_trace,
+        base_url=base_url,
+        temperature=temperature,
+        stop=stop,
+        lock=_GENERATE_LOCK,
         lookup_fn=token_limits_for_source,
         default_new=DEFAULT_MAX_NEW_TOKENS,
         default_timeout=DEFAULT_TIMEOUT_SECONDS,
-    )
-
-    pinned_base = _pin_client_env(base_url=base_url)
-    from jevops.lean import forced_unhealthy
-    from jevops.outer import either
-
-    health = either(
-        base_url is None,
-        probe_docker0_health,
-        lambda: forced_unhealthy(
-            HealthProbe,
-            url=DOCKER0_HEALTH_URL,
-            alias_url=DOCKER0_HEALTH_ALIAS_URL,
-            error=f"forced base_url={base_url}",
-            autostart=env_str("IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART"),
-        ),
-    )
-    from jevops.lean import closed_provider_identity, refuse_unhealthy
-    from jevops.outer import first_truthy
-
-    identity = closed_provider_identity(
+        pin_fn=_pin_client_env,
+        probe_fn=probe_docker0_health,
+        health_cls=HealthProbe,
+        health_url=DOCKER0_HEALTH_URL,
+        alias_url=DOCKER0_HEALTH_ALIAS_URL,
+        autostart_key="IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART",
         requested_provider=REQUESTED_PROVIDER,
         requested_model=REQUESTED_MODEL,
         identity_cls=ProviderIdentity,
-    )
-    from jevops.catalogs import DOCKER0_UNREACHABLE_FMT, LEANSTRAL_RERAISE_FMT
-
-    refuse_unhealthy(
-        health,
-        require_health=require_health,
-        error_cls=Docker0Unreachable,
-        fmt=DOCKER0_UNREACHABLE_FMT,
-        url=DOCKER0_HEALTH_URL,
-        error=first_truthy(health.error, default="no /health"),
-        provider=identity.requested_provider,
-        model=identity.requested_model,
-    )
-
-    from jevops.outer import coalesce_pair
-
-    router_generate, router_trace = coalesce_pair(generate, get_trace, _load_router)
-
-    from jevops.lean import overlay_generate_kwargs
-    from jevops.outer import nonempty_strs
-
-    call_kwargs = overlay_generate_kwargs(
-        FAIL_CLOSED_KWARGS,
-        temperature=temperature,
-        stop=stop,
-        stop_fn=nonempty_strs,
-    )
-    from jevops.lean import catch_trace, refuse_if_fallback, require_text, reraise_router_fail, run_locked_generate
-    from jevops.outer import env_str, exc_text, first_int
-
-    return run_locked_generate(
-        lock=_GENERATE_LOCK,
-        pin_fn=lambda: _pin_client_env(base_url=pinned_base),
-        call_fn=lambda: router_generate(
-            prompt,
-            max_new_tokens=first_int(max_new_tokens),
-            timeout=float(timeout),
-            **call_kwargs,
-        ),
-        catch_trace_fn=lambda: catch_trace(router_trace),
-        identity_fn=_identity_from_trace,
-        refuse_fn=refuse_if_fallback,
-        reraise_fn=reraise_router_fail,
-        require_fn=require_text,
+        unreachable_fmt=DOCKER0_UNREACHABLE_FMT,
+        reraise_fmt=LEANSTRAL_RERAISE_FMT,
+        openai_base=DOCKER0_OPENAI_BASE_URL,
+        base_env_key="IPFS_ACCELERATE_LLAMA_CPP_BASE_URL",
+        fail_closed=FAIL_CLOSED_KWARGS,
+        load_router_fn=_load_router,
+        identity_from_trace_fn=_identity_from_trace,
         generation_cls=LraGeneration,
-        health=health,
         generate_cls=LraGenerateError,
         unreachable_cls=Docker0Unreachable,
-        error_fn=exc_text,
-        reraise_kwargs={
-            "fmt": LEANSTRAL_RERAISE_FMT,
-            "base": env_str("IPFS_ACCELERATE_LLAMA_CPP_BASE_URL", DOCKER0_OPENAI_BASE_URL),
-        },
     )
 
 

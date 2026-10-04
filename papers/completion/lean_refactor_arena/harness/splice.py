@@ -92,14 +92,16 @@ def sha256_file(path: Path) -> str:
 def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[dict[str, Any]]]:
     """Load the frozen warm-up JSONL. Refuses digest drift. Does not rewrite the file."""
 
-    from jevops.outer import load_jsonl_objects, path_or
+    from jevops.lean import drive_load_frozen
+    from jevops.outer import load_jsonl_objects
 
-    jsonl = path_or(path, WARMUP_JSONL)
-    return load_jsonl_objects(
-        jsonl,
-        expected_digest=FROZEN_WARMUP_SHA256,
+    return drive_load_frozen(
+        path,
+        WARMUP_JSONL,
+        load_fn=load_jsonl_objects,
+        digest=FROZEN_WARMUP_SHA256,
         expected_n=WARMUP_N,
-        required_fields=REQUIRED_JSONL_FIELDS,
+        fields=REQUIRED_JSONL_FIELDS,
         mismatch_exc=DigestMismatch,
         record_exc=SpliceError,
     )
@@ -108,35 +110,13 @@ def load_warmup_records(path: Optional[Path] = None) -> tuple[bytes, str, list[d
 def split_statement_body(record: Mapping[str, Any]) -> StatementBody:
     """Bind the statement as a prefix of ``src``. Never search for ``:=``."""
 
-    from jevops.outer import as_str, get_str, require_str
+    from jevops.outer import drive_split_statement, split_statement_suffix
 
-    name = get_str(record, "name")
-    statement = require_str(
-        record.get("statement"),
+    return drive_split_statement(
+        record,
         error_cls=PrefixBindError,
-        empty=f"{name}: statement must be a non-empty string",
-    )
-    src = require_str(
-        record.get("src"),
-        error_cls=PrefixBindError,
-        empty=f"{name}: src must be a non-empty string",
-    )
-    from jevops.outer import split_statement_suffix
-
-    suffix = split_statement_suffix(
-        src,
-        statement,
-        name=name,
-        error_cls=PrefixBindError,
-        miss_msg=f"{name}: src does not start with the frozen statement",
-    )
-    header = as_str(record.get("header"))
-    return StatementBody(
-        name=name,
-        source=get_str(record, "source"),
-        statement=statement,
-        body_suffix=suffix,
-        header=header,
+        body_cls=StatementBody,
+        suffix_fn=split_statement_suffix,
     )
 
 
@@ -167,12 +147,15 @@ def lake_candidate_source(*, header: str, statement: str, tactic_block: str) -> 
 def forbidden_proof_tokens(proof_text: str) -> tuple[str, ...]:
     """Tokens that make ``proof_text`` a declaration/import rather than a tactic block."""
 
-    from jevops.repair import forbidden_tokens
+    from jevops.outer import drive_guarded_tokens
 
-    from jevops.outer import raise_if
-
-    raise_if(not isinstance(proof_text, str), SpliceError, "proof_text must be a string")
-    return forbidden_tokens(proof_text, FORBIDDEN_PROOF_TOKENS, boundary=_TOKEN_BOUNDARY)
+    return drive_guarded_tokens(
+        proof_text,
+        FORBIDDEN_PROOF_TOKENS,
+        error_cls=SpliceError,
+        miss="proof_text must be a string",
+        boundary=_TOKEN_BOUNDARY,
+    )
 
 
 def admit_tactic_block(
@@ -190,36 +173,30 @@ def admit_tactic_block(
     the first ``:=`` / ``by`` and that is not the LRA bind.
     """
 
-    forbidden_proof_tokens(proof_text)
-    native = statement_sorry_template(statement)
-    from jevops.lean import admit_empty_canonical
+    from jevops.lean import admit_tactic_only
 
-    return admit_empty_canonical(
-        _admit_lean_proof_text(),
+    return admit_tactic_only(
+        statement,
         proof_text,
-        native,
+        admit_loader=_admit_lean_proof_text,
+        forbid_fn=forbidden_proof_tokens,
+        sorry_fn=statement_sorry_template,
         theorem_id=theorem_id,
         declaration_name=declaration_name,
     )
 
 
 def admission_view(record: Mapping[str, Any], proof_text: str) -> AdmissionView:
-    from jevops.lean import pack_admission_view
+    from jevops.lean import drive_admission_view
     from jevops.outer import last_component
 
-    split = split_statement_body(record)
-    native = statement_sorry_template(split.statement)
-    admission = admit_tactic_block(
-        split.statement,
+    return drive_admission_view(
+        record,
         proof_text,
-        theorem_id=split.name,
-        declaration_name=last_component(split.name),
-    )
-    return pack_admission_view(
-        admission,
-        name=split.name,
-        native=native,
-        statement=split.statement,
+        split_fn=split_statement_body,
+        sorry_fn=statement_sorry_template,
+        admit_fn=admit_tactic_block,
+        last_fn=last_component,
         view_cls=AdmissionView,
     )
 
@@ -245,29 +222,15 @@ def _imported_names(source: str) -> set[str]:
 
 
 def _record_report(record: Mapping[str, Any]) -> dict[str, Any]:
-    split = split_statement_body(record)
-    tactics = tactic_block_from_body(split.body_suffix)
-    template = statement_sorry_template(split.statement)
-    view = admission_view(record, "simp")
-    from jevops.lean import pack_statement_report
-    from jevops.outer import prefix_bind_flags
+    from jevops.lean import drive_statement_report
 
-    flags = prefix_bind_flags(record["src"], record["statement"], split.body_suffix)
-    return pack_statement_report(
-        name=split.name,
-        source=split.source,
-        prefix_bind=flags["prefix_bind"],
-        body_is_suffix=flags["body_is_suffix"],
-        reconstructed_src=split.reconstructed_src == record["src"],
-        statement_chars=len(split.statement),
-        body_chars=len(split.body_suffix),
-        header_chars=len(split.header),
-        body_starts_with_by=any(split.body_suffix.startswith(prefix) for prefix in BODY_BY_PREFIXES),
-        tactic_block_chars=len(tactics),
-        template_starts_with_statement=template.startswith(split.statement),
-        template_sorry_count=template.count("sorry"),
-        admission_simp=asdict(view),
-        header_not_in_src=(not split.header.strip()) or (not record["src"].startswith(split.header)),
+    return drive_statement_report(
+        record,
+        split_fn=split_statement_body,
+        tactic_fn=tactic_block_from_body,
+        sorry_fn=statement_sorry_template,
+        admit_fn=admission_view,
+        prefixes=BODY_BY_PREFIXES,
     )
 
 

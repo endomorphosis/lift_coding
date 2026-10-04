@@ -87,10 +87,9 @@ def pin_client_env() -> str:
 def gpu0_lock_path() -> Path:
     """Owner lock path used by ``run_leanstral_ephemeral.py --gpu 0``."""
 
-    import os
-    from jevops.outer import xdg_runtime_dir
+    from jevops.outer import drive_owner_lock
 
-    return xdg_runtime_dir() / f"leanstral-jobs-{os.getuid()}" / f"{OWNER_LOCK_ID}.lock"
+    return drive_owner_lock(OWNER_LOCK_ID)
 
 
 def owner_script_path() -> Path:
@@ -104,10 +103,9 @@ def owner_argv(
 ) -> list[str]:
     """Argv for optional owner exec. The child takes exclusive ownership."""
 
-    from jevops.outer import path_or, python_argv
+    from jevops.outer import drive_owner_argv
 
-    path = path_or(script, factory=owner_script_path)
-    return python_argv(path, "--bind", OWNER_BIND, "--gpu", OWNER_GPU, python=python)
+    return drive_owner_argv(script, owner_script_path, OWNER_BIND, OWNER_GPU, python=python)
 
 
 def owner_argv_relative(*, python: Optional[str] = None) -> list[str]:
@@ -121,8 +119,9 @@ def owner_argv_relative(*, python: Optional[str] = None) -> list[str]:
 def probe_docker0_health(*, timeout: float = HEALTH_TIMEOUT_SECONDS) -> lra_gt.HealthProbe:
     """GET docker0 ``/health``. Does not start a server and does not flock."""
 
-    pin_client_env()
-    return lra_gt.probe_docker0_health(timeout=timeout)
+    from jevops.outer import drive_call_after
+
+    return drive_call_after(pin_client_env, lambda: lra_gt.probe_docker0_health(timeout=timeout))
 
 
 def _stat_dev_ino(path: Path) -> Optional[tuple[int, int, int]]:
@@ -157,18 +156,14 @@ def _shared_probe_holder(path: Path) -> tuple[bool, str]:
 def inspect_gpu0_lock(path: Optional[Path] = None) -> LockInspection:
     """Inspect owner lock without taking exclusive ownership."""
 
-    from jevops.outer import get_str, if_none, inspect_lock
+    from jevops.outer import drive_inspect_lock
 
-    pin_client_env()
-    lock_path = Path(if_none(path, factory=gpu0_lock_path))
-    info = inspect_lock(lock_path, error_cls=Docker0ClientError)
-    return LockInspection(
-        path=get_str(info, "path"),
-        exists=bool(info["exists"]),
-        held=bool(info["held"]),
-        pid=info["pid"],
-        method=get_str(info, "method"),
-        error=get_str(info, "error"),
+    return drive_inspect_lock(
+        path,
+        pin_fn=pin_client_env,
+        default_path_fn=gpu0_lock_path,
+        error_cls=Docker0ClientError,
+        lock_cls=LockInspection,
     )
 
 
@@ -203,13 +198,13 @@ def wait_for_health(
 ) -> lra_gt.HealthProbe:
     """Poll docker0 ``/health`` without flocking. Bounded wait."""
 
-    from jevops.outer import if_none, poll_until
+    from jevops.outer import drive_poll_health
 
-    return poll_until(
-        if_none(probe, probe_docker0_health),
-        ok_fn=lambda item: bool(item.ok),
+    return drive_poll_health(
         timeout=timeout,
         interval=interval,
+        probe=probe,
+        default_probe=probe_docker0_health,
     )
 
 
@@ -227,23 +222,18 @@ def maybe_exec_owner(
     started, is ``run_leanstral_ephemeral.py``, never ``llama-server``.
     """
 
-    from jevops.outer import call_if, env_copy, overlay_map, pack_owner_exec, replace_if, run_owner_exec, run_process
+    from jevops.outer import drive_maybe_owner, pack_owner_exec, run_process
 
-    argv = owner_argv(script=script)
-    rel = replace_if(script is not None, argv, owner_argv_relative())
-    extra = overlay_map(
-        {AUTOSTART_ENV: "0", "IPFS_ACCELERATE_LLAMA_CPP_AUTO_INSTALL": "0"},
-        **overlay_map(extra_env),
-    )
-    return run_owner_exec(
+    return drive_maybe_owner(
         execute=execute,
-        argv=argv,
-        argv_relative=rel,
-        pack_fn=pack_owner_exec,
-        target=call_if(len(argv) > 2, lambda: Path(argv[2]), default=""),
-        run_fn=run_process,
-        env=env_copy(extra),
+        script=script,
+        extra_env=extra_env,
         timeout=timeout,
+        argv_fn=owner_argv,
+        relative_fn=owner_argv_relative,
+        autostart_env=AUTOSTART_ENV,
+        run_fn=run_process,
+        pack_fn=pack_owner_exec,
     )
 
 
@@ -283,17 +273,7 @@ def generate_as_client(
     ``llama-server`` in this process.
     """
 
-    from jevops.outer import generate_client_flow, require_env_eq
-
-    pin_client_env()
-    require_env_eq(
-        AUTOSTART_ENV,
-        "0",
-        error_cls=Docker0ClientError,
-        fmt="{key} must be {expected}; refusing to generate",
-    )
-    health = probe_docker0_health()
-    lock = inspect_gpu0_lock(lock_path)
+    from jevops.outer import drive_generate_as_client
 
     def _generate() -> lra_gt.LraGeneration:
         return lra_gt.generate_lra(
@@ -308,9 +288,12 @@ def generate_as_client(
             stop=stop,
         )
 
-    return generate_client_flow(
-        health=health,
-        lock=lock,
+    return drive_generate_as_client(
+        pin_fn=pin_client_env,
+        autostart_env=AUTOSTART_ENV,
+        error_cls=Docker0ClientError,
+        probe_fn=probe_docker0_health,
+        inspect_fn=inspect_gpu0_lock,
         generate_fn=_generate,
         wait_fn=lambda seconds: wait_for_health(timeout=seconds),
         exec_fn=lambda execute: maybe_exec_owner(execute=execute),
@@ -319,6 +302,7 @@ def generate_as_client(
         allow_owner_exec=allow_owner_exec,
         wait_seconds=wait_seconds,
         execute_owner=execute_owner,
+        lock_path=lock_path,
     )
 
 
@@ -331,34 +315,19 @@ def plan_session(
 ) -> ClientSession:
     """Live protocol decision. Inspects lock without exclusive ownership."""
 
-    from jevops.outer import env_str
+    from jevops.outer import drive_plan_session
 
-    pin_client_env()
-    health = probe_docker0_health()
-    lock = inspect_gpu0_lock(lock_path)
-    action = decide_action(
-        health,
-        lock,
+    return drive_plan_session(
+        pin_fn=pin_client_env,
+        probe_fn=probe_docker0_health,
+        inspect_fn=inspect_gpu0_lock,
+        decide_fn=decide_action,
+        exec_fn=lambda execute: maybe_exec_owner(execute=execute),
+        autostart_env=AUTOSTART_ENV,
         allow_owner_exec=allow_owner_exec,
         wait_seconds=wait_seconds,
-    )
-    from jevops.outer import call_if
-
-    owner = maybe_exec_owner(execute=False)
-    owner = call_if(
-        action == "exec_owner" and execute_owner,
-        lambda: maybe_exec_owner(execute=True),
-        default=owner,
-    )
-    from jevops.outer import pack_client_session, session_reason
-
-    return pack_client_session(
-        action=action,
-        health=health,
-        lock=lock,
-        autostart=env_str(AUTOSTART_ENV),
-        owner=owner,
-        reason=session_reason(action, lock_held=bool(lock.held), allow_owner_exec=allow_owner_exec),
+        lock_path=lock_path,
+        execute_owner=execute_owner,
         session_cls=ClientSession,
     )
 

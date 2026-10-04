@@ -88,8 +88,13 @@ def pin_typesafe_path() -> None:
 
 
 def tactic_block(record: Mapping[str, Any]) -> str:
-    split = lra_splice.split_statement_body(record)
-    return lra_splice.tactic_block_from_body(split.body_suffix)
+    from jevops.lean import tactic_block_from_record
+
+    return tactic_block_from_record(
+        record,
+        split_fn=lra_splice.split_statement_body,
+        body_fn=lra_splice.tactic_block_from_body,
+    )
 
 
 def case_spans(text: str) -> list[CaseSpan]:
@@ -121,13 +126,9 @@ def drop_redundant_simp_at(text: str) -> str:
 def span_preserving_drafts(tactics: str) -> list[Draft]:
     """One-case edits that keep every ``case`` arm. Not whole-proof templates."""
 
-    from jevops.tactics import span_preserving_edits
+    from jevops.tactics import collect_span_drafts
 
-    drafts: list[Draft] = []
-    seen: set[str] = set()
-    for family, body, ops in span_preserving_edits(tactics):
-        _push(drafts, seen, family, body, ops)
-    return drafts
+    return collect_span_drafts(tactics, cap=MAX_DRAFTS, head_chars=HEAD_CHARS)
 
 
 def drop_have_obtain(text: str) -> str:
@@ -157,13 +158,9 @@ def _push(drafts: list[Draft], seen: set[str], family: str, tactics: str, ops: S
 
 
 def neighbor_tactic_head(record: Mapping[str, Any], *, n_lines: int = NEIGHBOR_HEAD_LINES) -> str:
-    try:
-        block = tactic_block(record)
-    except Exception:
-        return ""
-    from jevops.outer import head_lines
+    from jevops.outer import tactic_head_or_empty
 
-    return head_lines(block, n_lines)
+    return tactic_head_or_empty(record, block_fn=tactic_block, n_lines=n_lines)
 
 
 def enumerate_drafts(
@@ -172,17 +169,19 @@ def enumerate_drafts(
 ) -> list[Draft]:
     """Deterministic drafts from the reference tactic tree. Not a Lean parser."""
 
-    reference = tactic_block(record)
-    from jevops.tactics import closed_tree_edits, collect_tree_drafts, neighbor_style_ops
+    from jevops.tactics import drive_tree_drafts
 
-    retrieval = lra_retrieve.retrieve_record(record, records)
-    neighbors = lra_retrieve.prompt_neighbors(retrieval, k=NEIGHBOR_DRAFT_CAP)
-    by_name = {item.get("name"): item for item in records}
-    return collect_tree_drafts(
-        closed_edits=closed_tree_edits(reference, case_replace_cap=CASE_REPLACE_CAP),
-        neighbor_ops=neighbor_style_ops(neighbors, by_name, head_fn=neighbor_tactic_head),
+    return drive_tree_drafts(
+        record,
+        records,
+        tactic_fn=tactic_block,
+        retrieve_fn=lra_retrieve.retrieve_record,
+        neighbors_fn=lra_retrieve.prompt_neighbors,
+        neighbor_cap=NEIGHBOR_DRAFT_CAP,
+        case_cap=CASE_REPLACE_CAP,
+        head_fn=neighbor_tactic_head,
         push_fn=_push,
-        cap=MAX_DRAFTS,
+        draft_cap=MAX_DRAFTS,
     )
 
 
@@ -205,38 +204,28 @@ def fanout_state(
     record: Mapping[str, Any],
     drafts: Sequence[Draft],
 ) -> dict[str, Any]:
-    from jevops.jev import fanout_problem_state
-    from jevops.outer import get_list, get_str
+    from jevops.jev import drive_fanout_state
 
-    split = lra_splice.split_statement_body(record)
-    tactics = lra_splice.tactic_block_from_body(split.body_suffix)
-    ref_lines = tactics.splitlines()
-    return fanout_problem_state(
+    return drive_fanout_state(
         record,
+        drafts,
+        split_fn=lra_splice.split_statement_body,
+        tactic_fn=lra_splice.tactic_block_from_body,
+        catalog_fn=draft_catalog,
         statement_n=STATEMENT_CHARS,
-        problem={
-            "name": get_str(record, "name"),
-            "source": get_str(record, "source"),
-            "n_toolchains": len(get_list(record, "version_info")),
-            "proof_length": record.get("proof_length"),
-            "num_lines": record.get("num_lines"),
-        },
-        extra={
-            "reference_head": "\n".join(ref_lines[:REF_HEAD_LINES]),
-            "drafts": draft_catalog(drafts),
-        },
+        ref_head_lines=REF_HEAD_LINES,
     )
 
 
 def fanout_questions(drafts: Sequence[Draft], *, Choice: Any, Noul: Any, Score: Any) -> dict[str, Any]:
-    from jevops.jev import choice_questions, draft_criteria, require_choice_cap
+    from jevops.jev import draft_criteria, drive_choice_catalog
 
-    require_choice_cap(len(drafts), MAX_CHOICE_OPTIONS)
-    return choice_questions(
+    return drive_choice_catalog(
+        drafts,
         Choice=Choice,
         Noul=Noul,
         Score=Score,
-        criteria=draft_criteria(drafts),
+        criteria_fn=draft_criteria,
         best_instructions=DRAFT_FANOUT_BEST,
         nouls=DRAFT_FANOUT_NOULS,
         scores={
@@ -245,6 +234,7 @@ def fanout_questions(drafts: Sequence[Draft], *, Choice: Any, Noul: Any, Score: 
                 list(LIKELY_SHORTER_CRITERIA),
             )
         },
+        cap=MAX_CHOICE_OPTIONS,
     )
 
 
@@ -255,12 +245,14 @@ def redact(payload: Any) -> Any:
 
 
 def rank_choice(probabilities: Mapping[str, Any], drafts: Sequence[Draft], *, k: int = 8) -> list[dict[str, Any]]:
-    from jevops.pick import attach_ranked, rank_by_prob
+    from jevops.pick import drive_rank_choice
 
-    return attach_ranked(
-        rank_by_prob(probabilities, k=k),
-        {item.draft_id: item for item in drafts},
-        {
+    return drive_rank_choice(
+        probabilities,
+        drafts,
+        k=k,
+        id_fn=lambda item: item.draft_id,
+        fields={
             "family": "family",
             "ops": lambda item: list(item.ops),
             "n_chars": "n_chars",
@@ -270,62 +262,20 @@ def rank_choice(probabilities: Mapping[str, Any], drafts: Sequence[Draft], *, k:
 
 
 def rank_problem(record: Mapping[str, Any], records: Sequence[Mapping[str, Any]], *, live: bool) -> dict[str, Any]:
-    from jevops.jev import invoke_system_one, rank_catalog_or_live, unpack_response
-    from jevops.outer import dumps_sorted, overlay_map, unless_flag
+    from jevops.jev import drive_draft_rank
 
-    drafts = enumerate_drafts(record, records)
-    state = fanout_state(record, drafts)
-    families = [{"family": fam} for fam in sorted({item.family for item in drafts})]
-
-    def _project(result: Any, wall_ms: float) -> dict[str, Any]:
-        from jevops.jev import pack_fanout_live_row
-
-        return pack_fanout_live_row(
-            result,
-            wall_ms,
-            unpack_fn=unpack_response,
-            rank_fn=rank_choice,
-            drafts=drafts,
-        )
-
-    def _invoke() -> tuple[Any, float]:
-        from jevops.jev import load_typesafe_inference
-
-        loaded = load_typesafe_inference(setup=(pin_typesafe_path,), fallback=False)
-        Choice, Noul, Score, TypeSafeClient = (
-            loaded["Choice"],
-            loaded["Noul"],
-            loaded["Score"],
-            loaded["TypeSafeClient"],
-        )
-        questions = fanout_questions(drafts, Choice=Choice, Noul=Noul, Score=Score)
-        return invoke_system_one(TypeSafeClient(timeout=60.0), state, questions)
-
-    def _configured() -> bool:
-        from jevops.jev import typesafe_is_configured
-
-        return typesafe_is_configured(setup=(pin_typesafe_path,), fallback=False)
-
-    return rank_catalog_or_live(
+    return drive_draft_rank(
         record,
-        drafts=drafts,
-        families=families,
-        features={},
+        records,
         live=live,
-        extra=overlay_map(
-            {
-                "n_case_spans": len(case_spans(tactic_block(record))),
-                "state_chars": len(dumps_sorted(state)),
-                "compile_attempted": False,
-            },
-            **unless_flag(live, {"catalog": draft_catalog(drafts)}),
-        ),
-        catalog_fn=lambda: draft_catalog(drafts),
+        enumerate_fn=enumerate_drafts,
+        state_fn=fanout_state,
+        spans_fn=case_spans,
+        tactic_fn=tactic_block,
+        catalog_fn=draft_catalog,
         pin_fn=pin_typesafe_path,
-        configured_fn=_configured,
-        invoke_fn=_invoke,
-        project_fn=_project,
-        redact_fn=redact,
+        questions_fn=fanout_questions,
+        rank_fn=rank_choice,
     )
 
 
@@ -390,31 +340,21 @@ def self_check(path: Optional[Path] = None) -> dict[str, Any]:
 
 
 def live_rank(names: Sequence[str], path: Optional[Path] = None) -> dict[str, Any]:
-    from jevops.outer import pin_calls
+    from jevops.outer import drive_named_live_rank, path_or
 
-    pin_calls(load_keyfile, pin_typesafe_path)()
-    from jevops.outer import path_or
-
-    jsonl = path_or(path, WARMUP_JSONL)
-    _raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    started = time.perf_counter()
-    from jevops.outer import elapsed_ms, pack_live_rank, rank_named_rows
-
-    rows = rank_named_rows(
-        names, records, lambda record: rank_problem(record, records, live=True)
-    )
-    return pack_live_rank(
+    return drive_named_live_rank(
+        names,
+        load_fn=lambda: lra_splice.load_warmup_records(path_or(path, WARMUP_JSONL)),
+        rank_fn=lambda record, records, _ctx: rank_problem(record, records, live=True),
         schema="lra-draft-fanout/v1",
-        digest=digest,
-        canaries=rows,
-        wall_ms=elapsed_ms(started),
+        redact_fn=redact,
+        pin_fns=(load_keyfile, pin_typesafe_path),
         extra={
             "protocol": PROTOCOL,
             "pr": PR_ID,
             "frozen_warmup_sha256": FROZEN_WARMUP_SHA256,
             "compile_attempted": False,
         },
-        redact_fn=redact,
     )
 
 

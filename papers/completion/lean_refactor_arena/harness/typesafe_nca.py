@@ -45,56 +45,51 @@ def feed_state(memory: dict[str, Any], *, tactics: str = "", problem: str = "") 
     """Overlay memory plus LRA Lean residuals / decision tree."""
 
     import portable_rewrites as lra_port
-    from jevops.nca import feed_with_overlays
-    from jevops.nca import invert_multimap
+    from jevops.nca import drive_feed_state
 
-    from jevops.outer import call_if
-
-    counts = call_if(tactics, lambda: lra_port.analyze_residuals(tactics))
-    tree = call_if(tactics, lambda: lra_port.decision_tree(tactics, memory=memory, name=problem))
-    return feed_with_overlays(
+    return drive_feed_state(
         memory,
         tactics=tactics,
         problem=problem,
-        counts=counts,
-        inverse=call_if(counts, lambda: invert_multimap(lra_port.SKILL_RESIDUAL)),
-        tree=tree,
+        residual_fn=lra_port.analyze_residuals,
+        tree_fn=lambda text, mem, name: lra_port.decision_tree(text, memory=mem, name=name),
+        inverse_src=lra_port.SKILL_RESIDUAL,
     )
 
 
 def _safe_path(path: str | Path) -> Optional[Path]:
-    from jevops.nca import allowed_path
+    from jevops.nca import drive_allowed_pair
 
-    return allowed_path(path, roots=(HERE.resolve(), PAPER_ROOT.resolve()), base=HERE)
+    return drive_allowed_pair(path, here=HERE, paper=PAPER_ROOT, base=HERE)
 
 
 def hook_and_eval(path: str | Path) -> dict[str, Any]:
     """Walk one harness/paper file: AST, import, whether a test module names it."""
 
-    from jevops.nca import inspect_python
+    from jevops.nca import drive_here_inspect
 
-    return inspect_python(
+    return drive_here_inspect(
         path,
-        roots=(HERE.resolve(), PAPER_ROOT.resolve()),
+        here=HERE,
+        paper=PAPER_ROOT,
         base=HERE,
         import_dir=HERE,
         test_dir=HERE,
-        relative_to=PAPER_ROOT.resolve(),
     )
 
 
 def walk_codebase(*, limit: int = WALK_MAX_FILES) -> dict[str, Any]:
     """Hook every harness Python file (bounded)."""
 
-    from jevops.nca import walk_python
+    from jevops.nca import drive_here_walk
 
-    return walk_python(
+    return drive_here_walk(
         HERE,
         limit=limit,
-        roots=(HERE.resolve(), PAPER_ROOT.resolve()),
+        here=HERE,
+        paper=PAPER_ROOT,
         import_dir=HERE,
         test_dir=HERE,
-        relative_to=PAPER_ROOT.resolve(),
     )
 
 
@@ -120,63 +115,42 @@ def mutate(
 
     import binder_use as lra_bind
     import portable_rewrites as lra_port
-    from jevops.nca import apply_mutate
+    from jevops.nca import drive_mutate
 
-    def _fold(body: str) -> Optional[dict[str, Any]]:
-        from jevops.memory import first_fold
-
-        from jevops.outer import get_list
-
-        return first_fold(body, get_list(memory, "skills"), fold_fn=lra_port.fold_from_memory_skill)
-
-    def _mint() -> dict[str, Any]:
-        from jevops.outer import call_if
-
-        prop = lra_bind.propose_skill_from_research(memory, problem)
-
-        def _keep() -> dict[str, Any]:
-            lra_bind.expand_skills_from_memory(memory, name=problem, tactics=tactics)
-            return prop
-
-        return call_if(prop.get("keep_structure") and prop.get("mint"), _keep, default={})
-
-    return apply_mutate(memory, tactics=tactics, problem=problem, op=op, fold_fn=_fold, mint_fn=_mint)
+    return drive_mutate(
+        memory,
+        tactics=tactics,
+        problem=problem,
+        op=op,
+        fold_skill_fn=lra_port.fold_from_memory_skill,
+        propose_fn=lra_bind.propose_skill_from_research,
+        expand_fn=lra_bind.expand_skills_from_memory,
+    )
 
 
 def nca_tool(name: str, **kwargs: Any) -> dict[str, Any]:
-    from jevops.nca import dispatch_tool
-    from jevops.outer import as_dict, get_list, get_str
+    from jevops.nca import drive_nca_tool
 
-    memory = as_dict(kwargs.get("memory"), {})
-    tactics = get_str(kwargs, "tactics")
-    problem = get_str(kwargs, "problem")
-    return dispatch_tool(
+    return drive_nca_tool(
         name,
-        extras={
-            "nca_walk": lambda **_k: walk_codebase(),
-            "nca_hook": lambda **k: hook_and_eval(get_str(k, "path", default="portable_rewrites.py")),
-            "nca_mutate": lambda **k: mutate(
-                memory, tactics=tactics, problem=problem, op=get_str(k, "op", default="auto")
-            ),
-            "nca_eval": lambda **k: evaluate_tests(*get_list(k, "tests", default=["test_skill_improve_loop"])),
-        },
+        walk_fn=walk_codebase,
+        hook_fn=hook_and_eval,
+        mutate_fn=mutate,
+        eval_fn=evaluate_tests,
         **kwargs,
     )
 
 
 def _nca_tick_entry(**kwargs: Any) -> dict[str, Any]:
-    from jevops.outer import as_dict, first_truthy, get_str, text_or
+    from jevops.nca import drive_tick_kwargs
 
-    mem = as_dict(kwargs.get("memory"), {})
-    rec = as_dict(kwargs.get("record"), {})
-    problem = text_or(first_truthy(kwargs.get("problem"), rec.get("name"), default=""))
-    return tick(mem, tactics=get_str(kwargs, "tactics"), problem=problem)
+    return drive_tick_kwargs(kwargs, tick_fn=tick)
 
 
 def _nca_fork_entry(**kwargs: Any) -> dict[str, Any]:
-    from jevops.outer import as_dict, without_keys
+    from jevops.nca import drive_fork_kwargs
 
-    return fork_cells(as_dict(kwargs.get("memory"), {}), **without_keys(kwargs, ("name", "memory")))
+    return drive_fork_kwargs(kwargs, fork_fn=fork_cells)
 
 
 lra_tools.register_subloop("nca_tick", _nca_tick_entry)

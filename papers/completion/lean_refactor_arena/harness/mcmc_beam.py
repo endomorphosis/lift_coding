@@ -60,11 +60,12 @@ from jevops.tactics import LOCKED_HEADS
 
 
 def locked_have_names(reference: str) -> set[str]:
-    from jevops.outer import mapped_nonempty
+    from jevops.outer import drive_mapped_lines
 
-    return mapped_nonempty(
-        lra_cb.prefix_have_lines(reference),
-        lambda line: lra_cb.have_binder_name(line.strip()),
+    return drive_mapped_lines(
+        reference,
+        lines_fn=lra_cb.prefix_have_lines,
+        name_fn=lra_cb.have_binder_name,
     )
 
 
@@ -115,25 +116,20 @@ def propose_edits(
     extra: Optional[Sequence[dict[str, str]]] = None,
     limit: Optional[int] = MAX_PROPOSALS,
 ) -> list[dict[str, str]]:
-    from jevops.outer import first_truthy
-    from jevops.tactics import collect_mcmc_proposal_extras, propose_closed_edits
+    from jevops.tactics import drive_propose_edits
 
-    extras = collect_mcmc_proposal_extras(
+    return drive_propose_edits(
         tactics,
-        first_truthy(extra, default=()),
+        reference,
+        rng,
+        extra,
+        limit=limit,
         propose_fn=lra_ius.propose,
         replay_fn=lra_ius.replay,
         extras_fn=lra_ius.mcmc_extras,
         replay_note="apply the full Core.InitsUpdatesComm 268→139 kernel sequence",
-    )
-    return propose_closed_edits(
-        tactics,
-        reference,
-        rng,
-        extras,
         closers=CLOSERS,
         skip_prefix=LOCKED_HEADS,
-        limit=limit,
     )
 
 
@@ -150,52 +146,18 @@ def typesafe_rank_proposals(
     *,
     ledger: lra_t1.ProblemLedger,
 ) -> dict[str, Any]:
-    from jevops.jev import choice_questions, invoke_system_one, pack_ranked_pick, proposal_rank_state, rank_proposals_or_skip, skipped
-    from jevops.outer import dumps_compact, reason_text, result_usage
-    from jevops.pick import numbered_criteria
+    from jevops.jev import drive_mcmc_rank
 
-    def _invoke(module: Any) -> tuple[Any, float]:
-        criteria = numbered_criteria(
-            proposals,
-            prefix="p",
-            fmt=lambda _i, item: f"{item['kind']}: {item['note']}; {lra_loop.token_count(item['tactics'])} tok",
-        )
-        state = proposal_rank_state(record, current, criteria, tokens=lra_loop.token_count(current))
-        questions = choice_questions(
-            Choice=module.Choice,
-            Noul=module.Noul,
-            Score=module.Score,
-            criteria=criteria,
-            best_key="next_edit",
-            best_instructions=(
-                "Which proposal id should this Metropolis chain try? Prefer a deletion that "
-                "keeps every case header and the prefix haves Hk/Hlen1/Hlen2. Do not write Lean."
-            ),
-            nouls={"likely_compiles": "Will the chosen edit still lake-compile?"},
-            scores={
-                "likely_shorter": (
-                    "How likely is a token cut if it compiles?",
-                    list(lra_fan.LIKELY_SHORTER_CRITERIA),
-                )
-            },
-        )
-        return invoke_system_one(module.TypeSafeClient(timeout=45.0), state, questions)
-
-    def _skip(reason: Any, **extra: Any) -> dict[str, Any]:
-        text = reason_text(reason)
-        return skipped(text, **extra)
-
-    def _record(result: Any) -> Any:
-        inn, out = result_usage(result, fallback_in=lra_t1.estimate_tokens(dumps_compact(record)))
-        return ledger.record("jev", input_tokens=inn, output_tokens=out, model=lra_t1.JEV_MODEL_ID)
-
-    return rank_proposals_or_skip(
-        proposals=proposals,
+    return drive_mcmc_rank(
+        record,
+        current,
+        proposals,
+        ledger=ledger,
         load_fn=load_typesafe,
-        skip_fn=_skip,
-        invoke_fn=_invoke,
-        pack_fn=pack_ranked_pick,
-        record_fn=_record,
+        token_fn=lra_loop.token_count,
+        shorter_criteria=list(lra_fan.LIKELY_SHORTER_CRITERIA),
+        estimate_fn=lra_t1.estimate_tokens,
+        model_id=lra_t1.JEV_MODEL_ID,
     )
 
 
@@ -211,43 +173,20 @@ def leanstral_line_swap(
     rng: random.Random,
     locked_haves: set[str],
 ) -> Optional[dict[str, str]]:
-    from jevops.mask import around_lines
-
-    idxs = mutable_indices(tactics, locked_haves)
-    from jevops.outer import get_str, pick_line
-
-    if not idxs:
-        return None
-    index, target = pick_line(tactics, rng, idxs)
-    prompt = (
-        "Replace ONE Lean 4 tactic line with a shorter equivalent. "
-        "Reply with only that line. No sorry. Keep case/induction.\n\n"
-        f"Problem: {get_str(record, 'name')}\n"
-        f"Around:\n" + around_lines(tactics, index, radius=4) + "\n\n"
-        f"Replace this line:\n{target}\n\nReplacement:"
-    )
     import docker0_client as lra_d0
+    from jevops.search import drive_line_swap
 
-    result = lra_d0.generate_as_client(
-        prompt,
-        max_new_tokens=48,
-        timeout=90.0,
-        source=get_str(record, "source"),
-        allow_owner_exec=False,
-    )
-    from jevops.outer import head_chars
-    from jevops.search import swap_from_generate
-
-    return swap_from_generate(
-        result,
-        tactics=tactics,
-        index=index,
+    return drive_line_swap(
+        record,
+        tactics,
+        rng,
+        locked_haves,
+        mutable_fn=mutable_indices,
+        generate_fn=lra_d0.generate_as_client,
         parse_fn=lra_cb.parse_next_line,
         looks_fn=lra_cb.looks_like_tactic,
         replace_fn=apply_replace,
         stop=lra_cb.STOP_TOKEN,
-        target=target,
-        head_fn=head_chars,
     )
 
 
@@ -261,27 +200,18 @@ def compile_one(
     memory: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     import nca_kernel as lra_kern
+    from jevops.kernel import drive_guarded_compile
 
-    def _run() -> dict[str, Any]:
-        from jevops.outer import dict_call
-
-        return dict_call(
-            lra_kb.compile_tactics,
-            record,
-            tactics,
-            state_root=state_root,
-            timeout=timeout,
-            restore=restore,
-        )
-
-    from jevops.outer import get_str
-
-    return lra_kern.guarded_compile(
-        memory,
-        name=get_str(record, "name"),
+    return drive_guarded_compile(
+        record,
+        tactics,
+        state_root=state_root,
+        timeout=timeout,
+        restore=restore,
+        memory=memory,
+        compile_fn=lra_kb.compile_tactics,
+        guard_fn=lra_kern.guarded_compile,
         kind="mcmc",
-        tactics=tactics,
-        compile_fn=_run,
     )
 
 
@@ -298,121 +228,45 @@ def run_mcmc(
     leanstral: bool = False,
     memory: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
-    from jevops.outer import first_int, get_str
+    from jevops.search import drive_mcmc
 
-    reference = lra_fan.tactic_block(record)
-    rng = random.Random(first_int(seed))
-    ledger = lra_t1.ProblemLedger(
-        name=f"{get_str(record, 'name')}#mcmc-beam",
-        max_jev_calls=MAX_JEV,
-        max_mistral_calls=0,
-        max_grok_calls=0,
-    )
-    from jevops.outer import clone_restore
-
-    _clone, _dest, restore = clone_restore(
+    return drive_mcmc(
         record,
-        state_root,
-        clone_fn=lra_kb.lra_cw.clone_dir,
-        relpath_fn=lra_kb.lra_cw.source_relpath,
-    )
-    from jevops.outer import stripped_or
-
-    start = stripped_or(init_tactics, reference)
-    start_compiled = compile_one(
-        record, start, state_root=state_root, timeout=timeout, restore=restore, memory=memory
-    )
-    from jevops.outer import either
-    from jevops.search import (
-        begin_mcmc,
-        filter_blacklist,
-        mcmc_result,
-        mcmc_try_proposals,
-        pin_front,
-    )
-
-    packed = begin_mcmc(
-        start=start,
-        compiled=start_compiled,
-        reference=reference,
-        token_fn=lra_loop.token_count,
-        beam=beam,
-        chain_cls=Chain,
-        init_kind=either(init_tactics, lambda: "init", lambda: "reference"),
-    )
-    from jevops.outer import take_keys
-
-    chains, best, history, leanstral_calls, failed_bodies, lake_calls = take_keys(
-        packed, "chains", "best", "history", "leanstral_calls", "failed_bodies", "lake_calls"
-    )
-    counts = {"lake_calls": lake_calls}
-    locked = locked_have_names(reference)
-    failed_kinds: set[str] = {
-        "rewrite_refine_constructor",
-        "rewrite_ih_short",
-        "rewrite_ih_exact",
-        "collapse_ih_simps",
-        "drop_orphan_hnd",
-        "drop_isnotdefined_simp",
-        "drop_orphan_intros_hin",
-    }
-    sticky_fail = set(failed_kinds)
-    from jevops.search import run_mcmc_rounds
-
-    def _compile(body: str) -> dict[str, Any]:
-        from jevops.outer import bump_box
-
-        return bump_box(
-            counts,
-            "lake_calls",
-            lambda: compile_one(
-                record,
-                body,
-                state_root=state_root,
-                timeout=timeout,
-                restore=restore,
-                memory=memory,
-            ),
-        )
-
-    leanstral_calls = run_mcmc_rounds(
-        rounds=rounds,
-        chains=chains,
-        ledger=ledger,
-        leanstral=leanstral,
-        max_leanstral=MAX_LEANSTRAL,
-        leanstral_fn=lambda tactics: leanstral_line_swap(record, tactics, rng, locked),
-        propose_fn=lambda tactics, extra: propose_edits(tactics, reference, rng, extra=extra),
-        filter_fn=filter_blacklist,
-        rank_fn=lambda tactics, proposals: typesafe_rank_proposals(
-            record, tactics, proposals, ledger=ledger
-        ),
-        pin_fn=pin_front,
-        pin_prefixes=("drop_duplicate", "join_applies", "leanstral_"),
-        try_fn=lambda **kwargs: mcmc_try_proposals(
-            token_fn=lra_loop.token_count,
-            accept_fn=metropolis_accept,
-            **kwargs,
-        ),
-        compile_fn=_compile,
-        history=history,
-        failed_bodies=failed_bodies,
-        failed_kinds=failed_kinds,
-        sticky_fail=sticky_fail,
-        best=best,
-        temperature=temperature,
-        rng=rng,
-    )
-    return mcmc_result(
         rounds=rounds,
         beam=beam,
         temperature=temperature,
         seed=seed,
-        lake_calls=counts["lake_calls"],
-        leanstral_calls=leanstral_calls,
-        best=best,
-        history=history,
-        extra={"ledger": ledger.as_dict(), "hardware_class": HARDWARE_CLASS},
+        state_root=state_root,
+        timeout=timeout,
+        init_tactics=init_tactics,
+        leanstral=leanstral,
+        memory=memory,
+        tactic_fn=lra_fan.tactic_block,
+        rng_cls=random.Random,
+        ledger_cls=lra_t1.ProblemLedger,
+        max_jev=MAX_JEV,
+        clone_fn=lra_kb.lra_cw.clone_dir,
+        relpath_fn=lra_kb.lra_cw.source_relpath,
+        compile_fn=compile_one,
+        token_fn=lra_loop.token_count,
+        chain_cls=Chain,
+        locked_fn=locked_have_names,
+        failed_kinds={
+            "rewrite_refine_constructor",
+            "rewrite_ih_short",
+            "rewrite_ih_exact",
+            "collapse_ih_simps",
+            "drop_orphan_hnd",
+            "drop_isnotdefined_simp",
+            "drop_orphan_intros_hin",
+        },
+        leanstral_swap_fn=leanstral_line_swap,
+        propose_fn=propose_edits,
+        rank_fn=typesafe_rank_proposals,
+        accept_fn=metropolis_accept,
+        max_leanstral=MAX_LEANSTRAL,
+        pin_prefixes=("drop_duplicate", "join_applies", "leanstral_"),
+        hardware_class=HARDWARE_CLASS,
     )
 
 

@@ -60,19 +60,22 @@ def load_keyfile() -> None:
 
 
 def pin_typesafe_path() -> None:
-    from jevops.outer import pin_sys_path
+    from jevops.outer import drive_pin_then
 
-    pin_sys_path(
+    def _after() -> None:
+        lra_fan.pin_typesafe_path()
+        lra_fan.ACCEL_ROOT = ROOT_ACCEL
+        lra_fan.TYPESAFE_INFERENCE_PATH = ROOT_ACCEL / "ipfs_accelerate_py" / "typesafe_inference.py"
+
+    drive_pin_then(
         ROOT_ACCEL,
         defaults={
             "IPFS_ACCEL_SKIP_CORE": "1",
             "IPFS_AUTO_INSTALL": "false",
             "IPFS_ACCELERATE_LLAMA_CPP_AUTOSTART": "0",
         },
+        after_fn=_after,
     )
-    lra_fan.pin_typesafe_path()
-    lra_fan.ACCEL_ROOT = ROOT_ACCEL
-    lra_fan.TYPESAFE_INFERENCE_PATH = ROOT_ACCEL / "ipfs_accelerate_py" / "typesafe_inference.py"
 
 
 def count_tactics(tactics: str) -> dict[str, float]:
@@ -82,11 +85,11 @@ def count_tactics(tactics: str) -> dict[str, float]:
 
 
 def feature_row(record: Mapping[str, Any]) -> FeatureRow:
-    from jevops.tactics import feature_row as _fn
+    from jevops.tactics import drive_feature_row
 
-    return _fn(
+    return drive_feature_row(
         record,
-        tactics=lra_fan.tactic_block(record),
+        tactic_fn=lra_fan.tactic_block,
         feature_names=FEATURE_NAMES,
         token_fn=lra_loop.token_count,
     )
@@ -106,17 +109,15 @@ def fit_pca_mca(rows: Sequence[FeatureRow], *, n_principal: int = 3, n_minor: in
 def amenable_families(counts: Mapping[str, float], model: Mapping[str, Any], *, top_k: int = 5) -> list[dict[str, Any]]:
     """Features that load on minor components *and* are present in this proof."""
 
-    from jevops.rankers import rank_present_families
-    from jevops.rankers import residual_feature_scores
+    from jevops.rankers import drive_amenable
 
-    scores = residual_feature_scores(
+    return drive_amenable(
         counts,
-        model["mean"],
-        model["std"],
-        model["minor"],
-        FEATURE_NAMES,
+        model,
+        feature_names=FEATURE_NAMES,
+        families=FAMILY_FEATURES,
+        top_k=top_k,
     )
-    return rank_present_families(counts, scores, FAMILY_FEATURES, top_k=top_k)
 
 
 def drop_rename_i(text: str) -> str:
@@ -155,23 +156,14 @@ def guided_drafts(
     import inits_updates_shorten as lra_ius
     import portable_rewrites as lra_port
     import symbol_diffuse as lra_sym
-    from jevops.outer import get_str
+    from jevops.tactics import drive_guided_ops
 
-    portable = [
-        (
-            get_str(item, "family", default="search_space"),
-            get_str(item, "tactics"),
-            ("portable", get_str(item, "kind")),
-        )
-        for item in lra_port.portable_drafts(tactics)
-    ]
-    from jevops.tactics import collect_guided_drafts
-
-    return collect_guided_drafts(
+    return drive_guided_ops(
         tactics,
         families,
         counts,
-        extras=(portable, lra_ius.pca_mca_ops(tactics), lra_sym.pca_mca_ops(tactics)),
+        portable_fn=lra_port.portable_drafts,
+        op_fns=(lra_ius.pca_mca_ops, lra_sym.pca_mca_ops),
         push_fn=lra_fan._push,
     )
 
@@ -184,26 +176,20 @@ def fanout_state(
     drafts: Sequence[lra_fan.Draft],
     pca: Mapping[str, Any],
 ) -> dict[str, Any]:
-    from jevops.jev import fanout_problem_state
-    from jevops.outer import head_seq, overlay_map
+    from jevops.jev import drive_pca_fanout_state
 
-    return fanout_problem_state(
+    return drive_pca_fanout_state(
         record,
-        statement_n=480,
-        extra={
-            "ast_features": overlay_map(features),
-            "pca_principal": head_seq(pca["principal"], 2),
-            "mca_minor": pca["minor"],
-            "amenable": list(families),
-            "drafts": lra_fan.draft_catalog(drafts),
-            "compiler_families": list(FAMILY_FEATURES),
-        },
+        features=features,
+        families=families,
+        drafts=drafts,
+        pca=pca,
+        catalog_fn=lra_fan.draft_catalog,
+        compiler_families=FAMILY_FEATURES,
     )
 
 
 def fanout_questions(drafts: Sequence[lra_fan.Draft], *, Choice: Any, Noul: Any, Score: Any) -> dict[str, Any]:
-    from jevops.jev import choice_questions, draft_criteria
-
     from jevops.catalogs import (
         FANOUT_FAMILY_CRITERIA,
         LIKELY_SHORTER_CRITERIA,
@@ -211,12 +197,14 @@ def fanout_questions(drafts: Sequence[lra_fan.Draft], *, Choice: Any, Noul: Any,
         PCA_FANOUT_FAMILY_INSTRUCTIONS,
         PCA_FANOUT_NOULS,
     )
+    from jevops.jev import draft_criteria, drive_choice_catalog
 
-    return choice_questions(
+    return drive_choice_catalog(
+        drafts,
         Choice=Choice,
         Noul=Noul,
         Score=Score,
-        criteria=draft_criteria(drafts),
+        criteria_fn=draft_criteria,
         best_instructions=PCA_FANOUT_BEST,
         nouls=PCA_FANOUT_NOULS,
         scores={
@@ -245,65 +233,32 @@ def rank_problem(
     *,
     live: bool,
 ) -> dict[str, Any]:
-    tactics = lra_fan.tactic_block(record)
-    features = count_tactics(tactics)
-    families = amenable_families(features, model)
-    drafts = guided_drafts(tactics, families, features)
-    state = fanout_state(record, features=features, families=families, drafts=drafts, pca=model)
-    from jevops.jev import invoke_system_one, rank_catalog_or_live, rank_live_choice_row
-    from jevops.outer import or_none, unless_flag
+    from jevops.jev import drive_rank_problem
 
-    def _project(result: Any, wall_ms: float) -> dict[str, Any]:
-        return rank_live_choice_row(
-            result,
-            wall_ms,
-            rank_fn=lra_fan.rank_choice,
-            drafts=drafts,
-            choice_map={"best_compiler_family": "best_compiler_family", "best_first_draft": "best_first_draft"},
-            noul_map={
-                "dead_code_safe": "dead_code_safe",
-                "strength_reduction_safe": "strength_reduction_safe",
-                "loop_invariant_safe": "loop_invariant_safe",
-                "search_space_safe": "search_space_safe",
-                "algebraic_simplification_safe": "algebraic_simplification_safe",
-            },
-            score_map={"likely_token_cut": "likely_token_cut"},
-        )
-
-    def _invoke() -> tuple[Any, float]:
-        from jevops.jev import load_typesafe_inference
-
-        loaded = load_typesafe_inference(setup=(pin_typesafe_path,), fallback=False)
-        Choice, Noul, Score, TypeSafeClient = (
-            loaded["Choice"],
-            loaded["Noul"],
-            loaded["Score"],
-            loaded["TypeSafeClient"],
-        )
-        return invoke_system_one(
-            TypeSafeClient(timeout=60.0),
-            state,
-            fanout_questions(drafts, Choice=Choice, Noul=Noul, Score=Score),
-        )
-
-    def _configured() -> bool:
-        from jevops.jev import typesafe_is_configured
-
-        return typesafe_is_configured(setup=(pin_typesafe_path,), fallback=False)
-
-    return rank_catalog_or_live(
+    return drive_rank_problem(
         record,
-        drafts=drafts,
-        families=families,
-        features=features,
+        records,
+        model,
         live=live,
-        extra=or_none(unless_flag(live, {"catalog": lra_fan.draft_catalog(drafts)})),
-        catalog_fn=lambda: lra_fan.draft_catalog(drafts),
+        tactic_fn=lra_fan.tactic_block,
+        count_fn=count_tactics,
+        families_fn=amenable_families,
+        drafts_fn=guided_drafts,
+        state_fn=fanout_state,
+        questions_fn=fanout_questions,
+        catalog_fn=lra_fan.draft_catalog,
+        rank_choice_fn=lra_fan.rank_choice,
         pin_fn=pin_typesafe_path,
-        configured_fn=_configured,
-        invoke_fn=_invoke,
-        project_fn=_project,
         redact_fn=redact,
+        choice_map={"best_compiler_family": "best_compiler_family", "best_first_draft": "best_first_draft"},
+        noul_map={
+            "dead_code_safe": "dead_code_safe",
+            "strength_reduction_safe": "strength_reduction_safe",
+            "loop_invariant_safe": "loop_invariant_safe",
+            "search_space_safe": "search_space_safe",
+            "algebraic_simplification_safe": "algebraic_simplification_safe",
+        },
+        score_map={"likely_token_cut": "likely_token_cut"},
     )
 
 
@@ -359,24 +314,17 @@ def self_check() -> dict[str, Any]:
 
 
 def live_rank(names: Sequence[str]) -> dict[str, Any]:
-    from jevops.outer import fit_drop, pin_calls
+    from jevops.outer import drive_named_live_rank, fit_drop
 
-    pin_calls(load_keyfile, pin_typesafe_path)()
-    _raw, digest, records = lra_splice.load_warmup_records()
-    public_model = fit_drop(records, feature_row, fit_pca_mca)
-    started = time.perf_counter()
-    from jevops.outer import elapsed_ms, pack_live_rank, rank_named_rows
-
-    canaries = rank_named_rows(
-        names, records, lambda record: rank_problem(record, records, public_model, live=True)
-    )
-    return pack_live_rank(
+    return drive_named_live_rank(
+        names,
+        load_fn=lra_splice.load_warmup_records,
+        pin_fns=(load_keyfile, pin_typesafe_path),
+        prepare_fn=lambda records: fit_drop(records, feature_row, fit_pca_mca),
+        rank_fn=lambda record, records, model: rank_problem(record, records, model, live=True),
         schema="lra-pca-mca-fanout/v1",
-        digest=digest,
-        canaries=canaries,
-        wall_ms=elapsed_ms(started),
-        extra={"protocol": PROTOCOL, "pr": PR_ID, "pca": public_model},
         redact_fn=redact,
+        extra_fn=lambda _records, model: {"protocol": PROTOCOL, "pr": PR_ID, "pca": model},
     )
 
 

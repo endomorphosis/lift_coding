@@ -75,6 +75,7 @@ from jevops.catalogs import FORBIDDEN_ORACLE_NAMES
 from jevops.catalogs import FORBIDDEN_SCORE_NAMES
 from jevops.catalogs import GIT_BIN
 from jevops.catalogs import PROCESS_SUPERVISOR_ENV
+from jevops.catalogs import UNSCORED_HARDWARE
 
 FORBIDDEN_IMPORT_NAMES = frozenset(
     {
@@ -120,26 +121,29 @@ class CompilePlan(_KernelCompilePlan):
         return super().first_record(error_cls=CompileError, miss="warmup JSONL has no Strata record")
 
     def to_dict(self) -> dict[str, Any]:
-        from jevops.lean import pack_compile_plan
+        from jevops.lean import drive_compile_public, pack_compile_plan
 
-        first = self.first_record
-        return pack_compile_plan(
-            first,
-            iter_version_pins(first.get("version_info")),
-            frozen_warmup_sha256=self.frozen_warmup_sha256,
-            jsonl_bytes=self.jsonl_bytes,
-            n_records=self.n_records,
-            first_source=STRATA_SOURCE,
-            first_tag=STRATA_FIRST_TAG,
-            first_commit=STRATA_FIRST_COMMIT,
-            first_file=STRATA_FIRST_FILE,
-            first_url=STRATA_URL,
-            kernel_command_template=KERNEL_COMMAND_TEMPLATE,
-            measurement_argv_template=MEASUREMENT_ARGV_TEMPLATE,
-            measurement_max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-            ikv_timeout=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
-            official_timeout=OFFICIAL_TAG_TIMEOUT_SECONDS,
-            warmup_timeout=WARMUP_TAG_TIMEOUT_SECONDS,
+        return drive_compile_public(
+            self,
+            lambda first, pins: pack_compile_plan(
+                first,
+                pins,
+                frozen_warmup_sha256=self.frozen_warmup_sha256,
+                jsonl_bytes=self.jsonl_bytes,
+                n_records=self.n_records,
+                first_source=STRATA_SOURCE,
+                first_tag=STRATA_FIRST_TAG,
+                first_commit=STRATA_FIRST_COMMIT,
+                first_file=STRATA_FIRST_FILE,
+                first_url=STRATA_URL,
+                kernel_command_template=KERNEL_COMMAND_TEMPLATE,
+                measurement_argv_template=MEASUREMENT_ARGV_TEMPLATE,
+                measurement_max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+                ikv_timeout=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+                official_timeout=OFFICIAL_TAG_TIMEOUT_SECONDS,
+                warmup_timeout=WARMUP_TAG_TIMEOUT_SECONDS,
+            ),
+            pins_fn=iter_version_pins,
         )
 
 
@@ -181,17 +185,20 @@ def header_max_heartbeats(header: str) -> Optional[int]:
 
 
 def iter_version_pins(version_info: Any) -> list[VersionPin]:
-    pins = [
-        VersionPin(lean_tag=item.lean_tag, git_commit=item.git_commit)
-        for item in lra_bake.iter_version_pins(version_info)
-    ]
-    return sorted(pins, key=lambda pin: _tag_sort_key(pin.lean_tag), reverse=True)
+    from jevops.outer import drive_sorted_pins
+
+    return drive_sorted_pins(
+        version_info,
+        iter_fn=lra_bake.iter_version_pins,
+        pin_fn=lambda item: VersionPin(lean_tag=item.lean_tag, git_commit=item.git_commit),
+        key_fn=lambda pin: _tag_sort_key(pin.lean_tag),
+    )
 
 
 def _tag_sort_key(tag: str) -> tuple[tuple[int, int, int], str]:
-    from jevops.outer import version_sort_key
+    from jevops.outer import drive_tag_sort
 
-    return version_sort_key(lra_bake.normalize_lean_tag(tag))
+    return drive_tag_sort(tag, normalize_fn=lra_bake.normalize_lean_tag)
 
 
 def measurement_argv(
@@ -228,10 +235,9 @@ def parse_axioms(stdout: str, stderr: str = "") -> tuple[list[str], bool]:
 
 
 def clone_dir(url: str, state_root: Optional[Path] = None) -> Path:
-    from jevops.outer import path_or, url_clone_dir
+    from jevops.outer import drive_url_clone
 
-    root = path_or(state_root, factory=lra_bake.default_state_root)
-    return url_clone_dir(root, url)
+    return drive_url_clone(url, state_root, factory=lra_bake.default_state_root)
 
 
 def require_clone(
@@ -240,16 +246,14 @@ def require_clone(
     network: str,
     state_root: Optional[Path] = None,
 ) -> Path:
-    from jevops.outer import replace_if, require_marked_dir
+    from jevops.lean import drive_require_clone
 
-    return require_marked_dir(
-        clone_dir(url, state_root),
-        (".git", "lakefile.lean"),
-        error_cls=replace_if(network == "deny", CloneMissing, None),
-        miss=(
-            f"cached clone missing for {url} under network=deny; never falling "
-            "back to PATH lean or a guessed GitHub URL"
-        ),
+    return drive_require_clone(
+        url,
+        network=network,
+        state_root=state_root,
+        clone_fn=clone_dir,
+        deny_cls=CloneMissing,
     )
 
 
@@ -313,14 +317,14 @@ def source_relpath(record: Mapping[str, Any]) -> str:
 
 
 def write_record_source(record: Mapping[str, Any], dest: Path) -> Path:
-    from jevops.lean import write_lake_source
+    from jevops.lean import drive_write_split, write_lake_source
 
-    split = lra_splice.split_statement_body(record)
-    return write_lake_source(
+    return drive_write_split(
+        record,
         dest,
-        header=split.header,
-        statement=split.statement,
-        tactic_block=lra_splice.tactic_block_from_body(split.body_suffix),
+        split_fn=lra_splice.split_statement_body,
+        tactic_fn=lra_splice.tactic_block_from_body,
+        write_fn=write_lake_source,
         refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
         error_cls=CompileError,
     )
@@ -353,100 +357,66 @@ def compile_tag(
     elan_home: Optional[Path] = None,
     network: str = "allow",
     require_oleans: bool = False,
-    hardware_class: str = "unscored-dev",
+    hardware_class: str = UNSCORED_HARDWARE,
     skip_checkout: bool = False,
 ) -> CompileReceipt:
     """Run tag-pinned ``lake env lean`` with finite measurement maxHeartbeats."""
 
-    timeout = require_lake_timeout(timeout)
-    from jevops.outer import get_str, text_or
-
-    header_cap = header_max_heartbeats(get_str(record, "header"))
-    relpath = source_relpath(record)
-    from jevops.lean import init_compile_receipt
-
-    receipt = init_compile_receipt(
-        record,
-        pin,
-        timeout=timeout,
-        relpath=relpath,
-        schema=RECEIPT_SCHEMA,
-        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-        header_cap=header_cap,
-        lean_num_threads=LEAN_NUM_THREADS,
-        kernel_command_template=KERNEL_COMMAND_TEMPLATE,
-        hardware_class=hardware_class,
-    )
     from jevops.lean import (
         close_failed_receipt,
+        drive_tag_compile,
         prepare_lake_paths,
-        run_tag_compile,
         stamp_measured_receipt,
         stamp_with_lake_process,
         write_candidate_if_needed,
     )
+    from jevops.outer import optional_fn
 
-    def _stamp(receipt: CompileReceipt, *, toolchain: Any, cwd: Path, source_file: str) -> CompileReceipt:
-        return stamp_with_lake_process(
-            receipt,
-            lake_path=toolchain.lake_path,
-            lean_path=toolchain.lean_path,
-            source_file=source_file,
-            max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-            cwd=cwd,
-            toolchain=toolchain,
-            timeout=timeout,
-            stamp_fn=stamp_measured_receipt,
-            run_lean_process=run_lean_process,
-            state_root=state_root,
-            tmp_name="lra-014-process-supervisor",
-            process_env_key=PROCESS_SUPERVISOR_ENV,
-            threads=LEAN_NUM_THREADS,
-            ikv_floor=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
-            refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
-            error_cls=CompileError,
-        )
-
-    from jevops.outer import optional_fn as _optional_fn
-
-    return run_tag_compile(
-        receipt,
-        resolve_fn=lambda: resolve_pin(pin, elan_home=elan_home, require_installed=True),
-        prepare_fn=lambda: prepare_lake_paths(
-            record,
-            pin,
-            putnam_source=PUTNAM_SOURCE,
-            putnam_relpath=lra_bake.PUTNAM_CANDIDATE_RELPATH,
-            source_relpath_fn=source_relpath,
-            putnam_dir_fn=lambda rec, p, root: project_dir_for_record(rec, p, state_root=root),
-            materialize_fn=lambda p, project: lra_bake.materialize_putnam_project(
-                p.lean_tag, project, jsonl_version_pin=p.git_commit
-            ),
-            require_clone_fn=lambda url, net, root: require_clone(
-                url, network=net, state_root=root
-            ),
-            checkout_fn=checkout_commit,
-            skip_checkout=skip_checkout,
-            network=network,
-            state_root=state_root,
+    return drive_tag_compile(
+        record,
+        pin,
+        timeout=timeout,
+        state_root=state_root,
+        elan_home=elan_home,
+        network=network,
+        require_oleans=require_oleans,
+        hardware_class=hardware_class,
+        skip_checkout=skip_checkout,
+        require_timeout_fn=require_lake_timeout,
+        header_cap_fn=header_max_heartbeats,
+        relpath_fn=source_relpath,
+        schema=RECEIPT_SCHEMA,
+        max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        threads=LEAN_NUM_THREADS,
+        kernel_template=KERNEL_COMMAND_TEMPLATE,
+        stamp_process_fn=stamp_with_lake_process,
+        stamp_measured_fn=stamp_measured_receipt,
+        run_lean_process=run_lean_process,
+        process_env_key=PROCESS_SUPERVISOR_ENV,
+        ikv_floor=INDEPENDENT_KERNEL_VERIFIER_DEFAULT_TIMEOUT_SECONDS,
+        refuse=lra_bake.FORBIDDEN_PUTNAM_BASENAME,
+        error_cls=CompileError,
+        tmp_name="lra-014-process-supervisor",
+        resolve_fn=resolve_pin,
+        prepare_paths_fn=prepare_lake_paths,
+        write_candidate_fn=write_candidate_if_needed,
+        optional_fn=optional_fn,
+        bake_fn=lambda: lra_bake.require_cache(
+            _bake_job_for_record(record, pin), network=network, state_root=state_root
         ),
-        write_fn=lambda dest: write_candidate_if_needed(
-            record,
-            dest,
-            putnam_source=PUTNAM_SOURCE,
-            write_fn=write_record_source,
-        ),
-        bake_fn=_optional_fn(
-            require_oleans,
-            lambda: lra_bake.require_cache(
-                _bake_job_for_record(record, pin), network=network, state_root=state_root
-            ),
-        ),
-        stamp_fn=_stamp,
-        close_fn=lambda rec, exc: close_failed_receipt(
-            rec, exc, digest_fn=sha256_text, axiom_digest_fn=axiom_digest
-        ),
+        close_failed_fn=close_failed_receipt,
+        digest_fn=sha256_text,
+        axiom_digest_fn=axiom_digest,
         error_types=(CompileError, LeanToolchainMissing, lra_bake.BakeError),
+        putnam_source=PUTNAM_SOURCE,
+        putnam_relpath=lra_bake.PUTNAM_CANDIDATE_RELPATH,
+        putnam_dir_fn=lambda rec, p, root: project_dir_for_record(rec, p, state_root=root),
+        materialize_fn=lambda p, project: lra_bake.materialize_putnam_project(
+            p.lean_tag, project, jsonl_version_pin=p.git_commit
+        ),
+        require_clone_fn=lambda url, net, root: require_clone(url, network=net, state_root=root),
+        checkout_fn=checkout_commit,
+        write_record_fn=write_record_source,
     )
 
 
@@ -473,16 +443,16 @@ def compile_record(
     elan_home: Optional[Path] = None,
     network: str = "allow",
     require_oleans: bool = False,
-    hardware_class: str = "unscored-dev",
+    hardware_class: str = UNSCORED_HARDWARE,
     skip_checkout: bool = False,
     abort_on_first_failure: bool = True,
 ) -> list[CompileReceipt]:
-    from jevops.outer import collect_until, optional_fn, replace_if
+    from jevops.lean import drive_compile_pins
 
-    pins = iter_version_pins(record.get("version_info"))
-    return collect_until(
-        pins,
-        lambda pin: compile_tag(
+    return drive_compile_pins(
+        record,
+        pins_fn=iter_version_pins,
+        compile_fn=lambda pin: compile_tag(
             record,
             pin,
             timeout=timeout,
@@ -493,9 +463,7 @@ def compile_record(
             hardware_class=hardware_class,
             skip_checkout=skip_checkout,
         ),
-        abort_fn=optional_fn(abort_on_first_failure, lambda receipt: not receipt.ok),
-        remaining_fn=lambda rest: [item.lean_tag for item in rest],
-        remaining_attr=replace_if(abort_on_first_failure, "aborted_remaining_tags", ""),
+        abort=abort_on_first_failure,
     )
 
 
@@ -512,27 +480,29 @@ def write_receipts(receipts: Sequence[CompileReceipt], dest_dir: Path) -> list[s
 
 
 def plan_compile(path: Optional[Path] = None) -> CompilePlan:
-    from jevops.outer import if_none
+    from jevops.lean import drive_loaded_plan, plan_from_records
 
-    jsonl = Path(if_none(path, WARMUP_JSONL))
-    raw, digest, records = lra_splice.load_warmup_records(jsonl)
-    from jevops.lean import plan_from_records
-
-    return plan_from_records(
-        records,
-        digest,
-        len(raw),
-        first_source=STRATA_SOURCE,
-        cls=CompilePlan,
+    return drive_loaded_plan(
+        path,
+        default_path=WARMUP_JSONL,
+        load_fn=lra_splice.load_warmup_records,
+        build_fn=lambda raw, digest, records: plan_from_records(
+            records,
+            digest,
+            len(raw),
+            first_source=STRATA_SOURCE,
+            cls=CompilePlan,
+        ),
     )
 
 
 def first_strata_record(records: Sequence[Mapping[str, Any]]) -> Mapping[str, Any]:
-    from jevops.outer import field_eq, first_where
+    from jevops.outer import drive_first_field
 
-    return first_where(
+    return drive_first_field(
         records,
-        field_eq("source", STRATA_SOURCE),
+        "source",
+        STRATA_SOURCE,
         error_cls=CompileError,
         miss="no Strata record in warmup JSONL",
     )
@@ -545,36 +515,26 @@ def expand_records(
 ) -> list[Mapping[str, Any]]:
     """Records whose tags are compiled after ``after_name`` is green."""
 
-    from jevops.outer import after_named, field_eq
+    from jevops.outer import drive_after_value
 
-    return after_named(
-        records,
-        after_name,
-        pred=field_eq("source", STRATA_SOURCE),
-    )
+    return drive_after_value(records, after_name, field="source", value=STRATA_SOURCE)
 
 
 def probe_toolchain(tags: Iterable[str] | None = None) -> dict[str, Any]:
-    from jevops.outer import if_none
+    from jevops.lean import drive_resolver_probe
+    from jevops.outer import or_list
 
-    tags = if_none(tags, (STRATA_FIRST_TAG, "v4.27.0", "v4.29.1"))
-    from jevops.lean import probe_pins
-    from jevops.outer import env_str, or_list, text_or
-
-    resolver = LeanToolchainResolver()
-    return probe_pins(
-        or_list(tags, ()),
-        resolve_fn=lambda tag: resolver.resolve_tag(tag, require_installed=False).to_dict(),
+    return drive_resolver_probe(
+        tags,
+        resolver_cls=LeanToolchainResolver,
+        default_tags=(STRATA_FIRST_TAG, "v4.27.0", "v4.29.1"),
+        elan_home_fn=lra_bake.default_elan_home,
+        list_fn=lambda chosen: or_list(chosen, ()),
         extra={
-            "default_elan_home": text_or(lra_bake.default_elan_home()),
-            "elan_home_env": env_str("ELAN_HOME"),
             "independent_kernel_verifier_is_lake_oracle": False,
             "kernel_command_template": KERNEL_COMMAND_TEMPLATE,
-            "lake": False,
             "measurement_argv_template": MEASUREMENT_ARGV_TEMPLATE,
-            "path": env_str("PATH"),
             "run_lean_process": run_lean_process.__name__,
-            "validation_home": text_or(Path.home()),
             "warmup_timeout_seconds": WARMUP_TAG_TIMEOUT_SECONDS,
         },
     )
@@ -665,18 +625,16 @@ def plant_fake_toolchain(elan_home: Path, lean_tag: str) -> Path:
 
 
 def plant_synthetic_strata_clone(clone: Path) -> Path:
-    from jevops.lean import plant_synthetic_clone, render_lean_toolchain, render_package_lakefile
+    from jevops.lean import drive_plant_named, render_lean_toolchain, render_package_lakefile
 
-    return plant_synthetic_clone(
+    return drive_plant_named(
         clone,
-        {
-            "lakefile.lean": render_package_lakefile(
-                package="strata",
-                lib="Strata",
-                max_heartbeats=MEASUREMENT_MAX_HEARTBEATS,
-            ),
-            "lean-toolchain": render_lean_toolchain(STRATA_FIRST_TAG),
-        },
+        package="strata",
+        lib="Strata",
+        heartbeats=MEASUREMENT_MAX_HEARTBEATS,
+        tag=STRATA_FIRST_TAG,
+        lakefile_fn=render_package_lakefile,
+        toolchain_fn=render_lean_toolchain,
     )
 
 
@@ -693,11 +651,11 @@ def _receipt_summary(receipt: CompileReceipt) -> dict[str, Any]:
 def _exec_scratch_parent() -> Path:
     """Return a directory that can exec shebang scripts. ``/tmp`` is often noexec."""
 
-    from jevops.outer import exec_capable_dir, state_home_candidates
+    from jevops.outer import drive_exec_parent, state_home_candidates
 
-    return exec_capable_dir(
-        state_home_candidates(),
-        probe_name=".lra-014-exec-probe",
+    return drive_exec_parent(
+        candidates_fn=state_home_candidates,
+        probe=".lra-014-exec-probe",
         error_cls=CompileError,
         miss=(
             "no executable filesystem for tag-pinned synthetic lake/lean "
