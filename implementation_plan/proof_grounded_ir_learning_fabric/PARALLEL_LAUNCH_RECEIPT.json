@@ -1,0 +1,93 @@
+{
+  "schema": "proof-grounded-ir-learning/parallel-launch-receipt@1",
+  "observed_at": "2026-08-16T22:30:30Z",
+  "disposition": "running_parallel_inventory",
+  "authority": {
+    "accelerator_branch": "agent/proof-grounded-ir-learning",
+    "accelerator_commit": "a5db9edc6fa24c25b349f82184a0c375a0fab761",
+    "datasets_commit": "df93e91e6338c84a17c3208ef68b88de8566f78c",
+    "task_board_sha256": "a0659db2f6dbd53e0bd09cf3b913dbbdf539a0d2868092e387a112c6b8b388db"
+  },
+  "recovered_gate": {
+    "task_id": "PGIR-001",
+    "status": "completed",
+    "manifest_sha256": "3db018b70be45870a2c4b2ad6fb5d65258751d0c8c3d7d089af74e2a4ee9f92b",
+    "manifest_cid": "baguqeerasownoxqyrppw3ft3us3yvd26ghvqnjl74nr2rw5o7sm3sjehip7a",
+    "result_identity": "sha256:86f7c07cf7b62847b81315b6529942da7647acf9922f32cf5ccef9d8bb221e9c",
+    "focused_test": "19 passed, 1 warning",
+    "deterministic_replay": "passed",
+    "git_fsck_exit_codes": [0, 0],
+    "enumerated_commit_count": 5333
+  },
+  "preflight": {
+    "path": "/home/barberb/lift_coding/.pgir_campaign/runtime/preflight-parallel-20260816T222808Z",
+    "exit_code": 0,
+    "stuck": false,
+    "stale_worktree_count": 0,
+    "reconciliation_blocked_count": 0,
+    "pending_replay_count": 0
+  },
+  "master": {
+    "pid": 4152206,
+    "status": "running",
+    "pid_path": "/home/barberb/lift_coding/.pgir_campaign/runtime/master/pgir_parallel_master_20260816T222901Z.pid",
+    "log_path": "/home/barberb/lift_coding/.pgir_campaign/runtime/master/pgir_parallel_master_20260816T222901Z.log"
+  },
+  "lanes": [
+    {
+      "lane": 0,
+      "supervisor_pid": 4152397,
+      "daemon_pid": 4153547,
+      "status": "running",
+      "active_task": "PGIR-003",
+      "active_phase": "implementing",
+      "provider_process_verified": true,
+      "blocked_count": 0
+    },
+    {
+      "lane": 1,
+      "supervisor_pid": 4152398,
+      "daemon_pid": 4153529,
+      "status": "running",
+      "active_task": "PGIR-004",
+      "active_phase": "implementing",
+      "provider_process_verified": true,
+      "blocked_count": 0
+    },
+    {
+      "lane": 2,
+      "supervisor_pid": 4152399,
+      "daemon_pid": 4153910,
+      "status": "running",
+      "active_task": null,
+      "idle_reason": "all_selectable_ready_tasks_deferred_by_resource_claim",
+      "interpretation": "healthy lease backpressure: PGIR-002 and PGIR-004 both own the datasets submodule resource",
+      "blocked_count": 0
+    }
+  ],
+  "parallel_execution": {
+    "configured_lane_count": 3,
+    "simultaneously_active_task_count": 2,
+    "active_tasks": ["PGIR-003", "PGIR-004"],
+    "unsafe_same_submodule_overlap_prevented": true,
+    "serialized_merge_queue": "/home/barberb/lift_coding/.pgir_campaign/runtime/merge_queue"
+  },
+  "bounded_policy": {
+    "master_duration_seconds": 28800,
+    "heartbeat_interval_seconds": 30,
+    "status_stale_seconds": 600,
+    "implementation_timeout_seconds": 7200,
+    "implementation_log_stall_seconds": 900,
+    "max_restarts": 3,
+    "max_task_attempts": 3
+  },
+  "provider": {
+    "command": "/usr/local/bin/codex exec --approve-for-me --ephemeral",
+    "cli_version": "0.147.0",
+    "capability_probe": "READY",
+    "model_observed": "gpt-5.6-sol",
+    "authority": "implementation_candidate_only"
+  },
+  "promotion_status": "not_admitted",
+  "publication_status": "not_admitted"
+}

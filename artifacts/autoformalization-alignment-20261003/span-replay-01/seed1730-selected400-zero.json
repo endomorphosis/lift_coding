@@ -1,0 +1,6064 @@
+{
+  "admitted": false,
+  "checkpoint_sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b",
+  "context_contract_sha256": "2d617499ed6ced93b5e26b42b99aba07559f0e1e50970ff7269c4f1858edc5e2",
+  "decoded_count": 0,
+  "formalized": false,
+  "input_dimension": 768,
+  "latent_ablation": "zero",
+  "lineage_id": "native_dimensional_source_span_v1",
+  "model_state_unchanged": true,
+  "promotion_performed": false,
+  "proof_authority": false,
+  "publication_performed": false,
+  "qualified": false,
+  "roundtrip_ok": false,
+  "rows": [
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 28,
+            "char_start": 19,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 9.673379898071289,
+            "text": "authorize",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 104,
+            "char_start": 96,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.10231494903564453,
+            "text": "unless a",
+            "token_end_inclusive": 17,
+            "token_start": 16
+          },
+          "conditions": {
+            "char_end": 84,
+            "char_start": 52,
+            "presence_logit_margin": 21.232891082763672,
+            "present": true,
+            "span_logit_margin": 0.34677696228027344,
+            "text": "the review deadline if fees have",
+            "token_end_inclusive": 12,
+            "token_start": 7
+          },
+          "exceptions": {
+            "char_end": 123,
+            "char_start": 29,
+            "presence_logit_margin": 8.986010551452637,
+            "present": true,
+            "span_logit_margin": 3.2838382720947266,
+            "text": "the application before the review deadline if fees have been paid, unless a legal hold applies",
+            "token_end_inclusive": 20,
+            "token_start": 4
+          },
+          "object": {
+            "char_end": 13,
+            "char_start": 0,
+            "presence_logit_margin": 12.665275573730469,
+            "present": true,
+            "span_logit_margin": 2.0357770919799805,
+            "text": "The registrar",
+            "token_end_inclusive": 1,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          1.108597755432129,
+          -1.4674168825149536,
+          0.2227119356393814
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 13,
+            "start": 4,
+            "text": "registrar"
+          },
+          {
+            "end": 18,
+            "start": 14,
+            "text": "must"
+          },
+          {
+            "end": 28,
+            "start": 19,
+            "text": "authorize"
+          },
+          {
+            "end": 32,
+            "start": 29,
+            "text": "the"
+          },
+          {
+            "end": 44,
+            "start": 33,
+            "text": "application"
+          },
+          {
+            "end": 51,
+            "start": 45,
+            "text": "before"
+          },
+          {
+            "end": 55,
+            "start": 52,
+            "text": "the"
+          },
+          {
+            "end": 62,
+            "start": 56,
+            "text": "review"
+          },
+          {
+            "end": 71,
+            "start": 63,
+            "text": "deadline"
+          },
+          {
+            "end": 74,
+            "start": 72,
+            "text": "if"
+          },
+          {
+            "end": 79,
+            "start": 75,
+            "text": "fees"
+          },
+          {
+            "end": 84,
+            "start": 80,
+            "text": "have"
+          },
+          {
+            "end": 89,
+            "start": 85,
+            "text": "been"
+          },
+          {
+            "end": 94,
+            "start": 90,
+            "text": "paid"
+          },
+          {
+            "end": 95,
+            "start": 94,
+            "text": ","
+          },
+          {
+            "end": 102,
+            "start": 96,
+            "text": "unless"
+          },
+          {
+            "end": 104,
+            "start": 103,
+            "text": "a"
+          },
+          {
+            "end": 110,
+            "start": 105,
+            "text": "legal"
+          },
+          {
+            "end": 115,
+            "start": 111,
+            "text": "hold"
+          },
+          {
+            "end": 123,
+            "start": 116,
+            "text": "applies"
+          },
+          {
+            "end": 124,
+            "start": 123,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 21,
+            "char_start": 16,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 8.487886428833008,
+            "text": "audit",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 164,
+            "char_start": 136,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.5166435241699219,
+            "text": "unless a court order applies",
+            "token_end_inclusive": 29,
+            "token_start": 25
+          },
+          "object": {
+            "char_end": 79,
+            "char_start": 0,
+            "presence_logit_margin": 13.256171226501465,
+            "present": true,
+            "span_logit_margin": 0.32228851318359375,
+            "text": "The officer may audit the filing within 48 hours and before the review deadline",
+            "token_end_inclusive": 13,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          3.5224802494049072,
+          -0.9515579342842102,
+          -2.861698627471924
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 11,
+            "start": 4,
+            "text": "officer"
+          },
+          {
+            "end": 15,
+            "start": 12,
+            "text": "may"
+          },
+          {
+            "end": 21,
+            "start": 16,
+            "text": "audit"
+          },
+          {
+            "end": 25,
+            "start": 22,
+            "text": "the"
+          },
+          {
+            "end": 32,
+            "start": 26,
+            "text": "filing"
+          },
+          {
+            "end": 39,
+            "start": 33,
+            "text": "within"
+          },
+          {
+            "end": 42,
+            "start": 40,
+            "text": "48"
+          },
+          {
+            "end": 48,
+            "start": 43,
+            "text": "hours"
+          },
+          {
+            "end": 52,
+            "start": 49,
+            "text": "and"
+          },
+          {
+            "end": 59,
+            "start": 53,
+            "text": "before"
+          },
+          {
+            "end": 63,
+            "start": 60,
+            "text": "the"
+          },
+          {
+            "end": 70,
+            "start": 64,
+            "text": "review"
+          },
+          {
+            "end": 79,
+            "start": 71,
+            "text": "deadline"
+          },
+          {
+            "end": 82,
+            "start": 80,
+            "text": "if"
+          },
+          {
+            "end": 86,
+            "start": 83,
+            "text": "the"
+          },
+          {
+            "end": 98,
+            "start": 87,
+            "text": "application"
+          },
+          {
+            "end": 101,
+            "start": 99,
+            "text": "is"
+          },
+          {
+            "end": 110,
+            "start": 102,
+            "text": "complete"
+          },
+          {
+            "end": 114,
+            "start": 111,
+            "text": "and"
+          },
+          {
+            "end": 119,
+            "start": 115,
+            "text": "fees"
+          },
+          {
+            "end": 124,
+            "start": 120,
+            "text": "have"
+          },
+          {
+            "end": 129,
+            "start": 125,
+            "text": "been"
+          },
+          {
+            "end": 134,
+            "start": 130,
+            "text": "paid"
+          },
+          {
+            "end": 135,
+            "start": 134,
+            "text": ","
+          },
+          {
+            "end": 142,
+            "start": 136,
+            "text": "unless"
+          },
+          {
+            "end": 144,
+            "start": 143,
+            "text": "a"
+          },
+          {
+            "end": 150,
+            "start": 145,
+            "text": "court"
+          },
+          {
+            "end": 156,
+            "start": 151,
+            "text": "order"
+          },
+          {
+            "end": 164,
+            "start": 157,
+            "text": "applies"
+          },
+          {
+            "end": 167,
+            "start": 165,
+            "text": "or"
+          },
+          {
+            "end": 169,
+            "start": 168,
+            "text": "a"
+          },
+          {
+            "end": 175,
+            "start": 170,
+            "text": "legal"
+          },
+          {
+            "end": 180,
+            "start": 176,
+            "text": "hold"
+          },
+          {
+            "end": 188,
+            "start": 181,
+            "text": "applies"
+          },
+          {
+            "end": 189,
+            "start": 188,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 61,
+            "char_start": 55,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 7.407155990600586,
+            "text": "retain",
+            "token_end_inclusive": 10,
+            "token_start": 10
+          },
+          "actor": {
+            "char_end": 103,
+            "char_start": 32,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.9409456253051758,
+            "text": "the custodian must not retain the application within 48 hours, unless a",
+            "token_end_inclusive": 18,
+            "token_start": 6
+          }
+        },
+        "modality_logits": [
+          -0.9956989884376526,
+          -3.6023128032684326,
+          5.517585277557373
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 31,
+            "start": 30,
+            "text": ","
+          },
+          {
+            "end": 35,
+            "start": 32,
+            "text": "the"
+          },
+          {
+            "end": 45,
+            "start": 36,
+            "text": "custodian"
+          },
+          {
+            "end": 50,
+            "start": 46,
+            "text": "must"
+          },
+          {
+            "end": 54,
+            "start": 51,
+            "text": "not"
+          },
+          {
+            "end": 61,
+            "start": 55,
+            "text": "retain"
+          },
+          {
+            "end": 65,
+            "start": 62,
+            "text": "the"
+          },
+          {
+            "end": 77,
+            "start": 66,
+            "text": "application"
+          },
+          {
+            "end": 84,
+            "start": 78,
+            "text": "within"
+          },
+          {
+            "end": 87,
+            "start": 85,
+            "text": "48"
+          },
+          {
+            "end": 93,
+            "start": 88,
+            "text": "hours"
+          },
+          {
+            "end": 94,
+            "start": 93,
+            "text": ","
+          },
+          {
+            "end": 101,
+            "start": 95,
+            "text": "unless"
+          },
+          {
+            "end": 103,
+            "start": 102,
+            "text": "a"
+          },
+          {
+            "end": 109,
+            "start": 104,
+            "text": "legal"
+          },
+          {
+            "end": 114,
+            "start": 110,
+            "text": "hold"
+          },
+          {
+            "end": 122,
+            "start": 115,
+            "text": "applies"
+          },
+          {
+            "end": 123,
+            "start": 122,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 50,
+            "char_start": 44,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 5.540777206420898,
+            "text": "retain",
+            "token_end_inclusive": 8,
+            "token_start": 8
+          },
+          "actor": {
+            "char_end": 38,
+            "char_start": 19,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.7725811004638672,
+            "text": "custodian that they",
+            "token_end_inclusive": 6,
+            "token_start": 4
+          },
+          "object": {
+            "char_end": 66,
+            "char_start": 0,
+            "presence_logit_margin": 8.897143363952637,
+            "present": true,
+            "span_logit_margin": 0.8281631469726562,
+            "text": "The clerk told the custodian that they must retain the application",
+            "token_end_inclusive": 10,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          5.396881580352783,
+          -0.8703276515007019,
+          -4.537478446960449
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 14,
+            "start": 10,
+            "text": "told"
+          },
+          {
+            "end": 18,
+            "start": 15,
+            "text": "the"
+          },
+          {
+            "end": 28,
+            "start": 19,
+            "text": "custodian"
+          },
+          {
+            "end": 33,
+            "start": 29,
+            "text": "that"
+          },
+          {
+            "end": 38,
+            "start": 34,
+            "text": "they"
+          },
+          {
+            "end": 43,
+            "start": 39,
+            "text": "must"
+          },
+          {
+            "end": 50,
+            "start": 44,
+            "text": "retain"
+          },
+          {
+            "end": 54,
+            "start": 51,
+            "text": "the"
+          },
+          {
+            "end": 66,
+            "start": 55,
+            "text": "application"
+          },
+          {
+            "end": 67,
+            "start": 66,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 66,
+            "char_start": 60,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 1.1278209686279297,
+            "text": "before",
+            "token_end_inclusive": 12,
+            "token_start": 12
+          },
+          "actor": {
+            "char_end": 96,
+            "char_start": 24,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.8442554473876953,
+            "text": "the clerk must notify the applicant before the review deadline, unless a",
+            "token_end_inclusive": 18,
+            "token_start": 6
+          }
+        },
+        "modality_logits": [
+          1.019963264465332,
+          -1.3046646118164062,
+          0.11218476295471191
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 7,
+            "start": 3,
+            "text": "fees"
+          },
+          {
+            "end": 12,
+            "start": 8,
+            "text": "have"
+          },
+          {
+            "end": 17,
+            "start": 13,
+            "text": "been"
+          },
+          {
+            "end": 22,
+            "start": 18,
+            "text": "paid"
+          },
+          {
+            "end": 23,
+            "start": 22,
+            "text": ","
+          },
+          {
+            "end": 27,
+            "start": 24,
+            "text": "the"
+          },
+          {
+            "end": 33,
+            "start": 28,
+            "text": "clerk"
+          },
+          {
+            "end": 38,
+            "start": 34,
+            "text": "must"
+          },
+          {
+            "end": 45,
+            "start": 39,
+            "text": "notify"
+          },
+          {
+            "end": 49,
+            "start": 46,
+            "text": "the"
+          },
+          {
+            "end": 59,
+            "start": 50,
+            "text": "applicant"
+          },
+          {
+            "end": 66,
+            "start": 60,
+            "text": "before"
+          },
+          {
+            "end": 70,
+            "start": 67,
+            "text": "the"
+          },
+          {
+            "end": 77,
+            "start": 71,
+            "text": "review"
+          },
+          {
+            "end": 86,
+            "start": 78,
+            "text": "deadline"
+          },
+          {
+            "end": 87,
+            "start": 86,
+            "text": ","
+          },
+          {
+            "end": 94,
+            "start": 88,
+            "text": "unless"
+          },
+          {
+            "end": 96,
+            "start": 95,
+            "text": "a"
+          },
+          {
+            "end": 102,
+            "start": 97,
+            "text": "legal"
+          },
+          {
+            "end": 107,
+            "start": 103,
+            "text": "hold"
+          },
+          {
+            "end": 115,
+            "start": 108,
+            "text": "applies"
+          },
+          {
+            "end": 116,
+            "start": 115,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 21,
+            "char_start": 15,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 5.594487190246582,
+            "text": "notify",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 3,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.19927692413330078,
+            "text": "The",
+            "token_end_inclusive": 0,
+            "token_start": 0
+          },
+          "conditions": {
+            "char_end": 47,
+            "char_start": 22,
+            "presence_logit_margin": 16.71781349182129,
+            "present": true,
+            "span_logit_margin": 0.9776401519775391,
+            "text": "the applicant next Friday",
+            "token_end_inclusive": 7,
+            "token_start": 4
+          },
+          "object": {
+            "char_end": 47,
+            "char_start": 22,
+            "presence_logit_margin": 10.87794303894043,
+            "present": true,
+            "span_logit_margin": 0.5317840576171875,
+            "text": "the applicant next Friday",
+            "token_end_inclusive": 7,
+            "token_start": 4
+          }
+        },
+        "modality_logits": [
+          -1.7750834226608276,
+          0.33358603715896606,
+          2.462303638458252
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 14,
+            "start": 10,
+            "text": "must"
+          },
+          {
+            "end": 21,
+            "start": 15,
+            "text": "notify"
+          },
+          {
+            "end": 25,
+            "start": 22,
+            "text": "the"
+          },
+          {
+            "end": 35,
+            "start": 26,
+            "text": "applicant"
+          },
+          {
+            "end": 40,
+            "start": 36,
+            "text": "next"
+          },
+          {
+            "end": 47,
+            "start": 41,
+            "text": "Friday"
+          },
+          {
+            "end": 48,
+            "start": 47,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 20,
+            "char_start": 14,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 7.155641555786133,
+            "text": "retain",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 163,
+            "char_start": 135,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.3042335510253906,
+            "text": "unless a court order applies",
+            "token_end_inclusive": 29,
+            "token_start": 25
+          },
+          "object": {
+            "char_end": 78,
+            "char_start": 0,
+            "presence_logit_margin": 12.189496994018555,
+            "present": true,
+            "span_logit_margin": 0.08551597595214844,
+            "text": "The clerk may retain the filing within 48 hours and before the review deadline",
+            "token_end_inclusive": 13,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          4.2238240242004395,
+          -1.7417491674423218,
+          -2.748354196548462
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 13,
+            "start": 10,
+            "text": "may"
+          },
+          {
+            "end": 20,
+            "start": 14,
+            "text": "retain"
+          },
+          {
+            "end": 24,
+            "start": 21,
+            "text": "the"
+          },
+          {
+            "end": 31,
+            "start": 25,
+            "text": "filing"
+          },
+          {
+            "end": 38,
+            "start": 32,
+            "text": "within"
+          },
+          {
+            "end": 41,
+            "start": 39,
+            "text": "48"
+          },
+          {
+            "end": 47,
+            "start": 42,
+            "text": "hours"
+          },
+          {
+            "end": 51,
+            "start": 48,
+            "text": "and"
+          },
+          {
+            "end": 58,
+            "start": 52,
+            "text": "before"
+          },
+          {
+            "end": 62,
+            "start": 59,
+            "text": "the"
+          },
+          {
+            "end": 69,
+            "start": 63,
+            "text": "review"
+          },
+          {
+            "end": 78,
+            "start": 70,
+            "text": "deadline"
+          },
+          {
+            "end": 81,
+            "start": 79,
+            "text": "if"
+          },
+          {
+            "end": 85,
+            "start": 82,
+            "text": "the"
+          },
+          {
+            "end": 97,
+            "start": 86,
+            "text": "application"
+          },
+          {
+            "end": 100,
+            "start": 98,
+            "text": "is"
+          },
+          {
+            "end": 109,
+            "start": 101,
+            "text": "complete"
+          },
+          {
+            "end": 113,
+            "start": 110,
+            "text": "and"
+          },
+          {
+            "end": 118,
+            "start": 114,
+            "text": "fees"
+          },
+          {
+            "end": 123,
+            "start": 119,
+            "text": "have"
+          },
+          {
+            "end": 128,
+            "start": 124,
+            "text": "been"
+          },
+          {
+            "end": 133,
+            "start": 129,
+            "text": "paid"
+          },
+          {
+            "end": 134,
+            "start": 133,
+            "text": ","
+          },
+          {
+            "end": 141,
+            "start": 135,
+            "text": "unless"
+          },
+          {
+            "end": 143,
+            "start": 142,
+            "text": "a"
+          },
+          {
+            "end": 149,
+            "start": 144,
+            "text": "court"
+          },
+          {
+            "end": 155,
+            "start": 150,
+            "text": "order"
+          },
+          {
+            "end": 163,
+            "start": 156,
+            "text": "applies"
+          },
+          {
+            "end": 166,
+            "start": 164,
+            "text": "or"
+          },
+          {
+            "end": 168,
+            "start": 167,
+            "text": "a"
+          },
+          {
+            "end": 174,
+            "start": 169,
+            "text": "legal"
+          },
+          {
+            "end": 179,
+            "start": 175,
+            "text": "hold"
+          },
+          {
+            "end": 187,
+            "start": 180,
+            "text": "applies"
+          },
+          {
+            "end": 188,
+            "start": 187,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 52,
+            "char_start": 46,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 8.383502960205078,
+            "text": "retain",
+            "token_end_inclusive": 9,
+            "token_start": 9
+          },
+          "actor": {
+            "char_end": 100,
+            "char_start": 31,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.5059452056884766,
+            "text": "the clerk must retain the filing before the review deadline, unless a",
+            "token_end_inclusive": 18,
+            "token_start": 6
+          }
+        },
+        "modality_logits": [
+          3.317295789718628,
+          -3.461538791656494,
+          -0.25427231192588806
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 11,
+            "start": 3,
+            "text": "identity"
+          },
+          {
+            "end": 15,
+            "start": 12,
+            "text": "has"
+          },
+          {
+            "end": 20,
+            "start": 16,
+            "text": "been"
+          },
+          {
+            "end": 29,
+            "start": 21,
+            "text": "verified"
+          },
+          {
+            "end": 30,
+            "start": 29,
+            "text": ","
+          },
+          {
+            "end": 34,
+            "start": 31,
+            "text": "the"
+          },
+          {
+            "end": 40,
+            "start": 35,
+            "text": "clerk"
+          },
+          {
+            "end": 45,
+            "start": 41,
+            "text": "must"
+          },
+          {
+            "end": 52,
+            "start": 46,
+            "text": "retain"
+          },
+          {
+            "end": 56,
+            "start": 53,
+            "text": "the"
+          },
+          {
+            "end": 63,
+            "start": 57,
+            "text": "filing"
+          },
+          {
+            "end": 70,
+            "start": 64,
+            "text": "before"
+          },
+          {
+            "end": 74,
+            "start": 71,
+            "text": "the"
+          },
+          {
+            "end": 81,
+            "start": 75,
+            "text": "review"
+          },
+          {
+            "end": 90,
+            "start": 82,
+            "text": "deadline"
+          },
+          {
+            "end": 91,
+            "start": 90,
+            "text": ","
+          },
+          {
+            "end": 98,
+            "start": 92,
+            "text": "unless"
+          },
+          {
+            "end": 100,
+            "start": 99,
+            "text": "a"
+          },
+          {
+            "end": 106,
+            "start": 101,
+            "text": "legal"
+          },
+          {
+            "end": 111,
+            "start": 107,
+            "text": "hold"
+          },
+          {
+            "end": 119,
+            "start": 112,
+            "text": "applies"
+          },
+          {
+            "end": 120,
+            "start": 119,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 59,
+            "char_start": 53,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 3.833066940307617,
+            "text": "notify",
+            "token_end_inclusive": 10,
+            "token_start": 10
+          },
+          "actor": {
+            "char_end": 80,
+            "char_start": 32,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.22086715698242188,
+            "text": "the officer must not notify the applicant within",
+            "token_end_inclusive": 13,
+            "token_start": 6
+          }
+        },
+        "modality_logits": [
+          -1.9466713666915894,
+          -2.759983539581299,
+          5.503956317901611
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 31,
+            "start": 30,
+            "text": ","
+          },
+          {
+            "end": 35,
+            "start": 32,
+            "text": "the"
+          },
+          {
+            "end": 43,
+            "start": 36,
+            "text": "officer"
+          },
+          {
+            "end": 48,
+            "start": 44,
+            "text": "must"
+          },
+          {
+            "end": 52,
+            "start": 49,
+            "text": "not"
+          },
+          {
+            "end": 59,
+            "start": 53,
+            "text": "notify"
+          },
+          {
+            "end": 63,
+            "start": 60,
+            "text": "the"
+          },
+          {
+            "end": 73,
+            "start": 64,
+            "text": "applicant"
+          },
+          {
+            "end": 80,
+            "start": 74,
+            "text": "within"
+          },
+          {
+            "end": 83,
+            "start": 81,
+            "text": "48"
+          },
+          {
+            "end": 89,
+            "start": 84,
+            "text": "hours"
+          },
+          {
+            "end": 90,
+            "start": 89,
+            "text": ","
+          },
+          {
+            "end": 97,
+            "start": 91,
+            "text": "unless"
+          },
+          {
+            "end": 99,
+            "start": 98,
+            "text": "a"
+          },
+          {
+            "end": 105,
+            "start": 100,
+            "text": "legal"
+          },
+          {
+            "end": 110,
+            "start": 106,
+            "text": "hold"
+          },
+          {
+            "end": 118,
+            "start": 111,
+            "text": "applies"
+          },
+          {
+            "end": 119,
+            "start": 118,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 21,
+            "char_start": 19,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 1.8294792175292969,
+            "text": "an",
+            "token_end_inclusive": 4,
+            "token_start": 4
+          },
+          "actor": {
+            "char_end": 36,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.7346019744873047,
+            "text": "A clerk may notify an applicant only",
+            "token_end_inclusive": 6,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          0.6171278357505798,
+          1.9700373411178589,
+          -3.049330472946167
+        ],
+        "tokens": [
+          {
+            "end": 1,
+            "start": 0,
+            "text": "A"
+          },
+          {
+            "end": 7,
+            "start": 2,
+            "text": "clerk"
+          },
+          {
+            "end": 11,
+            "start": 8,
+            "text": "may"
+          },
+          {
+            "end": 18,
+            "start": 12,
+            "text": "notify"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "an"
+          },
+          {
+            "end": 31,
+            "start": 22,
+            "text": "applicant"
+          },
+          {
+            "end": 36,
+            "start": 32,
+            "text": "only"
+          },
+          {
+            "end": 39,
+            "start": 37,
+            "text": "if"
+          },
+          {
+            "end": 44,
+            "start": 40,
+            "text": "that"
+          },
+          {
+            "end": 54,
+            "start": 45,
+            "text": "applicant"
+          },
+          {
+            "end": 55,
+            "start": 54,
+            "text": "'"
+          },
+          {
+            "end": 56,
+            "start": 55,
+            "text": "s"
+          },
+          {
+            "end": 68,
+            "start": 57,
+            "text": "application"
+          },
+          {
+            "end": 71,
+            "start": 69,
+            "text": "is"
+          },
+          {
+            "end": 80,
+            "start": 72,
+            "text": "complete"
+          },
+          {
+            "end": 81,
+            "start": 80,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 21,
+            "char_start": 15,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 9.1122465133667,
+            "text": "retain",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 95,
+            "char_start": 81,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.7845230102539062,
+            "text": "unless a court",
+            "token_end_inclusive": 17,
+            "token_start": 15
+          },
+          "object": {
+            "char_end": 101,
+            "char_start": 0,
+            "presence_logit_margin": 11.75561237335205,
+            "present": true,
+            "span_logit_margin": 0.3242626190185547,
+            "text": "The clerk must retain the filing within 48 hours if the application is complete, unless a court order",
+            "token_end_inclusive": 18,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          1.7250373363494873,
+          -2.7834136486053467,
+          1.4843233823776245
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 14,
+            "start": 10,
+            "text": "must"
+          },
+          {
+            "end": 21,
+            "start": 15,
+            "text": "retain"
+          },
+          {
+            "end": 25,
+            "start": 22,
+            "text": "the"
+          },
+          {
+            "end": 32,
+            "start": 26,
+            "text": "filing"
+          },
+          {
+            "end": 39,
+            "start": 33,
+            "text": "within"
+          },
+          {
+            "end": 42,
+            "start": 40,
+            "text": "48"
+          },
+          {
+            "end": 48,
+            "start": 43,
+            "text": "hours"
+          },
+          {
+            "end": 51,
+            "start": 49,
+            "text": "if"
+          },
+          {
+            "end": 55,
+            "start": 52,
+            "text": "the"
+          },
+          {
+            "end": 67,
+            "start": 56,
+            "text": "application"
+          },
+          {
+            "end": 70,
+            "start": 68,
+            "text": "is"
+          },
+          {
+            "end": 79,
+            "start": 71,
+            "text": "complete"
+          },
+          {
+            "end": 80,
+            "start": 79,
+            "text": ","
+          },
+          {
+            "end": 87,
+            "start": 81,
+            "text": "unless"
+          },
+          {
+            "end": 89,
+            "start": 88,
+            "text": "a"
+          },
+          {
+            "end": 95,
+            "start": 90,
+            "text": "court"
+          },
+          {
+            "end": 101,
+            "start": 96,
+            "text": "order"
+          },
+          {
+            "end": 109,
+            "start": 102,
+            "text": "applies"
+          },
+          {
+            "end": 110,
+            "start": 109,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 25,
+            "char_start": 19,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 5.551479339599609,
+            "text": "notify",
+            "token_end_inclusive": 4,
+            "token_start": 4
+          },
+          "actor": {
+            "char_end": 96,
+            "char_start": 88,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.004154205322265625,
+            "text": "unless a",
+            "token_end_inclusive": 17,
+            "token_start": 16
+          },
+          "conditions": {
+            "char_end": 86,
+            "char_start": 59,
+            "presence_logit_margin": 16.21186065673828,
+            "present": true,
+            "span_logit_margin": 6.555242538452148,
+            "text": "the application is complete",
+            "token_end_inclusive": 14,
+            "token_start": 11
+          },
+          "exceptions": {
+            "char_end": 115,
+            "char_start": 26,
+            "presence_logit_margin": 7.940345764160156,
+            "present": true,
+            "span_logit_margin": 0.3007392883300781,
+            "text": "the applicant within 48 hours if the application is complete, unless a legal hold applies",
+            "token_end_inclusive": 20,
+            "token_start": 5
+          },
+          "object": {
+            "char_end": 39,
+            "char_start": 26,
+            "presence_logit_margin": 13.151834487915039,
+            "present": true,
+            "span_logit_margin": 3.454845428466797,
+            "text": "the applicant",
+            "token_end_inclusive": 6,
+            "token_start": 5
+          }
+        },
+        "modality_logits": [
+          -2.7014307975769043,
+          -1.3980056047439575,
+          4.934384822845459
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 14,
+            "start": 10,
+            "text": "must"
+          },
+          {
+            "end": 18,
+            "start": 15,
+            "text": "not"
+          },
+          {
+            "end": 25,
+            "start": 19,
+            "text": "notify"
+          },
+          {
+            "end": 29,
+            "start": 26,
+            "text": "the"
+          },
+          {
+            "end": 39,
+            "start": 30,
+            "text": "applicant"
+          },
+          {
+            "end": 46,
+            "start": 40,
+            "text": "within"
+          },
+          {
+            "end": 49,
+            "start": 47,
+            "text": "48"
+          },
+          {
+            "end": 55,
+            "start": 50,
+            "text": "hours"
+          },
+          {
+            "end": 58,
+            "start": 56,
+            "text": "if"
+          },
+          {
+            "end": 62,
+            "start": 59,
+            "text": "the"
+          },
+          {
+            "end": 74,
+            "start": 63,
+            "text": "application"
+          },
+          {
+            "end": 77,
+            "start": 75,
+            "text": "is"
+          },
+          {
+            "end": 86,
+            "start": 78,
+            "text": "complete"
+          },
+          {
+            "end": 87,
+            "start": 86,
+            "text": ","
+          },
+          {
+            "end": 94,
+            "start": 88,
+            "text": "unless"
+          },
+          {
+            "end": 96,
+            "start": 95,
+            "text": "a"
+          },
+          {
+            "end": 102,
+            "start": 97,
+            "text": "legal"
+          },
+          {
+            "end": 107,
+            "start": 103,
+            "text": "hold"
+          },
+          {
+            "end": 115,
+            "start": 108,
+            "text": "applies"
+          },
+          {
+            "end": 116,
+            "start": 115,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 64,
+            "char_start": 55,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 5.943309783935547,
+            "text": "authorize",
+            "token_end_inclusive": 10,
+            "token_start": 10
+          },
+          "actor": {
+            "char_end": 106,
+            "char_start": 32,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.4822502136230469,
+            "text": "the registrar must not authorize the application within 48 hours, unless a",
+            "token_end_inclusive": 18,
+            "token_start": 6
+          }
+        },
+        "modality_logits": [
+          -0.5413684248924255,
+          -3.230940103530884,
+          4.539951324462891
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 31,
+            "start": 30,
+            "text": ","
+          },
+          {
+            "end": 35,
+            "start": 32,
+            "text": "the"
+          },
+          {
+            "end": 45,
+            "start": 36,
+            "text": "registrar"
+          },
+          {
+            "end": 50,
+            "start": 46,
+            "text": "must"
+          },
+          {
+            "end": 54,
+            "start": 51,
+            "text": "not"
+          },
+          {
+            "end": 64,
+            "start": 55,
+            "text": "authorize"
+          },
+          {
+            "end": 68,
+            "start": 65,
+            "text": "the"
+          },
+          {
+            "end": 80,
+            "start": 69,
+            "text": "application"
+          },
+          {
+            "end": 87,
+            "start": 81,
+            "text": "within"
+          },
+          {
+            "end": 90,
+            "start": 88,
+            "text": "48"
+          },
+          {
+            "end": 96,
+            "start": 91,
+            "text": "hours"
+          },
+          {
+            "end": 97,
+            "start": 96,
+            "text": ","
+          },
+          {
+            "end": 104,
+            "start": 98,
+            "text": "unless"
+          },
+          {
+            "end": 106,
+            "start": 105,
+            "text": "a"
+          },
+          {
+            "end": 112,
+            "start": 107,
+            "text": "legal"
+          },
+          {
+            "end": 117,
+            "start": 113,
+            "text": "hold"
+          },
+          {
+            "end": 125,
+            "start": 118,
+            "text": "applies"
+          },
+          {
+            "end": 126,
+            "start": 125,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 26,
+            "char_start": 21,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 12.817296981811523,
+            "text": "audit",
+            "token_end_inclusive": 4,
+            "token_start": 4
+          },
+          "actor": {
+            "char_end": 94,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.3495311737060547,
+            "text": "The officer must not audit the filing within 48 hours if the application is complete, unless a",
+            "token_end_inclusive": 17,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          -2.7080531120300293,
+          -1.3034955263137817,
+          4.806515693664551
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 11,
+            "start": 4,
+            "text": "officer"
+          },
+          {
+            "end": 16,
+            "start": 12,
+            "text": "must"
+          },
+          {
+            "end": 20,
+            "start": 17,
+            "text": "not"
+          },
+          {
+            "end": 26,
+            "start": 21,
+            "text": "audit"
+          },
+          {
+            "end": 30,
+            "start": 27,
+            "text": "the"
+          },
+          {
+            "end": 37,
+            "start": 31,
+            "text": "filing"
+          },
+          {
+            "end": 44,
+            "start": 38,
+            "text": "within"
+          },
+          {
+            "end": 47,
+            "start": 45,
+            "text": "48"
+          },
+          {
+            "end": 53,
+            "start": 48,
+            "text": "hours"
+          },
+          {
+            "end": 56,
+            "start": 54,
+            "text": "if"
+          },
+          {
+            "end": 60,
+            "start": 57,
+            "text": "the"
+          },
+          {
+            "end": 72,
+            "start": 61,
+            "text": "application"
+          },
+          {
+            "end": 75,
+            "start": 73,
+            "text": "is"
+          },
+          {
+            "end": 84,
+            "start": 76,
+            "text": "complete"
+          },
+          {
+            "end": 85,
+            "start": 84,
+            "text": ","
+          },
+          {
+            "end": 92,
+            "start": 86,
+            "text": "unless"
+          },
+          {
+            "end": 94,
+            "start": 93,
+            "text": "a"
+          },
+          {
+            "end": 100,
+            "start": 95,
+            "text": "legal"
+          },
+          {
+            "end": 105,
+            "start": 101,
+            "text": "hold"
+          },
+          {
+            "end": 113,
+            "start": 106,
+            "text": "applies"
+          },
+          {
+            "end": 114,
+            "start": 113,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 24,
+            "char_start": 18,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 4.74061393737793,
+            "text": "assign",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 36,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 2.8068809509277344,
+            "text": "Each officer must assign exactly one",
+            "token_end_inclusive": 5,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          2.5616793632507324,
+          -0.2917197346687317,
+          -2.923346757888794
+        ],
+        "tokens": [
+          {
+            "end": 4,
+            "start": 0,
+            "text": "Each"
+          },
+          {
+            "end": 12,
+            "start": 5,
+            "text": "officer"
+          },
+          {
+            "end": 17,
+            "start": 13,
+            "text": "must"
+          },
+          {
+            "end": 24,
+            "start": 18,
+            "text": "assign"
+          },
+          {
+            "end": 32,
+            "start": 25,
+            "text": "exactly"
+          },
+          {
+            "end": 36,
+            "start": 33,
+            "text": "one"
+          },
+          {
+            "end": 45,
+            "start": 37,
+            "text": "reviewer"
+          },
+          {
+            "end": 48,
+            "start": 46,
+            "text": "to"
+          },
+          {
+            "end": 53,
+            "start": 49,
+            "text": "each"
+          },
+          {
+            "end": 65,
+            "start": 54,
+            "text": "application"
+          },
+          {
+            "end": 66,
+            "start": 65,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 22,
+            "char_start": 17,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 10.581550598144531,
+            "text": "audit",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 96,
+            "char_start": 82,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.9683437347412109,
+            "text": "unless a court",
+            "token_end_inclusive": 17,
+            "token_start": 15
+          },
+          "object": {
+            "char_end": 102,
+            "char_start": 0,
+            "presence_logit_margin": 13.245903015136719,
+            "present": true,
+            "span_logit_margin": 1.0005903244018555,
+            "text": "The officer must audit the filing within 48 hours if the application is complete, unless a court order",
+            "token_end_inclusive": 18,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          1.1398367881774902,
+          -2.198977470397949,
+          1.370906949043274
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 11,
+            "start": 4,
+            "text": "officer"
+          },
+          {
+            "end": 16,
+            "start": 12,
+            "text": "must"
+          },
+          {
+            "end": 22,
+            "start": 17,
+            "text": "audit"
+          },
+          {
+            "end": 26,
+            "start": 23,
+            "text": "the"
+          },
+          {
+            "end": 33,
+            "start": 27,
+            "text": "filing"
+          },
+          {
+            "end": 40,
+            "start": 34,
+            "text": "within"
+          },
+          {
+            "end": 43,
+            "start": 41,
+            "text": "48"
+          },
+          {
+            "end": 49,
+            "start": 44,
+            "text": "hours"
+          },
+          {
+            "end": 52,
+            "start": 50,
+            "text": "if"
+          },
+          {
+            "end": 56,
+            "start": 53,
+            "text": "the"
+          },
+          {
+            "end": 68,
+            "start": 57,
+            "text": "application"
+          },
+          {
+            "end": 71,
+            "start": 69,
+            "text": "is"
+          },
+          {
+            "end": 80,
+            "start": 72,
+            "text": "complete"
+          },
+          {
+            "end": 81,
+            "start": 80,
+            "text": ","
+          },
+          {
+            "end": 88,
+            "start": 82,
+            "text": "unless"
+          },
+          {
+            "end": 90,
+            "start": 89,
+            "text": "a"
+          },
+          {
+            "end": 96,
+            "start": 91,
+            "text": "court"
+          },
+          {
+            "end": 102,
+            "start": 97,
+            "text": "order"
+          },
+          {
+            "end": 110,
+            "start": 103,
+            "text": "applies"
+          },
+          {
+            "end": 111,
+            "start": 110,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 60,
+            "char_start": 51,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 2.1414852142333984,
+            "text": "authorize",
+            "token_end_inclusive": 9,
+            "token_start": 9
+          },
+          "actor": {
+            "char_end": 108,
+            "char_start": 94,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.37844181060791016,
+            "text": "unless a court",
+            "token_end_inclusive": 18,
+            "token_start": 16
+          },
+          "conditions": {
+            "char_end": 30,
+            "char_start": 3,
+            "presence_logit_margin": 21.01972198486328,
+            "present": true,
+            "span_logit_margin": 0.939361572265625,
+            "text": "the application is complete",
+            "token_end_inclusive": 4,
+            "token_start": 1
+          },
+          "object": {
+            "char_end": 30,
+            "char_start": 3,
+            "presence_logit_margin": 12.66988754272461,
+            "present": true,
+            "span_logit_margin": 0.0698995590209961,
+            "text": "the application is complete",
+            "token_end_inclusive": 4,
+            "token_start": 1
+          }
+        },
+        "modality_logits": [
+          2.9584076404571533,
+          -2.8726084232330322,
+          -0.28066977858543396
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 31,
+            "start": 30,
+            "text": ","
+          },
+          {
+            "end": 35,
+            "start": 32,
+            "text": "the"
+          },
+          {
+            "end": 45,
+            "start": 36,
+            "text": "registrar"
+          },
+          {
+            "end": 50,
+            "start": 46,
+            "text": "must"
+          },
+          {
+            "end": 60,
+            "start": 51,
+            "text": "authorize"
+          },
+          {
+            "end": 64,
+            "start": 61,
+            "text": "the"
+          },
+          {
+            "end": 76,
+            "start": 65,
+            "text": "application"
+          },
+          {
+            "end": 83,
+            "start": 77,
+            "text": "within"
+          },
+          {
+            "end": 86,
+            "start": 84,
+            "text": "48"
+          },
+          {
+            "end": 92,
+            "start": 87,
+            "text": "hours"
+          },
+          {
+            "end": 93,
+            "start": 92,
+            "text": ","
+          },
+          {
+            "end": 100,
+            "start": 94,
+            "text": "unless"
+          },
+          {
+            "end": 102,
+            "start": 101,
+            "text": "a"
+          },
+          {
+            "end": 108,
+            "start": 103,
+            "text": "court"
+          },
+          {
+            "end": 114,
+            "start": 109,
+            "text": "order"
+          },
+          {
+            "end": 122,
+            "start": 115,
+            "text": "applies"
+          },
+          {
+            "end": 123,
+            "start": 122,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 23,
+            "char_start": 17,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 1.2114753723144531,
+            "text": "notify",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 104,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.6197490692138672,
+            "text": "The officer must notify the applicant before the review deadline if identity has been verified, unless a",
+            "token_end_inclusive": 17,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          -0.9320070743560791,
+          -1.1324201822280884,
+          2.553140878677368
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 11,
+            "start": 4,
+            "text": "officer"
+          },
+          {
+            "end": 16,
+            "start": 12,
+            "text": "must"
+          },
+          {
+            "end": 23,
+            "start": 17,
+            "text": "notify"
+          },
+          {
+            "end": 27,
+            "start": 24,
+            "text": "the"
+          },
+          {
+            "end": 37,
+            "start": 28,
+            "text": "applicant"
+          },
+          {
+            "end": 44,
+            "start": 38,
+            "text": "before"
+          },
+          {
+            "end": 48,
+            "start": 45,
+            "text": "the"
+          },
+          {
+            "end": 55,
+            "start": 49,
+            "text": "review"
+          },
+          {
+            "end": 64,
+            "start": 56,
+            "text": "deadline"
+          },
+          {
+            "end": 67,
+            "start": 65,
+            "text": "if"
+          },
+          {
+            "end": 76,
+            "start": 68,
+            "text": "identity"
+          },
+          {
+            "end": 80,
+            "start": 77,
+            "text": "has"
+          },
+          {
+            "end": 85,
+            "start": 81,
+            "text": "been"
+          },
+          {
+            "end": 94,
+            "start": 86,
+            "text": "verified"
+          },
+          {
+            "end": 95,
+            "start": 94,
+            "text": ","
+          },
+          {
+            "end": 102,
+            "start": 96,
+            "text": "unless"
+          },
+          {
+            "end": 104,
+            "start": 103,
+            "text": "a"
+          },
+          {
+            "end": 110,
+            "start": 105,
+            "text": "legal"
+          },
+          {
+            "end": 115,
+            "start": 111,
+            "text": "hold"
+          },
+          {
+            "end": 123,
+            "start": 116,
+            "text": "applies"
+          },
+          {
+            "end": 124,
+            "start": 123,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 61,
+            "char_start": 55,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 1.7806777954101562,
+            "text": "before",
+            "token_end_inclusive": 10,
+            "token_start": 10
+          },
+          "actor": {
+            "char_end": 166,
+            "char_start": 138,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.3527870178222656,
+            "text": "unless a court order applies",
+            "token_end_inclusive": 29,
+            "token_start": 25
+          },
+          "conditions": {
+            "char_end": 136,
+            "char_start": 21,
+            "presence_logit_margin": 22.717140197753906,
+            "present": true,
+            "span_logit_margin": 0.40158843994140625,
+            "text": "the applicant within 48 hours and before the review deadline if the application is complete and fees have been paid",
+            "token_end_inclusive": 23,
+            "token_start": 4
+          },
+          "object": {
+            "char_end": 34,
+            "char_start": 0,
+            "presence_logit_margin": 12.751239776611328,
+            "present": true,
+            "span_logit_margin": 1.1785717010498047,
+            "text": "The clerk may notify the applicant",
+            "token_end_inclusive": 5,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          3.706559181213379,
+          -1.5355231761932373,
+          -2.438706874847412
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 13,
+            "start": 10,
+            "text": "may"
+          },
+          {
+            "end": 20,
+            "start": 14,
+            "text": "notify"
+          },
+          {
+            "end": 24,
+            "start": 21,
+            "text": "the"
+          },
+          {
+            "end": 34,
+            "start": 25,
+            "text": "applicant"
+          },
+          {
+            "end": 41,
+            "start": 35,
+            "text": "within"
+          },
+          {
+            "end": 44,
+            "start": 42,
+            "text": "48"
+          },
+          {
+            "end": 50,
+            "start": 45,
+            "text": "hours"
+          },
+          {
+            "end": 54,
+            "start": 51,
+            "text": "and"
+          },
+          {
+            "end": 61,
+            "start": 55,
+            "text": "before"
+          },
+          {
+            "end": 65,
+            "start": 62,
+            "text": "the"
+          },
+          {
+            "end": 72,
+            "start": 66,
+            "text": "review"
+          },
+          {
+            "end": 81,
+            "start": 73,
+            "text": "deadline"
+          },
+          {
+            "end": 84,
+            "start": 82,
+            "text": "if"
+          },
+          {
+            "end": 88,
+            "start": 85,
+            "text": "the"
+          },
+          {
+            "end": 100,
+            "start": 89,
+            "text": "application"
+          },
+          {
+            "end": 103,
+            "start": 101,
+            "text": "is"
+          },
+          {
+            "end": 112,
+            "start": 104,
+            "text": "complete"
+          },
+          {
+            "end": 116,
+            "start": 113,
+            "text": "and"
+          },
+          {
+            "end": 121,
+            "start": 117,
+            "text": "fees"
+          },
+          {
+            "end": 126,
+            "start": 122,
+            "text": "have"
+          },
+          {
+            "end": 131,
+            "start": 127,
+            "text": "been"
+          },
+          {
+            "end": 136,
+            "start": 132,
+            "text": "paid"
+          },
+          {
+            "end": 137,
+            "start": 136,
+            "text": ","
+          },
+          {
+            "end": 144,
+            "start": 138,
+            "text": "unless"
+          },
+          {
+            "end": 146,
+            "start": 145,
+            "text": "a"
+          },
+          {
+            "end": 152,
+            "start": 147,
+            "text": "court"
+          },
+          {
+            "end": 158,
+            "start": 153,
+            "text": "order"
+          },
+          {
+            "end": 166,
+            "start": 159,
+            "text": "applies"
+          },
+          {
+            "end": 169,
+            "start": 167,
+            "text": "or"
+          },
+          {
+            "end": 171,
+            "start": 170,
+            "text": "a"
+          },
+          {
+            "end": 177,
+            "start": 172,
+            "text": "legal"
+          },
+          {
+            "end": 182,
+            "start": 178,
+            "text": "hold"
+          },
+          {
+            "end": 190,
+            "start": 183,
+            "text": "applies"
+          },
+          {
+            "end": 191,
+            "start": 190,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 21,
+            "char_start": 15,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.29049110412597656,
+            "text": "notify",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 3,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.8560917377471924,
+            "text": "The",
+            "token_end_inclusive": 0,
+            "token_start": 0
+          },
+          "conditions": {
+            "char_end": 89,
+            "char_start": 39,
+            "presence_logit_margin": 32.16439437866211,
+            "present": true,
+            "span_logit_margin": 0.29582977294921875,
+            "text": "the application is complete or fees have been paid",
+            "token_end_inclusive": 15,
+            "token_start": 7
+          },
+          "exceptions": {
+            "char_end": 35,
+            "char_start": 0,
+            "presence_logit_margin": 4.042743682861328,
+            "present": true,
+            "span_logit_margin": 0.5877418518066406,
+            "text": "The clerk must notify the applicant",
+            "token_end_inclusive": 5,
+            "token_start": 0
+          },
+          "object": {
+            "char_end": 35,
+            "char_start": 22,
+            "presence_logit_margin": 12.694307327270508,
+            "present": true,
+            "span_logit_margin": 0.3953990936279297,
+            "text": "the applicant",
+            "token_end_inclusive": 5,
+            "token_start": 4
+          }
+        },
+        "modality_logits": [
+          -0.8962391018867493,
+          0.8730382919311523,
+          0.3289305567741394
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 14,
+            "start": 10,
+            "text": "must"
+          },
+          {
+            "end": 21,
+            "start": 15,
+            "text": "notify"
+          },
+          {
+            "end": 25,
+            "start": 22,
+            "text": "the"
+          },
+          {
+            "end": 35,
+            "start": 26,
+            "text": "applicant"
+          },
+          {
+            "end": 38,
+            "start": 36,
+            "text": "if"
+          },
+          {
+            "end": 42,
+            "start": 39,
+            "text": "the"
+          },
+          {
+            "end": 54,
+            "start": 43,
+            "text": "application"
+          },
+          {
+            "end": 57,
+            "start": 55,
+            "text": "is"
+          },
+          {
+            "end": 66,
+            "start": 58,
+            "text": "complete"
+          },
+          {
+            "end": 69,
+            "start": 67,
+            "text": "or"
+          },
+          {
+            "end": 74,
+            "start": 70,
+            "text": "fees"
+          },
+          {
+            "end": 79,
+            "start": 75,
+            "text": "have"
+          },
+          {
+            "end": 84,
+            "start": 80,
+            "text": "been"
+          },
+          {
+            "end": 89,
+            "start": 85,
+            "text": "paid"
+          },
+          {
+            "end": 90,
+            "start": 89,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 25,
+            "char_start": 19,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 8.78183364868164,
+            "text": "retain",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 101,
+            "char_start": 4,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.11775684356689453,
+            "text": "custodian must retain the application before the review deadline if fees have been paid, unless a",
+            "token_end_inclusive": 17,
+            "token_start": 1
+          }
+        },
+        "modality_logits": [
+          0.8804309964179993,
+          -1.232980728149414,
+          0.28392744064331055
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 13,
+            "start": 4,
+            "text": "custodian"
+          },
+          {
+            "end": 18,
+            "start": 14,
+            "text": "must"
+          },
+          {
+            "end": 25,
+            "start": 19,
+            "text": "retain"
+          },
+          {
+            "end": 29,
+            "start": 26,
+            "text": "the"
+          },
+          {
+            "end": 41,
+            "start": 30,
+            "text": "application"
+          },
+          {
+            "end": 48,
+            "start": 42,
+            "text": "before"
+          },
+          {
+            "end": 52,
+            "start": 49,
+            "text": "the"
+          },
+          {
+            "end": 59,
+            "start": 53,
+            "text": "review"
+          },
+          {
+            "end": 68,
+            "start": 60,
+            "text": "deadline"
+          },
+          {
+            "end": 71,
+            "start": 69,
+            "text": "if"
+          },
+          {
+            "end": 76,
+            "start": 72,
+            "text": "fees"
+          },
+          {
+            "end": 81,
+            "start": 77,
+            "text": "have"
+          },
+          {
+            "end": 86,
+            "start": 82,
+            "text": "been"
+          },
+          {
+            "end": 91,
+            "start": 87,
+            "text": "paid"
+          },
+          {
+            "end": 92,
+            "start": 91,
+            "text": ","
+          },
+          {
+            "end": 99,
+            "start": 93,
+            "text": "unless"
+          },
+          {
+            "end": 101,
+            "start": 100,
+            "text": "a"
+          },
+          {
+            "end": 107,
+            "start": 102,
+            "text": "legal"
+          },
+          {
+            "end": 112,
+            "start": 108,
+            "text": "hold"
+          },
+          {
+            "end": 120,
+            "start": 113,
+            "text": "applies"
+          },
+          {
+            "end": 121,
+            "start": 120,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 57,
+            "char_start": 51,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 3.8271751403808594,
+            "text": "retain",
+            "token_end_inclusive": 9,
+            "token_start": 9
+          },
+          "actor": {
+            "char_end": 105,
+            "char_start": 32,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.3935985565185547,
+            "text": "the custodian must retain the application within 48 hours, unless a court",
+            "token_end_inclusive": 18,
+            "token_start": 6
+          }
+        },
+        "modality_logits": [
+          3.816533327102661,
+          -3.684112787246704,
+          -0.2530502676963806
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 31,
+            "start": 30,
+            "text": ","
+          },
+          {
+            "end": 35,
+            "start": 32,
+            "text": "the"
+          },
+          {
+            "end": 45,
+            "start": 36,
+            "text": "custodian"
+          },
+          {
+            "end": 50,
+            "start": 46,
+            "text": "must"
+          },
+          {
+            "end": 57,
+            "start": 51,
+            "text": "retain"
+          },
+          {
+            "end": 61,
+            "start": 58,
+            "text": "the"
+          },
+          {
+            "end": 73,
+            "start": 62,
+            "text": "application"
+          },
+          {
+            "end": 80,
+            "start": 74,
+            "text": "within"
+          },
+          {
+            "end": 83,
+            "start": 81,
+            "text": "48"
+          },
+          {
+            "end": 89,
+            "start": 84,
+            "text": "hours"
+          },
+          {
+            "end": 90,
+            "start": 89,
+            "text": ","
+          },
+          {
+            "end": 97,
+            "start": 91,
+            "text": "unless"
+          },
+          {
+            "end": 99,
+            "start": 98,
+            "text": "a"
+          },
+          {
+            "end": 105,
+            "start": 100,
+            "text": "court"
+          },
+          {
+            "end": 111,
+            "start": 106,
+            "text": "order"
+          },
+          {
+            "end": 119,
+            "start": 112,
+            "text": "applies"
+          },
+          {
+            "end": 120,
+            "start": 119,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 35,
+            "char_start": 29,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 11.129335403442383,
+            "text": "retain",
+            "token_end_inclusive": 4,
+            "token_start": 4
+          },
+          "actor": {
+            "char_end": 112,
+            "char_start": 4,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.9460945129394531,
+            "text": "designated official must retain the case file within 48 hours if the application is complete, unless a court",
+            "token_end_inclusive": 19,
+            "token_start": 1
+          }
+        },
+        "modality_logits": [
+          1.6834155321121216,
+          -1.7588772773742676,
+          0.28185397386550903
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 14,
+            "start": 4,
+            "text": "designated"
+          },
+          {
+            "end": 23,
+            "start": 15,
+            "text": "official"
+          },
+          {
+            "end": 28,
+            "start": 24,
+            "text": "must"
+          },
+          {
+            "end": 35,
+            "start": 29,
+            "text": "retain"
+          },
+          {
+            "end": 39,
+            "start": 36,
+            "text": "the"
+          },
+          {
+            "end": 44,
+            "start": 40,
+            "text": "case"
+          },
+          {
+            "end": 49,
+            "start": 45,
+            "text": "file"
+          },
+          {
+            "end": 56,
+            "start": 50,
+            "text": "within"
+          },
+          {
+            "end": 59,
+            "start": 57,
+            "text": "48"
+          },
+          {
+            "end": 65,
+            "start": 60,
+            "text": "hours"
+          },
+          {
+            "end": 68,
+            "start": 66,
+            "text": "if"
+          },
+          {
+            "end": 72,
+            "start": 69,
+            "text": "the"
+          },
+          {
+            "end": 84,
+            "start": 73,
+            "text": "application"
+          },
+          {
+            "end": 87,
+            "start": 85,
+            "text": "is"
+          },
+          {
+            "end": 96,
+            "start": 88,
+            "text": "complete"
+          },
+          {
+            "end": 97,
+            "start": 96,
+            "text": ","
+          },
+          {
+            "end": 104,
+            "start": 98,
+            "text": "unless"
+          },
+          {
+            "end": 106,
+            "start": 105,
+            "text": "a"
+          },
+          {
+            "end": 112,
+            "start": 107,
+            "text": "court"
+          },
+          {
+            "end": 118,
+            "start": 113,
+            "text": "order"
+          },
+          {
+            "end": 126,
+            "start": 119,
+            "text": "applies"
+          },
+          {
+            "end": 127,
+            "start": 126,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 64,
+            "char_start": 57,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.2344970703125,
+            "text": "applies",
+            "token_end_inclusive": 10,
+            "token_start": 10
+          },
+          "actor": {
+            "char_end": 50,
+            "char_start": 4,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.30347251892089844,
+            "text": "clerk must notify the applicant unless a court",
+            "token_end_inclusive": 8,
+            "token_start": 1
+          },
+          "object": {
+            "char_end": 89,
+            "char_start": 0,
+            "presence_logit_margin": 17.47658920288086,
+            "present": true,
+            "span_logit_margin": 0.33876800537109375,
+            "text": "The clerk must notify the applicant unless a court order applies and a legal hold applies",
+            "token_end_inclusive": 15,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          1.1980971097946167,
+          0.0034692734479904175,
+          -1.822936773300171
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 14,
+            "start": 10,
+            "text": "must"
+          },
+          {
+            "end": 21,
+            "start": 15,
+            "text": "notify"
+          },
+          {
+            "end": 25,
+            "start": 22,
+            "text": "the"
+          },
+          {
+            "end": 35,
+            "start": 26,
+            "text": "applicant"
+          },
+          {
+            "end": 42,
+            "start": 36,
+            "text": "unless"
+          },
+          {
+            "end": 44,
+            "start": 43,
+            "text": "a"
+          },
+          {
+            "end": 50,
+            "start": 45,
+            "text": "court"
+          },
+          {
+            "end": 56,
+            "start": 51,
+            "text": "order"
+          },
+          {
+            "end": 64,
+            "start": 57,
+            "text": "applies"
+          },
+          {
+            "end": 68,
+            "start": 65,
+            "text": "and"
+          },
+          {
+            "end": 70,
+            "start": 69,
+            "text": "a"
+          },
+          {
+            "end": 76,
+            "start": 71,
+            "text": "legal"
+          },
+          {
+            "end": 81,
+            "start": 77,
+            "text": "hold"
+          },
+          {
+            "end": 89,
+            "start": 82,
+            "text": "applies"
+          },
+          {
+            "end": 90,
+            "start": 89,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 35,
+            "char_start": 29,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 11.129335403442383,
+            "text": "retain",
+            "token_end_inclusive": 4,
+            "token_start": 4
+          },
+          "actor": {
+            "char_end": 112,
+            "char_start": 4,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.9460945129394531,
+            "text": "designated official must retain the case file within 48 hours if the application is complete, unless a court",
+            "token_end_inclusive": 19,
+            "token_start": 1
+          }
+        },
+        "modality_logits": [
+          1.6834155321121216,
+          -1.7588772773742676,
+          0.28185397386550903
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 14,
+            "start": 4,
+            "text": "designated"
+          },
+          {
+            "end": 23,
+            "start": 15,
+            "text": "official"
+          },
+          {
+            "end": 28,
+            "start": 24,
+            "text": "must"
+          },
+          {
+            "end": 35,
+            "start": 29,
+            "text": "retain"
+          },
+          {
+            "end": 39,
+            "start": 36,
+            "text": "the"
+          },
+          {
+            "end": 44,
+            "start": 40,
+            "text": "case"
+          },
+          {
+            "end": 49,
+            "start": 45,
+            "text": "file"
+          },
+          {
+            "end": 56,
+            "start": 50,
+            "text": "within"
+          },
+          {
+            "end": 59,
+            "start": 57,
+            "text": "48"
+          },
+          {
+            "end": 65,
+            "start": 60,
+            "text": "hours"
+          },
+          {
+            "end": 68,
+            "start": 66,
+            "text": "if"
+          },
+          {
+            "end": 72,
+            "start": 69,
+            "text": "the"
+          },
+          {
+            "end": 84,
+            "start": 73,
+            "text": "application"
+          },
+          {
+            "end": 87,
+            "start": 85,
+            "text": "is"
+          },
+          {
+            "end": 96,
+            "start": 88,
+            "text": "complete"
+          },
+          {
+            "end": 97,
+            "start": 96,
+            "text": ","
+          },
+          {
+            "end": 104,
+            "start": 98,
+            "text": "unless"
+          },
+          {
+            "end": 106,
+            "start": 105,
+            "text": "a"
+          },
+          {
+            "end": 112,
+            "start": 107,
+            "text": "court"
+          },
+          {
+            "end": 118,
+            "start": 113,
+            "text": "order"
+          },
+          {
+            "end": 126,
+            "start": 119,
+            "text": "applies"
+          },
+          {
+            "end": 127,
+            "start": 126,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 80,
+            "char_start": 74,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 4.285469055175781,
+            "text": "retain",
+            "token_end_inclusive": 14,
+            "token_start": 14
+          },
+          "actor": {
+            "char_end": 173,
+            "char_start": 145,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.18439865112304688,
+            "text": "unless a court order applies",
+            "token_end_inclusive": 30,
+            "token_start": 26
+          },
+          "conditions": {
+            "char_end": 143,
+            "char_start": 3,
+            "presence_logit_margin": 21.143844604492188,
+            "present": true,
+            "span_logit_margin": 0.4707221984863281,
+            "text": "the application is complete and fees have been paid, the custodian may retain the application within 48 hours and before the review deadline",
+            "token_end_inclusive": 24,
+            "token_start": 1
+          },
+          "object": {
+            "char_end": 96,
+            "char_start": 81,
+            "presence_logit_margin": 13.089593887329102,
+            "present": true,
+            "span_logit_margin": 0.654052734375,
+            "text": "the application",
+            "token_end_inclusive": 16,
+            "token_start": 15
+          }
+        },
+        "modality_logits": [
+          3.1381611824035645,
+          -0.9395098090171814,
+          -2.7830071449279785
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 34,
+            "start": 31,
+            "text": "and"
+          },
+          {
+            "end": 39,
+            "start": 35,
+            "text": "fees"
+          },
+          {
+            "end": 44,
+            "start": 40,
+            "text": "have"
+          },
+          {
+            "end": 49,
+            "start": 45,
+            "text": "been"
+          },
+          {
+            "end": 54,
+            "start": 50,
+            "text": "paid"
+          },
+          {
+            "end": 55,
+            "start": 54,
+            "text": ","
+          },
+          {
+            "end": 59,
+            "start": 56,
+            "text": "the"
+          },
+          {
+            "end": 69,
+            "start": 60,
+            "text": "custodian"
+          },
+          {
+            "end": 73,
+            "start": 70,
+            "text": "may"
+          },
+          {
+            "end": 80,
+            "start": 74,
+            "text": "retain"
+          },
+          {
+            "end": 84,
+            "start": 81,
+            "text": "the"
+          },
+          {
+            "end": 96,
+            "start": 85,
+            "text": "application"
+          },
+          {
+            "end": 103,
+            "start": 97,
+            "text": "within"
+          },
+          {
+            "end": 106,
+            "start": 104,
+            "text": "48"
+          },
+          {
+            "end": 112,
+            "start": 107,
+            "text": "hours"
+          },
+          {
+            "end": 116,
+            "start": 113,
+            "text": "and"
+          },
+          {
+            "end": 123,
+            "start": 117,
+            "text": "before"
+          },
+          {
+            "end": 127,
+            "start": 124,
+            "text": "the"
+          },
+          {
+            "end": 134,
+            "start": 128,
+            "text": "review"
+          },
+          {
+            "end": 143,
+            "start": 135,
+            "text": "deadline"
+          },
+          {
+            "end": 144,
+            "start": 143,
+            "text": ","
+          },
+          {
+            "end": 151,
+            "start": 145,
+            "text": "unless"
+          },
+          {
+            "end": 153,
+            "start": 152,
+            "text": "a"
+          },
+          {
+            "end": 159,
+            "start": 154,
+            "text": "court"
+          },
+          {
+            "end": 165,
+            "start": 160,
+            "text": "order"
+          },
+          {
+            "end": 173,
+            "start": 166,
+            "text": "applies"
+          },
+          {
+            "end": 176,
+            "start": 174,
+            "text": "or"
+          },
+          {
+            "end": 178,
+            "start": 177,
+            "text": "a"
+          },
+          {
+            "end": 184,
+            "start": 179,
+            "text": "legal"
+          },
+          {
+            "end": 189,
+            "start": 185,
+            "text": "hold"
+          },
+          {
+            "end": 197,
+            "start": 190,
+            "text": "applies"
+          },
+          {
+            "end": 198,
+            "start": 197,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 2,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.6179828643798828,
+            "text": "If",
+            "token_end_inclusive": 0,
+            "token_start": 0
+          },
+          "actor": {
+            "char_end": 169,
+            "char_start": 141,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.3191719055175781,
+            "text": "unless a court order applies",
+            "token_end_inclusive": 30,
+            "token_start": 26
+          },
+          "conditions": {
+            "char_end": 139,
+            "char_start": 3,
+            "presence_logit_margin": 19.270790100097656,
+            "present": true,
+            "span_logit_margin": 0.2792549133300781,
+            "text": "the application is complete and fees have been paid, the officer may notify the applicant within 48 hours and before the review deadline",
+            "token_end_inclusive": 24,
+            "token_start": 1
+          },
+          "object": {
+            "char_end": 92,
+            "char_start": 79,
+            "presence_logit_margin": 13.814891815185547,
+            "present": true,
+            "span_logit_margin": 4.847728729248047,
+            "text": "the applicant",
+            "token_end_inclusive": 16,
+            "token_start": 15
+          }
+        },
+        "modality_logits": [
+          2.291719913482666,
+          -0.4660191535949707,
+          -2.3773891925811768
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 34,
+            "start": 31,
+            "text": "and"
+          },
+          {
+            "end": 39,
+            "start": 35,
+            "text": "fees"
+          },
+          {
+            "end": 44,
+            "start": 40,
+            "text": "have"
+          },
+          {
+            "end": 49,
+            "start": 45,
+            "text": "been"
+          },
+          {
+            "end": 54,
+            "start": 50,
+            "text": "paid"
+          },
+          {
+            "end": 55,
+            "start": 54,
+            "text": ","
+          },
+          {
+            "end": 59,
+            "start": 56,
+            "text": "the"
+          },
+          {
+            "end": 67,
+            "start": 60,
+            "text": "officer"
+          },
+          {
+            "end": 71,
+            "start": 68,
+            "text": "may"
+          },
+          {
+            "end": 78,
+            "start": 72,
+            "text": "notify"
+          },
+          {
+            "end": 82,
+            "start": 79,
+            "text": "the"
+          },
+          {
+            "end": 92,
+            "start": 83,
+            "text": "applicant"
+          },
+          {
+            "end": 99,
+            "start": 93,
+            "text": "within"
+          },
+          {
+            "end": 102,
+            "start": 100,
+            "text": "48"
+          },
+          {
+            "end": 108,
+            "start": 103,
+            "text": "hours"
+          },
+          {
+            "end": 112,
+            "start": 109,
+            "text": "and"
+          },
+          {
+            "end": 119,
+            "start": 113,
+            "text": "before"
+          },
+          {
+            "end": 123,
+            "start": 120,
+            "text": "the"
+          },
+          {
+            "end": 130,
+            "start": 124,
+            "text": "review"
+          },
+          {
+            "end": 139,
+            "start": 131,
+            "text": "deadline"
+          },
+          {
+            "end": 140,
+            "start": 139,
+            "text": ","
+          },
+          {
+            "end": 147,
+            "start": 141,
+            "text": "unless"
+          },
+          {
+            "end": 149,
+            "start": 148,
+            "text": "a"
+          },
+          {
+            "end": 155,
+            "start": 150,
+            "text": "court"
+          },
+          {
+            "end": 161,
+            "start": 156,
+            "text": "order"
+          },
+          {
+            "end": 169,
+            "start": 162,
+            "text": "applies"
+          },
+          {
+            "end": 172,
+            "start": 170,
+            "text": "or"
+          },
+          {
+            "end": 174,
+            "start": 173,
+            "text": "a"
+          },
+          {
+            "end": 180,
+            "start": 175,
+            "text": "legal"
+          },
+          {
+            "end": 185,
+            "start": 181,
+            "text": "hold"
+          },
+          {
+            "end": 193,
+            "start": 186,
+            "text": "applies"
+          },
+          {
+            "end": 194,
+            "start": 193,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 46,
+            "char_start": 41,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 7.495201110839844,
+            "text": "audit",
+            "token_end_inclusive": 9,
+            "token_start": 9
+          },
+          "actor": {
+            "char_end": 94,
+            "char_start": 24,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.09071826934814453,
+            "text": "the officer must audit the filing before the review deadline, unless a",
+            "token_end_inclusive": 18,
+            "token_start": 6
+          }
+        },
+        "modality_logits": [
+          3.277916669845581,
+          -3.1311721801757812,
+          -0.8963686227798462
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 7,
+            "start": 3,
+            "text": "fees"
+          },
+          {
+            "end": 12,
+            "start": 8,
+            "text": "have"
+          },
+          {
+            "end": 17,
+            "start": 13,
+            "text": "been"
+          },
+          {
+            "end": 22,
+            "start": 18,
+            "text": "paid"
+          },
+          {
+            "end": 23,
+            "start": 22,
+            "text": ","
+          },
+          {
+            "end": 27,
+            "start": 24,
+            "text": "the"
+          },
+          {
+            "end": 35,
+            "start": 28,
+            "text": "officer"
+          },
+          {
+            "end": 40,
+            "start": 36,
+            "text": "must"
+          },
+          {
+            "end": 46,
+            "start": 41,
+            "text": "audit"
+          },
+          {
+            "end": 50,
+            "start": 47,
+            "text": "the"
+          },
+          {
+            "end": 57,
+            "start": 51,
+            "text": "filing"
+          },
+          {
+            "end": 64,
+            "start": 58,
+            "text": "before"
+          },
+          {
+            "end": 68,
+            "start": 65,
+            "text": "the"
+          },
+          {
+            "end": 75,
+            "start": 69,
+            "text": "review"
+          },
+          {
+            "end": 84,
+            "start": 76,
+            "text": "deadline"
+          },
+          {
+            "end": 85,
+            "start": 84,
+            "text": ","
+          },
+          {
+            "end": 92,
+            "start": 86,
+            "text": "unless"
+          },
+          {
+            "end": 94,
+            "start": 93,
+            "text": "a"
+          },
+          {
+            "end": 100,
+            "start": 95,
+            "text": "legal"
+          },
+          {
+            "end": 105,
+            "start": 101,
+            "text": "hold"
+          },
+          {
+            "end": 113,
+            "start": 106,
+            "text": "applies"
+          },
+          {
+            "end": 114,
+            "start": 113,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 23,
+            "char_start": 17,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 6.076751708984375,
+            "text": "review",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 41,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.7439432144165039,
+            "text": "Every clerk must review every application",
+            "token_end_inclusive": 5,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          2.2895631790161133,
+          -0.3759862184524536,
+          -2.5137624740600586
+        ],
+        "tokens": [
+          {
+            "end": 5,
+            "start": 0,
+            "text": "Every"
+          },
+          {
+            "end": 11,
+            "start": 6,
+            "text": "clerk"
+          },
+          {
+            "end": 16,
+            "start": 12,
+            "text": "must"
+          },
+          {
+            "end": 23,
+            "start": 17,
+            "text": "review"
+          },
+          {
+            "end": 29,
+            "start": 24,
+            "text": "every"
+          },
+          {
+            "end": 41,
+            "start": 30,
+            "text": "application"
+          },
+          {
+            "end": 42,
+            "start": 41,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 35,
+            "char_start": 29,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 1.7952532768249512,
+            "text": "notify",
+            "token_end_inclusive": 6,
+            "token_start": 6
+          },
+          "actor": {
+            "char_end": 3,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.4983806610107422,
+            "text": "The",
+            "token_end_inclusive": 0,
+            "token_start": 0
+          },
+          "object": {
+            "char_end": 49,
+            "char_start": 0,
+            "presence_logit_margin": 9.172096252441406,
+            "present": true,
+            "span_logit_margin": 2.630133628845215,
+            "text": "The clerk is not required to notify the applicant",
+            "token_end_inclusive": 8,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          -1.946228265762329,
+          -1.530415654182434,
+          5.0629472732543945
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 12,
+            "start": 10,
+            "text": "is"
+          },
+          {
+            "end": 16,
+            "start": 13,
+            "text": "not"
+          },
+          {
+            "end": 25,
+            "start": 17,
+            "text": "required"
+          },
+          {
+            "end": 28,
+            "start": 26,
+            "text": "to"
+          },
+          {
+            "end": 35,
+            "start": 29,
+            "text": "notify"
+          },
+          {
+            "end": 39,
+            "start": 36,
+            "text": "the"
+          },
+          {
+            "end": 49,
+            "start": 40,
+            "text": "applicant"
+          },
+          {
+            "end": 50,
+            "start": 49,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 25,
+            "char_start": 19,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 13.031938552856445,
+            "text": "retain",
+            "token_end_inclusive": 4,
+            "token_start": 4
+          },
+          "actor": {
+            "char_end": 93,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.31983280181884766,
+            "text": "The clerk must not retain the filing within 48 hours if the application is complete, unless a",
+            "token_end_inclusive": 17,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          -2.4625375270843506,
+          -1.4854470491409302,
+          4.890422344207764
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 14,
+            "start": 10,
+            "text": "must"
+          },
+          {
+            "end": 18,
+            "start": 15,
+            "text": "not"
+          },
+          {
+            "end": 25,
+            "start": 19,
+            "text": "retain"
+          },
+          {
+            "end": 29,
+            "start": 26,
+            "text": "the"
+          },
+          {
+            "end": 36,
+            "start": 30,
+            "text": "filing"
+          },
+          {
+            "end": 43,
+            "start": 37,
+            "text": "within"
+          },
+          {
+            "end": 46,
+            "start": 44,
+            "text": "48"
+          },
+          {
+            "end": 52,
+            "start": 47,
+            "text": "hours"
+          },
+          {
+            "end": 55,
+            "start": 53,
+            "text": "if"
+          },
+          {
+            "end": 59,
+            "start": 56,
+            "text": "the"
+          },
+          {
+            "end": 71,
+            "start": 60,
+            "text": "application"
+          },
+          {
+            "end": 74,
+            "start": 72,
+            "text": "is"
+          },
+          {
+            "end": 83,
+            "start": 75,
+            "text": "complete"
+          },
+          {
+            "end": 84,
+            "start": 83,
+            "text": ","
+          },
+          {
+            "end": 91,
+            "start": 85,
+            "text": "unless"
+          },
+          {
+            "end": 93,
+            "start": 92,
+            "text": "a"
+          },
+          {
+            "end": 99,
+            "start": 94,
+            "text": "legal"
+          },
+          {
+            "end": 104,
+            "start": 100,
+            "text": "hold"
+          },
+          {
+            "end": 112,
+            "start": 105,
+            "text": "applies"
+          },
+          {
+            "end": 113,
+            "start": 112,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 21,
+            "char_start": 15,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 3.128787040710449,
+            "text": "notify",
+            "token_end_inclusive": 3,
+            "token_start": 3
+          },
+          "actor": {
+            "char_end": 98,
+            "char_start": 84,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.8629388809204102,
+            "text": "unless a court",
+            "token_end_inclusive": 17,
+            "token_start": 15
+          },
+          "object": {
+            "char_end": 35,
+            "char_start": 0,
+            "presence_logit_margin": 12.58399772644043,
+            "present": true,
+            "span_logit_margin": 0.9608879089355469,
+            "text": "The clerk must notify the applicant",
+            "token_end_inclusive": 5,
+            "token_start": 0
+          }
+        },
+        "modality_logits": [
+          0.46514537930488586,
+          -1.8735365867614746,
+          1.8355611562728882
+        ],
+        "tokens": [
+          {
+            "end": 3,
+            "start": 0,
+            "text": "The"
+          },
+          {
+            "end": 9,
+            "start": 4,
+            "text": "clerk"
+          },
+          {
+            "end": 14,
+            "start": 10,
+            "text": "must"
+          },
+          {
+            "end": 21,
+            "start": 15,
+            "text": "notify"
+          },
+          {
+            "end": 25,
+            "start": 22,
+            "text": "the"
+          },
+          {
+            "end": 35,
+            "start": 26,
+            "text": "applicant"
+          },
+          {
+            "end": 42,
+            "start": 36,
+            "text": "within"
+          },
+          {
+            "end": 45,
+            "start": 43,
+            "text": "48"
+          },
+          {
+            "end": 51,
+            "start": 46,
+            "text": "hours"
+          },
+          {
+            "end": 54,
+            "start": 52,
+            "text": "if"
+          },
+          {
+            "end": 58,
+            "start": 55,
+            "text": "the"
+          },
+          {
+            "end": 70,
+            "start": 59,
+            "text": "application"
+          },
+          {
+            "end": 73,
+            "start": 71,
+            "text": "is"
+          },
+          {
+            "end": 82,
+            "start": 74,
+            "text": "complete"
+          },
+          {
+            "end": 83,
+            "start": 82,
+            "text": ","
+          },
+          {
+            "end": 90,
+            "start": 84,
+            "text": "unless"
+          },
+          {
+            "end": 92,
+            "start": 91,
+            "text": "a"
+          },
+          {
+            "end": 98,
+            "start": 93,
+            "text": "court"
+          },
+          {
+            "end": 104,
+            "start": 99,
+            "text": "order"
+          },
+          {
+            "end": 112,
+            "start": 105,
+            "text": "applies"
+          },
+          {
+            "end": 113,
+            "start": 112,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 2,
+            "char_start": 0,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 1.3440303802490234,
+            "text": "If",
+            "token_end_inclusive": 0,
+            "token_start": 0
+          },
+          "actor": {
+            "char_end": 101,
+            "char_start": 87,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.2100973129272461,
+            "text": "unless a court",
+            "token_end_inclusive": 18,
+            "token_start": 16
+          },
+          "conditions": {
+            "char_end": 30,
+            "char_start": 3,
+            "presence_logit_margin": 14.798059463500977,
+            "present": true,
+            "span_logit_margin": 9.307840347290039,
+            "text": "the application is complete",
+            "token_end_inclusive": 4,
+            "token_start": 1
+          },
+          "exceptions": {
+            "char_end": 115,
+            "char_start": 56,
+            "presence_logit_margin": 5.214059829711914,
+            "present": true,
+            "span_logit_margin": 3.212127685546875,
+            "text": "the applicant within 48 hours, unless a court order applies",
+            "token_end_inclusive": 20,
+            "token_start": 10
+          },
+          "object": {
+            "char_end": 69,
+            "char_start": 56,
+            "presence_logit_margin": 13.231207847595215,
+            "present": true,
+            "span_logit_margin": 1.9531841278076172,
+            "text": "the applicant",
+            "token_end_inclusive": 11,
+            "token_start": 10
+          }
+        },
+        "modality_logits": [
+          1.3086254596710205,
+          -2.814410924911499,
+          1.7651457786560059
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 31,
+            "start": 30,
+            "text": ","
+          },
+          {
+            "end": 35,
+            "start": 32,
+            "text": "the"
+          },
+          {
+            "end": 43,
+            "start": 36,
+            "text": "officer"
+          },
+          {
+            "end": 48,
+            "start": 44,
+            "text": "must"
+          },
+          {
+            "end": 55,
+            "start": 49,
+            "text": "notify"
+          },
+          {
+            "end": 59,
+            "start": 56,
+            "text": "the"
+          },
+          {
+            "end": 69,
+            "start": 60,
+            "text": "applicant"
+          },
+          {
+            "end": 76,
+            "start": 70,
+            "text": "within"
+          },
+          {
+            "end": 79,
+            "start": 77,
+            "text": "48"
+          },
+          {
+            "end": 85,
+            "start": 80,
+            "text": "hours"
+          },
+          {
+            "end": 86,
+            "start": 85,
+            "text": ","
+          },
+          {
+            "end": 93,
+            "start": 87,
+            "text": "unless"
+          },
+          {
+            "end": 95,
+            "start": 94,
+            "text": "a"
+          },
+          {
+            "end": 101,
+            "start": 96,
+            "text": "court"
+          },
+          {
+            "end": 107,
+            "start": 102,
+            "text": "order"
+          },
+          {
+            "end": 115,
+            "start": 108,
+            "text": "applies"
+          },
+          {
+            "end": 116,
+            "start": 115,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    },
+    {
+      "admitted": false,
+      "canonical_ir": null,
+      "family_syntax_checked": false,
+      "formal_outputs": [],
+      "formalized": false,
+      "formula_text": null,
+      "latent_input_enabled": true,
+      "latent_sha256": "4dc8e554e4f15d270e0e4ba5d7bd6f1bbc13a6d9778a27f48726d587fb79ac78",
+      "learned_formula_generation": true,
+      "promotion_performed": false,
+      "proof_authority": false,
+      "publication_performed": false,
+      "qualified": false,
+      "reason": "copied_spans_overlap",
+      "roundtrip_ok": false,
+      "sample_memory_used": false,
+      "semantic_correctness_verified": false,
+      "source_input_conditioned": true,
+      "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+      "span_diagnostics": {
+        "facets": {
+          "action": {
+            "char_end": 83,
+            "char_start": 74,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 2.9590272903442383,
+            "text": "authorize",
+            "token_end_inclusive": 14,
+            "token_start": 14
+          },
+          "actor": {
+            "char_end": 176,
+            "char_start": 148,
+            "presence_logit_margin": null,
+            "present": true,
+            "span_logit_margin": 0.20058441162109375,
+            "text": "unless a court order applies",
+            "token_end_inclusive": 30,
+            "token_start": 26
+          },
+          "conditions": {
+            "char_end": 99,
+            "char_start": 3,
+            "presence_logit_margin": 22.298992156982422,
+            "present": true,
+            "span_logit_margin": 0.7356662750244141,
+            "text": "the application is complete and fees have been paid, the registrar may authorize the application",
+            "token_end_inclusive": 16,
+            "token_start": 1
+          },
+          "object": {
+            "char_end": 44,
+            "char_start": 3,
+            "presence_logit_margin": 13.001142501831055,
+            "present": true,
+            "span_logit_margin": 0.9903440475463867,
+            "text": "the application is complete and fees have",
+            "token_end_inclusive": 7,
+            "token_start": 1
+          }
+        },
+        "modality_logits": [
+          3.2357399463653564,
+          -0.9331881403923035,
+          -2.901583194732666
+        ],
+        "tokens": [
+          {
+            "end": 2,
+            "start": 0,
+            "text": "If"
+          },
+          {
+            "end": 6,
+            "start": 3,
+            "text": "the"
+          },
+          {
+            "end": 18,
+            "start": 7,
+            "text": "application"
+          },
+          {
+            "end": 21,
+            "start": 19,
+            "text": "is"
+          },
+          {
+            "end": 30,
+            "start": 22,
+            "text": "complete"
+          },
+          {
+            "end": 34,
+            "start": 31,
+            "text": "and"
+          },
+          {
+            "end": 39,
+            "start": 35,
+            "text": "fees"
+          },
+          {
+            "end": 44,
+            "start": 40,
+            "text": "have"
+          },
+          {
+            "end": 49,
+            "start": 45,
+            "text": "been"
+          },
+          {
+            "end": 54,
+            "start": 50,
+            "text": "paid"
+          },
+          {
+            "end": 55,
+            "start": 54,
+            "text": ","
+          },
+          {
+            "end": 59,
+            "start": 56,
+            "text": "the"
+          },
+          {
+            "end": 69,
+            "start": 60,
+            "text": "registrar"
+          },
+          {
+            "end": 73,
+            "start": 70,
+            "text": "may"
+          },
+          {
+            "end": 83,
+            "start": 74,
+            "text": "authorize"
+          },
+          {
+            "end": 87,
+            "start": 84,
+            "text": "the"
+          },
+          {
+            "end": 99,
+            "start": 88,
+            "text": "application"
+          },
+          {
+            "end": 106,
+            "start": 100,
+            "text": "within"
+          },
+          {
+            "end": 109,
+            "start": 107,
+            "text": "48"
+          },
+          {
+            "end": 115,
+            "start": 110,
+            "text": "hours"
+          },
+          {
+            "end": 119,
+            "start": 116,
+            "text": "and"
+          },
+          {
+            "end": 126,
+            "start": 120,
+            "text": "before"
+          },
+          {
+            "end": 130,
+            "start": 127,
+            "text": "the"
+          },
+          {
+            "end": 137,
+            "start": 131,
+            "text": "review"
+          },
+          {
+            "end": 146,
+            "start": 138,
+            "text": "deadline"
+          },
+          {
+            "end": 147,
+            "start": 146,
+            "text": ","
+          },
+          {
+            "end": 154,
+            "start": 148,
+            "text": "unless"
+          },
+          {
+            "end": 156,
+            "start": 155,
+            "text": "a"
+          },
+          {
+            "end": 162,
+            "start": 157,
+            "text": "court"
+          },
+          {
+            "end": 168,
+            "start": 163,
+            "text": "order"
+          },
+          {
+            "end": 176,
+            "start": 169,
+            "text": "applies"
+          },
+          {
+            "end": 179,
+            "start": 177,
+            "text": "or"
+          },
+          {
+            "end": 181,
+            "start": 180,
+            "text": "a"
+          },
+          {
+            "end": 187,
+            "start": 182,
+            "text": "legal"
+          },
+          {
+            "end": 192,
+            "start": 188,
+            "text": "hold"
+          },
+          {
+            "end": 200,
+            "start": 193,
+            "text": "applies"
+          },
+          {
+            "end": 201,
+            "start": 200,
+            "text": "."
+          }
+        ]
+      },
+      "status": "abstained",
+      "target_access": false,
+      "teacher_forcing": false,
+      "training_executed": false
+    }
+  ],
+  "schema": "native-dimensional-source-span-inference/v1",
+  "semantic_correctness_verified": false,
+  "source_parent_checkpoint_sha256": "ae4e85799cf10cffae11eac8ec38ec841f10b30ee233dde6d51788cd58386332",
+  "status": "abstained",
+  "target_access": false,
+  "teacher_forcing": false,
+  "training_executed": false
+}

@@ -1,0 +1,186 @@
+{
+  "accepted": false,
+  "alias_entry_count": 20,
+  "ambiguous_alias_count": 0,
+  "checksum_recipe": "sha256_canonical_sorted_compact_UTF8_JSON_without_content_sha256",
+  "content_sha256": "b2f897a33ca3e7c43b2879db4abb651653dedab587bc6f94364a6bd80bb06324",
+  "correspondence_origin": "caller_declared_TRAIN_exact_anchor_correspondences",
+  "entries": [
+    {
+      "canonical_symbols": [
+        "audit"
+      ],
+      "facet": "action",
+      "normalized_literal": "audit",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "authorize"
+      ],
+      "facet": "action",
+      "normalized_literal": "authorize",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "notify"
+      ],
+      "facet": "action",
+      "normalized_literal": "notify",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "retain"
+      ],
+      "facet": "action",
+      "normalized_literal": "retain",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "clerk"
+      ],
+      "facet": "actor",
+      "normalized_literal": "the clerk",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "custodian"
+      ],
+      "facet": "actor",
+      "normalized_literal": "the custodian",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "officer"
+      ],
+      "facet": "actor",
+      "normalized_literal": "the officer",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "registrar"
+      ],
+      "facet": "actor",
+      "normalized_literal": "the registrar",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "fees_paid"
+      ],
+      "facet": "conditions",
+      "normalized_literal": "fees have been paid",
+      "observation_count": 8
+    },
+    {
+      "canonical_symbols": [
+        "application_complete"
+      ],
+      "facet": "conditions",
+      "normalized_literal": "the application is complete",
+      "observation_count": 12
+    },
+    {
+      "canonical_symbols": [
+        "court_order"
+      ],
+      "facet": "exceptions",
+      "normalized_literal": "a court order applies",
+      "observation_count": 8
+    },
+    {
+      "canonical_symbols": [
+        "legal_hold"
+      ],
+      "facet": "exceptions",
+      "normalized_literal": "a legal hold applies",
+      "observation_count": 12
+    },
+    {
+      "canonical_symbols": [
+        "P"
+      ],
+      "facet": "modality",
+      "normalized_literal": "may",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "O"
+      ],
+      "facet": "modality",
+      "normalized_literal": "must",
+      "observation_count": 8
+    },
+    {
+      "canonical_symbols": [
+        "F"
+      ],
+      "facet": "modality",
+      "normalized_literal": "must not",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "applicant"
+      ],
+      "facet": "object",
+      "normalized_literal": "the applicant",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "application"
+      ],
+      "facet": "object",
+      "normalized_literal": "the application",
+      "observation_count": 8
+    },
+    {
+      "canonical_symbols": [
+        "filing"
+      ],
+      "facet": "object",
+      "normalized_literal": "the filing",
+      "observation_count": 4
+    },
+    {
+      "canonical_symbols": [
+        "before_the_review_deadline"
+      ],
+      "facet": "temporal",
+      "normalized_literal": "before the review deadline",
+      "observation_count": 8
+    },
+    {
+      "canonical_symbols": [
+        "within_48_hours"
+      ],
+      "facet": "temporal",
+      "normalized_literal": "within 48 hours",
+      "observation_count": 12
+    }
+  ],
+  "examples_persisted": false,
+  "fit_operation": "deterministic_alias_aggregation_without_model_training",
+  "independent_semantic_review_completed": false,
+  "model_executed": false,
+  "normalization": "unicode-casefold-whitespace-collapse-no-lexical-expansion/v1",
+  "proof_authority": false,
+  "prover_executed": false,
+  "qualified": false,
+  "query_reference_accessed": false,
+  "schema": "canonical-observed-train-alias-profile/v1",
+  "semantic_scope": "observed_literal_facet_symbol_agreement_only",
+  "source_fidelity_established": false,
+  "training_anchor_count": 124,
+  "training_manifest_sha256": "1339d9fe39ea4a60be40223ac6711f3c2cf706f4dccd2f63e25483e43aad8250",
+  "training_pair_count": 16,
+  "training_supervision_consumed": true
+}

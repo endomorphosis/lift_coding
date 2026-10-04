@@ -1,0 +1,614 @@
+{
+  "asset_manifest_binding": {
+    "bytes": 1470,
+    "digest_verified": true,
+    "path": "configs/autoencoders/gte_multilingual_local_assets_v1.json",
+    "sha256": "8beb874aa7b06599346173fde12e95f9f926b3028942d5014cdd2f99c4385166"
+  },
+  "complete_dependency_manifest": false,
+  "configuration": {
+    "gte384_snapshot": "/home/barberb/.cache/huggingface/hub/models--thenlper--gte-small/snapshots/17e1f347d17fe144873b1201da91788898c639cd",
+    "gte768_assets": {
+      "code_directory": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-encoder-assets/code",
+      "manifest": {
+        "path": "configs/autoencoders/gte_multilingual_local_assets_v1.json",
+        "sha256": "8beb874aa7b06599346173fde12e95f9f926b3028942d5014cdd2f99c4385166"
+      },
+      "model_directory": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-encoder-assets/model"
+    },
+    "max_seconds": 600,
+    "schema": "alignment-embedding-experiment-config/v1",
+    "spacy_backend": "local_en_core_web_sm",
+    "structure_report": {
+      "path": "artifacts/autoformalization-alignment-20261003/structure-01/report.json",
+      "sha256": "8e9deb8b957447907f94fac6116225481742b4616a5c7ece6133aed802e153a5"
+    },
+    "study_id": "autoformalization-richer-embedding-development-v1"
+  },
+  "configuration_binding": {
+    "bytes": 989,
+    "path": "configs/autoencoders/alignment_embedding_development_v1.json",
+    "sha256": "a86a19cef5e7a859ff65a2b9912816a1a8d8419999726a65b1f0ef9c3e786a70"
+  },
+  "context_applied_to_embeddings": false,
+  "context_resolution_executed": false,
+  "dependency_binding_scope": "listed_study_and_core_source_files_only",
+  "development_exposed_in_prior_grammar_design": true,
+  "development_used_in_fit": false,
+  "elapsed_seconds": 17.49447506499564,
+  "embedding_input_binding": {
+    "bytes": 17282,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/embedding_inputs.json",
+    "sha256": "072b5e7479499bd232715ec72bfe157c0dafb80c0bb9c140423c867c9f751f99"
+  },
+  "embedding_receipts_produced": {
+    "legacy8": 34,
+    "native384": 34,
+    "native768": 34
+  },
+  "evaluation_role": "exposed_development",
+  "formal_hash_dimension": 2048,
+  "formal_hash_seed": 0,
+  "independent_review_bundle_binding": {
+    "bytes": 195306,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/structure-01/review_bundle_private.json",
+    "sha256": "b40d15d3c48d1b050227351bdfb15bb5bddb0f41c760cbe8c1b8f81c9d68831e"
+  },
+  "independent_review_status": {
+    "bundle_sha256": "d85fae05df6164b6fb12ef0ad2fa576a02efe38eeedd7f6c9508c51a0f46754a",
+    "completed_reviews": 0,
+    "independent_fidelity_available": false,
+    "item_count": 34,
+    "organizer_payload_sha256": "6d620172b7409e09f05dfe96c126f2a3d4c198daa8a977af9380e37a71379f0d",
+    "production_admitted": false,
+    "proof_authority": false,
+    "qualified": false,
+    "reviewer_identity_attestations_created": false,
+    "reviewer_payload_sha256": "0584581979beac91312aabae8aed650cfc28af3b9c3ca239f67a6c8a2f9dfb62",
+    "schema": "alignment-richer-review-preparation-validation/v1",
+    "source_meaning_adjudicated": false,
+    "source_semantics_verified": false,
+    "status": "validated_blank_preparation_only",
+    "submissions_created": false
+  },
+  "lane_bindings": {
+    "legacy8": {
+      "bytes": 74282,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/legacy8_embeddings.json",
+      "sha256": "aa929c0836f592d2217e748fa7ee452c955ef2466497ee72efca2a859e08930c"
+    },
+    "native384": {
+      "bytes": 629044,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native384_embeddings.json",
+      "sha256": "14acf84a107d2bbdea3df8af9009f97ae670a3c45125e454c3a00312a78f7107"
+    },
+    "native768": {
+      "bytes": 1748842,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native768_embeddings.json",
+      "sha256": "d169295841e14829d896a81b48630d39f85537380df8e581b7440671ac49d2a9"
+    }
+  },
+  "leanstral_hidden_states_extracted": false,
+  "limitations": [
+    "The 16 TRAIN targets include no exact counterpart to any of the eight positive development references.",
+    "Rankings are scored against unreviewed authored facets and their attainable TRAIN-pool ceilings, not independent source meaning.",
+    "This fits tiny ridge probes against fixed hashed anchors; it does not evaluate trained autoencoder checkpoints or a contrastive objective.",
+    "Eight unsupported/ambiguous queries have unscored diagnostic rankings, not a certified abstention or ambiguity decision.",
+    "Two explicit-context queries are embedded source-only and excluded from semantic ranking scores; context is not resolved.",
+    "Finite formal hashing is lossy; distinct target separation is not a fidelity guarantee.",
+    "Leanstral embeddings, useful native proof coverage and authenticated richer reviews remain unrun or unavailable."
+  ],
+  "model_autoencoder_training_executed": false,
+  "native_useful_proof_coverage": {
+    "status": "unrun",
+    "value": null
+  },
+  "new_independent_reviews_created": 0,
+  "original_validation_accessed": false,
+  "paired_contrastive_training_executed": false,
+  "panel_binding": {
+    "bytes": 93063,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json",
+    "sha256": "d7ab18fa836f9ef2b0c9963eedb3b5c7980c45ea250a8414253b9d1987a7dde6"
+  },
+  "predecessor_binding": {
+    "path": "artifacts/autoformalization-alignment-20261003/structure-01/report.json",
+    "sha256": "8e9deb8b957447907f94fac6116225481742b4616a5c7ece6133aed802e153a5"
+  },
+  "production_admitted": false,
+  "proof_authority": false,
+  "protected_protocol_bindings": [
+    {
+      "bytes": 4721,
+      "digest_verified": true,
+      "path": "papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    }
+  ],
+  "qualified": false,
+  "query_generation_executed": false,
+  "query_targets_used_in_embedding": false,
+  "query_targets_used_in_fit_or_ranking": false,
+  "report_sha256": "9d79626ec7e81a043163a8636fa737ece867765a93168a2298a64490836873e3",
+  "resource_scope": {
+    "deadline_kind": "cooperative_between_lanes_and_queries_no_native_call_preemption",
+    "encoder_lanes_attempted": 3,
+    "llm_calls": 0,
+    "local_cpu_only": true,
+    "prover_calls": 0
+  },
+  "retrieval_evaluation_bindings": {
+    "legacy8": {
+      "bytes": 280644,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/legacy8_retrieval.json",
+      "sha256": "de79c994ef5de2091780cc89b170eb74802894b22a303a22e37711c0c1aa6067"
+    },
+    "native384": {
+      "bytes": 280595,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native384_retrieval.json",
+      "sha256": "3ee65516a78d7063644a6aba5e4a5e6f8dee505e9a3b2bb256118566974a405c"
+    },
+    "native768": {
+      "bytes": 280567,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native768_retrieval.json",
+      "sha256": "65a3b273e2eb3f9ce05a21e77904ad94be8ee7addcfd49273caab86951395e5b"
+    }
+  },
+  "ridge_alpha": 1.0,
+  "ridge_head_bindings": {
+    "legacy8": {
+      "bytes": 381898,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/legacy8_ridge.json",
+      "sha256": "e05b6e61c67afc9fdbae243e8d599b8f683ac03437fc4d6ecc46891d13d56188"
+    },
+    "native384": {
+      "bytes": 550456,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native384_ridge.json",
+      "sha256": "254d2548f303d5b3858a3885ca956ba061257230b3327c5e52600a6e2f878047"
+    },
+    "native768": {
+      "bytes": 723626,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native768_ridge.json",
+      "sha256": "6ae3760cd9c70b8b68da2984e43d91fa80004c1b06b53d89a29a63f3cbc68f0e"
+    }
+  },
+  "ridge_intercept": false,
+  "schema": "alignment-embedding-experiment-report/v1",
+  "sealed_final_test_accessed": false,
+  "source_bindings": [
+    {
+      "bytes": 19018,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+    },
+    {
+      "bytes": 31906,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+    },
+    {
+      "bytes": 20197,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+    },
+    {
+      "bytes": 23299,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e"
+    },
+    {
+      "bytes": 20651,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745"
+    },
+    {
+      "bytes": 17237,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576"
+    },
+    {
+      "bytes": 25163,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27"
+    },
+    {
+      "bytes": 17653,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318"
+    },
+    {
+      "bytes": 109257,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 37034,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd"
+    },
+    {
+      "bytes": 13437,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+    },
+    {
+      "bytes": 27010,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e"
+    },
+    {
+      "bytes": 17858,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/bridge/canonical.py",
+      "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194"
+    },
+    {
+      "bytes": 4428,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 27572,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8"
+    },
+    {
+      "bytes": 392561,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a"
+    },
+    {
+      "bytes": 300668,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+    },
+    {
+      "bytes": 1579,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+    },
+    {
+      "bytes": 14419,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "bytes": 6017,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 25914,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py",
+      "sha256": "23ea8a10eea572d05a90f822a8f0430d4c93648d6ec6a3e775f370cb3e9c4b5a"
+    },
+    {
+      "bytes": 1826,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_parser_experiment.py",
+      "sha256": "11069f97f4210071c13fb780a2ee3c0c778e392adf1da008dee5e93e6da34b8b"
+    },
+    {
+      "bytes": 13308,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/features.py",
+      "sha256": "a5abe46dbb9c90f83699f8d7922676bc41335e26413d73ae173c9fd9b66bb23c"
+    },
+    {
+      "bytes": 11288,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure.py",
+      "sha256": "8a5c5eb1667a46bd0e7ea3db1744f414de799e7dce1a53ecfbca888cdf51aa02"
+    },
+    {
+      "bytes": 10920,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review.py",
+      "sha256": "7d8321eef857937239b31e40152184883ef368a8103342cb3ef1da1d45a49dfc"
+    },
+    {
+      "bytes": 22237,
+      "digest_verified": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure_experiment.py",
+      "sha256": "e57ed548cbe6a77a2ece2787da95c39e3a8a8a45754342b5debec4e637342230"
+    },
+    {
+      "bytes": 1954,
+      "digest_verified": true,
+      "path": "scripts/ops/legal_ir/run_alignment_structure_experiment.py",
+      "sha256": "2e5599887e63138f5cae663f15cb57da91c34b7e8dc4bb21eb3598fc961fdb69"
+    },
+    {
+      "bytes": 41368,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_embeddings.py",
+      "sha256": "f5fff80ce717d2c185271eb04e92af7c02d13a3f01bfb4afb758f5865b74684b"
+    },
+    {
+      "bytes": 22401,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_retrieval.py",
+      "sha256": "bbbac13f8464e6c0b15b8add91ebd0cedeb0db6531c43f7e4962445153a5ef40"
+    },
+    {
+      "bytes": 18721,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_embedding_experiment.py",
+      "sha256": "c91b2730c45534821146991f5f873db8cea22a5baf0a2daa5667458fd5efa099"
+    },
+    {
+      "bytes": 9556,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    {
+      "bytes": 13375,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    {
+      "bytes": 15959,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    {
+      "bytes": 16725,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "sha256": "27855f5ffd59ebc45444d5e37c18ff1569618084cd27b1503db112940051ffb0"
+    },
+    {
+      "bytes": 26219,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    {
+      "bytes": 306403,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_linguistic_snapshot/spacy_modal_codec.py",
+      "sha256": "16ec4e141d5cb2f9d37cd4db42733921bc046e17fee12afc43ab31ca7a60cd59"
+    },
+    {
+      "bytes": 21063,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/linguistic.py",
+      "sha256": "baca84b44f7eda33466ffdc75170d904f480aafb47a779131337d90ed9a7bca3"
+    },
+    {
+      "bytes": 1646,
+      "path": "scripts/ops/legal_ir/run_alignment_embedding_experiment.py",
+      "sha256": "15ca20f3f4406ec98ba0c34894f47de990db592b037fe77ba23301e9726931f4"
+    }
+  ],
+  "source_fidelity_established": false,
+  "source_input_dimensions": [
+    8,
+    384,
+    768
+  ],
+  "status": "completed",
+  "study_id": "autoformalization-richer-embedding-development-v1",
+  "summaries": {
+    "legacy8": {
+      "dimension": 8,
+      "excluded_context_queries": 2,
+      "policies": {
+        "source_cosine": {
+          "eligible_positive_queries": 8,
+          "mean_graded_facet_ndcg": 0.9063527830841718,
+          "ndcg_queries": 8,
+          "scored_queries": 8,
+          "unscoped_qualifier_coverage": {
+            "conditions": {
+              "eligible_pool_ceiling_mean_identity_recall": 0.75,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 0.8,
+              "mean_identity_recall": 0.75,
+              "occurrence_weighted_identity_recall": 0.8,
+              "queries": 8
+            },
+            "exceptions": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            },
+            "temporal": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            }
+          }
+        },
+        "structural_ridge": {
+          "eligible_positive_queries": 8,
+          "mean_graded_facet_ndcg": 0.7878882812153971,
+          "ndcg_queries": 8,
+          "scored_queries": 8,
+          "unscoped_qualifier_coverage": {
+            "conditions": {
+              "eligible_pool_ceiling_mean_identity_recall": 0.75,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 0.8,
+              "mean_identity_recall": 0.75,
+              "occurrence_weighted_identity_recall": 0.8,
+              "queries": 8
+            },
+            "exceptions": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            },
+            "temporal": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            }
+          }
+        }
+      },
+      "ranked_positive_queries": 8,
+      "ranked_unscored_negative_queries": 8,
+      "status": "evaluated",
+      "training_rows": 16
+    },
+    "native384": {
+      "dimension": 384,
+      "excluded_context_queries": 2,
+      "policies": {
+        "source_cosine": {
+          "eligible_positive_queries": 8,
+          "mean_graded_facet_ndcg": 0.9618966579623486,
+          "ndcg_queries": 8,
+          "scored_queries": 8,
+          "unscoped_qualifier_coverage": {
+            "conditions": {
+              "eligible_pool_ceiling_mean_identity_recall": 0.75,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 0.8,
+              "mean_identity_recall": 0.75,
+              "occurrence_weighted_identity_recall": 0.8,
+              "queries": 8
+            },
+            "exceptions": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            },
+            "temporal": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            }
+          }
+        },
+        "structural_ridge": {
+          "eligible_positive_queries": 8,
+          "mean_graded_facet_ndcg": 0.9152191214914193,
+          "ndcg_queries": 8,
+          "scored_queries": 8,
+          "unscoped_qualifier_coverage": {
+            "conditions": {
+              "eligible_pool_ceiling_mean_identity_recall": 0.75,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 0.8,
+              "mean_identity_recall": 0.75,
+              "occurrence_weighted_identity_recall": 0.8,
+              "queries": 8
+            },
+            "exceptions": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            },
+            "temporal": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            }
+          }
+        }
+      },
+      "ranked_positive_queries": 8,
+      "ranked_unscored_negative_queries": 8,
+      "status": "evaluated",
+      "training_rows": 16
+    },
+    "native768": {
+      "dimension": 768,
+      "excluded_context_queries": 2,
+      "policies": {
+        "source_cosine": {
+          "eligible_positive_queries": 8,
+          "mean_graded_facet_ndcg": 0.9838375773719246,
+          "ndcg_queries": 8,
+          "scored_queries": 8,
+          "unscoped_qualifier_coverage": {
+            "conditions": {
+              "eligible_pool_ceiling_mean_identity_recall": 0.75,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 0.8,
+              "mean_identity_recall": 0.75,
+              "occurrence_weighted_identity_recall": 0.8,
+              "queries": 8
+            },
+            "exceptions": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            },
+            "temporal": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            }
+          }
+        },
+        "structural_ridge": {
+          "eligible_positive_queries": 8,
+          "mean_graded_facet_ndcg": 0.9957222034342201,
+          "ndcg_queries": 8,
+          "scored_queries": 8,
+          "unscoped_qualifier_coverage": {
+            "conditions": {
+              "eligible_pool_ceiling_mean_identity_recall": 0.75,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 0.8,
+              "mean_identity_recall": 0.75,
+              "occurrence_weighted_identity_recall": 0.8,
+              "queries": 8
+            },
+            "exceptions": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            },
+            "temporal": {
+              "eligible_pool_ceiling_mean_identity_recall": 1.0,
+              "eligible_pool_ceiling_occurrence_weighted_identity_recall": 1.0,
+              "mean_identity_recall": 1.0,
+              "occurrence_weighted_identity_recall": 1.0,
+              "queries": 8
+            }
+          }
+        }
+      },
+      "ranked_positive_queries": 8,
+      "ranked_unscored_negative_queries": 8,
+      "status": "evaluated",
+      "training_rows": 16
+    }
+  },
+  "target_origin": "synthetic_authored_unreviewed",
+  "trained_ridge_heads": 3,
+  "training_rows_per_head": 16
+}

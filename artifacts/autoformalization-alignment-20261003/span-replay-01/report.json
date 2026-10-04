@@ -1,0 +1,1555 @@
+{
+  "calls": {
+    "inference_calls": 45,
+    "optimizer_steps": 0,
+    "row_forward_calls": 1530
+  },
+  "checkpoint_states_replayed": 9,
+  "complete_dependency_manifest": false,
+  "content_sha256": "e0afe2ad5a5aaf41c4709589fb23edc0645d1a4221cd61573d14a0c28e5dd3b2",
+  "context_pair_equal_source_only": true,
+  "context_pair_positions": [
+    22,
+    24
+  ],
+  "context_pair_source_and_embedding_equal": true,
+  "cpu_threads": 1,
+  "device": "cpu",
+  "dtype": "float32",
+  "elapsed_seconds": 19.50291810199269,
+  "independent_review_completed": false,
+  "limitations": [
+    "Constructed initial controls are exact initializer reconstructions, not retained trained checkpoints.",
+    "Raw source-only vectors withhold explicit assumptions.",
+    "Source-span copying cannot emit normalized aliases absent from source tokens.",
+    "Decoded means supported single-rule syntax, not independently faithful source meaning.",
+    "Moment restoration validates saved Adam state but does not execute optimizer resumption.",
+    "Observed private reload equality is specific to this CPU process and input panel."
+  ],
+  "literal_compatible_reference_count": 0,
+  "loaded_repository_modules": [
+    {
+      "bytes": 56829,
+      "module_name": "ipfs_datasets_py",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    {
+      "bytes": 4434,
+      "module_name": "ipfs_datasets_py.logic",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    {
+      "bytes": 2073,
+      "module_name": "ipfs_datasets_py.logic.formalization",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/__init__.py",
+      "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+    },
+    {
+      "bytes": 97,
+      "module_name": "ipfs_datasets_py.logic.formalization.autoencoder",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+      "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+    },
+    {
+      "bytes": 41368,
+      "module_name": "ipfs_datasets_py.logic.formalization.autoencoder.alignment_richer_embeddings",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_embeddings.py",
+      "sha256": "f5fff80ce717d2c185271eb04e92af7c02d13a3f01bfb4afb758f5865b74684b"
+    },
+    {
+      "bytes": 13375,
+      "module_name": "ipfs_datasets_py.logic.formalization.autoencoder.source_embeddings_768",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    {
+      "bytes": 9556,
+      "module_name": "ipfs_datasets_py.logic.formalization.autoencoder.source_embeddings_768_complete",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    {
+      "bytes": 2708,
+      "module_name": "ipfs_datasets_py.logic.legal_ir",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/__init__.py",
+      "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    },
+    {
+      "bytes": 109257,
+      "module_name": "ipfs_datasets_py.logic.legal_ir.canonical_contracts",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 957,
+      "module_name": "ipfs_datasets_py.optimizers",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/__init__.py",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    {
+      "bytes": 69336,
+      "module_name": "ipfs_datasets_py.optimizers.logic_theorem_optimizer",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    {
+      "bytes": 14622,
+      "module_name": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_formula_codec",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 42137,
+      "module_name": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_family_evaluator",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    {
+      "bytes": 146870,
+      "module_name": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_grammar_decoder",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 22521,
+      "module_name": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_span_dimensions",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+      "sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d"
+    },
+    {
+      "bytes": 35294,
+      "module_name": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_span_formula",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+      "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+    },
+    {
+      "bytes": 38995,
+      "module_name": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.snapshot_evaluator",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    },
+    {
+      "bytes": 5845,
+      "module_name": "ipfs_datasets_py.router_deps",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    },
+    {
+      "bytes": 175,
+      "module_name": "ipfs_datasets_py.utils",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/__init__.py",
+      "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+    },
+    {
+      "bytes": 4428,
+      "module_name": "ipfs_datasets_py.utils.cid_utils",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    }
+  ],
+  "max_rss_kib": 688236,
+  "new_encoder_calls": 0,
+  "original_validation_accessed": false,
+  "plan_binding": {
+    "bytes": 23556,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/plan.json",
+    "sha256": "5680026e1cb714b466ddbce4b564b3456e94fc2a498f7a6b893b47454ae58664"
+  },
+  "private_reload_comparisons": 9,
+  "proof_authority": false,
+  "proof_calls": 0,
+  "qualified": false,
+  "reference_scope_binding": {
+    "bytes": 16328,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/posthoc_reference_scope.json",
+    "sha256": "486cef51e93c0c40aa48414f59bcc7d1ed409fd7a58cd0167044f8fbd314e2f9"
+  },
+  "rng_state_unchanged": true,
+  "runner_binding": {
+    "bytes": 19552,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/replay_source_span.py",
+    "sha256": "7d61779da700019046d233166023cf585e282743cea428051f1702d37bac283c"
+  },
+  "runs": [
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3518657,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-constructed-initial-control.json",
+        "sha256": "75088a42131cf95227057f1fb063c9c593411dddbd33149df2e9f08d4d463958"
+      },
+      "checkpoint_payload_sha256": "ca470fd4b44f89ce913f0cc85d4cb97f8441a4940b1cc80dbe744b9617cb21b0",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 1.8813508759922115,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "da7244ff886c93509f309f2029687f8e6f9a7291c7d5b916be64c2d78db15825",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 174430,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-constructed_initial_control-disabled.json",
+          "sha256": "704a133ae0a188cefc27b670282e024f9ad7a22ec302f965734c38a0a8448c25"
+        },
+        "none": {
+          "bytes": 174392,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-constructed_initial_control-none.json",
+          "sha256": "149d5c2e5518bbbdca38fb16165bc042407482391ff9c259ae97f36e561e9e49"
+        },
+        "rotate": {
+          "bytes": 174394,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-constructed_initial_control-rotate.json",
+          "sha256": "8d39e8f2e163500a1edc247075ba36f073f2dacf52fc9c4e4c94db763a675623"
+        },
+        "zero": {
+          "bytes": 174392,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-constructed_initial_control-zero.json",
+          "sha256": "476535ba99fff59e9837adb203c8dd013f48e5186144953eac13175cbad9c8dc"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 174392,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-constructed_initial_control-none-private-reload.json",
+        "sha256": "149d5c2e5518bbbdca38fb16165bc042407482391ff9c259ae97f36e561e9e49"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 0,
+      "role": "constructed_initial_control",
+      "seed": 1729,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 30
+          },
+          "decoded_count": 4,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 30
+          },
+          "decoded_count": 4,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 30
+          },
+          "decoded_count": 4,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 30
+          },
+          "decoded_count": 4,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    },
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3433326,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-400.json",
+        "sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc"
+      },
+      "checkpoint_payload_sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.0176405906677246,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.013372659683227539,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.777249813079834,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 2.88816619598947,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "a9960cfe9b4118327ed1aff3a4fedf0e4d9e1b9b163652bef89cf681b411978b",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 175240,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-selected400-disabled.json",
+          "sha256": "861cc56dae035cddf3948bb0f439eb594342001a0e640f851b02b77dc85f8810"
+        },
+        "none": {
+          "bytes": 175914,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-selected400-none.json",
+          "sha256": "eb710e49a5def35bb1811ddc8727142b4c57a9df576a175cc3fecef28369ad70"
+        },
+        "rotate": {
+          "bytes": 175915,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-selected400-rotate.json",
+          "sha256": "f84a30b1dcf8d1f835a178427b703c3df3a88e8542ca9fe8e2c97afd3eefa8e1"
+        },
+        "zero": {
+          "bytes": 175934,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-selected400-zero.json",
+          "sha256": "68f9d6e78da98538840fb539d0fa9fa0bd59393d9e58d89ad9ee374db2df7911"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 175914,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-selected400-none-private-reload.json",
+        "sha256": "eb710e49a5def35bb1811ddc8727142b4c57a9df576a175cc3fecef28369ad70"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 400,
+      "role": "selected400",
+      "seed": 1729,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 31
+          },
+          "decoded_count": 3,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 31
+          },
+          "decoded_count": 3,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 31
+          },
+          "decoded_count": 3,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 31
+          },
+          "decoded_count": 3,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    },
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3430828,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-800.json",
+        "sha256": "a6d0c8e1428358be6f5601ff75eb62962611184f4b5cbae1747a31253640ccbe"
+      },
+      "checkpoint_payload_sha256": "a6d0c8e1428358be6f5601ff75eb62962611184f4b5cbae1747a31253640ccbe",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.350677490234375,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.006870269775390625,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.9527297019958496,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 2.2259674640081357,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "f39c8f9ee7d71aa68943ecec66c4b5a622e99ebc3991498eec547d4e4a4d2261",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 174381,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-last800-disabled.json",
+          "sha256": "0e63701dc1b53e4bab5b6c82fc56a001ce8c73f377ba0bc2d2024f8c154bc85b"
+        },
+        "none": {
+          "bytes": 174313,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-last800-none.json",
+          "sha256": "23e86c137f01a2ec1656ea3320c0b8eed22766671fb2cd5e5b480cd7082079d4"
+        },
+        "rotate": {
+          "bytes": 174304,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-last800-rotate.json",
+          "sha256": "09da6f8009bbf590b64f6800209e1bb37c066815a7680e85a6a4a65114994fd8"
+        },
+        "zero": {
+          "bytes": 174303,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-last800-zero.json",
+          "sha256": "844d44d758533e826ab86921b28df855339c13120c4b37b9ef7b6569ba8acfa4"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 174313,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-last800-none-private-reload.json",
+        "sha256": "23e86c137f01a2ec1656ea3320c0b8eed22766671fb2cd5e5b480cd7082079d4"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 800,
+      "role": "last800",
+      "seed": 1729,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 31
+          },
+          "decoded_count": 3,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 31
+          },
+          "decoded_count": 3,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 31
+          },
+          "decoded_count": 3,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 31
+          },
+          "decoded_count": 3,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    },
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3519423,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-constructed-initial-control.json",
+        "sha256": "96fedab6e5eb3a2b06a30895e6139ada0c080496f52d99e6f8deb859f588bf70"
+      },
+      "checkpoint_payload_sha256": "f5787526393773a998f81febca908b4e015d5162130bfa7382ac133941fdc9e7",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 1.4071657369931927,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "8ae8ee058960646b53cf560d2ef9ba12e5570c6c0909cc6f3f8bef0d9c8554ec",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 155831,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-constructed_initial_control-disabled.json",
+          "sha256": "57ddaee48854b41d99bf1d62d8fb930c91b36792d3dd6a504dcf175f355bdc91"
+        },
+        "none": {
+          "bytes": 155793,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-constructed_initial_control-none.json",
+          "sha256": "7342fd825758389429ba9d1d9319970915457fc229aefad0a87e362e680bf70c"
+        },
+        "rotate": {
+          "bytes": 155795,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-constructed_initial_control-rotate.json",
+          "sha256": "55617c864f3875900a39318c09d7d70d40332ea9ed6139f4d3c87cf84abc833b"
+        },
+        "zero": {
+          "bytes": 155793,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-constructed_initial_control-zero.json",
+          "sha256": "99f08e8a9c2f5ec61484fd2e03bd161f8868b95e2b8e341c56fc7ff4c8d83b22"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 155793,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-constructed_initial_control-none-private-reload.json",
+        "sha256": "7342fd825758389429ba9d1d9319970915457fc229aefad0a87e362e680bf70c"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 0,
+      "role": "constructed_initial_control",
+      "seed": 1730,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    },
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3432437,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+        "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+      },
+      "checkpoint_payload_sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.5639042854309082,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.05577540397644043,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.1797184944152832,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 1.5947351729992079,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "ab1aaed682c3ac4905553cc7aab7ace78d3f07ab474d8670c234738fca2dc9eb",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 149752,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-selected400-disabled.json",
+          "sha256": "7785b919acfe3c7b12ba1c080c8172940b8ca94e6b841f65bf6c4f8542d284ae"
+        },
+        "none": {
+          "bytes": 149708,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-selected400-none.json",
+          "sha256": "8e98370045675aad8aebb6b7d8e7a1818dc2b443ea1bb882d0e397d8f0fa551b"
+        },
+        "rotate": {
+          "bytes": 149707,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-selected400-rotate.json",
+          "sha256": "5fd406831daa1e71cd09bf7219bc7caaca7a3c2e4dbf71de607f97f3f21054f9"
+        },
+        "zero": {
+          "bytes": 150732,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-selected400-zero.json",
+          "sha256": "3a894aa27594eaeae73aaaa3cf4669c80590c2fdcb2a3c8bb76a909c2ac5d5c4"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 149708,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-selected400-none-private-reload.json",
+        "sha256": "8e98370045675aad8aebb6b7d8e7a1818dc2b443ea1bb882d0e397d8f0fa551b"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 400,
+      "role": "selected400",
+      "seed": 1730,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    },
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3431987,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-800.json",
+        "sha256": "be269a0b0648063fe14ce0a291c474dd6c3aefbf3465b8adb2573346dc2315ba"
+      },
+      "checkpoint_payload_sha256": "be269a0b0648063fe14ce0a291c474dd6c3aefbf3465b8adb2573346dc2315ba",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.8950042724609375,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.04004335403442383,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.3268814086914062,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 1.706955301007838,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "74b5c5a78a28e76aca861144fd3da47173bd0166b4bbe9fb415e4f9766db2b0c",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 149006,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-last800-disabled.json",
+          "sha256": "89336325c79041d40ac6d1887e0d67ba20997f891546b7be05b23283c6b8dd11"
+        },
+        "none": {
+          "bytes": 149336,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-last800-none.json",
+          "sha256": "707b0279b17476a5322ec831782482ad3bfc225d6b5f95ac50a6f822908ef42c"
+        },
+        "rotate": {
+          "bytes": 149325,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-last800-rotate.json",
+          "sha256": "f49ad3fd64510c9b463aab24b501f6fe736562995bfafe14f40683cac3a8eb8b"
+        },
+        "zero": {
+          "bytes": 149322,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-last800-zero.json",
+          "sha256": "6063b1daec55bdbedd83c0dc2ab0e562f9b3945259138fabe46bf21c471f18ea"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 149336,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-last800-none-private-reload.json",
+        "sha256": "707b0279b17476a5322ec831782482ad3bfc225d6b5f95ac50a6f822908ef42c"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 800,
+      "role": "last800",
+      "seed": 1730,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    },
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3518508,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-constructed-initial-control.json",
+        "sha256": "afd8dd403f28dfae113a4d67a7f69c9aa0c89b26e5f92421da9b0ab023ca9f60"
+      },
+      "checkpoint_payload_sha256": "49fd52cfa08fdc10dec0e18354e20e0e19da2670d76cefbaff7142e8d67bc99d",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 1.469890916996519,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "72e5e0db44801bdfa776bd711d6e5e890ed60bcd9d95a7ac96e96b209481fecc",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 156801,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-constructed_initial_control-disabled.json",
+          "sha256": "c3a3e56b3b46ad7e645414fb13cfdfe6b70b2e206b4dbce8977002388fafaa97"
+        },
+        "none": {
+          "bytes": 156763,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-constructed_initial_control-none.json",
+          "sha256": "d022d26c02952c13b2ed134f13fd8055af7ad8ac7f2e7866e2751f06a542f9fb"
+        },
+        "rotate": {
+          "bytes": 156765,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-constructed_initial_control-rotate.json",
+          "sha256": "651d13cefc5f72879e51951af82221d64cebce5bce148c01300196e368825fce"
+        },
+        "zero": {
+          "bytes": 156763,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-constructed_initial_control-zero.json",
+          "sha256": "568fc8bdc2b329c9cc2d07080b47ad55a72d36250c94f6ce9261cdb1e96af14c"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 156763,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-constructed_initial_control-none-private-reload.json",
+        "sha256": "d022d26c02952c13b2ed134f13fd8055af7ad8ac7f2e7866e2751f06a542f9fb"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 0,
+      "role": "constructed_initial_control",
+      "seed": 1731,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    },
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3432783,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+        "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+      },
+      "checkpoint_payload_sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.6592001914978027,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.0288083553314209,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.3109617233276367,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 1.6605170279945014,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "9f9a5a2d0b735d11ffc876b39859118ad5d64f27317057d6b9827f03ef7ca79b",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 158878,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-selected400-disabled.json",
+          "sha256": "4ae80cbda5b4ffef042ffa4877a7b5cb44dccd3cca7f6e3252d7700098603fe4"
+        },
+        "none": {
+          "bytes": 158946,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-selected400-none.json",
+          "sha256": "e3018c78f7c1e47b7f3ab498b5fa8f42f8f845e307b6e84867039abe17bc80af"
+        },
+        "rotate": {
+          "bytes": 158944,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-selected400-rotate.json",
+          "sha256": "929af2680d0f30212b83b8ccedb0448def02b54421205ac0382ee971e1d4a2c7"
+        },
+        "zero": {
+          "bytes": 158832,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-selected400-zero.json",
+          "sha256": "6ac8110d8ff1cb1f0298a123834d30a2b551edc71b6359a8965403a8ee8b7638"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 158946,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-selected400-none-private-reload.json",
+        "sha256": "e3018c78f7c1e47b7f3ab498b5fa8f42f8f845e307b6e84867039abe17bc80af"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 400,
+      "role": "selected400",
+      "seed": 1731,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    },
+    {
+      "adam_moment_restore_validated": true,
+      "checkpoint_binding": {
+        "bytes": 3431123,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-800.json",
+        "sha256": "ff41c3199ca3b84f10e4d3574103cf01051a42b33639fc50e748f1ae19bea3a0"
+      },
+      "checkpoint_payload_sha256": "ff41c3199ca3b84f10e4d3574103cf01051a42b33639fc50e748f1ae19bea3a0",
+      "context_pair_equal_source_only": true,
+      "control_comparisons": {
+        "disabled": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 2.0779380798339844,
+          "modality_logit_comparison_rows": 34
+        },
+        "rotate": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 0.017785310745239258,
+          "modality_logit_comparison_rows": 34
+        },
+        "zero": {
+          "generation_changed_count": 0,
+          "generation_changed_row_positions": [],
+          "max_abs_modality_logit_difference": 1.5575857162475586,
+          "modality_logit_comparison_rows": 34
+        }
+      },
+      "elapsed_seconds": 1.6145189380040392,
+      "model_parameter_count": 33271,
+      "model_state_sha256": "8ae6f5dd8d8a1fc71379654202008bb8727bb2b3cced038a0323cbdcbcbb3547",
+      "model_state_unchanged": true,
+      "model_tensor_count": 23,
+      "optimizer_resume_executed": false,
+      "output_bindings": {
+        "disabled": {
+          "bytes": 158890,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-last800-disabled.json",
+          "sha256": "d65570c89b0b24d711ec219f47e7dc555896d8d76e6f3a6d71033d78abe0f15d"
+        },
+        "none": {
+          "bytes": 158839,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-last800-none.json",
+          "sha256": "2fc41b238324264fb041c0871525a8cccdac3fa65d5499cb7a1621ae02ec7d4a"
+        },
+        "rotate": {
+          "bytes": 158845,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-last800-rotate.json",
+          "sha256": "bbbf2d4f535fb0165fbb8d95f76a294475221b6ff958e28c10e0ac9164545e8e"
+        },
+        "zero": {
+          "bytes": 158831,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-last800-zero.json",
+          "sha256": "1c50dd07f8f99e104322a461035b006bfbefb72686e3b0b224d6b16f0d424f06"
+        }
+      },
+      "private_models_disjoint_storage": true,
+      "private_reload_binding": {
+        "bytes": 158839,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-last800-none-private-reload.json",
+        "sha256": "2fc41b238324264fb041c0871525a8cccdac3fa65d5499cb7a1621ae02ec7d4a"
+      },
+      "private_reload_bitwise_json_equal": true,
+      "recorded_optimizer_steps": 800,
+      "role": "last800",
+      "seed": 1731,
+      "summaries": {
+        "disabled": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "none": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "rotate": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        },
+        "zero": {
+          "abstention_reasons": {
+            "copied_spans_overlap": 34
+          },
+          "decoded_count": 0,
+          "model_state_unchanged": true,
+          "source_fidelity_established": false,
+          "target_access": false,
+          "teacher_forcing": false
+        }
+      }
+    }
+  ],
+  "schema": "alignment-source-span-replay-report/v1",
+  "sealed_final_test_accessed": false,
+  "source_bindings": [
+    {
+      "bytes": 17858,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/bridge/canonical.py",
+      "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194"
+    },
+    {
+      "bytes": 27572,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8"
+    },
+    {
+      "bytes": 392561,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a"
+    },
+    {
+      "bytes": 300668,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+    },
+    {
+      "bytes": 20651,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745"
+    },
+    {
+      "bytes": 14649,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_context_assay.py",
+      "sha256": "0a1639aab457c6babef609f10ef7094de156f8f488e4369025657d69269c3edf"
+    },
+    {
+      "bytes": 18845,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_context_embeddings.py",
+      "sha256": "72f2a31631595d9bae18eba412339ab103e6d7991a1cb7b4b645c9abf94ae759"
+    },
+    {
+      "bytes": 19508,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_context_experiment.py",
+      "sha256": "60f8169c1f1f6ae0b9b6b9f0623e681a5c34887df881706f35c05f541d29fa59"
+    },
+    {
+      "bytes": 18721,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_embedding_experiment.py",
+      "sha256": "c91b2730c45534821146991f5f873db8cea22a5baf0a2daa5667458fd5efa099"
+    },
+    {
+      "bytes": 25163,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27"
+    },
+    {
+      "bytes": 25914,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py",
+      "sha256": "23ea8a10eea572d05a90f822a8f0430d4c93648d6ec6a3e775f370cb3e9c4b5a"
+    },
+    {
+      "bytes": 23299,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e"
+    },
+    {
+      "bytes": 17653,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318"
+    },
+    {
+      "bytes": 22279,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_admission.py",
+      "sha256": "5ada191c03af4cfb3f69a60b116116b3ecfcec30b961030b20e66c631932d14e"
+    },
+    {
+      "bytes": 41368,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_embeddings.py",
+      "sha256": "f5fff80ce717d2c185271eb04e92af7c02d13a3f01bfb4afb758f5865b74684b"
+    },
+    {
+      "bytes": 20197,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+    },
+    {
+      "bytes": 19018,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+    },
+    {
+      "bytes": 31906,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+    },
+    {
+      "bytes": 22401,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_retrieval.py",
+      "sha256": "bbbac13f8464e6c0b15b8add91ebd0cedeb0db6531c43f7e4962445153a5ef40"
+    },
+    {
+      "bytes": 10920,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review.py",
+      "sha256": "7d8321eef857937239b31e40152184883ef368a8103342cb3ef1da1d45a49dfc"
+    },
+    {
+      "bytes": 21743,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_admission.py",
+      "sha256": "d1594da45955c19e8f64e1e1ce0ee2272dd589ed50ffadba3086faf64a650f37"
+    },
+    {
+      "bytes": 12871,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_review_workflow.py",
+      "sha256": "b7ca7776786a31412ed657a50c274262cacce052f790e5fa87d2f0cfe1a5cd10"
+    },
+    {
+      "bytes": 11288,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure.py",
+      "sha256": "8a5c5eb1667a46bd0e7ea3db1744f414de799e7dce1a53ecfbca888cdf51aa02"
+    },
+    {
+      "bytes": 22237,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_structure_experiment.py",
+      "sha256": "e57ed548cbe6a77a2ece2787da95c39e3a8a8a45754342b5debec4e637342230"
+    },
+    {
+      "bytes": 17237,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576"
+    },
+    {
+      "bytes": 15959,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    {
+      "bytes": 13375,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    {
+      "bytes": 9556,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    {
+      "bytes": 13308,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/features.py",
+      "sha256": "a5abe46dbb9c90f83699f8d7922676bc41335e26413d73ae173c9fd9b66bb23c"
+    },
+    {
+      "bytes": 37034,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 13437,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+    },
+    {
+      "bytes": 14419,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "bytes": 27010,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e"
+    },
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 26219,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    {
+      "bytes": 16725,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "sha256": "27855f5ffd59ebc45444d5e37c18ff1569618084cd27b1503db112940051ffb0"
+    },
+    {
+      "bytes": 306403,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_linguistic_snapshot/spacy_modal_codec.py",
+      "sha256": "16ec4e141d5cb2f9d37cd4db42733921bc046e17fee12afc43ab31ca7a60cd59"
+    },
+    {
+      "bytes": 21063,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/linguistic.py",
+      "sha256": "baca84b44f7eda33466ffdc75170d904f480aafb47a779131337d90ed9a7bca3"
+    },
+    {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 2122,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/admit_alignment_richer_reviews.py",
+      "sha256": "1eed2a881029effc2d8a84fe4760c61c25adb47fe69019bc727a12769446d92f"
+    },
+    {
+      "bytes": 1628,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_context_experiment.py",
+      "sha256": "f266a6f6c3fc1cb039d7146f64dd9ec227612e11d272a0684daf7678ed6ca83e"
+    },
+    {
+      "bytes": 1646,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_embedding_experiment.py",
+      "sha256": "15ca20f3f4406ec98ba0c34894f47de990db592b037fe77ba23301e9726931f4"
+    },
+    {
+      "bytes": 1826,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_parser_experiment.py",
+      "sha256": "11069f97f4210071c13fb780a2ee3c0c778e392adf1da008dee5e93e6da34b8b"
+    },
+    {
+      "bytes": 1579,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+    },
+    {
+      "bytes": 1954,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_structure_experiment.py",
+      "sha256": "2e5599887e63138f5cae663f15cb57da91c34b7e8dc4bb21eb3598fc961fdb69"
+    },
+    {
+      "bytes": 17629,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_checkpoint_representations.py",
+      "sha256": "ae52ec7b9e69b5fe3935e23c4d73d91d610a8c191203f946150bb5c222053ed6"
+    },
+    {
+      "bytes": 12457,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_representation_retrieval.py",
+      "sha256": "fea1daa81d36bf0f3b9264b3c15dfa7f46ec1af3428791b84adef8aa60236abd"
+    },
+    {
+      "bytes": 15839,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_checkpoint_experiment.py",
+      "sha256": "4cd68571bc5837dcc23c00b8c36f3238b5573a19b91427117f6e50fc8a5beb88"
+    },
+    {
+      "bytes": 1737,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_checkpoint_experiment.py",
+      "sha256": "86501723cc0384af4011562c7dab58ff45226ac066c59392f0212e8b9a44c4c4"
+    },
+    {
+      "bytes": 19456,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_bridge_teacher.py",
+      "sha256": "657de3e47e4d1031692c4280bd69f206dc8d388c3d8f4e064f6657f96d4c6c47"
+    },
+    {
+      "bytes": 13861,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_worker_contract.py",
+      "sha256": "2e8af403f437ec335a58d7b7c1a3a2771f3c047b6e41d55ce2e080dfb5187747"
+    },
+    {
+      "bytes": 29183,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_migration_inventory.py",
+      "sha256": "ce81752459e324e659d369f126f542e855a847aa87950aa55f2415745e81a5bf"
+    },
+    {
+      "bytes": 25011,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_transfer_replay.py",
+      "sha256": "0cff6e50bcf996dd70bbf3c63fcfe3a6875a177db87bdcdb4fba5c4d5dfdac88"
+    },
+    {
+      "bytes": 35427,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+      "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+    },
+    {
+      "bytes": 1948,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+      "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+    },
+    {
+      "bytes": 31851,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+      "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+    },
+    {
+      "bytes": 24220,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/decoder.py",
+      "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+    },
+    {
+      "bytes": 11527,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+      "sha256": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b"
+    },
+    {
+      "bytes": 27163,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/schema.py",
+      "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 37220,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/security_ir/model.py",
+      "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+    },
+    {
+      "bytes": 58065,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/software_verification/program.py",
+      "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+    },
+    {
+      "bytes": 8008,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+      "sha256": "d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57"
+    },
+    {
+      "bytes": 120714,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+      "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+    },
+    {
+      "bytes": 34679,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+      "sha256": "66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6"
+    },
+    {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 35427,
+      "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+      "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+    },
+    {
+      "bytes": 4721,
+      "path": "/home/barberb/lift_coding/papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 35294,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+      "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+    },
+    {
+      "bytes": 22521,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+      "sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d"
+    }
+  ],
+  "source_fidelity_established": false,
+  "source_input_joins_binding": {
+    "bytes": 28652,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/source_input_joins.json",
+    "sha256": "234164fa16bcac3d8f23c33c97b65829a3af699f97243a83107f9d872b83a6c3"
+  },
+  "status": "completed_unqualified",
+  "torch_version": "2.13.0+cu130",
+  "training_executed": false
+}
