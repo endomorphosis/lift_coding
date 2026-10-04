@@ -1,0 +1,134 @@
+{
+  "blocked_rows_per_invocation": 10,
+  "checkpoint_bindings": [
+    {
+      "bytes": 3518657,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-constructed-initial-control.json",
+      "sha256": "75088a42131cf95227057f1fb063c9c593411dddbd33149df2e9f08d4d463958"
+    },
+    {
+      "bytes": 3433326,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-400.json",
+      "sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc"
+    },
+    {
+      "bytes": 3430828,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-800.json",
+      "sha256": "a6d0c8e1428358be6f5601ff75eb62962611184f4b5cbae1747a31253640ccbe"
+    },
+    {
+      "bytes": 3519423,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-constructed-initial-control.json",
+      "sha256": "96fedab6e5eb3a2b06a30895e6139ada0c080496f52d99e6f8deb859f588bf70"
+    },
+    {
+      "bytes": 3432437,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+      "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+    },
+    {
+      "bytes": 3431987,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-800.json",
+      "sha256": "be269a0b0648063fe14ce0a291c474dd6c3aefbf3465b8adb2573346dc2315ba"
+    },
+    {
+      "bytes": 3518508,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-constructed-initial-control.json",
+      "sha256": "afd8dd403f28dfae113a4d67a7f69c9aa0c89b26e5f92421da9b0ab023ca9f60"
+    },
+    {
+      "bytes": 3432783,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+      "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+    },
+    {
+      "bytes": 3431123,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-800.json",
+      "sha256": "ff41c3199ca3b84f10e4d3574103cf01051a42b33639fc50e748f1ae19bea3a0"
+    }
+  ],
+  "complete_dependency_manifest": false,
+  "content_sha256": "f7ce1df92471a2a2f9d32df2435fb3c50f3d40f7e7a16f1524541f6540077269",
+  "contexts_retained_but_unresolved": 2,
+  "cpu_limit_seconds": [
+    120,
+    130
+  ],
+  "cpu_threads": 1,
+  "device": "cpu",
+  "dtype": "float32",
+  "evaluation_role": "exposed_authored_development",
+  "forwarded_rows_per_invocation": 24,
+  "implementation_bindings": [
+    {
+      "bytes": 9794,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+      "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+    },
+    {
+      "bytes": 21764,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+      "sha256": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec"
+    }
+  ],
+  "input_bindings": [
+    {
+      "bytes": 82017,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/source-grounding-validation-01/validation.json",
+      "sha256": "09ee9d1ededf1f4258c5b152ad62570300644cb5402a28af7050c074897de811"
+    },
+    {
+      "bytes": 68675,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/span-replay-01/report.json",
+      "sha256": "a42536a312b3940fe761e99b9b418a0889bd921f97b73fc3821158fb447e4d3a"
+    },
+    {
+      "bytes": 39315,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/grounding-01/request_manifest.json",
+      "sha256": "44741d12d68d2b22745326ef8174fc7d2721251594e7dbfcd23155aa1111f423"
+    },
+    {
+      "bytes": 17282,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/embedding_inputs.json",
+      "sha256": "072b5e7479499bd232715ec72bfe157c0dafb80c0bb9c140423c867c9f751f99"
+    },
+    {
+      "bytes": 1748842,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-embedding-01/native768_embeddings.json",
+      "sha256": "d169295841e14829d896a81b48630d39f85537380df8e581b7440671ac49d2a9"
+    }
+  ],
+  "max_rss_kib": 2097152,
+  "max_seconds": 180,
+  "new_encoder_calls": 0,
+  "preflight_counts": {
+    "clarification_required": 4,
+    "unassessed": 24,
+    "unsupported_profile": 6
+  },
+  "preserved_prior_binding_count": 258,
+  "proof_authority": false,
+  "proof_calls": 0,
+  "qualified": false,
+  "requested_control_order": [
+    "none",
+    "zero",
+    "disabled",
+    "rotate"
+  ],
+  "rotation_recipe": "full_34_input_order_next_row_then_filter",
+  "rows": 34,
+  "rss_limit_kind": "cooperative_ru_maxrss_checks",
+  "runner_binding": {
+    "bytes": 22562,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/run_preflight_decoder.py",
+    "sha256": "717467c90958a9d51c2e52197e0ad7c7e9f500eb1c0b8383a29b5a611256dcea"
+  },
+  "schema": "alignment-preflight-decoder-replay-plan/v1",
+  "source_fidelity_established": false,
+  "source_input_recipe": "exact_source_only_embeddings_with_declared_unresolved_context_in_preflight",
+  "started_utc": "2026-10-04T00:45:52Z",
+  "targets_used": false,
+  "torch_version": "2.13.0+cu130",
+  "training_executed": false
+}

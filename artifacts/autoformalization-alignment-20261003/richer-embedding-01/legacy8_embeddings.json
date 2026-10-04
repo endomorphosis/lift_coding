@@ -1,0 +1,1724 @@
+{
+  "backend_evidence": {
+    "asset_evidence": {
+      "bytes": 15241693,
+      "files": [
+        {
+          "bytes": 237,
+          "name": "__init__.py",
+          "sha256": "c8eb57079c03fc4157c227f641781fbcb3e9d11439abe1bf0b72e4c0fa78a38d"
+        },
+        {
+          "bytes": 1056,
+          "name": "en_core_web_sm-3.8.0/LICENSE",
+          "sha256": "3933c176979b68bc6d0bcc902c7d6c130f1d127f476f17ba5cdba8d99cfd0012"
+        },
+        {
+          "bytes": 2347,
+          "name": "en_core_web_sm-3.8.0/LICENSES_SOURCES",
+          "sha256": "20d9dfacd215112251f15341edd1a47b1f98bf393a212f10f194ffdc7ee98a90"
+        },
+        {
+          "bytes": 2587,
+          "name": "en_core_web_sm-3.8.0/README.md",
+          "sha256": "91b0ed1742ea0803034b4d769c4536e88d9d4da7808d833f2a804b6c54aae220"
+        },
+        {
+          "bytes": 6341,
+          "name": "en_core_web_sm-3.8.0/accuracy.json",
+          "sha256": "e7572d7f2f3c18e9921471f9d0b3424f8cf7f1a909ae484fa10b780a13f4c676"
+        },
+        {
+          "bytes": 14735,
+          "name": "en_core_web_sm-3.8.0/attribute_ruler/patterns",
+          "sha256": "f8b97f7ebef9b8536bba5f0fc1e73af6183563e96e2325bcbb021b8c6dbc6683"
+        },
+        {
+          "bytes": 5527,
+          "name": "en_core_web_sm-3.8.0/config.cfg",
+          "sha256": "65c545ca2da5bd4b87b22d4917318605360b37dee6ed6b18516a036f87319f79"
+        },
+        {
+          "bytes": 972893,
+          "name": "en_core_web_sm-3.8.0/lemmatizer/lookups/lookups.bin",
+          "sha256": "eb64f40c0f8396d1762730c0ddf4dad2a52d138f5a389f71a1a1d088173b7737"
+        },
+        {
+          "bytes": 10106,
+          "name": "en_core_web_sm-3.8.0/meta.json",
+          "sha256": "7456349002fa8cf31111051bd37fdbea67a1b7f7a0a60ce235466f98a6758125"
+        },
+        {
+          "bytes": 221,
+          "name": "en_core_web_sm-3.8.0/ner/cfg",
+          "sha256": "a7172edadafba9f472e9ac0f2660eec04b6405e471be9e20267b79c67288d22d"
+        },
+        {
+          "bytes": 6154601,
+          "name": "en_core_web_sm-3.8.0/ner/model",
+          "sha256": "cd93e9ca9126c69f1d10a1039ef67c3d9ec1223b44d079856705970f0f19ff4e"
+        },
+        {
+          "bytes": 1064,
+          "name": "en_core_web_sm-3.8.0/ner/moves",
+          "sha256": "d82b13473ebd33e0396004dd22f00c71fe3c1251742bf1f7c4554f23fd3b0af4"
+        },
+        {
+          "bytes": 222,
+          "name": "en_core_web_sm-3.8.0/parser/cfg",
+          "sha256": "e2a240ef01f95e58f5dd4c9d6e90d61f597b8d998966570d3009dd81e8879780"
+        },
+        {
+          "bytes": 319909,
+          "name": "en_core_web_sm-3.8.0/parser/model",
+          "sha256": "e0098910535a863d430082ece57455d5fa071cd4ca3a0054e80582076c752b1e"
+        },
+        {
+          "bytes": 1571,
+          "name": "en_core_web_sm-3.8.0/parser/moves",
+          "sha256": "ec41318c32eb7f9e4d8f050b2e8466ee67954d2d3455c1aec73abf46c82dd67f"
+        },
+        {
+          "bytes": 23,
+          "name": "en_core_web_sm-3.8.0/senter/cfg",
+          "sha256": "2a4db4a729b6469da1f87d71cc7cd3ed2a73360cc85326821e850836c4671103"
+        },
+        {
+          "bytes": 197089,
+          "name": "en_core_web_sm-3.8.0/senter/model",
+          "sha256": "b69e7174a0b6307739adec3c8053ac45fdbad7171c4d3d8bfcd9713ecbc01f8c"
+        },
+        {
+          "bytes": 615,
+          "name": "en_core_web_sm-3.8.0/tagger/cfg",
+          "sha256": "d484c3d9391f37bf9c727aa2eb4c477a24cb103020f95e52dc37842818b50118"
+        },
+        {
+          "bytes": 19829,
+          "name": "en_core_web_sm-3.8.0/tagger/model",
+          "sha256": "1ec3d93f38cebe172f2b5c89d84be72856ce42c8f1a64f1699f1d98a771f36b7"
+        },
+        {
+          "bytes": 4,
+          "name": "en_core_web_sm-3.8.0/tok2vec/cfg",
+          "sha256": "f8a5a26e3056eb6fb06deeb3dbccfd88ae74900200c98c70b5966bbb7ec9d4de"
+        },
+        {
+          "bytes": 6269370,
+          "name": "en_core_web_sm-3.8.0/tok2vec/model",
+          "sha256": "e84fc06eb319c94d28e460fc334e292120b01f18baa5dc8b50c977459820a090"
+        },
+        {
+          "bytes": 77066,
+          "name": "en_core_web_sm-3.8.0/tokenizer",
+          "sha256": "b014e8bba4958b120af2d0c1c63eabb7c00379f2bacaf10df7c5325efd2ea467"
+        },
+        {
+          "bytes": 1,
+          "name": "en_core_web_sm-3.8.0/vocab/key2row",
+          "sha256": "76be8b528d0075f7aae98d6fa57a6d3c83ae480a8469e668d7b0af968995ac71"
+        },
+        {
+          "bytes": 70040,
+          "name": "en_core_web_sm-3.8.0/vocab/lookups.bin",
+          "sha256": "fce9c883c56165f29573cc938c2a1c9d417ac61bd8f56b671dd5f7996de70682"
+        },
+        {
+          "bytes": 1103983,
+          "name": "en_core_web_sm-3.8.0/vocab/strings.json",
+          "sha256": "b1966d1f07a05b68576df07f43f40203b4e11124ad82cc839e8312ad8d7fdae7"
+        },
+        {
+          "bytes": 128,
+          "name": "en_core_web_sm-3.8.0/vocab/vectors",
+          "sha256": "14772b683e726436d5948ad3fff2b43d036ef2ebbe3458aafed6004e05a40706"
+        },
+        {
+          "bytes": 22,
+          "name": "en_core_web_sm-3.8.0/vocab/vectors.cfg",
+          "sha256": "ff4359091952c8cd16f1f0482f5770fb82d1707368d5cca3c46aa501f552e3c5"
+        },
+        {
+          "bytes": 10106,
+          "name": "meta.json",
+          "sha256": "7456349002fa8cf31111051bd37fdbea67a1b7f7a0a60ce235466f98a6758125"
+        }
+      ],
+      "files_manifest_sha256": "474472f16ed8d2e489507ce078940958e548613db50b81f78b363c9024647f95",
+      "package_directory": "/home/barberb/.local/lib/python3.12/site-packages/en_core_web_sm"
+    },
+    "execution_kind": "observed_native",
+    "execution_profile": {
+      "autoencoder_executed": false,
+      "backend": "local_en_core_web_sm",
+      "device": "cpu",
+      "feature_hash": "sha256:first4be_mod8:signed_0.5_plus_byte5_over255",
+      "feature_preprocessing": "collapse_whitespace",
+      "ir_compiler_executed": false,
+      "normalization": "l2_then_round6",
+      "pooling": "feature_hash",
+      "source_forwarding": "exact_utf8"
+    },
+    "implementation": {
+      "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages._contract": "ad9603c7b4dd80736aa9bb32dc4ffc537149f1d111b265c95b6dbedc5dbfe8aa",
+      "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._linguistic_snapshot": "209d89df0ac32061a5237d87d19e42bbd0ddd60b0ad8ac939b44cc18c5156b36",
+      "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._linguistic_snapshot.spacy_modal_codec": "16ec4e141d5cb2f9d37cd4db42733921bc046e17fee12afc43ab31ca7a60cd59",
+      "richer_embedding_wrapper": "f5fff80ce717d2c185271eb04e92af7c02d13a3f01bfb4afb758f5865b74684b"
+    },
+    "production_evidence": {
+      "codec_snapshot": {
+        "dependency_scope": "four relative imports use the separately verified frozen numerical snapshot; canonical compiler/proofs remain shared",
+        "relocation_edits": [
+          {
+            "after": "from .._snapshot.legal_modal_parser import",
+            "before": "from .legal_modal_parser import"
+          },
+          {
+            "after": "from .._snapshot.legal_samples import",
+            "before": "from .legal_samples import"
+          },
+          {
+            "after": "from .._snapshot.modal_ir import",
+            "before": "from .modal_ir import"
+          },
+          {
+            "after": "from .._snapshot.modal_registry import",
+            "before": "from .modal_registry import"
+          }
+        ],
+        "schema": "legacy-linguistic-codec-snapshot/v1",
+        "source_bytes": 306359,
+        "source_git_blob": "3e6cddfad55ba38a6304c74062468d32881e21fe",
+        "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py",
+        "source_revision": "ddf6b79467b68159650df81befc288c8553df664",
+        "source_sha256": "49446ed1e1289ac5cf8cc07e65f67968adc12666ebb66cf951107c9d8c591617",
+        "vendored_bytes": 306403,
+        "vendored_path": "spacy_modal_codec.py",
+        "vendored_sha256": "16ec4e141d5cb2f9d37cd4db42733921bc046e17fee12afc43ab31ca7a60cd59"
+      },
+      "model_identity": {
+        "backend": "local_en_core_web_sm",
+        "model_files_manifest_sha256": "474472f16ed8d2e489507ce078940958e548613db50b81f78b363c9024647f95",
+        "model_name": "en_core_web_sm",
+        "model_version": "3.8.0",
+        "package": "en_core_web_sm",
+        "pipeline": [
+          "tok2vec",
+          "tagger",
+          "parser",
+          "attribute_ruler",
+          "lemmatizer",
+          "ner",
+          "sentencizer"
+        ],
+        "pipeline_config_sha256": "a94a85e3b31a9e878c8cb9cb963f1d4b15584c6959c57c43c97af12c7dc2e3b1",
+        "spacy_version": "3.8.14",
+        "used_fallback_model": false
+      },
+      "numerical_snapshot": {
+        "files": [
+          {
+            "frozen_dependencies": [],
+            "module": "frame_bm25_selector",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 77959,
+            "source_git_blob": "14df4dd2b2e0496d06a3f7d823ef96164f40b9b0",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/frame_bm25_selector.py",
+            "source_sha256": "612d472efaf9cb5bb2f57914125d9fc87cde3a55f14dc5a105cc80f268df430a",
+            "vendored_bytes": 77959,
+            "vendored_path": "frame_bm25_selector.py",
+            "vendored_sha256": "612d472efaf9cb5bb2f57914125d9fc87cde3a55f14dc5a105cc80f268df430a"
+          },
+          {
+            "frozen_dependencies": [
+              "snapshot_evaluator"
+            ],
+            "module": "legal_ir_family_evaluator",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 42137,
+            "source_git_blob": "53d7123051e1a1b9737edeb8928dfe57a579286c",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+            "source_sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab",
+            "vendored_bytes": 42137,
+            "vendored_path": "legal_ir_family_evaluator.py",
+            "vendored_sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+          },
+          {
+            "frozen_dependencies": [
+              "legal_ir_family_evaluator"
+            ],
+            "module": "legal_ir_grammar_decoder",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 146870,
+            "source_git_blob": "446ea6eb734d8586a060f64fc56bf198e312aabe",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "source_sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd",
+            "vendored_bytes": 146870,
+            "vendored_path": "legal_ir_grammar_decoder.py",
+            "vendored_sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          {
+            "frozen_dependencies": [
+              "legal_ir_family_evaluator"
+            ],
+            "module": "legal_ir_semantic_metrics",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 75349,
+            "source_git_blob": "0ce0aa248a3b747cd539680f6e2177ffd8e927a0",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py",
+            "source_sha256": "cee46ad09daae3ae74cd359e8e25fb9fd592eee92c59730d42caf30db60c38da",
+            "vendored_bytes": 75349,
+            "vendored_path": "legal_ir_semantic_metrics.py",
+            "vendored_sha256": "cee46ad09daae3ae74cd359e8e25fb9fd592eee92c59730d42caf30db60c38da"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_ir",
+              "modal_registry"
+            ],
+            "module": "legal_modal_parser",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 160181,
+            "source_git_blob": "af00f209e18c3b40e0c9bd1892c9456451ac3638",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_modal_parser.py",
+            "source_sha256": "5415bf565171b17db1d4a03c715e974645a59018addb852cf67fc3c71d462406",
+            "vendored_bytes": 160181,
+            "vendored_path": "legal_modal_parser.py",
+            "vendored_sha256": "5415bf565171b17db1d4a03c715e974645a59018addb852cf67fc3c71d462406"
+          },
+          {
+            "frozen_dependencies": [
+              "frame_bm25_selector",
+              "legal_modal_parser",
+              "modal_ir"
+            ],
+            "module": "legal_samples",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 5865,
+            "source_git_blob": "009980aaeb9209e5ddaeb262034fe061a2fce317",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py",
+            "source_sha256": "51ce99dc83279c570bc57334c1cdc4cb72fa4b94c5b8c81101bb6252f0a614de",
+            "vendored_bytes": 5865,
+            "vendored_path": "legal_samples.py",
+            "vendored_sha256": "51ce99dc83279c570bc57334c1cdc4cb72fa4b94c5b8c81101bb6252f0a614de"
+          },
+          {
+            "frozen_dependencies": [
+              "legal_ir_grammar_decoder",
+              "legal_samples",
+              "modal_autoencoder_checkpoint",
+              "modal_autoencoder_cuda",
+              "modal_autoencoder_feature_capacity",
+              "modal_autoencoder_legacy_distillation",
+              "modal_autoencoder_state_migration",
+              "modal_autoencoder_state_transaction",
+              "modal_autoencoder_state_version",
+              "modal_autoencoder_tensor_state",
+              "modal_registry",
+              "projection_profiler",
+              "prover_integration"
+            ],
+            "module": "modal_autoencoder",
+            "relocation_edits": [
+              {
+                "after": "from ipfs_datasets_py.logic.integration.reasoning.legal_ir_view_contracts import",
+                "before": "from ...logic.integration.reasoning.legal_ir_view_contracts import",
+                "reason": "retain original canonical external import boundary"
+              },
+              {
+                "after": "from ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._snapshot.prover_integration import",
+                "before": "from ipfs_datasets_py.optimizers.logic_theorem_optimizer.prover_integration import",
+                "reason": "isolate absolute optimizer dependency"
+              },
+              {
+                "after": "repo_root = Path(__file__).resolve().parents[6]",
+                "before": "repo_root = Path(__file__).resolve().parents[3]",
+                "reason": "preserve repository root after three namespace levels"
+              },
+              {
+                "after": "package_root = Path(__file__).resolve().parents[5]",
+                "before": "package_root = Path(__file__).resolve().parents[2]",
+                "reason": "fingerprint the real canonical package and its shared bridges"
+              },
+              {
+                "after": "return repo_root / \"workspace\" / \"test-logs\" / \"legal-ir-metric-cache\" / \"legacy-v1\"",
+                "before": "return repo_root / \"workspace\" / \"test-logs\" / \"legal-ir-metric-cache\"",
+                "reason": "separate the default legacy disk target cache"
+              }
+            ],
+            "shared_canonical_imports": [
+              {
+                "line": 25760,
+                "module": "ipfs_datasets_py.logic.modal.decompiler_repairs",
+                "names": [
+                  "repair_decompiler_round_trip"
+                ]
+              },
+              {
+                "line": 27066,
+                "module": "ipfs_datasets_py.logic.bridge",
+                "names": [
+                  "evaluate_legal_ir_multiview"
+                ]
+              },
+              {
+                "line": 28407,
+                "module": "ipfs_datasets_py.logic.integration.reasoning.legal_ir_view_contracts",
+                "names": [
+                  "legal_ir_view_contracts"
+                ]
+              },
+              {
+                "line": 28968,
+                "module": "ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback",
+                "names": [
+                  "ProofFeedbackVersions"
+                ]
+              },
+              {
+                "line": 28984,
+                "module": "ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback",
+                "names": [
+                  "LegalIRProofFeedbackRecord",
+                  "ProofFeedbackPartition"
+                ]
+              }
+            ],
+            "source_bytes": 1352250,
+            "source_git_blob": "26c65bdfa1b1a7f3f40b151bc5ac7a3b9fc9fd55",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+            "source_sha256": "b56316f756a36cfbcbe7070207678090d5e1c8beebe2ef4710ddd6732ddd045d",
+            "vendored_bytes": 1352319,
+            "vendored_path": "modal_autoencoder.py",
+            "vendored_sha256": "5f504f08854a239eda60c588d78766681818f724b7b59f1851f46a4fdc2129bd"
+          },
+          {
+            "frozen_dependencies": [],
+            "module": "modal_autoencoder_batching",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 31941,
+            "source_git_blob": "f6aa6f38dd4efb80aeb5c878d4e48086acb2d34b",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_batching.py",
+            "source_sha256": "6538fc6f4bf3c7e7ba94c7ef8b4fa00833ca4f728b4bf90a2684096b2f70dc5a",
+            "vendored_bytes": 31941,
+            "vendored_path": "modal_autoencoder_batching.py",
+            "vendored_sha256": "6538fc6f4bf3c7e7ba94c7ef8b4fa00833ca4f728b4bf90a2684096b2f70dc5a"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_autoencoder",
+              "modal_autoencoder_state_version"
+            ],
+            "module": "modal_autoencoder_checkpoint",
+            "relocation_edits": [],
+            "shared_canonical_imports": [
+              {
+                "line": 30,
+                "module": "ipfs_datasets_py.logic.formalization.checkpoints",
+                "names": [
+                  "IR_CHECKPOINT_ID_PREFIX",
+                  "IR_CHECKPOINT_MANIFEST_SCHEMA",
+                  "IR_CHECKPOINT_POINTER_SCHEMA",
+                  "IRCheckpointLifecycleError",
+                  "IRCheckpointManifest",
+                  "IRCheckpointPointer",
+                  "IRCheckpointPromotionError",
+                  "IRCheckpointSideOutcome",
+                  "IRCheckpointValidationError",
+                  "IRPromotionManifest",
+                  "MODAL_STATE_LEGACY_KIND",
+                  "verify_ir_checkpoint_manifest",
+                  "verify_lifecycle_transition"
+                ]
+              }
+            ],
+            "source_bytes": 81068,
+            "source_git_blob": "f281a0d9328e174ef0878075e0e28e800b261bfb",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_checkpoint.py",
+            "source_sha256": "c14ae80c49943677149c3f74af207335ac97c6ddf734dae8d453b733d8d17474",
+            "vendored_bytes": 81068,
+            "vendored_path": "modal_autoencoder_checkpoint.py",
+            "vendored_sha256": "c14ae80c49943677149c3f74af207335ac97c6ddf734dae8d453b733d8d17474"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_autoencoder_batching",
+              "modal_autoencoder_tensor_state"
+            ],
+            "module": "modal_autoencoder_cuda",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 69046,
+            "source_git_blob": "6479dd0fdb7ee2e27da8bcc7313ca99b4619e430",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_cuda.py",
+            "source_sha256": "954bcdee38c8f55f0d9d57045b9f2648aac7efcdf105b3655f410dea1249f2e1",
+            "vendored_bytes": 69046,
+            "vendored_path": "modal_autoencoder_cuda.py",
+            "vendored_sha256": "954bcdee38c8f55f0d9d57045b9f2648aac7efcdf105b3655f410dea1249f2e1"
+          },
+          {
+            "frozen_dependencies": [
+              "legal_ir_semantic_metrics",
+              "modal_autoencoder_tensor_state"
+            ],
+            "module": "modal_autoencoder_factorized_heads",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 58859,
+            "source_git_blob": "d9ad9b356d92837715321f6fae8b473c5ea57a56",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_factorized_heads.py",
+            "source_sha256": "710f52b486afeb4e06a80e0ef03b4d0e0c4b8c5710537dd39a00f631fd431cea",
+            "vendored_bytes": 58859,
+            "vendored_path": "modal_autoencoder_factorized_heads.py",
+            "vendored_sha256": "710f52b486afeb4e06a80e0ef03b4d0e0c4b8c5710537dd39a00f631fd431cea"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_autoencoder"
+            ],
+            "module": "modal_autoencoder_feature_capacity",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 33363,
+            "source_git_blob": "ce35877ce215bbc5d9fd31222c53fc229b50082c",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_feature_capacity.py",
+            "source_sha256": "76608ad29c95cf3178fc59d7c76c6c7f4ca5b9907b338f9558c88d3d8a3b93ba",
+            "vendored_bytes": 33363,
+            "vendored_path": "modal_autoencoder_feature_capacity.py",
+            "vendored_sha256": "76608ad29c95cf3178fc59d7c76c6c7f4ca5b9907b338f9558c88d3d8a3b93ba"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_autoencoder"
+            ],
+            "module": "modal_autoencoder_legacy_distillation",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 77762,
+            "source_git_blob": "610b4db7163db7b378632759ba463bc995a6abcc",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_legacy_distillation.py",
+            "source_sha256": "35e19211af17fed272bfb25e0f0cabc5ce2c93c8652af6928b348157cedf7dee",
+            "vendored_bytes": 77762,
+            "vendored_path": "modal_autoencoder_legacy_distillation.py",
+            "vendored_sha256": "35e19211af17fed272bfb25e0f0cabc5ce2c93c8652af6928b348157cedf7dee"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_autoencoder",
+              "modal_autoencoder_checkpoint",
+              "modal_autoencoder_factorized_heads",
+              "modal_autoencoder_tensor_state"
+            ],
+            "module": "modal_autoencoder_state_migration",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 34031,
+            "source_git_blob": "ca3030555f71b3e281f96a8da7961d31f8e6545f",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_migration.py",
+            "source_sha256": "fc84de9e01de73862a747d24f861684c59b9cbf61cf91b45e7bbea80fbea1af2",
+            "vendored_bytes": 34031,
+            "vendored_path": "modal_autoencoder_state_migration.py",
+            "vendored_sha256": "fc84de9e01de73862a747d24f861684c59b9cbf61cf91b45e7bbea80fbea1af2"
+          },
+          {
+            "frozen_dependencies": [],
+            "module": "modal_autoencoder_state_transaction",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 14718,
+            "source_git_blob": "cebe81b18f132dba7a5ade2da6cd1a77c9386837",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py",
+            "source_sha256": "d86a5721643bab9a51d1587aef117f925c53ebcdd8fd767964cacbd7859b810b",
+            "vendored_bytes": 14718,
+            "vendored_path": "modal_autoencoder_state_transaction.py",
+            "vendored_sha256": "d86a5721643bab9a51d1587aef117f925c53ebcdd8fd767964cacbd7859b810b"
+          },
+          {
+            "frozen_dependencies": [],
+            "module": "modal_autoencoder_state_version",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 21389,
+            "source_git_blob": "26d0ffce40835b71cf274e644b80925317514f07",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_version.py",
+            "source_sha256": "f38530f5a8a10cd5969447e16e7d6a86542b8e9eeeb2d2a2dab69454ab250fc2",
+            "vendored_bytes": 21389,
+            "vendored_path": "modal_autoencoder_state_version.py",
+            "vendored_sha256": "f38530f5a8a10cd5969447e16e7d6a86542b8e9eeeb2d2a2dab69454ab250fc2"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_autoencoder_state_migration"
+            ],
+            "module": "modal_autoencoder_tensor_state",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 51791,
+            "source_git_blob": "48ba02bcfce72c64b3a70ebaa0aa3fb284dde452",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_tensor_state.py",
+            "source_sha256": "ee81537f1af3c3ca939f371cc9e4384adb317d6c7803dac22271d5dce0948d3f",
+            "vendored_bytes": 51791,
+            "vendored_path": "modal_autoencoder_tensor_state.py",
+            "vendored_sha256": "ee81537f1af3c3ca939f371cc9e4384adb317d6c7803dac22271d5dce0948d3f"
+          },
+          {
+            "frozen_dependencies": [],
+            "module": "modal_ir",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 7283,
+            "source_git_blob": "62e7701bae4b2b5fb5c4196cea2580933c458c93",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_ir.py",
+            "source_sha256": "697b8e183fb966f01a0b81e4241154c38d2785277739518cbdfcc8db37695743",
+            "vendored_bytes": 7283,
+            "vendored_path": "modal_ir.py",
+            "vendored_sha256": "697b8e183fb966f01a0b81e4241154c38d2785277739518cbdfcc8db37695743"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_registry"
+            ],
+            "module": "modal_prover_router",
+            "relocation_edits": [],
+            "shared_canonical_imports": [
+              {
+                "line": 74,
+                "module": "ipfs_datasets_py.logic.TDFOL.modal_tableaux",
+                "names": [
+                  "ModalLogicType",
+                  "prove_modal_formula"
+                ]
+              }
+            ],
+            "source_bytes": 6445,
+            "source_git_blob": "7b47493906c6e66f3253de0b742ed4f3a9020630",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_prover_router.py",
+            "source_sha256": "46fe3a0a83b8e0e86c9bbb9dbfab15a2a4a8401fbe661bd58b512a93ffd47388",
+            "vendored_bytes": 6445,
+            "vendored_path": "modal_prover_router.py",
+            "vendored_sha256": "46fe3a0a83b8e0e86c9bbb9dbfab15a2a4a8401fbe661bd58b512a93ffd47388"
+          },
+          {
+            "frozen_dependencies": [],
+            "module": "modal_registry",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 519367,
+            "source_git_blob": "573d23777a29a2e29e125ea16a6ae8417d407e75",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py",
+            "source_sha256": "e8a79d5612f50d3a842b72e618fc1903094dc4dd225688d9cb2d67bb4b0cb00a",
+            "vendored_bytes": 519367,
+            "vendored_path": "modal_registry.py",
+            "vendored_sha256": "e8a79d5612f50d3a842b72e618fc1903094dc4dd225688d9cb2d67bb4b0cb00a"
+          },
+          {
+            "frozen_dependencies": [],
+            "module": "projection_profiler",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 10801,
+            "source_git_blob": "6a152d4d394a36b185475db59329a47b7c37f25e",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/projection_profiler.py",
+            "source_sha256": "c5c5179cce6df49f694523b999f61cc8a842fa71424af956893400d574e3b4e8",
+            "vendored_bytes": 10801,
+            "vendored_path": "projection_profiler.py",
+            "vendored_sha256": "c5c5179cce6df49f694523b999f61cc8a842fa71424af956893400d574e3b4e8"
+          },
+          {
+            "frozen_dependencies": [
+              "modal_prover_router"
+            ],
+            "module": "prover_integration",
+            "relocation_edits": [
+              {
+                "after": "from ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._snapshot.modal_prover_router import",
+                "before": "from ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_prover_router import",
+                "reason": "isolate absolute optimizer dependency"
+              }
+            ],
+            "shared_canonical_imports": [
+              {
+                "line": 173,
+                "module": "ipfs_datasets_py.logic.external_provers.smt.z3_prover_bridge",
+                "names": [
+                  "Z3ProverBridge"
+                ]
+              },
+              {
+                "line": 181,
+                "module": "ipfs_datasets_py.logic.external_provers.smt.cvc5_prover_bridge",
+                "names": [
+                  "CVC5ProverBridge"
+                ]
+              },
+              {
+                "line": 189,
+                "module": "ipfs_datasets_py.logic.external_provers.interactive.lean_prover_bridge",
+                "names": [
+                  "LeanProverBridge"
+                ]
+              },
+              {
+                "line": 197,
+                "module": "ipfs_datasets_py.logic.external_provers.interactive.coq_prover_bridge",
+                "names": [
+                  "CoqProverBridge"
+                ]
+              },
+              {
+                "line": 205,
+                "module": "ipfs_datasets_py.logic.external_provers.neural.symbolicai_prover_bridge",
+                "names": [
+                  "SymbolicAIProverBridge"
+                ]
+              },
+              {
+                "line": 220,
+                "module": "ipfs_datasets_py.logic.external_provers.proof_cache",
+                "names": [
+                  "ProofCache"
+                ]
+              },
+              {
+                "line": 495,
+                "module": "ipfs_datasets_py.logic.TDFOL.tdfol_core",
+                "names": [
+                  "DeonticFormula",
+                  "DeonticOperator",
+                  "Predicate",
+                  "TemporalFormula",
+                  "TemporalOperator"
+                ]
+              }
+            ],
+            "source_bytes": 26522,
+            "source_git_blob": "d1d1423263486c06cbbf0787630d132c723609a0",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/prover_integration.py",
+            "source_sha256": "5c338d236cde845371d0efec9ddc43d2d858142f46e068b818e28dc8da37db8b",
+            "vendored_bytes": 26563,
+            "vendored_path": "prover_integration.py",
+            "vendored_sha256": "5417a7a5da2d3fb8eb3cc3b40e4db11b8e6d592d67f3808c0cbfd0dc5f13c1cb"
+          },
+          {
+            "frozen_dependencies": [],
+            "module": "snapshot_evaluator",
+            "relocation_edits": [],
+            "shared_canonical_imports": [],
+            "source_bytes": 38995,
+            "source_git_blob": "a0f72635842cdcb22b333ada6ff782f1fcbfd419",
+            "source_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+            "source_sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6",
+            "vendored_bytes": 38995,
+            "vendored_path": "snapshot_evaluator.py",
+            "vendored_sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+          }
+        ],
+        "isolation": {
+          "admission": "lake build <Lib> only; model metrics and bridge syntax are not admission",
+          "external_bridges_provers_proof_feedback_checkpoint_contracts": "shared canonical workspace logic tree",
+          "independent_learned_formula_decoder": false,
+          "internal_modal_parser_registry_ir": "frozen in this namespace",
+          "legacy_checkpoint_requires_explicit_verified_local_path": true,
+          "module_aliases": false,
+          "new_lineage_fallback": false,
+          "numerics_state_checkpoint_helpers": "frozen transitive optimizer closure",
+          "typed_deontic_compiler_decompiler_parser": "shared canonical workspace logic tree"
+        },
+        "module_count": 23,
+        "runtime_package": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._snapshot",
+        "schema_version": "legacy-autoencoder-vendored-runtime/v1",
+        "snapshot_init_sha256": "6e694ea02e8530c8fc207fd82769b1f29a13b3ceac504e902f8b26202bda26b4",
+        "source_bytes": 2943992,
+        "source_package": "ipfs_datasets_py.optimizers.logic_theorem_optimizer",
+        "source_revision": "ddf6b79467b68159650df81befc288c8553df664",
+        "vendored_module_bytes": 2944102
+      },
+      "receipts": [
+        {
+          "id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+          "normalized_source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+          "normalized_source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+          "token_count": 36
+        },
+        {
+          "id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+          "normalized_source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+          "token_count": 23
+        },
+        {
+          "id": "sha256:06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+          "normalized_source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+          "token_count": 12
+        },
+        {
+          "id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+          "normalized_source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+          "token_count": 23
+        },
+        {
+          "id": "sha256:27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+          "normalized_source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+          "token_count": 9
+        },
+        {
+          "id": "sha256:2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+          "normalized_source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+          "token_count": 36
+        },
+        {
+          "id": "sha256:340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+          "normalized_source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+          "token_count": 23
+        },
+        {
+          "id": "sha256:3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+          "normalized_source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+          "token_count": 23
+        },
+        {
+          "id": "sha256:4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+          "normalized_source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+          "token_count": 15
+        },
+        {
+          "id": "sha256:44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+          "normalized_source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+          "token_count": 21
+        },
+        {
+          "id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+          "normalized_source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+          "normalized_source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+          "token_count": 23
+        },
+        {
+          "id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+          "normalized_source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+          "normalized_source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+          "token_count": 11
+        },
+        {
+          "id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+          "normalized_source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+          "token_count": 21
+        },
+        {
+          "id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+          "normalized_source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+          "normalized_source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+          "normalized_source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+          "token_count": 36
+        },
+        {
+          "id": "sha256:7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+          "normalized_source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+          "token_count": 17
+        },
+        {
+          "id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+          "normalized_source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+          "normalized_source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+          "normalized_source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+          "token_count": 23
+        },
+        {
+          "id": "sha256:9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+          "normalized_source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+          "token_count": 17
+        },
+        {
+          "id": "sha256:a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+          "normalized_source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+          "token_count": 23
+        },
+        {
+          "id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+          "normalized_source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+          "token_count": 37
+        },
+        {
+          "id": "sha256:b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+          "normalized_source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+          "token_count": 37
+        },
+        {
+          "id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+          "normalized_source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+          "token_count": 23
+        },
+        {
+          "id": "sha256:d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+          "normalized_source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+          "token_count": 7
+        },
+        {
+          "id": "sha256:d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+          "normalized_source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+          "token_count": 10
+        },
+        {
+          "id": "sha256:e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+          "normalized_source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+          "normalized_source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+          "token_count": 21
+        },
+        {
+          "id": "sha256:fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+          "normalized_source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+          "token_count": 22
+        },
+        {
+          "id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+          "normalized_source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+          "token_count": 37
+        }
+      ]
+    },
+    "production_evidence_sha256": "0b6b6e526f68b6e0920e15208a8b22b54655a9c89471ed055ae378e4785bc77f",
+    "profile_id": "legacy-linguistic-features-8d/v1",
+    "runtime_versions": {
+      "python": "3.12.3",
+      "spacy": "3.8.14"
+    },
+    "source_blob_binding": null
+  },
+  "context_semantics_applied": false,
+  "dimension": 8,
+  "download_executed": false,
+  "encoder_execution_executed": true,
+  "input_manifest_sha256": "295eb18e7898997ed83a8f36406656625dfe553df4719f70d1ea039cc5379f61",
+  "input_recipe": "exact_source_only",
+  "issues": [],
+  "lane_id": "legacy8",
+  "model_inference_executed": true,
+  "payload_sha256": "622abf1d8c3bbc267261ce9fe838d5e5e4de68828b75b18194a51ffc5dd35dfa",
+  "proof_authority": false,
+  "qualified": false,
+  "receipts": [
+    {
+      "backend_input_id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.252185,
+        0.498811,
+        0.142707,
+        0.260281,
+        0.038909,
+        -0.286502,
+        0.335199,
+        -0.635235
+      ],
+      "embedding_sha256": "5a6daf6f52b56cc6324478f49225a6f09ca57dc5be7e902081f2e81f12526f8b",
+      "id": "sha256:01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+      "input_sha256": "01868e2f20e6c8501fb5598bbb73e0beb7b5eb6ae84bcd560e53ee9db2e18d08",
+      "normalized_source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+      "source_sha256": "11f67f7608971724fd8c1de8caeb6e70726e8ad9679a34f2e16be1411243867f",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.255987,
+        0.429708,
+        0.1511,
+        0.01511,
+        0.212601,
+        -0.230715,
+        0.300522,
+        -0.733499
+      ],
+      "embedding_sha256": "25bc261840eb05d90e5915c0777d746960172f13ad9a246f1731e2321c7e4cb4",
+      "id": "sha256:02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+      "input_sha256": "02c836de63011e214b20cf36b6a48ec2dff9b918dc787602798b9862f7a045d4",
+      "normalized_source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+      "source_sha256": "e501e096502ec25334b6fdc0a611c0f04a1d39e67eae3bb8236cffbd003353a2",
+      "status": "embedded",
+      "token_count": 36,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.42713,
+        0.465294,
+        0.231017,
+        0.222325,
+        0.181989,
+        -0.363163,
+        0.267686,
+        -0.51147
+      ],
+      "embedding_sha256": "b5c2784d4aa69251a7adcb7301a9bf54ef0629a8f438648f81005af4eb68f0f9",
+      "id": "sha256:037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+      "input_sha256": "037b600ae4f70e53067b8b1ef0f29d17d77c86d992ad78deb6ae13f41eeade49",
+      "normalized_source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+      "source_sha256": "39ed7d512e9e336de6b68b6120727579fc41f701cec0f87e9e785c7eadcee401",
+      "status": "embedded",
+      "token_count": 23,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.404689,
+        0.499352,
+        0.062675,
+        0.238796,
+        0.055422,
+        -0.383673,
+        0.160871,
+        -0.591411
+      ],
+      "embedding_sha256": "d72461ad72b4b463ffd8ebcf26236a5822a400b8290cbb970252c04d4892c895",
+      "id": "sha256:06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+      "input_sha256": "06904f62312b91782410ed1e5f19d813e3678ae4ac8f4faa5c499ffb6ec5bbeb",
+      "normalized_source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+      "source_sha256": "123bc63022e4c642a7298a8249a388f21118065cc2c421caebf5c320bf738014",
+      "status": "embedded",
+      "token_count": 12,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.392566,
+        0.469523,
+        0.234206,
+        0.274722,
+        0.078933,
+        -0.292881,
+        0.342662,
+        -0.534498
+      ],
+      "embedding_sha256": "2c6411b690644a8dc52187ae3984bd6c4669262907ee70a5a9ae62486d6c6e77",
+      "id": "sha256:2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+      "input_sha256": "2673b4c93a1756d5edc42a98ff7e828e9795714b843bb2d292783fd15c732e58",
+      "normalized_source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+      "source_sha256": "f2731c2cb376ef672b7d7f68ef0c9d67fbe3a050453260b70c759ac1cecc1458",
+      "status": "embedded",
+      "token_count": 23,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.436849,
+        0.493105,
+        -0.153683,
+        0.022,
+        0.0,
+        -0.677273,
+        0.086113,
+        -0.275309
+      ],
+      "embedding_sha256": "6f1103b9a65e520bea34dc325ba5d40753f55f71a9ea49c09f631379f7b6432a",
+      "id": "sha256:27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+      "input_sha256": "27eba359b5ee2aad48a96fe1ac9b24840646cf0103cbe8b655e1b1bfebea5ed2",
+      "normalized_source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+      "source_sha256": "c6ebf0cb0589b24439ab41a71ed1db591eed02c8149dac73e0828d38734109ed",
+      "status": "embedded",
+      "token_count": 9,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.253426,
+        0.425409,
+        0.19814,
+        0.078031,
+        0.210474,
+        -0.269435,
+        0.255438,
+        -0.726162
+      ],
+      "embedding_sha256": "49dc30d6b0c79b6913ad4af81960095fbed16268bcf0c99656ce27765081d57c",
+      "id": "sha256:2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+      "input_sha256": "2d114d8bbc1c93b0123942597b4fc48870fbaecf3718d5f7be22f4e4c19a97c5",
+      "normalized_source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+      "source_sha256": "6398ecd62d6bbf4693e53df45fab61ac26d41fe64eb329768262714f5c99695a",
+      "status": "embedded",
+      "token_count": 36,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.243257,
+        0.461848,
+        0.262698,
+        0.349333,
+        0.077643,
+        -0.358932,
+        0.353828,
+        -0.525761
+      ],
+      "embedding_sha256": "3b09a44270c70e26bb9d01273b6eea0885edc83d3801cb41f34c8d5ebf752ef4",
+      "id": "sha256:340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+      "input_sha256": "340d6da509d310a09d723ae62f6efbb5527be4dd2988facf2f771091631c4b4a",
+      "normalized_source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+      "source_sha256": "c86238b65509d923d1fc348f7194442f899ee87cb39dd4bf14ff141855b6960e",
+      "status": "embedded",
+      "token_count": 23,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.414255,
+        0.46948,
+        0.157042,
+        0.135116,
+        0.227066,
+        -0.36643,
+        0.336009,
+        -0.516072
+      ],
+      "embedding_sha256": "21166a840731c5b80b3de2ec7e3f3e1cd7ae734bf85831e01aa14ff938feb5a7",
+      "id": "sha256:3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+      "input_sha256": "3fc47f2d949128242fea375153516239c0545e0f7228c74c66ba0621e746a094",
+      "normalized_source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+      "source_sha256": "2759be952df20d804c2e9f40040409dc75f8ed2170fac32b173d2f9806f805ee",
+      "status": "embedded",
+      "token_count": 23,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.267042,
+        0.654169,
+        0.118405,
+        0.269141,
+        -0.005458,
+        -0.40959,
+        0.057523,
+        -0.493146
+      ],
+      "embedding_sha256": "91fc575faec3ab08e9ba82ab8b88341550baa3b5aeef4630e957510df02396e6",
+      "id": "sha256:4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+      "input_sha256": "4273e0788c64eaf62d45c9a5748ac0ac745e4d6389d09de02fd1c1f5d4d82459",
+      "normalized_source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+      "source_sha256": "b9f113861e404490cb8254b9bc5334bc76a8a4f75b68c30531139d0017c89053",
+      "status": "embedded",
+      "token_count": 15,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.353995,
+        0.424459,
+        0.238974,
+        0.278729,
+        0.268679,
+        -0.298606,
+        0.220772,
+        -0.591294
+      ],
+      "embedding_sha256": "f16e715f15f1c1dad242fc9846e78880dfb8bf3d169036b9729e01fd3ccb517c",
+      "id": "sha256:44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+      "input_sha256": "44cdb24cd8627d92863e42d3396385a883ff826270a8d4f2cdae9139553ddccb",
+      "normalized_source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+      "source_sha256": "49fdcfca0a0341e0a0bd6b52e4fa2bf304100a64607785352806a58000caf1cc",
+      "status": "embedded",
+      "token_count": 21,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.312288,
+        0.496828,
+        0.151709,
+        0.225975,
+        0.219356,
+        -0.353988,
+        0.260924,
+        -0.58314
+      ],
+      "embedding_sha256": "c8fcf80dd8cf23784dece2f9f9cc5d125d2ed5fd7d3d335b5ea5769d346f184e",
+      "id": "sha256:4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+      "input_sha256": "4b30af1b7b733b2928003f1af80cff310c506e10b0879e34756bc70575b18cf9",
+      "normalized_source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+      "source_sha256": "2d013a9fb5467653323694187fc439faea705105f4ae17821c227e6a9df2256a",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.364831,
+        0.481475,
+        0.060571,
+        0.230057,
+        0.188318,
+        -0.375792,
+        0.276996,
+        -0.570153
+      ],
+      "embedding_sha256": "c3c12dc9a7abad488e3397b2f57c9f4e5cfd1ab34ec7fbbd03a4da3f927fc6ef",
+      "id": "sha256:54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+      "input_sha256": "54997185c82cfc79c029f1b3114f851d0f7213332a9206c81d839756e843a131",
+      "normalized_source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+      "source_sha256": "fc432c7d4c128de2b70abeb957300161e7902470b6fdfe238169b68084e42bfb",
+      "status": "embedded",
+      "token_count": 23,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.255625,
+        0.496563,
+        0.151628,
+        0.216593,
+        0.219239,
+        -0.291746,
+        0.381188,
+        -0.58283
+      ],
+      "embedding_sha256": "677ed44859e7d4ea740a3663f366b4054feff3263c877229b42eafbd5033c6c6",
+      "id": "sha256:5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+      "input_sha256": "5abe4818315c2c3ff3885d39b8e976ae492720e44ae7ab5497c0e03354343cf7",
+      "normalized_source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+      "source_sha256": "d5048eed92bdb40442b2799366ee5766c648e7b2467e3c34b8d66b4849c314c3",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        0.258139,
+        0.436443,
+        -0.036996,
+        0.0,
+        -0.11377,
+        -0.403898,
+        0.51433,
+        -0.548544
+      ],
+      "embedding_sha256": "aae8c912f90d1eac245c641b2798db7b524aea66ff33982275ed2026c122fdee",
+      "id": "sha256:5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+      "input_sha256": "5bf9ec29b3fd3af95d1f07c4a231c234d2d99de2105cca95bfa4ce3b65e59851",
+      "normalized_source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+      "source_sha256": "4aac46e18d61b13f0641f9aad04c595fb7b643b6592d3be160a152993306f9d7",
+      "status": "embedded",
+      "token_count": 11,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.366311,
+        0.439227,
+        0.183156,
+        0.205111,
+        0.278027,
+        -0.2548,
+        0.284036,
+        -0.611867
+      ],
+      "embedding_sha256": "bb185446960727b9b6a023dafcac362a317caa806e515aa7972fa207aa5a012f",
+      "id": "sha256:5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+      "input_sha256": "5f19ae22aa97b7b36e76702d61a56735fe47272a0d3f1bc05ed07226b459d816",
+      "normalized_source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+      "source_sha256": "43538ce0bae7fd81c042ff670afeb8f7b1374985aa1495369e4bb27c60cd6c4a",
+      "status": "embedded",
+      "token_count": 21,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.4381,
+        0.471694,
+        0.099412,
+        0.202824,
+        0.238704,
+        -0.30555,
+        0.176885,
+        -0.594074
+      ],
+      "embedding_sha256": "090dca49ac8daabf8dcfa7b9bc2c750eabba73f755914230a0cd98f72757277b",
+      "id": "sha256:60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+      "input_sha256": "60a104816c30a231b95449d44bd45e6279cb5a389b6f31a6d5a1d3183486ed45",
+      "normalized_source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+      "source_sha256": "6edeff5ecac37237a40212545d473711c2e8e3bb48bd508397f8575c8b077f8d",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.214705,
+        0.502154,
+        0.195485,
+        0.182834,
+        0.077732,
+        -0.359342,
+        0.360558,
+        -0.604094
+      ],
+      "embedding_sha256": "b8cd5d03a56d4b8a1c8d300c697006c961eaad325896929f824aad428ba87f79",
+      "id": "sha256:65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+      "input_sha256": "65b1cece5b5b105521cdf42a4363c7cbb758d5a442925c72a966a8c7adfe32e6",
+      "normalized_source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+      "source_sha256": "d644b29e9486dbfad5968f1752660e4dcf289fc2c76e5ee0f90383026ec05bce",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.293726,
+        0.42972,
+        0.151105,
+        0.021296,
+        0.212607,
+        -0.272165,
+        0.220118,
+        -0.73352
+      ],
+      "embedding_sha256": "65f24941797e83f88a386d3896bd1a37aa588d8967432152492a452b3d4840c4",
+      "id": "sha256:6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+      "input_sha256": "6f68e353e6586b3a6b2bfe2a25271fcb3ce5bdcc1125324201d77405118242ea",
+      "normalized_source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+      "source_sha256": "7a3a961aa6db339f35b5c9e836cfd58ac2f032fa7c856b99268d989cbf492b06",
+      "status": "embedded",
+      "token_count": 36,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.556957,
+        0.537538,
+        0.113313,
+        -0.005606,
+        -0.005205,
+        -0.403604,
+        0.111712,
+        -0.461061
+      ],
+      "embedding_sha256": "ae76d13f7993282906748e74632cf4007f80d3fbf741aeb56bca09f281e99f92",
+      "id": "sha256:7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+      "input_sha256": "7895f06fedab109adef75599e2cb13e08f658e3ae8fab44c14dca9439393abe0",
+      "normalized_source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+      "source_sha256": "18f3e023adbb6a9a40d240a66705f4c7667c0d0484606e867104849867315ac1",
+      "status": "embedded",
+      "token_count": 17,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.309119,
+        0.484083,
+        0.287424,
+        0.252596,
+        0.03776,
+        -0.278043,
+        0.325302,
+        -0.582354
+      ],
+      "embedding_sha256": "0ea9cdc9880f726589d5a9dc8951ac7ef334d7a11a10c72e40d3641c9fd4a7b8",
+      "id": "sha256:796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+      "input_sha256": "796fe01cc472d68b440d881e6034e814c3a624bbdcf8e0c675292e2017017692",
+      "normalized_source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+      "source_sha256": "acc8ad10082b1108cfff0fad9ee55dd21eed7de8910dcc6c263393c2da74f6ef",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.48408,
+        0.455916,
+        0.236352,
+        0.19604,
+        0.230719,
+        -0.295329,
+        0.170969,
+        -0.542063
+      ],
+      "embedding_sha256": "0d34741b0452f7649ffb3d77a6b83cbf37794d4677bca0a665f9af2a8dd4972a",
+      "id": "sha256:7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+      "input_sha256": "7ed8879cfccda56f5e1ff4b5f2279d6d2d697ae50108688a0c167a98ba38b486",
+      "normalized_source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+      "source_sha256": "88f349046ea1a5b90db4f894c632f351591235336e05b29e27ff017cf48cb7bc",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+      "context_applied": false,
+      "context_role": "explicit_assumptions",
+      "embedding": [
+        -0.342505,
+        0.410682,
+        0.231218,
+        0.166282,
+        0.305229,
+        -0.361845,
+        0.099294,
+        -0.631635
+      ],
+      "embedding_sha256": "6fb237069ca32e20463d8bb25a94506f3359af9dc198e90cc7e076a188f55c3a",
+      "id": "sha256:857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+      "input_sha256": "857abaee3d49f5ceb0b63307aecf6883f2503209cb42db339737025be468ce8f",
+      "normalized_source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "status": "embedded",
+      "token_count": 23,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.20658,
+        0.447682,
+        0.094798,
+        0.048861,
+        0.193216,
+        -0.40787,
+        0.189318,
+        -0.711336
+      ],
+      "embedding_sha256": "e68e38f97cf35d131c0ddc064db8aab145d1559ec7fefca9903c73f45dfa8cf9",
+      "id": "sha256:9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+      "input_sha256": "9153bd0dd3b1026d79b4316da874224465bb4e70834da3d97f11af1bbb803dd4",
+      "normalized_source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+      "source_sha256": "fde357cc9b1dd32af40cd2f7fb1fb63c9ed04f80ab7c474fb19b20a85b4876f1",
+      "status": "embedded",
+      "token_count": 17,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+      "context_applied": false,
+      "context_role": "explicit_assumptions",
+      "embedding": [
+        -0.342505,
+        0.410682,
+        0.231218,
+        0.166282,
+        0.305229,
+        -0.361845,
+        0.099294,
+        -0.631635
+      ],
+      "embedding_sha256": "6fb237069ca32e20463d8bb25a94506f3359af9dc198e90cc7e076a188f55c3a",
+      "id": "sha256:a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+      "input_sha256": "a51ee4c6c5e6068ab099618cedc6abb4675c9b91b9679fafa2c3056be05955cc",
+      "normalized_source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "source_sha256": "3aa84242143095d4716fe96876cc5a679fd9efbcb6568366b005c9416e14ac73",
+      "status": "embedded",
+      "token_count": 23,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.313792,
+        0.42973,
+        0.200152,
+        0.015111,
+        0.126365,
+        -0.272171,
+        0.220123,
+        -0.733537
+      ],
+      "embedding_sha256": "2f235b3494fbb55795a11f45e47a39a783eeea1f9f74f413b1a370060375db86",
+      "id": "sha256:ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+      "input_sha256": "ae231e3d4177d5ef56fb084fb6a1ba4a5260093bad0fd6f8bb1c9fa8c2974319",
+      "normalized_source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+      "source_sha256": "1c239ac8eca9e9a47c99e4f40759e203f2905d6ddbd5f376483313af0b5cb0af",
+      "status": "embedded",
+      "token_count": 37,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.302095,
+        0.428431,
+        0.150651,
+        -0.042288,
+        0.153911,
+        -0.271348,
+        0.261833,
+        -0.731319
+      ],
+      "embedding_sha256": "f1bbd7f26eea415cc4012196aaab2d506b0055f5c4ab0fd515c0b9f351bc7e78",
+      "id": "sha256:b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+      "input_sha256": "b43d785910d79bd50859ad0090e2fb23469fa4fb011b4c2cdeffe96078019435",
+      "normalized_source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+      "source_sha256": "f402b58b989482d5e8e710a481d1e0af11bd7edc8722e95696b67af91fe75fb2",
+      "status": "embedded",
+      "token_count": 37,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.33717,
+        0.46586,
+        0.232379,
+        0.264,
+        0.078318,
+        -0.233114,
+        0.451521,
+        -0.530328
+      ],
+      "embedding_sha256": "9f91f1f46b95879fb078fb5f0e6e4a49ceec9faa7f3ae2bb29affa40b8d4ac6d",
+      "id": "sha256:b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+      "input_sha256": "b76c3e2e403b4ffc86a98e01ec77d46c234882a29933353f349deed36242e658",
+      "normalized_source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+      "source_sha256": "2251c2a8678e5e9194e6235f2f958aebc9bff739da48ecc04e97bd3058bcdbe3",
+      "status": "embedded",
+      "token_count": 23,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.350297,
+        0.574312,
+        0.267939,
+        0.263912,
+        -0.116034,
+        -0.531485,
+        0.100294,
+        -0.316256
+      ],
+      "embedding_sha256": "62fa6e2e28e3f7ccd108d3f632ed180c48985a34a55ce562dac5fba0be814de5",
+      "id": "sha256:d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+      "input_sha256": "d1539df3b42e8989b60fb9fdda81991713359d1b53a3db06c606cf4174c990a4",
+      "normalized_source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+      "source_sha256": "0aede2a85bddc1118660d6f13459855997c399fec6d1719eb23f941ecf197d0e",
+      "status": "embedded",
+      "token_count": 7,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.002461,
+        0.643478,
+        0.262067,
+        -0.183324,
+        0.288314,
+        -0.260836,
+        0.571707,
+        -0.075052
+      ],
+      "embedding_sha256": "e5067efd7d554999cb4102429f57fe85f52105a82449f1ef2c46a8f293bde2ff",
+      "id": "sha256:d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+      "input_sha256": "d6fddc9492a2c11ac044260c8de58e709f24289d66b6cfb8a87d996a2be4cdbd",
+      "normalized_source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+      "source_sha256": "37a8dd37e5df6f0578a3bc9422cdc6880b53a271285fbf777fd1e55c73776c88",
+      "status": "embedded",
+      "token_count": 10,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.246699,
+        0.479223,
+        0.217202,
+        0.301095,
+        0.211584,
+        -0.341445,
+        0.306458,
+        -0.562478
+      ],
+      "embedding_sha256": "9f337bb827f6bf282a8d2b78041d72fd8bb85820a4fd692ad474b59a082c971a",
+      "id": "sha256:e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+      "input_sha256": "e9d4007dfbf71d5c03b12361f2e48498d15d84eae9d5add262664102dc181fd0",
+      "normalized_source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+      "source_sha256": "c8d93c8c09f2f2a22d78091ace87479544f848b903ce0b76018757a39f50b133",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.410785,
+        0.434082,
+        0.18101,
+        0.210703,
+        0.27477,
+        -0.305376,
+        0.176785,
+        -0.6047
+      ],
+      "embedding_sha256": "e6ceafb6c890f6c3403335f5dac13f407749d0712d66f2cdf9223303a20f640f",
+      "id": "sha256:f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+      "input_sha256": "f13d9724f1ab634be0ea031070c6e66e2067f5f64495752b46c7664c5f9f0e54",
+      "normalized_source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+      "source_sha256": "1e2aa75b59df825b6dcbc39c15e6c2320760f5b7a66a330f9213014ad68ed032",
+      "status": "embedded",
+      "token_count": 21,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.476048,
+        0.461189,
+        0.177079,
+        0.125576,
+        0.268803,
+        -0.298745,
+        0.226684,
+        -0.548332
+      ],
+      "embedding_sha256": "2307620b9b49bea9c2823a89952c8f098dd424a43f42e22ef5f0c5d20fb1b789",
+      "id": "sha256:fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+      "input_sha256": "fc2e7abff84d9b52d327b67293acd8bcfe1c4684b81239d882a00ed69c083098",
+      "normalized_source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+      "source_sha256": "7f91d8cd8d2a3267899f0daf8d88d2f476e899c595c17e648521df7cc2f39289",
+      "status": "embedded",
+      "token_count": 22,
+      "token_input_sha256": null
+    },
+    {
+      "backend_input_id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+      "context_applied": false,
+      "context_role": "none_required",
+      "embedding": [
+        -0.258355,
+        0.418514,
+        0.085631,
+        0.071603,
+        0.123067,
+        -0.265068,
+        0.214378,
+        -0.783757
+      ],
+      "embedding_sha256": "44a390d5f8afb5faa9cd951a572625908e0e26a93434999c1bad66e67d32eea2",
+      "id": "sha256:fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+      "input_sha256": "fd8388c1906df0f30b44a0a7efa722e31168ea7addf0318c73cc9a0bd9450656",
+      "normalized_source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+      "source_sha256": "b2544610d13734380101c6e7d508bccdd849c44c3646fae573207cc1a4440855",
+      "status": "embedded",
+      "token_count": 37,
+      "token_input_sha256": null
+    }
+  ],
+  "schema": "alignment-richer-embedding-lane/v1",
+  "source_fidelity_established": false,
+  "status": "produced",
+  "training_executed": false
+}

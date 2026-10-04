@@ -1,0 +1,355 @@
+{
+  "artifact_checks": [
+    {
+      "bytes": 93063,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json",
+      "sha256": "d7ab18fa836f9ef2b0c9963eedb3b5c7980c45ea250a8414253b9d1987a7dde6"
+    },
+    {
+      "bytes": 585771,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/constructions.json",
+      "sha256": "098ea14c579a561f9a0bc0a89c61c2860bcba977d893c1a4e574248aa3e1369b"
+    },
+    {
+      "bytes": 72675,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/representation_assays.json",
+      "sha256": "62f804108cbde57f5c6a7e3a8e637bce70c1b9e0ebd155a6112fdcf741160ab8"
+    },
+    {
+      "bytes": 1160241,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-01/constructions.json",
+      "sha256": "56ebb4b0c6448e9b47a1cf5cdcee00fd783ce2b2467109da616d09408d2fafa3"
+    }
+  ],
+  "baseline_exact_replay_records": 34,
+  "bridge_transport_artifacts_verified": 22,
+  "clarification_pattern_ids": [
+    "alignment-richer-legal-authored-development-v1:negative:ambiguous_actor"
+  ],
+  "cli_result": {
+    "exit_code": 0,
+    "seconds": 2.0767391010012943,
+    "status": "completed"
+  },
+  "compiler_receipts_verified": 32,
+  "configuration_check": {
+    "bytes": 326,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_parser_development_v1.json",
+    "sha256": "1631e07235200f13dce2b7fd9021d1336f69a33002ef34f29563297e079a6e0e"
+  },
+  "content_sha256": "b067cf132e8ada71643b9aaed996a0d12c6d6a2047405355435067a9013eefb4",
+  "exact_authored_gains": 18,
+  "exact_authored_regressions": 0,
+  "frozen_compiler_configuration_cid": "baguqeera7dlkg3mkupddznjq3ehefgfy3uwcarhir2yfgukpgjmo4spmroea",
+  "full_compound_qualifier_case_ids": [
+    "alignment-richer-legal-authored-development-v1:notice_clerk:multiple",
+    "alignment-richer-legal-authored-development-v1:retention_custodian:multiple",
+    "alignment-richer-legal-authored-development-v1:audit_officer:multiple",
+    "alignment-richer-legal-authored-development-v1:authorization_registrar:multiple",
+    "alignment-richer-legal-authored-development-v1:retention_clerk:multiple",
+    "alignment-richer-legal-authored-development-v1:notice_officer:multiple"
+  ],
+  "human_report_binding": {
+    "bytes": 7692,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+    "sha256": "f91a076b694d496c3b62ff3899a8da5cf74bc2d86f4fd84132a21398d78264e2"
+  },
+  "limitations": [
+    "Frozen default/compiler and listed prior bytes are unchanged; this is not frozen benchmark admission.",
+    "Grammar design used exposed development diagnostics; results are exploratory regression evidence.",
+    "Listed hashes are not a complete transitive dependency closure or process-access trace.",
+    "Opaque qualifier and source agreement diagnostics are not independently adjudicated fidelity or native proof."
+  ],
+  "link_checks": [
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "richer evaluation",
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-report.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "ExplicitQualifierCanonicalCompiler",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "machine-readable report",
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-01/report.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "panel",
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/panel.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "construction records",
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-01/constructions.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "source-only guard",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "comparison runner",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "Workflow documentation",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_parser_improvement.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-report.md",
+      "exists": true,
+      "label": "comprehensive plan",
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_parser_improvement.md",
+      "exists": true,
+      "label": "richer evaluation",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_richer_evaluation.md"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_parser_improvement.md",
+      "exists": true,
+      "label": "compiler",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_parser_improvement.md",
+      "exists": true,
+      "label": "source guard",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_parser_improvement.md",
+      "exists": true,
+      "label": "configuration",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_parser_development_v1.json"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_parser_improvement.md",
+      "exists": true,
+      "label": "CLI",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_parser_experiment.py"
+    },
+    {
+      "document": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_parser_improvement.md",
+      "exists": true,
+      "label": "runner",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py"
+    }
+  ],
+  "markdown_links_verified": 15,
+  "new_compiler_configuration_cid": "baguqeerab76qr5dc5l6tovougzmuhi74r7vomi47aolcl5vxfazyi5ocrwrq",
+  "new_constructions_and_scores_verified": 34,
+  "new_file_bindings": [
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 14419,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "bytes": 25914,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py",
+      "sha256": "23ea8a10eea572d05a90f822a8f0430d4c93648d6ec6a3e775f370cb3e9c4b5a"
+    },
+    {
+      "bytes": 1826,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_parser_experiment.py",
+      "sha256": "11069f97f4210071c13fb780a2ee3c0c778e392adf1da008dee5e93e6da34b8b"
+    },
+    {
+      "bytes": 2743,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_source_guards.py",
+      "sha256": "7a730912d34c3dad9d97f46855e83f29bf9cb3c1c7e288f14dbcf47876eca917"
+    },
+    {
+      "bytes": 11612,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_explicit_qualifiers.py",
+      "sha256": "14f8d7cd71c2019a40774141ae1e0fe596bdf77b21b8e171db10336b44c5e28e"
+    },
+    {
+      "bytes": 14048,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_alignment_parser_experiment.py",
+      "sha256": "ea2cc7e3947dd6da868f39e5b5df394d15546dbfb1a6e3dc5014b5d38780469f"
+    },
+    {
+      "bytes": 326,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/alignment_parser_development_v1.json",
+      "sha256": "1631e07235200f13dce2b7fd9021d1336f69a33002ef34f29563297e079a6e0e"
+    },
+    {
+      "bytes": 8330,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/alignment_parser_improvement.md",
+      "sha256": "c69e9ef66d9f474ce628927bb21cb8372b37b06bb0e4b0cdeed11ff4de110782"
+    }
+  ],
+  "old_reference_scores_verified": 34,
+  "predecessor_check": {
+    "bytes": 19774,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/richer-01/report.json",
+    "sha256": "a97ad11b271e6149e1818a476008fba7355fa02d8e5b3cb49fedd462e8886483"
+  },
+  "protocol_checks": [
+    {
+      "bytes": 4721,
+      "path": "/home/barberb/lift_coding/papers/completion/autoformalization/protocol.md",
+      "sha256": "8f81d8d7c46de327f14b93100a24b97f18194518d18220ad459521e849f51401"
+    }
+  ],
+  "qualified": false,
+  "renderer_receipts_verified": 22,
+  "reparse_receipts_verified": 22,
+  "report_binding": {
+    "bytes": 20513,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/parser-01/report.json",
+    "sha256": "0e8b43316bb1209a4a7be47c3fef98ce8172e674f93e50e6237b38cb27e210e5"
+  },
+  "report_payload_sha256": "bfaf2e695408ea5c7f977449e79f7cacc6982a0ecc6f5b5bbc2253515aceb86a",
+  "ruff_result": {
+    "exit_code": 0,
+    "files": 7,
+    "status": "passed"
+  },
+  "schema": "alignment-parser-evidence-validation/v1",
+  "source_checks": [
+    {
+      "bytes": 19018,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_experiment.py",
+      "sha256": "fbd2c9cf851f43a855e92049d8804d44441487d273ea8a6a6410336b47c2019e"
+    },
+    {
+      "bytes": 31906,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_panel.py",
+      "sha256": "38133619c52349ab11ad44a11f2dc7ff378d8a4d53454939e4d952d99e87c06a"
+    },
+    {
+      "bytes": 20197,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_evaluation.py",
+      "sha256": "78bfd048957643289264703702b86d62a82444b01c296aad30ac8efb7ba36d76"
+    },
+    {
+      "bytes": 23299,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e"
+    },
+    {
+      "bytes": 20651,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_baseline.py",
+      "sha256": "2368b4d9a5cd7cfe7ef2ae0ba63a8aec4f0782719123ae2fa7abf6e47e563745"
+    },
+    {
+      "bytes": 17237,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_study.py",
+      "sha256": "d566959babd8f797eb3a79b4bb4cbb5be88a86200d2f218bb886ff56fe14c576"
+    },
+    {
+      "bytes": 25163,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_experiment.py",
+      "sha256": "3c5940850b3104dba8896a496c9c37729661bbe7778ced745c410c339798be27"
+    },
+    {
+      "bytes": 17653,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_retrieval_experiment.py",
+      "sha256": "8f84f0935321d17b3617bb0adcf055ff287bec519a52f3a7123fc0b5bca86318"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 37034,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd"
+    },
+    {
+      "bytes": 13437,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64"
+    },
+    {
+      "bytes": 27010,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_roundtrip.py",
+      "sha256": "7ab374e2f40b2ded4f3a0612fea03532a40cd03d43798a6585a2ddae4c537c6e"
+    },
+    {
+      "bytes": 17858,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/bridge/canonical.py",
+      "sha256": "1c8b3244ce3f172abc7da01c64688667c796540b4f079e77f96dd061f88c7194"
+    },
+    {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 27572,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8"
+    },
+    {
+      "bytes": 392561,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a"
+    },
+    {
+      "bytes": 300668,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+    },
+    {
+      "bytes": 1579,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_richer_experiment.py",
+      "sha256": "8ca283c343b0d010ce0073b44be8b06842b616838a781d80cbb372c7510e5ef8"
+    },
+    {
+      "bytes": 14419,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 25914,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_parser_experiment.py",
+      "sha256": "23ea8a10eea572d05a90f822a8f0430d4c93648d6ec6a3e775f370cb3e9c4b5a"
+    },
+    {
+      "bytes": 1826,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/legal_ir/run_alignment_parser_experiment.py",
+      "sha256": "11069f97f4210071c13fb780a2ee3c0c778e392adf1da008dee5e93e6da34b8b"
+    }
+  ],
+  "status": "passed",
+  "test_result": {
+    "exit_code": 0,
+    "failed": 0,
+    "files": 20,
+    "passed": 673,
+    "seconds": 35.92
+  },
+  "tree_head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+  "unchanged_prior_source_count": 18
+}

@@ -1,0 +1,16 @@
+{
+  "time_utc": "2026-10-04T06:59:06.202011+00:00",
+  "final_df": "Filesystem         1B-blocks          Used    Available Use% Mounted on\n/dev/nvme0n1p2 4031871553536 2992716267520 834314551296  79% /\n",
+  "net_available_bytes_increase": 780407209984,
+  "net_available_GiB_increase": 726.81,
+  "snapshots_removed": 789,
+  "snapshots_retained": 61,
+  "missing_retained_files": [],
+  "changed_retained_files": [],
+  "uv_cache": "Preserved; cleanup waited for an active cache user and was cancelled without forcing.",
+  "docker": "Both contexts have zero images, containers and build cache after cleanup. Existing default volume preserved.",
+  "runtime": "Existing watchdog and repair processes remain alive; Leanstral /health returned status ok.",
+  "remaining_data": "Active worktrees, archives, benchmark artifacts, datasets and model stores preserved.",
+  "snapshot_phase_baseline_df": "Filesystem         1B-blocks          Used    Available Use% Mounted on\n/dev/nvme0n1p2 4031871553536 3726004813824 101026004992  98% /\n",
+  "initial_available_bytes_before_all_cleanup": 53907341312
+}

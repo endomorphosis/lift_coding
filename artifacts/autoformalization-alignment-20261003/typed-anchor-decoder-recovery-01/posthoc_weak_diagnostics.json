@@ -1,0 +1,476 @@
+{
+  "accepted": false,
+  "all_generation_saved_before_development_supervision_read": true,
+  "all_request_denominator": 34,
+  "authored_reference_ir_used": false,
+  "content_sha256": "3e4d7595552c3dd31f4a3cbf2a580263b740c2626a2f105ea1157766d16fddfb",
+  "development_positive_denominator": 8,
+  "development_unavailable_positive_count": 2,
+  "independent_semantic_review_completed": false,
+  "proof_authority": false,
+  "qualified": false,
+  "rows": [
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "clarification_required": 4,
+        "decoder_proposal": 22,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_initial",
+      "row_count": 34,
+      "seed": 1729,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "clarification_required": 4,
+        "decoder_proposal": 22,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final",
+      "row_count": 34,
+      "seed": 1729,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "anchor_abstained": 22,
+        "clarification_required": 4,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final_anchor_initial",
+      "row_count": 34,
+      "seed": 1729,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "anchor_abstained": 5,
+        "anchored_proposal": 17,
+        "clarification_required": 4,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 16,
+          "weak_full_proposal_exact_count": 16,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 16
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 1
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final_anchor_final",
+      "row_count": 34,
+      "seed": 1729,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "clarification_required": 4,
+        "decoder_proposal": 22,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_initial",
+      "row_count": 34,
+      "seed": 1730,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "clarification_required": 4,
+        "decoder_proposal": 22,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final",
+      "row_count": 34,
+      "seed": 1730,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "anchor_abstained": 22,
+        "clarification_required": 4,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final_anchor_initial",
+      "row_count": 34,
+      "seed": 1730,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "anchor_abstained": 6,
+        "anchored_proposal": 16,
+        "clarification_required": 4,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 16,
+          "weak_full_proposal_exact_count": 16,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 16
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final_anchor_final",
+      "row_count": 34,
+      "seed": 1730,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "clarification_required": 4,
+        "decoder_proposal": 22,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_initial",
+      "row_count": 34,
+      "seed": 1731,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "clarification_required": 4,
+        "decoder_proposal": 22,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final",
+      "row_count": 34,
+      "seed": 1731,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "anchor_abstained": 22,
+        "clarification_required": 4,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 0
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final_anchor_initial",
+      "row_count": 34,
+      "seed": 1731,
+      "source_fidelity_established": false
+    },
+    {
+      "accepted": false,
+      "all_row_outcomes": {
+        "anchor_abstained": 6,
+        "anchored_proposal": 16,
+        "clarification_required": 4,
+        "source_blocked": 6,
+        "source_encoding_unavailable": 2
+      },
+      "independent_semantic_review_completed": false,
+      "partition_diagnostics": {
+        "train": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 16,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 16,
+          "weak_complete_anchor_exact_count": 16,
+          "weak_full_proposal_exact_count": 16,
+          "weak_reference_available": 16,
+          "weak_span_coordinate_exact_count": 16
+        },
+        "validation": {
+          "independent_fidelity_value": null,
+          "positive_denominator": 8,
+          "reference_role": "parser_derived_weak_diagnostic_not_independent_gold",
+          "weak_canonical_exact_count": 0,
+          "weak_complete_anchor_exact_count": 0,
+          "weak_full_proposal_exact_count": 0,
+          "weak_reference_available": 6,
+          "weak_span_coordinate_exact_count": 0
+        }
+      },
+      "proof_authority": false,
+      "qualified": false,
+      "role": "source_final_anchor_final",
+      "row_count": 34,
+      "seed": 1731,
+      "source_fidelity_established": false
+    }
+  ],
+  "schema": "alignment-typed-anchor-posthoc-weak-diagnostics/v1",
+  "source_fidelity_established": false,
+  "used_for_fit_or_checkpoint_selection": false
+}
