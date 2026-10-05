@@ -1,0 +1,75 @@
+{
+  "independent_reviews": [
+    {
+      "expected_status": "passed_source_only",
+      "issue_field": "outstanding_source_issues",
+      "receipt": {
+        "bytes": 9093,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/review-receipt.json",
+        "sha256": "78cce15ec117574bc29b3033e4f76c430e19f582c5268aef8863c849167d2e2d"
+      }
+    },
+    {
+      "expected_status": "passed_file_only",
+      "issue_field": "outstanding_source_issues",
+      "receipt": {
+        "bytes": 4868,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/prepared-input-review-receipt-01.json",
+        "sha256": "4e9436bdaf2a8cbb9182e476f95a04bb49997c85c0fe61fbeaa0f77ce8ec271f"
+      }
+    },
+    {
+      "expected_status": "passed_file_only_actual_receipt_review",
+      "issue_field": "outstanding_review_issues",
+      "receipt": {
+        "bytes": 15307,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/semantic-native-review-01.json",
+        "sha256": "830fbc6d21dfb074cf4d491df78a2f4a8f5d911cd2622163856600d9c29d3eca"
+      }
+    },
+    {
+      "expected_status": "passed_source_only",
+      "issue_field": "outstanding_source_issues",
+      "receipt": {
+        "bytes": 5531,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-metadata-source-review-20261005-01/review-receipt.json",
+        "sha256": "8c75bd6a5a2c558459b580d8bc129ca74d6ec1066c5d49e13134adcc0d516796"
+      }
+    },
+    {
+      "expected_status": "passed_source_only",
+      "issue_field": "outstanding_source_issues",
+      "receipt": {
+        "bytes": 2288,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-metadata-source-review-20261005-02/review-receipt.json",
+        "sha256": "e58edb188f872a15243b7b2eb03c56c5ca783256da8e7e95269b63a18a923804"
+      }
+    },
+    {
+      "expected_status": "passed_source_only",
+      "issue_field": "outstanding_source_issues",
+      "receipt": {
+        "bytes": 2062,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-metadata-source-review-20261005-02/closure-source-review-receipt.json",
+        "sha256": "66fbb0c99c08b4192c62f519f4993b6aa3ab734e8dd864fa1fe2df37652e7ccc"
+      }
+    },
+    {
+      "expected_status": "passed_source_only",
+      "issue_field": "outstanding_source_issues",
+      "receipt": {
+        "bytes": 2138,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-closure-source-review-20261005-02/review-receipt.json",
+        "sha256": "59f76e3ec97e27cb9b681d424e43ab9b15b837227652272bf2e50805cc8c5b01"
+      }
+    }
+  ],
+  "metadata_build_receipt": {
+    "bytes": 6625,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/metadata-objective-01/build-receipt.json",
+    "sha256": "af3305069bcf57a146a67053f17c3010b0dc3f02fd38834ff4b6e03b80ac9aba"
+  },
+  "schema": "ranker-objective-scalar-closure-plan@1",
+  "scope_root": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01",
+  "source_and_artifacts_quiet": true
+}

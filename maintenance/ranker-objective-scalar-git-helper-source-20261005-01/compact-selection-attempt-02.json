@@ -1,0 +1,22 @@
+{
+  "Git_read_calls": "read-only freshness/tree/blob/guards only",
+  "candidate_created": false,
+  "commit_calls": 0,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T17:46:52.736940+00:00",
+  "execution_authority": false,
+  "original_HEAD_index_mutations": 0,
+  "planner_activation": false,
+  "producer": {
+    "bytes": 21390,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-git-helper-source-20261005-01/prepare_compact_selection_02.py",
+    "sha256": "838424df7805e5f6d54d680a570c1783207c6de96416e2d3c2de806a80fb625b"
+  },
+  "proof_authority": false,
+  "push_calls": 0,
+  "reason": "nonempty selected list passed to exact-Boolean need; corrected03 uses len(selected)>0",
+  "returncode": 1,
+  "schema": "ranker-objective-scalar-compact-selection-retained-attempt@1",
+  "stage_calls": 0,
+  "status": "failed_after_read_only_selection_before_candidate_write"
+}

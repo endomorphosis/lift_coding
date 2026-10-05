@@ -1,0 +1,74 @@
+{
+  "all_selected_local_pins_rechecked": true,
+  "commit": "57c2bbf12ab14a597148cfbc874947ca17481ca3",
+  "committed_total_regular_files": 412,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T17:29:35.432726+00:00",
+  "execution_authority": false,
+  "fresh_public_main_after_tree_matches_commit": true,
+  "fresh_public_main_matches_commit": true,
+  "model_training_calls": 0,
+  "parent": "fae2e38dc882929edb2bcd2226560f0da3dfcd9e",
+  "prior_immutable_files_preserved": 329,
+  "producer": {
+    "bytes": 8944,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/review_hf_readback_01.py",
+    "sha256": "263e3c8a7879f310c1079ceda64e18df98821198491026f6978cf81111fef812"
+  },
+  "proof_authority": false,
+  "prover_calls": 0,
+  "public_main_readback_url": "https://huggingface.co/api/datasets/Publicus/codebase-ir-proof-index/revision/main",
+  "public_tree_readback_url": "https://huggingface.co/api/datasets/Publicus/codebase-ir-proof-index/tree/57c2bbf12ab14a597148cfbc874947ca17481ca3?recursive=true&expand=false",
+  "raw_SDK_logs_read": false,
+  "receipt_pins_before_after": [
+    {
+      "bytes": 39987,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-plan-01.json",
+      "sha256": "c11d6987d615024200cd9fea161b9fd6c7c19e3935a956b88d81af7aa7f103e5"
+    },
+    {
+      "bytes": 41721,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/final-upload-scan-01.json",
+      "sha256": "21b410a5e7b4ca308019f07bf498e9e06302725c52702116ec6af3fd4a5248f2"
+    },
+    {
+      "bytes": 731364,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-publication-invocation-01.json",
+      "sha256": "b94c2189c4f7ab0210b95016475480d2ef17573fafa1246901a8c1f6d01a4fe3"
+    },
+    {
+      "bytes": 565,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-publication-outer-01/closed.json",
+      "sha256": "442a893a1fed156a12d420b23eba2953273e69a0660a18dce084ab95955714c7"
+    },
+    {
+      "bytes": 115230,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-publication-01/remote-before.json",
+      "sha256": "c60b8c89b95e627ad6c09cd3c2f35a8794b4dca9806ffca2daa6b73526f6f300"
+    },
+    {
+      "bytes": 170,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-publication-01/commit-observed.json",
+      "sha256": "d57a95853f8d822e212a40130a1ce2b3943b52b7f514575e033543e13cf9e199"
+    },
+    {
+      "bytes": 47896,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-publication-01/verified-files.json",
+      "sha256": "e2307e6390c2777bdc1b8a24f59f6438ba51a388efbeafcdf34f9ea67d4a06e7"
+    },
+    {
+      "bytes": 889,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "360769276b3688789027cef091537d2680bd01b82ba9a602dcaef7b8da417a1b"
+    }
+  ],
+  "remote_mutations": 0,
+  "schema": "ranker-objective-scalar-public-HF-readback-join@1",
+  "selected_bytes": 15872242,
+  "selected_files": 83,
+  "status": "passed",
+  "verification_methods": {
+    "committed_LFS_SHA256_and_size": 8,
+    "downloaded_small_file_SHA256_and_size": 75
+  }
+}

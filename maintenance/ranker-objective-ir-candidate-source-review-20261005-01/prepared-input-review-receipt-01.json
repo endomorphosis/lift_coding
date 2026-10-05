@@ -1,0 +1,98 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "all_observed_sources_and_JSON_inputs_rechecked": true,
+  "captured_earlier_freeze_producer": {
+    "bytes": 8661,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-scalar-01-producer/freeze_source_profile_01.py",
+    "sha256": "8a5766529d4a5d8ac7999508ade37f205bec29b5191a0834164957d274543455"
+  },
+  "captured_earlier_freeze_producer_accepted_for_prepared_mode": true,
+  "complete_prior_environment_descriptor_prefix_preserved": true,
+  "completion_authority": false,
+  "current_candidate_source_review": {
+    "bytes": 9093,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/review-receipt.json",
+    "sha256": "78cce15ec117574bc29b3033e4f76c430e19f582c5268aef8863c849167d2e2d"
+  },
+  "declared_environment_census": {
+    "bytes": 3534384768,
+    "files": 20104
+  },
+  "exact_added_qualified_local_imports": {
+    "RealStableFactor": {
+      "bytes": 9253,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/check-result.json",
+      "sha256": "25adf30103c3d7455df5c7fff9eedf6b9e4ceb1fbd5263e919247ed18588e0f5"
+    },
+    "TypedNumericSlice": {
+      "bytes": 19104,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+      "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+    }
+  },
+  "exact_source_diff": "Only the single mode assertion changed; actual lean-objective-scalar-01 satisfies both.",
+  "execution_authority": false,
+  "full_task_satisfaction": "unknown",
+  "historical_original_freeze_descriptor_not_asserted_equal_current_live_source": true,
+  "limits": {
+    "Git_commands_or_mutations": 0,
+    "actual_original_checkout_or_resource_state_rechecked": false,
+    "compiler_renderer_test_native_model_jobs": 0,
+    "environment_dependency_bytes_rehashed": false,
+    "native_object_bodies_or_log_bodies_read": 0,
+    "remote_calls": 0,
+    "scope": "same-read source and JSON pins plus exact descriptor joins; actual bounded controller/checker must recheck dependencies at execution",
+    "target_imports_or_execution": 0
+  },
+  "native_qualification_claimed": false,
+  "native_retention_caps_unchanged": {
+    "per_file": 65536,
+    "reconstruction_aggregate": 3997696
+  },
+  "official_benchmark_score": null,
+  "outstanding_source_issues": [],
+  "planner_activation": false,
+  "prepared_AST_specification": {
+    "bytes": 1834,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/objective-slices-specification.json",
+    "sha256": "6aba6218c595db56698ecc8568ff0a710205fb6fd50a215c02944289d47c1d38"
+  },
+  "prepared_Lean_environment": {
+    "bytes": 9971781,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-scalar-01-producer/environment-manifest.json",
+    "sha256": "95cd44ea3b66f14ef3a633929eb1a3c94e1824cc8039f4cc8a5291b4ad5e598c"
+  },
+  "prepared_Lean_specification": {
+    "bytes": 1720,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-scalar-01-check-specification.json",
+    "sha256": "5a8aaac0881774c6cadb2af277afcc53e5e917190db7b6d78d7bae13bc4522ac"
+  },
+  "prepared_native_queries": [
+    "RankerObjectiveIR.compile_scalar_sound",
+    "RankerObjectiveIR.compile_scalar_refuses_unsupported",
+    "RankerObjectiveIR.compile_scalar_refuses_unknown_name",
+    "RankerObjectiveIR.stableLoss_eval_success",
+    "RankerObjectiveIR.stableFactor_eval_success"
+  ],
+  "prepared_request": {
+    "bytes": 561622,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/request-v3.json",
+    "sha256": "8e9038a657519b35e769e911219dbe5ad4bf92833017663f8673d5ef2613fdd3"
+  },
+  "proof_authority": false,
+  "protected_live_sources": 4,
+  "review_source": {
+    "bytes": 16639,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/review_prepared_inputs_01.py",
+    "sha256": "02eb3544dd4faba8691f957f51ac9bcea8be2c5db7f57d8ab55c11608274e5db"
+  },
+  "reviewed_current_freeze_producer": {
+    "bytes": 8719,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/freeze_source_profile_01.py",
+    "sha256": "194acc937634ffef66116be4256e9a1943df0a066333bd6150ff7c3249994323"
+  },
+  "schema": "ranker-objective-scalar-prepared-input-source-review@1",
+  "status": "passed_file_only",
+  "strict_guard_descriptors": 2108,
+  "test_success_claimed": false
+}

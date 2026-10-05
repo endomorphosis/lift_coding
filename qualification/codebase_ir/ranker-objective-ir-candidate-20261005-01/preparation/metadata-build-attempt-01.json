@@ -1,0 +1,24 @@
+{
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T16:37:43.505409+00:00",
+  "execution_authority": false,
+  "exit_code": 1,
+  "failure": "generated environment census comparison incorrectly imposed the32MiB bounded body input cap on large dependency descriptors",
+  "metadata_hydration_calls": 0,
+  "model_calls": 0,
+  "native_lean_calls": 0,
+  "output_directory_created": false,
+  "plan": {
+    "bytes": 6097,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/objective-metadata-build-plan-01.json",
+    "sha256": "ea6ce1298603f2c0447954133fd7edd3462d7f30296b5d9b5c52454a2af13caa"
+  },
+  "producer": {
+    "bytes": 49474,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/build_objective_metadata_01.py",
+    "sha256": "45246ee6931195cecc07433384c953aa474cd903ec7c665e6b38f406dc47e1c9"
+  },
+  "proof_authority": false,
+  "schema": "ranker-objective-scalar-file-preparation-attempt@1",
+  "status": "failed_before_outputs"
+}

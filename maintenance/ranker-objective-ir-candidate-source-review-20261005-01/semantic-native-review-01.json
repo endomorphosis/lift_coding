@@ -1,0 +1,367 @@
+{
+  "Python_Float_libm_fsum_semantics_proved": false,
+  "actual_AST_phase": {
+    "actual_operator_trees_match_independent_source_AST_inspection": true,
+    "generated": {
+      "bytes": 4315,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/compile-source-objective-01/GeneratedObjectiveScalarLeaves.lean",
+      "sha256": "c6ba9dbc3a9ed056d04d004692180efd76db4e8d379681d7c8ff2edb1da8e919"
+    },
+    "generated_bytes_equal_independently_inspected_inert_emitter_literal_concatenation": true,
+    "parses": 2,
+    "slices": {
+      "bytes": 17882,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/compile-source-objective-01/objective-slices.json",
+      "sha256": "20f4cc89a1b92a9ab2eb3a53ec15298e9892c00550b5cb61891d278256fae124"
+    },
+    "source_function_execution_calls": 0
+  },
+  "actual_distinct_kernel_queries": 14,
+  "actual_each_phase_guard_counts": {
+    "protected_live_sources": 4,
+    "strict_old_inputs": 2108
+  },
+  "actual_each_phase_owned_receipt_guards_unchanged_and_leases_drained": true,
+  "actual_native_checks": [
+    {
+      "check": {
+        "bytes": 22527,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-scalar-01/check-result.json",
+        "sha256": "57ac502ebc37df08ae73b7fec69280b2dcb1a2453895ab573869d826d613bd5e"
+      },
+      "queries": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIR.compile_scalar_sound"
+        },
+        {
+          "axioms": [],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIR.compile_scalar_refuses_unsupported"
+        },
+        {
+          "axioms": [
+            "propext"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIR.compile_scalar_refuses_unknown_name"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIR.stableLoss_eval_success"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIR.stableFactor_eval_success"
+        }
+      ],
+      "specification": {
+        "bytes": 1720,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-scalar-01-check-specification.json",
+        "sha256": "5a8aaac0881774c6cadb2af277afcc53e5e917190db7b6d78d7bae13bc4522ac"
+      }
+    },
+    {
+      "check": {
+        "bytes": 13074,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-generated-01/check-result.json",
+        "sha256": "4bcc8424739067b6e31382f594bd0c17e7e3e800d117bd08b2e38de302177041"
+      },
+      "queries": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_compile_scalar_sound"
+        },
+        {
+          "axioms": [],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_compile_refuses_unsupported"
+        },
+        {
+          "axioms": [
+            "propext"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_compile_refuses_unknown_name"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_stableLoss_compiles"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_stableFactor_compiles"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_stableLoss_eval_success"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_stableFactor_eval_success"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_stableLoss_eq_pairLoss"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerObjectiveIRGenerated.emitted_stableFactor_eq_logisticP"
+        }
+      ],
+      "specification": {
+        "bytes": 2054,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-generated-01-check-specification.json",
+        "sha256": "3bf0e1c7ab79bb3be5bf9beb25ff646216993e87b3f97f977233101ea8eb605c"
+      }
+    }
+  ],
+  "actual_native_invocations": 2,
+  "actual_phase_receipts": {
+    "compile-source-objective-01": {
+      "invocation": {
+        "bytes": 4301,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/compile-source-objective-01-invocation.json",
+        "sha256": "893bf86a4108fd226ccd53e0003af8562bede491ba530f9e1959cbf75ba605e8"
+      },
+      "outer": {
+        "bytes": 487,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/compile-source-objective-01-closed.json",
+        "sha256": "ec8300e4f4d3a7406f8a9d3ea1f093a64726988b5ab73d71e2e1147d108019b3"
+      },
+      "owned": {
+        "bytes": 15871,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/compile-source-objective-01/closed.json",
+        "sha256": "b083feb9f2397268062647867b8c993a0a774322c243605b38189f539bb43a9e"
+      }
+    },
+    "lean-objective-generated-01": {
+      "invocation": {
+        "bytes": 4367,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-generated-01-invocation.json",
+        "sha256": "02e51f2a6a784d368d1c9a9d0808de3a13fb424b8b5692176c6d191654a38648"
+      },
+      "outer": {
+        "bytes": 486,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-generated-01-closed.json",
+        "sha256": "547e672fadca53b032afbd66c5fd232eb22382e2e6b9c83cc3e59b5d7408d59e"
+      },
+      "owned": {
+        "bytes": 15848,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-generated-01/closed.json",
+        "sha256": "f79233cb4bbc17e93316aa4f54c515f3c288c658d01798a6ce6ab8ded518db99"
+      }
+    },
+    "lean-objective-scalar-01": {
+      "invocation": {
+        "bytes": 4307,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-scalar-01-invocation.json",
+        "sha256": "b77ddf708cc9d39422cc4856c542f49a28394bd1d99b0e6909e5a22f7a015c2e"
+      },
+      "outer": {
+        "bytes": 483,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-scalar-01-closed.json",
+        "sha256": "df4e5481fa83da841b5cec6a251a96a371a6a3e511b8d810e06e7163462e4ca8"
+      },
+      "owned": {
+        "bytes": 15832,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-scalar-01/closed.json",
+        "sha256": "cf79d451ab0edcc291b9fcbccffc7518875688b93b4336ab371a2ceb9b44c7a8"
+      }
+    },
+    "pure-tests-objective-01": {
+      "invocation": {
+        "bytes": 2781,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/pure-tests-objective-01-invocation.json",
+        "sha256": "674bef0037419d583db5d674f0abed90b4dac4e6b7e973fbe6eb23b10c785bba"
+      },
+      "outer": {
+        "bytes": 483,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/pure-tests-objective-01-closed.json",
+        "sha256": "4bf374151c0cd69c48f6b4f20f9128d153430a02a4a58bddc2f0735da1660279"
+      },
+      "owned": {
+        "bytes": 15271,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/pure-tests-objective-01/closed.json",
+        "sha256": "b1fb4920100a38ad3955c71ccf6be3bfab5733daa8bfc9ebc518e770da938a18"
+      }
+    }
+  },
+  "actual_pure_controls": {
+    "all_passed": true,
+    "native_or_direct_process_attempts": 0,
+    "phases": 294,
+    "phases_pin": {
+      "bytes": 52234,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/pure-tests-objective-01/phases.json",
+      "sha256": "2cbb99f6ced96d6251f241a89fbfa9d92b838982f7d84cb40772c8cb650976bd"
+    },
+    "tests": 98
+  },
+  "actual_query_report_occurrences_per_query": 2,
+  "all32_governing_RPI_exits": "OPEN",
+  "complete_retained_modules": [
+    {
+      "artifact": {
+        "bytes": 1881720,
+        "complete": true,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-scalar-01/lean/ObjectiveScalarIR.olean",
+        "retention_format": "bounded_lean_chunks@1",
+        "sha256": "4e8a30cb3830ee6f1c689d827db695ebad8555bf1c6ac624fd320f3c6c80f134"
+      },
+      "chunks": 29,
+      "full_raw_equals_ordered_chunks": true,
+      "retention_manifest": {
+        "bytes": 4665,
+        "complete": true,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-scalar-01/lean/LeanProofChunks.json",
+        "sha256": "7c7b838ba3e8e56d539cfabec739aa7b0068c71421f5465b52773419be91d2ac"
+      }
+    },
+    {
+      "artifact": {
+        "bytes": 73712,
+        "complete": true,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-generated-01/lean/GeneratedObjectiveScalarLeaves.olean",
+        "retention_format": "bounded_lean_chunks@1",
+        "sha256": "867a5617be43f395e05ef1cec1c5027b298f800c0969b625dabc0f2f74224f9a"
+      },
+      "chunks": 2,
+      "full_raw_equals_ordered_chunks": true,
+      "retention_manifest": {
+        "bytes": 704,
+        "complete": true,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-generated-01/lean/LeanProofChunks.json",
+        "sha256": "2ca0d454b221589fca12a1c75c9005aa702817110cc497b95c28fda79a1635aa"
+      }
+    }
+  ],
+  "completion_authority": false,
+  "execution_authority": false,
+  "full_objective_source_equivalence_proved": false,
+  "full_task_satisfaction": "unknown",
+  "global_autoencoder_convergence_proved": false,
+  "gradient_source_equivalence_proved": false,
+  "host_parser_correctness_theorem_proved": false,
+  "independently_read_complete_environment_union": {
+    "actual_runtime_open_trace_claimed": false,
+    "bytes": 3546322176,
+    "complete_sorted_descriptor_map_sha256": "b176be126f15c4b22ef6d63aaead15d1b43348a60fba52da2f2d5de0c3fcd2db",
+    "each_fd_read_and_path_stat_stable": true,
+    "every_file_body_matches_descriptor": true,
+    "files": 20112,
+    "whole_live_atomic_snapshot_claimed": false
+  },
+  "narrow_semantic_claims": [
+    "Accepted generic named-to-finite-slot scalar mathematical compilation preserves exact-real partial evaluation and domain errors.",
+    "Both syntax branches are validated; exact evaluation selects one branch lazily.",
+    "Literal emitted stable-loss and sign-split factor trees compile to the inspected exact-real trees and join the prior realPairLoss/realLogisticP statements.",
+    "Host AST/source/emitter joins are independently inspected and pure-controlled, not proved by the Lean kernel."
+  ],
+  "official_benchmark_score": null,
+  "only_allowed_standard_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "optimizer_source_convergence_proved": false,
+  "outstanding_review_issues": [],
+  "passed_native_modules": 2,
+  "physical_environment_profiles": [
+    {
+      "bytes": 3534384768,
+      "files": 20104,
+      "manifest": {
+        "bytes": 9971781,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-scalar-01-producer/environment-manifest.json",
+        "sha256": "95cd44ea3b66f14ef3a633929eb1a3c94e1824cc8039f4cc8a5291b4ad5e598c"
+      }
+    },
+    {
+      "bytes": 3546278601,
+      "files": 20109,
+      "manifest": {
+        "bytes": 9974503,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-generated-01-producer/environment-manifest.json",
+        "sha256": "e4c60649f7dcfca035af7842d5f6298d773d88bd769543a8fd2591195e6c3901"
+      }
+    }
+  ],
+  "planner_activation": false,
+  "prepared_input_review": {
+    "bytes": 4868,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/prepared-input-review-receipt-01.json",
+    "sha256": "4e9436bdaf2a8cbb9182e476f95a04bb49997c85c0fe61fbeaa0f77ce8ec271f"
+  },
+  "proof_authority": false,
+  "python_ranker_source_equivalence_proved": false,
+  "review_source": {
+    "bytes": 29510,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/review_semantic_native_01.py",
+    "sha256": "9d2023bdbc808fe35accfed90e00462d4f917f087a344348d955c0365b564719"
+  },
+  "reviewer_work": {
+    "Git_commands_or_mutations": 0,
+    "compiler_renderer_tests_native_model_jobs_rerun": 0,
+    "log_bodies_read": 0,
+    "remote_calls": 0,
+    "target_modules_imported_or_executed": 0,
+    "writes_outside_owned_review_namespace": 0
+  },
+  "schema": "ranker-objective-scalar-independent-semantic-native-review@1",
+  "source_review": {
+    "bytes": 9093,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/review-receipt.json",
+    "sha256": "78cce15ec117574bc29b3033e4f76c430e19f582c5268aef8863c849167d2e2d"
+  },
+  "status": "passed_file_only_actual_receipt_review",
+  "whole_codebase_IR_semantic_preservation_proved": false
+}

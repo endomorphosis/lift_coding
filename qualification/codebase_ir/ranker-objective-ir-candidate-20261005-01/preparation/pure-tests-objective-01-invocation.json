@@ -1,0 +1,55 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 33191,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/objective_scalar_compiler.py",
+      "sha256": "a9f4c93423c0f10e432e005ce4f8986e903706cf7ea5b493699633618519d9d9"
+    },
+    {
+      "bytes": 18118,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/test_typed_slice_compiler.py",
+      "sha256": "c18c4a95bde5da2c780a91bc77e1ad5358ebd30723087e11fb0a8b96448c35c1"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 43354,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/captured-driver-pure-tests-objective-01.py",
+      "sha256": "42db20ed326046ad9e2bc9666cc67494937dd3321a1b70ddb4f5618b8271d14f"
+    },
+    {
+      "bytes": 561622,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/request-v3.json",
+      "sha256": "8e9038a657519b35e769e911219dbe5ad4bf92833017663f8673d5ef2613fdd3"
+    },
+    {
+      "bytes": 33191,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/objective_scalar_compiler.py",
+      "sha256": "a9f4c93423c0f10e432e005ce4f8986e903706cf7ea5b493699633618519d9d9"
+    },
+    {
+      "bytes": 18118,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/test_typed_slice_compiler.py",
+      "sha256": "c18c4a95bde5da2c780a91bc77e1ad5358ebd30723087e11fb0a8b96448c35c1"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    }
+  ],
+  "mode": "pure-tests-objective-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 561622,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/request-v3.json",
+    "sha256": "8e9038a657519b35e769e911219dbe5ad4bf92833017663f8673d5ef2613fdd3"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T16:03:42.892944+00:00"
+}

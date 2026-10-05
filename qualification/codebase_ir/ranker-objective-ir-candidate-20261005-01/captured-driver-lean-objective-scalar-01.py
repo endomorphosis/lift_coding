@@ -1,0 +1,642 @@
+"""Owned objective scalar leaves only; no ranker import, execution, fit, or replay."""
+from __future__ import annotations
+import datetime
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+import time
+import traceback
+
+ROOT = Path(__file__).resolve().parent
+WORKSPACE = ROOT.parents[2]
+OLD = WORKSPACE / "qualification/codebase_ir/ranker-trace-authentication-20261005-01"
+HEAD = WORKSPACE / "artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01"
+CAP = WORKSPACE / "artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08"
+OBJECTIVE_ARGUMENTS = {
+    "expected_source_sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a",
+    "expected_objective_ast_sha256": "129da31ae6856167478c7f030a059d0f477b8362bb8fa478221eac7bac6031c2",
+    "expected_stable_loss_ast_sha256": "b71027e5d37d1a5b5b574a4b880a0857f0885dbc19c81dff3e652f8f7c76287e",
+    "expected_stable_factor_ast_sha256": "a5f60c17cb8efc0869ec1ac4001c04c1b43f67d7d38bc025cbb87061247d70aa",
+}
+OBJECTIVE_PLAN = WORKSPACE / "qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01"
+OBJECTIVE_DOCUMENTS = {
+    "source_bindings": ("source-bindings.json", "5f76eed1e9b025c8e7bb61d23e368a4740b01f329c40472f0c77f2f909bd5c16"),
+    "source_plan": ("source-plan.json", "f0e712a1b78ba1a728f5f4a41a8d8f66540017ae86418e23f4bd3c40f6cce690"),
+    "ir_interface": ("ir-interface.json", "53a6ba907b4ac64d79f88a97fb9b987a54d0b2efeb930cef798c249d483a6cd0"),
+}
+
+
+def validate_mode(mode):
+    if type(mode) is not str or len(mode) > 96 or re.fullmatch(r"(?:compile-source-objective|pure-tests-objective|lean-objective(?:-[a-z0-9]+)*)-[0-9]{2}", mode) is None:
+        raise ValueError("objective scalar phases only permit compile-source-objective, pure-tests-objective, or lean-objective numbered modes")
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False).encode()
+
+
+def helpers():
+    # Load only standard-library definitions from a previously sealed producer.
+    seal = json.loads((OLD / "file-only-seal-01.json").read_bytes())
+    assert sha((OLD / "file-only-seal-01.json").read_bytes()) == "8ea31286ffda2a5f08b4820bcc6ccf9ee05f133b96018132378f8c96ec16f438"
+    path = OLD / "run_trace_controls_02.py"
+    expected = next(row for row in seal["files"] if row["path"] == str(path))
+    raw = path.read_bytes()
+    assert len(raw) == expected["bytes"] and sha(raw) == expected["sha256"]
+    ns = {"__name__": "held_sealed_curvature_helpers", "__file__": str(path)}
+    exec(compile(raw, str(path), "exec"), ns)
+    ns["ROOTS"] = (OLD / "source", HEAD / "source", CAP / "accelerate", CAP / "datasets", CAP / "kit")
+    return ns
+
+
+def prepare():
+    h = helpers(); pin, read = h["pin"], h["read_pinned"]
+    (ROOT / "preparation").mkdir(exist_ok=True); (ROOT / "evidence").mkdir(exist_ok=True)
+    prior_request = json.loads((OLD / "preparation/request.json").read_bytes())
+    request = {key: prior_request[key] for key in ("strict_old_inputs", "protected_live_sources", "original_corpus_envelope",
+                "original_ranker_result", "external_fit_output_pins", "expected_original_corpus_sha256", "native_lean")}
+    request.update(schema="terminal-ranker-curvature-request@1",
+                   prior_trace_seal=pin(OLD / "file-only-seal-01.json"),
+                   prior_metadata_inputs=pin(OLD / "evidence/metadata-01/metadata-inputs.json"),
+                   trace_authentication=pin(OLD / "evidence/actual-01/authentication-result.json"),
+                   root_request={"cpu_slots": 1, "memory_mb": 2048, "child_process_slots": 4},
+                   outer_timeout_seconds=120,
+                   proof_limits={"wall_seconds": 20, "cpu_seconds": 20, "output_bytes": 65536, "workspace_bytes": 16777216},
+                   proof_pressure_limits={"memory_percent": 2.0, "cpu_percent": 50.0, "io_percent": 10.0},
+                   corpus_scope="original_d4aa_4_pairs_80_coordinates_only",
+                   full_source_runtime_equivalence=False, global_optimizer_convergence=False,
+                   full_task_satisfaction="unknown", planner_activation=False, official_benchmark_score=None)
+    for row in request["strict_old_inputs"]:
+        assert pin(row["path"])["sha256"] == row["sha256"]
+    for row in json.loads(read(request["prior_trace_seal"]))["files"]:
+        assert pin(row["path"]) == row
+    h["write"](ROOT / "preparation/request.json", request)
+    print(json.dumps({"status": "prepared", "request": pin(ROOT / "preparation/request-v3.json")}))
+
+
+def verify(h, request):
+    h["verify_old"](request)
+    for row in json.loads(h["read_pinned"](request["prior_trace_seal"]))["files"]:
+        assert h["pin"](row["path"]) == row
+
+
+def extract(run, receipt, request, h, head):
+    envelope = json.loads(h["read_pinned"](request["original_corpus_envelope"]))
+    fitted = json.loads(h["read_pinned"](request["original_ranker_result"]))
+    assert envelope["corpus"]["corpus_sha256"] == fitted["corpus_sha256"] == request["expected_original_corpus_sha256"]
+    # This is corpus/public-feature preparation only, never fitting or replaying.
+    prepared = head._prepare(envelope["corpus"], envelope["original_inputs"])
+    receipt["native_preparation_calls"] = 1
+    corpus, features, lexical, pairs, differences, profile, smoothness, step = prepared
+    training = fitted["training_receipt"]
+    assert pairs == training["train_pairs"] and len(differences) == 4 and all(len(row) == 80 for row in differences)
+    assert head._digest(differences) == training["train_pair_feature_differences_sha256"] == "e8504c6e8004a2f2878bc79aae0af54c9541bff82df8cde670b48bdf7da03ac6"
+    assert head._digest(profile) == training["feature_profile_sha256"]
+    assert smoothness == training["smoothness_upper_bound_numeric"] and step == training["step_size"] and head.L2 == training["L2"]
+    fixture = {"schema": "terminal-ranker-original-difference-artifact@1", "corpus_sha256": corpus["corpus_sha256"],
+               "feature_profile_sha256": head._digest(profile), "train_pairs_sha256": head._digest(pairs),
+               "differences": differences, "difference_vectors_sha256": head._digest(differences),
+               "L2": head.L2, "native_step_size": step, "native_numeric_smoothness": smoothness}
+    fixture["artifact_sha256"] = sha(canonical(fixture))
+    destination = ROOT / "numeric-binding/original-differences-01.json"
+    h["write"](destination, fixture, compact=True, maximum=65536)
+    receipt["original_difference_artifact"] = h["pin"](destination)
+    receipt["canonical_complete_difference_artifact_sha256"] = sha(canonical(fixture))
+    receipt["gradient_evaluations"] = receipt["optimizer_updates"] = 0
+
+
+def dependencies(run, receipt, h):
+    """Separate setup profile; never counts as an analytic proof invocation."""
+    directory = ROOT / "environment/mathlib4"
+    toolchain = Path("/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0")
+    assert (directory / "lean-toolchain").read_text().strip() == "leanprover/lean4:v4.34.0"
+    assert sha((directory / "lake-manifest.json").read_bytes()) == "8f67b2cf24143ac091cdb425e886c2164b2fc2d6fbccd6db9454b697f9541a67"
+    environment = {"PATH": str(toolchain / "bin") + ":/usr/bin:/bin", "HOME": os.environ["HOME"],
+                   "LANG": "C.UTF-8", "LEAN_NUM_THREADS": "1", "MATHLIB_CACHE_DIR": str(ROOT / "environment/cache")}
+    argv = [str(toolchain / "bin/lake"), "exe", "cache", "get",
+            "Mathlib.Analysis.Complex.Exponential", "Mathlib.Algebra.Order.BigOperators.Ring.Finset", "Mathlib.Tactic.Linarith"]
+    if "softplus" in receipt["mode"]:
+        argv.extend(["Mathlib.Analysis.SpecialFunctions.Log.Deriv", "Mathlib.Analysis.Calculus.Deriv.Inv", "Mathlib.Tactic.FieldSimp"])
+    if "descent" in receipt["mode"]:
+        argv.append("Mathlib.Analysis.Convex.Deriv")
+    setup = {"kind": "dependency_hydration_only", "argv": argv, "cwd": str(directory),
+             "wall_seconds": 100, "capture_bytes": 1048576, "external_disk_limit_bytes": 4 * 1024**3,
+             "proof_solver_limits_unchanged": True, "process_affinity_cpu": min(os.sched_getaffinity(0)),
+             "actual_native_proof_checks": 0, "root_lease": receipt["root_lease"]}
+    h["write"](run / "setup-request.json", setup)
+    def constrain():
+        os.sched_setaffinity(0, {setup["process_affinity_cpu"]})
+    started = time.monotonic()
+    child = subprocess.Popen(argv, cwd=directory, env=environment, stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT, preexec_fn=constrain, start_new_session=True)
+    raw = b""; setup["cleanup_errors"] = []
+    try:
+        raw, _ = child.communicate(timeout=100)
+        setup.update(returncode=child.returncode, timed_out=False)
+    except subprocess.TimeoutExpired:
+        import signal
+        setup["timed_out"] = True
+        os.killpg(child.pid, signal.SIGTERM)
+        try: raw, _ = child.communicate(timeout=5)
+        except subprocess.TimeoutExpired:
+            os.killpg(child.pid, signal.SIGKILL); raw, _ = child.communicate(timeout=5)
+        setup["returncode"] = child.returncode
+    finally:
+        assert len(raw) <= setup["capture_bytes"]
+        (run / "setup.log").write_bytes(raw)
+        setup["elapsed_seconds"] = time.monotonic() - started
+        setup["external_disk_bytes_post_setup"] = sum(p.stat().st_size for p in directory.rglob("*") if p.is_file())
+        setup["external_disk_guard_scope"] = "post-setup inventory; no continuous quota claim"
+        h["write"](run / "setup-result.json", setup)
+    receipt["dependency_setup"] = h["pin"](run / "setup-result.json")
+    assert setup["returncode"] == 0 and not setup["timed_out"], "dependency cache hydration failed; retained setup.log"
+    assert setup["external_disk_bytes_post_setup"] <= setup["external_disk_limit_bytes"]
+
+
+def held_module(h, descriptor, name):
+    import types
+    module = types.ModuleType(name); module.__file__ = descriptor["path"]
+    sys.modules[name] = module
+    exec(compile(h["read_pinned"](descriptor), descriptor["path"], "exec"), module.__dict__)
+    return module
+
+
+def numeric(run, receipt, request, h, invocation):
+    descriptors = invocation["extra_inputs"]
+    builder = next(row for row in descriptors if row["path"].endswith("/build_curvature_numeric_binding.py"))
+    api = held_module(h, builder, "build_curvature_numeric_binding")
+    fixture_pin = next(row for row in descriptors if row["path"].endswith("/original-differences-01.json"))
+    fixture = json.loads(h["read_pinned"](fixture_pin))
+    fitted = json.loads(h["read_pinned"](request["original_ranker_result"]))
+    auth = json.loads(h["read_pinned"](request["trace_authentication"]))
+    envelope = json.loads(h["read_pinned"](request["original_corpus_envelope"]))
+    arguments = {"differences": fixture["differences"], "difference_artifact": fixture,
+                 "ranker_result": fitted, "trace_authentication": auth, "corpus_envelope": envelope,
+                 "expected_difference_sha256": fixture["difference_vectors_sha256"],
+                 "expected_difference_artifact_sha256": sha(canonical(fixture)),
+                 "expected_ranker_result_sha256": sha(canonical(fitted)),
+                 "expected_authentication_sha256": sha(canonical(auth)),
+                 "expected_corpus_envelope_sha256": sha(canonical(envelope))}
+    if receipt["mode"].startswith("numeric"):
+        certificate = api.build_numeric_curvature_binding(**arguments)
+        h["write"](run / "numeric-binding.json", certificate, compact=True, maximum=65536)
+        receipt["numeric_binding"] = h["pin"](run / "numeric-binding.json")
+        receipt["exact_norm_accumulations"] = 1
+        receipt["coordinate_visits"] = 320
+    else:
+        import pytest
+        tests = next(row for row in descriptors if row["path"].endswith("/test_curvature_numeric_binding.py"))
+        phases = []
+        class Reports:
+            def pytest_runtest_logreport(self, report):
+                phases.append({"nodeid": report.nodeid, "phase": report.when,
+                               "outcome": report.outcome, "seconds": report.duration})
+        code = int(pytest.main(["-q", "-p", "no:cacheprovider", "--noconftest", "-o", "addopts=",
+                               "-c", str(OLD / "source/pytest.ini"), "--basetemp", str(run / "fixtures"),
+                               "--junitxml", str(run / "tests.xml"), tests["path"]], plugins=[Reports()]))
+        h["write"](run / "phases.json", phases)
+        calls = [row for row in phases if row["phase"] == "call"]
+        receipt["pytest_returncode"] = code; receipt["selected_test_count"] = len(calls)
+        assert code == 0 and calls and all(row["outcome"] == "passed" for row in phases)
+    receipt["prior_trace_replay_calls"] = receipt["native_preparation_calls"] = receipt["gradient_evaluations"] = 0
+    receipt["numeric_input_raw_pins"] = [builder, fixture_pin, request["original_ranker_result"], request["trace_authentication"], request["original_corpus_envelope"]]
+
+
+def environment_capture(run, receipt, h, invocation):
+    descriptor = next(row for row in invocation["extra_inputs"] if row["path"].endswith("/build_environment_manifest.py"))
+    source = next(row for row in invocation["extra_inputs"] if row["path"].endswith(".lean"))
+    builder = held_module(h, descriptor, "held_curvature_environment_builder")
+    targets = ["Mathlib.Analysis.Complex.Exponential", "Mathlib.Algebra.Order.BigOperators.Ring.Finset",
+               "Mathlib.Tactic.Linarith", "Mathlib.Analysis.SpecialFunctions.Log.Deriv",
+               "Mathlib.Analysis.Calculus.Deriv.Inv", "Mathlib.Tactic.FieldSimp"]
+    if "std" in receipt["mode"]: targets.append("Std")
+    if "descent" in receipt["mode"]: targets.append("Mathlib.Analysis.Convex.Deriv")
+    manifest = builder.build(mathlib=ROOT / "environment/mathlib4",
+        toolchain=Path("/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0"),
+        expected_mathlib_revision="5ed2965256430c3649e86755f9576b54eca72435",
+        target_imports=targets,
+        source_paths=[Path(source["path"])], output=run / "environment-manifest.json", full_core_fallback=False)
+    receipt["environment_manifest"] = manifest
+    body = json.loads(h["read_pinned"](manifest))
+    receipt["environment_file_count"] = body["external_file_count"]
+    receipt["environment_file_bytes"] = body["external_file_bytes"]
+    receipt["source_import_module_count"] = len(body["source_import_modules"])
+    receipt["dependency_read_scope"] = body["closure_scope"]
+
+
+def pure_tests(run, receipt, h, invocation):
+    descriptors = invocation["extra_inputs"]
+    original_source = [row for row in descriptors if Path(row["path"]).name == "terminal_codebase_intent_ranker_training.py"]
+    assert len(original_source) == 1 and original_source[0]["sha256"] == OBJECTIVE_ARGUMENTS["expected_source_sha256"]
+    h["read_pinned"](original_source[0])
+    os.environ["RANKER_AST_SOURCE"] = original_source[0]["path"]
+    import pytest
+    from ipfs_datasets_py.logic.backends.process import BoundedToolRunner
+    original = BoundedToolRunner.run
+    def forbidden_run(*args, **kwargs):
+        receipt["native_runner_calls_refused"] += 1
+        raise AssertionError("pure controls may not invoke an actual native tool")
+    BoundedToolRunner.run = forbidden_run
+    receipt["native_runner_calls_refused"] = 0
+    receipt["direct_process_calls_refused"] = 0
+    saved_process_calls = {name: getattr(subprocess, name) for name in
+                           ("Popen", "run", "check_call", "check_output", "call")}
+    def forbidden_process(*args, **kwargs):
+        receipt["direct_process_calls_refused"] += 1
+        raise AssertionError("source compiler controls may not spawn processes")
+    for name in saved_process_calls:
+        setattr(subprocess, name, forbidden_process)
+    checker_source = next((row for row in descriptors if row["path"].endswith("/numeric-checker-v4/bounded_analytic_checker.py")), None)
+    if checker_source: os.environ["RANKER_ANALYTIC_CHECKER_SOURCE"] = checker_source["path"]
+    tests = [row["path"] for row in descriptors if Path(row["path"]).name.startswith("test_")]
+    if receipt["mode"].startswith("pure-tests-mappingproxy"):
+        assert len(tests) == 1
+        tests = [tests[0] + "::test_compile_pipeline_accepts_frozen_runner_mappingproxy"]
+    phases = []
+    class Reports:
+        def pytest_runtest_logreport(self, report):
+            phases.append({"nodeid": report.nodeid, "phase": report.when,
+                           "outcome": report.outcome, "seconds": report.duration})
+    try:
+        code = int(pytest.main(["-q", "-p", "no:cacheprovider", "--noconftest", "-o", "addopts=",
+                               "-c", str(OLD / "source/pytest.ini"), "--basetemp", str(run / "fixtures"),
+                               "--junitxml", str(run / "tests.xml"), *tests], plugins=[Reports()]))
+    finally:
+        BoundedToolRunner.run = original
+        for name, function in saved_process_calls.items():
+            setattr(subprocess, name, function)
+    h["write"](run / "phases.json", phases)
+    calls = [row for row in phases if row["phase"] == "call"]
+    receipt["pytest_returncode"] = code; receipt["selected_test_count"] = len(calls)
+    assert code == 0 and calls and all(row["outcome"] == "passed" for row in phases)
+    assert receipt["native_runner_calls_refused"] == 0
+    assert receipt["direct_process_calls_refused"] == 0
+
+
+def check_lean(run, receipt, request, h, invocation, lease):
+    descriptors = invocation["extra_inputs"]
+    descriptor = next(row for row in descriptors if row["path"].endswith("/bounded_analytic_checker.py"))
+    specification = next(row for row in descriptors if row["path"].endswith("-check-specification.json"))
+    spec = json.loads(h["read_pinned"](specification))
+    assert spec["schema"] == "terminal-ranker-curvature-native-check-specification@1"
+    assert spec["source"] in descriptors and spec["environment_manifest"] in descriptors
+    wrapper = held_module(h, descriptor, "held_bounded_analytic_checker")
+    output = run / "lean"; output.mkdir()
+    receipt["native_checker_attempts"] = [{"specification": specification, "native_invocations_observed": 0}]
+    retention = {}
+    if "retention_helper" in spec:
+        assert spec["retention_helper"] in descriptors and spec["python_executable"] in descriptors
+        retention = {"retention_helper_pin": spec["retention_helper"], "python_executable_pin": spec["python_executable"]}
+    check = wrapper.compile_analytic_lean(environment_manifest=Path(spec["environment_manifest"]["path"]),
+        expected_environment_manifest_sha256=spec["environment_manifest"]["sha256"], source_pin=spec["source"],
+        output=output, root_lease=lease, expected_success=spec["expected_success"], theorem_names=tuple(spec["theorem_names"]), **retention)
+    receipt["native_checker_attempts"][0]["native_invocations_observed"] = check["native_invocations"]
+    h["write"](run / "check-result.json", check, compact=True, maximum=65536)
+    receipt["native_proof_checks"] = [h["pin"](run / "check-result.json")]
+    assert check["matches_expectation"] is True, "analytic Lean result failed/inconclusive: " + spec["source"]["path"]
+    if spec["expected_success"]:
+        assert check["status"] == "passed" and all(row.get("complete", True) for row in check["compiled_artifacts"])
+    else:
+        assert check["status"] == "rejected"
+
+
+def compile_source_slices(run, receipt, request, h, invocation):
+    """Lower two pinned scalar leaves; containers and whole objective stay OPEN."""
+    descriptors = invocation["extra_inputs"]
+    producer = next(row for row in descriptors if row["path"] == str(ROOT / "source-v2/objective_scalar_compiler.py"))
+    specification = next(row for row in descriptors if row["path"].endswith("/objective-slices-specification.json"))
+    spec = json.loads(h["read_pinned"](specification))
+    assert set(spec) == {"schema", "producer", "source", "source_bindings", "source_plan", "ir_interface", "arguments", "scope", "source_execution_calls"}
+    assert spec["schema"] == "ranker-objective-scalar-compilation-specification@1"
+    assert spec["producer"] == producer and spec["source"] in descriptors
+    assert spec["arguments"] == OBJECTIVE_ARGUMENTS and spec["source"]["sha256"] == OBJECTIVE_ARGUMENTS["expected_source_sha256"]
+    assert spec["scope"] == "stable_loss_and_sign_split_factor_scalar_leaves_exact_real_only"
+    assert type(spec["source_execution_calls"]) is int and spec["source_execution_calls"] == 0
+    documents = {}
+    for role, (name, expected) in OBJECTIVE_DOCUMENTS.items():
+        row = spec[role]
+        assert row in descriptors and row["path"] == str(OBJECTIVE_PLAN / name) and row["sha256"] == expected
+        documents[role] = json.loads(h["read_pinned"](row))
+    bindings = documents["source_bindings"]
+    assert bindings["schema"] == "ranker-objective-source-ast-bindings@1" and bindings["source"] == spec["source"]
+    assert bindings["objective"]["ast_dump_utf8_sha256"] == OBJECTIVE_ARGUMENTS["expected_objective_ast_sha256"]
+    for role in ("stable_loss", "stable_factor"):
+        assert bindings["selected_scalar_leaves"][role + "_scalar"]["ast_dump_utf8_sha256"] == OBJECTIVE_ARGUMENTS["expected_" + role + "_ast_sha256"]
+    api = held_module(h, producer, "held_objective_scalar_compiler")
+    source_bytes = h["read_pinned"](spec["source"])
+    result = api.compile_objective_scalar_slices(source_bytes, **spec["arguments"])
+    assert result["schema"] == "ranker-objective-scalar-source-slices@1" and result["status"] == "compiled_source_only_kernel_pending"
+    assert type(result["host_AST_parse_calls"]) is int and result["host_AST_parse_calls"] == 1
+    for counter in ("source_function_execution_calls", "native_qualification_jobs", "project_imports"):
+        assert type(result[counter]) is int and result[counter] == 0
+    assert result["source"]["sha256"] == spec["source"]["sha256"] and result["source"]["original_source_pin_matches"] is True
+    assert result["objective_context"]["ast_sha256"] == OBJECTIVE_ARGUMENTS["expected_objective_ast_sha256"]
+    for role in ("stable_loss", "stable_factor"):
+        assert result["source_snippets"][role + "_scalar"]["ast_sha256"] == OBJECTIVE_ARGUMENTS["expected_" + role + "_ast_sha256"]
+    for flag in ("proof_authority", "execution_authority", "completion_authority", "planner_activation", "objective_to_IR_translation_proved", "gradient_to_IR_translation_proved", "Python_Float_semantics_proved", "Python_libm_semantics_proved"):
+        assert result[flag] is False
+    assert result["full_task_satisfaction"] == "unknown"
+    h["write"](run / "objective-slices.json", result)
+    rendered = api.render_generated_lean_with_receipt(result, source_bytes)
+    assert set(rendered) == {"text", "validation_AST_parse_calls", "source_sha256", "source_execution_calls", "native_qualification_jobs", "theorem_qualified"}
+    assert type(rendered["validation_AST_parse_calls"]) is int and rendered["validation_AST_parse_calls"] == 1
+    assert rendered["source_sha256"] == spec["source"]["sha256"]
+    assert type(rendered["source_execution_calls"]) is int and rendered["source_execution_calls"] == 0
+    assert type(rendered["native_qualification_jobs"]) is int and rendered["native_qualification_jobs"] == 0
+    assert rendered["theorem_qualified"] is False
+    generated = rendered["text"]
+    assert type(generated) is str and len(generated.encode()) <= 262144
+    target = run / "GeneratedObjectiveScalarLeaves.lean"
+    with target.open("xb") as stream:
+        stream.write(generated.encode())
+        stream.flush()
+        os.fsync(stream.fileno())
+    receipt["objective_scalar_slices"] = h["pin"](run / "objective-slices.json")
+    receipt["source_AST_bindings"] = spec["source_bindings"]
+    receipt["generated_Lean_candidate"] = h["pin"](target)
+    receipt["source_AST_parse_calls"] = result["host_AST_parse_calls"] + rendered["validation_AST_parse_calls"]
+    receipt["source_function_execution_calls"] = 0
+    receipt["new_native_qualification_jobs"] = 0
+    receipt["host_parser_correctness_theorem_proved"] = False
+
+
+def cache_joins(run, receipt, request, h, invocation):
+    descriptors = invocation["extra_inputs"]
+    producer = next(row for row in descriptors if row["path"].endswith("/build_qualified_cache_joins.py"))
+    specification = next(row for row in descriptors if row["path"].endswith("cache-join-specification.json"))
+    spec = json.loads(h["read_pinned"](specification))
+    assert all(row in descriptors for row in spec["closure_files"])
+    api = held_module(h, producer, "held_qualified_cache_joins")
+    result = api.build_qualified_cache_joins(specification_path=Path(specification["path"]),
+        expected_specification_sha256=specification["sha256"], output_root=run / "joins")
+    h["write"](run / "cache-join-result.json", result)
+    receipt["qualified_cache_join_result"] = h["pin"](run / "cache-join-result.json")
+    receipt["prior_trace_replay_calls"] = receipt["native_runner_calls"] = 0
+
+
+def metadata(run, receipt, request, h, invocation):
+    descriptors = invocation["extra_inputs"]
+    records_pin = next(row for row in descriptors if row["path"].endswith("/metadata-inputs.json"))
+    join_result_pin = next(row for row in descriptors if row["path"].endswith("/cache-join-result.json"))
+    join_closed_pin = next(row for row in descriptors if row["path"].endswith("/closed.json"))
+    joins = json.loads(h["read_pinned"](join_result_pin))
+    join_closed = json.loads(h["read_pinned"](join_closed_pin))
+    assert join_closed["status"] == "passed" and not join_closed["cleanup_errors"]
+    assert join_closed["mode"].startswith("cache-joins-")
+    assert join_closed["qualified_cache_join_result"] == join_result_pin
+    assert records_pin in joins["output_files"]
+    records = json.loads(h["read_pinned"](records_pin))
+    prior = json.loads(h["read_pinned"](request["prior_metadata_inputs"]))
+    assert len(prior) == 29 and sum(map(len, prior.values())) == 4348
+    assert len(records) == 32 and all(records[family] == values for family, values in prior.items())
+    row_count = sum(map(len, records.values()))
+    h["write"](run / "metadata-inputs.json", records)
+    source_snapshot = {"schema": "ranker-real-curvature-native-metadata-source-snapshot@1",
+        "prior_metadata_inputs": request["prior_metadata_inputs"], "cache_join_result": join_result_pin,
+        "cache_join_owned_control": join_closed_pin, "metadata_input": records_pin,
+        "original_ranker_result": request["original_ranker_result"],
+        "unchanged_prior_payload_rows": 4348, "prior_wrapper_row_ids_rebound_to_new_source_snapshot": True,
+        "contracts_payloads_unchanged": True, "canonical_tasks": [], "planner_activation": False,
+        "official_benchmark_score": None, "all32_governing_RPI_exits": "OPEN",
+        "full_task_satisfaction": "unknown", "global_optimizer_convergence": False,
+        "full_source_runtime_equivalence": False, **h["AUTHORITY"]}
+    h["write"](run / "source-snapshot.json", source_snapshot)
+    from benchmarks.agent_supervisor.container_coding.codebase_ir_metadata import hydrate_codebase_ir_metadata
+    receipt["native_metadata_hydration_attempts"] = 1
+    started = time.monotonic()
+    native = hydrate_codebase_ir_metadata(records=records, output=run / "metadata", source_snapshot=source_snapshot)
+    receipt["native_metadata_seconds_including_fresh_restart"] = time.monotonic() - started
+    assert native["row_count"] == row_count and len(native["family_counts"]) == 32
+    assert native["fresh_process_readback"]["verified"] is True
+    for family, values in records.items():
+        exported = [json.loads(line)["payload"] for line in
+            (run / "metadata/exports" / (family + ".jsonl")).read_bytes().splitlines()]
+        assert canonical(exported) == canonical(values), "complete native metadata payload mismatch: " + family
+    readback = {"schema": "ranker-real-curvature-native-metadata-readback@1", "status": "passed",
+        "native_report": native, "source_snapshot": h["pin"](run / "source-snapshot.json"),
+        "fresh_process_readback": native["fresh_process_readback"],
+        "metadata_inputs": h["pin"](run / "metadata-inputs.json"), "cache_join_result": join_result_pin,
+        "fresh_process_readback_verified": True, "all_payload_rows_read_back_exactly": True,
+        "prior4348_payload_rows_preserved_exactly": True, "contracts_payloads_unchanged": True,
+        "metadata_family_count": 32, "metadata_row_count": row_count,
+        "planner_activation": False, "full_task_satisfaction": "unknown",
+        "source_runtime_equivalence_proved": False, "global_optimizer_convergence_proved": False,
+        **h["AUTHORITY"]}
+    h["write"](run / "metadata-readback.json", readback)
+    receipt["native_metadata_readback"] = h["pin"](run / "metadata-readback.json")
+    receipt["prior4348_payload_rows_preserved_exactly"] = True
+    receipt["all_payload_rows_read_back_exactly"] = True
+    receipt["metadata_family_count"] = 32; receipt["metadata_row_count"] = row_count
+
+
+def owned(mode, specification):
+    validate_mode(mode)
+    h = helpers(); pin, read, write = h["pin"], h["read_pinned"], h["write"]
+    invocation = json.loads(Path(specification).read_bytes())
+    assert invocation["mode"] == mode
+    for row in invocation["inputs"]: read(row)
+    request = json.loads(read(invocation["request"]))
+    run = ROOT / "evidence" / mode; run.mkdir()
+    started = time.monotonic(); scheduler = lease = guard = None; cleanup = []
+    receipt = {"schema": "terminal-ranker-curvature-owned-control@1", "mode": mode, "status": "started",
+               "native_preparation_calls": 0, "gradient_evaluations": 0, "optimizer_updates": 0,
+               "fit_calls": 0, "autoencoder_fit_calls": 0, "native_proof_checks": [],
+               "primary_error": None, "cleanup_errors": cleanup, "invocation": pin(specification),
+               "planner_activation": False, "full_task_satisfaction": "unknown", "global_convergence_proved": False,
+               **h["AUTHORITY"]}
+    try:
+        verify(h, request)
+        base = json.loads(read({"path": str(CAP / "generation-manifest.json"), "bytes": 25932539, "sha256": h["BASE_SHA"]}))
+        expected = {row["captured_path"]: {"path": row["captured_path"], "bytes": row["bytes"], "sha256": row["sha256"]} for row in base["files"]}
+        extension = json.loads((OLD / "source-manifest.json").read_bytes())
+        for descriptor in [*extension["extension_manifests"], pin(OLD / "source-manifest.json")]:
+            for row in json.loads(read(descriptor))["files"]:
+                expected[row["captured"]["path"]] = row["captured"]
+        for descriptor in invocation["extra_inputs"]:
+            path = Path(descriptor["path"])
+            if path.suffix == ".py" and path.is_relative_to(ROOT):
+                expected[descriptor["path"]] = descriptor
+        roots = h["ROOTS"]
+        sys.path[:] = [str(ROOT / "source-v2"), *[str(root) for root in roots]] + [value for value in sys.path if value and not Path(value).resolve().is_relative_to(WORKSPACE)]
+        os.environ["PYTHONDONTWRITEBYTECODE"] = "1"; sys.dont_write_bytecode = True
+        os.environ["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
+        os.environ["IPFS_DATASETS_RESOURCE_SCHEDULER_PATH"] = str(run / "resources.json")
+        class SourceSliceGuard(h["Guard"]):
+            def find_spec(self, fullname, path=None, target=None):
+                if (fullname == "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_ranker_training"
+                        or fullname.rsplit(".", 1)[-1] == "terminal_codebase_intent_ranker_training"):
+                    self.blocked.append({"module": fullname, "reason": "ranker execution module outside AST-slice phase"})
+                    raise ImportError("source-slice qualification refuses ranker module import")
+                return super().find_spec(fullname, path, target)
+        guard = SourceSliceGuard(expected); sys.meta_path.insert(0, guard)
+        import benchmarks.agent_supervisor.container_coding as package
+        package.__path__ = [str(root / "benchmarks/agent_supervisor/container_coding") for root in roots[:2]] + list(package.__path__)
+        from ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler import get_global_resource_scheduler, ResourceLane
+        scheduler = get_global_resource_scheduler(); config = scheduler.config
+        assert config.proof_safety_enabled and (config.proof_memory_stall_percent, config.proof_cpu_stall_percent, config.proof_io_stall_percent, config.proof_backoff_seconds) == (2.0, 50.0, 10.0, 2.0)
+        receipt["resource_policy"] = config.persisted_dict(); write(run / "started.json", receipt)
+        lease = scheduler.acquire(ResourceLane.ORCHESTRATION, cpu_slots=1, memory_mb=2048, child_process_slots=4, timeout=30)
+        receipt["root_lease"] = lease.to_dict()
+        if mode.startswith("compile-source-"):
+            compile_source_slices(run, receipt, request, h, invocation)
+        elif mode.startswith("pure-tests-"):
+            pure_tests(run, receipt, h, invocation)
+        elif mode.startswith("lean-"):
+            check_lean(run, receipt, request, h, invocation, lease)
+        else:
+            raise ValueError("objective scalar phase only permits AST compilation, pure tests and Lean")
+        verify(h, request)
+        for row in invocation["inputs"]: assert pin(row["path"]) == row
+        receipt["strict_old_input_count"] = len(request["strict_old_inputs"])
+        receipt["protected_live_source_count"] = len(request["protected_live_sources"])
+        receipt["all_strict_old_and_protected_live_inputs_unchanged"] = True
+        receipt["status"] = "passed"
+    except BaseException as error:
+        receipt["status"] = "failed"; receipt["primary_error"] = {"type": type(error).__name__, "message": str(error), "traceback": traceback.format_exc()}
+    finally:
+        if lease is not None:
+            try: receipt["root_release_returned"] = lease.release()
+            except BaseException as error: cleanup.append({"stage": "release", "error": str(error)})
+        if scheduler is not None:
+            try:
+                state = scheduler.snapshot(); receipt["final_resource_state"] = state
+                assert state["active_lease_count"] == state["waiting_request_count"] == 0
+            except BaseException as error: cleanup.append({"stage": "drain", "error": str(error)})
+        if guard is not None:
+            receipt["selected_owned_imports"] = []
+            for name, before in guard.records.items():
+                try:
+                    after = pin(before["path"])
+                    receipt["selected_owned_imports"].append({"module": name, "before": before, "after": after, "matches": before == after})
+                    if before != after: cleanup.append({"stage": "source_readback", "module": name})
+                except BaseException as error: cleanup.append({"stage": "source_readback", "module": name, "error": str(error)})
+            receipt["blocked_imports"] = guard.blocked
+        if cleanup: receipt["status"] = "failed"
+        receipt["elapsed_seconds_owned"] = time.monotonic() - started; write(run / "closed.json", receipt)
+    print(json.dumps({"status": receipt["status"], "owned_seconds": receipt["elapsed_seconds_owned"], "primary_error": receipt["primary_error"]}))
+    return 0 if receipt["status"] == "passed" else 1
+
+
+def outer(mode, extra):
+    validate_mode(mode)
+    h = helpers(); pin, write = h["pin"], h["write"]
+    spec = ROOT / "preparation" / (mode + "-invocation.json")
+    snapshot = ROOT / ("captured-driver-" + mode + ".py")
+    with snapshot.open("xb") as stream: stream.write(Path(__file__).read_bytes())
+    snapshot.chmod(0o444)
+    inputs = [pin(snapshot), pin(ROOT / "preparation/request-v3.json")]
+    inputs.extend(pin(Path(value).resolve(strict=True)) for value in extra)
+    invocation = {"schema": "terminal-ranker-curvature-frozen-invocation@1", "mode": mode,
+                  "inputs": inputs, "request": inputs[1], "extra_inputs": inputs[2:],
+                  "outer_timeout_seconds": 120, "started_utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    write(spec, invocation)
+    record = {"schema": "terminal-ranker-curvature-outer-control@1", "invocation": pin(spec),
+              "returncode": None, "primary_error": None, "cleanup_errors": []}
+    started = time.monotonic(); child = None
+    try:
+        with (ROOT / "evidence" / (mode + ".stdout.log")).open("xb") as stream:
+            child = subprocess.Popen([sys.executable, "-B", str(snapshot), "owned", mode, str(spec)],
+                                     stdout=stream, stderr=subprocess.STDOUT, cwd=ROOT, start_new_session=True)
+            record["child_pid"] = child.pid; record["returncode"] = child.wait(timeout=120)
+    except BaseException as error:
+        record["primary_error"] = {"type": type(error).__name__, "message": str(error)}
+        if child is not None and child.poll() is None:
+            import signal
+            try:
+                os.killpg(child.pid, signal.SIGTERM)
+                try: child.wait(timeout=5)
+                except subprocess.TimeoutExpired: os.killpg(child.pid, signal.SIGKILL); child.wait(timeout=5)
+            except BaseException as cleanup_error: record["cleanup_errors"].append(str(cleanup_error))
+    finally:
+        record["elapsed_seconds_outer"] = time.monotonic() - started
+        write(ROOT / "evidence" / (mode + "-closed.json"), record)
+    print(json.dumps(record)); return record["returncode"] or (1 if record["primary_error"] or record["cleanup_errors"] else 0)
+
+
+def metadata(run, receipt, request, h, invocation):
+    """Append source-slice proof evidence and two mathematical projection domains."""
+    descriptors = invocation["extra_inputs"]
+    records_pin = next(row for row in descriptors if row["path"].endswith("/metadata-inputs.json"))
+    records = json.loads(h["read_pinned"](records_pin))
+    prior = json.loads(h["read_pinned"](request["prior_metadata_inputs"]))
+    assert len(prior) == len(records) == 32 and set(records) == set(prior)
+    assert sum(map(len, prior.values())) == 4417
+    assert all(canonical(records[family][:len(values)]) == canonical(values) for family, values in prior.items())
+    assert canonical(records["vectors"]) == canonical(prior["vectors"])
+    additions = records["contracts"][len(prior["contracts"]):]
+    assert len(additions) == 2
+    for domain in additions:
+        assert domain["record_kind"] == "mathematical_projection_domain"
+        assert domain["runtime_enforced"] is False
+        assert domain["python_source_contract_proved"] is False
+        assert domain["numeric_backend"] == "exact_real"
+        assert type(domain["dimension"]) is int and domain["dimension"] == 80
+    expected_delta = {"ast": 2, "sources": 3, "contracts": 2,
+                      "ranker_real_curvature_proofs": 2,
+                      "ranker_real_curvature_checks": 3, "kg": 11}
+    assert all(len(records[family]) - len(prior[family]) == expected_delta.get(family, 0)
+               for family in records)
+    row_count = sum(map(len, records.values()))
+    h["write"](run / "metadata-inputs.json", records)
+    source_snapshot = {"schema": "ranker-source-slices-metadata-source-snapshot@1",
+        "prior_metadata_inputs": request["prior_metadata_inputs"], "additive_metadata_inputs": records_pin,
+        "unchanged_prior_payload_rows": 4417, "unchanged_family_limit": 32,
+        "prior_wrapper_row_ids_rebound_to_new_source_snapshot": True,
+        "prior_contract_payloads_preserved_and_vectors_unchanged": True,
+        "new_mathematical_projection_domain_contract_rows": 2,
+        "new_proof_records_are_native_module_evidence_not_strict_cache_admission_entries": True,
+        "source_slice_semantics": "typed dot and update exact-real candidate semantics only; full source and Float equivalence OPEN",
+        "source_interpreter_semantics_proved": False, "global_autoencoder_convergence_proved": False,
+        "canonical_tasks": [], "planner_activation": False, "official_benchmark_score": None,
+        "all32_governing_RPI_exits": "OPEN", "full_task_satisfaction": "unknown", **h["AUTHORITY"]}
+    h["write"](run / "source-snapshot.json", source_snapshot)
+    from benchmarks.agent_supervisor.container_coding.codebase_ir_metadata import hydrate_codebase_ir_metadata
+    receipt["native_metadata_hydration_attempts"] = 1
+    started = time.monotonic()
+    native = hydrate_codebase_ir_metadata(records=records, output=run / "metadata", source_snapshot=source_snapshot)
+    receipt["native_metadata_seconds_including_fresh_restart"] = time.monotonic() - started
+    assert native["row_count"] == row_count and len(native["family_counts"]) == 32
+    assert native["fresh_process_readback"]["verified"] is True
+    for family, values in records.items():
+        exported = [json.loads(line)["payload"] for line in
+            (run / "metadata/exports" / (family + ".jsonl")).read_bytes().splitlines()]
+        assert canonical(exported) == canonical(values), "complete native metadata payload mismatch: " + family
+    readback = {"schema": "ranker-source-slices-native-metadata-readback@1", "status": "passed",
+        "native_report": native, "source_snapshot": h["pin"](run / "source-snapshot.json"),
+        "fresh_process_readback": native["fresh_process_readback"],
+        "metadata_inputs": h["pin"](run / "metadata-inputs.json"),
+        "fresh_process_readback_verified": True, "all_payload_rows_read_back_exactly": True,
+        "prior4417_payload_rows_preserved_exactly_as_prefixes": True,
+        "prior_contract_payloads_preserved_and_vectors_unchanged": True,
+        "new_mathematical_projection_domain_contract_rows": 2,
+        "native_storage_family_cap_unchanged": 32,
+        "metadata_family_count": 32, "metadata_row_count": row_count,
+        "additive_payload_rows": row_count - 4417,
+        "strict_advisory_cache_entries_added_in_this_phase": 0,
+        "planner_activation": False, "full_task_satisfaction": "unknown",
+        "source_runtime_equivalence_proved": False, "global_autoencoder_convergence_proved": False,
+        **h["AUTHORITY"]}
+    h["write"](run / "metadata-readback.json", readback)
+    receipt["native_metadata_readback"] = h["pin"](run / "metadata-readback.json")
+    receipt["prior4417_payload_rows_preserved_exactly_as_prefixes"] = True
+    receipt["all_payload_rows_read_back_exactly"] = True
+    receipt["metadata_family_count"] = 32
+    receipt["metadata_row_count"] = row_count
+
+
+if __name__ == "__main__":
+    if not __debug__:
+        raise RuntimeError("optimized Python would disable qualification gates")
+    if sys.argv[1] == "prepare":
+        raise ValueError("use the separately pinned file-only prepare_request_01.py")
+    elif sys.argv[1] == "owned": raise SystemExit(owned(sys.argv[2], sys.argv[3]))
+    elif sys.argv[1] == "run": raise SystemExit(outer(sys.argv[2], sys.argv[3:]))
+    else: raise ValueError("unknown action")

@@ -1,0 +1,168 @@
+{
+  "frontier": {
+    "ae_equivalence_proved": false,
+    "compiled": false,
+    "full_task_complete": false,
+    "general_ir_equivalence_proved": false,
+    "gradient_source_equivalence_proved": false,
+    "implemented": false,
+    "objective_source_equivalence_proved": false,
+    "proof_authority": false,
+    "python_float_semantics_proved": false,
+    "source_loop_convergence_proved": false,
+    "theorem_qualified": false,
+    "whole_source_execution_proved": false
+  },
+  "future_container_interfaces": {
+    "base_types": [
+      "scalar",
+      "index(n)",
+      "vector(n)",
+      "matrix(n,m)"
+    ],
+    "constructors": [
+      "mapRows(typedDotCall)",
+      "mapScalar(sourceBody, vector)",
+      "zipMap(sourceBody,left,right)",
+      "orderedFsum(vector)",
+      "lengthToReal(vector)",
+      "rangeIndices(m)",
+      "index(vector, Fin m)",
+      "letScalar",
+      "letVector"
+    ],
+    "container_schema": "ranker-objective-container-ir@1 (proposed)",
+    "dot_calls": "Expand only the previously accepted exact _dot syntax/projection, pinning the same function body. No new hand-written dot opcode with unproved source-call binding.",
+    "fixed_domain": "weights : Fin m -> Real; differences : Fin n -> Fin m -> Real; 0 < n; original specialization n=4,m=80",
+    "fsum_semantics": "Ordered left addition fold in exact Real, using Q4 orderedFsum_eq_sum only after structural denotation. CPython compensated fsum semantics remains open.",
+    "index_semantics": "Only proven Fin-index access; ragged or mismatched source lists are refused by the projection-domain adapter. The actual Python _objective does not itself assert this domain.",
+    "literal_L2_binding": "Keep .var \"L2\" in the emitted source syntax. Later exact-original projection supplies originalRealMu, whose Rat is 5764607523034235 / 576460752303423488. Never substitute decimal 1/100 for this binary64 value.",
+    "prefix_program": "margins -> data -> regularizer -> factors -> gradient, as five typed lets in original statement order",
+    "zip_semantics": "Generic source list semantics uses min(length(left), length(right)). Equal-length typed vectors require an explicit shape witness before specialization; no silent padding/default values."
+  },
+  "kernel_interfaces": {
+    "compile": "compileScalar {slots} (scope : String -> Option (Fin slots)) (source : SourceScalar) : Except SliceError (ScalarIR slots)",
+    "error_identity": "Errors contain a stable kind and optional lexical name. AST spans/provenance are host receipt data, never proof premises for arithmetic equality.",
+    "named_evaluation": "evalSourceExact (environment : String -> Except SliceError Real) (source : SourceScalar) : Except SliceError Real",
+    "preservation_obligation": "compileScalar scope source = .ok program -> evalSourceExact (namesFromScope scope environment) source = evalExact program environment",
+    "tree_evaluation_order": "Unary operands first; binary left then right; condition once then only selected branch. Repeated source exp calls remain repeated nodes; arithmetic is not normalized by the host compiler.",
+    "typed_evaluation": "evalExact {slots} (program : ScalarIR slots) (environment : Fin slots -> Real) : Except SliceError Real",
+    "why_preservation_is_conditional_on_acceptance": "Both branches must compile, but only the selected branch evaluates. A refused dead branch can still have a defined source denotation; unconditional compile.bind/eval commutation would be false."
+  },
+  "namespace": "RankerObjectiveIR",
+  "refusal_protocol": {
+    "compile_errors": [
+      "unsupportedNode",
+      "unsupportedCallTarget",
+      "unknownName",
+      "wrongArity",
+      "keywordArguments",
+      "unsupportedComparison",
+      "unsupportedLiteral",
+      "comprehensionFilter",
+      "asyncComprehension",
+      "multipleGenerators",
+      "binderShape",
+      "contextHashMismatch"
+    ],
+    "deny_behavior": "No fallback to eval, ranker import, source execution, Float arithmetic, default coordinates, or unproved whole-function support. Keep failed/unsupported inputs distinct from qualified artifacts.",
+    "evaluation_errors": [
+      "divisionByZero",
+      "logDomain"
+    ],
+    "projection_domain_errors": [
+      "emptyDifferences",
+      "weightsLengthMismatch",
+      "raggedMatrix",
+      "pairLengthMismatch",
+      "indexOutOfBounds",
+      "unboundL2",
+      "unboundDotFunction"
+    ],
+    "required_fields": [
+      "schema",
+      "status=refused",
+      "reason_code",
+      "source_pin",
+      "ast_path",
+      "span"
+    ]
+  },
+  "scalar_operations": [
+    {
+      "domain": "exact Rat-to-Real cast",
+      "operation": "num",
+      "policy": "Source 0.0, 0, 1, 2 used by these leaves are exact. General Float literal conversion requires a separately pinned backend policy; refuse unsupported literal classes."
+    },
+    {
+      "domain": "resolved typed finite slot",
+      "operation": "var",
+      "policy": "Unknown/free name refused; no dictionary fallback or default zero."
+    },
+    {
+      "domain": "all Real operands",
+      "operation": "neg/add/sub/mul/abs/max",
+      "policy": "Retain source tree and left-to-right visitation. NaN/infinity/signed-zero/rounding are outside this backend."
+    },
+    {
+      "domain": "all Real operands",
+      "operation": "exp",
+      "policy": "Real.exp; positivity supplied by Real.exp_pos, not a Python libm theorem."
+    },
+    {
+      "domain": "1 + operand > 0",
+      "operation": "log1p",
+      "policy": "Real.log(1 + operand); otherwise logDomain error. The source stable-loss operand is exp(-abs(z)) and has positive 1+operand."
+    },
+    {
+      "domain": "denominator != 0",
+      "operation": "div",
+      "policy": "Real division when nonzero; otherwise divisionByZero error. Do not exploit Lean total division by zero to accept a Python-invalid input."
+    },
+    {
+      "domain": "all Real conditions; selected branch domain only",
+      "operation": "ifNonneg",
+      "policy": "Exactly 0 <= condition; lazy evaluation. Reject unsupported syntax in either source branch during compilation."
+    }
+  ],
+  "scalar_syntax": {
+    "condition_lowering": "Only an AST Compare(test, [GtE], [Constant(0)]) lowers to ifNonneg. Preserve test/then/else order; do not change the comparison or substitute a sigmoid opcode.",
+    "constructors": [
+      "num(q : Rat)",
+      "var(name : String)",
+      "neg(value)",
+      "abs(value)",
+      "add(left,right)",
+      "sub(left,right)",
+      "mul(left,right)",
+      "div(numerator,denominator)",
+      "max(left,right)",
+      "exp(value)",
+      "log1p(value)",
+      "ifNonneg(condition,thenBranch,elseBranch)",
+      "unsupported(tag : String)"
+    ],
+    "data_generator_element_source_literal": ".add (.max (.num 0) (.neg (.var \"z\"))) (.log1p (.exp (.neg (.abs (.var \"z\")))))",
+    "factors_comprehension_element_source_literal": ".ifNonneg (.var \"z\") (.div (.exp (.neg (.var \"z\"))) (.add (.num 1) (.exp (.neg (.var \"z\"))))) (.div (.num 1) (.add (.num 1) (.exp (.var \"z\"))))",
+    "no_high_level_opcodes": [
+      "objective",
+      "gradient",
+      "stableLoss",
+      "sigmoid",
+      "convergence"
+    ],
+    "proposed_Lean_type": "SourceScalar",
+    "scalar_names_for_first_stage": {
+      "z": 0
+    },
+    "typed_type": "ScalarIR(slots : Nat)",
+    "typed_variables": "var(slot : Fin slots); all other supported constructors preserve the source operator tree"
+  },
+  "schema": "ranker-objective-ir-proposed-interface@1",
+  "source_bindings": {
+    "bytes": 23828,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-bindings.json",
+    "sha256": "5f76eed1e9b025c8e7bb61d23e368a4740b01f329c40472f0c77f2f909bd5c16"
+  },
+  "status": "source_only_design_not_implemented_not_compiled"
+}

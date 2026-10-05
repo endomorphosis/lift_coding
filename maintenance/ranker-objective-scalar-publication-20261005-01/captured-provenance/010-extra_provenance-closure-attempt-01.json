@@ -1,0 +1,19 @@
+{
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T16:45:07.603969+00:00",
+  "execution_authority": false,
+  "exit_code": 1,
+  "failure": "32MiB parsed-body limit incorrectly applied to streaming old input guard hashing",
+  "native_calls": 0,
+  "plan_sha256": "fa59c903bd73e03947d19740583bd60cc37bfe15e2bdc9ff80b473534a860d26",
+  "producer": {
+    "bytes": 19691,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-root-review-20261005-01/close_qualification_01.py",
+    "sha256": "9d68d8c8575f47887bde85bbda88d57db91a563f91b73756bffe30c405ddeec4"
+  },
+  "proof_authority": false,
+  "qualified_review_written": false,
+  "schema": "ranker-objective-scalar-file-closure-attempt@1",
+  "seal_written": false,
+  "status": "failed_before_outputs"
+}

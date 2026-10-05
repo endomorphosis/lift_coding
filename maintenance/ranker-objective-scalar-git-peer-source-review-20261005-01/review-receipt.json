@@ -1,0 +1,30 @@
+{
+  "Git_or_network_calls": 0,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T17:50:43.426488+00:00",
+  "execution_authority": false,
+  "full_task_satisfaction": "unknown",
+  "native_model_metadata_classifier_test_jobs": 0,
+  "outstanding_issues": [],
+  "planner_activation": false,
+  "proof_authority": false,
+  "review_basis": [
+    "Full file read plus source/API review against actual candidate, stage, safe selector, policy, HF ledger and parent-owned combined closer.",
+    "Bounded inert stdlib source; exact read-only Git command census and source/index/tree/parent/gate pins.",
+    "Exact external poststage receipt avoids cyclic staged digests; no source qualification or authority beyond file-only audit."
+  ],
+  "reviewed_source": {
+    "bytes": 41488,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-git-helper-source-20261005-01/independent_final_input_review_01.py",
+    "sha256": "3addab8516ffd5bf4ad0bcd5accfb3f82b33560e507a28b0002d210a673d646f"
+  },
+  "reviewed_source_imports_or_execution": 0,
+  "reviewer": {
+    "bytes": 6768,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-git-peer-source-review-20261005-01/review_source.py",
+    "sha256": "776c69070f54160fe9a34d1538d7f59cba5ecd1f7ddf18585ab2c4e4274730b2"
+  },
+  "schema": "ranker-objective-scalar-independent-poststage-peer-source-review@1",
+  "source_AST_parses": 1,
+  "status": "passed_source_only"
+}

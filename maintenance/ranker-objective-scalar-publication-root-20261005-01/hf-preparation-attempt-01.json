@@ -1,0 +1,39 @@
+{
+  "archive_decoded_member_review": {
+    "bytes": 3274,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-20261005-01/package-review-01.json",
+    "sha256": "99b05a23c48461fb8356a045665e7aa2e83e8c50a920c56bb5af5a9817f8197b"
+  },
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T17:15:45.333942+00:00",
+  "execution_authority": false,
+  "exit_code": 1,
+  "failure": "producer incorrectly selected nonexistent sealed qualification README.md",
+  "frozen_archive_mutations": 0,
+  "hf_plan_created": false,
+  "model_jobs": 0,
+  "native_jobs": 0,
+  "partial_outputs": [
+    {
+      "bytes": 16744,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/HF-README-01.md",
+      "sha256": "5b45e603272ffbad96970cb2a64335dbea08f2e2a7057a10a3fba42a0817c58e"
+    },
+    {
+      "bytes": 88779,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/HF-publication-status-01.json",
+      "sha256": "1d63726fb3abfbaec640e3cb11e540c31b5dea4ebf416397306492f205e2f871"
+    }
+  ],
+  "planner_activation": false,
+  "producer": {
+    "bytes": 16950,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/prepare_hf_plan_01.py",
+    "sha256": "f1babaf4f90463dab973f5d185fce6d0c52c5fb9df6729a878ed878b6c45cfb1"
+  },
+  "proof_authority": false,
+  "remote_mutations": 0,
+  "schema": "ranker-objective-scalar-HF-file-preparation-attempt@1",
+  "sealed_qualification_mutations": 0,
+  "status": "failed_before_frozen_upload_plan"
+}
