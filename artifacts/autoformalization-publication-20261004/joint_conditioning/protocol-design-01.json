@@ -1,0 +1,565 @@
+{
+  "schema": "frozen-source-only-joint-conditioning-protocol-design/v1",
+  "status": "design_only_not_execution_or_runtime_admission",
+  "experiment_id": "authored64-native768-six-condition-frozen-greedy-vs-top16-beam64-joint-spans-v1",
+  "question": "Does the fixed bounded joint span policy reveal differences between raw conditioning, saved PCA/AE reconstructions and zero/disabled/rotation controls when the same retained raw-trained native768 decoder processes the same exact authored sources?",
+  "evidence_bindings": {
+    "baseline_downstream_plan": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-plan-01.json",
+      "bytes": 7996,
+      "sha256": "b62784c7c9857c9c222fc3b8c9cd736b9860fc4507d8e9b78b8ee53ee6c464ab"
+    },
+    "baseline_joint_plan": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-plan-02.json",
+      "bytes": 4264,
+      "sha256": "9387d84166cd82397d0f8432a70fbb1aaa350d80cd2d8a35ebab6fb354fc546c"
+    },
+    "prior_structural_summary": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+      "bytes": 32394,
+      "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42"
+    },
+    "prior_public_ledger": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/results-02/proposal-ledger-01.json",
+      "bytes": 1872374,
+      "sha256": "7b230e4314f3b26cdb33e919a255ebfe3c79dd5d1bbd7b301eb8d1245345d770"
+    },
+    "prior_independent_audit": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/independent-audit-01.json",
+      "bytes": 79821,
+      "sha256": "ab2394fd7d5212606a37b8172e4276c634d4794f1dc238ee4da6e6223b9c0c6e"
+    },
+    "prior_independent_publication_audit": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/independent-publication-audit-01.json",
+      "bytes": 22315,
+      "sha256": "1e51c1e55b22bc9cd66d0d748b47d7d2955736fa6aef986a7a54be42b76a2ef6"
+    },
+    "source_inputs": {
+      "bytes": 43238,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+      "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+    },
+    "cohort": {
+      "bytes": 22785,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+      "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+    },
+    "encoding_report": {
+      "bytes": 18904,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/encoding-report.json",
+      "sha256": "3732a01db278868ebeaa2383e3dd36c6eb3f15285e6fb6fb09422d1cd08a39d8"
+    },
+    "decoder_arms": [
+      {
+        "checkpoint_binding": {
+          "bytes": 3433326,
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-400.json",
+          "sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc"
+        },
+        "endpoints_binding": {
+          "bytes": 8257622,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/endpoints.json",
+          "sha256": "7d94d54ffa47770e2f0a5fda7898d3e7210ed9ccee2431e2f7841db7783d8db0"
+        },
+        "numeric_report_binding": {
+          "bytes": 8901,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/numeric-report.json",
+          "sha256": "2ef120533f20475c41826dda643bcca860f0646806b96694b0492913efbb964c"
+        },
+        "seed": 1729
+      },
+      {
+        "checkpoint_binding": {
+          "bytes": 3432437,
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+          "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+        },
+        "endpoints_binding": {
+          "bytes": 8257739,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/endpoints.json",
+          "sha256": "d1887bedba6662d1252c017c753e4bd7c793b1132aee1acb42c86330cf7fba9e"
+        },
+        "numeric_report_binding": {
+          "bytes": 8903,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/numeric-report.json",
+          "sha256": "9144e816e9846cf8961c2318a75306c773b3bb132cfb98cd7f83e1e4bdfd3483"
+        },
+        "seed": 1730
+      },
+      {
+        "checkpoint_binding": {
+          "bytes": 3432783,
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+          "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+        },
+        "endpoints_binding": {
+          "bytes": 8257900,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/endpoints.json",
+          "sha256": "2f172dcd9a34ceb8284b543517eb141ffd1a949e1c20266ecf5a800474cb0c2b"
+        },
+        "numeric_report_binding": {
+          "bytes": 8896,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/numeric-report.json",
+          "sha256": "89e3689bb5fbe825f0598af5b14a4ee6c782ed1f3846503cb18cd2e2c98c0e8d"
+        },
+        "seed": 1731
+      }
+    ],
+    "prior_seed_evidence": [
+      {
+        "seed": 1729,
+        "six_control_greedy_report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/seed1729-report-01.json",
+          "bytes": 35748,
+          "sha256": "434720545a6fb1ea7a0936d2d1334c9bf5f2f7c5bce3ab1bf68dd22ae7364736"
+        },
+        "greedy_receipts": {
+          "raw_source": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/raw_source-train.json",
+              "bytes": 414916,
+              "sha256": "1564bdcc6ba36c03a356ec399eed792e47079c372e9c28d8dc62e6bc4eaa3575"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/raw_source-development.json",
+              "bytes": 420611,
+              "sha256": "8b633f2765cf7da7bb1c90f2388e477d666d0a29f0d5c490aa80b5c9d3fcdd15"
+            }
+          },
+          "pca_reconstructed": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/pca_reconstructed-train.json",
+              "bytes": 414916,
+              "sha256": "86eb02f21a875a5cc66a91c89198ef1324c00a7a340e6fe83ca51d016b72a99f"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/pca_reconstructed-development.json",
+              "bytes": 420669,
+              "sha256": "5f5d96e43e0b8136006c3aa9691ba240bc9c3bf271b128feae6cda59ea2577f9"
+            }
+          },
+          "new_ae_reconstructed": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/new_ae_reconstructed-train.json",
+              "bytes": 414950,
+              "sha256": "e96f93deb69acc6abb34a834eb4a6228fafa4ccbbe1bc2ac27227c6aeb5a0c03"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/new_ae_reconstructed-development.json",
+              "bytes": 420615,
+              "sha256": "fb56573eb46d85a5ca3a1366f7e96d876abd6df3c1a262773820f28bcd2b27cf"
+            }
+          },
+          "zero_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/zero_raw-train.json",
+              "bytes": 414092,
+              "sha256": "575e9b3e363c50faefb4cfba94c295d9f81980dfb36ee4dfd135d452334eeda9"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/zero_raw-development.json",
+              "bytes": 420175,
+              "sha256": "42ed208192224d02ae6fc126ec71a501be2b9cd9b3f13c88fd9a7d25bb0e82ee"
+            }
+          },
+          "disabled_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/disabled_raw-train.json",
+              "bytes": 414190,
+              "sha256": "4bc1cd6244c823a49152e5dc8e530437a5cc168c6e03cbe23f1f31950995dd25"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/disabled_raw-development.json",
+              "bytes": 424610,
+              "sha256": "b7fd2ba8aad6a577142982f8744e73dac20e876faa27f907c47437a886ab6b14"
+            }
+          },
+          "rotated_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/rotated_raw-train.json",
+              "bytes": 414900,
+              "sha256": "12e3472ab0deca4c733f074bb21813ff5a8c6aa1dc230f455a59a7d9b03c6754"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/rotated_raw-development.json",
+              "bytes": 420673,
+              "sha256": "e7ce2ad1e9c9df3fd143d9dbfb9aa2a867c97e1430da4c6f20abd15f825d5ea9"
+            }
+          }
+        },
+        "raw_joint_report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/seed1729-report-01.json",
+          "bytes": 17094,
+          "sha256": "0ee0bc08e55f1b347fcfd9dbf31ffddb339708458f72692afbb3a05f0c00119e"
+        },
+        "raw_joint_ledger_binding": {
+          "bytes": 1141024,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/worker/proposal-ledger.json",
+          "sha256": "201dd479d8c726b14e6d7161cd55319442b3c7c7fb9e2d3b0c1506e6fb6dc3cf"
+        },
+        "raw_joint_score_bank_binding": {
+          "bytes": 805558,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/worker/score-bank.json",
+          "sha256": "2693078a05e4f6f775a6f314528be2d4fb61754e31636c9d5513209b0a17b86f"
+        }
+      },
+      {
+        "seed": 1730,
+        "six_control_greedy_report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/seed1730-report-01.json",
+          "bytes": 35746,
+          "sha256": "10fd49e3c64ed80ce1e0cb58336aab5b44404163a8d3f8d10a46d500446aa5ed"
+        },
+        "greedy_receipts": {
+          "raw_source": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-train.json",
+              "bytes": 386845,
+              "sha256": "edbd877c11fe1a40744731bd051d93d3f6fe85b36819108bd03f7129afa9763b"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-development.json",
+              "bytes": 377466,
+              "sha256": "db7814973e2b0477abf3dc5846768d643a44d1f6261b100612b6199a207789d5"
+            }
+          },
+          "pca_reconstructed": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/pca_reconstructed-train.json",
+              "bytes": 386857,
+              "sha256": "e9d1b7d161cd8aa21d545aaef379f458c18b786523e163c31dfe13be1b62e239"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/pca_reconstructed-development.json",
+              "bytes": 377474,
+              "sha256": "ebcdd279d2f33c2ea4dfe9535c9e84c9d25773ea99bf1ed8ebe967ded2985f37"
+            }
+          },
+          "new_ae_reconstructed": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/new_ae_reconstructed-train.json",
+              "bytes": 386845,
+              "sha256": "12d3e8e5aada83743a9a290b705b80c4c475e7d682d9f0f9f9fb7ac7076d4f93"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/new_ae_reconstructed-development.json",
+              "bytes": 377466,
+              "sha256": "48b7932eba16673881ed427400eaf55032d09fffb1c62bba79522d7f5034888d"
+            }
+          },
+          "zero_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/zero_raw-train.json",
+              "bytes": 386831,
+              "sha256": "d46f9bb1c793f57c0f7890f2f81c3f72308446a056910674de37ae79d0cb3eee"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/zero_raw-development.json",
+              "bytes": 377446,
+              "sha256": "7223539841ec060c047e16b3db1c37c49f75d99584d0758a03dc4d4dc6f87301"
+            }
+          },
+          "disabled_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/disabled_raw-train.json",
+              "bytes": 388363,
+              "sha256": "89c990269b9d583239f7b3e541fc44b54ac04f3ea7d9e6e7f772fe06f367306a"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/disabled_raw-development.json",
+              "bytes": 377598,
+              "sha256": "0ea9292cdd683c1c339e796393c3bea38bc2030bd2b37261aa3c2a70fb207edb"
+            }
+          },
+          "rotated_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/rotated_raw-train.json",
+              "bytes": 386833,
+              "sha256": "3641d5da2acb4c1057575fd7965094db4017a1579fa0ebf1b61f31321123d791"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/rotated_raw-development.json",
+              "bytes": 377466,
+              "sha256": "93f9a695f152b9da99905dec1d752cf5769803c35c5d920275b7ebc0eee95485"
+            }
+          }
+        },
+        "raw_joint_report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/seed1730-report-01.json",
+          "bytes": 17185,
+          "sha256": "bb5c8c197b6175a6c24c9194fb6c6e58607d7edbc4faa6d8f374572e3630ee8c"
+        },
+        "raw_joint_ledger_binding": {
+          "bytes": 1091731,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/worker/proposal-ledger.json",
+          "sha256": "0cae16c5ea6618d95016eeca44dd46b69de1d72fd0e162a39b81912d1d04f461"
+        },
+        "raw_joint_score_bank_binding": {
+          "bytes": 806928,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/worker/score-bank.json",
+          "sha256": "18701412cec290f0edfb336de560a75933b857799871a13816d08055d7ba8453"
+        }
+      },
+      {
+        "seed": 1731,
+        "six_control_greedy_report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/seed1731-report-01.json",
+          "bytes": 36102,
+          "sha256": "f4e60692b9c09e02c342e4678958621ce9e2cfb7187198be960115c349761a1c"
+        },
+        "greedy_receipts": {
+          "raw_source": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/raw_source-train.json",
+              "bytes": 405354,
+              "sha256": "0dc5bd58783d02963fb3e37ee196c4f53eb934e94944f330ec20eb2866df9922"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/raw_source-development.json",
+              "bytes": 414384,
+              "sha256": "575d5ff59a3704040cc064bf42f441072456eaf2c07f66ca7b44e179c3501d79"
+            }
+          },
+          "pca_reconstructed": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/pca_reconstructed-train.json",
+              "bytes": 405324,
+              "sha256": "563297db4483c8492d62a19620730c9b77f1d6cb5833c48c61218f7337922d0a"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/pca_reconstructed-development.json",
+              "bytes": 414352,
+              "sha256": "ca82b5949a243514206645038e3decd2420ebad2b286af7618fc4b1e65b79391"
+            }
+          },
+          "new_ae_reconstructed": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/new_ae_reconstructed-train.json",
+              "bytes": 405356,
+              "sha256": "7bc67d61989886afb14791bbc196b301c333db0773798b815b05e283810ced55"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/new_ae_reconstructed-development.json",
+              "bytes": 414336,
+              "sha256": "147f20817114cbae934fb41ab37cba0bc0a5314429918e647c2659dd1d94573a"
+            }
+          },
+          "zero_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/zero_raw-train.json",
+              "bytes": 405352,
+              "sha256": "ff63cb588593b8a123dd787900454896a8e15a970d75813bbcb53e91ede601e9"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/zero_raw-development.json",
+              "bytes": 415014,
+              "sha256": "79b6144e09712052902a54ed9e79664629fb72fcdf5b160c34a178b35e198815"
+            }
+          },
+          "disabled_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/disabled_raw-train.json",
+              "bytes": 405482,
+              "sha256": "d01f7b8c55340d5f01981f9d872e60dc6d2c242b82226e1128be974a7d1fec70"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/disabled_raw-development.json",
+              "bytes": 415038,
+              "sha256": "90b434ef546d129f2cee32ade6ab6f392c1867062dccebbff41cf5cc23a6331a"
+            }
+          },
+          "rotated_raw": {
+            "train_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/rotated_raw-train.json",
+              "bytes": 405304,
+              "sha256": "9a0e151ca474236495d8605e72ee883a9b0a60477fba4a20aba27b504573baa8"
+            },
+            "development_binding": {
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/rotated_raw-development.json",
+              "bytes": 414372,
+              "sha256": "ab5a13e6a5a08d458d7f9f2d2c94912f1b5ced7c1846cb51d80c0dd1fdc99152"
+            }
+          }
+        },
+        "raw_joint_report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/seed1731-report-01.json",
+          "bytes": 17248,
+          "sha256": "1f22e2624eb7ee6185630646ecbcb3dafa6693bf481be54b0476fc29f021a5f4"
+        },
+        "raw_joint_ledger_binding": {
+          "bytes": 1132666,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/proposal-ledger.json",
+          "sha256": "aa0b04e06594d0418496f54d779a03f067ed10b72e6214e3ee3795c2667c3252"
+        },
+        "raw_joint_score_bank_binding": {
+          "bytes": 807227,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/score-bank.json",
+          "sha256": "13c792aaf9a4bddb40af2cf30461b31c161ebc5c349ba6e7d3e953b888bf51bc"
+        }
+      }
+    ]
+  },
+  "binding_contract": {
+    "closed_fields": [
+      "path",
+      "bytes",
+      "sha256"
+    ],
+    "bytes": "positive exact integer; booleans rejected",
+    "sha256": "lowercase hexadecimal SHA256",
+    "capture": "Exact selected bytes before parse/compile and preservation recheck after execution; semantic admission is not implied by a hash.",
+    "seal": "SHA256 sorted compact UTF8 JSON excluding only content_sha256, ensure_ascii=false, allow_nan=false."
+  },
+  "scope": {
+    "source_count": 64,
+    "source_role": "previously exposed authored English requests, two ordered reconstruction panels of 32",
+    "seeds": [
+      1729,
+      1730,
+      1731
+    ],
+    "controls": [
+      "raw_source",
+      "pca_reconstructed",
+      "new_ae_reconstructed",
+      "zero_raw",
+      "disabled_raw",
+      "rotated_raw"
+    ],
+    "control_split_batches_per_seed": 12,
+    "source_condition_seed_forwards": 1152,
+    "paired_greedy_joint_policy_outcomes": 2304,
+    "native_model_forwards_per_source_condition_seed": 1,
+    "joint_extra_model_forwards": 0,
+    "native_dimension": 768,
+    "formal_decoder_training": "unchanged retained checkpoint-400 byte biGRU +768-to16-to64 FiLM raw-conditioning decoder",
+    "canonical_output": "one copied deontic rule only",
+    "source_position_policy": "Exact full split-local ordered request panel; rotation is successor within full32 split before preflight; no ID or donor collapse."
+  },
+  "controls": [
+    {
+      "id": "raw_source",
+      "values": "Saved original native768 source embedding",
+      "conditioning_gate": true,
+      "latent_ablation": "none",
+      "producer_contract": "Unchanged original source profile/context contract"
+    },
+    {
+      "id": "pca_reconstructed",
+      "values": "Saved full768 reconstruction from PCA fitted only on authored TRAIN32 embeddings",
+      "conditioning_gate": true,
+      "latent_ablation": "none",
+      "interpretation": "Off-distribution conditioner intervention into raw-trained frozen decoder; PCA acts on source embedding vectors, not source text or formal output."
+    },
+    {
+      "id": "new_ae_reconstructed",
+      "values": "Saved full768 reconstruction from new source-only AE fitted only on authored TRAIN32 embeddings; AE seed coupled to decoder seed",
+      "conditioning_gate": true,
+      "latent_ablation": "none",
+      "interpretation": "Off-distribution conditioner intervention; no matched decoder retraining or independent decoder/AE seed variance."
+    },
+    {
+      "id": "zero_raw",
+      "values": "Wrapper-applied all-zero768 effective vector",
+      "conditioning_gate": true,
+      "latent_ablation": "zero",
+      "interpretation": "Value removal with gate enabled; distinguish from disabling conditioning."
+    },
+    {
+      "id": "disabled_raw",
+      "values": "Original raw transport vector retained in receipt",
+      "conditioning_gate": false,
+      "latent_ablation": "disabled",
+      "interpretation": "Conditioner disabled in unchanged owner gate; hashed transport vector does not imply numerical use."
+    },
+    {
+      "id": "rotated_raw",
+      "values": "Saved raw vectors permuted to full split-local successor donor",
+      "conditioning_gate": true,
+      "latent_ablation": "rotate",
+      "interpretation": "ID/donor/position/effective hash explicitly retained; source remains unchanged."
+    }
+  ],
+  "joint_policy": {
+    "ambiguity_epsilon": 1e-07,
+    "beam_width": 64,
+    "candidates_per_facet": 16,
+    "greedy_fallback": false,
+    "joint_objective": "python_math_fsum_of_float32_pair_scores",
+    "modality_and_presence": "unchanged_native_argmax_and_float32_margin",
+    "optimality_scope": "surviving_beam_only",
+    "optional_facet_removal": false,
+    "span_order": "native_facet_order",
+    "span_pair_scores": "float32_start_plus_end"
+  },
+  "runtime_contract": {
+    "required_previous_greedy_receipts": 36,
+    "greedy_requirement": "Every control/split native wrapper receipt must exactly equal its previous saved receipt including scores and source/vector/control lineage.",
+    "raw_joint_requirement": "All192 raw source-seed joint outcomes including search diagnostics must exactly equal previous raw joint outcomes.",
+    "frozen_state_checks": [
+      "checkpoint/model bytes",
+      "restored Adam state for embedded source parent and retained dimensional decoder",
+      "CPU RNG",
+      "no parameter gradients",
+      "selected source/provider bytes"
+    ],
+    "optimizer_step_attempts": 0,
+    "optimizer_updates": 0,
+    "new_encoder_calls": 0,
+    "new_pca_or_ae_fits": 0,
+    "new_formal_decoder_fits": 0,
+    "formal_targets_read": false,
+    "teacher_forcing": false,
+    "proof_calls": 0,
+    "resource_limits": {
+      "address_space_bytes": 8589934592,
+      "cooperative_rss_kib": 2097152,
+      "cooperative_seconds": 90,
+      "cpu_seconds_hard": 130,
+      "cpu_seconds_soft": 120,
+      "cpu_threads": 1,
+      "device": "cpu",
+      "dtype": "float32",
+      "parent_wall_seconds": 180
+    },
+    "admission": "Fail closed if any prior greedy receipt, raw joint record, finite-head cohort, selected input or frozen state differs; preserve failed attempts without inferring missing counters."
+  },
+  "reporting": {
+    "primary": "Per condition, seed and split: greedy/joint structural proposals and abstentions, preserved/changed/lost greedy proposals, overlap rescues and search pruning totals.",
+    "paired_vs_raw": "Per policy status/reason/canonical IR and union changes; modality/presence/ambiguity, copied intervals and search/pruning changes reported separately.",
+    "score_diagnostics": "Head value and joint objective/margin differences are numerical diagnostics only. All score summaries are explicitly nonsemantic and incomparable as correctness evidence.",
+    "cost_scope": "Current frozen model/head capture plus both span selection policies only; exclude backbone encoding, vector-bank construction, previous representation/decoder fitting and independent audit. No per-control performance gain inferred from worker-wide totals.",
+    "public_ledger": "All1152 source-condition-seed pairs with exact authored source text, IDs/donors/hashes/gate/profile, greedy/joint generated canonical IR and structural diagnostics. Remove only greedy modality_logits; never publish full headbanks, latent arrays, model weights, or supervised formal targets.",
+    "independent_audit": "Independent stdlib replay of all captured native heads, full prior receipt joins, raw joint replay, scalar/public joins and deterministic grammar/transport checks. No new model executions or source-fidelity labels.",
+    "public_ledger_partition": "Three per-seed ledgers, each384 source-condition pairs; summary binds all three, complete union1152. This avoids publication per-file size limit without dropping rows."
+  },
+  "semantic_masks": {
+    "weak_decoder_fit": 0,
+    "strong_semantic_fit": 0,
+    "contrastive_supervision": 0,
+    "proof_supervision": 0,
+    "fidelity_evaluation": 0
+  },
+  "authority": {
+    "accepted": false,
+    "qualified": false,
+    "source_fidelity_established": false,
+    "independent_semantic_review_completed": false,
+    "semantic_accuracy_measured": false,
+    "proof_authority": false
+  },
+  "interpretation_limits": [
+    "Structural proposal coverage and valid copied grammar do not establish law fidelity, actor/modality binding or legal correctness.",
+    "PCA and AE reconstruction values retain full768 width; no lower-width latent capacity, storage/latency gain or matched conditioner training is measured.",
+    "PCA is applied to embeddings of source text; the span decoder still reads the actual source tokens and generates copied-rule IR.",
+    "All64 sources are exposed authored examples with component reuse; TRAIN/DEV label the reconstruction split and do not establish an independent historical decoder holdout.",
+    "Joint selection is approximate: top16 candidates and beam64 may remove feasible/correct/global-best assignments; survivor margin is uncalibrated.",
+    "Presence/modality remain native fixed decisions and may be wrong; no optional facet dropping, greedy fallback or new role-binding policy.",
+    "Single-rule copied spans cannot represent general quantified or multi-rule laws; broad family pilot remains separately gated.",
+    "No8D/384D matched conditioner decoder and no Leanstral embeddings/generation are executed here.",
+    "Selected source/provider entrypoints are not complete binary attestation or an OS sandbox."
+  ],
+  "decision_rule": "Use diagnostic differences to decide which conditioning controls belong in subsequent independently reviewed matched training. Admit no supervised target, correctness conclusion or deployment based solely on this source-only trial.",
+  "next_training_dependency": "Separate reviewed source-bound formal targets and source-symbol/modality/operator binding are required before new decoder fitting; maintain equal decoder budgets when comparing raw/PCA/AE conditioners.",
+  "content_sha256": "990dacbc076851574bc8e94906f5e3bb51771e12e7c21c68b77dfb9e29c576e5"
+}
