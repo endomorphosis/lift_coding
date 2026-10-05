@@ -1,0 +1,98 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "all_nine_fresh_gitlinks_preserved": true,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T15:39:58.594081+00:00",
+  "execution_authority": false,
+  "full_frozen_population": {
+    "all_pins_unchanged_after_both_publications": true,
+    "bytes": 87119741,
+    "files": 336
+  },
+  "full_task_satisfaction": "unknown",
+  "github": {
+    "all_new_remote_blobs_verified": true,
+    "bytes": 11917434,
+    "commit": "a6712457a8616c2d22100b3b0cd950986b891e64",
+    "files": 210,
+    "fresh_main_matches": true,
+    "url": "https://github.com/endomorphosis/lift_coding/commit/a6712457a8616c2d22100b3b0cd950986b891e64"
+  },
+  "huggingface": {
+    "bytes": 15799007,
+    "commit": "fae2e38dc882929edb2bcd2226560f0da3dfcd9e",
+    "files": 57,
+    "fresh_main_matches": true,
+    "prior_immutable_files_preserved": 274,
+    "url": "https://huggingface.co/datasets/Publicus/codebase-ir-proof-index/commit/fae2e38dc882929edb2bcd2226560f0da3dfcd9e"
+  },
+  "native_model_prover_test_or_codec_jobs": 0,
+  "official_benchmark_score": null,
+  "original_checkout_guards": {
+    "child": {
+      "head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "index": {
+        "bytes": 2062937,
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/index",
+        "sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4"
+      }
+    },
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "index": {
+        "bytes": 692628,
+        "path": "/home/barberb/lift_coding/.git/index",
+        "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+      }
+    }
+  },
+  "planner_activation": false,
+  "pre_commit_hf_ledger_preserved_as_historical_receipt": true,
+  "producer": {
+    "bytes": 6956,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/close_combined_publication_01.py",
+    "sha256": "e69a2d743986debc1eea292184b38af3738faeac1097de484b57877306fda702"
+  },
+  "proof_authority": false,
+  "raw_SDK_logs_read": false,
+  "receipts": {
+    "full_frozen_selection": {
+      "bytes": 150701,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/final-selection.json",
+      "sha256": "8f3798da8008ca665e188fe51b45836d8692fca0030f146b90f2c9e9bc2f7264"
+    },
+    "git_independent_input_review": {
+      "bytes": 5540,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-git-final-input-review-20261005-01/review-receipt.json",
+      "sha256": "49b746f058bd1c2c1f870120e054479339b86de72f644f7626800088aa6e0635"
+    },
+    "git_publication": {
+      "bytes": 144276,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-git-publication-20261005-01/closed.json",
+      "sha256": "204b5930e3f52bbf27f6a2337a7c6b6e8cb7be10f978bde7fcf29fe7aa4d01b9"
+    },
+    "hf_ledger_before_git_commit": {
+      "bytes": 4979,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/release-publication-ledger-01.json",
+      "sha256": "6dabae4b018ff8c803099b47609813c1a4c89e4bc9f7d5147984c4e2ca9711c4"
+    },
+    "hf_public_readback": {
+      "bytes": 3467,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-public-readback-01.json",
+      "sha256": "59093213bb8558b7087d9a17a020ddda46b7036e4dee98d1a2dee5581badec66"
+    },
+    "hf_publication": {
+      "bytes": 887,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "25893c408afc28cb6f14ee67a335488271c347b7d7c0a5e2153ca1f6a71edef0"
+    },
+    "qualification": {
+      "bytes": 12381,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/qualified-review-01.json",
+      "sha256": "39c403afd19b5972a28281813c23fdd13eddea1c32fa63747b4dd3258b07e550"
+    }
+  },
+  "remote_mutations": 0,
+  "schema": "ranker-source-slices-combined-publication-closure@1",
+  "status": "PUBLISHED_AND_VERIFIED"
+}

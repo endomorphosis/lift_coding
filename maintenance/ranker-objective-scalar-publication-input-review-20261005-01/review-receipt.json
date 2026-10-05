@@ -1,0 +1,128 @@
+{
+  "Git_or_HTTP_calls": 0,
+  "actual_native_calls": 2,
+  "all32_governing_RPI_exits": "OPEN",
+  "codec_calls": 0,
+  "complete_chunk_object_joins_verified_in_memory": true,
+  "completion_authority": false,
+  "contracts2_unchanged": true,
+  "created_at_utc": "2026-10-05T17:10:43.100613+00:00",
+  "elapsed_seconds": 4.777367587987101,
+  "exclusions": [],
+  "execution_authority": false,
+  "explicit_additions": 55,
+  "file_pins_rehashed": 22808,
+  "fixed_inputs": {
+    "closed": {
+      "bytes": 1204,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-20261005-01/closed-inputs.json",
+      "sha256": "91570733f5d31c7f698fc3738c552f5c93715f951571e4d385a2bcdb9de9e6f8"
+    },
+    "guards": {
+      "bytes": 697810,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/inherited-publication-guards-01.json",
+      "sha256": "0c18cc27a592b519e3efd22dea29176469d7718487b96fb86b1e973c2f8ce396"
+    },
+    "plan": {
+      "bytes": 20970,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-20261005-01/plan.json",
+      "sha256": "ef7badc0c9e2a1cbde415c088135ddc4fd85a096f8f86e11772c0082a287cf87"
+    },
+    "selection": {
+      "bytes": 150848,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-20261005-01/final-selection.json",
+      "sha256": "0b03b81f60dd1f88cf794c1c067927b9fd9e23dfabb698aa7a0db025aec5f69e"
+    }
+  },
+  "full_task_satisfaction": "unknown",
+  "global_autoencoder_convergence_proved": false,
+  "gradient_source_translation_proved": false,
+  "inherited_guard_population": 2393,
+  "metadata_families": 32,
+  "metadata_payloads": 4458,
+  "native_bounds": {
+    "cpu_seconds": 20,
+    "max_input_bytes": 262144,
+    "max_output_bytes": 65536,
+    "max_workspace_bytes": 16777216,
+    "timeout_seconds": 20
+  },
+  "native_checks": [
+    {
+      "check": {
+        "bytes": 22527,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-scalar-01/check-result.json",
+        "sha256": "57ac502ebc37df08ae73b7fec69280b2dcb1a2453895ab573869d826d613bd5e"
+      },
+      "chunks": 29,
+      "complete_objects": 1,
+      "environment_file_count": 20104,
+      "mode": "lean-objective-scalar-01",
+      "query_count_qualified": 5,
+      "source": {
+        "bytes": 13094,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-scalar-01-producer/ObjectiveScalarIR.lean",
+        "sha256": "ae4d1ebec782c2395cc9d2585f40296988fc2ec10cfdab3f946258251c527d71"
+      },
+      "status": "passed"
+    },
+    {
+      "check": {
+        "bytes": 13074,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-generated-01/check-result.json",
+        "sha256": "4bcc8424739067b6e31382f594bd0c17e7e3e800d117bd08b2e38de302177041"
+      },
+      "chunks": 2,
+      "complete_objects": 1,
+      "environment_file_count": 20109,
+      "mode": "lean-objective-generated-01",
+      "query_count_qualified": 9,
+      "source": {
+        "bytes": 4315,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/lean-objective-generated-01-producer/GeneratedObjectiveScalarLeaves.lean",
+        "sha256": "c6ba9dbc3a9ed056d04d004692180efd76db4e8d379681d7c8ff2edb1da8e919"
+      },
+      "status": "passed"
+    }
+  ],
+  "native_or_model_jobs": 0,
+  "new_domain_contract_rows": 0,
+  "objective_source_translation_proved": false,
+  "official_benchmark_score": null,
+  "outstanding_issues": [],
+  "peer_reviews_verified": 11,
+  "planner_activation": false,
+  "prior4440_payload_prefixes_verified": true,
+  "prior_protected_input_files": 2108,
+  "proof_authority": false,
+  "protected_live_source_files": 4,
+  "provenance_clones_verified": 47,
+  "python_Float_semantics_proved": false,
+  "python_source_equivalence_proved": false,
+  "qualified_native_checks": 2,
+  "qualified_theorem_queries": 14,
+  "raw_file_bytes_read_for_digest": 4275318245,
+  "remote_mutations": 0,
+  "reviewer": {
+    "bytes": 35412,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-input-review-20261005-01/review_inputs_01.py",
+    "sha256": "79cc227e1d50242a1f7f828f34a3fb648da4e37c9400eba10f19d3361207c187"
+  },
+  "runtime_contracts_claimed": false,
+  "schema": "ranker-objective-scalar-final-publication-input-review@1",
+  "sealed_regular_bytes_without_seal_self": 78794802,
+  "sealed_regular_files_without_seal_self": 276,
+  "sealed_scope_writes": 0,
+  "selected_aliases": 0,
+  "selected_directories": 27,
+  "selected_regular_bytes": 80792847,
+  "selected_regular_files": 335,
+  "status": "passed_file_only_final_publication_input_review",
+  "target_imports_or_executions": 0,
+  "typed_facts_verified": 657,
+  "vectors375_unchanged": true,
+  "whole_IR_equivalence_proved": false,
+  "whole_before_after_selection_pins_and_stats_verified": true,
+  "whole_candidate_regular_files_with_seal_self": 277,
+  "whole_source_plan_regular_files": 4
+}

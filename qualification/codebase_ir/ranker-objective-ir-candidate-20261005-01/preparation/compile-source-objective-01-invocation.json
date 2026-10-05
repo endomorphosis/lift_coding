@@ -1,0 +1,85 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 33191,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/objective_scalar_compiler.py",
+      "sha256": "a9f4c93423c0f10e432e005ce4f8986e903706cf7ea5b493699633618519d9d9"
+    },
+    {
+      "bytes": 1834,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/objective-slices-specification.json",
+      "sha256": "6aba6218c595db56698ecc8568ff0a710205fb6fd50a215c02944289d47c1d38"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    {
+      "bytes": 23828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-bindings.json",
+      "sha256": "5f76eed1e9b025c8e7bb61d23e368a4740b01f329c40472f0c77f2f909bd5c16"
+    },
+    {
+      "bytes": 22724,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-plan.json",
+      "sha256": "f0e712a1b78ba1a728f5f4a41a8d8f66540017ae86418e23f4bd3c40f6cce690"
+    },
+    {
+      "bytes": 7816,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/ir-interface.json",
+      "sha256": "53a6ba907b4ac64d79f88a97fb9b987a54d0b2efeb930cef798c249d483a6cd0"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 43354,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/captured-driver-compile-source-objective-01.py",
+      "sha256": "42db20ed326046ad9e2bc9666cc67494937dd3321a1b70ddb4f5618b8271d14f"
+    },
+    {
+      "bytes": 561622,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/request-v3.json",
+      "sha256": "8e9038a657519b35e769e911219dbe5ad4bf92833017663f8673d5ef2613fdd3"
+    },
+    {
+      "bytes": 33191,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/objective_scalar_compiler.py",
+      "sha256": "a9f4c93423c0f10e432e005ce4f8986e903706cf7ea5b493699633618519d9d9"
+    },
+    {
+      "bytes": 1834,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/objective-slices-specification.json",
+      "sha256": "6aba6218c595db56698ecc8568ff0a710205fb6fd50a215c02944289d47c1d38"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    {
+      "bytes": 23828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-bindings.json",
+      "sha256": "5f76eed1e9b025c8e7bb61d23e368a4740b01f329c40472f0c77f2f909bd5c16"
+    },
+    {
+      "bytes": 22724,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-plan.json",
+      "sha256": "f0e712a1b78ba1a728f5f4a41a8d8f66540017ae86418e23f4bd3c40f6cce690"
+    },
+    {
+      "bytes": 7816,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/ir-interface.json",
+      "sha256": "53a6ba907b4ac64d79f88a97fb9b987a54d0b2efeb930cef798c249d483a6cd0"
+    }
+  ],
+  "mode": "compile-source-objective-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 561622,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/preparation/request-v3.json",
+    "sha256": "8e9038a657519b35e769e911219dbe5ad4bf92833017663f8673d5ef2613fdd3"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T16:03:04.418726+00:00"
+}

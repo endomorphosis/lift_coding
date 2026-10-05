@@ -1,0 +1,117 @@
+{
+  "admitted_previous_driver": {
+    "bytes": 43354,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/run_objective_controls_01.py",
+    "sha256": "42db20ed326046ad9e2bc9666cc67494937dd3321a1b70ddb4f5618b8271d14f"
+  },
+  "all32_governing_RPI_exits": "OPEN",
+  "all_observed_inputs_rechecked_before_receipt": true,
+  "builder": {
+    "bytes": 49474,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/build_objective_metadata_01.py",
+    "sha256": "45246ee6931195cecc07433384c953aa474cd903ec7c665e6b38f406dc47e1c9"
+  },
+  "closed_plan_keys": [
+    "compile_closed",
+    "compile_outer",
+    "compiler_source",
+    "compiler_tests",
+    "generated_lean",
+    "native_attempts",
+    "original_source",
+    "prior_metadata",
+    "pure_closed",
+    "pure_outer",
+    "pure_phases",
+    "schema",
+    "source_slices",
+    "source_specification"
+  ],
+  "completion_authority": false,
+  "current_actual_expected_delta": {
+    "N": 2,
+    "additions": 18,
+    "contracts_unchanged": 2,
+    "families": 32,
+    "final_rows": 4458,
+    "vectors_unchanged": 375
+  },
+  "dynamic_native_check_delta": "all actual attempts N, including supported inconclusive attempts as unadmitted check records only",
+  "exact_actual_prior_metadata": {
+    "bytes": 8613100,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/metadata-source-slices-01/metadata-inputs.json",
+    "sha256": "99405523f277ab10b3248a1e9ca5c1af1373fbe26c086f35c7f6bd8157e91e35"
+  },
+  "execution_authority": false,
+  "fixed_family_deltas": {
+    "ast": 2,
+    "kg": 9,
+    "ranker_real_curvature_proofs": 2,
+    "sources": 3
+  },
+  "full_task_satisfaction": "unknown",
+  "limits": {
+    "Git_commands_or_mutations": 0,
+    "metadata_output_or_actual_hydration_success_claimed": false,
+    "remote_publication_calls": 0,
+    "scope": "source/AST/JSON review and actual prerequisite receipt joins only",
+    "target_builder_or_runtime_imported_or_executed": 0,
+    "tests_native_model_metadata_classifier_codec_jobs": 0,
+    "writes_outside_authorized_review_namespace": 0
+  },
+  "native_attempt_limit": 12,
+  "official_benchmark_score": null,
+  "outstanding_source_issues": [],
+  "planner_activation": false,
+  "prerequisite_actual_semantic_native_review": {
+    "bytes": 15307,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/semantic-native-review-01.json",
+    "sha256": "830fbc6d21dfb074cf4d491df78a2f4a8f5d911cd2622163856600d9c29d3eca"
+  },
+  "proof_authority": false,
+  "review_source": {
+    "bytes": 17820,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-metadata-source-review-20261005-01/review_source.py",
+    "sha256": "e97384427a2b2c86acdcccdb9103f3545db61fa0cd76d5cca49cfee2d1b30387"
+  },
+  "reviewed_properties": [
+    "Builder uses only stdlib source/JSON/file reads and exactly one AST parse of the fixed original source; no project imports, source evaluation, native jobs or hydration.",
+    "32MiB individual/256MiB aggregate input, 64MiB output, 262144-byte rows, finite JSON/node/depth/pending budgets, duplicate keys/IDs/aliases/conflicting pins and Python optimization refusal remain enforced.",
+    "Canonical old 4440 payload prefixes, all 32 families, vectors375 and contracts2 are preserved exactly; only AST2/source3/proof2/checksN/KG9 are added.",
+    "Actual source compiler/test/slices/emission and original source pins are fixed; compile spec and original source join the admitted compile/pure invocation inputs; counters use exact integers.",
+    "Only actual accepted generic/generated modules create two proof records; supported inconclusive attempts remain unadmitted check history. All actual check paths are indexed once.",
+    "Native specs/owned/outer/invocations/profiles/source augmentation, exact 5/9 theorem query names, standard axioms, unchanged caps and complete chunk/full raw object reconstruction are joined before metadata construction.",
+    "Generated frozen import registry source and ordered full objects join this accepted generic module, with files membership; generic source is the reviewed mathematical candidate hash.",
+    "Metadata runtime matches builder receipt/plan APIs and limit12, verifies accepted bodies before hydration and after full payload readback, uses the same inherited owned controls and captured hydration implementation, and checks every export payload after a fresh process.",
+    "No new domain/runtime contracts or strict-cache admission entries are created; Python/full-objective/gradient/Float/host-parser/AE/task and all authority frontiers stay open."
+  ],
+  "runtime": {
+    "bytes": 49452,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/run_objective_metadata_controls_01.py",
+    "sha256": "6b4a1e7b7d345d7bf27ba74eca5e64f6166deae4d777a5131ad50d0128d48908"
+  },
+  "runtime_functions_AST_unchanged": [
+    "cache_joins",
+    "canonical",
+    "check_lean",
+    "compile_source_slices",
+    "dependencies",
+    "environment_capture",
+    "extract",
+    "held_module",
+    "helpers",
+    "numeric",
+    "outer",
+    "prepare",
+    "pure_tests",
+    "sha",
+    "verify"
+  ],
+  "runtime_functions_changed_only": [
+    "metadata",
+    "owned",
+    "validate_mode"
+  ],
+  "schema": "ranker-objective-scalar-metadata-independent-source-review@1",
+  "status": "passed_source_only"
+}

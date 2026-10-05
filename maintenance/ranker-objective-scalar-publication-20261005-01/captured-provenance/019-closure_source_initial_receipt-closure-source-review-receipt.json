@@ -1,0 +1,41 @@
+{
+  "AST_node_count": 3302,
+  "atomic_whole_snapshot_claimed": false,
+  "closure_producer_executed_by_reviewer": false,
+  "completion_authority": false,
+  "execution_authority": false,
+  "historical_execution_origin_proved": false,
+  "limitations": [
+    "The later actual metadata run and final closure outputs remain subject to their own gates.",
+    "The original Git HEAD checks in the reviewed closure are read-only; this reviewer ran no Git commands.",
+    "Only exact-real scalar constructor/projection results are asserted; host/Python/Float/full objective/gradient/training/global convergence remain open."
+  ],
+  "native_and_metadata_jobs_rerun_by_reviewer": false,
+  "outstanding_source_issues": [],
+  "planner_activation": false,
+  "producer": {
+    "bytes": 10276,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-metadata-source-review-20261005-02/review_source.py",
+    "sha256": "07f681779b8097ef41d2ad851b98465717252633744ed0fa7d4e2259a586a189"
+  },
+  "proof_authority": false,
+  "reviewed_source": {
+    "bytes": 19691,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-root-review-20261005-01/close_qualification_01.py",
+    "sha256": "9d68d8c8575f47887bde85bbda88d57db91a563f91b73756bffe30c405ddeec4"
+  },
+  "reviewed_sources_imported_or_executed": false,
+  "schema": "ranker-objective-scalar-closure-independent-source-review@1",
+  "source_checks": [
+    "same-buffer external closure-plan pin",
+    "same-path repeated-read descriptor refusal",
+    "four distinct required independent review schemas and exact statuses",
+    "fixed two actual accepted native check pins and fourteen genuine queries",
+    "five owned phase/drain and prior2108plus4 guards",
+    "exact built metadata/readback payload and frozen-plan joins",
+    "canonical prior4440 prefixes, vectors375, contracts2 and all32 complete exports",
+    "final file census equals initial census plus known qualified review"
+  ],
+  "status": "passed_source_only",
+  "tests_native_metadata_classifier_codec_git_remote_jobs_run": false
+}

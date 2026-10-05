@@ -1,0 +1,43 @@
+{
+  "actual_closure_execution_or_outputs_reviewed_here": false,
+  "all_other_closure_AST_unchanged": true,
+  "atomic_whole_source_snapshot_claimed": false,
+  "canonical_regular_no_follow_and_FD_path_stat_guards": true,
+  "completion_authority": false,
+  "execution_authority": false,
+  "historical_execution_origin_proved": false,
+  "only_changed_AST_function": "pin",
+  "outstanding_source_issues": [],
+  "planner_activation": false,
+  "prior_source": {
+    "bytes": 19691,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-root-review-20261005-01/close_qualification_01.py",
+    "sha256": "9d68d8c8575f47887bde85bbda88d57db91a563f91b73756bffe30c405ddeec4"
+  },
+  "prior_source_review": {
+    "bytes": 2062,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-metadata-source-review-20261005-02/closure-source-review-receipt.json",
+    "sha256": "66fbb0c99c08b4192c62f519f4993b6aa3ab734e8dd864fa1fe2df37652e7ccc"
+  },
+  "producer": {
+    "bytes": 5851,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-closure-source-review-20261005-02/review_source.py",
+    "sha256": "0a78bc379934b282acbf94db7cfcf2f70dc2c207f44e3b440c50985f3e30142a"
+  },
+  "proof_authority": false,
+  "repeated_HELD_descriptor_conflicts_refused": true,
+  "reviewed_source": {
+    "bytes": 20940,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-root-review-20261005-01/close_qualification_02.py",
+    "sha256": "78c83eec498e1d4432747238f3695b7b7ea40dbc71eedffb22b05b55a2fb7c00"
+  },
+  "runtime_native_tests_metadata_git_remote_jobs_run": false,
+  "schema": "ranker-objective-scalar-closure-patch-independent-source-review@1",
+  "scope": "A descriptor-only streaming hash may cover prior large guard inputs while all parsed document reads retain their original 32 MiB limit. The previous independent closure source gates remain unchanged.",
+  "status": "passed_source_only",
+  "streaming_block_bytes": 1048576,
+  "streaming_guard_file_max_bytes": 268435456,
+  "target_imports_or_execution": false,
+  "unchanged_parsed_body_max_bytes": 33554432,
+  "whole_body_accumulation": false
+}

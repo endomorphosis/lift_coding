@@ -1,0 +1,181 @@
+{
+  "actual_prior_checked_import_receipts": {
+    "RealStableFactor": {
+      "bytes": 9253,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/check-result.json",
+      "sha256": "25adf30103c3d7455df5c7fff9eedf6b9e4ceb1fbd5263e919247ed18588e0f5"
+    },
+    "TypedNumericSlice": {
+      "bytes": 19104,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+      "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+    }
+  },
+  "all32_governing_RPI_exits": "OPEN",
+  "all_observed_inputs_rechecked_before_receipt": true,
+  "candidate_file_count": 9,
+  "candidate_source_bytes": 151531,
+  "candidate_sources": [
+    {
+      "bytes": 13094,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/math/ObjectiveScalarIR.lean",
+      "sha256": "ae4d1ebec782c2395cc9d2585f40296988fc2ec10cfdab3f946258251c527d71"
+    },
+    {
+      "bytes": 7043,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/prepare_request_01.py",
+      "sha256": "55206b57dc89973866f610f2f53032bb539f636db23be43997ae00474cbaeafd"
+    },
+    {
+      "bytes": 43354,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/run_objective_controls_01.py",
+      "sha256": "42db20ed326046ad9e2bc9666cc67494937dd3321a1b70ddb4f5618b8271d14f"
+    },
+    {
+      "bytes": 8719,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/freeze_source_profile_01.py",
+      "sha256": "194acc937634ffef66116be4256e9a1943df0a066333bd6150ff7c3249994323"
+    },
+    {
+      "bytes": 5155,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/freeze_objective_specification_01.py",
+      "sha256": "e19f535e16983e733905f39b93bfbc2503e9e06343474291593de0c93fa39ae5"
+    },
+    {
+      "bytes": 33191,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/objective_scalar_compiler.py",
+      "sha256": "a9f4c93423c0f10e432e005ce4f8986e903706cf7ea5b493699633618519d9d9"
+    },
+    {
+      "bytes": 18118,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/test_typed_slice_compiler.py",
+      "sha256": "c18c4a95bde5da2c780a91bc77e1ad5358ebd30723087e11fb0a8b96448c35c1"
+    },
+    {
+      "bytes": 15471,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-snippets.json",
+      "sha256": "292c8e2ed9bbdad5de5bf8bd7c5a5fbcb79a3ff3dbb2565d363d123f9546b5cc"
+    },
+    {
+      "bytes": 7386,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/candidate-interface.json",
+      "sha256": "60b9ac3e6737db5406dd58be06c010ea07bb455c10ace450493b4fbb449d79ab"
+    }
+  ],
+  "completion_authority": false,
+  "execution_authority": false,
+  "full_task_satisfaction": "unknown",
+  "global_autoencoder_convergence_proved": false,
+  "inherited_driver_functions_AST_unchanged": [
+    "cache_joins",
+    "canonical",
+    "check_lean",
+    "dependencies",
+    "environment_capture",
+    "extract",
+    "held_module",
+    "helpers",
+    "metadata",
+    "numeric",
+    "prepare",
+    "sha",
+    "verify"
+  ],
+  "inherited_driver_functions_changed_only": [
+    "compile_source_slices",
+    "outer",
+    "owned",
+    "pure_tests"
+  ],
+  "official_benchmark_score": null,
+  "original_source": {
+    "bytes": 16391,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "outstanding_source_issues": [],
+  "planned_generated_math_queries": [
+    "emitted_compile_scalar_sound",
+    "emitted_compile_refuses_unsupported",
+    "emitted_compile_refuses_unknown_name",
+    "emitted_stableLoss_compiles",
+    "emitted_stableFactor_compiles",
+    "emitted_stableLoss_eval_success",
+    "emitted_stableFactor_eval_success",
+    "emitted_stableLoss_eq_pairLoss",
+    "emitted_stableFactor_eq_logisticP"
+  ],
+  "planned_root_math_queries": [
+    "compile_scalar_sound",
+    "compile_scalar_refuses_unsupported",
+    "compile_scalar_refuses_unknown_name",
+    "stableLoss_eval_success",
+    "stableFactor_eval_success"
+  ],
+  "planner_activation": false,
+  "planning_documents": {
+    "ir_interface": {
+      "bytes": 7816,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/ir-interface.json",
+      "sha256": "53a6ba907b4ac64d79f88a97fb9b987a54d0b2efeb930cef798c249d483a6cd0"
+    },
+    "source_bindings": {
+      "bytes": 23828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-bindings.json",
+      "sha256": "5f76eed1e9b025c8e7bb61d23e368a4740b01f329c40472f0c77f2f909bd5c16"
+    },
+    "source_plan": {
+      "bytes": 22724,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-plan.json",
+      "sha256": "f0e712a1b78ba1a728f5f4a41a8d8f66540017ae86418e23f4bd3c40f6cce690"
+    }
+  },
+  "prior_owned_driver": {
+    "bytes": 38817,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/run_source_semantics_controls_v2.py",
+    "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+  },
+  "prior_profile_freezer": {
+    "bytes": 6693,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/freeze_source_profile_01.py",
+    "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+  },
+  "proof_authority": false,
+  "review_source": {
+    "bytes": 25668,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-ir-candidate-source-review-20261005-01/review_source.py",
+    "sha256": "fa1cfdf9f27072f88040e3a3bd6609181ad6d91f3dcf3322719cbf37682cc67b"
+  },
+  "schema": "ranker-objective-scalar-independent-source-review@1",
+  "scope": "source/AST/JSON inspection and pin joins only; qualification pending",
+  "source_only_review_limits": {
+    "Lean_candidate_native_qualified": false,
+    "Python_Float_libm_fsum_semantics_proved": false,
+    "full_objective_gradient_optimizer_source_equivalence_proved": false,
+    "git_commands_or_mutations": 0,
+    "host_parser_correctness_theorem_proved": false,
+    "native_model_classifier_codec_jobs": 0,
+    "remote_calls": 0,
+    "target_helpers_or_compiler_or_renderer_executed": 0,
+    "target_modules_imported": 0,
+    "tests_imported_collected_or_run": 0,
+    "writes_outside_authorized_review_namespace": 0
+  },
+  "source_review_findings": [
+    "All nine candidate files and complete original/P6 context digests are bound to stable same-read bytes.",
+    "Generic scalar AST/IR uses closed keys, finite lexical slots, exact rational literals, 262144-byte source/4096-module-node/128-scalar-node/depth32/256-bit/65536-receipt caps; incremental pending-node guards precede allocation.",
+    "Builtin/math lexical shadowing and non-load targets are refused; both conditional syntax branches are checked even if a branch would not evaluate.",
+    "Mathematical compiler soundness is restricted to accepted programs; div/log1p errors and lazy branch evaluation are retained. This is a source inspection, not a Lean proof check.",
+    "Actual stable-loss/sign-split operator trees and exact binary64 L2 ratio are preserved; original bridges require whole receipt equality after same-buffer canonical source re-extraction.",
+    "Driver/spec/frontend agree on four hash arguments and six-field renderer API; parse/zero-execution counters use exact non-Boolean integers.",
+    "Owned driver only admits numbered objective compile-source, pure-tests and lean modes of at most 96 characters, and blocks bare/alternate/full ranker imports; inherited checker/verify/lease/drain helpers and native 20s/65536-byte/16MiB/pressure limits are unchanged.",
+    "Profile freezer pins actual accepted RealStableFactor/TypedNumericSlice checks, preserves complete local artifacts and old retention caps, and requires external source and optional ObjectiveScalarIR check digests.",
+    "Pure source controls include changed pins/query trees, eager dead-branch refusals, malformed and valid changed gradient shapes, cyclic/wide AST, lexical/non-load calls, numeric/hash pre-regex caps, bounded caller receipts, and honest projection frontiers."
+  ],
+  "static_test_population": {
+    "actual_collection_or_execution": 0,
+    "functions": 30,
+    "parameterized_cases": 98
+  },
+  "status": "passed_source_only"
+}

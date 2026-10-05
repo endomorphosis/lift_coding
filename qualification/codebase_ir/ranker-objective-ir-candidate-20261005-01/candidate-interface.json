@@ -1,0 +1,163 @@
+{
+  "current_work": {
+    "Lean_jobs": 0,
+    "host_compiler_imported_or_executed": false,
+    "metadata_jobs": 0,
+    "model_training_or_gradient_calls": 0,
+    "old_sealed_directory_edits": 0,
+    "only_source_inspection_and_new_candidate_files_written": true,
+    "publication_calls": 0,
+    "ranker_imports_or_execution": 0,
+    "tests_imported_collected_or_run": false
+  },
+  "frontier_flags": {
+    "Python_Float_semantics_proved": false,
+    "all32_governing_RPI_exits": "OPEN",
+    "compiled": false,
+    "completion_authority": false,
+    "execution_authority": false,
+    "feature_preparation_to_IR_translation_proved": false,
+    "full_task_satisfaction": "unknown",
+    "full_training_loop_to_IR_translation_proved": false,
+    "global_autoencoder_convergence_proved": false,
+    "gradient_source_equivalence_proved": false,
+    "objective_source_equivalence_proved": false,
+    "optimizer_source_convergence_proved": false,
+    "planner_activation": false,
+    "proof_authority": false,
+    "python_ranker_source_equivalence_proved": false,
+    "theorem_qualified": false,
+    "whole_codebase_IR_semantic_preservation_proved": false
+  },
+  "host_API": {
+    "compiler": "compile_objective_scalar_slices(source_bytes, expected_source_sha256=SOURCE_SHA256, expected_objective_ast_sha256=OBJECTIVE_AST_SHA256, expected_stable_loss_ast_sha256=None, expected_stable_factor_ast_sha256=None)",
+    "compiler_AST_parses_per_successful_call": 1,
+    "compiler_schema": "ranker-objective-scalar-source-slices@1",
+    "compiler_status": "compiled_source_only_kernel_pending",
+    "generated_basename": "GeneratedObjectiveScalarLeaves.lean",
+    "generated_namespace": "RankerObjectiveIRGenerated",
+    "renderer": "render_generated_lean_with_receipt(compilation, source_bytes)",
+    "renderer_AST_validation_parses_per_successful_call": 1,
+    "renderer_closed_fields": [
+      "text",
+      "validation_AST_parse_calls",
+      "source_sha256",
+      "source_execution_calls",
+      "native_qualification_jobs",
+      "theorem_qualified"
+    ],
+    "renderer_source_execution_calls": 0,
+    "text_wrapper": "render_generated_lean(compilation, source_bytes) -> str"
+  },
+  "important_design_choices": [
+    "No high-level objective/gradient/loss/sigmoid opcode: retain generic operation trees from actual AST",
+    "Float constants use exact binary64 integer ratio; 0.01 is not substituted by rational1/100",
+    "Frontend refuses a bare >= comparison as scalar; gradient indexing/container context is recorded but unsupported",
+    "Both IfExp branches are validated eagerly; malformed dead branch cannot be accepted",
+    "Domain errors belong to partial exact-real semantics, not a blanket promise that every supported expression succeeds",
+    "Emit original mathematical bridge only for exact source/objective/leaf context and same-buffer re-extraction; changed queries retain changed trees and cannot inherit original bridge",
+    "Host AST/source hash/renderer binding is not proved by Lean; Python name/global resolution and binary64/libm remain frontiers",
+    "Before regex/JSON serialization, bound strings, depth, pending nodes and aggregate content; no default values or fallback execution"
+  ],
+  "kernel_interface": {
+    "compile": "compileScalar(scope)(source) : Except SliceError (ScalarIR slots)",
+    "domain": "div denominator nonzero, log1p 1+argument>0; accepted syntax alone need not evaluate successfully",
+    "errors": [
+      "unsupportedNode(tag)",
+      "unknownName(name)",
+      "divisionByZero",
+      "logDomain"
+    ],
+    "imports": [
+      "RealStableFactor",
+      "TypedNumericSlice"
+    ],
+    "named_eval": "evalSourceExact(namesFromScope(scope,environment))(source) : Except SliceError Real",
+    "namespace": "RankerObjectiveIR",
+    "operators": [
+      "num",
+      "var",
+      "neg",
+      "abs",
+      "add",
+      "sub",
+      "mul",
+      "div",
+      "max",
+      "exp",
+      "log1p",
+      "ifNonneg"
+    ],
+    "preservation": "Accepted-program soundness only; compilation validates both syntax branches, exact evaluation selects one branch",
+    "typed_eval": "evalExact(program)(environment) : Except SliceError Real"
+  },
+  "owned_directory": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01",
+  "planned_queries": {
+    "generated_module": [
+      "emitted_compile_scalar_sound",
+      "emitted_compile_refuses_unsupported",
+      "emitted_compile_refuses_unknown_name",
+      "emitted_stableLoss_compiles",
+      "emitted_stableFactor_compiles",
+      "emitted_stableLoss_eval_success",
+      "emitted_stableFactor_eval_success",
+      "emitted_stableLoss_eq_pairLoss",
+      "emitted_stableFactor_eq_logisticP"
+    ],
+    "native_checks_run": 0,
+    "qualified_queries": 0,
+    "root_kernel_module": [
+      "compile_scalar_sound",
+      "compile_scalar_refuses_unsupported",
+      "compile_scalar_refuses_unknown_name",
+      "stableLoss_eval_success",
+      "stableFactor_eval_success"
+    ]
+  },
+  "prior_Q4_compiler_read_only_baseline": {
+    "bytes": 28870,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/typed_slice_compiler.py",
+    "sha256": "6c38d05eff154e058bb31b1943bfe32b713b3e403fe778292353e738765ee119"
+  },
+  "prior_Q4_typed_math_read_only_baseline": {
+    "bytes": 11197,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/math-v2/TypedNumericSlice.lean",
+    "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+  },
+  "schema": "ranker-objective-scalar-candidate-interface@1",
+  "source_files": [
+    {
+      "bytes": 33191,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/objective_scalar_compiler.py",
+      "sha256": "a9f4c93423c0f10e432e005ce4f8986e903706cf7ea5b493699633618519d9d9"
+    },
+    {
+      "bytes": 18118,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-v2/test_typed_slice_compiler.py",
+      "sha256": "c18c4a95bde5da2c780a91bc77e1ad5358ebd30723087e11fb0a8b96448c35c1"
+    },
+    {
+      "bytes": 13094,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/math/ObjectiveScalarIR.lean",
+      "sha256": "ae4d1ebec782c2395cc9d2585f40296988fc2ec10cfdab3f946258251c527d71"
+    },
+    {
+      "bytes": 15471,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/source-snippets.json",
+      "sha256": "292c8e2ed9bbdad5de5bf8bd7c5a5fbcb79a3ff3dbb2565d363d123f9546b5cc"
+    }
+  ],
+  "source_plan": {
+    "bytes": 22724,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-plan.json",
+    "sha256": "f0e712a1b78ba1a728f5f4a41a8d8f66540017ae86418e23f4bd3c40f6cce690"
+  },
+  "status": "unexecuted_uncompiled_unqualified_source_candidate",
+  "test_population": {
+    "actual_pytest_collection_or_execution_count": 0,
+    "fixture": "RANKER_AST_SOURCE supplied by owned harness, fallback pinned original path; byte length/hash checked before extraction",
+    "source_declared_functions": 30,
+    "source_declared_parameterized_cases": 98,
+    "status": "source_AST_count_only_not_a_test_result"
+  }
+}

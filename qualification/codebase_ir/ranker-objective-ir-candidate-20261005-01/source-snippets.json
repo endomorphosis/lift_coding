@@ -1,0 +1,187 @@
+{
+  "Python_Float_semantics_proved": false,
+  "gradient_source_equivalence_proved": false,
+  "host_compiler_imports": 0,
+  "native_jobs": 0,
+  "objective_context": {
+    "ast_dump": "FunctionDef(name='_objective', args=arguments(posonlyargs=[], args=[arg(arg='weights'), arg(arg='differences')], kwonlyargs=[], kw_defaults=[], defaults=[]), body=[Assign(targets=[Name(id='margins', ctx=Store())], value=ListComp(elt=Call(func=Name(id='_dot', ctx=Load()), args=[Name(id='weights', ctx=Load()), Name(id='row', ctx=Load())], keywords=[]), generators=[comprehension(target=Name(id='row', ctx=Store()), iter=Name(id='differences', ctx=Load()), ifs=[], is_async=0)])), Assign(targets=[Name(id='data', ctx=Store())], value=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='fsum', ctx=Load()), args=[GeneratorExp(elt=BinOp(left=Call(func=Name(id='max', ctx=Load()), args=[Constant(value=0.0), UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[]), op=Add(), right=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='log1p', ctx=Load()), args=[Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='z', ctx=Load())], keywords=[]))], keywords=[])], keywords=[])), generators=[comprehension(target=Name(id='z', ctx=Store()), iter=Name(id='margins', ctx=Load()), ifs=[], is_async=0)])], keywords=[]), op=Div(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='margins', ctx=Load())], keywords=[]))), Assign(targets=[Name(id='regularizer', ctx=Store())], value=BinOp(left=BinOp(left=Name(id='L2', ctx=Load()), op=Mult(), right=Call(func=Name(id='_dot', ctx=Load()), args=[Name(id='weights', ctx=Load()), Name(id='weights', ctx=Load())], keywords=[])), op=Div(), right=Constant(value=2))), Assign(targets=[Name(id='factors', ctx=Store())], value=ListComp(elt=IfExp(test=Compare(left=Name(id='z', ctx=Load()), ops=[GtE()], comparators=[Constant(value=0)]), body=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[]), op=Div(), right=BinOp(left=Constant(value=1), op=Add(), right=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[]))), orelse=BinOp(left=Constant(value=1), op=Div(), right=BinOp(left=Constant(value=1), op=Add(), right=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[Name(id='z', ctx=Load())], keywords=[])))), generators=[comprehension(target=Name(id='z', ctx=Store()), iter=Name(id='margins', ctx=Load()), ifs=[], is_async=0)])), Assign(targets=[Name(id='gradient', ctx=Store())], value=ListComp(elt=BinOp(left=BinOp(left=Name(id='L2', ctx=Load()), op=Mult(), right=Subscript(value=Name(id='weights', ctx=Load()), slice=Name(id='i', ctx=Load()), ctx=Load())), op=Sub(), right=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='fsum', ctx=Load()), args=[GeneratorExp(elt=BinOp(left=Name(id='f', ctx=Load()), op=Mult(), right=Subscript(value=Name(id='row', ctx=Load()), slice=Name(id='i', ctx=Load()), ctx=Load())), generators=[comprehension(target=Tuple(elts=[Name(id='f', ctx=Store()), Name(id='row', ctx=Store())], ctx=Store()), iter=Call(func=Name(id='zip', ctx=Load()), args=[Name(id='factors', ctx=Load()), Name(id='differences', ctx=Load())], keywords=[]), ifs=[], is_async=0)])], keywords=[]), op=Div(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='differences', ctx=Load())], keywords=[]))), generators=[comprehension(target=Name(id='i', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Call(func=Name(id='len', ctx=Load()), args=[Name(id='weights', ctx=Load())], keywords=[])], keywords=[]), ifs=[], is_async=0)])), Expr(value=Call(func=Name(id='_need', ctx=Load()), args=[Call(func=Name(id='all', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='isfinite', ctx=Load()), args=[Name(id='x', ctx=Load())], keywords=[]), generators=[comprehension(target=Name(id='x', ctx=Store()), iter=List(elts=[Name(id='data', ctx=Load()), Name(id='regularizer', ctx=Load()), Starred(value=Name(id='gradient', ctx=Load()), ctx=Load())], ctx=Load()), ifs=[], is_async=0)])], keywords=[]), Constant(value='nonfinite scratch-head objective or gradient')], keywords=[])), Return(value=Tuple(elts=[Dict(keys=[Constant(value='objective'), Constant(value='pair_logistic_loss'), Constant(value='L2_penalty'), Constant(value='gradient_norm')], values=[BinOp(left=Name(id='data', ctx=Load()), op=Add(), right=Name(id='regularizer', ctx=Load())), Name(id='data', ctx=Load()), Name(id='regularizer', ctx=Load()), Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='sqrt', ctx=Load()), args=[Call(func=Name(id='_dot', ctx=Load()), args=[Name(id='gradient', ctx=Load()), Name(id='gradient', ctx=Load())], keywords=[])], keywords=[])]), Name(id='gradient', ctx=Load())], ctx=Load()))], decorator_list=[], type_params=[])",
+    "ast_path": "module.body[24]",
+    "ast_sha256": "129da31ae6856167478c7f030a059d0f477b8362bb8fa478221eac7bac6031c2",
+    "node_kind": "FunctionDef",
+    "role": "whole_function_context_only",
+    "source_segment": "def _objective(weights, differences):\n    margins = [_dot(weights, row) for row in differences]\n    data = math.fsum(max(0.0, -z) + math.log1p(math.exp(-abs(z))) for z in margins) / len(margins)\n    regularizer = L2 * _dot(weights, weights) / 2\n    factors = [math.exp(-z) / (1 + math.exp(-z)) if z >= 0 else 1 / (1 + math.exp(z))\n               for z in margins]\n    gradient = [L2 * weights[i] - math.fsum(f * row[i] for f, row in zip(factors, differences))\n                / len(differences) for i in range(len(weights))]\n    _need(all(math.isfinite(x) for x in [data, regularizer, *gradient]),\n          \"nonfinite scratch-head objective or gradient\")\n    return {\"objective\": data + regularizer, \"pair_logistic_loss\": data,\n            \"L2_penalty\": regularizer, \"gradient_norm\": math.sqrt(_dot(gradient, gradient))}, gradient",
+    "source_segment_utf8_bytes": 831,
+    "source_segment_utf8_sha256": "1036faf2d13d39ffc7bb86f7a8b39fad320cd3ad1ced3864d13eaa02498f56c9",
+    "span": [
+      123,
+      0,
+      134,
+      102
+    ]
+  },
+  "objective_source_equivalence_proved": false,
+  "proof_authority": false,
+  "schema": "ranker-objective-candidate-source-snippet-inventory@1",
+  "snippets": {
+    "factor_condition": {
+      "ast_dump": "Compare(left=Name(id='z', ctx=Load()), ops=[GtE()], comparators=[Constant(value=0)])",
+      "ast_path": "module.body[24].body[3].value.elt.test",
+      "ast_sha256": "bb331b1f0d76d6bd12bf40bdaba0fe6d558c037f89eba6f60368116b5a7ae0ac",
+      "node_kind": "Compare",
+      "role": "comparison_context_only_not_scalar",
+      "source_segment": "z >= 0",
+      "source_segment_utf8_bytes": 6,
+      "source_segment_utf8_sha256": "e19874b5cd90d2ce40aa17d87ea525287d159d77bd650fb5d272fe49b043538b",
+      "span": [
+        127,
+        52,
+        127,
+        58
+      ]
+    },
+    "factor_else_branch": {
+      "ast_dump": "BinOp(left=Constant(value=1), op=Div(), right=BinOp(left=Constant(value=1), op=Add(), right=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[Name(id='z', ctx=Load())], keywords=[])))",
+      "ast_path": "module.body[24].body[3].value.elt.orelse",
+      "ast_sha256": "66b715001c680603a02119431ae80ddefcda3ee0a09edabf3aa93971baab297f",
+      "node_kind": "BinOp",
+      "role": "proposed_scalar_subexpression",
+      "source_segment": "1 / (1 + math.exp(z))",
+      "source_segment_utf8_bytes": 21,
+      "source_segment_utf8_sha256": "e0fbdd70fb39ba8e0300ca42ba696d50dd689d44cabce7d99da995e502546e89",
+      "span": [
+        127,
+        64,
+        127,
+        85
+      ]
+    },
+    "factor_then_branch": {
+      "ast_dump": "BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[]), op=Div(), right=BinOp(left=Constant(value=1), op=Add(), right=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[])))",
+      "ast_path": "module.body[24].body[3].value.elt.body",
+      "ast_sha256": "cc8be58e2aea7f85de6683669665eed3a052693128f4550fe4b175516f17e9fa",
+      "node_kind": "BinOp",
+      "role": "proposed_scalar_subexpression",
+      "source_segment": "math.exp(-z) / (1 + math.exp(-z))",
+      "source_segment_utf8_bytes": 33,
+      "source_segment_utf8_sha256": "99278d16040a65cf0d0a25435bd098ce609d5047edb2d0ea3a0a93dbc39711db",
+      "span": [
+        127,
+        15,
+        127,
+        48
+      ]
+    },
+    "gradient_coordinate": {
+      "ast_dump": "BinOp(left=BinOp(left=Name(id='L2', ctx=Load()), op=Mult(), right=Subscript(value=Name(id='weights', ctx=Load()), slice=Name(id='i', ctx=Load()), ctx=Load())), op=Sub(), right=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='fsum', ctx=Load()), args=[GeneratorExp(elt=BinOp(left=Name(id='f', ctx=Load()), op=Mult(), right=Subscript(value=Name(id='row', ctx=Load()), slice=Name(id='i', ctx=Load()), ctx=Load())), generators=[comprehension(target=Tuple(elts=[Name(id='f', ctx=Store()), Name(id='row', ctx=Store())], ctx=Store()), iter=Call(func=Name(id='zip', ctx=Load()), args=[Name(id='factors', ctx=Load()), Name(id='differences', ctx=Load())], keywords=[]), ifs=[], is_async=0)])], keywords=[]), op=Div(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='differences', ctx=Load())], keywords=[])))",
+      "ast_path": "module.body[24].body[4].value.elt",
+      "ast_sha256": "baa0b04a63f7ceefdcc9e57577014d376e78e4f2e3a5740d8e2a9f8062ad33ff",
+      "node_kind": "BinOp",
+      "role": "unsupported_context_only_indexing_and_containers_open",
+      "source_segment": "L2 * weights[i] - math.fsum(f * row[i] for f, row in zip(factors, differences))\n                / len(differences)",
+      "source_segment_utf8_bytes": 114,
+      "source_segment_utf8_sha256": "2ce82825dfbe0952541221d108ce0ec2b742fbc369f83d6b36e04c0d587ff6cf",
+      "span": [
+        129,
+        16,
+        130,
+        34
+      ]
+    },
+    "log1p_argument": {
+      "ast_dump": "Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='z', ctx=Load())], keywords=[]))], keywords=[])",
+      "ast_path": "module.body[24].body[1].value.left.args[0].elt.right.args[0]",
+      "ast_sha256": "a0addb653542cb732461a44516af56f1ca0891774db5a2d4d4661b376aabf8a9",
+      "node_kind": "Call",
+      "role": "proposed_scalar_subexpression",
+      "source_segment": "math.exp(-abs(z))",
+      "source_segment_utf8_bytes": 17,
+      "source_segment_utf8_sha256": "6010c8a861228729ec5bddc7eac5cc7c129296ee0cba280f5ef5c34287cbb5d9",
+      "span": [
+        125,
+        47,
+        125,
+        64
+      ]
+    },
+    "loss_max_subexpression": {
+      "ast_dump": "Call(func=Name(id='max', ctx=Load()), args=[Constant(value=0.0), UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[])",
+      "ast_path": "module.body[24].body[1].value.left.args[0].elt.left",
+      "ast_sha256": "921e0ac28ee04571b8704b75b0752917fc5da2f13f82a6222294947d63633192",
+      "node_kind": "Call",
+      "role": "proposed_scalar_subexpression",
+      "source_segment": "max(0.0, -z)",
+      "source_segment_utf8_bytes": 12,
+      "source_segment_utf8_sha256": "fc2f6649b3819af9075aa638474643f29832b5a90a1b7416053ea5ddef396253",
+      "span": [
+        125,
+        21,
+        125,
+        33
+      ]
+    },
+    "source_L2_literal": {
+      "ast_dump": "Constant(value=0.01)",
+      "ast_path": "module.body[11].value",
+      "ast_sha256": "8530690a006323b2d55a0633fe64f6581a15bcdf80eee5733c6547397e763ef2",
+      "node_kind": "Constant",
+      "role": "exact_source_literal_binding_only",
+      "source_segment": "0.01",
+      "source_segment_utf8_bytes": 4,
+      "source_segment_utf8_sha256": "312b95ee5a344d2f7a16ad817ff70788980da6e30b9bb04b651d53847abd476f",
+      "span": [
+        21,
+        5,
+        21,
+        9
+      ]
+    },
+    "stable_factor_scalar": {
+      "ast_dump": "IfExp(test=Compare(left=Name(id='z', ctx=Load()), ops=[GtE()], comparators=[Constant(value=0)]), body=BinOp(left=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[]), op=Div(), right=BinOp(left=Constant(value=1), op=Add(), right=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[]))), orelse=BinOp(left=Constant(value=1), op=Div(), right=BinOp(left=Constant(value=1), op=Add(), right=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[Name(id='z', ctx=Load())], keywords=[]))))",
+      "ast_path": "module.body[24].body[3].value.elt",
+      "ast_sha256": "a5f60c17cb8efc0869ec1ac4001c04c1b43f67d7d38bc025cbb87061247d70aa",
+      "node_kind": "IfExp",
+      "role": "proposed_scalar_leaf",
+      "source_segment": "math.exp(-z) / (1 + math.exp(-z)) if z >= 0 else 1 / (1 + math.exp(z))",
+      "source_segment_utf8_bytes": 70,
+      "source_segment_utf8_sha256": "3b606e9946648df65b1ba914efbc05a84f11fe1b49bef6d9073349076e6894c9",
+      "span": [
+        127,
+        15,
+        127,
+        85
+      ]
+    },
+    "stable_loss_scalar": {
+      "ast_dump": "BinOp(left=Call(func=Name(id='max', ctx=Load()), args=[Constant(value=0.0), UnaryOp(op=USub(), operand=Name(id='z', ctx=Load()))], keywords=[]), op=Add(), right=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='log1p', ctx=Load()), args=[Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='exp', ctx=Load()), args=[UnaryOp(op=USub(), operand=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='z', ctx=Load())], keywords=[]))], keywords=[])], keywords=[]))",
+      "ast_path": "module.body[24].body[1].value.left.args[0].elt",
+      "ast_sha256": "b71027e5d37d1a5b5b574a4b880a0857f0885dbc19c81dff3e652f8f7c76287e",
+      "node_kind": "BinOp",
+      "role": "proposed_scalar_leaf",
+      "source_segment": "max(0.0, -z) + math.log1p(math.exp(-abs(z)))",
+      "source_segment_utf8_bytes": 44,
+      "source_segment_utf8_sha256": "19d0e597f98e72c80f09d2f7411d17bc2c6748d720fc902a4c1c3c4135b1465c",
+      "span": [
+        125,
+        21,
+        125,
+        65
+      ]
+    }
+  },
+  "source": {
+    "bytes": 16391,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "source_L2_exact_binary64_ratio": {
+    "denominator": "576460752303423488",
+    "host_literal_policy_kernel_proved": false,
+    "lexeme": "0.01",
+    "literal_host_backend": "stdlib AST Float constant as_integer_ratio",
+    "numerator": "5764607523034235"
+  },
+  "source_execution_calls": 0,
+  "status": "source_only_inventory_no_compiler_import_or_execution",
+  "tests_run": 0,
+  "theorem_qualified": false
+}

@@ -1,0 +1,117 @@
+{
+  "actual_decoded_archive_review": {
+    "bytes": 3274,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-20261005-01/package-review-01.json",
+    "sha256": "99b05a23c48461fb8356a045665e7aa2e83e8c50a920c56bb5af5a9817f8197b"
+  },
+  "actual_qualification_path_census": {
+    "README_present_or_declared": false,
+    "all_three_real_overview_files_retained": true,
+    "missing_or_extra_paths": [],
+    "regular_leaf_paths_including_seal_self": 277,
+    "sealed_regular_bytes": 78794802,
+    "sealed_regular_files": 276
+  },
+  "all32_governing_RPI_exits": "OPEN",
+  "all_AST_outside_explicit_patch_normalizes_to_prior_source": true,
+  "codec_classifier_native_model_metadata_Git_HTTP_or_remote_jobs_run": false,
+  "completion_authority": false,
+  "corrected_producer": {
+    "bytes": 18728,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/prepare_hf_plan_02.py",
+    "sha256": "03fcaed1c081acab3cb4ac558db9dfa4e0db02771efb2cd304c35bbe17bdef02"
+  },
+  "downstream_invocation_scanner_readback_and_closers_compatible": true,
+  "execution_authority": false,
+  "failed_attempt": {
+    "bytes": 1612,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-preparation-attempt-01.json",
+    "sha256": "7518151c5c546640ce12d50d42143ca90cbcbd015bd86a20f49ddfaf4a1d0cc1"
+  },
+  "findings": [],
+  "fixed_archive_population_unchanged": {
+    "bytes": 80792847,
+    "files": 335
+  },
+  "full_task_satisfaction": "unknown",
+  "official_benchmark_score": null,
+  "only_behavior_changes": [
+    "omit nonexistent unsealed qualification README.md",
+    "create fresh local HF-README-02.md and HF-publication-status-02.json",
+    "retain old/new producer, failure, old partial bodies and exact external patch review as immutable audit rows"
+  ],
+  "only_existing_mutable_remote_paths": [
+    "README.md",
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-status.json"
+  ],
+  "package_or_codec_rebuild_required_by_patch": false,
+  "planner_activation": false,
+  "prior_executed_producer": {
+    "bytes": 16950,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/prepare_hf_plan_01.py",
+    "sha256": "f1babaf4f90463dab973f5d185fce6d0c52c5fb9df6729a878ed878b6c45cfb1"
+  },
+  "prior_expected_HF_parent": "fae2e38dc882929edb2bcd2226560f0da3dfcd9e",
+  "proof_authority": false,
+  "qualified_seal": {
+    "bytes": 86066,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/file-only-seal-01.json",
+    "sha256": "874b51a3358dee5dbd18b70c66770f4e3fdf3553c2fac3fb644075c37273f43d"
+  },
+  "retained_partial_outputs": [
+    {
+      "bytes": 16744,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/HF-README-01.md",
+      "sha256": "5b45e603272ffbad96970cb2a64335dbea08f2e2a7057a10a3fba42a0817c58e"
+    },
+    {
+      "bytes": 88779,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/HF-publication-status-01.json",
+      "sha256": "1d63726fb3abfbaec640e3cb11e540c31b5dea4ebf416397306492f205e2f871"
+    }
+  ],
+  "review_scope_limitations": [
+    "Only qualification leaf paths were recounted here; sealed log/binary/database bodies were not read.",
+    "The actual complete archive decode and protected-input digest checks are bound through the previously completed independent package review.",
+    "The new producer and downstream jobs remain unexecuted by this reviewer; no future publication success is claimed."
+  ],
+  "reviewed_target_imports_or_execution": false,
+  "reviewer": {
+    "bytes": 12109,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-HF-plan-patch-review-20261005-01/review_source.py",
+    "sha256": "75ced897a469dbfa5b0803165f6aa7c7182299ba2d7d6bdb8b2a886fe3225a78"
+  },
+  "schema": "ranker-objective-scalar-HF-plan-independent-patch-review@1",
+  "sealed_qualification_or_publication_input_mutations_by_reviewer": 0,
+  "source_claims_native_caps_and_publication_caps_unchanged": true,
+  "status": "passed_source_only",
+  "unchanged_downstream_source_pins": [
+    {
+      "bytes": 11102,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/prepare_invocation_01.py",
+      "sha256": "223fcd8ce7918879c97da16e972da4ff4af59ff468e74e9465cd3a8ef76af72f"
+    },
+    {
+      "bytes": 4887,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/scan_final_upload_01.py",
+      "sha256": "9972c1291344a43485378f25c6853df1f8394c2d0bdf33ee24b7aa249beccd6b"
+    },
+    {
+      "bytes": 8944,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/review_hf_readback_01.py",
+      "sha256": "263e3c8a7879f310c1079ceda64e18df98821198491026f6978cf81111fef812"
+    },
+    {
+      "bytes": 11159,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/close_release_publication_01.py",
+      "sha256": "749cb044cc35cca875692b1464b0927d76cc845a48fd0e9498cfb2e3d5551c63"
+    },
+    {
+      "bytes": 9217,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/close_combined_publication_01.py",
+      "sha256": "a8c4e4ac8dc36435e5e250bd36c2d0234d7ea0c3b79f28228e856f4600cb3fe2"
+    }
+  ],
+  "unchanged_plan_output_path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-plan-01.json",
+  "upload_max_unique_files": 100
+}

@@ -1,0 +1,46 @@
+{
+  "AST_only_changes": [
+    "two metadata-only census helpers",
+    "one generated environment membership comparison"
+  ],
+  "atomic_whole_snapshot_claimed": false,
+  "builder": {
+    "bytes": 50438,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/build_objective_metadata_02.py",
+    "sha256": "40c0f9782caa995145bfe1cc84aaa5a4f9d19b0679dfc9529605816040255e90"
+  },
+  "completion_authority": false,
+  "descriptor_only_size_bound": 9223372036854775807,
+  "execution_authority": false,
+  "historical_execution_origin_proved": false,
+  "outstanding_source_issues": [],
+  "planner_activation": false,
+  "prior_builder": {
+    "bytes": 49474,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/build_objective_metadata_01.py",
+    "sha256": "45246ee6931195cecc07433384c953aa474cd903ec7c665e6b38f406dc47e1c9"
+  },
+  "prior_combined_review": {
+    "bytes": 5531,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-metadata-source-review-20261005-01/review-receipt.json",
+    "sha256": "8c75bd6a5a2c558459b580d8bc129ca74d6ec1066c5d49e13134adcc0d516796"
+  },
+  "producer": {
+    "bytes": 10276,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-metadata-source-review-20261005-02/review_source.py",
+    "sha256": "07f681779b8097ef41d2ad851b98465717252633744ed0fa7d4e2259a586a189"
+  },
+  "proof_authority": false,
+  "reviewed_sources_imported_or_executed": false,
+  "runtime": {
+    "bytes": 49452,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/run_objective_metadata_controls_01.py",
+    "sha256": "6b4a1e7b7d345d7bf27ba74eca5e64f6166deae4d777a5131ad50d0128d48908"
+  },
+  "schema": "ranker-objective-scalar-metadata-builder-patch-independent-source-review@1",
+  "scope": "Large native dependency census descriptors can be compared without granting permission to read their bodies. All original body-read, row, storage, source, native and provenance gates remain unchanged.",
+  "status": "passed_source_only",
+  "tests_native_metadata_classifier_codec_git_remote_jobs_run": false,
+  "unchanged_all_other_builder_AST": true,
+  "unchanged_body_read_cap_bytes": 33554432
+}

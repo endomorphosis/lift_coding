@@ -1,0 +1,49 @@
+{
+  "hf_commit": "57c2bbf12ab14a597148cfbc874947ca17481ca3",
+  "hf_parent": "fae2e38dc882929edb2bcd2226560f0da3dfcd9e",
+  "input_receipts": {
+    "final_scan": {
+      "bytes": 41721,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/final-upload-scan-01.json",
+      "sha256": "21b410a5e7b4ca308019f07bf498e9e06302725c52702116ec6af3fd4a5248f2"
+    },
+    "frozen_inputs": {
+      "bytes": 1204,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-20261005-01/closed-inputs.json",
+      "sha256": "91570733f5d31c7f698fc3738c552f5c93715f951571e4d385a2bcdb9de9e6f8"
+    },
+    "hf_closed": {
+      "bytes": 889,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "360769276b3688789027cef091537d2680bd01b82ba9a602dcaef7b8da417a1b"
+    },
+    "hf_plan": {
+      "bytes": 39987,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-plan-01.json",
+      "sha256": "c11d6987d615024200cd9fea161b9fd6c7c19e3935a956b88d81af7aa7f103e5"
+    },
+    "package_review": {
+      "bytes": 3274,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-20261005-01/package-review-01.json",
+      "sha256": "99b05a23c48461fb8356a045665e7aa2e83e8c50a920c56bb5af5a9817f8197b"
+    },
+    "public_readback": {
+      "bytes": 3498,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-public-readback-01.json",
+      "sha256": "2fe870f67b608fa682d8ff6beff6e0e211f3166a370634dde3c7623b25ac2507"
+    },
+    "qualification": {
+      "bytes": 11167,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/qualified-review-01.json",
+      "sha256": "590163443db860ac03bc2d3fde0f07ac44626e8b6e7cc57a3d6c770c4da87f00"
+    },
+    "seal": {
+      "bytes": 86066,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/file-only-seal-01.json",
+      "sha256": "874b51a3358dee5dbd18b70c66770f4e3fdf3553c2fac3fb644075c37273f43d"
+    }
+  },
+  "schema": "ranker-objective-scalar-release-ledger-plan@1",
+  "selected_bytes": 15872242,
+  "selected_files": 83
+}

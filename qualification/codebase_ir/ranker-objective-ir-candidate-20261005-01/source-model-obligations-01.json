@@ -1,0 +1,78 @@
+{
+  "schema": "ranker-objective-scalar-source-model-obligations@1",
+  "scope": "Pinned _objective stable-loss and sign-split probability scalar leaves in an explicit exact-real backend",
+  "qualified_native_leaf_obligations": {
+    "accepted_scalar_compiler_preserves_partial_exact_real_evaluation": true,
+    "unsupported_syntax_and_unknown_names_refused": true,
+    "emitted_stable_loss_compiles_to_generic_operator_tree": true,
+    "emitted_stable_factor_compiles_to_generic_operator_tree": true,
+    "emitted_stable_loss_evaluates_to_realPairLoss": true,
+    "emitted_stable_factor_evaluates_to_realLogisticP": true,
+    "native_module_checks": 2,
+    "native_queries": 14,
+    "native_checks": [
+      {"role": "generic", "phase": "lean-objective-scalar-01", "check_sha256": "57ac502ebc37df08ae73b7fec69280b2dcb1a2453895ab573869d826d613bd5e"},
+      {"role": "generated", "phase": "lean-objective-generated-01", "check_sha256": "4bcc8424739067b6e31382f594bd0c17e7e3e800d117bd08b2e38de302177041"}
+    ]
+  },
+  "remaining_source_numerical_projection_stages": [
+    {
+      "stage": "objective containers and mean",
+      "status": "OPEN",
+      "obligations": [
+        "Typed named vector/matrix environments, sequential assignments, comprehension binders and list denotation",
+        "Actual margins syntax calls the accepted dot slice with matching scopes and shapes",
+        "Ordered stable-loss fold and division by an explicitly nonempty margin count",
+        "Regularizer syntax preserves L2 * dot(weights, weights) / 2 before exact-real algebra",
+        "Compose emitted data plus regularizer with realStableObjective and realObjective"
+      ]
+    },
+    {
+      "stage": "computed gradient",
+      "status": "OPEN",
+      "obligations": [
+        "Actual factor map uses the qualified scalar branch syntax",
+        "List zip truncation remains explicit until factor/row counts are equal",
+        "Bounded coordinate indexing, rectangular matrix shape and range length",
+        "Ordered coordinate fold and nonempty mean preserve the source operation order",
+        "Compose emitted coordinate expression with realSourceBranchGradient and realCoordinateGradient"
+      ]
+    },
+    {
+      "stage": "original numerical specialization and update",
+      "status": "OPEN",
+      "obligations": [
+        "Bind emitted source L2 to 5764607523034235/576460752303423488, rather than 1/100",
+        "Bind the actual four-pair, 80-coordinate difference representation to the accepted original exact-real profile",
+        "Join emitted objective and computed gradient to the accepted update slice and originalRealStep",
+        "Preserve the distinction between exact-real convergence and Python Float iteration"
+      ]
+    }
+  ],
+  "remaining_host_and_runtime_obligations": [
+    "Host AST parsing and exact literal/constructor emission are pinned provenance, not kernel proofs of Python parsing",
+    "Python lexical/global binding, builtin shadowing, module mutation and monkeypatch behavior",
+    "Binary64 arithmetic, literal rounding, overflow, underflow, NaN, infinity and signed zero",
+    "CPython math.fsum, libm exp/log1p/sqrt and their exception behavior",
+    "_need finite checks, failure branches and dictionary/tuple/starred-list return behavior",
+    "Corpus/tokenization/features/difference construction and _prepare source semantics",
+    "Full train iteration, stopping, validation, serialization, ranking and metric semantics",
+    "General codebase IR and autoencoder semantic preservation and convergence",
+    "Actual Terminal Bench task execution and full task satisfaction"
+  ],
+  "prior_original_exact_real_model_convergence": "Retained mathematical evidence; these scalar leaves do not prove the complete source loop",
+  "python_ranker_source_equivalence_proved": false,
+  "whole_objective_source_equivalence_proved": false,
+  "computed_gradient_source_equivalence_proved": false,
+  "full_training_loop_source_equivalence_proved": false,
+  "native_Float_optimizer_convergence_proved": false,
+  "global_autoencoder_convergence_proved": false,
+  "full_task_satisfaction": "unknown",
+  "all32_governing_RPI_exits": "OPEN",
+  "official_benchmark_score": null,
+  "strict_advisory_cache_entries_added": 0,
+  "proof_authority": false,
+  "execution_authority": false,
+  "completion_authority": false,
+  "planner_activation": false
+}

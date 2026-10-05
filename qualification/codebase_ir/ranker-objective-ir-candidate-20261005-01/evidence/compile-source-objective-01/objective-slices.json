@@ -1,0 +1,545 @@
+{
+  "CPython_math_fsum_semantics_proved": false,
+  "Python_Float_semantics_proved": false,
+  "Python_libm_semantics_proved": false,
+  "all32_governing_RPI_exits": "OPEN",
+  "compiled": false,
+  "completion_authority": false,
+  "conditional_policy": {
+    "exact_real_evaluation": "selected branch only lazy",
+    "syntax_validation": "both branches eager"
+  },
+  "execution_authority": false,
+  "expected_AST_bindings": {
+    "objective": "129da31ae6856167478c7f030a059d0f477b8362bb8fa478221eac7bac6031c2",
+    "stable_factor": "a5f60c17cb8efc0869ec1ac4001c04c1b43f67d7d38bc025cbb87061247d70aa",
+    "stable_loss": "b71027e5d37d1a5b5b574a4b880a0857f0885dbc19c81dff3e652f8f7c76287e"
+  },
+  "feature_preparation_to_IR_translation_proved": false,
+  "frontiers": [
+    "host AST/hash/literal-rendering binding",
+    "Python name/global resolution",
+    "binary64 literal/runtime arithmetic and libm",
+    "containers/indexing/nonempty means/fsum",
+    "_need finite validation and exceptions",
+    "dictionary/tuple/sqrt return behavior",
+    "_prepare/corpus/features/hashes",
+    "full optimizer source loop/AE/general IR/full task"
+  ],
+  "full_task_satisfaction": "unknown",
+  "full_training_loop_to_IR_translation_proved": false,
+  "global_autoencoder_convergence_proved": false,
+  "gradient_to_IR_translation_proved": false,
+  "host_AST_parse_calls": 1,
+  "host_parser_correctness_theorem_proved": false,
+  "literal_backend": "stdlib AST Float constant exact as_integer_ratio; Rat-to-Real projection",
+  "native_qualification_jobs": 0,
+  "objective_context": {
+    "ast_path": "module.body[24]",
+    "ast_sha256": "129da31ae6856167478c7f030a059d0f477b8362bb8fa478221eac7bac6031c2",
+    "node_kind": "FunctionDef",
+    "role": "whole_function_context_only",
+    "source_segment": "def _objective(weights, differences):\n    margins = [_dot(weights, row) for row in differences]\n    data = math.fsum(max(0.0, -z) + math.log1p(math.exp(-abs(z))) for z in margins) / len(margins)\n    regularizer = L2 * _dot(weights, weights) / 2\n    factors = [math.exp(-z) / (1 + math.exp(-z)) if z >= 0 else 1 / (1 + math.exp(z))\n               for z in margins]\n    gradient = [L2 * weights[i] - math.fsum(f * row[i] for f, row in zip(factors, differences))\n                / len(differences) for i in range(len(weights))]\n    _need(all(math.isfinite(x) for x in [data, regularizer, *gradient]),\n          \"nonfinite scratch-head objective or gradient\")\n    return {\"objective\": data + regularizer, \"pair_logistic_loss\": data,\n            \"L2_penalty\": regularizer, \"gradient_norm\": math.sqrt(_dot(gradient, gradient))}, gradient",
+    "source_segment_utf8_bytes": 831,
+    "source_segment_utf8_sha256": "1036faf2d13d39ffc7bb86f7a8b39fad320cd3ad1ced3864d13eaa02498f56c9",
+    "span": [
+      123,
+      0,
+      134,
+      102
+    ]
+  },
+  "objective_to_IR_translation_proved": false,
+  "optimizer_source_convergence_proved": false,
+  "partial_domain_policy": {
+    "div": "denominator nonzero else divisionByZero",
+    "log1p": "1+argument strictly positive else logDomain"
+  },
+  "planner_activation": false,
+  "project_imports": 0,
+  "proof_authority": false,
+  "python_ranker_source_equivalence_proved": false,
+  "schema": "ranker-objective-scalar-source-slices@1",
+  "source": {
+    "bytes": 16391,
+    "module_ast_nodes": 2930,
+    "module_ast_sha256": "61ae9578f4a087b1b181af6fe4f78c3d811bbaa09368f833f6240384d085407b",
+    "original_source_pin_matches": true,
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "source_L2": {
+    "ir": {
+      "body": {
+        "denominator": "576460752303423488",
+        "kind": "num",
+        "numerator": "5764607523034235"
+      },
+      "schema": "ranker-objective-scalar-ir@1",
+      "slots": 1
+    },
+    "lean_source_scalar": "(.num ((5764607523034235 : Rat) / 576460752303423488))",
+    "literal_class": "float",
+    "literal_lexeme": "0.01",
+    "prior_exact_mu_rat_matches": true,
+    "schema": "ranker-objective-scalar-lowering@1",
+    "source_scalar": {
+      "denominator": "576460752303423488",
+      "kind": "num",
+      "numerator": "5764607523034235"
+    }
+  },
+  "source_function_execution_calls": 0,
+  "source_snippets": {
+    "factor_condition": {
+      "ast_path": "module.body[24].body[3].value.elt.test",
+      "ast_sha256": "bb331b1f0d76d6bd12bf40bdaba0fe6d558c037f89eba6f60368116b5a7ae0ac",
+      "node_kind": "Compare",
+      "role": "comparison_context_only_not_scalar",
+      "source_segment": "z >= 0",
+      "source_segment_utf8_bytes": 6,
+      "source_segment_utf8_sha256": "e19874b5cd90d2ce40aa17d87ea525287d159d77bd650fb5d272fe49b043538b",
+      "span": [
+        127,
+        52,
+        127,
+        58
+      ]
+    },
+    "factor_else_branch": {
+      "ast_path": "module.body[24].body[3].value.elt.orelse",
+      "ast_sha256": "66b715001c680603a02119431ae80ddefcda3ee0a09edabf3aa93971baab297f",
+      "node_kind": "BinOp",
+      "role": "accepted_scalar_subexpression",
+      "source_segment": "1 / (1 + math.exp(z))",
+      "source_segment_utf8_bytes": 21,
+      "source_segment_utf8_sha256": "e0fbdd70fb39ba8e0300ca42ba696d50dd689d44cabce7d99da995e502546e89",
+      "span": [
+        127,
+        64,
+        127,
+        85
+      ]
+    },
+    "factor_then_branch": {
+      "ast_path": "module.body[24].body[3].value.elt.body",
+      "ast_sha256": "cc8be58e2aea7f85de6683669665eed3a052693128f4550fe4b175516f17e9fa",
+      "node_kind": "BinOp",
+      "role": "accepted_scalar_subexpression",
+      "source_segment": "math.exp(-z) / (1 + math.exp(-z))",
+      "source_segment_utf8_bytes": 33,
+      "source_segment_utf8_sha256": "99278d16040a65cf0d0a25435bd098ce609d5047edb2d0ea3a0a93dbc39711db",
+      "span": [
+        127,
+        15,
+        127,
+        48
+      ]
+    },
+    "gradient_coordinate": {
+      "ast_path": "module.body[24].body[4].value.elt",
+      "ast_sha256": "baa0b04a63f7ceefdcc9e57577014d376e78e4f2e3a5740d8e2a9f8062ad33ff",
+      "node_kind": "BinOp",
+      "role": "unsupported_context_only_indexing_and_containers_open",
+      "source_segment": "L2 * weights[i] - math.fsum(f * row[i] for f, row in zip(factors, differences))\n                / len(differences)",
+      "source_segment_utf8_bytes": 114,
+      "source_segment_utf8_sha256": "2ce82825dfbe0952541221d108ce0ec2b742fbc369f83d6b36e04c0d587ff6cf",
+      "span": [
+        129,
+        16,
+        130,
+        34
+      ]
+    },
+    "log1p_argument": {
+      "ast_path": "module.body[24].body[1].value.left.args[0].elt.right.args[0]",
+      "ast_sha256": "a0addb653542cb732461a44516af56f1ca0891774db5a2d4d4661b376aabf8a9",
+      "node_kind": "Call",
+      "role": "accepted_scalar_subexpression",
+      "source_segment": "math.exp(-abs(z))",
+      "source_segment_utf8_bytes": 17,
+      "source_segment_utf8_sha256": "6010c8a861228729ec5bddc7eac5cc7c129296ee0cba280f5ef5c34287cbb5d9",
+      "span": [
+        125,
+        47,
+        125,
+        64
+      ]
+    },
+    "loss_max_subexpression": {
+      "ast_path": "module.body[24].body[1].value.left.args[0].elt.left",
+      "ast_sha256": "921e0ac28ee04571b8704b75b0752917fc5da2f13f82a6222294947d63633192",
+      "node_kind": "Call",
+      "role": "accepted_scalar_subexpression",
+      "source_segment": "max(0.0, -z)",
+      "source_segment_utf8_bytes": 12,
+      "source_segment_utf8_sha256": "fc2f6649b3819af9075aa638474643f29832b5a90a1b7416053ea5ddef396253",
+      "span": [
+        125,
+        21,
+        125,
+        33
+      ]
+    },
+    "source_L2_literal": {
+      "ast_path": "module.body[11].value",
+      "ast_sha256": "8530690a006323b2d55a0633fe64f6581a15bcdf80eee5733c6547397e763ef2",
+      "node_kind": "Constant",
+      "role": "exact_source_literal_binding_only",
+      "source_segment": "0.01",
+      "source_segment_utf8_bytes": 4,
+      "source_segment_utf8_sha256": "312b95ee5a344d2f7a16ad817ff70788980da6e30b9bb04b651d53847abd476f",
+      "span": [
+        21,
+        5,
+        21,
+        9
+      ]
+    },
+    "stable_factor_scalar": {
+      "ast_path": "module.body[24].body[3].value.elt",
+      "ast_sha256": "a5f60c17cb8efc0869ec1ac4001c04c1b43f67d7d38bc025cbb87061247d70aa",
+      "node_kind": "IfExp",
+      "role": "accepted_scalar_leaf",
+      "source_segment": "math.exp(-z) / (1 + math.exp(-z)) if z >= 0 else 1 / (1 + math.exp(z))",
+      "source_segment_utf8_bytes": 70,
+      "source_segment_utf8_sha256": "3b606e9946648df65b1ba914efbc05a84f11fe1b49bef6d9073349076e6894c9",
+      "span": [
+        127,
+        15,
+        127,
+        85
+      ]
+    },
+    "stable_loss_scalar": {
+      "ast_path": "module.body[24].body[1].value.left.args[0].elt",
+      "ast_sha256": "b71027e5d37d1a5b5b574a4b880a0857f0885dbc19c81dff3e652f8f7c76287e",
+      "node_kind": "BinOp",
+      "role": "accepted_scalar_leaf",
+      "source_segment": "max(0.0, -z) + math.log1p(math.exp(-abs(z)))",
+      "source_segment_utf8_bytes": 44,
+      "source_segment_utf8_sha256": "19d0e597f98e72c80f09d2f7411d17bc2c6748d720fc902a4c1c3c4135b1465c",
+      "span": [
+        125,
+        21,
+        125,
+        65
+      ]
+    }
+  },
+  "stable_factor": {
+    "ir": {
+      "body": {
+        "condition": {
+          "kind": "var",
+          "slot": 0
+        },
+        "else": {
+          "kind": "div",
+          "left": {
+            "denominator": "1",
+            "kind": "num",
+            "numerator": "1"
+          },
+          "right": {
+            "kind": "add",
+            "left": {
+              "denominator": "1",
+              "kind": "num",
+              "numerator": "1"
+            },
+            "right": {
+              "kind": "exp",
+              "value": {
+                "kind": "var",
+                "slot": 0
+              }
+            }
+          }
+        },
+        "kind": "ifNonneg",
+        "then": {
+          "kind": "div",
+          "left": {
+            "kind": "exp",
+            "value": {
+              "kind": "neg",
+              "value": {
+                "kind": "var",
+                "slot": 0
+              }
+            }
+          },
+          "right": {
+            "kind": "add",
+            "left": {
+              "denominator": "1",
+              "kind": "num",
+              "numerator": "1"
+            },
+            "right": {
+              "kind": "exp",
+              "value": {
+                "kind": "neg",
+                "value": {
+                  "kind": "var",
+                  "slot": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "schema": "ranker-objective-scalar-ir@1",
+      "slots": 1
+    },
+    "lean_source_scalar": "(.ifNonneg (.var \"z\") (.div (.exp (.neg (.var \"z\"))) (.add (.num (1 : Rat)) (.exp (.neg (.var \"z\"))))) (.div (.num (1 : Rat)) (.add (.num (1 : Rat)) (.exp (.var \"z\")))))",
+    "schema": "ranker-objective-scalar-lowering@1",
+    "source_scalar": {
+      "condition": {
+        "kind": "var",
+        "name": "z"
+      },
+      "else": {
+        "kind": "div",
+        "left": {
+          "denominator": "1",
+          "kind": "num",
+          "numerator": "1"
+        },
+        "right": {
+          "kind": "add",
+          "left": {
+            "denominator": "1",
+            "kind": "num",
+            "numerator": "1"
+          },
+          "right": {
+            "kind": "exp",
+            "value": {
+              "kind": "var",
+              "name": "z"
+            }
+          }
+        }
+      },
+      "kind": "ifNonneg",
+      "then": {
+        "kind": "div",
+        "left": {
+          "kind": "exp",
+          "value": {
+            "kind": "neg",
+            "value": {
+              "kind": "var",
+              "name": "z"
+            }
+          }
+        },
+        "right": {
+          "kind": "add",
+          "left": {
+            "denominator": "1",
+            "kind": "num",
+            "numerator": "1"
+          },
+          "right": {
+            "kind": "exp",
+            "value": {
+              "kind": "neg",
+              "value": {
+                "kind": "var",
+                "name": "z"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "stable_loss": {
+    "ir": {
+      "body": {
+        "kind": "add",
+        "left": {
+          "kind": "max",
+          "left": {
+            "denominator": "1",
+            "kind": "num",
+            "numerator": "0"
+          },
+          "right": {
+            "kind": "neg",
+            "value": {
+              "kind": "var",
+              "slot": 0
+            }
+          }
+        },
+        "right": {
+          "kind": "log1p",
+          "value": {
+            "kind": "exp",
+            "value": {
+              "kind": "neg",
+              "value": {
+                "kind": "abs",
+                "value": {
+                  "kind": "var",
+                  "slot": 0
+                }
+              }
+            }
+          }
+        }
+      },
+      "schema": "ranker-objective-scalar-ir@1",
+      "slots": 1
+    },
+    "lean_source_scalar": "(.add (.max (.num (0 : Rat)) (.neg (.var \"z\"))) (.log1p (.exp (.neg (.abs (.var \"z\"))))))",
+    "schema": "ranker-objective-scalar-lowering@1",
+    "source_scalar": {
+      "kind": "add",
+      "left": {
+        "kind": "max",
+        "left": {
+          "denominator": "1",
+          "kind": "num",
+          "numerator": "0"
+        },
+        "right": {
+          "kind": "neg",
+          "value": {
+            "kind": "var",
+            "name": "z"
+          }
+        }
+      },
+      "right": {
+        "kind": "log1p",
+        "value": {
+          "kind": "exp",
+          "value": {
+            "kind": "neg",
+            "value": {
+              "kind": "abs",
+              "value": {
+                "kind": "var",
+                "name": "z"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "statements": [
+    {
+      "ast_path": "module.body[24].body[0]",
+      "ast_sha256": "3e132b195b19b366ff4f1372a697a26c2c932f863b7e3434e1b5fc8f3f9940e5",
+      "node_kind": "Assign",
+      "role": "context_only",
+      "source_segment": "margins = [_dot(weights, row) for row in differences]",
+      "source_segment_utf8_bytes": 53,
+      "source_segment_utf8_sha256": "3c0a0ba2d056671eb2378aaeeeb784909b40e74e47039069dcc2d406efdbf587",
+      "span": [
+        124,
+        4,
+        124,
+        57
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[1]",
+      "ast_sha256": "927f4266c7270e16b2210417e75b320041330678069ecfa3475424a0eed8b0de",
+      "node_kind": "Assign",
+      "role": "context_only",
+      "source_segment": "data = math.fsum(max(0.0, -z) + math.log1p(math.exp(-abs(z))) for z in margins) / len(margins)",
+      "source_segment_utf8_bytes": 94,
+      "source_segment_utf8_sha256": "b01195690bdfb572f7b0573e752eaf0c64c28cf69c38070b207cb237fd8d6d55",
+      "span": [
+        125,
+        4,
+        125,
+        98
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[2]",
+      "ast_sha256": "00ff1da391f81ad1e8d7228e8a964e31e962a844a5c66d64c631e55fe6fca656",
+      "node_kind": "Assign",
+      "role": "context_only",
+      "source_segment": "regularizer = L2 * _dot(weights, weights) / 2",
+      "source_segment_utf8_bytes": 45,
+      "source_segment_utf8_sha256": "7a318e9c8b5e633e266bc00f0b165cf55b7cf0734427b24c0532fbeb00225ae1",
+      "span": [
+        126,
+        4,
+        126,
+        49
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[3]",
+      "ast_sha256": "5015fd0ebc131c731d7c6807c8a229dfab8d079f466b089da551173e195f3318",
+      "node_kind": "Assign",
+      "role": "context_only",
+      "source_segment": "factors = [math.exp(-z) / (1 + math.exp(-z)) if z >= 0 else 1 / (1 + math.exp(z))\n               for z in margins]",
+      "source_segment_utf8_bytes": 114,
+      "source_segment_utf8_sha256": "4a8de8191c554678ef05b86dad7d78510fcae7e1c44fdb3d82a559a6e754fb7e",
+      "span": [
+        127,
+        4,
+        128,
+        32
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[4]",
+      "ast_sha256": "1c711c9a58b9006091e229025d59c5ae1fa58eb78bb90fcdcec31ef7f108d36a",
+      "node_kind": "Assign",
+      "role": "context_only",
+      "source_segment": "gradient = [L2 * weights[i] - math.fsum(f * row[i] for f, row in zip(factors, differences))\n                / len(differences) for i in range(len(weights))]",
+      "source_segment_utf8_bytes": 156,
+      "source_segment_utf8_sha256": "e19fec18b94c002952819141a94ff236db8b25bdac5200ded3a5cbe9c78b3bac",
+      "span": [
+        129,
+        4,
+        130,
+        64
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[5]",
+      "ast_sha256": "0eed0cf256be52c514cca904f20ea7a4471883611ec4bb1e1cc3cc1712be4bd6",
+      "node_kind": "Expr",
+      "role": "context_only",
+      "source_segment": "_need(all(math.isfinite(x) for x in [data, regularizer, *gradient]),\n          \"nonfinite scratch-head objective or gradient\")",
+      "source_segment_utf8_bytes": 126,
+      "source_segment_utf8_sha256": "182989095aa28859e84c7d735bb1332c9d9ecd5c8d426b474057ac2d0899b343",
+      "span": [
+        131,
+        4,
+        132,
+        57
+      ]
+    },
+    {
+      "ast_path": "module.body[24].body[6]",
+      "ast_sha256": "b5fa0702d20f2801c2c375de0f2189561ca7adea484634701ab0e13c0a335115",
+      "node_kind": "Return",
+      "role": "context_only",
+      "source_segment": "return {\"objective\": data + regularizer, \"pair_logistic_loss\": data,\n            \"L2_penalty\": regularizer, \"gradient_norm\": math.sqrt(_dot(gradient, gradient))}, gradient",
+      "source_segment_utf8_bytes": 171,
+      "source_segment_utf8_sha256": "064bdc2495e9ca707023200ab4ac481be3062281d32d600522a8522343a58105",
+      "span": [
+        133,
+        4,
+        134,
+        102
+      ]
+    }
+  ],
+  "status": "compiled_source_only_kernel_pending",
+  "theorem_qualified": false,
+  "whole_codebase_IR_semantic_preservation_proved": false
+}
