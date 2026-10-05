@@ -1,0 +1,165 @@
+{
+  "authorization_scope": "source_only_expanded_frozen_evaluation_no_semantic_admission",
+  "bootstrap_binding": {
+    "bytes": 6247,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/huggingface/launch_reconstruction.py",
+    "sha256": "910ff61a235d6e988e78b34a3b27d7ae7520f2bb10722881ab532c934be1199e"
+  },
+  "cohort_binding": {
+    "bytes": 22785,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+    "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+  },
+  "content_sha256": "1a85380ca4d2f7e690b7b84f1340a654308a1873d4694ee705dad17584190d51",
+  "helper_binding": {
+    "bytes": 31241,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluate_expanded_reconstruction.py",
+    "sha256": "09ae2c503e1f8f0d43f3dad2a9ca49f13cb76bcee6b80338b1a463da53018f98"
+  },
+  "lane_owner_binding": {
+    "bytes": 18141,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+    "sha256": "d7d2e1303e15d46b70997e5880df6fb9a690bfebde63666cad04db516f3ef3a8"
+  },
+  "lanes": {
+    "legacy8": {
+      "development_bundle_binding": {
+        "bytes": 48045,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/legacy8_raw_query_bundle.json",
+        "sha256": "cdab980c394a5686851905710a80d25c72f74b86adb3076c2c88a0e13db34cca"
+      },
+      "development_expected_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/legacy8_raw_query_expected_bindings.json",
+        "sha256": "174bc2f3c8efde69c3f562f0ba959f20223f333499640b40a9e74dd5abc74939"
+      },
+      "train_bundle_binding": {
+        "bytes": 48042,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/legacy8_raw_train_bundle.json",
+        "sha256": "81e22da8f9fb450f8f47767b37c58ab3d6200fffe53f98b95f5fa51364f84fb3"
+      },
+      "train_expected_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/legacy8_raw_train_expected_bindings.json",
+        "sha256": "412318fb0f8f3e55ac65beb015731b51f3deefe2ddd488b7be59c9d6405802ca"
+      }
+    },
+    "native384": {
+      "development_bundle_binding": {
+        "bytes": 307667,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_query_bundle.json",
+        "sha256": "89560d81ef41cc0f852c2d0e60a695658327f61a57a6a7ab23cf94b557379fcb"
+      },
+      "development_expected_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_query_expected_bindings.json",
+        "sha256": "31ae135bac406eda1ecc303471453429c23ecbfeefa15113aa9029ef1a7e01f1"
+      },
+      "train_bundle_binding": {
+        "bytes": 307657,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_train_bundle.json",
+        "sha256": "c3e6a98c4486344926577d65a9573b3d0949ccc69e8a3351b1c66e11b4fa9aca"
+      },
+      "train_expected_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_train_expected_bindings.json",
+        "sha256": "22d1de549c2b7abf6ff7f1afdfe5c17c03e322f6b4a82e56eb46156c9a42fc1a"
+      }
+    },
+    "native768": {
+      "development_bundle_binding": {
+        "bytes": 568271,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_query_bundle.json",
+        "sha256": "6a956c8bcee7b3c10a34c6cae41710c36abe571837cb4b8c5f825b92e7234e0d"
+      },
+      "development_expected_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_query_expected_bindings.json",
+        "sha256": "eee5c1ea16f13fdb1df07a5f3b4f77bd94083363a220646930926dcf2023c129"
+      },
+      "train_bundle_binding": {
+        "bytes": 568345,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_train_bundle.json",
+        "sha256": "104237e15673981fcfdd0a5076761b64b571574623f1f7e9435ca074d8684453"
+      },
+      "train_expected_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_train_expected_bindings.json",
+        "sha256": "96c3b15fdfc37f6fa260ce9430c881cbdd5d431a5c0363ebaa8e86654073de58"
+      }
+    }
+  },
+  "new_helper_binding": {
+    "bytes": 32286,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/train_expanded_reconstruction.py",
+    "sha256": "9d5dca6c6a07d60956eb9da3c874b9df65e8cd8ad965ed16090bbc70738c1182"
+  },
+  "new_training_plan_binding": {
+    "bytes": 19383,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-plan-01.json",
+    "sha256": "9dc7caaa8b25ece565f150060ea56244b07a31c1b3ae8adbd2c3d0694c8d932f"
+  },
+  "new_training_report_bindings": [
+    {
+      "bytes": 42260,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1729/worker/training-report.json",
+      "sha256": "77c8e576615562a4bfbf5e96bff900876e3fa1f470d4dcf195d4b8010ede50be"
+    },
+    {
+      "bytes": 42255,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1730/worker/training-report.json",
+      "sha256": "f1dda60f9b39e6509f4517a2272e793c568b8f068a5e3fe4c91256f5d365404e"
+    },
+    {
+      "bytes": 42276,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1731/worker/training-report.json",
+      "sha256": "72e155b20ea34ee621b0e8bda78d36d4d1e1714e53a1897122d1c34a01eeeda4"
+    },
+    {
+      "bytes": 827427,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1729/worker/training-report.json",
+      "sha256": "f3f12d6da591d5e7a3ededb97c88a9ef17c48f840498b25534aa8e0c8c6dfa4f"
+    },
+    {
+      "bytes": 827340,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1730/worker/training-report.json",
+      "sha256": "8a46e6d34f849333147af07df171c3900532814303ab481a0d231352be2ccc4a"
+    },
+    {
+      "bytes": 827296,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1731/worker/training-report.json",
+      "sha256": "af9bce29d87a44ebbe826540d31c8c834c27cd85363ac75a6ba8f7d98226aaea"
+    },
+    {
+      "bytes": 1640782,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1729/worker/training-report.json",
+      "sha256": "563ec9a79d3473c517d40dc3a20dd891fd1549fb7363bed8a5415ae52740a9cf"
+    },
+    {
+      "bytes": 1640591,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1730/worker/training-report.json",
+      "sha256": "bb32e1f4dd3c6783970b7795afccace5da0bc77152c2ef1574de14f0d5195829"
+    },
+    {
+      "bytes": 1641028,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1731/worker/training-report.json",
+      "sha256": "643fb23b293281a53582bdc2a70c0d85fc44ff1a9c6d937f9ec35ea7b081b77d"
+    }
+  ],
+  "numeric_control_owner_binding": {
+    "bytes": 27100,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/evaluate_published_reconstruction_v2.py",
+    "sha256": "0c65247d19430dec78395fe591c60994b2a4b9ec054d8c20c10b067ede994c44"
+  },
+  "old_helper_binding": {
+    "bytes": 26131,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/download-01/release/train_reconstruction.py",
+    "sha256": "387c0335549374a98e1d5458d9746733fe385dd760584fdf059f6266c44873d3"
+  },
+  "old_release_manifest_binding": {
+    "bytes": 46629,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/download-01/release/release_manifest.json",
+    "sha256": "30e2fe3b112f60fd7f8d9494f88caaba674efdc8424a3c174a0e34570282cbf5"
+  },
+  "schema": "source-only-expanded-numeric-evaluation-plan/v1"
+}

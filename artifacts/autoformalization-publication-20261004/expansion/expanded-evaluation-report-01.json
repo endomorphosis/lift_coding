@@ -1,0 +1,181 @@
+{
+  "all_master_and_source_files_preserved": true,
+  "all_new_train_outputs_exact": true,
+  "all_restored_models_and_adam_preserved": true,
+  "arms": [
+    {
+      "endpoint_binding": {
+        "bytes": 152752,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1729/endpoints.json",
+        "sha256": "fedadb92e34a9a96f18da5ef9fd7c76290918e8b719c33c35bd61a3f34396195"
+      },
+      "lane_id": "legacy8",
+      "numeric_report_binding": {
+        "bytes": 8828,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1729/numeric-report.json",
+        "sha256": "c7c7df9e7abaa783bc833eb5ded424978dd82c1d11468a516da65118814de07c"
+      },
+      "seed": 1729
+    },
+    {
+      "endpoint_binding": {
+        "bytes": 152768,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1730/endpoints.json",
+        "sha256": "a15a3b1d7b2e6e8ec3906627e72b032c4d3d355aead2e376d9fa1ccce907c647"
+      },
+      "lane_id": "legacy8",
+      "numeric_report_binding": {
+        "bytes": 8829,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1730/numeric-report.json",
+        "sha256": "9f137c876261c28cef8414d94f8f82d667fcb55b9ebe347131dde5766b4ea286"
+      },
+      "seed": 1730
+    },
+    {
+      "endpoint_binding": {
+        "bytes": 152718,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1731/endpoints.json",
+        "sha256": "071486d6eed4811a54065a122bd72d5ec0c7d245c2bfbfa4e6045d4e5c31cd47"
+      },
+      "lane_id": "legacy8",
+      "numeric_report_binding": {
+        "bytes": 8832,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1731/numeric-report.json",
+        "sha256": "d996f8e7821a6c35b9836a38014fee48b44f5596e2502f4450443cc8e04137da"
+      },
+      "seed": 1731
+    },
+    {
+      "endpoint_binding": {
+        "bytes": 4173254,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1729/endpoints.json",
+        "sha256": "42ba54d6074c6f1bad78133d4ee8c1dbbbab69d9c787cc6bd95d99f8f8d2bcb4"
+      },
+      "lane_id": "native384",
+      "numeric_report_binding": {
+        "bytes": 8889,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1729/numeric-report.json",
+        "sha256": "4d7e4797c272714276ec69c8a25961acc973e8d6e2e23b08b50e556b4468ee53"
+      },
+      "seed": 1729
+    },
+    {
+      "endpoint_binding": {
+        "bytes": 4172685,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1730/endpoints.json",
+        "sha256": "8154a347cb398d61b020cf4088a8a9ca3c567149212fd0103fb89f8fc26eaba1"
+      },
+      "lane_id": "native384",
+      "numeric_report_binding": {
+        "bytes": 8902,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1730/numeric-report.json",
+        "sha256": "16acbea8e12fffd896bafc6d13ad237db84a87de4d28a6944d1b2dfc69e4f532"
+      },
+      "seed": 1730
+    },
+    {
+      "endpoint_binding": {
+        "bytes": 4172903,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1731/endpoints.json",
+        "sha256": "6c437439c7155c4fecfaebe35ab685fd85a8e4ef566617706435703370a707e5"
+      },
+      "lane_id": "native384",
+      "numeric_report_binding": {
+        "bytes": 8882,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1731/numeric-report.json",
+        "sha256": "061405163c1c4dd0dcbe8db535f5dce10626f43d0a6418a0428bd1ab76604659"
+      },
+      "seed": 1731
+    },
+    {
+      "endpoint_binding": {
+        "bytes": 8257622,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/endpoints.json",
+        "sha256": "7d94d54ffa47770e2f0a5fda7898d3e7210ed9ccee2431e2f7841db7783d8db0"
+      },
+      "lane_id": "native768",
+      "numeric_report_binding": {
+        "bytes": 8901,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/numeric-report.json",
+        "sha256": "2ef120533f20475c41826dda643bcca860f0646806b96694b0492913efbb964c"
+      },
+      "seed": 1729
+    },
+    {
+      "endpoint_binding": {
+        "bytes": 8257739,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/endpoints.json",
+        "sha256": "d1887bedba6662d1252c017c753e4bd7c793b1132aee1acb42c86330cf7fba9e"
+      },
+      "lane_id": "native768",
+      "numeric_report_binding": {
+        "bytes": 8903,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/numeric-report.json",
+        "sha256": "9144e816e9846cf8961c2318a75306c773b3bb132cfb98cd7f83e1e4bdfd3483"
+      },
+      "seed": 1730
+    },
+    {
+      "endpoint_binding": {
+        "bytes": 8257900,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/endpoints.json",
+        "sha256": "2f172dcd9a34ceb8284b543517eb141ffd1a949e1c20266ecf5a800474cb0c2b"
+      },
+      "lane_id": "native768",
+      "numeric_report_binding": {
+        "bytes": 8896,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/numeric-report.json",
+        "sha256": "89e3689bb5fbe825f0598af5b14a4ee6c782ed1f3846503cb18cd2e2c98c0e8d"
+      },
+      "seed": 1731
+    }
+  ],
+  "best_development_seed_selected": false,
+  "content_sha256": "8d9c49a35a02658738a257151644884d1b94d86c0bc5460eede595e114d1ed2a",
+  "cpu_threads": 1,
+  "decoder_forward_calls": 36,
+  "development_rows_per_arm": 32,
+  "development_rows_read_before_all_control_fits": 0,
+  "device": "cpu",
+  "dtype": "float32",
+  "encoder_backbone_calls": 0,
+  "encoder_forward_calls": 36,
+  "evaluation_plan_binding": {
+    "bytes": 9073,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-plan-01.json",
+    "sha256": "353c41fdf1f2e47dd9036a07373f9b40192e062d3bc491a6fd0373237cd22945"
+  },
+  "formal_target_bodies_read": false,
+  "global_cpu_rng_preserved": true,
+  "independent_reviews_created": 0,
+  "independent_semantic_accuracy_measured": false,
+  "masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "mean_control_fit_count": 3,
+  "model_loads": 18,
+  "network_calls": 0,
+  "optimizer_updates": 0,
+  "os_sandbox": false,
+  "pca_control_fit_count": 3,
+  "peak_rss_kib": 707716,
+  "producer_neighborhoods_are_not_semantic_gold": true,
+  "proof_authority": false,
+  "prover_calls": 0,
+  "qualified": false,
+  "schema": "source-only-expanded-reconstruction-evaluation-batch/v1",
+  "scope": "exposed_authored_compositions_reusing_exposed_components_not_pristine_holdout_or_broad_family_study",
+  "semantic_labels_admitted": 0,
+  "semantic_relevance_measured": false,
+  "source_fidelity_established": false,
+  "status": "completed_frozen_source_only_evaluation",
+  "successful_arms": 9,
+  "torch_version": "2.13.0+cu130",
+  "train_rows_per_fit": 32,
+  "wall_seconds": 10.417502006021095,
+  "worker_cpu_seconds": 10.328287000000001
+}
