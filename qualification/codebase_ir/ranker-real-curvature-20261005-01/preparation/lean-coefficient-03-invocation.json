@@ -1,0 +1,85 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1725,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-check-specification.json",
+      "sha256": "c617c6babb324acf8361e85e4a8dde3b74e49beca6ebfb1244082a3abf49276e"
+    },
+    {
+      "bytes": 9311930,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+      "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+    },
+    {
+      "bytes": 1969,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/LogisticCoefficient.lean",
+      "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 25757,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-lean-coefficient-03.py",
+      "sha256": "de4a468ec2178fdbb25c6d17a7ed5112c409b2bfc0dbbed0c24cd7b538558f29"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1725,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-check-specification.json",
+      "sha256": "c617c6babb324acf8361e85e4a8dde3b74e49beca6ebfb1244082a3abf49276e"
+    },
+    {
+      "bytes": 9311930,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+      "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+    },
+    {
+      "bytes": 1969,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/LogisticCoefficient.lean",
+      "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "mode": "lean-coefficient-03",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T04:00:21.477867+00:00"
+}

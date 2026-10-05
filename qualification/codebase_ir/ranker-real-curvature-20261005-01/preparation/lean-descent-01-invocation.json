@@ -1,0 +1,85 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1659,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-check-specification.json",
+      "sha256": "5654ef41aad733fccb982cf941d0066df7f9396a47db841eedff3a3568c9be02"
+    },
+    {
+      "bytes": 9325077,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/environment-manifest.json",
+      "sha256": "d41d511049c9d9a559eb0fe490516aa9f8e9ecaa9aa7b627c05ef332c73c61a0"
+    },
+    {
+      "bytes": 7498,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/RealDescent.lean",
+      "sha256": "84d375413a402aee2780f199c68bef044f52ccfb8b866c7f9123b85c141c2038"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 30575,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-lean-descent-01.py",
+      "sha256": "443c6f5fa40a686bb2db19d37ce5d84fd7f0cd2d130a359ba678ff1db9240274"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1659,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-check-specification.json",
+      "sha256": "5654ef41aad733fccb982cf941d0066df7f9396a47db841eedff3a3568c9be02"
+    },
+    {
+      "bytes": 9325077,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/environment-manifest.json",
+      "sha256": "d41d511049c9d9a559eb0fe490516aa9f8e9ecaa9aa7b627c05ef332c73c61a0"
+    },
+    {
+      "bytes": 7498,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/RealDescent.lean",
+      "sha256": "84d375413a402aee2780f199c68bef044f52ccfb8b866c7f9123b85c141c2038"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "mode": "lean-descent-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T04:12:37.985825+00:00"
+}

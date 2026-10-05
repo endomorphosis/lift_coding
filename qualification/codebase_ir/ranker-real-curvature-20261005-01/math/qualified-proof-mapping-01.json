@@ -1,0 +1,2692 @@
+{
+  "actual_Lean_call_census": {
+    "calls": 19,
+    "genuine_false_rejection": 1,
+    "inconclusive": 8,
+    "qualified_positive": 10
+  },
+  "all32_governing_RPI_exits": "OPEN",
+  "all_failed_attempt_receipts_retained": true,
+  "all_native_attempt_history": [
+    {
+      "diagnostic_stdout_sha256": "ec58ed8ddd18fccf9f3c92c5df77fc835fe5325521c8f61aa75881dac448cbdb",
+      "matches_expectation": false,
+      "owned_closure": {
+        "bytes": 18498,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-01/closed.json",
+        "sha256": "e7180824824915166eb426320e35b3f6e5b85890342835230203c9a5943acd13"
+      },
+      "receipt": {
+        "bytes": 5398,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-01/check-result.json",
+        "sha256": "2756ca9746d7b892112d3cc0dbc08c5c238a8700ee18d49e310ae6e37b0f04c2"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 0,
+      "returncode": 0,
+      "source": {
+        "bytes": 1969,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-01-producer/LogisticCoefficient.lean",
+        "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "diagnostic_stdout_sha256": "ec58ed8ddd18fccf9f3c92c5df77fc835fe5325521c8f61aa75881dac448cbdb",
+      "matches_expectation": false,
+      "owned_closure": {
+        "bytes": 18497,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-02/closed.json",
+        "sha256": "a5e9f4c4e2c71991a8e5daa4581eee44869f83959eb4116cab278b9a4d7b4632"
+      },
+      "receipt": {
+        "bytes": 8354,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-02/check-result.json",
+        "sha256": "b38bb8024929899aaad0582da3d58bd7909ff4be198c044a9d0405e59f077bff"
+      },
+      "reconstruction_validation_error": "ValueError: complete retention manifest absent",
+      "retained_complete_compiled_objects": 0,
+      "returncode": 0,
+      "source": {
+        "bytes": 1969,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-02-producer/LogisticCoefficient.lean",
+        "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "diagnostic_stdout_sha256": "ec58ed8ddd18fccf9f3c92c5df77fc835fe5325521c8f61aa75881dac448cbdb",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17480,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/closed.json",
+        "sha256": "207f668f63e4887293a6e8951da537572fab2b91536e3f38cd7bdfdd182f7a99"
+      },
+      "receipt": {
+        "bytes": 8838,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+        "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 1969,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/LogisticCoefficient.lean",
+        "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "bf13ff69b551635e6d51a34cfe6d256b957e4fcaf356ccb6303502bbb362a14f",
+      "matches_expectation": false,
+      "owned_closure": {
+        "bytes": 19633,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-01/closed.json",
+        "sha256": "78f4d385a610c6424c8ec175ed3c375b7ae34fd10ccdddfc1f3b5c07a5173de0"
+      },
+      "receipt": {
+        "bytes": 7501,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-01/check-result.json",
+        "sha256": "edf2fc6091d1080984fc1bf8d170bf453d7448c651c341eb7321c94668ca0fdd"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 0,
+      "returncode": 1,
+      "source": {
+        "bytes": 6816,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/frozen-01/LogisticCurvature.lean",
+        "sha256": "5ec7780a53c000dceecce646ecd68e009c61a20048f7cb7842a06489a24e4f5f"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "diagnostic_stdout_sha256": "0141f5d6d11b7c6b7b41b3bdb7cb3d3260e9ec3a268aadb3cdbeea4d59365daa",
+      "matches_expectation": false,
+      "owned_closure": {
+        "bytes": 18475,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-02/closed.json",
+        "sha256": "d22480f33b59210b55a966395a06bd915cebbaedf684242478f1699eadc144f7"
+      },
+      "receipt": {
+        "bytes": 5800,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-02/check-result.json",
+        "sha256": "e04ce87d9e6a683e3ee8971021b94ff4aca39ebe4b7524424a950dee033e8031"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 0,
+      "returncode": 1,
+      "source": {
+        "bytes": 6877,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-02-producer/LogisticCurvature.lean",
+        "sha256": "ae1a8e225221e49860a1cfffd99d329629aa0935cd57b35f92daa2abf13733b1"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "diagnostic_stdout_sha256": "0d31548cfc58b9eea6b6a9fc23c30b308d26b1a82106d8754718c80e937e1e46",
+      "matches_expectation": false,
+      "owned_closure": {
+        "bytes": 18473,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-03/closed.json",
+        "sha256": "971674be95ccfd68744d12b869967545c6e60028ee069891a11fb85a3a1d9e00"
+      },
+      "receipt": {
+        "bytes": 5818,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-03/check-result.json",
+        "sha256": "680987c1600061f4b884ba3cc6642ab87b24487b9a9e605c055c8fc6c099aa66"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 0,
+      "returncode": 0,
+      "source": {
+        "bytes": 6877,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-03-producer/LogisticCurvature.lean",
+        "sha256": "48ec4f89f719954bc4e8eb8124dea56517bd3fe7d0156b2412e704a3d69066f3"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "diagnostic_stdout_sha256": "7567f92d5dd50bc2d0876b4dc3f17087b6c5d8e15d1cb440f5d5a84f0b4a735b",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17469,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/closed.json",
+        "sha256": "d41dbb7b038747c2b464f4144922d9999300c3784233cf9948c8c1e548fb67fa"
+      },
+      "receipt": {
+        "bytes": 8455,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+        "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 4035,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/LogisticCurvature.lean",
+        "sha256": "65109da6110e218bf13d0f3f67d4820a748333e0a4be754e4b502081ff423f4a"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "f858df7bc7d3a6e4a8375532d73bb38a4bfdde34341bd20a97af051b8bca8adc",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17461,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/closed.json",
+        "sha256": "788d93fcfffd8de3acab4c76b7da11e2f95890fa0fda94397346c13738abfebb"
+      },
+      "receipt": {
+        "bytes": 10853,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/check-result.json",
+        "sha256": "8dead99aae1ea654ce957e990d6b06218354101bf8c6a13fd9639dccfede20bd"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 7498,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/RealDescent.lean",
+        "sha256": "84d375413a402aee2780f199c68bef044f52ccfb8b866c7f9123b85c141c2038"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "b101887c946c6cf46dca044037c3f9a91d5892b8dd458bb82e4de299778cfbbd",
+      "matches_expectation": false,
+      "owned_closure": {
+        "bytes": 18499,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-01/closed.json",
+        "sha256": "62689ffe4768ea9c9aa2432d1cba55b27b89440adaf74b9b9192363044e74a71"
+      },
+      "receipt": {
+        "bytes": 8000,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-01/check-result.json",
+        "sha256": "4a3abf5b1f63700ac45a07b1a4b3fa7e30110e57245832b66cb6c25775271581"
+      },
+      "reconstruction_validation_error": "ValueError: complete successful retention manifest required",
+      "retained_complete_compiled_objects": 0,
+      "returncode": 1,
+      "source": {
+        "bytes": 7558,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-01-producer/DirectionalObjective.lean",
+        "sha256": "7bcbc5d35c7791b70bf324c4de26b6db0d2762f2218c4bb9bb33cb59228c3e7e"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "diagnostic_stdout_sha256": "a4400d468bd1374e1faf7711c15f392f0e65f4775275dc5a9cf0aa484a43f9f2",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17479,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/closed.json",
+        "sha256": "f8f711ab42412b969dcf8d0f671cc4a0f7973b22d4340a12625d2f62ee212e7b"
+      },
+      "receipt": {
+        "bytes": 9601,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+        "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 7672,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-02-producer/DirectionalObjective.lean",
+        "sha256": "94720052863a636db021de6f22eb903df0b4d0c6ead334bd853191920e0cfc6c"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "d40ee0f0008291803df8e1843e06809219a180bfbff7628f31d69a37cb8956d2",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17489,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-false-control-01/closed.json",
+        "sha256": "89b5e645cbb83de984b6083747377b8b911c821caabf3e253866f0648846857c"
+      },
+      "receipt": {
+        "bytes": 6453,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-false-control-01/check-result.json",
+        "sha256": "7e579e6a09c80c6563e92c991d4f8fe3c2a09bf956ded8f6af29abf5724a6b32"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 0,
+      "returncode": 1,
+      "source": {
+        "bytes": 387,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-false-control-01-producer/FalseCurvatureControl.lean",
+        "sha256": "e7f98b9e1d2b68c5462e3df673c3fb67b50b0e1375b2cffc6f724072a90766dd"
+      },
+      "status": "rejected"
+    },
+    {
+      "diagnostic_stdout_sha256": "f4ae436bd7ba64654f267d1dbe6bbf51e9b6f2ebd6a7baebcd7a55092f3730ac",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17464,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/closed.json",
+        "sha256": "284e145af71477d5f568a970c16a8baffd4cfaae36bd4e2e60d4e76d355c9f92"
+      },
+      "receipt": {
+        "bytes": 7631,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+        "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 973,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/CoordinateGeometry.lean",
+        "sha256": "7dc84d3553fd722e58ef54c8ed661a841c84aacef5611bdfcd8033830b381fda"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "56e5c45e3e6ce5622c6962618be597a0da0e4d11be61997f63bed8380b4419dc",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17464,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/closed.json",
+        "sha256": "de46c5116a36fd8910bef85cbfe6661f513a269b5ccb74178d6cbf0ba98d4d45"
+      },
+      "receipt": {
+        "bytes": 8657,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/check-result.json",
+        "sha256": "315826ae63c23849542259cd613f70f7f2fa2a0e0b57a57a629880bf9ece1920"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 3402,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-gradient-01-producer/RealGradient.lean",
+        "sha256": "9ece52690c173349ba2cfbb345c1f5d4169365da55fc6f527fa16f41c8d9bdc7"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "df5d13f2834a12ecd6b9816246647e139c0d1bb49ab439ae9ac3ddb62ed25e7a",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17459,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/closed.json",
+        "sha256": "3ddb45ff89f3fb4dc5b0ec2528b9079fa211d09808daae31ffc7e132d9b4a1a2"
+      },
+      "receipt": {
+        "bytes": 5997,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/check-result.json",
+        "sha256": "3b5d9428526ec591c95f05a851202eb963f86d593a8e2c08ca87c84862ef473d"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 6710,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/OriginalNumericCurvature.lean",
+        "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "d206d359c46b95f8f58ebdbae0b91fdc94d312b2144b1c851a37da840a5d5f35",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17494,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/closed.json",
+        "sha256": "64484cec1e3f78ff33bf63be62ef20267c2e083e565ee23c401848f0c401dba3"
+      },
+      "receipt": {
+        "bytes": 8924,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/check-result.json",
+        "sha256": "658b3650b7ece388ee2df2fb1ced2a90ccfffb33170018be66e0581ab70d3629"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 1469,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-descent-01-producer/OriginalRealDescent.lean",
+        "sha256": "0acf2608c7d7cb5f3628a30f39f0f9a0c0990a29d831ec9266e970c6d1766526"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "d7443ea371bfb27337be159d5c0d68460c13ff3c3d7fe2976628d44e4b78d13c",
+      "matches_expectation": false,
+      "owned_closure": {
+        "bytes": 18542,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-01/closed.json",
+        "sha256": "b9c362f7cc21e4118dfcf1616c048d800deb50a43fad6308422a7e87a05e3b4f"
+      },
+      "receipt": {
+        "bytes": 7899,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-01/check-result.json",
+        "sha256": "ccaaa4a950e10a1c0fb2c8221ba5ff0e33d5ad434a0a90537d3c33547aba2a42"
+      },
+      "reconstruction_validation_error": "ValueError: complete successful retention manifest required",
+      "retained_complete_compiled_objects": 0,
+      "returncode": 1,
+      "source": {
+        "bytes": 6088,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-01-producer/OriginalRealProfile.lean",
+        "sha256": "52eecc62595596545013a7ec4f2cfc70e4b4c2b9f1607ff5db7237b46be3d196"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "diagnostic_stdout_sha256": "ad69669e92e8f877f2e6c288bdbe0da5dbadb05b012f5a62b3fcfa5aedaaa670",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17503,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/closed.json",
+        "sha256": "9cfbe4d818c8a67cda3bea4ce3ef806e24c4e2cc46be74a21087f066c782349b"
+      },
+      "receipt": {
+        "bytes": 9638,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/check-result.json",
+        "sha256": "d2d8e94548fb71b2f09f39770c856c2ce2ef17fa769000d875ac6b5b67e806ec"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 6088,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/OriginalRealProfile.lean",
+        "sha256": "52eecc62595596545013a7ec4f2cfc70e4b4c2b9f1607ff5db7237b46be3d196"
+      },
+      "status": "passed"
+    },
+    {
+      "diagnostic_stdout_sha256": "25495ac828a5fd97db34f23064147814d86538925b126a8a4670cd165864f30c",
+      "matches_expectation": false,
+      "owned_closure": {
+        "bytes": 18461,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-01/closed.json",
+        "sha256": "37d6b1a7bbb64d36d43a23249a7348d1786c7eca167690c16a51c338b487a159"
+      },
+      "receipt": {
+        "bytes": 9523,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-01/check-result.json",
+        "sha256": "ea28cfda6c34085c517332fbc7b5e84b0e82471a6eb7dd20cf06fe6210b9faed"
+      },
+      "reconstruction_validation_error": "ValueError: complete successful retention manifest required",
+      "retained_complete_compiled_objects": 0,
+      "returncode": 1,
+      "source": {
+        "bytes": 4468,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-01-producer/ScalarSoftplus.lean",
+        "sha256": "bafdea51b8066380a64ed8a4c0008636447a564b85b719e28f7cafc10fdef40c"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "diagnostic_stdout_sha256": "e03255a6b053e5b1bf2bedc4fe856c86c6d6daa71d8c13d9de9f7024593ba3f9",
+      "matches_expectation": true,
+      "owned_closure": {
+        "bytes": 17464,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/closed.json",
+        "sha256": "10bca1c40acc04de34564b780d21039b6e179f414b2c869b2455bc39d3e8bd8d"
+      },
+      "receipt": {
+        "bytes": 9684,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+        "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+      },
+      "reconstruction_validation_error": null,
+      "retained_complete_compiled_objects": 1,
+      "returncode": 0,
+      "source": {
+        "bytes": 4839,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/ScalarSoftplus.lean",
+        "sha256": "e32f5a68f4365fa60a2321a0cb7f6076e998c7841547255f90124a4875a36379"
+      },
+      "status": "passed"
+    }
+  ],
+  "binary64_error_bound_proved": false,
+  "completion_authority": false,
+  "dependency_bodies_rehashed_here": false,
+  "execution_authority": false,
+  "file_only_review": true,
+  "formalization_authority": false,
+  "full_source_satisfaction": false,
+  "full_task_satisfaction": "unknown",
+  "genuine_false_control": {
+    "precise_scope": "Sharp c(0)=1/4 refutes an eighth cap; separate intentional False statement is genuinely rejected by decide +kernel. This is not a global-convergence false control.",
+    "queried_counterexample_axioms": [
+      {
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "report_occurrences": 1,
+        "theorem": "RankerRealCurvature.sharp_coefficient_refutes_eighth"
+      }
+    ],
+    "receipt": {
+      "bytes": 6453,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-false-control-01/check-result.json",
+      "sha256": "7e579e6a09c80c6563e92c991d4f8fe3c2a09bf956ded8f6af29abf5724a6b32"
+    },
+    "source": {
+      "bytes": 387,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-false-control-01-producer/FalseCurvatureControl.lean",
+      "sha256": "e7f98b9e1d2b68c5462e3df673c3fb67b50b0e1375b2cffc6f724072a90766dd"
+    }
+  },
+  "git_calls_here": 0,
+  "global_autoencoder_convergence_proved": false,
+  "global_optimizer_convergence_proved": false,
+  "independent_numeric_literal_join": {
+    "all320_coordinate_literal_strings_match": true,
+    "all4_norm_literal_strings_match": true,
+    "complete_source_bytes_and_SHA256_match": true,
+    "expected_source_bytes": 6710,
+    "expected_source_sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc",
+    "formal_Float_to_Rat_conversion_proved": false,
+    "full_expected_source_regenerated_in_memory": true,
+    "matrix_coordinates": 320,
+    "mu_eta_maxNorm_meanL_conservativeL_literal_strings_match": true,
+    "no_norm_recomputation_no_new_binding_no_generated_source_write": true
+  },
+  "mathematical_statements": {
+    "actual_real_objective": "F(w)=mu/2*sum_j(w_j^2)+(1/n)*sum_i ell(dot(w,d_i)). The derivative of F(w+t*v) is the explicit lineFirstDerivative; its second derivative at every t is Q evaluated at w+t*v. Thus at t=0, the actual second directional derivative equals the stated candidate quadratic form.",
+    "actual_scalar_loss": "ell(t)=Real.log(1+Real.exp(-t)); ell_prime=-p, p_prime=-c, ell_second=c. The exact-real stable branch max(0,-t)+log(1+exp(-abs(t))) equals ell(t).",
+    "candidate_quadratic": "For all finite real vectors, n>0, arbitrary real mu, and Q=mu*sum_j(v_j^2)+(1/n)*sum_i c(dot(w,d_i))*dot(v,d_i)^2, mu*||v||_2^2<=Q<=(mu+sum_i||d_i||_2^2/(4n))*||v||_2^2.",
+    "coefficient": "For every real t, p(t)=1/(1+exp(t)) is strictly between 0 and 1, so c(t)=p(t)(1-p(t)) satisfies 0<=c(t)<=1/4; c(0)=1/4.",
+    "coordinate_gradient": "g_j(w)=mu*w_j-(1/n)*sum_i p(dot(w,d_i))*d_ij. Finite sum interchange establishes Fline_prime(0)=dot(g(w),v); no gradient identity is a premise.",
+    "exact_real_descent": "For the exact-real coordinate step w-eta*g(w), F(next)<=F(w)-eta*(1-eta*L/2)||g(w)||_2^2. With mu>0, eta>=0 and eta<=1/L, L>0 is derived and F(next)<=F(w)-(eta/2)||g(w)||_2^2. These sources do not establish native rounding error, gradient-map contraction, optimizer existence, or iteration convergence.",
+    "exact_real_taylor_upper": "For n>0 and L=mu+sum_i||d_i||_2^2/(4n), F(w+v)<=F(w)+dot(g(w),v)+(L/2)||v||_2^2. Established actual derivatives and curvature bound supply a scalar convexity proof, rather than assume the inequality.",
+    "norm_convention": "squaredEuclideanNorm=coordinate sum of squares. This is deliberately not Lean function-space default norm notation.",
+    "operator_hessian_limit": "No operator-valued Frechet Hessian, formal whole-Python semantic equality, or native implementation derivative is claimed by these sources.",
+    "original_real_profile_join": "For the independently bound OriginalNumericCurvature literal lists, originalRatCoordinates(i,j)=differences.getD(i,[]).getD(j,0) for Fin4/Fin80. Closed finite facts prove every index is in range, all four Fin80 coordinate sum-of-square norms equal recorded Rat norms, and the Fin4 mean equals recorded Rat L. A general finite-sum Rat-to-real cast lemma then proves real-coordinate norm/L equality and transfers mu/eta positivity and eta*L<=1 to the actual original exact-real matrix. No vector-alignment hypothesis or expanded43da profile substitutes for these proofs.",
+    "original_safe_descent": "OriginalRealDescent supplies the exact original mu/eta/matrix to realGradientStep_safe_descent through the proved real mean-L equality and eta<=1/L. This is an exact-real statement for the bound original coordinates; it is not a native update or global convergence statement."
+  },
+  "mutation_authority": false,
+  "network_calls_here": 0,
+  "new_native_Lean_or_solver_calls_here": 0,
+  "new_norm_folds_or_numeric_bindings_here": 0,
+  "new_training_or_replay_calls_here": 0,
+  "numeric_binding": {
+    "bytes": 17176,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/numeric-binding.json",
+    "sha256": "2e4a8aaf11e484b4bb8e7d63c993eb955e4f26a7183c3d5cb32fed6290bd8274"
+  },
+  "numeric_source_generator": {
+    "bytes": 3838,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/generate_numeric_lean.py",
+    "sha256": "8b967c9e757c77c455e603bcd23b54a950a8baf5f320a1ddb3ab38f5d117e323"
+  },
+  "numeric_source_mapping": {
+    "bytes": 627,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/numeric-source-mapping.json",
+    "sha256": "b613a5c75520dc1c6834f662c9e94b8cf1b5557204a0359ba9763c3ec8a49b31"
+  },
+  "official_benchmark_score": null,
+  "omission_authority": false,
+  "original_profile": {
+    "authentication": {
+      "bytes": 40487,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/authentication-result.json",
+      "sha256": "43b69bbb493c0aff290b040eb734d24866b2c83817e96950a0a86aada057f794"
+    },
+    "checkpoint_sha256": "ab63f45bb3b6bc54038cc4ea4ff44b14c17a6f9f8b0426441a15933772227046",
+    "complete_native_result_canonical_sha256": "6d904cc4662e271372c68bd27d5a6c041018cd786259c2f48adec919c7a80ef4",
+    "coordinates": 80,
+    "corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+    "expanded_43da_profile_accepted": false,
+    "frozen_ranker_source": {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    "native_eta_exact": {
+      "denominator": "4503599627370496",
+      "numerator": "1825681634788183"
+    },
+    "native_mu_exact": {
+      "denominator": "576460752303423488",
+      "numerator": "5764607523034235"
+    },
+    "native_update_profile_sha256": "5c8809e8cb25e058d803df64166082eedcf90fc9889ba7de5ee0a534799ba654",
+    "numeric_materialization_owner": "numeric-binding sibling; exact vector list must match original d4aa corpus and e850 difference hash, not substitute expanded corpus authority",
+    "pairs": 4,
+    "qualified_finite_review": {
+      "bytes": 9571,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-review-01.json",
+      "sha256": "d1809dca6471ba8640f03805d6ed1ef557a7879887664de9ec712abac90c0e8f"
+    },
+    "train_pair_feature_differences_sha256": "e8504c6e8004a2f2878bc79aae0af54c9541bff82df8cde670b48bdf7da03ac6",
+    "train_pairs_sha256": "ae4c11971dd8f1a763e88e2c113d8c6e8bf1d4919df8f4b2760a36c496729845",
+    "training_receipt_sha256": "89e5b20348bb6439a71d1aec72c962c4775a0b5fd1f6716243102f41ac7384e6"
+  },
+  "planner_activation": false,
+  "proof_authority": false,
+  "python_ranker_source_equivalence_proved": false,
+  "qualified_mathematical_claims": {
+    "actual_real_scalar_derivative": true,
+    "actual_real_second_directional_identity": true,
+    "candidate_quadratic_bounds": true,
+    "coefficient_bounds_and_sharpness": true,
+    "coordinate_first_directional_gradient_identity": true,
+    "original_Rat_literal_and_finite_shape_norm_parameter_facts": true,
+    "original_Rat_to_Real_coordinate_norm_L_step_join": true,
+    "original_exact_real_safe_one_step_descent": true,
+    "real_Taylor_upper_and_safe_one_step_descent": true
+  },
+  "qualified_modules": {
+    "CoordinateGeometry": {
+      "augmented_checked_source": {
+        "bytes": 1094,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/lean/CoordinateGeometry.lean",
+        "sha256": "fc39d0055a7f57a17f79aaaa4508c4ef1ff9e5c86a83a81f76062e75c3f9a669"
+      },
+      "checked_source": {
+        "bytes": 973,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/CoordinateGeometry.lean",
+        "sha256": "7dc84d3553fd722e58ef54c8ed661a841c84aacef5611bdfcd8033830b381fda"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 48096,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/lean/CoordinateGeometry.olean",
+          "sha256": "681216b3ddb2614978cefe66f5aad8042cc9bbddac74d77e92a135b97304598d"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9311895,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+        "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 0.892758383997716,
+      "native_receipt": {
+        "bytes": 7631,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+        "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+      },
+      "owned_closure": {
+        "bytes": 17464,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/closed.json",
+        "sha256": "284e145af71477d5f568a970c16a8baffd4cfaae36bd4e2e60d4e76d355c9f92"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "RankerRealCurvature.squaredEuclideanNorm_nonneg"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.dot_sq_le"
+        }
+      ],
+      "registered_local_imports": [],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 48096,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/lean/LeanProofChunk000.bin",
+            "sha256": "681216b3ddb2614978cefe66f5aad8042cc9bbddac74d77e92a135b97304598d"
+          }
+        ],
+        "manifest": {
+          "bytes": 546,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/lean/LeanProofChunks.json",
+          "sha256": "5e49af3dc1a414119dc61debdbb27f1def174dc4fd7b19aad9babd7fbfc02655"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 48096,
+          "chunk_count": 1,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Explicit Euclidean coordinate sum of squares, nonnegativity and finite Cauchy-Schwarz.",
+      "source": {
+        "bytes": 973,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/CoordinateGeometry.lean",
+        "sha256": "7dc84d3553fd722e58ef54c8ed661a841c84aacef5611bdfcd8033830b381fda"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 12,
+          "name": "dot"
+        },
+        {
+          "line": 15,
+          "name": "squaredEuclideanNorm"
+        },
+        {
+          "line": 17,
+          "name": "squaredEuclideanNorm_nonneg"
+        },
+        {
+          "line": 21,
+          "name": "dot_sq_le"
+        }
+      ]
+    },
+    "DirectionalObjective": {
+      "augmented_checked_source": {
+        "bytes": 7817,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/lean/DirectionalObjective.lean",
+        "sha256": "685d4a041b56769dbfeed8cc39e40ded99e0ac0ee2fd5e2e4c75e2e81c8b9839"
+      },
+      "checked_source": {
+        "bytes": 7672,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-02-producer/DirectionalObjective.lean",
+        "sha256": "94720052863a636db021de6f22eb903df0b4d0c6ead334bd853191920e0cfc6c"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 199832,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/lean/DirectionalObjective.olean",
+          "sha256": "56e8b30f864fdfe1d6c8efecc24edab80bb2ce68ff3c172414de0330f2fb9218"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9320746,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-02-producer/environment-manifest.json",
+        "sha256": "1b39457d00dbc69f08dd771bc125cc527a03eb050445ecc25ece89f79ac9db38"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 1.5025929249823093,
+      "native_receipt": {
+        "bytes": 9601,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+        "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+      },
+      "owned_closure": {
+        "bytes": 17479,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/closed.json",
+        "sha256": "f8f711ab42412b969dcf8d0f671cc4a0f7973b22d4340a12625d2f62ee212e7b"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.secondDeriv_realObjectiveLine"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.actual_secondDirectional_bounds"
+        }
+      ],
+      "registered_local_imports": [
+        {
+          "environment": {
+            "bytes": 9311930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+            "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+          },
+          "module": "LogisticCoefficient",
+          "qualification": {
+            "bytes": 8838,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+            "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9311895,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+            "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+          },
+          "module": "CoordinateGeometry",
+          "qualification": {
+            "bytes": 7631,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+            "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9316338,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+            "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+          },
+          "module": "LogisticCurvature",
+          "qualification": {
+            "bytes": 8455,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+            "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9318521,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/environment-manifest.json",
+            "sha256": "9bc81e02bf4c72393cfdff29d91a70f11cbe500c484e5c2043fdf475d1f15d37"
+          },
+          "module": "ScalarSoftplus",
+          "qualification": {
+            "bytes": 9684,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+            "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+          }
+        }
+      ],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/lean/LeanProofChunk000.bin",
+            "sha256": "0db0e58ec26bf6bb610999f8e19d0dc1f986d4415af1a43d72765011d353989c"
+          },
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/lean/LeanProofChunk001.bin",
+            "sha256": "4c2bce8be6dd84ec788f16d88e9d9578cbe5fd75a01ecfa79296289ac9d316fa"
+          },
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/lean/LeanProofChunk002.bin",
+            "sha256": "9e7e3b03680e00bd18e945923eb08ed44d90aa6ba67e95231e6d0ddd83369001"
+          },
+          {
+            "bytes": 3224,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/lean/LeanProofChunk003.bin",
+            "sha256": "4a3b868a601131f01738a9433fcd6601863cf639688f81cd524a362bc812c3f0"
+          }
+        ],
+        "manifest": {
+          "bytes": 990,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/lean/LeanProofChunks.json",
+          "sha256": "7dc458b1bdf22f993c4c8717ff7c847f87397dabeee3db72cf73e08ba4ab92c7"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 199832,
+          "chunk_count": 4,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Actual second derivative of the real objective along every affine line equals Q.",
+      "source": {
+        "bytes": 7672,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/DirectionalObjective.lean",
+        "sha256": "94720052863a636db021de6f22eb903df0b4d0c6ead334bd853191920e0cfc6c"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 21,
+          "name": "lineShift"
+        },
+        {
+          "line": 24,
+          "name": "realObjective"
+        },
+        {
+          "line": 29,
+          "name": "realStableObjective"
+        },
+        {
+          "line": 34,
+          "name": "realStableObjective_eq"
+        },
+        {
+          "line": 39,
+          "name": "realObjectiveLine"
+        },
+        {
+          "line": 43,
+          "name": "lineFirstDerivative"
+        },
+        {
+          "line": 49,
+          "name": "dot_self_eq_squaredEuclideanNorm"
+        },
+        {
+          "line": 53,
+          "name": "hasDerivAt_lineShift_coordinate"
+        },
+        {
+          "line": 59,
+          "name": "hasDerivAt_dot_lineShift"
+        },
+        {
+          "line": 65,
+          "name": "hasDerivAt_regularizerLine"
+        },
+        {
+          "line": 80,
+          "name": "hasDerivAt_realObjectiveLine"
+        },
+        {
+          "line": 96,
+          "name": "hasDerivAt_lineFirstDerivative"
+        },
+        {
+          "line": 124,
+          "name": "secondDeriv_realObjectiveLine"
+        },
+        {
+          "line": 134,
+          "name": "secondDeriv_realObjectiveLine_zero"
+        },
+        {
+          "line": 146,
+          "name": "actual_secondDirectional_bounds"
+        }
+      ]
+    },
+    "LogisticCoefficient": {
+      "augmented_checked_source": {
+        "bytes": 2163,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/lean/LogisticCoefficient.lean",
+        "sha256": "0226058b88b3a8d87b4e3ac7f6de75a35a2e0df49030b41cb223df53b2e912c7"
+      },
+      "checked_source": {
+        "bytes": 1969,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/LogisticCoefficient.lean",
+        "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 139424,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/lean/LogisticCoefficient.olean",
+          "sha256": "ba7cc0d71da28f92fe47bdd71363e45fdfedc2c8e5914faf222275e270c5fd1a"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9311930,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+        "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 1.0986667230026796,
+      "native_receipt": {
+        "bytes": 8838,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+        "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+      },
+      "owned_closure": {
+        "bytes": 17480,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/closed.json",
+        "sha256": "207f668f63e4887293a6e8951da537572fab2b91536e3f38cd7bdfdd182f7a99"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "RankerRealCurvature.realLogisticP_mem_Ioo"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.realLogisticCoeff_bounds"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.realLogisticCoeff_zero"
+        }
+      ],
+      "registered_local_imports": [],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/lean/LeanProofChunk000.bin",
+            "sha256": "2c342b5675ad110f9dc9d5f59e4bdfb931255ac8f9bcbae8716c556f02edd7e8"
+          },
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/lean/LeanProofChunk001.bin",
+            "sha256": "5d0185258c6d95f92829bef428b892f72f357c365bb4aa4171fa0417d67d3bfc"
+          },
+          {
+            "bytes": 8352,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/lean/LeanProofChunk002.bin",
+            "sha256": "16ebb8340cbc243f69954b70d5ada76791e96e5381727ffe6b4ba357d04903b9"
+          }
+        ],
+        "manifest": {
+          "bytes": 842,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/lean/LeanProofChunks.json",
+          "sha256": "d71f517cb3781d0b3d542ef525be2d2de5fe1810da3ff7b885121573877af714"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 139424,
+          "chunk_count": 3,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Real logistic p in (0,1), coefficient in [0,1/4], sharp c(0)=1/4.",
+      "source": {
+        "bytes": 1969,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/LogisticCoefficient.lean",
+        "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 10,
+          "name": "realLogisticP"
+        },
+        {
+          "line": 13,
+          "name": "realLogisticCoeff"
+        },
+        {
+          "line": 17,
+          "name": "realLogisticP_mem_Ioo"
+        },
+        {
+          "line": 34,
+          "name": "realLogisticCoeff_bounds"
+        },
+        {
+          "line": 44,
+          "name": "realLogisticCoeff_zero"
+        }
+      ]
+    },
+    "LogisticCurvature": {
+      "augmented_checked_source": {
+        "bytes": 4179,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/lean/LogisticCurvature.lean",
+        "sha256": "db713de9ec7c82cd7ca913127efb7de1cd2e318c38021662ef6c2653991df1f6"
+      },
+      "checked_source": {
+        "bytes": 4035,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/LogisticCurvature.lean",
+        "sha256": "65109da6110e218bf13d0f3f67d4820a748333e0a4be754e4b502081ff423f4a"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 116856,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/lean/LogisticCurvature.olean",
+          "sha256": "180449ef3c7093004a5a8b894e1cbe3ade6aff3d73758559b4a77ceac198611a"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9316338,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+        "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 1.137204835016746,
+      "native_receipt": {
+        "bytes": 8455,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+        "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+      },
+      "owned_closure": {
+        "bytes": 17469,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/closed.json",
+        "sha256": "d41dbb7b038747c2b464f4144922d9999300c3784233cf9948c8c1e548fb67fa"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.candidateHessianQuad_bounds"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.originalFourPairCandidate_bounds"
+        }
+      ],
+      "registered_local_imports": [
+        {
+          "environment": {
+            "bytes": 9311930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+            "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+          },
+          "module": "LogisticCoefficient",
+          "qualification": {
+            "bytes": 8838,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+            "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9311895,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+            "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+          },
+          "module": "CoordinateGeometry",
+          "qualification": {
+            "bytes": 7631,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+            "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+          }
+        }
+      ],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/lean/LeanProofChunk000.bin",
+            "sha256": "5da95b0dedff43806194d054ccaf38c2e51e3639c9f25992ea3f502940cbd082"
+          },
+          {
+            "bytes": 51320,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/lean/LeanProofChunk001.bin",
+            "sha256": "f7b560de52c61a3337d7a12371d6f1086ab9289f39af00953ac0710c6103bba4"
+          }
+        ],
+        "manifest": {
+          "bytes": 694,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/lean/LeanProofChunks.json",
+          "sha256": "f1efbd7f007f16bc4f57988e3da3701eff1037b7390d6122324ec079ecdaa8e7"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 116856,
+          "chunk_count": 2,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Bounds for stated candidate Q; this module alone does not identify an objective derivative.",
+      "source": {
+        "bytes": 4035,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/LogisticCurvature.lean",
+        "sha256": "65109da6110e218bf13d0f3f67d4820a748333e0a4be754e4b502081ff423f4a"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 13,
+          "name": "candidateHessianQuad"
+        },
+        {
+          "line": 20,
+          "name": "candidateHessianQuad_bounds"
+        },
+        {
+          "line": 70,
+          "name": "originalFourPairCandidate_bounds"
+        }
+      ]
+    },
+    "OriginalNumericCurvature": {
+      "augmented_checked_source": {
+        "bytes": 7171,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/lean/OriginalNumericCurvature.lean",
+        "sha256": "982da522b3059d50471007a9d0c97431e6fde780adab3b493e0e43a0da36abaa"
+      },
+      "checked_source": {
+        "bytes": 6710,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/OriginalNumericCurvature.lean",
+        "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 56104,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/lean/OriginalNumericCurvature.olean",
+          "sha256": "b8a89ce90adb8a92c03c6d98d123f172e94be68bc0478a4b499092c91d44e8ca"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9922660,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/environment-manifest.json",
+        "sha256": "7dff0dc3f2dddb5bba5b0864ec6d5899f842b9c6a7208af11b2212044912a988"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 0.3861178340157494,
+      "native_receipt": {
+        "bytes": 5997,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/check-result.json",
+        "sha256": "3b5d9428526ec591c95f05a851202eb963f86d593a8e2c08ca87c84862ef473d"
+      },
+      "owned_closure": {
+        "bytes": 17459,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/closed.json",
+        "sha256": "3ddb45ff89f3fb4dc5b0ec2528b9079fa211d09808daae31ffc7e132d9b4a1a2"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "OriginalRankerCurvatureArithmetic.original_norms_exact"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "OriginalRankerCurvatureArithmetic.original_shape"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "OriginalRankerCurvatureArithmetic.original_positive_scalars"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "OriginalRankerCurvatureArithmetic.original_mean_bound"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "OriginalRankerCurvatureArithmetic.original_conservative_bound"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "OriginalRankerCurvatureArithmetic.original_safe_steps"
+        }
+      ],
+      "registered_local_imports": [],
+      "retention": null,
+      "role": "Exact Rat literal matrix norm/shape/parameter/safe-step arithmetic.",
+      "source": {
+        "bytes": 6710,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalNumericCurvature.lean",
+        "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 7,
+          "name": "differences"
+        },
+        {
+          "line": 11,
+          "name": "squaredNorms"
+        },
+        {
+          "line": 12,
+          "name": "mu"
+        },
+        {
+          "line": 13,
+          "name": "eta"
+        },
+        {
+          "line": 14,
+          "name": "maxSquaredNorm"
+        },
+        {
+          "line": 15,
+          "name": "meanL"
+        },
+        {
+          "line": 16,
+          "name": "conservativeL"
+        },
+        {
+          "line": 17,
+          "name": "squaredNorm"
+        },
+        {
+          "line": 18,
+          "name": "original_norms_exact"
+        },
+        {
+          "line": 20,
+          "name": "original_shape"
+        },
+        {
+          "line": 22,
+          "name": "original_positive_scalars"
+        },
+        {
+          "line": 24,
+          "name": "original_mean_bound"
+        },
+        {
+          "line": 26,
+          "name": "original_conservative_bound"
+        },
+        {
+          "line": 29,
+          "name": "original_safe_steps"
+        }
+      ]
+    },
+    "OriginalRealDescent": {
+      "augmented_checked_source": {
+        "bytes": 1616,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/lean/OriginalRealDescent.lean",
+        "sha256": "4808e5b75747f97d320e93bd22abe120221520ddb48ae1efa54c6df7c9b79d78"
+      },
+      "checked_source": {
+        "bytes": 1469,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-descent-01-producer/OriginalRealDescent.lean",
+        "sha256": "0acf2608c7d7cb5f3628a30f39f0f9a0c0990a29d831ec9266e970c6d1766526"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 30480,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/lean/OriginalRealDescent.olean",
+          "sha256": "437f4a0cd82654ec970888a0fefc20d54b60202f3be5f5f95b35a9de18770618"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9950071,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-descent-01-producer/environment-manifest.json",
+        "sha256": "329b993f9c09e978c2c46b173670a93195ddf720c9462472824eae283a7ac341"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 1.358642316015903,
+      "native_receipt": {
+        "bytes": 8924,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/check-result.json",
+        "sha256": "658b3650b7ece388ee2df2fb1ced2a90ccfffb33170018be66e0581ab70d3629"
+      },
+      "owned_closure": {
+        "bytes": 17494,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/closed.json",
+        "sha256": "64484cec1e3f78ff33bf63be62ef20267c2e083e565ee23c401848f0c401dba3"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.originalReal_meanCurvatureBound_exact"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.originalReal_safe_descent"
+        }
+      ],
+      "registered_local_imports": [
+        {
+          "environment": {
+            "bytes": 9311930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+            "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+          },
+          "module": "LogisticCoefficient",
+          "qualification": {
+            "bytes": 8838,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+            "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9311895,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+            "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+          },
+          "module": "CoordinateGeometry",
+          "qualification": {
+            "bytes": 7631,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+            "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9316338,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+            "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+          },
+          "module": "LogisticCurvature",
+          "qualification": {
+            "bytes": 8455,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+            "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9318521,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/environment-manifest.json",
+            "sha256": "9bc81e02bf4c72393cfdff29d91a70f11cbe500c484e5c2043fdf475d1f15d37"
+          },
+          "module": "ScalarSoftplus",
+          "qualification": {
+            "bytes": 9684,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+            "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9320746,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-02-producer/environment-manifest.json",
+            "sha256": "1b39457d00dbc69f08dd771bc125cc527a03eb050445ecc25ece89f79ac9db38"
+          },
+          "module": "DirectionalObjective",
+          "qualification": {
+            "bytes": 9601,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+            "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9322930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-gradient-01-producer/environment-manifest.json",
+            "sha256": "18c13f80694fd1eaceedd33fffef13e52d8f892e440b3454a6b3db56455b0a06"
+          },
+          "module": "RealGradient",
+          "qualification": {
+            "bytes": 8657,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/check-result.json",
+            "sha256": "315826ae63c23849542259cd613f70f7f2fa2a0e0b57a57a629880bf9ece1920"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9325077,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/environment-manifest.json",
+            "sha256": "d41d511049c9d9a559eb0fe490516aa9f8e9ecaa9aa7b627c05ef332c73c61a0"
+          },
+          "module": "RealDescent",
+          "qualification": {
+            "bytes": 10853,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/check-result.json",
+            "sha256": "8dead99aae1ea654ce957e990d6b06218354101bf8c6a13fd9639dccfede20bd"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9922660,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/environment-manifest.json",
+            "sha256": "7dff0dc3f2dddb5bba5b0864ec6d5899f842b9c6a7208af11b2212044912a988"
+          },
+          "module": "OriginalNumericCurvature",
+          "qualification": {
+            "bytes": 5997,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/check-result.json",
+            "sha256": "3b5d9428526ec591c95f05a851202eb963f86d593a8e2c08ca87c84862ef473d"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9943486,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/environment-manifest.json",
+            "sha256": "43022260cd76d6195b3a4d0a7ec1ec8be2bdfdc04982e9e2d7a083af28c8f640"
+          },
+          "module": "OriginalRealProfile",
+          "qualification": {
+            "bytes": 9638,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/check-result.json",
+            "sha256": "d2d8e94548fb71b2f09f39770c856c2ce2ef17fa769000d875ac6b5b67e806ec"
+          }
+        }
+      ],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 30480,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/lean/LeanProofChunk000.bin",
+            "sha256": "437f4a0cd82654ec970888a0fefc20d54b60202f3be5f5f95b35a9de18770618"
+          }
+        ],
+        "manifest": {
+          "bytes": 547,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/lean/LeanProofChunks.json",
+          "sha256": "58ad52ab23e267f79c5ac5efbd0c375f98a3a3debb723fb05b27e1fab8aae22b"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 30480,
+          "chunk_count": 1,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Original mu/eta/coordinates instantiate the exact-real safe-step decrease.",
+      "source": {
+        "bytes": 1469,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalRealDescent.lean",
+        "sha256": "0acf2608c7d7cb5f3628a30f39f0f9a0c0990a29d831ec9266e970c6d1766526"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 13,
+          "name": "originalReal_meanCurvatureBound_exact"
+        },
+        {
+          "line": 19,
+          "name": "originalReal_safe_descent"
+        }
+      ]
+    },
+    "OriginalRealProfile": {
+      "augmented_checked_source": {
+        "bytes": 6316,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/lean/OriginalRealProfile.lean",
+        "sha256": "4e700632a124495728470810b1f5a2798b99b0096978ec6198ff2b747c1f69a4"
+      },
+      "checked_source": {
+        "bytes": 6088,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/OriginalRealProfile.lean",
+        "sha256": "52eecc62595596545013a7ec4f2cfc70e4b4c2b9f1607ff5db7237b46be3d196"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 90680,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/lean/OriginalRealProfile.olean",
+          "sha256": "bb4cb92353477546673f3cbca4029c654a4e358bd2994e29182982488249aa54"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9943486,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/environment-manifest.json",
+        "sha256": "43022260cd76d6195b3a4d0a7ec1ec8be2bdfdc04982e9e2d7a083af28c8f640"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 1.8714270680211484,
+      "native_receipt": {
+        "bytes": 9638,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/check-result.json",
+        "sha256": "d2d8e94548fb71b2f09f39770c856c2ce2ef17fa769000d875ac6b5b67e806ec"
+      },
+      "owned_closure": {
+        "bytes": 17503,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/closed.json",
+        "sha256": "9cfbe4d818c8a67cda3bea4ce3ef806e24c4e2cc46be74a21087f066c782349b"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "RankerRealCurvature.originalReal_norms_exact"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.originalReal_eta_le_inverse_meanL"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.originalReal_actual_secondDirectional_bounds"
+        }
+      ],
+      "registered_local_imports": [
+        {
+          "environment": {
+            "bytes": 9311930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+            "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+          },
+          "module": "LogisticCoefficient",
+          "qualification": {
+            "bytes": 8838,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+            "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9311895,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+            "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+          },
+          "module": "CoordinateGeometry",
+          "qualification": {
+            "bytes": 7631,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+            "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9316338,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+            "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+          },
+          "module": "LogisticCurvature",
+          "qualification": {
+            "bytes": 8455,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+            "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9318521,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/environment-manifest.json",
+            "sha256": "9bc81e02bf4c72393cfdff29d91a70f11cbe500c484e5c2043fdf475d1f15d37"
+          },
+          "module": "ScalarSoftplus",
+          "qualification": {
+            "bytes": 9684,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+            "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9320746,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-02-producer/environment-manifest.json",
+            "sha256": "1b39457d00dbc69f08dd771bc125cc527a03eb050445ecc25ece89f79ac9db38"
+          },
+          "module": "DirectionalObjective",
+          "qualification": {
+            "bytes": 9601,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+            "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9922660,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/environment-manifest.json",
+            "sha256": "7dff0dc3f2dddb5bba5b0864ec6d5899f842b9c6a7208af11b2212044912a988"
+          },
+          "module": "OriginalNumericCurvature",
+          "qualification": {
+            "bytes": 5997,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/check-result.json",
+            "sha256": "3b5d9428526ec591c95f05a851202eb963f86d593a8e2c08ca87c84862ef473d"
+          }
+        }
+      ],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/lean/LeanProofChunk000.bin",
+            "sha256": "aec098bc0c6da156652f1808826312c4659e5c694d0f8682408381714898af14"
+          },
+          {
+            "bytes": 25144,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/lean/LeanProofChunk001.bin",
+            "sha256": "967250fd800f9b46370164c34ebea52b81855de797adf9378afd9b255e64d0e3"
+          }
+        ],
+        "manifest": {
+          "bytes": 694,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/lean/LeanProofChunks.json",
+          "sha256": "efd984223268f1eb3eae18a96c5ae4d3bbce80351ae1112ef9a5fcdcd5f2744e"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 90680,
+          "chunk_count": 2,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Actual Rat/List to Fin4xFin80 Real coordinate/norm/L/eta join, without an alignment premise.",
+      "source": {
+        "bytes": 6088,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalRealProfile.lean",
+        "sha256": "52eecc62595596545013a7ec4f2cfc70e4b4c2b9f1607ff5db7237b46be3d196"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 22,
+          "name": "originalRatCoordinates"
+        },
+        {
+          "line": 26,
+          "name": "originalRat_index_bounds"
+        },
+        {
+          "line": 33,
+          "name": "originalRat_finite_norms_exact"
+        },
+        {
+          "line": 39,
+          "name": "originalRat_finite_mean_exact"
+        },
+        {
+          "line": 45,
+          "name": "originalRat_meanL_pos"
+        },
+        {
+          "line": 48,
+          "name": "ratCastFinsetSum"
+        },
+        {
+          "line": 55,
+          "name": "originalRealDifferences"
+        },
+        {
+          "line": 58,
+          "name": "originalRealMu"
+        },
+        {
+          "line": 60,
+          "name": "originalRealEta"
+        },
+        {
+          "line": 62,
+          "name": "originalRealMeanL"
+        },
+        {
+          "line": 65,
+          "name": "originalReal_norms_exact"
+        },
+        {
+          "line": 75,
+          "name": "originalReal_meanL_exact"
+        },
+        {
+          "line": 87,
+          "name": "originalReal_mu_pos"
+        },
+        {
+          "line": 90,
+          "name": "originalReal_eta_pos"
+        },
+        {
+          "line": 93,
+          "name": "originalReal_meanL_pos"
+        },
+        {
+          "line": 96,
+          "name": "originalReal_eta_times_meanL_le_one"
+        },
+        {
+          "line": 102,
+          "name": "originalReal_eta_le_inverse_meanL"
+        },
+        {
+          "line": 106,
+          "name": "originalReal_candidate_bounds"
+        },
+        {
+          "line": 116,
+          "name": "originalReal_actual_secondDirectional_bounds"
+        }
+      ]
+    },
+    "RealDescent": {
+      "augmented_checked_source": {
+        "bytes": 7636,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/RealDescent.lean",
+        "sha256": "db007fed883946ef0101461e6efe27b508636f42f0e3a6d5683d9530d9e85869"
+      },
+      "checked_source": {
+        "bytes": 7498,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/RealDescent.lean",
+        "sha256": "84d375413a402aee2780f199c68bef044f52ccfb8b866c7f9123b85c141c2038"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 365032,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/RealDescent.olean",
+          "sha256": "f0b316867f3f9ca03194481638bf982d3822e54907fc7367cfd602bc1448dcb2"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9325077,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/environment-manifest.json",
+        "sha256": "d41d511049c9d9a559eb0fe490516aa9f8e9ecaa9aa7b627c05ef332c73c61a0"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 1.4406783459999133,
+      "native_receipt": {
+        "bytes": 10853,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/check-result.json",
+        "sha256": "8dead99aae1ea654ce957e990d6b06218354101bf8c6a13fd9639dccfede20bd"
+      },
+      "owned_closure": {
+        "bytes": 17461,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/closed.json",
+        "sha256": "788d93fcfffd8de3acab4c76b7da11e2f95890fa0fda94397346c13738abfebb"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.scalar_taylor_unit_upper"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.realGradientStep_safe_descent"
+        }
+      ],
+      "registered_local_imports": [
+        {
+          "environment": {
+            "bytes": 9311930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+            "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+          },
+          "module": "LogisticCoefficient",
+          "qualification": {
+            "bytes": 8838,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+            "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9311895,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+            "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+          },
+          "module": "CoordinateGeometry",
+          "qualification": {
+            "bytes": 7631,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+            "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9316338,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+            "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+          },
+          "module": "LogisticCurvature",
+          "qualification": {
+            "bytes": 8455,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+            "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9318521,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/environment-manifest.json",
+            "sha256": "9bc81e02bf4c72393cfdff29d91a70f11cbe500c484e5c2043fdf475d1f15d37"
+          },
+          "module": "ScalarSoftplus",
+          "qualification": {
+            "bytes": 9684,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+            "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9320746,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-02-producer/environment-manifest.json",
+            "sha256": "1b39457d00dbc69f08dd771bc125cc527a03eb050445ecc25ece89f79ac9db38"
+          },
+          "module": "DirectionalObjective",
+          "qualification": {
+            "bytes": 9601,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+            "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9322930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-gradient-01-producer/environment-manifest.json",
+            "sha256": "18c13f80694fd1eaceedd33fffef13e52d8f892e440b3454a6b3db56455b0a06"
+          },
+          "module": "RealGradient",
+          "qualification": {
+            "bytes": 8657,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/check-result.json",
+            "sha256": "315826ae63c23849542259cd613f70f7f2fa2a0e0b57a57a629880bf9ece1920"
+          }
+        }
+      ],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/LeanProofChunk000.bin",
+            "sha256": "1fa1ce5eb7f2dcb532b01ff9ea379172c7cfb155cf8e2b205e10e3797e39e7d6"
+          },
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/LeanProofChunk001.bin",
+            "sha256": "615e61224ae53ad740aaca1e30ee915dd6872353562a4f3afcc5e78615d6e93b"
+          },
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/LeanProofChunk002.bin",
+            "sha256": "eb9a903a3d9144abaf1492e5e02edc76aabcd6217733d42cf923246358209d4e"
+          },
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/LeanProofChunk003.bin",
+            "sha256": "291825d2220c2f6cb0fd6011c3d6c7abfb7fb8afc764668e87c2b863eab55fb1"
+          },
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/LeanProofChunk004.bin",
+            "sha256": "f0cceb940225850be8a5068d654cab784c5e82d06c89d19a1963cbf4edbcb5c8"
+          },
+          {
+            "bytes": 37352,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/LeanProofChunk005.bin",
+            "sha256": "18648a5164f0c59d7bdc2d365c5026a77b7e5d0d0a367d19c7049f21b2c05136"
+          }
+        ],
+        "manifest": {
+          "bytes": 1276,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/lean/LeanProofChunks.json",
+          "sha256": "4f72c81dfcd85d54a5dfa81b94f835430f20406cf1ea8ddc09eb2a9ce8b3f36e"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 365032,
+          "chunk_count": 6,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Actual derivatives and curvature yield Taylor upper bound and exact-real safe-step decrease.",
+      "source": {
+        "bytes": 7498,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/RealDescent.lean",
+        "sha256": "84d375413a402aee2780f199c68bef044f52ccfb8b866c7f9123b85c141c2038"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 21,
+          "name": "scalar_taylor_unit_upper"
+        },
+        {
+          "line": 61,
+          "name": "meanCurvatureBound"
+        },
+        {
+          "line": 65,
+          "name": "realObjective_taylor_upper"
+        },
+        {
+          "line": 85,
+          "name": "realGradientStep"
+        },
+        {
+          "line": 90,
+          "name": "realGradientStep_descent"
+        },
+        {
+          "line": 120,
+          "name": "meanCurvatureBound_pos"
+        },
+        {
+          "line": 131,
+          "name": "realGradientStep_safe_descent"
+        }
+      ]
+    },
+    "RealGradient": {
+      "augmented_checked_source": {
+        "bytes": 3553,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/lean/RealGradient.lean",
+        "sha256": "c0e57bf0c10ddd1cc4ebecfd7ab77746412a9adb76ff3aa71b39dcadeb1af64e"
+      },
+      "checked_source": {
+        "bytes": 3402,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-gradient-01-producer/RealGradient.lean",
+        "sha256": "9ece52690c173349ba2cfbb345c1f5d4169365da55fc6f527fa16f41c8d9bdc7"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 120984,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/lean/RealGradient.olean",
+          "sha256": "38c589dcd8587e0d781ae6993fbbba02c8c60ed0d9304d06362732b6e21d4029"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9322930,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-gradient-01-producer/environment-manifest.json",
+        "sha256": "18c13f80694fd1eaceedd33fffef13e52d8f892e440b3454a6b3db56455b0a06"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 1.265469892998226,
+      "native_receipt": {
+        "bytes": 8657,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/check-result.json",
+        "sha256": "315826ae63c23849542259cd613f70f7f2fa2a0e0b57a57a629880bf9ece1920"
+      },
+      "owned_closure": {
+        "bytes": 17464,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/closed.json",
+        "sha256": "de46c5116a36fd8910bef85cbfe6661f513a269b5ccb74178d6cbf0ba98d4d45"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 1,
+          "theorem": "RankerRealCurvature.dot_realCoordinateGradient"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.lineFirstDerivative_zero_eq_dot_gradient"
+        }
+      ],
+      "registered_local_imports": [
+        {
+          "environment": {
+            "bytes": 9311930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+            "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+          },
+          "module": "LogisticCoefficient",
+          "qualification": {
+            "bytes": 8838,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+            "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9311895,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+            "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+          },
+          "module": "CoordinateGeometry",
+          "qualification": {
+            "bytes": 7631,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+            "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9316338,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+            "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+          },
+          "module": "LogisticCurvature",
+          "qualification": {
+            "bytes": 8455,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+            "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9318521,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/environment-manifest.json",
+            "sha256": "9bc81e02bf4c72393cfdff29d91a70f11cbe500c484e5c2043fdf475d1f15d37"
+          },
+          "module": "ScalarSoftplus",
+          "qualification": {
+            "bytes": 9684,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+            "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9320746,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-02-producer/environment-manifest.json",
+            "sha256": "1b39457d00dbc69f08dd771bc125cc527a03eb050445ecc25ece89f79ac9db38"
+          },
+          "module": "DirectionalObjective",
+          "qualification": {
+            "bytes": 9601,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+            "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+          }
+        }
+      ],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/lean/LeanProofChunk000.bin",
+            "sha256": "913b63d5b5782ef88b9d056d896494c1b6963cf9c88a984ef14d6ec412983f09"
+          },
+          {
+            "bytes": 55448,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/lean/LeanProofChunk001.bin",
+            "sha256": "3451e93edac58d1eace09bcb5b35401ad49fdf4584b510a90009d8e64c3d335a"
+          }
+        ],
+        "manifest": {
+          "bytes": 689,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/lean/LeanProofChunks.json",
+          "sha256": "11bd2bf6c4d67a307d1c9c07f4ee467d08d53433b35bbd856302e85d9a25f009"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 120984,
+          "chunk_count": 2,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Finite sum interchange identifies the coordinate gradient with first directional derivative at zero.",
+      "source": {
+        "bytes": 3402,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/RealGradient.lean",
+        "sha256": "9ece52690c173349ba2cfbb345c1f5d4169365da55fc6f527fa16f41c8d9bdc7"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 17,
+          "name": "realCoordinateGradient"
+        },
+        {
+          "line": 22,
+          "name": "dot_realCoordinateGradient"
+        },
+        {
+          "line": 64,
+          "name": "lineShift_zero"
+        },
+        {
+          "line": 68,
+          "name": "lineFirstDerivative_zero_eq_dot_gradient"
+        },
+        {
+          "line": 75,
+          "name": "dot_const_mul_right"
+        },
+        {
+          "line": 82,
+          "name": "squaredEuclideanNorm_const_mul"
+        }
+      ]
+    },
+    "ScalarSoftplus": {
+      "augmented_checked_source": {
+        "bytes": 5034,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/lean/ScalarSoftplus.lean",
+        "sha256": "e1ba40e7de910887622e52ba2c5b00ae24002b41dfa9a76d9fc6c6c4c44ec53f"
+      },
+      "checked_source": {
+        "bytes": 4839,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/ScalarSoftplus.lean",
+        "sha256": "e32f5a68f4365fa60a2321a0cb7f6076e998c7841547255f90124a4875a36379"
+      },
+      "compiled_artifacts": [
+        {
+          "bytes": 183736,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/lean/ScalarSoftplus.olean",
+          "sha256": "f82e427e3760daaf433894b1e3c14db9efad025f795d2602ac7b95bca0018c58"
+        }
+      ],
+      "environment_manifest": {
+        "bytes": 9318521,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/environment-manifest.json",
+        "sha256": "9bc81e02bf4c72393cfdff29d91a70f11cbe500c484e5c2043fdf475d1f15d37"
+      },
+      "native_bounds": {
+        "cpu_seconds": 20,
+        "max_input_bytes": 262144,
+        "max_output_bytes": 65536,
+        "max_workspace_bytes": 16777216,
+        "timeout_seconds": 20
+      },
+      "native_elapsed_seconds": 1.2521301460219547,
+      "native_receipt": {
+        "bytes": 9684,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+        "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+      },
+      "owned_closure": {
+        "bytes": 17464,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/closed.json",
+        "sha256": "10bca1c40acc04de34564b780d21039b6e179f414b2c869b2455bc39d3e8bd8d"
+      },
+      "queried_axioms": [
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.realStablePairLoss_eq"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.hasDerivAt_realPairLoss"
+        },
+        {
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "report_occurrences": 2,
+          "theorem": "RankerRealCurvature.secondDeriv_realPairLoss"
+        }
+      ],
+      "registered_local_imports": [
+        {
+          "environment": {
+            "bytes": 9311930,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+            "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+          },
+          "module": "LogisticCoefficient",
+          "qualification": {
+            "bytes": 8838,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+            "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9311895,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+            "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+          },
+          "module": "CoordinateGeometry",
+          "qualification": {
+            "bytes": 7631,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+            "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+          }
+        },
+        {
+          "environment": {
+            "bytes": 9316338,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+            "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+          },
+          "module": "LogisticCurvature",
+          "qualification": {
+            "bytes": 8455,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+            "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+          }
+        }
+      ],
+      "retention": {
+        "chunks": [
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/lean/LeanProofChunk000.bin",
+            "sha256": "ce8d8f08f5f7bf052a6cc89416f422004d16ffd6d9cb8e0053c05db36ea65291"
+          },
+          {
+            "bytes": 65536,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/lean/LeanProofChunk001.bin",
+            "sha256": "4a9f5e58411dd9df373a7bb60dfb21f88531a3d0f8a46237e33341c7a9961d4f"
+          },
+          {
+            "bytes": 52664,
+            "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/lean/LeanProofChunk002.bin",
+            "sha256": "9a5cbe73a60f40152df23700b65a9b81638b23ae508d1a2c3ba4832608248b4e"
+          }
+        ],
+        "manifest": {
+          "bytes": 838,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/lean/LeanProofChunks.json",
+          "sha256": "42eb25bf36b0994ec160ce78dbdac774d9774714c1493fbd05747895e9ce9596"
+        },
+        "profile": {
+          "chunk_bytes": 65536,
+          "chunk_order": "consecutive-global-index-and-object-concatenation",
+          "compression": "none",
+          "format": "bounded_lean_chunks@1",
+          "max_chunk_files": 61,
+          "max_manifest_bytes": 65536,
+          "max_object_files": 4,
+          "max_raw_object_bytes": 3997696,
+          "native_cpu_seconds": 20,
+          "native_max_declared_outputs": 64,
+          "native_max_source_bytes": 262144,
+          "native_per_file_capture_bytes": 65536,
+          "native_wall_seconds": 20,
+          "native_workspace_bytes": 16777216,
+          "object_suffixes": [
+            ".olean",
+            ".olean.private",
+            ".olean.server",
+            ".ir"
+          ]
+        },
+        "profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+        "validation": {
+          "aggregate_raw_object_bytes": 183736,
+          "chunk_count": 3,
+          "exact_chunk_population": true,
+          "manifest_complete": true,
+          "reconstructed_full_module_bodies_may_exceed_native_per_file_capture": true,
+          "reconstructed_object_count": 1,
+          "status": "passed"
+        }
+      },
+      "role": "Actual log/exp real scalar derivatives and stable real source-shape loss equality.",
+      "source": {
+        "bytes": 4839,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/ScalarSoftplus.lean",
+        "sha256": "e32f5a68f4365fa60a2321a0cb7f6076e998c7841547255f90124a4875a36379"
+      },
+      "source_declaration_line_roles": [
+        {
+          "line": 19,
+          "name": "realPairLoss"
+        },
+        {
+          "line": 22,
+          "name": "realStablePairLoss"
+        },
+        {
+          "line": 25,
+          "name": "realStablePairLoss_eq"
+        },
+        {
+          "line": 47,
+          "name": "hasDerivAt_realLogisticP"
+        },
+        {
+          "line": 64,
+          "name": "hasDerivAt_realPairLoss"
+        },
+        {
+          "line": 84,
+          "name": "hasDerivAt_negative_realLogisticP"
+        },
+        {
+          "line": 89,
+          "name": "deriv_realPairLoss"
+        },
+        {
+          "line": 94,
+          "name": "secondDeriv_realPairLoss"
+        }
+      ]
+    }
+  },
+  "retained_failures": {
+    "MappingProxy_regression_control": {
+      "bytes": 16930,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-mappingproxy-01/closed.json",
+      "sha256": "5bb32d72bb838ac8ef934df4926fc5ffbe91ce39e567f2436eb4a5dc8979328d"
+    },
+    "MappingProxy_retention_manifest_interface_failure": [
+      "lean-coefficient-02"
+    ],
+    "root_wrong_query_namespace": [
+      "lean-original-profile-01"
+    ],
+    "source_elaboration": [
+      "lean-curvature-01",
+      "lean-curvature-02",
+      "lean-softplus-01",
+      "lean-directional-01"
+    ],
+    "unchanged64KiB_single_file_truncation": [
+      "lean-curvature-03",
+      "lean-coefficient-01"
+    ]
+  },
+  "review_source": {
+    "bytes": 19051,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/review_qualified_math_mapping.py",
+    "sha256": "24193768658313856ff5a763fe7f28ba327671e9c038ef490aad77f7ec1c4a1e"
+  },
+  "schema": "terminal-ranker-real-curvature-qualified-proof-mapping@1",
+  "scope": "Actual root-qualified Lean mathematical statements under pinned declared dependencies, with explicit original matrix/parameter join.",
+  "scope_limits": {
+    "binary64_fsum_libm_uniform_error_or_error_floor_proved": false,
+    "candidate_Q_alone_is_treated_as_actual_derivative": false,
+    "full_Frechet_operator_Hessian_proved": false,
+    "gradient_Lipschitz_operator_theorem_proved": false,
+    "gradient_map_contraction_proved": false,
+    "historical_execution_pin_origin_or_heldout_outcomes_proved": false,
+    "minimizer_existence_uniqueness_or_global_real_iteration_convergence_proved": false,
+    "mu_strong_convexity_definition_theorem_proved": false,
+    "one_step_real_decrease_is_treated_as_native_or_global_convergence": false,
+    "original_matrix_alignment_is_a_premise": false
+  },
+  "source_and_artifact_pins_rehashed_here": true,
+  "source_proposal_snapshot": {
+    "bytes": 25916,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/proof-plan.json",
+    "sha256": "06703582ef5b1c819893a6c4a58abd0901e5ad4aa4634ba3dc825e40d3cb67ca"
+  },
+  "source_snapshot_atomic_claimed": false,
+  "status": "passed_file_only_actual_qualified_mathematical_mapping",
+  "uploads_here": 0,
+  "whole_source_runtime_equivalence_proved": false
+}

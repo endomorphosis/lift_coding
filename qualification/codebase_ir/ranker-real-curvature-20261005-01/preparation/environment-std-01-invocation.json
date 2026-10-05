@@ -1,0 +1,45 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 12951,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/build_environment_manifest.py",
+      "sha256": "bac826e0b9b95413d877aac659bb8a1bb2e7c80c67b053fd8d7995f6f2638085"
+    },
+    {
+      "bytes": 6710,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/frozen-numeric-01/OriginalNumericCurvature.lean",
+      "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 23269,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-environment-std-01.py",
+      "sha256": "99ff385cbf38f35b4474f89f892c092c138108a29ff16bcf4d9415ba23a9f5de"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 12951,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/build_environment_manifest.py",
+      "sha256": "bac826e0b9b95413d877aac659bb8a1bb2e7c80c67b053fd8d7995f6f2638085"
+    },
+    {
+      "bytes": 6710,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/frozen-numeric-01/OriginalNumericCurvature.lean",
+      "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+    }
+  ],
+  "mode": "environment-std-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T03:36:50.547861+00:00"
+}

@@ -1,0 +1,167 @@
+{
+  "current4_34_toolchain": {
+    "header_platform": "aarch64-unknown-linux-gnu",
+    "header_version": "4.34.0",
+    "lake": {
+      "bytes": 19192,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/bin/lake",
+      "sha256": "f80f50cbab5322e35bcb0bf88937e22e9d908b5e4e336e83ddfc30eb1506aacf"
+    },
+    "lean": {
+      "bytes": 13824,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/bin/lean",
+      "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085"
+    },
+    "shared_runtime": [
+      {
+        "bytes": 7040,
+        "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/lib/lean/libInit_shared.so",
+        "sha256": "57b86819d11d621bd0ba8f4078b0ec7d5e1a48d8a915729a8ac0496177d78be4"
+      },
+      {
+        "bytes": 255056856,
+        "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/lib/lean/libleanshared.so",
+        "sha256": "0f4e38912a764e34c295dbe3c7fbefe8d065fbfd08cf9d1db8f71924b8c5d0ca"
+      },
+      {
+        "bytes": 7040,
+        "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/lib/lean/libleanshared_1.so",
+        "sha256": "6fbf499b4e2391b8c3ed4e72aa6bbfe44b98358a52b646b3441cbfc6ca23e841"
+      },
+      {
+        "bytes": 7040,
+        "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/lib/lean/libleanshared_2.so",
+        "sha256": "e79f607f11b72cb2d3822e5cfe375351c75b5571e2994737a71835e273d724d1"
+      }
+    ],
+    "version_header": {
+      "bytes": 401,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/include/lean/version.h",
+      "sha256": "066ff8e8d136be4977b1bd80231174a4f034f151f78e741de9a104a4c60826b3"
+    }
+  },
+  "discovery_operations": [
+    "bounded_scoped_rg_file_queries",
+    "filesystem_metadata_and_source_reads",
+    "static_ELF_metadata_read",
+    "SHA256_streaming",
+    "stdlib_AST_parse_only"
+  ],
+  "full_task_satisfaction": "unknown",
+  "initial_confirmed_declarations": {
+    "Finset.sum_mul_sq_le_sq_mul_sq": "Mathlib/Algebra/Order/BigOperators/Ring/Finset.lean",
+    "Real.exp_pos": "Mathlib/Analysis/Complex/Exponential.lean"
+  },
+  "launcher_only_hash_does_not_distinguish4_34_0_and4_34_1": true,
+  "native_bounds_unchanged": {
+    "cpu_seconds": 20,
+    "max_output_bytes": 65536,
+    "max_workspace_bytes": 16777216,
+    "outer_seconds": 120,
+    "proof_cpu_stall_percent": 50,
+    "proof_io_stall_percent": 10,
+    "proof_memory_stall_percent": 2,
+    "root_cpu_slots": 1,
+    "root_memory_mb": 2048,
+    "timeout_seconds": 20
+  },
+  "new_compiler_and_manifest_builder_sources": [
+    {
+      "bytes": 16887,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/bounded_analytic_checker.py",
+      "sha256": "d3646eddac798ecd740d392895d6a8a7e7c0592128aef3c5ded83d0db9cdba41"
+    },
+    {
+      "bytes": 12951,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/build_environment_manifest.py",
+      "sha256": "bac826e0b9b95413d877aac659bb8a1bb2e7c80c67b053fd8d7995f6f2638085"
+    }
+  ],
+  "new_root_owned_mathlib_checkout": {
+    "declared_toolchain": "leanprover/lean4:v4.34.0",
+    "hydration_setup_owned_by_root": true,
+    "lake_manifest": {
+      "bytes": 2811,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/lake-manifest.json",
+      "sha256": "8f67b2cf24143ac091cdb425e886c2164b2fc2d6fbccd6db9454b697f9541a67"
+    },
+    "lean_toolchain": {
+      "bytes": 25,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/lean-toolchain",
+      "sha256": "8733782dc070a99b312039cda424f601b80f3be6f6f512627da5ba25adc27632"
+    },
+    "native_import_probe_executed_by_this_agent": false,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4",
+    "revision_reported_by_root_clone_receipt": "5ed2965256430c3649e86755f9576b54eca72435",
+    "source_present": true
+  },
+  "official_benchmark_score": null,
+  "old_recorded_mathlib_dependency": {
+    "compiled_dependency_present": false,
+    "lean_toolchain": {
+      "bytes": 24,
+      "path": "/home/barberb/lift_coding/JevOps/papers/completion/lean_refactor_arena/upstream/data_extraction/lean-toolchain",
+      "sha256": "fef6a296c29a3721186f8e3e4172dbd73880c93e45f1eb6d36bb354a96b6829a"
+    },
+    "manifest": {
+      "bytes": 4582,
+      "path": "/home/barberb/lift_coding/JevOps/papers/completion/lean_refactor_arena/upstream/data_extraction/lake-manifest.json",
+      "sha256": "f7152b2816c8995305eb9622e051307323e3a73fbf9dca890f9afa812558ff48"
+    },
+    "revision": "2df2f0150c275ad53cb3c90f7c98ec15a56a1a67",
+    "source_checkout_present": false,
+    "usable_for_current4_34_environment": false,
+    "version": "v4.26.0"
+  },
+  "old_sealed_sources_edited": false,
+  "operations_this_agent": {
+    "Lean_Lake_import_probes": 0,
+    "dependency_mutations": 0,
+    "native_prover_jobs": 0,
+    "network_calls": 0,
+    "new_fits_or_replays": 0,
+    "project_imports": 0,
+    "test_jobs": 0
+  },
+  "optimizer_convergence_proved": false,
+  "planner_activation": false,
+  "pre_hydration_available_cached_ltar_count": 24908,
+  "pre_hydration_cache_importability_proved": false,
+  "pre_hydration_cached_source_version_mapping_verified": false,
+  "pre_hydration_usable_Mathlib_checkout_found": false,
+  "proof_authority": false,
+  "runner_profile": {
+    "LEAN_PATH": "explicit request.environment required; old compile helper and base environment do not propagate inherited LEAN_PATH",
+    "axiom_scope": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "dependency_closure_scope": "conservative source-declared imports plus implicitInit and compiledcompanions; no runtimeopen trace",
+    "local_proof_extensions": "same environment schema with exact priorchecked completecompiled/source/checkpins and additionalreadonlyLEAN_PATHdirectory",
+    "negative_scope": "closedFalse theorem bydecide+kernel genuine logical diagnostic only",
+    "reuse": "frozenCAP08BoundedToolRunner+ToolRunRequest+ToolRunLimits and frozen scheduler"
+  },
+  "schema": "ranker-real-curvature-read-only-environment-discovery@1",
+  "selected_home_project_scan": {
+    "matched_target_source_or_project_metadata_files": 0,
+    "rg_returncode": 1,
+    "roots": [
+      "/home/barberb/Clarity_Act_Deontic_Logic",
+      "/home/barberb/ipfs_datasets_py",
+      "/home/barberb/ipfs_accelerate_py",
+      "/home/barberb/Documents"
+    ]
+  },
+  "status": "source_metadata_discovered_before_native_proof",
+  "whole_source_equivalence_proved": false,
+  "workspace_metadata_scan": {
+    "Mathlib_source_matches": 0,
+    "lake_manifests": 12366,
+    "lean_toolchain_markers": 13279,
+    "reason": "metadata query encountered filesystem read errors; result does not establish global absence",
+    "rg_returncode": 2,
+    "scope_complete": false,
+    "source_checkout_matches": 0
+  }
+}

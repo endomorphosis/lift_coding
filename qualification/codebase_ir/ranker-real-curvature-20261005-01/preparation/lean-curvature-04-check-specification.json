@@ -1,0 +1,34 @@
+{
+  "schema": "terminal-ranker-curvature-native-check-specification@1",
+  "source": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/LogisticCurvature.lean",
+    "bytes": 4035,
+    "sha256": "65109da6110e218bf13d0f3f67d4820a748333e0a4be754e4b502081ff423f4a"
+  },
+  "environment_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+    "bytes": 9316338,
+    "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+  },
+  "expected_success": true,
+  "theorem_names": [
+    "RankerRealCurvature.candidateHessianQuad_bounds",
+    "RankerRealCurvature.originalFourPairCandidate_bounds"
+  ],
+  "freeze_producer": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/freeze_chunk_check_profile.py",
+    "bytes": 5107,
+    "sha256": "c3be6b49302787c2b034f1bc81878969896eab2deaf4afc7199dad6acfe1227c"
+  },
+  "retention_helper": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/RetainLeanProof.py",
+    "bytes": 5828,
+    "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+  },
+  "python_executable": {
+    "path": "/usr/bin/python3.12",
+    "bytes": 7845032,
+    "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+  },
+  "source_capture_scope": "individual held-byte copies; no whole-live atomic or loader-open claim"
+}

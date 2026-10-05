@@ -1,0 +1,125 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "binary64_error_bound_proved": false,
+  "classifier_jobs_here": 0,
+  "codec_jobs_here": 0,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T04:35:22.302336+00:00",
+  "earlier_pin_gate_refusal": "A file-only receipt producer refused superseded source pins before writing any PASS document; the updated alias/census/lock changes were then read independently.",
+  "execution_authority": false,
+  "file_only_parse_checks": {
+    "builder_reviewer_literal_alias_validator_ast_identical": true,
+    "builder_reviewer_semantic_validator_ast_identical": true,
+    "theorem_registry_extra_query_and_boundaries_ast_identical": true,
+    "three_python_sources_parse": true
+  },
+  "findings": [],
+  "fit_trace_solver_test_jobs_here": 0,
+  "full_task_satisfaction": "unknown",
+  "git_mutations_as_part_of_this_review": 0,
+  "global_optimizer_convergence_proved": false,
+  "native_proof_jobs_here": 0,
+  "network_calls_here": 0,
+  "planner_activation": false,
+  "producer": {
+    "bytes": 8590,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-review-20261005-01/review_source_01.py",
+    "sha256": "06937f20a178fc583bab170ca9f716e14f2d13964ac505592d8f03a61d6cd898"
+  },
+  "project_imports_here": 0,
+  "proof_authority": false,
+  "publication_tool_sources_executed_here": 0,
+  "python_ranker_source_equivalence_proved": false,
+  "remote_mutations_here": 0,
+  "review_scope": {
+    "actual_package_reviewed_here": false,
+    "final_fact_policy_reviewed_here": false,
+    "final_qualification_seal_reviewed_here": false,
+    "final_selection_reviewed_here": false,
+    "source_only": true
+  },
+  "reviewed_sources": [
+    {
+      "bytes": 47829,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/build_package.py",
+      "sha256": "4e14c08fc6d680e5fcbf755f649284f750353b73b42dd08b926398f4c43c9a93"
+    },
+    {
+      "bytes": 43608,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/review_package.py",
+      "sha256": "cdb6dbea925e3bc3ae8d62c6b7c069bfcbe1fd79bf07282e32ed06a68daf88f9"
+    },
+    {
+      "bytes": 6572,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/freeze_inputs.py",
+      "sha256": "830d457108a95a8ccd29ee8a75af9742bc749336df1e87dabccaf8327aa2c041"
+    },
+    {
+      "bytes": 1212,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/publication-profile-authorization.json",
+      "sha256": "3b0c8fd91ccd62fdc65e2cf557da6175eb6e48aef8b95996315113ff534bc638"
+    },
+    {
+      "bytes": 7401,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/API.md",
+      "sha256": "3e66da5ea15246cb27cfefe79514cd533e14342b763614446cc6c9cacf0039ca"
+    }
+  ],
+  "schema": "ranker-curvature-publication-source-only-review@1",
+  "source_function_line_roles": {
+    "build_package.py": {
+      "allowed_addition": 101,
+      "build": 568,
+      "check_closed_inputs": 323,
+      "descriptor": 73,
+      "fixture_alias": 259,
+      "inspect_complete_shard": 490,
+      "inventory": 285,
+      "load_source": 83,
+      "need": 64,
+      "pointer": 93,
+      "reader_controls": 446,
+      "split_shards": 474,
+      "tar_item": 466,
+      "validate_semantics": 110,
+      "verify_final_selection": 434,
+      "verify_seal": 387,
+      "wire": 69
+    },
+    "freeze_inputs.py": {
+      "freeze": 17
+    },
+    "review_package.py": {
+      "allowed_addition": 122,
+      "body": 96,
+      "decode": 446,
+      "descriptor": 105,
+      "fixture_alias": 130,
+      "inventory": 157,
+      "need": 60,
+      "pin": 91,
+      "pointer": 114,
+      "read_regular": 73,
+      "review": 476,
+      "signature": 69,
+      "validate_semantics": 193,
+      "verify_inputs": 346,
+      "wire": 65
+    }
+  },
+  "source_review_observations": [
+    "Actual pinned positive and kernel-decide false-control receipts require unchanged native bounds, clean captures, standard-only axiom reports and actual artifacts. Full canonical positive checks and original numeric objects bind strictly advisory cache entries.",
+    "originalReal_meanL_exact source-authored output is separately checked and never mislabeled as part of the checker parsed registry.",
+    "Every sealed owned regular leaf is rehashed. Empty excluded leaves must be declared sealed *.lock files; a durable empty contracts.jsonl cannot be silently omitted.",
+    "Only the two exact dependency directories are excluded from traversal. Nineteen root-sealed literal pytest fixture aliases are separately bound by readlink bytes and seven-stat values, never traversed, and permitted only when they point directly to a real canonical sibling fixture directory. All regular bodies in those sibling directories remain selected once.",
+    "The complete regular seal plus fixed explicit additions defines the selected population before and after. Every outcome document and complete environment profile is selected.",
+    "GNU member headers, padded bodies, end markers and record padding are included in each complete decoded tar16MiB bound.",
+    "The first outer decoded-tar override charges every tar byte, checks its complete hash and exact ordered regular members, hashes every member byte during bounded copy, and delegates each member and nested-container scan to the unchanged pinned classifier.",
+    "The credential veto retains exact cached values and complete bounded PEM scanning. No universal secret-free claim is made.",
+    "Independent member review performs fresh bounded shard decoding, exact complete member hashes/identities/counts, and final input/selection/source rechecks.",
+    "The explicit 320MiB raw/1GiB decoded publication-only authorization reflects the corrected273066128-byte/1080regular-leaf seal. Native proof and metadata caps remain unchanged.",
+    "Final qualification seal, observed fact policy, selection and actual package results remain separately reviewable after root freezes them. This source-only document does not assert packaging success.",
+    "Failure closure retains private partial evidence without asserting attempted cleanup; a secondary receipt-write failure does not replace the primary exception."
+  ],
+  "status": "passed_source_only_no_remaining_blocker"
+}

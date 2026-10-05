@@ -1,0 +1,133 @@
+{
+  "archive": {
+    "decoded_member_review": {
+      "bytes": 4669,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-package-20261005-01/package-review-01.json",
+      "sha256": "8b40e662158e52ee0e7fe4375a64d6ed9cd56c25a60fbdc5f2f08cd9e2a86b7c"
+    },
+    "empty_contracts_export_retained": true,
+    "failed_attempts_and_dependency_profile_manifests_retained": true,
+    "manifest": {
+      "bytes": 887616,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-package-20261005-01/package/manifest.json",
+      "sha256": "04e1792d40a83c11e1df2ba5f2f3629d015d46954aa6848cc3a85dd47c50a85d"
+    },
+    "members": 1055,
+    "original_file_bytes": 273704180,
+    "raw_mathlib_and_cache_bodies_published": false,
+    "shards": 26
+  },
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T05:05:53.549401+00:00",
+  "execution_authority": false,
+  "final_seal": {
+    "bytes": 281311,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/file-only-seal-01.json",
+    "sha256": "6c281bd21da026b27797f78f98d0932bad4e7a115779a4fc348ee6987f30af15"
+  },
+  "github": {
+    "commit_oid_recorded_after_creation_in_external_closure_receipt": true,
+    "compact_evidence_and_source_additions": true,
+    "full_regular_bodies_retained_in_HF_bundle": true,
+    "nine_fresh_parent_gitlinks_unchanged_required": true,
+    "original_dirty_checkouts_unchanged_required": true,
+    "private_parent": "73e98e1a839086b26b30533e4d72a9306f1306a0",
+    "remote_target": "origin/main",
+    "repo": "endomorphosis/lift_coding"
+  },
+  "huggingface": {
+    "commit": "8b7b8c896749e0ca3884114cedbed782a88f4702",
+    "final_upload_scan": {
+      "bytes": 21282,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-root-20261005-01/final-upload-scan-01.json",
+      "sha256": "d508f8d638920f819f86f7a6d17d274301c88a615d737883a03e2e2f125fa2a1"
+    },
+    "immutable_namespace": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1",
+    "outer_closed": {
+      "bytes": 628,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-root-20261005-01/hf-publication-outer-01/closed.json",
+      "sha256": "97584bf045ef6f1d8709b8d3a8f02237a91f80a27cbdcfe7ba655501be145b77"
+    },
+    "parent": "af2ef515e4f69f504f466e3f3146e5dfcfea8c2d",
+    "prior_immutable_files_preserved": 180,
+    "public_readback": {
+      "bytes": 3373,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-root-20261005-01/hf-public-readback-01.json",
+      "sha256": "0987396d5e3e1c51d3ac7e09f672e86c740b4fe11099905e9d42013a1dd57ccd"
+    },
+    "publisher_closed": {
+      "bytes": 882,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "84e3d23388b4a8388967fdd64452abac37b3582c72bd37e0655980d6af6992ce"
+    },
+    "repo_id": "Publicus/codebase-ir-proof-index",
+    "selected_bytes": 51345329,
+    "selected_files": 47,
+    "url": "https://huggingface.co/datasets/Publicus/codebase-ir-proof-index/commit/8b7b8c896749e0ca3884114cedbed782a88f4702",
+    "verified_files": {
+      "bytes": 25108,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-root-20261005-01/hf-publication-01/verified-files.json",
+      "sha256": "c91f3f844f5732a06dba920988838ed86c5c8cb857fe6065702556eedb6ee462"
+    }
+  },
+  "next_obligations": {
+    "bytes": 5274,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/next-obligations.json",
+    "sha256": "31b9014c1f577c5ba041a32fc11625db13c147fa2e2cac4b3edd4344bfebd7ee"
+  },
+  "no_claim_of_Python_Float_source_equivalence_or_asymptotic_convergence": true,
+  "original_real_objective": "F(w) = mu/2 * sum_j w_j^2 + (1/4) * sum_i log(1 + exp(-sum_j w_j*d_ij))",
+  "planner_activation": false,
+  "proof_authority": false,
+  "qualification": {
+    "all32_governing_RPI_exits": "OPEN",
+    "all_failed_attempts_retained": true,
+    "all_owned_leases_drained": true,
+    "binary64_error_bound_proved": false,
+    "cache_changed_dimension_misses": 230,
+    "cache_same_query_hits": 10,
+    "completion_authority": false,
+    "contracts_payloads_unchanged": true,
+    "execution_authority": false,
+    "full_task_satisfaction": "unknown",
+    "genuine_negative_native_lean_checks": 1,
+    "global_autoencoder_convergence_proved": false,
+    "global_optimizer_convergence_proved": false,
+    "inconclusive_native_lean_checks_retained": 8,
+    "metadata_family_count": 32,
+    "metadata_payloads": 4378,
+    "native_lean_calls": 19,
+    "new_autoencoder_fits": 0,
+    "new_gradient_evaluations": 0,
+    "new_optimizer_updates": 0,
+    "new_public_fits": 0,
+    "new_ranker_training_trace_replays": 0,
+    "one_original_feature_preparation": 1,
+    "original_real_one_step_descent_qualified": true,
+    "original_real_profile_curvature_qualified": true,
+    "planner_activation": false,
+    "prior4348_payloads_preserved_exactly": true,
+    "proof_authority": false,
+    "python_ranker_source_equivalence_proved": false,
+    "qualified_positive_native_lean_checks": 10,
+    "selected_pure_test_executions": 249
+  },
+  "qualified_original_real_descent": "F(w - eta*g(w)) <= F(w) - eta/2 * sum_j g_j(w)^2",
+  "qualified_review": {
+    "bytes": 36092,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/qualified-review-01.json",
+    "sha256": "2c98df30a37fecffff99340d447dcf548c6c244a53223cbed39c914bb0e9238c"
+  },
+  "remaining_open": [
+    "real asymptotic convergence and minimizer existence",
+    "Python source-to-real-model equivalence",
+    "binary64/libm/fsum refinement and error bounds",
+    "codebase IR semantic fidelity and proof-backed contracts",
+    "task validators and full benchmark satisfaction",
+    "on-the-fly autoencoder training convergence"
+  ],
+  "schema": "ranker-original-real-curvature-release-ledger@1",
+  "scope": "Exact original finite feature coordinates embedded in Rat/Real; curvature and one-step real gradient descent; advisory proof cache and native DuckDB/DuckLake metadata.",
+  "status": "qualified_evidence_published_HF_Git_commit_pending",
+  "test_count_interpretation": "249 selected executions, including repeated cache tests; not 249 unique tests"
+}

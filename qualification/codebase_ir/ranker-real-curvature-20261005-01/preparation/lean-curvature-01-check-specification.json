@@ -1,0 +1,19 @@
+{
+  "schema": "terminal-ranker-curvature-native-check-specification@1",
+  "source": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/frozen-01/LogisticCurvature.lean",
+    "bytes": 6816,
+    "sha256": "5ec7780a53c000dceecce646ecd68e009c61a20048f7cb7842a06489a24e4f5f"
+  },
+  "environment_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-01/environment-manifest.json",
+    "bytes": 9302815,
+    "sha256": "110f4767016f7368df5522d687ad66487bece999e79b7af71c9a5b8097d080d6"
+  },
+  "expected_success": true,
+  "theorem_names": [
+    "RankerRealCurvature.realLogisticCoeff_bounds",
+    "RankerRealCurvature.candidateHessianQuad_bounds",
+    "RankerRealCurvature.originalFourPairCandidate_bounds"
+  ]
+}

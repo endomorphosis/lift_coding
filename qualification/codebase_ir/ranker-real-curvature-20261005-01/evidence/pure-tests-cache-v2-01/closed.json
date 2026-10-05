@@ -1,0 +1,387 @@
+{
+  "asymptotic_optimizer_convergence_proved": false,
+  "autoencoder_fit_calls": 0,
+  "behavioral_satisfaction": false,
+  "blocked_imports": [],
+  "cleanup_errors": [],
+  "completion_authority": false,
+  "elapsed_seconds_owned": 0.7293819740007166,
+  "execution_authority": false,
+  "final_resource_state": {
+    "active_child_lease_count": 0,
+    "active_lease_count": 0,
+    "active_root_lease_count": 0,
+    "allocated": {
+      "cpu_slots": 0,
+      "memory_mb": 0
+    },
+    "allocated_child_process_slots": 0,
+    "allocated_gpu_memory_mb": 0,
+    "allocated_unified_memory_mb": 0,
+    "available": {
+      "child_process_slots": 16,
+      "cpu_slots": 16,
+      "gpu_memory_mb": null,
+      "memory_mb": 99688,
+      "unified_memory_mb": null
+    },
+    "capacity": {
+      "child_process_slots": 16,
+      "cpu_slots": 16,
+      "gpu_memory_mb": null,
+      "memory_mb": 99688,
+      "reserved_gpu_memory_mb": 0,
+      "reserved_memory_mb": 0,
+      "unified_memory_mb": null,
+      "usable_gpu_memory_mb": null,
+      "usable_memory_mb": 99688
+    },
+    "counters": {
+      "acquisitions_total": 1,
+      "cancellations_total": 0,
+      "recovered_leases_total": 0,
+      "recoveries_total": 0,
+      "releases_total": 1,
+      "saturation_events_total": 0,
+      "timeouts_total": 0
+    },
+    "lanes": {
+      "orchestration": {
+        "allocated": {
+          "child_process_slots": 0,
+          "cpu_slots": 0,
+          "gpu_memory_mb": 0,
+          "memory_mb": 0,
+          "unified_memory_mb": 0
+        },
+        "reservation": {
+          "cpu_slots": 0,
+          "memory_mb": 0
+        },
+        "telemetry": {
+          "acquisitions_total": 1,
+          "cancellations_total": 0,
+          "timeouts_total": 0,
+          "wait_count": 1,
+          "wait_seconds_max": 5.599868018180132e-07,
+          "wait_seconds_mean": 5.599868018180132e-07,
+          "wait_seconds_total": 5.599868018180132e-07
+        }
+      },
+      "validation": {
+        "allocated": {
+          "child_process_slots": 0,
+          "cpu_slots": 0,
+          "gpu_memory_mb": 0,
+          "memory_mb": 0,
+          "unified_memory_mb": 0
+        },
+        "reservation": {
+          "cpu_slots": 2,
+          "memory_mb": 0
+        },
+        "telemetry": {
+          "acquisitions_total": 0,
+          "cancellations_total": 0,
+          "timeouts_total": 0,
+          "wait_count": 0,
+          "wait_seconds_max": 0.0,
+          "wait_seconds_mean": 0.0,
+          "wait_seconds_total": 0.0
+        }
+      }
+    },
+    "last_proof_refusal": null,
+    "proof_backoff": {},
+    "saturation": {
+      "child_process_slots_saturated": false,
+      "cpu_saturated": false,
+      "events_total": 0,
+      "gpu_memory_saturated": false,
+      "memory_saturated": false,
+      "saturated": false,
+      "unified_memory_saturated": false
+    },
+    "schema_version": "legal-ir-global-resource-scheduler-v1",
+    "state_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-cache-v2-01/resources.json",
+    "wait_time_seconds": {
+      "count": 1,
+      "max": 5.599868018180132e-07,
+      "mean": 5.599868018180132e-07,
+      "p50": 5.599868018180132e-07,
+      "p95": 5.599868018180132e-07,
+      "p99": 5.599868018180132e-07,
+      "total": 5.599868018180132e-07
+    },
+    "waiting_request_count": 0
+  },
+  "fit_calls": 0,
+  "formalization_authority": false,
+  "full_task_satisfaction": "unknown",
+  "global_convergence_proved": false,
+  "gradient_evaluations": 0,
+  "invocation": {
+    "bytes": 3151,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/pure-tests-cache-v2-01-invocation.json",
+    "sha256": "72427cfde5f983691337f0bcb1d0b507bc7dc782c3fa6ee4c0168b7140c70fb8"
+  },
+  "mode": "pure-tests-cache-v2-01",
+  "mutation_authority": false,
+  "native_preparation_calls": 0,
+  "native_proof_checks": [],
+  "native_runner_calls_refused": 0,
+  "old348_protected4_prior203_unchanged": true,
+  "omission_authority": false,
+  "optimizer_updates": 0,
+  "planner_activation": false,
+  "primary_error": null,
+  "proof_authority": false,
+  "pytest_returncode": 0,
+  "resource_policy": {
+    "lane_reservations": {
+      "validation": {
+        "cpu_slots": 2,
+        "memory_mb": 0
+      }
+    },
+    "max_gpu_memory_percent": null,
+    "max_memory_percent": null,
+    "max_swap_percent": null,
+    "max_waiting_requests": 256,
+    "proof_backoff_seconds": 2.0,
+    "proof_cpu_stall_percent": 50.0,
+    "proof_io_stall_percent": 10.0,
+    "proof_memory_headroom_mb": 24922,
+    "proof_memory_stall_percent": 2.0,
+    "proof_safety_enabled": true,
+    "require_known_gpu_for_gpu_work": true,
+    "reserved_gpu_memory_mb": 0,
+    "reserved_memory_mb": 0,
+    "total_child_process_slots": 16,
+    "total_cpu_slots": 16,
+    "total_gpu_memory_mb": null,
+    "total_memory_mb": 99688,
+    "total_unified_memory_mb": null
+  },
+  "root_lease": {
+    "acquired_at": 1791173280.7942872,
+    "cancelled": false,
+    "child_process_slots": 4,
+    "cpu_slots": 1,
+    "gpu_memory_mb": 0,
+    "lane": "orchestration",
+    "lease_id": "104e8e2fb13a4f08bf4f35677fe3a22d",
+    "memory_mb": 2048,
+    "owner_pid": 2649047,
+    "parent_lease_id": null,
+    "released": false,
+    "requires_gpu": false,
+    "unified_memory_mb": 0,
+    "wait_seconds": 5.599868018180132e-07
+  },
+  "root_release_returned": true,
+  "schema": "terminal-ranker-curvature-owned-control@1",
+  "selected_owned_imports": [
+    {
+      "after": {
+        "bytes": 29,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/__init__.py",
+        "sha256": "02cef7995128133d4cd2d26d5d140052ccf3d3bbaacea9d03fcac4e6736c9419"
+      },
+      "before": {
+        "bytes": 29,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/__init__.py",
+        "sha256": "02cef7995128133d4cd2d26d5d140052ccf3d3bbaacea9d03fcac4e6736c9419"
+      },
+      "matches": true,
+      "module": "benchmarks"
+    },
+    {
+      "after": {
+        "bytes": 65,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/__init__.py",
+        "sha256": "628d7f9eeaf55a52e0fb1052b00d45f02fe4c36f3587f2dfd40e6e97f9b630dc"
+      },
+      "before": {
+        "bytes": 65,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/__init__.py",
+        "sha256": "628d7f9eeaf55a52e0fb1052b00d45f02fe4c36f3587f2dfd40e6e97f9b630dc"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor"
+    },
+    {
+      "after": {
+        "bytes": 56829,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/__init__.py",
+        "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+      },
+      "before": {
+        "bytes": 56829,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/__init__.py",
+        "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py"
+    },
+    {
+      "after": {
+        "bytes": 5845,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/router_deps.py",
+        "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+      },
+      "before": {
+        "bytes": 5845,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/router_deps.py",
+        "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.router_deps"
+    },
+    {
+      "after": {
+        "bytes": 34477,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ipfs_backend_router.py",
+        "sha256": "37d0fabc92cec04574245c772beb197f1aaf7fef1db8c5b215fc51c3bbd30f9c"
+      },
+      "before": {
+        "bytes": 34477,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ipfs_backend_router.py",
+        "sha256": "37d0fabc92cec04574245c772beb197f1aaf7fef1db8c5b215fc51c3bbd30f9c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.ipfs_backend_router"
+    },
+    {
+      "after": {
+        "bytes": 957,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/__init__.py",
+        "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+      },
+      "before": {
+        "bytes": 957,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/__init__.py",
+        "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers"
+    },
+    {
+      "after": {
+        "bytes": 69336,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+        "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+      },
+      "before": {
+        "bytes": 69336,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+        "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer"
+    },
+    {
+      "after": {
+        "bytes": 97272,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "sha256": "f156511991e33d3b4ba523c3c5080ea30d0a53ad8a4dbcccea0487432679a9aa"
+      },
+      "before": {
+        "bytes": 97272,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "sha256": "f156511991e33d3b4ba523c3c5080ea30d0a53ad8a4dbcccea0487432679a9aa"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler"
+    },
+    {
+      "after": {
+        "bytes": 53075,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+        "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+      },
+      "before": {
+        "bytes": 53075,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+        "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.runtime_telemetry"
+    },
+    {
+      "after": {
+        "bytes": 9526,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+        "sha256": "16a24648b5625f9abb379cf3c4a189e9b05e3c32cc7d1f6812e7c94b475ae921"
+      },
+      "before": {
+        "bytes": 9526,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+        "sha256": "16a24648b5625f9abb379cf3c4a189e9b05e3c32cc7d1f6812e7c94b475ae921"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.proof_resource_safety"
+    },
+    {
+      "after": {
+        "bytes": 16391,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+        "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+      },
+      "before": {
+        "bytes": 16391,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+        "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_ranker_training"
+    },
+    {
+      "after": {
+        "bytes": 17681,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py",
+        "sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af"
+      },
+      "before": {
+        "bytes": 17681,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py",
+        "sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_training_join"
+    },
+    {
+      "after": {
+        "bytes": 4434,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/__init__.py",
+        "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+      },
+      "before": {
+        "bytes": 4434,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/__init__.py",
+        "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic"
+    },
+    {
+      "after": {
+        "bytes": 78154,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/process.py",
+        "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+      },
+      "before": {
+        "bytes": 78154,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/process.py",
+        "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.backends.process"
+    }
+  ],
+  "selected_test_count": 76,
+  "semantic_alignment_verified": false,
+  "source_semantics_verified": false,
+  "status": "passed",
+  "whole_program_proved": false
+}

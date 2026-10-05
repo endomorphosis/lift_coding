@@ -1,0 +1,35 @@
+{
+  "schema": "terminal-ranker-curvature-native-check-specification@1",
+  "source": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/ScalarSoftplus.lean",
+    "bytes": 4839,
+    "sha256": "e32f5a68f4365fa60a2321a0cb7f6076e998c7841547255f90124a4875a36379"
+  },
+  "environment_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/environment-manifest.json",
+    "bytes": 9318521,
+    "sha256": "9bc81e02bf4c72393cfdff29d91a70f11cbe500c484e5c2043fdf475d1f15d37"
+  },
+  "expected_success": true,
+  "theorem_names": [
+    "RankerRealCurvature.realStablePairLoss_eq",
+    "RankerRealCurvature.hasDerivAt_realPairLoss",
+    "RankerRealCurvature.secondDeriv_realPairLoss"
+  ],
+  "freeze_producer": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/freeze_chunk_check_profile.py",
+    "bytes": 5107,
+    "sha256": "c3be6b49302787c2b034f1bc81878969896eab2deaf4afc7199dad6acfe1227c"
+  },
+  "retention_helper": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/RetainLeanProof.py",
+    "bytes": 5828,
+    "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+  },
+  "python_executable": {
+    "path": "/usr/bin/python3.12",
+    "bytes": 7845032,
+    "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+  },
+  "source_capture_scope": "individual held-byte copies; no whole-live atomic or loader-open claim"
+}

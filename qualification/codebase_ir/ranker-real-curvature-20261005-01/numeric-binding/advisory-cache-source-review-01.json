@@ -1,0 +1,126 @@
+{
+  "cache_api": {
+    "changed_or_missing_dimensions": "miss; no native work",
+    "complete_object_pins": "ASCII canonical full JSON including any self field; native retained manifest is exact compact sorted ASCII JSON plus newline, hashed as raw bytes",
+    "entry_builder": "build_real_curvature_proof_cache_entry(*,cache_dimensions,expected_cache_dimensions_sha256,qualified_result,expected_qualified_result_sha256)",
+    "lookup": "lookup_real_curvature_proof_cache(*,entry,expected_entry_sha256,cache_dimensions,expected_cache_dimensions_sha256,qualified_result,expected_qualified_result_sha256)",
+    "malformed_or_resealed_entry": "miss unless exactly reconstructed from independently pinned qualified result",
+    "output": "copied advisory theorem row status kernel_real_statement_bound; full retained cache entry <=65536 bytes",
+    "required_dimension_count": 23,
+    "required_root_join_checker_bytes": "checker_source exact path/bytes/SHA descriptor and checker_source_text; UTF8 byte count and digest must match checker source dimension"
+  },
+  "controls": {
+    "AST_parsed": true,
+    "actual_or_false_Lean_job_in_tests": false,
+    "case_groups": {
+      "all_changed_dimensions": 23,
+      "changed_external_result": 1,
+      "complete_large_chunk_object": 1,
+      "entry_claim_reseal": 5,
+      "exact_advisory_hit": 1,
+      "malformed_external_entry_pins": 3,
+      "missing_dimension": 1,
+      "resealed_authority_dimension": 1,
+      "resealed_chunk_joins": 9,
+      "resealed_native_claims": 14
+    },
+    "declaration_only_synthetic_fixtures": true,
+    "declared_pure_cases": 59,
+    "declared_test_functions": 10,
+    "executed_here": false
+  },
+  "native_evidence_guards": {
+    "actual_check_source_and_environment_match_dimensions": true,
+    "actual_checker_source_bytes_match_dimension": true,
+    "actual_theorem_registered_and_axioms_exact": true,
+    "allowed_axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "fixed_native_caps": {
+      "cpu_seconds": 20,
+      "max_input_bytes": 262144,
+      "max_output_bytes": 65536,
+      "max_workspace_bytes": 16777216,
+      "timeout_seconds": 20
+    },
+    "frozen_source_and_import_membership_required": true,
+    "negative_or_inconclusive_never_reused": true,
+    "requires_passed_positive_single_actual_Lean_invocation": true,
+    "root_lease_profile": "1 CPU slot, 2048MiB, four child process slots, active uncancelled no GPU; external receipt origin not authenticated here"
+  },
+  "retention_joins": {
+    "aggregate_complete_raw_object_bytes_max": 3997696,
+    "chunk_check_schema": "ranker-real-curvature-bounded-analytic-lean-check@2",
+    "chunk_file_count_max": 61,
+    "chunk_format": "bounded_lean_chunks@1",
+    "chunk_per_file_capture_bytes_max": 65536,
+    "chunk_profile_sha256": "ac20651cebbf99688eedc01b10dfc3efffbb90be0938db7441728e9132c190ff",
+    "combined_augmented_source_plus_helper_bytes_max": 262144,
+    "compiled_object_count_max": 4,
+    "externally_pinned_actual_reconstruction_receipt_required": true,
+    "manifest_bytes_max": 65536,
+    "manifest_guards": "exact canonical bytes digest, complete actual status and call accounting; exact globally consecutive chunk descriptors, complete native captured file hashes/sizes; fixed object suffix order; exact object size/SHA/chunk partition and aggregate joins; actual complete reconstruction receipt count/status",
+    "native_checker_reconstructs_actual_bytes": true,
+    "ordinary_and_chunk_profiles_cannot_share_key": true,
+    "ordinary_check_schema": "ranker-real-curvature-bounded-analytic-lean-check@1",
+    "ordinary_each_complete_object_bytes_max": 65536,
+    "ordinary_format": "bounded_lean_files@1",
+    "pure_cache_reads_or_reconstructs_raw_chunks": false
+  },
+  "review_jobs": {
+    "Lean_or_Lake": 0,
+    "fits": 0,
+    "metadata": 0,
+    "native_preparations": 0,
+    "network": 0,
+    "pytest": 0,
+    "trace_replays": 0
+  },
+  "review_kind": "source_and_file_only_no_import_execution",
+  "reviewer": "ranker_trace_tests",
+  "schema": "terminal-ranker-real-curvature-advisory-cache-source-review@1",
+  "scope": {
+    "Rat_to_real_original_vector_index_and_norm_join": "required separately before instantiating the original real vector theorem; cache does not create it",
+    "all32_governing_RPI_exits": "OPEN",
+    "all_operational_authority": false,
+    "binary64_derivative_feature_update_or_libm_error_semantics_proved": false,
+    "core_RPI_and_ProgramContract_mutated": false,
+    "evidence_kinds": [
+      "real_candidate_quadratic_curvature",
+      "real_scalar_derivative",
+      "real_directional_second_derivative"
+    ],
+    "full_runtime_open_trace_claimed": false,
+    "full_task_satisfaction": "unknown",
+    "global_optimizer_convergence_proved": false,
+    "historical_execution_origin_authenticated_here": false,
+    "official_benchmark_score": null,
+    "real_derivative_scope": "finite affine-line second derivative of the explicit real objective, not multivariate Frechet Hessian",
+    "source_equivalence_proved": false
+  },
+  "source_pins": [
+    {
+      "bytes": 24759,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/real_curvature_proof_cache.py",
+      "sha256": "fdf3c4905002af9d51008875c5c470bbeacb5793088dae413bfd155978e95af4"
+    },
+    {
+      "bytes": 18900,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/test_real_curvature_proof_cache.py",
+      "sha256": "22807349237229cdde07d00e83bd2ee16630fa3bf8fe02e7a1c02cd7ba776f48"
+    },
+    {
+      "bytes": 29080,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/bounded_analytic_checker.py",
+      "sha256": "0cc6a6460d841568f100e68c136346aa4dd1f7b8b0936a1dc4eeedede11e7c22"
+    },
+    {
+      "bytes": 5828,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    }
+  ],
+  "status": "source_ready_for_root_admission"
+}

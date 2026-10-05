@@ -1,0 +1,23 @@
+{
+  "schema": "ranker-analytic-mathlib-hydration@1",
+  "kind": "dependency_setup_only",
+  "official_repository": "https://github.com/leanprover-community/mathlib4.git",
+  "tag": "v4.34.0",
+  "expected_commit": "5ed2965256430c3649e86755f9576b54eca72435",
+  "clone_wall_seconds": 120,
+  "capture_bytes": 65536,
+  "proof_solver_limits_unchanged": {
+    "wall_seconds": 20,
+    "cpu_seconds": 20,
+    "output_bytes": 65536,
+    "workspace_bytes": 16777216
+  },
+  "native_proof_checks": 0,
+  "fit_calls": 0,
+  "returncode": 0,
+  "elapsed_seconds": 8.530698157992447,
+  "actual_commit": "5ed2965256430c3649e86755f9576b54eca72435",
+  "lake_manifest_sha256": "8f67b2cf24143ac091cdb425e886c2164b2fc2d6fbccd6db9454b697f9541a67",
+  "lean_toolchain": "leanprover/lean4:v4.34.0",
+  "status": "pinned_checkout_ready"
+}

@@ -1,0 +1,153 @@
+{
+  "attempts": [],
+  "cache_source_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/real_curvature_proof_cache_v2.py",
+  "closure_files": [],
+  "numeric_binding_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/numeric-binding.json",
+  "numeric_outer_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01-closed.json",
+  "numeric_owned_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/closed.json",
+  "prior_metadata_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata-inputs.json",
+  "proofs": [
+    {
+      "attempt_id": "lean-coefficient-03",
+      "evidence_kind": "real_logistic_coefficient_bound",
+      "id": "coefficient",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.realLogisticCoeff_bounds",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-geometry-01",
+      "evidence_kind": "real_coordinate_geometry",
+      "id": "geometry",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.dot_sq_le",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-curvature-04",
+      "evidence_kind": "real_candidate_quadratic_curvature",
+      "id": "curvature",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.candidateHessianQuad_bounds",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-softplus-02",
+      "evidence_kind": "real_scalar_derivative",
+      "id": "scalar",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.secondDeriv_realPairLoss",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-directional-02",
+      "evidence_kind": "real_directional_second_derivative",
+      "id": "directional",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.actual_secondDirectional_bounds",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-numeric-01",
+      "evidence_kind": "exact_original_rational_arithmetic",
+      "id": "rational",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "OriginalRankerCurvatureArithmetic.original_safe_steps",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-gradient-01",
+      "evidence_kind": "real_objective_gradient_identity",
+      "id": "gradient",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.lineFirstDerivative_zero_eq_dot_gradient",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-descent-01",
+      "evidence_kind": "real_objective_step_descent",
+      "id": "descent",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.realGradientStep_safe_descent",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-original-profile-02",
+      "evidence_kind": "original_real_profile_curvature",
+      "id": "original-profile",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.originalReal_actual_secondDirectional_bounds",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    },
+    {
+      "attempt_id": "lean-original-descent-01",
+      "evidence_kind": "original_real_profile_descent",
+      "id": "original-descent",
+      "network_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-network-policy.json",
+      "statement_span": {
+        "end_utf8_byte": 1,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "start_utf8_byte": 0
+      },
+      "theorem": "RankerRealCurvature.originalReal_safe_descent",
+      "translation_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-translation-policy.json",
+      "verification_policy_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/REPLACE-verification-policy.json"
+    }
+  ],
+  "qualification_root": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01",
+  "schema": "terminal-ranker-real-curvature-qualified-cache-join-spec@1"
+}

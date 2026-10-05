@@ -1,0 +1,776 @@
+[
+  {
+    "nodeid": "::test_original_complete_exact_numeric_binding",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.09555872899363749
+  },
+  {
+    "nodeid": "::test_original_complete_exact_numeric_binding",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0007371940009761602
+  },
+  {
+    "nodeid": "::test_original_complete_exact_numeric_binding",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.913700442761183e-05
+  },
+  {
+    "nodeid": "::test_companion_accepts_complete_genuine_binding",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.571298581548035e-05
+  },
+  {
+    "nodeid": "::test_companion_accepts_complete_genuine_binding",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.05572924599982798
+  },
+  {
+    "nodeid": "::test_companion_accepts_complete_genuine_binding",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.289698649197817e-05
+  },
+  {
+    "nodeid": "::test_hand_authored_exact_norm_and_constants",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.971299156546593e-05
+  },
+  {
+    "nodeid": "::test_hand_authored_exact_norm_and_constants",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.000393830006942153
+  },
+  {
+    "nodeid": "::test_hand_authored_exact_norm_and_constants",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7280999347567558e-05
+  },
+  {
+    "nodeid": "::test_below_exact_rounded_norm_cannot_certify_boundary_step",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.931201015599072e-05
+  },
+  {
+    "nodeid": "::test_below_exact_rounded_norm_cannot_certify_boundary_step",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0004325339978095144
+  },
+  {
+    "nodeid": "::test_below_exact_rounded_norm_cannot_certify_boundary_step",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5775982066988945e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_sha256-None]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00014196999836713076
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_sha256-None]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.3072999687865376e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_sha256-None]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.1553023038432e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_artifact_sha256-True]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.688099867664278e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_artifact_sha256-True]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.7232006434351206e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_artifact_sha256-True]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.4975993912667036e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_authentication_sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.179300882853568e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_authentication_sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.899299190379679e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_authentication_sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.2095995265990496e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.849700002931058e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.7680997997522354e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.041699528694153e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_artifact_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.643301458097994e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_artifact_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00020499498350545764
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_difference_artifact_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.377601387910545e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_ranker_result_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.748898886144161e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_ranker_result_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.004906357993604615
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_ranker_result_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.5536009818315506e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_authentication_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.651300984434783e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_authentication_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005208538990700617
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_authentication_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.23050145804882e-05
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_corpus_envelope_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011201802408322692
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_corpus_envelope_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.025126519991317764
+  },
+  {
+    "nodeid": "::test_external_pins_refuse_before_norm[expected_corpus_envelope_sha256-0000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.15850037522614e-05
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[True]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00010812899563461542
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[True]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.846398951485753e-05
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[True]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.027200000360608e-05
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[319]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.936098750680685e-05
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[319]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.238399560563266e-05
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[319]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7888017939403653e-05
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[321]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.3185009164735675e-05
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[321]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.595201997086406e-05
+  },
+  {
+    "nodeid": "::test_exact_coordinate_budget_refuses_before_norm[321]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.76489881798625e-05
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[lost_pair]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.17290027346462e-05
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[lost_pair]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.037804894003784284
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[lost_pair]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 8.532899664714932e-05
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[lost_coordinate]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00013837000005878508
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[lost_coordinate]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.018204036983661354
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[lost_coordinate]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.48970196582377e-05
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[boolean_coordinate]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0001226250024046749
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[boolean_coordinate]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.018033601983916014
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[boolean_coordinate]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.067300612106919e-05
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[nonfinite_coordinate]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00010913799633271992
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[nonfinite_coordinate]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.018321814015507698
+  },
+  {
+    "nodeid": "::test_matrix_population_and_scalar_types_refuse_before_norm[nonfinite_coordinate]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.95049820933491e-05
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[None]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00010561800445429981
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[None]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.92009858135134e-05
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[None]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.208100679330528e-05
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[cap1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.9839978348463774e-05
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[cap1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.854400711134076e-05
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[cap1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8368987841531634e-05
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[cap2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.401601083576679e-05
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[cap2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.67519969586283e-05
+  },
+  {
+    "nodeid": "::test_quarter_cap_is_fixed_and_canonical[cap2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.084898344241083e-05
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[feature_profile_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.307298852130771e-05
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[feature_profile_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.07262083300156519
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[feature_profile_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 8.33930098451674e-05
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[train_pairs_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00012024102034047246
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[train_pairs_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.07271456098533235
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[train_pairs_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.58090172894299e-05
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[corpus_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011835299665108323
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[corpus_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.07236148399533704
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[corpus_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.820897735655308e-05
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[native_step_size]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011787298717536032
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[native_step_size]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.07214156098780222
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[native_step_size]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.651300984434783e-05
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[L2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.000119906006148085
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[L2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.07236225297674537
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[L2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.724901661276817e-05
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[differences]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011987399193458259
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[differences]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.04412786400644109
+  },
+  {
+    "nodeid": "::test_resealed_frozen_artifact_with_new_external_pin_still_refuses[differences]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.424099021591246e-05
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[feature_profile]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011611299123615026
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[feature_profile]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.08323186400230043
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[feature_profile]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.808098987676203e-05
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[step]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011816099868156016
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[step]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.08323631199891679
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[step]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.937701255083084e-05
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[regularization]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011745799565687776
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[regularization]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.10280753602273762
+  },
+  {
+    "nodeid": "::test_coherently_resealed_native_receipts_and_new_pins_cannot_swap_original_profile[regularization]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.718498818576336e-05
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[native_profile]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00012461000005714595
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[native_profile]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0729663890087977
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[native_profile]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.20329990144819e-05
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[trace_population]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011870599701069295
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[trace_population]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.07284224301110953
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[trace_population]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.496101898141205e-05
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[real_descent_claim]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011995399836450815
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[real_descent_claim]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.07318575200042687
+  },
+  {
+    "nodeid": "::test_resealed_trace_profile_and_qualification_swaps_refuse_before_norm[real_descent_claim]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.712200749665499e-05
+  },
+  {
+    "nodeid": "::test_changed_corpus_resealed_with_new_pin_is_outside_original_model",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.659400580450892e-05
+  },
+  {
+    "nodeid": "::test_changed_corpus_resealed_with_new_pin_is_outside_original_model",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.08756298199295998
+  },
+  {
+    "nodeid": "::test_changed_corpus_resealed_with_new_pin_is_outside_original_model",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.820898852311075e-05
+  },
+  {
+    "nodeid": "::test_ordered_membership_cannot_be_resealed_and_swapped",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.500898209400475e-05
+  },
+  {
+    "nodeid": "::test_ordered_membership_cannot_be_resealed_and_swapped",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.08352841198211536
+  },
+  {
+    "nodeid": "::test_ordered_membership_cannot_be_resealed_and_swapped",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.004899089224637e-05
+  },
+  {
+    "nodeid": "::test_forged_whole_native_result_self_digest_refuses_before_norm",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.604999700561166e-05
+  },
+  {
+    "nodeid": "::test_forged_whole_native_result_self_digest_refuses_before_norm",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.07645010302076116
+  },
+  {
+    "nodeid": "::test_forged_whole_native_result_self_digest_refuses_before_norm",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.672099698334932e-05
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[coordinate]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011892998008988798
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[coordinate]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.05698299198411405
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[coordinate]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.201700307428837e-05
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[curvature]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011329801054671407
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[curvature]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.056932447012513876
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[curvature]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.345700239762664e-05
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[coefficient]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011217800783924758
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[coefficient]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.05708904200582765
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[coefficient]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.518501322716475e-05
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[derivative_claim]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00010557001223787665
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[derivative_claim]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.05713060998823494
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[derivative_claim]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.705601117573678e-05
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[authority]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00010672200005501509
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[authority]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.05704152100952342
+  },
+  {
+    "nodeid": "::test_self_resealed_certificate_cannot_change_numeric_model_or_claims[authority]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.422499427571893e-05
+  },
+  {
+    "nodeid": "::test_certificate_self_digest_failure_refuses_before_norm",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.865700172260404e-05
+  },
+  {
+    "nodeid": "::test_certificate_self_digest_failure_refuses_before_norm",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0007859469915274531
+  },
+  {
+    "nodeid": "::test_certificate_self_digest_failure_refuses_before_norm",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.691298818215728e-05
+  }
+]

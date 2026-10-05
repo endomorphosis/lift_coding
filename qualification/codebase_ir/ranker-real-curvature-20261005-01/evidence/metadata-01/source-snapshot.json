@@ -1,0 +1,49 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "asymptotic_optimizer_convergence_proved": false,
+  "behavioral_satisfaction": false,
+  "cache_join_owned_control": {
+    "bytes": 15629,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/closed.json",
+    "sha256": "79c727093520d4e8fe857dff06ae4354db2690cab1c952c12d68b46c2248a7ec"
+  },
+  "cache_join_result": {
+    "bytes": 58956,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/cache-join-result.json",
+    "sha256": "6e58a5d9638b3592ae0ac05f74dd6f28a9db3f817ed3c20b9edb00cc1057e73d"
+  },
+  "canonical_tasks": [],
+  "completion_authority": false,
+  "contracts_payloads_unchanged": true,
+  "execution_authority": false,
+  "formalization_authority": false,
+  "full_source_runtime_equivalence": false,
+  "full_task_satisfaction": "unknown",
+  "global_optimizer_convergence": false,
+  "metadata_input": {
+    "bytes": 6315498,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/metadata-inputs.json",
+    "sha256": "89c33f1a198a7de64b8f106d66072f66fc5ccb55687fce4cbfcc34980ccf9366"
+  },
+  "mutation_authority": false,
+  "official_benchmark_score": null,
+  "omission_authority": false,
+  "original_ranker_result": {
+    "bytes": 640834,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/evidence/actual-02/ranker-result.json",
+    "sha256": "6a6b7eaa20bf1a82a958ff6c9a6ab6f64c613fb880569a76b625de156284d60a"
+  },
+  "planner_activation": false,
+  "prior_metadata_inputs": {
+    "bytes": 8128202,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata-inputs.json",
+    "sha256": "b53a4fd67b4e9c78128c8d24775d47f5b6cf7435989a3d266bc74b42427cf5d2"
+  },
+  "prior_wrapper_row_ids_rebound_to_new_source_snapshot": true,
+  "proof_authority": false,
+  "schema": "ranker-real-curvature-native-metadata-source-snapshot@1",
+  "semantic_alignment_verified": false,
+  "source_semantics_verified": false,
+  "unchanged_prior_payload_rows": 4348,
+  "whole_program_proved": false
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "terminal-ranker-curvature-native-check-specification@1",
+  "source": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-01-producer/DirectionalObjective.lean",
+    "bytes": 7558,
+    "sha256": "7bcbc5d35c7791b70bf324c4de26b6db0d2762f2218c4bb9bb33cb59228c3e7e"
+  },
+  "environment_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-01-producer/environment-manifest.json",
+    "bytes": 9320746,
+    "sha256": "0a1b3e01638a2244afebc8c40b81e98dcdb49f597b2c6495bb4e270aaf13f087"
+  },
+  "expected_success": true,
+  "theorem_names": [
+    "RankerRealCurvature.secondDeriv_realObjectiveLine",
+    "RankerRealCurvature.actual_secondDirectional_bounds"
+  ],
+  "freeze_producer": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-01-producer/freeze_chunk_check_profile.py",
+    "bytes": 5107,
+    "sha256": "c3be6b49302787c2b034f1bc81878969896eab2deaf4afc7199dad6acfe1227c"
+  },
+  "retention_helper": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-01-producer/RetainLeanProof.py",
+    "bytes": 5828,
+    "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+  },
+  "python_executable": {
+    "path": "/usr/bin/python3.12",
+    "bytes": 7845032,
+    "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+  },
+  "source_capture_scope": "individual held-byte copies; no whole-live atomic or loader-open claim"
+}

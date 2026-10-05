@@ -1,0 +1,28 @@
+{
+  "schema": "terminal-ranker-curvature-native-check-specification@1",
+  "source": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/OriginalNumericCurvature.lean",
+    "bytes": 6710,
+    "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+  },
+  "environment_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/environment-manifest.json",
+    "bytes": 9922660,
+    "sha256": "7dff0dc3f2dddb5bba5b0864ec6d5899f842b9c6a7208af11b2212044912a988"
+  },
+  "expected_success": true,
+  "theorem_names": [
+    "OriginalRankerCurvatureArithmetic.original_norms_exact",
+    "OriginalRankerCurvatureArithmetic.original_shape",
+    "OriginalRankerCurvatureArithmetic.original_positive_scalars",
+    "OriginalRankerCurvatureArithmetic.original_mean_bound",
+    "OriginalRankerCurvatureArithmetic.original_conservative_bound",
+    "OriginalRankerCurvatureArithmetic.original_safe_steps"
+  ],
+  "freeze_producer": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/freeze_std_check_profile.py",
+    "bytes": 4439,
+    "sha256": "9043f75b5ee603abfe4bce5a6c1b7d6a554fa949b926e2cee25d195681b457a4"
+  },
+  "source_capture_scope": "individual held-byte copy; no atomic whole-live or loader-open trace"
+}

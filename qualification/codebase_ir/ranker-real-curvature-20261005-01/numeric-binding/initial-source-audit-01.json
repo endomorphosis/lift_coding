@@ -1,0 +1,168 @@
+{
+  "average_curvature_bound_exact": {
+    "denominator": "332306998946228968225951765070086144",
+    "numerator": "148193205047351780041480481833762829"
+  },
+  "claims": {
+    "binary64_correctness_proved": false,
+    "full_task_satisfaction": "unknown",
+    "general_optimizer_convergence_proved": false,
+    "historical_execution_origin_authenticated_here": false,
+    "logistic_derivative_Hessian_identity_proved": false,
+    "official_benchmark_score": null,
+    "proof_authority": false
+  },
+  "conservative_curvature_bound_exact": {
+    "denominator": "10384593717069655257060992658440192",
+    "numerator": "6456113532727304764308018601938259"
+  },
+  "difference_vectors_sha256": "e8504c6e8004a2f2878bc79aae0af54c9541bff82df8cde670b48bdf7da03ac6",
+  "dimension": 80,
+  "exact_native_regularization": {
+    "denominator": "576460752303423488",
+    "numerator": "5764607523034235"
+  },
+  "exact_native_step": {
+    "denominator": "4503599627370496",
+    "numerator": "1825681634788183"
+  },
+  "exact_step_prerequisite_checks": {
+    "eta_Lmax_le_one": true,
+    "eta_Lmean_le_one": true,
+    "eta_positive": true,
+    "mu_positive": true
+  },
+  "feature_profile_sha256": "5c9ed26e5c02a2fd12c34dc27fcd6105db6798d28a984031c71e3f56aa5a1751",
+  "input_canonical_complete_object_sha256": {
+    "original_corpus_envelope": "2a452811f54d85509e2d0b0c962ecab5d8cd221a6cd0321556a387c95da0a8e7",
+    "original_ranker_result": "6d904cc4662e271372c68bd27d5a6c041018cd786259c2f48adec919c7a80ef4",
+    "original_trace_authentication": "43b69bbb493c0aff290b040eb734d24866b2c83817e96950a0a86aada057f794"
+  },
+  "input_pins": {
+    "native_ranker_source": {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "raw_file_sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    "native_step_source": {
+      "bytes": 6749,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+      "raw_file_sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+    },
+    "original_corpus_envelope": {
+      "bytes": 2029591,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/frozen-corpus/2a452811f54d85509e2d0b0c962ecab5d8cd221a6cd0321556a387c95da0a8e7.json",
+      "raw_file_sha256": "2a452811f54d85509e2d0b0c962ecab5d8cd221a6cd0321556a387c95da0a8e7"
+    },
+    "original_ranker_result": {
+      "bytes": 640834,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/evidence/actual-02/ranker-result.json",
+      "raw_file_sha256": "6a6b7eaa20bf1a82a958ff6c9a6ab6f64c613fb880569a76b625de156284d60a"
+    },
+    "original_trace_authentication": {
+      "bytes": 40487,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/authentication-result.json",
+      "raw_file_sha256": "43b69bbb493c0aff290b040eb734d24866b2c83817e96950a0a86aada057f794"
+    },
+    "prior_same_vector_digest_step_result": {
+      "bytes": 5017,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/step-result.json",
+      "raw_file_sha256": "fcc98eb4643cf7f9303652495d7fd2428d66f4ee3301213c6e28525b2d00a45c"
+    }
+  },
+  "maximum_squared_norm_exact": {
+    "denominator": "2596148429267413814265248164610048",
+    "numerator": "6352267595556608209575680854216019"
+  },
+  "mean_squared_norm_exact": {
+    "denominator": "83076749736557242056487941267521536",
+    "numerator": "144870135057889490290045673906651149"
+  },
+  "model": "Candidate real quadratic Hessian model with fixed logistic coefficient in [0, 1/4], squared Euclidean coordinate sum and L2 coefficient equal to the exact real embedding of the native float.",
+  "native_numeric_smoothness_embedding": {
+    "denominator": "2251799813685248",
+    "numerator": "2777374929063803"
+  },
+  "native_numeric_smoothness_exceeds_exact_conservative_bound": true,
+  "nearest_rounded_exact_norm_minus_exact_norm": [
+    {
+      "denominator": "20769187434139310514121985316880384",
+      "numerator": "-2302196481795288497"
+    },
+    {
+      "denominator": "1298074214633706907132624082305024",
+      "numerator": "-120472345732908117"
+    },
+    {
+      "denominator": "5192296858534827628530496329220096",
+      "numerator": "133499272901990243"
+    },
+    {
+      "denominator": "2596148429267413814265248164610048",
+      "numerator": "-3154004517342547"
+    }
+  ],
+  "operations": {
+    "Lean_calls": 0,
+    "existing_file_mutations": 0,
+    "fits": 0,
+    "metadata_jobs": 0,
+    "native_preparations": 0,
+    "objective_evaluations": 0,
+    "optimizer_updates": 0,
+    "project_imports": 0,
+    "pytest_runs": 0
+  },
+  "original_corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+  "original_pair_count": 4,
+  "prior_step_corpus_sha256": "sha256:43da7b53f322e21b495d0352b6ca90378399ffe0fc49864e729a9edf2a8306c6",
+  "prior_stored_norms_use_limit": "The prior step receipt has the same difference-vector digest but a different corpus identity. Its exact norms are comparison evidence; this audit has not materialized or independently recomputed the original 4x80 difference matrix.",
+  "prior_stored_pair_squared_norms_exact": [
+    {
+      "denominator": "20769187434139310514121985316880384",
+      "numerator": "46646319711462335500654408216079793"
+    },
+    {
+      "denominator": "1298074214633706907132624082305024",
+      "numerator": "1507989278949607563828642550842453"
+    },
+    {
+      "denominator": "5192296858534827628530496329220096",
+      "numerator": "5819461529695142022881884510840989"
+    },
+    {
+      "denominator": "2596148429267413814265248164610048",
+      "numerator": "6352267595556608209575680854216019"
+    }
+  ],
+  "proposed_source_files": [
+    "build_curvature_numeric_binding.py",
+    "test_curvature_numeric_binding.py"
+  ],
+  "rounding_warning": "Nearest rounding of an exact norm is below the exact value for rows 0, 1 and 3. This is not the native math.fsum sum of rounded products; neither rounding path is assumed to majorize the exact norm.",
+  "schema": "ranker-real-curvature-numeric-source-audit@1",
+  "separate_unproved_obligations": [
+    "candidate quadratic form is the derivative Hessian of the actual real objective",
+    "native feature preparation is correct for the independent original corpus",
+    "binary64 or libm error bounds and exact-to-native update connection",
+    "general optimizer convergence and complete task satisfaction"
+  ],
+  "source_API_coordination": "awaiting parent agreement before writing source",
+  "status": "preliminary_source_and_existing_receipt_exact_arithmetic_only",
+  "step_times_average_bound_exact": {
+    "denominator": "1496577676626844588240573268701473812127674924007424",
+    "numerator": "270553612855349610092775541901805648630363273849707"
+  },
+  "step_times_conservative_bound_exact": {
+    "denominator": "46768052394588893382517914646921056628989841375232",
+    "numerator": "11786807908807697171083453531535623283966708793397"
+  },
+  "test_design": [
+    "genuine exact synthetic4x80 model, explicitly authored unit-only",
+    "native float L2 and eta exact embeddings, average and max norm arithmetic",
+    "rounded norm below exact value must not replace exact bound",
+    "malformed pins/types/shapes and excessive budgets refuse before exact matrix traversal",
+    "changed corpus/profile/membership/differences/step/L2/coefficient/digest refuse",
+    "coefficient cap stays exactly1/4 and authority cannot be promoted"
+  ]
+}

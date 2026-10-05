@@ -1,0 +1,55 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 13245,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/test_bounded_lean_chunks.py",
+      "sha256": "e6b3265504c0f7e0fe8ee82460b5c216e152cfe881e0b1ff5464476d58cd9c70"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 25757,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-pure-tests-mappingproxy-01.py",
+      "sha256": "de4a468ec2178fdbb25c6d17a7ed5112c409b2bfc0dbbed0c24cd7b538558f29"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 13245,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/test_bounded_lean_chunks.py",
+      "sha256": "e6b3265504c0f7e0fe8ee82460b5c216e152cfe881e0b1ff5464476d58cd9c70"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    }
+  ],
+  "mode": "pure-tests-mappingproxy-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T04:00:01.437893+00:00"
+}

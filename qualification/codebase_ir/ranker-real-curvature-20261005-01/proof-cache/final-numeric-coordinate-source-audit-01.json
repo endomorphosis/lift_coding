@@ -1,0 +1,233 @@
+{
+  "cache_and_metadata_observations": {
+    "actual_cache_entries": 10,
+    "actual_cache_join_status": "prepared_inputs_only",
+    "actual_metadata_families": 32,
+    "actual_metadata_rows": 4378,
+    "actual_metadata_status": "passed",
+    "all_prior4348_payloads_exact": true,
+    "fresh_process_readback_verified": true,
+    "historical_checker_alias_only_failed_inconclusive_raw_bytes_same_no_qualification": true,
+    "initial_cache_join01_refusal_retained": true,
+    "pure_lookup_metrics": {
+      "changed_dimension_misses": 230,
+      "changed_dimension_queries": 230,
+      "same_query_hits": 10
+    },
+    "source_review_findings_resolved": {
+      "metadata_inputs_pin_required_in_actual_cache_join_output_bindings": true,
+      "metadata_join_result_pin_required_equal_passed_cache_join_owned_receipt_pointer": true
+    }
+  },
+  "coordinate_source_matches": [
+    {
+      "all_320_coordinates_exact": true,
+      "four_norms_exact": true,
+      "mu_eta_maxNorm_meanL_conservativeL_exact": true,
+      "raw_pin": {
+        "bytes": 6710,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/OriginalNumericCurvature.lean",
+        "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+      }
+    },
+    {
+      "all_320_coordinates_exact": true,
+      "four_norms_exact": true,
+      "mu_eta_maxNorm_meanL_conservativeL_exact": true,
+      "raw_pin": {
+        "bytes": 7171,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/lean/OriginalNumericCurvature.lean",
+        "sha256": "982da522b3059d50471007a9d0c97431e6fde780adab3b493e0e43a0da36abaa"
+      }
+    }
+  ],
+  "identity_conventions": {
+    "bare_difference_vectors_sha256": "e8504c6e8004a2f2878bc79aae0af54c9541bff82df8cde670b48bdf7da03ac6",
+    "cache_join_and_native_check_complete_object_pins_use_ASCII_canonical_JSON_including_self_fields": true,
+    "numeric_complete_ASCII_canonical_sha256_including_self_field": "2e4a8aaf11e484b4bb8e7d63c993eb955e4f26a7183c3d5cb32fed6290bd8274",
+    "numeric_native_self_sha256_excluding_self_field": "6e178d7cc6054945dad4a9445bf0e15bef3505922de31e81a724faeb0af518ca",
+    "numeric_raw_file_sha256": "2e4a8aaf11e484b4bb8e7d63c993eb955e4f26a7183c3d5cb32fed6290bd8274",
+    "original_and_augmented_Lean_source_are_distinct_raw_identities": true,
+    "original_corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+    "proof_source_and_environment_dimensions_use_raw_file_SHA256": true,
+    "retained_manifest_uses_exact_ASCII_sorted_compact_JSON_plus_newline": true
+  },
+  "input_pins": [
+    {
+      "bytes": 2342,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/original-differences-01.json",
+      "sha256": "d2b691805cddd5ba8a46f733589e4d09424a06d67a6a2bb09b61e7f727d9c739"
+    },
+    {
+      "bytes": 18552,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/build_curvature_numeric_binding.py",
+      "sha256": "d73de85db64c5cb7c3d9ca97d325e27bb73f30bbda83e674377646bbda4082b5"
+    },
+    {
+      "bytes": 24989,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/real_curvature_proof_cache_v2.py",
+      "sha256": "2b076527c8bc5984090df47d73122a4c29987d9a0c75f7c88ee5d7b7bcdef48b"
+    },
+    {
+      "bytes": 17176,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/numeric-binding.json",
+      "sha256": "2e4a8aaf11e484b4bb8e7d63c993eb955e4f26a7183c3d5cb32fed6290bd8274"
+    },
+    {
+      "bytes": 17100,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/closed.json",
+      "sha256": "5207f18cd4668d8227ace740c61002969a720849ee8a9db7b569efe79392880d"
+    },
+    {
+      "bytes": 5997,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/check-result.json",
+      "sha256": "3b5d9428526ec591c95f05a851202eb963f86d593a8e2c08ca87c84862ef473d"
+    },
+    {
+      "bytes": 9638,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/check-result.json",
+      "sha256": "d2d8e94548fb71b2f09f39770c856c2ce2ef17fa769000d875ac6b5b67e806ec"
+    },
+    {
+      "bytes": 8924,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/check-result.json",
+      "sha256": "658b3650b7ece388ee2df2fb1ced2a90ccfffb33170018be66e0581ab70d3629"
+    },
+    {
+      "bytes": 16575,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-01/closed.json",
+      "sha256": "d845ae4832737c953b19345842891547a452ec9cf798f18a249a907b8337896c"
+    },
+    {
+      "bytes": 15629,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/closed.json",
+      "sha256": "79c727093520d4e8fe857dff06ae4354db2690cab1c952c12d68b46c2248a7ec"
+    },
+    {
+      "bytes": 58956,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/cache-join-result.json",
+      "sha256": "6e58a5d9638b3592ae0ac05f74dd6f28a9db3f817ed3c20b9edb00cc1057e73d"
+    },
+    {
+      "bytes": 32234,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/metadata-01/metadata-readback.json",
+      "sha256": "4c566c565afda2a9286b1c34563f3cd96758046ebe6b701847e54da81d022a74"
+    },
+    {
+      "bytes": 30807,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/run_curvature_controls.py",
+      "sha256": "0969dd26088a2edf73bb8087afd39a0f419e09294a5e05d449cc3acd110bcc33"
+    },
+    {
+      "bytes": 31180,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/build_qualified_cache_joins.py",
+      "sha256": "a852b2beb1a5703e0fe4aa60927d0292a010f3829f0c53ed5349c55b1bb124c2"
+    },
+    {
+      "bytes": 32400,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/legacy-alias-v2/build_qualified_cache_joins.py",
+      "sha256": "a52205118635cb054988e18989c9b71d47ebaa39e9a238a9b52794ce3abc0da8"
+    }
+  ],
+  "limits_and_scope": {
+    "all32_governing_RPI_exits": "OPEN",
+    "all_operational_authority": false,
+    "binary64_feature_update_or_libm_error_semantics_proved": false,
+    "complete_runtime_open_trace_claimed": false,
+    "core_policy_RPI_ProgramContract_mutated": false,
+    "full_task_satisfaction": "unknown",
+    "global_optimizer_convergence_proved": false,
+    "historical_execution_origin_authenticated_here": false,
+    "multivariate_Frechet_Hessian_identity_proved": false,
+    "native_Float_source_equivalence_proved": false,
+    "official_benchmark_score": null,
+    "real_statement_scope": "kernel-qualified explicit real finite-coordinate model, affine-line second derivative, and exact real gradient step descent; all source and environment pins remain explicit",
+    "source_data_literal_binding": "exact stored native Float rational constants; no re-extraction or gradient replay"
+  },
+  "native_scalar_literals": {
+    "conservative_curvature_L": {
+      "denominator": "10384593717069655257060992658440192",
+      "numerator": "6456113532727304764308018601938259"
+    },
+    "eta": {
+      "denominator": "4503599627370496",
+      "numerator": "1825681634788183"
+    },
+    "mean_curvature_L": {
+      "denominator": "332306998946228968225951765070086144",
+      "numerator": "148193205047351780041480481833762829"
+    },
+    "mu": {
+      "denominator": "576460752303423488",
+      "numerator": "5764607523034235"
+    }
+  },
+  "original_numeric_to_real_profile_join": {
+    "actual_numeric_check_status": "passed",
+    "actual_real_profile_check_status": "passed",
+    "imported_numeric_compiled_objects_equal_complete_actual_numeric_objects": true,
+    "imported_numeric_source_equals_actual_augmented_checked_numeric_source": true,
+    "module": {
+      "compiled": [
+        {
+          "bytes": 56104,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/lean/OriginalNumericCurvature.olean",
+          "sha256": "b8a89ce90adb8a92c03c6d98d123f172e94be68bc0478a4b499092c91d44e8ca"
+        }
+      ],
+      "module": "OriginalNumericCurvature",
+      "package": "qualified-local-theorem",
+      "source": {
+        "bytes": 7171,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/lean/OriginalNumericCurvature.lean",
+        "sha256": "982da522b3059d50471007a9d0c97431e6fde780adab3b493e0e43a0da36abaa"
+      }
+    },
+    "profile_environment_manifest": {
+      "bytes": 9943486,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/environment-manifest.json",
+      "sha256": "43022260cd76d6195b3a4d0a7ec1ec8be2bdfdc04982e9e2d7a083af28c8f640"
+    }
+  },
+  "original_real_profile_to_descent_join": {
+    "actual_original_real_descent_status": "passed",
+    "descent_environment_manifest": {
+      "bytes": 9950071,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-descent-01-producer/environment-manifest.json",
+      "sha256": "329b993f9c09e978c2c46b173670a93195ddf720c9462472824eae283a7ac341"
+    },
+    "imported_profile_compiled_objects_equal_complete_actual_profile_objects": true,
+    "imported_profile_source_equals_actual_augmented_checked_profile_source": true,
+    "module": {
+      "compiled": [
+        {
+          "bytes": 90680,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/lean/OriginalRealProfile.olean",
+          "sha256": "bb4cb92353477546673f3cbca4029c654a4e358bd2994e29182982488249aa54"
+        }
+      ],
+      "module": "OriginalRealProfile",
+      "package": "qualified-local-theorem",
+      "source": {
+        "bytes": 6316,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/lean/OriginalRealProfile.lean",
+        "sha256": "4e700632a124495728470810b1f5a2798b99b0096978ec6198ff2b747c1f69a4"
+      }
+    }
+  },
+  "review_method": "read immutable JSON and Lean source bytes; compare canonical literal strings after removing whitespace; compare exact source/compiled-object descriptors in actual frozen environment manifests; no module import or target execution",
+  "review_work": {
+    "Lean_or_Lake_calls": 0,
+    "fits": 0,
+    "gradient_evaluations": 0,
+    "metadata_or_database_jobs": 0,
+    "native_preparations": 0,
+    "network_operations": 0,
+    "optimizer_updates": 0,
+    "project_module_imports": 0,
+    "pytest_calls": 0
+  },
+  "reviewer": "ranker_trace_tests",
+  "schema": "terminal-ranker-original-coordinate-source-file-audit@1",
+  "status": "exact_original_numeric_and_real_profile_dependency_joins_verified_file_only"
+}

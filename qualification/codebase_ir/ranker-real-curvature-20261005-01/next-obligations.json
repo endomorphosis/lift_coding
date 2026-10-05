@@ -1,0 +1,109 @@
+{
+  "schema": "ranker-real-curvature-next-obligations@1",
+  "scope": "source-to-model, exact-real convergence, Float refinement and actual benchmark satisfaction",
+  "obligations": [
+    {
+      "id": "REAL-CONVERGENCE",
+      "depends_on": [
+        "qualified originalReal_safe_descent",
+        "qualified originalReal_actual_secondDirectional_bounds"
+      ],
+      "work": [
+        "Derive strong convexity from the actual line second derivative lower bound and prove minimizer existence and uniqueness.",
+        "Derive the gradient domination inequality and geometric loss-gap recurrence.",
+        "Prove Tendsto for exact-real iterates using the exact original positive mu and eta; keep floating-point iterations separate."
+      ],
+      "acceptance": [
+        "Lean kernel checks a non-circular convergence theorem with no convergence or contraction premise.",
+        "Complete frozen module/import chain and explicit original matrix/parameter joins are retained."
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "SOURCE-MODEL",
+      "depends_on": [
+        "qualified actual gradient and scalar derivative statements"
+      ],
+      "work": [
+        "Pin the original Python AST/control-flow and exact feature/schema/update profile.",
+        "Define a supported semantics for the ranker source operations, including stable loss branches and gradient accumulation.",
+        "Prove source interpretation matches the stated real objective and gradient, with unsupported operations explicitly refused."
+      ],
+      "acceptance": [
+        "A checked interpretation theorem covers every supported expression in the original entry point and update loop.",
+        "Source changes, feature drift and missing dependencies invalidate the theorem/cache join."
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "FLOAT-REFINEMENT",
+      "depends_on": [
+        "SOURCE-MODEL",
+        "REAL-CONVERGENCE"
+      ],
+      "work": [
+        "Specify binary64 multiplication/addition, math.fsum and exp/log1p evaluation including underflow/overflow branches.",
+        "Derive rounding and evaluation error bounds over the original reachable finite iterates.",
+        "Prove perturbed descent or bounded convergence with explicit error floor; do not reuse the exact-real asymptotic claim for native Float."
+      ],
+      "acceptance": [
+        "Checked error bounds bind actual source, toolchain and numerical operation profiles.",
+        "Boundary and changed-profile controls reject invalid claims; no rounded norm is assumed to be an exact upper bound."
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "IR-SEMANTIC-FIDELITY",
+      "depends_on": [
+        "SOURCE-MODEL"
+      ],
+      "work": [
+        "Bind intent_IR obligations to supported codebase_IR AST, graph, vectors and contracts with exact snapshot identities.",
+        "Translate each supported logic-family projection through a typed semantics-preserving interface.",
+        "Treat autoencoder proposals as candidates requiring independent checking; abstain on unsupported constructs."
+      ],
+      "acceptance": [
+        "Every accepted projection has a checked semantic preservation obligation and a complete dependency-index/cache identity.",
+        "No embedding similarity, reconstruction loss or self-authored contract grants proof or planner authority."
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "TASK-SATISFACTION",
+      "depends_on": [
+        "IR-SEMANTIC-FIDELITY",
+        "FLOAT-REFINEMENT"
+      ],
+      "work": [
+        "Bind each canonical Terminal Bench task acceptance criterion to independently specified behavior and environment.",
+        "Run the actual supervisor entry point through prompt, intent_IR, codebase_IR match, symbolic plan and tool execution under the existing admission policy.",
+        "Retain task validator outcomes, failures, missing requirements and dataset split provenance."
+      ],
+      "acceptance": [
+        "All task criteria are independently verified by the benchmark validator and matched to the original requested intent.",
+        "Scores and completion claims refer to actual completed benchmark executions; all32 governing RPI exits satisfy their independent requirements."
+      ],
+      "status": "OPEN"
+    },
+    {
+      "id": "ON-THE-FLY-TRAINING",
+      "depends_on": [
+        "IR-SEMANTIC-FIDELITY"
+      ],
+      "work": [
+        "Define bounded incremental AST/graph/vector/contract indexing with invalidation by source and environment hashes.",
+        "Train codebase_IR on the supported repository snapshot with held-out task and formal-obligation validation.",
+        "Separate empirical optimizer metrics, bounded real-ranker theorems and any nonconvex autoencoder claims."
+      ],
+      "acceptance": [
+        "Measured runs retain training objective, gradients, update traces, metadata restart equality and independent validation splits.",
+        "A global autoencoder convergence claim requires its own valid theorem and assumptions; the present ranker descent result cannot supply it."
+      ],
+      "status": "OPEN"
+    }
+  ],
+  "planner_activation": false,
+  "proof_authority": false,
+  "full_task_satisfaction": "unknown",
+  "official_benchmark_score": null
+}

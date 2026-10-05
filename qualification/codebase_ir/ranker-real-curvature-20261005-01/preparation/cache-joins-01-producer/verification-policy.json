@@ -1,0 +1,32 @@
+{
+  "authority_profile": {
+    "all32_governing_RPI_exits": "OPEN",
+    "asymptotic_optimizer_convergence_proved": false,
+    "behavioral_satisfaction": false,
+    "binary64_error_bound_proved": false,
+    "completion_authority": false,
+    "execution_authority": false,
+    "formalization_authority": false,
+    "full_task_satisfaction": "unknown",
+    "global_optimizer_convergence_proved": false,
+    "historical_execution_origin_authenticated_here": false,
+    "multivariate_Frechet_Hessian_identity_proved": false,
+    "mutation_authority": false,
+    "official_benchmark_score": null,
+    "omission_authority": false,
+    "planner_activation": false,
+    "proof_authority": false,
+    "semantic_alignment_verified": false,
+    "source_semantics_verified": false,
+    "whole_program_proved": false,
+    "whole_source_runtime_equivalence_proved": false
+  },
+  "native_bounds": {
+    "cpu_seconds": 20,
+    "max_input_bytes": 262144,
+    "max_output_bytes": 65536,
+    "max_workspace_bytes": 16777216,
+    "timeout_seconds": 20
+  },
+  "schema": "terminal-ranker-real-verification-policy@1"
+}

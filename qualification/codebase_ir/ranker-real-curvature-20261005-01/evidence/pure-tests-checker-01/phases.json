@@ -1,0 +1,686 @@
+[
+  {
+    "nodeid": "::test_minimal_inert_environment_binds_manifest_itself",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.003109128010692075
+  },
+  {
+    "nodeid": "::test_minimal_inert_environment_binds_manifest_itself",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0006555120053235441
+  },
+  {
+    "nodeid": "::test_minimal_inert_environment_binds_manifest_itself",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 8.163301390595734e-05
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[selected_only]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0005265350046101958
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[selected_only]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0006212079897522926
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[selected_only]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.611300002783537e-05
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[inventory_only]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004482779768295586
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[inventory_only]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0005226310167927295
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[inventory_only]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.4016982428729534e-05
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[both]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004067890113219619
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[both]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00045357400085777044
+  },
+  {
+    "nodeid": "::test_missing_actual_source_refuses_before_admission[both]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.275300307199359e-05
+  },
+  {
+    "nodeid": "::test_changed_source_cannot_use_prior_pin",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00037022799369879067
+  },
+  {
+    "nodeid": "::test_changed_source_cannot_use_prior_pin",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00020801799837499857
+  },
+  {
+    "nodeid": "::test_changed_source_cannot_use_prior_pin",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.694399492815137e-05
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[import Outside]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0003736850048881024
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[import Outside]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0006087439833208919
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[import Outside]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.012900171801448e-05
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[import all Outside]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0003949010279029608
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[import all Outside]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00052117501036264
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[import all Outside]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.868801286444068e-05
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[public meta import Outside]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00039037299575284123
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[public meta import Outside]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.000511158985318616
+  },
+  {
+    "nodeid": "::test_import_outside_profile_refuses_before_admission[public meta import Outside]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.772898344323039e-05
+  },
+  {
+    "nodeid": "::test_compiled_lookup_shadow_refuses_even_when_original_pin_is_valid",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00035869298153556883
+  },
+  {
+    "nodeid": "::test_compiled_lookup_shadow_refuses_even_when_original_pin_is_valid",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0005459270032588392
+  },
+  {
+    "nodeid": "::test_compiled_lookup_shadow_refuses_even_when_original_pin_is_valid",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.646398545242846e-05
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[source]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00037123699439689517
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[source]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00042355700861662626
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[source]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.815998206846416e-05
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[compiled]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00038494900218211114
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[compiled]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0004169809981249273
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[compiled]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.6511977668851614e-05
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[Init]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00038506099372170866
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[Init]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00044531800085678697
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[Init]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.705601557157934e-05
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[duplicate_module]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0003788850153796375
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[duplicate_module]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0004920069768559188
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[duplicate_module]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.662399831227958e-05
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[duplicate_file]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00038045301334932446
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[duplicate_file]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002472669875714928
+  },
+  {
+    "nodeid": "::test_missing_or_duplicate_closure_records_refuse_before_admission[duplicate_file]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.755200305022299e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[None]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00035930000012740493
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[None]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00012600098852999508
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[None]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.476798883639276e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[True]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004689659981522709
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[True]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.974499021656811e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[True]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.2657000701874495e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004167890001554042
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 8.372901356779039e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.3168995287269354e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00037065998185425997
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.96169915702194e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[000000000000000000000000000000000000000000000000000000000000000]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.3904012525454164e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[not-a-pin]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0003572209971025586
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[not-a-pin]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.654499495401978e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_manifest_pin_refuses[not-a-pin]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.22410196531564e-05
+  },
+  {
+    "nodeid": "::test_manifest_reseal_does_not_hide_changed_compiled_file",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0003372199716977775
+  },
+  {
+    "nodeid": "::test_manifest_reseal_does_not_hide_changed_compiled_file",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0004606620059348643
+  },
+  {
+    "nodeid": "::test_manifest_reseal_does_not_hide_changed_compiled_file",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.5456003388389945e-05
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[True]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00036222898052074015
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[True]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001092169841285795
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[True]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.454400575719774e-05
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[-1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00035963699338026345
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[-1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 9.73450078163296e-05
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[-1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.404900780878961e-05
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[42]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00036293300217948854
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[42]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 9.692899766378105e-05
+  },
+  {
+    "nodeid": "::test_malformed_source_byte_field_refuses[42]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.9695994928479195e-05
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[sorryAx]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.8448011511936784e-05
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[sorryAx]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00014283301425166428
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[sorryAx]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7807982405647635e-05
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[untrustedAxiom]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.809600068256259e-05
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[untrustedAxiom]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.787298919633031e-05
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[untrustedAxiom]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5968998670578003e-05
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[propext, propext]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.7873007133603096e-05
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[propext, propext]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.457599086686969e-05
+  },
+  {
+    "nodeid": "::test_nonstandard_or_duplicate_axiom_reports_refuse[propext, propext]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.572798985056579e-05
+  },
+  {
+    "nodeid": "::test_consistent_repeated_reports_are_counted",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.1521019991487265e-05
+  },
+  {
+    "nodeid": "::test_consistent_repeated_reports_are_counted",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.38240060955286e-05
+  },
+  {
+    "nodeid": "::test_consistent_repeated_reports_are_counted",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.1455984096974134e-05
+  },
+  {
+    "nodeid": "::test_conflicting_spoof_and_actual_reports_refuse",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.2240001019090414e-05
+  },
+  {
+    "nodeid": "::test_conflicting_spoof_and_actual_reports_refuse",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.26730078086257e-05
+  },
+  {
+    "nodeid": "::test_conflicting_spoof_and_actual_reports_refuse",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.1792016923427582e-05
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004365009954199195
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0012497760180849582
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.4447981053963304e-05
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[#print axioms fixtureTruth\\n]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004277499974705279
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[#print axioms fixtureTruth\\n]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.001133966026827693
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[#print axioms fixtureTruth\\n]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.1952007450163364e-05
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[#print axioms A.fixtureTruth\\n]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.000427574006607756
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[#print axioms A.fixtureTruth\\n]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0010533570020925254
+  },
+  {
+    "nodeid": "::test_actual_fully_qualified_query_is_always_appended[#print axioms A.fixtureTruth\\n]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.3120002374053e-05
+  },
+  {
+    "nodeid": "::test_external_profile_cannot_relax_native_limits",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00039880501572042704
+  },
+  {
+    "nodeid": "::test_external_profile_cannot_relax_native_limits",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0010138530051335692
+  },
+  {
+    "nodeid": "::test_external_profile_cannot_relax_native_limits",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.459201591089368e-05
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unexpected token\\n]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00041746097849681973
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unexpected token\\n]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.001097166008548811
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unexpected token\\n]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.4576998334378004e-05
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unknown module prefix\\n]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004381019971333444
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unknown module prefix\\n]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.001006364997010678
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unknown module prefix\\n]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.227299359627068e-05
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unsolved goals\\n]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004147569998167455
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unsolved goals\\n]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0009866369946394116
+  },
+  {
+    "nodeid": "::test_generic_negative_failure_is_inconclusive[FixtureProof.lean:1:0: error: unsolved goals\\n]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.32969827670604e-05
+  },
+  {
+    "nodeid": "::test_only_closed_decide_false_diagnostic_is_rejected",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00039562099846079946
+  },
+  {
+    "nodeid": "::test_only_closed_decide_false_diagnostic_is_rejected",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.001106045994674787
+  },
+  {
+    "nodeid": "::test_only_closed_decide_false_diagnostic_is_rejected",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.038499901071191e-05
+  },
+  {
+    "nodeid": "::test_oversize_stub_artifact_preserves_inconclusive_receipt",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00039558898424729705
+  },
+  {
+    "nodeid": "::test_oversize_stub_artifact_preserves_inconclusive_receipt",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0010715179960243404
+  },
+  {
+    "nodeid": "::test_oversize_stub_artifact_preserves_inconclusive_receipt",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.268900374881923e-05
+  },
+  {
+    "nodeid": "::test_declared_optional_companions_are_bound_without_cap_relaxation",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00039488598122261465
+  },
+  {
+    "nodeid": "::test_declared_optional_companions_are_bound_without_cap_relaxation",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.001052589010214433
+  },
+  {
+    "nodeid": "::test_declared_optional_companions_are_bound_without_cap_relaxation",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.0001028970000334084
+  }
+]

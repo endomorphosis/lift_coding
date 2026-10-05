@@ -1,0 +1,365 @@
+{
+  "authority": {
+    "all32_governing_RPI_exits": "OPEN",
+    "completion_authority": false,
+    "default_activation": false,
+    "execution_authority": false,
+    "formalization_authority": false,
+    "mutation_authority": false,
+    "omission_authority": false,
+    "planner_activation": false,
+    "proof_authority": false
+  },
+  "compiled_artifact_retention_plan": {
+    "binary64_libm_error_bound_proved": false,
+    "cap_increase_authorized_or_performed_here": false,
+    "existing_max_files": 64,
+    "existing_per_file_capture_bytes": 65536,
+    "external_reconstruction_max_bytes": 4194304,
+    "format": "Complete object represented by bounded pieces plus exact manifest; root reconstructs raw object externally for independently pinned subsequent local imports. This separates per-file retention format from the analytic statement.",
+    "global_native_optimizer_convergence_proved": false,
+    "native_cpu_seconds_unchanged": 20,
+    "native_wall_seconds_unchanged": 20,
+    "native_workspace_bytes_unchanged": 16777216,
+    "owner": "root and environment agent; no native calls from math author",
+    "planned_piece_files_max": 61,
+    "qualification_gate": "Actual bounded chunk manifest, every piece pin/length/order, raw total SHA256+length, completed object and fresh local import chain must pass before an artifact is qualified. Source text and return0 alone are insufficient."
+  },
+  "current_qualified_claims": {
+    "actual_real_coordinate_gradient_kernel_proved": false,
+    "actual_real_one_step_descent_kernel_proved": false,
+    "actual_real_scalar_derivative_kernel_proved": false,
+    "actual_real_second_directional_identity_kernel_proved": false,
+    "actual_real_taylor_upper_kernel_proved": false,
+    "candidate_quadratic_kernel_proved": false,
+    "full_task_satisfaction": "unknown",
+    "global_autoencoder_convergence_proved": false,
+    "native_binary64_error_bound_proved": false,
+    "native_global_optimizer_convergence_proved": false,
+    "original_exact_rat_to_real_profile_kernel_join_proved": false,
+    "original_exact_real_safe_descent_kernel_proved": false,
+    "real_coefficient_kernel_proved": false,
+    "whole_source_runtime_equivalence_proved": false
+  },
+  "descent_proposal_scope": {
+    "core_formula_eta_restriction": "none: the Taylor-derived one-step formula itself is proved for every real eta.",
+    "full_source_or_task_satisfied": false,
+    "global_contraction_or_convergence_proved": false,
+    "kernel_checks_performed_here": 0,
+    "native_step_equivalence_or_implementation_error_proved": false,
+    "nonempty_pair_average_premise": "0<n",
+    "positive_mu_premise": "0<mu is used to derive L>0 in the safe-step corollary and is independently checkable for the original exact binary64 embedding.",
+    "source_only": true,
+    "step_premises": "eta>=0 and eta<=1/L; actual original parameter inequalities must be independently bound.",
+    "strict_decrease_condition": "eta>0 and coordinate gradient squared norm>0. The source corollary proves a weak inequality, which implies strict decrease only with these legitimate conditions.",
+    "uses_contraction_as_premise": false,
+    "uses_descent_or_taylor_as_premise": false
+  },
+  "false_control": {
+    "claim": "c(0)<=1/8",
+    "expected_native_returncode": 1,
+    "source": {
+      "bytes": 299,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/FalseLogisticCap.lean",
+      "sha256": "a95ba2144566e95069d5dddfdbe3e49e84b3aaa5420be78526f9b8d5fa2ef128"
+    },
+    "why_false": "The positive source proves c(0)=1/4. Actual checker rejection is required; this source has not been run."
+  },
+  "lean_imports_descent_additional": [
+    "Mathlib.Analysis.Convex.Deriv"
+  ],
+  "lean_imports_directional_additional": [
+    "Mathlib.Analysis.Calculus.Deriv.Add",
+    "Mathlib.Analysis.Calculus.Deriv.Mul",
+    "Mathlib.Analysis.Calculus.Deriv.Pow"
+  ],
+  "lean_imports_initial": [
+    "Mathlib.Analysis.Complex.Exponential",
+    "Mathlib.Algebra.Order.BigOperators.Ring.Finset",
+    "Mathlib.Tactic.Linarith",
+    "Mathlib.Basic.Real.Basic"
+  ],
+  "lean_imports_original_real_join_additional": [
+    "Mathlib.Data.Rat.Cast.Order"
+  ],
+  "lean_imports_scalar_additional": [
+    "Mathlib.Analysis.SpecialFunctions.Log.Deriv",
+    "Mathlib.Analysis.Calculus.Deriv.Inv",
+    "Mathlib.Tactic.FieldSimp"
+  ],
+  "mathlib": {
+    "commit": "5ed2965256430c3649e86755f9576b54eca72435",
+    "lake_manifest": {
+      "bytes": 2811,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/lake-manifest.json",
+      "sha256": "8f67b2cf24143ac091cdb425e886c2164b2fc2d6fbccd6db9454b697f9541a67"
+    },
+    "official_tag": "v4.34.0",
+    "source_declarations": [
+      {
+        "declaration": "Real.exp_pos",
+        "line": 283,
+        "source": {
+          "bytes": 28564,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Complex/Exponential.lean",
+          "sha256": "3578b916dce6592c54299ca59a69332acfff2ef5b198b179090a4d53ce7a50d5"
+        }
+      },
+      {
+        "declaration": "Finset.sum_mul_sq_le_sq_mul_sq s f g",
+        "line": 171,
+        "source": {
+          "bytes": 13131,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Algebra/Order/BigOperators/Ring/Finset.lean",
+          "sha256": "440f582cbd2e05fb6d2bbafdcc0c8fb45cc5b0b152204d90876f87ebbee3588f"
+        }
+      },
+      {
+        "declaration": "HasDerivAt.log: nonzero input implies derivative f_prime/f_value",
+        "line": 115,
+        "source": {
+          "bytes": 18831,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/SpecialFunctions/Log/Deriv.lean",
+          "sha256": "8d89d4b427d64327c296cf27bc14d4e3af4cfefbae6832b261b5da2bb8d5d834"
+        }
+      },
+      {
+        "declaration": "HasDerivAt.inv: nonzero input implies derivative -f_prime/f_value^2",
+        "line": 111,
+        "source": {
+          "bytes": 9568,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Calculus/Deriv/Inv.lean",
+          "sha256": "728a55b0c00e62076563a9018c801d6f61ff491ab040b923c7235879060f3477"
+        }
+      },
+      {
+        "declaration": "convexOn_univ_of_deriv2_nonneg: differentiable scalar function and derivative with nonnegative second derivative imply scalar convexity",
+        "line": 322,
+        "source": {
+          "bytes": 53812,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Convex/Deriv.lean",
+          "sha256": "d1e66bf6a1eb219f4894fd31c2dd207a03aa46d522c7295cbc1c6c33f792b344"
+        }
+      },
+      {
+        "declaration": "ConvexOn.le_slope_of_hasDerivAt: derivative at left endpoint bounded by secant slope",
+        "line": 594,
+        "source": {
+          "bytes": 53812,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Convex/Deriv.lean",
+          "sha256": "d1e66bf6a1eb219f4894fd31c2dd207a03aa46d522c7295cbc1c6c33f792b344"
+        }
+      },
+      {
+        "declaration": "slope_def_field: slope f a b = (f b - f a)/(b-a)",
+        "line": 41,
+        "source": {
+          "bytes": 7717,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/LinearAlgebra/AffineSpace/Slope.lean",
+          "sha256": "d449e05567a6f12fc7dfc93376740ddbda36a1eb0c41727e39dd4c82e089c667"
+        }
+      },
+      {
+        "declaration": "le_div_iff\u2080: positive denominator identifies safe-step product inequality",
+        "line": 1129,
+        "source": {
+          "bytes": 64250,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+          "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd"
+        }
+      },
+      {
+        "declaration": "Rat.cast_mul and cast_div: exact characteristic-zero field homomorphism laws",
+        "line": 48,
+        "source": {
+          "bytes": 4598,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Data/Rat/Cast/CharZero.lean",
+          "sha256": "a0cf8d3fd177656c086c13e1de2c9065d0ae898cc635acde1e5d877c46d3c5eb"
+        }
+      },
+      {
+        "declaration": "Rat.cast_le and cast_pos: order embedding of rationals into the real ordered field",
+        "line": 48,
+        "source": {
+          "bytes": 10782,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Data/Rat/Cast/Order.lean",
+          "sha256": "7168364a994bf3fa35b898925ea574614748a9976df00e7bfd4b27cab0a3a2a6"
+        }
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.34.0"
+  },
+  "operations_here": {
+    "git_calls": 0,
+    "native_lean_invocations": 0,
+    "native_model_or_training_jobs": 0,
+    "native_sql_or_metadata_jobs": 0,
+    "network_calls": 0,
+    "new_fits": 0,
+    "uploads": 0
+  },
+  "original_profile_binding": {
+    "authentication": {
+      "bytes": 40487,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/authentication-result.json",
+      "sha256": "43b69bbb493c0aff290b040eb734d24866b2c83817e96950a0a86aada057f794"
+    },
+    "checkpoint_sha256": "ab63f45bb3b6bc54038cc4ea4ff44b14c17a6f9f8b0426441a15933772227046",
+    "complete_native_result_canonical_sha256": "6d904cc4662e271372c68bd27d5a6c041018cd786259c2f48adec919c7a80ef4",
+    "coordinates": 80,
+    "corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+    "expanded_43da_profile_accepted": false,
+    "frozen_ranker_source": {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    "native_eta_exact": {
+      "denominator": "4503599627370496",
+      "numerator": "1825681634788183"
+    },
+    "native_mu_exact": {
+      "denominator": "576460752303423488",
+      "numerator": "5764607523034235"
+    },
+    "native_update_profile_sha256": "5c8809e8cb25e058d803df64166082eedcf90fc9889ba7de5ee0a534799ba654",
+    "numeric_materialization_owner": "numeric-binding sibling; exact vector list must match original d4aa corpus and e850 difference hash, not substitute expanded corpus authority",
+    "pairs": 4,
+    "qualified_finite_review": {
+      "bytes": 9571,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-review-01.json",
+      "sha256": "d1809dca6471ba8640f03805d6ed1ef557a7879887664de9ec712abac90c0e8f"
+    },
+    "train_pair_feature_differences_sha256": "e8504c6e8004a2f2878bc79aae0af54c9541bff82df8cde670b48bdf7da03ac6",
+    "train_pairs_sha256": "ae4c11971dd8f1a763e88e2c113d8c6e8bf1d4919df8f4b2760a36c496729845",
+    "training_receipt_sha256": "89e5b20348bb6439a71d1aec72c962c4775a0b5fd1f6716243102f41ac7384e6"
+  },
+  "original_real_join_scope": {
+    "Rat_to_Real_join": "General finite-sum cast plus multiplication and order cast laws; actual matrix definition is pointwise cast of the bound list entries.",
+    "all_coordinate_indices_in_range_proved_in_source": true,
+    "coordinate_matrix_dimension": "Fin 4 -> Fin 80 -> Real",
+    "expanded_43da_profile_accepted": false,
+    "finite_Rat_norm_and_mean_computation": "Closed decide +kernel statements, no values postulated as premises.",
+    "global_native_or_real_optimizer_convergence_proved": false,
+    "historical_execution_or_pin_origin_proved": false,
+    "kernel_checks_performed_here": 0,
+    "literal_source": {
+      "bytes": 6710,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalNumericCurvature.lean",
+      "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+    },
+    "native_float_semantics_proved": false,
+    "source_only": true
+  },
+  "proof_derivations": [
+    "exp(t)>0 gives denominator>0. Division cancellation gives p*(1+exp(t))=1 and p*exp(t)>0, hence 0<p<1.",
+    "(p-1/2)^2>=0 implies p-p^2<=1/4; nonnegative factors prove the lower coefficient bound.",
+    "Cauchy-Schwarz gives dot(v,d_i)^2<=sum(v_j^2)*sum(d_ij^2). Multiply by nonnegative c<=1/4, sum over i, and multiply by 1/n>0. Add mu*sum(v_j^2). No curvature bound or contraction is a premise.",
+    "For real scalar loss, differentiation of exp composed with negation and log gives -exp(-t)/(1+exp(-t)). Exp-neg and nonzero-denominator algebra identify this as -p(t); inverse differentiation gives p_prime=-c.",
+    "Differentiate finite coordinate polynomial squares and each finite loss summand along w+t*v. Then differentiate the explicit first derivative again. Finite sum rules and chain rules identify the exact second directional derivative with Q; Q bounds then apply to the actual stated real objective.",
+    "Interchange finite coordinate and pair sums to identify the explicit coordinate gradient with the first line derivative at zero. This is a derived identity for the real objective, not a premise about a native gradient.",
+    "For a scalar twice differentiable function with actual second derivative bounded by C, q(t)=C*t^2/2-f(t) has nonnegative second derivative. Mathlib scalar convexity gives q_prime(0)<=slope(q,0,1), which rearranges to f(1)<=f(0)+f_prime(0)+C/2. The objective theorem supplies C=L*||v||^2 from the previously established actual second derivative and Q bound.",
+    "Substitute v=-eta*g into the proved upper Taylor bound. Coordinate sum-of-squares scaling gives ||v||^2=eta^2*||g||^2 and dot(g,v)=-eta*||g||^2. For mu>0, mean L is positive; eta<=1/L and eta>=0 imply eta*(1-eta*L/2)>=eta/2. No desired descent or contraction inequality is assumed.",
+    "The original profile bridge proves finite Rat indexing/norm/mean equalities by closed kernel reduction, casts finite sums through additive homomorphism laws, and proves every Real coordinate norm and mean-L equality. Positivity and safe-step products transfer through the order embedding of rationals into reals. Thus original curvature/descent instantiation has no unproved coordinate-alignment premise."
+  ],
+  "remaining_obligations": {
+    "exact_numeric_join": "OriginalRealProfile.lean and OriginalRealDescent.lean now contain explicit source proofs joining the original authenticated Rat/List matrix to Fin4xFin80 real coordinates, norms, mean L, positive mu/eta, safe product and original bounds/descent. Qualification still requires native compile/kernel artifact readback for the bridge and independently fixed OriginalNumericCurvature literal-source/data pins; no current joined theorem is reported as complete.",
+    "exact_real_contraction": "Prove the real gradient map contraction for the proved objective/model and permitted step, then existence/uniqueness and global ideal-real convergence if pursued. No contraction premise is allowed to substitute for this.",
+    "exact_real_descent": "RealGradient.lean and RealDescent.lean contain source proofs of gradient identity, Taylor upper bound and one-step exact-real decrease. They remain unqualified until actual admitted Lean check, complete retained artifacts, axiom readback and exact numeric-to-real model join pass.",
+    "history_heldout_and_task": "Finite artifact authentication does not prove historical execution/pin origin, unseen/heldout outcomes, complete source semantics, official benchmark success or whole task completion.",
+    "kernel_validation": "All source statements await admitted pinned native Lean invocation and compiled-artifact/axiom readback; source writing is not a proof receipt.",
+    "native_rounding_error": "Bound source-shaped dot products, multiplications, fsum, exp, log1p, divisions and updates including parameter/feature embeddings. A native update perturbation bound would imply a separate finite/asymptotic error floor; no such uniform bound is currently proved.",
+    "smooth_and_strongly_convex": "After actual directional identity is kernel checked, prove the corresponding Euclidean gradient-Lipschitz and mu-strong-convex properties of the stated real objective for mu>0; generic candidate bounds alone do not close this."
+  },
+  "retained_root_checker_feedback": {
+    "additional_receipt_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-02/check-result.json",
+    "additional_source_repair": "Use add_le_add le_rfl for the unchanged regularizer on the left; frozen-02 is retained unchanged.",
+    "directional_first_receipt_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-01/check-result.json",
+    "directional_first_status": "Native return1/inconclusive with two simplification errors; dependent theorem axiom output included sorryAx and was refused. Immutable attempt retained.",
+    "directional_source_repairs": "Explicit Pi.pow_apply and Nat.reduceSub for the coordinate-square derivative; prove function-level lineShift(w,v,0)=w by funext and rewrite it in the actual second-derivative identity. No theorem statement or cap change.",
+    "receipt_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-01/check-result.json",
+    "returncode": 1,
+    "scalar_first_receipt_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-01/check-result.json",
+    "scalar_first_status": "Native return1/inconclusive. Stable real loss equality printed standard axioms; derivative targets failed elaboration and sorryAx was rejected. Immutable attempt is retained.",
+    "scalar_source_repairs": "Explicit function equality/change for reciprocal and real loss targets; explicit composition and negative function target. Set backward.isDefEq.respectTransparency=false only in mutable downstream source to resolve existing Real additive-group/module instance diamonds during elaboration. This adds no axiom and changes no mathematical statement or native cap.",
+    "source_repairs": "Explicit Finset.univ for sum_le_sum; norm_num original4x4 denominator; close all unnamed noncomputable sections. Original frozen-01 source unchanged. No kernel claim admitted from errored run.",
+    "split_coefficient_status": "Root coefficient split returned0 with standard axioms, but its complete object retention still exceeded the single-file64KiB limit; retained as INCONCLUSIVE. No artifact qualification inferred.",
+    "status": "inconclusive",
+    "structural_repair": "Split identical coefficient/geometry/candidate declarations into three modules; preserve namespace and all theorem statements. Root owns independent complete bounded compiled-module chain.",
+    "third_receipt_path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-03/check-result.json",
+    "third_status": "Lean return0 and standard3axioms; complete main compiled artifact exceeded unchanged64KiB retention cap, so INCONCLUSIVE and no qualified artifact"
+  },
+  "schema": "terminal-ranker-real-curvature-source-proposal@1",
+  "source_only": true,
+  "sources": {
+    "CoordinateGeometry.lean": {
+      "bytes": 973,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/CoordinateGeometry.lean",
+      "sha256": "7dc84d3553fd722e58ef54c8ed661a841c84aacef5611bdfcd8033830b381fda"
+    },
+    "DirectionalObjective.lean": {
+      "bytes": 7672,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/DirectionalObjective.lean",
+      "sha256": "94720052863a636db021de6f22eb903df0b4d0c6ead334bd853191920e0cfc6c"
+    },
+    "FalseLogisticCap.lean": {
+      "bytes": 299,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/FalseLogisticCap.lean",
+      "sha256": "a95ba2144566e95069d5dddfdbe3e49e84b3aaa5420be78526f9b8d5fa2ef128"
+    },
+    "LogisticCoefficient.lean": {
+      "bytes": 1969,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/LogisticCoefficient.lean",
+      "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+    },
+    "LogisticCurvature.lean": {
+      "bytes": 4035,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/LogisticCurvature.lean",
+      "sha256": "65109da6110e218bf13d0f3f67d4820a748333e0a4be754e4b502081ff423f4a"
+    },
+    "OriginalNumericCurvature.lean": {
+      "bytes": 6710,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalNumericCurvature.lean",
+      "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+    },
+    "OriginalRealDescent.lean": {
+      "bytes": 1469,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalRealDescent.lean",
+      "sha256": "0acf2608c7d7cb5f3628a30f39f0f9a0c0990a29d831ec9266e970c6d1766526"
+    },
+    "OriginalRealProfile.lean": {
+      "bytes": 6088,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalRealProfile.lean",
+      "sha256": "52eecc62595596545013a7ec4f2cfc70e4b4c2b9f1607ff5db7237b46be3d196"
+    },
+    "RealDescent.lean": {
+      "bytes": 7498,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/RealDescent.lean",
+      "sha256": "84d375413a402aee2780f199c68bef044f52ccfb8b866c7f9123b85c141c2038"
+    },
+    "RealGradient.lean": {
+      "bytes": 3402,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/RealGradient.lean",
+      "sha256": "9ece52690c173349ba2cfbb345c1f5d4169365da55fc6f527fa16f41c8d9bdc7"
+    },
+    "ScalarSoftplus.lean": {
+      "bytes": 4839,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/ScalarSoftplus.lean",
+      "sha256": "e32f5a68f4365fa60a2321a0cb7f6076e998c7841547255f90124a4875a36379"
+    }
+  },
+  "statements": {
+    "actual_real_objective": "F(w)=mu/2*sum_j(w_j^2)+(1/n)*sum_i ell(dot(w,d_i)). The derivative of F(w+t*v) is the explicit lineFirstDerivative; its second derivative at every t is Q evaluated at w+t*v. Thus at t=0, the actual second directional derivative equals the stated candidate quadratic form.",
+    "actual_scalar_loss": "ell(t)=Real.log(1+Real.exp(-t)); ell_prime=-p, p_prime=-c, ell_second=c. The exact-real stable branch max(0,-t)+log(1+exp(-abs(t))) equals ell(t).",
+    "candidate_quadratic": "For all finite real vectors, n>0, arbitrary real mu, and Q=mu*sum_j(v_j^2)+(1/n)*sum_i c(dot(w,d_i))*dot(v,d_i)^2, mu*||v||_2^2<=Q<=(mu+sum_i||d_i||_2^2/(4n))*||v||_2^2.",
+    "coefficient": "For every real t, p(t)=1/(1+exp(t)) is strictly between 0 and 1, so c(t)=p(t)(1-p(t)) satisfies 0<=c(t)<=1/4; c(0)=1/4.",
+    "coordinate_gradient": "g_j(w)=mu*w_j-(1/n)*sum_i p(dot(w,d_i))*d_ij. Finite sum interchange establishes Fline_prime(0)=dot(g(w),v); no gradient identity is a premise.",
+    "exact_real_descent": "For the exact-real coordinate step w-eta*g(w), F(next)<=F(w)-eta*(1-eta*L/2)||g(w)||_2^2. With mu>0, eta>=0 and eta<=1/L, L>0 is derived and F(next)<=F(w)-(eta/2)||g(w)||_2^2. These sources do not establish native rounding error, gradient-map contraction, optimizer existence, or iteration convergence.",
+    "exact_real_taylor_upper": "For n>0 and L=mu+sum_i||d_i||_2^2/(4n), F(w+v)<=F(w)+dot(g(w),v)+(L/2)||v||_2^2. Established actual derivatives and curvature bound supply a scalar convexity proof, rather than assume the inequality.",
+    "norm_convention": "squaredEuclideanNorm=coordinate sum of squares. This is deliberately not Lean function-space default norm notation.",
+    "operator_hessian_limit": "No operator-valued Frechet Hessian, formal whole-Python semantic equality, or native implementation derivative is claimed by these sources.",
+    "original_real_profile_join": "For the independently bound OriginalNumericCurvature literal lists, originalRatCoordinates(i,j)=differences.getD(i,[]).getD(j,0) for Fin4/Fin80. Closed finite facts prove every index is in range, all four Fin80 coordinate sum-of-square norms equal recorded Rat norms, and the Fin4 mean equals recorded Rat L. A general finite-sum Rat-to-real cast lemma then proves real-coordinate norm/L equality and transfers mu/eta positivity and eta*L<=1 to the actual original exact-real matrix. No vector-alignment hypothesis or expanded43da profile substitutes for these proofs.",
+    "original_safe_descent": "OriginalRealDescent supplies the exact original mu/eta/matrix to realGradientStep_safe_descent through the proved real mean-L equality and eta<=1/L. This is an exact-real statement for the bound original coordinates; it is not a native update or global convergence statement."
+  },
+  "status": "rigorous_sources_structurally_split_after_kernel_success_but_inconclusive_truncated_artifact"
+}

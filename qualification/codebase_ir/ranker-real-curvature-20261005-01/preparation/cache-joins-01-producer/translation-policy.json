@@ -1,0 +1,16 @@
+{
+  "exact_numeric_source_mapping": {
+    "bytes": 627,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/numeric-source-mapping.json",
+    "sha256": "b613a5c75520dc1c6834f662c9e94b8cf1b5557204a0359ba9763c3ec8a49b31"
+  },
+  "global_optimizer_convergence_proved": false,
+  "native_binary64_semantics_proved": false,
+  "native_source_equivalence_proved": false,
+  "original_real_profile_join": {
+    "attempt_id": "lean-original-profile-02",
+    "theorem": "RankerRealCurvature.originalReal_actual_secondDirectional_bounds"
+  },
+  "schema": "terminal-ranker-real-translation-policy@1",
+  "status": "explicit_real_model_without_native_source_equivalence"
+}

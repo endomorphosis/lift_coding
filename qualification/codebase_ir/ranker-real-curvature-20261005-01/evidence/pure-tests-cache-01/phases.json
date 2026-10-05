@@ -1,0 +1,1064 @@
+[
+  {
+    "nodeid": "::test_exact_dimensions_return_only_advisory_copy",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0009448619966860861
+  },
+  {
+    "nodeid": "::test_exact_dimensions_return_only_advisory_copy",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0005660570168402046
+  },
+  {
+    "nodeid": "::test_exact_dimensions_return_only_advisory_copy",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 9.253001189790666e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[schema]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015272200107574463
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[schema]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002635879791341722
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[schema]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.755298141390085e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[corpus_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 9.392198990099132e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[corpus_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00021741099772043526
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[corpus_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.708800068125129e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[feature_profile_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.921699969097972e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[feature_profile_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00021083501633256674
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[feature_profile_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.284899867139757e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[difference_vectors_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.278499495238066e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[difference_vectors_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002105470048263669
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[difference_vectors_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.0193012207746506e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[train_pairs_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.892899935133755e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[train_pairs_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002021630061790347
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[train_pairs_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8097012545913458e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_update_profile_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.403297836892307e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_update_profile_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00019429100211709738
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_update_profile_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6480003725737333e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_mu_exact]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.641701864078641e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_mu_exact]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00019131498993374407
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_mu_exact]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.550400677137077e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_eta_exact]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.030498141422868e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_eta_exact]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00019153900211676955
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[native_eta_exact]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6303983759135008e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[theorem]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.9664988182485104e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[theorem]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018982699839398265
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[theorem]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.473700442351401e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[evidence_kind]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.1776994951069355e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[evidence_kind]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018705899128690362
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[evidence_kind]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5937013560906053e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[theorem_statement_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.6608998673036695e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[theorem_statement_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00019027499365620315
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[theorem_statement_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5537010515108705e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[proof_source_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.644901491701603e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[proof_source_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001876190071925521
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[proof_source_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.924900036305189e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[assumptions_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.8640999011695385e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[assumptions_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00026957198861055076
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[assumptions_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.748798578977585e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[checker_source_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.088100442662835e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[checker_source_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018974702106788754
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[checker_source_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.561599831096828e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[environment_manifest_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.9344991566613317e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[environment_manifest_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00019633898045867682
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[environment_manifest_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6175985112786293e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[numeric_binding_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.0000991905108094e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[numeric_binding_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018768300651572645
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[numeric_binding_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6608002372086048e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[translation_profile_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.87850047647953e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[translation_profile_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018824299331754446
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[translation_profile_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7456990210339427e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[translation_status]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.78890142403543e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[translation_status]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001911389990709722
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[translation_status]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5568995624780655e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[verification_policy_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.857699968852103e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[verification_policy_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018950700177811086
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[verification_policy_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.587298513390124e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[network_policy_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.7617009840905666e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[network_policy_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018854698282666504
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[network_policy_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.659301389940083e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[authority_profile]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.726499901153147e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[authority_profile]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001894430024549365
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[authority_profile]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.55210034083575e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[retention_format]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.5968976337462664e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[retention_format]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001847870007622987
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[retention_format]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4959997972473502e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[retention_profile_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.571300814859569e-05
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[retention_profile_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018544300110079348
+  },
+  {
+    "nodeid": "::test_every_required_cache_dimension_change_is_a_miss[retention_profile_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5151995941996574e-05
+  },
+  {
+    "nodeid": "::test_missing_required_dimension_is_a_miss",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.284798003733158e-05
+  },
+  {
+    "nodeid": "::test_missing_required_dimension_is_a_miss",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001978750224225223
+  },
+  {
+    "nodeid": "::test_missing_required_dimension_is_a_miss",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.348801353946328e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[rejected]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.600099055096507e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[rejected]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00029363599605858326
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[rejected]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.696100273169577e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[inconclusive]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.790400271303952e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[inconclusive]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00025118800112977624
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[inconclusive]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.628899528644979e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[negative_expectation]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.8767979023978114e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[negative_expectation]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002393629983998835
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[negative_expectation]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.636900171637535e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[unregistered_theorem]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.504100070334971e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[unregistered_theorem]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002671399852260947
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[unregistered_theorem]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6591995265334845e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[nonstandard_axiom]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.6191998990252614e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[nonstandard_axiom]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00026381202042102814
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[nonstandard_axiom]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.723198849707842e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[source_swap]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.572799662128091e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[source_swap]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00023989100009202957
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[source_swap]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.580898581072688e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[environment_swap]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.5889028115198016e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[environment_swap]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00023926800349727273
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[environment_swap]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5568995624780655e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[proof_caps_swap]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.462499055080116e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[proof_caps_swap]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00023490001331083477
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[proof_caps_swap]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5536020984873176e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[checker_bytes_swap]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.513698513619602e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[checker_bytes_swap]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00020731499535031617
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[checker_bytes_swap]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5393004762008786e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[truncated_object]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.544100374914706e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[truncated_object]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.000249075994361192
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[truncated_object]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.527999458834529e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[native_authority_promotion]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.481698852032423e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[native_authority_promotion]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00022750700009055436
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[native_authority_promotion]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5136017939075828e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[unfrozen_import_registry]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.363199695944786e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[unfrozen_import_registry]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00022714000078849494
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[unfrozen_import_registry]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.595200203359127e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[lease_profile_swap]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.315297701396048e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[lease_profile_swap]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00023206701735034585
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[lease_profile_swap]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.487999154254794e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[oversized_ordinary_object]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.39200084656477e-05
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[oversized_ordinary_object]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00024971598759293556
+  },
+  {
+    "nodeid": "::test_newly_resealed_qualified_claims_do_not_bypass_native_evidence_checks[oversized_ordinary_object]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5888992240652442e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[authority]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.0704984460026026e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[authority]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0005290000117383897
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[authority]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.694400609470904e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[theorem]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011276901932433248
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[theorem]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0005111909995321184
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[theorem]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7968024369329214e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[evidence_kind]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.044799763709307e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[evidence_kind]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0005036710062995553
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[evidence_kind]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.536099054850638e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[translation]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.919999628327787e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[translation]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0005071760097052902
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[translation]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5425018975511193e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[compiled_object]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.70730010420084e-05
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[compiled_object]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0005022319965064526
+  },
+  {
+    "nodeid": "::test_entry_self_reseal_and_new_external_entry_pin_cannot_forge_advisory_claims[compiled_object]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9327988158911467e-05
+  },
+  {
+    "nodeid": "::test_changed_result_without_new_trusted_pin_is_a_miss",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.201700747013092e-05
+  },
+  {
+    "nodeid": "::test_changed_result_without_new_trusted_pin_is_a_miss",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00023569900076836348
+  },
+  {
+    "nodeid": "::test_changed_result_without_new_trusted_pin_is_a_miss",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.3600005079060793e-05
+  },
+  {
+    "nodeid": "::test_authority_promotion_rejected_even_after_dimension_and_result_reseals",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.8592010494321585e-05
+  },
+  {
+    "nodeid": "::test_authority_promotion_rejected_even_after_dimension_and_result_reseals",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002981809957418591
+  },
+  {
+    "nodeid": "::test_authority_promotion_rejected_even_after_dimension_and_result_reseals",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4880020646378398e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[None]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.80649939365685e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[None]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.0480994610115886e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[None]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.107200609520078e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[True]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.963300307281315e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[True]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 2.7359987143427134e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[True]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4527980713173747e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.7793000703677535e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 2.7600995963439345e-05
+  },
+  {
+    "nodeid": "::test_malformed_external_entry_pin_misses[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.443199628032744e-05
+  },
+  {
+    "nodeid": "::test_complete_chunk_chain_accepts_large_object_under_unchanged_per_file_caps",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004047259863000363
+  },
+  {
+    "nodeid": "::test_complete_chunk_chain_accepts_large_object_under_unchanged_per_file_caps",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0009144940122496337
+  },
+  {
+    "nodeid": "::test_complete_chunk_chain_accepts_large_object_under_unchanged_per_file_caps",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.05450230371207e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[missing_chunk]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.518497295677662e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[missing_chunk]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00043711101170629263
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[missing_chunk]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.0080991564318538e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[changed_chunk_digest]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.700901965610683e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[changed_chunk_digest]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00042155798291787505
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[changed_chunk_digest]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8161011869087815e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[manifest_digest]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.1665003411471844e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[manifest_digest]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0004078779893461615
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[manifest_digest]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8559996280819178e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[chunk_order]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.9377005780115724e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[chunk_order]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00042760599171742797
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[chunk_order]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7169007807970047e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[object_digest]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.843200440518558e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[object_digest]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00041080699884332716
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[object_digest]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.671999391168356e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[reconstruction_count]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.849699325859547e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[reconstruction_count]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00041987799340859056
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[reconstruction_count]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8609007131308317e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[aggregate_size]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.068801692686975e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[aggregate_size]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00042747901170514524
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[aggregate_size]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.643300103954971e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[profile_swap]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.571299698203802e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[profile_swap]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0004151739994995296
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[profile_swap]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6112014893442392e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[combined_input_size]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.097698885947466e-05
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[combined_input_size]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00039210199611261487
+  },
+  {
+    "nodeid": "::test_resealed_chunk_claims_require_complete_manifest_population_and_reconstruction_join[combined_input_size]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.4657004764303565e-05
+  }
+]

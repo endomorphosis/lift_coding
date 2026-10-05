@@ -1,0 +1,45 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 24759,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/real_curvature_proof_cache.py",
+      "sha256": "fdf3c4905002af9d51008875c5c470bbeacb5793088dae413bfd155978e95af4"
+    },
+    {
+      "bytes": 18900,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/test_real_curvature_proof_cache.py",
+      "sha256": "22807349237229cdde07d00e83bd2ee16630fa3bf8fe02e7a1c02cd7ba776f48"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 25574,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-pure-tests-cache-01.py",
+      "sha256": "a8a783818bcf07e48b68fb5bc2d2c13b2dd59536dad7a74384c9571d84358c7c"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 24759,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/real_curvature_proof_cache.py",
+      "sha256": "fdf3c4905002af9d51008875c5c470bbeacb5793088dae413bfd155978e95af4"
+    },
+    {
+      "bytes": 18900,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/test_real_curvature_proof_cache.py",
+      "sha256": "22807349237229cdde07d00e83bd2ee16630fa3bf8fe02e7a1c02cd7ba776f48"
+    }
+  ],
+  "mode": "pure-tests-cache-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T03:57:08.700773+00:00"
+}

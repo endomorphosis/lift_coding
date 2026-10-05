@@ -1,0 +1,150 @@
+{
+  "checker_findings_history": [
+    {
+      "affected_source_sha256": "d3646eddac798ecd740d392895d6a8a7e7c0592128aef3c5ded83d0db9cdba41",
+      "corrected_source_sha256": "1d8cf650a781591ca966be653b97b1194a4870ce2dbf6cab1b979b5820efa7f6",
+      "issue": "same-basename source-authored print could suppress actual qualified theorem axiom query",
+      "source_only_resolution": "always append #print axioms _root_.<every qualified registry theorem>; require repeated reports agree"
+    },
+    {
+      "affected_source_sha256": "d3646eddac798ecd740d392895d6a8a7e7c0592128aef3c5ded83d0db9cdba41",
+      "corrected_source_sha256": "1d8cf650a781591ca966be653b97b1194a4870ce2dbf6cab1b979b5820efa7f6",
+      "issue": "actual source not required in per-job selected source closure; imports could use unfrozen registry lookup",
+      "source_only_resolution": "require exact selected source membership in manifest inventory, direct imports in frozen registry, implicit Init, and first explicit LEAN_PATH compiled module lookup matches frozen companion pin"
+    }
+  ],
+  "chunk_retention_and_cache_review_status": "new source in progress; not approved or executed by this review",
+  "driver_note": {
+    "exact_snapshot_sha256": "74f505578d15c8510a84af21fbdf7b3d9410e35c2e59b348f63b6afdde3abaea",
+    "metadata_hook_not_implemented_in_snapshot": true,
+    "native_and_pure_test_hooks_present": true,
+    "note": "Metadata needs a later source freeze before its admission; no metadata execution is covered by this review. Exact norm accumulations=1 in receipt means one complete matrix build containing four row norms and 320 coordinate visits."
+  },
+  "numeric_checks": {
+    "actual_parent_admitted_numeric_jobs": {
+      "coordinate_visits": 320,
+      "fit_calls": 0,
+      "gradient_evaluations": 0,
+      "native_preparation_calls": 0,
+      "native_proof_checks": 0
+    },
+    "actual_parent_admitted_numeric_status": "passed",
+    "all_original_coordinates_retained": 320,
+    "bare_difference_vectors_sha256": "e8504c6e8004a2f2878bc79aae0af54c9541bff82df8cde670b48bdf7da03ac6",
+    "below_bound_rounded_counterexample": "mu=1/4, eta=2, each unit row has coordinates 1,2^-27,0...; rounded norm 1 passes eta*L=1 while exact eta*L=1+2^-55 fails",
+    "bound_construction": "exact Fraction embeddings; four coordinate squared sums; mean curvature mu+sum(normSq)/16; conservative curvature mu+max(normSq)/4; exact eta*conservative bound <=1",
+    "external_pin_conventions": "ASCII canonical full objects INCLUDING self fields; bare matrix digest separately; native corpus original_inputs and corpus self checks use native Unicode canonicalization; raw file digest remains distinct",
+    "fixed_logistic_coefficient_cap": {
+      "denominator": "4",
+      "numerator": "1"
+    },
+    "native_eta_exact": {
+      "denominator": "4503599627370496",
+      "numerator": "1825681634788183"
+    },
+    "native_mu_exact": {
+      "denominator": "576460752303423488",
+      "numerator": "5764607523034235"
+    },
+    "ordered_training_pairs": 4,
+    "original_corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+    "parent_admitted_controls_status": "passed_once",
+    "parent_admitted_numeric_controls": 43,
+    "rounded_norm_is_not_assumed_to_majorize_exact": true,
+    "same_vectors_changed_corpus_is_rejected": "43da corpus step result shares e850 vector identity but is not original d4aa binding",
+    "this_review_executed_numeric_or_test_code": false
+  },
+  "review_jobs": {
+    "Lean_or_Lake": 0,
+    "fits": 0,
+    "metadata": 0,
+    "native_preparations": 0,
+    "network": 0,
+    "pytest": 0,
+    "trace_replays": 0
+  },
+  "review_kind": "source_and_file_only_no_import_execution",
+  "reviewed_inputs": [
+    {
+      "bytes": 18552,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/build_curvature_numeric_binding.py",
+      "sha256": "d73de85db64c5cb7c3d9ca97d325e27bb73f30bbda83e674377646bbda4082b5"
+    },
+    {
+      "bytes": 15528,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/test_curvature_numeric_binding.py",
+      "sha256": "668dc67fb6358cba9740a941a4a3cd5670ac658a0cf3189ce5b59e932ce60eb1"
+    },
+    {
+      "bytes": 2342,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/original-differences-01.json",
+      "sha256": "d2b691805cddd5ba8a46f733589e4d09424a06d67a6a2bb09b61e7f727d9c739"
+    },
+    {
+      "bytes": 17176,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/numeric-binding.json",
+      "sha256": "2e4a8aaf11e484b4bb8e7d63c993eb955e4f26a7183c3d5cb32fed6290bd8274"
+    },
+    {
+      "bytes": 17100,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/closed.json",
+      "sha256": "5207f18cd4668d8227ace740c61002969a720849ee8a9db7b569efe79392880d"
+    },
+    {
+      "bytes": 16817,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/tests-01/closed.json",
+      "sha256": "7b993976f168636c692db016203c7c59f549fcbbff2c2568200f23584b4749bc"
+    },
+    {
+      "bytes": 29062,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/bounded_analytic_checker.py",
+      "sha256": "b59ae75bdbc0b12ca8f81947f42f1c4718c003cfd33c6b1886a779f9ff815180"
+    },
+    {
+      "bytes": 1969,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/math/LogisticCoefficient.lean",
+      "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+    },
+    {
+      "bytes": 973,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/math/CoordinateGeometry.lean",
+      "sha256": "7dc84d3553fd722e58ef54c8ed661a841c84aacef5611bdfcd8033830b381fda"
+    },
+    {
+      "bytes": 4035,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/math/LogisticCurvature.lean",
+      "sha256": "65109da6110e218bf13d0f3f67d4820a748333e0a4be754e4b502081ff423f4a"
+    },
+    {
+      "bytes": 4468,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/math/ScalarSoftplus.lean",
+      "sha256": "bafdea51b8066380a64ed8a4c0008636447a564b85b719e28f7cafc10fdef40c"
+    },
+    {
+      "bytes": 7503,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/math/DirectionalObjective.lean",
+      "sha256": "6d6046e6957d9500abea968225000a94be969a64e9c921d3bb185c16d4913433"
+    },
+    {
+      "bytes": 25109,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/run_curvature_controls.py",
+      "sha256": "74f505578d15c8510a84af21fbdf7b3d9410e35c2e59b348f63b6afdde3abaea"
+    }
+  ],
+  "reviewer": "ranker_trace_tests",
+  "schema": "terminal-ranker-real-curvature-source-review@1",
+  "scope": {
+    "all32_governing_RPI_exits": "OPEN",
+    "all_operational_authority": false,
+    "binary64_feature_or_update_or_libm_semantics_proved": false,
+    "candidate_curvature_bound": "explicit real logistic coefficient and finite coordinate quadratic form",
+    "full_task_satisfaction": "unknown",
+    "global_optimizer_convergence_proved": false,
+    "native_runtime_open_trace_claimed": false,
+    "official_benchmark_score": null,
+    "original_historical_execution_origin_authenticated_here": false,
+    "real_derivative_scope": "finite affine-line second derivative of the stated real objective; scalar log/exp derivative chain; no multivariate Frechet Hessian claim",
+    "source_runtime_equivalence_proved": false
+  },
+  "status": "finite_numeric_scope_and_corrected_checker_bindings_reviewed"
+}

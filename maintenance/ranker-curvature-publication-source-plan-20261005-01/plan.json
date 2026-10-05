@@ -1,0 +1,677 @@
+{
+  "documents": {
+    "cache_coefficient": {
+      "bytes": 5755,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/coefficient.cache-entry.json",
+      "sha256": "cd6d5944b001855509a9688f219525d6a0f22e385fa30dfd08e499de2c395aac"
+    },
+    "cache_curvature": {
+      "bytes": 5767,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/curvature.cache-entry.json",
+      "sha256": "fb679fd803d742fe2738d2355e53d8e1343bc79ea3275f9534f7ef8e2d0efba8"
+    },
+    "cache_descent": {
+      "bytes": 5757,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/descent.cache-entry.json",
+      "sha256": "6af0d1c6561fca57a67b900091a7b95e481846d60cccb3a92019d739df60744e"
+    },
+    "cache_directional": {
+      "bytes": 5775,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/directional.cache-entry.json",
+      "sha256": "b213a73ea61a8fa80de4ea8cda7a8b327e75471afb9ba92a8584e18eb768f78c"
+    },
+    "cache_geometry": {
+      "bytes": 5711,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/geometry.cache-entry.json",
+      "sha256": "f8edee45b1df15bbad7cc80cc7f28ff02d25e62ef4c4e0ea44621ab5ac8c75f3"
+    },
+    "cache_gradient": {
+      "bytes": 5789,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/gradient.cache-entry.json",
+      "sha256": "9fa3c51284bb11b2923edccb83452cf309f0e35e3d9d3ae2477a4be4f365c959"
+    },
+    "cache_join_result": {
+      "bytes": 58956,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/cache-join-result.json",
+      "sha256": "6e58a5d9638b3592ae0ac05f74dd6f28a9db3f817ed3c20b9edb00cc1057e73d"
+    },
+    "cache_original_descent": {
+      "bytes": 5753,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/original-descent.cache-entry.json",
+      "sha256": "211d7a862a61510bf57fc6588d4095c45e9182936fdd7a855a23d89376cf6521"
+    },
+    "cache_original_profile": {
+      "bytes": 5795,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/original-profile.cache-entry.json",
+      "sha256": "2e884b94a9ec90d56e2801f5da11b2dff8881950383a78d7aec52d0b92992725"
+    },
+    "cache_rational": {
+      "bytes": 5777,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/rational.cache-entry.json",
+      "sha256": "9307ed87ad6ced07ea58be7d42b01a8ea8a25d47630caff4c48565ad8820e148"
+    },
+    "cache_scalar": {
+      "bytes": 5737,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/joins/scalar.cache-entry.json",
+      "sha256": "b3bbd19da2e5d9fd0eaee5c971542e7b6b0ac40a0f8187b4438b146160a9e8fd"
+    },
+    "file_seal": {
+      "bytes": 281311,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/file-only-seal-01.json",
+      "sha256": "6c281bd21da026b27797f78f98d0932bad4e7a115779a4fc348ee6987f30af15"
+    },
+    "lean_coefficient_03": {
+      "bytes": 8838,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/check-result.json",
+      "sha256": "d862ebef0863b9a8ac449f9a34febbe4c22459a42af874a9c7b3dfbdc6ca0fac"
+    },
+    "lean_curvature_04": {
+      "bytes": 8455,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/check-result.json",
+      "sha256": "22503505997c4fa626bebaaedf8e6a813d3bd4cbf0ee74b3069c36a36c3b980e"
+    },
+    "lean_descent_01": {
+      "bytes": 10853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/check-result.json",
+      "sha256": "8dead99aae1ea654ce957e990d6b06218354101bf8c6a13fd9639dccfede20bd"
+    },
+    "lean_directional_02": {
+      "bytes": 9601,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+      "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+    },
+    "lean_false_control_01": {
+      "bytes": 6453,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-false-control-01/check-result.json",
+      "sha256": "7e579e6a09c80c6563e92c991d4f8fe3c2a09bf956ded8f6af29abf5724a6b32"
+    },
+    "lean_geometry_01": {
+      "bytes": 7631,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/check-result.json",
+      "sha256": "59d0b4271dab524d30e82d5b03073f300fdffe4b73a3086412cdc330ccc09739"
+    },
+    "lean_gradient_01": {
+      "bytes": 8657,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/check-result.json",
+      "sha256": "315826ae63c23849542259cd613f70f7f2fa2a0e0b57a57a629880bf9ece1920"
+    },
+    "lean_numeric_01": {
+      "bytes": 5997,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/check-result.json",
+      "sha256": "3b5d9428526ec591c95f05a851202eb963f86d593a8e2c08ca87c84862ef473d"
+    },
+    "lean_original_descent_01": {
+      "bytes": 8924,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/check-result.json",
+      "sha256": "658b3650b7ece388ee2df2fb1ced2a90ccfffb33170018be66e0581ab70d3629"
+    },
+    "lean_original_profile_02": {
+      "bytes": 9638,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/check-result.json",
+      "sha256": "d2d8e94548fb71b2f09f39770c856c2ce2ef17fa769000d875ac6b5b67e806ec"
+    },
+    "lean_softplus_02": {
+      "bytes": 9684,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+      "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+    },
+    "mathematical_mapping": {
+      "bytes": 120499,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/qualified-proof-mapping-01.json",
+      "sha256": "770239755a018a1d75f8ee1bce81c959d1f0724c17d1036aac717531d68b3964"
+    },
+    "metadata_readback": {
+      "bytes": 32234,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/metadata-01/metadata-readback.json",
+      "sha256": "4c566c565afda2a9286b1c34563f3cd96758046ebe6b701847e54da81d022a74"
+    },
+    "numeric_binding": {
+      "bytes": 17176,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/numeric-binding.json",
+      "sha256": "2e4a8aaf11e484b4bb8e7d63c993eb955e4f26a7183c3d5cb32fed6290bd8274"
+    },
+    "numeric_source_audit": {
+      "bytes": 11598,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/final-numeric-coordinate-source-audit-01.json",
+      "sha256": "44c749d8b21bb754847da1aaedadb6ffd358350b83dea759b608997bbc306163"
+    },
+    "publication_source_review": {
+      "bytes": 6421,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-review-20261005-01/source-review-01.json",
+      "sha256": "20b0de9eb6f118bc418ccc4ffb478ca56b2f99023afb063d08f11d21b3502b14"
+    },
+    "qualified_review": {
+      "bytes": 36092,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/qualified-review-01.json",
+      "sha256": "2c98df30a37fecffff99340d447dcf548c6c244a53223cbed39c914bb0e9238c"
+    }
+  },
+  "excluded_dependency_subtrees": [
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/cache"
+  ],
+  "excluded_fixture_symlinks": [
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_actual_fully_qualified_qucurrent",
+      "sha256": "dc5a81cd414e5c0a6d08aedf31a9f45e4873e6187a36224db85f9b92b52740ee",
+      "stat": [
+        66306,
+        38688900,
+        41471,
+        1,
+        157,
+        1791171851911958068,
+        1791171851911958068
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_actual_fully_qualified_qu2"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_changed_source_cannot_usecurrent",
+      "sha256": "85fe7ad2f075f7957c9073400856bab44d80d9b103a550beae1363ff6c5be2b5",
+      "stat": [
+        66306,
+        38688706,
+        41471,
+        1,
+        157,
+        1791171851892047557,
+        1791171851892047557
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_changed_source_cannot_use0"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_compiled_lookup_shadow_recurrent",
+      "sha256": "c2159275e6eeea89f38bb1fc614e706f9acd25830a5619c67126af77c897c962",
+      "stat": [
+        66306,
+        38688748,
+        41471,
+        1,
+        157,
+        1791171851896010680,
+        1791171851896010680
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_compiled_lookup_shadow_re0"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_declared_optional_companicurrent",
+      "sha256": "3b0b13dcada91890d1fa3c6b005827394e8df90ab92bb9fec295f2b7be8fe83b",
+      "stat": [
+        66306,
+        38689018,
+        41471,
+        1,
+        157,
+        1791171851923206357,
+        1791171851923206357
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_declared_optional_compani0"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_external_profile_cannot_rcurrent",
+      "sha256": "bb19d8fb933d6f6bd858c812bba615dc6ac41fabf14ebab3d17919a81d84a3a5",
+      "stat": [
+        66306,
+        38688940,
+        41471,
+        1,
+        157,
+        1791171851913585241,
+        1791171851913585241
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_external_profile_cannot_r0"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_generic_negative_failure_current",
+      "sha256": "b7c73f8c6bb2afe666972dbe7a184b9ec409ba28008e1579b5cbcd1ecc143a46",
+      "stat": [
+        66306,
+        38688954,
+        41471,
+        1,
+        157,
+        1791171851918399079,
+        1791171851918399079
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_generic_negative_failure_2"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_import_outside_profile_recurrent",
+      "sha256": "c368186e910f44cf27d4e2062e06236bf9d0dcb45ed08322ce8c7da581208546",
+      "stat": [
+        66306,
+        38688717,
+        41471,
+        1,
+        157,
+        1791171851894970138,
+        1791171851894970138
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_import_outside_profile_re2"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_malformed_external_manifecurrent",
+      "sha256": "21c707a4b149a0b2ac583373a3702ac19883881b39bbb99fc6ce466d8ebaa0f7",
+      "stat": [
+        66306,
+        38688812,
+        41471,
+        1,
+        157,
+        1791171851904166544,
+        1791171851904166544
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_malformed_external_manife4"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_malformed_source_byte_fiecurrent",
+      "sha256": "37134eeb75fadb5506c25dd9ad76769fcb283fb1306a30d135031963c569bda0",
+      "stat": [
+        66306,
+        38688869,
+        41471,
+        1,
+        157,
+        1791171851906838819,
+        1791171851906838819
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_malformed_source_byte_fie2"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_manifest_reseal_does_not_current",
+      "sha256": "0bad51bdf19cb2352002a5d3047c422ad6336c43e0e9e9cadd67b3662c92f9b1",
+      "stat": [
+        66306,
+        38688858,
+        41471,
+        1,
+        157,
+        1791171851904725303,
+        1791171851904725303
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_manifest_reseal_does_not_0"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_minimal_inert_environmentcurrent",
+      "sha256": "101352acaeccbf0454ea77d6528611bda9068a9113ec4ee3913a1e8ed79c1cc2",
+      "stat": [
+        66306,
+        38688665,
+        41471,
+        1,
+        157,
+        1791171851884691686,
+        1791171851884691686
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_minimal_inert_environment0"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_missing_actual_source_refcurrent",
+      "sha256": "855b93c8c1de4697ff2f2ffeeda36df7b5f04b093aadc196eec0b2bf8f74f316",
+      "stat": [
+        66306,
+        38688675,
+        41471,
+        1,
+        157,
+        1791171851891024232,
+        1791171851891024232
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_missing_actual_source_ref2"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_missing_or_duplicate_closcurrent",
+      "sha256": "e01a5455115e348efc62c8ad0b6b99566d30264463fb38f02ab389bf8f1c4d81",
+      "stat": [
+        66306,
+        38688761,
+        41471,
+        1,
+        157,
+        1791171851900894694,
+        1791171851900894694
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_missing_or_duplicate_clos4"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_only_closed_decide_false_current",
+      "sha256": "18a4169dda715387857ee58e3dfb9f247b76f93c351a08d2662fa16231f60b58",
+      "stat": [
+        66306,
+        38688991,
+        41471,
+        1,
+        157,
+        1791171851919946539,
+        1791171851919946539
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_only_closed_decide_false_0"
+    },
+    {
+      "bytes": 157,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_oversize_stub_artifact_prcurrent",
+      "sha256": "0e4013603564bbf5d6db2a20fbde79b57c2ae06a6f1e4528eb422d68a9abeb2d",
+      "stat": [
+        66306,
+        38689004,
+        41471,
+        1,
+        157,
+        1791171851921593648,
+        1791171851921593648
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/fixtures/test_oversize_stub_artifact_pr0"
+    },
+    {
+      "bytes": 156,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-chunks-01/fixtures/test_helper_nonzero_is_not_a_ccurrent",
+      "sha256": "1d2fd6dc28d126437a8311019eb7a99d406de5ee5878fab042b43d5e7919376a",
+      "stat": [
+        66306,
+        38689104,
+        41471,
+        1,
+        156,
+        1791172327619270614,
+        1791172327619270614
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-chunks-01/fixtures/test_helper_nonzero_is_not_a_c0"
+    },
+    {
+      "bytes": 156,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-chunks-01/fixtures/test_helper_overflow_preservescurrent",
+      "sha256": "deafcaf4296041ffd7d54cbe5c6aefccd7fdc2ccecba35105dadcc815e01110b",
+      "stat": [
+        66306,
+        38689107,
+        41471,
+        1,
+        156,
+        1791172327619702028,
+        1791172327619702028
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-chunks-01/fixtures/test_helper_overflow_preserves0"
+    },
+    {
+      "bytes": 156,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-chunks-01/fixtures/test_helper_runs_stub_once_andcurrent",
+      "sha256": "28d6183c7609a44ab12db60761b9e53c1d475229fc715b4be3d0ffc5aebd312a",
+      "stat": [
+        66306,
+        38689098,
+        41471,
+        1,
+        156,
+        1791172327618628894,
+        1791172327618628894
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-chunks-01/fixtures/test_helper_runs_stub_once_and0"
+    },
+    {
+      "bytes": 162,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-mappingproxy-01/fixtures/test_compile_pipeline_accepts_current",
+      "sha256": "9722829d78914de5337a827d10b2a26b4ff3ebba8b492c5de77d28c7e2eff6ef",
+      "stat": [
+        66306,
+        38689168,
+        41471,
+        1,
+        162,
+        1791172801937517021,
+        1791172801937517021
+      ],
+      "target": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-mappingproxy-01/fixtures/test_compile_pipeline_accepts_0"
+    }
+  ],
+  "excluded_zero_byte_locks": [
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/cache-joins-02/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/dependencies-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/dependencies-02/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/dependencies-descent-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/dependencies-softplus-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-descent-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-descent-std-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-std-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/extract-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-02/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-coefficient-03/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-02/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-03/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-curvature-04/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-descent-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-false-control-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-geometry-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-gradient-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-numeric-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/metadata-01/metadata/lake/owner.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/metadata-01/metadata/owner.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/metadata-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/numeric-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-cache-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-cache-v2-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-checker-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-chunks-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/pure-tests-mappingproxy-01/resources.json.lock",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/tests-01/resources.json.lock"
+  ],
+  "expected_sealed_file_bytes": 273066128,
+  "expected_sealed_file_count": 1080,
+  "explicit_addition_paths": [
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/API.md",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/build_package-v1.py",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/build_package.py",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/freeze_inputs-v1.py",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/freeze_inputs.py",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/prepare_final_plan.py",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/publication-profile-authorization-v1.json",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/publication-profile-authorization.json",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/required-facts.json",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/review_package-v1.py",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/review_package.py",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/plan.json",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/file-only-seal-01.json",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-review-20261005-01/source-review-01.json",
+    "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-review-20261005-01/review_source_01.py"
+  ],
+  "external_dependencies": {
+    "environment_manifests": [
+      {
+        "bytes": 9302815,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-01/environment-manifest.json",
+        "sha256": "110f4767016f7368df5522d687ad66487bece999e79b7af71c9a5b8097d080d6"
+      },
+      {
+        "bytes": 9308337,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-descent-01/environment-manifest.json",
+        "sha256": "e4e3ae4a4f0aaf6e7d5e78542c525baf62dcd924aa80ef00923110a8362c183d"
+      },
+      {
+        "bytes": 9926484,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-descent-std-01/environment-manifest.json",
+        "sha256": "de57363505c9e8ee7168d82c9ab9e557275b7ab91e997f81b006966e975124a0"
+      },
+      {
+        "bytes": 9921064,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-std-01/environment-manifest.json",
+        "sha256": "12ea10cdd65b9cc20cc6b312359fec7b7ab91e7f06d0cab589336059dd763db8"
+      },
+      {
+        "bytes": 9304399,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-01-producer/environment-manifest.json",
+        "sha256": "0438c2306371fcaf35ea19aadb896abcf729f3ac40cd35604e209b1c3677bbef"
+      },
+      {
+        "bytes": 9311930,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-02-producer/environment-manifest.json",
+        "sha256": "0ef1c2d1a0fa474bd1a40ae8f5f6aae2eef8be3410b0e43bf1f3b459a808308d"
+      },
+      {
+        "bytes": 9311930,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-03-producer/environment-manifest.json",
+        "sha256": "05e80cf8f3ae92d0e57efa9e97bbb820b37f6cee30ea0d63aab6ac33508aca80"
+      },
+      {
+        "bytes": 9304383,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-02-producer/environment-manifest.json",
+        "sha256": "029489467078177b8b951cb93294c31d6bb7e9227699e51e2eda15b293f4ca68"
+      },
+      {
+        "bytes": 9304383,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-03-producer/environment-manifest.json",
+        "sha256": "ad2549f2501b9938fc2d2425261e88c4c33ab8894048505eacee32b0239b9552"
+      },
+      {
+        "bytes": 9316338,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-04-producer/environment-manifest.json",
+        "sha256": "57607ffc3c9a4dd0a2a69e068c7d5a5affa3e96a2776a0bb8aa3888dd5517c94"
+      },
+      {
+        "bytes": 9325077,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-descent-01-producer/environment-manifest.json",
+        "sha256": "d41d511049c9d9a559eb0fe490516aa9f8e9ecaa9aa7b627c05ef332c73c61a0"
+      },
+      {
+        "bytes": 9320746,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-01-producer/environment-manifest.json",
+        "sha256": "0a1b3e01638a2244afebc8c40b81e98dcdb49f597b2c6495bb4e270aaf13f087"
+      },
+      {
+        "bytes": 9320746,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-directional-02-producer/environment-manifest.json",
+        "sha256": "1b39457d00dbc69f08dd771bc125cc527a03eb050445ecc25ece89f79ac9db38"
+      },
+      {
+        "bytes": 9314187,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-false-control-01-producer/environment-manifest.json",
+        "sha256": "316a49eea1a522af55c29cf8229c7fa64fc77946858fe790c2fbd0429af9dbae"
+      },
+      {
+        "bytes": 9311895,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+        "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+      },
+      {
+        "bytes": 9322930,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-gradient-01-producer/environment-manifest.json",
+        "sha256": "18c13f80694fd1eaceedd33fffef13e52d8f892e440b3454a6b3db56455b0a06"
+      },
+      {
+        "bytes": 9922660,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/environment-manifest.json",
+        "sha256": "7dff0dc3f2dddb5bba5b0864ec6d5899f842b9c6a7208af11b2212044912a988"
+      },
+      {
+        "bytes": 9950071,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-descent-01-producer/environment-manifest.json",
+        "sha256": "329b993f9c09e978c2c46b173670a93195ddf720c9462472824eae283a7ac341"
+      },
+      {
+        "bytes": 9943486,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-01-producer/environment-manifest.json",
+        "sha256": "dea9c4420f7ee344177f05bda20126e7251e7f93c45000ac7fbdc8153ad8ff43"
+      },
+      {
+        "bytes": 9943486,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/environment-manifest.json",
+        "sha256": "43022260cd76d6195b3a4d0a7ec1ec8be2bdfdc04982e9e2d7a083af28c8f640"
+      },
+      {
+        "bytes": 9318521,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-01-producer/environment-manifest.json",
+        "sha256": "c27c5b1401df865e3633a4a95aec4c9ea4d808ca69d07fc5a836407c8570041e"
+      },
+      {
+        "bytes": 9318521,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-softplus-02-producer/environment-manifest.json",
+        "sha256": "9bc81e02bf4c72393cfdff29d91a70f11cbe500c484e5c2043fdf475d1f15d37"
+      }
+    ],
+    "mathlib_revision": "5ed2965256430c3649e86755f9576b54eca72435",
+    "official_repository": "https://github.com/leanprover-community/mathlib4",
+    "raw_dependency_bodies_published": false,
+    "reproduction_notes": "Restore this owned bundle and prior frozen source/corpus evidence at their declared paths; use Lean4.34.0 and the exact official Mathlib revision/lake manifest. Hydrate the declared imports and verify each complete environment profile and local compiled-module binding before reproducing a check. Raw dependency/cache bodies are local, not part of this public bundle; dependency runtime opens and full Python stdlib closure are not claimed."
+  },
+  "publication_profile": {
+    "aggregate_decoded_work_max": 1073741824,
+    "authorization_reason": "final root seal273066128 bytes/1080 regular leaves exceeds256MiB; retain all failures and22 complete dependency profiles",
+    "authorization_scope": "explicit root publication-only320MiB raw/1GiB decoded; native limits unchanged",
+    "compressed_shard_max": 268435456,
+    "depth_max": 6,
+    "duplicate_verification_decoder_invocations": 0,
+    "member_readback_profile": "same_first_decoded_tar_and_member_streams@1",
+    "members_max": 10000,
+    "per_decoded_container_max": 16777216,
+    "per_file_max": 16777216,
+    "raw_population_max": 335544320,
+    "wall_seconds": 180,
+    "zstd_arguments": [
+      "-T1",
+      "-3"
+    ]
+  },
+  "schema": "ranker-curvature-publication-plan@1",
+  "scope_root": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01",
+  "semantic_policy": {
+    "bytes": 96622,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/required-facts.json",
+    "sha256": "50deb4972264d45a543de861d9c51e72b9862d10c5ce7664810e3f3e277aeecf"
+  },
+  "semantic_roles": {
+    "failure_and_call_accounting": "qualified_review",
+    "native_metadata_readback": "metadata_readback",
+    "negative_native_checks": [
+      "lean_false_control_01"
+    ],
+    "original_numeric_binding": "numeric_binding",
+    "positive_native_checks": [
+      "lean_coefficient_03",
+      "lean_curvature_04",
+      "lean_descent_01",
+      "lean_directional_02",
+      "lean_geometry_01",
+      "lean_gradient_01",
+      "lean_numeric_01",
+      "lean_original_descent_01",
+      "lean_original_profile_02",
+      "lean_softplus_02"
+    ],
+    "qualified_cache_acceptances": [
+      "cache_coefficient",
+      "cache_curvature",
+      "cache_descent",
+      "cache_directional",
+      "cache_geometry",
+      "cache_gradient",
+      "cache_original_descent",
+      "cache_original_profile",
+      "cache_rational",
+      "cache_scalar"
+    ]
+  },
+  "source_and_artifacts_quiet": true
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "terminal-ranker-curvature-native-check-specification@1",
+  "source": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/CoordinateGeometry.lean",
+    "bytes": 973,
+    "sha256": "7dc84d3553fd722e58ef54c8ed661a841c84aacef5611bdfcd8033830b381fda"
+  },
+  "environment_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/environment-manifest.json",
+    "bytes": 9311895,
+    "sha256": "5584dd14013c55693a1f0ebb40ac1bd1ad833e478e095a11f00ac16ba44ac30c"
+  },
+  "expected_success": true,
+  "theorem_names": [
+    "RankerRealCurvature.squaredEuclideanNorm_nonneg",
+    "RankerRealCurvature.dot_sq_le"
+  ],
+  "freeze_producer": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/freeze_chunk_check_profile.py",
+    "bytes": 5107,
+    "sha256": "c3be6b49302787c2b034f1bc81878969896eab2deaf4afc7199dad6acfe1227c"
+  },
+  "retention_helper": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-geometry-01-producer/RetainLeanProof.py",
+    "bytes": 5828,
+    "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+  },
+  "python_executable": {
+    "path": "/usr/bin/python3.12",
+    "bytes": 7845032,
+    "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+  },
+  "source_capture_scope": "individual held-byte copies; no whole-live atomic or loader-open claim"
+}

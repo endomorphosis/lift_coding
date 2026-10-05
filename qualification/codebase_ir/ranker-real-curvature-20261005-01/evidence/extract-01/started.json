@@ -1,0 +1,58 @@
+{
+  "asymptotic_optimizer_convergence_proved": false,
+  "autoencoder_fit_calls": 0,
+  "behavioral_satisfaction": false,
+  "cleanup_errors": [],
+  "completion_authority": false,
+  "execution_authority": false,
+  "fit_calls": 0,
+  "formalization_authority": false,
+  "full_task_satisfaction": "unknown",
+  "global_convergence_proved": false,
+  "gradient_evaluations": 0,
+  "invocation": {
+    "bytes": 955,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/extract-01-invocation.json",
+    "sha256": "3f855385937b93fc589a4383422951570e5b2c2f08fad76d575cfe05116ca9c8"
+  },
+  "mode": "extract-01",
+  "mutation_authority": false,
+  "native_preparation_calls": 0,
+  "native_proof_checks": [],
+  "omission_authority": false,
+  "optimizer_updates": 0,
+  "planner_activation": false,
+  "primary_error": null,
+  "proof_authority": false,
+  "resource_policy": {
+    "lane_reservations": {
+      "validation": {
+        "cpu_slots": 2,
+        "memory_mb": 0
+      }
+    },
+    "max_gpu_memory_percent": null,
+    "max_memory_percent": null,
+    "max_swap_percent": null,
+    "max_waiting_requests": 256,
+    "proof_backoff_seconds": 2.0,
+    "proof_cpu_stall_percent": 50.0,
+    "proof_io_stall_percent": 10.0,
+    "proof_memory_headroom_mb": 24922,
+    "proof_memory_stall_percent": 2.0,
+    "proof_safety_enabled": true,
+    "require_known_gpu_for_gpu_work": true,
+    "reserved_gpu_memory_mb": 0,
+    "reserved_memory_mb": 0,
+    "total_child_process_slots": 16,
+    "total_cpu_slots": 16,
+    "total_gpu_memory_mb": null,
+    "total_memory_mb": 99688,
+    "total_unified_memory_mb": null
+  },
+  "schema": "terminal-ranker-curvature-owned-control@1",
+  "semantic_alignment_verified": false,
+  "source_semantics_verified": false,
+  "status": "started",
+  "whole_program_proved": false
+}

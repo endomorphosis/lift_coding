@@ -1,0 +1,45 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 13672,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/test_bounded_analytic_checker.py",
+      "sha256": "4325915d199615161ca2c70cb836b3d48e299c0713ec03771a638df6f730ca6d"
+    },
+    {
+      "bytes": 19536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/numeric-checker-v4/bounded_analytic_checker.py",
+      "sha256": "1d8cf650a781591ca966be653b97b1194a4870ce2dbf6cab1b979b5820efa7f6"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 25109,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-pure-tests-checker-01.py",
+      "sha256": "74f505578d15c8510a84af21fbdf7b3d9410e35c2e59b348f63b6afdde3abaea"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 13672,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/test_bounded_analytic_checker.py",
+      "sha256": "4325915d199615161ca2c70cb836b3d48e299c0713ec03771a638df6f730ca6d"
+    },
+    {
+      "bytes": 19536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/numeric-checker-v4/bounded_analytic_checker.py",
+      "sha256": "1d8cf650a781591ca966be653b97b1194a4870ce2dbf6cab1b979b5820efa7f6"
+    }
+  ],
+  "mode": "pure-tests-checker-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T03:44:11.351757+00:00"
+}

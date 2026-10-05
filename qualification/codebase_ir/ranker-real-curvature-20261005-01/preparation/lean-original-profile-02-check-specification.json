@@ -1,0 +1,35 @@
+{
+  "schema": "terminal-ranker-curvature-native-check-specification@1",
+  "source": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/OriginalRealProfile.lean",
+    "bytes": 6088,
+    "sha256": "52eecc62595596545013a7ec4f2cfc70e4b4c2b9f1607ff5db7237b46be3d196"
+  },
+  "environment_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/environment-manifest.json",
+    "bytes": 9943486,
+    "sha256": "43022260cd76d6195b3a4d0a7ec1ec8be2bdfdc04982e9e2d7a083af28c8f640"
+  },
+  "expected_success": true,
+  "theorem_names": [
+    "RankerRealCurvature.originalReal_norms_exact",
+    "RankerRealCurvature.originalReal_eta_le_inverse_meanL",
+    "RankerRealCurvature.originalReal_actual_secondDirectional_bounds"
+  ],
+  "freeze_producer": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/freeze_std_descent_chunk_check_profile.py",
+    "bytes": 5111,
+    "sha256": "aae234a0b53fafc5e28852fe2bf8028483db068ed01247dc62ec28578d8b4cc2"
+  },
+  "retention_helper": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-original-profile-02-producer/RetainLeanProof.py",
+    "bytes": 5828,
+    "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+  },
+  "python_executable": {
+    "path": "/usr/bin/python3.12",
+    "bytes": 7845032,
+    "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+  },
+  "source_capture_scope": "individual held-byte copies; no whole-live atomic or loader-open claim"
+}

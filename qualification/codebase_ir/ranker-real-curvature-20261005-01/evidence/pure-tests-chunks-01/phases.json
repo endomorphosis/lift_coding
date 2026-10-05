@@ -1,0 +1,578 @@
+[
+  {
+    "nodeid": "::test_exact_profile_and_unchanged_native_caps",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.004021909000584856
+  },
+  {
+    "nodeid": "::test_exact_profile_and_unchanged_native_caps",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 8.118498953990638e-05
+  },
+  {
+    "nodeid": "::test_exact_profile_and_unchanged_native_caps",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.6401011534035206e-05
+  },
+  {
+    "nodeid": "::test_reconstructs_complete_large_object_and_companion",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.508802132681012e-05
+  },
+  {
+    "nodeid": "::test_reconstructs_complete_large_object_and_companion",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00030792399775236845
+  },
+  {
+    "nodeid": "::test_reconstructs_complete_large_object_and_companion",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.598499461077154e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[missing]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 9.673699969425797e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[missing]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00016908999532461166
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[missing]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.444799222052097e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[extra]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.339300307445228e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[extra]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00013776199193671346
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[extra]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.204902168363333e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_chunks]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.736100138165057e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_chunks]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.000129169988213107
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_chunks]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8960988856852055e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_partition]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.411298479884863e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_partition]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00016342700109817088
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_partition]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.804800169542432e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[forged_chunk_hash]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.988900036551058e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[forged_chunk_hash]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00015452998923137784
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[forged_chunk_hash]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7520000003278255e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[forged_object_hash]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.857699968852103e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[forged_object_hash]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00018211398855783045
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[forged_object_hash]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6321009499952197e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[changed_chunk]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.688100307248533e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[changed_chunk]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00015420999261550605
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[changed_chunk]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6897003408521414e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[duplicate_chunk]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.742498276755214e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[duplicate_chunk]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00015195398009382188
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[duplicate_chunk]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.555298851802945e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[duplicate_object]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.7281006118282676e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[duplicate_object]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00019945899839513004
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[duplicate_object]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5568006094545126e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[unknown_object]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.795199492946267e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[unknown_object]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001558259828016162
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[unknown_object]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5855988496914506e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_objects]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.718400305137038e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_objects]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00017929801833815873
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[reordered_objects]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.603299799375236e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_total]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.492898005992174e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_total]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00017940998077392578
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_total]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5200977688655257e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[bool_total]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.5808992581442e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[bool_total]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00011558597907423973
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[bool_total]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5327986804768443e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[bool_chunk_bytes]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.464000812731683e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[bool_chunk_bytes]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001147050061263144
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[bool_chunk_bytes]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.454497735016048e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_profile]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.4881016947329044e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_profile]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00010753702372312546
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_profile]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4944019969552755e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_status]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.6769011532887816e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_status]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00011257801088504493
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_status]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5760004064068198e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_native_calls]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.343999898992479e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_native_calls]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00011070599430240691
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_native_calls]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5073008146137e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_native_return]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.422501660883427e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_native_return]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00011252900003455579
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[wrong_native_return]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4528999347239733e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[missing_main]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.308900679461658e-05
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[missing_main]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00017920200480148196
+  },
+  {
+    "nodeid": "::test_consistently_resealed_manifest_attacks_refused[missing_main]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4464010493829846e-05
+  },
+  {
+    "nodeid": "::test_rejects_short_nonfinal_chunk_even_with_all_hashes_resealed",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.8799986466765404e-05
+  },
+  {
+    "nodeid": "::test_rejects_short_nonfinal_chunk_even_with_all_hashes_resealed",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 9.976097499020398e-05
+  },
+  {
+    "nodeid": "::test_rejects_short_nonfinal_chunk_even_with_all_hashes_resealed",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.396802301518619e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_chunk]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.6160974306985736e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_chunk]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001507219858467579
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_chunk]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5296991225332022e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[too_many_chunks]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.363298648968339e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[too_many_chunks]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005797484016511589
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[too_many_chunks]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.832099122926593e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_raw]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00010081799700856209
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_raw]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00013542600208893418
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_raw]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6991998311132193e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_manifest]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.803299088962376e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_manifest]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00010400099563412368
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[oversize_manifest]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5985005777329206e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[noncanonical]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.5505003072321415e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[noncanonical]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00015688201528973877
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[noncanonical]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5985005777329206e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[duplicate_key]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.9313006456941366e-05
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[duplicate_key]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002114269882440567
+  },
+  {
+    "nodeid": "::test_native_capture_and_complete_population_caps_refused[duplicate_key]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7664995286613703e-05
+  },
+  {
+    "nodeid": "::test_largest_allowed_complete_raw_body",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.964900340884924e-05
+  },
+  {
+    "nodeid": "::test_largest_allowed_complete_raw_body",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.007198414008598775
+  },
+  {
+    "nodeid": "::test_largest_allowed_complete_raw_body",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.5329001042991877e-05
+  },
+  {
+    "nodeid": "::test_helper_runs_stub_once_and_preserves_complete_bytes",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00047061400255188346
+  },
+  {
+    "nodeid": "::test_helper_runs_stub_once_and_preserves_complete_bytes",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00046126998495310545
+  },
+  {
+    "nodeid": "::test_helper_runs_stub_once_and_preserves_complete_bytes",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.007997970096767e-05
+  },
+  {
+    "nodeid": "::test_helper_nonzero_is_not_a_complete_reconstruction",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00019208301091566682
+  },
+  {
+    "nodeid": "::test_helper_nonzero_is_not_a_complete_reconstruction",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 9.276901255361736e-05
+  },
+  {
+    "nodeid": "::test_helper_nonzero_is_not_a_complete_reconstruction",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.5792996641248465e-05
+  },
+  {
+    "nodeid": "::test_helper_overflow_preserves_inconclusive_manifest",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0001584819983690977
+  },
+  {
+    "nodeid": "::test_helper_overflow_preserves_inconclusive_manifest",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0013649459870066494
+  },
+  {
+    "nodeid": "::test_helper_overflow_preserves_inconclusive_manifest",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.220898987725377e-05
+  }
+]

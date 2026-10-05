@@ -1,0 +1,45 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 12951,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/build_environment_manifest.py",
+      "sha256": "bac826e0b9b95413d877aac659bb8a1bb2e7c80c67b053fd8d7995f6f2638085"
+    },
+    {
+      "bytes": 1969,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/LogisticCoefficient.lean",
+      "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 25757,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-environment-descent-std-01.py",
+      "sha256": "de4a468ec2178fdbb25c6d17a7ed5112c409b2bfc0dbbed0c24cd7b538558f29"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 12951,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/build_environment_manifest.py",
+      "sha256": "bac826e0b9b95413d877aac659bb8a1bb2e7c80c67b053fd8d7995f6f2638085"
+    },
+    {
+      "bytes": 1969,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/LogisticCoefficient.lean",
+      "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+    }
+  ],
+  "mode": "environment-descent-std-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T04:08:41.322558+00:00"
+}

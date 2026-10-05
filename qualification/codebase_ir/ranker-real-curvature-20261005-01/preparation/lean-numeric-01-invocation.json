@@ -1,0 +1,65 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 19536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/bounded_analytic_checker.py",
+      "sha256": "1d8cf650a781591ca966be653b97b1194a4870ce2dbf6cab1b979b5820efa7f6"
+    },
+    {
+      "bytes": 1444,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-check-specification.json",
+      "sha256": "9a97b335d37226557859ed7b3bdc7e136fa1056a36a2edc028c847c67b4ef861"
+    },
+    {
+      "bytes": 9922660,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/environment-manifest.json",
+      "sha256": "7dff0dc3f2dddb5bba5b0864ec6d5899f842b9c6a7208af11b2212044912a988"
+    },
+    {
+      "bytes": 6710,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/OriginalNumericCurvature.lean",
+      "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 23269,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-lean-numeric-01.py",
+      "sha256": "99ff385cbf38f35b4474f89f892c092c138108a29ff16bcf4d9415ba23a9f5de"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 19536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/bounded_analytic_checker.py",
+      "sha256": "1d8cf650a781591ca966be653b97b1194a4870ce2dbf6cab1b979b5820efa7f6"
+    },
+    {
+      "bytes": 1444,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-check-specification.json",
+      "sha256": "9a97b335d37226557859ed7b3bdc7e136fa1056a36a2edc028c847c67b4ef861"
+    },
+    {
+      "bytes": 9922660,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/environment-manifest.json",
+      "sha256": "7dff0dc3f2dddb5bba5b0864ec6d5899f842b9c6a7208af11b2212044912a988"
+    },
+    {
+      "bytes": 6710,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-numeric-01-producer/OriginalNumericCurvature.lean",
+      "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+    }
+  ],
+  "mode": "lean-numeric-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T03:41:51.085333+00:00"
+}

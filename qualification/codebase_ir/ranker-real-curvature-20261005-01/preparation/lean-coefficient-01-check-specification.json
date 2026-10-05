@@ -1,0 +1,25 @@
+{
+  "schema": "terminal-ranker-curvature-native-check-specification@1",
+  "source": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-01-producer/LogisticCoefficient.lean",
+    "bytes": 1969,
+    "sha256": "8b19079fcc0884b6ee4c38b5e258470cbdc9394e788573ba9fafa414f5f4debf"
+  },
+  "environment_manifest": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-coefficient-01-producer/environment-manifest.json",
+    "bytes": 9304399,
+    "sha256": "0438c2306371fcaf35ea19aadb896abcf729f3ac40cd35604e209b1c3677bbef"
+  },
+  "expected_success": true,
+  "theorem_names": [
+    "RankerRealCurvature.realLogisticP_mem_Ioo",
+    "RankerRealCurvature.realLogisticCoeff_bounds",
+    "RankerRealCurvature.realLogisticCoeff_zero"
+  ],
+  "freeze_producer": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/freeze_check_profile.py",
+    "bytes": 4416,
+    "sha256": "606d6918254afbb489bb7b7df2dd88ba0dafb86fe5ca07ec1c9e67ca8dfb5fd8"
+  },
+  "source_capture_scope": "individual held-byte copy; no atomic whole-live or loader-open trace"
+}

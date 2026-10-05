@@ -1,0 +1,87 @@
+{
+  "actual_runtime_open_trace_proved": false,
+  "atomic_source_snapshot_proved": false,
+  "entire3GB_binary_population_rehashed_by_this_audit": false,
+  "full_dependency_hash_before_after_is_actual_checker_obligation": true,
+  "full_task_satisfaction": "unknown",
+  "operations": {
+    "JSON_and_file_metadata_only": true,
+    "Lean_import_probes": 0,
+    "native_jobs": 0,
+    "project_imports": 0,
+    "test_jobs": 0
+  },
+  "optimizer_convergence_proved": false,
+  "profiles": [
+    {
+      "actual_runtime_file_open_trace_claimed": false,
+      "declared_toolchain": "leanprover/lean4:v4.34.0",
+      "file_bytes": 3297414813,
+      "file_count": 18601,
+      "first_library_lookup_matches_registry_for_all_modules": true,
+      "implicit_Init_registered": true,
+      "library_roots": 9,
+      "manifest": {
+        "bytes": 9302815,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/environment-01/environment-manifest.json",
+        "sha256": "110f4767016f7368df5522d687ad66487bece999e79b7af71c9a5b8097d080d6"
+      },
+      "mathlib_revision": "5ed2965256430c3649e86755f9576b54eca72435",
+      "module_count": 3713,
+      "package_metadata_count": 8,
+      "requested_imports": [
+        "Mathlib.Analysis.Complex.Exponential",
+        "Mathlib.Algebra.Order.BigOperators.Ring.Finset",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Analysis.SpecialFunctions.Log.Deriv",
+        "Mathlib.Analysis.Calculus.Deriv.Inv",
+        "Mathlib.Tactic.FieldSimp"
+      ],
+      "selected_proof_sources": [
+        {
+          "bytes": 6816,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/frozen-01/LogisticCurvature.lean",
+          "sha256": "5ec7780a53c000dceecce646ecd68e009c61a20048f7cb7842a06489a24e4f5f"
+        }
+      ],
+      "source_and_compiled_registry_all_inventory_bound": true
+    },
+    {
+      "actual_runtime_file_open_trace_claimed": false,
+      "declared_toolchain": "leanprover/lean4:v4.34.0",
+      "file_bytes": 3297421690,
+      "file_count": 18602,
+      "first_library_lookup_matches_registry_for_all_modules": true,
+      "implicit_Init_registered": true,
+      "library_roots": 9,
+      "manifest": {
+        "bytes": 9304383,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-02-producer/environment-manifest.json",
+        "sha256": "029489467078177b8b951cb93294c31d6bb7e9227699e51e2eda15b293f4ca68"
+      },
+      "mathlib_revision": "5ed2965256430c3649e86755f9576b54eca72435",
+      "module_count": 3713,
+      "package_metadata_count": 8,
+      "requested_imports": [
+        "Mathlib.Analysis.Complex.Exponential",
+        "Mathlib.Algebra.Order.BigOperators.Ring.Finset",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Analysis.SpecialFunctions.Log.Deriv",
+        "Mathlib.Analysis.Calculus.Deriv.Inv",
+        "Mathlib.Tactic.FieldSimp"
+      ],
+      "selected_proof_sources": [
+        {
+          "bytes": 6877,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/lean-curvature-02-producer/LogisticCurvature.lean",
+          "sha256": "ae1a8e225221e49860a1cfffd99d329629aa0935cd57b35f92daa2abf13733b1"
+        }
+      ],
+      "source_and_compiled_registry_all_inventory_bound": true
+    }
+  ],
+  "proof_authority": false,
+  "schema": "ranker-real-curvature-source-only-environment-profile-audit@1",
+  "source_file_hashes_rechecked": true,
+  "status": "passed_registry_source_and_metadata_consistency"
+}

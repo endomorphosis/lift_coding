@@ -1,0 +1,45 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 18552,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/build_curvature_numeric_binding.py",
+      "sha256": "d73de85db64c5cb7c3d9ca97d325e27bb73f30bbda83e674377646bbda4082b5"
+    },
+    {
+      "bytes": 2342,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/original-differences-01.json",
+      "sha256": "d2b691805cddd5ba8a46f733589e4d09424a06d67a6a2bb09b61e7f727d9c739"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 20032,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/captured-driver-numeric-01.py",
+      "sha256": "df8e8eb7f6900427e2c5c2b59cac11cb8666c2dfde3a6b889aeed253b1b036a9"
+    },
+    {
+      "bytes": 109791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+      "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+    },
+    {
+      "bytes": 18552,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/build_curvature_numeric_binding.py",
+      "sha256": "d73de85db64c5cb7c3d9ca97d325e27bb73f30bbda83e674377646bbda4082b5"
+    },
+    {
+      "bytes": 2342,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/original-differences-01.json",
+      "sha256": "d2b691805cddd5ba8a46f733589e4d09424a06d67a6a2bb09b61e7f727d9c739"
+    }
+  ],
+  "mode": "numeric-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 109791,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/preparation/request.json",
+    "sha256": "e9ac637a7efc50599a571474c6ed358f3f7a8682d415afc8eb57ad0cfcc31291"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T03:22:20.336083+00:00"
+}
