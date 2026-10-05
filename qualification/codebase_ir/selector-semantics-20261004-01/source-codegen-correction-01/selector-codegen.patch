@@ -1,0 +1,18 @@
+--- selector.before.py
++++ selector.after.py
+@@ -25,12 +25,12 @@
+ set_option autoImplicit false
+ namespace BatchingSelector
+ -- None models the IndexError of indexing an empty representative list.
+-def sourceLoop (s : Int) (fallback : Option Int) : List Int → Option Int
++noncomputable def sourceLoop (s : Int) (fallback : Option Int) : List Int → Option Int
+   | [] => fallback
+   | r :: rs => if s ≤ r then some r else sourceLoop s fallback rs
+-def sourceSemantics (rs : List Int) (s : Int) : Option Int :=
++noncomputable def sourceSemantics (rs : List Int) (s : Int) : Option Int :=
+   sourceLoop s rs.getLast? rs
+-def irSemantics (rs : List Int) (s : Int) : Option Int :=
++noncomputable def irSemantics (rs : List Int) (s : Int) : Option Int :=
+   match rs.find? (fun r => decide (s ≤ r)) with
+   | some r => some r
+   | none => rs.getLast?

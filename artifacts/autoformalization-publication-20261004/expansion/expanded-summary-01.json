@@ -1,0 +1,2722 @@
+{
+  "actual_optimizer_updates": 1827,
+  "all_three_seeds_reported": true,
+  "arms": [
+    {
+      "architecture": [
+        8,
+        16,
+        4
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0727735161781311,
+            "mean_cosine_distortion": 0.03940458968281746,
+            "raw_coordinate_mse": 0.009657063521444798,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.009348690509796143,
+            "mean_cosine_distortion": 0.004112813621759415,
+            "raw_coordinate_mse": 0.001036354573443532,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.05007338523864746,
+            "mean_cosine_distortion": 0.02044651284813881,
+            "raw_coordinate_mse": 0.005119373090565205,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.003259122371673584,
+            "mean_cosine_distortion": 0.0010639447718858719,
+            "raw_coordinate_mse": 0.00030299846548587084,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0,
+            "mean_cosine_distortion": 0.0,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.07825011014938354,
+            "mean_cosine_distortion": 0.03939115256071091,
+            "raw_coordinate_mse": 0.009653839282691479,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.01291513442993164,
+            "mean_cosine_distortion": 0.0036631524562835693,
+            "raw_coordinate_mse": 0.0009263663669116795,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.05156147480010986,
+            "mean_cosine_distortion": 0.020171236246824265,
+            "raw_coordinate_mse": 0.005048789549618959,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.00459665060043335,
+            "mean_cosine_distortion": 0.0011938270181417465,
+            "raw_coordinate_mse": 0.0003324129502288997,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 5.960464477539063e-08,
+            "mean_cosine_distortion": 1.862645149230957e-09,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 152752,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1729/endpoints.json",
+        "sha256": "fedadb92e34a9a96f18da5ef9fd7c76290918e8b719c33c35bd61a3f34396195"
+      },
+      "final_train_mse": 0.0009263663669116795,
+      "initial_train_mse": 0.010185252875089645,
+      "lane_id": "legacy8",
+      "numeric_report_binding": {
+        "bytes": 8828,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1729/numeric-report.json",
+        "sha256": "c7c7df9e7abaa783bc833eb5ded424978dd82c1d11468a516da65118814de07c"
+      },
+      "pca_control": {
+        "basis_sha256": "f02fc1b2a21592b6e6526318523789ad73ff65a775c231a3770c6a484fc59cff",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 8,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 4,
+        "threshold": 4.684184386860579e-05
+      },
+      "seed": 1729,
+      "selected_checkpoint_binding": {
+        "bytes": 9461,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1729/worker/step200/checkpoint.json",
+        "sha256": "449650c9c40601b3217e0cbca05ea50b4f2f456035226d1f7bb9aa43a839b17b"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.03125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.16875,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.4375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.85,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.83125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.34375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.725,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.28125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.75625,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.71875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.83125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.84375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.9375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 42260,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1729/worker/training-report.json",
+        "sha256": "77c8e576615562a4bfbf5e96bff900876e3fa1f470d4dcf195d4b8010ede50be"
+      }
+    },
+    {
+      "architecture": [
+        8,
+        16,
+        4
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0727735161781311,
+            "mean_cosine_distortion": 0.03940458968281746,
+            "raw_coordinate_mse": 0.009657063521444798,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.008973538875579834,
+            "mean_cosine_distortion": 0.0031515397131443024,
+            "raw_coordinate_mse": 0.0008156331605277956,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0523834228515625,
+            "mean_cosine_distortion": 0.02140570431947708,
+            "raw_coordinate_mse": 0.005412274971604347,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.003259122371673584,
+            "mean_cosine_distortion": 0.0010639447718858719,
+            "raw_coordinate_mse": 0.00030299846548587084,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0,
+            "mean_cosine_distortion": 0.0,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.07825011014938354,
+            "mean_cosine_distortion": 0.03939115256071091,
+            "raw_coordinate_mse": 0.009653839282691479,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.010570168495178223,
+            "mean_cosine_distortion": 0.002706870436668396,
+            "raw_coordinate_mse": 0.0007006367086432874,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.053021788597106934,
+            "mean_cosine_distortion": 0.020981954410672188,
+            "raw_coordinate_mse": 0.005305929109454155,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.00459665060043335,
+            "mean_cosine_distortion": 0.0011938270181417465,
+            "raw_coordinate_mse": 0.0003324129502288997,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 5.960464477539063e-08,
+            "mean_cosine_distortion": 1.862645149230957e-09,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 152768,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1730/endpoints.json",
+        "sha256": "a15a3b1d7b2e6e8ec3906627e72b032c4d3d355aead2e376d9fa1ccce907c647"
+      },
+      "final_train_mse": 0.0007006367086432874,
+      "initial_train_mse": 0.010333450511097908,
+      "lane_id": "legacy8",
+      "numeric_report_binding": {
+        "bytes": 8829,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1730/numeric-report.json",
+        "sha256": "9f137c876261c28cef8414d94f8f82d667fcb55b9ebe347131dde5766b4ea286"
+      },
+      "pca_control": {
+        "basis_sha256": "f02fc1b2a21592b6e6526318523789ad73ff65a775c231a3770c6a484fc59cff",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 8,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 4,
+        "threshold": 4.684184386860579e-05
+      },
+      "seed": 1730,
+      "selected_checkpoint_binding": {
+        "bytes": 9461,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1730/worker/step200/checkpoint.json",
+        "sha256": "d66b0d64ee599e309f8ddf10bdfbfbc4d9d0c7e5f6e511544df83feb572d95a7"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.03125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.16875,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.53125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.86875,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.5625,
+          "mean_top5_set_overlap_fraction_with_raw": 0.875,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.25,
+          "mean_top5_set_overlap_fraction_with_raw": 0.6625,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.21875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.725,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.71875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.83125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.84375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.9375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 42255,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1730/worker/training-report.json",
+        "sha256": "f1dda60f9b39e6509f4517a2272e793c568b8f068a5e3fe4c91256f5d365404e"
+      }
+    },
+    {
+      "architecture": [
+        8,
+        16,
+        4
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0727735161781311,
+            "mean_cosine_distortion": 0.03940458968281746,
+            "raw_coordinate_mse": 0.009657063521444798,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.00946122407913208,
+            "mean_cosine_distortion": 0.0038846898823976517,
+            "raw_coordinate_mse": 0.0009744762210175395,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.05944716930389404,
+            "mean_cosine_distortion": 0.02202916517853737,
+            "raw_coordinate_mse": 0.0054907770827412605,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.003259122371673584,
+            "mean_cosine_distortion": 0.0010639447718858719,
+            "raw_coordinate_mse": 0.00030299846548587084,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0,
+            "mean_cosine_distortion": 0.0,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.07825011014938354,
+            "mean_cosine_distortion": 0.03939115256071091,
+            "raw_coordinate_mse": 0.009653839282691479,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.012522578239440918,
+            "mean_cosine_distortion": 0.003156673163175583,
+            "raw_coordinate_mse": 0.0007964251562952995,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.06169933080673218,
+            "mean_cosine_distortion": 0.021770188584923744,
+            "raw_coordinate_mse": 0.005425985436886549,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.00459665060043335,
+            "mean_cosine_distortion": 0.0011938270181417465,
+            "raw_coordinate_mse": 0.0003324129502288997,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 5.960464477539063e-08,
+            "mean_cosine_distortion": 1.862645149230957e-09,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 152718,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1731/endpoints.json",
+        "sha256": "071486d6eed4811a54065a122bd72d5ec0c7d245c2bfbfa4e6045d4e5c31cd47"
+      },
+      "final_train_mse": 0.0007964251562952995,
+      "initial_train_mse": 0.010191507637500763,
+      "lane_id": "legacy8",
+      "numeric_report_binding": {
+        "bytes": 8832,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/legacy8-seed1731/numeric-report.json",
+        "sha256": "d996f8e7821a6c35b9836a38014fee48b44f5596e2502f4450443cc8e04137da"
+      },
+      "pca_control": {
+        "basis_sha256": "f02fc1b2a21592b6e6526318523789ad73ff65a775c231a3770c6a484fc59cff",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 8,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 4,
+        "threshold": 4.684184386860579e-05
+      },
+      "seed": 1731,
+      "selected_checkpoint_binding": {
+        "bytes": 9461,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1731/worker/step200/checkpoint.json",
+        "sha256": "ebb9f54a807c171b1a9a75cbb80325525762c3f898468a1abaabe075e6560f5b"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.03125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.16875,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.5625,
+          "mean_top5_set_overlap_fraction_with_raw": 0.8375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.53125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.84375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.09375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.69375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.1875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.65,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.71875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.83125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.84375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.9375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 42276,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/legacy8-seed1731/worker/training-report.json",
+        "sha256": "72e155b20ea34ee621b0e8bda78d36d4d1e1714e53a1897122d1c34a01eeeda4"
+      }
+    },
+    {
+      "architecture": [
+        384,
+        128,
+        32
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.07701706886291504,
+            "mean_cosine_distortion": 0.049850866198539734,
+            "raw_coordinate_mse": 0.0002531697100494057,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.011278510093688965,
+            "mean_cosine_distortion": 0.00665397010743618,
+            "raw_coordinate_mse": 3.4615412005223334e-05,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.06103181838989258,
+            "mean_cosine_distortion": 0.03358711302280426,
+            "raw_coordinate_mse": 0.0001730385556584224,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0013512969017028809,
+            "mean_cosine_distortion": 0.0007805470377206802,
+            "raw_coordinate_mse": 4.073324362252606e-06,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 3.5390257835388184e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.08261388540267944,
+            "mean_cosine_distortion": 0.049226537346839905,
+            "raw_coordinate_mse": 0.00025007815565913916,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.00033670663833618164,
+            "mean_cosine_distortion": 0.00020876899361610413,
+            "raw_coordinate_mse": 1.0931667020486202e-06,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.05809581279754639,
+            "mean_cosine_distortion": 0.02572462521493435,
+            "raw_coordinate_mse": 0.00013258821854833513,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 1.1920928955078125e-07,
+            "mean_cosine_distortion": 5.587935447692871e-09,
+            "raw_coordinate_mse": 1.8594304162653836e-16,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 1.1920928955078125e-07,
+            "mean_cosine_distortion": 9.313225746154785e-09,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 4173254,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1729/endpoints.json",
+        "sha256": "42ba54d6074c6f1bad78133d4ee8c1dbbbab69d9c787cc6bd95d99f8f8d2bcb4"
+      },
+      "final_train_mse": 1.0931667020486202e-06,
+      "initial_train_mse": 0.0002528139448259026,
+      "lane_id": "native384",
+      "numeric_report_binding": {
+        "bytes": 8889,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1729/numeric-report.json",
+        "sha256": "4d7e4797c272714276ec69c8a25961acc973e8d6e2e23b08b50e556b4468ee53"
+      },
+      "pca_control": {
+        "basis_sha256": "0caccb30ecbaa0cce242ec9d7e8f8dc1072a3d5ae71f4cf421b1c33889776b34",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 31,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 31,
+        "threshold": 0.002790250116959214
+      },
+      "seed": 1729,
+      "selected_checkpoint_binding": {
+        "bytes": 20141,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1729/worker/step200/checkpoint.json",
+        "sha256": "2a4cb3c429206464ceca517b647b9a3f0963ee90356a2dde2674816d8731910b"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.03125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.15,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.75,
+          "mean_top5_set_overlap_fraction_with_raw": 0.90625,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.78125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.9,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.21875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.64375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.28125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.68125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.95,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 827427,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1729/worker/training-report.json",
+        "sha256": "f3f12d6da591d5e7a3ededb97c88a9ef17c48f840498b25534aa8e0c8c6dfa4f"
+      }
+    },
+    {
+      "architecture": [
+        384,
+        128,
+        32
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.07701706886291504,
+            "mean_cosine_distortion": 0.049850866198539734,
+            "raw_coordinate_mse": 0.0002531697100494057,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.012150287628173828,
+            "mean_cosine_distortion": 0.006964469328522682,
+            "raw_coordinate_mse": 3.626505713327788e-05,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0589330792427063,
+            "mean_cosine_distortion": 0.033347249031066895,
+            "raw_coordinate_mse": 0.0001719500432955101,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0013512969017028809,
+            "mean_cosine_distortion": 0.0007805470377206802,
+            "raw_coordinate_mse": 4.073324362252606e-06,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 3.5390257835388184e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.08261388540267944,
+            "mean_cosine_distortion": 0.049226537346839905,
+            "raw_coordinate_mse": 0.00025007815565913916,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.00025004148483276367,
+            "mean_cosine_distortion": 0.00018876977264881134,
+            "raw_coordinate_mse": 9.888648264677613e-07,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.056520044803619385,
+            "mean_cosine_distortion": 0.025733185932040215,
+            "raw_coordinate_mse": 0.00013287235924508423,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 1.1920928955078125e-07,
+            "mean_cosine_distortion": 5.587935447692871e-09,
+            "raw_coordinate_mse": 1.8594304162653836e-16,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 1.1920928955078125e-07,
+            "mean_cosine_distortion": 9.313225746154785e-09,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 4172685,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1730/endpoints.json",
+        "sha256": "8154a347cb398d61b020cf4088a8a9ca3c567149212fd0103fb89f8fc26eaba1"
+      },
+      "final_train_mse": 9.888648264677613e-07,
+      "initial_train_mse": 0.0002527920005377382,
+      "lane_id": "native384",
+      "numeric_report_binding": {
+        "bytes": 8902,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1730/numeric-report.json",
+        "sha256": "16acbea8e12fffd896bafc6d13ad237db84a87de4d28a6944d1b2dfc69e4f532"
+      },
+      "pca_control": {
+        "basis_sha256": "0caccb30ecbaa0cce242ec9d7e8f8dc1072a3d5ae71f4cf421b1c33889776b34",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 31,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 31,
+        "threshold": 0.002790250116959214
+      },
+      "seed": 1730,
+      "selected_checkpoint_binding": {
+        "bytes": 20141,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1730/worker/step200/checkpoint.json",
+        "sha256": "11514b128a093fbbd74096387ec8419325c2dc67cc213c06a067e769aedf7a38"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.03125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.15,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.71875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.88125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.84375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.9125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.25,
+          "mean_top5_set_overlap_fraction_with_raw": 0.6687500000000001,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.21875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.675,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.95,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 827340,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1730/worker/training-report.json",
+        "sha256": "8a46e6d34f849333147af07df171c3900532814303ab481a0d231352be2ccc4a"
+      }
+    },
+    {
+      "architecture": [
+        384,
+        128,
+        32
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.07701706886291504,
+            "mean_cosine_distortion": 0.049850866198539734,
+            "raw_coordinate_mse": 0.0002531697100494057,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.00858384370803833,
+            "mean_cosine_distortion": 0.00547107495367527,
+            "raw_coordinate_mse": 2.8465537980082445e-05,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.06293743848800659,
+            "mean_cosine_distortion": 0.034180253744125366,
+            "raw_coordinate_mse": 0.00017620460130274296,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0013512969017028809,
+            "mean_cosine_distortion": 0.0007805470377206802,
+            "raw_coordinate_mse": 4.073324362252606e-06,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 3.5390257835388184e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.08261388540267944,
+            "mean_cosine_distortion": 0.049226537346839905,
+            "raw_coordinate_mse": 0.00025007815565913916,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0006412863731384277,
+            "mean_cosine_distortion": 0.0002315118908882141,
+            "raw_coordinate_mse": 1.2139161071900162e-06,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.05805450677871704,
+            "mean_cosine_distortion": 0.026145929470658302,
+            "raw_coordinate_mse": 0.0001348874211544171,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 1.1920928955078125e-07,
+            "mean_cosine_distortion": 5.587935447692871e-09,
+            "raw_coordinate_mse": 1.8594304162653836e-16,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 1.1920928955078125e-07,
+            "mean_cosine_distortion": 9.313225746154785e-09,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 4172903,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1731/endpoints.json",
+        "sha256": "6c437439c7155c4fecfaebe35ab685fd85a8e4ef566617706435703370a707e5"
+      },
+      "final_train_mse": 1.2139161071900162e-06,
+      "initial_train_mse": 0.0002539475681260228,
+      "lane_id": "native384",
+      "numeric_report_binding": {
+        "bytes": 8882,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native384-seed1731/numeric-report.json",
+        "sha256": "061405163c1c4dd0dcbe8db535f5dce10626f43d0a6418a0428bd1ab76604659"
+      },
+      "pca_control": {
+        "basis_sha256": "0caccb30ecbaa0cce242ec9d7e8f8dc1072a3d5ae71f4cf421b1c33889776b34",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 31,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 31,
+        "threshold": 0.002790250116959214
+      },
+      "seed": 1731,
+      "selected_checkpoint_binding": {
+        "bytes": 20141,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1731/worker/step200/checkpoint.json",
+        "sha256": "0b160b11735df4a6d8d1f238a24e3fde519e8b9858053e91579e9794b83940c1"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.03125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.15,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.65625,
+          "mean_top5_set_overlap_fraction_with_raw": 0.9,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.75,
+          "mean_top5_set_overlap_fraction_with_raw": 0.9,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.63125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.34375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.65625,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.95,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 827296,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native384-seed1731/worker/training-report.json",
+        "sha256": "af9bce29d87a44ebbe826540d31c8c834c27cd85363ac75a6ba8f7d98226aaea"
+      }
+    },
+    {
+      "architecture": [
+        768,
+        128,
+        64
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.20703798532485962,
+            "mean_cosine_distortion": 0.1302291452884674,
+            "raw_coordinate_mse": 0.0003170558193232864,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.03818631172180176,
+            "mean_cosine_distortion": 0.02022821456193924,
+            "raw_coordinate_mse": 5.256189979263581e-05,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.18833351135253906,
+            "mean_cosine_distortion": 0.09176085889339447,
+            "raw_coordinate_mse": 0.00023242771567311138,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.002180814743041992,
+            "mean_cosine_distortion": 0.0011986158788204193,
+            "raw_coordinate_mse": 3.13067880597373e-06,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 1.862645149230957e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.2124342918395996,
+            "mean_cosine_distortion": 0.1297435462474823,
+            "raw_coordinate_mse": 0.00031595522887073457,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.000834345817565918,
+            "mean_cosine_distortion": 0.000590544193983078,
+            "raw_coordinate_mse": 1.556462848384399e-06,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.16794472932815552,
+            "mean_cosine_distortion": 0.07241716235876083,
+            "raw_coordinate_mse": 0.0001836250739870593,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 5.029141902923584e-08,
+            "raw_coordinate_mse": 3.593893826657604e-16,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 3.5762786865234375e-07,
+            "mean_cosine_distortion": 4.6566128730773926e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 8257622,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/endpoints.json",
+        "sha256": "7d94d54ffa47770e2f0a5fda7898d3e7210ed9ccee2431e2f7841db7783d8db0"
+      },
+      "final_train_mse": 1.556462848384399e-06,
+      "initial_train_mse": 0.00031995505560189486,
+      "lane_id": "native768",
+      "numeric_report_binding": {
+        "bytes": 8901,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/numeric-report.json",
+        "sha256": "2ef120533f20475c41826dda643bcca860f0646806b96694b0492913efbb964c"
+      },
+      "pca_control": {
+        "basis_sha256": "12c78229b90767a3037dc799cc7420594d1927fb4d680dbe719e5f5f0a3d6686",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 31,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 31,
+        "threshold": 0.008184499107301235
+      },
+      "seed": 1729,
+      "selected_checkpoint_binding": {
+        "bytes": 31102,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1729/worker/step200/checkpoint.json",
+        "sha256": "7496891fe4f51b2d36b2d1298efc8a59f31c9a009e1ece1786f45715accfbf20"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.0625,
+          "mean_top5_set_overlap_fraction_with_raw": 0.14375000000000002,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.65625,
+          "mean_top5_set_overlap_fraction_with_raw": 0.84375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.6875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.8562500000000001,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.25,
+          "mean_top5_set_overlap_fraction_with_raw": 0.625,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.28125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.675,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.94375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 1640782,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1729/worker/training-report.json",
+        "sha256": "563ec9a79d3473c517d40dc3a20dd891fd1549fb7363bed8a5415ae52740a9cf"
+      }
+    },
+    {
+      "architecture": [
+        768,
+        128,
+        64
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.20703798532485962,
+            "mean_cosine_distortion": 0.1302291452884674,
+            "raw_coordinate_mse": 0.0003170558193232864,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.04117083549499512,
+            "mean_cosine_distortion": 0.019688019528985023,
+            "raw_coordinate_mse": 5.100201815366745e-05,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.17801332473754883,
+            "mean_cosine_distortion": 0.09066066890954971,
+            "raw_coordinate_mse": 0.00022942142095416784,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.002180814743041992,
+            "mean_cosine_distortion": 0.0011986158788204193,
+            "raw_coordinate_mse": 3.13067880597373e-06,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 1.862645149230957e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.2124342918395996,
+            "mean_cosine_distortion": 0.1297435462474823,
+            "raw_coordinate_mse": 0.00031595522887073457,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0025205016136169434,
+            "mean_cosine_distortion": 0.0008245278149843216,
+            "raw_coordinate_mse": 2.2064641598262824e-06,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.1644795536994934,
+            "mean_cosine_distortion": 0.07039058208465576,
+            "raw_coordinate_mse": 0.0001781932805897668,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 5.029141902923584e-08,
+            "raw_coordinate_mse": 3.593893826657604e-16,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 3.5762786865234375e-07,
+            "mean_cosine_distortion": 4.6566128730773926e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 8257739,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/endpoints.json",
+        "sha256": "d1887bedba6662d1252c017c753e4bd7c793b1132aee1acb42c86330cf7fba9e"
+      },
+      "final_train_mse": 2.2064641598262824e-06,
+      "initial_train_mse": 0.0003198658232577145,
+      "lane_id": "native768",
+      "numeric_report_binding": {
+        "bytes": 8903,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/numeric-report.json",
+        "sha256": "9144e816e9846cf8961c2318a75306c773b3bb132cfb98cd7f83e1e4bdfd3483"
+      },
+      "pca_control": {
+        "basis_sha256": "12c78229b90767a3037dc799cc7420594d1927fb4d680dbe719e5f5f0a3d6686",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 31,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 31,
+        "threshold": 0.008184499107301235
+      },
+      "seed": 1730,
+      "selected_checkpoint_binding": {
+        "bytes": 31102,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1730/worker/step200/checkpoint.json",
+        "sha256": "3f8c25a3945898444c71630433196bbd165ec86300b6f373694a3e9d4cfe7774"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.0625,
+          "mean_top5_set_overlap_fraction_with_raw": 0.14375000000000002,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.59375,
+          "mean_top5_set_overlap_fraction_with_raw": 0.8625,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.5625,
+          "mean_top5_set_overlap_fraction_with_raw": 0.8562500000000001,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.25,
+          "mean_top5_set_overlap_fraction_with_raw": 0.65625,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.25,
+          "mean_top5_set_overlap_fraction_with_raw": 0.6875,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.94375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 1640591,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1730/worker/training-report.json",
+        "sha256": "bb32e1f4dd3c6783970b7795afccace5da0bc77152c2ef1574de14f0d5195829"
+      }
+    },
+    {
+      "architecture": [
+        768,
+        128,
+        64
+      ],
+      "cohorts": {
+        "development": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.20703798532485962,
+            "mean_cosine_distortion": 0.1302291452884674,
+            "raw_coordinate_mse": 0.0003170558193232864,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.042904436588287354,
+            "mean_cosine_distortion": 0.02173985168337822,
+            "raw_coordinate_mse": 5.627669088426046e-05,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.1838592290878296,
+            "mean_cosine_distortion": 0.09233073145151138,
+            "raw_coordinate_mse": 0.00023416266776621342,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.002180814743041992,
+            "mean_cosine_distortion": 0.0011986158788204193,
+            "raw_coordinate_mse": 3.13067880597373e-06,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 1.862645149230957e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        },
+        "train": {
+          "mean_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.2124342918395996,
+            "mean_cosine_distortion": 0.1297435462474823,
+            "raw_coordinate_mse": 0.00031595522887073457,
+            "row_count": 32
+          },
+          "new_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.0009587407112121582,
+            "mean_cosine_distortion": 0.0005736425518989563,
+            "raw_coordinate_mse": 1.507770662101393e-06,
+            "row_count": 32
+          },
+          "old_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 0.17171144485473633,
+            "mean_cosine_distortion": 0.07322803139686584,
+            "raw_coordinate_mse": 0.0001861560740508139,
+            "row_count": 32
+          },
+          "pca_reconstructed": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 2.384185791015625e-07,
+            "mean_cosine_distortion": 5.029141902923584e-08,
+            "raw_coordinate_mse": 3.593893826657604e-16,
+            "row_count": 32
+          },
+          "raw_identity": {
+            "cosine_defined_rows": 32,
+            "cosine_undefined_rows": 0,
+            "maximum_cosine_distortion": 3.5762786865234375e-07,
+            "mean_cosine_distortion": 4.6566128730773926e-08,
+            "raw_coordinate_mse": 0.0,
+            "row_count": 32
+          }
+        }
+      },
+      "endpoint_binding": {
+        "bytes": 8257900,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/endpoints.json",
+        "sha256": "2f172dcd9a34ceb8284b543517eb141ffd1a949e1c20266ecf5a800474cb0c2b"
+      },
+      "final_train_mse": 1.507770662101393e-06,
+      "initial_train_mse": 0.00032029373687691987,
+      "lane_id": "native768",
+      "numeric_report_binding": {
+        "bytes": 8896,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/numeric-report.json",
+        "sha256": "89e3689bb5fbe825f0598af5b14a4ee6c782ed1f3846503cb18cd2e2c98c0e8d"
+      },
+      "pca_control": {
+        "basis_sha256": "12c78229b90767a3037dc799cc7420594d1927fb4d680dbe719e5f5f0a3d6686",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 31,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 31,
+        "threshold": 0.008184499107301235
+      },
+      "seed": 1731,
+      "selected_checkpoint_binding": {
+        "bytes": 31102,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1731/worker/step200/checkpoint.json",
+        "sha256": "bc8e3716fe5a90fa4ed41ffc305db77958ea47baf0416473448a6888566c43b6"
+      },
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.0625,
+          "mean_top5_set_overlap_fraction_with_raw": 0.14375000000000002,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.8125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.84375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "new_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.6875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.8625,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.21875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.63125,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "old_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.3125,
+          "mean_top5_set_overlap_fraction_with_raw": 0.66875,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_latent": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 0.875,
+          "mean_top5_set_overlap_fraction_with_raw": 0.94375,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "pca_reconstructed": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        },
+        "raw_source": {
+          "development_queries": 32,
+          "fixed_train_candidates": 32,
+          "fully_defined_queries": 32,
+          "mean_top1_agreement_with_raw": 1.0,
+          "mean_top5_set_overlap_fraction_with_raw": 1.0,
+          "semantic_relevance_measured": false,
+          "source_neighborhood_measure_only": true,
+          "tie_rule": "descending_cosine_then_lexicographic_id",
+          "undefined_queries": 0
+        }
+      },
+      "training_report_binding": {
+        "bytes": 1641028,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1731/worker/training-report.json",
+        "sha256": "643fb23b293281a53582bdc2a70c0d85fc44ff1a9c6d937f9ec35ea7b081b77d"
+      }
+    }
+  ],
+  "best_development_seed_selected": false,
+  "content_sha256": "6a972173ce42c3d560fd43919da27b8a172646497aab0c23523a2dc71f341935",
+  "development_groups": 8,
+  "development_rows": 32,
+  "development_vector_rows_read_during_fit": 0,
+  "encoding_report_binding": {
+    "bytes": 18904,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/encoding-report.json",
+    "sha256": "3732a01db278868ebeaa2383e3dd36c6eb3f15285e6fb6fb09422d1cd08a39d8"
+  },
+  "evaluation_model_restores": 18,
+  "evaluation_optimizer_updates": 0,
+  "evaluation_report_binding": {
+    "bytes": 8080,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/evaluation-report.json",
+    "sha256": "fcd46385ee14720b2ce702e07609540bd53cdd1da9f45860546c1e6997e00dec"
+  },
+  "helper_binding": {
+    "bytes": 9823,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/summarize_expanded_run.py",
+    "sha256": "38d2159c9e122c248e3d17c41bbab50bac4f720dc4a0d21d3276d2c4ac3d3065"
+  },
+  "independent_semantic_accuracy_measured": false,
+  "lanes": {
+    "legacy8": {
+      "all_new_seeds_better_than_old_same_seed_mse": true,
+      "all_new_seeds_worse_than_train_pca_mse": true,
+      "development_mse": {
+        "mean_reconstructed": {
+          "maximum": 0.009657063521444798,
+          "mean": 0.009657063521444798,
+          "minimum": 0.009657063521444798,
+          "seed_values": [
+            0.009657063521444798,
+            0.009657063521444798,
+            0.009657063521444798
+          ]
+        },
+        "new_reconstructed": {
+          "maximum": 0.001036354573443532,
+          "mean": 0.0009421546516629556,
+          "minimum": 0.0008156331605277956,
+          "seed_values": [
+            0.001036354573443532,
+            0.0008156331605277956,
+            0.0009744762210175395
+          ]
+        },
+        "old_reconstructed": {
+          "maximum": 0.0054907770827412605,
+          "mean": 0.005340808381636937,
+          "minimum": 0.005119373090565205,
+          "seed_values": [
+            0.005119373090565205,
+            0.005412274971604347,
+            0.0054907770827412605
+          ]
+        },
+        "pca_reconstructed": {
+          "maximum": 0.00030299846548587084,
+          "mean": 0.00030299846548587084,
+          "minimum": 0.00030299846548587084,
+          "seed_values": [
+            0.00030299846548587084,
+            0.00030299846548587084,
+            0.00030299846548587084
+          ]
+        },
+        "raw_identity": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "minimum": 0.0,
+          "seed_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "new_mean_mse_reduction_fraction_against_old_models": 0.8235932494971503,
+      "pca_effective_rank": 8,
+      "pca_retained_axes": 4,
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.03125,
+            "mean": 0.03125,
+            "minimum": 0.03125,
+            "seed_values": [
+              0.03125,
+              0.03125,
+              0.03125
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.16875,
+            "mean": 0.16875000000000004,
+            "minimum": 0.16875,
+            "seed_values": [
+              0.16875,
+              0.16875,
+              0.16875
+            ]
+          }
+        },
+        "new_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.5625,
+            "mean": 0.5104166666666666,
+            "minimum": 0.4375,
+            "seed_values": [
+              0.4375,
+              0.53125,
+              0.5625
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.86875,
+            "mean": 0.8520833333333333,
+            "minimum": 0.8375,
+            "seed_values": [
+              0.85,
+              0.86875,
+              0.8375
+            ]
+          }
+        },
+        "new_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.5625,
+            "mean": 0.4895833333333333,
+            "minimum": 0.375,
+            "seed_values": [
+              0.375,
+              0.5625,
+              0.53125
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.875,
+            "mean": 0.85,
+            "minimum": 0.83125,
+            "seed_values": [
+              0.83125,
+              0.875,
+              0.84375
+            ]
+          }
+        },
+        "old_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.34375,
+            "mean": 0.22916666666666666,
+            "minimum": 0.09375,
+            "seed_values": [
+              0.34375,
+              0.25,
+              0.09375
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.725,
+            "mean": 0.69375,
+            "minimum": 0.6625,
+            "seed_values": [
+              0.725,
+              0.6625,
+              0.69375
+            ]
+          }
+        },
+        "old_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.28125,
+            "mean": 0.22916666666666666,
+            "minimum": 0.1875,
+            "seed_values": [
+              0.28125,
+              0.21875,
+              0.1875
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.75625,
+            "mean": 0.7104166666666667,
+            "minimum": 0.65,
+            "seed_values": [
+              0.75625,
+              0.725,
+              0.65
+            ]
+          }
+        },
+        "pca_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.71875,
+            "mean": 0.71875,
+            "minimum": 0.71875,
+            "seed_values": [
+              0.71875,
+              0.71875,
+              0.71875
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.83125,
+            "mean": 0.8312500000000002,
+            "minimum": 0.83125,
+            "seed_values": [
+              0.83125,
+              0.83125,
+              0.83125
+            ]
+          }
+        },
+        "pca_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.84375,
+            "mean": 0.84375,
+            "minimum": 0.84375,
+            "seed_values": [
+              0.84375,
+              0.84375,
+              0.84375
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.9375,
+            "mean": 0.9375,
+            "minimum": 0.9375,
+            "seed_values": [
+              0.9375,
+              0.9375,
+              0.9375
+            ]
+          }
+        },
+        "raw_source": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        }
+      }
+    },
+    "native384": {
+      "all_new_seeds_better_than_old_same_seed_mse": true,
+      "all_new_seeds_worse_than_train_pca_mse": true,
+      "development_mse": {
+        "mean_reconstructed": {
+          "maximum": 0.0002531697100494057,
+          "mean": 0.0002531697100494057,
+          "minimum": 0.0002531697100494057,
+          "seed_values": [
+            0.0002531697100494057,
+            0.0002531697100494057,
+            0.0002531697100494057
+          ]
+        },
+        "new_reconstructed": {
+          "maximum": 3.626505713327788e-05,
+          "mean": 3.311533570619455e-05,
+          "minimum": 2.8465537980082445e-05,
+          "seed_values": [
+            3.4615412005223334e-05,
+            3.626505713327788e-05,
+            2.8465537980082445e-05
+          ]
+        },
+        "old_reconstructed": {
+          "maximum": 0.00017620460130274296,
+          "mean": 0.00017373106675222516,
+          "minimum": 0.0001719500432955101,
+          "seed_values": [
+            0.0001730385556584224,
+            0.0001719500432955101,
+            0.00017620460130274296
+          ]
+        },
+        "pca_reconstructed": {
+          "maximum": 4.073324362252606e-06,
+          "mean": 4.073324362252606e-06,
+          "minimum": 4.073324362252606e-06,
+          "seed_values": [
+            4.073324362252606e-06,
+            4.073324362252606e-06,
+            4.073324362252606e-06
+          ]
+        },
+        "raw_identity": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "minimum": 0.0,
+          "seed_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "new_mean_mse_reduction_fraction_against_old_models": 0.8093873690799149,
+      "pca_effective_rank": 31,
+      "pca_retained_axes": 31,
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.03125,
+            "mean": 0.03125,
+            "minimum": 0.03125,
+            "seed_values": [
+              0.03125,
+              0.03125,
+              0.03125
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.15,
+            "mean": 0.15,
+            "minimum": 0.15,
+            "seed_values": [
+              0.15,
+              0.15,
+              0.15
+            ]
+          }
+        },
+        "new_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.75,
+            "mean": 0.7083333333333334,
+            "minimum": 0.65625,
+            "seed_values": [
+              0.75,
+              0.71875,
+              0.65625
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.90625,
+            "mean": 0.8958333333333334,
+            "minimum": 0.88125,
+            "seed_values": [
+              0.90625,
+              0.88125,
+              0.9
+            ]
+          }
+        },
+        "new_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.84375,
+            "mean": 0.7916666666666666,
+            "minimum": 0.75,
+            "seed_values": [
+              0.78125,
+              0.84375,
+              0.75
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.9125,
+            "mean": 0.9041666666666667,
+            "minimum": 0.9,
+            "seed_values": [
+              0.9,
+              0.9125,
+              0.9
+            ]
+          }
+        },
+        "old_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.375,
+            "mean": 0.28125,
+            "minimum": 0.21875,
+            "seed_values": [
+              0.21875,
+              0.25,
+              0.375
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.6687500000000001,
+            "mean": 0.6479166666666667,
+            "minimum": 0.63125,
+            "seed_values": [
+              0.64375,
+              0.6687500000000001,
+              0.63125
+            ]
+          }
+        },
+        "old_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.34375,
+            "mean": 0.28125,
+            "minimum": 0.21875,
+            "seed_values": [
+              0.28125,
+              0.21875,
+              0.34375
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.68125,
+            "mean": 0.6708333333333334,
+            "minimum": 0.65625,
+            "seed_values": [
+              0.68125,
+              0.675,
+              0.65625
+            ]
+          }
+        },
+        "pca_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.875,
+            "mean": 0.875,
+            "minimum": 0.875,
+            "seed_values": [
+              0.875,
+              0.875,
+              0.875
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.95,
+            "mean": 0.9499999999999998,
+            "minimum": 0.95,
+            "seed_values": [
+              0.95,
+              0.95,
+              0.95
+            ]
+          }
+        },
+        "pca_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "raw_source": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        }
+      }
+    },
+    "native768": {
+      "all_new_seeds_better_than_old_same_seed_mse": true,
+      "all_new_seeds_worse_than_train_pca_mse": true,
+      "development_mse": {
+        "mean_reconstructed": {
+          "maximum": 0.0003170558193232864,
+          "mean": 0.0003170558193232864,
+          "minimum": 0.0003170558193232864,
+          "seed_values": [
+            0.0003170558193232864,
+            0.0003170558193232864,
+            0.0003170558193232864
+          ]
+        },
+        "new_reconstructed": {
+          "maximum": 5.627669088426046e-05,
+          "mean": 5.328020294352124e-05,
+          "minimum": 5.100201815366745e-05,
+          "seed_values": [
+            5.256189979263581e-05,
+            5.100201815366745e-05,
+            5.627669088426046e-05
+          ]
+        },
+        "old_reconstructed": {
+          "maximum": 0.00023416266776621342,
+          "mean": 0.00023200393479783088,
+          "minimum": 0.00022942142095416784,
+          "seed_values": [
+            0.00023242771567311138,
+            0.00022942142095416784,
+            0.00023416266776621342
+          ]
+        },
+        "pca_reconstructed": {
+          "maximum": 3.13067880597373e-06,
+          "mean": 3.13067880597373e-06,
+          "minimum": 3.13067880597373e-06,
+          "seed_values": [
+            3.13067880597373e-06,
+            3.13067880597373e-06,
+            3.13067880597373e-06
+          ]
+        },
+        "raw_identity": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "minimum": 0.0,
+          "seed_values": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "new_mean_mse_reduction_fraction_against_old_models": 0.7703478478071942,
+      "pca_effective_rank": 31,
+      "pca_retained_axes": 31,
+      "source_neighborhood_agreement": {
+        "mean_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.0625,
+            "mean": 0.0625,
+            "minimum": 0.0625,
+            "seed_values": [
+              0.0625,
+              0.0625,
+              0.0625
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.14375000000000002,
+            "mean": 0.14375000000000002,
+            "minimum": 0.14375000000000002,
+            "seed_values": [
+              0.14375000000000002,
+              0.14375000000000002,
+              0.14375000000000002
+            ]
+          }
+        },
+        "new_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.8125,
+            "mean": 0.6875,
+            "minimum": 0.59375,
+            "seed_values": [
+              0.65625,
+              0.59375,
+              0.8125
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.8625,
+            "mean": 0.85,
+            "minimum": 0.84375,
+            "seed_values": [
+              0.84375,
+              0.8625,
+              0.84375
+            ]
+          }
+        },
+        "new_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.6875,
+            "mean": 0.6458333333333334,
+            "minimum": 0.5625,
+            "seed_values": [
+              0.6875,
+              0.5625,
+              0.6875
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.8625,
+            "mean": 0.8583333333333334,
+            "minimum": 0.8562500000000001,
+            "seed_values": [
+              0.8562500000000001,
+              0.8562500000000001,
+              0.8625
+            ]
+          }
+        },
+        "old_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.25,
+            "mean": 0.23958333333333334,
+            "minimum": 0.21875,
+            "seed_values": [
+              0.25,
+              0.25,
+              0.21875
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.65625,
+            "mean": 0.6375000000000001,
+            "minimum": 0.625,
+            "seed_values": [
+              0.625,
+              0.65625,
+              0.63125
+            ]
+          }
+        },
+        "old_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.3125,
+            "mean": 0.28125,
+            "minimum": 0.25,
+            "seed_values": [
+              0.28125,
+              0.25,
+              0.3125
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.6875,
+            "mean": 0.6770833333333334,
+            "minimum": 0.66875,
+            "seed_values": [
+              0.675,
+              0.6875,
+              0.66875
+            ]
+          }
+        },
+        "pca_latent": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 0.875,
+            "mean": 0.875,
+            "minimum": 0.875,
+            "seed_values": [
+              0.875,
+              0.875,
+              0.875
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 0.94375,
+            "mean": 0.94375,
+            "minimum": 0.94375,
+            "seed_values": [
+              0.94375,
+              0.94375,
+              0.94375
+            ]
+          }
+        },
+        "pca_reconstructed": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "raw_source": {
+          "mean_top1_agreement_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "mean_top5_set_overlap_fraction_with_raw": {
+            "maximum": 1.0,
+            "mean": 1.0,
+            "minimum": 1.0,
+            "seed_values": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Sources are exposed authored legal compositions, not natural-source or pristine confirmation evidence.",
+    "Exact source/group separation does not authenticate independent derivative provenance.",
+    "The new and old models use different TRAIN cohorts; this comparison measures adaptation, not an isolated sample-size effect.",
+    "Dense TRAIN rank31 is below the retained neural bottlenecks32/64; PCA retains31 independent axes.",
+    "Raw-neighborhood agreement measures vector preservation rather than semantic retrieval relevance.",
+    "Native numerical scales differ and cannot rank semantic quality across lanes."
+  ],
+  "masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "native_vectors_produced": 192,
+  "new_selected_models": 9,
+  "private_comparison_updates": 27,
+  "proof_authority": false,
+  "qualified": false,
+  "schema": "authored-source-expanded-reconstruction-summary/v1",
+  "scope": "exposed_authored_composition_source_reconstruction_only",
+  "selected_optimizer_updates": 1800,
+  "semantic_relevance_measured": false,
+  "source_fidelity_established": false,
+  "source_groups": 16,
+  "source_only_development_metadata_rows_read_during_fit": 32,
+  "source_rows": 64,
+  "source_vector_tables_included": false,
+  "train_groups": 8,
+  "train_rows": 32,
+  "training_batch_binding": {
+    "bytes": 6538,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/batch-report.json",
+    "sha256": "4d5ffcfaeebfd089e535d65c80ab23849abe72cde98f09c234224fa902af8890"
+  }
+}

@@ -1,0 +1,42 @@
+--- driver05.py
++++ driver06.py
+@@ -107,10 +107,10 @@
+             CONSUMER / 'source-manifest-02.json', PRIOR / 'source-manifest-02.json',
+             GROUND / 'source-manifest-04.json')],
+         'files': files, 'scope': 'Stable individually pinned selected sources; no atomic whole-live or all-loader census.'})
+-    write(ROOT / 'preparation/producer-pins-05.json', {'driver': pin(Path(__file__).resolve()),
++    write(ROOT / 'preparation/producer-pins-06.json', {'driver': pin(Path(__file__).resolve()),
+         'source_manifest': pin(ROOT / 'source-manifest-04.json'), 'request': pin(ROOT / 'preparation/request.json')})
+     print(json.dumps({'source_manifest': pin(ROOT / 'source-manifest-04.json'),
+-        'producer_pins': pin(ROOT / 'preparation/producer-pins-05.json')}))
++        'producer_pins': pin(ROOT / 'preparation/producer-pins-06.json')}))
+ 
+ 
+ ROOTS = (ROOT / 'source-04', GROUND / 'source-04', PRIOR / 'source-02', CONSUMER / 'source-02', HEAD / 'source',
+@@ -190,7 +190,7 @@
+         'native_lean_checks_invoked': [], 'native_metadata_hydration_attempts': 0,
+         'PlanCreate_calls': 0}
+     try:
+-        producers = json.loads((ROOT / 'preparation/producer-pins-05.json').read_bytes())
++        producers = json.loads((ROOT / 'preparation/producer-pins-06.json').read_bytes())
+         assert all(pin(row['path']) == row for row in producers.values())
+         request = json.loads(read_pinned(producers['request']))
+         for row in request['selected_prior']: assert pin(row['path']) == row
+@@ -265,7 +265,7 @@
+             selector_negative = selector['lean_source'] + '\nnamespace BatchingSelector\n' + (
+                 'theorem false_unconditional_lower_bound : sourceSemantics [1] 2 = some 1 ∧ (2 : Int) ≤ 1 := by decide\nend BatchingSelector\n')
+             step_negative = step['lean_source'] + '\nnamespace RankerStepPrerequisites\n' + (
+-                'theorem false_reversed_step_bound : 1 < eta * conditionalSmoothness := by decide\nend RankerStepPrerequisites\n')
++                'theorem false_reversed_step_bound : 1 < eta * conditionalSmoothness := by decide +kernel\nend RankerStepPrerequisites\n')
+             for key, filename, source, success in (
+                 ('selector', 'SelectorSemantics.lean', selector['lean_source'], True),
+                 ('false_selector_lower_bound', 'FalseSelectorLowerBound.lean', selector_negative, False),
+@@ -343,7 +343,7 @@
+     started = time.monotonic(); child = None
+     argv = [sys.executable, '-B', str(Path(__file__).resolve()), 'owned', mode]
+     record = {'schema': 'terminal-selector-step-outer-control@1', 'argv': argv,
+-        'driver': pin(Path(__file__).resolve()), 'producer_pin_specification': pin(ROOT / 'preparation/producer-pins-05.json'),
++        'driver': pin(Path(__file__).resolve()), 'producer_pin_specification': pin(ROOT / 'preparation/producer-pins-06.json'),
+         'started_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+         'returncode': None, 'primary_error': None, 'cleanup_errors': []}
+     write(ROOT / 'evidence' / (mode + '-invocation.json'), record)

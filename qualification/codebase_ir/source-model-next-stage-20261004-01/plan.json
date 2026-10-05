@@ -1,0 +1,103 @@
+{
+  "schema": "terminal-codebase-ir-source-model-task-convergence-plan@1",
+  "status": "implementation_prepared_checks_pending",
+  "prepared_sources": [
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+      "bytes": 8861,
+      "sha256": "da30b22c2a5edf6964b14eb6a9a0d8086ed7f7ace3050bcd60b9a2bc61d3e887"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+      "bytes": 6749,
+      "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_terminal_codebase_selector_semantics.py",
+      "bytes": 5752,
+      "sha256": "b98c3561a3d9d4f9ef9440589916b62cf1e4dd10cbe4f2951b8abe7bb439459a"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_terminal_codebase_ranker_step_certificate.py",
+      "bytes": 4027,
+      "sha256": "3a9cf3640549abeb736ffec0dff307ce5b193ec98b23b97ce3a9319693918961"
+    }
+  ],
+  "previous_sealed_evidence_unchanged": true,
+  "tracks": [
+    {
+      "id": "selector-source-model",
+      "state": "prepared",
+      "entry": "exact current full4380-byte source and grounding/nativecorpus replay",
+      "claim": "Closed immutable exact-int list helper lowered to first-eligible-or-last semantics",
+      "exits": [
+        "Native Lean sourceLoop-to-IR theorem, membership, first eligible, fallback and empty error",
+        "Bounded captured-helper differential controls on1705 cases including unsorted, duplicate, empty and uncovered inputs",
+        "Deliberate comparator/source/receipt mutation refusals and false coverage rejection"
+      ],
+      "limits": [
+        "CPython implementation semantics unproved",
+        "Caller, closure construction and imported bindings unproved",
+        "Generic ProgramIR remainsunsupported"
+      ]
+    },
+    {
+      "id": "full-original-task",
+      "state": "open",
+      "requirements": [
+        "Account every original instruction unit and both unknown residuals",
+        "Read and pin public cost_model.align/HEADS/HIDDEN and interfaces with declared provenance",
+        "Model request_id uniqueness/domain; prove exact once ledger and reject duplicate IDs before dictionary overwrite",
+        "Lower representative construction including float division/int index semantics; prove chosen representatives cover each reachable input",
+        "Use a global representative set/shared cap across both buckets rather than independently local caps",
+        "Prove record/batch identity and shape constraints acrossbothbuckets",
+        "Snapshot declared input files before/after execution and verify immutability",
+        "Run public task behavioral/performance checks under fixed resource envelope; keep heldoutoracle/canary separate from adaptation",
+        "Connect checked contracts and proof dependencies to supervisor plans with explicit abstention for unmet obligations"
+      ]
+    },
+    {
+      "id": "scratch-ranker-convergence",
+      "state": "exact-prerequisites-prepared",
+      "objective": "mean log(1+exp(-w dot d)) plus mu/2 ||w||^2",
+      "prepared_claim": "Exact rational embeddings of nativebinary64mu, differences and step; positive safe step and0<=q<1",
+      "open": [
+        "Mathematical logistic Hessian smoothness and strong convexity proofs",
+        "Contraction/descent theorem applicable to exact objective",
+        "Bounded binary64/libm/update errors and perturbation floor",
+        "Authenticated intermediate weight states for finite trajectory certificates",
+        "Heldout semantic relevance and task satisfaction evaluated separately"
+      ],
+      "new_fits": 0
+    },
+    {
+      "id": "autoencoder-training",
+      "state": "open",
+      "open": [
+        "Source/function split with shared-source leakage declarations",
+        "Typed decoder contracts and source-model proof witnesses as training targets",
+        "Compiler-backed accepted/rejected/residual family projections",
+        "Finite bounded update/stationarity claims matched to tanh/Adam/clipping optimizer",
+        "Calibration and heldout source reconstruction/semantic contract checks",
+        "No global convergence or whole-codebase equivalence claim from finite loss decreases"
+      ]
+    },
+    {
+      "id": "proof-cache-and-metadata",
+      "state": "open",
+      "requirements": [
+        "Append source model/obligation/checker/step-certificate metadata families; retain existing4209nativepayloadrows exactly",
+        "Keep candidate declarations, conditionalmodelproofs and verifiedsourcecontracts as distinct scopes",
+        "Bind proof cache keys to source/AST/IR/dependencies/logicprofile/checker/toolchain/domain",
+        "Invalidate changed source/imports/contract assumptions and preserve stale evidence as history",
+        "Do not populate native ProgramContracts from unsupported generic AST fragments"
+      ]
+    }
+  ],
+  "all32_governing_RPI_exits": "OPEN",
+  "proof_authority": false,
+  "execution_authority": false,
+  "completion_authority": false,
+  "official_benchmark_score": null,
+  "model_global_convergence_proved": false
+}

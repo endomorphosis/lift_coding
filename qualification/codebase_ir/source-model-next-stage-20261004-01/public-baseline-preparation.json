@@ -1,0 +1,45 @@
+{
+  "schema": "terminal-source-task-preparation@1",
+  "status": "two_actual_admission_refusals_no_baseline_execution",
+  "public_task_repository_HEAD": "2fd12b88aafdd04a52c298e3940bcb189f9766d6",
+  "public_source_bindings": [
+    {
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-source-20261004-02/baseline_packer.py",
+      "bytes": 4380,
+      "sha256": "547d230d5e6d93197803480cb81cab0ec6ac63fcfa0a24b246f549523f216c4e"
+    },
+    {
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-source-20261004-02/cost_model.py",
+      "bytes": 8096,
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    }
+  ],
+  "source_capture_changes_original_files": false,
+  "authored_fixture": "Two buckets with8unique aligned prompt lengths each, disjoint acrossbuckets;16unique request IDs/gen_len1",
+  "actual_benchmark_request_inputs_used": false,
+  "training_calls": 0,
+  "baseline_processes_started": 0,
+  "expected_control_result": "Unmodified noarg build_plan produces16globallydistinctshapetuples despite localcap8; inputbytesunchanged",
+  "expectation_is_observation": false,
+  "refusals": [
+    {
+      "receipt": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-source-20261004-01/closed.json",
+      "sha256": "62086e633c3bf12e57e8e37c2ced28a1ecbb3d06c9a8aad807f30ffb981190b8",
+      "elapsed_seconds": 30.013034775009146,
+      "reason": "proof_io_stall",
+      "cleanup_errors": [],
+      "final_active_leases": 0,
+      "final_waiters": 0
+    },
+    {
+      "receipt": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-source-20261004-02/closed.json",
+      "sha256": "918261e3b0d6eedb652bed53c15ecfb061123a49218cf8df4a620409dc81f251",
+      "elapsed_seconds": 30.012438092991943,
+      "reason": "proof_io_stall",
+      "cleanup_errors": [],
+      "final_active_leases": 0,
+      "final_waiters": 0
+    }
+  ],
+  "next": "Retry after archiveIOsettles with current-published scheduler policy unchanged; retain priorerrors and allactual source bindings."
+}

@@ -1,0 +1,113 @@
+{
+  "model_calls": 0,
+  "native_SQL_calls": 0,
+  "new_source_tests_only": 6,
+  "paths": [
+    {
+      "AST_and_compile_only": true,
+      "bytes": 8912,
+      "captured_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate-source-model-02/captured-source/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+      "sha256": "243f72c127e4086c44ea788c974b4b9565581a685f5b185505e1eb3dba420b70",
+      "stat": {
+        "ctime_ns": 1791146453113477460,
+        "dev": 66306,
+        "ino": 8783853,
+        "mtime_ns": 1791146453113477460
+      }
+    },
+    {
+      "AST_and_compile_only": true,
+      "bytes": 5752,
+      "captured_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate-source-model-02/captured-source/test/api/test_terminal_codebase_selector_semantics.py",
+      "path": "test/api/test_terminal_codebase_selector_semantics.py",
+      "sha256": "b98c3561a3d9d4f9ef9440589916b62cf1e4dd10cbe4f2951b8abe7bb439459a",
+      "stat": {
+        "ctime_ns": 1791144186138286246,
+        "dev": 66306,
+        "ino": 21897327,
+        "mtime_ns": 1791144186138286246
+      }
+    },
+    {
+      "AST_and_compile_only": true,
+      "bytes": 6749,
+      "captured_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate-source-model-02/captured-source/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+      "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4",
+      "stat": {
+        "ctime_ns": 1791144397424781685,
+        "dev": 66306,
+        "ino": 8794607,
+        "mtime_ns": 1791144397424781685
+      }
+    },
+    {
+      "AST_and_compile_only": true,
+      "bytes": 4027,
+      "captured_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate-source-model-02/captured-source/test/api/test_terminal_codebase_ranker_step_certificate.py",
+      "path": "test/api/test_terminal_codebase_ranker_step_certificate.py",
+      "sha256": "3a9cf3640549abeb736ffec0dff307ce5b193ec98b23b97ce3a9319693918961",
+      "stat": {
+        "ctime_ns": 1791144556448712011,
+        "dev": 66306,
+        "ino": 21897349,
+        "mtime_ns": 1791144556448712011
+      }
+    },
+    {
+      "AST_and_compile_only": true,
+      "bytes": 5501,
+      "captured_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate-source-model-02/captured-source/benchmarks/agent_supervisor/container_coding/terminal_codebase_batching_contract_reference.py",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_batching_contract_reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441",
+      "stat": {
+        "ctime_ns": 1791146152488427219,
+        "dev": 66306,
+        "ino": 8794702,
+        "mtime_ns": 1791146152488427219
+      }
+    },
+    {
+      "AST_and_compile_only": true,
+      "bytes": 2924,
+      "captured_path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/accelerate-source-model-02/captured-source/test/api/test_terminal_codebase_batching_contract_reference.py",
+      "path": "test/api/test_terminal_codebase_batching_contract_reference.py",
+      "sha256": "bd1bbd50dc20e0a6b511063794e2e8c9b5634794c9b3d17e270ac01ebc163963",
+      "stat": {
+        "ctime_ns": 1791146118371859443,
+        "dev": 66306,
+        "ino": 21897362,
+        "mtime_ns": 1791146118371859443
+      }
+    }
+  ],
+  "protected4": [
+    {
+      "bytes": 33934,
+      "path": "ipfs_accelerate_py/agent_supervisor/planning/finite_proof_query_join.py",
+      "sha256": "d6e4a6187036f5942f4637dd24bec65c1a90ed32c24e3b39e3759e653be03b79"
+    },
+    {
+      "bytes": 18129,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_admission.py",
+      "sha256": "2e5b0add5f19c1c31ad76dae67354d5bfadbfe59303a06590db14507c3abe7e4"
+    },
+    {
+      "bytes": 22624,
+      "path": "test/api/test_finite_proof_query_join.py",
+      "sha256": "d34cd489d69446bb4c88e6f8881fff44689cbf6c6944c1976fb411f77a06f890"
+    },
+    {
+      "bytes": 27488,
+      "path": "test/api/test_finite_proof_query_admission.py",
+      "sha256": "6867188f535b6e24cf2a217b5d601a9d92446bff3ba382800e8664c6a0650de0"
+    }
+  ],
+  "protected4_live_match_current_remote": true,
+  "prover_calls": 0,
+  "remote_parent": "69d3b0d75b375bf15245277e9fe8e62acdee0fdb",
+  "schema": "terminal-ir-source-model-publication-source-snapshot@1",
+  "source_scope_atomic": false,
+  "tests_rerun": false
+}

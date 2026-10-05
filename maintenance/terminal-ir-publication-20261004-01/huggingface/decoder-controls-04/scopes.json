@@ -1,0 +1,22 @@
+{
+  "destination": {
+    "repo_id": "SYNTHETIC_CONTROL_NO_REMOTE",
+    "repo_type": "dataset"
+  },
+  "recursive_roots": [
+    {
+      "namespace": "synthetic_controls",
+      "root": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/sources"
+    }
+  ],
+  "schema": "terminal-ir-publication-scopes@1",
+  "selected_sealed_and_external_pins_complete": true,
+  "selection_manifests": [],
+  "strict_pinned_inputs": [
+    {
+      "bytes": 9,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/sources/clean.txt",
+      "sha256": "abcdb830374fee390e36c2c4308773c28a33afad30246782163d27cecc4f5216"
+    }
+  ]
+}

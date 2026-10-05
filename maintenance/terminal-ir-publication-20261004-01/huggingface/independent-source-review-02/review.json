@@ -1,0 +1,209 @@
+{
+  "PEM_profile": {
+    "exotic_larger_encodings_qualified": false,
+    "maximum_match_bytes": 33418,
+    "minimum_match_bytes": 55,
+    "overlap_bytes": 65536
+  },
+  "actual_large_derivative_verified": false,
+  "archive_SQL_connections": 0,
+  "archive_census_calls": 0,
+  "authority": {
+    "completion": false,
+    "execution": false,
+    "model_convergence": false,
+    "planning": false,
+    "proof": false
+  },
+  "closed_builder_manifest_facts": {
+    "builder_inner_elapsed_seconds": 1960.7032297179976,
+    "data_shards": 46,
+    "facts_scope": "Owner manifest and closed receipt independently pinned/equal; archive bytes and all348 strict inputs not rehashed by this source review.",
+    "later_source_drift_count": 0,
+    "logical_captured_bytes": 117049382709,
+    "node_count": 2691565,
+    "status_counts": {
+      "captured_directory_metadata": 240195,
+      "captured_link_metadata": 1473,
+      "captured_special_metadata_only": 8,
+      "captured_stable_snapshot": 2449418,
+      "publication_administration_metadata_only": 5,
+      "quarantined_credential_candidate": 466
+    },
+    "strict_pinned_inputs_rechecked": 348,
+    "unique_chunks": 152723,
+    "unresolved_source_nodes": 0
+  },
+  "decoder_runs": 0,
+  "elapsed_seconds": 0.018636235006852075,
+  "limitations": [
+    "Source-level uploader review only; remote committed LFS SHA/size verification is not a full duplicate large-file download.",
+    "Synthetic decoder controls do not establish authentic public fixture provenance or classify the whole archive.",
+    "Bounded named container/credential profile only; unsupported/exotic encodings do not receive a universal cleanliness claim.",
+    "Formatting/parser CPU and total RSS are not claimed to have kernel containment.",
+    "No actual model/prover/native database jobs by this reviewer."
+  ],
+  "next_gate": "Root may run the frozen decoder under its actual heavy-work gate. Actual fixture public provenance and closed derivative byte/index verification remain required before upload.",
+  "pins": {
+    "archive-build-01/closed.json": {
+      "bytes": 119498,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/archive-build-01/closed.json",
+      "sha256": "d177ca2649583234d8101ff59e4d4b2cb9c68cc6d5ac6fc6d1de3f3e99ea2f49"
+    },
+    "archive-build-01/public/archive-manifest.json": {
+      "bytes": 119461,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/archive-build-01/public/archive-manifest.json",
+      "sha256": "ae1ccb2e390ef9d542f56d3a2895a38591618e926a425499192dc615f359c28e"
+    },
+    "build_evidence_archive_02.py": {
+      "bytes": 26475,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+      "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+    },
+    "classify_and_prepare_public_archive_07.py": {
+      "bytes": 35323,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classify_and_prepare_public_archive_07.py",
+      "sha256": "dd457cb927270f53617781de1f576d1de1fac76b86191d769f4f923fa966a1f8"
+    },
+    "decoder-controls-01/closed.json": {
+      "bytes": 227,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-01/closed.json",
+      "sha256": "760167d807f91431566586a859c712df7e030b78db6f98a567047dad832afbf4"
+    },
+    "decoder-controls-02/closed.json": {
+      "bytes": 925,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-02/closed.json",
+      "sha256": "0dbdf0d6f765d721242993b9a6c4e5420045ad4e07f6dc6e4c38efa88ab346b5"
+    },
+    "decoder-controls-03/closed.json": {
+      "bytes": 1135,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-03/closed.json",
+      "sha256": "84ba97e2ffe887352f167fbc2180b2c8cb281998251a4d0cfb0a231c66ee4142"
+    },
+    "decoder-controls-04/builder.closed.json": {
+      "bytes": 756,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/builder.closed.json",
+      "sha256": "9ab07936931ad1003ade5f3a8798477d3c4bb5392aa2ce85e7272fdebbac36d2"
+    },
+    "decoder-controls-04/closed.json": {
+      "bytes": 1208,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/closed.json",
+      "sha256": "aa60086b8d1e5fdd45a2aded13cedebe0cec21e28702d500348dfd29f0bd4a1a"
+    },
+    "decoder-controls-04/decoder.closed.json": {
+      "bytes": 1170,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/decoder.closed.json",
+      "sha256": "97415db10171b3c1374ebdeda9b57f9c31f1433f95cde81025a4781f30d932b3"
+    },
+    "decoder-controls-04/source-pins.json": {
+      "bytes": 774,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/source-pins.json",
+      "sha256": "488da0620f4064e46b2e1cefb77e25c68ec450ff5cd0c1680a5dbcd24cd82e13"
+    },
+    "independent-source-review-01/review.json": {
+      "bytes": 8093,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/independent-source-review-01/review.json",
+      "sha256": "d1c7097e2f52173bbec80f98662b00b1eccf47b81771623dfea219ae63f293d9"
+    },
+    "publish_qualified_archive_02.py": {
+      "bytes": 10215,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_qualified_archive_02.py",
+      "sha256": "3cd39d0c11034c26b976f25a9473d8ed7db692da7f0ff9c43868238b5b3cc754"
+    },
+    "run_decoder_controls_04.py": {
+      "bytes": 10596,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/run_decoder_controls_04.py",
+      "sha256": "2fcdee120818b2296fe8f3fdb150eda315573f39afeecaea53c0900d4a6d5b78"
+    }
+  },
+  "preserved_prior_controls": [
+    {
+      "elapsed_seconds": 0.3882346090103965,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-01/closed.json",
+      "pin": {
+        "bytes": 227,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-01/closed.json",
+        "sha256": "760167d807f91431566586a859c712df7e030b78db6f98a567047dad832afbf4"
+      },
+      "status": "FAIL"
+    },
+    {
+      "elapsed_seconds": 0.39593747901380993,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-02/closed.json",
+      "pin": {
+        "bytes": 925,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-02/closed.json",
+        "sha256": "0dbdf0d6f765d721242993b9a6c4e5420045ad4e07f6dc6e4c38efa88ab346b5"
+      },
+      "status": "PASS"
+    },
+    {
+      "elapsed_seconds": 0.2990571199916303,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-03/closed.json",
+      "pin": {
+        "bytes": 1135,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-03/closed.json",
+        "sha256": "84ba97e2ffe887352f167fbc2180b2c8cb281998251a4d0cfb0a231c66ee4142"
+      },
+      "status": "PASS"
+    }
+  ],
+  "producer_imports": 0,
+  "public_fixture_provenance_independently_verified": false,
+  "public_upload_qualified": false,
+  "remote_mutations": 0,
+  "schema": "terminal-ir-archive-independent-source-review@1",
+  "scope": "FINAL_SOURCE_AND_NAMED_CLOSED_SYNTHETIC_CONTROLS_ONLY",
+  "source_checks": {
+    "actual_commit_oid_durably_retained_before_verification": true,
+    "all_split_denials_monotonic_even_after_multiple_safe_contexts": true,
+    "approval_does_not_override_real_observed_hits": true,
+    "canonical_download_cache_blob_pinned_inside_fresh_output": true,
+    "declared_bounded_PEM_profile_fits_overlap": true,
+    "fixture_approval_does_not_clear_decoder_error": true,
+    "per_batch_before_after_local_pins_checked": true,
+    "physical_derivative_rewrite_preserves_original_local_shards": true,
+    "raw_whole_byte_claim_excludes_regular_metadata_only_paths": true,
+    "safe_file_chunks_exist_and_total_matches_file_bytes": true,
+    "split_order_matches_exact_external_manifest_membership": true,
+    "unsafe_group_beats_prior_safe_fixture_approval": true,
+    "upload_parent_chain_is_explicit_and_nonforce": true
+  },
+  "source_snapshot_atomic": false,
+  "started_wall_time": 1791146365.1353724,
+  "status": "PASS_SOURCE_AND_SYNTHETIC_CONTROLS_ONLY",
+  "synthetic_control": {
+    "HF_mutations": 0,
+    "checks": [
+      "real full-file raw credential exclusion",
+      "escaped JSON PEM detection",
+      "gzip/tar member detection",
+      "complete multipart group supersedes individual parse refusal",
+      "physical affected-shard rewrite",
+      "safe-file preservation",
+      "symlink text preservation",
+      "FIFO metadata only",
+      "observed token beats declared container provenance",
+      "fixture approval does not erase parse refusal",
+      "three shared-part contexts retain first denial",
+      "expected terminal part absence refuses",
+      "approved standalone fixture cannot override unsafe complete group"
+    ],
+    "classification_report": {
+      "bytes": 5887,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/derivative/public/archive-manifest.json",
+      "sha256": "694fa85bb8d8652d6f4315af8063076b7e04edff1e797bd4743b57977da99e2a"
+    },
+    "elapsed_seconds": 0.2961196289979853,
+    "model_jobs": 0,
+    "native_SQL_jobs": 0,
+    "native_qualification": false,
+    "originals_modified": false,
+    "prover_jobs": 0,
+    "scope": "SYNTHETIC_ARCHIVE_CONTROL_ONLY",
+    "status": "PASS",
+    "synthetic_credentials_are_valid": false
+  },
+  "universal_secret_free_claim": false,
+  "uploader_network_behavior_exercised_by_this_review": false
+}

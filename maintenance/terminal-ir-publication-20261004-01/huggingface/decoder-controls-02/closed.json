@@ -1,0 +1,27 @@
+{
+  "HF_mutations": 0,
+  "checks": [
+    "real full-file raw credential exclusion",
+    "escaped JSON PEM detection",
+    "gzip/tar member detection",
+    "complete multipart group supersedes individual parse refusal",
+    "physical affected-shard rewrite",
+    "safe-file preservation",
+    "symlink text preservation",
+    "FIFO metadata only"
+  ],
+  "classification_report": {
+    "bytes": 3459,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-02/derivative/public/archive-manifest.json",
+    "sha256": "8609831f71b5787ea01545e0ed2b8da681ea746fed2249314826172f3810da46"
+  },
+  "elapsed_seconds": 0.39593747901380993,
+  "model_jobs": 0,
+  "native_SQL_jobs": 0,
+  "native_qualification": false,
+  "originals_modified": false,
+  "prover_jobs": 0,
+  "scope": "SYNTHETIC_ARCHIVE_CONTROL_ONLY",
+  "status": "PASS",
+  "synthetic_credentials_are_valid": false
+}

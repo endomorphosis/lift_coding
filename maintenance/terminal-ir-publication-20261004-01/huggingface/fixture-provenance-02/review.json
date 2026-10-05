@@ -1,0 +1,133 @@
+{
+  "credential_service_calls": 0,
+  "decoder_completion_claim": false,
+  "elapsed_seconds": 0.9592762879910879,
+  "inventory": {
+    "bytes": 683986,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/candidate-inventory-01/candidate-files.json",
+    "sha256": "8bc9d37b68764febf00e40823a6b340fb23c0f1560194b7929469b39dba4002f"
+  },
+  "model_calls": 0,
+  "native_SQL_calls": 0,
+  "prior_failed_review": {
+    "bytes": 308,
+    "duration_seconds": 0.010862450988497585,
+    "failure_scope": "Narrow placeholder-order assertion omitted observed digit-cycle rotations and alternating character case; exact source/match hashes unchanged.",
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/fixture-provenance-01/review.json",
+    "sha256": "883248e0aa52d27a6a85a98d5194b100bfb2a0652a4ee9707ce1d12aac7fcd09"
+  },
+  "prover_calls": 0,
+  "public_container_provenance": [],
+  "public_fixture_files": [
+    {
+      "approved_match_sha256": [
+        "98fcd0be55157d89898648bec3a74af3dd9ad96c2f579577faa24a7540eff461"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "29cd0aa1b0beb4c7a3a95bee685f854a96e5cdac5208b2ff31bf0dd359ee99d7",
+      "provenance_ref": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/a601b87e9e6bceb42f925cb085203ea337d204a5/test/test_voice_response_dag_sink.py"
+    },
+    {
+      "approved_match_sha256": [
+        "b43c32336ff01f694cd6fafabfe5d1273ad59920a5c25b89c4324d44bc731c3d"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "5c5e22e4a5fc3b3ce8bf7ead015205bd5be73c9f95e389c83f92b9e4808ec11e",
+      "provenance_ref": "https://github.com/endomorphosis/ipfs_kit_py/blob/8ac00bb1974b1378e12091d546d8425af34049e0/examples/encrypted_config_example.py"
+    },
+    {
+      "approved_match_sha256": [
+        "9bdb626020bf7c6e867d28bfd7eb5005e6a9a1b773974c39edde5d20dbfeedac",
+        "b43c32336ff01f694cd6fafabfe5d1273ad59920a5c25b89c4324d44bc731c3d"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "882003971377e9d5f08254063399747f71a13388e440be572e2a3a85fc7f04eb",
+      "provenance_ref": "https://github.com/endomorphosis/ipfs_kit_py/blob/8ac00bb1974b1378e12091d546d8425af34049e0/tests/test_dashboard_config_loading.py"
+    },
+    {
+      "approved_match_sha256": [
+        "779ccbb468e0a9995e24f315009e61b020473e41da770099bc592ffe572a23d1"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "db2c58c21a5ea828b24e4397aac42127fbbf8df6577b99eea0b888ab20dde4a9",
+      "provenance_ref": "https://github.com/openradar/open-radar-data/blob/57215c7b42949ee88168bc1548d28bb5c760a420/data/cor-main131125105503.RAW2049"
+    }
+  ],
+  "public_key_values_retained_in_report": false,
+  "reviews": [
+    {
+      "bytes": 15512,
+      "classification_reason": "Exact published example/test body; each matched token is a consecutive alphabet/digit placeholder after case folding and digit-cycle rotation, or a repeated character. Voice literal belongs to the rejection test test_private_or_credential_metadata_fails_before_append. No credential service used.",
+      "file_sha256": "29cd0aa1b0beb4c7a3a95bee685f854a96e5cdac5208b2ff31bf0dd359ee99d7",
+      "literal_hits": [
+        {
+          "casefolded_cyclic_ordered_placeholder": true,
+          "line": 362,
+          "match_sha256": "98fcd0be55157d89898648bec3a74af3dd9ad96c2f579577faa24a7540eff461",
+          "single_character_placeholder": false
+        }
+      ],
+      "provenance_ref": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/a601b87e9e6bceb42f925cb085203ea337d204a5/test/test_voice_response_dag_sink.py",
+      "published_commit": "a601b87e9e6bceb42f925cb085203ea337d204a5",
+      "published_path": "test/test_voice_response_dag_sink.py",
+      "whole_file_matches_published_blob": true
+    },
+    {
+      "bytes": 6566,
+      "classification_reason": "Exact published example/test body; each matched token is a consecutive alphabet/digit placeholder after case folding and digit-cycle rotation, or a repeated character. Voice literal belongs to the rejection test test_private_or_credential_metadata_fails_before_append. No credential service used.",
+      "file_sha256": "5c5e22e4a5fc3b3ce8bf7ead015205bd5be73c9f95e389c83f92b9e4808ec11e",
+      "literal_hits": [
+        {
+          "casefolded_cyclic_ordered_placeholder": true,
+          "line": 60,
+          "match_sha256": "b43c32336ff01f694cd6fafabfe5d1273ad59920a5c25b89c4324d44bc731c3d",
+          "single_character_placeholder": false
+        }
+      ],
+      "provenance_ref": "https://github.com/endomorphosis/ipfs_kit_py/blob/8ac00bb1974b1378e12091d546d8425af34049e0/examples/encrypted_config_example.py",
+      "published_commit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "published_path": "examples/encrypted_config_example.py",
+      "whole_file_matches_published_blob": true
+    },
+    {
+      "bytes": 13289,
+      "classification_reason": "Exact published example/test body; each matched token is a consecutive alphabet/digit placeholder after case folding and digit-cycle rotation, or a repeated character. Voice literal belongs to the rejection test test_private_or_credential_metadata_fails_before_append. No credential service used.",
+      "file_sha256": "882003971377e9d5f08254063399747f71a13388e440be572e2a3a85fc7f04eb",
+      "literal_hits": [
+        {
+          "casefolded_cyclic_ordered_placeholder": false,
+          "line": 64,
+          "match_sha256": "9bdb626020bf7c6e867d28bfd7eb5005e6a9a1b773974c39edde5d20dbfeedac",
+          "single_character_placeholder": true
+        },
+        {
+          "casefolded_cyclic_ordered_placeholder": true,
+          "line": 253,
+          "match_sha256": "b43c32336ff01f694cd6fafabfe5d1273ad59920a5c25b89c4324d44bc731c3d",
+          "single_character_placeholder": false
+        }
+      ],
+      "provenance_ref": "https://github.com/endomorphosis/ipfs_kit_py/blob/8ac00bb1974b1378e12091d546d8425af34049e0/tests/test_dashboard_config_loading.py",
+      "published_commit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "published_path": "tests/test_dashboard_config_loading.py",
+      "whole_file_matches_published_blob": true
+    },
+    {
+      "bytes": 3145728,
+      "classification_reason": "Exact public radar-format binary fixture; scanner hit is a byte-pattern coincidence within the official data object, independently full-file SHA matched.",
+      "documentation_url": "https://docs.openradarscience.org/projects/xradar/en/stable/notebooks/Iris.html",
+      "download_url": "https://raw.githubusercontent.com/openradar/open-radar-data/57215c7b42949ee88168bc1548d28bb5c760a420/data/cor-main131125105503.RAW2049",
+      "file_sha256": "db2c58c21a5ea828b24e4397aac42127fbbf8df6577b99eea0b888ab20dde4a9",
+      "provenance_ref": "https://github.com/openradar/open-radar-data/blob/57215c7b42949ee88168bc1548d28bb5c760a420/data/cor-main131125105503.RAW2049",
+      "published_commit": "57215c7b42949ee88168bc1548d28bb5c760a420",
+      "published_path": "data/cor-main131125105503.RAW2049",
+      "registry_sha256": "67dbbeddba236f964dc0422dca27abbdac212d9cec68e6c03de320942a4fc86e",
+      "registry_url": "https://raw.githubusercontent.com/openradar/open-radar-data/57215c7b42949ee88168bc1548d28bb5c760a420/open_radar_data/registry.txt",
+      "whole_file_matches_official_registry_and_download": true
+    }
+  ],
+  "schema": "terminal-ir-public-fixture-provenance-review@1",
+  "status": "APPROVED_FOUR_EXACT_PUBLIC_FIXTURE_BODIES",
+  "values_printed": false,
+  "whole_archive_credential_free_claim": false
+}

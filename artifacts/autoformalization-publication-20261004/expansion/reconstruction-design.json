@@ -1,0 +1,205 @@
+{
+  "content_sha256": "0e985b50263d1c695cf7ac733aaf19ddb57ab0df60d08184a1a7f71d883182db",
+  "contrastive_fit_authorized": false,
+  "controls": {
+    "development_metrics": [
+      "raw_coordinate_mse",
+      "cosine_distortion",
+      "paired_per_group_losses"
+    ],
+    "endpoints": [
+      "raw_source",
+      "latent",
+      "reconstructed",
+      "mean_reconstructed",
+      "pca_reconstructed",
+      "pca_latent"
+    ],
+    "fit_before_development_vector_files_open": true,
+    "mean_fit_rows": 32,
+    "original_retained_json_weight_policy": "Retain historical JSON model snapshots unchanged. Do not reinterpret their fields as compatible neural autoencoder state or mix their coordinates with these native-profile controls; compare only under a separately demonstrated exact input/output contract.",
+    "pca_fit_rows": 32,
+    "pca_recipe": "TRAIN_centered_SVD/v1",
+    "pca_retained_axes": "min(nominal_latent_width,effective_centered_TRAIN_rank), never pad or claim nominal width as available data rank",
+    "pca_threshold": "max(n_rows,n_coordinates) * float32_epsilon * largest_singular_value",
+    "raw_identity_mse_is_control_not_competitive_compression": true,
+    "report_all_preselected_seeds": true,
+    "seed_or_hyperparameter_selected_on_development": false
+  },
+  "encoder_backbone_calls": 0,
+  "execution_limits": {
+    "os_sandbox": false,
+    "parent_process_group_cleanup_required": true,
+    "parent_wall_seconds_per_arm": 120,
+    "provider_verification_scope": "Pinned entrypoints and selected provider metadata; not a complete transitive dependency closure.",
+    "worker_rlimit_as_bytes": 8589934592,
+    "worker_rlimit_cpu_hard_seconds": 100,
+    "worker_rlimit_cpu_soft_seconds": 90,
+    "worker_rlimit_fsize_bytes": 33554432,
+    "worker_soft_fit_deadline_seconds": 60
+  },
+  "fit_policy": "source_vector_self_reconstruction_only_no_semantic_admission/v1",
+  "fixed_seeds": [
+    1729,
+    1730,
+    1731
+  ],
+  "formal_target_bodies_read": false,
+  "group_manifest_binding": {
+    "bytes": 56355,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-packet-01/organizer_manifest_private.json",
+    "sha256": "305538b22d4e037be3a65ac952263cef2720f724cf27cd738459297ce241618c"
+  },
+  "lanes": [
+    {
+      "architecture": [
+        8,
+        16,
+        4
+      ],
+      "lane_id": "legacy8",
+      "maximum_centered_train_rank": 8,
+      "nominal_latent_exceeds_or_equals_sample_rank_bound": false,
+      "prior_development_pca_mse": 0.009430017322301865,
+      "prior_mean_development_mse": 0.015881289417545002,
+      "prior_mean_latent_retrieval_ndcg": 0.8988738817720873,
+      "prior_raw_retrieval_ndcg": 0.9063527830841718
+    },
+    {
+      "architecture": [
+        384,
+        128,
+        32
+      ],
+      "lane_id": "native384",
+      "maximum_centered_train_rank": 31,
+      "nominal_latent_exceeds_or_equals_sample_rank_bound": true,
+      "prior_development_pca_mse": 0.00018401439592707902,
+      "prior_mean_development_mse": 0.0002453786776944374,
+      "prior_mean_latent_retrieval_ndcg": 0.9640768020936221,
+      "prior_raw_retrieval_ndcg": 0.9618966579623486
+    },
+    {
+      "architecture": [
+        768,
+        128,
+        64
+      ],
+      "lane_id": "native768",
+      "maximum_centered_train_rank": 31,
+      "nominal_latent_exceeds_or_equals_sample_rank_bound": true,
+      "prior_development_pca_mse": 0.00029257521964609623,
+      "prior_mean_development_mse": 0.0003715346974786371,
+      "prior_mean_latent_retrieval_ndcg": 0.9562315685456905,
+      "prior_raw_retrieval_ndcg": 0.9838375773719246
+    }
+  ],
+  "masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "model_inference_executed": false,
+  "original_training_helper_binding": {
+    "bytes": 26131,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/train_reconstruction.py",
+    "sha256": "387c0335549374a98e1d5458d9746733fe385dd760584fdf059f6266c44873d3"
+  },
+  "prior_frozen_summary_binding": {
+    "bytes": 66071,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+    "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83"
+  },
+  "proof_authority": false,
+  "prover_calls": 0,
+  "qualified": false,
+  "retrieval": {
+    "deterministic_order": "descending_cosine_then_lexicographic_id",
+    "graded_relevance_scores_available": false,
+    "may_save_rankings_without_reference_labels": true,
+    "no_facet_ndcg_without_separately_admitted_labels": true,
+    "query_sources": 32,
+    "ranking_agreement_with_raw_is_numerical_geometry_not_semantic_accuracy": true,
+    "training_bank_sources": 32
+  },
+  "reuse_assessment": {
+    "lane_validator_execute_only_verified_captured_bytes": true,
+    "new_checkpoint_schema": "source-vector-reconstruction-checkpoint/v1",
+    "new_version_required": true,
+    "new_worker_schema": "source-vector-expanded-reconstruction-run-plan/v1",
+    "old_loader_and_safetensors_closed_format_reusable_with_new_helper_and_config_pins": true,
+    "old_preflight_requires_train16_and4_groups": true,
+    "old_scheduler_hardcodes16_rows_and2_batches": true,
+    "preserve_old_helper_and_all_checkpoints": true
+  },
+  "schema": "expanded-source-reconstruction-experiment-design/v1",
+  "semantic_fit_authorized": false,
+  "source_fidelity_established": false,
+  "source_packet_binding": {
+    "bytes": 57962,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-packet-01/reviewer_items.json",
+    "sha256": "8a8303ea83fe22899f798703e7931b1f48a8aa0afb01c7d6980a7d3e9301701e"
+  },
+  "source_policy": {
+    "authored_compositional_sources": true,
+    "development_groups": 8,
+    "development_sources": 32,
+    "exact_source_overlap_with_old34": 0,
+    "group_source_input_identity_disjoint_required": true,
+    "independent_reviewer_labels_available": false,
+    "natural_source_corpus": false,
+    "previously_exposed_components": true,
+    "source_count": 64,
+    "source_groups": 16,
+    "split_rule": "retain_original_proposed_group_split_then_explicitly_select_for_source_reconstruction_only",
+    "train_groups": 8,
+    "train_sources": 32
+  },
+  "split_plan_binding": {
+    "bytes": 1929,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-packet-01/plan.json",
+    "sha256": "daf74fb13d5dc6a8cb5e186cd69e5a064e05db5e0604dcace0024e6b535aff36"
+  },
+  "status": "predeclared_source_only_design_no_training_executed",
+  "training": {
+    "actual_total_updates_if_all9_complete": 1827,
+    "additional_private_updates_per_arm": 3,
+    "batch_schedule": "TRAIN32_seed_plus_epoch_four_batches/v1",
+    "batch_size": 8,
+    "batches_per_epoch": 4,
+    "checkpoint_steps": [
+      0,
+      100,
+      200
+    ],
+    "comparison_budget": "Same optimizer update count as prior16-source fit; half as many passes per source. This is a bounded engineering comparison, not a controlled sample-size-only efficacy study.",
+    "cpu_threads": 1,
+    "device": "cpu",
+    "dtype": "float32",
+    "global_cpu_rng_preserved_required": true,
+    "gradient_clip": 5.0,
+    "midpoint_update": 100,
+    "normalization": "train_coordinate_mean_and_global_rms/v1",
+    "normalization_fit_rows": 32,
+    "optimizer": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "foreach": false,
+      "kind": "Adam",
+      "learning_rate": 0.003,
+      "weight_decay": 0.0
+    },
+    "private_resume_check": "Restore200 in disjoint state; perform201 and202, save201, independently restore201 and repeat202; compare all model and Adam tensors exactly; preserve selected200.",
+    "query_or_development_rows_read_during_fit": 0,
+    "schedule": "At each step, shuffle range(32) with private Python Random(seed + step // 4), then select the step % 4 batch of eight.",
+    "selected_checkpoint": "preselected200_no_development_selection",
+    "selected_epochs_per_arm": 50,
+    "selected_updates_per_arm": 200
+  },
+  "training_executed": false
+}

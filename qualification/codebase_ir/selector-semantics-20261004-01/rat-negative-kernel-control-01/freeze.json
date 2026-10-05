@@ -1,0 +1,12 @@
+{
+  "schema": "terminal-rat-negative-kernel-control-correction@1",
+  "status": "source_only_ast_pass",
+  "driver": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_06.py",
+    "bytes": 25860,
+    "sha256": "7546ec8adab52bf608afac812fbcbced66cebc9ef0358f6e1762c3f0ba3788a1"
+  },
+  "change": "Only false reversed Rat bound control uses decide +kernel, matching positive exactRat evaluator. Existing expected rejection classifier and budgets remain unchanged.",
+  "prior_actual06_negative": "ordinary_decide_reduction_stuck_inconclusive_not_false_acceptance",
+  "jobs_this_preparation": 0
+}

@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "/home/barberb/.local/bin/python",
+    "-B",
+    "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_06.py",
+    "owned",
+    "actual-07"
+  ],
+  "cleanup_errors": [],
+  "driver": {
+    "bytes": 25860,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_06.py",
+    "sha256": "7546ec8adab52bf608afac812fbcbced66cebc9ef0358f6e1762c3f0ba3788a1"
+  },
+  "primary_error": null,
+  "producer_pin_specification": {
+    "bytes": 748,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/preparation/producer-pins-06.json",
+    "sha256": "3989c5c223a7ba569f7fdc92fa0376f5a7b4305293a763d2db3f563875c51897"
+  },
+  "returncode": null,
+  "schema": "terminal-selector-step-outer-control@1",
+  "started_at_utc": "2026-10-04T20:44:19.585961+00:00"
+}

@@ -1,0 +1,11 @@
+--- selector02.py
++++ selector03.py
+@@ -71,7 +71,7 @@
+   simp [sourceSemantics, sourceLoop]
+ -- Deliberately does not assert unconditional coverage: the fallback can be small.
+ theorem unconditional_coverage_counterexample : sourceSemantics [1] 2 = some 1 := by
+-  decide
++  decide +kernel
+ end BatchingSelector
+ """
+ 

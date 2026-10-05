@@ -1,0 +1,41 @@
+{
+  "campaign_model_inference_executed": false,
+  "campaign_training_executed": false,
+  "content_sha256": "d3f800d98f6a784c14140bd7222c325147f4a180f8a2156962758c4d9906f11b",
+  "design_binding": {
+    "bytes": 8216,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/reconstruction-design.json",
+    "sha256": "c3cad06d7e89ae0edaad547e8d3214145316cdf413beef867cee8e9c31895339"
+  },
+  "encoder_backbone_calls": 0,
+  "formal_target_bodies_read": false,
+  "helper_binding": {
+    "bytes": 32286,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/train_expanded_reconstruction.py",
+    "sha256": "9d5dca6c6a07d60956eb9da3c874b9df65e8cd8ad965ed16090bbc70738c1182"
+  },
+  "numerical_fixture_optimizer_updates": 6,
+  "old_training_helper_sha256": "387c0335549374a98e1d5458d9746733fe385dd760584fdf059f6266c44873d3",
+  "prover_calls": 0,
+  "pytest_command": ".venv/bin/python -I -B -m pytest -q artifacts/autoformalization-publication-20261004/expansion/test_train_expanded_reconstruction.py",
+  "pytest_passed": 35,
+  "ruff_passed": true,
+  "schema": "expanded-reconstruction-engineering-validation/v1",
+  "test_binding": {
+    "bytes": 14184,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/test_train_expanded_reconstruction.py",
+    "sha256": "b88c31b2dbdb5bf7d1df4ff2bd72ffa732be389c6ce722778676bd3ec2088227"
+  },
+  "tests_scope": [
+    "complete32 native lane declarations",
+    "zero semantic masks and policy aliases",
+    "TRAIN/DEV group/source/input disjointness",
+    "exact four-batch scheduler covers every row",
+    "safe zero-update checkpoint restoration",
+    "tiny numerical fixture resume across epoch boundary with exact model and Adam tensors",
+    "checkpoint configuration transplantation rejection",
+    "download relocation without source bank",
+    "publication gate rejection before provider import",
+    "changed source owner rejected before execution"
+  ]
+}

@@ -1,0 +1,2780 @@
+{
+  "PlanCreate_calls": 0,
+  "blocked_imports": [],
+  "cleanup_errors": [],
+  "current_public_source_binding": {
+    "bytes": 4380,
+    "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/llm-inference-batching-scheduler/environment/task_file/scripts/baseline_packer.py",
+    "sha256": "547d230d5e6d93197803480cb81cab0ec6ac63fcfa0a24b246f549523f216c4e"
+  },
+  "elapsed_seconds_owned": 20.78263913100818,
+  "final_resource_state": {
+    "active_child_lease_count": 0,
+    "active_lease_count": 0,
+    "active_root_lease_count": 0,
+    "allocated": {
+      "cpu_slots": 0,
+      "memory_mb": 0
+    },
+    "allocated_child_process_slots": 0,
+    "allocated_gpu_memory_mb": 0,
+    "allocated_unified_memory_mb": 0,
+    "available": {
+      "child_process_slots": 16,
+      "cpu_slots": 16,
+      "gpu_memory_mb": null,
+      "memory_mb": 99688,
+      "unified_memory_mb": null
+    },
+    "capacity": {
+      "child_process_slots": 16,
+      "cpu_slots": 16,
+      "gpu_memory_mb": null,
+      "memory_mb": 99688,
+      "reserved_gpu_memory_mb": 0,
+      "reserved_memory_mb": 0,
+      "unified_memory_mb": null,
+      "usable_gpu_memory_mb": null,
+      "usable_memory_mb": 99688
+    },
+    "counters": {
+      "acquisitions_total": 1,
+      "cancellations_total": 0,
+      "recovered_leases_total": 0,
+      "recoveries_total": 0,
+      "releases_total": 1,
+      "saturation_events_total": 0,
+      "timeouts_total": 0
+    },
+    "lanes": {
+      "orchestration": {
+        "allocated": {
+          "child_process_slots": 0,
+          "cpu_slots": 0,
+          "gpu_memory_mb": 0,
+          "memory_mb": 0,
+          "unified_memory_mb": 0
+        },
+        "reservation": {
+          "cpu_slots": 0,
+          "memory_mb": 0
+        },
+        "telemetry": {
+          "acquisitions_total": 1,
+          "cancellations_total": 0,
+          "timeouts_total": 0,
+          "wait_count": 1,
+          "wait_seconds_max": 4.80009475722909e-07,
+          "wait_seconds_mean": 4.80009475722909e-07,
+          "wait_seconds_total": 4.80009475722909e-07
+        }
+      },
+      "validation": {
+        "allocated": {
+          "child_process_slots": 0,
+          "cpu_slots": 0,
+          "gpu_memory_mb": 0,
+          "memory_mb": 0,
+          "unified_memory_mb": 0
+        },
+        "reservation": {
+          "cpu_slots": 2,
+          "memory_mb": 0
+        },
+        "telemetry": {
+          "acquisitions_total": 0,
+          "cancellations_total": 0,
+          "timeouts_total": 0,
+          "wait_count": 0,
+          "wait_seconds_max": 0.0,
+          "wait_seconds_mean": 0.0,
+          "wait_seconds_total": 0.0
+        }
+      }
+    },
+    "last_proof_refusal": null,
+    "proof_backoff": {},
+    "saturation": {
+      "child_process_slots_saturated": false,
+      "cpu_saturated": false,
+      "events_total": 0,
+      "gpu_memory_saturated": false,
+      "memory_saturated": false,
+      "saturated": false,
+      "unified_memory_saturated": false
+    },
+    "schema_version": "legal-ir-global-resource-scheduler-v1",
+    "state_path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/resources.json",
+    "wait_time_seconds": {
+      "count": 1,
+      "max": 4.80009475722909e-07,
+      "mean": 4.80009475722909e-07,
+      "p50": 4.80009475722909e-07,
+      "p95": 4.80009475722909e-07,
+      "p99": 4.80009475722909e-07,
+      "total": 4.80009475722909e-07
+    },
+    "waiting_request_count": 0
+  },
+  "mode": "actual-08",
+  "native_fresh_readback": {
+    "lake_snapshot_digest": "sha256:fac92af84661c32a71e9093c16b7ba996bae86589251cf7c857241abdc7e61cc",
+    "manifest_sha256": "sha256:c20fe910c735ff6689631b5d874874847296bec20fee7fa48556f1714e6616cd",
+    "method": "new_python_process_native_duckdb_and_ducklake_readback",
+    "row_count": 4216,
+    "row_root_sha256": "sha256:94085417fa4bb3ff37ba6f5cd1f0b6949b328dd90b6175873efef9f99188cd4c",
+    "verified": true
+  },
+  "native_lean_checks_invoked": [
+    {
+      "expected_success": true,
+      "key": "selector"
+    },
+    {
+      "expected_success": false,
+      "key": "false_selector_lower_bound"
+    },
+    {
+      "expected_success": true,
+      "key": "step_parameters"
+    },
+    {
+      "expected_success": false,
+      "key": "false_reversed_step_bound"
+    }
+  ],
+  "native_metadata_hydration_attempts": 1,
+  "native_metadata_readback": {
+    "bytes": 25015,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/metadata-readback.json",
+    "sha256": "a9f47e2cd87377d0150fb967210285d9a6a4f3b65651e1029c02e7f1eac44aaa"
+  },
+  "new_autoencoder_fits": 0,
+  "new_public_fit_calls": 0,
+  "primary_error": null,
+  "prior_4209_rows_preserved_exactly": true,
+  "producer_pins": {
+    "driver": {
+      "bytes": 26144,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_07.py",
+      "sha256": "368c150d84ef126e5f0f8796cef6527ee6269c093379200dd9fa3470de485ae3"
+    },
+    "request": {
+      "bytes": 18799,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/preparation/request.json",
+      "sha256": "e67849102ab6fc540fc8d50e64a8a89ba02ac03fa0ce8c22057e6b8581cb87d3"
+    },
+    "source_manifest": {
+      "bytes": 6238,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-manifest-04.json",
+      "sha256": "93e3c12215b70c86d4a02bf28aedb4e89a9efff1a7e70a182c155dc6ab2582c0"
+    }
+  },
+  "resource_policy": {
+    "lane_reservations": {
+      "validation": {
+        "cpu_slots": 2,
+        "memory_mb": 0
+      }
+    },
+    "max_gpu_memory_percent": null,
+    "max_memory_percent": null,
+    "max_swap_percent": null,
+    "max_waiting_requests": 256,
+    "proof_backoff_seconds": 2.0,
+    "proof_cpu_stall_percent": 50.0,
+    "proof_io_stall_percent": 10.0,
+    "proof_memory_headroom_mb": 24922,
+    "proof_memory_stall_percent": 2.0,
+    "proof_safety_enabled": true,
+    "require_known_gpu_for_gpu_work": true,
+    "reserved_gpu_memory_mb": 0,
+    "reserved_memory_mb": 0,
+    "total_child_process_slots": 16,
+    "total_cpu_slots": 16,
+    "total_gpu_memory_mb": null,
+    "total_memory_mb": 99688,
+    "total_unified_memory_mb": null
+  },
+  "root_lease": {
+    "acquired_at": 1791146771.4073026,
+    "cancelled": false,
+    "child_process_slots": 4,
+    "cpu_slots": 1,
+    "gpu_memory_mb": 0,
+    "lane": "orchestration",
+    "lease_id": "06dfc98ae8a04e4ab9db12864b76b34a",
+    "memory_mb": 2048,
+    "owner_pid": 3926282,
+    "parent_lease_id": null,
+    "released": false,
+    "requires_gpu": false,
+    "unified_memory_mb": 0,
+    "wait_seconds": 4.80009475722909e-07
+  },
+  "root_release_returned": true,
+  "schema": "terminal-selector-step-owned-control@1",
+  "selected_inputs_and_prior_unchanged": true,
+  "selected_owned_imports": [
+    {
+      "after": {
+        "bytes": 29,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/__init__.py",
+        "sha256": "02cef7995128133d4cd2d26d5d140052ccf3d3bbaacea9d03fcac4e6736c9419"
+      },
+      "before": {
+        "bytes": 29,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/__init__.py",
+        "sha256": "02cef7995128133d4cd2d26d5d140052ccf3d3bbaacea9d03fcac4e6736c9419"
+      },
+      "matches": true,
+      "module": "benchmarks"
+    },
+    {
+      "after": {
+        "bytes": 65,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/__init__.py",
+        "sha256": "628d7f9eeaf55a52e0fb1052b00d45f02fe4c36f3587f2dfd40e6e97f9b630dc"
+      },
+      "before": {
+        "bytes": 65,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/__init__.py",
+        "sha256": "628d7f9eeaf55a52e0fb1052b00d45f02fe4c36f3587f2dfd40e6e97f9b630dc"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor"
+    },
+    {
+      "after": {
+        "bytes": 56829,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/__init__.py",
+        "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+      },
+      "before": {
+        "bytes": 56829,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/__init__.py",
+        "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py"
+    },
+    {
+      "after": {
+        "bytes": 5845,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/router_deps.py",
+        "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+      },
+      "before": {
+        "bytes": 5845,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/router_deps.py",
+        "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.router_deps"
+    },
+    {
+      "after": {
+        "bytes": 34477,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ipfs_backend_router.py",
+        "sha256": "37d0fabc92cec04574245c772beb197f1aaf7fef1db8c5b215fc51c3bbd30f9c"
+      },
+      "before": {
+        "bytes": 34477,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ipfs_backend_router.py",
+        "sha256": "37d0fabc92cec04574245c772beb197f1aaf7fef1db8c5b215fc51c3bbd30f9c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.ipfs_backend_router"
+    },
+    {
+      "after": {
+        "bytes": 957,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/__init__.py",
+        "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+      },
+      "before": {
+        "bytes": 957,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/__init__.py",
+        "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers"
+    },
+    {
+      "after": {
+        "bytes": 69336,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+        "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+      },
+      "before": {
+        "bytes": 69336,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+        "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer"
+    },
+    {
+      "after": {
+        "bytes": 97272,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "sha256": "f156511991e33d3b4ba523c3c5080ea30d0a53ad8a4dbcccea0487432679a9aa"
+      },
+      "before": {
+        "bytes": 97272,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "sha256": "f156511991e33d3b4ba523c3c5080ea30d0a53ad8a4dbcccea0487432679a9aa"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler"
+    },
+    {
+      "after": {
+        "bytes": 53075,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+        "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+      },
+      "before": {
+        "bytes": 53075,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+        "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.runtime_telemetry"
+    },
+    {
+      "after": {
+        "bytes": 9526,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+        "sha256": "16a24648b5625f9abb379cf3c4a189e9b05e3c32cc7d1f6812e7c94b475ae921"
+      },
+      "before": {
+        "bytes": 9526,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+        "sha256": "16a24648b5625f9abb379cf3c4a189e9b05e3c32cc7d1f6812e7c94b475ae921"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.proof_resource_safety"
+    },
+    {
+      "after": {
+        "bytes": 16391,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+        "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+      },
+      "before": {
+        "bytes": 16391,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+        "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_ranker_training"
+    },
+    {
+      "after": {
+        "bytes": 17681,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py",
+        "sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af"
+      },
+      "before": {
+        "bytes": 17681,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py",
+        "sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_training_join"
+    },
+    {
+      "after": {
+        "bytes": 8912,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-04/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+        "sha256": "243f72c127e4086c44ea788c974b4b9565581a685f5b185505e1eb3dba420b70"
+      },
+      "before": {
+        "bytes": 8912,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-04/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+        "sha256": "243f72c127e4086c44ea788c974b4b9565581a685f5b185505e1eb3dba420b70"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_selector_semantics"
+    },
+    {
+      "after": {
+        "bytes": 23178,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-requirement-grounding-20261004-01/source-04/benchmarks/agent_supervisor/container_coding/terminal_codebase_requirement_grounding.py",
+        "sha256": "9d3c62d8e9b09c41ff9ae91798a7fca9cbc8f10c682af1fffc34f93547673076"
+      },
+      "before": {
+        "bytes": 23178,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-requirement-grounding-20261004-01/source-04/benchmarks/agent_supervisor/container_coding/terminal_codebase_requirement_grounding.py",
+        "sha256": "9d3c62d8e9b09c41ff9ae91798a7fca9cbc8f10c682af1fffc34f93547673076"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_requirement_grounding"
+    },
+    {
+      "after": {
+        "bytes": 6749,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-04/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+        "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+      },
+      "before": {
+        "bytes": 6749,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-04/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+        "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_ranker_step_certificate"
+    },
+    {
+      "after": {
+        "bytes": 26022,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_corpus.py",
+        "sha256": "29292de03fbf36aca253f9b3d0cf8031effab0f35453011851d352976c12e29d"
+      },
+      "before": {
+        "bytes": 26022,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_corpus.py",
+        "sha256": "29292de03fbf36aca253f9b3d0cf8031effab0f35453011851d352976c12e29d"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_corpus"
+    },
+    {
+      "after": {
+        "bytes": 4434,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/__init__.py",
+        "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+      },
+      "before": {
+        "bytes": 4434,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/__init__.py",
+        "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic"
+    },
+    {
+      "after": {
+        "bytes": 2386,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/__init__.py",
+        "sha256": "acf68a7215af95b4a7d4e4dc883cb7577e2129e7bbadf49c1fc2c404848bc641"
+      },
+      "before": {
+        "bytes": 2386,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/__init__.py",
+        "sha256": "acf68a7215af95b4a7d4e4dc883cb7577e2129e7bbadf49c1fc2c404848bc641"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir"
+    },
+    {
+      "after": {
+        "bytes": 1006,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/autoencoder.py",
+        "sha256": "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91"
+      },
+      "before": {
+        "bytes": 1006,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/autoencoder.py",
+        "sha256": "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.autoencoder"
+    },
+    {
+      "after": {
+        "bytes": 1495,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/canonicalize.py",
+        "sha256": "3609047cc8c99437d77461b4f7ea0e05d193a31bf0d20a7e80b7b0c10a8cff87"
+      },
+      "before": {
+        "bytes": 1495,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/canonicalize.py",
+        "sha256": "3609047cc8c99437d77461b4f7ea0e05d193a31bf0d20a7e80b7b0c10a8cff87"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.canonicalize"
+    },
+    {
+      "after": {
+        "bytes": 27163,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
+        "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+      },
+      "before": {
+        "bytes": 27163,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/schema.py",
+        "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.schema"
+    },
+    {
+      "after": {
+        "bytes": 6942,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/__init__.py",
+        "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+      },
+      "before": {
+        "bytes": 6942,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/__init__.py",
+        "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core"
+    },
+    {
+      "after": {
+        "bytes": 14098,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/canonical.py",
+        "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+      },
+      "before": {
+        "bytes": 14098,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/canonical.py",
+        "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.canonical"
+    },
+    {
+      "after": {
+        "bytes": 24220,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/decoder.py",
+        "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+      },
+      "before": {
+        "bytes": 24220,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/decoder.py",
+        "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.decoder"
+    },
+    {
+      "after": {
+        "bytes": 31823,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/schema_registry.py",
+        "sha256": "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe"
+      },
+      "before": {
+        "bytes": 31823,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/schema_registry.py",
+        "sha256": "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.schema_registry"
+    },
+    {
+      "after": {
+        "bytes": 1693,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/protocols.py",
+        "sha256": "adb0ae8eaf2e55bf587ac76baa90d8303b61e0df246c03c30b56cb31a9643780"
+      },
+      "before": {
+        "bytes": 1693,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/protocols.py",
+        "sha256": "adb0ae8eaf2e55bf587ac76baa90d8303b61e0df246c03c30b56cb31a9643780"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.protocols"
+    },
+    {
+      "after": {
+        "bytes": 29936,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/requirements.py",
+        "sha256": "4e3eb3cbadb5b87973e0b823c692aac66c5691e87cb3d6ba536dea99b99f6914"
+      },
+      "before": {
+        "bytes": 29936,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/requirements.py",
+        "sha256": "4e3eb3cbadb5b87973e0b823c692aac66c5691e87cb3d6ba536dea99b99f6914"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.requirements"
+    },
+    {
+      "after": {
+        "bytes": 7882,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/extended_projections.py",
+        "sha256": "20163bc5eb509065475bbe85716467b106f0b9dd74a1aa530bb61755600697eb"
+      },
+      "before": {
+        "bytes": 7882,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/extended_projections.py",
+        "sha256": "20163bc5eb509065475bbe85716467b106f0b9dd74a1aa530bb61755600697eb"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.extended_projections"
+    },
+    {
+      "after": {
+        "bytes": 6460,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/projection_contracts.py",
+        "sha256": "86386464d599b4fc5af66b3e6f634e797594bbde0c3e2bcff087d802c478fdaf"
+      },
+      "before": {
+        "bytes": 6460,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/projection_contracts.py",
+        "sha256": "86386464d599b4fc5af66b3e6f634e797594bbde0c3e2bcff087d802c478fdaf"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.projection_contracts"
+    },
+    {
+      "after": {
+        "bytes": 9771,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/lean_projection.py",
+        "sha256": "aef6ff43d470857e67dbbc16707d213db0acac2439c1eddf1538a6f8eb930ed7"
+      },
+      "before": {
+        "bytes": 9771,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/lean_projection.py",
+        "sha256": "aef6ff43d470857e67dbbc16707d213db0acac2439c1eddf1538a6f8eb930ed7"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.lean_projection"
+    },
+    {
+      "after": {
+        "bytes": 2073,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/__init__.py",
+        "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+      },
+      "before": {
+        "bytes": 2073,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/__init__.py",
+        "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization"
+    },
+    {
+      "after": {
+        "bytes": 97,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+        "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+      },
+      "before": {
+        "bytes": 97,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+        "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder"
+    },
+    {
+      "after": {
+        "bytes": 90,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/__init__.py",
+        "sha256": "aa1c0d7bf68c1920ef385ef21a227bbef9af6a46a3ec663b4613ca8c3a8f41a7"
+      },
+      "before": {
+        "bytes": 90,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/__init__.py",
+        "sha256": "aa1c0d7bf68c1920ef385ef21a227bbef9af6a46a3ec663b4613ca8c3a8f41a7"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security"
+    },
+    {
+      "after": {
+        "bytes": 32609,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder.py",
+        "sha256": "035ca389848a37344025a69c8788fd66179f60ac21207c24779faeeb936c6f8a"
+      },
+      "before": {
+        "bytes": 32609,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder.py",
+        "sha256": "035ca389848a37344025a69c8788fd66179f60ac21207c24779faeeb936c6f8a"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.codebase_autoencoder"
+    },
+    {
+      "after": {
+        "bytes": 13307,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_corpus.py",
+        "sha256": "3f7f9443be1cf122d019f5936f0650b13da185686cbbc205d98e61098f9fca1c"
+      },
+      "before": {
+        "bytes": 13307,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_corpus.py",
+        "sha256": "3f7f9443be1cf122d019f5936f0650b13da185686cbbc205d98e61098f9fca1c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_formula_corpus"
+    },
+    {
+      "after": {
+        "bytes": 30424,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_source_context.py",
+        "sha256": "515be9aa5209c3547be8ef3bef75b541c00073bab74eac0445002b8ed13e2318"
+      },
+      "before": {
+        "bytes": 30424,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_source_context.py",
+        "sha256": "515be9aa5209c3547be8ef3bef75b541c00073bab74eac0445002b8ed13e2318"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_cve_source_context"
+    },
+    {
+      "after": {
+        "bytes": 23559,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_corpus.py",
+        "sha256": "6ae3e153ac742d6f23158f76ea43e3edcc638d9cf9436020004f5d0133607982"
+      },
+      "before": {
+        "bytes": 23559,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_corpus.py",
+        "sha256": "6ae3e153ac742d6f23158f76ea43e3edcc638d9cf9436020004f5d0133607982"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_cve_corpus"
+    },
+    {
+      "after": {
+        "bytes": 30515,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_canonical_export.py",
+        "sha256": "3d012d223b61295c6f5e85190f5dbb8b3530cfe3b24dfe25b0a9ea43d91b0259"
+      },
+      "before": {
+        "bytes": 30515,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_canonical_export.py",
+        "sha256": "3d012d223b61295c6f5e85190f5dbb8b3530cfe3b24dfe25b0a9ea43d91b0259"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_cve_canonical_export"
+    },
+    {
+      "after": {
+        "bytes": 7528,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/__init__.py",
+        "sha256": "dd25e981a8c6f0fc30af378185023acc2750dac07835ea1040006f3533009fd9"
+      },
+      "before": {
+        "bytes": 7528,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/__init__.py",
+        "sha256": "dd25e981a8c6f0fc30af378185023acc2750dac07835ea1040006f3533009fd9"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir"
+    },
+    {
+      "after": {
+        "bytes": 8576,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/classification.py",
+        "sha256": "2b838a82d4f4a69eef64fd9d8229fb8fad3d4b6696a419636447c72f1594d8a4"
+      },
+      "before": {
+        "bytes": 8576,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/classification.py",
+        "sha256": "2b838a82d4f4a69eef64fd9d8229fb8fad3d4b6696a419636447c72f1594d8a4"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.classification"
+    },
+    {
+      "after": {
+        "bytes": 52751,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/projector.py",
+        "sha256": "0ead87835938df05f0a40725938686b4483b1fea4daefd6060886d66f36d1361"
+      },
+      "before": {
+        "bytes": 52751,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/projector.py",
+        "sha256": "0ead87835938df05f0a40725938686b4483b1fea4daefd6060886d66f36d1361"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.projector"
+    },
+    {
+      "after": {
+        "bytes": 8911,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/identity.py",
+        "sha256": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e"
+      },
+      "before": {
+        "bytes": 8911,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/identity.py",
+        "sha256": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.identity"
+    },
+    {
+      "after": {
+        "bytes": 28674,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/schemas.py",
+        "sha256": "f385f3a7e03f7e26ccecf208b49d74792f076b4447d2fe5db7affbf278806665"
+      },
+      "before": {
+        "bytes": 28674,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/schemas.py",
+        "sha256": "f385f3a7e03f7e26ccecf208b49d74792f076b4447d2fe5db7affbf278806665"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.schemas"
+    },
+    {
+      "after": {
+        "bytes": 31891,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/provenance.py",
+        "sha256": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+      },
+      "before": {
+        "bytes": 31891,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/provenance.py",
+        "sha256": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.provenance"
+    },
+    {
+      "after": {
+        "bytes": 29068,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/source_snapshot.py",
+        "sha256": "7a67269cdcbff8a5bb48428e9abc409dcc4d78f621c1134eb00abbfcdd5a93ae"
+      },
+      "before": {
+        "bytes": 29068,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/source_snapshot.py",
+        "sha256": "7a67269cdcbff8a5bb48428e9abc409dcc4d78f621c1134eb00abbfcdd5a93ae"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.source_snapshot"
+    },
+    {
+      "after": {
+        "bytes": 30379,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/vocabulary.py",
+        "sha256": "c2db3910358e01e866e19cbc071ddd77b9f568228a65d6f8b0987841c6fe4647"
+      },
+      "before": {
+        "bytes": 30379,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/vocabulary.py",
+        "sha256": "c2db3910358e01e866e19cbc071ddd77b9f568228a65d6f8b0987841c6fe4647"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.vocabulary"
+    },
+    {
+      "after": {
+        "bytes": 44123,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/graph.py",
+        "sha256": "b0ecc0790d1e8143de31887d43c294b03196873b50571894815f44148287ef12"
+      },
+      "before": {
+        "bytes": 44123,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/graph.py",
+        "sha256": "b0ecc0790d1e8143de31887d43c294b03196873b50571894815f44148287ef12"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.graph"
+    },
+    {
+      "after": {
+        "bytes": 42364,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/release_policy.py",
+        "sha256": "139dac5cc47eb5920991c5c93a2f66940c51f90d696aa1fa5f13de50f144a24f"
+      },
+      "before": {
+        "bytes": 42364,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/release_policy.py",
+        "sha256": "139dac5cc47eb5920991c5c93a2f66940c51f90d696aa1fa5f13de50f144a24f"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.release_policy"
+    },
+    {
+      "after": {
+        "bytes": 14731,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_training_source.py",
+        "sha256": "09f1198e7d738c8535dbab6616a31bd564f9de6320edb64bdf3a24c5f507f15c"
+      },
+      "before": {
+        "bytes": 14731,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_training_source.py",
+        "sha256": "09f1198e7d738c8535dbab6616a31bd564f9de6320edb64bdf3a24c5f507f15c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_cve_training_source"
+    },
+    {
+      "after": {
+        "bytes": 55400,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/hf_complete_source.py",
+        "sha256": "df560d01f19990b5c3939cbd2e7bd161c2f4dc39a20514485f5a762f30e80566"
+      },
+      "before": {
+        "bytes": 55400,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/hf_complete_source.py",
+        "sha256": "df560d01f19990b5c3939cbd2e7bd161c2f4dc39a20514485f5a762f30e80566"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.hf_complete_source"
+    },
+    {
+      "after": {
+        "bytes": 55054,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/hf_release.py",
+        "sha256": "187b4120f32ffb2d99839627ef13c169037250479a081589c043cb48805e2d07"
+      },
+      "before": {
+        "bytes": 55054,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/hf_release.py",
+        "sha256": "187b4120f32ffb2d99839627ef13c169037250479a081589c043cb48805e2d07"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.hf_release"
+    },
+    {
+      "after": {
+        "bytes": 43974,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/hf_source.py",
+        "sha256": "513e89a81b1c19214bcf19750214161ca088443b006bb4c60e28d4ceef5e07d9"
+      },
+      "before": {
+        "bytes": 43974,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/hf_source.py",
+        "sha256": "513e89a81b1c19214bcf19750214161ca088443b006bb4c60e28d4ceef5e07d9"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.hf_source"
+    },
+    {
+      "after": {
+        "bytes": 24500,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py",
+        "sha256": "e48c33c7bed68da1c93539c23174d3963d01f0b7bec39b0475395c85a5851cdc"
+      },
+      "before": {
+        "bytes": 24500,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/adapter.py",
+        "sha256": "e48c33c7bed68da1c93539c23174d3963d01f0b7bec39b0475395c85a5851cdc"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.adapter"
+    },
+    {
+      "after": {
+        "bytes": 37220,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/model.py",
+        "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+      },
+      "before": {
+        "bytes": 37220,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/model.py",
+        "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.model"
+    },
+    {
+      "after": {
+        "bytes": 50496,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/hf_graph_layout.py",
+        "sha256": "f3902629cef305a5c3494e9c1eda75632d1ae04b17d9d9a25a2913bfe18968b2"
+      },
+      "before": {
+        "bytes": 50496,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/cvefixes/hf_graph_layout.py",
+        "sha256": "f3902629cef305a5c3494e9c1eda75632d1ae04b17d9d9a25a2913bfe18968b2"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.cvefixes.hf_graph_layout"
+    },
+    {
+      "after": {
+        "bytes": 2348,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_screening.py",
+        "sha256": "f53a59b989274d7944628017a3baae2ebd66dc432855a7aa92033774d7c41eab"
+      },
+      "before": {
+        "bytes": 2348,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_screening.py",
+        "sha256": "f53a59b989274d7944628017a3baae2ebd66dc432855a7aa92033774d7c41eab"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.source_screening"
+    },
+    {
+      "after": {
+        "bytes": 16927,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_grammar.py",
+        "sha256": "34a43e4ba450a133f096ed8ec99143d5e68aefc503a1b111c78a82f18ca745b3"
+      },
+      "before": {
+        "bytes": 16927,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_grammar.py",
+        "sha256": "34a43e4ba450a133f096ed8ec99143d5e68aefc503a1b111c78a82f18ca745b3"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_formula_grammar"
+    },
+    {
+      "after": {
+        "bytes": 14644,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formalization_evaluation.py",
+        "sha256": "fa094ce4beb8d356b1c219d5c1903d98809b4e874fb6e5be32ad26d53913fd72"
+      },
+      "before": {
+        "bytes": 14644,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formalization_evaluation.py",
+        "sha256": "fa094ce4beb8d356b1c219d5c1903d98809b4e874fb6e5be32ad26d53913fd72"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_formalization_evaluation"
+    },
+    {
+      "after": {
+        "bytes": 41073,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_autoencoder_checkpoint.py",
+        "sha256": "2f442b4cd1c2b4a1f3f5f225e413ab646f69ac51cc186bb8df91b3dea067c9ba"
+      },
+      "before": {
+        "bytes": 41073,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_autoencoder_checkpoint.py",
+        "sha256": "2f442b4cd1c2b4a1f3f5f225e413ab646f69ac51cc186bb8df91b3dea067c9ba"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_autoencoder_checkpoint"
+    },
+    {
+      "after": {
+        "bytes": 5711,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_autoencoder_features.py",
+        "sha256": "9d7e6d04686c4b7ff9bf77991f7b0cd56c79f9621e0cc8532a9df760d44aa4b8"
+      },
+      "before": {
+        "bytes": 5711,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_autoencoder_features.py",
+        "sha256": "9d7e6d04686c4b7ff9bf77991f7b0cd56c79f9621e0cc8532a9df760d44aa4b8"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.security.security_autoencoder_features"
+    },
+    {
+      "after": {
+        "bytes": 17773,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/code_program_derivation.py",
+        "sha256": "2084ee42f760d7d59b560a04b24af3e47c8966b7909f800f2b4c88be8f7bbbae"
+      },
+      "before": {
+        "bytes": 17773,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/code_program_derivation.py",
+        "sha256": "2084ee42f760d7d59b560a04b24af3e47c8966b7909f800f2b4c88be8f7bbbae"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.code_program_derivation"
+    },
+    {
+      "after": {
+        "bytes": 1446,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/__init__.py",
+        "sha256": "c110fbd4230bb13e83e56442e2fc2d6314e80fdaa286fc965fc53840da8a8292"
+      },
+      "before": {
+        "bytes": 1446,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/__init__.py",
+        "sha256": "c110fbd4230bb13e83e56442e2fc2d6314e80fdaa286fc965fc53840da8a8292"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification"
+    },
+    {
+      "after": {
+        "bytes": 58065,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/program.py",
+        "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+      },
+      "before": {
+        "bytes": 58065,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/program.py",
+        "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.program"
+    },
+    {
+      "after": {
+        "bytes": 16176,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/claims.py",
+        "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+      },
+      "before": {
+        "bytes": 16176,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/claims.py",
+        "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.claims"
+    },
+    {
+      "after": {
+        "bytes": 76841,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py",
+        "sha256": "aef42730598f74d35e232f460637560be71b55ddc459d555df9105d17fcfc003"
+      },
+      "before": {
+        "bytes": 76841,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py",
+        "sha256": "aef42730598f74d35e232f460637560be71b55ddc459d555df9105d17fcfc003"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.source_adapters"
+    },
+    {
+      "after": {
+        "bytes": 36277,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/families/models.py",
+        "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+      },
+      "before": {
+        "bytes": 36277,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/families/models.py",
+        "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.families.models"
+    },
+    {
+      "after": {
+        "bytes": 44109,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/artifacts.py",
+        "sha256": "63896fb1fb4ef22be50d76996ce404119a5d209d01f046a6a842b7b96848ebc6"
+      },
+      "before": {
+        "bytes": 44109,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/artifacts.py",
+        "sha256": "63896fb1fb4ef22be50d76996ce404119a5d209d01f046a6a842b7b96848ebc6"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.artifacts"
+    },
+    {
+      "after": {
+        "bytes": 20110,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/diagnostics.py",
+        "sha256": "508fd3c2dce94a1eb1e2dff19f8f578ccec2d1e94eb1db2742f75783e23ff198"
+      },
+      "before": {
+        "bytes": 20110,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/diagnostics.py",
+        "sha256": "508fd3c2dce94a1eb1e2dff19f8f578ccec2d1e94eb1db2742f75783e23ff198"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.diagnostics"
+    },
+    {
+      "after": {
+        "bytes": 12653,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/evidence.py",
+        "sha256": "826743829d2964b97e13720b5ea52907de77f6b18e8886e5a3c0fb6a977fdeff"
+      },
+      "before": {
+        "bytes": 12653,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/evidence.py",
+        "sha256": "826743829d2964b97e13720b5ea52907de77f6b18e8886e5a3c0fb6a977fdeff"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.evidence"
+    },
+    {
+      "after": {
+        "bytes": 33328,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/ir.py",
+        "sha256": "40f59ac33b5e8c282b06d7d8dec34940ffa8013f50fc65fc71e19a1ea41ef282"
+      },
+      "before": {
+        "bytes": 33328,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/ir.py",
+        "sha256": "40f59ac33b5e8c282b06d7d8dec34940ffa8013f50fc65fc71e19a1ea41ef282"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.ir"
+    },
+    {
+      "after": {
+        "bytes": 15384,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/properties.py",
+        "sha256": "0b438555895505df283d7f151887a14d826df27259f4f5eee0ac584b74dbe10a"
+      },
+      "before": {
+        "bytes": 15384,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/properties.py",
+        "sha256": "0b438555895505df283d7f151887a14d826df27259f4f5eee0ac584b74dbe10a"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.properties"
+    },
+    {
+      "after": {
+        "bytes": 14373,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/code_logic_projection.py",
+        "sha256": "e6328d747d54f26835b8da24c87a9a80eff6951bdc936c87243307574a85788b"
+      },
+      "before": {
+        "bytes": 14373,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/security_ir/code_logic_projection.py",
+        "sha256": "e6328d747d54f26835b8da24c87a9a80eff6951bdc936c87243307574a85788b"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.security_ir.code_logic_projection"
+    },
+    {
+      "after": {
+        "bytes": 36669,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/contracts.py",
+        "sha256": "0238a345e5c35aec78801891562e896d719bca0424eab8ad790d5da2c239c5aa"
+      },
+      "before": {
+        "bytes": 36669,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/contracts.py",
+        "sha256": "0238a345e5c35aec78801891562e896d719bca0424eab8ad790d5da2c239c5aa"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.contracts"
+    },
+    {
+      "after": {
+        "bytes": 47121,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/transitions.py",
+        "sha256": "982d7e3a243fb70f5f797b7b6efdb45faebb3895945b06c04a9421fbe4ba7d86"
+      },
+      "before": {
+        "bytes": 47121,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/transitions.py",
+        "sha256": "982d7e3a243fb70f5f797b7b6efdb45faebb3895945b06c04a9421fbe4ba7d86"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.transitions"
+    },
+    {
+      "after": {
+        "bytes": 35431,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/state.py",
+        "sha256": "085841a600ed8f8fde202e720d1f70e5a0432e4bf80d20ff11fe60c90107c54c"
+      },
+      "before": {
+        "bytes": 35431,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/state.py",
+        "sha256": "085841a600ed8f8fde202e720d1f70e5a0432e4bf80d20ff11fe60c90107c54c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.state"
+    },
+    {
+      "after": {
+        "bytes": 48463,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/temporal.py",
+        "sha256": "56d8a6d3a5e7f11dd9f4d9d2096ec0f787a481b006abac311d212bbc622558dc"
+      },
+      "before": {
+        "bytes": 48463,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/temporal.py",
+        "sha256": "56d8a6d3a5e7f11dd9f4d9d2096ec0f787a481b006abac311d212bbc622558dc"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.temporal"
+    },
+    {
+      "after": {
+        "bytes": 28653,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/trace.py",
+        "sha256": "4751f221cbe8ae8f2b328e3db3faf620b57288df9c3d22baba6e289f80523512"
+      },
+      "before": {
+        "bytes": 28653,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/trace.py",
+        "sha256": "4751f221cbe8ae8f2b328e3db3faf620b57288df9c3d22baba6e289f80523512"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.trace"
+    },
+    {
+      "after": {
+        "bytes": 44622,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/heap.py",
+        "sha256": "62e61bcd48cd17201dcd52f5e9d9458da44ef6c2af3dbe7b64587d77ac8c8e1b"
+      },
+      "before": {
+        "bytes": 44622,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/heap.py",
+        "sha256": "62e61bcd48cd17201dcd52f5e9d9458da44ef6c2af3dbe7b64587d77ac8c8e1b"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.heap"
+    },
+    {
+      "after": {
+        "bytes": 56048,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/separation.py",
+        "sha256": "b8f2985c26c8fc2db6f6bbbd4c5959554d6ce6f21d228618eba2d47f3ea5a9a4"
+      },
+      "before": {
+        "bytes": 56048,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/separation.py",
+        "sha256": "b8f2985c26c8fc2db6f6bbbd4c5959554d6ce6f21d228618eba2d47f3ea5a9a4"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.separation"
+    },
+    {
+      "after": {
+        "bytes": 88932,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/hyperproperties.py",
+        "sha256": "c49cb173aa9cd9cbbb69f72e461c0c7c048264cbbd7b92af7fd3c7390bd69ecb"
+      },
+      "before": {
+        "bytes": 88932,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/hyperproperties.py",
+        "sha256": "c49cb173aa9cd9cbbb69f72e461c0c7c048264cbbd7b92af7fd3c7390bd69ecb"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.hyperproperties"
+    },
+    {
+      "after": {
+        "bytes": 47941,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/syntax_bridge.py",
+        "sha256": "cc46f305dede1cadb358a524f30dbb894b84ab062f0c083c3138c7e43f271116"
+      },
+      "before": {
+        "bytes": 47941,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/syntax_bridge.py",
+        "sha256": "cc46f305dede1cadb358a524f30dbb894b84ab062f0c083c3138c7e43f271116"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.syntax_bridge"
+    },
+    {
+      "after": {
+        "bytes": 8285,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/__init__.py",
+        "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+      },
+      "before": {
+        "bytes": 8285,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/__init__.py",
+        "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.syntax_core"
+    },
+    {
+      "after": {
+        "bytes": 56966,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/ast.py",
+        "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+      },
+      "before": {
+        "bytes": 56966,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/ast.py",
+        "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.syntax_core.ast"
+    },
+    {
+      "after": {
+        "bytes": 34262,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/families/namespaces.py",
+        "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+      },
+      "before": {
+        "bytes": 34262,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/families/namespaces.py",
+        "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.families.namespaces"
+    },
+    {
+      "after": {
+        "bytes": 75291,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/contracts.py",
+        "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+      },
+      "before": {
+        "bytes": 75291,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/contracts.py",
+        "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.syntax_core.contracts"
+    },
+    {
+      "after": {
+        "bytes": 30488,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/signatures.py",
+        "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+      },
+      "before": {
+        "bytes": 30488,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/signatures.py",
+        "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.syntax_core.signatures"
+    },
+    {
+      "after": {
+        "bytes": 95747,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/authorization.py",
+        "sha256": "78f04e9231f9d04d98ab3597e52e8bb8c49d63047544657d33491b161effeeb7"
+      },
+      "before": {
+        "bytes": 95747,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/authorization.py",
+        "sha256": "78f04e9231f9d04d98ab3597e52e8bb8c49d63047544657d33491b161effeeb7"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.authorization"
+    },
+    {
+      "after": {
+        "bytes": 71898,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/concurrency.py",
+        "sha256": "4d47e1ffd235282b841ae00644832ec9105fc90ee9dbf05ced901f937e0e346a"
+      },
+      "before": {
+        "bytes": 71898,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/concurrency.py",
+        "sha256": "4d47e1ffd235282b841ae00644832ec9105fc90ee9dbf05ced901f937e0e346a"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.concurrency"
+    },
+    {
+      "after": {
+        "bytes": 81092,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/protocol.py",
+        "sha256": "46e69f306c9eb2368d5d1abe589b10dfa10d09ab2e0ef3018585c76bd7c6335a"
+      },
+      "before": {
+        "bytes": 81092,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/protocol.py",
+        "sha256": "46e69f306c9eb2368d5d1abe589b10dfa10d09ab2e0ef3018585c76bd7c6335a"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.protocol"
+    },
+    {
+      "after": {
+        "bytes": 56593,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/refinement.py",
+        "sha256": "975b8493035f414e82a611499c119aab9843b0b8546bd1cb82d04344f170874d"
+      },
+      "before": {
+        "bytes": 56593,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/refinement.py",
+        "sha256": "975b8493035f414e82a611499c119aab9843b0b8546bd1cb82d04344f170874d"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.refinement"
+    },
+    {
+      "after": {
+        "bytes": 81752,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/vc.py",
+        "sha256": "bc738a32af07afb4cc787d0ea5f743dc01e99d52230a45669bb04222e6cf7bf9"
+      },
+      "before": {
+        "bytes": 81752,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/vc.py",
+        "sha256": "bc738a32af07afb4cc787d0ea5f743dc01e99d52230a45669bb04222e6cf7bf9"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.vc"
+    },
+    {
+      "after": {
+        "bytes": 53127,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/evaluation/splits.py",
+        "sha256": "73339a0936ab19fa24acd8ea89e0037515226090c7b5d483b60c2c06241184e7"
+      },
+      "before": {
+        "bytes": 53127,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/evaluation/splits.py",
+        "sha256": "73339a0936ab19fa24acd8ea89e0037515226090c7b5d483b60c2c06241184e7"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.evaluation.splits"
+    },
+    {
+      "after": {
+        "bytes": 15447,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/domain_targets.py",
+        "sha256": "b373c8b26310a761525459880de7fa7ba052e0fde57f1d0cbe2ddd9d2f85b586"
+      },
+      "before": {
+        "bytes": 15447,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/autoencoder/domain_targets.py",
+        "sha256": "b373c8b26310a761525459880de7fa7ba052e0fde57f1d0cbe2ddd9d2f85b586"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.domain_targets"
+    },
+    {
+      "after": {
+        "bytes": 22238,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+        "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+      },
+      "before": {
+        "bytes": 22238,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+        "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.modal_projections"
+    },
+    {
+      "after": {
+        "bytes": 21237,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/state_projections.py",
+        "sha256": "d22aa49f30252bf70c63ab76ee8338a045751f37d8cfeb5314c0587a0658ccb1"
+      },
+      "before": {
+        "bytes": 21237,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/state_projections.py",
+        "sha256": "d22aa49f30252bf70c63ab76ee8338a045751f37d8cfeb5314c0587a0658ccb1"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.state_projections"
+    },
+    {
+      "after": {
+        "bytes": 18947,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/structural_projections.py",
+        "sha256": "c03ce3a4a083c463a3ced8d8dd8e08b9693711e35829cf8f44b9b007ab1bd6b9"
+      },
+      "before": {
+        "bytes": 18947,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/structural_projections.py",
+        "sha256": "c03ce3a4a083c463a3ced8d8dd8e08b9693711e35829cf8f44b9b007ab1bd6b9"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.structural_projections"
+    },
+    {
+      "after": {
+        "bytes": 3407,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/__init__.py",
+        "sha256": "8f4f1468b80c29eb7f6af4c02907adccc6bad5df1c7f22de5be7731a52b04b6b"
+      },
+      "before": {
+        "bytes": 3407,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/__init__.py",
+        "sha256": "8f4f1468b80c29eb7f6af4c02907adccc6bad5df1c7f22de5be7731a52b04b6b"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC"
+    },
+    {
+      "after": {
+        "bytes": 7228,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/__init__.py",
+        "sha256": "7c467c25a9abdc899a46266ed21582443dbd412fb07acf129d5fb34a90be9dc6"
+      },
+      "before": {
+        "bytes": 7228,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/__init__.py",
+        "sha256": "7c467c25a9abdc899a46266ed21582443dbd412fb07acf129d5fb34a90be9dc6"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native"
+    },
+    {
+      "after": {
+        "bytes": 57189,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+        "sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14"
+      },
+      "before": {
+        "bytes": 57189,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+        "sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.dcec_core"
+    },
+    {
+      "after": {
+        "bytes": 10095,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/exceptions.py",
+        "sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622"
+      },
+      "before": {
+        "bytes": 10095,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/exceptions.py",
+        "sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.exceptions"
+    },
+    {
+      "after": {
+        "bytes": 13580,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_namespace.py",
+        "sha256": "9e6903c74d3b95634f86f4f67392ca61bf9a284b577294d2b12ff001d9fbeb24"
+      },
+      "before": {
+        "bytes": 13580,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_namespace.py",
+        "sha256": "9e6903c74d3b95634f86f4f67392ca61bf9a284b577294d2b12ff001d9fbeb24"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.dcec_namespace"
+    },
+    {
+      "after": {
+        "bytes": 19007,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/prover_core.py",
+        "sha256": "c734b6cfbd05cd73bb5836d0635c1d9bb95ce3d722567e5afd082a4edb963487"
+      },
+      "before": {
+        "bytes": 19007,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/prover_core.py",
+        "sha256": "c734b6cfbd05cd73bb5836d0635c1d9bb95ce3d722567e5afd082a4edb963487"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.prover_core"
+    },
+    {
+      "after": {
+        "bytes": 4312,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py",
+        "sha256": "46d1d7677be5038b9006cfa6738940dd306aa404736295cf58d201a4a398c641"
+      },
+      "before": {
+        "bytes": 4312,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py",
+        "sha256": "46d1d7677be5038b9006cfa6738940dd306aa404736295cf58d201a4a398c641"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules"
+    },
+    {
+      "after": {
+        "bytes": 2387,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/base.py",
+        "sha256": "5776e79206eb65fc3d2e898e48c374cba6fde09dbc48661d1ffb8417f2d99646"
+      },
+      "before": {
+        "bytes": 2387,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/base.py",
+        "sha256": "5776e79206eb65fc3d2e898e48c374cba6fde09dbc48661d1ffb8417f2d99646"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules.base"
+    },
+    {
+      "after": {
+        "bytes": 15934,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py",
+        "sha256": "feb45f9807bc2d1cd38738006cb98cc553aa652918ee1158e8b106131ccd86bb"
+      },
+      "before": {
+        "bytes": 15934,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py",
+        "sha256": "feb45f9807bc2d1cd38738006cb98cc553aa652918ee1158e8b106131ccd86bb"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules.propositional"
+    },
+    {
+      "after": {
+        "bytes": 23768,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py",
+        "sha256": "08d09c5be78e72168a4f4edef74840e766f65e1b9a9e4601f3000308254b9eaf"
+      },
+      "before": {
+        "bytes": 23768,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py",
+        "sha256": "08d09c5be78e72168a4f4edef74840e766f65e1b9a9e4601f3000308254b9eaf"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules.temporal"
+    },
+    {
+      "after": {
+        "bytes": 15450,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py",
+        "sha256": "8ef29a48e2e132f595ead529d446f7180745920ffae790feac985c121b4a6ddb"
+      },
+      "before": {
+        "bytes": 15450,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py",
+        "sha256": "8ef29a48e2e132f595ead529d446f7180745920ffae790feac985c121b4a6ddb"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules.deontic"
+    },
+    {
+      "after": {
+        "bytes": 24462,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py",
+        "sha256": "329334034ecfbb55fcb306c0d084a2a31f658a85af2ecb1edaef1c6ad7de7813"
+      },
+      "before": {
+        "bytes": 24462,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py",
+        "sha256": "329334034ecfbb55fcb306c0d084a2a31f658a85af2ecb1edaef1c6ad7de7813"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules.cognitive"
+    },
+    {
+      "after": {
+        "bytes": 9218,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py",
+        "sha256": "4ddf941cb2c2920699ec0e7f48d34b68a727da40a8868bd161c56eb315c2e4ef"
+      },
+      "before": {
+        "bytes": 9218,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py",
+        "sha256": "4ddf941cb2c2920699ec0e7f48d34b68a727da40a8868bd161c56eb315c2e4ef"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules.modal"
+    },
+    {
+      "after": {
+        "bytes": 15219,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py",
+        "sha256": "8a5078e2e5ed25c350b8d28d6173f0013c6f78d075bfe5ca4b0516d46cbfcd82"
+      },
+      "before": {
+        "bytes": 15219,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py",
+        "sha256": "8a5078e2e5ed25c350b8d28d6173f0013c6f78d075bfe5ca4b0516d46cbfcd82"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules.resolution"
+    },
+    {
+      "after": {
+        "bytes": 16154,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py",
+        "sha256": "6a3d14356a1b076c7c943d7bd30da7d7694c03bae9da0d3ccf5a8bf848e7de96"
+      },
+      "before": {
+        "bytes": 16154,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py",
+        "sha256": "6a3d14356a1b076c7c943d7bd30da7d7694c03bae9da0d3ccf5a8bf848e7de96"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.inference_rules.specialized"
+    },
+    {
+      "after": {
+        "bytes": 51196,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py",
+        "sha256": "07e26b65dba0a2f6be6bf7f36424a25da28d4c1e440e703b6985044684d9b253"
+      },
+      "before": {
+        "bytes": 51196,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py",
+        "sha256": "07e26b65dba0a2f6be6bf7f36424a25da28d4c1e440e703b6985044684d9b253"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.prover_core_extended_rules"
+    },
+    {
+      "after": {
+        "bytes": 15938,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/nl_converter.py",
+        "sha256": "016b8e4893b9825e2f3b0a95d331691736433a1cdae430dde2d831862e0bf254"
+      },
+      "before": {
+        "bytes": 15938,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/nl_converter.py",
+        "sha256": "016b8e4893b9825e2f3b0a95d331691736433a1cdae430dde2d831862e0bf254"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.nl_converter"
+    },
+    {
+      "after": {
+        "bytes": 26343,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py",
+        "sha256": "2b87f9e7d256dd236c65147eabfc55bd3d481e74be63c80c23f6720d33cba0b2"
+      },
+      "before": {
+        "bytes": 26343,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py",
+        "sha256": "2b87f9e7d256dd236c65147eabfc55bd3d481e74be63c80c23f6720d33cba0b2"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.dcec_english_grammar"
+    },
+    {
+      "after": {
+        "bytes": 14472,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/grammar_engine.py",
+        "sha256": "df787f7656894c063eaad5e16bc78168f1fd7c301a0907639dfb466b5f286293"
+      },
+      "before": {
+        "bytes": 14472,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/grammar_engine.py",
+        "sha256": "df787f7656894c063eaad5e16bc78168f1fd7c301a0907639dfb466b5f286293"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.grammar_engine"
+    },
+    {
+      "after": {
+        "bytes": 9131,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+        "sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0"
+      },
+      "before": {
+        "bytes": 9131,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+        "sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.dcec_cleaning"
+    },
+    {
+      "after": {
+        "bytes": 14204,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+        "sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70"
+      },
+      "before": {
+        "bytes": 14204,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+        "sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.dcec_parsing"
+    },
+    {
+      "after": {
+        "bytes": 15038,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+        "sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e"
+      },
+      "before": {
+        "bytes": 15038,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+        "sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.dcec_prototypes"
+    },
+    {
+      "after": {
+        "bytes": 18642,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+        "sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82"
+      },
+      "before": {
+        "bytes": 18642,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+        "sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.dcec_integration"
+    },
+    {
+      "after": {
+        "bytes": 4694,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py",
+        "sha256": "0e70084ecacfed64efa46716d13e5ecfd6a44686df5546a67716eb5cadc4a7fd"
+      },
+      "before": {
+        "bytes": 4694,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py",
+        "sha256": "0e70084ecacfed64efa46716d13e5ecfd6a44686df5546a67716eb5cadc4a7fd"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.legal_ir_lifecycle"
+    },
+    {
+      "after": {
+        "bytes": 22696,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/shadow_prover.py",
+        "sha256": "90049debb68b2ae19238ee4637bd3b5a3124a7f06bb9448cd3567621df95d496"
+      },
+      "before": {
+        "bytes": 22696,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/shadow_prover.py",
+        "sha256": "90049debb68b2ae19238ee4637bd3b5a3124a7f06bb9448cd3567621df95d496"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.shadow_prover"
+    },
+    {
+      "after": {
+        "bytes": 17450,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/modal_tableaux.py",
+        "sha256": "5910e250b1aa61221f22318e6cea6858df3ee1701fe631634f9e1977ae671235"
+      },
+      "before": {
+        "bytes": 17450,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/modal_tableaux.py",
+        "sha256": "5910e250b1aa61221f22318e6cea6858df3ee1701fe631634f9e1977ae671235"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.modal_tableaux"
+    },
+    {
+      "after": {
+        "bytes": 10061,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/problem_parser.py",
+        "sha256": "fd946d11ca07fcf09db67f91f3a90680f8b7024c373be09c514ff91a957682d3"
+      },
+      "before": {
+        "bytes": 10061,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/problem_parser.py",
+        "sha256": "fd946d11ca07fcf09db67f91f3a90680f8b7024c373be09c514ff91a957682d3"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.problem_parser"
+    },
+    {
+      "after": {
+        "bytes": 18314,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py",
+        "sha256": "8a40f17c0b82d7f8b9dfb8654d53c5f9472852acbcc830fdb3f3d98221f71bf3"
+      },
+      "before": {
+        "bytes": 18314,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py",
+        "sha256": "8a40f17c0b82d7f8b9dfb8654d53c5f9472852acbcc830fdb3f3d98221f71bf3"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.cec_proof_cache"
+    },
+    {
+      "after": {
+        "bytes": 2438,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/__init__.py",
+        "sha256": "e574c74067e7059cc506b32c780bc0444de89c63b55dade3df00ae9fd563431e"
+      },
+      "before": {
+        "bytes": 2438,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/__init__.py",
+        "sha256": "e574c74067e7059cc506b32c780bc0444de89c63b55dade3df00ae9fd563431e"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.common"
+    },
+    {
+      "after": {
+        "bytes": 2268,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/errors.py",
+        "sha256": "10d21acd8d0fd6049297a1b36d10db1fcc09146095f1dabfe5a686b887f4b8cf"
+      },
+      "before": {
+        "bytes": 2268,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/errors.py",
+        "sha256": "10d21acd8d0fd6049297a1b36d10db1fcc09146095f1dabfe5a686b887f4b8cf"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.common.errors"
+    },
+    {
+      "after": {
+        "bytes": 13962,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/converters.py",
+        "sha256": "f530c453775f2c1a4a2f8a26aa647df1f725be109078df258288eab33a427fde"
+      },
+      "before": {
+        "bytes": 13962,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/converters.py",
+        "sha256": "f530c453775f2c1a4a2f8a26aa647df1f725be109078df258288eab33a427fde"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.common.converters"
+    },
+    {
+      "after": {
+        "bytes": 6656,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/bounded_cache.py",
+        "sha256": "29a450b5fc08c5577964774035717dc5d7be85c159cfd502fba5252c4ec9c9fa"
+      },
+      "before": {
+        "bytes": 6656,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/bounded_cache.py",
+        "sha256": "29a450b5fc08c5577964774035717dc5d7be85c159cfd502fba5252c4ec9c9fa"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.common.bounded_cache"
+    },
+    {
+      "after": {
+        "bytes": 6398,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/utility_monitor.py",
+        "sha256": "ef23631a622dfd555cefcdf69793e78a7c64a115c7451aea4dfff5389b014985"
+      },
+      "before": {
+        "bytes": 6398,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/utility_monitor.py",
+        "sha256": "ef23631a622dfd555cefcdf69793e78a7c64a115c7451aea4dfff5389b014985"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.common.utility_monitor"
+    },
+    {
+      "after": {
+        "bytes": 168205,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/proof_cache.py",
+        "sha256": "b68c36ff934ba6ee7a308162ee7035c78f4c522a5483e85e536b428db8485b36"
+      },
+      "before": {
+        "bytes": 168205,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/proof_cache.py",
+        "sha256": "b68c36ff934ba6ee7a308162ee7035c78f4c522a5483e85e536b428db8485b36"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.common.proof_cache"
+    },
+    {
+      "after": {
+        "bytes": 175,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/utils/__init__.py",
+        "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+      },
+      "before": {
+        "bytes": 175,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/utils/__init__.py",
+        "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.utils"
+    },
+    {
+      "after": {
+        "bytes": 4428,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/utils/cid_utils.py",
+        "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+      },
+      "before": {
+        "bytes": 4428,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/utils/cid_utils.py",
+        "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.utils.cid_utils"
+    },
+    {
+      "after": {
+        "bytes": 4875,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/feature_detection.py",
+        "sha256": "a285d84f9b13ee3c2c54023e07ccf9da94ce93e6736362c1881421db9e509d76"
+      },
+      "before": {
+        "bytes": 4875,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/feature_detection.py",
+        "sha256": "a285d84f9b13ee3c2c54023e07ccf9da94ce93e6736362c1881421db9e509d76"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.common.feature_detection"
+    },
+    {
+      "after": {
+        "bytes": 8374,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/validators.py",
+        "sha256": "e58dbba7d3f346545e2ff572928ed9c7bb9adc71b20e8cc8dc816a7fc060e0c7"
+      },
+      "before": {
+        "bytes": 8374,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/common/validators.py",
+        "sha256": "e58dbba7d3f346545e2ff572928ed9c7bb9adc71b20e8cc8dc816a7fc060e0c7"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.common.validators"
+    },
+    {
+      "after": {
+        "bytes": 19473,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py",
+        "sha256": "8284720a83162918a9785ec31d2e44dfbb2dd948a0f653b451745b0f8e3ab962"
+      },
+      "before": {
+        "bytes": 19473,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py",
+        "sha256": "8284720a83162918a9785ec31d2e44dfbb2dd948a0f653b451745b0f8e3ab962"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.CEC.native.cec_zkp_integration"
+    },
+    {
+      "after": {
+        "bytes": 8817,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/zkp/__init__.py",
+        "sha256": "ea2eb0e91ae023d2b2180189c26fda4bf9fac3a9d0b1189cbe415676b2af3151"
+      },
+      "before": {
+        "bytes": 8817,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/zkp/__init__.py",
+        "sha256": "ea2eb0e91ae023d2b2180189c26fda4bf9fac3a9d0b1189cbe415676b2af3151"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.zkp"
+    },
+    {
+      "after": {
+        "bytes": 51399,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/families/registry.py",
+        "sha256": "669c4d90dbbac1014bd3dced401027be0391d304477b904f9da04d5a2d6c0450"
+      },
+      "before": {
+        "bytes": 51399,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/families/registry.py",
+        "sha256": "669c4d90dbbac1014bd3dced401027be0391d304477b904f9da04d5a2d6c0450"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.families.registry"
+    },
+    {
+      "after": {
+        "bytes": 11004,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/TDFOL/__init__.py",
+        "sha256": "42c252ba4fb85301b649bc3afe497a2799d27460b9556e57c7398b5441ba13e8"
+      },
+      "before": {
+        "bytes": 11004,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/TDFOL/__init__.py",
+        "sha256": "42c252ba4fb85301b649bc3afe497a2799d27460b9556e57c7398b5441ba13e8"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.TDFOL"
+    },
+    {
+      "after": {
+        "bytes": 28721,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+        "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+      },
+      "before": {
+        "bytes": 28721,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+        "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.TDFOL.tdfol_core"
+    },
+    {
+      "after": {
+        "bytes": 3636,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+        "sha256": "c0306a55184bc6baabf7528bf7a255604ff8c49d2c510afde13eae2e8108ff88"
+      },
+      "before": {
+        "bytes": 3636,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+        "sha256": "c0306a55184bc6baabf7528bf7a255604ff8c49d2c510afde13eae2e8108ff88"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.TDFOL.compiler_repairs"
+    },
+    {
+      "after": {
+        "bytes": 29788,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+        "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+      },
+      "before": {
+        "bytes": 29788,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+        "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.TDFOL.tdfol_parser"
+    },
+    {
+      "after": {
+        "bytes": 8980,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/parsers/__init__.py",
+        "sha256": "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+      },
+      "before": {
+        "bytes": 8980,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/parsers/__init__.py",
+        "sha256": "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.parsers"
+    },
+    {
+      "after": {
+        "bytes": 27560,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/registry.py",
+        "sha256": "eff5ca12d748eff1e9463b737a8243c97d89cac51e1b604fe2c765aed885cb44"
+      },
+      "before": {
+        "bytes": 27560,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/registry.py",
+        "sha256": "eff5ca12d748eff1e9463b737a8243c97d89cac51e1b604fe2c765aed885cb44"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.syntax_core.registry"
+    },
+    {
+      "after": {
+        "bytes": 59003,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/parsers/event_calculus.py",
+        "sha256": "8bd7217febef6daf86f76bae7e03ab0cbf7eb22a1b64f3040fd26a3d2ebfc390"
+      },
+      "before": {
+        "bytes": 59003,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/parsers/event_calculus.py",
+        "sha256": "8bd7217febef6daf86f76bae7e03ab0cbf7eb22a1b64f3040fd26a3d2ebfc390"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.parsers.event_calculus"
+    },
+    {
+      "after": {
+        "bytes": 45735,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/algebra.py",
+        "sha256": "d3587e2270943167ebef226e03cbd70cfc8888d936647670a21cfa514240e6b7"
+      },
+      "before": {
+        "bytes": 45735,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/algebra.py",
+        "sha256": "d3587e2270943167ebef226e03cbd70cfc8888d936647670a21cfa514240e6b7"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.syntax_core.algebra"
+    },
+    {
+      "after": {
+        "bytes": 10752,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/diagnostics.py",
+        "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+      },
+      "before": {
+        "bytes": 10752,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/diagnostics.py",
+        "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.syntax_core.diagnostics"
+    },
+    {
+      "after": {
+        "bytes": 27534,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/lexer.py",
+        "sha256": "f666e9759323508f4e90964c0d71164645af9ce1de60bed778e5f64f7f4a3aea"
+      },
+      "before": {
+        "bytes": 27534,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/syntax_core/lexer.py",
+        "sha256": "f666e9759323508f4e90964c0d71164645af9ce1de60bed778e5f64f7f4a3aea"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.syntax_core.lexer"
+    },
+    {
+      "after": {
+        "bytes": 83865,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/tla/compiler.py",
+        "sha256": "6c136f55a79d16d99c641b7b6f7646d0254413b7069b1ac8deed8e28fa5a18c6"
+      },
+      "before": {
+        "bytes": 83865,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/tla/compiler.py",
+        "sha256": "6c136f55a79d16d99c641b7b6f7646d0254413b7069b1ac8deed8e28fa5a18c6"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.backends.tla.compiler"
+    },
+    {
+      "after": {
+        "bytes": 28440,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/translations.py",
+        "sha256": "c418cf45efd69dd01ced3eb2e05f9bc411ab12855fa408401d1ba74839df6dda"
+      },
+      "before": {
+        "bytes": 28440,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/software_verification/translations.py",
+        "sha256": "c418cf45efd69dd01ced3eb2e05f9bc411ab12855fa408401d1ba74839df6dda"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.software_verification.translations"
+    },
+    {
+      "after": {
+        "bytes": 78083,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/parsers/flogic.py",
+        "sha256": "85ac4353d2bd15fee7cfcf345a4f7afe33d27baca49b1b273f08a217298d1bb7"
+      },
+      "before": {
+        "bytes": 78083,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/parsers/flogic.py",
+        "sha256": "85ac4353d2bd15fee7cfcf345a4f7afe33d27baca49b1b273f08a217298d1bb7"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.parsers.flogic"
+    },
+    {
+      "after": {
+        "bytes": 27160,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/results.py",
+        "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+      },
+      "before": {
+        "bytes": 27160,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/results.py",
+        "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.backends.results"
+    },
+    {
+      "after": {
+        "bytes": 57414,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/protocols.py",
+        "sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed"
+      },
+      "before": {
+        "bytes": 57414,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/ir_core/protocols.py",
+        "sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.ir_core.protocols"
+    },
+    {
+      "after": {
+        "bytes": 53880,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/toolchain_roles.py",
+        "sha256": "1f5ffbf35e9171b77474da7fb7a1eeb91579a3d09fc0f99d480abfd49aaaf3e0"
+      },
+      "before": {
+        "bytes": 53880,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/toolchain_roles.py",
+        "sha256": "1f5ffbf35e9171b77474da7fb7a1eeb91579a3d09fc0f99d480abfd49aaaf3e0"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.backends.toolchain_roles"
+    },
+    {
+      "after": {
+        "bytes": 7283,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_ir.py",
+        "sha256": "697b8e183fb966f01a0b81e4241154c38d2785277739518cbdfcc8db37695743"
+      },
+      "before": {
+        "bytes": 7283,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_ir.py",
+        "sha256": "697b8e183fb966f01a0b81e4241154c38d2785277739518cbdfcc8db37695743"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_ir"
+    },
+    {
+      "after": {
+        "bytes": 105593,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/parsers/rules.py",
+        "sha256": "14b04bd0e77a99a7f99a7c76e0f126552f9fc256d94bfb53280c3a75131c24ed"
+      },
+      "before": {
+        "bytes": 105593,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/parsers/rules.py",
+        "sha256": "14b04bd0e77a99a7f99a7c76e0f126552f9fc256d94bfb53280c3a75131c24ed"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.parsers.rules"
+    },
+    {
+      "after": {
+        "bytes": 59085,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+        "sha256": "b9eb0aeab9fef143609a09860713548fa617d53de800c8c82643aac4390f2d9b"
+      },
+      "before": {
+        "bytes": 59085,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/compiler.py",
+        "sha256": "b9eb0aeab9fef143609a09860713548fa617d53de800c8c82643aac4390f2d9b"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.compiler"
+    },
+    {
+      "after": {
+        "bytes": 35152,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/compiler.py",
+        "sha256": "2d4c63025e3d0004774c3a1d688193187f115b181085d7825d46c9d72581b03c"
+      },
+      "before": {
+        "bytes": 35152,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/compiler.py",
+        "sha256": "2d4c63025e3d0004774c3a1d688193187f115b181085d7825d46c9d72581b03c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.compiler"
+    },
+    {
+      "after": {
+        "bytes": 13082,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/samples.py",
+        "sha256": "90b5efa905eb9d3fb980cb628d32a180d37fa9097fb252b3aad006a3eb628695"
+      },
+      "before": {
+        "bytes": 13082,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/samples.py",
+        "sha256": "90b5efa905eb9d3fb980cb628d32a180d37fa9097fb252b3aad006a3eb628695"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.samples"
+    },
+    {
+      "after": {
+        "bytes": 29888,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/views.py",
+        "sha256": "509fdf2d7334559c7ef176d504d5a6a9d8645c99c00c779d14cb3d08c51f9ae2"
+      },
+      "before": {
+        "bytes": 29888,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/formalization/views.py",
+        "sha256": "509fdf2d7334559c7ef176d504d5a6a9d8645c99c00c779d14cb3d08c51f9ae2"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.formalization.views"
+    },
+    {
+      "after": {
+        "bytes": 30952,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/graphrag/retrieval.py",
+        "sha256": "c54484421a6d4a6c45e8fe6fb75a53fc4788a9014fcfe6c4da76bd9046dcf6bd"
+      },
+      "before": {
+        "bytes": 30952,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/graphrag/retrieval.py",
+        "sha256": "c54484421a6d4a6c45e8fe6fb75a53fc4788a9014fcfe6c4da76bd9046dcf6bd"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.graphrag.retrieval"
+    },
+    {
+      "after": {
+        "bytes": 25947,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/graphrag/ontology.py",
+        "sha256": "b7578d181cc6967383a7466c4e5079237819b27130ea1bf08282a8abf4c258d4"
+      },
+      "before": {
+        "bytes": 25947,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/graphrag/ontology.py",
+        "sha256": "b7578d181cc6967383a7466c4e5079237819b27130ea1bf08282a8abf4c258d4"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.graphrag.ontology"
+    },
+    {
+      "after": {
+        "bytes": 49951,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/graphrag/semantic_projector.py",
+        "sha256": "5f7cec8a6fa2e21c8f680b286eb4cdea96bf7532f312a45a67c4d7f85385a162"
+      },
+      "before": {
+        "bytes": 49951,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/graphrag/semantic_projector.py",
+        "sha256": "5f7cec8a6fa2e21c8f680b286eb4cdea96bf7532f312a45a67c4d7f85385a162"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.graphrag.semantic_projector"
+    },
+    {
+      "after": {
+        "bytes": 46700,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/graphrag/corpus_projector.py",
+        "sha256": "2192e20f17fe4d625c2b21b2460915c1b798457dfd1fff3016e3019e6891e09c"
+      },
+      "before": {
+        "bytes": 46700,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/graphrag/corpus_projector.py",
+        "sha256": "2192e20f17fe4d625c2b21b2460915c1b798457dfd1fff3016e3019e6891e09c"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.graphrag.corpus_projector"
+    },
+    {
+      "after": {
+        "bytes": 732,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/__init__.py",
+        "sha256": "d60f048c70a7b90c668e1bc8064eaf78eafadfb7c579db47c63ad51b70fac5aa"
+      },
+      "before": {
+        "bytes": 732,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/__init__.py",
+        "sha256": "d60f048c70a7b90c668e1bc8064eaf78eafadfb7c579db47c63ad51b70fac5aa"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.source_adapters"
+    },
+    {
+      "after": {
+        "bytes": 21084,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/skillcenter.py",
+        "sha256": "3d10d1b7a78df0184b44ee05747d27581761b7d687c2b5bf78891c6fa2597636"
+      },
+      "before": {
+        "bytes": 21084,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/skillcenter.py",
+        "sha256": "3d10d1b7a78df0184b44ee05747d27581761b7d687c2b5bf78891c6fa2597636"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.source_adapters.skillcenter"
+    },
+    {
+      "after": {
+        "bytes": 54035,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/profile_g.py",
+        "sha256": "4ca5dcc601f30c723467f425a6a03a7c5b1f644c2239a0f4a489705f1b715f03"
+      },
+      "before": {
+        "bytes": 54035,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/profile_g.py",
+        "sha256": "4ca5dcc601f30c723467f425a6a03a7c5b1f644c2239a0f4a489705f1b715f03"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.profile_g"
+    },
+    {
+      "after": {
+        "bytes": 33406,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/policy.py",
+        "sha256": "cfa048dda6ffb1fdd70de99491997e1e5968f97c5a8abdf9346e59a446d8daa8"
+      },
+      "before": {
+        "bytes": 33406,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/source_adapters/policy.py",
+        "sha256": "cfa048dda6ffb1fdd70de99491997e1e5968f97c5a8abdf9346e59a446d8daa8"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.source_adapters.policy"
+    },
+    {
+      "after": {
+        "bytes": 32432,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/decompiler.py",
+        "sha256": "4a06beefbc7d29bbcfcbd0dcff6268db6e3aeecab977629ea5553fcd5b311174"
+      },
+      "before": {
+        "bytes": 32432,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/decompiler.py",
+        "sha256": "4a06beefbc7d29bbcfcbd0dcff6268db6e3aeecab977629ea5553fcd5b311174"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.decompiler"
+    },
+    {
+      "after": {
+        "bytes": 83760,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/typed_compiler.py",
+        "sha256": "e7b361f0e03b97995e4665c051d32d8635ac7445b7893bf3a5eb4ae30a507c3b"
+      },
+      "before": {
+        "bytes": 83760,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/typed_compiler.py",
+        "sha256": "e7b361f0e03b97995e4665c051d32d8635ac7445b7893bf3a5eb4ae30a507c3b"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.typed_compiler"
+    },
+    {
+      "after": {
+        "bytes": 1457,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/integrations/__init__.py",
+        "sha256": "bdb2341ef1aa175864b322be35079f1043ad4aabfe5c81a9b01227d7a41af776"
+      },
+      "before": {
+        "bytes": 1457,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/integrations/__init__.py",
+        "sha256": "bdb2341ef1aa175864b322be35079f1043ad4aabfe5c81a9b01227d7a41af776"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.integrations"
+    },
+    {
+      "after": {
+        "bytes": 78186,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/integrations/typesafe_advisor.py",
+        "sha256": "f8647ffcf8dc1266030182a05929e51de5f4bc701f610f00ee544fb24f552b52"
+      },
+      "before": {
+        "bytes": 78186,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/integrations/typesafe_advisor.py",
+        "sha256": "f8647ffcf8dc1266030182a05929e51de5f4bc701f610f00ee544fb24f552b52"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.integrations.typesafe_advisor"
+    },
+    {
+      "after": {
+        "bytes": 40208,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/ipfs_accelerate_py/__init__.py",
+        "sha256": "5083369f823be18cd467346f6f3b955925ec65bedafe9eb28a61ca8897997c03"
+      },
+      "before": {
+        "bytes": 40208,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/ipfs_accelerate_py/__init__.py",
+        "sha256": "5083369f823be18cd467346f6f3b955925ec65bedafe9eb28a61ca8897997c03"
+      },
+      "matches": true,
+      "module": "ipfs_accelerate_py"
+    },
+    {
+      "after": {
+        "bytes": 20589,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/ipfs_accelerate_py/typesafe_inference.py",
+        "sha256": "3354d7d9a96231f1c4fcb11e2517f32f1b4cfe40600c6aa9b51394c3277adf90"
+      },
+      "before": {
+        "bytes": 20589,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/ipfs_accelerate_py/typesafe_inference.py",
+        "sha256": "3354d7d9a96231f1c4fcb11e2517f32f1b4cfe40600c6aa9b51394c3277adf90"
+      },
+      "matches": true,
+      "module": "ipfs_accelerate_py.typesafe_inference"
+    },
+    {
+      "after": {
+        "bytes": 16074,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/workflow_state.py",
+        "sha256": "075283eb7eebb4426f535db2e20b714b6a208910c31e71c3c44752bca0464e0f"
+      },
+      "before": {
+        "bytes": 16074,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/workflow_state.py",
+        "sha256": "075283eb7eebb4426f535db2e20b714b6a208910c31e71c3c44752bca0464e0f"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.workflow_state"
+    },
+    {
+      "after": {
+        "bytes": 22461,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/guarded_workflow.py",
+        "sha256": "27f57fe52c30c59d24386acf7e66785270ed33351791ad72b9d6f55d8df08b57"
+      },
+      "before": {
+        "bytes": 22461,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/intent_ir/formalize/guarded_workflow.py",
+        "sha256": "27f57fe52c30c59d24386acf7e66785270ed33351791ad72b9d6f55d8df08b57"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.intent_ir.formalize.guarded_workflow"
+    },
+    {
+      "after": {
+        "bytes": 19224,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_logic_qualification.py",
+        "sha256": "7d56d32f62f2bc36b72cbbb5c6582c7de23b4edfdaaaa8e0b0b60d2369bfc829"
+      },
+      "before": {
+        "bytes": 19224,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_logic_qualification.py",
+        "sha256": "7d56d32f62f2bc36b72cbbb5c6582c7de23b4edfdaaaa8e0b0b60d2369bfc829"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_logic_qualification"
+    },
+    {
+      "after": {
+        "bytes": 78154,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/process.py",
+        "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+      },
+      "before": {
+        "bytes": 78154,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/logic/backends/process.py",
+        "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.logic.backends.process"
+    },
+    {
+      "after": {
+        "bytes": 32204,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/codebase_ir_metadata.py",
+        "sha256": "6de19b39635eef7c682a3171b9d5e3afe3e656e10767080023002188c39f62f5"
+      },
+      "before": {
+        "bytes": 32204,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/accelerate/benchmarks/agent_supervisor/container_coding/codebase_ir_metadata.py",
+        "sha256": "6de19b39635eef7c682a3171b9d5e3afe3e656e10767080023002188c39f62f5"
+      },
+      "matches": true,
+      "module": "benchmarks.agent_supervisor.container_coding.codebase_ir_metadata"
+    },
+    {
+      "after": {
+        "bytes": 3741,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ducklake/__init__.py",
+        "sha256": "1ad1a67508281e923834b4a321fac21e8e0d2e294fdc422b6a1b27732a648454"
+      },
+      "before": {
+        "bytes": 3741,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ducklake/__init__.py",
+        "sha256": "1ad1a67508281e923834b4a321fac21e8e0d2e294fdc422b6a1b27732a648454"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.ducklake"
+    },
+    {
+      "after": {
+        "bytes": 91556,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ducklake/capabilities.py",
+        "sha256": "049f1597d3002407bcaa741ac2bbf64fd51255013d2c6613fa526a66878da728"
+      },
+      "before": {
+        "bytes": 91556,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ducklake/capabilities.py",
+        "sha256": "049f1597d3002407bcaa741ac2bbf64fd51255013d2c6613fa526a66878da728"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.ducklake.capabilities"
+    },
+    {
+      "after": {
+        "bytes": 21476,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ducklake/autoencoder_history.py",
+        "sha256": "846a8bd8640694cb5a47ec9fa91eb71e4345262f22b8c16e36e217f715e05079"
+      },
+      "before": {
+        "bytes": 21476,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/ducklake/autoencoder_history.py",
+        "sha256": "846a8bd8640694cb5a47ec9fa91eb71e4345262f22b8c16e36e217f715e05079"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.ducklake.autoencoder_history"
+    },
+    {
+      "after": {
+        "bytes": 19957,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/duckdb_control/contracts.py",
+        "sha256": "7ef4df9216ecaef4a415afffbb353b9b091120a4faaf702d3c243d43ceb6c199"
+      },
+      "before": {
+        "bytes": 19957,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/datasets/ipfs_datasets_py/duckdb_control/contracts.py",
+        "sha256": "7ef4df9216ecaef4a415afffbb353b9b091120a4faaf702d3c243d43ceb6c199"
+      },
+      "matches": true,
+      "module": "ipfs_datasets_py.duckdb_control.contracts"
+    }
+  ],
+  "selector_result": {
+    "bytes": 4978,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/selector-result.json",
+    "sha256": "70644542acaec82b57f8e44490661811017672223aadb3a5940e3b12c8e20468"
+  },
+  "status": "passed",
+  "step_result": {
+    "bytes": 5017,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/step-result.json",
+    "sha256": "fcc98eb4643cf7f9303652495d7fd2428d66f4ee3301213c6e28525b2d00a45c"
+  },
+  "synthetic_fits": 0
+}

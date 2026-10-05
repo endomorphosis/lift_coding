@@ -1,0 +1,206 @@
+{
+  "active_exact_credential_veto_required": true,
+  "alias_path_count": 318,
+  "approvals": [
+    {
+      "approved_match_sha256": [
+        "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "1f4ebaf98e8d9adb018ef5d4532903667163656551b6499af2c2b0936574fd53",
+      "provenance_ref": "https://github.com/oauthlib/oauthlib/blob/9e824cfb0eb36b4d23ab73171b821b1a74ec659c/tests/oauth2/rfc6749/clients/test_service_application.py"
+    },
+    {
+      "approved_match_sha256": [
+        "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "4de74f50b33be0f5d1974d6c4652cb708daea90fce6a60826d6890ed5e31aa1d",
+      "provenance_ref": "https://github.com/oauthlib/oauthlib/blob/9e824cfb0eb36b4d23ab73171b821b1a74ec659c/tests/oauth1/rfc5849/test_signatures.py"
+    },
+    {
+      "approved_match_sha256": [
+        "3ade4761d8aad0fe44358e2bbad9742bdd43703aeecbdf626925bcf8178a3c3b"
+      ],
+      "classification": "published_public_fixture",
+      "file_sha256": "acd22beaf606192f6f196a65e7069363ae9cb66b9de24d44cc044a8fad97fcc4",
+      "provenance_ref": "https://github.com/oauthlib/oauthlib/blob/9dfa40c3bdab3aa788e711283afdf36c2fbdd1de/tests/oauth2/rfc6749/test_server.py"
+    }
+  ],
+  "candidate_credentials_tested_against_services": false,
+  "credential_values_printed": false,
+  "elapsed_seconds": 0.410309751983732,
+  "errors": [],
+  "files": [
+    {
+      "alias_path_count": 106,
+      "bytes": 7609,
+      "candidate_digests": [
+        "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637"
+      ],
+      "classification": "published_public_fixture",
+      "decoder07_match_digests": [
+        "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637"
+      ],
+      "file_sha256": "1f4ebaf98e8d9adb018ef5d4532903667163656551b6499af2c2b0936574fd53",
+      "fixture_ast_contexts": [
+        {
+          "bound_names": [
+            "private_key"
+          ],
+          "decoded_literal_sha256": "de8f785ef57d1c6e9ab65bc0ad7a3d68332c17057b1e102ea25930e7e46d7d8c",
+          "enclosing_scopes": [
+            {
+              "kind": "ClassDef",
+              "line": 16,
+              "name": "ServiceApplicationClientTest"
+            }
+          ],
+          "end_line": 36,
+          "literal_line": 20,
+          "literal_type": "str"
+        }
+      ],
+      "immutable_revision": "9e824cfb0eb36b4d23ab73171b821b1a74ec659c",
+      "interpretation": "Exactly published OAuthlib unit-test fixture bodies. No assertion that active services use or do not use this material; active exact-credential veto remains mandatory.",
+      "public_body_bytes": 7609,
+      "public_body_sha256": "1f4ebaf98e8d9adb018ef5d4532903667163656551b6499af2c2b0936574fd53",
+      "public_browser_url": "https://github.com/oauthlib/oauthlib/blob/9e824cfb0eb36b4d23ab73171b821b1a74ec659c/tests/oauth2/rfc6749/clients/test_service_application.py",
+      "public_http_status": 200,
+      "public_path": "tests/oauth2/rfc6749/clients/test_service_application.py",
+      "public_raw_url": "https://raw.githubusercontent.com/oauthlib/oauthlib/9e824cfb0eb36b4d23ab73171b821b1a74ec659c/tests/oauth2/rfc6749/clients/test_service_application.py",
+      "published_tag": "v3.0.2",
+      "representative": {
+        "bytes": 7609,
+        "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/generic-transport-controls-v1/ns-hist-03-oauthlib/comment/tests/oauth2/rfc6749/clients/test_service_application.py",
+        "sha256": "1f4ebaf98e8d9adb018ef5d4532903667163656551b6499af2c2b0936574fd53"
+      },
+      "upstream_repository": "https://github.com/oauthlib/oauthlib",
+      "whole_file_byte_identity_verified": true
+    },
+    {
+      "alias_path_count": 106,
+      "bytes": 15197,
+      "candidate_digests": [
+        "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637"
+      ],
+      "classification": "published_public_fixture",
+      "decoder07_match_digests": [
+        "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637"
+      ],
+      "file_sha256": "4de74f50b33be0f5d1974d6c4652cb708daea90fce6a60826d6890ed5e31aa1d",
+      "fixture_ast_contexts": [
+        {
+          "bound_names": [
+            "rsa_private_key"
+          ],
+          "decoded_literal_sha256": "4ca20538da5ff5ab5ca3d7b975f271daff1ecd29d0111717ebb83ad21ffae87e",
+          "enclosing_scopes": [
+            {
+              "kind": "ClassDef",
+              "line": 25,
+              "name": "SignatureTests"
+            }
+          ],
+          "end_line": 295,
+          "literal_line": 280,
+          "literal_type": "bytes"
+        }
+      ],
+      "immutable_revision": "9e824cfb0eb36b4d23ab73171b821b1a74ec659c",
+      "interpretation": "Exactly published OAuthlib unit-test fixture bodies. No assertion that active services use or do not use this material; active exact-credential veto remains mandatory.",
+      "public_body_bytes": 15197,
+      "public_body_sha256": "4de74f50b33be0f5d1974d6c4652cb708daea90fce6a60826d6890ed5e31aa1d",
+      "public_browser_url": "https://github.com/oauthlib/oauthlib/blob/9e824cfb0eb36b4d23ab73171b821b1a74ec659c/tests/oauth1/rfc5849/test_signatures.py",
+      "public_http_status": 200,
+      "public_path": "tests/oauth1/rfc5849/test_signatures.py",
+      "public_raw_url": "https://raw.githubusercontent.com/oauthlib/oauthlib/9e824cfb0eb36b4d23ab73171b821b1a74ec659c/tests/oauth1/rfc5849/test_signatures.py",
+      "published_tag": "v3.0.2",
+      "representative": {
+        "bytes": 15197,
+        "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/generic-transport-controls-v1/ns-hist-03-oauthlib/comment/tests/oauth1/rfc5849/test_signatures.py",
+        "sha256": "4de74f50b33be0f5d1974d6c4652cb708daea90fce6a60826d6890ed5e31aa1d"
+      },
+      "upstream_repository": "https://github.com/oauthlib/oauthlib",
+      "whole_file_byte_identity_verified": true
+    },
+    {
+      "alias_path_count": 106,
+      "bytes": 16182,
+      "candidate_digests": [
+        "3ade4761d8aad0fe44358e2bbad9742bdd43703aeecbdf626925bcf8178a3c3b"
+      ],
+      "classification": "published_public_fixture",
+      "decoder07_match_digests": [
+        "3ade4761d8aad0fe44358e2bbad9742bdd43703aeecbdf626925bcf8178a3c3b"
+      ],
+      "file_sha256": "acd22beaf606192f6f196a65e7069363ae9cb66b9de24d44cc044a8fad97fcc4",
+      "fixture_ast_contexts": [
+        {
+          "bound_names": [
+            "private_pem"
+          ],
+          "decoded_literal_sha256": "96000195a8d038db2d113886aa4e5a5e9c8e36ae2e6f7b72f0bc4612e2d8902c",
+          "enclosing_scopes": [
+            {
+              "kind": "ClassDef",
+              "line": 211,
+              "name": "SignedTokenEndpointTest"
+            },
+            {
+              "kind": "FunctionDef",
+              "line": 213,
+              "name": "setUp"
+            }
+          ],
+          "end_line": 255,
+          "literal_line": 227,
+          "literal_type": "str"
+        }
+      ],
+      "immutable_revision": "9dfa40c3bdab3aa788e711283afdf36c2fbdd1de",
+      "interpretation": "Exactly published OAuthlib unit-test fixture bodies. No assertion that active services use or do not use this material; active exact-credential veto remains mandatory.",
+      "public_body_bytes": 16182,
+      "public_body_sha256": "acd22beaf606192f6f196a65e7069363ae9cb66b9de24d44cc044a8fad97fcc4",
+      "public_browser_url": "https://github.com/oauthlib/oauthlib/blob/9dfa40c3bdab3aa788e711283afdf36c2fbdd1de/tests/oauth2/rfc6749/test_server.py",
+      "public_http_status": 200,
+      "public_path": "tests/oauth2/rfc6749/test_server.py",
+      "public_raw_url": "https://raw.githubusercontent.com/oauthlib/oauthlib/9dfa40c3bdab3aa788e711283afdf36c2fbdd1de/tests/oauth2/rfc6749/test_server.py",
+      "published_tag": "v3.0.0",
+      "representative": {
+        "bytes": 16182,
+        "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/generic-transport-controls-v1/ns-hist-03-oauthlib/comment/tests/oauth2/rfc6749/test_server.py",
+        "sha256": "acd22beaf606192f6f196a65e7069363ae9cb66b9de24d44cc044a8fad97fcc4"
+      },
+      "upstream_repository": "https://github.com/oauthlib/oauthlib",
+      "whole_file_byte_identity_verified": true
+    }
+  ],
+  "inventory": {
+    "bytes": 683986,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/candidate-inventory-01/candidate-files.json",
+    "sha256": "8bc9d37b68764febf00e40823a6b340fb23c0f1560194b7929469b39dba4002f"
+  },
+  "path_prefix_whitelists": [],
+  "public_source_bodies_retained_in_receipt": false,
+  "raw_source_files_modified": false,
+  "remote_tag_observations": [
+    {
+      "ref": "refs/tags/v3.0.0",
+      "sha1": "9dfa40c3bdab3aa788e711283afdf36c2fbdd1de"
+    },
+    {
+      "ref": "refs/tags/v3.0.2",
+      "sha1": "9e824cfb0eb36b4d23ab73171b821b1a74ec659c"
+    }
+  ],
+  "reviewer": {
+    "bytes": 9391,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/oauthlib-public-fixture-provenance-02/review_oauthlib_fixtures.py",
+    "sha256": "cb9e992f78afbe385637f318a80f12c78e7732a734b9df652c37a80c69f56fb1"
+  },
+  "schema": "terminal-ir-oauthlib-exact-public-fixture-provenance@1",
+  "status": "passed_exact_public_fixture_provenance",
+  "unique_file_count": 3,
+  "whole_archive_credential_safety_claimed": false
+}

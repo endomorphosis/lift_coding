@@ -1,0 +1,12 @@
+{
+  "schema": "terminal-ir-oauthlib-reviewer-preparation-failure@1",
+  "status": "failed_reviewer_AST_assumption",
+  "error_type": "AssertionError",
+  "observed_traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 35, in <module>\nAssertionError\n",
+  "cause": "Public test_signatures PEM is an AST bytes literal; initial metadata helper considered str literals only. Fullfile/publicbyte equality had succeeded for first2files before assertion.",
+  "aggregate_elapsed_seconds": null,
+  "tool_reported_wall_seconds_separate_not_aggregate": 0.320185929,
+  "credential_values_printed": false,
+  "servicecredential_tests": 0,
+  "public_approval_emitted": false
+}

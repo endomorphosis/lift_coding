@@ -1,0 +1,150 @@
+{
+  "authorization_scope": "source_only_frozen_reconstruction_evaluation_no_semantic_admission",
+  "bootstrap_binding": {
+    "bytes": 6247,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/huggingface/launch_reconstruction.py",
+    "sha256": "910ff61a235d6e988e78b34a3b27d7ae7520f2bb10722881ab532c934be1199e"
+  },
+  "cohort_metadata_binding": {
+    "bytes": 13184,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/cohort-metadata-01.json",
+    "sha256": "d48b88d54bb109a03bc142b00bb20ac70ff02854d31d1bf3879568ee12202d78"
+  },
+  "content_sha256": "247f229331aa4cf17d9bebd975eafc790389d7e93f0d58639ccbb0f616f074a4",
+  "helper_binding": {
+    "bytes": 27100,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/evaluate_published_reconstruction_v2.py",
+    "sha256": "0c65247d19430dec78395fe591c60994b2a4b9ec054d8c20c10b067ede994c44"
+  },
+  "lane_owner_binding": {
+    "bytes": 18141,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+    "sha256": "d7d2e1303e15d46b70997e5880df6fb9a690bfebde63666cad04db516f3ef3a8"
+  },
+  "lanes": {
+    "legacy8": {
+      "query_bundle_binding": {
+        "bytes": 27178,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/legacy8_raw_query_bundle.json",
+        "sha256": "5121a88eaf0ed977b25a33e72657351d8c8adee396540e0811daeccdafbe02b7"
+      },
+      "query_expected_binding": {
+        "bytes": 3124,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/legacy8_raw_query_expected_bindings.json",
+        "sha256": "8627d35d1d6392f745636e0d4afc8b3a301b5f22b930f58bf5fe842a5070740b"
+      },
+      "train_bundle_binding": {
+        "bytes": 25144,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/legacy8_raw_train_bundle.json",
+        "sha256": "26a7810e8605eb25da608a50228483c0ec709ac597a67df0cdfdcca192f5e0f4"
+      },
+      "train_expected_binding": {
+        "bytes": 2798,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/legacy8_raw_train_expected_bindings.json",
+        "sha256": "2c10595c86fe13ca456b85b09de300bf8bb9e0911a68c8bd9d39d2f88cd8e8a1"
+      }
+    },
+    "native384": {
+      "query_bundle_binding": {
+        "bytes": 173284,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native384_raw_query_bundle.json",
+        "sha256": "c9a32229c6bdd465d46a55e1a77c5c74835bd5a9024485502987e9bb7a97d838"
+      },
+      "query_expected_binding": {
+        "bytes": 3124,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native384_raw_query_expected_bindings.json",
+        "sha256": "4ada9327519a7cf48436c5fb3c36982a12103fc00ba7eb719aa2ddb3346a2c23"
+      },
+      "train_bundle_binding": {
+        "bytes": 155023,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native384_raw_train_bundle.json",
+        "sha256": "bde9861a4e7c12895f9dd208f7daaca40458422669f3cbce55508841f7322d36"
+      },
+      "train_expected_binding": {
+        "bytes": 2798,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native384_raw_train_expected_bindings.json",
+        "sha256": "c30fefa309d4b0846e0ef17ff7c69e219a8001cb477ffecf8d51383c941748c6"
+      }
+    },
+    "native768": {
+      "query_bundle_binding": {
+        "bytes": 319940,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native768_raw_query_bundle.json",
+        "sha256": "116b3829cef874533934568e88b912c1706439483a7eeac3b5213883ca15b7b5"
+      },
+      "query_expected_binding": {
+        "bytes": 3124,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native768_raw_query_expected_bindings.json",
+        "sha256": "d569e1c6be997cff1b0b173896ee4093da50c6128a411968bffaf294e5082a58"
+      },
+      "train_bundle_binding": {
+        "bytes": 285377,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native768_raw_train_bundle.json",
+        "sha256": "c6f71204c8b4dc9f27f435a1f8b8c28c034923a8d29e0ded183145458eac7f71"
+      },
+      "train_expected_binding": {
+        "bytes": 2798,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/stage-workflow-01/inputs/native768_raw_train_expected_bindings.json",
+        "sha256": "5b95a956faa3f693e207f6435a221e536ed01bce9bafbc6011e718014f4b5bc5"
+      }
+    }
+  },
+  "release_manifest_binding": {
+    "bytes": 46629,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/download-01/release/release_manifest.json",
+    "sha256": "30e2fe3b112f60fd7f8d9494f88caaba674efdc8424a3c174a0e34570282cbf5"
+  },
+  "run_plan_binding": {
+    "bytes": 11459,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-plan-02.json",
+    "sha256": "b02b0b35a9f2d82abd5422643f9034bea30e1d83f0c21772aa0a609c234ead3b"
+  },
+  "schema": "source-reconstruction-frozen-evaluation-plan/v1",
+  "training_report_bindings": [
+    {
+      "bytes": 26487,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/legacy8-seed1729/training-report.json",
+      "sha256": "0c3b26bd35fb2d67c2c872527aecdefcf26ab67e9a86a2e877491ca3845df2a7"
+    },
+    {
+      "bytes": 26488,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/legacy8-seed1730/training-report.json",
+      "sha256": "01bf2cac79a984edd263ce7e932018eb60a16939f54768d96bd9bbd984f4d4c0"
+    },
+    {
+      "bytes": 26501,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/legacy8-seed1731/training-report.json",
+      "sha256": "c804c2dd0906438bd077a49fffbd004828ffb3286e4030b3b88ce2f6823fd98a"
+    },
+    {
+      "bytes": 424602,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/native384-seed1729/training-report.json",
+      "sha256": "aee614786d73285a6a89988bf2962765cdafe9ee7ca337af28bec90cb44de4cf"
+    },
+    {
+      "bytes": 424582,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/native384-seed1730/training-report.json",
+      "sha256": "f1296995e140ae0f31053f23365f83c8fe5c1befaad6aabff7df65182948b45f"
+    },
+    {
+      "bytes": 424557,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/native384-seed1731/training-report.json",
+      "sha256": "ce936cbf09889ad0be7cebbe9acd52dfdeeab8e30ab3a374a3519d31ecb5b1c2"
+    },
+    {
+      "bytes": 836605,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/native768-seed1729/training-report.json",
+      "sha256": "da952a3aee3c851c358db0a9e28a058f6e821ba5f42bfe8f3ddd7b9545c4c6c3"
+    },
+    {
+      "bytes": 836477,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/native768-seed1730/training-report.json",
+      "sha256": "7d197d681c976ca5f113818f14c3af533181e191d7841ce23a2f82074e445a1c"
+    },
+    {
+      "bytes": 836424,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/run-01/native768-seed1731/training-report.json",
+      "sha256": "0786b8f47e39dcc5218e3403fab7491d4c4ddbc0d512efeb709f9acd67b8148e"
+    }
+  ]
+}

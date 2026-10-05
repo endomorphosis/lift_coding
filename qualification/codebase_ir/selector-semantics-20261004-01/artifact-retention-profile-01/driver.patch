@@ -1,0 +1,94 @@
+--- driver04.py
++++ driver05.py
+@@ -107,10 +107,10 @@
+             CONSUMER / 'source-manifest-02.json', PRIOR / 'source-manifest-02.json',
+             GROUND / 'source-manifest-04.json')],
+         'files': files, 'scope': 'Stable individually pinned selected sources; no atomic whole-live or all-loader census.'})
+-    write(ROOT / 'preparation/producer-pins-04.json', {'driver': pin(Path(__file__).resolve()),
++    write(ROOT / 'preparation/producer-pins-05.json', {'driver': pin(Path(__file__).resolve()),
+         'source_manifest': pin(ROOT / 'source-manifest-04.json'), 'request': pin(ROOT / 'preparation/request.json')})
+     print(json.dumps({'source_manifest': pin(ROOT / 'source-manifest-04.json'),
+-        'producer_pins': pin(ROOT / 'preparation/producer-pins-04.json')}))
++        'producer_pins': pin(ROOT / 'preparation/producer-pins-05.json')}))
+ 
+ 
+ ROOTS = (ROOT / 'source-04', GROUND / 'source-04', PRIOR / 'source-02', CONSUMER / 'source-02', HEAD / 'source',
+@@ -136,6 +136,51 @@
+         return spec
+ 
+ 
++def _compile_source_model_lean(*, executable, filename, source, output, expected_success):
++    from ipfs_datasets_py.logic.backends.process import BoundedToolRunner, ToolRunRequest, ToolRunLimits
++
++    source_raw = source.encode()
++    with (output / filename).open("xb") as stream:
++        stream.write(source_raw)
++    source_pin = pin(output / filename)
++    object_file = str(Path(filename).with_suffix(".olean"))
++    command = ((str(executable), "-o", object_file, filename) if expected_success
++               else (str(executable), filename))
++    run = BoundedToolRunner().run(ToolRunRequest(argv=command,
++        input_files={filename: source}, output_paths=(object_file,) if expected_success else (),
++        limits=ToolRunLimits(timeout_seconds=20,
++            cpu_seconds=20, max_input_bytes=262144, max_output_bytes=262144,
++            max_workspace_bytes=16 * 1024 * 1024)))
++    passed = run.ok and not run.output_truncated and not run.workspace_limit_exceeded
++    expected_failure = (run.returncode is not None and run.returncode != 0
++        and not any((run.timed_out, run.cancelled, run.unavailable, run.resource_exhausted,
++                     run.output_truncated, run.workspace_limit_exceeded))
++        and "Tactic `decide` proved that the proposition" in run.stdout and "is false" in run.stdout)
++    compiled_artifacts = []
++    for name, raw in run.output_files.items():
++        with (output / name).open("xb") as stream:
++            stream.write(raw)
++        compiled_artifacts.append({"path": str(output / name), "sha256": sha(raw), "bytes": len(raw)})
++    if expected_success and not compiled_artifacts:
++        passed = False
++    return {"artifact_retention_profile": "terminal-closed-source-model-proof-artifacts-256k@1",
++        "max_output_bytes": 262144, "max_workspace_bytes": 16777216,
++        "timeout_seconds": 20, "cpu_seconds": 20,
++        "schema": "terminal-codebase-lean-check@1", "file": filename, "artifact": source_pin,
++        "status": "passed" if passed else "rejected" if expected_failure else "inconclusive",
++        "expected_success": expected_success,
++        "matches_expectation": passed if expected_success else expected_failure,
++        "compiled_artifacts": compiled_artifacts,
++        "backend_executed": True, "executable": str(executable),
++        "executable_sha256": sha(executable.read_bytes()), "command": list(run.command),
++        "returncode": run.returncode, "stdout": run.stdout, "stderr": run.stderr,
++        "timed_out": run.timed_out, "output_truncated": run.output_truncated,
++        "workspace_limit_exceeded": run.workspace_limit_exceeded,
++        "resource_exhausted": run.resource_exhausted, "workspace_cleaned": run.workspace_cleaned,
++        "elapsed_seconds": run.elapsed_seconds,
++        "proof_scope": "kernel_checked_generated_model_statement_only", **__import__("benchmarks.agent_supervisor.container_coding.terminal_codebase_logic_qualification", fromlist=["AUTHORITY"]).AUTHORITY}
++
++
+ def owned(mode):
+     run = ROOT / 'evidence' / mode; run.mkdir()
+     started = time.monotonic(); scheduler = lease = guard = None; cleanup = []
+@@ -145,7 +190,7 @@
+         'native_lean_checks_invoked': [], 'native_metadata_hydration_attempts': 0,
+         'PlanCreate_calls': 0}
+     try:
+-        producers = json.loads((ROOT / 'preparation/producer-pins-04.json').read_bytes())
++        producers = json.loads((ROOT / 'preparation/producer-pins-05.json').read_bytes())
+         assert all(pin(row['path']) == row for row in producers.values())
+         request = json.loads(read_pinned(producers['request']))
+         for row in request['selected_prior']: assert pin(row['path']) == row
+@@ -228,7 +273,7 @@
+                 ('false_reversed_step_bound', 'FalseReversedStepBound.lean', step_negative, False)):
+                 assert pin(request['native_lean']['path']) == request['native_lean']
+                 receipt['native_lean_checks_invoked'].append({'key': key, 'expected_success': success})
+-                checked = logic._compile_lean(executable=Path(request['native_lean']['path']),
++                checked = _compile_source_model_lean(executable=Path(request['native_lean']['path']),
+                     filename=filename, source=source, output=output, expected_success=success)
+                 checks.append({'key': key, **checked}); write(run / ('lean-' + key + '-check.json'), checks[-1])
+                 assert checked['matches_expectation'] is True, 'Lean check inconclusive or wrong result: ' + key
+@@ -298,7 +343,7 @@
+     started = time.monotonic(); child = None
+     argv = [sys.executable, '-B', str(Path(__file__).resolve()), 'owned', mode]
+     record = {'schema': 'terminal-selector-step-outer-control@1', 'argv': argv,
+-        'driver': pin(Path(__file__).resolve()), 'producer_pin_specification': pin(ROOT / 'preparation/producer-pins-04.json'),
++        'driver': pin(Path(__file__).resolve()), 'producer_pin_specification': pin(ROOT / 'preparation/producer-pins-05.json'),
+         'started_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+         'returncode': None, 'primary_error': None, 'cleanup_errors': []}
+     write(ROOT / 'evidence' / (mode + '-invocation.json'), record)

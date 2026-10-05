@@ -1,0 +1,465 @@
+{
+  "archive_manifest": {
+    "bytes": 119461,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/archive-build-01/public/archive-manifest.json",
+    "sha256": "ae1ccb2e390ef9d542f56d3a2895a38591618e926a425499192dc615f359c28e"
+  },
+  "groups": [
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz.part-001",
+          "sha256": "edbfcf9736668d2d39790897df3195867afacfb6e331143e4a34dad0a9e59d67"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz.part-002",
+          "sha256": "a7ab5aa464bbf80e6077e8ca132cb5ac7be37a3b8bef27c833dc029e82eb94ea"
+        },
+        {
+          "bytes": 10911344,
+          "path": "docs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz.part-003",
+          "sha256": "4670a2bf1ff63c1d60cdcb2eb65f28ff1641313241d3bbbf43f9389f4991126f"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz.part-001",
+          "sha256": "2dc50e3b8f05179677a5332e8d5c12cadc8074e6bedab01b29c9bb50fa95b006"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz.part-002",
+          "sha256": "90962c84af9bd371197c19816590f484a3460b2761c766cee2379b924c22f5ad"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz.part-003",
+          "sha256": "ec4190b05365a4481332f409c063c65ccd453e5380b95fae0e477bb7bdebef9b"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz.part-004",
+          "sha256": "f1ef33f5727ff43289bad0d3f8fe828ab41c8eb1573ba502121a448ee2719ff0"
+        },
+        {
+          "bytes": 4205088,
+          "path": "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz.part-005",
+          "sha256": "9a426a7f5c1f7e141e781e3cee2d71f07fbf01d3725362b8e330b32fb5506613"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-boundary-reconstruction-20261003/evidence.tar.xz.part-001",
+          "sha256": "5a6c6c75da640a31abdf17ae432a400e8fb925403122f95ec288daae7382d9c8"
+        },
+        {
+          "bytes": 20806720,
+          "path": "docs/implementation/reports/evidence/decoder-boundary-reconstruction-20261003/evidence.tar.xz.part-002",
+          "sha256": "5c31b874ca8fe1aeb51b4c7b8e302c174acb1d8c62840e25d9f89603d9b19b0c"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-boundary-reconstruction-20261003/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-conditioning-20261004/evidence.tar.gz.part-001",
+          "sha256": "bd64d0afcc5ac1347f5a6db55d6fac30e341490e6a2e8ef3979ddec35fef9e02"
+        },
+        {
+          "bytes": 189141,
+          "path": "docs/implementation/reports/evidence/decoder-conditioning-20261004/evidence.tar.gz.part-002",
+          "sha256": "225d0bcb7f8327a7fdef1ebf9836b29dbbaeed930688b47db6c50813a5dba5af"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-conditioning-20261004/evidence.tar.gz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-content-matched-20261004/evidence.tar.xz.part-001",
+          "sha256": "78ffe28b0eba86ded120c83717f8a06249c62ea52d4b25bdf68aa201f8c5a97e"
+        },
+        {
+          "bytes": 9183056,
+          "path": "docs/implementation/reports/evidence/decoder-content-matched-20261004/evidence.tar.xz.part-002",
+          "sha256": "1937f276e68d96d55e013ce480f92ba6b6521510e51e920eba77b604e9debaee"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-content-matched-20261004/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz.part-001",
+          "sha256": "2d7017f3ae147fb6ce6af286cd405ee3ca8939a9ad5aef1984dafd83a9d23249"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz.part-002",
+          "sha256": "6a1553f66cd43919f955b5ee479b9a78a43e9b3f5760bd52c01c633fa53c64a7"
+        },
+        {
+          "bytes": 23263308,
+          "path": "docs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz.part-003",
+          "sha256": "ce95a832dcd351784ca58c657e8d520b59df4660d7b43f95b196cd89fefcdd91"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 16525416,
+          "path": "docs/implementation/reports/evidence/decoder-contextual-margins-20261004/evidence.tar.xz.part-001",
+          "sha256": "d1cee453a55a8a4b4b0c036c840df03087d179197ae921d8399dcccb2ba86a80"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-contextual-margins-20261004/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-continuation-native4096-20261004/evidence.tar.gz.part-001",
+          "sha256": "cd2dbce41f3d8ddc5dd3952f6284f16ca2ffe54bfae560a6e2bf7dd24986cfce"
+        },
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-continuation-native4096-20261004/evidence.tar.gz.part-002",
+          "sha256": "8fb95789c8b04934f176f048da3f137d21d0b15785c0453aab0d8f5b2b737ed5"
+        },
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-continuation-native4096-20261004/evidence.tar.gz.part-003",
+          "sha256": "dea6c78c60cb217161446f4db029fd41663e8d55c9e1d40ef26aad1bbbea5df3"
+        },
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-continuation-native4096-20261004/evidence.tar.gz.part-004",
+          "sha256": "28555cc93baf9e5d636aa16c48df336b09ef7e0f9e7dd60e2b0d54518a3db322"
+        },
+        {
+          "bytes": 27133684,
+          "path": "docs/implementation/reports/evidence/decoder-continuation-native4096-20261004/evidence.tar.gz.part-005",
+          "sha256": "00e3d474eb959bb5b8ecbb3396b059dc32c58f89dc952a0cc8cecfd7ffa46297"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-continuation-native4096-20261004/evidence.tar.gz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/evidence.tar.gz.part-001",
+          "sha256": "6b5cfa29d06de491894a24dbba06a670f91880da50b04cfe56734c38425ba990"
+        },
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/evidence.tar.gz.part-002",
+          "sha256": "04b6771ff1ab72f3b2370f4d6b61941ac71e982ca63acb6ff39ee0896919e4f2"
+        },
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/evidence.tar.gz.part-003",
+          "sha256": "491ff44fb25c6de88447298598c09e850e000cd82eb5b8a78960ec8b6cdea8b8"
+        },
+        {
+          "bytes": 15474775,
+          "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/evidence.tar.gz.part-004",
+          "sha256": "9322c6d9124d2660d84982c61a12c9fd66a8f1ad2516074f96c63fcc0d7d64f8"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-four-width-20261004/evidence.tar.gz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-four-width-followup-20261004/evidence.tar.gz.part-001",
+          "sha256": "0477d66f18822d2170df09ba51047802b3430531aa4e36ce84ba55dd3dee7e3a"
+        },
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-four-width-followup-20261004/evidence.tar.gz.part-002",
+          "sha256": "ea875d158e8157392df16181aa2cfdecf1c3e35ad1da877fb015e06c8286406e"
+        },
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-four-width-followup-20261004/evidence.tar.gz.part-003",
+          "sha256": "2351637a6afa828b5a045a0ab089368c5810d5375381a14861558bb51431bbb4"
+        },
+        {
+          "bytes": 9151395,
+          "path": "docs/implementation/reports/evidence/decoder-four-width-followup-20261004/evidence.tar.gz.part-004",
+          "sha256": "90328d9ee55e3c439110b77890b098681a9d5f1eb6bf800162311b78337759eb"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-four-width-followup-20261004/evidence.tar.gz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 40000000,
+          "path": "docs/implementation/reports/evidence/decoder-generalization-20261004/evidence.tar.gz.part-001",
+          "sha256": "59d72baedb13db01c3bef30e8da230f8d4d8b9f3292a9b7e715259d742791519"
+        },
+        {
+          "bytes": 14158479,
+          "path": "docs/implementation/reports/evidence/decoder-generalization-20261004/evidence.tar.gz.part-002",
+          "sha256": "cd243885c97a86b058b3a5f032e960b52db43509e89c90cea31cbfb8d14090f0"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-generalization-20261004/evidence.tar.gz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz.part-001",
+          "sha256": "f3912caaa38c7516c82eb6270b904648f99643fc559da4a0cc27d7d23557c58a"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz.part-002",
+          "sha256": "19f4ba165e737bfbe604c5b9f575ded5f942e3ea5307430e617a30571b49f7f3"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz.part-003",
+          "sha256": "17758765e30ff14c0f0f5fa6829f25af58db20d8a76feff6aebcd35d890ca5d1"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz.part-004",
+          "sha256": "58ad192febd98904a887a338476beee6fd7b706163ef1fabc9dd4cb573be6a59"
+        },
+        {
+          "bytes": 11598796,
+          "path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz.part-005",
+          "sha256": "cac2edf71f2fccff560ebc8b861607e3c6edde0b6d5a489381286d51c2d5254d"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-modality-gap-r2-20261004/evidence.tar.xz.part-001",
+          "sha256": "7d5922fb2c6f6c43629fed09f103b5a4c743fc00a276db60e64e79a2f39f5f15"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-modality-gap-r2-20261004/evidence.tar.xz.part-002",
+          "sha256": "0218ecf6f536ca86829842a558b76516ba2a3b2751f4d7e973f6d5c38cb93bc8"
+        },
+        {
+          "bytes": 12527204,
+          "path": "docs/implementation/reports/evidence/decoder-modality-gap-r2-20261004/evidence.tar.xz.part-003",
+          "sha256": "92e949d0c4a13df64cb40b9c02cd33ebdc9907ae8651fb8d6d578cd8787eb17f"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-modality-gap-r2-20261004/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-source-head-lr-20261003/evidence.tar.xz.part-001",
+          "sha256": "1a01c1471c02267c0c168855d11f90e03c303b49ab52810454b316edc4677261"
+        },
+        {
+          "bytes": 46273408,
+          "path": "docs/implementation/reports/evidence/decoder-source-head-lr-20261003/evidence.tar.xz.part-002",
+          "sha256": "3f5113b368ad1c8725df025d371afabbcfaa7cb31ec26beeb8af589cdd740c21"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-source-head-lr-20261003/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    },
+    {
+      "completeness_scope": "full generated-preservation manifest population",
+      "expected_source_schema": "datasets-generated-HF-preservation-paths@1",
+      "namespace": "datasets_generated_preserved",
+      "ordered_parts": [
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/evidence.tar.xz.part-001",
+          "sha256": "f6222376127b33b3c3219b86b84c21262213ce8c80f2c395c5ce7436f4207e87"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/evidence.tar.xz.part-002",
+          "sha256": "1f16e27de81b05581202d9d39daa41df733cb1c6770a79bcb4c7f253c75f50ca"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/evidence.tar.xz.part-003",
+          "sha256": "b3606646a9d230744f5c6fd766d2eb2f7297384276e4f95b9124423e3afd2215"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/evidence.tar.xz.part-004",
+          "sha256": "5173b4ff9ef686d5b16deacc8d846a1702fc95fec3749efb7a297108a4c0452a"
+        },
+        {
+          "bytes": 48000000,
+          "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/evidence.tar.xz.part-005",
+          "sha256": "d9b8338344cf18b78a1e732fe990006a79e6213f0234ffea9ea4a74780367289"
+        },
+        {
+          "bytes": 28583552,
+          "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/evidence.tar.xz.part-006",
+          "sha256": "a78fd8d9180bf84a1da3c78b9dcd63071cc938ac8f107350e241e361dd671a6e"
+        }
+      ],
+      "path_prefix": "docs/implementation/reports/evidence/decoder-source-margin-20261004/evidence.tar.xz.part-",
+      "source_manifest": {
+        "bytes": 39702,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/hf-generated-paths-02.json",
+        "sha256": "4cc4f34a07ef92441c1c925b08acde156812924dddaab88671c91e30417455c5"
+      },
+      "source_manifest_field": "files"
+    }
+  ],
+  "schema": "terminal-ir-explicit-archive-split-groups@1"
+}

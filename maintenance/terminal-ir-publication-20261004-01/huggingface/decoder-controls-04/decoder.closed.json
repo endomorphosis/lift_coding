@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "/home/barberb/.local/bin/python",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classify_and_prepare_public_archive_07.py",
+    "--build",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/build",
+    "--helper",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+    "--approvals",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/approvals.json",
+    "--output",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-04/derivative",
+    "--expected-archive-manifest-sha256",
+    "225d2ff0fe36414e2b66978564e2876fe707d141239d1af8122d311a051f179c",
+    "--expected-helper-sha256",
+    "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036",
+    "--expected-approvals-sha256",
+    "2ecf5daf402529359ab4e99240061c69ae9271d4c28457350bcc7d80f9e9f5f5",
+    "--wall-seconds",
+    "90"
+  ],
+  "elapsed_seconds": 0.16377654802636243,
+  "returncode": 0
+}

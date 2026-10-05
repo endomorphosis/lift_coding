@@ -1,0 +1,125 @@
+{
+  "base_generation_cid": "sha256:30d08864e562515c29af9c138f944a70626361137a8ae3721f532a6b6014a5fa",
+  "base_manifest": {
+    "bytes": 25932539,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/generation-manifest.json",
+    "sha256": "5efc3725539ced8b5a0f6e172c3b4c7e92fccc158940feaa71b4890a054203a3"
+  },
+  "extension_manifests": [
+    {
+      "bytes": 4940,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source-manifest.json",
+      "sha256": "97c6209ba34351cdfbd347d4620bb19059b51ecbbd0be7022a0943f478e702bb"
+    },
+    {
+      "bytes": 5020,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-analysis-consumer-20261004-01/source-manifest-02.json",
+      "sha256": "25d4b82e0074009edebe07daf405d3c4d0a182d9f55c28c5e8378f4d6902e1f5"
+    },
+    {
+      "bytes": 5321,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-expanded-transfer-20261004-01/source-manifest-02.json",
+      "sha256": "c0f5542be05526eefb684387af9d4357b0a903d2b9c759f6592fe46262be6f29"
+    },
+    {
+      "bytes": 4258,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-requirement-grounding-20261004-01/source-manifest-04.json",
+      "sha256": "56c501311230b8522125cc8961b197a7ac4c3f515c9547ca448b751b0237c158"
+    }
+  ],
+  "files": [
+    {
+      "captured": {
+        "bytes": 8903,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-02/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+        "sha256": "50b9322c9b20f85c595400636d323da0c26e9faf31e5b117ccf19ca6ea924614"
+      },
+      "original": {
+        "bytes": 8903,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+        "sha256": "50b9322c9b20f85c595400636d323da0c26e9faf31e5b117ccf19ca6ea924614"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 6749,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-02/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+        "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+      },
+      "original": {
+        "bytes": 6749,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+        "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 5752,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-02/test/api/test_terminal_codebase_selector_semantics.py",
+        "sha256": "b98c3561a3d9d4f9ef9440589916b62cf1e4dd10cbe4f2951b8abe7bb439459a"
+      },
+      "original": {
+        "bytes": 5752,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_terminal_codebase_selector_semantics.py",
+        "sha256": "b98c3561a3d9d4f9ef9440589916b62cf1e4dd10cbe4f2951b8abe7bb439459a"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 4027,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-02/test/api/test_terminal_codebase_ranker_step_certificate.py",
+        "sha256": "3a9cf3640549abeb736ffec0dff307ce5b193ec98b23b97ce3a9319693918961"
+      },
+      "original": {
+        "bytes": 4027,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_terminal_codebase_ranker_step_certificate.py",
+        "sha256": "3a9cf3640549abeb736ffec0dff307ce5b193ec98b23b97ce3a9319693918961"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 28202,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-02/test/api/test_terminal_codebase_requirement_grounding.py",
+        "sha256": "56c461ab23473c73a874901c13c6082209e31decd4a062612e4877839cacbce9"
+      },
+      "original": {
+        "bytes": 28202,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-requirement-grounding-20261004-01/source-04/test/api/test_terminal_codebase_requirement_grounding.py",
+        "sha256": "56c461ab23473c73a874901c13c6082209e31decd4a062612e4877839cacbce9"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 281,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-02/test/__init__.py",
+        "sha256": "7e3d36be0483b3390520eea90959d0361d6e2fd7dae43cb3aa619389b0b977d6"
+      },
+      "original": {
+        "bytes": 281,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/test/__init__.py",
+        "sha256": "7e3d36be0483b3390520eea90959d0361d6e2fd7dae43cb3aa619389b0b977d6"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 32,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-02/test/api/__init__.py",
+        "sha256": "bb030272da3d2d800639cb7f5054189a073d08ae536210b1e6457628aa9ccb0d"
+      },
+      "original": {
+        "bytes": 32,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/test/api/__init__.py",
+        "sha256": "bb030272da3d2d800639cb7f5054189a073d08ae536210b1e6457628aa9ccb0d"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 9,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-02/pytest.ini",
+        "sha256": "8250d20f42b419af40706490ead78aabab9feba93eab09a3f626e3de5256e1f4"
+      }
+    }
+  ],
+  "schema": "terminal-batching-grounding-source-extension@1",
+  "scope": "Stable individually pinned selected sources; no atomic whole-live or all-loader census."
+}

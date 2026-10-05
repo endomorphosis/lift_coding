@@ -1,0 +1,285 @@
+{
+  "rows": [
+    {
+      "bytes": 190647,
+      "classification": {
+        "approval": null,
+        "candidate_hits": [
+          {
+            "match_sha256": "3ade4761d8aad0fe44358e2bbad9742bdd43703aeecbdf626925bcf8178a3c3b",
+            "pattern": "complete_private_key_pem_or_escaped"
+          },
+          {
+            "match_sha256": "d56f3fa05ca5a4307ed502970c30e85b601895a439c23c74df14afebcdf0f637",
+            "pattern": "complete_private_key_pem_or_escaped"
+          }
+        ],
+        "decoded_scan_complete": true,
+        "error": null,
+        "file_sha256": "b6bfcf9e85b050d83670b83ac23797ecda3da3c8eb4d8123718b49dcf7ac1c4d",
+        "scanner_stream_counts": {
+          "containers": 2,
+          "raw_stream_bytes": 2222861,
+          "streams": 201
+        },
+        "status": "quarantined_credential_candidate"
+      },
+      "file_sha256": "b6bfcf9e85b050d83670b83ac23797ecda3da3c8eb4d8123718b49dcf7ac1c4d",
+      "namespace": "root_working_changes",
+      "path": "papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/original_acceptance_v1/curator_custody/ns-hist-03-oauthlib/source.tar.gz",
+      "source_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/original_acceptance_v1/curator_custody/ns-hist-03-oauthlib/source.tar.gz"
+    },
+    {
+      "bytes": 1312186971,
+      "classification": {
+        "approval": null,
+        "candidate_hits": [
+          {
+            "match_sha256": "d8234958cc1b634bcbd91298f50fbc38e7d9458dfb40fab80b7fa580190ba389",
+            "pattern": "complete_private_key_pem_or_escaped"
+          },
+          {
+            "match_sha256": "540c214fdfb77ab7aae37a99eac157138b89f30cc900f162192af27a58df6789",
+            "pattern": "github_classic_token"
+          },
+          {
+            "match_sha256": "91abc4825f846d1e2187e05ee96da911395421128448b23c9cf22fc7b36e0d02",
+            "pattern": "huggingface_token"
+          },
+          {
+            "match_sha256": "e624103a52a1087336ce45cf66b9ae7a195a2fae0780b858cc4e81d4a67a2a7e",
+            "pattern": "huggingface_token"
+          },
+          {
+            "match_sha256": "ffcda78279dc8b7c0d331d982bb59a7595ccf87737a4dddc784dfa819aebb7f1",
+            "pattern": "huggingface_token"
+          }
+        ],
+        "decoded_scan_complete": false,
+        "error": "depth_budget",
+        "file_sha256": "26135539796f5ed643ad8de423da5d6c5814bf4f3fbda061a8db75a678efbc1c",
+        "scanner_stream_counts": {
+          "containers": 82,
+          "raw_stream_bytes": 6780349625,
+          "streams": 63918
+        },
+        "status": "unresolved_container_or_read"
+      },
+      "file_sha256": "26135539796f5ed643ad8de423da5d6c5814bf4f3fbda061a8db75a678efbc1c",
+      "namespace": "root_working_changes",
+      "path": "papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/xradar/openradar__xradar-267/layer_custody/layer-4.tar.gz",
+      "source_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/xradar/openradar__xradar-267/layer_custody/layer-4.tar.gz"
+    },
+    {
+      "bytes": 573078624,
+      "classification": {
+        "approval": null,
+        "candidate_hits": [
+          {
+            "match_sha256": "d8234958cc1b634bcbd91298f50fbc38e7d9458dfb40fab80b7fa580190ba389",
+            "pattern": "complete_private_key_pem_or_escaped"
+          },
+          {
+            "match_sha256": "540c214fdfb77ab7aae37a99eac157138b89f30cc900f162192af27a58df6789",
+            "pattern": "github_classic_token"
+          },
+          {
+            "match_sha256": "91abc4825f846d1e2187e05ee96da911395421128448b23c9cf22fc7b36e0d02",
+            "pattern": "huggingface_token"
+          },
+          {
+            "match_sha256": "e624103a52a1087336ce45cf66b9ae7a195a2fae0780b858cc4e81d4a67a2a7e",
+            "pattern": "huggingface_token"
+          },
+          {
+            "match_sha256": "ffcda78279dc8b7c0d331d982bb59a7595ccf87737a4dddc784dfa819aebb7f1",
+            "pattern": "huggingface_token"
+          }
+        ],
+        "decoded_scan_complete": true,
+        "error": null,
+        "file_sha256": "69038be3b735da083b0abe39a2796399c2b0186ee305014f59d752a1201678e9",
+        "scanner_stream_counts": {
+          "containers": 75,
+          "raw_stream_bytes": 4533551029,
+          "streams": 63994
+        },
+        "status": "quarantined_credential_candidate"
+      },
+      "file_sha256": "69038be3b735da083b0abe39a2796399c2b0186ee305014f59d752a1201678e9",
+      "namespace": "root_working_changes",
+      "path": "papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/xradar/openradar__xradar-267/layer_custody/layer-5.tar.gz",
+      "source_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/xradar/openradar__xradar-267/layer_custody/layer-5.tar.gz"
+    },
+    {
+      "bytes": 1312325252,
+      "classification": {
+        "approval": null,
+        "candidate_hits": [
+          {
+            "match_sha256": "d8234958cc1b634bcbd91298f50fbc38e7d9458dfb40fab80b7fa580190ba389",
+            "pattern": "complete_private_key_pem_or_escaped"
+          },
+          {
+            "match_sha256": "540c214fdfb77ab7aae37a99eac157138b89f30cc900f162192af27a58df6789",
+            "pattern": "github_classic_token"
+          },
+          {
+            "match_sha256": "91abc4825f846d1e2187e05ee96da911395421128448b23c9cf22fc7b36e0d02",
+            "pattern": "huggingface_token"
+          },
+          {
+            "match_sha256": "e624103a52a1087336ce45cf66b9ae7a195a2fae0780b858cc4e81d4a67a2a7e",
+            "pattern": "huggingface_token"
+          },
+          {
+            "match_sha256": "ffcda78279dc8b7c0d331d982bb59a7595ccf87737a4dddc784dfa819aebb7f1",
+            "pattern": "huggingface_token"
+          }
+        ],
+        "decoded_scan_complete": false,
+        "error": "depth_budget",
+        "file_sha256": "8effef4d0826a64bc8a510127faabe0a773c98abbd593c93ea42136ea4b076e9",
+        "scanner_stream_counts": {
+          "containers": 82,
+          "raw_stream_bytes": 6780478810,
+          "streams": 63918
+        },
+        "status": "unresolved_container_or_read"
+      },
+      "file_sha256": "8effef4d0826a64bc8a510127faabe0a773c98abbd593c93ea42136ea4b076e9",
+      "namespace": "root_working_changes",
+      "path": "papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/xradar/openradar__xradar-269/layer_custody/layer-4.tar.gz",
+      "source_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/xradar/openradar__xradar-269/layer_custody/layer-4.tar.gz"
+    },
+    {
+      "bytes": 573073735,
+      "classification": {
+        "approval": null,
+        "candidate_hits": [
+          {
+            "match_sha256": "d8234958cc1b634bcbd91298f50fbc38e7d9458dfb40fab80b7fa580190ba389",
+            "pattern": "complete_private_key_pem_or_escaped"
+          },
+          {
+            "match_sha256": "540c214fdfb77ab7aae37a99eac157138b89f30cc900f162192af27a58df6789",
+            "pattern": "github_classic_token"
+          },
+          {
+            "match_sha256": "91abc4825f846d1e2187e05ee96da911395421128448b23c9cf22fc7b36e0d02",
+            "pattern": "huggingface_token"
+          },
+          {
+            "match_sha256": "e624103a52a1087336ce45cf66b9ae7a195a2fae0780b858cc4e81d4a67a2a7e",
+            "pattern": "huggingface_token"
+          },
+          {
+            "match_sha256": "ffcda78279dc8b7c0d331d982bb59a7595ccf87737a4dddc784dfa819aebb7f1",
+            "pattern": "huggingface_token"
+          }
+        ],
+        "decoded_scan_complete": true,
+        "error": null,
+        "file_sha256": "41c16dfdca6e0370a4e999ea407ffeacede03a44ad6d31a5f1e0a875abc61a38",
+        "scanner_stream_counts": {
+          "containers": 75,
+          "raw_stream_bytes": 4533571391,
+          "streams": 63994
+        },
+        "status": "quarantined_credential_candidate"
+      },
+      "file_sha256": "41c16dfdca6e0370a4e999ea407ffeacede03a44ad6d31a5f1e0a875abc61a38",
+      "namespace": "root_working_changes",
+      "path": "papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/xradar/openradar__xradar-269/layer_custody/layer-5.tar.gz",
+      "source_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/xradar/openradar__xradar-269/layer_custody/layer-5.tar.gz"
+    },
+    {
+      "bytes": 536512841,
+      "classification": {
+        "approval": null,
+        "candidate_hits": [
+          {
+            "match_sha256": "8b172cdca6117f6626940d1baf4357ada07ec7f9572fc3c4d74f49dc9a92e001",
+            "pattern": "complete_private_key_pem_or_escaped"
+          },
+          {
+            "match_sha256": "e6f6e780c47f56496cc497b3e306159fa5900e3f7b7813909fc33243d4c99df4",
+            "pattern": "complete_private_key_pem_or_escaped"
+          }
+        ],
+        "decoded_scan_complete": false,
+        "error": "depth_budget",
+        "file_sha256": "a3993b41eafed1ca2b617e1595763311a519c25d868e7c908b483c82129b8927",
+        "scanner_stream_counts": {
+          "containers": 1105,
+          "raw_stream_bytes": 2629914866,
+          "streams": 19654
+        },
+        "status": "unresolved_container_or_read"
+      },
+      "file_sha256": "a3993b41eafed1ca2b617e1595763311a519c25d868e7c908b483c82129b8927",
+      "namespace": "root_working_changes",
+      "path": "papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/zarr/zarr-developers__zarr-python-2996/layer_custody/layer-4.tar.gz",
+      "source_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/zarr/zarr-developers__zarr-python-2996/layer_custody/layer-4.tar.gz"
+    },
+    {
+      "bytes": 186157584,
+      "classification": {
+        "approval": null,
+        "candidate_hits": [
+          {
+            "match_sha256": "8b172cdca6117f6626940d1baf4357ada07ec7f9572fc3c4d74f49dc9a92e001",
+            "pattern": "complete_private_key_pem_or_escaped"
+          },
+          {
+            "match_sha256": "e6f6e780c47f56496cc497b3e306159fa5900e3f7b7813909fc33243d4c99df4",
+            "pattern": "complete_private_key_pem_or_escaped"
+          }
+        ],
+        "decoded_scan_complete": true,
+        "error": null,
+        "file_sha256": "0e1b1bae463db8af1e33087efd5f76128c563c1b7d83eb84dd94498237ec1fe0",
+        "scanner_stream_counts": {
+          "containers": 1120,
+          "raw_stream_bytes": 1363081010,
+          "streams": 20573
+        },
+        "status": "quarantined_credential_candidate"
+      },
+      "file_sha256": "0e1b1bae463db8af1e33087efd5f76128c563c1b7d83eb84dd94498237ec1fe0",
+      "namespace": "root_working_changes",
+      "path": "papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/zarr/zarr-developers__zarr-python-2996/layer_custody/layer-5.tar.gz",
+      "source_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/zarr/zarr-developers__zarr-python-2996/layer_custody/layer-5.tar.gz"
+    },
+    {
+      "bytes": 587940989,
+      "classification": {
+        "approval": null,
+        "candidate_hits": [
+          {
+            "match_sha256": "8b172cdca6117f6626940d1baf4357ada07ec7f9572fc3c4d74f49dc9a92e001",
+            "pattern": "complete_private_key_pem_or_escaped"
+          },
+          {
+            "match_sha256": "e6f6e780c47f56496cc497b3e306159fa5900e3f7b7813909fc33243d4c99df4",
+            "pattern": "complete_private_key_pem_or_escaped"
+          }
+        ],
+        "decoded_scan_complete": false,
+        "error": "depth_budget",
+        "file_sha256": "9d1fdf98b5b1a94b564b104c844e138f1c1d92dea80f99a7ffb34da721bc96d8",
+        "scanner_stream_counts": {
+          "containers": 1321,
+          "raw_stream_bytes": 2969258701,
+          "streams": 22393
+        },
+        "status": "unresolved_container_or_read"
+      },
+      "file_sha256": "9d1fdf98b5b1a94b564b104c844e138f1c1d92dea80f99a7ffb34da721bc96d8",
+      "namespace": "root_working_changes",
+      "path": "papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/zarr/zarr-developers__zarr-python-3015/layer_custody/layer-4.tar.gz",
+      "source_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/recruitment/rebench_environment_v1/zarr/zarr-developers__zarr-python-3015/layer_custody/layer-4.tar.gz"
+    }
+  ],
+  "schema": "terminal-ir-closed-classification-exception-summary@1"
+}

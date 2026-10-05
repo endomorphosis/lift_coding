@@ -1,0 +1,43 @@
+{
+  "artifact": {
+    "bytes": 2535,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-07/lean/FalseSelectorLowerBound.lean",
+    "sha256": "0fd1e01fe852a7cc341f30709f5afe702e2ed545cae15b6d72d2726ca4c6f144"
+  },
+  "artifact_retention_profile": "terminal-closed-source-model-proof-artifacts-256k@1",
+  "asymptotic_optimizer_convergence_proved": false,
+  "backend_executed": true,
+  "command": [
+    "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/bin/lean",
+    "FalseSelectorLowerBound.lean"
+  ],
+  "compiled_artifacts": [],
+  "completion_authority": false,
+  "cpu_seconds": 20,
+  "elapsed_seconds": 0.34108344101696275,
+  "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/bin/lean",
+  "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+  "execution_authority": false,
+  "expected_success": false,
+  "file": "FalseSelectorLowerBound.lean",
+  "key": "false_selector_lower_bound",
+  "matches_expectation": true,
+  "max_output_bytes": 262144,
+  "max_workspace_bytes": 16777216,
+  "mutation_authority": false,
+  "output_truncated": false,
+  "proof_authority": false,
+  "proof_scope": "kernel_checked_generated_model_statement_only",
+  "resource_exhausted": false,
+  "returncode": 1,
+  "schema": "terminal-codebase-lean-check@1",
+  "source_semantics_verified": false,
+  "status": "rejected",
+  "stderr": "",
+  "stdout": "FalseSelectorLowerBound.lean:55:95: error: Tactic `decide` proved that the proposition\n  sourceSemantics [1] 2 = some 1 ∧ 2 ≤ 1\nis false\n",
+  "timed_out": false,
+  "timeout_seconds": 20,
+  "whole_program_proved": false,
+  "workspace_cleaned": true,
+  "workspace_limit_exceeded": false
+}

@@ -1,0 +1,98 @@
+{
+  "actual_optimizer_updates_across_both_attempts": 0,
+  "actual_published_model_restores_across_both_attempts": 18,
+  "all_five_semantic_masks_zero": true,
+  "content_sha256": "8b78111d9c4514a048f4eaa959d54587fcbb9e29e8377e94f53f8a8ae673c9b5",
+  "engineering_review_binding": {
+    "bytes": 37214,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/independent-evaluation-check-02.json",
+    "sha256": "fb8444cdb17a2e9be52069bb89a50e07f4723214168ecd3543222668cb86d58d"
+  },
+  "human_review_completed": false,
+  "no_new_model_weights_created": true,
+  "parent_helper_binding": {
+    "bytes": 5551,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/run_frozen_evaluation.py",
+    "sha256": "4aecf66bd348a53b2dac2bb064aba083c0ecd067a24b0ab66522a08969b5a8bc"
+  },
+  "parent_report_binding": {
+    "bytes": 1221,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-parent-report-02.json",
+    "sha256": "fc641b58112fda8f5f5aed72109cd9eb647dcad3bee9bed0da40964c736b11f2"
+  },
+  "preserved_initial_attempt": {
+    "numeric_report_binding": {
+      "bytes": 7832,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/run-01/worker/evaluation-report.json",
+      "sha256": "48188c0faffb58c840ee71162e72b744f50595d37f15b791ad1f86a6dabf0986"
+    },
+    "plan_binding": {
+      "bytes": 8007,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-evaluation-plan-01.json",
+      "sha256": "99e20586cbc2365601388a951e84900cc1965b9c49f0d04363774c240f5ec045"
+    },
+    "raw_control_rejection_binding": {
+      "bytes": 2526,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/raw-control-rejection-receipt-01.json",
+      "sha256": "1fdb7b3a21f79f5ae8a001c3c3fddb41208110c4b16446d78e8f1d764031cc6c"
+    },
+    "status": "numeric_only_raw_identity_rejected_before_reference_scoring",
+    "worker_binding": {
+      "bytes": 26914,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/evaluate_published_reconstruction.py",
+      "sha256": "1a0d369d253630f9da83b3300f47c12479cb3e3783f409592d35aaecf5a271b1"
+    }
+  },
+  "proof_authority": false,
+  "published_download_receipt_binding": {
+    "bytes": 26931,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/published-download-receipt-01.json",
+    "sha256": "223bb8ea0ead5599debda7c4b5de39d08d0832ab89a567ed6021122e07facc8d"
+  },
+  "qualified": false,
+  "retrieval_receipt_binding": {
+    "bytes": 50421,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-retrieval-receipt-02.json",
+    "sha256": "b0d4add7f2aa38db0130820e9d533d82802613327acd0b4bfc4cbd147ef19383"
+  },
+  "schema": "source-reconstruction-frozen-continuation-evidence/v1",
+  "scope": "exposed_authored_legal_development_diagnostic",
+  "selected_generation_model_restores": 9,
+  "selected_plan_binding": {
+    "bytes": 8010,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-evaluation-plan-02.json",
+    "sha256": "74a058f6a209fc0cde1837bf7856f30985d7b3b6702549315a56abee8fd24b85"
+  },
+  "selected_summary_binding": {
+    "bytes": 66071,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+    "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83"
+  },
+  "selected_worker_binding": {
+    "bytes": 27100,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/evaluate_published_reconstruction_v2.py",
+    "sha256": "0c65247d19430dec78395fe591c60994b2a4b9ec054d8c20c10b067ede994c44"
+  },
+  "semantic_gold_created": false,
+  "source_fidelity_established": false,
+  "unchanged_huggingface_revision": "ce4589fa2a61ac5755af08e2f5a3a345667c2465",
+  "validation": {
+    "actual_downloaded_model_inference": "passed",
+    "actual_target_free_ranking_and_separate_reference_scoring": "passed",
+    "bounded_toy_numeric_control_tests": 11,
+    "exact_original_producer_raw_arrays": 306,
+    "independent_bound_files": 107,
+    "independent_cosine_recomputations": 144,
+    "independent_mse_recomputations": 72,
+    "original_train_rows_reproduced": 144,
+    "parent_same_group_descendant_cleanup_fixture": "passed",
+    "root_stdlib_downloader_and_ranker_tests": 31,
+    "root_stdlib_test_seconds": 3.02,
+    "ruff_all_evaluation_sources": "passed"
+  },
+  "worker_report_binding": {
+    "bytes": 7834,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-worker-report-02.json",
+    "sha256": "7210752841d606eb1a2d331694d6c7fa1c599f28d2603af5057424bcd508394b"
+  }
+}

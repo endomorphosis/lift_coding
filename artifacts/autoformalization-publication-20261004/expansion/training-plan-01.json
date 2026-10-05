@@ -1,0 +1,520 @@
+{
+  "authorization_scope": "user_authorized_source_vector_reconstruction_only_no_semantic_mask_promotion",
+  "baseline_helper_binding": {
+    "bytes": 26131,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/training/train_reconstruction.py",
+    "sha256": "387c0335549374a98e1d5458d9746733fe385dd760584fdf059f6266c44873d3"
+  },
+  "bootstrap_binding": {
+    "bytes": 6247,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/huggingface/launch_reconstruction.py",
+    "sha256": "910ff61a235d6e988e78b34a3b27d7ae7520f2bb10722881ab532c934be1199e"
+  },
+  "cohort_binding": {
+    "bytes": 22785,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+    "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+  },
+  "config": {
+    "batch_schedule": "TRAIN32_seed_plus_epoch_four_batches/v1",
+    "batch_size": 8,
+    "cpu_threads": 1,
+    "device": "cpu",
+    "dtype": "float32",
+    "gradient_clip": 5.0,
+    "learning_rate": 0.003,
+    "midpoint": 100,
+    "normalization": "train_coordinate_mean_and_global_rms/v1",
+    "private_resume_comparison_updates": 3,
+    "steps": 200
+  },
+  "content_sha256": "a45ba2c3cc9eda7e52de73e17b0f763fded98676263783422777a09420bbc737",
+  "helper_binding": {
+    "bytes": 32286,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/train_expanded_reconstruction.py",
+    "sha256": "9d5dca6c6a07d60956eb9da3c874b9df65e8cd8ad965ed16090bbc70738c1182"
+  },
+  "lane_owner_binding": {
+    "bytes": 18141,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+    "sha256": "d7d2e1303e15d46b70997e5880df6fb9a690bfebde63666cad04db516f3ef3a8"
+  },
+  "lanes": {
+    "legacy8": {
+      "architecture": [
+        8,
+        16,
+        4
+      ],
+      "bundle_binding": {
+        "bytes": 48042,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/legacy8_raw_train_bundle.json",
+        "sha256": "81e22da8f9fb450f8f47767b37c58ab3d6200fffe53f98b95f5fa51364f84fb3"
+      },
+      "expected_lane_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/legacy8_raw_train_expected_bindings.json",
+        "sha256": "412318fb0f8f3e55ac65beb015731b51f3deefe2ddd488b7be59c9d6405802ca"
+      }
+    },
+    "native384": {
+      "architecture": [
+        384,
+        128,
+        32
+      ],
+      "bundle_binding": {
+        "bytes": 307657,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_train_bundle.json",
+        "sha256": "c3e6a98c4486344926577d65a9573b3d0949ccc69e8a3351b1c66e11b4fa9aca"
+      },
+      "expected_lane_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_train_expected_bindings.json",
+        "sha256": "22d1de549c2b7abf6ff7f1afdfe5c17c03e322f6b4a82e56eb46156c9a42fc1a"
+      }
+    },
+    "native768": {
+      "architecture": [
+        768,
+        128,
+        64
+      ],
+      "bundle_binding": {
+        "bytes": 568345,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_train_bundle.json",
+        "sha256": "104237e15673981fcfdd0a5076761b64b571574623f1f7e9435ca074d8684453"
+      },
+      "expected_lane_binding": {
+        "bytes": 5406,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_train_expected_bindings.json",
+        "sha256": "96c3b15fdfc37f6fa260ce9430c881cbdd5d431a5c0363ebaa8e86654073de58"
+      }
+    }
+  },
+  "repo": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "schema": "source-vector-expanded-reconstruction-run-plan/v1",
+  "seeds": [
+    1729,
+    1730,
+    1731
+  ],
+  "train_selection": [
+    {
+      "group_id": "authored-binding-composition-v1:0:0",
+      "id": "sha256:0181199642a701f4fb96dab2b3d5aca6055f6541d6fb722e2e7142d4aef42976",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "0b3ac88229163b1f7c722c4467e9546425e463144e1953a104cf16b5edb70c4c",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:3:3",
+      "id": "sha256:04f6e6b30a2f70524cc8619f8cd960b4f44e2af4db3a2888e3b85b6ab1a942c9",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "af5ef273d19865caff566f1ce0fe6df78beb26f76af72812ce5f6e815f9195c7",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:1:1",
+      "id": "sha256:061425d71716cc475aa095e68fd88cd4684c7270c39e1726e50f08994a84ff37",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "1834bd8a4066295bb59cb796bb404d4abacfd31f0de4c1122cf322b813d4d4ba",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:2:2",
+      "id": "sha256:1528cffb363c62de975cc41cd3a7c0562046278ae378b98bd6eee4aa1b08a605",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "8b8aeeb61f49c5e722820334bca248c721cd2fb1e5d095ea88f95dd82a483023",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:1:0",
+      "id": "sha256:15c88c70830026570d41cae9d5791a24f2be7b20d41c7d875237cb29db8d5b7a",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "ffab21d5f572ca627ebe26ebbad5c578ca6efaa27dc4daace5816d449dd49f98",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:2:2",
+      "id": "sha256:2e5a5316218fe9aac23343f138b3049550221bda9c305ef87ecc9154ccfcccfd",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "85ee2f2a71efbeda567511ed3c2a8b2a2db703076c3f83d5b00c70e90ba3a79b",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:0:3",
+      "id": "sha256:3d0651f27d412fab316811690166c27947ddfe0d2d37d2b947bdbf20020a254f",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "dbcb5984ee08a7f2482a5c8d64b7bef2d60cf3093a67d98032a66129b6e257b3",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:0:3",
+      "id": "sha256:4455fcc40aa66bb3b58eeb7c6195793375a4affb90460987c7fd6da2ba285600",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "6c23b5ce9d344601dcb4137d1f4261f3066cfa0f9fec535a8370813390c5431f",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:3:2",
+      "id": "sha256:4687e728411b99f95adfe622bf84dc07a5e365b7eb72e44436f9e3a3d9e1581d",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "bf66e455621c25304246ca46924524f5f8205e13d29fa7f0c3fd46bf8340e093",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:3:2",
+      "id": "sha256:4c5ce5824cd5511cd6f6db9f4da10f1443d2b8502474365796add07698ccedf6",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "5beeabb9b5b8807a09aa98001407598ec85b9a76522f9a223b141669ef5d3425",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:2:1",
+      "id": "sha256:5b4bb90196ebdd0a537fff917c9e061f4835bb8f19785ece55ef67668daf6187",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "cf9da2364c4439c64f44c02864006c38f4b9318c6dff9f1c447de9d3b593ed4f",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:3:3",
+      "id": "sha256:5cb837cd56313c9af3410efc2bff2e5c72af30e5886230a9aad12302a60f2f67",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "1f50956cf60c998b5dca391a883fa410a5f0784d76fa26718a0babead7cccd38",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:1:1",
+      "id": "sha256:5e73144e2b08021c94da4fe39659d5d00f749230dbe0e72de3a170e212b64623",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "054fe4650ec470a1adb7fee971edd84dd68ec9231f95dfdee734ef985c942d49",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:3:2",
+      "id": "sha256:60fec1e3568f8b25c97f7a305cce00bf8dbcc97cc18f5c6e0d2e45dfbdaaf17d",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "edab12d7ae04942187e2efd5a5b8c9038906e3ede2c8776df53627ff54a5aa36",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:1:0",
+      "id": "sha256:64387446e62dd1ae50a96609facb5a80b159a38abcdc1ebb001d0c4ede056fc9",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "5cab98eb5377a501485911883809c946927a0702e24095787db0cd433282c6fe",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:2:1",
+      "id": "sha256:6adacbf0692342e4f61514eef9319cb52c0a676a8fe274d09ca92a67cf543b5d",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "b24309b664908f9f96376ee29d0a802cbc6bcc63910ea94ffef6fd66816da562",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:0:3",
+      "id": "sha256:6b141a701f069797775c10ec928f4ca7705e61d85415ab5f74d70e8309f4f529",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "9cd3d90df895bfc3f329df907c987f5e42d8a78dbbc78b300b9f4d7daa92fc51",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:0:0",
+      "id": "sha256:776e94ef2c949e1240c4dd6cf0b936b6b26a4008a1152d0de7d2752833e096e0",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "f164a09b4f03501d53027b642be303e2fca9285ab486a4ef4b634ab008cb9129",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:3:3",
+      "id": "sha256:77b6db92244cb3d1dfdc323187ea70c8a4add4f11d9e9dbff239bdb56c2da04a",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "8604f6969d372f3eb76103ec533341602e67f6c86d417fed9765da5c3d91fc5a",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:1:0",
+      "id": "sha256:87dee5dbd444995f6909820222d33b5995970120180acbc76bc815523e0ea555",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "7c5654b03fa810c2e11df0834537e2912775c22bd2a0b2c4be6e9f55d466136f",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:1:1",
+      "id": "sha256:89b01e7eb75ef2cbc3858e32909a263475700a3b47997b1c014af7b22d2f8a75",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "09c240b489b9f0e456d66944ac957f78ab4153ba3dabaf20fc3683a9068c9548",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:3:2",
+      "id": "sha256:8f02917f86f80a5e34fa3b9fa6629babf266233e7b2c783dbf6f41d866cb159a",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "dd3016c65fca733cdd624802e010f775c9613de995cfe8c89517cf9040878d06",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:2:1",
+      "id": "sha256:956c1925604b75c404f910e3814f56c6ff1368eca1d00dc45e5bc28ecc481c8f",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "96d5b83d8de6b99021577bd293b421a1eaf0e4296115b18d3f9aa13cac447edb",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:0:3",
+      "id": "sha256:98d712d40fca2ef327e6743f72b6e6ac064bc38b862a10f7a6118233e0bf1167",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "2a55f9ac34a8aad7493644f50d7f51c4a3b94ba4be5043b30472bbb80ea8be9e",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:3:3",
+      "id": "sha256:9db9985a4787d1c0add6a09b33c1a26423fa9a89f736b11abec28475f3b744bb",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "97b8b158802307790e794e46163d1ae905af72283376eee4e6b8047648c64560",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:2:2",
+      "id": "sha256:b0aa2f6622739cc21a340308e721c0da800092ed891634c1740c52e13bacfe60",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "d519000440bcaf948a584c7815bbb6ecbb75ab4b8de152ad83dc97b138651240",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:0:0",
+      "id": "sha256:c24280541e09eb49808ee11c125dfcd7e3cbf96b814204cf9339ab2df7ac04c4",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "6fa7cbb2c3df1f1d2f99326f197a232d63eb31f3ec37629e85a4e49a7303322f",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:2:2",
+      "id": "sha256:cdf174c22284a47adb1e459b24fed8c7942da072bc066477bb7521b9b6d13a01",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "f3ecdef45dc21bd1af7b6056881b26ca900599eb68198a6c4869e0ea52854449",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:1:0",
+      "id": "sha256:db6181485124bbd5f4c20d003233c8697541d8fe2a84f15c0664c877e9191302",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "a0ef9778097dff03039926e1b0f45bf7f4c8a0dfb7bf4f60c8750b58210232c4",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:2:1",
+      "id": "sha256:dfe78ad6af3bc4b9c26a7513a76ec66cc8e8ba0e8afcef0bc01b59dde1688808",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "66d78613879f6c0256873c2468b7316e3c19b3d1e4605133f48d8c1743f509a0",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:0:0",
+      "id": "sha256:e5b5a2c8c3707fe54f1e8712acd74bc7dfa6dd19c48cec042f3888f5e16815f9",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "14e49044c05c516c792590084ed1feb93b2978342fec51a5c8e5e6926a6b43d2",
+      "split": "train"
+    },
+    {
+      "group_id": "authored-binding-composition-v1:1:1",
+      "id": "sha256:fe26e40b06676ed1a00773b0633f70ce14a2f3dd2338a4bbc2dcf9008d44d16d",
+      "original_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "source_sha256": "6a79ce4eebfe1b31bac4652e22cad977e7a6b798924a897e5badb9e4a6ae6b2a",
+      "split": "train"
+    }
+  ]
+}

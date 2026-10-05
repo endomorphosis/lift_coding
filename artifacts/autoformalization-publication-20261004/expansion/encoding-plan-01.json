@@ -1,0 +1,272 @@
+{
+  "asset_manifest_binding": {
+    "bytes": 1470,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/configs/autoencoders/gte_multilingual_local_assets_v1.json",
+    "sha256": "8beb874aa7b06599346173fde12e95f9f926b3028942d5014cdd2f99c4385166"
+  },
+  "authorization_scope": "source_only_native_encoding_no_semantic_admission",
+  "bootstrap_binding": {
+    "bytes": 6247,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/huggingface/launch_reconstruction.py",
+    "sha256": "910ff61a235d6e988e78b34a3b27d7ae7520f2bb10722881ab532c934be1199e"
+  },
+  "cohort_metadata_binding": {
+    "bytes": 22785,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+    "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+  },
+  "content_sha256": "5be75416574d7aff5540d9d7e460f2a2b99655b00ec2f7c680463a38849b6e6b",
+  "expected_profiles": {
+    "legacy8": {
+      "content_sha256": "241b60803b7172bb6b1dc6e7b48e19675103226c194f9d1716fa5419dd50a67a",
+      "dimension": 8,
+      "fit_input_recipe": "exact_source_only/v1",
+      "inference_input_recipe": "exact_source_only/v1",
+      "lane_id": "legacy8",
+      "normalization": {
+        "kind": "l2",
+        "unit_tolerance": 1e-05
+      },
+      "pooling": {
+        "endpoint": "spacy_modal_codec.decode_embedding(dimensions=8)",
+        "method": "none"
+      },
+      "precision": "decimal6",
+      "producer": {
+        "checkpoint_sha256": null,
+        "code_sha256": "62dcbf4442fc19560fc752d733144086d18cf2917c02c65e18516dba1eb8d317",
+        "model_assets_sha256": "504f2870ca3105064ce2ca86c27eca766df2d4d085ed92c626afe79d2fbf7817",
+        "model_id": "en_core_web_sm",
+        "model_revision": "3.8.0",
+        "profile_id": "legacy-linguistic-features-8d/v1"
+      },
+      "schema": "alignment-representation-profile/v1",
+      "stage": "historical_linguistic_features"
+    },
+    "native384": {
+      "content_sha256": "7ab65a8822403038422f07f1b93ffb5e8cc3027e9de82886390fad084817443c",
+      "dimension": 384,
+      "fit_input_recipe": "exact_source_only/v1",
+      "inference_input_recipe": "exact_source_only/v1",
+      "lane_id": "native384",
+      "normalization": {
+        "kind": "l2",
+        "unit_tolerance": 1e-05
+      },
+      "pooling": {
+        "endpoint": "sentence_transformers.mean_pooling",
+        "method": "mean"
+      },
+      "precision": "float32",
+      "producer": {
+        "checkpoint_sha256": null,
+        "code_sha256": "3077b91e46e8a8250c4ab219a444963a8f78e98586a4359a8c271d4d32020bcb",
+        "model_assets_sha256": "def8d7e04c05560b1d0dd1fa9317be7a59a1ba8399ca725be0ac807a9a264edc",
+        "model_id": "thenlper/gte-small",
+        "model_revision": "17e1f347d17fe144873b1201da91788898c639cd",
+        "profile_id": "thenlper/gte-small@17e1f347d17fe144873b1201da91788898c639cd:d384:pool=mean:norm=l2:precision=float32:input_policy=exact_source_no_truncation"
+      },
+      "schema": "alignment-representation-profile/v1",
+      "stage": "raw_embedding"
+    },
+    "native768": {
+      "content_sha256": "04d062a7724d01e6b5d3f50578211347f6f9e7f5eceec5e02978fd37f7f70d0f",
+      "dimension": 768,
+      "fit_input_recipe": "exact_source_only/v1",
+      "inference_input_recipe": "exact_source_only/v1",
+      "lane_id": "native768",
+      "normalization": {
+        "kind": "l2",
+        "unit_tolerance": 1e-05
+      },
+      "pooling": {
+        "endpoint": "complete_model.encoder.last_hidden_state[:,0]",
+        "method": "cls"
+      },
+      "precision": "float32",
+      "producer": {
+        "checkpoint_sha256": null,
+        "code_sha256": "874c6db14e70e3adbb3ea3190d9a0eb1cd44aa50ab9aa60e3387b678fcf3a588",
+        "model_assets_sha256": "1b45c5a2bb0bf45f75ac4a745d695aa12956e043f4fe581495d112e44b647961",
+        "model_id": "Alibaba-NLP/gte-multilingual-base",
+        "model_revision": "9bbca17d9273fd0d03d5725c7a4b0f6b45142062",
+        "profile_id": "Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062:code=Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4:d768:pool=cls:norm=l2:cpu:float32:tokens8192:reject_overlength:v1"
+      },
+      "schema": "alignment-representation-profile/v1",
+      "stage": "raw_embedding"
+    }
+  },
+  "helper_binding": {
+    "bytes": 31574,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encode_expanded_sources.py",
+    "sha256": "7cc67329a6dc23d6b2a1e2dae92ed6cad02cacd93c9de19895f5c7fcc0aa85f6"
+  },
+  "producer_source_bindings": [
+    {
+      "binding": {
+        "bytes": 41368,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_richer_embeddings.py",
+        "sha256": "f5fff80ce717d2c185271eb04e92af7c02d13a3f01bfb4afb758f5865b74684b"
+      },
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.alignment_richer_embeddings"
+    },
+    {
+      "binding": {
+        "bytes": 18141,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+        "sha256": "d7d2e1303e15d46b70997e5880df6fb9a690bfebde63666cad04db516f3ef3a8"
+      },
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.alignment_lane_bundle"
+    },
+    {
+      "binding": {
+        "bytes": 9556,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+        "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+      },
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.source_embeddings_768_complete"
+    },
+    {
+      "binding": {
+        "bytes": 13375,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+        "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+      },
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.source_embeddings_768"
+    },
+    {
+      "binding": {
+        "bytes": 15959,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+        "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+      },
+      "module": "ipfs_datasets_py.logic.formalization.autoencoder.gte_multilingual_profile"
+    },
+    {
+      "binding": {
+        "bytes": 16725,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+        "sha256": "27855f5ffd59ebc45444d5e37c18ff1569618084cd27b1503db112940051ffb0"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_embedding_runtime"
+    },
+    {
+      "binding": {
+        "bytes": 26219,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+        "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_embedding_production"
+    },
+    {
+      "binding": {
+        "bytes": 27947,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+        "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_corpus_manifest"
+    },
+    {
+      "binding": {
+        "bytes": 100140,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+        "sha256": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_training_worker"
+    },
+    {
+      "binding": {
+        "bytes": 7896,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+        "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_native_pool"
+    },
+    {
+      "binding": {
+        "bytes": 21228,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+        "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_adaptive_optimizer"
+    },
+    {
+      "binding": {
+        "bytes": 16164,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/_contract.py",
+        "sha256": "ad9603c7b4dd80736aa9bb32dc4ffc537149f1d111b265c95b6dbedc5dbfe8aa"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages._contract"
+    },
+    {
+      "binding": {
+        "bytes": 751,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_linguistic_snapshot/__init__.py",
+        "sha256": "209d89df0ac32061a5237d87d19e42bbd0ddd60b0ad8ac939b44cc18c5156b36"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._linguistic_snapshot"
+    },
+    {
+      "binding": {
+        "bytes": 306403,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_linguistic_snapshot/spacy_modal_codec.py",
+        "sha256": "16ec4e141d5cb2f9d37cd4db42733921bc046e17fee12afc43ab31ca7a60cd59"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._linguistic_snapshot.spacy_modal_codec"
+    },
+    {
+      "binding": {
+        "bytes": 160181,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_snapshot/legal_modal_parser.py",
+        "sha256": "5415bf565171b17db1d4a03c715e974645a59018addb852cf67fc3c71d462406"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._snapshot.legal_modal_parser"
+    },
+    {
+      "binding": {
+        "bytes": 5865,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_snapshot/legal_samples.py",
+        "sha256": "51ce99dc83279c570bc57334c1cdc4cb72fa4b94c5b8c81101bb6252f0a614de"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._snapshot.legal_samples"
+    },
+    {
+      "binding": {
+        "bytes": 7283,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_snapshot/modal_ir.py",
+        "sha256": "697b8e183fb966f01a0b81e4241154c38d2785277739518cbdfcc8db37695743"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._snapshot.modal_ir"
+    },
+    {
+      "binding": {
+        "bytes": 519367,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_snapshot/modal_registry.py",
+        "sha256": "e8a79d5612f50d3a842b72e618fc1903094dc4dd225688d9cb2d67bb4b0cb00a"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._snapshot.modal_registry"
+    },
+    {
+      "binding": {
+        "bytes": 77959,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/_snapshot/frame_bm25_selector.py",
+        "sha256": "612d472efaf9cb5bb2f57914125d9fc87cde3a55f14dc5a105cc80f268df430a"
+      },
+      "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_lineages.legacy_v1._snapshot.frame_bm25_selector"
+    }
+  ],
+  "resource_limits": {
+    "address_space_bytes": 8589934592,
+    "cpu_hard_seconds": 130,
+    "cpu_soft_seconds": 120,
+    "cpu_threads": 1,
+    "file_size_bytes": 33554432,
+    "parent_wall_seconds": 180
+  },
+  "schema": "expanded-source-native-encoding-plan/v1",
+  "source_inputs_binding": {
+    "bytes": 43238,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+    "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+  }
+}

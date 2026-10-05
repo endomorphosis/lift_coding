@@ -1,0 +1,30 @@
+{
+  "schema": "codebase-ir-certified-adaptation-design@1",
+  "status": "design_only_not_implemented",
+  "decision": "Keep existing nonlinear autoencoder qualification separate; add a certifiable convex per-repository adapter where a convergence guarantee is required.",
+  "fixed_inputs": [
+    "Pinned repository snapshot and typed AST/symbol graph",
+    "Source/model/profile/dependency scoped compiler-backed targets from proof index",
+    "Versioned normalization and family projections; unsupported fragments remain opaque"
+  ],
+  "trainable_scope": "Regularized linear adapter/readout over fixed features or fixed embeddings; independently trained nonlinear encoder is frozen during a certified adapter run.",
+  "objective": "Mean squared typed-target reconstruction or pair-logistic relevance plus positive L2 regularization.",
+  "certificates_required": [
+    "Exact feature and target hashes; target provenance distinguishes source-derived and conditional models",
+    "Positive regularization; exact or interval Hessian upper bound",
+    "A descent/contraction theorem applicable to chosen objective/update rule",
+    "Binary64 update error bounds or an exact-rational reference optimizer",
+    "Finite run stopping criterion with authenticated intermediate weight states",
+    "Heldout source/program contract reconstruction and task outcomes"
+  ],
+  "what_this_cannot_certify": [
+    "Global convergence of simultaneously changing tanh encoder/decoder/Adam/clipped updates",
+    "Semantic correctness merely because a loss decreases",
+    "Full codebase semantics for opaque unsupported fragments",
+    "Natural language intent alignment without reviewed source grounding"
+  ],
+  "integration": "Repository-specific adapter/checkpoint IDs join DuckDB/DuckLake source/AST/KG/vector/contract/proof dependencies; symbolic planner consumes only proofs matching current snapshot, assumptions and toolchain.",
+  "new_training_calls": 0,
+  "global_convergence_proved": false,
+  "completion_authority": false
+}
