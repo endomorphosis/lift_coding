@@ -1,0 +1,1128 @@
+{
+  "attempts": [
+    {
+      "closure": {
+        "bytes": 17492,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/closed.json",
+        "sha256": "a174edb3f378f0f41d9e1ad6d2179a1bfefc0d03efa4d60c6a14f1b6fef29f35"
+      },
+      "declared_environment_file_count": 20061,
+      "environment": {
+        "bytes": 9951117,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/environment-manifest.json",
+        "sha256": "6dc31bbe7f628613565d9513f261877191f4aa5875a45ce221b5af1f2b4cbea2"
+      },
+      "job": "lean-strong-lower-01",
+      "module": "RealStrongLower",
+      "native_elapsed_seconds": 1.4248625449836254,
+      "outer_closure": {
+        "bytes": 472,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01-closed.json",
+        "sha256": "bdafe1e1ad3a7fdc63b6db8c7af28c27ac7fc9b4d0b4d950fb34680cc3fd708e"
+      },
+      "qualified_query_count": 6,
+      "receipt": {
+        "bytes": 11095,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/check-result.json",
+        "sha256": "7c801fee36f5d96f9813fbd634ef215f7161d407f41a7ae6307e70ecd8c2c6eb"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile"
+      ],
+      "retained_chunk_count": 3,
+      "retained_object_bytes": 186376,
+      "source": {
+        "bytes": 4405,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/RealStrongLower.lean",
+        "sha256": "b4196a1637cffe9cde7728355f2833767a6867f187d06d2614f7a251be778744"
+      },
+      "source_direct_imports": [
+        "OriginalRealProfile",
+        "RealDescent"
+      ],
+      "specification": {
+        "bytes": 1725,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-check-specification.json",
+        "sha256": "850ec85acb37493ae94a252924d572ba3e6c48f3b646a57bf665ba9509d322bb"
+      },
+      "status": "passed"
+    },
+    {
+      "closure": {
+        "bytes": 17443,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/closed.json",
+        "sha256": "11fd90eb3b29d4fd8231b2c41582cfe6405dfb1ed7816836b2f921db2e303c0b"
+      },
+      "declared_environment_file_count": 20066,
+      "environment": {
+        "bytes": 9953505,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/environment-manifest.json",
+        "sha256": "e331b0c11459c22f1882c50d7e975ab4e7e4ffeb24452bb88c71f1e2434485cd"
+      },
+      "job": "lean-pl-01",
+      "module": "RealPL",
+      "native_elapsed_seconds": 1.402582753013121,
+      "outer_closure": {
+        "bytes": 463,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01-closed.json",
+        "sha256": "926240664354877bb1281d62c6d7aad4a3835a3cc773679a823ec6ef82502160"
+      },
+      "qualified_query_count": 5,
+      "receipt": {
+        "bytes": 10872,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/check-result.json",
+        "sha256": "4331a7022fe1159ad5638c0ff1af69cdafb06612b54d8302760d1a48dd650012"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile",
+        "RealStrongLower"
+      ],
+      "retained_chunk_count": 3,
+      "retained_object_bytes": 182368,
+      "source": {
+        "bytes": 3863,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/RealPL.lean",
+        "sha256": "e2800d4368455db0f9e1fc1ea6ed2eb2786a92b19580b6a9d2d11d6c3f8cc885"
+      },
+      "source_direct_imports": [
+        "RealStrongLower"
+      ],
+      "specification": {
+        "bytes": 1684,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-check-specification.json",
+        "sha256": "ac281b521181c9413456a7f2aea7343d94a74b22ecaa18d9b38df9299eb1bff0"
+      },
+      "status": "passed"
+    },
+    {
+      "closure": {
+        "bytes": 17497,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/closed.json",
+        "sha256": "7215d13fa3f6330b4983646dc108e74baeb83636ccd9f7eb680fae65f0dff179"
+      },
+      "declared_environment_file_count": 20061,
+      "environment": {
+        "bytes": 9951148,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/environment-manifest.json",
+        "sha256": "68843ca01a9310ec6b93106702f4ec30e97c01fd7bbfa5fdf74fcd21b6d50888"
+      },
+      "job": "lean-stable-factor-01",
+      "module": "RealStableFactor",
+      "native_elapsed_seconds": 1.181726279988652,
+      "outer_closure": {
+        "bytes": 474,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01-closed.json",
+        "sha256": "10bd9a8c04491dba08f6df244a4c2c5dc049ee89a1a3f01b488c064f7fb42d70"
+      },
+      "qualified_query_count": 2,
+      "receipt": {
+        "bytes": 9253,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/check-result.json",
+        "sha256": "25adf30103c3d7455df5c7fff9eedf6b9e4ceb1fbd5263e919247ed18588e0f5"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile"
+      ],
+      "retained_chunk_count": 2,
+      "retained_object_bytes": 82952,
+      "source": {
+        "bytes": 1767,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RealStableFactor.lean",
+        "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+      },
+      "source_direct_imports": [
+        "RealGradient"
+      ],
+      "specification": {
+        "bytes": 1540,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-check-specification.json",
+        "sha256": "de371519d9b91ca735e04508435f1de70384ae5e35df8996d298596f216539a2"
+      },
+      "status": "passed"
+    },
+    {
+      "closure": {
+        "bytes": 17438,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/closed.json",
+        "sha256": "5cd2d28325df86c939605b2f8597da4e2ab29983de0ced82ac4772488dfc48f8"
+      },
+      "declared_environment_file_count": 20075,
+      "environment": {
+        "bytes": 9958178,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/environment-manifest.json",
+        "sha256": "49df919d790a53af69a33e5a832bef0e8a9bad841f81069f338a31a836808c53"
+      },
+      "job": "lean-gap-01",
+      "module": "RealGapContraction",
+      "native_elapsed_seconds": 1.4958629269967787,
+      "outer_closure": {
+        "bytes": 463,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01-closed.json",
+        "sha256": "17ddfdee5d9cd87ea7ebf646764770b1eae9cac11fdc612c57ad024b3480005a"
+      },
+      "qualified_query_count": 6,
+      "receipt": {
+        "bytes": 11902,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/check-result.json",
+        "sha256": "e8848a7a9946e8948c2fb60f9c86aaced904f1ccbd78aaf490f06b9a8a39a23e"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile",
+        "RealStrongLower",
+        "RealPL",
+        "OriginalRealDescent"
+      ],
+      "retained_chunk_count": 4,
+      "retained_object_bytes": 243072,
+      "source": {
+        "bytes": 5799,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/RealGapContraction.lean",
+        "sha256": "f548594b460e63c288f28fefd681224ae9fa598e545f2bca5d5f1a77b7aee8b3"
+      },
+      "source_direct_imports": [
+        "RealPL",
+        "OriginalRealDescent",
+        "Mathlib.Analysis.SpecificLimits.Basic"
+      ],
+      "specification": {
+        "bytes": 1722,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-check-specification.json",
+        "sha256": "584fd08d485670301b33402a8fd9774f03798d083f2d3f8a2009c17693d8d4cf"
+      },
+      "status": "passed"
+    },
+    {
+      "closure": {
+        "bytes": 19680,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/closed.json",
+        "sha256": "66a5f92c68ce96e7d497e33baf777cc309c624a1af0617b8146eb53e032e8537"
+      },
+      "declared_environment_file_count": 20066,
+      "environment": {
+        "bytes": 9953596,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/environment-manifest.json",
+        "sha256": "58699b2f5b20e1c06314a0832b64caa41c023c1cad68682d2b7732f92e58df12"
+      },
+      "job": "lean-minimizer-01",
+      "module": "RealMinimizer",
+      "native_elapsed_seconds": 1.4146435799775645,
+      "outer_closure": {
+        "bytes": 471,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01-closed.json",
+        "sha256": "9fd8a08054d8e78f89e3a203e46bfa4c4c37d550871b10275de6897f4aabe58e"
+      },
+      "qualified_query_count": 0,
+      "receipt": {
+        "bytes": 9722,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/check-result.json",
+        "sha256": "93e2fb9d2e0767bc423f2134edd41bf0b0ba35c7d02d859096614ae914865cc6"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile",
+        "RealStrongLower"
+      ],
+      "retained_failure_diagnostic": [
+        "RealMinimizer.lean:41:32: error: linarith failed to find a contradiction",
+        "margin : \u211d",
+        "a\u271d : ((fun x => 1) + Real.exp \u2218 (-id)) margin \u2264 0",
+        "\u22a2 False",
+        "failed",
+        "'RankerRealCurvature.realDot_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'RankerRealCurvature.squaredEuclideanNorm_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'RankerRealCurvature.realPairLoss_continuous' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]"
+      ],
+      "source": {
+        "bytes": 6460,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/RealMinimizer.lean",
+        "sha256": "16339d15b34d822db054b8239087940a9e9a75e0b4364856bc3438cf7df251bf"
+      },
+      "source_direct_imports": [
+        "RealStrongLower",
+        "Mathlib.Topology.Order.Compact",
+        "Mathlib.Topology.MetricSpace.Bounded",
+        "Mathlib.Analysis.Calculus.LocalExtr.Basic"
+      ],
+      "specification": {
+        "bytes": 1906,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-check-specification.json",
+        "sha256": "9d11efb88aecf260f7a3cb6efd62d0e6c7dbf570d17e191a4126181293806f37"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "closure": {
+        "bytes": 17478,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/closed.json",
+        "sha256": "e4994963020aac3618c7c2bd9f05da15fcb45973bbba544389d855afa786d659"
+      },
+      "declared_environment_file_count": 20066,
+      "environment": {
+        "bytes": 9953604,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/environment-manifest.json",
+        "sha256": "c215b52ae6a2e6f561fa0a53e4b26bd29e019961b12aa4f88779e850968fe6bc"
+      },
+      "job": "lean-minimizer-02",
+      "module": "RealMinimizerV2",
+      "native_elapsed_seconds": 1.4711016779765487,
+      "outer_closure": {
+        "bytes": 470,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02-closed.json",
+        "sha256": "ebde71b52f7bc5a7bc8466d2cdb63f10e882d2b2d7946cb8e55a096f55f7550b"
+      },
+      "qualified_query_count": 9,
+      "receipt": {
+        "bytes": 12490,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/check-result.json",
+        "sha256": "c2b7246f77d736091eb1540ae3db8ce9952d6db05ea2e6f4da1f327b1489ab09"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile",
+        "RealStrongLower"
+      ],
+      "retained_chunk_count": 3,
+      "retained_object_bytes": 171544,
+      "source": {
+        "bytes": 6517,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RealMinimizerV2.lean",
+        "sha256": "7a38abd3651b1cfab1c17d60789356f63189fa30ec9fe111d7872611f062ad73"
+      },
+      "source_direct_imports": [
+        "RealStrongLower",
+        "Mathlib.Topology.Order.Compact",
+        "Mathlib.Topology.MetricSpace.Bounded",
+        "Mathlib.Analysis.Calculus.LocalExtr.Basic"
+      ],
+      "specification": {
+        "bytes": 1908,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-check-specification.json",
+        "sha256": "c2e9bd08876fb9b2829f8a234b6876ca7acc2bd24f25941ad9aa71868f8d0ead"
+      },
+      "status": "passed"
+    },
+    {
+      "closure": {
+        "bytes": 17463,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/closed.json",
+        "sha256": "38e36eacec6261e80abccdaa19c3e16b8e2130550e9faa2ce42803ca51bd5433"
+      },
+      "declared_environment_file_count": 20071,
+      "environment": {
+        "bytes": 9956051,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/environment-manifest.json",
+        "sha256": "5776c7956eabaae70ac0ee8ae2d7a3ff552454a36a5de4f7b00ae943a32ef75d"
+      },
+      "job": "lean-growth-01",
+      "module": "RealMinimumGrowth",
+      "native_elapsed_seconds": 1.405354326008819,
+      "outer_closure": {
+        "bytes": 467,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01-closed.json",
+        "sha256": "1325e4a10239f12383a635e9fb000403220caf7adbc2a5a295a9b63161b4ac62"
+      },
+      "qualified_query_count": 8,
+      "receipt": {
+        "bytes": 12409,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/check-result.json",
+        "sha256": "0ce1fb5b3e118e4f2b32a38d82b347a17df1a0bfaabe9344742ce8ab3f39d574"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile",
+        "RealStrongLower",
+        "RealMinimizerV2"
+      ],
+      "retained_chunk_count": 3,
+      "retained_object_bytes": 181616,
+      "source": {
+        "bytes": 6906,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RealMinimumGrowth.lean",
+        "sha256": "aa502dbba4fb11dab6ebbd6f3f16a2c58588753791bd64bf8333a8d398917b3c"
+      },
+      "source_direct_imports": [
+        "RealMinimizerV2",
+        "Mathlib.Analysis.Calculus.LocalExtr.Basic"
+      ],
+      "specification": {
+        "bytes": 1919,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-check-specification.json",
+        "sha256": "45af05aa9cacfe40e3df35773f5f3e5f90cba3788f150667b557090a473282bc"
+      },
+      "status": "passed"
+    },
+    {
+      "closure": {
+        "bytes": 18603,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/closed.json",
+        "sha256": "c80a09c41a46ee613ef52086f7c0371f133217ee96c518b7628e7f6a8ac9f413"
+      },
+      "declared_environment_file_count": 20090,
+      "environment": {
+        "bytes": 9965694,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/environment-manifest.json",
+        "sha256": "246d4b871956486e67fa65786fc1fbc76f36fa58ce6495cdd642c8dd55619ff1"
+      },
+      "job": "lean-original-convergence-01",
+      "module": "OriginalRealConvergence",
+      "native_elapsed_seconds": 1.4211558690003585,
+      "outer_closure": {
+        "bytes": 480,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01-closed.json",
+        "sha256": "75a93cf3515815221ef62989a73128904071e1c6afa1cf440a2d899415e03eec"
+      },
+      "qualified_query_count": 0,
+      "receipt": {
+        "bytes": 9494,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/check-result.json",
+        "sha256": "c0a50f2018c6922be901be5ac0400439aef38e399047dbbd1eef36fad151f1d9"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile",
+        "RealStrongLower",
+        "RealPL",
+        "OriginalRealDescent",
+        "RealGapContraction",
+        "RealMinimizerV2",
+        "RealMinimumGrowth"
+      ],
+      "retained_failure_diagnostic": [
+        "OriginalRealConvergence.lean:66:47: error: typeclass instance problem is stuck",
+        "  AddLeftMono ?m.258",
+        "",
+        "Note: Lean will not try to resolve this typeclass instance problem because the first, second, and third type arguments to `AddLeftMono` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.",
+        "",
+        "Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.",
+        "'RankerRealCurvature.originalReal_iterate_squared_distance_rate' depends on axioms: [propext,",
+        " Classical.choice,"
+      ],
+      "source": {
+        "bytes": 4763,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/OriginalRealConvergence.lean",
+        "sha256": "eebf0815c95f8247f6a156e9d972fbb19c57eed8da4be374a88a7ce2b8317b0c"
+      },
+      "source_direct_imports": [
+        "RealMinimumGrowth",
+        "RealGapContraction",
+        "Mathlib.Analysis.Real.Sqrt",
+        "Mathlib.Topology.Constructions"
+      ],
+      "specification": {
+        "bytes": 1655,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-check-specification.json",
+        "sha256": "f9360fd038fcc3ff103a9a54e5fd1ea311e89a3d132d629430b5e8e4f257d65e"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "closure": {
+        "bytes": 17533,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/closed.json",
+        "sha256": "70ae9819293f1b1bca3a0eaa7bf85dbbdb434e601c0d128ee3179a64fa618494"
+      },
+      "declared_environment_file_count": 20090,
+      "environment": {
+        "bytes": 9965702,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/environment-manifest.json",
+        "sha256": "c9cf0ff47f85d562eb3c2f3dcd604f2f850f99b8f8e8e42a9bd063f668ed3084"
+      },
+      "job": "lean-original-convergence-02",
+      "module": "OriginalRealConvergenceV2",
+      "native_elapsed_seconds": 1.5577788130030967,
+      "outer_closure": {
+        "bytes": 481,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02-closed.json",
+        "sha256": "8a4dd20dd19fdcedc6eb3c4e56b12317748ca1f808f2507b6fda6884fc6ef6c7"
+      },
+      "qualified_query_count": 3,
+      "receipt": {
+        "bytes": 10623,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/check-result.json",
+        "sha256": "c26b9781daa03872d6ec6b42111822357a9f43ee703b06f30e8910b6731f5dd1"
+      },
+      "registered_local_modules": [
+        "LogisticCoefficient",
+        "CoordinateGeometry",
+        "LogisticCurvature",
+        "ScalarSoftplus",
+        "DirectionalObjective",
+        "RealGradient",
+        "RealDescent",
+        "OriginalNumericCurvature",
+        "OriginalRealProfile",
+        "RealStrongLower",
+        "RealPL",
+        "OriginalRealDescent",
+        "RealGapContraction",
+        "RealMinimizerV2",
+        "RealMinimumGrowth"
+      ],
+      "retained_chunk_count": 2,
+      "retained_object_bytes": 78128,
+      "source": {
+        "bytes": 4827,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/OriginalRealConvergenceV2.lean",
+        "sha256": "c423d7114996e9f6d1785684b291ca09fde589ae8006d846cdbcd6feb8405469"
+      },
+      "source_direct_imports": [
+        "RealMinimumGrowth",
+        "RealGapContraction",
+        "Mathlib.Analysis.Real.Sqrt",
+        "Mathlib.Topology.Constructions"
+      ],
+      "specification": {
+        "bytes": 1657,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-check-specification.json",
+        "sha256": "47130054807dfbee6fdfd675d4bd68c24c19b95a823495d65ca695fe02d542f5"
+      },
+      "status": "passed"
+    }
+  ],
+  "complete_retained_objects_joined_in_memory": [
+    {
+      "bytes": 186376,
+      "chunks": 3,
+      "job": "lean-strong-lower-01",
+      "joined_in_memory_only": true,
+      "name": "RealStrongLower.olean",
+      "sha256": "fece2696086e9234c1730f56bef19f6e78479707f5895a96d0e84e4c1ac028b4"
+    },
+    {
+      "bytes": 182368,
+      "chunks": 3,
+      "job": "lean-pl-01",
+      "joined_in_memory_only": true,
+      "name": "RealPL.olean",
+      "sha256": "5334b227397847c1200ac915170e8e990bc906faefe3e8c5b4192dc95546646e"
+    },
+    {
+      "bytes": 82952,
+      "chunks": 2,
+      "job": "lean-stable-factor-01",
+      "joined_in_memory_only": true,
+      "name": "RealStableFactor.olean",
+      "sha256": "b1f3128c80daf4015fe1f2f5e61647f50d047f755d908a07df5e5581f1410477"
+    },
+    {
+      "bytes": 243072,
+      "chunks": 4,
+      "job": "lean-gap-01",
+      "joined_in_memory_only": true,
+      "name": "RealGapContraction.olean",
+      "sha256": "ae542e35e282039c0f5066c75903b7d75a0b8949571bb36782c0f9fcd04ba5e7"
+    },
+    {
+      "bytes": 171544,
+      "chunks": 3,
+      "job": "lean-minimizer-02",
+      "joined_in_memory_only": true,
+      "name": "RealMinimizerV2.olean",
+      "sha256": "a0f4db9e6e507d1fbc8cb7bc0c88f97b6c39725a2190a71a2aff57946346d05f"
+    },
+    {
+      "bytes": 181616,
+      "chunks": 3,
+      "job": "lean-growth-01",
+      "joined_in_memory_only": true,
+      "name": "RealMinimumGrowth.olean",
+      "sha256": "acce046e01bb8a033dd69d9334624d02d9d34c7cde479f95e1e66c8f9da43adb"
+    },
+    {
+      "bytes": 78128,
+      "chunks": 2,
+      "job": "lean-original-convergence-02",
+      "joined_in_memory_only": true,
+      "name": "OriginalRealConvergenceV2.olean",
+      "sha256": "c6a5bc6bcfa5cbe04f543eeafe6c8abaa6541a230602dfad89354493c287c2aa"
+    }
+  ],
+  "issues": [],
+  "mathematical_review": {
+    "actual_fixed_dimensions": {
+      "coordinates": 80,
+      "pairs": 4
+    },
+    "actual_objective": "F(w)=originalRealMu/2*\u03a3_j(w_j)^2+1/4*\u03a3_i log(1+exp(-dot(w,originalRealDifferences_i)))",
+    "conclusion": "A unique global minimizer of this fixed original exact-real objective exists; every initial Fin 80 real vector has exact-real iterates and objective values tending to that minimizer/value.",
+    "final_theorem": "RankerRealCurvature.originalReal_model_converges",
+    "final_theorem_has_no_minimum_contraction_or_convergence_premise": true,
+    "native_scalar_literals": {
+      "conservative_curvature_L": {
+        "denominator": "10384593717069655257060992658440192",
+        "numerator": "6456113532727304764308018601938259"
+      },
+      "eta": {
+        "denominator": "4503599627370496",
+        "numerator": "1825681634788183"
+      },
+      "mean_curvature_L": {
+        "denominator": "332306998946228968225951765070086144",
+        "numerator": "148193205047351780041480481833762829"
+      },
+      "mu": {
+        "denominator": "576460752303423488",
+        "numerator": "5764607523034235"
+      }
+    },
+    "noncircular_chain": [
+      "actual scalar and line derivatives",
+      "derived lower Taylor inequality",
+      "nonnegative regularizer lower bound and continuity",
+      "bounded actual sublevel and actual global minimizer existence",
+      "scalar Fermat stationarity, quadratic growth and actual uniqueness",
+      "sum-of-squares PL domination",
+      "original safe descent plus PL gives gap contraction",
+      "actual recursive iteration and derived geometric rate",
+      "gap squeeze and coordinate-square/sqrt limits",
+      "Pi Tendsto plus actual unique minimizer removes all minimum/convergence premises from final theorem"
+    ],
+    "parameter_source": "Exact Q2 original literal Rat coordinates and scalars, cast to Real; closed finite indexing/norm/mean joins are qualified conclusions, not alignment premises.",
+    "retained_failures": {
+      "OriginalRealConvergence": "Coordinate-square nonnegativity had an unresolved AddLeftMono typeclass; V2 annotates Fin 80 and its actual squared coordinate expression.",
+      "RealMinimizer": "Log-continuity nonzero goal failed to normalize its Pi/composition expression; RealMinimizerV2 supplies the explicit positive 1+exp(-margin) expression."
+    },
+    "stable_source_branch_result": "RealStableFactor proves exact-real stable probability/coordinate-gradient branch identities; binary64 execution is outside that conclusion.",
+    "topology_norm_check": "All analytic bounds use the explicit sum of coordinate squares. Compactness uses a finite-Pi coordinate box and proper function-space topology; no equality with the default function norm is assumed."
+  },
+  "metadata_and_scope": {
+    "Float_libm_fsum_error_bound_or_execution_origin_proved": false,
+    "Python_binary64_source_runtime_equivalence_proved": false,
+    "all_native_environment_checker_and_owned_closure_proof_authority_fields_false": true,
+    "arbitrary_IR_or_general_task_satisfaction_proved": false,
+    "autoencoder_equivalence_or_convergence_proved": false,
+    "inherited_optimizer_convergence_proved_false_explanation": "The native receipt keeps broad pipeline authority/scope fields false. Specific qualified Lean queries establish only the named fixed original exact-real theorem; no global pipeline flag is promoted.",
+    "proof_authority": false
+  },
+  "module_direct_dependency_graph": {
+    "OriginalRealConvergence": [
+      "RealMinimumGrowth",
+      "RealGapContraction"
+    ],
+    "OriginalRealConvergenceV2": [
+      "RealMinimumGrowth",
+      "RealGapContraction"
+    ],
+    "RealGapContraction": [
+      "RealPL",
+      "OriginalRealDescent"
+    ],
+    "RealMinimizer": [
+      "RealStrongLower"
+    ],
+    "RealMinimizerV2": [
+      "RealStrongLower"
+    ],
+    "RealMinimumGrowth": [
+      "RealMinimizerV2"
+    ],
+    "RealPL": [
+      "RealStrongLower"
+    ],
+    "RealStableFactor": [
+      "RealGradient"
+    ],
+    "RealStrongLower": [
+      "OriginalRealProfile",
+      "RealDescent"
+    ]
+  },
+  "native_census": {
+    "calls": 9,
+    "inconclusive_retained": 2,
+    "passed": 7,
+    "qualified_theorem_query_entries": 39
+  },
+  "pin_review": {
+    "actual_runtime_file_open_trace_claimed": false,
+    "all_declared_environment_file_pins_rehashed": true,
+    "atomic_live_source_snapshot_claimed": false,
+    "references_checked": 362891,
+    "unique_regular_file_bytes_hashed": 3818952235,
+    "unique_regular_files_hashed": 21270
+  },
+  "prior_Q2_preservation": {
+    "no_follow_fixture_aliases": 19,
+    "original_320_coordinates_and_exact_mu_eta_bindings_retained": true,
+    "regular_bytes": 273066128,
+    "regular_files": 1080,
+    "seal": {
+      "bytes": 281311,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/file-only-seal-01.json",
+      "sha256": "6c281bd21da026b27797f78f98d0932bad4e7a115779a4fc348ee6987f30af15"
+    },
+    "semantic_data_join_audit": {
+      "bytes": 11598,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/proof-cache/final-numeric-coordinate-source-audit-01.json",
+      "sha256": "44c749d8b21bb754847da1aaedadb6ffd358350b83dea759b608997bbc306163"
+    }
+  },
+  "qualified_queries": [
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealStrongLower",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.scalar_taylor_unit_lower"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealStrongLower",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_taylor_lower"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealStrongLower",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_lower_between"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealStrongLower",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realPairLoss_nonneg"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealStrongLower",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_regularizer_lower"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealStrongLower",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_lower_between"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealPL",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.squared_gradient_completion_nonneg"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealPL",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_scaled_gradient_domination"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealPL",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_gradient_domination"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealPL",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_scaled_gradient_domination"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealPL",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_gradient_domination"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealStableFactor",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realStableLogisticP_eq"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealStableFactor",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realSourceBranchGradient_eq"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealGapContraction",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_mu_le_meanL"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealGapContraction",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_rho_bounds"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealGapContraction",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_gap_contraction"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealGapContraction",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_iterate_gap_le"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealGapContraction",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_iterate_gap_tendsto_zero"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealGapContraction",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_iterate_objective_tendsto"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realDot_continuous"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.squaredEuclideanNorm_continuous"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realPairLoss_continuous"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.continuous_realObjective"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_sublevel_coordinate_abs_le"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_sublevel_isBounded"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_sublevel_isCompact"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_exists_global_minimizer"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimizerV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_exists_global_minimizer"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimumGrowth",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.eq_zero_of_squaredEuclideanNorm_eq_zero"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimumGrowth",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realCoordinateGradient_eq_zero_of_global_minimum"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimumGrowth",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_quadratic_growth_at_minimum"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimumGrowth",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.realObjective_minimizer_unique"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimumGrowth",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_gradient_eq_zero_of_global_minimum"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimumGrowth",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_quadratic_growth_at_minimum"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimumGrowth",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_minimizer_unique"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "RealMinimumGrowth",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_exists_unique_global_minimizer"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "OriginalRealConvergenceV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_iterate_squared_distance_rate"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "OriginalRealConvergenceV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_iterate_weights_tendsto"
+    },
+    {
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "module": "OriginalRealConvergenceV2",
+      "report_occurrences": 2,
+      "theorem": "RankerRealCurvature.originalReal_model_converges"
+    }
+  ],
+  "review_source": {
+    "bytes": 21679,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-math-review-20261005-01/review_native_math.py",
+    "sha256": "e612ddb49f2f1280399305cbe5e867ba94a152e43a0f09256e4f396f1a74180b"
+  },
+  "review_work": {
+    "Git_or_HF_operations": 0,
+    "Lean_calls": 0,
+    "Q2_or_Q3_writes": 0,
+    "artifact_imports": 0,
+    "decoder_classifier_training_fit_replay_solver_test_jobs": 0,
+    "method": "source/JSON reads, existing pin hashes, byte joins in memory only",
+    "native_checks": 0
+  },
+  "schema": "ranker-original-real-convergence-independent-file-review@1",
+  "status": "passed_file_only_review"
+}

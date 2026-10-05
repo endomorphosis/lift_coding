@@ -1,0 +1,45 @@
+{
+  "HF_parent": "8b7b8c896749e0ca3884114cedbed782a88f4702",
+  "Q3_P4_S2_mutations": 0,
+  "actual_verified_HF_commit": "d6b6e333f3b1bcfe9028a8ca5ac3be6b12256e8a",
+  "base_bytes": 3818550,
+  "base_files": 197,
+  "base_selection": {
+    "bytes": 144570,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-private-git-preparation-20261005-01/compact-base-selection-01.json",
+    "sha256": "755f0531ed8ef39685c20784a647dd3f5ccf13f827838fd01af05c3796f15e0a"
+  },
+  "classifier_codec_native_calls": 0,
+  "commit_calls": 0,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T06:17:08.037305+00:00",
+  "execution_authority": false,
+  "first_changed_remote_main_observation": "91a60ad2a43d944a7406e03f74430a6b1b46127d",
+  "force_push_calls": 0,
+  "observed_remote_main": "91a60ad2a43d944a7406e03f74430a6b1b46127d",
+  "original_guard_after_read_only_attempt": {
+    "child": {
+      "head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "index_bytes": 2062937,
+      "index_sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4"
+    },
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "index_bytes": 692628,
+      "index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    }
+  },
+  "original_guards_unchanged": true,
+  "prepared_parent": "769dc97d372ae2515b71d32a380d42de069c5d1d",
+  "private_Git_fetch_index_HEAD_ref_mutations": 0,
+  "private_checkout": "/home/barberb/lift_coding/maintenance/ranker-curvature-private-git-preparation-20261005-01/root",
+  "private_checkout_clean": true,
+  "proof_authority": false,
+  "push_calls": 0,
+  "reason": "Explicit root instruction: stop and retain concrete failure if remote parent changes; no blind force or rebase.",
+  "rebase_calls": 0,
+  "safe_HF_receipt_scan_or_Git_receipt_selection_not_started": true,
+  "schema": "ranker-convergence-Git-publication-stopped-at-parent-guard@1",
+  "stage_calls": 0,
+  "status": "stopped_remote_parent_changed_before_any_Git_mutation"
+}

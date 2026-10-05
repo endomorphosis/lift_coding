@@ -1,0 +1,45 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 6414101,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/metadata-inputs.json",
+      "sha256": "9d7579929a93bde731213f275cb09cb8549f0bd4e5c9659632042c743af6cf84"
+    },
+    {
+      "bytes": 30154,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/source-model-obligations-01.json",
+      "sha256": "19cf94e462dfc0541953832b57861c78f9fdddf2db6d392bde0da70d4d252304"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 34791,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-metadata-convergence-01.py",
+      "sha256": "df7d76e4a1cb27e309b8be2a4774b627d668fa345cc03ebe2b0b12e501ecaeea"
+    },
+    {
+      "bytes": 417675,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v3.json",
+      "sha256": "1d7d6efb49bb951d0cf2470d8b93d79a73e25cbd42961624ca263ee40314e458"
+    },
+    {
+      "bytes": 6414101,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/metadata-inputs.json",
+      "sha256": "9d7579929a93bde731213f275cb09cb8549f0bd4e5c9659632042c743af6cf84"
+    },
+    {
+      "bytes": 30154,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/source-model-obligations-01.json",
+      "sha256": "19cf94e462dfc0541953832b57861c78f9fdddf2db6d392bde0da70d4d252304"
+    }
+  ],
+  "mode": "metadata-convergence-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 417675,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v3.json",
+    "sha256": "1d7d6efb49bb951d0cf2470d8b93d79a73e25cbd42961624ca263ee40314e458"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T05:38:09.217013+00:00"
+}

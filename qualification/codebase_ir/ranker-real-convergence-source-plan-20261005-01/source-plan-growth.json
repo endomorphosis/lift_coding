@@ -1,0 +1,59 @@
+{
+  "schema": "ranker-real-minimum-growth-source-plan@1",
+  "status": "source_only_uncompiled_unqualified",
+  "draft": "drafts/RealMinimumGrowth.lean",
+  "prior_drafts_and_plans_mutated": false,
+  "native_calls_in_this_draft_phase": 0,
+  "training_fit_test_import_calls_in_this_draft_phase": 0,
+  "git_hf_operations_in_this_draft_phase": 0,
+  "qualified_theorems_added_in_this_draft_phase": 0,
+  "imports": ["RealMinimizerV2", "Mathlib.Analysis.Calculus.LocalExtr.Basic"],
+  "qualified_minimizer_receipt_reported_by_root": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/check-result.json",
+  "proof_chain": [
+    {"name": "RankerRealCurvature.eq_zero_of_squaredEuclideanNorm_eq_zero", "method": "Each coordinate square is bounded by the nonnegative finite square sum. A zero sum forces every coordinate square, and then every coordinate, to vanish."},
+    {"name": "RankerRealCurvature.realCoordinateGradient_eq_zero_of_global_minimum", "method": "Let g be the actual coordinate gradient at z. A true global minimum makes t↦F(z+t*g) locally minimal at 0. Fermat applied to the already established actual scalar derivative gives dot(g,g)=0; the coordinate square sum is therefore zero and g=0.", "premises": "Only the true global-minimum property. Neither n>0 nor mu>0 is needed for this stationarity conclusion because the directional derivatives were already proved for every finite n,m and mu."},
+    {"name": "RankerRealCurvature.realObjective_quadratic_growth_at_minimum", "method": "Use realObjective_lower_between from z to w. Substitute the derived zero gradient and rearrange.", "premises": "n>0 and the true global-minimum property. Positive mu is needed when growth is later used to control displacement, but the displayed inequality itself holds for every mu."},
+    {"name": "RankerRealCurvature.realObjective_minimizer_unique", "method": "Two global minima have equal objective values. Quadratic growth from z1 to z2, positive mu and square-sum nonnegativity force zero displacement. Coordinate equality gives z1=z2.", "premises": "n>0, mu>0, and the genuine global-minimum properties of both comparison points."},
+    {"name": "RankerRealCurvature.originalReal_gradient_eq_zero_of_global_minimum", "method": "Specialize stationarity to the already joined original exact-real coordinate data."},
+    {"name": "RankerRealCurvature.originalReal_quadratic_growth_at_minimum", "method": "Specialize actual growth to n=4, m=80 and the original real scalars and data."},
+    {"name": "RankerRealCurvature.originalReal_minimizer_unique", "method": "Specialize uniqueness with originalReal_mu_pos."},
+    {"name": "RankerRealCurvature.originalReal_exists_unique_global_minimizer", "method": "Obtain the actual minimizer from the independently qualified originalReal_exists_global_minimizer, then use the derived original uniqueness theorem. Unique existence is a conclusion, not a premise."}
+  ],
+  "mathlib_source_declarations": [
+    {"file": "Mathlib/Analysis/Calculus/LocalExtr/Basic.lean", "line": 237, "name": "IsLocalMin.hasDerivAt_eq_zero", "role": "Scalar Fermat theorem at 0 along the actual gradient direction."},
+    {"file": "Mathlib/Order/Filter/Extr.lean", "line": 98, "name": "IsMinFilter", "role": "A true global minimum gives the eventual inequality required by IsLocalMin."},
+    {"file": "Mathlib/Algebra/GroupWithZero/Basic.lean", "line": 263, "name": "sq_eq_zero_iff", "role": "A zero real coordinate square forces a zero coordinate."}
+  ],
+  "noncircularity": {
+    "stationarity_assumed": false,
+    "quadratic_growth_assumed": false,
+    "uniqueness_assumed": false,
+    "convergence_or_contraction_assumed": false,
+    "existence_supplied_by_an_independent_qualified_theorem": true
+  },
+  "next_isolated_acceptance_step": {
+    "action": "Freeze this new module and register the accepted RealMinimizerV2 module plus its exact transitive local closure before the next bounded native call.",
+    "minimal_local_registered_module_count": 11,
+    "wall_seconds": 20,
+    "cpu_seconds": 20,
+    "per_file_capture_bytes": 65536,
+    "max_source_bytes": 262144,
+    "workspace_bytes": 16777216,
+    "axiom_queries": [
+      "RankerRealCurvature.eq_zero_of_squaredEuclideanNorm_eq_zero",
+      "RankerRealCurvature.realCoordinateGradient_eq_zero_of_global_minimum",
+      "RankerRealCurvature.realObjective_quadratic_growth_at_minimum",
+      "RankerRealCurvature.realObjective_minimizer_unique",
+      "RankerRealCurvature.originalReal_gradient_eq_zero_of_global_minimum",
+      "RankerRealCurvature.originalReal_quadratic_growth_at_minimum",
+      "RankerRealCurvature.originalReal_minimizer_unique",
+      "RankerRealCurvature.originalReal_exists_unique_global_minimizer"
+    ],
+    "acceptance": "Actual successful elaboration, exact source and dependency pins, complete retained objects with accepted bounded chunk reconstruction and closure, and queried axioms within the allowed standard set. No native call is run by this source-only draft phase."
+  },
+  "scope_limits": {
+    "weight_vector_convergence_proved_here": false,
+    "binary64_or_python_source_runtime_equivalence_proved_here": false,
+    "full_model_task_or_heldout_behavior_equivalence_proved_here": false
+  }
+}

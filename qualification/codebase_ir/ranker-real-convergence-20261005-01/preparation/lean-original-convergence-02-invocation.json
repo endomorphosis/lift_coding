@@ -1,0 +1,85 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1657,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-check-specification.json",
+      "sha256": "47130054807dfbee6fdfd675d4bd68c24c19b95a823495d65ca695fe02d542f5"
+    },
+    {
+      "bytes": 9965702,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/environment-manifest.json",
+      "sha256": "c9cf0ff47f85d562eb3c2f3dcd604f2f850f99b8f8e8e42a9bd063f668ed3084"
+    },
+    {
+      "bytes": 4827,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/OriginalRealConvergenceV2.lean",
+      "sha256": "c423d7114996e9f6d1785684b291ca09fde589ae8006d846cdbcd6feb8405469"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 30818,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-original-convergence-02.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 417675,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v3.json",
+      "sha256": "1d7d6efb49bb951d0cf2470d8b93d79a73e25cbd42961624ca263ee40314e458"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1657,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-check-specification.json",
+      "sha256": "47130054807dfbee6fdfd675d4bd68c24c19b95a823495d65ca695fe02d542f5"
+    },
+    {
+      "bytes": 9965702,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/environment-manifest.json",
+      "sha256": "c9cf0ff47f85d562eb3c2f3dcd604f2f850f99b8f8e8e42a9bd063f668ed3084"
+    },
+    {
+      "bytes": 4827,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/OriginalRealConvergenceV2.lean",
+      "sha256": "c423d7114996e9f6d1785684b291ca09fde589ae8006d846cdbcd6feb8405469"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "mode": "lean-original-convergence-02",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 417675,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v3.json",
+    "sha256": "1d7d6efb49bb951d0cf2470d8b93d79a73e25cbd42961624ca263ee40314e458"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T05:35:17.672516+00:00"
+}

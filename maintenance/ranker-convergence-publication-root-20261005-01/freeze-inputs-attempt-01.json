@@ -1,0 +1,13 @@
+{
+  "actual_plan_sha256": "44674a6e9901d49db15acac1264706cb0aa5ed6a5136ad3dcd38354dd1ef594b",
+  "codec_calls": 0,
+  "error": "fixed final plan and independent lowercase SHA256 required",
+  "error_type": "ValueError",
+  "generated_selection_or_closure_before_failure": false,
+  "native_calls": 0,
+  "remote_mutations": 0,
+  "returncode": 1,
+  "schema": "ranker-convergence-publication-preflight-attempt@1",
+  "status": "refused_before_output_creation",
+  "supplied_expected_plan_sha256": "596abc58cdb27d07f00b176805c535d605ce8e07ad273c5cfa7b3969eb6e367a5"
+}

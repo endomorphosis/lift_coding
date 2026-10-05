@@ -1,0 +1,267 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "archive": {
+    "complete_selected_regular_file_bytes": 147838468,
+    "complete_selected_regular_file_count": 401,
+    "compressed_shard_bytes": 26110063,
+    "decoded_member_review": {
+      "bytes": 3948,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/package-review-01.json",
+      "sha256": "80e52bb19948125571ceec442e82bc2bed5fe2b792ed32222cdcd2c8c43b0f93"
+    },
+    "file_seal": {
+      "bytes": 112015,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/file-only-seal-01.json",
+      "sha256": "6ee7b5d675777e8cc9744c9072ee7f885cb8fc47a9204c1a40d9724632012648"
+    },
+    "manifest": {
+      "bytes": 336685,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-package-20261005-01/package/manifest.json",
+      "sha256": "b21ad711f3c88d4c2ae6fa1d74db33ba892c77dc9dfedd7d7343989ea44b0b95"
+    },
+    "native_limits_changed": false,
+    "publication_profile": {
+      "aggregate_decoded_work_max": 1073741824,
+      "complete_decoded_tar_max": 16777216,
+      "compressed_shard_max": 16777216,
+      "depth_max": 6,
+      "duplicate_verification_decoder_invocations": 0,
+      "member_readback_profile": "same_first_decoded_tar_and_member_streams@1",
+      "members_max": 10000,
+      "native_qualification_limits_changed": false,
+      "per_file_max": 14680064,
+      "raw_member_sum_per_shard_max": 14680064,
+      "raw_population_max": 268435456,
+      "shards_max": 64,
+      "wall_seconds": 180,
+      "zstd_args": [
+        "-T1",
+        "-3"
+      ]
+    },
+    "qualified_review": {
+      "bytes": 22341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/qualified-review-01.json",
+      "sha256": "eebf40b5de2822faef1293a62578da208b582131e44c8a1f3e0d060071b6d0e7"
+    },
+    "raw_external_environment_dependency_bodies_published": false,
+    "sealed_regular_file_bytes": 147093916,
+    "sealed_regular_file_count": 378,
+    "shards": 14,
+    "typed_semantic_facts_verified": 329
+  },
+  "binary64_error_bound_proved": false,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T06:14:52.624352+00:00",
+  "execution_authority": false,
+  "full_task_satisfaction": "unknown",
+  "general_codebase_IR_preservation_proved": false,
+  "github": {
+    "Git_publication_pending_at_ledger_creation": true,
+    "new_commit_and_normal_push_closure_recorded_externally": true,
+    "prior_published_commit": "769dc97d372ae2515b71d32a380d42de069c5d1d",
+    "repo": "endomorphosis/lift_coding",
+    "required_branch": "origin/main"
+  },
+  "global_autoencoder_convergence_proved": false,
+  "hf_publication_completed_and_verified": true,
+  "huggingface": {
+    "commit": "d6b6e333f3b1bcfe9028a8ca5ac3be6b12256e8a",
+    "committed_total_regular_files": 276,
+    "old_large_archives_reuploaded": false,
+    "parent": "8b7b8c896749e0ca3884114cedbed782a88f4702",
+    "prior_immutable_files_preserved": 225,
+    "public_readback": {
+      "bytes": 3448,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-public-readback-01.json",
+      "sha256": "ae264df8e038e4b4e2cacde49081e1062f546f6179153c60d9d475a3ce3440fe"
+    },
+    "repo_id": "Publicus/codebase-ir-proof-index",
+    "selected_bytes": 27316939,
+    "selected_files": 51,
+    "url": "https://huggingface.co/datasets/Publicus/codebase-ir-proof-index/commit/d6b6e333f3b1bcfe9028a8ca5ac3be6b12256e8a",
+    "verification_methods": {
+      "committed_LFS_SHA256_and_size": 14,
+      "downloaded_small_file_SHA256_and_size": 37
+    }
+  },
+  "mathematical_result": {
+    "accepted_modules": 7,
+    "accepted_theorem_query_entries": 39,
+    "actual_native_lean_attempts": 9,
+    "minimizer_or_convergence_premise_required": false,
+    "objective_values_converge_to_minimum": true,
+    "retained_inconclusive_native_attempts": 2,
+    "scope": "Original four-pair, 80-coordinate convex exact-real objective and infinite gradient recurrence",
+    "theorem": "RankerRealCurvature.originalReal_model_converges",
+    "unique_global_minimizer_proved": true,
+    "weights_converge_from_every_initial_real_vector": true
+  },
+  "metadata": {
+    "additive_payloads": 39,
+    "complete_export_comparison_and_fresh_process_readback_verified": true,
+    "engine": "native DuckDB/DuckLake",
+    "families": 32,
+    "new_strict_cache_admissions": 0,
+    "payloads": 4417,
+    "prior_exact_prefix_payloads": 4378,
+    "vectors_and_empty_contracts_unchanged": true
+  },
+  "native_Float_optimizer_convergence_proved": false,
+  "new_autoencoder_fits": 0,
+  "new_feature_preparations": 0,
+  "new_fits": 0,
+  "new_gradient_evaluations": 0,
+  "new_optimizer_updates": 0,
+  "new_training_trace_replays": 0,
+  "next_obligations": {
+    "bytes": 3196,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/next-obligations.json",
+    "sha256": "7f7fe204c3994fb1ad03d2d6de452399cf705ee9e51b3e6afaa6c9da4ad5a974"
+  },
+  "official_benchmark_score": null,
+  "original_checkout_guards_unchanged": {
+    "child": {
+      "head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "index": {
+        "bytes": 2062937,
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/index",
+        "sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4"
+      }
+    },
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "index": {
+        "bytes": 692628,
+        "path": "/home/barberb/lift_coding/.git/index",
+        "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+      }
+    }
+  },
+  "planner_activation": false,
+  "producer": {
+    "bytes": 9408,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/close_publication_ledger_01.py",
+    "sha256": "dc758a11e9401e83d2e698218129d432fcba7dc70b99f89f44eef71f86be39b4"
+  },
+  "proof_authority": false,
+  "publication_attempts": {
+    "final-upload-scan-outer-01": {
+      "elapsed_seconds": 1.6735582270193845,
+      "input_pins_unchanged": true,
+      "receipt": {
+        "bytes": 522,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/closed.json",
+        "sha256": "d443f2b14d43bb42cd0cf8b9423190ce80b84a24c790ee6910feafc81a552a18"
+      },
+      "returncode": 0,
+      "status": "closed_phase"
+    },
+    "hf-publication-outer-01": {
+      "elapsed_seconds": 173.73136566299945,
+      "input_pins_unchanged": true,
+      "receipt": {
+        "bytes": 559,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/closed.json",
+        "sha256": "70e8d0bca972494a63fe1c40fb4d9008e1a09fa5af825fa374dbdfa5252ab1c3"
+      },
+      "returncode": 0,
+      "status": "closed_phase"
+    },
+    "package-outer-01": {
+      "elapsed_seconds": 3.3786712780129164,
+      "input_pins_unchanged": true,
+      "receipt": {
+        "bytes": 518,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/closed.json",
+        "sha256": "1e0fa69dff54306d35fb6120077260bf1eec51a4a19084f2a71c7690899862bd"
+      },
+      "returncode": 0,
+      "status": "closed_phase"
+    },
+    "package-review-outer-01": {
+      "elapsed_seconds": 2.350925828999607,
+      "input_pins_unchanged": true,
+      "receipt": {
+        "bytes": 534,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/closed.json",
+        "sha256": "f85c762612087f0f26b81027b12d3c08ef8b08ed4c0289011605a7b7f78913dd"
+      },
+      "returncode": 1,
+      "status": "failed_phase_preserved"
+    },
+    "package-review-outer-02": {
+      "elapsed_seconds": 2.281455084012123,
+      "input_pins_unchanged": true,
+      "receipt": {
+        "bytes": 524,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/closed.json",
+        "sha256": "c1662c6b7cf3257febf1a48be53f9226cb1f57df892590051baee71e348782f0"
+      },
+      "returncode": 0,
+      "status": "closed_phase"
+    }
+  },
+  "publication_review_failure_retained": "Attempt01 decoded then refused a mismatched output path; attempt02 used the existing fixed reviewer output path and passed",
+  "python_ranker_source_equivalence_proved": false,
+  "raw_SDK_logs_read_or_published": false,
+  "safe_receipt_pins": [
+    {
+      "bytes": 21851,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-plan-01.json",
+      "sha256": "af77746e72284e0adaf75839ee03a797f5f6a260b25aac9bfc146644344d15a1"
+    },
+    {
+      "bytes": 539848,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-invocation-01.json",
+      "sha256": "d2dcd63e22b3b6afe8c7d1d8db13a61dd7e24acb007ce1a69957095f7e85bc57"
+    },
+    {
+      "bytes": 76132,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/remote-before.json",
+      "sha256": "b026f49ae41846c124f09734d47ee6a12b3aa00d47a828493275fca76c9fdcf6"
+    },
+    {
+      "bytes": 170,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/commit-observed.json",
+      "sha256": "9f148b82f6c8732f1b06e4595f2db57e683be0e59b0a075ee9044c219312584c"
+    },
+    {
+      "bytes": 27060,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/verified-files.json",
+      "sha256": "7b0e6b42a55ec4a1fd0e6bac29547d9f826f4f8380a7033a78251552a79e8776"
+    },
+    {
+      "bytes": 885,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "35df9327cca8fc205507de3222ba3885a9826df6485eb98724ea464ef429b0b1"
+    },
+    {
+      "bytes": 3448,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/hf-public-readback-01.json",
+      "sha256": "ae264df8e038e4b4e2cacde49081e1062f546f6179153c60d9d475a3ce3440fe"
+    },
+    {
+      "bytes": 23425,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-01.json",
+      "sha256": "c8e49b40e213c0cdaf7850f8b59d53b555245dbf6932b347cf818c194172329c"
+    },
+    {
+      "bytes": 3948,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/package-review-01.json",
+      "sha256": "80e52bb19948125571ceec442e82bc2bed5fe2b792ed32222cdcd2c8c43b0f93"
+    },
+    {
+      "bytes": 464,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-package-20261005-01/closed.json",
+      "sha256": "1094eef2abd1add664054792e4c320a5218cd377e3e631b89d8ed24dbf3a54bd"
+    },
+    {
+      "bytes": 336685,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-package-20261005-01/package/manifest.json",
+      "sha256": "b21ad711f3c88d4c2ae6fa1d74db33ba892c77dc9dfedd7d7343989ea44b0b95"
+    }
+  ],
+  "schema": "ranker-convergence-release-publication-ledger@1",
+  "status": "closed_verified_HF_increment_Git_commit_recorded_externally"
+}

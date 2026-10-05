@@ -1,0 +1,127 @@
+{
+  "schema": "ranker-real-convergence-source-plan@1",
+  "status": "source_only_uncompiled_unqualified",
+  "sealed_read_dependency": "qualification/codebase_ir/ranker-real-curvature-20261005-01",
+  "source_only_artifact": "drafts/RealStrongLower.lean",
+  "native_calls_in_this_phase": 0,
+  "training_fit_test_import_calls_in_this_phase": 0,
+  "git_hf_operations_in_this_phase": 0,
+  "qualified_theorems_added_in_this_phase": 0,
+  "existing_sibling_before_this_phase": false,
+  "mathlib_source_root": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib",
+  "declared_mathlib_revision": "5ed2965256430c3649e86755f9576b54eca72435",
+  "declared_lean_version": "4.34.0",
+  "fixed_target": {
+    "space": "Fin 80 → ℝ",
+    "pairs": 4,
+    "differences": "RankerRealCurvature.originalRealDifferences",
+    "mu": "RankerRealCurvature.originalRealMu",
+    "eta": "RankerRealCurvature.originalRealEta",
+    "objective": "F w := realObjective originalRealMu originalRealDifferences w",
+    "gradient": "g w := realCoordinateGradient originalRealMu originalRealDifferences w",
+    "step": "G w := realGradientStep originalRealMu originalRealEta originalRealDifferences w",
+    "iteration": "W w0 0 = w0; W w0 (k+1) = G (W w0 k)",
+    "gap": "gap w := F w - F wStar",
+    "ratio": "q := 1 - originalRealEta * originalRealMu"
+  },
+  "qualified_input_declarations": [
+    {"file": "preparation/lean-descent-01-producer/RealDescent.lean", "line": 21, "declaration": "scalar_taylor_unit_upper", "use": "Apply to -f with bound -c; derive lower Taylor without assuming a Taylor inequality."},
+    {"file": "preparation/lean-directional-02-producer/DirectionalObjective.lean", "line": 80, "declaration": "hasDerivAt_realObjectiveLine", "use": "Actual first derivative at every line point."},
+    {"file": "preparation/lean-directional-02-producer/DirectionalObjective.lean", "line": 96, "declaration": "hasDerivAt_lineFirstDerivative", "use": "Actual second derivative at every line point."},
+    {"file": "preparation/lean-curvature-04-producer/LogisticCurvature.lean", "line": 20, "declaration": "candidateHessianQuad_bounds", "use": "Lower part supplies mu times the coordinate square sum at every shifted point."},
+    {"file": "preparation/lean-gradient-01-producer/RealGradient.lean", "line": 68, "declaration": "lineFirstDerivative_zero_eq_dot_gradient", "use": "Converts first derivative at zero to the established coordinate gradient."},
+    {"file": "preparation/lean-original-profile-02-producer/OriginalRealProfile.lean", "line": 87, "declaration": "originalReal_mu_pos", "use": "Positive strong lower coefficient and division by mu."},
+    {"file": "preparation/lean-original-profile-02-producer/OriginalRealProfile.lean", "line": 90, "declaration": "originalReal_eta_pos", "use": "Strict q < 1."},
+    {"file": "preparation/lean-original-profile-02-producer/OriginalRealProfile.lean", "line": 96, "declaration": "originalReal_eta_times_meanL_le_one", "use": "Together with mu <= meanL establishes q >= 0."},
+    {"file": "preparation/lean-original-descent-01-producer/OriginalRealDescent.lean", "line": 19, "declaration": "originalReal_safe_descent", "use": "Actual original-model one-step objective decrease supplies the contraction algebra after PL is proved."}
+  ],
+  "obligations": [
+    {
+      "id": "lower_taylor",
+      "depends_on": [],
+      "statement": "For all w,y, F y >= F w + dot (g w) (y-w) + (mu/2) squaredEuclideanNorm (y-w).",
+      "method": "Negate the qualified scalar upper Taylor theorem; supply the actual line derivative and the proved lower curvature bound at every t. Specialize generic n,m to the bound original 4 x 80 data. Candidate proof bodies are in RealStrongLower.lean.",
+      "status": "draft_only_not_elaborated"
+    },
+    {
+      "id": "continuity_and_coercivity",
+      "depends_on": ["lower_taylor"],
+      "statement": "Continuous F and Tendsto F (Filter.cocompact (Fin 80 → ℝ)) Filter.atTop.",
+      "method": "Continuity follows from finite coordinate sums, exp, and Continuous.log, with 1 + exp(-dot w d) > 0 proved pointwise. Prove realPairLoss >= 0 and F w >= (mu/2) sum_j (w j)^2 from the objective itself. For each real K, put B=max 0 (2*K/mu), R=B+1. If F w <= K then (w j)^2 <= sum_j(w j)^2 <= B for every j, hence -R <= w j <= R. The sublevel {w | F w <= K} is closed and lies in the compact Pi order interval Icc (fun _ => -R) (fun _ => R). Its complement is cocompact, giving eventual K <= F w and the required Tendsto via Filter.tendsto_atTop. This uses the coordinate sum only for analytic inequalities and the product topology only for compactness.",
+      "status": "unimplemented_obligation",
+      "note": "Coercivity does not logically need lower_taylor; its nonnegative-loss/regularizer lemmas share the proposed first module. It is never a premise of a convergence theorem."
+    },
+    {
+      "id": "minimizer_exists",
+      "depends_on": ["continuity_and_coercivity"],
+      "statement": "∃ wStar : Fin 80 → ℝ, ∀ w, F wStar <= F w.",
+      "method": "Apply Continuous.exists_forall_le to the proved continuity and proved cocompact-to-atTop limit. An alternative is Continuous.exists_forall_le_of_isBounded applied to the explicitly bounded initial sublevel, but the compact Pi interval route avoids identifying the default function norm with squaredEuclideanNorm.",
+      "status": "unimplemented_obligation"
+    },
+    {
+      "id": "stationarity_growth_unique",
+      "depends_on": ["lower_taylor", "minimizer_exists"],
+      "statement": "g wStar = 0; (mu/2) squaredEuclideanNorm(w-wStar) <= F w-F wStar; the minimizer is unique.",
+      "method": "For every direction v, the scalar line t ↦ F(wStar+t*v) has a global minimum at 0. Convert that actual minimum to IsLocalMin and use IsLocalMin.hasDerivAt_eq_zero with the proved first derivative. Choose v=g wStar: dot(g wStar)(g wStar)=sum_j(g wStar j)^2=0, so all coordinates vanish by nonnegative finite-sum algebra. Then apply lower_taylor at wStar to obtain quadratic growth. Two global minimizers have equal F; growth and mu>0 force squared displacement 0 and coordinatewise equality.",
+      "status": "unimplemented_obligation",
+      "note": "Uses Fermat only on real scalar lines. No full Frechet gradient theorem or operator Hessian is required."
+    },
+    {
+      "id": "polyak_lojasiewicz",
+      "depends_on": ["lower_taylor", "minimizer_exists"],
+      "statement": "2*mu*(F w-F wStar) <= squaredEuclideanNorm(g w) for every w.",
+      "method": "Apply lower_taylor from w to wStar. Independently prove dot(g w)v + (mu/2)sum_j(v j)^2 >= -sum_j(g w j)^2/(2*mu) by summing mu/2*(v j+g w j/mu)^2 >= 0 and field algebra using mu>0. Combine both inequalities and multiply by positive 2*mu. No assumed PL or convergence premise appears.",
+      "status": "unimplemented_obligation",
+      "note": "Stationarity/uniqueness are useful for final weight convergence, but not needed for this PL proof."
+    },
+    {
+      "id": "original_gap_contraction",
+      "depends_on": ["minimizer_exists", "polyak_lojasiewicz"],
+      "statement": "0 <= q < 1 and 0 <= gap (G w) <= q * gap w for every w.",
+      "method": "Prove mu <= originalRealMeanL by its proved exact mu-plus-nonnegative-sum formula. Combine eta>0, mu>0, and eta*meanL<=1 to obtain eta*mu<=1, so q>=0 and q<1. Subtract F wStar from originalReal_safe_descent, multiply the derived PL inequality by eta/2>=0, and finish real arithmetic. gap>=0 follows from the proved global minimizer. All coefficients and coordinates remain the actual original model.",
+      "status": "unimplemented_obligation"
+    },
+    {
+      "id": "iteration_rate_and_limits",
+      "depends_on": ["original_gap_contraction", "stationarity_growth_unique"],
+      "statement": "For every w0,k, 0<=gap(W w0 k)<=q^k*gap w0; Tendsto (fun k => F(W w0 k)) atTop (nhds(F wStar)); Tendsto (W w0) atTop (nhds wStar).",
+      "method": "Define the actual exact-real recurrence with Nat recursion; prove the rate by induction using the derived pointwise contraction and q>=0. Use tendsto_pow_atTop_nhds_zero_of_lt_one and squeeze to make the objective gap tend to zero. Quadratic growth bounds squared displacement by 2*gap/mu. Each coordinate square is at most the displacement square sum. Apply sqrt to those nonnegative scalar bounds, using Real.sqrt_sq_eq_abs and Filter.Tendsto.sqrt, then squeeze each coordinate around wStar j. Assemble function-space convergence with tendsto_pi_nhds. This proves actual convergence of the exact-real fixed-data sequence without assuming any convergence or contraction statement.",
+      "status": "unimplemented_obligation"
+    }
+  ],
+  "mathlib_source_declarations": [
+    {"file": "Analysis/SpecialFunctions/Log/Basic.lean", "line": 213, "name": "Real.log_nonneg", "role": "Nonnegative actual pair loss."},
+    {"file": "Analysis/SpecialFunctions/Log/Basic.lean", "line": 542, "name": "Continuous.log", "role": "Objective continuity with pointwise nonzero log argument."},
+    {"file": "Topology/Order/Compact.lean", "line": 53, "name": "isCompact_Icc", "role": "Compact coordinate box."},
+    {"file": "Topology/Order/Compact.lean", "line": 81, "name": "Pi CompactIccSpace instance", "role": "Order intervals in Fin 80 → ℝ are compact in the product topology."},
+    {"file": "Topology/Compactness/Compact.lean", "line": 596, "name": "IsCompact.compl_mem_cocompact", "role": "Compact sublevel complement is an eventual cocompact set."},
+    {"file": "Order/Filter/AtTopBot/Tendsto.lean", "line": 62, "name": "Filter.tendsto_atTop", "role": "Coercive eventual lower bounds give an atTop limit."},
+    {"file": "Topology/Order/Compact.lean", "line": 286, "name": "Continuous.exists_forall_le", "role": "Global minimizer from proved continuity and coercive limit."},
+    {"file": "Topology/MetricSpace/Bounded.lean", "line": 646, "name": "Continuous.exists_forall_le_of_isBounded", "role": "Alternative bounded-sublevel minimizer theorem, requires a ProperSpace."},
+    {"file": "Analysis/Calculus/LocalExtr/Basic.lean", "line": 237, "name": "IsLocalMin.hasDerivAt_eq_zero", "role": "Scalar Fermat theorem on objective lines through the global minimizer."},
+    {"file": "Analysis/SpecificLimits/Basic.lean", "line": 190, "name": "tendsto_pow_atTop_nhds_zero_of_lt_one", "role": "q^k tends to zero from proved 0<=q<1."},
+    {"file": "Topology/Order/Basic.lean", "line": 231, "name": "tendsto_of_tendsto_of_tendsto_of_le_of_le / Filter.Tendsto.squeeze", "role": "Objective-gap and coordinate scalar squeeze."},
+    {"file": "Analysis/Real/Sqrt.lean", "line": 189, "name": "Real.sqrt_sq_eq_abs", "role": "Square-to-coordinate absolute displacement."},
+    {"file": "Analysis/Real/Sqrt.lean", "line": 457, "name": "Filter.Tendsto.sqrt", "role": "Continuity of square root at zero."},
+    {"file": "Topology/Constructions.lean", "line": 813, "name": "tendsto_pi_nhds", "role": "Coordinate limits give the final Fin 80 → ℝ limit."}
+  ],
+  "minimal_next_isolated_acceptance_step": {
+    "action": "Qualify only RealStrongLower.lean as a fresh owned bounded producer/checker run; do not alter the sealed curvature phase.",
+    "inputs": "The exact source draft imports OriginalRealProfile and RealDescent, so register precisely the same nine-module closure as the original descent producer: OriginalNumericCurvature, LogisticCoefficient, CoordinateGeometry, LogisticCurvature, ScalarSoftplus, DirectionalObjective, RealGradient, RealDescent, OriginalRealProfile. OriginalRealDescent is only needed by the later gap-contraction stage. Register each original-qualified dependency independently under the declared Mathlib revision.",
+    "unchanged_limits": {"native_wall_seconds": 20, "native_cpu_seconds": 20, "native_max_source_bytes": 262144, "native_per_file_capture_bytes": 65536, "native_workspace_bytes": 16777216},
+    "acceptance": "A native successful elaboration, exact source/dependency/environment pins, complete retained compiled-object bodies through the established bounded chunk retention, replay/reconstruction acceptance, and printed theorem axioms restricted to the existing allowed standard axioms. Preserve rejected/inconclusive attempts. Do not equate exit code 0 or a truncated capture with acceptance.",
+    "proofs_to_query": ["scalar_taylor_unit_lower", "realObjective_taylor_lower", "realObjective_lower_between", "realPairLoss_nonneg", "realObjective_regularizer_lower", "originalReal_lower_between"],
+    "after_acceptance": "Implement and separately qualify objective continuity plus compact-sublevel/coercivity and actual minimizer existence; then stationarity/growth/uniqueness, PL, exact original gap contraction, and recurrence Tendsto in small dependency stages.",
+    "run_here": false
+  },
+  "scope_limits": {
+    "strong_lower_draft_has_been_compiled": false,
+    "formal_mathlib_StrongConvexOn_definition_theorem_added": false,
+    "minimizer_existence_or_uniqueness_qualified": false,
+    "pl_qualified": false,
+    "gap_contraction_qualified": false,
+    "iteration_tendsto_qualified": false,
+    "python_binary64_exp_log1p_fsum_or_source_execution_equivalence_proved": false,
+    "historical_execution_provenance_or_heldout_outcomes_proved": false
+  }
+}

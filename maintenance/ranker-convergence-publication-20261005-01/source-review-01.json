@@ -1,0 +1,68 @@
+{
+  "Git_or_remote_mutations": 0,
+  "Q2_Q3_P4_or_sealed_S2_writes": 0,
+  "all_failures_chunks_full_objects_zero_byte_locks_selected": true,
+  "all_native_attempt_status_fact_denominators_required": true,
+  "assertion_based_reader_requires_debug_mode": true,
+  "builder_classifier_codec_native_calls": 0,
+  "complete_Q3_seal_regular_census_and_seal_self_file_required": true,
+  "complete_quiet_P4_regular_population_required": true,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T05:47:39.310458+00:00",
+  "execution_authority": false,
+  "first_decoded_tar_and_member_hash_readback_charged": true,
+  "fixed_publication_caps_verified": {
+    "aggregate_decoded_work_max": 1073741824,
+    "complete_decoded_tar_max": 16777216,
+    "raw_member_sum_per_shard_max": 14680064,
+    "raw_population_max": 268435456,
+    "wall_seconds": 180,
+    "zstd_args": [
+      "-T1",
+      "-3"
+    ]
+  },
+  "independent_reviewer_task": "/root/git_publication_finalize/convergence_package_source_review",
+  "issues_fixed": [
+    "freezer refuses python -O before loading assertion-based reader",
+    "parsed plan/closure/document/manifest bytes are bound to external pins on the same read"
+  ],
+  "module_imports_or_helper_execution": 0,
+  "old_HF_bundle_reuploaded": false,
+  "outstanding_issues": [],
+  "parsed_document_bytes_verified_against_pins_on_same_read": true,
+  "pinned_cached_credential_complete_PEM_nested_classifier_reused": true,
+  "proof_authority": false,
+  "schema": "ranker-convergence-publication-source-only-review@1",
+  "source_drafts_not_promoted_to_qualification": true,
+  "source_namespace_isolation_verified": true,
+  "source_only_AST_and_JSON_parse": true,
+  "sources": [
+    {
+      "bytes": 5035,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/API.md",
+      "sha256": "9736361f02d4028dde877fad087af72f02327ef0420f7c5ee892fbfe50d0add0"
+    },
+    {
+      "bytes": 26997,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/build_package.py",
+      "sha256": "f5ac610e20fa7dab88b8f3de94ee588d47e557cc9209fd4aef8eb13bc8425782"
+    },
+    {
+      "bytes": 3227,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/freeze_inputs.py",
+      "sha256": "6402eaa0a5d91f93c71f95599a256b06caf2076a991267dffbfb5fd962c8002e"
+    },
+    {
+      "bytes": 1359,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/plan-template.json",
+      "sha256": "a19a3fd27ae1f2c73e2b1697f6191df5fc6a8bfb6e5c345d489c53e3df8140ba"
+    },
+    {
+      "bytes": 18537,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/review_package.py",
+      "sha256": "313924a164782439d7f7e91a4ea51580e822c19ad221684949427daf4dbb2b70"
+    }
+  ],
+  "status": "passed_source_only_review"
+}

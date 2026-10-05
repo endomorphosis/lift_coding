@@ -1,0 +1,100 @@
+{
+  "function_space_norm": "Finite Pi default norm infinity; squaredEuclideanNorm is used only as an explicit coordinate sum, with no identification of these norms.",
+  "generic_conclusion": "For hn:0<n and hmu:0<mu, there exists z:Fin m->Real with realObjective mu differences z <= realObjective mu differences w for every w.",
+  "git_hf_operations_in_this_phase": 0,
+  "imports": [
+    "RealStrongLower",
+    "Mathlib.Topology.Order.Compact",
+    "Mathlib.Topology.MetricSpace.Bounded",
+    "Mathlib.Analysis.Calculus.LocalExtr.Basic"
+  ],
+  "mathlib_imports_registered_in_Q2_profile": {
+    "Mathlib.Analysis.Calculus.LocalExtr.Basic": true,
+    "Mathlib.Topology.MetricSpace.Bounded": true,
+    "Mathlib.Topology.Order.Compact": true
+  },
+  "mathlib_read_sources": [
+    {
+      "bytes": 26397,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Topology/Order/Compact.lean",
+      "sha256": "7c02670f2e88f16acd11d69ddd6afb8d8118adca50279e1abb2a3c7761feb044"
+    },
+    {
+      "bytes": 31443,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Topology/MetricSpace/Bounded.lean",
+      "sha256": "dbdb5dce531767c8e6b56f004d9d3a4cde9173a5a11ef40733a86cb432cadd2b"
+    },
+    {
+      "bytes": 12167,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Calculus/LocalExtr/Basic.lean",
+      "sha256": "801427d8438cbbad5b877877a5b31724a1097b38a5084aa21cb0c2d978ee0d1e"
+    }
+  ],
+  "namespace": "RankerRealCurvature",
+  "native_calls_in_this_phase": 0,
+  "native_registration": {
+    "inherited_original_qualified_module_closure": [
+      "OriginalNumericCurvature",
+      "LogisticCoefficient",
+      "CoordinateGeometry",
+      "LogisticCurvature",
+      "ScalarSoftplus",
+      "DirectionalObjective",
+      "RealGradient",
+      "RealDescent",
+      "OriginalRealProfile"
+    ],
+    "new_root_module": "RealMinimizer",
+    "proofs_to_query": [
+      "realDot_continuous",
+      "squaredEuclideanNorm_continuous",
+      "realPairLoss_continuous",
+      "continuous_realObjective",
+      "realObjective_sublevel_coordinate_abs_le",
+      "realObjective_sublevel_isBounded",
+      "realObjective_sublevel_isCompact",
+      "realObjective_exists_global_minimizer",
+      "originalReal_exists_global_minimizer"
+    ],
+    "required_qualified_additive_source_module": "RealStrongLower",
+    "root_handles_fresh_isolated_native_qualification": true
+  },
+  "no_minimizer_existence_or_coercivity_hypothesis": true,
+  "original_conclusion": "There exists z:Fin 80->Real minimizing the bound original 4-pair exact-real objective globally.",
+  "proof_method": [
+    "Derive direct finite-coordinate dot and square-sum continuity; prove the log argument 1+exp(-margin) positive pointwise.",
+    "Use the already qualified actual regularizer lower bound to obtain sum_j (w j)^2 <= 2*level/mu on each sublevel, with hn>0 and hmu>0.",
+    "Each coordinate square is bounded by the sum; radius R=max 1 (2*level/mu) obeys R>=1 and 2*level/mu<=R<=R^2, so |w j|<=R.",
+    "Embed the actual sublevel inside the compact finite-Pi order interval Icc (fun _ => -R) (fun _ => R); compactness gives boundedness in the default function-space metric.",
+    "Continuity makes each sublevel closed, hence compact; apply Continuous.exists_forall_le_of_isBounded at the zero vector to conclude generic global minimizer existence.",
+    "Specialize n=4,m=80 and originalRealMu, originalRealDifferences using originalReal_mu_pos."
+  ],
+  "qualified_read_dependency_receipt": {
+    "bytes": 11095,
+    "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/check-result.json",
+    "sha256": "7c801fee36f5d96f9813fbd634ef215f7161d407f41a7ae6307e70ecd8c2c6eb"
+  },
+  "qualified_theorems_added_in_this_phase": 0,
+  "read_dependency_source": {
+    "bytes": 4405,
+    "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealStrongLower.lean",
+    "sha256": "b4196a1637cffe9cde7728355f2833767a6867f187d06d2614f7a251be778744"
+  },
+  "schema": "ranker-real-minimizer-source-plan@1",
+  "scope_limits": {
+    "Python_Float_execution_equivalence_proved": false,
+    "coercive_Tendsto_theorem_added": false,
+    "draft_elaborated": false,
+    "iteration_convergence_qualified": false,
+    "minimizer_existence_qualified": false,
+    "sealed_Q2_or_existing_drafts_plans_modified": false,
+    "stationarity_or_uniqueness_qualified": false
+  },
+  "source_only_artifact": {
+    "bytes": 6447,
+    "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealMinimizer.lean",
+    "sha256": "32b53d9b46e17e8de76e342916ca6e65c8de985a2c3269b734e40fb3038e16a8"
+  },
+  "status": "source_only_uncompiled_unqualified",
+  "training_fit_test_import_calls_in_this_phase": 0
+}

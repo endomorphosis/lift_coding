@@ -1,0 +1,85 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1540,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-check-specification.json",
+      "sha256": "de371519d9b91ca735e04508435f1de70384ae5e35df8996d298596f216539a2"
+    },
+    {
+      "bytes": 9951148,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/environment-manifest.json",
+      "sha256": "68843ca01a9310ec6b93106702f4ec30e97c01fd7bbfa5fdf74fcd21b6d50888"
+    },
+    {
+      "bytes": 1767,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RealStableFactor.lean",
+      "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 30818,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-stable-factor-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 417673,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v2.json",
+      "sha256": "829d2ec981840753eee2bcfc73965828cf6bb86ae8ca10387bfe9229dd7f3857"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1540,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-check-specification.json",
+      "sha256": "de371519d9b91ca735e04508435f1de70384ae5e35df8996d298596f216539a2"
+    },
+    {
+      "bytes": 9951148,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/environment-manifest.json",
+      "sha256": "68843ca01a9310ec6b93106702f4ec30e97c01fd7bbfa5fdf74fcd21b6d50888"
+    },
+    {
+      "bytes": 1767,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RealStableFactor.lean",
+      "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "mode": "lean-stable-factor-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 417673,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v2.json",
+    "sha256": "829d2ec981840753eee2bcfc73965828cf6bb86ae8ca10387bfe9229dd7f3857"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T05:20:39.780949+00:00"
+}

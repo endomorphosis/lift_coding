@@ -1,0 +1,2020 @@
+{
+  "complete_regular_file_count": 227,
+  "complete_remote_files": {
+    ".gitattributes": {
+      "oid": "bed0738c7eeb449bca98b5d2f33c89a1ee56349a",
+      "path": ".gitattributes",
+      "size": 2504,
+      "type": "file"
+    },
+    "README.md": {
+      "oid": "56ca48ec894d3afeaba4677fe0e4b5a1bd81d76e",
+      "path": "README.md",
+      "size": 9695,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/archive-manifest.json": {
+      "oid": "edac325afddbab6a5d6e0f4c95f8e664a97b1b00",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/archive-manifest.json",
+      "size": 42134,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/chunks-000000.jsonl.zst": {
+      "lfs": {
+        "oid": "0a795179608210ca3cb4c84fadcc4fb2bf983cff8e3871589043936e54610d17",
+        "pointerSize": 133,
+        "size": 11967927
+      },
+      "oid": "b566248c072d2f89314be82feb246dea81dbfb34",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/chunks-000000.jsonl.zst",
+      "size": 11967927,
+      "type": "file",
+      "xetHash": "2e7c4307e25cf40002b0e513ccbc365492855eafda227a2621a5a0f8c9ae7ea7"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/classification-approvals.json": {
+      "oid": "49a5907be06eff39c32f5dda09069344ecef656c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/classification-approvals.json",
+      "size": 27261,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/classification-exceptions.json": {
+      "oid": "6f887ad29ccd5f6b01758901b63d05b0b8d1c24e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/classification-exceptions.json",
+      "size": 12891,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/classification-outer-closure.json": {
+      "oid": "0b6f0ca878496b769a95b2781bd97d9f33a6f9fa",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/classification-outer-closure.json",
+      "size": 506,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/classifier-source-review.json": {
+      "oid": "3d4f7aed78292790daa88c84a4d495ceb8be3b54",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/classifier-source-review.json",
+      "size": 10307,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000000.tar.zst": {
+      "lfs": {
+        "oid": "f41d2cb36fd4bab235ca29ab295ef797cd64bd435f4ecd40a5a15eff5a973676",
+        "pointerSize": 134,
+        "size": 241024827
+      },
+      "oid": "63b045e0fdc265ae435175c69bbc42bf92918a69",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000000.tar.zst",
+      "size": 241024827,
+      "type": "file",
+      "xetHash": "01a4f7b12d1afa9d3563e597aa35c7530403acabcf6bdbcda902d4a89af33f28"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000001.tar.zst": {
+      "lfs": {
+        "oid": "52831668d337a15daa0d357957438ab217eb677108926189a7fe89e6d1ae9189",
+        "pointerSize": 134,
+        "size": 249028332
+      },
+      "oid": "13308999f1e468e323c530a033a2a23b4ab3dc2c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000001.tar.zst",
+      "size": 249028332,
+      "type": "file",
+      "xetHash": "2263223f42b3b49652c12ac9b13b14ac20becb9962b5579a033f1fc4afae2f44"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000002.tar.zst": {
+      "lfs": {
+        "oid": "a6f68ea5e4be7d3fcb029c925d5a8064087f913797d1a272e1d1a8179f3b7334",
+        "pointerSize": 134,
+        "size": 250259592
+      },
+      "oid": "8cab5c4b130bf16525b601360d91d9888f211386",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000002.tar.zst",
+      "size": 250259592,
+      "type": "file",
+      "xetHash": "69e4d05ea8987b79a2826f17dc133e187d3bf377b67040b38be490c661a7e206"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000003.tar.zst": {
+      "lfs": {
+        "oid": "1454f12d5479dd7521972d1a9da5916e7f2be614dd98dfb22dac7c1a99bec4a7",
+        "pointerSize": 134,
+        "size": 256357625
+      },
+      "oid": "10eb5334100705d9f9dcb3cb46f17c5d76e3efb9",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000003.tar.zst",
+      "size": 256357625,
+      "type": "file",
+      "xetHash": "0c1ad2d3a2ad4768ccb1e26d367eb2db17993354e39d6399715573fb78f2e7e9"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000004.tar.zst": {
+      "lfs": {
+        "oid": "67d022cf49429c023778152edcf1a346ba18006a650a8b2ea49c7b8830f69bd1",
+        "pointerSize": 134,
+        "size": 254300915
+      },
+      "oid": "eaa881d2fadecc98bfd3286eb828a8649ef7c70c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000004.tar.zst",
+      "size": 254300915,
+      "type": "file",
+      "xetHash": "a283db8bce561720d671b0c67de18f5eb10130b98165d03a8f42f3678e7e7f75"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000005.tar.zst": {
+      "lfs": {
+        "oid": "3d991e9760a079a017867ff0ea1454a318a49eb63e4c0cdc47a44247e17cf015",
+        "pointerSize": 134,
+        "size": 249370797
+      },
+      "oid": "3be03dff3199a3f296ad1ecf25f36b624705e082",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000005.tar.zst",
+      "size": 249370797,
+      "type": "file",
+      "xetHash": "11b5a16e6726434c15da5739230cd986f7f840cf67c399588120333f887d785d"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000006.tar.zst": {
+      "lfs": {
+        "oid": "07e230542e7bc9c3f7ddee13b915e5756116e284c78e32e5bcee5d305cdd1bc9",
+        "pointerSize": 134,
+        "size": 261142506
+      },
+      "oid": "666c5c1b1415f936d553e4716a8e9f9df6e4b283",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000006.tar.zst",
+      "size": 261142506,
+      "type": "file",
+      "xetHash": "26a5a998b725684f0cdb90f91785c835fa16c809ded1e021746de0cb1b79493c"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000007.tar.zst": {
+      "lfs": {
+        "oid": "c8a91000848bc818bcbbec84ef2b94a9b223acfeace4600d6422d0134f8b2ac0",
+        "pointerSize": 134,
+        "size": 260119530
+      },
+      "oid": "32584d4e1067475254d3a2c68042e0f40b64dff3",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000007.tar.zst",
+      "size": 260119530,
+      "type": "file",
+      "xetHash": "d7eea0cb64062fd076407797db7db74ede058e4301ef7e4e7c8197d22d921e82"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000008.tar.zst": {
+      "lfs": {
+        "oid": "891e0f5c1ade6911c08ca8fd6675baebb8d2a740304c972cae7d3371c7b94b8e",
+        "pointerSize": 134,
+        "size": 257028019
+      },
+      "oid": "a4f6f8864dd69b3ec721a524722c62316558d751",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000008.tar.zst",
+      "size": 257028019,
+      "type": "file",
+      "xetHash": "0cb70abce802204fabee49c18586ed48afc5aec6da4563de713c044ca434ac31"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000009.tar.zst": {
+      "lfs": {
+        "oid": "0ac20871b27ce0e688f1bf6d76e99ebb001e48e5a17f23ea143188638e520094",
+        "pointerSize": 134,
+        "size": 258808965
+      },
+      "oid": "19c5bf323d8832563a3d18431d3aaad0bb96dc1b",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000009.tar.zst",
+      "size": 258808965,
+      "type": "file",
+      "xetHash": "252d86f8812e2c440a3d5150605ce0d9ae1cb461643983ef517134dc011701dd"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000010.tar.zst": {
+      "lfs": {
+        "oid": "cd4132e38bc23086ec62fa584ec98ef24f35b66d805567bf97cd7cf009f3b8df",
+        "pointerSize": 134,
+        "size": 258110931
+      },
+      "oid": "f72b33dfa9750b5aee54c3856fcf04ccc581108b",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000010.tar.zst",
+      "size": 258110931,
+      "type": "file",
+      "xetHash": "667f87bfa0ed5fffaa0784fc62fe6e4d6a2ed9c9bab24875c0c19ea593eaabc5"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000011.tar.zst": {
+      "lfs": {
+        "oid": "772ba8ad541a95ddae7dffc53ab661d98e4bc6ec11581e1c6b68d681b12eb5f0",
+        "pointerSize": 134,
+        "size": 258351627
+      },
+      "oid": "b300188c6858b1d9a2b36aec491fa3b879cb7190",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000011.tar.zst",
+      "size": 258351627,
+      "type": "file",
+      "xetHash": "bc80d632685463e7175a9efd2b294b32da4c836cfe500f58452e2934f4ec80fd"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000012.tar.zst": {
+      "lfs": {
+        "oid": "ad661085f1011f1b358a83ad39782df7da56de44628ff3875fecc5851a1b794e",
+        "pointerSize": 134,
+        "size": 256355490
+      },
+      "oid": "e7a6ef71c549df853282345d50037e48799ab7de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000012.tar.zst",
+      "size": 256355490,
+      "type": "file",
+      "xetHash": "f143bb8e5da6ab207f49b2e1eabbb30e7c3b0b2f185d56b54efd37c02a6a4cdd"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000013.tar.zst": {
+      "lfs": {
+        "oid": "900db19fad0031f7a2616bdc9fb6f4ce1f46bd1db7e995ab35ef3d4f036a426f",
+        "pointerSize": 134,
+        "size": 262326715
+      },
+      "oid": "e12353ff40e01389fd8d5d717c30b3606839fb8e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000013.tar.zst",
+      "size": 262326715,
+      "type": "file",
+      "xetHash": "e0ea80eb353f070095d14b102fef0f98e5cced507987349b7f78c031ab0a5467"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000014.tar.zst": {
+      "lfs": {
+        "oid": "2fb27669307d2cda38d6f59895f3962e35541e084382be9d1082bc0736b28e0a",
+        "pointerSize": 134,
+        "size": 262628846
+      },
+      "oid": "44a9adaf9d7d6d57a5bb73ba30be3b804d28c9aa",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000014.tar.zst",
+      "size": 262628846,
+      "type": "file",
+      "xetHash": "1c3b45d12611ab25664dadfd8d1ef3650df1a3b56cbbeed015dd2b180c65970e"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000015.tar.zst": {
+      "lfs": {
+        "oid": "ba68be15221350448226fd970dc9e97b877f9366a8a922f01c8c0574e8908130",
+        "pointerSize": 134,
+        "size": 256144820
+      },
+      "oid": "dfcaf4adcbb97758205969f6017ecb4ebc606c2d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000015.tar.zst",
+      "size": 256144820,
+      "type": "file",
+      "xetHash": "b0054cb577e895e36600a2dc868411c2c531851e5d054c49fe10d61f00dfad95"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000016.tar.zst": {
+      "lfs": {
+        "oid": "df49e6443481f14980c70dd8bac0bde68e2124a418c76c6e3739049d349be11c",
+        "pointerSize": 134,
+        "size": 263963790
+      },
+      "oid": "216a9debfb9e9dc94a15eaf850af6e7851622452",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000016.tar.zst",
+      "size": 263963790,
+      "type": "file",
+      "xetHash": "e86e317e4bc8d22293c69a9e7357feeef4c36f8e1fff1c6e348515ea2466ef17"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000017.tar.zst": {
+      "lfs": {
+        "oid": "8539e6804c5f1893ed92c9aa3f7417876d4abbf09f0ebaf33b28a36c894271b0",
+        "pointerSize": 134,
+        "size": 262347486
+      },
+      "oid": "1f12eae93367ab1be19695ae694d2a15f1986c08",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000017.tar.zst",
+      "size": 262347486,
+      "type": "file",
+      "xetHash": "806a1b11a3aa0396b4bf432135cd7ad5d81ef1c9325a68a399a577697d0e5897"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000018.tar.zst": {
+      "lfs": {
+        "oid": "a85b1307959f738fdf3211cd4862e6c3caa4d465c36570f0d37ab273e4a33fe6",
+        "pointerSize": 134,
+        "size": 261745207
+      },
+      "oid": "e51400adf598db53bf9c28f94322d17ad5e5d17c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000018.tar.zst",
+      "size": 261745207,
+      "type": "file",
+      "xetHash": "c68fb8af5adad04c841ed7a500e1e1e1244495c97c74db0ac663a2651b7e7123"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000019.tar.zst": {
+      "lfs": {
+        "oid": "7de0412d596deeb53361cce2c78939db4bd99e6f7dc14ee4fe22775f95f5b5b3",
+        "pointerSize": 134,
+        "size": 261364762
+      },
+      "oid": "baaaf060120149060efe91cd1aafd9567dba847d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000019.tar.zst",
+      "size": 261364762,
+      "type": "file",
+      "xetHash": "54577c67e72d204d7b97424fa6423cfcf84e7c8412e2539082b2ca71ec8a95f1"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000020.tar.zst": {
+      "lfs": {
+        "oid": "611d6fc774ca2baf1d0b634719ed15a946334249a0c14c9b23089c03a384e563",
+        "pointerSize": 134,
+        "size": 251065857
+      },
+      "oid": "b70396731100ba70f69f55aee2ce61662f1903b7",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000020.tar.zst",
+      "size": 251065857,
+      "type": "file",
+      "xetHash": "8f3a90063099d186c5e8346e8de4334bba470c0e6bff4ac811d42e97efd783fd"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000021.tar.zst": {
+      "lfs": {
+        "oid": "113d0ad1735b04de346dca338a2d3b3cf57cd37e4455e3fd04414dd0f93667fe",
+        "pointerSize": 134,
+        "size": 249623009
+      },
+      "oid": "76761320da6573ea958b0420f258cb1d2865e214",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000021.tar.zst",
+      "size": 249623009,
+      "type": "file",
+      "xetHash": "125e5b61d97c1dce785d2adf8c0cc9215a6b721d68e375dee70df1342e70a517"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000022.tar.zst": {
+      "lfs": {
+        "oid": "6eec759a9423fad329279d465d661937bd963a129234d76df118cba02bd39390",
+        "pointerSize": 134,
+        "size": 262582700
+      },
+      "oid": "6294282d92e56efe6814b4102d4bf0367007c3d8",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000022.tar.zst",
+      "size": 262582700,
+      "type": "file",
+      "xetHash": "144a7e0ce953fb7ee23067f83a5498521729e2339b0fa3f4abd220fbf594dcaf"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000023.tar.zst": {
+      "lfs": {
+        "oid": "666e4ccc5c0eb0b15c44dd222541ce3e9560f98b9e8d5bc1d158ca478f65c7f8",
+        "pointerSize": 134,
+        "size": 262449360
+      },
+      "oid": "ca5283c0eebfcfabfefe02fd2e0a3a1ad03c2419",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000023.tar.zst",
+      "size": 262449360,
+      "type": "file",
+      "xetHash": "cf94ba62ed4e1a06c934b29becf69ae590c3afdbe6130cec811ade774d660c01"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000024.tar.zst": {
+      "lfs": {
+        "oid": "f380fc4af7a6a5335475b822e74611a99fd51edbfb44d183c485cc2360826cfa",
+        "pointerSize": 134,
+        "size": 259435971
+      },
+      "oid": "75c28860b35af64c37ddba0be6d5b7eceb410ce3",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000024.tar.zst",
+      "size": 259435971,
+      "type": "file",
+      "xetHash": "d7ca6cabd6aba976b6e340287cd89c6eebb6e9dbe3cecb04e3c2244c8a781ba6"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000025.tar.zst": {
+      "lfs": {
+        "oid": "76551ab730e4161d2f5d1588bf69cb4e2ada595de30d9b46d383ab8fc4cd145b",
+        "pointerSize": 134,
+        "size": 151582893
+      },
+      "oid": "42f47b4b4aaad6be1ddc9670b5994976c6155c34",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000025.tar.zst",
+      "size": 151582893,
+      "type": "file",
+      "xetHash": "b7a2041ed0ab7ab31cca5c93621a7c2f220b779a6bf7d7b080653ecdd0a2f8ab"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000026.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000026.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000027.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000027.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000028.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000028.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000029.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000029.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000030.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000030.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000031.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000031.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000032.tar.zst": {
+      "lfs": {
+        "oid": "aef4baf2038f0e54147f9f735dc12983339e5fd6e2ecfe3291a7dda580d4d64f",
+        "pointerSize": 131,
+        "size": 515250
+      },
+      "oid": "9afad44077c200baf5c66c18059982a12ffd6ed8",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000032.tar.zst",
+      "size": 515250,
+      "type": "file",
+      "xetHash": "cfbbeaca57a2bba44837b521d7ace30e0ca7f30655a2d0dc6ee0c66bc4daf468"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000033.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000033.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000034.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000034.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000035.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000035.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000036.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000036.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000037.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000037.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000038.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000038.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000039.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000039.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000040.tar.zst": {
+      "lfs": {
+        "oid": "2039c8913f2dba0799d8567c4425579a1fd7c584f8165e340f41484b97149502",
+        "pointerSize": 133,
+        "size": 17895416
+      },
+      "oid": "e17f7b320d80128ed127443895b9fe95a6cf34ab",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000040.tar.zst",
+      "size": 17895416,
+      "type": "file",
+      "xetHash": "c38eec3c357953a843083176379c1188242f07cb98dce357f63a60fff125009c"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000041.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000041.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000042.tar.zst": {
+      "lfs": {
+        "oid": "9c77d5d223c74e3ce12bebcc0762fc23790f9165d6f5f353455f605c4f78467e",
+        "pointerSize": 132,
+        "size": 1324346
+      },
+      "oid": "7f2e3d9fbe05e7a207c05870faaced081c17317d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000042.tar.zst",
+      "size": 1324346,
+      "type": "file",
+      "xetHash": "2b044116c3edd109feb317e0204111f6a09102a2205f9949d03b915e78814ed5"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000043.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000043.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000044.tar.zst": {
+      "lfs": {
+        "oid": "ef077a15315f941a8fc5700796762259eb286177402b33c31d5bddc62df4a397",
+        "pointerSize": 127,
+        "size": 23
+      },
+      "oid": "811e151f378b8c3f8e9130e22afd894aa73977de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000044.tar.zst",
+      "size": 23,
+      "type": "file",
+      "xetHash": "0647603bbcc3a03da81a4e4b72a93b4c03dbafee0ae51684b2e8659808590314"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000045.tar.zst": {
+      "lfs": {
+        "oid": "ce05be0c157f9f8fcdeeb0c741c159cde6cf4af45f4944558659f83844bb1245",
+        "pointerSize": 133,
+        "size": 13018324
+      },
+      "oid": "4b718c9b15a0565127d3556e1c98e7fa142258b9",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000045.tar.zst",
+      "size": 13018324,
+      "type": "file",
+      "xetHash": "a49377c6c890856d85c7157b23e3b5f3a82341559d3eba867e17a0f0b49477ae"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000046.tar.zst": {
+      "lfs": {
+        "oid": "cb1dc78ac336e9605bd9c200a6c4913748d1b5c32592c6a5cf06455a93675221",
+        "pointerSize": 132,
+        "size": 2300812
+      },
+      "oid": "746b516667c34e83fc408a602434e435b4997c44",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/data-000046.tar.zst",
+      "size": 2300812,
+      "type": "file",
+      "xetHash": "40b1a825e1633ec962011fd6aedc3721cd0514bdb5ff416ea893d3b17da5a5f4"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/first-upload-interrupted-outer.json": {
+      "oid": "c605cef820c9cf172473bdbd0b19c37eda935ae1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/first-upload-interrupted-outer.json",
+      "size": 682,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/first-upload-remote-reconciliation.json": {
+      "oid": "a2e908d85e7b48d753fb03254bb91c257f7943e4",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/first-upload-remote-reconciliation.json",
+      "size": 1014,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/first-upload-stall-observation.json": {
+      "oid": "9454d2bff3ede500d9a90f3fd07589947ce91f30",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/first-upload-stall-observation.json",
+      "size": 1459,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/four-public-fixture-provenance.json": {
+      "oid": "b23f2031e8d98ee41e4e93580bf4e74de48cc872",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/four-public-fixture-provenance.json",
+      "size": 7672,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/oauthlib-public-fixture-provenance.json": {
+      "oid": "63ed132d828b1dfb842ef52f22a08997a75e2e72",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/oauthlib-public-fixture-provenance.json",
+      "size": 9690,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/original-classifier-manifest.json": {
+      "oid": "8ac9b03b7910a32a44fdb288b7fd57be397eb86a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/original-classifier-manifest.json",
+      "size": 38301,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000000.jsonl.zst": {
+      "lfs": {
+        "oid": "bccba285df6076ae918523de3cb1f966a86e8d541e5d0b5ef5790d2cd54ddbb6",
+        "pointerSize": 132,
+        "size": 8160357
+      },
+      "oid": "53b411dda7b5ead45277d2fd8727374c1ecd987f",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000000.jsonl.zst",
+      "size": 8160357,
+      "type": "file",
+      "xetHash": "0680c9f995048fd4e0c9a9b98f518e5296342dbaa54783d4069f8be9697fc060"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000001.jsonl.zst": {
+      "lfs": {
+        "oid": "b8b008befc755300f41ab5288d41ce817a26571b6bc16749ab250e44c8c88293",
+        "pointerSize": 132,
+        "size": 8103830
+      },
+      "oid": "3168124509ca1885f8fc13c3bda4831ea993bc02",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000001.jsonl.zst",
+      "size": 8103830,
+      "type": "file",
+      "xetHash": "611d55ece1f645eb20295f86efdc7d5673df199106fcfd8c594ab51e37f65ca7"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000002.jsonl.zst": {
+      "lfs": {
+        "oid": "ce48753238cb9820657f1877e7b0ab0483f2d9e91834571b4c53480b757f9a4d",
+        "pointerSize": 132,
+        "size": 8669866
+      },
+      "oid": "86f7f87d502384583d7cb56211b18732be890835",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000002.jsonl.zst",
+      "size": 8669866,
+      "type": "file",
+      "xetHash": "104856fbaf304d4c311a3c5b3df329fc067595ffb37d1cb410fd3503f16b8943"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000003.jsonl.zst": {
+      "lfs": {
+        "oid": "52de7fceac67d90b7d691ab28c1c6a8423b8007448aef5a20fcc1bb13af530e3",
+        "pointerSize": 132,
+        "size": 8793123
+      },
+      "oid": "141667a386dc1f170356b88a3d42b3e48733bf6f",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000003.jsonl.zst",
+      "size": 8793123,
+      "type": "file",
+      "xetHash": "95fe521cc912813b1031ac1c9c4851efee0c574342ee047c95c7f17e2d1e8906"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000004.jsonl.zst": {
+      "lfs": {
+        "oid": "052606ee7256b6e5107a0ff03e73a0efa356887581a7c0b524748a93968d18e5",
+        "pointerSize": 132,
+        "size": 8287878
+      },
+      "oid": "eecf3d03c51cd3fc8702f680f6a601d4d957c028",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000004.jsonl.zst",
+      "size": 8287878,
+      "type": "file",
+      "xetHash": "0aae8fd1b19fb9ec7c6e25b3c0404c127362d347f3ddc3e45d0150b4caf003d8"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000005.jsonl.zst": {
+      "lfs": {
+        "oid": "0172b18b9356e9775ec7f54aa09fcc78ccef9eaa42da7f3e8db68e97262ae56a",
+        "pointerSize": 132,
+        "size": 8800673
+      },
+      "oid": "4b6c246f17dff5d8a029597e274d00dd4d158e89",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000005.jsonl.zst",
+      "size": 8800673,
+      "type": "file",
+      "xetHash": "bc6a17919fc8e75f5ded21b48fc8dabe37c5249c3728f684a7d34d098e9212c1"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000006.jsonl.zst": {
+      "lfs": {
+        "oid": "a60eab7b737d503143f5378fc8f927a1777b0c34eb4ec4046f41592717b67153",
+        "pointerSize": 132,
+        "size": 8647658
+      },
+      "oid": "b6eeb269d8526e1efd5984ede4bc9453cb673c76",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000006.jsonl.zst",
+      "size": 8647658,
+      "type": "file",
+      "xetHash": "16465d110d3ccc87746d69c91fb514a7f08ddd4df7b36f2785f1a913d076c7f0"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000007.jsonl.zst": {
+      "lfs": {
+        "oid": "af4c018415ce9e5582a06c6895bf0e9880ca06c2fe58fb2944e2e1662dc31c1d",
+        "pointerSize": 132,
+        "size": 8366373
+      },
+      "oid": "8e1db58e19e2d6e29bd61255ab2397043d56aeca",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000007.jsonl.zst",
+      "size": 8366373,
+      "type": "file",
+      "xetHash": "43de77cff92790092131231d04b7d274711426f10918dbedc80c7ca807c3f4a7"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000008.jsonl.zst": {
+      "lfs": {
+        "oid": "ae1053dbc833fc6f74e2136420cda442ac280f11380cf24c34debe2ed48acddf",
+        "pointerSize": 132,
+        "size": 8424062
+      },
+      "oid": "9bcecb3f985a16f1c2384773229a9dc3903a9cc9",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000008.jsonl.zst",
+      "size": 8424062,
+      "type": "file",
+      "xetHash": "4e2b2ecf4197f2429ffd6d7343544fff0f7f122c84bdddf51d5ea0e811be8bb3"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000009.jsonl.zst": {
+      "lfs": {
+        "oid": "c21dfca6cd8d14166912267856cb775e20c82a373d07a57004ba9e20a380bbff",
+        "pointerSize": 132,
+        "size": 8207560
+      },
+      "oid": "24aa6f43b478bcd623e3f9abbfe90f590e6efe00",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000009.jsonl.zst",
+      "size": 8207560,
+      "type": "file",
+      "xetHash": "346036d98cda0f6aaefda3451d95c9cc64c9121cd1142405218bbe241b478294"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000010.jsonl.zst": {
+      "lfs": {
+        "oid": "20312456343757b21d63d0a6c82dc8037eb9dc5344f1f040609d119f6c0ecd3c",
+        "pointerSize": 132,
+        "size": 8485868
+      },
+      "oid": "ce210d7c33ef21e596821cff14772db717f3fc1e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000010.jsonl.zst",
+      "size": 8485868,
+      "type": "file",
+      "xetHash": "935eae906f67949dac45e828ac575867158622ca32dae0021e88ad451eee2d06"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000011.jsonl.zst": {
+      "lfs": {
+        "oid": "5f63cc2a82feb3e8d35bdfc20259a7fe77d112753dae98b8d4308eede153ca53",
+        "pointerSize": 132,
+        "size": 8484877
+      },
+      "oid": "1658db227200a72f6bebe3b77904e5f6324daf7a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000011.jsonl.zst",
+      "size": 8484877,
+      "type": "file",
+      "xetHash": "85069da400903bbfe43ccd4bad9423c658650e997fcbae3bf9dc8390492a7db4"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000012.jsonl.zst": {
+      "lfs": {
+        "oid": "2959029dc61bd9850622aac49b63d5b9a883c4c83c0027ab792104f4a3ef365e",
+        "pointerSize": 132,
+        "size": 8473358
+      },
+      "oid": "ad44cacc76f5f74a5b52c6317298fe04bfe3f4c4",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000012.jsonl.zst",
+      "size": 8473358,
+      "type": "file",
+      "xetHash": "e506934af082b16fa5a4f9619986e968ffe674afcdd087d97b3e428b538a9ba5"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000013.jsonl.zst": {
+      "lfs": {
+        "oid": "50519cad9ab29307bfa9f69c1debf196c19031c9074f83274870ac99e58c60a9",
+        "pointerSize": 132,
+        "size": 8011694
+      },
+      "oid": "6f05d34836bc452f5d660cd9111e9d5b55946528",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000013.jsonl.zst",
+      "size": 8011694,
+      "type": "file",
+      "xetHash": "6fecda13c52900719719de850b95a77581f33fc436a941eb05f23c9ed9c694f0"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000014.jsonl.zst": {
+      "lfs": {
+        "oid": "9c4b1f76c3024b2d84fda65f194064dcfb8a63a8854c94790b576a116f587319",
+        "pointerSize": 132,
+        "size": 8466252
+      },
+      "oid": "860f427195bda33587894a3d076b3dcabbdb8f66",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000014.jsonl.zst",
+      "size": 8466252,
+      "type": "file",
+      "xetHash": "f2a58179dcc087aafb11c2963397a4dffe2cf2fdd1e737d15fd7a328a5230f80"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000015.jsonl.zst": {
+      "lfs": {
+        "oid": "0669ad93f860acf2d2aa7fd53752faf752e83b712b1d3c95a3bee42197d389af",
+        "pointerSize": 132,
+        "size": 8457514
+      },
+      "oid": "e5685588475e5ce7f1aa1804206ee83d1a66fa55",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000015.jsonl.zst",
+      "size": 8457514,
+      "type": "file",
+      "xetHash": "2c54a644f765b28f69009693e705efa656b8ee39da867e5e19c53de31b08e15b"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000016.jsonl.zst": {
+      "lfs": {
+        "oid": "f5319816b8b0e713428a50254660a43175ca795e099b25568f2370001afff130",
+        "pointerSize": 132,
+        "size": 8458254
+      },
+      "oid": "8fbfb242c135527e15dd867202e7e4dc9fafbbc3",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000016.jsonl.zst",
+      "size": 8458254,
+      "type": "file",
+      "xetHash": "704f513798531decca62b2fb0fb5b2c90ceeb0b47fe27ab6256b68b3720c8498"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000017.jsonl.zst": {
+      "lfs": {
+        "oid": "51706a2d8e8aaa50a967b5306bd377310117d18da5da46459579f5d9e785e16a",
+        "pointerSize": 132,
+        "size": 8457591
+      },
+      "oid": "3b56b94a188d2259cb5e51195a737fd1e78e178d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000017.jsonl.zst",
+      "size": 8457591,
+      "type": "file",
+      "xetHash": "40af1d134a810896f3fb397814520bde9492168dfdc7acb5fa9f3222f5ff8e48"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000018.jsonl.zst": {
+      "lfs": {
+        "oid": "210a9ecb8945fd25aac70a3174450ae5dc86d5cc91d2749d95d25abbaae8f104",
+        "pointerSize": 132,
+        "size": 8603182
+      },
+      "oid": "f18ef07ffec2eb81b37de01f2804ce3e0d3cd4d7",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000018.jsonl.zst",
+      "size": 8603182,
+      "type": "file",
+      "xetHash": "f2874789b90ac85cd9b6f252f95f7c288635dcb123a14458f18601661e9628eb"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000019.jsonl.zst": {
+      "lfs": {
+        "oid": "13ad6e0dfcb3086e9a958814f1fcbd0047ab1513a684b02cd48d739671cfe028",
+        "pointerSize": 132,
+        "size": 8709930
+      },
+      "oid": "a8033becdb566086ced32f79b63483967ee3aa42",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000019.jsonl.zst",
+      "size": 8709930,
+      "type": "file",
+      "xetHash": "f67e23a6846a87082f685c22de7fc3d680937176339d3055d3f4841b4f145242"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000020.jsonl.zst": {
+      "lfs": {
+        "oid": "cdca23b17a9ab9f7b94d04d6e02a4fc9ffff6cae240f7e155414cbf49bcb99c4",
+        "pointerSize": 132,
+        "size": 8989947
+      },
+      "oid": "cc627ebc296d669f810fff8b0f4a5e48b723cfe1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000020.jsonl.zst",
+      "size": 8989947,
+      "type": "file",
+      "xetHash": "6dd184a0f82488e819b9079aea7fcab36bdac171519e6618529e310a5c1b50b7"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000021.jsonl.zst": {
+      "lfs": {
+        "oid": "5a0805d5f98da883486be88d5cb5e095621e84643b067851ed5b562095e06352",
+        "pointerSize": 132,
+        "size": 8645563
+      },
+      "oid": "bbbbc9da865345e10073b76c2cf918cbdc2e237a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000021.jsonl.zst",
+      "size": 8645563,
+      "type": "file",
+      "xetHash": "1606b21dc0f20197bc1bf83f159159065ec7193b811f928cbff14aea2f0d1ba6"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000022.jsonl.zst": {
+      "lfs": {
+        "oid": "5585e156e4072efe4736e6dca54ef8d749a1d0bfc7a16c7717fab82b2b92dbff",
+        "pointerSize": 132,
+        "size": 8671079
+      },
+      "oid": "b7322aaa9bd78d761a19ae9fd7a0470b24d5feb6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000022.jsonl.zst",
+      "size": 8671079,
+      "type": "file",
+      "xetHash": "b2f2a425e4609110745c2ad307273b0e2b530e8f933e5261dfedea294ced2b58"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000023.jsonl.zst": {
+      "lfs": {
+        "oid": "0d14e5122e3342d076c0c7b9a75ab14de3ecec714ba86e618c4a271187a1d881",
+        "pointerSize": 132,
+        "size": 7008178
+      },
+      "oid": "18074b5618f654c7e6bb3b9d2b1d8de57de5224a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000023.jsonl.zst",
+      "size": 7008178,
+      "type": "file",
+      "xetHash": "36843647c179eff2a9c2b5765a807bdd753716e7e97a3f56ec0210b2bbb20d62"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000024.jsonl.zst": {
+      "lfs": {
+        "oid": "8eddea9e45cba4eb5b1c861596190185d448b07fef50ef92ea76f81608b432a5",
+        "pointerSize": 132,
+        "size": 5648099
+      },
+      "oid": "48e85ed1be88da17383dcf2c8c4d8a4555b51b3e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000024.jsonl.zst",
+      "size": 5648099,
+      "type": "file",
+      "xetHash": "11c5fdbba6b36c6dbc2d655a4a6f6c4e0c6dda05b0228d757a5dd2bcee756f28"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000025.jsonl.zst": {
+      "lfs": {
+        "oid": "01b4cc416e0862e10fba9d7b9be3ee58f46d6dd8b7027452350c1fb6b13e9fc5",
+        "pointerSize": 132,
+        "size": 3959911
+      },
+      "oid": "86204a1fe73e4811b06610c0fefb4e1216169ded",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/paths-000025.jsonl.zst",
+      "size": 3959911,
+      "type": "file",
+      "xetHash": "050a76be4f3dadcef9d317f3185dba9a1f135e0501b1ff57e4a0c07865df2920"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/physical-review.json": {
+      "oid": "2072322e04adc376c7ad1919dcba7ef8b58c8dc1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/physical-review.json",
+      "size": 2780,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/publication-closure.json": {
+      "oid": "6c7a5e180f76ad0026811652ba2d77bdf6668506",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/publication-closure.json",
+      "size": 2135,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/publication-outer-closure.json": {
+      "oid": "69c538c6d639cc01970853c8c373de100643c692",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/publication-outer-closure.json",
+      "size": 655,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/root-classification-review.json": {
+      "oid": "120b708b6a133998036613aa018252e027ec7b0e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/archive-payload-v1/root-classification-review.json",
+      "size": 5173,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/seal.json": {
+      "oid": "1a901102d0c2a3bdd0872f47931239fe208d5592",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/seal.json",
+      "size": 127159,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/verification/final-closure.json": {
+      "oid": "8caa5d6bd8dd3fb6f7fe278274d8db44c996e96a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/verification/final-closure.json",
+      "size": 3524,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/verification/readback.json": {
+      "oid": "6332e455b64fe213473108d0d09731ab09aefdac",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/latest-grounding-retention/verification/readback.json",
+      "size": 32068,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-status.json": {
+      "oid": "eba567e15f052c272e9518e58317f1cf2563caef",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-status.json",
+      "size": 65690,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/build_evidence_archive_02.py": {
+      "oid": "1086eea3fc60781fc6655da1fff7d96f509491f7",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/build_evidence_archive_02.py",
+      "size": 26475,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/classification-source-freeze-01.json": {
+      "oid": "a767592aaa37f35f68584f248f5927ada8571e5b",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/classification-source-freeze-01.json",
+      "size": 1495,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/classify_and_prepare_public_archive_07.py": {
+      "oid": "b589dc12dbcc148f961a1448d233f8d588b17a3d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/classify_and_prepare_public_archive_07.py",
+      "size": 35323,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/decoder-controls-05/closed.json": {
+      "oid": "b332294d380112916e354ad3389eb89202f0caf8",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/decoder-controls-05/closed.json",
+      "size": 1285,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/independent-source-review-01/review.json": {
+      "oid": "171cef2f50efbe1d639acdd4a00603762b1a45a5",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/independent-source-review-01/review.json",
+      "size": 8093,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/independent-source-review-02/review.json": {
+      "oid": "3d4f7aed78292790daa88c84a4d495ceb8be3b54",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/independent-source-review-02/review.json",
+      "size": 10307,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/prepare_successor_publication_01.py": {
+      "oid": "cf595991234c6b7cf6b469ad5ac84624cb075aa1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/prepare_successor_publication_01.py",
+      "size": 9453,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/prepare_successor_publication_02.py": {
+      "oid": "f91c6e966cf7c58bd16770ecd2fdb8e4e63d66c6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/prepare_successor_publication_02.py",
+      "size": 12224,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/prepare_successor_publication_03.py": {
+      "oid": "0d89a37da72419ab426af5410c0a0ded81a4762c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/prepare_successor_publication_03.py",
+      "size": 12947,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/prepare_successor_publication_04.py": {
+      "oid": "9086958ab7edb1bcaa0d368f44760521cd6e9fea",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/prepare_successor_publication_04.py",
+      "size": 13558,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/publication-phase-wrapper-freeze-01.json": {
+      "oid": "b6d57825609bdf6289eff031150ed4df530728f1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/publication-phase-wrapper-freeze-01.json",
+      "size": 547,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/publish_qualified_archive_02.py": {
+      "oid": "9b0dc87128b36cc8fec57c0c11274b7674fdd13d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/publish_qualified_archive_02.py",
+      "size": 10215,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/publish_successor_evidence_01.py": {
+      "oid": "81b9c98d76b7f6920127c33fbe2f93659f1bfc4d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/publish_successor_evidence_01.py",
+      "size": 8519,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/publish_successor_evidence_02.py": {
+      "oid": "2ff8cc6f253da29bef8cef061948bb1abba8a48c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/publish_successor_evidence_02.py",
+      "size": 9568,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/review_closed_public_archive_01.py": {
+      "oid": "b9ab7e9e831a5de348c2c7201a08aa26c668aaaf",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/review_closed_public_archive_01.py",
+      "size": 15522,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/root-physical-review-01/review.json": {
+      "oid": "2072322e04adc376c7ad1919dcba7ef8b58c8dc1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/root-physical-review-01/review.json",
+      "size": 2780,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/root-physical-review-controls-02/review.json": {
+      "oid": "5e25d5c7b06b5caa5df9c28658722389f7d2a980",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/root-physical-review-controls-02/review.json",
+      "size": 2915,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/root-physical-review-negative-01/control-result.json": {
+      "oid": "4deaf37b82636be8874ad9a7cf054024ad76c83d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/root-physical-review-negative-01/control-result.json",
+      "size": 397,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/run_frozen_publication_phase.py": {
+      "oid": "f1809b6cea9bf07aba744869103b8e1dff3cd271",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/run_frozen_publication_phase.py",
+      "size": 5757,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/selection-manifest.json": {
+      "oid": "5268bef352cfd60e50e295eb9fac4f165995dfbb",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/selection-manifest.json",
+      "size": 23101,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/selection-review.json": {
+      "oid": "bc24c4bcd6f562c8566f06d01a8bd7418fe6b12a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/selection-review.json",
+      "size": 16644,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-preparer-source-review-04/review.json": {
+      "oid": "b2dffaaa97b6c66a8f17a234089caf1458b6fe75",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-preparer-source-review-04/review.json",
+      "size": 7083,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-publisher-reader-controls-01/closed.json": {
+      "oid": "198f41fad17dbaac18cd3a6b52b43229c0bc3d7e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-publisher-reader-controls-01/closed.json",
+      "size": 723,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-publisher-source-review-01/review.json": {
+      "oid": "501290ab1bbbbeac6ec4aa01cf1776168edc1257",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-publisher-source-review-01/review.json",
+      "size": 2180,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-publisher-source-review-02/review.json": {
+      "oid": "a3bb6191506a19a8a8cc66ab04091551e0fc2525",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-publisher-source-review-02/review.json",
+      "size": 3111,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-01/build_package.py": {
+      "oid": "ef6de099e43ecc02520532f4b4ef684b4705433c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-01/build_package.py",
+      "size": 17194,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-01/closed.json": {
+      "oid": "0d13d562783a992385cec7fe61215d7120b585f3",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-01/closed.json",
+      "size": 1664,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-02/build_package.py": {
+      "oid": "93c5ade82f6654df959750648e4141aa60864e0a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-02/build_package.py",
+      "size": 21312,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-02/closed.json": {
+      "oid": "3111806534ec5e6f9db850fb95ff2742e6e2a8dc",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-02/closed.json",
+      "size": 1298,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-02/file-only-review-01.json": {
+      "oid": "804f24c3060fe136e5d0f1c059bad0a34c44452b",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-02/file-only-review-01.json",
+      "size": 2123,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-02/review_package.py": {
+      "oid": "359c068f57060d1aaac2c6f132887c4a36c489b2",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-02/review_package.py",
+      "size": 7396,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-03/build_package.py": {
+      "oid": "ba1eff2e90e577af967f673c96561a9c536c0468",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-03/build_package.py",
+      "size": 21117,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-03/closed.json": {
+      "oid": "e5abbec1fec9b459e0e1a6660fdf68e7e1e0d14e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-03/closed.json",
+      "size": 1275,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-03/file-only-review-01.json": {
+      "oid": "937766bd46ec1ce6227e902f62c18478f40e1ce9",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-03/file-only-review-01.json",
+      "size": 4823,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-03/review_package.py": {
+      "oid": "f09878dbfcc4ac60c65463999fb36586d851c253",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-source-model-package-03/review_package.py",
+      "size": 10093,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-tooling-file-review-01/prepare_tooling_manifest.py": {
+      "oid": "8b3e23537e60320c19c2935e5c25c6fe266e00fc",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-tooling-v1/successor-tooling-file-review-01/prepare_tooling_manifest.py",
+      "size": 8666,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/README.md": {
+      "oid": "e46db9d4e727d68c60b27829ee0f45ab91abaae1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/README.md",
+      "size": 3404,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/cache-joins.json": {
+      "oid": "5072669361ba34a53f6847cf0fda4dfa2e3b29ad",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/cache-joins.json",
+      "size": 58956,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/closed-inputs.json": {
+      "oid": "f62646c447191e69f654579b764dfb4a86aba945",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/closed-inputs.json",
+      "size": 113611,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/file-seal.json": {
+      "oid": "22e77c2cb7dc16a70096048dba31aa34630ebc41",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/file-seal.json",
+      "size": 281311,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/final-selection.json": {
+      "oid": "0819fad285c8434b7f59935083af7308286f2bcc",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/final-selection.json",
+      "size": 517699,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/metadata-readback.json": {
+      "oid": "a8491cd62837492ecfd3a5030e75c44b4a6a0bd7",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/metadata-readback.json",
+      "size": 32234,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/next-obligations.json": {
+      "oid": "341cf1d0450d13d5b3e0aec0d6e274f2bb410877",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/next-obligations.json",
+      "size": 5274,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/numeric-binding.json": {
+      "oid": "67a1e085fca490d88142283f56957b1fd0e15cc9",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/numeric-binding.json",
+      "size": 17176,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/numeric-source-audit.json": {
+      "oid": "7fad6fead458dcb95a93fb8226b78c7e28dfae67",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/numeric-source-audit.json",
+      "size": 11598,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package-closed.json": {
+      "oid": "670c32a37bdbd9b66394d460b9d31bfac567eff3",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package-closed.json",
+      "size": 457,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package-review.json": {
+      "oid": "f8adf365066841f97ced771f2147dc25b5429f73",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package-review.json",
+      "size": 4669,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000000.tar.zst": {
+      "lfs": {
+        "oid": "41e6e564581dab37354123577f5c11fb5d1fc6afcfa814a4a843da10ed3419d2",
+        "pointerSize": 131,
+        "size": 686923
+      },
+      "oid": "3616f6cea064612a5e851931fd056e6ed0743824",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000000.tar.zst",
+      "size": 686923,
+      "type": "file",
+      "xetHash": "b062eb3ddda2aba5b6c42fee5bccb777e5c597cd7d55dfd61a124eac02a0ab7e"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000001.tar.zst": {
+      "lfs": {
+        "oid": "c4e0da83fab3f81e17b50f56e6d8db699e4c52ed4bb3c216dbea2db2776d57b8",
+        "pointerSize": 132,
+        "size": 1797441
+      },
+      "oid": "70c970543e243ed5acf5ca5827d7dc74d0cf4928",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000001.tar.zst",
+      "size": 1797441,
+      "type": "file",
+      "xetHash": "1280c441caff8f809bfce4e904b5ba41410254ac81c5a04c5f15b9ea95c93e4d"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000002.tar.zst": {
+      "lfs": {
+        "oid": "fbc2d2ff5647bb6f3cab8e92d9f24db04e9dc41d707ab43b444607c9b320f41d",
+        "pointerSize": 132,
+        "size": 1798343
+      },
+      "oid": "743341b0c4e49a4cfa64f831974d4f738b81dbde",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000002.tar.zst",
+      "size": 1798343,
+      "type": "file",
+      "xetHash": "e0e4627fbfe102e222452506798e295883b077c648241fd48072cba0ac4ff3fe"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000003.tar.zst": {
+      "lfs": {
+        "oid": "9833ce92690e4e58726a78d12c3c596f83898de68aecac35c9d01e13d7b2a57d",
+        "pointerSize": 132,
+        "size": 1936841
+      },
+      "oid": "d0fc21c5798c804a471db856d0be93f0e8a43d01",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000003.tar.zst",
+      "size": 1936841,
+      "type": "file",
+      "xetHash": "06f1f2f0754466f83689469a96d015bdc2c93997a0b61c27e0a1ca1b00fc6bb5"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000004.tar.zst": {
+      "lfs": {
+        "oid": "181bb98f153bb6e5222720edbce121a86c0e30fd9637e74d832e3db1d08a858d",
+        "pointerSize": 132,
+        "size": 2386122
+      },
+      "oid": "8c7966635e39e8ac727f0e012b4109f72abccd47",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000004.tar.zst",
+      "size": 2386122,
+      "type": "file",
+      "xetHash": "c392c0ec7c2592e4d0fc19d8c6ab096a45a69a45a323cec01c6bddf646639f56"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000005.tar.zst": {
+      "lfs": {
+        "oid": "6300fad72aee954e5feb5c4578dc03a2075bfb3c7e43ad297d798f83a682ed26",
+        "pointerSize": 132,
+        "size": 1506903
+      },
+      "oid": "61f90ef911e91cba5164d18f4a14f88afe34d569",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000005.tar.zst",
+      "size": 1506903,
+      "type": "file",
+      "xetHash": "b9ea6d73d64c7c38dcfc43eaaf073980f580aefa3877b23cbac1ed9f9069612f"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000006.tar.zst": {
+      "lfs": {
+        "oid": "f2430548bbfdadc935a5924367e9db97a1b240872fdee45e606d1466aebeef65",
+        "pointerSize": 132,
+        "size": 4315813
+      },
+      "oid": "af2a462ad8025c6fc63dfe18a350b06d707bcf12",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000006.tar.zst",
+      "size": 4315813,
+      "type": "file",
+      "xetHash": "486cb221e0db88ee659c87e66fbd9b85dffce2d2df19d23972eac753da629bf0"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000007.tar.zst": {
+      "lfs": {
+        "oid": "4a5bf35830679f2e177bc8ff5123a627c19246442797d512201dc3c88b260062",
+        "pointerSize": 132,
+        "size": 1326334
+      },
+      "oid": "37cdc2cd49ae329272c71fee79fd86a9efcc794f",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000007.tar.zst",
+      "size": 1326334,
+      "type": "file",
+      "xetHash": "43eccfcbb9db2934b041e3e7438f8c84b7291dac901323884cf3e2898d973498"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000008.tar.zst": {
+      "lfs": {
+        "oid": "1f87fe580eacaa9d070a291b193454efe72440721645d32a0f44ea737d629a38",
+        "pointerSize": 132,
+        "size": 1945573
+      },
+      "oid": "217e56eb3e5a2f5822f83e988ae1b4c70023a34b",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000008.tar.zst",
+      "size": 1945573,
+      "type": "file",
+      "xetHash": "15c8d082a87f86338bfaa598ee9dc57b54e83040501759ebb9bc1f2da2ee21d2"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000009.tar.zst": {
+      "lfs": {
+        "oid": "8e7349f6a1f64f4cad01a6aed28b44979b83fa82a4b84d0bd221e5661683ac74",
+        "pointerSize": 132,
+        "size": 1809460
+      },
+      "oid": "c011c6008300d47a387cab4badc81e1a10c7b0c6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000009.tar.zst",
+      "size": 1809460,
+      "type": "file",
+      "xetHash": "f0010c55e021f86e9816d647b5b3f2e3e91d37b3f0fcd8034f2b34c07d3abc0f"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000010.tar.zst": {
+      "lfs": {
+        "oid": "caa0c29d9b7aa4836983d17b2f47b90fbbcc47b8416c779cb2ee4d25a53465d8",
+        "pointerSize": 132,
+        "size": 1807535
+      },
+      "oid": "db476b16ea663c243f9c67d08f1d74d71e50632d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000010.tar.zst",
+      "size": 1807535,
+      "type": "file",
+      "xetHash": "23475c9485fd7a2fe83631eee94ed1fa0684397560c406e938517ec9e3052304"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000011.tar.zst": {
+      "lfs": {
+        "oid": "415f11403010bb4b9d4cb171ffdb713776d5bb7d403dee1370be185771afa6a7",
+        "pointerSize": 132,
+        "size": 1803817
+      },
+      "oid": "74b12cf70c733c4d8545b2e580cf361baa3b4ff5",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000011.tar.zst",
+      "size": 1803817,
+      "type": "file",
+      "xetHash": "5efffe37c683501080cbb94c20d4c4651bd386784df94e292467da881134b7ea"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000012.tar.zst": {
+      "lfs": {
+        "oid": "46eca58f59d2b805d1332ecc7ba0df25055f767562e2d86d68968e328aee1dde",
+        "pointerSize": 132,
+        "size": 1806606
+      },
+      "oid": "05c9eee28da7718f69ed5751382ea91187771d76",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000012.tar.zst",
+      "size": 1806606,
+      "type": "file",
+      "xetHash": "c732b59d1ae1634e2f7329f346fdf563b541b03f9d3bca6b28066dc3aafaf44d"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000013.tar.zst": {
+      "lfs": {
+        "oid": "af05e16027b63cdffef5024227650c067542ad0409405c6d86104f72f224c7c4",
+        "pointerSize": 132,
+        "size": 1812061
+      },
+      "oid": "ecd83eca23d6a541ec771dafa79be5cadadfa735",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000013.tar.zst",
+      "size": 1812061,
+      "type": "file",
+      "xetHash": "7ea62fe605cbc212da76d480f84e3647362f758c5ae74e8748e7b9c7999e277c"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000014.tar.zst": {
+      "lfs": {
+        "oid": "fc12ca7af21e72933a7789c8f796a834110cf0f7954460aa3a29586566b23853",
+        "pointerSize": 132,
+        "size": 1813585
+      },
+      "oid": "1c4b703e1bff2a182e066c3db0aefc8a0631e88d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000014.tar.zst",
+      "size": 1813585,
+      "type": "file",
+      "xetHash": "6a3822a59689066a9932054752e8a560d8562ffd11b1ede10fd53d20f5c38029"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000015.tar.zst": {
+      "lfs": {
+        "oid": "b4ae8430e10f9b2d34d9878eadf480d0c1d2102731f2cf67b7bc2f50723aa334",
+        "pointerSize": 132,
+        "size": 1812727
+      },
+      "oid": "b22afc4569050b804ca2ed984cf6278b2aa51a1a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000015.tar.zst",
+      "size": 1812727,
+      "type": "file",
+      "xetHash": "2008df5507b8300383a20cca0a9052d59b4145d722fc834e86911d22049fd75f"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000016.tar.zst": {
+      "lfs": {
+        "oid": "1ca5df0fd95daa93f55d1fe39acdd656bf6cfda786b45966d30e32b360f83ad0",
+        "pointerSize": 132,
+        "size": 1810949
+      },
+      "oid": "f0028d3636f65b53f0c3046cc6e2085bb822b8bb",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000016.tar.zst",
+      "size": 1810949,
+      "type": "file",
+      "xetHash": "e0a330dcd16b27b90c5081cf2b22848b697eeacfa62136c70764d12fa95e0c5b"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000017.tar.zst": {
+      "lfs": {
+        "oid": "c0ec62211b36ef5e103482f4e8233037b75418478965661d5859ec41d0d75e4d",
+        "pointerSize": 132,
+        "size": 1809699
+      },
+      "oid": "0c29a913772cec42d3077255fe89ab1416da1730",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000017.tar.zst",
+      "size": 1809699,
+      "type": "file",
+      "xetHash": "0b67706fc6662cca542f91396a4150ab950b50ad1a41f9750c12df7a69cf2e43"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000018.tar.zst": {
+      "lfs": {
+        "oid": "62f257bd773df6fa3409ff6a63958ade9fcd6e86b3ed802b63b01a542b42f5c0",
+        "pointerSize": 132,
+        "size": 1809647
+      },
+      "oid": "cb1ae92a0ec54388bbda9f1cd86303124cd4c8bc",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000018.tar.zst",
+      "size": 1809647,
+      "type": "file",
+      "xetHash": "195c15bae4c82410a71989ff445a627052bc6f516c2f763ba563b41e47010ae7"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000019.tar.zst": {
+      "lfs": {
+        "oid": "63536401a321bc73dd0aea5ba687cf94cbf3810290325de159c4356bde07ac3c",
+        "pointerSize": 132,
+        "size": 1809012
+      },
+      "oid": "cbc349a8d643c981a8d4709d50887f67a59c9706",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000019.tar.zst",
+      "size": 1809012,
+      "type": "file",
+      "xetHash": "54fbf5b2c7fc2babb27d639d3a54362e69fe8e07ee763a00829bbfceb99a8262"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000020.tar.zst": {
+      "lfs": {
+        "oid": "d5d7d78f056e134e7fa8bd9d380b4eead66c3e6a5ff7d0d84a96e93803044b5d",
+        "pointerSize": 132,
+        "size": 1945516
+      },
+      "oid": "3dd897bdff7921a6043e98df905e27baf2e16b71",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000020.tar.zst",
+      "size": 1945516,
+      "type": "file",
+      "xetHash": "b3848833f8378188de06f6cdcbcd7b90e9e7b88b88197770fdb61577a1225f5f"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000021.tar.zst": {
+      "lfs": {
+        "oid": "7c5720e034bf7e6c501e601c86918813ec42c1f604f9bc1d46d41de1e5268e9f",
+        "pointerSize": 132,
+        "size": 1952810
+      },
+      "oid": "4eb06cc18f748017146e356ce0c676f2c08ed440",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000021.tar.zst",
+      "size": 1952810,
+      "type": "file",
+      "xetHash": "4662d7d620e442854ae4045bd568fffa10c195009fc1bb27e9a6d6d474d66599"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000022.tar.zst": {
+      "lfs": {
+        "oid": "6fdd2e9c29b6c1d121f9a216e77208e6581e128afbd4eba1de9675f56ce6d155",
+        "pointerSize": 132,
+        "size": 1951399
+      },
+      "oid": "4c26d34aee127c11f6fb82807683fa3b451b7272",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000022.tar.zst",
+      "size": 1951399,
+      "type": "file",
+      "xetHash": "a2832e048df9af91dfe617b521d7e34d604e5f8a6296168d8726a31fb561d040"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000023.tar.zst": {
+      "lfs": {
+        "oid": "ebddae0853eec29c1a3a56b66b87cfcc491c631248260c697e5ff1477c9df8ee",
+        "pointerSize": 132,
+        "size": 1951131
+      },
+      "oid": "d776fba249105c81022bbb1f2b7a0d0985a9c61c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000023.tar.zst",
+      "size": 1951131,
+      "type": "file",
+      "xetHash": "871b77e777b015be9ba7e894391e281bf542445e9c78ced3bdefb7ae8c78b278"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000024.tar.zst": {
+      "lfs": {
+        "oid": "ec99f233e0c5da3a7b7f536690aa63d7cbdb9d9ebf796e6120a5353341855617",
+        "pointerSize": 132,
+        "size": 1811856
+      },
+      "oid": "9dbc8899f1929b1809ead3b072a9d9ec27f3a2bf",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000024.tar.zst",
+      "size": 1811856,
+      "type": "file",
+      "xetHash": "00e8ff9ab714e5713fff3edc3ce4002a119132f957d1b04408d830c54834e9bd"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000025.tar.zst": {
+      "lfs": {
+        "oid": "afb14cef997e3613f8c99b8b9d1f324df791ef60e3a8820e9f4af272418ed750",
+        "pointerSize": 132,
+        "size": 1848706
+      },
+      "oid": "be495a07793025e80f69676b467ee77a8cdf94c6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/data-000025.tar.zst",
+      "size": 1848706,
+      "type": "file",
+      "xetHash": "a47548d0acd3e37491de7a1757eec3d6107e3440f577dbef0da1280e0d6ff71d"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/manifest.json": {
+      "oid": "e244394b973a9cd3fe998187e21b8a982d504669",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/package/manifest.json",
+      "size": 887616,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/publication-plan-review.json": {
+      "oid": "0e4b9c02f1cb89d30229676e96781f83b2d62783",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/publication-plan-review.json",
+      "size": 3911,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/publication-profile-authorization.json": {
+      "oid": "609b2f8930df52467ffba394ff0f7c7bdd08b964",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/publication-profile-authorization.json",
+      "size": 1212,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/publication-selection-review.json": {
+      "oid": "8fbe41503e05a22953be42fde0620edd61165975",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/publication-selection-review.json",
+      "size": 4373,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/publication-source-review.json": {
+      "oid": "2e2a4741e068b1366fb276b000714ba0f7b02502",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/publication-source-review.json",
+      "size": 6421,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/qualified-mathematical-mapping.json": {
+      "oid": "0831147582ae35069e7f99d22f91065faae5fcf6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/qualified-mathematical-mapping.json",
+      "size": 120499,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/qualified-review.json": {
+      "oid": "676daef1bb0cd057cf2e1a9a878f3f72d82c746b",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/qualified-review.json",
+      "size": 36092,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/required-facts.json": {
+      "oid": "c09997ceb2eee29d852f0152efb8634316d22a8e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-curvature-v1/required-facts.json",
+      "size": 96622,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/data-000000.tar.zst": {
+      "lfs": {
+        "oid": "37041f66780c44d8f8800e9191bf4602c00c25d0b02614e568f5a9c0cba6cff5",
+        "pointerSize": 132,
+        "size": 1496443
+      },
+      "oid": "884e1deab208caf2bb587dde75e87cf694a4eb4c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/data-000000.tar.zst",
+      "size": 1496443,
+      "type": "file",
+      "xetHash": "e8454f2e1b5dbb5585b49e95b39bf6d0e7411959f405f761c1fbad3f4b5bfd43"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/data-000001.tar.zst": {
+      "lfs": {
+        "oid": "2497faf6cecd4d5710379834b29cc7de9a31f3f0ce80b1cd9a65d3e83cb01fd4",
+        "pointerSize": 132,
+        "size": 4290283
+      },
+      "oid": "09e5655f854924f8d91e9eabf0b2963892a581e0",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/data-000001.tar.zst",
+      "size": 4290283,
+      "type": "file",
+      "xetHash": "da3254aed31fed11a19a5beb0faa604b0757d7f36df9b1054680ad1c2dccaceb"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/data-000002.tar.zst": {
+      "lfs": {
+        "oid": "2793171247b46c3bd723e434df09afb1f9d6da81a027515e567dddaaaf645a2f",
+        "pointerSize": 132,
+        "size": 1352759
+      },
+      "oid": "f762a6da0b74a73680dca9bc09c174021857ae8e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/data-000002.tar.zst",
+      "size": 1352759,
+      "type": "file",
+      "xetHash": "70cc48826be4e2744aee7c3dc4643aef3be5d219815e9b7b8b15b1fd9a92955b"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/manifest.json": {
+      "oid": "f96ae46e9e346c5a1f584356d72ce90b5be146e4",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/manifest.json",
+      "size": 183434,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/package-closure.json": {
+      "oid": "752d671c9ec43ccee302745285eca44ac3607622",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/package-closure.json",
+      "size": 449,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/package-review.json": {
+      "oid": "509d03d423a6cb34befe72eb8a1ecc2688b6eafb",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/package-review.json",
+      "size": 1979,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/child-publication-closed.json": {
+      "oid": "d0ea5beb19e9101254bb352672004ad51e6de60a",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/child-publication-closed.json",
+      "size": 1802,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/child-upstream-compatibility-source-review.json": {
+      "oid": "8f7cf9024f23ea37e411ddb8f82379f6a1ed3115",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/child-upstream-compatibility-source-review.json",
+      "size": 3833,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-qualified-join-01.json": {
+      "oid": "66c46a00b208049083350cb2e89e674572d48d7d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-qualified-join-01.json",
+      "size": 3147,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/actual-package-receipt-join-01.json": {
+      "oid": "1a8671abb8decec5459d76d9d345c826c553e1e8",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/actual-package-receipt-join-01.json",
+      "size": 5157,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/draft-findings-01.json": {
+      "oid": "ed8a630327a94a48b94c229e67b3bb25748df7e4",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/draft-findings-01.json",
+      "size": 2920,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/failed-source-review-01.json": {
+      "oid": "0c86dad3300112ec49a1cf737221f761f2e87cc2",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/failed-source-review-01.json",
+      "size": 771,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/failed-source-review-02.json": {
+      "oid": "dfb8106ab64296f92f227eda6719feff04f72999",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/failed-source-review-02.json",
+      "size": 886,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/final-source-review-03.json": {
+      "oid": "3142b8867edb8a6cc5ff7fc88408ebbbe4d373ff",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/final-source-review-03.json",
+      "size": 7902,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review-seal-01.json": {
+      "oid": "7aab5880a8d0da9c6fd07e4b0a979c56d36d3fe6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review-seal-01.json",
+      "size": 2831,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review_actual_package_receipts_01.py": {
+      "oid": "9de9551154051f9329fb9d260ab0efadf8e3ece6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review_actual_package_receipts_01.py",
+      "size": 8979,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review_final_source_01.py": {
+      "oid": "64752c23c7aa0f2dccc494e723bca4debbc7c4e6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review_final_source_01.py",
+      "size": 10820,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review_final_source_02.py": {
+      "oid": "596cc2594346b61b5a01bad7afa333cc426ea325",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review_final_source_02.py",
+      "size": 10820,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review_final_source_03.py": {
+      "oid": "703785e0a4efaff42e7f286304c66a30473b7d63",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/independent-review/review_final_source_03.py",
+      "size": 11025,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/input-pins.json": {
+      "oid": "92450fb5f66499dca39229f215c196f840ed08de",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/input-pins.json",
+      "size": 1554,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/metadata-scan-closed.json": {
+      "oid": "f85a3060524d58691112f4e457e683c4c17c3412",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/metadata-scan-closed.json",
+      "size": 24612,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/prepare_publication_metadata.py": {
+      "oid": "fe941ba446ad86ccf684203b78be66caafb05301",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/prepare_publication_metadata.py",
+      "size": 9058,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/publish_successor_evidence_02.py": {
+      "oid": "2ff8cc6f253da29bef8cef061948bb1abba8a48c",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/publish_successor_evidence_02.py",
+      "size": 9568,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/run_frozen_publication_phase.py": {
+      "oid": "f1809b6cea9bf07aba744869103b8e1dff3cd271",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/run_frozen_publication_phase.py",
+      "size": 5757,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/verify_closed_qualification.py": {
+      "oid": "7b7b751092c062ea2fcc20281173dff6ba3cfdac",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/verify_closed_qualification.py",
+      "size": 10460,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/qualification/file-only-review-01.json": {
+      "oid": "a8801d03257b7de697741b9da98b507fa84ddadc",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/qualification/file-only-review-01.json",
+      "size": 9571,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/qualification/file-only-seal-01.json": {
+      "oid": "71b72b0879e23654ea17668bb5a06a62065ccda6",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/qualification/file-only-seal-01.json",
+      "size": 62047,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/qualification/ranker-convergence-obligations-20261005-01/review.json": {
+      "oid": "74d7179edeafc66f1eb1808c6fbf8b74fd2b21c1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/qualification/ranker-convergence-obligations-20261005-01/review.json",
+      "size": 27570,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/qualification/ranker-trace-authentication-source-review-20261005-01/review.json": {
+      "oid": "71a633d2b2cc05bb67cf2ab912dc0e68fc64a670",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/qualification/ranker-trace-authentication-source-review-20261005-01/review.json",
+      "size": 11249,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/source/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py": {
+      "oid": "86e5c9f2accdbb24fb0a4f3b8059d3ed421def9b",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/source/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py",
+      "size": 18891,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/source/ipfs_accelerate/test/api/test_terminal_codebase_ranker_trace_authentication.py": {
+      "oid": "a0afd406c336c7ab8b1259cce52d8bcfd9e3bc6d",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/source/ipfs_accelerate/test/api/test_terminal_codebase_ranker_trace_authentication.py",
+      "size": 18828,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/build_package.py": {
+      "oid": "8f0b9ffbd5a720a611a47bac632002e64533b944",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/build_package.py",
+      "size": 22389,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/closed-inputs.json": {
+      "oid": "9b3fae45a948adbb006afe667b4fc1b22cfa94b3",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/closed-inputs.json",
+      "size": 26258,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/final-selection.json": {
+      "oid": "8f5becc26d670a29d55ebf0fb8791039ca3b9720",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/final-selection.json",
+      "size": 97911,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/plan.json": {
+      "oid": "cfd440b5d4054d1a16ab87143c300fc54458e619",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/plan.json",
+      "size": 11813,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/required-facts.json": {
+      "oid": "020a5a7706bc103c3079f4f2bd946c1663a5a907",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/required-facts.json",
+      "size": 19425,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/review_package.py": {
+      "oid": "cbe0eaa874c303f0cee6e8c7c2f417aafc06cfb0",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/tooling/review_package.py",
+      "size": 15656,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/data-000000.tar.zst": {
+      "lfs": {
+        "oid": "15495a34a39169648fed3ef9bc5041fdd76e5d59a711a92ac61d1fed65ab2352",
+        "pointerSize": 133,
+        "size": 12489096
+      },
+      "oid": "51c5ea65401212d4ee15b24be3a8ba3676964d76",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/data-000000.tar.zst",
+      "size": 12489096,
+      "type": "file",
+      "xetHash": "50527b4fc81802348cdcb1e291c877cb7233679702bb4c854d82e54089052694"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/github-accelerator-publication.json": {
+      "oid": "e9a61da845581a1c5b3073808e315db9b40f7900",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/github-accelerator-publication.json",
+      "size": 639,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/github-root-publication.json": {
+      "oid": "8373bd99eebafc43273c406558569df8007eb6d1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/github-root-publication.json",
+      "size": 1011,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/manifest.json": {
+      "oid": "2313fae0befcbea40149d7227186ca73acd3f52f",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/manifest.json",
+      "size": 510628,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/package-closure.json": {
+      "oid": "3111806534ec5e6f9db850fb95ff2742e6e2a8dc",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/package-closure.json",
+      "size": 1298,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/package-review.json": {
+      "oid": "804f24c3060fe136e5d0f1c059bad0a34c44452b",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/package-review.json",
+      "size": 2123,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/publisher-input-controls.json": {
+      "oid": "198f41fad17dbaac18cd3a6b52b43229c0bc3d7e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/publisher-input-controls.json",
+      "size": 723,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/publisher-source-review.json": {
+      "oid": "a3bb6191506a19a8a8cc66ab04091551e0fc2525",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/publisher-source-review.json",
+      "size": 3111,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/qualified-result.json": {
+      "oid": "c0a8e144568e1451bf879a20a9ff7b26fb8751b5",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v1/qualified-result.json",
+      "size": 2885,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/data-000000.tar.zst": {
+      "lfs": {
+        "oid": "9904cedd6e8b45f69e4a1ba5f7505444b8cdcbaf116817d0e09a3c548ee31ffb",
+        "pointerSize": 130,
+        "size": 49900
+      },
+      "oid": "a7710d9d9ff9b4e8a4c16e2debe9a5ee830e1ac1",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/data-000000.tar.zst",
+      "size": 49900,
+      "type": "file",
+      "xetHash": "107cb77ace4230b1a778ec6df2218135a69cd65d9d77eef7e6090b7ce40b56cb"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/manifest.json": {
+      "oid": "0ac6951b0dbc176b03ae7c5f1ed5c7bab5833aa0",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/manifest.json",
+      "size": 57232,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/package-closure.json": {
+      "oid": "e5abbec1fec9b459e0e1a6660fdf68e7e1e0d14e",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/package-closure.json",
+      "size": 1275,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/package-review.json": {
+      "oid": "937766bd46ec1ce6227e902f62c18478f40e1ce9",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/package-review.json",
+      "size": 4823,
+      "type": "file"
+    },
+    "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/qualified-review.json": {
+      "oid": "750e92f0f521e1e6a7266ec328a656063af48787",
+      "path": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-source-model-v2/qualified-review.json",
+      "size": 7195,
+      "type": "file"
+    }
+  },
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T05:57:32.650882+00:00",
+  "execution_authority": false,
+  "mutable_pointer_source_pins": [
+    {
+      "bytes": 9695,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/prior-HF-README-01.md",
+      "sha256": "918fb6a0bb98be0a5d6ca699f00ec6969d5b6ac4971bb8b1dba89c4d030ef87b"
+    },
+    {
+      "bytes": 65690,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/prior-HF-publication-status-01.json",
+      "sha256": "40e0656445c582d9ca7624ab915eff5c622b1aab4187320d5d4cdd7c574f2802"
+    }
+  ],
+  "namespace": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-convergence-v1",
+  "namespace_unoccupied": true,
+  "parent_commit": "8b7b8c896749e0ca3884114cedbed782a88f4702",
+  "proof_authority": false,
+  "remote_mutations": 0,
+  "repo_id": "Publicus/codebase-ir-proof-index",
+  "schema": "ranker-convergence-HF-public-parent-preflight@1",
+  "status": "passed"
+}

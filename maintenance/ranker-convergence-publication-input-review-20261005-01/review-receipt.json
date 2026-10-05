@@ -1,0 +1,2181 @@
+{
+  "external_input_pins": {
+    "closed-inputs.json": {
+      "bytes": 1183,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/closed-inputs.json",
+      "sha256": "3721e16edddb301d9832001995fb9e685226cb9665852b31732bb148f8e7cdab"
+    },
+    "final-selection.json": {
+      "bytes": 178614,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/final-selection.json",
+      "sha256": "9877c6ef83bc9e554fdd12209152eb749067d47730b294e0928356cf86fc773b"
+    },
+    "plan.json": {
+      "bytes": 9736,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/plan.json",
+      "sha256": "44674a6e9901d49db15acac1264706cb0aa5ed6a5136ad3dcd38354dd1ef594b"
+    },
+    "required-facts.json": {
+      "bytes": 67665,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/required-facts.json",
+      "sha256": "6312761c32e8c4aa63dca576c19c24b08a5221de0ce68cbb17807b28297dc632"
+    }
+  },
+  "held_regular_reads": 882,
+  "native_evidence_included": {
+    "all_frozen_profiles_failed_attempts_chunks_and_full_objects_selected": true,
+    "attempts": 9,
+    "inconclusive_retained": 2,
+    "passed": 7,
+    "qualified_queries": 39,
+    "required_native_selected_member_count": 63,
+    "statuses": {
+      "lean_gap_01": "passed",
+      "lean_growth_01": "passed",
+      "lean_minimizer_01": "inconclusive",
+      "lean_minimizer_02": "passed",
+      "lean_original_convergence_01": "inconclusive",
+      "lean_original_convergence_02": "passed",
+      "lean_pl_01": "passed",
+      "lean_stable_factor_01": "passed",
+      "lean_strong_lower_01": "passed"
+    },
+    "unchanged_native_caps": {
+      "cpu_seconds": 20,
+      "max_input_bytes": 262144,
+      "max_output_bytes": 65536,
+      "max_workspace_bytes": 16777216,
+      "timeout_seconds": 20
+    }
+  },
+  "outstanding_issues": [],
+  "provenance": {
+    "copies": [
+      {
+        "captured": {
+          "bytes": 21679,
+          "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-math-review-20261005-01-review_native_math.py",
+          "sha256": "e612ddb49f2f1280399305cbe5e867ba94a152e43a0f09256e4f396f1a74180b"
+        },
+        "original": {
+          "bytes": 21679,
+          "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-math-review-20261005-01/review_native_math.py",
+          "sha256": "e612ddb49f2f1280399305cbe5e867ba94a152e43a0f09256e4f396f1a74180b"
+        }
+      },
+      {
+        "captured": {
+          "bytes": 42429,
+          "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-math-review-20261005-01-review-receipt.json",
+          "sha256": "c318ae97630369514b07d9da3cb2a8f133c22341d2f9f040bcef1eab9d5df09e"
+        },
+        "original": {
+          "bytes": 42429,
+          "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-math-review-20261005-01/review-receipt.json",
+          "sha256": "c318ae97630369514b07d9da3cb2a8f133c22341d2f9f040bcef1eab9d5df09e"
+        }
+      },
+      {
+        "captured": {
+          "bytes": 11331,
+          "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-root-review-20261005-01-close_qualification_01.py",
+          "sha256": "ae2bc26bfddf3a15718f79d8ee25c14f93b9c81974b0bc4cf98bc95e5270fe82"
+        },
+        "original": {
+          "bytes": 11331,
+          "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-root-review-20261005-01/close_qualification_01.py",
+          "sha256": "ae2bc26bfddf3a15718f79d8ee25c14f93b9c81974b0bc4cf98bc95e5270fe82"
+        }
+      },
+      {
+        "captured": {
+          "bytes": 367416,
+          "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-curvature-git-publication-20261005-01-closed.json",
+          "sha256": "c83744433854e23801ff8f1422e82be7d537902887b93546c189db9e1bac1085"
+        },
+        "original": {
+          "bytes": 367416,
+          "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-git-publication-20261005-01/closed.json",
+          "sha256": "c83744433854e23801ff8f1422e82be7d537902887b93546c189db9e1bac1085"
+        }
+      }
+    ],
+    "four_original_byte_clones_equal_before_after": true,
+    "map_pin": {
+      "bytes": 2526,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/captured-provenance/provenance-map.json",
+      "sha256": "d982a2855281debb7e314f93d5beeabb54081ab58efbbe33f756420aed061f53"
+    },
+    "nested_math_review_source_and_original_captured_descriptor_joins_verified": true,
+    "no_live_atomic_snapshot_claim": true
+  },
+  "publication_profile": {
+    "aggregate_decoded_work_max": 1073741824,
+    "complete_decoded_tar_max": 16777216,
+    "compressed_shard_max": 16777216,
+    "depth_max": 6,
+    "duplicate_verification_decoder_invocations": 0,
+    "member_readback_profile": "same_first_decoded_tar_and_member_streams@1",
+    "members_max": 10000,
+    "native_qualification_limits_changed": false,
+    "per_file_max": 14680064,
+    "raw_member_sum_per_shard_max": 14680064,
+    "raw_population_max": 268435456,
+    "shards_max": 64,
+    "wall_seconds": 180,
+    "zstd_args": [
+      "-T1",
+      "-3"
+    ]
+  },
+  "review_source": {
+    "bytes": 20729,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-input-review-20261005-01/review_inputs.py",
+    "sha256": "517a2b8a46547aa7a09b449ac2141e63967ef7499e01d492ec1c1a74fe8bcd97"
+  },
+  "review_work": {
+    "Git_or_remote_mutations": 0,
+    "S2_Q3_P4_writes": 0,
+    "method": "No-follow held-byte reads with fstat/path before-after identity, JSON wire/type comparison, source reads only",
+    "native_model_test_classifier_codec_jobs": 0,
+    "publication_helper_or_project_imports": 0
+  },
+  "schema": "ranker-convergence-publication-input-independent-file-review@1",
+  "scope": {
+    "archive_codec_classification_or_member_review_performed_here": false,
+    "completion_authority": false,
+    "execution_authority": false,
+    "full_task_satisfaction": "unknown",
+    "prior_HF_bundle_reuploaded": false,
+    "proof_authority": false,
+    "remote_publication_performed_here": false,
+    "source_drafts_promoted_to_native_qualification_here": false,
+    "whole_source_runtime_equivalence_proved": false
+  },
+  "selection": {
+    "P4_quiet_regular_files": 10,
+    "Q3_regular_files_including_seal_self": 379,
+    "Q3_sealed_regular_files": 378,
+    "aliases": 0,
+    "all_regular_Q3_files_selected": true,
+    "directories": 44,
+    "duplicate_selected_inodes": 0,
+    "exclusions": 0,
+    "explicit_additions": 13,
+    "explicit_additions_already_in_Q3": 1,
+    "regular_bytes": 147838468,
+    "regular_files": 401,
+    "whole_before_after_byte_stat_census_equal": true,
+    "whole_selection_json_wire_sha256": "e9efe585fc6d66911db46da5bd3354d81cad715fc2ceda40fa181338908f5f68",
+    "zero_byte_member_count": 13,
+    "zero_byte_members": [
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/resources.json.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata/exports/contracts.jsonl",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata/lake/owner.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata/owner.lock",
+      "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/resources.json.lock"
+    ]
+  },
+  "status": "passed_file_only_final_publication_input_review",
+  "typed_facts": {
+    "all_exact_json_wire_matches": true,
+    "count": 329,
+    "duplicates": 0,
+    "explicit_fact_document_roles": 14,
+    "native_roles": 9,
+    "observations": [
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "0b918943df0962bc7a1824c0555a389347b4febdc7cf9d1254406d80ce44e3f9",
+        "pointer": "/additive_metadata_payloads",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/all_owned_leases_drained",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/all_prior1080_regular_leaves_unchanged",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/atomic_whole_source_snapshot_claimed",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/contracts_and_vectors_payloads_unchanged",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "e601dcd0d0e0a6b6d90c397fe90d9300264beb33a15218d535ea2efb87545e77",
+        "pointer": "/created_at_utc",
+        "type": "string"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/geometric_original_exact_real_gap_rate_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/global_autoencoder_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/historical_execution_origin_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "pointer": "/inconclusive_native_lean_checks_retained",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/inherited_checker_scope_labels_are_not_a_source_semantics_or_full_pipeline_convergence_registry",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "e29c9c180c6279b0b02abd6a1801c7c04082cf486ec027aa13515e4f3884bb6b",
+        "pointer": "/metadata_family_count",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "392e98bd37203b489ec2d73030efddd156949035a1dffede8c328ad3e9a69c22",
+        "pointer": "/metadata_payloads",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/native_Float_optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+        "pointer": "/native_lean_calls",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/native_proof_and_metadata_limits_unchanged",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/new_autoencoder_fits",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/new_feature_preparations",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/new_gradient_evaluations",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/new_optimizer_updates",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/new_public_fits",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/new_ranker_training_trace_replays",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/official_benchmark_score",
+        "type": "null"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/original_exact_real_model_weights_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/original_exact_real_objective_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+        "pointer": "/owned_phase_count",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/prior4378_payloads_preserved_exactly_as_prefixes",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+        "pointer": "/qualified_positive_native_lean_checks",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "0b918943df0962bc7a1824c0555a389347b4febdc7cf9d1254406d80ce44e3f9",
+        "pointer": "/qualified_theorem_queries",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "de9587acc8e8a2faf91c01772f6c9b4a19a564a95744456270297c82c54efd6b",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+        "pointer": "/source_AST_function_count",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/strict_advisory_cache_entries_added",
+        "type": "integer"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/unique_original_exact_real_global_minimizer_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "qualified_review",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/whole_codebase_IR_semantic_preservation_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "0b918943df0962bc7a1824c0555a389347b4febdc7cf9d1254406d80ce44e3f9",
+        "pointer": "/additive_payload_rows",
+        "type": "integer"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/all_payload_rows_read_back_exactly",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/asymptotic_optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/behavioral_satisfaction",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/contracts_and_vectors_payloads_unchanged",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/formalization_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/fresh_process_readback_verified",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/global_autoencoder_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "e29c9c180c6279b0b02abd6a1801c7c04082cf486ec027aa13515e4f3884bb6b",
+        "pointer": "/metadata_family_count",
+        "type": "integer"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "392e98bd37203b489ec2d73030efddd156949035a1dffede8c328ad3e9a69c22",
+        "pointer": "/metadata_row_count",
+        "type": "integer"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/mutation_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "e29c9c180c6279b0b02abd6a1801c7c04082cf486ec027aa13515e4f3884bb6b",
+        "pointer": "/native_storage_family_cap_unchanged",
+        "type": "integer"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/omission_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/prior4378_payload_rows_preserved_exactly_as_prefixes",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "154cada3cd7ba43a5470b7aabdef154e95f7f73db075f30c10fb1e7e532d6177",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/semantic_alignment_verified",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/source_runtime_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/source_semantics_verified",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/strict_advisory_cache_entries_added_in_this_phase",
+        "type": "integer"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/whole_program_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "metadata_readback",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/fresh_process_readback/verified",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "6f64dab7252fe5a0efeac59bb371f451c77a10a5aa11b5a4a062dce64836d710",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "e1f54590639896fa753e6a1262b5dbd9f0cc2f69286e7d9d6229c0f88e1d4063",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "0a9acc0d59b08fba6ad35b4471129d0d82d09c3646a440a81358c0ad3e18c2b9",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "cdc933bc49fb4ba1cb8b281c57dc2637af63efb225b93d53c04273ca4e78a6c5",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "e7da81a4a377aa83d86b9a6b1781fe5654e69659759e3ead8a6bd8d0f5a27ab3",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "d5a3f48f93cb13dcb86800ef9adc93ef4f943b8f24b8f1c330d6780ca8504a9d",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "e041edb8086efeaa5b7aac435e4f284a45cb013adb91c22315e947f634072718",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "bbbba101f485a7e46295ad8e5acb5ddcb0c09503a98a1dd5b6232570171d0a89",
+        "pointer": "/reconstruction_validation",
+        "type": "object"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/axiom_report_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_gap_01",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "5a0e20712d6df8cfb66b3ce3830a4d82a168dc034a73bef7f3ac3e91f932c7f5",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "8210a42336421ad1b0b1770c3c167eb2fc40d627a90bddd2e77e512183067fa6",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "4c082e9f4fafae582a2357f7fc098afa344de5c170ec462a5c48d1644d4b5c89",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "aec48f53ccd7aba2e72c9f1deff58bb000d456e9027a4d22f2266558ba762a71",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "6a04af09e398ec83bcf1fdcd24cbbdcd0137975e5b239ebced670177a8ec1d15",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "0944a7bce98eed6862eb8d8e41bfffffbd780b5a026a9fd118aa7c4faebbaebd",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "5003d3ef85b3557e273f4532ae83530ec64d7f91816acfebe8311c0f35ec50de",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "09696eabcff8008736fe8622619ed13a09aad78a2fe21b12d805e5201e1ebb81",
+        "pointer": "/reconstruction_validation",
+        "type": "object"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/axiom_report_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_growth_01",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "b33e98425fb438586ae42a50776673828fad24c921392395edff5b9405c2bd6c",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "aad17ce6b0de49f90c9861b8d55d5cf533869b5701504634ce695e045ea60d98",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "d9adcd2ac27887eb419d661b646d2c7b78453bd7b79bbf5090430e4a0851ecbb",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "6c285cd5bdf7ac1e9601ac4731835561dbcdc1e4acaac01a5620a9cc7da314a7",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "690db09de204140fe94fdc5f8a42796682c28228e151f3fb24ac0f9ea02371eb",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/reconstruction_validation",
+        "type": "null"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "825384b4103484513e46d7edf1709d151b663f0e6538e8a0993f73a5c496b6fb",
+        "pointer": "/axiom_report_error",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_01",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "028425953bd00611a3a54a599f7d64bf3610480c9f2fb66a6ff12ae46fae17a6",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "1db04a7fbe63155599914dc6324ae050a2849f7062be4952d75c1c3d318ab24c",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "b955e2fe54704ed05ef6e9f93075bb18f4abb0e32fc21da90a7c58c1edcb07fc",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "edbe9043e8f2ac799f151bccf62e3d1aed4e8000bcb781cd565354962f8ba250",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "8b303684fed8a040a68cddd60746c91ae3e33fa8459316cdc0123108d047371f",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "de59d05eae14c684d943b5bb0395dcd9a56222fd83ddd1fe1bf67f85de43c7e9",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "cc6a8ec29118c0e6864ed0e2887da4e5138e7f4a7ac83982717fa5bfe0961a09",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "4c254146f4e922ad831d95802d20f9e1331400e5cf6ce36699f2bac1c02a60f1",
+        "pointer": "/reconstruction_validation",
+        "type": "object"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/axiom_report_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_minimizer_02",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "b33e98425fb438586ae42a50776673828fad24c921392395edff5b9405c2bd6c",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "43ada6ac394b7c892c463e5627cb5027b0fb3538ac2060f0dd1c4c6459ffadd2",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "7bfc88f49efbcaaf6f17ca0a32b69024905791e3e5f412062d9815a10732ec55",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "48219e476bc8673a789fc5796c2921ec2110b8fbd1db22f17530dd15ef3cb1e6",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "179fb0bcb0ccea1de41d18ec3f2cbcc92fd0b7eb85e45b45a1a600d6dddf2c15",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/reconstruction_validation",
+        "type": "null"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "296f29a7fa5a06cbf68ce84a478ac7c7f296ad43d01df619abd995b33082ea2d",
+        "pointer": "/axiom_report_error",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_01",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "a120ab9832d55b73784bad221c8790ae44c2ff218557074e1cac3b269357a738",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "cfae88bf020bfdf570a349a0a1517d3f96fded6f0b071c4c487fb692dc6c68b0",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "6b5830c92dbdca2a9e3bb80541d9c78d91afbc7af85d22ee9e5cbd44b0cded83",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "07d7a1ce51d03c48477f3dc479ac8181ba46aca87073e875d09a08599db62243",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "ddce18b28372bbe3d028e559f78e5592a13bf99db807ca6acf2707742212396d",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "54df1c414d31ede889d9ff8575912dadde9b21e0d14334ae31db05e36d167c07",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "30562e93f6842a149ebc7cc382f57df16ad8b56a5ac7562b3d6feaf04861b2e8",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "216f7ea9dbbd2ee90ab5dae8a533da78a577f6369b1853cf86922464719dbfe0",
+        "pointer": "/reconstruction_validation",
+        "type": "object"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/axiom_report_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_original_convergence_02",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "6cc9b6a8daa593eb7cc06fabbb1be1b1e2353f134f47efbd89ba36fcba0ca447",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "d7fe4a55ce9aa9dc7d72d1d9fc5196e9fda7e98e0aa3390b672ed7545247409a",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "6a314b65ea3fafd878a3d7c3a22cc7b7b92bcd6de1f4a02b0be81d537cc6f3d0",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "108628a9b28a75b0afda800794d0c540dbb165f32178fd00c07bb2ba356fcf2c",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "2061c00e3785d91bd63b9103e9ca9e5db825451e514abab848328a5ff5372eb7",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "149d014597710ee22a6d896b6e2c056bed1273b3e3e94200db4e3f568ca00544",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "472dbf0ba653bf4504444e4be3a3980c61c0eaa9248e5790ede620ae60ef7ba5",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "fd532e219d201b61ca664263f00f350b6ccb87f4be42bdd89e1809cba9653087",
+        "pointer": "/reconstruction_validation",
+        "type": "object"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/axiom_report_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_pl_01",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "0c3e3f4946eca61b5fe23dd8d531e8e9101f635444bb3e5d9100c3952765b5f4",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "8eadee51286c020ef5b85364dff3725fc4c13069f66cfec2bc311cdb5ea572e0",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "4f7ab84f9964d3447535132f991a1f4578b169b54f638bf599350870d156d461",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "0a48c02e356b5b2880f4008ef808784e53513d4e26da1905c4fd87fbbe4744e4",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "5dde7dad34a6d760be98b2f68d84f73f7f93d960f5184ef085e83d26e3c170ac",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "acc95a767be0bfd9594fad807f44808375a26ee50f98e0f720ae106cccbf324a",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "22aebbf5f405d5809ce2078014051353ba594975c88b883326c2c4eb72d26583",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "93b4a095bfbd81a19c7298f27cbf58492e6957e66ea88e7ebe8610616a67b336",
+        "pointer": "/reconstruction_validation",
+        "type": "object"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/axiom_report_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_stable_factor_01",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "cd11f5afc431108344ec51401ac1ce546f11f23285d3f811d255c1fb54741b55",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "559532ad927252eed5d9b6687d55203a96b956d822055f4570f196a93a42bece",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "94669c590bd3450a32bfc9042a1d737defca0fbb7d302728ad1361e5823bfa6f",
+        "pointer": "/native_bounds",
+        "type": "object"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/expected_success",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/matches_expectation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "pointer": "/returncode",
+        "type": "integer"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+        "pointer": "/native_lean_invocations",
+        "type": "integer"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "6430dcfe2482f16753e67260375178e29b8fa5e32771ed1255ee0afa90d51766",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "bfb879a1d4e788a7a0f98a566565a692c371577139bd75bfb53f5edfcaf0728a",
+        "pointer": "/augmented_source",
+        "type": "object"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "2bae5f53fa106e67ee914992792ceb4e5448622d58f9f93f9b5599c6a4dacb18",
+        "pointer": "/environment_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "2ff6e9f10141cbe3d2322996ba6fc75d6ff2a1e12e6e02b046b675157503fbdf",
+        "pointer": "/theorem_axiom_output",
+        "type": "array"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "b057e9473c2f174bdac288c80c99137ef588588bb2206ad64278b10f30c4fbf8",
+        "pointer": "/compiled_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "fa1db7b1af1afc2c386caac0350728dde5c252356e91363291f93fdf0cd835a7",
+        "pointer": "/retained_chunk_artifacts",
+        "type": "array"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "cd833ed651847692a8a77650abfe08aec5eb6b00850f2133fc575001458f03bf",
+        "pointer": "/retention_manifest",
+        "type": "object"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "0199fe1fc378969f18e7b35674573393d016771ffa942cd45b4b874b1187d4b5",
+        "pointer": "/reconstruction_validation",
+        "type": "object"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/axiom_report_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pointer": "/post_call_binding_error",
+        "type": "null"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/optimizer_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "lean_strong_lower_01",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      },
+      {
+        "document": "math_review",
+        "equal_json_wire_sha256": "24ce9f9abf3b099b3bcc01a29e68d35c2601f740a87f635d716500a0c380c1c8",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "math_review",
+        "equal_json_wire_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "pointer": "/issues",
+        "type": "array"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "1febdb1adfc70ac9f111d721f4d4c9413ec52a4035d2624110e1b229ff99e9d7",
+        "pointer": "/schema",
+        "type": "string"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fb3015e2db1785d6e5b6fb38f4c920599abd04c5b5a6290ec7b93d503e594a1f",
+        "pointer": "/status",
+        "type": "string"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "4d269a55ad0eb3f3e1fc8a1afb83448b88f90bdab59a9745bfef0c9aab0c18c1",
+        "pointer": "/source",
+        "type": "object"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+        "pointer": "/source_AST_shapes_matched",
+        "type": "boolean"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/source_interpreter_theorem_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/binary64_error_bound_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/python_ranker_source_equivalence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/global_autoencoder_convergence_proved",
+        "type": "boolean"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "eb8bf0d80db323992f6b634aab492b1e6d9e96a8e87a511c2a0db75ab929452c",
+        "pointer": "/full_task_satisfaction",
+        "type": "string"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/proof_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/execution_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/completion_authority",
+        "type": "boolean"
+      },
+      {
+        "document": "source_AST",
+        "equal_json_wire_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+        "pointer": "/planner_activation",
+        "type": "boolean"
+      },
+      {
+        "document": "next_obligations",
+        "equal_json_wire_sha256": "be0a10fd97364a8fcdbc5bee5360b8ef41f3693ffcef3804485a3b96c2b2ab65",
+        "pointer": "/all32_governing_RPI_exits",
+        "type": "string"
+      }
+    ],
+    "pinned_documents": 15,
+    "seal_document_checked_structurally": true,
+    "value_type_counts": {
+      "array": 28,
+      "boolean": 130,
+      "integer": 48,
+      "null": 19,
+      "object": 53,
+      "string": 51
+    }
+  }
+}

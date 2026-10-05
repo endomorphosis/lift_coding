@@ -1,0 +1,85 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1908,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-check-specification.json",
+      "sha256": "c2e9bd08876fb9b2829f8a234b6876ca7acc2bd24f25941ad9aa71868f8d0ead"
+    },
+    {
+      "bytes": 9953604,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/environment-manifest.json",
+      "sha256": "c215b52ae6a2e6f561fa0a53e4b26bd29e019961b12aa4f88779e850968fe6bc"
+    },
+    {
+      "bytes": 6517,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RealMinimizerV2.lean",
+      "sha256": "7a38abd3651b1cfab1c17d60789356f63189fa30ec9fe111d7872611f062ad73"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 30818,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-minimizer-02.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 417673,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v2.json",
+      "sha256": "829d2ec981840753eee2bcfc73965828cf6bb86ae8ca10387bfe9229dd7f3857"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1908,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-check-specification.json",
+      "sha256": "c2e9bd08876fb9b2829f8a234b6876ca7acc2bd24f25941ad9aa71868f8d0ead"
+    },
+    {
+      "bytes": 9953604,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/environment-manifest.json",
+      "sha256": "c215b52ae6a2e6f561fa0a53e4b26bd29e019961b12aa4f88779e850968fe6bc"
+    },
+    {
+      "bytes": 6517,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RealMinimizerV2.lean",
+      "sha256": "7a38abd3651b1cfab1c17d60789356f63189fa30ec9fe111d7872611f062ad73"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "mode": "lean-minimizer-02",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 417673,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v2.json",
+    "sha256": "829d2ec981840753eee2bcfc73965828cf6bb86ae8ca10387bfe9229dd7f3857"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T05:25:19.307760+00:00"
+}

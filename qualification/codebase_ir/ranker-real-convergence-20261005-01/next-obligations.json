@@ -1,0 +1,52 @@
+{
+  "schema": "ranker-real-convergence-next-obligations@1",
+  "qualified_mathematical_component": "Original fixed-data exact-real ranker weights and objective converge from every initial real vector to a unique global minimizer",
+  "obligations": [
+    {
+      "id": "SOURCE-MODEL",
+      "status": "OPEN",
+      "next": "Implement a typed, supported source semantics for the four pinned AST functions, rather than treating shape identification and manually specified real expressions as a translation theorem",
+      "acceptance": "A kernel-checked semantic preservation theorem binds exact source AST, corpus/feature cardinalities, operation evaluation order, validation branches and actual update recurrence; unsupported constructs are refused"
+    },
+    {
+      "id": "FLOAT-REFINEMENT",
+      "status": "OPEN",
+      "next": "Specify native binary64 and libm/fsum behavior over reachable finite iterates and derive perturbed descent with an explicit error floor",
+      "acceptance": "Checked source/toolchain-bound error estimates justify the native numerical claim; an infinite exact-real recurrence is not substituted for the finite native run"
+    },
+    {
+      "id": "PROOF-CACHE-EXTENSION",
+      "status": "OPEN",
+      "next": "Add typed convergence/source-projection evidence kinds to the strict advisory cache join only after independent schema and changed-query refusal controls",
+      "acceptance": "Complete actual source, environment, corpus, coefficient, profile, theorem and artifact identities match; unknown or stale evidence is refused; no metadata row alone grants authority"
+    },
+    {
+      "id": "IR-SEMANTIC-FIDELITY",
+      "status": "OPEN",
+      "next": "Bind intent_IR obligations to supported repository AST/graph/vector/contracts projections through typed semantics-preserving logic-family interfaces",
+      "acceptance": "Each accepted logic projection carries an independently checked preservation obligation; autoencoder and embedding proposals remain candidates"
+    },
+    {
+      "id": "TASK-SATISFACTION",
+      "status": "OPEN",
+      "next": "Run the real supervisor prompt-to-intent-to-codebase-match-to-symbolic-plan path against independently specified Terminal Bench task validators",
+      "acceptance": "Actual task executions satisfy all canonical intent requirements and benchmark validators with complete split/source/environment provenance"
+    },
+    {
+      "id": "ON-THE-FLY-AUTOENCODER",
+      "status": "OPEN",
+      "next": "Train bounded repository-specific codebase IR with held-out behavioral/formal-obligation validation and hash-based invalidation",
+      "acceptance": "Empirical training and formal preservation evidence are retained separately; this convex ranker theorem does not prove a nonconvex autoencoder convergence claim"
+    }
+  ],
+  "all32_governing_RPI_exits": "OPEN",
+  "python_ranker_source_equivalence_proved": false,
+  "binary64_error_bound_proved": false,
+  "global_autoencoder_convergence_proved": false,
+  "full_task_satisfaction": "unknown",
+  "official_benchmark_score": null,
+  "proof_authority": false,
+  "execution_authority": false,
+  "completion_authority": false,
+  "planner_activation": false
+}

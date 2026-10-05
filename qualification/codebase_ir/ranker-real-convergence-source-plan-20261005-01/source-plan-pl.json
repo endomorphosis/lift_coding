@@ -1,0 +1,73 @@
+{
+  "schema": "ranker-real-pl-source-plan@1",
+  "status": "source_only_uncompiled_unqualified",
+  "draft": "drafts/RealPL.lean",
+  "prior_source_plan_and_strong_lower_draft_mutated": false,
+  "native_calls_in_this_draft_phase": 0,
+  "training_fit_test_import_calls_in_this_draft_phase": 0,
+  "git_hf_operations_in_this_draft_phase": 0,
+  "qualified_theorems_added_in_this_draft_phase": 0,
+  "dependency": "RealStrongLower must be independently qualified, captured, retained and registered before this draft is checked.",
+  "proof_chain": [
+    {
+      "name": "RankerRealCurvature.squared_gradient_completion_nonneg",
+      "statement": "0 <= squaredEuclideanNorm g + 2*mu*dot g v + mu^2*squaredEuclideanNorm v",
+      "premises": "No positivity assumption on mu; g and v are arbitrary finite real coordinate vectors.",
+      "method": "The expression equals squaredEuclideanNorm (fun j => g j + mu*v j). Expand finite sums coordinatewise by ring algebra and use the existing sum-of-squares nonnegativity theorem."
+    },
+    {
+      "name": "RankerRealCurvature.realObjective_scaled_gradient_domination",
+      "statement": "2*mu*(realObjective mu differences w - realObjective mu differences z) <= squaredEuclideanNorm (realCoordinateGradient mu differences w)",
+      "premises": "n>0, mu>0, arbitrary differences,w,z. No minimizer or desired domination inequality is a premise.",
+      "method": "Multiply the actual realObjective_lower_between inequality by nonnegative 2*mu. Complete squares at g=realCoordinateGradient mu differences w and v=z-w. Real arithmetic combines the two independently derived inequalities."
+    },
+    {
+      "name": "RankerRealCurvature.realObjective_gradient_domination",
+      "statement": "realObjective mu differences w - realObjective mu differences z <= squaredEuclideanNorm (realCoordinateGradient mu differences w)/(2*mu)",
+      "premises": "Same primitive premises as the scaled theorem.",
+      "method": "Divide the proved scaled inequality by positive 2*mu."
+    },
+    {
+      "name": "RankerRealCurvature.originalReal_scaled_gradient_domination",
+      "statement": "2*originalRealMu*(F w-F z) <= squaredEuclideanNorm(g w)",
+      "premises": "Arbitrary original Fin 80 real-coordinate w,z; all data and scalars are the already joined original real profile.",
+      "method": "Specialize generic scaled domination with n=4 and originalReal_mu_pos."
+    },
+    {
+      "name": "RankerRealCurvature.originalReal_gradient_domination",
+      "statement": "F w-F z <= squaredEuclideanNorm(g w)/(2*originalRealMu)",
+      "premises": "Arbitrary original Fin 80 real-coordinate w,z.",
+      "method": "Specialize generic divided domination with n=4 and originalReal_mu_pos."
+    }
+  ],
+  "noncircularity": {
+    "minimizer_existence_assumed": false,
+    "gradient_at_minimizer_zero_assumed": false,
+    "pl_inequality_assumed": false,
+    "gap_contraction_assumed": false,
+    "convergence_assumed": false,
+    "use_after_actual_minimizer_exists": "Instantiate z with the independently proved global minimizer. The upper PL bound already holds for every z; minimizer existence provides an actual z and nonnegativity of the objective gap."
+  },
+  "next_isolated_acceptance_step": {
+    "action": "After the independent RealStrongLower qualification is accepted, freeze RealPL.lean in a new owned producer phase and register RealStrongLower plus its nine original local dependencies.",
+    "local_registered_module_count": 10,
+    "wall_seconds": 20,
+    "cpu_seconds": 20,
+    "per_file_capture_bytes": 65536,
+    "max_source_bytes": 262144,
+    "workspace_bytes": 16777216,
+    "axiom_queries": [
+      "RankerRealCurvature.squared_gradient_completion_nonneg",
+      "RankerRealCurvature.realObjective_scaled_gradient_domination",
+      "RankerRealCurvature.realObjective_gradient_domination",
+      "RankerRealCurvature.originalReal_scaled_gradient_domination",
+      "RankerRealCurvature.originalReal_gradient_domination"
+    ],
+    "acceptance": "Native successful elaboration, exact source and dependency pins, complete retained compiled objects through established bounded chunks, accepted reconstruction, and queried axioms within the allowed standard set. Preserve inconclusive or rejected attempts. No check is run by this draft phase."
+  },
+  "scope_limits": {
+    "minimizer_exists_or_unique_proved_here": false,
+    "contraction_or_iteration_convergence_proved_here": false,
+    "binary64_or_python_source_runtime_equivalence_proved_here": false
+  }
+}

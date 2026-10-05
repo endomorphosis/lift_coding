@@ -1,0 +1,37 @@
+{
+  "schema": "ranker-convergence-publication-plan@1",
+  "status": "source_template_not_ready_for_execution",
+  "source_and_artifacts_quiet": false,
+  "source_plan_quiet": false,
+  "scope_root": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01",
+  "source_plan_root": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01",
+  "seal_schema": null,
+  "review_schema": null,
+  "documents": {
+    "file_seal": null,
+    "qualified_review": null
+  },
+  "semantic_policy": null,
+  "native_checks": [],
+  "excluded_dependency_subtrees": [],
+  "explicit_additions": [],
+  "external_dependencies": {},
+  "prior_HF_commit": "8b7b8c896749e0ca3884114cedbed782a88f4702",
+  "old_HF_bundle_reuploaded": false,
+  "publication_profile": {
+    "raw_population_max": 268435456,
+    "raw_member_sum_per_shard_max": 14680064,
+    "per_file_max": 14680064,
+    "complete_decoded_tar_max": 16777216,
+    "compressed_shard_max": 16777216,
+    "aggregate_decoded_work_max": 1073741824,
+    "wall_seconds": 180,
+    "members_max": 10000,
+    "depth_max": 6,
+    "shards_max": 64,
+    "zstd_args": ["-T1", "-3"],
+    "duplicate_verification_decoder_invocations": 0,
+    "member_readback_profile": "same_first_decoded_tar_and_member_streams@1",
+    "native_qualification_limits_changed": false
+  }
+}

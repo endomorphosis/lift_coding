@@ -1,0 +1,93 @@
+{
+  "schema": "ranker-real-gap-contraction-source-plan@1",
+  "status": "source_only_uncompiled_unqualified",
+  "draft": "drafts/RealGapContraction.lean",
+  "prior_drafts_and_plans_mutated": false,
+  "native_calls_in_this_draft_phase": 0,
+  "training_fit_test_import_calls_in_this_draft_phase": 0,
+  "git_hf_operations_in_this_draft_phase": 0,
+  "qualified_theorems_added_in_this_draft_phase": 0,
+  "imports": ["RealPL", "OriginalRealDescent", "Mathlib.Analysis.SpecificLimits.Basic"],
+  "qualified_dependency_receipts_reported_by_root": [
+    "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/check-result.json",
+    "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/check-result.json",
+    "qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-descent-01/check-result.json"
+  ],
+  "definitions": [
+    {"name": "RankerRealCurvature.originalRealRho", "meaning": "1-originalRealEta*originalRealMu"},
+    {"name": "RankerRealCurvature.originalRealGap", "meaning": "F w-F z for the fixed actual original exact-real objective"},
+    {"name": "RankerRealCurvature.originalRealIterate", "meaning": "W w0 0=w0; W w0 (k+1)=realGradientStep originalRealMu originalRealEta originalRealDifferences (W w0 k)"}
+  ],
+  "proof_chain": [
+    {
+      "name": "RankerRealCurvature.originalReal_mu_le_meanL",
+      "statement": "originalRealMu <= originalRealMeanL",
+      "method": "Use originalReal_meanL_exact and the nonnegative finite sum of squared original differences."
+    },
+    {
+      "name": "RankerRealCurvature.originalReal_rho_bounds",
+      "statement": "0<=originalRealRho and originalRealRho<1",
+      "method": "mu<=meanL and eta>0 give eta*mu<=eta*meanL<=1. eta>0 and mu>0 give eta*mu>0. Subtract both proved bounds from 1."
+    },
+    {
+      "name": "RankerRealCurvature.originalReal_gap_contraction",
+      "statement": "originalRealGap (realGradientStep originalRealMu originalRealEta originalRealDifferences w) z <= originalRealRho*originalRealGap w z",
+      "premises": "Arbitrary original real coordinate points w,z. There is no minimizer or desired contraction premise.",
+      "method": "Multiply the qualified original scaled gradient domination by eta/2>=0. Combine with originalReal_safe_descent and real arithmetic. The statement is valid even before the gap is known to be nonnegative."
+    },
+    {
+      "name": "RankerRealCurvature.originalReal_iterate_gap_le",
+      "statement": "originalRealGap (originalRealIterate w0 k) z <= originalRealRho^k*originalRealGap w0 z",
+      "premises": "Arbitrary w0,z,k; no iteration-rate premise.",
+      "method": "Induct on the actual recursive exact-real sequence, using the derived pointwise contraction and proved rho>=0."
+    },
+    {
+      "name": "RankerRealCurvature.originalReal_iterate_gap_tendsto_zero",
+      "statement": "Tendsto (fun k => originalRealGap (originalRealIterate w0 k) z) atTop (nhds 0)",
+      "premises": "z is a genuine global minimizer: forall w, F z<=F w. This is supplied by a separate existence proof, not assumed as a convergence result.",
+      "method": "The true minimum gives gap>=0. The derived induction bound gives gap<=rho^k*gap0. Proved 0<=rho<1 implies rho^k tends to 0, and scalar squeeze yields the gap limit."
+    },
+    {
+      "name": "RankerRealCurvature.originalReal_iterate_objective_tendsto",
+      "statement": "Tendsto (fun k => F (originalRealIterate w0 k)) atTop (nhds (F z))",
+      "premises": "The same genuine global-minimum property of z.",
+      "method": "Add the constant F z to the derived zero gap limit and simplify the actual objective identity."
+    }
+  ],
+  "mathlib_source_declarations": [
+    {"file": "Mathlib/Analysis/SpecificLimits/Basic.lean", "line": 190, "name": "tendsto_pow_atTop_nhds_zero_of_lt_one", "role": "Geometric powers tend to zero from the independently proved rho bounds."},
+    {"file": "Mathlib/Topology/Order/Basic.lean", "line": 231, "name": "tendsto_of_tendsto_of_tendsto_of_le_of_le", "role": "Scalar gap squeezed between zero and its geometric upper bound."}
+  ],
+  "noncircularity": {
+    "desired_contraction_assumed": false,
+    "desired_convergence_assumed": false,
+    "desired_iteration_rate_assumed": false,
+    "actual_minimizer_existence_proved_here": false,
+    "minimum_property_is_only_used_for_gap_nonnegativity": true
+  },
+  "next_isolated_acceptance_step": {
+    "action": "Freeze this source into a new owned gap producer, register the exact retained qualified RealPL and OriginalRealDescent module closures, and native-check only this new module.",
+    "local_registered_module_count": 12,
+    "registered_local_modules": ["OriginalNumericCurvature", "LogisticCoefficient", "CoordinateGeometry", "LogisticCurvature", "ScalarSoftplus", "DirectionalObjective", "RealGradient", "RealDescent", "OriginalRealProfile", "OriginalRealDescent", "RealStrongLower", "RealPL"],
+    "wall_seconds": 20,
+    "cpu_seconds": 20,
+    "per_file_capture_bytes": 65536,
+    "max_source_bytes": 262144,
+    "workspace_bytes": 16777216,
+    "axiom_queries": [
+      "RankerRealCurvature.originalReal_mu_le_meanL",
+      "RankerRealCurvature.originalReal_rho_bounds",
+      "RankerRealCurvature.originalReal_gap_contraction",
+      "RankerRealCurvature.originalReal_iterate_gap_le",
+      "RankerRealCurvature.originalReal_iterate_gap_tendsto_zero",
+      "RankerRealCurvature.originalReal_iterate_objective_tendsto"
+    ],
+    "acceptance": "Actual successful elaboration, exact source and all registered dependency pins, complete retained compiled objects with bounded chunk reconstruction, accepted closure, and queried axioms within the allowed standard set. Preserve every rejected or inconclusive attempt. No native check is run in this draft phase."
+  },
+  "scope_limits": {
+    "minimizer_existence_or_uniqueness_proved_here": false,
+    "weight_vector_tendsto_proved_here": false,
+    "binary64_python_source_runtime_equivalence_proved_here": false,
+    "full_model_task_or_heldout_behavior_equivalence_proved_here": false
+  }
+}

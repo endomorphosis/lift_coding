@@ -1,0 +1,85 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1919,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-check-specification.json",
+      "sha256": "45af05aa9cacfe40e3df35773f5f3e5f90cba3788f150667b557090a473282bc"
+    },
+    {
+      "bytes": 9956051,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/environment-manifest.json",
+      "sha256": "5776c7956eabaae70ac0ee8ae2d7a3ff552454a36a5de4f7b00ae943a32ef75d"
+    },
+    {
+      "bytes": 6906,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RealMinimumGrowth.lean",
+      "sha256": "aa502dbba4fb11dab6ebbd6f3f16a2c58588753791bd64bf8333a8d398917b3c"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 30818,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-growth-01.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 417675,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v3.json",
+      "sha256": "1d7d6efb49bb951d0cf2470d8b93d79a73e25cbd42961624ca263ee40314e458"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 1919,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-check-specification.json",
+      "sha256": "45af05aa9cacfe40e3df35773f5f3e5f90cba3788f150667b557090a473282bc"
+    },
+    {
+      "bytes": 9956051,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/environment-manifest.json",
+      "sha256": "5776c7956eabaae70ac0ee8ae2d7a3ff552454a36a5de4f7b00ae943a32ef75d"
+    },
+    {
+      "bytes": 6906,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RealMinimumGrowth.lean",
+      "sha256": "aa502dbba4fb11dab6ebbd6f3f16a2c58588753791bd64bf8333a8d398917b3c"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 7845032,
+      "path": "/usr/bin/python3.12",
+      "sha256": "1a301bb1763139d48ae638d97b11edf56de6cd185e1b054eae6dc28c271c0c5f"
+    }
+  ],
+  "mode": "lean-growth-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 417675,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v3.json",
+    "sha256": "1d7d6efb49bb951d0cf2470d8b93d79a73e25cbd42961624ca263ee40314e458"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T05:31:35.260644+00:00"
+}
