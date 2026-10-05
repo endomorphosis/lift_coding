@@ -1,0 +1,377 @@
+{
+  "accepted": false,
+  "actual_runtime_counts": {
+    "actual_model_forward_calls": 1152,
+    "dimensional_restores": 3,
+    "embedded_parent_restores": 3,
+    "joint_additional_model_forward_calls": 0,
+    "joint_selection_calls": 1152,
+    "model_constructors": 9,
+    "optimizer_step_attempts": 0,
+    "optimizer_updates": 0,
+    "owner_decoder_calls": 36,
+    "source_row_decode_calls": 1152,
+    "wrapper_calls": 36
+  },
+  "aggregate": {
+    "changed_greedy_proposals": 0,
+    "greedy_proposals": 61,
+    "greedy_reason_counts": {
+      "copied_spans_overlap": 1091
+    },
+    "joint_proposals": 1099,
+    "joint_reason_counts": {
+      "no_complete_assignment_in_retained_candidates": 53
+    },
+    "lost_greedy_proposals": 0,
+    "policy_outcome_count": 2304,
+    "preserved_greedy_proposals": 61,
+    "request_count": 1152,
+    "rescued_greedy_overlap_abstentions": 1038,
+    "search_maxima": {
+      "maximum_attempted_expansions_per_row": 4368,
+      "maximum_retained_beam_size": 64,
+      "peak_feasible_expanded_state_count": 788
+    },
+    "search_totals": {
+      "attempted_expansion_count": 3974528,
+      "beam_boundary_tied_layers": 0,
+      "candidate_cutoff_tied_facets": 0,
+      "complete_retained_state_count": 67139,
+      "enumerated_candidate_spans": 1776543,
+      "incomplete_search_rows": 1152,
+      "overlap_rejected_expansion_count": 2848087,
+      "pruned_beam_state_count": 757746,
+      "pruned_candidate_count": 1681055,
+      "retained_candidate_spans": 95488,
+      "rows_with_beam_pruning": 1152,
+      "rows_with_candidate_pruning": 1152,
+      "rows_with_search": 1152
+    },
+    "transition_counts": {
+      "abstained->abstained": 53,
+      "abstained->proposal": 1038,
+      "decoded->proposal": 61
+    }
+  },
+  "conditioning_comparison": {
+    "disabled_raw": {
+      "greedy_proposals": 11,
+      "joint_proposals": 183,
+      "joint_proposals_per_seed": [
+        64,
+        56,
+        63
+      ],
+      "request_count": 192,
+      "vs_raw_changed_counts": {
+        "fixed_ambiguity": 0,
+        "fixed_modality": 22,
+        "fixed_presence": 11,
+        "greedy_canonical_ir": 3,
+        "greedy_facet_intervals": 10,
+        "greedy_reason": 1,
+        "greedy_status": 1,
+        "greedy_status_reason_ir": 3,
+        "joint_canonical_ir": 31,
+        "joint_reason": 0,
+        "joint_search_full_diagnostics": 192,
+        "joint_search_presence": 0,
+        "joint_search_pruning_diagnostics": 172,
+        "joint_search_status_reason": 0,
+        "joint_selected_spans": 16,
+        "joint_status": 0,
+        "joint_status_reason_ir": 31
+      }
+    },
+    "new_ae_reconstructed": {
+      "greedy_proposals": 10,
+      "joint_proposals": 183,
+      "joint_proposals_per_seed": [
+        64,
+        56,
+        63
+      ],
+      "request_count": 192,
+      "vs_raw_changed_counts": {
+        "fixed_ambiguity": 0,
+        "fixed_modality": 0,
+        "fixed_presence": 0,
+        "greedy_canonical_ir": 0,
+        "greedy_facet_intervals": 0,
+        "greedy_reason": 0,
+        "greedy_status": 0,
+        "greedy_status_reason_ir": 0,
+        "joint_canonical_ir": 0,
+        "joint_reason": 0,
+        "joint_search_full_diagnostics": 192,
+        "joint_search_presence": 0,
+        "joint_search_pruning_diagnostics": 3,
+        "joint_search_status_reason": 0,
+        "joint_selected_spans": 0,
+        "joint_status": 0,
+        "joint_status_reason_ir": 0
+      }
+    },
+    "pca_reconstructed": {
+      "greedy_proposals": 10,
+      "joint_proposals": 183,
+      "joint_proposals_per_seed": [
+        64,
+        56,
+        63
+      ],
+      "request_count": 192,
+      "vs_raw_changed_counts": {
+        "fixed_ambiguity": 0,
+        "fixed_modality": 0,
+        "fixed_presence": 0,
+        "greedy_canonical_ir": 0,
+        "greedy_facet_intervals": 0,
+        "greedy_reason": 0,
+        "greedy_status": 0,
+        "greedy_status_reason_ir": 0,
+        "joint_canonical_ir": 0,
+        "joint_reason": 0,
+        "joint_search_full_diagnostics": 179,
+        "joint_search_presence": 0,
+        "joint_search_pruning_diagnostics": 2,
+        "joint_search_status_reason": 0,
+        "joint_selected_spans": 0,
+        "joint_status": 0,
+        "joint_status_reason_ir": 0
+      }
+    },
+    "raw_source": {
+      "greedy_proposals": 10,
+      "joint_proposals": 183,
+      "joint_proposals_per_seed": [
+        64,
+        56,
+        63
+      ],
+      "request_count": 192,
+      "vs_raw_changed_counts": {
+        "fixed_ambiguity": 0,
+        "fixed_modality": 0,
+        "fixed_presence": 0,
+        "greedy_canonical_ir": 0,
+        "greedy_facet_intervals": 0,
+        "greedy_reason": 0,
+        "greedy_status": 0,
+        "greedy_status_reason_ir": 0,
+        "joint_canonical_ir": 0,
+        "joint_reason": 0,
+        "joint_search_full_diagnostics": 0,
+        "joint_search_presence": 0,
+        "joint_search_pruning_diagnostics": 0,
+        "joint_search_status_reason": 0,
+        "joint_selected_spans": 0,
+        "joint_status": 0,
+        "joint_status_reason_ir": 0
+      }
+    },
+    "rotated_raw": {
+      "greedy_proposals": 10,
+      "joint_proposals": 183,
+      "joint_proposals_per_seed": [
+        64,
+        56,
+        63
+      ],
+      "request_count": 192,
+      "vs_raw_changed_counts": {
+        "fixed_ambiguity": 0,
+        "fixed_modality": 1,
+        "fixed_presence": 0,
+        "greedy_canonical_ir": 0,
+        "greedy_facet_intervals": 0,
+        "greedy_reason": 0,
+        "greedy_status": 0,
+        "greedy_status_reason_ir": 0,
+        "joint_canonical_ir": 1,
+        "joint_reason": 0,
+        "joint_search_full_diagnostics": 192,
+        "joint_search_presence": 0,
+        "joint_search_pruning_diagnostics": 4,
+        "joint_search_status_reason": 0,
+        "joint_selected_spans": 0,
+        "joint_status": 0,
+        "joint_status_reason_ir": 1
+      }
+    },
+    "zero_raw": {
+      "greedy_proposals": 10,
+      "joint_proposals": 184,
+      "joint_proposals_per_seed": [
+        64,
+        57,
+        63
+      ],
+      "request_count": 192,
+      "vs_raw_changed_counts": {
+        "fixed_ambiguity": 0,
+        "fixed_modality": 17,
+        "fixed_presence": 9,
+        "greedy_canonical_ir": 3,
+        "greedy_facet_intervals": 6,
+        "greedy_reason": 2,
+        "greedy_status": 2,
+        "greedy_status_reason_ir": 3,
+        "joint_canonical_ir": 26,
+        "joint_reason": 1,
+        "joint_search_full_diagnostics": 192,
+        "joint_search_presence": 0,
+        "joint_search_pruning_diagnostics": 136,
+        "joint_search_status_reason": 1,
+        "joint_selected_spans": 14,
+        "joint_status": 1,
+        "joint_status_reason_ir": 26
+      }
+    }
+  },
+  "content_sha256": "dc3975dd0d056b8e0f732dc13218b92b27cef72b95209f7a2b7511f04491b056",
+  "engineering_validation_binding": {
+    "bytes": 4286,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/engineering-validation-01.json",
+    "sha256": "1c5997e4d0984c73f35a0fce772029091f24e2eb2bac37c57707e9ad0b83d7c8"
+  },
+  "git_publication_policy": "Overlay only explicit source/scalar/ledger/doc files on exact current origin/main; preserve every other blob, mode and Gitlink; ordinary fast-forward push with active hooks.",
+  "huggingface_upload_needed_for_this_round": false,
+  "independent_audit": {
+    "audit_model_calls": 0,
+    "checked_file_count": 142,
+    "policy_outcomes_checked": 2304,
+    "public_results_checked": true
+  },
+  "independent_semantic_review_completed": false,
+  "input_bindings": {
+    "audit": {
+      "bytes": 425989,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/independent-audit-01.json",
+      "sha256": "da298d60692580e8afcd07e7d14eb28c71b8b3e98494387e579f337b31764372"
+    },
+    "batch": {
+      "bytes": 2989,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run-01/batch-report.json",
+      "sha256": "c1b0891e9bdc8649615a522a6f6aa7004ae84b8668e38fdd8f1fd5ae150d501d"
+    },
+    "plan": {
+      "bytes": 16555,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run-plan-02.json",
+      "sha256": "7503d736aa53f62961487c3354974b384f21a20ae70311a779456b68edc61e68"
+    },
+    "summary": {
+      "bytes": 392135,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+      "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851"
+    }
+  },
+  "limitations": [
+    "Structural proposal coverage and valid copied grammar do not establish law fidelity, actor/modality binding or legal correctness.",
+    "PCA and AE reconstruction values retain full768 width; no lower-width latent capacity, storage/latency gain or matched conditioner training is measured.",
+    "PCA is applied to embeddings of source text; the span decoder still reads the actual source tokens and generates copied-rule IR.",
+    "All64 sources are exposed authored examples with component reuse; TRAIN/DEV label the reconstruction split and do not establish an independent historical decoder holdout.",
+    "Joint selection is approximate: top16 candidates and beam64 may remove feasible/correct/global-best assignments; survivor margin is uncalibrated.",
+    "Presence/modality remain native fixed decisions and may be wrong; no optional facet dropping, greedy fallback or new role-binding policy.",
+    "Single-rule copied spans cannot represent general quantified or multi-rule laws; broad family pilot remains separately gated.",
+    "No8D/384D matched conditioner decoder and no Leanstral embeddings/generation are executed here.",
+    "Selected source/provider entrypoints are not complete binary attestation or an OS sandbox."
+  ],
+  "new_model_weights": false,
+  "proof_authority": false,
+  "public_batch_copy_binding": {
+    "bytes": 2989,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/batch-report-01.json",
+    "sha256": "c1b0891e9bdc8649615a522a6f6aa7004ae84b8668e38fdd8f1fd5ae150d501d"
+  },
+  "public_ledger_bindings": [
+    {
+      "ledger_binding": {
+        "bytes": 4104858,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/seed1729-ledger-01.json",
+        "sha256": "2878b48ae86415ebb8c7a53a2f9bdf634a2850f399c18f1e021e07de91b16a2b"
+      },
+      "seed": 1729
+    },
+    {
+      "ledger_binding": {
+        "bytes": 3931666,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/seed1730-ledger-01.json",
+        "sha256": "953757f09cfe0cd8724234e5bf74aef9672aab1b4264ed7c288e49c95a05ab7a"
+      },
+      "seed": 1730
+    },
+    {
+      "ledger_binding": {
+        "bytes": 4080246,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/seed1731-ledger-01.json",
+        "sha256": "a58b28eb69946089a6518023229792e5720274f0bd1177363cf8641cc52ec35f"
+      },
+      "seed": 1731
+    }
+  ],
+  "public_worker_report_copies": [
+    {
+      "original_binding": {
+        "bytes": 45901,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run-01/seed1729/worker/joint-conditioning-report.json",
+        "sha256": "844337fe27a852348d3bdc5deae3305794986949505ea25ef6ed9b56ce2b72e1"
+      },
+      "public_copy_binding": {
+        "bytes": 45901,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/seed1729-worker-report-01.json",
+        "sha256": "844337fe27a852348d3bdc5deae3305794986949505ea25ef6ed9b56ce2b72e1"
+      },
+      "seed": 1729
+    },
+    {
+      "original_binding": {
+        "bytes": 45992,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run-01/seed1730/worker/joint-conditioning-report.json",
+        "sha256": "c29baf5086d613a381957e0d85131c0ef9e6f559dffd7c134fefdd8c68a54142"
+      },
+      "public_copy_binding": {
+        "bytes": 45992,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/seed1730-worker-report-01.json",
+        "sha256": "c29baf5086d613a381957e0d85131c0ef9e6f559dffd7c134fefdd8c68a54142"
+      },
+      "seed": 1730
+    },
+    {
+      "original_binding": {
+        "bytes": 46334,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run-01/seed1731/worker/joint-conditioning-report.json",
+        "sha256": "fb715ba09fa8f0d7670d5202a0cfc35958e5da8167a66351fad5c59bf089df20"
+      },
+      "public_copy_binding": {
+        "bytes": 46334,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/seed1731-worker-report-01.json",
+        "sha256": "fb715ba09fa8f0d7670d5202a0cfc35958e5da8167a66351fad5c59bf089df20"
+      },
+      "seed": 1731
+    }
+  ],
+  "qualified": false,
+  "resources": {
+    "compression_latency_gain_measured": false,
+    "maximum_worker_peak_rss_kib": 774896,
+    "parent_wall_seconds_total": 22.44337449298473,
+    "per_condition_performance_measured": false,
+    "scope": "Current native model/head capture plus both span selection policies; excludes upstream encoding/vector-bank creation/prior fitting/independent audits.",
+    "worker_cpu_seconds_total": 20.456592,
+    "worker_wall_seconds_total": 20.664672924001934
+  },
+  "schema": "joint-conditioning-continuation-evidence/v1",
+  "semantic_accuracy_measured": false,
+  "semantic_masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "source_fidelity_established": false,
+  "status": "completed_experiment_publication_recorded_separately",
+  "training_executed": false
+}

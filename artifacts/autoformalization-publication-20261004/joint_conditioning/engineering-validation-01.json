@@ -1,0 +1,83 @@
+{
+  "accepted": false,
+  "content_sha256": "f660d4c3bee674ae694a02260da2368e32f4b193fa7ba23891a09ccb1020a531",
+  "fixture_tests": {
+    "command": ".venv/bin/python -I -B -m unittest discover -s artifacts/autoformalization-publication-20261004/joint_conditioning -p 'test_*.py'",
+    "elapsed_seconds": 0.54,
+    "failed": 0,
+    "independent_auditor": 30,
+    "passed": 72,
+    "summary": 13,
+    "worker": 29
+  },
+  "plan_binding": {
+    "bytes": 16555,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run-plan-02.json",
+    "sha256": "7503d736aa53f62961487c3354974b384f21a20ae70311a779456b68edc61e68"
+  },
+  "proof_authority": false,
+  "ruff_command": ".venv/bin/ruff check artifacts/autoformalization-publication-20261004/joint_conditioning --exclude 'run-*'",
+  "ruff_passed": true,
+  "runtime_pins": {
+    "audit_joint_conditioning.py": {
+      "bytes": 55854,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/audit_joint_conditioning.py",
+      "sha256": "aab93a4a5ee4dbdaabe4758fe9f0727d3d6d0fea680fe27b024e2cb04ed4631e"
+    },
+    "evaluate_joint_conditioning.py": {
+      "bytes": 31075,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/evaluate_joint_conditioning.py",
+      "sha256": "de3fb2c61381c3c04f7bab63d34f3cac62bab50645dd32bd3a9eb127b335128b"
+    },
+    "record_joint_conditioning_evidence.py": {
+      "bytes": 6299,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/record_joint_conditioning_evidence.py",
+      "sha256": "14ff3a1de4225462003bf901f425e09e0c9f7d80690ca4b11164cf39c0096888"
+    },
+    "run_conditioning_batch.py": {
+      "bytes": 4342,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run_conditioning_batch.py",
+      "sha256": "94f4f9e16d7682cafee808a8008f13ea088489f60f5849310dd15b756459c8cc"
+    },
+    "run_conditioning_parent.py": {
+      "bytes": 6154,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run_conditioning_parent.py",
+      "sha256": "cfc65e1207e95b963d13c02cadcde89c7d031cfae60d9184e87e6b9cf880323f"
+    },
+    "summarize_joint_conditioning.py": {
+      "bytes": 30662,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/summarize_joint_conditioning.py",
+      "sha256": "0601728d66e0306120f5151bf498bfe791a19ca780e4e2d8de8db2a8bf7af33d"
+    },
+    "test_audit_joint_conditioning.py": {
+      "bytes": 12810,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/test_audit_joint_conditioning.py",
+      "sha256": "c6378c5214d1bf2b5951ce7865d29a12780ba218025191d38ebae5e2cc3f227e"
+    },
+    "test_evaluate_joint_conditioning.py": {
+      "bytes": 22056,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/test_evaluate_joint_conditioning.py",
+      "sha256": "cf362e7d45203d632393511c97d1a11d5befa49f7b3a7306408e77011d55ab23"
+    },
+    "test_summarize_joint_conditioning.py": {
+      "bytes": 9229,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/test_summarize_joint_conditioning.py",
+      "sha256": "7db8ee8a0564629ae23be50aaf73c71de9294059ea304194141fc63fdc150777"
+    }
+  },
+  "schema": "joint-conditioning-engineering-validation/v1",
+  "semantic_accuracy_measured": false,
+  "source_only_readiness": {
+    "model_calls": 0,
+    "previous_control_panels": 36,
+    "source_condition_seed_joins": 1152,
+    "target_calls": 0
+  },
+  "status": "passed",
+  "superseded_preexecution_plan_binding": {
+    "bytes": 16555,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/run-plan-01.json",
+    "sha256": "07df009ea62073f478df9fc74a06a8d92603440d9f7065cdae90bec94691f85b"
+  },
+  "superseded_reason": "Fixed-decision ambiguity may abstain before selection: forward/outcome denominator remains complete while selector-call count is conditional. Superseded before model execution."
+}
