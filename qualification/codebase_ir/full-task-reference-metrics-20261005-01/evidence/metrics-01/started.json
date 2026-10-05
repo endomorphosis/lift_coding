@@ -1,0 +1,108 @@
+{
+  "PlanCreate_calls": 0,
+  "actual_benchmark_instances_or_heldout_data_read": false,
+  "cleanup_errors": [],
+  "full_task_satisfaction": "unknown",
+  "model_convergence_proved": false,
+  "official_benchmark_score": null,
+  "optimizer_updates": 0,
+  "prover_calls": 0,
+  "resource_policy": {
+    "lane_reservations": {
+      "validation": {
+        "cpu_slots": 2,
+        "memory_mb": 0
+      }
+    },
+    "max_gpu_memory_percent": null,
+    "max_memory_percent": null,
+    "max_swap_percent": null,
+    "max_waiting_requests": 256,
+    "proof_backoff_seconds": 2.0,
+    "proof_cpu_stall_percent": 50.0,
+    "proof_io_stall_percent": 10.0,
+    "proof_memory_headroom_mb": 24922,
+    "proof_memory_stall_percent": 2.0,
+    "proof_recovery_enabled": false,
+    "proof_recovery_grants": 4,
+    "proof_recovery_interval_seconds": 0.25,
+    "proof_recovery_samples": 2,
+    "proof_resource_profile": null,
+    "proof_safety_enabled": true,
+    "require_known_gpu_for_gpu_work": true,
+    "reserved_gpu_memory_mb": 0,
+    "reserved_memory_mb": 0,
+    "total_child_process_slots": 16,
+    "total_cpu_slots": 16,
+    "total_gpu_memory_mb": null,
+    "total_memory_mb": 99688,
+    "total_unified_memory_mb": null
+  },
+  "root_lease": {
+    "acquired_at": 1791161315.8100533,
+    "cancelled": false,
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "gpu_memory_mb": 0,
+    "lane": "orchestration",
+    "lease_id": "311998f71d6442bdb34a50206bfd719d",
+    "memory_mb": 2048,
+    "owner_pid": 3503051,
+    "parent_lease_id": null,
+    "released": false,
+    "requires_gpu": false,
+    "unified_memory_mb": 0,
+    "wait_seconds": 1.1840020306408405e-06
+  },
+  "schema": "terminal-authored-reference-metrics-owned-attempt@1",
+  "selected_parent_tooling_before": [
+    {
+      "bytes": 56829,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    {
+      "bytes": 4434,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    {
+      "bytes": 78154,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/logic/backends/process.py",
+      "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+    },
+    {
+      "bytes": 957,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/__init__.py",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    {
+      "bytes": 69336,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    {
+      "bytes": 15543,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+      "sha256": "3655923785cb99409171caaba8c523354f03dbe8d82b6deb45a7b46db8394633"
+    },
+    {
+      "bytes": 109669,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "0887be4827a877438f793552a1ea43cb36815ceced96ee51df11690576a66e8c"
+    },
+    {
+      "bytes": 53075,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+      "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+    },
+    {
+      "bytes": 5845,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    }
+  ],
+  "selected_tooling_scope": "Observed parent Python source imports from published datasets checkout; no whole checkout, child, native library or all-loader census.",
+  "status": "started",
+  "training_calls": 0
+}

@@ -1,0 +1,44 @@
+{
+  "actual_benchmark_satisfaction_proved": false,
+  "compiled_artifacts": [],
+  "completion_authority": false,
+  "execution_authority": false,
+  "expected_success": false,
+  "finite_observed_values_only": true,
+  "matches_expectation": true,
+  "model_convergence_proved": false,
+  "proof_authority": false,
+  "run": {
+    "cancelled": false,
+    "command": [
+      "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/bin/lean",
+      "FalseReversedCostBound.lean"
+    ],
+    "elapsed_seconds": 0.35332122299587354,
+    "error": "",
+    "interface_version": "bounded-tool-runner/v1",
+    "output_files": {},
+    "output_truncated": false,
+    "pid": 3561688,
+    "process_tree_terminated": false,
+    "resource_exhausted": false,
+    "returncode": 1,
+    "runtime": "native",
+    "stderr": "",
+    "stdout": "'AuthoredReferenceMetricBounds.strict_b1_cost' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AuthoredReferenceMetricBounds.strict_b1_pad_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AuthoredReferenceMetricBounds.strict_b1_p95_latency_ms' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AuthoredReferenceMetricBounds.strict_b1_sequential_timecost' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AuthoredReferenceMetricBounds.strict_b2_cost' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AuthoredReferenceMetricBounds.strict_b2_pad_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AuthoredReferenceMetricBounds.strict_b2_p95_latency_ms' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AuthoredReferenceMetricBounds.strict_b2_sequential_timecost' depends on axioms: [propext, Classical.choice, Quot.sound]\nFalseReversedCostBound.lean:45:2: error: Tactic `decide` proved that the proposition\n  false = true\nis false\n",
+    "termination_reason": "nonzero_exit",
+    "timed_out": false,
+    "unavailable": false,
+    "workspace_cleaned": true,
+    "workspace_limit_exceeded": false
+  },
+  "schema": "terminal-authored-metric-finite-lean-check@1",
+  "source": {
+    "bytes": 3094,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/FalseReversedCostBound.lean",
+    "sha256": "85740c075dbdb35107e10f72dee5de79037d3fe298db50687b40e6325abfc8ce"
+  },
+  "status": "rejected",
+  "universal_cost_model_semantics_proved": false,
+  "whole_source_equivalence_proved": false
+}

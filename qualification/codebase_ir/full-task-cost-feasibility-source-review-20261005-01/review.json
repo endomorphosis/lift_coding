@@ -1,0 +1,165 @@
+{
+  "actual_benchmark_request_data_or_heldout_data_read": false,
+  "authored_fixture": {
+    "generation_lengths": "all1",
+    "identifiers": "globally unique model-b{bucket}-r{index:02d}",
+    "prompt_lengths_b1": [
+      64,
+      128,
+      192,
+      256,
+      320,
+      384,
+      448,
+      512
+    ],
+    "prompt_lengths_b2": [
+      576,
+      640,
+      704,
+      768,
+      832,
+      896,
+      960,
+      1024
+    ],
+    "real_tokens_b1": 2312,
+    "real_tokens_b2": 6408,
+    "request_count_per_bucket": 8,
+    "role": "Small authored structural regression case for independent-vs-global shape caps; not actual benchmark instances."
+  },
+  "cost_model_semantics": {
+    "batch_S_max_minus_individual_prompt_contributes_to_pad_tokens": false,
+    "batch_cost_overhead": 10000000,
+    "batch_latency_overhead_ms": 8,
+    "declared_shape_seq_align_contributes_to_pad_tokens": false,
+    "declared_shapes_use": "Compile cost and per-shape compilation latency in plan_metrics; separate shape-cap/coverage constraints must be validated elsewhere.",
+    "decode_cost_uses": "Batch maximum of actual align(prompt_len,g), generation bound G_max applied to every request.",
+    "granularity_assumption": 64,
+    "granularity_assumption_basis": "Instruction ceil(prompt_len/64)*64; CostModel constructor itself is configurable. Evaluator configuration has not been read or executed in this audit.",
+    "p95_method": "Sorted latency index ceil(.95*N)-1 with bounds; for N=8 this is maximum.",
+    "pad_decode_formula": "sum(batch_G_max-gen_len for each request)",
+    "pad_prefill_formula": "sum(align(prompt_len,g)-prompt_len for each request)",
+    "pad_ratio_formula": "total(pad_prefill+pad_decode)/max(1,total(prompt_len+gen_len))",
+    "prefill_cost_uses": "Each request individual align(prompt_len,g), not declared shape.seq_align or common batch S_max.",
+    "sequential_timecost_method": "Sum of maximum latency within each batch after overhead and shape compilation.",
+    "shape_compilation_latency_ms": 1500,
+    "source_lines": {
+      "batch_metrics": "85-121",
+      "final_ratios_and_percentile": "186-188",
+      "sequential_and_percentile": "191-225",
+      "shape_compile_and_overhead": "154-179"
+    }
+  },
+  "formal_feasibility_proof": false,
+  "full_task_satisfaction": "unknown",
+  "infeasibility_hypothesis": {
+    "counterfinding": "At g=64 all prompts already align, and all generation lengths equal1, so both padding sums are0 regardless of batch grouping. The 127.16/961.2 padding allowances impose no representative-count lower bound for this fixture under current model.",
+    "rejected_assumption": "Representative seq_align minus each prompt contributes to reported padding.",
+    "status": "Not supported by actual pad_ratio formula."
+  },
+  "model_training_calls": 0,
+  "native_checker_invocations": 0,
+  "native_cost_model_invocations": 0,
+  "next_stage_proposal": [
+    "Create a new bounded native public-cost experiment on the same authored fixtures and pinned reference source, leaving all historical evidence and false authority defaults unchanged.",
+    "Explicitly instantiate the pinned public CostModel with granularity64 and default CostConsts in an isolated copy; record configuration, sources, inputs, outputs, real resource admission, cleanup and all failures.",
+    "For each bucket record actual cost, pad_tokens, real_tokens, pad_ratio, p95 and sequential timecost; separately record exact-once coverage, batch shape consistency, global8-shape cap and unchanged input byte hashes.",
+    "Compare actual results against these source-derived predictions and all written thresholds, preserving a scoped authored-fixture result rather than an official benchmark score.",
+    "Add new scoped performance-contract/cost-model formula provenance to the proof index; keep intended common-shape padding distinct from the actual model padding formula.",
+    "Evaluate actual benchmark instances only in a separately authorized evaluation scope; do not use a pass on this small structural fixture as evidence of full task satisfaction, heldout transfer or model convergence."
+  ],
+  "official_benchmark_score": null,
+  "prover_calls": 0,
+  "schema": "terminal-authored-batching-performance-feasibility-source-review@1",
+  "scope_limits": [
+    "Manual source review and documentation only; no execution of the cost model, planner, checker, optimizer or prover.",
+    "No old qualification/source files modified; all six sealed qualification roots remain unchanged.",
+    "Native cost model uses binary64 constants for latency; these rounded algebraic predictions do not certify its exact trace.",
+    "CostModel.plan_metrics itself does not enforce all task structural constraints; external checker behavior remains unreviewed.",
+    "No general padding lower-bound or infeasibility theorem is established."
+  ],
+  "source_derived_reference_witness": {
+    "batches_per_bucket": 4,
+    "comparison_from_instruction": "Metrics must be below thresholds; exact evaluator comparator has not been inspected. Predicted values are far below either strict or inclusive interpretations.",
+    "construction": "Global reference selects every second of the16 sorted aligned lengths, assigning adjacent pairs to one representative and separating generation lengths.",
+    "floating_point_trace_checked": false,
+    "global_unique_shapes": 8,
+    "interpretation": "Authored fixture appears feasible for all stated numerical metrics and structural constraints. This does not qualify full task satisfaction or actual benchmark performance.",
+    "observed_by_native_execution": false,
+    "per_bucket_metrics_method": "Manual algebra from pinned public source with default CostConsts and g=64; these are predictions, not recorded CostModel results.",
+    "predicted_b1": {
+      "batch_overhead_cost": 40000000,
+      "compile_cost": 256245760,
+      "cost": 313580032,
+      "decode_cost": 6225920,
+      "p95_latency_ms_approx": 6234.784,
+      "pad_ratio": 0,
+      "prefill_cost": 11108352,
+      "sequential_timecost_ms_approx": 16747.136
+    },
+    "predicted_b2": {
+      "batch_overhead_cost": 40000000,
+      "compile_cost": 1452670976,
+      "cost": 1548802560,
+      "decode_cost": 19333120,
+      "p95_latency_ms_approx": 13024.3136,
+      "pad_ratio": 0,
+      "prefill_cost": 36798464,
+      "sequential_timecost_ms_approx": 41388.672
+    },
+    "requests_per_batch": 2,
+    "shared_representatives": [
+      128,
+      256,
+      384,
+      512,
+      640,
+      768,
+      896,
+      1024
+    ],
+    "thresholds_b1": {
+      "cost": 300000000000,
+      "p95_latency_ms": 2100000,
+      "pad_ratio": 0.055,
+      "sequential_timecost_ms": 270000000
+    },
+    "thresholds_b2": {
+      "cost": 48000000000,
+      "p95_latency_ms": 210000,
+      "pad_ratio": 0.15,
+      "sequential_timecost_ms": 32000000
+    }
+  },
+  "source_pins": [
+    {
+      "bytes": 4365,
+      "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/llm-inference-batching-scheduler/instruction.md",
+      "sha256": "0817374767533fbf51bb93345ee1bba266263c216c6cc55c096e71b4a1d37dfc"
+    },
+    {
+      "bytes": 8096,
+      "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/llm-inference-batching-scheduler/environment/task_file/scripts/cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    },
+    {
+      "bytes": 5501,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_batching_contract_reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441"
+    },
+    {
+      "bytes": 6347,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-source-20261004-03/run_public_baseline_control.py",
+      "sha256": "b58dd0046aaf3359bc6952da90b15b61a401024fcb7f043b2615d9c6002eead7"
+    },
+    {
+      "bytes": 1538,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-source-20261004-03/input-manifest.json",
+      "sha256": "f73825ffa0162d7e5dcab84a2c758d196760e66e1dda33adb69ce9089e90b859"
+    }
+  ],
+  "source_pins_before_after_match": true,
+  "status": "source_review_complete_native_performance_evidence_absent",
+  "universal_source_equivalence_proved": false
+}

@@ -1,0 +1,241 @@
+{
+  "PlanCreate_calls": 0,
+  "actual_benchmark_instances_or_heldout_data_used": false,
+  "all_eight_strict_threshold_comparisons": [
+    {
+      "bucket": 1,
+      "comparison": "strictly_less_than",
+      "metric": "cost",
+      "observed_binary64": 313580032.0,
+      "passed": true,
+      "prediction_matches_observation": true,
+      "source_derived_prediction": 313580032,
+      "threshold_binary64": 300000000000.0
+    },
+    {
+      "bucket": 1,
+      "comparison": "strictly_less_than",
+      "metric": "pad_ratio",
+      "observed_binary64": 0.0,
+      "passed": true,
+      "prediction_matches_observation": true,
+      "source_derived_prediction": 0,
+      "threshold_binary64": 0.055
+    },
+    {
+      "bucket": 1,
+      "comparison": "strictly_less_than",
+      "metric": "p95_latency_ms",
+      "observed_binary64": 6234.784,
+      "passed": true,
+      "prediction_matches_observation": true,
+      "source_derived_prediction": 6234.784,
+      "threshold_binary64": 2100000.0
+    },
+    {
+      "bucket": 1,
+      "comparison": "strictly_less_than",
+      "metric": "sequential_timecost",
+      "observed_binary64": 16747.136,
+      "passed": true,
+      "prediction_matches_observation": true,
+      "source_derived_prediction": 16747.136,
+      "threshold_binary64": 270000000.0
+    },
+    {
+      "bucket": 2,
+      "comparison": "strictly_less_than",
+      "metric": "cost",
+      "observed_binary64": 1548802560.0,
+      "passed": true,
+      "prediction_matches_observation": true,
+      "source_derived_prediction": 1548802560,
+      "threshold_binary64": 48000000000.0
+    },
+    {
+      "bucket": 2,
+      "comparison": "strictly_less_than",
+      "metric": "pad_ratio",
+      "observed_binary64": 0.0,
+      "passed": true,
+      "prediction_matches_observation": true,
+      "source_derived_prediction": 0,
+      "threshold_binary64": 0.15
+    },
+    {
+      "bucket": 2,
+      "comparison": "strictly_less_than",
+      "metric": "p95_latency_ms",
+      "observed_binary64": 13024.3136,
+      "passed": true,
+      "prediction_matches_observation": true,
+      "source_derived_prediction": 13024.3136,
+      "threshold_binary64": 210000.0
+    },
+    {
+      "bucket": 2,
+      "comparison": "strictly_less_than",
+      "metric": "sequential_timecost",
+      "observed_binary64": 41388.672,
+      "passed": true,
+      "prediction_matches_observation": true,
+      "source_derived_prediction": 41388.672,
+      "threshold_binary64": 32000000.0
+    }
+  ],
+  "buckets": [
+    {
+      "batch_count": 4,
+      "bucket": 1,
+      "metrics": {
+        "cost": 313580032.0,
+        "latencies": [
+          2243.6416,
+          1161.4336,
+          3469.1648,
+          2419.7248,
+          4799.5456,
+          3782.873600000001,
+          6234.784,
+          5250.88
+        ],
+        "p95_latency_ms": 6234.784,
+        "pad_ratio": 0.0,
+        "pad_tokens": 0,
+        "real_tokens": 2312,
+        "sequential_timecost": 16747.136
+      }
+    },
+    {
+      "batch_count": 4,
+      "bucket": 2,
+      "metrics": {
+        "cost": 1548802560.0,
+        "latencies": [
+          13024.3136,
+          12171.4816,
+          7774.88,
+          6823.744,
+          9419.8336,
+          8501.4656,
+          11169.6448,
+          10284.0448
+        ],
+        "p95_latency_ms": 13024.3136,
+        "pad_ratio": 0.0,
+        "pad_tokens": 0,
+        "real_tokens": 6408,
+        "sequential_timecost": 41388.672
+      }
+    }
+  ],
+  "completion_authority": false,
+  "cost_constants": {
+    "Kbatch_overhead_cost": 10000000.0,
+    "Kd_attn": 1.0,
+    "Kd_mlp": 0.5,
+    "Kp_attn": 2.0,
+    "Kp_mlp": 1.0,
+    "Kshape_attn": 500.0,
+    "Kshape_mlp": 2.0,
+    "Tbatch_overhead_ms": 8.0,
+    "Td_attn": 0.0012,
+    "Td_mlp": 0.0006,
+    "Tp_attn": 0.002,
+    "Tp_mlp": 0.0015,
+    "Tshape_compile_ms": 1500.0
+  },
+  "default_activation": false,
+  "execution_authority": false,
+  "full_task_satisfaction": "unknown",
+  "global_unique_shapes": [
+    [
+      128,
+      32,
+      4096
+    ],
+    [
+      256,
+      32,
+      4096
+    ],
+    [
+      384,
+      32,
+      4096
+    ],
+    [
+      512,
+      32,
+      4096
+    ],
+    [
+      640,
+      32,
+      4096
+    ],
+    [
+      768,
+      32,
+      4096
+    ],
+    [
+      896,
+      32,
+      4096
+    ],
+    [
+      1024,
+      32,
+      4096
+    ]
+  ],
+  "granularity": 64,
+  "input_bytes_unchanged": true,
+  "input_hashes_after": {
+    "task_file/input_data/requests_bucket_1.jsonl": "59f779e03963f0f94a66ff19763e7a424fc6d0063cc4b3385a74763b23b41a46",
+    "task_file/input_data/requests_bucket_2.jsonl": "cfd0640d0c8535ced94c3b87467537dcf25c320f8ab02ebd63f9403ba4972f7b"
+  },
+  "input_hashes_before": {
+    "task_file/input_data/requests_bucket_1.jsonl": "59f779e03963f0f94a66ff19763e7a424fc6d0063cc4b3385a74763b23b41a46",
+    "task_file/input_data/requests_bucket_2.jsonl": "cfd0640d0c8535ced94c3b87467537dcf25c320f8ab02ebd63f9403ba4972f7b"
+  },
+  "model_convergence_proved": false,
+  "official_benchmark_score": null,
+  "optimizer_updates": 0,
+  "proof_authority": false,
+  "prover_calls": 0,
+  "schema": "terminal-authored-reference-native-cost-result@1",
+  "shared_representatives": [
+    128,
+    256,
+    384,
+    512,
+    640,
+    768,
+    896,
+    1024
+  ],
+  "source_pins_in_ephemeral_workspace": [
+    {
+      "bytes": 8096,
+      "path": "source/cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    },
+    {
+      "bytes": 5501,
+      "path": "source/reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441"
+    }
+  ],
+  "source_prediction_matches_observations": true,
+  "status": "passed_scoped_authored_fixture",
+  "structural_four_clauses": {
+    "aligned_and_covering_shapes": true,
+    "consistent_shape_within_each_batch": true,
+    "global_at_most_eight_shapes": true,
+    "included_exactly_once": true
+  },
+  "training_calls": 0,
+  "universal_source_equivalence_proved": false
+}

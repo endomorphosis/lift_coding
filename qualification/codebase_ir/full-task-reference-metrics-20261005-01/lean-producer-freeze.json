@@ -1,0 +1,34 @@
+{
+  "gates": [
+    2.0,
+    50.0,
+    10.0,
+    2.0
+  ],
+  "limits": {
+    "cpu_seconds": 20,
+    "max_output_bytes": 65536,
+    "max_workspace_bytes": 16777216,
+    "wall_seconds": 20
+  },
+  "no_old_source_or_qualification_changes": true,
+  "schema": "terminal-authored-finite-lean-producer-freeze@1",
+  "source_pins": [
+    {
+      "bytes": 7346,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_lean_owned.py",
+      "sha256": "5100cc271893ab2944501a6a887d9294f49fc40eca0685ebec76207c1cb34f9d"
+    },
+    {
+      "bytes": 2566,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_lean_outer.py",
+      "sha256": "bd089cdaabf08f1d3af306a5bba6c05a203de27c7261c2ce2f62eae9efdb86dc"
+    },
+    {
+      "bytes": 8388,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_owned.py",
+      "sha256": "1bf880dc0fb26e51639e0b3372bdc4f28a1187d740cdc3f9dcf9d76133c6e822"
+    }
+  ],
+  "syntax_ast": "passed"
+}

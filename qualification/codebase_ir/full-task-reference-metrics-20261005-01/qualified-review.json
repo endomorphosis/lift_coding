@@ -1,0 +1,168 @@
+{
+  "PlanCreate_calls": 0,
+  "RPI_macrocriteria": {
+    "open": 32,
+    "qualified": 0
+  },
+  "active_leases": 0,
+  "actual_benchmark_instances_or_heldout_data_read": false,
+  "admission_timeout_attempts": 0,
+  "all_failed_outer_attempts_preserved": true,
+  "asymptotic_optimizer_convergence_proved": false,
+  "autoencoder_convergence_proved": false,
+  "cleanup_errors": [],
+  "complete_olean_bytes": 29336,
+  "completion_authority": false,
+  "cost_model_semantics_theorem_proved": false,
+  "counter_scope_correction": {
+    "field": "prover_calls",
+    "historical_value": 0,
+    "meaning": "Copied outer wrapper placeholder does not count child prover calls. The exact owned receipt records2 native Lean invocations; selected native prover total is2. Historical receipt and producer are unchanged.",
+    "preserved_receipt": {
+      "bytes": 594,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/closed.json",
+      "sha256": "4a62063730599eea6ee6dab564f40c117809ba91f9ddd7df0d7f97bcc35d6521"
+    }
+  },
+  "default_activation": false,
+  "eight_strict_threshold_comparisons": "passed",
+  "exact_binary64_embedding": {
+    "bytes": 4656,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/embedding.json",
+    "sha256": "a2e5d0eaedefaced963ecb6bdee3749333928f7c6d7dda047ed63c01d5a43a7e"
+  },
+  "execution_authority": false,
+  "failed_outer_attempts": 0,
+  "false_control": "genuinely rejected reversedcostbound",
+  "file_seal": {
+    "bytes": 11006,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/file-seal.json",
+    "sha256": "0fa7ad8b1d232bc402450c89c8f3a02e0f165360413cadf42aa948c54d43a885"
+  },
+  "four_structural_clauses": "passed",
+  "full_task_satisfaction": "unknown",
+  "global_unique_shapes": 8,
+  "input_byte_frame": "passed",
+  "lean_standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "metric_worker_wall_CPU_seconds": 10,
+  "native_artifact_output_limit_bytes": 65536,
+  "native_checks": {
+    "complete_compiled_artifact": {
+      "bytes": 29336,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/ObservedMetricBounds.olean",
+      "sha256": "cbf88527529c19bed724a8114fc9ef10c1363762ac64e991b7429b6934dbc2aa"
+    },
+    "false_control": {
+      "bytes": 2464,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/FalseReversedCostBound.lean.check.json",
+      "sha256": "9d5a3e0ed004096d839c7e6e2623f22e9cb8d37035335ecb13d6c6fb5e7ebd0d"
+    },
+    "positive": {
+      "bytes": 151489,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/ObservedMetricBounds.lean.check.json",
+      "sha256": "f8da64a967d68d5fd58eecd31fcdbde61d6ef0fe9c14a2b2054379dc51bbd0b6"
+    }
+  },
+  "native_lean_calls": 2,
+  "native_lean_wall_CPU_seconds": 20,
+  "native_metric_worker_invocations": 1,
+  "native_metrics": {
+    "bytes": 5960,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/result.json",
+    "sha256": "747f990980aac1f0f1bb054914a18f5f3833bc6732e6714b98e59e2a4c099a98"
+  },
+  "native_metrics_b1": {
+    "cost": 313580032.0,
+    "latencies": [
+      2243.6416,
+      1161.4336,
+      3469.1648,
+      2419.7248,
+      4799.5456,
+      3782.873600000001,
+      6234.784,
+      5250.88
+    ],
+    "p95_latency_ms": 6234.784,
+    "pad_ratio": 0.0,
+    "pad_tokens": 0,
+    "real_tokens": 2312,
+    "sequential_timecost": 16747.136
+  },
+  "native_metrics_b2": {
+    "cost": 1548802560.0,
+    "latencies": [
+      13024.3136,
+      12171.4816,
+      7774.88,
+      6823.744,
+      9419.8336,
+      8501.4656,
+      11169.6448,
+      10284.0448
+    ],
+    "p95_latency_ms": 13024.3136,
+    "pad_ratio": 0.0,
+    "pad_tokens": 0,
+    "real_tokens": 6408,
+    "sequential_timecost": 41388.672
+  },
+  "native_public_plan_metrics_calls": 2,
+  "nested_owned_and_tool_timings_not_added": true,
+  "new_metadata_hydration_jobs": 0,
+  "next_stage": [
+    "Bind the full noarg scheduler caller and dependency semantics to the CodebaseIR before claiming universal source equivalence.",
+    "Evaluate broader authored request distributions with performance and frame constraints separately from actual benchmark instances.",
+    "Use official task evaluation only in a separate scope; preserve benchmark scoreunknown until observed.",
+    "Continue analytic Hessian/contraction and authenticated binary64 update-error obligations separately; these metric proofs give no training convergence theorem."
+  ],
+  "official_benchmark_score": null,
+  "optimizer_updates": 0,
+  "outer_attempts": [
+    {
+      "bytes": 579,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/closed.json",
+      "sha256": "cafbd30576bdbd5463a8ad547929707355a879a155f39d8eb9feee91d77c3ce0"
+    },
+    {
+      "bytes": 594,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/closed.json",
+      "sha256": "4a62063730599eea6ee6dab564f40c117809ba91f9ddd7df0d7f97bcc35d6521"
+    }
+  ],
+  "owned_lean": {
+    "bytes": 13082,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/closed.json",
+    "sha256": "11a83a1fb9e5607f21056c5e3d38f3ec32d7e412128ffc60f5fc2ebf6050eb85"
+  },
+  "owned_metrics": {
+    "bytes": 21011,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/closed.json",
+    "sha256": "1cd6a3e87540768e2388ea3adc2f36a75876b443e7812442337046e6afb68f5f"
+  },
+  "positive_lean_theorems": 8,
+  "proof_authority": false,
+  "qualification_scope": "This one authored structural regression fixture meets all written perbucket thresholds under pinned public CostModel(g=64, default constants), with8global shapes and unchanged inputs. Lean checks exact real embeddings of the observed finite binary64 metrics against exact embeddings of8threshold literals. Neither cost-model source semantics nor actual benchmark instances are proved.",
+  "schema": "terminal-authored-reference-performance-finite-qualification@1",
+  "selected_outer_elapsed_seconds": 7.207515327987494,
+  "selected_parent_tooling_before_after_counts": [
+    9,
+    9
+  ],
+  "selected_parent_tooling_pin_drift": 0,
+  "source_prediction_matches_native_metrics": true,
+  "source_review": {
+    "bytes": 8310,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-cost-feasibility-source-review-20261005-01/review.json",
+    "sha256": "9a5aa04746fa331dfd30be0fd37ecb91fcda5d304e64a6e10d4595a11de46505"
+  },
+  "status": "qualified_single_authored_source_execution_and_exact_metric_bounds",
+  "training_calls": 0,
+  "waiting_requests": 0,
+  "whole_source_equivalence_proved": false,
+  "whole_turn_wall_CPU_GPU_calendar_cost": null
+}

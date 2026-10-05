@@ -1,0 +1,49 @@
+{
+  "actual_benchmark_instances_or_heldout_data_read": false,
+  "files": [
+    {
+      "bytes": 5667,
+      "path": "control.py",
+      "sha256": "c1b05543202c25355e0a0bc0dbb7f5d4f10e2e22e75015abd123fb5870850050"
+    },
+    {
+      "bytes": 8096,
+      "path": "source/cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    },
+    {
+      "bytes": 5501,
+      "path": "source/reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441"
+    },
+    {
+      "bytes": 511,
+      "path": "task_file/input_data/requests_bucket_1.jsonl",
+      "sha256": "59f779e03963f0f94a66ff19763e7a424fc6d0063cc4b3385a74763b23b41a46"
+    },
+    {
+      "bytes": 513,
+      "path": "task_file/input_data/requests_bucket_2.jsonl",
+      "sha256": "cfd0640d0c8535ced94c3b87467537dcf25c320f8ab02ebd63f9403ba4972f7b"
+    }
+  ],
+  "fixture_used_for_training": false,
+  "original_source_pins": [
+    {
+      "bytes": 8096,
+      "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/llm-inference-batching-scheduler/environment/task_file/scripts/cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    },
+    {
+      "bytes": 5501,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_batching_contract_reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441"
+    },
+    {
+      "bytes": 5667,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/control.py",
+      "sha256": "c1b05543202c25355e0a0bc0dbb7f5d4f10e2e22e75015abd123fb5870850050"
+    }
+  ],
+  "schema": "terminal-authored-reference-metrics-inputs@1"
+}

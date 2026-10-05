@@ -1,0 +1,39 @@
+{
+  "actual_benchmark_instances_or_heldout_data_read": false,
+  "gates": [
+    2.0,
+    50.0,
+    10.0,
+    2.0
+  ],
+  "limits": {
+    "cpu_seconds": 10,
+    "max_output_bytes": 65536,
+    "max_workspace_bytes": 16777216,
+    "wall_seconds": 10
+  },
+  "producers": [
+    {
+      "bytes": 5667,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/control.py",
+      "sha256": "c1b05543202c25355e0a0bc0dbb7f5d4f10e2e22e75015abd123fb5870850050"
+    },
+    {
+      "bytes": 8388,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_owned.py",
+      "sha256": "1bf880dc0fb26e51639e0b3372bdc4f28a1187d740cdc3f9dcf9d76133c6e822"
+    },
+    {
+      "bytes": 2567,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_outer.py",
+      "sha256": "9cfd9361479d75f38386d04f3a87c09880990739f9ebf15ece1ab7fe398fe37c"
+    }
+  ],
+  "root_lease": {
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "memory_mb": 2048
+  },
+  "schema": "terminal-authored-reference-metrics-producer-freeze@1",
+  "syntax_ast": "passed"
+}

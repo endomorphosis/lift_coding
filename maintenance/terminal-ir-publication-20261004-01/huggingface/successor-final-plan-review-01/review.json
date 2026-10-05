@@ -1,0 +1,122 @@
+{
+  "actual_closed_bulk": {
+    "bytes": 2135,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/closed.json",
+    "sha256": "3810fc43a395468d83dd35a2afd0484f0843ad87c07f67c164b82c4e8501ef28"
+  },
+  "actual_file_only_review_elapsed_seconds": 0.06616760301403701,
+  "all32_governing_exits_open": true,
+  "all65_local_pins_exact_before_after": true,
+  "authored_case_review": {
+    "bytes": 7195,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/qualified-review.json",
+    "sha256": "e63564f7396e879ca24f8e022550265dfda97fe2add23238bc98ea17da0e5429"
+  },
+  "base_plan": {
+    "bytes": 11755,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/file-plan.json",
+    "sha256": "24e39c4b486f7c24f788cfd372fd121c0d8e469d8d74a0392a95b04bf7573941"
+  },
+  "derivation": {
+    "base_rows": 29,
+    "sole_replaced_binding": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-status.json",
+    "status_body_change": "Only publication_tooling appended.",
+    "tooling_bindings_added": 34,
+    "tooling_metadata_added": 2,
+    "tooling_metadata_leaves": [
+      "selection-manifest.json",
+      "selection-review.json"
+    ],
+    "unchanged_base_rows": 28
+  },
+  "exact_available_cached_credential_veto": true,
+  "expected_parent_commit": "e008f1ed73c642eb8ce33cec0bec52eac305ae28",
+  "file_count": 65,
+  "final_concrete_plan_approved_for_reviewed_publisher02": true,
+  "final_plan": {
+    "bytes": 25766,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/file-plan-with-tooling.json",
+    "sha256": "51189f505e55a7cdb5569631a8bce9a6c1b8df21910faec9a5237cc9a1b76372"
+  },
+  "frozen_scanner_classifier": {
+    "bytes": 35323,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classify_and_prepare_public_archive_07.py",
+    "sha256": "dd457cb927270f53617781de1f576d1de1fac76b86191d769f4f923fa966a1f8"
+  },
+  "frozen_scanner_helper": {
+    "bytes": 26475,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+    "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+  },
+  "full_task_satisfaction_proved": false,
+  "git_operations": 0,
+  "global_autoencoder_convergence_proved": false,
+  "native_SQL_model_optimizer_prover_jobs": 0,
+  "network_calls": 0,
+  "new_plan_and_status_bounded_scans": [
+    {
+      "binding": {
+        "bytes": 25766,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/file-plan-with-tooling.json",
+        "sha256": "51189f505e55a7cdb5569631a8bce9a6c1b8df21910faec9a5237cc9a1b76372"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 25766,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 13587,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/publication-status-with-tooling.json",
+        "sha256": "d2f9b652fcb6369047f14ad291bd7e0af1ea3a4b6e5f5bf6a6609f4bba3f01f3"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 13587,
+        "streams": 1
+      },
+      "scan_hits": []
+    }
+  ],
+  "official_benchmark_score": null,
+  "old_archive_or_source_controls_rerun": false,
+  "publication_status": {
+    "bytes": 13587,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/publication-status-with-tooling.json",
+    "sha256": "d2f9b652fcb6369047f14ad291bd7e0af1ea3a4b6e5f5bf6a6609f4bba3f01f3"
+  },
+  "publisher_operation_bound_checked": true,
+  "publisher_source": {
+    "bytes": 9568,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_successor_evidence_02.py",
+    "sha256": "670e064a8222ce1b0c962e202985974741a9a4476630b0541c7ec880b32009f2"
+  },
+  "release_card": {
+    "bytes": 2818,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/README.md",
+    "sha256": "5220bad35f4a275e3f44598ff004c8e534196bc7a0e4e085e233ec265a2bf72e"
+  },
+  "remaining_actual_publisher_obligations": [
+    "Fresh live parentCAS and unoccupied immutable namespaces.",
+    "Record actualcommit before verification; verify all65selectedremoteidentities and preserve all prior immutable files."
+  ],
+  "review_initial_assertion_correction": "Initial reviewer assumed manifest.json/review.json metadata leaves; concrete plan correctly uses selection-manifest.json/selection-review.json. No source, evidence or plan changes were needed.",
+  "schema": "terminal-successor-final-concrete-file-plan-review@1",
+  "scope": "Actual verified scoped archive, v1 source/model qualification, v2 single authored16request performance/8finite exact metric bounds and34tooling files. No actualbenchmark, whole-source or convergence qualification.",
+  "selected_bytes": 13600880,
+  "status": "PASS",
+  "tooling_manifest": {
+    "bytes": 23101,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-tooling-file-review-01/manifest.json",
+    "sha256": "33a3700727c188703295760f69e13676b3eebed6247a4eb5a81cc12c019f4fd2"
+  },
+  "tooling_review": {
+    "bytes": 16644,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-tooling-file-review-01/review.json",
+    "sha256": "34111a81d6a18b748e0c51185aeca77ba66f57b4808ca8a5195d02707febcdd0"
+  },
+  "unique_canonical_remote_paths": true,
+  "uploads": 0,
+  "whole_source_equivalence_proved": false
+}

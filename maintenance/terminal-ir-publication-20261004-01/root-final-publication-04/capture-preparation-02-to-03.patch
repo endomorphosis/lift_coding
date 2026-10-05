@@ -1,0 +1,100 @@
+--- capture_final_increment_02.py
++++ capture_final_increment_03.py
+@@ -18,7 +18,7 @@
+ 
+ def git(*args, cwd=BASE, data=None, private=False):
+     env = os.environ.copy()
+-    if private: env['GIT_INDEX_FILE'] = str(OUT / 'index-preparation-02')
++    if private: env['GIT_INDEX_FILE'] = str(OUT / 'index-preparation-03')
+     result = subprocess.run(['git', *args], cwd=cwd, env=env, input=data,
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+     if result.returncode:
+@@ -81,27 +81,46 @@
+         selected.add(path)
+ for name in ('publish_successor_evidence_01.py', 'publish_successor_evidence_02.py',
+              'prepare_successor_publication_01.py', 'prepare_successor_publication_02.py',
+-             'prepare_successor_publication_03.py'):
++             'prepare_successor_publication_03.py', 'prepare_successor_publication_04.py'):
+     selected.add(HF / name)
+ for name in ('successor-source-model-package-01', 'successor-source-model-package-02', 'successor-source-model-package-03',
+              'successor-publisher-source-review-01', 'successor-publisher-source-review-02',
+-             'successor-publisher-reader-controls-01', 'bulk-publication-01', 'bulk-publication-outer-01'):
++             'successor-publisher-reader-controls-01', 'bulk-publication-01', 'bulk-publication-outer-01',
++             'bulk-publication-02', 'bulk-publication-outer-02',
++             'successor-preparer-source-review-03', 'successor-preparer-source-review-04',
++             'successor-tooling-file-review-01'):
+     root = HF / name
+     for path in root.glob('*'):
+-        if path.is_file() and not path.is_symlink() and path.suffix in {'.json', '.py', '.log'} and path.stat().st_size <= LIMIT:
++        if path.is_file() and not path.is_symlink() and path.suffix in {'.json', '.py'} and path.stat().st_size <= LIMIT:
+             selected.add(path)
+ for path in (BASE / 'maintenance/terminal-ir-publication-20261004-01/root-source-model-03').glob('*.json'):
+     selected.add(path)
+ selected.add(OUT / 'capture_final_increment_01.py')
+ selected.add(OUT / 'capture_final_increment_02.py')
+-for name in ('selection-preparation-01.json', 'prepared-tree-01.json'):
++selected.add(OUT / 'capture_final_increment_03.py')
++for name in ('selection-preparation-01.json', 'prepared-tree-01.json',
++             'selection-preparation-02.json', 'prepared-tree-02.json'):
+     selected.add(OUT / name)
+ for name in ('successor-publication-preparation-01', 'successor-publication-preparation-02',
+-             'successor-publication-preparation-03'):
++             'successor-publication-preparation-03', 'successor-publication-preparation-04'):
+     root = HF / name
+-    for path in root.glob('*.md'):
+-        if path.stat().st_size <= LIMIT: selected.add(path)
++    for path in root.glob('*'):
++        if path.is_file() and path.suffix in {'.md', '.json'} and path.stat().st_size <= LIMIT: selected.add(path)
+ selected.add(HF / 'successor-source-model-package-03/package/manifest.json')
++bulk = json.loads((HF / 'bulk-publication-02/closed.json').read_bytes())
++assert bulk['status'] == 'PUBLISHED_AND_SELECTED_REMOTE_IDENTITIES_VERIFIED'
++assert bulk['all_selected_files_verified'] and bulk['file_count'] == 76
++assert bulk['selected_uploaded_bytes'] == 6836582999
++assert bulk['final_commit'] == 'e008f1ed73c642eb8ce33cec0bec52eac305ae28'
++assert len(bulk['commits']) == 4 and all(row['verification_status'] == 'passed' for row in bulk['commits'])
++plan = HF / 'successor-publication-preparation-04/file-plan-with-tooling.json'
++assert hashlib.sha256(plan.read_bytes()).hexdigest() == '51189f505e55a7cdb5569631a8bce9a6c1b8df21910faec9a5237cc9a1b76372'
++for row in json.loads((HF / 'successor-tooling-file-review-01/manifest.json').read_bytes())['files']:
++    path = Path(row['path'])
++    data = path.read_bytes()
++    assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256']
++    assert path.stat().st_size <= LIMIT and path.suffix in {'.json', '.py'}
++    selected.add(path)
+ 
+ credentials = []
+ for path in (Path('/home/barberb/.cache/huggingface/token'), Path('/home/barberb/.huggingface/token')):
+@@ -125,14 +144,14 @@
+            'original_348_strict_inputs_unchanged': True, 'six_qualified_source_tests_and_protected_four_exact': True,
+            'selected_files': rows, 'selected_bytes': sum(row['bytes'] for row in rows),
+            'omitted_large_binary_or_lock_files': omitted,
+-           'awaiting': ['final source audit', 'final HF bulk and successor publication closures',
+-                        'verified final HF revision', 'final preparer03 publication plan/status output',
++           'awaiting': ['final file-plan review', 'final HF successor publication closures',
++                        'verified final HF revision', 'verified addon revision and metadata readback',
+                         'parent instruction to publish final ordinary GitHub followup'],
+            'new_test_prover_model_native_SQL_calls': 0, 'new_proof_claims': False,
+            'full_benchmark_and_asymptotic_convergence': 'OPEN', 'official_score': None,
+            'production_defaults': False, 'elapsed_seconds': time.monotonic() - start}
+-save(OUT / 'selection-preparation-02.json', summary)
+-contents[str((OUT / 'selection-preparation-02.json').relative_to(BASE))] = (OUT / 'selection-preparation-02.json').read_bytes()
++save(OUT / 'selection-preparation-03.json', summary)
++contents[str((OUT / 'selection-preparation-03.json').relative_to(BASE))] = (OUT / 'selection-preparation-03.json').read_bytes()
+ git('read-tree', parent, private=True)
+ updates, changed = [], []
+ for name, data in sorted(contents.items()):
+@@ -146,11 +165,13 @@
+ updates.append(('160000 ' + child + '\texternal/ipfs_accelerate').encode() + b'\0')
+ git('update-index', '-z', '--index-info', data=b''.join(updates), private=True)
+ tree = git('write-tree', private=True).decode().strip()
+-assert sorted(git('diff', '--name-only', parent, tree).decode().splitlines()) == sorted(changed + ['external/ipfs_accelerate'])
++old_child = git('ls-tree', parent, 'external/ipfs_accelerate').decode().split()[2]
++expected_changed = changed + (['external/ipfs_accelerate'] if old_child != child else [])
++assert sorted(git('diff', '--name-only', parent, tree).decode().splitlines()) == sorted(expected_changed)
+ for name, data in contents.items(): assert git('show', tree + ':' + name) == data
+ assert git('rev-parse', 'HEAD').decode().strip() == 'fe18069df4203da9bddfb77b1ed41748f4d5fb4d'
+ assert hashlib.sha256((BASE / '.git/index').read_bytes()).hexdigest() == '80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4'
+-save(OUT / 'prepared-tree-02.json', {'schema': 'terminal-ir-final-root-prepared-tree@1',
++save(OUT / 'prepared-tree-03.json', {'schema': 'terminal-ir-final-root-prepared-tree@1',
+      'parent': parent, 'tree': tree, 'accelerator_gitlink': child, 'new_paths': len(changed),
+      'selected_files': len(contents), 'elapsed_seconds': time.monotonic() - start,
+      'commit_created': False, 'pushed': False, 'original_head_index_unchanged': True})

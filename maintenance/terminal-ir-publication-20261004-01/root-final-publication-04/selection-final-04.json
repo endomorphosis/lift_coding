@@ -1,0 +1,805 @@
+{
+  "awaiting": [],
+  "current_parent": "b48ec0fb6aa1b45a46c1239f50f645d03ab74808",
+  "elapsed_seconds": 1.040648983005667,
+  "full_benchmark_and_asymptotic_convergence": "OPEN",
+  "new_proof_claims": false,
+  "new_test_prover_model_native_SQL_calls": 0,
+  "official_score": null,
+  "omitted_large_binary_or_lock_files": [
+    "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/resources.json.lock",
+    "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/resources.json.lock",
+    "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/ObservedMetricBounds.olean"
+  ],
+  "original_348_strict_inputs_unchanged": true,
+  "original_child_head_index_unchanged": true,
+  "original_head_index_unchanged": true,
+  "production_defaults": false,
+  "proposed_accelerator_gitlink": "4d8f1ffc440ee1231c7b3775ce92be9b7d5995f1",
+  "schema": "terminal-ir-final-root-compact-preparation@1",
+  "selected_bytes": 1387074,
+  "selected_files": [
+    {
+      "bytes": 26475,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+      "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+    },
+    {
+      "bytes": 7032,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-01/batch-0000-started.json",
+      "sha256": "4553088fe3d6eb7bde4b693caa42f731e115521ac55532ffb5ae113202b72dd5"
+    },
+    {
+      "bytes": 941,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-01/invocation.json",
+      "sha256": "4a468be7ac4b156a2a2e1ebb8e5e4cc1b166a3bf7c1ec4ab82432ef3efa4a808"
+    },
+    {
+      "bytes": 26944,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-01/publication-file-plan.json",
+      "sha256": "938e03cfe4209a255389d7a44e5370c52dab15920c39a44c9283a78777454923"
+    },
+    {
+      "bytes": 1497,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-01/remote-before.json",
+      "sha256": "536243e58272d4295840715de56f2b1e9c89ee73baf8ff8a8a44ac67878d1a39"
+    },
+    {
+      "bytes": 198,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-01/started.json",
+      "sha256": "111f67bd5081e18b53b4efb622c0d54d8bf89c20551b611dd2e85b32a99a6f03"
+    },
+    {
+      "bytes": 11589,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0000-closed.json",
+      "sha256": "f0d9aed252091f82b9c81e820b3b9bdd67ef0cc42ce021e517bd0c933ec7e879"
+    },
+    {
+      "bytes": 186,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0000-commit-observed.json",
+      "sha256": "dbe5fc56de1c43a8fc52c5c1ff4dc662135464b93c22008342b58f86c62032c1"
+    },
+    {
+      "bytes": 7031,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0000-started.json",
+      "sha256": "a30fc9ca29094ac4ad78c886f48cd7a3791b08deb1b7a594a9bcc205b7415305"
+    },
+    {
+      "bytes": 11544,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0001-closed.json",
+      "sha256": "8b14dae1664191e1a2cb323e2eec448ecf9c2e9e22d06ca321de76e1c8618a85"
+    },
+    {
+      "bytes": 186,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0001-commit-observed.json",
+      "sha256": "9a8ce59efd82d03c4b9d5df7e7fcb552b98a89aa647ab06d00cb608db9785c94"
+    },
+    {
+      "bytes": 7082,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0001-started.json",
+      "sha256": "fcba3d6ee818eacd98d475f58b27886dc48cbe794c15df57d0fb31bfe37b35a0"
+    },
+    {
+      "bytes": 11741,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0002-closed.json",
+      "sha256": "946734b0b38fca7273cb542405f1642d3109caa9008db5d839bddc3457617473"
+    },
+    {
+      "bytes": 185,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0002-commit-observed.json",
+      "sha256": "28ccbd4097f5b47ce912a312044f957e88fc0316d6969744cdcc96faf24e72b2"
+    },
+    {
+      "bytes": 7237,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0002-started.json",
+      "sha256": "d2c0821333c8c9658278ebda350939327d330be4540acc224e108bcb04f7cd58"
+    },
+    {
+      "bytes": 9375,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0003-closed.json",
+      "sha256": "24ba1f911582d0feb67b8bef61c2a7e648be5748ff1e559b7d8c242cd04de3da"
+    },
+    {
+      "bytes": 185,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0003-commit-observed.json",
+      "sha256": "71468302f3ef57a5b53dc1b82d98fa58d28c7dbbd568630953581909f9e5e596"
+    },
+    {
+      "bytes": 5862,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/batch-0003-started.json",
+      "sha256": "01e3202a34216ca41c82bcbf56c1aca2a47b16afda616e3aa0a8d44d915d79ec"
+    },
+    {
+      "bytes": 2135,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/closed.json",
+      "sha256": "3810fc43a395468d83dd35a2afd0484f0843ad87c07f67c164b82c4e8501ef28"
+    },
+    {
+      "bytes": 941,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/invocation.json",
+      "sha256": "9b156618aacad7f9b82a6db58a7f00ee7abcd70269fce5a36977837d3f2c28bb"
+    },
+    {
+      "bytes": 26944,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/publication-file-plan.json",
+      "sha256": "938e03cfe4209a255389d7a44e5370c52dab15920c39a44c9283a78777454923"
+    },
+    {
+      "bytes": 1497,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/remote-before.json",
+      "sha256": "536243e58272d4295840715de56f2b1e9c89ee73baf8ff8a8a44ac67878d1a39"
+    },
+    {
+      "bytes": 198,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/started.json",
+      "sha256": "2c05cc063ea563c72bf30ac7e230d1f1790608e5eaca66704254abcb375dfb0a"
+    },
+    {
+      "bytes": 26137,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-02/verified-files.json",
+      "sha256": "1f9cb73931f41d326f2ffb55dead39df93508adf2760acbb9e4425e839d1b590"
+    },
+    {
+      "bytes": 682,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-01/closed.json",
+      "sha256": "85fa1558f2b968e7cd4d6e60e7f7c749a2fa23ef5918af7802bdd99ff58a417d"
+    },
+    {
+      "bytes": 1856,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-01/inputs-after.json",
+      "sha256": "e4c80f91fe1d1c04bc7a557d9dd286f354b0b94cd3be752d60f78f83953457f8"
+    },
+    {
+      "bytes": 1856,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-01/inputs-before.json",
+      "sha256": "e4c80f91fe1d1c04bc7a557d9dd286f354b0b94cd3be752d60f78f83953457f8"
+    },
+    {
+      "bytes": 1420,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-01/invocation.json",
+      "sha256": "97960e62398275d3c7ce97a573f553735d389ac1ff92567fb57ce706a67ca175"
+    },
+    {
+      "bytes": 313,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-01/started.json",
+      "sha256": "8224d5d51e1a2579a0074c1c12d92cf2fe8da7393c3f3a254acbe62acdc1f1a1"
+    },
+    {
+      "bytes": 655,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-02/closed.json",
+      "sha256": "63fc7ee90e761e579a8b6dd10f0de390239d454055871f5c6ee5b408936e1873"
+    },
+    {
+      "bytes": 2704,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-02/inputs-after.json",
+      "sha256": "b6f8d60a9529e6fc9a4e5e103117a4896edcb71df120b70b929b73cdc399d78c"
+    },
+    {
+      "bytes": 2704,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-02/inputs-before.json",
+      "sha256": "b6f8d60a9529e6fc9a4e5e103117a4896edcb71df120b70b929b73cdc399d78c"
+    },
+    {
+      "bytes": 1491,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-02/invocation.json",
+      "sha256": "b0ef666b378d51dd8df7d22f7e747c6b1ad80a3fded6591366ec15d2aedd8427"
+    },
+    {
+      "bytes": 313,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-outer-02/started.json",
+      "sha256": "150333c2ca4c841d6a94ac3d4bfc0bc5a994e07ba0ba4a40e209086ec3d516da"
+    },
+    {
+      "bytes": 1495,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/classification-source-freeze-01.json",
+      "sha256": "e83bcd6a395c2470e36d170e6054df44a5ddbb48c1649dc75c6efaac5126459f"
+    },
+    {
+      "bytes": 35323,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/classify_and_prepare_public_archive_07.py",
+      "sha256": "dd457cb927270f53617781de1f576d1de1fac76b86191d769f4f923fa966a1f8"
+    },
+    {
+      "bytes": 1285,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-05/closed.json",
+      "sha256": "3f7c2c731dbf9e34ad24df8f4740dcfe8869dc22daf934ff299c0994ea14423c"
+    },
+    {
+      "bytes": 8093,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/independent-source-review-01/review.json",
+      "sha256": "d1c7097e2f52173bbec80f98662b00b1eccf47b81771623dfea219ae63f293d9"
+    },
+    {
+      "bytes": 10307,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/independent-source-review-02/review.json",
+      "sha256": "6cc56fb7f61d95970507512ced3b13a2a0a7279b2c9d344ef707b7dc247e395c"
+    },
+    {
+      "bytes": 9453,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/prepare_successor_publication_01.py",
+      "sha256": "ef195b21fd5f43cacde763469288418fcdfd7b11989f36d62e3e65e285d3d1e6"
+    },
+    {
+      "bytes": 12224,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/prepare_successor_publication_02.py",
+      "sha256": "9a4accdc8b87a4dcf11ffee3914aee1ad4bd601925d5dfea675438613a0c82bb"
+    },
+    {
+      "bytes": 12947,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/prepare_successor_publication_03.py",
+      "sha256": "11c948e4d0ee57a18bde125f8f2cee10a5817074ec61bd43bdd25f01d23b955f"
+    },
+    {
+      "bytes": 13558,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/prepare_successor_publication_04.py",
+      "sha256": "86605b18130b0b9453f7ade3d507df36fd42e4688bf96cac93ecf334a8269ff7"
+    },
+    {
+      "bytes": 547,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/publication-phase-wrapper-freeze-01.json",
+      "sha256": "a8425716a0a43a3481a2e45726c1d9e032eaf80cb5b2c1f3b9c8fb04670ecae3"
+    },
+    {
+      "bytes": 10215,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/publish_qualified_archive_02.py",
+      "sha256": "3cd39d0c11034c26b976f25a9473d8ed7db692da7f0ff9c43868238b5b3cc754"
+    },
+    {
+      "bytes": 8519,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/publish_successor_evidence_01.py",
+      "sha256": "d1ba836b65d584c206c7371b2525b793c8c872c3484c4c5e9a1523eb89324fec"
+    },
+    {
+      "bytes": 9568,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/publish_successor_evidence_02.py",
+      "sha256": "670e064a8222ce1b0c962e202985974741a9a4476630b0541c7ec880b32009f2"
+    },
+    {
+      "bytes": 15522,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/review_closed_public_archive_01.py",
+      "sha256": "106c82a7c24cd134f2c2f43e814741d310d27b0f9ea47840bcb7916762ac71e6"
+    },
+    {
+      "bytes": 2780,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/root-physical-review-01/review.json",
+      "sha256": "e6c703e2c3a8082f38b8e63f9a6582d0c2f14a61f479bc8501a84bf6047e1b67"
+    },
+    {
+      "bytes": 2915,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/root-physical-review-controls-02/review.json",
+      "sha256": "0311c3f9efcc0d0e572b74686ede06e4f7e71c33216df1374d75f562e3a18bd9"
+    },
+    {
+      "bytes": 397,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/root-physical-review-negative-01/control-result.json",
+      "sha256": "df6f292a306ddccacdc28df86b3e9e3dac8d1c6cbddd6474056be1f32a1993a0"
+    },
+    {
+      "bytes": 5757,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/run_frozen_publication_phase.py",
+      "sha256": "8d9955df76155f75326fdda8039119bacab9bad3ca71306f241be9b2124d01b8"
+    },
+    {
+      "bytes": 5962,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-final-plan-review-01/review.json",
+      "sha256": "e678c77b28183ef5a1da7b650d392ed5e10a02bf9780b5fdd79f6a3ff461bc34"
+    },
+    {
+      "bytes": 405,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-final-plan-review-01/root-readback.json",
+      "sha256": "8011b4255290e9b35487f2ec398c24539a8cd6bd1eeefdd8d284ac84952525b6"
+    },
+    {
+      "bytes": 7083,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-preparer-source-review-04/review.json",
+      "sha256": "69f40a994cd259b7d0105f4ee5ae5f7adcac232f61677f21df4024b394d8dc06"
+    },
+    {
+      "bytes": 933,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-01/closed.json",
+      "sha256": "9246ef1380cdcb3c683072ed5a1b456d97b3bb8c187e05fa78ded710f5921f08"
+    },
+    {
+      "bytes": 170,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-01/commit-observed.json",
+      "sha256": "dfa4febc620289c4623e62baf0122092843cf49a297725c78b6f292cb99935f2"
+    },
+    {
+      "bytes": 27484,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-01/remote-before.json",
+      "sha256": "c6b1b5a4f58b372d203dfd4ebcdb6f9d229e1df282ba8065155cb7277577f4c6"
+    },
+    {
+      "bytes": 619,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-01/root-remote-head-readback.json",
+      "sha256": "63b1cf0c2fb3dbdae1c16e892f36c5f69ab1174315578e55bbd55f4b83e7ad88"
+    },
+    {
+      "bytes": 679,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-01/started.json",
+      "sha256": "e3691c532e559b272355e516be8e153916923697103046b9054333e6a36ef2c7"
+    },
+    {
+      "bytes": 33869,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-01/verified-files.json",
+      "sha256": "ef70f9896569bbe4a81bbb2a3df51d418539568e1a5aaa35d86bc7bcd8a40b72"
+    },
+    {
+      "bytes": 787,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-outer-01/closed.json",
+      "sha256": "9e345a7f7b8c4778b7a03ba33bce842093e7ec812ccb697ccbf13a918a9d47a7"
+    },
+    {
+      "bytes": 13767,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-outer-01/inputs-after.json",
+      "sha256": "e7f0456f03c5e2e9c345d6e07bd9201818142b9e6dd9530596f2b986f56300a0"
+    },
+    {
+      "bytes": 13767,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-outer-01/inputs-before.json",
+      "sha256": "e7f0456f03c5e2e9c345d6e07bd9201818142b9e6dd9530596f2b986f56300a0"
+    },
+    {
+      "bytes": 1216,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-outer-01/invocation.json",
+      "sha256": "4525351967468fdfa7a7f9eab30269ad8b1ce65a6377425326c61085dd02609a"
+    },
+    {
+      "bytes": 312,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-outer-01/started.json",
+      "sha256": "36d939cb48ecd70b289927ea46d4426eda576e786ef319f5658e33a2afb8b3d9"
+    },
+    {
+      "bytes": 2385,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-01/README.md",
+      "sha256": "55e1bd7d45d5255cdf7022fcd87f658c2b00c163cf70b5ce5994f7b20e6102cb"
+    },
+    {
+      "bytes": 2818,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-02/README.md",
+      "sha256": "5220bad35f4a275e3f44598ff004c8e534196bc7a0e4e085e233ec265a2bf72e"
+    },
+    {
+      "bytes": 2818,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-03/README.md",
+      "sha256": "5220bad35f4a275e3f44598ff004c8e534196bc7a0e4e085e233ec265a2bf72e"
+    },
+    {
+      "bytes": 2818,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/README.md",
+      "sha256": "5220bad35f4a275e3f44598ff004c8e534196bc7a0e4e085e233ec265a2bf72e"
+    },
+    {
+      "bytes": 25766,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/file-plan-with-tooling.json",
+      "sha256": "51189f505e55a7cdb5569631a8bce9a6c1b8df21910faec9a5237cc9a1b76372"
+    },
+    {
+      "bytes": 11755,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/file-plan.json",
+      "sha256": "24e39c4b486f7c24f788cfd372fd121c0d8e469d8d74a0392a95b04bf7573941"
+    },
+    {
+      "bytes": 13587,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/publication-status-with-tooling.json",
+      "sha256": "d2f9b652fcb6369047f14ad291bd7e0af1ea3a4b6e5f5bf6a6609f4bba3f01f3"
+    },
+    {
+      "bytes": 13002,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publication-preparation-04/publication-status.json",
+      "sha256": "3e19e35566c4c15208d624fb8a378f0cc31d977d2a018b5a18b1e6b1f4025f67"
+    },
+    {
+      "bytes": 723,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publisher-reader-controls-01/closed.json",
+      "sha256": "8cb5f12c570c61e47784fd5209e1a614a94c9f3888af53e823b54da0ff57e615"
+    },
+    {
+      "bytes": 38,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publisher-reader-controls-01/plan-fixture.json",
+      "sha256": "6d15f41068c70391cba70453b4c01533d55638d2d0e3a874f9854c1fb1d7ae2c"
+    },
+    {
+      "bytes": 2180,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publisher-source-review-01/review.json",
+      "sha256": "945c63469239b8f22431acb559e57d6e374f3fed190c9c1920715ace98ef9b73"
+    },
+    {
+      "bytes": 3111,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publisher-source-review-02/review.json",
+      "sha256": "17ea2e8ae7b2be5e12c8df66c27eaced7db632b003bb9e55483f10c45e51eb2b"
+    },
+    {
+      "bytes": 17194,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-01/build_package.py",
+      "sha256": "16945c4ac8741014f7dc34c5e46c26f3081c62244d9d63645aa4ce2364e93a3b"
+    },
+    {
+      "bytes": 1664,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-01/closed.json",
+      "sha256": "7da9692bac22a147cc60564769485f59f38f9994d98ee02e3591110ccfee77c5"
+    },
+    {
+      "bytes": 667,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-01/freeze.json",
+      "sha256": "b33f456cee1c89b30b58d1b8b92962a78ff274c04e3c81c71c56da49a6c5ec95"
+    },
+    {
+      "bytes": 1707,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-01/started.json",
+      "sha256": "b4ae6de603efff0a1795ed844ba878d418f9cc4c46ed2746d118616d7cd31c1b"
+    },
+    {
+      "bytes": 21312,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/build_package.py",
+      "sha256": "4ae975f4f04acbc4112e4615c4b5595825f9f7ac573714d50802b64cfd753b82"
+    },
+    {
+      "bytes": 1298,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/closed.json",
+      "sha256": "49cec904cf7f0d7b013d5f26909480eee87e436f4f19bce79a7693d5dc897ac3"
+    },
+    {
+      "bytes": 2123,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/file-only-review-01.json",
+      "sha256": "142ac6862e5fa656b13c5e93bd7b6190e939ce0885c27a8dae9ace5cf9d9a2a4"
+    },
+    {
+      "bytes": 888,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/freeze.json",
+      "sha256": "ae45467a96ae79ea1f3b237be6e5852e466fbc310241af6e63eac24a93a61d1e"
+    },
+    {
+      "bytes": 7396,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/review_package.py",
+      "sha256": "54a07b5afb08039d403f709c4e14fd744e5e3ba1d0e7b08097e7b4262ae72431"
+    },
+    {
+      "bytes": 1707,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/started.json",
+      "sha256": "a395bc4e34b4b9562dc287466df434e69b9cf5e68ca4af957990c3de0a05ced4"
+    },
+    {
+      "bytes": 21117,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/build_package.py",
+      "sha256": "8c8eab266a053115cdf0ea11a8aea5323611c2ab049ec1541383831618e385ce"
+    },
+    {
+      "bytes": 1275,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/closed.json",
+      "sha256": "6a5b53f221d8241f7a51048fdb9cc2c9e05b1d61cbee712d5fedc689399faaa3"
+    },
+    {
+      "bytes": 4823,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/file-only-review-01.json",
+      "sha256": "18a11d303dee0d87f508a3b046a6ad66b91a327da0b5a9f43a49c956f1c4926d"
+    },
+    {
+      "bytes": 703,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/freeze.json",
+      "sha256": "3e3e0636e7cc44d113a5b8b56b04c32236fb09d0dbfa5d98f7e3982057055f9b"
+    },
+    {
+      "bytes": 57232,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/package/manifest.json",
+      "sha256": "1e7e5c92b4d1bcad035aab75d77ddfc9fd650d9c306fb52e1045b681fdb744bf"
+    },
+    {
+      "bytes": 10093,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/review_package.py",
+      "sha256": "dc2cca8e23cdf7aa67c455a623d6206cf5ba4c755e0cb3ad0516536e4a247caa"
+    },
+    {
+      "bytes": 633,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/started.json",
+      "sha256": "37ba12d7d2db3c07dd0ae8e846af143c5711166451ae0f0685b35d2f63c9b6c0"
+    },
+    {
+      "bytes": 23101,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-tooling-file-review-01/manifest.json",
+      "sha256": "33a3700727c188703295760f69e13676b3eebed6247a4eb5a81cc12c019f4fd2"
+    },
+    {
+      "bytes": 8666,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-tooling-file-review-01/prepare_tooling_manifest.py",
+      "sha256": "5a6cd977d78aaef5df354e6a44a3380a179b1c940ca3bd1c20e7882b118f8048"
+    },
+    {
+      "bytes": 16644,
+      "path": "maintenance/terminal-ir-publication-20261004-01/huggingface/successor-tooling-file-review-01/review.json",
+      "sha256": "34111a81d6a18b748e0c51185aeca77ba66f57b4808ca8a5195d02707febcdd0"
+    },
+    {
+      "bytes": 4531,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/capture-preparation-01-to-02.patch",
+      "sha256": "750c46c148eaf88b48c0b26aab4da8466ce87b045faf838b3519836e84f49437"
+    },
+    {
+      "bytes": 7108,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/capture-preparation-02-to-03.patch",
+      "sha256": "b8a21ae84715506827b53d3a54380331527c53c94a8fe92868d1602890d5c8dc"
+    },
+    {
+      "bytes": 15423,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/capture-preparation-03-to-final-04.patch",
+      "sha256": "1b767c64ecd0e5e15bd179a16cf87d4e02c1a94a2e9464282db8d6e1732ca424"
+    },
+    {
+      "bytes": 9141,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/capture_final_increment_01.py",
+      "sha256": "eb76b4d37bbd31ae62a3cca84fb21a57b65993b9561de658217dd531e60c5b1b"
+    },
+    {
+      "bytes": 9743,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/capture_final_increment_02.py",
+      "sha256": "5b287d3f1aaee8f89d95c8e3ad388e4ab79957ca5b6a7b2d9dd3c5814a902950"
+    },
+    {
+      "bytes": 11347,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/capture_final_increment_03.py",
+      "sha256": "50a837e015930dd371019cffd37cfc103fd9dac08057b03eb8981675f81ceaa3"
+    },
+    {
+      "bytes": 3323,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/huggingface-publication-pointer.json",
+      "sha256": "4e145be45e14b5de53ac8a8f3ad41bfd903d4412a8637a7eef4708c456da0b6b"
+    },
+    {
+      "bytes": 405,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/prepared-tree-01.json",
+      "sha256": "5a67d94203509e98d13133d824905a378653167c87eeb06eaab554ddde0794a3"
+    },
+    {
+      "bytes": 407,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/prepared-tree-02.json",
+      "sha256": "e4fd68a8c25d28fd4b148e4f8601a333b39c7ed458a4241d307a92e6a7caee28"
+    },
+    {
+      "bytes": 409,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/prepared-tree-03.json",
+      "sha256": "c0f588c83ae13ec3f99d6099d4b05f46991b10516dba524abc50c6815e519e56"
+    },
+    {
+      "bytes": 20758,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/publish_final_increment_04.py",
+      "sha256": "b6ea3d7e7cc31222fee51941c439219c46372e8e0f8e831c277c2242efd35ce3"
+    },
+    {
+      "bytes": 18573,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/selection-preparation-01.json",
+      "sha256": "8a4ccac97145da6912d2c4c6d91afb5ba32bf4deffb33258804cc99e43bd58d8"
+    },
+    {
+      "bytes": 22161,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/selection-preparation-02.json",
+      "sha256": "855fda3593cba195fc02f5956fbae0e56ac9acf6c3ab28e79a73de85405bef5c"
+    },
+    {
+      "bytes": 33588,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-final-publication-04/selection-preparation-03.json",
+      "sha256": "2a3e6be1f2fe1d3b531e49e05d1924d5ae032d734b59f4dc411bf20ecc38f6a9"
+    },
+    {
+      "bytes": 43121,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-source-model-03/prepared.json",
+      "sha256": "77701c5dae36a128aa22174576fbe10eb736c51f761992a1ed257c2216a6c8bf"
+    },
+    {
+      "bytes": 1011,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-source-model-03/publication-closed-01.json",
+      "sha256": "cdde370cf58b6ad96739cf6608cd937e8a14d4287be92d7485095dc0f7ef5bce"
+    },
+    {
+      "bytes": 404,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-source-model-03/push-01.json",
+      "sha256": "5ede2b11f28dd958411df668174d59fa7894ead4c054f4a16b6b787627c50a86"
+    },
+    {
+      "bytes": 122894,
+      "path": "maintenance/terminal-ir-publication-20261004-01/root-source-model-03/selection.json",
+      "sha256": "79e72c095113c11032a5b9f33a4120dd0b3ea83dd20f2a7297fffc03d7c3c731"
+    },
+    {
+      "bytes": 8310,
+      "path": "qualification/codebase_ir/full-task-cost-feasibility-source-review-20261005-01/review.json",
+      "sha256": "9a5aa04746fa331dfd30be0fd37ecb91fcda5d304e64a6e10d4595a11de46505"
+    },
+    {
+      "bytes": 5667,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/control.py",
+      "sha256": "c1b05543202c25355e0a0bc0dbb7f5d4f10e2e22e75015abd123fb5870850050"
+    },
+    {
+      "bytes": 3094,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/FalseReversedCostBound.lean",
+      "sha256": "85740c075dbdb35107e10f72dee5de79037d3fe298db50687b40e6325abfc8ce"
+    },
+    {
+      "bytes": 2464,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/FalseReversedCostBound.lean.check.json",
+      "sha256": "9d5a3e0ed004096d839c7e6e2623f22e9cb8d37035335ecb13d6c6fb5e7ebd0d"
+    },
+    {
+      "bytes": 2737,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/ObservedMetricBounds.lean",
+      "sha256": "6ccb2fdc0c16be7426836d6d9e1eea318d5e24e925d604fb7d55b55c85545909"
+    },
+    {
+      "bytes": 151489,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/ObservedMetricBounds.lean.check.json",
+      "sha256": "f8da64a967d68d5fd58eecd31fcdbde61d6ef0fe9c14a2b2054379dc51bbd0b6"
+    },
+    {
+      "bytes": 13082,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/closed.json",
+      "sha256": "11a83a1fb9e5607f21056c5e3d38f3ec32d7e412128ffc60f5fc2ebf6050eb85"
+    },
+    {
+      "bytes": 2402,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/resources.json",
+      "sha256": "e03c9a83b4d1e087f9c3fc788943908843a77751d539abc77bfe3185d8e5383c"
+    },
+    {
+      "bytes": 5336,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/started.json",
+      "sha256": "0f46f5162f6f7fee0974d4cb62ed3853a7e6b0cea64c6f28ccae876b4225f725"
+    },
+    {
+      "bytes": 5667,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/control.py",
+      "sha256": "c1b05543202c25355e0a0bc0dbb7f5d4f10e2e22e75015abd123fb5870850050"
+    },
+    {
+      "bytes": 8096,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/source/cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    },
+    {
+      "bytes": 5501,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/source/reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441"
+    },
+    {
+      "bytes": 511,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/task_file/input_data/requests_bucket_1.jsonl",
+      "sha256": "59f779e03963f0f94a66ff19763e7a424fc6d0063cc4b3385a74763b23b41a46"
+    },
+    {
+      "bytes": 513,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/task_file/input_data/requests_bucket_2.jsonl",
+      "sha256": "cfd0640d0c8535ced94c3b87467537dcf25c320f8ab02ebd63f9403ba4972f7b"
+    },
+    {
+      "bytes": 21011,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/closed.json",
+      "sha256": "1cd6a3e87540768e2388ea3adc2f36a75876b443e7812442337046e6afb68f5f"
+    },
+    {
+      "bytes": 1802,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/input-manifest.json",
+      "sha256": "09b72d911b2368d030ca7fc9f48a8aa3c15fae840317f01eb43242822f5d3d94"
+    },
+    {
+      "bytes": 5960,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/result.json",
+      "sha256": "747f990980aac1f0f1bb054914a18f5f3833bc6732e6714b98e59e2a4c099a98"
+    },
+    {
+      "bytes": 1080,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/task_file/output_data/plan_b1.jsonl",
+      "sha256": "8ca69468133a513d1519d5a0b02d4f89740cb3f0708b1cbb3d009c6f3bd26407"
+    },
+    {
+      "bytes": 1084,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/task_file/output_data/plan_b2.jsonl",
+      "sha256": "02af82cc4983ea6edc91a42b78c8c60b29e08e7d6c9b9428b904f47152026ee8"
+    },
+    {
+      "bytes": 1499,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/resources.json",
+      "sha256": "0bf256e9eeb251a5edb52bd882b028a6ac6ab9aa6606169dd9afb72757f7a399"
+    },
+    {
+      "bytes": 4480,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/started.json",
+      "sha256": "731c385c3a9159097770b5407c134bf8a5b05e7456a0cab2ecbf427e94f045eb"
+    },
+    {
+      "bytes": 11006,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/file-seal.json",
+      "sha256": "0fa7ad8b1d232bc402450c89c8f3a02e0f165360413cadf42aa948c54d43a885"
+    },
+    {
+      "bytes": 3094,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/FalseReversedCostBound.lean",
+      "sha256": "85740c075dbdb35107e10f72dee5de79037d3fe298db50687b40e6325abfc8ce"
+    },
+    {
+      "bytes": 2737,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/ObservedMetricBounds.lean",
+      "sha256": "6ccb2fdc0c16be7426836d6d9e1eea318d5e24e925d604fb7d55b55c85545909"
+    },
+    {
+      "bytes": 4656,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/embedding.json",
+      "sha256": "a2e5d0eaedefaced963ecb6bdee3749333928f7c6d7dda047ed63c01d5a43a7e"
+    },
+    {
+      "bytes": 1080,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-producer-freeze.json",
+      "sha256": "f83b9ce4df470428e1f3ecdd5c86722b51c410fa372ac265e91cae916dfb7430"
+    },
+    {
+      "bytes": 594,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/closed.json",
+      "sha256": "4a62063730599eea6ee6dab564f40c117809ba91f9ddd7df0d7f97bcc35d6521"
+    },
+    {
+      "bytes": 478,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/started.json",
+      "sha256": "574c0473b97f7b9d91e8f3ed868aa0f16e81cea0e77f7fdfb6741320daf262f6"
+    },
+    {
+      "bytes": 0,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 344,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/stdout.log",
+      "sha256": "dccdb91755430c512643e7f05abd2c37d1243e3d60e4bc0541e4f3a87bf97218"
+    },
+    {
+      "bytes": 579,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/closed.json",
+      "sha256": "cafbd30576bdbd5463a8ad547929707355a879a155f39d8eb9feee91d77c3ce0"
+    },
+    {
+      "bytes": 471,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/started.json",
+      "sha256": "5d7b3f61cfd7969910105f7769bbc984dab36db2030f8c411c365054fd05eb76"
+    },
+    {
+      "bytes": 0,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 326,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/stdout.log",
+      "sha256": "855623c0f971c296f8b54a398eb4e492c8e100dc3a50330ec50352d90cecd590"
+    },
+    {
+      "bytes": 1177,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/producer-freeze.json",
+      "sha256": "91f335ec29b8b631eaa6512e954b4388e69c5dc1a9a7fbaf7c1ec55b0bfa5801"
+    },
+    {
+      "bytes": 7195,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/qualified-review.json",
+      "sha256": "e63564f7396e879ca24f8e022550265dfda97fe2add23238bc98ea17da0e5429"
+    },
+    {
+      "bytes": 2566,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_lean_outer.py",
+      "sha256": "bd089cdaabf08f1d3af306a5bba6c05a203de27c7261c2ce2f62eae9efdb86dc"
+    },
+    {
+      "bytes": 7346,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_lean_owned.py",
+      "sha256": "5100cc271893ab2944501a6a887d9294f49fc40eca0685ebec76207c1cb34f9d"
+    },
+    {
+      "bytes": 2567,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_outer.py",
+      "sha256": "9cfd9361479d75f38386d04f3a87c09880990739f9ebf15ece1ab7fe398fe37c"
+    },
+    {
+      "bytes": 8388,
+      "path": "qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_owned.py",
+      "sha256": "1bf880dc0fb26e51639e0b3372bdc4f28a1187d740cdc3f9dcf9d76133c6e822"
+    }
+  ],
+  "six_qualified_source_tests_and_protected_four_exact": true,
+  "status": "FINAL_VERIFIED_METADATA_READY_FOR_ORDINARY_PUBLICATION"
+}

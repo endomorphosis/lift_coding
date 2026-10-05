@@ -1,0 +1,313 @@
+{
+  "PlanCreate_calls": 0,
+  "actual_benchmark_instances_or_heldout_data_read": false,
+  "actual_owned_elapsed_seconds": 0.22274836600990966,
+  "cancelled": false,
+  "cleanup_errors": [],
+  "command": [
+    "/home/barberb/.local/bin/python",
+    "-I",
+    "-S",
+    "-B",
+    "control.py"
+  ],
+  "elapsed_seconds": 0.0581542509899009,
+  "error": "",
+  "final_scheduler_snapshot": {
+    "active_child_lease_count": 0,
+    "active_lease_count": 0,
+    "active_root_lease_count": 0,
+    "allocated": {
+      "cpu_slots": 0,
+      "memory_mb": 0
+    },
+    "allocated_child_process_slots": 0,
+    "allocated_gpu_memory_mb": 0,
+    "allocated_unified_memory_mb": 0,
+    "available": {
+      "child_process_slots": 16,
+      "cpu_slots": 16,
+      "gpu_memory_mb": null,
+      "memory_mb": 99688,
+      "unified_memory_mb": null
+    },
+    "capacity": {
+      "child_process_slots": 16,
+      "cpu_slots": 16,
+      "gpu_memory_mb": null,
+      "memory_mb": 99688,
+      "reserved_gpu_memory_mb": 0,
+      "reserved_memory_mb": 0,
+      "unified_memory_mb": null,
+      "usable_gpu_memory_mb": null,
+      "usable_memory_mb": 99688
+    },
+    "counters": {
+      "acquisitions_total": 1,
+      "cancellations_total": 0,
+      "recovered_leases_total": 0,
+      "recoveries_total": 0,
+      "releases_total": 1,
+      "saturation_events_total": 0,
+      "timeouts_total": 0
+    },
+    "lanes": {
+      "orchestration": {
+        "allocated": {
+          "child_process_slots": 0,
+          "cpu_slots": 0,
+          "gpu_memory_mb": 0,
+          "memory_mb": 0,
+          "unified_memory_mb": 0
+        },
+        "reservation": {
+          "cpu_slots": 0,
+          "memory_mb": 0
+        },
+        "telemetry": {
+          "acquisitions_total": 1,
+          "cancellations_total": 0,
+          "timeouts_total": 0,
+          "wait_count": 1,
+          "wait_seconds_max": 1.1840020306408405e-06,
+          "wait_seconds_mean": 1.1840020306408405e-06,
+          "wait_seconds_total": 1.1840020306408405e-06
+        }
+      },
+      "validation": {
+        "allocated": {
+          "child_process_slots": 0,
+          "cpu_slots": 0,
+          "gpu_memory_mb": 0,
+          "memory_mb": 0,
+          "unified_memory_mb": 0
+        },
+        "reservation": {
+          "cpu_slots": 2,
+          "memory_mb": 0
+        },
+        "telemetry": {
+          "acquisitions_total": 0,
+          "cancellations_total": 0,
+          "timeouts_total": 0,
+          "wait_count": 0,
+          "wait_seconds_max": 0.0,
+          "wait_seconds_mean": 0.0,
+          "wait_seconds_total": 0.0
+        }
+      }
+    },
+    "last_proof_refusal": null,
+    "proof_backoff": {},
+    "proof_recovery": {},
+    "saturation": {
+      "child_process_slots_saturated": false,
+      "cpu_saturated": false,
+      "events_total": 0,
+      "gpu_memory_saturated": false,
+      "memory_saturated": false,
+      "saturated": false,
+      "unified_memory_saturated": false
+    },
+    "schema_version": "legal-ir-global-resource-scheduler-v1",
+    "state_path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/resources.json",
+    "wait_time_seconds": {
+      "count": 1,
+      "max": 1.1840020306408405e-06,
+      "mean": 1.1840020306408405e-06,
+      "p50": 1.1840020306408405e-06,
+      "p95": 1.1840020306408405e-06,
+      "p99": 1.1840020306408405e-06,
+      "total": 1.1840020306408405e-06
+    },
+    "waiting_request_count": 0
+  },
+  "full_task_satisfaction": "unknown",
+  "interface_version": "bounded-tool-runner/v1",
+  "model_convergence_proved": false,
+  "official_benchmark_score": null,
+  "optimizer_updates": 0,
+  "output_bindings": [
+    {
+      "bytes": 5960,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/result.json",
+      "sha256": "747f990980aac1f0f1bb054914a18f5f3833bc6732e6714b98e59e2a4c099a98"
+    },
+    {
+      "bytes": 1080,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/task_file/output_data/plan_b1.jsonl",
+      "sha256": "8ca69468133a513d1519d5a0b02d4f89740cb3f0708b1cbb3d009c6f3bd26407"
+    },
+    {
+      "bytes": 1084,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/task_file/output_data/plan_b2.jsonl",
+      "sha256": "02af82cc4983ea6edc91a42b78c8c60b29e08e7d6c9b9428b904f47152026ee8"
+    }
+  ],
+  "output_files": {
+    "result.json": "{\n  \"PlanCreate_calls\": 0,\n  \"actual_benchmark_instances_or_heldout_data_used\": false,\n  \"all_eight_strict_threshold_comparisons\": [\n    {\n      \"bucket\": 1,\n      \"comparison\": \"strictly_less_than\",\n      \"metric\": \"cost\",\n      \"observed_binary64\": 313580032.0,\n      \"passed\": true,\n      \"prediction_matches_observation\": true,\n      \"source_derived_prediction\": 313580032,\n      \"threshold_binary64\": 300000000000.0\n    },\n    {\n      \"bucket\": 1,\n      \"comparison\": \"strictly_less_than\",\n      \"metric\": \"pad_ratio\",\n      \"observed_binary64\": 0.0,\n      \"passed\": true,\n      \"prediction_matches_observation\": true,\n      \"source_derived_prediction\": 0,\n      \"threshold_binary64\": 0.055\n    },\n    {\n      \"bucket\": 1,\n      \"comparison\": \"strictly_less_than\",\n      \"metric\": \"p95_latency_ms\",\n      \"observed_binary64\": 6234.784,\n      \"passed\": true,\n      \"prediction_matches_observation\": true,\n      \"source_derived_prediction\": 6234.784,\n      \"threshold_binary64\": 2100000.0\n    },\n    {\n      \"bucket\": 1,\n      \"comparison\": \"strictly_less_than\",\n      \"metric\": \"sequential_timecost\",\n      \"observed_binary64\": 16747.136,\n      \"passed\": true,\n      \"prediction_matches_observation\": true,\n      \"source_derived_prediction\": 16747.136,\n      \"threshold_binary64\": 270000000.0\n    },\n    {\n      \"bucket\": 2,\n      \"comparison\": \"strictly_less_than\",\n      \"metric\": \"cost\",\n      \"observed_binary64\": 1548802560.0,\n      \"passed\": true,\n      \"prediction_matches_observation\": true,\n      \"source_derived_prediction\": 1548802560,\n      \"threshold_binary64\": 48000000000.0\n    },\n    {\n      \"bucket\": 2,\n      \"comparison\": \"strictly_less_than\",\n      \"metric\": \"pad_ratio\",\n      \"observed_binary64\": 0.0,\n      \"passed\": true,\n      \"prediction_matches_observation\": true,\n      \"source_derived_prediction\": 0,\n      \"threshold_binary64\": 0.15\n    },\n    {\n      \"bucket\": 2,\n      \"comparison\": \"strictly_less_than\",\n      \"metric\": \"p95_latency_ms\",\n      \"observed_binary64\": 13024.3136,\n      \"passed\": true,\n      \"prediction_matches_observation\": true,\n      \"source_derived_prediction\": 13024.3136,\n      \"threshold_binary64\": 210000.0\n    },\n    {\n      \"bucket\": 2,\n      \"comparison\": \"strictly_less_than\",\n      \"metric\": \"sequential_timecost\",\n      \"observed_binary64\": 41388.672,\n      \"passed\": true,\n      \"prediction_matches_observation\": true,\n      \"source_derived_prediction\": 41388.672,\n      \"threshold_binary64\": 32000000.0\n    }\n  ],\n  \"buckets\": [\n    {\n      \"batch_count\": 4,\n      \"bucket\": 1,\n      \"metrics\": {\n        \"cost\": 313580032.0,\n        \"latencies\": [\n          2243.6416,\n          1161.4336,\n          3469.1648,\n          2419.7248,\n          4799.5456,\n          3782.873600000001,\n          6234.784,\n          5250.88\n        ],\n        \"p95_latency_ms\": 6234.784,\n        \"pad_ratio\": 0.0,\n        \"pad_tokens\": 0,\n        \"real_tokens\": 2312,\n        \"sequential_timecost\": 16747.136\n      }\n    },\n    {\n      \"batch_count\": 4,\n      \"bucket\": 2,\n      \"metrics\": {\n        \"cost\": 1548802560.0,\n        \"latencies\": [\n          13024.3136,\n          12171.4816,\n          7774.88,\n          6823.744,\n          9419.8336,\n          8501.4656,\n          11169.6448,\n          10284.0448\n        ],\n        \"p95_latency_ms\": 13024.3136,\n        \"pad_ratio\": 0.0,\n        \"pad_tokens\": 0,\n        \"real_tokens\": 6408,\n        \"sequential_timecost\": 41388.672\n      }\n    }\n  ],\n  \"completion_authority\": false,\n  \"cost_constants\": {\n    \"Kbatch_overhead_cost\": 10000000.0,\n    \"Kd_attn\": 1.0,\n    \"Kd_mlp\": 0.5,\n    \"Kp_attn\": 2.0,\n    \"Kp_mlp\": 1.0,\n    \"Kshape_attn\": 500.0,\n    \"Kshape_mlp\": 2.0,\n    \"Tbatch_overhead_ms\": 8.0,\n    \"Td_attn\": 0.0012,\n    \"Td_mlp\": 0.0006,\n    \"Tp_attn\": 0.002,\n    \"Tp_mlp\": 0.0015,\n    \"Tshape_compile_ms\": 1500.0\n  },\n  \"default_activation\": false,\n  \"execution_authority\": false,\n  \"full_task_satisfaction\": \"unknown\",\n  \"global_unique_shapes\": [\n    [\n      128,\n      32,\n      4096\n    ],\n    [\n      256,\n      32,\n      4096\n    ],\n    [\n      384,\n      32,\n      4096\n    ],\n    [\n      512,\n      32,\n      4096\n    ],\n    [\n      640,\n      32,\n      4096\n    ],\n    [\n      768,\n      32,\n      4096\n    ],\n    [\n      896,\n      32,\n      4096\n    ],\n    [\n      1024,\n      32,\n      4096\n    ]\n  ],\n  \"granularity\": 64,\n  \"input_bytes_unchanged\": true,\n  \"input_hashes_after\": {\n    \"task_file/input_data/requests_bucket_1.jsonl\": \"59f779e03963f0f94a66ff19763e7a424fc6d0063cc4b3385a74763b23b41a46\",\n    \"task_file/input_data/requests_bucket_2.jsonl\": \"cfd0640d0c8535ced94c3b87467537dcf25c320f8ab02ebd63f9403ba4972f7b\"\n  },\n  \"input_hashes_before\": {\n    \"task_file/input_data/requests_bucket_1.jsonl\": \"59f779e03963f0f94a66ff19763e7a424fc6d0063cc4b3385a74763b23b41a46\",\n    \"task_file/input_data/requests_bucket_2.jsonl\": \"cfd0640d0c8535ced94c3b87467537dcf25c320f8ab02ebd63f9403ba4972f7b\"\n  },\n  \"model_convergence_proved\": false,\n  \"official_benchmark_score\": null,\n  \"optimizer_updates\": 0,\n  \"proof_authority\": false,\n  \"prover_calls\": 0,\n  \"schema\": \"terminal-authored-reference-native-cost-result@1\",\n  \"shared_representatives\": [\n    128,\n    256,\n    384,\n    512,\n    640,\n    768,\n    896,\n    1024\n  ],\n  \"source_pins_in_ephemeral_workspace\": [\n    {\n      \"bytes\": 8096,\n      \"path\": \"source/cost_model.py\",\n      \"sha256\": \"0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce\"\n    },\n    {\n      \"bytes\": 5501,\n      \"path\": \"source/reference.py\",\n      \"sha256\": \"afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441\"\n    }\n  ],\n  \"source_prediction_matches_observations\": true,\n  \"status\": \"passed_scoped_authored_fixture\",\n  \"structural_four_clauses\": {\n    \"aligned_and_covering_shapes\": true,\n    \"consistent_shape_within_each_batch\": true,\n    \"global_at_most_eight_shapes\": true,\n    \"included_exactly_once\": true\n  },\n  \"training_calls\": 0,\n  \"universal_source_equivalence_proved\": false\n}\n",
+    "task_file/output_data/plan_b1.jsonl": "{\"batch_id\": \"bucket-1-s-128-g-1\", \"request_id\": \"model-b1-r01\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 128}}\n{\"batch_id\": \"bucket-1-s-128-g-1\", \"request_id\": \"model-b1-r02\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 128}}\n{\"batch_id\": \"bucket-1-s-256-g-1\", \"request_id\": \"model-b1-r03\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 256}}\n{\"batch_id\": \"bucket-1-s-256-g-1\", \"request_id\": \"model-b1-r04\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 256}}\n{\"batch_id\": \"bucket-1-s-384-g-1\", \"request_id\": \"model-b1-r05\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 384}}\n{\"batch_id\": \"bucket-1-s-384-g-1\", \"request_id\": \"model-b1-r06\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 384}}\n{\"batch_id\": \"bucket-1-s-512-g-1\", \"request_id\": \"model-b1-r07\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 512}}\n{\"batch_id\": \"bucket-1-s-512-g-1\", \"request_id\": \"model-b1-r08\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 512}}\n",
+    "task_file/output_data/plan_b2.jsonl": "{\"batch_id\": \"bucket-2-s-640-g-1\", \"request_id\": \"model-b2-r01\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 640}}\n{\"batch_id\": \"bucket-2-s-640-g-1\", \"request_id\": \"model-b2-r02\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 640}}\n{\"batch_id\": \"bucket-2-s-768-g-1\", \"request_id\": \"model-b2-r03\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 768}}\n{\"batch_id\": \"bucket-2-s-768-g-1\", \"request_id\": \"model-b2-r04\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 768}}\n{\"batch_id\": \"bucket-2-s-896-g-1\", \"request_id\": \"model-b2-r05\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 896}}\n{\"batch_id\": \"bucket-2-s-896-g-1\", \"request_id\": \"model-b2-r06\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 896}}\n{\"batch_id\": \"bucket-2-s-1024-g-1\", \"request_id\": \"model-b2-r07\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 1024}}\n{\"batch_id\": \"bucket-2-s-1024-g-1\", \"request_id\": \"model-b2-r08\", \"shape\": {\"heads_align\": 32, \"hidden_align\": 4096, \"seq_align\": 1024}}\n"
+  },
+  "output_truncated": false,
+  "pid": 3503084,
+  "process_tree_terminated": false,
+  "prover_calls": 0,
+  "resource_exhausted": false,
+  "resource_policy": {
+    "lane_reservations": {
+      "validation": {
+        "cpu_slots": 2,
+        "memory_mb": 0
+      }
+    },
+    "max_gpu_memory_percent": null,
+    "max_memory_percent": null,
+    "max_swap_percent": null,
+    "max_waiting_requests": 256,
+    "proof_backoff_seconds": 2.0,
+    "proof_cpu_stall_percent": 50.0,
+    "proof_io_stall_percent": 10.0,
+    "proof_memory_headroom_mb": 24922,
+    "proof_memory_stall_percent": 2.0,
+    "proof_recovery_enabled": false,
+    "proof_recovery_grants": 4,
+    "proof_recovery_interval_seconds": 0.25,
+    "proof_recovery_samples": 2,
+    "proof_resource_profile": null,
+    "proof_safety_enabled": true,
+    "require_known_gpu_for_gpu_work": true,
+    "reserved_gpu_memory_mb": 0,
+    "reserved_memory_mb": 0,
+    "total_child_process_slots": 16,
+    "total_cpu_slots": 16,
+    "total_gpu_memory_mb": null,
+    "total_memory_mb": 99688,
+    "total_unified_memory_mb": null
+  },
+  "returncode": 0,
+  "root_lease": {
+    "acquired_at": 1791161315.8100533,
+    "cancelled": true,
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "gpu_memory_mb": 0,
+    "lane": "orchestration",
+    "lease_id": "311998f71d6442bdb34a50206bfd719d",
+    "memory_mb": 2048,
+    "owner_pid": 3503051,
+    "parent_lease_id": null,
+    "released": true,
+    "requires_gpu": false,
+    "unified_memory_mb": 0,
+    "wait_seconds": 1.1840020306408405e-06
+  },
+  "runtime": "native",
+  "schema": "terminal-authored-reference-metrics-owned-attempt@1",
+  "scoped_result_status": "passed_scoped_authored_fixture",
+  "selected_parent_tooling_after": [
+    {
+      "bytes": 56829,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    {
+      "bytes": 4434,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    {
+      "bytes": 78154,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/logic/backends/process.py",
+      "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+    },
+    {
+      "bytes": 957,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/__init__.py",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    {
+      "bytes": 69336,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    {
+      "bytes": 15543,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+      "sha256": "3655923785cb99409171caaba8c523354f03dbe8d82b6deb45a7b46db8394633"
+    },
+    {
+      "bytes": 109669,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "0887be4827a877438f793552a1ea43cb36815ceced96ee51df11690576a66e8c"
+    },
+    {
+      "bytes": 53075,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+      "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+    },
+    {
+      "bytes": 5845,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    }
+  ],
+  "selected_parent_tooling_before": [
+    {
+      "bytes": 56829,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    {
+      "bytes": 4434,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    {
+      "bytes": 78154,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/logic/backends/process.py",
+      "sha256": "39774ae277fbac649d9bec2ddd4f112c18c8a5617b105578847f42ac29d583f2"
+    },
+    {
+      "bytes": 957,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/__init__.py",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    {
+      "bytes": 69336,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    {
+      "bytes": 15543,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+      "sha256": "3655923785cb99409171caaba8c523354f03dbe8d82b6deb45a7b46db8394633"
+    },
+    {
+      "bytes": 109669,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "0887be4827a877438f793552a1ea43cb36815ceced96ee51df11690576a66e8c"
+    },
+    {
+      "bytes": 53075,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+      "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+    },
+    {
+      "bytes": 5845,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/datasets/checkout/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    }
+  ],
+  "selected_parent_tooling_common_pins_stable": true,
+  "selected_tooling_scope": "Observed parent Python source imports from published datasets checkout; no whole checkout, child, native library or all-loader census.",
+  "status": "passed_native_metrics_recorded",
+  "stderr": "",
+  "stdout": "{\"status\": \"passed_scoped_authored_fixture\", \"strict_thresholds\": 8, \"global_shapes\": 8, \"inputs_unchanged\": true}\n",
+  "termination_reason": "completed",
+  "timed_out": false,
+  "training_calls": 0,
+  "unavailable": false,
+  "workspace_cleaned": true,
+  "workspace_limit_exceeded": false
+}

@@ -1,0 +1,15 @@
+{
+  "builder": {
+    "bytes": 17194,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-01/build_package.py",
+    "sha256": "16945c4ac8741014f7dc34c5e46c26f3081c62244d9d63645aa4ce2364e93a3b"
+  },
+  "hardlink_source_mutations": false,
+  "new_model_prover_SQL_calls": 0,
+  "remote_network_mutations": 0,
+  "roots": 6,
+  "schema": "terminal-source-model-package-builder-freeze@1",
+  "scope": "Source/package byte preservation plus frozen scanner/decoder inspection; no semantic model training or new native database readback.",
+  "source_test_files": 6,
+  "status": "ast_pass_source_only"
+}

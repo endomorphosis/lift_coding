@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "parsed_bytes_equal_exact_hashed_bytes",
+    "symlink_rejected",
+    "relative_path_rejected",
+    "FIFO_rejected_without_wait",
+    "oversize_plan_rejected"
+  ],
+  "cleaned_temporary_special_nodes": true,
+  "elapsed_seconds": 0.007023538986686617,
+  "model_training_calls": 0,
+  "payload_values_printed": false,
+  "prover_calls": 0,
+  "remote_mutations": 0,
+  "schema": "terminal-ir-successor-publisher-exact-input-controls@1",
+  "source": {
+    "bytes": 9568,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_successor_evidence_02.py",
+    "sha256": "670e064a8222ce1b0c962e202985974741a9a4476630b0541c7ec880b32009f2"
+  },
+  "status": "PASS"
+}

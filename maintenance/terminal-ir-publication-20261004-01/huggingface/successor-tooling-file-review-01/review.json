@@ -1,0 +1,479 @@
+{
+  "actual_file_only_elapsed_seconds": 0.05209358502179384,
+  "audit_JSON_syntax_passed": true,
+  "bounded_scans": [
+    {
+      "binding": {
+        "bytes": 35323,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classify_and_prepare_public_archive_07.py",
+        "sha256": "dd457cb927270f53617781de1f576d1de1fac76b86191d769f4f923fa966a1f8"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 35323,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 26475,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+        "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 26475,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 5757,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/run_frozen_publication_phase.py",
+        "sha256": "8d9955df76155f75326fdda8039119bacab9bad3ca71306f241be9b2124d01b8"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 5757,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 10215,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_qualified_archive_02.py",
+        "sha256": "3cd39d0c11034c26b976f25a9473d8ed7db692da7f0ff9c43868238b5b3cc754"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 10215,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 15522,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/review_closed_public_archive_01.py",
+        "sha256": "106c82a7c24cd134f2c2f43e814741d310d27b0f9ea47840bcb7916762ac71e6"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 15522,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 8519,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_successor_evidence_01.py",
+        "sha256": "d1ba836b65d584c206c7371b2525b793c8c872c3484c4c5e9a1523eb89324fec"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 8519,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 9568,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_successor_evidence_02.py",
+        "sha256": "670e064a8222ce1b0c962e202985974741a9a4476630b0541c7ec880b32009f2"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 9568,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 9453,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/prepare_successor_publication_01.py",
+        "sha256": "ef195b21fd5f43cacde763469288418fcdfd7b11989f36d62e3e65e285d3d1e6"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 9453,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 12224,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/prepare_successor_publication_02.py",
+        "sha256": "9a4accdc8b87a4dcf11ffee3914aee1ad4bd601925d5dfea675438613a0c82bb"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 12224,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 12947,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/prepare_successor_publication_03.py",
+        "sha256": "11c948e4d0ee57a18bde125f8f2cee10a5817074ec61bd43bdd25f01d23b955f"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 12947,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 13558,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/prepare_successor_publication_04.py",
+        "sha256": "86605b18130b0b9453f7ade3d507df36fd42e4688bf96cac93ecf334a8269ff7"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 13558,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 17194,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-01/build_package.py",
+        "sha256": "16945c4ac8741014f7dc34c5e46c26f3081c62244d9d63645aa4ce2364e93a3b"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 17194,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 21312,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/build_package.py",
+        "sha256": "4ae975f4f04acbc4112e4615c4b5595825f9f7ac573714d50802b64cfd753b82"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 21312,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 7396,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/review_package.py",
+        "sha256": "54a07b5afb08039d403f709c4e14fd744e5e3ba1d0e7b08097e7b4262ae72431"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 7396,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 21117,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/build_package.py",
+        "sha256": "8c8eab266a053115cdf0ea11a8aea5323611c2ab049ec1541383831618e385ce"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 21117,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 10093,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/review_package.py",
+        "sha256": "dc2cca8e23cdf7aa67c455a623d6206cf5ba4c755e0cb3ad0516536e4a247caa"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 10093,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 8666,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-tooling-file-review-01/prepare_tooling_manifest.py",
+        "sha256": "5a6cd977d78aaef5df354e6a44a3380a179b1c940ca3bd1c20e7882b118f8048"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 8666,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 2180,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publisher-source-review-01/review.json",
+        "sha256": "945c63469239b8f22431acb559e57d6e374f3fed190c9c1920715ace98ef9b73"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 2180,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 3111,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publisher-source-review-02/review.json",
+        "sha256": "17ea2e8ae7b2be5e12c8df66c27eaced7db632b003bb9e55483f10c45e51eb2b"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 3111,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 723,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-publisher-reader-controls-01/closed.json",
+        "sha256": "8cb5f12c570c61e47784fd5209e1a614a94c9f3888af53e823b54da0ff57e615"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 723,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 8093,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/independent-source-review-01/review.json",
+        "sha256": "d1c7097e2f52173bbec80f98662b00b1eccf47b81771623dfea219ae63f293d9"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 8093,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 10307,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/independent-source-review-02/review.json",
+        "sha256": "6cc56fb7f61d95970507512ced3b13a2a0a7279b2c9d344ef707b7dc247e395c"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 10307,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 2780,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/root-physical-review-01/review.json",
+        "sha256": "e6c703e2c3a8082f38b8e63f9a6582d0c2f14a61f479bc8501a84bf6047e1b67"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 2780,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 2915,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/root-physical-review-controls-02/review.json",
+        "sha256": "0311c3f9efcc0d0e572b74686ede06e4f7e71c33216df1374d75f562e3a18bd9"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 2915,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 397,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/root-physical-review-negative-01/control-result.json",
+        "sha256": "df6f292a306ddccacdc28df86b3e9e3dac8d1c6cbddd6474056be1f32a1993a0"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 397,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 1664,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-01/closed.json",
+        "sha256": "7da9692bac22a147cc60564769485f59f38f9994d98ee02e3591110ccfee77c5"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 1664,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 1298,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/closed.json",
+        "sha256": "49cec904cf7f0d7b013d5f26909480eee87e436f4f19bce79a7693d5dc897ac3"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 1298,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 1275,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/closed.json",
+        "sha256": "6a5b53f221d8241f7a51048fdb9cc2c9e05b1d61cbee712d5fedc689399faaa3"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 1275,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 2123,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-02/file-only-review-01.json",
+        "sha256": "142ac6862e5fa656b13c5e93bd7b6190e939ce0885c27a8dae9ace5cf9d9a2a4"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 2123,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 4823,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/file-only-review-01.json",
+        "sha256": "18a11d303dee0d87f508a3b046a6ad66b91a327da0b5a9f43a49c956f1c4926d"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 4823,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 7083,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-preparer-source-review-04/review.json",
+        "sha256": "69f40a994cd259b7d0105f4ee5ae5f7adcac232f61677f21df4024b394d8dc06"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 7083,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 1285,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-05/closed.json",
+        "sha256": "3f7c2c731dbf9e34ad24df8f4740dcfe8869dc22daf934ff299c0994ea14423c"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 1285,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 1495,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classification-source-freeze-01.json",
+        "sha256": "e83bcd6a395c2470e36d170e6054df44a5ddbb48c1649dc75c6efaac5126459f"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 1495,
+        "streams": 1
+      },
+      "scan_hits": []
+    },
+    {
+      "binding": {
+        "bytes": 547,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publication-phase-wrapper-freeze-01.json",
+        "sha256": "a8425716a0a43a3481a2e45726c1d9e032eaf80cb5b2c1f3b9c8fb04670ecae3"
+      },
+      "scan_counts": {
+        "raw_stream_bytes": 547,
+        "streams": 1
+      },
+      "scan_hits": []
+    }
+  ],
+  "bytes": 297438,
+  "candidate_exclusions": [
+    {
+      "binding": {
+        "bytes": 11371,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/run_decoder_controls_05.py",
+        "sha256": "d70ccbfe0f27f5e81597ddf8bdc9eb32ea731292256eb8468bb0a9415de57cdf"
+      },
+      "hits": [
+        {
+          "match_sha256": "0f6d5c106a0d105445c528e7541e510314e68a3d395815055c19c4f870187c0b",
+          "pattern": "complete_private_key_pem_or_escaped"
+        },
+        {
+          "match_sha256": "9e7d4f0783321c341622611b32fae92c0c747eb34ba1463db963aa5bad37b013",
+          "pattern": "complete_private_key_pem_or_escaped"
+        }
+      ],
+      "reason": "credential_pattern_or_exact_cached_credential_candidate"
+    }
+  ],
+  "exact_available_cached_credential_veto": true,
+  "file_count": 34,
+  "files_all_exact_before_after": true,
+  "frozen_scanner_classifier": {
+    "bytes": 35323,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classify_and_prepare_public_archive_07.py",
+    "sha256": "dd457cb927270f53617781de1f576d1de1fac76b86191d769f4f923fa966a1f8"
+  },
+  "frozen_scanner_helper": {
+    "bytes": 26475,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+    "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+  },
+  "manifest": {
+    "bytes": 23101,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-tooling-file-review-01/manifest.json",
+    "sha256": "33a3700727c188703295760f69e13676b3eebed6247a4eb5a81cc12c019f4fd2"
+  },
+  "manifest_scan_counts": {
+    "raw_stream_bytes": 23101,
+    "streams": 1
+  },
+  "manifest_scan_hits": [],
+  "native_SQL_model_optimizer_prover_jobs": 0,
+  "new_source_ast_syntax_passed": true,
+  "old_sources_or_evidence_modified": false,
+  "remote_mutations": 0,
+  "scan_budget": {
+    "actual_decoded_bytes": 0,
+    "actual_members": 0,
+    "container_bytes": 2097152,
+    "decoded_bytes": 8388608,
+    "depth": 6,
+    "members": 1000,
+    "wall_seconds": 60
+  },
+  "schema": "terminal-successor-publication-tooling-file-only-review@1",
+  "scope_limits": [
+    "Exact individually stable selected source files, not atomic all-file capture or universal secret absence.",
+    "Code syntax and credential byte scan only; no new claim that all earlier candidate tooling versions passed source review.",
+    "Earlier rejected source versions and failed local attempts remain labeled in their closed audit receipts."
+  ],
+  "status": "passed",
+  "tooling_behaviors_rerun": false
+}

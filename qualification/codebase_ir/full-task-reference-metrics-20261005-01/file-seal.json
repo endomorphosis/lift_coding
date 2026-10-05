@@ -1,0 +1,215 @@
+{
+  "PlanCreate_calls": 0,
+  "exclusions": [
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/resources.json.lock",
+      "reason": "closed transient runtime lock"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/resources.json.lock",
+      "reason": "closed transient runtime lock"
+    }
+  ],
+  "files": [
+    {
+      "bytes": 5667,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/control.py",
+      "sha256": "c1b05543202c25355e0a0bc0dbb7f5d4f10e2e22e75015abd123fb5870850050"
+    },
+    {
+      "bytes": 3094,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/FalseReversedCostBound.lean",
+      "sha256": "85740c075dbdb35107e10f72dee5de79037d3fe298db50687b40e6325abfc8ce"
+    },
+    {
+      "bytes": 2464,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/FalseReversedCostBound.lean.check.json",
+      "sha256": "9d5a3e0ed004096d839c7e6e2623f22e9cb8d37035335ecb13d6c6fb5e7ebd0d"
+    },
+    {
+      "bytes": 2737,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/ObservedMetricBounds.lean",
+      "sha256": "6ccb2fdc0c16be7426836d6d9e1eea318d5e24e925d604fb7d55b55c85545909"
+    },
+    {
+      "bytes": 151489,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/ObservedMetricBounds.lean.check.json",
+      "sha256": "f8da64a967d68d5fd58eecd31fcdbde61d6ef0fe9c14a2b2054379dc51bbd0b6"
+    },
+    {
+      "bytes": 29336,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/ObservedMetricBounds.olean",
+      "sha256": "cbf88527529c19bed724a8114fc9ef10c1363762ac64e991b7429b6934dbc2aa"
+    },
+    {
+      "bytes": 13082,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/closed.json",
+      "sha256": "11a83a1fb9e5607f21056c5e3d38f3ec32d7e412128ffc60f5fc2ebf6050eb85"
+    },
+    {
+      "bytes": 2402,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/resources.json",
+      "sha256": "e03c9a83b4d1e087f9c3fc788943908843a77751d539abc77bfe3185d8e5383c"
+    },
+    {
+      "bytes": 5336,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/lean-01/started.json",
+      "sha256": "0f46f5162f6f7fee0974d4cb62ed3853a7e6b0cea64c6f28ccae876b4225f725"
+    },
+    {
+      "bytes": 5667,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/control.py",
+      "sha256": "c1b05543202c25355e0a0bc0dbb7f5d4f10e2e22e75015abd123fb5870850050"
+    },
+    {
+      "bytes": 8096,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/source/cost_model.py",
+      "sha256": "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+    },
+    {
+      "bytes": 5501,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/source/reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441"
+    },
+    {
+      "bytes": 511,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/task_file/input_data/requests_bucket_1.jsonl",
+      "sha256": "59f779e03963f0f94a66ff19763e7a424fc6d0063cc4b3385a74763b23b41a46"
+    },
+    {
+      "bytes": 513,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/captured/task_file/input_data/requests_bucket_2.jsonl",
+      "sha256": "cfd0640d0c8535ced94c3b87467537dcf25c320f8ab02ebd63f9403ba4972f7b"
+    },
+    {
+      "bytes": 21011,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/closed.json",
+      "sha256": "1cd6a3e87540768e2388ea3adc2f36a75876b443e7812442337046e6afb68f5f"
+    },
+    {
+      "bytes": 1802,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/input-manifest.json",
+      "sha256": "09b72d911b2368d030ca7fc9f48a8aa3c15fae840317f01eb43242822f5d3d94"
+    },
+    {
+      "bytes": 5960,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/result.json",
+      "sha256": "747f990980aac1f0f1bb054914a18f5f3833bc6732e6714b98e59e2a4c099a98"
+    },
+    {
+      "bytes": 1080,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/task_file/output_data/plan_b1.jsonl",
+      "sha256": "8ca69468133a513d1519d5a0b02d4f89740cb3f0708b1cbb3d009c6f3bd26407"
+    },
+    {
+      "bytes": 1084,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/task_file/output_data/plan_b2.jsonl",
+      "sha256": "02af82cc4983ea6edc91a42b78c8c60b29e08e7d6c9b9428b904f47152026ee8"
+    },
+    {
+      "bytes": 1499,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/resources.json",
+      "sha256": "0bf256e9eeb251a5edb52bd882b028a6ac6ab9aa6606169dd9afb72757f7a399"
+    },
+    {
+      "bytes": 4480,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/started.json",
+      "sha256": "731c385c3a9159097770b5407c134bf8a5b05e7456a0cab2ecbf427e94f045eb"
+    },
+    {
+      "bytes": 3094,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/FalseReversedCostBound.lean",
+      "sha256": "85740c075dbdb35107e10f72dee5de79037d3fe298db50687b40e6325abfc8ce"
+    },
+    {
+      "bytes": 2737,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/ObservedMetricBounds.lean",
+      "sha256": "6ccb2fdc0c16be7426836d6d9e1eea318d5e24e925d604fb7d55b55c85545909"
+    },
+    {
+      "bytes": 4656,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/embedding.json",
+      "sha256": "a2e5d0eaedefaced963ecb6bdee3749333928f7c6d7dda047ed63c01d5a43a7e"
+    },
+    {
+      "bytes": 1080,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-producer-freeze.json",
+      "sha256": "f83b9ce4df470428e1f3ecdd5c86722b51c410fa372ac265e91cae916dfb7430"
+    },
+    {
+      "bytes": 594,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/closed.json",
+      "sha256": "4a62063730599eea6ee6dab564f40c117809ba91f9ddd7df0d7f97bcc35d6521"
+    },
+    {
+      "bytes": 478,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/started.json",
+      "sha256": "574c0473b97f7b9d91e8f3ed868aa0f16e81cea0e77f7fdfb6741320daf262f6"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 344,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/lean-01/stdout.log",
+      "sha256": "dccdb91755430c512643e7f05abd2c37d1243e3d60e4bc0541e4f3a87bf97218"
+    },
+    {
+      "bytes": 579,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/closed.json",
+      "sha256": "cafbd30576bdbd5463a8ad547929707355a879a155f39d8eb9feee91d77c3ce0"
+    },
+    {
+      "bytes": 471,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/started.json",
+      "sha256": "5d7b3f61cfd7969910105f7769bbc984dab36db2030f8c411c365054fd05eb76"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 326,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/outer/metrics-01/stdout.log",
+      "sha256": "855623c0f971c296f8b54a398eb4e492c8e100dc3a50330ec50352d90cecd590"
+    },
+    {
+      "bytes": 1177,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/producer-freeze.json",
+      "sha256": "91f335ec29b8b631eaa6512e954b4388e69c5dc1a9a7fbaf7c1ec55b0bfa5801"
+    },
+    {
+      "bytes": 2566,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_lean_outer.py",
+      "sha256": "bd089cdaabf08f1d3af306a5bba6c05a203de27c7261c2ce2f62eae9efdb86dc"
+    },
+    {
+      "bytes": 7346,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_lean_owned.py",
+      "sha256": "5100cc271893ab2944501a6a887d9294f49fc40eca0685ebec76207c1cb34f9d"
+    },
+    {
+      "bytes": 2567,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_outer.py",
+      "sha256": "9cfd9361479d75f38386d04f3a87c09880990739f9ebf15ece1ab7fe398fe37c"
+    },
+    {
+      "bytes": 8388,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/run_owned.py",
+      "sha256": "1bf880dc0fb26e51639e0b3372bdc4f28a1187d740cdc3f9dcf9d76133c6e822"
+    }
+  ],
+  "native_lean_calls": 2,
+  "native_metric_worker_invocations": 1,
+  "native_public_plan_metrics_calls": 2,
+  "official_benchmark_score": null,
+  "relative_paths_not_used": true,
+  "schema": "terminal-authored-native-metrics-and-finite-lean-file-seal@1",
+  "scope": "Two successful outer attempts: public CostModel evaluation on16 authored requests and finite Lean inequalities with one genuinely rejected false control. Historical roots unchanged; no actual benchmark or convergence qualification.",
+  "training_calls": 0
+}

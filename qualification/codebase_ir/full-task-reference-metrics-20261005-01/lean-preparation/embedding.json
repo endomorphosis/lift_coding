@@ -1,0 +1,144 @@
+{
+  "embedding_method": "fractions.Fraction.from_float actual JSON-decoded native binary64 values and threshold values; no decimal substitution.",
+  "formal_scope": "Finite inequalities for exact real embeddings of values observed in one authored native source execution only. No cost model derivation, instruction-to-model equivalence, full benchmark satisfaction, convergence or activation.",
+  "lean_sources": [
+    {
+      "bytes": 2737,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/ObservedMetricBounds.lean",
+      "sha256": "6ccb2fdc0c16be7426836d6d9e1eea318d5e24e925d604fb7d55b55c85545909"
+    },
+    {
+      "bytes": 3094,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/lean-preparation/FalseReversedCostBound.lean",
+      "sha256": "85740c075dbdb35107e10f72dee5de79037d3fe298db50687b40e6325abfc8ce"
+    }
+  ],
+  "native_result": {
+    "bytes": 5960,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/full-task-reference-metrics-20261005-01/evidence/metrics-01/output/result.json",
+    "sha256": "747f990980aac1f0f1bb054914a18f5f3833bc6732e6714b98e59e2a4c099a98"
+  },
+  "rows": [
+    {
+      "bucket": 1,
+      "metric": "cost",
+      "observed_binary64": 313580032.0,
+      "observed_exact": {
+        "denominator": "1",
+        "numerator": "313580032"
+      },
+      "theorem": "AuthoredReferenceMetricBounds.strict_b1_cost",
+      "threshold_binary64": 300000000000.0,
+      "threshold_exact": {
+        "denominator": "1",
+        "numerator": "300000000000"
+      }
+    },
+    {
+      "bucket": 1,
+      "metric": "pad_ratio",
+      "observed_binary64": 0.0,
+      "observed_exact": {
+        "denominator": "1",
+        "numerator": "0"
+      },
+      "theorem": "AuthoredReferenceMetricBounds.strict_b1_pad_ratio",
+      "threshold_binary64": 0.055,
+      "threshold_exact": {
+        "denominator": "144115188075855872",
+        "numerator": "7926335344172073"
+      }
+    },
+    {
+      "bucket": 1,
+      "metric": "p95_latency_ms",
+      "observed_binary64": 6234.784,
+      "observed_exact": {
+        "denominator": "68719476736",
+        "numerator": "428451094041985"
+      },
+      "theorem": "AuthoredReferenceMetricBounds.strict_b1_p95_latency_ms",
+      "threshold_binary64": 2100000.0,
+      "threshold_exact": {
+        "denominator": "1",
+        "numerator": "2100000"
+      }
+    },
+    {
+      "bucket": 1,
+      "metric": "sequential_timecost",
+      "observed_binary64": 16747.136,
+      "observed_exact": {
+        "denominator": "17179869184",
+        "numerator": "287713605686657"
+      },
+      "theorem": "AuthoredReferenceMetricBounds.strict_b1_sequential_timecost",
+      "threshold_binary64": 270000000.0,
+      "threshold_exact": {
+        "denominator": "1",
+        "numerator": "270000000"
+      }
+    },
+    {
+      "bucket": 2,
+      "metric": "cost",
+      "observed_binary64": 1548802560.0,
+      "observed_exact": {
+        "denominator": "1",
+        "numerator": "1548802560"
+      },
+      "theorem": "AuthoredReferenceMetricBounds.strict_b2_cost",
+      "threshold_binary64": 48000000000.0,
+      "threshold_exact": {
+        "denominator": "1",
+        "numerator": "48000000000"
+      }
+    },
+    {
+      "bucket": 2,
+      "metric": "pad_ratio",
+      "observed_binary64": 0.0,
+      "observed_exact": {
+        "denominator": "1",
+        "numerator": "0"
+      },
+      "theorem": "AuthoredReferenceMetricBounds.strict_b2_pad_ratio",
+      "threshold_binary64": 0.15,
+      "threshold_exact": {
+        "denominator": "36028797018963968",
+        "numerator": "5404319552844595"
+      }
+    },
+    {
+      "bucket": 2,
+      "metric": "p95_latency_ms",
+      "observed_binary64": 13024.3136,
+      "observed_exact": {
+        "denominator": "549755813888",
+        "numerator": "7160192123500547"
+      },
+      "theorem": "AuthoredReferenceMetricBounds.strict_b2_p95_latency_ms",
+      "threshold_binary64": 210000.0,
+      "threshold_exact": {
+        "denominator": "1",
+        "numerator": "210000"
+      }
+    },
+    {
+      "bucket": 2,
+      "metric": "sequential_timecost",
+      "observed_binary64": 41388.672,
+      "observed_exact": {
+        "denominator": "137438953472",
+        "numerator": "5688415765275869"
+      },
+      "theorem": "AuthoredReferenceMetricBounds.strict_b2_sequential_timecost",
+      "threshold_binary64": 32000000.0,
+      "threshold_exact": {
+        "denominator": "1",
+        "numerator": "32000000"
+      }
+    }
+  ],
+  "schema": "terminal-authored-native-metric-exact-binary64-embedding@1"
+}
