@@ -1,0 +1,950 @@
+{
+  "accepted": false,
+  "all64_requests_retained_per_control": true,
+  "arms": {
+    "disabled_raw": {
+      "development": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 32
+        },
+        "decoder_status_counts": {
+          "abstained": 32
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 377598,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/disabled_raw-development.json",
+          "sha256": "0ea9292cdd683c1c339e796393c3bea38bc2030bd2b37261aa3c2a70fb207edb"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 32
+        },
+        "syntax_valid_unaccepted_proposals": 0
+      },
+      "train": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 31
+        },
+        "decoder_status_counts": {
+          "abstained": 31,
+          "decoded": 1
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 388363,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/disabled_raw-train.json",
+          "sha256": "89c990269b9d583239f7b3e541fc44b54ac04f3ea7d9e6e7f772fe06f367306a"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 31,
+          "decoder_proposal": 1
+        },
+        "syntax_valid_unaccepted_proposals": 1
+      }
+    },
+    "new_ae_reconstructed": {
+      "development": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 32
+        },
+        "decoder_status_counts": {
+          "abstained": 32
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 377466,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/new_ae_reconstructed-development.json",
+          "sha256": "48b7932eba16673881ed427400eaf55032d09fffb1c62bba79522d7f5034888d"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 32
+        },
+        "syntax_valid_unaccepted_proposals": 0
+      },
+      "train": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 31
+        },
+        "decoder_status_counts": {
+          "abstained": 31,
+          "decoded": 1
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 386845,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/new_ae_reconstructed-train.json",
+          "sha256": "12d3e8e5aada83743a9a290b705b80c4c475e7d682d9f0f9f9fb7ac7076d4f93"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 31,
+          "decoder_proposal": 1
+        },
+        "syntax_valid_unaccepted_proposals": 1
+      }
+    },
+    "pca_reconstructed": {
+      "development": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 32
+        },
+        "decoder_status_counts": {
+          "abstained": 32
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 377474,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/pca_reconstructed-development.json",
+          "sha256": "ebcdd279d2f33c2ea4dfe9535c9e84c9d25773ea99bf1ed8ebe967ded2985f37"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 32
+        },
+        "syntax_valid_unaccepted_proposals": 0
+      },
+      "train": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 31
+        },
+        "decoder_status_counts": {
+          "abstained": 31,
+          "decoded": 1
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 386857,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/pca_reconstructed-train.json",
+          "sha256": "e9d1b7d161cd8aa21d545aaef379f458c18b786523e163c31dfe13be1b62e239"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 31,
+          "decoder_proposal": 1
+        },
+        "syntax_valid_unaccepted_proposals": 1
+      }
+    },
+    "raw_source": {
+      "development": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 32
+        },
+        "decoder_status_counts": {
+          "abstained": 32
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 377466,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-development.json",
+          "sha256": "db7814973e2b0477abf3dc5846768d643a44d1f6261b100612b6199a207789d5"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 32
+        },
+        "syntax_valid_unaccepted_proposals": 0
+      },
+      "train": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 31
+        },
+        "decoder_status_counts": {
+          "abstained": 31,
+          "decoded": 1
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 386845,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-train.json",
+          "sha256": "edbd877c11fe1a40744731bd051d93d3f6fe85b36819108bd03f7129afa9763b"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 31,
+          "decoder_proposal": 1
+        },
+        "syntax_valid_unaccepted_proposals": 1
+      }
+    },
+    "rotated_raw": {
+      "development": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 32
+        },
+        "decoder_status_counts": {
+          "abstained": 32
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 377466,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/rotated_raw-development.json",
+          "sha256": "93f9a695f152b9da99905dec1d752cf5769803c35c5d920275b7ebc0eee95485"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 32
+        },
+        "syntax_valid_unaccepted_proposals": 0
+      },
+      "train": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 31
+        },
+        "decoder_status_counts": {
+          "abstained": 31,
+          "decoded": 1
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 386833,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/rotated_raw-train.json",
+          "sha256": "3641d5da2acb4c1057575fd7965094db4017a1579fa0ebf1b61f31321123d791"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 31,
+          "decoder_proposal": 1
+        },
+        "syntax_valid_unaccepted_proposals": 1
+      }
+    },
+    "zero_raw": {
+      "development": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 32
+        },
+        "decoder_status_counts": {
+          "abstained": 32
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 377446,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/zero_raw-development.json",
+          "sha256": "7223539841ec060c047e16b3db1c37c49f75d99584d0758a03dc4d4dc6f87301"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 32
+        },
+        "syntax_valid_unaccepted_proposals": 0
+      },
+      "train": {
+        "accepted_artifacts": 0,
+        "actual_model_forward_calls": 32,
+        "backend_exception_type": null,
+        "decoder_calls": 1,
+        "decoder_completions": 1,
+        "decoder_reason_counts": {
+          "copied_spans_overlap": 31
+        },
+        "decoder_status_counts": {
+          "abstained": 31,
+          "decoded": 1
+        },
+        "eligible_rows": 32,
+        "generation_executed": true,
+        "observed_owner_decoder_calls": 1,
+        "preflight_outcomes": {
+          "unassessed": 32
+        },
+        "proof_calls": 0,
+        "receipt_binding": {
+          "bytes": 386831,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/zero_raw-train.json",
+          "sha256": "d46f9bb1c793f57c0f7890f2f81c3f72308446a056910674de37ae79d0cb3eee"
+        },
+        "requested_rows": 32,
+        "semantic_accuracy_measured": false,
+        "semantic_support_established": false,
+        "source_outcomes": {
+          "decoder_abstained": 31,
+          "decoder_proposal": 1
+        },
+        "syntax_valid_unaccepted_proposals": 1
+      }
+    }
+  },
+  "canonical_package_initializers_executed": false,
+  "checkpoint_binding": {
+    "bytes": 3432437,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+    "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+  },
+  "checkpoint_unchanged": true,
+  "cohort_binding": {
+    "bytes": 22785,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+    "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+  },
+  "comparisons_against_raw": {
+    "disabled_raw": {
+      "development": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 1.141019344329834,
+        "mean_abs_modality_logit_difference": 0.46978594176471233,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      },
+      "train": {
+        "changed_counts": {
+          "canonical_ir": 1,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 1
+        },
+        "max_abs_modality_logit_difference": 1.000962257385254,
+        "mean_abs_modality_logit_difference": 0.47582922669244,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      }
+    },
+    "new_ae_reconstructed": {
+      "development": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 0.005646109580993652,
+        "mean_abs_modality_logit_difference": 0.001337531100337704,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      },
+      "train": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 0.0010879039764404297,
+        "mean_abs_modality_logit_difference": 0.00019386274895320335,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      }
+    },
+    "pca_reconstructed": {
+      "development": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 0.0013254880905151367,
+        "mean_abs_modality_logit_difference": 0.0002769492566585541,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      },
+      "train": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 2.384185791015625e-07,
+        "mean_abs_modality_logit_difference": 4.419901718695959e-08,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      }
+    },
+    "raw_source": {
+      "development": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 0.0,
+        "mean_abs_modality_logit_difference": 0.0,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      },
+      "train": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 0.0,
+        "mean_abs_modality_logit_difference": 0.0,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      }
+    },
+    "rotated_raw": {
+      "development": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 0.011384859681129456,
+        "mean_abs_modality_logit_difference": 0.0025528098146120706,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      },
+      "train": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 0.019217252731323242,
+        "mean_abs_modality_logit_difference": 0.003509634252016743,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      }
+    },
+    "zero_raw": {
+      "development": {
+        "changed_counts": {
+          "canonical_ir": 0,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 0
+        },
+        "max_abs_modality_logit_difference": 0.9562578201293945,
+        "mean_abs_modality_logit_difference": 0.39667208077541244,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      },
+      "train": {
+        "changed_counts": {
+          "canonical_ir": 1,
+          "decoder_presence": 0,
+          "preflight": 0,
+          "reason": 0,
+          "source_outcome": 0,
+          "status": 0,
+          "status_reason_ir": 1
+        },
+        "max_abs_modality_logit_difference": 0.8458695411682129,
+        "mean_abs_modality_logit_difference": 0.4033811034072035,
+        "modality_logit_comparison_rows": 32,
+        "requested_rows": 32,
+        "semantic_improvement_measured": false
+      }
+    }
+  },
+  "compression_storage_or_latency_benefit_measured": false,
+  "conditioner_profiles": {
+    "disabled_raw": {
+      "kind": "original_raw_vector_gate_disabled",
+      "latent_input_enabled": false
+    },
+    "new_ae_reconstructed": {
+      "checkpoint_binding": {
+        "bytes": 31102,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1730/worker/step200/checkpoint.json",
+        "sha256": "3f8c25a3945898444c71630433196bbd165ec86300b6f373694a3e9d4cfe7774"
+      },
+      "kind": "out_of_distribution_frozen_ae_reconstruction_perturbation",
+      "original_producer_receipt_claimed": false
+    },
+    "pca_reconstructed": {
+      "kind": "out_of_distribution_frozen_pca_inverse_perturbation",
+      "original_producer_receipt_claimed": false,
+      "pca_control": {
+        "basis_sha256": "12c78229b90767a3037dc799cc7420594d1927fb4d680dbe719e5f5f0a3d6686",
+        "development_rows_read_before_fit": 0,
+        "effective_train_rank": 31,
+        "fit_rows": 32,
+        "recipe": "TRAIN_centered_SVD/v1",
+        "retained_axes": 31,
+        "threshold": 0.008184499107301235
+      }
+    },
+    "raw_source": {
+      "kind": "original_pinned_native_source",
+      "source_profile_sha256": "151bd007468651bb720cfa60976c491e3e7cde55a06ef2336d786f9b80fe5f5e"
+    },
+    "rotated_raw": {
+      "kind": "within_split32_one_position_rotation_before_preflight",
+      "original_matched_source_producer_receipt_claimed": false
+    },
+    "zero_raw": {
+      "kind": "zero_vector_ablation",
+      "original_producer_receipt_claimed": false
+    }
+  },
+  "conditioner_width": 768,
+  "content_sha256": "e274ecc1a942690d78a0a6a0ae6bf5a038ab6ef3ef98d079c4aaf049585331b5",
+  "context_contract_unchanged": true,
+  "control_transformation_scope": "complete_within_split32_before_preflight",
+  "cost_scope": "frozen_decoder_execution_excludes_upstream_encoding_pca_and_ae_production",
+  "counts": {
+    "actual_model_forward_calls": 384,
+    "dimensional_restores": 1,
+    "embedded_parent_restores": 1,
+    "model_constructors": 3,
+    "optimizer_step_attempts": 0,
+    "optimizer_updates": 0,
+    "owner_decoder_calls": 12,
+    "source_row_decode_calls": 384,
+    "wrapper_calls": 12
+  },
+  "dependency_scope": "selected_entrypoints_and_captured_canonical_modules_not_complete_binary_closure",
+  "endpoints_binding": {
+    "bytes": 8257739,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/endpoints.json",
+    "sha256": "d1887bedba6662d1252c017c753e4bd7c793b1132aee1acb42c86330cf7fba9e"
+  },
+  "frozen_pca_ae_conditioners_reused": true,
+  "global_cpu_rng_unchanged": true,
+  "helper_binding": {
+    "bytes": 39894,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/evaluate_frozen_formalization.py",
+    "sha256": "b8d0c28006805585115aec4f236a6b14bdba6f43f82f9ec3e6cc64654925e475"
+  },
+  "masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "matched_8d_384d_decoder_experiments_executed": false,
+  "model_state_sha256": "ab1aaed682c3ac4905553cc7aab7ace78d3f07ab474d8670c234738fca2dc9eb",
+  "model_state_unchanged": true,
+  "native768_only": true,
+  "native_bundle_binding": {
+    "bytes": 1134995,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_bundle.json",
+    "sha256": "cc7f03946d5176900dceff276d3c5e721dff700c323fdf9fcd0667875d5179da"
+  },
+  "new_ae_fits": 0,
+  "new_encoder_calls": 0,
+  "new_pca_fits": 0,
+  "numeric_report_binding": {
+    "bytes": 8903,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/numeric-report.json",
+    "sha256": "9144e816e9846cf8961c2318a75306c773b3bb132cfb98cd7f83e1e4bdfd3483"
+  },
+  "original_context_contract": {
+    "dimension": 768,
+    "producer_sha256": "b1b043897e866794185e242c8e0e1ac7982cd012f61111186b3e09c96f416d43",
+    "representation_id": "Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062:code=Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4:d768:pool=cls:norm=l2:cpu:float32:tokens8192:reject_overlength:v1",
+    "training_index_sha256": "739964281f8eb516ca7849da422d44428d9ce09a3f2b64df2c34da2d26d6949f"
+  },
+  "os_sandbox": false,
+  "output_scope": "unaccepted_single_rule_literal_source_span_proposals",
+  "parameter_gradients_created": false,
+  "plan_binding": {
+    "bytes": 7996,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-plan-01.json",
+    "sha256": "b62784c7c9857c9c222fc3b8c9cd736b9860fc4507d8e9b78b8ee53ee6c464ab"
+  },
+  "preflight_scope": "unassessed_means_eligible_not_semantically_supported",
+  "preserved_input_bindings": [
+    {
+      "bytes": 7996,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-plan-01.json",
+      "sha256": "b62784c7c9857c9c222fc3b8c9cd736b9860fc4507d8e9b78b8ee53ee6c464ab"
+    },
+    {
+      "bytes": 39894,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/evaluate_frozen_formalization.py",
+      "sha256": "b8d0c28006805585115aec4f236a6b14bdba6f43f82f9ec3e6cc64654925e475"
+    },
+    {
+      "bytes": 6247,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/huggingface/launch_reconstruction.py",
+      "sha256": "910ff61a235d6e988e78b34a3b27d7ae7520f2bb10722881ab532c934be1199e"
+    },
+    {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 38995,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    },
+    {
+      "bytes": 42137,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 35294,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+      "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+    },
+    {
+      "bytes": 22521,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+      "sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d"
+    },
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 9794,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+      "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+    },
+    {
+      "bytes": 21764,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+      "sha256": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec"
+    },
+    {
+      "bytes": 43238,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+      "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+    },
+    {
+      "bytes": 22785,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+      "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+    },
+    {
+      "bytes": 18904,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/encoding-report.json",
+      "sha256": "3732a01db278868ebeaa2383e3dd36c6eb3f15285e6fb6fb09422d1cd08a39d8"
+    },
+    {
+      "bytes": 1134995,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_bundle.json",
+      "sha256": "cc7f03946d5176900dceff276d3c5e721dff700c323fdf9fcd0667875d5179da"
+    },
+    {
+      "bytes": 3433326,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-400.json",
+      "sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc"
+    },
+    {
+      "bytes": 8257622,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/endpoints.json",
+      "sha256": "7d94d54ffa47770e2f0a5fda7898d3e7210ed9ccee2431e2f7841db7783d8db0"
+    },
+    {
+      "bytes": 8901,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/numeric-report.json",
+      "sha256": "2ef120533f20475c41826dda643bcca860f0646806b96694b0492913efbb964c"
+    },
+    {
+      "bytes": 3432437,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+      "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+    },
+    {
+      "bytes": 8257739,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/endpoints.json",
+      "sha256": "d1887bedba6662d1252c017c753e4bd7c793b1132aee1acb42c86330cf7fba9e"
+    },
+    {
+      "bytes": 8903,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/numeric-report.json",
+      "sha256": "9144e816e9846cf8961c2318a75306c773b3bb132cfb98cd7f83e1e4bdfd3483"
+    },
+    {
+      "bytes": 3432783,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+      "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+    },
+    {
+      "bytes": 8257900,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/endpoints.json",
+      "sha256": "2f172dcd9a34ceb8284b543517eb141ffd1a949e1c20266ecf5a800474cb0c2b"
+    },
+    {
+      "bytes": 8896,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/numeric-report.json",
+      "sha256": "89e3689bb5fbe825f0598af5b14a4ee6c782ed1f3846503cb18cd2e2c98c0e8d"
+    },
+    {
+      "bytes": 568345,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_train_bundle.json",
+      "sha256": "104237e15673981fcfdd0a5076761b64b571574623f1f7e9435ca074d8684453"
+    },
+    {
+      "bytes": 568271,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_query_bundle.json",
+      "sha256": "6a956c8bcee7b3c10a34c6cae41710c36abe571837cb4b8c5f825b92e7234e0d"
+    }
+  ],
+  "proof_authority": false,
+  "proof_calls": 0,
+  "qualified": false,
+  "resources": {
+    "cpu_seconds": 5.185941,
+    "elapsed_seconds": 5.256135431001894,
+    "limits": {
+      "address_space_bytes": 8589934592,
+      "cooperative_rss_kib": 2097152,
+      "cooperative_seconds": 90,
+      "cpu_seconds_hard": 130,
+      "cpu_seconds_soft": 120,
+      "cpu_threads": 1,
+      "device": "cpu",
+      "dtype": "float32",
+      "parent_wall_seconds": 180
+    },
+    "observation_scope": "worker_before_final_report_serialization",
+    "peak_rss_kib": 727200
+  },
+  "restored_adam_unchanged": true,
+  "restored_optimizer_state_checksums": [
+    {
+      "role": "embedded_source_parent",
+      "sha256": "675d86193b99610edff944d4236b216573542ce5cf867d42009265cbb9bb95dd"
+    },
+    {
+      "role": "retained_dimensional_decoder",
+      "sha256": "563d0b16fb990f6a61e5abe296170d84591a5aed1afb2d605b403b882e2c84eb"
+    }
+  ],
+  "saved_optimizer_state_sha256": "563d0b16fb990f6a61e5abe296170d84591a5aed1afb2d605b403b882e2c84eb",
+  "schema": "source-only-frozen-downstream-span-report/v1",
+  "seed": 1730,
+  "selected_provider_entrypoints": {
+    "safetensors": {
+      "bytes": 194,
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/safetensors/__init__.py",
+      "sha256": "c1bcca66501582702c8c79aaaf2b922428800efa4367134609f8fc57363402dd",
+      "version": "0.7.0"
+    },
+    "torch": {
+      "bytes": 111841,
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/torch/__init__.py",
+      "sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1",
+      "version": "2.13.0"
+    }
+  },
+  "semantic_accuracy_measured": false,
+  "semantic_relevance_measured": false,
+  "site_pth_processing": false,
+  "source_fidelity_established": false,
+  "source_inputs_binding": {
+    "bytes": 43238,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+    "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+  },
+  "source_vector_tables_included": false,
+  "status": "completed",
+  "target_access": false,
+  "teacher_forcing": false,
+  "training_executed": false
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "frozen-downstream-source-representation-protocol-design/v1",
+  "status": "design_only_not_an_executed_experiment_or_runtime_admission",
+  "experiment_id": "authored64-native768-frozen-source-span-raw-pca-ae-v1",
+  "runtime_protocol_schema": "frozen-downstream-source-representation-protocol/v1",
+  "closed_runtime_protocol_fields": [
+    "schema", "experiment_id", "lane_id", "dimension", "cohort_binding",
+    "source_inputs_binding", "native_bundle_binding", "native_expected_binding",
+    "reconstruction_run_plan_binding", "reconstruction_training_report_bindings",
+    "reconstruction_evaluation_report_binding", "numeric_control_owner_binding",
+    "decoder_checkpoint_bindings", "decoder_owner_bindings", "preflight_owner_binding",
+    "wrapper_owner_binding", "worker_binding", "seeds", "splits", "views",
+    "representation_recipes", "rotation_recipe", "request_recipe", "output_selection",
+    "resource_limits", "authorization_scope", "outcome_contract", "validation_rules",
+    "content_sha256"
+  ],
+  "binding_contract": {
+    "closed_fields": ["path", "bytes", "sha256"],
+    "sha256": "lowercase_hex_64",
+    "bytes": "positive_exact_integer_not_boolean",
+    "verification": "Read exact captured bytes once, verify external digest and byte count before parsing or compiling; recheck preserved files after execution.",
+    "record_seal": "SHA256 of sorted compact UTF8 JSON excluding only content_sha256; no newline in the hashed payload."
+  },
+  "fixed_design": {
+    "lane_id": "native768",
+    "dimension": 768,
+    "sources": 64,
+    "splits": [{"id": "train", "rows": 32}, {"id": "development", "rows": 32}],
+    "declared_groups": 16,
+    "declared_groups_per_split": 8,
+    "contexts": "All exact prepared contexts are none_required with empty text and bindings.",
+    "seeds": [1729, 1730, 1731],
+    "views": ["raw", "pca_reconstructed", "ae_reconstructed", "disabled", "zero", "rotate_raw"],
+    "decoder_selection": "Retained native768 selected400 checkpoint for each registered seed; no new selection or fitting.",
+    "ae_selection": "Expanded TRAIN32 update200 checkpoint matching decoder seed; this is a paired seed design, not a full AE-seed by decoder-seed factorial.",
+    "arm_count": 18,
+    "requests_per_arm": 64,
+    "planned_primary_request_outcomes": 1152,
+    "representation_fit": "None in this downstream continuation. Use saved TRAIN32-only PCA control and saved selected AEs from the completed expanded run.",
+    "decoder_training_updates": 0,
+    "source_backbone_calls": 0,
+    "prover_calls": 0,
+    "formal_target_reads": 0
+  },
+  "representation_recipes": {
+    "raw": {
+      "recipe": "Exact original native768 producer coordinates joined by source/input identity; float32 conversion is confined to numerical decoder input.",
+      "original_json_preserved": true,
+      "owner_control": "none",
+      "training_basis": "Existing pinned Alibaba multilingual GTE native producer profile."
+    },
+    "pca_reconstructed": {
+      "recipe": "Saved TRAIN32-only mean/global RMS, retained31 PCA axes and inverse projection, then inverse normalization into768 source coordinates.",
+      "owner_control": "none",
+      "fit_rows": "train32_only_in_preceding_run",
+      "additional_l2_normalization": false,
+      "same_representation_for_all_decoder_seeds": true,
+      "profile_label": "Derived PCA reconstruction; never relabel as an observed native backbone output."
+    },
+    "ae_reconstructed": {
+      "recipe": "Saved same-seed selected update200 expanded AE reconstruction, inversely normalized into768 source coordinates.",
+      "owner_control": "none",
+      "fit_rows": "train32_only_in_preceding_run",
+      "additional_l2_normalization": false,
+      "ae_seed_pairing": "same_seed_as_decoder",
+      "profile_label": "Derived AE reconstruction; never relabel as an observed native backbone output."
+    },
+    "disabled": {
+      "recipe": "Exact raw768 input with decoder latent conditioning disabled through the owner's disabled control.",
+      "owner_control": "disabled",
+      "distinguished_from_zero": true
+    },
+    "zero": {
+      "recipe": "768 float32 zero coordinates with latent conditioning enabled.",
+      "owner_control": "none",
+      "distinguished_from_disabled": true
+    },
+    "rotate_raw": {
+      "recipe": "For each32-row split in its immutable cohort order, donate the next raw768 vector cyclically; perform donation before source preflight or decoder eligibility filtering.",
+      "owner_control": "none",
+      "donor_formula": "split_positions[(split_local_position+1)%32]",
+      "cross_split_donation": false,
+      "self_donation": false
+    }
+  },
+  "request_contract": {
+    "closed_inference_fields": ["id", "source_text", "context_text", "requires_context_resolution"],
+    "requires_context_resolution": false,
+    "source_text": "Exact prepared source_text, without grammar repair, truncation or case normalization.",
+    "context_text": "Exact prepared empty context text.",
+    "reference_fields_permitted": false,
+    "organizer_actor_action_object_fields_permitted": false,
+    "candidate_ir_permitted": false,
+    "source_preflight": "Existing pinned canonical decoder preflight, computed from source and declared context only.",
+    "filtering": "Compute all transformations and all donors for the complete64-request panel before filtering; return every input in original order.",
+    "zero_eligible_rows": "Valid observed outcome. Persist every blocked request, record zero decoder forwards and avoid inventing generation success."
+  },
+  "authorization_scope": {
+    "role": "exposed_authored_target_free_frozen_conditioning_perturbation_diagnostic",
+    "source_cohort_original_policy_unchanged": true,
+    "semantic_label_admission": false,
+    "independent_semantic_review_completed": false,
+    "masks": {"weak_decoder_fit": 0, "strong_semantic_fit": 0, "contrastive_supervision": 0, "proof_supervision": 0, "fidelity_evaluation": 0},
+    "source_fidelity_established": false,
+    "proof_authority": false,
+    "qualified": false,
+    "new_model_training_authorized_by_this_protocol": false,
+    "earlier_weak16_policy_does_not_admit_these64_rows": true
+  },
+  "measurable_outcomes": {
+    "all_request_outcomes": ["source_blocked", "clarification_required", "source_encoding_unavailable", "decoder_abstained", "decoder_unavailable", "decoder_proposal"],
+    "decoder_proposal_authority": "Existing wrapper outcome decoder_proposal means an unaccepted structural proposal; accepted remains false.",
+    "structural": ["canonical IR structural validity", "complete source-span transport consistency", "number of unaccepted proposals"],
+    "conditioning_sensitivity": ["proposal bytes equal to same-seed raw", "proposal bytes equal to same-seed disabled", "status equal to same-seed raw", "finite decision-margin changes on common eligible rows"],
+    "resource": ["actual decoder forwards", "restore count", "wall seconds", "worker CPU seconds", "peak RSS", "optimizer updates"],
+    "not_measured": ["semantic accuracy", "legal correctness", "source-fidelity accuracy", "independently judged obligation or permission preservation", "correct exception or quantifier scope", "useful proof success", "retrieval relevance", "broad-family generalization"]
+  },
+  "reporting_contract": {
+    "report_every_seed_and_view": true,
+    "aggregate_across_seeds_without_winner_selection": true,
+    "denominators": "Report64 all requests per arm plus separate32 TRAIN and32 DEV outcomes; eligibility denominators remain supplementary.",
+    "deterministic_controls": "Raw and PCA input representations are deterministic controls shared across decoder seeds; three decoder outputs are different seeded models, not independent representation fits.",
+    "paired_ae_limitation": "Same seed index pairs AE and decoder randomness. Results do not isolate AE-seed variance from decoder-seed variance.",
+    "interpretation": "This perturbation experiment tests whether a retained raw-trained decoder changes under reconstruction. It does not compare newly trained PCA-conditioned versus AE-conditioned decoders or establish which representation autoformalizes law better.",
+    "supported_lane_scope": "native768 only. Retained trained384 decoder uses a different learned legal-IR profile, and no compatible8D span decoder was established.",
+    "weights": "No new model weights are generated by this inference-only slice."
+  },
+  "next_matched_training_design": {
+    "prerequisite": "Separately admit exact TRAIN formal targets under an explicit reviewed or weak-diagnostic row-bound policy; do not change the current source-only masks by inference.",
+    "minimal_architecture": "Use identical source-token encoder, formula decoder,768-dimensional conditioning adapter, initial source weights, parameter count, vocabulary, optimizer schedule and decoding limits across raw/PCA-reconstructed/AE-reconstructed arms.",
+    "source_text_control": "Include the same source text in all arms and a source-only disabled arm, since text may dominate the conditioning vector.",
+    "fit_boundaries": "Fit PCA, AE and normalization on TRAIN sources only; freeze representation transforms before opening DEV targets; fit every decoder on the same admitted TRAIN targets.",
+    "budget": "Prespecify identical completed optimizer-update counts and batch schedules; retain zero-step and final states, all seeds and all-request outcomes. Never select a representation on these already exposed DEV32 sources as if they were confirmation data.",
+    "latent_only_comparison": "Lower-dimensional latent conditioning requires a new versioned adapter. Match effective bottleneck width or separately report capacity as a changed factor; equal widths cannot be silently imposed on the existing4/32/64 AE latents and4/31/31 PCA coordinates.",
+    "reviewed_confirmation": "A new traceably grouped independently reviewed corpus is required for semantic conclusions, with training, tuning and untouched confirmation roles declared before fitting."
+  },
+  "design_validation": {
+    "no_execution_occurred_in_preparing_this_design": true,
+    "no_network_calls": true,
+    "no_model_or_prover_calls": true,
+    "no_semantic_target_bodies_read": true,
+    "prior_weak_manifest_read_scope": "Top-level keys, first-row key names, ID/group identity and masks only; no proposal/canonical target bodies."
+  }
+}

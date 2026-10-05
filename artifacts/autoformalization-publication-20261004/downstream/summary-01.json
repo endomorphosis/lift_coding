@@ -1,0 +1,4931 @@
+{
+  "accepted": false,
+  "actual_counters": {
+    "actual_model_forward_calls": 1152,
+    "dimensional_restores": 3,
+    "embedded_parent_restores": 3,
+    "model_constructors": 9,
+    "optimizer_step_attempts": 0,
+    "optimizer_updates": 0,
+    "owner_decoder_calls": 36,
+    "source_row_decode_calls": 1152,
+    "wrapper_calls": 36
+  },
+  "all_registered_seeds_reported": true,
+  "all_selected_bindings_preserved": true,
+  "batch_binding": {
+    "bytes": 2821,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/batch-report.json",
+    "sha256": "d8167dd477213293b48eaa3ea123784d03dfb66e1999ae20b1a06dcacc8a4dc5"
+  },
+  "content_sha256": "4549c39cc36f8f4932bfe28aad05cbebdec240a073dd656463199db214545db5",
+  "development_rows": 32,
+  "development_winner_selected": false,
+  "formal_targets_read": false,
+  "generated_formula_bodies_included": false,
+  "helper_binding": {
+    "bytes": 25742,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/summarize_downstream.py",
+    "sha256": "5324d2a9a826abfbdf0b41db07cde1f50b28d5a4a5a18062e0a7ea9e1ba87ef6"
+  },
+  "limitations": [
+    "The sources are exposed authored English legal fixtures, not natural sources or untouched confirmation evidence.",
+    "PCA and AE reconstruction perturb a frozen raw-trained decoder; this is not a comparison of newly trained representation-conditioned decoders.",
+    "Raw/PCA input representations are shared deterministic controls across the three seeded decoder models.",
+    "AE and decoder seed indices are paired; AE-seed variance is coupled with decoder-seed variance.",
+    "Output coverage, structural validity and changes in generated IR or logits do not measure legal or semantic accuracy.",
+    "Decoder timing excludes upstream source encoding and PCA/AE production and does not establish compression savings.",
+    "Only the compatible native768 decoder lane executes;8D and the current native GTE384 lane remain planned."
+  ],
+  "masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "primary_request_outcomes": 1152,
+  "primary_view_seed_arms": 18,
+  "proof_authority": false,
+  "protocol_design_binding": {
+    "bytes": 10397,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/protocol-design-01.json",
+    "sha256": "267f1f6b2de84909e9834749269e4bf062f304e5024ae7821d21f439b5fd7af2"
+  },
+  "qualified": false,
+  "schema": "source-only-frozen-downstream-summary/v1",
+  "scope": "exposed_authored_native768_frozen_decoder_conditioning_perturbation",
+  "seed_results": [
+    {
+      "ae_checkpoint_binding": {
+        "bytes": 31102,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1729/worker/step200/checkpoint.json",
+        "sha256": "7496891fe4f51b2d36b2d1298efc8a59f31c9a009e1ece1786f45715accfbf20"
+      },
+      "arms": {
+        "disabled_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 1,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 1,
+                "source_outcome": 1,
+                "status": 1,
+                "status_reason_ir": 1
+              },
+              "max_abs_modality_logit_difference": 1.015298843383789,
+              "mean_abs_modality_logit_difference": 0.3851742039357002,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 30
+            },
+            "decoder_status_counts": {
+              "abstained": 30,
+              "decoded": 2
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 30,
+              "decoder_proposal": 2
+            },
+            "syntax_valid_unaccepted_proposals": 2
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 1.0233659744262695,
+              "mean_abs_modality_logit_difference": 0.38842673009397305,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          }
+        },
+        "new_ae_reconstructed": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0029859542846679688,
+              "mean_abs_modality_logit_difference": 0.0008354187981846432,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.00040221214294433594,
+              "mean_abs_modality_logit_difference": 0.00012311261768142381,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          }
+        },
+        "pca_reconstructed": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.000713348388671875,
+              "mean_abs_modality_logit_difference": 0.000142200345483919,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 4.76837158203125e-07,
+              "mean_abs_modality_logit_difference": 2.3903946081797283e-08,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          }
+        },
+        "raw_source": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0,
+              "mean_abs_modality_logit_difference": 0.0,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0,
+              "mean_abs_modality_logit_difference": 0.0,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          }
+        },
+        "rotated_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.009082630276679993,
+              "mean_abs_modality_logit_difference": 0.0025305664942910275,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.013267040252685547,
+              "mean_abs_modality_logit_difference": 0.002757861434171597,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          }
+        },
+        "zero_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 2,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 2,
+                "source_outcome": 2,
+                "status": 2,
+                "status_reason_ir": 2
+              },
+              "max_abs_modality_logit_difference": 0.7776050567626953,
+              "mean_abs_modality_logit_difference": 0.2922098081229099,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.782315731048584,
+              "mean_abs_modality_logit_difference": 0.2949723695249607,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          }
+        }
+      },
+      "checkpoint_binding": {
+        "bytes": 3433326,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-400.json",
+        "sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc"
+      },
+      "counts": {
+        "actual_model_forward_calls": 384,
+        "dimensional_restores": 1,
+        "embedded_parent_restores": 1,
+        "model_constructors": 3,
+        "optimizer_step_attempts": 0,
+        "optimizer_updates": 0,
+        "owner_decoder_calls": 12,
+        "source_row_decode_calls": 384,
+        "wrapper_calls": 12
+      },
+      "parent_binding": {
+        "bytes": 1227,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/parent-report.json",
+        "sha256": "19f8bd55ae7e2a91a94d130e326e8c5d1b7a2bf5fdfe6c12de825fdb371c2874"
+      },
+      "parent_wall_seconds": 5.977914707997115,
+      "report_binding": {
+        "bytes": 35748,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/downstream-report.json",
+        "sha256": "434720545a6fb1ea7a0936d2d1334c9bf5f2f7c5bce3ab1bf68dd22ae7364736"
+      },
+      "resources": {
+        "cpu_seconds": 5.233021,
+        "elapsed_seconds": 5.302729086019099,
+        "limits": {
+          "address_space_bytes": 8589934592,
+          "cooperative_rss_kib": 2097152,
+          "cooperative_seconds": 90,
+          "cpu_seconds_hard": 130,
+          "cpu_seconds_soft": 120,
+          "cpu_threads": 1,
+          "device": "cpu",
+          "dtype": "float32",
+          "parent_wall_seconds": 180
+        },
+        "observation_scope": "worker_before_final_report_serialization",
+        "peak_rss_kib": 729320
+      },
+      "seed": 1729
+    },
+    {
+      "ae_checkpoint_binding": {
+        "bytes": 31102,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1730/worker/step200/checkpoint.json",
+        "sha256": "3f8c25a3945898444c71630433196bbd165ec86300b6f373694a3e9d4cfe7774"
+      },
+      "arms": {
+        "disabled_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 1.141019344329834,
+              "mean_abs_modality_logit_difference": 0.46978594176471233,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 1,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 1
+              },
+              "max_abs_modality_logit_difference": 1.000962257385254,
+              "mean_abs_modality_logit_difference": 0.47582922669244,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          }
+        },
+        "new_ae_reconstructed": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.005646109580993652,
+              "mean_abs_modality_logit_difference": 0.001337531100337704,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0010879039764404297,
+              "mean_abs_modality_logit_difference": 0.00019386274895320335,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          }
+        },
+        "pca_reconstructed": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0013254880905151367,
+              "mean_abs_modality_logit_difference": 0.0002769492566585541,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 2.384185791015625e-07,
+              "mean_abs_modality_logit_difference": 4.419901718695959e-08,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          }
+        },
+        "raw_source": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0,
+              "mean_abs_modality_logit_difference": 0.0,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0,
+              "mean_abs_modality_logit_difference": 0.0,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          }
+        },
+        "rotated_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.011384859681129456,
+              "mean_abs_modality_logit_difference": 0.0025528098146120706,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.019217252731323242,
+              "mean_abs_modality_logit_difference": 0.003509634252016743,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          }
+        },
+        "zero_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.9562578201293945,
+              "mean_abs_modality_logit_difference": 0.39667208077541244,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 32
+            },
+            "decoder_status_counts": {
+              "abstained": 32
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 32
+            },
+            "syntax_valid_unaccepted_proposals": 0
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 1,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 1
+              },
+              "max_abs_modality_logit_difference": 0.8458695411682129,
+              "mean_abs_modality_logit_difference": 0.4033811034072035,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 31
+            },
+            "decoder_status_counts": {
+              "abstained": 31,
+              "decoded": 1
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 31,
+              "decoder_proposal": 1
+            },
+            "syntax_valid_unaccepted_proposals": 1
+          }
+        }
+      },
+      "checkpoint_binding": {
+        "bytes": 3432437,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+        "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+      },
+      "counts": {
+        "actual_model_forward_calls": 384,
+        "dimensional_restores": 1,
+        "embedded_parent_restores": 1,
+        "model_constructors": 3,
+        "optimizer_step_attempts": 0,
+        "optimizer_updates": 0,
+        "owner_decoder_calls": 12,
+        "source_row_decode_calls": 384,
+        "wrapper_calls": 12
+      },
+      "parent_binding": {
+        "bytes": 1228,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/parent-report.json",
+        "sha256": "71858ee14fc8760af3e1ae965f6968c326984d13299f808265ff1a7a48fe8567"
+      },
+      "parent_wall_seconds": 5.7750234410050325,
+      "report_binding": {
+        "bytes": 35746,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/downstream-report.json",
+        "sha256": "10fd49e3c64ed80ce1e0cb58336aab5b44404163a8d3f8d10a46d500446aa5ed"
+      },
+      "resources": {
+        "cpu_seconds": 5.185941,
+        "elapsed_seconds": 5.256135431001894,
+        "limits": {
+          "address_space_bytes": 8589934592,
+          "cooperative_rss_kib": 2097152,
+          "cooperative_seconds": 90,
+          "cpu_seconds_hard": 130,
+          "cpu_seconds_soft": 120,
+          "cpu_threads": 1,
+          "device": "cpu",
+          "dtype": "float32",
+          "parent_wall_seconds": 180
+        },
+        "observation_scope": "worker_before_final_report_serialization",
+        "peak_rss_kib": 727200
+      },
+      "seed": 1730
+    },
+    {
+      "ae_checkpoint_binding": {
+        "bytes": 31102,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/training-01/native768-seed1731/worker/step200/checkpoint.json",
+        "sha256": "bc8e3716fe5a90fa4ed41ffc305db77958ea47baf0416473448a6888566c43b6"
+      },
+      "arms": {
+        "disabled_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 1,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 1
+              },
+              "max_abs_modality_logit_difference": 0.8182262182235718,
+              "mean_abs_modality_logit_difference": 0.338570532136752,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.7527800798416138,
+              "mean_abs_modality_logit_difference": 0.33682828877742094,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          }
+        },
+        "new_ae_reconstructed": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0030310451984405518,
+              "mean_abs_modality_logit_difference": 0.0006490397499874234,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0008272081613540649,
+              "mean_abs_modality_logit_difference": 0.00012174745400746663,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          }
+        },
+        "pca_reconstructed": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0005471706390380859,
+              "mean_abs_modality_logit_difference": 0.00012738364360605678,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 4.76837158203125e-07,
+              "mean_abs_modality_logit_difference": 4.889443516731262e-08,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          }
+        },
+        "raw_source": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0,
+              "mean_abs_modality_logit_difference": 0.0,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.0,
+              "mean_abs_modality_logit_difference": 0.0,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          }
+        },
+        "rotated_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.004935801029205322,
+              "mean_abs_modality_logit_difference": 0.0012623645015992224,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.010376840829849243,
+              "mean_abs_modality_logit_difference": 0.00180362102886041,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          }
+        },
+        "zero_raw": {
+          "development": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.6404541730880737,
+              "mean_abs_modality_logit_difference": 0.27164592848081764,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          },
+          "train": {
+            "accepted_artifacts": 0,
+            "actual_model_forward_calls": 32,
+            "against_raw": {
+              "changed_counts": {
+                "canonical_ir": 0,
+                "decoder_presence": 0,
+                "preflight": 0,
+                "reason": 0,
+                "source_outcome": 0,
+                "status": 0,
+                "status_reason_ir": 0
+              },
+              "max_abs_modality_logit_difference": 0.5871462821960449,
+              "mean_abs_modality_logit_difference": 0.2704932559669639,
+              "modality_logit_comparison_rows": 32,
+              "requested_rows": 32,
+              "semantic_improvement_measured": false
+            },
+            "backend_exception_type": null,
+            "decoder_calls": 1,
+            "decoder_completions": 1,
+            "decoder_reason_counts": {
+              "copied_spans_overlap": 28
+            },
+            "decoder_status_counts": {
+              "abstained": 28,
+              "decoded": 4
+            },
+            "eligible_rows": 32,
+            "generation_executed": true,
+            "preflight_outcomes": {
+              "unassessed": 32
+            },
+            "proof_calls": 0,
+            "requested_rows": 32,
+            "semantic_accuracy_measured": false,
+            "semantic_support_established": false,
+            "source_outcomes": {
+              "decoder_abstained": 28,
+              "decoder_proposal": 4
+            },
+            "syntax_valid_unaccepted_proposals": 4
+          }
+        }
+      },
+      "checkpoint_binding": {
+        "bytes": 3432783,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+        "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+      },
+      "counts": {
+        "actual_model_forward_calls": 384,
+        "dimensional_restores": 1,
+        "embedded_parent_restores": 1,
+        "model_constructors": 3,
+        "optimizer_step_attempts": 0,
+        "optimizer_updates": 0,
+        "owner_decoder_calls": 12,
+        "source_row_decode_calls": 384,
+        "wrapper_calls": 12
+      },
+      "parent_binding": {
+        "bytes": 1227,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/parent-report.json",
+        "sha256": "db364b7a17b0a809deb8151bdf064b4cf19f058697ce0ee0a73045e2f5a55c83"
+      },
+      "parent_wall_seconds": 5.977364132995717,
+      "report_binding": {
+        "bytes": 36102,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/downstream-report.json",
+        "sha256": "f4e60692b9c09e02c342e4678958621ce9e2cfb7187198be960115c349761a1c"
+      },
+      "resources": {
+        "cpu_seconds": 5.3435950000000005,
+        "elapsed_seconds": 5.407239402993582,
+        "limits": {
+          "address_space_bytes": 8589934592,
+          "cooperative_rss_kib": 2097152,
+          "cooperative_seconds": 90,
+          "cpu_seconds_hard": 130,
+          "cpu_seconds_soft": 120,
+          "cpu_threads": 1,
+          "device": "cpu",
+          "dtype": "float32",
+          "parent_wall_seconds": 180
+        },
+        "observation_scope": "worker_before_final_report_serialization",
+        "peak_rss_kib": 727404
+      },
+      "seed": 1731
+    }
+  ],
+  "seeds": [
+    1729,
+    1730,
+    1731
+  ],
+  "selected_decoder_models": 3,
+  "selection_binding": {
+    "bytes": 2118,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/summary-selection-01.json",
+    "sha256": "b18d54e79ead95a75f38bb6f5240cebcf5221c202f6824e44a44a5400a2643d2"
+  },
+  "semantic_accuracy_measured": false,
+  "semantic_relevance_measured": false,
+  "source_fidelity_established": false,
+  "source_rows": 64,
+  "source_vector_tables_included": false,
+  "split_receipts": 36,
+  "train_rows": 32,
+  "verified_binding_count": 81,
+  "view_split_aggregates": {
+    "disabled_raw": {
+      "development": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.6666666666666666,
+              "minimum": 0,
+              "seed_values": [
+                1,
+                0,
+                1
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.3333333333333333,
+              "minimum": 0,
+              "seed_values": [
+                1,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.3333333333333333,
+              "minimum": 0,
+              "seed_values": [
+                1,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.3333333333333333,
+              "minimum": 0,
+              "seed_values": [
+                1,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.6666666666666666,
+              "minimum": 0,
+              "seed_values": [
+                1,
+                0,
+                1
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 1.141019344329834,
+            "mean": 0.9915148019790649,
+            "minimum": 0.8182262182235718,
+            "seed_values": [
+              1.015298843383789,
+              1.141019344329834,
+              0.8182262182235718
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.46978594176471233,
+            "mean": 0.39784355927905485,
+            "minimum": 0.338570532136752,
+            "seed_values": [
+              0.3851742039357002,
+              0.46978594176471233,
+              0.338570532136752
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.0,
+            "minimum": 28,
+            "seed_values": [
+              30,
+              32,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.0,
+            "minimum": 28,
+            "seed_values": [
+              30,
+              32,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 2.0,
+            "minimum": 0,
+            "seed_values": [
+              2,
+              0,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.0,
+            "minimum": 28,
+            "seed_values": [
+              30,
+              32,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 2.0,
+            "minimum": 0,
+            "seed_values": [
+              2,
+              0,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 2.0,
+          "minimum": 0,
+          "seed_values": [
+            2,
+            0,
+            4
+          ]
+        }
+      },
+      "train": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.3333333333333333,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                1,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.3333333333333333,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 1.0233659744262695,
+            "mean": 0.9257027705510458,
+            "minimum": 0.7527800798416138,
+            "seed_values": [
+              1.0233659744262695,
+              1.000962257385254,
+              0.7527800798416138
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.47582922669244,
+            "mean": 0.40036141518794466,
+            "minimum": 0.33682828877742094,
+            "seed_values": [
+              0.38842673009397305,
+              0.47582922669244,
+              0.33682828877742094
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            0,
+            1,
+            4
+          ]
+        }
+      }
+    },
+    "new_ae_reconstructed": {
+      "development": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.005646109580993652,
+            "mean": 0.003887703021367391,
+            "minimum": 0.0029859542846679688,
+            "seed_values": [
+              0.0029859542846679688,
+              0.005646109580993652,
+              0.0030310451984405518
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.001337531100337704,
+            "mean": 0.0009406632161699235,
+            "minimum": 0.0006490397499874234,
+            "seed_values": [
+              0.0008354187981846432,
+              0.001337531100337704,
+              0.0006490397499874234
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            1,
+            0,
+            4
+          ]
+        }
+      },
+      "train": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.0010879039764404297,
+            "mean": 0.0007724414269129435,
+            "minimum": 0.00040221214294433594,
+            "seed_values": [
+              0.00040221214294433594,
+              0.0010879039764404297,
+              0.0008272081613540649
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.00019386274895320335,
+            "mean": 0.00014624094021403126,
+            "minimum": 0.00012174745400746663,
+            "seed_values": [
+              0.00012311261768142381,
+              0.00019386274895320335,
+              0.00012174745400746663
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            0,
+            1,
+            4
+          ]
+        }
+      }
+    },
+    "pca_reconstructed": {
+      "development": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.0013254880905151367,
+            "mean": 0.0008620023727416992,
+            "minimum": 0.0005471706390380859,
+            "seed_values": [
+              0.000713348388671875,
+              0.0013254880905151367,
+              0.0005471706390380859
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.0002769492566585541,
+            "mean": 0.0001821777485828433,
+            "minimum": 0.00012738364360605678,
+            "seed_values": [
+              0.000142200345483919,
+              0.0002769492566585541,
+              0.00012738364360605678
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            1,
+            0,
+            4
+          ]
+        }
+      },
+      "train": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 4.76837158203125e-07,
+            "mean": 3.973642985026042e-07,
+            "minimum": 2.384185791015625e-07,
+            "seed_values": [
+              4.76837158203125e-07,
+              2.384185791015625e-07,
+              4.76837158203125e-07
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 4.889443516731262e-08,
+            "mean": 3.899913281202316e-08,
+            "minimum": 2.3903946081797283e-08,
+            "seed_values": [
+              2.3903946081797283e-08,
+              4.419901718695959e-08,
+              4.889443516731262e-08
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            0,
+            1,
+            4
+          ]
+        }
+      }
+    },
+    "raw_source": {
+      "development": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "seed_values": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "seed_values": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            1,
+            0,
+            4
+          ]
+        }
+      },
+      "train": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "seed_values": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.0,
+            "mean": 0.0,
+            "minimum": 0.0,
+            "seed_values": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            0,
+            1,
+            4
+          ]
+        }
+      }
+    },
+    "rotated_raw": {
+      "development": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.011384859681129456,
+            "mean": 0.008467763662338257,
+            "minimum": 0.004935801029205322,
+            "seed_values": [
+              0.009082630276679993,
+              0.011384859681129456,
+              0.004935801029205322
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.0025528098146120706,
+            "mean": 0.0021152469368341067,
+            "minimum": 0.0012623645015992224,
+            "seed_values": [
+              0.0025305664942910275,
+              0.0025528098146120706,
+              0.0012623645015992224
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            1,
+            0,
+            4
+          ]
+        }
+      },
+      "train": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.019217252731323242,
+            "mean": 0.014287044604619345,
+            "minimum": 0.010376840829849243,
+            "seed_values": [
+              0.013267040252685547,
+              0.019217252731323242,
+              0.010376840829849243
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.003509634252016743,
+            "mean": 0.0026903722383495835,
+            "minimum": 0.00180362102886041,
+            "seed_values": [
+              0.002757861434171597,
+              0.003509634252016743,
+              0.00180362102886041
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            0,
+            1,
+            4
+          ]
+        }
+      }
+    },
+    "zero_raw": {
+      "development": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 2,
+              "mean": 0.6666666666666666,
+              "minimum": 0,
+              "seed_values": [
+                2,
+                0,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 2,
+              "mean": 0.6666666666666666,
+              "minimum": 0,
+              "seed_values": [
+                2,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 2,
+              "mean": 0.6666666666666666,
+              "minimum": 0,
+              "seed_values": [
+                2,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 2,
+              "mean": 0.6666666666666666,
+              "minimum": 0,
+              "seed_values": [
+                2,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 2,
+              "mean": 0.6666666666666666,
+              "minimum": 0,
+              "seed_values": [
+                2,
+                0,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.9562578201293945,
+            "mean": 0.7914390166600546,
+            "minimum": 0.6404541730880737,
+            "seed_values": [
+              0.7776050567626953,
+              0.9562578201293945,
+              0.6404541730880737
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.39667208077541244,
+            "mean": 0.32017593912638004,
+            "minimum": 0.27164592848081764,
+            "seed_values": [
+              0.2922098081229099,
+              0.39667208077541244,
+              0.27164592848081764
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              31,
+              32,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              1,
+              0,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            1,
+            0,
+            4
+          ]
+        }
+      },
+      "train": {
+        "actual_model_forward_calls": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "against_raw": {
+          "changed_counts": {
+            "canonical_ir": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.3333333333333333,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                1,
+                0
+              ]
+            },
+            "decoder_presence": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "preflight": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "reason": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "source_outcome": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status": {
+              "defined_seeds": 3,
+              "maximum": 0,
+              "mean": 0.0,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                0,
+                0
+              ]
+            },
+            "status_reason_ir": {
+              "defined_seeds": 3,
+              "maximum": 1,
+              "mean": 0.3333333333333333,
+              "minimum": 0,
+              "seed_values": [
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          "max_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.8458695411682129,
+            "mean": 0.7384438514709473,
+            "minimum": 0.5871462821960449,
+            "seed_values": [
+              0.782315731048584,
+              0.8458695411682129,
+              0.5871462821960449
+            ]
+          },
+          "mean_abs_modality_logit_difference": {
+            "defined_seeds": 3,
+            "maximum": 0.4033811034072035,
+            "mean": 0.3229489096330427,
+            "minimum": 0.2704932559669639,
+            "seed_values": [
+              0.2949723695249607,
+              0.4033811034072035,
+              0.2704932559669639
+            ]
+          },
+          "modality_logit_comparison_rows": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "decoder_calls": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_completions": {
+          "defined_seeds": 3,
+          "maximum": 1,
+          "mean": 1.0,
+          "minimum": 1,
+          "seed_values": [
+            1,
+            1,
+            1
+          ]
+        },
+        "decoder_reason_counts": {
+          "copied_spans_overlap": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          }
+        },
+        "decoder_status_counts": {
+          "abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoded": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "eligible_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "preflight_outcomes": {
+          "unassessed": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 32.0,
+            "minimum": 32,
+            "seed_values": [
+              32,
+              32,
+              32
+            ]
+          }
+        },
+        "requested_rows": {
+          "defined_seeds": 3,
+          "maximum": 32,
+          "mean": 32.0,
+          "minimum": 32,
+          "seed_values": [
+            32,
+            32,
+            32
+          ]
+        },
+        "source_outcomes": {
+          "decoder_abstained": {
+            "defined_seeds": 3,
+            "maximum": 32,
+            "mean": 30.333333333333332,
+            "minimum": 28,
+            "seed_values": [
+              32,
+              31,
+              28
+            ]
+          },
+          "decoder_proposal": {
+            "defined_seeds": 3,
+            "maximum": 4,
+            "mean": 1.6666666666666667,
+            "minimum": 0,
+            "seed_values": [
+              0,
+              1,
+              4
+            ]
+          }
+        },
+        "syntax_valid_unaccepted_proposals": {
+          "defined_seeds": 3,
+          "maximum": 4,
+          "mean": 1.6666666666666667,
+          "minimum": 0,
+          "seed_values": [
+            0,
+            1,
+            4
+          ]
+        }
+      }
+    }
+  },
+  "views": [
+    "raw_source",
+    "pca_reconstructed",
+    "new_ae_reconstructed",
+    "zero_raw",
+    "disabled_raw",
+    "rotated_raw"
+  ]
+}

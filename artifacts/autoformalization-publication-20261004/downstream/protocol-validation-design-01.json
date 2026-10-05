@@ -1,0 +1,62 @@
+{
+  "schema": "frozen-downstream-source-representation-validation-design/v1",
+  "status": "validation_design_not_a_claim_of_completed_experiment_validation",
+  "fail_closed": true,
+  "validation_stages": [
+    {
+      "stage": "before_import_or_inference",
+      "checks": [
+        "Validate closed plan fields and exact seal; integers must reject bool substitutes.",
+        "Verify every source, bank, expected-binding, saved reconstruction, checkpoint and owner binding against external SHA256 and exact bytes.",
+        "Validate64 unique source/input IDs,32 train/32 development rows,8 disjoint declared groups per split, exact source and context hashes and all zero semantic masks.",
+        "Require source-only original policy, empty none_required contexts, no formal targets and no actor/action/object organizer channel.",
+        "Require observed native768 bundle with exact pinned Alibaba model and code profile;768 finite float32-compatible coordinates for every row.",
+        "Require PCA and mean derive only from the preceding TRAIN32 run, and saved AE endpoints derive from the selected200 checkpoint matching decoder seed.",
+        "Require all three selected400 decoder checkpoints match exact native768 context profile and current bound checkpoint owner pins; do not substitute trained384 or last800 states.",
+        "Validate all six views and18 arms, explicit selected-state/seed pairing, no DEV selection and no extra L2 operation.",
+        "Validate split-local rotation donor IDs and transformed vector hashes for all64 rows before source filtering.",
+        "Set CPU float32, one thread and bounded child process resources before numerical work; prevent optimizer steps and record actual call counters."
+      ]
+    },
+    {
+      "stage": "during_frozen_generation",
+      "checks": [
+        "Every arm presents exactly the same64 exact source/context requests in the same order; only its declared vector recipe or conditioning-enabled flag changes.",
+        "Source preflight results are identical across all arms and seeds; preflight uses no representation, target, candidate or organizer facet.",
+        "Only eligible rows reach the decoder, while every blocked/unavailable/abstained row remains in the full output denominator.",
+        "Disabled and zero controls have different owner gate semantics; manual split-local rotation invokes owner control none to avoid a second rotation.",
+        "Decoder receipts bind the exact effective vectors, checkpoint, source text and state digest and expose no acceptance, fidelity or proof authority.",
+        "Every output proposal passes existing structural and source-span transport checks; malformed receipts are an experiment failure, not success.",
+        "Actual numerical model state, serialized checkpoint bytes and global Torch CPU RNG remain unchanged; optimizer count stays zero."
+      ]
+    },
+    {
+      "stage": "saved_artifact_audit",
+      "checks": [
+        "Reverify all selected bindings after execution; compare plan and source/cohort policy bytes with their pre-run bindings.",
+        "Validate18 primary arm outputs each contain64 ordered outcomes,1152 primary outcomes in total, split counts32/32 and complete outcome accounting.",
+        "Recompute all-request/split status counts and pairwise output/status parity from saved receipts without model replay or semantic targets.",
+        "Persist zero eligible/zero forward outcomes accurately if all requests are blocked; do not omit such arms or replace them with unconstrained decoder calls.",
+        "Report deterministic source representation controls once and seeded decoder arms individually; do not treat repeated control inputs as independent samples.",
+        "Use all registered seeds and selected states, retaining any failures with bounded exception categories and no credential-bearing text.",
+        "Record actual numerical restores/forwards and resource observations separately from any requested counts or validation-only method invocations.",
+        "Require all authority fields and semantic-admission masks stay false/zero; report structural/sensitivity results separately from unmeasured semantic outcomes."
+      ]
+    }
+  ],
+  "focused_fixture_cases": [
+    "A valid64-row plan validates without numerical calls.",
+    "One changed source/profile/target-policy binding rejects before model import.",
+    "A boolean mask or count rejects when the contract requires exact integer0 or row counts.",
+    "An extra reference/candidate/organizer field in an inference request rejects.",
+    "Cross-split or post-filter rotation rejects; split-local cyclic donation succeeds.",
+    "A reconstruction paired with the wrong seed/checkpoint rejects.",
+    "A retained384 learned legal-IR context profile rejects as incompatible native GTE384, despite matching dimension.",
+    "Empty eligible positions produce complete64 blocked outcomes and zero forwards.",
+    "An unavailable decoder outcome remains in all-request counts.",
+    "Malformed source/vector/checkpoint joins reject.",
+    "Disabled and zero remain distinct even when their generated outputs happen to match.",
+    "A requested18-arm summary with17 actual arm files rejects completeness claims.",
+    "Structural proposal validity never turns semantic or proof authority fields on."
+  ]
+}
