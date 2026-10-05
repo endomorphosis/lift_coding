@@ -1,0 +1,20 @@
+{
+  "archive_decodes": 0,
+  "classifier_calls": 0,
+  "credential_reads": 0,
+  "failing_source": {
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/prepare_publication_metadata.py",
+    "sha256": "2811e0cf50ed17bc1f92fb1368bbd06b044d7059f84369830117c0bd4b15182d"
+  },
+  "native_jobs": 0,
+  "network_calls": 0,
+  "qualification_failure": false,
+  "reviewer_source": {
+    "bytes": 10820,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/review_final_source_02.py",
+    "sha256": "0ab69de5d76712d579624c06ff5a1145f934ad7e4900c6d7467f59f4c565a0c3"
+  },
+  "schema": "ranker-trace-independent-publication-source-review-attempt@1",
+  "source_error": "SyntaxError at line127: positional argument follows keyword argument",
+  "status": "refused_source_syntax_error_before_population_checks"
+}

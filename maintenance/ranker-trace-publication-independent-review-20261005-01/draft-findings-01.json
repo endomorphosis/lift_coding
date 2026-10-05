@@ -1,0 +1,56 @@
+{
+  "builder": {
+    "bytes": 17062,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/build_package.py",
+    "sha256": "d3b14c0c5ee9fb4c790a0f6235d4f3dbf18df1923c5e1eb9ed1e9db39668c8ac"
+  },
+  "findings": [
+    {
+      "evidence": "Draft creates one tar from about45MBselected qualification bytes, while frozen classifier.copy caps any decoded container at16MiB. Final zstd recursive classification deterministically refuses this population.",
+      "id": "decoded_container_bound",
+      "recommended_resolution": "Use a root-reviewed concrete archive selection/strategy within unchanged per-container and decoded-work bounds; continue binding every203sealed qualification input.",
+      "severity": "blocking_before_packaging"
+    },
+    {
+      "evidence": "Recursive zstd-to-tar inspection charges decodedtarbytes and decodedtarmemberbytes into a shared64MiB budget, so about45MBpayload produces about90MBdecodedwork even with small shards.",
+      "id": "recursive_decoded_work_bound",
+      "recommended_resolution": "Bind actual classification work to an explicit reviewed bounded strategy; do not silently raise budgets or discard durable evidence.",
+      "severity": "blocking_before_packaging"
+    },
+    {
+      "evidence": "Six zero-byte lock files are included in the203-file seal; reader.inventory declares them excluded fromarchive.",
+      "id": "sealed_locks_binding",
+      "recommended_resolution": "Verify their sealed size/hash before and after, and retain exact declared exclusion records.",
+      "severity": "required_final_gate"
+    }
+  ],
+  "operations": {
+    "archive_decodes": 0,
+    "credential_reads": 0,
+    "native_jobs": 0,
+    "network_calls": 0,
+    "publication_writes": 0,
+    "test_repeats": 0
+  },
+  "plan": {
+    "bytes": 10860,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/plan.json",
+    "sha256": "439a4bafb1d6b3bbe3038e56307f163ec74266b3f32a4706f69fc44465e0cec8"
+  },
+  "qualification_review": {
+    "bytes": 9571,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-review-01.json",
+    "sha256": "d1809dca6471ba8640f03805d6ed1ef557a7879887664de9ec712abac90c0e8f"
+  },
+  "qualification_seal": {
+    "bytes": 62047,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-seal-01.json",
+    "sha256": "8ea31286ffda2a5f08b4820bcc6ccf9ee05f133b96018132378f8c96ec16f438"
+  },
+  "schema": "ranker-trace-publication-source-only-draft-findings@1",
+  "scope": "Source/JSON inspection only; no helper code executed, qualification jobs or publication operations.",
+  "sealed_regular_file_bytes": 45201654,
+  "sealed_regular_file_count": 203,
+  "sealed_zero_byte_transient_locks": 6,
+  "status": "blocking_draft_findings_final_configured_source_pending"
+}

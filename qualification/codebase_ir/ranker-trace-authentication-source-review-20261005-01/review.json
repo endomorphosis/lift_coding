@@ -1,0 +1,139 @@
+{
+  "schema": "terminal-codebase-ranker-trace-authentication-source-review@1",
+  "review_date_utc": "2026-10-05",
+  "reviewer": "independent_source_review_agent",
+  "status": "source_review_complete_no_blocking_finding",
+  "method": "Read source and parse AST only; no reviewed module imports, tests, native model jobs, fits, optimizer replay, proof jobs, qualification runs, git operations or uploads executed by this reviewer.",
+  "scope": "Finite consistency of all recorded epochs under the current declared native binary64 update profile and externally supplied canonical artifact pins.",
+  "reviewed_source_pins": {
+    "digest_kind": "SHA256 of exact raw source file bytes; these source pins are distinct from API canonical artifact digests",
+    "module": {
+      "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py",
+      "raw_file_sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364",
+      "bytes": 18891
+    },
+    "tests": {
+      "path": "external/ipfs_accelerate/test/api/test_terminal_codebase_ranker_trace_authentication.py",
+      "raw_file_sha256": "5e5d1791233b279654b2e616866e7b73d5028c6cf64d5b0f805b29a07e56092d",
+      "bytes": 18828,
+      "ast_parse": "passed",
+      "static_test_function_count": 20,
+      "static_parameterized_case_count": 64,
+      "runtime_test_status": "not_run_by_this_reviewer"
+    },
+    "native_ranker_dependency": {
+      "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "raw_file_sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a",
+      "bytes": 16391,
+      "changed_by_this_reviewer": false
+    },
+    "native_digest_and_json_dependency": {
+      "path": "external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py",
+      "raw_file_sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af",
+      "bytes": 17681,
+      "changed_by_this_reviewer": false
+    }
+  },
+  "pin_conventions": {
+    "canonical_encoder": "Native ranker._digest uses json.dumps(sort_keys=True, separators=(',', ':'), ensure_ascii=True, allow_nan=False), UTF8 bytes and SHA256.",
+    "checkpoint": "Digest of complete checkpoint object, including its native weights_sha256 field.",
+    "training_receipt": "Native training_receipt.receipt_sha256; independently recomputed after excluding receipt_sha256 from the training object.",
+    "ranker_result": "Digest of complete ranker result object INCLUDING its existing result_sha256 self field; this is not the existing result_sha256 field alone.",
+    "companion_self_digest": "Native digest of complete authentication receipt after excluding authentication_sha256.",
+    "raw_file_pin_semantics": "The API has no separate raw-file-digest input. File formatting or a trailing newline changes a raw-file digest without changing the canonical object digest. The two may numerically coincide if a file contains the exact canonical bytes; that coincidence does not authenticate pin origin.",
+    "required_pin_domain": "Each expected artifact pin must be an exact str containing 64 lowercase hexadecimal characters. None, bool, numeric, string subclasses and malformed strings are refused before preparation or gradient evaluation.",
+    "origin_of_supplied_pins_authenticated": false
+  },
+  "finite_replay_review": {
+    "initial_state": "Exactly eighty positive-zero binary64 weights.",
+    "data_binding": "The old passive validator independently reconstructs corpus, features, membership and inference; the companion prepares them again and checks actual native pair count against its preflight plan.",
+    "objective_evaluator": "The existing native ranker._objective is reused. Replay is independent of supplied history and checkpoint values, not an independent implementation or proof of logistic calculus.",
+    "update": "For each nonfinal epoch, compute weights[i] - native_step_size * gradient[i] in fixed native feature and pair order.",
+    "row_comparison": "Compare canonical digests of every reconstructed row with the pinned training trace row. Exact float types are required, and canonical JSON distinguishes 0.0 from -0.0; Python numeric-equality coercion cannot authenticate a forged signed-zero row.",
+    "final_binding": "Reconstruct complete checkpoint and require its digest to equal the external checkpoint pin as well as its final weight digest.",
+    "state_retention": "All N+1 states are retained with epoch, weights_sha256, gradient_sha256 and finite_state_sha256. The latter commits epoch, full weights, full gradient and observation. Complete observations remain in the externally pinned original trace; no epoch or population truncation occurs.",
+    "companion_validation": "Rebuild the entire companion under external pins and budget, then compare canonical complete-object digests. A correctly resealed altered companion cannot acquire new count, profile, state, authority or convergence claims.",
+    "finite_only": true
+  },
+  "counter_semantics": {
+    "applies_to": "Successfully returned authentication receipts; these are not instrumentation or counters returned for a refused prefix.",
+    "native_preparation_calls": 2,
+    "passive_validator_calls": 1,
+    "endpoint_validation_gradient_evaluations": 2,
+    "replay_gradient_evaluations": "N+1",
+    "total_gradient_evaluations": "N+3",
+    "optimizer_replay_updates": "N",
+    "new_training_fit_calls": 0,
+    "checkpoint_activation_calls": 0,
+    "native_128_epoch_scope": {
+      "recorded_and_checked_rows": 129,
+      "retained_states": 129,
+      "passive_endpoint_gradient_evaluations": 2,
+      "replay_gradient_evaluations": 129,
+      "total_gradient_evaluations": 131,
+      "verification_optimizer_updates": 128,
+      "new_fit_calls": 0,
+      "activation_calls": 0,
+      "arithmetic_status": "Derived from source loop bounds; no native128 run performed by this reviewer."
+    },
+    "synthetic_fixture_scope": {
+      "module_scoped_fit_definitions": 1,
+      "fit_epochs": 16,
+      "reviewer_executed_fixture_fits": 0,
+      "train_pairs": 1,
+      "replay_gradient_evaluations": 17,
+      "total_gradient_evaluations": 19,
+      "verification_optimizer_updates": 16,
+      "replay_coordinate_visits": 8080,
+      "evidence_label": "Authored synthetic unit fixture only; no official data or benchmark score."
+    }
+  },
+  "budget_and_refusal_review": {
+    "allowed_max_coordinate_operations": "Exact int from 1 through 1000000; bool and int subclasses are refused.",
+    "charge_formula": "80 * ((2 * p + 3) * (N + 1) + N)",
+    "charge_components": "Each observation visits p*80 margin coordinates, p*80 pair-gradient coordinates and 3*80 weight-norm/L2-gradient/gradient-norm coordinates; each verification update visits 80 coordinates.",
+    "charge_unit": "Scalar coordinate visits, not all floating point instructions or total elapsed work.",
+    "excluded_work": "Existing passive validation, its two endpoint gradient evaluations, corpus validation, feature preparation, serialization and hash work. These remain subject to existing independent bounds.",
+    "native_128_epoch_formula": "80 * ((2*p+3)*129+128); at p=4 this is 123760 visits. This example is source arithmetic, not a measurement of an executed actual artifact.",
+    "native_128_epoch_pair_capacity_at_hard_cap": 46,
+    "early_refusal": "Pin format, budget type/range, exact trace/checkpoint shape, calculated excess budget and external pin mismatches precede passive validation and either gradient path.",
+    "late_refusal": "A self-resealed interior-row forgery with matching supplied artifact pins can pass old endpoints and then fail at that replayed epoch. For a mismatch at epoch8, the companion may perform two endpoint observations plus nine replay observations and eight verification updates before refusing. No success receipt is returned; fixed success counters do not describe the refused prefix.",
+    "no_general_zero_work_refusal_claim": true,
+    "native_json_limits": {
+      "dependency": "terminal_codebase_intent_training_join._json",
+      "maximum_depth": 48,
+      "maximum_visited_nodes": 1000000,
+      "maximum_encoded_bytes": 33554432,
+      "distinction": "Any 64KiB qualification capture/output cap is a separate outer harness limit; it is not this native JSON helper's byte bound."
+    }
+  },
+  "runtime_assumptions_and_unproved_claims": {
+    "required": "CPython; float radix2, mantissa53, max exponent1024, min exponent-1021; eighty native features.",
+    "reported": "Python version, reported float rounding mode, math.fsum, math.exp/log1p/sqrt and current CPython platform libm.",
+    "platform_libm_identity_independently_pinned": false,
+    "cross_platform_bitwise_reproducibility_proved": false,
+    "binary64_or_libm_error_bound_proved": false,
+    "real_logistic_descent_proved": false,
+    "global_or_asymptotic_optimizer_convergence_proved": false,
+    "autoencoder_convergence_proved": false,
+    "historical_training_or_execution_origin_authenticated": false,
+    "semantic_alignment_or_task_completion_authority": false,
+    "full_task_satisfaction": "unknown"
+  },
+  "meaningful_attack_controls_present_in_test_source": [
+    "Five finite interior metric/weight-digest forgeries resealed under newly supplied matching forged pins are explicitly accepted by the old endpoint validator before the companion must refuse.",
+    "An arbitrary forged checkpoint has a matching recomputed final observation and inference output, all native self digests resealed, and newly matching supplied pins; old validation accepts while full update replay must refuse.",
+    "An endpoint L2 observation changed from positive to negative zero is accepted by old Python numeric equality and refused by canonical every-row replay.",
+    "A changed ranker outer result selfdigest is refused even when its full canonical outer-object pin matches the supplied forged object.",
+    "Malformed/None/bool inputs, strict pin domains, foreign pins and invalid or one-operation-short budgets forbid both objective and replay observation hooks.",
+    "Genuine validation observes actual nineteen total objective calls, seventeen replay calls and two preparations while forbidding a new fit API call.",
+    "Representative native numeric/libm-profile, gradient/update-count, budget-count and authority/global-convergence promotions are consistently resealed and refused.",
+    "All four intermediate state bindings and state-chain reversal/truncation are consistently resealed and refused; companion outer selfdigest corruption is refused before gradient hooks."
+  ],
+  "blocking_findings": [],
+  "review_limits": [
+    "Source inspection supports algorithm and counter semantics only; runtime test outcomes and actual128 replay results belong to the separately controlled qualification.",
+    "The existing native evaluator and dependency source must remain trusted and pinned; this consumer does not establish independent source correctness or mathematical convergence.",
+    "No old sealed files were edited. The only artifact authored for this review is this new bounded JSON audit."
+  ]
+}

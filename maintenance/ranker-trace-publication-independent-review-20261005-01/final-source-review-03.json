@@ -1,0 +1,136 @@
+{
+  "actual_local_classification_member_review_and_publication_not_executed_by_this_review": true,
+  "all32_governing_RPI_exits": "OPEN",
+  "asymptotic_optimizer_convergence_proved": false,
+  "binary64_error_bound_proved": false,
+  "blocking_findings": [],
+  "exact_explicit_additions": 11,
+  "full_task_satisfaction": "unknown",
+  "historical_execution_origin_authenticated": false,
+  "independent_pin_origin_authenticated": false,
+  "native_solver_and_metadata_limits_unchanged": true,
+  "native_source_pins": {
+    "external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364",
+    "external/ipfs_accelerate/test/api/test_terminal_codebase_ranker_trace_authentication.py": "5e5d1791233b279654b2e616866e7b73d5028c6cf64d5b0f805b29a07e56092d"
+  },
+  "official_benchmark_score": null,
+  "operations_this_review": {
+    "archive_decodes": 0,
+    "classifier_calls": 0,
+    "credential_reads": 0,
+    "git_calls": 0,
+    "native_jobs": 0,
+    "network_calls": 0,
+    "test_repeats": 0,
+    "uploads": 0
+  },
+  "planner_activation": false,
+  "proof_authority": false,
+  "publication_profile": {
+    "aggregate_decoded_work_bytes": 536870912,
+    "compressed_shard_bytes": 268435456,
+    "depth_limit": 6,
+    "member_limit": 10000,
+    "per_decoded_container_bytes": 16777216,
+    "per_file_bytes": 16777216,
+    "raw_selected_population_bytes": 67108864,
+    "scope": "Explicit root-authorized publication-only recursive scan and additional verification decode; solver20s/64KiB/16MiB and metadata existing limits unchanged.",
+    "wall_seconds": 180
+  },
+  "qualification_review": {
+    "bytes": 9571,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-review-01.json",
+    "sha256": "d1809dca6471ba8640f03805d6ed1ef557a7879887664de9ec712abac90c0e8f"
+  },
+  "qualification_seal": {
+    "bytes": 62047,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-seal-01.json",
+    "sha256": "8ea31286ffda2a5f08b4820bcc6ccf9ee05f133b96018132378f8c96ec16f438"
+  },
+  "resolved_findings": [
+    "Multiple complete GNU tar shards respect the16MiB decoded-container bound.",
+    "Explicit publication-only512MiB decoding profile covers recursive scans and charged manual readback.",
+    "Seal inventory digest uses original compact JSON without trailing newline.",
+    "Supplemental scanner accepts exact ordered package-closure and member-review schema/status pairs.",
+    "Producer metadata-scan receipt destination is reserved outside the scanned root selection.",
+    "Root supplemental scanner dictionary-update syntax corrected and independently AST parsed.",
+    "Builder failure retention requires output ownership established by exclusive mkdir."
+  ],
+  "reviewer_source": {
+    "bytes": 11025,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/review_final_source_03.py",
+    "sha256": "564223f44a6b0ed4484e51ab5f298fcda1b99ecd158aee4ac3552064a0f27b22"
+  },
+  "schema": "ranker-trace-independent-publication-source-gate-review@1",
+  "sealed_empty_locks_bound_but_not_archived": 6,
+  "sealed_leaves_rehashed_before_after": 203,
+  "selected_regular_file_bytes": 45423129,
+  "selected_regular_files_rehashed_before_after": 208,
+  "semantic_scope": "Finite original native replay, exact integer order of authenticated rounded observations, and native storage integrity only.",
+  "source_findings": {
+    "all203_sealed_inputs_and_only_fixed_additions": true,
+    "all_selected_bytes_and_helper_builder_pins_checked_before_after": true,
+    "bounded_complete_PEM_veto_and_no_candidate_value_output": true,
+    "counts64_tests129_states128_updates131_gradients_bound": true,
+    "failed_owned_packaging_outputs_retained_private": true,
+    "first_inconclusive_lean_attempt_retained": true,
+    "fresh_process_readback_dictionary_verified_true_bound": true,
+    "frozen_recursive_classifier_and_exact_cached_credential_veto": true,
+    "metadata29_families4348_rows4216_prior_payloads_bound": true,
+    "original_training_corpus_separate_from_expanded_step_profile": true,
+    "root_publisher02_requires_external_planSHA_fresh_parent_immutable_preservation": true,
+    "six_excluded_locks_still_verified": true,
+    "supplemental_scan_failure_retention_starts_after_output_ownership": true
+  },
+  "source_only": true,
+  "sources_and_inputs": {
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/independent-qualified-join-01.json": {
+      "bytes": 3147,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/independent-qualified-join-01.json",
+      "sha256": "2850d5e7598e84b1696faa447cb45da92f897b6764ae97a03f457912758ad712"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/prepare_publication_metadata.py": {
+      "bytes": 9058,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/prepare_publication_metadata.py",
+      "sha256": "ac90a026b3dec72592cfb9f82df7081018851426e6c4325c6ca9a44428373154"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/verify_closed_qualification.py": {
+      "bytes": 10460,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/verify_closed_qualification.py",
+      "sha256": "6cdfb1454d0b870cd32a0a68c0b2ce32602982cc12c00c1224c88e81ba072120"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/build_package.py": {
+      "bytes": 22389,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/build_package.py",
+      "sha256": "06a88576368b2b232b8f9bd8ee27462277215d805572a74639304d4cd882685f"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/closed-inputs.json": {
+      "bytes": 26258,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/closed-inputs.json",
+      "sha256": "93b6fde44a3439c1fd6b59a65286ebc66bc4ce47dda12fe801f659d08fb006c3"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/final-selection.json": {
+      "bytes": 97911,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/final-selection.json",
+      "sha256": "41c1338ba0463d1f4ae7c409e8e820ed4d6bf7b099bced4c5db27b659a4e7390"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/plan.json": {
+      "bytes": 11813,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/plan.json",
+      "sha256": "35d622515486464e4a215af5420fa83c82b12bd1f2c938069698bc615cd53a9a"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/required-facts.json": {
+      "bytes": 19425,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/required-facts.json",
+      "sha256": "256f52449c65b8c7e477349af63d1dad6cbc24b73949fd957a6b63499ce47833"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/review_package.py": {
+      "bytes": 15656,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-source-plan-20261005-01/review_package.py",
+      "sha256": "1e7bc7f14d336147018d7b64af225c4eb9ba87c7398bfc96eec7a08d708855e8"
+    }
+  },
+  "status": "source_and_exact_file_bindings_reviewed_no_blocking_findings",
+  "type_preserved_observed_semantic_facts_checked": 202,
+  "whole_source_runtime_equivalence_proved": false
+}

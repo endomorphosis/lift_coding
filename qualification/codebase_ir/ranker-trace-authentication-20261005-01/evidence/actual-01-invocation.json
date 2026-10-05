@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/home/barberb/.local/bin/python",
+    "-B",
+    "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/run_trace_controls_01.py",
+    "owned",
+    "actual-01"
+  ],
+  "cleanup_errors": [],
+  "driver": {
+    "bytes": 32622,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/run_trace_controls_01.py",
+    "sha256": "86a7b9aeea6a7c21e09052520c9748aeeb43e6f04da1636ff0998fbf624535d5"
+  },
+  "outer_timeout_seconds": 120,
+  "primary_error": null,
+  "producer_pin_specification": {
+    "bytes": 765,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/preparation/producer-pins.json",
+    "sha256": "125486433647b05de9bc1db538d3105366c279107d482d68f477bc1b00d96dfe"
+  },
+  "returncode": null,
+  "schema": "terminal-ranker-trace-outer-control@1",
+  "started_at_utc": "2026-10-05T01:51:30.380437+00:00"
+}

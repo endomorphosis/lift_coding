@@ -1,0 +1,115 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "asymptotic_optimizer_convergence_proved": false,
+  "authentication": {
+    "bytes": 40487,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/authentication-result.json",
+    "sha256": "43b69bbb493c0aff290b040eb734d24866b2c83817e96950a0a86aada057f794"
+  },
+  "authentication_sha256": "ed731da80eac035526c501b1b24e84cc7e47cb329ee2f36b1878f073e8380830",
+  "behavioral_satisfaction": false,
+  "canonical_tasks": [],
+  "completed_lean_invocation": {
+    "bytes": 20215,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/closed.json",
+    "sha256": "d0b4bad851e49068e5e7b5ae97e4ac5c7f2e52f30684ebfee37cdffc32dd94fe"
+  },
+  "completion_authority": false,
+  "contracts_payloads_unchanged": true,
+  "execution_authority": false,
+  "external_fit_output_pins": {
+    "bytes": 487,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/evidence/actual-02/fit-output-pins.json",
+    "sha256": "cc61f5b8e65cfdc79ba870740811fef9944425f9e4d0cc2417fc25144b2b2e48"
+  },
+  "finite_objective_mapping": {
+    "bytes": 4962,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/finite-objective-mapping.json",
+    "sha256": "5481539a6d7f71903e4a4093b1ea3bd35050dc086f40ec3b2f300d1bc7a6f261"
+  },
+  "formalization_authority": false,
+  "full_task_satisfaction": "unknown",
+  "lean_checks": {
+    "bytes": 4528,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean-checks.json",
+    "sha256": "f59b417b20e639bbc5e291a11dd70de123448351d39e9d394f5679077a014cae"
+  },
+  "lean_sources_and_objects": [
+    {
+      "bytes": 3082,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean/AuthenticatedFiniteLossOrder.lean",
+      "sha256": "f519df774d9b27fe2930b646518cc1e980d6ce3abf453098661c0dcdbc0d2d04"
+    },
+    {
+      "bytes": 58952,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean/AuthenticatedFiniteLossOrder.olean",
+      "sha256": "27a74abd8a8e2474c6cd518cf479874f6bc2a287a0c933b4dbcc07357ffc22eb"
+    },
+    {
+      "bytes": 3276,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean/FalseReversedLossOrder.lean",
+      "sha256": "6baa1a384fa5d91a6cc91135a20807e57c46c91b127d15fa60a63cca10757123"
+    }
+  ],
+  "mutation_authority": false,
+  "native_update_profile_sha256": "5c8809e8cb25e058d803df64166082eedcf90fc9889ba7de5ee0a534799ba654",
+  "official_benchmark_score": null,
+  "omission_authority": false,
+  "original_authentication_invocation": {
+    "bytes": 80732,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/closed.json",
+    "sha256": "687ff3336b01ae7f2bf1720276e07a88bb9a74ce3f817124017ef948a0a317af"
+  },
+  "original_corpus_envelope": {
+    "bytes": 2029591,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/frozen-corpus/2a452811f54d85509e2d0b0c962ecab5d8cd221a6cd0321556a387c95da0a8e7.json",
+    "sha256": "2a452811f54d85509e2d0b0c962ecab5d8cd221a6cd0321556a387c95da0a8e7"
+  },
+  "original_corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+  "original_ranker_result": {
+    "bytes": 640834,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/evidence/actual-02/ranker-result.json",
+    "sha256": "6a6b7eaa20bf1a82a958ff6c9a6ab6f64c613fb880569a76b625de156284d60a"
+  },
+  "planner_activation": false,
+  "prior_metadata_inputs": {
+    "bytes": 8032009,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/metadata-inputs.json",
+    "sha256": "63196d5a27088a82045a8a0bcac4a9b8cab31b49cff75dc1fd7088607a7dad14"
+  },
+  "prior_wrapper_row_ids_rebound_to_new_source_snapshot": true,
+  "producer_pins": {
+    "driver": {
+      "bytes": 37622,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/run_trace_controls_02.py",
+      "sha256": "ee06b42bd98793b9bf121ed8d07dc5518af0d27774b55df2b1a7260b49c749c3"
+    },
+    "request": {
+      "bytes": 110513,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/preparation/request.json",
+      "sha256": "789be09c158433d49fdbf2191c0566d99b04f846e7c239385343607be526b3f7"
+    },
+    "source_manifest": {
+      "bytes": 4245,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source-manifest.json",
+      "sha256": "ed26da0ede3db262de1ba273012890d4626b9d18034a4ea9bab07430bf52c036"
+    }
+  },
+  "proof_authority": false,
+  "raw_canonical_binding": {
+    "bytes": 754,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/raw-canonical-binding.json",
+    "sha256": "8ec3bab3c663376e7015e00497ebafe3a2d9386c393940b5e26e5dcc586d3dfe"
+  },
+  "review": {
+    "bytes": 27570,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-convergence-obligations-20261005-01/review.json",
+    "sha256": "dd70a5e366a629ef45773100402a6995e7ee9c5d4ec4d7338fdf46973c177856"
+  },
+  "schema": "terminal-ranker-trace-native-metadata-source-snapshot@1",
+  "scope": "Finite native replay and exact integer order of authenticated rounded objective observations only; historical execution/pin origin, whole Python/source/task, exact-real logistic/binary64 error, global/asymptotic/autoencoder convergence and generalized gains remain unproved; all 32 governing RPI exits OPEN, planner inactive, official score null.",
+  "semantic_alignment_verified": false,
+  "source_semantics_verified": false,
+  "unchanged_prior_payload_rows": 4216,
+  "whole_program_proved": false
+}

@@ -1,0 +1,56 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "asymptotic_convergence_proved": false,
+  "blocking_findings": [],
+  "cards_preserve_all_prior_status_fields_except_schema_and_status": true,
+  "child_publication_and_dependency_compatibility_receipts_consistent": true,
+  "expected_produced_upload_file_count_after_successful_scan": 39,
+  "explicit_mutable_pointers": [
+    "README.md",
+    "releases/20261004-terminal-codebase-ir-evidence-v1/publication-status.json"
+  ],
+  "fixed_producer_scan_receipt_destination": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1/publication/metadata-scan-closed.json",
+  "full_task_satisfaction": "unknown",
+  "historical_execution_origin_proved": false,
+  "new_namespace_destinations": 36,
+  "no_future_HF_or_root_commit_fabricated_in_cards": true,
+  "official_benchmark_score": null,
+  "operations_this_review": {
+    "archive_decodes": 0,
+    "classifier_calls": 0,
+    "credential_reads": 0,
+    "file_JSON_AST_only": true,
+    "git_calls": 0,
+    "native_jobs": 0,
+    "network_calls": 0,
+    "project_imports": 0,
+    "test_repeats": 0,
+    "uploads": 0
+  },
+  "original_128_replay_and_finite_integer_order_scope_preserved": true,
+  "package_closure_and_member_review_exact": true,
+  "package_members": 208,
+  "package_original_bytes": 45423129,
+  "planner_activation": false,
+  "prior145_files143_immutable_preservation_is_publisher_requirement_not_remote_read_in_this_review": true,
+  "producer": {
+    "bytes": 12323,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-final-selection-review-20261005-01/review_selection_01.py",
+    "sha256": "f7e2d781ad4860a6ca269e481a864ece8ea68393317ab8c3d7966408ac6bf977"
+  },
+  "proof_authority": false,
+  "publication_decoder_512MiB_only_native_limits_unchanged": true,
+  "qualification_card_is_exact_type_preserved_copy_of_bound_review": true,
+  "qualified_shards_exact": 3,
+  "scan_success_and_fresh_parent_and_remote_verification_remain_required": true,
+  "schema": "ranker-trace-final-HF-selection-file-only-review@1",
+  "selected_file_bytes": 7810498,
+  "selected_files_rehashed_before_after": 38,
+  "selection": {
+    "bytes": 14919,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/final-hf-selection-01.json",
+    "sha256": "a53a4b11ab8e5cf257ada4f7d0e8525aa4738516edd2cc2e86e281b3cab908e7"
+  },
+  "status": "passed_no_blocking_findings",
+  "three_Lean_attempts_including_first_inconclusive_retained": true
+}

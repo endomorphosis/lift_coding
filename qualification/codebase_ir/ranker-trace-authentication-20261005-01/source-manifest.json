@@ -1,0 +1,86 @@
+{
+  "base_generation_cid": "sha256:30d08864e562515c29af9c138f944a70626361137a8ae3721f532a6b6014a5fa",
+  "base_manifest": {
+    "bytes": 25932539,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-learned-intent-join-20261004-01/source-generation-08/generation-manifest.json",
+    "sha256": "5efc3725539ced8b5a0f6e172c3b4c7e92fccc158940feaa71b4890a054203a3"
+  },
+  "extension_manifests": [
+    {
+      "bytes": 4940,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source-manifest.json",
+      "sha256": "97c6209ba34351cdfbd347d4620bb19059b51ecbbd0be7022a0943f478e702bb"
+    }
+  ],
+  "files": [
+    {
+      "captured": {
+        "bytes": 18891,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py",
+        "sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364"
+      },
+      "original": {
+        "bytes": 18891,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py",
+        "sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 18828,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/test/api/test_terminal_codebase_ranker_trace_authentication.py",
+        "sha256": "5e5d1791233b279654b2e616866e7b73d5028c6cf64d5b0f805b29a07e56092d"
+      },
+      "original": {
+        "bytes": 18828,
+        "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_terminal_codebase_ranker_trace_authentication.py",
+        "sha256": "5e5d1791233b279654b2e616866e7b73d5028c6cf64d5b0f805b29a07e56092d"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 26521,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/test/api/test_terminal_codebase_intent_corpus.py",
+        "sha256": "5478113e11dd1fdd428255d0b455fe1a8e9b7cc592996f1d5d5d86d47e2125bd"
+      },
+      "original": {
+        "bytes": 26521,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/test/api/test_terminal_codebase_intent_corpus.py",
+        "sha256": "5478113e11dd1fdd428255d0b455fe1a8e9b7cc592996f1d5d5d86d47e2125bd"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 281,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/test/__init__.py",
+        "sha256": "7e3d36be0483b3390520eea90959d0361d6e2fd7dae43cb3aa619389b0b977d6"
+      },
+      "original": {
+        "bytes": 281,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/test/__init__.py",
+        "sha256": "7e3d36be0483b3390520eea90959d0361d6e2fd7dae43cb3aa619389b0b977d6"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 32,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/test/api/__init__.py",
+        "sha256": "bb030272da3d2d800639cb7f5054189a073d08ae536210b1e6457628aa9ccb0d"
+      },
+      "original": {
+        "bytes": 32,
+        "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/test/api/__init__.py",
+        "sha256": "bb030272da3d2d800639cb7f5054189a073d08ae536210b1e6457628aa9ccb0d"
+      }
+    },
+    {
+      "captured": {
+        "bytes": 9,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/pytest.ini",
+        "sha256": "8250d20f42b419af40706490ead78aabab9feba93eab09a3f626e3de5256e1f4"
+      }
+    }
+  ],
+  "schema": "terminal-ranker-trace-source-extension@1",
+  "scope": "Read-only bounded additive capture and selected owned imports; no whole-live or atomic loader claim."
+}

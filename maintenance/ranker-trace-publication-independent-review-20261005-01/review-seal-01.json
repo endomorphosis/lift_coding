@@ -1,0 +1,61 @@
+{
+  "actual_receipt_join": "actual-package-receipt-join-01.json",
+  "archive_decodes": 0,
+  "classifier_calls": 0,
+  "credential_reads": 0,
+  "failed_draft_reviews_preserved": true,
+  "files": [
+    {
+      "bytes": 5157,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/actual-package-receipt-join-01.json",
+      "sha256": "ea4c1d27d7a4eab89a376c3cb783600a9dcb3759c4c332cc1c114b3f4a05a1ec"
+    },
+    {
+      "bytes": 2920,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/draft-findings-01.json",
+      "sha256": "6f354d11c527c08191c494899cbd5b800dc11396bebda73407a5c9d51d00ecbf"
+    },
+    {
+      "bytes": 771,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/failed-source-review-01.json",
+      "sha256": "e720dccf9ddc4dce89d4b568f17d10af9757e429026c04bbe37cf5e46f7fe7d9"
+    },
+    {
+      "bytes": 886,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/failed-source-review-02.json",
+      "sha256": "2228f4f2b6b413b24e9507c4acefeedef7d6c4531fbf2aafe68cb3634beec4d4"
+    },
+    {
+      "bytes": 7902,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/final-source-review-03.json",
+      "sha256": "41b57a5606b12f4f87863cf3003848135c7625862c950467d17b6a2c4b661ddc"
+    },
+    {
+      "bytes": 8979,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/review_actual_package_receipts_01.py",
+      "sha256": "44584db6785d0e6a075c6cd5d509d7c5dfe3a090aad389f9de76ca1224b5deb7"
+    },
+    {
+      "bytes": 10820,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/review_final_source_01.py",
+      "sha256": "2840b7c86f24f31dc23d83f70af48512a76d9785383e4fa977f2b494b5ce8370"
+    },
+    {
+      "bytes": 10820,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/review_final_source_02.py",
+      "sha256": "0ab69de5d76712d579624c06ff5a1145f934ad7e4900c6d7467f59f4c565a0c3"
+    },
+    {
+      "bytes": 11025,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/review_final_source_03.py",
+      "sha256": "564223f44a6b0ed4484e51ab5f298fcda1b99ecd158aee4ac3552064a0f27b22"
+    }
+  ],
+  "files_sha256": "41bc568b9aabc897a43b75ecf3d68e2ab12662c30f7087dcabd39053236f7b75",
+  "native_jobs": 0,
+  "remote_mutations": 0,
+  "schema": "ranker-trace-independent-source-and-receipt-review-files@1",
+  "source_clearance": "final-source-review-03.json",
+  "status": "closed_file_only_review",
+  "test_repeats": 0
+}

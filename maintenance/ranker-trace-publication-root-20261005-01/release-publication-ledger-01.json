@@ -1,0 +1,113 @@
+{
+  "child_previous_main": "776a737744049f59bad3101268529af9c6db13f5",
+  "child_source_commit": "fa51b32e8d3f296f4481344a5a61da9fd3ffd2a6",
+  "huggingface": {
+    "commit": "af2ef515e4f69f504f466e3f3146e5dfcfea8c2d",
+    "final_main_readback": {
+      "bytes": 1213,
+      "path": "maintenance/ranker-trace-publication-root-20261005-01/hf-final-main-readback-01.json",
+      "raw_file_sha256": "a580741014eacb732ccf8f67c1a0a38a04bd1051777b14e9b15291753c285853"
+    },
+    "outer_closure": {
+      "bytes": 788,
+      "path": "maintenance/ranker-trace-publication-root-20261005-01/hf-publication-outer-01/closed.json",
+      "raw_file_sha256": "1409eec393dda805db3cb68c5c70de4cb4a064cf43a9833fb11b123c4940b7c2"
+    },
+    "package_prefix": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-trace-v1",
+    "parent": "580717c7b45e7162ce6f1b5e63309fc76b962b44",
+    "prior_immutable_remote_files_preserved": 143,
+    "public": true,
+    "publisher_closure": {
+      "bytes": 885,
+      "path": "maintenance/ranker-trace-publication-root-20261005-01/hf-publication-01/closed.json",
+      "raw_file_sha256": "1073a8b20a79f24a2d2fffc88cf4c910ba28e2d41aea24f14b034c1c6d37c89f"
+    },
+    "repo_id": "Publicus/codebase-ir-proof-index",
+    "selected_bytes": 7835110,
+    "selected_files_verified": 39,
+    "total_regular_files": 182,
+    "verified_files": {
+      "bytes": 20261,
+      "path": "maintenance/ranker-trace-publication-root-20261005-01/hf-publication-01/verified-files.json",
+      "raw_file_sha256": "a667d766509b7feddbf860743039f53ba435fa668ef43c499a3f7a4305833810"
+    }
+  },
+  "old_release_exclusions_preserved": {
+    "complete_raw_publication": false,
+    "denied_archives": 4,
+    "unresolved_containers": 4
+  },
+  "operations_in_this_publication_preparation": {
+    "HF_writes": 0,
+    "new_model_fits": 0,
+    "new_prover_calls": 0,
+    "new_replays": 0,
+    "new_tests": 0
+  },
+  "qualification": {
+    "actual_Lean_attempts_total": 3,
+    "authenticated_original_states": 129,
+    "earlier_inconclusive_Lean_attempts_retained": 1,
+    "endpoint_objective_evaluations": 2,
+    "final_qualified_Lean_checks": 2,
+    "metadata_families": 29,
+    "metadata_rows": 4348,
+    "native_objective_evaluations": 131,
+    "native_preparations": 2,
+    "new_authored_unit_tests_passed": 64,
+    "new_original_or_public_corpus_fits": 0,
+    "prior_distinct_unit_tests_passed": 48,
+    "prior_metadata_payloads_exact": 4216,
+    "replay_objective_evaluations": 129,
+    "review": {
+      "bytes": 9571,
+      "path": "qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-review-01.json",
+      "raw_file_sha256": "d1809dca6471ba8640f03805d6ed1ef557a7879887664de9ec712abac90c0e8f"
+    },
+    "seal": {
+      "bytes": 62047,
+      "path": "qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-seal-01.json",
+      "raw_file_sha256": "8ea31286ffda2a5f08b4820bcc6ccf9ee05f133b96018132378f8c96ec16f438"
+    },
+    "synthetic_unit_fixture_epochs": 16,
+    "synthetic_unit_fixture_fits": 1,
+    "verification_updates": 128
+  },
+  "qualified_package": {
+    "closure": {
+      "bytes": 449,
+      "path": "maintenance/ranker-trace-publication-package-20261005-01/closed.json",
+      "raw_file_sha256": "5692071899b1bb31f4d32a384678b7d233c47c5a4e824935b570d853db8ed1ef"
+    },
+    "independent_member_review": {
+      "bytes": 1979,
+      "path": "maintenance/ranker-trace-publication-package-20261005-01/package-review.json",
+      "raw_file_sha256": "e5e2dd4d4368e7096e494e1e2e9412561dc46ad6eb1b173b232ac03dd6d76ef2"
+    },
+    "manifest": {
+      "bytes": 183434,
+      "path": "maintenance/ranker-trace-publication-package-20261005-01/package/manifest.json",
+      "raw_file_sha256": "876343b329834a62a33e36a5279359f4486cdf332a689af72576b9062ff424f6"
+    },
+    "member_bytes": 45423129,
+    "members": 208,
+    "shards": 3
+  },
+  "root_commit_reference": "verified OID recorded in the private root-publication-closed.json receipt after ordinary publication",
+  "root_fresh_upstream_observed_before_commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+  "root_preparation_baseline_main": "fc597fb980521a94945b154390b7db6b6b59d5c5",
+  "schema": "terminal-ranker-trace-release-publication-ledger@1",
+  "scope": {
+    "all32_governing_RPI_exits": "OPEN",
+    "asymptotic_optimizer_convergence_proved": false,
+    "finite_native_profile_consistency_only": true,
+    "full_task_satisfaction": "unknown",
+    "historical_execution_origin_authenticated": false,
+    "native_binary64_platform_and_libm_assumptions_remain": true,
+    "official_benchmark_score": null,
+    "planner_activation": false,
+    "proof_authority": false,
+    "whole_source_runtime_equivalence_proved": false
+  },
+  "status": "qualified_increment_HF_and_child_published_root_publication_reference_external"
+}

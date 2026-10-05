@@ -1,0 +1,117 @@
+{
+  "actual_package_closure_and_independent_member_review_bound": true,
+  "all32_governing_RPI_exits": "OPEN",
+  "asymptotic_convergence_proved": false,
+  "blocking_findings": [],
+  "declared_member_reviewer_decode_bytes": 45762560,
+  "declared_producer_aggregate_decoded_work_bytes": 136948249,
+  "decode_reports_are_bound_here_actual_decoding_was_by_other_owned_producers": true,
+  "full_task_satisfaction": "unknown",
+  "historical_origin_proved": false,
+  "inputs": {
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/final-source-review-03.json": {
+      "bytes": 7902,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/final-source-review-03.json",
+      "sha256": "41b57a5606b12f4f87863cf3003848135c7625862c950467d17b6a2c4b661ddc"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/closed.json": {
+      "bytes": 449,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/closed.json",
+      "sha256": "5692071899b1bb31f4d32a384678b7d233c47c5a4e824935b570d853db8ed1ef"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package-review.json": {
+      "bytes": 1979,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package-review.json",
+      "sha256": "e5e2dd4d4368e7096e494e1e2e9412561dc46ad6eb1b173b232ac03dd6d76ef2"
+    },
+    "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package/manifest.json": {
+      "bytes": 183434,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package/manifest.json",
+      "sha256": "876343b329834a62a33e36a5279359f4486cdf332a689af72576b9062ff424f6"
+    }
+  },
+  "native_limits_unchanged": true,
+  "official_benchmark_score": null,
+  "operations_this_join": {
+    "archive_decodes": 0,
+    "classifier_calls": 0,
+    "credential_reads": 0,
+    "file_and_json_reads_only": true,
+    "git_calls": 0,
+    "native_jobs": 0,
+    "network_calls": 0,
+    "project_imports": 0,
+    "test_repeats": 0,
+    "uploads": 0
+  },
+  "per_container_limit_bytes": 16777216,
+  "planner_activation": false,
+  "producer": {
+    "bytes": 8979,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/review_actual_package_receipts_01.py",
+    "sha256": "44584db6785d0e6a075c6cd5d509d7c5dfe3a090aad389f9de76ca1224b5deb7"
+  },
+  "proof_authority": false,
+  "publication_aggregate_decode_limit_bytes": 536870912,
+  "same208_selected_members_and_shards_bound": true,
+  "schema": "ranker-trace-independent-actual-package-receipt-join@1",
+  "sealed203_before_after_bound": true,
+  "semantic202_facts_and_prior_inconclusive_attempt_bound": true,
+  "shards": [
+    {
+      "archive": "data-000000.tar.zst",
+      "bytes": 1496443,
+      "decoded_per_file_readback_verified": true,
+      "decoded_tar_bytes": 15892480,
+      "decoded_tar_sha256": "7b17e85dd9483da1b75394c90a38ec0e8ddee514037ea22ef190c97334402ca4",
+      "members": 48,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package/data-000000.tar.zst",
+      "scan_counts": {
+        "containers": 2,
+        "raw_stream_bytes": 33212516,
+        "streams": 50
+      },
+      "scan_hits": [],
+      "sha256": "37041f66780c44d8f8800e9191bf4602c00c25d0b02614e568f5a9c0cba6cff5"
+    },
+    {
+      "archive": "data-000001.tar.zst",
+      "bytes": 4290283,
+      "decoded_per_file_readback_verified": true,
+      "decoded_tar_bytes": 14592000,
+      "decoded_tar_sha256": "71bb67880724ab9cfa4030b71a9a71ec940204a75221a1b4d1af9e295f5429d8",
+      "members": 129,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package/data-000001.tar.zst",
+      "scan_counts": {
+        "containers": 2,
+        "raw_stream_bytes": 33243367,
+        "streams": 131
+      },
+      "scan_hits": [],
+      "sha256": "2497faf6cecd4d5710379834b29cc7de9a31f3f0ce80b1cd9a65d3e83cb01fd4"
+    },
+    {
+      "archive": "data-000002.tar.zst",
+      "bytes": 1352759,
+      "decoded_per_file_readback_verified": true,
+      "decoded_tar_bytes": 15278080,
+      "decoded_tar_sha256": "fffbcfa809c54277b61dde6f85e91722d42b9ca453acb3b7b3f9d48d2f5d8ea4",
+      "members": 31,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package/data-000002.tar.zst",
+      "scan_counts": {
+        "containers": 2,
+        "raw_stream_bytes": 31869291,
+        "streams": 33
+      },
+      "scan_hits": [],
+      "sha256": "2793171247b46c3bd723e434df09afb1f9d6da81a027515e567dddaaaf645a2f"
+    }
+  ],
+  "source_regular_files_rehashed": 208,
+  "source_review_clearance": {
+    "bytes": 7902,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/final-source-review-03.json",
+    "sha256": "41b57a5606b12f4f87863cf3003848135c7625862c950467d17b6a2c4b661ddc"
+  },
+  "status": "passed_file_only_receipt_join"
+}

@@ -1,0 +1,31 @@
+{
+  "hf_writes": 0,
+  "inputs": {
+    "README.md": {
+      "bytes": 7719,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/publication-inputs/README.md",
+      "sha256": "f45948bbd1f33453beb8b9219d723896764c32e77ad4b2546227cb32c8929661"
+    },
+    "publication-status.json": {
+      "bytes": 28534,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-root-20261005-01/publication-inputs/publication-status.json",
+      "sha256": "12af9daa9f02b2874d0d792f0f9dddacb0184f2ee05f31a35ffbf54e14c2848b"
+    }
+  },
+  "package_manifest": {
+    "bytes": 183434,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package/manifest.json",
+    "sha256": "876343b329834a62a33e36a5279359f4486cdf332a689af72576b9062ff424f6"
+  },
+  "package_review": {
+    "bytes": 1979,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-package-20261005-01/package-review.json",
+    "sha256": "e5e2dd4d4368e7096e494e1e2e9412561dc46ad6eb1b173b232ac03dd6d76ef2"
+  },
+  "preparation_time_base_hf_revision": "580717c7b45e7162ce6f1b5e63309fc76b962b44",
+  "revision_reference": "revision containing this status; verified OID recorded in root publication receipt",
+  "root_preparation_time_baseline_commit": "fc597fb980521a94945b154390b7db6b6b59d5c5",
+  "schema": "ranker-trace-public-publication-input-pins@1",
+  "status": "finalized_against_actual_closed_package_no_hf_write",
+  "verified_child_commit": "fa51b32e8d3f296f4481344a5a61da9fd3ffd2a6"
+}

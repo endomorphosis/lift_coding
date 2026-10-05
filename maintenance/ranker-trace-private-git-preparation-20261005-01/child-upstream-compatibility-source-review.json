@@ -1,0 +1,64 @@
+{
+  "checked_dependencies": [
+    {
+      "fresh_child_main_or_selected_new_file_sha256": "02cef7995128133d4cd2d26d5d140052ccf3d3bbaacea9d03fcac4e6736c9419",
+      "match": true,
+      "module": "benchmarks",
+      "qualified_source_sha256": "02cef7995128133d4cd2d26d5d140052ccf3d3bbaacea9d03fcac4e6736c9419",
+      "relative_path": "benchmarks/__init__.py"
+    },
+    {
+      "fresh_child_main_or_selected_new_file_sha256": "628d7f9eeaf55a52e0fb1052b00d45f02fe4c36f3587f2dfd40e6e97f9b630dc",
+      "match": true,
+      "module": "benchmarks.agent_supervisor",
+      "qualified_source_sha256": "628d7f9eeaf55a52e0fb1052b00d45f02fe4c36f3587f2dfd40e6e97f9b630dc",
+      "relative_path": "benchmarks/agent_supervisor/__init__.py"
+    },
+    {
+      "fresh_child_main_or_selected_new_file_sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a",
+      "match": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_ranker_training",
+      "qualified_source_sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a",
+      "relative_path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py"
+    },
+    {
+      "fresh_child_main_or_selected_new_file_sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af",
+      "match": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_training_join",
+      "qualified_source_sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af",
+      "relative_path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py"
+    },
+    {
+      "fresh_child_main_or_selected_new_file_sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364",
+      "match": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_ranker_trace_authentication",
+      "qualified_source_sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364",
+      "relative_path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py"
+    },
+    {
+      "fresh_child_main_or_selected_new_file_sha256": "29292de03fbf36aca253f9b3d0cf8031effab0f35453011851d352976c12e29d",
+      "match": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_intent_corpus",
+      "qualified_source_sha256": "29292de03fbf36aca253f9b3d0cf8031effab0f35453011851d352976c12e29d",
+      "relative_path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_corpus.py"
+    },
+    {
+      "fresh_child_main_or_selected_new_file_sha256": "7d56d32f62f2bc36b72cbbb5c6582c7de23b4edfdaaaa8e0b0b60d2369bfc829",
+      "match": true,
+      "module": "benchmarks.agent_supervisor.container_coding.terminal_codebase_logic_qualification",
+      "qualified_source_sha256": "7d56d32f62f2bc36b72cbbb5c6582c7de23b4edfdaaaa8e0b0b60d2369bfc829",
+      "relative_path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_logic_qualification.py"
+    }
+  ],
+  "fresh_child_main": "776a737744049f59bad3101268529af9c6db13f5",
+  "model_or_solver_jobs": 0,
+  "project_imports": 0,
+  "qualified_actual_receipt": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/closed.json",
+    "raw_file_sha256": "687ff3336b01ae7f2bf1720276e07a88bb9a74ce3f817124017ef948a0a317af"
+  },
+  "review_scope": "exact frozen critical native benchmark dependency bytes and AST syntax; no test/import/native job execution; external datasets runtime remains separately pinned qualification provenance",
+  "schema": "ranker-trace-child-upstream-source-compatibility@1",
+  "status": "passed_source_only_exact_dependency_bytes",
+  "test_jobs": 0
+}

@@ -1,0 +1,15 @@
+{
+  "archive_decodes": 0,
+  "classifier_calls": 0,
+  "native_jobs": 0,
+  "network_calls": 0,
+  "qualification_failure": false,
+  "reason": "Builder output-ownership hardening changed the final builder, selection, and closed-inputs pins while the audit held earlier pins. No packaging, classification, native qualification, or upload was attempted.",
+  "reviewer_source": {
+    "bytes": 10820,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-trace-publication-independent-review-20261005-01/review_final_source_01.py",
+    "sha256": "2840b7c86f24f31dc23d83f70af48512a76d9785383e4fa977f2b494b5ce8370"
+  },
+  "schema": "ranker-trace-independent-publication-source-review-attempt@1",
+  "status": "refused_superseded_expected_source_pins_before_population_checks"
+}

@@ -1,0 +1,546 @@
+{
+  "additional_lean_certificate": {
+    "backend": "Pinned Lean 4.34.0 plus Std; closed Nat/Bool proposition proved by decide +kernel within existing bounded runner. Common-unit literals avoid 129 expensive rational division checks.",
+    "binding_required": [
+      "Accept only a completed finite authentication receipt from the original fit corpus and independently supplied original result/checkpoint/training pins.",
+      "Derive Fraction.from_float values from the original pinned training_receipt.trace after the successful authentication verifies all its rows and matching authenticated_trace_sha256. Choose the common positive power-of-two denominator D, verify every objective embedding equals loss_units[i]/D exactly, and pin the mapping manifest with authentication/state/native-profile IDs and generated Lean source.",
+      "Check generated source bytes and retained .olean plus checker receipt under the existing bounded runner; reject a deliberately reversed adjacent inequality."
+    ],
+    "conversion_proof_boundary": "Lean checks order of integer literals. The conversion from binary64 observations to exact fractions/common units and their linkage to native observations are checked by pinned preparation/replay code; no Lean Float/libm implementation theorem is claimed.",
+    "does_not_prove": [
+      "Exact-real logistic loss decrease or global convergence.",
+      "Historical execution origin, independent pin origin or original training provenance.",
+      "Heldout semantic relevance, source correctness, full-task satisfaction, nonlinear autoencoder convergence or planning admission."
+    ],
+    "minimal_claim": "After successful original finite authentication, prove length(loss_units)=129, common_denominator>0, every Nat unit>0, and recursively strictlyDeclining(loss_units)=true, using common positive integer units for the authenticated native objective values.",
+    "negative_control": "Check an appended reversed-chain or deliberately reversed first-adjacent inequality fails under the same pinned source/toolchain/bounds; retain failure as control evidence.",
+    "recorded_candidate_nonvacuous": true,
+    "source_only_recorded_mapping_check": {
+      "all_adjacent_units_strictly_declining": true,
+      "all_units_positive": true,
+      "common_denominator": "72057594037927936",
+      "first_unit": "49946518145322872",
+      "last_unit": "8122210501779950",
+      "mapping_inversion_exact": true,
+      "status": "exact_integer_mapping_inspected_from_original_recorded_values_only_authentication_still_required",
+      "unit_count": 129
+    },
+    "status": "recommended_candidate_not_generated_or_checked_here"
+  },
+  "authority": {
+    "behavioral_satisfaction": false,
+    "completion_authority": false,
+    "execution_authority": false,
+    "formalization_authority": false,
+    "mutation_authority": false,
+    "omission_authority": false,
+    "proof_authority": false,
+    "semantic_alignment_verified": false,
+    "source_semantics_verified": false,
+    "whole_program_proved": false
+  },
+  "binary64_and_error_floor_obligations": {
+    "asymptotic_optimizer_convergence_proved": false,
+    "binary64_error_bound_proved": false,
+    "candidate_distance_bound": "||hat_w[k]-w*||<=q^k||hat_w[0]-w*||+sum_{j=0}^{k-1}q^(k-1-j)*epsilon_j",
+    "perturbed_update": "hat_w[k+1]=hat_w[k]-eta*grad F(hat_w[k])+e_k, with ||e_k||<=epsilon_k requiring proof",
+    "real_loss_descent_bridge": "Observed rounded loss decline implies exact-real decline only with certified evaluation enclosures and a gap exceeding the sum of adjacent objective error bounds.",
+    "required_bounds": [
+      "Products and math.fsum in 80D margins, regularization, summed logistic losses and each gradient coordinate.",
+      "Branching on rounded margin sign, libm exp/log1p and arithmetic for logistic factors, averaging, mu*w, eta*g and subtraction.",
+      "Finite/nonfinite, overflow, underflow/subnormal and rounding behavior over an explicitly bounded state/margin domain.",
+      "Observation evaluation error, including gradient_norm sqrt; pin Python/float/math.fsum/platform libm and executable/dependency identities.",
+      "Uniform or per-step update and objective error bounds; same-profile bit replay proves reproducibility on that invocation, not exact-real correctness."
+    ],
+    "status": "open",
+    "uniform_error_floor_candidate": "If every epsilon_j<=epsilon, the additional distance is <=epsilon*(1-q^k)/(1-q), with limiting floor epsilon/(eta*mu). No epsilon has been proved or estimated here."
+  },
+  "coordinated_finite_authentication_scope": {
+    "analytic_convergence_proved": false,
+    "authentication_scope": "same_declared_native_update_profile_and_independently_supplied_artifact_pins",
+    "compact_representation": "All 129 epoch states retain epoch, weights_sha256, gradient_sha256 and finite_state_sha256; the latter commits complete epoch/weights/gradient/observation. Observed metrics remain in the independently pinned original training_receipt.trace; recorded and replayed trace digests are retained.",
+    "crossplatform_reproducibility_proved": false,
+    "historical_execution_origin_authenticated": false,
+    "historical_training_provenance_authenticated_here": false,
+    "independent_pin_origin_authenticated": false,
+    "meaning": "A successful new replay can authenticate equality of the finite native update sequence and intermediate hashed observations for declared current runtime semantics.",
+    "schema": "terminal-codebase-ranker-training-trace-authentication@1",
+    "source_review_finding": "Declared finite scope and reported work counters agree with the inspected loops. Mandatory canonical artifact pins are distinct from raw file hashes and native self digests. The implementation authenticates equality under the current recorded profile only; it correctly leaves historical/pin origin, exact-real analytic errors and authority false.",
+    "status": "source_reviewed_implementation_native_checks_not_run_here"
+  },
+  "mathematical_proof_candidate": {
+    "candidate_consequences": "F is mu-strongly convex and L-smooth for L=mu+max_i ||d_i||^2/4; coercivity gives a unique minimizer. Exact gradient descent with 0<eta<=1/L contracts distance by q=1-eta*mu and satisfies F(w-eta*grad F(w))<=F(w)-eta*(1-eta*L/2)*||grad F(w)||^2.",
+    "coefficient_bound": "0 <= p_i*(1-p_i) <= 1/4, using p_i in [0,1] and p_i*(1-p_i)=1/4-(p_i-1/2)^2",
+    "fixed_domain": "w in R^80; finite fixed d_i are exact real embeddings of the replayed binary64 feature-difference bits; n>0 and mu>0",
+    "gradient": "grad F(w)=mu*w-(1/n) sum_i p_i(w)*d_i",
+    "hessian": "H(w)=mu*I+(1/n) sum_i p_i(w)*(1-p_i(w))*d_i*d_i^T",
+    "logistic_factor": "p_i(w)=1/(1+exp(dot(w,d_i)))",
+    "missing_proofs": [
+      "Define the real objective and derivative chain rules, prove the displayed Hessian identity for actual fixed vectors.",
+      "Prove the logistic coefficient bound and matrix/quadratic-form inequalities; scalar exact L/eta/q inequalities alone do not supply these lemmas.",
+      "Prove differentiability, global smoothness, strong convexity, existence/uniqueness and the exact update contraction/descent theorem.",
+      "Bind the exact mathematical problem to the pinned corpus, feature profile, reviewed train membership and difference bits; preserve historical feature exposure declarations."
+    ],
+    "objective": "F(w) = (1/n) sum_i log(1+exp(-dot(w,d_i))) + (mu/2)||w||^2",
+    "proved_by_existing_step_certificate": "Only positivity and exact rational eta*conditionalL<=1, q=1-mu*eta, 0<=q<1; no Hessian or optimizer theorem",
+    "quadratic_form_bounds": "mu*||v||^2 <= v^T H(w) v <= (mu+sum_i ||d_i||^2/(4*n))*||v||^2 <= (mu+max_i ||d_i||^2/4)*||v||^2",
+    "status": "candidate_derivation_not_kernel_proved"
+  },
+  "metadata_hydration_without_authority_escalation": {
+    "example_additive_families": [
+      "ranker_trace_authentication",
+      "ranker_trace_obligations",
+      "ranker_trace_lean_checks"
+    ],
+    "instructions": [
+      "Root should read the pinned prior 26-family/4216-payload input, append disjoint bounded JSON evidence families, and assert every prior family payload list remains exactly equal. Preserve the old sealed namespace.",
+      "Use hydrate_codebase_ir_metadata in a NEW isolated output namespace with a source_snapshot pinning original corpus envelope, original result/fit pins, frozen producer code, authentication receipt, generated Lean source/object/checker, and the explicit finite scope.",
+      "Keep certificate/state rows within 262144 bytes, structural/node and global row/payload bounds. Split full state vectors into ordered hash-bound rows only if needed, rather than raising bounds or truncating.",
+      "DuckDB metadata_rows and family views plus isolated DuckLake history packets preserve JSON payloads. Perform fresh-process readback and retain exports/manifest/receipt. New source snapshots intentionally rebind wrapper row IDs; exact preservation here means original payload rows, not old wrapper IDs.",
+      "Retain all semantic/proof/formalization/execution/completion/mutation/omission/task/gain authority flags false, planning_handoff abstained, canonical_tasks empty and contracts family unchanged. Store checker accepted statements with their finite exact-value scope only.",
+      "If relating to proof cache keys, use complete source/expression/formalization/slice/obligation/assumptions/bounds/translation/provider/environment/policy/schema/checker/network/evidence-kind/authority-ceiling/kernel/theorem-registry dimensions. Changed profile/source/differences/receipt/toolchain means a miss; stale evidence stays historical.",
+      "Do not insert native ProgramContracts, alter the existing seven-entry Bottle proof index policy, grant a supervisor task-admission hit, or promote candidate declarations into verified source contracts."
+    ],
+    "prior_families": 26,
+    "prior_metadata_inputs": {
+      "bytes": 8032009,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/metadata-inputs.json",
+      "sha256": "63196d5a27088a82045a8a0bcac4a9b8cab31b49cff75dc1fd7088607a7dad14"
+    },
+    "prior_payload_rows": 4216,
+    "resulting_family_count": 29,
+    "status": "source_plan_only_not_hydrated_here"
+  },
+  "native_evidence_and_toolchain": {
+    "existing_conditional_proof_index": {
+      "bytes": 5512587,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/intent-qualification-20261001-02/proof-index/manifest.json",
+      "sha256": "de97803a2d250cf846670034d86b29aaa984cef8c2046e7df84757ef3dee2620"
+    },
+    "existing_index_entry_count": 7,
+    "existing_index_policy_scope": "checked_conditional_model_only",
+    "existing_native_metadata_fixture": {
+      "bytes": 8032009,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/metadata-inputs.json",
+      "sha256": "63196d5a27088a82045a8a0bcac4a9b8cab31b49cff75dc1fd7088607a7dad14"
+    },
+    "existing_std_only_step_checker_receipt": {
+      "bytes": 1892,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/lean-step_parameters-check.json",
+      "sha256": "e1b1bd5f92d59f1fd9e72834ec3c7e0f7b77e549bbfeb901b9d97b36e8e93a6e"
+    },
+    "existing_successful_harness_receipt": {
+      "bytes": 155853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/closed.json",
+      "sha256": "836402f06567fb1259187214a7d0e540e89e35cc8dc3ffe6fa7de3d3f16644af"
+    },
+    "lean_executable": {
+      "bytes": 13824,
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.0/bin/lean",
+      "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085"
+    },
+    "lean_execution_in_this_review": false,
+    "mathlib_availability": "/home/barberb/.cache/mathlib contains cached .ltar files. Read-only searches found no Mathlib.lean checkout under the workspace or checked cache/local-share/Codex roots. Importability/toolchain compatibility was not probed; do not claim unavailable globally or installed usable from this inspection.",
+    "proof_index_frontier": "The public Bottle index is a seven-entry conditional header-model profile; its builder/lookup do not generically admit ranker analytic or finite-trace proofs.",
+    "reusable_bounded_harness": {
+      "bytes": 26144,
+      "line_roles": [
+        {
+          "lines": [
+            186,
+            229
+          ],
+          "role": "pinned source/import guard, local resource scheduler, safety thresholds, orchestration root lease and forbidden fit"
+        },
+        {
+          "lines": [
+            264,
+            311
+          ],
+          "role": "bounded Lean positive/negative controls, disjoint additive metadata, prior 4209 payload rows preserved"
+        },
+        {
+          "lines": [
+            316,
+            342
+          ],
+          "role": "input/source rehashes, root release, scheduler drain and cleanup receipts"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_07.py",
+      "sha256": "368c150d84ef126e5f0f8796cef6527ee6269c093379200dd9fa3470de485ae3"
+    },
+    "synthetic_fixture_frontier": "Existing native metadata fixtures demonstrate bounded storage controls for authored synthetic cases; they do not authenticate the original four-pair/128-update ranker fit.",
+    "synthetic_native_metadata_fixture_root": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-expanded-transfer-20261004-01/evidence/tests-02/fixtures"
+  },
+  "original_finite_fit": {
+    "checkpoint_sha256": "ab63f45bb3b6bc54038cc4ea4ff44b14c17a6f9f8b0426441a15933772227046",
+    "corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+    "differences_sha256": "e8504c6e8004a2f2878bc79aae0af54c9541bff82df8cde670b48bdf7da03ac6",
+    "envelope_fields": [
+      "corpus",
+      "original_inputs",
+      "schema"
+    ],
+    "epochs": 128,
+    "externally_retained_fit_pins": {
+      "bytes": 487,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/evidence/actual-02/fit-output-pins.json",
+      "sha256": "cc61f5b8e65cfdc79ba870740811fef9944425f9e4d0cc2417fc25144b2b2e48"
+    },
+    "feature_profile_sha256": "5c9ed26e5c02a2fd12c34dc27fcd6105db6798d28a984031c71e3f56aa5a1751",
+    "frozen_original_arguments": {
+      "bytes": 2029591,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/frozen-corpus/2a452811f54d85509e2d0b0c962ecab5d8cd221a6cd0321556a387c95da0a8e7.json",
+      "sha256": "2a452811f54d85509e2d0b0c962ecab5d8cd221a6cd0321556a387c95da0a8e7"
+    },
+    "historical_exposure_frontier": "Bottle native AST source was previously exposed to an autoencoder fit and source review; scratch head uses fixed AST/lexical features, not old AE weights or latents. Other candidate labels remain unjudged.",
+    "original_input_fields": [
+      "historical_exposure",
+      "query_records",
+      "reviewed_judgments",
+      "source_records",
+      "split_assignments"
+    ],
+    "ranker_result_and_embedded_training_receipt": {
+      "bytes": 640834,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/evidence/actual-02/ranker-result.json",
+      "sha256": "6a6b7eaa20bf1a82a958ff6c9a6ab6f64c613fb880569a76b625de156284d60a"
+    },
+    "recorded_loss_order_scope": "JSON values inspected only; this review did not authenticate updates or prove objective evaluation errors",
+    "recorded_objective_first": 0.6931471805599453,
+    "recorded_objective_last": 0.11271831387410433,
+    "recorded_states": 129,
+    "recorded_strict_adjacent_declines": 128,
+    "train_pairs": 4,
+    "training_receipt_json_pointer": "/training_receipt",
+    "training_receipt_sha256": "89e5b20348bb6439a71d1aec72c962c4775a0b5fd1f6716243102f41ac7384e6"
+  },
+  "remaining_task_frontiers": {
+    "all32_governing_RPI_exits": "OPEN",
+    "asymptotic_optimizer_convergence_proved": false,
+    "binary64_error_bound_proved": false,
+    "full_original_task_satisfaction_proved": false,
+    "full_source_exits": "OPEN",
+    "full_task_exits": "OPEN",
+    "generalized_ranking_gain_qualified": false,
+    "global_autoencoder_convergence_proved": false,
+    "heldout_semantic_alignment_qualified": false,
+    "logistic_hessian_bound_proved": false,
+    "official_benchmark_score": null,
+    "planner_activation": false,
+    "reason": "Finite replay/value-order evidence closes only its explicitly checked finite obligation. Source runtime equivalence, representative construction/public dependencies, all instruction/output/performance/immutability constraints, heldout outcomes and all 32 governing RPI exits require their separate evidence.",
+    "whole_source_runtime_equivalence_proved": false
+  },
+  "review_operations": {
+    "existing_files_modified": 0,
+    "git_calls": 0,
+    "jobs": 0,
+    "native_checker_calls": 0,
+    "native_metadata_calls": 0,
+    "native_optimizer_replays": 0,
+    "network_calls": 0,
+    "new_fits": 0
+  },
+  "schema": "ranker-convergence-obligations-source-review@1",
+  "scope_mismatch_control": {
+    "existing_step_receipt": {
+      "bytes": 5017,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/evidence/actual-08/step-result.json",
+      "sha256": "fcc98eb4643cf7f9303652495d7fd2428d66f4ee3301213c6e28525b2d00a45c"
+    },
+    "original_training_corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+    "requirement": "Do not use the expanded-transfer step certificate as an original-fit trajectory certificate. Recompute matching step prerequisites if needed from the original frozen arguments.",
+    "step_corpus_sha256": "sha256:43da7b53f322e21b495d0352b6ca90378399ffe0fc49864e729a9edf2a8306c6"
+  },
+  "source_only": true,
+  "source_pins": {
+    "adapter_design": {
+      "bytes": 2014,
+      "line_roles": [
+        {
+          "lines": [
+            3,
+            29
+          ],
+          "role": "design only; frozen features/encoder, positive regularized adapter, required calculus/error/trace/heldout certificates"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/source-model-next-stage-20261004-01/certified-adaptation-design.json",
+      "sha256": "1317749c0eb3e29b0ac97ca62a3b0e6fefcda75dcad006678b06cce6d6d4bc46"
+    },
+    "authority": {
+      "bytes": 17681,
+      "line_roles": [
+        {
+          "lines": [
+            18,
+            22
+          ],
+          "role": "all semantic/proof/formalization/execution/completion/mutation/omission/behavior/whole-program/asymptotic authority flags false"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_training_join.py",
+      "sha256": "f279a9121300392a0af4df98fd31366643b069944294a1b99efc25ba2bd664af"
+    },
+    "bounded_harness": {
+      "bytes": 26144,
+      "line_roles": [
+        {
+          "lines": [
+            186,
+            229
+          ],
+          "role": "pinned source/import guard, local resource scheduler, safety thresholds, orchestration root lease and forbidden fit"
+        },
+        {
+          "lines": [
+            264,
+            311
+          ],
+          "role": "bounded Lean positive/negative controls, disjoint additive metadata, prior 4209 payload rows preserved"
+        },
+        {
+          "lines": [
+            316,
+            342
+          ],
+          "role": "input/source rehashes, root release, scheduler drain and cleanup receipts"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_07.py",
+      "sha256": "368c150d84ef126e5f0f8796cef6527ee6269c093379200dd9fa3470de485ae3"
+    },
+    "finite_trace_authentication": {
+      "bytes": 18891,
+      "line_roles": [
+        {
+          "lines": [
+            1,
+            8
+          ],
+          "role": "finite artifact consistency only; no historical execution origin or convergence claim"
+        },
+        {
+          "lines": [
+            50,
+            83
+          ],
+          "role": "shape/domain checks and finite scalar-coordinate replay budget before native work"
+        },
+        {
+          "lines": [
+            86,
+            115
+          ],
+          "role": "reported CPython/binary64/math.fsum/libm runtime profile; missing libm identity and error proofs explicit"
+        },
+        {
+          "lines": [
+            123,
+            181
+          ],
+          "role": "mandatory canonical result/checkpoint/training pins, passive validation and original-input preparation"
+        },
+        {
+          "lines": [
+            184,
+            219
+          ],
+          "role": "all-zero sequence replay, every observation/weight hash and full final checkpoint compared"
+        },
+        {
+          "lines": [
+            220,
+            299
+          ],
+          "role": "complete finite receipt, per-state hashes, call/update counters, explicit semantic/provenance/error/authority frontiers"
+        },
+        {
+          "lines": [
+            302,
+            328
+          ],
+          "role": "companion receipt self-digest and independent complete replay validation"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py",
+      "sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364"
+    },
+    "metadata": {
+      "bytes": 32204,
+      "line_roles": [
+        {
+          "lines": [
+            1,
+            6
+          ],
+          "role": "isolated storage preserves labels without authenticating them"
+        },
+        {
+          "lines": [
+            30,
+            44
+          ],
+          "role": "32-family/65536-row/262144-byte row bounds and experimental unadmitted qualification"
+        },
+        {
+          "lines": [
+            213,
+            246
+          ],
+          "role": "payload and source-snapshot bound row identities; no truncation"
+        },
+        {
+          "lines": [
+            354,
+            413
+          ],
+          "role": "new namespace only, canonical exports, DuckDB views and isolated DuckLake append"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/codebase_ir_metadata.py",
+      "sha256": "6de19b39635eef7c682a3171b9d5e3afe3e656e10767080023002188c39f62f5"
+    },
+    "nextstage_plan": {
+      "bytes": 5337,
+      "line_roles": [],
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/source-model-next-stage-20261004-01/plan.json",
+      "sha256": "e0558c500d2e766ac4869a51111b4ca328fdc2558e45f5b3bb41949049b799f5"
+    },
+    "nextstage_result": {
+      "bytes": 2885,
+      "line_roles": [
+        {
+          "lines": [
+            2,
+            3
+          ],
+          "role": "all 32 exits OPEN; asymptotic convergence unproved"
+        },
+        {
+          "lines": [
+            26,
+            39
+          ],
+          "role": "task/AE proof frontiers, 26 families 4216 rows and remaining calculus/error/planner obligations"
+        },
+        {
+          "lines": [
+            67,
+            67
+          ],
+          "role": "whole-source runtime equivalence unproved"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/source-model-next-stage-20261004-01/qualified-result.json",
+      "sha256": "ec9dcc2b81bc5aaeb4b6f2ee8ecf20b5e41a26c4100f12cb12e31abddcfa697f"
+    },
+    "proof_index": {
+      "bytes": 34642,
+      "line_roles": [
+        {
+          "lines": [
+            1,
+            7
+          ],
+          "role": "bounded conditional-model catalog is separate from supervisor admission authority"
+        },
+        {
+          "lines": [
+            39,
+            43
+          ],
+          "role": "public Bottle seven-entry conditional model policy; no optimizer steps"
+        },
+        {
+          "lines": [
+            218,
+            243
+          ],
+          "role": "complete datasets/supervisor proof-key dimensions relationship"
+        },
+        {
+          "lines": [
+            473,
+            521
+          ],
+          "role": "exact environment/key equality, changed dependencies fail, complete envelope authority checks"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_proof_index.py",
+      "sha256": "c55d360a10984122e844a4fb20d0487ecd19412277228a9646f97e96cf5b634b"
+    },
+    "ranker": {
+      "bytes": 16391,
+      "line_roles": [
+        {
+          "lines": [
+            21,
+            29
+          ],
+          "role": "positive L2, finite bounds and 80-dimensional fixed feature names"
+        },
+        {
+          "lines": [
+            51,
+            116
+          ],
+          "role": "corpus/role replay, lexical plus native AST features, train-only differences and numeric step selection"
+        },
+        {
+          "lines": [
+            119,
+            134
+          ],
+          "role": "binary64 dot, stable softplus, logistic factors, fullbatch gradient and gradient norm"
+        },
+        {
+          "lines": [
+            178,
+            186
+          ],
+          "role": "source exposure and explicit unauthenticated-intermediate-history/semantic/gain frontiers"
+        },
+        {
+          "lines": [
+            191,
+            218
+          ],
+          "role": "zero initial weights, 128-bounded finite training loop, hashed trace and final checkpoint"
+        },
+        {
+          "lines": [
+            221,
+            277
+          ],
+          "role": "passive validator; all row shapes, only initial/final observations recomputed, independent external fit digests optional"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    "step_certificate": {
+      "bytes": 6749,
+      "line_roles": [
+        {
+          "lines": [
+            43,
+            65
+          ],
+          "role": "exact rational float-bit embeddings; conditional L=mu+max squared norm/4 and q=1-mu*eta scalar inequalities"
+        },
+        {
+          "lines": [
+            68,
+            110
+          ],
+          "role": "native preparation without fits, independent corpus pin, generated Std-only theorem, analytic and authority frontiers"
+        }
+      ],
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_step_certificate.py",
+      "sha256": "a38cdbbd2b5a9b10c260be5034bf2a37cf83941690e0804dd1dfef0532a002e4"
+    }
+  },
+  "status": "source_review_only_finite_authentication_and_additional_lean_checks_not_run_here"
+}

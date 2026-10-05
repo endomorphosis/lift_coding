@@ -1,0 +1,218 @@
+{
+  "actual_phase_timings": {
+    "actual-01": {
+      "final_active_leases": 0,
+      "final_waiting_requests": 0,
+      "native_authentication_seconds": 1.2850170620076824,
+      "native_metadata_seconds_including_fresh_restart": null,
+      "outer_seconds": 2.1247249949956313,
+      "owned_seconds": 1.9959819780196995,
+      "selected_owned_import_count": 88,
+      "test_seconds": null,
+      "timings_nested_not_added": true
+    },
+    "lean-02": {
+      "final_active_leases": 0,
+      "final_waiting_requests": 0,
+      "native_authentication_seconds": null,
+      "native_metadata_seconds_including_fresh_restart": null,
+      "outer_seconds": 1.2297552530071698,
+      "owned_seconds": 1.094668511999771,
+      "selected_owned_import_count": 15,
+      "test_seconds": null,
+      "timings_nested_not_added": true
+    },
+    "metadata-01": {
+      "final_active_leases": 0,
+      "final_waiting_requests": 0,
+      "native_authentication_seconds": null,
+      "native_metadata_seconds_including_fresh_restart": 16.24488863098668,
+      "outer_seconds": 33.126770195987774,
+      "owned_seconds": 32.94278705900069,
+      "selected_owned_import_count": 17,
+      "test_seconds": null,
+      "timings_nested_not_added": true
+    },
+    "tests-01": {
+      "final_active_leases": 0,
+      "final_waiting_requests": 0,
+      "native_authentication_seconds": null,
+      "native_metadata_seconds_including_fresh_restart": null,
+      "outer_seconds": 1.3314753879967611,
+      "owned_seconds": 1.2091279989981558,
+      "selected_owned_import_count": 88,
+      "test_seconds": 0.7063695660035592,
+      "timings_nested_not_added": true
+    }
+  },
+  "all32_governing_RPI_exits": "OPEN",
+  "all348_strict_old_inputs_unchanged": true,
+  "all4_protected_live_sources_unchanged": true,
+  "all_phase_cleanup_errors": [],
+  "all_phase_scheduler_drains_zero_active_zero_waiting": true,
+  "asymptotic_optimizer_convergence_proved": false,
+  "authenticated_states": 129,
+  "authentication": {
+    "bytes": 40487,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/authentication-result.json",
+    "sha256": "43b69bbb493c0aff290b040eb734d24866b2c83817e96950a0a86aada057f794"
+  },
+  "authentication_scope": "same_declared_native_update_profile_and_independently_supplied_artifact_pins",
+  "authentication_sha256": "ed731da80eac035526c501b1b24e84cc7e47cb329ee2f36b1878f073e8380830",
+  "autoencoder_convergence_proved": false,
+  "behavioral_satisfaction": false,
+  "binary64_error_bound_proved": false,
+  "canonical_tasks": [],
+  "checkpoint_activation_calls": 0,
+  "complete_positive_olean_bytes": 58952,
+  "completed_original_authentication_despite_first_proof_retention_failure": true,
+  "completion_authority": false,
+  "contracts_payloads_unchanged": true,
+  "exact_real_logistic_descent_proved": false,
+  "execution_authority": false,
+  "file_verifier_source": {
+    "bytes": 10628,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/seal_file_only_01.py",
+    "sha256": "9a710766c0cad96dd5ab278c9c50daaf9335b8a037ca2f51048bae8bdce7b030"
+  },
+  "final_lean_checks": {
+    "bytes": 4528,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean-checks.json",
+    "sha256": "f59b417b20e639bbc5e291a11dd70de123448351d39e9d394f5679077a014cae"
+  },
+  "finite_objective_mapping": {
+    "bytes": 4962,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/finite-objective-mapping.json",
+    "sha256": "5481539a6d7f71903e4a4093b1ea3bd35050dc086f40ec3b2f300d1bc7a6f261"
+  },
+  "formalization_authority": false,
+  "fresh_native_restart_and_all_payloads_verified": true,
+  "full_task_satisfaction": "unknown",
+  "generalized_ranking_gain_qualified": false,
+  "global_optimizer_convergence_proved": false,
+  "historical_execution_origin_authenticated": false,
+  "independent_pin_origin_authenticated": false,
+  "independent_source_review": {
+    "bytes": 27570,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-convergence-obligations-20261005-01/review.json",
+    "sha256": "dd70a5e366a629ef45773100402a6995e7ee9c5d4ec4d7338fdf46973c177856"
+  },
+  "metadata_families": 29,
+  "metadata_rows": 4348,
+  "mutation_authority": false,
+  "native_lean_elapsed_seconds_by_attempt": [
+    0.3251148120034486,
+    0.29318368501844816,
+    0.27302783299819566
+  ],
+  "native_lean_final_qualified_checks": 2,
+  "native_lean_invocations_total": 3,
+  "native_lean_prior_inconclusive_calls": 1,
+  "native_metadata_existing_limits_unchanged": true,
+  "native_metadata_hydration_attempts": 1,
+  "native_metadata_readback": {
+    "bytes": 26630,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata-readback.json",
+    "sha256": "56c82bf267e05d1d0f63a6bc35a80b0b0793ab65efae326c50d56982d709b90f"
+  },
+  "native_solver_limits_unchanged": {
+    "cpu_seconds": 20,
+    "max_output_bytes": 65536,
+    "max_workspace_bytes": 16777216,
+    "timeout_seconds": 20
+  },
+  "new_autoencoder_fit_calls": 0,
+  "new_metadata_family_counts": {
+    "ranker_trace_authentication": 1,
+    "ranker_trace_lean_checks": 2,
+    "ranker_trace_states": 129
+  },
+  "new_public_fit_calls": 0,
+  "official_benchmark_score": null,
+  "old_inventory": {
+    "bytes": 110037,
+    "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scopes-approved-02.json",
+    "sha256": "f2ec236e180f42f262661faca65d282918a55a4956174759727b341aeb4306e6"
+  },
+  "omission_authority": false,
+  "original_native_preparation_calls": 2,
+  "original_numeric_authentication_calls": 1,
+  "original_passive_endpoint_gradient_evaluations": 2,
+  "original_replay_gradient_evaluations": 129,
+  "original_total_gradient_evaluations": 131,
+  "original_training_corpus_sha256": "sha256:d4aa22b9a7bfe796c31adbcf78f9b72987549a85117b8f08534f5a06c032a3df",
+  "original_verification_optimizer_updates": 128,
+  "outer_timeout_seconds_unchanged": 120,
+  "planner_activation": false,
+  "planning_handoff": "abstained",
+  "positive_common_denominator": "72057594037927936",
+  "prior_expanded_step_profile_remains_separate": true,
+  "prior_payload_rows_preserved_exactly": 4216,
+  "proof_authority": false,
+  "proof_pressure_gate_unchanged": {
+    "cpu_stall_percent": 50,
+    "io_stall_percent": 10,
+    "memory_stall_percent": 2
+  },
+  "protected_live_sources": [
+    {
+      "bytes": 33934,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/finite_proof_query_join.py",
+      "sha256": "d6e4a6187036f5942f4637dd24bec65c1a90ed32c24e3b39e3759e653be03b79"
+    },
+    {
+      "bytes": 18129,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/finite_proof_query_admission.py",
+      "sha256": "2e5b0add5f19c1c31ad76dae67354d5bfadbfe59303a06590db14507c3abe7e4"
+    },
+    {
+      "bytes": 22624,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_finite_proof_query_join.py",
+      "sha256": "d34cd489d69446bb4c88e6f8881fff44689cbf6c6944c1976fb411f77a06f890"
+    },
+    {
+      "bytes": 27488,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/test/api/test_finite_proof_query_admission.py",
+      "sha256": "6867188f535b6e24cf2a217b5d601a9d92446bff3ba382800e8664c6a0650de0"
+    }
+  ],
+  "raw_file_canonical_binding": {
+    "bytes": 754,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/raw-canonical-binding.json",
+    "sha256": "8ec3bab3c663376e7015e00497ebafe3a2d9386c393940b5e26e5dcc586d3dfe"
+  },
+  "request": {
+    "bytes": 110513,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/preparation/request.json",
+    "sha256": "789be09c158433d49fdbf2191c0566d99b04f846e7c239385343607be526b3f7"
+  },
+  "retained_inconclusive_checker": {
+    "bytes": 2355,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/lean-finite_native_observation_order-check.json",
+    "sha256": "d19330e8266d8e5485d7bb4c89f79521d4224bf1e0edfb1eb7e024b7d8728515"
+  },
+  "review_mode": "file-only existing results; no project imports, fits, solver or storage calls",
+  "root_lease_unchanged": {
+    "cpu_slots": 1,
+    "memory_mb": 2048
+  },
+  "schema": "terminal-ranker-trace-file-only-qualification-review@1",
+  "selected_import_blocked_count": 0,
+  "selected_import_sources_unchanged_all_phases": true,
+  "selected_unit_tests": 64,
+  "semantic_alignment_verified": false,
+  "source_semantics_verified": false,
+  "source_snapshot": {
+    "bytes": 6300,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/source-snapshot.json",
+    "sha256": "05f88c9a3d05bf27ddd29b01526624ff30faa9146839a55e0b6b9d2e3f578848"
+  },
+  "status": "passed_finite_original_native_replay_observed_value_order_and_fresh_metadata",
+  "strict_observed_adjacent_declines": 128,
+  "synthetic_unit_fit_calls": 1,
+  "synthetic_unit_optimizer_fit_updates": 16,
+  "tests_skipped": 0,
+  "unit_adversarial_replay_updates_global_total": "not aggregated; controls stop at their first mismatch",
+  "whole_program_proved": false,
+  "whole_source_runtime_equivalence_proved": false
+}

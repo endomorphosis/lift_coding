@@ -1,0 +1,1032 @@
+{
+  "all348_old_pinned_inputs_unchanged": true,
+  "all4_protected_live_sources_unchanged": true,
+  "file_count": 203,
+  "file_inventory_sha256": "22fa2ced314c17fa14a76243b2dad64af4cee2712cecf31e68b8fe5f1d630cb8",
+  "files": [
+    {
+      "bytes": 40487,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/authentication-result.json",
+      "sha256": "43b69bbb493c0aff290b040eb734d24866b2c83817e96950a0a86aada057f794"
+    },
+    {
+      "bytes": 80732,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/closed.json",
+      "sha256": "687ff3336b01ae7f2bf1720276e07a88bb9a74ce3f817124017ef948a0a317af"
+    },
+    {
+      "bytes": 4269,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/finite-objective-mapping.json",
+      "sha256": "cb2792ee4fd61ee254a964b40449b7e7257d0099097ee80e713c346799d62e06"
+    },
+    {
+      "bytes": 3054,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/lean/AuthenticatedFiniteLossOrder.lean",
+      "sha256": "85ab0e3196c3a90eb34c0a7d57a69aeda2cefef75fd8cea5342d8146c256a820"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/lean/AuthenticatedFiniteLossOrder.olean",
+      "sha256": "823de4c2ddb3cc3ef281735fa07c184c58409f527fad2daea4d39b8f4884948c"
+    },
+    {
+      "bytes": 2355,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/lean-finite_native_observation_order-check.json",
+      "sha256": "d19330e8266d8e5485d7bb4c89f79521d4224bf1e0edfb1eb7e024b7d8728515"
+    },
+    {
+      "bytes": 754,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/raw-canonical-binding.json",
+      "sha256": "8ec3bab3c663376e7015e00497ebafe3a2d9386c393940b5e26e5dcc586d3dfe"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/resources.json",
+      "sha256": "f481269b4f09fdbb9ad3fc1e7a65ba9ac2f573933e2447425090629a0fa6493f"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3146,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01/started.json",
+      "sha256": "4f266063296517aed3df8e7dd97c3f74659c89453dca9df46f6041f21c47190d"
+    },
+    {
+      "bytes": 1029,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01-closed.json",
+      "sha256": "20739f87eda9b1280a400254363add8039a75b1106095f21b8638b2886c75fbb"
+    },
+    {
+      "bytes": 962,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01-invocation.json",
+      "sha256": "3a8b1d3264ced22eef3128c0a812ec85d6696a6669935970b255639009b2e34c"
+    },
+    {
+      "bytes": 944,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/actual-01.stdout.log",
+      "sha256": "6f1526e65706595202d243030b2861fb7aaece78d1ddc842cf4198969121813f"
+    },
+    {
+      "bytes": 20215,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/closed.json",
+      "sha256": "d0b4bad851e49068e5e7b5ae97e4ac5c7f2e52f30684ebfee37cdffc32dd94fe"
+    },
+    {
+      "bytes": 4962,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/finite-objective-mapping.json",
+      "sha256": "5481539a6d7f71903e4a4093b1ea3bd35050dc086f40ec3b2f300d1bc7a6f261"
+    },
+    {
+      "bytes": 3082,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean/AuthenticatedFiniteLossOrder.lean",
+      "sha256": "f519df774d9b27fe2930b646518cc1e980d6ce3abf453098661c0dcdbc0d2d04"
+    },
+    {
+      "bytes": 58952,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean/AuthenticatedFiniteLossOrder.olean",
+      "sha256": "27a74abd8a8e2474c6cd518cf479874f6bc2a287a0c933b4dbcc07357ffc22eb"
+    },
+    {
+      "bytes": 3276,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean/FalseReversedLossOrder.lean",
+      "sha256": "6baa1a384fa5d91a6cc91135a20807e57c46c91b127d15fa60a63cca10757123"
+    },
+    {
+      "bytes": 4528,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean-checks.json",
+      "sha256": "f59b417b20e639bbc5e291a11dd70de123448351d39e9d394f5679077a014cae"
+    },
+    {
+      "bytes": 2181,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean-false_reversed_observation_chain-check.json",
+      "sha256": "51af61cb82f2cf3486596f4b9c1a0d9dc965f81e174fe7e51d8085f1c3ae5e66"
+    },
+    {
+      "bytes": 2344,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/lean-finite_native_observation_order-check.json",
+      "sha256": "2e0b1d9d70b5e6b01deba1bc04606ae690715fd3d02cbda0f508c6480b53a638"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/resources.json",
+      "sha256": "1a666be5a837406736f19165910493e3f435f54be631042886f49671ae28fdf4"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3144,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02/started.json",
+      "sha256": "8380706cf9155d23ac5b71e399ef720a3ef144dbd60eff12007e9db888ff7944"
+    },
+    {
+      "bytes": 1030,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02-closed.json",
+      "sha256": "743bebb8af807ebbe9289cb0b9b9b83ba4e9ee6f4abea7c5d9259c79b2afe2cb"
+    },
+    {
+      "bytes": 963,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02-invocation.json",
+      "sha256": "b81e6039a9e2f952caf7b2c9c2fe570c8494a144dfb04583fdcc0124336fba3e"
+    },
+    {
+      "bytes": 80,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/lean-02.stdout.log",
+      "sha256": "066d2806dcd4b573405ac24e3fddbc949f43c37d19dbba18fd0c743a2a24e986"
+    },
+    {
+      "bytes": 22764,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/closed.json",
+      "sha256": "16beaad9a84f09348332ee4c767a15d86991a720198028208e488018d49fcefd"
+    },
+    {
+      "bytes": 970604,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000000.json",
+      "sha256": "14c19f416c8218514ef6783b2bd074e682b07ad4791b69ff08de69b177d6005e"
+    },
+    {
+      "bytes": 912930,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000001.json",
+      "sha256": "ad69f14718a658e3e87f99aae57b370f0e96f0910923b047e033621d70fb126c"
+    },
+    {
+      "bytes": 616315,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000002.json",
+      "sha256": "5ac8e743f2167608c30958a8599bb435108433be5516ec6b81cd633ecfcfb857"
+    },
+    {
+      "bytes": 838348,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000003.json",
+      "sha256": "58049245f9a08b5eb005e4ed6de81c39a7dcba76e27146aedfe8cf85b4208276"
+    },
+    {
+      "bytes": 883556,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000004.json",
+      "sha256": "387ec4c1e4f0dda77a9a727fb30d254943ecded959388e6204f6738af1c3448f"
+    },
+    {
+      "bytes": 991185,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000005.json",
+      "sha256": "92e92260a6abc7632362820bfe1387b9c652eedff90874dbd3157286c5ec0035"
+    },
+    {
+      "bytes": 993574,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000006.json",
+      "sha256": "e6779410d1802fb94953b8a3aa027d739772a2973fe90b85fb06b339f28c2097"
+    },
+    {
+      "bytes": 978518,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000007.json",
+      "sha256": "9afad6d91fb5b6881cdf500cd51a2c261eae232efcbf58d56e2c62871595004f"
+    },
+    {
+      "bytes": 1000586,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000008.json",
+      "sha256": "713b4e41a6f12ce8e6cd1a6224baa3b65f15322ee9d1aaaf193a5f18be7aa3a7"
+    },
+    {
+      "bytes": 387600,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/batches/000009.json",
+      "sha256": "43242382f8cda2dcf5292163011b5962c0b17a2602fec835aeca7b3107559e10"
+    },
+    {
+      "bytes": 1396332,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ast.jsonl",
+      "sha256": "59c441eb9d556ce5ec176642e15a111455965456c491629f1645b56982496940"
+    },
+    {
+      "bytes": 7727,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/batching_finite_witness.jsonl",
+      "sha256": "598f08f44603c56f823610735db426ed0d9392a6ef39beec4e7334c6f9bb4459"
+    },
+    {
+      "bytes": 16836,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/batching_grounding_coverage.jsonl",
+      "sha256": "c94d534358b044a5f2127448df6724308fc8e9472334fad434b4673602765669"
+    },
+    {
+      "bytes": 31710,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/batching_native_intent.jsonl",
+      "sha256": "d65a461255f5954d7b472a8a88bfa54e7eeee87e328a8243b29e9d196f361084"
+    },
+    {
+      "bytes": 22945,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/batching_native_targets.jsonl",
+      "sha256": "79a0f4bac0502114d233dd5986159f0b03375b70c808d6d94feb49109acef1fe"
+    },
+    {
+      "bytes": 292634,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/batching_projection_reports.jsonl",
+      "sha256": "34cfddc325ed9c1876ca53a11e0ac8a2e170fd3110e5476091288fcf8410bd8e"
+    },
+    {
+      "bytes": 20920,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/batching_requirement_ledger.jsonl",
+      "sha256": "a776ac8a210e81207390b6610b2a86323d9f44b00dfa59eafc87aab64d5440a1"
+    },
+    {
+      "bytes": 22844,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/batching_requirement_links.jsonl",
+      "sha256": "818da17ddc24e451eb79000385a150e4d86b104ca56c93891af5755e5df0d87b"
+    },
+    {
+      "bytes": 54952,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/batching_source_context.jsonl",
+      "sha256": "ab8317422ef49d5b6c42642b8822b74af800a2117597a7521c5bdf67de660eac"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/contracts.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1315,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/coverage_status.jsonl",
+      "sha256": "e33b4c3fa44cdd3a88c12564a9974d17797f5edb4689482b49f18b8d519ec295"
+    },
+    {
+      "bytes": 5789,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/grounding_lean_checks.jsonl",
+      "sha256": "2cb8fe3e3a19bce6e9bad4eaeae7225122dc46024c8d4e360bdf052101808f64"
+    },
+    {
+      "bytes": 31127,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/judgments.jsonl",
+      "sha256": "856ec935c1990d7b5d740c5ddeec7ea052a849324852c9987de05e6dffdf53d8"
+    },
+    {
+      "bytes": 897163,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/kg.jsonl",
+      "sha256": "d157e5940ad3c356b003558bd8634ae67ca113223071a1dfb1e0702b023863ae"
+    },
+    {
+      "bytes": 205660,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/queries.jsonl",
+      "sha256": "64f14abe0ab32fbe8b608cf6c4a865cd9a4792a7eb4b949616b817593be49651"
+    },
+    {
+      "bytes": 1251,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ranker_checkpoint.jsonl",
+      "sha256": "79134f45d54df13bac0206872b1c68aa98cfca4fcc80afcfb4c39c4ba73f289e"
+    },
+    {
+      "bytes": 4880,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ranker_step_parameters.jsonl",
+      "sha256": "8cd46853a47dbb0b362863ca53b4cddd8440a80640ab1ded920c17cddc1c1eb2"
+    },
+    {
+      "bytes": 40879,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ranker_trace_authentication.jsonl",
+      "sha256": "9d268e57c3d7161adc398498c1f7f8d445de45cd848a96729bd9e239176c256f"
+    },
+    {
+      "bytes": 5303,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ranker_trace_lean_checks.jsonl",
+      "sha256": "34b10947cb3146750678e009b0f3edeb9493c7a4fcc8c697e8e0dee1dd81ee06"
+    },
+    {
+      "bytes": 84533,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ranker_trace_states.jsonl",
+      "sha256": "6453e20abe8b3750207f081b560242570e23a03f91b24705dc7a5d7e32d3005e"
+    },
+    {
+      "bytes": 33366,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ranker_training.jsonl",
+      "sha256": "48eab2bc84a3808a9f432641e83187ae761622e91fc953eefe43fdfc2957fda3"
+    },
+    {
+      "bytes": 2252,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ranker_transfer.jsonl",
+      "sha256": "44194cc717f3d17bd3e9aae673b2227df38bcc38b24ebde3832b49c35ccfac3f"
+    },
+    {
+      "bytes": 3248587,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/ranking.jsonl",
+      "sha256": "f990c34182228655f6d6e790be15fa221bfe4fe1ad48f53472b66caf482a6eaf"
+    },
+    {
+      "bytes": 1464,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/selector_proof_obligations.jsonl",
+      "sha256": "bd8862e95b02ca2e35c71302e546e4e0131f3c22f81f860ac092728ac8a5e3b6"
+    },
+    {
+      "bytes": 5089,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/selector_source_model.jsonl",
+      "sha256": "d578aae66f630cd7899164ff905998fb356e512ed31f17ce19c9a66ef051eedb"
+    },
+    {
+      "bytes": 7997,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/selector_step_lean_checks.jsonl",
+      "sha256": "a16ede74027754bff73162f3f53b21a2f8a43badcd0b03638ad8527c4ae782ef"
+    },
+    {
+      "bytes": 194356,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/sources.jsonl",
+      "sha256": "2035bdc0f81b9a8a45439ce0271d46e9286ce66ba09b8fa995b195612e8e48d9"
+    },
+    {
+      "bytes": 76122,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/split_history.jsonl",
+      "sha256": "72b6fdf9dae835e5fc6f15e2d89a985d1a328cbcfe4617be7dae46925beb911e"
+    },
+    {
+      "bytes": 994348,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/exports/vectors.jsonl",
+      "sha256": "e23fe8ae1056dbe7837e0942e2465c5bbe8b290239a4f4622b0ed1d04bae1de1"
+    },
+    {
+      "bytes": 298675,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-24de-749b-9011-f78f9b433327.parquet",
+      "sha256": "1a4bab2a9ef3ab898330227d46fc40f5787b63f9d944766ac92117aab881fbfc"
+    },
+    {
+      "bytes": 225616,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-2576-7946-9c23-d64aa9548bfa.parquet",
+      "sha256": "ca1355ba2490a96c9231e736b4cd5ae9dc14f698523e257ae97a5d9d303de4b4"
+    },
+    {
+      "bytes": 190534,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-25fe-7e7c-8d5c-00cda6f7ee5d.parquet",
+      "sha256": "85af420de05e1edf8b0be09018d28e61a0b560a9204ee933bf457a04018bd71c"
+    },
+    {
+      "bytes": 295918,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-269b-7624-81dc-2b415b0452fd.parquet",
+      "sha256": "1584a42d81e1c15b378745553323b2f87e3f3b502234b1f36605680cd7511e11"
+    },
+    {
+      "bytes": 268465,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-2741-75f4-8bd8-b830c27c59bb.parquet",
+      "sha256": "eb7f7d37661a52dc84b96bd401d9401190f555e978f0d1a1534c508f13d98f80"
+    },
+    {
+      "bytes": 268797,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-27da-7f40-b410-ed8a636cc374.parquet",
+      "sha256": "c8e0bd5bcfa57106d93f66a23873bd2ad902bcb581de913a6f17b240fe3428d5"
+    },
+    {
+      "bytes": 267925,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-2869-7fc5-b07f-dc527bae8258.parquet",
+      "sha256": "a427f8c3413571d7d9476eb53db5e9fec7c77c8ae5796effe762fecec34d1170"
+    },
+    {
+      "bytes": 257460,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-2906-7228-82a4-317ec6bb3ac1.parquet",
+      "sha256": "da2122a3b71f98138fe1230e28455d778db171904d2cbf1b1654b76a65458a89"
+    },
+    {
+      "bytes": 368541,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-29ab-7520-a561-c12d99119110.parquet",
+      "sha256": "61eb0b3fad2a585ba769472aad9329b4def8ab7ad1a710ac80261b82bd255a54"
+    },
+    {
+      "bytes": 123582,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/commits/ducklake-01a109c5-2a1c-7d6e-87a8-351634301953.parquet",
+      "sha256": "a45f7bda4152383044ccf9c09290ab9dcfc82ff478f4bd74b055f266915575e5"
+    },
+    {
+      "bytes": 47994,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-24d7-70cc-91e3-88c30ee5b9d0.parquet",
+      "sha256": "ffbad2a79da012d62d0cda10864d08f26036ea9ee8f03dc722d06139ee460cae"
+    },
+    {
+      "bytes": 43877,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-24d7-71b0-aa03-0fa471a2d77c.parquet",
+      "sha256": "085a4c6013cc0fa5a85ed025587b001f37e97db6d5d4060ca4ac799f4878f3b2"
+    },
+    {
+      "bytes": 41688,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-24d8-754c-8b0a-d17958b0c0d5.parquet",
+      "sha256": "0e648e02652fee0c700622a1cf83a56339bf3aaa0dfb552c7faf621e39a23115"
+    },
+    {
+      "bytes": 43820,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-24d8-7717-adfd-a757a17004a6.parquet",
+      "sha256": "6333ed2716b6414b362216ff7d206222a4fe630b0b8401b3efbf6c503726890d"
+    },
+    {
+      "bytes": 44435,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-24d8-777f-aec5-20e00bc7b532.parquet",
+      "sha256": "f21f87ddc539643544324263c606060bc59d36787f3b41c0a485155bc4c8a468"
+    },
+    {
+      "bytes": 45951,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-24d9-788a-826d-be48bd4e66b3.parquet",
+      "sha256": "ab39ce19e052b7522e6875f485f45ef84ac8ec4868a9a636eb0d7a793ad39666"
+    },
+    {
+      "bytes": 47687,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-24d9-7fca-80e0-a5fc9aecc23c.parquet",
+      "sha256": "89a4a1895c94e28dd7775f754141d1ffaaa62932554fa2dcdbf5a5433d85cc0f"
+    },
+    {
+      "bytes": 9721,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-256e-736f-b0e8-08f71284ea66.parquet",
+      "sha256": "fba62446892d815a7c153356424cfb460e35541a44645282ef8b853d3899299b"
+    },
+    {
+      "bytes": 40009,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-256e-773a-831d-224383292f67.parquet",
+      "sha256": "cce0d3681b855437ee15bf9d9f1ff5f44b8e91926a765ffb52873d46276985c3"
+    },
+    {
+      "bytes": 24583,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-256f-70b7-955b-e47369f9a12e.parquet",
+      "sha256": "b801eb54d94659be01b775e1bcf5cd4adefac5792ef37738c8fec445531252f6"
+    },
+    {
+      "bytes": 34521,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-256f-72aa-bdf3-0a6946cbb60a.parquet",
+      "sha256": "ad07116f332966f26cea49c31cce96fab9430695a18de25a576cbd65cd17653b"
+    },
+    {
+      "bytes": 42375,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-256f-78f2-b869-add8b4cea07f.parquet",
+      "sha256": "d6865b4893b53f1357c8ae808a8f7e7563c5150cdd1fde77551b546dcabd425d"
+    },
+    {
+      "bytes": 9470,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-256f-7997-ae99-e6f6f1495539.parquet",
+      "sha256": "22754afb2a8524a630dccecf069392cb4e7661361f491cc84fe3a2d63d9ac5a1"
+    },
+    {
+      "bytes": 6469,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2570-7379-895a-ca93af828939.parquet",
+      "sha256": "1136849a2e7495e44ff846c9db07d1925a25c841e859546a19ee20195e5ca84f"
+    },
+    {
+      "bytes": 6642,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2570-7595-b881-53573ff7f8df.parquet",
+      "sha256": "f286432c2bbaf24b450ff968f60c4c06c33ad39176de2ab38cfbc8edb14b1ff4"
+    },
+    {
+      "bytes": 31373,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2570-7734-9134-dca570d00fe7.parquet",
+      "sha256": "8a5e6e5c42925d6b3617dc9f1a3f6fd1bdb215d238736255022e6dec90cf45d7"
+    },
+    {
+      "bytes": 40235,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2571-7781-9c27-73599f33727d.parquet",
+      "sha256": "7b399a62abec1a316e01f3e800654264e4208d4939bf67053ca96f1e4c3e4f79"
+    },
+    {
+      "bytes": 50286,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25f7-72cf-a83e-644e12141017.parquet",
+      "sha256": "87c50b4086b0af95a11e944cef8fe8711137d28b82fe0aef6a9a796f736b7318"
+    },
+    {
+      "bytes": 12363,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25f8-746a-8e8d-68e124e5f585.parquet",
+      "sha256": "e9211843dc70775db02bc0d0d8b6939c0727f35643ad0405a57bd78bf06ac6ca"
+    },
+    {
+      "bytes": 47235,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25f8-7c37-bae9-52008ac4e0d3.parquet",
+      "sha256": "51a9d148c4db1d6ab43ecff9a1567543bdcf549ce3971bc6a100fe735c830d83"
+    },
+    {
+      "bytes": 3767,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25f9-7047-a1ad-0dd212c8a043.parquet",
+      "sha256": "2e8753de73c01528b9e4d619fd15f182effe2c90fe5d5a6766768d07d353ed5f"
+    },
+    {
+      "bytes": 4975,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25f9-7187-8128-a17129e9a1f2.parquet",
+      "sha256": "c2d226772f40a3b1fcdbbabe93bf82afb703b687d104d85befc1fb6ff3e3b91d"
+    },
+    {
+      "bytes": 15942,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25f9-72c0-9598-5449350c105c.parquet",
+      "sha256": "a6514b6bf0d27ad3facfe9bc57bd98d6368dec1da70e63957680bfc13e80feb3"
+    },
+    {
+      "bytes": 8377,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25f9-7e9e-8033-b6165cb426ef.parquet",
+      "sha256": "39fc2b014adddceeb99aab80deca108a814b7c485c4f08d58e74fc56b30bef80"
+    },
+    {
+      "bytes": 47560,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25f9-7ed5-9730-afe1478bc153.parquet",
+      "sha256": "9b9977713645e0fd62b291dfedee41a91717134b26557c7f941a247c94128bef"
+    },
+    {
+      "bytes": 10244,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25fa-77f3-83fd-eb4b13f1ed7e.parquet",
+      "sha256": "8f8323e8925316ea1a0e25255bfa6972d2020b9e1214d7a0038a3aa52b570654"
+    },
+    {
+      "bytes": 10803,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-25fa-7899-8aba-900ae92f3805.parquet",
+      "sha256": "6b3e42e6b2867b5b5245d586c739e307b7ade2426950ea76365ee480737e2f75"
+    },
+    {
+      "bytes": 32709,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2693-75dc-acbf-905fcd8f3ce3.parquet",
+      "sha256": "7ec6bb3aa9b125bb122babf88c9d177bd89484bbd0c3089658fb9481ff8391d8"
+    },
+    {
+      "bytes": 39011,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2694-7007-8ed4-cf26a2da51f8.parquet",
+      "sha256": "f4212c45ac3a0e26a69135c5c54fbdbed3929461a0e487c8864b65d207747a95"
+    },
+    {
+      "bytes": 5046,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2694-7945-be17-31f15d1f0336.parquet",
+      "sha256": "7ce0f944b1c0f0b77f66fcbdbc3c899a311fe59f2b0c11dde92657b5b96147c2"
+    },
+    {
+      "bytes": 52255,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2694-7ced-b9ef-e22f94ca0732.parquet",
+      "sha256": "6e2ffed9566acd8ce111d644e2602203c51e1747354eebd8834d9eddfb851e0a"
+    },
+    {
+      "bytes": 47208,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2695-744c-b487-238be7a4298e.parquet",
+      "sha256": "8294391d111343340cdfe733c56f780fc0137cf7a67ef083b498c62f9fdf6c1a"
+    },
+    {
+      "bytes": 39050,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2695-7ab1-bcfb-82598d721ebe.parquet",
+      "sha256": "dcb03c556b57f377d19bf1051f64c121fd54804d54a4f950171d21b1ec41f0d5"
+    },
+    {
+      "bytes": 41104,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2695-7b1a-9de4-39ecb2eebbe5.parquet",
+      "sha256": "6b7f371f330d24046f4381e28385a4e18997ce80a7c5de3b421d252bd1843cf4"
+    },
+    {
+      "bytes": 5726,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2695-7d41-9787-94870c0ad848.parquet",
+      "sha256": "7dea05ae3dc2a127ebd9bde9538ce309663099a5737ec5230005f81083d372a6"
+    },
+    {
+      "bytes": 3554,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2696-7653-83fe-cce96a983404.parquet",
+      "sha256": "d362c620d5b9d92e7e92db13d87d83ff928cefc9fc83633edf8a49ed2e673683"
+    },
+    {
+      "bytes": 44623,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2696-7d2d-aa89-6e4c89bff56e.parquet",
+      "sha256": "52f0ab9c11b46f5b7ce334b39914cc1965f45b9398f4fcd75e62ee69142ad1bc"
+    },
+    {
+      "bytes": 22875,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273a-7197-898a-ba8cf12ff948.parquet",
+      "sha256": "5bb57516be189b74ef18fa57350c33ac303537a390d766fc6fee0e175cf7c982"
+    },
+    {
+      "bytes": 33209,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273b-70a8-b9fa-9e9fb255a65c.parquet",
+      "sha256": "435557a175d1628f49c91d9ae714f9f04c61bafa133092675c5ad6314530e1f3"
+    },
+    {
+      "bytes": 34585,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273b-7c51-985c-1680ec0fefde.parquet",
+      "sha256": "be5502d2dd8f019a03abaa87e1c0a463e2fc7a8a2ae67a2a699719504153a482"
+    },
+    {
+      "bytes": 30984,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273c-7056-ba95-6b45e989a299.parquet",
+      "sha256": "c950411791ee14e5543f5799f6ee718422168b0296721035afded3b5650c7e78"
+    },
+    {
+      "bytes": 34548,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273c-7c29-a775-ee7735b2bcad.parquet",
+      "sha256": "b006e61b8d9625ea0d821407ff09efaa7114eac1b3ce9a940824c3aa5dcae082"
+    },
+    {
+      "bytes": 4388,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273c-7e25-a628-fcdebee77093.parquet",
+      "sha256": "2690ccbf0c85bfb2ff1dc54186fb945774a2b44fc8b2834e6950233dfa162098"
+    },
+    {
+      "bytes": 33111,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273c-7eeb-8d09-d608c7902f21.parquet",
+      "sha256": "b66be89f8e4886e84c12b25f06520b81f171e8716d9c049a3dd37f3a009fb6a0"
+    },
+    {
+      "bytes": 40686,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273d-74d7-be71-2b3d2455203f.parquet",
+      "sha256": "703619ee38d9116e54cd305eac171194f1c088504a18a442b30bf25052c88889"
+    },
+    {
+      "bytes": 33224,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273d-75c7-bf5d-9656c1530a3a.parquet",
+      "sha256": "42905b7120b883dfd288afc40b2e089da9ef7c29fc5747a214d2ddc55f6da72f"
+    },
+    {
+      "bytes": 13516,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-273d-77de-852b-d09a2a32609f.parquet",
+      "sha256": "25d1b23a9c6592d740372afddedf29c7147de5eabbab6981db18716de09f265b"
+    },
+    {
+      "bytes": 34736,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-27d4-78a3-a057-6558aecdcc28.parquet",
+      "sha256": "931a1f142ae376e5b65f8f29e37b7110b8e5a967df4b4bcf9f3b0aaf0622c52b"
+    },
+    {
+      "bytes": 32802,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-27d4-7c06-a6e7-27dc31fca43a.parquet",
+      "sha256": "07113caacc468da109cad31fa3337f2814e780f1a74373f6fc662a75ed6f7d2b"
+    },
+    {
+      "bytes": 33602,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-27d4-7c7c-a412-79834ee7b64b.parquet",
+      "sha256": "0bb4afa583d6f965c7c64675bca88a28c8f4c3ceac4bf8749d37a2c75fd1d5bc"
+    },
+    {
+      "bytes": 33339,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-27d5-7633-8204-bd6f5867aa86.parquet",
+      "sha256": "4cb5f378f032a6b49cd931928f987b1d528b61a5cade2cffdab6583f51ceb0ff"
+    },
+    {
+      "bytes": 32892,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-27d5-7ac1-8ec4-83638d6b6fe6.parquet",
+      "sha256": "fa8fcba02cd2fa772218c2b2fabfb5d9300138c542d0ff38c869fe48ac539f97"
+    },
+    {
+      "bytes": 34562,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-27d5-7ec7-a9f0-eb3d3adefc2c.parquet",
+      "sha256": "9d88de018891e266125297aa028812d465a9c22edcd6011fe4fb013ff82174b6"
+    },
+    {
+      "bytes": 34675,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-27d6-77ef-a2a1-1351ca53aaf9.parquet",
+      "sha256": "c0b207701f403848e795491fe86322d90ddb6e937ce8aa1824c5cc74d11c9448"
+    },
+    {
+      "bytes": 34614,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-27d6-7f50-aa5e-d7baad66d422.parquet",
+      "sha256": "1134f50c87dc7e8a44946596930309404b171fc61973e7a954d5f1669ea9f553"
+    },
+    {
+      "bytes": 34623,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2863-757c-a7e0-aecf6e6b7bbd.parquet",
+      "sha256": "905d701b2bd2f9485e911e8eec7bdc699842574a3852b2e88c2ca9ab41ec0204"
+    },
+    {
+      "bytes": 33083,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2864-785b-9c6c-75b47bf61958.parquet",
+      "sha256": "84ff2ca06e050fb30bc22687f7e6ba05d7acddd27087c6fb358a464f8b9c9dcd"
+    },
+    {
+      "bytes": 33006,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2864-78aa-a21f-eb449ec4b5f9.parquet",
+      "sha256": "a58387688eea5e24243b02afb19a335096c00e55f293c3ace9e850af21a2dc76"
+    },
+    {
+      "bytes": 32935,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2864-7bea-bee5-666d61624b15.parquet",
+      "sha256": "fcbab4f89515f1b27da1c7ae5842c1c366fda585d2c93552e6e3027d216ab656"
+    },
+    {
+      "bytes": 33110,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2864-7bfc-91a0-3862be11d14f.parquet",
+      "sha256": "f5a20f2af2618bac9e4d24b4fcd6b6b4b30c36f43019dda62b3443cb2c7ae002"
+    },
+    {
+      "bytes": 34416,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2865-74f9-aecb-95eda1f255cd.parquet",
+      "sha256": "9041d2d88c2d3270161c98014afed7e137b26dfe37bf9ed85f5ed3bfd74a7b2d"
+    },
+    {
+      "bytes": 34123,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2865-7641-b913-6106e4878909.parquet",
+      "sha256": "7faec65f5caa61edc841b697986171adc6149b04cc47adcfc9123139abe946fe"
+    },
+    {
+      "bytes": 34759,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2865-7c21-9861-5caa9cc4ad10.parquet",
+      "sha256": "12d0ad429032eb7988d16b9d2a075d0d8a1777ac1880cb5f77e92fcfbecfd91f"
+    },
+    {
+      "bytes": 25311,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-28fe-7bae-9776-b7ba36f2fafe.parquet",
+      "sha256": "39f93883b08f20a7dc8777b7a2b7803417270b3d51495516bd3c9470617da421"
+    },
+    {
+      "bytes": 33063,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-28ff-704b-8e5d-9d4da9be5c3c.parquet",
+      "sha256": "bb3214bc4a1c55e49f0cc0555d618c26551a871fb8859cd64288ab612fee4ec2"
+    },
+    {
+      "bytes": 3975,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-28ff-79c0-aa51-2c26b496a577.parquet",
+      "sha256": "382525f7ab764cd908329bb0887a6eaa047b4f7d1e5d5f6365286a46626d96a1"
+    },
+    {
+      "bytes": 34752,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-28ff-7a64-b294-f4a36204535f.parquet",
+      "sha256": "e41f0f4e0e9796157a6de90d91e57aeb443d2780ddb73b7811d8fecedd7b3c5f"
+    },
+    {
+      "bytes": 5929,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-28ff-7a86-9ea6-8ee40dfcb49c.parquet",
+      "sha256": "6c93b3abb478cb6ab96b67e15a113a32b69a0cec80c5da89ba8b4c5ed6b2434c"
+    },
+    {
+      "bytes": 33087,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2900-7184-bb83-53c7e908b98a.parquet",
+      "sha256": "9fc73b3c1f27defee5c3c466c4bd494da205a67636917dbc0e3ca541057855e9"
+    },
+    {
+      "bytes": 33052,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2900-76d2-a0e4-507c3fd9d7ce.parquet",
+      "sha256": "64fd5c5ced5bed7e49230ed0601dadb76a50c640f9b039764fdcc6f1fa061d41"
+    },
+    {
+      "bytes": 34099,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2900-7d05-981e-bedca742f5e1.parquet",
+      "sha256": "01478bb677f8681adc4520a52b83b3c951f71c18b2f5b1c327372f0a0a0f488c"
+    },
+    {
+      "bytes": 34613,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2900-7daa-b417-9d1fdcf27cc4.parquet",
+      "sha256": "7a53ebae82a2158a9fee27fb11ff2756eaf49b3b20cd491ea5e4e2c23f9174ad"
+    },
+    {
+      "bytes": 34687,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2901-74ba-8d9b-eb7b8c59c670.parquet",
+      "sha256": "9292f12d9ef8fdf3b0b7d381c174a329330afc7fc8d5bd57937ebaf55c4b39df"
+    },
+    {
+      "bytes": 46278,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a2-723c-95c5-4cdf690b6f36.parquet",
+      "sha256": "99783846c470a9321dc145f466cd0f71dd5a211f9b48b60ac47338915a67be46"
+    },
+    {
+      "bytes": 82065,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a2-7bda-9423-84efc974fc94.parquet",
+      "sha256": "97a9b703b199e78ca51cde7c3ff471c767293e04ab8b77d9020f5e5c534b5dae"
+    },
+    {
+      "bytes": 5509,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a3-7687-95af-570a0d2838f1.parquet",
+      "sha256": "8a6ee94e7607ddbb97f8c7a97c9d8c01ffc9a0cddb57ddc3df4284a4b9c9cd4f"
+    },
+    {
+      "bytes": 46572,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a3-7f1f-b9da-7a0aaea98d96.parquet",
+      "sha256": "db40c528730b1b1459729ef359576e3f00019a8fb1b333f483d17130da1bc23f"
+    },
+    {
+      "bytes": 5921,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a4-7559-a989-07d4cae74e85.parquet",
+      "sha256": "4a4b675e9c29f390d0a88a9dfc33d34073edff7b8e5dbba303f2d5f68f130d22"
+    },
+    {
+      "bytes": 47433,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a4-7697-9a11-1b9796424545.parquet",
+      "sha256": "256d41698f8c3ac0fa31886e7ba4436bc1f19ee861efd973cfdb9cdd30f05317"
+    },
+    {
+      "bytes": 50761,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a4-7ae7-85b9-88264a020dd5.parquet",
+      "sha256": "34ba07ee1e8139418f1eddfc0f71d3788278b5c42cf628096fa295ee7f6c99b0"
+    },
+    {
+      "bytes": 6365,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a4-7b25-93a8-db5ddf3837a4.parquet",
+      "sha256": "c67b31dd6f74a842b76275798315a1b8258cc3d2ca9331fda6d1ad65e699684f"
+    },
+    {
+      "bytes": 47934,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a5-7a26-954e-21cae5bb478a.parquet",
+      "sha256": "9a355b442e86af956fbbc0afac9ec1fe5c54b0096113959da53b66ed07c04408"
+    },
+    {
+      "bytes": 50289,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-29a5-7f60-a510-f1b94815453f.parquet",
+      "sha256": "20ff5a341be1b74529e86ced9d956a77bc7a900a4b6b34b8e46e84d6c12d00bc"
+    },
+    {
+      "bytes": 34434,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2a19-7e94-8ff6-4844008a3d6d.parquet",
+      "sha256": "15e2acd62b2d7b9cd51b0710fe321a1a519816f5bb444206ee9b913a063246bf"
+    },
+    {
+      "bytes": 47267,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2a1a-7478-bccf-f58aff9d984a.parquet",
+      "sha256": "0095f4b038190870786f5785d4850fa16ed3ca4861fd33c280a2bbb8ae2ca5b9"
+    },
+    {
+      "bytes": 46526,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/events/ducklake-01a109c5-2a1a-7ed8-af9e-3db3b84e7d67.parquet",
+      "sha256": "b56cdb1be9e4087c55edc9544ed0bd5026d7cf65f2d243352caa044de198bce1"
+    },
+    {
+      "bytes": 1938,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/identity/ducklake-01a109c5-242f-7ff5-a8a7-f11a2b39c414.parquet",
+      "sha256": "51a1e88252d1b1456701e051e8dd51bccfa24a7686577a31c6508aa49bafaa33"
+    },
+    {
+      "bytes": 2053,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/data/main/sources/ducklake-01a109c5-24d3-7906-9e15-e3bb28ff3f8f.parquet",
+      "sha256": "c1571f121151e822ab849ce034f019eb4f9ae604fa833b4a86947261a10d373a"
+    },
+    {
+      "bytes": 4206592,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/history.ducklake",
+      "sha256": "e17a028e4cf79bd25c8521dcc3598ca678a2a4abc9566b32d0dcc85b72b28c24"
+    },
+    {
+      "bytes": 958,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/history.json",
+      "sha256": "5f2f501662801cd138bfcae9428fa08f12ab62f12fa6ada344b82546d2870870"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/lake/owner.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 28848,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/manifest.json",
+      "sha256": "1bb1c3aac133aac3b84c41f5cb6821d7862809b34c478911b324d3bc1c286ad8"
+    },
+    {
+      "bytes": 10498048,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/metadata.duckdb",
+      "sha256": "d464b31733c843d55ab74a6c1dd2654ee8ba72d26913a251ac9f68dca77c665d"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata/owner.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 8128202,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata-inputs.json",
+      "sha256": "b53a4fd67b4e9c78128c8d24775d47f5b6cf7435989a3d266bc74b42427cf5d2"
+    },
+    {
+      "bytes": 26630,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/metadata-readback.json",
+      "sha256": "56c82bf267e05d1d0f63a6bc35a80b0b0793ab65efae326c50d56982d709b90f"
+    },
+    {
+      "bytes": 2263,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/resources.json",
+      "sha256": "5cf72e25c4e3e634054cb649f3f8a430cba4df44517f617dd4adcc48732e78f0"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6300,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/source-snapshot.json",
+      "sha256": "05f88c9a3d05bf27ddd29b01526624ff30faa9146839a55e0b6b9d2e3f578848"
+    },
+    {
+      "bytes": 3148,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01/started.json",
+      "sha256": "c027b7802075e333ed19c6ee776b526dac5f1d1a7e59f18c8571f973662273cd"
+    },
+    {
+      "bytes": 1034,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01-closed.json",
+      "sha256": "8b37ffd2595fa8869dee99f2125b62c0432be6512cf9bd5a29e235c0d3e2499f"
+    },
+    {
+      "bytes": 967,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01-invocation.json",
+      "sha256": "c50fb2420609f6d4247c40154b2fa404689ba6f3fec37d59c599750747fbfeea"
+    },
+    {
+      "bytes": 80,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/metadata-01.stdout.log",
+      "sha256": "ac4d820f2131bdf5e6c0aeb021b3f309844dedc2bea5f313b08a527118e167a7"
+    },
+    {
+      "bytes": 79391,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01/closed.json",
+      "sha256": "af12c787337f04e336026fd8a61efbc4e150c4ce6058219c59a728abd9cc21a2"
+    },
+    {
+      "bytes": 49457,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01/phases.json",
+      "sha256": "72ef4f758cf7a47dda343221149a83322fe9973c1254aabe16ec02561fc07151"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01/resources.json",
+      "sha256": "2b403c5e8835e8710a905e946a559ae3bb1a74827176f65f9023e659c6d83bfc"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3145,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01/started.json",
+      "sha256": "9407360439c4f60d6dc3b5273ea42ba52ff95beae505a216b86cfa87755a32d2"
+    },
+    {
+      "bytes": 12203,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01/tests.xml",
+      "sha256": "cf08362eac9fa18f36dd6825ea1db26d74f33ed0936a13a4dad6f83c584c0edd"
+    },
+    {
+      "bytes": 1028,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01-closed.json",
+      "sha256": "12ea407d8ca92012b1e1614f821da150b836c2547a13c412d43b6b87e04fa27e"
+    },
+    {
+      "bytes": 961,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01-invocation.json",
+      "sha256": "37abc3177d4b3d058a9f5c0504c3c538fba1d9cde25335b5d89ae9e96bb6aede"
+    },
+    {
+      "bytes": 180,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/evidence/tests-01.stdout.log",
+      "sha256": "7fd680266adf9af41a3bd5b22696798355864ee010b13460252fb15b4ce2cef6"
+    },
+    {
+      "bytes": 9571,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-review-01.json",
+      "sha256": "d1809dca6471ba8640f03805d6ed1ef557a7879887664de9ec712abac90c0e8f"
+    },
+    {
+      "bytes": 765,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/preparation/producer-pins-02.json",
+      "sha256": "87400c8051f326504a7b9d1201c539f247489151a387cfaf5dbbbac98138c429"
+    },
+    {
+      "bytes": 765,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/preparation/producer-pins.json",
+      "sha256": "125486433647b05de9bc1db538d3105366c279107d482d68f477bc1b00d96dfe"
+    },
+    {
+      "bytes": 110513,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/preparation/request.json",
+      "sha256": "789be09c158433d49fdbf2191c0566d99b04f846e7c239385343607be526b3f7"
+    },
+    {
+      "bytes": 32622,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/run_trace_controls_01.py",
+      "sha256": "86a7b9aeea6a7c21e09052520c9748aeeb43e6f04da1636ff0998fbf624535d5"
+    },
+    {
+      "bytes": 37622,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/run_trace_controls_02.py",
+      "sha256": "ee06b42bd98793b9bf121ed8d07dc5518af0d27774b55df2b1a7260b49c749c3"
+    },
+    {
+      "bytes": 10628,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/seal_file_only_01.py",
+      "sha256": "9a710766c0cad96dd5ab278c9c50daaf9335b8a037ca2f51048bae8bdce7b030"
+    },
+    {
+      "bytes": 18891,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py",
+      "sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364"
+    },
+    {
+      "bytes": 9,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/pytest.ini",
+      "sha256": "8250d20f42b419af40706490ead78aabab9feba93eab09a3f626e3de5256e1f4"
+    },
+    {
+      "bytes": 281,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/test/__init__.py",
+      "sha256": "7e3d36be0483b3390520eea90959d0361d6e2fd7dae43cb3aa619389b0b977d6"
+    },
+    {
+      "bytes": 32,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/test/api/__init__.py",
+      "sha256": "bb030272da3d2d800639cb7f5054189a073d08ae536210b1e6457628aa9ccb0d"
+    },
+    {
+      "bytes": 26521,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/test/api/test_terminal_codebase_intent_corpus.py",
+      "sha256": "5478113e11dd1fdd428255d0b455fe1a8e9b7cc592996f1d5d5d86d47e2125bd"
+    },
+    {
+      "bytes": 18828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source/test/api/test_terminal_codebase_ranker_trace_authentication.py",
+      "sha256": "5e5d1791233b279654b2e616866e7b73d5028c6cf64d5b0f805b29a07e56092d"
+    },
+    {
+      "bytes": 4245,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/source-manifest.json",
+      "sha256": "ed26da0ede3db262de1ba273012890d4626b9d18034a4ea9bab07430bf52c036"
+    }
+  ],
+  "new_native_jobs_during_seal": 0,
+  "review": {
+    "bytes": 9571,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-trace-authentication-20261005-01/file-only-review-01.json",
+    "sha256": "d1809dca6471ba8640f03805d6ed1ef557a7879887664de9ec712abac90c0e8f"
+  },
+  "schema": "terminal-ranker-trace-file-only-seal@1",
+  "scope": "Stable individual file hashes after closed jobs; no atomic whole-live snapshot or historical execution origin claim.",
+  "status": "retained_and_rehashed"
+}

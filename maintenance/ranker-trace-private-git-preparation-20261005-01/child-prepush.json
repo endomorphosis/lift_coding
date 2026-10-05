@@ -1,0 +1,37 @@
+{
+  "base_main_commit": "776a737744049f59bad3101268529af9c6db13f5",
+  "changed_files": [
+    {
+      "bytes": 18891,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_codebase_ranker_trace_authentication.py",
+      "sha256": "d89e83376367b3114cca967797677e0982a27cab78797ebfca0d7a1c1807c364"
+    },
+    {
+      "bytes": 18828,
+      "path": "test/api/test_terminal_codebase_ranker_trace_authentication.py",
+      "sha256": "5e5d1791233b279654b2e616866e7b73d5028c6cf64d5b0f805b29a07e56092d"
+    }
+  ],
+  "critical_dependency_source_review": "child-upstream-compatibility-source-review.json",
+  "file_seal_sha256": "8ea31286ffda2a5f08b4820bcc6ccf9ee05f133b96018132378f8c96ec16f438",
+  "new_commit": "fa51b32e8d3f296f4481344a5a61da9fd3ffd2a6",
+  "no_new_test_or_native_jobs": true,
+  "original_checkout_guards": {
+    "child": {
+      "head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "head_matches_original": true,
+      "index_matches_original": true,
+      "index_sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4"
+    },
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "head_matches_original": true,
+      "index_matches_original": true,
+      "index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    }
+  },
+  "push_mode": "ordinary fast-forward HEAD:refs/heads/main; no force",
+  "qualified_review_sha256": "d1809dca6471ba8640f03805d6ed1ef557a7879887664de9ec712abac90c0e8f",
+  "remote_main_before": "776a737744049f59bad3101268529af9c6db13f5",
+  "schema": "ranker-trace-private-child-prepush@1"
+}
