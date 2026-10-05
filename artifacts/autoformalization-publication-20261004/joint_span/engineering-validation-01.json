@@ -1,0 +1,67 @@
+{
+  "accepted": false,
+  "content_sha256": "fb5b18b9fb137961caa6cc0994bb036cd22ac79decd3900857c1131dfa2a9d2b",
+  "fixture_tests": {
+    "elapsed_seconds": 0.005,
+    "failed": 0,
+    "passed": 51,
+    "selector": 22,
+    "source_binding_and_decisions": 29
+  },
+  "plan_binding": {
+    "bytes": 4264,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-plan-02.json",
+    "sha256": "9387d84166cd82397d0f8432a70fbb1aaa350d80cd2d8a35ebab6fb354fc546c"
+  },
+  "proof_authority": false,
+  "runtime_pins": {
+    "evaluate_joint_spans.py": {
+      "bytes": 24347,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/evaluate_joint_spans.py",
+      "sha256": "c589e45f501b500ad86f88b04b56c83df5445e6aa578c90fa9925cbc64395a3e"
+    },
+    "run_joint_batch.py": {
+      "bytes": 4313,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run_joint_batch.py",
+      "sha256": "318237e8f99529bedb8ddf36b5dcf910564b4fad0eb77d7d5a466944ec525854"
+    },
+    "run_joint_parent.py": {
+      "bytes": 6134,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run_joint_parent.py",
+      "sha256": "47bbc19e12a6d45ea344aed5b473cbcf71fa0fb17c45710ee300e8bf4b8b510d"
+    },
+    "select_joint_spans.py": {
+      "bytes": 11479,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/select_joint_spans.py",
+      "sha256": "b926b0ab29f02c3eeed020b1c261151e83d073dbd4edf90ba63e9e9dee659afa"
+    },
+    "test_evaluate_joint_spans.py": {
+      "bytes": 12380,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/test_evaluate_joint_spans.py",
+      "sha256": "d91bbfb239621e26ff6de0cdced4213b0f83c5a41f869c6887f139d25f109fdb"
+    },
+    "test_select_joint_spans.py": {
+      "bytes": 13346,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/test_select_joint_spans.py",
+      "sha256": "10b864b3177593915b72b891a5c37804c572e52ba6f7026bc0fbf7001976a02f"
+    }
+  },
+  "schema": "joint-span-engineering-validation/v1",
+  "semantic_accuracy_measured": false,
+  "source_only_readiness": {
+    "model_calls": 0,
+    "native_checkpoint_endpoint_and_previous_raw_receipt_joins_checked": true,
+    "new_weights": false,
+    "numerical_providers_imported": false,
+    "requests": 64,
+    "seeds": 3,
+    "target_calls": 0
+  },
+  "status": "passed",
+  "superseded_preexecution_plan_binding": {
+    "bytes": 4264,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-plan-01.json",
+    "sha256": "33a659b2f81a9f728adffe9567374b1fa7175080e23064de7075d3e73b85f4b2"
+  },
+  "superseded_reason": "Pure invalid-head fixtures prompted explicit bounded rejection; score capture hash contract completed before any ML."
+}

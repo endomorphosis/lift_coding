@@ -1,0 +1,398 @@
+{
+  "accepted": false,
+  "all_requests_retained": true,
+  "baseline_summaries": {
+    "development": {
+      "accepted_artifacts": 0,
+      "backend_exception_type": null,
+      "decoder_calls": 1,
+      "decoder_completions": 1,
+      "decoder_reason_counts": {
+        "copied_spans_overlap": 28
+      },
+      "decoder_status_counts": {
+        "abstained": 28,
+        "decoded": 4
+      },
+      "eligible_rows": 32,
+      "exact_previous_receipt_match": true,
+      "preflight_outcomes": {
+        "unassessed": 32
+      },
+      "proof_calls": 0,
+      "receipt_binding": {
+        "bytes": 414384,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/greedy-development.json",
+        "sha256": "575d5ff59a3704040cc064bf42f441072456eaf2c07f66ca7b44e179c3501d79"
+      },
+      "requested_rows": 32,
+      "semantic_accuracy_measured": false,
+      "semantic_support_established": false,
+      "source_outcomes": {
+        "decoder_abstained": 28,
+        "decoder_proposal": 4
+      },
+      "syntax_valid_unaccepted_proposals": 4
+    },
+    "train": {
+      "accepted_artifacts": 0,
+      "backend_exception_type": null,
+      "decoder_calls": 1,
+      "decoder_completions": 1,
+      "decoder_reason_counts": {
+        "copied_spans_overlap": 28
+      },
+      "decoder_status_counts": {
+        "abstained": 28,
+        "decoded": 4
+      },
+      "eligible_rows": 32,
+      "exact_previous_receipt_match": true,
+      "preflight_outcomes": {
+        "unassessed": 32
+      },
+      "proof_calls": 0,
+      "receipt_binding": {
+        "bytes": 405354,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/greedy-train.json",
+        "sha256": "0dc5bd58783d02963fb3e37ee196c4f53eb934e94944f330ec20eb2866df9922"
+      },
+      "requested_rows": 32,
+      "semantic_accuracy_measured": false,
+      "semantic_support_established": false,
+      "source_outcomes": {
+        "decoder_abstained": 28,
+        "decoder_proposal": 4
+      },
+      "syntax_valid_unaccepted_proposals": 4
+    }
+  },
+  "checkpoint_binding": {
+    "bytes": 3432783,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+    "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+  },
+  "checkpoint_unchanged": true,
+  "content_sha256": "c8f0d896878d7eb8d38e254944c5ef9d19d2207a9fcc10d86e4747688d827ad9",
+  "context_contract_unchanged": true,
+  "counts": {
+    "actual_model_forward_calls": 64,
+    "dimensional_restores": 1,
+    "embedded_parent_restores": 1,
+    "joint_additional_model_forward_calls": 0,
+    "joint_selection_calls": 64,
+    "model_constructors": 3,
+    "optimizer_step_attempts": 0,
+    "optimizer_updates": 0,
+    "owner_decoder_calls": 2,
+    "source_row_decode_calls": 64,
+    "wrapper_calls": 2
+  },
+  "dependency_scope": "selected_entrypoints_and_captured_canonical_modules_not_complete_binary_closure",
+  "formal_targets_read": false,
+  "global_cpu_rng_unchanged": true,
+  "greedy_profile_unchanged": true,
+  "greedy_proposals": 8,
+  "independent_greedy_and_joint_model_forwards": false,
+  "joint_profile": "separate_bounded_joint_span_intervention/v1",
+  "joint_proposals": 63,
+  "joint_reason_counts": {
+    "no_complete_assignment_in_retained_candidates": 1
+  },
+  "masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "model_state_sha256": "9f9a5a2d0b735d11ffc876b39859118ad5d64f27317057d6b9827f03ef7ca79b",
+  "model_state_unchanged": true,
+  "native768_only": true,
+  "natural_sources": false,
+  "new_encoder_calls": 0,
+  "new_model_fits": 0,
+  "original_context_contract": {
+    "dimension": 768,
+    "producer_sha256": "b1b043897e866794185e242c8e0e1ac7982cd012f61111186b3e09c96f416d43",
+    "representation_id": "Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062:code=Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4:d768:pool=cls:norm=l2:cpu:float32:tokens8192:reject_overlength:v1",
+    "training_index_sha256": "739964281f8eb516ca7849da422d44428d9ce09a3f2b64df2c34da2d26d6949f"
+  },
+  "os_sandbox": false,
+  "parameter_gradients_created": false,
+  "plan_binding": {
+    "bytes": 4264,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-plan-02.json",
+    "sha256": "9387d84166cd82397d0f8432a70fbb1aaa350d80cd2d8a35ebab6fb354fc546c"
+  },
+  "policy": {
+    "ambiguity_epsilon": 1e-07,
+    "beam_width": 64,
+    "candidates_per_facet": 16,
+    "greedy_fallback": false,
+    "joint_objective": "python_math_fsum_of_float32_pair_scores",
+    "modality_and_presence": "unchanged_native_argmax_and_float32_margin",
+    "optimality_scope": "surviving_beam_only",
+    "optional_facet_removal": false,
+    "span_order": "native_facet_order",
+    "span_pair_scores": "float32_start_plus_end"
+  },
+  "preserved_input_bindings": [
+    {
+      "bytes": 4264,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-plan-02.json",
+      "sha256": "9387d84166cd82397d0f8432a70fbb1aaa350d80cd2d8a35ebab6fb354fc546c"
+    },
+    {
+      "bytes": 24347,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/evaluate_joint_spans.py",
+      "sha256": "c589e45f501b500ad86f88b04b56c83df5445e6aa578c90fa9925cbc64395a3e"
+    },
+    {
+      "bytes": 39894,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/evaluate_frozen_formalization.py",
+      "sha256": "b8d0c28006805585115aec4f236a6b14bdba6f43f82f9ec3e6cc64654925e475"
+    },
+    {
+      "bytes": 11479,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/select_joint_spans.py",
+      "sha256": "b926b0ab29f02c3eeed020b1c261151e83d073dbd4edf90ba63e9e9dee659afa"
+    },
+    {
+      "bytes": 25454,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/protocol-design-01.json",
+      "sha256": "ade373f2166d550d7539b2a3a3b851797c01c731703ba45ad7eded0ec16e8684"
+    },
+    {
+      "bytes": 7996,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-plan-01.json",
+      "sha256": "b62784c7c9857c9c222fc3b8c9cd736b9860fc4507d8e9b78b8ee53ee6c464ab"
+    },
+    {
+      "bytes": 414916,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/raw_source-train.json",
+      "sha256": "1564bdcc6ba36c03a356ec399eed792e47079c372e9c28d8dc62e6bc4eaa3575"
+    },
+    {
+      "bytes": 420611,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/raw_source-development.json",
+      "sha256": "8b633f2765cf7da7bb1c90f2388e477d666d0a29f0d5c490aa80b5c9d3fcdd15"
+    },
+    {
+      "bytes": 386845,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-train.json",
+      "sha256": "edbd877c11fe1a40744731bd051d93d3f6fe85b36819108bd03f7129afa9763b"
+    },
+    {
+      "bytes": 377466,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-development.json",
+      "sha256": "db7814973e2b0477abf3dc5846768d643a44d1f6261b100612b6199a207789d5"
+    },
+    {
+      "bytes": 405354,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/raw_source-train.json",
+      "sha256": "0dc5bd58783d02963fb3e37ee196c4f53eb934e94944f330ec20eb2866df9922"
+    },
+    {
+      "bytes": 414384,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/raw_source-development.json",
+      "sha256": "575d5ff59a3704040cc064bf42f441072456eaf2c07f66ca7b44e179c3501d79"
+    },
+    {
+      "bytes": 6247,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/huggingface/launch_reconstruction.py",
+      "sha256": "910ff61a235d6e988e78b34a3b27d7ae7520f2bb10722881ab532c934be1199e"
+    },
+    {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 38995,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    },
+    {
+      "bytes": 42137,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 35294,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+      "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+    },
+    {
+      "bytes": 22521,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+      "sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d"
+    },
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 9794,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+      "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+    },
+    {
+      "bytes": 21764,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+      "sha256": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec"
+    },
+    {
+      "bytes": 43238,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+      "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+    },
+    {
+      "bytes": 22785,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+      "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+    },
+    {
+      "bytes": 18904,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/encoding-report.json",
+      "sha256": "3732a01db278868ebeaa2383e3dd36c6eb3f15285e6fb6fb09422d1cd08a39d8"
+    },
+    {
+      "bytes": 1134995,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_bundle.json",
+      "sha256": "cc7f03946d5176900dceff276d3c5e721dff700c323fdf9fcd0667875d5179da"
+    },
+    {
+      "bytes": 3433326,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-400.json",
+      "sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc"
+    },
+    {
+      "bytes": 8257622,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/endpoints.json",
+      "sha256": "7d94d54ffa47770e2f0a5fda7898d3e7210ed9ccee2431e2f7841db7783d8db0"
+    },
+    {
+      "bytes": 8901,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/numeric-report.json",
+      "sha256": "2ef120533f20475c41826dda643bcca860f0646806b96694b0492913efbb964c"
+    },
+    {
+      "bytes": 3432437,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+      "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+    },
+    {
+      "bytes": 8257739,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/endpoints.json",
+      "sha256": "d1887bedba6662d1252c017c753e4bd7c793b1132aee1acb42c86330cf7fba9e"
+    },
+    {
+      "bytes": 8903,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/numeric-report.json",
+      "sha256": "9144e816e9846cf8961c2318a75306c773b3bb132cfb98cd7f83e1e4bdfd3483"
+    },
+    {
+      "bytes": 3432783,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+      "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+    },
+    {
+      "bytes": 8257900,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/endpoints.json",
+      "sha256": "2f172dcd9a34ceb8284b543517eb141ffd1a949e1c20266ecf5a800474cb0c2b"
+    },
+    {
+      "bytes": 8896,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/numeric-report.json",
+      "sha256": "89e3689bb5fbe825f0598af5b14a4ee6c782ed1f3846503cb18cd2e2c98c0e8d"
+    }
+  ],
+  "pristine_holdout": false,
+  "proof_authority": false,
+  "proof_calls": 0,
+  "proposal_ledger_binding": {
+    "bytes": 1132666,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/proposal-ledger.json",
+    "sha256": "aa0b04e06594d0418496f54d779a03f067ed10b72e6214e3ee3795c2667c3252"
+  },
+  "qualified": false,
+  "request_count": 64,
+  "resources": {
+    "cpu_seconds": 2.8396829999999995,
+    "elapsed_seconds": 2.863380689988844,
+    "limits": {
+      "address_space_bytes": 8589934592,
+      "cooperative_rss_kib": 2097152,
+      "cooperative_seconds": 90,
+      "cpu_seconds_hard": 130,
+      "cpu_seconds_soft": 120,
+      "cpu_threads": 1,
+      "device": "cpu",
+      "dtype": "float32",
+      "parent_wall_seconds": 180
+    },
+    "observation_scope": "worker_before_final_report_serialization",
+    "peak_rss_kib": 723636
+  },
+  "restored_adam_unchanged": true,
+  "restored_optimizer_state_checksums": [
+    {
+      "role": "embedded_source_parent",
+      "sha256": "bb80460e7cac2f21114e4294b3f79d9b8333903b95b8233e02644773e4cedb27"
+    },
+    {
+      "role": "retained_dimensional_decoder",
+      "sha256": "1ef8ce77f912768c81e21fe79c6a8abc04643e18f909a1bb55cd81cb82841833"
+    }
+  ],
+  "runtime_admission_scope": "fail_closed_complete64_previously_preflighted_finite_score_cohort",
+  "saved_optimizer_state_sha256": "1ef8ce77f912768c81e21fe79c6a8abc04643e18f909a1bb55cd81cb82841833",
+  "schema": "source-only-joint-span-report/v1",
+  "score_bank_binding": {
+    "bytes": 807227,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/score-bank.json",
+    "sha256": "13c792aaf9a4bddb40af2cf30461b31c161ebc5c349ba6e7d3e953b888bf51bc"
+  },
+  "search_incomplete_rows": 64,
+  "seed": 1731,
+  "selected_provider_entrypoints": {
+    "safetensors": {
+      "bytes": 194,
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/safetensors/__init__.py",
+      "sha256": "c1bcca66501582702c8c79aaaf2b922428800efa4367134609f8fc57363402dd",
+      "version": "0.7.0"
+    },
+    "torch": {
+      "bytes": 111841,
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/torch/__init__.py",
+      "sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1",
+      "version": "2.13.0"
+    }
+  },
+  "semantic_accuracy_measured": false,
+  "source_fidelity_established": false,
+  "status": "completed",
+  "training_executed": false,
+  "transition_counts": {
+    "abstained->abstained": 1,
+    "abstained->proposal": 55,
+    "decoded->proposal": 8
+  }
+}

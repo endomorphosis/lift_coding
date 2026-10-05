@@ -1,0 +1,530 @@
+{
+  "schema": "frozen-source-only-joint-span-protocol-design/v1",
+  "status": "design_only_not_execution_or_runtime_admission",
+  "experiment_id": "authored64-native768-frozen-raw-greedy-vs-top16-beam64-joint-spans-v1",
+  "binding_contract": {
+    "fields": [
+      "path",
+      "bytes",
+      "sha256"
+    ],
+    "bytes": "exact_positive_integer_not_boolean",
+    "sha256": "lowercase_hex64",
+    "capture": "Verify exact captured bytes before parsing or compiling; verify preserved files after execution. Runtime selects helper and module bindings after their final bytes are frozen.",
+    "seal": "SHA256 of sorted compact UTF8 JSON excluding only content_sha256, ensure_ascii=false, allow_nan=false, no trailing newline in hashed payload."
+  },
+  "evidence_bindings": {
+    "existing_downstream_plan": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-plan-01.json",
+      "bytes": 7996,
+      "sha256": "b62784c7c9857c9c222fc3b8c9cd736b9860fc4507d8e9b78b8ee53ee6c464ab"
+    },
+    "cohort": {
+      "bytes": 22785,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+      "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+    },
+    "source_inputs": {
+      "bytes": 43238,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+      "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+    },
+    "encoding_report": {
+      "bytes": 18904,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/encoding-report.json",
+      "sha256": "3732a01db278868ebeaa2383e3dd36c6eb3f15285e6fb6fb09422d1cd08a39d8"
+    },
+    "decoder_arms": [
+      {
+        "checkpoint_binding": {
+          "bytes": 3433326,
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-400.json",
+          "sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc"
+        },
+        "endpoints_binding": {
+          "bytes": 8257622,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/endpoints.json",
+          "sha256": "7d94d54ffa47770e2f0a5fda7898d3e7210ed9ccee2431e2f7841db7783d8db0"
+        },
+        "numeric_report_binding": {
+          "bytes": 8901,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/numeric-report.json",
+          "sha256": "2ef120533f20475c41826dda643bcca860f0646806b96694b0492913efbb964c"
+        },
+        "seed": 1729
+      },
+      {
+        "checkpoint_binding": {
+          "bytes": 3432437,
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+          "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+        },
+        "endpoints_binding": {
+          "bytes": 8257739,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/endpoints.json",
+          "sha256": "d1887bedba6662d1252c017c753e4bd7c793b1132aee1acb42c86330cf7fba9e"
+        },
+        "numeric_report_binding": {
+          "bytes": 8903,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/numeric-report.json",
+          "sha256": "9144e816e9846cf8961c2318a75306c773b3bb132cfb98cd7f83e1e4bdfd3483"
+        },
+        "seed": 1730
+      },
+      {
+        "checkpoint_binding": {
+          "bytes": 3432783,
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+          "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+        },
+        "endpoints_binding": {
+          "bytes": 8257900,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/endpoints.json",
+          "sha256": "2f172dcd9a34ceb8284b543517eb141ffd1a949e1c20266ecf5a800474cb0c2b"
+        },
+        "numeric_report_binding": {
+          "bytes": 8896,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/numeric-report.json",
+          "sha256": "89e3689bb5fbe825f0598af5b14a4ee6c782ed1f3846503cb18cd2e2c98c0e8d"
+        },
+        "seed": 1731
+      }
+    ],
+    "prior_raw_evidence": [
+      {
+        "seed": 1729,
+        "report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/seed1729-report-01.json",
+          "bytes": 35748,
+          "sha256": "434720545a6fb1ea7a0936d2d1334c9bf5f2f7c5bce3ab1bf68dd22ae7364736"
+        },
+        "raw_receipts": [
+          {
+            "split": "train",
+            "receipt_binding": {
+              "bytes": 414916,
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/raw_source-train.json",
+              "sha256": "1564bdcc6ba36c03a356ec399eed792e47079c372e9c28d8dc62e6bc4eaa3575"
+            }
+          },
+          {
+            "split": "development",
+            "receipt_binding": {
+              "bytes": 420611,
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/raw_source-development.json",
+              "sha256": "8b633f2765cf7da7bb1c90f2388e477d666d0a29f0d5c490aa80b5c9d3fcdd15"
+            }
+          }
+        ],
+        "expected_raw_proposals": 1
+      },
+      {
+        "seed": 1730,
+        "report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/seed1730-report-01.json",
+          "bytes": 35746,
+          "sha256": "10fd49e3c64ed80ce1e0cb58336aab5b44404163a8d3f8d10a46d500446aa5ed"
+        },
+        "raw_receipts": [
+          {
+            "split": "train",
+            "receipt_binding": {
+              "bytes": 386845,
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-train.json",
+              "sha256": "edbd877c11fe1a40744731bd051d93d3f6fe85b36819108bd03f7129afa9763b"
+            }
+          },
+          {
+            "split": "development",
+            "receipt_binding": {
+              "bytes": 377466,
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-development.json",
+              "sha256": "db7814973e2b0477abf3dc5846768d643a44d1f6261b100612b6199a207789d5"
+            }
+          }
+        ],
+        "expected_raw_proposals": 1
+      },
+      {
+        "seed": 1731,
+        "report_binding": {
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/seed1731-report-01.json",
+          "bytes": 36102,
+          "sha256": "f4e60692b9c09e02c342e4678958621ce9e2cfb7187198be960115c349761a1c"
+        },
+        "raw_receipts": [
+          {
+            "split": "train",
+            "receipt_binding": {
+              "bytes": 405354,
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/raw_source-train.json",
+              "sha256": "0dc5bd58783d02963fb3e37ee196c4f53eb934e94944f330ec20eb2866df9922"
+            }
+          },
+          {
+            "split": "development",
+            "receipt_binding": {
+              "bytes": 414384,
+              "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/raw_source-development.json",
+              "sha256": "575d5ff59a3704040cc064bf42f441072456eaf2c07f66ca7b44e179c3501d79"
+            }
+          }
+        ],
+        "expected_raw_proposals": 8
+      }
+    ],
+    "prior_downstream_summary": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+      "bytes": 139006,
+      "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a"
+    },
+    "prior_downstream_audit": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/independent-downstream-check-01.json",
+      "bytes": 83366,
+      "sha256": "8b45a0e0538da85bb043a185e178ca65314ed970bb603b939b884d050826425c"
+    }
+  },
+  "fixed_design": {
+    "lane": "native768",
+    "input_dimension": 768,
+    "conditioner": "exact_existing_native_source_vectors_only",
+    "seeds": [
+      1729,
+      1730,
+      1731
+    ],
+    "source_requests": 64,
+    "split_panels": [
+      {
+        "split": "train",
+        "rows": 32
+      },
+      {
+        "split": "development",
+        "rows": 32
+      }
+    ],
+    "policies": [
+      "unchanged_native_greedy",
+      "joint_top16_beam64"
+    ],
+    "paired_source_seed_occurrences": 192,
+    "planned_policy_outcomes": 384,
+    "planned_model_forward_calls": 192,
+    "planned_joint_policy_extra_model_forward_calls": 0,
+    "all_requests_retained": true,
+    "decoder_selection": "The exact retained per-seed selected400 checkpoint; no checkpoint selection or fitting.",
+    "split_scope": "Representation-reconstruction split labels; these do not establish independence from historical formal-decoder training.",
+    "fitting_steps": 0,
+    "new_encoder_calls": 0,
+    "new_ae_or_pca_fits": 0,
+    "formal_target_reads": 0,
+    "prover_calls": 0
+  },
+  "source_contract": {
+    "request_fields": [
+      "id",
+      "source_text",
+      "context_text",
+      "requires_context_resolution"
+    ],
+    "source_text": "Exact original UTF8 source text, no repair, lowercasing, truncation, paraphrase, or result-dependent filtering.",
+    "context_text": "Existing exact empty declared context; not interpreted or applied.",
+    "joining": "Join source inputs, metadata and raw vector bank by exact registered ID/input/source hash; never assume independently saved table order.",
+    "preflight": "Unchanged captured canonical decoder preflight before native execution. unassessed permits execution but does not establish representability.",
+    "tokens": "Existing retained Unicode lexemes with exact Python character offsets; copied atoms refer to token-start through inclusive-token-end and exact source slice.",
+    "bounds": {
+      "source_characters": 16384,
+      "source_tokens": 256,
+      "token_utf8_bytes": 2048
+    },
+    "forbidden_input_fields": [
+      "reference_ir",
+      "formal_target",
+      "candidate_ir",
+      "organizer_actor_action_object",
+      "theorem_body",
+      "proof_target"
+    ]
+  },
+  "score_capture_contract": {
+    "capture_point": "Observe the return value of each unchanged actual model.forward invoked by the native greedy decoder. Capture does not replace output, call forward again, change model mode beyond native inference, or advance RNG.",
+    "head_fields": [
+      "modality",
+      "presence",
+      "start",
+      "end"
+    ],
+    "head_shapes": {
+      "modality": [
+        1,
+        3
+      ],
+      "presence": [
+        1,
+        4,
+        2
+      ],
+      "start": "[1,6,exact_token_count]",
+      "end": "[1,6,exact_token_count]"
+    },
+    "detach": "Finite float32 values copied to ordinary CPU scalars; bank contains no vectors, checkpoint tensor state, semantic labels or target bodies.",
+    "source_binding": "For every observed forward, bind source ID, exact source/input hashes, exact latent digest and policy-independent token-input hash; count and check capture once per native source-row forward.",
+    "early_abstentions": "Capture complete heads even when unchanged greedy decoding returns on an early overlap; saved greedy span diagnostics alone cannot expose later facets.",
+    "not_forwarded": "Every preflight-blocked, encoding-rejected or operationally unavailable original request remains in outcomes with no fabricated score record.",
+    "paired_input_scope": "Both policies consume this same captured head record; only span selection varies.",
+    "private_bank": "Save a sealed bounded exact score bank sufficient for independent pure replay. Publish its digest and scalar aggregates; do not treat score-bank integrity as independent numerical attestation."
+  },
+  "joint_policy": {
+    "policy_identity": "separate_opt_in_structural_joint_span_selector; never relabel as native unchanged greedy inference",
+    "facet_order": [
+      "actor",
+      "action",
+      "object",
+      "conditions",
+      "exceptions",
+      "temporal"
+    ],
+    "required_facets": [
+      "actor",
+      "action"
+    ],
+    "optional_facets": [
+      "object",
+      "conditions",
+      "exceptions",
+      "temporal"
+    ],
+    "modality": "Keep native stable argmax over O/P/F and the native finite float32 top-two modality margin threshold.",
+    "presence": "Keep native present-vs-absent argmax for all four optional facets and native float32 absolute-logit-margin threshold; do not omit a predicted qualifier or object to manufacture feasible output.",
+    "fixed_decision_threshold": 1e-07,
+    "span_ambiguity": "Joint assignment ambiguity is a separately named survivor-score margin under this bounded policy; it is not the native independent argmax span margin.",
+    "candidate_score": "For every legal token interval left<=right, round start[left]+end[right] to float32 as native pair scoring does. Explicitly reject nonfinite sum/score values.",
+    "candidate_order": "Descending pair score; ties ordered by ascending row-major flat index left*token_count+right.",
+    "candidate_count_per_present_facet": 16,
+    "candidate_truncation": "Keep min(16, token_count*(token_count+1)//2) legal intervals. Save legal count, retained count, dropped count, cutoff score and tie-at-cutoff information. No result-dependent widening or row-specific K tuning.",
+    "span_constraints": [
+      "Exact token-aligned literal copy",
+      "Left token <= right token",
+      "Nonempty required actor and action",
+      "One interval per predicted-present facet",
+      "No occupied token intersection across chosen facets",
+      "At most one copied atom per qualifier facet"
+    ],
+    "beam_width": 64,
+    "search": "Expand present facets in the fixed order from the current surviving partial assignments; reject overlapping expansions, rank complete prefixes by registered score then coordinate signature, retain up to64 prefixes at each stage. Predicted-absent optional facets add no span or score.",
+    "assignment_score": "Sum the already rounded float32 pair scores in deterministic facet order using the registered pure-policy accumulation precision. Runtime must bind its exact accumulation and difference recipe before any model executes.",
+    "selection": "Best feasible complete surviving assignment; abstain if none, if relevant scores are nonfinite, or if the top two complete survivor scores are ambiguous under the registered threshold. A single survivor has no numerical runner-up margin.",
+    "fallback": "No silent greedy fallback, widening or additional forward. Persist bounded-search failure as its own joint outcome.",
+    "optimality_scope": "Best of surviving beam only; beam64 can prune a prefix whose completion would otherwise be best, and top16 can exclude feasible or correct spans. Final survivor margin is not a global optimum gap or calibrated confidence.",
+    "grammar_validation": "Pass generated single-rule AST through the same captured codec and canonical grammar validators. Structural validity is separate from fidelity.",
+    "no_added_semantic_prior": true,
+    "no_new_span_length_or_lexical_prior": true,
+    "no_new_parameters": true
+  },
+  "baseline_comparison_contract": {
+    "baseline_execution": "Unchanged native decoder through its original canonical preflight wrapper with original raw vector profile, native source owners and canonical schemas.",
+    "native_receipt": "Do not add joint search fields, replace independent span margins or alter the native inference policy.",
+    "previous_raw_join": "Check newly generated greedy outputs against the registered prior raw-source receipts on every original source/seed ID and source/effective-latent digest.",
+    "required_equal_fields": [
+      "status",
+      "reason",
+      "canonical_ir"
+    ],
+    "stronger_repeat_check": "Prefer full deterministic greedy row equality where schema and input scope permit; metadata/diagnostic fields retain native meaning.",
+    "expected_counts": {
+      "per_seed_raw_proposals": {
+        "1729": 1,
+        "1730": 1,
+        "1731": 8
+      },
+      "total_raw_proposals": 10,
+      "total_raw_copied_spans_overlap_abstentions": 182
+    },
+    "comparison_unit": "Paired source and seed, with explicit split and declared group labels. Do not count repeated seed occurrences as independent legal documents.",
+    "all_request_denominators": "Retain all64 per seed and both policies; separately report model eligibility and proposals among actually forwarded rows.",
+    "proposal_preservation_check": "Report whether every prior greedy proposal is preserved by joint selection. Unexpected changes to a nonoverlapping unique native top-choice assignment require numerical/search audit rather than a quality claim."
+  },
+  "proposed_report_contract": {
+    "schema": "frozen-source-only-joint-span-report/v1",
+    "top_level_fields": [
+      "schema",
+      "status",
+      "experiment_id",
+      "seed",
+      "plan_binding",
+      "helper_binding",
+      "policy_binding",
+      "input_bindings",
+      "checkpoint_binding",
+      "context_contract",
+      "native_baseline_receipt_bindings",
+      "head_score_bank_binding",
+      "joint_receipt_bindings",
+      "prior_raw_replay_comparison",
+      "counts",
+      "state_preservation",
+      "structural_comparisons",
+      "search_aggregates",
+      "resource_observations",
+      "authorization_scope",
+      "limitations",
+      "content_sha256"
+    ],
+    "joint_receipt_fields": [
+      "schema",
+      "policy_identity",
+      "policy_binding",
+      "seed",
+      "split",
+      "score_bank_binding",
+      "input_count",
+      "rows",
+      "outcome_counts",
+      "structurally_valid_unaccepted_proposals",
+      "accepted",
+      "source_fidelity_established",
+      "proof_authority",
+      "qualified",
+      "masks",
+      "content_sha256"
+    ],
+    "joint_row_fields": [
+      "id",
+      "position",
+      "source_sha256",
+      "request_sha256",
+      "effective_latent_sha256",
+      "token_input_sha256",
+      "head_score_digest",
+      "preflight_outcome",
+      "outcome",
+      "reason",
+      "canonical_ir",
+      "copied_facet_spans",
+      "fixed_modality_decision",
+      "fixed_presence_decisions",
+      "candidate_pool_accounting",
+      "beam_stage_accounting",
+      "assignment_score",
+      "survivor_score_margin",
+      "survivor_count",
+      "structural_validity",
+      "accepted",
+      "source_fidelity_established",
+      "proof_authority",
+      "qualified"
+    ],
+    "search_accounting": [
+      "Legal triangular intervals per present facet",
+      "Retained and pruned candidate intervals",
+      "Cutoff ties",
+      "Per-stage expanded assignments",
+      "Per-stage rejected overlap assignments",
+      "Per-stage kept and pruned partial assignments",
+      "Pruning boundary ties",
+      "Maximum surviving beam size",
+      "No feasible completion count",
+      "Ambiguous survivor count",
+      "Finite score checks",
+      "Grammar rejection count"
+    ],
+    "paired_structural_comparisons": [
+      "All-request outcome and reason transitions",
+      "Greedy proposal -> identical joint proposal",
+      "Greedy proposal -> changed joint proposal",
+      "Greedy proposal -> joint abstention or unavailable",
+      "Greedy overlap abstention -> unaccepted joint structural proposal",
+      "Greedy abstention -> joint abstention by reason",
+      "Canonical IR/status/reason equality and changes per seed and split"
+    ],
+    "counts": [
+      "Wrapper/native-owner calls",
+      "Actual source-row forwards",
+      "Captured head records",
+      "Joint policy calls with and without scores",
+      "Dimensional restores",
+      "Embedded source-parent restores",
+      "Model factories",
+      "Retained Adam objects",
+      "Optimizer step attempts and updates",
+      "Gradient creation",
+      "New encoder/AE/PCA/prover/target calls"
+    ],
+    "state_preservation": [
+      "Checkpoint bytes and loaded content unchanged",
+      "All captured owner source bytes unchanged",
+      "Model state unchanged",
+      "Restored Adam state unchanged",
+      "Global CPU RNG unchanged",
+      "No parameter gradients created"
+    ],
+    "resources": [
+      "Worker wall and CPU seconds",
+      "Peak RSS",
+      "Hard CPU/address-space limits",
+      "Parent timeout",
+      "Capture + pure joint selection included; upstream encoding and earlier training excluded"
+    ],
+    "authority": "Every proposal remains structurally valid but unaccepted. No legal correctness, source fidelity or proof claim follows from complete copying or increased coverage."
+  },
+  "validation_requirements": {
+    "before_execution": [
+      "Pure fixture tests for invalid shapes, nonfinite head/pair/objective scores, unknown fields and altered source/vector joins",
+      "Candidate float32 ordering and stable row-major ties",
+      "Exact non-overlap and literal token/character transport",
+      "Required/optional facet presence contract",
+      "Beam/candidate bounds including no feasible completion and ambiguity",
+      "No extra numerical execution in readiness checks",
+      "Closed runtime policy and bindings frozen before actual numerical execution"
+    ],
+    "after_execution": [
+      "Verify prior greedy baseline all192 exact paired joins and expected counts",
+      "Independently replay pure joint selection from all saved captured score arrays",
+      "Recompute all384 policy outcomes and public ledger joins",
+      "Recompute per-seed/split structural transition and search aggregates",
+      "Recheck all preserved model/source/input file bindings and recorded state preservation",
+      "Audit summary and ledger masks/authority remain false or integer zero"
+    ],
+    "audit_limit": "Saved score replay independently validates deterministic selection and receipts, not the origin or correctness of numerical scores, full native binary dependency closure, or semantic fidelity."
+  },
+  "authorization_scope": {
+    "source_cohort_original_policy_unchanged": true,
+    "masks": {
+      "weak_decoder_fit": 0,
+      "strong_semantic_fit": 0,
+      "contrastive_supervision": 0,
+      "proof_supervision": 0,
+      "fidelity_evaluation": 0
+    },
+    "formal_target_reads": false,
+    "semantic_label_admission": false,
+    "independent_semantic_review_completed": false,
+    "training_executed": false,
+    "accepted": false,
+    "source_fidelity_established": false,
+    "semantic_accuracy_measured": false,
+    "proof_authority": false,
+    "qualified": false,
+    "new_model_weights_created": false,
+    "proof_calls": 0,
+    "earlier_weak16_policy_does_not_admit_these64_rows": true
+  },
+  "limitations": [
+    "All64 are exposed authored English sources assembled from reused components; no natural or pristine holdout evidence.",
+    "Declared train/development splits belong to reconstruction experiments; historical decoder training overlap has not been independently audited.",
+    "Single canonical deontic rule with literal copied atoms only; no learned multi-rule, multiple same-facet atoms, variable binding, typed domains or rich operator scope.",
+    "Source copying and grammar checks do not enforce correct actor, action, modality or qualifier scope. Non-overlap can force a structurally complete wrong law.",
+    "Native768 only; compatible matched8D/384D joint-policy trials remain unexecuted.",
+    "Raw conditioner only; no new comparison of PCA or AE conditioning in this round.",
+    "Beam64/top16 search is approximate and can miss feasible/correct/global-best assignments.",
+    "Inference-only source-only policy change; no admitted formal training targets or semantic review.",
+    "Independent pure replay is evidence validation, not independent legal-fidelity judgment."
+  ],
+  "next_decisions": [
+    "If joint search improves structural coverage, examine exact source-span bindings and obtain independently reviewed row-bound formal targets before claiming improvement in autoformalization.",
+    "Use separate source-symbol/modality diagnostics and richer typed scope/representation contracts to address structurally valid but unfaithful outputs.",
+    "Only after target admission, train matched raw/PCA/AE-conditioned decoders with identical budgets and independent heldout confirmation; expose genuine lower-dimensional latent compression as a separate capacity experiment."
+  ],
+  "content_sha256": "5844e1112b6536e6fdcd78ea521291eafce28617a5dcca6a87b8f02bb8360e82"
+}

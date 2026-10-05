@@ -1,0 +1,2221 @@
+{
+  "accepted": false,
+  "actual_root_worker_counts": {
+    "actual_model_forward_calls": 192,
+    "dimensional_restores": 3,
+    "embedded_parent_restores": 3,
+    "joint_additional_model_forward_calls": 0,
+    "joint_selection_calls": 192,
+    "model_constructors": 9,
+    "optimizer_step_attempts": 0,
+    "optimizer_updates": 0,
+    "owner_decoder_calls": 6,
+    "source_row_decode_calls": 192,
+    "wrapper_calls": 6
+  },
+  "all64_denominators_retained_per_seed": true,
+  "audit_model_calls": 0,
+  "audit_network_calls": 0,
+  "audit_optimizer_updates": 0,
+  "audit_prover_calls": 0,
+  "batch_binding": {
+    "bytes": 2850,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/batch-report.json",
+    "sha256": "d9ba7730fa2179340ffaac2e4aa104ed4b71a51888939ea3439dc0b5b350344f"
+  },
+  "checked_file_bindings": [
+    {
+      "bytes": 4264,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-plan-02.json",
+      "sha256": "9387d84166cd82397d0f8432a70fbb1aaa350d80cd2d8a35ebab6fb354fc546c"
+    },
+    {
+      "bytes": 39894,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/evaluate_frozen_formalization.py",
+      "sha256": "b8d0c28006805585115aec4f236a6b14bdba6f43f82f9ec3e6cc64654925e475"
+    },
+    {
+      "bytes": 7996,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-plan-01.json",
+      "sha256": "b62784c7c9857c9c222fc3b8c9cd736b9860fc4507d8e9b78b8ee53ee6c464ab"
+    },
+    {
+      "bytes": 420611,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/raw_source-development.json",
+      "sha256": "8b633f2765cf7da7bb1c90f2388e477d666d0a29f0d5c490aa80b5c9d3fcdd15"
+    },
+    {
+      "bytes": 414916,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1729/worker/raw_source-train.json",
+      "sha256": "1564bdcc6ba36c03a356ec399eed792e47079c372e9c28d8dc62e6bc4eaa3575"
+    },
+    {
+      "bytes": 377466,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-development.json",
+      "sha256": "db7814973e2b0477abf3dc5846768d643a44d1f6261b100612b6199a207789d5"
+    },
+    {
+      "bytes": 386845,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1730/worker/raw_source-train.json",
+      "sha256": "edbd877c11fe1a40744731bd051d93d3f6fe85b36819108bd03f7129afa9763b"
+    },
+    {
+      "bytes": 414384,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/raw_source-development.json",
+      "sha256": "575d5ff59a3704040cc064bf42f441072456eaf2c07f66ca7b44e179c3501d79"
+    },
+    {
+      "bytes": 405354,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/run-01/seed1731/worker/raw_source-train.json",
+      "sha256": "0dc5bd58783d02963fb3e37ee196c4f53eb934e94944f330ec20eb2866df9922"
+    },
+    {
+      "bytes": 24347,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/evaluate_joint_spans.py",
+      "sha256": "c589e45f501b500ad86f88b04b56c83df5445e6aa578c90fa9925cbc64395a3e"
+    },
+    {
+      "bytes": 25454,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/protocol-design-01.json",
+      "sha256": "ade373f2166d550d7539b2a3a3b851797c01c731703ba45ad7eded0ec16e8684"
+    },
+    {
+      "bytes": 11479,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/select_joint_spans.py",
+      "sha256": "b926b0ab29f02c3eeed020b1c261151e83d073dbd4edf90ba63e9e9dee659afa"
+    },
+    {
+      "bytes": 3433326,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1729/checkpoint-400.json",
+      "sha256": "fd6bd55ba3a7698401c7b8201f8ebe195f364f8295e98a13d833f420c0add2fc"
+    },
+    {
+      "bytes": 8257622,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/endpoints.json",
+      "sha256": "7d94d54ffa47770e2f0a5fda7898d3e7210ed9ccee2431e2f7841db7783d8db0"
+    },
+    {
+      "bytes": 8901,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1729/numeric-report.json",
+      "sha256": "2ef120533f20475c41826dda643bcca860f0646806b96694b0492913efbb964c"
+    },
+    {
+      "bytes": 3432437,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1730/checkpoint-400.json",
+      "sha256": "6a70108d76a548c04076d3cfb35eaa8e29f1b325ffafdd13a5fb5cf099205a0b"
+    },
+    {
+      "bytes": 8257739,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/endpoints.json",
+      "sha256": "d1887bedba6662d1252c017c753e4bd7c793b1132aee1acb42c86330cf7fba9e"
+    },
+    {
+      "bytes": 8903,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1730/numeric-report.json",
+      "sha256": "9144e816e9846cf8961c2318a75306c773b3bb132cfb98cd7f83e1e4bdfd3483"
+    },
+    {
+      "bytes": 3432783,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-open-vocabulary-20261002/run-01/native768-1731/checkpoint-400.json",
+      "sha256": "adb17a04854ea865ee0433d75405e15f62c1e7dedd4c60f8c889ed087958a2ef"
+    },
+    {
+      "bytes": 8257900,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/endpoints.json",
+      "sha256": "2f172dcd9a34ceb8284b543517eb141ffd1a949e1c20266ecf5a800474cb0c2b"
+    },
+    {
+      "bytes": 8896,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/evaluation-01/worker/native768-seed1731/numeric-report.json",
+      "sha256": "89e3689bb5fbe825f0598af5b14a4ee6c782ed1f3846503cb18cd2e2c98c0e8d"
+    },
+    {
+      "bytes": 6247,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/huggingface/launch_reconstruction.py",
+      "sha256": "910ff61a235d6e988e78b34a3b27d7ae7520f2bb10722881ab532c934be1199e"
+    },
+    {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 38995,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    },
+    {
+      "bytes": 42137,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 35294,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+      "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+    },
+    {
+      "bytes": 22521,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+      "sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d"
+    },
+    {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    {
+      "bytes": 9794,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+      "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+    },
+    {
+      "bytes": 21764,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+      "sha256": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec"
+    },
+    {
+      "bytes": 22785,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+      "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+    },
+    {
+      "bytes": 18904,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/encoding-report.json",
+      "sha256": "3732a01db278868ebeaa2383e3dd36c6eb3f15285e6fb6fb09422d1cd08a39d8"
+    },
+    {
+      "bytes": 43238,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+      "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+    },
+    {
+      "bytes": 1134995,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_bundle.json",
+      "sha256": "cc7f03946d5176900dceff276d3c5e721dff700c323fdf9fcd0667875d5179da"
+    },
+    {
+      "bytes": 2850,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/batch-report.json",
+      "sha256": "d9ba7730fa2179340ffaac2e4aa104ed4b71a51888939ea3439dc0b5b350344f"
+    },
+    {
+      "bytes": 1212,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/parent-report.json",
+      "sha256": "1a7500b253581f539daee0000671caa7c26ac97df892e59aaf4dd7483811fd40"
+    },
+    {
+      "bytes": 17094,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/worker/joint-report.json",
+      "sha256": "0ee0bc08e55f1b347fcfd9dbf31ffddb339708458f72692afbb3a05f0c00119e"
+    },
+    {
+      "bytes": 1212,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/parent-report.json",
+      "sha256": "bccb44cc973e543368699369f90a23e8a38c7affc0f7a5b422f0b500ffa40612"
+    },
+    {
+      "bytes": 17185,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/worker/joint-report.json",
+      "sha256": "bb5c8c197b6175a6c24c9194fb6c6e58607d7edbc4faa6d8f374572e3630ee8c"
+    },
+    {
+      "bytes": 1212,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/parent-report.json",
+      "sha256": "5f3ff8a603816e138b47b2f351b2ea665be088ad5a398699c38cafda49d70100"
+    },
+    {
+      "bytes": 17248,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/joint-report.json",
+      "sha256": "1f22e2624eb7ee6185630646ecbcb3dafa6693bf481be54b0476fc29f021a5f4"
+    },
+    {
+      "bytes": 6134,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run_joint_parent.py",
+      "sha256": "47bbc19e12a6d45ea344aed5b473cbcf71fa0fb17c45710ee300e8bf4b8b510d"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/parent/worker.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 668,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/parent/worker.stdout",
+      "sha256": "afac52ee3d009788fe4d56e6bb11466fb734aac028caf921f6baa5ca5b18a84b"
+    },
+    {
+      "bytes": 420611,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/worker/greedy-development.json",
+      "sha256": "8b633f2765cf7da7bb1c90f2388e477d666d0a29f0d5c490aa80b5c9d3fcdd15"
+    },
+    {
+      "bytes": 414916,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/worker/greedy-train.json",
+      "sha256": "1564bdcc6ba36c03a356ec399eed792e47079c372e9c28d8dc62e6bc4eaa3575"
+    },
+    {
+      "bytes": 1141024,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/worker/proposal-ledger.json",
+      "sha256": "201dd479d8c726b14e6d7161cd55319442b3c7c7fb9e2d3b0c1506e6fb6dc3cf"
+    },
+    {
+      "bytes": 805558,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/worker/score-bank.json",
+      "sha256": "2693078a05e4f6f775a6f314528be2d4fb61754e31636c9d5513209b0a17b86f"
+    },
+    {
+      "bytes": 194,
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/safetensors/__init__.py",
+      "sha256": "c1bcca66501582702c8c79aaaf2b922428800efa4367134609f8fc57363402dd"
+    },
+    {
+      "bytes": 111841,
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/torch/__init__.py",
+      "sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/parent/worker.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 668,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/parent/worker.stdout",
+      "sha256": "2551fced49e93cf6a1045fa3f21716f53e871c0164823338b1e5a7d800adbb7e"
+    },
+    {
+      "bytes": 377466,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/worker/greedy-development.json",
+      "sha256": "db7814973e2b0477abf3dc5846768d643a44d1f6261b100612b6199a207789d5"
+    },
+    {
+      "bytes": 386845,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/worker/greedy-train.json",
+      "sha256": "edbd877c11fe1a40744731bd051d93d3f6fe85b36819108bd03f7129afa9763b"
+    },
+    {
+      "bytes": 1091731,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/worker/proposal-ledger.json",
+      "sha256": "0cae16c5ea6618d95016eeca44dd46b69de1d72fd0e162a39b81912d1d04f461"
+    },
+    {
+      "bytes": 806928,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/worker/score-bank.json",
+      "sha256": "18701412cec290f0edfb336de560a75933b857799871a13816d08055d7ba8453"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/parent/worker.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 668,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/parent/worker.stdout",
+      "sha256": "e671223369147ce82b5b2932cab11563f078e35850bdacf7e4c2d9344ebeaf79"
+    },
+    {
+      "bytes": 414384,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/greedy-development.json",
+      "sha256": "575d5ff59a3704040cc064bf42f441072456eaf2c07f66ca7b44e179c3501d79"
+    },
+    {
+      "bytes": 405354,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/greedy-train.json",
+      "sha256": "0dc5bd58783d02963fb3e37ee196c4f53eb934e94944f330ec20eb2866df9922"
+    },
+    {
+      "bytes": 1132666,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/proposal-ledger.json",
+      "sha256": "aa0b04e06594d0418496f54d779a03f067ed10b72e6214e3ee3795c2667c3252"
+    },
+    {
+      "bytes": 807227,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/score-bank.json",
+      "sha256": "13c792aaf9a4bddb40af2cf30461b31c161ebc5c349ba6e7d3e953b888bf51bc"
+    }
+  ],
+  "checked_file_count": 65,
+  "complete_prior_raw_receipts_exact": true,
+  "content_sha256": "7af4c92e24299210e19ec55b1143848677eea1d11f48be0ddb31156ca91f09a4",
+  "fixed_native_modality_and_presence_choices_checked": true,
+  "independent_algorithm": "full_candidate_sort_and_token_set_beam_prefix_expansion/v1",
+  "independent_semantic_reviews_created": 0,
+  "limits": [
+    "Saved head origin and correctness are not independently attested.",
+    "Checkpoint file/digest consistency and recorded state-preservation assertions are checked; no numerical model is restored by this auditor.",
+    "Selected source/provider entrypoint bindings are not a complete binary dependency closure.",
+    "Top16/beam64 replay confirms a bounded approximate structural policy; it does not establish global optimality or calibrated confidence.",
+    "Literal copying, non-overlap and bounded grammar validity do not establish semantic fidelity."
+  ],
+  "native_head_records_checked": 192,
+  "paired_source_seed_occurrences": 192,
+  "plan_binding": {
+    "bytes": 4264,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-plan-02.json",
+    "sha256": "9387d84166cd82397d0f8432a70fbb1aaa350d80cd2d8a35ebab6fb354fc546c"
+  },
+  "policy_outcomes": [
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:0181199642a701f4fb96dab2b3d5aca6055f6541d6fb722e2e7142d4aef42976",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:04f6e6b30a2f70524cc8619f8cd960b4f44e2af4db3a2888e3b85b6ab1a942c9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:061425d71716cc475aa095e68fd88cd4684c7270c39e1726e50f08994a84ff37",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:1528cffb363c62de975cc41cd3a7c0562046278ae378b98bd6eee4aa1b08a605",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:15c88c70830026570d41cae9d5791a24f2be7b20d41c7d875237cb29db8d5b7a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:2e5a5316218fe9aac23343f138b3049550221bda9c305ef87ecc9154ccfcccfd",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:3d0651f27d412fab316811690166c27947ddfe0d2d37d2b947bdbf20020a254f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4455fcc40aa66bb3b58eeb7c6195793375a4affb90460987c7fd6da2ba285600",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4687e728411b99f95adfe622bf84dc07a5e365b7eb72e44436f9e3a3d9e1581d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4c5ce5824cd5511cd6f6db9f4da10f1443d2b8502474365796add07698ccedf6",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5b4bb90196ebdd0a537fff917c9e061f4835bb8f19785ece55ef67668daf6187",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5cb837cd56313c9af3410efc2bff2e5c72af30e5886230a9aad12302a60f2f67",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5e73144e2b08021c94da4fe39659d5d00f749230dbe0e72de3a170e212b64623",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:60fec1e3568f8b25c97f7a305cce00bf8dbcc97cc18f5c6e0d2e45dfbdaaf17d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:64387446e62dd1ae50a96609facb5a80b159a38abcdc1ebb001d0c4ede056fc9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:6adacbf0692342e4f61514eef9319cb52c0a676a8fe274d09ca92a67cf543b5d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:6b141a701f069797775c10ec928f4ca7705e61d85415ab5f74d70e8309f4f529",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:776e94ef2c949e1240c4dd6cf0b936b6b26a4008a1152d0de7d2752833e096e0",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:77b6db92244cb3d1dfdc323187ea70c8a4add4f11d9e9dbff239bdb56c2da04a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:87dee5dbd444995f6909820222d33b5995970120180acbc76bc815523e0ea555",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:89b01e7eb75ef2cbc3858e32909a263475700a3b47997b1c014af7b22d2f8a75",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8f02917f86f80a5e34fa3b9fa6629babf266233e7b2c783dbf6f41d866cb159a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:956c1925604b75c404f910e3814f56c6ff1368eca1d00dc45e5bc28ecc481c8f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:98d712d40fca2ef327e6743f72b6e6ac064bc38b862a10f7a6118233e0bf1167",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:9db9985a4787d1c0add6a09b33c1a26423fa9a89f736b11abec28475f3b744bb",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:b0aa2f6622739cc21a340308e721c0da800092ed891634c1740c52e13bacfe60",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:c24280541e09eb49808ee11c125dfcd7e3cbf96b814204cf9339ab2df7ac04c4",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:cdf174c22284a47adb1e459b24fed8c7942da072bc066477bb7521b9b6d13a01",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:db6181485124bbd5f4c20d003233c8697541d8fe2a84f15c0664c877e9191302",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:dfe78ad6af3bc4b9c26a7513a76ec66cc8e8ba0e8afcef0bc01b59dde1688808",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:e5b5a2c8c3707fe54f1e8712acd74bc7dfa6dd19c48cec042f3888f5e16815f9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:fe26e40b06676ed1a00773b0633f70ce14a2f3dd2338a4bbc2dcf9008d44d16d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:0f67681931a861f026de8a5dbeaf09f9f3f1dda8f7f0ee8f1f1ba6c2d74bc6c0",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:10d099ef5a6f6933dfcd6f5e82ad155432478fb06e5c7360053d285fd5ab734d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:19b64859f6f14bafc9baa540ea178e34db4a798f681128c2d16ddf2f0c9f5a24",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:1b423533b0bc1a35728596e383a997375a7e3309c4407172056f8d478f6478a3",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:1d25f06b43feb8db0951d8fbd6487d833871f2c61808b163f8b2b229c522f9ed",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:22ab69cbc838dac67205b36d889271540a80600cc6b682beeb9e6edbd6371d31",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:231b3218fb2bdf6855f8ee1a004ee78fb967346a5144410e9a1d177b4db5bd8e",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:282280214c2302ca5bb32fbc1f1d34b6d8ecddda0459cb494773fd9dc3ee632d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:2d69c904854e9fa8a8dd70c536cddbb1f9b1004707158eadcb424ec58e873144",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:3f9b4bd5ed5444921db71cc4c17bdb7d251183a7faf0a83948aa74778f6e82ed",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:43d4c14ce142c307c4d47e43b1f33e8947bde9fca51a586a5939d925728fe888",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:492583c8f34d383bb90b40597eb6b1c9e40958390e0d63c55fd7c3e825ed047f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4d7fbf44fecb492378b68769a99d2c357a2d88c11e2331ad4f8602b02278281f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:54972d378c45de8057db617a168fd25a2300f310ad8809f40ea6155730092bda",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:57e93a75969a273c66f11a9fa929d5c599ecb3a3d884b80e214237acdf41c13b",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5f5ccf1ba69c27c29b6c1b24b50a2ae1de44c80fae92c3f7f1e36e5a101596b1",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5fac59b0070c043ceacfe37f0b87fca57bb213e94ecf8dd26a4b12bf3e9282db",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:682adb57e82c0bbe5a9363a12b19f6518bdedd406eacc654e1e893f6a48ec758",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:69cd21994a1823f2843c30545614ab4987febe0058875f4571ba584738790a54",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:6b4db33fa9b75fb74beee88885a5450766f3ba86e0de324cc2595a841b4e05f9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:73d74dfd7158d48c2e5363e162046a0ae2f38e3802e6993a0540fac407666e52",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8464021b9444aaa5c7d219aaf4668005a6c5bf22041758f1df86045ece798f30",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8532169f57287b942238476b6817112621d0ca618f434fd5b25a8f856d600393",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:900b7152123afebfedee47be70a9e95cdb399c29439e6ee9a526c72b59fe3881",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:a6a1d17b5a13dc0b020556c14afcbb460ac20faf20ed751f8faf27f84331bf51",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ac0d083fa783501cbf6d30f634f1777a961e7bf6bbde17903aa73a2f673df1b1",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:b2380d6d50835d2b9e53ede2efd37316de32de079981d63cbc8eaa2e988fdf27",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:b34dcc40f78cdebef9d0bb0db9e860022d1070885693942eef01167dcad66622",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:e8c514bea2c764f7163c338be4b95447cceaf7f43745443c53e9675adf83cc0a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ebad4dced51eccf47cd874f6f60697b8cdafae29fd56783f74e801383e49907f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ed447fbc2f73fd8c4dd41fd55caa98996fd706f0e19fd6756927afa5dad8e040",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ffaa3b4ee0123e333d0b30438c45e9e2f5657940a734de01314696558d3f114c",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1729,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:0181199642a701f4fb96dab2b3d5aca6055f6541d6fb722e2e7142d4aef42976",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:04f6e6b30a2f70524cc8619f8cd960b4f44e2af4db3a2888e3b85b6ab1a942c9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:061425d71716cc475aa095e68fd88cd4684c7270c39e1726e50f08994a84ff37",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:1528cffb363c62de975cc41cd3a7c0562046278ae378b98bd6eee4aa1b08a605",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:15c88c70830026570d41cae9d5791a24f2be7b20d41c7d875237cb29db8d5b7a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:2e5a5316218fe9aac23343f138b3049550221bda9c305ef87ecc9154ccfcccfd",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:3d0651f27d412fab316811690166c27947ddfe0d2d37d2b947bdbf20020a254f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4455fcc40aa66bb3b58eeb7c6195793375a4affb90460987c7fd6da2ba285600",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4687e728411b99f95adfe622bf84dc07a5e365b7eb72e44436f9e3a3d9e1581d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4c5ce5824cd5511cd6f6db9f4da10f1443d2b8502474365796add07698ccedf6",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5b4bb90196ebdd0a537fff917c9e061f4835bb8f19785ece55ef67668daf6187",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5cb837cd56313c9af3410efc2bff2e5c72af30e5886230a9aad12302a60f2f67",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5e73144e2b08021c94da4fe39659d5d00f749230dbe0e72de3a170e212b64623",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:60fec1e3568f8b25c97f7a305cce00bf8dbcc97cc18f5c6e0d2e45dfbdaaf17d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:64387446e62dd1ae50a96609facb5a80b159a38abcdc1ebb001d0c4ede056fc9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:6adacbf0692342e4f61514eef9319cb52c0a676a8fe274d09ca92a67cf543b5d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:6b141a701f069797775c10ec928f4ca7705e61d85415ab5f74d70e8309f4f529",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:776e94ef2c949e1240c4dd6cf0b936b6b26a4008a1152d0de7d2752833e096e0",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:77b6db92244cb3d1dfdc323187ea70c8a4add4f11d9e9dbff239bdb56c2da04a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:87dee5dbd444995f6909820222d33b5995970120180acbc76bc815523e0ea555",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:89b01e7eb75ef2cbc3858e32909a263475700a3b47997b1c014af7b22d2f8a75",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8f02917f86f80a5e34fa3b9fa6629babf266233e7b2c783dbf6f41d866cb159a",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:956c1925604b75c404f910e3814f56c6ff1368eca1d00dc45e5bc28ecc481c8f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:98d712d40fca2ef327e6743f72b6e6ac064bc38b862a10f7a6118233e0bf1167",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:9db9985a4787d1c0add6a09b33c1a26423fa9a89f736b11abec28475f3b744bb",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:b0aa2f6622739cc21a340308e721c0da800092ed891634c1740c52e13bacfe60",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:c24280541e09eb49808ee11c125dfcd7e3cbf96b814204cf9339ab2df7ac04c4",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:cdf174c22284a47adb1e459b24fed8c7942da072bc066477bb7521b9b6d13a01",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:db6181485124bbd5f4c20d003233c8697541d8fe2a84f15c0664c877e9191302",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:dfe78ad6af3bc4b9c26a7513a76ec66cc8e8ba0e8afcef0bc01b59dde1688808",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:e5b5a2c8c3707fe54f1e8712acd74bc7dfa6dd19c48cec042f3888f5e16815f9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:fe26e40b06676ed1a00773b0633f70ce14a2f3dd2338a4bbc2dcf9008d44d16d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:0f67681931a861f026de8a5dbeaf09f9f3f1dda8f7f0ee8f1f1ba6c2d74bc6c0",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:10d099ef5a6f6933dfcd6f5e82ad155432478fb06e5c7360053d285fd5ab734d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:19b64859f6f14bafc9baa540ea178e34db4a798f681128c2d16ddf2f0c9f5a24",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:1b423533b0bc1a35728596e383a997375a7e3309c4407172056f8d478f6478a3",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:1d25f06b43feb8db0951d8fbd6487d833871f2c61808b163f8b2b229c522f9ed",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:22ab69cbc838dac67205b36d889271540a80600cc6b682beeb9e6edbd6371d31",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:231b3218fb2bdf6855f8ee1a004ee78fb967346a5144410e9a1d177b4db5bd8e",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:282280214c2302ca5bb32fbc1f1d34b6d8ecddda0459cb494773fd9dc3ee632d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:2d69c904854e9fa8a8dd70c536cddbb1f9b1004707158eadcb424ec58e873144",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:3f9b4bd5ed5444921db71cc4c17bdb7d251183a7faf0a83948aa74778f6e82ed",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:43d4c14ce142c307c4d47e43b1f33e8947bde9fca51a586a5939d925728fe888",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:492583c8f34d383bb90b40597eb6b1c9e40958390e0d63c55fd7c3e825ed047f",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4d7fbf44fecb492378b68769a99d2c357a2d88c11e2331ad4f8602b02278281f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:54972d378c45de8057db617a168fd25a2300f310ad8809f40ea6155730092bda",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:57e93a75969a273c66f11a9fa929d5c599ecb3a3d884b80e214237acdf41c13b",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5f5ccf1ba69c27c29b6c1b24b50a2ae1de44c80fae92c3f7f1e36e5a101596b1",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5fac59b0070c043ceacfe37f0b87fca57bb213e94ecf8dd26a4b12bf3e9282db",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:682adb57e82c0bbe5a9363a12b19f6518bdedd406eacc654e1e893f6a48ec758",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:69cd21994a1823f2843c30545614ab4987febe0058875f4571ba584738790a54",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:6b4db33fa9b75fb74beee88885a5450766f3ba86e0de324cc2595a841b4e05f9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:73d74dfd7158d48c2e5363e162046a0ae2f38e3802e6993a0540fac407666e52",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8464021b9444aaa5c7d219aaf4668005a6c5bf22041758f1df86045ece798f30",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8532169f57287b942238476b6817112621d0ca618f434fd5b25a8f856d600393",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:900b7152123afebfedee47be70a9e95cdb399c29439e6ee9a526c72b59fe3881",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:a6a1d17b5a13dc0b020556c14afcbb460ac20faf20ed751f8faf27f84331bf51",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ac0d083fa783501cbf6d30f634f1777a961e7bf6bbde17903aa73a2f673df1b1",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:b2380d6d50835d2b9e53ede2efd37316de32de079981d63cbc8eaa2e988fdf27",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:b34dcc40f78cdebef9d0bb0db9e860022d1070885693942eef01167dcad66622",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:e8c514bea2c764f7163c338be4b95447cceaf7f43745443c53e9675adf83cc0a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ebad4dced51eccf47cd874f6f60697b8cdafae29fd56783f74e801383e49907f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ed447fbc2f73fd8c4dd41fd55caa98996fd706f0e19fd6756927afa5dad8e040",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ffaa3b4ee0123e333d0b30438c45e9e2f5657940a734de01314696558d3f114c",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1730,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:0181199642a701f4fb96dab2b3d5aca6055f6541d6fb722e2e7142d4aef42976",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:04f6e6b30a2f70524cc8619f8cd960b4f44e2af4db3a2888e3b85b6ab1a942c9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:061425d71716cc475aa095e68fd88cd4684c7270c39e1726e50f08994a84ff37",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:1528cffb363c62de975cc41cd3a7c0562046278ae378b98bd6eee4aa1b08a605",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:15c88c70830026570d41cae9d5791a24f2be7b20d41c7d875237cb29db8d5b7a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:2e5a5316218fe9aac23343f138b3049550221bda9c305ef87ecc9154ccfcccfd",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:3d0651f27d412fab316811690166c27947ddfe0d2d37d2b947bdbf20020a254f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4455fcc40aa66bb3b58eeb7c6195793375a4affb90460987c7fd6da2ba285600",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4687e728411b99f95adfe622bf84dc07a5e365b7eb72e44436f9e3a3d9e1581d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4c5ce5824cd5511cd6f6db9f4da10f1443d2b8502474365796add07698ccedf6",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5b4bb90196ebdd0a537fff917c9e061f4835bb8f19785ece55ef67668daf6187",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5cb837cd56313c9af3410efc2bff2e5c72af30e5886230a9aad12302a60f2f67",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5e73144e2b08021c94da4fe39659d5d00f749230dbe0e72de3a170e212b64623",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:60fec1e3568f8b25c97f7a305cce00bf8dbcc97cc18f5c6e0d2e45dfbdaaf17d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:64387446e62dd1ae50a96609facb5a80b159a38abcdc1ebb001d0c4ede056fc9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:6adacbf0692342e4f61514eef9319cb52c0a676a8fe274d09ca92a67cf543b5d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:6b141a701f069797775c10ec928f4ca7705e61d85415ab5f74d70e8309f4f529",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:776e94ef2c949e1240c4dd6cf0b936b6b26a4008a1152d0de7d2752833e096e0",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:77b6db92244cb3d1dfdc323187ea70c8a4add4f11d9e9dbff239bdb56c2da04a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:87dee5dbd444995f6909820222d33b5995970120180acbc76bc815523e0ea555",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:89b01e7eb75ef2cbc3858e32909a263475700a3b47997b1c014af7b22d2f8a75",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8f02917f86f80a5e34fa3b9fa6629babf266233e7b2c783dbf6f41d866cb159a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:956c1925604b75c404f910e3814f56c6ff1368eca1d00dc45e5bc28ecc481c8f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:98d712d40fca2ef327e6743f72b6e6ac064bc38b862a10f7a6118233e0bf1167",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:9db9985a4787d1c0add6a09b33c1a26423fa9a89f736b11abec28475f3b744bb",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:b0aa2f6622739cc21a340308e721c0da800092ed891634c1740c52e13bacfe60",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:c24280541e09eb49808ee11c125dfcd7e3cbf96b814204cf9339ab2df7ac04c4",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:cdf174c22284a47adb1e459b24fed8c7942da072bc066477bb7521b9b6d13a01",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:db6181485124bbd5f4c20d003233c8697541d8fe2a84f15c0664c877e9191302",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:dfe78ad6af3bc4b9c26a7513a76ec66cc8e8ba0e8afcef0bc01b59dde1688808",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:e5b5a2c8c3707fe54f1e8712acd74bc7dfa6dd19c48cec042f3888f5e16815f9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:fe26e40b06676ed1a00773b0633f70ce14a2f3dd2338a4bbc2dcf9008d44d16d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "train"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:0f67681931a861f026de8a5dbeaf09f9f3f1dda8f7f0ee8f1f1ba6c2d74bc6c0",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:10d099ef5a6f6933dfcd6f5e82ad155432478fb06e5c7360053d285fd5ab734d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:19b64859f6f14bafc9baa540ea178e34db4a798f681128c2d16ddf2f0c9f5a24",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:1b423533b0bc1a35728596e383a997375a7e3309c4407172056f8d478f6478a3",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:1d25f06b43feb8db0951d8fbd6487d833871f2c61808b163f8b2b229c522f9ed",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:22ab69cbc838dac67205b36d889271540a80600cc6b682beeb9e6edbd6371d31",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:231b3218fb2bdf6855f8ee1a004ee78fb967346a5144410e9a1d177b4db5bd8e",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:282280214c2302ca5bb32fbc1f1d34b6d8ecddda0459cb494773fd9dc3ee632d",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:2d69c904854e9fa8a8dd70c536cddbb1f9b1004707158eadcb424ec58e873144",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:3f9b4bd5ed5444921db71cc4c17bdb7d251183a7faf0a83948aa74778f6e82ed",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:43d4c14ce142c307c4d47e43b1f33e8947bde9fca51a586a5939d925728fe888",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:492583c8f34d383bb90b40597eb6b1c9e40958390e0d63c55fd7c3e825ed047f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:4d7fbf44fecb492378b68769a99d2c357a2d88c11e2331ad4f8602b02278281f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:54972d378c45de8057db617a168fd25a2300f310ad8809f40ea6155730092bda",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:57e93a75969a273c66f11a9fa929d5c599ecb3a3d884b80e214237acdf41c13b",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5f5ccf1ba69c27c29b6c1b24b50a2ae1de44c80fae92c3f7f1e36e5a101596b1",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:5fac59b0070c043ceacfe37f0b87fca57bb213e94ecf8dd26a4b12bf3e9282db",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:682adb57e82c0bbe5a9363a12b19f6518bdedd406eacc654e1e893f6a48ec758",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:69cd21994a1823f2843c30545614ab4987febe0058875f4571ba584738790a54",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:6b4db33fa9b75fb74beee88885a5450766f3ba86e0de324cc2595a841b4e05f9",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:73d74dfd7158d48c2e5363e162046a0ae2f38e3802e6993a0540fac407666e52",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8464021b9444aaa5c7d219aaf4668005a6c5bf22041758f1df86045ece798f30",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:8532169f57287b942238476b6817112621d0ca618f434fd5b25a8f856d600393",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:900b7152123afebfedee47be70a9e95cdb399c29439e6ee9a526c72b59fe3881",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:a6a1d17b5a13dc0b020556c14afcbb460ac20faf20ed751f8faf27f84331bf51",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ac0d083fa783501cbf6d30f634f1777a961e7bf6bbde17903aa73a2f673df1b1",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:b2380d6d50835d2b9e53ede2efd37316de32de079981d63cbc8eaa2e988fdf27",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:b34dcc40f78cdebef9d0bb0db9e860022d1070885693942eef01167dcad66622",
+      "joint_reason": "no_complete_assignment_in_retained_candidates",
+      "joint_status": "abstained",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:e8c514bea2c764f7163c338be4b95447cceaf7f43745443c53e9675adf83cc0a",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ebad4dced51eccf47cd874f6f60697b8cdafae29fd56783f74e801383e49907f",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": null,
+      "greedy_status": "decoded",
+      "id": "sha256:ed447fbc2f73fd8c4dd41fd55caa98996fd706f0e19fd6756927afa5dad8e040",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    },
+    {
+      "greedy_reason": "copied_spans_overlap",
+      "greedy_status": "abstained",
+      "id": "sha256:ffaa3b4ee0123e333d0b30438c45e9e2f5657940a734de01314696558d3f114c",
+      "joint_reason": null,
+      "joint_status": "proposal",
+      "seed": 1731,
+      "split": "development"
+    }
+  ],
+  "policy_outcomes_checked": 384,
+  "proof_authority": false,
+  "qualified": false,
+  "schema": "independent-source-only-joint-span-audit/v1",
+  "seed_checks": [
+    {
+      "all64_source_vector_token_digest_joins_exact": true,
+      "complete_original_baseline_receipts_exact": true,
+      "greedy_proposals_preserved_exactly": 1,
+      "joint_reason_counts": {},
+      "joint_structural_proposals": 64,
+      "native_head_bound_greedy_rows_checked": 64,
+      "overlap_abstentions_rescued_structurally": 63,
+      "parent_report_binding": {
+        "bytes": 1212,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/parent-report.json",
+        "sha256": "1a7500b253581f539daee0000671caa7c26ac97df892e59aaf4dd7483811fd40"
+      },
+      "raw_greedy_proposals": 1,
+      "search_counter_totals": {
+        "attempted_expansion_count": 210388,
+        "overlap_rejected_expansion_count": 148814,
+        "pruned_beam_state_count": 40489,
+        "pruned_candidate_count": 89505
+      },
+      "search_incomplete_rows": 64,
+      "seed": 1729,
+      "source_rows_replayed": 64,
+      "transition_counts": {
+        "abstained->proposal": 63,
+        "decoded->proposal": 1
+      },
+      "worker_report_binding": {
+        "bytes": 17094,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1729/worker/joint-report.json",
+        "sha256": "0ee0bc08e55f1b347fcfd9dbf31ffddb339708458f72692afbb3a05f0c00119e"
+      }
+    },
+    {
+      "all64_source_vector_token_digest_joins_exact": true,
+      "complete_original_baseline_receipts_exact": true,
+      "greedy_proposals_preserved_exactly": 1,
+      "joint_reason_counts": {
+        "no_complete_assignment_in_retained_candidates": 8
+      },
+      "joint_structural_proposals": 56,
+      "native_head_bound_greedy_rows_checked": 64,
+      "overlap_abstentions_rescued_structurally": 55,
+      "parent_report_binding": {
+        "bytes": 1212,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/parent-report.json",
+        "sha256": "bccb44cc973e543368699369f90a23e8a38c7affc0f7a5b422f0b500ffa40612"
+      },
+      "raw_greedy_proposals": 1,
+      "search_counter_totals": {
+        "attempted_expansion_count": 236560,
+        "overlap_rejected_expansion_count": 174378,
+        "pruned_beam_state_count": 42317,
+        "pruned_candidate_count": 100215
+      },
+      "search_incomplete_rows": 64,
+      "seed": 1730,
+      "source_rows_replayed": 64,
+      "transition_counts": {
+        "abstained->abstained": 8,
+        "abstained->proposal": 55,
+        "decoded->proposal": 1
+      },
+      "worker_report_binding": {
+        "bytes": 17185,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1730/worker/joint-report.json",
+        "sha256": "bb5c8c197b6175a6c24c9194fb6c6e58607d7edbc4faa6d8f374572e3630ee8c"
+      }
+    },
+    {
+      "all64_source_vector_token_digest_joins_exact": true,
+      "complete_original_baseline_receipts_exact": true,
+      "greedy_proposals_preserved_exactly": 8,
+      "joint_reason_counts": {
+        "no_complete_assignment_in_retained_candidates": 1
+      },
+      "joint_structural_proposals": 63,
+      "native_head_bound_greedy_rows_checked": 64,
+      "overlap_abstentions_rescued_structurally": 55,
+      "parent_report_binding": {
+        "bytes": 1212,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/parent-report.json",
+        "sha256": "5f3ff8a603816e138b47b2f351b2ea665be088ad5a398699c38cafda49d70100"
+      },
+      "raw_greedy_proposals": 8,
+      "search_counter_totals": {
+        "attempted_expansion_count": 217096,
+        "overlap_rejected_expansion_count": 153039,
+        "pruned_beam_state_count": 43554,
+        "pruned_candidate_count": 90855
+      },
+      "search_incomplete_rows": 64,
+      "seed": 1731,
+      "source_rows_replayed": 64,
+      "transition_counts": {
+        "abstained->abstained": 1,
+        "abstained->proposal": 55,
+        "decoded->proposal": 8
+      },
+      "worker_report_binding": {
+        "bytes": 17248,
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/run-01/seed1731/worker/joint-report.json",
+        "sha256": "1f22e2624eb7ee6185630646ecbcb3dafa6693bf481be54b0476fc29f021a5f4"
+      }
+    }
+  ],
+  "semantic_accuracy_measured": false,
+  "semantic_target_bodies_read": false,
+  "single_rule_grammar_validation_scope": "independent_exact_seven_field_single_rule_contract_and_nonblank_deontic_projection_only",
+  "source_fidelity_established": false,
+  "source_literal_copy_and_global_nonoverlap_checked": true,
+  "status": "passed",
+  "torch_imported": false
+}

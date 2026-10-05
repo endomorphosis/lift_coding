@@ -1,0 +1,114 @@
+{
+  "accepted": false,
+  "actual_runtime_counts": {
+    "actual_model_forward_calls": 192,
+    "dimensional_restores": 3,
+    "embedded_parent_restores": 3,
+    "joint_additional_model_forward_calls": 0,
+    "joint_selection_calls": 192,
+    "model_constructors": 9,
+    "optimizer_step_attempts": 0,
+    "optimizer_updates": 0,
+    "owner_decoder_calls": 6,
+    "source_row_decode_calls": 192,
+    "wrapper_calls": 6
+  },
+  "aggregate": {
+    "changed_greedy_proposals": 0,
+    "greedy_proposals": 10,
+    "greedy_reason_counts": {
+      "copied_spans_overlap": 182
+    },
+    "joint_proposals": 183,
+    "joint_reason_counts": {
+      "no_complete_assignment_in_retained_candidates": 9
+    },
+    "lost_greedy_proposals": 0,
+    "policy_outcome_count": 384,
+    "preserved_greedy_proposals": 10,
+    "request_count": 192,
+    "rescued_greedy_overlap_abstentions": 173,
+    "search_maxima": {
+      "maximum_attempted_expansions_per_row": 4368,
+      "maximum_retained_beam_size": 64,
+      "peak_feasible_expanded_state_count": 788
+    },
+    "search_totals": {
+      "attempted_expansion_count": 664044,
+      "beam_boundary_tied_layers": 0,
+      "candidate_cutoff_tied_facets": 0,
+      "complete_retained_state_count": 11206,
+      "enumerated_candidate_spans": 296527,
+      "incomplete_search_rows": 192,
+      "overlap_rejected_expansion_count": 476231,
+      "pruned_beam_state_count": 126360,
+      "pruned_candidate_count": 280575,
+      "retained_candidate_spans": 15952,
+      "rows_with_beam_pruning": 192,
+      "rows_with_candidate_pruning": 192,
+      "rows_with_search": 192
+    },
+    "transition_counts": {
+      "abstained->abstained": 9,
+      "abstained->proposal": 173,
+      "decoded->proposal": 10
+    }
+  },
+  "aggregation_attempts": {
+    "extra_model_calls": 0,
+    "first": "rejected_before_aggregation_when_provider_version_metadata_was_passed_as_closed_file_binding",
+    "second": "completed_after_metadata_projection_fix_and_four_regression_fixtures"
+  },
+  "content_sha256": "864982b7c5052bc90e6072b8cccc98b6c37abd04d9138d058b994a97015423f9",
+  "core_audit_binding": {
+    "bytes": 79821,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/independent-audit-01.json",
+    "sha256": "ab2394fd7d5212606a37b8172e4276c634d4794f1dc238ee4da6e6223b9c0c6e"
+  },
+  "engineering_validation_binding": {
+    "bytes": 2966,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/engineering-validation-01.json",
+    "sha256": "92b8889cdea13197079d7e284c16cc71e1389fea716274c34d6716cee0cccee8"
+  },
+  "experiment_fixture_tests": {
+    "core_auditor": 13,
+    "publication_auditor": 14,
+    "selector_and_worker": 51,
+    "summary_provider_regressions": 4,
+    "total": 82
+  },
+  "git_publication_policy": "Preserve current origin/main baseline source and child Gitlinks; publish experimental source/metadata only with no force push.",
+  "huggingface_upload_needed_for_this_round": false,
+  "independent_semantic_review_completed": false,
+  "new_model_weights": false,
+  "no_full_score_banks_source_vectors_or_model_weights_in_public_result_ledger": true,
+  "proof_authority": false,
+  "public_ledger_binding": {
+    "bytes": 1872374,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/results-02/proposal-ledger-01.json",
+    "sha256": "7b230e4314f3b26cdb33e919a255ebfe3c79dd5d1bbd7b301eb8d1245345d770"
+  },
+  "publication_audit_binding": {
+    "bytes": 22315,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/independent-publication-audit-01.json",
+    "sha256": "1e51c1e55b22bc9cd66d0d748b47d7d2955736fa6aef986a7a54be42b76a2ef6"
+  },
+  "qualified": false,
+  "schema": "joint-span-continuation-evidence/v1",
+  "semantic_accuracy_measured": false,
+  "semantic_masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "source_fidelity_established": false,
+  "status": "completed_experiment_publication_recorded_separately",
+  "summary_binding": {
+    "bytes": 32394,
+    "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+    "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42"
+  },
+  "training_executed": false
+}
