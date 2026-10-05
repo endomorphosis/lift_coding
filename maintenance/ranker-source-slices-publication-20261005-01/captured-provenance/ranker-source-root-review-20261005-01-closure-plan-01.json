@@ -1,0 +1,48 @@
+{
+  "independent_reviews": [
+    {
+      "expected_status": "passed_source_only_diff_review",
+      "issue_field": "outstanding_issues",
+      "receipt": {
+        "bytes": 4451,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-emitter-v2-review-20261005-01/review-receipt.json",
+        "sha256": "e1898c75757f99496ced1a7b6f46698974c243a6e86bda8044bd86e49d952bec"
+      }
+    },
+    {
+      "expected_status": "passed_source_only_review",
+      "issue_field": "outstanding_issues",
+      "receipt": {
+        "bytes": 3659,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-v2-review-20261005-01/review-receipt.json",
+        "sha256": "389c846228b7d1e0c00bda272188a77c7c5edab971e5af9874061e33d2f1b28c"
+      }
+    },
+    {
+      "expected_status": "passed_file_only_source_slice_semantic_native_review",
+      "issue_field": "outstanding_issues",
+      "receipt": {
+        "bytes": 10415,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-semantic-native-review-20261005-01/review-receipt.json",
+        "sha256": "02eaceb1c54ce1d4a179459b0f748a4c68c44d8b7800df7d562b6d31f79ec901"
+      }
+    },
+    {
+      "expected_status": "passed_source_only_review",
+      "issue_field": "outstanding_issues",
+      "receipt": {
+        "bytes": 5009,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-metadata-builder-review-20261005-01/review-receipt.json",
+        "sha256": "789dc7f19ade29e545149e267df2c31885b26b180f825ed0dee1273fd0120e52"
+      }
+    }
+  ],
+  "metadata_build_receipt": {
+    "bytes": 7531,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-source-01/build-receipt.json",
+    "sha256": "ffc066a92f4476a9fc3dcb991651d8689418d29f1a2552f2de371d25179ec98d"
+  },
+  "schema": "ranker-source-slices-closure-plan@1",
+  "scope_root": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01",
+  "source_and_artifacts_quiet": true
+}

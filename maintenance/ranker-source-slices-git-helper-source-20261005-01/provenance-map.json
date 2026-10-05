@@ -1,0 +1,73 @@
+{
+  "completion_authority": false,
+  "execution_authority": false,
+  "files": [
+    {
+      "byte_identical": true,
+      "capture_role": "reviewed_source_provenance_only_not_an_executable_checkout",
+      "captured": {
+        "bytes": 13796,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-git-helper-source-20261005-01/prepare_compact_selection_01.py",
+        "sha256": "b9378beff7404d8253ec86403c052ae05a9fcaea70dc44e508e34fdaad242c27"
+      },
+      "original": {
+        "bytes": 13796,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-private-git-preparation-20261005-01/prepare_compact_selection_01.py",
+        "sha256": "b9378beff7404d8253ec86403c052ae05a9fcaea70dc44e508e34fdaad242c27"
+      }
+    },
+    {
+      "byte_identical": true,
+      "capture_role": "reviewed_source_provenance_only_not_an_executable_checkout",
+      "captured": {
+        "bytes": 14349,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-git-helper-source-20261005-01/stage_verified_increment_01.py",
+        "sha256": "96bdce1359839d8ddced226037691d9b5ac41839fd2918d6ab230ce0275c8421"
+      },
+      "original": {
+        "bytes": 14349,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-private-git-preparation-20261005-01/stage_verified_increment_01.py",
+        "sha256": "96bdce1359839d8ddced226037691d9b5ac41839fd2918d6ab230ce0275c8421"
+      }
+    },
+    {
+      "byte_identical": true,
+      "capture_role": "reviewed_source_provenance_only_not_an_executable_checkout",
+      "captured": {
+        "bytes": 15374,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-git-helper-source-20261005-01/publish_git_increment_01.py",
+        "sha256": "409c835d2ee50ce987c0c24ff98ecd0d6200a0df44a0164971c7da79d5fdfd7b"
+      },
+      "original": {
+        "bytes": 15374,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-private-git-preparation-20261005-01/publish_git_increment_01.py",
+        "sha256": "409c835d2ee50ce987c0c24ff98ecd0d6200a0df44a0164971c7da79d5fdfd7b"
+      }
+    },
+    {
+      "byte_identical": true,
+      "capture_role": "reviewed_source_provenance_only_not_an_executable_checkout",
+      "captured": {
+        "bytes": 2885,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-git-helper-source-20261005-01/publication-policy.json",
+        "sha256": "3628d49b2281a7cfe6cfc3c70e7ccaa24b1154ba0326a7d93304fc93cdcaa09c"
+      },
+      "original": {
+        "bytes": 2885,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-private-git-preparation-20261005-01/publication-policy.json",
+        "sha256": "3628d49b2281a7cfe6cfc3c70e7ccaa24b1154ba0326a7d93304fc93cdcaa09c"
+      }
+    }
+  ],
+  "full_task_satisfaction": "unknown",
+  "planner_activation": false,
+  "private_worktree_bodies_included": false,
+  "proof_authority": false,
+  "schema": "ranker-source-slices-public-Git-helper-source-capture@1",
+  "source_review": {
+    "bytes": 5878,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-git-helper-review-20261005-01/review-receipt.json",
+    "sha256": "afaa5ed7227eafcb959e4667a92897646c5feb8bb632484da98aa75346c08d53"
+  },
+  "status": "byte_identical_reviewed_source_copies"
+}

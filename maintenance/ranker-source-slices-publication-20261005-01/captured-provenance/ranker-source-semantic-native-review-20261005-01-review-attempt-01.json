@@ -1,0 +1,21 @@
+{
+  "accepted_qualification_claims": 0,
+  "error": "ValueError: malformed pin at verify_native retention_manifest binding: actual checker artifact descriptor includes complete:true",
+  "native_jobs": 0,
+  "plan": {
+    "bytes": 10340,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-semantic-native-review-20261005-01/final-plan.json",
+    "sha256": "342e0210c197e35e19d0569ffe8750e737528f1a3d9cd3fbd035c12c3a0b2011"
+  },
+  "proof_authority": false,
+  "returncode": 1,
+  "review_source": {
+    "bytes": 24635,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-semantic-native-review-20261005-01/review_final.py",
+    "sha256": "925ec5dac803c22cf0a0060a6512c8690b093952bd49b6aa435ac6c07b95ecd1"
+  },
+  "schema": "ranker-source-slices-file-review-attempt@1",
+  "status": "refused_descriptor_shape",
+  "target_imports": 0,
+  "test_jobs": 0
+}

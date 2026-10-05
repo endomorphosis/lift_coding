@@ -1,0 +1,142 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T14:57:04.114710+00:00",
+  "execution_authority": false,
+  "findings": [],
+  "five_inherited_tools_exact_declared_adaptations_only": true,
+  "full_task_satisfaction": "unknown",
+  "limitations": [
+    "Source/AST inspection only. None of the reviewed sources or inherited helpers was imported or executed.",
+    "No package/classifier/codec/native/model/test/Git/HTTP/remote job ran in this audit.",
+    "Final S3 required-facts/plan/selection/package and actual R3 scan/publication/readback receipts are outside this source-only review.",
+    "Preserved preparer01 is an unexecuted superseded draft; the reviewed preparation entry point is preparer02 only."
+  ],
+  "new_HF_plan_preparer02_independent_source_review": true,
+  "pinned_baseline_sources": [
+    {
+      "ast_nodes": 5199,
+      "bytes": 26997,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/build_package.py",
+      "sha256": "f5ac610e20fa7dab88b8f3de94ee588d47e557cc9209fd4aef8eb13bc8425782"
+    },
+    {
+      "ast_nodes": 495,
+      "bytes": 3227,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/freeze_inputs.py",
+      "sha256": "6402eaa0a5d91f93c71f95599a256b06caf2076a991267dffbfb5fd962c8002e"
+    },
+    {
+      "ast_nodes": 3686,
+      "bytes": 18537,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-20261005-01/review_package.py",
+      "sha256": "313924a164782439d7f7e91a4ea51580e822c19ad221684949427daf4dbb2b70"
+    },
+    {
+      "ast_nodes": 983,
+      "bytes": 4872,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/scan_final_upload_01.py",
+      "sha256": "9a688f074ac89a1fee08fd05c71ac287b5bd9c0be330e0b4256277df8812ee8b"
+    },
+    {
+      "ast_nodes": 1854,
+      "bytes": 8845,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-publication-root-20261005-01/review_hf_readback_01.py",
+      "sha256": "b15ed0dfc5a6c4411a0a94c7bcb4b5df4c16e00dee38e6a01454af63cb621b9c"
+    }
+  ],
+  "pinned_inherited_helpers_rehashed_without_import": [
+    {
+      "bytes": 21117,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/successor-source-model-package-03/build_package.py",
+      "sha256": "8c8eab266a053115cdf0ea11a8aea5323611c2ab049ec1541383831618e385ce"
+    },
+    {
+      "bytes": 26475,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+      "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+    },
+    {
+      "bytes": 35323,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classify_and_prepare_public_archive_07.py",
+      "sha256": "dd457cb927270f53617781de1f576d1de1fac76b86191d769f4f923fa966a1f8"
+    },
+    {
+      "bytes": 47829,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-curvature-publication-source-plan-20261005-01/build_package.py",
+      "sha256": "4e14c08fc6d680e5fcbf755f649284f750353b73b42dd08b926398f4c43c9a93"
+    }
+  ],
+  "planner_activation": false,
+  "project_jobs": 0,
+  "proof_authority": false,
+  "remote_mutations": 0,
+  "remote_reads": 0,
+  "reviewed_sources": [
+    {
+      "ast_nodes": 5199,
+      "bytes": 27020,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/build_package.py",
+      "sha256": "f1269ff1b2d3e808a8e4c44a292d098a08f5d97adf9477da96e565f107d7618e",
+      "target_execution": false
+    },
+    {
+      "ast_nodes": 495,
+      "bytes": 3233,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/freeze_inputs.py",
+      "sha256": "baa46e4be40f7ce3c1cad6cd4aebeb2bfae10312570041553c1dcd3eacfcda56",
+      "target_execution": false
+    },
+    {
+      "ast_nodes": 3686,
+      "bytes": 18549,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/review_package.py",
+      "sha256": "150ac0bbdd63663daace169c668dfe1b0d088d9394c03480e8816c47124c1e3c",
+      "target_execution": false
+    },
+    {
+      "ast_nodes": 983,
+      "bytes": 4876,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/scan_final_upload_01.py",
+      "sha256": "b170ec89299076fc88226d28fad891923a33bd7e2fc2ba6facf620e07b123c95",
+      "target_execution": false
+    },
+    {
+      "ast_nodes": 1879,
+      "bytes": 8935,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/review_hf_readback_01.py",
+      "sha256": "231f61b3bc3bc2dfcc1cce54d48bed560e6f7270ae04e461e151cccdf0c1e9f8",
+      "target_execution": false
+    },
+    {
+      "ast_nodes": 1725,
+      "bytes": 10632,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/prepare_hf_plan_02.py",
+      "sha256": "d4762b7d1d30036caf83965709c7b54d61da781766c5f71669ed2194d7c66e82",
+      "target_execution": false
+    }
+  ],
+  "reviewer": {
+    "bytes": 15393,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-source-review-20261005-01/review_source.py",
+    "sha256": "52dae6d9aa175c6c39409e87cedd10a4200cfb902c9e122d643917e03ac163b8"
+  },
+  "schema": "ranker-source-slices-publication-independent-source-review@1",
+  "source_assessments": [
+    "Fixed independent plan/builder/closure/manifest pins and same-read parsed-buffer hash checks remain unchanged.",
+    "Full owned Q4 regular census equals seal leaves plus seal self-file; complete P5 source-plan census and explicit public tools/policy remain selected.",
+    "Failed attempts, full compiled objects/chunks, and zero-byte locks retain the inherited census rules.",
+    "Raw 256MiB, per-file and per-shard raw sum 14MiB, complete decoded tar 16MiB, charged aggregate decode 1GiB, 180s, 10000 members, depth6, 64 shards, zstd T1/3 stay unchanged.",
+    "Native 20s CPU/wall, 262144 input, 65536 output, and 16MiB workspace gates stay unchanged.",
+    "Pinned complete-container/complete-PEM/cached-credential classifier and same-first-decoded member readback retain the inherited implementation; no duplicate budget exemption was introduced.",
+    "Only new owned S3 package paths receive package writes; no old Q2/Q3/S2 evidence mutation was introduced.",
+    "R3 readback pins plan/invocation, joins scan/closed/observed/verified/local bytes, uses bounded 4MiB HTTP JSON reads, and rejects pagination.",
+    "R3 requires parent d6b6e333f3b1bcfe9028a8ca5ac3be6b12256e8a, complete 276-file prior tree, exact mutable two, all 274 immutable identity/LFS joins, and final tree size 276+selected-2.",
+    "The new HF preparer binds baseline/manifest/decoded-review/qualification to externally pinned same-read buffers, binds the closed package descriptor to its review, and holds all parsed/selected/prior-body descriptors through final rechecks.",
+    "The HF preparer appends prior README bytes, preserves prior status fields, selects only new immutable namespace files plus the exact mutable two, and requires actual 3 attempts/2 accepted/1 inconclusive/21 queries/4440 payloads/32 families/23 additions.",
+    "The new card/status limit source claims to typed dot/update arithmetic and exactReal projection with supplied mathematical gradient; host-parser correctness, full Python, _objective, binary64/libm, feature preparation, full loop, AE, and Terminal Bench remain open.",
+    "Operational/full-task authority flags stay false/unknown, no score is claimed, and all32 RPI exits stay OPEN."
+  ],
+  "status": "passed_source_only",
+  "target_imports_or_executions": 0
+}

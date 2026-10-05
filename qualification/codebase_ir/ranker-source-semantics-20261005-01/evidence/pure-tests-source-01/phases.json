@@ -1,0 +1,2468 @@
+[
+  {
+    "nodeid": "::test_original_slices_keep_actual_arithmetic_and_context",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0002142289886251092
+  },
+  {
+    "nodeid": "::test_original_slices_keep_actual_arithmetic_and_context",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.007477920007659122
+  },
+  {
+    "nodeid": "::test_original_slices_keep_actual_arithmetic_and_context",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.00010841799667105079
+  },
+  {
+    "nodeid": "::test_original_receipt_preserves_open_frontiers",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015574702410958707
+  },
+  {
+    "nodeid": "::test_original_receipt_preserves_open_frontiers",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005124237999552861
+  },
+  {
+    "nodeid": "::test_original_receipt_preserves_open_frontiers",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.092999294400215e-05
+  },
+  {
+    "nodeid": "::test_candidate_renderer_uses_actual_bodies_and_seven_explicit_kernel_gates",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011131400242447853
+  },
+  {
+    "nodeid": "::test_candidate_renderer_uses_actual_bodies_and_seven_explicit_kernel_gates",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.009697615983895957
+  },
+  {
+    "nodeid": "::test_candidate_renderer_uses_actual_bodies_and_seven_explicit_kernel_gates",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.747397128492594e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00017054699128493667
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00487475999398157
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.256101187318563e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015563599299639463
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.004931097995722666
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.83220278006047e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.000155699992319569
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.004947449982864782
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.621000309474766e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0001437789760529995
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.004982202022802085
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.00020453199977055192
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015667598927393556
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00503662001574412
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.084999768063426e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>5]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00014277099398896098
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>5]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.004926328983856365
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>5]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.13770098425448e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>6]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015589100075885653
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>6]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0049079449963755906
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>6]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.729799158871174e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>7]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00014027499128133059
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>7]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00488596098148264
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>7]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.0018006479367614e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>8]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0001504829851910472
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>8]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005012027017073706
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>8]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.747298175469041e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>9]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0001500670041423291
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>9]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005144191003637388
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>9]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.120100781321526e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>10]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015502699534408748
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>10]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0050237719842698425
+  },
+  {
+    "nodeid": "::test_renderer_rejects_receipt_scope_pin_schema_and_constructor_drift[<lambda>10]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.988898919895291e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_consistently_changed_ir_and_literal_with_old_source_pins",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011113900109194219
+  },
+  {
+    "nodeid": "::test_renderer_rejects_consistently_changed_ir_and_literal_with_old_source_pins",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.02433679299429059
+  },
+  {
+    "nodeid": "::test_renderer_rejects_consistently_changed_ir_and_literal_with_old_source_pins",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.129798177629709e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[None-open_frontiers]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00020931698963977396
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[None-open_frontiers]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005057708011008799
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[None-open_frontiers]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 7.293000817298889e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[dot-expression_ast_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00018221201025880873
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[dot-expression_ast_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005019834992708638
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[dot-expression_ast_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.881801527924836e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[update-guard_ast_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0001824999926611781
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[update-guard_ast_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0049645540129859
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[update-guard_ast_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.94410118740052e-05
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[source-module_ast_sha256]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00017987602041102946
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[source-module_ast_sha256]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005107357021188363
+  },
+  {
+    "nodeid": "::test_renderer_rejects_missing_context_fields[source-module_ast_sha256]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.654599565081298e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00016197198419831693
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.291400106623769e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.4321012208238244e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 8.651401731185615e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.657800986431539e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.05929861497134e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.651399937458336e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.9937010519206524e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9440998332574964e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.638498209416866e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.64649996906519e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9040995286777616e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.361799362115562e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.084900815039873e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8543989174067974e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>5]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.094600005075336e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>5]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.492899799719453e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>5]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.742398646660149e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>6]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.017800817266107e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>6]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.115297972224653e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>6]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7936010155826807e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>7]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.813000072725117e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>7]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.0032977014780045e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>7]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7457019314169884e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>8]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.644902168773115e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>8]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.393699393607676e-05
+  },
+  {
+    "nodeid": "::test_original_raw_source_drift_refused_even_if_context_looks_similar[<lambda>8]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5008979719132185e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.774498615413904e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.041699528694153e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.075299900956452e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.44490064587444e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 2.9440008802339435e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5984016247093678e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.364900036714971e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.134401049464941e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.823999966494739e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.502500036731362e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.027200000360608e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5215995265170932e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.584200309589505e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 2.8991984436288476e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.0001539240183774382
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs5]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00019920399063266814
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs5]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.443398888222873e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs5]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.2401003409177065e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs6]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 9.235399193130434e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs6]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.8129004426300526e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs6]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9153015930205584e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs7]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.665701559744775e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs7]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.2095984099432826e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs7]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7520989533513784e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs8]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.993798888288438e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs8]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.1104998672381043e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs8]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6896013878285885e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs9]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.686599226668477e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs9]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.848102642223239e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs9]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.592100645415485e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs10]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.771300104446709e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs10]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.0368991903960705e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs10]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7664005756378174e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs11]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.624101661145687e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs11]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.094498581252992e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs11]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.816098276525736e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs12]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.694599869661033e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs12]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.980900510214269e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs12]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7297006454318762e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs13]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.64810067974031e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs13]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.9440987166017294e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs13]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.12959891743958e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs14]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.598600884899497e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs14]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.060898208990693e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs14]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6448979042470455e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs15]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.587299867533147e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs15]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.924898919649422e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs15]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6863999664783478e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs16]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.427301559597254e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs16]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.0144001357257366e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs16]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5904009817168117e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs17]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.328098243102431e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs17]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 2.9504008125513792e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs17]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6320019969716668e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs18]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.324899732135236e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs18]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.067200304940343e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs18]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6640016585588455e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs19]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00016334798419848084
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs19]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.001902377000078559
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs19]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.516901728697121e-05
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs20]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0001388189848512411
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs20]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0016278910043183714
+  },
+  {
+    "nodeid": "::test_original_pins_shape_and_bounds_refuse[kwargs20]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 0.00048244200297631323
+  },
+  {
+    "nodeid": "::test_source_byte_cap_boundary",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00015890001668594778
+  },
+  {
+    "nodeid": "::test_source_byte_cap_boundary",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.005370514991227537
+  },
+  {
+    "nodeid": "::test_source_byte_cap_boundary",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 6.63219834677875e-05
+  },
+  {
+    "nodeid": "::test_original_shape_is_a_separate_external_assumption_gate",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.1136983782052994e-05
+  },
+  {
+    "nodeid": "::test_original_shape_is_a_separate_external_assumption_gate",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.700900171883404e-05
+  },
+  {
+    "nodeid": "::test_original_shape_is_a_separate_external_assumption_gate",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7584988856688142e-05
+  },
+  {
+    "nodeid": "::test_generic_scalar_preserves_order_bindings_and_rationals",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.92810145765543e-05
+  },
+  {
+    "nodeid": "::test_generic_scalar_preserves_order_bindings_and_rationals",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0002463569981046021
+  },
+  {
+    "nodeid": "::test_generic_scalar_preserves_order_bindings_and_rationals",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9457005439326167e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[f(p)]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 8.69939976837486e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[f(p)]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.163298919796944e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[f(p)]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.0127994250506163e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[math.exp(p)]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.497699021361768e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[math.exp(p)]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.680099664255977e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[math.exp(p)]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.804800169542432e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p.real]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.9377005780115724e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p.real]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.047999391332269e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p.real]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.734398003667593e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[row[i+1]]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.8336980398744345e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[row[i+1]]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.464099765755236e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[row[i+1]]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7936999686062336e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p if flag else q]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.5680993935093284e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p if flag else q]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.382498445920646e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p if flag else q]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.636900171637535e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p/q]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.4272979721426964e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p/q]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.8928992580622435e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p/q]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.558500273153186e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p**q]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.235300002619624e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p**q]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.056098987348378e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p**q]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5376997655257583e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[-p]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.1521008824929595e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[-p]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.760101390071213e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[-p]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5488989194855094e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[lambda: p]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.0673010516911745e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[lambda: p]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.174499190412462e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[lambda: p]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5632994947955012e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[(p:=q)]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.948897938244045e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[(p:=q)]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.982498310506344e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[(p:=q)]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.487999154254794e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p<q]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.0849001379683614e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p<q]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.7793011870235205e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[p<q]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4416978703811765e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[[p]]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.1216990211978555e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[[p]]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.692900645546615e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[[p]]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5120010832324624e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[{p}]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.971299156546593e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[{p}]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.7457008147612214e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[{p}]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.53919861279428e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[True]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.156900104135275e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[True]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.496100543998182e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[True]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5424989871680737e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[None]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.540898953564465e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[None]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.440000000409782e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[None]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.497597597539425e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse['p']",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.0448998333886266e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse['p']",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.416102845221758e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse['p']",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5232002371922135e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[unbound*p]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.924901830032468e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[unbound*p]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.8209022022783756e-05
+  },
+  {
+    "nodeid": "::test_unsupported_scalar_nodes_calls_attributes_branches_indices_refuse[unbound*p]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.484899596311152e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[True]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.148800508119166e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[True]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.4303986467421055e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[True]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5264016585424542e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[False]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.0001003071665764e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[False]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.236898919567466e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[False]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.492900239303708e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[inf]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.950498648919165e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[inf]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.163199289701879e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[inf]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.473700442351401e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[-inf]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.0337006794288754e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[-inf]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.0736002372577786e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[-inf]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.513598883524537e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[nan]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.0257000364363194e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[nan]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.0433002393692732e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[nan]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5792978703975677e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[231584178474632390847141970017375815706539969331281128078915168015826259279872]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 9.955398854799569e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[231584178474632390847141970017375815706539969331281128078915168015826259279872]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.3680000342428684e-05
+  },
+  {
+    "nodeid": "::test_bool_nonfinite_and_oversized_constants_refuse[231584178474632390847141970017375815706539969331281128078915168015826259279872]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.491197665221989e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.16009861510247e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.5712990211322904e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5809014914557338e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.046500544063747e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.252900205552578e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6416993932798505e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.0960992919281125e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.2687996281310916e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.739200135692954e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.068901762366295e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.326500882394612e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6049005100503564e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.003301728516817e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0004600580141413957
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 8.340997737832367e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope5]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00011334699229337275
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope5]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.313798414543271e-05
+  },
+  {
+    "nodeid": "::test_bad_lexical_scope_refuses[scope5]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.057700814679265e-05
+  },
+  {
+    "nodeid": "::test_ast_node_and_depth_caps_are_preflighted",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.89129966404289e-05
+  },
+  {
+    "nodeid": "::test_ast_node_and_depth_caps_are_preflighted",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00016161997336894274
+  },
+  {
+    "nodeid": "::test_ast_node_and_depth_caps_are_preflighted",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4849025066941977e-05
+  },
+  {
+    "nodeid": "::test_wide_and_cyclic_unsupported_ast_refuses_with_bounded_pending_stack",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 3.360098344273865e-05
+  },
+  {
+    "nodeid": "::test_wide_and_cyclic_unsupported_ast_refuses_with_bounded_pending_stack",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0010099249775521457
+  },
+  {
+    "nodeid": "::test_wide_and_cyclic_unsupported_ast_refuses_with_bounded_pending_stack",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.2576994271948934e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for q,p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.597001967951655e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for q,p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 8.493001223541796e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for q,p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.934399526566267e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(right,left))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.147300544194877e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(right,left))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.0080987168475986e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(right,left))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.777701593004167e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right,strict=True))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.6097004087641835e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right,strict=True))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.091300747357309e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right,strict=True))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.756799221970141e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right,left))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.508902202360332e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right,left))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.3584983106702566e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right,left))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7936999686062336e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in other(left,right))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.345699562691152e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in other(left,right))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.972901660948992e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in other(left,right))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.659301389940083e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right) if p)]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.1633000364527106e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right) if p)]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.9744994612410665e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right) if p)]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.566500916145742e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right) for z in left)]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.145700950175524e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right) for z in left)]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.936102777719498e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,q in zip(left,right) for z in left)]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5280984118580818e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q async for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0005104749870952219
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q async for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00017121899873018265
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q async for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 4.7169014578685164e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00010000201291404665
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.26100115571171e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p,p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.1584990210831165e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 5.6321994634345174e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.5105017963796854e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q for p in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.3424003049731255e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(left*q for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.611298209056258e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(left*q for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.644902168773115e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(left*q for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5375979021191597e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q[0] for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.292899393476546e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q[0] for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.680199294351041e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q[0] for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6641006115823984e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q if p else q for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.2512983782216907e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q if p else q for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.44490064587444e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[(p*q if p else q for p,q in zip(left,right))]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6367983082309365e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[[p*q for p,q in zip(left,right)]]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.120098310522735e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[[p*q for p,q in zip(left,right)]]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.4432992581278086e-05
+  },
+  {
+    "nodeid": "::test_zip_scope_and_unsupported_comprehensions_refuse[[p*q for p,q in zip(left,right)]]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6271998649463058e-05
+  },
+  {
+    "nodeid": "::test_zip_binder_cannot_shadow_vector_or_external_slot",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.5600980734452605e-05
+  },
+  {
+    "nodeid": "::test_zip_binder_cannot_shadow_vector_or_external_slot",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 5.704097566194832e-05
+  },
+  {
+    "nodeid": "::test_zip_binder_cannot_shadow_vector_or_external_slot",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.3761007469147444e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left0-right0-expected0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.430498953908682e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left0-right0-expected0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 9.105799836106598e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left0-right0-expected0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9201008146628737e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left1-right1-expected1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.883300375193357e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left1-right1-expected1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.397000445052981e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left1-right1-expected1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.8737005777657032e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left2-right2-expected2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 6.73769973218441e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left2-right2-expected2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 6.731401663273573e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left2-right2-expected2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.896101796068251e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left3-right3-expected3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.0004937379853799939
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left3-right3-expected3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00023834098828956485
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left3-right3-expected3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 5.398501525633037e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left4-right4-expected4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00013593901530839503
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left4-right4-expected4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 9.768200106918812e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left4-right4-expected4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.449700307101011e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left5-right5-expected5]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 7.822498446330428e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left5-right5-expected5]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 9.297800716012716e-05
+  },
+  {
+    "nodeid": "::test_synthetic_fold_empty_and_unequal_zip_is_min_length[left5-right5-expected5]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.1969015253707767e-05
+  },
+  {
+    "nodeid": "::test_synthetic_update_empty_truncation_and_simultaneous_arithmetic",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.8833019314333797e-05
+  },
+  {
+    "nodeid": "::test_synthetic_update_empty_truncation_and_simultaneous_arithmetic",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.0001398430031258613
+  },
+  {
+    "nodeid": "::test_synthetic_update_empty_truncation_and_simultaneous_arithmetic",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5904999347403646e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.83370095025748e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00014267500955611467
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9663991881534457e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.595299833454192e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.816101863980293e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.662499900907278e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.2911997297778726e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.545701085589826e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6785011868923903e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.300801083445549e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.2033003410324454e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6560999685898423e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.233600338920951e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.177697701379657e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_refuses_nonrational_values_and_wrong_arity[values4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5809014914557338e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_cannot_replay_original_dimension",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.654499257914722e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_cannot_replay_original_dimension",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.150598685257137e-05
+  },
+  {
+    "nodeid": "::test_synthetic_oracle_cannot_replay_original_dimension",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.4784996639937162e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.4033018639311194e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.353700205683708e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.617700374685228e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.2480998672544956e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.1265011532232165e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6080990210175514e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.1727995267137885e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.1728984797373414e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6192981749773026e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.419300239533186e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.990400000475347e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5743996957316995e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.150500171817839e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.1601015254855156e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.587199560366571e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>5]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.681700374931097e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>5]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.0561018977314234e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>5]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.510400372557342e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>6]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.398502642288804e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>6]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.142502439208329e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>6]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.632098039612174e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>7]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.227302270010114e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>7]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.998502506874502e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>7]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.574501559138298e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>8]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.2176980059593916e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>8]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.017699393443763e-05
+  },
+  {
+    "nodeid": "::test_unknown_missing_extra_scalar_ir_keys_and_slots_refuse[<lambda>8]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6416993932798505e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.7281006118282676e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.6080979043617845e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6528985472396016e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.168099258095026e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.163199289701879e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 3.033599932678044e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.24330064561218e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.2369018299505115e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5936984457075596e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.11689979955554e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.598499461077154e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.496098750270903e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.153698682785034e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.182401997037232e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.9055983759462833e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number5]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 0.00029632600490003824
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number5]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 3.272001049481332e-05
+  },
+  {
+    "nodeid": "::test_noncanonical_or_unbounded_rational_ir_refuses[number5]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6160007109865546e-05
+  },
+  {
+    "nodeid": "::test_cycle_in_untrusted_ir_refuses_without_recursion",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.7120986487716436e-05
+  },
+  {
+    "nodeid": "::test_cycle_in_untrusted_ir_refuses_without_recursion",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.582502879202366e-05
+  },
+  {
+    "nodeid": "::test_cycle_in_untrusted_ir_refuses_without_recursion",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.3936008801683784e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>0]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.508899291977286e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>0]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 9.611400309950113e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>0]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7039990527555346e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>1]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.3473002733662724e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>1]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.534600445069373e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>1]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5904999347403646e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>2]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.227299359627068e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>2]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 0.00010902600479312241
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>2]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6832014555111527e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>3]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.246502066962421e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>3]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 8.02100112196058e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>3]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.6112014893442392e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>4]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.1888997657224536e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>4]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.092999294400215e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>4]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5824992917478085e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>5]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.081599763594568e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>5]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.094501052051783e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>5]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5775982066988945e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>6]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.0929007809609175e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>6]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.076998008415103e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>6]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.632098039612174e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>7]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.067199188284576e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>7]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.268899935297668e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>7]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.5312008801847696e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>8]",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 4.1072984458878636e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>8]",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 7.299400749616325e-05
+  },
+  {
+    "nodeid": "::test_unknown_or_malformed_zip_ir_refuses_before_oracle[<lambda>8]",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.558500273153186e-05
+  },
+  {
+    "nodeid": "::test_wrong_objective_gradient_index_is_unsupported_and_objective_stays_open",
+    "outcome": "passed",
+    "phase": "setup",
+    "seconds": 2.812800812534988e-05
+  },
+  {
+    "nodeid": "::test_wrong_objective_gradient_index_is_unsupported_and_objective_stays_open",
+    "outcome": "passed",
+    "phase": "call",
+    "seconds": 4.6945002395659685e-05
+  },
+  {
+    "nodeid": "::test_wrong_objective_gradient_index_is_unsupported_and_objective_stays_open",
+    "outcome": "passed",
+    "phase": "teardown",
+    "seconds": 2.7664005756378174e-05
+  }
+]

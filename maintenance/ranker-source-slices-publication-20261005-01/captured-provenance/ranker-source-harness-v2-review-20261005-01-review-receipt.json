@@ -1,0 +1,100 @@
+{
+  "changed_functions": [
+    [
+      "metadata",
+      0
+    ],
+    [
+      "metadata",
+      1
+    ],
+    [
+      "owned",
+      0
+    ]
+  ],
+  "dispatch_prefixes": [
+    "compile-source",
+    "lean",
+    "metadata",
+    "pure-tests"
+  ],
+  "findings": [
+    "Only owned source-v2 search path and metadata gates change.",
+    "Canonical prior payload prefixes, vectors and complete exports preserve numeric types.",
+    "Exactly two mathematical domain contracts require false runtime/Python-contract claims and exact integer80.",
+    "Exact32 family set and exact23 per-family additions preserve every other family.",
+    "Inherited request/freezer/controller/native/root/import/process/optimization guards retain exact source pins.",
+    "No source runtime, Float, objective, training, task or authority frontier is closed by this review."
+  ],
+  "guard_leaf_revalidation_in_this_review": false,
+  "guard_leaf_revalidation_scope": "Prior durable review is inherited; this review checks source changes and request pins only.",
+  "inherited_review": {
+    "bytes": 3149,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-review-20261005-01/review-receipt.json",
+    "sha256": "afe5cf1c0fd34afc297728c55c0fce5c6bda85a4b3a238b6d492e6f4197922fb"
+  },
+  "metadata_additions": 23,
+  "metadata_delta": {
+    "ast": 2,
+    "contracts": 2,
+    "kg": 11,
+    "ranker_real_curvature_checks": 3,
+    "ranker_real_curvature_proofs": 2,
+    "sources": 3
+  },
+  "metadata_prior_rows": 4417,
+  "metadata_result_rows": 4440,
+  "outstanding_issues": [],
+  "protected_live_source_count_in_request": 4,
+  "request": {
+    "bytes": 478981,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+    "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+  },
+  "review_source": {
+    "bytes": 11223,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-v2-review-20261005-01/review_source.py",
+    "sha256": "3820d903c46d73e6dd6ceba9d17000da1bda08082bc4c29e0cf839dbe3422155"
+  },
+  "reviewed_producers": [
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/run_source_semantics_controls.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/run_source_semantics_controls_v2.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 4527,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/prepare_request_01.py",
+      "sha256": "7e54562d463afb399bcc98940f0457a4005436f93e0b0dbbda9107070a0ed027"
+    }
+  ],
+  "schema": "ranker-source-semantics-harness-v2-independent-source-review@1",
+  "scope": {
+    "Git_actions": 0,
+    "codec_jobs": 0,
+    "completion_authority": false,
+    "execution_authority": false,
+    "model_jobs": 0,
+    "native_jobs": 0,
+    "proof_authority": false,
+    "protected_writes": 0,
+    "remote_actions": 0,
+    "source_only": true,
+    "target_execution": 0,
+    "target_imports": 0,
+    "test_jobs": 0
+  },
+  "status": "passed_source_only_review",
+  "strict_old_input_count_in_request": 1808
+}

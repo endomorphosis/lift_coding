@@ -1,0 +1,3956 @@
+{
+  "all_nine_fresh_parent_gitlinks_preserved": true,
+  "commit": "f98f3c49b79281a79d7cd7202e1cec90af74a586",
+  "commit_calls": 1,
+  "commit_gitlinks": [
+    {
+      "mode": "160000",
+      "oid": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+      "path": "JevOps"
+    },
+    {
+      "mode": "160000",
+      "oid": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "path": "Mcp-Plus-Plus"
+    },
+    {
+      "mode": "160000",
+      "oid": "77cdae9603c3c2e6bad4bfc0fdea35a2d8cfc88c",
+      "path": "external/ipfs_accelerate"
+    },
+    {
+      "mode": "160000",
+      "oid": "987cf856b2b902aa68c4587bb492b19b932b5d30",
+      "path": "external/ipfs_datasets"
+    },
+    {
+      "mode": "160000",
+      "oid": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "path": "external/ipfs_kit"
+    },
+    {
+      "mode": "160000",
+      "oid": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+      "path": "external/meta-wearables-dat-android"
+    },
+    {
+      "mode": "160000",
+      "oid": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+      "path": "external/meta-wearables-dat-ios"
+    },
+    {
+      "mode": "160000",
+      "oid": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+      "path": "hallucinate_app"
+    },
+    {
+      "mode": "160000",
+      "oid": "4772c7ff648dd5f438af059e21a1a5305d32dbe3",
+      "path": "swissknife"
+    }
+  ],
+  "commit_reachable_from_remote_main": true,
+  "committed_source_blobs": [
+    {
+      "bytes": 30118,
+      "git_blob_oid": "7200c127446b6424133fcd79350561dd151badac",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-HF-readback-source-review-20261005-01/review-receipt.json",
+      "sha256": "876743349ebc8c3bb9703bb423b036133d659066a5c3c3f20149bc7ee53d5ba3"
+    },
+    {
+      "bytes": 12619,
+      "git_blob_oid": "ed04a6bad2de4809a9d0aa2987e59dabac8a7dc6",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-HF-readback-source-review-20261005-01/review_source.py",
+      "sha256": "646ea966509b7d68c5c8e4ae0825fb56e80216722ffb0300d8f3bc7eb89fc409"
+    },
+    {
+      "bytes": 10251,
+      "git_blob_oid": "9c04d833507980313b04fc6edc4a38ac9f00da5e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/current-prepare_compact_selection_01.py",
+      "sha256": "586c4793281ab06317927fef07b4c1c10287d9da7fff36e2b1a9187bbd041e8f"
+    },
+    {
+      "bytes": 2010,
+      "git_blob_oid": "4eeffeb7acd3bee317f32af7adf436e1d15b8a8f",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/current-publication-policy.json",
+      "sha256": "5526c2a35a94c5b46f2fed4f17243885211546e50e5ecd702bd5a40e775da04b"
+    },
+    {
+      "bytes": 15194,
+      "git_blob_oid": "d84aa704cd70c86e9700d03f94af1be030fab5ec",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/current-publish_git_increment_01.py",
+      "sha256": "84f16b2b734319c5547e9468e617894a9f895ba187f8bb64d58366b220e93bd1"
+    },
+    {
+      "bytes": 12619,
+      "git_blob_oid": "9e7b071f3a452d69c8a1acb47f897e7141d9524d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/current-stage_verified_increment_01.py",
+      "sha256": "2b9d7cc540e7905004392ce2edb74b0921a5924827805e1e44b91c786b21ba8f"
+    },
+    {
+      "bytes": 144570,
+      "git_blob_oid": "ec149eb5de07b529fa67f6710cb685f283ac8232",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-compact-base-selection-01.json",
+      "sha256": "755f0531ed8ef39685c20784a647dd3f5ccf13f827838fd01af05c3796f15e0a"
+    },
+    {
+      "bytes": 143269,
+      "git_blob_oid": "3a461e36fcea69aceec63fb4c440cd1106b76340",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-compact-candidate-selection-01.json",
+      "sha256": "286610317312899a028e2a159aee570c7588ff735da73de7b21fb8746a4342b4"
+    },
+    {
+      "bytes": 10257,
+      "git_blob_oid": "f014a88e34ee215b94b87a1f5390aeb738633215",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-prepare_compact_selection_01.py",
+      "sha256": "2a19f4af4c7b4dbfd7464518896b07ba51a0d3c9b0506d4309127731fd13e80b"
+    },
+    {
+      "bytes": 2023,
+      "git_blob_oid": "3c1b9f09cc39498a2ecba07834e2a70677271883",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-publication-parent-guard-failure-01.json",
+      "sha256": "99ea7bae424260f180747e6ba57a9f76754804f9220984bb0ca34ff773bd68d3"
+    },
+    {
+      "bytes": 1819,
+      "git_blob_oid": "1f71b323bc31cd040c67edf939de6a1b2dfd1ea4",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-publication-policy.json",
+      "sha256": "9c242ddd5486d18d52d0585014de4d551f1542601a031eab4d788c7f55a5c3a8"
+    },
+    {
+      "bytes": 16036,
+      "git_blob_oid": "386e67a912c9ccd62cb1d9bab49ac846ab387766",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-publish_git_increment_01.py",
+      "sha256": "7099dd55cd8b6313717f2eebc7675dd86f16946b2a520c6d0c40734f67480946"
+    },
+    {
+      "bytes": 12689,
+      "git_blob_oid": "baf68a62e67b4ac6b96ec137de6e363ec72dba3a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-stage_verified_increment_01.py",
+      "sha256": "c70ec14ed6ad4252a7a8d6495eca67820e67277e236e51d4e4e4548515176418"
+    },
+    {
+      "bytes": 7431,
+      "git_blob_oid": "aa056377689e184746ebc46dd4256a6eb4e1707b",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/provenance-map.json",
+      "sha256": "498218bf158585a61caf3b1f5e9728d6eef34d29e3d87b62bd796a473da75b33"
+    },
+    {
+      "bytes": 42429,
+      "git_blob_oid": "b4558e5c2c83e6bf1122943fd9230c94fc0f86f7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-math-review-20261005-01/review-receipt.json",
+      "sha256": "c318ae97630369514b07d9da3cb2a8f133c22341d2f9f040bcef1eab9d5df09e"
+    },
+    {
+      "bytes": 21679,
+      "git_blob_oid": "614ea3203ebf93c73fd0d9d6f68792fb844ce48d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-math-review-20261005-01/review_native_math.py",
+      "sha256": "e612ddb49f2f1280399305cbe5e867ba94a152e43a0f09256e4f396f1a74180b"
+    },
+    {
+      "bytes": 5035,
+      "git_blob_oid": "5f80d6894ca079094937105968508449d1c0a918",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/API.md",
+      "sha256": "9736361f02d4028dde877fad087af72f02327ef0420f7c5ee892fbfe50d0add0"
+    },
+    {
+      "bytes": 26997,
+      "git_blob_oid": "ce9e2a52ea5758fc65d410d2cceb50e5f3b1e14d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/build_package.py",
+      "sha256": "f5ac610e20fa7dab88b8f3de94ee588d47e557cc9209fd4aef8eb13bc8425782"
+    },
+    {
+      "bytes": 2526,
+      "git_blob_oid": "6c4a041db5e5b274adb1da9c9fb3fa115ed44bae",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/provenance-map.json",
+      "sha256": "d982a2855281debb7e314f93d5beeabb54081ab58efbbe33f756420aed061f53"
+    },
+    {
+      "bytes": 42429,
+      "git_blob_oid": "b4558e5c2c83e6bf1122943fd9230c94fc0f86f7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-math-review-20261005-01-review-receipt.json",
+      "sha256": "c318ae97630369514b07d9da3cb2a8f133c22341d2f9f040bcef1eab9d5df09e"
+    },
+    {
+      "bytes": 21679,
+      "git_blob_oid": "614ea3203ebf93c73fd0d9d6f68792fb844ce48d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-math-review-20261005-01-review_native_math.py",
+      "sha256": "e612ddb49f2f1280399305cbe5e867ba94a152e43a0f09256e4f396f1a74180b"
+    },
+    {
+      "bytes": 11331,
+      "git_blob_oid": "171abfe03292face7fc1889552223a4cd33524ce",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-root-review-20261005-01-close_qualification_01.py",
+      "sha256": "ae2bc26bfddf3a15718f79d8ee25c14f93b9c81974b0bc4cf98bc95e5270fe82"
+    },
+    {
+      "bytes": 367416,
+      "git_blob_oid": "334893e84323fc46d9052a6e681108d9483630b8",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-curvature-git-publication-20261005-01-closed.json",
+      "sha256": "c83744433854e23801ff8f1422e82be7d537902887b93546c189db9e1bac1085"
+    },
+    {
+      "bytes": 1183,
+      "git_blob_oid": "d5ef53ff9c1d101102405ea998ea4ddb3cfce7ed",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/closed-inputs.json",
+      "sha256": "3721e16edddb301d9832001995fb9e685226cb9665852b31732bb148f8e7cdab"
+    },
+    {
+      "bytes": 178614,
+      "git_blob_oid": "6b4f0210ce5a833e1f308962f9cc970eed6b673f",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/final-selection.json",
+      "sha256": "9877c6ef83bc9e554fdd12209152eb749067d47730b294e0928356cf86fc773b"
+    },
+    {
+      "bytes": 3227,
+      "git_blob_oid": "2a7b8e0757879ade4bba2d2fd32dfe9ccaa5531c",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/freeze_inputs.py",
+      "sha256": "6402eaa0a5d91f93c71f95599a256b06caf2076a991267dffbfb5fd962c8002e"
+    },
+    {
+      "bytes": 3948,
+      "git_blob_oid": "70043d83e69130e7eb5caf4ffe507d3602a916c0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/package-review-01.json",
+      "sha256": "80e52bb19948125571ceec442e82bc2bed5fe2b792ed32222cdcd2c8c43b0f93"
+    },
+    {
+      "bytes": 1359,
+      "git_blob_oid": "0b94d45d58115101b35adbf834376ea141ae1528",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/plan-template.json",
+      "sha256": "a19a3fd27ae1f2c73e2b1697f6191df5fc6a8bfb6e5c345d489c53e3df8140ba"
+    },
+    {
+      "bytes": 9736,
+      "git_blob_oid": "6e4e00b61fb6fb47bfa6d52c98a9ab5e43b9f211",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/plan.json",
+      "sha256": "44674a6e9901d49db15acac1264706cb0aa5ed6a5136ad3dcd38354dd1ef594b"
+    },
+    {
+      "bytes": 67665,
+      "git_blob_oid": "d230e41eae97e77397767a9721ef0ad00f0c15eb",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/required-facts.json",
+      "sha256": "6312761c32e8c4aa63dca576c19c24b08a5221de0ce68cbb17807b28297dc632"
+    },
+    {
+      "bytes": 18537,
+      "git_blob_oid": "ae16d5002bf2f144d9899d885f9f310d0cdc5834",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/review_package.py",
+      "sha256": "313924a164782439d7f7e91a4ea51580e822c19ad221684949427daf4dbb2b70"
+    },
+    {
+      "bytes": 2898,
+      "git_blob_oid": "b4d0518de3fd9e1b823deac53daa49bff9e6cb32",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/source-review-01.json",
+      "sha256": "2b34b33ca95e2c22b5dee81b21a9f86f9843493310a7b8eb36abfb478cdc1377"
+    },
+    {
+      "bytes": 85645,
+      "git_blob_oid": "7e0860f8cdf124e95cb70aef11e75653179dfdde",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-input-review-20261005-01/review-receipt.json",
+      "sha256": "28b43224125a231e7dc9036de5cca61165e4292583429620985d87624900cf25"
+    },
+    {
+      "bytes": 20729,
+      "git_blob_oid": "5181bf39ad337f556a4e6dcd5510eb80f59d8a41",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-input-review-20261005-01/review_inputs.py",
+      "sha256": "517a2b8a46547aa7a09b449ac2141e63967ef7499e01d492ec1c1a74fe8bcd97"
+    },
+    {
+      "bytes": 464,
+      "git_blob_oid": "4a15d668ca1ec2c01063eb1c7cd9fcfdf2126b67",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-package-20261005-01/closed.json",
+      "sha256": "1094eef2abd1add664054792e4c320a5218cd377e3e631b89d8ed24dbf3a54bd"
+    },
+    {
+      "bytes": 336685,
+      "git_blob_oid": "2595bc9e636bcf33722f47f3d71b4ed6ec4aaa16",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-package-20261005-01/package/manifest.json",
+      "sha256": "b21ad711f3c88d4c2ae6fa1d74db33ba892c77dc9dfedd7d7343989ea44b0b95"
+    },
+    {
+      "bytes": 1035,
+      "git_blob_oid": "8cb5c72185480e26124868ac22903a69ee680f89",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-package-20261005-01/started.json",
+      "sha256": "bc76e26b6ea3a9ad16bee63727bca2482055c358588fc2f5b695ffc51a504be6"
+    },
+    {
+      "bytes": 12675,
+      "git_blob_oid": "d159df5f20019b776c7faf02c04b737af3a4772b",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/HF-README-01.md",
+      "sha256": "b8257f3a15330e519273766d5a49b8ba7f2bb5ed14c388d1fc337bdc7e102d5f"
+    },
+    {
+      "bytes": 103984,
+      "git_blob_oid": "c57ae6ba1e982c499655aba4ed663518397f01c5",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/HF-parent-preflight-01.json",
+      "sha256": "bfaa2cb0b42af891854b956074a72c757ad60a7b55c8964a4282056143933841"
+    },
+    {
+      "bytes": 84464,
+      "git_blob_oid": "998cf8a988c75ec6605c67e67e3dcf4e4dc065a6",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/HF-publication-status-01.json",
+      "sha256": "abf4008f97f0bb563151c7ff9860700944085118d7d9def004476b3c522164b4"
+    },
+    {
+      "bytes": 9408,
+      "git_blob_oid": "7b058ce0dcd45baa31d69123437befe2d0a5c037",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/close_publication_ledger_01.py",
+      "sha256": "dc758a11e9401e83d2e698218129d432fcba7dc70b99f89f44eef71f86be39b4"
+    },
+    {
+      "bytes": 23425,
+      "git_blob_oid": "f3c88b53e488b7f95aa0e5e2e24946f9f1f00255",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-01.json",
+      "sha256": "c8e49b40e213c0cdaf7850f8b59d53b555245dbf6932b347cf818c194172329c"
+    },
+    {
+      "bytes": 538990,
+      "git_blob_oid": "2e707b48868ec5a2a9b512c2f5ef7f39c1ee7ab7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-invocation-01.json",
+      "sha256": "ba24b35f3f87e4e0d828df319aadfeef0a27cbc59aa237bada93caabb3c73905"
+    },
+    {
+      "bytes": 522,
+      "git_blob_oid": "6929858758f6388aed8553a7eb70648a309a97b8",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/closed.json",
+      "sha256": "d443f2b14d43bb42cd0cf8b9423190ce80b84a24c790ee6910feafc81a552a18"
+    },
+    {
+      "bytes": 538346,
+      "git_blob_oid": "517fa03106e7075910532ab0ce8d503314d85a3d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/inputs-after.json",
+      "sha256": "514dcbcdb00ce31fdf1905f139cb4810c614a21e92d23142c098d4c96988bbd8"
+    },
+    {
+      "bytes": 538346,
+      "git_blob_oid": "517fa03106e7075910532ab0ce8d503314d85a3d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/inputs-before.json",
+      "sha256": "514dcbcdb00ce31fdf1905f139cb4810c614a21e92d23142c098d4c96988bbd8"
+    },
+    {
+      "bytes": 791,
+      "git_blob_oid": "1d7b05ba34318f87d053ac3ef5e753560160226e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/invocation.json",
+      "sha256": "bdfa1081e78a4ff4e2f3181bb972421ea2463860b9d249aeec0e0cf59a6ba704"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "9c91d15172d638c8ee3cc6de77f9fb48bfca6657",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/started.json",
+      "sha256": "da65e3a401ee4e4f6188cbcba42be169cf8b4dca6845a10ede6d619fd5df6215"
+    },
+    {
+      "bytes": 557,
+      "git_blob_oid": "936e07c22725dbc8bd7a739d11431fcb1e489bdb",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/freeze-inputs-attempt-01.json",
+      "sha256": "9b3e56049094408dfef58bd7a959d4e6e4c95a3238f4a32afd18d85393a562e8"
+    },
+    {
+      "bytes": 21851,
+      "git_blob_oid": "169c3e07ddfa08fba949f570a562e9137c358082",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-plan-01.json",
+      "sha256": "af77746e72284e0adaf75839ee03a797f5f6a260b25aac9bfc146644344d15a1"
+    },
+    {
+      "bytes": 3448,
+      "git_blob_oid": "826b0b3d60d3a44ccc5023c887a46fcc52ad812a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-public-readback-01.json",
+      "sha256": "ae264df8e038e4b4e2cacde49081e1062f546f6179153c60d9d475a3ce3440fe"
+    },
+    {
+      "bytes": 885,
+      "git_blob_oid": "7c85759ee00773429099cd46e7885bb80d4844a5",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "35df9327cca8fc205507de3222ba3885a9826df6485eb98724ea464ef429b0b1"
+    },
+    {
+      "bytes": 170,
+      "git_blob_oid": "8b053c8dd4606c15f0c057762fbd6b5d121b111c",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/commit-observed.json",
+      "sha256": "9f148b82f6c8732f1b06e4595f2db57e683be0e59b0a075ee9044c219312584c"
+    },
+    {
+      "bytes": 76132,
+      "git_blob_oid": "73bb3a9b66690ab2bebd6c4ebbafefb1021b43b7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/remote-before.json",
+      "sha256": "b026f49ae41846c124f09734d47ee6a12b3aa00d47a828493275fca76c9fdcf6"
+    },
+    {
+      "bytes": 623,
+      "git_blob_oid": "5786aa318876a68a118d484930ee70078181f2a7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/started.json",
+      "sha256": "ea3953c3414e92dfb7b091e719e02ba0dd2406ca057d117ce04d5645a3df1cb1"
+    },
+    {
+      "bytes": 27060,
+      "git_blob_oid": "112d3df0b2921c33e04ae7a0d714c047cce77ea5",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/verified-files.json",
+      "sha256": "7b0e6b42a55ec4a1fd0e6bac29547d9f826f4f8380a7033a78251552a79e8776"
+    },
+    {
+      "bytes": 539848,
+      "git_blob_oid": "e658a0671d89f06822c6f5377216a95a7eb0602b",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-invocation-01.json",
+      "sha256": "d2dcd63e22b3b6afe8c7d1d8db13a61dd7e24acb007ce1a69957095f7e85bc57"
+    },
+    {
+      "bytes": 559,
+      "git_blob_oid": "a1c187f90c2f221baf11f5ea2b0de3128cd17179",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/closed.json",
+      "sha256": "70e8d0bca972494a63fe1c40fb4d9008e1a09fa5af825fa374dbdfa5252ab1c3"
+    },
+    {
+      "bytes": 538795,
+      "git_blob_oid": "2fc28e32b6bc402b640c25031c2a791e9ad04ab0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/inputs-after.json",
+      "sha256": "05af7bb7ee68505170b920e5f50af70be6feb2d8318012a0b062f53529432d18"
+    },
+    {
+      "bytes": 538795,
+      "git_blob_oid": "2fc28e32b6bc402b640c25031c2a791e9ad04ab0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/inputs-before.json",
+      "sha256": "05af7bb7ee68505170b920e5f50af70be6feb2d8318012a0b062f53529432d18"
+    },
+    {
+      "bytes": 1160,
+      "git_blob_oid": "61da7b9d6ce58b581f51487f28dfb6dd81a6ad7a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/invocation.json",
+      "sha256": "103915c80131d2443487cc91a63b828c5b8f3ea29f820ece8714e8e824483f7b"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "82cfc021f27501e99466f9e26ef763a29ef2c225",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/started.json",
+      "sha256": "4210daa6f25dce3d702ec23567157e3f829f3cc2842ea8df2870d58d968aa524"
+    },
+    {
+      "bytes": 532553,
+      "git_blob_oid": "3e53b2e8e0beacaa83d88e0286e93a8c3eeb56fe",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-invocation-01.json",
+      "sha256": "21ec4459e7a48c67119556a545ff91d6a9c332b17f45cae044ab3f7b421c98e0"
+    },
+    {
+      "bytes": 518,
+      "git_blob_oid": "a5976bc3a38792b5e9b148c7d1ada2cb295adf6c",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/closed.json",
+      "sha256": "1e0fa69dff54306d35fb6120077260bf1eec51a4a19084f2a71c7690899862bd"
+    },
+    {
+      "bytes": 531716,
+      "git_blob_oid": "03394b5f07ff45d1969e88c76c099ee73b87365a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/inputs-after.json",
+      "sha256": "427812538652db4ad27efae0c2772e3c5515ba9601b0312f5e4b15069788385a"
+    },
+    {
+      "bytes": 531716,
+      "git_blob_oid": "03394b5f07ff45d1969e88c76c099ee73b87365a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/inputs-before.json",
+      "sha256": "427812538652db4ad27efae0c2772e3c5515ba9601b0312f5e4b15069788385a"
+    },
+    {
+      "bytes": 978,
+      "git_blob_oid": "f91ef43b669e561760f3ff6907fa8df15009e6b0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/invocation.json",
+      "sha256": "ee58ef597f3affc1d80d5db9312c6ceb82a4ca8c47b6da794e3ce242e4678445"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "1dc0feb689f40a4a88c34948e5289f0f7ac67c76",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/started.json",
+      "sha256": "f1fdf2b7dc2590b52a9e0ca8492b722e8b5b93d187803429edb6d42dfe5a3342"
+    },
+    {
+      "bytes": 536495,
+      "git_blob_oid": "f512e4addc7846350193f6de6d0f3636bf853551",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-invocation-01.json",
+      "sha256": "16228eb542e121c39973d4555c68868f02661f97d17213c14ff108f711f407be"
+    },
+    {
+      "bytes": 536487,
+      "git_blob_oid": "d1faea8210563790f2cef0a274983e53e53fdb91",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-invocation-02.json",
+      "sha256": "5a88e6cc8be722a721cd5a6da5eb09d291b167d0bca238b79300223b44ea67ed"
+    },
+    {
+      "bytes": 534,
+      "git_blob_oid": "2eccba8cebe2e34eb3963cb0896e3122400dff7a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/closed.json",
+      "sha256": "f85c762612087f0f26b81027b12d3c08ef8b08ed4c0289011605a7b7f78913dd"
+    },
+    {
+      "bytes": 535304,
+      "git_blob_oid": "69ce8b20f0e5d9a6d60117f1160f49e627e281ea",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/inputs-after.json",
+      "sha256": "60889687976999441271ff7fc0b5d9753745b3893df37ac9f50ff4efdfb10bb5"
+    },
+    {
+      "bytes": 535304,
+      "git_blob_oid": "69ce8b20f0e5d9a6d60117f1160f49e627e281ea",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/inputs-before.json",
+      "sha256": "60889687976999441271ff7fc0b5d9753745b3893df37ac9f50ff4efdfb10bb5"
+    },
+    {
+      "bytes": 1332,
+      "git_blob_oid": "18db01423a381b75c51d5650bb20447cfff9a970",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/invocation.json",
+      "sha256": "c3f6bfca05a116dba087ff123606cd4a2821a064f176bf86db83c12a20ecc01e"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "0d150567cf4208d33c9a78031f2a690d31546153",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/started.json",
+      "sha256": "f754c7629f290a08e65944d78258d8a837f37a3cc9a7c602d484c337d2fe2625"
+    },
+    {
+      "bytes": 524,
+      "git_blob_oid": "39adb123b65cb320f84fcedf8651803a083f4d77",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/closed.json",
+      "sha256": "c1662c6b7cf3257febf1a48be53f9226cb1f57df892590051baee71e348782f0"
+    },
+    {
+      "bytes": 535304,
+      "git_blob_oid": "2ba5e51eba14db9fabf8827f071c38ac43d2572e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/inputs-after.json",
+      "sha256": "a1cc328c35e0aa331beb9e201f246f0aee90ecc21d18719c537dee27b02a0262"
+    },
+    {
+      "bytes": 535304,
+      "git_blob_oid": "2ba5e51eba14db9fabf8827f071c38ac43d2572e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/inputs-before.json",
+      "sha256": "a1cc328c35e0aa331beb9e201f246f0aee90ecc21d18719c537dee27b02a0262"
+    },
+    {
+      "bytes": 1324,
+      "git_blob_oid": "c8325bf79f7fa15fc88d20b3428eecb5c8658b00",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/invocation.json",
+      "sha256": "58edc601a775716269037fb64773e7e466a478dc16ceb981906e8eef61d13598"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "6abff42ebe0400d0131bce510bb86f11afc81308",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/started.json",
+      "sha256": "63de1e2df26e38c7c960e07ee0cde04405e1347313b46f56d636a323fb36d7ec"
+    },
+    {
+      "bytes": 7277,
+      "git_blob_oid": "167b7a61bd03dd89982adf195437e1793c05f8fb",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/plan-data-inputs-01.json",
+      "sha256": "2bb0dbd46703d239ae87f04a3859455b407c28c464da5c47db5f9acf99578d25"
+    },
+    {
+      "bytes": 13459,
+      "git_blob_oid": "da3c2a41b12ef9ee73557b009473ac98429015ca",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prepare_hf_plan_01.py",
+      "sha256": "ece5a206ba9c466ec68d22bd0e5846f09d7e7fc9ddb75bc2aafc6acd9ad55bbb"
+    },
+    {
+      "bytes": 5476,
+      "git_blob_oid": "4be9e8675555ce3182184b52e6349de8f36fcfec",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prepare_phase_invocations_01.py",
+      "sha256": "993e82bbd5658b559ebbe28e2ed89913a1d060f0c6e39fe0ade7b8ebafd310a3"
+    },
+    {
+      "bytes": 5571,
+      "git_blob_oid": "54e9ada4ff2250453ca566de8e43dede23ddf0bc",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prepare_phase_invocations_02.py",
+      "sha256": "da80e8da3321ad7445e610692f4ef75e81cda93fd34a702453a3bbeb9bcd2ee0"
+    },
+    {
+      "bytes": 5942,
+      "git_blob_oid": "30e3af0ea8df9b0add16d9cbf5fc282d4ca09dee",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prepare_upload_phase_01.py",
+      "sha256": "67ca98dfd60fcc0a647239e3c47c701b422270cb8e4b97655d053533903432ee"
+    },
+    {
+      "bytes": 9695,
+      "git_blob_oid": "56ca48ec894d3afeaba4677fe0e4b5a1bd81d76e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prior-HF-README-01.md",
+      "sha256": "918fb6a0bb98be0a5d6ca699f00ec6969d5b6ac4971bb8b1dba89c4d030ef87b"
+    },
+    {
+      "bytes": 65690,
+      "git_blob_oid": "eba567e15f052c272e9518e58317f1cf2563caef",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prior-HF-publication-status-01.json",
+      "sha256": "40e0656445c582d9ca7624ab915eff5c622b1aab4187320d5d4cdd7c574f2802"
+    },
+    {
+      "bytes": 11491,
+      "git_blob_oid": "5e50f8b420e87c972e1ead373b34ff6c98bb9a1c",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/release-publication-ledger-01.json",
+      "sha256": "74df73cc8b705ddd2432abecbe440d459d55858279d880352cb46ba94991efb4"
+    },
+    {
+      "bytes": 8845,
+      "git_blob_oid": "27759c7fa07ec9d382a5836c87683933b1be81f0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/review_hf_readback_01.py",
+      "sha256": "b15ed0dfc5a6c4411a0a94c7bcb4b5df4c16e00dee38e6a01454af63cb621b9c"
+    },
+    {
+      "bytes": 4872,
+      "git_blob_oid": "c951617fbc2041ce5dadf9b0ea70b410afea952a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/scan_final_upload_01.py",
+      "sha256": "9a688f074ac89a1fee08fd05c71ac287b5bd9c0be330e0b4256277df8812ee8b"
+    },
+    {
+      "bytes": 11331,
+      "git_blob_oid": "171abfe03292face7fc1889552223a4cd33524ce",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-root-review-20261005-01/close_qualification_01.py",
+      "sha256": "ae2bc26bfddf3a15718f79d8ee25c14f93b9c81974b0bc4cf98bc95e5270fe82"
+    },
+    {
+      "bytes": 3271,
+      "git_blob_oid": "a873b752be4ac42b5a1d3495f7624d7353595aae",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/README.md",
+      "sha256": "9c7c9e6f3b6b6dc7a842d0c0f987a6fc2bd49759bb99ea0cf7793d78a559438f"
+    },
+    {
+      "bytes": 4677,
+      "git_blob_oid": "d8a96f0fd7c30e4912cdf533a9cacfd8325e15f9",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/bind_source_obligations_01.py",
+      "sha256": "268d540501780fe948912b423e1b221a51fde78721ec32eb2214daa20fd2ea0f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-gap-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "ed960500f5db797ab65e05e59c428446512d723e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-growth-01.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-minimizer-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-minimizer-02.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "ed960500f5db797ab65e05e59c428446512d723e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-original-convergence-01.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "ed960500f5db797ab65e05e59c428446512d723e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-original-convergence-02.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-pl-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-stable-factor-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30812,
+      "git_blob_oid": "0f79b85e091813f805a87d8ad2f974fd1c784c1f",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-strong-lower-01.py",
+      "sha256": "7dec2c896613297bbe43b51025c8b601a713cd362c6b07d7098b122f76963d98"
+    },
+    {
+      "bytes": 34791,
+      "git_blob_oid": "2246580286e2b92d4d165b08154653fd561968cc",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-metadata-convergence-01.py",
+      "sha256": "df7d76e4a1cb27e309b8be2a4774b627d668fa345cc03ebe2b0b12e501ecaeea"
+    },
+    {
+      "bytes": 463,
+      "git_blob_oid": "c52a2f68cf57ff48893c05e6727f5b2d39ec2dfb",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01-closed.json",
+      "sha256": "17ddfdee5d9cd87ea7ebf646764770b1eae9cac11fdc612c57ad024b3480005a"
+    },
+    {
+      "bytes": 11902,
+      "git_blob_oid": "f37e580852a450e2f450c07d1f6001c88f612ebc",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/check-result.json",
+      "sha256": "e8848a7a9946e8948c2fb60f9c86aaced904f1ccbd78aaf490f06b9a8a39a23e"
+    },
+    {
+      "bytes": 17438,
+      "git_blob_oid": "9d62c204821b2312286b4f4d986d3831e613ef2b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/closed.json",
+      "sha256": "5cd2d28325df86c939605b2f8597da4e2ab29983de0ced82ac4772488dfc48f8"
+    },
+    {
+      "bytes": 989,
+      "git_blob_oid": "5d7eb96ea475fd5bdbf40a5bbfd8c054596cc53d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/lean/LeanProofChunks.json",
+      "sha256": "0bb0830415fcc17187faa06c18bac2a8f3addc25990832ebaf553a25726d3d3a"
+    },
+    {
+      "bytes": 11903,
+      "git_blob_oid": "1e32408247be3c0486751d291a42117364b4de7c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/lean/RealGapContraction.check.json",
+      "sha256": "1eb675e26f410178ab02a026f96f2add06ebff8428bc48942c13ffef4860d623"
+    },
+    {
+      "bytes": 6229,
+      "git_blob_oid": "0258ec0dad0949c3014dd708f09c5c25369d5c96",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/lean/RealGapContraction.lean",
+      "sha256": "5414a4d10594a3feeb46194d2a06ecc376f13fe21849aa2bf57a5065d814898f"
+    },
+    {
+      "bytes": 1336,
+      "git_blob_oid": "209674d551af53108336399b096edd9308a85c38",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/resources.json",
+      "sha256": "db6ea03995df7b6881a1d6dde47a19cded7eab43cd0d84b2e2303bb15257f90d"
+    },
+    {
+      "bytes": 1844,
+      "git_blob_oid": "d6f4ac15f41c887026f473a6e9084b21a7b76eb0",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/started.json",
+      "sha256": "8b09176cdff6b3ee9905ae5cae4ea2e7b1b8f91e62652f8b259526bef0eb07c1"
+    },
+    {
+      "bytes": 467,
+      "git_blob_oid": "84c4b904ffd59d35da2f85ab2a63a6ae32db3336",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01-closed.json",
+      "sha256": "1325e4a10239f12383a635e9fb000403220caf7adbc2a5a295a9b63161b4ac62"
+    },
+    {
+      "bytes": 12409,
+      "git_blob_oid": "4a8633c59e382f622e1d48cccc773784f4856e76",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/check-result.json",
+      "sha256": "0ce1fb5b3e118e4f2b32a38d82b347a17df1a0bfaabe9344742ce8ab3f39d574"
+    },
+    {
+      "bytes": 17463,
+      "git_blob_oid": "f52e53d7a5d933eded0f90bc839cb0995cecc86b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/closed.json",
+      "sha256": "38e36eacec6261e80abccdaa19c3e16b8e2130550e9faa2ce42803ca51bd5433"
+    },
+    {
+      "bytes": 841,
+      "git_blob_oid": "189682fc1757a8d6ba57743db243b7ca43881f85",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/lean/LeanProofChunks.json",
+      "sha256": "338062fa2f4cf25fbf479af63d3eefd979d50e421785c9b10fa829859bbae7ca"
+    },
+    {
+      "bytes": 12410,
+      "git_blob_oid": "e207e311b2e20babfc2ab091a9f252b47ce4fe69",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/lean/RealMinimumGrowth.check.json",
+      "sha256": "04729bcae24726e80df14b006a00fb6d1c825fe4a2e70edf365da4ac209467d5"
+    },
+    {
+      "bytes": 7560,
+      "git_blob_oid": "8e7d3306abd2ad00b9f2b651499c623797113023",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/lean/RealMinimumGrowth.lean",
+      "sha256": "f5c5652d7202bf4d9be53b24c46666d79bbaaaadd86a3476dd3d3bf224d2bf03"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "a9c9d6e6984e68229da62c4935cc7afef8a3bd26",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/resources.json",
+      "sha256": "1cc67d96a62bfde3443d8d04f53247ae64bdd2f7ea41fcb15632e141fc3220c2"
+    },
+    {
+      "bytes": 1850,
+      "git_blob_oid": "dd512d493ad9244353a9e8942d482013277c8bce",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/started.json",
+      "sha256": "0c237fe57c97191d2a6ac5467efa862e2f9524777810b853ad2707ed3ccea3af"
+    },
+    {
+      "bytes": 471,
+      "git_blob_oid": "288f634d4b3a25b075042b6947135439f68757c1",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01-closed.json",
+      "sha256": "9fd8a08054d8e78f89e3a203e46bfa4c4c37d550871b10275de6897f4aabe58e"
+    },
+    {
+      "bytes": 9722,
+      "git_blob_oid": "e4f27383b611da8fb0ddfdf3ab49ebb6590136bd",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/check-result.json",
+      "sha256": "93e2fb9d2e0767bc423f2134edd41bf0b0ba35c7d02d859096614ae914865cc6"
+    },
+    {
+      "bytes": 19680,
+      "git_blob_oid": "06a4edd8ec011fc97fd818e95ad0f0b27ff4da40",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/closed.json",
+      "sha256": "66a5f92c68ce96e7d497e33baf777cc309c624a1af0617b8146eb53e032e8537"
+    },
+    {
+      "bytes": 210,
+      "git_blob_oid": "aaddc333b30e188dc4862bd2fb8610d2088e83df",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/lean/LeanProofChunks.json",
+      "sha256": "e4a002205eeae87779636cd7eebab687d96435cea98dc791e2546bffe57c4e05"
+    },
+    {
+      "bytes": 9723,
+      "git_blob_oid": "d45742620b6e011ebaa00079a2ae2856639d00cc",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/lean/RealMinimizer.check.json",
+      "sha256": "d70fcfd9c5a29efba20b2db93498a3a1b31b12c1b470901de46ff2c4d9b582b4"
+    },
+    {
+      "bytes": 7112,
+      "git_blob_oid": "517e66d0f6b34c32a5bb94b8950a598e3cd331f5",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/lean/RealMinimizer.lean",
+      "sha256": "5d331d185f62149c3d57062f28fc2bbd0e582bcf9c1b27f45dbd9bbdba66ed04"
+    },
+    {
+      "bytes": 2260,
+      "git_blob_oid": "fb941b3392a34057ddcd1fc21a341c3cc73f23dd",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/resources.json",
+      "sha256": "26c3f756f60c13c959e57328c60c9e429006e3aeca8fce23f594703e7fcde3f6"
+    },
+    {
+      "bytes": 1856,
+      "git_blob_oid": "92e50694ba0f22450b90322e4d6d06a155369387",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/started.json",
+      "sha256": "9ac958e96f24bcfd7f55871f1157e3b0b1194a5e5f078a72eb2d69017615445e"
+    },
+    {
+      "bytes": 470,
+      "git_blob_oid": "511a9785d8cf4dcd7f17b157c36696e32c65ab2e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02-closed.json",
+      "sha256": "ebde71b52f7bc5a7bc8466d2cdb63f10e882d2b2d7946cb8e55a096f55f7550b"
+    },
+    {
+      "bytes": 12490,
+      "git_blob_oid": "d9e197787595a8f52695cdefb3847d5fe66c6f58",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/check-result.json",
+      "sha256": "c2b7246f77d736091eb1540ae3db8ce9952d6db05ea2e6f4da1f327b1489ab09"
+    },
+    {
+      "bytes": 17478,
+      "git_blob_oid": "1a1ca879280d411b38ac85ee128816b25d16f5bd",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/closed.json",
+      "sha256": "e4994963020aac3618c7c2bd9f05da15fcb45973bbba544389d855afa786d659"
+    },
+    {
+      "bytes": 839,
+      "git_blob_oid": "dc59d738f00058cff3dce2423c82925ba75dba94",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/lean/LeanProofChunks.json",
+      "sha256": "7033df3bd358407c5f776028522c4dca6c8983c79bf96a4af3c685fbdbc2f564"
+    },
+    {
+      "bytes": 12491,
+      "git_blob_oid": "51a9c1f795d7251a67eafd034c182aa7cdfab752",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/lean/RealMinimizerV2.check.json",
+      "sha256": "4cb4a86985713d74e8893c171a1252793e81383dcfa692401817f04158288023"
+    },
+    {
+      "bytes": 7169,
+      "git_blob_oid": "1e55390d7ebfac2a889f5f4692eeab24e2be6bb2",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/lean/RealMinimizerV2.lean",
+      "sha256": "2e3ce3088a3bf3a84e1cc561278516224aa59c5397f678fb667bb9ffa2dc6880"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "916fff4ebc934380ff154eaa8a3079c72c1e5abe",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/resources.json",
+      "sha256": "ec1ec36c416f16c8bec131c03b358f8a08e71d87b71ea3bff00046985389ba77"
+    },
+    {
+      "bytes": 1856,
+      "git_blob_oid": "0f9d6e1a352cff64cdb6b272eb1da3316bcbc0d7",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/started.json",
+      "sha256": "dc6fe18bf9f7c5a3cd8b0c8b97dba728aee51597ecbc548ecda27108fa5145a2"
+    },
+    {
+      "bytes": 480,
+      "git_blob_oid": "6b9b62a71b0dcbd31a1a46489035e714368419a4",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01-closed.json",
+      "sha256": "75a93cf3515815221ef62989a73128904071e1c6afa1cf440a2d899415e03eec"
+    },
+    {
+      "bytes": 9494,
+      "git_blob_oid": "6fae1212fa1bd72a76e4ad1b68d65601dd7108da",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/check-result.json",
+      "sha256": "c0a50f2018c6922be901be5ac0400439aef38e399047dbbd1eef36fad151f1d9"
+    },
+    {
+      "bytes": 18603,
+      "git_blob_oid": "71d718475829c251231ff5e502a866292dd882ba",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/closed.json",
+      "sha256": "c80a09c41a46ee613ef52086f7c0371f133217ee96c518b7628e7f6a8ac9f413"
+    },
+    {
+      "bytes": 210,
+      "git_blob_oid": "aaddc333b30e188dc4862bd2fb8610d2088e83df",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/lean/LeanProofChunks.json",
+      "sha256": "e4a002205eeae87779636cd7eebab687d96435cea98dc791e2546bffe57c4e05"
+    },
+    {
+      "bytes": 9495,
+      "git_blob_oid": "2d560dbea0fff02f6a3c126880da322165181b65",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/lean/OriginalRealConvergence.check.json",
+      "sha256": "069e501ff56dbc2dde55aee24e70e50c866a35a72128492cba96867900275556"
+    },
+    {
+      "bytes": 4996,
+      "git_blob_oid": "7da7ceeb0d46b6920589923a9bd5d390cabb64c1",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/lean/OriginalRealConvergence.lean",
+      "sha256": "78c94f365804ef38edeabf1bee78498d6cc31af1676e9b8d89431379055d01d4"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "76863fe0ab32e5bcee6204a4a191703ee4b68cc3",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/resources.json",
+      "sha256": "85d95d7d1779f9013f6e0c8245012a506fca93a7cc143b5739362f577608a749"
+    },
+    {
+      "bytes": 1878,
+      "git_blob_oid": "1cd5fad614163885922aed4c9d11bdcd270747e8",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/started.json",
+      "sha256": "a24688541bc13acb050221a1655aa1237ffa273eb44619df73d5787c9cc4cabb"
+    },
+    {
+      "bytes": 481,
+      "git_blob_oid": "d1007b20405cc66dc0814c8bc752ead6b0700f9a",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02-closed.json",
+      "sha256": "8a4dd20dd19fdcedc6eb3c4e56b12317748ca1f808f2507b6fda6884fc6ef6c7"
+    },
+    {
+      "bytes": 10623,
+      "git_blob_oid": "4d6a7ffb20d233fc9c5935bc6e3b710485729674",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/check-result.json",
+      "sha256": "c26b9781daa03872d6ec6b42111822357a9f43ee703b06f30e8910b6731f5dd1"
+    },
+    {
+      "bytes": 17533,
+      "git_blob_oid": "6ab68ab159b807735af35a84ee4f857c71fa7b31",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/closed.json",
+      "sha256": "70ae9819293f1b1bca3a0eaa7bf85dbbdb434e601c0d128ee3179a64fa618494"
+    },
+    {
+      "bytes": 700,
+      "git_blob_oid": "fcb8d28040ad67e06d6b7df02b73254f98a3060e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/lean/LeanProofChunks.json",
+      "sha256": "e76e61582aa25cb8d9fefccdc49a38c4e799e01f4ae22d18a54b9356cae5991a"
+    },
+    {
+      "bytes": 10624,
+      "git_blob_oid": "0255424021ecff86c5e9f705b64a6f72c6878a3e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/lean/OriginalRealConvergenceV2.check.json",
+      "sha256": "7653975ec314876aff786909d78110549c9feb89625ad8ba4e4e751a20c48016"
+    },
+    {
+      "bytes": 5060,
+      "git_blob_oid": "c95d34cf356abe4efc8f2a35cf1c6d7c642a569e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/lean/OriginalRealConvergenceV2.lean",
+      "sha256": "f09a14c34bd891393d1acb2d0417fc2ddfdf4ca157fd83428c80639d16a97117"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "90a88c1b7295277719c2b7f9da1d51c495984c74",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/resources.json",
+      "sha256": "e363b43d16e88e3e8b42443441d9ad69ecc733b2bfbeb7358e6f5ce83226e339"
+    },
+    {
+      "bytes": 1878,
+      "git_blob_oid": "b323d8c508cb08480b8be9ce84802a0057c84a2c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/started.json",
+      "sha256": "6a3ff379c2797d29514fc1ae89c816442f582cf29c15aa7685641ed9c89aa88e"
+    },
+    {
+      "bytes": 463,
+      "git_blob_oid": "96760e4d3d6370fd58d3550188e1ba02508fdc0b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01-closed.json",
+      "sha256": "926240664354877bb1281d62c6d7aad4a3835a3cc773679a823ec6ef82502160"
+    },
+    {
+      "bytes": 10872,
+      "git_blob_oid": "f905ffb6618ffc8d799ebc621ed2ffdb24df86aa",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/check-result.json",
+      "sha256": "4331a7022fe1159ad5638c0ff1af69cdafb06612b54d8302760d1a48dd650012"
+    },
+    {
+      "bytes": 17443,
+      "git_blob_oid": "bf30f21b117336a1f79f1df2d471eadc08ef4575",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/closed.json",
+      "sha256": "11fd90eb3b29d4fd8231b2c41582cfe6405dfb1ed7816836b2f921db2e303c0b"
+    },
+    {
+      "bytes": 830,
+      "git_blob_oid": "b427489d46648a1d061598539c94847957632b04",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/lean/LeanProofChunks.json",
+      "sha256": "df25b84ddbd308430d1aaba1f617dccf7afb839b802a3b3f546527b9f02505d3"
+    },
+    {
+      "bytes": 10873,
+      "git_blob_oid": "0629c82ad26faa61f65e30a538d67628e7e49f45",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/lean/RealPL.check.json",
+      "sha256": "9948717ab90edf5eacb7f67d28aca6e0f15d40621eac924b6d846277d23176df"
+    },
+    {
+      "bytes": 4252,
+      "git_blob_oid": "8047ceed3385c1bde947bfc582ab43032f26f59e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/lean/RealPL.lean",
+      "sha256": "f4a5a13403f74cf946830836dd8d2cb816dccfe1abae6723004418bf36dfceee"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "a054f7e99ae989e212296a657a4e69ee5553de23",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/resources.json",
+      "sha256": "a3c8323167de7d6d3c33bbaaf9d9ff9f332986985ce0c59815085e8f17131a89"
+    },
+    {
+      "bytes": 1842,
+      "git_blob_oid": "e7becad3ce68943a3ddc92efa73a5aa9995171aa",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/started.json",
+      "sha256": "79977ae17a4182a8b50d940127fae39d132aa10955d48edc9c46900719449744"
+    },
+    {
+      "bytes": 474,
+      "git_blob_oid": "0d4ef2326d85344d08771074cce6091368e703de",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01-closed.json",
+      "sha256": "10bd9a8c04491dba08f6df244a4c2c5dc049ee89a1a3f01b488c064f7fb42d70"
+    },
+    {
+      "bytes": 9253,
+      "git_blob_oid": "33f53d72c9374eed55901b3c285848182ec9ea15",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/check-result.json",
+      "sha256": "25adf30103c3d7455df5c7fff9eedf6b9e4ceb1fbd5263e919247ed18588e0f5"
+    },
+    {
+      "bytes": 17497,
+      "git_blob_oid": "da567f6036bca62349ee69866844366b6bd9daf1",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/closed.json",
+      "sha256": "7215d13fa3f6330b4983646dc108e74baeb83636ccd9f7eb680fae65f0dff179"
+    },
+    {
+      "bytes": 691,
+      "git_blob_oid": "ff5f508d7203df3ebe025bf14094a399b082f332",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/lean/LeanProofChunks.json",
+      "sha256": "2e5288ac5487bfce42c0116cc93ab2371b74aa23f7296f85ed686d6aed09f739"
+    },
+    {
+      "bytes": 9254,
+      "git_blob_oid": "c39daa22b58362760590a9c779e49935b4fb569c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/lean/RealStableFactor.check.json",
+      "sha256": "e16f33c509b217711fbd99dc46a0205d156b7ebf31a031f5b902a53fd77630e6"
+    },
+    {
+      "bytes": 1901,
+      "git_blob_oid": "d746340bfdce854e00d6944c0a498fc02fe12d64",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/lean/RealStableFactor.lean",
+      "sha256": "45946085a5c34d394acc5cc160f813ef1e0c4d6d03a5e7fa92eda22cb0bc4624"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "50cb69a0a59f01034e04945c14ab7812e2f5b605",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/resources.json",
+      "sha256": "5dba7954f68263a5f9450a3b9492a999707dffb0d781bd4711b9331429a69264"
+    },
+    {
+      "bytes": 1864,
+      "git_blob_oid": "2c30a1a535417a1a8efe80d483997a5608846ae4",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/started.json",
+      "sha256": "567cecfee2ea02c9cc3e92fa21e484f3cb1437828639eba4ce53e1043f7106fe"
+    },
+    {
+      "bytes": 472,
+      "git_blob_oid": "c1a24732534181c87d782d75e43fdd0082681c40",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01-closed.json",
+      "sha256": "bdafe1e1ad3a7fdc63b6db8c7af28c27ac7fc9b4d0b4d950fb34680cc3fd708e"
+    },
+    {
+      "bytes": 11095,
+      "git_blob_oid": "4cb59106f817d09b5ff0339b588a7cddbdce472a",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/check-result.json",
+      "sha256": "7c801fee36f5d96f9813fbd634ef215f7161d407f41a7ae6307e70ecd8c2c6eb"
+    },
+    {
+      "bytes": 17492,
+      "git_blob_oid": "43519346137490d00ca834b16390f05b266d9e67",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/closed.json",
+      "sha256": "a174edb3f378f0f41d9e1ad6d2179a1bfefc0d03efa4d60c6a14f1b6fef29f35"
+    },
+    {
+      "bytes": 839,
+      "git_blob_oid": "205786195dd57d79927a3be7cc49652a23484bd2",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/lean/LeanProofChunks.json",
+      "sha256": "28639551c0e21766c0886fd557e9ebe5a61eb18155c8617a5e625260963362ca"
+    },
+    {
+      "bytes": 11096,
+      "git_blob_oid": "fa100e8c309d3465ae7069569bbd1723144a5135",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/lean/RealStrongLower.check.json",
+      "sha256": "81b83bd03f807403cc1ac466ec4748525bce6e986a7f6acb6d2fc2062e4929f4"
+    },
+    {
+      "bytes": 4811,
+      "git_blob_oid": "a57047f8142b17e2f4f1213768c14413a319c4d5",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/lean/RealStrongLower.lean",
+      "sha256": "078f984af75c4fbf7098d449a5a84c955b025c26cec62de12f1bf148dc427331"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "916fff4ebc934380ff154eaa8a3079c72c1e5abe",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/resources.json",
+      "sha256": "ec1ec36c416f16c8bec131c03b358f8a08e71d87b71ea3bff00046985389ba77"
+    },
+    {
+      "bytes": 1862,
+      "git_blob_oid": "36598f2bc18deaaa3e538d3c014ffe64339609d6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/started.json",
+      "sha256": "3e2d1a1f2664b25ba7ba11e478883fdb55459b797f305da3df3241b9a92581d3"
+    },
+    {
+      "bytes": 477,
+      "git_blob_oid": "bd4ffde4d8a4bb80ff4dc7365a567a930a505491",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01-closed.json",
+      "sha256": "69cbe5253be9619a1ed180a2051a2b8d9f76d467efc764112d0ef9cd603a1360"
+    },
+    {
+      "bytes": 19872,
+      "git_blob_oid": "07fc372b5bf7da568aa74e68519ce0f4c22e2abe",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/closed.json",
+      "sha256": "ad579fa3a8964bb22ffa41570b96a319823355f097017e71b7d36025b77c8b56"
+    },
+    {
+      "bytes": 32329,
+      "git_blob_oid": "c9a0cc88d6a9c491db0d09acdc61b23e20c9e47c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata-readback.json",
+      "sha256": "247d0715ba3183201c1131e3a4c96442024df92c55969f7cc9e3c3a4d24ee908"
+    },
+    {
+      "bytes": 982,
+      "git_blob_oid": "618a5ace677514699cd2c577a63c97d6973a4e2e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata/lake/history.json",
+      "sha256": "070551f8eb1d683e6f23e5f465fcb19831901b04f3c22ebbaee1a18f97c0cd06"
+    },
+    {
+      "bytes": 26754,
+      "git_blob_oid": "55b67a491bbea8d58203fe45a563437ce7756c48",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata/manifest.json",
+      "sha256": "621de650329bffa6a47838e8ccb3b8403c8049055e214f2a1e3dadcf7f21f6d5"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "a054f7e99ae989e212296a657a4e69ee5553de23",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/resources.json",
+      "sha256": "a3c8323167de7d6d3c33bbaaf9d9ff9f332986985ce0c59815085e8f17131a89"
+    },
+    {
+      "bytes": 1671,
+      "git_blob_oid": "0b5a7ce8c8a6dcbbe633b4554afecf5aa494b32c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/source-snapshot.json",
+      "sha256": "56088d71137345c26a6c889976cfc4fbfb8095f7d6844ee4b333f96263b5d6f0"
+    },
+    {
+      "bytes": 1868,
+      "git_blob_oid": "943ff13ca63f462049eef48137625e26e38dcf65",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/started.json",
+      "sha256": "45d1c2e92cef5f3dc53f1407fc63937a3660ddeca11b8010d32f223fc46d7e6d"
+    },
+    {
+      "bytes": 112015,
+      "git_blob_oid": "348083802e7fd75fc029b43908bf5fbe4ebfcb28",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/file-only-seal-01.json",
+      "sha256": "6ee7b5d675777e8cc9744c9072ee7f885cb8fc47a9204c1a40d9724632012648"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 4289,
+      "git_blob_oid": "9060a9031757e979ce0755a2ec51d053d2fe9b88",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/freeze_lower_profile_01.py",
+      "sha256": "63062ab2b0f2837c99e183df5d971993f071b6f90c251ebcd050f958ac1ad027"
+    },
+    {
+      "bytes": 4763,
+      "git_blob_oid": "e87fcb42112f7dbeb93a75a5a6b9b1e68b5e016b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/OriginalRealConvergence.lean",
+      "sha256": "eebf0815c95f8247f6a156e9d972fbb19c57eed8da4be374a88a7ce2b8317b0c"
+    },
+    {
+      "bytes": 4827,
+      "git_blob_oid": "aac1ff2e09dea9709edfc960214bcc0bea3a86a6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/OriginalRealConvergenceV2.lean",
+      "sha256": "c423d7114996e9f6d1785684b291ca09fde589ae8006d846cdbcd6feb8405469"
+    },
+    {
+      "bytes": 5799,
+      "git_blob_oid": "64c081a792e97a18156c798df36e83266c568178",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealGapContraction.lean",
+      "sha256": "f548594b460e63c288f28fefd681224ae9fa598e545f2bca5d5f1a77b7aee8b3"
+    },
+    {
+      "bytes": 6460,
+      "git_blob_oid": "5d00bde6e6d94d108334ac31d9e5a1339e8aa3d9",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealMinimizer.lean",
+      "sha256": "16339d15b34d822db054b8239087940a9e9a75e0b4364856bc3438cf7df251bf"
+    },
+    {
+      "bytes": 6517,
+      "git_blob_oid": "efced9d3d6c66c034fee85e7dd3f92fe9342e133",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealMinimizerV2.lean",
+      "sha256": "7a38abd3651b1cfab1c17d60789356f63189fa30ec9fe111d7872611f062ad73"
+    },
+    {
+      "bytes": 6906,
+      "git_blob_oid": "74ecef900cbd7ae0299061fd16915b1db2521302",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealMinimumGrowth.lean",
+      "sha256": "aa502dbba4fb11dab6ebbd6f3f16a2c58588753791bd64bf8333a8d398917b3c"
+    },
+    {
+      "bytes": 3863,
+      "git_blob_oid": "a64103bd7d3ae1491468dddc3d0e17205d94a162",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealPL.lean",
+      "sha256": "e2800d4368455db0f9e1fc1ea6ed2eb2786a92b19580b6a9d2d11d6c3f8cc885"
+    },
+    {
+      "bytes": 1767,
+      "git_blob_oid": "46d95a9eebf36e1b544b6844a5d5172ff1f1d1c6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealStableFactor.lean",
+      "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+    },
+    {
+      "bytes": 4405,
+      "git_blob_oid": "362aa129b20d1f9d79950f149aeed0a7d09533c3",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealStrongLower.lean",
+      "sha256": "b4196a1637cffe9cde7728355f2833767a6867f187d06d2614f7a251be778744"
+    },
+    {
+      "bytes": 3196,
+      "git_blob_oid": "94c8be13774bf93f000c34c224b7ec209f1b7b82",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/next-obligations.json",
+      "sha256": "7f7fe204c3994fb1ad03d2d6de452399cf705ee9e51b3e6afaa6c9da4ad5a974"
+    },
+    {
+      "bytes": 1722,
+      "git_blob_oid": "9f004f32498ae9cc326e9bfec8e6212bce62cb58",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-check-specification.json",
+      "sha256": "584fd08d485670301b33402a8fd9774f03798d083f2d3f8a2009c17693d8d4cf"
+    },
+    {
+      "bytes": 4073,
+      "git_blob_oid": "b9c9719e099a517b5331310f8b60ff58fe2d991c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-invocation.json",
+      "sha256": "0bf6a013c4b5175892c451da501e91d63b33c0687c8111f8da75f523704cdebe"
+    },
+    {
+      "bytes": 5799,
+      "git_blob_oid": "64c081a792e97a18156c798df36e83266c568178",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/RealGapContraction.lean",
+      "sha256": "f548594b460e63c288f28fefd681224ae9fa598e545f2bca5d5f1a77b7aee8b3"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1919,
+      "git_blob_oid": "b075896835e72a689706a038eb67a2d675bbe433",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-check-specification.json",
+      "sha256": "45af05aa9cacfe40e3df35773f5f3e5f90cba3788f150667b557090a473282bc"
+    },
+    {
+      "bytes": 4107,
+      "git_blob_oid": "48681dcdcb53ad83b86a0c50b584f1982e00be7e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-invocation.json",
+      "sha256": "e6c4fc7a875fe5b956d27c1f6737dc66df668d6fc8d0f513e7b4f4c6532bbb7e"
+    },
+    {
+      "bytes": 6906,
+      "git_blob_oid": "74ecef900cbd7ae0299061fd16915b1db2521302",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RealMinimumGrowth.lean",
+      "sha256": "aa502dbba4fb11dab6ebbd6f3f16a2c58588753791bd64bf8333a8d398917b3c"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1906,
+      "git_blob_oid": "19cd1742b92385ea5fb5b77386d52c4f7e56b20f",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-check-specification.json",
+      "sha256": "9d11efb88aecf260f7a3cb6efd62d0e6c7dbf570d17e191a4126181293806f37"
+    },
+    {
+      "bytes": 4135,
+      "git_blob_oid": "f8a9923d2bd5f4dc74601c4e4b1cf7c925233a9a",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-invocation.json",
+      "sha256": "fa8a122d168ce87f609eb3e59f0ba5fc43562f6da35a2c2e504d7dc88eefc7af"
+    },
+    {
+      "bytes": 6460,
+      "git_blob_oid": "5d00bde6e6d94d108334ac31d9e5a1339e8aa3d9",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/RealMinimizer.lean",
+      "sha256": "16339d15b34d822db054b8239087940a9e9a75e0b4364856bc3438cf7df251bf"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1908,
+      "git_blob_oid": "ef327d65c5efd1e305963ad9f5299d0eb52dd568",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-check-specification.json",
+      "sha256": "c2e9bd08876fb9b2829f8a234b6876ca7acc2bd24f25941ad9aa71868f8d0ead"
+    },
+    {
+      "bytes": 4139,
+      "git_blob_oid": "9c87646c5f553ae12b2584880900ed8e69aa353c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-invocation.json",
+      "sha256": "bdac48d8bd1d3ff22aaa3895215d60053b60129f37ddbe1c21e48b9dc6bf365f"
+    },
+    {
+      "bytes": 6517,
+      "git_blob_oid": "efced9d3d6c66c034fee85e7dd3f92fe9342e133",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RealMinimizerV2.lean",
+      "sha256": "7a38abd3651b1cfab1c17d60789356f63189fa30ec9fe111d7872611f062ad73"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1655,
+      "git_blob_oid": "20f89a1d572223b68e51f0c16b1c5942b4542458",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-check-specification.json",
+      "sha256": "f9360fd038fcc3ff103a9a54e5fd1ea311e89a3d132d629430b5e8e4f257d65e"
+    },
+    {
+      "bytes": 4287,
+      "git_blob_oid": "724588dd056e09e434e261be1cc7fab171179b1b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-invocation.json",
+      "sha256": "9cdb716b6748e5277c932f40f3a7251a0cfae3a5d43c6260d9d57e6429adb7c4"
+    },
+    {
+      "bytes": 4763,
+      "git_blob_oid": "e87fcb42112f7dbeb93a75a5a6b9b1e68b5e016b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/OriginalRealConvergence.lean",
+      "sha256": "eebf0815c95f8247f6a156e9d972fbb19c57eed8da4be374a88a7ce2b8317b0c"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1657,
+      "git_blob_oid": "2322a4899771f07202be3abc7aec18323d9494d1",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-check-specification.json",
+      "sha256": "47130054807dfbee6fdfd675d4bd68c24c19b95a823495d65ca695fe02d542f5"
+    },
+    {
+      "bytes": 4291,
+      "git_blob_oid": "e66cecc171114562c07179f3213a4038e6ea2d50",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-invocation.json",
+      "sha256": "3b4845d3e37a07310237d5fac6485cfefc9afd3f9c02aac85c46af642c1bd52d"
+    },
+    {
+      "bytes": 4827,
+      "git_blob_oid": "aac1ff2e09dea9709edfc960214bcc0bea3a86a6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/OriginalRealConvergenceV2.lean",
+      "sha256": "c423d7114996e9f6d1785684b291ca09fde589ae8006d846cdbcd6feb8405469"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1684,
+      "git_blob_oid": "8b69689a7cd97eda63d5a29dd9e025825d294e4e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-check-specification.json",
+      "sha256": "ac281b521181c9413456a7f2aea7343d94a74b22ecaa18d9b38df9299eb1bff0"
+    },
+    {
+      "bytes": 4037,
+      "git_blob_oid": "2ea4cc99c3e7d41ef966988c0adf7bf1567d6a23",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-invocation.json",
+      "sha256": "bb6e167f9ccd6eeb04713d4ea6f83afe62f2288173734d3517ee58dc64dbf392"
+    },
+    {
+      "bytes": 3863,
+      "git_blob_oid": "a64103bd7d3ae1491468dddc3d0e17205d94a162",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/RealPL.lean",
+      "sha256": "e2800d4368455db0f9e1fc1ea6ed2eb2786a92b19580b6a9d2d11d6c3f8cc885"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1540,
+      "git_blob_oid": "43ab2b3c90c74e641ffb9b52ead1fb7100813d9d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-check-specification.json",
+      "sha256": "de371519d9b91ca735e04508435f1de70384ae5e35df8996d298596f216539a2"
+    },
+    {
+      "bytes": 4189,
+      "git_blob_oid": "377ee2cf5e5190304f07ed83f00a475c5c5f1ae7",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-invocation.json",
+      "sha256": "c3f98c1b8413c304c2d1af2fe3dfde079ce19eed173ff9f6d1bb3b80f7dc9f9d"
+    },
+    {
+      "bytes": 1767,
+      "git_blob_oid": "46d95a9eebf36e1b544b6844a5d5172ff1f1d1c6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RealStableFactor.lean",
+      "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1725,
+      "git_blob_oid": "1bceecf4119ffdfeaca6559cb890037a44699594",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-check-specification.json",
+      "sha256": "850ec85acb37493ae94a252924d572ba3e6c48f3b646a57bf665ba9509d322bb"
+    },
+    {
+      "bytes": 4169,
+      "git_blob_oid": "94319fe35bbeabe905d461af5f892da18d259687",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-invocation.json",
+      "sha256": "b5dc2b9f223eee4502ec4a68dee36e39a2afa8d84c643d4897d96f15564efd32"
+    },
+    {
+      "bytes": 4405,
+      "git_blob_oid": "362aa129b20d1f9d79950f149aeed0a7d09533c3",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/RealStrongLower.lean",
+      "sha256": "b4196a1637cffe9cde7728355f2833767a6867f187d06d2614f7a251be778744"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 4289,
+      "git_blob_oid": "9060a9031757e979ce0755a2ec51d053d2fe9b88",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/freeze_lower_profile_01.py",
+      "sha256": "63062ab2b0f2837c99e183df5d971993f071b6f90c251ebcd050f958ac1ad027"
+    },
+    {
+      "bytes": 2027,
+      "git_blob_oid": "75416b377f3de97ccbfa840fbdbcd6ffa5796dcd",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/metadata-convergence-01-invocation.json",
+      "sha256": "3a06c8f8dd60657f0a38720215ac02fd265acebf13766413fed494d822042ebc"
+    },
+    {
+      "bytes": 417673,
+      "git_blob_oid": "b0244e81dd1c88ed62f3ba006318c0d9da721c2e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v2.json",
+      "sha256": "829d2ec981840753eee2bcfc73965828cf6bb86ae8ca10387bfe9229dd7f3857"
+    },
+    {
+      "bytes": 417675,
+      "git_blob_oid": "43ac17d80cc3c27b6253ee4b26573f43e54d387c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v3.json",
+      "sha256": "1d7d6efb49bb951d0cf2470d8b93d79a73e25cbd42961624ca263ee40314e458"
+    },
+    {
+      "bytes": 417618,
+      "git_blob_oid": "3f06a667cd6ac603d5f1d50abfc971bc6b3ada0d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request.json",
+      "sha256": "eb755a2b02505be51f698e06994e7bc17e90217c74da74b67af5826fd45e58a8"
+    },
+    {
+      "bytes": 22341,
+      "git_blob_oid": "86534709e5b7d88880566cb6712a71dd19f3acb4",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/qualified-review-01.json",
+      "sha256": "eebf40b5de2822faef1293a62578da208b582131e44c8a1f3e0d060071b6d0e7"
+    },
+    {
+      "bytes": 30812,
+      "git_blob_oid": "0f79b85e091813f805a87d8ad2f974fd1c784c1f",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/run_convergence_controls-v1.py",
+      "sha256": "7dec2c896613297bbe43b51025c8b601a713cd362c6b07d7098b122f76963d98"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/run_convergence_controls-v2.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "ed960500f5db797ab65e05e59c428446512d723e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/run_convergence_controls-v3.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 34791,
+      "git_blob_oid": "2246580286e2b92d4d165b08154653fd561968cc",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/run_convergence_controls.py",
+      "sha256": "df7d76e4a1cb27e309b8be2a4774b627d668fa345cc03ebe2b0b12e501ecaeea"
+    },
+    {
+      "bytes": 30154,
+      "git_blob_oid": "d1d4483b250f571d85a5540126f9f9697485d7cb",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/source-model-obligations-01.json",
+      "sha256": "19cf94e462dfc0541953832b57861c78f9fdddf2db6d392bde0da70d4d252304"
+    },
+    {
+      "bytes": 5809,
+      "git_blob_oid": "a75a4d6748d9c05c96119748dfd54be9e31196b3",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealGapContraction.lean",
+      "sha256": "d41f6ad73a6b877063d6f2a2b8284b820b7b07e0a9cb3f5d5ab53d027ecd3746"
+    },
+    {
+      "bytes": 6447,
+      "git_blob_oid": "e77f0376cdd9465cc40b6327d98f1bc4446f1e03",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealMinimizer.lean",
+      "sha256": "32b53d9b46e17e8de76e342916ca6e65c8de985a2c3269b734e40fb3038e16a8"
+    },
+    {
+      "bytes": 6916,
+      "git_blob_oid": "e8178b267d6141efaa0f9270af4c0efb05f8b930",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealMinimumGrowth.lean",
+      "sha256": "bdb0b2616ae23d8032d375f5649570046791953bd4e76cb37d02444a81b81f10"
+    },
+    {
+      "bytes": 3873,
+      "git_blob_oid": "2f66f65fe5fbb98684d594e35552efa3e42e26ff",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealPL.lean",
+      "sha256": "10e3805d7844b7db75637c4c4a372a5552223ec2fc55bc1ec674b7f311a19a39"
+    },
+    {
+      "bytes": 4410,
+      "git_blob_oid": "1612e8ce5bc7eb0b2fe454a15628a6d1ab09d75e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealStrongLower.lean",
+      "sha256": "2dac766100733d7b7c5acf027edde048bffbcb5d96f345393b5fd5d2a63cd993"
+    },
+    {
+      "bytes": 6097,
+      "git_blob_oid": "032367b3e215dd274a3d8ba84a5c741cd3034a02",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan-gap.json",
+      "sha256": "749cbcda026c597a084579af0c9ef80aecaba0cde0792f01c34f0008e31a1ee7"
+    },
+    {
+      "bytes": 5252,
+      "git_blob_oid": "d0991609616d0a53f368625e03a6e1a6caddc182",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan-growth.json",
+      "sha256": "df8c02953d29b9519bbe2ef17c275ff932062f164485bcd21e5a3c3be2c50961"
+    },
+    {
+      "bytes": 4889,
+      "git_blob_oid": "e26fa1f38e3628b7162a0e2b5b7460d44b2a68e2",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan-minimizer.json",
+      "sha256": "0e3966de712b4f863973e94c6dd7720555773d8385c28512c73a952f2e998716"
+    },
+    {
+      "bytes": 4506,
+      "git_blob_oid": "00de3e07cb9994b2a8c785b4b3dbbf351684a7a7",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan-pl.json",
+      "sha256": "0092e253a6bf2719371ee8909a14b715b4463bcd8a8f400ae1f2771a35eaa4f0"
+    },
+    {
+      "bytes": 13239,
+      "git_blob_oid": "f30293d94a58889823011f44598cd289d698dead",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan.json",
+      "sha256": "e6c55ce90500c0e6e205c89d97f7e21345d9cf0a22d69a88e4649fc6ff334d7d"
+    }
+  ],
+  "completion_authority": false,
+  "concurrency_rebases": 0,
+  "created_at_utc": "2026-10-05T06:25:33.149494+00:00",
+  "execution_authority": false,
+  "final_stage": {
+    "bytes": 93381,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-private-git-preparation-20261005-02/final-stage-closed-01.json",
+    "sha256": "50401cfd79a5617b7d64f5852e26ebfffe40d8fd592200f0305cdf424748ef4d"
+  },
+  "force_push_calls": 0,
+  "full_new_population_remote_Git_blobs_verified": true,
+  "full_task_satisfaction": "unknown",
+  "hf_commit": "d6b6e333f3b1bcfe9028a8ca5ac3be6b12256e8a",
+  "native_model_solver_test_fit_codec_jobs": 0,
+  "new_file_bytes": 13244071,
+  "new_file_count": 270,
+  "observed_commits": [
+    {
+      "bytes": 1187,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-git-publication-20261005-02/commit-observed-01.json",
+      "sha256": "9ce91d6d1adb1062b23aa6ece02b6fa0d5c97adb1802b60d72479bb00cb70747"
+    }
+  ],
+  "original_guard_after": {
+    "child": {
+      "head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "index_bytes": 2062937,
+      "index_sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4"
+    },
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "index_bytes": 692628,
+      "index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    }
+  },
+  "original_guard_before": {
+    "child": {
+      "head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "index_bytes": 2062937,
+      "index_sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4"
+    },
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "index_bytes": 692628,
+      "index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    }
+  },
+  "original_root_or_child_HEAD_index_mutations": 0,
+  "parent": "91a60ad2a43d944a7406e03f74430a6b1b46127d",
+  "parent_gitlinks": [
+    {
+      "mode": "160000",
+      "oid": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+      "path": "JevOps"
+    },
+    {
+      "mode": "160000",
+      "oid": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "path": "Mcp-Plus-Plus"
+    },
+    {
+      "mode": "160000",
+      "oid": "77cdae9603c3c2e6bad4bfc0fdea35a2d8cfc88c",
+      "path": "external/ipfs_accelerate"
+    },
+    {
+      "mode": "160000",
+      "oid": "987cf856b2b902aa68c4587bb492b19b932b5d30",
+      "path": "external/ipfs_datasets"
+    },
+    {
+      "mode": "160000",
+      "oid": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "path": "external/ipfs_kit"
+    },
+    {
+      "mode": "160000",
+      "oid": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+      "path": "external/meta-wearables-dat-android"
+    },
+    {
+      "mode": "160000",
+      "oid": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+      "path": "external/meta-wearables-dat-ios"
+    },
+    {
+      "mode": "160000",
+      "oid": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+      "path": "hallucinate_app"
+    },
+    {
+      "mode": "160000",
+      "oid": "4772c7ff648dd5f438af059e21a1a5305d32dbe3",
+      "path": "swissknife"
+    }
+  ],
+  "private_checkout_clean": true,
+  "producer": {
+    "bytes": 15194,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-private-git-preparation-20261005-02/publish_git_increment_01.py",
+    "sha256": "84f16b2b734319c5547e9468e617894a9f895ba187f8bb64d58366b220e93bd1"
+  },
+  "project_imports": 0,
+  "proof_authority": false,
+  "push_calls": 1,
+  "raw_SDK_logs_archives_caches_private_worktrees_added": 0,
+  "remote_main": "f98f3c49b79281a79d7cd7202e1cec90af74a586",
+  "remote_readback_source_blobs": [
+    {
+      "bytes": 30118,
+      "git_blob_oid": "7200c127446b6424133fcd79350561dd151badac",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-HF-readback-source-review-20261005-01/review-receipt.json",
+      "sha256": "876743349ebc8c3bb9703bb423b036133d659066a5c3c3f20149bc7ee53d5ba3"
+    },
+    {
+      "bytes": 12619,
+      "git_blob_oid": "ed04a6bad2de4809a9d0aa2987e59dabac8a7dc6",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-HF-readback-source-review-20261005-01/review_source.py",
+      "sha256": "646ea966509b7d68c5c8e4ae0825fb56e80216722ffb0300d8f3bc7eb89fc409"
+    },
+    {
+      "bytes": 10251,
+      "git_blob_oid": "9c04d833507980313b04fc6edc4a38ac9f00da5e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/current-prepare_compact_selection_01.py",
+      "sha256": "586c4793281ab06317927fef07b4c1c10287d9da7fff36e2b1a9187bbd041e8f"
+    },
+    {
+      "bytes": 2010,
+      "git_blob_oid": "4eeffeb7acd3bee317f32af7adf436e1d15b8a8f",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/current-publication-policy.json",
+      "sha256": "5526c2a35a94c5b46f2fed4f17243885211546e50e5ecd702bd5a40e775da04b"
+    },
+    {
+      "bytes": 15194,
+      "git_blob_oid": "d84aa704cd70c86e9700d03f94af1be030fab5ec",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/current-publish_git_increment_01.py",
+      "sha256": "84f16b2b734319c5547e9468e617894a9f895ba187f8bb64d58366b220e93bd1"
+    },
+    {
+      "bytes": 12619,
+      "git_blob_oid": "9e7b071f3a452d69c8a1acb47f897e7141d9524d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/current-stage_verified_increment_01.py",
+      "sha256": "2b9d7cc540e7905004392ce2edb74b0921a5924827805e1e44b91c786b21ba8f"
+    },
+    {
+      "bytes": 144570,
+      "git_blob_oid": "ec149eb5de07b529fa67f6710cb685f283ac8232",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-compact-base-selection-01.json",
+      "sha256": "755f0531ed8ef39685c20784a647dd3f5ccf13f827838fd01af05c3796f15e0a"
+    },
+    {
+      "bytes": 143269,
+      "git_blob_oid": "3a461e36fcea69aceec63fb4c440cd1106b76340",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-compact-candidate-selection-01.json",
+      "sha256": "286610317312899a028e2a159aee570c7588ff735da73de7b21fb8746a4342b4"
+    },
+    {
+      "bytes": 10257,
+      "git_blob_oid": "f014a88e34ee215b94b87a1f5390aeb738633215",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-prepare_compact_selection_01.py",
+      "sha256": "2a19f4af4c7b4dbfd7464518896b07ba51a0d3c9b0506d4309127731fd13e80b"
+    },
+    {
+      "bytes": 2023,
+      "git_blob_oid": "3c1b9f09cc39498a2ecba07834e2a70677271883",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-publication-parent-guard-failure-01.json",
+      "sha256": "99ea7bae424260f180747e6ba57a9f76754804f9220984bb0ca34ff773bd68d3"
+    },
+    {
+      "bytes": 1819,
+      "git_blob_oid": "1f71b323bc31cd040c67edf939de6a1b2dfd1ea4",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-publication-policy.json",
+      "sha256": "9c242ddd5486d18d52d0585014de4d551f1542601a031eab4d788c7f55a5c3a8"
+    },
+    {
+      "bytes": 16036,
+      "git_blob_oid": "386e67a912c9ccd62cb1d9bab49ac846ab387766",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-publish_git_increment_01.py",
+      "sha256": "7099dd55cd8b6313717f2eebc7675dd86f16946b2a520c6d0c40734f67480946"
+    },
+    {
+      "bytes": 12689,
+      "git_blob_oid": "baf68a62e67b4ac6b96ec137de6e363ec72dba3a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/previous-stage_verified_increment_01.py",
+      "sha256": "c70ec14ed6ad4252a7a8d6495eca67820e67277e236e51d4e4e4548515176418"
+    },
+    {
+      "bytes": 7431,
+      "git_blob_oid": "aa056377689e184746ebc46dd4256a6eb4e1707b",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-git-history-20261005-01/provenance-map.json",
+      "sha256": "498218bf158585a61caf3b1f5e9728d6eef34d29e3d87b62bd796a473da75b33"
+    },
+    {
+      "bytes": 42429,
+      "git_blob_oid": "b4558e5c2c83e6bf1122943fd9230c94fc0f86f7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-math-review-20261005-01/review-receipt.json",
+      "sha256": "c318ae97630369514b07d9da3cb2a8f133c22341d2f9f040bcef1eab9d5df09e"
+    },
+    {
+      "bytes": 21679,
+      "git_blob_oid": "614ea3203ebf93c73fd0d9d6f68792fb844ce48d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-math-review-20261005-01/review_native_math.py",
+      "sha256": "e612ddb49f2f1280399305cbe5e867ba94a152e43a0f09256e4f396f1a74180b"
+    },
+    {
+      "bytes": 5035,
+      "git_blob_oid": "5f80d6894ca079094937105968508449d1c0a918",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/API.md",
+      "sha256": "9736361f02d4028dde877fad087af72f02327ef0420f7c5ee892fbfe50d0add0"
+    },
+    {
+      "bytes": 26997,
+      "git_blob_oid": "ce9e2a52ea5758fc65d410d2cceb50e5f3b1e14d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/build_package.py",
+      "sha256": "f5ac610e20fa7dab88b8f3de94ee588d47e557cc9209fd4aef8eb13bc8425782"
+    },
+    {
+      "bytes": 2526,
+      "git_blob_oid": "6c4a041db5e5b274adb1da9c9fb3fa115ed44bae",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/provenance-map.json",
+      "sha256": "d982a2855281debb7e314f93d5beeabb54081ab58efbbe33f756420aed061f53"
+    },
+    {
+      "bytes": 42429,
+      "git_blob_oid": "b4558e5c2c83e6bf1122943fd9230c94fc0f86f7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-math-review-20261005-01-review-receipt.json",
+      "sha256": "c318ae97630369514b07d9da3cb2a8f133c22341d2f9f040bcef1eab9d5df09e"
+    },
+    {
+      "bytes": 21679,
+      "git_blob_oid": "614ea3203ebf93c73fd0d9d6f68792fb844ce48d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-math-review-20261005-01-review_native_math.py",
+      "sha256": "e612ddb49f2f1280399305cbe5e867ba94a152e43a0f09256e4f396f1a74180b"
+    },
+    {
+      "bytes": 11331,
+      "git_blob_oid": "171abfe03292face7fc1889552223a4cd33524ce",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-convergence-root-review-20261005-01-close_qualification_01.py",
+      "sha256": "ae2bc26bfddf3a15718f79d8ee25c14f93b9c81974b0bc4cf98bc95e5270fe82"
+    },
+    {
+      "bytes": 367416,
+      "git_blob_oid": "334893e84323fc46d9052a6e681108d9483630b8",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/captured-provenance/ranker-curvature-git-publication-20261005-01-closed.json",
+      "sha256": "c83744433854e23801ff8f1422e82be7d537902887b93546c189db9e1bac1085"
+    },
+    {
+      "bytes": 1183,
+      "git_blob_oid": "d5ef53ff9c1d101102405ea998ea4ddb3cfce7ed",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/closed-inputs.json",
+      "sha256": "3721e16edddb301d9832001995fb9e685226cb9665852b31732bb148f8e7cdab"
+    },
+    {
+      "bytes": 178614,
+      "git_blob_oid": "6b4f0210ce5a833e1f308962f9cc970eed6b673f",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/final-selection.json",
+      "sha256": "9877c6ef83bc9e554fdd12209152eb749067d47730b294e0928356cf86fc773b"
+    },
+    {
+      "bytes": 3227,
+      "git_blob_oid": "2a7b8e0757879ade4bba2d2fd32dfe9ccaa5531c",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/freeze_inputs.py",
+      "sha256": "6402eaa0a5d91f93c71f95599a256b06caf2076a991267dffbfb5fd962c8002e"
+    },
+    {
+      "bytes": 3948,
+      "git_blob_oid": "70043d83e69130e7eb5caf4ffe507d3602a916c0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/package-review-01.json",
+      "sha256": "80e52bb19948125571ceec442e82bc2bed5fe2b792ed32222cdcd2c8c43b0f93"
+    },
+    {
+      "bytes": 1359,
+      "git_blob_oid": "0b94d45d58115101b35adbf834376ea141ae1528",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/plan-template.json",
+      "sha256": "a19a3fd27ae1f2c73e2b1697f6191df5fc6a8bfb6e5c345d489c53e3df8140ba"
+    },
+    {
+      "bytes": 9736,
+      "git_blob_oid": "6e4e00b61fb6fb47bfa6d52c98a9ab5e43b9f211",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/plan.json",
+      "sha256": "44674a6e9901d49db15acac1264706cb0aa5ed6a5136ad3dcd38354dd1ef594b"
+    },
+    {
+      "bytes": 67665,
+      "git_blob_oid": "d230e41eae97e77397767a9721ef0ad00f0c15eb",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/required-facts.json",
+      "sha256": "6312761c32e8c4aa63dca576c19c24b08a5221de0ce68cbb17807b28297dc632"
+    },
+    {
+      "bytes": 18537,
+      "git_blob_oid": "ae16d5002bf2f144d9899d885f9f310d0cdc5834",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/review_package.py",
+      "sha256": "313924a164782439d7f7e91a4ea51580e822c19ad221684949427daf4dbb2b70"
+    },
+    {
+      "bytes": 2898,
+      "git_blob_oid": "b4d0518de3fd9e1b823deac53daa49bff9e6cb32",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-20261005-01/source-review-01.json",
+      "sha256": "2b34b33ca95e2c22b5dee81b21a9f86f9843493310a7b8eb36abfb478cdc1377"
+    },
+    {
+      "bytes": 85645,
+      "git_blob_oid": "7e0860f8cdf124e95cb70aef11e75653179dfdde",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-input-review-20261005-01/review-receipt.json",
+      "sha256": "28b43224125a231e7dc9036de5cca61165e4292583429620985d87624900cf25"
+    },
+    {
+      "bytes": 20729,
+      "git_blob_oid": "5181bf39ad337f556a4e6dcd5510eb80f59d8a41",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-input-review-20261005-01/review_inputs.py",
+      "sha256": "517a2b8a46547aa7a09b449ac2141e63967ef7499e01d492ec1c1a74fe8bcd97"
+    },
+    {
+      "bytes": 464,
+      "git_blob_oid": "4a15d668ca1ec2c01063eb1c7cd9fcfdf2126b67",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-package-20261005-01/closed.json",
+      "sha256": "1094eef2abd1add664054792e4c320a5218cd377e3e631b89d8ed24dbf3a54bd"
+    },
+    {
+      "bytes": 336685,
+      "git_blob_oid": "2595bc9e636bcf33722f47f3d71b4ed6ec4aaa16",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-package-20261005-01/package/manifest.json",
+      "sha256": "b21ad711f3c88d4c2ae6fa1d74db33ba892c77dc9dfedd7d7343989ea44b0b95"
+    },
+    {
+      "bytes": 1035,
+      "git_blob_oid": "8cb5c72185480e26124868ac22903a69ee680f89",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-package-20261005-01/started.json",
+      "sha256": "bc76e26b6ea3a9ad16bee63727bca2482055c358588fc2f5b695ffc51a504be6"
+    },
+    {
+      "bytes": 12675,
+      "git_blob_oid": "d159df5f20019b776c7faf02c04b737af3a4772b",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/HF-README-01.md",
+      "sha256": "b8257f3a15330e519273766d5a49b8ba7f2bb5ed14c388d1fc337bdc7e102d5f"
+    },
+    {
+      "bytes": 103984,
+      "git_blob_oid": "c57ae6ba1e982c499655aba4ed663518397f01c5",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/HF-parent-preflight-01.json",
+      "sha256": "bfaa2cb0b42af891854b956074a72c757ad60a7b55c8964a4282056143933841"
+    },
+    {
+      "bytes": 84464,
+      "git_blob_oid": "998cf8a988c75ec6605c67e67e3dcf4e4dc065a6",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/HF-publication-status-01.json",
+      "sha256": "abf4008f97f0bb563151c7ff9860700944085118d7d9def004476b3c522164b4"
+    },
+    {
+      "bytes": 9408,
+      "git_blob_oid": "7b058ce0dcd45baa31d69123437befe2d0a5c037",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/close_publication_ledger_01.py",
+      "sha256": "dc758a11e9401e83d2e698218129d432fcba7dc70b99f89f44eef71f86be39b4"
+    },
+    {
+      "bytes": 23425,
+      "git_blob_oid": "f3c88b53e488b7f95aa0e5e2e24946f9f1f00255",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-01.json",
+      "sha256": "c8e49b40e213c0cdaf7850f8b59d53b555245dbf6932b347cf818c194172329c"
+    },
+    {
+      "bytes": 538990,
+      "git_blob_oid": "2e707b48868ec5a2a9b512c2f5ef7f39c1ee7ab7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-invocation-01.json",
+      "sha256": "ba24b35f3f87e4e0d828df319aadfeef0a27cbc59aa237bada93caabb3c73905"
+    },
+    {
+      "bytes": 522,
+      "git_blob_oid": "6929858758f6388aed8553a7eb70648a309a97b8",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/closed.json",
+      "sha256": "d443f2b14d43bb42cd0cf8b9423190ce80b84a24c790ee6910feafc81a552a18"
+    },
+    {
+      "bytes": 538346,
+      "git_blob_oid": "517fa03106e7075910532ab0ce8d503314d85a3d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/inputs-after.json",
+      "sha256": "514dcbcdb00ce31fdf1905f139cb4810c614a21e92d23142c098d4c96988bbd8"
+    },
+    {
+      "bytes": 538346,
+      "git_blob_oid": "517fa03106e7075910532ab0ce8d503314d85a3d",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/inputs-before.json",
+      "sha256": "514dcbcdb00ce31fdf1905f139cb4810c614a21e92d23142c098d4c96988bbd8"
+    },
+    {
+      "bytes": 791,
+      "git_blob_oid": "1d7b05ba34318f87d053ac3ef5e753560160226e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/invocation.json",
+      "sha256": "bdfa1081e78a4ff4e2f3181bb972421ea2463860b9d249aeec0e0cf59a6ba704"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "9c91d15172d638c8ee3cc6de77f9fb48bfca6657",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/final-upload-scan-outer-01/started.json",
+      "sha256": "da65e3a401ee4e4f6188cbcba42be169cf8b4dca6845a10ede6d619fd5df6215"
+    },
+    {
+      "bytes": 557,
+      "git_blob_oid": "936e07c22725dbc8bd7a739d11431fcb1e489bdb",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/freeze-inputs-attempt-01.json",
+      "sha256": "9b3e56049094408dfef58bd7a959d4e6e4c95a3238f4a32afd18d85393a562e8"
+    },
+    {
+      "bytes": 21851,
+      "git_blob_oid": "169c3e07ddfa08fba949f570a562e9137c358082",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-plan-01.json",
+      "sha256": "af77746e72284e0adaf75839ee03a797f5f6a260b25aac9bfc146644344d15a1"
+    },
+    {
+      "bytes": 3448,
+      "git_blob_oid": "826b0b3d60d3a44ccc5023c887a46fcc52ad812a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-public-readback-01.json",
+      "sha256": "ae264df8e038e4b4e2cacde49081e1062f546f6179153c60d9d475a3ce3440fe"
+    },
+    {
+      "bytes": 885,
+      "git_blob_oid": "7c85759ee00773429099cd46e7885bb80d4844a5",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "35df9327cca8fc205507de3222ba3885a9826df6485eb98724ea464ef429b0b1"
+    },
+    {
+      "bytes": 170,
+      "git_blob_oid": "8b053c8dd4606c15f0c057762fbd6b5d121b111c",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/commit-observed.json",
+      "sha256": "9f148b82f6c8732f1b06e4595f2db57e683be0e59b0a075ee9044c219312584c"
+    },
+    {
+      "bytes": 76132,
+      "git_blob_oid": "73bb3a9b66690ab2bebd6c4ebbafefb1021b43b7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/remote-before.json",
+      "sha256": "b026f49ae41846c124f09734d47ee6a12b3aa00d47a828493275fca76c9fdcf6"
+    },
+    {
+      "bytes": 623,
+      "git_blob_oid": "5786aa318876a68a118d484930ee70078181f2a7",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/started.json",
+      "sha256": "ea3953c3414e92dfb7b091e719e02ba0dd2406ca057d117ce04d5645a3df1cb1"
+    },
+    {
+      "bytes": 27060,
+      "git_blob_oid": "112d3df0b2921c33e04ae7a0d714c047cce77ea5",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-01/verified-files.json",
+      "sha256": "7b0e6b42a55ec4a1fd0e6bac29547d9f826f4f8380a7033a78251552a79e8776"
+    },
+    {
+      "bytes": 539848,
+      "git_blob_oid": "e658a0671d89f06822c6f5377216a95a7eb0602b",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-invocation-01.json",
+      "sha256": "d2dcd63e22b3b6afe8c7d1d8db13a61dd7e24acb007ce1a69957095f7e85bc57"
+    },
+    {
+      "bytes": 559,
+      "git_blob_oid": "a1c187f90c2f221baf11f5ea2b0de3128cd17179",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/closed.json",
+      "sha256": "70e8d0bca972494a63fe1c40fb4d9008e1a09fa5af825fa374dbdfa5252ab1c3"
+    },
+    {
+      "bytes": 538795,
+      "git_blob_oid": "2fc28e32b6bc402b640c25031c2a791e9ad04ab0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/inputs-after.json",
+      "sha256": "05af7bb7ee68505170b920e5f50af70be6feb2d8318012a0b062f53529432d18"
+    },
+    {
+      "bytes": 538795,
+      "git_blob_oid": "2fc28e32b6bc402b640c25031c2a791e9ad04ab0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/inputs-before.json",
+      "sha256": "05af7bb7ee68505170b920e5f50af70be6feb2d8318012a0b062f53529432d18"
+    },
+    {
+      "bytes": 1160,
+      "git_blob_oid": "61da7b9d6ce58b581f51487f28dfb6dd81a6ad7a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/invocation.json",
+      "sha256": "103915c80131d2443487cc91a63b828c5b8f3ea29f820ece8714e8e824483f7b"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "82cfc021f27501e99466f9e26ef763a29ef2c225",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/hf-publication-outer-01/started.json",
+      "sha256": "4210daa6f25dce3d702ec23567157e3f829f3cc2842ea8df2870d58d968aa524"
+    },
+    {
+      "bytes": 532553,
+      "git_blob_oid": "3e53b2e8e0beacaa83d88e0286e93a8c3eeb56fe",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-invocation-01.json",
+      "sha256": "21ec4459e7a48c67119556a545ff91d6a9c332b17f45cae044ab3f7b421c98e0"
+    },
+    {
+      "bytes": 518,
+      "git_blob_oid": "a5976bc3a38792b5e9b148c7d1ada2cb295adf6c",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/closed.json",
+      "sha256": "1e0fa69dff54306d35fb6120077260bf1eec51a4a19084f2a71c7690899862bd"
+    },
+    {
+      "bytes": 531716,
+      "git_blob_oid": "03394b5f07ff45d1969e88c76c099ee73b87365a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/inputs-after.json",
+      "sha256": "427812538652db4ad27efae0c2772e3c5515ba9601b0312f5e4b15069788385a"
+    },
+    {
+      "bytes": 531716,
+      "git_blob_oid": "03394b5f07ff45d1969e88c76c099ee73b87365a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/inputs-before.json",
+      "sha256": "427812538652db4ad27efae0c2772e3c5515ba9601b0312f5e4b15069788385a"
+    },
+    {
+      "bytes": 978,
+      "git_blob_oid": "f91ef43b669e561760f3ff6907fa8df15009e6b0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/invocation.json",
+      "sha256": "ee58ef597f3affc1d80d5db9312c6ceb82a4ca8c47b6da794e3ce242e4678445"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "1dc0feb689f40a4a88c34948e5289f0f7ac67c76",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-outer-01/started.json",
+      "sha256": "f1fdf2b7dc2590b52a9e0ca8492b722e8b5b93d187803429edb6d42dfe5a3342"
+    },
+    {
+      "bytes": 536495,
+      "git_blob_oid": "f512e4addc7846350193f6de6d0f3636bf853551",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-invocation-01.json",
+      "sha256": "16228eb542e121c39973d4555c68868f02661f97d17213c14ff108f711f407be"
+    },
+    {
+      "bytes": 536487,
+      "git_blob_oid": "d1faea8210563790f2cef0a274983e53e53fdb91",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-invocation-02.json",
+      "sha256": "5a88e6cc8be722a721cd5a6da5eb09d291b167d0bca238b79300223b44ea67ed"
+    },
+    {
+      "bytes": 534,
+      "git_blob_oid": "2eccba8cebe2e34eb3963cb0896e3122400dff7a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/closed.json",
+      "sha256": "f85c762612087f0f26b81027b12d3c08ef8b08ed4c0289011605a7b7f78913dd"
+    },
+    {
+      "bytes": 535304,
+      "git_blob_oid": "69ce8b20f0e5d9a6d60117f1160f49e627e281ea",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/inputs-after.json",
+      "sha256": "60889687976999441271ff7fc0b5d9753745b3893df37ac9f50ff4efdfb10bb5"
+    },
+    {
+      "bytes": 535304,
+      "git_blob_oid": "69ce8b20f0e5d9a6d60117f1160f49e627e281ea",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/inputs-before.json",
+      "sha256": "60889687976999441271ff7fc0b5d9753745b3893df37ac9f50ff4efdfb10bb5"
+    },
+    {
+      "bytes": 1332,
+      "git_blob_oid": "18db01423a381b75c51d5650bb20447cfff9a970",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/invocation.json",
+      "sha256": "c3f6bfca05a116dba087ff123606cd4a2821a064f176bf86db83c12a20ecc01e"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "0d150567cf4208d33c9a78031f2a690d31546153",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-01/started.json",
+      "sha256": "f754c7629f290a08e65944d78258d8a837f37a3cc9a7c602d484c337d2fe2625"
+    },
+    {
+      "bytes": 524,
+      "git_blob_oid": "39adb123b65cb320f84fcedf8651803a083f4d77",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/closed.json",
+      "sha256": "c1662c6b7cf3257febf1a48be53f9226cb1f57df892590051baee71e348782f0"
+    },
+    {
+      "bytes": 535304,
+      "git_blob_oid": "2ba5e51eba14db9fabf8827f071c38ac43d2572e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/inputs-after.json",
+      "sha256": "a1cc328c35e0aa331beb9e201f246f0aee90ecc21d18719c537dee27b02a0262"
+    },
+    {
+      "bytes": 535304,
+      "git_blob_oid": "2ba5e51eba14db9fabf8827f071c38ac43d2572e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/inputs-before.json",
+      "sha256": "a1cc328c35e0aa331beb9e201f246f0aee90ecc21d18719c537dee27b02a0262"
+    },
+    {
+      "bytes": 1324,
+      "git_blob_oid": "c8325bf79f7fa15fc88d20b3428eecb5c8658b00",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/invocation.json",
+      "sha256": "58edc601a775716269037fb64773e7e466a478dc16ceb981906e8eef61d13598"
+    },
+    {
+      "bytes": 313,
+      "git_blob_oid": "6abff42ebe0400d0131bce510bb86f11afc81308",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/package-review-outer-02/started.json",
+      "sha256": "63de1e2df26e38c7c960e07ee0cde04405e1347313b46f56d636a323fb36d7ec"
+    },
+    {
+      "bytes": 7277,
+      "git_blob_oid": "167b7a61bd03dd89982adf195437e1793c05f8fb",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/plan-data-inputs-01.json",
+      "sha256": "2bb0dbd46703d239ae87f04a3859455b407c28c464da5c47db5f9acf99578d25"
+    },
+    {
+      "bytes": 13459,
+      "git_blob_oid": "da3c2a41b12ef9ee73557b009473ac98429015ca",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prepare_hf_plan_01.py",
+      "sha256": "ece5a206ba9c466ec68d22bd0e5846f09d7e7fc9ddb75bc2aafc6acd9ad55bbb"
+    },
+    {
+      "bytes": 5476,
+      "git_blob_oid": "4be9e8675555ce3182184b52e6349de8f36fcfec",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prepare_phase_invocations_01.py",
+      "sha256": "993e82bbd5658b559ebbe28e2ed89913a1d060f0c6e39fe0ade7b8ebafd310a3"
+    },
+    {
+      "bytes": 5571,
+      "git_blob_oid": "54e9ada4ff2250453ca566de8e43dede23ddf0bc",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prepare_phase_invocations_02.py",
+      "sha256": "da80e8da3321ad7445e610692f4ef75e81cda93fd34a702453a3bbeb9bcd2ee0"
+    },
+    {
+      "bytes": 5942,
+      "git_blob_oid": "30e3af0ea8df9b0add16d9cbf5fc282d4ca09dee",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prepare_upload_phase_01.py",
+      "sha256": "67ca98dfd60fcc0a647239e3c47c701b422270cb8e4b97655d053533903432ee"
+    },
+    {
+      "bytes": 9695,
+      "git_blob_oid": "56ca48ec894d3afeaba4677fe0e4b5a1bd81d76e",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prior-HF-README-01.md",
+      "sha256": "918fb6a0bb98be0a5d6ca699f00ec6969d5b6ac4971bb8b1dba89c4d030ef87b"
+    },
+    {
+      "bytes": 65690,
+      "git_blob_oid": "eba567e15f052c272e9518e58317f1cf2563caef",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/prior-HF-publication-status-01.json",
+      "sha256": "40e0656445c582d9ca7624ab915eff5c622b1aab4187320d5d4cdd7c574f2802"
+    },
+    {
+      "bytes": 11491,
+      "git_blob_oid": "5e50f8b420e87c972e1ead373b34ff6c98bb9a1c",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/release-publication-ledger-01.json",
+      "sha256": "74df73cc8b705ddd2432abecbe440d459d55858279d880352cb46ba94991efb4"
+    },
+    {
+      "bytes": 8845,
+      "git_blob_oid": "27759c7fa07ec9d382a5836c87683933b1be81f0",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/review_hf_readback_01.py",
+      "sha256": "b15ed0dfc5a6c4411a0a94c7bcb4b5df4c16e00dee38e6a01454af63cb621b9c"
+    },
+    {
+      "bytes": 4872,
+      "git_blob_oid": "c951617fbc2041ce5dadf9b0ea70b410afea952a",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-publication-root-20261005-01/scan_final_upload_01.py",
+      "sha256": "9a688f074ac89a1fee08fd05c71ac287b5bd9c0be330e0b4256277df8812ee8b"
+    },
+    {
+      "bytes": 11331,
+      "git_blob_oid": "171abfe03292face7fc1889552223a4cd33524ce",
+      "mode": "100644",
+      "path": "maintenance/ranker-convergence-root-review-20261005-01/close_qualification_01.py",
+      "sha256": "ae2bc26bfddf3a15718f79d8ee25c14f93b9c81974b0bc4cf98bc95e5270fe82"
+    },
+    {
+      "bytes": 3271,
+      "git_blob_oid": "a873b752be4ac42b5a1d3495f7624d7353595aae",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/README.md",
+      "sha256": "9c7c9e6f3b6b6dc7a842d0c0f987a6fc2bd49759bb99ea0cf7793d78a559438f"
+    },
+    {
+      "bytes": 4677,
+      "git_blob_oid": "d8a96f0fd7c30e4912cdf533a9cacfd8325e15f9",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/bind_source_obligations_01.py",
+      "sha256": "268d540501780fe948912b423e1b221a51fde78721ec32eb2214daa20fd2ea0f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-gap-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "ed960500f5db797ab65e05e59c428446512d723e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-growth-01.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-minimizer-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-minimizer-02.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "ed960500f5db797ab65e05e59c428446512d723e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-original-convergence-01.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "ed960500f5db797ab65e05e59c428446512d723e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-original-convergence-02.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-pl-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-stable-factor-01.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30812,
+      "git_blob_oid": "0f79b85e091813f805a87d8ad2f974fd1c784c1f",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-lean-strong-lower-01.py",
+      "sha256": "7dec2c896613297bbe43b51025c8b601a713cd362c6b07d7098b122f76963d98"
+    },
+    {
+      "bytes": 34791,
+      "git_blob_oid": "2246580286e2b92d4d165b08154653fd561968cc",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/captured-driver-metadata-convergence-01.py",
+      "sha256": "df7d76e4a1cb27e309b8be2a4774b627d668fa345cc03ebe2b0b12e501ecaeea"
+    },
+    {
+      "bytes": 463,
+      "git_blob_oid": "c52a2f68cf57ff48893c05e6727f5b2d39ec2dfb",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01-closed.json",
+      "sha256": "17ddfdee5d9cd87ea7ebf646764770b1eae9cac11fdc612c57ad024b3480005a"
+    },
+    {
+      "bytes": 11902,
+      "git_blob_oid": "f37e580852a450e2f450c07d1f6001c88f612ebc",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/check-result.json",
+      "sha256": "e8848a7a9946e8948c2fb60f9c86aaced904f1ccbd78aaf490f06b9a8a39a23e"
+    },
+    {
+      "bytes": 17438,
+      "git_blob_oid": "9d62c204821b2312286b4f4d986d3831e613ef2b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/closed.json",
+      "sha256": "5cd2d28325df86c939605b2f8597da4e2ab29983de0ced82ac4772488dfc48f8"
+    },
+    {
+      "bytes": 989,
+      "git_blob_oid": "5d7eb96ea475fd5bdbf40a5bbfd8c054596cc53d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/lean/LeanProofChunks.json",
+      "sha256": "0bb0830415fcc17187faa06c18bac2a8f3addc25990832ebaf553a25726d3d3a"
+    },
+    {
+      "bytes": 11903,
+      "git_blob_oid": "1e32408247be3c0486751d291a42117364b4de7c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/lean/RealGapContraction.check.json",
+      "sha256": "1eb675e26f410178ab02a026f96f2add06ebff8428bc48942c13ffef4860d623"
+    },
+    {
+      "bytes": 6229,
+      "git_blob_oid": "0258ec0dad0949c3014dd708f09c5c25369d5c96",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/lean/RealGapContraction.lean",
+      "sha256": "5414a4d10594a3feeb46194d2a06ecc376f13fe21849aa2bf57a5065d814898f"
+    },
+    {
+      "bytes": 1336,
+      "git_blob_oid": "209674d551af53108336399b096edd9308a85c38",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/resources.json",
+      "sha256": "db6ea03995df7b6881a1d6dde47a19cded7eab43cd0d84b2e2303bb15257f90d"
+    },
+    {
+      "bytes": 1844,
+      "git_blob_oid": "d6f4ac15f41c887026f473a6e9084b21a7b76eb0",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-gap-01/started.json",
+      "sha256": "8b09176cdff6b3ee9905ae5cae4ea2e7b1b8f91e62652f8b259526bef0eb07c1"
+    },
+    {
+      "bytes": 467,
+      "git_blob_oid": "84c4b904ffd59d35da2f85ab2a63a6ae32db3336",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01-closed.json",
+      "sha256": "1325e4a10239f12383a635e9fb000403220caf7adbc2a5a295a9b63161b4ac62"
+    },
+    {
+      "bytes": 12409,
+      "git_blob_oid": "4a8633c59e382f622e1d48cccc773784f4856e76",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/check-result.json",
+      "sha256": "0ce1fb5b3e118e4f2b32a38d82b347a17df1a0bfaabe9344742ce8ab3f39d574"
+    },
+    {
+      "bytes": 17463,
+      "git_blob_oid": "f52e53d7a5d933eded0f90bc839cb0995cecc86b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/closed.json",
+      "sha256": "38e36eacec6261e80abccdaa19c3e16b8e2130550e9faa2ce42803ca51bd5433"
+    },
+    {
+      "bytes": 841,
+      "git_blob_oid": "189682fc1757a8d6ba57743db243b7ca43881f85",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/lean/LeanProofChunks.json",
+      "sha256": "338062fa2f4cf25fbf479af63d3eefd979d50e421785c9b10fa829859bbae7ca"
+    },
+    {
+      "bytes": 12410,
+      "git_blob_oid": "e207e311b2e20babfc2ab091a9f252b47ce4fe69",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/lean/RealMinimumGrowth.check.json",
+      "sha256": "04729bcae24726e80df14b006a00fb6d1c825fe4a2e70edf365da4ac209467d5"
+    },
+    {
+      "bytes": 7560,
+      "git_blob_oid": "8e7d3306abd2ad00b9f2b651499c623797113023",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/lean/RealMinimumGrowth.lean",
+      "sha256": "f5c5652d7202bf4d9be53b24c46666d79bbaaaadd86a3476dd3d3bf224d2bf03"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "a9c9d6e6984e68229da62c4935cc7afef8a3bd26",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/resources.json",
+      "sha256": "1cc67d96a62bfde3443d8d04f53247ae64bdd2f7ea41fcb15632e141fc3220c2"
+    },
+    {
+      "bytes": 1850,
+      "git_blob_oid": "dd512d493ad9244353a9e8942d482013277c8bce",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-growth-01/started.json",
+      "sha256": "0c237fe57c97191d2a6ac5467efa862e2f9524777810b853ad2707ed3ccea3af"
+    },
+    {
+      "bytes": 471,
+      "git_blob_oid": "288f634d4b3a25b075042b6947135439f68757c1",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01-closed.json",
+      "sha256": "9fd8a08054d8e78f89e3a203e46bfa4c4c37d550871b10275de6897f4aabe58e"
+    },
+    {
+      "bytes": 9722,
+      "git_blob_oid": "e4f27383b611da8fb0ddfdf3ab49ebb6590136bd",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/check-result.json",
+      "sha256": "93e2fb9d2e0767bc423f2134edd41bf0b0ba35c7d02d859096614ae914865cc6"
+    },
+    {
+      "bytes": 19680,
+      "git_blob_oid": "06a4edd8ec011fc97fd818e95ad0f0b27ff4da40",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/closed.json",
+      "sha256": "66a5f92c68ce96e7d497e33baf777cc309c624a1af0617b8146eb53e032e8537"
+    },
+    {
+      "bytes": 210,
+      "git_blob_oid": "aaddc333b30e188dc4862bd2fb8610d2088e83df",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/lean/LeanProofChunks.json",
+      "sha256": "e4a002205eeae87779636cd7eebab687d96435cea98dc791e2546bffe57c4e05"
+    },
+    {
+      "bytes": 9723,
+      "git_blob_oid": "d45742620b6e011ebaa00079a2ae2856639d00cc",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/lean/RealMinimizer.check.json",
+      "sha256": "d70fcfd9c5a29efba20b2db93498a3a1b31b12c1b470901de46ff2c4d9b582b4"
+    },
+    {
+      "bytes": 7112,
+      "git_blob_oid": "517e66d0f6b34c32a5bb94b8950a598e3cd331f5",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/lean/RealMinimizer.lean",
+      "sha256": "5d331d185f62149c3d57062f28fc2bbd0e582bcf9c1b27f45dbd9bbdba66ed04"
+    },
+    {
+      "bytes": 2260,
+      "git_blob_oid": "fb941b3392a34057ddcd1fc21a341c3cc73f23dd",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/resources.json",
+      "sha256": "26c3f756f60c13c959e57328c60c9e429006e3aeca8fce23f594703e7fcde3f6"
+    },
+    {
+      "bytes": 1856,
+      "git_blob_oid": "92e50694ba0f22450b90322e4d6d06a155369387",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-01/started.json",
+      "sha256": "9ac958e96f24bcfd7f55871f1157e3b0b1194a5e5f078a72eb2d69017615445e"
+    },
+    {
+      "bytes": 470,
+      "git_blob_oid": "511a9785d8cf4dcd7f17b157c36696e32c65ab2e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02-closed.json",
+      "sha256": "ebde71b52f7bc5a7bc8466d2cdb63f10e882d2b2d7946cb8e55a096f55f7550b"
+    },
+    {
+      "bytes": 12490,
+      "git_blob_oid": "d9e197787595a8f52695cdefb3847d5fe66c6f58",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/check-result.json",
+      "sha256": "c2b7246f77d736091eb1540ae3db8ce9952d6db05ea2e6f4da1f327b1489ab09"
+    },
+    {
+      "bytes": 17478,
+      "git_blob_oid": "1a1ca879280d411b38ac85ee128816b25d16f5bd",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/closed.json",
+      "sha256": "e4994963020aac3618c7c2bd9f05da15fcb45973bbba544389d855afa786d659"
+    },
+    {
+      "bytes": 839,
+      "git_blob_oid": "dc59d738f00058cff3dce2423c82925ba75dba94",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/lean/LeanProofChunks.json",
+      "sha256": "7033df3bd358407c5f776028522c4dca6c8983c79bf96a4af3c685fbdbc2f564"
+    },
+    {
+      "bytes": 12491,
+      "git_blob_oid": "51a9c1f795d7251a67eafd034c182aa7cdfab752",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/lean/RealMinimizerV2.check.json",
+      "sha256": "4cb4a86985713d74e8893c171a1252793e81383dcfa692401817f04158288023"
+    },
+    {
+      "bytes": 7169,
+      "git_blob_oid": "1e55390d7ebfac2a889f5f4692eeab24e2be6bb2",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/lean/RealMinimizerV2.lean",
+      "sha256": "2e3ce3088a3bf3a84e1cc561278516224aa59c5397f678fb667bb9ffa2dc6880"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "916fff4ebc934380ff154eaa8a3079c72c1e5abe",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/resources.json",
+      "sha256": "ec1ec36c416f16c8bec131c03b358f8a08e71d87b71ea3bff00046985389ba77"
+    },
+    {
+      "bytes": 1856,
+      "git_blob_oid": "0f9d6e1a352cff64cdb6b272eb1da3316bcbc0d7",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-minimizer-02/started.json",
+      "sha256": "dc6fe18bf9f7c5a3cd8b0c8b97dba728aee51597ecbc548ecda27108fa5145a2"
+    },
+    {
+      "bytes": 480,
+      "git_blob_oid": "6b9b62a71b0dcbd31a1a46489035e714368419a4",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01-closed.json",
+      "sha256": "75a93cf3515815221ef62989a73128904071e1c6afa1cf440a2d899415e03eec"
+    },
+    {
+      "bytes": 9494,
+      "git_blob_oid": "6fae1212fa1bd72a76e4ad1b68d65601dd7108da",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/check-result.json",
+      "sha256": "c0a50f2018c6922be901be5ac0400439aef38e399047dbbd1eef36fad151f1d9"
+    },
+    {
+      "bytes": 18603,
+      "git_blob_oid": "71d718475829c251231ff5e502a866292dd882ba",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/closed.json",
+      "sha256": "c80a09c41a46ee613ef52086f7c0371f133217ee96c518b7628e7f6a8ac9f413"
+    },
+    {
+      "bytes": 210,
+      "git_blob_oid": "aaddc333b30e188dc4862bd2fb8610d2088e83df",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/lean/LeanProofChunks.json",
+      "sha256": "e4a002205eeae87779636cd7eebab687d96435cea98dc791e2546bffe57c4e05"
+    },
+    {
+      "bytes": 9495,
+      "git_blob_oid": "2d560dbea0fff02f6a3c126880da322165181b65",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/lean/OriginalRealConvergence.check.json",
+      "sha256": "069e501ff56dbc2dde55aee24e70e50c866a35a72128492cba96867900275556"
+    },
+    {
+      "bytes": 4996,
+      "git_blob_oid": "7da7ceeb0d46b6920589923a9bd5d390cabb64c1",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/lean/OriginalRealConvergence.lean",
+      "sha256": "78c94f365804ef38edeabf1bee78498d6cc31af1676e9b8d89431379055d01d4"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "76863fe0ab32e5bcee6204a4a191703ee4b68cc3",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/resources.json",
+      "sha256": "85d95d7d1779f9013f6e0c8245012a506fca93a7cc143b5739362f577608a749"
+    },
+    {
+      "bytes": 1878,
+      "git_blob_oid": "1cd5fad614163885922aed4c9d11bdcd270747e8",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-01/started.json",
+      "sha256": "a24688541bc13acb050221a1655aa1237ffa273eb44619df73d5787c9cc4cabb"
+    },
+    {
+      "bytes": 481,
+      "git_blob_oid": "d1007b20405cc66dc0814c8bc752ead6b0700f9a",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02-closed.json",
+      "sha256": "8a4dd20dd19fdcedc6eb3c4e56b12317748ca1f808f2507b6fda6884fc6ef6c7"
+    },
+    {
+      "bytes": 10623,
+      "git_blob_oid": "4d6a7ffb20d233fc9c5935bc6e3b710485729674",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/check-result.json",
+      "sha256": "c26b9781daa03872d6ec6b42111822357a9f43ee703b06f30e8910b6731f5dd1"
+    },
+    {
+      "bytes": 17533,
+      "git_blob_oid": "6ab68ab159b807735af35a84ee4f857c71fa7b31",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/closed.json",
+      "sha256": "70ae9819293f1b1bca3a0eaa7bf85dbbdb434e601c0d128ee3179a64fa618494"
+    },
+    {
+      "bytes": 700,
+      "git_blob_oid": "fcb8d28040ad67e06d6b7df02b73254f98a3060e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/lean/LeanProofChunks.json",
+      "sha256": "e76e61582aa25cb8d9fefccdc49a38c4e799e01f4ae22d18a54b9356cae5991a"
+    },
+    {
+      "bytes": 10624,
+      "git_blob_oid": "0255424021ecff86c5e9f705b64a6f72c6878a3e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/lean/OriginalRealConvergenceV2.check.json",
+      "sha256": "7653975ec314876aff786909d78110549c9feb89625ad8ba4e4e751a20c48016"
+    },
+    {
+      "bytes": 5060,
+      "git_blob_oid": "c95d34cf356abe4efc8f2a35cf1c6d7c642a569e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/lean/OriginalRealConvergenceV2.lean",
+      "sha256": "f09a14c34bd891393d1acb2d0417fc2ddfdf4ca157fd83428c80639d16a97117"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "90a88c1b7295277719c2b7f9da1d51c495984c74",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/resources.json",
+      "sha256": "e363b43d16e88e3e8b42443441d9ad69ecc733b2bfbeb7358e6f5ce83226e339"
+    },
+    {
+      "bytes": 1878,
+      "git_blob_oid": "b323d8c508cb08480b8be9ce84802a0057c84a2c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-original-convergence-02/started.json",
+      "sha256": "6a3ff379c2797d29514fc1ae89c816442f582cf29c15aa7685641ed9c89aa88e"
+    },
+    {
+      "bytes": 463,
+      "git_blob_oid": "96760e4d3d6370fd58d3550188e1ba02508fdc0b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01-closed.json",
+      "sha256": "926240664354877bb1281d62c6d7aad4a3835a3cc773679a823ec6ef82502160"
+    },
+    {
+      "bytes": 10872,
+      "git_blob_oid": "f905ffb6618ffc8d799ebc621ed2ffdb24df86aa",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/check-result.json",
+      "sha256": "4331a7022fe1159ad5638c0ff1af69cdafb06612b54d8302760d1a48dd650012"
+    },
+    {
+      "bytes": 17443,
+      "git_blob_oid": "bf30f21b117336a1f79f1df2d471eadc08ef4575",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/closed.json",
+      "sha256": "11fd90eb3b29d4fd8231b2c41582cfe6405dfb1ed7816836b2f921db2e303c0b"
+    },
+    {
+      "bytes": 830,
+      "git_blob_oid": "b427489d46648a1d061598539c94847957632b04",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/lean/LeanProofChunks.json",
+      "sha256": "df25b84ddbd308430d1aaba1f617dccf7afb839b802a3b3f546527b9f02505d3"
+    },
+    {
+      "bytes": 10873,
+      "git_blob_oid": "0629c82ad26faa61f65e30a538d67628e7e49f45",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/lean/RealPL.check.json",
+      "sha256": "9948717ab90edf5eacb7f67d28aca6e0f15d40621eac924b6d846277d23176df"
+    },
+    {
+      "bytes": 4252,
+      "git_blob_oid": "8047ceed3385c1bde947bfc582ab43032f26f59e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/lean/RealPL.lean",
+      "sha256": "f4a5a13403f74cf946830836dd8d2cb816dccfe1abae6723004418bf36dfceee"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "a054f7e99ae989e212296a657a4e69ee5553de23",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/resources.json",
+      "sha256": "a3c8323167de7d6d3c33bbaaf9d9ff9f332986985ce0c59815085e8f17131a89"
+    },
+    {
+      "bytes": 1842,
+      "git_blob_oid": "e7becad3ce68943a3ddc92efa73a5aa9995171aa",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-pl-01/started.json",
+      "sha256": "79977ae17a4182a8b50d940127fae39d132aa10955d48edc9c46900719449744"
+    },
+    {
+      "bytes": 474,
+      "git_blob_oid": "0d4ef2326d85344d08771074cce6091368e703de",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01-closed.json",
+      "sha256": "10bd9a8c04491dba08f6df244a4c2c5dc049ee89a1a3f01b488c064f7fb42d70"
+    },
+    {
+      "bytes": 9253,
+      "git_blob_oid": "33f53d72c9374eed55901b3c285848182ec9ea15",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/check-result.json",
+      "sha256": "25adf30103c3d7455df5c7fff9eedf6b9e4ceb1fbd5263e919247ed18588e0f5"
+    },
+    {
+      "bytes": 17497,
+      "git_blob_oid": "da567f6036bca62349ee69866844366b6bd9daf1",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/closed.json",
+      "sha256": "7215d13fa3f6330b4983646dc108e74baeb83636ccd9f7eb680fae65f0dff179"
+    },
+    {
+      "bytes": 691,
+      "git_blob_oid": "ff5f508d7203df3ebe025bf14094a399b082f332",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/lean/LeanProofChunks.json",
+      "sha256": "2e5288ac5487bfce42c0116cc93ab2371b74aa23f7296f85ed686d6aed09f739"
+    },
+    {
+      "bytes": 9254,
+      "git_blob_oid": "c39daa22b58362760590a9c779e49935b4fb569c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/lean/RealStableFactor.check.json",
+      "sha256": "e16f33c509b217711fbd99dc46a0205d156b7ebf31a031f5b902a53fd77630e6"
+    },
+    {
+      "bytes": 1901,
+      "git_blob_oid": "d746340bfdce854e00d6944c0a498fc02fe12d64",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/lean/RealStableFactor.lean",
+      "sha256": "45946085a5c34d394acc5cc160f813ef1e0c4d6d03a5e7fa92eda22cb0bc4624"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "50cb69a0a59f01034e04945c14ab7812e2f5b605",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/resources.json",
+      "sha256": "5dba7954f68263a5f9450a3b9492a999707dffb0d781bd4711b9331429a69264"
+    },
+    {
+      "bytes": 1864,
+      "git_blob_oid": "2c30a1a535417a1a8efe80d483997a5608846ae4",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/started.json",
+      "sha256": "567cecfee2ea02c9cc3e92fa21e484f3cb1437828639eba4ce53e1043f7106fe"
+    },
+    {
+      "bytes": 472,
+      "git_blob_oid": "c1a24732534181c87d782d75e43fdd0082681c40",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01-closed.json",
+      "sha256": "bdafe1e1ad3a7fdc63b6db8c7af28c27ac7fc9b4d0b4d950fb34680cc3fd708e"
+    },
+    {
+      "bytes": 11095,
+      "git_blob_oid": "4cb59106f817d09b5ff0339b588a7cddbdce472a",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/check-result.json",
+      "sha256": "7c801fee36f5d96f9813fbd634ef215f7161d407f41a7ae6307e70ecd8c2c6eb"
+    },
+    {
+      "bytes": 17492,
+      "git_blob_oid": "43519346137490d00ca834b16390f05b266d9e67",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/closed.json",
+      "sha256": "a174edb3f378f0f41d9e1ad6d2179a1bfefc0d03efa4d60c6a14f1b6fef29f35"
+    },
+    {
+      "bytes": 839,
+      "git_blob_oid": "205786195dd57d79927a3be7cc49652a23484bd2",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/lean/LeanProofChunks.json",
+      "sha256": "28639551c0e21766c0886fd557e9ebe5a61eb18155c8617a5e625260963362ca"
+    },
+    {
+      "bytes": 11096,
+      "git_blob_oid": "fa100e8c309d3465ae7069569bbd1723144a5135",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/lean/RealStrongLower.check.json",
+      "sha256": "81b83bd03f807403cc1ac466ec4748525bce6e986a7f6acb6d2fc2062e4929f4"
+    },
+    {
+      "bytes": 4811,
+      "git_blob_oid": "a57047f8142b17e2f4f1213768c14413a319c4d5",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/lean/RealStrongLower.lean",
+      "sha256": "078f984af75c4fbf7098d449a5a84c955b025c26cec62de12f1bf148dc427331"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "916fff4ebc934380ff154eaa8a3079c72c1e5abe",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/resources.json",
+      "sha256": "ec1ec36c416f16c8bec131c03b358f8a08e71d87b71ea3bff00046985389ba77"
+    },
+    {
+      "bytes": 1862,
+      "git_blob_oid": "36598f2bc18deaaa3e538d3c014ffe64339609d6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-strong-lower-01/started.json",
+      "sha256": "3e2d1a1f2664b25ba7ba11e478883fdb55459b797f305da3df3241b9a92581d3"
+    },
+    {
+      "bytes": 477,
+      "git_blob_oid": "bd4ffde4d8a4bb80ff4dc7365a567a930a505491",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01-closed.json",
+      "sha256": "69cbe5253be9619a1ed180a2051a2b8d9f76d467efc764112d0ef9cd603a1360"
+    },
+    {
+      "bytes": 19872,
+      "git_blob_oid": "07fc372b5bf7da568aa74e68519ce0f4c22e2abe",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/closed.json",
+      "sha256": "ad579fa3a8964bb22ffa41570b96a319823355f097017e71b7d36025b77c8b56"
+    },
+    {
+      "bytes": 32329,
+      "git_blob_oid": "c9a0cc88d6a9c491db0d09acdc61b23e20c9e47c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata-readback.json",
+      "sha256": "247d0715ba3183201c1131e3a4c96442024df92c55969f7cc9e3c3a4d24ee908"
+    },
+    {
+      "bytes": 982,
+      "git_blob_oid": "618a5ace677514699cd2c577a63c97d6973a4e2e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata/lake/history.json",
+      "sha256": "070551f8eb1d683e6f23e5f465fcb19831901b04f3c22ebbaee1a18f97c0cd06"
+    },
+    {
+      "bytes": 26754,
+      "git_blob_oid": "55b67a491bbea8d58203fe45a563437ce7756c48",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata/manifest.json",
+      "sha256": "621de650329bffa6a47838e8ccb3b8403c8049055e214f2a1e3dadcf7f21f6d5"
+    },
+    {
+      "bytes": 1341,
+      "git_blob_oid": "a054f7e99ae989e212296a657a4e69ee5553de23",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/resources.json",
+      "sha256": "a3c8323167de7d6d3c33bbaaf9d9ff9f332986985ce0c59815085e8f17131a89"
+    },
+    {
+      "bytes": 1671,
+      "git_blob_oid": "0b5a7ce8c8a6dcbbe633b4554afecf5aa494b32c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/source-snapshot.json",
+      "sha256": "56088d71137345c26a6c889976cfc4fbfb8095f7d6844ee4b333f96263b5d6f0"
+    },
+    {
+      "bytes": 1868,
+      "git_blob_oid": "943ff13ca63f462049eef48137625e26e38dcf65",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/started.json",
+      "sha256": "45d1c2e92cef5f3dc53f1407fc63937a3660ddeca11b8010d32f223fc46d7e6d"
+    },
+    {
+      "bytes": 112015,
+      "git_blob_oid": "348083802e7fd75fc029b43908bf5fbe4ebfcb28",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/file-only-seal-01.json",
+      "sha256": "6ee7b5d675777e8cc9744c9072ee7f885cb8fc47a9204c1a40d9724632012648"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 4289,
+      "git_blob_oid": "9060a9031757e979ce0755a2ec51d053d2fe9b88",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/freeze_lower_profile_01.py",
+      "sha256": "63062ab2b0f2837c99e183df5d971993f071b6f90c251ebcd050f958ac1ad027"
+    },
+    {
+      "bytes": 4763,
+      "git_blob_oid": "e87fcb42112f7dbeb93a75a5a6b9b1e68b5e016b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/OriginalRealConvergence.lean",
+      "sha256": "eebf0815c95f8247f6a156e9d972fbb19c57eed8da4be374a88a7ce2b8317b0c"
+    },
+    {
+      "bytes": 4827,
+      "git_blob_oid": "aac1ff2e09dea9709edfc960214bcc0bea3a86a6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/OriginalRealConvergenceV2.lean",
+      "sha256": "c423d7114996e9f6d1785684b291ca09fde589ae8006d846cdbcd6feb8405469"
+    },
+    {
+      "bytes": 5799,
+      "git_blob_oid": "64c081a792e97a18156c798df36e83266c568178",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealGapContraction.lean",
+      "sha256": "f548594b460e63c288f28fefd681224ae9fa598e545f2bca5d5f1a77b7aee8b3"
+    },
+    {
+      "bytes": 6460,
+      "git_blob_oid": "5d00bde6e6d94d108334ac31d9e5a1339e8aa3d9",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealMinimizer.lean",
+      "sha256": "16339d15b34d822db054b8239087940a9e9a75e0b4364856bc3438cf7df251bf"
+    },
+    {
+      "bytes": 6517,
+      "git_blob_oid": "efced9d3d6c66c034fee85e7dd3f92fe9342e133",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealMinimizerV2.lean",
+      "sha256": "7a38abd3651b1cfab1c17d60789356f63189fa30ec9fe111d7872611f062ad73"
+    },
+    {
+      "bytes": 6906,
+      "git_blob_oid": "74ecef900cbd7ae0299061fd16915b1db2521302",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealMinimumGrowth.lean",
+      "sha256": "aa502dbba4fb11dab6ebbd6f3f16a2c58588753791bd64bf8333a8d398917b3c"
+    },
+    {
+      "bytes": 3863,
+      "git_blob_oid": "a64103bd7d3ae1491468dddc3d0e17205d94a162",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealPL.lean",
+      "sha256": "e2800d4368455db0f9e1fc1ea6ed2eb2786a92b19580b6a9d2d11d6c3f8cc885"
+    },
+    {
+      "bytes": 1767,
+      "git_blob_oid": "46d95a9eebf36e1b544b6844a5d5172ff1f1d1c6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealStableFactor.lean",
+      "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+    },
+    {
+      "bytes": 4405,
+      "git_blob_oid": "362aa129b20d1f9d79950f149aeed0a7d09533c3",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealStrongLower.lean",
+      "sha256": "b4196a1637cffe9cde7728355f2833767a6867f187d06d2614f7a251be778744"
+    },
+    {
+      "bytes": 3196,
+      "git_blob_oid": "94c8be13774bf93f000c34c224b7ec209f1b7b82",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/next-obligations.json",
+      "sha256": "7f7fe204c3994fb1ad03d2d6de452399cf705ee9e51b3e6afaa6c9da4ad5a974"
+    },
+    {
+      "bytes": 1722,
+      "git_blob_oid": "9f004f32498ae9cc326e9bfec8e6212bce62cb58",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-check-specification.json",
+      "sha256": "584fd08d485670301b33402a8fd9774f03798d083f2d3f8a2009c17693d8d4cf"
+    },
+    {
+      "bytes": 4073,
+      "git_blob_oid": "b9c9719e099a517b5331310f8b60ff58fe2d991c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-invocation.json",
+      "sha256": "0bf6a013c4b5175892c451da501e91d63b33c0687c8111f8da75f523704cdebe"
+    },
+    {
+      "bytes": 5799,
+      "git_blob_oid": "64c081a792e97a18156c798df36e83266c568178",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/RealGapContraction.lean",
+      "sha256": "f548594b460e63c288f28fefd681224ae9fa598e545f2bca5d5f1a77b7aee8b3"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-gap-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1919,
+      "git_blob_oid": "b075896835e72a689706a038eb67a2d675bbe433",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-check-specification.json",
+      "sha256": "45af05aa9cacfe40e3df35773f5f3e5f90cba3788f150667b557090a473282bc"
+    },
+    {
+      "bytes": 4107,
+      "git_blob_oid": "48681dcdcb53ad83b86a0c50b584f1982e00be7e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-invocation.json",
+      "sha256": "e6c4fc7a875fe5b956d27c1f6737dc66df668d6fc8d0f513e7b4f4c6532bbb7e"
+    },
+    {
+      "bytes": 6906,
+      "git_blob_oid": "74ecef900cbd7ae0299061fd16915b1db2521302",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RealMinimumGrowth.lean",
+      "sha256": "aa502dbba4fb11dab6ebbd6f3f16a2c58588753791bd64bf8333a8d398917b3c"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-growth-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1906,
+      "git_blob_oid": "19cd1742b92385ea5fb5b77386d52c4f7e56b20f",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-check-specification.json",
+      "sha256": "9d11efb88aecf260f7a3cb6efd62d0e6c7dbf570d17e191a4126181293806f37"
+    },
+    {
+      "bytes": 4135,
+      "git_blob_oid": "f8a9923d2bd5f4dc74601c4e4b1cf7c925233a9a",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-invocation.json",
+      "sha256": "fa8a122d168ce87f609eb3e59f0ba5fc43562f6da35a2c2e504d7dc88eefc7af"
+    },
+    {
+      "bytes": 6460,
+      "git_blob_oid": "5d00bde6e6d94d108334ac31d9e5a1339e8aa3d9",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/RealMinimizer.lean",
+      "sha256": "16339d15b34d822db054b8239087940a9e9a75e0b4364856bc3438cf7df251bf"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1908,
+      "git_blob_oid": "ef327d65c5efd1e305963ad9f5299d0eb52dd568",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-check-specification.json",
+      "sha256": "c2e9bd08876fb9b2829f8a234b6876ca7acc2bd24f25941ad9aa71868f8d0ead"
+    },
+    {
+      "bytes": 4139,
+      "git_blob_oid": "9c87646c5f553ae12b2584880900ed8e69aa353c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-invocation.json",
+      "sha256": "bdac48d8bd1d3ff22aaa3895215d60053b60129f37ddbe1c21e48b9dc6bf365f"
+    },
+    {
+      "bytes": 6517,
+      "git_blob_oid": "efced9d3d6c66c034fee85e7dd3f92fe9342e133",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RealMinimizerV2.lean",
+      "sha256": "7a38abd3651b1cfab1c17d60789356f63189fa30ec9fe111d7872611f062ad73"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-minimizer-02-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1655,
+      "git_blob_oid": "20f89a1d572223b68e51f0c16b1c5942b4542458",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-check-specification.json",
+      "sha256": "f9360fd038fcc3ff103a9a54e5fd1ea311e89a3d132d629430b5e8e4f257d65e"
+    },
+    {
+      "bytes": 4287,
+      "git_blob_oid": "724588dd056e09e434e261be1cc7fab171179b1b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-invocation.json",
+      "sha256": "9cdb716b6748e5277c932f40f3a7251a0cfae3a5d43c6260d9d57e6429adb7c4"
+    },
+    {
+      "bytes": 4763,
+      "git_blob_oid": "e87fcb42112f7dbeb93a75a5a6b9b1e68b5e016b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/OriginalRealConvergence.lean",
+      "sha256": "eebf0815c95f8247f6a156e9d972fbb19c57eed8da4be374a88a7ce2b8317b0c"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1657,
+      "git_blob_oid": "2322a4899771f07202be3abc7aec18323d9494d1",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-check-specification.json",
+      "sha256": "47130054807dfbee6fdfd675d4bd68c24c19b95a823495d65ca695fe02d542f5"
+    },
+    {
+      "bytes": 4291,
+      "git_blob_oid": "e66cecc171114562c07179f3213a4038e6ea2d50",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-invocation.json",
+      "sha256": "3b4845d3e37a07310237d5fac6485cfefc9afd3f9c02aac85c46af642c1bd52d"
+    },
+    {
+      "bytes": 4827,
+      "git_blob_oid": "aac1ff2e09dea9709edfc960214bcc0bea3a86a6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/OriginalRealConvergenceV2.lean",
+      "sha256": "c423d7114996e9f6d1785684b291ca09fde589ae8006d846cdbcd6feb8405469"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1684,
+      "git_blob_oid": "8b69689a7cd97eda63d5a29dd9e025825d294e4e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-check-specification.json",
+      "sha256": "ac281b521181c9413456a7f2aea7343d94a74b22ecaa18d9b38df9299eb1bff0"
+    },
+    {
+      "bytes": 4037,
+      "git_blob_oid": "2ea4cc99c3e7d41ef966988c0adf7bf1567d6a23",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-invocation.json",
+      "sha256": "bb6e167f9ccd6eeb04713d4ea6f83afe62f2288173734d3517ee58dc64dbf392"
+    },
+    {
+      "bytes": 3863,
+      "git_blob_oid": "a64103bd7d3ae1491468dddc3d0e17205d94a162",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/RealPL.lean",
+      "sha256": "e2800d4368455db0f9e1fc1ea6ed2eb2786a92b19580b6a9d2d11d6c3f8cc885"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-pl-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1540,
+      "git_blob_oid": "43ab2b3c90c74e641ffb9b52ead1fb7100813d9d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-check-specification.json",
+      "sha256": "de371519d9b91ca735e04508435f1de70384ae5e35df8996d298596f216539a2"
+    },
+    {
+      "bytes": 4189,
+      "git_blob_oid": "377ee2cf5e5190304f07ed83f00a475c5c5f1ae7",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-invocation.json",
+      "sha256": "c3f98c1b8413c304c2d1af2fe3dfde079ce19eed173ff9f6d1bb3b80f7dc9f9d"
+    },
+    {
+      "bytes": 1767,
+      "git_blob_oid": "46d95a9eebf36e1b544b6844a5d5172ff1f1d1c6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RealStableFactor.lean",
+      "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 5956,
+      "git_blob_oid": "c8adfa7dda7bc83338b35998676dfaed674a4413",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-stable-factor-01-producer/freeze_convergence_profile_02.py",
+      "sha256": "a31c8ef6694eb81b594bce668f017d70748985e2c82cbf002baff613df36606e"
+    },
+    {
+      "bytes": 1725,
+      "git_blob_oid": "1bceecf4119ffdfeaca6559cb890037a44699594",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-check-specification.json",
+      "sha256": "850ec85acb37493ae94a252924d572ba3e6c48f3b646a57bf665ba9509d322bb"
+    },
+    {
+      "bytes": 4169,
+      "git_blob_oid": "94319fe35bbeabe905d461af5f892da18d259687",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-invocation.json",
+      "sha256": "b5dc2b9f223eee4502ec4a68dee36e39a2afa8d84c643d4897d96f15564efd32"
+    },
+    {
+      "bytes": 4405,
+      "git_blob_oid": "362aa129b20d1f9d79950f149aeed0a7d09533c3",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/RealStrongLower.lean",
+      "sha256": "b4196a1637cffe9cde7728355f2833767a6867f187d06d2614f7a251be778744"
+    },
+    {
+      "bytes": 5828,
+      "git_blob_oid": "9329e7f1bcebb066dce6a6d2469fe1e8d1dae5f6",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "git_blob_oid": "dc3cd72cbdcfcd005653b184c1ddd8de83b2cf4b",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 4289,
+      "git_blob_oid": "9060a9031757e979ce0755a2ec51d053d2fe9b88",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-strong-lower-01-producer/freeze_lower_profile_01.py",
+      "sha256": "63062ab2b0f2837c99e183df5d971993f071b6f90c251ebcd050f958ac1ad027"
+    },
+    {
+      "bytes": 2027,
+      "git_blob_oid": "75416b377f3de97ccbfa840fbdbcd6ffa5796dcd",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/metadata-convergence-01-invocation.json",
+      "sha256": "3a06c8f8dd60657f0a38720215ac02fd265acebf13766413fed494d822042ebc"
+    },
+    {
+      "bytes": 417673,
+      "git_blob_oid": "b0244e81dd1c88ed62f3ba006318c0d9da721c2e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v2.json",
+      "sha256": "829d2ec981840753eee2bcfc73965828cf6bb86ae8ca10387bfe9229dd7f3857"
+    },
+    {
+      "bytes": 417675,
+      "git_blob_oid": "43ac17d80cc3c27b6253ee4b26573f43e54d387c",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request-v3.json",
+      "sha256": "1d7d6efb49bb951d0cf2470d8b93d79a73e25cbd42961624ca263ee40314e458"
+    },
+    {
+      "bytes": 417618,
+      "git_blob_oid": "3f06a667cd6ac603d5f1d50abfc971bc6b3ada0d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/request.json",
+      "sha256": "eb755a2b02505be51f698e06994e7bc17e90217c74da74b67af5826fd45e58a8"
+    },
+    {
+      "bytes": 22341,
+      "git_blob_oid": "86534709e5b7d88880566cb6712a71dd19f3acb4",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/qualified-review-01.json",
+      "sha256": "eebf40b5de2822faef1293a62578da208b582131e44c8a1f3e0d060071b6d0e7"
+    },
+    {
+      "bytes": 30812,
+      "git_blob_oid": "0f79b85e091813f805a87d8ad2f974fd1c784c1f",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/run_convergence_controls-v1.py",
+      "sha256": "7dec2c896613297bbe43b51025c8b601a713cd362c6b07d7098b122f76963d98"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "9b9b912e0a40d4640bba2ebac81435cfa2ae035d",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/run_convergence_controls-v2.py",
+      "sha256": "dcc56b660b9f58f186c81d6585410cba1ba9c25d17873b10eb82ee209910b90f"
+    },
+    {
+      "bytes": 30818,
+      "git_blob_oid": "ed960500f5db797ab65e05e59c428446512d723e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/run_convergence_controls-v3.py",
+      "sha256": "17a7301d84e2bd4d0e268b51fd7ba81126df53a5b2fe8342eb8212e51741b927"
+    },
+    {
+      "bytes": 34791,
+      "git_blob_oid": "2246580286e2b92d4d165b08154653fd561968cc",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/run_convergence_controls.py",
+      "sha256": "df7d76e4a1cb27e309b8be2a4774b627d668fa345cc03ebe2b0b12e501ecaeea"
+    },
+    {
+      "bytes": 30154,
+      "git_blob_oid": "d1d4483b250f571d85a5540126f9f9697485d7cb",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-20261005-01/source-model-obligations-01.json",
+      "sha256": "19cf94e462dfc0541953832b57861c78f9fdddf2db6d392bde0da70d4d252304"
+    },
+    {
+      "bytes": 5809,
+      "git_blob_oid": "a75a4d6748d9c05c96119748dfd54be9e31196b3",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealGapContraction.lean",
+      "sha256": "d41f6ad73a6b877063d6f2a2b8284b820b7b07e0a9cb3f5d5ab53d027ecd3746"
+    },
+    {
+      "bytes": 6447,
+      "git_blob_oid": "e77f0376cdd9465cc40b6327d98f1bc4446f1e03",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealMinimizer.lean",
+      "sha256": "32b53d9b46e17e8de76e342916ca6e65c8de985a2c3269b734e40fb3038e16a8"
+    },
+    {
+      "bytes": 6916,
+      "git_blob_oid": "e8178b267d6141efaa0f9270af4c0efb05f8b930",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealMinimumGrowth.lean",
+      "sha256": "bdb0b2616ae23d8032d375f5649570046791953bd4e76cb37d02444a81b81f10"
+    },
+    {
+      "bytes": 3873,
+      "git_blob_oid": "2f66f65fe5fbb98684d594e35552efa3e42e26ff",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealPL.lean",
+      "sha256": "10e3805d7844b7db75637c4c4a372a5552223ec2fc55bc1ec674b7f311a19a39"
+    },
+    {
+      "bytes": 4410,
+      "git_blob_oid": "1612e8ce5bc7eb0b2fe454a15628a6d1ab09d75e",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/drafts/RealStrongLower.lean",
+      "sha256": "2dac766100733d7b7c5acf027edde048bffbcb5d96f345393b5fd5d2a63cd993"
+    },
+    {
+      "bytes": 6097,
+      "git_blob_oid": "032367b3e215dd274a3d8ba84a5c741cd3034a02",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan-gap.json",
+      "sha256": "749cbcda026c597a084579af0c9ef80aecaba0cde0792f01c34f0008e31a1ee7"
+    },
+    {
+      "bytes": 5252,
+      "git_blob_oid": "d0991609616d0a53f368625e03a6e1a6caddc182",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan-growth.json",
+      "sha256": "df8c02953d29b9519bbe2ef17c275ff932062f164485bcd21e5a3c3be2c50961"
+    },
+    {
+      "bytes": 4889,
+      "git_blob_oid": "e26fa1f38e3628b7162a0e2b5b7460d44b2a68e2",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan-minimizer.json",
+      "sha256": "0e3966de712b4f863973e94c6dd7720555773d8385c28512c73a952f2e998716"
+    },
+    {
+      "bytes": 4506,
+      "git_blob_oid": "00de3e07cb9994b2a8c785b4b3dbbf351684a7a7",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan-pl.json",
+      "sha256": "0092e253a6bf2719371ee8909a14b715b4463bcd8a8f400ae1f2771a35eaa4f0"
+    },
+    {
+      "bytes": 13239,
+      "git_blob_oid": "f30293d94a58889823011f44598cd289d698dead",
+      "mode": "100644",
+      "path": "qualification/codebase_ir/ranker-real-convergence-source-plan-20261005-01/source-plan.json",
+      "sha256": "e6c55ce90500c0e6e205c89d97f7e21345d9cf0a22d69a88e4649fc6ff334d7d"
+    }
+  ],
+  "remote_target": "origin/main",
+  "remote_tree": "6f01bdebfbeddb9a05692325dedc9fd32b9784e5",
+  "schema": "ranker-convergence-GitHub-complete-publication-closure@1",
+  "sealed_Q3_P4_S2_mutations": 0,
+  "started": {
+    "bytes": 1414,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-convergence-git-publication-20261005-02/started.json",
+    "sha256": "d6a49ad029712968037509a0125366d5568875d1b21f89f3d640cef1032c9b2b"
+  },
+  "status": "PUBLISHED_AND_VERIFIED",
+  "title": "Qualify original real ranker convergence and publish proof-index evidence",
+  "tree": "6f01bdebfbeddb9a05692325dedc9fd32b9784e5"
+}

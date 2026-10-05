@@ -1,0 +1,74 @@
+{
+  "all_selected_local_pins_rechecked": true,
+  "commit": "fae2e38dc882929edb2bcd2226560f0da3dfcd9e",
+  "committed_total_regular_files": 331,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T15:22:43.408330+00:00",
+  "execution_authority": false,
+  "fresh_public_main_after_tree_matches_commit": true,
+  "fresh_public_main_matches_commit": true,
+  "model_training_calls": 0,
+  "parent": "d6b6e333f3b1bcfe9028a8ca5ac3be6b12256e8a",
+  "prior_immutable_files_preserved": 274,
+  "producer": {
+    "bytes": 8935,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/review_hf_readback_01.py",
+    "sha256": "231f61b3bc3bc2dfcc1cce54d48bed560e6f7270ae04e461e151cccdf0c1e9f8"
+  },
+  "proof_authority": false,
+  "prover_calls": 0,
+  "public_main_readback_url": "https://huggingface.co/api/datasets/Publicus/codebase-ir-proof-index/revision/main",
+  "public_tree_readback_url": "https://huggingface.co/api/datasets/Publicus/codebase-ir-proof-index/tree/fae2e38dc882929edb2bcd2226560f0da3dfcd9e?recursive=true&expand=false",
+  "raw_SDK_logs_read": false,
+  "receipt_pins_before_after": [
+    {
+      "bytes": 26576,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-plan-01.json",
+      "sha256": "f063bb98cbc6e97137be63af7cc912484a503f4a366223b0fe31b6fa6637381f"
+    },
+    {
+      "bytes": 28095,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/final-upload-scan-01.json",
+      "sha256": "a5aa2abe3d937614db19687ccde76fd92b837e0db64a24414455e6f70e446d59"
+    },
+    {
+      "bytes": 636412,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-publication-invocation-01.json",
+      "sha256": "2957b7e9953d125f8d3603371c7d47f52bf2e20904fa751557b1d554e2a9b2e1"
+    },
+    {
+      "bytes": 561,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-publication-outer-01/closed.json",
+      "sha256": "57e587a3f23df629a0c2f548570d5b775ab3460a88400a50c735253cecb8ff85"
+    },
+    {
+      "bytes": 93562,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-publication-01/remote-before.json",
+      "sha256": "c882d3d7644318b4fb2bf46735032c973a071890bb7baeebbc914e46da96ce27"
+    },
+    {
+      "bytes": 170,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-publication-01/commit-observed.json",
+      "sha256": "22489abf0327b8cb10b6e466012b6f9cf14fc941bab5549237b9b17cc0d525c6"
+    },
+    {
+      "bytes": 32016,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-publication-01/verified-files.json",
+      "sha256": "eb94451a6130651673b96e8bc8aab2dc6cce2cd32df8a18da10de328a8c64979"
+    },
+    {
+      "bytes": 887,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "25893c408afc28cb6f14ee67a335488271c347b7d7c0a5e2153ca1f6a71edef0"
+    }
+  ],
+  "remote_mutations": 0,
+  "schema": "ranker-source-slices-public-HF-readback-join@1",
+  "selected_bytes": 15799007,
+  "selected_files": 57,
+  "status": "passed",
+  "verification_methods": {
+    "committed_LFS_SHA256_and_size": 8,
+    "downloaded_small_file_SHA256_and_size": 49
+  }
+}

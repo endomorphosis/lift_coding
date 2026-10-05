@@ -1,0 +1,253 @@
+{
+  "CPython_math_fsum_semantics_proved": false,
+  "additive_metadata_payloads": 23,
+  "all32_governing_RPI_exits": "OPEN",
+  "all_owned_leases_drained": true,
+  "all_prior378_regular_leaves_unchanged": true,
+  "atomic_whole_source_snapshot_claimed": false,
+  "binary64_error_bound_proved": false,
+  "closure_plan": {
+    "bytes": 2026,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-root-review-20261005-01/closure-plan-01.json",
+    "sha256": "9f9f0b0e36a4822effd9fba01539c061d396d3d97aa8b6146ddd074534bde02c"
+  },
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T14:47:26.011922+00:00",
+  "emitted_dot_exact_real_projection_proved": true,
+  "emitted_update_exact_real_projection_proved": true,
+  "execution_authority": false,
+  "feature_preparation_to_IR_translation_proved": false,
+  "full_task_satisfaction": "unknown",
+  "full_training_loop_to_IR_translation_proved": false,
+  "global_autoencoder_convergence_proved": false,
+  "historical_execution_origin_proved": false,
+  "host_parser_correctness_theorem_proved": false,
+  "inconclusive_native_lean_checks_retained": 1,
+  "independent_reviews": [
+    {
+      "bytes": 4451,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-emitter-v2-review-20261005-01/review-receipt.json",
+      "sha256": "e1898c75757f99496ced1a7b6f46698974c243a6e86bda8044bd86e49d952bec"
+    },
+    {
+      "bytes": 3659,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-v2-review-20261005-01/review-receipt.json",
+      "sha256": "389c846228b7d1e0c00bda272188a77c7c5edab971e5af9874061e33d2f1b28c"
+    },
+    {
+      "bytes": 10415,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-semantic-native-review-20261005-01/review-receipt.json",
+      "sha256": "02eaceb1c54ce1d4a179459b0f748a4c68c44d8b7800df7d562b6d31f79ec901"
+    },
+    {
+      "bytes": 5009,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-metadata-builder-review-20261005-01/review-receipt.json",
+      "sha256": "789dc7f19ade29e545149e267df2c31885b26b180f825ed0dee1273fd0120e52"
+    }
+  ],
+  "metadata_build_receipt": {
+    "bytes": 7531,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-source-01/build-receipt.json",
+    "sha256": "ffc066a92f4476a9fc3dcb991651d8689418d29f1a2552f2de371d25179ec98d"
+  },
+  "metadata_family_count": 32,
+  "metadata_payloads": 4440,
+  "native_Float_optimizer_convergence_proved": false,
+  "native_checks": [
+    {
+      "environment_manifest": {
+        "bytes": 9969244,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/environment-manifest.json",
+        "sha256": "e7db6a10a522f64496560a07343213b795def126972f804ba7091f174a02a8b7"
+      },
+      "mode": "lean-generated-slices-01",
+      "outer_closed": {
+        "bytes": 477,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01-closed.json",
+        "sha256": "6276d35a709f49b28ca9e7db856587f60a537304b7ccfee0c88448aba82bc5b0"
+      },
+      "owned_closed": {
+        "bytes": 15715,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/closed.json",
+        "sha256": "3da906c0dc0c01c59b038a93e74f33afac844d8510f5048a3bafbf83a36c63d6"
+      },
+      "qualification": {
+        "bytes": 11597,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/check-result.json",
+        "sha256": "2261dc8f8effc5449c7b37db95f8a3f834c9e4b14135d6ea2d5df62563188a7b"
+      },
+      "source": {
+        "bytes": 3129,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/GeneratedNumericSlices.lean",
+        "sha256": "841cc68dd9ef75e76398804ca5c0f2e33cef100611f2c3755c26ee24c9491297"
+      },
+      "status": "passed"
+    },
+    {
+      "environment_manifest": {
+        "bytes": 9966669,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/environment-manifest.json",
+        "sha256": "b08edd0c6fde42fec77a7752ce16a746b99addd06f15ca01232fa3b39dedf078"
+      },
+      "mode": "lean-typed-scalar-01",
+      "outer_closed": {
+        "bytes": 472,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01-closed.json",
+        "sha256": "5d7dae0cbc36e3698e16ae51b836aac45a041ad13b399cbd2453448143752201"
+      },
+      "owned_closed": {
+        "bytes": 16731,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/closed.json",
+        "sha256": "cba82d2a503d1a42fa64a029114e3124076004adf776fff76728e6412fbb93e8"
+      },
+      "qualification": {
+        "bytes": 12256,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/check-result.json",
+        "sha256": "39291f56456434f28191b1a7c47b8d6fa7df121059b98c06bf497718721870e8"
+      },
+      "source": {
+        "bytes": 11460,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/TypedNumericSlice.lean",
+        "sha256": "26a07662275da84404fe5797f0fdc21b6b4910c0ddf54810945bd454fb9f4bc9"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "environment_manifest": {
+        "bytes": 9966660,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/environment-manifest.json",
+        "sha256": "389da898f3c2638807bc9b9b4e3da29cad708c443a94daa3910a9e615384f04b"
+      },
+      "mode": "lean-typed-scalar-02",
+      "outer_closed": {
+        "bytes": 472,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02-closed.json",
+        "sha256": "5092da50b94b249912d512b04dc18518512b367e5c3f702006557aa93096e08f"
+      },
+      "owned_closed": {
+        "bytes": 15695,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/closed.json",
+        "sha256": "85c5803339e8decf6ae9fde901b3e7e8548291a8c7e2dcb6c99229c5bc1d985d"
+      },
+      "qualification": {
+        "bytes": 19104,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+        "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+      },
+      "source": {
+        "bytes": 11197,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/TypedNumericSlice.lean",
+        "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+      },
+      "status": "passed"
+    }
+  ],
+  "native_lean_calls": 3,
+  "native_metadata_readback": {
+    "bytes": 32494,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/metadata-source-slices-01/metadata-readback.json",
+    "sha256": "1b339902baff28e381e8390e1bd46f57897b035f2bae10890d60cd674db70485"
+  },
+  "native_proof_and_metadata_limits_unchanged": true,
+  "new_autoencoder_fits": 0,
+  "new_feature_preparations": 0,
+  "new_gradient_evaluations": 0,
+  "new_mathematical_projection_domain_contract_rows": 2,
+  "new_optimizer_updates": 0,
+  "new_public_fits": 0,
+  "new_ranker_training_trace_replays": 0,
+  "objective_to_IR_translation_proved": false,
+  "official_benchmark_score": null,
+  "open_obligations": {
+    "bytes": 5487,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-model-obligations-01.json",
+    "sha256": "184ce58096f0bea6eb698a33d7e8d585dd7e1bde6431c06ac031851c7821d7f2"
+  },
+  "original_checkout_guards": {
+    "child": {
+      "head": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "index": {
+        "bytes": 2062937,
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_accelerate/index",
+        "sha256": "f2bda620f13454566d1b5db3b5b7fcaa9296dbd829bb4da85febead864edadc4"
+      }
+    },
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "index": {
+        "bytes": 692628,
+        "path": "/home/barberb/lift_coding/.git/index",
+        "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+      }
+    }
+  },
+  "owned_phase_count": 8,
+  "phases": [
+    {
+      "bytes": 14233,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/closed.json",
+      "sha256": "7710861d7f9c501c9b548b4f6e20547113ffaa260f312b3f8630760c4c7202e9"
+    },
+    {
+      "bytes": 14232,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/closed.json",
+      "sha256": "92532dbc64af515c5045410fbf2b9f5b2ad3d9193f0372ef24c5378eeec20b3a"
+    },
+    {
+      "bytes": 15715,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/closed.json",
+      "sha256": "3da906c0dc0c01c59b038a93e74f33afac844d8510f5048a3bafbf83a36c63d6"
+    },
+    {
+      "bytes": 16731,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/closed.json",
+      "sha256": "cba82d2a503d1a42fa64a029114e3124076004adf776fff76728e6412fbb93e8"
+    },
+    {
+      "bytes": 15695,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/closed.json",
+      "sha256": "85c5803339e8decf6ae9fde901b3e7e8548291a8c7e2dcb6c99229c5bc1d985d"
+    },
+    {
+      "bytes": 18096,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/metadata-source-slices-01/closed.json",
+      "sha256": "4b2f894c7186428522d896095fcdcd12ebb4b5d0f83e6ccfdb3438c0fdc76549"
+    },
+    {
+      "bytes": 15167,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/closed.json",
+      "sha256": "37d917338fbe3ddde11d51b946df288d7721376f391d1f3c119aad7b8d5780a9"
+    },
+    {
+      "bytes": 15167,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/closed.json",
+      "sha256": "f29564f903aea95229b7fa91a5bf3a7a70f6832dbd3182d84ae7f1de7eea6ca5"
+    }
+  ],
+  "planner_activation": false,
+  "prior4417_payloads_preserved_exactly_as_prefixes": true,
+  "prior_convergence_seal": {
+    "bytes": 112015,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/file-only-seal-01.json",
+    "sha256": "6ee7b5d675777e8cc9744c9072ee7f885cb8fc47a9204c1a40d9724632012648"
+  },
+  "prior_original_exact_real_model_weights_and_objective_convergence_preserved": true,
+  "producer": {
+    "bytes": 15237,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-root-review-20261005-01/close_qualification_01.py",
+    "sha256": "a3ea59ead6aae6902ef660e2095499563a40a08aee68e115b238b606334216c9"
+  },
+  "projection_domains_runtime_enforced": false,
+  "proof_authority": false,
+  "pure_test_cases_per_compiler_version": 137,
+  "python_ranker_source_equivalence_proved": false,
+  "qualified_positive_native_lean_checks": 2,
+  "qualified_theorem_queries": 21,
+  "schema": "ranker-source-slices-closed-qualification@1",
+  "status": "passed",
+  "strict_advisory_cache_entries_added": 0,
+  "supplied_mathematical_gradient_update_joins_original_exact_real_step": true,
+  "typed_scalar_compiler_semantic_preservation_proved": true,
+  "vectors_payloads_unchanged": true,
+  "whole_codebase_IR_semantic_preservation_proved": false
+}

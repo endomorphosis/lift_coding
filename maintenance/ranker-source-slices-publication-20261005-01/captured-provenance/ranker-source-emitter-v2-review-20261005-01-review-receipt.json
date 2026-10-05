@@ -1,0 +1,75 @@
+{
+  "changed_function": [
+    "render_generated_lean"
+  ],
+  "exact_diff": "--- /home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/typed_slice_compiler.py\n+++ /home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/typed_slice_compiler.py\n@@ -454,10 +454,8 @@\n       some (List.ofFn (RankerRealCurvature.realGradientStep\n         RankerRealCurvature.originalRealMu RankerRealCurvature.originalRealEta\n         RankerRealCurvature.originalRealDifferences weights)) := by\n-  simpa only [RankerRealCurvature.realGradientStep] using\n-    emitted_update_projection RankerRealCurvature.originalRealEta weights\n-      (RankerRealCurvature.realCoordinateGradient RankerRealCurvature.originalRealMu\n-        RankerRealCurvature.originalRealDifferences weights)\n+  rw [emitted_update_projection]\n+  rfl\n \n #print axioms emitted_dot_compiles\n #print axioms emitted_update_compiles\n",
+  "findings": [
+    "Only the emitted_originalRealStep_join proof string changes.",
+    "Rewriting emitted_update_projection exposes the same coordinate update expression; rfl then unfolds the existing realGradientStep definition.",
+    "This mirrors the corrected generic module proof that actually passed fourteen bounded native queries.",
+    "All compiler APIs, pinned original AST/source identity, IR translation, list/shape semantics, constructor rendering and seven generated theorem query names are unchanged.",
+    "Tests copy byte-for-byte; the existing renderer test checks gates, bodies, hashes and absence of sorry/axiom declarations without depending on the superseded proof text.",
+    "The emitter remains a candidate until its fresh generated module actually qualifies."
+  ],
+  "outstanding_issues": [],
+  "qualified_generic_module_check": {
+    "bytes": 19104,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+    "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+  },
+  "review_source": {
+    "bytes": 6624,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-emitter-v2-review-20261005-01/review_diff.py",
+    "sha256": "84ddd325137f2c59b1f83c3dd58718164ae01dc84991e2ebf69fa049dbd92191"
+  },
+  "schema": "ranker-source-emitter-v2-file-only-diff-review@1",
+  "scope": {
+    "Git_actions": 0,
+    "codec_jobs": 0,
+    "completion_authority": false,
+    "execution_authority": false,
+    "full_Python_or_Float_equivalence_proved": false,
+    "native_jobs": 0,
+    "old_input_writes": 0,
+    "proof_authority": false,
+    "ranker_execution": 0,
+    "remote_actions": 0,
+    "source_only": true,
+    "target_execution": 0,
+    "target_imports": 0,
+    "test_jobs": 0
+  },
+  "status": "passed_source_only_diff_review",
+  "unchanged_v1_source_population": [
+    {
+      "bytes": 17103,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/test_typed_slice_compiler.py",
+      "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+    },
+    {
+      "bytes": 29109,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/typed_slice_compiler.py",
+      "sha256": "f318a6879d9eac517127a4440cfca8e48b2ad61a7411453b16f17847b3dd1f06"
+    }
+  ],
+  "v1_compiler": {
+    "bytes": 29109,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/typed_slice_compiler.py",
+    "sha256": "f318a6879d9eac517127a4440cfca8e48b2ad61a7411453b16f17847b3dd1f06"
+  },
+  "v1_tests": {
+    "bytes": 17103,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/test_typed_slice_compiler.py",
+    "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+  },
+  "v2_compiler": {
+    "bytes": 28870,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/typed_slice_compiler.py",
+    "sha256": "6c38d05eff154e058bb31b1943bfe32b713b3e403fe778292353e738765ee119"
+  },
+  "v2_tests": {
+    "bytes": 17103,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/test_typed_slice_compiler.py",
+    "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+  }
+}

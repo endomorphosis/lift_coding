@@ -1,0 +1,117 @@
+{
+  "all32_governing_RPI_exits": "OPEN",
+  "binary64_error_bound_proved": false,
+  "completion_authority": false,
+  "execution_authority": false,
+  "full_task_satisfaction": "unknown",
+  "global_autoencoder_convergence_proved": false,
+  "host_parser_correctness_theorem_proved": false,
+  "native_Float_optimizer_convergence_proved": false,
+  "new_training_calls": 0,
+  "obligations": [
+    {
+      "acceptance": "Kernel-checked parser/selection relation binds raw source bytes and source context to the supported syntax; current tests and hash binding remain evidence only.",
+      "id": "S0",
+      "obligation": "Host parser and Python AST selection correctness",
+      "status": "OPEN"
+    },
+    {
+      "acceptance": "Actual accepted TypedNumericSlice and GeneratedNumericSlices kernel checks, with all21query reports and complete retained modules. ExactReal backend and equal Fin80 projection domain; update uses a supplied mathematical gradient. This does not discharge S0 or Float semantics.",
+      "id": "S1",
+      "obligation": "Typed arithmetic and source-derived dot/update projections",
+      "status": "PARTIALLY_PROVED"
+    },
+    {
+      "acceptance": "Extend typed syntax to exact-real abs/max/exp/log1p, conditional expressions, vector comprehensions and nonzero division; prove stable softplus and sign-split sigmoid equal the existing mathematical objective and gradient for every domain vector.",
+      "id": "S2",
+      "obligation": "Objective and computed gradient translation",
+      "status": "OPEN"
+    },
+    {
+      "acceptance": "Translate train-pair selection, tokenization, normalized source features and subtraction; prove all4originaldifference vectors correspond to the pinned corpus, with held-out membership excluded. Raw shape/provenance pins alone do not prove this relation.",
+      "id": "S3",
+      "obligation": "Feature preparation and original corpus relation",
+      "status": "OPEN"
+    },
+    {
+      "acceptance": "Prove loop initialization, epoch range, gradient evaluation before update, trace append, finite checks and checkpoint construction; connect a source loop simulation to every exact-real iterate. An arithmetic update slice does not establish the loop theorem.",
+      "id": "S4",
+      "obligation": "Full training loop source relation",
+      "status": "OPEN"
+    },
+    {
+      "acceptance": "Specify Float rounding, math.fsum, exp/log1p approximation, overflow and finite guards; derive certified step/error bounds and a perturbation convergence or finite-epoch accuracy theorem for the actual implementation.",
+      "id": "S5",
+      "obligation": "CPython/math.fsum and binary64 execution refinement",
+      "status": "OPEN"
+    },
+    {
+      "acceptance": "Add checked language coverage with provenance and abstention, incremental content-addressed AST/KG/vector/contract refresh, typed logic-family projection certificates and a justified training objective. Ranker convergence does not establish autoencoder convergence.",
+      "id": "S6",
+      "obligation": "General codebase autoencoder IR soundness and convergence",
+      "status": "OPEN"
+    },
+    {
+      "acceptance": "Resolve each prompt requirement against current source-backed IR and retrieved obligations; bind action pre/postconditions and evaluator checks to all required RPI exits before task completion. Navigation ranking and kernel subtheorems do not establish a task score.",
+      "id": "S7",
+      "obligation": "Intent-to-codebase planning and full Terminal Bench satisfaction",
+      "status": "OPEN"
+    }
+  ],
+  "official_benchmark_score": null,
+  "original_corpus_scope": "original_d4aa_4_pairs_80_coordinates_only",
+  "planner_activation": false,
+  "proof_authority": false,
+  "python_ranker_source_equivalence_proved": false,
+  "schema": "ranker-source-model-obligations@2",
+  "sequence": [
+    "S2",
+    "S3",
+    "S4",
+    "S0",
+    "S5",
+    "S6",
+    "S7"
+  ],
+  "source": {
+    "bytes": 16391,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "source_AST_functions": [
+    {
+      "AST_node_count": 534,
+      "end_line": 116,
+      "full_function_semantic_equivalence_proved": false,
+      "line": 69,
+      "name": "_prepare",
+      "normalized_AST_sha256": "9ff2e5ae2f4603654a98f7ae7b56363e689b27063e8615c80d5865534ae85ecd"
+    },
+    {
+      "AST_node_count": 31,
+      "end_line": 120,
+      "full_function_semantic_equivalence_proved": false,
+      "line": 119,
+      "name": "_dot",
+      "normalized_AST_sha256": "3ff8d47ab6f2e375b3bd4b81c6a39e364cd5a15ec859ca383b5e41504250de1e"
+    },
+    {
+      "AST_node_count": 261,
+      "end_line": 134,
+      "full_function_semantic_equivalence_proved": false,
+      "line": 123,
+      "name": "_objective",
+      "normalized_AST_sha256": "129da31ae6856167478c7f030a059d0f477b8362bb8fa478221eac7bac6031c2"
+    },
+    {
+      "AST_node_count": 327,
+      "end_line": 218,
+      "full_function_semantic_equivalence_proved": false,
+      "line": 191,
+      "name": "train_terminal_codebase_intent_ranker",
+      "normalized_AST_sha256": "5b87aa5ce21daf1439ed8d51f37557e6aba962130fd4f8732d149cea7ca2ac5a"
+    }
+  ],
+  "source_function_execution_calls": 0,
+  "whole_codebase_IR_semantic_preservation_proved": false
+}

@@ -1,0 +1,428 @@
+{
+  "actual_work": {
+    "Lean_invocation_count": 0,
+    "Q4_writes": 0,
+    "ast_parse_detail": "One read-only inspection parse and one durable binding extraction parse; neither executes source.",
+    "existing_evidence_mutations": 0,
+    "model_or_training_jobs": 0,
+    "only_new_source_plan_files_written": true,
+    "pinned_source_byte_reads_only": true,
+    "project_import_count": 0,
+    "source_execution_count": 0,
+    "stdlib_ast_parse_count": 2,
+    "tests_run": 0
+  },
+  "closure_source_recheck": {
+    "bytes": 15237,
+    "execution_count": 0,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-root-review-20261005-01/close_qualification_01.py",
+    "sha256": "a3ea59ead6aae6902ef660e2095499563a40a08aee68e115b238b606334216c9",
+    "status": "passed_source_only_recheck"
+  },
+  "exact_bindings": {
+    "L2": {
+      "not_identical_to_decimal_rat": "1/100",
+      "policy": "Emit free scalar L2 binding; specialize to originalRealMu only after pinned exact-original projection. Native Float literal conversion is still not kernel-proved.",
+      "prior_exact_mu_rat_denominator": "576460752303423488",
+      "prior_exact_mu_rat_numerator": "5764607523034235",
+      "prior_numeric_module": {
+        "bytes": 6710,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalNumericCurvature.lean",
+        "sha256": "e7b33b4f3027ecd8f5e3786fd71a197aa3a75cd71e4f22337e23554f23638bdc"
+      },
+      "source_literal": "0.01"
+    },
+    "first_stage_context": "Bind both scalar leaves to their enclosing exact statement and complete _objective AST, plus whole-source byte pin; do not identify a similar expression elsewhere.",
+    "first_stage_leaves": {
+      "stable_factor_scalar": "a5f60c17cb8efc0869ec1ac4001c04c1b43f67d7d38bc025cbb87061247d70aa",
+      "stable_loss_scalar": "b71027e5d37d1a5b5b574a4b880a0857f0885dbc19c81dff3e652f8f7c76287e"
+    },
+    "function": "_objective(weights, differences)",
+    "line_span": [
+      123,
+      134
+    ],
+    "names": "Retain actual lexical z, row, f, i, weights, differences, L2 and local lets. Scoped binders resolve to finite typed slots. math, max, abs, len, range, zip, _dot, _need remain explicit host/runtime binding frontiers.",
+    "statement_order": [
+      "margins",
+      "data",
+      "regularizer",
+      "factors",
+      "gradient",
+      "_need",
+      "return"
+    ]
+  },
+  "first_bounded_acceptance": {
+    "admission": "Actual checker status passed, genuine per-query accepted results with only propext/Classical.choice/Quot.sound, complete retained object/chunks, full source/spec/profile producer and outer lease joins. An inconclusive native result remains evidence and is not admitted. No cap raise.",
+    "cap_source": "Exact native_bounds from accepted Q4/evidence/lean-typed-scalar-02/check-result.json; output cap is combined runner output, workspace cap is workspace bytes.",
+    "compiler_pure_controls_planned": [
+      "same pinned buffer used for parsing and rendering",
+      "operator-tree change visibly changes emitted tree",
+      "changed branch/comparison not silently normalized",
+      "unsupported call target refused",
+      "unknown/free name refused",
+      "keyword/wrong-arity calls refused",
+      "comprehension filter/async/multiple-generator refused",
+      "zero denominator distinguished as evaluation error",
+      "log1p invalid argument distinguished as evaluation error",
+      "both syntax branches checked but only selected branch evaluated"
+    ],
+    "controls_scope": "Own future pure source/IR harness only, with original ranker imports and BoundedToolRunner/direct subprocess calls blocked. No original objective evaluation, exp/log numerics, gradient computation, preparation or training.",
+    "dependency_policy": "Reuse only complete accepted frozen prior module objects and their captured Mathlib closure; no hydration, recompilation or mutation of old profiles. Freeze the new producer before any native run.",
+    "draft_module": "ObjectiveScalarIR.lean (not created)",
+    "fixed_caps": {
+      "cpu_seconds": 20,
+      "max_input_bytes": 262144,
+      "max_output_bytes": 65536,
+      "max_workspace_bytes": 16777216,
+      "timeout_seconds": 20
+    },
+    "generated_module": "GeneratedObjectiveScalarLeaves.lean (not created)",
+    "phase": "scalar stable-loss and factor leaves only",
+    "qualified_queries": 0,
+    "queries": [
+      {
+        "name": "RankerObjectiveIR.compile_scalar_sound",
+        "obligation": "Every accepted named scalar expression has the same partial exact-real result as the typed IR; no desired pair-loss identity is a premise."
+      },
+      {
+        "name": "RankerObjectiveIR.compile_scalar_refuses_unsupported",
+        "obligation": "Unsupported source nodes return refusal, including nodes in an unselected branch."
+      },
+      {
+        "name": "RankerObjectiveIR.compile_scalar_refuses_unknown_name",
+        "obligation": "Unknown lexical names return refusal, without default values."
+      },
+      {
+        "name": "RankerObjectiveIR.compiled_stableLoss_body",
+        "obligation": "The actual emitted source constructor literal compiles to its generic typed operator tree."
+      },
+      {
+        "name": "RankerObjectiveIR.compiled_stableFactor_body",
+        "obligation": "The actual emitted IfExp constructor literal compiles to its generic typed operator tree."
+      },
+      {
+        "name": "RankerObjectiveIR.stableLoss_eval_success",
+        "obligation": "For every Real z, the emitted scalar tree evaluates to ok(realStablePairLoss z), proving 1+exp(-abs(z))>0."
+      },
+      {
+        "name": "RankerObjectiveIR.stableFactor_eval_success",
+        "obligation": "For every Real z, the emitted lazy branch tree evaluates to ok(realStableLogisticP z), with nonzero selected denominator."
+      },
+      {
+        "name": "RankerObjectiveIR.emitted_stableLoss_eq_pairLoss",
+        "obligation": "Compose accepted compilation/evaluation with realStablePairLoss_eq; output equals ok(realPairLoss z)."
+      },
+      {
+        "name": "RankerObjectiveIR.emitted_stableFactor_eq_logisticP",
+        "obligation": "Compose accepted compilation/evaluation with realStableLogisticP_eq; output equals ok(realLogisticP z)."
+      }
+    ],
+    "ready_for_native_execution": false,
+    "reuse_imports": [
+      "RealStableFactor",
+      "TypedNumericSlice"
+    ]
+  },
+  "frontier_flags": {
+    "ae_equivalence_proved": false,
+    "compiled": false,
+    "draft": true,
+    "full_task_complete": false,
+    "general_ir_equivalence_proved": false,
+    "gradient_source_equivalence_proved": false,
+    "implemented": false,
+    "objective_source_equivalence_proved": false,
+    "optimizer_source_convergence_proved": false,
+    "proof_authority": false,
+    "python_float_equivalence_proved": false,
+    "python_source_equivalence_proved": false,
+    "source_to_model_equivalence_proved": false,
+    "theorem_qualified": false
+  },
+  "ir_interface": {
+    "bytes": 7816,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/ir-interface.json",
+    "sha256": "53a6ba907b4ac64d79f88a97fb9b987a54d0b2efeb930cef798c249d483a6cd0"
+  },
+  "later_acceptance_stages": [
+    {
+      "new_obligations": [
+        "typed vector/matrix and sequential let denotation",
+        "accepted _dot function call projection",
+        "rectangular n-by-m shape",
+        "nonempty n for division",
+        "ordered fold to finite sum",
+        "source arithmetic order to realStableObjective"
+      ],
+      "planned_queries": [
+        "RankerObjectiveIR.emitted_margins_eq",
+        "RankerObjectiveIR.emitted_data_eq",
+        "RankerObjectiveIR.emitted_regularizer_eq",
+        "RankerObjectiveIR.emitted_objective_projection_eq_realObjective"
+      ],
+      "qualified": false,
+      "scope": "margins map + stable-loss map + nonempty mean + regularizer",
+      "stage": 2
+    },
+    {
+      "new_obligations": [
+        "list zip min-length preserved before equal-length domain",
+        "Fin m indexing and range length m",
+        "factor length n and each row length m",
+        "mean division order preserved",
+        "join to realSourceBranchGradient then realCoordinateGradient"
+      ],
+      "planned_queries": [
+        "RankerObjectiveIR.emitted_factors_eq",
+        "RankerObjectiveIR.emitted_gradient_coordinate_eq",
+        "RankerObjectiveIR.emitted_gradient_projection_eq_realCoordinateGradient"
+      ],
+      "qualified": false,
+      "scope": "factors map + zip product + coordinate gradient map",
+      "stage": 3
+    },
+    {
+      "new_obligations": [
+        "exact original \u00b5/differences embedding",
+        "actual emitted prefix and prior update syntax joined with compatible typed environments",
+        "source-to-host AST/literal provenance remains a frontier",
+        "no convergence theorem about Python Float iterations"
+      ],
+      "planned_queries": [
+        "RankerObjectiveIR.original_emitted_objective_projection_eq",
+        "RankerObjectiveIR.original_emitted_gradient_projection_eq",
+        "RankerObjectiveIR.original_emitted_update_join"
+      ],
+      "qualified": false,
+      "scope": "original 4x80 exact-real numerical specialization and existing accepted update slice",
+      "stage": 4
+    }
+  ],
+  "math_lemma_map": [
+    {
+      "accepted_check": {
+        "bytes": 9684,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-softplus-02/check-result.json",
+        "sha256": "d35a196c44aa8103e93e30bb3cc0de4ee410174648ac3903b7a8185f5636e0dd"
+      },
+      "declaration_line": 25,
+      "lemma": "RankerRealCurvature.realStablePairLoss_eq",
+      "module": {
+        "bytes": 4839,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/ScalarSoftplus.lean",
+        "sha256": "e32f5a68f4365fa60a2321a0cb7f6076e998c7841547255f90124a4875a36379"
+      },
+      "new_work": "Prove emitted scalar tree evaluates successfully to realStablePairLoss z, then rewrite by this qualified identity.",
+      "source_obligation": "stable loss scalar tree -> nonstable pair loss"
+    },
+    {
+      "accepted_check": {
+        "bytes": 9253,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/check-result.json",
+        "sha256": "25adf30103c3d7455df5c7fff9eedf6b9e4ceb1fbd5263e919247ed18588e0f5"
+      },
+      "declaration_line": 20,
+      "lemma": "RankerRealCurvature.realStableLogisticP_eq",
+      "module": {
+        "bytes": 1767,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealStableFactor.lean",
+        "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+      },
+      "new_work": "Prove exact emitted IfExp tree denotation is realStableLogisticP z; prove denominators positive in the selected branch.",
+      "source_obligation": "sign-split sigmoid scalar tree -> realLogisticP"
+    },
+    {
+      "accepted_check": {
+        "bytes": 9601,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+        "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+      },
+      "declaration_line": 52,
+      "lemma": "RankerRealCurvature.dot_self_eq_squaredEuclideanNorm",
+      "module": {
+        "bytes": 7672,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/DirectionalObjective.lean",
+        "sha256": "94720052863a636db021de6f22eb903df0b4d0c6ead334bd853191920e0cfc6c"
+      },
+      "new_work": "Use accepted dot projection, then equality of source multiplication/division order to (mu/2)*squaredEuclideanNorm. This equality does not certify Float reassociation.",
+      "source_obligation": "regularizer source order L2 * dot(weights,weights) / 2"
+    },
+    {
+      "accepted_check": {
+        "bytes": 9601,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-directional-02/check-result.json",
+        "sha256": "2c2f7f8c3abef38cd540eb2a2ab07a34943c5bc73a19e67e7da8797055fddd66"
+      },
+      "declaration_line": 34,
+      "lemma": "RankerRealCurvature.realStableObjective_eq",
+      "module": {
+        "bytes": 7672,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/DirectionalObjective.lean",
+        "sha256": "94720052863a636db021de6f22eb903df0b4d0c6ead334bd853191920e0cfc6c"
+      },
+      "new_work": "Margin-map literal, ordered exact-real fold, nonempty mean, and scalar loss proofs; swap the two real addends explicitly if needed.",
+      "source_obligation": "data + regularizer numeric projection -> realObjective"
+    },
+    {
+      "accepted_check": {
+        "bytes": 9253,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/lean-stable-factor-01/check-result.json",
+        "sha256": "25adf30103c3d7455df5c7fff9eedf6b9e4ceb1fbd5263e919247ed18588e0f5"
+      },
+      "declaration_line": 40,
+      "lemma": "RankerRealCurvature.realSourceBranchGradient_eq",
+      "module": {
+        "bytes": 1767,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/math/RealStableFactor.lean",
+        "sha256": "b0a6750c1264fa4024b1f033305e60979d45775eb31fc182914b7d3caf74154d"
+      },
+      "new_work": "Prove emitted factor map, zip/truncation, coordinate indexing, ordered fold, and sum/len vs (1/n)*sum order. Do not insert this identity as a compiler opcode or premise.",
+      "source_obligation": "gradient comprehension coordinate -> realCoordinateGradient"
+    },
+    {
+      "accepted_check": {
+        "bytes": 19104,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+        "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+      },
+      "declaration_line": 200,
+      "lemma": "RankerSourceSemantics.supported_dot_eq",
+      "module": {
+        "bytes": 11197,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/math-v2/TypedNumericSlice.lean",
+        "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+      },
+      "new_work": "Reuse literal _dot body and original zip-min semantics; project only equal-length vectors.",
+      "source_obligation": "typed dot call and equal-shape list projection"
+    },
+    {
+      "accepted_check": {
+        "bytes": 19104,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+        "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+      },
+      "declaration_line": 152,
+      "lemma": "RankerSourceSemantics.orderedFsum_eq_sum",
+      "module": {
+        "bytes": 11197,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/math-v2/TypedNumericSlice.lean",
+        "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+      },
+      "new_work": "Keep emitted evaluation order until this algebraic lemma is applied; CPython math.fsum is outside scope.",
+      "source_obligation": "ordered exact-real fsum fold -> finite sum"
+    },
+    {
+      "accepted_check": {
+        "bytes": 9638,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/evidence/lean-original-profile-02/check-result.json",
+        "sha256": "d2d8e94548fb71b2f09f39770c856c2ce2ef17fa769000d875ac6b5b67e806ec"
+      },
+      "lemma": "RankerRealCurvature.originalRealMu; RankerRealCurvature.originalRealDifferences; RankerRealCurvature.originalRat_index_bounds",
+      "module": {
+        "bytes": 6088,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/math/OriginalRealProfile.lean",
+        "sha256": "52eecc62595596545013a7ec4f2cfc70e4b4c2b9f1607ff5db7237b46be3d196"
+      },
+      "new_work": "Use original fixed 4x80 exact Rat coordinate embedding and exact mu cast; also pin OriginalNumericCurvature source. No assumed source/corpus/feature alignment.",
+      "source_obligation": "original exact L2 and differences specialization"
+    }
+  ],
+  "objective_function_ast_sha256": "129da31ae6856167478c7f030a059d0f477b8362bb8fa478221eac7bac6031c2",
+  "open_boundaries": [
+    "Host Python ast parser, whole-source hashing and constructor renderer provenance are file bindings, not Lean proofs of parsing Python.",
+    "Runtime Python name/global resolution, math module binding, builtin shadowing, mutation and monkeypatch absence are not modeled.",
+    "Python binary64 operations, literal rounding, overflow/underflow, NaN/infinity/signed zero, CPython math.fsum, libm exp/log1p/sqrt and exception behavior are not modeled.",
+    "The _need finite check and its failure branch, starred list construction, all/isfinite iteration, return dictionary/tuple allocation and gradient_norm sqrt are not included in the proposed first five-assignment numerical projection.",
+    "The _prepare path, hashes, tokenization, corpus/features/difference construction and validation must acquire separate source bindings and semantic obligations.",
+    "Training iteration, stopping/validation, artifact serialization, ranking/metrics, full source-to-model equivalence, general IR equivalence, AE equivalence and full terminal task remain open.",
+    "Qualified original exact-real optimizer convergence is prior mathematical evidence. No new source objective, source gradient or source loop convergence follows from this design."
+  ],
+  "schema": "ranker-objective-ir-source-acceptance-plan@1",
+  "scope_root": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01",
+  "source": {
+    "bytes": 16391,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "source_backed_mathlib_apis": [
+    {
+      "file_pin": {
+        "bytes": 28564,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Complex/Exponential.lean",
+        "sha256": "3578b916dce6592c54299ca59a69332acfff2ef5b198b179090a4d53ce7a50d5"
+      },
+      "line": 283,
+      "name": "Real.exp_pos",
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Complex/Exponential.lean",
+      "purpose": "log1p argument positivity and nonzero sigmoid denominators"
+    },
+    {
+      "file_pin": {
+        "bytes": 28564,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Complex/Exponential.lean",
+        "sha256": "3578b916dce6592c54299ca59a69332acfff2ef5b198b179090a4d53ce7a50d5"
+      },
+      "line": 211,
+      "name": "Real.exp_add",
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Complex/Exponential.lean",
+      "purpose": "exp(-z)*exp(z)=1 when proving stable factor identity"
+    },
+    {
+      "file_pin": {
+        "bytes": 28564,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Complex/Exponential.lean",
+        "sha256": "3578b916dce6592c54299ca59a69332acfff2ef5b198b179090a4d53ce7a50d5"
+      },
+      "line": 240,
+      "name": "Real.exp_neg",
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/Complex/Exponential.lean",
+      "purpose": "Optional inverse form for the same branch arithmetic"
+    },
+    {
+      "file_pin": {
+        "bytes": 28253,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+        "sha256": "5c3ecb5112d5d46df46d3dff3efa1548095356259633b34885db8ab4275340a2"
+      },
+      "line": 133,
+      "name": "Real.log_mul",
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+      "purpose": "Existing stable-loss proof; requires both factors nonzero"
+    },
+    {
+      "file_pin": {
+        "bytes": 28253,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+        "sha256": "5c3ecb5112d5d46df46d3dff3efa1548095356259633b34885db8ab4275340a2"
+      },
+      "line": 75,
+      "name": "Real.log_exp",
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+      "purpose": "Existing stable-loss proof"
+    },
+    {
+      "file_pin": {
+        "bytes": 31730,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Algebra/BigOperators/Fin.lean",
+        "sha256": "798914333dd97eada9032afc50a9106cc5cf481b57477c4a6f198220ffd17304"
+      },
+      "line": 751,
+      "name": "List.sum_ofFn",
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/environment/mathlib4/Mathlib/Algebra/BigOperators/Fin.lean",
+      "purpose": "Generated by to_additive from List.prod_ofFn; exact list-to-Fin sum join"
+    }
+  ],
+  "source_bindings": {
+    "bytes": 23828,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/source-bindings.json",
+    "sha256": "5f76eed1e9b025c8e7bb61d23e368a4740b01f329c40472f0c77f2f909bd5c16"
+  },
+  "source_inventory_helper": {
+    "bytes": 5698,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-source-plan-20261005-01/extract_bindings_01.py",
+    "sha256": "e9888ea64ad2c9523207ca3488b5869d0ac2dfecca07d73d17825c78f90a40e8"
+  },
+  "status": "source_only_design_unimplemented_uncompiled_unqualified"
+}

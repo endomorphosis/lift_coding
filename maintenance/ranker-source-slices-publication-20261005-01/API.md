@@ -1,0 +1,15 @@
+# Source-slice evidence publication
+
+The source, typed IR, checks and metadata are frozen under `qualification/codebase_ir/ranker-source-semantics-20261005-01`. The full seal contains 299 regular files totaling 86,451,989 bytes. The earlier source-only draft is retained under `qualification/codebase_ir/ranker-source-semantics-source-plan-20261005-01`; its statements confer no qualification by themselves.
+
+The final plan binds the seal, qualified review, all three actual Lean attempts, native metadata readback and exact observed facts. Two modules were accepted, with 21 theorem queries; one attempt remains inconclusive. The mathematical projection applies to dot/update arithmetic under an exactReal backend. It supplies the mathematical gradient and does not prove `_objective`, the host parser, Python/Float execution or full task satisfaction.
+
+`freeze_inputs.py --plan <absolute plan.json> --expected-plan-sha256 <independent SHA256> --expected-builder-sha256 <independent builder SHA256>` creates the complete selection and closed-input descriptor. `build_package.py --closed-inputs <absolute closed-inputs.json> --expected-closed-inputs-sha256 <independent SHA256> --output <fresh maintenance/ranker-source-slices-publication-package-...>` retains every selected file, including locks, failures, full modules, chunks and complete environment manifests.
+
+`review_package.py` independently checks all decoded members. Its `--output` must be the exact `maintenance/ranker-source-slices-publication-20261005-01/package-review-01.json` path. The other required arguments bind closed inputs, manifest and the exact builder SHA256. The wrapper captures each phase's input pins before and after and preserves its result.
+
+Archive limits remain 256 MiB total raw population, 14 MiB per file and raw members per shard, 16 MiB complete decoded tar/compressed shard, 1 GiB aggregate decoded work, 64 shards, 10,000 members, depth six and 180 seconds per local phase. Cached-credential and complete PEM vetoes are unchanged. External Lean/Mathlib raw bodies and prior large archives are referenced without reupload.
+
+The authorized HF successor occupies `releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1` at `Publicus/codebase-ir-proof-index`. A fresh parent and unoccupied namespace are required. The publisher uses a single normal parent-protected commit, explicitly updates only the README and release status among existing files, durably records the observed commit before verification, verifies all new files, and preserves every preceding immutable path. Public readback checks the full tree and local evidence pins. Raw SDK logs and download caches remain outside the publication selection.
+
+Git publication uses a fresh isolated checkout of current `origin/main`, preserves every intervening file and gitlink, and verifies all new blobs after a normal push. The user's original dirty root and child HEAD/index are guarded and remain unchanged. Full raw evidence is retained in HF; Git carries sources and compact review/retention manifests.

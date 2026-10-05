@@ -1,0 +1,14 @@
+{
+  "codec_jobs": 0,
+  "error": "Exact pinned source review uses passed_source_only and has no issues property; refusal before any plan or review-copy writes.",
+  "native_jobs": 0,
+  "remote_mutations": 0,
+  "returncode": 1,
+  "schema": "ranker-source-slices-file-only-plan-attempt@1",
+  "source": {
+    "bytes": 6080,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/prepare_plan_02.py",
+    "sha256": "1cad6d31de17f716206af658d8770b1e2e311a33ff36c34e721173ee4e484972"
+  },
+  "status": "refused_absent_optional_issue_field"
+}

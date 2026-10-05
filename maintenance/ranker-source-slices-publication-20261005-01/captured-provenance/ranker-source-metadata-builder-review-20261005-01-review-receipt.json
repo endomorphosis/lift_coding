@@ -1,0 +1,119 @@
+{
+  "actual_native_receipt_joins": [
+    {
+      "compiled_artifact_descriptors": [],
+      "phase": "lean-typed-scalar-01",
+      "qualification": {
+        "bytes": 12256,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/check-result.json",
+        "sha256": "39291f56456434f28191b1a7c47b8d6fa7df121059b98c06bf497718721870e8"
+      },
+      "query_count": 0,
+      "role": "typed_failed",
+      "status": "inconclusive"
+    },
+    {
+      "compiled_artifact_descriptors": [
+        {
+          "bytes": 939920,
+          "complete": true,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/TypedNumericSlice.olean",
+          "retention_format": "bounded_lean_chunks@1",
+          "sha256": "d666b11adfa7d878e2745c2ebdec1c7caf523bd82e0d7a702e99741376209465"
+        }
+      ],
+      "phase": "lean-typed-scalar-02",
+      "qualification": {
+        "bytes": 19104,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+        "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+      },
+      "query_count": 14,
+      "role": "typed_accepted",
+      "status": "passed"
+    },
+    {
+      "compiled_artifact_descriptors": [
+        {
+          "bytes": 40584,
+          "complete": true,
+          "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/GeneratedNumericSlices.olean",
+          "retention_format": "bounded_lean_chunks@1",
+          "sha256": "0c213c77bd25cafc44bee70e750eb3ed8735154ffc2c7c3ecc1f9d9ce16c25f5"
+        }
+      ],
+      "phase": "lean-generated-slices-01",
+      "qualification": {
+        "bytes": 11597,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/check-result.json",
+        "sha256": "2261dc8f8effc5449c7b37db95f8a3f834c9e4b14135d6ea2d5df62563188a7b"
+      },
+      "query_count": 7,
+      "role": "generated_accepted",
+      "status": "passed"
+    }
+  ],
+  "builder": {
+    "bytes": 41339,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/build_source_metadata_01.py",
+    "sha256": "d40b60554e292a2b6b8e14a7ff7696809360479bcb81e9c0c57bf351071e6fbf"
+  },
+  "family_count": 32,
+  "family_deltas": {
+    "ast": 2,
+    "contracts": 2,
+    "kg": 11,
+    "ranker_real_curvature_checks": 3,
+    "ranker_real_curvature_proofs": 2,
+    "sources": 3
+  },
+  "findings": [
+    "Actual owned native calls use one-element lists with source specification joins.",
+    "Outer/owned/invocation/specification/check schemas and pin joins fail closed.",
+    "Native typed01 remains inconclusive and is never indexed as a qualified module.",
+    "Accepted modules require exact queried sources, standard axioms and complete reconstructed object/chunk sets.",
+    "Pure transcript belongs to its owned run and compile outputs join the frozen source/IR/emission records.",
+    "Canonical4417 prefixes and375 vectors remain intact with exactly23 authorized rows and11 descriptive KG edges.",
+    "Mathematical domains use exact-real supplied-gradient assumptions and false runtime/source-contract claims.",
+    "Only a new Q4 preparation output directory may be created; source/runtime/Float/AE/authority frontiers remain open."
+  ],
+  "frozen_build_plan": {
+    "bytes": 8272,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-build-plan-01.json",
+    "sha256": "7d4de36938aca90e4bff572dc00bfa53bda77c37fdd8b5c37476a0428d874d79"
+  },
+  "metadata_additions": 23,
+  "metadata_prior_rows": 4417,
+  "metadata_result_rows": 4440,
+  "new_mathematical_domains": 2,
+  "outstanding_issues": [],
+  "pure_cases": 137,
+  "pure_phases": 411,
+  "review_source": {
+    "bytes": 14275,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-metadata-builder-review-20261005-01/review_source.py",
+    "sha256": "bf911a65e54767d38d9dff56e66800b3736da74163417a4e7809ab7402d68462"
+  },
+  "reviewed_input_pin_count": 35,
+  "schema": "ranker-source-metadata-builder-independent-source-review@1",
+  "scope": {
+    "Git_actions": 0,
+    "codec_jobs": 0,
+    "complete_native_dependency_closure_revalidated_in_review": false,
+    "completion_authority": false,
+    "execution_authority": false,
+    "external_binary_body_reads_in_review": 0,
+    "model_jobs": 0,
+    "native_jobs": 0,
+    "native_object_reconstruction_executed_in_review": false,
+    "proof_authority": false,
+    "protected_writes": 0,
+    "remote_actions": 0,
+    "source_only": true,
+    "target_execution": 0,
+    "target_imports": 0,
+    "test_jobs": 0
+  },
+  "status": "passed_source_only_review",
+  "unchanged_vector_count": 375
+}

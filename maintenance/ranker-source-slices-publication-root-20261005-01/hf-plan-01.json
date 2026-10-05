@@ -1,0 +1,467 @@
+{
+  "expected_parent_commit": "d6b6e333f3b1bcfe9028a8ca5ac3be6b12256e8a",
+  "files": [
+    {
+      "local": {
+        "bytes": 1392079,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/data-000000.tar.zst",
+        "sha256": "32933e53d0e5a508c660c16787007398ef711535290038d687abb1303083de3b"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/data-000000.tar.zst"
+    },
+    {
+      "local": {
+        "bytes": 1620864,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/data-000001.tar.zst",
+        "sha256": "c567500e0d365f85c41a8a453af6f7bde2993b0e0ab14db6757d10d24d6279b0"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/data-000001.tar.zst"
+    },
+    {
+      "local": {
+        "bytes": 3545400,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/data-000002.tar.zst",
+        "sha256": "e30d15ec5a3a26fac14d5ffa8e78fe84af4dbcb0c578051477bdf46b98ad2a65"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/data-000002.tar.zst"
+    },
+    {
+      "local": {
+        "bytes": 1328388,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/data-000003.tar.zst",
+        "sha256": "7c1ba10a177213c9d55a12d77164d7d84f43bbc6027bf8a3cb2c32880f7e06fe"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/data-000003.tar.zst"
+    },
+    {
+      "local": {
+        "bytes": 1958475,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/data-000004.tar.zst",
+        "sha256": "4c608082750940b0c493a8c5882d4c6c4c592d6c5cc222efd4abdc0d8e27e0f4"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/data-000004.tar.zst"
+    },
+    {
+      "local": {
+        "bytes": 1957999,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/data-000005.tar.zst",
+        "sha256": "a2d94b0a0280ddc70784af287c289242f7a41fb384012e712755af47afcb31c9"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/data-000005.tar.zst"
+    },
+    {
+      "local": {
+        "bytes": 1947174,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/data-000006.tar.zst",
+        "sha256": "03a81828a6fa24fe929c1848e0e55526c5879f5fc9345b810f8e6c85f22b4e06"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/data-000006.tar.zst"
+    },
+    {
+      "local": {
+        "bytes": 691508,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/data-000007.tar.zst",
+        "sha256": "1e026ba50784cab258ebb333d8e4f9ea8911aa490eddcc3ec3c5ed9a95bddf68"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/data-000007.tar.zst"
+    },
+    {
+      "local": {
+        "bytes": 287300,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-package-20261005-01/package/manifest.json",
+        "sha256": "1f2d90b859430e4bb94ee7bca02fabd895d3919fd644c0427ea2fa351ffce1bd"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/package/manifest.json"
+    },
+    {
+      "local": {
+        "bytes": 3085,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/API.md",
+        "sha256": "7adf1900877870e81bfc643765c5ddb5ddf481acbea5503e7ee96232cb746cad"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/API.md"
+    },
+    {
+      "local": {
+        "bytes": 27020,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/build_package.py",
+        "sha256": "f1269ff1b2d3e808a8e4c44a292d098a08f5d97adf9477da96e565f107d7618e"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/build_package.py"
+    },
+    {
+      "local": {
+        "bytes": 13606,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/provenance-map.json",
+        "sha256": "505d93c139e3109a118424328de8bb3435fb391cc1b39c55488572041eb17bd4"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/provenance-map.json"
+    },
+    {
+      "local": {
+        "bytes": 182984,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-convergence-git-publication-20261005-02-closed.json",
+        "sha256": "2c43240350e9af9ea1e1534aa466a926425baea9fccc2d7b79417c90dadb3141"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-convergence-git-publication-20261005-02-closed.json"
+    },
+    {
+      "local": {
+        "bytes": 5698,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-objective-ir-source-plan-20261005-01-extract_bindings_01.py",
+        "sha256": "e9888ea64ad2c9523207ca3488b5869d0ac2dfecca07d73d17825c78f90a40e8"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-objective-ir-source-plan-20261005-01-extract_bindings_01.py"
+    },
+    {
+      "local": {
+        "bytes": 7816,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-objective-ir-source-plan-20261005-01-ir-interface.json",
+        "sha256": "53a6ba907b4ac64d79f88a97fb9b987a54d0b2efeb930cef798c249d483a6cd0"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-objective-ir-source-plan-20261005-01-ir-interface.json"
+    },
+    {
+      "local": {
+        "bytes": 23828,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-objective-ir-source-plan-20261005-01-source-bindings.json",
+        "sha256": "5f76eed1e9b025c8e7bb61d23e368a4740b01f329c40472f0c77f2f909bd5c16"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-objective-ir-source-plan-20261005-01-source-bindings.json"
+    },
+    {
+      "local": {
+        "bytes": 22724,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-objective-ir-source-plan-20261005-01-source-plan.json",
+        "sha256": "f0e712a1b78ba1a728f5f4a41a8d8f66540017ae86418e23f4bd3c40f6cce690"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-objective-ir-source-plan-20261005-01-source-plan.json"
+    },
+    {
+      "local": {
+        "bytes": 4451,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-emitter-v2-review-20261005-01-review-receipt.json",
+        "sha256": "e1898c75757f99496ced1a7b6f46698974c243a6e86bda8044bd86e49d952bec"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-emitter-v2-review-20261005-01-review-receipt.json"
+    },
+    {
+      "local": {
+        "bytes": 6624,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-emitter-v2-review-20261005-01-review_diff.py",
+        "sha256": "84ddd325137f2c59b1f83c3dd58718164ae01dc84991e2ebf69fa049dbd92191"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-emitter-v2-review-20261005-01-review_diff.py"
+    },
+    {
+      "local": {
+        "bytes": 3149,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-harness-review-20261005-01-review-receipt.json",
+        "sha256": "afe5cf1c0fd34afc297728c55c0fce5c6bda85a4b3a238b6d492e6f4197922fb"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-harness-review-20261005-01-review-receipt.json"
+    },
+    {
+      "local": {
+        "bytes": 12569,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-harness-review-20261005-01-review_source.py",
+        "sha256": "af29cfe8e71794c24d83a8678758e8d1e1b3b5b3ab9e36a710d23ab40c802ce4"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-harness-review-20261005-01-review_source.py"
+    },
+    {
+      "local": {
+        "bytes": 3659,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-harness-v2-review-20261005-01-review-receipt.json",
+        "sha256": "389c846228b7d1e0c00bda272188a77c7c5edab971e5af9874061e33d2f1b28c"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-harness-v2-review-20261005-01-review-receipt.json"
+    },
+    {
+      "local": {
+        "bytes": 11223,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-harness-v2-review-20261005-01-review_source.py",
+        "sha256": "3820d903c46d73e6dd6ceba9d17000da1bda08082bc4c29e0cf839dbe3422155"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-harness-v2-review-20261005-01-review_source.py"
+    },
+    {
+      "local": {
+        "bytes": 5009,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-metadata-builder-review-20261005-01-review-receipt.json",
+        "sha256": "789dc7f19ade29e545149e267df2c31885b26b180f825ed0dee1273fd0120e52"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-metadata-builder-review-20261005-01-review-receipt.json"
+    },
+    {
+      "local": {
+        "bytes": 14275,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-metadata-builder-review-20261005-01-review_source.py",
+        "sha256": "bf911a65e54767d38d9dff56e66800b3736da74163417a4e7809ab7402d68462"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-metadata-builder-review-20261005-01-review_source.py"
+    },
+    {
+      "local": {
+        "bytes": 15237,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-root-review-20261005-01-close_qualification_01.py",
+        "sha256": "a3ea59ead6aae6902ef660e2095499563a40a08aee68e115b238b606334216c9"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-root-review-20261005-01-close_qualification_01.py"
+    },
+    {
+      "local": {
+        "bytes": 2026,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-root-review-20261005-01-closure-plan-01.json",
+        "sha256": "9f9f0b0e36a4822effd9fba01539c061d396d3d97aa8b6146ddd074534bde02c"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-root-review-20261005-01-closure-plan-01.json"
+    },
+    {
+      "local": {
+        "bytes": 10340,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-semantic-native-review-20261005-01-final-plan.json",
+        "sha256": "342e0210c197e35e19d0569ffe8750e737528f1a3d9cd3fbd035c12c3a0b2011"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-semantic-native-review-20261005-01-final-plan.json"
+    },
+    {
+      "local": {
+        "bytes": 871,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-semantic-native-review-20261005-01-review-attempt-01.json",
+        "sha256": "0ebc7f73d353f13324d09476644db728205f38b5715b3c88cd3f996e54837695"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-semantic-native-review-20261005-01-review-attempt-01.json"
+    },
+    {
+      "local": {
+        "bytes": 10415,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-semantic-native-review-20261005-01-review-receipt.json",
+        "sha256": "02eaceb1c54ce1d4a179459b0f748a4c68c44d8b7800df7d562b6d31f79ec901"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-semantic-native-review-20261005-01-review-receipt.json"
+    },
+    {
+      "local": {
+        "bytes": 24635,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-semantic-native-review-20261005-01-review_final.py",
+        "sha256": "925ec5dac803c22cf0a0060a6512c8690b093952bd49b6aa435ac6c07b95ecd1"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-semantic-native-review-20261005-01-review_final.py"
+    },
+    {
+      "local": {
+        "bytes": 25053,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-semantic-native-review-20261005-01-review_final_v2.py",
+        "sha256": "9c6b691b2377bc10c7c7fc09d24408fa736113fb3afaec5f2e811611a714be89"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-semantic-native-review-20261005-01-review_final_v2.py"
+    },
+    {
+      "local": {
+        "bytes": 7848,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-slices-publication-source-review-20261005-01-review-receipt.json",
+        "sha256": "fbfef37641d60af2e94439b53faa71a5dcfbcbfb35ea632ca9882f84561f4257"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-slices-publication-source-review-20261005-01-review-receipt.json"
+    },
+    {
+      "local": {
+        "bytes": 15393,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/captured-provenance/ranker-source-slices-publication-source-review-20261005-01-review_source.py",
+        "sha256": "52dae6d9aa175c6c39409e87cedd10a4200cfb902c9e122d643917e03ac163b8"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/captured-provenance/ranker-source-slices-publication-source-review-20261005-01-review_source.py"
+    },
+    {
+      "local": {
+        "bytes": 1192,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/closed-inputs.json",
+        "sha256": "4a22f424af31259af6f9914a98452ae365f8d5da2354b3b4c5cc34c2fe00e2aa"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/closed-inputs.json"
+    },
+    {
+      "local": {
+        "bytes": 150701,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/final-selection.json",
+        "sha256": "8f3798da8008ca665e188fe51b45836d8692fca0030f146b90f2c9e9bc2f7264"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/final-selection.json"
+    },
+    {
+      "local": {
+        "bytes": 3233,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/freeze_inputs.py",
+        "sha256": "baa46e4be40f7ce3c1cad6cd4aebeb2bfae10312570041553c1dcd3eacfcda56"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/freeze_inputs.py"
+    },
+    {
+      "local": {
+        "bytes": 3263,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/package-review-01.json",
+        "sha256": "11f6a1ddc624cb35cb6b7d398f3d68b0f6983b9f447e287148e53f3b0b4d7b4b"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/package-review-01.json"
+    },
+    {
+      "local": {
+        "bytes": 14321,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/plan.json",
+        "sha256": "8f97dc8e9ca3fefed4aa0bebfa681975535e2caaad2f57664ee39f7665a63160"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/plan.json"
+    },
+    {
+      "local": {
+        "bytes": 586,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/prepare-plan-attempt-01.json",
+        "sha256": "72dddfcc30e0ebe9c53cc55a14d4d4eb95acd68072bff3320c90507598f29c73"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/prepare-plan-attempt-01.json"
+    },
+    {
+      "local": {
+        "bytes": 574,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/prepare-plan-attempt-02.json",
+        "sha256": "1b51ce40c2eef12e520d732e401d50e4b654382574c56ee9dc3fb6db8b7ed566"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/prepare-plan-attempt-02.json"
+    },
+    {
+      "local": {
+        "bytes": 5955,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/prepare_plan_01.py",
+        "sha256": "d7427c063d34bb5cf031aabfd2785003bb427cdbe7ba90613577dc38bbb9b108"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/prepare_plan_01.py"
+    },
+    {
+      "local": {
+        "bytes": 6080,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/prepare_plan_02.py",
+        "sha256": "1cad6d31de17f716206af658d8770b1e2e311a33ff36c34e721173ee4e484972"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/prepare_plan_02.py"
+    },
+    {
+      "local": {
+        "bytes": 6088,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/prepare_plan_03.py",
+        "sha256": "5590ccac9119fc662ce17024b381e1cdd81126f5f428f517f90de008fc1d0d9e"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/prepare_plan_03.py"
+    },
+    {
+      "local": {
+        "bytes": 47785,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/required-facts.json",
+        "sha256": "900fd4d22ed22a9bda69cecce854e7d8c374fc613d820e3f7c77134c326a4fbc"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/required-facts.json"
+    },
+    {
+      "local": {
+        "bytes": 18549,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/review_package.py",
+        "sha256": "150ac0bbdd63663daace169c668dfe1b0d088d9394c03480e8816c47124c1e3c"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/review_package.py"
+    },
+    {
+      "local": {
+        "bytes": 7848,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/source-review-01.json",
+        "sha256": "fbfef37641d60af2e94439b53faa71a5dcfbcbfb35ea632ca9882f84561f4257"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication/source-review-01.json"
+    },
+    {
+      "local": {
+        "bytes": 3344,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/README.md",
+        "sha256": "f7529814fd0e65c72a4d33add533fce99871c1bf863bfc2961b42db63de4f4b0"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/qualification/README.md"
+    },
+    {
+      "local": {
+        "bytes": 12381,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/qualified-review-01.json",
+        "sha256": "39c403afd19b5972a28281813c23fdd13eddea1c32fa63747b4dd3258b07e550"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/qualification/qualified-review-01.json"
+    },
+    {
+      "local": {
+        "bytes": 90820,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/file-only-seal-01.json",
+        "sha256": "21a459ac9bfcf399132943708e32445c93cb66fa0fab8fb2878beeb01dcf8b65"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/qualification/file-only-seal-01.json"
+    },
+    {
+      "local": {
+        "bytes": 5487,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-model-obligations-01.json",
+        "sha256": "184ce58096f0bea6eb698a33d7e8d585dd7e1bde6431c06ac031851c7821d7f2"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/qualification/source-model-obligations-01.json"
+    },
+    {
+      "local": {
+        "bytes": 10632,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/prepare_hf_plan_02.py",
+        "sha256": "d4762b7d1d30036caf83965709c7b54d61da781766c5f71669ed2194d7c66e82"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication-root/prepare_hf_plan_02.py"
+    },
+    {
+      "local": {
+        "bytes": 4876,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/scan_final_upload_01.py",
+        "sha256": "b170ec89299076fc88226d28fad891923a33bd7e2fc2ba6facf620e07b123c95"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication-root/scan_final_upload_01.py"
+    },
+    {
+      "local": {
+        "bytes": 8935,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/review_hf_readback_01.py",
+        "sha256": "231f61b3bc3bc2dfcc1cce54d48bed560e6f7270ae04e461e151cccdf0c1e9f8"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication-root/review_hf_readback_01.py"
+    },
+    {
+      "local": {
+        "bytes": 106358,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/HF-parent-preflight-01.json",
+        "sha256": "a0014341e217f3862ad9921c38e6cfc93994befb2413975342b53f655f5d764e"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1/publication-root/HF-parent-preflight-01.json"
+    },
+    {
+      "local": {
+        "bytes": 14785,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/HF-README-01.md",
+        "sha256": "0c6c55598c2d89ddc1a7b64f15bdc87a11ff1135d9235841f51b1fd64bdabe6a"
+      },
+      "remote": "README.md"
+    },
+    {
+      "local": {
+        "bytes": 86489,
+        "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-root-20261005-01/HF-publication-status-01.json",
+        "sha256": "16fcbb8888f093130933ccf2ae12939997024ea136fec1525870d289e2483239"
+      },
+      "remote": "releases/20261004-terminal-codebase-ir-evidence-v1/publication-status.json"
+    }
+  ],
+  "immutable_namespace": "releases/20261004-terminal-codebase-ir-evidence-v1/successor-ranker-source-slices-v1",
+  "large_prior_archive_reupload": false,
+  "old_immutable_files_preserved": true,
+  "repo_id": "Publicus/codebase-ir-proof-index",
+  "schema": "terminal-ir-successor-evidence-publication-plan@1",
+  "scope": "Pinned dot/update arithmetic slices projected to exactReal, supplied original mathematical gradient only"
+}

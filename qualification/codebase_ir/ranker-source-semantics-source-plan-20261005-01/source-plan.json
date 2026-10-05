@@ -1,0 +1,178 @@
+{
+  "completion_authority": false,
+  "deferred_theorem_names": {
+    "originalReal_model_converges": "Already qualified for mathematical recurrence only; this draft does not establish entire Python recurrence equivalence",
+    "realSourceGradient_eq": "Deferred: no actual gradient AST numerical slice is compiled in v1"
+  },
+  "dependencies_already_in_qualified_final_convergence_profile": true,
+  "draft": {
+    "bytes": 11460,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-source-plan-20261005-01/math/TypedNumericSlice.lean",
+    "sha256": "26a07662275da84404fe5797f0fdc21b6b4910c0ddf54810945bd454fb9f4bc9"
+  },
+  "exact_draft_queries": [
+    "RankerSourceSemantics.compile_eval_commutes",
+    "RankerSourceSemantics.compile_sound",
+    "RankerSourceSemantics.compile_refuses_unsupported",
+    "RankerSourceSemantics.compile_refuses_unknown_name",
+    "RankerSourceSemantics.compiled_dot_body",
+    "RankerSourceSemantics.compiled_update_body",
+    "RankerSourceSemantics.orderedFsum_eq_sum",
+    "RankerSourceSemantics.zipBody_length",
+    "RankerSourceSemantics.zipBodyWithScalar_length",
+    "RankerSourceSemantics.supported_dot_eq",
+    "RankerSourceSemantics.source_dot_literal_eq",
+    "RankerSourceSemantics.supported_update_eq",
+    "RankerSourceSemantics.source_update_literal_eq",
+    "RankerSourceSemantics.originalRealStep_update_join"
+  ],
+  "execution_authority": false,
+  "full_task_satisfaction": "unknown",
+  "host_compiler_interface": {
+    "compile": "compile : (String \u2192 Option (Fin slots)) \u2192 SourceScalar \u2192 Option (ScalarIR slots)",
+    "container_programs": [
+      "zipBody",
+      "zipBodyWithScalar",
+      "dotSlice",
+      "updateSlice",
+      "runDotSource",
+      "runUpdateSource"
+    ],
+    "denotation": "eval : ScalarIR slots \u2192 (Fin slots \u2192 \u211d) \u2192 \u211d",
+    "dot_literal": ".mul (.var \"x\") (.var \"y\")",
+    "dot_scope": {
+      "x": 0,
+      "y": 1
+    },
+    "no_dot_gradient_objective_opcode": true,
+    "partial_source_denotation": "evalSource : (String \u2192 Option \u211d) \u2192 SourceScalar \u2192 Option \u211d",
+    "raw_syntax": "SourceScalar(num \u211a,var String,add/sub/mul SourceScalar SourceScalar,unsupported String)",
+    "renderer_must_preserve_actual_names_and_tree": true,
+    "source_generated_literal_obligations": [
+      "compile dotScope actualSourceDotBody = some compiledDotBody",
+      "compile updateScope actualSourceUpdateBody = some compiledUpdateBody"
+    ],
+    "typed_syntax": "ScalarIR slots(num \u211a,var Fin slots,add/sub/mul ScalarIR ScalarIR)",
+    "update_literal": ".sub (.var \"w\") (.mul (.var \"step\") (.var \"g\"))",
+    "update_scope": {
+      "g": 1,
+      "step": 2,
+      "w": 0
+    }
+  },
+  "imports": [
+    "OriginalRealDescent",
+    "Mathlib.Algebra.BigOperators.Fin"
+  ],
+  "minimal_next_owned_step": {
+    "1": "Freeze this uncompiled producer plus host-generated actual AST literals and byte/AST/source bindings in a separate qualification namespace",
+    "2": "Run only the existing bounded Lean checker over fourteen generic/bridge queries and source-generated compilation equations; retain all outcomes and full object/chunks",
+    "3": "Host source compiler refusal/changed-query checks must separately cover unsupported AST, altered operators, extra comprehension filters/async/zip inputs, invalid binders and malformed scopes",
+    "4": "After these pass, extend kernel syntax and compiler to actual stable _objective factor/gradient AST, preserving exact four-pair/eighty-coordinate cardinalities; join RealStableFactor only after literal compile preservation"
+  },
+  "namespace": "RankerSourceSemantics",
+  "native_qualification_done": false,
+  "no_theorem_qualified_by_this_plan": true,
+  "optional_original_join": "originalRealStep_update_join supplies the already-qualified mathematical gradient as an argument; it does not prove Python _objective produces that argument",
+  "planner_activation": false,
+  "prior_frozen_profile": {
+    "bytes": 9965702,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/preparation/lean-original-convergence-02-producer/environment-manifest.json",
+    "sha256": "c9cf0ff47f85d562eb3c2f3dcd604f2f850f99b8f8e8e42a9bd063f668ed3084"
+  },
+  "proof_authority": false,
+  "queried_theorem_qualification_count": 0,
+  "remaining_open": [
+    "Full Python AST parser/source-to-literal correctness and builtin/math name resolution",
+    "Python float numeric literal and binary64 arithmetic/fsum/libm/error/exception refinement",
+    "Stable-loss exp/log1p/abs/max and branch AST semantics",
+    "_objective gradient, finite checks and return dictionary",
+    "_prepare corpus validation, lexical/native AST features, identities, validation branches, hashes and profiles",
+    "Full finite training loop/trace/inference/metrics and actual execution origin",
+    "General codebase IR semantic fidelity, global autoencoder convergence and full task satisfaction"
+  ],
+  "schema": "ranker-source-semantics-numeric-slice-source-plan@1",
+  "source": {
+    "bytes": 16391,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "source_backed_apis": [
+    {
+      "lemma": "List.sum_eq_foldl",
+      "line": 2801,
+      "path": "Init/Data/List/Lemmas.lean"
+    },
+    {
+      "lemma": "List.ofFn_succ",
+      "line": 81,
+      "path": "Init/Data/List/OfFn.lean"
+    },
+    {
+      "lemma": "List.zipWith_cons_cons and List.length_zipWith",
+      "path": "Init/Data/List/Zip.lean"
+    },
+    {
+      "lemma": "List.sum_ofFn (to_additive of prod_ofFn)",
+      "line": 751,
+      "path": "Mathlib/Algebra/BigOperators/Fin.lean"
+    },
+    {
+      "definition": "RankerRealCurvature.dot",
+      "line": 12,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/math/CoordinateGeometry.lean"
+    },
+    {
+      "definition": "RankerRealCurvature.realGradientStep",
+      "line": 85,
+      "path": "qualification/codebase_ir/ranker-real-curvature-20261005-01/math/RealDescent.lean"
+    }
+  ],
+  "source_subtrees": [
+    {
+      "Python_parse_is_part_of_host_frontier": true,
+      "ast_dump": "Return(value=Call(func=Attribute(value=Name(id='math', ctx=Load()), attr='fsum', ctx=Load()), args=[GeneratorExp(elt=BinOp(left=Name(id='x', ctx=Load()), op=Mult(), right=Name(id='y', ctx=Load())), generators=[comprehension(target=Tuple(elts=[Name(id='x', ctx=Store()), Name(id='y', ctx=Store())], ctx=Store()), iter=Call(func=Name(id='zip', ctx=Load()), args=[Name(id='a', ctx=Load()), Name(id='b', ctx=Load())], keywords=[]), ifs=[], is_async=0)])], keywords=[]))",
+      "ast_dump_utf8_sha256": "f6c7fffe649a45df4e339808fc1354e65b21b82d54c2623775ed7faae1da631b",
+      "end_lineno": 120,
+      "function": "_dot",
+      "lineno": 120
+    },
+    {
+      "Python_parse_is_part_of_host_frontier": true,
+      "ast_dump": "Assign(targets=[Name(id='weights', ctx=Store())], value=ListComp(elt=BinOp(left=Name(id='w', ctx=Load()), op=Sub(), right=BinOp(left=Name(id='step', ctx=Load()), op=Mult(), right=Name(id='g', ctx=Load()))), generators=[comprehension(target=Tuple(elts=[Name(id='w', ctx=Store()), Name(id='g', ctx=Store())], ctx=Store()), iter=Call(func=Name(id='zip', ctx=Load()), args=[Name(id='weights', ctx=Load()), Name(id='gradient', ctx=Load())], keywords=[]), ifs=[], is_async=0)]))",
+      "ast_dump_utf8_sha256": "18f6dae8d8b26c08e101018837033db979d20c4bb5b65cb80119a4fd03084c4b",
+      "end_lineno": 201,
+      "function": "train_terminal_codebase_intent_ranker",
+      "lineno": 201
+    }
+  ],
+  "status": "uncompiled_source_only_candidate",
+  "supported_boundary": {
+    "evaluation_order": "Left/right source arithmetic tree is preserved structurally; the exact-real pure backend does not establish CPython execution/exception order",
+    "functions": "_dot return expression; numerical body of the training weight-update assignment only",
+    "lists": "Generic zipWith retains shorter-length truncation; equal-length Fin m\u2192List bridges do not truncate",
+    "original_shape": "m=80; pair cardinality4 belongs to imported mathematical gradient and is not a source-objective translation",
+    "scalar_backend": "Exact-real arithmetic; literal rational projection; ordered left addition fold for the fsum call",
+    "source_binding": "Host Python ast.parse/AST extraction, parser version, lexical/global builtin/math binding and byte-hash/literal-rendering association remain an explicit frontier"
+  },
+  "unchanged_native_limits": {
+    "cpu_seconds": 20,
+    "max_input_bytes": 262144,
+    "max_output_bytes": 65536,
+    "max_workspace_bytes": 16777216,
+    "timeout_seconds": 20
+  },
+  "work_counts": {
+    "codec_jobs": 0,
+    "fits": 0,
+    "gradient_evaluations": 0,
+    "native_jobs": 0,
+    "optimizer_updates": 0,
+    "original_source_imports": 0,
+    "preparations": 0,
+    "project_imports": 0,
+    "remote_mutations": 0,
+    "source_ast_parses": 2,
+    "trace_replays": 0
+  }
+}

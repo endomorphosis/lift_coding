@@ -1,0 +1,1375 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 3344,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/README.md",
+      "sha256": "f7529814fd0e65c72a4d33add533fce99871c1bf863bfc2961b42db63de4f4b0"
+    },
+    {
+      "bytes": 41339,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/build_source_metadata_01.py",
+      "sha256": "d40b60554e292a2b6b8e14a7ff7696809360479bcb81e9c0c57bf351071e6fbf"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-compile-source-01.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-compile-source-02.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-lean-generated-slices-01.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-lean-typed-scalar-01.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-lean-typed-scalar-02.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-pure-tests-source-01.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-pure-tests-source-02.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 469,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01-closed.json",
+      "sha256": "263d566e672f8ac0e24ef1783f36de4b4d8f16e0a5874cb6b502668c8a9f0347"
+    },
+    {
+      "bytes": 81,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01.stdout.log",
+      "sha256": "b8a9d7c8b74eb651e56757f9b1d1ddaf2d324a4c3286668a884f47435919261e"
+    },
+    {
+      "bytes": 3368,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/GeneratedNumericSlices.lean",
+      "sha256": "4523687c6334ed6c70ca9409c283b5b20c14c4423d6517e1c628a0075a518788"
+    },
+    {
+      "bytes": 14233,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/closed.json",
+      "sha256": "7710861d7f9c501c9b548b4f6e20547113ffaa260f312b3f8630760c4c7202e9"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/resources.json",
+      "sha256": "e9d61e3d082f2deb5881beed3cf9f80a10c40e696b3ff3d643832f8ecb0f3d7c"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4024,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/source-slices.json",
+      "sha256": "0c8ee3c28e80533cf0f1ceecde06fad2f2daa10c366fd43bcbebd6f34df0c270"
+    },
+    {
+      "bytes": 1856,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/started.json",
+      "sha256": "71033b898b462a8f30c60c4f9f2541db9a36dce3064e2e8922a02eee2c9eedf6"
+    },
+    {
+      "bytes": 471,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02-closed.json",
+      "sha256": "e215fdd8a430153cc241c0bfeb725c92d83ed85fe7eb07d46f4485d0774280d4"
+    },
+    {
+      "bytes": 81,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02.stdout.log",
+      "sha256": "353693114b2bbfef11bc46f0ef9250165e3b41d55849d0cc3e3296e2aa1a323b"
+    },
+    {
+      "bytes": 3129,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/GeneratedNumericSlices.lean",
+      "sha256": "841cc68dd9ef75e76398804ca5c0f2e33cef100611f2c3755c26ee24c9491297"
+    },
+    {
+      "bytes": 14232,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/closed.json",
+      "sha256": "92532dbc64af515c5045410fbf2b9f5b2ad3d9193f0372ef24c5378eeec20b3a"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/resources.json",
+      "sha256": "1a666be5a837406736f19165910493e3f435f54be631042886f49671ae28fdf4"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4024,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/source-slices.json",
+      "sha256": "0c8ee3c28e80533cf0f1ceecde06fad2f2daa10c366fd43bcbebd6f34df0c270"
+    },
+    {
+      "bytes": 1856,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/started.json",
+      "sha256": "d8b08fa606280ec24e27279a7aa7aea69b4a1813edaab19e035df5ba78c65f12"
+    },
+    {
+      "bytes": 477,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01-closed.json",
+      "sha256": "6276d35a709f49b28ca9e7db856587f60a537304b7ccfee0c88448aba82bc5b0"
+    },
+    {
+      "bytes": 80,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01.stdout.log",
+      "sha256": "762c07c8526671a0799f16be0da38890fbc5b072bc1aa39efd1d5189af7cb459"
+    },
+    {
+      "bytes": 11597,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/check-result.json",
+      "sha256": "2261dc8f8effc5449c7b37db95f8a3f834c9e4b14135d6ea2d5df62563188a7b"
+    },
+    {
+      "bytes": 15715,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/closed.json",
+      "sha256": "3da906c0dc0c01c59b038a93e74f33afac844d8510f5048a3bafbf83a36c63d6"
+    },
+    {
+      "bytes": 11598,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/GeneratedNumericSlices.check.json",
+      "sha256": "b164eb06da7854ba66868da183e577bfb0d80c9771a3a0e99297832a542a25e6"
+    },
+    {
+      "bytes": 3681,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/GeneratedNumericSlices.lean",
+      "sha256": "2d7c2170195275e2bbecc687dd942ebd2d82d5d2819dfe85d9b99f32fb9bc6e6"
+    },
+    {
+      "bytes": 40584,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/GeneratedNumericSlices.olean",
+      "sha256": "0c213c77bd25cafc44bee70e750eb3ed8735154ffc2c7c3ecc1f9d9ce16c25f5"
+    },
+    {
+      "bytes": 40584,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/LeanProofChunk000.bin",
+      "sha256": "0c213c77bd25cafc44bee70e750eb3ed8735154ffc2c7c3ecc1f9d9ce16c25f5"
+    },
+    {
+      "bytes": 550,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/LeanProofChunks.json",
+      "sha256": "45f287a3ba5318b2828c61e063d1f359d0a22de1eba4adba400f84c33a959efa"
+    },
+    {
+      "bytes": 1336,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/resources.json",
+      "sha256": "db6ea03995df7b6881a1d6dde47a19cded7eab43cd0d84b2e2303bb15257f90d"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1870,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/started.json",
+      "sha256": "ff7e6f412563aed61dd6186164bb72b2d3f01aab472da229ba0425945b785855"
+    },
+    {
+      "bytes": 472,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01-closed.json",
+      "sha256": "5d7dae0cbc36e3698e16ae51b836aac45a041ad13b399cbd2453448143752201"
+    },
+    {
+      "bytes": 1139,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01.stdout.log",
+      "sha256": "e934129050e7c1ebb2a4541a723675de0fa26d840d092609fb90f6f40d327aa9"
+    },
+    {
+      "bytes": 12256,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/check-result.json",
+      "sha256": "39291f56456434f28191b1a7c47b8d6fa7df121059b98c06bf497718721870e8"
+    },
+    {
+      "bytes": 16731,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/closed.json",
+      "sha256": "cba82d2a503d1a42fa64a029114e3124076004adf776fff76728e6412fbb93e8"
+    },
+    {
+      "bytes": 210,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/lean/LeanProofChunks.json",
+      "sha256": "e4a002205eeae87779636cd7eebab687d96435cea98dc791e2546bffe57c4e05"
+    },
+    {
+      "bytes": 12257,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/lean/TypedNumericSlice.check.json",
+      "sha256": "83732bc323161223316e81174af2ac8c4e635c5542d44fa2193ea61fe6685755"
+    },
+    {
+      "bytes": 12367,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/lean/TypedNumericSlice.lean",
+      "sha256": "739646af9843393839b6b62a50de7cf4465db00fbfbb7706a04167ce4816a934"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/resources.json",
+      "sha256": "ec1ec36c416f16c8bec131c03b358f8a08e71d87b71ea3bff00046985389ba77"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1862,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/started.json",
+      "sha256": "9e765ae09e50e553807c2864b7b518b93d849ea0e5d2875e236f2fa743a20c07"
+    },
+    {
+      "bytes": 472,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02-closed.json",
+      "sha256": "5092da50b94b249912d512b04dc18518512b367e5c3f702006557aa93096e08f"
+    },
+    {
+      "bytes": 80,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02.stdout.log",
+      "sha256": "5456b7c1512392ea236ea9fe0544ba8107914594e8a3046c5deb711e24b5227a"
+    },
+    {
+      "bytes": 19104,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+      "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+    },
+    {
+      "bytes": 15695,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/closed.json",
+      "sha256": "85c5803339e8decf6ae9fde901b3e7e8548291a8c7e2dcb6c99229c5bc1d985d"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk000.bin",
+      "sha256": "a92ef0578bd2a51eb60090aad756c3e8a32239ce583a2238df26e6f6b8234858"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk001.bin",
+      "sha256": "4c1dc49de188eed1ef0c1e666b594ed1061c9582056f9ef4f48b86a9ca2744f1"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk002.bin",
+      "sha256": "cde80d988b86f6bb9ef6c0d3824e64cee94c12db0f5ffd7a50c7b5b087e75bcf"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk003.bin",
+      "sha256": "4b15f07ba70055456e0a669ec3afbb4530edf74418905c13fcd042a5c1cfb4ea"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk004.bin",
+      "sha256": "f43699994fa281711590174767b6570d53131e8e1590d5a8562231d5707b12f9"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk005.bin",
+      "sha256": "5d3f10155ec7d06da63c67c86d17136d461b6ed9ca3ae0ae8eb8e5c1893bcc25"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk006.bin",
+      "sha256": "0ef7c50e7bf8fb0d7afdf9be8a0a61f4f721e59bc2904157dc240f8080badddc"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk007.bin",
+      "sha256": "eaaecf73482aae5b278ff506abc158d02d247991e4e107a41a4e1930fbd540a5"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk008.bin",
+      "sha256": "e89be05f3045c740e31441fcba62970cc4bddd2351615279ef31e8b6e5b0c31d"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk009.bin",
+      "sha256": "a116a03ff0ad2f29876324308e121a985b0e73ea2d0c65680181782bdb889f88"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk010.bin",
+      "sha256": "f72fe9558e2ed9b2769d94c60e79f2e7c43407efc28da6654c3527b54a608229"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk011.bin",
+      "sha256": "398c7021e17185957d591bd94bf967b503a994cb759b80a5b5fc9741a06a45e1"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk012.bin",
+      "sha256": "33cd881c213ac2c70ac022b4c0767b4723acd8ddc924f937a3a69605cee34894"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk013.bin",
+      "sha256": "782c483e7e8ea5fc6613a0d8b9b8a4a6596e74da7b88d4b667189010265019a2"
+    },
+    {
+      "bytes": 22416,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk014.bin",
+      "sha256": "d4d3b4bbe98efc2a320e74664a23fc0474fd0a865f6ea48101ab6512b214d357"
+    },
+    {
+      "bytes": 2605,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunks.json",
+      "sha256": "2da15c4910bceef6c0fe30f8c8969d801e51d40fe669775ef860761a97575711"
+    },
+    {
+      "bytes": 19105,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/TypedNumericSlice.check.json",
+      "sha256": "61b74938fb25c15475861fa02bce958cc923afe3286596304ea81669077d348c"
+    },
+    {
+      "bytes": 12104,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/TypedNumericSlice.lean",
+      "sha256": "ee4fec837a351f8a578ba99f47c25a0ac6ef10e24de62cd6cc8e08fc7fb966cb"
+    },
+    {
+      "bytes": 939920,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/TypedNumericSlice.olean",
+      "sha256": "d666b11adfa7d878e2745c2ebdec1c7caf523bd82e0d7a702e99741376209465"
+    },
+    {
+      "bytes": 1336,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/resources.json",
+      "sha256": "9b541410b07b889a5cdfa9e7502e04e95cf6cb7c4bbdae0733a2d70cdc22fc48"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1862,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/started.json",
+      "sha256": "6876a33f2721db07935d4393f55d25b8198955cdd278c8b01e8ccaf7c3411fc4"
+    },
+    {
+      "bytes": 474,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01-closed.json",
+      "sha256": "7f7257d4372131a3c534989c230c52a17ca2bb36b264731f96aa48017614e9cf"
+    },
+    {
+      "bytes": 261,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01.stdout.log",
+      "sha256": "1c3605132836f08848df0f59f3def245fe02b635c519f086f66945a5aa20c3d8"
+    },
+    {
+      "bytes": 15167,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/closed.json",
+      "sha256": "37d917338fbe3ddde11d51b946df288d7721376f391d1f3c119aad7b8d5780a9"
+    },
+    {
+      "bytes": 74961,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/phases.json",
+      "sha256": "63f7070c2503b20951c244c59608e0999f325dc4a2b8005e67d19d0bc950d6aa"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/resources.json",
+      "sha256": "5dba7954f68263a5f9450a3b9492a999707dffb0d781bd4711b9331429a69264"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1862,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/started.json",
+      "sha256": "acde54e2c051cb2b3379ff7b3a8190dbc39b358d8ac4ec13ab68aeacf8973b21"
+    },
+    {
+      "bytes": 16154,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/tests.xml",
+      "sha256": "2c469a106449aa230e54f5b21ec93e66d5d9a7365e84938023b6c8bd4bf44311"
+    },
+    {
+      "bytes": 473,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02-closed.json",
+      "sha256": "619a6a5ad1e32235fa6b484e3d929de468c741f934284e616ff6d9c974e59c1e"
+    },
+    {
+      "bytes": 261,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02.stdout.log",
+      "sha256": "b1dc6e556a8b3ac9fb56643b404b801ae86b5137c96a9b735cd7e523ff7f0c6f"
+    },
+    {
+      "bytes": 15167,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/closed.json",
+      "sha256": "f29564f903aea95229b7fa91a5bf3a7a70f6832dbd3182d84ae7f1de7eea6ca5"
+    },
+    {
+      "bytes": 74951,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/phases.json",
+      "sha256": "3931cfcb447a3ed6f790a9e9869c46d1c38f1ae935d0a271b19771010e74900f"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/resources.json",
+      "sha256": "ec1ec36c416f16c8bec131c03b358f8a08e71d87b71ea3bff00046985389ba77"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1862,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/started.json",
+      "sha256": "b1e81c42d31c1fafe6fcc6f86332738e8c97747dc4c1eb6d450bc2aa00f849db"
+    },
+    {
+      "bytes": 16154,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/tests.xml",
+      "sha256": "ce9912aac3de4c7b2f3893c47980ba1c9560598e0b6c8ce878374f5136c15405"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 11197,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/math-v2/TypedNumericSlice.lean",
+      "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+    },
+    {
+      "bytes": 3717,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/compile-source-01-invocation.json",
+      "sha256": "dacf18b5332b2341fb36a4578e49890fe24441bafd314a1c9e3489a82bc6c2e4"
+    },
+    {
+      "bytes": 4201,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/compile-source-02-invocation.json",
+      "sha256": "96ccc040d157085459dca5c399f8f32ef79a8e17a8e1d3aa5a504f05026d2144"
+    },
+    {
+      "bytes": 1876,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-check-specification.json",
+      "sha256": "60e83706befa89422c33c02bb2e9651b888e3cce3370a0ec1b1af3c9dac1f908"
+    },
+    {
+      "bytes": 1541,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-freeze-result.json",
+      "sha256": "45a3f941f76472732847f8cfbd401a97ff53743bede635de15adb579c694dde6"
+    },
+    {
+      "bytes": 7385,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-invocation.json",
+      "sha256": "d49a77eb3217bbc73602f74fdd0c242fe5310e92c4a63b0ce71c2910d46c3f84"
+    },
+    {
+      "bytes": 3129,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/GeneratedNumericSlices.lean",
+      "sha256": "841cc68dd9ef75e76398804ca5c0f2e33cef100611f2c3755c26ee24c9491297"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 9969244,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/environment-manifest.json",
+      "sha256": "e7db6a10a522f64496560a07343213b795def126972f804ba7091f174a02a8b7"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 2078,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-check-specification.json",
+      "sha256": "3e5b6d8148578ef1e44d7e5f54767adab3746979d271e3fbfcd676380973162e"
+    },
+    {
+      "bytes": 1517,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-freeze-result.json",
+      "sha256": "6bcd0c6e14579a909c6659850ba4d87aff393ace65cd0fa64941df8f5a63e227"
+    },
+    {
+      "bytes": 4647,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-invocation.json",
+      "sha256": "0c089cf5d3d1ba3e79a37137c9e3b22a5364201b07c4f60df4703d5eee75ac21"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 11460,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/TypedNumericSlice.lean",
+      "sha256": "26a07662275da84404fe5797f0fdc21b6b4910c0ddf54810945bd454fb9f4bc9"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 9966669,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/environment-manifest.json",
+      "sha256": "b08edd0c6fde42fec77a7752ce16a746b99addd06f15ca01232fa3b39dedf078"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 2078,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-check-specification.json",
+      "sha256": "314482337c3f74ab340e366e6463d8b589f3405c9765e6abcb7ed5f95dcf5052"
+    },
+    {
+      "bytes": 1517,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-freeze-result.json",
+      "sha256": "7a34a5372e223cdeacebbf1d4121a59c09cdf8100a678b52b1eeb1fe8ab58e17"
+    },
+    {
+      "bytes": 4647,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-invocation.json",
+      "sha256": "746ab807daff0d64afa89c4b91495fd019f1907ce6bb84ff84d0ac07a075235b"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 11197,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/TypedNumericSlice.lean",
+      "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 9966660,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/environment-manifest.json",
+      "sha256": "389da898f3c2638807bc9b9b4e3da29cad708c443a94daa3910a9e615384f04b"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 8272,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-build-plan-01.json",
+      "sha256": "7d4de36938aca90e4bff572dc00bfa53bda77c37fdd8b5c37476a0428d874d79"
+    },
+    {
+      "bytes": 7531,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-source-01/build-receipt.json",
+      "sha256": "ffc066a92f4476a9fc3dcb991651d8689418d29f1a2552f2de371d25179ec98d"
+    },
+    {
+      "bytes": 6470721,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-source-01/metadata-inputs.json",
+      "sha256": "16766db973c8f8a017ca275fc474e0ce7cdc3664901eea2fda2ed629c3a06569"
+    },
+    {
+      "bytes": 3177,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/pure-tests-source-01-invocation.json",
+      "sha256": "7ac00c04ac0480b49040d3c71d44dae0da18bc9871ae6cb606cf2319f9607ed4"
+    },
+    {
+      "bytes": 3667,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/pure-tests-source-02-invocation.json",
+      "sha256": "df53814e56f9620adedf24ba1f93a91d9d81ee0e005dcc003f74d01dc07a8518"
+    },
+    {
+      "bytes": 478981,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+      "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+    },
+    {
+      "bytes": 1366,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/source-slices-specification.json",
+      "sha256": "a83e4bce90450833db0eb31150aedbf31f5f3f0bb6b0c8b0a4f2d2c2d27ff035"
+    },
+    {
+      "bytes": 4527,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/prepare_request_01.py",
+      "sha256": "7e54562d463afb399bcc98940f0457a4005436f93e0b0dbbda9107070a0ed027"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/run_source_semantics_controls.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/run_source_semantics_controls_v2.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 5487,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-model-obligations-01.json",
+      "sha256": "184ce58096f0bea6eb698a33d7e8d585dd7e1bde6431c06ac031851c7821d7f2"
+    },
+    {
+      "bytes": 17103,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/test_typed_slice_compiler.py",
+      "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+    },
+    {
+      "bytes": 28870,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/typed_slice_compiler.py",
+      "sha256": "6c38d05eff154e058bb31b1943bfe32b713b3e403fe778292353e738765ee119"
+    },
+    {
+      "bytes": 17103,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/test_typed_slice_compiler.py",
+      "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+    },
+    {
+      "bytes": 29109,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/typed_slice_compiler.py",
+      "sha256": "f318a6879d9eac517127a4440cfca8e48b2ad61a7411453b16f17847b3dd1f06"
+    },
+    {
+      "bytes": 5009,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-metadata-builder-review-20261005-01/review-receipt.json",
+      "sha256": "789dc7f19ade29e545149e267df2c31885b26b180f825ed0dee1273fd0120e52"
+    },
+    {
+      "bytes": 10415,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-semantic-native-review-20261005-01/review-receipt.json",
+      "sha256": "02eaceb1c54ce1d4a179459b0f748a4c68c44d8b7800df7d562b6d31f79ec901"
+    },
+    {
+      "bytes": 3659,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-v2-review-20261005-01/review-receipt.json",
+      "sha256": "389c846228b7d1e0c00bda272188a77c7c5edab971e5af9874061e33d2f1b28c"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-metadata-source-slices-01.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 478981,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+      "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+    },
+    {
+      "bytes": 3344,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/README.md",
+      "sha256": "f7529814fd0e65c72a4d33add533fce99871c1bf863bfc2961b42db63de4f4b0"
+    },
+    {
+      "bytes": 41339,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/build_source_metadata_01.py",
+      "sha256": "d40b60554e292a2b6b8e14a7ff7696809360479bcb81e9c0c57bf351071e6fbf"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-compile-source-01.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-compile-source-02.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-lean-generated-slices-01.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-lean-typed-scalar-01.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-lean-typed-scalar-02.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-pure-tests-source-01.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-pure-tests-source-02.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 469,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01-closed.json",
+      "sha256": "263d566e672f8ac0e24ef1783f36de4b4d8f16e0a5874cb6b502668c8a9f0347"
+    },
+    {
+      "bytes": 81,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01.stdout.log",
+      "sha256": "b8a9d7c8b74eb651e56757f9b1d1ddaf2d324a4c3286668a884f47435919261e"
+    },
+    {
+      "bytes": 3368,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/GeneratedNumericSlices.lean",
+      "sha256": "4523687c6334ed6c70ca9409c283b5b20c14c4423d6517e1c628a0075a518788"
+    },
+    {
+      "bytes": 14233,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/closed.json",
+      "sha256": "7710861d7f9c501c9b548b4f6e20547113ffaa260f312b3f8630760c4c7202e9"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/resources.json",
+      "sha256": "e9d61e3d082f2deb5881beed3cf9f80a10c40e696b3ff3d643832f8ecb0f3d7c"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4024,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/source-slices.json",
+      "sha256": "0c8ee3c28e80533cf0f1ceecde06fad2f2daa10c366fd43bcbebd6f34df0c270"
+    },
+    {
+      "bytes": 1856,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-01/started.json",
+      "sha256": "71033b898b462a8f30c60c4f9f2541db9a36dce3064e2e8922a02eee2c9eedf6"
+    },
+    {
+      "bytes": 471,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02-closed.json",
+      "sha256": "e215fdd8a430153cc241c0bfeb725c92d83ed85fe7eb07d46f4485d0774280d4"
+    },
+    {
+      "bytes": 81,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02.stdout.log",
+      "sha256": "353693114b2bbfef11bc46f0ef9250165e3b41d55849d0cc3e3296e2aa1a323b"
+    },
+    {
+      "bytes": 3129,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/GeneratedNumericSlices.lean",
+      "sha256": "841cc68dd9ef75e76398804ca5c0f2e33cef100611f2c3755c26ee24c9491297"
+    },
+    {
+      "bytes": 14232,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/closed.json",
+      "sha256": "92532dbc64af515c5045410fbf2b9f5b2ad3d9193f0372ef24c5378eeec20b3a"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/resources.json",
+      "sha256": "1a666be5a837406736f19165910493e3f435f54be631042886f49671ae28fdf4"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4024,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/source-slices.json",
+      "sha256": "0c8ee3c28e80533cf0f1ceecde06fad2f2daa10c366fd43bcbebd6f34df0c270"
+    },
+    {
+      "bytes": 1856,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/started.json",
+      "sha256": "d8b08fa606280ec24e27279a7aa7aea69b4a1813edaab19e035df5ba78c65f12"
+    },
+    {
+      "bytes": 477,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01-closed.json",
+      "sha256": "6276d35a709f49b28ca9e7db856587f60a537304b7ccfee0c88448aba82bc5b0"
+    },
+    {
+      "bytes": 80,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01.stdout.log",
+      "sha256": "762c07c8526671a0799f16be0da38890fbc5b072bc1aa39efd1d5189af7cb459"
+    },
+    {
+      "bytes": 11597,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/check-result.json",
+      "sha256": "2261dc8f8effc5449c7b37db95f8a3f834c9e4b14135d6ea2d5df62563188a7b"
+    },
+    {
+      "bytes": 15715,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/closed.json",
+      "sha256": "3da906c0dc0c01c59b038a93e74f33afac844d8510f5048a3bafbf83a36c63d6"
+    },
+    {
+      "bytes": 11598,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/GeneratedNumericSlices.check.json",
+      "sha256": "b164eb06da7854ba66868da183e577bfb0d80c9771a3a0e99297832a542a25e6"
+    },
+    {
+      "bytes": 3681,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/GeneratedNumericSlices.lean",
+      "sha256": "2d7c2170195275e2bbecc687dd942ebd2d82d5d2819dfe85d9b99f32fb9bc6e6"
+    },
+    {
+      "bytes": 40584,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/GeneratedNumericSlices.olean",
+      "sha256": "0c213c77bd25cafc44bee70e750eb3ed8735154ffc2c7c3ecc1f9d9ce16c25f5"
+    },
+    {
+      "bytes": 40584,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/LeanProofChunk000.bin",
+      "sha256": "0c213c77bd25cafc44bee70e750eb3ed8735154ffc2c7c3ecc1f9d9ce16c25f5"
+    },
+    {
+      "bytes": 550,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/lean/LeanProofChunks.json",
+      "sha256": "45f287a3ba5318b2828c61e063d1f359d0a22de1eba4adba400f84c33a959efa"
+    },
+    {
+      "bytes": 1336,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/resources.json",
+      "sha256": "db6ea03995df7b6881a1d6dde47a19cded7eab43cd0d84b2e2303bb15257f90d"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1870,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/started.json",
+      "sha256": "ff7e6f412563aed61dd6186164bb72b2d3f01aab472da229ba0425945b785855"
+    },
+    {
+      "bytes": 472,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01-closed.json",
+      "sha256": "5d7dae0cbc36e3698e16ae51b836aac45a041ad13b399cbd2453448143752201"
+    },
+    {
+      "bytes": 1139,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01.stdout.log",
+      "sha256": "e934129050e7c1ebb2a4541a723675de0fa26d840d092609fb90f6f40d327aa9"
+    },
+    {
+      "bytes": 12256,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/check-result.json",
+      "sha256": "39291f56456434f28191b1a7c47b8d6fa7df121059b98c06bf497718721870e8"
+    },
+    {
+      "bytes": 16731,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/closed.json",
+      "sha256": "cba82d2a503d1a42fa64a029114e3124076004adf776fff76728e6412fbb93e8"
+    },
+    {
+      "bytes": 210,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/lean/LeanProofChunks.json",
+      "sha256": "e4a002205eeae87779636cd7eebab687d96435cea98dc791e2546bffe57c4e05"
+    },
+    {
+      "bytes": 12257,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/lean/TypedNumericSlice.check.json",
+      "sha256": "83732bc323161223316e81174af2ac8c4e635c5542d44fa2193ea61fe6685755"
+    },
+    {
+      "bytes": 12367,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/lean/TypedNumericSlice.lean",
+      "sha256": "739646af9843393839b6b62a50de7cf4465db00fbfbb7706a04167ce4816a934"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/resources.json",
+      "sha256": "ec1ec36c416f16c8bec131c03b358f8a08e71d87b71ea3bff00046985389ba77"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1862,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/started.json",
+      "sha256": "9e765ae09e50e553807c2864b7b518b93d849ea0e5d2875e236f2fa743a20c07"
+    },
+    {
+      "bytes": 472,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02-closed.json",
+      "sha256": "5092da50b94b249912d512b04dc18518512b367e5c3f702006557aa93096e08f"
+    },
+    {
+      "bytes": 80,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02.stdout.log",
+      "sha256": "5456b7c1512392ea236ea9fe0544ba8107914594e8a3046c5deb711e24b5227a"
+    },
+    {
+      "bytes": 19104,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+      "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+    },
+    {
+      "bytes": 15695,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/closed.json",
+      "sha256": "85c5803339e8decf6ae9fde901b3e7e8548291a8c7e2dcb6c99229c5bc1d985d"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk000.bin",
+      "sha256": "a92ef0578bd2a51eb60090aad756c3e8a32239ce583a2238df26e6f6b8234858"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk001.bin",
+      "sha256": "4c1dc49de188eed1ef0c1e666b594ed1061c9582056f9ef4f48b86a9ca2744f1"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk002.bin",
+      "sha256": "cde80d988b86f6bb9ef6c0d3824e64cee94c12db0f5ffd7a50c7b5b087e75bcf"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk003.bin",
+      "sha256": "4b15f07ba70055456e0a669ec3afbb4530edf74418905c13fcd042a5c1cfb4ea"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk004.bin",
+      "sha256": "f43699994fa281711590174767b6570d53131e8e1590d5a8562231d5707b12f9"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk005.bin",
+      "sha256": "5d3f10155ec7d06da63c67c86d17136d461b6ed9ca3ae0ae8eb8e5c1893bcc25"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk006.bin",
+      "sha256": "0ef7c50e7bf8fb0d7afdf9be8a0a61f4f721e59bc2904157dc240f8080badddc"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk007.bin",
+      "sha256": "eaaecf73482aae5b278ff506abc158d02d247991e4e107a41a4e1930fbd540a5"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk008.bin",
+      "sha256": "e89be05f3045c740e31441fcba62970cc4bddd2351615279ef31e8b6e5b0c31d"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk009.bin",
+      "sha256": "a116a03ff0ad2f29876324308e121a985b0e73ea2d0c65680181782bdb889f88"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk010.bin",
+      "sha256": "f72fe9558e2ed9b2769d94c60e79f2e7c43407efc28da6654c3527b54a608229"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk011.bin",
+      "sha256": "398c7021e17185957d591bd94bf967b503a994cb759b80a5b5fc9741a06a45e1"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk012.bin",
+      "sha256": "33cd881c213ac2c70ac022b4c0767b4723acd8ddc924f937a3a69605cee34894"
+    },
+    {
+      "bytes": 65536,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk013.bin",
+      "sha256": "782c483e7e8ea5fc6613a0d8b9b8a4a6596e74da7b88d4b667189010265019a2"
+    },
+    {
+      "bytes": 22416,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunk014.bin",
+      "sha256": "d4d3b4bbe98efc2a320e74664a23fc0474fd0a865f6ea48101ab6512b214d357"
+    },
+    {
+      "bytes": 2605,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/LeanProofChunks.json",
+      "sha256": "2da15c4910bceef6c0fe30f8c8969d801e51d40fe669775ef860761a97575711"
+    },
+    {
+      "bytes": 19105,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/TypedNumericSlice.check.json",
+      "sha256": "61b74938fb25c15475861fa02bce958cc923afe3286596304ea81669077d348c"
+    },
+    {
+      "bytes": 12104,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/TypedNumericSlice.lean",
+      "sha256": "ee4fec837a351f8a578ba99f47c25a0ac6ef10e24de62cd6cc8e08fc7fb966cb"
+    },
+    {
+      "bytes": 939920,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/lean/TypedNumericSlice.olean",
+      "sha256": "d666b11adfa7d878e2745c2ebdec1c7caf523bd82e0d7a702e99741376209465"
+    },
+    {
+      "bytes": 1336,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/resources.json",
+      "sha256": "9b541410b07b889a5cdfa9e7502e04e95cf6cb7c4bbdae0733a2d70cdc22fc48"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1862,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/started.json",
+      "sha256": "6876a33f2721db07935d4393f55d25b8198955cdd278c8b01e8ccaf7c3411fc4"
+    },
+    {
+      "bytes": 474,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01-closed.json",
+      "sha256": "7f7257d4372131a3c534989c230c52a17ca2bb36b264731f96aa48017614e9cf"
+    },
+    {
+      "bytes": 261,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01.stdout.log",
+      "sha256": "1c3605132836f08848df0f59f3def245fe02b635c519f086f66945a5aa20c3d8"
+    },
+    {
+      "bytes": 15167,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/closed.json",
+      "sha256": "37d917338fbe3ddde11d51b946df288d7721376f391d1f3c119aad7b8d5780a9"
+    },
+    {
+      "bytes": 74961,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/phases.json",
+      "sha256": "63f7070c2503b20951c244c59608e0999f325dc4a2b8005e67d19d0bc950d6aa"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/resources.json",
+      "sha256": "5dba7954f68263a5f9450a3b9492a999707dffb0d781bd4711b9331429a69264"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1862,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/started.json",
+      "sha256": "acde54e2c051cb2b3379ff7b3a8190dbc39b358d8ac4ec13ab68aeacf8973b21"
+    },
+    {
+      "bytes": 16154,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-01/tests.xml",
+      "sha256": "2c469a106449aa230e54f5b21ec93e66d5d9a7365e84938023b6c8bd4bf44311"
+    },
+    {
+      "bytes": 473,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02-closed.json",
+      "sha256": "619a6a5ad1e32235fa6b484e3d929de468c741f934284e616ff6d9c974e59c1e"
+    },
+    {
+      "bytes": 261,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02.stdout.log",
+      "sha256": "b1dc6e556a8b3ac9fb56643b404b801ae86b5137c96a9b735cd7e523ff7f0c6f"
+    },
+    {
+      "bytes": 15167,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/closed.json",
+      "sha256": "f29564f903aea95229b7fa91a5bf3a7a70f6832dbd3182d84ae7f1de7eea6ca5"
+    },
+    {
+      "bytes": 74951,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/phases.json",
+      "sha256": "3931cfcb447a3ed6f790a9e9869c46d1c38f1ae935d0a271b19771010e74900f"
+    },
+    {
+      "bytes": 1341,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/resources.json",
+      "sha256": "ec1ec36c416f16c8bec131c03b358f8a08e71d87b71ea3bff00046985389ba77"
+    },
+    {
+      "bytes": 0,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1862,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/started.json",
+      "sha256": "b1e81c42d31c1fafe6fcc6f86332738e8c97747dc4c1eb6d450bc2aa00f849db"
+    },
+    {
+      "bytes": 16154,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/tests.xml",
+      "sha256": "ce9912aac3de4c7b2f3893c47980ba1c9560598e0b6c8ce878374f5136c15405"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 11197,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/math-v2/TypedNumericSlice.lean",
+      "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+    },
+    {
+      "bytes": 3717,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/compile-source-01-invocation.json",
+      "sha256": "dacf18b5332b2341fb36a4578e49890fe24441bafd314a1c9e3489a82bc6c2e4"
+    },
+    {
+      "bytes": 4201,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/compile-source-02-invocation.json",
+      "sha256": "96ccc040d157085459dca5c399f8f32ef79a8e17a8e1d3aa5a504f05026d2144"
+    },
+    {
+      "bytes": 1876,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-check-specification.json",
+      "sha256": "60e83706befa89422c33c02bb2e9651b888e3cce3370a0ec1b1af3c9dac1f908"
+    },
+    {
+      "bytes": 1541,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-freeze-result.json",
+      "sha256": "45a3f941f76472732847f8cfbd401a97ff53743bede635de15adb579c694dde6"
+    },
+    {
+      "bytes": 7385,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-invocation.json",
+      "sha256": "d49a77eb3217bbc73602f74fdd0c242fe5310e92c4a63b0ce71c2910d46c3f84"
+    },
+    {
+      "bytes": 3129,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/GeneratedNumericSlices.lean",
+      "sha256": "841cc68dd9ef75e76398804ca5c0f2e33cef100611f2c3755c26ee24c9491297"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 9969244,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/environment-manifest.json",
+      "sha256": "e7db6a10a522f64496560a07343213b795def126972f804ba7091f174a02a8b7"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 2078,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-check-specification.json",
+      "sha256": "3e5b6d8148578ef1e44d7e5f54767adab3746979d271e3fbfcd676380973162e"
+    },
+    {
+      "bytes": 1517,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-freeze-result.json",
+      "sha256": "6bcd0c6e14579a909c6659850ba4d87aff393ace65cd0fa64941df8f5a63e227"
+    },
+    {
+      "bytes": 4647,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-invocation.json",
+      "sha256": "0c089cf5d3d1ba3e79a37137c9e3b22a5364201b07c4f60df4703d5eee75ac21"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 11460,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/TypedNumericSlice.lean",
+      "sha256": "26a07662275da84404fe5797f0fdc21b6b4910c0ddf54810945bd454fb9f4bc9"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 9966669,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/environment-manifest.json",
+      "sha256": "b08edd0c6fde42fec77a7752ce16a746b99addd06f15ca01232fa3b39dedf078"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 2078,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-check-specification.json",
+      "sha256": "314482337c3f74ab340e366e6463d8b589f3405c9765e6abcb7ed5f95dcf5052"
+    },
+    {
+      "bytes": 1517,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-freeze-result.json",
+      "sha256": "7a34a5372e223cdeacebbf1d4121a59c09cdf8100a678b52b1eeb1fe8ab58e17"
+    },
+    {
+      "bytes": 4647,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-invocation.json",
+      "sha256": "746ab807daff0d64afa89c4b91495fd019f1907ce6bb84ff84d0ac07a075235b"
+    },
+    {
+      "bytes": 5828,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/RetainLeanProof.py",
+      "sha256": "ccdf7df547844ac5d39cc077c8a14194fd06f7bb51838d80ffa9d7f349999e66"
+    },
+    {
+      "bytes": 11197,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/TypedNumericSlice.lean",
+      "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+    },
+    {
+      "bytes": 29086,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/bounded_analytic_checker.py",
+      "sha256": "04015267ed110533a7406c0b39c38b88a974a1d80259fd5755a99ef908a8a8b4"
+    },
+    {
+      "bytes": 9966660,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/environment-manifest.json",
+      "sha256": "389da898f3c2638807bc9b9b4e3da29cad708c443a94daa3910a9e615384f04b"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 8272,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-build-plan-01.json",
+      "sha256": "7d4de36938aca90e4bff572dc00bfa53bda77c37fdd8b5c37476a0428d874d79"
+    },
+    {
+      "bytes": 7531,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-source-01/build-receipt.json",
+      "sha256": "ffc066a92f4476a9fc3dcb991651d8689418d29f1a2552f2de371d25179ec98d"
+    },
+    {
+      "bytes": 6470721,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/metadata-source-01/metadata-inputs.json",
+      "sha256": "16766db973c8f8a017ca275fc474e0ce7cdc3664901eea2fda2ed629c3a06569"
+    },
+    {
+      "bytes": 3177,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/pure-tests-source-01-invocation.json",
+      "sha256": "7ac00c04ac0480b49040d3c71d44dae0da18bc9871ae6cb606cf2319f9607ed4"
+    },
+    {
+      "bytes": 3667,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/pure-tests-source-02-invocation.json",
+      "sha256": "df53814e56f9620adedf24ba1f93a91d9d81ee0e005dcc003f74d01dc07a8518"
+    },
+    {
+      "bytes": 478981,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+      "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+    },
+    {
+      "bytes": 1366,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/source-slices-specification.json",
+      "sha256": "a83e4bce90450833db0eb31150aedbf31f5f3f0bb6b0c8b0a4f2d2c2d27ff035"
+    },
+    {
+      "bytes": 4527,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/prepare_request_01.py",
+      "sha256": "7e54562d463afb399bcc98940f0457a4005436f93e0b0dbbda9107070a0ed027"
+    },
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/run_source_semantics_controls.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/run_source_semantics_controls_v2.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 5487,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-model-obligations-01.json",
+      "sha256": "184ce58096f0bea6eb698a33d7e8d585dd7e1bde6431c06ac031851c7821d7f2"
+    },
+    {
+      "bytes": 17103,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/test_typed_slice_compiler.py",
+      "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+    },
+    {
+      "bytes": 28870,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/typed_slice_compiler.py",
+      "sha256": "6c38d05eff154e058bb31b1943bfe32b713b3e403fe778292353e738765ee119"
+    },
+    {
+      "bytes": 17103,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/test_typed_slice_compiler.py",
+      "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+    },
+    {
+      "bytes": 29109,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/typed_slice_compiler.py",
+      "sha256": "f318a6879d9eac517127a4440cfca8e48b2ad61a7411453b16f17847b3dd1f06"
+    },
+    {
+      "bytes": 5009,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-metadata-builder-review-20261005-01/review-receipt.json",
+      "sha256": "789dc7f19ade29e545149e267df2c31885b26b180f825ed0dee1273fd0120e52"
+    },
+    {
+      "bytes": 10415,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-semantic-native-review-20261005-01/review-receipt.json",
+      "sha256": "02eaceb1c54ce1d4a179459b0f748a4c68c44d8b7800df7d562b6d31f79ec901"
+    },
+    {
+      "bytes": 3659,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-v2-review-20261005-01/review-receipt.json",
+      "sha256": "389c846228b7d1e0c00bda272188a77c7c5edab971e5af9874061e33d2f1b28c"
+    }
+  ],
+  "mode": "metadata-source-slices-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 478981,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+    "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T14:46:13.421866+00:00"
+}

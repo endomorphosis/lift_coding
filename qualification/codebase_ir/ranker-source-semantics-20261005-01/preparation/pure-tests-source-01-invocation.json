@@ -1,0 +1,65 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 29109,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/typed_slice_compiler.py",
+      "sha256": "f318a6879d9eac517127a4440cfca8e48b2ad61a7411453b16f17847b3dd1f06"
+    },
+    {
+      "bytes": 17103,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/test_typed_slice_compiler.py",
+      "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    {
+      "bytes": 3149,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-review-20261005-01/review-receipt.json",
+      "sha256": "afe5cf1c0fd34afc297728c55c0fce5c6bda85a4b3a238b6d492e6f4197922fb"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-pure-tests-source-01.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 478981,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+      "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+    },
+    {
+      "bytes": 29109,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/typed_slice_compiler.py",
+      "sha256": "f318a6879d9eac517127a4440cfca8e48b2ad61a7411453b16f17847b3dd1f06"
+    },
+    {
+      "bytes": 17103,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source/test_typed_slice_compiler.py",
+      "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    {
+      "bytes": 3149,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-review-20261005-01/review-receipt.json",
+      "sha256": "afe5cf1c0fd34afc297728c55c0fce5c6bda85a4b3a238b6d492e6f4197922fb"
+    }
+  ],
+  "mode": "pure-tests-source-01",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 478981,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+    "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T06:53:27.282751+00:00"
+}

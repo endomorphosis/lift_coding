@@ -1,0 +1,141 @@
+{
+  "Git_or_HTTP_calls": 0,
+  "Q4_S3_P5_P6_writes": 0,
+  "actual_native_calls": 3,
+  "all32_governing_RPI_exits": "OPEN",
+  "captured_next_objective_draft_byte_clones": 4,
+  "codec_calls": 0,
+  "complete_chunk_object_joins_verified_in_memory": true,
+  "completion_authority": false,
+  "created_at_utc": "2026-10-05T15:09:58.535041+00:00",
+  "elapsed_seconds": 3.474977365025552,
+  "exclusions": [],
+  "execution_authority": false,
+  "explicit_additions": 35,
+  "file_pins_rehashed": 22206,
+  "fixed_inputs": {
+    "closed": {
+      "bytes": 1192,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/closed-inputs.json",
+      "sha256": "4a22f424af31259af6f9914a98452ae365f8d5da2354b3b4c5cc34c2fe00e2aa"
+    },
+    "plan": {
+      "bytes": 14321,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/plan.json",
+      "sha256": "8f97dc8e9ca3fefed4aa0bebfa681975535e2caaad2f57664ee39f7665a63160"
+    },
+    "selection": {
+      "bytes": 150701,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/final-selection.json",
+      "sha256": "8f3798da8008ca665e188fe51b45836d8692fca0030f146b90f2c9e9bc2f7264"
+    }
+  },
+  "full_task_satisfaction": "unknown",
+  "full_training_loop_proved": false,
+  "global_autoencoder_convergence_proved": false,
+  "gradient_source_translation_proved": false,
+  "inconclusive_native_attempts_retained_unadmitted": 1,
+  "metadata_families": 32,
+  "metadata_payloads": 4440,
+  "native_bounds": {
+    "cpu_seconds": 20,
+    "max_input_bytes": 262144,
+    "max_output_bytes": 65536,
+    "max_workspace_bytes": 16777216,
+    "timeout_seconds": 20
+  },
+  "native_checks": [
+    {
+      "check": {
+        "bytes": 11597,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/check-result.json",
+        "sha256": "2261dc8f8effc5449c7b37db95f8a3f834c9e4b14135d6ea2d5df62563188a7b"
+      },
+      "chunks": 1,
+      "complete_objects": 1,
+      "environment_file_count": 20099,
+      "mode": "lean-generated-slices-01",
+      "query_count_qualified": 7,
+      "source": {
+        "bytes": 3129,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-producer/GeneratedNumericSlices.lean",
+        "sha256": "841cc68dd9ef75e76398804ca5c0f2e33cef100611f2c3755c26ee24c9491297"
+      },
+      "status": "passed"
+    },
+    {
+      "check": {
+        "bytes": 12256,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/check-result.json",
+        "sha256": "39291f56456434f28191b1a7c47b8d6fa7df121059b98c06bf497718721870e8"
+      },
+      "chunks": 0,
+      "complete_objects": 0,
+      "environment_file_count": 20094,
+      "mode": "lean-typed-scalar-01",
+      "query_count_qualified": 0,
+      "source": {
+        "bytes": 11460,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-producer/TypedNumericSlice.lean",
+        "sha256": "26a07662275da84404fe5797f0fdc21b6b4910c0ddf54810945bd454fb9f4bc9"
+      },
+      "status": "inconclusive"
+    },
+    {
+      "check": {
+        "bytes": 19104,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+        "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+      },
+      "chunks": 15,
+      "complete_objects": 1,
+      "environment_file_count": 20094,
+      "mode": "lean-typed-scalar-02",
+      "query_count_qualified": 14,
+      "source": {
+        "bytes": 11197,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-producer/TypedNumericSlice.lean",
+        "sha256": "bd65d5d0c5ba08dfe4523db151ac5e6075d5abb2f54b26e8007b0926b82f335d"
+      },
+      "status": "passed"
+    }
+  ],
+  "native_or_model_jobs": 0,
+  "new_domain_contract_rows": 2,
+  "objective_source_translation_proved": false,
+  "outstanding_issues": [],
+  "planner_activation": false,
+  "prior4417_payload_prefixes_verified": true,
+  "prior_protected_input_files": 1808,
+  "proof_authority": false,
+  "protected_live_source_files": 4,
+  "provenance_clones_verified": 22,
+  "python_Float_semantics_proved": false,
+  "python_source_equivalence_proved": false,
+  "qualified_native_checks": 2,
+  "qualified_theorem_queries": 21,
+  "raw_file_bytes_read_for_digest": 4117908092,
+  "remote_mutations": 0,
+  "reviewer": {
+    "bytes": 27195,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-input-review-20261005-01/review_inputs_01.py",
+    "sha256": "14fbb79d6976aec1d62276f4fb63b7a1cc542f8ed59f074ded5f4689a77216f6"
+  },
+  "runtime_contracts_claimed": false,
+  "schema": "ranker-source-slices-final-publication-input-review@1",
+  "sealed_regular_bytes_without_seal_self": 86451989,
+  "sealed_regular_files_without_seal_self": 299,
+  "selected_aliases": 0,
+  "selected_directories": 33,
+  "selected_regular_bytes": 87119741,
+  "selected_regular_files": 336,
+  "source_review_helpers": 6,
+  "status": "passed_file_only_final_publication_input_review",
+  "target_imports_or_executions": 0,
+  "typed_facts_verified": 157,
+  "vectors375_unchanged": true,
+  "whole_IR_equivalence_proved": false,
+  "whole_P5_draft_regular_files": 2,
+  "whole_Q4_regular_files_with_seal_self": 300,
+  "whole_before_after_selection_pins_and_stats_verified": true
+}

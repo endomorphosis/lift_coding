@@ -1,0 +1,128 @@
+{
+  "AE_authority": false,
+  "authority_activation": false,
+  "binary64_error_bound_proved": false,
+  "completion_authority": false,
+  "dimension": 80,
+  "dot": {
+    "expression_ast_sha256": "a40bd993387cc9aa7cf6392f126c30d9e7a56f7277ddaf3532553b560366ffe5",
+    "function_ast_sha256": "3ff8d47ab6f2e375b3bd4b81c6a39e364cd5a15ec859ca383b5e41504250de1e",
+    "ir": {
+      "binders": [
+        "x",
+        "y"
+      ],
+      "externals": [],
+      "fold": "ordered-real-sum",
+      "inputs": [
+        "a",
+        "b"
+      ],
+      "kind": "zipFold",
+      "scalar": {
+        "body": {
+          "kind": "mul",
+          "left": {
+            "kind": "var",
+            "slot": 0
+          },
+          "right": {
+            "kind": "var",
+            "slot": 1
+          }
+        },
+        "schema": "ranker-typed-scalar-ir@1",
+        "slots": 2
+      },
+      "schema": "ranker-typed-zip-ir@1",
+      "zip_length": "min"
+    },
+    "lean_source_scalar": "(.mul (.var \"x\") (.var \"y\"))",
+    "path": "Module._dot.body[0].value.args[0]"
+  },
+  "execution_authority": false,
+  "external_shape_assumptions": {
+    "difference_artifact_sha256": "d2b691805cddd5ba8a46f733589e4d09424a06d67a6a2bb09b61e7f727d9c739",
+    "difference_columns": 80,
+    "difference_rows": 4,
+    "gradient_length": 80,
+    "weights_length": 80
+  },
+  "full_objective_semantics_proved": false,
+  "full_task_satisfaction": "unknown",
+  "full_training_semantics_proved": false,
+  "global_autoencoder_convergence_proved": false,
+  "interpretation": "ordered finite-list exact-real projection; zip truncates to minimum input length",
+  "kernel_compiler_correctness_qualified": false,
+  "official_benchmark_score": null,
+  "open_frontiers": [
+    "Python interpreter/evaluation/exception semantics",
+    "binary64 arithmetic and math.fsum",
+    "full objective and gradient",
+    "preparation/features/filter/validation/hash",
+    "full training initialization/loop/trace/receipts",
+    "original shape provenance and corpus preparation",
+    "source interpreter refinement",
+    "whole requested task and authority"
+  ],
+  "planner_activation": false,
+  "planner_authority": false,
+  "proof_authority": false,
+  "python_ranker_source_equivalence_proved": false,
+  "schema": "ranker-source-numeric-slices@1",
+  "source": {
+    "bytes": 16391,
+    "module_ast_nodes": 2930,
+    "module_ast_sha256": "61ae9578f4a087b1b181af6fe4f78c3d811bbaa09368f833f6240384d085407b",
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "source_shape_frontier_proved": false,
+  "status": "compiled_source_only_kernel_pending",
+  "update": {
+    "assignment_ast_sha256": "18f6dae8d8b26c08e101018837033db979d20c4bb5b65cb80119a4fd03084c4b",
+    "expression_ast_sha256": "0c383d057b351d78a3f4376aa0b716391b9a4e4b35a00b7d3c262c554a9a9191",
+    "function_ast_sha256": "5b87aa5ce21daf1439ed8d51f37557e6aba962130fd4f8732d149cea7ca2ac5a",
+    "guard_ast_sha256": "5c0dcebf9fc716307f4579951d8935733ad9412ede6cadefe8afc6584e873a0d",
+    "ir": {
+      "binders": [
+        "w",
+        "g"
+      ],
+      "externals": [
+        "step"
+      ],
+      "inputs": [
+        "weights",
+        "gradient"
+      ],
+      "kind": "zipMap",
+      "scalar": {
+        "body": {
+          "kind": "sub",
+          "left": {
+            "kind": "var",
+            "slot": 0
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "var",
+              "slot": 2
+            },
+            "right": {
+              "kind": "var",
+              "slot": 1
+            }
+          }
+        },
+        "schema": "ranker-typed-scalar-ir@1",
+        "slots": 3
+      },
+      "schema": "ranker-typed-zip-ir@1",
+      "zip_length": "min"
+    },
+    "lean_source_scalar": "(.sub (.var \"w\") (.mul (.var \"step\") (.var \"g\")))",
+    "loop_ast_sha256": "29fe662f009466768e57c6575171bdb324feb97a33ba81c1767ecfe474c7cbd9",
+    "path": "Module.train_terminal_codebase_intent_ranker.body[5].body[2].body[0]"
+  }
+}

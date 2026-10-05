@@ -1,0 +1,155 @@
+{
+  "compile_closed": {
+    "bytes": 14232,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/closed.json",
+    "sha256": "92532dbc64af515c5045410fbf2b9f5b2ad3d9193f0372ef24c5378eeec20b3a"
+  },
+  "compile_outer": {
+    "bytes": 471,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02-closed.json",
+    "sha256": "e215fdd8a430153cc241c0bfeb725c92d83ed85fe7eb07d46f4485d0774280d4"
+  },
+  "compiler_source": {
+    "bytes": 28870,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/typed_slice_compiler.py",
+    "sha256": "6c38d05eff154e058bb31b1943bfe32b713b3e403fe778292353e738765ee119"
+  },
+  "compiler_tests": {
+    "bytes": 17103,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/test_typed_slice_compiler.py",
+    "sha256": "fd3a6a4926786aa8f45dc2bfc6419c0577c64c93523f1e6e80d2ee2d501b44b3"
+  },
+  "generated_lean": {
+    "bytes": 3129,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/GeneratedNumericSlices.lean",
+    "sha256": "841cc68dd9ef75e76398804ca5c0f2e33cef100611f2c3755c26ee24c9491297"
+  },
+  "native_attempts": [
+    {
+      "check_result": {
+        "bytes": 12256,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/check-result.json",
+        "sha256": "39291f56456434f28191b1a7c47b8d6fa7df121059b98c06bf497718721870e8"
+      },
+      "invocation": {
+        "bytes": 4647,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-invocation.json",
+        "sha256": "0c089cf5d3d1ba3e79a37137c9e3b22a5364201b07c4f60df4703d5eee75ac21"
+      },
+      "module": "TypedNumericSlice",
+      "outer_closed": {
+        "bytes": 472,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01-closed.json",
+        "sha256": "5d7dae0cbc36e3698e16ae51b836aac45a041ad13b399cbd2453448143752201"
+      },
+      "owned_closed": {
+        "bytes": 16731,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-01/closed.json",
+        "sha256": "cba82d2a503d1a42fa64a029114e3124076004adf776fff76728e6412fbb93e8"
+      },
+      "phase": "lean-typed-scalar-01",
+      "role": "typed_failed",
+      "specification": {
+        "bytes": 2078,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-01-check-specification.json",
+        "sha256": "3e5b6d8148578ef1e44d7e5f54767adab3746979d271e3fbfcd676380973162e"
+      }
+    },
+    {
+      "check_result": {
+        "bytes": 19104,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/check-result.json",
+        "sha256": "1e11d2917e3087dc2e231bdf6b329416518eb74542d6e83074d000ee7f8a0e23"
+      },
+      "invocation": {
+        "bytes": 4647,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-invocation.json",
+        "sha256": "746ab807daff0d64afa89c4b91495fd019f1907ce6bb84ff84d0ac07a075235b"
+      },
+      "module": "TypedNumericSlice",
+      "outer_closed": {
+        "bytes": 472,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02-closed.json",
+        "sha256": "5092da50b94b249912d512b04dc18518512b367e5c3f702006557aa93096e08f"
+      },
+      "owned_closed": {
+        "bytes": 15695,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-typed-scalar-02/closed.json",
+        "sha256": "85c5803339e8decf6ae9fde901b3e7e8548291a8c7e2dcb6c99229c5bc1d985d"
+      },
+      "phase": "lean-typed-scalar-02",
+      "role": "typed_accepted",
+      "specification": {
+        "bytes": 2078,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-typed-scalar-02-check-specification.json",
+        "sha256": "314482337c3f74ab340e366e6463d8b589f3405c9765e6abcb7ed5f95dcf5052"
+      }
+    },
+    {
+      "check_result": {
+        "bytes": 11597,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/check-result.json",
+        "sha256": "2261dc8f8effc5449c7b37db95f8a3f834c9e4b14135d6ea2d5df62563188a7b"
+      },
+      "invocation": {
+        "bytes": 7385,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-invocation.json",
+        "sha256": "d49a77eb3217bbc73602f74fdd0c242fe5310e92c4a63b0ce71c2910d46c3f84"
+      },
+      "module": "GeneratedNumericSlices",
+      "outer_closed": {
+        "bytes": 477,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01-closed.json",
+        "sha256": "6276d35a709f49b28ca9e7db856587f60a537304b7ccfee0c88448aba82bc5b0"
+      },
+      "owned_closed": {
+        "bytes": 15715,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/lean-generated-slices-01/closed.json",
+        "sha256": "3da906c0dc0c01c59b038a93e74f33afac844d8510f5048a3bafbf83a36c63d6"
+      },
+      "phase": "lean-generated-slices-01",
+      "role": "generated_accepted",
+      "specification": {
+        "bytes": 1876,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/lean-generated-slices-01-check-specification.json",
+        "sha256": "60e83706befa89422c33c02bb2e9651b888e3cce3370a0ec1b1af3c9dac1f908"
+      }
+    }
+  ],
+  "original_source": {
+    "bytes": 16391,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "prior_metadata": {
+    "bytes": 8540409,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-convergence-20261005-01/evidence/metadata-convergence-01/metadata-inputs.json",
+    "sha256": "c0f5ab88db02ff6b59d36f5dbce63c99a8fc09414f2eedbab6c4116241881f41"
+  },
+  "pure_closed": {
+    "bytes": 15167,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/closed.json",
+    "sha256": "f29564f903aea95229b7fa91a5bf3a7a70f6832dbd3182d84ae7f1de7eea6ca5"
+  },
+  "pure_outer": {
+    "bytes": 473,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02-closed.json",
+    "sha256": "619a6a5ad1e32235fa6b484e3d929de468c741f934284e616ff6d9c974e59c1e"
+  },
+  "pure_phases": {
+    "bytes": 74951,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/pure-tests-source-02/phases.json",
+    "sha256": "3931cfcb447a3ed6f790a9e9869c46d1c38f1ae935d0a271b19771010e74900f"
+  },
+  "schema": "ranker-source-metadata-build-plan@1",
+  "source_slices": {
+    "bytes": 4024,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/evidence/compile-source-02/source-slices.json",
+    "sha256": "0c8ee3c28e80533cf0f1ceecde06fad2f2daa10c366fd43bcbebd6f34df0c270"
+  },
+  "source_specification": {
+    "bytes": 1366,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/source-slices-specification.json",
+    "sha256": "a83e4bce90450833db0eb31150aedbf31f5f3f0bb6b0c8b0a4f2d2c2d27ff035"
+  }
+}

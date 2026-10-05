@@ -1,0 +1,85 @@
+{
+  "extra_inputs": [
+    {
+      "bytes": 28870,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/typed_slice_compiler.py",
+      "sha256": "6c38d05eff154e058bb31b1943bfe32b713b3e403fe778292353e738765ee119"
+    },
+    {
+      "bytes": 1366,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/source-slices-specification.json",
+      "sha256": "a83e4bce90450833db0eb31150aedbf31f5f3f0bb6b0c8b0a4f2d2c2d27ff035"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    {
+      "bytes": 2342,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/original-differences-01.json",
+      "sha256": "d2b691805cddd5ba8a46f733589e4d09424a06d67a6a2bb09b61e7f727d9c739"
+    },
+    {
+      "bytes": 3659,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-v2-review-20261005-01/review-receipt.json",
+      "sha256": "389c846228b7d1e0c00bda272188a77c7c5edab971e5af9874061e33d2f1b28c"
+    },
+    {
+      "bytes": 4451,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-emitter-v2-review-20261005-01/review-receipt.json",
+      "sha256": "e1898c75757f99496ced1a7b6f46698974c243a6e86bda8044bd86e49d952bec"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 38817,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/captured-driver-compile-source-02.py",
+      "sha256": "3c183e16c3b0b5578048f60055953a34965b958c793734ad59ade9a2e1d68d96"
+    },
+    {
+      "bytes": 478981,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+      "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+    },
+    {
+      "bytes": 28870,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/source-v2/typed_slice_compiler.py",
+      "sha256": "6c38d05eff154e058bb31b1943bfe32b713b3e403fe778292353e738765ee119"
+    },
+    {
+      "bytes": 1366,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/source-slices-specification.json",
+      "sha256": "a83e4bce90450833db0eb31150aedbf31f5f3f0bb6b0c8b0a4f2d2c2d27ff035"
+    },
+    {
+      "bytes": 16391,
+      "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+      "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+    },
+    {
+      "bytes": 2342,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-real-curvature-20261005-01/numeric-binding/original-differences-01.json",
+      "sha256": "d2b691805cddd5ba8a46f733589e4d09424a06d67a6a2bb09b61e7f727d9c739"
+    },
+    {
+      "bytes": 3659,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-v2-review-20261005-01/review-receipt.json",
+      "sha256": "389c846228b7d1e0c00bda272188a77c7c5edab971e5af9874061e33d2f1b28c"
+    },
+    {
+      "bytes": 4451,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-source-emitter-v2-review-20261005-01/review-receipt.json",
+      "sha256": "e1898c75757f99496ced1a7b6f46698974c243a6e86bda8044bd86e49d952bec"
+    }
+  ],
+  "mode": "compile-source-02",
+  "outer_timeout_seconds": 120,
+  "request": {
+    "bytes": 478981,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+    "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+  },
+  "schema": "terminal-ranker-curvature-frozen-invocation@1",
+  "started_utc": "2026-10-05T14:34:25.102532+00:00"
+}

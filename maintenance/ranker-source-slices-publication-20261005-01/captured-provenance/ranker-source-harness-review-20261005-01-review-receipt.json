@@ -1,0 +1,75 @@
+{
+  "dispatch_prefixes": [
+    "compile-source",
+    "lean",
+    "metadata",
+    "pure-tests"
+  ],
+  "findings": [
+    "Original ranker module imports explicitly refused by owned guard.",
+    "Compile phase uses one pinned source buffer for compiler and renderer, with two AST parses and zero source execution.",
+    "Pure controls refuse bounded native runner and direct subprocess calls, restoring patches in finally.",
+    "Owned source guard rechecks selected captured source imports and inherited/live leaves before and after; lease released and zero active/waiting leases required.",
+    "Freezer uses qualified Q3 final closure, digest-bound base/prior JSON buffers, safe new mode path, and writes/chmods only new captured files/profile.",
+    "Native source/output/workspace/CPU/time and root/pressure/family limits unchanged.",
+    "Metadata reuses 32 families, preserves all 4417 prior prefix values and vector/contract payloads, and verifies complete exports and fresh process result.",
+    "Source/Float/full task/AE/authority frontiers remain open and false."
+  ],
+  "inherited_dead_functions_unreachable_from_authorized_dispatch": [
+    "prepare",
+    "extract",
+    "numeric",
+    "dependencies",
+    "environment_capture",
+    "cache_joins",
+    "first metadata definition"
+  ],
+  "input_pin_count": 1814,
+  "outstanding_issues": [],
+  "protected_live_sources": 4,
+  "request": {
+    "bytes": 478981,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/preparation/request-v3.json",
+    "sha256": "4858034f642fcedd31d7b243d65156eade84332e8401578df12e0c8f30c30861"
+  },
+  "review_source": {
+    "bytes": 12569,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-harness-review-20261005-01/review_source.py",
+    "sha256": "af29cfe8e71794c24d83a8678758e8d1e1b3b5b3ab9e36a710d23ab40c802ce4"
+  },
+  "reviewed_producers": [
+    {
+      "bytes": 37853,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/run_source_semantics_controls.py",
+      "sha256": "362a6ad08063f9920b114f4a68edba87c732b1e5e3e3a24e6f9ba01a96a590f4"
+    },
+    {
+      "bytes": 6693,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/freeze_source_profile_01.py",
+      "sha256": "82d36418fc74f5b32ea759b11b2af92aadc6c3d683f4a4cdafbc72edba781de8"
+    },
+    {
+      "bytes": 4527,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-source-semantics-20261005-01/prepare_request_01.py",
+      "sha256": "7e54562d463afb399bcc98940f0457a4005436f93e0b0dbbda9107070a0ed027"
+    }
+  ],
+  "schema": "ranker-source-semantics-harness-independent-source-review@1",
+  "scope": {
+    "Git_actions": 0,
+    "codec_jobs": 0,
+    "completion_authority": false,
+    "execution_authority": false,
+    "model_jobs": 0,
+    "native_jobs": 0,
+    "proof_authority": false,
+    "protected_writes": 0,
+    "remote_actions": 0,
+    "source_only": true,
+    "target_execution": 0,
+    "target_imports": 0,
+    "test_jobs": 0
+  },
+  "status": "passed_source_only_review",
+  "strict_old_inputs": 1808
+}

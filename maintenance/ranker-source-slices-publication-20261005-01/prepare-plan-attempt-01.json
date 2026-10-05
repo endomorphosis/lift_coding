@@ -1,0 +1,14 @@
+{
+  "codec_jobs": 0,
+  "error": "Expected source-review receipt status label differed from actual passed_source_only schema; refusal before any plan or source-review-copy writes.",
+  "native_jobs": 0,
+  "remote_mutations": 0,
+  "returncode": 1,
+  "schema": "ranker-source-slices-file-only-plan-attempt@1",
+  "source": {
+    "bytes": 5955,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-source-slices-publication-20261005-01/prepare_plan_01.py",
+    "sha256": "d7427c063d34bb5cf031aabfd2785003bb427cdbe7ba90613577dc38bbb9b108"
+  },
+  "status": "refused_review_status_shape"
+}
