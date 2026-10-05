@@ -1,0 +1,11 @@
+--- selector03.py
++++ selector04.py
+@@ -21,7 +21,7 @@
+             return rep
+     return reps[-1]
+ """
+-_LOGIC = """import Std
++_LOGIC = """import Init
+ set_option autoImplicit false
+ namespace BatchingSelector
+ -- None models the IndexError of indexing an empty representative list.

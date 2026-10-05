@@ -1,0 +1,70 @@
+{
+  "argv": [
+    "/home/barberb/.local/bin/python",
+    "-u",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_qualified_archive_02.py",
+    "--manifest",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scoped-publication-review-01/archive-manifest.json",
+    "--review",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scoped-publication-review-01/root-classification-review.json",
+    "--output",
+    "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/bulk-publication-01",
+    "--expected-manifest-sha256",
+    "4e7c722f5938877a2b868945f842011a8e65678f77a867fdfdcf2fe613c7a9b9",
+    "--expected-review-sha256",
+    "e4bce17560db481d35f315dda29dda2e4f2a528e78c2e8fdef5699c30a6ea9c8",
+    "--expected-parent-commit",
+    "50ca63252a6c4dcf51597a3d6e7e6e1d4c3ee623",
+    "--wall-seconds",
+    "18000"
+  ],
+  "cwd": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface",
+  "expected_parent_commit": "50ca63252a6c4dcf51597a3d6e7e6e1d4c3ee623",
+  "native_model_or_prover_jobs": false,
+  "phase": "reviewed_explicit_public_subset_HF_dataset_publication",
+  "pinned_inputs": [
+    {
+      "bytes": 10215,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_qualified_archive_02.py",
+      "sha256": "3cd39d0c11034c26b976f25a9473d8ed7db692da7f0ff9c43868238b5b3cc754"
+    },
+    {
+      "bytes": 42134,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scoped-publication-review-01/archive-manifest.json",
+      "sha256": "4e7c722f5938877a2b868945f842011a8e65678f77a867fdfdcf2fe613c7a9b9"
+    },
+    {
+      "bytes": 5173,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scoped-publication-review-01/root-classification-review.json",
+      "sha256": "e4bce17560db481d35f315dda29dda2e4f2a528e78c2e8fdef5699c30a6ea9c8"
+    },
+    {
+      "bytes": 5757,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/run_frozen_publication_phase.py",
+      "sha256": "8d9955df76155f75326fdda8039119bacab9bad3ca71306f241be9b2124d01b8"
+    },
+    {
+      "bytes": 345,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/hf-parent-observation-01.json",
+      "sha256": "0dabc83871125a8e00959883448e98e9bab2f40d4ed8730b37b009314e2bf798"
+    },
+    {
+      "bytes": 2780,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/root-physical-review-01/review.json",
+      "sha256": "e6c703e2c3a8082f38b8e63f9a6582d0c2f14a61f479bc8501a84bf6047e1b67"
+    },
+    {
+      "bytes": 38301,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/archive-classification-01/public/archive-manifest.json",
+      "sha256": "d2e355c7f5a467a9e93abad1919a726ad57c605006d6eceacaf56377bba45b67"
+    },
+    {
+      "bytes": 2532,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/root/publication-closed-01.json",
+      "sha256": "d82bffd02525636ae689a1769f6fa512bc881fbffee099dd34dd27aa97902c13"
+    }
+  ],
+  "remote_mutation_scope": "Authorized new immutable archive-payload-v1 prefix; known returned commits are retained before verification; prior bootstrap files must remain unchanged.",
+  "schema": "terminal-ir-frozen-publication-phase-invocation@1",
+  "wall_seconds": 18000
+}

@@ -1,0 +1,71 @@
+--- driver03.py
++++ driver04.py
+@@ -84,7 +84,7 @@
+ 
+ 
+ def capture():
+-    destination = ROOT / 'source-03'; destination.mkdir()
++    destination = ROOT / 'source-04'; destination.mkdir()
+     files = []
+     entries = [(WORKSPACE / 'external/ipfs_accelerate', relative) for relative in (
+         'benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py',
+@@ -101,19 +101,19 @@
+     config = destination / 'pytest.ini'; config.open('x').write('[pytest]\n'); config.chmod(0o444)
+     files.append({'captured': pin(config)})
+     assert pin(CAP / 'generation-manifest.json')['sha256'] == BASE_SHA
+-    write(ROOT / 'source-manifest-03.json', {'schema': 'terminal-batching-grounding-source-extension@1',
++    write(ROOT / 'source-manifest-04.json', {'schema': 'terminal-batching-grounding-source-extension@1',
+         'base_manifest': pin(CAP / 'generation-manifest.json'), 'base_generation_cid': BASE_CID,
+         'extension_manifests': [pin(path) for path in (HEAD / 'source-manifest.json',
+             CONSUMER / 'source-manifest-02.json', PRIOR / 'source-manifest-02.json',
+             GROUND / 'source-manifest-04.json')],
+         'files': files, 'scope': 'Stable individually pinned selected sources; no atomic whole-live or all-loader census.'})
+-    write(ROOT / 'preparation/producer-pins-03.json', {'driver': pin(Path(__file__).resolve()),
+-        'source_manifest': pin(ROOT / 'source-manifest-03.json'), 'request': pin(ROOT / 'preparation/request.json')})
+-    print(json.dumps({'source_manifest': pin(ROOT / 'source-manifest-03.json'),
+-        'producer_pins': pin(ROOT / 'preparation/producer-pins-03.json')}))
+-
+-
+-ROOTS = (ROOT / 'source-03', GROUND / 'source-04', PRIOR / 'source-02', CONSUMER / 'source-02', HEAD / 'source',
++    write(ROOT / 'preparation/producer-pins-04.json', {'driver': pin(Path(__file__).resolve()),
++        'source_manifest': pin(ROOT / 'source-manifest-04.json'), 'request': pin(ROOT / 'preparation/request.json')})
++    print(json.dumps({'source_manifest': pin(ROOT / 'source-manifest-04.json'),
++        'producer_pins': pin(ROOT / 'preparation/producer-pins-04.json')}))
++
++
++ROOTS = (ROOT / 'source-04', GROUND / 'source-04', PRIOR / 'source-02', CONSUMER / 'source-02', HEAD / 'source',
+          CAP / 'accelerate', CAP / 'datasets', CAP / 'kit')
+ 
+ 
+@@ -145,7 +145,7 @@
+         'native_lean_checks_invoked': [], 'native_metadata_hydration_attempts': 0,
+         'PlanCreate_calls': 0}
+     try:
+-        producers = json.loads((ROOT / 'preparation/producer-pins-03.json').read_bytes())
++        producers = json.loads((ROOT / 'preparation/producer-pins-04.json').read_bytes())
+         assert all(pin(row['path']) == row for row in producers.values())
+         request = json.loads(read_pinned(producers['request']))
+         for row in request['selected_prior']: assert pin(row['path']) == row
+@@ -186,10 +186,10 @@
+                 def pytest_runtest_logreport(self, report):
+                     phases.append({'nodeid': report.nodeid, 'phase': report.when, 'outcome': report.outcome,
+                                    'seconds': report.duration})
+-            argv = ['-q', '-p', 'no:cacheprovider', '-c', str(ROOT / 'source-03/pytest.ini'), '--noconftest',
++            argv = ['-q', '-p', 'no:cacheprovider', '-c', str(ROOT / 'source-04/pytest.ini'), '--noconftest',
+                 '-o', 'addopts=', '--basetemp', str(run / 'fixtures'), '--junitxml', str(run / 'tests.xml'),
+-                str(ROOT / 'source-03/test/api/test_terminal_codebase_selector_semantics.py'),
+-                str(ROOT / 'source-03/test/api/test_terminal_codebase_ranker_step_certificate.py')]
++                str(ROOT / 'source-04/test/api/test_terminal_codebase_selector_semantics.py'),
++                str(ROOT / 'source-04/test/api/test_terminal_codebase_ranker_step_certificate.py')]
+             code = int(pytest.main(argv, plugins=[Reports()])); write(run / 'phases.json', phases)
+             receipt['pytest_returncode'] = code
+             assert code == 0 and all(row['outcome'] == 'passed' for row in phases), 'selected tests failed or skipped'
+@@ -298,7 +298,7 @@
+     started = time.monotonic(); child = None
+     argv = [sys.executable, '-B', str(Path(__file__).resolve()), 'owned', mode]
+     record = {'schema': 'terminal-selector-step-outer-control@1', 'argv': argv,
+-        'driver': pin(Path(__file__).resolve()), 'producer_pin_specification': pin(ROOT / 'preparation/producer-pins-03.json'),
++        'driver': pin(Path(__file__).resolve()), 'producer_pin_specification': pin(ROOT / 'preparation/producer-pins-04.json'),
+         'started_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+         'returncode': None, 'primary_error': None, 'cleanup_errors': []}
+     write(ROOT / 'evidence' / (mode + '-invocation.json'), record)

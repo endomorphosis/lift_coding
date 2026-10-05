@@ -1,0 +1,101 @@
+{
+  "analytic_obligations": [
+    "Prove the mathematical logistic Hessian eigenvalue bound from these exact feature vectors.",
+    "Connect exact smooth strongly convex gradient descent to the contraction rate.",
+    "Bound errors in binary64 dot products, libm exp/log1p, gradient and updates.",
+    "Authenticate every intermediate weight state before using a finite trace certificate.",
+    "Qualify held-out semantic alignment and task outcomes separately from training objective convergence."
+  ],
+  "asymptotic_optimizer_convergence_proved": false,
+  "autoencoder_convergence_proved": false,
+  "behavioral_satisfaction": false,
+  "binary64_error_bound_proved": false,
+  "certificate_sha256": "676cc44896c391340f9e547985828f4881784633060d3d359503b3181eadd057",
+  "checker_calls": 0,
+  "completion_authority": false,
+  "conditional_contraction_exact": {
+    "denominator": "2596148429267413814265248164610048",
+    "numerator": "2585624091180848413821180482165043"
+  },
+  "conditional_smoothness_exact": {
+    "denominator": "10384593717069655257060992658440192",
+    "numerator": "6456113532727304764308018601938259"
+  },
+  "corpus_sha256": "sha256:43da7b53f322e21b495d0352b6ca90378399ffe0fc49864e729a9edf2a8306c6",
+  "dimension": 80,
+  "exact_parameter_inequalities_checked_in_python": true,
+  "execution_authority": false,
+  "feature_profile_sha256": "5c9ed26e5c02a2fd12c34dc27fcd6105db6798d28a984031c71e3f56aa5a1751",
+  "formalization_authority": false,
+  "full_task_satisfaction": "unknown",
+  "lean_checker_status": "not_run",
+  "lean_source": "import Std\nset_option autoImplicit false\nnamespace RankerStepPrerequisites\n-- Exact rational checks only; no logistic calculus or binary64 convergence theorem.\nnoncomputable def mu : Rat := ((5764607523034235 : Rat) / 576460752303423488)\nnoncomputable def eta : Rat := ((1825681634788183 : Rat) / 4503599627370496)\nnoncomputable def conditionalSmoothness : Rat := ((6456113532727304764308018601938259 : Rat) / 10384593717069655257060992658440192)\nnoncomputable def q : Rat := ((2585624091180848413821180482165043 : Rat) / 2596148429267413814265248164610048)\ntheorem exact_positive_safe_step :\n    0 < mu ∧ 0 < eta ∧ eta * conditionalSmoothness ≤ 1 ∧\n    q = 1 - mu * eta ∧ 0 ≤ q ∧ q < 1 := by decide +kernel\nend RankerStepPrerequisites\n",
+  "lean_source_sha256": "ac2e9df0a289139c9a5f8462e98d7d276b70b16a916db0744c30089703515149",
+  "logistic_hessian_bound_proved": false,
+  "mutation_authority": false,
+  "native_difference_vectors_sha256": "e8504c6e8004a2f2878bc79aae0af54c9541bff82df8cde670b48bdf7da03ac6",
+  "native_numeric_smoothness": 1.233402237705318,
+  "native_step_size": 0.4053827573154274,
+  "native_train_pairs": [
+    {
+      "negative_candidate_id": "sha256:cc39c338484a33ef5b8d508748672ced8fad2817eb919a644ab5085b309b8932",
+      "positive_candidate_id": "sha256:46a7030f4a00e2f744ad65803781c119d8e2be709ecd8d745446ccd24ce08734",
+      "query_id": "bottle-header-name",
+      "task_role": "train"
+    },
+    {
+      "negative_candidate_id": "sha256:dd5ed3452facf99fc91c67d41eb7d1961782b820bc3d209d99058040b5bcb55c",
+      "positive_candidate_id": "sha256:46a7030f4a00e2f744ad65803781c119d8e2be709ecd8d745446ccd24ce08734",
+      "query_id": "bottle-header-name",
+      "task_role": "train"
+    },
+    {
+      "negative_candidate_id": "sha256:46a7030f4a00e2f744ad65803781c119d8e2be709ecd8d745446ccd24ce08734",
+      "positive_candidate_id": "sha256:dd5ed3452facf99fc91c67d41eb7d1961782b820bc3d209d99058040b5bcb55c",
+      "query_id": "bottle-header-value",
+      "task_role": "train"
+    },
+    {
+      "negative_candidate_id": "sha256:cc39c338484a33ef5b8d508748672ced8fad2817eb919a644ab5085b309b8932",
+      "positive_candidate_id": "sha256:dd5ed3452facf99fc91c67d41eb7d1961782b820bc3d209d99058040b5bcb55c",
+      "query_id": "bottle-header-value",
+      "task_role": "train"
+    }
+  ],
+  "omission_authority": false,
+  "optimizer_updates": 0,
+  "pair_squared_norms_exact": [
+    {
+      "denominator": "20769187434139310514121985316880384",
+      "numerator": "46646319711462335500654408216079793"
+    },
+    {
+      "denominator": "1298074214633706907132624082305024",
+      "numerator": "1507989278949607563828642550842453"
+    },
+    {
+      "denominator": "5192296858534827628530496329220096",
+      "numerator": "5819461529695142022881884510840989"
+    },
+    {
+      "denominator": "2596148429267413814265248164610048",
+      "numerator": "6352267595556608209575680854216019"
+    }
+  ],
+  "planning_handoff": "abstained",
+  "proof_authority": false,
+  "regularization_exact": {
+    "denominator": "576460752303423488",
+    "numerator": "5764607523034235"
+  },
+  "schema": "terminal-codebase-ranker-step-certificate@1",
+  "semantic_alignment_verified": false,
+  "source_semantics_verified": false,
+  "status": "exact_parameters_unchecked_lean_prerequisites",
+  "step_exact": {
+    "denominator": "4503599627370496",
+    "numerator": "1825681634788183"
+  },
+  "training_calls": 0,
+  "whole_program_proved": false
+}

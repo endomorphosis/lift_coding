@@ -1,0 +1,29 @@
+--- unexecuted-driver03.py
++++ fixed-driver03.py
+@@ -60,7 +60,7 @@
+     inherited = json.loads((PRIOR / 'final-retention-01/external-pins.json').read_bytes())['pins']
+     for row in inherited:
+         actual = pin(row['path']); assert actual['sha256'] == row['sha256']; selected.append(actual)
+-    for relative in ('preparation/input-pins.json', 'source-manifest-03.json',
++    for relative in ('preparation/input-pins.json', 'source-manifest-02.json',
+                      'evidence/actual-01/metadata-inputs.json', 'evidence/actual-01/metadata-readback.json',
+                      'file-only-audit-01.json'):
+         selected.append(pin(PRIOR / relative))
+@@ -104,7 +104,7 @@
+     write(ROOT / 'source-manifest-03.json', {'schema': 'terminal-batching-grounding-source-extension@1',
+         'base_manifest': pin(CAP / 'generation-manifest.json'), 'base_generation_cid': BASE_CID,
+         'extension_manifests': [pin(path) for path in (HEAD / 'source-manifest.json',
+-            CONSUMER / 'source-manifest-03.json', PRIOR / 'source-manifest-03.json',
++            CONSUMER / 'source-manifest-02.json', PRIOR / 'source-manifest-02.json',
+             GROUND / 'source-manifest-04.json')],
+         'files': files, 'scope': 'Stable individually pinned selected sources; no atomic whole-live or all-loader census.'})
+     write(ROOT / 'preparation/producer-pins-03.json', {'driver': pin(Path(__file__).resolve()),
+@@ -113,7 +113,7 @@
+         'producer_pins': pin(ROOT / 'preparation/producer-pins-03.json')}))
+ 
+ 
+-ROOTS = (ROOT / 'source-03', GROUND / 'source-04', PRIOR / 'source-03', CONSUMER / 'source-03', HEAD / 'source',
++ROOTS = (ROOT / 'source-03', GROUND / 'source-04', PRIOR / 'source-02', CONSUMER / 'source-02', HEAD / 'source',
+          CAP / 'accelerate', CAP / 'datasets', CAP / 'kit')
+ 
+ 

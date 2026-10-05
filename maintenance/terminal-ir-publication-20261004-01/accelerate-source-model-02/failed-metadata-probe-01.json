@@ -1,0 +1,13 @@
+{
+  "cause": "lean-checks.json is a list; unexecuted qualification probe incorrectly assumed all named documents were mappings.",
+  "duration_seconds": null,
+  "exit_code": 1,
+  "operation": "Bounded named selector receipts shape probe before documentation",
+  "original_receipts_retained": true,
+  "primary_error_type": "AttributeError",
+  "qualification_conferred": false,
+  "recorded_wall_time": 1791147020.6358538,
+  "remote_mutations": 0,
+  "schema": "terminal-ir-publication-preparation-failure@1",
+  "source_mutations": 0
+}

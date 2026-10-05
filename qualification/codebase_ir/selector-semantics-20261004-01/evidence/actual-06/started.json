@@ -1,0 +1,57 @@
+{
+  "PlanCreate_calls": 0,
+  "cleanup_errors": [],
+  "mode": "actual-06",
+  "native_lean_checks_invoked": [],
+  "native_metadata_hydration_attempts": 0,
+  "new_autoencoder_fits": 0,
+  "new_public_fit_calls": 0,
+  "primary_error": null,
+  "producer_pins": {
+    "driver": {
+      "bytes": 25852,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_05.py",
+      "sha256": "f321d712adba571d626deef2548e45d95b8c29c7d200be843df14421940619cc"
+    },
+    "request": {
+      "bytes": 18799,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/preparation/request.json",
+      "sha256": "e67849102ab6fc540fc8d50e64a8a89ba02ac03fa0ce8c22057e6b8581cb87d3"
+    },
+    "source_manifest": {
+      "bytes": 6238,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-manifest-04.json",
+      "sha256": "93e3c12215b70c86d4a02bf28aedb4e89a9efff1a7e70a182c155dc6ab2582c0"
+    }
+  },
+  "resource_policy": {
+    "lane_reservations": {
+      "validation": {
+        "cpu_slots": 2,
+        "memory_mb": 0
+      }
+    },
+    "max_gpu_memory_percent": null,
+    "max_memory_percent": null,
+    "max_swap_percent": null,
+    "max_waiting_requests": 256,
+    "proof_backoff_seconds": 2.0,
+    "proof_cpu_stall_percent": 50.0,
+    "proof_io_stall_percent": 10.0,
+    "proof_memory_headroom_mb": 24922,
+    "proof_memory_stall_percent": 2.0,
+    "proof_safety_enabled": true,
+    "require_known_gpu_for_gpu_work": true,
+    "reserved_gpu_memory_mb": 0,
+    "reserved_memory_mb": 0,
+    "total_child_process_slots": 16,
+    "total_cpu_slots": 16,
+    "total_gpu_memory_mb": null,
+    "total_memory_mb": 99688,
+    "total_unified_memory_mb": null
+  },
+  "root_lease": null,
+  "schema": "terminal-selector-step-owned-control@1",
+  "status": "started",
+  "synthetic_fits": 0
+}

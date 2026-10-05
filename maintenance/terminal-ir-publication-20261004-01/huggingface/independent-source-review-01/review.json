@@ -1,0 +1,179 @@
+{
+  "all_raw_bytes_published": false,
+  "archive_SQL_connections": 0,
+  "archive_census_calls": 0,
+  "authority": {
+    "completion": false,
+    "execution": false,
+    "model_convergence": false,
+    "planning": false,
+    "proof": false
+  },
+  "builder_findings": "Stable whole regular-file snapshots before staged chunks enter shards; exact strict pins checked by builder before/after; no hardlinks/source mutations; later drift separate. This review does not independently rehash all selected data.",
+  "credential_classification_complete": false,
+  "decoded_archive_jobs": 0,
+  "elapsed_seconds": 0.02033566599129699,
+  "findings": [
+    {
+      "finding": "Decode-error container provenance can override observed credential candidates, including exact available values. Successor must never approve such candidates by container provenance.",
+      "id": "container_approval_preserves_credential_hits",
+      "lines": [
+        298,
+        299
+      ],
+      "producer": "classify_and_prepare_public_archive_02.py",
+      "severity": "blocker"
+    },
+    {
+      "finding": "Fixture match approval clears a decoder error and marks decoded scan complete. Credential false-positive approval must be separate from decoder completion.",
+      "id": "fixture_approval_preserves_decode_error",
+      "lines": [
+        294,
+        297
+      ],
+      "producer": "classify_and_prepare_public_archive_02.py",
+      "severity": "blocker"
+    },
+    {
+      "finding": "A later clean group can overwrite unsafe full-file-SHA classification from another group; all group contexts must be retained with worst-result protection.",
+      "id": "multipart_context_monotonicity",
+      "lines": [
+        321,
+        330
+      ],
+      "producer": "classify_and_prepare_public_archive_02.py",
+      "severity": "blocker"
+    },
+    {
+      "finding": "Filename continuity does not establish expected terminal part. Use exact reviewed preservation-manifest group membership or qualify/deny unresolved multipart inputs.",
+      "id": "multipart_external_completeness",
+      "lines": [
+        305,
+        306
+      ],
+      "producer": "classify_and_prepare_public_archive_02.py",
+      "severity": "scope_gate"
+    },
+    {
+      "finding": "Default HF download returns a pointer symlink; O_NOFOLLOW pin of returned pathname refuses. Canonically bind the downloaded regular blob inside the fresh controlled cache.",
+      "id": "HF_download_cache_symlink",
+      "producer": "publish_qualified_archive.py",
+      "severity": "blocker"
+    },
+    {
+      "finding": "Re-pin actual batch inputs before constructing/uploading CommitOperationAdd; retain observed post-upload drift separately.",
+      "id": "batch_preupload_stability",
+      "producer": "publish_qualified_archive.py",
+      "severity": "custody_gate"
+    },
+    {
+      "finding": "Persist returned commit OID immediately, before remote verification may fail, rather than retaining only completed verified batches.",
+      "id": "known_commit_before_verification",
+      "producer": "publish_qualified_archive.py",
+      "severity": "custody_gate"
+    },
+    {
+      "finding": "64KiB overlap cannot cover every >2MiB regex match across read boundaries. Existing plan explicitly excludes exotic larger encodings; no universal clean or complete-regex claim is qualified.",
+      "id": "PEM_overlap_frontier",
+      "producer": "publication-plan-02.json",
+      "severity": "explicit_limit"
+    }
+  ],
+  "pins": {
+    "build_evidence_archive_02.py": {
+      "bytes": 26475,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/build_evidence_archive_02.py",
+      "sha256": "f72c1ea8efb3d04a67eca31af333d73b2079fd9cfbcfd7439580f87d56e53036"
+    },
+    "classify_and_prepare_public_archive_02.py": {
+      "bytes": 31830,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/classify_and_prepare_public_archive_02.py",
+      "sha256": "9f0e9ab257a32a789736448f80b4fe8060e89bdfba8417a646b5236383eef680"
+    },
+    "decoded-container-review-plan-01.json": {
+      "bytes": 3202,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoded-container-review-plan-01.json",
+      "sha256": "4ebede63ecbd7ebab39bed28bbb8f0234d129b7f2c2c7052d4d4e02addbb1543"
+    },
+    "decoder-controls-01/closed.json": {
+      "bytes": 227,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-01/closed.json",
+      "sha256": "760167d807f91431566586a859c712df7e030b78db6f98a567047dad832afbf4"
+    },
+    "decoder-controls-02/closed.json": {
+      "bytes": 925,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-02/closed.json",
+      "sha256": "0dbdf0d6f765d721242993b9a6c4e5420045ad4e07f6dc6e4c38efa88ab346b5"
+    },
+    "installed_hf_download_source": {
+      "bytes": 79254,
+      "path": "/home/barberb/.local/lib/python3.12/site-packages/huggingface_hub/file_download.py",
+      "sha256": "0bbe85320d5183be34d4af54a703809c5775506da4a346cbf40112da633b36d8"
+    },
+    "publication-plan-02.json": {
+      "bytes": 11150,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publication-plan-02.json",
+      "sha256": "c98f452b3e6493fbe5305d281794264399eff47f090ae2bd821ef540b781607e"
+    },
+    "publish_qualified_archive.py": {
+      "bytes": 9675,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/publish_qualified_archive.py",
+      "sha256": "25d0c975bd3e66bd2a2dad72f05dab15742cb643e092a29d44d80a4b08340c5a"
+    },
+    "scopes-approved-02.json": {
+      "bytes": 110037,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/scopes-approved-02.json",
+      "sha256": "f2ec236e180f42f262661faca65d282918a55a4956174759727b341aeb4306e6"
+    }
+  },
+  "producer_imports": 0,
+  "remote_archive_identity_verified": false,
+  "remote_mutations": 0,
+  "schema": "terminal-ir-archive-independent-source-review@1",
+  "scope": "SOURCE_ONLY_AND_NAMED_SMALL_CLOSED_CONTROL_RECEIPTS",
+  "shared_chunk_closure": "Unsafe whole-file chunk sets seed conservative graph closure; physically affected members are rewritten out of derivative, preserving original local shards. Source algorithm reviewed; actual derivative is not yet qualified.",
+  "started_wall_time": 1791145513.5336494,
+  "status": "SOURCE_REVIEW_COMPLETED_UPLOAD_BLOCKED_PENDING_SUCCESSOR",
+  "strict_pin_bytes_rehashed_by_this_review": false,
+  "strict_pinned_input_declarations": 348,
+  "synthetic_controls": {
+    "failed": {
+      "HF_mutations": 0,
+      "elapsed_seconds": 0.3882346090103965,
+      "error_type": "AssertionError",
+      "model_jobs": 0,
+      "native_SQL_jobs": 0,
+      "prover_jobs": 0,
+      "scope": "SYNTHETIC_ARCHIVE_CONTROL_ONLY",
+      "status": "FAIL"
+    },
+    "passed": {
+      "HF_mutations": 0,
+      "checks": [
+        "real full-file raw credential exclusion",
+        "escaped JSON PEM detection",
+        "gzip/tar member detection",
+        "complete multipart group supersedes individual parse refusal",
+        "physical affected-shard rewrite",
+        "safe-file preservation",
+        "symlink text preservation",
+        "FIFO metadata only"
+      ],
+      "classification_report": {
+        "bytes": 3459,
+        "path": "/home/barberb/lift_coding/maintenance/terminal-ir-publication-20261004-01/huggingface/decoder-controls-02/derivative/public/archive-manifest.json",
+        "sha256": "8609831f71b5787ea01545e0ed2b8da681ea746fed2249314826172f3810da46"
+      },
+      "elapsed_seconds": 0.39593747901380993,
+      "model_jobs": 0,
+      "native_SQL_jobs": 0,
+      "native_qualification": false,
+      "originals_modified": false,
+      "prover_jobs": 0,
+      "scope": "SYNTHETIC_ARCHIVE_CONTROL_ONLY",
+      "status": "PASS",
+      "synthetic_credentials_are_valid": false
+    }
+  },
+  "universal_secret_free_claim": false
+}

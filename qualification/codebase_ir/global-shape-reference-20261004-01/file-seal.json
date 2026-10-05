@@ -1,0 +1,57 @@
+{
+  "files": [
+    {
+      "bytes": 20393,
+      "path": "closed.json",
+      "sha256": "a771330549f2d0c86aca7aa9458f70132121b03efcd5ac8ff2dfa40005e210c5"
+    },
+    {
+      "bytes": 10572,
+      "path": "phases.json",
+      "sha256": "bdde2bc0a09a41afd378e4017a7d5a5eff6c8b3c7ce1070c1701b96570f98231"
+    },
+    {
+      "bytes": 1499,
+      "path": "resources.json",
+      "sha256": "ea37e881df3ad4d91613ed5a628916c56b5db0a6b055e1fd8570c7989162f9be"
+    },
+    {
+      "bytes": 0,
+      "path": "resources.json.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2465,
+      "path": "result.xml",
+      "sha256": "6d68aae0448c11e8bb3c525cd53e1a5adfe762b13badd9dadd7ecb91e564f899"
+    },
+    {
+      "bytes": 4269,
+      "path": "run_reference_controls.py",
+      "sha256": "beef45ce5abc496836149870c06e04d51e4e003dc99b839952327f3a0485c941"
+    },
+    {
+      "bytes": 5501,
+      "path": "source/reference.py",
+      "sha256": "afcfe16033f1c7faa0bc255cf62d98fd667ee28a1514b2a329a69aac29a0e441"
+    },
+    {
+      "bytes": 2924,
+      "path": "source/test_reference.py",
+      "sha256": "bd1bbd50dc20e0a6b511063794e2e8c9b5634794c9b3d17e270ac01ebc163963"
+    },
+    {
+      "bytes": 2123,
+      "path": "started.json",
+      "sha256": "9ed572db2df58cd8b378088c88b319141de0f82133d5552e6b9c2e10057f5c86"
+    }
+  ],
+  "full_task_satisfaction": "unknown",
+  "model_convergence_proved": false,
+  "performance_thresholds_checked": false,
+  "schema": "global-shape-reference-file-seal@1",
+  "scope": "18 observed structural contract cases,54phases. No performance/nativeLean/source-universal claim. Realcurrent-published scheduler ownership/gates/cleanup retained.",
+  "source_equivalence_proved": false,
+  "structural_checks": "passed",
+  "training_calls": 0
+}

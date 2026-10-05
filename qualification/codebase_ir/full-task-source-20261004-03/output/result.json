@@ -1,0 +1,109 @@
+{
+  "actual_benchmark_request_data_used": false,
+  "baseline_entry_point": "unmodified_no_arg_build_plan",
+  "bucket_checks": [
+    {
+      "heads_hidden_aligned": true,
+      "included_exactly_once": true,
+      "local_unique_shape_count": 8,
+      "seq_covers_and_aligned": true
+    },
+    {
+      "heads_hidden_aligned": true,
+      "included_exactly_once": true,
+      "local_unique_shape_count": 8,
+      "seq_covers_and_aligned": true
+    }
+  ],
+  "fixture_kind": "authored_two_disjoint_eight_request_buckets",
+  "full_task_satisfaction": false,
+  "global_cap_satisfied": false,
+  "global_unique_shape_count": 16,
+  "global_unique_shapes": [
+    [
+      64,
+      32,
+      4096
+    ],
+    [
+      128,
+      32,
+      4096
+    ],
+    [
+      192,
+      32,
+      4096
+    ],
+    [
+      256,
+      32,
+      4096
+    ],
+    [
+      320,
+      32,
+      4096
+    ],
+    [
+      384,
+      32,
+      4096
+    ],
+    [
+      448,
+      32,
+      4096
+    ],
+    [
+      512,
+      32,
+      4096
+    ],
+    [
+      576,
+      32,
+      4096
+    ],
+    [
+      640,
+      32,
+      4096
+    ],
+    [
+      704,
+      32,
+      4096
+    ],
+    [
+      768,
+      32,
+      4096
+    ],
+    [
+      832,
+      32,
+      4096
+    ],
+    [
+      896,
+      32,
+      4096
+    ],
+    [
+      960,
+      32,
+      4096
+    ],
+    [
+      1024,
+      32,
+      4096
+    ]
+  ],
+  "input_bytes_unchanged": true,
+  "official_benchmark_score": null,
+  "required_global_cap": 8,
+  "schema": "public-baseline-authored-fixture-result@1",
+  "universal_source_equivalence_proved": false
+}

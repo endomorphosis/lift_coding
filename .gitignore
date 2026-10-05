@@ -124,6 +124,9 @@ mobile/web-build/
 **/node_modules/
 
 # Published checkpoint payloads remain local; immutable references belong in Git.
+/artifacts/autoformalization-publication-20261004/evaluation/download-*/
+/artifacts/autoformalization-publication-20261004/evaluation/run-*/
+/artifacts/autoformalization-publication-20261004/training/run-*/
 /artifacts/autoformalization-publication-20261004/git/hf-large-evidence-v1/
 /artifacts/autoformalization-publication-20261004/git/hf-retained-checkpoint-weights-v1/
 /artifacts/autoformalization-alignment-20261003/projection-01/d384-seed0-neg1.checkpoint.json

@@ -1,0 +1,30 @@
+{
+  "schema": "terminal-selector-codegen-correction-source@1",
+  "status": "ast_passed_source_only",
+  "selector_before": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-codegen-correction-01/terminal_codebase_selector_semantics.py.before",
+    "bytes": 8861,
+    "sha256": "da30b22c2a5edf6964b14eb6a9a0d8086ed7f7ace3050bcd60b9a2bc61d3e887"
+  },
+  "selector_after": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/source-codegen-correction-01/terminal_codebase_selector_semantics.py.after",
+    "bytes": 8903,
+    "sha256": "50b9322c9b20f85c595400636d323da0c26e9faf31e5b117ccf19ca6ea924614"
+  },
+  "selector_live": {
+    "path": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_codebase_selector_semantics.py",
+    "bytes": 8903,
+    "sha256": "50b9322c9b20f85c595400636d323da0c26e9faf31e5b117ccf19ca6ea924614"
+  },
+  "driver": {
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/selector-semantics-20261004-01/run_selector_step_controls_02.py",
+    "bytes": 22884,
+    "sha256": "49fd64d0cb2111ffaee567ac78bc87f0ef88d3d9bbf342150600fbf875ddc459"
+  },
+  "changes": [
+    "Only three Lean model definitions marked noncomputable; mathematical terms and theorem statements unchanged.",
+    "Driver selects fresh source02/manifests/producers only; resource/proof/artifact limits unchanged."
+  ],
+  "prior_actual02": "inconclusive_output_truncated_not_qualified",
+  "native_jobs_this_preparation": 0
+}
