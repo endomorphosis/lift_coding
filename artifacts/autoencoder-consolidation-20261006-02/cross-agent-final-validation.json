@@ -1,0 +1,52 @@
+{
+  "schema": "grouped-legal-actual-cross-agent-final-validation/v1",
+  "status": "passed",
+  "candidate_base": "b1a37b973fa670f18badda527ee5370ee825f84e",
+  "actual_main_commit": "b1a37b973fa670f18badda527ee5370ee825f84e",
+  "original_407_cases_preserved": true,
+  "additional_contextual_runtime_cases": 11,
+  "additional_isolation_cases": 2,
+  "original_418_case_ids_preserved": true,
+  "checkpoint_bound_modules_stable": {
+    "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f",
+    "ipfs_datasets_py/logic/deontic/coordination_decoder.py": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+  },
+  "candidate_worktree": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough",
+  "command": [
+    "/home/barberb/.local/bin/python",
+    "-c",
+    "import torch, pytest; torch.set_num_threads(2); raise SystemExit(pytest.main(['-q', 'tests/unit/logic/test_deontic_grouped_decoder.py', 'tests/unit/logic/test_deontic_grouped_decoder_boundaries.py', 'tests/unit/logic/test_legal_grouped_span_decoder.py', 'tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py', 'tests/unit/logic/test_legal_grouped_span_decoder_v2.py', 'tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py', 'tests/unit/logic/test_legal_grouped_phase1_integration.py', 'tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_runtime_registry.py', 'tests/unit/optimizers/logic_theorem_optimizer/test_learned_formula_runtime.py', 'tests/unit/optimizers/logic_theorem_optimizer/test_native_formula_runtime.py', 'tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py', 'tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py', '--junitxml=/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/cross-agent-final-validation.xml']))"
+  ],
+  "counts": {
+    "tests": 420,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_pins": {
+    "docs/autoencoders/grouped_legal_decoders.md": "caea32c25f4713e050d154d0fc33a6f7e1cabbe6234b2f9908b4d90d9e14c84e",
+    "docs/autoencoders/progress_reconciliation_20261006.md": "689205848379b69fdf771de4d6abe4c017fcdd4a5e006ad165b6ca1bea63bc7c",
+    "tests/unit/logic/test_legal_grouped_phase1_integration.py": "12e9b330a35560bbb673a6fffbc3551c475c391d8ffb5cf43ab502d59d2ffe82"
+  },
+  "test_pins": {
+    "tests/unit/logic/test_deontic_grouped_decoder.py": "de59814005b798404996a6d8a207bb7b17f806c93c8ea590eb483cbd60a8afb4",
+    "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py": "aa799e28e8e01d5e27ac650ad0158b5974bf65c96521737a23f0f83dccc8e719",
+    "tests/unit/logic/test_legal_grouped_span_decoder.py": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8",
+    "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c",
+    "tests/unit/logic/test_legal_grouped_span_decoder_v2.py": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840",
+    "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f",
+    "tests/unit/logic/test_legal_grouped_phase1_integration.py": "12e9b330a35560bbb673a6fffbc3551c475c391d8ffb5cf43ab502d59d2ffe82",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_runtime_registry.py": "cba44a74ad99ebff2ea9d89c0100e35c8473dcf5cdf3d170ee5ecab072d20553",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_learned_formula_runtime.py": "613abb4e36d1d8ac5b45b65dc2afca4f7352adc1c27397ca2afa089aa50f6f9b",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_native_formula_runtime.py": "e52594f4c68794963c81c88e798599cced535d07993568633bc4822f0b33e1d9",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0",
+    "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py": "907f802e33121913a242482f898286243bfe160fffe966716860bb3f2c606965"
+  },
+  "source_and_tests_stable": true,
+  "runner_sha256": "c45ceb67aced832d6e7e3de902c0a9345cd9723f1e08aa1f125cb1f7cb782305",
+  "production_promotion": false,
+  "new_training_experiment": false,
+  "unit_tests_include_small_optimizer_fixtures": true
+}
