@@ -1,0 +1,1061 @@
+{
+  "admitted": false,
+  "cases": [
+    {
+      "expected": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "id": "fresh-modality-v3:975e94cc3218d1f07d9a11acbcf2470aa158a7408c0bf91c5287df50495edb26",
+      "now_exact": false,
+      "positive": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "scalar_observations": [
+        {
+          "expected": {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          },
+          "id": "fresh-modality-v3:975e94cc3218d1f07d9a11acbcf2470aa158a7408c0bf91c5287df50495edb26",
+          "positive": {
+            "combined_correct": false,
+            "components": {
+              "combined": {
+                "argmax_token_id": 3,
+                "full_vocabulary_cross_entropy": 1.195426710617502,
+                "target_minus_best_other": -0.2069854736328125,
+                "target_minus_emitted": -0.2069854736328125
+              },
+              "recurrent": {
+                "argmax_token_id": 28,
+                "full_vocabulary_cross_entropy": 2.656340065714801,
+                "target_minus_best_other": -1.9832360744476318,
+                "target_minus_emitted": -0.05015730857849121
+              },
+              "source": {
+                "argmax_token_id": 3,
+                "full_vocabulary_cross_entropy": 1.136786227588717,
+                "target_minus_best_other": -0.15682804584503174,
+                "target_minus_emitted": -0.15682804584503174
+              }
+            },
+            "emitted": "\"F\"",
+            "field": "modality",
+            "id": "fresh-modality-v3:975e94cc3218d1f07d9a11acbcf2470aa158a7408c0bf91c5287df50495edb26",
+            "recurrent_correct": false,
+            "slot": 0,
+            "source_correct": false,
+            "source_text": "The secretary is obligated to publish the notice.",
+            "target": "\"O\"",
+            "template_family": "actor_normative_status",
+            "training_pair_stratum": "unseen"
+          },
+          "slot": 0,
+          "zero": {
+            "combined_correct": false,
+            "components": {
+              "combined": {
+                "argmax_token_id": 5,
+                "full_vocabulary_cross_entropy": 1.1798614804561938,
+                "target_minus_best_other": -0.31235265731811523,
+                "target_minus_emitted": -0.31235265731811523
+              },
+              "recurrent": {
+                "argmax_token_id": 28,
+                "full_vocabulary_cross_entropy": 2.6545777990579174,
+                "target_minus_best_other": -1.9822280406951904,
+                "target_minus_emitted": -0.12752532958984375
+              },
+              "source": {
+                "argmax_token_id": 5,
+                "full_vocabulary_cross_entropy": 1.1141444720564793,
+                "target_minus_best_other": -0.18482744693756104,
+                "target_minus_emitted": -0.18482744693756104
+              }
+            },
+            "emitted": "\"P\"",
+            "field": "modality",
+            "id": "fresh-modality-v3:975e94cc3218d1f07d9a11acbcf2470aa158a7408c0bf91c5287df50495edb26",
+            "recurrent_correct": false,
+            "slot": 0,
+            "source_correct": false,
+            "source_text": "The secretary is obligated to publish the notice.",
+            "target": "\"O\"",
+            "template_family": "actor_normative_status",
+            "training_pair_stratum": "unseen"
+          }
+        }
+      ],
+      "source_text": "The secretary is obligated to publish the notice.",
+      "was_exact": false,
+      "zero": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      }
+    },
+    {
+      "expected": {
+        "rules": [
+          {
+            "action": "deliver",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "id": "fresh-modality-v3:3bf2034030b22d0594ac8f3f167931ce129626a3f11985d46a5ebef591612c78",
+      "now_exact": false,
+      "positive": {
+        "rules": [
+          {
+            "action": "deliver",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "scalar_observations": [
+        {
+          "expected": {
+            "action": "deliver",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          "id": "fresh-modality-v3:3bf2034030b22d0594ac8f3f167931ce129626a3f11985d46a5ebef591612c78",
+          "positive": {
+            "combined_correct": false,
+            "components": {
+              "combined": {
+                "argmax_token_id": 5,
+                "full_vocabulary_cross_entropy": 0.7063725559541734,
+                "target_minus_best_other": -0.026271820068359375,
+                "target_minus_emitted": -0.026271820068359375
+              },
+              "recurrent": {
+                "argmax_token_id": 28,
+                "full_vocabulary_cross_entropy": 2.3675929390137735,
+                "target_minus_best_other": -1.5659661293029785,
+                "target_minus_emitted": -0.14708185195922852
+              },
+              "source": {
+                "argmax_token_id": 4,
+                "full_vocabulary_cross_entropy": 0.6345799503160698,
+                "target_minus_best_other": 0.12081050872802734,
+                "target_minus_emitted": 0.12081050872802734
+              }
+            },
+            "emitted": "\"P\"",
+            "field": "modality",
+            "id": "fresh-modality-v3:3bf2034030b22d0594ac8f3f167931ce129626a3f11985d46a5ebef591612c78",
+            "recurrent_correct": false,
+            "slot": 0,
+            "source_correct": true,
+            "source_text": "The obligation is for the trustee to deliver the archive.",
+            "target": "\"O\"",
+            "template_family": "norm_noun_subject",
+            "training_pair_stratum": "seen"
+          },
+          "slot": 0,
+          "zero": {
+            "combined_correct": true,
+            "components": {
+              "combined": {
+                "argmax_token_id": 4,
+                "full_vocabulary_cross_entropy": 0.425778552505097,
+                "target_minus_best_other": 0.6334104537963867,
+                "target_minus_emitted": 0.0
+              },
+              "recurrent": {
+                "argmax_token_id": 28,
+                "full_vocabulary_cross_entropy": 2.368362978980029,
+                "target_minus_best_other": -1.5673885345458984,
+                "target_minus_emitted": 0.0
+              },
+              "source": {
+                "argmax_token_id": 4,
+                "full_vocabulary_cross_entropy": 0.37747619284357103,
+                "target_minus_best_other": 0.7796182632446289,
+                "target_minus_emitted": 0.0
+              }
+            },
+            "emitted": "\"O\"",
+            "field": "modality",
+            "id": "fresh-modality-v3:3bf2034030b22d0594ac8f3f167931ce129626a3f11985d46a5ebef591612c78",
+            "recurrent_correct": false,
+            "slot": 0,
+            "source_correct": true,
+            "source_text": "The obligation is for the trustee to deliver the archive.",
+            "target": "\"O\"",
+            "template_family": "norm_noun_subject",
+            "training_pair_stratum": "seen"
+          }
+        }
+      ],
+      "source_text": "The obligation is for the trustee to deliver the archive.\n\nThe permission is for the treasurer to deliver the archive.",
+      "was_exact": true,
+      "zero": {
+        "rules": [
+          {
+            "action": "deliver",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      }
+    },
+    {
+      "expected": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "id": "fresh-modality-v3:627be23cc0da96cdeede598e2612c2fc55271822c2de32f7fd1984ebf5a20772",
+      "now_exact": false,
+      "positive": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "scalar_observations": [
+        {
+          "expected": {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          "id": "fresh-modality-v3:627be23cc0da96cdeede598e2612c2fc55271822c2de32f7fd1984ebf5a20772",
+          "positive": {
+            "combined_correct": false,
+            "components": {
+              "combined": {
+                "argmax_token_id": 5,
+                "full_vocabulary_cross_entropy": 0.9575727739076374,
+                "target_minus_best_other": -0.47312259674072266,
+                "target_minus_emitted": -0.47312259674072266
+              },
+              "recurrent": {
+                "argmax_token_id": 28,
+                "full_vocabulary_cross_entropy": 2.481379022659066,
+                "target_minus_best_other": -1.6409695148468018,
+                "target_minus_emitted": -0.13492727279663086
+              },
+              "source": {
+                "argmax_token_id": 5,
+                "full_vocabulary_cross_entropy": 0.8766501077201525,
+                "target_minus_best_other": -0.3381948471069336,
+                "target_minus_emitted": -0.3381948471069336
+              }
+            },
+            "emitted": "\"P\"",
+            "field": "modality",
+            "id": "fresh-modality-v3:627be23cc0da96cdeede598e2612c2fc55271822c2de32f7fd1984ebf5a20772",
+            "recurrent_correct": false,
+            "slot": 0,
+            "source_correct": false,
+            "source_text": "Publishing the archive is an obligation of the secretary.",
+            "target": "\"O\"",
+            "template_family": "gerund_normative_subject",
+            "training_pair_stratum": "unseen"
+          },
+          "slot": 0,
+          "zero": {
+            "combined_correct": true,
+            "components": {
+              "combined": {
+                "argmax_token_id": 4,
+                "full_vocabulary_cross_entropy": 0.6860186890794964,
+                "target_minus_best_other": 0.014553070068359375,
+                "target_minus_emitted": 0.0
+              },
+              "recurrent": {
+                "argmax_token_id": 28,
+                "full_vocabulary_cross_entropy": 2.4761549472527644,
+                "target_minus_best_other": -1.6297869682312012,
+                "target_minus_emitted": 0.0
+              },
+              "source": {
+                "argmax_token_id": 4,
+                "full_vocabulary_cross_entropy": 0.6216118590410487,
+                "target_minus_best_other": 0.1489248275756836,
+                "target_minus_emitted": 0.0
+              }
+            },
+            "emitted": "\"O\"",
+            "field": "modality",
+            "id": "fresh-modality-v3:627be23cc0da96cdeede598e2612c2fc55271822c2de32f7fd1984ebf5a20772",
+            "recurrent_correct": false,
+            "slot": 0,
+            "source_correct": true,
+            "source_text": "Publishing the archive is an obligation of the secretary.",
+            "target": "\"O\"",
+            "template_family": "gerund_normative_subject",
+            "training_pair_stratum": "unseen"
+          }
+        }
+      ],
+      "source_text": "Publishing the archive is an obligation of the secretary.\n\nPreserving the notice is an obligation of the secretary.\n\nDelivering the archive is authorized for the registrar.\n\nDelivering the notice is prohibited for the registrar.\n\nPreserving the archive is prohibited for the trustee.\n\nPreserving the notice is prohibited for the trustee.\n\nPreserving the archive is an obligation of the secretary.\n\nExamining the notice is authorized for the trustee.",
+      "was_exact": false,
+      "zero": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "preserve",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      }
+    },
+    {
+      "expected": {
+        "rules": [
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "approve",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "id": "fresh-modality-v3:91e5a48ee548d0b4045c4772d529f8c7fc6fe58a397ed4c4640decd4edf36063",
+      "now_exact": false,
+      "positive": {
+        "rules": [
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "approve",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "scalar_observations": [
+        {
+          "expected": {
+            "action": "publish",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          },
+          "id": "fresh-modality-v3:91e5a48ee548d0b4045c4772d529f8c7fc6fe58a397ed4c4640decd4edf36063",
+          "positive": {
+            "combined_correct": false,
+            "components": {
+              "combined": {
+                "argmax_token_id": 5,
+                "full_vocabulary_cross_entropy": 1.1284679713256898,
+                "target_minus_best_other": -0.7253303527832031,
+                "target_minus_emitted": -0.7253303527832031
+              },
+              "recurrent": {
+                "argmax_token_id": 28,
+                "full_vocabulary_cross_entropy": 2.9356340078521983,
+                "target_minus_best_other": -2.4463706016540527,
+                "target_minus_emitted": -0.1112358570098877
+              },
+              "source": {
+                "argmax_token_id": 5,
+                "full_vocabulary_cross_entropy": 1.055295016370176,
+                "target_minus_best_other": -0.6140940189361572,
+                "target_minus_emitted": -0.6140940189361572
+              }
+            },
+            "emitted": "\"P\"",
+            "field": "modality",
+            "id": "fresh-modality-v3:91e5a48ee548d0b4045c4772d529f8c7fc6fe58a397ed4c4640decd4edf36063",
+            "recurrent_correct": false,
+            "slot": 2,
+            "source_correct": false,
+            "source_text": "Publishing the notice is an obligation of the notary.",
+            "target": "\"O\"",
+            "template_family": "gerund_normative_subject",
+            "training_pair_stratum": "seen"
+          },
+          "slot": 2,
+          "zero": {
+            "combined_correct": true,
+            "components": {
+              "combined": {
+                "argmax_token_id": 4,
+                "full_vocabulary_cross_entropy": 0.6286251723163874,
+                "target_minus_best_other": 0.1519603729248047,
+                "target_minus_emitted": 0.0
+              },
+              "recurrent": {
+                "argmax_token_id": 28,
+                "full_vocabulary_cross_entropy": 2.9349551486749013,
+                "target_minus_best_other": -2.4437084197998047,
+                "target_minus_emitted": 0.0
+              },
+              "source": {
+                "argmax_token_id": 4,
+                "full_vocabulary_cross_entropy": 0.579184383100019,
+                "target_minus_best_other": 0.2626626491546631,
+                "target_minus_emitted": 0.0
+              }
+            },
+            "emitted": "\"O\"",
+            "field": "modality",
+            "id": "fresh-modality-v3:91e5a48ee548d0b4045c4772d529f8c7fc6fe58a397ed4c4640decd4edf36063",
+            "recurrent_correct": false,
+            "slot": 2,
+            "source_correct": true,
+            "source_text": "Publishing the notice is an obligation of the notary.",
+            "target": "\"O\"",
+            "template_family": "gerund_normative_subject",
+            "training_pair_stratum": "seen"
+          }
+        }
+      ],
+      "source_text": "Delivering the archive is an obligation of the registrar.\n\nExamining the archive is authorized for the treasurer.\n\nPublishing the notice is an obligation of the notary.\n\nDelivering the archive is prohibited for the notary.\n\nApproving the notice is an obligation of the treasurer.\n\nPublishing the archive is authorized for the secretary.\n\nExamining the archive is an obligation of the trustee.\n\nPublishing the notice is authorized for the secretary.",
+      "was_exact": false,
+      "zero": {
+        "rules": [
+          {
+            "action": "deliver",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "deliver",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "F",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "approve",
+            "actor": "treasurer",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "examine",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          },
+          {
+            "action": "publish",
+            "actor": "secretary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      }
+    }
+  ],
+  "complete": true,
+  "formalized": false,
+  "lake_executed": false,
+  "previously_exposed": true,
+  "roundtrip_ok": false,
+  "schema": "matched-published-formula-transitions/v1",
+  "unchanged_768_errors": [
+    [
+      {
+        "combined_correct": false,
+        "components": {
+          "combined": {
+            "argmax_token_id": 4,
+            "full_vocabulary_cross_entropy": 4.879225145770283,
+            "target_minus_best_other": -4.8715925216674805,
+            "target_minus_emitted": -4.8715925216674805
+          },
+          "recurrent": {
+            "argmax_token_id": 28,
+            "full_vocabulary_cross_entropy": 1.6699894072000276,
+            "target_minus_best_other": -0.8288435935974121,
+            "target_minus_emitted": 0.15503692626953125
+          },
+          "source": {
+            "argmax_token_id": 4,
+            "full_vocabulary_cross_entropy": 5.033172388649261,
+            "target_minus_best_other": -5.02662992477417,
+            "target_minus_emitted": -5.02662992477417
+          }
+        },
+        "emitted": "\"O\"",
+        "field": "modality",
+        "id": "fresh-modality-v3:a5a854e4c7081610e7444964bdcf072192d45eb9043688c8a08db2e41f806dfd",
+        "recurrent_correct": false,
+        "slot": 2,
+        "source_correct": false,
+        "source_text": "The secretary is authorized to deliver the notice.",
+        "target": "\"P\"",
+        "template_family": "actor_normative_status",
+        "training_pair_stratum": "seen"
+      },
+      {
+        "combined_correct": false,
+        "components": {
+          "combined": {
+            "argmax_token_id": 4,
+            "full_vocabulary_cross_entropy": 2.8281031472311913,
+            "target_minus_best_other": -2.7671566009521484,
+            "target_minus_emitted": -2.7671566009521484
+          },
+          "recurrent": {
+            "argmax_token_id": 5,
+            "full_vocabulary_cross_entropy": 1.4197055925004012,
+            "target_minus_best_other": 0.054012298583984375,
+            "target_minus_emitted": 0.16624879837036133
+          },
+          "source": {
+            "argmax_token_id": 4,
+            "full_vocabulary_cross_entropy": 2.985264646887421,
+            "target_minus_best_other": -2.9334053993225098,
+            "target_minus_emitted": -2.9334053993225098
+          }
+        },
+        "emitted": "\"O\"",
+        "field": "modality",
+        "id": "fresh-modality-v3:7fbd6bbfd4f98f5438bdb7252fe8b91f4728adc82087dc4d28e1fc95e0c3390d",
+        "recurrent_correct": true,
+        "slot": 1,
+        "source_correct": false,
+        "source_text": "The secretary is authorized to publish the notice.",
+        "target": "\"P\"",
+        "template_family": "actor_normative_status",
+        "training_pair_stratum": "unseen"
+      }
+    ],
+    [
+      {
+        "combined_correct": false,
+        "components": {
+          "combined": {
+            "argmax_token_id": 4,
+            "full_vocabulary_cross_entropy": 4.04016751165531,
+            "target_minus_best_other": -4.0224151611328125,
+            "target_minus_emitted": -4.0224151611328125
+          },
+          "recurrent": {
+            "argmax_token_id": 28,
+            "full_vocabulary_cross_entropy": 1.6745228539905241,
+            "target_minus_best_other": -0.8360881805419922,
+            "target_minus_emitted": 0.15599918365478516
+          },
+          "source": {
+            "argmax_token_id": 4,
+            "full_vocabulary_cross_entropy": 4.193625382088188,
+            "target_minus_best_other": -4.1784138679504395,
+            "target_minus_emitted": -4.1784138679504395
+          }
+        },
+        "emitted": "\"O\"",
+        "field": "modality",
+        "id": "fresh-modality-v3:a5a854e4c7081610e7444964bdcf072192d45eb9043688c8a08db2e41f806dfd",
+        "recurrent_correct": false,
+        "slot": 2,
+        "source_correct": false,
+        "source_text": "The secretary is authorized to deliver the notice.",
+        "target": "\"P\"",
+        "template_family": "actor_normative_status",
+        "training_pair_stratum": "seen"
+      },
+      {
+        "combined_correct": false,
+        "components": {
+          "combined": {
+            "argmax_token_id": 4,
+            "full_vocabulary_cross_entropy": 1.4374675285479483,
+            "target_minus_best_other": -1.1662731170654297,
+            "target_minus_emitted": -1.1662731170654297
+          },
+          "recurrent": {
+            "argmax_token_id": 5,
+            "full_vocabulary_cross_entropy": 1.423354561151764,
+            "target_minus_best_other": 0.05383920669555664,
+            "target_minus_emitted": 0.16728639602661133
+          },
+          "source": {
+            "argmax_token_id": 4,
+            "full_vocabulary_cross_entropy": 1.5674960173616146,
+            "target_minus_best_other": -1.333559513092041,
+            "target_minus_emitted": -1.333559513092041
+          }
+        },
+        "emitted": "\"O\"",
+        "field": "modality",
+        "id": "fresh-modality-v3:7fbd6bbfd4f98f5438bdb7252fe8b91f4728adc82087dc4d28e1fc95e0c3390d",
+        "recurrent_correct": true,
+        "slot": 1,
+        "source_correct": false,
+        "source_text": "The secretary is authorized to publish the notice.",
+        "target": "\"P\"",
+        "template_family": "actor_normative_status",
+        "training_pair_stratum": "unseen"
+      }
+    ]
+  ],
+  "unchanged_768_formula_outputs": true,
+  "used_for_selection": false,
+  "used_for_training": false
+}

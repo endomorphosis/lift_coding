@@ -1,0 +1,20 @@
+{
+  "schema": "paraphrase-modality-margin-diagnostic-tests/v1",
+  "source_sha256": {
+    "scripts/ops/autoencoder/diagnose_paraphrase_modality_margins.py": "86906fcbaeb348d418e7d0fed6a9faf5510b61c139ea35db0f9d6dc4086d621e",
+    "tests/unit/logic/formalization/autoencoder/test_paraphrase_modality_margins.py": "9509ceaf65172c793df423736d5eb8617357a4ee85221d4f3b9dd227dfa57565"
+  },
+  "tests_log_sha256": "c855350253debca287b04bb9652f68d4b564a76b724581c8d59d1873a2f8de80",
+  "tests_xml_sha256": "a9c7da95a7432903224edd58cfeefea05f6f5a3f7fa1bf3bf58169b47bd0ec05",
+  "test_count": 73,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "returncode": 0,
+  "model_executed": false,
+  "encoder_executed": false,
+  "native_validation_executed": false,
+  "training_executed": false,
+  "resource_ledger_written": false,
+  "source_stable_for_freeze": true
+}

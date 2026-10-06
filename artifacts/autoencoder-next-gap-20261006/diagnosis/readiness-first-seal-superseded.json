@@ -1,0 +1,13 @@
+{
+  "schema": "independent-readiness-superseded-seal/v1",
+  "source_changed_after_initial_seal": true,
+  "original_manifest_sha256": "efbea2249426e18c2ec2a99baee0b0a500129c22b9220bd1cc651ffc30566293",
+  "original_plan_sha256": "317cdb5eab766a1c9cf7026ee3e098462e6591eb5c68c4c4bba5ea8d3cdf4ff4",
+  "frozen_runner_sha256": "e787742051c1da1ebdc73e8ca6f505ed6c69ed7cedae2e60fba87f100e869fe8",
+  "revised_canonical_runner_sha256": "86906fcbaeb348d418e7d0fed6a9faf5510b61c139ea35db0f9d6dc4086d621e",
+  "stated_reason": "Final driver adds pre-reference fsync and exact dimension/schema/vocabulary checks; fresh r2 freeze required.",
+  "model_executed": false,
+  "encoder_executed": false,
+  "resource_ledger_written": false,
+  "launch_authorized_by_this_review": false
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "paraphrase-modality-margin-diagnostic-tests/v1",
+  "source_sha256": {
+    "scripts/ops/autoencoder/diagnose_paraphrase_modality_margins.py": "e787742051c1da1ebdc73e8ca6f505ed6c69ed7cedae2e60fba87f100e869fe8",
+    "tests/unit/logic/formalization/autoencoder/test_paraphrase_modality_margins.py": "e0e52f3806a256e3ba57a59bcee478824ea3ef9355600ad44979af66f381d563"
+  },
+  "tests_log_sha256": "9f917828a13ce1441c83a4f5ec8ce6957423cd618aba5345279ebc15d017416c",
+  "tests_xml_sha256": "689a9f07aa92e5e8ab453a1d8b8edcb4cb59b7e74b80f87fd330b4ea13e5d35e",
+  "returncode": 0,
+  "model_executed": false,
+  "encoder_executed": false,
+  "native_validation_executed": false,
+  "training_executed": false,
+  "resource_ledger_written": false
+}

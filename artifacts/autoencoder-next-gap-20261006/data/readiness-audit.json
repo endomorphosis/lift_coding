@@ -1,0 +1,571 @@
+{
+  "admitted": false,
+  "audit_operations": {
+    "authenticated_review_or_adjudication_created": false,
+    "canonical_imports": 0,
+    "checks": 3839,
+    "downloads": 0,
+    "encoder_forwards": 0,
+    "json_reads_and_hashing_only": true,
+    "lake_builds": 0,
+    "model_forwards": 0,
+    "optimizer_updates": 0
+  },
+  "bindings": [
+    {
+      "bytes": 31087,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/summary.json",
+      "sha256": "1da1dfdcd9417b5fc219a0fdf071720cafdddd17456e06067f1e658ab448c54d"
+    },
+    {
+      "bytes": 3624,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/training-corpus-receipt.json",
+      "sha256": "c61ca27f5d01fbc5d9e9449f8c32edee4d93dcf8034c6d1f4ca9eb7b9b112156"
+    },
+    {
+      "bytes": 206528,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/training-references.json",
+      "sha256": "bf390f9ec51085f6a8320c4186b189734b8449288321db9795ca3bc51c3716ee"
+    },
+    {
+      "bytes": 16724,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/source-rows.json",
+      "sha256": "cc95f19cbc645a38e908baa02c521e3416f6c2b8775c523b5e7c871c13733727"
+    },
+    {
+      "bytes": 38792,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/original-training-bank-used.json",
+      "sha256": "97a928de6fb124cf01ea24fefa7ac43c94352de748354422fdcdb35f34216b10"
+    },
+    {
+      "bytes": 118378,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/prior-source-inventories.json",
+      "sha256": "b9cdf4cb6526cf102656667a2b3ff3d78c21c39093c56beba3ecb1a4409dbf8f"
+    },
+    {
+      "bytes": 129499,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/source-plan.json",
+      "sha256": "b4b08d2b1f054ff35eb0daad0ebe6475abf4efe7bf4f967042c38e04f6ff39a8"
+    },
+    {
+      "bytes": 614534,
+      "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json",
+      "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+    },
+    {
+      "bytes": 3406508,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/dimension-inputs-384.json",
+      "sha256": "6c7f6cf44140f6608b456c8117f845516edc60c0ff0e7248c9b1c321389899b3"
+    },
+    {
+      "bytes": 2766871,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/production-384.json",
+      "sha256": "8666ce6e1df0c8332a61d2519700f7f0ecfb2a1af80cb47531e885dfb06c791d"
+    },
+    {
+      "bytes": 24418,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-content-matched-r3-20261004/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/fresh_scalar_source_inputs.py",
+      "sha256": "7014e59ed0561718e082879ed1913d2442d7b4edeec59e26517aae6e1b847189"
+    },
+    {
+      "bytes": 19364,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-content-matched-r3-20261004/experiment-source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+    },
+    {
+      "bytes": 18437,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-source-margin-20261004/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/authored_scalar_holdout.py",
+      "sha256": "ff1a260df1466671a4c4625d396b79a20d6a830ce1050f14ffd7e1f93a522c00"
+    },
+    {
+      "bytes": 9145,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/training_paraphrase_source_inputs.py",
+      "sha256": "5c0d4571b87d4b3b82be3bae11ff08599f2a5d09c4465a8315641a05d1657649"
+    },
+    {
+      "bytes": 27947,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+      "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+    },
+    {
+      "bytes": 26219,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    {
+      "bytes": 6723600,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/dimension-inputs-768.json",
+      "sha256": "355a379986f98c7908bf25e7d28a58c865565cbd9b7e8e7cc9fc65ee0b04361a"
+    },
+    {
+      "bytes": 7282243,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/production-768.json",
+      "sha256": "6002b29f9095a279691592e98ee7e717c41082bfe2e399f0ee3729f961a51b16"
+    },
+    {
+      "bytes": 28444,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-content-matched-r3-20261004/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py",
+      "sha256": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206"
+    },
+    {
+      "bytes": 15959,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-content-matched-r3-20261004/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    {
+      "bytes": 13375,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-content-matched-r3-20261004/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    {
+      "bytes": 9556,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-content-matched-r3-20261004/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    {
+      "bytes": 57962,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-packet-01/reviewer_items.json",
+      "sha256": "8a8303ea83fe22899f798703e7931b1f48a8aa0afb01c7d6980a7d3e9301701e"
+    },
+    {
+      "bytes": 56355,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-packet-01/organizer_manifest_private.json",
+      "sha256": "305538b22d4e037be3a65ac952263cef2720f724cf27cd738459297ce241618c"
+    },
+    {
+      "bytes": 123008,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/binding-review-admission-01/recording/receipt_private.json",
+      "sha256": "5ca45110113be81b180c4ecacc99b7b534c14095496ef449995645dde494950c"
+    },
+    {
+      "bytes": 91547,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/label-evidence-intake-01/intake/intake_receipt_private.json",
+      "sha256": "def505b32cdf302effc223c27c746806501f381e62dd624441d3fbcb3440426c"
+    },
+    {
+      "bytes": 43238,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+      "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+    },
+    {
+      "bytes": 22785,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/cohort-metadata.json",
+      "sha256": "fbd8a59414f6e0a7d96b80171c164e24c42c1675f5314c77873a132fef5d82fa"
+    },
+    {
+      "bytes": 18904,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/expanded-encoding-report-01.json",
+      "sha256": "3732a01db278868ebeaa2383e3dd36c6eb3f15285e6fb6fb09422d1cd08a39d8"
+    },
+    {
+      "bytes": 307657,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_train_bundle.json",
+      "sha256": "c3e6a98c4486344926577d65a9573b3d0949ccc69e8a3351b1c66e11b4fa9aca"
+    },
+    {
+      "bytes": 844873,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384-production.json",
+      "sha256": "03f153b11633282251c220efc91ade0dd9510c636a97ed48ffbfabc487c5cfb7"
+    },
+    {
+      "bytes": 307667,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_query_bundle.json",
+      "sha256": "89560d81ef41cc0f852c2d0e60a695658327f61a57a6a7ab23cf94b557379fcb"
+    },
+    {
+      "bytes": 568345,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_train_bundle.json",
+      "sha256": "104237e15673981fcfdd0a5076761b64b571574623f1f7e9435ca074d8684453"
+    },
+    {
+      "bytes": 2174752,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768-production.json",
+      "sha256": "ad289bfc25ea4022b9b1637d10caef28f7c487ece1223c3436820f89c4232932"
+    },
+    {
+      "bytes": 568271,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_query_bundle.json",
+      "sha256": "6a956c8bcee7b3c10a34c6cae41710c36abe571837cb4b8c5f825b92e7234e0d"
+    },
+    {
+      "bytes": 333966,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-alignment-20261003/canonical-codec-01/train_weak_supervision.json",
+      "sha256": "97a333821790db1ad11a542f918a32e583b9b4ab150b82cdd71bbd883bbc42ba"
+    }
+  ],
+  "checkpoint_promoted": false,
+  "composition64": {
+    "all_annotation_slots_blank": true,
+    "allowed_reuse": "source-only reconstruction or source-only diagnostic inference with exact profile; semantic fitting remains blocked",
+    "cache_pairs": {
+      "native384": {
+        "development": {
+          "bundle": {
+            "bytes": 307667,
+            "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_query_bundle.json",
+            "sha256": "89560d81ef41cc0f852c2d0e60a695658327f61a57a6a7ab23cf94b557379fcb"
+          },
+          "producer": {
+            "bytes": 844873,
+            "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384-production.json",
+            "sha256": "03f153b11633282251c220efc91ade0dd9510c636a97ed48ffbfabc487c5cfb7"
+          },
+          "profile": {
+            "content_sha256": "7ab65a8822403038422f07f1b93ffb5e8cc3027e9de82886390fad084817443c",
+            "dimension": 384,
+            "fit_input_recipe": "exact_source_only/v1",
+            "inference_input_recipe": "exact_source_only/v1",
+            "lane_id": "native384",
+            "normalization": {
+              "kind": "l2",
+              "unit_tolerance": 1e-05
+            },
+            "pooling": {
+              "endpoint": "sentence_transformers.mean_pooling",
+              "method": "mean"
+            },
+            "precision": "float32",
+            "producer": {
+              "checkpoint_sha256": null,
+              "code_sha256": "3077b91e46e8a8250c4ab219a444963a8f78e98586a4359a8c271d4d32020bcb",
+              "model_assets_sha256": "def8d7e04c05560b1d0dd1fa9317be7a59a1ba8399ca725be0ac807a9a264edc",
+              "model_id": "thenlper/gte-small",
+              "model_revision": "17e1f347d17fe144873b1201da91788898c639cd",
+              "profile_id": "thenlper/gte-small@17e1f347d17fe144873b1201da91788898c639cd:d384:pool=mean:norm=l2:precision=float32:input_policy=exact_source_no_truncation"
+            },
+            "schema": "alignment-representation-profile/v1",
+            "stage": "raw_embedding"
+          },
+          "rows": 32
+        },
+        "train": {
+          "bundle": {
+            "bytes": 307657,
+            "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384_raw_train_bundle.json",
+            "sha256": "c3e6a98c4486344926577d65a9573b3d0949ccc69e8a3351b1c66e11b4fa9aca"
+          },
+          "producer": {
+            "bytes": 844873,
+            "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native384-production.json",
+            "sha256": "03f153b11633282251c220efc91ade0dd9510c636a97ed48ffbfabc487c5cfb7"
+          },
+          "profile": {
+            "content_sha256": "7ab65a8822403038422f07f1b93ffb5e8cc3027e9de82886390fad084817443c",
+            "dimension": 384,
+            "fit_input_recipe": "exact_source_only/v1",
+            "inference_input_recipe": "exact_source_only/v1",
+            "lane_id": "native384",
+            "normalization": {
+              "kind": "l2",
+              "unit_tolerance": 1e-05
+            },
+            "pooling": {
+              "endpoint": "sentence_transformers.mean_pooling",
+              "method": "mean"
+            },
+            "precision": "float32",
+            "producer": {
+              "checkpoint_sha256": null,
+              "code_sha256": "3077b91e46e8a8250c4ab219a444963a8f78e98586a4359a8c271d4d32020bcb",
+              "model_assets_sha256": "def8d7e04c05560b1d0dd1fa9317be7a59a1ba8399ca725be0ac807a9a264edc",
+              "model_id": "thenlper/gte-small",
+              "model_revision": "17e1f347d17fe144873b1201da91788898c639cd",
+              "profile_id": "thenlper/gte-small@17e1f347d17fe144873b1201da91788898c639cd:d384:pool=mean:norm=l2:precision=float32:input_policy=exact_source_no_truncation"
+            },
+            "schema": "alignment-representation-profile/v1",
+            "stage": "raw_embedding"
+          },
+          "rows": 32
+        }
+      },
+      "native768": {
+        "development": {
+          "bundle": {
+            "bytes": 568271,
+            "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_query_bundle.json",
+            "sha256": "6a956c8bcee7b3c10a34c6cae41710c36abe571837cb4b8c5f825b92e7234e0d"
+          },
+          "producer": {
+            "bytes": 2174752,
+            "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768-production.json",
+            "sha256": "ad289bfc25ea4022b9b1637d10caef28f7c487ece1223c3436820f89c4232932"
+          },
+          "profile": {
+            "content_sha256": "04d062a7724d01e6b5d3f50578211347f6f9e7f5eceec5e02978fd37f7f70d0f",
+            "dimension": 768,
+            "fit_input_recipe": "exact_source_only/v1",
+            "inference_input_recipe": "exact_source_only/v1",
+            "lane_id": "native768",
+            "normalization": {
+              "kind": "l2",
+              "unit_tolerance": 1e-05
+            },
+            "pooling": {
+              "endpoint": "complete_model.encoder.last_hidden_state[:,0]",
+              "method": "cls"
+            },
+            "precision": "float32",
+            "producer": {
+              "checkpoint_sha256": null,
+              "code_sha256": "874c6db14e70e3adbb3ea3190d9a0eb1cd44aa50ab9aa60e3387b678fcf3a588",
+              "model_assets_sha256": "1b45c5a2bb0bf45f75ac4a745d695aa12956e043f4fe581495d112e44b647961",
+              "model_id": "Alibaba-NLP/gte-multilingual-base",
+              "model_revision": "9bbca17d9273fd0d03d5725c7a4b0f6b45142062",
+              "profile_id": "Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062:code=Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4:d768:pool=cls:norm=l2:cpu:float32:tokens8192:reject_overlength:v1"
+            },
+            "schema": "alignment-representation-profile/v1",
+            "stage": "raw_embedding"
+          },
+          "rows": 32
+        },
+        "train": {
+          "bundle": {
+            "bytes": 568345,
+            "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768_raw_train_bundle.json",
+            "sha256": "104237e15673981fcfdd0a5076761b64b571574623f1f7e9435ca074d8684453"
+          },
+          "producer": {
+            "bytes": 2174752,
+            "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/encoding-01/worker/native768-production.json",
+            "sha256": "ad289bfc25ea4022b9b1637d10caef28f7c487ece1223c3436820f89c4232932"
+          },
+          "profile": {
+            "content_sha256": "04d062a7724d01e6b5d3f50578211347f6f9e7f5eceec5e02978fd37f7f70d0f",
+            "dimension": 768,
+            "fit_input_recipe": "exact_source_only/v1",
+            "inference_input_recipe": "exact_source_only/v1",
+            "lane_id": "native768",
+            "normalization": {
+              "kind": "l2",
+              "unit_tolerance": 1e-05
+            },
+            "pooling": {
+              "endpoint": "complete_model.encoder.last_hidden_state[:,0]",
+              "method": "cls"
+            },
+            "precision": "float32",
+            "producer": {
+              "checkpoint_sha256": null,
+              "code_sha256": "874c6db14e70e3adbb3ea3190d9a0eb1cd44aa50ab9aa60e3387b678fcf3a588",
+              "model_assets_sha256": "1b45c5a2bb0bf45f75ac4a745d695aa12956e043f4fe581495d112e44b647961",
+              "model_id": "Alibaba-NLP/gte-multilingual-base",
+              "model_revision": "9bbca17d9273fd0d03d5725c7a4b0f6b45142062",
+              "profile_id": "Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062:code=Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4:d768:pool=cls:norm=l2:cpu:float32:tokens8192:reject_overlength:v1"
+            },
+            "schema": "alignment-representation-profile/v1",
+            "stage": "raw_embedding"
+          },
+          "rows": 32
+        }
+      }
+    },
+    "cached_forward_no_new_encoding_required": true,
+    "formal_targets_admitted": 0,
+    "semantic_masks_nonzero": 0,
+    "source_group_overlap": 0,
+    "source_groups": 16,
+    "source_reconstruction_development_rows": 32,
+    "source_reconstruction_train_rows": 32,
+    "source_rows": 64,
+    "submitted_reviews": 0
+  },
+  "constitution_formalized": false,
+  "content_sha256": "17d668dfe59777e964a5bd22254ce27c213fb7dbd32ea2881819c03b9146e574",
+  "created_utc": "2026-10-06T08:44:27.766119+00:00",
+  "datasets_review_commit": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+  "existing_weak_teacher": {
+    "allowed_reuse": "separately declared weak decoder diagnostic; no semantic or contrastive labels inferred",
+    "groups": 4,
+    "origin": "parser_derived_weak_teacher",
+    "pairs": 16,
+    "semantic_review_authenticated": false
+  },
+  "qualified": false,
+  "r4": {
+    "allowed_reuse": "existing authored diagnostic training; new declared arms need a frozen recipe and original controls",
+    "cache_pairs": {
+      "384": {
+        "cache": {
+          "bytes": 3406508,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/dimension-inputs-384.json",
+          "sha256": "6c7f6cf44140f6608b456c8117f845516edc60c0ff0e7248c9b1c321389899b3"
+        },
+        "clause_vectors": 180,
+        "complete_binary_and_model_asset_closure_rechecked": false,
+        "named_producer_files_rechecked": 6,
+        "numeric_cache_matches_saved_native_outputs": true,
+        "observed_tokens_max": 111,
+        "paragraph_vectors": 48,
+        "production": {
+          "bytes": 2766871,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/production-384.json",
+          "sha256": "8666ce6e1df0c8332a61d2519700f7f0ecfb2a1af80cb47531e885dfb06c791d"
+        },
+        "representation": {
+          "actual_forward_tokens_verified": true,
+          "device": "cpu",
+          "dimension": 384,
+          "dtype": "float32",
+          "experiment_token_limit": 512,
+          "kind": "native_gte_small_semantic_embedding",
+          "model_id": "thenlper/gte-small",
+          "revision": "17e1f347d17fe144873b1201da91788898c639cd",
+          "semantic_embedding": true
+        },
+        "unique_native_vectors": 216
+      },
+      "768": {
+        "cache": {
+          "bytes": 6723600,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/dimension-inputs-768.json",
+          "sha256": "355a379986f98c7908bf25e7d28a58c865565cbd9b7e8e7cc9fc65ee0b04361a"
+        },
+        "clause_vectors": 180,
+        "complete_binary_and_model_asset_closure_rechecked": false,
+        "named_producer_files_rechecked": 7,
+        "numeric_cache_matches_saved_native_outputs": true,
+        "observed_tokens_max": 132,
+        "paragraph_vectors": 48,
+        "production": {
+          "bytes": 7282243,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/production-768.json",
+          "sha256": "6002b29f9095a279691592e98ee7e717c41082bfe2e399f0ee3729f961a51b16"
+        },
+        "representation": {
+          "actual_forward_tokens_verified": true,
+          "cached_profile_relabelled": false,
+          "device": "cpu",
+          "dimension": 768,
+          "dtype": "float32",
+          "experiment_token_limit": 512,
+          "historical_profile_token_limit": 8192,
+          "kind": "native_gte_multilingual_semantic_embedding",
+          "profile_id": "Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062:code=Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4:d768:pool=cls:norm=l2:cpu:float32:tokens8192:reject_overlength:v1",
+          "semantic_embedding": true
+        },
+        "unique_native_vectors": 216
+      }
+    },
+    "complete_paragraphs": 48,
+    "explicit_absent_actor_action_object_examples": 0,
+    "facet_counts": {
+      "action": {
+        "approve": 36,
+        "deliver": 36,
+        "examine": 36,
+        "preserve": 36,
+        "publish": 36
+      },
+      "actor": {
+        "notary": 36,
+        "registrar": 36,
+        "secretary": 36,
+        "treasurer": 36,
+        "trustee": 36
+      },
+      "modality": {
+        "F": 60,
+        "O": 60,
+        "P": 60
+      },
+      "object": {
+        "archive": 90,
+        "notice": 90
+      }
+    },
+    "formal_targets_admitted": 0,
+    "novel_formal_rules": 0,
+    "qualifier_nonempty_counts": {
+      "conditions": 0,
+      "exceptions": 0,
+      "temporal": 0
+    },
+    "role": "authored_train_augmentation_diagnostic",
+    "semantic_review_authenticated": false,
+    "source_exclusions": {
+      "exposed_r6": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 216,
+        "rows": 48
+      },
+      "exposed_r8": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 216,
+        "rows": 48
+      },
+      "exposed_v3": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 216,
+        "rows": 48
+      },
+      "original_train_bank": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 180,
+        "rows": 180
+      },
+      "paragraph_train": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 149,
+        "rows": 48
+      },
+      "paragraph_validation": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 90,
+        "rows": 48
+      },
+      "raw_canary": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 30,
+        "rows": 30
+      },
+      "raw_test": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 60,
+        "rows": 60
+      },
+      "raw_train": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 180,
+        "rows": 180
+      },
+      "raw_validation": {
+        "normalized_overlap": 0,
+        "normalized_source_count": 60,
+        "rows": 60
+      }
+    },
+    "source_semantics_verified": false,
+    "templates": {
+      "rule_gerund_by_actor": 90,
+      "topicalized_actor_norm": 90
+    },
+    "unique_clauses": 180,
+    "unique_original_rules": 90
+  },
+  "schema": "autoencoder-next-training-data-readiness/v1",
+  "scope": "saved_data_integrity_and_readiness_only",
+  "semantic_fidelity_established": false,
+  "trained_restricted32V_compatibility": {
+    "composition64_direct_targets_compatible": false,
+    "decoder_profile_fork_required_before_richer_fitting": true,
+    "missing_action_symbols": [
+      "audit",
+      "authorize",
+      "notify",
+      "retain"
+    ],
+    "missing_actor_symbols": [
+      "clerk",
+      "custodian",
+      "officer"
+    ],
+    "missing_object_symbols": [
+      "applicant",
+      "application",
+      "filing"
+    ],
+    "qualifier_value_symbols_present": false,
+    "scope_operators_preserved_by_flat_facets": false
+  },
+  "workspace_review_commit": "3eb24f89e82b74cfba3fa261ef099a1c5c7e1370"
+}
