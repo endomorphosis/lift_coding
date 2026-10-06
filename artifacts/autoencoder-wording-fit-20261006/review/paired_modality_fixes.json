@@ -1,0 +1,589 @@
+{
+  "384_formula_regressions": [],
+  "admitted": false,
+  "all_five_fixes_scope": "actor_norm_possession_v1 obligation clauses: bears a duty to; five P\u2192O modality corrections",
+  "auditor_models_executed": false,
+  "auditor_new_inference": false,
+  "broader_family_coverage_established": false,
+  "checkpoint_promoted": false,
+  "complete_384_selected_candidate_correct": 60,
+  "complete_384_selected_zero_correct": 55,
+  "complete_768_selected_candidate_correct": 60,
+  "complete_768_selected_zero_correct": 60,
+  "composition64_vector_comparison_complete": false,
+  "content_sha256": "4cd79441a5b246ee213ae416a839a072cbfc95012e5c714a776ac44402ad1723",
+  "driver_elapsed_seconds": 28.597860664012842,
+  "embedding_MSE_measured_on_new_panel": false,
+  "findings": [],
+  "five_384_paired_formula_fixes": [
+    {
+      "candidate_generated_ir": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "expected_ir": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "formula_syntax_valid_after": true,
+      "formula_syntax_valid_before": true,
+      "id": "prospective-normative-v1:352578590f5f1c572132e9d118ff9dba69f82bf757a5eada59ffe579dd73d6b0",
+      "modality_transition": "P \u2192 O",
+      "other_six_facets_unchanged": true,
+      "source_head_argmax_after": "\"O\"",
+      "source_head_argmax_before": "\"P\"",
+      "source_head_modality_after": {
+        "actual_next_token_id": 4,
+        "combined": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.01301445430133974,
+          "target_minus_best_other": 4.335235118865967,
+          "target_minus_emitted": 0.0
+        },
+        "formula_field_correct": true,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.5861026664191966,
+          "target_minus_best_other": -1.857494831085205,
+          "target_minus_emitted": 0.0
+        },
+        "source": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.008440462026175766,
+          "target_minus_best_other": 4.770716190338135,
+          "target_minus_emitted": 0.0
+        },
+        "source_correct": true,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_head_modality_before": {
+        "actual_next_token_id": 5,
+        "combined": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 1.9346904572613504,
+          "target_minus_best_other": -1.7786540985107422,
+          "target_minus_emitted": -1.7786540985107422
+        },
+        "formula_field_correct": false,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.463439669179081,
+          "target_minus_best_other": -1.7526545524597168,
+          "target_minus_emitted": -0.14187002182006836
+        },
+        "source": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 1.814613335572976,
+          "target_minus_best_other": -1.6367850303649902,
+          "target_minus_emitted": -1.6367850303649902
+        },
+        "source_correct": false,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_text": "The registrar bears a duty to preserve the archive.",
+      "zero_generated_ir": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      }
+    },
+    {
+      "candidate_generated_ir": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "expected_ir": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "formula_syntax_valid_after": true,
+      "formula_syntax_valid_before": true,
+      "id": "prospective-normative-v1:ddb8bfc76bc2bfba68021017be9490069d2239720fe54c9a5b878b3883adc9ce",
+      "modality_transition": "P \u2192 O",
+      "other_six_facets_unchanged": true,
+      "source_head_argmax_after": "\"O\"",
+      "source_head_argmax_before": "\"P\"",
+      "source_head_modality_after": {
+        "actual_next_token_id": 4,
+        "combined": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.04285688731537185,
+          "target_minus_best_other": 3.128464698791504,
+          "target_minus_emitted": 0.0
+        },
+        "formula_field_correct": true,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.6605167929346774,
+          "target_minus_best_other": -2.048875570297241,
+          "target_minus_emitted": 0.0
+        },
+        "source": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.027808266608635,
+          "target_minus_best_other": 3.568812131881714,
+          "target_minus_emitted": 0.0
+        },
+        "source_correct": true,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_head_modality_before": {
+        "actual_next_token_id": 5,
+        "combined": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 3.6473148037940923,
+          "target_minus_best_other": -3.620903968811035,
+          "target_minus_emitted": -3.620903968811035
+        },
+        "formula_field_correct": false,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.55066225715633,
+          "target_minus_best_other": -1.9654178619384766,
+          "target_minus_emitted": -0.14261722564697266
+        },
+        "source": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 3.508699709012041,
+          "target_minus_best_other": -3.4782865047454834,
+          "target_minus_emitted": -3.4782865047454834
+        },
+        "source_correct": false,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_text": "The registrar bears a duty to preserve the notice.",
+      "zero_generated_ir": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      }
+    },
+    {
+      "candidate_generated_ir": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "expected_ir": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "formula_syntax_valid_after": true,
+      "formula_syntax_valid_before": true,
+      "id": "prospective-normative-v1:f9b6854c4c3d53fee314cc60859f86894ff5e178e3bff523347837a050932767",
+      "modality_transition": "P \u2192 O",
+      "other_six_facets_unchanged": true,
+      "source_head_argmax_after": "\"O\"",
+      "source_head_argmax_before": "\"P\"",
+      "source_head_modality_after": {
+        "actual_next_token_id": 4,
+        "combined": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.07730177911291136,
+          "target_minus_best_other": 2.521627426147461,
+          "target_minus_emitted": 0.0
+        },
+        "formula_field_correct": true,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.6916757196868897,
+          "target_minus_best_other": -2.101076602935791,
+          "target_minus_emitted": 0.0
+        },
+        "source": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.051373536349490934,
+          "target_minus_best_other": 2.9435982704162598,
+          "target_minus_emitted": 0.0
+        },
+        "source_correct": true,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_head_modality_before": {
+        "actual_next_token_id": 5,
+        "combined": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 1.7566761715371513,
+          "target_minus_best_other": -1.5670747756958008,
+          "target_minus_emitted": -1.5670747756958008
+        },
+        "formula_field_correct": false,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.5935016319036865,
+          "target_minus_best_other": -2.0227129459381104,
+          "target_minus_emitted": -0.12656760215759277
+        },
+        "source": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 1.6531574225813204,
+          "target_minus_best_other": -1.440506935119629,
+          "target_minus_emitted": -1.440506935119629
+        },
+        "source_correct": false,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_text": "The notary bears a duty to approve the archive.",
+      "zero_generated_ir": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      }
+    },
+    {
+      "candidate_generated_ir": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "expected_ir": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "formula_syntax_valid_after": true,
+      "formula_syntax_valid_before": true,
+      "id": "prospective-normative-v1:54bc6b5be4d82334c8dd8b1aa3b881b5001122efac9c2e83ea172a1e638fb2a3",
+      "modality_transition": "P \u2192 O",
+      "other_six_facets_unchanged": true,
+      "source_head_argmax_after": "\"O\"",
+      "source_head_argmax_before": "\"P\"",
+      "source_head_modality_after": {
+        "actual_next_token_id": 4,
+        "combined": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.037087347590844644,
+          "target_minus_best_other": 3.2768659591674805,
+          "target_minus_emitted": 0.0
+        },
+        "formula_field_correct": true,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.927943089969319,
+          "target_minus_best_other": -2.4443306922912598,
+          "target_minus_emitted": 0.0
+        },
+        "source": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.02456748664471764,
+          "target_minus_best_other": 3.6955244541168213,
+          "target_minus_emitted": 0.0
+        },
+        "source_correct": true,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_head_modality_before": {
+        "actual_next_token_id": 5,
+        "combined": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 2.785318968895,
+          "target_minus_best_other": -2.7216014862060547,
+          "target_minus_emitted": -2.7216014862060547
+        },
+        "formula_field_correct": false,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.7758129648640795,
+          "target_minus_best_other": -2.2827963829040527,
+          "target_minus_emitted": -0.13048171997070312
+        },
+        "source": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 2.663417034700368,
+          "target_minus_best_other": -2.5911195278167725,
+          "target_minus_emitted": -2.5911195278167725
+        },
+        "source_correct": false,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_text": "The trustee bears a duty to publish the notice.",
+      "zero_generated_ir": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      }
+    },
+    {
+      "candidate_generated_ir": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "expected_ir": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "formula_syntax_valid_after": true,
+      "formula_syntax_valid_before": true,
+      "id": "prospective-normative-v1:f7b786e6f765cee3803da86748c68e73819e28213e381f212bdcf51198dfcdfe",
+      "modality_transition": "P \u2192 O",
+      "other_six_facets_unchanged": true,
+      "source_head_argmax_after": "\"O\"",
+      "source_head_argmax_before": "\"P\"",
+      "source_head_modality_after": {
+        "actual_next_token_id": 4,
+        "combined": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.1927812727564593,
+          "target_minus_best_other": 1.5485649108886719,
+          "target_minus_emitted": 0.0
+        },
+        "formula_field_correct": true,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.5699245427510284,
+          "target_minus_best_other": -1.887603521347046,
+          "target_minus_emitted": 0.0
+        },
+        "source": {
+          "argmax_token_id": 4,
+          "full_vocabulary_cross_entropy": 0.12993045013684856,
+          "target_minus_best_other": 1.9755613803863525,
+          "target_minus_emitted": 0.0
+        },
+        "source_correct": true,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_head_modality_before": {
+        "actual_next_token_id": 5,
+        "combined": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 2.9544559134304045,
+          "target_minus_best_other": -2.9008970260620117,
+          "target_minus_emitted": -2.9008970260620117
+        },
+        "formula_field_correct": false,
+        "position": 25,
+        "recurrent": {
+          "argmax_token_id": 28,
+          "full_vocabulary_cross_entropy": 2.456442497882053,
+          "target_minus_best_other": -1.7924809455871582,
+          "target_minus_emitted": -0.13108539581298828
+        },
+        "source": {
+          "argmax_token_id": 5,
+          "full_vocabulary_cross_entropy": 2.830660803865652,
+          "target_minus_best_other": -2.7698118686676025,
+          "target_minus_emitted": -2.7698118686676025
+        },
+        "source_correct": false,
+        "status": "visited",
+        "target_token_id": 4
+      },
+      "source_text": "The notary bears a duty to approve the notice.",
+      "zero_generated_ir": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      }
+    }
+  ],
+  "guardian_elapsed_seconds": 64.89136038301513,
+  "independent_semantic_holdout": false,
+  "join_artifacts": {
+    "normative-wording-ce": {
+      "bytes": 192540,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/evaluation-r1/results/384-normative-wording-ce/selected-source-head-formula-join.json",
+      "sha256": "6e5f82d369497d3f5eb8c54220755bcb4843c0fd2fc40e812f8f40644dded5ff"
+    },
+    "normative-wording-zero": {
+      "bytes": 192815,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/evaluation-r1/results/384-normative-wording-zero/selected-source-head-formula-join.json",
+      "sha256": "12da56573c995357c39dc844604025ec10e9afb16ce10f8e8c3fa1aa75291850"
+    }
+  },
+  "lake_executed": false,
+  "live_child_returncode": 0,
+  "live_outer_returncode": 0,
+  "old_identity_MSE_is_learned_embedding_reconstruction": false,
+  "original_DEV_comparison": {
+    "384": {
+      "measured_positive_fit_call_seconds_delta": 0.48005377501249313,
+      "originalDEV_CE_improved": false,
+      "originalDEV_positive_CE_delta": 1.0838527555410591e-05
+    },
+    "768": {
+      "measured_positive_fit_call_seconds_delta": -0.790880448941607,
+      "originalDEV_CE_improved": false,
+      "originalDEV_positive_CE_delta": 4.911794062218127e-06
+    }
+  },
+  "owned_resource_status": "released",
+  "passed": true,
+  "prospective_meanings_previously_exposed": true,
+  "prospective_wording_new_literal_strings": true,
+  "qualified": false,
+  "schema": "prospective-wording-paired-transitions-and-costs/v1",
+  "source_head_gains_match_formula_gains": true,
+  "terminal_artifact_refs": {
+    "evaluation-r1-guardian-exit.json": {
+      "bytes": 62,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/evaluation-r1-guardian-exit.json",
+      "sha256": "fa7fd3d52a6bdb49b8404694f58f271608becfd1e548ab5126251542f9a1c7b4"
+    },
+    "evaluation-r1/child-exit.json": {
+      "bytes": 324,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/evaluation-r1/child-exit.json",
+      "sha256": "1e8df6f0ff649bb0992022737c69482737387c27bee6e944504e69570e591cd5"
+    },
+    "evaluation-r1/resources-final.json": {
+      "bytes": 5835,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/evaluation-r1/resources-final.json",
+      "sha256": "79da3ac0a98b38ee277d1f1a770a8b6062fd3891ee8df3cde3e423ec3681664c"
+    },
+    "evaluation-r1/results/predictions-complete.json": {
+      "bytes": 10087,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/evaluation-r1/results/predictions-complete.json",
+      "sha256": "2ad5ac692eba3bacb144082acd03cc350ac10fe7a6363b7c5949767790aef278"
+    },
+    "evaluation-r1/results/summary.json": {
+      "bytes": 56048,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/evaluation-r1/results/summary.json",
+      "sha256": "27645b9d3ae6d87d5b6045b0aa7aecee6afbc544526bdc2469f54f3342d9c35c"
+    }
+  }
+}

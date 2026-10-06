@@ -1,0 +1,59 @@
+{
+  "checked_endpoint_refs": 8,
+  "findings": [],
+  "input_count": 1287,
+  "model_executed": false,
+  "passed": true,
+  "prospective_reference_JSON_parsed": false,
+  "runs": [
+    {
+      "admitted": false,
+      "arm": "normative-wording-zero",
+      "budget_completed": true,
+      "dimension": 384,
+      "qualified": false,
+      "selected": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+      "selected_last_alias": true,
+      "steps": 170,
+      "zero_replay": true
+    },
+    {
+      "admitted": false,
+      "arm": "normative-wording-ce",
+      "budget_completed": true,
+      "dimension": 384,
+      "qualified": false,
+      "selected": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+      "selected_last_alias": true,
+      "steps": 170,
+      "zero_replay": false
+    },
+    {
+      "admitted": false,
+      "arm": "normative-wording-zero",
+      "budget_completed": true,
+      "dimension": 768,
+      "qualified": false,
+      "selected": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+      "selected_last_alias": true,
+      "steps": 170,
+      "zero_replay": true
+    },
+    {
+      "admitted": false,
+      "arm": "normative-wording-ce",
+      "budget_completed": true,
+      "dimension": 768,
+      "qualified": false,
+      "selected": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+      "selected_last_alias": true,
+      "steps": 170,
+      "zero_replay": false
+    }
+  ],
+  "schema": "normative-wording-evaluation-sealer-readiness/v1",
+  "sealer_executed": false,
+  "sealer_path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/pipeline/seal_evaluation.py",
+  "sealer_sha256": "9b671aa7e219c74d12614c976e4eefc940cbecdd5308adb8a67c1944087e0cc6",
+  "training_executed": false
+}

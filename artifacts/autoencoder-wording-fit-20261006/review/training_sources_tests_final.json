@@ -1,0 +1,58 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/training_sources_tests_final.txt": {
+      "bytes": 1239,
+      "sha256": "b56ae5223eff92123be8d5e2b8165c5e95b28745e65b793383b5511aff27c5d5"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/training_sources_tests_final.xml": {
+      "bytes": 20565,
+      "sha256": "db7b638793040a800f90954f222777ab1fa7c2ff62f438861a7ec86352cc5944"
+    }
+  },
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "pytest",
+    "-q",
+    "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_normative_wording_training_sources.py",
+    "--junitxml=/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/training_sources_tests_final.xml"
+  ],
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 97
+  },
+  "created_at": "2026-10-06T13:42:27.829667+00:00",
+  "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "encoders_executed": false,
+  "models_loaded": false,
+  "passed": true,
+  "qualification_granted": false,
+  "reason_for_rerun": "Final97 TRAIN builder tests previously had terminal evidence only; preserve standalone final XML/output for publication, without rerunning numerical models.",
+  "returncode": 0,
+  "same_frozen_sources": true,
+  "schema": "normative-wording-training-source-pure-tests/v1",
+  "source_pins_after": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py": {
+      "bytes": 14474,
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_normative_wording_training_sources.py": {
+      "bytes": 14460,
+      "sha256": "f9c0ebd846c1541c76ef67c49bba06fe1006cd8e1edec9af402cc43f0e998fe5"
+    }
+  },
+  "source_pins_before": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py": {
+      "bytes": 14474,
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_normative_wording_training_sources.py": {
+      "bytes": 14460,
+      "sha256": "f9c0ebd846c1541c76ef67c49bba06fe1006cd8e1edec9af402cc43f0e998fe5"
+    }
+  },
+  "training_executed": false,
+  "weights_downloaded": false
+}

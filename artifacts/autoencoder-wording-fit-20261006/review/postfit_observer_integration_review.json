@@ -1,0 +1,29 @@
+{
+  "artifact_paths": [
+    "artifacts/autoencoder-wording-fit-20261006/review/audit_saved_wording_outputs.py",
+    "artifacts/autoencoder-wording-fit-20261006/review/postfit_observer_integration.md"
+  ],
+  "composition64_vector_comparison_complete": false,
+  "evaluation_sealer_no_reference_json_parse": true,
+  "evaluation_sealer_reviewed": "artifacts/autoencoder-wording-fit-20261006/pipeline/seal_evaluation.py",
+  "evaluation_sealer_sha256": "9b671aa7e219c74d12614c976e4eefc940cbecdd5308adb8a67c1944087e0cc6",
+  "findings": [],
+  "formula_scorer_consumes_embedding_mse": false,
+  "formula_scorer_pin": "8018dc61cdf8372d514f2666731bb8f01d7e8b40f38f19e61649b70d4cde9d5e",
+  "formula_scorer_score_panel_line": 295,
+  "future_reference_json_parsed": false,
+  "models_executed": false,
+  "old_identity_mse_is_learned_reconstruction": false,
+  "passed": true,
+  "prospective_meanings_previously_exposed": true,
+  "required_prediction_keys": [
+    "complete",
+    "model_tensor_sha256",
+    "predictions",
+    "source_contexts_sha256",
+    "source_rows_sha256"
+  ],
+  "schema": "prospective-observer-integration-review/v1",
+  "source_edits": false,
+  "trace_prediction_embedding_mse_measured": false
+}

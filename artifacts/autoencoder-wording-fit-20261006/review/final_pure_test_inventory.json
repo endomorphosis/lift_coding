@@ -1,0 +1,68 @@
+{
+  "created_at": "2026-10-06T13:43:20.005738+00:00",
+  "errors": 0,
+  "excluded_intermediate_reports": {
+    "native_adapter_tests_initial.xml": 23,
+    "training_adapter_review_tests.xml": 76
+  },
+  "failures": 0,
+  "final_reports": {
+    "development_sources": {
+      "bytes": 14401,
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 70
+      },
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/tests.xml",
+      "sha256": "e7ab95f9d54c9ab496a16468efcde198a56011c584f12d16a3d1de023fc73c8e",
+      "unique_test_identities": 70
+    },
+    "native_adapter": {
+      "bytes": 7156,
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 35
+      },
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/native_adapter_tests_final.xml",
+      "sha256": "d1553a86fd1c76f463ed18314050d83793c5aa15043e924f8b21f6eab38c46d5",
+      "unique_test_identities": 35
+    },
+    "training_adapter_observer": {
+      "bytes": 18380,
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 95
+      },
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/training_adapter_updated_observer_tests.xml",
+      "sha256": "089a7f4e4a1be25f56daf9e3e240ee099754776b6f2082779f628cfc85b2d923",
+      "unique_test_identities": 95
+    },
+    "training_sources": {
+      "bytes": 20565,
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 97
+      },
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/training_sources_tests_final.xml",
+      "sha256": "db7b638793040a800f90954f222777ab1fa7c2ff62f438861a7ec86352cc5944",
+      "unique_test_identities": 97
+    }
+  },
+  "identities_sha256": "e22e8ca135b7cc8786d7c0daf79ff370ac793b3393337272cb4102d7b1d9d21c",
+  "models_executed_by_inventory": false,
+  "passed": true,
+  "qualification_granted": false,
+  "schema": "normative-wording-final-pure-test-inventory/v1",
+  "scope": "Deduplicated final saved pure contract XML reports only; does not count numeric fits, source audit checks, or intermediate repetitions. Test identity uniqueness follows XML classname/name pairs.",
+  "skipped": 0,
+  "tests": 297,
+  "unique_xml_classname_name_identities": 297
+}

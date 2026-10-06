@@ -1,0 +1,230 @@
+{
+  "schema": "normative-wording-paired-reconstruction-transitions/v1",
+  "posthoc": true,
+  "original_meanings_previously_exposed": true,
+  "newly_fixed": 5,
+  "rows": [
+    {
+      "id": "prospective-normative-v1:352578590f5f1c572132e9d118ff9dba69f82bf757a5eada59ffe579dd73d6b0",
+      "source_text": "The registrar bears a duty to preserve the archive.",
+      "reference": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "zero_output": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "positive_output": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "fixed": true
+    },
+    {
+      "id": "prospective-normative-v1:ddb8bfc76bc2bfba68021017be9490069d2239720fe54c9a5b878b3883adc9ce",
+      "source_text": "The registrar bears a duty to preserve the notice.",
+      "reference": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "zero_output": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "positive_output": {
+        "rules": [
+          {
+            "action": "preserve",
+            "actor": "registrar",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "fixed": true
+    },
+    {
+      "id": "prospective-normative-v1:f9b6854c4c3d53fee314cc60859f86894ff5e178e3bff523347837a050932767",
+      "source_text": "The notary bears a duty to approve the archive.",
+      "reference": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "zero_output": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "positive_output": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "archive",
+            "temporal": []
+          }
+        ]
+      },
+      "fixed": true
+    },
+    {
+      "id": "prospective-normative-v1:54bc6b5be4d82334c8dd8b1aa3b881b5001122efac9c2e83ea172a1e638fb2a3",
+      "source_text": "The trustee bears a duty to publish the notice.",
+      "reference": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "zero_output": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "positive_output": {
+        "rules": [
+          {
+            "action": "publish",
+            "actor": "trustee",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "fixed": true
+    },
+    {
+      "id": "prospective-normative-v1:f7b786e6f765cee3803da86748c68e73819e28213e381f212bdcf51198dfcdfe",
+      "source_text": "The notary bears a duty to approve the notice.",
+      "reference": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "zero_output": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "P",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "positive_output": {
+        "rules": [
+          {
+            "action": "approve",
+            "actor": "notary",
+            "conditions": [],
+            "exceptions": [],
+            "modality": "O",
+            "object": "notice",
+            "temporal": []
+          }
+        ]
+      },
+      "fixed": true
+    }
+  ],
+  "admitted": false,
+  "qualified": false
+}

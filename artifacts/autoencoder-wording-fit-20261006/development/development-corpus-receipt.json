@@ -1,0 +1,224 @@
+{
+  "actor_action_disjointness_checked": true,
+  "actor_action_group_overlap": 0,
+  "admitted": false,
+  "checkpoint_promoted": false,
+  "codec_sha256": "cba3e5384e2bee12e709ccc8e9ee430e51cf09a8fc2e8abdd57143fdaa38dba2",
+  "complete": true,
+  "context_tokens": 512,
+  "decoder_output_tokens": 512,
+  "encoder_executed": false,
+  "exposure_policy": "sealed wording before fit; postfit measurements only; no selection or TRAIN use",
+  "formalized": false,
+  "fresh_holdout_claimed": false,
+  "historical_linguistic_teacher_modified": false,
+  "independent_human_review_authenticated": false,
+  "label_provenance": "authored_development",
+  "lake_executed": false,
+  "lifecycle_seal_verified": false,
+  "linguistic_novelty_claimed": false,
+  "literal_overlap": 0,
+  "modality_counts": {
+    "F": 20,
+    "O": 20,
+    "P": 20
+  },
+  "normalized_overlap": 0,
+  "original_meanings_previously_exposed": true,
+  "original_train_actor_action_groups": [
+    [
+      "notary",
+      "examine"
+    ],
+    [
+      "notary",
+      "preserve"
+    ],
+    [
+      "notary",
+      "publish"
+    ],
+    [
+      "registrar",
+      "deliver"
+    ],
+    [
+      "registrar",
+      "examine"
+    ],
+    [
+      "registrar",
+      "publish"
+    ],
+    [
+      "secretary",
+      "approve"
+    ],
+    [
+      "secretary",
+      "deliver"
+    ],
+    [
+      "secretary",
+      "preserve"
+    ],
+    [
+      "treasurer",
+      "approve"
+    ],
+    [
+      "treasurer",
+      "preserve"
+    ],
+    [
+      "treasurer",
+      "publish"
+    ],
+    [
+      "trustee",
+      "approve"
+    ],
+    [
+      "trustee",
+      "deliver"
+    ],
+    [
+      "trustee",
+      "examine"
+    ]
+  ],
+  "original_train_bank_sha256": "012e604f56318d638410734f4f14870abd957bf39f3f12a78488c65af32241ed",
+  "original_train_sources": 180,
+  "original_validation_bank_sha256": "34772990c6e4630f75f483e8a2cb99fbc9cbe5f7a1cf5cafcde53b0a7a74ebfe",
+  "original_validation_sources": 60,
+  "prior_inventory": {
+    "composition64": {
+      "literal_sha256_count": 64,
+      "normalized_paragraph_and_clause_count": 64,
+      "rows": 64,
+      "source_rows_sha256": "de9443e0d435a86ff3d8b3c08eeaf3af51f9ecb087d9fab1dcc88d005ec5891d"
+    },
+    "exposed_r6": {
+      "literal_sha256_count": 216,
+      "normalized_paragraph_and_clause_count": 216,
+      "rows": 48,
+      "source_rows_sha256": "bc002ccc1e4a8502948166c06cc809cd14c24639ba023a0ad5c8516485844ea7"
+    },
+    "exposed_r8": {
+      "literal_sha256_count": 216,
+      "normalized_paragraph_and_clause_count": 216,
+      "rows": 48,
+      "source_rows_sha256": "03abe5b2ced39fb4eeef36623c9f5956ef35c2b7f8f791ddb5810733793ed690"
+    },
+    "exposed_v3": {
+      "literal_sha256_count": 216,
+      "normalized_paragraph_and_clause_count": 216,
+      "rows": 48,
+      "source_rows_sha256": "8692cba09b6ca3e9ea179dfaa3c810f5f612f8983727588541e81f998403e02c"
+    },
+    "new_training_wordings": {
+      "literal_sha256_count": 216,
+      "normalized_paragraph_and_clause_count": 216,
+      "rows": 48,
+      "source_rows_sha256": "153f1db61a4cbf88969b940d04706adda0554acc61b3514660f3c28d942fda3c"
+    },
+    "original_train_bank": {
+      "literal_sha256_count": 180,
+      "normalized_paragraph_and_clause_count": 180,
+      "rows": 180,
+      "source_rows_sha256": "3cadc9506e3875a4008b61f4ae40a64c1569a2d2a665aa66fcb8d2fbeb7ababb"
+    },
+    "paragraph_train": {
+      "literal_sha256_count": 149,
+      "normalized_paragraph_and_clause_count": 149,
+      "rows": 48,
+      "source_rows_sha256": "eb73f475dee5e6f7631b84c2f10bdd1fc660837a639f83acf5be4dd14c050527"
+    },
+    "paragraph_validation": {
+      "literal_sha256_count": 90,
+      "normalized_paragraph_and_clause_count": 90,
+      "rows": 48,
+      "source_rows_sha256": "a211a18b19f607c2fd106d8f47a7b6b165219da93b5895a3beb961fdc9c2b04a"
+    },
+    "r4_training_paraphrases": {
+      "literal_sha256_count": 216,
+      "normalized_paragraph_and_clause_count": 216,
+      "rows": 48,
+      "source_rows_sha256": "dedb3f44ab7b11ad24968790fadce4d3520a40488044f0f14b86ba30f827405b"
+    },
+    "raw_canary": {
+      "literal_sha256_count": 30,
+      "normalized_paragraph_and_clause_count": 30,
+      "rows": 30,
+      "source_rows_sha256": "ea1848c8738354ee67c53857d6d152e2770e3a9f721202daec592f91b0352e52"
+    },
+    "raw_test": {
+      "literal_sha256_count": 60,
+      "normalized_paragraph_and_clause_count": 60,
+      "rows": 60,
+      "source_rows_sha256": "da4a3b0fa758f8ff2b837ecf54bc007ffc9bb21c528f0649b674cc05a7a0f113"
+    },
+    "raw_train": {
+      "literal_sha256_count": 180,
+      "normalized_paragraph_and_clause_count": 180,
+      "rows": 180,
+      "source_rows_sha256": "3cadc9506e3875a4008b61f4ae40a64c1569a2d2a665aa66fcb8d2fbeb7ababb"
+    },
+    "raw_validation": {
+      "literal_sha256_count": 60,
+      "normalized_paragraph_and_clause_count": 60,
+      "rows": 60,
+      "source_rows_sha256": "b1452623e545d1768fb2cec6846a1432191425879d33ce9c7d12a087a6b88abb"
+    }
+  },
+  "prior_inventory_completeness_verified": false,
+  "prior_sources_sha256": "52b5784a8a6c80668af2f69488f7733ff357ae067270909fa0412cb71fe5fd2f",
+  "proof_authority": false,
+  "qualified": false,
+  "qualifiers_empty_floor": true,
+  "receipt_sha256": "762d5ec862e57edc15942af2a4f8d85fb38928d4ca91741b189b1d8dddac18b1",
+  "recipe_sha256": "b5509d8e62a8743775bd74fe563e8bb548de0c6abbb2327c8a35aa6a7c99d57f",
+  "references_sha256": "aaf63b05b21aa402ea9514d3a290a2c28188d478ed9b268feb3bc9d22d5963cd",
+  "role": "prospective_authored_development",
+  "roundtrip_ok": false,
+  "schema": "prospective-normative-development/v1",
+  "sealed_recipe_sha256": "14f8a6b363580c6ed1e5556e8a5990cc187f83dfdb1b0e59ca109e57903f1474",
+  "selection_allowed": false,
+  "source_alignment_reviewed": false,
+  "source_clauses": 60,
+  "source_rows": 60,
+  "source_rows_contain_targets": false,
+  "source_rows_sha256": "f14384255cda7a39429ba080f7b328baec47f201fa7dbe08fe76749444457eae",
+  "source_semantics_verified": false,
+  "temperature": 0,
+  "templates": [
+    "normative_that_clause_v1",
+    "actor_norm_possession_v1"
+  ],
+  "training_allowed": false,
+  "training_executed": false,
+  "unique_original_validation_rules": 30,
+  "validation_actor_action_groups": [
+    [
+      "notary",
+      "approve"
+    ],
+    [
+      "registrar",
+      "preserve"
+    ],
+    [
+      "secretary",
+      "examine"
+    ],
+    [
+      "treasurer",
+      "deliver"
+    ],
+    [
+      "trustee",
+      "publish"
+    ]
+  ],
+  "vocabulary_size": 32
+}

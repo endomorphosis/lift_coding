@@ -1,0 +1,247 @@
+{
+  "admitted": false,
+  "checkpoint_promoted": false,
+  "complete": true,
+  "content_sha256": "c369ff73fa3a99cf253008e2e083263ac1a3b143923e433099de5fdc0180a550",
+  "encoder_executed": false,
+  "findings": {
+    "all_eight_source_only_development_panels_before_references": {
+      "both_file_and_directory_fsync": true,
+      "future_reference_json_loaded_only_after_complete_barrier": true,
+      "greedy_passes_per_model": 1,
+      "lines": {
+        "bound": 54,
+        "check_deadline": 67,
+        "durable_save": 72,
+        "execute": 157,
+        "load_references": 117,
+        "main": 301,
+        "require": 41,
+        "restore_before_deadline": 87,
+        "scoring_references": 149,
+        "sha": 46,
+        "validate_plan": 62,
+        "verify_predictions": 94
+      },
+      "panels": 8,
+      "posthoc_teacher_forced_full32V_CE_separate_from_greedy": true,
+      "rows_per_panel": 60,
+      "saved_model_source_context_identity_checked": true,
+      "source_generations_reference_access": false,
+      "status": "pass_as_runtime_contract_not_executed"
+    },
+    "full32V_auxiliary_and_readout": {
+      "classification_vocabulary_mask": false,
+      "field": "modality",
+      "lines": {
+        "_deadline": 30,
+        "_loss": 146,
+        "_sha": 35,
+        "estimate_training_work_bytes": 78,
+        "evaluate_bank": 180,
+        "modality_loss": 165,
+        "prepare_bank": 38,
+        "prepare_tensor_cache": 92,
+        "select_indices": 140
+      },
+      "loss": "mean of six full32-token vocabulary cross-entropies",
+      "positive_gradient": true,
+      "rows_per_stratum": 30,
+      "source_slot": 0,
+      "status": "pass_as_runtime_contract_not_executed",
+      "strata": 6,
+      "train_source_readouts": 180,
+      "zero_requires_grad": false
+    },
+    "original_170_streams_and_zero_control": {
+      "all_nine_original_panels_per_endpoint": true,
+      "auxiliary_presentations": 1020,
+      "lines": {
+        "bank_readout": 267,
+        "bound": 65,
+        "check_deadline": 72,
+        "execute": 284,
+        "load_context": 106,
+        "main": 373,
+        "package_inventory": 82,
+        "prepare_bank": 177,
+        "recheck": 97,
+        "require": 54,
+        "schedule": 191,
+        "sha": 58,
+        "source_inventory": 88,
+        "tensor_cache": 184,
+        "train_candidate": 138,
+        "validate_auxiliary_report": 243,
+        "validate_cache_schedule": 215,
+        "validate_independent_inputs": 221,
+        "validate_original_streams": 156,
+        "validate_plan": 76,
+        "validate_zero_replay": 167
+      },
+      "optimizer_steps": 170,
+      "original384_auxiliary_stream_checked": true,
+      "original_decoder_and_count_ids_vs_M2_checked": true,
+      "positive_supervised": 1020,
+      "row_presentations": 1220,
+      "source_value_presentations": 12800,
+      "status": "pass_as_runtime_contract_not_executed",
+      "valid_target_token_presentations": 112920,
+      "zero_initial_selected_last_tensors_and_selected_epoch_checked": true,
+      "zero_loss_graph_attached": false,
+      "zero_original_update_metrics_checked": true,
+      "zero_supervised": 0
+    },
+    "private_default_global_preservation": {
+      "implementation": "owner-local function code/defaults retained with globals rebound to private module; plain Selector methods/properties similarly rebound; narrow relative helper import intercepted only in private trainer",
+      "lines": {
+        "configure": 62,
+        "configure_trainer": 148,
+        "private_module": 23,
+        "private_selector": 41,
+        "require": 18
+      },
+      "status": "pass"
+    },
+    "prospective_source_head_fidelity_and_pair_join": {
+      "details": "Prospective observer saves greedy formula predictions, formula fidelity, and posthoc full32V recurrent token CE, but no prospective source-head logits, independent head correctness, or head/formula paired joins. TRAIN full180 heads are measured. Add an explicitly accounted source-only head observation before the reference barrier or separately schedule authenticated postfit diagnostics; do not claim head/formula comparisons from formula-only results.",
+      "severity": "measurement_completion_gap_before_reporting_full_spec_results",
+      "status": "missing_measurement"
+    },
+    "strict_thirteen_training_exclusions": {
+      "counts_original_saved": {
+        "composition64": 64,
+        "exposed_r6": 48,
+        "exposed_r8": 48,
+        "exposed_v3": 48,
+        "original_train_bank": 180,
+        "paragraph_train": 48,
+        "paragraph_validation": 48,
+        "r4_training_paraphrases": 48,
+        "raw_canary": 30,
+        "raw_test": 60,
+        "raw_train": 180,
+        "raw_validation": 60
+      },
+      "future_row_keys": [
+        "id",
+        "source_text"
+      ],
+      "future_sources": 60,
+      "future_target_bodies_supplied": false,
+      "provenance_rebuild": true,
+      "required_names": "twelve saved names plus prospective_development_sources",
+      "status": "pass",
+      "whole_generation_collision_refusal": true
+    }
+  },
+  "independent_checks": {
+    "checks": 26,
+    "encoders_executed": false,
+    "labels": [
+      "original M2 recipe untouched",
+      "original M2 arm names untouched",
+      "unchanged private M2 train_candidate bytecode",
+      "unchanged private M2 validate_zero_replay bytecode",
+      "unchanged private M2 validate_original_streams bytecode",
+      "unchanged private M2 validate_auxiliary_report bytecode",
+      "unchanged private M2 schedule bytecode",
+      "unchanged private M2 prepare_bank bytecode",
+      "unchanged private M2 tensor_cache bytecode",
+      "original work denominators",
+      "complete auxiliary source/vocabulary budget",
+      "diagnostic metric flags explicit",
+      "module globals and function identities preserved",
+      "private module functions use isolated globals",
+      "selector properties isolated",
+      "selector property globals rebinding",
+      "one explicit relative helper import intercepted",
+      "all ordinary imports retain original import owner",
+      "original trainer imports/globals untouched",
+      "all eight60-row panels mandatory",
+      "durable predictions before reference barrier declared",
+      "context/output/temperature unchanged",
+      "authored development and no selection/TRAIN use explicit",
+      "generation loop structurally precedes only future reference load",
+      "prospective observer currently has no independent source-head observation",
+      "all reviewed source hashes stable"
+    ],
+    "models_executed": false,
+    "package_models_loaded": false,
+    "private_stub_functions_only": true
+  },
+  "lake_executed": false,
+  "model_executed": false,
+  "no_git_mutations": true,
+  "no_source_edits": true,
+  "pure_contract_tests": {
+    "failed": 0,
+    "junit_file": {
+      "bytes": 14727,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/training_adapter_review_tests.xml",
+      "sha256": "9c5bb05079e5d6ee038be7d0a429548a2357ea42caac019b3578e8c38c44dfcb"
+    },
+    "numerical_models_executed": false,
+    "passed": 76
+  },
+  "qualified": false,
+  "readiness_limits": [
+    "Pure contracts do not prove actual fresh native vectors, resident producer closure, resource admission, numerical zero replay, successful fits, or convergence. Those runtime guards remain required.",
+    "Imports in authenticated inherited setup may read older exposed metadata/references; barrier claim is limited to this newly sealed prospective reference JSON.",
+    "This is restricted authored32V decoder reconstruction, not richer legal family qualification, independent semantics, full span autoformalization, checkpoint promotion, or Lean admission."
+  ],
+  "review_status": "ready_for_guarded_preflight_with_development_measurement_gap",
+  "reviewed_files": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_training_mixture.py": {
+      "bytes": 17786,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_training_mixture.py",
+      "sha256": "2d7de997e1baff4a1534ddd756f99864ef2270e3c641c0664f6a240f826bfda5"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py": {
+      "bytes": 105415,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "sha256": "c1663820492a6879b14ab89dfd9b052105cf16378bb015fea08c3220d83456e0"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py": {
+      "bytes": 9634,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py",
+      "sha256": "48b7a3b2a0e5b69ae292f2c02dc0e87d92de4ffb4443bfba5ae52695b9a4320a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py": {
+      "bytes": 14474,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/paraphrase_modality_auxiliary_training.py": {
+      "bytes": 13994,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/paraphrase_modality_auxiliary_training.py",
+      "sha256": "789f47047badfa30553940547c2db28f08afa1052f1bcc5ace68dbccedc2ccac"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/benchmark_formula_checkpoint_continuation.py": {
+      "bytes": 17248,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/benchmark_formula_checkpoint_continuation.py",
+      "sha256": "172e57ee71aa8bba810fe09603d24fc422ca909ca2b1e15dcc4d37a74b5c1807"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/benchmark_normative_wording_training.py": {
+      "bytes": 12978,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/benchmark_normative_wording_training.py",
+      "sha256": "e9231f6fa2bccc329539da089568254181756245333d1418249a6dbfe1c6507e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/benchmark_paraphrase_modality_training.py": {
+      "bytes": 26383,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/benchmark_paraphrase_modality_training.py",
+      "sha256": "d84974df896df766794069da01319ef0d7473eb2907f4a6a540a0661f6b193e8"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/evaluate_normative_wording_development.py": {
+      "bytes": 17191,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/evaluate_normative_wording_development.py",
+      "sha256": "2af30c2030e519e036bac4d3223470cc282b9422b07a6cb5908dd7827769d023"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/evaluate_source_margin_holdout.py": {
+      "bytes": 28240,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/evaluate_source_margin_holdout.py",
+      "sha256": "8018dc61cdf8372d514f2666731bb8f01d7e8b40f38f19e61649b70d4cde9d5e"
+    }
+  },
+  "schema": "independent-normative-training-adapter-review/v1"
+}

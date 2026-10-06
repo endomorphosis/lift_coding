@@ -1,0 +1,402 @@
+{
+  "admitted": false,
+  "artifact_files": {
+    "codec": {
+      "bytes": 588,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/codec.json",
+      "sha256": "f8a2fa384ae91a9e6c93ac1a8f5fb1d7b20d5ea354443c4a86bb3210ac984c82"
+    },
+    "exclusions": {
+      "bytes": 191638,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/prior-source-inventories.json",
+      "sha256": "69e5919392633f524072f709201c168f97f859738c505893eaef596fa3fe834f"
+    },
+    "receipt": {
+      "bytes": 6457,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/development-corpus-receipt.json",
+      "sha256": "343c191c2747ea80c6fe4af151a07ae94d563a74c64879516a874f3df5d3a922"
+    },
+    "recipe": {
+      "bytes": 2299,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/recipe.json",
+      "sha256": "1b050bcce90f8cfba0c3d2ea2b93e187841e43454d93ec591d353d3891494a04"
+    },
+    "references": {
+      "bytes": 173559,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/development-references.json",
+      "sha256": "5e593f816f742666d54a3f38b38d615da6844a42fef5421d5f65531b32888055"
+    },
+    "source_rows": {
+      "bytes": 11199,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/source-rows.json",
+      "sha256": "3606bbc7abcae9fcb6cdb45a5756fc8f10c16feb9d45f45ca8e45b76e4b2d625"
+    },
+    "training_source_exclusion": {
+      "bytes": 19389,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/new-training-source-exclusion.json",
+      "sha256": "f19451dab2f62366b363ac408046dcbbeb0a73465f6221f15e150a4c66732ee1"
+    },
+    "validation_bank": {
+      "bytes": 31473,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/original-validation-bank-used.json",
+      "sha256": "d26837ece6145ca8052a170fdb561a19fd40fb9cb2ffe24a62e63631c5f99a2c"
+    }
+  },
+  "checkpoint_promoted": false,
+  "complete": true,
+  "complete_prior_sources_sha256": "52b5784a8a6c80668af2f69488f7733ff357ae067270909fa0412cb71fe5fd2f",
+  "created_utc": "2026-10-06T12:52:02.723436+00:00",
+  "creation_policy": "fixed wording before all new encoder/model queries and fits",
+  "encoder_executed": false,
+  "fresh_holdout_claimed": false,
+  "generation_seconds": 0.2198724530171603,
+  "independent_human_review_authenticated": false,
+  "input_files": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development-spec.md": {
+      "bytes": 4660,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development-spec.md",
+      "sha256": "894e22d6b86b52ef267e0891cb8e0001301c46953b20a7286612b5cbe2bffac3"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/generate.py": {
+      "bytes": 8333,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/generate.py",
+      "sha256": "cf2f10cdb1373fedf53ed6fb0c92eb6c72d8b5a3abb3fb07f42e557ef7489137"
+    },
+    "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json": {
+      "bytes": 43238,
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/cohort-01/source-inputs.json",
+      "sha256": "5840b8810be09d1938d0f2a4ce857b33026f726233c96ac915ef6669f0659774"
+    },
+    "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json": {
+      "bytes": 614534,
+      "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json",
+      "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/__init__.py": {
+      "bytes": 56829,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/__init__.py": {
+      "bytes": 4434,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/__init__.py": {
+      "bytes": 2073,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/__init__.py",
+      "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py": {
+      "bytes": 97,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+      "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_modality_holdout_v3.py": {
+      "bytes": 13886,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_modality_holdout_v3.py",
+      "sha256": "3f8fe7c631aa85a8630baaaf5f55831f1647389386b4378d9fc61fbe5935b6dc"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_scalar_holdout.py": {
+      "bytes": 18437,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_scalar_holdout.py",
+      "sha256": "ff1a260df1466671a4c4625d396b79a20d6a830ce1050f14ffd7e1f93a522c00"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py": {
+      "bytes": 9718,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py",
+      "sha256": "9644f86159fecd0d9a1bb8599e06dacfcbba2581db98a990b0e224ebb8de8513"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py": {
+      "bytes": 14474,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/prospective_normative_development.py": {
+      "bytes": 12167,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/prospective_normative_development.py",
+      "sha256": "fa02f14e1b70e14dfe04c70b3eb18ca68eb594ebd337221a33ee2f287c2e35d5"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/__init__.py": {
+      "bytes": 2708,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/__init__.py",
+      "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/__init__.py": {
+      "bytes": 957,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/__init__.py",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py": {
+      "bytes": 69336,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py": {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": {
+      "bytes": 42137,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py": {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py": {
+      "bytes": 38995,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/router_deps.py": {
+      "bytes": 5845,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/__init__.py": {
+      "bytes": 175,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/__init__.py",
+      "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py": {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-distillation-limits-20261002/prepared-r1/prepared384-validation.json": {
+      "bytes": 677960,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-distillation-limits-20261002/prepared-r1/prepared384-validation.json",
+      "sha256": "26eb933cf0e7266b9d822c5404ff4002b410f259df58669b1f94aa9f673f0002"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-manifest.json": {
+      "bytes": 259103,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-manifest.json",
+      "sha256": "2bd79a47f79b22a767180dc2e088b962461dc9a77077d848933bf238a7ca3f2d"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/original-training-bank-used.json": {
+      "bytes": 38792,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/original-training-bank-used.json",
+      "sha256": "97a928de6fb124cf01ea24fefa7ac43c94352de748354422fdcdb35f34216b10"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/prior-source-inventories.json": {
+      "bytes": 118378,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/prior-source-inventories.json",
+      "sha256": "b9cdf4cb6526cf102656667a2b3ff3d78c21c39093c56beba3ecb1a4409dbf8f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/source-rows.json": {
+      "bytes": 16724,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/source-rows.json",
+      "sha256": "cc95f19cbc645a38e908baa02c521e3416f6c2b8775c523b5e7c871c13733727"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/summary.json": {
+      "bytes": 31087,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/summary.json",
+      "sha256": "1da1dfdcd9417b5fc219a0fdf071720cafdddd17456e06067f1e658ab448c54d"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/training-corpus-receipt.json": {
+      "bytes": 3624,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-training-paraphrases-r4-20261004/preparation-r1/results/training-corpus-receipt.json",
+      "sha256": "c61ca27f5d01fbc5d9e9449f8c32edee4d93dcf8034c6d1f4ca9eb7b9b112156"
+    }
+  },
+  "lake_executed": false,
+  "model_queries_used_for_template_choice": false,
+  "model_scored": false,
+  "new_training_sources_sha256": "153f1db61a4cbf88969b940d04706adda0554acc61b3514660f3c28d942fda3c",
+  "numeric_execution_authorized": false,
+  "original_meanings_previously_exposed": true,
+  "producer_sources": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/__init__.py": {
+      "bytes": 56829,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/__init__.py": {
+      "bytes": 4434,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/__init__.py": {
+      "bytes": 2073,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/__init__.py",
+      "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py": {
+      "bytes": 97,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+      "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_modality_holdout_v3.py": {
+      "bytes": 13886,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_modality_holdout_v3.py",
+      "sha256": "3f8fe7c631aa85a8630baaaf5f55831f1647389386b4378d9fc61fbe5935b6dc"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_scalar_holdout.py": {
+      "bytes": 18437,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_scalar_holdout.py",
+      "sha256": "ff1a260df1466671a4c4625d396b79a20d6a830ce1050f14ffd7e1f93a522c00"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py": {
+      "bytes": 9718,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py",
+      "sha256": "9644f86159fecd0d9a1bb8599e06dacfcbba2581db98a990b0e224ebb8de8513"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py": {
+      "bytes": 14474,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/prospective_normative_development.py": {
+      "bytes": 12167,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/prospective_normative_development.py",
+      "sha256": "fa02f14e1b70e14dfe04c70b3eb18ca68eb594ebd337221a33ee2f287c2e35d5"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/__init__.py": {
+      "bytes": 2708,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/__init__.py",
+      "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/__init__.py": {
+      "bytes": 957,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/__init__.py",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py": {
+      "bytes": 69336,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py": {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": {
+      "bytes": 42137,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py": {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py": {
+      "bytes": 38995,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/router_deps.py": {
+      "bytes": 5845,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/__init__.py": {
+      "bytes": 175,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/__init__.py",
+      "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py": {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    }
+  },
+  "pure_checks": 598,
+  "qualified": false,
+  "recipe": {
+    "actor_action_groups_disjoint_from_train_required": true,
+    "admitted": false,
+    "checkpoint_promoted": false,
+    "clauses_per_source": 1,
+    "decoder_output_tokens": 512,
+    "encoder_context_tokens": 512,
+    "encoder_executed": false,
+    "exclusion": "literal and case-folded whitespace-normalized paragraphs and clauses",
+    "formalized": false,
+    "fresh_holdout_claimed": false,
+    "gerunds": {
+      "approve": "approving",
+      "deliver": "delivering",
+      "examine": "examining",
+      "preserve": "preserving",
+      "publish": "publishing"
+    },
+    "historical_linguistic_teacher_modified": false,
+    "lake_executed": false,
+    "modalities": {
+      "F": 20,
+      "O": 20,
+      "P": 20
+    },
+    "ordering": "template ordinal then canonical original-rule SHA256",
+    "original_validation_sources": 60,
+    "proof_authority": false,
+    "qualified": false,
+    "qualifiers": "all seven fields preserved; nonempty qualifiers refused",
+    "reference_origin": "authored rendering of previously exposed original validation rules",
+    "required_prior_datasets": [
+      "exposed_r6",
+      "exposed_r8",
+      "exposed_v3",
+      "original_train_bank",
+      "paragraph_train",
+      "paragraph_validation",
+      "raw_canary",
+      "raw_test",
+      "raw_train",
+      "raw_validation",
+      "r4_training_paraphrases",
+      "composition64",
+      "new_training_wordings"
+    ],
+    "role": "prospective_authored_development",
+    "roundtrip_ok": false,
+    "schema": "prospective-normative-development/v1",
+    "selection_allowed": false,
+    "source_alignment_reviewed": false,
+    "source_rows": 60,
+    "source_semantics_verified": false,
+    "temperature": 0,
+    "template_text": {
+      "actor_norm_possession_v1": {
+        "F": "The {actor} faces a ban on {gerund} the {object}.",
+        "O": "The {actor} bears a duty to {action} the {object}.",
+        "P": "The {actor} holds permission to {action} the {object}."
+      },
+      "normative_that_clause_v1": {
+        "F": "It is prohibited that the {actor} {action} the {object}.",
+        "O": "It is mandatory that the {actor} {action} the {object}.",
+        "P": "It is permissible that the {actor} {action} the {object}."
+      }
+    },
+    "templates": [
+      "normative_that_clause_v1",
+      "actor_norm_possession_v1"
+    ],
+    "training_allowed": false,
+    "training_executed": false,
+    "unique_original_validation_rules": 30
+  },
+  "role": "prospective_authored_development",
+  "schema": "prospective-wording-authoring-seal/v1",
+  "seal_manifest_sha256": "5d4aa88f3c6892c671e45d7807ebc281d2b727478cbc1af9ebf8596512481da9",
+  "sealed_recipe_sha256": "14f8a6b363580c6ed1e5556e8a5990cc187f83dfdb1b0e59ca109e57903f1474",
+  "source_semantics_verified": false,
+  "template_author": "prospective_wording_dev preparation owner",
+  "training_executed": false
+}

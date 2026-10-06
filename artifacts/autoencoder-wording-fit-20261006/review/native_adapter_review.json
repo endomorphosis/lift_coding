@@ -1,0 +1,80 @@
+{
+  "actual_native_forward": false,
+  "admitted": false,
+  "caller_requirements": [
+    "Authenticate and freeze complete transitive import/data/asset closure before dependent native loads.",
+    "Reserve storage/CPU/native RSS with existing resource owner and live owned lease guardian before launch; this module supplies no resource admission.",
+    "Enforce hard parent process deadline, because native kernel forwards are not asynchronously interruptible; retain partial/failure evidence.",
+    "Keep prospective reference label bodies inaccessible to TRAIN/native producer/inference phases, and use source-only generation-before-scoring barrier."
+  ],
+  "created_at": "2026-10-06T12:57:34.893587+00:00",
+  "downloads_performed": false,
+  "encoders_loaded": false,
+  "lake_executed": false,
+  "limitations": [
+    "Pure tests use explicitly injected native/normalized-vector test doubles; no actual encoder execution, full native model artifact closure replay, empirical RSS measurement or numerical embedding fidelity was performed.",
+    "Saved real native receipt validation is statically reviewed and forwarding/refusal-tested; mocks do not prove an actual native execution.",
+    "Caller guard and new preparation driver require separate review before launch."
+  ],
+  "qualified": false,
+  "resolved_findings": [
+    {
+      "finding": "Initial replay validator accepted top-level representation labels inconsistent with unchanged native payload.",
+      "id": "representation-profile-cross-binding",
+      "resolution": "Root explicitly bound384 kind/model/revision and768 kind/profileID/historical8192/relabelFalse; independent rehashed mutation checks now refuse."
+    },
+    {
+      "finding": "Initial outer batch4 bound did not cross-bind actual saved native execution batch.",
+      "id": "native-execution-cross-binding",
+      "resolution": "Root bound384 native execution batch int4 and exact768 seven-field native execution profile; independent rehashed batch/pool/device/dtype checks now refuse."
+    }
+  ],
+  "reviewer": "normative_train_sources",
+  "schema": "prospective-native-adapter-review/v1",
+  "scope": "Independent source/API/native-evidence contract review; no real native forward or model load.",
+  "source_sha256": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/fresh_scalar_source_inputs.py": "7014e59ed0561718e082879ed1913d2442d7b4edeec59e26517aae6e1b847189",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/prospective_wording_source_inputs.py": "6cb67453e22bf6f9c36fb056a75dd022bf46d11286a846adcaa03baacdc987dc",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609",
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py": "27855f5ffd59ebc45444d5e37c18ff1569618084cd27b1503db112940051ffb0",
+    "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_prospective_wording_source_inputs.py": "5ec6f4e6762a29826bf83f50110c33153ddaf1a254912f4f793892a607b96593"
+  },
+  "status": "pass_for_guarded_native_preparation",
+  "test_provenance": {
+    "command": "PYTHONPATH=/home/barberb/lift_coding/external/ipfs_datasets python3 -m pytest -q tests/unit/logic/formalization/autoencoder/test_prospective_wording_source_inputs.py --junitxml=artifacts/autoencoder-wording-fit-20261006/review/native_adapter_tests_final.xml",
+    "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "errors": 0,
+    "failures": 0,
+    "independent_checks": {
+      "count": 581,
+      "passed": true,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/native_adapter_independent_checks.json",
+      "sha256": "3a4fca6d9d7c46115e43b133494f6d55d1ff27caaa705f46b598d7afd7639a8d"
+    },
+    "junit_xml": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/native_adapter_tests_final.xml",
+      "sha256": "d1553a86fd1c76f463ed18314050d83793c5aa15043e924f8b21f6eab38c46d5"
+    },
+    "reproducer": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/review/check_native_adapter.py",
+      "sha256": "cd4e395b7e237ee5a30f5704ea37ecd09eb89bdae64354d16d089ad1247d2d4e"
+    },
+    "skipped": 0,
+    "tests": 35
+  },
+  "training_executed": false,
+  "verified_contracts": [
+    "Exactly sixty bounded closed id/source_text rows; duplicate IDs, casefolded whitespace-equivalent strings, label fields and multi-blank-line clauses refuse.",
+    "Every full source string binds source-derived SHA256 identity; exactly 120 aliases preserve paragraph/clause identity and single-clause slot.",
+    "Existing fresh_scalar_source_inputs 48-paragraph contract remains unchanged and rejects the new sixty-row shape.",
+    "Only384/768 local native producers; batch4, positive finite cooperative deadline at most600seconds, CPUfloat32,512actualtokens; no width fallback.",
+    "Forwarding retains full saved native source/vector/token validation, exact ordered sixty vector rows and immutable named producer hashes.",
+    "384 representation matches originalGTE-small model/revision and saved native batch4; inherited native receipt verifies mean/L2,eval/inference,CPU1,no truncation and pinned assets.",
+    "768 representation preserves complete native profile ID and historical8192 ceiling without relabeling; actual execution profile exactly batch4/CPU/float32/CLS/L2/512/eager. Inherited token and actual-forward schedule validator remains in use.",
+    "Assembled sixty source-only rows and exact single-clause caches produce sixty full contexts with correct character/UTF8 byte offsets and source/vector hashes.",
+    "All qualification/proof/Lake/training/promotion flags remainfalse; no labels, transforms or predictions supplied to native input."
+  ]
+}

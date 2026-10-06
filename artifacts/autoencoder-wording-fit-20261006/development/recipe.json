@@ -1,0 +1,74 @@
+{
+  "actor_action_groups_disjoint_from_train_required": true,
+  "admitted": false,
+  "checkpoint_promoted": false,
+  "clauses_per_source": 1,
+  "decoder_output_tokens": 512,
+  "encoder_context_tokens": 512,
+  "encoder_executed": false,
+  "exclusion": "literal and case-folded whitespace-normalized paragraphs and clauses",
+  "formalized": false,
+  "fresh_holdout_claimed": false,
+  "gerunds": {
+    "approve": "approving",
+    "deliver": "delivering",
+    "examine": "examining",
+    "preserve": "preserving",
+    "publish": "publishing"
+  },
+  "historical_linguistic_teacher_modified": false,
+  "lake_executed": false,
+  "modalities": {
+    "F": 20,
+    "O": 20,
+    "P": 20
+  },
+  "ordering": "template ordinal then canonical original-rule SHA256",
+  "original_validation_sources": 60,
+  "proof_authority": false,
+  "qualified": false,
+  "qualifiers": "all seven fields preserved; nonempty qualifiers refused",
+  "reference_origin": "authored rendering of previously exposed original validation rules",
+  "required_prior_datasets": [
+    "exposed_r6",
+    "exposed_r8",
+    "exposed_v3",
+    "original_train_bank",
+    "paragraph_train",
+    "paragraph_validation",
+    "raw_canary",
+    "raw_test",
+    "raw_train",
+    "raw_validation",
+    "r4_training_paraphrases",
+    "composition64",
+    "new_training_wordings"
+  ],
+  "role": "prospective_authored_development",
+  "roundtrip_ok": false,
+  "schema": "prospective-normative-development/v1",
+  "selection_allowed": false,
+  "source_alignment_reviewed": false,
+  "source_rows": 60,
+  "source_semantics_verified": false,
+  "temperature": 0,
+  "template_text": {
+    "actor_norm_possession_v1": {
+      "F": "The {actor} faces a ban on {gerund} the {object}.",
+      "O": "The {actor} bears a duty to {action} the {object}.",
+      "P": "The {actor} holds permission to {action} the {object}."
+    },
+    "normative_that_clause_v1": {
+      "F": "It is prohibited that the {actor} {action} the {object}.",
+      "O": "It is mandatory that the {actor} {action} the {object}.",
+      "P": "It is permissible that the {actor} {action} the {object}."
+    }
+  },
+  "templates": [
+    "normative_that_clause_v1",
+    "actor_norm_possession_v1"
+  ],
+  "training_allowed": false,
+  "training_executed": false,
+  "unique_original_validation_rules": 30
+}

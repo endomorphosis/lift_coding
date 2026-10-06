@@ -1,0 +1,19 @@
+{
+  "PYTHONPATH": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "admitted": false,
+  "command": [
+    "python3",
+    "-m",
+    "pytest",
+    "-q",
+    "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/formalization/autoencoder/test_prospective_normative_development.py",
+    "--junitxml=/home/barberb/lift_coding/artifacts/autoencoder-wording-fit-20261006/development/tests.xml"
+  ],
+  "cwd": "/home/barberb/lift_coding",
+  "elapsed_seconds": 3.386998397996649,
+  "exit_code": 0,
+  "lake_executed": false,
+  "numerical_models_executed": false,
+  "passed": 70,
+  "test_file_sha256": "3bcdd0e0cd5f864d1357a14875c7981ff8e960734aca86af1577dfbfd4abe8fb"
+}
