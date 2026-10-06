@@ -1,0 +1,114 @@
+{
+  "checked_at": "2026-10-06T15:33:55.533992+00:00",
+  "responses": [
+    {
+      "dataset": "justicedao/uscode-autoformal-span-cache",
+      "endpoint": "splits",
+      "status": 200,
+      "url": "https://datasets-server.huggingface.co/splits?dataset=justicedao%2Fuscode-autoformal-span-cache",
+      "sha256": "7dbc91afe7099640804cd25ffedd0a42c3e828e1865de1422ebe90b29c06a2bf",
+      "bytes": 810,
+      "keys": [
+        "splits",
+        "pending",
+        "failed"
+      ],
+      "splits": [
+        {
+          "dataset": "justicedao/uscode-autoformal-span-cache",
+          "config": "paired_spans",
+          "split": "train"
+        },
+        {
+          "dataset": "justicedao/uscode-autoformal-span-cache",
+          "config": "census_v2",
+          "split": "train"
+        },
+        {
+          "dataset": "justicedao/uscode-autoformal-span-cache",
+          "config": "census_v3",
+          "split": "train"
+        },
+        {
+          "dataset": "justicedao/uscode-autoformal-span-cache",
+          "config": "deferred_goals",
+          "split": "train"
+        },
+        {
+          "dataset": "justicedao/uscode-autoformal-span-cache",
+          "config": "evidence_artifacts",
+          "split": "train"
+        },
+        {
+          "dataset": "justicedao/uscode-autoformal-span-cache",
+          "config": "formal_logic_text",
+          "split": "train"
+        },
+        {
+          "dataset": "justicedao/uscode-autoformal-span-cache",
+          "config": "retained_outputs_v1",
+          "split": "train"
+        },
+        {
+          "dataset": "justicedao/uscode-autoformal-span-cache",
+          "config": "supervisor_goals_v2",
+          "split": "train"
+        }
+      ],
+      "error": null
+    },
+    {
+      "dataset": "justicedao/uscode-autoformal-span-cache",
+      "endpoint": "parquet",
+      "status": 200,
+      "url": "https://datasets-server.huggingface.co/parquet?dataset=justicedao%2Fuscode-autoformal-span-cache",
+      "sha256": "fb0ca41658c810ac72acabf23e4e2bcc58a052a52a135111a5975a14341dcf41",
+      "bytes": 1022439,
+      "keys": [
+        "parquet_files",
+        "pending",
+        "failed",
+        "partial"
+      ],
+      "splits": null,
+      "error": null
+    },
+    {
+      "dataset": "justicedao/open-us-law-span-cache",
+      "endpoint": "splits",
+      "status": 200,
+      "url": "https://datasets-server.huggingface.co/splits?dataset=justicedao%2Fopen-us-law-span-cache",
+      "sha256": "dd63e687510b52b3ae9bf9a9714c6f3e406c51d83295b81d6d5c6228dcf72aef",
+      "bytes": 120,
+      "keys": [
+        "splits",
+        "pending",
+        "failed"
+      ],
+      "splits": [
+        {
+          "dataset": "justicedao/open-us-law-span-cache",
+          "config": "default",
+          "split": "train"
+        }
+      ],
+      "error": null
+    },
+    {
+      "dataset": "justicedao/open-us-law-span-cache",
+      "endpoint": "parquet",
+      "status": 200,
+      "url": "https://datasets-server.huggingface.co/parquet?dataset=justicedao%2Fopen-us-law-span-cache",
+      "sha256": "1522b1aff0cab304ebdc4f71830fa03123dfbf76e3ec3bdaea65cc3d709b912e",
+      "bytes": 315,
+      "keys": [
+        "parquet_files",
+        "pending",
+        "failed",
+        "partial"
+      ],
+      "splits": null,
+      "error": null
+    }
+  ]
+}

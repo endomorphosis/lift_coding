@@ -1,0 +1,87 @@
+{
+  "schema": "law-cache-training-intake-observation/v1",
+  "dataset": "justicedao/uscode-autoformal-span-cache",
+  "config": "formal_logic_text",
+  "rows_observed": 372,
+  "pages": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/formal-logic-text-page-0.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=justicedao%2Fuscode-autoformal-span-cache&config=formal_logic_text&split=train&offset=0&length=100",
+      "sha256": "b78cd619bc9330df7304b74c7c57b39a9f84595b481caa42d1f2c93ec3af303f",
+      "total": 372
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/formal-logic-text-page-100.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=justicedao%2Fuscode-autoformal-span-cache&config=formal_logic_text&split=train&offset=100&length=100",
+      "sha256": "930cbdf9887c40f3b6db0fdb055c12d74203676d10a9f4f7b53cfd31a270a2af",
+      "total": 372
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/formal-logic-text-page-200.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=justicedao%2Fuscode-autoformal-span-cache&config=formal_logic_text&split=train&offset=200&length=100",
+      "sha256": "c31ebf42ffba5e73fb05190f72629d3fe62483fa6543b0b047c3c515a4e9946f",
+      "total": 372
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/formal-logic-text-page-300.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=justicedao%2Fuscode-autoformal-span-cache&config=formal_logic_text&split=train&offset=300&length=100",
+      "sha256": "35e20c94071b49e65c3f7189edac7ec4ca56feccb8e4138f260c79fdb2f3d924",
+      "total": 372
+    }
+  ],
+  "field_counts": {
+    "admitted": {
+      "False": 372
+    },
+    "training_qualified": {
+      "False": 372
+    },
+    "independent_validation": {
+      "False": 372
+    },
+    "learned_formula_generation": {
+      "False": 372
+    },
+    "producer_origin": {
+      "source_bridge_target": 372
+    },
+    "format": {
+      "dcec-formula-records": 90,
+      "cec-event-calculus-state-records": 45,
+      "tdfol-router-formula-records": 90,
+      "tdfol-proof-obligations": 45,
+      "tdfol-formula-records": 90,
+      "deontic-formula-records": 4,
+      "deontic-parser-capability-profile": 4,
+      "deontic-proof-obligations": 4
+    },
+    "recorded_document_identity_status": {
+      "verified": 372
+    }
+  },
+  "source_character_lengths": {
+    "2": 56,
+    "46": 11,
+    "28": 24,
+    "4": 48,
+    "32": 19,
+    "12": 8,
+    "69": 8,
+    "40": 8,
+    "11": 8,
+    "9": 8,
+    "10": 24,
+    "29": 8,
+    "34": 8,
+    "30": 16,
+    "13": 24,
+    "35": 11,
+    "7": 32,
+    "100": 27,
+    "64": 16,
+    "81": 8
+  },
+  "source_legal_semantic_review_established": false,
+  "training_or_selection_rows_used": 0,
+  "interpretation": "These are cache observations; repository identity and reported validation do not independently qualify legal meanings."
+}

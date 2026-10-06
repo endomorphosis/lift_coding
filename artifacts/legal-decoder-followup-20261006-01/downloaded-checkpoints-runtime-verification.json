@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "models": {
+    "original_negatives": {
+      "exact_model_adam_restore": true,
+      "steps": 580,
+      "public_raw_core_predictions_exact": 2,
+      "formal_core_except_appended_validation_blockers_exact": 2,
+      "appended_validation_blockers_exact": true,
+      "actual_model_calls": 4,
+      "download_sha256": "402dca5fde0a32612a99b2ba4b3f4082cda5b7737bc44f948e20d3d733808be6"
+    },
+    "position_local_negatives": {
+      "exact_model_adam_restore": true,
+      "steps": 680,
+      "public_raw_core_predictions_exact": 2,
+      "formal_core_except_appended_validation_blockers_exact": 2,
+      "appended_validation_blockers_exact": true,
+      "actual_model_calls": 4,
+      "download_sha256": "0174d11019a0a4eb894337f7f3d79a9dec7a2e11b0e406832d27312cee05daba"
+    }
+  },
+  "weights_changed": false,
+  "training_calls": 0,
+  "prior_verification_assumption_corrected": "Formal rendering intentionally appends validation blockers; raw inference preserves core predictions."
+}

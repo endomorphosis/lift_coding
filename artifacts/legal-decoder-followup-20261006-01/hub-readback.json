@@ -1,0 +1,17 @@
+{
+  "schema": "grouped-boundary-hub-readback/v1",
+  "revision": "27667843f4a6cfda36f4763b27d08a080cad9fd3",
+  "repo": "Publicus/legal-ir-autoencoder",
+  "prefix": "experiments/grouped-boundary-20261006/run-01",
+  "files_verified": 49,
+  "old_files_retained": 2409,
+  "old_files_changed": [
+    ".gitattributes"
+  ],
+  "old_attributes_only_additive": true,
+  "checkpoint_downloads": {
+    "original_negatives": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/hub-roundtrip/experiments/grouped-boundary-20261006/run-01/checkpoints/original_negatives/checkpoint.json",
+    "position_local_negatives": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/hub-roundtrip/experiments/grouped-boundary-20261006/run-01/checkpoints/position_local_negatives/checkpoint.json"
+  },
+  "both_downloaded_checkpoints_byte_exact": true
+}

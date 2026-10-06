@@ -1,0 +1,452 @@
+{
+  "schema": "legal-decoder-next-training-readonly-audit/v1",
+  "checked_at_utc": "2026-10-06T15:37:51.781978+00:00",
+  "scope": "Read existing source and retained evaluation metadata only. No fitting, inference, tests, weight hashing, remote verification or model promotion. Working-file documentation is pinned here; root independently refreshes current GitHub main.",
+  "cached_datasets_origin_main": "1ff99942caf57d8dc82cd3ddbe8df962752da7aa",
+  "evidence": [
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/summary.json",
+      "sha256": "cb1c36c1bb7005e8b63f2bdbba7d64ceff0e41e16e3cba4af156ccdc4e628b57",
+      "bytes": 43996
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/README.md",
+      "sha256": "6d78883cf7a22894d6e354b615e2a69c7513975d4739e0e5e1a9828c43995938",
+      "bytes": 2431
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/publication-scope-r2.json",
+      "sha256": "c073f2b36c6be2b1002a4dd6f9e6c7f8d70d67b851e5cf0d0697a43f0a86f23c",
+      "bytes": 6695
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/pipeline/retention-documentation-numeric-review-r2.json",
+      "sha256": "a91878bfe6fef4b278b2dad595206bf37e30ed2ecd7f4a90a75680da355b5f98",
+      "bytes": 27278
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/normative_wording_retention.md",
+      "sha256": "d55b4f6e88cf03516ac8d1eca110d4a09079c13946af557f118c200dec3570ec",
+      "bytes": 7687
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/normative_wording_training.md",
+      "sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19",
+      "bytes": 13198
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+      "sha256": "ee8cb120795ce9ee8c696d952169da5544c34e3ae4f2f6adeeacc58701532fa6",
+      "bytes": 15551
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/contextual_scalar_diagnostics.md",
+      "sha256": "c4c8054bfb89338b06e3a4ce19199ced3def08777dfbba988d76d00f9d40836d",
+      "bytes": 11623
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/completion.json",
+      "sha256": "ad163f658519ff7ca9dab8fbcebd366bdb2bb883f7a0207e8f9559879dc6f233",
+      "bytes": 58903
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/policy.json",
+      "sha256": "3bb46f41b3d1e055d8d3e839fe27705bc6af5b11c048ea7796f514808e1a6c8d",
+      "bytes": 6410
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/final-holdout-evaluation.json",
+      "sha256": "468ad182632ee903a244495223d5f88b56d02c418760368a82eec0c1fdbeb47c",
+      "bytes": 594022
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/build_v2_corpus.py",
+      "sha256": "5349a5a79b03f5d801ed4da7b0e48ba8ac32e75d2e2b26c9332281cbecc84007",
+      "bytes": 22162
+    }
+  ],
+  "latest_normative_results": {
+    "retention_complete": true,
+    "retention_exposure": "Earlier inspected v3 authored development,48 paragraphs/180rules/720scalar sites per state; not fresh semantic holdout.",
+    "retention_panels": [
+      {
+        "dimension": 384,
+        "arm": "normative-wording-zero",
+        "ordered_exact": 20,
+        "token_cross_entropy": 0.03058925516207093,
+        "field_exact": {
+          "action": {
+            "correct": 179,
+            "total": 180
+          },
+          "actor": {
+            "correct": 180,
+            "total": 180
+          },
+          "modality": {
+            "correct": 139,
+            "total": 180
+          },
+          "object": {
+            "correct": 180,
+            "total": 180
+          }
+        },
+        "state_ref": {
+          "bytes": 2798242,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+          "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e",
+          "tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3"
+        },
+        "source_modality_correct": 139,
+        "correct_source_modality_but_wrong_generated_modality": 0
+      },
+      {
+        "dimension": 384,
+        "arm": "normative-wording-ce",
+        "ordered_exact": 31,
+        "token_cross_entropy": 0.01082419951458873,
+        "field_exact": {
+          "action": {
+            "correct": 179,
+            "total": 180
+          },
+          "actor": {
+            "correct": 180,
+            "total": 180
+          },
+          "modality": {
+            "correct": 159,
+            "total": 180
+          },
+          "object": {
+            "correct": 180,
+            "total": 180
+          }
+        },
+        "state_ref": {
+          "bytes": 2797392,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+          "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266",
+          "tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594"
+        },
+        "source_modality_correct": 161,
+        "correct_source_modality_but_wrong_generated_modality": 2
+      },
+      {
+        "dimension": 768,
+        "arm": "normative-wording-zero",
+        "ordered_exact": 46,
+        "token_cross_entropy": 0.003361466448192735,
+        "field_exact": {
+          "action": {
+            "correct": 180,
+            "total": 180
+          },
+          "actor": {
+            "correct": 180,
+            "total": 180
+          },
+          "modality": {
+            "correct": 178,
+            "total": 180
+          },
+          "object": {
+            "correct": 180,
+            "total": 180
+          }
+        },
+        "state_ref": {
+          "bytes": 4778674,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+          "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f",
+          "tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379"
+        },
+        "source_modality_correct": 178,
+        "correct_source_modality_but_wrong_generated_modality": 0
+      },
+      {
+        "dimension": 768,
+        "arm": "normative-wording-ce",
+        "ordered_exact": 48,
+        "token_cross_entropy": 0.001863383598312809,
+        "field_exact": {
+          "action": {
+            "correct": 180,
+            "total": 180
+          },
+          "actor": {
+            "correct": 180,
+            "total": 180
+          },
+          "modality": {
+            "correct": 180,
+            "total": 180
+          },
+          "object": {
+            "correct": 180,
+            "total": 180
+          }
+        },
+        "state_ref": {
+          "bytes": 4779949,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+          "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3",
+          "tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d"
+        },
+        "source_modality_correct": 180,
+        "correct_source_modality_but_wrong_generated_modality": 0
+      }
+    ],
+    "same_zero_generation_exact_replay": true,
+    "retention_training_steps": 0,
+    "prospective_wording_60_results": {
+      "384": {
+        "zero_exact": 55,
+        "auxiliary_exact": 60,
+        "zero_ce": 0.00832563,
+        "auxiliary_ce": 0.0025041777
+      },
+      "768": {
+        "zero_exact": 60,
+        "auxiliary_exact": 60,
+        "zero_ce": 0.0015389897,
+        "auxiliary_ce": 0.0015766217
+      },
+      "exposure": "Wording sealed prospectively; original30DEV semantic identities already exposed.",
+      "four_fits": "Per width zero/0.05auxiliary,170original updates,1220original row presentations and1020auxiliary presentations per arm; frozen native encoders.",
+      "original_development_retention": "48/48 allarms,slightly worse CE inauxiliaries."
+    },
+    "remaining384_retention_error": "21wrong modalities and1action; source modality161/180 vs generated159/180, so2correct-source sites become wrong combined outputs. No causal proof that deleting recurrence fixes generation.",
+    "do_not_duplicate": "Do not rerun this completed four-state v3 retention as the next training experiment or reuse its inspected errors as a fresh holdout."
+  },
+  "contextual_runtime_limits": {
+    "original_ir_replay": "48/48original-cohort exactIR;0/48original-prose exactness is a separate metric.",
+    "paragraph_vector_binding": "caller_pinned_asset_bytes",
+    "saved_paragraph_vector_producer_authenticated": false,
+    "reuse_requirement": "Maintain source-owner/cached-input/checkpoint identities; prepare new contextual plans after implementation changes. No implicit latest endpoint substitution."
+  },
+  "grouped_v2_baseline": {
+    "checkpoint": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/epoch-003/checkpoint.json",
+      "sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+      "bytes": 30519315
+    },
+    "parameters": 306317,
+    "selected_steps": 480,
+    "completed_updates": 2400,
+    "seed": 1729,
+    "learning_rate": 0.003,
+    "batch_size": 16,
+    "support_threshold": 0.5,
+    "selection": 128,
+    "selection_denominator": 128,
+    "formerly_fresh_final": {
+      "positive_exact_count": 64,
+      "positive_count": 64,
+      "negative_learned_refusal_count": 55,
+      "negative_safe_refusal_count": 62,
+      "negative_count": 64,
+      "negative_emitted_request_count": 2,
+      "mixed_exact_count": 119,
+      "case_count": 128,
+      "mixed_exact_rate": 0.9296875,
+      "mixed_safe_exact_count": 126,
+      "support_classification_correct": 119,
+      "support_classifier_available": true,
+      "positive_false_abstention_count": 0,
+      "negative_incidental_block_count": 7
+    },
+    "negative_categories": {
+      "missing_modal": {
+        "case_count": 14,
+        "learned_refusal_count": 7,
+        "safe_refusal_count": 13
+      },
+      "mixed_coordination": {
+        "case_count": 12,
+        "learned_refusal_count": 12,
+        "safe_refusal_count": 12
+      },
+      "permuted_modal": {
+        "case_count": 14,
+        "learned_refusal_count": 12,
+        "safe_refusal_count": 13
+      },
+      "qualified": {
+        "case_count": 12,
+        "learned_refusal_count": 12,
+        "safe_refusal_count": 12
+      },
+      "single_duty": {
+        "case_count": 12,
+        "learned_refusal_count": 12,
+        "safe_refusal_count": 12
+      }
+    },
+    "source_parent_clusters": 38,
+    "exact_positive_actor_action_occurrences": 305,
+    "known_emission_failures": [
+      {
+        "case_id": "v2-fresh-d33f0cefc004e2ebd92fe6330a68ef79d68fd307fd7eb2ed11e9e522d4e2d66e-unsupported-missing_modal-disjunction_of_norms",
+        "negative_category": "missing_modal",
+        "modal_scope": "disjunction_of_norms",
+        "support_probability": 0.9944877028465271,
+        "source": "The Wharf Pilot transcribe the inscription or shall tabulate the matrix or must photograph the mural.",
+        "predicted_members": [
+          {
+            "actor": "wharf pilot transcribe",
+            "modality": "P",
+            "action": "tabulate the matrix"
+          },
+          {
+            "actor": "wharf pilot transcribe",
+            "modality": "O",
+            "action": "photograph the mural"
+          }
+        ]
+      },
+      {
+        "case_id": "v2-fresh-54c9b6f55e6eac2214baf47b0c8adc362317394876cdf778c5c9205cc4c93836-unsupported-permuted_modal-disjunction_of_norms",
+        "negative_category": "permuted_modal",
+        "modal_scope": "disjunction_of_norms",
+        "support_probability": 0.86215740442276,
+        "source": "The Estuary Cartographer sahll transcribe the inscription or the Estuary Cartographer muts inspect the mosaic or sahll photograph the mural or the Estuary Cartographer muts stamp the medallion or sahll number the lithograph.",
+        "predicted_members": [
+          {
+            "actor": "estuary cartographer",
+            "modality": "P",
+            "action": "transcribe the inscription"
+          },
+          {
+            "actor": "estuary cartographer muts inspect",
+            "modality": "P",
+            "action": "inspect the mosaic"
+          },
+          {
+            "actor": "estuary cartographer muts inspect",
+            "modality": "P",
+            "action": "photograph the mural"
+          },
+          {
+            "actor": "estuary cartographer muts",
+            "modality": "P",
+            "action": "stamp the medallion"
+          },
+          {
+            "actor": "estuary cartographer muts",
+            "modality": "P",
+            "action": "number the lithograph"
+          }
+        ]
+      }
+    ],
+    "now_exposed": "All earlier train/selection/final rows and14real-source probes are diagnostic or retention sets now; none may be advertised as a fresh final evaluation.",
+    "real_uscode": "7retained officialparagraphs x2explicitcaller scopes,14learned refusals,0requests; no independent referenceIR or legalaccuracy estimate.",
+    "architecture_comparison_limit": "V1 vsV2 changed byteencoder,augmentation,negative supervision andpositivepresentation count; not a controlled architecture ablation."
+  },
+  "concrete_data_gap": {
+    "builder_observation": "build_v2_corpus.py missing_modal uses allparentmembers inTRAIN/selection but onlyfirstmember inoldfinal; permuted_modal corrupts allmembers with split-specific spellings.",
+    "failure_concentration": "7/14missing_modal learned refusals and12/14permuted_modal; other3negative families12/12each. Two emitted unsupported requests are narrow-scope cases withsupport probabilities0.9944877 and0.8621574.",
+    "interpretation": "The support head needs local branch-level modal evidence, not merely some modal-looking tokens somewhere. This is a falsifiable training hypothesis, not an established causal explanation.",
+    "label_semantics": "supported=False means outside this closed engineering source profile; modal omission and coordination can still be meaningful legal English. Do not label such text legally invalid."
+  },
+  "recommended_next_experiment": {
+    "name": "paired grouped-v2 continuation with position-local unsupported-source negatives",
+    "status": "Proposed recipe; root must seal actual corpus/schedule/reference receipts before fitting.",
+    "question": "Does training on local modal deletion/permutation reduce unsupported request emission while retaining exact supported source spans?",
+    "parents": "Restore the same v2 selected model AND Adam state independently for both arms; keep frozen parent as third no-update control. No architecture or checkpoint-schema change.",
+    "training_api": "restore_grouped_span_checkpoint -> train_grouped_span_step -> save_grouped_span_checkpoint; predict_grouped_span_decoder receives onlysource_text andexplicitmodal_scope.",
+    "arms": {
+      "control": "Existing originalTRAIN positives andoriginalTRAIN unsupported examples.",
+      "candidate": "Same positive row stream; of8negative rows perbatch,4original negative replay and4new position-local corruptions fromoriginalTRAIN parentgroups only. Stratify first/middle/last branch,2..8members,O/P/F,modalaliases,implicit/explicit actors."
+    },
+    "budget": {
+      "seeds": [
+        1729
+      ],
+      "updates_per_arm": 200,
+      "batch_size": 16,
+      "positive_rows_per_batch": 8,
+      "negative_rows_per_batch": 8,
+      "row_presentations_per_arm": 3200,
+      "total_updates": 400,
+      "learning_rate": 0.003,
+      "weight_decay": 0.0,
+      "gradient_clip": 5.0,
+      "support_threshold": 0.5,
+      "cpu_threads": 2,
+      "cuda_visible_devices": "",
+      "candidate_snapshots_after_new_updates": [
+        0,
+        50,
+        100,
+        150,
+        200
+      ]
+    },
+    "fixed_controls": "Same initial tensors/Adam, positive row order, batch composition, numerical owners, candidate selection schedule and200updates. Logactualtrain-source occurrence andnegative corruption lineage, notjust rowcounts.",
+    "new_negatives": "Delete or permute exactly one modal span at authored source positions while leaving othermodalheads intact; include bounded multiple-local-edit variants onlyif prospectivelysealed. Use fresh corruption strings and no exactoldfinal examples. members=() andsupported=False, soexisting support-only negative loss mask applies.",
+    "why_full_head_continuation": "Existingstrict checkpoint owns fullmodel/Adam inventory. A support-head-only frozen-trunk optimizer would require a separately versioned checkpoint/step-state contract; unnecessary for this first data-only comparison.",
+    "fresh_splits": "Author and seal newselection andfinal parentgroups beforefitting; exclude all priorv1/v2sourcehashes,normalizedtext,parentlineages andnear-template duplicates. Keepallscopevariants/negative derivatives withtheirparent. Use newactor/action lexemes andheldouttemplate-position combinations; explicit authored span references,notparser-derived legalgold. Minimum proposal:64supported+64unsupported cases perpanel, balanced O/P/F/membercounts/negative categories, reportparent-cluster denominator.",
+    "selection": "Use onlynewselection. Require positive exactIR/span retention vsfrozenparent onnewselection andoldpositive regression; rank fewer unsupported request emissions first, thenmore learned refusals, thenearlierstep. Keepfixed0.5 gate andcount incidentalblocks separately.",
+    "final": "Aftercheckpointselection sealed, scorepredeclared frozenparent/control/candidate onnewfinal once; retain alloutputs andallattemptdenominators. Treatold128final panel strictly as exposedretention. Do notretune fromnewfinal failures.",
+    "success_gates": "No positive/source-span regression onprespecifiedretention, fewer unsupported emissions andhigherlearnedrefusal onfreshselection/final; reportcount-and-cluster uncertainty. Retainfailedarms. A syntaxvalid unsupportedrequest remainsa failure.",
+    "native_check": "For any actual selected predicted positivepair, rerenderbothdeclaredscopes throughunchanged semantic/native owners andrun actual lakebuildlegal plusfalse-scope negativecontrol. This remainsengineering validation ratherthan source-meaning proof."
+  },
+  "ready_reusable_owners": [
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+      "bytes": 33948
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+      "bytes": 29370
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+      "bytes": 13298
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f",
+      "bytes": 6557
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+      "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955",
+      "bytes": 64337
+    }
+  ],
+  "ready_registered_runtime": "legal_ir:source_conditioned_grouped_v2; source+caller scope, no8D/384D/768Dvector input.",
+  "other_reusable_checkpoints": {
+    "grouped_v1": "9d6d50eb304d1caddf7917277ac4e5a6bc7c2652ea19dfc82d49aa4a9d989df3 retainedbaseline; strictschema differsfromv2.",
+    "normative384_auxiliary": {
+      "bytes": 2797392,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+      "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266",
+      "tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594"
+    },
+    "normative768_auxiliary": {
+      "bytes": 4779949,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+      "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3",
+      "tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d"
+    },
+    "reuse_scope": "Native-vector normative/checkpoint generations are separate controls,notparameter-compatible grouped donors."
+  },
+  "deferred_work": {
+    "conditioning": "Before raw/PCA/AE latent claims, provide genuine vector-to-grouped conditioner interface and matchedtraining withsource-onlycontrol andauthentic producerjoins. Frozen-decoder parity isnot a trainedrepresentation comparison.",
+    "real_law": "UseJusticeDAO caches as source/provenance/candidate targets,notindependentlyreviewedgold; requirecontext-complete source/IR review beforelegal fidelityclaims.",
+    "logic_families": "Currentgrouped output onlydeontic_fol withTDFOLnative lowering,explicitinclusiveor/modal scope,2..8members,noqualifierfields. Richfamilies/nonemptyexceptions neednewtypedgrammar+evidence; cannotbe gainedby thistrainingrecipe."
+  },
+  "model_calls": 0,
+  "training_calls": 0,
+  "tests_run": 0,
+  "weights_rehashed": false,
+  "remote_writes": false,
+  "legal_accuracy_claimed": false
+}

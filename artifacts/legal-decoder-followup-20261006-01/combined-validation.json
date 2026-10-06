@@ -1,0 +1,29 @@
+{
+  "schema": "legal-support-and-scope-combined-validation/v1",
+  "counts": {
+    "tests": 571,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "test_pins": {
+    "tests/unit/logic/test_deontic_grouped_decoder.py": "de59814005b798404996a6d8a207bb7b17f806c93c8ea590eb483cbd60a8afb4",
+    "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py": "aa799e28e8e01d5e27ac650ad0158b5974bf65c96521737a23f0f83dccc8e719",
+    "tests/unit/logic/test_legal_grouped_span_decoder.py": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8",
+    "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c",
+    "tests/unit/logic/test_legal_grouped_span_decoder_v2.py": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840",
+    "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f",
+    "tests/unit/logic/test_legal_grouped_phase1_integration.py": "12e9b330a35560bbb673a6fffbc3551c475c391d8ffb5cf43ab502d59d2ffe82",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_runtime_registry.py": "cba44a74ad99ebff2ea9d89c0100e35c8473dcf5cdf3d170ee5ecab072d20553",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_learned_formula_runtime.py": "613abb4e36d1d8ac5b45b65dc2afca4f7352adc1c27397ca2afa089aa50f6f9b",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_native_formula_runtime.py": "e52594f4c68794963c81c88e798599cced535d07993568633bc4822f0b33e1d9",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0",
+    "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py": "907f802e33121913a242482f898286243bfe160fffe966716860bb3f2c606965",
+    "tests/unit/logic/test_legal_scope_span_proposal.py": "67d3a40c6374d249511cde4c033f11eb7733e684e7adac303511dab907a06a4a",
+    "tests/unit/logic/legal_ir/test_canonical_statement_scope.py": "0e2e272942c41472a4f166319c8212c25ee5901a0d86044c4937719ff80faa18",
+    "tests/unit/logic/legal_ir/test_canonical_statement_scope_bridge.py": "09623ca049a5af6a7912c67f1b74a5cbd1878e75393533d77a4bbf1765d92aea"
+  },
+  "status": "passed",
+  "cuda_visible_devices": "",
+  "native_lake_not_executed_by_this_test_panel": true
+}

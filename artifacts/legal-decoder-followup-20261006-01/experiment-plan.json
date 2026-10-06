@@ -1,0 +1,77 @@
+{
+  "schema": "grouped-boundary-matched-continuation-plan/v1",
+  "parent_checkpoint": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/epoch-003/checkpoint.json",
+    "sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+    "steps": 480
+  },
+  "training_corpus": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/training-corpus.json",
+    "sha256": "e89bfcff55af1d8159c14c6cf971dfb2246717733a91bdeff00f01bdfdba9eb2",
+    "bytes": 6926524
+  },
+  "selection_reference": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/selection-reference.json",
+    "sha256": "db0d0844052a334e50578f3fcc7c26621a870819432905fe45393bec5d1e73f8",
+    "bytes": 230770
+  },
+  "sealed_final_reference": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/final-reference.json",
+    "sha256": "923aef1c6de98f6c42824b0401365f9973d52f6b2677b7535eeb77bcb1d1ea2d",
+    "bytes": 229396
+  },
+  "arms": [
+    "original_negatives",
+    "position_local_negatives"
+  ],
+  "updates_per_arm": 200,
+  "batch_size": 16,
+  "positive_per_batch": 8,
+  "negative_per_batch": 8,
+  "targeted_arm_original_negatives_per_batch": 4,
+  "targeted_arm_local_negatives_per_batch": 4,
+  "learning_rate": 0.0005,
+  "batch_order_seed": 24601,
+  "support_threshold": 0.5,
+  "selection_updates": [
+    0,
+    100,
+    200
+  ],
+  "selection_score": [
+    "mixed_exact_count",
+    "-negative_emitted_request_count",
+    "positive_exact_count",
+    "-additional_updates"
+  ],
+  "source_sets_disjoint_from_parent_corpus_and_between_new_splits": true,
+  "new_source_parent_groups_per_evaluation_split": 38,
+  "evaluation_positive_rows_per_split": 64,
+  "evaluation_negative_rows_per_split": 64,
+  "negative_meaning": "outside narrow repeated-modal coordination profile; not legally false",
+  "legal_gold": false,
+  "source_semantics_reviewed": false,
+  "latent_conditioned": false,
+  "fresh_references_fixed_before_training": true,
+  "corruptions": {
+    "train": {
+      "shall": "ahlls",
+      "must": "mstu",
+      "may": "aym",
+      "permitted": "deeimprtt"
+    },
+    "selection": {
+      "shall": "ahsll",
+      "must": "smtu",
+      "may": "yma",
+      "permitted": "deeimpttr"
+    },
+    "final": {
+      "shall": "alhsl",
+      "must": "stmu",
+      "may": "mmay",
+      "permitted": "deeimrtpt"
+    }
+  },
+  "runner_sha256": "040991ff1cccb85a623c3acda481f30d23d4e39ca66e8191cc75d7617e75d61c"
+}
