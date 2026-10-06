@@ -1,0 +1,221 @@
+{
+  "audit_ref": "refs/remotes/autoencoder-audit-20261006-02/main",
+  "canonical_HEAD": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+  "history_findings": {
+    "all_five_reviewed_worktree_commits_are_ancestors": true,
+    "already_integrated_commits_to_preserve": [
+      "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+      "37c2d63f0bf9490e5b019788afcafbc3b806d8c7",
+      "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+      "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+    ],
+    "no_retained_branch_cherry_pick_required_for_phase1": true,
+    "six_new_grouped_modules_have_no_commit_in_any_retained_ref": true,
+    "worktrees": [
+      {
+        "HEAD": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+        "ancestor_of_live_main": true,
+        "branch": "refs/heads/codex/alignment-decoder-768-20261003",
+        "locked": "Persistent autoformalization decoder study source references",
+        "selected_path_dirty_status": "",
+        "worktree": "/home/barberb/lift_coding/.worktrees/alignment-decoder-768-20261003"
+      },
+      {
+        "HEAD": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+        "ancestor_of_live_main": true,
+        "branch": "refs/heads/agent/contextual-legal-runtime-20261006",
+        "selected_path_dirty_status": "",
+        "worktree": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006"
+      },
+      {
+        "HEAD": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+        "ancestor_of_live_main": true,
+        "branch": "refs/heads/agent/decoder-profile-recovery-20261006",
+        "selected_path_dirty_status": "",
+        "worktree": "/home/barberb/lift_coding/.worktrees/decoder-profile-recovery-datasets-20261006"
+      },
+      {
+        "HEAD": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+        "ancestor_of_live_main": true,
+        "branch": "refs/heads/codex/legal-original-text-roundtrip-retained-20261004",
+        "locked": "Active retained Legal384 reconstruction scorer implementation and regression; preserve until explicit root completion",
+        "selected_path_dirty_status": "",
+        "worktree": "/home/barberb/lift_coding/.worktrees/legal-original-text-roundtrip-retained-20261004"
+      },
+      {
+        "HEAD": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+        "ancestor_of_live_main": true,
+        "branch": "refs/heads/codex/source-v2-warm-start-20261004",
+        "locked": "Active saved-weight continuation implementation and review; preserve exact retained inputs",
+        "selected_path_dirty_status": "",
+        "worktree": "/home/barberb/lift_coding/.worktrees/source-v2-warm-start-20261004"
+      }
+    ]
+  },
+  "lane_reconciliation": [
+    {
+      "lane": "Historical 8D/384D/768D autoencoders and formula sidecars",
+      "next_reuse": "Use their source/vector and decoder-format contracts when a separately versioned conditioning adapter is designed; no latent qualification from grouped-head scores.",
+      "relationship": "Different representation/checkpoint lineages; dimension alone does not identify the decoder. Existing normative/paraphrase training at main must be preserved."
+    },
+    {
+      "lane": "Retained native768 legal_span_formula and joint span policies",
+      "next_reuse": "Keep frozen greedy/joint and real/disabled/zero/rotated controls; future matched training must use common profile-compatible, admitted paired data.",
+      "relationship": "Single-rule source-span+FiLM family; donor trunk insights inform grouped heads but no donor weights were copied. Owner is already identical on main."
+    },
+    {
+      "lane": "Contextual LegalIR runtime and original-text scorer",
+      "next_reuse": "Reuse authentic checkpoint/source-binding interfaces; evaluate original prose reconstruction separately from normalized grouped CNL.",
+      "relationship": "Already integrated contextual checkpoint replay and separate text reconstruction scoring. Canonical roundtrip sorting is not interchangeable with ordered grouped alternatives."
+    },
+    {
+      "lane": "coordination_decoder deterministic renderer",
+      "next_reuse": "Common deterministic endpoint for source heads and future admitted latent conditioners; scope is explicit caller input, not inferred legal scope.",
+      "relationship": "No trained weights; validates/lowers an explicit closed semantic request into strict deontic FOL/native AST/Lean body."
+    },
+    {
+      "lane": "Grouped span v1",
+      "next_reuse": "Preserve checkpoint9d6d50eb304d1caddf7917277ac4e5a6bc7c2652ea19dfc82d49aa4a9d989df3 as frozen engineering baseline.",
+      "relationship": "Trainable source+caller scope head; pooled byte bag, ordered slots, no learned support classifier; published separately at80087f53b1dff4811623079dd7d642347d6232bb."
+    },
+    {
+      "lane": "Grouped span v2",
+      "next_reuse": "Preserve checkpointefd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95; use source-only control in future matched studies. Fresh authored positives64/64, negative learned refusals55/64, incidental blocks7, unsupported emitted requests2. Real retained paragraph probe14/14abstained; legal accuracy unmeasured.",
+      "relationship": "Trainable source+caller scope head with local ordered byte convolutions and support head; no latent-vector input; published separately at726386d3cb0ef068f275d4ded97fef71fdfeebf0."
+    }
+  ],
+  "next_work_before_further_training": [
+    "Complete parent-wide branch/effective-tree review and phase1 checkpoint/native replay before considering a new fit.",
+    "Commit additive phase1 with exact source/provenance and preserve all existing published assets; user/root controls GitHub writes.",
+    "Review/port phase2 source-fidelity helpers and readiness guards on current main with explicit before/after evidence.",
+    "Collect independently reviewed real source/context/formal pairs and richer scope/qualifier boundaries; neither authored support negatives nor Lake syntax supply legal labels.",
+    "Only then register matched source-only/raw/PCA/AE conditioned comparisons with exact lineage joins, equal architectures/updates/selection/decoding budgets and fresh source-group holdout."
+  ],
+  "not_claimed": [
+    "real US Code semantic accuracy",
+    "8D/384D/768D latent compatibility or benefit",
+    "40-family support from the single deontic_fol grouped profile",
+    "general legal scope inference",
+    "reconstruction of original legal prose from normalized CNL",
+    "proof readiness from syntax/native engineering countermodels"
+  ],
+  "phase1": {
+    "candidate_commit_by_parent_only": true,
+    "checkpoint_source_bytes_must_remain_exact": true,
+    "does_not_integrate_legacy_readiness_guards": true,
+    "production_paths": [
+      {
+        "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+        "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+      },
+      {
+        "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+        "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+      },
+      {
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+        "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+      },
+      {
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+        "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+      }
+    ],
+    "purpose": "Add source-only trained v1/v2 heads, closed semantic IR renderer and full-denominator evaluator without changing shared legacy parser/IR/export owners.",
+    "requires_new_candidate_commit": true,
+    "reused_unchanged_main_dependencies": {
+      "ipfs_datasets_py/logic/TDFOL/tdfol_core.py": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7",
+      "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3",
+      "ipfs_datasets_py/logic/autoformal/family_qualification.py": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8",
+      "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe",
+      "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+    },
+    "test_fixture_port_receipt": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/phase1-test-port-manifest.json",
+    "test_paths": [
+      "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "tests/unit/logic/test_legal_grouped_span_decoder.py",
+      "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+      "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+      "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+      "tests/unit/logic/test_legal_grouped_phase1_integration.py"
+    ]
+  },
+  "phase2": {
+    "missing_deliverable_paths": [
+      "ipfs_datasets_py/logic/autoformal/legal_coordination.py",
+      "ipfs_datasets_py/logic/deontic/coordination.py",
+      "tests/unit/logic/test_deontic_actor_heading_boundaries.py",
+      "tests/unit/logic/test_deontic_actor_heading_recovery.py",
+      "tests/unit/logic/test_deontic_coordination_boundaries.py",
+      "tests/unit/logic/test_deontic_coordination_integration.py",
+      "tests/unit/logic/test_deontic_coordination_parser.py",
+      "tests/unit/logic/test_deontic_coordination_readiness.py",
+      "tests/unit/logic/test_deontic_duty_scope_boundaries.py",
+      "tests/unit/logic/test_deontic_duty_scope_integration.py",
+      "tests/unit/logic/test_deontic_duty_scope_parser.py",
+      "tests/unit/logic/test_deontic_duty_scope_readiness.py",
+      "tests/unit/logic/test_deontic_formula_omission_integration.py",
+      "tests/unit/logic/test_deontic_formula_omission_readiness.py",
+      "tests/unit/logic/test_deontic_grouped_coordination.py",
+      "tests/unit/logic/test_deontic_grouped_coordination_boundaries.py",
+      "tests/unit/logic/test_deontic_inline_exception_boundaries.py",
+      "tests/unit/logic/test_deontic_inline_exception_integration.py",
+      "tests/unit/logic/test_deontic_inline_exception_parser.py",
+      "tests/unit/logic/test_deontic_inline_exception_readiness.py",
+      "tests/unit/logic/test_deontic_override_condition_fidelity.py",
+      "tests/unit/logic/test_deontic_persisted_override_readiness.py",
+      "tests/unit/logic/test_deontic_procedure_decoder_overlap.py",
+      "tests/unit/logic/test_deontic_procedure_source_fidelity.py",
+      "tests/unit/logic/test_deontic_qualifier_procedure_integration.py",
+      "tests/unit/logic/test_deontic_reference_list_boundaries.py",
+      "tests/unit/logic/test_deontic_reference_list_integration.py",
+      "tests/unit/logic/test_deontic_reference_list_ir.py",
+      "tests/unit/logic/test_deontic_reference_list_parser.py",
+      "tests/unit/logic/test_deontic_reference_readiness.py",
+      "tests/unit/logic/test_deontic_reference_readiness_integration.py",
+      "tests/unit/logic/test_deontic_reference_resolution_boundaries.py",
+      "tests/unit/logic/test_deontic_source_quality_metrics.py",
+      "tests/unit/logic/test_legal_coordination_compiler.py",
+      "tests/unit/logic/test_legal_coordination_evaluation.py",
+      "tests/unit/logic/test_legal_grouped_coordination_integration.py",
+      "tests/unit/logic/test_legal_grouped_decoder_integration.py",
+      "tests/unit/logic/test_legal_grouped_span_decoder_integration.py",
+      "tests/unit/logic/test_legal_grouped_span_decoder_v2_integration.py",
+      "tests/unit/logic/test_temporal_occurrence_session.py"
+    ],
+    "modified_shared_or_existing_paths": [
+      "docs/autoencoders/inference_and_qualification.md",
+      "ipfs_datasets_py/logic/deontic/decoder.py",
+      "ipfs_datasets_py/logic/deontic/exports.py",
+      "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "ipfs_datasets_py/logic/deontic/ir.py",
+      "ipfs_datasets_py/logic/deontic/metrics.py",
+      "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "tests/unit/logic/test_deontic_ir.py",
+      "tests/unit_tests/logic/deontic/test_deontic_decoder.py",
+      "tests/unit_tests/logic/deontic/test_deontic_export_capability_profiles.py",
+      "tests/unit_tests/logic/deontic/test_deontic_exports.py",
+      "tests/unit_tests/logic/deontic/test_deontic_formula_builder.py",
+      "tests/unit_tests/logic/deontic/test_deontic_parser_metrics.py",
+      "tests/unit_tests/logic/deontic/test_legal_norm_ir.py"
+    ],
+    "parser_closure_counts": {
+      "absent": 20,
+      "identical": 26,
+      "modified": 6
+    },
+    "purpose": "Reconcile exact source-group construction and legacy readiness/fidelity defenses separately, then add original bridge-dependent integration tests.",
+    "review_constraints": [
+      "Do not replace whole parser/formula/export/IR trees; preserve current-main preimages and independently inspect each changed helper.",
+      "Preserve exact grouped source spans and inherited actor provenance, scope unknown states, and semicolon sibling boundaries.",
+      "Keep formula/export recomputation independent of cached parser warning flags; preserve tamper defenses and conservative readiness.",
+      "Distinguish raw source-bound group validation from generated semantic requests; source grouping must not become an inference target fallback.",
+      "Existing source-group/bridge artifact pins must remain historical; publish newly validated producer bindings for any reconciled implementation."
+    ],
+    "static_parser_dependency_receipt": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/grouped-phase2-parser-dependencies.json"
+  },
+  "schema": "grouped-decoder-integration-plan/v1",
+  "scope": "76 exact retained grouped/source-fidelity deliverable paths; complementary to parent-wide autoencoder inventory, not a census of all repository work.",
+  "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+}

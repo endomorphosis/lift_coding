@@ -1,0 +1,587 @@
+{
+  "schema": "autoencoder-workspace-publication-independent-review/v1",
+  "status": "passed",
+  "blocking_findings": [],
+  "time_utc": "2026-10-06T14:45:14.676605+00:00",
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/review_workspace_publication.py",
+    "sha256": "ec07da4c99094334be2b7522060e884175899a8cba4dd9a4e2ffd41b1dcd52ff",
+    "bytes": 9358
+  },
+  "candidate": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-integration",
+  "base": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+  "head": "d1d3f3736e2a461ae4d40903da53bc20f4958437",
+  "freeze": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-publication-freeze.json",
+    "sha256": "761fdd6380a60b5cf785bb03230981681030b05abfc0f06baa50d7fd7e7bb54a",
+    "bytes": 15364
+  },
+  "freeze_original_inventory_base": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+  "freeze_base_scope": "Original inventory base retained; actual contribution diff independently checked against rebased base above.",
+  "changed_paths_exactly_equal_80_path_freeze": true,
+  "all_committed_worktree_and_frozen_bytes_agree": true,
+  "verified_files": [
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/candidate-freeze.json",
+      "sha256": "ceadaf21f9038af85f9bf1335ad5e4948f3358d93c5ac4e2078253a273b3ea48",
+      "bytes": 4174,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/canonical-preservation-final-review.json",
+      "sha256": "bd7787f0100b5eb5c24b3b541db78d409be567fa1e6e8d41f1a46928f9e478f9",
+      "bytes": 1642,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/combined-main-validation.json",
+      "sha256": "364706bfb3c4be68c0e934f0241b5f9cd6fd7fad0f0092a02b59c851988f6e16",
+      "bytes": 7158,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/contribution-independent-review.json",
+      "sha256": "6c70da655fe5032c45b9ef36bf7122a3b9a502943141807f7a631fd4d841e5c4",
+      "bytes": 3786,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/README.md",
+      "sha256": "e722fa8abf26026649760dece9da6edeaa35b29b4481f10b04b40bd7509425f3",
+      "bytes": 1125,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/docs/autoencoders/inference_and_qualification.md",
+      "sha256": "de591d05db47c02964735f8e294543e278197eee4f64109824485cc3562c5598",
+      "bytes": 52229,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/ipfs_datasets_py/logic/autoformal/legal_coordination.py",
+      "sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205",
+      "bytes": 10247,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/ipfs_datasets_py/logic/deontic/coordination.py",
+      "sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf",
+      "bytes": 19598,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/ipfs_datasets_py/logic/deontic/decoder.py",
+      "sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa",
+      "bytes": 35370,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/ipfs_datasets_py/logic/deontic/exports.py",
+      "sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc",
+      "bytes": 226780,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23",
+      "bytes": 425746,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/ipfs_datasets_py/logic/deontic/ir.py",
+      "sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d",
+      "bytes": 132048,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/ipfs_datasets_py/logic/deontic/metrics.py",
+      "sha256": "f96a8fc71278c9573e58449aedea687aba99cdbadf2f3336a739dd731226c6fe",
+      "bytes": 15888,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec",
+      "bytes": 337171,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/manifest.json",
+      "sha256": "519390119e178d4d0a03c3eb34ca6fb504f34fcf4a4581decf55e9833f12b3d5",
+      "bytes": 15937,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_actor_heading_boundaries.py",
+      "sha256": "961cb18a68b41e0a0bd7e0083f08b9c229ed03d9dbba4497c4264fca60443a8d",
+      "bytes": 10656,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_actor_heading_recovery.py",
+      "sha256": "da94b57ff6febfd1d89ac0e96dcee51dd593b149b1cb990addf0a60273b96b20",
+      "bytes": 5394,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_coordination_boundaries.py",
+      "sha256": "6ffdabe99f536cde5444819fea6832a8628b4ce8d97acfe204a0800870f942c3",
+      "bytes": 11333,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_coordination_integration.py",
+      "sha256": "6952b9eb92f5c4d88e746572f5527f9cc99473d01e6e3eac6de57e6d96b7c1de",
+      "bytes": 14425,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_coordination_parser.py",
+      "sha256": "9a9a446f4574364fb042a3135f0064552bd97924e050d67d353d306df89ec64a",
+      "bytes": 8017,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_coordination_readiness.py",
+      "sha256": "be25ec1f37392f63f415494a29b9e3893f1c2bc5eb7b9ac25aaac53953d04d25",
+      "bytes": 3109,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_duty_scope_boundaries.py",
+      "sha256": "46d87c21e6f4696f9e47138a4f57d1effcbab64a1142753e87af411bc0c5ea12",
+      "bytes": 12603,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_duty_scope_integration.py",
+      "sha256": "4ca90703f2c835ac8c5a4f675dd29705d1134cf8b73f5638da3418033282317f",
+      "bytes": 18184,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_duty_scope_parser.py",
+      "sha256": "6eb452b22267ce1f617f76053dfa16dc077ee88c118bf3095d43f9e77ecc8225",
+      "bytes": 6683,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_duty_scope_readiness.py",
+      "sha256": "f6e02633ce4bc91180ccf0af24e28665c40f38dfd059857ef8e6034bbf59b699",
+      "bytes": 6666,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_formula_omission_integration.py",
+      "sha256": "480600af79998ae9e3e0fb377dff0729667ae14f55ca1fd32b3b6f5797b2a5b7",
+      "bytes": 9565,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_formula_omission_readiness.py",
+      "sha256": "cfaf82e590a4b093dc139e3f6c77404cfb7395e5ddc238e65b8f33dcaa56dc51",
+      "bytes": 9568,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_grouped_coordination.py",
+      "sha256": "2b4fc660b36fa90200f499505c8e85f5476ead3f4fde18b5c3a52724fcbc2c3a",
+      "bytes": 12029,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_grouped_coordination_boundaries.py",
+      "sha256": "5f978dbbb03cab75ac68e0f27792931ea3e00e70f9cfa7323ccfcc783a71ffac",
+      "bytes": 16633,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_inline_exception_boundaries.py",
+      "sha256": "a9c21793c45c5ceb49117dc2a95ea20b840042d1af7b46a46fd92cff38f2f50c",
+      "bytes": 13601,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_inline_exception_integration.py",
+      "sha256": "c7334cabba4de9d6d907dc08fb2b12a89598877fdc82ce2bc8ee696006db0ace",
+      "bytes": 11478,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_inline_exception_parser.py",
+      "sha256": "5568520ada60db9e760fc8ed2624dae83bb60607ad1aec26c5842380c4d70b0b",
+      "bytes": 6107,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_inline_exception_readiness.py",
+      "sha256": "9245a022b2e4e6eb5669a292c1661d19810c3844e89f6e7e22f42d62828fcf94",
+      "bytes": 5053,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_ir.py",
+      "sha256": "6b12f10fc4e6f1286d2a7b7da43eeca9fa6489fe6f531d9414c6d9f300fb433a",
+      "bytes": 7614,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_override_condition_fidelity.py",
+      "sha256": "6a2cf9ddde11e280010121923f6c67b2843c003021ffddfdc1b5c21f6df40832",
+      "bytes": 9461,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_persisted_override_readiness.py",
+      "sha256": "5d06d5bdc2e1253afb2e8ccb6e7f34c148b0c68d560f2fd2bf8a9a9b491d595d",
+      "bytes": 5180,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_procedure_decoder_overlap.py",
+      "sha256": "0b709bcaa2d5053dd2e0441683114898f4a9325153f28838ad274aedca1d0b86",
+      "bytes": 7341,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_procedure_source_fidelity.py",
+      "sha256": "4b00b5ad31953f108eefe06488f4319aadb227745fc238c88d251cda918f3dc2",
+      "bytes": 14001,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_qualifier_procedure_integration.py",
+      "sha256": "e4cc9ec12b3372ff251063a0a38641f299e6af0405d54a5c3f5fdf063b73e6b1",
+      "bytes": 9196,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_reference_list_boundaries.py",
+      "sha256": "4bee04f9a1f87163dc1f9b8d6e02002f0735b48bf7c6b4f14f2a42b7f4fa315c",
+      "bytes": 9742,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_reference_list_integration.py",
+      "sha256": "31abf7c51cc99a3edffd21b946bcacb395f245b31f25f50e9ca8d9e974f949ed",
+      "bytes": 7207,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_reference_list_ir.py",
+      "sha256": "c2dc1db2fe2b264cbcdec88c5fb078eff0141b6444e8fc4782c6552ce704b94d",
+      "bytes": 3014,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_reference_list_parser.py",
+      "sha256": "81c6b068b623839fac301dc873f3a84228aa2d1cb6629112d26ee389cecc4962",
+      "bytes": 6171,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_reference_readiness.py",
+      "sha256": "c03f2f8d6a32939118c156bcf0c5d535a5143b6bc3838591d43731a6d3feafea",
+      "bytes": 4373,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_reference_readiness_integration.py",
+      "sha256": "d69323424947ab2cb0a23b458d8b188d2b024184dcef53a58c6e4c9e512baadf",
+      "bytes": 9916,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_reference_resolution_boundaries.py",
+      "sha256": "d24dd1913cbcd9a36b048b2ea6bb577def3e4043c375782280cfa179f03df664",
+      "bytes": 11265,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_deontic_source_quality_metrics.py",
+      "sha256": "a8f642f8f86918a03c06ac675d264b58c6729857c5d7cb2abe7be794f4183f37",
+      "bytes": 7893,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_legal_coordination_compiler.py",
+      "sha256": "cc04044899a8169feda13dcd6825f01275d4b205663d0ece8f7f391666c77e19",
+      "bytes": 4775,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_legal_coordination_evaluation.py",
+      "sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0",
+      "bytes": 5682,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_legal_grouped_coordination_integration.py",
+      "sha256": "3b3bd69982fab615d653207e1835c6e94a4800fcfc83e242414e8916ff85c736",
+      "bytes": 8010,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_legal_grouped_decoder_integration.py",
+      "sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea",
+      "bytes": 9537,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_legal_grouped_span_decoder_integration.py",
+      "sha256": "628657cadeb058c0772bbcc4a1a48623a15e3f34b98fa7db737fadd5d0b34779",
+      "bytes": 11246,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_legal_grouped_span_decoder_v2_integration.py",
+      "sha256": "2dec33cccde0709f55db4e1ce27173b09f132abae2d0149b311978befb6c69b9",
+      "bytes": 11843,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit/logic/test_temporal_occurrence_session.py",
+      "sha256": "8fdb4f775358e209d16011a168eadc0235de3270815a9e059703766e011e7efb",
+      "bytes": 14870,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit_tests/logic/deontic/test_deontic_decoder.py",
+      "sha256": "35ae221066b397af2a49a9203f9e605d524eb4d5ef65ffb36425211913c85205",
+      "bytes": 30883,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit_tests/logic/deontic/test_deontic_export_capability_profiles.py",
+      "sha256": "ec54bd4ef392497fca789daa922b3fcac1cd0e00f73ab4d22247f3e43484c44c",
+      "bytes": 31510,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit_tests/logic/deontic/test_deontic_exports.py",
+      "sha256": "02a59755a3118435316b75faa494bf492bd4a7d7668ca36252e3a18d92f9d44f",
+      "bytes": 333227,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit_tests/logic/deontic/test_deontic_formula_builder.py",
+      "sha256": "74af98575585567648292dbe981aabfd1ecfe3442c0279d9da9b5388c06622cc",
+      "bytes": 439982,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit_tests/logic/deontic/test_deontic_parser_metrics.py",
+      "sha256": "088b84e96c9727947f3e0e3639fb77c52b3dfa669edc76a2ab2bb373b5137260",
+      "bytes": 10564,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/tests/unit_tests/logic/deontic/test_legal_norm_ir.py",
+      "sha256": "801d82ffef06cd7dbd06754bacbd7806c6a102efb1029ae9fb0f274610e29354",
+      "bytes": 21348,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/github-ci-observation.json",
+      "sha256": "01c422d839e09030fad30f4e089e936fb5aec4a6c0261e016e6f5377be406846",
+      "bytes": 587,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/grouped-decoder-integration-plan.json",
+      "sha256": "23dfbb11256c67e21032d7d0e2b7b7280d9125f2985f3868047f2450d8fabc53",
+      "bytes": 14122,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/grouped-deliverable-path-audit.json",
+      "sha256": "c6a73052affaa3cf950b1c35bed1e1c276ffb84612b86b0ae3dd65de4c808819",
+      "bytes": 179963,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/grouped-phase1-exact-copy.json",
+      "sha256": "b3ac1d91d0c6018e124e465053c65d4e1c4bd384aaeae14057ae91221bd0c9a5",
+      "bytes": 3044,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/grouped-phase2-parser-dependencies.json",
+      "sha256": "0e3f105934219d2ed0d77b071dee06367b43cfe50cf74b05cf0131dab5758565",
+      "bytes": 17135,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/historical-handoff-restoration.json",
+      "sha256": "31fa684bc112d943abced09b5e979fd91625336bf0d318b8e46d70e390df9f30",
+      "bytes": 3841,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/initial-snapshot.json",
+      "sha256": "c0409c02fb1809b05e25ac2c210dd28bfa7c2d9087391836d4412183eacd5d55",
+      "bytes": 5754,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/inventory_scientific_provenance.py",
+      "sha256": "01857c7c76677eb3fede92ae71b064daf755f37b23e46947b2aa34632fab63e9",
+      "bytes": 10966,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/local-worktree-audit/findings.json",
+      "sha256": "9ef277753ea4e8866eff4428fae57a829daf5dd6955366ccc316b3fa14d2cb2a",
+      "bytes": 13725,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/main-native-replay/results.json",
+      "sha256": "c8548ecef2c12b54526f4f4bdfefaea8c40032c7367abb2502ad4ee18a99d755",
+      "bytes": 132436,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/phase1-test-port-manifest.json",
+      "sha256": "5ab5589dc85f25a5ba5ed8f92fa6eef769c4e7ffc696009adb669ec96febdc13",
+      "bytes": 2863,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/phase1-validation-retention.json",
+      "sha256": "cbda963ad03caa2ed1281ad2b768e25dfc6e480cd9598622d0d923a2fbf4c1e3",
+      "bytes": 62631,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/registry-integration-validation.json",
+      "sha256": "68737c864f688b42201e5c1144290d952cda34521c0781a5de46c946817048b8",
+      "bytes": 6578,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/registry-selected-checkpoint-replay.json",
+      "sha256": "4f710842c75c75d09edb26356b0e4dfbd535a575effd222fe61927a02c4651bc",
+      "bytes": 68216,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/replay_grouped_registry_checkpoint.py",
+      "sha256": "98507b536adfa2a02c9e36607b6c5237daa12456debe0cdd32d913fbf596fbcc",
+      "bytes": 4950,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/scientific-integration-findings.md",
+      "sha256": "66007c89308be1b56d3980a3fa1cbb6e58cebddfae859b986f753e9020b1c1b1",
+      "bytes": 13911,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/scientific-provenance-inventory.json",
+      "sha256": "59e4f3f0ac4484dee1348768c58ef9860da1ea22fa16e683cb0ef9b9548f6744",
+      "bytes": 238396,
+      "mode": "100644"
+    },
+    {
+      "path": "artifacts/autoencoder-consolidation-20261006-02/validate_candidate.py",
+      "sha256": "6ac70da3e608bab98f08934ee4c839d8912f0d2a4eb6f8d8420c1cc5fab9ae9a",
+      "bytes": 2845,
+      "mode": "100644"
+    },
+    {
+      "path": "implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "sha256": "6845f0cd4662516d785674e7930d19bcf527595983a91c205e3fc3169767d9af",
+      "bytes": 12790,
+      "mode": "100644"
+    },
+    {
+      "path": "implementation_plan/docs/59-grouped-legal-decoders-consolidation-2026-10-06.md",
+      "sha256": "6cd003835624e36d643bd4b025e48cd1676ff130c50b6f94db394ff71fbceff5",
+      "bytes": 7195,
+      "mode": "100644"
+    }
+  ],
+  "all_entries_regular_utf8_blobs": true,
+  "unexpected_nested_worktrees_or_weight_files": [],
+  "credential_scan": {
+    "scope": "Bounded high-confidence credential markers and closed path/extension inventory; not a general secret-exfiltration proof.",
+    "patterns": [
+      "private_key_pem",
+      "huggingface_token",
+      "github_classic_token",
+      "github_fine_grained_token",
+      "aws_access_key_id"
+    ],
+    "findings": []
+  },
+  "index_and_worktree_clean": true,
+  "gitlinks_identical_to_rebased_main": true,
+  "gitlinks": {
+    "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+    "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+    "external/ipfs_accelerate": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+    "external/ipfs_datasets": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+    "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+    "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+    "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+    "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+  },
+  "intended_datasets_gitlink_not_yet_updated": true,
+  "deferred_archive": {
+    "manifest": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-integration/artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot/manifest.json",
+      "sha256": "519390119e178d4d0a03c3eb34ca6fb504f34fcf4a4581decf55e9833f12b3d5",
+      "bytes": 15937
+    },
+    "source_test_files": 54,
+    "source_test_bytes": 2482032,
+    "all_source_hashes_and_main_preimages_verified": true,
+    "declared_nonruntime": true,
+    "no_runtime_or_configuration_paths_changed_in_parent": true
+  },
+  "historical_receipt_scope": "Older checkpoint, main and unchanged-file observations retain their original pinned generations. The dated preservation supplement explicitly supersedes any whole-canonical-byte preservation interpretation and records two concurrent test edits without attributing or reverting them.",
+  "canonical_preservation_supplement": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-integration/artifacts/autoencoder-consolidation-20261006-02/canonical-preservation-final-review.json",
+    "sha256": "bd7787f0100b5eb5c24b3b541db78d409be567fa1e6e8d41f1a46928f9e478f9",
+    "bytes": 1642
+  },
+  "current_canonical_heads_and_indexes": {
+    "workspace": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    },
+    "datasets": {
+      "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+    }
+  },
+  "concurrent_test_edits_still_preserved": [
+    {
+      "current_mtime_utc": "2026-10-06T14:18:38.892737+00:00",
+      "current_sha256": "de59814005b798404996a6d8a207bb7b17f806c93c8ea590eb483cbd60a8afb4",
+      "current_size_bytes": 11558,
+      "original_frozen_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831",
+      "ownership": "unknown",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "preserved_without_revert": true
+    },
+    {
+      "current_mtime_utc": "2026-10-06T14:18:38.893686+00:00",
+      "current_sha256": "aa799e28e8e01d5e27ac650ad0158b5974bf65c96521737a23f0f83dccc8e719",
+      "current_size_bytes": 12950,
+      "original_frozen_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c",
+      "ownership": "unknown",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "preserved_without_revert": true
+    }
+  ],
+  "github_ci_not_misreported_as_passed": true,
+  "reviewed_scope_excludes_future_gitlink_or_publication_receipt_additions": true,
+  "model_calls": 0,
+  "training_calls": 0,
+  "proof_calls": 0,
+  "git_edits_commits_or_pushes": 0,
+  "canonical_file_edits": 0
+}

@@ -1,0 +1,373 @@
+{
+  "schema": "autoencoder-worktree-integration-findings/v1",
+  "audit": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/local-worktree-audit/results.json",
+    "bytes": 279478,
+    "sha256": "c8ce67d8b92d93ec5c7f3940c7a05e3772a39017bad984864d1c70e1d97e04f7"
+  },
+  "target_revisions": {
+    "datasets": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "workspace": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e"
+  },
+  "worktrees": [
+    {
+      "id": "contextual-legal-runtime",
+      "path": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006",
+      "head": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+      "branch": "refs/heads/agent/contextual-legal-runtime-20261006",
+      "locked": false,
+      "lock_reason": null,
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 51
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "decoder-profile-recovery",
+      "path": "/home/barberb/lift_coding/.worktrees/decoder-profile-recovery-datasets-20261006",
+      "head": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+      "branch": "refs/heads/agent/decoder-profile-recovery-20261006",
+      "locked": false,
+      "lock_reason": null,
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 34
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "original-text-roundtrip",
+      "path": "/home/barberb/lift_coding/.worktrees/legal-original-text-roundtrip-retained-20261004",
+      "head": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+      "branch": "refs/heads/codex/legal-original-text-roundtrip-retained-20261004",
+      "locked": true,
+      "lock_reason": "Active retained Legal384 reconstruction scorer implementation and regression; preserve until explicit root completion",
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 3
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "source-v2-warm-start",
+      "path": "/home/barberb/lift_coding/.worktrees/source-v2-warm-start-20261004",
+      "head": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+      "branch": "refs/heads/codex/source-v2-warm-start-20261004",
+      "locked": true,
+      "lock_reason": "Active saved-weight continuation implementation and review; preserve exact retained inputs",
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 4
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "model-manager-hf-sync",
+      "path": "/home/barberb/lift_coding/.worktrees/ir-model-manager-hf-sync-20261004",
+      "head": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "branch": "refs/heads/codex/ir-model-manager-hf-sync-20261004",
+      "locked": false,
+      "lock_reason": null,
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 10,
+        "missing": 4,
+        "modified": 1
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "supervisor-contracts",
+      "path": "/home/barberb/lift_coding/.worktrees/ir-supervisor-contracts-datasets-20261004",
+      "head": "987cf856b2b902aa68c4587bb492b19b932b5d30",
+      "branch": "refs/heads/codex/ir-supervisor-contracts-20261004",
+      "locked": false,
+      "lock_reason": null,
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 9
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "alignment-decoder-768",
+      "path": "/home/barberb/lift_coding/.worktrees/alignment-decoder-768-20261003",
+      "head": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+      "branch": "refs/heads/codex/alignment-decoder-768-20261003",
+      "locked": true,
+      "lock_reason": "Persistent autoformalization decoder study source references",
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 12,
+        "modified": 2
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "codebase-numerical-replay",
+      "path": "/home/barberb/lift_coding/.worktrees/codebase-numerical-replay-20261003",
+      "head": "7732a5808828083afb1cd19d126d987991136375",
+      "branch": "refs/heads/codex/codebase-numerical-replay-20261003",
+      "locked": false,
+      "lock_reason": null,
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 2,
+        "staged": 0,
+        "unstaged": 2,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 4,
+        "missing": 6,
+        "modified": 1
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "current-main-joint-conditioning-01",
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-conditioning-01/publication-worktree",
+      "head": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+      "branch": "refs/heads/codex/joint-conditioning-20261005-01",
+      "locked": false,
+      "lock_reason": null,
+      "head_is_ancestor_of_target": false,
+      "unique_commits": [
+        "8c02d655e2d086bd644a9011ea67325060ef87bc"
+      ],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 25,
+        "modified": 2
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "current-main-joint-conditioning-02",
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-conditioning-02/publication-worktree",
+      "head": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+      "branch": "refs/heads/codex/joint-conditioning-20261005-02",
+      "locked": false,
+      "lock_reason": null,
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 27
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    },
+    {
+      "id": "current-main-joint-span-01",
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-span-01/publication-worktree",
+      "head": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+      "branch": "refs/heads/codex/joint-span-policy-20261005-01",
+      "locked": false,
+      "lock_reason": null,
+      "head_is_ancestor_of_target": true,
+      "unique_commits": [],
+      "status_counts": {
+        "paths": 0,
+        "staged": 0,
+        "unstaged": 0,
+        "untracked": 0
+      },
+      "effective_path_counts": {
+        "identical": 27,
+        "modified": 3
+      },
+      "head_stable": true,
+      "status_stable": true,
+      "index_stable": true
+    }
+  ],
+  "registration_counts": {
+    "initial": {
+      "datasets": 18,
+      "workspace": 35
+    },
+    "during_read_only_audit": {
+      "datasets": 19,
+      "workspace": 36
+    },
+    "new_root_owned_candidates": [
+      "artifacts/autoencoder-consolidation-20261006-02/datasets-integration",
+      ".worktrees/autoencoder-progress-reconciliation-root-20261006"
+    ]
+  },
+  "all_eight_requested_datasets_heads_already_merged": true,
+  "missing_runtime_files_in_selected_contribution_paths": 0,
+  "historical_documents_recovered": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/historical-handoff-restoration.json",
+    "bytes": 3841,
+    "sha256": "31fa684bc112d943abced09b5e979fd91625336bf0d318b8e46d70e390df9f30"
+  },
+  "historical_index": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/docs/autoencoders/pilots/intent_codebase_grounding/historical_handoff_index.md",
+    "bytes": 3220,
+    "sha256": "cea8adb3d3a2cc7de260f1262b67ebc295a486d15bc71da5a0cbc33fdc518fdc"
+  },
+  "uncommitted_changes": [
+    {
+      "worktree": "codebase-numerical-replay",
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+      "disposition": "Preserve archived checkpoint implementation in its existing worktree; do not replace current main UI decoder.",
+      "reason": "The historical numerical replay handoff explicitly requires an old UI codec for pinned checkpoint source identity. That codec predates current recursive complete-field decoding, strict types, byte/node/depth limits and duplicate/nonfinite JSON rejection.",
+      "production_integration_required": false
+    },
+    {
+      "worktree": "codebase-numerical-replay",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "disposition": "Already byte-identical to live main and canonical working file; preserve local dirty state.",
+      "reason": "Its unset/auto compiler worker_budget patch is already retained.",
+      "production_integration_required": false
+    }
+  ],
+  "modified_contribution_dispositions": [
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+      "disposition": "Preserve live main version.",
+      "reason": "Later optimized Legal loader wrapper adds validated optimized flag and retains opt-out, plus later dependency recovery; older version must not overwrite it."
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "disposition": "Preserve live main version.",
+      "reason": "Later work adds source-head group learning rates, source margin gradients and complete auxiliary-loss/readout receipts; older alignment branch would remove these changes."
+    },
+    {
+      "path": "docs/autoencoders/decoder_length_distillation.md",
+      "disposition": "Preserve later source-head optimizer follow-up link."
+    }
+  ],
+  "publication_duplicate_resolution": {
+    "unmerged_commit": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+    "merged_commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+    "artifact_paths_identical": 25,
+    "only_changes_between_heads": [
+      "implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+      "implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md"
+    ],
+    "disposition": "No remerge needed: main has the same artifact tree plus four explanatory lines qualifying conditioner-control interpretation; retain duplicate worktree."
+  },
+  "grouped_head_compatibility": {
+    "receipt": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/results.json",
+      "bytes": 132436,
+      "sha256": "c8548ecef2c12b54526f4f4bdfefaea8c40032c7367abb2502ad4ee18a99d755"
+    },
+    "input_contract": "Actual source text and explicit caller modal-scope declaration; not a latent input head.",
+    "output_contract": "Closed actor/modality/action members, then deterministic typed-IR/native renderer.",
+    "v1_checkpoint_roundtrip": true,
+    "v2_checkpoint_roundtrip": true,
+    "v1_model_tensors": 42,
+    "v1_optimizer_tensors": 126,
+    "v2_model_tensors": 48,
+    "v2_optimizer_tensors": 144,
+    "actual_forwards": 256,
+    "exact_prior_full_prediction_matches": 256,
+    "source_target_helpers_poisoned": 227,
+    "positive_lake_build_passed": true,
+    "false_scope_claim_rejected": true,
+    "integration_policy": "Add independent versioned modules; keep all existing latent, contextual, cached replay and original-text owners unchanged.",
+    "not_established": [
+      "8D/384D/768D latent decoder interchangeability",
+      "new learned latent conditioning",
+      "independently reviewed legal fidelity",
+      "proof admission",
+      "fresh evaluation on the formerly held-out authored rows"
+    ]
+  },
+  "preservation": {
+    "reviewed_worktree_heads_status_indexes_stable": true,
+    "canonical_indexes_stable_during_audit": {
+      "datasets": true,
+      "workspace": true
+    },
+    "worktree_locks_preserved": true,
+    "source_worktrees_edited": false,
+    "network_fetch_performed_by_this_agent": false,
+    "git_commits_merges_or_pushes_by_this_agent": false,
+    "training_calls": 0
+  }
+}

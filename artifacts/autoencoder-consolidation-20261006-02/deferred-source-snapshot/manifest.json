@@ -1,0 +1,389 @@
+{
+  "schema": "legal-source-fidelity-deferred-source-snapshot/v1",
+  "scope": "Exact current source/test preservation for reviewed dependency port; archived files are not imported by the main runtime.",
+  "base": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "files": [
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination.py",
+      "source_sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205",
+      "bytes": 10247,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "ipfs_datasets_py/logic/deontic/coordination.py",
+      "source_sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf",
+      "bytes": 19598,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_actor_heading_boundaries.py",
+      "source_sha256": "961cb18a68b41e0a0bd7e0083f08b9c229ed03d9dbba4497c4264fca60443a8d",
+      "bytes": 10656,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_actor_heading_recovery.py",
+      "source_sha256": "da94b57ff6febfd1d89ac0e96dcee51dd593b149b1cb990addf0a60273b96b20",
+      "bytes": 5394,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_coordination_boundaries.py",
+      "source_sha256": "6ffdabe99f536cde5444819fea6832a8628b4ce8d97acfe204a0800870f942c3",
+      "bytes": 11333,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_coordination_integration.py",
+      "source_sha256": "6952b9eb92f5c4d88e746572f5527f9cc99473d01e6e3eac6de57e6d96b7c1de",
+      "bytes": 14425,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_coordination_parser.py",
+      "source_sha256": "9a9a446f4574364fb042a3135f0064552bd97924e050d67d353d306df89ec64a",
+      "bytes": 8017,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_coordination_readiness.py",
+      "source_sha256": "be25ec1f37392f63f415494a29b9e3893f1c2bc5eb7b9ac25aaac53953d04d25",
+      "bytes": 3109,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_duty_scope_boundaries.py",
+      "source_sha256": "46d87c21e6f4696f9e47138a4f57d1effcbab64a1142753e87af411bc0c5ea12",
+      "bytes": 12603,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_duty_scope_integration.py",
+      "source_sha256": "4ca90703f2c835ac8c5a4f675dd29705d1134cf8b73f5638da3418033282317f",
+      "bytes": 18184,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_duty_scope_parser.py",
+      "source_sha256": "6eb452b22267ce1f617f76053dfa16dc077ee88c118bf3095d43f9e77ecc8225",
+      "bytes": 6683,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_duty_scope_readiness.py",
+      "source_sha256": "f6e02633ce4bc91180ccf0af24e28665c40f38dfd059857ef8e6034bbf59b699",
+      "bytes": 6666,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_formula_omission_integration.py",
+      "source_sha256": "480600af79998ae9e3e0fb377dff0729667ae14f55ca1fd32b3b6f5797b2a5b7",
+      "bytes": 9565,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_formula_omission_readiness.py",
+      "source_sha256": "cfaf82e590a4b093dc139e3f6c77404cfb7395e5ddc238e65b8f33dcaa56dc51",
+      "bytes": 9568,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_grouped_coordination.py",
+      "source_sha256": "2b4fc660b36fa90200f499505c8e85f5476ead3f4fde18b5c3a52724fcbc2c3a",
+      "bytes": 12029,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_grouped_coordination_boundaries.py",
+      "source_sha256": "5f978dbbb03cab75ac68e0f27792931ea3e00e70f9cfa7323ccfcc783a71ffac",
+      "bytes": 16633,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_inline_exception_boundaries.py",
+      "source_sha256": "a9c21793c45c5ceb49117dc2a95ea20b840042d1af7b46a46fd92cff38f2f50c",
+      "bytes": 13601,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_inline_exception_integration.py",
+      "source_sha256": "c7334cabba4de9d6d907dc08fb2b12a89598877fdc82ce2bc8ee696006db0ace",
+      "bytes": 11478,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_inline_exception_parser.py",
+      "source_sha256": "5568520ada60db9e760fc8ed2624dae83bb60607ad1aec26c5842380c4d70b0b",
+      "bytes": 6107,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_inline_exception_readiness.py",
+      "source_sha256": "9245a022b2e4e6eb5669a292c1661d19810c3844e89f6e7e22f42d62828fcf94",
+      "bytes": 5053,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_override_condition_fidelity.py",
+      "source_sha256": "6a2cf9ddde11e280010121923f6c67b2843c003021ffddfdc1b5c21f6df40832",
+      "bytes": 9461,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_persisted_override_readiness.py",
+      "source_sha256": "5d06d5bdc2e1253afb2e8ccb6e7f34c148b0c68d560f2fd2bf8a9a9b491d595d",
+      "bytes": 5180,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_procedure_decoder_overlap.py",
+      "source_sha256": "0b709bcaa2d5053dd2e0441683114898f4a9325153f28838ad274aedca1d0b86",
+      "bytes": 7341,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_procedure_source_fidelity.py",
+      "source_sha256": "4b00b5ad31953f108eefe06488f4319aadb227745fc238c88d251cda918f3dc2",
+      "bytes": 14001,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_qualifier_procedure_integration.py",
+      "source_sha256": "e4cc9ec12b3372ff251063a0a38641f299e6af0405d54a5c3f5fdf063b73e6b1",
+      "bytes": 9196,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_reference_list_boundaries.py",
+      "source_sha256": "4bee04f9a1f87163dc1f9b8d6e02002f0735b48bf7c6b4f14f2a42b7f4fa315c",
+      "bytes": 9742,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_reference_list_integration.py",
+      "source_sha256": "31abf7c51cc99a3edffd21b946bcacb395f245b31f25f50e9ca8d9e974f949ed",
+      "bytes": 7207,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_reference_list_ir.py",
+      "source_sha256": "c2dc1db2fe2b264cbcdec88c5fb078eff0141b6444e8fc4782c6552ce704b94d",
+      "bytes": 3014,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_reference_list_parser.py",
+      "source_sha256": "81c6b068b623839fac301dc873f3a84228aa2d1cb6629112d26ee389cecc4962",
+      "bytes": 6171,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_reference_readiness.py",
+      "source_sha256": "c03f2f8d6a32939118c156bcf0c5d535a5143b6bc3838591d43731a6d3feafea",
+      "bytes": 4373,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_reference_readiness_integration.py",
+      "source_sha256": "d69323424947ab2cb0a23b458d8b188d2b024184dcef53a58c6e4c9e512baadf",
+      "bytes": 9916,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_reference_resolution_boundaries.py",
+      "source_sha256": "d24dd1913cbcd9a36b048b2ea6bb577def3e4043c375782280cfa179f03df664",
+      "bytes": 11265,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_source_quality_metrics.py",
+      "source_sha256": "a8f642f8f86918a03c06ac675d264b58c6729857c5d7cb2abe7be794f4183f37",
+      "bytes": 7893,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_legal_coordination_compiler.py",
+      "source_sha256": "cc04044899a8169feda13dcd6825f01275d4b205663d0ece8f7f391666c77e19",
+      "bytes": 4775,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_legal_coordination_evaluation.py",
+      "source_sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0",
+      "bytes": 5682,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_legal_grouped_coordination_integration.py",
+      "source_sha256": "3b3bd69982fab615d653207e1835c6e94a4800fcfc83e242414e8916ff85c736",
+      "bytes": 8010,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_legal_grouped_decoder_integration.py",
+      "source_sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea",
+      "bytes": 9537,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_integration.py",
+      "source_sha256": "628657cadeb058c0772bbcc4a1a48623a15e3f34b98fa7db737fadd5d0b34779",
+      "bytes": 11246,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_integration.py",
+      "source_sha256": "2dec33cccde0709f55db4e1ce27173b09f132abae2d0149b311978befb6c69b9",
+      "bytes": 11843,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_temporal_occurrence_session.py",
+      "source_sha256": "8fdb4f775358e209d16011a168eadc0235de3270815a9e059703766e011e7efb",
+      "bytes": 14870,
+      "main_preimage_sha256": null,
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "docs/autoencoders/inference_and_qualification.md",
+      "source_sha256": "de591d05db47c02964735f8e294543e278197eee4f64109824485cc3562c5598",
+      "bytes": 52229,
+      "main_preimage_sha256": "04e197bb57d4ad258c9907fc00a8011d0fad7c7ea333085bcc263431733218c6",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "ipfs_datasets_py/logic/deontic/decoder.py",
+      "source_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa",
+      "bytes": 35370,
+      "main_preimage_sha256": "051a5e7a98ef2cf8a63326218cebeabcca2c528f6839a1a3cb11756ee7c1aab9",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "ipfs_datasets_py/logic/deontic/exports.py",
+      "source_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc",
+      "bytes": 226780,
+      "main_preimage_sha256": "ac46bf1efa79925620199b56f6f1dbde34c92889a0a2a474cc6b9e408ea3c3de",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "source_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23",
+      "bytes": 425746,
+      "main_preimage_sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "ipfs_datasets_py/logic/deontic/ir.py",
+      "source_sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d",
+      "bytes": 132048,
+      "main_preimage_sha256": "a6bafa2aa4b1e8d9c368d4c4354e56b924888d43eb1f817c11058767f17f3416",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "ipfs_datasets_py/logic/deontic/metrics.py",
+      "source_sha256": "f96a8fc71278c9573e58449aedea687aba99cdbadf2f3336a739dd731226c6fe",
+      "bytes": 15888,
+      "main_preimage_sha256": "5a2f92bc24154e14d3d2e3b6e73dcc128e6183957b5832b9bc1d72e60f7370da",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "source_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec",
+      "bytes": 337171,
+      "main_preimage_sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit/logic/test_deontic_ir.py",
+      "source_sha256": "6b12f10fc4e6f1286d2a7b7da43eeca9fa6489fe6f531d9414c6d9f300fb433a",
+      "bytes": 7614,
+      "main_preimage_sha256": "84750fc3678f97054d70a77602aa63d2692e082965e63c2acd6960d6f144ae93",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit_tests/logic/deontic/test_deontic_decoder.py",
+      "source_sha256": "35ae221066b397af2a49a9203f9e605d524eb4d5ef65ffb36425211913c85205",
+      "bytes": 30883,
+      "main_preimage_sha256": "90b22896ee88c5899cc74c7aee46e346ec46354131918248495c3447f3568899",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit_tests/logic/deontic/test_deontic_export_capability_profiles.py",
+      "source_sha256": "ec54bd4ef392497fca789daa922b3fcac1cd0e00f73ab4d22247f3e43484c44c",
+      "bytes": 31510,
+      "main_preimage_sha256": "1dd6534b66d938f1ca96ecdb995b41cc41c75209c1184aed4cc5fdaa67af4616",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit_tests/logic/deontic/test_deontic_exports.py",
+      "source_sha256": "02a59755a3118435316b75faa494bf492bd4a7d7668ca36252e3a18d92f9d44f",
+      "bytes": 333227,
+      "main_preimage_sha256": "ac1d7400b9bd7263d63c1dad8defa07384df1de55dcf73ed4e494d378bc07f3c",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit_tests/logic/deontic/test_deontic_formula_builder.py",
+      "source_sha256": "74af98575585567648292dbe981aabfd1ecfe3442c0279d9da9b5388c06622cc",
+      "bytes": 439982,
+      "main_preimage_sha256": "6b5407148beb6cd0fe3fa0bb3666c8147823c6096221efbbfe6f465f85677c3e",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit_tests/logic/deontic/test_deontic_parser_metrics.py",
+      "source_sha256": "088b84e96c9727947f3e0e3639fb77c52b3dfa669edc76a2ab2bb373b5137260",
+      "bytes": 10564,
+      "main_preimage_sha256": "7e8fb0ae0ac3eadc9ddd23290cf6174db3b986e87bf5cc239ca7bbcc63819e92",
+      "integrated_as_runtime": false
+    },
+    {
+      "path": "tests/unit_tests/logic/deontic/test_legal_norm_ir.py",
+      "source_sha256": "801d82ffef06cd7dbd06754bacbd7806c6a102efb1029ae9fb0f274610e29354",
+      "bytes": 21348,
+      "main_preimage_sha256": "063238dd245ad49e8551c7f8b5daaa66ba5262aed846b48cdcbf2c13dbbf203e",
+      "integrated_as_runtime": false
+    }
+  ],
+  "file_count": 54,
+  "bytes": 2482032,
+  "source_semantics_verified": false,
+  "production_promotion": false
+}

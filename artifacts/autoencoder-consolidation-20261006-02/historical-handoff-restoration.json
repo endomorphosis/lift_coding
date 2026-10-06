@@ -1,0 +1,80 @@
+{
+  "schema": "autoencoder-historical-handoff-restoration/v1",
+  "source_audit_sha256": "c8ce67d8b92d93ec5c7f3940c7a05e3772a39017bad984864d1c70e1d97e04f7",
+  "target": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "candidate": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration",
+  "exact_restored_blobs": [
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json",
+      "source_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "blob": "b47142ea3288ce9bcca56ddefc6a2f7d1fea9f0b",
+      "sha256": "ea4cd3a66bf3fa9134a88c6dbd143f75369aa4708e544e08c3dbfd0aa7c8d1b7",
+      "bytes": 7188
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md",
+      "source_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "blob": "100405a1d45d779c351fb3855036d866caa8bad9",
+      "sha256": "56b913587a21dd44e97e19ffff5d2be826da2aaa2e87dc598727c56f8b89e08c",
+      "bytes": 12776
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json",
+      "source_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "blob": "4ac1418559a884fe0beaf8cb2f8095bb0b38570d",
+      "sha256": "6fde5a8adaa68730058679722e4ec521312ac725033dc1f4395cbf5bc49c6246",
+      "bytes": 12408
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md",
+      "source_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "blob": "cfc21f594a3ccc3ada3a498d72eb1870a34426a4",
+      "sha256": "52d0459199e9b1819f2c897b565772ffa4debab37296bc5b76831a021e2e43f7",
+      "bytes": 9629
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json",
+      "source_commit": "7732a5808828083afb1cd19d126d987991136375",
+      "blob": "cb59ad2049a3d3fc4ff97a3620d8d76acc6a5785",
+      "sha256": "bd37dc85cd23f36b1bcf30695ae3bb56674bac139ce01c0f0466cb024daa3291",
+      "bytes": 28691
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md",
+      "source_commit": "7732a5808828083afb1cd19d126d987991136375",
+      "blob": "3d1cc46bd62a394b8afd2a324a964884abd11f56",
+      "sha256": "c0f1ee29a0d188ffb0750cb2b06e6f38abda6d8065db0e33035b5a2b0bf667b4",
+      "bytes": 13148
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json",
+      "source_commit": "7732a5808828083afb1cd19d126d987991136375",
+      "blob": "dd1e119e562913d98ccd33c6eb441d61d184cedd",
+      "sha256": "ba05379dda8d7215d0c907b78b18e85dec703f6d98923a5da8c46388f908da60",
+      "bytes": 53630
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md",
+      "source_commit": "7732a5808828083afb1cd19d126d987991136375",
+      "blob": "e13790db64a384696f5efc8012333c0f261eadae",
+      "sha256": "24f44c8351d273e50bcb41f6d684a1ab742d3326dde8904769c1062dea2482f1",
+      "bytes": 12577
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json",
+      "source_commit": "7732a5808828083afb1cd19d126d987991136375",
+      "blob": "a117902515364f93ede0a3b252b9f368c6bcb3e0",
+      "sha256": "035578e2629d1b728fbfae8b177ab23a2ca628ef428a8a376451fdb34d5924e9",
+      "bytes": 22303
+    },
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md",
+      "source_commit": "7732a5808828083afb1cd19d126d987991136375",
+      "blob": "d1fbf99cd843f4923ea5d8c5420c62893868dcd4",
+      "sha256": "e1d61c57126a5e4553296d8a0758654bdf4d398d59efecfdc5bc62a4122a8615",
+      "bytes": 8806
+    }
+  ],
+  "runtime_files_changed": false,
+  "historical_not_current_qualification": true
+}

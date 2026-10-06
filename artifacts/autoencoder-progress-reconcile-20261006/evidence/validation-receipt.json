@@ -1,0 +1,20 @@
+{
+  "schema": "autoencoder-evidence-catalog-validation/v1",
+  "passed": true,
+  "primary_git_sources_byte_blob_hash_verified": 56,
+  "entries": 20,
+  "new_published_evidence_lanes": 4,
+  "original_entries_hash_verified": 16,
+  "four_unique_wording_endpoint_tensors": true,
+  "contextual_parent_to_wording_initialization_joins_verified": true,
+  "selected_last_aliases_verified": true,
+  "distinct48_and60cohort_counts_verified": true,
+  "no_fresh_semantic_holdout_or_lake_authority_in_new_fit": true,
+  "actual_models_executed": false,
+  "git_mutations": false,
+  "artifact_sha256": {
+    "evidence-review.json": "e26d4d7395d3af9d936ad33af50f141ab9d99578c8f29ddc9c3a321662c31ddb",
+    "build_evidence_review.py": "163ed1a84965e5f472cf145b2a1260eea58194afbba6438d0415a0448287f7d4",
+    "evidence-review.md": "4eafc50fd4ff4135c9205e769fa20b21cb6f0236f3286e6e1d5f4a2144cfaa08"
+  }
+}

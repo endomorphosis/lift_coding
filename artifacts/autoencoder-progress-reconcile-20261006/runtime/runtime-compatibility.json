@@ -1,0 +1,534 @@
+{
+  "schema": "autoencoder-runtime-compatibility-audit/v1",
+  "created_at": "2026-10-06T14:05:49.156949+00:00",
+  "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+  "source_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "working_head_at_review": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+  "inspection_scope": "Pinned published Git source and bounded live source bytes; no source or Git edits, numerical imports, model loads, weight reads, databases, networks or suite reruns.",
+  "owner_dependency_and_addition_survey": [
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 36421,
+      "main_sha256": "e9191bcbca77d7e73830bc7096ceb719288e18493cb3c30db35843fbf5c0238e",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 15840,
+      "main_sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/dimension_native_decoder_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 11090,
+      "main_sha256": "477e09a731880cf4d93f322f81c3cd084f6d9be875eac5c3b912255cb0876874",
+      "live_exists": true,
+      "live_bytes": 11090,
+      "live_sha256": "477e09a731880cf4d93f322f81c3cd084f6d9be875eac5c3b912255cb0876874",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment_v2.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 13794,
+      "main_sha256": "0352c392a518c9ea6ff215c32e5ddd6345d776e2bb32f22fd137b5e34d93c6c6",
+      "live_exists": true,
+      "live_bytes": 13794,
+      "live_sha256": "0352c392a518c9ea6ff215c32e5ddd6345d776e2bb32f22fd137b5e34d93c6c6",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/projected_source_decoder_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 25942,
+      "main_sha256": "ce4354a96324285bff08277c3fac43e9885a75e84a50337414f7dea8501af3ee",
+      "live_exists": true,
+      "live_bytes": 25942,
+      "live_sha256": "ce4354a96324285bff08277c3fac43e9885a75e84a50337414f7dea8501af3ee",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/clause_source_decoder_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 21833,
+      "main_sha256": "004d432d16a2819eb46a95743d58c26443cc32737311ea8553c5019127f97603",
+      "live_exists": true,
+      "live_bytes": 21833,
+      "live_sha256": "004d432d16a2819eb46a95743d58c26443cc32737311ea8553c5019127f97603",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/action_factorized_clause_decoder_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 19729,
+      "main_sha256": "81145f156594f28a0fc5ccec2d078a6188bb4af0a6fed826a69074116e1aa43e",
+      "live_exists": true,
+      "live_bytes": 19729,
+      "live_sha256": "81145f156594f28a0fc5ccec2d078a6188bb4af0a6fed826a69074116e1aa43e",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 26392,
+      "main_sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da",
+      "live_exists": true,
+      "live_bytes": 26392,
+      "live_sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 37989,
+      "main_sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61",
+      "live_exists": true,
+      "live_bytes": 37989,
+      "live_sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_cardinality_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 14873,
+      "main_sha256": "44f1d91edb8f8cc8bafdc517ab450a003fece945d2e9a25bba933da2e9e12ac1",
+      "live_exists": true,
+      "live_bytes": 14873,
+      "live_sha256": "44f1d91edb8f8cc8bafdc517ab450a003fece945d2e9a25bba933da2e9e12ac1",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/shared_slot_source_decoder_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 20524,
+      "main_sha256": "4a2fec44a1d8756c212a2e64cad774919aed1f8c12b3741c6608e2dd35c7f0d1",
+      "live_exists": true,
+      "live_bytes": 20524,
+      "live_sha256": "4a2fec44a1d8756c212a2e64cad774919aed1f8c12b3741c6608e2dd35c7f0d1",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 14958,
+      "main_sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e",
+      "live_exists": true,
+      "live_bytes": 14816,
+      "live_sha256": "dcc63a3bd10c1a699fbd0addfb44a04ffab8cbf6b4594164bb4ed824bdb5dbf1",
+      "live_equals_main": false
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 14249,
+      "main_sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6",
+      "live_exists": true,
+      "live_bytes": 14249,
+      "live_sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_output.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 13756,
+      "main_sha256": "0477aaa5222523e27f4010644ad5bfac67720a793fcccc53b48593e4321c31a7",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_source_fidelity.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 17329,
+      "main_sha256": "1eb1f116e74f4f35804b6398de9b9224da1fb7b50f9ef96a718ce2977f819bac",
+      "live_exists": true,
+      "live_bytes": 17329,
+      "live_sha256": "1eb1f116e74f4f35804b6398de9b9224da1fb7b50f9ef96a718ce2977f819bac",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 97,
+      "main_sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073",
+      "live_exists": true,
+      "live_bytes": 97,
+      "live_sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 109257,
+      "main_sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+      "live_exists": true,
+      "live_bytes": 109257,
+      "live_sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 13437,
+      "main_sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64",
+      "live_exists": true,
+      "live_bytes": 13437,
+      "live_sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/legal_ir/__init__.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 2708,
+      "main_sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1",
+      "live_exists": true,
+      "live_bytes": 2708,
+      "live_sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1",
+      "live_equals_main": true
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 12563,
+      "main_sha256": "1b83e9ef3baec6f3d9b12d32179c9520229c45c471f1d7b299496e8d4f744e62",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime_adversarial.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 27539,
+      "main_sha256": "6213be7010a7dbfebadb0b29f786513d9be9a34a39a0b3d8a6f0f5d3af9828ce",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_numeric.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 11167,
+      "main_sha256": "a12691031cb0ac91c9886ff396c6671a160aec1b3ec8e02dfaa6651533be58df",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_output.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 10987,
+      "main_sha256": "7e2ed28f2795b0736eac77a550d9cecfecc37aa711b532c574b94b7a5da92cea",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    },
+    {
+      "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 14867,
+      "main_sha256": "fb2059be730ef00f485b1344bff600f3acb309b96cee55d2e9378ae87f2ac598",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    }
+  ],
+  "reference_source_pins": [
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 29300,
+      "main_sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b",
+      "live_exists": false,
+      "live_bytes": null,
+      "live_sha256": null,
+      "live_equals_main": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_decoder_profile_inventory.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 20396,
+      "main_sha256": "bc8aab1ba3a53b91c0e39fc813983657e52e07118a14c0d65c3c4e2aa660face",
+      "live_exists": true,
+      "live_bytes": 20396,
+      "live_sha256": "bc8aab1ba3a53b91c0e39fc813983657e52e07118a14c0d65c3c4e2aa660face",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_cell_runtime.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 15209,
+      "main_sha256": "673702cc415b37d9597bbe5ccf259717d77f8335a0c2269265cddc4dff49ffdd",
+      "live_exists": true,
+      "live_bytes": 15209,
+      "live_sha256": "673702cc415b37d9597bbe5ccf259717d77f8335a0c2269265cddc4dff49ffdd",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_decoder_format_runtime.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 22669,
+      "main_sha256": "e5521f573a5d592c2f452742c827104fe613d227591a04ab255ec46b2d34e33b",
+      "live_exists": true,
+      "live_bytes": 22669,
+      "live_sha256": "e5521f573a5d592c2f452742c827104fe613d227591a04ab255ec46b2d34e33b",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/native4096_formula_sidecar_experiment.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 13448,
+      "main_sha256": "d76e22e6ffa8459e579bc5795d9bb9b742cb679d34e937989f1565071941518a",
+      "live_exists": true,
+      "live_bytes": 13448,
+      "live_sha256": "d76e22e6ffa8459e579bc5795d9bb9b742cb679d34e937989f1565071941518a",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 58156,
+      "main_sha256": "ca31983a5f514c7f5cf8b1b9250ef92e1beb13c0a2305381aac575931e79b4ac",
+      "live_exists": true,
+      "live_bytes": 58156,
+      "live_sha256": "ca31983a5f514c7f5cf8b1b9250ef92e1beb13c0a2305381aac575931e79b4ac",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_lineages/legacy_v1/linguistic_teacher.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 19650,
+      "main_sha256": "529b7758fe2db751a9ae37bc50a6b8c8126c6b12b4d344cf1cb61324a5e2c869",
+      "live_exists": true,
+      "live_bytes": 19650,
+      "live_sha256": "529b7758fe2db751a9ae37bc50a6b8c8126c6b12b4d344cf1cb61324a5e2c869",
+      "live_equals_main": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_family_training_validated_v5.py",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 23641,
+      "main_sha256": "c17b0ea27bbde64d2dd3a71121c984086f92a037343fb8e3a675b5b6715d0054",
+      "live_exists": true,
+      "live_bytes": 23641,
+      "live_sha256": "c17b0ea27bbde64d2dd3a71121c984086f92a037343fb8e3a675b5b6715d0054",
+      "live_equals_main": true
+    },
+    {
+      "path": "docs/autoencoders/formula_fleet.md",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 7745,
+      "main_sha256": "abbeb71b29a0ff74119a671e93eb3dce2b6eab0bb90514cceb25a7879085cf88",
+      "live_exists": true,
+      "live_bytes": 7745,
+      "live_sha256": "abbeb71b29a0ff74119a671e93eb3dce2b6eab0bb90514cceb25a7879085cf88",
+      "live_equals_main": true
+    },
+    {
+      "path": "docs/autoencoders/control_plane_and_sync.md",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 37068,
+      "main_sha256": "3230e8b9e0d587bcdf25fd77ee2519f122409e3c158c5fd73d1f7bec0752b348",
+      "live_exists": true,
+      "live_bytes": 37068,
+      "live_sha256": "3230e8b9e0d587bcdf25fd77ee2519f122409e3c158c5fd73d1f7bec0752b348",
+      "live_equals_main": true
+    },
+    {
+      "path": "docs/autoencoders/logic_output_requirements.md",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 13166,
+      "main_sha256": "0a948378713e3533c7468751ad31e39817f17b17fe433073cac5a0a732a513bf",
+      "live_exists": true,
+      "live_bytes": 13166,
+      "live_sha256": "0a948378713e3533c7468751ad31e39817f17b17fe433073cac5a0a732a513bf",
+      "live_equals_main": true
+    },
+    {
+      "path": "docs/autoencoders/normative_wording_training.md",
+      "main_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "main_bytes": 13198,
+      "main_sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19",
+      "live_exists": true,
+      "live_bytes": 13198,
+      "live_sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19",
+      "live_equals_main": true
+    }
+  ],
+  "patch": {
+    "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+    "exact_import_relocation_only": true,
+    "calculation_ast_unchanged_after_import_relocation": true,
+    "diff_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/runtime/source_value_lazy_import.diff",
+    "contract": "reference_weights is imported only inside reference_source_values. Cached numerical inference does not need the historical training/reference owner; explicitly calling training reference preparation retains its original import and call."
+  },
+  "contextual_contract": {
+    "family": "legal_ir",
+    "dimensions": [
+      384,
+      768
+    ],
+    "dimension_role": "input_embedding",
+    "task_id": "semantic_IR_reconstruction",
+    "prepare": "prepare_contextual_legal_ir_runtime(request, checkpoint_pin, preprocessing_pin, donor_checkpoint_pin, source_inputs_pin, source_contexts_pin, source_owner_pins, row_ids)",
+    "open": "open_contextual_legal_ir_autoencoder: explicit lazy CPU numerical restoration; describe and infer_cached only",
+    "inputs": "Original cached normalized paragraph vectors and original ordered raw clause vectors with literal source spans; source binding, saved TRAIN transform, full selected 32 tensors and raw384 13-tensor donor are authenticated.",
+    "budgets": {
+      "rows": 64,
+      "source_clauses": 8,
+      "decoder_output_tokens_including_BOS_EOS": 512,
+      "cpu_threads_caller_owned": 1,
+      "dtype": "float32",
+      "device": "cpu"
+    },
+    "outputs": "Raw token/status/EOS candidates. Separate output owner validates actual CanonicalRoundTripIR and scores ordered IR, canonical IR and original text independently.",
+    "reference_access": "Generation accepts no gold prefix, reference IR, labels or rule count. Evaluation is separate.",
+    "authority": "Native format/profile identities remain null; complete_runtime_io_contract, teacher, production runtime, fresh holdout, learned prose and proof authority remain false.",
+    "unsupported": [
+      "fresh source or embeddings",
+      "8D",
+      "4096D",
+      "other families",
+      "training/resume",
+      "automatic ModelManager serving dispatch",
+      "8-family promotion",
+      "Lake admission",
+      "8192-token span qualification"
+    ]
+  },
+  "integration_map": [
+    {
+      "owner": "ir_model_manager_import.py",
+      "relationship": "Metadata-only injected genuine ModelManager registration with independently reopened persisted readback; asset/component identity is separate from serving selection. Dimension8/384/768 concrete bindings and null-dimension source-token components;4096 cannot become an allowed lane merely by renaming metadata. runtime_ready/teacher/proof remain false."
+    },
+    {
+      "owner": "autoencoder_runtime_registry.py",
+      "relationship": "Common domain/version API knows legacy8D, current384D, published384 source packages, separate legal source-text formula lineage and compiler-structural native formula lineages. Contextual cached384/768 is not a version of any listed profile and has no exact-resume adapter."
+    },
+    {
+      "owner": "LegacyLinguisticTeacher",
+      "relationship": "Explicit original8D linguistic model plus bounded canonical compiler observations; parser features and target caches remain supervised/guided observations. No contextual384/768 automatic teacher promotion or tensor migration."
+    },
+    {
+      "owner": "ir_decoder_profile_inventory / ir_decoder_format_runtime",
+      "relationship": "Stable supported profiles currently only exact original Intent/Security384 fragment bindings. Contextual Legal384/768 explicitly has unknown native schema/profile/format; do not force its state serialization schema into a native profile."
+    },
+    {
+      "owner": "native4096_formula_sidecar_experiment.py",
+      "relationship": "Separate4096 pilot requires a live full native-owner result, reuses donor token embedding/GRU/readout only, and creates new source heads. Its project returns identity explicitly; zero reconstruction MSE is not learned reconstruction or autoformalization progress."
+    },
+    {
+      "owner": "autoencoder_family_training_validated_v5.py",
+      "relationship": "Validated native-v7 feature training requires live complete projections and source-disjoint batches, with no source-text decoder objective. These states and targets cannot be fed directly into contextual sequence checkpoints."
+    },
+    {
+      "owner": "shared Arrow / DuckDB / Quack",
+      "relationship": "Shared prepared targets, mapped Arrow features and sparse modal updates support owned feature campaigns with exact checkpoint/source identities. Formula fleet is separate exact-resume full checkpoint exchange, one DuckDB owner/scoped Quack leases and actual decoded-output Lake replay. Contextual runtime opens none of these stores; publication is not transactional training synchronization."
+    }
+  ],
+  "prior_closure": {
+    "receipt": "/home/barberb/lift_coding/artifacts/autoencoder-integration-review-20261006/branches/test-receipts.json",
+    "receipt_sha256": "653fcd3d8b01e867da568ad65b235e26cd512bc7840c203804226e5430824616",
+    "canonical_unique_tests_passed": 928,
+    "receipts_reused_not_rerun": [
+      {
+        "attempt": "profile-canonical-tests-r1",
+        "xml_sha256": "875d2d5edff2b33bf27dcb6cae276f11017fcd66b3f44014af6b67caa5edd386",
+        "log_sha256": "574a87b17343c98100707ceb7b059960d023511b4bb12a3e9037f50a3a654418",
+        "tests": 129.0,
+        "failures": 0.0,
+        "errors": 0.0,
+        "skipped": 0.0,
+        "time": 36.456
+      },
+      {
+        "attempt": "ir-wrapper-canonical-tests-r1",
+        "xml_sha256": "a23a606a5d0e64eea32d0528bb5813a9ae8b19f2225fd3cfedb0b2cdb605f5e6",
+        "log_sha256": "bdd2684f9013de31a882edb0c0dc19e5d112c573de4c0a45209ba688525bfa6d",
+        "tests": 774.0,
+        "failures": 0.0,
+        "errors": 0.0,
+        "skipped": 0.0,
+        "time": 8.664
+      },
+      {
+        "attempt": "checkpoint-hub-existing-tests-r1",
+        "xml_sha256": "1f30838a240f11fc034c0f886de3ce15116c5a344534f48af9b0eb27ec45acb7",
+        "log_sha256": "6c9964ec41dcf7a8e3015891a3d0612bcdf9e8f1f393d6935f7bc0ade264cae8",
+        "tests": 25.0,
+        "failures": 0.0,
+        "errors": 0.0,
+        "skipped": 0.0,
+        "time": 0.354
+      }
+    ],
+    "scope": "129 profile closure +774 original wrapper closure +25 existing checkpoint-Hub controls. No models or Lean admission. This is older5171a632-era closure, not validation of the newly added contextual runtime."
+  },
+  "bounded_integration": {
+    "action": "Materialize only absent published contextual modules, dedicated tests and guide into canonical workspace; apply exact guarded lazy reference import delta only if preimage still matches.",
+    "additions": [
+      "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_output.py",
+      "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+      "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime_adversarial.py",
+      "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_numeric.py",
+      "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_output.py",
+      "docs/autoencoders/contextual_legal_reconstruction_runtime.md"
+    ],
+    "existing_patch": "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+    "source_compatibility": "Ten existing numerical owners and three direct output dependencies are byte-identical published main; only source-value import placement differs.",
+    "source_mutation_owner": "root agent; this audit wrote only its runtime artifact directory",
+    "verification_required": [
+      "Hash every materialized file against pinned795d960 and retain before/after source-value SHA; refuse existing-path clobber.",
+      "Run dedicated pure metadata/adversarial/output test files in canonical workspace with minimal imports, no auto-install, offline flags and plugin autoload disabled. Assert complete metadata fixture imports no ML/database/network owner.",
+      "Run fresh-process numerical._owners() import probe with historical training/reference, manager/database, encoder and network imports blocked. Calling _owners imports no models; it verifies lazy training import closure.",
+      "Keep numeric original-asset regression receipts as prior evidence. No model reload, training or archived weight read is needed for this materialization.",
+      "No retest of old774/129/25 green closures absent new dependency changes."
+    ]
+  },
+  "new_verification": {
+    "static_import_relocation_check_passed": true,
+    "static_calculation_AST_check_passed": true,
+    "pure_pytest_executed_by_this_audit": false,
+    "model_or_encoder_forwards": 0,
+    "training_runs": 0,
+    "Lake_calls": 0,
+    "qualification_granted": false
+  },
+  "remaining_disconnected_interfaces": [
+    "Canonical workspace lacked contextual entry points despite published GitHubmain containing them; bounded materialization fixes this source availability gap.",
+    "Common registry, ModelManager metadata and decoder-profile inventories do not supply contextual training/resume/serving qualification. New adapter would require exact task and state contracts; no silent routing now.",
+    "Legal semantic IR erases original prose choices. Deterministic source-withheld renderer is a separate canonical baseline;48/48 semantic exactness coexists with0/48 original text byte equality.",
+    "Original contextual48-row regression, separate modality paraphrase panels and normative TRAIN/DEVELOPMENT controls have distinct checkpoint/source populations; merging scores cannot establish broader semantic coverage.",
+    "Actual source-bound family and Lake gates remain required before formalization/proof admission."
+  ],
+  "expanded_additive_review": {
+    "source_schema_files": 89,
+    "dedicated_tests": 82,
+    "test_support": 1,
+    "python_sources_tests_compiled_without_import": 171,
+    "manifest": "additive-closure-review.json",
+    "validation": "additive-static-validation.json",
+    "guides": "additive-guide-pins.json",
+    "existing_dependency_blockers": [
+      "codebase_resources.codebase_admission_timeout and upstream scheduler proof-resource profile",
+      "security_formalization_evaluation._function_line_index"
+    ],
+    "source_mutations_by_audit": 0
+  }
+}

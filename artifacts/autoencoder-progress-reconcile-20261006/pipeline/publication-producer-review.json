@@ -1,0 +1,621 @@
+{
+  "schema": "independent-autoencoder-publication-producer-review/v1",
+  "passed": true,
+  "findings": [],
+  "checks": [
+    {
+      "id": "exact-five-datasets-paths",
+      "passed": true,
+      "detail": "Exactly two grouped LegalIR interface modules, two dedicated test modules and the reconciliation guide are selected; recovered published sources are not republished as edits."
+    },
+    {
+      "id": "exact-workspace-selection",
+      "passed": true,
+      "detail": "Working-copy audit, its tests, implementation-plan note and the bounded named reconciliation artifacts are selected. The producer review itself is retained."
+    },
+    {
+      "id": "explicit-independent-sealed-scope-gate",
+      "passed": true,
+      "detail": "Production requires passed/findings-empty reviews and exact SHA sealing of the selected final scope, which is a separate later review."
+    },
+    {
+      "id": "private-index-upstream-preservation",
+      "passed": true,
+      "detail": "Fresh alternate index begins at fetched main; only whitelisted approved/preimage-bound bytes replace entries. Foreign upstream progress remains and ordinary HEAD/index snapshots are checked before and after publication."
+    },
+    {
+      "id": "nonforce-remote-race-guard",
+      "passed": true,
+      "detail": "Push is non-force, based on the current fetched descendant; changed remote main and selected-path preimages refuse. No push is executed by this review."
+    },
+    {
+      "id": "explicit-datasets-gitlink",
+      "passed": true,
+      "detail": "Workspace publication adds only the exact verified datasets commit gitlink, requires its live remote identity and preserves ancestry from the prior workspace pointer."
+    },
+    {
+      "id": "closed-regular-literal-paths",
+      "passed": true,
+      "detail": "Closed relative paths, literal Git pathspecs, regular-file and parent-alias checks prevent path expansion/out-of-repository selection."
+    },
+    {
+      "id": "synthetic-receipt-current-publisher",
+      "passed": true,
+      "detail": "Retained synthetic receipt binds the exact current publisher bytes."
+    },
+    {
+      "id": "six-synthetic-cases",
+      "passed": true,
+      "detail": "Both private-index successes preserve upstream foreign progress and unrelated staged work; changed preimages/candidates/scope and unsafe paths refuse. Remote operations are mocked."
+    },
+    {
+      "id": "archive-excludes-mirrors-fixtures-pipelines-indexes",
+      "passed": true,
+      "detail": "Full coordination source closure, synthetic fixtures, caches, pipeline future receipts, indexes and binary tensor extensions are excluded. Small reviewed preimage/diff/proposal code remains evidence; the private retention extension is deliberate bounded review source."
+    },
+    {
+      "id": "raw-worktree-status-inventories-excluded",
+      "passed": true,
+      "detail": "The two large raw ref/worktree status inventories are now excluded; scoped summarized branch/equivalence findings remain retained."
+    },
+    {
+      "id": "bounded-deterministic-evidence-archive",
+      "passed": true,
+      "detail": "Evidence archive enforces4MB per member/15MB aggregate, fixed timestamps/modes and exclusive new output. This review does not create the archive or scope."
+    },
+    {
+      "id": "current-prospective-archive-bounds",
+      "passed": true,
+      "detail": "Prospective current members meet bounds; actual archive members/hashes require the later exact scope review after sealing."
+    },
+    {
+      "id": "no-numerical-or-mirror-publish-scope",
+      "passed": true,
+      "detail": "Published selected paths contain no trained tensor files, model mirrors or raw status inventories. Hash identities in bounded evidence are metadata."
+    },
+    {
+      "id": "no-producer-execution",
+      "passed": true,
+      "detail": "AST/source inspection and existing synthetic receipt review only; no archive/scope creation, staging, fetch, commit, push, model, compiler, database or prover execution occurred."
+    }
+  ],
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/build_publication_scope.py": {
+      "bytes": 4842,
+      "sha256": "08b89c6c66a00963bb99963f8a25d2cf7e1f1f121e913e3faa16af71b7d14f29"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/publish_integration.py": {
+      "bytes": 7603,
+      "sha256": "e4f33ca68c1902aea71e07f21605b86562c8483b6131411e4dc73d7d18ca67c9"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/publisher_review_tests.py": {
+      "bytes": 9293,
+      "sha256": "5fd6af5937d5f6ff30e3d645c76d051b22c59f07920e8a9d3a01b18f858d47a8"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/pipeline/publisher-synthetic-validation.json": {
+      "bytes": 1892,
+      "sha256": "cd090a24757284cd40c9cf33b9d8bbd6249b48a530982c2a597dc400d04c7e2a"
+    }
+  },
+  "reviewed_at": "2026-10-06T14:49:19.798758+00:00",
+  "datasets_declared_paths": [
+    "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+    "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+    "tests/unit/logic/test_deontic_grouped_decoder.py",
+    "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+    "docs/autoencoders/progress_reconciliation_20261006.md"
+  ],
+  "workspace_declared_paths": [
+    "scripts/review_autoencoder_progress.py",
+    "tests/test_review_autoencoder_progress.py",
+    "implementation_plan/docs/59-autoencoder-progress-reconciliation-2026-10-06.md",
+    "artifacts/autoencoder-progress-reconcile-20261006/README.md",
+    "artifacts/autoencoder-progress-reconcile-20261006/initial-state.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/build_publication_scope.py",
+    "artifacts/autoencoder-progress-reconcile-20261006/publish_integration.py",
+    "artifacts/autoencoder-progress-reconcile-20261006/publisher_review_tests.py",
+    "artifacts/autoencoder-progress-reconcile-20261006/review-evidence.tar.gz",
+    "artifacts/autoencoder-progress-reconcile-20261006/review-evidence-manifest.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/branches/branch-worktree-review.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/branches/branch-worktree-review.md",
+    "artifacts/autoencoder-progress-reconcile-20261006/branches/main-coordination-interface-review.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/evidence/evidence-review.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/evidence/evidence-review.md",
+    "artifacts/autoencoder-progress-reconcile-20261006/evidence/validation-receipt.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/runtime/runtime-compatibility.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/runtime/runtime-compatibility.md",
+    "artifacts/autoencoder-progress-reconcile-20261006/runtime/additive-closure-review.md",
+    "artifacts/autoencoder-progress-reconcile-20261006/recovery/effective-workingcopy-after.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/recovery/canonical-logic-tree-check.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/pipeline/publisher-synthetic-validation.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/pipeline/reconciliation-documentation-review.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/pipeline/evidence-documentation-review.json",
+    "artifacts/autoencoder-progress-reconcile-20261006/pipeline/publication-producer-review.json"
+  ],
+  "workspace_gitlink_addition": "external/ipfs_datasets",
+  "required_reviews": [
+    "pipeline/publisher-synthetic-validation.json",
+    "pipeline/reconciliation-documentation-review.json",
+    "pipeline/evidence-documentation-review.json",
+    "pipeline/publication-producer-review.json",
+    "pipeline/publication-scope-independent-review.json"
+  ],
+  "prospective_archive": {
+    "member_count": 114,
+    "uncompressed_bytes": 4767544,
+    "members": [
+      {
+        "path": "README.md",
+        "bytes": 2229
+      },
+      {
+        "path": "branches/audit_branches.py",
+        "bytes": 10862
+      },
+      {
+        "path": "branches/branch-worktree-review.json",
+        "bytes": 18575
+      },
+      {
+        "path": "branches/branch-worktree-review.md",
+        "bytes": 5266
+      },
+      {
+        "path": "branches/build_main_coordination_closure.py",
+        "bytes": 4594
+      },
+      {
+        "path": "branches/canonical-308615b1dcbc.diff",
+        "bytes": 6663
+      },
+      {
+        "path": "branches/canonical-3c9d3608fcc0.diff",
+        "bytes": 1313
+      },
+      {
+        "path": "branches/canonical-4712a27db276.diff",
+        "bytes": 9197
+      },
+      {
+        "path": "branches/canonical-619f19212b57.diff",
+        "bytes": 7285
+      },
+      {
+        "path": "branches/canonical-706f51c510e2.diff",
+        "bytes": 2959
+      },
+      {
+        "path": "branches/canonical-7822e19a6274.diff",
+        "bytes": 4819
+      },
+      {
+        "path": "branches/canonical-786a80d886f6.diff",
+        "bytes": 9142
+      },
+      {
+        "path": "branches/canonical-8467fdaa41cb.diff",
+        "bytes": 764
+      },
+      {
+        "path": "branches/canonical-9b06feb5c2a0.diff",
+        "bytes": 1464
+      },
+      {
+        "path": "branches/canonical-a4ab8ffbe9f8.diff",
+        "bytes": 1226
+      },
+      {
+        "path": "branches/canonical-ab54cc6838a6.diff",
+        "bytes": 8849
+      },
+      {
+        "path": "branches/canonical-adapted-coordination-tests.xml",
+        "bytes": 31040
+      },
+      {
+        "path": "branches/canonical-af59f70de849.diff",
+        "bytes": 6380
+      },
+      {
+        "path": "branches/canonical-bda0f8c1cf8d.diff",
+        "bytes": 38617
+      },
+      {
+        "path": "branches/canonical-c75bb8ff131f.diff",
+        "bytes": 0
+      },
+      {
+        "path": "branches/canonical-c88f1dc8bcfd.diff",
+        "bytes": 2218
+      },
+      {
+        "path": "branches/canonical-f8781645c377.diff",
+        "bytes": 1200
+      },
+      {
+        "path": "branches/canonical-uncommitted-scope.json",
+        "bytes": 106499
+      },
+      {
+        "path": "branches/coordination-test-only-proposal.json",
+        "bytes": 1695
+      },
+      {
+        "path": "branches/coordination-test-preimages/test_deontic_grouped_decoder.py",
+        "bytes": 11213
+      },
+      {
+        "path": "branches/coordination-test-preimages/test_deontic_grouped_decoder_boundaries.py",
+        "bytes": 12553
+      },
+      {
+        "path": "branches/coordination-test-proposed/test_deontic_grouped_decoder.py",
+        "bytes": 11558
+      },
+      {
+        "path": "branches/coordination-test-proposed/test_deontic_grouped_decoder_boundaries.py",
+        "bytes": 12950
+      },
+      {
+        "path": "branches/datasets-patch-equivalence.json",
+        "bytes": 116115
+      },
+      {
+        "path": "branches/deontic-grouped-supplement.json",
+        "bytes": 22336
+      },
+      {
+        "path": "branches/focused-source-inclusion.json",
+        "bytes": 127779
+      },
+      {
+        "path": "branches/focused_evidence.py",
+        "bytes": 5142
+      },
+      {
+        "path": "branches/grouped-pure-tests.xml",
+        "bytes": 31040
+      },
+      {
+        "path": "branches/main-actual-coordination-tests.xml",
+        "bytes": 31040
+      },
+      {
+        "path": "branches/main-coordination-closure-manifest.json",
+        "bytes": 8281
+      },
+      {
+        "path": "branches/main-coordination-interface-review.json",
+        "bytes": 15870
+      },
+      {
+        "path": "branches/main-coordination-schema-probe.json",
+        "bytes": 13503
+      },
+      {
+        "path": "branches/main-proposed-coordination-tests.xml",
+        "bytes": 115533
+      },
+      {
+        "path": "branches/published-source-missing-from-canonical.json",
+        "bytes": 37031
+      },
+      {
+        "path": "branches/pytest-cache-grouped-adapted/README.md",
+        "bytes": 302
+      },
+      {
+        "path": "branches/pytest-cache-grouped-pure/README.md",
+        "bytes": 302
+      },
+      {
+        "path": "branches/pytest-cache-main-actual/README.md",
+        "bytes": 302
+      },
+      {
+        "path": "branches/pytest-cache-main-proposal/README.md",
+        "bytes": 302
+      },
+      {
+        "path": "branches/standalone-coordination-candidate.json",
+        "bytes": 2607
+      },
+      {
+        "path": "branches/test_deontic_grouped_decoder.py.candidate.diff",
+        "bytes": 1860
+      },
+      {
+        "path": "branches/test_deontic_grouped_decoder_boundaries.py.candidate.diff",
+        "bytes": 1645
+      },
+      {
+        "path": "branches/workspace-patch-equivalence.json",
+        "bytes": 8419
+      },
+      {
+        "path": "build_publication_scope.py",
+        "bytes": 4842
+      },
+      {
+        "path": "evidence/build_evidence_review.py",
+        "bytes": 28338
+      },
+      {
+        "path": "evidence/evidence-review.json",
+        "bytes": 705529
+      },
+      {
+        "path": "evidence/evidence-review.md",
+        "bytes": 6905
+      },
+      {
+        "path": "evidence/validation-receipt.json",
+        "bytes": 880
+      },
+      {
+        "path": "initial-state.json",
+        "bytes": 932
+      },
+      {
+        "path": "publish_integration.py",
+        "bytes": 7603
+      },
+      {
+        "path": "publisher_review_tests.py",
+        "bytes": 9293
+      },
+      {
+        "path": "recovery/bounded-owner-merge.json",
+        "bytes": 661
+      },
+      {
+        "path": "recovery/canonical-logic-tree-check.json",
+        "bytes": 1257
+      },
+      {
+        "path": "recovery/contextual-evidence-restoration.json",
+        "bytes": 11611
+      },
+      {
+        "path": "recovery/effective-workingcopy-after.json",
+        "bytes": 204456
+      },
+      {
+        "path": "recovery/latest-metadata-controls-r2.xml",
+        "bytes": 451
+      },
+      {
+        "path": "recovery/latest-metadata-controls.json",
+        "bytes": 681
+      },
+      {
+        "path": "recovery/latest-metadata-preimages/docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+        "bytes": 14867
+      },
+      {
+        "path": "recovery/latest-metadata-preimages/docs/autoencoders/paraphrase_modality_diagnostics.md",
+        "bytes": 9327
+      },
+      {
+        "path": "recovery/latest-metadata-preimages/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+        "bytes": 36421
+      },
+      {
+        "path": "recovery/latest-metadata-preimages/tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+        "bytes": 12563
+      },
+      {
+        "path": "recovery/latest-metadata-restoration.json",
+        "bytes": 4786
+      },
+      {
+        "path": "recovery/preimages/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formalization_evaluation.py",
+        "bytes": 14644
+      },
+      {
+        "path": "recovery/preimages/ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+        "bytes": 14816
+      },
+      {
+        "path": "recovery/preimages.json",
+        "bytes": 851
+      },
+      {
+        "path": "recovery/protected-state-before-publication.json",
+        "bytes": 526
+      },
+      {
+        "path": "recovery/published-source-restoration-01.json",
+        "bytes": 115023
+      },
+      {
+        "path": "recovery/recovered-api-tests-01.json",
+        "bytes": 2562
+      },
+      {
+        "path": "recovery/recovered-api-tests-01.log",
+        "bytes": 741
+      },
+      {
+        "path": "recovery/recovered-api-tests-01.xml",
+        "bytes": 172250
+      },
+      {
+        "path": "recovery/restore_latest_metadata.py",
+        "bytes": 2619
+      },
+      {
+        "path": "retention/README.md",
+        "bytes": 6785
+      },
+      {
+        "path": "retention/combine_execution_readiness.py",
+        "bytes": 2608
+      },
+      {
+        "path": "retention/experiment-source/scripts/ops/autoencoder/evaluate_normative_wording_retention.py",
+        "bytes": 30085
+      },
+      {
+        "path": "retention/guardian-adaptation.diff",
+        "bytes": 2123
+      },
+      {
+        "path": "retention/guardian-freeze.json",
+        "bytes": 812
+      },
+      {
+        "path": "retention/guardian-input-hash-review.json",
+        "bytes": 549470
+      },
+      {
+        "path": "retention/guardian-readiness.json",
+        "bytes": 23394
+      },
+      {
+        "path": "retention/independent-input-hash-review.json",
+        "bytes": 561232
+      },
+      {
+        "path": "retention/independent-pure-contracts.xml",
+        "bytes": 4647
+      },
+      {
+        "path": "retention/independent-pytest-cache/README.md",
+        "bytes": 302
+      },
+      {
+        "path": "retention/independent-runner-readiness.json",
+        "bytes": 12807
+      },
+      {
+        "path": "retention/independent-runner-review.json",
+        "bytes": 16784
+      },
+      {
+        "path": "retention/prepare_retention_proposal.py",
+        "bytes": 18900
+      },
+      {
+        "path": "retention/proposal-preflight.json",
+        "bytes": 1499
+      },
+      {
+        "path": "retention/proposal-readiness-summary.json",
+        "bytes": 2741
+      },
+      {
+        "path": "retention/pure-contracts.xml",
+        "bytes": 6807
+      },
+      {
+        "path": "retention/pytest-cache/README.md",
+        "bytes": 302
+      },
+      {
+        "path": "retention/retention-manifest.json",
+        "bytes": 327444
+      },
+      {
+        "path": "retention/retention-plan.json",
+        "bytes": 323039
+      },
+      {
+        "path": "retention/review_guardian_readiness.py",
+        "bytes": 14108
+      },
+      {
+        "path": "retention/runner-adaptation.diff",
+        "bytes": 24250
+      },
+      {
+        "path": "retention/test_retention_contracts.py",
+        "bytes": 9651
+      },
+      {
+        "path": "runtime/additive-closure-review.json",
+        "bytes": 358400
+      },
+      {
+        "path": "runtime/additive-closure-review.md",
+        "bytes": 5766
+      },
+      {
+        "path": "runtime/additive-guide-pins.json",
+        "bytes": 831
+      },
+      {
+        "path": "runtime/additive-restore-plan-01.json",
+        "bytes": 74665
+      },
+      {
+        "path": "runtime/additive-static-validation.json",
+        "bytes": 41071
+      },
+      {
+        "path": "runtime/audit_additive_closure.py",
+        "bytes": 9927
+      },
+      {
+        "path": "runtime/build_runtime_compatibility.py",
+        "bytes": 14908
+      },
+      {
+        "path": "runtime/codebase_resources.py.diff",
+        "bytes": 2940
+      },
+      {
+        "path": "runtime/restore_published_sources.py",
+        "bytes": 14694
+      },
+      {
+        "path": "runtime/restorer-fixture-validation.json",
+        "bytes": 366
+      },
+      {
+        "path": "runtime/runtime-compatibility.json",
+        "bytes": 27265
+      },
+      {
+        "path": "runtime/runtime-compatibility.md",
+        "bytes": 7742
+      },
+      {
+        "path": "runtime/security_formalization_evaluation.py.diff",
+        "bytes": 1972
+      },
+      {
+        "path": "runtime/source_value_lazy_import.diff",
+        "bytes": 1217
+      },
+      {
+        "path": "runtime/working-tree-guard-validation.json",
+        "bytes": 1487
+      },
+      {
+        "path": "runtime/working-tree-tests-final.xml",
+        "bytes": 4324
+      },
+      {
+        "path": "runtime/working-tree-tests.xml",
+        "bytes": 4205
+      }
+    ],
+    "actual_archive_sealed": false
+  },
+  "synthetic_validation": {
+    "cases": 6,
+    "receipt": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/pipeline/publisher-synthetic-validation.json",
+    "reused_not_rerun": true,
+    "actual_remote_operations": 0
+  },
+  "actual_publication_scope_reviewed": false,
+  "execution_readiness_granted": false,
+  "publication_executed": false,
+  "producer_executed": false,
+  "Git_state_mutated": false,
+  "models_executed": false,
+  "training_executed": false,
+  "proof_authority": false,
+  "scope": "Review of exact producer code and retained synthetic controls. Root must seal scope after documentation reviews and obtain independent actual-scope/archive review before publication."
+}

@@ -9,6 +9,13 @@ experiment. The initial remote snapshots are workspace
 The [datasets progress guide](../../external/ipfs_datasets/docs/autoencoders/progress_integration.md)
 provides the training-owner map and next experiment sequence.
 
+The [grouped-decoder follow-up](59-grouped-legal-decoders-consolidation-2026-10-06.md)
+reviews later mains, preserves current decoder improvements, restores historical
+handoffs and contributes the new source-conditioned grouped profile.
+
+The [parallel reconciliation](59-autoencoder-progress-reconciliation-2026-10-06.md)
+retains its separate twenty-study catalog and canonical working-copy audit.
+
 ## Later cross-agent reconciliation
 
 The [current reconciliation](../../artifacts/autoencoder-progress-reconciliation-20261006/README.md)

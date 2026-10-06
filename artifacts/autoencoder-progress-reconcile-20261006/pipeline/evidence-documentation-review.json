@@ -1,0 +1,528 @@
+{
+  "schema": "autoencoder-reconciliation-evidence-documentation-review/v1",
+  "passed": true,
+  "findings": [],
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/README.md": {
+      "bytes": 2229,
+      "sha256": "52606ef18b977dc148e884acfd97ff45c89255310411c1043a5ceaf06d7f30f4"
+    },
+    "/home/barberb/lift_coding/implementation_plan/docs/59-autoencoder-progress-reconciliation-2026-10-06.md": {
+      "bytes": 3105,
+      "sha256": "6e91b8bd82d578ef49a6f61829b5db8c791e0f49d5dccef0bbec82663f3cea4b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/progress_reconciliation_20261006.md": {
+      "bytes": 10864,
+      "sha256": "76944efb75e1daed7b8d656c95f10e5b40fba2385095aff220b321a222647833"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/evidence/evidence-review.json": {
+      "bytes": 705529,
+      "sha256": "e26d4d7395d3af9d936ad33af50f141ab9d99578c8f29ddc9c3a321662c31ddb"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/evidence/evidence-review.md": {
+      "bytes": 6905,
+      "sha256": "4eafc50fd4ff4135c9205e769fa20b21cb6f0236f3286e6e1d5f4a2144cfaa08"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/evidence/validation-receipt.json": {
+      "bytes": 880,
+      "sha256": "6124b9ef4451a77d42d7af53cf0361fc6ac50aa8062fc21eddab396c2f370710"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/README.md": {
+      "bytes": 6785,
+      "sha256": "0862674fa51b65a990b09883646bf1d8f614994cdb5a6f41d3b3a75f14941582"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/retention-plan.json": {
+      "bytes": 323039,
+      "sha256": "3b3e0597906192d94da94e85abcee732d4a669d2a7c059ebda7d459bc614e1db"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/retention-manifest.json": {
+      "bytes": 327444,
+      "sha256": "589e08ea17147019b68f34fe740401deec978163449daae5e8144358952219fc"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/proposal-preflight.json": {
+      "bytes": 1499,
+      "sha256": "49d64f25153a5d743240ddeb261f71f303f3e68c43a9f44993fe5bbd939d7d2a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/pure-contracts.xml": {
+      "bytes": 6807,
+      "sha256": "560e018ce63542bae9d3c7320b267b2511bc19f199d9f95ae74c49b8a24c5932"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/independent-runner-review.json": {
+      "bytes": 16784,
+      "sha256": "1b75e412d4bfdae5136c05ba312b111d094c64931791868a0e112f5b1905e2ba"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/independent-runner-readiness.json": {
+      "bytes": 12807,
+      "sha256": "b3b6e895c7d4b97c37c2dd702a51d2cec03273fa6d92e583877d2f9b984e15b9"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/guardian-readiness.json": {
+      "bytes": 23394,
+      "sha256": "178d35f137ee6bf4284e686a3af30270c20ee4d6f8ac6e63af33dbe2219d5ac3"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/main-coordination-interface-review.json": {
+      "bytes": 15870,
+      "sha256": "03be92538e37283cbf61f38ee7705ea4ffb9b74aa1c467a9ae3ab666da1b845b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/deontic/coordination_decoder.py": {
+      "bytes": 13298,
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+    }
+  },
+  "checks": [
+    {
+      "id": "catalog20uniqueentries",
+      "passed": true
+    },
+    {
+      "id": "56primaryGitbindings",
+      "passed": true
+    },
+    {
+      "id": "source:b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e:artifacts/autoencoder-integration-review-20261006/findings/evidence-matrix.json",
+      "passed": true
+    },
+    {
+      "id": "source:0ced2e533c9090d21aba602c3550c5ff5ecd45eb:docs/autoencoders/legacy_linguistic_validation_20261001.md",
+      "passed": true
+    },
+    {
+      "id": "source:dce8ab819331a5f5bddac86c851710fa4377c1d4:docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:d466db01a32c419a765e5cef046991ddedc3c279:docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:fd89d2a48aa0de771dd22ec8fd079af10732051f:docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:aa586a9b91b583a2ac5d867bd107ba0c5a4762d5:docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:60f5c2951ac34231f05b54e50f2725296871c5b9:docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:1b6461e65f15635b89d04609dae01a4196cd3ea5:docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+      "passed": true
+    },
+    {
+      "id": "source:6589f788791f8991a8b856fbc3fc5fa396d17229:docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:df732e8aaf5b4eec7373f1581e7193d7c0a91134:docs/autoencoders/complete_features_and_ui_fidelity.md",
+      "passed": true
+    },
+    {
+      "id": "source:ea275ae32779db01c7dc59dc62ce12bcd9841ae2:docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:2d93857e78ceedc7f055637c887afeaa40653993:docs/security_formula_decoder.md",
+      "passed": true
+    },
+    {
+      "id": "source:e44254d4dd9e9a873d1b7a257f53286f35860e01:artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+      "passed": true
+    },
+    {
+      "id": "source:67bd5f1a3d6ff1540bd594e1205d753eb44f03ef:artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+      "passed": true
+    },
+    {
+      "id": "source:b48ec0fb6aa1b45a46c1239f50f645d03ab74808:artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+      "passed": true
+    },
+    {
+      "id": "source:ec4302acd75f0dbb0d744586db35fef9d23980ac:artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+      "passed": true
+    },
+    {
+      "id": "source:3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a:artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+      "passed": true
+    },
+    {
+      "id": "source:7a16fc06578abbf3cc95ad3ed8e4fa8a33b1ea0d:docs/implementation/reports/evidence/decoder-paraphrase-modality-margins-20261006/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:39f25777d557df1c51b8f98ed0dcd084c35d4d6d:docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.json",
+      "passed": true
+    },
+    {
+      "id": "source:39f25777d557df1c51b8f98ed0dcd084c35d4d6d:docs/autoencoders/evidence/contextual-legal-runtime-20261006/generation-qualification.json",
+      "passed": true
+    },
+    {
+      "id": "source:39f25777d557df1c51b8f98ed0dcd084c35d4d6d:docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-metadata-plan.json",
+      "passed": true
+    },
+    {
+      "id": "source:39f25777d557df1c51b8f98ed0dcd084c35d4d6d:docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-metadata-plan.json",
+      "passed": true
+    },
+    {
+      "id": "source:39f25777d557df1c51b8f98ed0dcd084c35d4d6d:docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/final-facade-review.json",
+      "passed": true
+    },
+    {
+      "id": "source:39f25777d557df1c51b8f98ed0dcd084c35d4d6d:docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-final-receipt.json",
+      "passed": true
+    },
+    {
+      "id": "source:39f25777d557df1c51b8f98ed0dcd084c35d4d6d:docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/architecture-review.json",
+      "passed": true
+    },
+    {
+      "id": "source:39f25777d557df1c51b8f98ed0dcd084c35d4d6d:docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/docs-final-review.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/implementation/reports/evidence/decoder-normative-wording-20261006/results.json",
+      "passed": true
+    },
+    {
+      "id": "source:b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e:artifacts/autoencoder-wording-fit-20261006/development/development-corpus-receipt.json",
+      "passed": true
+    },
+    {
+      "id": "source:b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e:artifacts/autoencoder-wording-fit-20261006/development/source-rows.json",
+      "passed": true
+    },
+    {
+      "id": "source:b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e:artifacts/autoencoder-wording-fit-20261006/development/codec.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/implementation/reports/evidence/decoder-normative-wording-20261006/manifest.json",
+      "passed": true
+    },
+    {
+      "id": "source:b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e:artifacts/autoencoder-wording-fit-20261006/review/postfit_observer_integration_review.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:configs/autoencoders/legal_autoencoder_lineages.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:configs/autoencoders/gte_multilingual_local_assets_v1.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/legal_ir/8d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/legal_ir/384d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/legal_ir/768d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/intent_ir/8d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/intent_ir/384d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/intent_ir/768d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/security_ir/8d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/security_ir/384d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/security_ir/768d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/codebase_ir/8d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/codebase_ir/384d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/inventories/codebase_ir/768d.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/implementation/reports/evidence/multidomain-training-20261001/summary.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/implementation/reports/evidence/modal-joint-20261001/summary.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/implementation/reports/evidence/legal-lineages-20260930/logic-output-requirements-validation.json",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/native_formula_training.md",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/logic_output_requirements.md",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/progress_integration.md",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/native_formal_decoders.md",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/complete_features_and_ui_fidelity.md",
+      "passed": true
+    },
+    {
+      "id": "source:795d960170214d03e2eaf4c0a13ad4eb922c5c08:docs/autoencoders/ir_progress_recovery.md",
+      "passed": true
+    },
+    {
+      "id": "essential_catalog_validation_hashes_current",
+      "passed": true
+    },
+    {
+      "id": "384wording55to60",
+      "passed": true
+    },
+    {
+      "id": "768exact60unchangedwithCEregression",
+      "passed": true
+    },
+    {
+      "id": "newfitsonly384768",
+      "passed": true
+    },
+    {
+      "id": "newfit_no_freshsemantic_or_Lake_admission",
+      "passed": true
+    },
+    {
+      "id": "plan4selected48exposed",
+      "passed": true
+    },
+    {
+      "id": "planfixednumericalscope",
+      "passed": true
+    },
+    {
+      "id": "fournewselectedtensoridentities_match_catalog",
+      "passed": true
+    },
+    {
+      "id": "exacttwoM2zeroarchives_and1297inputs",
+      "passed": true
+    },
+    {
+      "id": "correctfournewentries_and12separateplans",
+      "passed": true
+    },
+    {
+      "id": "package_widthspecific_interpretation",
+      "passed": true
+    },
+    {
+      "id": "package_retention_exposed_unfitted",
+      "passed": true
+    },
+    {
+      "id": "package_IR_prose_population_scope",
+      "passed": true
+    },
+    {
+      "id": "package_qualifier_gap_not_admitted",
+      "passed": true
+    },
+    {
+      "id": "allnextactiondocs_preserve_exposed_designation",
+      "passed": true
+    },
+    {
+      "id": "newmetadata_commit_correctly_named",
+      "passed": true
+    },
+    {
+      "id": "paragraph_binding_claim_narrow_to_caller_bytes",
+      "passed": true
+    },
+    {
+      "id": "missing_saved_paragraph_producer_receipt_and_digest_disclosed",
+      "passed": true
+    },
+    {
+      "id": "repinned_replacements_have_no_encoder_provenance",
+      "passed": true
+    },
+    {
+      "id": "original44replay_not_relabelled",
+      "passed": true
+    },
+    {
+      "id": "metadata_change_no_fitting_or_qualification",
+      "passed": true
+    },
+    {
+      "id": "published_runtime_explicit_falseproducer_contract",
+      "passed": true
+    },
+    {
+      "id": "published_review_original_assets_unchanged_and_numerical_owner_unchanged",
+      "passed": true
+    },
+    {
+      "id": "grouped_lexical_rejection_scoped_to_declared_cues",
+      "passed": true
+    },
+    {
+      "id": "grouped_owner_has_closed_fields_and_bounded_lexical_checks",
+      "passed": true
+    },
+    {
+      "id": "grouped_interface_review_scope_remains_nonsemantic",
+      "passed": true
+    },
+    {
+      "id": "catalog20_and56validation_unchanged",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/README.md",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/implementation_plan/docs/59-autoencoder-progress-reconciliation-2026-10-06.md",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/evidence/evidence-review.json",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/evidence/evidence-review.md",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/evidence/validation-receipt.json",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/README.md",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/retention-plan.json",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/retention-manifest.json",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/proposal-preflight.json",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/pure-contracts.xml",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/independent-runner-review.json",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/independent-runner-readiness.json",
+      "passed": true
+    },
+    {
+      "id": "unchanged_review_binding:/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/guardian-readiness.json",
+      "passed": true
+    }
+  ],
+  "scope": {
+    "review": "Scientific claims and next-action documentation; immutable source bytes and metadata only",
+    "catalog_entries": 20,
+    "primary_Git_source_bindings": 56,
+    "existing_studies_preserved": 16,
+    "new_evidence_entries": 4,
+    "retention_prepared_selected_panels": 4,
+    "retention_sources_per_panel": 48,
+    "retention_reference_rules_per_panel": 180,
+    "retention_scalar_reference_sites_per_panel": 720,
+    "reference_bodies_parsed": false,
+    "checkpoint_tensor_files_parsed": false,
+    "models_loaded": false,
+    "models_executed": false,
+    "encoders_executed": false,
+    "training_executed": false,
+    "resource_owner_invoked": false,
+    "semantic_qualification_granted": false,
+    "proof_authority": false,
+    "supplemental_metadata_source_bindings": 3
+  },
+  "interpretation": {
+    "new_384_fit": "Five prospective wording formulas repaired55/60→60/60; scoped improvement on previously exposed meanings.",
+    "new_768_fit": "60/60 unchanged; teacher-forced CE2.45% worse; uniform auxiliary benefit unsupported.",
+    "original_contextual_replay": "48/48 original semantic IR/canonical contract and0/48 original prose equality remain distinct measurements/populations.",
+    "8d_and4096": "Protected8D teacher and4096 lineage not modified/trained by new normative fits; their earlier studies remain separately cataloged.",
+    "retention_next_action": "Observe the four new selected tensors on exposed-v3 with exact two-zero archival replay and durable reference barrier before any additional fitting; no fresh holdout claim.",
+    "richer_autoformalization_gap": "Independently reviewed richer pairs, lossless nonempty qualifiers and fresh source groups remain prerequisites to broader fitting/qualification.",
+    "paragraph_provenance_metadata_update": "The contextual facade authenticates caller-selected paragraph file bytes and vector geometry; saved paragraph encoder-producer provenance is absent. Repinned replacements cannot inherit provenance. Exact original44-asset replay and historical795d960recovery audit remain separately attributable; metadata change supplies no new fitting, replay, qualification or proof.",
+    "grouped_lexical_bound": "Closed requests reject explicit source/provenance fields and recognized lexical modal/qualifier cues; this is a bounded declared profile, not a general detector of arbitrary hidden source structure."
+  },
+  "prior_review": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/pipeline/evidence-documentation-review-r1.json",
+    "bytes": 15822,
+    "sha256": "2a5e6bfa296031064274a2a29b009dd467ac4168883adbcfb61a8bca4b528310"
+  },
+  "revision": 2,
+  "supplemental_metadata_sources": [
+    {
+      "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+      "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+      "git_blob": "c155bec4a8899f10c9916d30f86aef88fa34394e",
+      "bytes": 15551,
+      "sha256": "ee8cb120795ce9ee8c696d952169da5544c34e3ae4f2f6adeeacc58701532fa6"
+    },
+    {
+      "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "git_blob": "444dde0da7d0e8460da0c6968707be7808006e02",
+      "bytes": 36594,
+      "sha256": "773e30977478921c31fbc075b5357339cc13e8e920ba93be85b5160b7f442a15"
+    },
+    {
+      "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-patch-independent-review.json",
+      "git_blob": "135184ece846499f10c4957a8cab9164ea709ea3",
+      "bytes": 4120,
+      "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb"
+    }
+  ]
+}

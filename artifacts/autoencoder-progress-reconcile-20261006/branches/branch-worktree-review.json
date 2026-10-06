@@ -1,0 +1,417 @@
+{
+  "advertised_origin_heads_counts": {
+    "datasets": 9,
+    "workspace": 36
+  },
+  "artifacts": [
+    {
+      "bytes": 10862,
+      "path": "audit_branches.py",
+      "sha256": "b01fe70aa44f244faf5b3ceb1a868ceed859acc3e31b509db254a1a23ea5af55"
+    },
+    {
+      "bytes": 4594,
+      "path": "build_main_coordination_closure.py",
+      "sha256": "e2ff6a1dc785100a89caed85ae2888fd0244b70057095b16d4a5c045cd8c87d0"
+    },
+    {
+      "bytes": 6663,
+      "path": "canonical-308615b1dcbc.diff",
+      "sha256": "561f7c21b1f5bc0b10a1e934efe365634c4e9093a022c2c45461ad6b132b530a"
+    },
+    {
+      "bytes": 1313,
+      "path": "canonical-3c9d3608fcc0.diff",
+      "sha256": "a66ceed2e4f9af6a2115feafd15ae75fd3a04382ed9bd4b5ca1cc04ff816617a"
+    },
+    {
+      "bytes": 9197,
+      "path": "canonical-4712a27db276.diff",
+      "sha256": "c7e212e645bef24b65e388f89d5d55582d1f45b27a241d55d18b5bc2041c7b49"
+    },
+    {
+      "bytes": 7285,
+      "path": "canonical-619f19212b57.diff",
+      "sha256": "1e699826b2dd3979d7b197aafa187d0f02fff352b777188e65e84a5a2a748b26"
+    },
+    {
+      "bytes": 2959,
+      "path": "canonical-706f51c510e2.diff",
+      "sha256": "44348df30370210d4c3f24a45560db6565810dbf9ccaa50bb3aa176581a7e83e"
+    },
+    {
+      "bytes": 4819,
+      "path": "canonical-7822e19a6274.diff",
+      "sha256": "26d54bca3e6cd8c5de7c755d15acb76a196dbe43061f2fb1ab5dfc7fe641810b"
+    },
+    {
+      "bytes": 9142,
+      "path": "canonical-786a80d886f6.diff",
+      "sha256": "6499862c707c390f2f8427a2866328d0c39ad019aadfe8aaf20558eeabfe8760"
+    },
+    {
+      "bytes": 764,
+      "path": "canonical-8467fdaa41cb.diff",
+      "sha256": "14c437eaa74f1db8426b1156d98bab276a9b719b2d46f327849c1bb4449950af"
+    },
+    {
+      "bytes": 1464,
+      "path": "canonical-9b06feb5c2a0.diff",
+      "sha256": "8fc3915ce42c3f21c200e2cd17c53b33ec705bfd4f4e5709467945d845a17925"
+    },
+    {
+      "bytes": 1226,
+      "path": "canonical-a4ab8ffbe9f8.diff",
+      "sha256": "20eadd122ea8d5b24115c596ab7c9be3b4c2445882e7bd640e6346052e349c82"
+    },
+    {
+      "bytes": 8849,
+      "path": "canonical-ab54cc6838a6.diff",
+      "sha256": "7293c0283e5d595ad6fbaf635e6bb302c30a629e41d4da9ee70431c79a0a211e"
+    },
+    {
+      "bytes": 31040,
+      "path": "canonical-adapted-coordination-tests.xml",
+      "sha256": "efe18e7ac8af136051a90315335735c2c67152c11623a86b1b5a3707d4576566"
+    },
+    {
+      "bytes": 6380,
+      "path": "canonical-af59f70de849.diff",
+      "sha256": "f1ae5d89e77cd6c5c7cd10c52d819e27ad59e344bf731c0d3be95ce59abf8bc3"
+    },
+    {
+      "bytes": 38617,
+      "path": "canonical-bda0f8c1cf8d.diff",
+      "sha256": "20c01e066109f4360a3685b8262e5ce6b33f855dce5f7c37d460e609385b3970"
+    },
+    {
+      "bytes": 0,
+      "path": "canonical-c75bb8ff131f.diff",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2218,
+      "path": "canonical-c88f1dc8bcfd.diff",
+      "sha256": "331b9171369900608c812c00e905140a2796161af567f523be5766632fa1562a"
+    },
+    {
+      "bytes": 1200,
+      "path": "canonical-f8781645c377.diff",
+      "sha256": "72f5339df16b4c6159e4b3b3ab6228300f06ea2c88189b3b995fb23357a0f67d"
+    },
+    {
+      "bytes": 106499,
+      "path": "canonical-uncommitted-scope.json",
+      "sha256": "7a889bba7be9776a50b973608e6220c7880340ae420021bb11ec24ddc5d31072"
+    },
+    {
+      "bytes": 1695,
+      "path": "coordination-test-only-proposal.json",
+      "sha256": "a21d960bb86d8a07a168c533d3eee1b70024a99754f00af7974392104f839ed6"
+    },
+    {
+      "bytes": 116115,
+      "path": "datasets-patch-equivalence.json",
+      "sha256": "105888d09025abfbdf31aa8bd7160eec8dec2fc57c702e36be18e65462613ce5"
+    },
+    {
+      "bytes": 2265450,
+      "path": "datasets-ref-worktree-inventory.json",
+      "sha256": "10949c1e8e74607901dfc93cce2c5aa84ec2eb1af84e9bcc21068ca047611e2b"
+    },
+    {
+      "bytes": 22336,
+      "path": "deontic-grouped-supplement.json",
+      "sha256": "df8f2cadd4a5f40948362a7a9613752a3f6c18cd6d34b64190eb2cbf4f472d07"
+    },
+    {
+      "bytes": 127779,
+      "path": "focused-source-inclusion.json",
+      "sha256": "d1ab9e5318903af0553997ea613554a4edffd08b763e9f311ff1ace4fc302c3e"
+    },
+    {
+      "bytes": 5142,
+      "path": "focused_evidence.py",
+      "sha256": "73eee11e115d72e634991538bd664a2387665825f7edb2ed9b755213735aa342"
+    },
+    {
+      "bytes": 31040,
+      "path": "grouped-pure-tests.xml",
+      "sha256": "78a0ba8c8165e343aa1675934b37c830e3cd296874701781f6ac6065f755d0c9"
+    },
+    {
+      "bytes": 31040,
+      "path": "main-actual-coordination-tests.xml",
+      "sha256": "d75f2d8500354ede6d22c3c9923024fca381918a6ed0ac3b80e986e49c2b27bc"
+    },
+    {
+      "bytes": 8281,
+      "path": "main-coordination-closure-manifest.json",
+      "sha256": "5ca03f55180a7c9186016669891142d676d7a9d8440f9d152797797c5ea61b75"
+    },
+    {
+      "bytes": 15870,
+      "path": "main-coordination-interface-review.json",
+      "sha256": "03be92538e37283cbf61f38ee7705ea4ffb9b74aa1c467a9ae3ab666da1b845b"
+    },
+    {
+      "bytes": 13503,
+      "path": "main-coordination-schema-probe.json",
+      "sha256": "8f93e8f32442818bd634a4ca7b82dee386505307a18fe6682ace61b8cce9d5b9"
+    },
+    {
+      "bytes": 115533,
+      "path": "main-proposed-coordination-tests.xml",
+      "sha256": "02f660b86c738577a2225458a7fb4cecb34300543346d249f8e8ddc98bea745e"
+    },
+    {
+      "bytes": 37031,
+      "path": "published-source-missing-from-canonical.json",
+      "sha256": "e96951808f757f22d54f5100acca7b34d0ee45e409ba07ec58c4c546c19c0a0d"
+    },
+    {
+      "bytes": 2607,
+      "path": "standalone-coordination-candidate.json",
+      "sha256": "2d6cdf7bd6da4c8f50c95b1262d4f3452d12ab60644744bf65929c0214106d5b"
+    },
+    {
+      "bytes": 1860,
+      "path": "test_deontic_grouped_decoder.py.candidate.diff",
+      "sha256": "8e69cb5c75d74fbf01df3065abef11034901310faa8ec53b1468404e0b59f891"
+    },
+    {
+      "bytes": 1645,
+      "path": "test_deontic_grouped_decoder_boundaries.py.candidate.diff",
+      "sha256": "e78fa99402cdddd43407cd15c4a8d8bab288a8b762fe8c05f92b57156c7b69b2"
+    },
+    {
+      "bytes": 8419,
+      "path": "workspace-patch-equivalence.json",
+      "sha256": "905b1bb7600d707b086513a09cb6a79edc67878eb1d5d1285fd38861e4d4e47a"
+    },
+    {
+      "bytes": 2919918,
+      "path": "workspace-ref-worktree-inventory.json",
+      "sha256": "bdac0b7db808ba926d6e40209d593aa36e4c38715c639e1fd5142b63d6f91cf2"
+    }
+  ],
+  "authorized_source_edit_scope": [
+    "tests/unit/logic/test_deontic_grouped_decoder.py",
+    "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py"
+  ],
+  "canonical_missing_at_inventory": {
+    "all_scoped_package_paths": 640,
+    "executable_package_source_paths": 86
+  },
+  "coverage": {
+    "datasets": {
+      "all_refs_including_archives_recovery_tags": 423,
+      "ancestry_checked_for_every_commit_head": true,
+      "dirty_status_checked_for_every_existing_registered_worktree": true,
+      "path_scoped_introduced_changes_checked_for_every_nonancestor": true,
+      "registered_worktrees": 19,
+      "unchanged_previously_merged_ref_effective_tree_checks": "Focused source restoration/producer pins validated separately",
+      "unique_commit_heads_including_detached": 385
+    },
+    "scope": "Path-based source, training, tests, docs and evidence for autoencoder/decoder/IR/duckdb_control/formalization; supplemental deontic coordination scope; all refs and registered detached worktrees inventoried.",
+    "workspace": {
+      "all_refs_including_archives_recovery_tags": 338,
+      "ancestry_checked_for_every_commit_head": true,
+      "dirty_status_checked_for_every_existing_registered_worktree": true,
+      "path_scoped_introduced_changes_checked_for_every_nonancestor": true,
+      "registered_worktrees": 35,
+      "unchanged_previously_merged_ref_effective_tree_checks": "Focused source restoration/producer pins validated separately",
+      "unique_commit_heads_including_detached": 253
+    }
+  },
+  "findings": [
+    {
+      "classification": "already_merged",
+      "evidence": "focused-source-inclusion.json",
+      "id": "prior-restoration-retained",
+      "result": "All 31 paths from prior restoration are SHA256-identical on pinned package main. No repeated branch cherry-pick."
+    },
+    {
+      "classification": "already_merged",
+      "evidence": "focused-source-inclusion.json",
+      "id": "published-new-contextual-and-normative-progress",
+      "result": "3b3b994 restoration, 7a16fc modality diagnosis, 37c2d63 contextual runtime, 39f25777 contextual guide/evidence, 795d960 normative TRAIN wording are reachable from pinned package main; introduced files bound by Git blob and SHA256."
+    },
+    {
+      "classification": "published_main_missing_shared_source",
+      "evidence": [
+        "focused-source-inclusion.json",
+        "published-source-missing-from-canonical.json"
+      ],
+      "id": "new-contextual-runtime-missing-in-canonical",
+      "result": "At audit snapshot, three contextual runtime modules, four tests and guide/evidence were absent from shared cwd despite publication. Existing source_value_decoder_experiment.py lacks published lazy-reference import delta. Root should materialize absent exact main paths and narrowly apply reviewed import delta."
+    },
+    {
+      "classification": "published_main_missing_shared_source",
+      "evidence": "focused-source-inclusion.json",
+      "id": "saved-continuation-and-legal-text-scorer-missing",
+      "result": "Saved source-v2 continuation (4 paths) and LegalIR/original-text scorer (3 paths) are exact on main but absent from shared cwd. They need exact recovery for local use, rather than a repeated merge."
+    },
+    {
+      "classification": "already_merged_or_superseded_divergence",
+      "evidence": [
+        "datasets-ref-worktree-inventory.json",
+        "workspace-ref-worktree-inventory.json",
+        "datasets-patch-equivalence.json",
+        "workspace-patch-equivalence.json",
+        "deontic-grouped-supplement.json"
+      ],
+      "id": "no-new-branch-only-scoped-file",
+      "result": "No nonancestor introduced scoped path is absent from pinned main in either repository. Existing branch differences are earlier variants or divergence; literal missing patch matches do not establish missing functionality. Every absent-module recovery candidate comes from published main or unpublished cwd work."
+    },
+    {
+      "classification": "genuinely_new_uncommitted_progress",
+      "evidence": [
+        "standalone-coordination-candidate.json",
+        "grouped-pure-tests.xml",
+        "main-coordination-interface-review.json",
+        "main-actual-coordination-tests.xml",
+        "canonical-adapted-coordination-tests.xml",
+        "main-coordination-schema-probe.json"
+      ],
+      "id": "narrow-coordination-interface",
+      "result": "Two standalone typed semantic IR renderer/evaluator modules and two adapted boundary suites are absent from main. Main-pinned contract passes 161 pure tests and canonical cwd passes 161; root-authorized two-test-only adaptation removes unpublished source-helper imports and guards sys.modules plus parent attributes. Exact 4-path scope is 44,363 bytes, with runtime module bodies unchanged."
+    },
+    {
+      "classification": "uncommitted_active_work",
+      "evidence": [
+        "canonical-uncommitted-scope.json",
+        "deontic-grouped-supplement.json"
+      ],
+      "id": "active-grouped-and-temporal-work",
+      "result": "Grouped-span v1/v2 model modules, coordination bridge/parser and temporal occurrence/interpretation additions remain unpublished. Preserve active source and producer pins; broader integration requires the complete dependency scope and numerical tests for model files. No wholesale dirty-tree staging."
+    },
+    {
+      "classification": "superseded_or_already_merged",
+      "evidence": "datasets-ref-worktree-inventory.json",
+      "id": "numerical-replay-dirty-variants",
+      "result": "Numerical-replay worker-budget edit matches pinned main. Dirty UI codec differs and was diagnosed by prior review as an older lossy variant; retain worktree for attribution and do not overwrite current codec."
+    },
+    {
+      "classification": "preserved_divergence",
+      "evidence": "../autoencoder-integration-review-20261006/branches/branch-review-summary.json",
+      "id": "old-snapshot-source-boundary-owner-review",
+      "result": "Prior snapshot.py physical-byte/ancestor-witness difference remains a distinct owner review. Current retained implementation is preserved; this audit grants no semantic or admission qualification."
+    }
+  ],
+  "focused_restoration_retention": {
+    "exact": 31,
+    "total": 31
+  },
+  "limitations": [
+    "Inventory is a timestamped snapshot in a concurrently active shared workspace; root created new isolated worktrees/metadata refs during audit. Counts therefore exceed initial inventory without deleting or changing existing source.",
+    "Workspace origin/main advanced to 7362059 during audit while effective comparisons remain pinned to requested b0ba1. Publication must rebase/verify against the latest root fetch.",
+    "A first workspace status attempt failed on retained nested-submodule metadata; final successful inventory ignores nested submodule dirty state and audits this repository only. No source or model command was run for the failed status.",
+    "No new numerical or full-family qualification follows from source presence, strict native parsing or renderer tests."
+  ],
+  "new_unpublished_local_executable_paths": [
+    {
+      "bytes": 6557,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+    },
+    {
+      "bytes": 13298,
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+    },
+    {
+      "bytes": 29370,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+    },
+    {
+      "bytes": 33948,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+    },
+    {
+      "bytes": 35501,
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_inventory_shared_chunks.py",
+      "sha256": "562e271b278dea373d4e14dbdc438d62ff4f02ac8dcf1f57ec20f73d436c3835"
+    },
+    {
+      "bytes": 38155,
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_inventory_shared_scan.py",
+      "sha256": "8d538d37e2105d8184a1350163f6ca0a4be745f02da34c4480eed7908b57fed5"
+    },
+    {
+      "bytes": 25159,
+      "path": "ipfs_datasets_py/logic/software_contracts/codebase_resume_shared_targets.py",
+      "sha256": "d9c36d0ba7d26f2495d64d749002d76a709c273ff9f77086e4a08fa00a5499cf"
+    }
+  ],
+  "observed_origin_main": {
+    "datasets": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "workspace": "7362059ff2cd0a7fe1c3fc534f499e64d3afe17a"
+  },
+  "patch_equivalence": {
+    "datasets": {
+      "heads_compared": 14,
+      "heads_with_exact_scoped_patch_match": 2
+    },
+    "workspace": {
+      "heads_compared": 7,
+      "heads_with_exact_scoped_patch_match": 4
+    }
+  },
+  "pinned_targets": {
+    "datasets": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "workspace": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e"
+  },
+  "primary_git_preservation": [
+    {
+      "head_before": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "head_observed": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "head_unchanged": true,
+      "index_bytes_unchanged": true,
+      "index_bytes_unchanged_after_authorized_tests": true,
+      "index_sha256_after_authorized_tests": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175",
+      "index_sha256_before": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175",
+      "index_sha256_observed": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175",
+      "repository": "datasets"
+    },
+    {
+      "head_before": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "head_observed": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "head_unchanged": true,
+      "index_bytes_unchanged": true,
+      "index_bytes_unchanged_after_authorized_tests": true,
+      "index_sha256_after_authorized_tests": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+      "index_sha256_before": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+      "index_sha256_observed": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+      "repository": "workspace"
+    }
+  ],
+  "production_module_edits_performed": false,
+  "recommended_integration_order": [
+    "Use current-main isolated publication tree and retain primary shared source indexes/HEADs.",
+    "Materialize missing published contextual, source-v2 continuation and Legal original-text scoring files exactly; apply only source_value_decoder_experiment lazy import delta with preimage check.",
+    "Optionally contribute the four pinned standalone coordination interface paths after root verifies the exact scope against current main; 161 pure boundary tests already pass.",
+    "Preserve active grouped-model, temporal, source-embedding and codebase-inventory scopes for complete later owner integration; do not stage whole dirty source/worktrees.",
+    "Run root-selected callable-interface tests, publish scoped reviewed findings, then use provenance-bound training inputs for subsequent numerical work."
+  ],
+  "schema": "autoencoder-branch-worktree-reconciliation-review/v1",
+  "source_edits_performed": true,
+  "validation": {
+    "all_semantic_admission_masks_false": true,
+    "canonical_adapted_coordination_tests_passed": 161,
+    "checkpoint_downloads": false,
+    "constraints": "No Mathlib, no downloads, context 512 / temperature 0 preserved by not executing runtime generation; only an actual lake build <Lib> may admit Lean.",
+    "frozen_main_coordination_tests_passed": 161,
+    "lake_executed": false,
+    "lean_admission_granted": false,
+    "model_import_or_forward_executed_by_audit": false,
+    "model_training_executed": false,
+    "pure_coordination_tests_failed": 0,
+    "pure_coordination_tests_passed": 161,
+    "pure_coordination_tests_skipped": 0,
+    "qualifier_labels_rejected_before_rendering": 5,
+    "semantic_qualification_granted": false
+  }
+}

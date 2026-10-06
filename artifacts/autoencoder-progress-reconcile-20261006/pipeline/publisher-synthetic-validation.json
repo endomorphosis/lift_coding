@@ -1,0 +1,63 @@
+{
+  "actual_remote_operations": 0,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/publish_integration.py": {
+      "bytes": 7603,
+      "sha256": "e4f33ca68c1902aea71e07f21605b86562c8483b6131411e4dc73d7d18ca67c9"
+    }
+  },
+  "findings": [],
+  "models_or_source_runtime_executed": false,
+  "passed": true,
+  "results": [
+    {
+      "actual_remote_operations": 0,
+      "case": "datasets_success",
+      "expected_rejection": null,
+      "mocked_pushes": 1,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "workspace_success",
+      "expected_rejection": null,
+      "mocked_pushes": 1,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "upstream_preimage_changed",
+      "expected_rejection": "upstream preimage changed; reconcile: selected.py",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "candidate_changed",
+      "expected_rejection": "candidate changed: selected.py",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "scope_changed",
+      "expected_rejection": "reviewed artifact changed: /tmp/autoencoder-publisher-review-ponlyp3o/review/publication-scope.json",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "unsafe_path",
+      "expected_rejection": "closed normalized repository-relative path required",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    }
+  ],
+  "schema": "independent-integration-publisher-synthetic-validation/v1"
+}
