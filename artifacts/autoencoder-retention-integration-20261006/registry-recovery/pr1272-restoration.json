@@ -1,0 +1,36 @@
+{
+  "base_revision": "0f36163a585a9bf514c41d8eabe202936c000705",
+  "findings": [],
+  "model_or_runtime_code_changed": false,
+  "native_or_Lake_executed": false,
+  "normal_after": {
+    "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+    "index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+  },
+  "normal_before": {
+    "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+    "index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+  },
+  "normal_state_preserved": true,
+  "passed": true,
+  "paths": [
+    {
+      "bytes": 9075,
+      "existing_unreviewed_changes_overwritten": false,
+      "path": "docs/autoencoders/grouped_legal_decoders.md",
+      "previous_sha256": "221bf9eaf93b8db4e57a90017f01303894e4d24483988f5b99c7ff64f81402d0",
+      "sha256": "caea32c25f4713e050d154d0fc33a6f7e1cabbe6234b2f9908b4d90d9e14c84e"
+    },
+    {
+      "bytes": 13500,
+      "existing_unreviewed_changes_overwritten": false,
+      "path": "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+      "previous_sha256": "6c3b7653741ae3d03264fdb629cede9df233616c5ef1d41a816f579afd6e0b20",
+      "sha256": "12e9b330a35560bbb673a6fffbc3551c475c391d8ffb5cf43ab502d59d2ffe82"
+    }
+  ],
+  "qualification_granted": false,
+  "schema": "latest-cross-agent-guards-workingcopy-restoration/v1",
+  "target_revision": "61c5db04538596ea00091cd4f013500854368397",
+  "tests_executed": false
+}

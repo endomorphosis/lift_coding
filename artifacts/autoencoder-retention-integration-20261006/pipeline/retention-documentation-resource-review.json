@@ -1,0 +1,208 @@
+{
+  "Git_mutated": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/actual-result-independent-review.json": {
+      "bytes": 423463,
+      "sha256": "abc9f0a49b18806374046b536d1381bf4318e6c37fc645016f56f74d6d1bd3a8"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/resource-execution-independent-review.json": {
+      "bytes": 16240,
+      "sha256": "452593f28f0d94124037323ac56cb75bddaae3bce7043b123c5a8d2eabbb2340"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/review_resource_execution.py": {
+      "bytes": 23329,
+      "sha256": "40a558c245c766679cf431f5edb517518af6480886c16a8819b761dfbd9047bb"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/normative_wording_retention.md": {
+      "bytes": 7687,
+      "sha256": "d55b4f6e88cf03516ac8d1eca110d4a09079c13946af557f118c200dec3570ec"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/progress_reconciliation_20261006.md": {
+      "bytes": 12357,
+      "sha256": "39c9046ffa28f1765273c960c1bfe4738bbafc10fb6c981d12ce834d22621039"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/evaluation-plan.json": {
+      "bytes": 323039,
+      "sha256": "3b3e0597906192d94da94e85abcee732d4a669d2a7c059ebda7d459bc614e1db"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-guardian-exit.json": {
+      "bytes": 62,
+      "sha256": "97072e4bcd10eb07346c386b033678da20e2740e09a6c7cc69dfc8e27eff9f16"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-guardian.log": {
+      "bytes": 5125,
+      "sha256": "00f77ba3c3666d58f2258d1b07e3f489e54b8feca73aaa51585a6f5e10d0e359"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-lease-observations.jsonl": {
+      "bytes": 38752,
+      "sha256": "0b509202a75aaee9f2225119387cf94ae93c2f3a754e00c870b349a255cf0fd7"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "d699e3149131fb25f8435613f083602a97ab75223a8939958f2ddb8efcb749c9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/child-exit.json": {
+      "bytes": 324,
+      "sha256": "4057e17fff55ea013ac013cc7427f2f6e903edbae94757ca25d909abda9f9be6"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/lease-binding.json": {
+      "bytes": 694,
+      "sha256": "bd623c577355f66a834f1475613c023549f033f68ff176af7e1f22b1dac713ab"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/resources-final.json": {
+      "bytes": 5851,
+      "sha256": "6e5b450bc3b6b90f7e35567ea420ba13bbc75aa89a08319b08fa5ee69eaec969"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/summary.json": {
+      "bytes": 43996,
+      "sha256": "cb1c36c1bb7005e8b63f2bdbba7d64ceff0e41e16e3cba4af156ccdc4e628b57"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/run_reserved.py": {
+      "bytes": 17158,
+      "sha256": "5e16b2f0093a8ebf55987d023721d7f0eba5cbdbbd8b24a32bb632a6b67857bb"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py": {
+      "bytes": 82754,
+      "sha256": "a418e84f70ed8509ba0518feea69e7a8c27865139f83b6c81349eefdfd5893a4"
+    }
+  },
+  "checks": [
+    {
+      "detail": "The independent completed-run resource review passes all 22 checks and binds its resource/guardian receipts.",
+      "id": "clean-completed-resource-review",
+      "passed": true
+    },
+    {
+      "detail": "28.500 s driver, 64.370 s reserved wrapper and 66.364 s outer wall time are separately named and correctly rounded.",
+      "id": "driver-reserved-outer-time-scopes",
+      "passed": true
+    },
+    {
+      "detail": "The separately reported 34.731 s launch-to-reap interval includes monitoring/accounting and is not isolated inference time.",
+      "id": "launch-to-reap-monitoring-scope",
+      "passed": true
+    },
+    {
+      "detail": "The two auxiliary rollout intervals and per-paragraph figures match actual summary generation_seconds and the 48-row denominator.",
+      "id": "cached-rollout-times-correctly-rounded",
+      "passed": true
+    },
+    {
+      "detail": "The documentation avoids treating cached greedy rollout timing as complete encoder-to-proof or bridge-on runtime.",
+      "id": "rollout-speed-boundaries-explicit",
+      "passed": true
+    },
+    {
+      "detail": "Documented worker, batch, bridge/prover and metric-cache settings match the sealed evaluation recipe.",
+      "id": "runtime-options-authenticated",
+      "passed": true
+    },
+    {
+      "detail": "Both guides preserve the declared temperature 0 and 512 context/output limits.",
+      "id": "temperature-and-context-output-limits",
+      "passed": true
+    },
+    {
+      "detail": "The run uses warm authenticated vectors and disabled CUDA; no encoder-forward throughput is claimed.",
+      "id": "warm-cache-and-cuda-boundaries",
+      "passed": true
+    },
+    {
+      "detail": "Historical numerical owners remain distinct from the current source-of-truth compiler integration.",
+      "id": "historical-source-owner-boundary",
+      "passed": true
+    },
+    {
+      "detail": "The 14,567,512-byte finalization census and 14,573,363-byte terminal census differ by exactly the subsequently written 5,851-byte final receipt.",
+      "id": "two-storage-censuses-and-exact-receipt-delta",
+      "passed": true
+    },
+    {
+      "detail": "RSS is explicitly sampled, and the storage/memory reservation figures agree with actual resource receipts.",
+      "id": "sampled-memory-and-reservation-labels",
+      "passed": true
+    },
+    {
+      "detail": "The lifecycle statement matches the reaped successful child and the owned-group final/current observations.",
+      "id": "successful-exit-reaping-and-empty-group",
+      "passed": true
+    },
+    {
+      "detail": "The own reservation/lease are released and the shared configuration matches at recorded and independent current observations.",
+      "id": "release-and-configuration-statements",
+      "passed": true
+    },
+    {
+      "detail": "The guide explicitly retains the endpoint-only finalization gap and declines continuous lease coverage.",
+      "id": "sampled-watchdog-and-finalization-gap",
+      "passed": true
+    },
+    {
+      "detail": "The terminal cancelled getter means a removed lease; it does not contradict successful, uncancelled active lease observations.",
+      "id": "released-cancelled-flag-interpretation",
+      "passed": true
+    },
+    {
+      "detail": "The adoption receipt and reviewed observer scope support the no-reset statement, while ordinary own lease lifecycle remains explicit.",
+      "id": "no-foreign-reset-claim",
+      "passed": true
+    },
+    {
+      "detail": "This postfit observation performs no new training, encoder forward, download or Lake build; the prose preserves those actual execution boundaries.",
+      "id": "no-new-execution-or-transfer-authority",
+      "passed": true
+    },
+    {
+      "detail": "Both documents identify previously exposed development retention, not an independent semantic holdout.",
+      "id": "exposed-development-and-no-fresh-holdout",
+      "passed": true
+    },
+    {
+      "detail": "No selection, checkpoint promotion or global-minimum inference is introduced by the retention prose.",
+      "id": "no-selection-promotion-or-global-minimum",
+      "passed": true
+    },
+    {
+      "detail": "A generated IR example and improved scores do not grant native-family, source-semantic, formalization, proof or Lean admission authority.",
+      "id": "semantic-family-and-lake-gates-preserved",
+      "passed": true
+    },
+    {
+      "detail": "Both guides preserve the unformalized Constitution boundary and grant no span roundtrip status.",
+      "id": "constitution-boundary-preserved",
+      "passed": true
+    },
+    {
+      "detail": "The prior integration guide now links the actual completed follow-up, while retaining its original snapshot and prospective experiment contract.",
+      "id": "progress-guide-followup-resolves",
+      "passed": true
+    },
+    {
+      "detail": "Full numeric/generated-value and reference-barrier validity is separately reviewed by the clean independent actual-result review; this review does not reparse predictions or references.",
+      "id": "numerical-review-separated-and-clean",
+      "passed": true
+    }
+  ],
+  "dimension": null,
+  "documentation_claims_grant_authority": false,
+  "findings": [],
+  "formalized": false,
+  "model_executed": false,
+  "model_imported": false,
+  "passed": true,
+  "phase": "evaluation",
+  "predictions_parsed": false,
+  "proof_authority": false,
+  "reference_bodies_parsed": false,
+  "reviewed_at_unix": 1791299259.5312605,
+  "run_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006",
+  "scheduler_or_lease_state_mutated": false,
+  "schema": "retention-documentation-resource-review/v1",
+  "scope": "Read-only resource, timing and postrun-boundary review of the retention guide and progress-guide follow-up. Numerical generated-value correctness and PR1271 integration are separate independent reviews.",
+  "source_edited": false,
+  "source_edits_required": false,
+  "source_semantics_verified": false,
+  "teacher_qualified": false,
+  "tensor_values_read": false,
+  "tests_rerun": false
+}

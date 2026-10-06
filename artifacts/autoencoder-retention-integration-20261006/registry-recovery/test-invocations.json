@@ -1,0 +1,21 @@
+{
+  "Lake_run": false,
+  "first_attempt": {
+    "reason": "incorrect test module path",
+    "returncode": 4,
+    "tests_run": 0
+  },
+  "models_run": false,
+  "schema": "published-grouped-runtime-targeted-api-controls/v1",
+  "scope": "catalog preservation, wrong domain/version rejection and duplicate/nonfinite JSON refusal; no model fixtures",
+  "second_attempt": {
+    "deselected": 24,
+    "junit": "api-controls-r2.xml",
+    "max_seconds": 60,
+    "module": "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py",
+    "passed": 11,
+    "pytest_seconds": 1.32,
+    "returncode": 0
+  },
+  "training_run": false
+}

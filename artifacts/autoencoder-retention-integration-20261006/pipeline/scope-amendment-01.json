@@ -1,0 +1,55 @@
+{
+  "added_metadata": {
+    "bytes": 1431,
+    "sha256": "75622d354266df7e0a633d3c916d0ffbaf013f7d58f4e3cafa9144cb9df231f9"
+  },
+  "added_metadata_path": "artifacts/autoencoder-retention-integration-20261006/registry-recovery/pr1272-restoration.json",
+  "archive_changed": false,
+  "late_source_changes_already_published_main": true,
+  "latest_datasets_parent": "61c5db04538596ea00091cd4f013500854368397",
+  "model_or_training_executed": false,
+  "previous_scope_sha256": "3252c7493c432ad3a49e8a9fe0d09dcb6bbc19d81c49b5aeeae1d13af672561b",
+  "progress_documentation_preserves_latest_upstream_paragraphs": true,
+  "reason": "Preserve concurrent PR1272 published grouped-head documentation and cross-agent guards",
+  "retention_documentation_changed": false,
+  "schema": "reviewable-main-publication-scope-amendment/v1",
+  "semantic_qualification_granted": false,
+  "updated_bindings": [
+    {
+      "path": "docs/autoencoders/progress_reconciliation_20261006.md",
+      "previous": {
+        "bytes": 11428,
+        "sha256": "b693092f48aa3e600e51ed07ff35e227001854aae16079adfd44c197711f4236"
+      },
+      "repository": "datasets",
+      "updated": {
+        "bytes": 12357,
+        "sha256": "39c9046ffa28f1765273c960c1bfe4738bbafc10fb6c981d12ce834d22621039"
+      }
+    },
+    {
+      "path": "artifacts/autoencoder-retention-integration-20261006/pipeline/retention-documentation-numeric-review.json",
+      "previous": {
+        "bytes": 23099,
+        "sha256": "5569775a9c01ce679e86bc6b723e1dcb5d7b0d3cd75f06c92ba4017de1a98014"
+      },
+      "repository": "workspace",
+      "updated": {
+        "bytes": 27278,
+        "sha256": "a91878bfe6fef4b278b2dad595206bf37e30ed2ecd7f4a90a75680da355b5f98"
+      }
+    },
+    {
+      "path": "artifacts/autoencoder-retention-integration-20261006/pipeline/retention-documentation-resource-review.json",
+      "previous": {
+        "bytes": 10303,
+        "sha256": "4e6310c45fce515ff1ba1236a00032fe18efcbdcd51c8448cfdef4f8f917e857"
+      },
+      "repository": "workspace",
+      "updated": {
+        "bytes": 10303,
+        "sha256": "94c7af526d0bf1eb89caf26092ab1b278d1c8ad3a725ef64f0fd4a0fdb719add"
+      }
+    }
+  ]
+}

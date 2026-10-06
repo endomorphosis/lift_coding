@@ -1,0 +1,63 @@
+{
+  "actual_remote_operations": 0,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/publish_integration.py": {
+      "bytes": 7609,
+      "sha256": "2c9973365ea5b2905301c05b2f35be0b8545f042f54be418a4b01286d8ada84b"
+    }
+  },
+  "findings": [],
+  "models_or_source_runtime_executed": false,
+  "passed": true,
+  "results": [
+    {
+      "actual_remote_operations": 0,
+      "case": "datasets_success",
+      "expected_rejection": null,
+      "mocked_pushes": 1,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "workspace_success",
+      "expected_rejection": null,
+      "mocked_pushes": 1,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "upstream_preimage_changed",
+      "expected_rejection": "upstream preimage changed; reconcile: selected.py",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "candidate_changed",
+      "expected_rejection": "candidate changed: selected.py",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "scope_changed",
+      "expected_rejection": "reviewed artifact changed: /tmp/autoencoder-publisher-review-ecxb8dsd/review/publication-scope.json",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "unsafe_path",
+      "expected_rejection": "closed normalized repository-relative path required",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    }
+  ],
+  "schema": "independent-integration-publisher-synthetic-validation/v1"
+}

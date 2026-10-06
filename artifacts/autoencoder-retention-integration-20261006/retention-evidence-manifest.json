@@ -1,0 +1,390 @@
+{
+  "archive": {
+    "bytes": 4146645,
+    "sha256": "650ec3df8f4216eccb044376fd83f86895226f6b8c11546a3abf3525782e78d4"
+  },
+  "historical_publication_commit": "b1a37b973fa670f18badda527ee5370ee825f84e",
+  "member_count": 75,
+  "members": {
+    "README.md": {
+      "bytes": 2431,
+      "sha256": "6d78883cf7a22894d6e354b615e2a69c7513975d4739e0e5e1a9828c43995938",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/README.md"
+    },
+    "actual-run/child-exit.json": {
+      "bytes": 324,
+      "sha256": "4057e17fff55ea013ac013cc7427f2f6e903edbae94757ca25d909abda9f9be6",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/child-exit.json"
+    },
+    "actual-run/child-identity.json": {
+      "bytes": 44,
+      "sha256": "3c2331e14b4cbc208d705bd563e367df1eed7a3ca8d8ceb5db9c4a516e128f8b",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/child-identity.json"
+    },
+    "actual-run/child.log": {
+      "bytes": 1674,
+      "sha256": "80633b4fc45621a5a5c2203d00ea83a4412b2d1b0366cfea5b07cd2749289302",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/child.log"
+    },
+    "actual-run/command.json": {
+      "bytes": 6466,
+      "sha256": "d739c3f2f81cb79b4c580eb0c335b8a5bd30bb5b3e6dba78c2b9e1c41b27820b",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/command.json"
+    },
+    "actual-run/lease-binding.json": {
+      "bytes": 694,
+      "sha256": "bd623c577355f66a834f1475613c023549f033f68ff176af7e1f22b1dac713ab",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/lease-binding.json"
+    },
+    "actual-run/resource-observations.json": {
+      "bytes": 1744,
+      "sha256": "952fd6e556a40a2106ff0e1cb962919e8a04f35e695d4dc3e2ef2cba03077c3b",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/resource-observations.json"
+    },
+    "actual-run/resources-final.json": {
+      "bytes": 5851,
+      "sha256": "6e5b450bc3b6b90f7e35567ea420ba13bbc75aa89a08319b08fa5ee69eaec969",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/resources-final.json"
+    },
+    "actual-run/resources-start.json": {
+      "bytes": 3188,
+      "sha256": "7809cbb42305f3c06438d152479f26361c68e144903d44626bc04051f6901fe4",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/resources-start.json"
+    },
+    "actual-run/results/384-normative-wording-ce/selected-predictions.json": {
+      "bytes": 26319,
+      "sha256": "3137971457a9ece0ebfbd71bd28cad8ca8ee7634acd8dc334d0cd981c5360208",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-predictions.json"
+    },
+    "actual-run/results/384-normative-wording-ce/selected-score.json": {
+      "bytes": 648156,
+      "sha256": "29432f20088e1810ef82238f3fdc679f4541a426505bdbeefa62ac374840cb16",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-score.json"
+    },
+    "actual-run/results/384-normative-wording-ce/selected-source-head-formula-join.json": {
+      "bytes": 529974,
+      "sha256": "cb6745940c5d4c2ac07b491f969d94b737f294aa397edb3e9f90e93ff378dbbf",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-source-head-formula-join.json"
+    },
+    "actual-run/results/384-normative-wording-ce/selected-source-head-score.json": {
+      "bytes": 597463,
+      "sha256": "5d36b766f57852783cb1578905e0f9c9be7672ff45355b46664ce123b869f716",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-source-head-score.json"
+    },
+    "actual-run/results/384-normative-wording-ce/selected-source-head-trace.json": {
+      "bytes": 1664906,
+      "sha256": "84953c7caec9cf9af2dde6998040ad13c9d126a376ee3887114ae63d0f661f4a",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-source-head-trace.json"
+    },
+    "actual-run/results/384-normative-wording-zero/selected-predictions.json": {
+      "bytes": 26319,
+      "sha256": "416a83eda637e8dca296bd63f393d3d1db2595726b971efd115e4bb58d522f69",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-predictions.json"
+    },
+    "actual-run/results/384-normative-wording-zero/selected-score.json": {
+      "bytes": 648204,
+      "sha256": "f12f05c845bde6bad38a6e41464aba09f5e82cc7a4da55b0c5ed41b97ee153af",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-score.json"
+    },
+    "actual-run/results/384-normative-wording-zero/selected-source-head-formula-join.json": {
+      "bytes": 530996,
+      "sha256": "8f931bb96776430f8e4f08c0a0f1e014f8ddb1c7bf8b1e28c4d59666401e6aeb",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-source-head-formula-join.json"
+    },
+    "actual-run/results/384-normative-wording-zero/selected-source-head-score.json": {
+      "bytes": 598443,
+      "sha256": "2c31d3ad62521454bf3662f31e0accb069229060cc61c847904b9f15b8e0193a",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-source-head-score.json"
+    },
+    "actual-run/results/384-normative-wording-zero/selected-source-head-trace.json": {
+      "bytes": 1666360,
+      "sha256": "2250650b4d2dd8aadfd23e143c4295fdbe11425d6b2ef21d2bbe89f8961d096f",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-source-head-trace.json"
+    },
+    "actual-run/results/768-normative-wording-ce/selected-predictions.json": {
+      "bytes": 26319,
+      "sha256": "1eb9263653eefd5263768558fb58f515faf2bb12f30db2aeef091d9da327d776",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-predictions.json"
+    },
+    "actual-run/results/768-normative-wording-ce/selected-score.json": {
+      "bytes": 648242,
+      "sha256": "7a76308498fc53e8e2d2c5fa06ba7e75d4f934426a9d43f42f3720ac7a13f1d0",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-score.json"
+    },
+    "actual-run/results/768-normative-wording-ce/selected-source-head-formula-join.json": {
+      "bytes": 529589,
+      "sha256": "0075da42b72ad00e2405f591ff850c8348b27d89730a3d07553524b11a5c2729",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-source-head-formula-join.json"
+    },
+    "actual-run/results/768-normative-wording-ce/selected-source-head-score.json": {
+      "bytes": 597122,
+      "sha256": "7c1898d032d5d58c6388d2f366c904c787d236af3b2a52b34078c8520541a6ac",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-source-head-score.json"
+    },
+    "actual-run/results/768-normative-wording-ce/selected-source-head-trace.json": {
+      "bytes": 1665026,
+      "sha256": "60a044d0e459d4a85e25c5b673a81063419fd31bcc8b6d38e9e77bcd91d1323b",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-source-head-trace.json"
+    },
+    "actual-run/results/768-normative-wording-zero/selected-predictions.json": {
+      "bytes": 26319,
+      "sha256": "91b88260a61f6ef1b99bd68343e25e5e87254f74d585047c62ecf7e80cc22121",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-predictions.json"
+    },
+    "actual-run/results/768-normative-wording-zero/selected-score.json": {
+      "bytes": 647666,
+      "sha256": "c2863fb8f75960a61c74b4595724a2057fdcb8323cdce270fe08dc8823a01013",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-score.json"
+    },
+    "actual-run/results/768-normative-wording-zero/selected-source-head-formula-join.json": {
+      "bytes": 529578,
+      "sha256": "8fa2e5ebadfc81ac8395d648c103110585358f9e53d516032a3a9a632ee9e279",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-source-head-formula-join.json"
+    },
+    "actual-run/results/768-normative-wording-zero/selected-source-head-score.json": {
+      "bytes": 597107,
+      "sha256": "908beb0eff65d434ac57f9a8a92fc18ded88f61ebdb6f0e4e6158371772ea4da",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-source-head-score.json"
+    },
+    "actual-run/results/768-normative-wording-zero/selected-source-head-trace.json": {
+      "bytes": 1665510,
+      "sha256": "69bb8bb0e4eb2ca95a16b227a4a03356f0e29ddc40de2cf140808586c8628515",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-source-head-trace.json"
+    },
+    "actual-run/results/predictions-complete.json": {
+      "bytes": 5302,
+      "sha256": "a3f92e990453ae421d4c312ab92c5af66db8b92e6d498a8c5fe50356c84a6996",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/predictions-complete.json"
+    },
+    "actual-run/results/sealed-recipe.json": {
+      "bytes": 634462,
+      "sha256": "84b98ca18e2bf5d5d0463f1bdfb68049681b3f3d1f00769f7eb0c8de92d62ff6",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/sealed-recipe.json"
+    },
+    "actual-run/results/summary.json": {
+      "bytes": 43996,
+      "sha256": "cb1c36c1bb7005e8b63f2bdbba7d64ceff0e41e16e3cba4af156ccdc4e628b57",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/summary.json"
+    },
+    "build_publication_scope.py": {
+      "bytes": 7062,
+      "sha256": "0415eddbec5212be601c0f1c849f10032ee94bfcb870ef38cf5cb99109e310cf",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/build_publication_scope.py"
+    },
+    "owned-guardian/adopt_shared_scheduler.py": {
+      "bytes": 11206,
+      "sha256": "4956baa1e41abe53fc83a2d4ae7709b3be13ebc1c775b44571a33903b8f70b1f",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/adopt_shared_scheduler.py"
+    },
+    "owned-guardian/evaluation-manifest.json": {
+      "bytes": 327444,
+      "sha256": "589e08ea17147019b68f34fe740401deec978163449daae5e8144358952219fc",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/evaluation-manifest.json"
+    },
+    "owned-guardian/evaluation-plan.json": {
+      "bytes": 323039,
+      "sha256": "3b3e0597906192d94da94e85abcee732d4a669d2a7c059ebda7d459bc614e1db",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/evaluation-plan.json"
+    },
+    "owned-guardian/experiment-source/scripts/ops/autoencoder/evaluate_normative_wording_retention.py": {
+      "bytes": 30085,
+      "sha256": "ea7c61a94cd40c09c81cc952134751546b5cd9171a324a187a7010039ac954d4",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/experiment-source/scripts/ops/autoencoder/evaluate_normative_wording_retention.py"
+    },
+    "owned-guardian/lazy_scheduler_adoption.py": {
+      "bytes": 1345,
+      "sha256": "42f31d8da1eb5b44274ca0b8c8180cd78bc083dfd0e93438e61f38223929d84a",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/lazy_scheduler_adoption.py"
+    },
+    "owned-guardian/owned_lease_watchdog.py": {
+      "bytes": 20712,
+      "sha256": "f1b9f71e375cf5ed4004e023bbef2d6f7f61e1ecb588078a1094d7b1982609b3",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/owned_lease_watchdog.py"
+    },
+    "owned-guardian/retention-r1-guardian-exit.json": {
+      "bytes": 62,
+      "sha256": "97072e4bcd10eb07346c386b033678da20e2740e09a6c7cc69dfc8e27eff9f16",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-guardian-exit.json"
+    },
+    "owned-guardian/retention-r1-guardian.log": {
+      "bytes": 5125,
+      "sha256": "00f77ba3c3666d58f2258d1b07e3f489e54b8feca73aaa51585a6f5e10d0e359",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-guardian.log"
+    },
+    "owned-guardian/retention-r1-lease-observations.jsonl": {
+      "bytes": 38752,
+      "sha256": "0b509202a75aaee9f2225119387cf94ae93c2f3a754e00c870b349a255cf0fd7",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-lease-observations.jsonl"
+    },
+    "owned-guardian/retention-r1-scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "d699e3149131fb25f8435613f083602a97ab75223a8939958f2ddb8efcb749c9",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-scheduler-adoption.json"
+    },
+    "owned-guardian/run_guardian.py": {
+      "bytes": 2522,
+      "sha256": "25a1254e785ccd656c9e50fceba0d6a70e8c0345b0abf6633748b880ab1e151e",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/run_guardian.py"
+    },
+    "owned-guardian/run_reserved.py": {
+      "bytes": 17158,
+      "sha256": "5e16b2f0093a8ebf55987d023721d7f0eba5cbdbbd8b24a32bb632a6b67857bb",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/run_reserved.py"
+    },
+    "pre-execution-publication/progress_reconciliation_20261006.md": {
+      "bytes": 10864,
+      "sha256": "76944efb75e1daed7b8d656c95f10e5b40fba2385095aff220b321a222647833",
+      "source_path": null
+    },
+    "prior-integration/branches/latest-pr1271-review.json": {
+      "bytes": 37297,
+      "sha256": "ac7cf742aedf65a9a8f55c1406ef341a3e075d5425cf1e0581b37edf7a8a4f51",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/latest-pr1271-review.json"
+    },
+    "prior-integration/branches/latest-pr1271-review.md": {
+      "bytes": 3875,
+      "sha256": "863efedf72a9091543ed9aed2efda9beb53ad21fc7fc223d31c947af48520bce",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/latest-pr1271-review.md"
+    },
+    "prior-integration/branches/pr1271-canonical-proposal/README.md": {
+      "bytes": 3287,
+      "sha256": "9fa062280b4a23ffed10bc5ba52562e6b694fcd8a5b50a37f627fcd3f3117828",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/pr1271-canonical-proposal/README.md"
+    },
+    "prior-integration/branches/pr1271-canonical-proposal/canonical-preimage-addition.diff": {
+      "bytes": 9031,
+      "sha256": "a612eb48033b8d9ba3b277a2c79f639cfeba257f0bd7005eb14dee96dfc15431",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/pr1271-canonical-proposal/canonical-preimage-addition.diff"
+    },
+    "prior-integration/branches/pr1271-canonical-proposal/canonical-registry-proposed.py": {
+      "bytes": 64337,
+      "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/pr1271-canonical-proposal/canonical-registry-proposed.py"
+    },
+    "prior-integration/branches/pr1271-canonical-proposal/missing-only-restoration-plan.json": {
+      "bytes": 10571,
+      "sha256": "af848b44218ac4382509f9ea1ce2e53e53bdeafaff6b7ee1ad8dfefaea047483",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/pr1271-canonical-proposal/missing-only-restoration-plan.json"
+    },
+    "prior-integration/branches/pr1271-canonical-proposal/proposal-review.json": {
+      "bytes": 20152,
+      "sha256": "63cf5b22f0c53befe8a152b13d9ae0616ffbc94b2db4a3855827fa0588684777",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/pr1271-canonical-proposal/proposal-review.json"
+    },
+    "prior-integration/branches/pr1271-canonical-proposal/published-registry-addition.diff": {
+      "bytes": 9524,
+      "sha256": "3e245549e4758f1d321a3d2e5b3a445db85154f2d19db641ab656fb8a1eef2ca",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/pr1271-canonical-proposal/published-registry-addition.diff"
+    },
+    "prior-integration/branches/pr1271-canonical-proposal/registry-preimage.json": {
+      "bytes": 908,
+      "sha256": "de6fc2a6d5a1663d7edf66b1b170c4bfaea387a29e682fba3096b2e17f478590",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/pr1271-canonical-proposal/registry-preimage.json"
+    },
+    "prior-integration/datasets-publication.json": {
+      "bytes": 1168,
+      "sha256": "b777fb44d618b18a787b8d5d345af80e9831b9717ef4ddc7ba3f37c406cf9961",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/datasets-publication.json"
+    },
+    "prior-integration/retention/actual-result-independent-review.json": {
+      "bytes": 423463,
+      "sha256": "abc9f0a49b18806374046b536d1381bf4318e6c37fc645016f56f74d6d1bd3a8",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/actual-result-independent-review.json"
+    },
+    "prior-integration/retention/audit_actual_retention.py": {
+      "bytes": 23372,
+      "sha256": "d983a8d843b033dca0fda8689b53a2fff41d57e407ec8da41d8b5b1d0eb4c20c",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/audit_actual_retention.py"
+    },
+    "prior-integration/retention/combine_execution_readiness.py": {
+      "bytes": 2608,
+      "sha256": "8b4bf57840d7fe0c6b823ec2254f2a94a8f7aaa27ea9bc8d655dd5caadf97d89",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/combine_execution_readiness.py"
+    },
+    "prior-integration/retention/combiner-review.json": {
+      "bytes": 3871,
+      "sha256": "34dd07e32a1ab9a10f695b477961b521139e1047800ce98a57987570af9ae897",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/combiner-review.json"
+    },
+    "prior-integration/retention/execution-readiness.json": {
+      "bytes": 40993,
+      "sha256": "4fcac174ef2bbff6ff4d1d0a32ecd047251a274a86019713c57f53fb41650e29",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/execution-readiness.json"
+    },
+    "prior-integration/retention/guardian-input-hash-review.json": {
+      "bytes": 549470,
+      "sha256": "7e53469d3d3eb810a518b1b0a7bafc5dfcdacd283f8c06c192757adcf9d2b73c",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/guardian-input-hash-review.json"
+    },
+    "prior-integration/retention/guardian-readiness.json": {
+      "bytes": 23394,
+      "sha256": "178d35f137ee6bf4284e686a3af30270c20ee4d6f8ac6e63af33dbe2219d5ac3",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/guardian-readiness.json"
+    },
+    "prior-integration/retention/independent-runner-readiness.json": {
+      "bytes": 12807,
+      "sha256": "b3b6e895c7d4b97c37c2dd702a51d2cec03273fa6d92e583877d2f9b984e15b9",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/independent-runner-readiness.json"
+    },
+    "prior-integration/retention/resource-execution-independent-review.json": {
+      "bytes": 16240,
+      "sha256": "452593f28f0d94124037323ac56cb75bddaae3bce7043b123c5a8d2eabbb2340",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/resource-execution-independent-review.json"
+    },
+    "prior-integration/retention/review_resource_execution.py": {
+      "bytes": 23329,
+      "sha256": "40a558c245c766679cf431f5edb517518af6480886c16a8819b761dfbd9047bb",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/review_resource_execution.py"
+    },
+    "prior-integration/workspace-publication.json": {
+      "bytes": 3185,
+      "sha256": "850c70f028d49bf5320d3b029c6d75e834eed593adc34f93399c6fb2b952fa64",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/workspace-publication.json"
+    },
+    "publish_integration.py": {
+      "bytes": 7609,
+      "sha256": "2c9973365ea5b2905301c05b2f35be0b8545f042f54be418a4b01286d8ada84b",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/publish_integration.py"
+    },
+    "publisher_review_tests.py": {
+      "bytes": 9293,
+      "sha256": "5fd6af5937d5f6ff30e3d645c76d051b22c59f07920e8a9d3a01b18f858d47a8",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/publisher_review_tests.py"
+    },
+    "registry-recovery/api-controls-r2.xml": {
+      "bytes": 2582,
+      "sha256": "e04f15c9b3dea84ce7a0a36d884d11ab6af9ac7796e32a8d4043395ea2f94c57",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/api-controls-r2.xml"
+    },
+    "registry-recovery/api-controls.xml": {
+      "bytes": 236,
+      "sha256": "244592134ea9d835f507882c45b79f06b11df603c23dbf3642ec6fcf8f3fcd7f",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/api-controls.xml"
+    },
+    "registry-recovery/restoration-receipt.json": {
+      "bytes": 10728,
+      "sha256": "a8b51e27ac46959f7e2661e6fb149d13b9e94bfe402be430e3e881c828559677",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/restoration-receipt.json"
+    },
+    "registry-recovery/restore_published_grouped_runtime.py": {
+      "bytes": 3120,
+      "sha256": "469f2c0121e05a19fccc0eba109336fc3984750e3271634e2f7e94529a1096c9",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/restore_published_grouped_runtime.py"
+    },
+    "registry-recovery/runtime-registry-preimage.py": {
+      "bytes": 58156,
+      "sha256": "ca31983a5f514c7f5cf8b1b9250ef92e1beb13c0a2305381aac575931e79b4ac",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/runtime-registry-preimage.py"
+    },
+    "registry-recovery/test-invocations.json": {
+      "bytes": 640,
+      "sha256": "8e4d1152db63153eeaded722101e7270a55a0220fcee0f0357778b40efd74a5f",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/test-invocations.json"
+    }
+  },
+  "model_weights_included": false,
+  "native_embedding_cache_values_included": false,
+  "schema": "bounded-retention-evidence-archive/v1",
+  "source_tree_mirrors_included": false,
+  "uncompressed_bytes": 16751062
+}

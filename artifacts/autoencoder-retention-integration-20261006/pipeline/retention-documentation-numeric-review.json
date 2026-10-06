@@ -1,0 +1,608 @@
+{
+  "all_semantic_proof_admission_promotion_masks_false": true,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/results.json": {
+      "bytes": 132436,
+      "sha256": "c8548ecef2c12b54526f4f4bdfefaea8c40032c7367abb2502ad4ee18a99d755"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/evidence/evidence-review.json": {
+      "bytes": 705529,
+      "sha256": "e26d4d7395d3af9d936ad33af50f141ab9d99578c8f29ddc9c3a321662c31ddb"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/pipeline/reconciliation-documentation-review.json": {
+      "bytes": 9785,
+      "sha256": "7e71d44e947b1f3531820be4faaf0c4aa3de451a0e3c23351555203da1c42fc3"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/actual-result-independent-review.json": {
+      "bytes": 423463,
+      "sha256": "abc9f0a49b18806374046b536d1381bf4318e6c37fc645016f56f74d6d1bd3a8"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/audit_actual_retention.py": {
+      "bytes": 23372,
+      "sha256": "d983a8d843b033dca0fda8689b53a2fff41d57e407ec8da41d8b5b1d0eb4c20c"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/retention/resource-execution-independent-review.json": {
+      "bytes": 16240,
+      "sha256": "452593f28f0d94124037323ac56cb75bddaae3bce7043b123c5a8d2eabbb2340"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/pipeline/retention-documentation-numeric-review-r1.json": {
+      "bytes": 23099,
+      "sha256": "5569775a9c01ce679e86bc6b723e1dcb5d7b0d3cd75f06c92ba4017de1a98014"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/api-controls-r2.xml": {
+      "bytes": 2582,
+      "sha256": "e04f15c9b3dea84ce7a0a36d884d11ab6af9ac7796e32a8d4043395ea2f94c57"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/restoration-receipt.json": {
+      "bytes": 10728,
+      "sha256": "a8b51e27ac46959f7e2661e6fb149d13b9e94bfe402be430e3e881c828559677"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/test-invocations.json": {
+      "bytes": 640,
+      "sha256": "8e4d1152db63153eeaded722101e7270a55a0220fcee0f0357778b40efd74a5f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/grouped_legal_decoders.md": {
+      "bytes": 9075,
+      "sha256": "caea32c25f4713e050d154d0fc33a6f7e1cabbe6234b2f9908b4d90d9e14c84e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/normative_wording_retention.md": {
+      "bytes": 7687,
+      "sha256": "d55b4f6e88cf03516ac8d1eca110d4a09079c13946af557f118c200dec3570ec"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json": {
+      "bytes": 28691,
+      "sha256": "bd37dc85cd23f36b1bcf30695ae3bb56674bac139ce01c0f0466cb024daa3291"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md": {
+      "bytes": 13148,
+      "sha256": "c0f1ee29a0d188ffb0750cb2b06e6f38abda6d8065db0e33035b5a2b0bf667b4"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json": {
+      "bytes": 7188,
+      "sha256": "ea4cd3a66bf3fa9134a88c6dbd143f75369aa4708e544e08c3dbfd0aa7c8d1b7"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md": {
+      "bytes": 12776,
+      "sha256": "56b913587a21dd44e97e19ffff5d2be826da2aaa2e87dc598727c56f8b89e08c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json": {
+      "bytes": 12408,
+      "sha256": "6fde5a8adaa68730058679722e4ec521312ac725033dc1f4395cbf5bc49c6246"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md": {
+      "bytes": 9629,
+      "sha256": "52d0459199e9b1819f2c897b565772ffa4debab37296bc5b76831a021e2e43f7"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/historical_handoff_index.md": {
+      "bytes": 3220,
+      "sha256": "cea8adb3d3a2cc7de260f1262b67ebc295a486d15bc71da5a0cbc33fdc518fdc"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json": {
+      "bytes": 53630,
+      "sha256": "ba05379dda8d7215d0c907b78b18e85dec703f6d98923a5da8c46388f908da60"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md": {
+      "bytes": 12577,
+      "sha256": "24f44c8351d273e50bcb41f6d684a1ab742d3326dde8904769c1062dea2482f1"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json": {
+      "bytes": 22303,
+      "sha256": "035578e2629d1b728fbfae8b177ab23a2ca628ef428a8a376451fdb34d5924e9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md": {
+      "bytes": 8806,
+      "sha256": "e1d61c57126a5e4553296d8a0758654bdf4d398d59efecfdc5bc62a4122a8615"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/progress_reconciliation_20261006.md": {
+      "bytes": 12357,
+      "sha256": "39c9046ffa28f1765273c960c1bfe4738bbafc10fb6c981d12ce834d22621039"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/grouped-legal-decoders-20261006/summary.json": {
+      "bytes": 6729,
+      "sha256": "94fe7cfd1c736b2a6bb310f920a5cbc258731fef9f73a5c79ae173a5591827ec"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py": {
+      "bytes": 64337,
+      "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/test_legal_grouped_phase1_integration.py": {
+      "bytes": 13500,
+      "sha256": "12e9b330a35560bbb673a6fffbc3551c475c391d8ffb5cf43ab502d59d2ffe82"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py": {
+      "bytes": 12462,
+      "sha256": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-fresh-normative-style-r2-20261004/preparation-r1/results/references.json": {
+      "bytes": 154526,
+      "sha256": "b85a24543587f88a185037c02094048eba6bc4bfbfacac465d35a8942a895d0c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json": {
+      "bytes": 2797392,
+      "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json": {
+      "bytes": 2798242,
+      "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json": {
+      "bytes": 4779949,
+      "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json": {
+      "bytes": 4778674,
+      "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/evaluation-manifest.json": {
+      "bytes": 327444,
+      "sha256": "589e08ea17147019b68f34fe740401deec978163449daae5e8144358952219fc"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/evaluation-plan.json": {
+      "bytes": 323039,
+      "sha256": "3b3e0597906192d94da94e85abcee732d4a669d2a7c059ebda7d459bc614e1db"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-guardian-exit.json": {
+      "bytes": 62,
+      "sha256": "97072e4bcd10eb07346c386b033678da20e2740e09a6c7cc69dfc8e27eff9f16"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-guardian.log": {
+      "bytes": 5125,
+      "sha256": "00f77ba3c3666d58f2258d1b07e3f489e54b8feca73aaa51585a6f5e10d0e359"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-lease-observations.jsonl": {
+      "bytes": 38752,
+      "sha256": "0b509202a75aaee9f2225119387cf94ae93c2f3a754e00c870b349a255cf0fd7"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1-scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "d699e3149131fb25f8435613f083602a97ab75223a8939958f2ddb8efcb749c9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/child-exit.json": {
+      "bytes": 324,
+      "sha256": "4057e17fff55ea013ac013cc7427f2f6e903edbae94757ca25d909abda9f9be6"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/resource-observations.json": {
+      "bytes": 1744,
+      "sha256": "952fd6e556a40a2106ff0e1cb962919e8a04f35e695d4dc3e2ef2cba03077c3b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/resources-final.json": {
+      "bytes": 5851,
+      "sha256": "6e5b450bc3b6b90f7e35567ea420ba13bbc75aa89a08319b08fa5ee69eaec969"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-predictions.json": {
+      "bytes": 26319,
+      "sha256": "3137971457a9ece0ebfbd71bd28cad8ca8ee7634acd8dc334d0cd981c5360208"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-score.json": {
+      "bytes": 648156,
+      "sha256": "29432f20088e1810ef82238f3fdc679f4541a426505bdbeefa62ac374840cb16"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-source-head-formula-join.json": {
+      "bytes": 529974,
+      "sha256": "cb6745940c5d4c2ac07b491f969d94b737f294aa397edb3e9f90e93ff378dbbf"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-source-head-score.json": {
+      "bytes": 597463,
+      "sha256": "5d36b766f57852783cb1578905e0f9c9be7672ff45355b46664ce123b869f716"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-source-head-trace.json": {
+      "bytes": 1664906,
+      "sha256": "84953c7caec9cf9af2dde6998040ad13c9d126a376ee3887114ae63d0f661f4a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-predictions.json": {
+      "bytes": 26319,
+      "sha256": "416a83eda637e8dca296bd63f393d3d1db2595726b971efd115e4bb58d522f69"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-score.json": {
+      "bytes": 648204,
+      "sha256": "f12f05c845bde6bad38a6e41464aba09f5e82cc7a4da55b0c5ed41b97ee153af"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-source-head-formula-join.json": {
+      "bytes": 530996,
+      "sha256": "8f931bb96776430f8e4f08c0a0f1e014f8ddb1c7bf8b1e28c4d59666401e6aeb"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-source-head-score.json": {
+      "bytes": 598443,
+      "sha256": "2c31d3ad62521454bf3662f31e0accb069229060cc61c847904b9f15b8e0193a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-source-head-trace.json": {
+      "bytes": 1666360,
+      "sha256": "2250650b4d2dd8aadfd23e143c4295fdbe11425d6b2ef21d2bbe89f8961d096f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-predictions.json": {
+      "bytes": 26319,
+      "sha256": "1eb9263653eefd5263768558fb58f515faf2bb12f30db2aeef091d9da327d776"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-score.json": {
+      "bytes": 648242,
+      "sha256": "7a76308498fc53e8e2d2c5fa06ba7e75d4f934426a9d43f42f3720ac7a13f1d0"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-source-head-formula-join.json": {
+      "bytes": 529589,
+      "sha256": "0075da42b72ad00e2405f591ff850c8348b27d89730a3d07553524b11a5c2729"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-source-head-score.json": {
+      "bytes": 597122,
+      "sha256": "7c1898d032d5d58c6388d2f366c904c787d236af3b2a52b34078c8520541a6ac"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-source-head-trace.json": {
+      "bytes": 1665026,
+      "sha256": "60a044d0e459d4a85e25c5b673a81063419fd31bcc8b6d38e9e77bcd91d1323b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-predictions.json": {
+      "bytes": 26319,
+      "sha256": "91b88260a61f6ef1b99bd68343e25e5e87254f74d585047c62ecf7e80cc22121"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-score.json": {
+      "bytes": 647666,
+      "sha256": "c2863fb8f75960a61c74b4595724a2057fdcb8323cdce270fe08dc8823a01013"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-source-head-formula-join.json": {
+      "bytes": 529578,
+      "sha256": "8fa2e5ebadfc81ac8395d648c103110585358f9e53d516032a3a9a632ee9e279"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-source-head-score.json": {
+      "bytes": 597107,
+      "sha256": "908beb0eff65d434ac57f9a8a92fc18ded88f61ebdb6f0e4e6158371772ea4da"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-source-head-trace.json": {
+      "bytes": 1665510,
+      "sha256": "69bb8bb0e4eb2ca95a16b227a4a03356f0e29ddc40de2cf140808586c8628515"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/predictions-complete.json": {
+      "bytes": 5302,
+      "sha256": "a3f92e990453ae421d4c312ab92c5af66db8b92e6d498a8c5fe50356c84a6996"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/summary.json": {
+      "bytes": 43996,
+      "sha256": "cb1c36c1bb7005e8b63f2bdbba7d64ceff0e41e16e3cba4af156ccdc4e628b57"
+    }
+  },
+  "audit_execution": {
+    "encoder_executed": false,
+    "model_executed": false,
+    "model_imported": false,
+    "native_validator_or_prover_or_lake_executed": false,
+    "read_only": true,
+    "reference_bodies_parsed_after_root_completion_signal": true,
+    "source_or_tensor_or_document_modified": false
+  },
+  "checks": [
+    {
+      "id": "completed-independent-numerical-and-resource-audits",
+      "passed": true
+    },
+    {
+      "id": "previously-exposed-retention-population",
+      "passed": true
+    },
+    {
+      "id": "empty-qualifiers-not-qualified",
+      "passed": true
+    },
+    {
+      "id": "four-paragraph-and-CE-table-claims",
+      "passed": true
+    },
+    {
+      "id": "384-remaining-substitutions",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_prefix_hashes": 2880,
+        "full_vocabulary_scalar_sites": 2880,
+        "reference_labels_checked_against_complete_ordered_rules": true
+      },
+      "id": "independent-gold-label-prefix-and-clause-binding",
+      "passed": true
+    },
+    {
+      "details": {
+        "panels": [
+          {
+            "arm": "normative-wording-zero",
+            "dimension": 384,
+            "eos_count": 48,
+            "rules": 180,
+            "scalar_sites": 720,
+            "syntax_valid": 48,
+            "unavailable": 0,
+            "unvisited": 0,
+            "valid_rules": 180
+          },
+          {
+            "arm": "normative-wording-ce",
+            "dimension": 384,
+            "eos_count": 48,
+            "rules": 180,
+            "scalar_sites": 720,
+            "syntax_valid": 48,
+            "unavailable": 0,
+            "unvisited": 0,
+            "valid_rules": 180
+          },
+          {
+            "arm": "normative-wording-zero",
+            "dimension": 768,
+            "eos_count": 48,
+            "rules": 180,
+            "scalar_sites": 720,
+            "syntax_valid": 48,
+            "unavailable": 0,
+            "unvisited": 0,
+            "valid_rules": 180
+          },
+          {
+            "arm": "normative-wording-ce",
+            "dimension": 768,
+            "eos_count": 48,
+            "rules": 180,
+            "scalar_sites": 720,
+            "syntax_valid": 48,
+            "unavailable": 0,
+            "unvisited": 0,
+            "valid_rules": 180
+          }
+        ]
+      },
+      "id": "complete-all-facets-rules-EOS-and-null-site-accounting",
+      "passed": true
+    },
+    {
+      "details": {
+        "source_correct_formula_wrong": [
+          {
+            "generated": "P",
+            "gold": "O",
+            "id": "fresh-modality-v3:49b5ff821271d381aeee3016efde2bb39a2b2508c01c867d3d954904322ba6b9",
+            "slot": 1
+          },
+          {
+            "generated": "P",
+            "gold": "O",
+            "id": "fresh-modality-v3:7e759680c3ce8cd08b9cbcc103e89f51d1bd939581c7ddd039905fa99175843b",
+            "slot": 2
+          }
+        ]
+      },
+      "id": "384-source-and-formula-diagnostic",
+      "passed": true
+    },
+    {
+      "details": {
+        "arm": "normative-wording-ce",
+        "decoder_generated_IR": {
+          "rules": [
+            {
+              "action": "preserve",
+              "actor": "trustee",
+              "conditions": [],
+              "exceptions": [],
+              "modality": "O",
+              "object": "archive",
+              "temporal": []
+            }
+          ]
+        },
+        "dimension": 768,
+        "note": "The displayed actual O row is now explicitly labeled as 768D auxiliary. Both 384D arms emit P on this row; their errors remain counted.",
+        "predictions_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-predictions.json",
+        "source_id": "fresh-modality-v3:fc5e287da9b1bef21f873f5a6972bfb9378b2bafefcd77d095f035a2d4502c09"
+      },
+      "id": "example-is-retained-actual-decoder-JSON",
+      "passed": true
+    },
+    {
+      "id": "zero-parity-durable-same-pass-barrier",
+      "passed": true
+    },
+    {
+      "id": "timing-scopes-and-per-paragraph-units",
+      "passed": true
+    },
+    {
+      "id": "resource-census-and-sampled-lease-claims",
+      "passed": true
+    },
+    {
+      "id": "warm-cache-offline-no-fit-no-proof-or-promotion",
+      "passed": true
+    },
+    {
+      "details": {
+        "historical_reconciliation_review": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/pipeline/reconciliation-documentation-review.json",
+        "new_grouped_PR_semantics": "Architecture/source and published runtime integration receive a separate agent review; this report checks retention numeric interpretation."
+      },
+      "id": "historical-and-later-populations-remain-separate",
+      "passed": true
+    },
+    {
+      "details": {
+        "deselected": 24,
+        "model_or_native_or_Lake_executed": false,
+        "preserved_head_index": {
+          "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+        },
+        "published_owner_sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955",
+        "pytest_seconds": 1.32,
+        "qualification_granted": false,
+        "restored_files": 15,
+        "targeted_API_tests": 11
+      },
+      "id": "final-canonical-grouped-registry-follow-up",
+      "passed": true
+    },
+    {
+      "details": {
+        "scope": "Only the progress-guide byte binding is refreshed; prior retention document and numerical result bindings are preserved.",
+        "upstream_commit": "61c5db04538596ea00091cd4f013500854368397"
+      },
+      "id": "PR1272-upstream-paragraph-preserved-verbatim",
+      "passed": true
+    },
+    {
+      "details": {
+        "negative_denominator": 64,
+        "negative_incidental_blocks": 7,
+        "negative_learned_refusals": 55,
+        "negative_unsupported_emissions": 2,
+        "positive_denominator": 64,
+        "positive_exact": 64,
+        "source": "Published PR1271 findings; no new model run."
+      },
+      "id": "PR1271-counts-and-distinct-failure-types",
+      "passed": true
+    },
+    {
+      "details": {
+        "new_model_or_native_or_Lake_calls": false,
+        "original_actual_native_scope_witness_only": true,
+        "retained_prediction_replays": 256
+      },
+      "id": "PR1271-retained-replay-and-scope-controls",
+      "passed": true
+    },
+    {
+      "details": {
+        "latent_8D_384D_768D_conditioning": false,
+        "later_cohort_now_exposed": true,
+        "overlapping_published_tests_not_added_to_integration_test_count": true,
+        "raw_source_and_explicit_scope": true,
+        "real_law_formalization_established": false
+      },
+      "id": "PR1271-architecture-and-real-law-limits",
+      "passed": true
+    },
+    {
+      "details": {
+        "checkpoint_sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+        "v2_revision": "726386d3cb0ef068f275d4ded97fef71fdfeebf0",
+        "verification": "Read published Git blobs and bound original replay receipts; no Hub/download/model execution in this review."
+      },
+      "id": "PR1271-immutable-published-source-identities",
+      "passed": true
+    },
+    {
+      "details": {
+        "HEAD_and_index_preserved": {
+          "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+        },
+        "bindings": [
+          {
+            "current_file": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/grouped_legal_decoders.md",
+            "immutable_postimage": {
+              "bytes": 9075,
+              "commit": "61c5db04538596ea00091cd4f013500854368397",
+              "git_blob": "8dd03ce7097b1a3cc96a2e9c227ad41f27f0ad14",
+              "sha256": "caea32c25f4713e050d154d0fc33a6f7e1cabbe6234b2f9908b4d90d9e14c84e"
+            },
+            "path": "docs/autoencoders/grouped_legal_decoders.md",
+            "preserved_preimage": {
+              "bytes": 8776,
+              "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+              "git_blob": "e5b72457c19d8f0533b88fdbf1308c3ac06b5ba7",
+              "path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/pr1272-preimages/docs/autoencoders/grouped_legal_decoders.md",
+              "sha256": "221bf9eaf93b8db4e57a90017f01303894e4d24483988f5b99c7ff64f81402d0"
+            }
+          },
+          {
+            "current_file": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/test_legal_grouped_phase1_integration.py",
+            "immutable_postimage": {
+              "bytes": 13500,
+              "commit": "61c5db04538596ea00091cd4f013500854368397",
+              "git_blob": "f8a7e8c2b97aef195dc646610e76ccbe27c478c8",
+              "sha256": "12e9b330a35560bbb673a6fffbc3551c475c391d8ffb5cf43ab502d59d2ffe82"
+            },
+            "path": "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+            "preserved_preimage": {
+              "bytes": 8925,
+              "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+              "git_blob": "127135af815271476ca2b3d7db9e0c329944043a",
+              "path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/pr1272-preimages/tests/unit/logic/test_legal_grouped_phase1_integration.py",
+              "sha256": "6c3b7653741ae3d03264fdb629cede9df233616c5ef1d41a816f579afd6e0b20"
+            }
+          }
+        ],
+        "historical_PR1271_metrics_unchanged": true,
+        "new_tests_or_models_or_native_or_Lake_executed": false,
+        "production_model_runtime_changes": false,
+        "restoration_receipt": {
+          "bytes": 1431,
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/registry-recovery/pr1272-restoration.json",
+          "sha256": "75622d354266df7e0a633d3c916d0ffbaf013f7d58f4e3cafa9144cb9df231f9"
+        }
+      },
+      "id": "PR1272-two-exact-restored-working-file-bindings",
+      "passed": true
+    }
+  ],
+  "document_paths": [
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/normative_wording_retention.md",
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/progress_reconciliation_20261006.md"
+  ],
+  "example_binding_scope": "Explicitly authenticated and documented as actual 768D auxiliary row; the example makes no claim that the 384D row is correct.",
+  "findings": [],
+  "passed": true,
+  "prior_review_r1": {
+    "bytes": 23099,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/pipeline/retention-documentation-numeric-review-r1.json",
+    "sha256": "5569775a9c01ce679e86bc6b723e1dcb5d7b0d3cd75f06c92ba4017de1a98014"
+  },
+  "prior_review_r2": {
+    "bytes": 27278,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/pipeline/retention-documentation-numeric-review-r2.json",
+    "sha256": "a91878bfe6fef4b278b2dad595206bf37e30ed2ecd7f4a90a75680da355b5f98"
+  },
+  "published_grouped_source_bindings": [
+    {
+      "bytes": 11596,
+      "commit": "61c5db04538596ea00091cd4f013500854368397",
+      "git_blob": "0db877899c4631755cfe965958c109aa56ee556d",
+      "path": "docs/autoencoders/progress_reconciliation_20261006.md",
+      "sha256": "689205848379b69fdf771de4d6abe4c017fcdd4a5e006ad165b6ca1bea63bc7c"
+    },
+    {
+      "bytes": 8776,
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob": "e5b72457c19d8f0533b88fdbf1308c3ac06b5ba7",
+      "path": "docs/autoencoders/grouped_legal_decoders.md",
+      "sha256": "221bf9eaf93b8db4e57a90017f01303894e4d24483988f5b99c7ff64f81402d0"
+    },
+    {
+      "bytes": 6729,
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob": "a2accc1fcb5765993da35757bb41a593c4d694b6",
+      "path": "docs/implementation/reports/evidence/grouped-legal-decoders-20261006/summary.json",
+      "sha256": "94fe7cfd1c736b2a6bb310f920a5cbc258731fef9f73a5c79ae173a5591827ec"
+    }
+  ],
+  "review_amendment": {
+    "existing_numerical_bindings_unchanged": true,
+    "existing_result_archive_unchanged": true,
+    "new_progress_guide_binding": {
+      "bytes": 12357,
+      "sha256": "39c9046ffa28f1765273c960c1bfe4738bbafc10fb6c981d12ce834d22621039"
+    },
+    "previous_progress_guide_binding": {
+      "bytes": 11428,
+      "sha256": "b693092f48aa3e600e51ed07ff35e227001854aae16079adfd44c197711f4236"
+    },
+    "reason": "PR1272 upstream grouped-head paragraph integrated while preserving historical snapshot and retention follow-up.",
+    "retention_doc_unchanged": true
+  },
+  "review_binding_amendment_2": {
+    "only_artifact_bindings_updated": [
+      "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/grouped_legal_decoders.md",
+      "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/test_legal_grouped_phase1_integration.py"
+    ],
+    "previous_PR1271_Git_bindings_retained_as_historical": true,
+    "reason": "Root restored PR1272 exact guide and phase-one test postimages after previous file observation.",
+    "retention_document_and_result_archive_unchanged": true
+  },
+  "reviewed_at_unix": 1791300591.8110156,
+  "root_completion_signal_received": true,
+  "schema": "retention-documentation-numeric-review/v1"
+}
