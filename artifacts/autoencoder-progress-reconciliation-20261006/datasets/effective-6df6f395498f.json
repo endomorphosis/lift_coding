@@ -1,0 +1,38 @@
+{
+  "counts": {
+    "identical": 1,
+    "missing": 0,
+    "modified": 0
+  },
+  "git_state_mutated": false,
+  "lean_admission_granted": false,
+  "model_executed": false,
+  "paths": [
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder.py",
+      "source": {
+        "blob": "27a8afb136ab962852c604d5c98ae40d7d136182",
+        "bytes": 32609,
+        "mode": "100644",
+        "sha256": "035ca389848a37344025a69c8788fd66179f60ac21207c24779faeeb936c6f8a"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "27a8afb136ab962852c604d5c98ae40d7d136182",
+        "bytes": 32609,
+        "mode": "100644",
+        "sha256": "035ca389848a37344025a69c8788fd66179f60ac21207c24779faeeb936c6f8a"
+      }
+    }
+  ],
+  "repository": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006",
+  "schema": "autoencoder-effective-tree-review/v1",
+  "scope": "Source presence only; modified files require review against later work.",
+  "semantic_qualification_granted": false,
+  "source_history_reachable_from_target": true,
+  "source_refs": [
+    "refs/heads/recovery/tmp-training-publish-20261002"
+  ],
+  "source_revision": "6df6f395498f73095c6c560e44a55367741cdf3f",
+  "target_revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+}

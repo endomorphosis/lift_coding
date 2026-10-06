@@ -1,0 +1,315 @@
+{
+  "UI_tracking_finding": "With no local branch override and no remote agent/ui-ux-ir ref, git submodule update --remote cannot resolve its configured remote-tracking revision. This is a dangling tracking selector, not evidence of a valid older UI branch. No update was executed.",
+  "UI_tracking_review_pin": {
+    "bytes": 7091,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/UI-branch-review.json",
+    "sha256": "3eccd57c4423d0bb89dfbcbc58ebd0d77d55c1bbb72d6329b44bbd5b0d6b2b7b"
+  },
+  "active_dirty_source_review_pin": {
+    "bytes": 720267,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-source-effective-review.json",
+    "sha256": "40b58e9b83b1b2a66748ef5587d093a6faa21468334381c4a001c338f26a9741"
+  },
+  "active_grouped_work_classification": "Ten untracked grouped-span/deontic owners/tests on integration worktree, with overlapping canonical dirty copies; not on main and not admitted by this survey. Owner review, current-main dependency/compatibility checks and meaningful tests required before commit. Preserve all copies.",
+  "blanket_ancestor_or_old_publication_merges_not_recommended": true,
+  "canonical_dirty_scope": {
+    "dirty_entries": 2468,
+    "proof_semantic_or_runtime_qualification_granted": false,
+    "selected_modified_main": 17,
+    "selected_new_main_absent": 43,
+    "selected_same_main": 782,
+    "selected_source_files": 842
+  },
+  "codebase_replay_dirty_scope": "Two tracked dirty files, UI wire decoder and modal_autoencoder. Selected source review hashes UI dirty decoder and current-main preimage; preserve both, do not merge stale tree.",
+  "completed": true,
+  "current_published_contextual_runtime_unchanged_except_later_parallel_doc_note": true,
+  "effective_tree_auditor_reused": true,
+  "existing_work_to_reuse": [
+    "Root effective-tree auditor and16/18study matrix; already integrated six IR wrappers, source-v2 saved-weight continuation and retained text scorer.",
+    "Published contextual37c2/39f2 runtime and immutable original384/768 assets/caches:48/48 IR,0/48 original prose,454 controls.",
+    "Published paraphrase4state diagnosis:20/19/46/46 exact on different exposed wording populations.",
+    "Published normative795d source and metadata:38455\u219260/60,76860\u219260/60;4distinct tensor endpoints,8serializationroles/aliases; prospective wording with exposed semantics, empty qualifiers, no promotion."
+  ],
+  "history_divergence_does_not_imply_useful_missing_code": true,
+  "main_autoformalization_next_gates": [
+    "Update existing cumulative progress guide rather than duplicating merged studies or cold-restarting training.",
+    "Audit exposed v3 retention and reserve genuinely fresh source groups before promotion; preserve source/checkpoint/cohort distinctions.",
+    "Review active grouped source and complete nonempty qualifier/cross-clause contracts under separate native output profiles.",
+    "Maintain12family-width inventories and distinct schema/version/task/ablation checkpoint namespaces; current local/public original availability does not establish all12runtimes/stores.",
+    "Keep original-text reconstruction separate; semanticIR plus lexical/order/citation residual contract must be explicit.",
+    "Use native paired vectors and manifests for tensor/token transfer to768; no 384padding masquerading as native768 or automatic8192qualification.",
+    "Bind codebase/intent planning candidates to currentrepository generation and independentchecker proof evidence."
+  ],
+  "main_snapshot_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "newer_normative_training_already_published": {
+    "all8_complete_state_serialization_files_fresh_pins_match": true,
+    "checkpoint_promoted": false,
+    "current_ModelManager_or_HF_presence_or_absence_not_inferred": true,
+    "current_model_registration_or_publication_evidence_checked": false,
+    "decoder_output_limit_tokens": 512,
+    "encoder_context_tokens": 512,
+    "fresh_holdout": false,
+    "native_encoder_preparation_executed": true,
+    "native_vectors_per_width": 276,
+    "original_DEV_meanings_previously_exposed": true,
+    "published_main_source_result_pin": {
+      "bytes": 2902845,
+      "commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "repository_relative_path": "docs/implementation/reports/evidence/decoder-normative-wording-20261006/results.json",
+      "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496"
+    },
+    "qualified": false,
+    "selected_panel_metrics": [
+      {
+        "arm": "normative-wording-zero",
+        "dimension": 384,
+        "ordered_exact": 55,
+        "sample_count": 60,
+        "state_tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+        "token_cross_entropy": 0.008325630034077302
+      },
+      {
+        "arm": "normative-wording-ce",
+        "dimension": 384,
+        "ordered_exact": 60,
+        "sample_count": 60,
+        "state_tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+        "token_cross_entropy": 0.00250417767925287
+      },
+      {
+        "arm": "normative-wording-zero",
+        "dimension": 768,
+        "ordered_exact": 60,
+        "sample_count": 60,
+        "state_tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+        "token_cross_entropy": 0.0015389897126341205
+      },
+      {
+        "arm": "normative-wording-ce",
+        "dimension": 768,
+        "ordered_exact": 60,
+        "sample_count": 60,
+        "state_tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+        "token_cross_entropy": 0.0015766216948401286
+      }
+    ],
+    "states": [
+      {
+        "arm": "normative-wording-zero",
+        "checkpoint_dimension": 384,
+        "codec_schema": "typed-json-lexical/v1",
+        "dimension": 384,
+        "full_model_state_entries": 32,
+        "native_profile_identity_inferred": false,
+        "native_tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+        "original_complete_state_pin": {
+          "bytes": 2798242,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+          "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+        },
+        "proof_authority": false,
+        "qualified": false,
+        "role": "selected",
+        "serialization_schema": "private-native-dimension-source-state/v1",
+        "source_semantics_verified": false,
+        "vocabulary_size": 32
+      },
+      {
+        "arm": "normative-wording-zero",
+        "checkpoint_dimension": 384,
+        "codec_schema": "typed-json-lexical/v1",
+        "dimension": 384,
+        "full_model_state_entries": 32,
+        "native_profile_identity_inferred": false,
+        "native_tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+        "original_complete_state_pin": {
+          "bytes": 2798246,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/last-attempt-state.json",
+          "sha256": "7575ce918ab16a5c76d60ce2f1b94d7a75ff72e12897634a3564d8e192c1b2e4"
+        },
+        "proof_authority": false,
+        "qualified": false,
+        "role": "last-attempt",
+        "serialization_schema": "private-native-dimension-source-state/v1",
+        "source_semantics_verified": false,
+        "vocabulary_size": 32
+      },
+      {
+        "arm": "normative-wording-ce",
+        "checkpoint_dimension": 384,
+        "codec_schema": "typed-json-lexical/v1",
+        "dimension": 384,
+        "full_model_state_entries": 32,
+        "native_profile_identity_inferred": false,
+        "native_tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+        "original_complete_state_pin": {
+          "bytes": 2797392,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+          "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+        },
+        "proof_authority": false,
+        "qualified": false,
+        "role": "selected",
+        "serialization_schema": "private-native-dimension-source-state/v1",
+        "source_semantics_verified": false,
+        "vocabulary_size": 32
+      },
+      {
+        "arm": "normative-wording-ce",
+        "checkpoint_dimension": 384,
+        "codec_schema": "typed-json-lexical/v1",
+        "dimension": 384,
+        "full_model_state_entries": 32,
+        "native_profile_identity_inferred": false,
+        "native_tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+        "original_complete_state_pin": {
+          "bytes": 2797396,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/last-attempt-state.json",
+          "sha256": "886cf857852bfbc7eead2aaf216e917a920e48d48e0d297ba0ccb07245f1e815"
+        },
+        "proof_authority": false,
+        "qualified": false,
+        "role": "last-attempt",
+        "serialization_schema": "private-native-dimension-source-state/v1",
+        "source_semantics_verified": false,
+        "vocabulary_size": 32
+      },
+      {
+        "arm": "normative-wording-zero",
+        "checkpoint_dimension": 768,
+        "codec_schema": "typed-json-lexical/v1",
+        "dimension": 768,
+        "full_model_state_entries": 32,
+        "native_profile_identity_inferred": false,
+        "native_tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+        "original_complete_state_pin": {
+          "bytes": 4778674,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+          "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+        },
+        "proof_authority": false,
+        "qualified": false,
+        "role": "selected",
+        "serialization_schema": "private-native-dimension-source-state/v1",
+        "source_semantics_verified": false,
+        "vocabulary_size": 32
+      },
+      {
+        "arm": "normative-wording-zero",
+        "checkpoint_dimension": 768,
+        "codec_schema": "typed-json-lexical/v1",
+        "dimension": 768,
+        "full_model_state_entries": 32,
+        "native_profile_identity_inferred": false,
+        "native_tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+        "original_complete_state_pin": {
+          "bytes": 4778678,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/last-attempt-state.json",
+          "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+        },
+        "proof_authority": false,
+        "qualified": false,
+        "role": "last-attempt",
+        "serialization_schema": "private-native-dimension-source-state/v1",
+        "source_semantics_verified": false,
+        "vocabulary_size": 32
+      },
+      {
+        "arm": "normative-wording-ce",
+        "checkpoint_dimension": 768,
+        "codec_schema": "typed-json-lexical/v1",
+        "dimension": 768,
+        "full_model_state_entries": 32,
+        "native_profile_identity_inferred": false,
+        "native_tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+        "original_complete_state_pin": {
+          "bytes": 4779949,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+          "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+        },
+        "proof_authority": false,
+        "qualified": false,
+        "role": "selected",
+        "serialization_schema": "private-native-dimension-source-state/v1",
+        "source_semantics_verified": false,
+        "vocabulary_size": 32
+      },
+      {
+        "arm": "normative-wording-ce",
+        "checkpoint_dimension": 768,
+        "codec_schema": "typed-json-lexical/v1",
+        "dimension": 768,
+        "full_model_state_entries": 32,
+        "native_profile_identity_inferred": false,
+        "native_tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+        "original_complete_state_pin": {
+          "bytes": 4779953,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/last-attempt-state.json",
+          "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+        },
+        "proof_authority": false,
+        "qualified": false,
+        "role": "last-attempt",
+        "serialization_schema": "private-native-dimension-source-state/v1",
+        "source_semantics_verified": false,
+        "vocabulary_size": 32
+      }
+    ],
+    "training_executed": true,
+    "unique_tensor_endpoint_count": 4
+  },
+  "observed_at_utc": "2026-10-06T14:17:01.664362+00:00",
+  "operations": {
+    "GitHub_live_branch_refs_read": true,
+    "git_merge_checkout_fetch_or_index_write_executed": false,
+    "models_loaded_or_inference_or_training_executed": false,
+    "original_local_state_files_read_for_metadata_and_hash_only": true,
+    "source_or_catalog_or_HF_mutated": false
+  },
+  "qualification": false,
+  "safe_metadata_integration_candidate": "Change only external/ipfs_datasets branch selector from deleted agent/ui-ux-ir to main, after root review. Keep795d pinned gitlink, other submodules, all dirtytrees/indexes and historical refs untouched; do not run submoduleupdate.",
+  "safe_unmerged_neural_training_candidate_identified": false,
+  "sampled_modified_paths_frequency": {
+    "docs/autoencoders/four_width_training.md": 6,
+    "docs/autoencoders/paraphrase_modality_diagnostics.md": 1,
+    "ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py": 2,
+    "ipfs_datasets_py/logic/formalization/autoencoder/decoder_source_fidelity.py": 3,
+    "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py": 14,
+    "scripts/ops/autoencoder/prepare_training_paraphrases.py": 2,
+    "tests/unit/logic/formalization/autoencoder/test_authored_training_paraphrases.py": 2
+  },
+  "sampled_relevant_source_paths_missing_main": 0,
+  "schema": "datasets-autoencoder-progress-reconciliation-findings/v1",
+  "source_effective_review_count": 20,
+  "survey_pin": {
+    "bytes": 1285555,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/survey.json",
+    "sha256": "a02278d934c90a3b0448434b0e531e863d39982f4f72c60b41e115689666ed50"
+  },
+  "tracked_local_branch_heads_not_reachable_main": [
+    {
+      "ahead_behind": {
+        "source_only_commits": 48,
+        "target_only_commits": 64
+      },
+      "commit": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+      "ref": "refs/heads/publication/main-20261004/datasets"
+    },
+    {
+      "ahead_behind": {
+        "source_only_commits": 50,
+        "target_only_commits": 63
+      },
+      "commit": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+      "ref": "refs/heads/publication/main-refresh-20261004/datasets-01"
+    },
+    {
+      "ahead_behind": {
+        "source_only_commits": 1,
+        "target_only_commits": 3748
+      },
+      "commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "ref": "refs/heads/recovery/local-source-20261004"
+    }
+  ]
+}

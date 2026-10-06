@@ -1,0 +1,1418 @@
+{
+  "schema": "autoencoder-progress-reconciliation-semantic-map/v1",
+  "observed_at_utc": "2026-10-06T14:33:05.283779+00:00",
+  "scope": "Extends the prior16-study review; pinned local ordinary evidence and peer effective-tree receipts. No new model inference/training, encoder, database, Hub or Git-ref mutation by this synthesis.",
+  "sources": {
+    "prior-matrix": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-integration-review-20261006/findings/evidence-matrix.json",
+      "exists": true,
+      "bytes": 24910,
+      "sha256": "4ea1c62da24b33742faa9261d131b653f11cb03da7244d2d487babb82fa98dad"
+    },
+    "prior-workspace-guide": {
+      "path": "/home/barberb/lift_coding/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "exists": true,
+      "bytes": 12552,
+      "sha256": "aa10ce001b3558654b9b1abddfd24600d509913a90c39b50cbb696be9c35426b"
+    },
+    "prior-findings-guide": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-integration-review-20261006/findings/README.md",
+      "exists": true,
+      "bytes": 8439,
+      "sha256": "e9657a9530351b02e621ba697295bf8c68ea87daf5aa45eb47cea133f842fb1b"
+    },
+    "datasets-survey": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/survey.json",
+      "exists": true,
+      "bytes": 1285555,
+      "sha256": "a02278d934c90a3b0448434b0e531e863d39982f4f72c60b41e115689666ed50"
+    },
+    "datasets-findings": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/reconciliation-findings.json",
+      "exists": true,
+      "bytes": 16067,
+      "sha256": "01390c913bb853b2556d7d38b02c4adcfe2b156799d91bfde9ca3b6fe0bc9d3a"
+    },
+    "datasets-effective-contextual39": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-39f25777d557.json",
+      "exists": true,
+      "bytes": 52016,
+      "sha256": "1eff0983cb2035089145c2fae71fa42cbe4c2ad6e858e833676be77cd38ab4b9"
+    },
+    "datasets-effective795": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-795d96017021.json",
+      "exists": true,
+      "bytes": 60104,
+      "sha256": "413b974428357b06d29a664363c36686f034ad79f790d70b057dc8c684c03a12"
+    },
+    "accelerate-survey": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/survey.json",
+      "exists": true,
+      "bytes": 3577582,
+      "sha256": "b5e1dfa4962632ed0b1ae9fc42d2d4325b0244b65d3285ad68cbb4866dd36dad"
+    },
+    "accelerate-findings": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/findings.json",
+      "exists": true,
+      "bytes": 6330,
+      "sha256": "d35c739f9c2acbaf47da686192de7cc8529442089e9e65015856153989dcd03b"
+    },
+    "contextual-generation": {
+      "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/generation-qualification.json",
+      "exists": true,
+      "bytes": 21275,
+      "sha256": "734343f3dca0068fafe5d75c07ba51a193f8fe0a48e48eea2c15a15167fb41d2"
+    },
+    "contextual-evaluation": {
+      "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/separate-evaluation.json",
+      "exists": true,
+      "bytes": 22379,
+      "sha256": "e05bd76ef4577698f0cd5aeb3b8676974d661f22808aebed58c7626f9543361b"
+    },
+    "contextual-frozen-source": {
+      "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/committed-source-qualification.json",
+      "exists": true,
+      "bytes": 8028,
+      "sha256": "4b035d25c5145815a915eff42d9b0d81cc98135c50bb1d5f8ec198cf4f0a9103"
+    },
+    "contextual-document37": {
+      "path": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006/docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+      "exists": true,
+      "bytes": 14867,
+      "sha256": "fb2059be730ef00f485b1344bff600f3acb309b96cee55d2e9378ae87f2ac598"
+    },
+    "candidate-contextual-document": {
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006/docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+      "exists": true,
+      "bytes": 15551,
+      "sha256": "ee8cb120795ce9ee8c696d952169da5544c34e3ae4f2f6adeeacc58701532fa6"
+    },
+    "candidate-paraphrase-document": {
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006/docs/autoencoders/paraphrase_modality_diagnostics.md",
+      "exists": true,
+      "bytes": 9689,
+      "sha256": "ff8a25cd9b6548377f04f91d88e92b2b4f83e07597b8a33dc43a463263e310b1"
+    },
+    "original-modelmanager-registration": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/model-manager-registration.json",
+      "exists": true,
+      "bytes": 7619,
+      "sha256": "73e0f2b11c718d3f275d42f3fc975defed247c6a6ca004c6d5c89c58bcd01e88"
+    },
+    "original-dimension-mirrors": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/dimension-mirrors/publication-summary.json",
+      "exists": true,
+      "bytes": 2035,
+      "sha256": "757d37b29aeb4c5ed69c1ea2b9176f1d59de790dd34c41e3d303081ecd250583"
+    },
+    "original-native-profile-metadata": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/native-owner/qualification.json",
+      "exists": true,
+      "bytes": 92027,
+      "sha256": "f526b9d0f860675d84503e124ecdc294261eea3bf91aa7bc585f51227427598c"
+    },
+    "original-registration-document": {
+      "path": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-accelerate-20261006/docs/agent_supervisor/contextual_ir_checkpoint_recovery.md",
+      "exists": true,
+      "bytes": 15009,
+      "sha256": "88693f214e86f6792f28c0c87507f92e570df4dfe1415613b9a2cd5e39a2269b"
+    },
+    "normative-document": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/normative_wording_training.md",
+      "exists": true,
+      "bytes": 13198,
+      "sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19"
+    },
+    "normative-results": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-normative-wording-20261006/results.json",
+      "exists": true,
+      "bytes": 2902845,
+      "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496"
+    },
+    "modality-margins-results": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-paraphrase-modality-margins-20261006/results.json",
+      "exists": true,
+      "bytes": 13017,
+      "sha256": "a55318ad277812712fcded9cfc3ac9f8a8c0dd2031e22fc9c9c6b38892d32d81"
+    },
+    "source-only-expansion": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+      "exists": true,
+      "bytes": 102630,
+      "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5"
+    },
+    "joint-condition-control": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+      "exists": true,
+      "bytes": 392135,
+      "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851"
+    },
+    "logic-output-policy": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/logic_output_requirements.md",
+      "exists": true,
+      "bytes": 13166,
+      "sha256": "0a948378713e3533c7468751ad31e39817f17b17fe433073cac5a0a732a513bf"
+    },
+    "native-projection-v3": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/native_semantic_projections_v3.md",
+      "exists": true,
+      "bytes": 12047,
+      "sha256": "3bbc56ce9e84b87823fa2719224b3e8309fd375ec95434ffc0397540cc929edb"
+    },
+    "native-formal-readout": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/native_formal_decoders.md",
+      "exists": true,
+      "bytes": 6537,
+      "sha256": "c79f03de9cb918b100f9430dc459f90aa01abf9a1c83168dc5a8e465afa17441"
+    },
+    "legacy-teacher-fidelity": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/legacy_teacher_fidelity.md",
+      "exists": true,
+      "bytes": 24821,
+      "sha256": "4b3e36ab0826edeba808e59c458c3e6b4e05fb91fab96a9ba252bbafa0e0eeb4"
+    },
+    "linguistic-teacher-validation": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/legacy_linguistic_validation_20261001.md",
+      "exists": true,
+      "bytes": 6239,
+      "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a"
+    },
+    "formula-visibility-audit": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/formal_logic_visibility_audit.md",
+      "exists": true,
+      "bytes": 5844,
+      "sha256": "4a15f9056e2bfd62d6d771b5c6d1881b3bcdd93544ee2179f4b4c67b92bb2c78"
+    },
+    "dual-donor-replay": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_decoder_knowledge_transfer.md",
+      "exists": true,
+      "bytes": 10467,
+      "sha256": "e50f53bf4db5472ab0d42f78021f29051a184cbfbe84f77210519e00097c8026"
+    },
+    "gte-migration-plan": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/gte_multilingual_migration_plan.md",
+      "exists": true,
+      "bytes": 48025,
+      "sha256": "9d7ec5a66a5786223f75412a5bb3d3e97d2e426fd38d5e226afb641ddda36248"
+    },
+    "ir-recovery-interface": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/ir_progress_recovery.md",
+      "exists": true,
+      "bytes": 6398,
+      "sha256": "85d73aa103b676ee8da77cef0aa5175f02eeb47bf8f90b8c7c5455231a172234"
+    },
+    "family-cell-proof-index-plan": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/codebase_ir_proof_index_improvement_plan.md",
+      "exists": true,
+      "bytes": 67228,
+      "sha256": "6a2ea9f9d5e50a5aac67f3bb54b13ed18abff47fe9cb21550cb9b7790ece0b71"
+    },
+    "repository-pipeline-plan": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/codebase_ir_repository_pipeline_improvement_plan.md",
+      "exists": true,
+      "bytes": 131322,
+      "sha256": "f0dac92514c73b448ad14b7002db07e878172a3da94241be0c82d1edbded327c"
+    },
+    "intent-text-roundtrip": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/intent_roundtrip_training.md",
+      "exists": true,
+      "bytes": 6572,
+      "sha256": "eb6ee8352ae90cc9993674d1d80ee0b49fee6c070822d167695726ec54064bd8"
+    },
+    "security-formula-document": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/security_formula_decoder.md",
+      "exists": true,
+      "bytes": 8596,
+      "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398"
+    },
+    "codebase-live300-document": {
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/codebase_full300_companion_and_linear_observation_qualification_v2.md",
+      "exists": true,
+      "bytes": 10385,
+      "sha256": "95ce8d5aacb866a5a518244505952ecace8d990709dc158cb46d0323b927b1e8"
+    },
+    "codebase-live-larger-head-document": {
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/codebase_larger_head_native_owner_integration_note.md",
+      "exists": true,
+      "bytes": 9473,
+      "sha256": "43337ec8dd326ac42708bd16a2c8d2866e55534ebc63642429496a00e1ede235"
+    },
+    "paragraph-caller-pin-control": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/paragraph-pin-boundary.json",
+      "exists": true,
+      "bytes": 7774,
+      "sha256": "7407e81d7a5f67394aaf8bccd0bd340e734b2b3e8717677931760f3e381cd36a"
+    },
+    "honesty-patch-review": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-patch-independent-review.json",
+      "exists": true,
+      "bytes": 4120,
+      "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb"
+    },
+    "honesty-original-metadata-control": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-original-metadata-controls.json",
+      "exists": true,
+      "bytes": 9186,
+      "sha256": "349ded197c764927cc77d0cf4b24f6afa650360686f6d9c90de47713f5908ed8"
+    },
+    "honesty-original-metadata-reproducer": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/check_metadata_honesty_patch.py",
+      "exists": true,
+      "bytes": 5433,
+      "sha256": "ae3d5f818001e0969d476538dfcbf7d28f8bb378596f2f4af4c1fd1a65ab306a"
+    },
+    "paragraph-control-reproducer": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/reproduce_paragraph_pin_boundary.py",
+      "exists": true,
+      "bytes": 5779,
+      "sha256": "e9d99a4524dffb4e082e5a47dfef948ec478d3344e3e371cea20b958c80e4ba9"
+    },
+    "ordinary-matrix-verifier": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/verify_semantic_matrix.py",
+      "exists": true,
+      "bytes": 5604,
+      "sha256": "9709a99c2dc031092f3d5dc108ccf2810cb2bf72cac3f1beb156e4ebdf22ee48"
+    },
+    "matrix-builder": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/build_semantic_matrix.py",
+      "exists": true,
+      "bytes": 35298,
+      "sha256": "2685258fc782860a2855b58052e7b3cc5457017d954783b212c935905ec6f71d"
+    },
+    "prior-source:preserved-8d-linguistic-teacher": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/legacy_linguistic_validation_20261001.md",
+      "exists": true,
+      "bytes": 6239,
+      "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a"
+    },
+    "prior-source:four-width-initial-head-comparison": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+      "exists": true,
+      "bytes": 389091,
+      "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b"
+    },
+    "prior-source:native4096-and-field-rates": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+      "exists": true,
+      "bytes": 27951,
+      "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285"
+    },
+    "prior-source:broader4096-and-8d-geometry": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+      "exists": true,
+      "bytes": 26924,
+      "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7"
+    },
+    "prior-source:train-paraphrase-mixture": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+      "exists": true,
+      "bytes": 3049472,
+      "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac"
+    },
+    "prior-source:train-paraphrase-modality": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+      "exists": true,
+      "bytes": 3547468,
+      "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d"
+    },
+    "prior-source:source-margin-two-seed-study": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+      "exists": true,
+      "bytes": 6276,
+      "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918"
+    },
+    "prior-source:intent-ui-composition-ridge": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+      "exists": true,
+      "bytes": 647843,
+      "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1"
+    },
+    "prior-source:complete-intent-ui-feature-loss": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/complete_features_and_ui_fidelity.md",
+      "exists": true,
+      "bytes": 24229,
+      "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517"
+    },
+    "prior-source:ui-temporal-dcec-floor": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+      "exists": true,
+      "bytes": 307406,
+      "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95"
+    },
+    "prior-source:security-production-head": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/security_formula_decoder.md",
+      "exists": true,
+      "bytes": 8596,
+      "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398"
+    },
+    "prior-source:source-ae-frozen-control": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+      "exists": true,
+      "bytes": 66071,
+      "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83"
+    },
+    "prior-source:source-ae-authored32-expansion": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+      "exists": true,
+      "bytes": 102630,
+      "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5"
+    },
+    "prior-source:frozen-law-conditioner-interventions": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+      "exists": true,
+      "bytes": 139006,
+      "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a"
+    },
+    "prior-source:bounded-joint-span-policy": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+      "exists": true,
+      "bytes": 32394,
+      "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42"
+    },
+    "prior-source:joint-span-six-condition-control": {
+      "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+      "exists": true,
+      "bytes": 392135,
+      "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851"
+    },
+    "published-contextual-owner:runtime": {
+      "path": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "exists": true,
+      "bytes": 36421,
+      "sha256": "e9191bcbca77d7e73830bc7096ceb719288e18493cb3c30db35843fbf5c0238e"
+    },
+    "live-contextual-owner:runtime": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "exists": true,
+      "bytes": 36421,
+      "sha256": "e9191bcbca77d7e73830bc7096ceb719288e18493cb3c30db35843fbf5c0238e"
+    },
+    "published-contextual-owner:numeric": {
+      "path": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "exists": true,
+      "bytes": 15840,
+      "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+    },
+    "live-contextual-owner:numeric": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "exists": true,
+      "bytes": 15840,
+      "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+    },
+    "published-contextual-owner:output": {
+      "path": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_output.py",
+      "exists": true,
+      "bytes": 13756,
+      "sha256": "0477aaa5222523e27f4010644ad5bfac67720a793fcccc53b48593e4321c31a7"
+    },
+    "live-contextual-owner:output": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_output.py",
+      "exists": true,
+      "bytes": 13756,
+      "sha256": "0477aaa5222523e27f4010644ad5bfac67720a793fcccc53b48593e4321c31a7"
+    },
+    "live-contextual-document": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+      "exists": true,
+      "bytes": 14867,
+      "sha256": "fb2059be730ef00f485b1344bff600f3acb309b96cee55d2e9378ae87f2ac598"
+    },
+    "candidate-contextual-owner": {
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "exists": true,
+      "bytes": 36594,
+      "sha256": "773e30977478921c31fbc075b5357339cc13e8e920ba93be85b5160b7f442a15"
+    }
+  },
+  "prior_reviewed_heads": {
+    "/home/barberb/lift_coding": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+    "/home/barberb/lift_coding/external/ipfs_datasets": "5171a632c6b9f0ecb2939d29d2ad74992cbfeb11"
+  },
+  "current_peer_reviewed_heads": {
+    "datasets": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "accelerate_initial": "e3a44a6ddf8a1373223eee015b2a2066f4ddd9fa",
+    "accelerate_later_docs": "d5c59e961d1a0ca8d09296b520cbd414a2078235"
+  },
+  "inherited_prior_entry_count": 16,
+  "inherited_prior_entries": [
+    {
+      "id": "preserved-8d-linguistic-teacher",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "0ced2e533c9090d21aba602c3550c5ff5ecd45eb",
+        "path": "docs/autoencoders/legacy_linguistic_validation_20261001.md",
+        "bytes": 6239,
+        "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "historical-runtime-preservation",
+      "scope": "Historical 8D sparse residual model and deterministic linguistic codec",
+      "findings": [
+        "The original linguistic codec, sparse training and resume path are preserved separately from learned formula sidecars.",
+        "Target-aware vector reconstruction and provenance-based text decompilation can be exact despite semantic errors. The historical prohibition becomes obligation O; explicit numeric duration structure is incomplete."
+      ],
+      "limitations": [
+        "The linguistic formulas are deterministic compiler outputs, not learned latent-to-formula generation.",
+        "This replay establishes operational compatibility, not a qualified semantic teacher; bridge-off timing has zero legal-IR targets."
+      ],
+      "next_gap": "Distill independently reviewed semantic targets while preserving the immutable teacher and its runtime identity.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/legacy_linguistic_validation_20261001.md",
+        "exists": true,
+        "bytes": 6239,
+        "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "four-width-initial-head-comparison",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "dce8ab819331a5f5bddac86c851710fa4377c1d4",
+        "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+        "bytes": 389091,
+        "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Initial 8D/384D/768D authored formula sidecar comparison with frozen encoders",
+      "findings": [
+        "Six fits completed 340 updates each. Final development exact counts changed 1\u21921, 47\u219248, and 46\u219244 out of 48 for 8D, 384D and 768D. Exposed R6 exact counts changed 0\u21920, 30\u219228, and 47\u219248."
+      ],
+      "limitations": [
+        "Representations have different source producers, so this is not a pure width ablation.",
+        "Final attempts and selected states differ. The 8D sidecar is distinct from the preserved linguistic teacher. The initial 4096D readiness gap was later partially resolved."
+      ],
+      "next_gap": "Use later selected 384D/768D parents and preserve the original controls; evaluate 8D object and cue fidelity separately.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+        "exists": true,
+        "bytes": 389091,
+        "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "native4096-and-field-rates",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "d466db01a32c419a765e5cef046991ddedc3c279",
+        "path": "docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+        "bytes": 27951,
+        "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Matched native 4096D source conditioning and 8D field-head learning rates",
+      "findings": [
+        "The study completed 940 head updates: three 4096D fits of 200 updates and two 8D fits of 170 updates.",
+        "Scaled 4096D conditioning reconstructed 2/2 TRAIN clauses with CE 0.015291 versus 0.018791 unscaled. Prior freezing worsened the result.",
+        "The lower 8D rate reduced development CE 0.16349\u21920.14803, while exact remained 1/48 and correct objects fell 97\u219288/180."
+      ],
+      "limitations": [
+        "The two 4096D permission clauses differ only in object and supply no held-out or broad-family evidence.",
+        "The 8D candidate was rejected and its original parent retained; no encoder training or Lake execution occurred."
+      ],
+      "next_gap": "Establish broader source fidelity before scaling capacity or making optimizer convergence claims.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+        "exists": true,
+        "bytes": 27951,
+        "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "broader4096-and-8d-geometry",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "fd89d2a48aa0de771dd22ec8fd079af10732051f",
+        "path": "docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+        "bytes": 26924,
+        "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Corrected 8D diagnostic geometry and broader 4096D authored development experiment",
+      "findings": [
+        "740 head updates completed. The 8D covariance candidate worsened development CE 0.163492\u21920.168503 and correct objects 97\u219293/180.",
+        "The broader 4096D experiment used 12 TRAIN and 12 exposed development clauses. TRAIN exact was 7/12 unscaled and 1/12 scaled; both development exact counts were 0/12.",
+        "The study also prepared 216 unique verified native source inputs per 384D/768D encoder in 8.679/26.969 seconds."
+      ],
+      "limitations": [
+        "TRAIN-input scaling was not adopted. The earlier 8D omission affected diagnostic normalization, not training or selection.",
+        "This is exposed authored development data, with no Lake or promotion."
+      ],
+      "next_gap": "Improve 4096D decoder generalization beyond two-row fitting.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+        "exists": true,
+        "bytes": 26924,
+        "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "train-paraphrase-mixture",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "aa586a9b91b583a2ac5d867bd107ba0c5a4762d5",
+        "path": "docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+        "bytes": 3049472,
+        "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Original-only versus half-paraphrase TRAIN exposure at 384D and 768D",
+      "findings": [
+        "Four 170-update fits completed 680 updates; all original development endpoints were 48/48 exact.",
+        "Exposed v3 exact changed 20\u219218/48 at 384D and stayed 46/48 at 768D. Fit calls were 38.389/38.103 seconds at 384D and 50.626/50.639 seconds at 768D."
+      ],
+      "limitations": [
+        "The exposed v3 panel is regression data, not a fresh holdout. The encoder did not execute and cached vectors were warm.",
+        "The changed mixture did not improve exact reconstruction."
+      ],
+      "next_gap": "Preserve ordinary decoder batches while testing additional semantic supervision.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+        "exists": true,
+        "bytes": 3049472,
+        "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "train-paraphrase-modality",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "60f5c2951ac34231f05b54e50f2725296871c5b9",
+        "path": "docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+        "bytes": 3547468,
+        "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Independent balanced R4 modality auxiliary loss, weight zero versus 0.05, at 384D/768D",
+      "findings": [
+        "Four fits completed 680 updates and 232 focused tests passed. The zero arm replayed ordinary historical training exactly.",
+        "Original development remained 48/48. Exposed v3 exact changed 20\u219219/48 at 384D and stayed 46/48 at 768D; CE fell 0.030589255\u21920.028552217 and 0.003361466\u21920.003004750.",
+        "Fit calls changed 40.964\u219242.164 and 50.002\u219250.582 seconds. The full 180-clause TRAIN modality readout was already 180/180 before training."
+      ],
+      "limitations": [
+        "Lower CE supplied no exact reconstruction gain or promotion. Positive supervision adds explicit work; the arms do not have equal FLOPs.",
+        "No Lake build, bridge evaluate or convergence measurement occurred."
+      ],
+      "next_gap": "Investigate recurrent contributions and wording-specific modality errors before increasing the saturated auxiliary weight.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+        "exists": true,
+        "bytes": 3547468,
+        "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "source-margin-two-seed-study",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "1b6461e65f15635b89d04609dae01a4196cd3ea5",
+        "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+        "bytes": 6276,
+        "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "18 restricted authored fits of 340 updates each, two seeds, R6 wording observation",
+      "findings": [
+        "The positive 768D final attempts achieved 96/96 exact with 12.6% lower CE than the execution control. Both were rejected by the unchanged development extra-rule gate; selected positive 768D states scored 0/96.",
+        "384D final exact was 61/96, matching the original path but with 2.6% worse CE than the zero control; the 8D sidecar remained 0/96 exact."
+      ],
+      "limitations": [
+        "48 sources observed under two seeds are 96 predictions, not 96 independent examples.",
+        "R6 is now exposed, and a rejected final attempt is not a qualified or promoted head."
+      ],
+      "next_gap": "Improve modality and whole-rule fidelity under the unchanged selection policy.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+        "exists": true,
+        "bytes": 6276,
+        "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "intent-ui-composition-ridge",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "6589f788791f8991a8b856fbc3fc5fa396d17229",
+        "path": "docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+        "bytes": 647843,
+        "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "source-to-typed-candidate-training",
+      "scope": "384D fixed-schema Intent/UI reconstruction of 24 sealed test compositions per domain",
+      "findings": [
+        "The deterministic ridge head reconstructed 24/24 in each domain. GRU Intent counts were 3/24 and 8/24; UI counts were 3/24 and 2/24.",
+        "Ridge public fitting took about 0.140 seconds, with warm common-validation readout of 0.226 ms per Intent span and 0.326 ms per UI span.",
+        "The follow-up ran 14 actual successful builds: five IntentIR and nine UIUXIR. Four wrong Intent predictions were blocked before Lake."
+      ],
+      "limitations": [
+        "The test uses known TRAIN vocabulary and a fixed shape. Every built report is partial: Intent has 10/40 routes and UI 2/40.",
+        "Six wrong UI GRU candidates also passed Lake, demonstrating the separate requirement for source fidelity."
+      ],
+      "next_gap": "Add complete source-bound document fidelity and richer targets while keeping this fixed-schema head separate from GRU experiments.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+        "exists": true,
+        "bytes": 647843,
+        "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "complete-intent-ui-feature-loss",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "df732e8aaf5b4eec7373f1581e7193d7c0a91134",
+        "path": "docs/autoencoders/complete_features_and_ui_fidelity.md",
+        "bytes": 24229,
+        "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "compiler-target-feature-reconstruction",
+      "scope": "Native family feature reconstruction, complete support versus a 4,096-atom cap, 12 fits",
+      "findings": [
+        "The comparison ran 20 actual IntentIR/UIUXIR Lake builds and 390 projection checks.",
+        "Common-support held-out loss fell 0.026985\u21920.001958 for Intent and 0.008037\u21920.002575 for UI. Known atom coverage rose 15.108\u219299.651% and 56.543\u219297.876%.",
+        "Complete support retained 26,986 Intent atoms and 7,329 UI atoms; numerical refinement consumed 7.55 of 315.04 seconds of full fitting."
+      ],
+      "limitations": [
+        "The gain mainly restores support and individual family regressions remain. The adaptive schedule shows no broad win; fixed remains default.",
+        "Compiler-target feature reconstruction is distinct from independent source-to-formula fidelity."
+      ],
+      "next_gap": "Reuse full-support metrics and guarded native checks while resolving family regressions and decoder grammar gaps.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/complete_features_and_ui_fidelity.md",
+        "exists": true,
+        "bytes": 24229,
+        "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "ui-temporal-dcec-floor",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "ea275ae32779db01c7dc59dc62ce12bcd9841ae2",
+        "path": "docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+        "bytes": 307406,
+        "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "authored-native-projection-validation",
+      "scope": "23 authored declared UI projection fixtures; no neural inference or optimizer",
+      "findings": [
+        "Nine actual lake build UIUXIR executions passed; all 12 new modal projection occurrences passed parser, lowering and Lake checks.",
+        "The seven-entry UI minimum floor is satisfied, with seven of 40 families validated somewhere in the fixture union.",
+        "Every strict training gate remains closed. Compound targets contain 575\u2013759 tokens, exceeding the unchanged 64-token codec and its grammar."
+      ],
+      "limitations": [
+        "Declared norms, beliefs and traces are interpretations, not truths or observed runtime behavior.",
+        "Prepared authored targets are not learned decoder outputs."
+      ],
+      "next_gap": "Develop a lossless supported target representation and source-specific family reviews without truncation or increasing the encoder context.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+        "exists": true,
+        "bytes": 307406,
+        "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "security-production-head",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "2d93857e78ceedc7f055637c887afeaa40653993",
+        "path": "docs/security_formula_decoder.md",
+        "bytes": 8596,
+        "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "bounded-source-production-decoder",
+      "scope": "Bounded parser-scaffolded source production decoder with a separate learned grammar head",
+      "findings": [
+        "Learned production choices form candidate ASTs; an independently reparsed comparison rejects incorrect predictions.",
+        "Complete-function source and byte-map adapters retain unsupported coverage; model-off controls cannot obtain deterministic production fallback.",
+        "The supervisor consumes source-bound candidates and native proof-work plans through ModelManager and DuckLake."
+      ],
+      "limitations": [
+        "This is not arbitrary software formalization or a learned security specification.",
+        "The advisory Security-CVE checkpoint still has 44 AST features and no formula head. Authored contracts and solver diagnostics do not establish source qualification."
+      ],
+      "next_gap": "Preserve separate advisory and formula-head identities and expand independently reviewed grammar and function coverage.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/security_formula_decoder.md",
+        "exists": true,
+        "bytes": 8596,
+        "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "source-ae-frozen-control",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "e44254d4dd9e9a873d1b7a257f53286f35860e01",
+        "path": "artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+        "bytes": 66071,
+        "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "source-vector-reconstruction-and-retrieval",
+      "scope": "Nine source-only 8D/384D/768D neural reconstruction models, TRAIN16 and authored development",
+      "findings": [
+        "All neural models beat TRAIN mean-vector MSE, but all trail TRAIN-only PCA.",
+        "Mean latent authored-facet nDCG was 0.96408 versus raw 0.96190 at 384D and 0.95623 versus raw 0.98384 at 768D."
+      ],
+      "limitations": [
+        "There is no formal-target or proof supervision; relevance is authored development evidence.",
+        "Dense centered TRAIN rank is 15, below the 32/64 bottlenecks. These MLPs are distinct from sparse legal runtimes and formula sidecars."
+      ],
+      "next_gap": "Keep raw, mean and PCA controls and define formal-target alignment separately.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+        "exists": true,
+        "bytes": 66071,
+        "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "source-ae-authored32-expansion",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "67bd5f1a3d6ff1540bd594e1205d753eb44f03ef",
+        "path": "artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+        "bytes": 102630,
+        "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "source-vector-reconstruction-training",
+      "scope": "64 authored sources, TRAIN32/DEV32, nine MLP fits with widths 8\u219216\u21924, 384\u2192128\u219232 and 768\u2192128\u219264",
+      "findings": [
+        "1,827 actual updates include private resume checks; the nine selected models have 1,800 updates, 200 per model.",
+        "Mean DEV MSE improved 82.36%, 80.94% and 77.03% against the older same-seed models, but every new model remains worse than TRAIN-only PCA.",
+        "Models and Adam state were published to immutable Publicus/legal-ir-autoencoder revision d624057cf58e0090a0db9a3ad25857aaa91357de."
+      ],
+      "limitations": [
+        "All five semantic, decoder, contrastive, proof and fidelity masks remain zero.",
+        "Changing TRAIN cohorts measures adaptation rather than an isolated sample-size benefit. TRAIN rank 31 limits capacity interpretation."
+      ],
+      "next_gap": "Admit richer paired source/formal targets and compare matched decoders before choosing capacity by vector MSE.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+        "exists": true,
+        "bytes": 102630,
+        "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "frozen-law-conditioner-interventions",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "b48ec0fb6aa1b45a46c1239f50f645d03ab74808",
+        "path": "artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+        "bytes": 139006,
+        "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "frozen-native768-source-span-decoder-inference",
+      "scope": "64 sources \u00d7 three native 768D source-span decoders \u00d7 six conditioning controls, 1,152 forwards",
+      "findings": [
+        "Raw, PCA-reconstructed, AE-reconstructed and rotated raw inputs generate identical IR/status/reason for all 64 sources per seed.",
+        "Raw proposal counts are 1/64, 1/64 and 8/64; the other 182 paired occurrences abstain for overlapping copied spans.",
+        "Zero and disabled conditioning each change three paired outcomes; internal conditioning scores are active."
+      ],
+      "limitations": [
+        "Full 768D inverse reconstructions perturb a raw-trained decoder; this is neither matched conditioner training nor compression.",
+        "Every output remains a proposal, with no independent fidelity label or proof."
+      ],
+      "next_gap": "Resolve source-span assignments, symbol binding and optional presence before representation capacity selection.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+        "exists": true,
+        "bytes": 139006,
+        "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "bounded-joint-span-policy",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+        "path": "artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+        "bytes": 32394,
+        "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "frozen-native768-policy-diagnostic",
+      "scope": "192 shared native 768D forwards and 384 greedy/joint policy outcomes",
+      "findings": [
+        "Proposals rose from 10 to 183/192, preserving all ten previous proposals. 173 former overlap abstentions yielded new unaccepted proposals.",
+        "Top-16 span candidates and beam size 64 leave nine retained-search abstentions.",
+        "Worker wall time was 8.462 seconds, parent time 10.271 seconds and maximum worker RSS 724,032 KiB, excluding source encoding and training."
+      ],
+      "limitations": [
+        "The single copied deontic rule can still have wrong actor, modality or qualifier binding.",
+        "Every search pruned candidates or beam states, so neither full-space infeasibility nor a global optimum is established. Structural coverage is not semantic accuracy."
+      ],
+      "next_gap": "Retain a diagnostic proposal policy and independently review role, attachment and presence fidelity before using outputs as targets.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+        "exists": true,
+        "bytes": 32394,
+        "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    },
+    {
+      "id": "joint-span-six-condition-control",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+        "path": "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+        "bytes": 392135,
+        "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "frozen-native768-policy-diagnostic",
+      "scope": "1,152 native forwards and 2,304 policy outcomes, three seeds and six conditioners",
+      "findings": [
+        "Raw, PCA and AE joint IR/status/reason match on every one of 192 paired occurrences; each produces 183 proposals.",
+        "Rotation changes one joint modality record, while zero and disabled conditioning change 26 and 31 joint IR/status/reason records.",
+        "Across controls, joint selection produces 1,099 proposals versus 61 greedy proposals, preserving all 61. Worker wall time was 20.665 seconds, parent time 22.443 seconds and maximum worker RSS 774,896 KiB."
+      ],
+      "limitations": [
+        "Independent review and broad-family semantic masks remain zero. This repeats the same 64 sources and checkpoints, so it is not another independent confirmation cohort.",
+        "Enabled zero conditioning retains FiLM biases, while disabling the gate removes its residual."
+      ],
+      "next_gap": "Review source roles, modality, negation, attachment and presence pairs, then compare matched raw/PCA/AE/source-only decoder training.",
+      "current_local_ordinary_bytes": {
+        "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+        "exists": true,
+        "bytes": 392135,
+        "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851"
+      },
+      "prior_report_bytes_retained_locally": true,
+      "reachability_scope": "Original prior5171/3b0162 review; current effective-tree status is separately sourced from the new branch-agent receipts."
+    }
+  ],
+  "new_contribution_count": 5,
+  "new_contributions": [
+    {
+      "id": "original-contextual-registration-and-publication",
+      "sources": [
+        "original-modelmanager-registration",
+        "original-dimension-mirrors",
+        "original-native-profile-metadata"
+      ],
+      "kind": "byte_custody_and_metadata_integration",
+      "scope": "Two original selected32-entry Legal384/768 states; retained API registration668\u2192670 and two existing public dimension mirrors.",
+      "reusable": "Exact asset IDs, immutable state hashes, detached source-bound profile exports, unchanged12 lane declarations and separate original384 Intent/Security fragment contracts.",
+      "limit": "Native schema/profile/format remainsnull for contextual states; runtime/teacher/proof remainsfalse. Historical670 and Hub commits are retained observations, not a new live catalog/Hub read by this semantic reviewer. Per-cell12 physical stores are not established."
+    },
+    {
+      "id": "original-contextual48-ir-versus-prose",
+      "sources": [
+        "contextual-generation",
+        "contextual-evaluation",
+        "contextual-frozen-source",
+        "contextual-document37"
+      ],
+      "kind": "actual_frozen_original_asset_source_only_regression",
+      "scope": "Original48 exposed paragraphs and180 literal clause occurrences per384/768 lane; frozen37c2 source, publication39f257.",
+      "reusable": "Original raw384 donor, width-specific paragraph/clause caches, saved TRAIN transforms, independent paragraph/clause feature norms, exact32 selected tensors and512 output budget;244 new/source-value and210 old-owner controls.",
+      "observed": "Each lane48/48 ordered and canonical IR,180/180 rules,720/720 actor/action/modality/object fields;48 source-withheld rendered texts but0/48 UTF8 and0/48 NFC/whitespace prose matches.",
+      "limit": "All qualifiers empty, clause counts1/2/4/8; no fresh semantic holdout, arbitrary prose decoder, native8192 span, independent teacher or proof qualification. Canonical sorting differs from ordered exactness."
+    },
+    {
+      "id": "paraphrase-source-recurrent-modality-diagnosis",
+      "sources": [
+        "modality-margins-results",
+        "candidate-paraphrase-document"
+      ],
+      "kind": "same_pass_component_observation",
+      "scope": "Previously exposedv3 wording; four selected arm observations from the earlier parity-preserved384/768 head experiments.",
+      "reusable": "Reference barrier, full32-vocabulary source/recurrent/combined logits, durable same-pass traces, no extra forward/model copy, independent66,467 scalar checks.",
+      "observed": "384 exact20\u219219/48 and modality source139\u2192137/180 versus combined139\u2192136/180;768 exact46\u219246/48 and modality178/180. One positive384 additive override changes a correct source preference into a wrong emitted modality.",
+      "limit": "Recurrent uncombined argmax is often a grammar token and is not another formula decoder; trace does not causally isolate paragraph/clause/history effects. No fitting/encoder/Lake here."
+    },
+    {
+      "id": "normative60-broader-wording-training",
+      "sources": [
+        "normative-results",
+        "normative-document",
+        "datasets-findings"
+      ],
+      "kind": "actual_decoder_training_and_separate_native_preparation",
+      "scope": "90 old TRAIN rules rendered as180 balanced empty-qualifier clauses; separately sealed60 new wordings over30 already exposed DEV meanings.",
+      "reusable": "Four paired170-update fits; exact zero control replay; same original batches/codec/parents, TRAIN-only additional modality loss, native frozen offline512 encoder caches276 vectors/width, durable eight endpoint panels before references.",
+      "observed": "38455/60\u219260/60 with69.92% lowerCE;76860/60\u219260/60 with2.45% higherCE. Original48 exact retained; selected/last states alias, so four fits/four unique tensors are not eight independent repetitions.",
+      "limit": "Prospective wording is not fresh semantic holdout; no qualifier capability, decoder promotion, bridge/projection/Lake or encoder weight update. New auxiliary state hashes6cab6f\u2026/aa2f75\u2026 differ from registered original0ac5\u2026/8892\u2026; record/publication currentness must be independently joined before selection."
+    },
+    {
+      "id": "codebase-native-structural-and-larger-width-prerequisites",
+      "sources": [
+        "codebase-live300-document",
+        "codebase-live-larger-head-document",
+        "accelerate-findings",
+        "repository-pipeline-plan"
+      ],
+      "kind": "scoped_native_structural_scanning_and_source_owner_prerequisites",
+      "scope": "Authored300 members,53 compiler features and8-wide structural latent; separate one-row native4096 CPU completed-owner boundary.",
+      "reusable": "Exact source/CAS/AST manifests, five pages64/64/64/64/44 per mode, cold resume, signed companion joins, default/reference equality and explicit current source/checker drift refusal.",
+      "observed": "Latest branch-agent notes distinguish full300 member accounting from110 encoded/184 deferred rows per mode; zero formalized/checked properties, no worker launch/install.4096 native owner hashes full assets and supplies a process/thread-bound capability, not a trained Codebase head.",
+      "limit": "Some live source/docs are still unreviewed/unpublished candidates. No complete working-repository semantic scan, trained384/768/4096 Codebase lineage, independent reproof or accepted proof-cache claims are supplied."
+    }
+  ],
+  "recomputed_metric_panels": {
+    "original_contextual": [
+      {
+        "dimension": 384,
+        "reference_rows": 48,
+        "ordered_ir_exact": 48,
+        "canonical_ir_exact": 48,
+        "expected_rules": 180,
+        "utf8_text_exact": 0,
+        "nfc_whitespace_text_exact": 0,
+        "all_reference_qualifiers_empty": true
+      },
+      {
+        "dimension": 768,
+        "reference_rows": 48,
+        "ordered_ir_exact": 48,
+        "canonical_ir_exact": 48,
+        "expected_rules": 180,
+        "utf8_text_exact": 0,
+        "nfc_whitespace_text_exact": 0,
+        "all_reference_qualifiers_empty": true
+      }
+    ],
+    "exposed_v3_modality": [
+      {
+        "dimension": 384,
+        "arm": "paraphrase-modality-zero",
+        "rows": 48,
+        "exact": 20,
+        "source_modality_correct": 139,
+        "combined_modality_correct": 139,
+        "modality_sites": 180
+      },
+      {
+        "dimension": 384,
+        "arm": "paraphrase-modality-ce",
+        "rows": 48,
+        "exact": 19,
+        "source_modality_correct": 137,
+        "combined_modality_correct": 136,
+        "modality_sites": 180
+      },
+      {
+        "dimension": 768,
+        "arm": "paraphrase-modality-zero",
+        "rows": 48,
+        "exact": 46,
+        "source_modality_correct": 178,
+        "combined_modality_correct": 178,
+        "modality_sites": 180
+      },
+      {
+        "dimension": 768,
+        "arm": "paraphrase-modality-ce",
+        "rows": 48,
+        "exact": 46,
+        "source_modality_correct": 178,
+        "combined_modality_correct": 178,
+        "modality_sites": 180
+      }
+    ],
+    "prospective_wording_selected": [
+      {
+        "dimension": 384,
+        "arm": "normative-wording-zero",
+        "rows": 60,
+        "exact": 55,
+        "token_ce": 0.008325630034077302,
+        "selected_last_same_tensor": true
+      },
+      {
+        "dimension": 384,
+        "arm": "normative-wording-ce",
+        "rows": 60,
+        "exact": 60,
+        "token_ce": 0.00250417767925287,
+        "selected_last_same_tensor": true
+      },
+      {
+        "dimension": 768,
+        "arm": "normative-wording-zero",
+        "rows": 60,
+        "exact": 60,
+        "token_ce": 0.0015389897126341205,
+        "selected_last_same_tensor": true
+      },
+      {
+        "dimension": 768,
+        "arm": "normative-wording-ce",
+        "rows": 60,
+        "exact": 60,
+        "token_ce": 0.0015766216948401286,
+        "selected_last_same_tensor": true
+      }
+    ],
+    "normative_execution": {
+      "local_native_encoders_executed": true,
+      "native_source_vectors_per_width": 276,
+      "training_executed": true,
+      "fresh_holdout": false,
+      "checkpoint_promoted": false,
+      "lake_executed": false,
+      "logic_family_projections_executed": false
+    },
+    "source_only64": {
+      "source_rows": 64,
+      "train_rows": 32,
+      "development_rows": 32,
+      "selected_optimizer_updates": 1800,
+      "actual_optimizer_updates": 1827,
+      "new_selected_models": 9,
+      "masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      }
+    },
+    "joint_conditioning64": {
+      "original_source_count": 64,
+      "unique_policy_model_forwards": 1152,
+      "policy_outcomes": 2304,
+      "semantic_masks": {
+        "contrastive_supervision": 0,
+        "fidelity_evaluation": 0,
+        "proof_supervision": 0,
+        "strong_semantic_fit": 0,
+        "weak_decoder_fit": 0
+      },
+      "accepted": false,
+      "source_fidelity_established": false,
+      "independent_semantic_review_completed": false
+    },
+    "retained_original_registration": {
+      "before_count": 668,
+      "after_count": 670,
+      "new_checkpoint_count": 2,
+      "runtime_ready": false,
+      "teacher_qualified": false,
+      "proof_authority": false,
+      "current_external_service_process_refreshed": false
+    },
+    "retained_original_dimension_publication": {
+      "new_release_files": 6,
+      "new_repository_count": 0,
+      "original_model_manager_records_rewritten": false,
+      "runtime_admitted": false,
+      "models_changed_or_retrained": false
+    }
+  },
+  "family_dimension_cells": [
+    {
+      "family": "legal_ir",
+      "dimension": 8,
+      "roles": "Historical explicit8D sparse/linguistic representation; separately learned18-token formula head; separately source-only8\u219216\u21924 MLP.",
+      "status": "Preserved teacher replay; teacher semantic defects remain. Formula sidecar original1/48/exposed0/48. These are different owners.",
+      "missing": "Independently reviewed teacher scope, nonempty qualifiers and compatible task-specific distillation targets."
+    },
+    {
+      "family": "legal_ir",
+      "dimension": 384,
+      "roles": "GTE-small input384/token512; source GRU, parser-assisted64-token package, contextual32-entry semantic decoder/output512, residual8 view and source-only latent32 are distinct.",
+      "status": "Original contextual48 exact/prose0; new normative selected60 exact under restricted grammar. Original complete state registered/public.",
+      "missing": "Richer source/qualifier vocabulary and lossless schema, fresh grouped holdout, trained prose task and candidate-state registry/routing joins."
+    },
+    {
+      "family": "legal_ir",
+      "dimension": 768,
+      "roles": "Native multilingual768 input; current bounded512 caches; contextual decoder, dual-donor inherited interfaces, source-only latent64 and copied-span native head are distinct.",
+      "status": "Original contextual48 exact/prose0; normative control/auxiliary60 exact with no auxCE gain; original state registered/public.",
+      "missing": "Task-aware selected-state/codec and cache alignment, scoped teacher KD, native long-span8192/output curriculum and production ABI."
+    },
+    {
+      "family": "codebase_ir",
+      "dimension": 8,
+      "roles": "53 structural compiler-input features and8-wide learned latent, not necessarily8-wide semantic source input.",
+      "status": "Bounded structural native scans/resume/companion observations exist; zero formalized/checked properties.",
+      "missing": "Source/native semantic correspondence, formal decoder, complete declared inventory integration and independent checker admission."
+    },
+    {
+      "family": "codebase_ir",
+      "dimension": 384,
+      "roles": "Semantic source384 bridge may own Codebase IR while reusing Security numerical payload; this ownership must remain explicit.",
+      "status": "Encoder/head prerequisites and narrow wrappers exist; broader admitted native Codebase grammar/task is not established by the reviewed evidence.",
+      "missing": "Dedicated task/codec, source-to-native head lineage, complete scan/dispatch and source-bound proof index adapter."
+    },
+    {
+      "family": "codebase_ir",
+      "dimension": 768,
+      "roles": "Larger semantic source representation is separate from structural latent8 and Legal768 heads.",
+      "status": "Source/encoder and narrow head protocol observations exist; a trained admitted repository-native formal decoder is not established.",
+      "missing": "Representative source/target corpus, inherited parent and optimizer continuation, Codebase-native grammar, full task and scanner qualification."
+    },
+    {
+      "family": "security_ir",
+      "dimension": 8,
+      "roles": "52-input/8-latent compiler-conditional path/value model; richer289-input variant is another basis.",
+      "status": "Structural numerical reconstruction/native fixed-tree readout exists, conditioned on compiler-prepared inputs.",
+      "missing": "Independent source-to-IR scope, variable tree presence/length and source-specific native/code applicability gates."
+    },
+    {
+      "family": "security_ir",
+      "dimension": 384,
+      "roles": "ProgramIR expression GRU/native fragment; advisory44-AST-feature classifier; separate bounded source production grammar head.",
+      "status": "Original program-ir/v1 fragment route authenticates; complete Python function/byte-map adapters and reviewed header/integer native obligations exist.",
+      "missing": "Preserve classifier/formula identities; broaden source grammar/coverage without converting CVE labels into function-level truths or compiler scaffolding into learned specifications."
+    },
+    {
+      "family": "security_ir",
+      "dimension": 768,
+      "roles": "Declared family/input-role lane, independent from Legal768 and Codebase source bridges.",
+      "status": "No authenticated trained family-specific full-document head established by this review; lane declaration alone is insufficient.",
+      "missing": "Compatible native task/schema/codec parent, source/cache corpus and separate training/evaluation/checker evidence."
+    },
+    {
+      "family": "intent_ir",
+      "dimension": 8,
+      "roles": "12 compiler-input features and8-wide structural latent; frozen lexical width8 in sequence models is another role.",
+      "status": "Compiler-conditional numerical path exists; cannot substitute for an independent intent understanding head.",
+      "missing": "Source-bound goals/preconditions/effects/workflows and current repository symbol/evidence correspondence."
+    },
+    {
+      "family": "intent_ir",
+      "dimension": 384,
+      "roles": "Source-conditioned GRU/rich AST fragment, fixed-schema ridge and separate learned frame\u2192normalized instruction inverse.",
+      "status": "intent-rich-grammar/v1 replay and24/24 fixed-composition ridge controls exist. Paired inverse authored75/75 versus weak public0/3 reflects narrow language/OOV scope.",
+      "missing": "Full workflow/conditional documents, case-sensitive code symbols, richer source fidelity and typed current/post-change repository grounding."
+    },
+    {
+      "family": "intent_ir",
+      "dimension": 768,
+      "roles": "Declared separate source representation/task lane, not a relabeled Legal student.",
+      "status": "No authenticated trained full-document family head established by reviewed evidence.",
+      "missing": "Native codec/schema and exact source-to-Codebase binding contract, compatible warm-start map, paired inputs and family-specific checks."
+    }
+  ],
+  "claim_reconciliation": [
+    {
+      "id": "cohorts-and-losses",
+      "finding": "Original48 contextual, exposedv348, prospective60 wording, source-only64 and broader4096DEV12 have different checkpoints/objectives/populations.",
+      "action": "Never pool exact,CE,MSE,proposal,Lake or repeated seed/alias counts; keep source-group exposure/selection ledgers."
+    },
+    {
+      "id": "historical-plan-readiness",
+      "finding": "The October2 family plan's Legal768 unavailable observation predates authenticated retained selected768 states and October6 original-asset replay.",
+      "action": "Preserve dated tables, append new exact state/producer/task observations; no blanket all-family768 readiness claim."
+    },
+    {
+      "id": "inverse-source-access",
+      "finding": "Legacy provenance decompilation can reproduce bytes despite wrong formulas. Source-withheld semantic rendering has48 outputs but0 exact prose matches.",
+      "action": "Separate retained-source restoration, semantic paraphrase and learned original-prose decoder tasks; expose all residual information and collisions."
+    },
+    {
+      "id": "paragraph-producer-custody",
+      "finding": "Caller paragraph file SHA establishes selected bytes; saved source/text inventory and clause-context SHA do not independently bind original paragraph vector production.",
+      "action": "Reviewed honesty patch exposesfalse producer authentication in prepare/describe. Require independent producer/vector receipt joins for stronger/new input admission; preserve original44 replay pins.",
+      "sources": [
+        "paragraph-caller-pin-control",
+        "honesty-patch-review"
+      ]
+    },
+    {
+      "id": "wording-scratch-status",
+      "finding": "Earlier diagnostic prose mixed a completed successor with unexecuted scratch wording; the reviewed patch attributes execution only to the separately sealed normative successor.",
+      "action": "Retain scratch as proposal with its own recipe identity, completed successor as actual execution; do not claim they are identical artifacts."
+    },
+    {
+      "id": "currentness-versus-local-checkout",
+      "finding": "Branch-agent795 effective-tree review preserves all103 sampled relevant paths, including published contextual39. Older dirty live checkout can lack those files.",
+      "action": "Treat local absence as checkout drift; use fresh owned current-main checkouts, preserve dirtywork, and compare effective trees separately from ancestry."
+    },
+    {
+      "id": "source-publication-versus-active-work",
+      "finding": "Datasets grouped-span/deontic and accelerate larger-head/preview candidates remain active or unreviewed; source presence, Hub presence and catalog presence are independent stages.",
+      "action": "Do not merge old broad trees or infer qualification from uploaded weights. Require exact owner/source/dependency/test review and fresh state/task bindings."
+    },
+    {
+      "id": "unknown-native-identities",
+      "finding": "Contextual private state serialization is known, while registered native output schema/profile/format remainsnull and all quality/runtime/proof flagsfalse.",
+      "action": "Keep operators/tasks/assets separate; byte and shape authentication cannot invent an ABI/native profile or planner proof fact."
+    },
+    {
+      "id": "logic-taxonomy-scope",
+      "finding": "Historical35 family inventory, later40-family capability accounting, eight Legal floors and14 code routes describe different catalog/profile/version scopes.",
+      "action": "Pin family catalog/version, applicable profiles, emitted distinctive operators and actual native checks; opaque atom/syntax/count success does not establish full semantics."
+    },
+    {
+      "id": "corrected-reviewer-count",
+      "finding": "The inherited matrix contains16 entries. An earlier reviewer message miscounted them as18.",
+      "action": "Corrected by direct JSON count and SHA4ea1c62d\u2026; no guide-count defect is claimed."
+    }
+  ],
+  "cross_family_autoformalization_connections": [
+    {
+      "family": "legal_ir",
+      "contribution": "Learned source-only contextual/native rule candidates; existing deterministic canonical inverse and source-locked numeric Lake routes.",
+      "formalization_handoff": "Validate complete native IR, retain source correspondence and nonempty qualifiers, generate actual applicable FOL/TDFOL/DCEC/CEC/frame/etc projections with loss/omission records, then trusted checks.",
+      "remaining": "Original prose inverse, richer grammar/meaning, fresh groups and independently qualified teacher scope."
+    },
+    {
+      "family": "codebase_ir",
+      "contribution": "Current exact captured source/AST/dependency/structural representation and partial conditional proof index.",
+      "formalization_handoff": "Bind a Codebase-native task/decoder and exact units to typed program/state/contract/trace obligations and verified source maps; cache checker outcomes with current dependency keys.",
+      "remaining": "Independent source-to-formal semantics, complete inventory/worker dispatch and admitted larger heads; structural scan coverage remains separate from encoded/checked coverage."
+    },
+    {
+      "family": "security_ir",
+      "contribution": "Native fixed-shape projection readouts, source-scaffolded learned production choices and explicit complete-function/byte-map recovery.",
+      "formalization_handoff": "Independent AST replay/source binding, reviewed header/security assumptions and eligible arithmetic/string/program/code projection checkers.",
+      "remaining": "Unsupported source/topology coverage, variable grammar, source security specification and broad property claims; classifier/CVE/CWE labels are not proof."
+    },
+    {
+      "family": "intent_ir",
+      "contribution": "Narrow learned frame/normalized-text inverse, rich native fragment/reconstruction heads and deterministic workflow/action projections.",
+      "formalization_handoff": "Ground intent goals/preconditions/effects against current Codebase symbols/source state and scoped checked facts, then compile residual/review obligations into the symbolic planner.",
+      "remaining": "Open vocabulary/case-sensitive symbols/full workflows and independently derived satisfaction evidence; ID-presence or Lake syntax alone cannot satisfy intent."
+    }
+  ],
+  "prioritized_missing_integration": [
+    {
+      "priority": 0,
+      "work": "Preserve and integrate exact current contributions",
+      "reuse": "Prior16-study review; current795/effective39 and acceleratee3\u2192d5 receipts; reviewed two-line honesty patch.",
+      "deliver": "Effective-tree/lineage manifest, reviewed clean source selection, active-owner handoffs and exact source+asset+task pins.",
+      "gate": "No automatic old branch replay or dirtytree reset; no numerical/teacher/proof promotion."
+    },
+    {
+      "priority": 1,
+      "work": "Admit complete paired formal targets and fresh source groups",
+      "reuse": "Existing64 native source caches, reference barrier, source/recurrent traces and provenance/review owners.",
+      "deliver": "Independently reviewed roles,modality/negation,qualifier presence/scope,binders,multiple rules and source/citation spans; TRAIN/tune/final grouped exposure ledger.",
+      "gate": "All five64-source semantic masks arezero until valid review; never invent labels, simplify qualifiers or self-certify compiler/teacher agreement."
+    },
+    {
+      "priority": 2,
+      "work": "Make the decoder output contract lossless for those targets",
+      "reuse": "Restricted32-vocabulary/512 Legal baseline; richer Intent/Security native codecs and fixed-tree coverage diagnostics.",
+      "deliver": "Separate schema/version/task heads with vocabulary migration, presence/length/order/symbol binding and unsupported ledgers; separate legal_text_reconstruction information contract.",
+      "gate": "Complete target must encode; encoder8192 or lower vectorMSE cannot repair an incompatible output grammar."
+    },
+    {
+      "priority": 3,
+      "work": "Compare compatible warm-started heads and retention",
+      "reuse": "Original8D/384D donors, complete384/768 states, new normative endpoints and exact cached width-specific vectors.",
+      "deliver": "Tensor/name/shape/dtype/codec transfer manifest; matched raw/PCA/AE/source-only conditioning and paragraph/clause/order controls; exposedv3 retention before candidate selection.",
+      "gate": "Keep original controls; copied-head KL zero is preservation, not adapter learning; teacher-output KD needs screened qualified scope; rejected final attempts and aliases cannot be promoted."
+    },
+    {
+      "priority": 4,
+      "work": "Connect explicit experimental runtime selection to the supervisor",
+      "reuse": "Exact ModelManager10 selectors and byte authentication, typed cached Legal facade, original fragment routes, current native planner/obligation adapters.",
+      "deliver": "Opt-in candidate producer with exact source/cache/decoder IO/profile/task bindings, resource leases and truthful unavailable/refusal states; fresh reviewed task context after catalog/source generation changes.",
+      "gate": "No accelerate contextual numerical callsite is established by the branch review. Unknown IDs stayunknown; generated IR remains candidate until source/native/checker gates pass."
+    },
+    {
+      "priority": 5,
+      "work": "Publish current-state proof indexing and intent grounding",
+      "reuse": "RepositoryCodebaseIndex/CAS/AST captures, conditional evidence keys/reverse dependencies, signed companion/currentness and native family checkers.",
+      "deliver": "Candidate index separate from attempt/proof index; source/model/checker/version/assumption hashes; dependent invalidation; current and desired post-change Intent symbol bindings.",
+      "gate": "Whole declared inventory denominators and unsupported/deferred members remain visible. Embeddings,53\u21928 reconstruction or a source hash discharge no obligations."
+    },
+    {
+      "priority": 6,
+      "work": "Instantiate12 independent cells and stage model publication",
+      "reuse": "Existing family/width declarations, AutoencoderRegistry/index owners, central ModelManager and immutable CAS/Hub receipts.",
+      "deliver": "Separate family8/384/768 manifests, physically configured registry/index/DuckLake/catalog prefixes and public repositories; within each cell separate schema/task/profile/run/asset records.",
+      "gate": "Declarative12 slots or670 central records do not prove12 stores/full decoders. Check new normative/grouped state catalog/Hub presence independently; append new asset records and preserve prior defaults."
+    },
+    {
+      "priority": 7,
+      "work": "Adapt repository-specific Codebase models in shadow",
+      "reuse": "Compatible inherited structural/native parent, exact repository generation/caches, finite corpus/replay and existing owner leases.",
+      "deliver": "Mandatory inherited policy, unknown-atom/basis/grammar gate, explicit optimizer-state policy, immutable new run and regression/canary comparison while prior admitted planner generation staysactive.",
+      "gate": "Weights-only sidecars cannot claim Adam exact-resume; no online fitting inside planning requests or in-place sealed-context/checkpoint mutation."
+    },
+    {
+      "priority": 8,
+      "work": "Increase source and output spans independently",
+      "reuse": "Current512 frozen encoder/cached decoder baselines and separately authenticated native768/4096 producer prerequisites.",
+      "deliver": "Family-specific span curriculum, source token/offset/dependency accounting, output length/rule capacity and memory/cost comparisons, then8192 source experiment.",
+      "gate": "768 is the actual GTE dimension; existing small source and max8-clause/512 output experiments do not qualify8192.4096 remains an independent lineage, not an extension of three requested cell widths."
+    }
+  ],
+  "logic_and_proof_boundaries": [
+    "Eight distinct Legal floor capabilities and applicable14 code routes require exact family/profile/schema semantics. A particular source need only its applicable constructs; eight fabricated translations are not required.",
+    "Nativev3 default63/66 supported checks still blocks all four full training panels. Separate authored smoke198 occurrences/12 builds/9 SANY establishes a gated handoff, not broad source fidelity or all40 families.",
+    "Only actual applicable source-bound lake build<Lib> grants Lean admission; raw lean--json,PROOF enum,JSON schema,compiler rows and reconstruction loss cannot replace it.",
+    "Logic projection features can reconstruct compiler targets or fixed trees while source-to-formula meaning remains wrong. Wrong UI candidates passing Lake demonstrate the need for independent source fidelity.",
+    "Proof index must retain assumptions,backend/toolchain/profile,exact artifact/source/dependencies and current eligibility separately from model candidate/retrieval/parse observations."
+  ],
+  "non_aggregation_rules": [
+    "Repeated observations of 48 sources under different seeds are not independent holdouts.",
+    "Source-vector MSE, formula token CE and Lake counts measure different objectives.",
+    "Do not merge tensors or sparse updates across runtime, decoder grammar or embedding profiles.",
+    "The new source-only 8\u219216\u21924 MLP is distinct from the protected historical 8D linguistic teacher.",
+    "A final attempt rejected by an unchanged gate cannot be promoted from its diagnostic score.",
+    "Same semantic meanings under new wording are prospective wording evidence, not an untouched semantic holdout.",
+    "Selected/last equal tensors,seed repeats,shared64 sources and duplicate8c02/3b39 artifact trees are controls or aliases, not independent studies.",
+    "Native encoder preparation,decoder fitting,greedy observation,posthoc scoring,resource admission and cached/compiler/native-backend work need separate timing scopes.",
+    "8D input,8D structural latent,8D token lexical rows and residual8 with a384 skip do not select interchangeable checkpoints or token budgets."
+  ],
+  "reviewer_correction": "Prior matrix count is16; earlier messages claiming18 were a reviewer counting mistake and are superseded.",
+  "operations": {
+    "model_inference_executed": false,
+    "training_executed": false,
+    "encoder_executed": false,
+    "database_or_network_executed": false,
+    "repository_source_mutated": false,
+    "git_refs_mutated": false,
+    "proof_authority": false,
+    "independent_metadata_controls_executed": true
+  },
+  "limitations": [
+    "Peer branch reviews are sampled/bounded source-presence observations, not exhaustive qualification of unrelated branches. Dirty active work remains preserved and unqualified.",
+    "Retained historical execution receipts are attributed to their exact source/corpus/model generations; rehashing JSON does not attest execution origin or fresh current runtime/Hub presence.",
+    "This reviewer additionally executed only synthetic and original48 metadata controls under import/effect bombs. Those do not establish a new numerical replay or producer provenance.",
+    "Sources are cooperative endpoint observations rather than an atomic cross-repository snapshot. Later documentation/source/publication changes need fresh verification.",
+    "US Constitution formalization, global convergence,production teacher/runtime and broad source-to-law/code proof authority remain unestablished."
+  ],
+  "source_endpoints_unchanged": true
+}

@@ -1,0 +1,654 @@
+{
+  "all_18_original_report_Git_pins_authenticated": true,
+  "all_83_selected_contribution_Git_paths_present": true,
+  "approved_for_scoped_root_documentation_and_tracking_field_change": true,
+  "cohort_and_model_scope_checks": {
+    "8_input8_latent_and8_internal_projection_roles_separate": true,
+    "Hub_absence_scoped_to_exact_serializations_selected_store_and_three_snapshots": true,
+    "IR_exact48_is_separate_from_original_text_exact0": true,
+    "all_reference_qualifiers_empty_preserved": true,
+    "cached_replay_is_original_exposed48_per_width": true,
+    "clause_context_correspondence_not_independent_encoder_producer_authentication": true,
+    "codebase_current_source_hash_dependency_invalidation_and_candidate_index_scope_preserved": true,
+    "encoder_span_and_decoder_output_budgets_separate": true,
+    "families_widths_schema_versions_decoder_tasks_and_ablations_separate": true,
+    "four_unique_tensor_arms_and_selected_last_aliases_preserved": true,
+    "native_canonical_IR_validity_source_semantics_and_proof_gates_separate": true,
+    "no_family_cell_readiness_inferred_from_declarations": true,
+    "normative_60_wording_rows_are_previously_exposed30_meanings": true,
+    "other_public_grouped_artifacts_do_not_qualify_active_uncommitted_sources": true,
+    "paragraph_pin_is_caller_byte_custody_not_producer_authentication": true,
+    "source_MSE_and_TRAIN_only_PCA_not_semantic_or_proof_fidelity": true,
+    "width_specific384_gain_and768_no_auxiliary_exact_gain_preserved": true
+  },
+  "completed": true,
+  "contribution_checks": [
+    {
+      "independent_counts": {
+        "identical": 51,
+        "missing": 0,
+        "modified": 0
+      },
+      "path_count": 51,
+      "repository_role": "datasets",
+      "source_commit": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+      "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+    },
+    {
+      "independent_counts": {
+        "identical": 17,
+        "missing": 0,
+        "modified": 0
+      },
+      "path_count": 17,
+      "repository_role": "datasets",
+      "source_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+    },
+    {
+      "independent_counts": {
+        "identical": 1,
+        "missing": 0,
+        "modified": 1
+      },
+      "path_count": 2,
+      "repository_role": "accelerate",
+      "source_commit": "bcd466018cff101c34b281a4fe234bdc1f33fb0a",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235"
+    },
+    {
+      "independent_counts": {
+        "identical": 12,
+        "missing": 0,
+        "modified": 1
+      },
+      "path_count": 13,
+      "repository_role": "accelerate",
+      "source_commit": "82671e6c8411875cb9919e3a71b07831548c0aeb",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235"
+    }
+  ],
+  "existing_saved_control_reports_only": [
+    {
+      "passed": 163,
+      "pin": {
+        "bytes": 35104,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/honesty-controls.xml",
+        "sha256": "a63c3260ab7683d54eaea75f0a6e683ff74e91b99fe3ad23382f268c04f4d6c3"
+      },
+      "rerun_in_this_review": false
+    },
+    {
+      "passed": 9,
+      "pin": {
+        "bytes": 1380,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/effective-tree-auditor-tests.xml",
+        "sha256": "57187a4c155e4608c21710e117a075e50560626aafdc8766139ffbdf821623c7"
+      },
+      "rerun_in_this_review": false
+    }
+  ],
+  "findings": [],
+  "gitlink_scope": "The three existing private child HEADs differ from root HEAD/index. Review did not materialize, stage, update, delete or clean children. Initial index values remain authenticated; desired later dataset repair gitlink and final merged root commit remain parent-owned publication work.",
+  "gitmodules_change": {
+    "after": "main",
+    "before": "agent/ui-ux-ir",
+    "exactly_one_tracking_field_changed": true,
+    "historical_UI_review_pin": {
+      "bytes": 7091,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/UI-branch-review.json",
+      "sha256": "3eccd57c4423d0bb89dfbcbc58ebd0d77d55c1bbb72d6329b44bbd5b0d6b2b7b"
+    },
+    "submodule": "external/ipfs_datasets",
+    "submodule_update_executed_by_reviewer": false
+  },
+  "limits": [
+    "Selected explicit source/report contribution paths; not a review of every unrelated branch or all live divergent files.",
+    "This review authenticates retained reports and saved test receipts, without rerunning model experiments or tests.",
+    "Availability registration, semantic fidelity, runtime release, teacher scope and proof admission remain separate future gates; no new model is admitted."
+  ],
+  "operations": {
+    "DB_or_Hub_or_network_calls": false,
+    "checkpoint_or_cache_or_source_or_git_index_modified": false,
+    "immutable_local_Git_blobs_and_metadata_read": true,
+    "inference_or_training_or_tests_executed": false,
+    "model_or_encoder_loaded": false,
+    "new_evidence_receipt_written": true,
+    "submodule_init_update_checkout_or_cleanup": false
+  },
+  "prior_16_entries_semantics_unchanged": true,
+  "private_gitlink_drift_unmodified": true,
+  "report_checks": [
+    {
+      "id": "preserved-8d-linguistic-teacher",
+      "repository_role": "datasets",
+      "source_commit": "0ced2e533c9090d21aba602c3550c5ff5ecd45eb",
+      "source_path": "docs/autoencoders/legacy_linguistic_validation_20261001.md",
+      "source_pin": {
+        "bytes": 6239,
+        "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 6239,
+        "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a"
+      }
+    },
+    {
+      "id": "four-width-initial-head-comparison",
+      "repository_role": "datasets",
+      "source_commit": "dce8ab819331a5f5bddac86c851710fa4377c1d4",
+      "source_path": "docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+      "source_pin": {
+        "bytes": 389091,
+        "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 389091,
+        "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b"
+      }
+    },
+    {
+      "id": "native4096-and-field-rates",
+      "repository_role": "datasets",
+      "source_commit": "d466db01a32c419a765e5cef046991ddedc3c279",
+      "source_path": "docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+      "source_pin": {
+        "bytes": 27951,
+        "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 27951,
+        "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285"
+      }
+    },
+    {
+      "id": "broader4096-and-8d-geometry",
+      "repository_role": "datasets",
+      "source_commit": "fd89d2a48aa0de771dd22ec8fd079af10732051f",
+      "source_path": "docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+      "source_pin": {
+        "bytes": 26924,
+        "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 26924,
+        "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7"
+      }
+    },
+    {
+      "id": "train-paraphrase-mixture",
+      "repository_role": "datasets",
+      "source_commit": "aa586a9b91b583a2ac5d867bd107ba0c5a4762d5",
+      "source_path": "docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+      "source_pin": {
+        "bytes": 3049472,
+        "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 3049472,
+        "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac"
+      }
+    },
+    {
+      "id": "train-paraphrase-modality",
+      "repository_role": "datasets",
+      "source_commit": "60f5c2951ac34231f05b54e50f2725296871c5b9",
+      "source_path": "docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+      "source_pin": {
+        "bytes": 3547468,
+        "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 3547468,
+        "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d"
+      }
+    },
+    {
+      "id": "source-margin-two-seed-study",
+      "repository_role": "datasets",
+      "source_commit": "1b6461e65f15635b89d04609dae01a4196cd3ea5",
+      "source_path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+      "source_pin": {
+        "bytes": 6276,
+        "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 6276,
+        "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918"
+      }
+    },
+    {
+      "id": "intent-ui-composition-ridge",
+      "repository_role": "datasets",
+      "source_commit": "6589f788791f8991a8b856fbc3fc5fa396d17229",
+      "source_path": "docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+      "source_pin": {
+        "bytes": 647843,
+        "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 647843,
+        "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1"
+      }
+    },
+    {
+      "id": "complete-intent-ui-feature-loss",
+      "repository_role": "datasets",
+      "source_commit": "df732e8aaf5b4eec7373f1581e7193d7c0a91134",
+      "source_path": "docs/autoencoders/complete_features_and_ui_fidelity.md",
+      "source_pin": {
+        "bytes": 24229,
+        "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 24229,
+        "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517"
+      }
+    },
+    {
+      "id": "ui-temporal-dcec-floor",
+      "repository_role": "datasets",
+      "source_commit": "ea275ae32779db01c7dc59dc62ce12bcd9841ae2",
+      "source_path": "docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+      "source_pin": {
+        "bytes": 307406,
+        "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 307406,
+        "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95"
+      }
+    },
+    {
+      "id": "security-production-head",
+      "repository_role": "datasets",
+      "source_commit": "2d93857e78ceedc7f055637c887afeaa40653993",
+      "source_path": "docs/security_formula_decoder.md",
+      "source_pin": {
+        "bytes": 8596,
+        "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 8596,
+        "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398"
+      }
+    },
+    {
+      "id": "source-ae-frozen-control",
+      "repository_role": "workspace",
+      "source_commit": "e44254d4dd9e9a873d1b7a257f53286f35860e01",
+      "source_path": "artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+      "source_pin": {
+        "bytes": 66071,
+        "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 66071,
+        "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83"
+      }
+    },
+    {
+      "id": "source-ae-authored32-expansion",
+      "repository_role": "workspace",
+      "source_commit": "67bd5f1a3d6ff1540bd594e1205d753eb44f03ef",
+      "source_path": "artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+      "source_pin": {
+        "bytes": 102630,
+        "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 102630,
+        "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5"
+      }
+    },
+    {
+      "id": "frozen-law-conditioner-interventions",
+      "repository_role": "workspace",
+      "source_commit": "b48ec0fb6aa1b45a46c1239f50f645d03ab74808",
+      "source_path": "artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+      "source_pin": {
+        "bytes": 139006,
+        "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 139006,
+        "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a"
+      }
+    },
+    {
+      "id": "bounded-joint-span-policy",
+      "repository_role": "workspace",
+      "source_commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+      "source_path": "artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+      "source_pin": {
+        "bytes": 32394,
+        "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 32394,
+        "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42"
+      }
+    },
+    {
+      "id": "joint-span-six-condition-control",
+      "repository_role": "workspace",
+      "source_commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+      "source_path": "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+      "source_pin": {
+        "bytes": 392135,
+        "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 392135,
+        "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851"
+      }
+    },
+    {
+      "id": "original-contextual-cached-replay-and-text-baseline",
+      "repository_role": "datasets",
+      "source_commit": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+      "source_path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.json",
+      "source_pin": {
+        "bytes": 22379,
+        "sha256": "e05bd76ef4577698f0cd5aeb3b8676974d661f22808aebed58c7626f9543361b"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 22379,
+        "sha256": "e05bd76ef4577698f0cd5aeb3b8676974d661f22808aebed58c7626f9543361b"
+      }
+    },
+    {
+      "id": "broader-normative-wording-paired-decoder-fits",
+      "repository_role": "datasets",
+      "source_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "source_path": "docs/implementation/reports/evidence/decoder-normative-wording-20261006/results.json",
+      "source_pin": {
+        "bytes": 2902845,
+        "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496"
+      },
+      "source_reachable": true,
+      "target_pin": {
+        "bytes": 2902845,
+        "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496"
+      }
+    }
+  ],
+  "resolved_findings": [
+    {
+      "builder_and_regenerated_ledger_match": true,
+      "correction": "saved clause-context joins bind supplied clause/context bytes to the original saved inventory.",
+      "original_overstatement": "Saved clause-context joins independently authenticate native encoder production.",
+      "topic": "clause_context_provenance"
+    },
+    {
+      "README_matches_actual_native_presence_query": true,
+      "correction": "670-binding ModelManager catalog",
+      "topic": "catalog_count_scope"
+    }
+  ],
+  "reviewed_at_utc": "2026-10-06T14:43:18.117106+00:00",
+  "reviewed_file_pins_after": [
+    {
+      "bytes": 9572,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/build_integration_ledger.py",
+      "sha256": "11975aaf2addb285381415ccc8075e3eba36b9c0acf6bada06896be08b5dbea3"
+    },
+    {
+      "bytes": 96895,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/integration-ledger.json",
+      "sha256": "73745a889d35c99ca15ea6ab7fb7c4b2189602c854740f9fa0eb65d5f1d01967"
+    },
+    {
+      "bytes": 11559,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/README.md",
+      "sha256": "eb43dcae77c0d7eb51f422ce8317cacba323732459fde9ba4f51ce6c6bff3b9d"
+    },
+    {
+      "bytes": 1123,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/.gitmodules",
+      "sha256": "09812e273eb7a22a2cf6e5569afc4376c630edfa28994bf743195f165bf5b245"
+    },
+    {
+      "bytes": 14864,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "sha256": "556825e128d3883bd776f83a86dff5ebaaa6e3e39a9768e530d1ae5222c23057"
+    },
+    {
+      "bytes": 5054,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/scripts/review_autoencoder_progress.py",
+      "sha256": "fbd8d061913c550853fd3ad610692db213bbba8a92294019ae7f2e9d1142c08d"
+    },
+    {
+      "bytes": 35104,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/honesty-controls.xml",
+      "sha256": "a63c3260ab7683d54eaea75f0a6e683ff74e91b99fe3ad23382f268c04f4d6c3"
+    },
+    {
+      "bytes": 1380,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/effective-tree-auditor-tests.xml",
+      "sha256": "57187a4c155e4608c21710e117a075e50560626aafdc8766139ffbdf821623c7"
+    },
+    {
+      "bytes": 7774,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/paragraph-pin-boundary.json",
+      "sha256": "7407e81d7a5f67394aaf8bccd0bd340e734b2b3e8717677931760f3e381cd36a"
+    },
+    {
+      "bytes": 4120,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-patch-independent-review.json",
+      "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb"
+    },
+    {
+      "bytes": 868,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/matrix-verification.json",
+      "sha256": "cffd5695fe3effaf83a51d118b9750301aa83f24cf7c4edef6fc42aa9e0f2487"
+    },
+    {
+      "bytes": 85148,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/semantic-evidence-matrix.json",
+      "sha256": "4d840b42598db820c6a533ef61379992c45fe8ca12f99b3c5bedf3ce8396d2b8"
+    },
+    {
+      "bytes": 7091,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/UI-branch-review.json",
+      "sha256": "3eccd57c4423d0bb89dfbcbc58ebd0d77d55c1bbb72d6329b44bbd5b0d6b2b7b"
+    },
+    {
+      "bytes": 1285555,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/survey.json",
+      "sha256": "a02278d934c90a3b0448434b0e531e863d39982f4f72c60b41e115689666ed50"
+    },
+    {
+      "bytes": 16067,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/reconciliation-findings.json",
+      "sha256": "01390c913bb853b2556d7d38b02c4adcfe2b156799d91bfde9ca3b6fe0bc9d3a"
+    },
+    {
+      "bytes": 5062,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-summary.json",
+      "sha256": "3ef501aca9e0caff1a7b226e51df9f05bfe160f799402bcb5af19679cacfc44a"
+    },
+    {
+      "bytes": 1246028,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-survey.json",
+      "sha256": "14dfb9a009428dba56bbca12b04acf52811d2fc733aa8420bb1a101895dc6dd5"
+    },
+    {
+      "bytes": 45213,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/root/survey.json",
+      "sha256": "ee1a5c3bee975c1239206a666df3f1a2b54b945d28f1776a5d4369fff4192fe6"
+    },
+    {
+      "bytes": 6330,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/findings.json",
+      "sha256": "d35c739f9c2acbaf47da686192de7cc8529442089e9e65015856153989dcd03b"
+    }
+  ],
+  "reviewed_file_pins_before": [
+    {
+      "bytes": 9572,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/build_integration_ledger.py",
+      "sha256": "11975aaf2addb285381415ccc8075e3eba36b9c0acf6bada06896be08b5dbea3"
+    },
+    {
+      "bytes": 96895,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/integration-ledger.json",
+      "sha256": "73745a889d35c99ca15ea6ab7fb7c4b2189602c854740f9fa0eb65d5f1d01967"
+    },
+    {
+      "bytes": 11559,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/README.md",
+      "sha256": "eb43dcae77c0d7eb51f422ce8317cacba323732459fde9ba4f51ce6c6bff3b9d"
+    },
+    {
+      "bytes": 1123,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/.gitmodules",
+      "sha256": "09812e273eb7a22a2cf6e5569afc4376c630edfa28994bf743195f165bf5b245"
+    },
+    {
+      "bytes": 14864,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "sha256": "556825e128d3883bd776f83a86dff5ebaaa6e3e39a9768e530d1ae5222c23057"
+    },
+    {
+      "bytes": 5054,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/scripts/review_autoencoder_progress.py",
+      "sha256": "fbd8d061913c550853fd3ad610692db213bbba8a92294019ae7f2e9d1142c08d"
+    },
+    {
+      "bytes": 35104,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/honesty-controls.xml",
+      "sha256": "a63c3260ab7683d54eaea75f0a6e683ff74e91b99fe3ad23382f268c04f4d6c3"
+    },
+    {
+      "bytes": 1380,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/effective-tree-auditor-tests.xml",
+      "sha256": "57187a4c155e4608c21710e117a075e50560626aafdc8766139ffbdf821623c7"
+    },
+    {
+      "bytes": 7774,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/paragraph-pin-boundary.json",
+      "sha256": "7407e81d7a5f67394aaf8bccd0bd340e734b2b3e8717677931760f3e381cd36a"
+    },
+    {
+      "bytes": 4120,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-patch-independent-review.json",
+      "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb"
+    },
+    {
+      "bytes": 868,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/matrix-verification.json",
+      "sha256": "cffd5695fe3effaf83a51d118b9750301aa83f24cf7c4edef6fc42aa9e0f2487"
+    },
+    {
+      "bytes": 85148,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/semantic-evidence-matrix.json",
+      "sha256": "4d840b42598db820c6a533ef61379992c45fe8ca12f99b3c5bedf3ce8396d2b8"
+    },
+    {
+      "bytes": 7091,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/UI-branch-review.json",
+      "sha256": "3eccd57c4423d0bb89dfbcbc58ebd0d77d55c1bbb72d6329b44bbd5b0d6b2b7b"
+    },
+    {
+      "bytes": 1285555,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/survey.json",
+      "sha256": "a02278d934c90a3b0448434b0e531e863d39982f4f72c60b41e115689666ed50"
+    },
+    {
+      "bytes": 16067,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/reconciliation-findings.json",
+      "sha256": "01390c913bb853b2556d7d38b02c4adcfe2b156799d91bfde9ca3b6fe0bc9d3a"
+    },
+    {
+      "bytes": 5062,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-summary.json",
+      "sha256": "3ef501aca9e0caff1a7b226e51df9f05bfe160f799402bcb5af19679cacfc44a"
+    },
+    {
+      "bytes": 1246028,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-survey.json",
+      "sha256": "14dfb9a009428dba56bbca12b04acf52811d2fc733aa8420bb1a101895dc6dd5"
+    },
+    {
+      "bytes": 45213,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/root/survey.json",
+      "sha256": "ee1a5c3bee975c1239206a666df3f1a2b54b945d28f1776a5d4369fff4192fe6"
+    },
+    {
+      "bytes": 6330,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/findings.json",
+      "sha256": "d35c739f9c2acbaf47da686192de7cc8529442089e9e65015856153989dcd03b"
+    }
+  ],
+  "reviewed_files_unchanged_during_final_review": true,
+  "reviewed_initial_immutable_snapshots": {
+    "accelerate": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+    "datasets": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "workspace": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb"
+  },
+  "schema": "autoencoder-progress-root-integration-independent-review/v1",
+  "three_way_gitlinks_after": [
+    {
+      "HEAD_gitlink": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "index_gitlink": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "path": "external/ipfs_datasets",
+      "private_child_worktree_HEAD": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "private_child_worktree_top_level": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/external/ipfs_datasets"
+    },
+    {
+      "HEAD_gitlink": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "index_gitlink": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "path": "external/ipfs_accelerate",
+      "private_child_worktree_HEAD": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "private_child_worktree_top_level": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/external/ipfs_accelerate"
+    },
+    {
+      "HEAD_gitlink": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "index_gitlink": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "path": "external/ipfs_kit",
+      "private_child_worktree_HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "private_child_worktree_top_level": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/external/ipfs_kit"
+    }
+  ],
+  "three_way_gitlinks_before": [
+    {
+      "HEAD_gitlink": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "index_gitlink": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "path": "external/ipfs_datasets",
+      "private_child_worktree_HEAD": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "private_child_worktree_top_level": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/external/ipfs_datasets"
+    },
+    {
+      "HEAD_gitlink": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "index_gitlink": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "path": "external/ipfs_accelerate",
+      "private_child_worktree_HEAD": "03eb84149cac3de7e16a99148466e4ad9327cb79",
+      "private_child_worktree_top_level": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/external/ipfs_accelerate"
+    },
+    {
+      "HEAD_gitlink": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "index_gitlink": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "path": "external/ipfs_kit",
+      "private_child_worktree_HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "private_child_worktree_top_level": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/external/ipfs_kit"
+    }
+  ]
+}

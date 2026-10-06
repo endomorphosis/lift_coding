@@ -1,0 +1,228 @@
+{
+  "authority": "Original byte identities and recorded provenance only.",
+  "checkpoints": [
+    {
+      "checkpoint": {
+        "bytes": 6873498,
+        "path_in_repo": "releases/retained-checkpoints/7443c8a60cb1f95e9a35017edcd394c0f47fd457c3733e0863d37bfc09a09a12/checkpoint.json",
+        "sha256": "7443c8a60cb1f95e9a35017edcd394c0f47fd457c3733e0863d37bfc09a09a12"
+      },
+      "codec": null,
+      "companion_assets": [
+        {
+          "original_pin": {
+            "bytes": 9002,
+            "path": "/home/barberb/lift_coding/artifacts/gte-decoder-reuse-20261001/run-01/manifest.json",
+            "sha256": "2b8017707f5619262b6cdf1d86f73035322fa6f3a9e5a521c2a42c029bf55cde"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/2b8017707f5619262b6cdf1d86f73035322fa6f3a9e5a521c2a42c029bf55cde/manifest.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 565,
+            "path": "/home/barberb/lift_coding/artifacts/gte-decoder-reuse-20261001/run-01/donor-pins.json",
+            "sha256": "8284f3dda68384de197c71f38a641bfc71cc036cdb8497b464e9a511337bb965"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/8284f3dda68384de197c71f38a641bfc71cc036cdb8497b464e9a511337bb965/donor-pins.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 875,
+            "path": "/home/barberb/lift_coding/artifacts/gte-decoder-reuse-20261001/run-01/inspection.json",
+            "sha256": "22b4635e5689ed5e3482353a8cbcb5143f2f0268df6dd52e9409226c2a57c26f"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/22b4635e5689ed5e3482353a8cbcb5143f2f0268df6dd52e9409226c2a57c26f/inspection.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 1236,
+            "path": "/home/barberb/lift_coding/artifacts/gte-decoder-reuse-20261001/run-01/summary.json",
+            "sha256": "d42ae4124d1e30a25f1f89ff1dbe133f4c64059bd7c6b1e5e054d5a4272cbb74"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/d42ae4124d1e30a25f1f89ff1dbe133f4c64059bd7c6b1e5e054d5a4272cbb74/summary.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        }
+      ],
+      "config": null,
+      "contract": null,
+      "declaration": {
+        "dimension_role": "input_embedding",
+        "input_width": 768,
+        "native_source_inputs_available_in_prior_evaluation": false,
+        "receipt": {
+          "bytes": 6873498,
+          "path": "/home/barberb/lift_coding/artifacts/gte-decoder-reuse-20261001/run-01/student-initialization.json",
+          "sha256": "7443c8a60cb1f95e9a35017edcd394c0f47fd457c3733e0863d37bfc09a09a12"
+        },
+        "role": "authenticated inherited initialization",
+        "teacher_qualified": false,
+        "training_completed": false
+      },
+      "full_runtime_closure_verified": false,
+      "identity": {
+        "checkpoint_schema": "gte-dual-donor-decoder-warm-start/v1",
+        "dimension": 768,
+        "dimension_role": "input_embedding",
+        "donor": null,
+        "donor_pins": {
+          "legacy8_checkpoint_sha256": "ffca84492b81ab94fa291ae6ddbe52cfc84318f3516a22f901d468de255b6cbe",
+          "legacy8_codec_sha256": "25d32d252ce8ef0fab2b6315068898fa3205246bc5f8abfad1ffbce8a1bfd6e1",
+          "legacy8_weights_sha256": "e96a6e3ff5771b9227aa98919aee2745d42cd3361e0f85d5d2771ed88e9d1995",
+          "teacher384_checkpoint_sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61",
+          "teacher384_codec_sha256": "cba3e5384e2bee12e709ccc8e9ee430e51cf09a8fc2e8abdd57143fdaa38dba2",
+          "teacher384_weights_sha256": "17ddd2026a72eda808e5223cc32c5c6fd0b523fc2ec771f620c9b3179793a05a"
+        },
+        "embedded_decoder_schema": "gte-dual-donor-decoder-warm-start/v1",
+        "format_id": null,
+        "initialization_only": true,
+        "ir_family_id": "legal_ir",
+        "legacy_profile": null,
+        "native_codebase_decoder_complete": null,
+        "original_checkpoint_pin": {
+          "bytes": 6873498,
+          "path": "/home/barberb/lift_coding/artifacts/gte-decoder-reuse-20261001/run-01/student-initialization.json",
+          "sha256": "7443c8a60cb1f95e9a35017edcd394c0f47fd457c3733e0863d37bfc09a09a12"
+        },
+        "payload_ir_family": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:8dbc9583049fa8fa0a1a73389ab9539fb4e7c9450d2bd74e98a9d872d9664033",
+        "retained_status": "initialization_only",
+        "role": "authenticated inherited initialization",
+        "runtime_ready": false,
+        "schema_version": null,
+        "source_profile_id": "Alibaba-NLP/gte-multilingual-base@9bbca17d9273fd0d03d5725c7a4b0f6b45142062:code=Alibaba-NLP/new-impl@40ced75c3017eb27626c9d4ea981bde21a2662f4:d768:pool=cls:norm=l2:cpu:float32:tokens8192:reject_overlength:v1",
+        "task_id": null,
+        "teacher_qualified": false,
+        "trained": false
+      },
+      "license_scope": {
+        "repository_source": "AGPL-3.0, see SOURCE-LICENSE",
+        "weights_and_companions": "Original provenance retained; this release supplies no new blanket license grant."
+      },
+      "numerical_execution_performed": false,
+      "original_package": null,
+      "schema": "retained-ir-checkpoint-release/v1",
+      "source_binding_scope": "listed checkpoint implementation hashes only, not full import/native closure",
+      "source_map": [
+        {
+          "declaration_pointer": "/gte_decoder_reuse.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_reuse.py",
+          "original_pin": {
+            "bytes": 13945,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_reuse.py",
+            "sha256": "82e7ef0eacec0dc392773cae62db84b7fba83812363004e73a168a366220e3e5"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/82e7ef0eacec0dc392773cae62db84b7fba83812363004e73a168a366220e3e5/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_reuse.py"
+        },
+        {
+          "declaration_pointer": "/gte_decoder_warm_start.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_warm_start.py",
+          "original_pin": {
+            "bytes": 26165,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_warm_start.py",
+            "sha256": "2d8bc4a22718392b250e777bba192512d1fcf60973bfa7e615a409c22fb7e6e3"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/2d8bc4a22718392b250e777bba192512d1fcf60973bfa7e615a409c22fb7e6e3/ipfs_datasets_py/logic/formalization/autoencoder/gte_decoder_warm_start.py"
+        },
+        {
+          "declaration_pointer": "/gte_legacy8_decoder_donor.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_legacy8_decoder_donor.py",
+          "original_pin": {
+            "bytes": 30102,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_legacy8_decoder_donor.py",
+            "sha256": "1f09e5975e808e5f1afcd5fec25cd5c412524f89db691d0ab7c107e17f9a8f71"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/1f09e5975e808e5f1afcd5fec25cd5c412524f89db691d0ab7c107e17f9a8f71/ipfs_datasets_py/logic/formalization/autoencoder/gte_legacy8_decoder_donor.py"
+        }
+      ],
+      "unknown_schema_task_profile_policy": "Unknown fields remain null; no family-only alias or default serving route."
+    }
+  ],
+  "dimension": 768,
+  "empty_lane": false,
+  "input_audit_pins": [
+    {
+      "bytes": 661812,
+      "path": "/home/barberb/lift_coding/artifacts/ir-model-manager-hf-sync-20261004/publication_inventory_audit.json",
+      "sha256": "8e857941cee73c75e8dc4ac7aa5df604e8953aa9dc87ec00bd2f83c0677e93ae"
+    },
+    {
+      "bytes": 1033525,
+      "path": "/home/barberb/lift_coding/artifacts/ir-model-manager-hf-sync-20261004/publication_source_binding_audit.json",
+      "sha256": "1ae36985f031ac16fa989cb4ec27f1ec49fdebf2d769b771c7db491dec1f6d9a"
+    }
+  ],
+  "ir_family_id": "legal_ir",
+  "original_lane_declaration": {
+    "cell_id": "legal_ir_768d",
+    "checkpoint_count": 1,
+    "dimension": 768,
+    "dimension_profile": {
+      "code_revision": "40ced75c3017eb27626c9d4ea981bde21a2662f4",
+      "dimension": 768,
+      "dimension_role_required": true,
+      "encoder_kind": "native GTE multilingual source embedding after local asset admission",
+      "hard_encoder_token_limit": 8192,
+      "model_id": "Alibaba-NLP/gte-multilingual-base",
+      "model_revision": "9bbca17d9273fd0d03d5725c7a4b0f6b45142062",
+      "normalization": "l2",
+      "pooling": "cls",
+      "qualified_source_token_limit": null,
+      "unknown_limit_policy": "native production/admission and per-task span qualification required; no padded384 vectors"
+    },
+    "empty_model_lane": false,
+    "huggingface_plan": {
+      "existing_descriptor_source": null,
+      "existing_read_only_descriptors": [],
+      "load_requires": [
+        "full immutable commit",
+        "manifest SHA256",
+        "matching family/dimension role/task/profile/codec",
+        "actual checkpoint SHA256"
+      ],
+      "namespace_write_access_verified": false,
+      "release_path_template": "releases/<task>/<profile>/<release_id>/",
+      "repo_type": "model",
+      "repository_id_template": "<hf_namespace>/legal-ir-autoencoder-768d",
+      "status": "proposed_not_created",
+      "suggested_namespace_from_existing_release_descriptors": "Publicus",
+      "suggested_repository_id": "Publicus/legal-ir-autoencoder-768d",
+      "visibility": null,
+      "visibility_status": "explicit deployment configuration required; no visibility changes performed during planning"
+    },
+    "inventory_receipt": {
+      "bytes": 7577,
+      "path": "/home/barberb/lift_coding/artifacts/codebase-ir-numerical-replay-20261003/inputs/inventories/legal_ir/768d.json",
+      "sha256": "7c48396a3d0332b0dacbb248fdd5c6ab037080475ebde137aa2217973d514595"
+    },
+    "ir_family_id": "legal_ir",
+    "reference_checks": [
+      {
+        "kind": "checkpoint",
+        "receipt": {
+          "bytes": 6873498,
+          "path": "/home/barberb/lift_coding/artifacts/gte-decoder-reuse-20261001/run-01/student-initialization.json",
+          "sha256": "7443c8a60cb1f95e9a35017edcd394c0f47fd457c3733e0863d37bfc09a09a12"
+        },
+        "status": "verified"
+      }
+    ],
+    "task_profiles_to_inventory": [
+      "source_to_native_ir",
+      "structural_reconstruction",
+      "native_ir_to_logic",
+      "native_ir_to_source",
+      "retained_source_byte_restoration"
+    ],
+    "unsupported_checkpoint_deserialization_for_runtime": false
+  },
+  "qualified_runtime_count": 0,
+  "repository_id": "Publicus/legal-ir-autoencoder-768d",
+  "schema": "retained-ir-lane-release/v1",
+  "teacher_qualified_count": 0,
+  "trained_768_model_count": 0
+}

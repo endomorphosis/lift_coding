@@ -1,0 +1,1496 @@
+{
+  "PR_number": 1271,
+  "changed_Git_blob_pins": [
+    {
+      "bytes": 8776,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "e5b72457c19d8f0533b88fdbf1308c3ac06b5ba7",
+      "path": "docs/autoencoders/grouped_legal_decoders.md",
+      "sha256": "221bf9eaf93b8db4e57a90017f01303894e4d24483988f5b99c7ff64f81402d0"
+    },
+    {
+      "bytes": 28691,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "cb59ad2049a3d3fc4ff97a3620d8d76acc6a5785",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json",
+      "sha256": "bd37dc85cd23f36b1bcf30695ae3bb56674bac139ce01c0f0466cb024daa3291"
+    },
+    {
+      "bytes": 13148,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "3d1cc46bd62a394b8afd2a324a964884abd11f56",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md",
+      "sha256": "c0f1ee29a0d188ffb0750cb2b06e6f38abda6d8065db0e33035b5a2b0bf667b4"
+    },
+    {
+      "bytes": 7188,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "b47142ea3288ce9bcca56ddefc6a2f7d1fea9f0b",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json",
+      "sha256": "ea4cd3a66bf3fa9134a88c6dbd143f75369aa4708e544e08c3dbfd0aa7c8d1b7"
+    },
+    {
+      "bytes": 12776,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "100405a1d45d779c351fb3855036d866caa8bad9",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md",
+      "sha256": "56b913587a21dd44e97e19ffff5d2be826da2aaa2e87dc598727c56f8b89e08c"
+    },
+    {
+      "bytes": 12408,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "4ac1418559a884fe0beaf8cb2f8095bb0b38570d",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json",
+      "sha256": "6fde5a8adaa68730058679722e4ec521312ac725033dc1f4395cbf5bc49c6246"
+    },
+    {
+      "bytes": 9629,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "cfc21f594a3ccc3ada3a498d72eb1870a34426a4",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md",
+      "sha256": "52d0459199e9b1819f2c897b565772ffa4debab37296bc5b76831a021e2e43f7"
+    },
+    {
+      "bytes": 3220,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "19ee04a4ca653e9f18c1827c1825ba0b360ecb60",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/historical_handoff_index.md",
+      "sha256": "cea8adb3d3a2cc7de260f1262b67ebc295a486d15bc71da5a0cbc33fdc518fdc"
+    },
+    {
+      "bytes": 53630,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "dd1e119e562913d98ccd33c6eb441d61d184cedd",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json",
+      "sha256": "ba05379dda8d7215d0c907b78b18e85dec703f6d98923a5da8c46388f908da60"
+    },
+    {
+      "bytes": 12577,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "e13790db64a384696f5efc8012333c0f261eadae",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md",
+      "sha256": "24f44c8351d273e50bcb41f6d684a1ab742d3326dde8904769c1062dea2482f1"
+    },
+    {
+      "bytes": 22303,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "a117902515364f93ede0a3b252b9f368c6bcb3e0",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json",
+      "sha256": "035578e2629d1b728fbfae8b177ab23a2ca628ef428a8a376451fdb34d5924e9"
+    },
+    {
+      "bytes": 8806,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "d1fbf99cd843f4923ea5d8c5420c62893868dcd4",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md",
+      "sha256": "e1d61c57126a5e4553296d8a0758654bdf4d398d59efecfdc5bc62a4122a8615"
+    },
+    {
+      "bytes": 10560,
+      "change": "M",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "0f224f89d4fbb8e06275a4e6421a8ac904f71066",
+      "path": "docs/autoencoders/progress_integration.md",
+      "sha256": "ddecdb35d83ed3a21a05525495d6baf0bbccfcb63358d316e6c14b85e64c8d54"
+    },
+    {
+      "bytes": 6729,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "a2accc1fcb5765993da35757bb41a593c4d694b6",
+      "path": "docs/implementation/reports/evidence/grouped-legal-decoders-20261006/summary.json",
+      "sha256": "94fe7cfd1c736b2a6bb310f920a5cbc258731fef9f73a5c79ae173a5591827ec"
+    },
+    {
+      "bytes": 6557,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "d125e9108e49dacf8568450cba17c3a49f7193ef",
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+    },
+    {
+      "bytes": 13298,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "22d8260dd03cc2cf4d262138161adbe6cda31bcb",
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+    },
+    {
+      "bytes": 29370,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "d262c36eb036ba5b516636f152038ab81ee19d94",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+    },
+    {
+      "bytes": 33948,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "b34ca1d3406645e8edf58b651dff3049e583741f",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+    },
+    {
+      "bytes": 64337,
+      "change": "M",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "f3e844c05792b4cb8facceb0513c736be69afcf6",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+      "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955"
+    },
+    {
+      "bytes": 12277,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "ed3b52182827cd6c58e3b5963eaa4fad123cb69a",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "sha256": "c8f5d26d9e0ee6abcd18059389d9a267d0f645b22e381386120e191a65315c80"
+    },
+    {
+      "bytes": 13556,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "a89c3a67a90895446ef27200bdd7255153d938aa",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "sha256": "b932ea70a7f3cc26037055271894ede450e44030bf017001fb7eab53cc9f4b40"
+    },
+    {
+      "bytes": 8925,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "127135af815271476ca2b3d7db9e0c329944043a",
+      "path": "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+      "sha256": "6c3b7653741ae3d03264fdb629cede9df233616c5ef1d41a816f579afd6e0b20"
+    },
+    {
+      "bytes": 9694,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "0ece79f9b824d23d61711a3e7585e66e500fc529",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+      "sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+    },
+    {
+      "bytes": 12618,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "6cfe658152fa4332130a34648a5a591982abf0a0",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+      "sha256": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c"
+    },
+    {
+      "bytes": 11468,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "3f76f27535d0e5ecaf46223a21199af1492d4746",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+      "sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+    },
+    {
+      "bytes": 16523,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "91b131c981e640b8c6a763b0ad3b7c516050998a",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+      "sha256": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f"
+    },
+    {
+      "bytes": 12462,
+      "change": "A",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "c0e6685576e8393fe01357081cac70017ae282c3",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py",
+      "sha256": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0"
+    }
+  ],
+  "changed_path_count": 27,
+  "completed": true,
+  "current_root_document_review": {
+    "ModelManager_and_Hub_presence_still_initial_inspected_snapshots_not_refreshed": true,
+    "README_pin": {
+      "bytes": 13148,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/README.md",
+      "sha256": "5c3176ae0e8962096d35e5545dccb9ad9fdf902c94820a2a783275aed8145f94"
+    },
+    "guide58_pin": {
+      "bytes": 15405,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "sha256": "4e5031b13268fbe310d2404adde55cb2c04521ae88200fd134fe73d5016e6104"
+    },
+    "initial18_ledger_and_prior_independent_review_unchanged": true,
+    "new_paragraph_metrics_and_runtime_scope_match_merged_summary": true,
+    "source_delivery_is_now_committed_for_ten_selected_paths": true
+  },
+  "findings": [],
+  "first_parent": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+  "four_original_producer_owner_bytes_preserved": true,
+  "historical_handoff_exact_recovery_count": 10,
+  "historical_handoff_original_Git_joins": [
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 7188,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "b47142ea3288ce9bcca56ddefc6a2f7d1fea9f0b",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json",
+        "sha256": "ea4cd3a66bf3fa9134a88c6dbd143f75369aa4708e544e08c3dbfd0aa7c8d1b7"
+      },
+      "original_pin": {
+        "bytes": 7188,
+        "commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+        "git_blob_oid": "b47142ea3288ce9bcca56ddefc6a2f7d1fea9f0b",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json",
+        "sha256": "ea4cd3a66bf3fa9134a88c6dbd143f75369aa4708e544e08c3dbfd0aa7c8d1b7"
+      },
+      "original_revision": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 12776,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "100405a1d45d779c351fb3855036d866caa8bad9",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md",
+        "sha256": "56b913587a21dd44e97e19ffff5d2be826da2aaa2e87dc598727c56f8b89e08c"
+      },
+      "original_pin": {
+        "bytes": 12776,
+        "commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+        "git_blob_oid": "100405a1d45d779c351fb3855036d866caa8bad9",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md",
+        "sha256": "56b913587a21dd44e97e19ffff5d2be826da2aaa2e87dc598727c56f8b89e08c"
+      },
+      "original_revision": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 12408,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "4ac1418559a884fe0beaf8cb2f8095bb0b38570d",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json",
+        "sha256": "6fde5a8adaa68730058679722e4ec521312ac725033dc1f4395cbf5bc49c6246"
+      },
+      "original_pin": {
+        "bytes": 12408,
+        "commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+        "git_blob_oid": "4ac1418559a884fe0beaf8cb2f8095bb0b38570d",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json",
+        "sha256": "6fde5a8adaa68730058679722e4ec521312ac725033dc1f4395cbf5bc49c6246"
+      },
+      "original_revision": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 9629,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "cfc21f594a3ccc3ada3a498d72eb1870a34426a4",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md",
+        "sha256": "52d0459199e9b1819f2c897b565772ffa4debab37296bc5b76831a021e2e43f7"
+      },
+      "original_pin": {
+        "bytes": 9629,
+        "commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+        "git_blob_oid": "cfc21f594a3ccc3ada3a498d72eb1870a34426a4",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md",
+        "sha256": "52d0459199e9b1819f2c897b565772ffa4debab37296bc5b76831a021e2e43f7"
+      },
+      "original_revision": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 28691,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "cb59ad2049a3d3fc4ff97a3620d8d76acc6a5785",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json",
+        "sha256": "bd37dc85cd23f36b1bcf30695ae3bb56674bac139ce01c0f0466cb024daa3291"
+      },
+      "original_pin": {
+        "bytes": 28691,
+        "commit": "7732a5808828083afb1cd19d126d987991136375",
+        "git_blob_oid": "cb59ad2049a3d3fc4ff97a3620d8d76acc6a5785",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json",
+        "sha256": "bd37dc85cd23f36b1bcf30695ae3bb56674bac139ce01c0f0466cb024daa3291"
+      },
+      "original_revision": "7732a5808828083afb1cd19d126d987991136375",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 13148,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "3d1cc46bd62a394b8afd2a324a964884abd11f56",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md",
+        "sha256": "c0f1ee29a0d188ffb0750cb2b06e6f38abda6d8065db0e33035b5a2b0bf667b4"
+      },
+      "original_pin": {
+        "bytes": 13148,
+        "commit": "7732a5808828083afb1cd19d126d987991136375",
+        "git_blob_oid": "3d1cc46bd62a394b8afd2a324a964884abd11f56",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md",
+        "sha256": "c0f1ee29a0d188ffb0750cb2b06e6f38abda6d8065db0e33035b5a2b0bf667b4"
+      },
+      "original_revision": "7732a5808828083afb1cd19d126d987991136375",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 53630,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "dd1e119e562913d98ccd33c6eb441d61d184cedd",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json",
+        "sha256": "ba05379dda8d7215d0c907b78b18e85dec703f6d98923a5da8c46388f908da60"
+      },
+      "original_pin": {
+        "bytes": 53630,
+        "commit": "7732a5808828083afb1cd19d126d987991136375",
+        "git_blob_oid": "dd1e119e562913d98ccd33c6eb441d61d184cedd",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json",
+        "sha256": "ba05379dda8d7215d0c907b78b18e85dec703f6d98923a5da8c46388f908da60"
+      },
+      "original_revision": "7732a5808828083afb1cd19d126d987991136375",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 12577,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "e13790db64a384696f5efc8012333c0f261eadae",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md",
+        "sha256": "24f44c8351d273e50bcb41f6d684a1ab742d3326dde8904769c1062dea2482f1"
+      },
+      "original_pin": {
+        "bytes": 12577,
+        "commit": "7732a5808828083afb1cd19d126d987991136375",
+        "git_blob_oid": "e13790db64a384696f5efc8012333c0f261eadae",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md",
+        "sha256": "24f44c8351d273e50bcb41f6d684a1ab742d3326dde8904769c1062dea2482f1"
+      },
+      "original_revision": "7732a5808828083afb1cd19d126d987991136375",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 22303,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "a117902515364f93ede0a3b252b9f368c6bcb3e0",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json",
+        "sha256": "035578e2629d1b728fbfae8b177ab23a2ca628ef428a8a376451fdb34d5924e9"
+      },
+      "original_pin": {
+        "bytes": 22303,
+        "commit": "7732a5808828083afb1cd19d126d987991136375",
+        "git_blob_oid": "a117902515364f93ede0a3b252b9f368c6bcb3e0",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json",
+        "sha256": "035578e2629d1b728fbfae8b177ab23a2ca628ef428a8a376451fdb34d5924e9"
+      },
+      "original_revision": "7732a5808828083afb1cd19d126d987991136375",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json"
+    },
+    {
+      "historical_snapshot_not_current_qualification": true,
+      "merged_pin": {
+        "bytes": 8806,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "d1fbf99cd843f4923ea5d8c5420c62893868dcd4",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md",
+        "sha256": "e1d61c57126a5e4553296d8a0758654bdf4d398d59efecfdc5bc62a4122a8615"
+      },
+      "original_pin": {
+        "bytes": 8806,
+        "commit": "7732a5808828083afb1cd19d126d987991136375",
+        "git_blob_oid": "d1fbf99cd843f4923ea5d8c5420c62893868dcd4",
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md",
+        "sha256": "e1d61c57126a5e4553296d8a0758654bdf4d398d59efecfdc5bc62a4122a8615"
+      },
+      "original_revision": "7732a5808828083afb1cd19d126d987991136375",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md"
+    }
+  ],
+  "initial_ten_working_grouped_paths_now_committed": [
+    {
+      "bytes": 6557,
+      "change_classification": "same_original_owner",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "d125e9108e49dacf8568450cba17c3a49f7193ef",
+      "original_working_bytes_preserved": true,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "prior_working_byte_witness": {
+        "bytes": 6557,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+        "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+      },
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+    },
+    {
+      "bytes": 13298,
+      "change_classification": "same_original_owner",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "22d8260dd03cc2cf4d262138161adbe6cda31bcb",
+      "original_working_bytes_preserved": true,
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "prior_working_byte_witness": {
+        "bytes": 13298,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+        "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+      },
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+    },
+    {
+      "bytes": 29370,
+      "change_classification": "same_original_owner",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "d262c36eb036ba5b516636f152038ab81ee19d94",
+      "original_working_bytes_preserved": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "prior_working_byte_witness": {
+        "bytes": 29370,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+        "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+      },
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+    },
+    {
+      "bytes": 33948,
+      "change_classification": "same_original_owner",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "b34ca1d3406645e8edf58b651dff3049e583741f",
+      "original_working_bytes_preserved": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "prior_working_byte_witness": {
+        "bytes": 33948,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+        "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+      },
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+    },
+    {
+      "bytes": 12277,
+      "change_classification": "candidate_only_test_port",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "ed3b52182827cd6c58e3b5963eaa4fad123cb69a",
+      "original_working_bytes_preserved": false,
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "prior_working_byte_witness": {
+        "bytes": 11213,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/tests/unit/logic/test_deontic_grouped_decoder.py",
+        "sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831"
+      },
+      "sha256": "c8f5d26d9e0ee6abcd18059389d9a267d0f645b22e381386120e191a65315c80"
+    },
+    {
+      "bytes": 13556,
+      "change_classification": "candidate_only_test_port",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "a89c3a67a90895446ef27200bdd7255153d938aa",
+      "original_working_bytes_preserved": false,
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "prior_working_byte_witness": {
+        "bytes": 12553,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+        "sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c"
+      },
+      "sha256": "b932ea70a7f3cc26037055271894ede450e44030bf017001fb7eab53cc9f4b40"
+    },
+    {
+      "bytes": 9694,
+      "change_classification": "committed_test_port_with_separate_retention_receipt",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "0ece79f9b824d23d61711a3e7585e66e500fc529",
+      "original_working_byte_pin_available_in_initial_bounded_sample": false,
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+      "sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+    },
+    {
+      "bytes": 12618,
+      "change_classification": "committed_test_port_with_separate_retention_receipt",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "6cfe658152fa4332130a34648a5a591982abf0a0",
+      "original_working_byte_pin_available_in_initial_bounded_sample": false,
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+      "sha256": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c"
+    },
+    {
+      "bytes": 11468,
+      "change_classification": "committed_test_port_with_separate_retention_receipt",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "3f76f27535d0e5ecaf46223a21199af1492d4746",
+      "original_working_byte_pin_available_in_initial_bounded_sample": false,
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+      "sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+    },
+    {
+      "bytes": 16523,
+      "change_classification": "committed_test_port_with_separate_retention_receipt",
+      "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "git_blob_oid": "91b131c981e640b8c6a763b0ad3b7c516050998a",
+      "original_working_byte_pin_available_in_initial_bounded_sample": false,
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+      "sha256": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f"
+    }
+  ],
+  "limits": [
+    "Bounded PR1271 successor review at immutable0f; no broad branch/worktree inventory refresh.",
+    "This adds source-currentness and evidence-contract joins, without independently rerunning the407 saved controls or numerical/native/Lake experiments.",
+    "Older source-bound parser/compiler closure remains deferred; this contribution does not establish qualifiers, exclusive/nested logic, legal scope inference, vector distillation or all-family readiness.",
+    "No new ModelManager or Hub presence observation, checkpoint registration, promotion or proof admission."
+  ],
+  "local_metadata_pins_after": [
+    {
+      "bytes": 13148,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/README.md",
+      "sha256": "5c3176ae0e8962096d35e5545dccb9ad9fdf902c94820a2a783275aed8145f94"
+    },
+    {
+      "bytes": 15405,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "sha256": "4e5031b13268fbe310d2404adde55cb2c04521ae88200fd134fe73d5016e6104"
+    },
+    {
+      "bytes": 96895,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/integration-ledger.json",
+      "sha256": "73745a889d35c99ca15ea6ab7fb7c4b2189602c854740f9fa0eb65d5f1d01967"
+    },
+    {
+      "bytes": 28730,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/final-integration-review.json",
+      "sha256": "fae4faed5ca418f2e9de3d95d77c6a491e859b7aebc34294afd7aa27ec91b8aa"
+    },
+    {
+      "bytes": 1285555,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/survey.json",
+      "sha256": "a02278d934c90a3b0448434b0e531e863d39982f4f72c60b41e115689666ed50"
+    },
+    {
+      "bytes": 720267,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-source-effective-review.json",
+      "sha256": "40b58e9b83b1b2a66748ef5587d093a6faa21468334381c4a001c338f26a9741"
+    },
+    {
+      "bytes": 3841,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/historical-handoff-restoration.json",
+      "sha256": "31fa684bc112d943abced09b5e979fd91625336bf0d318b8e46d70e390df9f30"
+    },
+    {
+      "bytes": 7158,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/combined-main-validation.json",
+      "sha256": "364706bfb3c4be68c0e934f0241b5f9cd6fd7fad0f0092a02b59c851988f6e16"
+    },
+    {
+      "bytes": 77708,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/combined-main-validation.xml",
+      "sha256": "169a1b9e2df794435a74bf9020a1c851b4d3334449a4291d4c2dfd630323a798"
+    },
+    {
+      "bytes": 6578,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/registry-integration-validation.json",
+      "sha256": "68737c864f688b42201e5c1144290d952cda34521c0781a5de46c946817048b8"
+    },
+    {
+      "bytes": 62631,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/phase1-validation-retention.json",
+      "sha256": "cbda963ad03caa2ed1281ad2b768e25dfc6e480cd9598622d0d923a2fbf4c1e3"
+    },
+    {
+      "bytes": 3786,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/contribution-independent-review.json",
+      "sha256": "6c70da655fe5032c45b9ef36bf7122a3b9a502943141807f7a631fd4d841e5c4"
+    },
+    {
+      "bytes": 132436,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/results.json",
+      "sha256": "c8548ecef2c12b54526f4f4bdfefaea8c40032c7367abb2502ad4ee18a99d755"
+    },
+    {
+      "bytes": 238396,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/scientific-provenance-inventory.json",
+      "sha256": "59e4f3f0ac4484dee1348768c58ef9860da1ea22fa16e683cb0ef9b9548f6744"
+    },
+    {
+      "bytes": 58903,
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/completion.json",
+      "sha256": "ad163f658519ff7ca9dab8fbcebd366bdb2bb883f7a0207e8f9559879dc6f233"
+    }
+  ],
+  "local_metadata_pins_before": [
+    {
+      "bytes": 13148,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/README.md",
+      "sha256": "5c3176ae0e8962096d35e5545dccb9ad9fdf902c94820a2a783275aed8145f94"
+    },
+    {
+      "bytes": 15405,
+      "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "sha256": "4e5031b13268fbe310d2404adde55cb2c04521ae88200fd134fe73d5016e6104"
+    },
+    {
+      "bytes": 96895,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/integration-ledger.json",
+      "sha256": "73745a889d35c99ca15ea6ab7fb7c4b2189602c854740f9fa0eb65d5f1d01967"
+    },
+    {
+      "bytes": 28730,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/final-integration-review.json",
+      "sha256": "fae4faed5ca418f2e9de3d95d77c6a491e859b7aebc34294afd7aa27ec91b8aa"
+    },
+    {
+      "bytes": 1285555,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/survey.json",
+      "sha256": "a02278d934c90a3b0448434b0e531e863d39982f4f72c60b41e115689666ed50"
+    },
+    {
+      "bytes": 720267,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-source-effective-review.json",
+      "sha256": "40b58e9b83b1b2a66748ef5587d093a6faa21468334381c4a001c338f26a9741"
+    },
+    {
+      "bytes": 3841,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/historical-handoff-restoration.json",
+      "sha256": "31fa684bc112d943abced09b5e979fd91625336bf0d318b8e46d70e390df9f30"
+    },
+    {
+      "bytes": 7158,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/combined-main-validation.json",
+      "sha256": "364706bfb3c4be68c0e934f0241b5f9cd6fd7fad0f0092a02b59c851988f6e16"
+    },
+    {
+      "bytes": 77708,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/combined-main-validation.xml",
+      "sha256": "169a1b9e2df794435a74bf9020a1c851b4d3334449a4291d4c2dfd630323a798"
+    },
+    {
+      "bytes": 6578,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/registry-integration-validation.json",
+      "sha256": "68737c864f688b42201e5c1144290d952cda34521c0781a5de46c946817048b8"
+    },
+    {
+      "bytes": 62631,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/phase1-validation-retention.json",
+      "sha256": "cbda963ad03caa2ed1281ad2b768e25dfc6e480cd9598622d0d923a2fbf4c1e3"
+    },
+    {
+      "bytes": 3786,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/contribution-independent-review.json",
+      "sha256": "6c70da655fe5032c45b9ef36bf7122a3b9a502943141807f7a631fd4d841e5c4"
+    },
+    {
+      "bytes": 132436,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/results.json",
+      "sha256": "c8548ecef2c12b54526f4f4bdfefaea8c40032c7367abb2502ad4ee18a99d755"
+    },
+    {
+      "bytes": 238396,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/scientific-provenance-inventory.json",
+      "sha256": "59e4f3f0ac4484dee1348768c58ef9860da1ea22fa16e683cb0ef9b9548f6744"
+    },
+    {
+      "bytes": 58903,
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/completion.json",
+      "sha256": "ad163f658519ff7ca9dab8fbcebd366bdb2bb883f7a0207e8f9559879dc6f233"
+    }
+  ],
+  "local_source_worktree_after": {
+    "HEAD": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+    "index_pin": {
+      "bytes": 4653020,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/worktrees/autoencoder-progress-reconciliation-datasets-20261006/index",
+      "sha256": "e16803c2053d766d7aaedea9d5fd5fbd122db65f8946a5f48100305ce91678f2"
+    },
+    "status": ""
+  },
+  "local_source_worktree_before": {
+    "HEAD": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+    "index_pin": {
+      "bytes": 4653020,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/worktrees/autoencoder-progress-reconciliation-datasets-20261006/index",
+      "sha256": "e16803c2053d766d7aaedea9d5fd5fbd122db65f8946a5f48100305ce91678f2"
+    },
+    "status": ""
+  },
+  "merge_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+  "new_runtime_contract": {
+    "all_eight_Legal_family_requirements_satisfied": false,
+    "automatic_ModelManager_registration_or_HF_upload_performed_by_adapter": false,
+    "caller_scope_inferred": false,
+    "checkpoint_schema": "legal-grouped-span-decoder-checkpoint/v2",
+    "dimension": null,
+    "explicit_opt_in": true,
+    "input_fields": [
+      "source_text",
+      "modal_scope"
+    ],
+    "member_count_max": 8,
+    "member_count_min": 2,
+    "new_default_or_trained_prose_head_claimed": false,
+    "nonnull_output_is_syntax_or_rendering_evidence": true,
+    "null_refused_or_blocked_requests_preserved": true,
+    "output_schema": "legal-coordination-decode-request/v1",
+    "proof_ready": false,
+    "qualified": false,
+    "runtime_id": "legal_ir:source_conditioned_grouped_v2",
+    "source_semantics_verified": false,
+    "supported_logic_families": [
+      "deontic_fol"
+    ],
+    "vector_or_latent_conditioning": false
+  },
+  "observed_at_utc": "2026-10-06T14:51:20.973448+00:00",
+  "operations": {
+    "DB_or_HF_or_network_calls": false,
+    "checkpoint_or_vector_cache_files_opened": false,
+    "fetch_checkout_merge_source_or_index_or_ref_changes": false,
+    "immutable_local_Git_and_small_saved_metadata_reads": true,
+    "initial_ledger_or_old_review_overwritten": false,
+    "new_addendum_written": true,
+    "numerical_or_model_or_encoder_or_test_execution": false,
+    "training_or_new_evaluation": false
+  },
+  "own_thirteen_provenance_repair_paths_preserved": [
+    {
+      "base_pin": {
+        "bytes": 15551,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "c155bec4a8899f10c9916d30f86aef88fa34394e",
+        "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+        "sha256": "ee8cb120795ce9ee8c696d952169da5544c34e3ae4f2f6adeeacc58701532fa6"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 15551,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "c155bec4a8899f10c9916d30f86aef88fa34394e",
+        "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+        "sha256": "ee8cb120795ce9ee8c696d952169da5544c34e3ae4f2f6adeeacc58701532fa6"
+      },
+      "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md"
+    },
+    {
+      "base_pin": {
+        "bytes": 1209,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "d0e84c14dc60a34aa0f3ae53037866d5384fbd36",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/README.md",
+        "sha256": "807b9067172eb80f2c984153bf0546fcc0d6e45aee6f8acc71c359a20a61660e"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 1209,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "d0e84c14dc60a34aa0f3ae53037866d5384fbd36",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/README.md",
+        "sha256": "807b9067172eb80f2c984153bf0546fcc0d6e45aee6f8acc71c359a20a61660e"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/README.md"
+    },
+    {
+      "base_pin": {
+        "bytes": 5433,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "45400717a41a75ee54d8fc7a7b8f576d951ad4f1",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/check_metadata_honesty_patch.py",
+        "sha256": "ae3d5f818001e0969d476538dfcbf7d28f8bb378596f2f4af4c1fd1a65ab306a"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 5433,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "45400717a41a75ee54d8fc7a7b8f576d951ad4f1",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/check_metadata_honesty_patch.py",
+        "sha256": "ae3d5f818001e0969d476538dfcbf7d28f8bb378596f2f4af4c1fd1a65ab306a"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/check_metadata_honesty_patch.py"
+    },
+    {
+      "base_pin": {
+        "bytes": 35104,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "81a5f72282e8dbe9fb73dab618a61d0b88bf9db3",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-controls.xml",
+        "sha256": "a63c3260ab7683d54eaea75f0a6e683ff74e91b99fe3ad23382f268c04f4d6c3"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 35104,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "81a5f72282e8dbe9fb73dab618a61d0b88bf9db3",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-controls.xml",
+        "sha256": "a63c3260ab7683d54eaea75f0a6e683ff74e91b99fe3ad23382f268c04f4d6c3"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-controls.xml"
+    },
+    {
+      "base_pin": {
+        "bytes": 636,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "f10da301241b442043ddfccb0578f99eec394edb",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-metadata-diagnostic-01.json",
+        "sha256": "dfe7cfaad057d82ae60a139650f947e79e95d2bf4caa8bccc7d05b4cc6e98e84"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 636,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "f10da301241b442043ddfccb0578f99eec394edb",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-metadata-diagnostic-01.json",
+        "sha256": "dfe7cfaad057d82ae60a139650f947e79e95d2bf4caa8bccc7d05b4cc6e98e84"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-metadata-diagnostic-01.json"
+    },
+    {
+      "base_pin": {
+        "bytes": 9186,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "cb332ca440148770a7201c55cf41d0b990330149",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-original-metadata-controls.json",
+        "sha256": "349ded197c764927cc77d0cf4b24f6afa650360686f6d9c90de47713f5908ed8"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 9186,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "cb332ca440148770a7201c55cf41d0b990330149",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-original-metadata-controls.json",
+        "sha256": "349ded197c764927cc77d0cf4b24f6afa650360686f6d9c90de47713f5908ed8"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-original-metadata-controls.json"
+    },
+    {
+      "base_pin": {
+        "bytes": 4120,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "135184ece846499f10c4957a8cab9164ea709ea3",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-patch-independent-review.json",
+        "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 4120,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "135184ece846499f10c4957a8cab9164ea709ea3",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-patch-independent-review.json",
+        "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-patch-independent-review.json"
+    },
+    {
+      "base_pin": {
+        "bytes": 2661,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "57bdcbd94ccf792433126f23c42d8a9da0c742a6",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/manifest.json",
+        "sha256": "cede7e4519313699ee9c0f0055e6a2c55b60bc550c33474d701f161367b2dbdc"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 2661,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "57bdcbd94ccf792433126f23c42d8a9da0c742a6",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/manifest.json",
+        "sha256": "cede7e4519313699ee9c0f0055e6a2c55b60bc550c33474d701f161367b2dbdc"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/manifest.json"
+    },
+    {
+      "base_pin": {
+        "bytes": 7774,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "d608ac276cc5ee801e57431794d14391e892cb6e",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/paragraph-pin-boundary.json",
+        "sha256": "7407e81d7a5f67394aaf8bccd0bd340e734b2b3e8717677931760f3e381cd36a"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 7774,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "d608ac276cc5ee801e57431794d14391e892cb6e",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/paragraph-pin-boundary.json",
+        "sha256": "7407e81d7a5f67394aaf8bccd0bd340e734b2b3e8717677931760f3e381cd36a"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/paragraph-pin-boundary.json"
+    },
+    {
+      "base_pin": {
+        "bytes": 5779,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "17b0f680464ac6c3d1ad124e3fb73f9f61714d77",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/reproduce_paragraph_pin_boundary.py",
+        "sha256": "e9d99a4524dffb4e082e5a47dfef948ec478d3344e3e371cea20b958c80e4ba9"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 5779,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "17b0f680464ac6c3d1ad124e3fb73f9f61714d77",
+        "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/reproduce_paragraph_pin_boundary.py",
+        "sha256": "e9d99a4524dffb4e082e5a47dfef948ec478d3344e3e371cea20b958c80e4ba9"
+      },
+      "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/reproduce_paragraph_pin_boundary.py"
+    },
+    {
+      "base_pin": {
+        "bytes": 9689,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "4082a2d3105992501af2203e98eb91332fc5825f",
+        "path": "docs/autoencoders/paraphrase_modality_diagnostics.md",
+        "sha256": "ff8a25cd9b6548377f04f91d88e92b2b4f83e07597b8a33dc43a463263e310b1"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 9689,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "4082a2d3105992501af2203e98eb91332fc5825f",
+        "path": "docs/autoencoders/paraphrase_modality_diagnostics.md",
+        "sha256": "ff8a25cd9b6548377f04f91d88e92b2b4f83e07597b8a33dc43a463263e310b1"
+      },
+      "path": "docs/autoencoders/paraphrase_modality_diagnostics.md"
+    },
+    {
+      "base_pin": {
+        "bytes": 36594,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "444dde0da7d0e8460da0c6968707be7808006e02",
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+        "sha256": "773e30977478921c31fbc075b5357339cc13e8e920ba93be85b5160b7f442a15"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 36594,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "444dde0da7d0e8460da0c6968707be7808006e02",
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+        "sha256": "773e30977478921c31fbc075b5357339cc13e8e920ba93be85b5160b7f442a15"
+      },
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py"
+    },
+    {
+      "base_pin": {
+        "bytes": 13460,
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "git_blob_oid": "c1157b7e05e3ac48369debbc7d81bb458b89c066",
+        "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+        "sha256": "907f802e33121913a242482f898286243bfe160fffe966716860bb3f2c606965"
+      },
+      "byte_identical": true,
+      "merged_pin": {
+        "bytes": 13460,
+        "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+        "git_blob_oid": "c1157b7e05e3ac48369debbc7d81bb458b89c066",
+        "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+        "sha256": "907f802e33121913a242482f898286243bfe160fffe966716860bb3f2c606965"
+      },
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py"
+    }
+  ],
+  "owned_source_worktree_and_index_unchanged": true,
+  "parents": [
+    "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+    "004887f6250b083e0b095d5ac7563bc5bb792491"
+  ],
+  "published_results_are_retained_claims_not_new_execution": {
+    "controlled_architecture_ablation": false,
+    "native_Lake_witness_not_universal_source_or_proof_authority": true,
+    "negative_requests_v2": {
+      "count": 64,
+      "incidental_blocks": 7,
+      "learned_refusals": 55,
+      "unsupported_emissions": 2
+    },
+    "now_exposed_final_panel": true,
+    "official_paragraphs": 7,
+    "official_requests_emitted": 0,
+    "official_scope_probe_calls": 14,
+    "official_semantic_accuracy": null,
+    "positive_requests_v2": {
+      "count": 64,
+      "exact": 64
+    },
+    "same_panel_v1_positive_exact": 40,
+    "source_parent_clusters": 38
+  },
+  "saved_execution_and_validation_provenance": {
+    "combined_saved_tests": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 407
+    },
+    "registry_saved_test_results": {
+      "registry-combined-final.xml": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 77
+      },
+      "registry-existing-baseline.xml": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 42
+      },
+      "registry-grouped-tests-01.xml": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 35
+      }
+    },
+    "small_optimizer_fixture_warning": true,
+    "source_and_test_SHA_joins_to_merged_commit": [
+      {
+        "merged_pin": {
+          "bytes": 8776,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "e5b72457c19d8f0533b88fdbf1308c3ac06b5ba7",
+          "path": "docs/autoencoders/grouped_legal_decoders.md",
+          "sha256": "221bf9eaf93b8db4e57a90017f01303894e4d24483988f5b99c7ff64f81402d0"
+        },
+        "path": "docs/autoencoders/grouped_legal_decoders.md",
+        "saved_validation_sha256": "221bf9eaf93b8db4e57a90017f01303894e4d24483988f5b99c7ff64f81402d0"
+      },
+      {
+        "merged_pin": {
+          "bytes": 28691,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "cb59ad2049a3d3fc4ff97a3620d8d76acc6a5785",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json",
+          "sha256": "bd37dc85cd23f36b1bcf30695ae3bb56674bac139ce01c0f0466cb024daa3291"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json",
+        "saved_validation_sha256": "bd37dc85cd23f36b1bcf30695ae3bb56674bac139ce01c0f0466cb024daa3291"
+      },
+      {
+        "merged_pin": {
+          "bytes": 13148,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "3d1cc46bd62a394b8afd2a324a964884abd11f56",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md",
+          "sha256": "c0f1ee29a0d188ffb0750cb2b06e6f38abda6d8065db0e33035b5a2b0bf667b4"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md",
+        "saved_validation_sha256": "c0f1ee29a0d188ffb0750cb2b06e6f38abda6d8065db0e33035b5a2b0bf667b4"
+      },
+      {
+        "merged_pin": {
+          "bytes": 7188,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "b47142ea3288ce9bcca56ddefc6a2f7d1fea9f0b",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json",
+          "sha256": "ea4cd3a66bf3fa9134a88c6dbd143f75369aa4708e544e08c3dbfd0aa7c8d1b7"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json",
+        "saved_validation_sha256": "ea4cd3a66bf3fa9134a88c6dbd143f75369aa4708e544e08c3dbfd0aa7c8d1b7"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12776,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "100405a1d45d779c351fb3855036d866caa8bad9",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md",
+          "sha256": "56b913587a21dd44e97e19ffff5d2be826da2aaa2e87dc598727c56f8b89e08c"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md",
+        "saved_validation_sha256": "56b913587a21dd44e97e19ffff5d2be826da2aaa2e87dc598727c56f8b89e08c"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12408,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "4ac1418559a884fe0beaf8cb2f8095bb0b38570d",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json",
+          "sha256": "6fde5a8adaa68730058679722e4ec521312ac725033dc1f4395cbf5bc49c6246"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json",
+        "saved_validation_sha256": "6fde5a8adaa68730058679722e4ec521312ac725033dc1f4395cbf5bc49c6246"
+      },
+      {
+        "merged_pin": {
+          "bytes": 9629,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "cfc21f594a3ccc3ada3a498d72eb1870a34426a4",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md",
+          "sha256": "52d0459199e9b1819f2c897b565772ffa4debab37296bc5b76831a021e2e43f7"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md",
+        "saved_validation_sha256": "52d0459199e9b1819f2c897b565772ffa4debab37296bc5b76831a021e2e43f7"
+      },
+      {
+        "merged_pin": {
+          "bytes": 3220,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "19ee04a4ca653e9f18c1827c1825ba0b360ecb60",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/historical_handoff_index.md",
+          "sha256": "cea8adb3d3a2cc7de260f1262b67ebc295a486d15bc71da5a0cbc33fdc518fdc"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/historical_handoff_index.md",
+        "saved_validation_sha256": "cea8adb3d3a2cc7de260f1262b67ebc295a486d15bc71da5a0cbc33fdc518fdc"
+      },
+      {
+        "merged_pin": {
+          "bytes": 53630,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "dd1e119e562913d98ccd33c6eb441d61d184cedd",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json",
+          "sha256": "ba05379dda8d7215d0c907b78b18e85dec703f6d98923a5da8c46388f908da60"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json",
+        "saved_validation_sha256": "ba05379dda8d7215d0c907b78b18e85dec703f6d98923a5da8c46388f908da60"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12577,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "e13790db64a384696f5efc8012333c0f261eadae",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md",
+          "sha256": "24f44c8351d273e50bcb41f6d684a1ab742d3326dde8904769c1062dea2482f1"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md",
+        "saved_validation_sha256": "24f44c8351d273e50bcb41f6d684a1ab742d3326dde8904769c1062dea2482f1"
+      },
+      {
+        "merged_pin": {
+          "bytes": 22303,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "a117902515364f93ede0a3b252b9f368c6bcb3e0",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json",
+          "sha256": "035578e2629d1b728fbfae8b177ab23a2ca628ef428a8a376451fdb34d5924e9"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json",
+        "saved_validation_sha256": "035578e2629d1b728fbfae8b177ab23a2ca628ef428a8a376451fdb34d5924e9"
+      },
+      {
+        "merged_pin": {
+          "bytes": 8806,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "d1fbf99cd843f4923ea5d8c5420c62893868dcd4",
+          "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md",
+          "sha256": "e1d61c57126a5e4553296d8a0758654bdf4d398d59efecfdc5bc62a4122a8615"
+        },
+        "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md",
+        "saved_validation_sha256": "e1d61c57126a5e4553296d8a0758654bdf4d398d59efecfdc5bc62a4122a8615"
+      },
+      {
+        "merged_pin": {
+          "bytes": 10560,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "0f224f89d4fbb8e06275a4e6421a8ac904f71066",
+          "path": "docs/autoencoders/progress_integration.md",
+          "sha256": "ddecdb35d83ed3a21a05525495d6baf0bbccfcb63358d316e6c14b85e64c8d54"
+        },
+        "path": "docs/autoencoders/progress_integration.md",
+        "saved_validation_sha256": "ddecdb35d83ed3a21a05525495d6baf0bbccfcb63358d316e6c14b85e64c8d54"
+      },
+      {
+        "merged_pin": {
+          "bytes": 6729,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "a2accc1fcb5765993da35757bb41a593c4d694b6",
+          "path": "docs/implementation/reports/evidence/grouped-legal-decoders-20261006/summary.json",
+          "sha256": "94fe7cfd1c736b2a6bb310f920a5cbc258731fef9f73a5c79ae173a5591827ec"
+        },
+        "path": "docs/implementation/reports/evidence/grouped-legal-decoders-20261006/summary.json",
+        "saved_validation_sha256": "94fe7cfd1c736b2a6bb310f920a5cbc258731fef9f73a5c79ae173a5591827ec"
+      },
+      {
+        "merged_pin": {
+          "bytes": 6557,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "d125e9108e49dacf8568450cba17c3a49f7193ef",
+          "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+          "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+        },
+        "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+        "saved_validation_sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+      },
+      {
+        "merged_pin": {
+          "bytes": 13298,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "22d8260dd03cc2cf4d262138161adbe6cda31bcb",
+          "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+          "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+        },
+        "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+        "saved_validation_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+      },
+      {
+        "merged_pin": {
+          "bytes": 29370,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "d262c36eb036ba5b516636f152038ab81ee19d94",
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+          "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+        },
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+        "saved_validation_sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+      },
+      {
+        "merged_pin": {
+          "bytes": 33948,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "b34ca1d3406645e8edf58b651dff3049e583741f",
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+          "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+        },
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+        "saved_validation_sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+      },
+      {
+        "merged_pin": {
+          "bytes": 64337,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "f3e844c05792b4cb8facceb0513c736be69afcf6",
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+          "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955"
+        },
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+        "saved_validation_sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12277,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "ed3b52182827cd6c58e3b5963eaa4fad123cb69a",
+          "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+          "sha256": "c8f5d26d9e0ee6abcd18059389d9a267d0f645b22e381386120e191a65315c80"
+        },
+        "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+        "saved_validation_sha256": "c8f5d26d9e0ee6abcd18059389d9a267d0f645b22e381386120e191a65315c80"
+      },
+      {
+        "merged_pin": {
+          "bytes": 13556,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "a89c3a67a90895446ef27200bdd7255153d938aa",
+          "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+          "sha256": "b932ea70a7f3cc26037055271894ede450e44030bf017001fb7eab53cc9f4b40"
+        },
+        "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+        "saved_validation_sha256": "b932ea70a7f3cc26037055271894ede450e44030bf017001fb7eab53cc9f4b40"
+      },
+      {
+        "merged_pin": {
+          "bytes": 8925,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "127135af815271476ca2b3d7db9e0c329944043a",
+          "path": "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+          "sha256": "6c3b7653741ae3d03264fdb629cede9df233616c5ef1d41a816f579afd6e0b20"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+        "saved_validation_sha256": "6c3b7653741ae3d03264fdb629cede9df233616c5ef1d41a816f579afd6e0b20"
+      },
+      {
+        "merged_pin": {
+          "bytes": 9694,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "0ece79f9b824d23d61711a3e7585e66e500fc529",
+          "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+          "sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+        "saved_validation_sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12618,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "6cfe658152fa4332130a34648a5a591982abf0a0",
+          "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+          "sha256": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+        "saved_validation_sha256": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c"
+      },
+      {
+        "merged_pin": {
+          "bytes": 11468,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "3f76f27535d0e5ecaf46223a21199af1492d4746",
+          "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+          "sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+        "saved_validation_sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+      },
+      {
+        "merged_pin": {
+          "bytes": 16523,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "91b131c981e640b8c6a763b0ad3b7c516050998a",
+          "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+          "sha256": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+        "saved_validation_sha256": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12462,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "c0e6685576e8393fe01357081cac70017ae282c3",
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py",
+          "sha256": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0"
+        },
+        "path": "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py",
+        "saved_validation_sha256": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12277,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "ed3b52182827cd6c58e3b5963eaa4fad123cb69a",
+          "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+          "sha256": "c8f5d26d9e0ee6abcd18059389d9a267d0f645b22e381386120e191a65315c80"
+        },
+        "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+        "saved_validation_sha256": "c8f5d26d9e0ee6abcd18059389d9a267d0f645b22e381386120e191a65315c80"
+      },
+      {
+        "merged_pin": {
+          "bytes": 13556,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "a89c3a67a90895446ef27200bdd7255153d938aa",
+          "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+          "sha256": "b932ea70a7f3cc26037055271894ede450e44030bf017001fb7eab53cc9f4b40"
+        },
+        "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+        "saved_validation_sha256": "b932ea70a7f3cc26037055271894ede450e44030bf017001fb7eab53cc9f4b40"
+      },
+      {
+        "merged_pin": {
+          "bytes": 9694,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "0ece79f9b824d23d61711a3e7585e66e500fc529",
+          "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+          "sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+        "saved_validation_sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12618,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "6cfe658152fa4332130a34648a5a591982abf0a0",
+          "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+          "sha256": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+        "saved_validation_sha256": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c"
+      },
+      {
+        "merged_pin": {
+          "bytes": 11468,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "3f76f27535d0e5ecaf46223a21199af1492d4746",
+          "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+          "sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+        "saved_validation_sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+      },
+      {
+        "merged_pin": {
+          "bytes": 16523,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "91b131c981e640b8c6a763b0ad3b7c516050998a",
+          "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+          "sha256": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+        "saved_validation_sha256": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f"
+      },
+      {
+        "merged_pin": {
+          "bytes": 8925,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "127135af815271476ca2b3d7db9e0c329944043a",
+          "path": "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+          "sha256": "6c3b7653741ae3d03264fdb629cede9df233616c5ef1d41a816f579afd6e0b20"
+        },
+        "path": "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+        "saved_validation_sha256": "6c3b7653741ae3d03264fdb629cede9df233616c5ef1d41a816f579afd6e0b20"
+      },
+      {
+        "merged_pin": {
+          "bytes": 13377,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "72132ec5ed17af8b46338bbbce32afe070c7375a",
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_runtime_registry.py",
+          "sha256": "cba44a74ad99ebff2ea9d89c0100e35c8473dcf5cdf3d170ee5ecab072d20553"
+        },
+        "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_runtime_registry.py",
+        "saved_validation_sha256": "cba44a74ad99ebff2ea9d89c0100e35c8473dcf5cdf3d170ee5ecab072d20553"
+      },
+      {
+        "merged_pin": {
+          "bytes": 7587,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "821af5f37cc0d5a0b98ac45bc1fa124739ddc01b",
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_learned_formula_runtime.py",
+          "sha256": "613abb4e36d1d8ac5b45b65dc2afca4f7352adc1c27397ca2afa089aa50f6f9b"
+        },
+        "path": "tests/unit/optimizers/logic_theorem_optimizer/test_learned_formula_runtime.py",
+        "saved_validation_sha256": "613abb4e36d1d8ac5b45b65dc2afca4f7352adc1c27397ca2afa089aa50f6f9b"
+      },
+      {
+        "merged_pin": {
+          "bytes": 7426,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "6dcb0885dab671edd6497f26dcec594c82a8195c",
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_native_formula_runtime.py",
+          "sha256": "e52594f4c68794963c81c88e798599cced535d07993568633bc4822f0b33e1d9"
+        },
+        "path": "tests/unit/optimizers/logic_theorem_optimizer/test_native_formula_runtime.py",
+        "saved_validation_sha256": "e52594f4c68794963c81c88e798599cced535d07993568633bc4822f0b33e1d9"
+      },
+      {
+        "merged_pin": {
+          "bytes": 12462,
+          "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "git_blob_oid": "c0e6685576e8393fe01357081cac70017ae282c3",
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py",
+          "sha256": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0"
+        },
+        "path": "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py",
+        "saved_validation_sha256": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0"
+      }
+    ],
+    "summary_receipt_pins_authenticated": true,
+    "tests_or_models_rerun_by_addendum": false
+  },
+  "schema": "concurrent-grouped-main-source-addendum/v1",
+  "summary_pin": {
+    "bytes": 6729,
+    "commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+    "git_blob_oid": "a2accc1fcb5765993da35757bb41a593c4d694b6",
+    "path": "docs/implementation/reports/evidence/grouped-legal-decoders-20261006/summary.json",
+    "sha256": "94fe7cfd1c736b2a6bb310f920a5cbc258731fef9f73a5c79ae173a5591827ec"
+  },
+  "ten_path_presence_count": 10,
+  "test_ports_scope": "The previous bounded working byte sample covered two of six tests; both change in the merged candidate ports. Separate phase1/contribution receipts document all original cases/assertions retained. No claim that all ten historical working files are byte-identical to main."
+}

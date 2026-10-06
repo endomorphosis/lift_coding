@@ -1,0 +1,165 @@
+{
+  "critical_current_main_UI_and_registry_paths": {
+    "ipfs_datasets_py/logic/api.py": {
+      "blob": "3fe53af1c47b71cdf5d475cca6fa2defc1009a3f",
+      "bytes": 25377,
+      "mode": "100644",
+      "sha256": "eeed9356f14d181ff38655494c4656450529d6606ac67eca219abab925fd5e85"
+    },
+    "ipfs_datasets_py/logic/bridge/registry.py": {
+      "blob": "cde57e166b64f5a4060eff36339cee4a72df5223",
+      "bytes": 14516,
+      "mode": "100644",
+      "sha256": "267d5065864c6778601fc8ebb23a5b4c57ef74856fc1b1b974b96bf283e47569"
+    },
+    "ipfs_datasets_py/logic/submodule_registry.py": {
+      "blob": "00b8b92c4cbc25aa5ff5654d0063993c30a2476e",
+      "bytes": 45344,
+      "mode": "100644",
+      "sha256": "baa9f3cad102b23e0fef8f92ce8277de5d6ff161ec4f9d2f8fecce3cf54f51df"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/autoencoder.py": {
+      "blob": "6c114edc34ee0c47dbc40add8631399d19feca90",
+      "bytes": 1003,
+      "mode": "100644",
+      "sha256": "65820534575552f467727592b7f85a873c635ffee65f482f4dae750ea2d070ec"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/decoder.py": {
+      "blob": "77950b04c9e103410b66a4147981146ab7bebd70",
+      "bytes": 7300,
+      "mode": "100644",
+      "sha256": "21e8315b0054f7755512212d610d4e3f5f4ac86387f3b27edb9632fa8ca68bc3"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/domain_slice.py": {
+      "blob": "cf30dd151bee2595504ed4f3f611a6e2b43f033c",
+      "bytes": 935,
+      "mode": "100644",
+      "sha256": "37ce58f2048f1d6681ec86c2633a9765da35e540415c85e0e7fd0dd7236ca287"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/formalize/compiler.py": {
+      "blob": "173cf421a8f904ae54365f39eaec8572e906f6c3",
+      "bytes": 17830,
+      "mode": "100644",
+      "sha256": "0f6b4729775b257d2c014e6082bba2c412266a08426204b62e67ea90d690ea51"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/formalize/decompiler.py": {
+      "blob": "8f3a8c90b5762ee82dd49c4c935e6f9edb97fa76",
+      "bytes": 39999,
+      "mode": "100644",
+      "sha256": "115a78c57139f07b3c50ebd998c14fa22ce64aae2ead6a0a8c9f2a85e1389b3f"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/formalize/roundtrip.py": {
+      "blob": "cdb7ac00f62bc2c8bd77a4315addb87d25e7869c",
+      "bytes": 29709,
+      "mode": "100644",
+      "sha256": "5ea38b379244651f13c1346d1c4ef21ea9863744d6a70f97e6ac32a9acd8f78e"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/runtime/idl_projection.py": {
+      "blob": "e06463d1c283bbcac9a56976be3c353b926f31b9",
+      "bytes": 15641,
+      "mode": "100644",
+      "sha256": "20ea93e46469a5bb37fcf27bc89d01c9ed2f03e745a7db6b34f854608fa9fd8d"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/schema.py": {
+      "blob": "9621440ba04ed8dd787fc74603410300e2f738c4",
+      "bytes": 120714,
+      "mode": "100644",
+      "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/source_adapters/dom_aria.py": {
+      "blob": "ce43deba4a809aefe096eed53323c85cc1ab24d4",
+      "bytes": 53181,
+      "mode": "100644",
+      "sha256": "57ecb5f487985e9c3e47da30fb22db77d71c208a5e79fbc0d7f7d585483b6f9e"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/source_adapters/mcp_idl.py": {
+      "blob": "1eaa48ceb2eb123988db4029c1349a77e442f57e",
+      "bytes": 5193,
+      "mode": "100644",
+      "sha256": "eab84b723a4ea351dfa4a58d2f9381f05a4a7c9c4b085c6574a647ef8f3275aa"
+    },
+    "ipfs_datasets_py/logic/ui_ux_ir/source_adapters/mcp_idl_identity.py": {
+      "blob": "bf31582bb34f12b5e98e5eb8c69f68b03555e92a",
+      "bytes": 31340,
+      "mode": "100644",
+      "sha256": "ad854ff01b25a6c8c9fbc36ef13d11069ee6e0923d0e6b906cac7c073f0b94e9"
+    }
+  },
+  "git_or_worktree_mutation": false,
+  "historical_UI_branch_commit_preserved": "9d558ad706e83a944bbf3b66508f969041cc9518",
+  "historical_UI_snapshots_effective_reviews": [
+    {
+      "counts": {
+        "identical": 96,
+        "missing": 0,
+        "modified": 3
+      },
+      "missing_paths": [],
+      "modified_paths": [
+        "ipfs_datasets_py/logic/ui_ux_ir/__init__.py",
+        "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+        "ipfs_datasets_py/logic/ui_ux_ir/formalize/compiler.py"
+      ],
+      "paths": 99,
+      "receipt_pin": {
+        "bytes": 55437,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/ui-effective-9d558ad706e8.json",
+        "sha256": "66b05afd0c4aa05095e1f92cea9a1a8126cc8258c3ebe0a37b4f234b36a71e9e"
+      },
+      "source_commit": "9d558ad706e83a944bbf3b66508f969041cc9518",
+      "source_history_reachable_from_main": true
+    },
+    {
+      "counts": {
+        "identical": 98,
+        "missing": 0,
+        "modified": 3
+      },
+      "missing_paths": [],
+      "modified_paths": [
+        "ipfs_datasets_py/logic/ui_ux_ir/__init__.py",
+        "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+        "ipfs_datasets_py/logic/ui_ux_ir/formalize/compiler.py"
+      ],
+      "paths": 101,
+      "receipt_pin": {
+        "bytes": 56530,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/ui-effective-6353ed34167a.json",
+        "sha256": "25528230db5dd3f87657471fcf2954e7c8e4f4222ff12d4364ab4ccdb3185bf4"
+      },
+      "source_commit": "6353ed34167a411a85a506150a8c5e6b18c2775c",
+      "source_history_reachable_from_main": true
+    },
+    {
+      "counts": {
+        "identical": 101,
+        "missing": 0,
+        "modified": 2
+      },
+      "missing_paths": [],
+      "modified_paths": [
+        "ipfs_datasets_py/logic/ui_ux_ir/__init__.py",
+        "ipfs_datasets_py/logic/ui_ux_ir/decoder.py"
+      ],
+      "paths": 103,
+      "receipt_pin": {
+        "bytes": 57641,
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/ui-effective-3ea970167c58.json",
+        "sha256": "51d089756075a15b95c55eb9f6441de2595071327e181e339ecbc1708bd8562f"
+      },
+      "source_commit": "3ea970167c58fa28dc964caa52e43fe2ad95c8d6",
+      "source_history_reachable_from_main": true
+    }
+  ],
+  "known_original_UI_paths_missing_current_main": 0,
+  "live_agent_UI_branch_exists": false,
+  "live_agent_UI_branch_heads": [],
+  "live_origin_main": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "model_or_tests_executed": false,
+  "recommendation": "Changing only external/ipfs_datasets .gitmodules branch to main is consistent with published autoformalization target. Preserve pinned gitlink, other submodule settings, dirty local worktree and historical UI branch objects; run no submodule remote update. Retention is source evidence only, not new UI semantic/runtime/proof qualification.",
+  "remote_branch_ahead_behind_main": null,
+  "root_gitmodules_configured_branch": "agent/ui-ux-ir",
+  "root_local_branch_override": null,
+  "schema": "datasets-UI-branch-tracking-effective-retention-review/v1",
+  "submodule_remote_behavior": "With no local branch override and no remote agent/ui-ux-ir ref, git submodule update --remote cannot resolve its configured remote-tracking revision. This is a dangling tracking selector, not evidence of a valid older UI branch. No update was executed."
+}

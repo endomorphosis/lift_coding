@@ -1,0 +1,2079 @@
+{
+  "effective_contribution_reviews": [
+    {
+      "repository_role": "datasets",
+      "review": {
+        "counts": {
+          "identical": 51,
+          "missing": 0,
+          "modified": 0
+        },
+        "git_state_mutated": false,
+        "lean_admission_granted": false,
+        "model_executed": false,
+        "paths": [
+          {
+            "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+            "source": {
+              "blob": "2aa4284e5f035831f0ab5236885c115c30021dbe",
+              "bytes": 14867,
+              "mode": "100644",
+              "sha256": "fb2059be730ef00f485b1344bff600f3acb309b96cee55d2e9378ae87f2ac598"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "2aa4284e5f035831f0ab5236885c115c30021dbe",
+              "bytes": 14867,
+              "mode": "100644",
+              "sha256": "fb2059be730ef00f485b1344bff600f3acb309b96cee55d2e9378ae87f2ac598"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-fresh-source-only-candidates.json",
+            "source": {
+              "blob": "fad44b7be3b328cb3a945cdb79506d2555303989",
+              "bytes": 141231,
+              "mode": "100644",
+              "sha256": "1c59f99df7453841818b2d2f43524c36fa9030e0aa068f376bd80241c8f4edf3"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "fad44b7be3b328cb3a945cdb79506d2555303989",
+              "bytes": 141231,
+              "mode": "100644",
+              "sha256": "1c59f99df7453841818b2d2f43524c36fa9030e0aa068f376bd80241c8f4edf3"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-metadata-plan.json",
+            "source": {
+              "blob": "a39754d985e2cce91a55571b9cac8aaebd82ceb1",
+              "bytes": 43214,
+              "mode": "100644",
+              "sha256": "a8ae1307d14c38327d776281bb534b8fc2bac3119cb92da9ab2584f5a99c1d79"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "a39754d985e2cce91a55571b9cac8aaebd82ceb1",
+              "bytes": 43214,
+              "mode": "100644",
+              "sha256": "a8ae1307d14c38327d776281bb534b8fc2bac3119cb92da9ab2584f5a99c1d79"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-original-text-evaluation.json",
+            "source": {
+              "blob": "510ee476bfe9b189cd8f7f60b9a0ad0b6955a554",
+              "bytes": 21317,
+              "mode": "100644",
+              "sha256": "62e2f6764fb3e010a7502af0bfaf54b82b8df5658087d612a6f203b5c1aa0491"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "510ee476bfe9b189cd8f7f60b9a0ad0b6955a554",
+              "bytes": 21317,
+              "mode": "100644",
+              "sha256": "62e2f6764fb3e010a7502af0bfaf54b82b8df5658087d612a6f203b5c1aa0491"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-semantic-ir-evaluation.json",
+            "source": {
+              "blob": "96ef53f19791608135d7680a33ef552980ceb014",
+              "bytes": 553913,
+              "mode": "100644",
+              "sha256": "d347e4cc6c69cd8d8b2f75b552f861f1f1dd092c02c8a8e64e769745b124c61f"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "96ef53f19791608135d7680a33ef552980ceb014",
+              "bytes": 553913,
+              "mode": "100644",
+              "sha256": "d347e4cc6c69cd8d8b2f75b552f861f1f1dd092c02c8a8e64e769745b124c61f"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-source-withheld-text-rendering.json",
+            "source": {
+              "blob": "7134352bccd0f7e52bda8b35146c8382e2644d10",
+              "bytes": 315861,
+              "mode": "100644",
+              "sha256": "e03810e46abf68b532b47e6de5ea289b529d5c452319eddabae817edcc8dd58b"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "7134352bccd0f7e52bda8b35146c8382e2644d10",
+              "bytes": 315861,
+              "mode": "100644",
+              "sha256": "e03810e46abf68b532b47e6de5ea289b529d5c452319eddabae817edcc8dd58b"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-fresh-source-only-candidates.json",
+            "source": {
+              "blob": "21c2a8d9a2c4652458946e5c521fff0cccc8a196",
+              "bytes": 141232,
+              "mode": "100644",
+              "sha256": "9dfcade8a446865a56960ae36562a25ac4289f471b70aa5ed3cfb6f3607cf046"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "21c2a8d9a2c4652458946e5c521fff0cccc8a196",
+              "bytes": 141232,
+              "mode": "100644",
+              "sha256": "9dfcade8a446865a56960ae36562a25ac4289f471b70aa5ed3cfb6f3607cf046"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-metadata-plan.json",
+            "source": {
+              "blob": "fea342d24475f8c79820d22574d2d8fcdec9a720",
+              "bytes": 43215,
+              "mode": "100644",
+              "sha256": "d54e0935cd343d21bd02f3f6caad930799c29d804dcb5d5b36d971456b24fa65"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "fea342d24475f8c79820d22574d2d8fcdec9a720",
+              "bytes": 43215,
+              "mode": "100644",
+              "sha256": "d54e0935cd343d21bd02f3f6caad930799c29d804dcb5d5b36d971456b24fa65"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-original-text-evaluation.json",
+            "source": {
+              "blob": "510ee476bfe9b189cd8f7f60b9a0ad0b6955a554",
+              "bytes": 21317,
+              "mode": "100644",
+              "sha256": "62e2f6764fb3e010a7502af0bfaf54b82b8df5658087d612a6f203b5c1aa0491"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "510ee476bfe9b189cd8f7f60b9a0ad0b6955a554",
+              "bytes": 21317,
+              "mode": "100644",
+              "sha256": "62e2f6764fb3e010a7502af0bfaf54b82b8df5658087d612a6f203b5c1aa0491"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-semantic-ir-evaluation.json",
+            "source": {
+              "blob": "96ef53f19791608135d7680a33ef552980ceb014",
+              "bytes": 553913,
+              "mode": "100644",
+              "sha256": "d347e4cc6c69cd8d8b2f75b552f861f1f1dd092c02c8a8e64e769745b124c61f"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "96ef53f19791608135d7680a33ef552980ceb014",
+              "bytes": 553913,
+              "mode": "100644",
+              "sha256": "d347e4cc6c69cd8d8b2f75b552f861f1f1dd092c02c8a8e64e769745b124c61f"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-source-withheld-text-rendering.json",
+            "source": {
+              "blob": "7134352bccd0f7e52bda8b35146c8382e2644d10",
+              "bytes": 315861,
+              "mode": "100644",
+              "sha256": "e03810e46abf68b532b47e6de5ea289b529d5c452319eddabae817edcc8dd58b"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "7134352bccd0f7e52bda8b35146c8382e2644d10",
+              "bytes": 315861,
+              "mode": "100644",
+              "sha256": "e03810e46abf68b532b47e6de5ea289b529d5c452319eddabae817edcc8dd58b"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/committed-source-qualification.json",
+            "source": {
+              "blob": "5d01faa16c342801199885d3ba955e808f2f7447",
+              "bytes": 8028,
+              "mode": "100644",
+              "sha256": "4b035d25c5145815a915eff42d9b0d81cc98135c50bb1d5f8ec198cf4f0a9103"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "5d01faa16c342801199885d3ba955e808f2f7447",
+              "bytes": 8028,
+              "mode": "100644",
+              "sha256": "4b035d25c5145815a915eff42d9b0d81cc98135c50bb1d5f8ec198cf4f0a9103"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/contextual-runtime-tests.xml",
+            "source": {
+              "blob": "d3fe87c3e80df2832418360f57fcf1991fc10242",
+              "bytes": 51045,
+              "mode": "100644",
+              "sha256": "2fb4eb8ace3a065d1376c3e9dd09b52cf3e4c418ccbdfdb82f3d3d6c728b28e5"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "d3fe87c3e80df2832418360f57fcf1991fc10242",
+              "bytes": 51045,
+              "mode": "100644",
+              "sha256": "2fb4eb8ace3a065d1376c3e9dd09b52cf3e4c418ccbdfdb82f3d3d6c728b28e5"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/generation-qualification.json",
+            "source": {
+              "blob": "e9312b5d50ee8357217c86ec3cc09ce035f3296c",
+              "bytes": 21275,
+              "mode": "100644",
+              "sha256": "734343f3dca0068fafe5d75c07ba51a193f8fe0a48e48eea2c15a15167fb41d2"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "e9312b5d50ee8357217c86ec3cc09ce035f3296c",
+              "bytes": 21275,
+              "mode": "100644",
+              "sha256": "734343f3dca0068fafe5d75c07ba51a193f8fe0a48e48eea2c15a15167fb41d2"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/generation-qualification.stderr.log",
+            "source": {
+              "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+              "bytes": 0,
+              "mode": "100644",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+              "bytes": 0,
+              "mode": "100644",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/generation-qualification.stdout.log",
+            "source": {
+              "blob": "f8497a519649aa82ce9ffd41d15761bf4353c00c",
+              "bytes": 1316,
+              "mode": "100644",
+              "sha256": "1e9b74045a980e723486177a906194b61e4f1dbc5d8433bfc003925b7782e0f7"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "f8497a519649aa82ce9ffd41d15761bf4353c00c",
+              "bytes": 1316,
+              "mode": "100644",
+              "sha256": "1e9b74045a980e723486177a906194b61e4f1dbc5d8433bfc003925b7782e0f7"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/historical-owner-regression.xml",
+            "source": {
+              "blob": "9d30bee6969e2497c6fc2ceb0c7c5baa44c385eb",
+              "bytes": 40921,
+              "mode": "100644",
+              "sha256": "2c42d12ae17f78675c50f665701949edfd38f7173ac0fc2abc87654f2edb890f"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "9d30bee6969e2497c6fc2ceb0c7c5baa44c385eb",
+              "bytes": 40921,
+              "mode": "100644",
+              "sha256": "2c42d12ae17f78675c50f665701949edfd38f7173ac0fc2abc87654f2edb890f"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/qualify_original_assets.py",
+            "source": {
+              "blob": "6d866df5f2940c3e8e407bcd36dd9b69d480b57b",
+              "bytes": 15878,
+              "mode": "100644",
+              "sha256": "2a976023ada55059bf55f778a10ef9e13a39221c412a374b4f4bcbe87c6f6119"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "6d866df5f2940c3e8e407bcd36dd9b69d480b57b",
+              "bytes": 15878,
+              "mode": "100644",
+              "sha256": "2a976023ada55059bf55f778a10ef9e13a39221c412a374b4f4bcbe87c6f6119"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/retention-manifest.json",
+            "source": {
+              "blob": "d532f3d0578a9e694b37ed9a6405696a1ac59ce5",
+              "bytes": 13080,
+              "mode": "100644",
+              "sha256": "2c2598c69a91e63d76dfcc92332a400a04f8211f659a3042e18f687ca91bd93b"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "d532f3d0578a9e694b37ed9a6405696a1ac59ce5",
+              "bytes": 13080,
+              "mode": "100644",
+              "sha256": "2c2598c69a91e63d76dfcc92332a400a04f8211f659a3042e18f687ca91bd93b"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-diagnostic-01.xml",
+            "source": {
+              "blob": "b97ab236c831e284f0a73be637223728db7ec626",
+              "bytes": 27061,
+              "mode": "100644",
+              "sha256": "a85e1f4d1576bdc6caeee3a13d6fb676c918aa66214d45f2d2d2cc7ee3b26ecc"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "b97ab236c831e284f0a73be637223728db7ec626",
+              "bytes": 27061,
+              "mode": "100644",
+              "sha256": "a85e1f4d1576bdc6caeee3a13d6fb676c918aa66214d45f2d2d2cc7ee3b26ecc"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-diagnostic-02.log",
+            "source": {
+              "blob": "c8c151c9c8b0febcca7c4d92d673a7f7b846ab47",
+              "bytes": 953,
+              "mode": "100644",
+              "sha256": "24b930745a83ac6b49065140afb6ace00bc8451bd600b02a6dcdbe8fa849c8a4"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "c8c151c9c8b0febcca7c4d92d673a7f7b846ab47",
+              "bytes": 953,
+              "mode": "100644",
+              "sha256": "24b930745a83ac6b49065140afb6ace00bc8451bd600b02a6dcdbe8fa849c8a4"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-diagnostic-02.xml",
+            "source": {
+              "blob": "cbad9759db4fa23f5f079160f504d520acf79eb6",
+              "bytes": 32724,
+              "mode": "100644",
+              "sha256": "1e47c6753782162955c4c2c07fc4859a16399c5e2948651c84d61306f4a30b3b"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "cbad9759db4fa23f5f079160f504d520acf79eb6",
+              "bytes": 32724,
+              "mode": "100644",
+              "sha256": "1e47c6753782162955c4c2c07fc4859a16399c5e2948651c84d61306f4a30b3b"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-final-receipt.json",
+            "source": {
+              "blob": "7728af5d4b7de84e99b7ba4f0800fd1d8dbec1dd",
+              "bytes": 9400,
+              "mode": "100644",
+              "sha256": "0dd785f1ddc2797429c36404626ff110f1db721cfb4f9aa8572a991f41b3f0c4"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "7728af5d4b7de84e99b7ba4f0800fd1d8dbec1dd",
+              "bytes": 9400,
+              "mode": "100644",
+              "sha256": "0dd785f1ddc2797429c36404626ff110f1db721cfb4f9aa8572a991f41b3f0c4"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-final.log",
+            "source": {
+              "blob": "ea53299be9c8b7a2da413367773e04a155ba408e",
+              "bytes": 945,
+              "mode": "100644",
+              "sha256": "aa096174ebfa33bdfb73cbf57c279965f07762c405212370d87937eb23f83581"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "ea53299be9c8b7a2da413367773e04a155ba408e",
+              "bytes": 945,
+              "mode": "100644",
+              "sha256": "aa096174ebfa33bdfb73cbf57c279965f07762c405212370d87937eb23f83581"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-final.xml",
+            "source": {
+              "blob": "6dd5117568bc02ea200e742e8c3da2d28fe8b58c",
+              "bytes": 32932,
+              "mode": "100644",
+              "sha256": "d317f3c5b51442e0ae44bcdddd6974b70beabf8afd58be01dd82f248261b5863"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "6dd5117568bc02ea200e742e8c3da2d28fe8b58c",
+              "bytes": 32932,
+              "mode": "100644",
+              "sha256": "d317f3c5b51442e0ae44bcdddd6974b70beabf8afd58be01dd82f248261b5863"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-parent-endpoint-diagnostic.xml",
+            "source": {
+              "blob": "76ba9f00be3f3838b5c856d8071629da14afe00d",
+              "bytes": 843,
+              "mode": "100644",
+              "sha256": "2bfd4458932add7f84bd146cf1c3d07920a9d09236a009444984b4e5b5e82f2a"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "76ba9f00be3f3838b5c856d8071629da14afe00d",
+              "bytes": 843,
+              "mode": "100644",
+              "sha256": "2bfd4458932add7f84bd146cf1c3d07920a9d09236a009444984b4e5b5e82f2a"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/architecture-review.json",
+            "source": {
+              "blob": "047f5e86d259da45b6cb9f9f52e33a5d1be966c9",
+              "bytes": 31658,
+              "mode": "100644",
+              "sha256": "f999fe08a304db9b3cbc10fbfd9aec9bd783e0fb8bceda2e8079a483769dea7c"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "047f5e86d259da45b6cb9f9f52e33a5d1be966c9",
+              "bytes": 31658,
+              "mode": "100644",
+              "sha256": "f999fe08a304db9b3cbc10fbfd9aec9bd783e0fb8bceda2e8079a483769dea7c"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/final-facade-review.json",
+            "source": {
+              "blob": "2932e5a2955e9badc50ec6290f55e8eb5348fcd1",
+              "bytes": 8301,
+              "mode": "100644",
+              "sha256": "d7a3ce6d6c2e87379cf47f37923a5d85b074a8b763985ea68275583b9b5ddb02"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "2932e5a2955e9badc50ec6290f55e8eb5348fcd1",
+              "bytes": 8301,
+              "mode": "100644",
+              "sha256": "d7a3ce6d6c2e87379cf47f37923a5d85b074a8b763985ea68275583b9b5ddb02"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.json",
+            "source": {
+              "blob": "c615617af25dabd7dac2e4ee84b4975c2a54111e",
+              "bytes": 22379,
+              "mode": "100644",
+              "sha256": "e05bd76ef4577698f0cd5aeb3b8676974d661f22808aebed58c7626f9543361b"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "c615617af25dabd7dac2e4ee84b4975c2a54111e",
+              "bytes": 22379,
+              "mode": "100644",
+              "sha256": "e05bd76ef4577698f0cd5aeb3b8676974d661f22808aebed58c7626f9543361b"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.stderr.log",
+            "source": {
+              "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+              "bytes": 0,
+              "mode": "100644",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+              "bytes": 0,
+              "mode": "100644",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.stdout.log",
+            "source": {
+              "blob": "df1b1238d08a6021b9e028472e3707d472e7be3a",
+              "bytes": 2529,
+              "mode": "100644",
+              "sha256": "7ec4588e53e72a19b12bbcd8a006676bcfd40cfcb6c271c5394b42c4c469e71a"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "df1b1238d08a6021b9e028472e3707d472e7be3a",
+              "bytes": 2529,
+              "mode": "100644",
+              "sha256": "7ec4588e53e72a19b12bbcd8a006676bcfd40cfcb6c271c5394b42c4c469e71a"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/docs-final-review.json",
+            "source": {
+              "blob": "eac80df0a185da66d40b56b7c1eca44f727a8222",
+              "bytes": 6877,
+              "mode": "100644",
+              "sha256": "e03dca39f813335a74b0b2eafee42274d4a68100bccfeabe2f3831057725de91"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "eac80df0a185da66d40b56b7c1eca44f727a8222",
+              "bytes": 6877,
+              "mode": "100644",
+              "sha256": "e03dca39f813335a74b0b2eafee42274d4a68100bccfeabe2f3831057725de91"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/docs-review.json",
+            "source": {
+              "blob": "6f23e9b59df888efeaa9e13b8dbe9157186c6db5",
+              "bytes": 3905,
+              "mode": "100644",
+              "sha256": "bcb2cc5983b9814e87f2c6cb914961ac6ba1f2e2479ebe38abbd44e41081a4f3"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "6f23e9b59df888efeaa9e13b8dbe9157186c6db5",
+              "bytes": 3905,
+              "mode": "100644",
+              "sha256": "bcb2cc5983b9814e87f2c6cb914961ac6ba1f2e2479ebe38abbd44e41081a4f3"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/execution-review.json",
+            "source": {
+              "blob": "3660fc66884a55e1199c2e10452e848e13914e52",
+              "bytes": 54202,
+              "mode": "100644",
+              "sha256": "d7d36eebeaac7fba77e283203adb56484cd1b47658f641c29c01f2a5beacc6ef"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "3660fc66884a55e1199c2e10452e848e13914e52",
+              "bytes": 54202,
+              "mode": "100644",
+              "sha256": "d7d36eebeaac7fba77e283203adb56484cd1b47658f641c29c01f2a5beacc6ef"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/lazy-training-import-review.json",
+            "source": {
+              "blob": "85cb195af7fcb24ce4569b1c647195e8e11f05c4",
+              "bytes": 14349,
+              "mode": "100644",
+              "sha256": "d7d1bf35b63192a2276fb72a42f13fb8459621b3872754b39efb5c23781dc6c9"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "85cb195af7fcb24ce4569b1c647195e8e11f05c4",
+              "bytes": 14349,
+              "mode": "100644",
+              "sha256": "d7d1bf35b63192a2276fb72a42f13fb8459621b3872754b39efb5c23781dc6c9"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/numeric-post-freeze-review.json",
+            "source": {
+              "blob": "79cfbc8cc1ff13324a4c8a6f39624546e58b8b0c",
+              "bytes": 15573,
+              "mode": "100644",
+              "sha256": "2c67b501a1337c7a832b4b226408e49f91c462ebf0ddbc98d12388ac72f89328"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "79cfbc8cc1ff13324a4c8a6f39624546e58b8b0c",
+              "bytes": 15573,
+              "mode": "100644",
+              "sha256": "2c67b501a1337c7a832b4b226408e49f91c462ebf0ddbc98d12388ac72f89328"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/numeric-restoration-smoke.json",
+            "source": {
+              "blob": "b0b07b6a4129e323bbc5daf55c0fdfd4b4847263",
+              "bytes": 2188,
+              "mode": "100644",
+              "sha256": "ff412c8aa43b2972a8b3c1c7226176b0e43a3f795a7a6ce76b76894622adeb00"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "b0b07b6a4129e323bbc5daf55c0fdfd4b4847263",
+              "bytes": 2188,
+              "mode": "100644",
+              "sha256": "ff412c8aa43b2972a8b3c1c7226176b0e43a3f795a7a6ce76b76894622adeb00"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/output-review.json",
+            "source": {
+              "blob": "89620d300cfc180254ff0107532cf4f34b3bbee1",
+              "bytes": 9550,
+              "mode": "100644",
+              "sha256": "f9f00809321daac7a585a9d4f7f3d5c2cab4a2aa9a6f0bd52de39a50882c9306"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "89620d300cfc180254ff0107532cf4f34b3bbee1",
+              "bytes": 9550,
+              "mode": "100644",
+              "sha256": "f9f00809321daac7a585a9d4f7f3d5c2cab4a2aa9a6f0bd52de39a50882c9306"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/qualification-driver-review.json",
+            "source": {
+              "blob": "04c2602ca3384f0142fc1b8894a02014efaaab39",
+              "bytes": 6416,
+              "mode": "100644",
+              "sha256": "b712ca935c7362c2c67ef873504e6f7b37bf717c853caee1cb25eaa9fe683352"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "04c2602ca3384f0142fc1b8894a02014efaaab39",
+              "bytes": 6416,
+              "mode": "100644",
+              "sha256": "b712ca935c7362c2c67ef873504e6f7b37bf717c853caee1cb25eaa9fe683352"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/review_execution.py",
+            "source": {
+              "blob": "ec0d61e346a35aa36f89571d8eebe918401b383a",
+              "bytes": 20867,
+              "mode": "100644",
+              "sha256": "da254d64bb2ba9a8b57e8bbb9e2246e324564773b2b0767b8d5d34c759cd418f"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "ec0d61e346a35aa36f89571d8eebe918401b383a",
+              "bytes": 20867,
+              "mode": "100644",
+              "sha256": "da254d64bb2ba9a8b57e8bbb9e2246e324564773b2b0767b8d5d34c759cd418f"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/review_lazy_reference_import.py",
+            "source": {
+              "blob": "b5ee6d78f10dff8ca7a1811aebd61ae6db81a772",
+              "bytes": 6948,
+              "mode": "100644",
+              "sha256": "8008d3cc39efec964ba28638c4a05b00bd142f707cb33842d4c487825ef5dad9"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "b5ee6d78f10dff8ca7a1811aebd61ae6db81a772",
+              "bytes": 6948,
+              "mode": "100644",
+              "sha256": "8008d3cc39efec964ba28638c4a05b00bd142f707cb33842d4c487825ef5dad9"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/source-survey.json",
+            "source": {
+              "blob": "442c3010a1b6677c54b71319176c6ba031102282",
+              "bytes": 72367,
+              "mode": "100644",
+              "sha256": "b440e299626e201b9bdae9c52083ed0c29312fd138380a5e07f27e551d2cda2b"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "442c3010a1b6677c54b71319176c6ba031102282",
+              "bytes": 72367,
+              "mode": "100644",
+              "sha256": "b440e299626e201b9bdae9c52083ed0c29312fd138380a5e07f27e551d2cda2b"
+            }
+          },
+          {
+            "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/survey.py",
+            "source": {
+              "blob": "ba31c720ba3b91efecf6387b9c061cf76289de3a",
+              "bytes": 11289,
+              "mode": "100644",
+              "sha256": "353f11f055b8599b8efddc026d7a291b39991aeebcc19a2c231d1076b0c55d08"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "ba31c720ba3b91efecf6387b9c061cf76289de3a",
+              "bytes": 11289,
+              "mode": "100644",
+              "sha256": "353f11f055b8599b8efddc026d7a291b39991aeebcc19a2c231d1076b0c55d08"
+            }
+          },
+          {
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+            "source": {
+              "blob": "50e331a8a76abef452967c9a5c5021df77b90879",
+              "bytes": 15840,
+              "mode": "100644",
+              "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "50e331a8a76abef452967c9a5c5021df77b90879",
+              "bytes": 15840,
+              "mode": "100644",
+              "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+            }
+          },
+          {
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_output.py",
+            "source": {
+              "blob": "bd97b3eff1ebcfff359c1854dfd1bd8998037bfa",
+              "bytes": 13756,
+              "mode": "100644",
+              "sha256": "0477aaa5222523e27f4010644ad5bfac67720a793fcccc53b48593e4321c31a7"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "bd97b3eff1ebcfff359c1854dfd1bd8998037bfa",
+              "bytes": 13756,
+              "mode": "100644",
+              "sha256": "0477aaa5222523e27f4010644ad5bfac67720a793fcccc53b48593e4321c31a7"
+            }
+          },
+          {
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+            "source": {
+              "blob": "ee70391c1afa83a341d14ddae9d156d6e7e2e22f",
+              "bytes": 36421,
+              "mode": "100644",
+              "sha256": "e9191bcbca77d7e73830bc7096ceb719288e18493cb3c30db35843fbf5c0238e"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "ee70391c1afa83a341d14ddae9d156d6e7e2e22f",
+              "bytes": 36421,
+              "mode": "100644",
+              "sha256": "e9191bcbca77d7e73830bc7096ceb719288e18493cb3c30db35843fbf5c0238e"
+            }
+          },
+          {
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+            "source": {
+              "blob": "807db7726e21c6e687e1318324a60f0b22eb650a",
+              "bytes": 14958,
+              "mode": "100644",
+              "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "807db7726e21c6e687e1318324a60f0b22eb650a",
+              "bytes": 14958,
+              "mode": "100644",
+              "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_numeric.py",
+            "source": {
+              "blob": "7899d9c689b95d294f529cab42941fe8a9d607d9",
+              "bytes": 11167,
+              "mode": "100644",
+              "sha256": "a12691031cb0ac91c9886ff396c6671a160aec1b3ec8e02dfaa6651533be58df"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "7899d9c689b95d294f529cab42941fe8a9d607d9",
+              "bytes": 11167,
+              "mode": "100644",
+              "sha256": "a12691031cb0ac91c9886ff396c6671a160aec1b3ec8e02dfaa6651533be58df"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_output.py",
+            "source": {
+              "blob": "e37c7a061a420efc72184f69f7fdb2708081d72b",
+              "bytes": 10987,
+              "mode": "100644",
+              "sha256": "7e2ed28f2795b0736eac77a550d9cecfecc37aa711b532c574b94b7a5da92cea"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "e37c7a061a420efc72184f69f7fdb2708081d72b",
+              "bytes": 10987,
+              "mode": "100644",
+              "sha256": "7e2ed28f2795b0736eac77a550d9cecfecc37aa711b532c574b94b7a5da92cea"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+            "source": {
+              "blob": "730b3fcba0dc7374b06a8bf7f845130b6f7f3447",
+              "bytes": 12563,
+              "mode": "100644",
+              "sha256": "1b83e9ef3baec6f3d9b12d32179c9520229c45c471f1d7b299496e8d4f744e62"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "730b3fcba0dc7374b06a8bf7f845130b6f7f3447",
+              "bytes": 12563,
+              "mode": "100644",
+              "sha256": "1b83e9ef3baec6f3d9b12d32179c9520229c45c471f1d7b299496e8d4f744e62"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime_adversarial.py",
+            "source": {
+              "blob": "f402d77dd983d585095de54cad18d1fa81159736",
+              "bytes": 27539,
+              "mode": "100644",
+              "sha256": "6213be7010a7dbfebadb0b29f786513d9be9a34a39a0b3d8a6f0f5d3af9828ce"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "f402d77dd983d585095de54cad18d1fa81159736",
+              "bytes": 27539,
+              "mode": "100644",
+              "sha256": "6213be7010a7dbfebadb0b29f786513d9be9a34a39a0b3d8a6f0f5d3af9828ce"
+            }
+          }
+        ],
+        "repository": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006",
+        "schema": "autoencoder-effective-tree-review/v1",
+        "scope": "Source presence only; modified files require review against later work.",
+        "semantic_qualification_granted": false,
+        "source_history_reachable_from_target": true,
+        "source_revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+        "target_revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+      },
+      "source_commit": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+      "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+    },
+    {
+      "repository_role": "datasets",
+      "review": {
+        "counts": {
+          "identical": 17,
+          "missing": 0,
+          "modified": 0
+        },
+        "git_state_mutated": false,
+        "lean_admission_granted": false,
+        "model_executed": false,
+        "paths": [
+          {
+            "path": "docs/autoencoders/normative_wording_training.md",
+            "source": {
+              "blob": "ef8c592e0aad6a1044b74a26e84dc71ffffde37b",
+              "bytes": 13198,
+              "mode": "100644",
+              "sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "ef8c592e0aad6a1044b74a26e84dc71ffffde37b",
+              "bytes": 13198,
+              "mode": "100644",
+              "sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19"
+            }
+          },
+          {
+            "path": "docs/autoencoders/paraphrase_modality_diagnostics.md",
+            "source": {
+              "blob": "88e4f692ebf00f97091a55b8672d95db24d85fc5",
+              "bytes": 9327,
+              "mode": "100644",
+              "sha256": "1cc8a639924fa6ed7234e24c65dad91fdb15e3e30ab66b3b17a8c873cf165b12"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "88e4f692ebf00f97091a55b8672d95db24d85fc5",
+              "bytes": 9327,
+              "mode": "100644",
+              "sha256": "1cc8a639924fa6ed7234e24c65dad91fdb15e3e30ab66b3b17a8c873cf165b12"
+            }
+          },
+          {
+            "path": "docs/implementation/reports/evidence/decoder-normative-wording-20261006/manifest.json",
+            "source": {
+              "blob": "eef46b9783eadcce78f94367d20ab63afd696227",
+              "bytes": 76440,
+              "mode": "100644",
+              "sha256": "c20d18a62e072a89c3c5aab62936ea327f0db862ffb0f887f488f28583aec019"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "eef46b9783eadcce78f94367d20ab63afd696227",
+              "bytes": 76440,
+              "mode": "100644",
+              "sha256": "c20d18a62e072a89c3c5aab62936ea327f0db862ffb0f887f488f28583aec019"
+            }
+          },
+          {
+            "path": "docs/implementation/reports/evidence/decoder-normative-wording-20261006/results.json",
+            "source": {
+              "blob": "d9f232d8704295ade390527c3f38a2446be93080",
+              "bytes": 2902845,
+              "mode": "100644",
+              "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "d9f232d8704295ade390527c3f38a2446be93080",
+              "bytes": 2902845,
+              "mode": "100644",
+              "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496"
+            }
+          },
+          {
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py",
+            "source": {
+              "blob": "5b2db8e3a7a98ad4f293910f7d8d33d14d63a479",
+              "bytes": 9634,
+              "mode": "100644",
+              "sha256": "48b7a3b2a0e5b69ae292f2c02dc0e87d92de4ffb4443bfba5ae52695b9a4320a"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "5b2db8e3a7a98ad4f293910f7d8d33d14d63a479",
+              "bytes": 9634,
+              "mode": "100644",
+              "sha256": "48b7a3b2a0e5b69ae292f2c02dc0e87d92de4ffb4443bfba5ae52695b9a4320a"
+            }
+          },
+          {
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+            "source": {
+              "blob": "cc5628bf3b40e16aae2f3c8a4ea808dce4b58253",
+              "bytes": 14474,
+              "mode": "100644",
+              "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "cc5628bf3b40e16aae2f3c8a4ea808dce4b58253",
+              "bytes": 14474,
+              "mode": "100644",
+              "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+            }
+          },
+          {
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/prospective_normative_development.py",
+            "source": {
+              "blob": "0da97835cec7f02399ddc6d04c5fc345ba5ecb1c",
+              "bytes": 12167,
+              "mode": "100644",
+              "sha256": "fa02f14e1b70e14dfe04c70b3eb18ca68eb594ebd337221a33ee2f287c2e35d5"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "0da97835cec7f02399ddc6d04c5fc345ba5ecb1c",
+              "bytes": 12167,
+              "mode": "100644",
+              "sha256": "fa02f14e1b70e14dfe04c70b3eb18ca68eb594ebd337221a33ee2f287c2e35d5"
+            }
+          },
+          {
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/prospective_wording_source_inputs.py",
+            "source": {
+              "blob": "f58bbb46e8bbae05a20a4a20718d100ee159c2f3",
+              "bytes": 10857,
+              "mode": "100644",
+              "sha256": "6cb67453e22bf6f9c36fb056a75dd022bf46d11286a846adcaa03baacdc987dc"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "f58bbb46e8bbae05a20a4a20718d100ee159c2f3",
+              "bytes": 10857,
+              "mode": "100644",
+              "sha256": "6cb67453e22bf6f9c36fb056a75dd022bf46d11286a846adcaa03baacdc987dc"
+            }
+          },
+          {
+            "path": "scripts/ops/autoencoder/benchmark_normative_wording_training.py",
+            "source": {
+              "blob": "344295d447526209882a2ca990a221359aa652b8",
+              "bytes": 12978,
+              "mode": "100644",
+              "sha256": "e9231f6fa2bccc329539da089568254181756245333d1418249a6dbfe1c6507e"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "344295d447526209882a2ca990a221359aa652b8",
+              "bytes": 12978,
+              "mode": "100644",
+              "sha256": "e9231f6fa2bccc329539da089568254181756245333d1418249a6dbfe1c6507e"
+            }
+          },
+          {
+            "path": "scripts/ops/autoencoder/evaluate_normative_wording_development.py",
+            "source": {
+              "blob": "63357e13caeaf62bb641dd2d785746eee9a3a829",
+              "bytes": 28346,
+              "mode": "100644",
+              "sha256": "6be7e03656087fa9b5607b7e82b4a0a1244ca920cad8a81d64510f140962cfc6"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "63357e13caeaf62bb641dd2d785746eee9a3a829",
+              "bytes": 28346,
+              "mode": "100644",
+              "sha256": "6be7e03656087fa9b5607b7e82b4a0a1244ca920cad8a81d64510f140962cfc6"
+            }
+          },
+          {
+            "path": "scripts/ops/autoencoder/prepare_normative_wording_sources.py",
+            "source": {
+              "blob": "c305f0c273e46f9286b993eeeb90fc4c460f61d7",
+              "bytes": 12023,
+              "mode": "100644",
+              "sha256": "c863dbfbbd43d021fb103ec78e61c19a8e07b917a3c54236978d99d9451f2917"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "c305f0c273e46f9286b993eeeb90fc4c460f61d7",
+              "bytes": 12023,
+              "mode": "100644",
+              "sha256": "c863dbfbbd43d021fb103ec78e61c19a8e07b917a3c54236978d99d9451f2917"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_normative_wording_development.py",
+            "source": {
+              "blob": "b73a6a5a0727dc523139b99b4d7935f086e20b09",
+              "bytes": 13784,
+              "mode": "100644",
+              "sha256": "cd10307d3c3a02cb6131b8894d7275d061f521213eb4f1566d5f032d94681da0"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "b73a6a5a0727dc523139b99b4d7935f086e20b09",
+              "bytes": 13784,
+              "mode": "100644",
+              "sha256": "cd10307d3c3a02cb6131b8894d7275d061f521213eb4f1566d5f032d94681da0"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_normative_wording_modality_auxiliary.py",
+            "source": {
+              "blob": "ec3123a3d55fdfc0d6a7230c0ec38b1dccec5055",
+              "bytes": 13491,
+              "mode": "100644",
+              "sha256": "05e89ab067336a2bdd40d7222320a30ba1b5250a4d2ab5472d73727f1cd9bb78"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "ec3123a3d55fdfc0d6a7230c0ec38b1dccec5055",
+              "bytes": 13491,
+              "mode": "100644",
+              "sha256": "05e89ab067336a2bdd40d7222320a30ba1b5250a4d2ab5472d73727f1cd9bb78"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_normative_wording_training_runner.py",
+            "source": {
+              "blob": "1c73ca368a37a594c3a7a8f5ce0a7819268ebf3f",
+              "bytes": 3556,
+              "mode": "100644",
+              "sha256": "96e513a3244c22d74f20b6bc5c0094dd00dbfd3455617e01d776db6d98103865"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "1c73ca368a37a594c3a7a8f5ce0a7819268ebf3f",
+              "bytes": 3556,
+              "mode": "100644",
+              "sha256": "96e513a3244c22d74f20b6bc5c0094dd00dbfd3455617e01d776db6d98103865"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_normative_wording_training_sources.py",
+            "source": {
+              "blob": "64cde986f445f2b2f8fa318a152c9df847c595d4",
+              "bytes": 14460,
+              "mode": "100644",
+              "sha256": "f9c0ebd846c1541c76ef67c49bba06fe1006cd8e1edec9af402cc43f0e998fe5"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "64cde986f445f2b2f8fa318a152c9df847c595d4",
+              "bytes": 14460,
+              "mode": "100644",
+              "sha256": "f9c0ebd846c1541c76ef67c49bba06fe1006cd8e1edec9af402cc43f0e998fe5"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_prospective_normative_development.py",
+            "source": {
+              "blob": "3db913df6760efd564e4688a50c97a5f5a4b0093",
+              "bytes": 9158,
+              "mode": "100644",
+              "sha256": "3bcdd0e0cd5f864d1357a14875c7981ff8e960734aca86af1577dfbfd4abe8fb"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "3db913df6760efd564e4688a50c97a5f5a4b0093",
+              "bytes": 9158,
+              "mode": "100644",
+              "sha256": "3bcdd0e0cd5f864d1357a14875c7981ff8e960734aca86af1577dfbfd4abe8fb"
+            }
+          },
+          {
+            "path": "tests/unit/logic/formalization/autoencoder/test_prospective_wording_source_inputs.py",
+            "source": {
+              "blob": "1fc25f59bfb09a60441cd13184838d19d1338f3a",
+              "bytes": 7334,
+              "mode": "100644",
+              "sha256": "5ec6f4e6762a29826bf83f50110c33153ddaf1a254912f4f793892a607b96593"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "1fc25f59bfb09a60441cd13184838d19d1338f3a",
+              "bytes": 7334,
+              "mode": "100644",
+              "sha256": "5ec6f4e6762a29826bf83f50110c33153ddaf1a254912f4f793892a607b96593"
+            }
+          }
+        ],
+        "repository": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006",
+        "schema": "autoencoder-effective-tree-review/v1",
+        "scope": "Source presence only; modified files require review against later work.",
+        "semantic_qualification_granted": false,
+        "source_history_reachable_from_target": true,
+        "source_revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+      },
+      "source_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+    },
+    {
+      "repository_role": "accelerate",
+      "review": {
+        "counts": {
+          "identical": 1,
+          "missing": 0,
+          "modified": 1
+        },
+        "git_state_mutated": false,
+        "lean_admission_granted": false,
+        "model_executed": false,
+        "paths": [
+          {
+            "path": "docs/agent_supervisor/contextual_ir_checkpoint_recovery.md",
+            "source": {
+              "blob": "067975e6c029b5225267db110ebe7eaba8810033",
+              "bytes": 15009,
+              "mode": "100644",
+              "sha256": "88693f214e86f6792f28c0c87507f92e570df4dfe1415613b9a2cd5e39a2269b"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "067975e6c029b5225267db110ebe7eaba8810033",
+              "bytes": 15009,
+              "mode": "100644",
+              "sha256": "88693f214e86f6792f28c0c87507f92e570df4dfe1415613b9a2cd5e39a2269b"
+            }
+          },
+          {
+            "path": "docs/agent_supervisor/terminal_symbolic_capabilities.md",
+            "source": {
+              "blob": "df975c5703a999b054c6d034f7bbfeecfbbe5371",
+              "bytes": 89547,
+              "mode": "100644",
+              "sha256": "6cf504d040e5b60cbb24648ed0b22ac55a4f77e0140fe523fecae12faee709b3"
+            },
+            "status": "modified",
+            "target": {
+              "blob": "56322bdae95c9333eb7d2abf366c483e1be89288",
+              "bytes": 100482,
+              "mode": "100644",
+              "sha256": "a7844afaa7fc8963470165edf7f9c45c7e46acbd85849aa4141c84f02b8cb461"
+            }
+          }
+        ],
+        "repository": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-accelerate-20261006",
+        "schema": "autoencoder-effective-tree-review/v1",
+        "scope": "Source presence only; modified files require review against later work.",
+        "semantic_qualification_granted": false,
+        "source_history_reachable_from_target": true,
+        "source_revision": "bcd466018cff101c34b281a4fe234bdc1f33fb0a",
+        "target_revision": "d5c59e961d1a0ca8d09296b520cbd414a2078235"
+      },
+      "source_commit": "bcd466018cff101c34b281a4fe234bdc1f33fb0a",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235"
+    },
+    {
+      "repository_role": "accelerate",
+      "review": {
+        "counts": {
+          "identical": 12,
+          "missing": 0,
+          "modified": 1
+        },
+        "git_state_mutated": false,
+        "lean_admission_granted": false,
+        "model_executed": false,
+        "paths": [
+          {
+            "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/README.md",
+            "source": {
+              "blob": "f913d7050a415c7d01d7dd67fd228a29b83f79f9",
+              "bytes": 3769,
+              "mode": "100644",
+              "sha256": "94d8857a357bb6289b1dc65e3f0b676e2fa1b8cb814f7b653543c7e35d68036e"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "f913d7050a415c7d01d7dd67fd228a29b83f79f9",
+              "bytes": 3769,
+              "mode": "100644",
+              "sha256": "94d8857a357bb6289b1dc65e3f0b676e2fa1b8cb814f7b653543c7e35d68036e"
+            }
+          },
+          {
+            "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/artifact-manifest.json",
+            "source": {
+              "blob": "19791087708368bf1859f76acfff30c0221ee92e",
+              "bytes": 1394,
+              "mode": "100644",
+              "sha256": "6af1bf2d0dc278032418c7c291c9c394a703d8067ec39d14585a06ab8f52ddec"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "19791087708368bf1859f76acfff30c0221ee92e",
+              "bytes": 1394,
+              "mode": "100644",
+              "sha256": "6af1bf2d0dc278032418c7c291c9c394a703d8067ec39d14585a06ab8f52ddec"
+            }
+          },
+          {
+            "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/failed-attempt-accounting.json",
+            "source": {
+              "blob": "6e7e8bdf86c1ae07bc1e1138c1fc0d954fed87b4",
+              "bytes": 18472,
+              "mode": "100644",
+              "sha256": "1599bf2dab4efd612d606568ad10547bdd803928ada8644605c2e688d3a58666"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "6e7e8bdf86c1ae07bc1e1138c1fc0d954fed87b4",
+              "bytes": 18472,
+              "mode": "100644",
+              "sha256": "1599bf2dab4efd612d606568ad10547bdd803928ada8644605c2e688d3a58666"
+            }
+          },
+          {
+            "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/helper-tests.json",
+            "source": {
+              "blob": "46d664f1559ea9a7448e13b0df6ee58e98865cbd",
+              "bytes": 2654,
+              "mode": "100644",
+              "sha256": "ca18bcd7c67764394e268c2c5c635d04b60e581286c3268f183fd238908096fa"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "46d664f1559ea9a7448e13b0df6ee58e98865cbd",
+              "bytes": 2654,
+              "mode": "100644",
+              "sha256": "ca18bcd7c67764394e268c2c5c635d04b60e581286c3268f183fd238908096fa"
+            }
+          },
+          {
+            "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/independent-review.json",
+            "source": {
+              "blob": "3577fc8a09b825709b168674d6ea1bbafd60b5d4",
+              "bytes": 7967,
+              "mode": "100644",
+              "sha256": "72035209ccdc419a01c53061503cd568a2849003c795794617650c4eafb647df"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "3577fc8a09b825709b168674d6ea1bbafd60b5d4",
+              "bytes": 7967,
+              "mode": "100644",
+              "sha256": "72035209ccdc419a01c53061503cd568a2849003c795794617650c4eafb647df"
+            }
+          },
+          {
+            "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/provider-tests.json",
+            "source": {
+              "blob": "620e0d34b567497d428b4af263305710f5aec5fb",
+              "bytes": 1919,
+              "mode": "100644",
+              "sha256": "8d31b7591703c5991e977acc8f15a3a26ada75b7f385070a2f325cd5b539e0c7"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "620e0d34b567497d428b4af263305710f5aec5fb",
+              "bytes": 1919,
+              "mode": "100644",
+              "sha256": "8d31b7591703c5991e977acc8f15a3a26ada75b7f385070a2f325cd5b539e0c7"
+            }
+          },
+          {
+            "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/qualification.json",
+            "source": {
+              "blob": "934a78c1ba57adbcdd3cd38eebfbb06d4b851c09",
+              "bytes": 3023,
+              "mode": "100644",
+              "sha256": "1a26253ac693b164795677f4432182b8b2ebf0072dd9c9fb961d60d63130f2ee"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "934a78c1ba57adbcdd3cd38eebfbb06d4b851c09",
+              "bytes": 3023,
+              "mode": "100644",
+              "sha256": "1a26253ac693b164795677f4432182b8b2ebf0072dd9c9fb961d60d63130f2ee"
+            }
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/runtime/codex_planning_schema.py",
+            "source": {
+              "blob": "e0d59ff6c7f4193634bf07799182d2e00ce9de9e",
+              "bytes": 6186,
+              "mode": "100644",
+              "sha256": "1df9d13d7a076892934233672725b1dab4651bdb95bd65452f1df63df3a3d75a"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "e0d59ff6c7f4193634bf07799182d2e00ce9de9e",
+              "bytes": 6186,
+              "mode": "100644",
+              "sha256": "1df9d13d7a076892934233672725b1dab4651bdb95bd65452f1df63df3a3d75a"
+            }
+          },
+          {
+            "path": "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py",
+            "source": {
+              "blob": "cc942873f3e30d9f09ac12d555a0e4975cde6d87",
+              "bytes": 25594,
+              "mode": "100644",
+              "sha256": "e9373e4c0f10ac8a856a6d258ba4023dba960b9e20935bea86040d48f1a81238"
+            },
+            "status": "modified",
+            "target": {
+              "blob": "5925db7fa15c058e869abf6cf5aeee891e5a4136",
+              "bytes": 32366,
+              "mode": "100644",
+              "sha256": "92a5c3467a7dabb14ea43e51e0d53cea799f67fc1d3ca1c76b4c326ca9aebc3f"
+            }
+          },
+          {
+            "path": "ipfs_accelerate_py/llm_router.py",
+            "source": {
+              "blob": "e3cbeba04f2e3940077c7c98abcfca3a9a6639c8",
+              "bytes": 553806,
+              "mode": "100644",
+              "sha256": "105ae0c70ab2020e9b558a2be0f37de3f8ccf0a7bf537aa79dc16097ebd7f659"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "e3cbeba04f2e3940077c7c98abcfca3a9a6639c8",
+              "bytes": 553806,
+              "mode": "100644",
+              "sha256": "105ae0c70ab2020e9b558a2be0f37de3f8ccf0a7bf537aa79dc16097ebd7f659"
+            }
+          },
+          {
+            "path": "test/api/test_codex_cli_output_schema.py",
+            "source": {
+              "blob": "eab2205dd0375e5f9da1699c4146985170182aaa",
+              "bytes": 10277,
+              "mode": "100644",
+              "sha256": "917107ca89008d4bd5d9b70d2317f782ad0fd8d9506154dd5f8dc8bd9d01e41f"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "eab2205dd0375e5f9da1699c4146985170182aaa",
+              "bytes": 10277,
+              "mode": "100644",
+              "sha256": "917107ca89008d4bd5d9b70d2317f782ad0fd8d9506154dd5f8dc8bd9d01e41f"
+            }
+          },
+          {
+            "path": "test/api/test_codex_planning_schema.py",
+            "source": {
+              "blob": "0ae58fbfee3d2c311d034fd7a37687d1b47a1f49",
+              "bytes": 9857,
+              "mode": "100644",
+              "sha256": "b5e9e19fed206d71747aba9ba811f5b3496864f9b3ffff15b4c498c8aa0a5f11"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "0ae58fbfee3d2c311d034fd7a37687d1b47a1f49",
+              "bytes": 9857,
+              "mode": "100644",
+              "sha256": "b5e9e19fed206d71747aba9ba811f5b3496864f9b3ffff15b4c498c8aa0a5f11"
+            }
+          },
+          {
+            "path": "test/api/test_codex_structured_plan_roundtrip.py",
+            "source": {
+              "blob": "05245f7644bdcdf2736788565997024e23e9a698",
+              "bytes": 5424,
+              "mode": "100644",
+              "sha256": "b05281c671650628c7ec44421e8625455298e6298bc6fc2883ffc3cde419ee23"
+            },
+            "status": "identical",
+            "target": {
+              "blob": "05245f7644bdcdf2736788565997024e23e9a698",
+              "bytes": 5424,
+              "mode": "100644",
+              "sha256": "b05281c671650628c7ec44421e8625455298e6298bc6fc2883ffc3cde419ee23"
+            }
+          }
+        ],
+        "repository": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-accelerate-20261006",
+        "schema": "autoencoder-effective-tree-review/v1",
+        "scope": "Source presence only; modified files require review against later work.",
+        "semantic_qualification_granted": false,
+        "source_history_reachable_from_target": true,
+        "source_revision": "82671e6c8411875cb9919e3a71b07831548c0aeb",
+        "target_revision": "d5c59e961d1a0ca8d09296b520cbd414a2078235"
+      },
+      "source_commit": "82671e6c8411875cb9919e3a71b07831548c0aeb",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235"
+    }
+  ],
+  "entries": [
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "e0232b183e00c83031acd0e01d8c15e119fa0447",
+          "bytes": 6239,
+          "mode": "100644",
+          "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a"
+        }
+      },
+      "findings": [
+        "The original linguistic codec, sparse training and resume path are preserved separately from learned formula sidecars.",
+        "Target-aware vector reconstruction and provenance-based text decompilation can be exact despite semantic errors. The historical prohibition becomes obligation O; explicit numeric duration structure is incomplete."
+      ],
+      "id": "preserved-8d-linguistic-teacher",
+      "kind": "historical-runtime-preservation",
+      "limitations": [
+        "The linguistic formulas are deterministic compiler outputs, not learned latent-to-formula generation.",
+        "This replay establishes operational compatibility, not a qualified semantic teacher; bridge-off timing has zero legal-IR targets."
+      ],
+      "next_gap": "Distill independently reviewed semantic targets while preserving the immutable teacher and its runtime identity.",
+      "scope": "Historical 8D sparse residual model and deterministic linguistic codec",
+      "source": {
+        "bytes": 6239,
+        "commit": "0ced2e533c9090d21aba602c3550c5ff5ecd45eb",
+        "path": "docs/autoencoders/legacy_linguistic_validation_20261001.md",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "6109651d8ec89edf201f8deb64d91455ed62f391",
+          "bytes": 389091,
+          "mode": "100644",
+          "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b"
+        }
+      },
+      "findings": [
+        "Six fits completed 340 updates each. Final development exact counts changed 1\u21921, 47\u219248, and 46\u219244 out of 48 for 8D, 384D and 768D. Exposed R6 exact counts changed 0\u21920, 30\u219228, and 47\u219248."
+      ],
+      "id": "four-width-initial-head-comparison",
+      "kind": "restricted-authored-formula-training",
+      "limitations": [
+        "Representations have different source producers, so this is not a pure width ablation.",
+        "Final attempts and selected states differ. The 8D sidecar is distinct from the preserved linguistic teacher. The initial 4096D readiness gap was later partially resolved."
+      ],
+      "next_gap": "Use later selected 384D/768D parents and preserve the original controls; evaluate 8D object and cue fidelity separately.",
+      "scope": "Initial 8D/384D/768D authored formula sidecar comparison with frozen encoders",
+      "source": {
+        "bytes": 389091,
+        "commit": "dce8ab819331a5f5bddac86c851710fa4377c1d4",
+        "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "976fa6ad313173ca2e02c3e5bc713accbf8f1b04",
+          "bytes": 27951,
+          "mode": "100644",
+          "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285"
+        }
+      },
+      "findings": [
+        "The study completed 940 head updates: three 4096D fits of 200 updates and two 8D fits of 170 updates.",
+        "Scaled 4096D conditioning reconstructed 2/2 TRAIN clauses with CE 0.015291 versus 0.018791 unscaled. Prior freezing worsened the result.",
+        "The lower 8D rate reduced development CE 0.16349\u21920.14803, while exact remained 1/48 and correct objects fell 97\u219288/180."
+      ],
+      "id": "native4096-and-field-rates",
+      "kind": "restricted-authored-formula-training",
+      "limitations": [
+        "The two 4096D permission clauses differ only in object and supply no held-out or broad-family evidence.",
+        "The 8D candidate was rejected and its original parent retained; no encoder training or Lake execution occurred."
+      ],
+      "next_gap": "Establish broader source fidelity before scaling capacity or making optimizer convergence claims.",
+      "scope": "Matched native 4096D source conditioning and 8D field-head learning rates",
+      "source": {
+        "bytes": 27951,
+        "commit": "d466db01a32c419a765e5cef046991ddedc3c279",
+        "path": "docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "c0f334b6fc8924263b8bd7f54da027f7a1f190fa",
+          "bytes": 26924,
+          "mode": "100644",
+          "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7"
+        }
+      },
+      "findings": [
+        "740 head updates completed. The 8D covariance candidate worsened development CE 0.163492\u21920.168503 and correct objects 97\u219293/180.",
+        "The broader 4096D experiment used 12 TRAIN and 12 exposed development clauses. TRAIN exact was 7/12 unscaled and 1/12 scaled; both development exact counts were 0/12.",
+        "The study also prepared 216 unique verified native source inputs per 384D/768D encoder in 8.679/26.969 seconds."
+      ],
+      "id": "broader4096-and-8d-geometry",
+      "kind": "restricted-authored-formula-training",
+      "limitations": [
+        "TRAIN-input scaling was not adopted. The earlier 8D omission affected diagnostic normalization, not training or selection.",
+        "This is exposed authored development data, with no Lake or promotion."
+      ],
+      "next_gap": "Improve 4096D decoder generalization beyond two-row fitting.",
+      "scope": "Corrected 8D diagnostic geometry and broader 4096D authored development experiment",
+      "source": {
+        "bytes": 26924,
+        "commit": "fd89d2a48aa0de771dd22ec8fd079af10732051f",
+        "path": "docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "ec73d2b1fa9a9a698ac2039a96edcd156d52ffa9",
+          "bytes": 3049472,
+          "mode": "100644",
+          "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac"
+        }
+      },
+      "findings": [
+        "Four 170-update fits completed 680 updates; all original development endpoints were 48/48 exact.",
+        "Exposed v3 exact changed 20\u219218/48 at 384D and stayed 46/48 at 768D. Fit calls were 38.389/38.103 seconds at 384D and 50.626/50.639 seconds at 768D."
+      ],
+      "id": "train-paraphrase-mixture",
+      "kind": "restricted-authored-formula-training",
+      "limitations": [
+        "The exposed v3 panel is regression data, not a fresh holdout. The encoder did not execute and cached vectors were warm.",
+        "The changed mixture did not improve exact reconstruction."
+      ],
+      "next_gap": "Preserve ordinary decoder batches while testing additional semantic supervision.",
+      "scope": "Original-only versus half-paraphrase TRAIN exposure at 384D and 768D",
+      "source": {
+        "bytes": 3049472,
+        "commit": "aa586a9b91b583a2ac5d867bd107ba0c5a4762d5",
+        "path": "docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "0bd3ddd91558c6bc2889aaf1521a438d919d5f43",
+          "bytes": 3547468,
+          "mode": "100644",
+          "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d"
+        }
+      },
+      "findings": [
+        "Four fits completed 680 updates and 232 focused tests passed. The zero arm replayed ordinary historical training exactly.",
+        "Original development remained 48/48. Exposed v3 exact changed 20\u219219/48 at 384D and stayed 46/48 at 768D; CE fell 0.030589255\u21920.028552217 and 0.003361466\u21920.003004750.",
+        "Fit calls changed 40.964\u219242.164 and 50.002\u219250.582 seconds. The full 180-clause TRAIN modality readout was already 180/180 before training."
+      ],
+      "id": "train-paraphrase-modality",
+      "kind": "restricted-authored-formula-training",
+      "limitations": [
+        "Lower CE supplied no exact reconstruction gain or promotion. Positive supervision adds explicit work; the arms do not have equal FLOPs.",
+        "No Lake build, bridge evaluate or convergence measurement occurred."
+      ],
+      "next_gap": "Investigate recurrent contributions and wording-specific modality errors before increasing the saturated auxiliary weight.",
+      "scope": "Independent balanced R4 modality auxiliary loss, weight zero versus 0.05, at 384D/768D",
+      "source": {
+        "bytes": 3547468,
+        "commit": "60f5c2951ac34231f05b54e50f2725296871c5b9",
+        "path": "docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "6ee2e3727049945ffaf1ab2184104af925bbbb78",
+          "bytes": 6276,
+          "mode": "100644",
+          "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918"
+        }
+      },
+      "findings": [
+        "The positive 768D final attempts achieved 96/96 exact with 12.6% lower CE than the execution control. Both were rejected by the unchanged development extra-rule gate; selected positive 768D states scored 0/96.",
+        "384D final exact was 61/96, matching the original path but with 2.6% worse CE than the zero control; the 8D sidecar remained 0/96 exact."
+      ],
+      "id": "source-margin-two-seed-study",
+      "kind": "restricted-authored-formula-training",
+      "limitations": [
+        "48 sources observed under two seeds are 96 predictions, not 96 independent examples.",
+        "R6 is now exposed, and a rejected final attempt is not a qualified or promoted head."
+      ],
+      "next_gap": "Improve modality and whole-rule fidelity under the unchanged selection policy.",
+      "scope": "18 restricted authored fits of 340 updates each, two seeds, R6 wording observation",
+      "source": {
+        "bytes": 6276,
+        "commit": "1b6461e65f15635b89d04609dae01a4196cd3ea5",
+        "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "7492e4c61cc38f7459ffd2cd9c6b144ba58c7e67",
+          "bytes": 647843,
+          "mode": "100644",
+          "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1"
+        }
+      },
+      "findings": [
+        "The deterministic ridge head reconstructed 24/24 in each domain. GRU Intent counts were 3/24 and 8/24; UI counts were 3/24 and 2/24.",
+        "Ridge public fitting took about 0.140 seconds, with warm common-validation readout of 0.226 ms per Intent span and 0.326 ms per UI span.",
+        "The follow-up ran 14 actual successful builds: five IntentIR and nine UIUXIR. Four wrong Intent predictions were blocked before Lake."
+      ],
+      "id": "intent-ui-composition-ridge",
+      "kind": "source-to-typed-candidate-training",
+      "limitations": [
+        "The test uses known TRAIN vocabulary and a fixed shape. Every built report is partial: Intent has 10/40 routes and UI 2/40.",
+        "Six wrong UI GRU candidates also passed Lake, demonstrating the separate requirement for source fidelity."
+      ],
+      "next_gap": "Add complete source-bound document fidelity and richer targets while keeping this fixed-schema head separate from GRU experiments.",
+      "scope": "384D fixed-schema Intent/UI reconstruction of 24 sealed test compositions per domain",
+      "source": {
+        "bytes": 647843,
+        "commit": "6589f788791f8991a8b856fbc3fc5fa396d17229",
+        "path": "docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "6e2b5fb65a61697b2999e80750d40a450183b893",
+          "bytes": 24229,
+          "mode": "100644",
+          "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517"
+        }
+      },
+      "findings": [
+        "The comparison ran 20 actual IntentIR/UIUXIR Lake builds and 390 projection checks.",
+        "Common-support held-out loss fell 0.026985\u21920.001958 for Intent and 0.008037\u21920.002575 for UI. Known atom coverage rose 15.108\u219299.651% and 56.543\u219297.876%.",
+        "Complete support retained 26,986 Intent atoms and 7,329 UI atoms; numerical refinement consumed 7.55 of 315.04 seconds of full fitting."
+      ],
+      "id": "complete-intent-ui-feature-loss",
+      "kind": "compiler-target-feature-reconstruction",
+      "limitations": [
+        "The gain mainly restores support and individual family regressions remain. The adaptive schedule shows no broad win; fixed remains default.",
+        "Compiler-target feature reconstruction is distinct from independent source-to-formula fidelity."
+      ],
+      "next_gap": "Reuse full-support metrics and guarded native checks while resolving family regressions and decoder grammar gaps.",
+      "scope": "Native family feature reconstruction, complete support versus a 4,096-atom cap, 12 fits",
+      "source": {
+        "bytes": 24229,
+        "commit": "df732e8aaf5b4eec7373f1581e7193d7c0a91134",
+        "path": "docs/autoencoders/complete_features_and_ui_fidelity.md",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "979a2babb490c8c68d2a9810de4d18f05b66481d",
+          "bytes": 307406,
+          "mode": "100644",
+          "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95"
+        }
+      },
+      "findings": [
+        "Nine actual lake build UIUXIR executions passed; all 12 new modal projection occurrences passed parser, lowering and Lake checks.",
+        "The seven-entry UI minimum floor is satisfied, with seven of 40 families validated somewhere in the fixture union.",
+        "Every strict training gate remains closed. Compound targets contain 575\u2013759 tokens, exceeding the unchanged 64-token codec and its grammar."
+      ],
+      "id": "ui-temporal-dcec-floor",
+      "kind": "authored-native-projection-validation",
+      "limitations": [
+        "Declared norms, beliefs and traces are interpretations, not truths or observed runtime behavior.",
+        "Prepared authored targets are not learned decoder outputs."
+      ],
+      "next_gap": "Develop a lossless supported target representation and source-specific family reviews without truncation or increasing the encoder context.",
+      "scope": "23 authored declared UI projection fixtures; no neural inference or optimizer",
+      "source": {
+        "bytes": 307406,
+        "commit": "ea275ae32779db01c7dc59dc62ce12bcd9841ae2",
+        "path": "docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "9eacf7e79610dbf7b728e323ac754f0381fb7914",
+          "bytes": 8596,
+          "mode": "100644",
+          "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398"
+        }
+      },
+      "findings": [
+        "Learned production choices form candidate ASTs; an independently reparsed comparison rejects incorrect predictions.",
+        "Complete-function source and byte-map adapters retain unsupported coverage; model-off controls cannot obtain deterministic production fallback.",
+        "The supervisor consumes source-bound candidates and native proof-work plans through ModelManager and DuckLake."
+      ],
+      "id": "security-production-head",
+      "kind": "bounded-source-production-decoder",
+      "limitations": [
+        "This is not arbitrary software formalization or a learned security specification.",
+        "The advisory Security-CVE checkpoint still has 44 AST features and no formula head. Authored contracts and solver diagnostics do not establish source qualification."
+      ],
+      "next_gap": "Preserve separate advisory and formula-head identities and expand independently reviewed grammar and function coverage.",
+      "scope": "Bounded parser-scaffolded source production decoder with a separate learned grammar head",
+      "source": {
+        "bytes": 8596,
+        "commit": "2d93857e78ceedc7f055637c887afeaa40653993",
+        "path": "docs/security_formula_decoder.md",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "workspace",
+        "target_commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+        "target_report_identity": {
+          "blob": "0feb32e6676e94855a26c6f4032106447200b8ba",
+          "bytes": 66071,
+          "mode": "100644",
+          "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83"
+        }
+      },
+      "findings": [
+        "All neural models beat TRAIN mean-vector MSE, but all trail TRAIN-only PCA.",
+        "Mean latent authored-facet nDCG was 0.96408 versus raw 0.96190 at 384D and 0.95623 versus raw 0.98384 at 768D."
+      ],
+      "id": "source-ae-frozen-control",
+      "kind": "source-vector-reconstruction-and-retrieval",
+      "limitations": [
+        "There is no formal-target or proof supervision; relevance is authored development evidence.",
+        "Dense centered TRAIN rank is 15, below the 32/64 bottlenecks. These MLPs are distinct from sparse legal runtimes and formula sidecars."
+      ],
+      "next_gap": "Keep raw, mean and PCA controls and define formal-target alignment separately.",
+      "scope": "Nine source-only 8D/384D/768D neural reconstruction models, TRAIN16 and authored development",
+      "source": {
+        "bytes": 66071,
+        "commit": "e44254d4dd9e9a873d1b7a257f53286f35860e01",
+        "path": "artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding",
+        "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "workspace",
+        "target_commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+        "target_report_identity": {
+          "blob": "d60928d72775a86b0587e1aec98a6879f5350ba2",
+          "bytes": 102630,
+          "mode": "100644",
+          "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5"
+        }
+      },
+      "findings": [
+        "1,827 actual updates include private resume checks; the nine selected models have 1,800 updates, 200 per model.",
+        "Mean DEV MSE improved 82.36%, 80.94% and 77.03% against the older same-seed models, but every new model remains worse than TRAIN-only PCA.",
+        "Models and Adam state were published to immutable Publicus/legal-ir-autoencoder revision d624057cf58e0090a0db9a3ad25857aaa91357de."
+      ],
+      "id": "source-ae-authored32-expansion",
+      "kind": "source-vector-reconstruction-training",
+      "limitations": [
+        "All five semantic, decoder, contrastive, proof and fidelity masks remain zero.",
+        "Changing TRAIN cohorts measures adaptation rather than an isolated sample-size benefit. TRAIN rank 31 limits capacity interpretation."
+      ],
+      "next_gap": "Admit richer paired source/formal targets and compare matched decoders before choosing capacity by vector MSE.",
+      "scope": "64 authored sources, TRAIN32/DEV32, nine MLP fits with widths 8\u219216\u21924, 384\u2192128\u219232 and 768\u2192128\u219264",
+      "source": {
+        "bytes": 102630,
+        "commit": "67bd5f1a3d6ff1540bd594e1205d753eb44f03ef",
+        "path": "artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding",
+        "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "workspace",
+        "target_commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+        "target_report_identity": {
+          "blob": "34fa3ebe4372502f6bfc4ff3f73ccba9209000f0",
+          "bytes": 139006,
+          "mode": "100644",
+          "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a"
+        }
+      },
+      "findings": [
+        "Raw, PCA-reconstructed, AE-reconstructed and rotated raw inputs generate identical IR/status/reason for all 64 sources per seed.",
+        "Raw proposal counts are 1/64, 1/64 and 8/64; the other 182 paired occurrences abstain for overlapping copied spans.",
+        "Zero and disabled conditioning each change three paired outcomes; internal conditioning scores are active."
+      ],
+      "id": "frozen-law-conditioner-interventions",
+      "kind": "frozen-native768-source-span-decoder-inference",
+      "limitations": [
+        "Full 768D inverse reconstructions perturb a raw-trained decoder; this is neither matched conditioner training nor compression.",
+        "Every output remains a proposal, with no independent fidelity label or proof."
+      ],
+      "next_gap": "Resolve source-span assignments, symbol binding and optional presence before representation capacity selection.",
+      "scope": "64 sources \u00d7 three native 768D source-span decoders \u00d7 six conditioning controls, 1,152 forwards",
+      "source": {
+        "bytes": 139006,
+        "commit": "b48ec0fb6aa1b45a46c1239f50f645d03ab74808",
+        "path": "artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding",
+        "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "workspace",
+        "target_commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+        "target_report_identity": {
+          "blob": "3e2fe539138480978771deec65df10975c1be95c",
+          "bytes": 32394,
+          "mode": "100644",
+          "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42"
+        }
+      },
+      "findings": [
+        "Proposals rose from 10 to 183/192, preserving all ten previous proposals. 173 former overlap abstentions yielded new unaccepted proposals.",
+        "Top-16 span candidates and beam size 64 leave nine retained-search abstentions.",
+        "Worker wall time was 8.462 seconds, parent time 10.271 seconds and maximum worker RSS 724,032 KiB, excluding source encoding and training."
+      ],
+      "id": "bounded-joint-span-policy",
+      "kind": "frozen-native768-policy-diagnostic",
+      "limitations": [
+        "The single copied deontic rule can still have wrong actor, modality or qualifier binding.",
+        "Every search pruned candidates or beam states, so neither full-space infeasibility nor a global optimum is established. Structural coverage is not semantic accuracy."
+      ],
+      "next_gap": "Retain a diagnostic proposal policy and independently review role, attachment and presence fidelity before using outputs as targets.",
+      "scope": "192 shared native 768D forwards and 384 greedy/joint policy outcomes",
+      "source": {
+        "bytes": 32394,
+        "commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+        "path": "artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding",
+        "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "workspace",
+        "target_commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+        "target_report_identity": {
+          "blob": "34bd372c10b275d236c568c712709c05cd6ba376",
+          "bytes": 392135,
+          "mode": "100644",
+          "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851"
+        }
+      },
+      "findings": [
+        "Raw, PCA and AE joint IR/status/reason match on every one of 192 paired occurrences; each produces 183 proposals.",
+        "Rotation changes one joint modality record, while zero and disabled conditioning change 26 and 31 joint IR/status/reason records.",
+        "Across controls, joint selection produces 1,099 proposals versus 61 greedy proposals, preserving all 61. Worker wall time was 20.665 seconds, parent time 22.443 seconds and maximum worker RSS 774,896 KiB."
+      ],
+      "id": "joint-span-six-condition-control",
+      "kind": "frozen-native768-policy-diagnostic",
+      "limitations": [
+        "Independent review and broad-family semantic masks remain zero. This repeats the same 64 sources and checkpoints, so it is not another independent confirmation cohort.",
+        "Enabled zero conditioning retains FiLM biases, while disabling the gate removes its residual."
+      ],
+      "next_gap": "Review source roles, modality, negation, attachment and presence pairs, then compare matched raw/PCA/AE/source-only decoder training.",
+      "scope": "1,152 native forwards and 2,304 policy outcomes, three seeds and six conditioners",
+      "source": {
+        "bytes": 392135,
+        "commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+        "path": "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+        "reachable_from_reviewed_origin_main": true,
+        "repository": "/home/barberb/lift_coding",
+        "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "c615617af25dabd7dac2e4ee84b4975c2a54111e",
+          "bytes": 22379,
+          "mode": "100644",
+          "sha256": "e05bd76ef4577698f0cd5aeb3b8676974d661f22808aebed58c7626f9543361b"
+        }
+      },
+      "findings": [
+        "Both widths48/48 ordered and canonical IRs,180/180 rules, exact historical raw token/status/EOS parity.",
+        "Deterministic source-withheld text baseline48 outputs per width:0/48 UTF8 and0/48 NFC/whitespace exact.",
+        "Same original state/donor/paragraph/clause assets; generation/evaluation separated;454 saved local controls passed."
+      ],
+      "id": "original-contextual-cached-replay-and-text-baseline",
+      "kind": "original-cached-decoder-replay-and-separate-source-withheld-text-evaluation",
+      "limitations": [
+        "Every qualifier list is empty; no independent semantic holdout, trained prose head,8192 trial or proof.",
+        "Caller-pinned paragraph bytes alone do not authenticate native producer provenance; saved clause-context joins bind supplied clause/context bytes to the original saved inventory."
+      ],
+      "next_gap": "Fresh grouped source fidelity, explicit prose decoder/residual contract and task-specific warm-start transfer.",
+      "scope": "Original selected Legal384/768, exposed48 paragraphs and180 rules per width, cached512 experiment.",
+      "source": {
+        "bytes": 22379,
+        "commit": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+        "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.json",
+        "repository": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006",
+        "sha256": "e05bd76ef4577698f0cd5aeb3b8676974d661f22808aebed58c7626f9543361b"
+      }
+    },
+    {
+      "current_main_observation": {
+        "effective_report_status": "identical",
+        "history_reachable": true,
+        "repository_role": "datasets",
+        "target_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "target_report_identity": {
+          "blob": "d9f232d8704295ade390527c3f38a2446be93080",
+          "bytes": 2902845,
+          "mode": "100644",
+          "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496"
+        }
+      },
+      "findings": [
+        "384D new wording exact55/60->60/60;768D60/60 in both arms.",
+        "Original48-row development stays48/48;768 auxiliary token CE is slightly worse, so gains are width-specific.",
+        "Four unique trained tensors; selected/last aliases do not count as independent replications;297 published pure contracts."
+      ],
+      "id": "broader-normative-wording-paired-decoder-fits",
+      "kind": "decoder-modality-auxiliary-training-and-prospective-wording-development",
+      "limitations": [
+        "Prospective wording is not untouched meaning; empty qualifiers and fixed32-token grammar.",
+        "No native compiler/logic-family projection/prover/Lake in this experiment and no automatic checkpoint promotion."
+      ],
+      "next_gap": "Replay exposed v3 retention and independently reviewed richer/groups before promotion or extending decoder dialect.",
+      "scope": "Two native widths, zero/0.05 arms, original90 TRAIN meanings and separately authored60 wording sources from30 exposed DEV meanings.",
+      "source": {
+        "bytes": 2902845,
+        "commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "path": "docs/implementation/reports/evidence/decoder-normative-wording-20261006/results.json",
+        "repository": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006",
+        "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496"
+      }
+    }
+  ],
+  "existing_weights_or_caches_modified": false,
+  "main_source_omissions_found_in_selected_contributions": 0,
+  "model_or_training_executed_by_this_review": false,
+  "new_observation_count": 2,
+  "non_aggregation_rules": [
+    "Repeated observations of 48 sources under different seeds are not independent holdouts.",
+    "Source-vector MSE, formula token CE and Lake counts measure different objectives.",
+    "Do not merge tensors or sparse updates across runtime, decoder grammar or embedding profiles.",
+    "The new source-only 8\u219216\u21924 MLP is distinct from the protected historical 8D linguistic teacher.",
+    "A final attempt rejected by an unchanged gate cannot be promoted from its diagnostic score."
+  ],
+  "prior_review_pin": {
+    "bytes": 24910,
+    "commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+    "path": "artifacts/autoencoder-integration-review-20261006/findings/evidence-matrix.json",
+    "sha256": "4ea1c62da24b33742faa9261d131b653f11cb03da7244d2d487babb82fa98dad"
+  },
+  "prior_study_count": 16,
+  "reviewed_main_snapshots": {
+    "accelerate": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+    "datasets": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "workspace": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb"
+  },
+  "schema": "autoencoder-current-effort-integration-ledger/v1",
+  "scope": "Selected explicit contribution/report paths at immutable snapshots; inventory does not qualify every branch or live divergent file.",
+  "semantic_or_proof_admission_granted": false,
+  "study_count": 18
+}

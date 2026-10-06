@@ -1,0 +1,566 @@
+{
+  "counts": {
+    "identical": 33,
+    "missing": 0,
+    "modified": 1
+  },
+  "git_state_mutated": false,
+  "lean_admission_granted": false,
+  "model_executed": false,
+  "paths": [
+    {
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/ir_model_publication_handoff.md",
+      "source": {
+        "blob": "c9c3e3a116c25d877ef8bf54b89278f45f13a2d3",
+        "bytes": 13779,
+        "mode": "100644",
+        "sha256": "6a9830769de928162041732be612ba3a1d84793dacf660a792fe5db6c3305c3f"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "c9c3e3a116c25d877ef8bf54b89278f45f13a2d3",
+        "bytes": 13779,
+        "mode": "100644",
+        "sha256": "6a9830769de928162041732be612ba3a1d84793dacf660a792fe5db6c3305c3f"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "source": {
+        "blob": "04e8237a468e2483e398a0eaf0d69fe582208720",
+        "bytes": 14249,
+        "mode": "100644",
+        "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "04e8237a468e2483e398a0eaf0d69fe582208720",
+        "bytes": 14249,
+        "mode": "100644",
+        "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_source_fidelity.py",
+      "source": {
+        "blob": "b8ef63ff16af02fbad65ee483692fc2583b61749",
+        "bytes": 17329,
+        "mode": "100644",
+        "sha256": "1eb1f116e74f4f35804b6398de9b9224da1fb7b50f9ef96a718ce2977f819bac"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b8ef63ff16af02fbad65ee483692fc2583b61749",
+        "bytes": 17329,
+        "mode": "100644",
+        "sha256": "1eb1f116e74f4f35804b6398de9b9224da1fb7b50f9ef96a718ce2977f819bac"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_cell_routing.py",
+      "source": {
+        "blob": "08472163d5c22ab0408d700b9f691770671dad04",
+        "bytes": 20422,
+        "mode": "100644",
+        "sha256": "e5ad1d9ca5187abf39d66f18be7c4ec5a891a2da6d2e571ad4132edae8b7528a"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "08472163d5c22ab0408d700b9f691770671dad04",
+        "bytes": 20422,
+        "mode": "100644",
+        "sha256": "e5ad1d9ca5187abf39d66f18be7c4ec5a891a2da6d2e571ad4132edae8b7528a"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_cell_runtime.py",
+      "source": {
+        "blob": "4340d21a71e30446c31ae38893488955118e0e5b",
+        "bytes": 15209,
+        "mode": "100644",
+        "sha256": "673702cc415b37d9597bbe5ccf259717d77f8335a0c2269265cddc4dff49ffdd"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "4340d21a71e30446c31ae38893488955118e0e5b",
+        "bytes": 15209,
+        "mode": "100644",
+        "sha256": "673702cc415b37d9597bbe5ccf259717d77f8335a0c2269265cddc4dff49ffdd"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_cell_target_compatibility.py",
+      "source": {
+        "blob": "945b837f129f432af819991591ca762bbc615a50",
+        "bytes": 18253,
+        "mode": "100644",
+        "sha256": "49251451146d94bf0ba784b4d9e439174efcb602d17daa16fc0bf9986fea33ab"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "945b837f129f432af819991591ca762bbc615a50",
+        "bytes": 18253,
+        "mode": "100644",
+        "sha256": "49251451146d94bf0ba784b4d9e439174efcb602d17daa16fc0bf9986fea33ab"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_decoder_format_runtime.py",
+      "source": {
+        "blob": "74620208d32c29b41733cf21aab9e39882096657",
+        "bytes": 22669,
+        "mode": "100644",
+        "sha256": "e5521f573a5d592c2f452742c827104fe613d227591a04ab255ec46b2d34e33b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "74620208d32c29b41733cf21aab9e39882096657",
+        "bytes": 22669,
+        "mode": "100644",
+        "sha256": "e5521f573a5d592c2f452742c827104fe613d227591a04ab255ec46b2d34e33b"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_decoder_profile_inventory.py",
+      "source": {
+        "blob": "cf99ea1c401e69f5a765b6d8470b68cab659a74e",
+        "bytes": 20396,
+        "mode": "100644",
+        "sha256": "bc8aab1ba3a53b91c0e39fc813983657e52e07118a14c0d65c3c4e2aa660face"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "cf99ea1c401e69f5a765b6d8470b68cab659a74e",
+        "bytes": 20396,
+        "mode": "100644",
+        "sha256": "bc8aab1ba3a53b91c0e39fc813983657e52e07118a14c0d65c3c4e2aa660face"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_model_hub_publish.py",
+      "source": {
+        "blob": "33d28fccb01786fbb0fe01d2c0601f17cacc5819",
+        "bytes": 14204,
+        "mode": "100644",
+        "sha256": "bf6e0faa7f78054b3bfa751a10b854249b2174b53b83981091b653c5572d9780"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "33d28fccb01786fbb0fe01d2c0601f17cacc5819",
+        "bytes": 14204,
+        "mode": "100644",
+        "sha256": "bf6e0faa7f78054b3bfa751a10b854249b2174b53b83981091b653c5572d9780"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "source": {
+        "blob": "1ab6ba6a523137ca25ffbcc32e44a630e058569e",
+        "bytes": 29300,
+        "mode": "100644",
+        "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "1ab6ba6a523137ca25ffbcc32e44a630e058569e",
+        "bytes": 29300,
+        "mode": "100644",
+        "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_original_corpus_runtime.py",
+      "source": {
+        "blob": "a9bd6115599d99e2fdb22581e78750715e961be1",
+        "bytes": 14468,
+        "mode": "100644",
+        "sha256": "03b9dd075227982f67543bdd7352f52186ba33f1dd98158342bab2aa37735b4f"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "a9bd6115599d99e2fdb22581e78750715e961be1",
+        "bytes": 14468,
+        "mode": "100644",
+        "sha256": "03b9dd075227982f67543bdd7352f52186ba33f1dd98158342bab2aa37735b4f"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder.py",
+      "source": {
+        "blob": "27a8afb136ab962852c604d5c98ae40d7d136182",
+        "bytes": 32609,
+        "mode": "100644",
+        "sha256": "035ca389848a37344025a69c8788fd66179f60ac21207c24779faeeb936c6f8a"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "27a8afb136ab962852c604d5c98ae40d7d136182",
+        "bytes": 32609,
+        "mode": "100644",
+        "sha256": "035ca389848a37344025a69c8788fd66179f60ac21207c24779faeeb936c6f8a"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+      "source": {
+        "blob": "7331939ac4fcbfb86f0d3a589a2edbd49142b4d2",
+        "bytes": 31851,
+        "mode": "100644",
+        "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "7331939ac4fcbfb86f0d3a589a2edbd49142b4d2",
+        "bytes": 31851,
+        "mode": "100644",
+        "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "source": {
+        "blob": "863b103e4b29871504549d81835012be5fc839e8",
+        "bytes": 14816,
+        "mode": "100644",
+        "sha256": "dcc63a3bd10c1a699fbd0addfb44a04ffab8cbf6b4594164bb4ed824bdb5dbf1"
+      },
+      "status": "modified",
+      "target": {
+        "blob": "807db7726e21c6e687e1318324a60f0b22eb650a",
+        "bytes": 14958,
+        "mode": "100644",
+        "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ui_declared_source_fidelity.py",
+      "source": {
+        "blob": "75c235383ed5b85a1d9e4a0c5417affa3ea7fb20",
+        "bytes": 11764,
+        "mode": "100644",
+        "sha256": "f36c85052bc553a1d50e5efce5b644864e51d0ef13d89d0a06a76d8f0e442daf"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "75c235383ed5b85a1d9e4a0c5417affa3ea7fb20",
+        "bytes": 11764,
+        "mode": "100644",
+        "sha256": "f36c85052bc553a1d50e5efce5b644864e51d0ef13d89d0a06a76d8f0e442daf"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/intent_ir/autoencoder.py",
+      "source": {
+        "blob": "14cdf673b44e46f7263daca506813ad5f836aa68",
+        "bytes": 1006,
+        "mode": "100644",
+        "sha256": "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "14cdf673b44e46f7263daca506813ad5f836aa68",
+        "bytes": 1006,
+        "mode": "100644",
+        "sha256": "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/security_ir/autoencoder.py",
+      "source": {
+        "blob": "3470d2506d50d4dbc72526bcc77f0b353573a8b3",
+        "bytes": 1012,
+        "mode": "100644",
+        "sha256": "e474b10b56e83dd1398276226ce3996c589eb969196122a8f85edeb5aa998b65"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "3470d2506d50d4dbc72526bcc77f0b353573a8b3",
+        "bytes": 1012,
+        "mode": "100644",
+        "sha256": "e474b10b56e83dd1398276226ce3996c589eb969196122a8f85edeb5aa998b65"
+      }
+    },
+    {
+      "path": "scripts/ops/autoencoder/benchmark_decoder_source_fidelity.py",
+      "source": {
+        "blob": "4a827e6aca6350eacd694a74ad81b3af43d2494a",
+        "bytes": 20049,
+        "mode": "100644",
+        "sha256": "4ab6d8b525a3edf0255e13936f74eb34fc56b2deb443f3b332466e9161fe92eb"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "4a827e6aca6350eacd694a74ad81b3af43d2494a",
+        "bytes": 20049,
+        "mode": "100644",
+        "sha256": "4ab6d8b525a3edf0255e13936f74eb34fc56b2deb443f3b332466e9161fe92eb"
+      }
+    },
+    {
+      "path": "scripts/ops/autoencoder/benchmark_source_training_v2.py",
+      "source": {
+        "blob": "78071af9baa6b5532afb10412a704a8ba9a7a411",
+        "bytes": 11766,
+        "mode": "100644",
+        "sha256": "2387eb53540637b9655073f4a0c1bead8fad79765cb59b20dfe1f671e9ad3653"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "78071af9baa6b5532afb10412a704a8ba9a7a411",
+        "bytes": 11766,
+        "mode": "100644",
+        "sha256": "2387eb53540637b9655073f4a0c1bead8fad79765cb59b20dfe1f671e9ad3653"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_benchmark_decoder_source_fidelity.py",
+      "source": {
+        "blob": "8595399958fd28e3af93e61d4fc79e8042e8364c",
+        "bytes": 8281,
+        "mode": "100644",
+        "sha256": "b875fb3a76ba4eb7d8e72fd73b48d2dcb5d4b3000c474b73a4e2758b0c627846"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "8595399958fd28e3af93e61d4fc79e8042e8364c",
+        "bytes": 8281,
+        "mode": "100644",
+        "sha256": "b875fb3a76ba4eb7d8e72fd73b48d2dcb5d4b3000c474b73a4e2758b0c627846"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_clause_source_context.py",
+      "source": {
+        "blob": "b7e52d77b2c374dd24956ab991fbe281851db08b",
+        "bytes": 9129,
+        "mode": "100644",
+        "sha256": "6941cd511db4ec5073aad322efaaf9ec31a8ef29836096bde8152ee16c11b534"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b7e52d77b2c374dd24956ab991fbe281851db08b",
+        "bytes": 9129,
+        "mode": "100644",
+        "sha256": "6941cd511db4ec5073aad322efaaf9ec31a8ef29836096bde8152ee16c11b534"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_codebase_autoencoder.py",
+      "source": {
+        "blob": "7cc5ff09180ec7afca7006ca4091097d2df3d571",
+        "bytes": 9640,
+        "mode": "100644",
+        "sha256": "719366a620e6fc29795d163310a95b3597fd6bfafb28c00c9734a4d075dfc3db"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "7cc5ff09180ec7afca7006ca4091097d2df3d571",
+        "bytes": 9640,
+        "mode": "100644",
+        "sha256": "719366a620e6fc29795d163310a95b3597fd6bfafb28c00c9734a4d075dfc3db"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_decoder_source_fidelity.py",
+      "source": {
+        "blob": "bd502aa4e2d278cd6a2ecb9224114010ac35b749",
+        "bytes": 13587,
+        "mode": "100644",
+        "sha256": "ae311096039a7d82b15b3bca0789bd0b0d4152a6d4b6fd29ebded18182f289cb"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "bd502aa4e2d278cd6a2ecb9224114010ac35b749",
+        "bytes": 13587,
+        "mode": "100644",
+        "sha256": "ae311096039a7d82b15b3bca0789bd0b0d4152a6d4b6fd29ebded18182f289cb"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_cell_routing.py",
+      "source": {
+        "blob": "e18cbdd670e3e2f323f50156af707dd3c5e90290",
+        "bytes": 38015,
+        "mode": "100644",
+        "sha256": "cd941d503c18fb752202cfeceb72184c0496ea9f7cecfb5fa8721b450fc04bd4"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "e18cbdd670e3e2f323f50156af707dd3c5e90290",
+        "bytes": 38015,
+        "mode": "100644",
+        "sha256": "cd941d503c18fb752202cfeceb72184c0496ea9f7cecfb5fa8721b450fc04bd4"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_cell_runtime.py",
+      "source": {
+        "blob": "b2e915185339ad90c5fa571ebd163f67e4bd0287",
+        "bytes": 29082,
+        "mode": "100644",
+        "sha256": "10d3dba7ffbf4867cac35e2a4e43bc7ef84955278a20d5c815c6d0aed8b98805"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b2e915185339ad90c5fa571ebd163f67e4bd0287",
+        "bytes": 29082,
+        "mode": "100644",
+        "sha256": "10d3dba7ffbf4867cac35e2a4e43bc7ef84955278a20d5c815c6d0aed8b98805"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_cell_target_compatibility.py",
+      "source": {
+        "blob": "20845b234e97c6c488d25770d9d4e2b7036a2b36",
+        "bytes": 31880,
+        "mode": "100644",
+        "sha256": "7386436c9efe3d8360cd0c90acaae33f9fa1a4e8f02258e3d6f4388e26f3fe33"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "20845b234e97c6c488d25770d9d4e2b7036a2b36",
+        "bytes": 31880,
+        "mode": "100644",
+        "sha256": "7386436c9efe3d8360cd0c90acaae33f9fa1a4e8f02258e3d6f4388e26f3fe33"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_decoder_format_runtime.py",
+      "source": {
+        "blob": "9dfb205ef6ab7a5c6f78f1f99d094a934fbb5116",
+        "bytes": 36795,
+        "mode": "100644",
+        "sha256": "42270c0d7528b88da26b061e6e7fb74c265bfb56f5720a7aae4ac4b2a1aa14eb"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "9dfb205ef6ab7a5c6f78f1f99d094a934fbb5116",
+        "bytes": 36795,
+        "mode": "100644",
+        "sha256": "42270c0d7528b88da26b061e6e7fb74c265bfb56f5720a7aae4ac4b2a1aa14eb"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_decoder_profile_inventory.py",
+      "source": {
+        "blob": "c102a1f1a0a0152cfd2b2fd45a569a2e869a8e25",
+        "bytes": 24982,
+        "mode": "100644",
+        "sha256": "991acbeae8e6faf4e631de2eeb792db4b4fbe5e1e6903eab7c298e0026b1305e"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "c102a1f1a0a0152cfd2b2fd45a569a2e869a8e25",
+        "bytes": 24982,
+        "mode": "100644",
+        "sha256": "991acbeae8e6faf4e631de2eeb792db4b4fbe5e1e6903eab7c298e0026b1305e"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_model_hub_publish.py",
+      "source": {
+        "blob": "6cfa4c9eb7127164f0c1389e1773c5c64da7cffd",
+        "bytes": 18189,
+        "mode": "100644",
+        "sha256": "22b9b3896441dbb2074c804111e0f65a0c87fb93cffbaaee0a24ba383276b47b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "6cfa4c9eb7127164f0c1389e1773c5c64da7cffd",
+        "bytes": 18189,
+        "mode": "100644",
+        "sha256": "22b9b3896441dbb2074c804111e0f65a0c87fb93cffbaaee0a24ba383276b47b"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_model_manager_import.py",
+      "source": {
+        "blob": "e95be02994dea18600f3cd6e9adc35699ec9827d",
+        "bytes": 28810,
+        "mode": "100644",
+        "sha256": "216acf5017720ccc853d049a73398a1949952b589ed3df5fe368e12805d741a2"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "e95be02994dea18600f3cd6e9adc35699ec9827d",
+        "bytes": 28810,
+        "mode": "100644",
+        "sha256": "216acf5017720ccc853d049a73398a1949952b589ed3df5fe368e12805d741a2"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_original_corpus_runtime.py",
+      "source": {
+        "blob": "8529c80ef1239820ce8ef9d468926d6bff7bc4f0",
+        "bytes": 23374,
+        "mode": "100644",
+        "sha256": "6a0dcc17f6bb30cf8ae5a49add473315a15ac10ab5df6006cfd60c9efa7667bc"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "8529c80ef1239820ce8ef9d468926d6bff7bc4f0",
+        "bytes": 23374,
+        "mode": "100644",
+        "sha256": "6a0dcc17f6bb30cf8ae5a49add473315a15ac10ab5df6006cfd60c9efa7667bc"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_source_training_v2.py",
+      "source": {
+        "blob": "caf6f15c29826687a264d16de18cb53e179b25ab",
+        "bytes": 11303,
+        "mode": "100644",
+        "sha256": "ee213255ef99d23fa6c5933f4ce4c70b01d9506b319876c37ba7137c9ef5d31a"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "caf6f15c29826687a264d16de18cb53e179b25ab",
+        "bytes": 11303,
+        "mode": "100644",
+        "sha256": "ee213255ef99d23fa6c5933f4ce4c70b01d9506b319876c37ba7137c9ef5d31a"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_source_value_decoder_experiment.py",
+      "source": {
+        "blob": "991332341b3be96053210594d6d3ba3e89ab759b",
+        "bytes": 16293,
+        "mode": "100644",
+        "sha256": "03c4f299d781b8c71fe76fabbc9e3d7fdb0a0e2cee3b07ea996aef3125a4f551"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "991332341b3be96053210594d6d3ba3e89ab759b",
+        "bytes": 16293,
+        "mode": "100644",
+        "sha256": "03c4f299d781b8c71fe76fabbc9e3d7fdb0a0e2cee3b07ea996aef3125a4f551"
+      }
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ui_declared_source_fidelity.py",
+      "source": {
+        "blob": "0ea07f07494d11ce0d24960e747da071e24703bc",
+        "bytes": 6890,
+        "mode": "100644",
+        "sha256": "eae4ca62d3d5893a97e73c6ac7e83577ace38731e4c8729e614fa3cb119cda12"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "0ea07f07494d11ce0d24960e747da071e24703bc",
+        "bytes": 6890,
+        "mode": "100644",
+        "sha256": "eae4ca62d3d5893a97e73c6ac7e83577ace38731e4c8729e614fa3cb119cda12"
+      }
+    }
+  ],
+  "repository": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006",
+  "schema": "autoencoder-effective-tree-review/v1",
+  "scope": "Source presence only; modified files require review against later work.",
+  "semantic_qualification_granted": false,
+  "source_history_reachable_from_target": true,
+  "source_refs": [
+    "refs/heads/codex/ir-model-manager-hf-sync-20261004"
+  ],
+  "source_revision": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+  "target_revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+}

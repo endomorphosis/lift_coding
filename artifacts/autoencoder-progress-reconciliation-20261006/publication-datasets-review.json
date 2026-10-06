@@ -1,0 +1,203 @@
+{
+  "approved": true,
+  "checkout_clean_before_after": true,
+  "checkpoint_or_cache_path_changed": false,
+  "commit_path_count": 13,
+  "copied_seven_payloads": [
+    {
+      "bytes": 7774,
+      "copied_bytes_equal": true,
+      "retained_path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/paragraph-pin-boundary.json",
+      "sha256": "7407e81d7a5f67394aaf8bccd0bd340e734b2b3e8717677931760f3e381cd36a",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/paragraph-pin-boundary.json"
+    },
+    {
+      "bytes": 5779,
+      "copied_bytes_equal": true,
+      "retained_path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/reproduce_paragraph_pin_boundary.py",
+      "sha256": "e9d99a4524dffb4e082e5a47dfef948ec478d3344e3e371cea20b958c80e4ba9",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/reproduce_paragraph_pin_boundary.py"
+    },
+    {
+      "bytes": 4120,
+      "copied_bytes_equal": true,
+      "retained_path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-patch-independent-review.json",
+      "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-patch-independent-review.json"
+    },
+    {
+      "bytes": 9186,
+      "copied_bytes_equal": true,
+      "retained_path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-original-metadata-controls.json",
+      "sha256": "349ded197c764927cc77d0cf4b24f6afa650360686f6d9c90de47713f5908ed8",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-original-metadata-controls.json"
+    },
+    {
+      "bytes": 5433,
+      "copied_bytes_equal": true,
+      "retained_path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/check_metadata_honesty_patch.py",
+      "sha256": "ae3d5f818001e0969d476538dfcbf7d28f8bb378596f2f4af4c1fd1a65ab306a",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/check_metadata_honesty_patch.py"
+    },
+    {
+      "bytes": 636,
+      "copied_bytes_equal": true,
+      "retained_path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-metadata-diagnostic-01.json",
+      "sha256": "dfe7cfaad057d82ae60a139650f947e79e95d2bf4caa8bccc7d05b4cc6e98e84",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-metadata-diagnostic-01.json"
+    },
+    {
+      "bytes": 35104,
+      "copied_bytes_equal": true,
+      "retained_path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/honesty-controls.xml",
+      "sha256": "a63c3260ab7683d54eaea75f0a6e683ff74e91b99fe3ad23382f268c04f4d6c3",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/honesty-controls.xml"
+    }
+  ],
+  "exact_path_set_verified": true,
+  "independent_review_pin": {
+    "bytes": 4120,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-patch-independent-review.json",
+    "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb"
+  },
+  "numerical_source_changed": false,
+  "observed_at_utc": "2026-10-06T14:46:43.851452+00:00",
+  "old_runtime_numerical_evidence_changed": false,
+  "only_prior_source_differences_are_four_reviewed_paths": true,
+  "operations": {
+    "database_opened": false,
+    "huggingface_updated": false,
+    "models_loaded": false,
+    "remote_read_only_ls_remote": true,
+    "source_or_index_mutated": false,
+    "tests_rerun": false,
+    "training_executed": false
+  },
+  "parent_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "prior_contextual_runtime_contribution": {
+    "identical": 48,
+    "modified": [
+      {
+        "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+        "source": {
+          "bytes": 14867,
+          "sha256": "fb2059be730ef00f485b1344bff600f3acb309b96cee55d2e9378ae87f2ac598"
+        },
+        "status": "modified",
+        "target": {
+          "bytes": 15551,
+          "sha256": "ee8cb120795ce9ee8c696d952169da5544c34e3ae4f2f6adeeacc58701532fa6"
+        }
+      },
+      {
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+        "source": {
+          "bytes": 36421,
+          "sha256": "e9191bcbca77d7e73830bc7096ceb719288e18493cb3c30db35843fbf5c0238e"
+        },
+        "status": "modified",
+        "target": {
+          "bytes": 36594,
+          "sha256": "773e30977478921c31fbc075b5357339cc13e8e920ba93be85b5160b7f442a15"
+        }
+      },
+      {
+        "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+        "source": {
+          "bytes": 12563,
+          "sha256": "1b83e9ef3baec6f3d9b12d32179c9520229c45c471f1d7b299496e8d4f744e62"
+        },
+        "status": "modified",
+        "target": {
+          "bytes": 13460,
+          "sha256": "907f802e33121913a242482f898286243bfe160fffe966716860bb3f2c606965"
+        }
+      }
+    ],
+    "path_inventory_sha256": "1005cbf01ed8e91284e1afb61e2bc6bb15297159f8335c46fa0ee7e5dd123ace",
+    "paths": 51,
+    "present": 51,
+    "source_commit": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d"
+  },
+  "prior_contribution_paths_present": 68,
+  "prior_normative_wording_contribution": {
+    "identical": 16,
+    "modified": [
+      {
+        "path": "docs/autoencoders/paraphrase_modality_diagnostics.md",
+        "source": {
+          "bytes": 9327,
+          "sha256": "1cc8a639924fa6ed7234e24c65dad91fdb15e3e30ab66b3b17a8c873cf165b12"
+        },
+        "status": "modified",
+        "target": {
+          "bytes": 9689,
+          "sha256": "ff8a25cd9b6548377f04f91d88e92b2b4f83e07597b8a33dc43a463263e310b1"
+        }
+      }
+    ],
+    "path_inventory_sha256": "e317877bef569727fc396401a9ef8473536650ef0491fa1efb46134b656122df",
+    "paths": 17,
+    "present": 17,
+    "source_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+  },
+  "published_reviewed_commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+  "remote_heads_closing_observation": {
+    "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+    "refs/heads/main": "0f36163a585a9bf514c41d8eabe202936c000705"
+  },
+  "remote_heads_initial_observation": {
+    "refs/heads/main": "a3f16f2870a80a7e985b35bed3334512c47d9dc3"
+  },
+  "remote_main_advanced_during_review": true,
+  "remote_newer_main_ancestry_verified": false,
+  "remote_scope": "The reviewed commit was observed on main at entry and remains on its exact published topic. Main advanced during the review; the newer object is unavailable locally and no fetch or ancestry claim is made.",
+  "repository": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006",
+  "retained_tests": {
+    "errors": 0,
+    "executed_by_this_review": false,
+    "failures": 0,
+    "skipped": 0,
+    "testcases_observed": 163,
+    "tests": 163,
+    "xml": {
+      "bytes": 35104,
+      "sha256": "a63c3260ab7683d54eaea75f0a6e683ff74e91b99fe3ad23382f268c04f4d6c3"
+    }
+  },
+  "retention_manifest_pin": {
+    "bytes": 2661,
+    "path": "docs/autoencoders/evidence/contextual-input-provenance-20261006/manifest.json",
+    "sha256": "cede7e4519313699ee9c0f0055e6a2c55b60bc550c33474d701f161367b2dbdc"
+  },
+  "reviewed_changed_path_count": 4,
+  "reviewed_four_paths": [
+    {
+      "bytes": 36594,
+      "matches_independent_review": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "sha256": "773e30977478921c31fbc075b5357339cc13e8e920ba93be85b5160b7f442a15"
+    },
+    {
+      "bytes": 13460,
+      "matches_independent_review": true,
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+      "sha256": "907f802e33121913a242482f898286243bfe160fffe966716860bb3f2c606965"
+    },
+    {
+      "bytes": 15551,
+      "matches_independent_review": true,
+      "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+      "sha256": "ee8cb120795ce9ee8c696d952169da5544c34e3ae4f2f6adeeacc58701532fa6"
+    },
+    {
+      "bytes": 9689,
+      "matches_independent_review": true,
+      "path": "docs/autoencoders/paraphrase_modality_diagnostics.md",
+      "sha256": "ff8a25cd9b6548377f04f91d88e92b2b4f83e07597b8a33dc43a463263e310b1"
+    }
+  ],
+  "schema": "autoencoder-reconciliation-datasets-publication-review/v1",
+  "scope": "Published Git blobs and copied ordinary evidence only; no test, model, numerical metadata producer, training, database or Hub rerun. Four changes are additive metadata, documentation and an inert boundary test.",
+  "scoped_added_evidence_path_count": 9
+}

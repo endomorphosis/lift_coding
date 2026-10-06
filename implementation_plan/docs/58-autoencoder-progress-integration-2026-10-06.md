@@ -9,6 +9,50 @@ experiment. The initial remote snapshots are workspace
 The [datasets progress guide](../../external/ipfs_datasets/docs/autoencoders/progress_integration.md)
 provides the training-owner map and next experiment sequence.
 
+## Later cross-agent reconciliation
+
+The [current reconciliation](../../artifacts/autoencoder-progress-reconciliation-20261006/README.md)
+extends this initial sixteen-study review with the original contextual runtime
+replay/text baseline and the completed broader normative wording fit. Its
+[eighteen-study ledger](../../artifacts/autoencoder-progress-reconciliation-20261006/integration-ledger.json)
+authenticates original report blobs and checks all 83 changed paths in four
+recent contributions against explicit main snapshots. All selected paths are
+retained. The other agents' newer work and our cached replay are already
+contributed to the parent and component main histories; re-merging those older
+branches would add no numerical progress.
+
+The new wording result is a concrete 384D improvement, 55/60 to 60/60 complete
+formulas, while both 768D arms are 60/60. It concerns separately authored wording
+for previously exposed meanings and empty qualifiers. Our original cached panel
+remains 48/48 IR exact at both widths; its deterministic text renderer remains
+0/48 original-text exact. These distinct studies do not identify a universally
+saturated or qualified decoder.
+
+Fresh branch/worktree inventories distinguish already published bytes from
+active divergent candidates. The canonical checkout is older and dirty; local
+file absence is not automatically a main omission. The parent datasets tracking
+field is corrected from a deleted `agent/ui-ux-ir` branch to `main`, after exact
+historical UI source retention checks. Runtime metadata also now distinguishes
+caller-pinned paragraph bytes from saved clause-context inventory joins, without
+changing numerical calculations or the original pinned replay. The new normative
+checkpoint serializations are still absent from the inspected ModelManager and
+public Hub snapshots and need scoped candidate availability registration before
+new supervisor use.
+
+During this reconciliation, datasets PR #1271 also published experimental grouped
+Legal decoders and retained handoffs at `0f36163a585a9bf514c41d8eabe202936c000705`.
+The parent now includes that successor and our provenance correction together.
+The [concurrent-main addendum](../../artifacts/autoencoder-progress-reconciliation-20261006/concurrent-grouped-main-addendum.json)
+records its separate raw-text/caller-scope contract and remaining negative-profile
+errors; it is not an 8D/384D/768D latent decoder or general legal qualification.
+
+The next common effort remains independent source/formal review, compatible
+family/schema/task decoders, matched representation controls, warm-started
+8D/384D-to-768D transfer and current-source proof-index/planner contracts. Keep
+the original sixteen-study matrix below as its historical snapshot; the new
+ledger records later observations separately and grants no semantic or proof
+admission.
+
 ## What was already contributed
 
 The inventory covers 35 registered workspace worktrees and 16 datasets worktrees,

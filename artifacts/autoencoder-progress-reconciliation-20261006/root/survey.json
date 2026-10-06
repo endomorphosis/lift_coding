@@ -1,0 +1,860 @@
+{
+  "local_and_origin_refs": [
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "a6915c06bb8cc28d2bb3b167d8708561c69a108a",
+      "ref": "refs/heads/agent/agent-supervisor-direct-objective-and-event-driven-planning-v1"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "7362059ff2cd0a7fe1c3fc534f499e64d3afe17a",
+      "ref": "refs/heads/agent/autoencoder-progress-reconciliation-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "85b19286106b02871ea17203f98e912434cd309a",
+      "ref": "refs/heads/agent/parallel-content-sealing-proof-carrying-tdd-v1"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "4e2562338314599c09b4898c5154cfc70f140c5f",
+      "ref": "refs/heads/agent/parallel-content-sealing-proof-carrying-tdd-v1-g9"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "520cbd15389981de72592480273275e111b01e1d",
+      "ref": "refs/heads/agent/proof-carrying-context-engine-v0.1"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "ref": "refs/heads/agent/vericodegen-2026-autoformalization"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "e881a47f7a447d7f07cd2077a209dce68a11149e",
+      "ref": "refs/heads/agent/vericodegen-2026-lean_refactor_arena"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "ref": "refs/heads/chore/fmt-check-main"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "0febcc082749dcf551ba49fe0ab320b1b078b5ab",
+      "ref": "refs/heads/codex/doep-monitor-recovery"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "7a1938ba75156f5fc768609c340eb67ec22df5aa",
+      "ref": "refs/heads/codex/doep031-sealed-readmission"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "7362059ff2cd0a7fe1c3fc534f499e64d3afe17a",
+      "ref": "refs/heads/codex/grok-recovery-parent-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+      "ref": "refs/heads/codex/grouped-autoencoder-findings-20261006-02"
+    },
+    {
+      "ancestor_of_snapshot_main": false,
+      "changed_paths": [
+        ".gitignore",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/audit_joint_conditioning.py",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/batch-report-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/continuation-evidence-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/engineering-validation-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/evaluate_joint_conditioning.py",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/independent-audit-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/protocol-design-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/protocol-design-02.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/record_joint_conditioning_evidence.py",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/seed1729-ledger-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/seed1730-ledger-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/seed1731-ledger-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/run-plan-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/run-plan-02.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/run_conditioning_batch.py",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/run_conditioning_parent.py",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/seed1729-worker-report-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/seed1730-worker-report-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/seed1731-worker-report-01.json",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/summarize_joint_conditioning.py",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/test_audit_joint_conditioning.py",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/test_evaluate_joint_conditioning.py",
+        "artifacts/autoformalization-publication-20261004/joint_conditioning/test_summarize_joint_conditioning.py",
+        "implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+        "implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md"
+      ],
+      "commit": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+      "patch_equivalence": [
+        "+ 8c02d655e2d086bd644a9011ea67325060ef87bc"
+      ],
+      "ref": "refs/heads/codex/joint-conditioning-20261005-01",
+      "unmerged_log": [
+        "8c02d655e2d086bd644a9011ea67325060ef87bc Evaluate frozen conditioning controls with joint span selection"
+      ]
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+      "ref": "refs/heads/codex/joint-conditioning-20261005-02"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+      "ref": "refs/heads/codex/joint-span-policy-20261005-01"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "96057eed0cde15ce46c2c229adc50597a4b185e1",
+      "ref": "refs/heads/codex/pctdd-g9-descendant-source"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "48d47c102ce25eb2d6e76b99b2a3092ba0be1537",
+      "ref": "refs/heads/codex/pctdd-validation-evidence-guard"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "3eb24f89e82b74cfba3fa261ef099a1c5c7e1370",
+      "ref": "refs/heads/codex/supervisor-context-token-economy-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "6089e1f163d68dd09b006e4b13b14c165ecc136d",
+      "ref": "refs/heads/codex/supervisor-lifecycle-root-20261005"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "c317deb66a95a90f1204f4354cd5fa37698ebe6b",
+      "ref": "refs/heads/codex/terminal-bench-readiness-root-20261005"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "a6712457a8616c2d22100b3b0cd950986b891e64",
+      "ref": "refs/heads/codex/terminal-codex-baseline-root-20261005"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "236108a334e719ab3174cf016e59ae8eee66597e",
+      "ref": "refs/heads/codex/terminal-context-dictionary-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+      "ref": "refs/heads/codex/terminal-context-pair-results-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "f55817cad023e657edb150201c01a750e6bef510",
+      "ref": "refs/heads/codex/terminal-eigenvalue-symbolic-diagnosis-root-20261005"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "1500a7c548f4a981af1b0d8a490744f8450d4529",
+      "ref": "refs/heads/codex/terminal-eigenvalue-symbolic-trial-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "fc597fb980521a94945b154390b7db6b6b59d5c5",
+      "ref": "refs/heads/codex/terminal-ir-final-publication-20261005-04"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "e8994ea6003fdd1f1fe061550bb190c70ba011dc",
+      "ref": "refs/heads/codex/terminal-ir-root-publication-20261004-01"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "dea82900daeb81596040fed39b8595f73138fc15",
+      "ref": "refs/heads/codex/terminal-ir-source-model-20261004-03"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "7362059ff2cd0a7fe1c3fc534f499e64d3afe17a",
+      "ref": "refs/heads/codex/terminal-planning-schema-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "fadf091facbf259fec0ff55af3d2104ed16f66df",
+      "ref": "refs/heads/implementation/doep-030-b8d4ee0e8de3-attempt-1-1788101472"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "35e45b3e26acedc25b109667066460ec595775c4",
+      "ref": "refs/heads/implementation/doep-100-e348c8e778da-attempt-1-1789273504"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "5ac3983204fe92572b097ee45d8c16e86c6ff55d",
+      "ref": "refs/heads/implementation/ns-022-fd92ef2bddf6-attempt-1-1789307474"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "2fa137229c84f48dd93dccf88f09f9b572c71ea1",
+      "ref": "refs/heads/main"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "b2d6e9d57dab90ad0e61bfdc8251643382e3de76",
+      "ref": "refs/heads/publication/canonical-current-root-03-20261004/3560d0e1d9383e2100675998"
+    },
+    {
+      "ancestor_of_snapshot_main": false,
+      "commit": "ef9c8e4d94d9d427d1bd60168e9bd6d0a15cfe38",
+      "ref": "refs/heads/publication/canonical-current-root-20261004/3560d0e1d9383e2100675998"
+    },
+    {
+      "ancestor_of_snapshot_main": false,
+      "commit": "bc64e1a2d3d3428ae3823fd4754d0051a61d485d",
+      "ref": "refs/heads/publication/canonical-wip-20261004/3560d0e1d9383e2100675998"
+    },
+    {
+      "ancestor_of_snapshot_main": false,
+      "commit": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+      "ref": "refs/heads/publication/main-20261004/root-02"
+    },
+    {
+      "ancestor_of_snapshot_main": false,
+      "commit": "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+      "ref": "refs/heads/publication/main-20261004/root-03"
+    },
+    {
+      "ancestor_of_snapshot_main": false,
+      "commit": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+      "ref": "refs/heads/publication/main-refresh-20261004/root-01"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "525286396553613c933ee3c1a46f4a2f938f96ae",
+      "ref": "refs/heads/publication/wip-20261004/e274636ce75ea701cedca920"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "4f137a226ff7dbdd46b197f83f5478ba0f083309",
+      "ref": "refs/heads/recovery/uiir-root-combined-pre-serialized-20260801"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "738cdc6afa62ddc0636a9fef93dfd31bfabfdacd",
+      "ref": "refs/heads/repair/pctdd-native-entry-1789010527"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "ed4e3d72be3bfa70ba295613182717ac56c273c1",
+      "ref": "refs/heads/repair/pctdd-operator-restart"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+      "ref": "refs/remotes/origin/HEAD"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "a6915c06bb8cc28d2bb3b167d8708561c69a108a",
+      "ref": "refs/remotes/origin/agent/agent-supervisor-direct-objective-and-event-driven-planning-v1"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "b30b8b05e19c219249511db9e06ed3ab7ac4b1ad",
+      "ref": "refs/remotes/origin/agent/parallel-content-sealing-proof-carrying-tdd-v1-g9"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "ed97ee2dd11e0409afaeeb539b645d7b718869af",
+      "ref": "refs/remotes/origin/agent/proof-carrying-context-engine-v0.1"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "23bdc18f777f5ff673144b5eccbc58827b58d755",
+      "ref": "refs/remotes/origin/agent/vericodegen-2026-lean_refactor_arena"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "c260f562fcecd49093442cbe9a59337b75dbd218",
+      "ref": "refs/remotes/origin/chore/fmt-check-main"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "0febcc082749dcf551ba49fe0ab320b1b078b5ab",
+      "ref": "refs/remotes/origin/codex/doep-monitor-recovery"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "7a1938ba75156f5fc768609c340eb67ec22df5aa",
+      "ref": "refs/remotes/origin/codex/doep031-sealed-readmission"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+      "ref": "refs/remotes/origin/codex/pctdd-g9-descendant-source"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+      "ref": "refs/remotes/origin/codex/pctdd-validation-evidence-guard"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+      "ref": "refs/remotes/origin/codex/supervisor-context-token-economy-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "6089e1f163d68dd09b006e4b13b14c165ecc136d",
+      "ref": "refs/remotes/origin/codex/supervisor-lifecycle-root-20261005"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "c317deb66a95a90f1204f4354cd5fa37698ebe6b",
+      "ref": "refs/remotes/origin/codex/terminal-bench-readiness-root-20261005"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "9da9a77393ba5829bfaa6ba988dfd2bd042c4aa0",
+      "ref": "refs/remotes/origin/codex/terminal-codex-baseline-root-20261005"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "cdb8a5201e57d50aa4a5ba589eed1c07151689f1",
+      "ref": "refs/remotes/origin/codex/terminal-context-dictionary-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+      "ref": "refs/remotes/origin/codex/terminal-context-pair-results-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "ac5e4793df10f9c33a854b459a370f6f52a02924",
+      "ref": "refs/remotes/origin/codex/terminal-eigenvalue-symbolic-diagnosis-root-20261005"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "1500a7c548f4a981af1b0d8a490744f8450d4529",
+      "ref": "refs/remotes/origin/codex/terminal-eigenvalue-symbolic-trial-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "79f29121b12471d7e6226246f2cd2b74c918ab75",
+      "ref": "refs/remotes/origin/codex/terminal-planning-schema-root-20261006"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "fadf091facbf259fec0ff55af3d2104ed16f66df",
+      "ref": "refs/remotes/origin/implementation/doep-030-b8d4ee0e8de3-attempt-1-1788101472"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "35e45b3e26acedc25b109667066460ec595775c4",
+      "ref": "refs/remotes/origin/implementation/doep-100-e348c8e778da-attempt-1-1789273504"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "5ac3983204fe92572b097ee45d8c16e86c6ff55d",
+      "ref": "refs/remotes/origin/implementation/ns-022-fd92ef2bddf6-attempt-1-1789307474"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+      "ref": "refs/remotes/origin/main"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "973d41304bd8161710906c1e934c63b249bdcc5a",
+      "ref": "refs/remotes/origin/repair/doep-append-quarantine-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "9cf8deb84204beb4e0b388194336f93718df33e2",
+      "ref": "refs/remotes/origin/repair/doep-completed-projection-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "dede193885407ece66e5b5fb5e42da9ac8deb6d0",
+      "ref": "refs/remotes/origin/repair/doep-empty-priority-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "355ce7a628ee013396f0e0f86333fe7fd2cc3383",
+      "ref": "refs/remotes/origin/repair/doep-exhausted-post-merge-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "2bef289426fa5f038ae630313db097efe3a78adc",
+      "ref": "refs/remotes/origin/repair/doep-readonly-queue-launch-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "baeabe9911291c8a119dba6ab78cdc971e72635f",
+      "ref": "refs/remotes/origin/repair/doep-readonly-queue-native-parent-base-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "e9afd83fb3a55173c628a479c5a45dd897a6c23b",
+      "ref": "refs/remotes/origin/repair/pctdd-after-task008-native-base-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "42578300ef9ccf87b6c21ff33dd4df467a1520d8",
+      "ref": "refs/remotes/origin/repair/pctdd-current-quarantine-owner-read-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "d60b5ff1f2f265c703ed022359059627caea827b",
+      "ref": "refs/remotes/origin/repair/pctdd-lifecycle-qualified-job24"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "91453f7bbe024270831ac2e2d65f8f682fe554e8",
+      "ref": "refs/remotes/origin/repair/pctdd-maintenance-after-task008-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "738cdc6afa62ddc0636a9fef93dfd31bfabfdacd",
+      "ref": "refs/remotes/origin/repair/pctdd-native-entry-1789010527"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+      "ref": "refs/remotes/origin/repair/pctdd-operator-restart"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "283004348c4920d8d74252640d98565dbc71169e",
+      "ref": "refs/remotes/origin/repair/pctdd-quarantine-read-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "ee3c1988d6115c5278566e4c4534b17f191af893",
+      "ref": "refs/remotes/origin/repair/pctdd-quarantined-maintenance-parent-20260913"
+    },
+    {
+      "ancestor_of_snapshot_main": true,
+      "commit": "48f56974d9548e1c382d37e3888869b49d831083",
+      "ref": "refs/remotes/origin/repair/pctdd-workspace-quarantine-parent-20260913"
+    }
+  ],
+  "models_executed": false,
+  "ordinary_heads_or_indexes_modified": false,
+  "proof_admission_granted": false,
+  "ref_count": 81,
+  "remote_head_count": 37,
+  "remote_heads": {
+    "refs/heads/agent/agent-supervisor-direct-objective-and-event-driven-planning-v1": "a6915c06bb8cc28d2bb3b167d8708561c69a108a",
+    "refs/heads/agent/parallel-content-sealing-proof-carrying-tdd-v1-g9": "b30b8b05e19c219249511db9e06ed3ab7ac4b1ad",
+    "refs/heads/agent/proof-carrying-context-engine-v0.1": "ed97ee2dd11e0409afaeeb539b645d7b718869af",
+    "refs/heads/agent/vericodegen-2026-lean_refactor_arena": "23bdc18f777f5ff673144b5eccbc58827b58d755",
+    "refs/heads/chore/fmt-check-main": "c260f562fcecd49093442cbe9a59337b75dbd218",
+    "refs/heads/codex/doep-monitor-recovery": "0febcc082749dcf551ba49fe0ab320b1b078b5ab",
+    "refs/heads/codex/doep031-sealed-readmission": "7a1938ba75156f5fc768609c340eb67ec22df5aa",
+    "refs/heads/codex/pctdd-g9-descendant-source": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "refs/heads/codex/pctdd-validation-evidence-guard": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "refs/heads/codex/supervisor-context-token-economy-root-20261006": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+    "refs/heads/codex/supervisor-lifecycle-root-20261005": "6089e1f163d68dd09b006e4b13b14c165ecc136d",
+    "refs/heads/codex/terminal-bench-readiness-root-20261005": "c317deb66a95a90f1204f4354cd5fa37698ebe6b",
+    "refs/heads/codex/terminal-codex-baseline-root-20261005": "9da9a77393ba5829bfaa6ba988dfd2bd042c4aa0",
+    "refs/heads/codex/terminal-context-dictionary-root-20261006": "cdb8a5201e57d50aa4a5ba589eed1c07151689f1",
+    "refs/heads/codex/terminal-context-pair-results-root-20261006": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+    "refs/heads/codex/terminal-eigenvalue-symbolic-diagnosis-root-20261005": "ac5e4793df10f9c33a854b459a370f6f52a02924",
+    "refs/heads/codex/terminal-eigenvalue-symbolic-trial-root-20261006": "1500a7c548f4a981af1b0d8a490744f8450d4529",
+    "refs/heads/codex/terminal-planning-schema-root-20261006": "79f29121b12471d7e6226246f2cd2b74c918ab75",
+    "refs/heads/implementation/doep-030-b8d4ee0e8de3-attempt-1-1788101472": "fadf091facbf259fec0ff55af3d2104ed16f66df",
+    "refs/heads/implementation/doep-100-e348c8e778da-attempt-1-1789273504": "35e45b3e26acedc25b109667066460ec595775c4",
+    "refs/heads/implementation/ns-022-fd92ef2bddf6-attempt-1-1789307474": "5ac3983204fe92572b097ee45d8c16e86c6ff55d",
+    "refs/heads/main": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+    "refs/heads/repair/doep-append-quarantine-parent-20260913": "973d41304bd8161710906c1e934c63b249bdcc5a",
+    "refs/heads/repair/doep-completed-projection-parent-20260913": "9cf8deb84204beb4e0b388194336f93718df33e2",
+    "refs/heads/repair/doep-empty-priority-parent-20260913": "dede193885407ece66e5b5fb5e42da9ac8deb6d0",
+    "refs/heads/repair/doep-exhausted-post-merge-parent-20260913": "355ce7a628ee013396f0e0f86333fe7fd2cc3383",
+    "refs/heads/repair/doep-readonly-queue-launch-parent-20260913": "2bef289426fa5f038ae630313db097efe3a78adc",
+    "refs/heads/repair/doep-readonly-queue-native-parent-base-20260913": "baeabe9911291c8a119dba6ab78cdc971e72635f",
+    "refs/heads/repair/pctdd-after-task008-native-base-20260913": "e9afd83fb3a55173c628a479c5a45dd897a6c23b",
+    "refs/heads/repair/pctdd-current-quarantine-owner-read-parent-20260913": "42578300ef9ccf87b6c21ff33dd4df467a1520d8",
+    "refs/heads/repair/pctdd-lifecycle-qualified-job24": "d60b5ff1f2f265c703ed022359059627caea827b",
+    "refs/heads/repair/pctdd-maintenance-after-task008-parent-20260913": "91453f7bbe024270831ac2e2d65f8f682fe554e8",
+    "refs/heads/repair/pctdd-native-entry-1789010527": "738cdc6afa62ddc0636a9fef93dfd31bfabfdacd",
+    "refs/heads/repair/pctdd-operator-restart": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+    "refs/heads/repair/pctdd-quarantine-read-parent-20260913": "283004348c4920d8d74252640d98565dbc71169e",
+    "refs/heads/repair/pctdd-quarantined-maintenance-parent-20260913": "ee3c1988d6115c5278566e4c4534b17f191af893",
+    "refs/heads/repair/pctdd-workspace-quarantine-parent-20260913": "48f56974d9548e1c382d37e3888869b49d831083"
+  },
+  "repository": "/home/barberb/lift_coding",
+  "schema": "autoencoder-parent-worktree-survey/v1",
+  "scope": "Explicit snapshots; worktree statuses are observations, not atomic global currentness.",
+  "snapshot_main": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+  "training_executed": false,
+  "worktree_count": 37,
+  "worktree_registry_unchanged": true,
+  "worktrees": [
+    {
+      "HEAD": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "branch": "refs/heads/chore/fmt-check-main",
+      "dirty_records": 86,
+      "relevant_dirty_records": [
+        " M external/ipfs_accelerate",
+        " M external/ipfs_datasets",
+        "?? artifacts/autoformalization-alignment-20261003/",
+        "?? artifacts/autoformalization-publication-20261004/",
+        "?? implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+        "?? implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md",
+        "?? implementation_plan/docs/51-autoformalization-review-evidence-intake-2026-10-04.md",
+        "?? implementation_plan/docs/52-autoformalization-statement-scope-coverage-2026-10-04.md",
+        "?? implementation_plan/docs/53-autoformalization-representation-and-stage-boundaries-2026-10-04.md",
+        "?? implementation_plan/docs/54-autoformalization-pinned-stage-workflows-2026-10-04.md",
+        "?? implementation_plan/docs/55-autoformalization-masked-contrastive-relations-2026-10-04.md",
+        "?? implementation_plan/docs/56-autoformalization-relation-mask-handoff-2026-10-04.md",
+        "?? implementation_plan/docs/57-autoformalization-signed-review-provenance-2026-10-04.md",
+        "?? implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+        "?? implementation_plan/proof_grounded_ir_learning_fabric/",
+        "?? ipfs_accelerate_py/",
+        "?? scripts/autoformalization_recovery_probe.py",
+        "?? scripts/review_autoencoder_progress.py",
+        "?? tests/test_autoformalization_recovery_probe.py",
+        "?? tests/test_review_autoencoder_progress.py"
+      ],
+      "status_available": true,
+      "status_sha256": "224e045a78f425d832065cfd191bebba948eed12a7dec0a2d5fb5caf760b2f17",
+      "worktree": "/home/barberb/lift_coding"
+    },
+    {
+      "HEAD": "5ac3983204fe92572b097ee45d8c16e86c6ff55d",
+      "branch": "refs/heads/implementation/ns-022-fd92ef2bddf6-attempt-1-1789307474",
+      "status_available": false,
+      "status_error": "fatal: not a git repository: /home/barberb/lift_coding/.worktrees/vericodegen-neurosymbolic_supervision-2026/external/ipfs_accelerate/.git/worktrees/ipfs_accelerate11\n",
+      "worktree": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/neurosymbolic_supervision/worktrees/ns-022-fd92ef2bddf6-attempt-1-1789307474"
+    },
+    {
+      "HEAD": "d6b999aa4cf942dd38f0fa8a3ce1fb69c374af20",
+      "detached": true,
+      "dirty_records": 3,
+      "relevant_dirty_records": [
+        " M external/ipfs_accelerate",
+        " M external/ipfs_datasets"
+      ],
+      "status_available": true,
+      "status_sha256": "475d966a5fd03f5121f37db89739cae5330b7621f82ed939bef93ecf4c1ef4a6",
+      "worktree": "/home/barberb/lift_coding/.doep-handoff-fix.kDRwxP"
+    },
+    {
+      "HEAD": "0febcc082749dcf551ba49fe0ab320b1b078b5ab",
+      "branch": "refs/heads/codex/doep-monitor-recovery",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.doep-monitor-recovery"
+    },
+    {
+      "HEAD": "a6915c06bb8cc28d2bb3b167d8708561c69a108a",
+      "branch": "refs/heads/agent/agent-supervisor-direct-objective-and-event-driven-planning-v1",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio"
+    },
+    {
+      "HEAD": "eeded153cac72007c5b8531cdfdc76915b2f487b",
+      "detached": true,
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_1cf5611fbb87_27f5933ddbe0': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_1cf5611fbb87_27f5933ddbe0"
+    },
+    {
+      "HEAD": "f13efefa9fdbc1e4e734d74efd45b819d78f7ccd",
+      "detached": true,
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_296543f524d3_18a4d9634159': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_296543f524d3_18a4d9634159"
+    },
+    {
+      "HEAD": "9b5636729fe2d8bfe345200089ea7c40fce2a05c",
+      "detached": true,
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_5c6df40ea9d3_07def83bd414': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_5c6df40ea9d3_07def83bd414"
+    },
+    {
+      "HEAD": "fadf091facbf259fec0ff55af3d2104ed16f66df",
+      "branch": "refs/heads/implementation/doep-030-b8d4ee0e8de3-attempt-1-1788101472",
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_6b4c063bd5e3_bdd9b20cc1e1': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_6b4c063bd5e3_bdd9b20cc1e1"
+    },
+    {
+      "HEAD": "de3230e2471b60e7f0c19f10bdcf58559345b2bd",
+      "detached": true,
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_75ebbebc3af1_f5fe8f4bcba0': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_75ebbebc3af1_f5fe8f4bcba0"
+    },
+    {
+      "HEAD": "e046a592d70affb19ad31af3c03228be69eddd7f",
+      "detached": true,
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_8705e115b8b7_cd389b9e4703': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_8705e115b8b7_cd389b9e4703"
+    },
+    {
+      "HEAD": "35e45b3e26acedc25b109667066460ec595775c4",
+      "branch": "refs/heads/implementation/doep-100-e348c8e778da-attempt-1-1789273504",
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_c93f1b172856_9a0f0fc2e387': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/agent-supervisor-direct-objective-and-event-driven-planning-v1/portfolio/data/agent_supervisor/agent_supervisor_direct_objective_event_driven_planning_v1_r5/worktrees/workspace_c93f1b172856_9a0f0fc2e387"
+    },
+    {
+      "HEAD": "7362059ff2cd0a7fe1c3fc534f499e64d3afe17a",
+      "branch": "refs/heads/agent/autoencoder-progress-reconciliation-20261006",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006"
+    },
+    {
+      "HEAD": "7a1938ba75156f5fc768609c340eb67ec22df5aa",
+      "branch": "refs/heads/codex/doep031-sealed-readmission",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/doep031-sealed-readmission-portfolio"
+    },
+    {
+      "HEAD": "7362059ff2cd0a7fe1c3fc534f499e64d3afe17a",
+      "branch": "refs/heads/codex/grok-recovery-parent-20261006",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/grok-recovery-parent-20261006"
+    },
+    {
+      "HEAD": "f55817cad023e657edb150201c01a750e6bef510",
+      "detached": true,
+      "dirty_records": 0,
+      "locked": "Persistent recovery of interrupted proof-index integration",
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/ir-release-lift-20261002"
+    },
+    {
+      "HEAD": "85b19286106b02871ea17203f98e912434cd309a",
+      "branch": "refs/heads/agent/parallel-content-sealing-proof-carrying-tdd-v1",
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/parallel-content-sealing-proof-carrying-tdd-v1"
+    },
+    {
+      "HEAD": "96057eed0cde15ce46c2c229adc50597a4b185e1",
+      "branch": "refs/heads/codex/pctdd-g9-descendant-source",
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/pctdd-g9-descendant-source': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/pctdd-g9-descendant-source"
+    },
+    {
+      "HEAD": "4e2562338314599c09b4898c5154cfc70f140c5f",
+      "branch": "refs/heads/agent/parallel-content-sealing-proof-carrying-tdd-v1-g9",
+      "dirty_records": 86,
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "relevant_dirty_records": [
+        " M external/ipfs_accelerate",
+        " M external/ipfs_datasets",
+        "?? artifacts/autoformalization-alignment-20261003/",
+        "?? artifacts/autoformalization-publication-20261004/",
+        "?? implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+        "?? implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md",
+        "?? implementation_plan/docs/51-autoformalization-review-evidence-intake-2026-10-04.md",
+        "?? implementation_plan/docs/52-autoformalization-statement-scope-coverage-2026-10-04.md",
+        "?? implementation_plan/docs/53-autoformalization-representation-and-stage-boundaries-2026-10-04.md",
+        "?? implementation_plan/docs/54-autoformalization-pinned-stage-workflows-2026-10-04.md",
+        "?? implementation_plan/docs/55-autoformalization-masked-contrastive-relations-2026-10-04.md",
+        "?? implementation_plan/docs/56-autoformalization-relation-mask-handoff-2026-10-04.md",
+        "?? implementation_plan/docs/57-autoformalization-signed-review-provenance-2026-10-04.md",
+        "?? implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+        "?? implementation_plan/proof_grounded_ir_learning_fabric/",
+        "?? ipfs_accelerate_py/",
+        "?? scripts/autoformalization_recovery_probe.py",
+        "?? scripts/review_autoencoder_progress.py",
+        "?? tests/test_autoformalization_recovery_probe.py",
+        "?? tests/test_review_autoencoder_progress.py"
+      ],
+      "status_available": true,
+      "status_sha256": "224e045a78f425d832065cfd191bebba948eed12a7dec0a2d5fb5caf760b2f17",
+      "worktree": "/home/barberb/lift_coding/.worktrees/pctdd-g9-orphan-recovery"
+    },
+    {
+      "HEAD": "0dea857ab3f9a8508f09ab7a69f206d4cda2a142",
+      "detached": true,
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/pctdd-g9-reviewed-deploy': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/pctdd-g9-reviewed-deploy"
+    },
+    {
+      "HEAD": "956a21b608914976e2bc11667bda955d77641a03",
+      "detached": true,
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/pctdd-incident-outer-client': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/pctdd-incident-outer-client"
+    },
+    {
+      "HEAD": "738cdc6afa62ddc0636a9fef93dfd31bfabfdacd",
+      "branch": "refs/heads/repair/pctdd-native-entry-1789010527",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/pctdd-native-entry-1789010527"
+    },
+    {
+      "HEAD": "ed4e3d72be3bfa70ba295613182717ac56c273c1",
+      "branch": "refs/heads/repair/pctdd-operator-restart",
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/pctdd-operator-restart': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/pctdd-operator-restart"
+    },
+    {
+      "HEAD": "48d47c102ce25eb2d6e76b99b2a3092ba0be1537",
+      "branch": "refs/heads/codex/pctdd-validation-evidence-guard",
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/pctdd-validation-evidence-guard': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/pctdd-validation-evidence-guard"
+    },
+    {
+      "HEAD": "520cbd15389981de72592480273275e111b01e1d",
+      "branch": "refs/heads/agent/proof-carrying-context-engine-v0.1",
+      "locked": "Preserve embedded submodule Git repositories and runtime recovery history",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/home/barberb/lift_coding/.worktrees/proof-carrying-context-engine-r6': No such file or directory\n",
+      "worktree": "/home/barberb/lift_coding/.worktrees/proof-carrying-context-engine-r6"
+    },
+    {
+      "HEAD": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+      "branch": "refs/heads/publication/main-20261004/root-02",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/root-02"
+    },
+    {
+      "HEAD": "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+      "branch": "refs/heads/publication/main-20261004/root-03",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/root-03"
+    },
+    {
+      "HEAD": "091624a773179d24178d12bc1f410864885c10bf",
+      "branch": "refs/heads/agent/vericodegen-2026-autoformalization",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026"
+    },
+    {
+      "HEAD": "e881a47f7a447d7f07cd2077a209dce68a11149e",
+      "branch": "refs/heads/agent/vericodegen-2026-lean_refactor_arena",
+      "dirty_records": 39,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "655902bd3b11af71af51e0b73f2e8d2286ff9d301e0942283114785862103056",
+      "worktree": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026"
+    },
+    {
+      "HEAD": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+      "branch": "refs/heads/codex/grouped-autoencoder-findings-20261006-02",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-integration"
+    },
+    {
+      "HEAD": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+      "branch": "refs/heads/codex/joint-conditioning-20261005-01",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-conditioning-01/publication-worktree"
+    },
+    {
+      "HEAD": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+      "branch": "refs/heads/codex/joint-conditioning-20261005-02",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-conditioning-02/publication-worktree"
+    },
+    {
+      "HEAD": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+      "branch": "refs/heads/codex/joint-span-policy-20261005-01",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-span-01/publication-worktree"
+    },
+    {
+      "HEAD": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+      "branch": "refs/heads/publication/main-refresh-20261004/root-01",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/git/root-main-refresh-01/publication-worktree"
+    },
+    {
+      "HEAD": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+      "branch": "refs/heads/codex/terminal-context-pair-results-root-20261006",
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/home/barberb/lift_coding_worktrees/supervisor-lifecycle-root-20261005"
+    },
+    {
+      "HEAD": "275873929482a36a52891e9aa8ae83f242c92a21",
+      "detached": true,
+      "locked": "Active repository proof-index release; preserve working tree",
+      "status_available": false,
+      "status_error": "fatal: cannot change to '/tmp/ir-release-lift-rpi-20261002': No such file or directory\n",
+      "worktree": "/tmp/ir-release-lift-rpi-20261002"
+    },
+    {
+      "HEAD": "23182df167ddfe0e4f063132fd24d46185eb43a5",
+      "detached": true,
+      "dirty_records": 0,
+      "relevant_dirty_records": [],
+      "status_available": true,
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "worktree": "/tmp/lift-publish-retry-root-fy7s4bqk/worktree"
+    }
+  ]
+}

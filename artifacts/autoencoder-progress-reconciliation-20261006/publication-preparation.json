@@ -1,0 +1,885 @@
+{
+  "schema": "autoencoder-reconciliation-publication-preparation/v1",
+  "reviewed_snapshots_unchanged_in_ledger": {
+    "accelerate": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+    "datasets": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "workspace": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb"
+  },
+  "publication_component_heads": {
+    "datasets": "0f36163a585a9bf514c41d8eabe202936c000705",
+    "accelerate": "d5c59e961d1a0ca8d09296b520cbd414a2078235"
+  },
+  "parent_base": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb",
+  "planned_gitlinks": {
+    "external/ipfs_datasets": "0f36163a585a9bf514c41d8eabe202936c000705",
+    "external/ipfs_accelerate": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "contribution_path_count": 83,
+  "missing_paths": 0,
+  "approved_changed_paths_count": 4,
+  "contribution_checks": [
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/contextual_legal_reconstruction_runtime.md",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 15551,
+      "sha256": "ee8cb120795ce9ee8c696d952169da5544c34e3ae4f2f6adeeacc58701532fa6",
+      "changed_since_reviewed_main": true,
+      "change_scope": "approved metadata/documentation/test correction"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-fresh-source-only-candidates.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 141231,
+      "sha256": "1c59f99df7453841818b2d2f43524c36fa9030e0aa068f376bd80241c8f4edf3",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-metadata-plan.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 43214,
+      "sha256": "a8ae1307d14c38327d776281bb534b8fc2bac3119cb92da9ab2584f5a99c1d79",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-original-text-evaluation.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 21317,
+      "sha256": "62e2f6764fb3e010a7502af0bfaf54b82b8df5658087d612a6f203b5c1aa0491",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-semantic-ir-evaluation.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 553913,
+      "sha256": "d347e4cc6c69cd8d8b2f75b552f861f1f1dd092c02c8a8e64e769745b124c61f",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/384-source-withheld-text-rendering.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 315861,
+      "sha256": "e03810e46abf68b532b47e6de5ea289b529d5c452319eddabae817edcc8dd58b",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-fresh-source-only-candidates.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 141232,
+      "sha256": "9dfcade8a446865a56960ae36562a25ac4289f471b70aa5ed3cfb6f3607cf046",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-metadata-plan.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 43215,
+      "sha256": "d54e0935cd343d21bd02f3f6caad930799c29d804dcb5d5b36d971456b24fa65",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-original-text-evaluation.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 21317,
+      "sha256": "62e2f6764fb3e010a7502af0bfaf54b82b8df5658087d612a6f203b5c1aa0491",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-semantic-ir-evaluation.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 553913,
+      "sha256": "d347e4cc6c69cd8d8b2f75b552f861f1f1dd092c02c8a8e64e769745b124c61f",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/768-source-withheld-text-rendering.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 315861,
+      "sha256": "e03810e46abf68b532b47e6de5ea289b529d5c452319eddabae817edcc8dd58b",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/committed-source-qualification.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 8028,
+      "sha256": "4b035d25c5145815a915eff42d9b0d81cc98135c50bb1d5f8ec198cf4f0a9103",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/contextual-runtime-tests.xml",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 51045,
+      "sha256": "2fb4eb8ace3a065d1376c3e9dd09b52cf3e4c418ccbdfdb82f3d3d6c728b28e5",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/generation-qualification.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 21275,
+      "sha256": "734343f3dca0068fafe5d75c07ba51a193f8fe0a48e48eea2c15a15167fb41d2",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/generation-qualification.stderr.log",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/generation-qualification.stdout.log",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 1316,
+      "sha256": "1e9b74045a980e723486177a906194b61e4f1dbc5d8433bfc003925b7782e0f7",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/historical-owner-regression.xml",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 40921,
+      "sha256": "2c42d12ae17f78675c50f665701949edfd38f7173ac0fc2abc87654f2edb890f",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/qualify_original_assets.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 15878,
+      "sha256": "2a976023ada55059bf55f778a10ef9e13a39221c412a374b4f4bcbe87c6f6119",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/retention-manifest.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 13080,
+      "sha256": "2c2598c69a91e63d76dfcc92332a400a04f8211f659a3042e18f687ca91bd93b",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-diagnostic-01.xml",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 27061,
+      "sha256": "a85e1f4d1576bdc6caeee3a13d6fb676c918aa66214d45f2d2d2cc7ee3b26ecc",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-diagnostic-02.log",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 953,
+      "sha256": "24b930745a83ac6b49065140afb6ace00bc8451bd600b02a6dcdbe8fa849c8a4",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-diagnostic-02.xml",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 32724,
+      "sha256": "1e47c6753782162955c4c2c07fc4859a16399c5e2948651c84d61306f4a30b3b",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-final-receipt.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 9400,
+      "sha256": "0dd785f1ddc2797429c36404626ff110f1db721cfb4f9aa8572a991f41b3f0c4",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-final.log",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 945,
+      "sha256": "aa096174ebfa33bdfb73cbf57c279965f07762c405212370d87937eb23f83581",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-final.xml",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 32932,
+      "sha256": "d317f3c5b51442e0ae44bcdddd6974b70beabf8afd58be01dd82f248261b5863",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/adversarial-parent-endpoint-diagnostic.xml",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 843,
+      "sha256": "2bfd4458932add7f84bd146cf1c3d07920a9d09236a009444984b4e5b5e82f2a",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/architecture-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 31658,
+      "sha256": "f999fe08a304db9b3cbc10fbfd9aec9bd783e0fb8bceda2e8079a483769dea7c",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/review/final-facade-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 8301,
+      "sha256": "d7a3ce6d6c2e87379cf47f37923a5d85b074a8b763985ea68275583b9b5ddb02",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 22379,
+      "sha256": "e05bd76ef4577698f0cd5aeb3b8676974d661f22808aebed58c7626f9543361b",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.stderr.log",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/separate-evaluation.stdout.log",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 2529,
+      "sha256": "7ec4588e53e72a19b12bbcd8a006676bcfd40cfcb6c271c5394b42c4c469e71a",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/docs-final-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 6877,
+      "sha256": "e03dca39f813335a74b0b2eafee42274d4a68100bccfeabe2f3831057725de91",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/docs-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 3905,
+      "sha256": "bcb2cc5983b9814e87f2c6cb914961ac6ba1f2e2479ebe38abbd44e41081a4f3",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/execution-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 54202,
+      "sha256": "d7d36eebeaac7fba77e283203adb56484cd1b47658f641c29c01f2a5beacc6ef",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/lazy-training-import-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 14349,
+      "sha256": "d7d1bf35b63192a2276fb72a42f13fb8459621b3872754b39efb5c23781dc6c9",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/numeric-post-freeze-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 15573,
+      "sha256": "2c67b501a1337c7a832b4b226408e49f91c462ebf0ddbc98d12388ac72f89328",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/numeric-restoration-smoke.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 2188,
+      "sha256": "ff412c8aa43b2972a8b3c1c7226176b0e43a3f795a7a6ce76b76894622adeb00",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/output-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 9550,
+      "sha256": "f9f00809321daac7a585a9d4f7f3d5c2cab4a2aa9a6f0bd52de39a50882c9306",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/qualification-driver-review.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 6416,
+      "sha256": "b712ca935c7362c2c67ef873504e6f7b37bf717c853caee1cb25eaa9fe683352",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/review_execution.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 20867,
+      "sha256": "da254d64bb2ba9a8b57e8bbb9e2246e324564773b2b0767b8d5d34c759cd418f",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/review_lazy_reference_import.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 6948,
+      "sha256": "8008d3cc39efec964ba28638c4a05b00bd142f707cb33842d4c487825ef5dad9",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/source-survey.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 72367,
+      "sha256": "b440e299626e201b9bdae9c52083ed0c29312fd138380a5e07f27e551d2cda2b",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/evidence/contextual-legal-runtime-20261006/source-survey/survey.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 11289,
+      "sha256": "353f11f055b8599b8efddc026d7a291b39991aeebcc19a2c231d1076b0c55d08",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 15840,
+      "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_output.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 13756,
+      "sha256": "0477aaa5222523e27f4010644ad5bfac67720a793fcccc53b48593e4321c31a7",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 36594,
+      "sha256": "773e30977478921c31fbc075b5357339cc13e8e920ba93be85b5160b7f442a15",
+      "changed_since_reviewed_main": true,
+      "change_scope": "approved metadata/documentation/test correction"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 14958,
+      "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_numeric.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 11167,
+      "sha256": "a12691031cb0ac91c9886ff396c6671a160aec1b3ec8e02dfaa6651533be58df",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_output.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 10987,
+      "sha256": "7e2ed28f2795b0736eac77a550d9cecfecc37aa711b532c574b94b7a5da92cea",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 13460,
+      "sha256": "907f802e33121913a242482f898286243bfe160fffe966716860bb3f2c606965",
+      "changed_since_reviewed_main": true,
+      "change_scope": "approved metadata/documentation/test correction"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_contextual_legal_ir_runtime_adversarial.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 27539,
+      "sha256": "6213be7010a7dbfebadb0b29f786513d9be9a34a39a0b3d8a6f0f5d3af9828ce",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/normative_wording_training.md",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 13198,
+      "sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/autoencoders/paraphrase_modality_diagnostics.md",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 9689,
+      "sha256": "ff8a25cd9b6548377f04f91d88e92b2b4f83e07597b8a33dc43a463263e310b1",
+      "changed_since_reviewed_main": true,
+      "change_scope": "approved metadata/documentation/test correction"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/implementation/reports/evidence/decoder-normative-wording-20261006/manifest.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 76440,
+      "sha256": "c20d18a62e072a89c3c5aab62936ea327f0db862ffb0f887f488f28583aec019",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "docs/implementation/reports/evidence/decoder-normative-wording-20261006/results.json",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 2902845,
+      "sha256": "afa30e5df3e789fd77170507f90c303814e1bf7ec8f21b6276ac07a7896c9496",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 9634,
+      "sha256": "48b7a3b2a0e5b69ae292f2c02dc0e87d92de4ffb4443bfba5ae52695b9a4320a",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 14474,
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/prospective_normative_development.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 12167,
+      "sha256": "fa02f14e1b70e14dfe04c70b3eb18ca68eb594ebd337221a33ee2f287c2e35d5",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/prospective_wording_source_inputs.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 10857,
+      "sha256": "6cb67453e22bf6f9c36fb056a75dd022bf46d11286a846adcaa03baacdc987dc",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "scripts/ops/autoencoder/benchmark_normative_wording_training.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 12978,
+      "sha256": "e9231f6fa2bccc329539da089568254181756245333d1418249a6dbfe1c6507e",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "scripts/ops/autoencoder/evaluate_normative_wording_development.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 28346,
+      "sha256": "6be7e03656087fa9b5607b7e82b4a0a1244ca920cad8a81d64510f140962cfc6",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "scripts/ops/autoencoder/prepare_normative_wording_sources.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 12023,
+      "sha256": "c863dbfbbd43d021fb103ec78e61c19a8e07b917a3c54236978d99d9451f2917",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_normative_wording_development.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 13784,
+      "sha256": "cd10307d3c3a02cb6131b8894d7275d061f521213eb4f1566d5f032d94681da0",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_normative_wording_modality_auxiliary.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 13491,
+      "sha256": "05e89ab067336a2bdd40d7222320a30ba1b5250a4d2ab5472d73727f1cd9bb78",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_normative_wording_training_runner.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 3556,
+      "sha256": "96e513a3244c22d74f20b6bc5c0094dd00dbfd3455617e01d776db6d98103865",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_normative_wording_training_sources.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 14460,
+      "sha256": "f9c0ebd846c1541c76ef67c49bba06fe1006cd8e1edec9af402cc43f0e998fe5",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_prospective_normative_development.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 9158,
+      "sha256": "3bcdd0e0cd5f864d1357a14875c7981ff8e960734aca86af1577dfbfd4abe8fb",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "datasets",
+      "path": "tests/unit/logic/formalization/autoencoder/test_prospective_wording_source_inputs.py",
+      "target_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "bytes": 7334,
+      "sha256": "5ec6f4e6762a29826bf83f50110c33153ddaf1a254912f4f793892a607b96593",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/contextual_ir_checkpoint_recovery.md",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 15009,
+      "sha256": "88693f214e86f6792f28c0c87507f92e570df4dfe1415613b9a2cd5e39a2269b",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/terminal_symbolic_capabilities.md",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 100482,
+      "sha256": "a7844afaa7fc8963470165edf7f9c45c7e46acbd85849aa4141c84f02b8cb461",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/README.md",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 3769,
+      "sha256": "94d8857a357bb6289b1dc65e3f0b676e2fa1b8cb814f7b653543c7e35d68036e",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/artifact-manifest.json",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 1394,
+      "sha256": "6af1bf2d0dc278032418c7c291c9c394a703d8067ec39d14585a06ab8f52ddec",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/failed-attempt-accounting.json",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 18472,
+      "sha256": "1599bf2dab4efd612d606568ad10547bdd803928ada8644605c2e688d3a58666",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/helper-tests.json",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 2654,
+      "sha256": "ca18bcd7c67764394e268c2c5c635d04b60e581286c3268f183fd238908096fa",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/independent-review.json",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 7967,
+      "sha256": "72035209ccdc419a01c53061503cd568a2849003c795794617650c4eafb647df",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/provider-tests.json",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 1919,
+      "sha256": "8d31b7591703c5991e977acc8f15a3a26ada75b7f385070a2f325cd5b539e0c7",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "docs/agent_supervisor/evidence/terminal-planning-schema-20261006/qualification.json",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 3023,
+      "sha256": "1a26253ac693b164795677f4432182b8b2ebf0072dd9c9fb961d60d63130f2ee",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codex_planning_schema.py",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 6186,
+      "sha256": "1df9d13d7a076892934233672725b1dab4651bdb95bd65452f1df63df3a3d75a",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 32366,
+      "sha256": "92a5c3467a7dabb14ea43e51e0d53cea799f67fc1d3ca1c76b4c326ca9aebc3f",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "ipfs_accelerate_py/llm_router.py",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 553806,
+      "sha256": "105ae0c70ab2020e9b558a2be0f37de3f8ccf0a7bf537aa79dc16097ebd7f659",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "test/api/test_codex_cli_output_schema.py",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 10277,
+      "sha256": "917107ca89008d4bd5d9b70d2317f782ad0fd8d9506154dd5f8dc8bd9d01e41f",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "test/api/test_codex_planning_schema.py",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 9857,
+      "sha256": "b5e9e19fed206d71747aba9ba811f5b3496864f9b3ffff15b4c498c8aa0a5f11",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    },
+    {
+      "repository_role": "accelerate",
+      "path": "test/api/test_codex_structured_plan_roundtrip.py",
+      "target_commit": "d5c59e961d1a0ca8d09296b520cbd414a2078235",
+      "bytes": 5424,
+      "sha256": "b05281c671650628c7ec44421e8625455298e6298bc6fc2883ffc3cde419ee23",
+      "changed_since_reviewed_main": false,
+      "change_scope": "unchanged reviewed main bytes"
+    }
+  ],
+  "original16_report_retention": [
+    {
+      "id": "preserved-8d-linguistic-teacher",
+      "repository_role": "datasets",
+      "original_commit": "0ced2e533c9090d21aba602c3550c5ff5ecd45eb",
+      "original_report_sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "four-width-initial-head-comparison",
+      "repository_role": "datasets",
+      "original_commit": "dce8ab819331a5f5bddac86c851710fa4377c1d4",
+      "original_report_sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "native4096-and-field-rates",
+      "repository_role": "datasets",
+      "original_commit": "d466db01a32c419a765e5cef046991ddedc3c279",
+      "original_report_sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "broader4096-and-8d-geometry",
+      "repository_role": "datasets",
+      "original_commit": "fd89d2a48aa0de771dd22ec8fd079af10732051f",
+      "original_report_sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "train-paraphrase-mixture",
+      "repository_role": "datasets",
+      "original_commit": "aa586a9b91b583a2ac5d867bd107ba0c5a4762d5",
+      "original_report_sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "train-paraphrase-modality",
+      "repository_role": "datasets",
+      "original_commit": "60f5c2951ac34231f05b54e50f2725296871c5b9",
+      "original_report_sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "source-margin-two-seed-study",
+      "repository_role": "datasets",
+      "original_commit": "1b6461e65f15635b89d04609dae01a4196cd3ea5",
+      "original_report_sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "intent-ui-composition-ridge",
+      "repository_role": "datasets",
+      "original_commit": "6589f788791f8991a8b856fbc3fc5fa396d17229",
+      "original_report_sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "complete-intent-ui-feature-loss",
+      "repository_role": "datasets",
+      "original_commit": "df732e8aaf5b4eec7373f1581e7193d7c0a91134",
+      "original_report_sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "ui-temporal-dcec-floor",
+      "repository_role": "datasets",
+      "original_commit": "ea275ae32779db01c7dc59dc62ce12bcd9841ae2",
+      "original_report_sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "security-production-head",
+      "repository_role": "datasets",
+      "original_commit": "2d93857e78ceedc7f055637c887afeaa40653993",
+      "original_report_sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "source-ae-frozen-control",
+      "repository_role": "workspace",
+      "original_commit": "e44254d4dd9e9a873d1b7a257f53286f35860e01",
+      "original_report_sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "source-ae-authored32-expansion",
+      "repository_role": "workspace",
+      "original_commit": "67bd5f1a3d6ff1540bd594e1205d753eb44f03ef",
+      "original_report_sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "frozen-law-conditioner-interventions",
+      "repository_role": "workspace",
+      "original_commit": "b48ec0fb6aa1b45a46c1239f50f645d03ab74808",
+      "original_report_sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "bounded-joint-span-policy",
+      "repository_role": "workspace",
+      "original_commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+      "original_report_sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42",
+      "retained_and_reachable_from_final_component_main": true
+    },
+    {
+      "id": "joint-span-six-condition-control",
+      "repository_role": "workspace",
+      "original_commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+      "original_report_sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851",
+      "retained_and_reachable_from_final_component_main": true
+    }
+  ],
+  "scope": "The metadata repair successor is observed separately; initial peer-reviewed source snapshots and historical model receipts are preserved. No model or proof qualification is granted."
+}

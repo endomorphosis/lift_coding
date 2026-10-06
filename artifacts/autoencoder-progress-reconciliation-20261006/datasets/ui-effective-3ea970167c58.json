@@ -1,0 +1,1667 @@
+{
+  "counts": {
+    "identical": 101,
+    "missing": 0,
+    "modified": 2
+  },
+  "git_state_mutated": false,
+  "lean_admission_granted": false,
+  "model_executed": false,
+  "paths": [
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/README.md",
+      "source": {
+        "blob": "5d7406a179fd8fa947c792d66941d2437abb3f7b",
+        "bytes": 886,
+        "mode": "100644",
+        "sha256": "5c7d07ad9b6182d86b7dae18bb7be04d3c66304202159510dc304294fd008792"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "5d7406a179fd8fa947c792d66941d2437abb3f7b",
+        "bytes": 886,
+        "mode": "100644",
+        "sha256": "5c7d07ad9b6182d86b7dae18bb7be04d3c66304202159510dc304294fd008792"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/__init__.py",
+      "source": {
+        "blob": "15a4913a2e390a6a4c332773f8133ec8d867b88c",
+        "bytes": 3486,
+        "mode": "100644",
+        "sha256": "851b72ba64049ca073bae47752c12c4aa253c8be03420bcd9b63f2f966377773"
+      },
+      "status": "modified",
+      "target": {
+        "blob": "6037e664dd6c32cf7a6d80eb317448850d74a3ae",
+        "bytes": 3688,
+        "mode": "100644",
+        "sha256": "b1fe4a927db3fff8e67b61d0a87ea15cbab87698c47d245b43aa787d53446744"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/assurance/__init__.py",
+      "source": {
+        "blob": "ae185ccef7991bc6d632c034dc1401088ddc38de",
+        "bytes": 704,
+        "mode": "100644",
+        "sha256": "29081d496dcd54bbbe49e88b89f0da36530d93ed7634c50ce668aec3d4deab89"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "ae185ccef7991bc6d632c034dc1401088ddc38de",
+        "bytes": 704,
+        "mode": "100644",
+        "sha256": "29081d496dcd54bbbe49e88b89f0da36530d93ed7634c50ce668aec3d4deab89"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/assurance/accessibility.py",
+      "source": {
+        "blob": "307a3b129b5d8f65c0d885a5b6a6cded646457a0",
+        "bytes": 7914,
+        "mode": "100644",
+        "sha256": "be050347b0e42a22edb63b967473d96c82615ba20349186e4e450fb7ab5861e1"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "307a3b129b5d8f65c0d885a5b6a6cded646457a0",
+        "bytes": 7914,
+        "mode": "100644",
+        "sha256": "be050347b0e42a22edb63b967473d96c82615ba20349186e4e450fb7ab5861e1"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/assurance/privacy.py",
+      "source": {
+        "blob": "3fd1da25b5efc3331c8ce5d8523949950b46cac4",
+        "bytes": 5731,
+        "mode": "100644",
+        "sha256": "e1a09bd6f3db5ffda6491c7bba6889e0259b2074f156764ddfb74e70290a39d0"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "3fd1da25b5efc3331c8ce5d8523949950b46cac4",
+        "bytes": 5731,
+        "mode": "100644",
+        "sha256": "e1a09bd6f3db5ffda6491c7bba6889e0259b2074f156764ddfb74e70290a39d0"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/assurance/security.py",
+      "source": {
+        "blob": "98ff1d5bdeef46d5791fca1a639957314a018410",
+        "bytes": 8694,
+        "mode": "100644",
+        "sha256": "67e62a9eda98456ca1ffc9d187adfc0b2ea2780c08cf518006b84e83a7880b40"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "98ff1d5bdeef46d5791fca1a639957314a018410",
+        "bytes": 8694,
+        "mode": "100644",
+        "sha256": "67e62a9eda98456ca1ffc9d187adfc0b2ea2780c08cf518006b84e83a7880b40"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/canonicalize.py",
+      "source": {
+        "blob": "53456d8b0415bbc0b4b44c022601f0d04fbb4e04",
+        "bytes": 2099,
+        "mode": "100644",
+        "sha256": "9e9dcf26d6434a8bf4d1b38669aaa0cb47d006ac2a4eee05a7145c4bbc84ea01"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "53456d8b0415bbc0b4b44c022601f0d04fbb4e04",
+        "bytes": 2099,
+        "mode": "100644",
+        "sha256": "9e9dcf26d6434a8bf4d1b38669aaa0cb47d006ac2a4eee05a7145c4bbc84ea01"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/conformance.py",
+      "source": {
+        "blob": "f7372f9414baf471c58ba3d487cacdf47c20ffb8",
+        "bytes": 6078,
+        "mode": "100644",
+        "sha256": "a263d18cfcaa558bc18e66b53c734db9d4a4357382face64ca38428fbe560421"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "f7372f9414baf471c58ba3d487cacdf47c20ffb8",
+        "bytes": 6078,
+        "mode": "100644",
+        "sha256": "a263d18cfcaa558bc18e66b53c734db9d4a4357382face64ca38428fbe560421"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+      "source": {
+        "blob": "e39bcaf91cb0a3559c2d5bfb8da62addf96181a0",
+        "bytes": 8008,
+        "mode": "100644",
+        "sha256": "d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57"
+      },
+      "status": "modified",
+      "target": {
+        "blob": "77950b04c9e103410b66a4147981146ab7bebd70",
+        "bytes": 7300,
+        "mode": "100644",
+        "sha256": "21e8315b0054f7755512212d610d4e3f5f4ac86387f3b27edb9632fa8ca68bc3"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/domain_slice.py",
+      "source": {
+        "blob": "cf30dd151bee2595504ed4f3f611a6e2b43f033c",
+        "bytes": 935,
+        "mode": "100644",
+        "sha256": "37ce58f2048f1d6681ec86c2633a9765da35e540415c85e0e7fd0dd7236ca287"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "cf30dd151bee2595504ed4f3f611a6e2b43f033c",
+        "bytes": 935,
+        "mode": "100644",
+        "sha256": "37ce58f2048f1d6681ec86c2633a9765da35e540415c85e0e7fd0dd7236ca287"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/__init__.py",
+      "source": {
+        "blob": "14f79a5313cab90e8f56d9b3bfd62509dc09a10b",
+        "bytes": 938,
+        "mode": "100644",
+        "sha256": "6e40eb0d6f1d2ac22d33100353658c1696e99205a4f0246b96e66552a205ba70"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "14f79a5313cab90e8f56d9b3bfd62509dc09a10b",
+        "bytes": 938,
+        "mode": "100644",
+        "sha256": "6e40eb0d6f1d2ac22d33100353658c1696e99205a4f0246b96e66552a205ba70"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/compiler.py",
+      "source": {
+        "blob": "173cf421a8f904ae54365f39eaec8572e906f6c3",
+        "bytes": 17830,
+        "mode": "100644",
+        "sha256": "0f6b4729775b257d2c014e6082bba2c412266a08426204b62e67ea90d690ea51"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "173cf421a8f904ae54365f39eaec8572e906f6c3",
+        "bytes": 17830,
+        "mode": "100644",
+        "sha256": "0f6b4729775b257d2c014e6082bba2c412266a08426204b62e67ea90d690ea51"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/contracts.py",
+      "source": {
+        "blob": "dcf7f35b311f413449be440c5932d1062e7555dc",
+        "bytes": 5974,
+        "mode": "100644",
+        "sha256": "6073f56d616cb35aa904e55ce801ceb43a911ee06773e0e397fda48ebcdd9e70"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "dcf7f35b311f413449be440c5932d1062e7555dc",
+        "bytes": 5974,
+        "mode": "100644",
+        "sha256": "6073f56d616cb35aa904e55ce801ceb43a911ee06773e0e397fda48ebcdd9e70"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/dcec.py",
+      "source": {
+        "blob": "063982ff0f02b9392effca00d7ab0f34bd02596c",
+        "bytes": 2968,
+        "mode": "100644",
+        "sha256": "b988b9302971102ad8e3ae5fac4e78b543ba18ec8d3a4e68115ab8cc06046085"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "063982ff0f02b9392effca00d7ab0f34bd02596c",
+        "bytes": 2968,
+        "mode": "100644",
+        "sha256": "b988b9302971102ad8e3ae5fac4e78b543ba18ec8d3a4e68115ab8cc06046085"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/decompiler.py",
+      "source": {
+        "blob": "8f3a8c90b5762ee82dd49c4c935e6f9edb97fa76",
+        "bytes": 39999,
+        "mode": "100644",
+        "sha256": "115a78c57139f07b3c50ebd998c14fa22ce64aae2ead6a0a8c9f2a85e1389b3f"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "8f3a8c90b5762ee82dd49c4c935e6f9edb97fa76",
+        "bytes": 39999,
+        "mode": "100644",
+        "sha256": "115a78c57139f07b3c50ebd998c14fa22ce64aae2ead6a0a8c9f2a85e1389b3f"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/event_calculus.py",
+      "source": {
+        "blob": "5c965f8dee1366ac7b070200f1cfa756bca9e568",
+        "bytes": 2713,
+        "mode": "100644",
+        "sha256": "371948b54db7ddc4f2c9e66e7b198a26d96d198a2b4076f916b1781e02905e28"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "5c965f8dee1366ac7b070200f1cfa756bca9e568",
+        "bytes": 2713,
+        "mode": "100644",
+        "sha256": "371948b54db7ddc4f2c9e66e7b198a26d96d198a2b4076f916b1781e02905e28"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/flogic.py",
+      "source": {
+        "blob": "5fea55ade74d070bea8d86853f45d5c6e52e6215",
+        "bytes": 3004,
+        "mode": "100644",
+        "sha256": "2671912bf789bf3c8ea6412023006c0436a3fd838b7e787a41f9743e102a6909"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "5fea55ade74d070bea8d86853f45d5c6e52e6215",
+        "bytes": 3004,
+        "mode": "100644",
+        "sha256": "2671912bf789bf3c8ea6412023006c0436a3fd838b7e787a41f9743e102a6909"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/ontology.py",
+      "source": {
+        "blob": "a3f72ef34a68f9e6c045c322d469933a798e12e7",
+        "bytes": 7859,
+        "mode": "100644",
+        "sha256": "18fcfd6bf616672ca8c9571b5519ba408b3a145da99c9c6eff7998c93f668592"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "a3f72ef34a68f9e6c045c322d469933a798e12e7",
+        "bytes": 7859,
+        "mode": "100644",
+        "sha256": "18fcfd6bf616672ca8c9571b5519ba408b3a145da99c9c6eff7998c93f668592"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/roundtrip.py",
+      "source": {
+        "blob": "cdb7ac00f62bc2c8bd77a4315addb87d25e7869c",
+        "bytes": 29709,
+        "mode": "100644",
+        "sha256": "5ea38b379244651f13c1346d1c4ef21ea9863744d6a70f97e6ac32a9acd8f78e"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "cdb7ac00f62bc2c8bd77a4315addb87d25e7869c",
+        "bytes": 29709,
+        "mode": "100644",
+        "sha256": "5ea38b379244651f13c1346d1c4ef21ea9863744d6a70f97e6ac32a9acd8f78e"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/synthesis.py",
+      "source": {
+        "blob": "2a8e8851a265cbcfd1e9443a91aed9cee3f7f588",
+        "bytes": 66249,
+        "mode": "100644",
+        "sha256": "534f025841702892a8a9d6a7bc28127181155d473890733320ebfabd002a034d"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "2a8e8851a265cbcfd1e9443a91aed9cee3f7f588",
+        "bytes": 66249,
+        "mode": "100644",
+        "sha256": "534f025841702892a8a9d6a7bc28127181155d473890733320ebfabd002a034d"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/formalize/tdfol.py",
+      "source": {
+        "blob": "61a0e7f5b28adebe3038e0076ae0115ed078a82c",
+        "bytes": 3029,
+        "mode": "100644",
+        "sha256": "7c16f8fd4fc2b9f843728daab40d4600ef4dd66b2c8b71c159255ca12a327a8b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "61a0e7f5b28adebe3038e0076ae0115ed078a82c",
+        "bytes": 3029,
+        "mode": "100644",
+        "sha256": "7c16f8fd4fc2b9f843728daab40d4600ef4dd66b2c8b71c159255ca12a327a8b"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/migrations.py",
+      "source": {
+        "blob": "8cd6f0a8ebf88ecc3075bcd487ff5bfd90fffb4a",
+        "bytes": 4124,
+        "mode": "100644",
+        "sha256": "0d59420410147ecdba0aaccea7b9385d280b8d32e9ffc4add56e5415e7e4113a"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "8cd6f0a8ebf88ecc3075bcd487ff5bfd90fffb4a",
+        "bytes": 4124,
+        "mode": "100644",
+        "sha256": "0d59420410147ecdba0aaccea7b9385d280b8d32e9ffc4add56e5415e7e4113a"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/model/__init__.py",
+      "source": {
+        "blob": "889ff9753021cdb4d45759f29eae163e1530e73c",
+        "bytes": 872,
+        "mode": "100644",
+        "sha256": "2c63b38d1b8d609159a77aad5473c9fa79b2a4b855c49186b848d0081115f381"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "889ff9753021cdb4d45759f29eae163e1530e73c",
+        "bytes": 872,
+        "mode": "100644",
+        "sha256": "2c63b38d1b8d609159a77aad5473c9fa79b2a4b855c49186b848d0081115f381"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/model/behavior.py",
+      "source": {
+        "blob": "6ed4eed52db5c00fcf42a908c8c72814bf9ae114",
+        "bytes": 4799,
+        "mode": "100644",
+        "sha256": "98b65818c54d5bddc816e6ee20183c96dc9813c4430e3d40fc1b0d53ac8e6724"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "6ed4eed52db5c00fcf42a908c8c72814bf9ae114",
+        "bytes": 4799,
+        "mode": "100644",
+        "sha256": "98b65818c54d5bddc816e6ee20183c96dc9813c4430e3d40fc1b0d53ac8e6724"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/model/bindings.py",
+      "source": {
+        "blob": "972ec039f8a9e7265604ebf9cda1b66a667ca59f",
+        "bytes": 18860,
+        "mode": "100644",
+        "sha256": "325499d1e4664e7d75dcb850a2d3259769e4f42ff2dd6e60fef2b48416c9befe"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "972ec039f8a9e7265604ebf9cda1b66a667ca59f",
+        "bytes": 18860,
+        "mode": "100644",
+        "sha256": "325499d1e4664e7d75dcb850a2d3259769e4f42ff2dd6e60fef2b48416c9befe"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/model/components.py",
+      "source": {
+        "blob": "1bbf4a9707d6fa322418383f14d9ea9d396b1a23",
+        "bytes": 36079,
+        "mode": "100644",
+        "sha256": "72567a0e24bae8d2c0cac70bd06e4b7249016de271c35be6d215bccd054018c5"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "1bbf4a9707d6fa322418383f14d9ea9d396b1a23",
+        "bytes": 36079,
+        "mode": "100644",
+        "sha256": "72567a0e24bae8d2c0cac70bd06e4b7249016de271c35be6d215bccd054018c5"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/model/experience.py",
+      "source": {
+        "blob": "01c0f136634b506bd297efcef428c76f751740e6",
+        "bytes": 3433,
+        "mode": "100644",
+        "sha256": "3f5d9908c23441f6f26b4272295c921e681dd928292d2afbcd2ed0f7ac5c04ed"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "01c0f136634b506bd297efcef428c76f751740e6",
+        "bytes": 3433,
+        "mode": "100644",
+        "sha256": "3f5d9908c23441f6f26b4272295c921e681dd928292d2afbcd2ed0f7ac5c04ed"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/model/layout.py",
+      "source": {
+        "blob": "8c50e40e197a729af3b84b7a43dfb9acff2b3565",
+        "bytes": 33066,
+        "mode": "100644",
+        "sha256": "fe3a63cf8c4a34275c8791a954eef8459e0a3c82bcbcbe36fd4c5aad2f07b366"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "8c50e40e197a729af3b84b7a43dfb9acff2b3565",
+        "bytes": 33066,
+        "mode": "100644",
+        "sha256": "fe3a63cf8c4a34275c8791a954eef8459e0a3c82bcbcbe36fd4c5aad2f07b366"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/model/modality.py",
+      "source": {
+        "blob": "d9951065584443cc9edc083b0db80a8ec37696ff",
+        "bytes": 28044,
+        "mode": "100644",
+        "sha256": "973b575a2d28758e856a912797f9ac81ab345acd03b0c974284ee034e465c2ab"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "d9951065584443cc9edc083b0db80a8ec37696ff",
+        "bytes": 28044,
+        "mode": "100644",
+        "sha256": "973b575a2d28758e856a912797f9ac81ab345acd03b0c974284ee034e465c2ab"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/__init__.py",
+      "source": {
+        "blob": "28bcf6389a26ef1e55b1c3489bcf652be07f5825",
+        "bytes": 809,
+        "mode": "100644",
+        "sha256": "e80d38b5c0c17ebebe8de1e20b0c95b8fc36560ef4716fa151305aa323de7f30"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "28bcf6389a26ef1e55b1c3489bcf652be07f5825",
+        "bytes": 809,
+        "mode": "100644",
+        "sha256": "e80d38b5c0c17ebebe8de1e20b0c95b8fc36560ef4716fa151305aa323de7f30"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/capabilities.py",
+      "source": {
+        "blob": "10a9bdc25cfc0d6c4bc7b136c452c9cda008d68a",
+        "bytes": 28925,
+        "mode": "100644",
+        "sha256": "8753fc0482595916a77bbeb4afd8c92f3e2fa2a6184b9db0e282de696d1e43a3"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "10a9bdc25cfc0d6c4bc7b136c452c9cda008d68a",
+        "bytes": 28925,
+        "mode": "100644",
+        "sha256": "8753fc0482595916a77bbeb4afd8c92f3e2fa2a6184b9db0e282de696d1e43a3"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/glasses.py",
+      "source": {
+        "blob": "9b992a9f0f886a420f0cbf271d8f32cdba318d1b",
+        "bytes": 51928,
+        "mode": "100644",
+        "sha256": "f66f04431457dafe6a6c1af865662f5e6fbe9afe59efaf5ed50adcd2ad97c955"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "9b992a9f0f886a420f0cbf271d8f32cdba318d1b",
+        "bytes": 51928,
+        "mode": "100644",
+        "sha256": "f66f04431457dafe6a6c1af865662f5e6fbe9afe59efaf5ed50adcd2ad97c955"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/loss.py",
+      "source": {
+        "blob": "7d74a4f045f38e28cd23450c860207c70bab8841",
+        "bytes": 16811,
+        "mode": "100644",
+        "sha256": "cddb3895c5b0af5441342e07cedafd33f09b32de6f85eb3c23c565ab21dfd281"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "7d74a4f045f38e28cd23450c860207c70bab8841",
+        "bytes": 16811,
+        "mode": "100644",
+        "sha256": "cddb3895c5b0af5441342e07cedafd33f09b32de6f85eb3c23c565ab21dfd281"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/mobile.py",
+      "source": {
+        "blob": "01a2d8297b409d15732cae43e6c5cc1100ab0a2a",
+        "bytes": 46737,
+        "mode": "100644",
+        "sha256": "3dad4465cbee8536274e5e2000bb62544069ce6346077a5445313afead496d2d"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "01a2d8297b409d15732cae43e6c5cc1100ab0a2a",
+        "bytes": 46737,
+        "mode": "100644",
+        "sha256": "3dad4465cbee8536274e5e2000bb62544069ce6346077a5445313afead496d2d"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/solver.py",
+      "source": {
+        "blob": "022c6fa6d6ed59f077ef254b5c5a79956e0bb92c",
+        "bytes": 50821,
+        "mode": "100644",
+        "sha256": "109f23fdadfc126650d3affde55d66b8f9bb618521597ea96c64f9efaec8d0b0"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "022c6fa6d6ed59f077ef254b5c5a79956e0bb92c",
+        "bytes": 50821,
+        "mode": "100644",
+        "sha256": "109f23fdadfc126650d3affde55d66b8f9bb618521597ea96c64f9efaec8d0b0"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/voice.py",
+      "source": {
+        "blob": "753781bd3622e14b07aea59397b1b29f38cf3130",
+        "bytes": 75543,
+        "mode": "100644",
+        "sha256": "e8860dc8997301c33ff9f67ee115ab069b5606957ca3eb753796b7de0fd41c12"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "753781bd3622e14b07aea59397b1b29f38cf3130",
+        "bytes": 75543,
+        "mode": "100644",
+        "sha256": "e8860dc8997301c33ff9f67ee115ab069b5606957ca3eb753796b7de0fd41c12"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/projection/web.py",
+      "source": {
+        "blob": "6ec5cf08ca36cca501e5c333baa40552239d712f",
+        "bytes": 60280,
+        "mode": "100644",
+        "sha256": "78532ea309c929af9633761f3e5c18556420ad87d9a4cd3db27a00ac1cf8624b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "6ec5cf08ca36cca501e5c333baa40552239d712f",
+        "bytes": 60280,
+        "mode": "100644",
+        "sha256": "78532ea309c929af9633761f3e5c18556420ad87d9a4cd3db27a00ac1cf8624b"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/protocols.py",
+      "source": {
+        "blob": "89742a9af9974ed8a97dcbe28f2caf1d1d48711d",
+        "bytes": 8879,
+        "mode": "100644",
+        "sha256": "40ba55c21817f50fe4ada6040ea6796b26e11e1f6b54fbad6b307b49403bac81"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "89742a9af9974ed8a97dcbe28f2caf1d1d48711d",
+        "bytes": 8879,
+        "mode": "100644",
+        "sha256": "40ba55c21817f50fe4ada6040ea6796b26e11e1f6b54fbad6b307b49403bac81"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/provenance.py",
+      "source": {
+        "blob": "19c04ded4f7cee3751b69459ee086739e4bb8418",
+        "bytes": 4297,
+        "mode": "100644",
+        "sha256": "8c6391f617eb7e3953152f27eb3747b26beee83377846f6b2023e94ae7d35fe2"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "19c04ded4f7cee3751b69459ee086739e4bb8418",
+        "bytes": 4297,
+        "mode": "100644",
+        "sha256": "8c6391f617eb7e3953152f27eb3747b26beee83377846f6b2023e94ae7d35fe2"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/__init__.py",
+      "source": {
+        "blob": "45bcc2303432e10ee0811103cf4060c016ebdfe5",
+        "bytes": 890,
+        "mode": "100644",
+        "sha256": "80cf9c7e484a89e7cea818e769830e7019177da94d91f4f9e5f0e50e3c63e93b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "45bcc2303432e10ee0811103cf4060c016ebdfe5",
+        "bytes": 890,
+        "mode": "100644",
+        "sha256": "80cf9c7e484a89e7cea818e769830e7019177da94d91f4f9e5f0e50e3c63e93b"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/events.py",
+      "source": {
+        "blob": "c2838fbf45577c03d325cdb17d2c0c962a69ba46",
+        "bytes": 3919,
+        "mode": "100644",
+        "sha256": "ac58b7168bc2e2e1831859af3db517df0b23c01f74cab6077a7d37b5a7507722"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "c2838fbf45577c03d325cdb17d2c0c962a69ba46",
+        "bytes": 3919,
+        "mode": "100644",
+        "sha256": "ac58b7168bc2e2e1831859af3db517df0b23c01f74cab6077a7d37b5a7507722"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/fusion.py",
+      "source": {
+        "blob": "a90581f78ef86f92a0fce0773dd98a0419016a4e",
+        "bytes": 8224,
+        "mode": "100644",
+        "sha256": "8d34d8a8ef7a8f8a5d265990fff5c2d520592d643efafac7445b56c8d8bb3691"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "a90581f78ef86f92a0fce0773dd98a0419016a4e",
+        "bytes": 8224,
+        "mode": "100644",
+        "sha256": "8d34d8a8ef7a8f8a5d265990fff5c2d520592d643efafac7445b56c8d8bb3691"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/idl_projection.py",
+      "source": {
+        "blob": "e06463d1c283bbcac9a56976be3c353b926f31b9",
+        "bytes": 15641,
+        "mode": "100644",
+        "sha256": "20ea93e46469a5bb37fcf27bc89d01c9ed2f03e745a7db6b34f854608fa9fd8d"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "e06463d1c283bbcac9a56976be3c353b926f31b9",
+        "bytes": 15641,
+        "mode": "100644",
+        "sha256": "20ea93e46469a5bb37fcf27bc89d01c9ed2f03e745a7db6b34f854608fa9fd8d"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/input/__init__.py",
+      "source": {
+        "blob": "842e49c8e5adf8aea6aaf6a54218423f4d16cc05",
+        "bytes": 824,
+        "mode": "100644",
+        "sha256": "aaac50090f1b97c4fe891c31700f2eab6ba19ae197a3bd96196350d98042bb08"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "842e49c8e5adf8aea6aaf6a54218423f4d16cc05",
+        "bytes": 824,
+        "mode": "100644",
+        "sha256": "aaac50090f1b97c4fe891c31700f2eab6ba19ae197a3bd96196350d98042bb08"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/input/conventional.py",
+      "source": {
+        "blob": "d0565069583bba7704087ed64266bd6e37431208",
+        "bytes": 3139,
+        "mode": "100644",
+        "sha256": "50ff150ecbebd18d13e72e1d2c1f6d7f938560a699498ef9f3373087500a542e"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "d0565069583bba7704087ed64266bd6e37431208",
+        "bytes": 3139,
+        "mode": "100644",
+        "sha256": "50ff150ecbebd18d13e72e1d2c1f6d7f938560a699498ef9f3373087500a542e"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/input/embodied.py",
+      "source": {
+        "blob": "3d33928dd892fbb01d424a2fa00175ba38b1274e",
+        "bytes": 55502,
+        "mode": "100644",
+        "sha256": "b4bf5127a028126c3f753561564c2d3a05b529dc5896252fea8908c5e50515ca"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "3d33928dd892fbb01d424a2fa00175ba38b1274e",
+        "bytes": 55502,
+        "mode": "100644",
+        "sha256": "b4bf5127a028126c3f753561564c2d3a05b529dc5896252fea8908c5e50515ca"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/input/speech.py",
+      "source": {
+        "blob": "fdcab0c121c4393087ab9c9328f428290a9f4ef3",
+        "bytes": 12010,
+        "mode": "100644",
+        "sha256": "f2bb65fd817c8a470509ee5ca882051bc24193787268910310085969fe5a8c90"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "fdcab0c121c4393087ab9c9328f428290a9f4ef3",
+        "bytes": 12010,
+        "mode": "100644",
+        "sha256": "f2bb65fd817c8a470509ee5ca882051bc24193787268910310085969fe5a8c90"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/mediator.py",
+      "source": {
+        "blob": "d37dc5986cbca7f82ff018b9967fff096a7bbd70",
+        "bytes": 33118,
+        "mode": "100644",
+        "sha256": "da3b5658bc7209ec8993fc27720bc76c3e3ffcc947e41c78ec6209f7b2b481c0"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "d37dc5986cbca7f82ff018b9967fff096a7bbd70",
+        "bytes": 33118,
+        "mode": "100644",
+        "sha256": "da3b5658bc7209ec8993fc27720bc76c3e3ffcc947e41c78ec6209f7b2b481c0"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/receipts.py",
+      "source": {
+        "blob": "1344088e1c13375c562b644d15c205ff9f7ae27a",
+        "bytes": 16953,
+        "mode": "100644",
+        "sha256": "96abb4895b47883ae7a9305f7accb2e23515aca2e8dbf6e61576a511ba47f37e"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "1344088e1c13375c562b644d15c205ff9f7ae27a",
+        "bytes": 16953,
+        "mode": "100644",
+        "sha256": "96abb4895b47883ae7a9305f7accb2e23515aca2e8dbf6e61576a511ba47f37e"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/runtime/state_machine.py",
+      "source": {
+        "blob": "eaf4ce4321f58fc9d11c748b4ad22bae6eba8454",
+        "bytes": 39587,
+        "mode": "100644",
+        "sha256": "bff5ce88b3fc58446bb2c14683ea83f6e55c44d70822919417e3529b4f52e957"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "eaf4ce4321f58fc9d11c748b4ad22bae6eba8454",
+        "bytes": 39587,
+        "mode": "100644",
+        "sha256": "bff5ce88b3fc58446bb2c14683ea83f6e55c44d70822919417e3529b4f52e957"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+      "source": {
+        "blob": "9621440ba04ed8dd787fc74603410300e2f738c4",
+        "bytes": 120714,
+        "mode": "100644",
+        "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "9621440ba04ed8dd787fc74603410300e2f738c4",
+        "bytes": 120714,
+        "mode": "100644",
+        "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/source_adapters/__init__.py",
+      "source": {
+        "blob": "49888d53756609f03461fb45c808cc136413396c",
+        "bytes": 2269,
+        "mode": "100644",
+        "sha256": "80bf60732205f15e150f0dcd7c7cf5401caf2d2f227ebc4851e45e809466272a"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "49888d53756609f03461fb45c808cc136413396c",
+        "bytes": 2269,
+        "mode": "100644",
+        "sha256": "80bf60732205f15e150f0dcd7c7cf5401caf2d2f227ebc4851e45e809466272a"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/source_adapters/dom_aria.py",
+      "source": {
+        "blob": "ce43deba4a809aefe096eed53323c85cc1ab24d4",
+        "bytes": 53181,
+        "mode": "100644",
+        "sha256": "57ecb5f487985e9c3e47da30fb22db77d71c208a5e79fbc0d7f7d585483b6f9e"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "ce43deba4a809aefe096eed53323c85cc1ab24d4",
+        "bytes": 53181,
+        "mode": "100644",
+        "sha256": "57ecb5f487985e9c3e47da30fb22db77d71c208a5e79fbc0d7f7d585483b6f9e"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/source_adapters/intent_ir.py",
+      "source": {
+        "blob": "b05dd5440e9439fbbedf052aeed383f6bbdd17b8",
+        "bytes": 55260,
+        "mode": "100644",
+        "sha256": "dba5e4279c9b77c35edf909b5c2edf03867c65a3ddce2ef259c2bb4db2281a0b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b05dd5440e9439fbbedf052aeed383f6bbdd17b8",
+        "bytes": 55260,
+        "mode": "100644",
+        "sha256": "dba5e4279c9b77c35edf909b5c2edf03867c65a3ddce2ef259c2bb4db2281a0b"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/source_adapters/mcp_idl.py",
+      "source": {
+        "blob": "1eaa48ceb2eb123988db4029c1349a77e442f57e",
+        "bytes": 5193,
+        "mode": "100644",
+        "sha256": "eab84b723a4ea351dfa4a58d2f9381f05a4a7c9c4b085c6574a647ef8f3275aa"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "1eaa48ceb2eb123988db4029c1349a77e442f57e",
+        "bytes": 5193,
+        "mode": "100644",
+        "sha256": "eab84b723a4ea351dfa4a58d2f9381f05a4a7c9c4b085c6574a647ef8f3275aa"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/source_adapters/mcp_idl_identity.py",
+      "source": {
+        "blob": "bf31582bb34f12b5e98e5eb8c69f68b03555e92a",
+        "bytes": 31340,
+        "mode": "100644",
+        "sha256": "ad854ff01b25a6c8c9fbc36ef13d11069ee6e0923d0e6b906cac7c073f0b94e9"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "bf31582bb34f12b5e98e5eb8c69f68b03555e92a",
+        "bytes": 31340,
+        "mode": "100644",
+        "sha256": "ad854ff01b25a6c8c9fbc36ef13d11069ee6e0923d0e6b906cac7c073f0b94e9"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/ui_ux_ir.schema.json",
+      "source": {
+        "blob": "b3d0ebcc435bc065e1d9bd57caf4ab9f0acd0a96",
+        "bytes": 32785,
+        "mode": "100644",
+        "sha256": "15ec4e19998fed7922d85d0810fdc10d1b487877669fa4e61fe21b19de8ef058"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b3d0ebcc435bc065e1d9bd57caf4ab9f0acd0a96",
+        "bytes": 32785,
+        "mode": "100644",
+        "sha256": "15ec4e19998fed7922d85d0810fdc10d1b487877669fa4e61fe21b19de8ef058"
+      }
+    },
+    {
+      "path": "tests/fixtures/ui_ux_ir/pilots/agent_supervisor_program.json",
+      "source": {
+        "blob": "eb4c856e5299283904b7be43c34aa2bfc5b48517",
+        "bytes": 253,
+        "mode": "100644",
+        "sha256": "b51875d5df44ddd069c098e4a26964c0d1d9b75eaf61be0ca223930aaae1f8d1"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "eb4c856e5299283904b7be43c34aa2bfc5b48517",
+        "bytes": 253,
+        "mode": "100644",
+        "sha256": "b51875d5df44ddd069c098e4a26964c0d1d9b75eaf61be0ca223930aaae1f8d1"
+      }
+    },
+    {
+      "path": "tests/fixtures/ui_ux_ir/pilots/destructive_workflow.json",
+      "source": {
+        "blob": "ddccca37ff1561debe101b4946953d5ffe747238",
+        "bytes": 287,
+        "mode": "100644",
+        "sha256": "33f0f896fa0d3d156aa2ff885a9b56fe04452ec44a6ee677dd7a5e299c52350f"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "ddccca37ff1561debe101b4946953d5ffe747238",
+        "bytes": 287,
+        "mode": "100644",
+        "sha256": "33f0f896fa0d3d156aa2ff885a9b56fe04452ec44a6ee677dd7a5e299c52350f"
+      }
+    },
+    {
+      "path": "tests/fixtures/ui_ux_ir/pilots/meta_glasses.json",
+      "source": {
+        "blob": "aece25ea181f3b4cbcb1e54835e3905eebccab68",
+        "bytes": 304,
+        "mode": "100644",
+        "sha256": "6b4d6ed742c293ac8c18e57bdb8eacdde3c45937dab432b159bb87891cec982e"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "aece25ea181f3b4cbcb1e54835e3905eebccab68",
+        "bytes": 304,
+        "mode": "100644",
+        "sha256": "6b4d6ed742c293ac8c18e57bdb8eacdde3c45937dab432b159bb87891cec982e"
+      }
+    },
+    {
+      "path": "tests/fixtures/ui_ux_ir/pilots/responsive_form.json",
+      "source": {
+        "blob": "a04af9d3f46ac0975c85ed0bf35638e1d280cc12",
+        "bytes": 492,
+        "mode": "100644",
+        "sha256": "62a71597fe571d9b26d323af3e8aa79c374740b8a93f6a1ffc780f93868660b2"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "a04af9d3f46ac0975c85ed0bf35638e1d280cc12",
+        "bytes": 492,
+        "mode": "100644",
+        "sha256": "62a71597fe571d9b26d323af3e8aa79c374740b8a93f6a1ffc780f93868660b2"
+      }
+    },
+    {
+      "path": "tests/fixtures/ui_ux_ir/v1/golden_vectors.json",
+      "source": {
+        "blob": "d8679bc0e9fdc42d5d67ac6cbc2a3f0443df9ee7",
+        "bytes": 12883,
+        "mode": "100644",
+        "sha256": "058c81fb0bca481af780dd61076d0e0f3d4a9ba48c0032f77ef1ee19ef21d79e"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "d8679bc0e9fdc42d5d67ac6cbc2a3f0443df9ee7",
+        "bytes": 12883,
+        "mode": "100644",
+        "sha256": "058c81fb0bca481af780dd61076d0e0f3d4a9ba48c0032f77ef1ee19ef21d79e"
+      }
+    },
+    {
+      "path": "tests/fixtures/ui_ux_ir/v1/mcp_idl_identity_vectors.json",
+      "source": {
+        "blob": "84e6bbccf6d1a99657fa3a21af3b5fa02119f18c",
+        "bytes": 17533,
+        "mode": "100644",
+        "sha256": "bcda9ae828624d97ce1648161d3c5db8afb90bb859b113b5c8610ee5749e89ef"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "84e6bbccf6d1a99657fa3a21af3b5fa02119f18c",
+        "bytes": 17533,
+        "mode": "100644",
+        "sha256": "bcda9ae828624d97ce1648161d3c5db8afb90bb859b113b5c8610ee5749e89ef"
+      }
+    },
+    {
+      "path": "tests/fixtures/ui_ux_ir/v1/vocabulary.json",
+      "source": {
+        "blob": "438abfe9e9a8dfa2e14035e18be79314d91ad25c",
+        "bytes": 22073,
+        "mode": "100644",
+        "sha256": "a404f14fc9188d5c914bedce88926ba529405feb033d2567b89e1de71ee53c87"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "438abfe9e9a8dfa2e14035e18be79314d91ad25c",
+        "bytes": 22073,
+        "mode": "100644",
+        "sha256": "a404f14fc9188d5c914bedce88926ba529405feb033d2567b89e1de71ee53c87"
+      }
+    },
+    {
+      "path": "tests/integration/logic/ui_ux_ir/test_destructive_workflow_pilot.py",
+      "source": {
+        "blob": "3e7200cc214eacc17f384b7fbd64c21f55a3951b",
+        "bytes": 3216,
+        "mode": "100644",
+        "sha256": "aefa296d8c826c609e94272c209ddfc46081e6b215cc8a9aedaa1536a0b1b537"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "3e7200cc214eacc17f384b7fbd64c21f55a3951b",
+        "bytes": 3216,
+        "mode": "100644",
+        "sha256": "aefa296d8c826c609e94272c209ddfc46081e6b215cc8a9aedaa1536a0b1b537"
+      }
+    },
+    {
+      "path": "tests/integration/logic/ui_ux_ir/test_meta_glasses_pilot.py",
+      "source": {
+        "blob": "5b77e636eec0673719a8700aaf87da0a16f71e4f",
+        "bytes": 2243,
+        "mode": "100644",
+        "sha256": "164e2a42ee12004887adf651637045dda1d1b262a151328e009a8ed1fb5723e1"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "5b77e636eec0673719a8700aaf87da0a16f71e4f",
+        "bytes": 2243,
+        "mode": "100644",
+        "sha256": "164e2a42ee12004887adf651637045dda1d1b262a151328e009a8ed1fb5723e1"
+      }
+    },
+    {
+      "path": "tests/integration/logic/ui_ux_ir/test_program_supervisor_pilot.py",
+      "source": {
+        "blob": "b3d83e6d460846984969952aa83ad666275067d4",
+        "bytes": 3240,
+        "mode": "100644",
+        "sha256": "eebb3a55e82bf062e1f2100e94d6311c29c8a0abc01dd0babe36e4fcaffb6354"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b3d83e6d460846984969952aa83ad666275067d4",
+        "bytes": 3240,
+        "mode": "100644",
+        "sha256": "eebb3a55e82bf062e1f2100e94d6311c29c8a0abc01dd0babe36e4fcaffb6354"
+      }
+    },
+    {
+      "path": "tests/integration/logic/ui_ux_ir/test_responsive_form_pilot.py",
+      "source": {
+        "blob": "19cdf8b4ef04fca9a7a6b9b38170c30b5b0f692c",
+        "bytes": 1047,
+        "mode": "100644",
+        "sha256": "4c43e318e5b11f4af62db2c13cbcd91f2252c5200171ea75d87208307e1130f0"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "19cdf8b4ef04fca9a7a6b9b38170c30b5b0f692c",
+        "bytes": 1047,
+        "mode": "100644",
+        "sha256": "4c43e318e5b11f4af62db2c13cbcd91f2252c5200171ea75d87208307e1130f0"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/formalize/test_compiler.py",
+      "source": {
+        "blob": "9e0120649ab55f853722bfd96da80350193847e5",
+        "bytes": 6750,
+        "mode": "100644",
+        "sha256": "5e9b83bfd86d4e2509dc6a598bcd2dd1969e6b69a54b17f83cfd6e372636adba"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "9e0120649ab55f853722bfd96da80350193847e5",
+        "bytes": 6750,
+        "mode": "100644",
+        "sha256": "5e9b83bfd86d4e2509dc6a598bcd2dd1969e6b69a54b17f83cfd6e372636adba"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/formalize/test_dcec.py",
+      "source": {
+        "blob": "8d2be0a3fbec0c9f5cc64a9b35278294fba6c276",
+        "bytes": 1116,
+        "mode": "100644",
+        "sha256": "ac744e23791f87dafa3f1fc3d4ec97b31d1fea82a9d8816375288939884d8c3b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "8d2be0a3fbec0c9f5cc64a9b35278294fba6c276",
+        "bytes": 1116,
+        "mode": "100644",
+        "sha256": "ac744e23791f87dafa3f1fc3d4ec97b31d1fea82a9d8816375288939884d8c3b"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/formalize/test_event_calculus.py",
+      "source": {
+        "blob": "966940b355f26eee7a3e03e27f89345a43c46daa",
+        "bytes": 1090,
+        "mode": "100644",
+        "sha256": "5b2efaedd2a095c464dff03b7cc115f905e178b0936bddfac7bf4613634b00ef"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "966940b355f26eee7a3e03e27f89345a43c46daa",
+        "bytes": 1090,
+        "mode": "100644",
+        "sha256": "5b2efaedd2a095c464dff03b7cc115f905e178b0936bddfac7bf4613634b00ef"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/formalize/test_flogic.py",
+      "source": {
+        "blob": "b7bcd61517e9a1c841d4608b22857ec81994ead4",
+        "bytes": 1379,
+        "mode": "100644",
+        "sha256": "5a2ba83618e5ff3f2b11ac803feb8326b2d247650b6f537213c190f866f6be32"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b7bcd61517e9a1c841d4608b22857ec81994ead4",
+        "bytes": 1379,
+        "mode": "100644",
+        "sha256": "5a2ba83618e5ff3f2b11ac803feb8326b2d247650b6f537213c190f866f6be32"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/formalize/test_ontology.py",
+      "source": {
+        "blob": "c43d5818deb7eecb9972d4e3866e9706f3e418e3",
+        "bytes": 2136,
+        "mode": "100644",
+        "sha256": "0ccfb5860be4484f6a689f8f3f5e5ed44f3ea0fe1f9b0491b4afc54255ddf4ed"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "c43d5818deb7eecb9972d4e3866e9706f3e418e3",
+        "bytes": 2136,
+        "mode": "100644",
+        "sha256": "0ccfb5860be4484f6a689f8f3f5e5ed44f3ea0fe1f9b0491b4afc54255ddf4ed"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/formalize/test_roundtrip.py",
+      "source": {
+        "blob": "8ab6c89fbfec699186bcb0141191bfb6869826f5",
+        "bytes": 4742,
+        "mode": "100644",
+        "sha256": "aefd95519f29e08ad7a511dcc1e2f331444f8f50aa5abe507f418378087d7988"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "8ab6c89fbfec699186bcb0141191bfb6869826f5",
+        "bytes": 4742,
+        "mode": "100644",
+        "sha256": "aefd95519f29e08ad7a511dcc1e2f331444f8f50aa5abe507f418378087d7988"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/formalize/test_synthesis.py",
+      "source": {
+        "blob": "db278037fab9287a92778aa103d9673b0a134b71",
+        "bytes": 19584,
+        "mode": "100644",
+        "sha256": "e437134f7db378df72c38409af018be32d5b02a0853689c182d98081eb0cb5d4"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "db278037fab9287a92778aa103d9673b0a134b71",
+        "bytes": 19584,
+        "mode": "100644",
+        "sha256": "e437134f7db378df72c38409af018be32d5b02a0853689c182d98081eb0cb5d4"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/formalize/test_tdfol.py",
+      "source": {
+        "blob": "e7e6ecbceb64c3ee6d36a8ec16a7f06340d037b1",
+        "bytes": 1158,
+        "mode": "100644",
+        "sha256": "f09e20a39548e5d4bdceb5eb5bef9f3fe5be64270eb04b7160b726d4d0c19084"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "e7e6ecbceb64c3ee6d36a8ec16a7f06340d037b1",
+        "bytes": 1158,
+        "mode": "100644",
+        "sha256": "f09e20a39548e5d4bdceb5eb5bef9f3fe5be64270eb04b7160b726d4d0c19084"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/model/test_behavior_experience.py",
+      "source": {
+        "blob": "a2ab70c31ef24e2a68364d96ee56ef6310bfcca8",
+        "bytes": 4429,
+        "mode": "100644",
+        "sha256": "f7d68b1ea5bbf746b5fa56cbf4ae7062844c4fbd7e7bea8438d618254dbe6a15"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "a2ab70c31ef24e2a68364d96ee56ef6310bfcca8",
+        "bytes": 4429,
+        "mode": "100644",
+        "sha256": "f7d68b1ea5bbf746b5fa56cbf4ae7062844c4fbd7e7bea8438d618254dbe6a15"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/model/test_components_layout.py",
+      "source": {
+        "blob": "0a0d350c27371424a94b456ccefe67f5c5371e8f",
+        "bytes": 6075,
+        "mode": "100644",
+        "sha256": "0c9688755349b0f1658b438e341d38fc1ec165b270f0bb6d423ee3b1ff06031f"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "0a0d350c27371424a94b456ccefe67f5c5371e8f",
+        "bytes": 6075,
+        "mode": "100644",
+        "sha256": "0c9688755349b0f1658b438e341d38fc1ec165b270f0bb6d423ee3b1ff06031f"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/projection/test_glasses.py",
+      "source": {
+        "blob": "ed178c738d2dfa8a9af8a49678cefaed893e6f96",
+        "bytes": 3228,
+        "mode": "100644",
+        "sha256": "19828253b86b388330305938c72d5a736f23026974214166dc8a67af86ec2374"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "ed178c738d2dfa8a9af8a49678cefaed893e6f96",
+        "bytes": 3228,
+        "mode": "100644",
+        "sha256": "19828253b86b388330305938c72d5a736f23026974214166dc8a67af86ec2374"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/projection/test_mobile.py",
+      "source": {
+        "blob": "4245bea42f08f3deabb186b406df948b5adb5613",
+        "bytes": 3013,
+        "mode": "100644",
+        "sha256": "9e984fd802a1b0aef76c7e561006cb8c314622693b5db7c6b4b1be74fbac6911"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "4245bea42f08f3deabb186b406df948b5adb5613",
+        "bytes": 3013,
+        "mode": "100644",
+        "sha256": "9e984fd802a1b0aef76c7e561006cb8c314622693b5db7c6b4b1be74fbac6911"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/projection/test_solver.py",
+      "source": {
+        "blob": "f05952fd29cdad69b662386135f3730e0d47482a",
+        "bytes": 25020,
+        "mode": "100644",
+        "sha256": "17c5978e0611a54f21ab51c8561a2dd6e4a4eb3249985c407c82dc79256703b3"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "f05952fd29cdad69b662386135f3730e0d47482a",
+        "bytes": 25020,
+        "mode": "100644",
+        "sha256": "17c5978e0611a54f21ab51c8561a2dd6e4a4eb3249985c407c82dc79256703b3"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/projection/test_voice.py",
+      "source": {
+        "blob": "f7fb55779dd9ee7078223db724df5247cb1206e0",
+        "bytes": 1548,
+        "mode": "100644",
+        "sha256": "25d7026a5ea4f558a6fc8d2e3340360cc841aacae35fb45056e1073609fc87a1"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "f7fb55779dd9ee7078223db724df5247cb1206e0",
+        "bytes": 1548,
+        "mode": "100644",
+        "sha256": "25d7026a5ea4f558a6fc8d2e3340360cc841aacae35fb45056e1073609fc87a1"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/projection/test_web.py",
+      "source": {
+        "blob": "6b9e12df7759ffae9a7ac6b90ef24f225f872c50",
+        "bytes": 10746,
+        "mode": "100644",
+        "sha256": "35f22ff79c8b29d3e92dbb684c9d350a39f6dbdf049c70aed73c7ac063502682"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "6b9e12df7759ffae9a7ac6b90ef24f225f872c50",
+        "bytes": 10746,
+        "mode": "100644",
+        "sha256": "35f22ff79c8b29d3e92dbb684c9d350a39f6dbdf049c70aed73c7ac063502682"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/runtime/test_embodied_input.py",
+      "source": {
+        "blob": "f3b7b56efaee660f14c22324c7accf9b76e37be2",
+        "bytes": 18624,
+        "mode": "100644",
+        "sha256": "5e20c8370b58de6f1a2ca90c11df2288b0d2ccad7fc23d27cb27a0e2e78ae7b7"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "f3b7b56efaee660f14c22324c7accf9b76e37be2",
+        "bytes": 18624,
+        "mode": "100644",
+        "sha256": "5e20c8370b58de6f1a2ca90c11df2288b0d2ccad7fc23d27cb27a0e2e78ae7b7"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/runtime/test_events.py",
+      "source": {
+        "blob": "76538387da4c8cf0e5a69a7b4be0831a93eec20e",
+        "bytes": 3910,
+        "mode": "100644",
+        "sha256": "762127ed585d32032ca85b383c44cdb6516f12c54bcca198222f36eb78189ec0"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "76538387da4c8cf0e5a69a7b4be0831a93eec20e",
+        "bytes": 3910,
+        "mode": "100644",
+        "sha256": "762127ed585d32032ca85b383c44cdb6516f12c54bcca198222f36eb78189ec0"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/runtime/test_fusion.py",
+      "source": {
+        "blob": "50e3be8471a564e8dcb9e8f8f778d857211dfeac",
+        "bytes": 3270,
+        "mode": "100644",
+        "sha256": "99e2228e95e3b3a55878bf8b73d17f297cfc05f25c2fcd031a4d7babde41b4a5"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "50e3be8471a564e8dcb9e8f8f778d857211dfeac",
+        "bytes": 3270,
+        "mode": "100644",
+        "sha256": "99e2228e95e3b3a55878bf8b73d17f297cfc05f25c2fcd031a4d7babde41b4a5"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/runtime/test_mediator.py",
+      "source": {
+        "blob": "7fca6c598c500fcf2a55da5a9485b2c9a21c29c6",
+        "bytes": 21516,
+        "mode": "100644",
+        "sha256": "a7a1400075c3cb651faa000cd0a0aef2b5207c4f5ac8d385f7af663c339f2f80"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "7fca6c598c500fcf2a55da5a9485b2c9a21c29c6",
+        "bytes": 21516,
+        "mode": "100644",
+        "sha256": "a7a1400075c3cb651faa000cd0a0aef2b5207c4f5ac8d385f7af663c339f2f80"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/runtime/test_receipts.py",
+      "source": {
+        "blob": "f0b93593371a0949ac2291a4375df24b549628d0",
+        "bytes": 10571,
+        "mode": "100644",
+        "sha256": "c0777ab0ded415aaeeb045fba3e8b2a54241311eccae1bd574d55b5b550aca65"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "f0b93593371a0949ac2291a4375df24b549628d0",
+        "bytes": 10571,
+        "mode": "100644",
+        "sha256": "c0777ab0ded415aaeeb045fba3e8b2a54241311eccae1bd574d55b5b550aca65"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/runtime/test_speech_input.py",
+      "source": {
+        "blob": "b347d3cd9908628ed9ac921795c8b6c78ca6a976",
+        "bytes": 4509,
+        "mode": "100644",
+        "sha256": "a3616a2147a629b83df87f34c26d901cd8c614590c33f8a985e52340f7f51ee5"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b347d3cd9908628ed9ac921795c8b6c78ca6a976",
+        "bytes": 4509,
+        "mode": "100644",
+        "sha256": "a3616a2147a629b83df87f34c26d901cd8c614590c33f8a985e52340f7f51ee5"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/runtime/test_state_machine.py",
+      "source": {
+        "blob": "0b97356815eb8cf9c1d772fcb35d30145b1905ba",
+        "bytes": 27151,
+        "mode": "100644",
+        "sha256": "643c6696d6cd72b1944d6f089511d9d8cb073c26405d935ab922523cabeeb368"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "0b97356815eb8cf9c1d772fcb35d30145b1905ba",
+        "bytes": 27151,
+        "mode": "100644",
+        "sha256": "643c6696d6cd72b1944d6f089511d9d8cb073c26405d935ab922523cabeeb368"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/source_adapters/test_intent_ir.py",
+      "source": {
+        "blob": "f5e0956c34ef13469086169a5bc04edc6701eaf5",
+        "bytes": 22801,
+        "mode": "100644",
+        "sha256": "ca1af65ee4210997645f799aa007668d19fa1e55349150cdeefe1967141492b7"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "f5e0956c34ef13469086169a5bc04edc6701eaf5",
+        "bytes": 22801,
+        "mode": "100644",
+        "sha256": "ca1af65ee4210997645f799aa007668d19fa1e55349150cdeefe1967141492b7"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/source_adapters/test_mcp_idl.py",
+      "source": {
+        "blob": "a0c2d9c697246b3473a607cc073bff51522eb39e",
+        "bytes": 2348,
+        "mode": "100644",
+        "sha256": "dcc523b2375ae701e141852af39759be436c1871b72e56e075f56028ec71208d"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "a0c2d9c697246b3473a607cc073bff51522eb39e",
+        "bytes": 2348,
+        "mode": "100644",
+        "sha256": "dcc523b2375ae701e141852af39759be436c1871b72e56e075f56028ec71208d"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_assurance.py",
+      "source": {
+        "blob": "38b0cbb549cd94cb7e9f0620f3e5f2c61e2616bb",
+        "bytes": 7446,
+        "mode": "100644",
+        "sha256": "845b040a96b4874085dbc3bb2d9336f4a485b7bccf3290e3164262c40040b780"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "38b0cbb549cd94cb7e9f0620f3e5f2c61e2616bb",
+        "bytes": 7446,
+        "mode": "100644",
+        "sha256": "845b040a96b4874085dbc3bb2d9336f4a485b7bccf3290e3164262c40040b780"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_conformance.py",
+      "source": {
+        "blob": "023e7ffc5112b02712188e52cd0bcdca5f36c437",
+        "bytes": 2481,
+        "mode": "100644",
+        "sha256": "c61c3e6520347d686c2bc895b839b348e7e94f1c4ba43d6cd3dcd90c96d27ee4"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "023e7ffc5112b02712188e52cd0bcdca5f36c437",
+        "bytes": 2481,
+        "mode": "100644",
+        "sha256": "c61c3e6520347d686c2bc895b839b348e7e94f1c4ba43d6cd3dcd90c96d27ee4"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_domain_slice.py",
+      "source": {
+        "blob": "2abc06180c468b78fbfecd1219d9e89bb1eb0de8",
+        "bytes": 2214,
+        "mode": "100644",
+        "sha256": "69b543252108ec99b3b53410ccd2e96503837cf8cf0261d4926e28630c5156f9"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "2abc06180c468b78fbfecd1219d9e89bb1eb0de8",
+        "bytes": 2214,
+        "mode": "100644",
+        "sha256": "69b543252108ec99b3b53410ccd2e96503837cf8cf0261d4926e28630c5156f9"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_idl_projection.py",
+      "source": {
+        "blob": "c08d10be3003baed01ade889e060b52b1f8902d0",
+        "bytes": 9853,
+        "mode": "100644",
+        "sha256": "9f752aa3393ab6377f8d8ec86bfd72cefb507a926e17649882d6afc0a8b6c15b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "c08d10be3003baed01ade889e060b52b1f8902d0",
+        "bytes": 9853,
+        "mode": "100644",
+        "sha256": "9f752aa3393ab6377f8d8ec86bfd72cefb507a926e17649882d6afc0a8b6c15b"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_internal_api.py",
+      "source": {
+        "blob": "b445be5b191b7b60ce90d25a56763ce1ee2eb17d",
+        "bytes": 3696,
+        "mode": "100644",
+        "sha256": "1b45ae370f42ba8eb049239810aa5074bc73acd3649789b14ebe44fc9c6c3843"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "b445be5b191b7b60ce90d25a56763ce1ee2eb17d",
+        "bytes": 3696,
+        "mode": "100644",
+        "sha256": "1b45ae370f42ba8eb049239810aa5074bc73acd3649789b14ebe44fc9c6c3843"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_mcp_idl_identity_contract.py",
+      "source": {
+        "blob": "df66969a32b55f55bca26e0cb7450a5f7e8251b3",
+        "bytes": 25421,
+        "mode": "100644",
+        "sha256": "528fa1154cfb7b5c22b4c3466270cd58bb8b7f8512b555e85bf8567ba83d4f98"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "df66969a32b55f55bca26e0cb7450a5f7e8251b3",
+        "bytes": 25421,
+        "mode": "100644",
+        "sha256": "528fa1154cfb7b5c22b4c3466270cd58bb8b7f8512b555e85bf8567ba83d4f98"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_modality_bindings.py",
+      "source": {
+        "blob": "58fadd51ffaedf790efd5938f8be77d0b8ba6c19",
+        "bytes": 7317,
+        "mode": "100644",
+        "sha256": "34a2d629c018fba2f3f5b8774fea7fe9e05cdcf57b2f6895abe87135f0c12011"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "58fadd51ffaedf790efd5938f8be77d0b8ba6c19",
+        "bytes": 7317,
+        "mode": "100644",
+        "sha256": "34a2d629c018fba2f3f5b8774fea7fe9e05cdcf57b2f6895abe87135f0c12011"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_provenance.py",
+      "source": {
+        "blob": "96b12f1c7118e252c24807643f1703c8a89ed5b0",
+        "bytes": 2961,
+        "mode": "100644",
+        "sha256": "312a6d66c24ddf8af80297bc46a307e81f29d49bfa97fd9b8622f3da322539ff"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "96b12f1c7118e252c24807643f1703c8a89ed5b0",
+        "bytes": 2961,
+        "mode": "100644",
+        "sha256": "312a6d66c24ddf8af80297bc46a307e81f29d49bfa97fd9b8622f3da322539ff"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_public_api.py",
+      "source": {
+        "blob": "cfcdb9a240f9577871988d0465461d0646e64d1f",
+        "bytes": 4400,
+        "mode": "100644",
+        "sha256": "f0985a2b72759ec5a41dba5146e4a95c883d1e0a402573128e0db955d14cefa9"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "cfcdb9a240f9577871988d0465461d0646e64d1f",
+        "bytes": 4400,
+        "mode": "100644",
+        "sha256": "f0985a2b72759ec5a41dba5146e4a95c883d1e0a402573128e0db955d14cefa9"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_schema.py",
+      "source": {
+        "blob": "347f0fee7d8366fb632eccb4323b03fe92ff74ff",
+        "bytes": 22951,
+        "mode": "100644",
+        "sha256": "d6a301a28133747c07645624a033d6080a9f0aafe7eeab57dabba8edeffd59fa"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "347f0fee7d8366fb632eccb4323b03fe92ff74ff",
+        "bytes": 22951,
+        "mode": "100644",
+        "sha256": "d6a301a28133747c07645624a033d6080a9f0aafe7eeab57dabba8edeffd59fa"
+      }
+    },
+    {
+      "path": "tests/unit/logic/ui_ux_ir/test_versioning.py",
+      "source": {
+        "blob": "02cb392547cdbb4d3b842b197789cbf205896a51",
+        "bytes": 4204,
+        "mode": "100644",
+        "sha256": "0d1eba71b7667b8cbdddec2b789f03ef314eb82001d1b37677c0f7886b2c6a1b"
+      },
+      "status": "identical",
+      "target": {
+        "blob": "02cb392547cdbb4d3b842b197789cbf205896a51",
+        "bytes": 4204,
+        "mode": "100644",
+        "sha256": "0d1eba71b7667b8cbdddec2b789f03ef314eb82001d1b37677c0f7886b2c6a1b"
+      }
+    }
+  ],
+  "repository": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006",
+  "schema": "autoencoder-effective-tree-review/v1",
+  "scope": "Source presence only; modified files require review against later work.",
+  "semantic_qualification_granted": false,
+  "source_history_reachable_from_target": true,
+  "source_revision": "3ea970167c58fa28dc964caa52e43fe2ad95c8d6",
+  "target_revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+}

@@ -1,0 +1,534 @@
+{
+  "schema": "autoencoder-progress-reconciliation-curated-retention/v1",
+  "scope": "Byte-preserving publication of reviewed metadata, source observations, reproduction scripts and local control receipts. Initial snapshots, historical evidence and concurrent successor observations remain distinct.",
+  "retained_files": [
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/README.md",
+      "retained_path": "README.md",
+      "bytes": 13148,
+      "sha256": "5c3176ae0e8962096d35e5545dccb9ad9fdf902c94820a2a783275aed8145f94"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/finalize_findings.py",
+      "retained_path": "accelerate/finalize_findings.py",
+      "bytes": 5945,
+      "sha256": "f482c10c2284abce106395d115fb3d5553e2213dbc0ad1cdb7e567decfaa011c"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/findings.json",
+      "retained_path": "accelerate/findings.json",
+      "bytes": 6330,
+      "sha256": "d35c739f9c2acbaf47da686192de7cc8529442089e9e65015856153989dcd03b"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/integration-observations-v2.json",
+      "retained_path": "accelerate/integration-observations-v2.json",
+      "bytes": 420510,
+      "sha256": "bf2ee76a3f5a0f0704f376f169c9c69b889e6216c932d3481af6fb9f3d75f6d3"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/integration-observations.json",
+      "retained_path": "accelerate/integration-observations.json",
+      "bytes": 9685,
+      "sha256": "91fc680270754d7d6c67238d6a67d73e70f77825030038ca9eaef5b1dfd57c8a"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/integration_observations.py",
+      "retained_path": "accelerate/integration_observations.py",
+      "bytes": 9399,
+      "sha256": "fb2618829249d0e11f3af18ee4ce3c83453276b029e118bf409b18e8869bcd61"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/integration_observations_initial_diagnostic.py",
+      "retained_path": "accelerate/integration_observations_initial_diagnostic.py",
+      "bytes": 9299,
+      "sha256": "321ffbfc9154b7b30517a141c1a423f32d9a1b3e44255970e0a5b32fa6aa4f52"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/survey.json",
+      "retained_path": "accelerate/survey.json",
+      "bytes": 3577582,
+      "sha256": "b5e1dfa4962632ed0b1ae9fc42d2d4325b0244b65d3285ad68cbb4866dd36dad"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/accelerate/survey_accelerate.py",
+      "retained_path": "accelerate/survey_accelerate.py",
+      "bytes": 13280,
+      "sha256": "e71c5844899b85abed835b4cb44e6c22f3a48f3ad157b2a71f544c7b32642278"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/build_integration_ledger.py",
+      "retained_path": "build_integration_ledger.py",
+      "bytes": 9572,
+      "sha256": "11975aaf2addb285381415ccc8075e3eba36b9c0acf6bada06896be08b5dbea3"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/concurrent-grouped-main-addendum.json",
+      "retained_path": "concurrent-grouped-main-addendum.json",
+      "bytes": 73407,
+      "sha256": "2724ff10f7e908b0cdb55c77b25b326b45c067caae7e85f423be0cea136008d4"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/dataset-ci-observation.json",
+      "retained_path": "dataset-ci-observation.json",
+      "bytes": 11215,
+      "sha256": "658bb5d50728ea96b875b8fb1e1e03b76755684d0dcb3edf6dcd610d0ed59066"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/UI-branch-review.json",
+      "retained_path": "datasets/UI-branch-review.json",
+      "bytes": 7091,
+      "sha256": "3eccd57c4423d0bb89dfbcbc58ebd0d77d55c1bbb72d6329b44bbd5b0d6b2b7b"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-source-effective-review.json",
+      "retained_path": "datasets/dirty-source-effective-review.json",
+      "bytes": 720267,
+      "sha256": "40b58e9b83b1b2a66748ef5587d093a6faa21468334381c4a001c338f26a9741"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-1c84ab2ed3bd.json",
+      "retained_path": "datasets/effective-1c84ab2ed3bd.json",
+      "bytes": 28286,
+      "sha256": "8334a00f05dd34c168b54c01439d5f50b3053a1d7d1757c838415c6f716ab9bb"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-1d17bfc7ed3d.json",
+      "retained_path": "datasets/effective-1d17bfc7ed3d.json",
+      "bytes": 28301,
+      "sha256": "a939493ec796cabe6850c4f619122edb791ce070fdb4180eb2311e57f6940a20"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-23540627b1cf.json",
+      "retained_path": "datasets/effective-23540627b1cf.json",
+      "bytes": 34642,
+      "sha256": "64db3e87a8c768726dc95820565fe4b158f3baa2da06a9a793a86b2df67e00ec"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-2b87326cb73f.json",
+      "retained_path": "datasets/effective-2b87326cb73f.json",
+      "bytes": 27253,
+      "sha256": "dd8c7a54d572e23c4f1862209558f279c278a10b873b299d7d352110abab3dc4"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-39f25777d557.json",
+      "retained_path": "datasets/effective-39f25777d557.json",
+      "bytes": 52016,
+      "sha256": "1eff0983cb2035089145c2fae71fa42cbe4c2ad6e858e833676be77cd38ab4b9"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-3b3b994407b2.json",
+      "retained_path": "datasets/effective-3b3b994407b2.json",
+      "bytes": 46177,
+      "sha256": "636ab8ffbb9e5990e19f037ede3613f88da766bcdf5a2ca8769212b8cb91e92f"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-5cb60b78fd5b.json",
+      "retained_path": "datasets/effective-5cb60b78fd5b.json",
+      "bytes": 8158,
+      "sha256": "770785b4b778b2c56e3b826f10424b13e2bf660faadc2e85806259b4fbda3af7"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-5e7f15587898.json",
+      "retained_path": "datasets/effective-5e7f15587898.json",
+      "bytes": 28291,
+      "sha256": "166caeec313db869ffcbc38a7d8c179d8f200d644ceca1cae143fd5aff6fa377"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-5eedd23dd8b8.json",
+      "retained_path": "datasets/effective-5eedd23dd8b8.json",
+      "bytes": 33478,
+      "sha256": "d658f7b1b7fdf1b4a90545862676bb852354d4ad89f09a1b97c2fb9720c10acb"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-64bc5734dc82.json",
+      "retained_path": "datasets/effective-64bc5734dc82.json",
+      "bytes": 10464,
+      "sha256": "5b93673d5582c30d79e282e6c4e0486412c7a9abf9ea4b31ce962abfa9b45ff0"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-6df6f395498f.json",
+      "retained_path": "datasets/effective-6df6f395498f.json",
+      "bytes": 1309,
+      "sha256": "253759d01fc635a9adc23b321f8894a564f2138a19a3ff21e7a4653973899392"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-73db2c8f3edb.json",
+      "retained_path": "datasets/effective-73db2c8f3edb.json",
+      "bytes": 20284,
+      "sha256": "9644277b8182423414a88af8bb1308ebd9bab666fa6d40eaa8261e1b31ad6ba1"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-795d96017021.json",
+      "retained_path": "datasets/effective-795d96017021.json",
+      "bytes": 60104,
+      "sha256": "413b974428357b06d29a664363c36686f034ad79f790d70b057dc8c684c03a12"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-9126231a15fb.json",
+      "retained_path": "datasets/effective-9126231a15fb.json",
+      "bytes": 8151,
+      "sha256": "f2fb9db4f74cbdd33ae1e4249d83f0849f6eb92d68e50c43b202813c4eb8a7b3"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-92600cbfc70f.json",
+      "retained_path": "datasets/effective-92600cbfc70f.json",
+      "bytes": 27171,
+      "sha256": "1e9246f5512f595b4313cc06973fd66013df89dd93fe9aa2bc62f210b8b1acb2"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-987cf856b2b9.json",
+      "retained_path": "datasets/effective-987cf856b2b9.json",
+      "bytes": 38705,
+      "sha256": "1d94770cc2f603ee047abc09ca4ad58a0c21fb88995d26e4347bd5f2ba188382"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-b8a9bb35a823.json",
+      "retained_path": "datasets/effective-b8a9bb35a823.json",
+      "bytes": 24269,
+      "sha256": "3c1f017e285eb3b325290092922669c900203f7a1231404f95bee890075b9475"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-d1643c2c621f.json",
+      "retained_path": "datasets/effective-d1643c2c621f.json",
+      "bytes": 29540,
+      "sha256": "cd1b5db32e84a5dff8b03e70e85420fd9fb2d63479b4a4f78948d3c56b35cef3"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-e8d2df7c0ef0.json",
+      "retained_path": "datasets/effective-e8d2df7c0ef0.json",
+      "bytes": 10435,
+      "sha256": "3fc38e07f776b694203625cb858a3589f5a4357f5ec288936ab22d03bc3cdb7f"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/effective-f3164b7cb04c.json",
+      "retained_path": "datasets/effective-f3164b7cb04c.json",
+      "bytes": 27174,
+      "sha256": "97374379a6fcc616c3165bbf8f4f2aab2311772c404e00d11426d909e9fa8b7c"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder/experiments/grouped-span-head-20261006/run-03/release_manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder/experiments/grouped-span-head-20261006/run-03/release_manifest.json",
+      "bytes": 11637,
+      "sha256": "bd69dfb5475f2cf9088d9246e71cfdf8f16cf15accb679a5353ff988a99fa1b8"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder/experiments/grouped-span-head-v2-20261006/run-02/release_manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder/experiments/grouped-span-head-v2-20261006/run-02/release_manifest.json",
+      "bytes": 17890,
+      "sha256": "ed8456e9d74e9e72b7f82025f22adc6b55129639c4b3f0ce966e316fc89e7f70"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261004-additional-decoder-cutoff-v1/release_manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261004-additional-decoder-cutoff-v1/release_manifest.json",
+      "bytes": 174484,
+      "sha256": "7043406e67182ffc09df95e7affbd2b112287d14bc6a2920986ab3bd299f67bf"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261004-formula-sidecars-v1/release_manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261004-formula-sidecars-v1/release_manifest.json",
+      "bytes": 67143,
+      "sha256": "3dea3b477de63e7c32ba0d2123a37ee4810bc3d2c539e545f5c1681d6b927a7f"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261004-retained-checkpoint-weights-v1/release_manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261004-retained-checkpoint-weights-v1/release_manifest.json",
+      "bytes": 16236,
+      "sha256": "4d61ca4ccae50cfe930527b933c01f635df8a09d3f73456902c5d4c4a90d81ad"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261004-source-reconstruction-aes-v1/release_manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261004-source-reconstruction-aes-v1/release_manifest.json",
+      "bytes": 46629,
+      "sha256": "30e2fe3b112f60fd7f8d9494f88caaba674efdc8424a3c174a0e34570282cbf5"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261005-authored32-source-reconstruction-aes-v1/release_manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder/releases/20261005-authored32-source-reconstruction-aes-v1/release_manifest.json",
+      "bytes": 86094,
+      "sha256": "5cb44de8754699b25571908abfc79c0b486f115b2c9dac49557d3c19e9af1a88"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder-384d/releases/20261004-retained-checkpoints-v1/lane-manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder-384d/releases/20261004-retained-checkpoints-v1/lane-manifest.json",
+      "bytes": 178240,
+      "sha256": "a08d541c18a3929cbca442397542b2d47a0ad100926165da20b197809609ec40"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder-384d/releases/20261006-contextual-selected-v1/manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder-384d/releases/20261006-contextual-selected-v1/manifest.json",
+      "bytes": 10074,
+      "sha256": "ee74e5b9738caa94dc8f24e296d4895c16baf9a52eb2305b5c5fa3141e1b309e"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder-768d/releases/20261004-retained-checkpoints-v1/lane-manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder-768d/releases/20261004-retained-checkpoints-v1/lane-manifest.json",
+      "bytes": 11456,
+      "sha256": "159e01ed3a3f87e4a2433bc4e53cfb59b97dda451fecee9ac5e186a8cbb041c6"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/manifests/Publicus--legal-ir-autoencoder-768d/releases/20261006-contextual-selected-v1/manifest.json",
+      "retained_path": "datasets/presence/manifests/Publicus--legal-ir-autoencoder-768d/releases/20261006-contextual-selected-v1/manifest.json",
+      "bytes": 10160,
+      "sha256": "9e802e5a83d3503924c38d7caffa6d879f1914c7d0f0689487b1efd7035421b1"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-summary.json",
+      "retained_path": "datasets/presence/presence-summary.json",
+      "bytes": 5062,
+      "sha256": "3ef501aca9e0caff1a7b226e51df9f05bfe160f799402bcb5af19679cacfc44a"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-survey.json",
+      "retained_path": "datasets/presence/presence-survey.json",
+      "bytes": 1246028,
+      "sha256": "14dfb9a009428dba56bbca12b04acf52811d2fc733aa8420bb1a101895dc6dd5"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/query.py",
+      "retained_path": "datasets/presence/query.py",
+      "bytes": 16292,
+      "sha256": "f2611ed5465bd412130e1a26f6a6809dbdb9d516d8813ad862e7b6031c1de2b6"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/reconciliation-findings.json",
+      "retained_path": "datasets/reconciliation-findings.json",
+      "bytes": 16067,
+      "sha256": "01390c913bb853b2556d7d38b02c4adcfe2b156799d91bfde9ca3b6fe0bc9d3a"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/survey.json",
+      "retained_path": "datasets/survey.json",
+      "bytes": 1285555,
+      "sha256": "a02278d934c90a3b0448434b0e531e863d39982f4f72c60b41e115689666ed50"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/survey.py",
+      "retained_path": "datasets/survey.py",
+      "bytes": 11752,
+      "sha256": "e78d6ca2cfaf861c3667c7ad60cb967786c95a1fe1347620c933401e60df2745"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/ui-effective-3ea970167c58.json",
+      "retained_path": "datasets/ui-effective-3ea970167c58.json",
+      "bytes": 57641,
+      "sha256": "51d089756075a15b95c55eb9f6441de2595071327e181e339ecbc1708bd8562f"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/ui-effective-6353ed34167a.json",
+      "retained_path": "datasets/ui-effective-6353ed34167a.json",
+      "bytes": 56530,
+      "sha256": "25528230db5dd3f87657471fcf2954e7c8e4f4222ff12d4364ab4ccdb3185bf4"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/ui-effective-9d558ad706e8.json",
+      "retained_path": "datasets/ui-effective-9d558ad706e8.json",
+      "bytes": 55437,
+      "sha256": "66b05afd0c4aa05095e1f92cea9a1a8126cc8258c3ebe0a37b4f234b36a71e9e"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/effective-tree-auditor-tests.xml",
+      "retained_path": "effective-tree-auditor-tests.xml",
+      "bytes": 1380,
+      "sha256": "57187a4c155e4608c21710e117a075e50560626aafdc8766139ffbdf821623c7"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/final-integration-review.json",
+      "retained_path": "final-integration-review.json",
+      "bytes": 28730,
+      "sha256": "fae4faed5ca418f2e9de3d95d77c6a491e859b7aebc34294afd7aa27ec91b8aa"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/honesty-controls.xml",
+      "retained_path": "honesty-controls.xml",
+      "bytes": 35104,
+      "sha256": "a63c3260ab7683d54eaea75f0a6e683ff74e91b99fe3ad23382f268c04f4d6c3"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/integration-ledger.json",
+      "retained_path": "integration-ledger.json",
+      "bytes": 96895,
+      "sha256": "73745a889d35c99ca15ea6ab7fb7c4b2189602c854740f9fa0eb65d5f1d01967"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/publication-datasets-review.json",
+      "retained_path": "publication-datasets-review.json",
+      "bytes": 8969,
+      "sha256": "617ef943ee3c5a8bed9d04c1b8244562bb5f415fe54e2f6420bd92cf6c5be05b"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/publication-preparation.json",
+      "retained_path": "publication-preparation.json",
+      "bytes": 41541,
+      "sha256": "072c27da794021921b6eb699a6b9cd22543a013c7f74bc3b32e2e4d790f36668"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/root/survey.json",
+      "retained_path": "root/survey.json",
+      "bytes": 45213,
+      "sha256": "ee1a5c3bee975c1239206a666df3f1a2b54b945d28f1776a5d4369fff4192fe6"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/root/survey_root.py",
+      "retained_path": "root/survey_root.py",
+      "bytes": 3946,
+      "sha256": "87da99721bab137a98bb6cd742349afb8c1a88d97b73beed4dc27c80c413ba16"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/build_semantic_matrix.py",
+      "retained_path": "semantic/build_semantic_matrix.py",
+      "bytes": 35298,
+      "sha256": "2685258fc782860a2855b58052e7b3cc5457017d954783b212c935905ec6f71d"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/check_metadata_honesty_patch.py",
+      "retained_path": "semantic/check_metadata_honesty_patch.py",
+      "bytes": 5433,
+      "sha256": "ae3d5f818001e0969d476538dfcbf7d28f8bb378596f2f4af4c1fd1a65ab306a"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/findings.json",
+      "retained_path": "semantic/findings.json",
+      "bytes": 5479,
+      "sha256": "f4c8ac26a260c952df9216e20e5dbd88dcdba38740b359ded2c08f91be5a2c84"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-metadata-diagnostic-01.json",
+      "retained_path": "semantic/honesty-metadata-diagnostic-01.json",
+      "bytes": 636,
+      "sha256": "dfe7cfaad057d82ae60a139650f947e79e95d2bf4caa8bccc7d05b4cc6e98e84"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-original-metadata-controls.json",
+      "retained_path": "semantic/honesty-original-metadata-controls.json",
+      "bytes": 9186,
+      "sha256": "349ded197c764927cc77d0cf4b24f6afa650360686f6d9c90de47713f5908ed8"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/honesty-patch-independent-review.json",
+      "retained_path": "semantic/honesty-patch-independent-review.json",
+      "bytes": 4120,
+      "sha256": "33461ba035d4209a4581f5ccd97960009b3a08b08463da183d302e773a77f2eb"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/matrix-verification.json",
+      "retained_path": "semantic/matrix-verification.json",
+      "bytes": 868,
+      "sha256": "cffd5695fe3effaf83a51d118b9750301aa83f24cf7c4edef6fc42aa9e0f2487"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/paragraph-pin-boundary.json",
+      "retained_path": "semantic/paragraph-pin-boundary.json",
+      "bytes": 7774,
+      "sha256": "7407e81d7a5f67394aaf8bccd0bd340e734b2b3e8717677931760f3e381cd36a"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/reproduce_paragraph_pin_boundary.py",
+      "retained_path": "semantic/reproduce_paragraph_pin_boundary.py",
+      "bytes": 5779,
+      "sha256": "e9d99a4524dffb4e082e5a47dfef948ec478d3344e3e371cea20b958c80e4ba9"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/semantic-current-presence-addendum.json",
+      "retained_path": "semantic/semantic-current-presence-addendum.json",
+      "bytes": 8418,
+      "sha256": "faa7161355c336f7a3c2e39d348d101055506a7b04aa603e78fe6fdc8a7d1a2b"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/semantic-evidence-matrix.json",
+      "retained_path": "semantic/semantic-evidence-matrix.json",
+      "bytes": 85148,
+      "sha256": "4d840b42598db820c6a533ef61379992c45fe8ca12f99b3c5bedf3ce8396d2b8"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/verify_semantic_matrix.py",
+      "retained_path": "semantic/verify_semantic_matrix.py",
+      "bytes": 5604,
+      "sha256": "9709a99c2dc031092f3d5dc108ccf2810cb2bf72cac3f1beb156e4ebdf22ee48"
+    },
+    {
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/verify_publication_preparation.py",
+      "retained_path": "verify_publication_preparation.py",
+      "bytes": 4279,
+      "sha256": "80a44ab9f5de1a33a68fecd601788b96fbcd5d3a299db687f76354e8effda167"
+    }
+  ],
+  "excluded_paths": [
+    "datasets/dirty-diffs/022201b2f190.diff",
+    "datasets/dirty-diffs/038dd68e0cfd.diff",
+    "datasets/dirty-diffs/07fa55e17510.diff",
+    "datasets/dirty-diffs/129343bc416f.diff",
+    "datasets/dirty-diffs/174b7daa0ee6.diff",
+    "datasets/dirty-diffs/1800cb9adf4d.diff",
+    "datasets/dirty-diffs/187c51b03ca4.diff",
+    "datasets/dirty-diffs/1d9e1a6127d3.diff",
+    "datasets/dirty-diffs/20aff0b567d5.diff",
+    "datasets/dirty-diffs/2272ac167aec.diff",
+    "datasets/dirty-diffs/2439927e60f5.diff",
+    "datasets/dirty-diffs/31c2e7d80656.diff",
+    "datasets/dirty-diffs/348a271d1973.diff",
+    "datasets/dirty-diffs/35adac5366c2.diff",
+    "datasets/dirty-diffs/367a7df9f46f.diff",
+    "datasets/dirty-diffs/3cb522a6f6b6.diff",
+    "datasets/dirty-diffs/3ece01b3408c.diff",
+    "datasets/dirty-diffs/3f591f9df417.diff",
+    "datasets/dirty-diffs/416f65a22ab9.diff",
+    "datasets/dirty-diffs/4224e112d6f6.diff",
+    "datasets/dirty-diffs/428f43c01b43.diff",
+    "datasets/dirty-diffs/482e523989b1.diff",
+    "datasets/dirty-diffs/4a3fec724604.diff",
+    "datasets/dirty-diffs/4f53f4665628.diff",
+    "datasets/dirty-diffs/502d01d98464.diff",
+    "datasets/dirty-diffs/55fa88d32f4b.diff",
+    "datasets/dirty-diffs/5dda74f2ac05.diff",
+    "datasets/dirty-diffs/5ecc0ef2ba53.diff",
+    "datasets/dirty-diffs/5f27e7ec489b.diff",
+    "datasets/dirty-diffs/671730c9350d.diff",
+    "datasets/dirty-diffs/6885f080c867.diff",
+    "datasets/dirty-diffs/6a1280e12a5c.diff",
+    "datasets/dirty-diffs/6a2b74fe6bfd.diff",
+    "datasets/dirty-diffs/6a9f5c128a96.diff",
+    "datasets/dirty-diffs/7a7e8cd4c576.diff",
+    "datasets/dirty-diffs/7b5f2014c590.diff",
+    "datasets/dirty-diffs/8685ae245aa5.diff",
+    "datasets/dirty-diffs/88c59f456929.diff",
+    "datasets/dirty-diffs/8d1d3c8a6a3e.diff",
+    "datasets/dirty-diffs/8df83347b060.diff",
+    "datasets/dirty-diffs/8e018cb7db05.diff",
+    "datasets/dirty-diffs/8ea91aecb765.diff",
+    "datasets/dirty-diffs/95d3ecd541e4.diff",
+    "datasets/dirty-diffs/97a8d93658a0.diff",
+    "datasets/dirty-diffs/a7968285dc86.diff",
+    "datasets/dirty-diffs/aee34f691e96.diff",
+    "datasets/dirty-diffs/b4bb50416c7a.diff",
+    "datasets/dirty-diffs/bafb99591040.diff",
+    "datasets/dirty-diffs/c150ceab79cd.diff",
+    "datasets/dirty-diffs/c198ce466c89.diff",
+    "datasets/dirty-diffs/c4efc33b9435.diff",
+    "datasets/dirty-diffs/c9378dddbcc5.diff",
+    "datasets/dirty-diffs/cbce1068d773.diff",
+    "datasets/dirty-diffs/cc284158ed92.diff",
+    "datasets/dirty-diffs/ce1b6aed4794.diff",
+    "datasets/dirty-diffs/d25f613b2769.diff",
+    "datasets/dirty-diffs/d4ff07a4d950.diff",
+    "datasets/dirty-diffs/d6f4d9551e77.diff",
+    "datasets/dirty-diffs/d9e4889df62d.diff",
+    "datasets/dirty-diffs/db938a0ad872.diff",
+    "datasets/dirty-diffs/ddf2a190460f.diff",
+    "datasets/dirty-diffs/e35d42cf879f.diff",
+    "datasets/dirty-diffs/e36a095ec87e.diff",
+    "datasets/dirty-diffs/ea5cbdeb4a8a.diff",
+    "datasets/dirty-diffs/eb502fd5d6b6.diff",
+    "datasets/dirty-diffs/f65837aeb92e.diff",
+    "datasets/dirty-diffs/fc17bde4a04f.diff",
+    "root/status-before.z",
+    "root/survey.stderr.log",
+    "root/survey.stdout.log",
+    "semantic/paragraph-pin-boundary-fixture/checkpoint.json",
+    "semantic/paragraph-pin-boundary-fixture/contexts.json",
+    "semantic/paragraph-pin-boundary-fixture/donor.json",
+    "semantic/paragraph-pin-boundary-fixture/preprocessing.json",
+    "semantic/paragraph-pin-boundary-fixture/rows.json"
+  ],
+  "exclusions_reason": "Raw worktree status/logs, foreign patch payloads, generated private synthetic tensor fixtures and Python caches are retained locally and excluded from publication. No real model checkpoint or embedding/cache payload is copied."
+}

@@ -1,0 +1,141 @@
+{
+  "schema": "autoencoder-semantic-current-presence-addendum/v1",
+  "matrix_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/semantic/semantic-evidence-matrix.json",
+    "bytes": 85148,
+    "sha256": "4d840b42598db820c6a533ef61379992c45fe8ca12f99b3c5bedf3ce8396d2b8"
+  },
+  "presence_summary_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-summary.json",
+    "bytes": 5062,
+    "sha256": "3ef501aca9e0caff1a7b226e51df9f05bfe160f799402bcb5af19679cacfc44a"
+  },
+  "presence_full_survey_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-survey.json",
+    "bytes": 1246028,
+    "sha256": "14dfb9a009428dba56bbca12b04acf52811d2fc733aa8420bb1a101895dc6dd5"
+  },
+  "observed_at_utc": "2026-10-06T14:30:11.757313+00:00",
+  "borrowed_peer_observation": {
+    "Hub": [
+      {
+        "all_normative_named_paths": [],
+        "bounded_manifest_fetch_count": 7,
+        "exact_identity_scope": "All sibling file metadata at the recorded immutable repository revision; original weight contents were not downloaded. Exact local serialization SHA256 is joined to Hub Git blob OID/LFS SHA metadata, not a fresh remote weight SHA256 measurement.",
+        "file_metadata_count": 2395,
+        "immutable_revision": "726386d3cb0ef068f275d4ded97fef71fdfeebf0",
+        "legacy_contextual_serialization_identity_matches": 2,
+        "main_revision_stable": true,
+        "new_normative_serialization_identity_matches": 0,
+        "public": true,
+        "repository": "Publicus/legal-ir-autoencoder"
+      },
+      {
+        "all_normative_named_paths": [],
+        "bounded_manifest_fetch_count": 2,
+        "exact_identity_scope": "All sibling file metadata at the recorded immutable repository revision; original weight contents were not downloaded. Exact local serialization SHA256 is joined to Hub Git blob OID/LFS SHA metadata, not a fresh remote weight SHA256 measurement.",
+        "file_metadata_count": 505,
+        "immutable_revision": "f2c3714f7bf8e30177a799270f0cead51baf19dc",
+        "legacy_contextual_serialization_identity_matches": 1,
+        "main_revision_stable": true,
+        "new_normative_serialization_identity_matches": 0,
+        "public": true,
+        "repository": "Publicus/legal-ir-autoencoder-384d"
+      },
+      {
+        "all_normative_named_paths": [],
+        "bounded_manifest_fetch_count": 2,
+        "exact_identity_scope": "All sibling file metadata at the recorded immutable repository revision; original weight contents were not downloaded. Exact local serialization SHA256 is joined to Hub Git blob OID/LFS SHA metadata, not a fresh remote weight SHA256 measurement.",
+        "file_metadata_count": 145,
+        "immutable_revision": "2fc77ccd037e7276c8bdd56a2c79cada0334fd79",
+        "legacy_contextual_serialization_identity_matches": 1,
+        "main_revision_stable": true,
+        "new_normative_serialization_identity_matches": 0,
+        "public": true,
+        "repository": "Publicus/legal-ir-autoencoder-768d"
+      }
+    ],
+    "additional_public_grouped_experiment_metadata_only": {
+      "aggregate_repository": "Publicus/legal-ir-autoencoder",
+      "paths": [
+        "experiments/grouped-span-head-20261006/run-03/release_manifest.json",
+        "experiments/grouped-span-head-v2-20261006/run-02/release_manifest.json"
+      ],
+      "revision": "726386d3cb0ef068f275d4ded97fef71fdfeebf0",
+      "scope": "Two current public release manifests were pinned and tree identities recorded. Publication does not establish source integration, correctness, reconstruction quality, native-runtime readiness, fresh holdout, or proof qualification."
+    },
+    "all_eleven_bounded_manifest_fetches_identity_verified": true,
+    "catalog": {
+      "DB_and_WAL_stat_unchanged": true,
+      "IR_bindings": 670,
+      "legacy_contextual_exact_sha_matches": 2,
+      "new_normative_last_alias_exact_sha_matches": 0,
+      "new_normative_selected_exact_sha_matches": 0,
+      "path": "/home/barberb/lift_coding/external/ipfs_accelerate/model_manager.duckdb",
+      "whole_DB_hash_or_copy": false
+    },
+    "completed": true,
+    "exact_scope": "One selected native read-only ModelManager store and three public Hub main snapshots at recorded immutable commits; no all-host or other-repository absence claim.",
+    "legacy_registered_contract_fields_preserved": [
+      {
+        "dimension": 384,
+        "format_id": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:10485c538f0f4a64e9ec0b6fa1c62e06af1f368446cd2c0e8e342e127e9055d9",
+        "runtime_ready": false,
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction",
+        "teacher_qualified": false
+      },
+      {
+        "dimension": 768,
+        "format_id": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:c992440d87ae57cffb689aa37fe2f3b63e9ae4c251a9ad65697148e576f840e2",
+        "runtime_ready": false,
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction",
+        "teacher_qualified": false
+      }
+    ],
+    "local_original_state_evidence_and_source_pins_unchanged": true,
+    "new_normative_models_registered_or_Hub_published_in_selected_scope": false,
+    "no_model_inference_training_or_weight_downloads": true,
+    "no_models_weights_or_databases_mutated": true,
+    "observed_at_utc": "2026-10-06T14:30:11.757313+00:00",
+    "query_pin": {
+      "bytes": 16292,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/query.py",
+      "sha256": "f2611ed5465bd412130e1a26f6a6809dbdb9d516d8813ad862e7b6031c1de2b6"
+    },
+    "schema": "autoencoder-selected-state-presence-summary/v1",
+    "survey_pin": {
+      "bytes": 1246028,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/presence/presence-survey.json",
+      "sha256": "14dfb9a009428dba56bbca12b04acf52811d2fc733aa8420bb1a101895dc6dd5"
+    }
+  },
+  "interpretation": [
+    "The eight newer normative selected/last serialization assets (four tensor identities with aliases) have no exact SHA match in the selected670-binding ModelManager store and no exact GitOID/LFS join in the three recorded Hub snapshots.",
+    "This is bounded exact-serialization presence, not a claim that no equivalent tensors or other repository copies exist anywhere. The older original contextual0ac5/8892 states remain present and retain nullable native identities/all authorityfalse.",
+    "Public grouped-span release manifests are present in the aggregate snapshot, while grouped/deontic source work remains active/unqualified. Hub presence, published source, main integration, current runtime availability and semantic/proof qualification are separate stages."
+  ],
+  "next_concrete_work": [
+    "Inventory selected versus last alias roles and exact native tensor/serialization identities, then use the existing native import/publisher APIs in a separately reviewed action to add new candidate assets without replacing original records/defaults.",
+    "Bind each candidate to family/dimension/input role/task/codec/run/checkpoint and complete original corpus/cache/preprocessing/source receipts; keep teacher/runtime/prooffalse and unknown output identities null.",
+    "Evaluate v3 retention/richer semantics and current source compatibility before selecting a candidate or declaring a teacher; preserve all zero controls and alias counts."
+  ],
+  "source_binding_precision": "Clause-context/source-inventory comparisons authenticate joins against caller-pinned saved preprocessing. They do not independently authenticate the encoder producer; paragraph bytes have only caller-pin custody at the generic facade. The exact original44-asset execution remains separately bound.",
+  "operations": {
+    "model_loaded": false,
+    "model_inference_executed": false,
+    "training_executed": false,
+    "encoder_executed": false,
+    "database_or_huggingface_mutated": false,
+    "weight_downloaded": false,
+    "proof_authority": false
+  },
+  "scope": "This synthesis reads the completed peer presence receipt; it does not reopen the catalog or query Hub itself."
+}
