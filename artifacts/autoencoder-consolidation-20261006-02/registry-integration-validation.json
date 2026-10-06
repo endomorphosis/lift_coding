@@ -1,0 +1,153 @@
+{
+  "schema": "grouped-v2-registry-integration-validation/v1",
+  "status": "passed",
+  "scope": "Candidate worktree only; explicit experimental source-conditioned profile, no model/default promotion.",
+  "source": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+    "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955",
+    "bytes": 64337
+  },
+  "new_tests": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py",
+    "sha256": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0",
+    "bytes": 12462
+  },
+  "test_results": {
+    "registry-existing-baseline.xml": {
+      "tests": 42,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "registry-grouped-tests-01.xml": {
+      "tests": 35,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "registry-combined-final.xml": {
+      "tests": 77,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "test_receipts": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/registry-existing-baseline.xml",
+      "sha256": "15cc1aae76fe6fba34bcc03d38b2b268c4a189d65cdde3159e50c5b88b194c23",
+      "bytes": 8780
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/registry-grouped-tests-01.xml",
+      "sha256": "e99c266de17993d562248cf4e44cd218d91041849c2f432f760ead6d5a3fdc3e",
+      "bytes": 7569
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/registry-combined-final.xml",
+      "sha256": "cdc29cf31272c7c96a2e2ef1555cffc483b8ba09b5287788855437e438136622",
+      "bytes": 16102
+    }
+  ],
+  "existing_test_files_unchanged": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_runtime_registry.py",
+      "sha256": "cba44a74ad99ebff2ea9d89c0100e35c8473dcf5cdf3d170ee5ecab072d20553",
+      "bytes": 13377
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/tests/unit/optimizers/logic_theorem_optimizer/test_learned_formula_runtime.py",
+      "sha256": "613abb4e36d1d8ac5b45b65dc2afca4f7352adc1c27397ca2afa089aa50f6f9b",
+      "bytes": 7587
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/tests/unit/optimizers/logic_theorem_optimizer/test_native_formula_runtime.py",
+      "sha256": "e52594f4c68794963c81c88e798599cced535d07993568633bc4822f0b33e1d9",
+      "bytes": 7426
+    }
+  ],
+  "four_checkpoint_modules_identical_to_frozen_snapshot": [
+    {
+      "candidate": {
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+        "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+        "bytes": 13298
+      },
+      "snapshot": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/after/ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+        "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+        "bytes": 13298
+      }
+    },
+    {
+      "candidate": {
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+        "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f",
+        "bytes": 6557
+      },
+      "snapshot": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/after/ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+        "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f",
+        "bytes": 6557
+      }
+    },
+    {
+      "candidate": {
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+        "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+        "bytes": 29370
+      },
+      "snapshot": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/after/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+        "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+        "bytes": 29370
+      }
+    },
+    {
+      "candidate": {
+        "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+        "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+        "bytes": 33948
+      },
+      "snapshot": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/after/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+        "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+        "bytes": 33948
+      }
+    }
+  ],
+  "selected_checkpoint_replay": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/registry-selected-checkpoint-replay.json",
+    "sha256": "4f710842c75c75d09edb26356b0e4dfbd535a575effd222fe61927a02c4651bc",
+    "bytes": 68216
+  },
+  "profile": "legal_ir:source_conditioned_grouped_v2",
+  "capabilities": [
+    "load_checkpoint",
+    "infer",
+    "decode_formal_logic"
+  ],
+  "load_arguments": [
+    "checkpoint_path",
+    "checkpoint_sha256"
+  ],
+  "inference_arguments": [
+    "source_text",
+    "modal_scope"
+  ],
+  "numeric_vector_conditioning": false,
+  "supported_logic_families": [
+    "deontic_fol"
+  ],
+  "all_family_requirements_satisfied": false,
+  "actual_checkpoint_replay_forward_count": 2,
+  "new_lake_builds": 0,
+  "training_experiment_executed": false,
+  "unit_tests_include_existing_small_training_fixtures": true,
+  "cuda_visible_devices": "",
+  "torch_threads": 2,
+  "git_commits_created": 0,
+  "git_pushes": 0,
+  "production_promotion": false,
+  "source_semantics_verified": false
+}

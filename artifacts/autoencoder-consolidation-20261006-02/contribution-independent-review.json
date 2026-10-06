@@ -1,0 +1,75 @@
+{
+  "blocking_findings": [],
+  "both_checkpoint_exact_resaves": true,
+  "candidate_content_stable": true,
+  "candidate_freeze": {
+    "bytes": 4174,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/candidate-freeze.json",
+    "sha256": "ceadaf21f9038af85f9bf1335ad5e4948f3358d93c5ac4e2078253a273b3ea48"
+  },
+  "canonical_file_byte_preservation_claimed": false,
+  "canonical_heads_and_indexes_unchanged": true,
+  "combined_tests": 407,
+  "datasets_base": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "datasets_frozen_files_verified": 27,
+  "decision": "clear_for_parent_contribution",
+  "deferred_snapshot": {
+    "archived_not_runtime": true,
+    "bytes": 2482032,
+    "files": 54,
+    "missing_main_paths": 40,
+    "present_main_preimages_verified": 14
+  },
+  "drift_disposition": "Parent instructed that the two concurrent canonical test edits be preserved with ownership unknown. Frozen candidate files and archived original bytes are verified independently; no review action reverts these working files.",
+  "four_module_and_five_dependency_compatibility_preserved": true,
+  "github_writes_performed": false,
+  "guides_summary_and_parent_report_claims_reconciled": true,
+  "historical_handoff_git_blobs_verified": 10,
+  "native_positive_and_false_scope_control_receipts_verified": true,
+  "new_training_experiment_performed": false,
+  "observed_unattributed_canonical_test_drift": [
+    {
+      "current_mtime_utc": "2026-10-06T14:18:38.892737+00:00",
+      "current_sha256": "de59814005b798404996a6d8a207bb7b17f806c93c8ea590eb483cbd60a8afb4",
+      "current_size_bytes": 11558,
+      "original_frozen_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831",
+      "ownership": "unknown",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "preserved_without_revert": true
+    },
+    {
+      "current_mtime_utc": "2026-10-06T14:18:38.893686+00:00",
+      "current_sha256": "aa799e28e8e01d5e27ac650ad0158b5974bf65c96521737a23f0f83dccc8e719",
+      "current_size_bytes": 12950,
+      "original_frozen_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c",
+      "ownership": "unknown",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "preserved_without_revert": true
+    }
+  ],
+  "opt_in_registry_adapter_reviewed": true,
+  "original_runtime_classes_and_nonrouter_functions_AST_unchanged": true,
+  "parent_followthrough": "Rebase the isolated workspace contribution preserving the latest unrelated submodule-pointer update, and point only the intended datasets submodule to the reviewed published datasets contribution. This review approves the frozen content; it does not perform commits or GitHub writes.",
+  "production_model_renderer_evaluator_bytes_unchanged": true,
+  "proof_promotion": false,
+  "public_registry_actual_predictions": 2,
+  "retained_checkpoint_predictions_reproduced": 256,
+  "review_runner": {
+    "bytes": 12352,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/review_contribution.py",
+    "sha256": "3c124a197ab9c00bd8dea93b11e555a9a34d52ce0b6ecc595fe7c32fc1894797"
+  },
+  "schema": "autoencoder-consolidation-contribution-independent-review/v1",
+  "source_semantics_verified": false,
+  "test_ports_preserve_all_cases_and_assertions": true,
+  "workspace_candidate_freeze": {
+    "bytes": 14805,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-candidate-freeze.json",
+    "sha256": "8a58511b5bb414bd5a1c07b720546198480910c249f85964601b90d8490a8604"
+  },
+  "workspace_frozen_files_verified": 77,
+  "workspace_latest_diff": [
+    "M\texternal/ipfs_accelerate"
+  ],
+  "workspace_latest_main": "b16464347c479f7a3cbda4c8e29dbaef90dda4fb"
+}

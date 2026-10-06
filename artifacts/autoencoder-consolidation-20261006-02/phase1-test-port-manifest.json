@@ -1,0 +1,40 @@
+{
+  "candidate_only": true,
+  "canonical_and_frozen_tests_unchanged": true,
+  "files": [
+    {
+      "all_original_assertions_preserved": true,
+      "candidate_sha256": "c8f5d26d9e0ee6abcd18059389d9a267d0f645b22e381386120e191a65315c80",
+      "change": "Replace eager optional grouping import/setup with explicit import denial and negative control when absent; retain real helper poison with negative control when present. Missing scanner attribute receives only a scoped test poison.",
+      "function": "test_semantic_renderer_never_calls_source_parser_group_builder_or_legacy_decoder",
+      "original_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py"
+    },
+    {
+      "all_original_assertions_preserved": true,
+      "candidate_sha256": "b932ea70a7f3cc26037055271894ede450e44030bf017001fb7eab53cc9f4b40",
+      "change": "Replace eager optional grouping import/setup with explicit import denial and negative control when absent; retain real helper poison with negative control when present. Missing scanner attribute receives only a scoped test poison.",
+      "function": "test_decoder_has_no_dependency_on_group_or_source_reconstruction",
+      "original_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py"
+    },
+    {
+      "all_original_assertions_preserved": true,
+      "candidate_sha256": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c",
+      "change": "Replace eager optional grouping import/setup with explicit import denial and negative control when absent; retain real helper poison with negative control when present. Missing scanner attribute receives only a scoped test poison.",
+      "function": "test_predictor_signature_has_no_target_or_source_parser_dependency",
+      "original_sha256": "61a5fe1b430517362e6331ace33c7f34efa282d4987cfe1761b3651a9e97bb4b",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py"
+    },
+    {
+      "all_original_assertions_preserved": true,
+      "candidate_sha256": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f",
+      "change": "Replace eager optional grouping import/setup with explicit import denial and negative control when absent; retain real helper poison with negative control when present. Missing scanner attribute receives only a scoped test poison.",
+      "function": "test_refusal_comes_from_learned_head_without_modal_dictionary_or_parser",
+      "original_sha256": "08ee59189e648e31f1d8f50c881cf24bc91c34f017d32cfac84920d73f7ff0c1",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py"
+    }
+  ],
+  "production_modules_changed": false,
+  "schema": "grouped-phase1-optional-dependency-test-port/v1"
+}

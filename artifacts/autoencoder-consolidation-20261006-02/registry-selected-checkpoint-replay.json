@@ -1,0 +1,1629 @@
+{
+  "schema": "grouped-legal-runtime-selected-checkpoint-replay/v1",
+  "status": "passed",
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/replay_grouped_registry_checkpoint.py",
+    "sha256": "98507b536adfa2a02c9e36607b6c5237daa12456debe0cdd32d913fbf596fbcc",
+    "bytes": 4950
+  },
+  "registry_source": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+    "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955",
+    "bytes": 64337
+  },
+  "checkpoint": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/epoch-003/checkpoint.json",
+    "sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+    "bytes": 30519315
+  },
+  "selected_receipt": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/selected.json",
+    "sha256": "fd7cabf348a37458bd3794d5953858bc17cac569dc07e08ca8f775f10bc834bc",
+    "bytes": 6214
+  },
+  "prior_native_audit": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/native-audit-01/results.json",
+    "sha256": "d682da6baecdc40daa9966cd0d35b1ff960739f5b194a191f24b5edbdf3208cc",
+    "bytes": 52333
+  },
+  "prior_predictions": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/native-audit-01/actual-predictions.json",
+    "sha256": "7eca12ce68eadd2ba6523147d533d5c3da4a2ba63050843a7c2a20ef3b60a6cf",
+    "bytes": 11995
+  },
+  "prior_native_records": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/native-audit-01/decoded-records.json",
+    "sha256": "0e1de2aa03e138ec729f6cd895486c794902ccc9c4388e0456deb78e3b87b7fa",
+    "bytes": 78184
+  },
+  "descriptor": {
+    "admitted": false,
+    "all_family_requirements_satisfied": false,
+    "caller_modal_scope_required_for_prediction": true,
+    "capabilities": [
+      "load_checkpoint",
+      "infer",
+      "decode_formal_logic"
+    ],
+    "dimension": null,
+    "domain": "legal_ir",
+    "experimental": true,
+    "formal_decoder": {
+      "available": true,
+      "binding_profile": "universal_actor_predicate",
+      "connective": "inclusive_or",
+      "head_required": true,
+      "independent_learned_formula_decoder": true,
+      "member_count": {
+        "maximum": 8,
+        "minimum": 2
+      },
+      "modes": [
+        "learned_grouped"
+      ],
+      "scope": "ordered_2_to_8_actor_modality_action_members_with_declared_modal_scope"
+    },
+    "formalized": false,
+    "input_fields": [
+      "source_text",
+      "modal_scope"
+    ],
+    "input_representation": "source_text_and_explicit_caller_modal_scope",
+    "integrated": true,
+    "latent_conditioned": false,
+    "lineage_id": "source_conditioned_grouped_v2",
+    "numeric_vector_conditioning": false,
+    "output_schema": "legal-coordination-decode-request/v1",
+    "promotion_performed": false,
+    "proof_ready": false,
+    "qualification_requirements": {
+      "admitted": false,
+      "catalog_binding": {
+        "family_registry_sha256": "e29c84e4519e83547babc061b514f7639265329318e3ff7d0c2ac1e380100e4e",
+        "family_registry_version": "2.0.0",
+        "profile_catalog_sha256": "9682c97c3b7be805e73c2072af7b1119bdb429b8387f0b1156c04d79cb8915b8",
+        "software_routes_sha256": "5603e7e69613129891f9d551dc333c2c4621f4dfd9626ffd6e324b6ab203107e",
+        "source_identity": {
+          "files": {
+            "logic/families/models.py": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f",
+            "logic/families/namespaces.py": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d",
+            "logic/families/profile_catalog_v3.py": "5897d3a1452f3c7582362604d37cbf4967f6616bfeaad88f892908ab67d21313",
+            "logic/families/profiles.py": "94287238f7816c25ecf9d63e9bcbbd9951140e842a3135da7f615454cfc04a23",
+            "logic/families/registry.py": "669c4d90dbbac1014bd3dced401027be0391d304477b904f9da04d5a2d6c0450",
+            "logic/software_verification/syntax_bridge.py": "cc46f305dede1cadb358a524f30dbb894b84ab062f0c083c3138c7e43f271116"
+          },
+          "scope": "listed_catalog_sources_only_not_transitive_provenance",
+          "sha256": "c3628833b8ecd942e041e60d181efe6a2ab1bb4d62a3287c5c63a7894dcba225"
+        }
+      },
+      "code_requirement_trigger": {
+        "applicability_owner": "trusted_domain_adapter_not_dataset_or_caller_pass_flags",
+        "codebase_ir_always_required": true,
+        "conditional_route_ids": [
+          "software_verification.authorization",
+          "software_verification.concurrency",
+          "software_verification.contract",
+          "software_verification.heap",
+          "software_verification.hyperproperty",
+          "software_verification.program",
+          "software_verification.protocol",
+          "software_verification.refinement",
+          "software_verification.separation",
+          "software_verification.state",
+          "software_verification.temporal",
+          "software_verification.trace",
+          "software_verification.transition",
+          "software_verification.vc"
+        ],
+        "false_is_not_a_waiver": true,
+        "otherwise": "trusted_typed_source_or_output_contains_code_state_transition_or_executable_idl_contract",
+        "security_ir_always_required": true
+      },
+      "code_state_requirement": {
+        "bounded_model_check_is_unbounded_proof": false,
+        "canonical_families": [
+          {
+            "descriptor_sha256": "e98a42d53e44f087aac56322062e2310dca93e481fe97c7b98b4b8334b445afe",
+            "family_id": "transition_system"
+          },
+          {
+            "descriptor_sha256": "e547d7e771838d39180134c385bcaf08b0b0ff94483d42985e50e8af004e562e",
+            "family_id": "temporal"
+          }
+        ],
+        "conditionally_required": true,
+        "profile": {
+          "aliases": [
+            "tla+"
+          ],
+          "description": "",
+          "identity": {
+            "interface": "LogicIdentityNamespaces@1",
+            "namespace": "profile",
+            "schema_version": "logic-identity-namespaces/v1",
+            "value": "tla_plus",
+            "version": "1.0.0"
+          },
+          "name": "TLA+",
+          "namespace": "profile",
+          "value": "tla_plus"
+        },
+        "profile_sha256": "de63449d0a9cb030da66e10cbf37d3298e2cbcf2e3704b13919c1b40e3c2523e",
+        "required": false,
+        "validation_required": [
+          "typed_state_schema",
+          "typed_transition_system",
+          "tla_plus_strict_syntax",
+          "explicit_initial_state_and_next_relation",
+          "invariant_and_liveness_obligations",
+          "declared_fairness_and_model_bounds",
+          "backend_specific_model_check_receipt_when_model_check_claimed"
+        ]
+      },
+      "constitution_policy": "never_mark_roundtrip_ok_or_formalized",
+      "contains_code": false,
+      "declaration_only": true,
+      "domain": "legal_ir",
+      "feature_pretraining_policy": "may_continue_with_explicit_gaps_without_qualification_or_promotion",
+      "formalized": false,
+      "lake_executed": false,
+      "lake_schema_requirement": {
+        "command_template": [
+          "lake",
+          "build",
+          "<Lib>"
+        ],
+        "downloads_allowed": false,
+        "fingerprint_only_theorem_satisfies_requirement": false,
+        "lean_major_version": 4,
+        "mathlib_allowed": false,
+        "receipt_authority": "locally_verified_actual_source_bound_lake_build_only",
+        "receipt_binding_required": [
+          "domain",
+          "schema_version",
+          "schema_sha256",
+          "decoded_output_sha256",
+          "source_sha256",
+          "emitter_sha256",
+          "lean_source_sha256",
+          "lake_project_sha256",
+          "library_target",
+          "installed_toolchain_identity",
+          "command",
+          "returncode",
+          "complete_build_log_sha256"
+        ],
+        "required": true,
+        "scope": "exact_emitted_output_schema_and_typed_instance",
+        "sorry_admit_axiom_allowed": false,
+        "successful_schema_build_proves_source_meaning": false
+      },
+      "logic_floor": [
+        {
+          "binding_gaps": [],
+          "canonical_families": [
+            {
+              "descriptor_sha256": "61e5583e4e5453b8ca98f535520da2faf40cbd7cc2763de6d15ff3be302d516d",
+              "family_id": "first_order"
+            }
+          ],
+          "composition": null,
+          "required": true,
+          "requirement_id": "first_order_logic",
+          "scope": "schema_capability_not_universal_per_span_translation",
+          "validation_required": [
+            "typed_output_schema",
+            "strict_family_syntax",
+            "operator_and_argument_coverage",
+            "explicit_projection_losses",
+            "source_binding",
+            "decoded_semantic_evaluation"
+          ]
+        },
+        {
+          "binding_gaps": [],
+          "canonical_families": [
+            {
+              "descriptor_sha256": "5d96a24de3635fffabfc932d025df740d8a907d4014f5e5b6ec5838b59ae1629",
+              "family_id": "tdfol"
+            }
+          ],
+          "composition": {
+            "composition_id": "tdfol_composition_v1",
+            "description": "Temporal-FOL expressed as versioned composition metadata under canonical family_id tdfol",
+            "family_id": "tdfol",
+            "interface": "FamilyComposition@1",
+            "metadata": {
+              "component_family_ids": [
+                "deontic",
+                "first_order",
+                "temporal"
+              ],
+              "composition_version": "1.0.0",
+              "notes": "temporal_first_order is a composition label over retained tdfol; it must not be emitted as a standalone family_id",
+              "role_by_family": {
+                "deontic": "normative_operators",
+                "first_order": "quantified_matrix",
+                "temporal": "time_trace"
+              },
+              "schema_version": "1.0.0"
+            },
+            "name": "Temporal-FOL (tdfol retained identity)",
+            "profile": {
+              "attacker": {
+                "equational_theories": [],
+                "model": "not_applicable",
+                "notes": ""
+              },
+              "bounds": {
+                "domain": "unbounded",
+                "domain_size": null,
+                "model_check_depth": null,
+                "resource_bound_names": [],
+                "step_bound": null
+              },
+              "consequence": "classical",
+              "description": "Declared composition of temporal and first-order semantics; not an opaque replacement family string.",
+              "family_ids": [
+                "deontic",
+                "first_order",
+                "tdfol",
+                "temporal"
+              ],
+              "fragment_ids": [
+                "deontic",
+                "linear_time",
+                "quantifiers"
+              ],
+              "frames": {
+                "euclidean": null,
+                "frame": "not_applicable",
+                "reflexive": null,
+                "serial": null,
+                "symmetric": null,
+                "transitive": null
+              },
+              "hypertrace": {
+                "max_alternation": null,
+                "quantifier_prefix": [],
+                "supported": false
+              },
+              "interface": "SemanticProfile@1",
+              "kernel_environment": {
+                "axioms": [],
+                "imports": [],
+                "target": null,
+                "universes": []
+              },
+              "name": "Temporal first-order composition profile",
+              "norms": {
+                "contrary_to_duty": false,
+                "exceptions": false,
+                "form": "monadic",
+                "permission": "strong",
+                "priorities": false
+              },
+              "profile_id": "tdfol_default",
+              "schema_version": "logic-family-semantic-profile/v1",
+              "smt_theory": {
+                "arithmetic": "not_applicable",
+                "bitvector_width": null,
+                "theories": []
+              },
+              "time": {
+                "density": "discrete",
+                "metric_intervals": false
+              },
+              "traces": {
+                "fairness": "none",
+                "model": "infinite",
+                "stuttering_allowed": true
+              },
+              "version": "1.0.0",
+              "world_policy": "open_world"
+            },
+            "schema_version": "logic-family-composition/v1",
+            "version": "1.0.0"
+          },
+          "required": true,
+          "requirement_id": "temporal_deontic_first_order_logic",
+          "scope": "schema_capability_not_universal_per_span_translation",
+          "validation_required": [
+            "typed_output_schema",
+            "strict_family_syntax",
+            "operator_and_argument_coverage",
+            "explicit_projection_losses",
+            "source_binding",
+            "decoded_semantic_evaluation"
+          ]
+        },
+        {
+          "binding_gaps": [
+            "standalone_deontic_first_order_composition_not_registered"
+          ],
+          "canonical_families": [
+            {
+              "descriptor_sha256": "8bb262ea3b67a740481964b6428312b58179d745ce1102a093e2e4e6604c7754",
+              "family_id": "deontic"
+            },
+            {
+              "descriptor_sha256": "61e5583e4e5453b8ca98f535520da2faf40cbd7cc2763de6d15ff3be302d516d",
+              "family_id": "first_order"
+            }
+          ],
+          "composition": null,
+          "coverage_requirement": "deontic_and_first_order_semantics_must_be_bound_together",
+          "required": true,
+          "requirement_id": "deontic_first_order_logic",
+          "scope": "schema_capability_not_universal_per_span_translation",
+          "validation_required": [
+            "typed_output_schema",
+            "strict_family_syntax",
+            "operator_and_argument_coverage",
+            "explicit_projection_losses",
+            "source_binding",
+            "decoded_semantic_evaluation"
+          ]
+        },
+        {
+          "binding_gaps": [],
+          "canonical_families": [
+            {
+              "descriptor_sha256": "e547d7e771838d39180134c385bcaf08b0b0ff94483d42985e50e8af004e562e",
+              "family_id": "temporal"
+            },
+            {
+              "descriptor_sha256": "61e5583e4e5453b8ca98f535520da2faf40cbd7cc2763de6d15ff3be302d516d",
+              "family_id": "first_order"
+            }
+          ],
+          "composition": {
+            "composition_id": "pure_temporal_fol_v1",
+            "description": "Plan migration: temporal_first_order -> composition of temporal and first_order under retained temporal identity",
+            "family_id": "temporal",
+            "interface": "FamilyComposition@1",
+            "metadata": {
+              "component_family_ids": [
+                "first_order",
+                "temporal"
+              ],
+              "composition_version": "1.0.0",
+              "notes": "temporal_first_order is composition of temporal and first_order; do not invent a replacement family string",
+              "role_by_family": {
+                "first_order": "quantified_matrix",
+                "temporal": "time_trace"
+              },
+              "schema_version": "1.0.0"
+            },
+            "name": "Temporal + first-order composition",
+            "profile": {
+              "attacker": {
+                "equational_theories": [],
+                "model": "not_applicable",
+                "notes": ""
+              },
+              "bounds": {
+                "domain": "unbounded",
+                "domain_size": null,
+                "model_check_depth": null,
+                "resource_bound_names": [],
+                "step_bound": null
+              },
+              "consequence": "classical",
+              "description": "Declared composition of temporal and first_order only.",
+              "family_ids": [
+                "first_order",
+                "temporal"
+              ],
+              "fragment_ids": [
+                "linear_time",
+                "quantifiers"
+              ],
+              "frames": {
+                "euclidean": null,
+                "frame": "not_applicable",
+                "reflexive": null,
+                "serial": null,
+                "symmetric": null,
+                "transitive": null
+              },
+              "hypertrace": {
+                "max_alternation": null,
+                "quantifier_prefix": [],
+                "supported": false
+              },
+              "interface": "SemanticProfile@1",
+              "kernel_environment": {
+                "axioms": [],
+                "imports": [],
+                "target": null,
+                "universes": []
+              },
+              "name": "Pure temporal first-order composition profile",
+              "norms": {
+                "contrary_to_duty": false,
+                "exceptions": false,
+                "form": "not_applicable",
+                "permission": "not_applicable",
+                "priorities": false
+              },
+              "profile_id": "temporal_first_order",
+              "schema_version": "logic-family-semantic-profile/v1",
+              "smt_theory": {
+                "arithmetic": "not_applicable",
+                "bitvector_width": null,
+                "theories": []
+              },
+              "time": {
+                "density": "discrete",
+                "metric_intervals": false
+              },
+              "traces": {
+                "fairness": "none",
+                "model": "infinite",
+                "stuttering_allowed": false
+              },
+              "version": "1.0.0",
+              "world_policy": "open_world"
+            },
+            "schema_version": "logic-family-composition/v1",
+            "version": "1.0.0"
+          },
+          "required": true,
+          "requirement_id": "temporal_first_order_logic",
+          "scope": "schema_capability_not_universal_per_span_translation",
+          "validation_required": [
+            "typed_output_schema",
+            "strict_family_syntax",
+            "operator_and_argument_coverage",
+            "explicit_projection_losses",
+            "source_binding",
+            "decoded_semantic_evaluation"
+          ]
+        },
+        {
+          "binding_gaps": [
+            "standalone_cognitive_event_calculus_composition_not_registered"
+          ],
+          "canonical_families": [
+            {
+              "descriptor_sha256": "b2996a97dde4123afb8a9c4a8c0178c9f262db2e63ea34d28014564f27c237eb",
+              "family_id": "event_calculus"
+            },
+            {
+              "descriptor_sha256": "5ad5f5fb334f8a0b523c7b79cf05af3ad1ed732d75a047a2e9bb519765db7903",
+              "family_id": "modal"
+            }
+          ],
+          "composition": null,
+          "coverage_requirement": "cognitive_and_event_operators_require_explicit_semantics_not_dcec_alias",
+          "required": true,
+          "requirement_id": "cognitive_event_calculus",
+          "scope": "schema_capability_not_universal_per_span_translation",
+          "validation_required": [
+            "typed_output_schema",
+            "strict_family_syntax",
+            "operator_and_argument_coverage",
+            "explicit_projection_losses",
+            "source_binding",
+            "decoded_semantic_evaluation"
+          ]
+        },
+        {
+          "binding_gaps": [],
+          "canonical_families": [
+            {
+              "descriptor_sha256": "aebfded521e10576cc8626564303c64c1b935342a9332547409b82aaddb8bbf1",
+              "family_id": "dcec"
+            }
+          ],
+          "composition": {
+            "composition_id": "dcec_composition_v1",
+            "description": "Canonical dcec with versioned deontic/event/cognitive composition",
+            "family_id": "dcec",
+            "interface": "FamilyComposition@1",
+            "metadata": {
+              "component_family_ids": [
+                "deontic",
+                "event_calculus",
+                "modal"
+              ],
+              "composition_version": "1.0.0",
+              "notes": "dcec retains its canonical family_id; composition metadata links deontic, event, and cognitive/modal components",
+              "role_by_family": {
+                "deontic": "norms",
+                "event_calculus": "events_fluents",
+                "modal": "cognitive_attitudes"
+              },
+              "schema_version": "1.0.0"
+            },
+            "name": "DCEC composition",
+            "profile": {
+              "attacker": {
+                "equational_theories": [],
+                "model": "not_applicable",
+                "notes": ""
+              },
+              "bounds": {
+                "domain": "unbounded",
+                "domain_size": null,
+                "model_check_depth": null,
+                "resource_bound_names": [],
+                "step_bound": null
+              },
+              "consequence": "classical",
+              "description": "Deontic cognitive event calculus composition: deontic + event_calculus + modal/cognitive operators under retained dcec identity.",
+              "family_ids": [
+                "dcec",
+                "deontic",
+                "event_calculus",
+                "modal"
+              ],
+              "fragment_ids": [
+                "deontic",
+                "event_calculus",
+                "modal",
+                "quantifiers"
+              ],
+              "frames": {
+                "euclidean": true,
+                "frame": "s5",
+                "reflexive": true,
+                "serial": true,
+                "symmetric": true,
+                "transitive": true
+              },
+              "hypertrace": {
+                "max_alternation": null,
+                "quantifier_prefix": [],
+                "supported": false
+              },
+              "interface": "SemanticProfile@1",
+              "kernel_environment": {
+                "axioms": [],
+                "imports": [],
+                "target": null,
+                "universes": []
+              },
+              "name": "DCEC default composition profile",
+              "norms": {
+                "contrary_to_duty": true,
+                "exceptions": true,
+                "form": "dyadic",
+                "permission": "strong",
+                "priorities": true
+              },
+              "profile_id": "dcec_default",
+              "schema_version": "logic-family-semantic-profile/v1",
+              "smt_theory": {
+                "arithmetic": "not_applicable",
+                "bitvector_width": null,
+                "theories": []
+              },
+              "time": {
+                "density": "discrete",
+                "metric_intervals": false
+              },
+              "traces": {
+                "fairness": "none",
+                "model": "finite_or_infinite",
+                "stuttering_allowed": true
+              },
+              "version": "1.0.0",
+              "world_policy": "open_world"
+            },
+            "schema_version": "logic-family-composition/v1",
+            "version": "1.0.0"
+          },
+          "required": true,
+          "requirement_id": "deontic_cognitive_event_calculus",
+          "scope": "schema_capability_not_universal_per_span_translation",
+          "validation_required": [
+            "typed_output_schema",
+            "strict_family_syntax",
+            "operator_and_argument_coverage",
+            "explicit_projection_losses",
+            "source_binding",
+            "decoded_semantic_evaluation"
+          ]
+        },
+        {
+          "binding_gaps": [],
+          "canonical_families": [
+            {
+              "descriptor_sha256": "9d656080ecd352fc0c5f4654672890f6f5ba830ba399da2df347feb3e62a012a",
+              "family_id": "frame_logic"
+            }
+          ],
+          "composition": null,
+          "required": true,
+          "requirement_id": "frame_logic",
+          "scope": "schema_capability_not_universal_per_span_translation",
+          "validation_required": [
+            "typed_output_schema",
+            "strict_family_syntax",
+            "operator_and_argument_coverage",
+            "explicit_projection_losses",
+            "source_binding",
+            "decoded_semantic_evaluation"
+          ]
+        },
+        {
+          "binding_gaps": [],
+          "canonical_families": [
+            {
+              "descriptor_sha256": "cbafc55913a9749f73e45d1a45116447ce082663a78ee84539a99169db853c4c",
+              "family_id": "propositional"
+            }
+          ],
+          "composition": null,
+          "required": true,
+          "requirement_id": "propositional_logic",
+          "scope": "schema_capability_not_universal_per_span_translation",
+          "validation_required": [
+            "typed_output_schema",
+            "strict_family_syntax",
+            "operator_and_argument_coverage",
+            "explicit_projection_losses",
+            "source_binding",
+            "decoded_semantic_evaluation"
+          ]
+        }
+      ],
+      "promotion_performed": false,
+      "proof_authority": false,
+      "qualification_gaps": [
+        "declaration_does_not_execute_independent_evidence_checker",
+        "complete_domain_schema_lake_emitter_and_receipt_not_established_by_this_interface",
+        "per_family_decoder_training_and_semantic_coverage_must_be_verified",
+        "standalone_cognitive_event_calculus_composition_not_registered",
+        "standalone_deontic_first_order_composition_not_registered"
+      ],
+      "qualified": false,
+      "requirements_sha256": "1bb5c38bdd15a9e80f74fd478ddaab36268cdcebfc4604358244d6928d9009c4",
+      "schema": "autoencoder-logic-requirements/v1",
+      "scope": "output_schema_capability_floor",
+      "semantic_correctness_verified": false,
+      "software_routes": [],
+      "training_executed": false,
+      "training_loss_requirements": {
+        "embedding_cosine_alone_satisfies_requirement": false,
+        "gradient_evidence_required": "nonzero_updates_to_the_relevant_learned_decoder_parameters",
+        "heldout_canary_required_for_generalization_claim": true,
+        "heldout_canary_used_for_fit_or_selection": false,
+        "lake_and_family_verifiers_are_differentiable_losses": false,
+        "required_for_decoder_aware_training": [
+          "source_conditioned_output_reconstruction",
+          "operator_and_polarity",
+          "arguments_and_quantifier_scope",
+          "conditions_and_exceptions",
+          "temporal_scope_and_quantity",
+          "structural_presence_and_references",
+          "per_required_family_output_coverage",
+          "explicit_unsupported_and_projection_loss"
+        ],
+        "selection_checks_required": [
+          "free_running_decoded_output",
+          "disjoint_tuning_evaluation",
+          "strict_family_syntax",
+          "source_semantic_fidelity",
+          "source_bound_lake_schema_build"
+        ]
+      },
+      "validation_executed": false
+    },
+    "qualified": false,
+    "release_stage": "experimental",
+    "runtime_id": "legal_ir:source_conditioned_grouped_v2",
+    "runtime_version": "source_conditioned_grouped_v2",
+    "schema": "autoencoder-runtime-interface/v1",
+    "source_conditioned": true,
+    "source_identity": {
+      "files": {
+        "autoencoder_logic_requirements.py": "b75b67d5201a377a55d53aa7f0dbe09d31f2ec903446718bc01c8fd1efc1e4f0",
+        "autoencoder_runtime_registry.py": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955",
+        "logic/deontic/coordination_decoder.py": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+        "logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+      },
+      "scope": "listed_runtime_files_only_not_transitive_dependency_provenance",
+      "sha256": "f87ca8820ff1c94a842be79b271898df2b3cff7160df5373e189c249ce40117c"
+    },
+    "source_semantics_verified": false,
+    "state_schema": "legal-grouped-span-decoder-checkpoint/v2",
+    "supported_logic_families": [
+      "deontic_fol"
+    ],
+    "checkpoint_sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+    "checkpoint_content_sha256": "75956e487bfb1b3b5f9dd570b4ddb9a8c52c42aed21b88d2a97a33c40d681e6d",
+    "checkpoint_producer": {
+      "byte_encoder_profile": "masked_two_conv3_gelu_mean_max/v2",
+      "implementation_sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+      "semantic_decoder_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+      "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1",
+      "torch_version": "2.13.0+cu130"
+    },
+    "optimizer_steps": 480,
+    "checkpoint_present": true,
+    "trained_checkpoint_present": true
+  },
+  "rows": [
+    {
+      "case_id": "authored-0e435e14fad7cda097e5f25f125fd52d8fb0ae430c7fa7cf10211f5e9cd77625-modal_over_actions",
+      "input": {
+        "source_text": "The Bureau Keeper shall retain the worksheet or the Bureau Keeper must copy the certificate or shall publish the summary or the Bureau Keeper must record the entry or shall store the record or the Bureau Keeper must file the declaration or shall seal the envelope or the Bureau Keeper must display the checklist.",
+        "modal_scope": "modal_over_actions"
+      },
+      "output": {
+        "schema": "legal-grouped-span-decoder-prediction/v2",
+        "status": "predicted",
+        "request": {
+          "schema": "legal-coordination-decode-request/v1",
+          "modal_scope": "modal_over_actions",
+          "connective": "inclusive_or",
+          "binding_profile": "universal_actor_predicate",
+          "members": [
+            {
+              "actor": "bureau keeper",
+              "modality": "O",
+              "action": "retain the worksheet"
+            },
+            {
+              "actor": "bureau keeper",
+              "modality": "O",
+              "action": "copy the certificate"
+            },
+            {
+              "actor": "bureau keeper",
+              "modality": "O",
+              "action": "publish the summary"
+            },
+            {
+              "actor": "bureau keeper",
+              "modality": "O",
+              "action": "record the entry"
+            },
+            {
+              "actor": "bureau keeper",
+              "modality": "O",
+              "action": "store the record"
+            },
+            {
+              "actor": "bureau keeper",
+              "modality": "O",
+              "action": "file the declaration"
+            },
+            {
+              "actor": "bureau keeper",
+              "modality": "O",
+              "action": "seal the envelope"
+            },
+            {
+              "actor": "bureau keeper",
+              "modality": "O",
+              "action": "display the checklist"
+            }
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed"
+        ],
+        "raw_prediction": {
+          "count": 8,
+          "modal_scope": "modal_over_actions",
+          "members": [
+            {
+              "modality": "O",
+              "actor_start": 1,
+              "actor_end": 2,
+              "action_start": 4,
+              "action_end": 6
+            },
+            {
+              "modality": "O",
+              "actor_start": 9,
+              "actor_end": 10,
+              "action_start": 12,
+              "action_end": 14
+            },
+            {
+              "modality": "O",
+              "actor_start": 9,
+              "actor_end": 10,
+              "action_start": 17,
+              "action_end": 19
+            },
+            {
+              "modality": "O",
+              "actor_start": 22,
+              "actor_end": 23,
+              "action_start": 25,
+              "action_end": 27
+            },
+            {
+              "modality": "O",
+              "actor_start": 22,
+              "actor_end": 23,
+              "action_start": 30,
+              "action_end": 32
+            },
+            {
+              "modality": "O",
+              "actor_start": 35,
+              "actor_end": 36,
+              "action_start": 38,
+              "action_end": 40
+            },
+            {
+              "modality": "O",
+              "actor_start": 35,
+              "actor_end": 36,
+              "action_start": 43,
+              "action_end": 45
+            },
+            {
+              "modality": "O",
+              "actor_start": 48,
+              "actor_end": 49,
+              "action_start": 51,
+              "action_end": 53
+            }
+          ],
+          "support_probability": 0.9968928098678589
+        },
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "model_accuracy_claimed": false,
+        "targets_used_at_inference": false,
+        "support_probability": 0.9968928098678589,
+        "support_threshold": 0.5,
+        "confidence": {
+          "support": 0.9968928098678589,
+          "count": 0.9905210733413696,
+          "scope": 0.9978845715522766
+        },
+        "predicted_character_spans": [
+          {
+            "actor": [
+              4,
+              17
+            ],
+            "action": [
+              24,
+              44
+            ]
+          },
+          {
+            "actor": [
+              52,
+              65
+            ],
+            "action": [
+              71,
+              91
+            ]
+          },
+          {
+            "actor": [
+              52,
+              65
+            ],
+            "action": [
+              101,
+              120
+            ]
+          },
+          {
+            "actor": [
+              128,
+              141
+            ],
+            "action": [
+              147,
+              163
+            ]
+          },
+          {
+            "actor": [
+              128,
+              141
+            ],
+            "action": [
+              173,
+              189
+            ]
+          },
+          {
+            "actor": [
+              197,
+              210
+            ],
+            "action": [
+              216,
+              236
+            ]
+          },
+          {
+            "actor": [
+              197,
+              210
+            ],
+            "action": [
+              246,
+              263
+            ]
+          },
+          {
+            "actor": [
+              271,
+              284
+            ],
+            "action": [
+              290,
+              311
+            ]
+          }
+        ],
+        "runtime_id": "legal_ir:source_conditioned_grouped_v2",
+        "checkpoint_sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+        "experimental": true,
+        "source_conditioned": true,
+        "latent_conditioned": false,
+        "requires_validation": true,
+        "accepted": false,
+        "kernel_checked": false,
+        "lake_executed": false,
+        "qualified": false,
+        "admitted": false,
+        "formalized": false,
+        "promotion_performed": false,
+        "formal_output": {
+          "schema": "legal-coordination-decode-result/v1",
+          "context": "source_withheld_semantic_ir",
+          "decoder_kind": "deterministic_ir_renderer",
+          "normalized_text": "Declared modal scope: modal_over_actions; connective: inclusive_or; binding: universal_actor_predicate. OBLIGATION[for every x, if actor(\"bureau keeper\", x), then (action(\"retain the worksheet\", x) OR action(\"copy the certificate\", x) OR action(\"publish the summary\", x) OR action(\"record the entry\", x) OR action(\"store the record\", x) OR action(\"file the declaration\", x) OR action(\"seal the envelope\", x) OR action(\"display the checklist\", x))].",
+          "target_logic": "deontic_fol",
+          "formula": "O(forall x. (Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8(x) -> (Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a(x) or Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e(x) or Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42(x) or Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820(x) or Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998(x) or Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605(x) or Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b(x) or Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f(x))))",
+          "native_ast": {
+            "node_type": "DeonticFormula",
+            "operator": {
+              "enum": "DeonticOperator",
+              "value": "O"
+            },
+            "formula": {
+              "node_type": "QuantifiedFormula",
+              "quantifier": {
+                "enum": "Quantifier",
+                "value": "\u2200"
+              },
+              "variable": {
+                "node_type": "Variable",
+                "name": "x",
+                "sort": null
+              },
+              "formula": {
+                "node_type": "BinaryFormula",
+                "operator": {
+                  "enum": "LogicOperator",
+                  "value": "\u2192"
+                },
+                "left": {
+                  "node_type": "Predicate",
+                  "name": "Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8",
+                  "arguments": [
+                    {
+                      "node_type": "Variable",
+                      "name": "x",
+                      "sort": null
+                    }
+                  ]
+                },
+                "right": {
+                  "node_type": "BinaryFormula",
+                  "operator": {
+                    "enum": "LogicOperator",
+                    "value": "\u2228"
+                  },
+                  "left": {
+                    "node_type": "BinaryFormula",
+                    "operator": {
+                      "enum": "LogicOperator",
+                      "value": "\u2228"
+                    },
+                    "left": {
+                      "node_type": "BinaryFormula",
+                      "operator": {
+                        "enum": "LogicOperator",
+                        "value": "\u2228"
+                      },
+                      "left": {
+                        "node_type": "BinaryFormula",
+                        "operator": {
+                          "enum": "LogicOperator",
+                          "value": "\u2228"
+                        },
+                        "left": {
+                          "node_type": "BinaryFormula",
+                          "operator": {
+                            "enum": "LogicOperator",
+                            "value": "\u2228"
+                          },
+                          "left": {
+                            "node_type": "BinaryFormula",
+                            "operator": {
+                              "enum": "LogicOperator",
+                              "value": "\u2228"
+                            },
+                            "left": {
+                              "node_type": "BinaryFormula",
+                              "operator": {
+                                "enum": "LogicOperator",
+                                "value": "\u2228"
+                              },
+                              "left": {
+                                "node_type": "Predicate",
+                                "name": "Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a",
+                                "arguments": [
+                                  {
+                                    "node_type": "Variable",
+                                    "name": "x",
+                                    "sort": null
+                                  }
+                                ]
+                              },
+                              "right": {
+                                "node_type": "Predicate",
+                                "name": "Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e",
+                                "arguments": [
+                                  {
+                                    "node_type": "Variable",
+                                    "name": "x",
+                                    "sort": null
+                                  }
+                                ]
+                              }
+                            },
+                            "right": {
+                              "node_type": "Predicate",
+                              "name": "Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42",
+                              "arguments": [
+                                {
+                                  "node_type": "Variable",
+                                  "name": "x",
+                                  "sort": null
+                                }
+                              ]
+                            }
+                          },
+                          "right": {
+                            "node_type": "Predicate",
+                            "name": "Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820",
+                            "arguments": [
+                              {
+                                "node_type": "Variable",
+                                "name": "x",
+                                "sort": null
+                              }
+                            ]
+                          }
+                        },
+                        "right": {
+                          "node_type": "Predicate",
+                          "name": "Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998",
+                          "arguments": [
+                            {
+                              "node_type": "Variable",
+                              "name": "x",
+                              "sort": null
+                            }
+                          ]
+                        }
+                      },
+                      "right": {
+                        "node_type": "Predicate",
+                        "name": "Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605",
+                        "arguments": [
+                          {
+                            "node_type": "Variable",
+                            "name": "x",
+                            "sort": null
+                          }
+                        ]
+                      }
+                    },
+                    "right": {
+                      "node_type": "Predicate",
+                      "name": "Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b",
+                      "arguments": [
+                        {
+                          "node_type": "Variable",
+                          "name": "x",
+                          "sort": null
+                        }
+                      ]
+                    }
+                  },
+                  "right": {
+                    "node_type": "Predicate",
+                    "name": "Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f",
+                    "arguments": [
+                      {
+                        "node_type": "Variable",
+                        "name": "x",
+                        "sort": null
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "agent": null,
+            "context": null
+          },
+          "native_payload": {
+            "format": "native_tdfol_ast",
+            "payload": {
+              "formulas": [
+                {
+                  "source": "O(forall x. (Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8(x) -> (Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a(x) or Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e(x) or Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42(x) or Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820(x) or Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998(x) or Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605(x) or Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b(x) or Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f(x))))",
+                  "ast": {
+                    "node_type": "DeonticFormula",
+                    "operator": {
+                      "enum": "DeonticOperator",
+                      "value": "O"
+                    },
+                    "formula": {
+                      "node_type": "QuantifiedFormula",
+                      "quantifier": {
+                        "enum": "Quantifier",
+                        "value": "\u2200"
+                      },
+                      "variable": {
+                        "node_type": "Variable",
+                        "name": "x",
+                        "sort": null
+                      },
+                      "formula": {
+                        "node_type": "BinaryFormula",
+                        "operator": {
+                          "enum": "LogicOperator",
+                          "value": "\u2192"
+                        },
+                        "left": {
+                          "node_type": "Predicate",
+                          "name": "Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8",
+                          "arguments": [
+                            {
+                              "node_type": "Variable",
+                              "name": "x",
+                              "sort": null
+                            }
+                          ]
+                        },
+                        "right": {
+                          "node_type": "BinaryFormula",
+                          "operator": {
+                            "enum": "LogicOperator",
+                            "value": "\u2228"
+                          },
+                          "left": {
+                            "node_type": "BinaryFormula",
+                            "operator": {
+                              "enum": "LogicOperator",
+                              "value": "\u2228"
+                            },
+                            "left": {
+                              "node_type": "BinaryFormula",
+                              "operator": {
+                                "enum": "LogicOperator",
+                                "value": "\u2228"
+                              },
+                              "left": {
+                                "node_type": "BinaryFormula",
+                                "operator": {
+                                  "enum": "LogicOperator",
+                                  "value": "\u2228"
+                                },
+                                "left": {
+                                  "node_type": "BinaryFormula",
+                                  "operator": {
+                                    "enum": "LogicOperator",
+                                    "value": "\u2228"
+                                  },
+                                  "left": {
+                                    "node_type": "BinaryFormula",
+                                    "operator": {
+                                      "enum": "LogicOperator",
+                                      "value": "\u2228"
+                                    },
+                                    "left": {
+                                      "node_type": "BinaryFormula",
+                                      "operator": {
+                                        "enum": "LogicOperator",
+                                        "value": "\u2228"
+                                      },
+                                      "left": {
+                                        "node_type": "Predicate",
+                                        "name": "Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a",
+                                        "arguments": [
+                                          {
+                                            "node_type": "Variable",
+                                            "name": "x",
+                                            "sort": null
+                                          }
+                                        ]
+                                      },
+                                      "right": {
+                                        "node_type": "Predicate",
+                                        "name": "Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e",
+                                        "arguments": [
+                                          {
+                                            "node_type": "Variable",
+                                            "name": "x",
+                                            "sort": null
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "right": {
+                                      "node_type": "Predicate",
+                                      "name": "Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42",
+                                      "arguments": [
+                                        {
+                                          "node_type": "Variable",
+                                          "name": "x",
+                                          "sort": null
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "right": {
+                                    "node_type": "Predicate",
+                                    "name": "Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820",
+                                    "arguments": [
+                                      {
+                                        "node_type": "Variable",
+                                        "name": "x",
+                                        "sort": null
+                                      }
+                                    ]
+                                  }
+                                },
+                                "right": {
+                                  "node_type": "Predicate",
+                                  "name": "Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998",
+                                  "arguments": [
+                                    {
+                                      "node_type": "Variable",
+                                      "name": "x",
+                                      "sort": null
+                                    }
+                                  ]
+                                }
+                              },
+                              "right": {
+                                "node_type": "Predicate",
+                                "name": "Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605",
+                                "arguments": [
+                                  {
+                                    "node_type": "Variable",
+                                    "name": "x",
+                                    "sort": null
+                                  }
+                                ]
+                              }
+                            },
+                            "right": {
+                              "node_type": "Predicate",
+                              "name": "Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b",
+                              "arguments": [
+                                {
+                                  "node_type": "Variable",
+                                  "name": "x",
+                                  "sort": null
+                                }
+                              ]
+                            }
+                          },
+                          "right": {
+                            "node_type": "Predicate",
+                            "name": "Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f",
+                            "arguments": [
+                              {
+                                "node_type": "Variable",
+                                "name": "x",
+                                "sort": null
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "agent": null,
+                    "context": null
+                  }
+                }
+              ]
+            }
+          },
+          "mapping": {
+            "actor_symbols": [
+              {
+                "text": "bureau keeper",
+                "source_texts": [
+                  "bureau keeper"
+                ],
+                "symbol": "Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8",
+                "member_indices": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              }
+            ],
+            "action_symbols": [
+              {
+                "text": "retain the worksheet",
+                "source_texts": [
+                  "retain the worksheet"
+                ],
+                "symbol": "Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a",
+                "member_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "copy the certificate",
+                "source_texts": [
+                  "copy the certificate"
+                ],
+                "symbol": "Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e",
+                "member_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "publish the summary",
+                "source_texts": [
+                  "publish the summary"
+                ],
+                "symbol": "Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42",
+                "member_indices": [
+                  2
+                ]
+              },
+              {
+                "text": "record the entry",
+                "source_texts": [
+                  "record the entry"
+                ],
+                "symbol": "Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820",
+                "member_indices": [
+                  3
+                ]
+              },
+              {
+                "text": "store the record",
+                "source_texts": [
+                  "store the record"
+                ],
+                "symbol": "Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998",
+                "member_indices": [
+                  4
+                ]
+              },
+              {
+                "text": "file the declaration",
+                "source_texts": [
+                  "file the declaration"
+                ],
+                "symbol": "Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605",
+                "member_indices": [
+                  5
+                ]
+              },
+              {
+                "text": "seal the envelope",
+                "source_texts": [
+                  "seal the envelope"
+                ],
+                "symbol": "Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b",
+                "member_indices": [
+                  6
+                ]
+              },
+              {
+                "text": "display the checklist",
+                "source_texts": [
+                  "display the checklist"
+                ],
+                "symbol": "Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f",
+                "member_indices": [
+                  7
+                ]
+              }
+            ]
+          },
+          "family_validation": {
+            "family": "deontic_fol",
+            "passed": true,
+            "syntax_valid": true,
+            "formula": "O(forall x. (Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8(x) -> (Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a(x) or Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e(x) or Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42(x) or Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820(x) or Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998(x) or Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605(x) or Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b(x) or Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f(x))))",
+            "formula_sha256": "20523fd64b8ef2818c34efac2ccad8d1b3a100deefc2a67e81b640d98e7ffccd",
+            "diagnostics": [],
+            "semantic_equivalence_checked": false,
+            "source_bound": false,
+            "admitted": false,
+            "formalized": false,
+            "parser": "ipfs_datasets_py.logic.TDFOL.tdfol_parser.TDFOLParser",
+            "parser_source_sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3",
+            "consumed_all_input": true,
+            "ast_classes": [
+              "BinaryFormula",
+              "DeonticFormula",
+              "Predicate",
+              "QuantifiedFormula"
+            ],
+            "predicates": [
+              "Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e",
+              "Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f",
+              "Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605",
+              "Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42",
+              "Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820",
+              "Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a",
+              "Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b",
+              "Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998",
+              "Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8"
+            ],
+            "printed": "O(\u2200x.(\u2192 Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8(x) (\u2228 (\u2228 (\u2228 (\u2228 (\u2228 (\u2228 (\u2228 Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a(x) Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e(x)) Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42(x)) Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820(x)) Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998(x)) Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605(x)) Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b(x)) Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f(x))))"
+          },
+          "lean_body": "def formula_0 {Entity Agent : Type} (i : Interpretation Entity Agent) : Nat \u2192 Prop := (i.modal \"deontic:O\" [] none (fun t => \u2200 v0 : Entity, (fun t => ((fun t => i.atom \"Actor_bureau_keeper_d129578ad26d7ea4efe5dbdcd743ffc48e0c405121de0275dda225f5cd614ad8\" [v0] t) t) \u2192 ((fun t => ((fun t => ((fun t => ((fun t => ((fun t => ((fun t => ((fun t => ((fun t => i.atom \"Action_retain_the_worksheet_138bd938bdf7bb47534410236398396d82ed8a5dd9e3b5f9258e68788265a43a\" [v0] t) t) \u2228 ((fun t => i.atom \"Action_copy_the_certificate_de4102fb9eb4610aa5bc9da51334a4f037ee4a2cd16f0bb15a2ce0e2dcd5522e\" [v0] t) t)) t) \u2228 ((fun t => i.atom \"Action_publish_the_summary_09f79be7d6590324cfbcf58e12c33a1ee9f877a8cd0f8d12c46b24907e6efa42\" [v0] t) t)) t) \u2228 ((fun t => i.atom \"Action_record_the_entry_ad34e258dd6710940ddd979fe94ab1cc798657125be34090fb18a7ea48584820\" [v0] t) t)) t) \u2228 ((fun t => i.atom \"Action_store_the_record_e346b41bc2c22075988d11de2b641d42d5408a819ecd73489551eaf3d222c998\" [v0] t) t)) t) \u2228 ((fun t => i.atom \"Action_file_the_declaration_f3238b1060d41997b57bfe2820dd0b5aada0d8ad748469a8668dfda037f97605\" [v0] t) t)) t) \u2228 ((fun t => i.atom \"Action_seal_the_envelope_3586e542d5223fa5aa7b8136590dedd2f9b9b4bd57a93e2a1a2daa6a113f165b\" [v0] t) t)) t) \u2228 ((fun t => i.atom \"Action_display_the_checklist_b7e357a5aa8c631feaaa98dbf152ddeed1adff4d929abcd567b8aeab36bec64f\" [v0] t) t)) t)) t))",
+          "native_validation": {
+            "validator": "strict_native_reparse_and_exact_AST",
+            "operators": [
+              "DeonticFormula",
+              "O",
+              "QuantifiedFormula",
+              "BinaryFormula",
+              "\u2192",
+              "Predicate",
+              "BinaryFormula",
+              "\u2228",
+              "BinaryFormula",
+              "\u2228",
+              "BinaryFormula",
+              "\u2228",
+              "BinaryFormula",
+              "\u2228",
+              "BinaryFormula",
+              "\u2228",
+              "BinaryFormula",
+              "\u2228",
+              "BinaryFormula",
+              "\u2228",
+              "Predicate",
+              "Predicate",
+              "Predicate",
+              "Predicate",
+              "Predicate",
+              "Predicate",
+              "Predicate",
+              "Predicate"
+            ],
+            "assumptions": [
+              "Object carrier and atomic predicates are arbitrary interpretation parameters.",
+              "Deontic/cognitive operators are distinct interpretation parameters; no modal axioms or source truth are asserted.",
+              "Supported temporal operators use discrete unbounded Nat traces."
+            ]
+          },
+          "structure_compiled": true,
+          "source_semantics_verified": false,
+          "semantic_equivalence_checked": false,
+          "admitted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "requires_validation": true,
+          "blockers": [
+            "source_interpretation_unreviewed"
+          ]
+        },
+        "formula_count": 1,
+        "decoded_formulas_generated": true
+      },
+      "retained_neural_prediction_exactly_reproduced": true,
+      "retained_native_rendering_exactly_reproduced": true
+    },
+    {
+      "case_id": "authored-06b5c31d7c0e63caf0deb5a5bb28da71f8f5dbf077e47ad9e3d9e5be42ef079c-unsupported-permuted_modal-disjunction_of_norms",
+      "input": {
+        "source_text": "The Bureau Registrar slahl publish the summary or the Bureau Registrar mtus publish the summary.",
+        "modal_scope": "disjunction_of_norms"
+      },
+      "output": {
+        "schema": "legal-grouped-span-decoder-prediction/v2",
+        "status": "abstained",
+        "request": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "count": 2,
+          "modal_scope": "disjunction_of_norms",
+          "members": [
+            {
+              "modality": "P",
+              "actor_start": 1,
+              "actor_end": 4,
+              "action_start": 4,
+              "action_end": 6
+            },
+            {
+              "modality": "P",
+              "actor_start": 9,
+              "actor_end": 10,
+              "action_start": 12,
+              "action_end": 14
+            }
+          ],
+          "support_probability": 0.0008681045728735626
+        },
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "model_accuracy_claimed": false,
+        "targets_used_at_inference": false,
+        "support_probability": 0.0008681045728735626,
+        "support_threshold": 0.5,
+        "confidence": {
+          "support": 0.0008681045728735626,
+          "count": 0.9974736571311951,
+          "scope": 0.9958435893058777
+        },
+        "runtime_id": "legal_ir:source_conditioned_grouped_v2",
+        "checkpoint_sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+        "experimental": true,
+        "source_conditioned": true,
+        "latent_conditioned": false,
+        "requires_validation": true,
+        "accepted": false,
+        "kernel_checked": false,
+        "lake_executed": false,
+        "qualified": false,
+        "admitted": false,
+        "formalized": false,
+        "promotion_performed": false,
+        "formal_output": null,
+        "formula_count": 0,
+        "decoded_formulas_generated": false
+      },
+      "retained_neural_prediction_exactly_reproduced": true,
+      "retained_native_rendering_exactly_reproduced": null
+    }
+  ],
+  "predictor_inputs_observed": [
+    {
+      "source_text": "The Bureau Keeper shall retain the worksheet or the Bureau Keeper must copy the certificate or shall publish the summary or the Bureau Keeper must record the entry or shall store the record or the Bureau Keeper must file the declaration or shall seal the envelope or the Bureau Keeper must display the checklist.",
+      "modal_scope": "modal_over_actions"
+    },
+    {
+      "source_text": "The Bureau Registrar slahl publish the summary or the Bureau Registrar mtus publish the summary.",
+      "modal_scope": "disjunction_of_norms"
+    }
+  ],
+  "actual_source_only_predictions": 2,
+  "eight_member_native_formula_count": 1,
+  "learned_refusal_count": 1,
+  "checkpoint_steps": 480,
+  "target_fields_supplied_to_predictor": false,
+  "checkpoint_or_production_modified": false,
+  "training_calls": 0,
+  "new_lake_builds": 0,
+  "semantic_accuracy_claimed": false,
+  "fresh_final_scored": false,
+  "source_semantics_verified": false,
+  "qualified": false,
+  "scope": "Two previously selected engineering witnesses replayed through the new registry; not an accuracy estimate or new native build."
+}

@@ -1,0 +1,3293 @@
+{
+  "schema": "autoencoder-current-main-retained-grouped-replay/v1",
+  "status": "passed",
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/replay_main_candidate.py",
+    "sha256": "ff217d6f8e04d1cfb9f5aa94f622b1dcbde14119097cca5954ed228f5721b8e9",
+    "bytes": 14446
+  },
+  "candidate": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration",
+  "candidate_base": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "producer_pins": {
+    "ipfs_datasets_py/logic/TDFOL/tdfol_core.py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+      "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7",
+      "bytes": 28721
+    },
+    "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+      "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3",
+      "bytes": 29788
+    },
+    "ipfs_datasets_py/logic/autoformal/family_qualification.py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/autoformal/family_qualification.py",
+      "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8",
+      "bytes": 37698
+    },
+    "ipfs_datasets_py/logic/deontic/coordination_decoder.py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+      "bytes": 13298
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+      "bytes": 29370
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+      "bytes": 33948
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+      "sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe",
+      "bytes": 29000
+    },
+    "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+      "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d",
+      "bytes": 22238
+    }
+  },
+  "imported_project_source": {
+    "ipfs_datasets_py": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9",
+      "bytes": 56829
+    },
+    "ipfs_datasets_py.logic": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/__init__.py",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79",
+      "bytes": 4434
+    },
+    "ipfs_datasets_py.logic.CEC": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/__init__.py",
+      "sha256": "8f4f1468b80c29eb7f6af4c02907adccc6bad5df1c7f22de5be7731a52b04b6b",
+      "bytes": 3407
+    },
+    "ipfs_datasets_py.logic.CEC.native": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/__init__.py",
+      "sha256": "7c467c25a9abdc899a46266ed21582443dbd412fb07acf129d5fb34a90be9dc6",
+      "bytes": 7228
+    },
+    "ipfs_datasets_py.logic.CEC.native.cec_proof_cache": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py",
+      "sha256": "8a40f17c0b82d7f8b9dfb8654d53c5f9472852acbcc830fdb3f3d98221f71bf3",
+      "bytes": 18314
+    },
+    "ipfs_datasets_py.logic.CEC.native.cec_zkp_integration": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py",
+      "sha256": "8284720a83162918a9785ec31d2e44dfbb2dd948a0f653b451745b0f8e3ab962",
+      "bytes": 19473
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_cleaning": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+      "sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0",
+      "bytes": 9131
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_core": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+      "sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14",
+      "bytes": 57189
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_english_grammar": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py",
+      "sha256": "2b87f9e7d256dd236c65147eabfc55bd3d481e74be63c80c23f6720d33cba0b2",
+      "bytes": 26343
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_integration": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+      "sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82",
+      "bytes": 18642
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_namespace": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/dcec_namespace.py",
+      "sha256": "9e6903c74d3b95634f86f4f67392ca61bf9a284b577294d2b12ff001d9fbeb24",
+      "bytes": 13580
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_parsing": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+      "sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70",
+      "bytes": 14204
+    },
+    "ipfs_datasets_py.logic.CEC.native.dcec_prototypes": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+      "sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e",
+      "bytes": 15038
+    },
+    "ipfs_datasets_py.logic.CEC.native.exceptions": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/exceptions.py",
+      "sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622",
+      "bytes": 10095
+    },
+    "ipfs_datasets_py.logic.CEC.native.grammar_engine": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/grammar_engine.py",
+      "sha256": "df787f7656894c063eaad5e16bc78168f1fd7c301a0907639dfb466b5f286293",
+      "bytes": 14472
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py",
+      "sha256": "46d1d7677be5038b9006cfa6738940dd306aa404736295cf58d201a4a398c641",
+      "bytes": 4312
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules.base": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/base.py",
+      "sha256": "5776e79206eb65fc3d2e898e48c374cba6fde09dbc48661d1ffb8417f2d99646",
+      "bytes": 2387
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules.cognitive": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py",
+      "sha256": "329334034ecfbb55fcb306c0d084a2a31f658a85af2ecb1edaef1c6ad7de7813",
+      "bytes": 24462
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules.deontic": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py",
+      "sha256": "8ef29a48e2e132f595ead529d446f7180745920ffae790feac985c121b4a6ddb",
+      "bytes": 15450
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules.modal": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py",
+      "sha256": "4ddf941cb2c2920699ec0e7f48d34b68a727da40a8868bd161c56eb315c2e4ef",
+      "bytes": 9218
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules.propositional": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py",
+      "sha256": "feb45f9807bc2d1cd38738006cb98cc553aa652918ee1158e8b106131ccd86bb",
+      "bytes": 15934
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules.resolution": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py",
+      "sha256": "8a5078e2e5ed25c350b8d28d6173f0013c6f78d075bfe5ca4b0516d46cbfcd82",
+      "bytes": 15219
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules.specialized": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py",
+      "sha256": "6a3d14356a1b076c7c943d7bd30da7d7694c03bae9da0d3ccf5a8bf848e7de96",
+      "bytes": 16154
+    },
+    "ipfs_datasets_py.logic.CEC.native.inference_rules.temporal": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py",
+      "sha256": "08d09c5be78e72168a4f4edef74840e766f65e1b9a9e4601f3000308254b9eaf",
+      "bytes": 23768
+    },
+    "ipfs_datasets_py.logic.CEC.native.legal_ir_lifecycle": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py",
+      "sha256": "0e70084ecacfed64efa46716d13e5ecfd6a44686df5546a67716eb5cadc4a7fd",
+      "bytes": 4694
+    },
+    "ipfs_datasets_py.logic.CEC.native.modal_tableaux": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/modal_tableaux.py",
+      "sha256": "5910e250b1aa61221f22318e6cea6858df3ee1701fe631634f9e1977ae671235",
+      "bytes": 17450
+    },
+    "ipfs_datasets_py.logic.CEC.native.nl_converter": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/nl_converter.py",
+      "sha256": "016b8e4893b9825e2f3b0a95d331691736433a1cdae430dde2d831862e0bf254",
+      "bytes": 15938
+    },
+    "ipfs_datasets_py.logic.CEC.native.problem_parser": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/problem_parser.py",
+      "sha256": "fd946d11ca07fcf09db67f91f3a90680f8b7024c373be09c514ff91a957682d3",
+      "bytes": 10061
+    },
+    "ipfs_datasets_py.logic.CEC.native.prover_core": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/prover_core.py",
+      "sha256": "c734b6cfbd05cd73bb5836d0635c1d9bb95ce3d722567e5afd082a4edb963487",
+      "bytes": 19007
+    },
+    "ipfs_datasets_py.logic.CEC.native.prover_core_extended_rules": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py",
+      "sha256": "07e26b65dba0a2f6be6bf7f36424a25da28d4c1e440e703b6985044684d9b253",
+      "bytes": 51196
+    },
+    "ipfs_datasets_py.logic.CEC.native.shadow_prover": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/CEC/native/shadow_prover.py",
+      "sha256": "90049debb68b2ae19238ee4637bd3b5a3124a7f06bb9448cd3567621df95d496",
+      "bytes": 22696
+    },
+    "ipfs_datasets_py.logic.TDFOL": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/__init__.py",
+      "sha256": "42c252ba4fb85301b649bc3afe497a2799d27460b9556e57c7398b5441ba13e8",
+      "bytes": 11004
+    },
+    "ipfs_datasets_py.logic.TDFOL.compiler_repairs": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+      "sha256": "c0306a55184bc6baabf7528bf7a255604ff8c49d2c510afde13eae2e8108ff88",
+      "bytes": 3636
+    },
+    "ipfs_datasets_py.logic.TDFOL.strategies": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/strategies/__init__.py",
+      "sha256": "96a6aae98c7d6ee877559b847f455f57e60a81c476468c61d77d6fde86b774b1",
+      "bytes": 1866
+    },
+    "ipfs_datasets_py.logic.TDFOL.strategies.base": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/strategies/base.py",
+      "sha256": "3763cc86f14697a68cb7a38dab9c7e6a9d0160910b73ba1ea2e965cd89d6e905",
+      "bytes": 4332
+    },
+    "ipfs_datasets_py.logic.TDFOL.strategies.cec_delegate": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/strategies/cec_delegate.py",
+      "sha256": "ebaf1bde83b2c00d5b0028fa34f43c52e6e0628d19bb8ffeb1a6c1987b61a9ef",
+      "bytes": 6937
+    },
+    "ipfs_datasets_py.logic.TDFOL.strategies.forward_chaining": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/strategies/forward_chaining.py",
+      "sha256": "0c56b8663063aeb30c5bbbda045a3f723ab26fffe08e23b14f3c94e866392f09",
+      "bytes": 12658
+    },
+    "ipfs_datasets_py.logic.TDFOL.strategies.modal_tableaux": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/strategies/modal_tableaux.py",
+      "sha256": "ffc1489b684e0630b7940b2ba688ddb99142f7fcce203e06fbfa55643826d1c4",
+      "bytes": 12397
+    },
+    "ipfs_datasets_py.logic.TDFOL.strategies.strategy_selector": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/strategies/strategy_selector.py",
+      "sha256": "5b7b71c5256dca709917fd6e8d55fd014d7ec0d4a216b56cff1b633b2143f501",
+      "bytes": 8483
+    },
+    "ipfs_datasets_py.logic.TDFOL.tdfol_core": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+      "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7",
+      "bytes": 28721
+    },
+    "ipfs_datasets_py.logic.TDFOL.tdfol_parser": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+      "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3",
+      "bytes": 29788
+    },
+    "ipfs_datasets_py.logic.TDFOL.tdfol_prover": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/TDFOL/tdfol_prover.py",
+      "sha256": "41fa83374a9e7b188255476710e778a056a3090ee1fdfe3b151caa6359855476",
+      "bytes": 24431
+    },
+    "ipfs_datasets_py.logic.autoformal": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/autoformal/__init__.py",
+      "sha256": "9fe9ca06f142b1af8a2bd5d5a89bd38ac79c1ac7f01a476a63160bb8c5b7bd03",
+      "bytes": 52609
+    },
+    "ipfs_datasets_py.logic.autoformal.family_qualification": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/autoformal/family_qualification.py",
+      "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8",
+      "bytes": 37698
+    },
+    "ipfs_datasets_py.logic.autoformal.tree_pin": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+      "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d",
+      "bytes": 1948
+    },
+    "ipfs_datasets_py.logic.common": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/common/__init__.py",
+      "sha256": "e574c74067e7059cc506b32c780bc0444de89c63b55dade3df00ae9fd563431e",
+      "bytes": 2438
+    },
+    "ipfs_datasets_py.logic.common.bounded_cache": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/common/bounded_cache.py",
+      "sha256": "29a450b5fc08c5577964774035717dc5d7be85c159cfd502fba5252c4ec9c9fa",
+      "bytes": 6656
+    },
+    "ipfs_datasets_py.logic.common.converters": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/common/converters.py",
+      "sha256": "f530c453775f2c1a4a2f8a26aa647df1f725be109078df258288eab33a427fde",
+      "bytes": 13962
+    },
+    "ipfs_datasets_py.logic.common.errors": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/common/errors.py",
+      "sha256": "10d21acd8d0fd6049297a1b36d10db1fcc09146095f1dabfe5a686b887f4b8cf",
+      "bytes": 2268
+    },
+    "ipfs_datasets_py.logic.common.feature_detection": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/common/feature_detection.py",
+      "sha256": "a285d84f9b13ee3c2c54023e07ccf9da94ce93e6736362c1881421db9e509d76",
+      "bytes": 4875
+    },
+    "ipfs_datasets_py.logic.common.proof_cache": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/common/proof_cache.py",
+      "sha256": "b68c36ff934ba6ee7a308162ee7035c78f4c522a5483e85e536b428db8485b36",
+      "bytes": 168205
+    },
+    "ipfs_datasets_py.logic.common.utility_monitor": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/common/utility_monitor.py",
+      "sha256": "ef23631a622dfd555cefcdf69793e78a7c64a115c7451aea4dfff5389b014985",
+      "bytes": 6398
+    },
+    "ipfs_datasets_py.logic.common.validators": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/common/validators.py",
+      "sha256": "e58dbba7d3f346545e2ff572928ed9c7bb9adc71b20e8cc8dc816a7fc060e0c7",
+      "bytes": 8374
+    },
+    "ipfs_datasets_py.logic.deontic": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/__init__.py",
+      "sha256": "1eeb1a57e388c37415facf3989a26d3b960b176b4bf1e65eef66e106c1aadb4b",
+      "bytes": 2644
+    },
+    "ipfs_datasets_py.logic.deontic.analyzer": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/analyzer.py",
+      "sha256": "8953235974d062f968334106c952d0978cc31a58408206bb56c26da174f29d6c",
+      "bytes": 19375
+    },
+    "ipfs_datasets_py.logic.deontic.compiler_repairs": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/compiler_repairs.py",
+      "sha256": "53ff5b4b6cf3303f46569f43e748b5d15a75b1895dbb4c4a054b541e9fc5569e",
+      "bytes": 2743
+    },
+    "ipfs_datasets_py.logic.deontic.converter": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/converter.py",
+      "sha256": "e1749ca0403f34834374b5089d78523f1866d53d3ec923137b6fb526fdffe7c8",
+      "bytes": 27572
+    },
+    "ipfs_datasets_py.logic.deontic.coordination_decoder": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+      "bytes": 13298
+    },
+    "ipfs_datasets_py.logic.deontic.decoder": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/decoder.py",
+      "sha256": "051a5e7a98ef2cf8a63326218cebeabcca2c528f6839a1a3cb11756ee7c1aab9",
+      "bytes": 31862
+    },
+    "ipfs_datasets_py.logic.deontic.exports": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/exports.py",
+      "sha256": "ac46bf1efa79925620199b56f6f1dbde34c92889a0a2a474cc6b9e408ea3c3de",
+      "bytes": 221362
+    },
+    "ipfs_datasets_py.logic.deontic.formula_builder": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a",
+      "bytes": 392561
+    },
+    "ipfs_datasets_py.logic.deontic.graph": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/graph.py",
+      "sha256": "5a595b05f5bec6d74f6c8c06129cc7f1a7860a2beff98d1f28b9fde6635bdfde",
+      "bytes": 22853
+    },
+    "ipfs_datasets_py.logic.deontic.ir": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/ir.py",
+      "sha256": "a6bafa2aa4b1e8d9c368d4c4354e56b924888d43eb1f817c11058767f17f3416",
+      "bytes": 114441
+    },
+    "ipfs_datasets_py.logic.deontic.knowledge_base": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/knowledge_base.py",
+      "sha256": "a6e59bf538caa19cfeff6e02aa5da0b964b83c73396d05e58c3830e39dd97d9a",
+      "bytes": 7285
+    },
+    "ipfs_datasets_py.logic.deontic.legal_text_to_deontic": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/legal_text_to_deontic.py",
+      "sha256": "abb138e7b51dbb071b9ab98865e3fb6c64dfd6a6cc5674a0853d523f00a7797a",
+      "bytes": 11583
+    },
+    "ipfs_datasets_py.logic.deontic.metrics": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/metrics.py",
+      "sha256": "5a2f92bc24154e14d3d2e3b6e73dcc128e6183957b5832b9bc1d72e60f7370da",
+      "bytes": 15413
+    },
+    "ipfs_datasets_py.logic.deontic.prover_syntax": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/prover_syntax.py",
+      "sha256": "1946190c1d1ec8e8ea659c0d7c9a0a8da29f2f6b0aca8326193a95a57deaad31",
+      "bytes": 67553
+    },
+    "ipfs_datasets_py.logic.deontic.support_map": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/support_map.py",
+      "sha256": "e48a537061611eee0cacff129839ce04992db838b86a3edbe8f422f1018fda84",
+      "bytes": 6124
+    },
+    "ipfs_datasets_py.logic.deontic.utils": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/utils/__init__.py",
+      "sha256": "6b3ede4588f4d18b84b6a06ebc774b8d3755627a0b5313147de7838503032f3c",
+      "bytes": 112
+    },
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59",
+      "bytes": 300668
+    },
+    "ipfs_datasets_py.logic.formalization": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/__init__.py",
+      "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266",
+      "bytes": 2073
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+      "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073",
+      "bytes": 97
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+      "bytes": 29370
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder_v2": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+      "bytes": 33948
+    },
+    "ipfs_datasets_py.logic.formalization.autoencoder.native_family_lean_emitters": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+      "sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe",
+      "bytes": 29000
+    },
+    "ipfs_datasets_py.logic.intent_ir": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/intent_ir/__init__.py",
+      "sha256": "acf68a7215af95b4a7d4e4dc883cb7577e2129e7bbadf49c1fc2c404848bc641",
+      "bytes": 2386
+    },
+    "ipfs_datasets_py.logic.intent_ir.autoencoder": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/intent_ir/autoencoder.py",
+      "sha256": "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91",
+      "bytes": 1006
+    },
+    "ipfs_datasets_py.logic.intent_ir.canonicalize": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/intent_ir/canonicalize.py",
+      "sha256": "3609047cc8c99437d77461b4f7ea0e05d193a31bf0d20a7e80b7b0c10a8cff87",
+      "bytes": 1495
+    },
+    "ipfs_datasets_py.logic.intent_ir.decoder": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/intent_ir/decoder.py",
+      "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257",
+      "bytes": 24220
+    },
+    "ipfs_datasets_py.logic.intent_ir.formalize.modal_projections": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+      "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d",
+      "bytes": 22238
+    },
+    "ipfs_datasets_py.logic.intent_ir.protocols": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/intent_ir/protocols.py",
+      "sha256": "adb0ae8eaf2e55bf587ac76baa90d8303b61e0df246c03c30b56cb31a9643780",
+      "bytes": 1693
+    },
+    "ipfs_datasets_py.logic.intent_ir.schema": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/intent_ir/schema.py",
+      "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56",
+      "bytes": 27163
+    },
+    "ipfs_datasets_py.logic.ir_core": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/ir_core/__init__.py",
+      "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c",
+      "bytes": 6942
+    },
+    "ipfs_datasets_py.logic.ir_core.canonical": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/ir_core/canonical.py",
+      "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0",
+      "bytes": 14098
+    },
+    "ipfs_datasets_py.logic.ir_core.schema_registry": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/ir_core/schema_registry.py",
+      "sha256": "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe",
+      "bytes": 31823
+    },
+    "ipfs_datasets_py.logic.legal_document_workspace": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/legal_document.py",
+      "sha256": "b44785f720df1a60495bb7086a78fc00325a5d653a7e1782c0712fb7691454f2",
+      "bytes": 20391
+    },
+    "ipfs_datasets_py.logic.legal_ir": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/legal_ir/__init__.py",
+      "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1",
+      "bytes": 2708
+    },
+    "ipfs_datasets_py.logic.legal_ir.canonical_compiler": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py",
+      "sha256": "daa148e076ebfd0e61f5a06a915bb924023873bcad5b41923976a33e2693ebdd",
+      "bytes": 37034
+    },
+    "ipfs_datasets_py.logic.legal_ir.canonical_contracts": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+      "bytes": 109257
+    },
+    "ipfs_datasets_py.logic.legal_ir.canonical_decompiler": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py",
+      "sha256": "79eeb9072e74e68dc5fab7640b5ad49e82131d0f35232ff473c7f2dfbe232c64",
+      "bytes": 13437
+    },
+    "ipfs_datasets_py.logic.types": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/types/__init__.py",
+      "sha256": "60359f47e39c12483d2ffa702d66b611ecba8451678d7a1f7e228e30e795402e",
+      "bytes": 3873
+    },
+    "ipfs_datasets_py.logic.types.bridge_types": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/types/bridge_types.py",
+      "sha256": "5ec9c47e1d5c527f66a01ec0790335ff70d784e6d3e20cc2dd73e1bc647449ad",
+      "bytes": 3009
+    },
+    "ipfs_datasets_py.logic.types.common_types": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/types/common_types.py",
+      "sha256": "0ad8f7b7e6f38540414c94dc9d6da6aba9665d4dee6283499d8a637a53dfc500",
+      "bytes": 2859
+    },
+    "ipfs_datasets_py.logic.types.deontic_types": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/types/deontic_types.py",
+      "sha256": "6fa123ecf0afb1d3293736c24633043aeb3349a3b3f7728247bfd08ea8cafe94",
+      "bytes": 10681
+    },
+    "ipfs_datasets_py.logic.types.fol_types": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/types/fol_types.py",
+      "sha256": "d1debd330e7a3102a1580efcbc6e06b863ee8ca9d78b2e34a60cd98b5ba1e902",
+      "bytes": 3529
+    },
+    "ipfs_datasets_py.logic.types.proof_types": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/types/proof_types.py",
+      "sha256": "8c96df27865d86cd54ae242497e4d9ddeaf89c5cd7484718b521dccf123fcb97",
+      "bytes": 741
+    },
+    "ipfs_datasets_py.logic.types.translation_types": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/types/translation_types.py",
+      "sha256": "5a0e4314692fdd4945bfd3c9b04d80e2fda86aa7f4b264f4c9c21964afe1343e",
+      "bytes": 2591
+    },
+    "ipfs_datasets_py.logic.zkp": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/zkp/__init__.py",
+      "sha256": "ea2eb0e91ae023d2b2180189c26fda4bf9fac3a9d0b1189cbe415676b2af3151",
+      "bytes": 8817
+    },
+    "ipfs_datasets_py.router_deps": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/router_deps.py",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c",
+      "bytes": 5845
+    },
+    "ipfs_datasets_py.utils": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/utils/__init__.py",
+      "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2",
+      "bytes": 175
+    },
+    "ipfs_datasets_py.utils.anyio_compat": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/utils/anyio_compat.py",
+      "sha256": "75fe36e8ffb3f8cec2240aa3fd91385493555fba6d573dff1d3c1d6270b58530",
+      "bytes": 12149
+    },
+    "ipfs_datasets_py.utils.cid_utils": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf",
+      "bytes": 4428
+    }
+  },
+  "v1_restore": {
+    "checkpoint": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/run-03/epoch-005/checkpoint.json",
+      "sha256": "9d6d50eb304d1caddf7917277ac4e5a6bc7c2652ea19dfc82d49aa4a9d989df3",
+      "bytes": 30231454
+    },
+    "module": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+      "bytes": 29370
+    },
+    "steps": 400,
+    "model_tensors": {
+      "byte_embedding.weight": {
+        "shape": [
+          257,
+          16
+        ],
+        "float32_bytes_sha256": "2c707e0dcce4bbfa3e16146307335a8955761a67142ee94356f83f77592837e2"
+      },
+      "token_projection.weight": {
+        "shape": [
+          64,
+          49
+        ],
+        "float32_bytes_sha256": "b1553b5cacd4a3f19a317bdf665099aa891db5ba570247db9c7751d08d420895"
+      },
+      "token_projection.bias": {
+        "shape": [
+          64
+        ],
+        "float32_bytes_sha256": "646cd07e6624b92de0bd25aea389820b3c6c8d3ad912bda31739dc9457f5231f"
+      },
+      "position_embedding.weight": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "9f5772a452cf404189adb88b3209be3b0f3da86dd08709faeb5dbc53c478c357"
+      },
+      "token_gru.weight_ih_l0": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "2c8c3ddcfcd2821aba9ecdb5520f9b85a278bc2d8ee9ce107502bff17e6ae8e0"
+      },
+      "token_gru.weight_hh_l0": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "da58695d2905026b454a656d2e007ded93ef682a1126c3a57ea6c927f01ebc88"
+      },
+      "token_gru.bias_ih_l0": {
+        "shape": [
+          192
+        ],
+        "float32_bytes_sha256": "513db60fccffe62451ba084e9c88226b6eae6dd8c8590e12756c152e3c71f354"
+      },
+      "token_gru.bias_hh_l0": {
+        "shape": [
+          192
+        ],
+        "float32_bytes_sha256": "92f59abd6b5917196e40d5b09daf4421cd1678866b47d258e85e93fcf70d3b67"
+      },
+      "token_gru.weight_ih_l0_reverse": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "42d0cd8d7db3ddabce809112dff8a44ef664be48a1ffbf1971f1bf8cb86f0685"
+      },
+      "token_gru.weight_hh_l0_reverse": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "09dd230c52ac03504216a440a48fd70f3cad11dbaf1a68a86e8aad37430d6fe3"
+      },
+      "token_gru.bias_ih_l0_reverse": {
+        "shape": [
+          192
+        ],
+        "float32_bytes_sha256": "d1e0e11a0e079afcf8dc51facc4d811411069d2906e27575971dbfe93810a3f9"
+      },
+      "token_gru.bias_hh_l0_reverse": {
+        "shape": [
+          192
+        ],
+        "float32_bytes_sha256": "e462f749f6809268f5e51f5f9cac50c77f13bca11ea9def6ed05e4e4defa4e70"
+      },
+      "global_projection.weight": {
+        "shape": [
+          128,
+          385
+        ],
+        "float32_bytes_sha256": "ecd88ba400e07072115b5f5fac26f261ada20cf1b387368bdbe265038677da5b"
+      },
+      "global_projection.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "636fc60827c00e1f18e8d5017d9978fcdc294855da716977acfa986e2db3b3e7"
+      },
+      "scope_embedding.weight": {
+        "shape": [
+          2,
+          128
+        ],
+        "float32_bytes_sha256": "29895cf4c1d29ac40f1e9f60b9246ad007c00f3896a581bcefb9648eb7f091da"
+      },
+      "slot_queries.weight": {
+        "shape": [
+          8,
+          128
+        ],
+        "float32_bytes_sha256": "fbf39b9236cff60df185808c21e0c9a9009eb5ce40732037051fa7f421d038a3"
+      },
+      "attention_keys.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "b0d8e379e00f57440c0eb93da9a3e85507762ef8904a35ead251d3c63de33ede"
+      },
+      "attention_keys.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "4e4b2b7a1e81370d2af53d284503574df363dd28f4011cc6f186b4058b576a5a"
+      },
+      "slot_fusion.weight": {
+        "shape": [
+          128,
+          256
+        ],
+        "float32_bytes_sha256": "a22f80f3c226e3e4be475605e596f80a9bf566cc9169421ddc0bc6bf51a861ce"
+      },
+      "slot_fusion.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "ce86d29a4fe7b0094de7a55a5e2c39a43a8d8aa2bc8a79aa56554cbc65683198"
+      },
+      "count_head.weight": {
+        "shape": [
+          7,
+          128
+        ],
+        "float32_bytes_sha256": "89eb100f00f4c7ef60b2065b463d48f637bf6c15354e0c8f528a70264b35ab9e"
+      },
+      "count_head.bias": {
+        "shape": [
+          7
+        ],
+        "float32_bytes_sha256": "6c0187c51979ec4b756f7c29f4b45033d98ce747c0399a0855cffd9c13441a95"
+      },
+      "scope_head.weight": {
+        "shape": [
+          2,
+          128
+        ],
+        "float32_bytes_sha256": "f05bd08dca71d6d167dde25e245974f887fa2058cbf965329424c4147d7a48c9"
+      },
+      "scope_head.bias": {
+        "shape": [
+          2
+        ],
+        "float32_bytes_sha256": "382ab6ba09c252f4309254734594adf8b26ef742acf44a813ae864479c83d06e"
+      },
+      "modality_head.weight": {
+        "shape": [
+          3,
+          128
+        ],
+        "float32_bytes_sha256": "204ff20d133342110ca5f95abdf0583a93c25e3716467c0946d994395e7fa39f"
+      },
+      "modality_head.bias": {
+        "shape": [
+          3
+        ],
+        "float32_bytes_sha256": "2c1ec39a8d9d326a4957ccc28e5d0d504275eb6537e2573c3cc2755fc4a9c0cb"
+      },
+      "pointer_keys.actor_start.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "5b9820f2c59bcfaf8b35062cb966d0a68830de45157c9c5251e7373626d02278"
+      },
+      "pointer_keys.actor_start.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "eff38ce744fe3a78b5503032995a1aefa6982a3044b57787b69071d3456ef903"
+      },
+      "pointer_keys.actor_end.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "32684daccfa47fb208e9f2ac85ad60da43456f1533f1f853e2ea44964b77fe58"
+      },
+      "pointer_keys.actor_end.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "ac163cd44a71eae9467bf86f02b49d4833ac0706244040aadeb4beafc9d066d2"
+      },
+      "pointer_keys.action_start.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "d36288b745e572b94135c9e25f0b4181914afcf9cfaa3a50a48b89fb5b524c46"
+      },
+      "pointer_keys.action_start.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "01bdd06dfea52ce36e5aa433d16b52dc9edec4bf31405b0ef659b7e2ab29b1e2"
+      },
+      "pointer_keys.action_end.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "6e1d58c85494dcab8bb48095e00e5811f3c37d1e5c9117817148ad1fc04e72b6"
+      },
+      "pointer_keys.action_end.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "040b28d1391e098e29ec010c5cd36bd0b689b015e15b991d5e7ea08966ee1566"
+      },
+      "pointer_queries.actor_start.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "c012ae46fe569602c6413604608e1e0c7db79e98e3bb8aaf98b5465f4cdb6e37"
+      },
+      "pointer_queries.actor_start.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "f4f14f161ac1b527b2dfd532cb3328bf6a2f9c042642a9e929fbba8626d0ab58"
+      },
+      "pointer_queries.actor_end.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "6d537dadadab455cde2896ffbf53b143547f92cac1eedb9a711ecbce13518032"
+      },
+      "pointer_queries.actor_end.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "8cd0831a2b645428aa7cbad31954a1238d6ca72e43a769631cd8647204f39d2c"
+      },
+      "pointer_queries.action_start.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "e9c56b93ecbfc731022c2a5f5137bd6ba079bd3fcb5c6e6679853d36852394ec"
+      },
+      "pointer_queries.action_start.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "9d692477375cefd6d90d67d774aff123e7928009385e8281440dd0e04bdd60a8"
+      },
+      "pointer_queries.action_end.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "6ddcbc45ab95f42d70a16ad5e4bacfe9babe7ab1f4e972d4ecadff01e40a95f3"
+      },
+      "pointer_queries.action_end.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "42e76d8652d8426378a2cedcdaf57f04c0f091aa7be1a525e795e89a692aec9c"
+      }
+    },
+    "optimizer_tensors": {
+      "0": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            257,
+            16
+          ],
+          "float32_bytes_sha256": "8e5a95ad7b909bdb30f042d67e028b4d4fc1c7ebef8ff545aa54008cadf218af"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            257,
+            16
+          ],
+          "float32_bytes_sha256": "33a5b9499d348b9a73ba7d3835c2df3d9756f0303e3c617d2b39d67c9cd7b373"
+        }
+      },
+      "1": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            64,
+            49
+          ],
+          "float32_bytes_sha256": "3b307fca80af7fcc1626bfc634d92604a29eb6b7c61192e4e35a836a8c6cfc21"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            64,
+            49
+          ],
+          "float32_bytes_sha256": "4dae2ecb9a1cbd5f1ae5644f8f8eacc49ab92eb225cce2eecbe7817a6d9aeb67"
+        }
+      },
+      "2": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            64
+          ],
+          "float32_bytes_sha256": "3290b5f564884abe5b613a53dbcda67398a05c80b8fb3e9c47c88f5f353345da"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            64
+          ],
+          "float32_bytes_sha256": "089049b9b633800f86b77d69f6a4ba9960721421df722878404da5058f65f713"
+        }
+      },
+      "3": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "8aa9797293029b4e0358d1d5498f465421c476b591b7df3c46d1e553ea736fcc"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "4d7fa47467a8d263f158559a514079c53b20979ebf161f165c750ed0614a3e33"
+        }
+      },
+      "4": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "52a942eafd4cac144fd6a9ebc7e8f512195ee9bedcf70a686f063de6c592bb7c"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "cc1d3c491440d64c1d86b8bb7e0ca554a5b94ac35393d3b9807643bb96d08fe2"
+        }
+      },
+      "5": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "c333c2b83809101655cc3eb03b9e9aa9504c14eee54ccc3f700f4b8606ad94b1"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "45a6a2cde0a82dbcbced92e0448fb983804cad10e22c79f8532b4397fddf573f"
+        }
+      },
+      "6": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "6cd68af0902d69e38bcc9b7503c1f8ddb99e0da077565085a0e2e282428b13b2"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "88c5761dc7f2208776ecc14146a9bd4e82b616c068e8eb38d7252d4e3b4d8d01"
+        }
+      },
+      "7": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "503082743ee31ba091498d59a5c381fdc61eccacc58ed22a7cd963719172fd1c"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "cda37e8be6cae0b9ec52e4632ac1ff4decc64297f6ff5371e05b34d40a6282b5"
+        }
+      },
+      "8": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "3b8da086f60d6e7898ddbee4ec8356bebbe579c8d96b2d8058b1cbd7050ac964"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "6a3690c8f6177b657f6792d42c6b1fb69b03266b7a8c093d7bace6d6704d6c1f"
+        }
+      },
+      "9": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "7e6b8e6ab0ad0948c5e8031c6f100f31456955b6b2dc5aa333f5a2a540e1427d"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "6c8e84e061d9141b52c454bcba1fe03997ac7325b4a153c5146c5ea8475f5724"
+        }
+      },
+      "10": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "8949efee8bea134fa1ddd0ac459921ed54db73736f2674efe45b585df66fad49"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "05ca0501604a14f94bd5084f23bdca0918afa2c2c033975eaa7e627458c8b0a8"
+        }
+      },
+      "11": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "f33d8f950c2cf9fe77f43e9c33c9a34e97b1da567f1da83c77a6ab5cfcf5ddea"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "8759c7c1fd7e718a94836a201d69488cbaed4da5b4d79464d4de2c2d962aea35"
+        }
+      },
+      "12": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            385
+          ],
+          "float32_bytes_sha256": "f1cbab4b6b0ea220372a96d8b3e1f6d4b0d96e2bdab7c090da006463a9bc5523"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            385
+          ],
+          "float32_bytes_sha256": "6fb72a34b60352e88d4c7e75875e9f332646f5a4e04f1dff1b2d0ce6cb468b68"
+        }
+      },
+      "13": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "5a650f84ca18b287cd13e8e73edc15e852a07d851de02ec3a3082639f4f1e6ef"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "c2567660988e69ca6a86c458d3494d24eaea0b680b16bd870eb8dedbd7b4d67d"
+        }
+      },
+      "14": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            2,
+            128
+          ],
+          "float32_bytes_sha256": "e98aea7bda51bb260368253dc78104d55f4d4deed58a4ef929c34d99a2b005cd"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            2,
+            128
+          ],
+          "float32_bytes_sha256": "7ee98b0b3d4561a8dcfbd42d396d7159bc6f06e73df57dd1313e5bc83e5a9b8b"
+        }
+      },
+      "15": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            8,
+            128
+          ],
+          "float32_bytes_sha256": "3f868781409512037c0f7355c309f475d61db32fdd67567d7949d51101d7f621"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            8,
+            128
+          ],
+          "float32_bytes_sha256": "ffa2e133b4119fef7560db7057708704cfab99f138efdfb62b8d4b037eb22699"
+        }
+      },
+      "16": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "1bce8d3cab6a85eaa20d87ccf12e3b3774ce22b1c19dccf058ebcecbbe493a17"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "84b06f362dc77d9909033cb7e9e46f6087e1b43b3d4159ad2d6a302e05adcea1"
+        }
+      },
+      "17": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "6f6e57fdd75ba2e6995c5a253bf4c1d886ef59fe81896bf06b8ad30b2904208e"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "b7924f145401af3168aa315e5b65020fc8cc9107f18a92f729041c44fb921ac9"
+        }
+      },
+      "18": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            256
+          ],
+          "float32_bytes_sha256": "141615bcd779a032a18d3aa834568017781bb2b6b8f3f3d51e76242c8381ed99"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            256
+          ],
+          "float32_bytes_sha256": "274b6194b63d55c38af8499a08fddb45e8aa9bd8229acb8617e9dc3da11670a0"
+        }
+      },
+      "19": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "5d7968c7283fd41134b8fb168ba2bcd632511f1ed03355a2760e8b0d230fae93"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "581dcf055469ea2152b70faff952c8c3619789264f9b924add5135c368e68334"
+        }
+      },
+      "20": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            7,
+            128
+          ],
+          "float32_bytes_sha256": "8d715312e7e1420b42eb98acc4d7c908bac293308bea1c9f7d4578a5a9ceb8c3"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            7,
+            128
+          ],
+          "float32_bytes_sha256": "a6087f3c30f9796153463ec0941553e3edea938ea0990d6e0a7f73cd91ad4198"
+        }
+      },
+      "21": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            7
+          ],
+          "float32_bytes_sha256": "7cf72271b6031f701900f8d288b145a80169642bef1b3a0a76b00ea6e67dac77"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            7
+          ],
+          "float32_bytes_sha256": "a3fce40340648643c03c9ec4d44789c43df665915bbd2c0ce3d62c5712b2b6a5"
+        }
+      },
+      "22": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            2,
+            128
+          ],
+          "float32_bytes_sha256": "660e7edf996bfc32dda8a18b9d8a012332b89b3330256cf30ad170292d1b9132"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            2,
+            128
+          ],
+          "float32_bytes_sha256": "b0c821dbff5e3ded0c01981280f5608a51efaebaefc2a282b1585568491f2f52"
+        }
+      },
+      "23": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            2
+          ],
+          "float32_bytes_sha256": "585df48119e5ea3702db6f34b0edef0658ffaadf9cbf48c86484aab502292aea"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            2
+          ],
+          "float32_bytes_sha256": "76e25ea04d4a550ad41c12ca264cca89633d6ad5cb55b12610d95117a10bd2cf"
+        }
+      },
+      "24": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            3,
+            128
+          ],
+          "float32_bytes_sha256": "09a3508a36bfae3009f9e26e687ff89089c6066bc0abd4dd40c545180018fa37"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            3,
+            128
+          ],
+          "float32_bytes_sha256": "2d1aa96492adf344f01c98bb1a7cd0c08e826e4907bc0ac6b2da981e27c4965b"
+        }
+      },
+      "25": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            3
+          ],
+          "float32_bytes_sha256": "b0ea5c29fbcd993662cf7a8221b33f598a13db79b3f79e4d7e14cab4782c3bb3"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            3
+          ],
+          "float32_bytes_sha256": "89c080786e04839b41e5c74479dbb4056499cf7e3c0bf14235bcb057c2f0cb8a"
+        }
+      },
+      "26": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "26d95def2e87a1739d9e3028aa21f0342f754f773afdf2b0c1556dc15e284f72"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "9675453b5adf69585519c345ca64a7cebf12a2402ebc3b8ab07191cc08040a0d"
+        }
+      },
+      "27": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "75cef6ab087caceba3df757a85f3645e60d77e0c5f3ec9b9cb114e1a92e02625"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "190a644125b561ea4cbbb75c6c739074b7f8c458b9107778db11b172b05653ff"
+        }
+      },
+      "28": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "deb7ae2fe442aa80e8c2e20d59325283d17345415700c29d73c16b8470b3c408"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "afe9065911c3e05fa185649f550e1567ce4a3f7d0af14f95e1e4ad6887ad60ce"
+        }
+      },
+      "29": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "f5f89b9b279dfbd86ed23331f57c6598b8a2b400b88928f1689095c77dd00fac"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "a76d109f164eed37f2e6cc17072b5077f4a1828b724ead15566e9ad46d084d42"
+        }
+      },
+      "30": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "17083fd1bf02d9577c76409052f2ac5239042c18bf3adfe23de6c86b89204adf"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "b9903164c5984e89d6d24f46e1c5fa341b4ce7af4686662aec90e192ef54d66b"
+        }
+      },
+      "31": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "ff18fbc060c1d788dd9ea920c0ca885b14722383fd72fdab9ac7ba98e6ef0c2c"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "43555f764a7293ae4dea2d0c8e2ded6ea2d37f7edcdd3a13e9327e01ef674304"
+        }
+      },
+      "32": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "1f1cf8377270e3105a78f48595dc2c62864bf58ddb3c742c9832cb0c25fa2cb7"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "76864782a4b1818dc51fc62bd2d72b8a80317025f41220fbbaa7370a53e7da2f"
+        }
+      },
+      "33": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "be60b504d1e5316e41dc972a52354db7cd825f0e599fa922892b9b8914810837"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "39cf1ec92fd48fb129e1941ccf520a89c520f578b9364dc78f8bba8ab4765495"
+        }
+      },
+      "34": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "c5a0da5334422eee712cf474fdc968a838541a89d3acbeee2793f2aa83a488c3"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "7f58beb6ed1cf18ed0e57d6ef7685baab5237d18505751c605c598b37593240c"
+        }
+      },
+      "35": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "859ad1c3c56d389701d9a76b7228c3643f944f9b03e959c6f0ab2b28375f6183"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "da4daf1ab62946daf73282aca7e0d6e646236dd3534f42da3afc80ef7f6480be"
+        }
+      },
+      "36": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "b95437f062275ae823df58a9329720bf9e70125bbc48ca511f534471476a69c3"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "f364ab57a1a31c79e8ec3a39a2f0d476c492f0f82268decff8f9fb8858d96c76"
+        }
+      },
+      "37": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "fa0e08cd77d15b97b2482f9cb9fc82d7de7ea92fa8a2dbcf8608444ae6d0954d"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "73e0052253bb7172145a44ab5d9d44090a00f799b571bea7e2efb8b6556e2ef3"
+        }
+      },
+      "38": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "41b80540468bc7f12ac40f28bf068102eb3385007c31bb2eb1b1c147fce83bb3"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "9f6c74542ba77cba164c19635a0e3e97627cd86a804d7ae5fd9523e65fc7a511"
+        }
+      },
+      "39": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "7a13fb9834fda13877df50e6cf537c12f48c158b7bdefc63a468cac59d062d09"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "24ee569c27778a3ecc0ef91eb254b35e5ce21064ad1c2eed86e33b3a2a26409c"
+        }
+      },
+      "40": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "b6d0fd9bf41dbd51a126d69eb82eb50771f40fe66bbd41e5121f852732bf8b0e"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "40875accc73349b8b2822f1d7ea495207e3696656e957328954563f8a3611bbf"
+        }
+      },
+      "41": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "ac8fb139930df65fdb788559d7299840c359549afc851b82ba08d1485e67f3b7"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "b441660e91e4df7a3aa7b4d7c78ee3e5aa50db2a22dbee8d9d42ca55f7c404c1"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "d8778475e2495b128f70fe3132c72675e84dde2b9b38bc35a4df4efd7d2f3895"
+        }
+      }
+    },
+    "model_tensor_count": 42,
+    "optimizer_tensor_count": 126,
+    "exact_resave": true
+  },
+  "v2_restore": {
+    "checkpoint": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/epoch-003/checkpoint.json",
+      "sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+      "bytes": 30519315
+    },
+    "module": {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+      "bytes": 33948
+    },
+    "steps": 480,
+    "model_tensors": {
+      "byte_embedding.weight": {
+        "shape": [
+          257,
+          16
+        ],
+        "float32_bytes_sha256": "011513fc759dc4992fb04fc5e119db4ecd99d4d50c58556099da55deec28bc42"
+      },
+      "byte_convs.0.weight": {
+        "shape": [
+          24,
+          16,
+          3
+        ],
+        "float32_bytes_sha256": "69443a643939133a9ee018535ffa9ad211b96b337aeb0003dd4192ddcd386926"
+      },
+      "byte_convs.0.bias": {
+        "shape": [
+          24
+        ],
+        "float32_bytes_sha256": "7ec3ebfc2ba6f5bd7d66f774dff9873fc3000de9db72cbe82eb8f4e6d08e8884"
+      },
+      "byte_convs.1.weight": {
+        "shape": [
+          24,
+          24,
+          3
+        ],
+        "float32_bytes_sha256": "4ae8d000e47b6f8fb7cfb6ade9433072a7eca410dc41c2e8381c711c61a3116c"
+      },
+      "byte_convs.1.bias": {
+        "shape": [
+          24
+        ],
+        "float32_bytes_sha256": "8794f400105ccaddd14f8333e90ad0fa17e587650446396068ef80fb44087947"
+      },
+      "token_projection.weight": {
+        "shape": [
+          64,
+          49
+        ],
+        "float32_bytes_sha256": "1456e8b081a7a5fa72376e534ffde1377fffeaf42010494e993a17988eb627cd"
+      },
+      "token_projection.bias": {
+        "shape": [
+          64
+        ],
+        "float32_bytes_sha256": "bcd376085063da616cd95a709c3a686dcc95f86b4fb6dc4768bd7c8bbb9a1fff"
+      },
+      "position_embedding.weight": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "1d67b0da81d17eb31c915ab005aad6b8c30817df6b4ae295081164017987613d"
+      },
+      "token_gru.weight_ih_l0": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "ef0919498c6c1b777aaa826c16d7f44887557c1ca80ebd121dcd79db4048a451"
+      },
+      "token_gru.weight_hh_l0": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "8eecf5d9c7c4cbb41d7a4812886d0689a529e8f983eeddfb3d701c9b08feb9c0"
+      },
+      "token_gru.bias_ih_l0": {
+        "shape": [
+          192
+        ],
+        "float32_bytes_sha256": "1d3684655ddd63082d74142cefcc179ae80c0d16b9a4f570acfd1947ac2767fb"
+      },
+      "token_gru.bias_hh_l0": {
+        "shape": [
+          192
+        ],
+        "float32_bytes_sha256": "6be5065890e56d8b7b49b4b6176b366c1d52a1396adec8d0ad32b3a6e8a72372"
+      },
+      "token_gru.weight_ih_l0_reverse": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "3967e3c6290685e3b717eba635a9120889a65696dc27f1dbcac30dce6d0a752f"
+      },
+      "token_gru.weight_hh_l0_reverse": {
+        "shape": [
+          192,
+          64
+        ],
+        "float32_bytes_sha256": "982e25aae18bc2842e8805fe1ea7e05428aea99a00bbaa37f48b4c74270c1dac"
+      },
+      "token_gru.bias_ih_l0_reverse": {
+        "shape": [
+          192
+        ],
+        "float32_bytes_sha256": "3cfedb15fdf996090b85318fb18f4d4d52fcc4f920b1dfd560a0d859b739ff86"
+      },
+      "token_gru.bias_hh_l0_reverse": {
+        "shape": [
+          192
+        ],
+        "float32_bytes_sha256": "f5aa6a93df4e581a9ece885c7e29a3f63b1098b76ec5c417d88964b4d434b0ae"
+      },
+      "global_projection.weight": {
+        "shape": [
+          128,
+          385
+        ],
+        "float32_bytes_sha256": "95c3a74f24323fdbc795e976fcd10823767dcece61d971cbf75e9b81761bd1cf"
+      },
+      "global_projection.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "093fc10005e55274b042b527883609dbc4720954dd112d2c9f8a790f719c88b8"
+      },
+      "scope_embedding.weight": {
+        "shape": [
+          2,
+          128
+        ],
+        "float32_bytes_sha256": "635058e2f748a94385bb89581160b24dd94c207f89dbd6f0fb44a78a19bbdc28"
+      },
+      "slot_queries.weight": {
+        "shape": [
+          8,
+          128
+        ],
+        "float32_bytes_sha256": "e5cef0e83e8db476aff0939488f6f09bb1da94e23cb79ed8f37ad3b7d5687408"
+      },
+      "attention_keys.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "36f1c08b24114439161db89b7fd94128b4a58c951d937cf4d6f0dcb03933ca18"
+      },
+      "attention_keys.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "2e1e3041cc206c3f47d1a4988bba2d5c9eca52ac450036c6524dfa63f66de521"
+      },
+      "slot_fusion.weight": {
+        "shape": [
+          128,
+          256
+        ],
+        "float32_bytes_sha256": "aa5a836fd2a2dab56f4248be12309296fe24a90b8ef928f6878418202bf63e0b"
+      },
+      "slot_fusion.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "0baf54ca20b869fc84cfa7715f37d2da8671e2fa2fc82ef6367c172945a2c0b4"
+      },
+      "support_head.weight": {
+        "shape": [
+          1,
+          128
+        ],
+        "float32_bytes_sha256": "b9aad41443a025212313bd62c3dd7c7f5d6386d263a39755635f3b2752a198c1"
+      },
+      "support_head.bias": {
+        "shape": [
+          1
+        ],
+        "float32_bytes_sha256": "09f9531cb80e46603e4c77c28d5075aa84fd3013456834d8fc6b8f282aeb5c64"
+      },
+      "count_head.weight": {
+        "shape": [
+          7,
+          128
+        ],
+        "float32_bytes_sha256": "f29805287c499079f604ac03c48fcff9755f4a6ded9e01510d2a0657bed1e1fc"
+      },
+      "count_head.bias": {
+        "shape": [
+          7
+        ],
+        "float32_bytes_sha256": "c347c03e4148af3aa4c5a4903562c357db6ce108cfca771ff625ed6032de273f"
+      },
+      "scope_head.weight": {
+        "shape": [
+          2,
+          128
+        ],
+        "float32_bytes_sha256": "6b91e7763224c4da8cc922fa82813b899ee9f6d23b94a3ddabee0051c18aa02d"
+      },
+      "scope_head.bias": {
+        "shape": [
+          2
+        ],
+        "float32_bytes_sha256": "c2714837fdad66ecc08e3f1e69727f7fd1f984b262608e7d832ddc91572a916e"
+      },
+      "modality_head.weight": {
+        "shape": [
+          3,
+          128
+        ],
+        "float32_bytes_sha256": "bbc4d7d6ddfa80bc1243e45026d3d251d497a6edcc89fe724eaee59fe617d33e"
+      },
+      "modality_head.bias": {
+        "shape": [
+          3
+        ],
+        "float32_bytes_sha256": "34bcce90a838ebc0e4cff1ab127be091f4270e6337d0c94f5877e3013d0310e4"
+      },
+      "pointer_keys.actor_start.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "77471c3961d3ba6e12d4b0932f8bd502a082c75a6811043f1b2de152e05c957d"
+      },
+      "pointer_keys.actor_start.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "e9b8929bc0055de56201c2ea8f78f6d1354465046f492eadd84e34fd5420a67d"
+      },
+      "pointer_keys.actor_end.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "66cc8f584cd89bd7a3f537e95553f74ad62b18426ce8cf1c70f2888f9af5644b"
+      },
+      "pointer_keys.actor_end.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "67033398ba22e36b6a0c2908a79e406a1cd5d0516cb729977751a20454361825"
+      },
+      "pointer_keys.action_start.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "a9d4959abeb559ec11e40e7ab555884233be4b903fe25d602382c9b33ee481d4"
+      },
+      "pointer_keys.action_start.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "46ff2b324e5165102e00dc867c5a9ee03950710bbc2cecb833c80b3d63f7c426"
+      },
+      "pointer_keys.action_end.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "02f502ce0fcfbcf7a6116d0274b504690574d4f8b34bbda360f84a7db25fece0"
+      },
+      "pointer_keys.action_end.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "371b732801de58f154602ef1beae8b6c1bed32579e162d80206cd4ada12a4563"
+      },
+      "pointer_queries.actor_start.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "eb4d5868f8b02e58c9500c97ee0ed70d8a819ec55195e3f7d9448595d3d9ca3b"
+      },
+      "pointer_queries.actor_start.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "8d91c80520f05e63b8b8744397d32d13e9fb1f0f4849e3c2fdd625f3ecad921e"
+      },
+      "pointer_queries.actor_end.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "e52d694ccd4ab0baf236cd558878135350bf7fbe753fc0ee047496b73c9b6439"
+      },
+      "pointer_queries.actor_end.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "8b9e4998d94f2e1142e41ea33a7d25c82ddfb8066b0d23e18c88a755bf85cf53"
+      },
+      "pointer_queries.action_start.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "ddcd843fcf0b9c4097824fc35cee93675ef7d2e4a0540819e6e5dc5ec39bb369"
+      },
+      "pointer_queries.action_start.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "aa1ee051e8f0cda4dd2098cf3d5e51e3e57b2e59ad9ebd172ab53a2da99232eb"
+      },
+      "pointer_queries.action_end.weight": {
+        "shape": [
+          128,
+          128
+        ],
+        "float32_bytes_sha256": "7ea5b206c4853be0455a439030bc918ee1642a07519428d37a5617a571f36a95"
+      },
+      "pointer_queries.action_end.bias": {
+        "shape": [
+          128
+        ],
+        "float32_bytes_sha256": "7a0dd003b3531053d7f02c4bbcc63331fd5d43bca152331480e8f2fb8e99bc39"
+      }
+    },
+    "optimizer_tensors": {
+      "0": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            257,
+            16
+          ],
+          "float32_bytes_sha256": "34e10bc933dd7ca49214a1a24c6f4c11d54c95d06b551a3e67ed30d6e7d9b8ec"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            257,
+            16
+          ],
+          "float32_bytes_sha256": "be8fbd2751071e91cd798e935788e19310fdebcfd6ea2d7f6da715c27d141f72"
+        }
+      },
+      "1": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            24,
+            16,
+            3
+          ],
+          "float32_bytes_sha256": "1ca0913687b0fdca0ce2e1aba6cb9dd13569eb634e72eead4fe1e0d9e007acf1"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            24,
+            16,
+            3
+          ],
+          "float32_bytes_sha256": "fd857d377dbf1a3702254e76a91f1031d76a0602979e74a6600719e9606d772b"
+        }
+      },
+      "2": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            24
+          ],
+          "float32_bytes_sha256": "1ef281b22a85e4c613a7120d32dbda77b5f53deba04d5394ae2c267688db4ce5"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            24
+          ],
+          "float32_bytes_sha256": "3a0fb96336f26557f55862f4ca89c938c91ffcc66c06a44e64f2d8b4d83b7fec"
+        }
+      },
+      "3": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            24,
+            24,
+            3
+          ],
+          "float32_bytes_sha256": "e07cd0c9a03cb470596d6fc01c4672c1467e07f5551dfd6e1df1e176bb8ff2a0"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            24,
+            24,
+            3
+          ],
+          "float32_bytes_sha256": "370bae5b1419ccbed63b8bf7a46305c3e602be9001f2dab93830fff1ac8bb883"
+        }
+      },
+      "4": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            24
+          ],
+          "float32_bytes_sha256": "461b17f10b2759aea6368faf90378f547d242355e7c71900b2e63f5b8c3c84b8"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            24
+          ],
+          "float32_bytes_sha256": "a239ef1e8b7e0689fdca9348c19576b50b156190ab1346ace7eba637b71f91a6"
+        }
+      },
+      "5": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            64,
+            49
+          ],
+          "float32_bytes_sha256": "a403ed5bee0219acc591f061afa8b3944a491341b873d58cf29f0025f05a449b"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            64,
+            49
+          ],
+          "float32_bytes_sha256": "ee0342082543ce876ca118ea7ad54d5c1b29263f64817b80bce4a309c88dbdea"
+        }
+      },
+      "6": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            64
+          ],
+          "float32_bytes_sha256": "f6255812a9073d5ec67215c5475722b51707f6341b6cfa77e9112e956988f9cb"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            64
+          ],
+          "float32_bytes_sha256": "e4d472e2ef137e79c88af483e5ea68041f4d455cafb6d739cacc0e21532a0352"
+        }
+      },
+      "7": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "01831ee3fce4fb6c78057637d17c70f95711317b89c89048692c217a0525891e"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "a3a05eef544f8e040f9311a41d10968e3fe1c385ad411d9da86bbc71f0a3a6c1"
+        }
+      },
+      "8": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "77a8b5f78df412e77ed892107967ac725b3901081f6ac0219a856e0082326808"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "6ca5db9276034660c678c159e3f49e13684ec6372c6336caa6d5011d6b2562d8"
+        }
+      },
+      "9": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "3a81c458347b43d12e6386787404bdbf1e5c28dfe262cbc6f9081c1bf21ba2fc"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "b729f6e7384bf7457efc63e09bab4082886897fd83a06ca11adee0051ef61d98"
+        }
+      },
+      "10": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "9cdb40564b7d54c14deb64357b77a34a0892e89c3a950e7d564d9443ed85156e"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "a865b5e8320b0cfee9a9da262610bab9e5fb5c66093251a36b74b5138ddff6ec"
+        }
+      },
+      "11": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "09c20bc0be53b0c3122cc1aa11de5a3998405dfab3a9319f290ae3e5210ebe80"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "54dfdbabe04256d8554d2aca7fd9a7aefc0715eaa1d68b6fdfb02ff2254a818b"
+        }
+      },
+      "12": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "2ffa1c2c67b4d722f489dbd7634e4871aec7e559e52446e376c7f665f1a8a6c7"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "d3a9865acd75fa8c7e2d0dac15ac10a5ce42502f6a9ef43d8757554b09e54e43"
+        }
+      },
+      "13": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "76ec7fa75bb465c6b61d212b1e0ad2fc75a7ccf91fc7744b903fceb062ed5bed"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192,
+            64
+          ],
+          "float32_bytes_sha256": "8d9d427a9bbc315d6b7455e7f65acaa997cb8967b5f3115f9aebc9ccb765a839"
+        }
+      },
+      "14": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "ee197da14a16782376da76a7c94f22292f4d26584b23dd967c3f30b6d9db7eb7"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "c550b99cc3411ae39a8bcecf07722b39f4c6e9825ca02a2744aa4c07cbe9f3f8"
+        }
+      },
+      "15": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "d30b6d7a27253df18abbea3941b73131c17731091179114e1bc95a2cfb8e742a"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            192
+          ],
+          "float32_bytes_sha256": "a63afaf1f596b7f00a3cd1e3fad5ddd581fd2b070ebdf95d092b68ba1f7929ba"
+        }
+      },
+      "16": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            385
+          ],
+          "float32_bytes_sha256": "0f0f1ef3e3730087b5658bd4cfaa498c7c0893814742466d3c86e292e6c1d705"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            385
+          ],
+          "float32_bytes_sha256": "ceabffa81721c95c0754bcd3c31feceb466d76f8162f13483608847b0fbda135"
+        }
+      },
+      "17": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "3467d63a8c93a67f97ab7912656a902bb009f7ab55d4a27e348eb890fbed79a6"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "b8fc0e24f158e52458a63d803ffd1a06ef2a31ab8f74d620290e7efdf9230129"
+        }
+      },
+      "18": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            2,
+            128
+          ],
+          "float32_bytes_sha256": "c1c6dd83bb7eff2e91e1a64e657b5c613c0bd7a2557478805ea305f8a8f6e1f0"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            2,
+            128
+          ],
+          "float32_bytes_sha256": "284ea33b362f11085a578e4fc693d676203426917064d741a28f14fbc29e96a2"
+        }
+      },
+      "19": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            8,
+            128
+          ],
+          "float32_bytes_sha256": "43b4f6d3a417c01d985ed5ff44ed9c93d931850b16da3295edb9272dd0db0a29"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            8,
+            128
+          ],
+          "float32_bytes_sha256": "770738b0b1d07c2cc4be900adebeb6b1ea91af86d25497daf82701e8240401fd"
+        }
+      },
+      "20": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "1852b75407a098d6e1c0e72214fe43d15aec5efffb7ece8310b2685ea29cf50e"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "dab52e6e3317054e7ed9211136b5bf6912176a0ea8f7c49b53166570d4467ce7"
+        }
+      },
+      "21": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "999abe8b8fdb136b56ec79047b626b513a3967cf9b8240af4aec88db5ba186d4"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "37f8b560f2ff9c5b16f86f94524553017c680c3c860f2f701b9e7f3bef2b1662"
+        }
+      },
+      "22": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            256
+          ],
+          "float32_bytes_sha256": "4f44978b9d7e48a3f4e6fb4296a4eced5e336e70bd90c77ce1a905a939919fc8"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            256
+          ],
+          "float32_bytes_sha256": "18fa19262a9545de085986c1c8ea7b2cd3c772a23bbf760793a70d8416ba6f6e"
+        }
+      },
+      "23": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "e625ac0bb37ff8b001e1ba7429413a5e60663cc50ff0ebd4d86122998188b399"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "e5239c5f7fc4d67ce5d729b5c913f4d5c9eff4628c42a17b0690c17310ebbb4b"
+        }
+      },
+      "24": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            1,
+            128
+          ],
+          "float32_bytes_sha256": "3ebbae76b46100c352f7b0ab66c2b90b9d9e001c918f3fb903520b92452666c1"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            1,
+            128
+          ],
+          "float32_bytes_sha256": "e200a231db564d6c20934c290281b5d89462e9d5c081c525999834a4f03ee2e5"
+        }
+      },
+      "25": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            1
+          ],
+          "float32_bytes_sha256": "321f40fcda3c6de98c5d1f315e1d46e1c8429e076eceb710f579e87a2e7db2de"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            1
+          ],
+          "float32_bytes_sha256": "c1ab11af924c2e5c034d12ca0a56658e006b4056f22b02936c49d7990b7782d4"
+        }
+      },
+      "26": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            7,
+            128
+          ],
+          "float32_bytes_sha256": "a15d45373cc442520eb9e1fbb23690520efd58e6d86a9ca474960e84928bde1d"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            7,
+            128
+          ],
+          "float32_bytes_sha256": "3dfd1c0e40160cfbe51417ad1454ad89c87a0fe2bcce62db8d8299962a4f42e2"
+        }
+      },
+      "27": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            7
+          ],
+          "float32_bytes_sha256": "8a7b87cb199bd7bbf26c27798842ebe60adeae89f1728b0d09e63f5dc7efcb55"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            7
+          ],
+          "float32_bytes_sha256": "b2a0401350a68371662a3e4b9c2847ca41d4071a792c862069bce389ef39320e"
+        }
+      },
+      "28": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            2,
+            128
+          ],
+          "float32_bytes_sha256": "0a61617684f6db6c9d7cf9c2adf2125aba1ba89a80202d731349dd11fd5eb5f9"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            2,
+            128
+          ],
+          "float32_bytes_sha256": "591af2c54fd6f54818c721c3815a9e530025460238f9687263c605c3f4b1527d"
+        }
+      },
+      "29": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            2
+          ],
+          "float32_bytes_sha256": "3d05cdd9b5d1f9613a9b9286ae69ce824c85d002413681dd800aaae0284cb853"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            2
+          ],
+          "float32_bytes_sha256": "2f6ef424eba5c8767452aa9c9c31da2ac454c92d6bc3eee03f42c472d231eb3b"
+        }
+      },
+      "30": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            3,
+            128
+          ],
+          "float32_bytes_sha256": "13c882a9ee924ed5ef19cbb9d7819793ff7f4a857d1406dd615f293ca57f4eaa"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            3,
+            128
+          ],
+          "float32_bytes_sha256": "0671e0c900312c1a7494dcfd63e31f0ab520eaccdd845da8c6a044e9f8f9293f"
+        }
+      },
+      "31": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            3
+          ],
+          "float32_bytes_sha256": "581809c651128663aefdea0c19f005771ff57d0040ce93e81bdb48c3ffc7c78c"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            3
+          ],
+          "float32_bytes_sha256": "2e46dbb853dc87d5e82cd037edc8d95350e6796298d991d74a856c024744418e"
+        }
+      },
+      "32": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "2f5de93c09abf1149a18ab3e819ce5a7503493c9ab4de7da7b0f5b63d3918fb6"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "c3408fc5028ed878a372cb9bc5909d28636d711a9942df2653e5ddc997c19fda"
+        }
+      },
+      "33": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "a6d5e78a039e9f73b48ea8e18ecee07e464b86fc00ba93958cd3d83711f16ac4"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "d65416cd73024ac5ba9b7419fe687836720b96b9072d243d23d11fc6946c56b4"
+        }
+      },
+      "34": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "9b33ce5a0ece992a4e7973dd4141b0a93bd15f9c735921d25123358a87f19e82"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "2b3d7092da4e132a5d10f7e02feb34fbc93362a8bb341b32c078521155479a9c"
+        }
+      },
+      "35": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "2709c0a886edd789435e746ef14e5c7455b116c658ae2abfd5c079e985908d28"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "87f634e53955e466fa30ffb53f879b7207f065c876495b6bac1da35d6a3f8db8"
+        }
+      },
+      "36": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "bcd671cb36ab2ebb26646a1264627dc10948e0c63a9bfed18605554bd743b271"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "6da89445594f1f8501787aab1bb8e24049476ad9a97e0a78586669c18072a110"
+        }
+      },
+      "37": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "cf78a6ed22b071b9585057c76e20e53a923aecefa8de4a5fa8e6ee7bac4226c3"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "dc3797a3bc6bfd3c84653d23221f90c1d61fb650cb65d02faac8b5fb29067c7c"
+        }
+      },
+      "38": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "d849dd2c17f0844fd6e50bf788190be509bae9b086333e7009ff971fa7883c91"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "566dc13e3e70032055d664a906dda5b20c72fdeb6b7482e27de2db9eb5d9b692"
+        }
+      },
+      "39": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "d35423e2032bfc204ab6883dd2033dd4db1549b393479ddaa5e2eed87447286e"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "d54177e7b74ed86a1d833ae6604fd84223ab34039ce305dac0d5fe5ac6e5373d"
+        }
+      },
+      "40": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "b755ed0fd5091e45e151c530d0d302f642e142ae9881c90cc5e6377086d29614"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "afde51572f2b9e7c3386f219887b7ae38bf95e929ae37597557ce999467cfd82"
+        }
+      },
+      "41": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "5189f11bc349ae4c28ac5daa924f24a8f48349f99429a0928af204f7c0145489"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "9a4cfd353a2d32cbf7c2e5571da4b30eec153fedc2d4a72057ad20ea67ba518c"
+        }
+      },
+      "42": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "15ef524b87a8ad3f76fc704730d4cb9e396cbab6d76d00153e75ae096657ac5a"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "64ddb5126b8aecce578ca0292cff5fa96887294c96ba2c7a9aeea1975fb5f307"
+        }
+      },
+      "43": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "c781e462ae4ad39f10dd5d28ad829fc8e94f07b83ff1b0fa9eed871b9a8ffcd1"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "1a845e2ad983e15c1a0b97c82d5a97df6ce5aecadcdf00390a148761c984a879"
+        }
+      },
+      "44": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "7e9e26d885d2723ee0f35b829dd4cb8439ab1c5a069dc95b88f8558c0f061ca4"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "430aeaae47fd5d6204be6eee88ac9a0a6c913a75eb611e023d6722adc15bc41f"
+        }
+      },
+      "45": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "5ce27e9df8434ab79c69bb1cd995f1bc46301d8b8a4864534efb1c50060b8929"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "f5333c8686f71b9aa56ee80c674bddf6d50c490d9d58131b785e8ddaf40fa507"
+        }
+      },
+      "46": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "7c9bf6d57fb9906aa1963382a7d873fa997b93586f0fef5e231290faa15c198a"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128,
+            128
+          ],
+          "float32_bytes_sha256": "a20fe4a67917fceee4f1724ca33322b36315f473063e85017fb45814d221e23e"
+        }
+      },
+      "47": {
+        "step": {
+          "shape": [],
+          "float32_bytes_sha256": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa"
+        },
+        "exp_avg": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "c87ea59436dc327dd4cd8a714f24b22c6489e44a09095e4676a1235769552dad"
+        },
+        "exp_avg_sq": {
+          "shape": [
+            128
+          ],
+          "float32_bytes_sha256": "a56e0478b16080909a7653b120ffb1bb92e1d636a1948213f690ec79d1ff5bad"
+        }
+      }
+    },
+    "model_tensor_count": 48,
+    "optimizer_tensor_count": 144,
+    "exact_resave": true
+  },
+  "v1_to_v2_migration_rejected": "checkpoint schema/producer mismatch",
+  "selection_receipt": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/selected.json",
+    "sha256": "fd7cabf348a37458bd3794d5953858bc17cac569dc07e08ca8f775f10bc834bc",
+    "bytes": 6214
+  },
+  "panels": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/epoch-003/selection-evaluation.json",
+      "sha256": "93bfd3508cb73748c08153b2d8a6c3206da05b34cbb52ed713de9511c5dfdebf",
+      "bytes": 579388
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/final-holdout-evaluation.json",
+      "sha256": "468ad182632ee903a244495223d5f88b56d02c418760368a82eec0c1fdbeb47c",
+      "bytes": 594022
+    }
+  ],
+  "reference_field_access_in_predictor": false,
+  "model_input_fields": [
+    "source_text",
+    "modal_scope"
+  ],
+  "poisoned_helpers": [
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder._labels",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder.GroupedSpanTarget",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder.GroupedSpanExample",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder.train_grouped_span_step",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder_v2._labels",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder_v2.GroupedSpanTarget",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder_v2.GroupedSpanExample",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_grouped_span_decoder_v2.train_grouped_span_step",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_normative_elements",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_same_document_reference_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._has_resolved_same_document_reference_exception",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._mark_same_document_reference_resolutions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._same_document_reference_values",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._same_document_reference_display_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_local_applicability_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_local_applicability_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._local_applicability_reference_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_local_scope_condition_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_local_scope_condition_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._local_scope_condition_scopes",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_local_scope_exception_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_local_scope_exception_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._local_scope_exception_scopes",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_formula_resolved_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_active_repair_status",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._precedence_override_reference_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.expand_enumerated_norms",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_enumerated_child_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._split_legal_sentences",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.segment_legal_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._citation_context_from_sentence",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_citation_heading",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._sentence_has_normative_cue",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._hierarchy_path_replaced_by",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._hierarchy_detail_replaced_by",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._looks_like_section_header",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_citation_parenthetical",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._split_segment_fragments",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.analyze_normative_sentence",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._extract_section_status_lifecycle_elements",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_superseded_editorial_status_heading",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._section_status_should_short_circuit",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_section_status_lifecycle_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_savings_preservation_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._savings_preserved_actor_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._savings_preserved_object_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._section_status_detail",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._section_status_instrument_from_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._strip_leading_enumeration_label",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._strip_leading_authorized_action_prefix",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._complete_field_spans",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._find_span",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._definition_body_span",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._impersonal_field_spans",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._finalize_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_definition_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_canonical_citation",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_source_id",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_formal_terms",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.normalize_symbol",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._definition_applies_to_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._same_hierarchy_scope",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._hierarchy_value",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_cross_reference_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_section_index",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.resolve_cross_references",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._hierarchy_reference_target",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._resolve_section_range",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._section_sort_key",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._relative_reference_target",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_relative_reference",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_section_ref",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._unresolved_cross_references",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_document_penalty_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_enforcement_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_conflict_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_section_violation_index",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_enforcement_links",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._enforcement_target_sections",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.validate_parser_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.migrate_parser_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._legacy_clause_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._legacy_cross_reference_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._legacy_temporal_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._deterministic_ir_repair_resolution",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_llm_repair_payload",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._inactive_deterministic_repair_payload",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_logic_frame",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_export_readiness",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.infer_definition_scope",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_ontology_terms",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.merge_ontology_terms",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._enrich_legal_frame",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_legal_frame",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_monetary_amounts",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_monetary_amount_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_penalty_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_sanction_class",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_sanction_modality",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._penalty_bound",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_penalty_recurrence",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_imprisonment_duration",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_procedure_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_procedure_event_mentions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_procedure_event_relations",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._infer_trigger_event",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._infer_terminal_event",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._events_from_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._infer_event_from_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_kg_relationship_hints",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_kg_triples",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_legal_instrument_target",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_modal",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._has_leading_negated_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_negated_subject_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._trim_embedded_heading_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._span_pair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._element_span",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._overlaps",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._mostly_inside",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._manner_shall",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._detail_governs",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._scope_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._drop_shalls_inside_conditions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._dedupe_slot_surfaces",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._contained_by_other",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._split_inverted_action",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._with_condition",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._effect_before_approval_elements",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._subject_without_except",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._skip_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._occupied",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._modal_already_covered",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._outer_comma_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._enumerated_power_before",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._keep_inhabitant_clause",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._coordinated_no_head",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._manner_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._grant_without",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._drop_grant_without_exceptions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._keep_without_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._colon_object",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._append_elliptical_nor",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clause_lead",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._restore_otherwise",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._flatten_relative_shall",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._as_follows_tail",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._restore_provided_that",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._expand_infinitive_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._attach_leading_case",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._restore_interrupted_action",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_action",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._first_verb",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._action_object",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._mental_state",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._action_without_mental_state",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._split_leading_complex_mental_state",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_passive_clause",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_legal_entity",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_action_recipient",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_passive_benefit_recipient",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_definition_body",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.score_scaffold_quality",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_legal_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_legal_action",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_conditions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_qualification_when",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_condition_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_override_clauses",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_override_clause_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_cross_references",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_cross_reference_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_definition_scope_marker",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_enumerated_items",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_temporal_constraints",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_temporal_constraint_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.normalize_temporal_value",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_exceptions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_exception_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._extract_clause_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_formal_logic_record",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_procedure_event_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_proof_obligation_record",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_clause_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_reference_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_sanction_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_ontology_entity_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_repair_queue_record",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_export_record_bundle",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_document_export_tables",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_document_export_manifest",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.validate_document_export_tables",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.get_export_table_specs",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.serialize_export_tables_for_parquet",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.write_document_export_parquet",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._parquet_cell",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_deontic_formula",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.normalize_predicate_name",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.parser_elements_with_deterministic_ir_readiness",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.identify_obligations",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.detect_normative_conflicts",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._check_conflict_pair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._actions_similar",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._first_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._subjects_similar",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._check_temporal_conflict",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._check_conditional_conflict",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._extract_normative_elements_without_substantive_exception_projection",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_authorized_and_directed_obligation",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_instruction_order_obligation",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_express_duty_obligation",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clear_subject_to_duty_condition_noise",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_authority_grant_permission",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clear_standard_substantive_exception_active_repair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clear_local_applicability_active_repair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clear_pure_precedence_override_active_repair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._single_parser_exception_record",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._parser_slot_first_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._parser_slot_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._substantive_exception_requires_external_resolution",
+    "ipfs_datasets_py.logic.deontic.converter.build_deontic_formula",
+    "ipfs_datasets_py.logic.deontic.converter.detect_normative_conflicts",
+    "ipfs_datasets_py.logic.deontic.converter.extract_normative_elements",
+    "ipfs_datasets_py.logic.deontic.converter.identify_obligations",
+    "ipfs_datasets_py.logic.deontic.coordination_decoder.decode_coordination_request"
+  ],
+  "actual_model_calls": 256,
+  "exact_prior_prediction_matches": 256,
+  "replayed_former_holdout_is_exposed_regression_not_fresh_evaluation": true,
+  "actual_predictions": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/actual-predictions.json",
+    "sha256": "cefab631c2dcb251ee6bf2b9446f9de77ac8b3fc20bf91c2d2d49103b625f154",
+    "bytes": 727161
+  },
+  "forward_trace": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/forward-trace.json",
+    "sha256": "8c4a59d19c8a4629ec966db431d619e4ae4cb3628b05c82a997839274b84a7b0",
+    "bytes": 145495
+  },
+  "native_witness_prior": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/native-audit-01/actual-predictions.json",
+    "sha256": "7eca12ce68eadd2ba6523147d533d5c3da4a2ba63050843a7c2a20ef3b60a6cf",
+    "bytes": 11995
+  },
+  "native_witness_case_ids": [
+    "authored-0e435e14fad7cda097e5f25f125fd52d8fb0ae430c7fa7cf10211f5e9cd77625-modal_over_actions",
+    "authored-0e435e14fad7cda097e5f25f125fd52d8fb0ae430c7fa7cf10211f5e9cd77625-disjunction_of_norms"
+  ],
+  "native_decoded_records": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/native-decoded-records.json",
+    "sha256": "0e1de2aa03e138ec729f6cd895486c794902ccc9c4388e0456deb78e3b87b7fa",
+    "bytes": 78184
+  },
+  "native_record_fields_identical": [
+    "formula",
+    "native_ast",
+    "native_payload",
+    "lean_body",
+    "mapping",
+    "family_validation",
+    "native_validation"
+  ],
+  "native_witness_member_count": 8,
+  "native_toolchain": [
+    {
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+      "sha256": "65e6788674aa50c98da101339ca213c5a9599414830fa74f963ad794e025efc7",
+      "bytes": 17504
+    },
+    {
+      "path": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lean",
+      "sha256": "e215cbe9eab0914b49761e9e486d388e2e701cf876d1079d1ba733c48edb2d7b",
+      "bytes": 13824
+    }
+  ],
+  "builds": [
+    {
+      "command": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "build",
+        "legal"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/positive",
+      "returncode": 0,
+      "files": [
+        {
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/positive/lakefile.toml",
+          "sha256": "451837a5c7ec667721d812a3cacd14f0e8e06511c1860ecca2452560e8fe9fcb",
+          "bytes": 117
+        },
+        {
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/positive/PredictionWitness.lean",
+          "sha256": "0252126d35ac97d2db8f56b8355d4506439e3f6ba5defb0281be7379d32338b3",
+          "bytes": 7027
+        },
+        {
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/positive/stdout.txt",
+          "sha256": "eccb4673e15b4df29b8f4fd27af0fde47524dcddeef12096f359f333acfc2454",
+          "bytes": 80
+        },
+        {
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/positive/stderr.txt",
+          "sha256": "1f13f37bdbe11848920aee39c7cfd6527d0c3ba0b94a600c5df5eff03ed4946b",
+          "bytes": 147
+        }
+      ]
+    },
+    {
+      "command": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+        "build",
+        "legal"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/negative",
+      "returncode": 1,
+      "files": [
+        {
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/negative/lakefile.toml",
+          "sha256": "451837a5c7ec667721d812a3cacd14f0e8e06511c1860ecca2452560e8fe9fcb",
+          "bytes": 117
+        },
+        {
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/negative/PredictionWitness.lean",
+          "sha256": "a056c3a6cfc07384f9a6fcf42261e5edbdbdf0ded9f6ce29c7cc8b71244e9095",
+          "bytes": 7110
+        },
+        {
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/negative/stdout.txt",
+          "sha256": "75f4baf74d83f6b79875ef387210b305c9c4f6b83e20ce36ecec7762c0a75fb3",
+          "bytes": 1133
+        },
+        {
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/main-native-replay/negative/stderr.txt",
+          "sha256": "4e6f981bf09d40aa173c514c61fe147401b5d1187f03ace54bc920cf992f585a",
+          "bytes": 167
+        }
+      ]
+    }
+  ],
+  "positive_lake_build_passed": true,
+  "false_scope_claim_rejected": true,
+  "checkpoint_exact_resave_after_prediction": true,
+  "training_calls": 0,
+  "selection_changes": false,
+  "new_latent_8D_384D_768D_training": false,
+  "source_semantics_verified": false,
+  "legal_accuracy_claimed": false,
+  "proof_ready": false,
+  "scope": "Engineering compatibility of frozen authored predictions and two-world modal scope countermodel."
+}

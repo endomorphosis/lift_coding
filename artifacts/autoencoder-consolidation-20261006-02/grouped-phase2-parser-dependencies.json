@@ -1,0 +1,541 @@
+{
+  "base_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "limitation": "Static module-global reference closure; duplicate-name local variables can overapproximate. This is a port review inventory, not a proven minimal executable patch.",
+  "main_sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59",
+  "recommended_action": "Reconcile scanner, qualifier inventory and readiness guards as a separate patch on current main. Do not replace whole parser/formula/export files.",
+  "roots": [
+    "_unresolved_duty_disjunction_groups",
+    "classify_modal",
+    "extract_condition_details",
+    "extract_cross_reference_details",
+    "extract_exception_details",
+    "extract_override_clause_details",
+    "extract_procedure_details",
+    "extract_temporal_constraint_inventory"
+  ],
+  "schema": "grouped-phase2-parser-dependency-review/v1",
+  "source_path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+  "source_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec",
+  "transitive_module_ast_dependencies": [
+    {
+      "current_ast_sha256": "f106ce54a52eef6ad2828d9d83b5768015e9432ee353fbb2bcbaf4dfa63a18b6",
+      "current_lines": [
+        157,
+        162
+      ],
+      "main_ast_sha256": "f106ce54a52eef6ad2828d9d83b5768015e9432ee353fbb2bcbaf4dfa63a18b6",
+      "name": "_ACTION_TEMPORAL_CUT",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "60190b59a2465f53b4e89fb2512d73f29d62225d7c8f3a7c0f7d5784539cb5e7",
+      "current_lines": [
+        153,
+        155
+      ],
+      "main_ast_sha256": "60190b59a2465f53b4e89fb2512d73f29d62225d7c8f3a7c0f7d5784539cb5e7",
+      "name": "_CALENDAR_MONTH",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "5b6bbbab180a5ae1a5002366d0f37dc21232369b071d62fb56d8961bd0c484e3",
+      "current_lines": [
+        6571,
+        6574
+      ],
+      "main_ast_sha256": null,
+      "name": "_CITATION_DURATION_TAIL_RE",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "ac4c24fe084a998d47b115b56f7ff65c11a8ee990c5a4d917bea49040ced4e41",
+      "current_lines": [
+        6570,
+        6570
+      ],
+      "main_ast_sha256": null,
+      "name": "_CITATION_LIST_LABEL_RE",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "dee3d57951bbd0286031e4aec9dd12467bb82447a43d06a43d7c851dae54e6c0",
+      "current_lines": [
+        6562,
+        6562
+      ],
+      "main_ast_sha256": null,
+      "name": "_CITATION_LIST_NUMBER",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "e9b976ed573abea30c307786b958cdd5474858d998fa9556effbbebe656b4449",
+      "current_lines": [
+        6568,
+        6568
+      ],
+      "main_ast_sha256": null,
+      "name": "_CITATION_LIST_NUMBER_RE",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "8a406f11db75f3d332f95b346c42db31d6b337857f0f9b79d3bb981a1e2f320a",
+      "current_lines": [
+        6563,
+        6567
+      ],
+      "main_ast_sha256": null,
+      "name": "_CITATION_LIST_PREFIX_RE",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "10cab9f4921b11e3b8574c44cb071fd49730cef40b8fe3615f9812ca1f984ce6",
+      "current_lines": [
+        6569,
+        6569
+      ],
+      "main_ast_sha256": null,
+      "name": "_CITATION_LIST_SEPARATOR_RE",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "2fb03ecaefcc0285009c8e136f2069b7136a735a6328fb3e32281104ec947862",
+      "current_lines": [
+        393,
+        393
+      ],
+      "main_ast_sha256": "2fb03ecaefcc0285009c8e136f2069b7136a735a6328fb3e32281104ec947862",
+      "name": "_CLAUSE_END_RE",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "79793e18031b7f09ffcaa82485362672dc19ccbddb963ee0888ae0df5e6cd948",
+      "current_lines": [
+        398,
+        426
+      ],
+      "main_ast_sha256": "79793e18031b7f09ffcaa82485362672dc19ccbddb963ee0888ae0df5e6cd948",
+      "name": "_CONDITION_PATTERNS",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "5cc99e12907b21c895d1b50b865c4a221e3c8bf62c39f1c8b96d169042c0f45d",
+      "current_lines": [
+        152,
+        152
+      ],
+      "main_ast_sha256": "5cc99e12907b21c895d1b50b865c4a221e3c8bf62c39f1c8b96d169042c0f45d",
+      "name": "_DIGIT_DURATION",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "17dad9e7399b9902e57c4dbaecef15ee9db9b0cdf19ceaed914bbc4a3a7cc105",
+      "current_lines": [
+        150,
+        150
+      ],
+      "main_ast_sha256": "17dad9e7399b9902e57c4dbaecef15ee9db9b0cdf19ceaed914bbc4a3a7cc105",
+      "name": "_DURATION_UNIT",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "e67c35778060179d0a8f83bda30d0971fc753cdf40e198eeeb11540e439c1206",
+      "current_lines": [
+        427,
+        451
+      ],
+      "main_ast_sha256": "e67c35778060179d0a8f83bda30d0971fc753cdf40e198eeeb11540e439c1206",
+      "name": "_EXCEPTION_PATTERNS",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "ef5b2af40ee86124b65dc8ab7e119785d7b7bf320da54917054055858345d8e4",
+      "current_lines": [
+        245,
+        247
+      ],
+      "main_ast_sha256": null,
+      "name": "_EXPLICIT_MODAL_HEAD_RE",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "d6184ff7c21abf7ed5a49a7eb82ddf32eb8ef88543bd46d192058b69da3a5486",
+      "current_lines": [
+        263,
+        279
+      ],
+      "main_ast_sha256": "d6184ff7c21abf7ed5a49a7eb82ddf32eb8ef88543bd46d192058b69da3a5486",
+      "name": "_IMPLICIT_MODAL_RE",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "cfcee16fa5b2dcd89c69287e8e1671af71ed0372d2506f1f5125b6825a3361a9",
+      "current_lines": [
+        163,
+        240
+      ],
+      "main_ast_sha256": "cfcee16fa5b2dcd89c69287e8e1671af71ed0372d2506f1f5125b6825a3361a9",
+      "name": "_MODAL_RE",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "0c39b19ef28f73852c05f22767893103a96a6f5ab5ed55dd3e5cf1233f9a2de6",
+      "current_lines": [
+        452,
+        455
+      ],
+      "main_ast_sha256": "0c39b19ef28f73852c05f22767893103a96a6f5ab5ed55dd3e5cf1233f9a2de6",
+      "name": "_OVERRIDE_PATTERNS",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "085561ed9780198e3b4e1c4f1644a61e2039b08c9dcb146f221d50fc39205642",
+      "current_lines": [
+        156,
+        156
+      ],
+      "main_ast_sha256": "085561ed9780198e3b4e1c4f1644a61e2039b08c9dcb146f221d50fc39205642",
+      "name": "_PARENTHETICAL_LABEL",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "04aa88bf406cea2a1094addc4ee209300ff40a24cbb869b86967d88591204672",
+      "current_lines": [
+        729,
+        742
+      ],
+      "main_ast_sha256": "04aa88bf406cea2a1094addc4ee209300ff40a24cbb869b86967d88591204672",
+      "name": "_PROCEDURE_EVENT_ORDER",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "5f535404da3ae4367101f04ba03688d8e772b0c358610d3618265982da532f76",
+      "current_lines": [
+        743,
+        756
+      ],
+      "main_ast_sha256": "5f535404da3ae4367101f04ba03688d8e772b0c358610d3618265982da532f76",
+      "name": "_PROCEDURE_EVENT_PATTERNS",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "e9d5527479316e791b3838dace48b75d832de10cf2e3ed3a7b5a56e3b6a01dd2",
+      "current_lines": [
+        151,
+        151
+      ],
+      "main_ast_sha256": "e9d5527479316e791b3838dace48b75d832de10cf2e3ed3a7b5a56e3b6a01dd2",
+      "name": "_SPELLED_DURATION",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "31544ad5202a04173921979035eac466e67a8403bfe9c85811d374c0dd81ee54",
+      "current_lines": [
+        137,
+        149
+      ],
+      "main_ast_sha256": "31544ad5202a04173921979035eac466e67a8403bfe9c85811d374c0dd81ee54",
+      "name": "_SPELLED_SMALL",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "eebf7f33df5955a6b6b1ec0eaa57c9bbb95024efa7c1fcec2e82e706633a51a8",
+      "current_lines": [
+        456,
+        548
+      ],
+      "main_ast_sha256": "eebf7f33df5955a6b6b1ec0eaa57c9bbb95024efa7c1fcec2e82e706633a51a8",
+      "name": "_TEMPORAL_PATTERNS",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "761501ea502b821284a4cb644d68c82dd39a8104d0636afde97086e1fbe3e49e",
+      "current_lines": [
+        6140,
+        6166
+      ],
+      "main_ast_sha256": null,
+      "name": "_balanced_parenthesis_end",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "73983f90e6f9dabcf4b725c0c88fa54818a2db2d9fc61420460a28cdec87e6c8",
+      "current_lines": [
+        6627,
+        6648
+      ],
+      "main_ast_sha256": null,
+      "name": "_citation_clause_end",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "32c95cc67055b0346cba114a69414ee7083f95224645eab9d6f5edbd8c4de246",
+      "current_lines": [
+        6577,
+        6580
+      ],
+      "main_ast_sha256": null,
+      "name": "_citation_tail_has_operative_modal",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "178d705b473a0b4f227b5940c8a7d65b0fcd03b38753ceed9eb28bd584037986",
+      "current_lines": [
+        5132,
+        5140
+      ],
+      "main_ast_sha256": "d7ddd2f49a6ba7b301f7a4e13aa5551c51be78ca0522cb1d6a7ce35430378d82",
+      "name": "_events_from_phrase",
+      "status": "changed_ast"
+    },
+    {
+      "current_ast_sha256": "85f2b17111f98d21ff2f24d3b242ddc3c2f272e3713d902b00be1ba50993b39a",
+      "current_lines": [
+        6887,
+        6941
+      ],
+      "main_ast_sha256": "46b4bb64f0d9511f41c47f844fcec8670d1f8c7ee27f73893e4d2c90fdf4f80c",
+      "name": "_extract_clause_details",
+      "status": "changed_ast"
+    },
+    {
+      "current_ast_sha256": "b85252036c61a4acedee773ef36f287db65de1ff13070475b293b859a4c773d8",
+      "current_lines": [
+        5143,
+        5149
+      ],
+      "main_ast_sha256": "2238bb2d4199d34d9ae8b79cfdd7588778b7fee3019d87bfff3eb709109e886c",
+      "name": "_infer_event_from_phrase",
+      "status": "changed_ast"
+    },
+    {
+      "current_ast_sha256": "6254db6d5d9926c8d37ff9de81f43800e48cc29b49b12405fab5e68e5e053015",
+      "current_lines": [
+        5120,
+        5129
+      ],
+      "main_ast_sha256": "6254db6d5d9926c8d37ff9de81f43800e48cc29b49b12405fab5e68e5e053015",
+      "name": "_infer_terminal_event",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "ec99141a3fb1a3fadf268c21d1f660fb31ca1a69939bcef644305150af70eeb0",
+      "current_lines": [
+        5110,
+        5117
+      ],
+      "main_ast_sha256": "ec99141a3fb1a3fadf268c21d1f660fb31ca1a69939bcef644305150af70eeb0",
+      "name": "_infer_trigger_event",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "d2f0b7e77e0094d85cdb511950613933fdf340433838343bb652c53fead4758b",
+      "current_lines": [
+        6722,
+        6727
+      ],
+      "main_ast_sha256": "d2f0b7e77e0094d85cdb511950613933fdf340433838343bb652c53fead4758b",
+      "name": "_is_definition_scope_marker",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "87a7d0f770a19baa4096b62fda2f3df729ff498463b65b9b139f43e4462b43cc",
+      "current_lines": [
+        6524,
+        6539
+      ],
+      "main_ast_sha256": "87a7d0f770a19baa4096b62fda2f3df729ff498463b65b9b139f43e4462b43cc",
+      "name": "_is_qualification_when",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "2f877dbfa0767ff2f3e913ce3cc0629c5cb40a570e97a7f1ab34addb476597b5",
+      "current_lines": [
+        6583,
+        6624
+      ],
+      "main_ast_sha256": null,
+      "name": "_numeric_citation_lists",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "5af721c7dadd968eee5cefd9e09cf6607bee2f525a7e0cfd28b6e786a81fffcd",
+      "current_lines": [
+        4870,
+        4923
+      ],
+      "main_ast_sha256": null,
+      "name": "_procedure_action_owner",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "aa3862aade5624e3ad83e61d856810289bc3c413a7a6046f63f2473ffdbb92fc",
+      "current_lines": [
+        4926,
+        4940
+      ],
+      "main_ast_sha256": null,
+      "name": "_procedure_anchor_event",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "1316985b3d39dcf290933fbfff50c42d4633e5684c85f469f4b0b548ad3d3afb",
+      "current_lines": [
+        4943,
+        4953
+      ],
+      "main_ast_sha256": null,
+      "name": "_procedure_connector_matches",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "f8d5a76fadc2d062e93ce52341d180c38eed2890e52e8c2529afa298469c5e8b",
+      "current_lines": [
+        4956,
+        4962
+      ],
+      "main_ast_sha256": null,
+      "name": "_procedure_match_span",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "1753a7c158046b9d2d748586dbeca8a8eb7aa1fd7c4db4fc61c8133acb467c08",
+      "current_lines": [
+        4849,
+        4867
+      ],
+      "main_ast_sha256": null,
+      "name": "_procedure_unquoted_source",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "58a9cbcc431567c9f384c1c65cfe1f6585176c02e63f93c3fcb195c48cf809f9",
+      "current_lines": [
+        4965,
+        5019
+      ],
+      "main_ast_sha256": null,
+      "name": "_procedure_unresolved_event_relations",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "af7b54c2d2cd530918bf2a39d6d7ac3e464aa36424e86cf6c149b6bc39d4493f",
+      "current_lines": [
+        6118,
+        6137
+      ],
+      "main_ast_sha256": null,
+      "name": "_source_quote_at",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "c49f72d838346aa4f81149cc4e4ad59410a598694a4a1c6c44474e9d3a0887d2",
+      "current_lines": [
+        1815,
+        1976
+      ],
+      "main_ast_sha256": null,
+      "name": "_unresolved_duty_disjunction_groups",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "92041172facb820f787b15d60eea115be7bb8f31a7d063828e852464894416a1",
+      "current_lines": [
+        5350,
+        5377
+      ],
+      "main_ast_sha256": "92041172facb820f787b15d60eea115be7bb8f31a7d063828e852464894416a1",
+      "name": "classify_modal",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "2f820de5601afce2fdd36cde4d7cbb8b74ef17a3605a3e3381fd4adbafad8413",
+      "current_lines": [
+        6542,
+        6544
+      ],
+      "main_ast_sha256": "2f820de5601afce2fdd36cde4d7cbb8b74ef17a3605a3e3381fd4adbafad8413",
+      "name": "extract_condition_details",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "76a02240692a8841d41200d093f36a3ad358fbf76c8d8cbf7161e3730c4aab6b",
+      "current_lines": [
+        6651,
+        6719
+      ],
+      "main_ast_sha256": "14e6a7deec71de0aefb9a40d4230611343013aa9ae7b4d88c25c29fd472f6e62",
+      "name": "extract_cross_reference_details",
+      "status": "changed_ast"
+    },
+    {
+      "current_ast_sha256": "551f2a975ded6f085f17d6d95501c5493b0d5e784b8e6b7d52dec485c1f5e33c",
+      "current_lines": [
+        6883,
+        6884
+      ],
+      "main_ast_sha256": "551f2a975ded6f085f17d6d95501c5493b0d5e784b8e6b7d52dec485c1f5e33c",
+      "name": "extract_exception_details",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "7e2b48a737d46c2a6452d7c8ac48f1abd526e4d74065bab9c4d7412256e1a983",
+      "current_lines": [
+        6551,
+        6552
+      ],
+      "main_ast_sha256": "7e2b48a737d46c2a6452d7c8ac48f1abd526e4d74065bab9c4d7412256e1a983",
+      "name": "extract_override_clause_details",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "33968ac09486baf2245065ce3ac065061d0378671baa011b85dc46bb43945bbf",
+      "current_lines": [
+        4784,
+        4824
+      ],
+      "main_ast_sha256": "f209ef9eb6dbab360a5f0af237a99ebee80e62e03fb65c6ff6f8b459932ebbee",
+      "name": "extract_procedure_details",
+      "status": "changed_ast"
+    },
+    {
+      "current_ast_sha256": "3ca0fb6f0d4245260778eb495ae1cdddac20e986739b7a6b97591d4491020d90",
+      "current_lines": [
+        4827,
+        4846
+      ],
+      "main_ast_sha256": "3ca0fb6f0d4245260778eb495ae1cdddac20e986739b7a6b97591d4491020d90",
+      "name": "extract_procedure_event_mentions",
+      "status": "identical_ast"
+    },
+    {
+      "current_ast_sha256": "98e7afbd6d1cb57a0a7a1dbfc94c7746e90dfe7e23a504dd665fe9be5f1e7f29",
+      "current_lines": [
+        5022,
+        5107
+      ],
+      "main_ast_sha256": "ca1924b9f06b69771d9a002d99161f08991d1f6b256487177442feb36fd39f76",
+      "name": "extract_procedure_event_relations",
+      "status": "changed_ast"
+    },
+    {
+      "current_ast_sha256": "f3fa1f042b383458a4114411ff50bf9fcb08612c6f4a22b150cb4c0756b88a83",
+      "current_lines": [
+        6754,
+        6843
+      ],
+      "main_ast_sha256": null,
+      "name": "extract_temporal_constraint_inventory",
+      "status": "missing"
+    },
+    {
+      "current_ast_sha256": "b48522455c53605c130ef4879647ec904e1ee313f4bcec9f3ce7377181b6a06e",
+      "current_lines": [
+        6846,
+        6876
+      ],
+      "main_ast_sha256": "b48522455c53605c130ef4879647ec904e1ee313f4bcec9f3ce7377181b6a06e",
+      "name": "normalize_temporal_value",
+      "status": "identical_ast"
+    }
+  ]
+}

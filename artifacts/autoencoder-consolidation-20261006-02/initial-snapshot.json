@@ -1,0 +1,71 @@
+{
+  "schema": "autoencoder-consolidation-initial-snapshot/v1",
+  "repos": {
+    "workspace": "/home/barberb/lift_coding",
+    "datasets": "/home/barberb/lift_coding/external/ipfs_datasets"
+  },
+  "live_remote_heads": {
+    "workspace": {
+      "refs/heads/agent/agent-supervisor-direct-objective-and-event-driven-planning-v1": "a6915c06bb8cc28d2bb3b167d8708561c69a108a",
+      "refs/heads/agent/parallel-content-sealing-proof-carrying-tdd-v1-g9": "b30b8b05e19c219249511db9e06ed3ab7ac4b1ad",
+      "refs/heads/agent/proof-carrying-context-engine-v0.1": "ed97ee2dd11e0409afaeeb539b645d7b718869af",
+      "refs/heads/agent/vericodegen-2026-lean_refactor_arena": "23bdc18f777f5ff673144b5eccbc58827b58d755",
+      "refs/heads/chore/fmt-check-main": "c260f562fcecd49093442cbe9a59337b75dbd218",
+      "refs/heads/codex/doep-monitor-recovery": "0febcc082749dcf551ba49fe0ab320b1b078b5ab",
+      "refs/heads/codex/doep031-sealed-readmission": "7a1938ba75156f5fc768609c340eb67ec22df5aa",
+      "refs/heads/codex/pctdd-g9-descendant-source": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+      "refs/heads/codex/pctdd-validation-evidence-guard": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+      "refs/heads/codex/supervisor-context-token-economy-root-20261006": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+      "refs/heads/codex/supervisor-lifecycle-root-20261005": "6089e1f163d68dd09b006e4b13b14c165ecc136d",
+      "refs/heads/codex/terminal-bench-readiness-root-20261005": "c317deb66a95a90f1204f4354cd5fa37698ebe6b",
+      "refs/heads/codex/terminal-codex-baseline-root-20261005": "9da9a77393ba5829bfaa6ba988dfd2bd042c4aa0",
+      "refs/heads/codex/terminal-context-dictionary-root-20261006": "cdb8a5201e57d50aa4a5ba589eed1c07151689f1",
+      "refs/heads/codex/terminal-eigenvalue-symbolic-diagnosis-root-20261005": "ac5e4793df10f9c33a854b459a370f6f52a02924",
+      "refs/heads/codex/terminal-eigenvalue-symbolic-trial-root-20261006": "1500a7c548f4a981af1b0d8a490744f8450d4529",
+      "refs/heads/codex/terminal-planning-schema-root-20261006": "79f29121b12471d7e6226246f2cd2b74c918ab75",
+      "refs/heads/implementation/doep-030-b8d4ee0e8de3-attempt-1-1788101472": "fadf091facbf259fec0ff55af3d2104ed16f66df",
+      "refs/heads/implementation/doep-100-e348c8e778da-attempt-1-1789273504": "35e45b3e26acedc25b109667066460ec595775c4",
+      "refs/heads/implementation/ns-022-fd92ef2bddf6-attempt-1-1789307474": "5ac3983204fe92572b097ee45d8c16e86c6ff55d",
+      "refs/heads/main": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+      "refs/heads/repair/doep-append-quarantine-parent-20260913": "973d41304bd8161710906c1e934c63b249bdcc5a",
+      "refs/heads/repair/doep-completed-projection-parent-20260913": "9cf8deb84204beb4e0b388194336f93718df33e2",
+      "refs/heads/repair/doep-empty-priority-parent-20260913": "dede193885407ece66e5b5fb5e42da9ac8deb6d0",
+      "refs/heads/repair/doep-exhausted-post-merge-parent-20260913": "355ce7a628ee013396f0e0f86333fe7fd2cc3383",
+      "refs/heads/repair/doep-readonly-queue-launch-parent-20260913": "2bef289426fa5f038ae630313db097efe3a78adc",
+      "refs/heads/repair/doep-readonly-queue-native-parent-base-20260913": "baeabe9911291c8a119dba6ab78cdc971e72635f",
+      "refs/heads/repair/pctdd-after-task008-native-base-20260913": "e9afd83fb3a55173c628a479c5a45dd897a6c23b",
+      "refs/heads/repair/pctdd-current-quarantine-owner-read-parent-20260913": "42578300ef9ccf87b6c21ff33dd4df467a1520d8",
+      "refs/heads/repair/pctdd-lifecycle-qualified-job24": "d60b5ff1f2f265c703ed022359059627caea827b",
+      "refs/heads/repair/pctdd-maintenance-after-task008-parent-20260913": "91453f7bbe024270831ac2e2d65f8f682fe554e8",
+      "refs/heads/repair/pctdd-native-entry-1789010527": "738cdc6afa62ddc0636a9fef93dfd31bfabfdacd",
+      "refs/heads/repair/pctdd-operator-restart": "7fe11f6fd883a9303ef89f4cd0c0210b722b173e",
+      "refs/heads/repair/pctdd-quarantine-read-parent-20260913": "283004348c4920d8d74252640d98565dbc71169e",
+      "refs/heads/repair/pctdd-quarantined-maintenance-parent-20260913": "ee3c1988d6115c5278566e4c4534b17f191af893",
+      "refs/heads/repair/pctdd-workspace-quarantine-parent-20260913": "48f56974d9548e1c382d37e3888869b49d831083"
+    },
+    "datasets": {
+      "refs/heads/agent/contextual-legal-runtime-20261006": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+      "refs/heads/codex/ir-publication-main-integration-20261004": "f3164b7cb04c4c2c5647d4b5ffa74a87074ba01b",
+      "refs/heads/codex/legal-original-text-roundtrip-retained-20261004": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+      "refs/heads/codex/source-v2-warm-start-20261004": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+      "refs/heads/main": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+      "refs/heads/recovery/eaaef-023-hidden-worktree": "b8002a60177f3196d32fe7a7990d57899accad75",
+      "refs/heads/recovery/eaaef-094-child-merge-20260825": "c30ccbec997868b061c4cadac38d30468c46ea2d",
+      "refs/heads/recovery/eaaef-datasets-run-v14-aggregate": "f199a61aa431fcbca3aecff3f5749db6bfa76b54",
+      "refs/heads/recovery/plat2-060-session-20260728": "cf056bd4a19402bad0eda5931d2924901d7eae5c"
+    }
+  },
+  "canonical_heads": {
+    "workspace": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+    "datasets": "d5238def256d1c352793ee7d977e6b17b6d8cbee"
+  },
+  "protected_canonical_index_sha256": {
+    "workspace": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+    "datasets": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+  },
+  "new_training_permitted_before_consolidation": false,
+  "prior_our_completion": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/completion.json",
+    "sha256": "ad163f658519ff7ca9dab8fbcebd366bdb2bb883f7a0207e8f9559879dc6f233"
+  }
+}

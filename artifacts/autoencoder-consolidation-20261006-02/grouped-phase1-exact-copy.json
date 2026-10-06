@@ -1,0 +1,67 @@
+{
+  "base_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "candidate": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration",
+  "canonical_modified": false,
+  "checkpoint_implementation_hashes_preserved": true,
+  "copied_files": [
+    {
+      "bytes": 13298,
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+    },
+    {
+      "bytes": 6557,
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+    },
+    {
+      "bytes": 29370,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+    },
+    {
+      "bytes": 33948,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+    },
+    {
+      "bytes": 11213,
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831"
+    },
+    {
+      "bytes": 12553,
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c"
+    },
+    {
+      "bytes": 9694,
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+      "sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+    },
+    {
+      "bytes": 11544,
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+      "sha256": "61a5fe1b430517362e6331ace33c7f34efa282d4987cfe1761b3651a9e97bb4b"
+    },
+    {
+      "bytes": 11468,
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+      "sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+    },
+    {
+      "bytes": 15449,
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+      "sha256": "08ee59189e648e31f1d8f50c881cf24bc91c34f017d32cfac84920d73f7ff0c1"
+    }
+  ],
+  "existing_paths_overwritten": false,
+  "schema": "grouped-phase1-exact-copy/v1",
+  "unchanged_dependencies": {
+    "ipfs_datasets_py/logic/TDFOL/tdfol_core.py": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7",
+    "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3",
+    "ipfs_datasets_py/logic/autoformal/family_qualification.py": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8",
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe",
+    "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+  }
+}
