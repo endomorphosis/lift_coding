@@ -1,0 +1,40 @@
+{
+  "schema": "autoencoder-canonical-contribution-preservation/v2",
+  "time_utc": "2026-10-06T14:41:31.076366+00:00",
+  "canonical": {
+    "workspace": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "head_unchanged": true,
+      "index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+      "index_unchanged": true
+    },
+    "datasets": {
+      "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "head_unchanged": true,
+      "index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175",
+      "index_unchanged": true
+    }
+  },
+  "canonical_file_byte_preservation_claimed": false,
+  "contribution_changes_isolated": true,
+  "observed_unattributed_canonical_test_drift": [
+    {
+      "current_mtime_utc": "2026-10-06T14:18:38.892737+00:00",
+      "current_sha256": "de59814005b798404996a6d8a207bb7b17f806c93c8ea590eb483cbd60a8afb4",
+      "current_size_bytes": 11558,
+      "original_frozen_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831",
+      "ownership": "unknown",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "preserved_without_revert": true
+    },
+    {
+      "current_mtime_utc": "2026-10-06T14:18:38.893686+00:00",
+      "current_sha256": "aa799e28e8e01d5e27ac650ad0158b5974bf65c96521737a23f0f83dccc8e719",
+      "current_size_bytes": 12950,
+      "original_frozen_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c",
+      "ownership": "unknown",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "preserved_without_revert": true
+    }
+  ]
+}

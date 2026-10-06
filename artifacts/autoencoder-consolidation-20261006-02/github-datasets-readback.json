@@ -1,0 +1,1502 @@
+{
+  "schema": "autoencoder-datasets-github-readback/v1",
+  "status": "passed",
+  "checked_at_utc": "2026-10-06T14:44:20.775905+00:00",
+  "pr_url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1271",
+  "pr_number": 1271,
+  "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+  "base_commit": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "pr_state": "open",
+  "mergeable": true,
+  "mergeable_state": "unstable",
+  "remote_commit": {
+    "sha": "004887f6250b083e0b095d5ac7563bc5bb792491",
+    "node_id": "C_kwDOLq3nQdoAKDAwNDg4N2Y2MjUwYjA4M2UwYjA5NWQ1YWM3NTYzYmM1YmI3OTI0OTE",
+    "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/git/commits/004887f6250b083e0b095d5ac7563bc5bb792491",
+    "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/commit/004887f6250b083e0b095d5ac7563bc5bb792491",
+    "author": {
+      "name": "benjamin barber",
+      "email": "starworks5@gmail.com",
+      "date": "2026-10-06T14:40:15Z"
+    },
+    "committer": {
+      "name": "benjamin barber",
+      "email": "starworks5@gmail.com",
+      "date": "2026-10-06T14:40:15Z"
+    },
+    "tree": {
+      "sha": "c147ede3be3c550c478a18e1d9d105867e585d17",
+      "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/git/trees/c147ede3be3c550c478a18e1d9d105867e585d17"
+    },
+    "message": "Integrate experimental grouped Legal decoders and preserved handoffs",
+    "parents": [
+      {
+        "sha": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/git/commits/795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+        "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/commit/795d960170214d03e2eaf4c0a13ad4eb922c5c08"
+      }
+    ],
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "remote_parent_report_commit": {
+    "sha": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+    "node_id": "C_kwDOQ4Bra9oAKGIwYmExYWFhOWM4YTNmMWQwZTQyYmNhMzFhYTcxMGYxMTA4YzY4NmU",
+    "url": "https://api.github.com/repos/endomorphosis/lift_coding/git/commits/b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+    "html_url": "https://github.com/endomorphosis/lift_coding/commit/b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+    "author": {
+      "name": "benjamin barber",
+      "email": "starworks5@gmail.com",
+      "date": "2026-10-06T13:55:43Z"
+    },
+    "committer": {
+      "name": "benjamin barber",
+      "email": "starworks5@gmail.com",
+      "date": "2026-10-06T13:55:43Z"
+    },
+    "tree": {
+      "sha": "b3f554d61d41c2f00842cc9772664aa08865c139",
+      "url": "https://api.github.com/repos/endomorphosis/lift_coding/git/trees/b3f554d61d41c2f00842cc9772664aa08865c139"
+    },
+    "message": "Record verified source preparation and paired normative decoder fits\n\nRetain source provenance, full vocabulary traces, failure evidence and prospective development results without promoting checkpoints.",
+    "parents": [
+      {
+        "sha": "79f29121b12471d7e6226246f2cd2b74c918ab75",
+        "url": "https://api.github.com/repos/endomorphosis/lift_coding/git/commits/79f29121b12471d7e6226246f2cd2b74c918ab75",
+        "html_url": "https://github.com/endomorphosis/lift_coding/commit/79f29121b12471d7e6226246f2cd2b74c918ab75"
+      }
+    ],
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "candidate_freeze": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/candidate-freeze.json",
+    "sha256": "ceadaf21f9038af85f9bf1335ad5e4948f3358d93c5ac4e2078253a273b3ea48",
+    "bytes": 4174
+  },
+  "exact_27_file_change_set": [
+    "docs/autoencoders/grouped_legal_decoders.md",
+    "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json",
+    "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md",
+    "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json",
+    "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md",
+    "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json",
+    "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md",
+    "docs/autoencoders/pilots/intent_codebase_grounding/historical_handoff_index.md",
+    "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json",
+    "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md",
+    "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json",
+    "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md",
+    "docs/autoencoders/progress_integration.md",
+    "docs/implementation/reports/evidence/grouped-legal-decoders-20261006/summary.json",
+    "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+    "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+    "tests/unit/logic/test_deontic_grouped_decoder.py",
+    "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+    "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+    "tests/unit/logic/test_legal_grouped_span_decoder.py",
+    "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+    "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+    "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py"
+  ],
+  "all_27_frozen_sha256_verified": true,
+  "core_4_modules": [
+    {
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+    }
+  ],
+  "retained_2_checkpoint_hashes": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/run-03/epoch-005/checkpoint.json",
+      "sha256": "9d6d50eb304d1caddf7917277ac4e5a6bc7c2652ea19dfc82d49aa4a9d989df3",
+      "bytes": 30231454
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/run-02/epoch-003/checkpoint.json",
+      "sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+      "bytes": 30519315
+    }
+  ],
+  "checkpoint_hash_check_scope": "Existing local checkpoint files; this GitHub PR contains source, not new checkpoint uploads. No fresh Hugging Face verification was performed.",
+  "exact_10_historical_git_blobs_verified": true,
+  "retained_16_reports": [
+    {
+      "id": "preserved-8d-linguistic-teacher",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/autoencoders/legacy_linguistic_validation_20261001.md",
+      "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a",
+      "bytes": 6239,
+      "blob": "e0232b183e00c83031acd0e01d8c15e119fa0447"
+    },
+    {
+      "id": "four-width-initial-head-comparison",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+      "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b",
+      "bytes": 389091,
+      "blob": "6109651d8ec89edf201f8deb64d91455ed62f391"
+    },
+    {
+      "id": "native4096-and-field-rates",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+      "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285",
+      "bytes": 27951,
+      "blob": "976fa6ad313173ca2e02c3e5bc713accbf8f1b04"
+    },
+    {
+      "id": "broader4096-and-8d-geometry",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+      "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7",
+      "bytes": 26924,
+      "blob": "c0f334b6fc8924263b8bd7f54da027f7a1f190fa"
+    },
+    {
+      "id": "train-paraphrase-mixture",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+      "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac",
+      "bytes": 3049472,
+      "blob": "ec73d2b1fa9a9a698ac2039a96edcd156d52ffa9"
+    },
+    {
+      "id": "train-paraphrase-modality",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+      "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d",
+      "bytes": 3547468,
+      "blob": "0bd3ddd91558c6bc2889aaf1521a438d919d5f43"
+    },
+    {
+      "id": "source-margin-two-seed-study",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+      "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918",
+      "bytes": 6276,
+      "blob": "6ee2e3727049945ffaf1ab2184104af925bbbb78"
+    },
+    {
+      "id": "intent-ui-composition-ridge",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+      "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1",
+      "bytes": 647843,
+      "blob": "7492e4c61cc38f7459ffd2cd9c6b144ba58c7e67"
+    },
+    {
+      "id": "complete-intent-ui-feature-loss",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/autoencoders/complete_features_and_ui_fidelity.md",
+      "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517",
+      "bytes": 24229,
+      "blob": "6e2b5fb65a61697b2999e80750d40a450183b893"
+    },
+    {
+      "id": "ui-temporal-dcec-floor",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+      "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95",
+      "bytes": 307406,
+      "blob": "979a2babb490c8c68d2a9810de4d18f05b66481d"
+    },
+    {
+      "id": "security-production-head",
+      "repository": "datasets",
+      "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+      "path": "docs/security_formula_decoder.md",
+      "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398",
+      "bytes": 8596,
+      "blob": "9eacf7e79610dbf7b728e323ac754f0381fb7914"
+    },
+    {
+      "id": "source-ae-frozen-control",
+      "repository": "workspace",
+      "head": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+      "path": "artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+      "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83",
+      "bytes": 66071,
+      "blob": "0feb32e6676e94855a26c6f4032106447200b8ba"
+    },
+    {
+      "id": "source-ae-authored32-expansion",
+      "repository": "workspace",
+      "head": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+      "path": "artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+      "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5",
+      "bytes": 102630,
+      "blob": "d60928d72775a86b0587e1aec98a6879f5350ba2"
+    },
+    {
+      "id": "frozen-law-conditioner-interventions",
+      "repository": "workspace",
+      "head": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+      "path": "artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+      "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a",
+      "bytes": 139006,
+      "blob": "34fa3ebe4372502f6bfc4ff3f73ccba9209000f0"
+    },
+    {
+      "id": "bounded-joint-span-policy",
+      "repository": "workspace",
+      "head": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+      "path": "artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+      "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42",
+      "bytes": 32394,
+      "blob": "3e2fe539138480978771deec65df10975c1be95c"
+    },
+    {
+      "id": "joint-span-six-condition-control",
+      "repository": "workspace",
+      "head": "b0ba1aaa9c8a3f1d0e42bca31aa710f1108c686e",
+      "path": "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+      "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851",
+      "bytes": 392135,
+      "blob": "34bd372c10b275d236c568c712709c05cd6ba376"
+    }
+  ],
+  "report_scope": "Eleven reports retained in datasets PR tree; five retained in independently fetched immutable parent Git tree.",
+  "unchanged_owner_count": 32,
+  "unchanged_owners": [
+    "ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+    "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+    "ipfs_datasets_py/logic/autoformal/family_qualification.py",
+    "ipfs_datasets_py/logic/deontic/decoder.py",
+    "ipfs_datasets_py/logic/deontic/exports.py",
+    "ipfs_datasets_py/logic/deontic/formula_builder.py",
+    "ipfs_datasets_py/logic/deontic/ir.py",
+    "ipfs_datasets_py/logic/deontic/metrics.py",
+    "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_masked_contrastive.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_declarations.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_provenance.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_workflow.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_inference_session.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_router.py",
+    "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+    "ipfs_datasets_py/logic/legal_ir/canonical_binding_review.py",
+    "ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+    "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_checkpoint.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_learning.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_joint_formula_inference.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/native_formula_checkpoint.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/native_formula_training.py"
+  ],
+  "remote_blob_readbacks": [
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/grouped_legal_decoders.md",
+      "sha256": "221bf9eaf93b8db4e57a90017f01303894e4d24483988f5b99c7ff64f81402d0",
+      "bytes": 8776,
+      "blob": "e5b72457c19d8f0533b88fdbf1308c3ac06b5ba7",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.json",
+      "sha256": "bd37dc85cd23f36b1bcf30695ae3bb56674bac139ce01c0f0466cb024daa3291",
+      "bytes": 28691,
+      "blob": "cb59ad2049a3d3fc4ff97a3620d8d76acc6a5785",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/cell_routing_handoff.md",
+      "sha256": "c0f1ee29a0d188ffb0750cb2b06e6f38abda6d8065db0e33035b5a2b0bf667b4",
+      "bytes": 13148,
+      "blob": "3d1cc46bd62a394b8afd2a324a964884abd11f56",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.json",
+      "sha256": "ea4cd3a66bf3fa9134a88c6dbd143f75369aa4708e544e08c3dbfd0aa7c8d1b7",
+      "bytes": 7188,
+      "blob": "b47142ea3288ce9bcca56ddefc6a2f7d1fea9f0b",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_format_handoff.md",
+      "sha256": "56b913587a21dd44e97e19ffff5d2be826da2aaa2e87dc598727c56f8b89e08c",
+      "bytes": 12776,
+      "blob": "100405a1d45d779c351fb3855036d866caa8bad9",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.json",
+      "sha256": "6fde5a8adaa68730058679722e4ec521312ac725033dc1f4395cbf5bc49c6246",
+      "bytes": 12408,
+      "blob": "4ac1418559a884fe0beaf8cb2f8095bb0b38570d",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/decoder_profile_inventory_handoff.md",
+      "sha256": "52d0459199e9b1819f2c897b565772ffa4debab37296bc5b76831a021e2e43f7",
+      "bytes": 9629,
+      "blob": "cfc21f594a3ccc3ada3a498d72eb1870a34426a4",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/historical_handoff_index.md",
+      "sha256": "cea8adb3d3a2cc7de260f1262b67ebc295a486d15bc71da5a0cbc33fdc518fdc",
+      "bytes": 3220,
+      "blob": "19ee04a4ca653e9f18c1827c1825ba0b360ecb60",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.json",
+      "sha256": "ba05379dda8d7215d0c907b78b18e85dec703f6d98923a5da8c46388f908da60",
+      "bytes": 53630,
+      "blob": "dd1e119e562913d98ccd33c6eb441d61d184cedd",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/numerical_replay_handoff.md",
+      "sha256": "24f44c8351d273e50bcb41f6d684a1ab742d3326dde8904769c1062dea2482f1",
+      "bytes": 12577,
+      "blob": "e13790db64a384696f5efc8012333c0f261eadae",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.json",
+      "sha256": "035578e2629d1b728fbfae8b177ab23a2ca628ef428a8a376451fdb34d5924e9",
+      "bytes": 22303,
+      "blob": "a117902515364f93ede0a3b252b9f368c6bcb3e0",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/pilots/intent_codebase_grounding/runtime_routing_handoff.md",
+      "sha256": "e1d61c57126a5e4553296d8a0758654bdf4d398d59efecfdc5bc62a4122a8615",
+      "bytes": 8806,
+      "blob": "d1fbf99cd843f4923ea5d8c5420c62893868dcd4",
+      "roles": [
+        "frozen_candidate",
+        "exact_historical_blob"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/progress_integration.md",
+      "sha256": "ddecdb35d83ed3a21a05525495d6baf0bbccfcb63358d316e6c14b85e64c8d54",
+      "bytes": 10560,
+      "blob": "0f224f89d4fbb8e06275a4e6421a8ac904f71066",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/grouped-legal-decoders-20261006/summary.json",
+      "sha256": "94fe7cfd1c736b2a6bb310f920a5cbc258731fef9f73a5c79ae173a5591827ec",
+      "bytes": 6729,
+      "blob": "a2accc1fcb5765993da35757bb41a593c4d694b6",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f",
+      "bytes": 6557,
+      "blob": "d125e9108e49dacf8568450cba17c3a49f7193ef",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+      "bytes": 13298,
+      "blob": "22d8260dd03cc2cf4d262138161adbe6cda31bcb",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+      "bytes": 29370,
+      "blob": "d262c36eb036ba5b516636f152038ab81ee19d94",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+      "bytes": 33948,
+      "blob": "b34ca1d3406645e8edf58b651dff3049e583741f",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+      "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955",
+      "bytes": 64337,
+      "blob": "f3e844c05792b4cb8facceb0513c736be69afcf6",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "sha256": "c8f5d26d9e0ee6abcd18059389d9a267d0f645b22e381386120e191a65315c80",
+      "bytes": 12277,
+      "blob": "ed3b52182827cd6c58e3b5963eaa4fad123cb69a",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "sha256": "b932ea70a7f3cc26037055271894ede450e44030bf017001fb7eab53cc9f4b40",
+      "bytes": 13556,
+      "blob": "a89c3a67a90895446ef27200bdd7255153d938aa",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "tests/unit/logic/test_legal_grouped_phase1_integration.py",
+      "sha256": "6c3b7653741ae3d03264fdb629cede9df233616c5ef1d41a816f579afd6e0b20",
+      "bytes": 8925,
+      "blob": "127135af815271476ca2b3d7db9e0c329944043a",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+      "sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8",
+      "bytes": 9694,
+      "blob": "0ece79f9b824d23d61711a3e7585e66e500fc529",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+      "sha256": "14edafadfd0dad249dc098c492d3ac9ec8a6766694cc396a181478f2b734fd6c",
+      "bytes": 12618,
+      "blob": "6cfe658152fa4332130a34648a5a591982abf0a0",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+      "sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840",
+      "bytes": 11468,
+      "blob": "3f76f27535d0e5ecaf46223a21199af1492d4746",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+      "sha256": "f46517946f54971183bf4ea62573c5efcd956cd44199b6542609b87ce78e114f",
+      "bytes": 16523,
+      "blob": "91b131c981e640b8c6a763b0ad3b7c516050998a",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_grouped_formula_runtime.py",
+      "sha256": "587ec09322852c3e8765d059ae13fe0a455f0d91e5cd7cb89ffdef31db36bce0",
+      "bytes": 12462,
+      "blob": "c0e6685576e8393fe01357081cac70017ae282c3",
+      "roles": [
+        "frozen_candidate"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/legacy_linguistic_validation_20261001.md",
+      "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a",
+      "bytes": 6239,
+      "blob": "e0232b183e00c83031acd0e01d8c15e119fa0447",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+      "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b",
+      "bytes": 389091,
+      "blob": "6109651d8ec89edf201f8deb64d91455ed62f391",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+      "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285",
+      "bytes": 27951,
+      "blob": "976fa6ad313173ca2e02c3e5bc713accbf8f1b04",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+      "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7",
+      "bytes": 26924,
+      "blob": "c0f334b6fc8924263b8bd7f54da027f7a1f190fa",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+      "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac",
+      "bytes": 3049472,
+      "blob": "ec73d2b1fa9a9a698ac2039a96edcd156d52ffa9",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+      "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d",
+      "bytes": 3547468,
+      "blob": "0bd3ddd91558c6bc2889aaf1521a438d919d5f43",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+      "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918",
+      "bytes": 6276,
+      "blob": "6ee2e3727049945ffaf1ab2184104af925bbbb78",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+      "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1",
+      "bytes": 647843,
+      "blob": "7492e4c61cc38f7459ffd2cd9c6b144ba58c7e67",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/autoencoders/complete_features_and_ui_fidelity.md",
+      "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517",
+      "bytes": 24229,
+      "blob": "6e2b5fb65a61697b2999e80750d40a450183b893",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+      "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95",
+      "bytes": 307406,
+      "blob": "979a2babb490c8c68d2a9810de4d18f05b66481d",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "docs/security_formula_decoder.md",
+      "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398",
+      "bytes": 8596,
+      "blob": "9eacf7e79610dbf7b728e323ac754f0381fb7914",
+      "roles": [
+        "retained_report"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+      "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7",
+      "bytes": 28721,
+      "blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+      "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3",
+      "bytes": 29788,
+      "blob": "6fab7228536c780d1b38704c946532fd9c27cb2f",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/autoformal/family_qualification.py",
+      "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8",
+      "bytes": 37698,
+      "blob": "509d35f7e5c68acd2157f85f20face935cafcc31",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/deontic/decoder.py",
+      "sha256": "051a5e7a98ef2cf8a63326218cebeabcca2c528f6839a1a3cb11756ee7c1aab9",
+      "bytes": 31862,
+      "blob": "d755e76f55477ad093514665f5b7ce0ff5dfa416",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/deontic/exports.py",
+      "sha256": "ac46bf1efa79925620199b56f6f1dbde34c92889a0a2a474cc6b9e408ea3c3de",
+      "bytes": 221362,
+      "blob": "2ce7febb69d82b54572fb7100960cb327f743c49",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "sha256": "6a220bf20aa8bdb24dd14d8b3467554d674cfadd0b44e88f3d019ce0b02afb2a",
+      "bytes": 392561,
+      "blob": "24f5107049edb019f1694b7bdd1d93236cec7744",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/deontic/ir.py",
+      "sha256": "a6bafa2aa4b1e8d9c368d4c4354e56b924888d43eb1f817c11058767f17f3416",
+      "bytes": 114441,
+      "blob": "c02e473b1700c7a7760de1e8952f56c8594f1584",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/deontic/metrics.py",
+      "sha256": "5a2f92bc24154e14d3d2e3b6e73dcc128e6183957b5832b9bc1d72e60f7370da",
+      "bytes": 15413,
+      "blob": "3fa9cd622f98fe596314d036441b9de4a72b9cf5",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59",
+      "bytes": 300668,
+      "blob": "2972b9475f8d63158d59ae886c213cd35c7ea431",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+      "sha256": "d7d2e1303e15d46b70997e5880df6fb9a690bfebde63666cad04db516f3ef3a8",
+      "bytes": 18141,
+      "blob": "e91ac069cff4ac42721e21ef2ed051635bc8b382",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_masked_contrastive.py",
+      "sha256": "913033528d04602fe60e941ee78cfd8d8b7a898bc0803c02e9b60531bd2aa89f",
+      "bytes": 9479,
+      "blob": "50094e1113c87ce09b4705f73a7dd89366ad46ab",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_projection.py",
+      "sha256": "d29853a4238350eabe2265b51c48913c9e77280af0ee131bbd04ef760199c18e",
+      "bytes": 23299,
+      "blob": "5ea40dcd18b6d9fea33695f545afde4894825ac8",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_declarations.py",
+      "sha256": "869461e204b0ff2b6d060cd07cea585d627eb3eb87557aebc21f058f3d64c175",
+      "bytes": 8494,
+      "blob": "e0b2ce796459416cf6e63ef2c0449e09bbac783c",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py",
+      "sha256": "ef382f127be99f174df45388c5cc8a5b29c960fca7497d68e555365faaa85f0d",
+      "bytes": 18008,
+      "blob": "f0faa160a647325c0d9654c3fc40f1a03094943d",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_review_provenance.py",
+      "sha256": "f666f3e5b1be498687662c0b9cfae2d8befe319c58625259ed7e1d360d65f222",
+      "bytes": 25216,
+      "blob": "aa5f89794ce191228ddfd5798c894f39414d0ef3",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_workflow.py",
+      "sha256": "0e72fb48de559eb047fb87f0490d23fe4abfec98b8197ef94d359c84e57c8441",
+      "bytes": 29119,
+      "blob": "e6222a05884fe5e74812be76141ee9d205825198",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+      "sha256": "80da578b0b67ec9867012535df0e51d06ca72ea4ae397e07c922713dc3d9691f",
+      "bytes": 16384,
+      "blob": "9dc92a56730aa1f728a9630c3a42bce4a06d7c55",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_inference_session.py",
+      "sha256": "2480e7b81af1d122cbc7e3297bb74fe02116fef3436eddc63e1bd5f96f03e6fc",
+      "bytes": 6522,
+      "blob": "a9dcae6f06a8c3173160c13d3b93753eb87aba36",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "sha256": "c1663820492a6879b14ab89dfd9b052105cf16378bb015fea08c3220d83456e0",
+      "bytes": 105415,
+      "blob": "cfbac38773d4778b1044be8bb504b6e52dac4cdb",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+      "sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe",
+      "bytes": 29000,
+      "blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "sha256": "b25a909cf1a85743ba701867152d6588cf3eae2707e4deb68374a4b5579fa17c",
+      "bytes": 57466,
+      "blob": "5371337e75cc40b272b524af550154ec758e8932",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_router.py",
+      "sha256": "d1f7e330390f9ca6f81d876c0103dd261c2a24ebb27f43b685c48a11a7861af2",
+      "bytes": 56155,
+      "blob": "9635b8c241cd778982caae54a6c9aa0c5e7736e1",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+      "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d",
+      "bytes": 22238,
+      "blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_binding_review.py",
+      "sha256": "658bce8569101e36852702ceb53f1bc0ab61d6a00ed071e73d7044f39765d59d",
+      "bytes": 21097,
+      "blob": "376b9093756e66a2e0fcd7a201278b00b0662b52",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+      "sha256": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec",
+      "bytes": 21764,
+      "blob": "7ce3ed18ec40071f0c8b24457f74fdfb248ad93e",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+      "bytes": 29993,
+      "blob": "18783070b45c280067552f110bc48748a210e53e",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_checkpoint.py",
+      "sha256": "c414b20bf587210bb5bea65e31a743ec7165aaccf8a1ca336d756c46a3f53704",
+      "bytes": 7903,
+      "blob": "bdfc111e18b4bad9c7605348d0c0370ec96315d2",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_learning.py",
+      "sha256": "bb5fad7e1410149be8e9fe649c5825ccff931ed2ab89c840c70c141b96c6a425",
+      "bytes": 31271,
+      "blob": "b0ce866432f36e082feccb64fa3aff7dc0218e23",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+      "sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d",
+      "bytes": 22521,
+      "blob": "05ec4a6e88ea7b84f3a977794cfd97bee52f726d",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_joint_formula_inference.py",
+      "sha256": "e09488f8d3f08d130c4bfd5e2244e26cb467e189e6373d79eaa2a1cb4d717c2f",
+      "bytes": 17841,
+      "blob": "a14f288d2c80418c87f265838f8af9ff0d34a87e",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/native_formula_checkpoint.py",
+      "sha256": "807f0ff97aa0604648126aed9c5bda5429133f71d47c370493d43bce2e273cf1",
+      "bytes": 6291,
+      "blob": "39bf0268dc896415e743a87bbcb1c446bf8e8d81",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/native_formula_training.py",
+      "sha256": "a3ea0a8b7b71f526afafecda8dd8ab9504d1138f9d96eee177729e7a568a2da2",
+      "bytes": 39837,
+      "blob": "540b3ad12fcf6fcc0bd962b5f316dd9d752bf440",
+      "roles": [
+        "unchanged_existing_owner"
+      ],
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/lift_coding",
+      "path": "artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+      "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83",
+      "bytes": 66071,
+      "blob": "0feb32e6676e94855a26c6f4032106447200b8ba",
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/lift_coding",
+      "path": "artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+      "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5",
+      "bytes": 102630,
+      "blob": "d60928d72775a86b0587e1aec98a6879f5350ba2",
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/lift_coding",
+      "path": "artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+      "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a",
+      "bytes": 139006,
+      "blob": "34fa3ebe4372502f6bfc4ff3f73ccba9209000f0",
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/lift_coding",
+      "path": "artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+      "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42",
+      "bytes": 32394,
+      "blob": "3e2fe539138480978771deec65df10975c1be95c",
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    },
+    {
+      "repository": "endomorphosis/lift_coding",
+      "path": "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+      "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851",
+      "bytes": 392135,
+      "blob": "34bd372c10b275d236c568c712709c05cd6ba376",
+      "remote_content_sha256_verified": true,
+      "remote_git_blob_hash_verified": true
+    }
+  ],
+  "github_checks": [
+    {
+      "name": "dashboard-smoke-tests (3.12)",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429744/job/112330255764",
+      "annotations": []
+    },
+    {
+      "name": "Build distribution \ud83d\udce6",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429727/job/112330254992",
+      "annotations": []
+    },
+    {
+      "name": "enhanced-pr-monitor",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429632/job/112330253828",
+      "annotations": []
+    },
+    {
+      "name": "build-and-test (Dockerfile.mcp-minimal, linux/amd64)",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429732/job/112330252420",
+      "annotations": []
+    },
+    {
+      "name": "sdk-static-analysis",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429679/job/112330252350",
+      "annotations": []
+    },
+    {
+      "name": "setup",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429716/job/112330252326",
+      "annotations": []
+    },
+    {
+      "name": "build-multi-arch",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429732/job/112330252234",
+      "annotations": []
+    },
+    {
+      "name": "build-and-test (docker/Dockerfile.test, linux/amd64)",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429732/job/112330252223",
+      "annotations": []
+    },
+    {
+      "name": "arm64-system-info",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429669/job/112330252171",
+      "annotations": []
+    },
+    {
+      "name": "benchmark",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429767/job/112330252159",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "name": "check-pr-completion",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429769/job/112330251961",
+      "annotations": []
+    },
+    {
+      "name": "cli-smoke-tests",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429619/job/112330251810",
+      "annotations": []
+    },
+    {
+      "name": "test-docker-compose",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429732/job/112330251782",
+      "annotations": []
+    },
+    {
+      "name": "Setup Cache Infrastructure",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429540/job/112330250996",
+      "annotations": []
+    },
+    {
+      "name": "analyze-and-assign-copilot",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429627/job/112330250781",
+      "annotations": []
+    },
+    {
+      "name": "discover-tool-categories",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37481429575/job/112330250702",
+      "annotations": []
+    },
+    {
+      "name": "Analyze (rust)",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37480946636/job/112328592145",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "name": "Analyze (python)",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37480946636/job/112328591976",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "name": "Analyze (actions)",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37480946636/job/112328591920",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "name": "Analyze (javascript-typescript)",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/37480946636/job/112328591622",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/004887f6250b083e0b095d5ac7563bc5bb792491/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    }
+  ],
+  "codeql_completed_successfully": false,
+  "ci_limitation": "CodeQL jobs did not start because the GitHub account is locked due to a billing issue; failed statuses are not code-analysis findings.",
+  "new_source_blockers": [],
+  "refs_files_candidate_or_comments_changed": false,
+  "artifact_receipt_written": true,
+  "training_calls": 0,
+  "legal_accuracy_claimed": false
+}

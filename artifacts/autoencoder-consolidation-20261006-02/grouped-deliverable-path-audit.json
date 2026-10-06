@@ -1,0 +1,4331 @@
+{
+  "canonical_HEAD": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+  "note": "Current uncommitted source bytes are compared with immutable commit blobs. Ancestor history and effective-path retention are separate; missing paths require additive integration, not a merge of an ancestor.",
+  "records": [
+    {
+      "bytes": 52229,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "b56591f0d645a9cb341214723b3762e0b8f83137"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "b56591f0d645a9cb341214723b3762e0b8f83137"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "a41699c9f1998093a1aac4055dabcb5cfc0169bd"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "a41699c9f1998093a1aac4055dabcb5cfc0169bd"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "a41699c9f1998093a1aac4055dabcb5cfc0169bd"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "a41699c9f1998093a1aac4055dabcb5cfc0169bd"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "a41699c9f1998093a1aac4055dabcb5cfc0169bd"
+        }
+      },
+      "path": "docs/autoencoders/inference_and_qualification.md",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-lists-20261005/completion.json",
+          "recorded_sha256": "34be0534c80402500c9963b2d1e159277e055ffac328143b4cc2fd10b382e63e"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "1308cf6e079b5ad65251efeeea2e04277a520fc3a5b85bdcbb3aca8c0e976d0e"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/completion.json",
+          "recorded_sha256": "1308cf6e079b5ad65251efeeea2e04277a520fc3a5b85bdcbb3aca8c0e976d0e"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-formula-omission-readiness-20261005/completion.json",
+          "recorded_sha256": "36edd23d706499d4f1e92f829c6d74b0f5fcb8f833ee2ecb5ef04ec25e0e2db2"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "7eb8bc991454ac3cad4d482b8aa4e5341b556c80d1349f740190d2433ce9558b"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "7eb8bc991454ac3cad4d482b8aa4e5341b556c80d1349f740190d2433ce9558b"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/completion.json",
+          "recorded_sha256": "7eb8bc991454ac3cad4d482b8aa4e5341b556c80d1349f740190d2433ce9558b"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "73ddcb9313308930e6cafe2a1c89cff679d6c01bd64cdccc870cf8fedc31792f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/completion.json",
+          "recorded_sha256": "73ddcb9313308930e6cafe2a1c89cff679d6c01bd64cdccc870cf8fedc31792f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "064c327e58124db8c16c807df285728421ff878448b95e2d8ab861edb9ae74d7"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-inline-exceptions-20261005/completion.json",
+          "recorded_sha256": "d564cafc02ab6d8ffdf5889f5fa09d95322297ec610f36359f33c278fe3830f6"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "de591d05db47c02964735f8e294543e278197eee4f64109824485cc3562c5598"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "2a026145bcf1aa230b1033d1556cacaf2a280aceab5538d025beccc4f970c8df"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze.json",
+          "recorded_sha256": "c9e6e748666f4e7b611351d028fb0246df0a7c3be6d72492c58abc87ab7be692"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze-02.json",
+          "recorded_sha256": "ed2ae6270b2c19c2d3e0c8dc8f2eb3e83c1878c43e1f240b946caeeab188d86f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/completion.json",
+          "recorded_sha256": "ed2ae6270b2c19c2d3e0c8dc8f2eb3e83c1878c43e1f240b946caeeab188d86f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "986a8637e519a61e56df5b6e1799af7e315a2800be4d3b2139eec9325da16649"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze.json",
+          "recorded_sha256": "77113b28d3f238c3a784d9acec711c8a0f73e35c7d4c641c40afa2f712afe2d9"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze-02.json",
+          "recorded_sha256": "1820d6fe27b174a0a3e6d7b64451c5d85c1d9411996e6b48bc427e1f5e1b6e0c"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "1820d6fe27b174a0a3e6d7b64451c5d85c1d9411996e6b48bc427e1f5e1b6e0c"
+        }
+      ],
+      "working_blob": "7780b530165a3b3d417893f23d31ef0c99f4a401",
+      "working_sha256": "de591d05db47c02964735f8e294543e278197eee4f64109824485cc3562c5598"
+    },
+    {
+      "bytes": 28721,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "identical",
+          "target_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "identical",
+          "target_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/dependency-freeze.json",
+          "recorded_sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+        }
+      ],
+      "working_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829",
+      "working_sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+    },
+    {
+      "bytes": 29788,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "identical",
+          "target_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "identical",
+          "target_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/dependency-freeze.json",
+          "recorded_sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+        }
+      ],
+      "working_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f",
+      "working_sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+    },
+    {
+      "bytes": 37698,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "identical",
+          "target_blob": "509d35f7e5c68acd2157f85f20face935cafcc31"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "identical",
+          "target_blob": "509d35f7e5c68acd2157f85f20face935cafcc31"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "509d35f7e5c68acd2157f85f20face935cafcc31"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "509d35f7e5c68acd2157f85f20face935cafcc31"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "509d35f7e5c68acd2157f85f20face935cafcc31"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "509d35f7e5c68acd2157f85f20face935cafcc31"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "509d35f7e5c68acd2157f85f20face935cafcc31"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/autoformal/family_qualification.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+        }
+      ],
+      "working_blob": "509d35f7e5c68acd2157f85f20face935cafcc31",
+      "working_sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+    },
+    {
+      "bytes": 21273,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "34991558530193194fd0a1d217a1f846de38b9ff"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "34991558530193194fd0a1d217a1f846de38b9ff"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "34991558530193194fd0a1d217a1f846de38b9ff"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "34991558530193194fd0a1d217a1f846de38b9ff"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "34991558530193194fd0a1d217a1f846de38b9ff"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/autoformal/legal_context_review.py",
+      "provenance": [
+        {
+          "artifact": "explicit retained source/family owner"
+        }
+      ],
+      "working_blob": "34991558530193194fd0a1d217a1f846de38b9ff",
+      "working_sha256": "50f4d92175c0812c61a3c45f90fbdfa3dec9a087cfb864342abd376b1f11d84c"
+    },
+    {
+      "bytes": 10247,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/completion.json",
+          "recorded_sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "1124c8f14301deb3644868c187554bef5c6d8e9c2bc508cb3603de304ed6db08"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/completion.json",
+          "recorded_sha256": "1124c8f14301deb3644868c187554bef5c6d8e9c2bc508cb3603de304ed6db08"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205"
+        }
+      ],
+      "working_blob": "f46fc3d9e9ea832bef7fa5bc718db21224a75c91",
+      "working_sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205"
+    },
+    {
+      "bytes": 6557,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/completion.json",
+          "recorded_sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+        }
+      ],
+      "working_blob": "d125e9108e49dacf8568450cba17c3a49f7193ef",
+      "working_sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+    },
+    {
+      "bytes": 21178,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "c44085c2e590b15fe2143691a6189d80714079d7"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "c44085c2e590b15fe2143691a6189d80714079d7"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "c44085c2e590b15fe2143691a6189d80714079d7"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "c44085c2e590b15fe2143691a6189d80714079d7"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "c44085c2e590b15fe2143691a6189d80714079d7"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/autoformal/legal_source_family_bridge.py",
+      "provenance": [
+        {
+          "artifact": "explicit retained source/family owner"
+        }
+      ],
+      "working_blob": "c44085c2e590b15fe2143691a6189d80714079d7",
+      "working_sha256": "660601ed20971eb972c3a9c6c0ededf5fceeaf734260074a7e64333739b97212"
+    },
+    {
+      "bytes": 11880,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "c4d8e5318421c1a3d297acc91640a7e3bc90d2fb"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "c4d8e5318421c1a3d297acc91640a7e3bc90d2fb"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "c4d8e5318421c1a3d297acc91640a7e3bc90d2fb"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "c4d8e5318421c1a3d297acc91640a7e3bc90d2fb"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "c4d8e5318421c1a3d297acc91640a7e3bc90d2fb"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/autoformal/legal_source_family_lake.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-decoder-uscode-fidelity-20261003/independent-family-gate-freeze.json",
+          "recorded_sha256": "8658477c4ec1c7f76c2def3ca226eab7600d0d380a3ef873434ba8c6464a8c94"
+        },
+        {
+          "artifact": "explicit retained source/family owner"
+        }
+      ],
+      "working_blob": "c4d8e5318421c1a3d297acc91640a7e3bc90d2fb",
+      "working_sha256": "8658477c4ec1c7f76c2def3ca226eab7600d0d380a3ef873434ba8c6464a8c94"
+    },
+    {
+      "bytes": 9079,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "77087d536089c2a1add9cba8370c3477a96485eb"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "77087d536089c2a1add9cba8370c3477a96485eb"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "77087d536089c2a1add9cba8370c3477a96485eb"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "77087d536089c2a1add9cba8370c3477a96485eb"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "77087d536089c2a1add9cba8370c3477a96485eb"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/autoformal/legal_statutory_context.py",
+      "provenance": [
+        {
+          "artifact": "explicit retained source/family owner"
+        }
+      ],
+      "working_blob": "77087d536089c2a1add9cba8370c3477a96485eb",
+      "working_sha256": "d35fcf49c26663b2c4fd334bd6323a624eda41d02739c308a4336526d6718bf3"
+    },
+    {
+      "bytes": 19598,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "ipfs_datasets_py/logic/deontic/coordination.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/completion.json",
+          "recorded_sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf"
+        }
+      ],
+      "working_blob": "ff6f7428c8eb1a495a2d881fab295bc95f245958",
+      "working_sha256": "27d36eb4410c1531aaa470970931c24baa10fefb4f69652bd5c83c8a7fcd61cf"
+    },
+    {
+      "bytes": 13298,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/completion.json",
+          "recorded_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+        }
+      ],
+      "working_blob": "22d8260dd03cc2cf4d262138161adbe6cda31bcb",
+      "working_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+    },
+    {
+      "bytes": 35370,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "d755e76f55477ad093514665f5b7ce0ff5dfa416"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "d755e76f55477ad093514665f5b7ce0ff5dfa416"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "d755e76f55477ad093514665f5b7ce0ff5dfa416"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "d755e76f55477ad093514665f5b7ce0ff5dfa416"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "d755e76f55477ad093514665f5b7ce0ff5dfa416"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "d755e76f55477ad093514665f5b7ce0ff5dfa416"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "d755e76f55477ad093514665f5b7ce0ff5dfa416"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/deontic/decoder.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze.json",
+          "recorded_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze-02.json",
+          "recorded_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+        }
+      ],
+      "working_blob": "9701970c220ff0cecb0d25b69449a4dce94fa557",
+      "working_sha256": "ab61c8e34562bc0a5e3538e72b62a46f367112307c8f3a8452b1710422ec75aa"
+    },
+    {
+      "bytes": 226780,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "2ce7febb69d82b54572fb7100960cb327f743c49"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "2ce7febb69d82b54572fb7100960cb327f743c49"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "2ce7febb69d82b54572fb7100960cb327f743c49"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "2ce7febb69d82b54572fb7100960cb327f743c49"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "2ce7febb69d82b54572fb7100960cb327f743c49"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "2ce7febb69d82b54572fb7100960cb327f743c49"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "2ce7febb69d82b54572fb7100960cb327f743c49"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/deontic/exports.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-formula-omission-readiness-20261005/completion.json",
+          "recorded_sha256": "bf4971dac7c3e1429526e710bef40f1bfa502d46c2b02d6da7f38ddcbece5333"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "aabf0d0522fe44d26c1155b36c1b6dba2e62bd8d5baf71c078f4b425001c5267"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-inline-exceptions-20261005/completion.json",
+          "recorded_sha256": "d8a529bbea9c97847355c83ffc5fd104be959d6f9d232eddf64085f2aba6e5c5"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "f35fb65e3e55b9e9dc38eef16dc45feb4cb00c68e3a0b2cdaa71ae9615370794"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze.json",
+          "recorded_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze-02.json",
+          "recorded_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/completion.json",
+          "recorded_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "a5e88639fbc5351f4a13d3000b64efc81fc78aed313d07cdbf86318d8a7cafdc"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze.json",
+          "recorded_sha256": "ed1f522f6651e83d8b94407f77a18d7ce9df4365e0b5b75afb7ff8879f2ef2c8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze-02.json",
+          "recorded_sha256": "ed1f522f6651e83d8b94407f77a18d7ce9df4365e0b5b75afb7ff8879f2ef2c8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "ed1f522f6651e83d8b94407f77a18d7ce9df4365e0b5b75afb7ff8879f2ef2c8"
+        }
+      ],
+      "working_blob": "c2f1069413ec6fe1b7dd0fda5937d4103e2ffef0",
+      "working_sha256": "aceafcaf40d8e623f56881254909e5e359f4be5409b2187daee4f51f3e1505bc"
+    },
+    {
+      "bytes": 425746,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "84e5bbf331c672ebd06794af750adf945c0daabe"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "84e5bbf331c672ebd06794af750adf945c0daabe"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "24f5107049edb019f1694b7bdd1d93236cec7744"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "24f5107049edb019f1694b7bdd1d93236cec7744"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "24f5107049edb019f1694b7bdd1d93236cec7744"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "24f5107049edb019f1694b7bdd1d93236cec7744"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "24f5107049edb019f1694b7bdd1d93236cec7744"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/deontic/formula_builder.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-lists-20261005/completion.json",
+          "recorded_sha256": "9fbc1d3ce10ce61c4711042345792147a2ec50976305415137be226b536ba7ee"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-formula-omission-readiness-20261005/completion.json",
+          "recorded_sha256": "219d20cfb2d8e192d53e2d71002c293e4f873dceb751f9bdbe0f051eda73a7e5"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-inline-exceptions-20261005/completion.json",
+          "recorded_sha256": "7024dd86f2081b9492d3e2ba993946779b0c45a6e14668663e46d455a604c27d"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "530646d270b5a754d791f3d164fd82cdd6149b159e57f7142b4a5ee35e740ef4"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze.json",
+          "recorded_sha256": "122fc927cc8f6ebbd38a0f868f63b9b6a31fe80e916cf84b591fa09fac7605b8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze-02.json",
+          "recorded_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/completion.json",
+          "recorded_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "5cddd1ab1d071b43afd3b368fdfb5dbae670773030f8726d8efc560c3c6a00d3"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze.json",
+          "recorded_sha256": "880c9a7865b1ccd3b48156ee274a6324f45a0c81fc7f90373eb98b3948c7af18"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze-02.json",
+          "recorded_sha256": "c37a29c949698137119c2cdb6c1d114ed0288fe8595da220a27dc940c095edf3"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "c37a29c949698137119c2cdb6c1d114ed0288fe8595da220a27dc940c095edf3"
+        }
+      ],
+      "working_blob": "e59eb95cd0eae96e4e4c672630b1fa6e0e0d1000",
+      "working_sha256": "f208dd44c841ecb2309d956e5bc4fd6d83107e2fff3fc6ec21a2dd033dfaaf23"
+    },
+    {
+      "bytes": 132048,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "c02e473b1700c7a7760de1e8952f56c8594f1584"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "c02e473b1700c7a7760de1e8952f56c8594f1584"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "c02e473b1700c7a7760de1e8952f56c8594f1584"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "c02e473b1700c7a7760de1e8952f56c8594f1584"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "c02e473b1700c7a7760de1e8952f56c8594f1584"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "c02e473b1700c7a7760de1e8952f56c8594f1584"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "c02e473b1700c7a7760de1e8952f56c8594f1584"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/deontic/ir.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-lists-20261005/completion.json",
+          "recorded_sha256": "0f33e33638d4f5649c5590fbebaa736b86dc48547d457a25d5fb69e2a4db0c3d"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "a8299fbb7093eaf974522a84b79cf67ec51017c782bad1f29336a2babfd477d4"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "8156dd46b0cfba5d5d2e001572d9dbbec8e7003c759a97c331a7c890c350958b"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze.json",
+          "recorded_sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze-02.json",
+          "recorded_sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze.json",
+          "recorded_sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze-02.json",
+          "recorded_sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d"
+        }
+      ],
+      "working_blob": "ce23827dce7577b6fff3181cc1a8cc26d4ccabd9",
+      "working_sha256": "300d5213aa5a041601622a4f27cec525a53616a4246c86a78ff2f937db00f44d"
+    },
+    {
+      "bytes": 15888,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "3fa9cd622f98fe596314d036441b9de4a72b9cf5"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "3fa9cd622f98fe596314d036441b9de4a72b9cf5"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "3fa9cd622f98fe596314d036441b9de4a72b9cf5"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "3fa9cd622f98fe596314d036441b9de4a72b9cf5"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "3fa9cd622f98fe596314d036441b9de4a72b9cf5"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "3fa9cd622f98fe596314d036441b9de4a72b9cf5"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "3fa9cd622f98fe596314d036441b9de4a72b9cf5"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/deontic/metrics.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "f96a8fc71278c9573e58449aedea687aba99cdbadf2f3336a739dd731226c6fe"
+        }
+      ],
+      "working_blob": "ae76767139c840843fcb8ed33ba18fa79f13179f",
+      "working_sha256": "f96a8fc71278c9573e58449aedea687aba99cdbadf2f3336a739dd731226c6fe"
+    },
+    {
+      "bytes": 337171,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "4af5c8cec7e4cec8626042d7aaca2eb072a6ce81"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "4af5c8cec7e4cec8626042d7aaca2eb072a6ce81"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "2972b9475f8d63158d59ae886c213cd35c7ea431"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "2972b9475f8d63158d59ae886c213cd35c7ea431"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "2972b9475f8d63158d59ae886c213cd35c7ea431"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "2972b9475f8d63158d59ae886c213cd35c7ea431"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "2972b9475f8d63158d59ae886c213cd35c7ea431"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-lists-20261005/completion.json",
+          "recorded_sha256": "7a2137a6487192103822c41503714a345005420e3bc89f1a811c04e4ff587fb9"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-inline-exceptions-20261005/completion.json",
+          "recorded_sha256": "d94c75eca3e6d6e58611790fd46b2eedfa7cef8abdde8e55f3e9a6edf92f6d29"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "f224b262437eb667e93c9aba31c51f2da9fea272d69958ee357819d498c90d09"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze.json",
+          "recorded_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/production-freeze-02.json",
+          "recorded_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/completion.json",
+          "recorded_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze.json",
+          "recorded_sha256": "66ed33a418907d3967c341608fb892d96aa7b349a2b82498a6319ac750314856"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/production-freeze-02.json",
+          "recorded_sha256": "66ed33a418907d3967c341608fb892d96aa7b349a2b82498a6319ac750314856"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "66ed33a418907d3967c341608fb892d96aa7b349a2b82498a6319ac750314856"
+        }
+      ],
+      "working_blob": "884a42fc263d8bb8486e20ee4dcfc3f1a26547dd",
+      "working_sha256": "980e214b068184823cdb318024c3eef9e8b03852c79d3cf58396cc1dca8d6eec"
+    },
+    {
+      "bytes": 29370,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/completion.json",
+          "recorded_sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+        }
+      ],
+      "working_blob": "d262c36eb036ba5b516636f152038ab81ee19d94",
+      "working_sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+    },
+    {
+      "bytes": 33948,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+        }
+      ],
+      "working_blob": "b34ca1d3406645e8edf58b651dff3049e583741f",
+      "working_sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+    },
+    {
+      "bytes": 29000,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "identical",
+          "target_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "identical",
+          "target_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/production-freeze.json",
+          "recorded_sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe"
+        }
+      ],
+      "working_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45",
+      "working_sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe"
+    },
+    {
+      "bytes": 22238,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "identical",
+          "target_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "identical",
+          "target_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a"
+        }
+      },
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/dependency-freeze.json",
+          "recorded_sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+        }
+      ],
+      "working_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a",
+      "working_sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+    },
+    {
+      "bytes": 35294,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a"
+        }
+      },
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+        }
+      ],
+      "working_blob": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a",
+      "working_sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+    },
+    {
+      "bytes": 15723,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "22764bc76850cfd145db189b8f7c6f5019f7dc6a"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "22764bc76850cfd145db189b8f7c6f5019f7dc6a"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "22764bc76850cfd145db189b8f7c6f5019f7dc6a"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "22764bc76850cfd145db189b8f7c6f5019f7dc6a"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "22764bc76850cfd145db189b8f7c6f5019f7dc6a"
+        }
+      },
+      "path": "tests/unit/logic/autoformal/test_legal_source_family_bridge_independent.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-decoder-uscode-fidelity-20261003/independent-family-gate-freeze.json",
+          "recorded_sha256": "d0bac1b69ea4462170eff0c3cd6a7763f9273b849a726342809683db007053f2"
+        }
+      ],
+      "working_blob": "22764bc76850cfd145db189b8f7c6f5019f7dc6a",
+      "working_sha256": "d0bac1b69ea4462170eff0c3cd6a7763f9273b849a726342809683db007053f2"
+    },
+    {
+      "bytes": 11239,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "identical",
+          "target_blob": "b4aa6279f9e6162c0824464a65ef108b6c5105a5"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "identical",
+          "target_blob": "b4aa6279f9e6162c0824464a65ef108b6c5105a5"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "identical",
+          "target_blob": "b4aa6279f9e6162c0824464a65ef108b6c5105a5"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "identical",
+          "target_blob": "b4aa6279f9e6162c0824464a65ef108b6c5105a5"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "identical",
+          "target_blob": "b4aa6279f9e6162c0824464a65ef108b6c5105a5"
+        }
+      },
+      "path": "tests/unit/logic/autoformal/test_legal_source_family_lake.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-decoder-uscode-fidelity-20261003/independent-family-gate-freeze.json",
+          "recorded_sha256": "caa676d1918e87b11198437097182f8782c7eb5e949273d8c0cdf988694369f0"
+        }
+      ],
+      "working_blob": "b4aa6279f9e6162c0824464a65ef108b6c5105a5",
+      "working_sha256": "caa676d1918e87b11198437097182f8782c7eb5e949273d8c0cdf988694369f0"
+    },
+    {
+      "bytes": 10656,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_actor_heading_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "961cb18a68b41e0a0bd7e0083f08b9c229ed03d9dbba4497c4264fca60443a8d"
+        }
+      ],
+      "working_blob": "b392831d5dd51ac248faa48aad6656ca70e0b6eb",
+      "working_sha256": "961cb18a68b41e0a0bd7e0083f08b9c229ed03d9dbba4497c4264fca60443a8d"
+    },
+    {
+      "bytes": 5394,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_actor_heading_recovery.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "da94b57ff6febfd1d89ac0e96dcee51dd593b149b1cb990addf0a60273b96b20"
+        }
+      ],
+      "working_blob": "9ef47294c1176f11d39e46e8546809d37b8d2a43",
+      "working_sha256": "da94b57ff6febfd1d89ac0e96dcee51dd593b149b1cb990addf0a60273b96b20"
+    },
+    {
+      "bytes": 11333,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_coordination_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/completion.json",
+          "recorded_sha256": "6ffdabe99f536cde5444819fea6832a8628b4ce8d97acfe204a0800870f942c3"
+        }
+      ],
+      "working_blob": "b48162573dbb3bbdef45060f9d6948e66bcd7ae5",
+      "working_sha256": "6ffdabe99f536cde5444819fea6832a8628b4ce8d97acfe204a0800870f942c3"
+    },
+    {
+      "bytes": 14425,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_coordination_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/completion.json",
+          "recorded_sha256": "6952b9eb92f5c4d88e746572f5527f9cc99473d01e6e3eac6de57e6d96b7c1de"
+        }
+      ],
+      "working_blob": "45cba65ae8e2f7a204c246c0b80c2f4e353bf792",
+      "working_sha256": "6952b9eb92f5c4d88e746572f5527f9cc99473d01e6e3eac6de57e6d96b7c1de"
+    },
+    {
+      "bytes": 8017,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_coordination_parser.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/completion.json",
+          "recorded_sha256": "9a9a446f4574364fb042a3135f0064552bd97924e050d67d353d306df89ec64a"
+        }
+      ],
+      "working_blob": "097209d30ba09a076b4aa1751da792cfb8752d60",
+      "working_sha256": "9a9a446f4574364fb042a3135f0064552bd97924e050d67d353d306df89ec64a"
+    },
+    {
+      "bytes": 3109,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_coordination_readiness.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-coordination-readiness-20261006/completion.json",
+          "recorded_sha256": "be25ec1f37392f63f415494a29b9e3893f1c2bc5eb7b9ac25aaac53953d04d25"
+        }
+      ],
+      "working_blob": "2e992038e6006e1bf58aca2fa89a9624ba341fa4",
+      "working_sha256": "be25ec1f37392f63f415494a29b9e3893f1c2bc5eb7b9ac25aaac53953d04d25"
+    },
+    {
+      "bytes": 12603,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_duty_scope_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "46d87c21e6f4696f9e47138a4f57d1effcbab64a1142753e87af411bc0c5ea12"
+        }
+      ],
+      "working_blob": "1839491a2c38786422de2a3d8df78c2fc6a0c6f7",
+      "working_sha256": "46d87c21e6f4696f9e47138a4f57d1effcbab64a1142753e87af411bc0c5ea12"
+    },
+    {
+      "bytes": 18184,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_duty_scope_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "4ca90703f2c835ac8c5a4f675dd29705d1134cf8b73f5638da3418033282317f"
+        }
+      ],
+      "working_blob": "272b5b414d9c31fc4b7451c21333c8739b37eb32",
+      "working_sha256": "4ca90703f2c835ac8c5a4f675dd29705d1134cf8b73f5638da3418033282317f"
+    },
+    {
+      "bytes": 6683,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_duty_scope_parser.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "6eb452b22267ce1f617f76053dfa16dc077ee88c118bf3095d43f9e77ecc8225"
+        }
+      ],
+      "working_blob": "6ec238a23aa3b397e23530dfcccd4dc94e0b67c6",
+      "working_sha256": "6eb452b22267ce1f617f76053dfa16dc077ee88c118bf3095d43f9e77ecc8225"
+    },
+    {
+      "bytes": 6666,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_duty_scope_readiness.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-duty-scope-20261005/completion.json",
+          "recorded_sha256": "f6e02633ce4bc91180ccf0af24e28665c40f38dfd059857ef8e6034bbf59b699"
+        }
+      ],
+      "working_blob": "f36ee43df6358b5f2650c8ccb10d3b8c48d68f1a",
+      "working_sha256": "f6e02633ce4bc91180ccf0af24e28665c40f38dfd059857ef8e6034bbf59b699"
+    },
+    {
+      "bytes": 9565,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_formula_omission_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-formula-omission-readiness-20261005/completion.json",
+          "recorded_sha256": "480600af79998ae9e3e0fb377dff0729667ae14f55ca1fd32b3b6f5797b2a5b7"
+        }
+      ],
+      "working_blob": "97adf745152690a5d3da596728efc40d6642da01",
+      "working_sha256": "480600af79998ae9e3e0fb377dff0729667ae14f55ca1fd32b3b6f5797b2a5b7"
+    },
+    {
+      "bytes": 9568,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_formula_omission_readiness.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-formula-omission-readiness-20261005/completion.json",
+          "recorded_sha256": "cfaf82e590a4b093dc139e3f6c77404cfb7395e5ddc238e65b8f33dcaa56dc51"
+        }
+      ],
+      "working_blob": "bdd93b687758c7c74b139ca4a700e0396006ac9f",
+      "working_sha256": "cfaf82e590a4b093dc139e3f6c77404cfb7395e5ddc238e65b8f33dcaa56dc51"
+    },
+    {
+      "bytes": 12029,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_grouped_coordination.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/completion.json",
+          "recorded_sha256": "2b4fc660b36fa90200f499505c8e85f5476ead3f4fde18b5c3a52724fcbc2c3a"
+        }
+      ],
+      "working_blob": "05385fe2747ad5f2fd7210c476a5a35ceca5fa39",
+      "working_sha256": "2b4fc660b36fa90200f499505c8e85f5476ead3f4fde18b5c3a52724fcbc2c3a"
+    },
+    {
+      "bytes": 16633,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_grouped_coordination_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/completion.json",
+          "recorded_sha256": "5f978dbbb03cab75ac68e0f27792931ea3e00e70f9cfa7323ccfcc783a71ffac"
+        }
+      ],
+      "working_blob": "2040e7beff42824c18a9b6310a40ee78bd8e902e",
+      "working_sha256": "5f978dbbb03cab75ac68e0f27792931ea3e00e70f9cfa7323ccfcc783a71ffac"
+    },
+    {
+      "bytes": 11213,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/completion.json",
+          "recorded_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831"
+        }
+      ],
+      "working_blob": "c9188ffcde8624f9f1f83ba79a1e975c948a635e",
+      "working_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831"
+    },
+    {
+      "bytes": 12553,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "72679177f9e53fd222103862c89deaf91216a8b48d496ec5f597a2e4fa966157"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/completion.json",
+          "recorded_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c"
+        }
+      ],
+      "working_blob": "9cd34f75b49ce1d22c610191d7020abd5a8ef87e",
+      "working_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c"
+    },
+    {
+      "bytes": 13601,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_inline_exception_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-inline-exceptions-20261005/completion.json",
+          "recorded_sha256": "a9c21793c45c5ceb49117dc2a95ea20b840042d1af7b46a46fd92cff38f2f50c"
+        }
+      ],
+      "working_blob": "c0dee8098101f16bcf320a9676ca85ff8aa89265",
+      "working_sha256": "a9c21793c45c5ceb49117dc2a95ea20b840042d1af7b46a46fd92cff38f2f50c"
+    },
+    {
+      "bytes": 11478,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_inline_exception_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-inline-exceptions-20261005/completion.json",
+          "recorded_sha256": "c7334cabba4de9d6d907dc08fb2b12a89598877fdc82ce2bc8ee696006db0ace"
+        }
+      ],
+      "working_blob": "5f7e578cf0039da96adc3a0fa06ac3c5a5d96562",
+      "working_sha256": "c7334cabba4de9d6d907dc08fb2b12a89598877fdc82ce2bc8ee696006db0ace"
+    },
+    {
+      "bytes": 6107,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_inline_exception_parser.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-inline-exceptions-20261005/completion.json",
+          "recorded_sha256": "5568520ada60db9e760fc8ed2624dae83bb60607ad1aec26c5842380c4d70b0b"
+        }
+      ],
+      "working_blob": "41a42a2955f03c3fae62b95a54dfef4cc27a2653",
+      "working_sha256": "5568520ada60db9e760fc8ed2624dae83bb60607ad1aec26c5842380c4d70b0b"
+    },
+    {
+      "bytes": 5053,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_inline_exception_readiness.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-inline-exceptions-20261005/completion.json",
+          "recorded_sha256": "9245a022b2e4e6eb5669a292c1661d19810c3844e89f6e7e22f42d62828fcf94"
+        }
+      ],
+      "working_blob": "f856d2d4aa87c02141b43ea8b24d03da9b60d87f",
+      "working_sha256": "9245a022b2e4e6eb5669a292c1661d19810c3844e89f6e7e22f42d62828fcf94"
+    },
+    {
+      "bytes": 7614,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "55d6b710a54252649719596313fd6b8258b95d72"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "55d6b710a54252649719596313fd6b8258b95d72"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "55d6b710a54252649719596313fd6b8258b95d72"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "55d6b710a54252649719596313fd6b8258b95d72"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "55d6b710a54252649719596313fd6b8258b95d72"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "55d6b710a54252649719596313fd6b8258b95d72"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "55d6b710a54252649719596313fd6b8258b95d72"
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_ir.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "6b12f10fc4e6f1286d2a7b7da43eeca9fa6489fe6f531d9414c6d9f300fb433a"
+        }
+      ],
+      "working_blob": "8315fcd9d9547ebce009913aa407a96fe7131a2d",
+      "working_sha256": "6b12f10fc4e6f1286d2a7b7da43eeca9fa6489fe6f531d9414c6d9f300fb433a"
+    },
+    {
+      "bytes": 9461,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_override_condition_fidelity.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "6a2cf9ddde11e280010121923f6c67b2843c003021ffddfdc1b5c21f6df40832"
+        }
+      ],
+      "working_blob": "f4511f438814ec9c802186493db2dfa2e4c8f7f4",
+      "working_sha256": "6a2cf9ddde11e280010121923f6c67b2843c003021ffddfdc1b5c21f6df40832"
+    },
+    {
+      "bytes": 5180,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_persisted_override_readiness.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "5d06d5bdc2e1253afb2e8ccb6e7f34c148b0c68d560f2fd2bf8a9a9b491d595d"
+        }
+      ],
+      "working_blob": "f21c2ba05bac0b2db916893f140564d98ca36417",
+      "working_sha256": "5d06d5bdc2e1253afb2e8ccb6e7f34c148b0c68d560f2fd2bf8a9a9b491d595d"
+    },
+    {
+      "bytes": 7341,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_procedure_decoder_overlap.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "0b709bcaa2d5053dd2e0441683114898f4a9325153f28838ad274aedca1d0b86"
+        }
+      ],
+      "working_blob": "7acd6032d9d9bb35690e87bbdac7d1c8acbf9a08",
+      "working_sha256": "0b709bcaa2d5053dd2e0441683114898f4a9325153f28838ad274aedca1d0b86"
+    },
+    {
+      "bytes": 14001,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_procedure_source_fidelity.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "4b00b5ad31953f108eefe06488f4319aadb227745fc238c88d251cda918f3dc2"
+        }
+      ],
+      "working_blob": "2aac512b4dae4820e1a04c45fdbb5117ff109a98",
+      "working_sha256": "4b00b5ad31953f108eefe06488f4319aadb227745fc238c88d251cda918f3dc2"
+    },
+    {
+      "bytes": 9196,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_qualifier_procedure_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "e4cc9ec12b3372ff251063a0a38641f299e6af0405d54a5c3f5fdf063b73e6b1"
+        }
+      ],
+      "working_blob": "f638e2f99284b24f30546092d7c450baef2975d7",
+      "working_sha256": "e4cc9ec12b3372ff251063a0a38641f299e6af0405d54a5c3f5fdf063b73e6b1"
+    },
+    {
+      "bytes": 9742,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_reference_list_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-lists-20261005/completion.json",
+          "recorded_sha256": "4bee04f9a1f87163dc1f9b8d6e02002f0735b48bf7c6b4f14f2a42b7f4fa315c"
+        }
+      ],
+      "working_blob": "316805117be834cd6cf67f1b3174cb3646e78afa",
+      "working_sha256": "4bee04f9a1f87163dc1f9b8d6e02002f0735b48bf7c6b4f14f2a42b7f4fa315c"
+    },
+    {
+      "bytes": 7207,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_reference_list_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-lists-20261005/completion.json",
+          "recorded_sha256": "31abf7c51cc99a3edffd21b946bcacb395f245b31f25f50e9ca8d9e974f949ed"
+        }
+      ],
+      "working_blob": "0a21d4122161122d554bc769f18224e382289653",
+      "working_sha256": "31abf7c51cc99a3edffd21b946bcacb395f245b31f25f50e9ca8d9e974f949ed"
+    },
+    {
+      "bytes": 3014,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_reference_list_ir.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-lists-20261005/completion.json",
+          "recorded_sha256": "c2dc1db2fe2b264cbcdec88c5fb078eff0141b6444e8fc4782c6552ce704b94d"
+        }
+      ],
+      "working_blob": "0e0b74e17d94eca3eda691ea1720d3870b31ee6a",
+      "working_sha256": "c2dc1db2fe2b264cbcdec88c5fb078eff0141b6444e8fc4782c6552ce704b94d"
+    },
+    {
+      "bytes": 6171,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_reference_list_parser.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-lists-20261005/completion.json",
+          "recorded_sha256": "81c6b068b623839fac301dc873f3a84228aa2d1cb6629112d26ee389cecc4962"
+        }
+      ],
+      "working_blob": "f28ab7791bab57e63cdc7363b8d0f28f7ce5eff9",
+      "working_sha256": "81c6b068b623839fac301dc873f3a84228aa2d1cb6629112d26ee389cecc4962"
+    },
+    {
+      "bytes": 4373,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_reference_readiness.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "c03f2f8d6a32939118c156bcf0c5d535a5143b6bc3838591d43731a6d3feafea"
+        }
+      ],
+      "working_blob": "c9c03def219aeddf5285a721f18284b42e52c606",
+      "working_sha256": "c03f2f8d6a32939118c156bcf0c5d535a5143b6bc3838591d43731a6d3feafea"
+    },
+    {
+      "bytes": 9916,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_reference_readiness_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "d69323424947ab2cb0a23b458d8b188d2b024184dcef53a58c6e4c9e512baadf"
+        }
+      ],
+      "working_blob": "ab2013fac0b4efaadd459803c0ecf2f1cfc8d0ac",
+      "working_sha256": "d69323424947ab2cb0a23b458d8b188d2b024184dcef53a58c6e4c9e512baadf"
+    },
+    {
+      "bytes": 11265,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_reference_resolution_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "d24dd1913cbcd9a36b048b2ea6bb577def3e4043c375782280cfa179f03df664"
+        }
+      ],
+      "working_blob": "c267ef804311845b9f46e763c6a72083281b0f02",
+      "working_sha256": "d24dd1913cbcd9a36b048b2ea6bb577def3e4043c375782280cfa179f03df664"
+    },
+    {
+      "bytes": 7893,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_deontic_source_quality_metrics.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "a8f642f8f86918a03c06ac675d264b58c6729857c5d7cb2abe7be794f4183f37"
+        }
+      ],
+      "working_blob": "e653aa86e3025477fc0f963572f94a520685a2cf",
+      "working_sha256": "a8f642f8f86918a03c06ac675d264b58c6729857c5d7cb2abe7be794f4183f37"
+    },
+    {
+      "bytes": 4775,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_coordination_compiler.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/completion.json",
+          "recorded_sha256": "cc04044899a8169feda13dcd6825f01275d4b205663d0ece8f7f391666c77e19"
+        }
+      ],
+      "working_blob": "61c61d25de82986d02f4f78c0fe58b60044b7377",
+      "working_sha256": "cc04044899a8169feda13dcd6825f01275d4b205663d0ece8f7f391666c77e19"
+    },
+    {
+      "bytes": 5682,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_coordination_evaluation.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/completion.json",
+          "recorded_sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0"
+        }
+      ],
+      "working_blob": "f2e8b37a7f52f022fe4fb482f4cc9f632e3201d1",
+      "working_sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0"
+    },
+    {
+      "bytes": 8010,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_grouped_coordination_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-coordination-20261006/completion.json",
+          "recorded_sha256": "3b3bd69982fab615d653207e1835c6e94a4800fcfc83e242414e8916ff85c736"
+        }
+      ],
+      "working_blob": "3eed9d80b7d8480a5a12f8c64a927007b9f738ec",
+      "working_sha256": "3b3bd69982fab615d653207e1835c6e94a4800fcfc83e242414e8916ff85c736"
+    },
+    {
+      "bytes": 9537,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_grouped_decoder_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze.json",
+          "recorded_sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/production-freeze-v2.json",
+          "recorded_sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-decoder-20261006/completion.json",
+          "recorded_sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea"
+        }
+      ],
+      "working_blob": "6d4e0e9d44e818d8834689c9e0a737b3c042ea48",
+      "working_sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea"
+    },
+    {
+      "bytes": 9694,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/completion.json",
+          "recorded_sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+        }
+      ],
+      "working_blob": "0ece79f9b824d23d61711a3e7585e66e500fc529",
+      "working_sha256": "a78722d83c41717bb34756d8da5870589b185022872617f1fc08819e5e3842c8"
+    },
+    {
+      "bytes": 11544,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "61a5fe1b430517362e6331ace33c7f34efa282d4987cfe1761b3651a9e97bb4b"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/completion.json",
+          "recorded_sha256": "61a5fe1b430517362e6331ace33c7f34efa282d4987cfe1761b3651a9e97bb4b"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "61a5fe1b430517362e6331ace33c7f34efa282d4987cfe1761b3651a9e97bb4b"
+        }
+      ],
+      "working_blob": "07cb90a6e46814d3311fad9678e8e8b5a7dbafe9",
+      "working_sha256": "61a5fe1b430517362e6331ace33c7f34efa282d4987cfe1761b3651a9e97bb4b"
+    },
+    {
+      "bytes": 11246,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/production-freeze.json",
+          "recorded_sha256": "628657cadeb058c0772bbcc4a1a48623a15e3f34b98fa7db737fadd5d0b34779"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-training-20261006/completion.json",
+          "recorded_sha256": "628657cadeb058c0772bbcc4a1a48623a15e3f34b98fa7db737fadd5d0b34779"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "628657cadeb058c0772bbcc4a1a48623a15e3f34b98fa7db737fadd5d0b34779"
+        }
+      ],
+      "working_blob": "e660ec671e1a0b48933da5c1038ebc4eea1d9a24",
+      "working_sha256": "628657cadeb058c0772bbcc4a1a48623a15e3f34b98fa7db737fadd5d0b34779"
+    },
+    {
+      "bytes": 11468,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+        }
+      ],
+      "working_blob": "3f76f27535d0e5ecaf46223a21199af1492d4746",
+      "working_sha256": "d8704282b322c91c2c075e38b92b1ce8a49bc0373ae05c1667762b3f2535c840"
+    },
+    {
+      "bytes": 15449,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "08ee59189e648e31f1d8f50c881cf24bc91c34f017d32cfac84920d73f7ff0c1"
+        }
+      ],
+      "working_blob": "15773d3e301680f99e604687c5f98dc8f1a224e1",
+      "working_sha256": "08ee59189e648e31f1d8f50c881cf24bc91c34f017d32cfac84920d73f7ff0c1"
+    },
+    {
+      "bytes": 11843,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_integration.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/production-freeze.json",
+          "recorded_sha256": "2dec33cccde0709f55db4e1ce27173b09f132abae2d0149b311978befb6c69b9"
+        }
+      ],
+      "working_blob": "606423e26f8e1c343d09d1c341d64030299a3b67",
+      "working_sha256": "2dec33cccde0709f55db4e1ce27173b09f132abae2d0149b311978befb6c69b9"
+    },
+    {
+      "bytes": 14870,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "missing",
+          "target_blob": null
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "missing",
+          "target_blob": null
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "missing",
+          "target_blob": null
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "missing",
+          "target_blob": null
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "missing",
+          "target_blob": null
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "missing",
+          "target_blob": null
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "missing",
+          "target_blob": null
+        }
+      },
+      "path": "tests/unit/logic/test_temporal_occurrence_session.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "8fdb4f775358e209d16011a168eadc0235de3270815a9e059703766e011e7efb"
+        }
+      ],
+      "working_blob": "79d0398a1ef13ce8c99ac37d8c092e6fab21bb5d",
+      "working_sha256": "8fdb4f775358e209d16011a168eadc0235de3270815a9e059703766e011e7efb"
+    },
+    {
+      "bytes": 30883,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "2ca32cdae06b1df7b7e2d400bd7975105efaa6f6"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "2ca32cdae06b1df7b7e2d400bd7975105efaa6f6"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "2ca32cdae06b1df7b7e2d400bd7975105efaa6f6"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "2ca32cdae06b1df7b7e2d400bd7975105efaa6f6"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "2ca32cdae06b1df7b7e2d400bd7975105efaa6f6"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "2ca32cdae06b1df7b7e2d400bd7975105efaa6f6"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "2ca32cdae06b1df7b7e2d400bd7975105efaa6f6"
+        }
+      },
+      "path": "tests/unit_tests/logic/deontic/test_deontic_decoder.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-qualifier-procedure-fidelity-20261005/completion.json",
+          "recorded_sha256": "35ae221066b397af2a49a9203f9e605d524eb4d5ef65ffb36425211913c85205"
+        }
+      ],
+      "working_blob": "a501a924dc2867be368dd4318e5aabd3ac5c2ba1",
+      "working_sha256": "35ae221066b397af2a49a9203f9e605d524eb4d5ef65ffb36425211913c85205"
+    },
+    {
+      "bytes": 31510,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "53640e644cb502260cc03e5f4adecdac016c38f7"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "53640e644cb502260cc03e5f4adecdac016c38f7"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "53640e644cb502260cc03e5f4adecdac016c38f7"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "53640e644cb502260cc03e5f4adecdac016c38f7"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "53640e644cb502260cc03e5f4adecdac016c38f7"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "53640e644cb502260cc03e5f4adecdac016c38f7"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "53640e644cb502260cc03e5f4adecdac016c38f7"
+        }
+      },
+      "path": "tests/unit_tests/logic/deontic/test_deontic_export_capability_profiles.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "ec54bd4ef392497fca789daa922b3fcac1cd0e00f73ab4d22247f3e43484c44c"
+        }
+      ],
+      "working_blob": "5509ff0faecc6848bf9f31e65ccda3dc422aa353",
+      "working_sha256": "ec54bd4ef392497fca789daa922b3fcac1cd0e00f73ab4d22247f3e43484c44c"
+    },
+    {
+      "bytes": 333227,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "6cf050015faca0df001ff3a88eb220cdeefc3bdd"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "6cf050015faca0df001ff3a88eb220cdeefc3bdd"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "6cf050015faca0df001ff3a88eb220cdeefc3bdd"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "6cf050015faca0df001ff3a88eb220cdeefc3bdd"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "6cf050015faca0df001ff3a88eb220cdeefc3bdd"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "6cf050015faca0df001ff3a88eb220cdeefc3bdd"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "6cf050015faca0df001ff3a88eb220cdeefc3bdd"
+        }
+      },
+      "path": "tests/unit_tests/logic/deontic/test_deontic_exports.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "02a59755a3118435316b75faa494bf492bd4a7d7668ca36252e3a18d92f9d44f"
+        }
+      ],
+      "working_blob": "45bf0253521be43fbf67a412a3e92497dc608fea",
+      "working_sha256": "02a59755a3118435316b75faa494bf492bd4a7d7668ca36252e3a18d92f9d44f"
+    },
+    {
+      "bytes": 439982,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "896a98117231ab3905fe49e7efdbb2814df48d76"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "896a98117231ab3905fe49e7efdbb2814df48d76"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "896a98117231ab3905fe49e7efdbb2814df48d76"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "896a98117231ab3905fe49e7efdbb2814df48d76"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "896a98117231ab3905fe49e7efdbb2814df48d76"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "896a98117231ab3905fe49e7efdbb2814df48d76"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "896a98117231ab3905fe49e7efdbb2814df48d76"
+        }
+      },
+      "path": "tests/unit_tests/logic/deontic/test_deontic_formula_builder.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-formula-omission-readiness-20261005/completion.json",
+          "recorded_sha256": "74af98575585567648292dbe981aabfd1ecfe3442c0279d9da9b5388c06622cc"
+        }
+      ],
+      "working_blob": "6128549377ec20cde00f2acd77dfab8c642888cf",
+      "working_sha256": "74af98575585567648292dbe981aabfd1ecfe3442c0279d9da9b5388c06622cc"
+    },
+    {
+      "bytes": 10564,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "5c979caebe5208b605fa97e0427ce3e26ae7da3b"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "5c979caebe5208b605fa97e0427ce3e26ae7da3b"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "5c979caebe5208b605fa97e0427ce3e26ae7da3b"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "5c979caebe5208b605fa97e0427ce3e26ae7da3b"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "5c979caebe5208b605fa97e0427ce3e26ae7da3b"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "5c979caebe5208b605fa97e0427ce3e26ae7da3b"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "5c979caebe5208b605fa97e0427ce3e26ae7da3b"
+        }
+      },
+      "path": "tests/unit_tests/logic/deontic/test_deontic_parser_metrics.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-actor-source-grounding-20261005/completion.json",
+          "recorded_sha256": "b272a7701eb99d3c55ce1938ea95c24fd17311cb69fbb459aa6f3511b95d3233"
+        },
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "088b84e96c9727947f3e0e3639fb77c52b3dfa669edc76a2ab2bb373b5137260"
+        }
+      ],
+      "working_blob": "123cd3f57c7f12872c4b18c067e5d3c21e0d54c1",
+      "working_sha256": "088b84e96c9727947f3e0e3639fb77c52b3dfa669edc76a2ab2bb373b5137260"
+    },
+    {
+      "bytes": 21348,
+      "comparisons": {
+        "alignment-decoder-768-20261003": {
+          "revision": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "status": "modified",
+          "target_blob": "1bbbdf03b15159bf3aeee999fde6fffa1caf9f65"
+        },
+        "canonical_HEAD": {
+          "revision": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+          "status": "modified",
+          "target_blob": "1bbbdf03b15159bf3aeee999fde6fffa1caf9f65"
+        },
+        "contextual-legal-runtime-datasets-20261006": {
+          "revision": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "status": "modified",
+          "target_blob": "1bbbdf03b15159bf3aeee999fde6fffa1caf9f65"
+        },
+        "decoder-profile-recovery-datasets-20261006": {
+          "revision": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "status": "modified",
+          "target_blob": "1bbbdf03b15159bf3aeee999fde6fffa1caf9f65"
+        },
+        "legal-original-text-roundtrip-retained-20261004": {
+          "revision": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "status": "modified",
+          "target_blob": "1bbbdf03b15159bf3aeee999fde6fffa1caf9f65"
+        },
+        "live_origin_main": {
+          "revision": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+          "status": "modified",
+          "target_blob": "1bbbdf03b15159bf3aeee999fde6fffa1caf9f65"
+        },
+        "source-v2-warm-start-20261004": {
+          "revision": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "status": "modified",
+          "target_blob": "1bbbdf03b15159bf3aeee999fde6fffa1caf9f65"
+        }
+      },
+      "path": "tests/unit_tests/logic/deontic/test_legal_norm_ir.py",
+      "provenance": [
+        {
+          "artifact": "/home/barberb/lift_coding/artifacts/legal-reference-readiness-20261005/completion.json",
+          "recorded_sha256": "801d82ffef06cd7dbd06754bacbd7806c6a102efb1029ae9fb0f274610e29354"
+        }
+      ],
+      "working_blob": "c1a558c80c8ea997d3296338a13b9a37eb58d676",
+      "working_sha256": "801d82ffef06cd7dbd06754bacbd7806c6a102efb1029ae9fb0f274610e29354"
+    }
+  ],
+  "runner_sha256": "32745cca7d09732664bd48420ee479e3b986a50daf6fe44b6e2e4842e3582f68",
+  "schema": "grouped-deliverable-effective-tree-audit/v1",
+  "source_read_only": true,
+  "summary": {
+    "alignment-decoder-768-20261003": {
+      "identical": 5,
+      "missing": 57,
+      "modified": 14
+    },
+    "canonical_HEAD": {
+      "identical": 5,
+      "missing": 57,
+      "modified": 14
+    },
+    "contextual-legal-runtime-datasets-20261006": {
+      "identical": 12,
+      "missing": 50,
+      "modified": 14
+    },
+    "decoder-profile-recovery-datasets-20261006": {
+      "identical": 12,
+      "missing": 50,
+      "modified": 14
+    },
+    "legal-original-text-roundtrip-retained-20261004": {
+      "identical": 12,
+      "missing": 50,
+      "modified": 14
+    },
+    "live_origin_main": {
+      "identical": 12,
+      "missing": 50,
+      "modified": 14
+    },
+    "source-v2-warm-start-20261004": {
+      "identical": 12,
+      "missing": 50,
+      "modified": 14
+    }
+  },
+  "target_live_main": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "worktrees": [
+    {
+      "HEAD": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+      "ancestor_of_live_main": true,
+      "branch": "refs/heads/codex/alignment-decoder-768-20261003",
+      "locked": "Persistent autoformalization decoder study source references",
+      "selected_path_dirty_status": "",
+      "worktree": "/home/barberb/lift_coding/.worktrees/alignment-decoder-768-20261003"
+    },
+    {
+      "HEAD": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+      "ancestor_of_live_main": true,
+      "branch": "refs/heads/agent/contextual-legal-runtime-20261006",
+      "selected_path_dirty_status": "",
+      "worktree": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006"
+    },
+    {
+      "HEAD": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+      "ancestor_of_live_main": true,
+      "branch": "refs/heads/agent/decoder-profile-recovery-20261006",
+      "selected_path_dirty_status": "",
+      "worktree": "/home/barberb/lift_coding/.worktrees/decoder-profile-recovery-datasets-20261006"
+    },
+    {
+      "HEAD": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+      "ancestor_of_live_main": true,
+      "branch": "refs/heads/codex/legal-original-text-roundtrip-retained-20261004",
+      "locked": "Active retained Legal384 reconstruction scorer implementation and regression; preserve until explicit root completion",
+      "selected_path_dirty_status": "",
+      "worktree": "/home/barberb/lift_coding/.worktrees/legal-original-text-roundtrip-retained-20261004"
+    },
+    {
+      "HEAD": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+      "ancestor_of_live_main": true,
+      "branch": "refs/heads/codex/source-v2-warm-start-20261004",
+      "locked": "Active saved-weight continuation implementation and review; preserve exact retained inputs",
+      "selected_path_dirty_status": "",
+      "worktree": "/home/barberb/lift_coding/.worktrees/source-v2-warm-start-20261004"
+    }
+  ]
+}

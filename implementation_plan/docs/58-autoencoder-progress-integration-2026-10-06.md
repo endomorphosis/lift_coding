@@ -9,6 +9,10 @@ experiment. The initial remote snapshots are workspace
 The [datasets progress guide](../../external/ipfs_datasets/docs/autoencoders/progress_integration.md)
 provides the training-owner map and next experiment sequence.
 
+The [grouped-decoder follow-up](59-grouped-legal-decoders-consolidation-2026-10-06.md)
+reviews later mains, preserves current decoder improvements, restores historical
+handoffs and contributes the new source-conditioned grouped profile.
+
 ## What was already contributed
 
 The inventory covers 35 registered workspace worktrees and 16 datasets worktrees,
